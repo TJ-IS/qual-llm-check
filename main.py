@@ -16,25 +16,30 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 
-DEFAULT_INPUT = "llm_qual_abs_all.csv"
-DEFAULT_OUTPUT = "llm_qual_abs_relevant.csv"
-DEFAULT_PROGRESS = "llm_qual_abs_relevant.progress.jsonl"
-DEFAULT_ERRORS = "llm_qual_abs_relevant.errors.jsonl"
+DEFAULT_INPUT = "game_ais_abs_all.csv"
+DEFAULT_OUTPUT = "game_ais_abs_relevant.csv"
+DEFAULT_PROGRESS = "game_ais_abs_relevant.progress.jsonl"
+DEFAULT_ERRORS = "game_ais_abs_relevant.errors.jsonl"
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 DEFAULT_MODEL = "deepseek-v4-pro"
 
 
 SYSTEM_PROMPT = """You are a careful literature screening assistant.
 
-Task: judge whether a paper is relevant to "using generative AI to assist qualitative analysis".
+Task: judge whether a paper is about "digital games or entertainment software at the individual level".
 
-Relevant means the title and abstract together indicate that generative AI, LLMs, ChatGPT, GPT-like tools, or other generative AI systems are used, evaluated, proposed, compared, or discussed as tools to assist qualitative analysis work, such as qualitative coding, thematic analysis, content analysis, grounded theory analysis, interview/focus-group/open-ended-response analysis, memoing, data interpretation, or synthesis of qualitative data.
+Relevant papers MUST satisfy ALL of the following:
+1. The paper actually studies digital games, video games, mobile games, online games, or entertainment software — NOT game theory (博弈论), NOT gamification for non-entertainment purposes (e.g., gamified learning, gamified fitness, gamified marketing).
+2. The research focuses on the INDIVIDUAL level — e.g., player behavior, player experience, player psychology, user engagement, enjoyment, flow, immersion, avatar identification, player motivation, in-game purchase by individuals, etc.
+3. The game/entertainment software is the core subject of study, not just a context or tool for something else.
 
-Not relevant if the paper is merely:
-- a qualitative study about people's opinions/adoption/use of AI;
-- about AI in general clinical/educational/technical practice without qualitative analysis assistance;
-- about non-generative AI, machine learning, NLP, or text mining without generative AI assisting qualitative analysis;
-- about LLM evaluation, theorem understanding, chatbots, summarization, or automation unrelated to qualitative analysis.
+Not relevant if:
+- The paper is about game theory (博弈论 / 博弈模型) — mathematical/economic game theory, Nash equilibrium, strategic games, etc.;
+- The paper uses gamification for non-entertainment goals (e.g., gamified education, gamified health, gamified workplace) — the end goal is not entertainment;
+- The paper studies games at the macro level — e.g., firm-level strategy, industry analysis, platform competition between game companies, national gaming policies, market structure of game industry;
+- The paper uses "game" metaphorically (e.g., "the game of business", "game plan", "playing a role");
+- The paper is about VR/AR used for non-entertainment purposes (training, therapy, remote work);
+- The paper is about general social media, live streaming, or online communities that are NOT primarily about gaming.
 
 Return only valid json. Use this exact schema:
 {
@@ -87,8 +92,8 @@ def non_negative_float(value: str) -> float:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Screen CSV rows for papers about using generative AI to assist "
-            "qualitative analysis. Relevant rows are appended to a CSV."
+            "Screen CSV rows for papers about digital games / entertainment software "
+            "at the individual level. Relevant rows are appended to a CSV."
         )
     )
     parser.add_argument("--input", default=DEFAULT_INPUT, help="Input CSV path.")

@@ -10,7 +10,7 @@ from typing import Any
 from deep_translator import GoogleTranslator
 
 
-DEFAULT_INPUT = "llm_qual_abs_relevant.csv"
+DEFAULT_INPUT = "game_ais_abs_relevant.csv"
 DEFAULT_ZH_COLUMN = "zh"
 
 

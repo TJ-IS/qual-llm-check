@@ -1,7 +1,7 @@
 [project]
-name = "qual-llm-check"
+name = "game-llm-check"
 version = "0.1.0"
-description = "Add your description here"
+description = "Screen literature for digital games / entertainment software research at the individual level"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

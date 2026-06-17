@@ -1,6 +1,6 @@
-﻿# qual-llm-check
+﻿# game-llm-check
 
-用 DeepSeek 官方 API 和 LangChain 对文献题名与摘要进行筛选，判断每条记录是否涉及「用生成式 AI 去辅助定性分析」。相关记录会被追加保存到 `llm_qual_abs_relevant.csv`。
+用 DeepSeek 官方 API 和 LangChain 对文献题名与摘要进行筛选，判断每条记录是否涉及「数字游戏 / 娱乐软件的个人层面研究」。相关记录会被追加保存到 `game_ais_abs_relevant.csv`。
 
 ## 文件结构
 
@@ -15,23 +15,23 @@
 ├── translate_csv_zh.py               # 将 CSV 的 Title + Abstract 翻译成中文并新增 zh 列
 ├── pyproject.toml                    # 项目依赖配置
 ├── uv.lock                           # uv 锁定依赖版本
-├── llm_qual_abs_all.csv              # 输入数据，Scopus 导出的全部题录
-├── llm_qual_abs_relevant.csv         # 输出数据，仅保存判断为相关的行
-├── llm_qual_abs_relevant_zh.csv      # 中文翻译输出，多一列 zh
-└── llm_qual_abs_relevant.progress.jsonl
+├── game_ais_abs_all.csv              # 输入数据，Scopus 导出的全部题录
+├── game_ais_abs_relevant.csv         # 输出数据，仅保存判断为相关的行
+├── game_ais_abs_relevant_zh.csv      # 中文翻译输出，多一列 zh
+└── game_ais_abs_relevant.progress.jsonl
                                       # 逐行进度记录，用于断点续跑
 ```
 
 运行失败且某些行重试后仍不可用时，会额外生成：
 
 ```text
-llm_qual_abs_relevant.errors.jsonl    # 错误记录，包含行号、row_key、标题和错误信息
+game_ais_abs_relevant.errors.jsonl    # 错误记录，包含行号、row_key、标题和错误信息
 ```
 
 ## 示例检索式
 
 ```text
-( TITLE-ABS-KEY ( "large language model" OR "generative AI" OR "generative artificial intelligence" ) AND TITLE-ABS-KEY ( "qualitative study" OR "grounded theory" ) )
+TITLE-ABS-KEY(game* OR play* OR fun* OR hedonic*) AND (ISSN(0167-9236) OR ISSN(0960-085X) OR ISSN(0378-7206) OR ISSN(1471-7727) OR ISSN(1350-1917) OR ISSN(1047-7047) OR ISSN(1536-9323) OR ISSN(0268-3962) OR ISSN(0742-1222) OR ISSN(0963-8687) OR ISSN(0276-7783))
 ```
 
 ## 快速上手
@@ -67,11 +67,11 @@ uv run python main.py --model deepseek-v4-pro --max-concurrency 4
 uv run python main.py --model deepseek-v4-pro --max-concurrency 4 --reset
 ```
 
-默认会读取 `llm_qual_abs_all.csv`，判断 `Title` 和 `Abstract` 合并后的内容是否相关，并把相关行追加到 `llm_qual_abs_relevant.csv`。输入和输出默认都使用 `utf-8-sig`，适合 Windows 和 Excel 场景，避免中文乱码和 BOM 问题。
+默认会读取 `game_ais_abs_all.csv`，判断 `Title` 和 `Abstract` 合并后的内容是否相关，并把相关行追加到 `game_ais_abs_relevant.csv`。输入和输出默认都使用 `utf-8-sig`，适合 Windows 和 Excel 场景，避免中文乱码和 BOM 问题。
 
 ## 断点续跑
 
-程序每完成一行都会写入 `llm_qual_abs_relevant.progress.jsonl`。如果运行中断，再次执行同一命令时会跳过已经处理过的行。
+程序每完成一行都会写入 `game_ais_abs_relevant.progress.jsonl`。如果运行中断，再次执行同一命令时会跳过已经处理过的行。
 
 不要加 `--reset`，并继续显式指定模型：
 
@@ -85,10 +85,10 @@ uv run python main.py --model deepseek-v4-pro --max-concurrency 4
 
 | 参数 | 默认值 | 作用 |
 | --- | --- | --- |
-| `--input` | `llm_qual_abs_all.csv` | 输入 CSV 路径 |
-| `--output` | `llm_qual_abs_relevant.csv` | 相关文献输出 CSV 路径 |
-| `--progress` | `llm_qual_abs_relevant.progress.jsonl` | 逐行进度文件，用于断点续跑 |
-| `--errors` | `llm_qual_abs_relevant.errors.jsonl` | 错误日志文件 |
+| `--input` | `game_ais_abs_all.csv` | 输入 CSV 路径 |
+| `--output` | `game_ais_abs_relevant.csv` | 相关文献输出 CSV 路径 |
+| `--progress` | `game_ais_abs_relevant.progress.jsonl` | 逐行进度文件，用于断点续跑 |
+| `--errors` | `game_ais_abs_relevant.errors.jsonl` | 错误日志文件 |
 | `--env-file` | `.env` | 环境变量文件 |
 | `--api-key-env` | `NEW_API_KEY` | API Key 对应的环境变量名 |
 | `--base-url-env` | `NEW_API_BASE_URL` | API base URL 对应的环境变量名 |
@@ -136,7 +136,7 @@ uv run python main.py --help
 
 ## 翻译相关文献
 
-`translate_csv_zh.py` 默认读取 `llm_qual_abs_relevant.csv`，把每行的 `Title` 和 `Abstract` 合并后用 Google Translate 翻译成中文，并写入新增的 `zh` 列。默认输出文件名是在输入文件名后加 `_zh`，例如 `llm_qual_abs_relevant_zh.csv`。
+`translate_csv_zh.py` 默认读取 `game_ais_abs_relevant.csv`，把每行的 `Title` 和 `Abstract` 合并后用 Google Translate 翻译成中文，并写入新增的 `zh` 列。默认输出文件名是在输入文件名后加 `_zh`，例如 `game_ais_abs_relevant_zh.csv`。
 
 运行默认翻译：
 
@@ -166,7 +166,7 @@ uv run python translate_csv_zh.py --max-workers 4
 
 | 参数 | 默认值 | 作用 |
 | --- | --- | --- |
-| `--input` | `llm_qual_abs_relevant.csv` | 输入 CSV 路径 |
+| `--input` | `game_ais_abs_relevant.csv` | 输入 CSV 路径 |
 | `--output` | 自动生成 `_zh.csv` | 输出 CSV 路径 |
 | `--title-column` | `Title` | 标题列名 |
 | `--abstract-column` | `Abstract` | 摘要列名 |
@@ -182,21 +182,22 @@ uv run python translate_csv_zh.py --max-workers 4
 
 ## 筛选标准
 
-判断依据是 `Title` 和 `Abstract` 合并后的内容。
+判断依据是 `Title` 和 `Abstract` 合并后的内容。筛选目标是找出真正关于**数字游戏 / 娱乐软件**且在**个人层面**进行研究的文献。
 
-相关文献通常包括：
+相关文献必须同时满足：
 
-- 使用、评估、提出或讨论生成式 AI、LLM、ChatGPT、GPT 类工具辅助定性编码；
-- 使用生成式 AI 辅助 thematic analysis、content analysis、grounded theory analysis；
-- 使用生成式 AI 处理访谈、焦点小组、开放题回答、社交媒体文本等定性资料；
-- 讨论 LLM 在定性分析中的可靠性、工作流、比较、风险或方法论影响。
+1. 研究对象是数字游戏、视频游戏、手机游戏、网络游戏或娱乐软件——而非博弈论（数学/经济学含义的 game theory），也非以非娱乐为目的的游戏化（如游戏化学习、游戏化健身、游戏化营销）；
+2. 研究聚焦于**个人层面**——如玩家行为、玩家体验、玩家心理、用户参与、沉浸感、心流、化身认同、玩家动机、个人内购行为等；
+3. 游戏/娱乐软件是研究的核心对象，而非仅仅作为研究其他问题的背景或工具。
 
 不相关文献通常包括：
 
-- 只是用定性研究方法调查人们对 AI 的看法；
-- 只是讨论 AI 在临床、教育、软件工程等场景中的采用或影响；
-- 使用传统机器学习、NLP 或文本挖掘，但没有生成式 AI 辅助定性分析；
-- LLM 评测、聊天机器人、自动摘要、定理理解等与定性分析无关的研究。
+- 博弈论 / 博弈模型（Nash 均衡、策略博弈等数学/经济学研究）；
+- 以非娱乐为最终目的的游戏化研究（教育游戏化、健康游戏化、工作游戏化等）；
+- 宏观层面的游戏研究——企业战略、产业分析、平台竞争、国家政策、市场结构；
+- 仅把 "game" 当作隐喻（如 "商业博弈"、"扮演角色"）；
+- VR/AR 用于非娱乐目的（培训、治疗、远程办公）；
+- 与游戏无关的社交媒体、直播或在线社区研究。
 
 ## 实现说明
 
