@@ -18,7 +18,13 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 
-DEFAULT_SOURCE_CSV = "construct_all_AIS_basket.csv"
+def configure_stdio() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
+DEFAULT_SOURCE_CSV = "all_MISQ_ISR.csv"
 DEFAULT_RUN_ROOT = "runs"
 DEFAULT_CONFIG = "config.json"
 DEFAULT_INPUT_COPY = "source.csv"
@@ -26,39 +32,84 @@ DEFAULT_SYSTEM_PROMPT = "system_prompt.md"
 DEFAULT_USER_PROMPT = "user_prompt_template.md"
 DEFAULT_ENCODING = "utf-8-sig"
 
-CONSTRUCT_SYSTEM_PROMPT = """You are a careful literature screening assistant.
+CODING_AGENT_UX_SYSTEM_PROMPT = """You are a careful information-systems literature screening assistant.
 
-Task: decide whether a paper is relevant to developing a construct or constructs.
+Project goal:
+We are building new individual-level user-experience concepts, constructs, and measures for coding agents. Screen MISQ/ISR papers for whether they contain an individual-level UX concept or phenomenon that could be adapted into an important coding-agent-specific UX concept.
 
-Target concept:
-A relevant paper has a title and/or abstract indicating that a substantive contribution of the paper is to develop, introduce, define, conceptualize, reconceptualize, refine, operationalize, measure, or validate a theoretical construct or a set of constructs. This includes scale or instrument development when the paper specifies the construct's meaning, dimensions, boundaries, or measurement items.
+Focal research object:
+A coding agent is an AI software-engineering agent that can inspect a codebase, edit files, run shell commands/tests/linters, use tools, work across multiple files, create commits or pull requests, ask for clarification, and sometimes work asynchronously or with reduced human approval.
 
-Include papers when the abstract shows one or more of these signals:
-- the paper proposes or develops a new construct, concept, conceptualization, typology, taxonomy, or dimensions;
-- the paper refines, reconceptualizes, extends, or clarifies an existing construct;
-- the paper develops and validates a scale, measure, or instrument for a construct;
-- the paper's core theory contribution is construct definition, construct dimensions, construct boundaries, or construct operationalization.
+Open discovery stance:
+Do not force every relevant paper into one predetermined concept. Calibrated delegation and control is only one promising example. Include any paper that contains an important individual-level UX concept or phenomenon that seems suitable for coding-agent-specific adaptation.
 
-Exclude papers when they only:
-- use existing constructs as variables in an empirical model;
-- test relationships among constructs without developing or refining the constructs themselves;
-- develop a framework, model, hypotheses, propositions, or research agenda without clear construct development;
-- mention "construct", "developed", "framework", "model", "measurement", or "scale" only in passing;
-- are literature reviews, methods papers, or domain applications unless they explicitly create, refine, operationalize, or validate constructs.
+What makes a UX concept coding-agent-specific:
+The concept should matter because coding agents are not just chatbots, recommender systems, search tools, generic automation, or traditional programming IDE features. Coding agents can take consequential actions inside executable and evolving code environments. They transform user experience through some combination of codebase context, tool execution, multi-step autonomy, artifact production, verification traces, permissions, background work, responsibility for code quality, and developer skill/identity.
 
-If the evidence is ambiguous, choose relevant=false with a lower confidence score. Do not infer relevance from references or citations; use the title, abstract, and keywords only.
+Possible coding-agent-specific UX concept areas include, but are not limited to:
+- calibrated delegation, autonomy, control, approval, interruption, and course correction;
+- action-boundary awareness, permission comfort, safe stopping, overscope concern, and blast-radius sensitivity;
+- context alignment: whether the agent understands the right files, architecture, conventions, dependencies, and task intent;
+- verification burden and evidential traceability through diffs, tests, logs, citations, explanations, commits, or pull requests;
+- proactive or background agent timing: when the agent should notify, ask, draft, continue, or stay silent;
+- co-agency, authorship, responsibility, accountability, and ownership of agent-produced code;
+- developer agency, expertise, learning, deskilling, confidence, flow, attention, and cognitive offloading;
+- collaboration quality with a nonhuman teammate that can execute work, not merely advise;
+- trust, reliance, transparency, explainability, or acceptance when older constructs do not fit the code-action setting.
+
+Screening task:
+Decide whether the paper contains a concept or phenomenon that is suitable for our team to adapt into a coding-agent-specific individual UX concept. The paper does not have to mention coding agents, develop a construct, or provide measurement guidance. The key question is whether there is a recognizable individual-level UX concept in the paper that could be meaningfully reworked for coding agents.
+
+Include when the title, abstract, or keywords show all four gates:
+Gate 1 - Individual UX relevance:
+- The paper concerns individual users, developers, workers, customers, learners, professionals, or human decision makers and their perceptions, experiences, judgments, behavior, cognition, affect, learning, or collaboration with technology.
+
+Gate 2 - Adaptable concept presence:
+- The paper contains a recognizable concept, phenomenon, experience, behavior, tension, or mechanism that could be adapted by us. The paper itself does not need to define, refine, operationalize, measure, or validate that concept.
+
+Gate 3 - Coding-agent-specific adaptation gap:
+- The concept would need meaningful adaptation for coding agents because the agent can inspect code, execute tools, modify artifacts, act across time/steps, produce reviewable outputs, or create responsibility for code quality and downstream effects. If the concept transfers directly without changing its meaning, boundaries, dimensions, or stakes, it is not enough.
+
+Gate 4 - Practical importance:
+- The adapted concept would matter for real coding-agent use, not merely be a narrow curiosity. It should connect to consequential UX issues such as safe and effective delegation, code quality, verification burden, user control, action boundaries, accountability, trust/reliance calibration, productivity, flow, interruption, learning, expertise, deskilling, collaboration, responsibility, or developer well-being.
+
+Strong inclusion signals include:
+1. Direct fit: AI coding assistants, software developers, programming tools, human-AI software engineering, intelligent agents, automation, or developer experience with individual user perceptions, behaviors, or work practices.
+2. Adjacent construct fit: individual-level constructs about trust, reliance, delegation, control, autonomy, transparency, accountability, explainability, interruption, cognitive load, flow, expertise, learning, user agency, technology acceptance, or human-AI collaboration that need adaptation for coding agents.
+3. Adaptable concept fit: the paper contains a concept, phenomenon, behavior, experience, or mechanism that could plausibly be reworked for coding-agent UX research.
+4. Practical importance: the candidate concept would address a meaningful issue in how people use, supervise, depend on, or work with coding agents.
+
+Exclude when the paper is only:
+- firm-level, market-level, platform/ecosystem-level, policy-level, or purely organizational without an individual UX mechanism;
+- a technical, econometric, or methodological paper with no relevant individual UX concept;
+- about IT careers, labor markets, governance, security, adoption, or productivity without a clear bridge to individual experience of using or supervising coding agents;
+- a generic technology-use paper where the concept transfers directly without needing coding-agent-specific adaptation;
+- a paper with a coding-agent-specific angle that is too trivial, narrow, or practically unimportant for developing a major UX concept.
+
+Decision calibration:
+- Use relevant=true for strong or moderate fit: the paper passes the four gates and contains a plausible candidate concept or phenomenon for coding-agent UX research.
+- Use relevant=false for weak/no fit or when the bridge is too speculative.
+- If ambiguous, choose relevant=false with decision_label="uncertain_exclude" and a lower confidence score.
+- Use only the title, abstract, and keywords as evidence. Do not infer from references, authors, journal reputation, or external knowledge.
 
 Return only valid JSON. Use this exact schema:
 {
   "relevant": true,
   "confidence": 0.0,
-  "decision_label": "include | exclude | uncertain_exclude",
+  "decision_label": "include_strong | include_possible | uncertain_exclude | exclude_no_individual_ux | exclude_no_adaptable_concept | exclude_not_coding_agent_specific | exclude_low_practical_importance | exclude_domain_mismatch",
+  "fit_level": "strong | moderate | weak | none",
+  "source_concept": "concept or phenomenon in the paper that could be adapted, or 'none'",
+  "candidate_coding_agent_ux_concept": "possible adapted coding-agent UX concept name, or 'none'",
+  "ux_topic": "delegation_control | action_boundary_safety | context_alignment | verification_traceability | proactivity_interruption | coagency_responsibility | skill_learning_identity | cognitive_load_attention | collaboration_communication | trust_reliance_calibration | workflow_asynchrony | affect_confidence_flow | other | none",
+  "adaptation_potential": "high | medium | low | none",
+  "practical_importance": "why this would matter in real coding-agent use, or 'none'",
+  "uniqueness_rationale": "why this concept is distinctive or mismatched when moved to coding agents, or 'none'",
   "evidence": "brief phrase from the title, abstract, or keywords that supports the decision",
   "reason": "one concise sentence explaining the decision"
 }
 """
 
-CONSTRUCT_USER_PROMPT = """Screen this literature record using the system criteria.
+CODING_AGENT_UX_USER_PROMPT = """Screen this literature record using the system criteria.
 
 Use the title, abstract, and keywords as evidence. The other bibliographic fields are provided only for orientation.
 
@@ -106,6 +157,13 @@ class ModelDecision:
     relevant: bool
     confidence: float
     decision_label: str
+    fit_level: str
+    source_concept: str
+    candidate_coding_agent_ux_concept: str
+    ux_topic: str
+    adaptation_potential: str
+    practical_importance: str
+    uniqueness_rationale: str
     evidence: str
     reason: str
     raw_response: str
@@ -128,8 +186,8 @@ def non_negative_int(value: str) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Create run directories and screen literature records for construct "
-            "development with two independent LLMs."
+            "Create run directories and screen MISQ/ISR records for coding-agent "
+            "user-experience concept development with two independent LLM calls."
         )
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -138,8 +196,8 @@ def build_parser() -> argparse.ArgumentParser:
     init_parser.add_argument("--run-dir", default=None, help="Run directory to create.")
     init_parser.add_argument("--input", default=DEFAULT_SOURCE_CSV, help="Source CSV to copy into the run directory.")
     init_parser.add_argument("--env-file", default=".env", help="Env file used by this run, stored as a relative path.")
-    init_parser.add_argument("--deepseek-model", default="deepseek-v4-pro", help="DeepSeek model id.")
-    init_parser.add_argument("--gpt-model", default="gpt-5.5", help="OpenAI model id.")
+    init_parser.add_argument("--first-model", default="deepseek-v4-pro", help="First reviewer model id.")
+    init_parser.add_argument("--second-model", default="deepseek-v4-pro", help="Second reviewer model id.")
     init_parser.add_argument("--overwrite", action="store_true", help="Overwrite existing config and prompt files.")
 
     preview_parser = subparsers.add_parser("preview", help="Print configured prompts without calling any API.")
@@ -168,7 +226,7 @@ def normalize_cell(value: Any) -> str:
 
 def default_run_dir() -> Path:
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    return Path(DEFAULT_RUN_ROOT) / f"construct_development_{stamp}"
+    return Path(DEFAULT_RUN_ROOT) / f"coding_agent_ux_{stamp}"
 
 
 def relative_to(path: Path, base: Path) -> str:
@@ -198,7 +256,7 @@ def write_text_if_allowed(path: Path, content: str, overwrite: bool) -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def build_default_config(run_dir: Path, env_file: Path, deepseek_model: str, gpt_model: str) -> dict[str, Any]:
+def build_default_config(run_dir: Path, env_file: Path, first_model: str, second_model: str) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "created_at": utc_now(),
@@ -220,26 +278,26 @@ def build_default_config(run_dir: Path, env_file: Path, deepseek_model: str, gpt
         },
         "models": [
             {
-                "name": "deepseekv4pro",
-                "model": deepseek_model,
+                "name": "deepseekv4pro_reviewer_1",
+                "model": first_model,
                 "enabled": True,
                 "api_key_env": "NEW_API_KEY",
                 "base_url_env": "NEW_API_BASE_URL",
                 "base_url": "https://api.deepseek.com",
                 "timeout": 90.0,
-                "max_tokens": 420,
+                "max_tokens": 900,
                 "temperature": 0,
                 "response_format": {"type": "json_object"},
             },
             {
-                "name": "gpt-5-5",
-                "model": gpt_model,
+                "name": "deepseekv4pro_reviewer_2",
+                "model": second_model,
                 "enabled": True,
                 "api_key_env": "NEW_API_KEY",
                 "base_url_env": "NEW_API_BASE_URL",
-                "base_url": None,
+                "base_url": "https://api.deepseek.com",
                 "timeout": 90.0,
-                "max_tokens": 1200,
+                "max_tokens": 900,
                 "temperature": 0,
                 "response_format": {"type": "json_object"},
             },
@@ -288,7 +346,7 @@ def init_run(args: argparse.Namespace) -> int:
         print(f"Copied source CSV to {target_csv}")
 
     env_path = Path(args.env_file)
-    config = build_default_config(run_dir, env_path, args.deepseek_model, args.gpt_model)
+    config = build_default_config(run_dir, env_path, args.first_model, args.second_model)
     config_path = run_dir / DEFAULT_CONFIG
     if config_path.exists() and not args.overwrite:
         print(f"Keeping existing config: {config_path}")
@@ -296,8 +354,8 @@ def init_run(args: argparse.Namespace) -> int:
         save_config(run_dir, config)
         print(f"Wrote config: {config_path}")
 
-    write_text_if_allowed(run_dir / DEFAULT_SYSTEM_PROMPT, CONSTRUCT_SYSTEM_PROMPT, args.overwrite)
-    write_text_if_allowed(run_dir / DEFAULT_USER_PROMPT, CONSTRUCT_USER_PROMPT, args.overwrite)
+    write_text_if_allowed(run_dir / DEFAULT_SYSTEM_PROMPT, CODING_AGENT_UX_SYSTEM_PROMPT, args.overwrite)
+    write_text_if_allowed(run_dir / DEFAULT_USER_PROMPT, CODING_AGENT_UX_USER_PROMPT, args.overwrite)
     print(f"Wrote prompts: {run_dir / DEFAULT_SYSTEM_PROMPT}, {run_dir / DEFAULT_USER_PROMPT}")
     print("Next: preview the prompts if needed, then run the screening.")
     return 0
@@ -462,7 +520,7 @@ def render_user_prompt(template: str, item: ScreenItem) -> str:
         raise ValueError(f"Unknown placeholder in user prompt template: {exc}") from exc
 
 
-def parse_model_json(content: str) -> tuple[bool, float, str, str, str]:
+def parse_model_json(content: str) -> tuple[bool, float, str, str, str, str, str, str, str, str, str, str]:
     if not content or not content.strip():
         raise ValueError("empty model response")
     text = content.strip()
@@ -486,9 +544,29 @@ def parse_model_json(content: str) -> tuple[bool, float, str, str, str]:
         confidence = 0.0
     confidence = max(0.0, min(1.0, confidence))
     decision_label = normalize_cell(payload.get("decision_label", ""))
+    fit_level = normalize_cell(payload.get("fit_level", ""))
+    source_concept = normalize_cell(payload.get("source_concept", ""))
+    candidate_coding_agent_ux_concept = normalize_cell(payload.get("candidate_coding_agent_ux_concept", ""))
+    ux_topic = normalize_cell(payload.get("ux_topic", ""))
+    adaptation_potential = normalize_cell(payload.get("adaptation_potential", ""))
+    practical_importance = normalize_cell(payload.get("practical_importance", ""))
+    uniqueness_rationale = normalize_cell(payload.get("uniqueness_rationale", ""))
     evidence = normalize_cell(payload.get("evidence", ""))
     reason = normalize_cell(payload.get("reason", ""))
-    return relevant, confidence, decision_label, evidence, reason
+    return (
+        relevant,
+        confidence,
+        decision_label,
+        fit_level,
+        source_concept,
+        candidate_coding_agent_ux_concept,
+        ux_topic,
+        adaptation_potential,
+        practical_importance,
+        uniqueness_rationale,
+        evidence,
+        reason,
+    )
 
 
 async def classify_with_retries(
@@ -513,13 +591,33 @@ async def classify_with_retries(
                     ]
                 )
             raw_response = response.content if isinstance(response.content, str) else json.dumps(response.content)
-            relevant, confidence, decision_label, evidence, reason = parse_model_json(raw_response)
+            (
+                relevant,
+                confidence,
+                decision_label,
+                fit_level,
+                source_concept,
+                candidate_coding_agent_ux_concept,
+                ux_topic,
+                adaptation_potential,
+                practical_importance,
+                uniqueness_rationale,
+                evidence,
+                reason,
+            ) = parse_model_json(raw_response)
             return ModelDecision(
                 model_name=spec.name,
                 model=spec.model,
                 relevant=relevant,
                 confidence=confidence,
                 decision_label=decision_label,
+                fit_level=fit_level,
+                source_concept=source_concept,
+                candidate_coding_agent_ux_concept=candidate_coding_agent_ux_concept,
+                ux_topic=ux_topic,
+                adaptation_potential=adaptation_potential,
+                practical_importance=practical_importance,
+                uniqueness_rationale=uniqueness_rationale,
                 evidence=evidence,
                 reason=reason,
                 raw_response=raw_response,
@@ -579,6 +677,13 @@ def build_output_fieldnames(input_fieldnames: list[str], specs: list[ModelSpec])
                 f"{slug}_relevant",
                 f"{slug}_confidence",
                 f"{slug}_decision_label",
+                f"{slug}_fit_level",
+                f"{slug}_source_concept",
+                f"{slug}_candidate_coding_agent_ux_concept",
+                f"{slug}_ux_topic",
+                f"{slug}_adaptation_potential",
+                f"{slug}_practical_importance",
+                f"{slug}_uniqueness_rationale",
                 f"{slug}_evidence",
                 f"{slug}_reason",
             ]
@@ -604,6 +709,13 @@ def decisions_payload(item: ScreenItem, decisions: list[ModelDecision]) -> dict[
                 "relevant": decision.relevant,
                 "confidence": decision.confidence,
                 "decision_label": decision.decision_label,
+                "fit_level": decision.fit_level,
+                "source_concept": decision.source_concept,
+                "candidate_coding_agent_ux_concept": decision.candidate_coding_agent_ux_concept,
+                "ux_topic": decision.ux_topic,
+                "adaptation_potential": decision.adaptation_potential,
+                "practical_importance": decision.practical_importance,
+                "uniqueness_rationale": decision.uniqueness_rationale,
                 "evidence": decision.evidence,
                 "reason": decision.reason,
                 "raw_response": decision.raw_response,
@@ -639,6 +751,13 @@ def csv_output_row(item: ScreenItem, decisions: list[ModelDecision]) -> dict[str
                 f"{slug}_relevant": str(decision.relevant).lower(),
                 f"{slug}_confidence": f"{decision.confidence:.3f}",
                 f"{slug}_decision_label": decision.decision_label,
+                f"{slug}_fit_level": decision.fit_level,
+                f"{slug}_source_concept": decision.source_concept,
+                f"{slug}_candidate_coding_agent_ux_concept": decision.candidate_coding_agent_ux_concept,
+                f"{slug}_ux_topic": decision.ux_topic,
+                f"{slug}_adaptation_potential": decision.adaptation_potential,
+                f"{slug}_practical_importance": decision.practical_importance,
+                f"{slug}_uniqueness_rationale": decision.uniqueness_rationale,
                 f"{slug}_evidence": decision.evidence,
                 f"{slug}_reason": decision.reason,
             }
@@ -837,6 +956,13 @@ async def run_screening(args: argparse.Namespace) -> int:
                             "relevant": decision.relevant,
                             "confidence": decision.confidence,
                             "decision_label": decision.decision_label,
+                            "fit_level": decision.fit_level,
+                            "source_concept": decision.source_concept,
+                            "candidate_coding_agent_ux_concept": decision.candidate_coding_agent_ux_concept,
+                            "ux_topic": decision.ux_topic,
+                            "adaptation_potential": decision.adaptation_potential,
+                            "practical_importance": decision.practical_importance,
+                            "uniqueness_rationale": decision.uniqueness_rationale,
                             "evidence": decision.evidence,
                             "reason": decision.reason,
                             "raw_response": decision.raw_response,
@@ -870,6 +996,7 @@ async def run_screening(args: argparse.Namespace) -> int:
 
 
 def main() -> None:
+    configure_stdio()
     parser = build_parser()
     args = parser.parse_args()
     try:

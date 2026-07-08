@@ -2,7 +2,6 @@
 *.jsonl
 .env
 *.log
-runs/
 
 # Python-generated files
 __pycache__/
