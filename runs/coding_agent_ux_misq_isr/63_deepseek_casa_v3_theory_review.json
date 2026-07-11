@@ -1,0 +1,87 @@
+﻿[
+  {
+    "reviewer": "misq_sentence_function_and_citation_reviewer",
+    "response": {
+      "verdict": "Proceed",
+      "sentence_function_alignment": [
+        {
+          "paragraph": "C45",
+          "function": "Establishes definition, context dependency, domain attention, and table introduction for SA concepts, akin to Chen's C45."
+        },
+        {
+          "paragraph": "C47",
+          "function": "Directly invokes specific dimensions from Table 1 (SART, LETSSA, SAGAT, information security SA, operational dashboard SA) to demonstrate measurement-context mismatch, as Chen's C47 does with MUG and mobile app scales."
+        },
+        {
+          "paragraph": "Table 2 and C53",
+          "function": "Introduces adjacent programming agent studies (Table 2) and then argues breadth and depth gaps in existing literature, analogous to Chen's Table 2 and C53."
+        },
+        {
+          "paragraph": "C55",
+          "function": "Specifies three research gaps (lack of integrated conceptualization, overgeneralized concepts, absence of validated scale), mirroring Chen's C55."
+        },
+        {
+          "paragraph": "C59",
+          "function": "Presents dynamic SA theory original meaning, similar to Chen's C59 on CPT."
+        },
+        {
+          "paragraph": "C61",
+          "function": "Cites cross-disciplinary use (aviation, automation, train driving, IS, autonomous agents) and establishes applicability bridge to programming agents, matching Chen's C61."
+        },
+        {
+          "paragraph": "C63",
+          "function": "Discusses new context differences (agent-generated states, distributed artifacts, delegated monitoring) and development space, akin to Chen's C63."
+        }
+      ],
+      "citation_role_errors": [],
+      "unsupported_or_overstated_claims": [],
+      "table_problems": [],
+      "missing_primary_or_top_is_sources": [],
+      "specific_revisions": [
+        "Verify that Kretsou et al. (2021) is a peer-reviewed publication directly relevant to programming agent interaction and state distribution; if not, substitute with a more established source.",
+        "Ensure all cited forthcoming or very recent works (e.g., Kumar et al. 2025, Dhanorkar et al. 2026, van de Merwe et al. 2024) are accepted for publication or are accessible as preprints in recognized repositories to avoid over-reliance on in-press materials.",
+        "In C53.5, the example referencing SART's information quantity and quality could be strengthened by explicitly connecting to page numbers or specific items in Taylor (1990) to avoid ambiguity."
+      ],
+      "overall_assessment": "The CASA manuscript successfully replicates Chen et al. (2024)'s argumentative structure for theoretical background: it defines the construct, demonstrates context dependency, reviews adjacent literature, identifies breadth/depth gaps, articulates three research gaps, and applies a foundational theory with explicit discussion of cross-domain usage, bridging, and extension. Citations are appropriate, with no decorative references or table-text inconsistencies. Minor suggestions are offered to confirm the publication status of a few very recent sources and to add precision for one SART example. Overall, the section is well-aligned and can proceed."
+    }
+  },
+  {
+    "reviewer": "theoretical_lens_and_construct_boundary_reviewer",
+    "response": {
+      "verdict": "需小幅修改",
+      "theory_architecture_strengths": [
+        "Clear division of labor: Taylor (1990) as the sole foundational construct, Endsley (1995b) as the organizing theoretical lens, IS delegation theory as situational theory, and agent transparency as antecedent.",
+        "The architecture mirrors the theorizing logic of Chen et al. (2024) and explicitly avoids treating agent transparency as a mother theory.",
+        "Table 1 covers classical, IS-specific, and autonomous agent situation awareness literature, providing adequate evidence for contextualization.",
+        "The three structural differences are derived from the characteristics of programming agents and are supported by literature, going beyond mere object name substitution.",
+        "The planned mixed-method construct development approach is consistent with the proposed theoretical framework and does not presuppose the three Endsley levels as final dimensions.",
+        "Construct boundaries with transparency, trust, workload, perceived control, and objective task knowledge are articulated throughout the manuscript."
+      ],
+      "role_confusions": [
+        "In the Introduction and Section 2.1, Taylor (1990) and Endsley (1995b) are introduced side by side as defining situation awareness, without explicitly stating that Taylor is the sole foundational construct and Endsley serves only as an organizing lens. This may mislead readers into viewing them as two competing foundational constructs.",
+        "The relationship between IS delegation theory and Endsley’s dynamic situation awareness is explained, but the distinct theoretical roles could be stated more prominently at the construct definition stage."
+      ],
+      "migration_logic_risks": [
+        "The three identified structural differences (state generation, object and carrier distribution, indirect access) risk being interpreted as simply different content rather than genuinely new structural features of the task environment. The manuscript should strengthen the argument that these differences fundamentally alter the nature of the ‘situation’ to be tracked, not just the items listed on a measurement scale.",
+        "While the manuscript claims the Endsley levels will not be forced as final dimensions, the coding process heavily anchored on them could still result in a mere re-labeling effect if not carefully executed. An explicit mechanism for preventing such forcing should be described."
+      ],
+      "construct_boundary_risks": [
+        "During open coding, there is a risk that attributes of agent transparency (e.g., visibility of plans, reasons, future states) and workload (e.g., attention demands) appear in user comments and are mistakenly coded as part of CASA rather than as antecedents. Strict coding rules must be enforced.",
+        "The distinction between CASA as a subjective cognitive state and objective task knowledge must be maintained, especially when users describe their behavior or system performance rather than their feeling of knowing."
+      ],
+      "missing_literature_or_evidence": [
+        "No significant omissions detected. Table 1 is sufficiently representative."
+      ],
+      "specific_revisions": [
+        "Explicitly state in the Introduction and/or Section 2.1 that CASA builds on Taylor’s subjective SA tradition as the sole foundational construct, and Endsley’s theory is used as a high-level organizational framework (akin to CPT in Chen et al. 2024), not as an additional foundational construct.",
+        "Add a short discussion in the methods section on how the coding process will prevent the three Endsley levels from being imposed as final dimensions (e.g., iterative comparison of emergent themes with the levels, openness to dimensions that cross-cut the levels, or procedures to ensure content saturation before applying theoretical categories).",
+        "Strengthen the linkage between the three structural differences and the specific challenges they pose to situation awareness, making it clear why a new construct is necessary beyond simple content adaptation."
+      ],
+      "minimum_evidence_needed_after_phase_1": [
+        "Evidence that emergent CASA dimensions are not merely the three Endsley levels relabeled, but reflect specific cognitive challenges reported by users (e.g., difficulty in integrating evidence across artifacts, tracking agent-initiated changes, or re-engaging after attention shift).",
+        "Demonstration that items pool excludes indicators of agent transparency, trust, workload, or perceived control, based on clear boundary specification in the coding phase."
+      ],
+      "overall_assessment": "The theoretical architecture is well-conceived and largely consistent with the principles of construct development from secondary data. Minor clarifications are needed to eliminate potential confusion about the roles of Taylor and Endsley and to ensure that the theoretical lens does not inadvertently constrain the emergent dimensional structure. With these revisions, the theoretical foundation is sound."
+    }
+  }
+]

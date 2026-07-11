@@ -1,0 +1,63 @@
+﻿[
+  {
+    "reviewer": "introduction_argument_reviewer",
+    "response": {
+      "verdict": "proceed",
+      "strong_paragraphs": [
+        "C19: establishes the economic importance of programming agents and the persistence of task-state judgment demands, supported by appropriate evidence.",
+        "C21: convincingly contrasts classical SA contexts with programming agent tasks, showing why existing SA cannot directly apply.",
+        "C23: formally defines CASA using Taylor's subjective SA, connects to practical judgments (continued delegation, control, satisfaction) without claiming untested effects.",
+        "C25: demonstrates that SA has been contextually measured in multiple domains, setting up the need for domain-specific measurement.",
+        "C27: concretely identifies measurement mismatches—SART lacks agent action/artifact dimensions, SAGAT misses subjective judgment and open trajectories, transparency measures overlook artifact relations.",
+        "C29: clearly articulates research and practical necessity: common measurement unit for testing antecedents and outcomes, and design evaluation tool.",
+        "C31-C39: research questions and methodological overview align with the necessity chain, and contributions are specific and verifiable."
+      ],
+      "unsupported_inferences": [],
+      "necessity_chain_gaps": [],
+      "redundant_or_misplaced_material": [],
+      "sentence_level_revisions": [],
+      "overall_assessment": "The CASA introduction successfully reproduces the argumentative functions of Chen et al. (2024) by establishing economic and practical relevance (C19), contrasting new and old contexts to justify theoretical development (C21), formally defining the focal construct without interim labels (C23), pinpointing measurement gaps with concrete comparisons (C25–C27), and stating clear necessity for research and practice (C29). The logic from Dong's Chapter 3 (construct development as prerequisite for empirical testing, alignment with target behaviors, and demonstration that existing dimensions do not cover the new context) is incorporated without importing a full literature-review chapter. The introduction avoids untested effect claims, refrains from listing adjacent AI programming studies redundantly, and uses complete sentences rather than colon-driven definitions. Minor issues such as the slight leap from Kumar and Dhanorkar's findings to 'task cognition' in C19.11 are still logically connected and do not weaken the necessity chain."
+    }
+  },
+  {
+    "reviewer": "skeptical_evidence_and_style_reviewer",
+    "response": {
+      "verdict": "minor revisions",
+      "evidence_type_errors": [
+        {
+          "location": "C23.7–C23.12",
+          "claim": "CASA直接关系到用户在编程智能体任务中需要作出的后续判断… CASA 可以为用户决定继续委托、补充信息、介入调整或接受结果提供认知基础，并可能进一步影响其感知控制和使用满意度。",
+          "cited_evidence": "Selkowitz et al., 2017; Endsley, 2023; Jaeger & Eckhardt, 2021; Nadj et al., 2020; Baronas & Louis, 1988; Bhattacherjee, 2001",
+          "issue": "所引文献仅支持一般情境下态势感知的重要性，未提供CASA与这些结果变量之间存在关系的直接证据，将已有发现延伸至全新构念属于过度推断。"
+        },
+        {
+          "location": "C29.1–C29.4",
+          "claim": "没有这一构念及其测量，相关研究只能分别观察交互行为…难以检验这些现象是否通过用户对任务状态的认识发生联系。",
+          "cited_evidence": "Hong et al., 2014; Hoehle & Venkatesh, 2015（支持情境化重要性）",
+          "issue": "断言该构念是研究用户任务认识及其效应的唯一途径，缺乏实证支撑；现有测量或替代方法可能也能部分捕捉用户的认知状态，此处的必要性声明过于绝对。"
+        }
+      ],
+      "causal_overstatements": [
+        {
+          "location": "C23.11",
+          "statement": "CASA 可以为用户决定继续委托、补充信息、介入调整或接受结果提供认知基础，并可能进一步影响其感知控制和使用满意度。",
+          "problem": "将未经验证的理论关系表述为既定事实，在尚未开发出有效量表且未进行因果检验的情况下，即确定CASA的认知基础作用及其后续效应。"
+        },
+        {
+          "location": "C29.3",
+          "statement": "CASA 量表将使研究者能够检验…这种认识如何连接到感知控制、满意度和持续使用。",
+          "problem": "预设尚未构建的量表能够实现所宣称的检验功能，忽略了量表开发可能面临的内容效度不足或因子结构不理想等结果，属于预期性过度承诺。"
+        }
+      ],
+      "definition_problems": [],
+      "style_problems": [],
+      "required_revisions": [
+        "修改C23.7–C23.12部分，将CASA与感知控制、满意度及持续使用意愿的关系明确表述为理论假设（例如“我们预期CASA可能影响…”），而非已确立的联系。",
+        "调整C29.1–C29.4的表述，淡化“必要性”的绝对断言，改用“有助于”“为…提供一种途径”等措辞，并承认其他研究策略同样可能探索用户认知。",
+        "将C23.11的因果表述从陈述语气改为推测语气，例如“因此，CASA有可能构成…的认知基础，但这一关系尚待实证检验”。",
+        "在整个引言中清晰划分既有研究直接支持的结论与研究预期，避免将文献缺口直接等同于新构念的不可或缺性。"
+      ],
+      "overall_assessment": "引言对编程智能体态势感知的提出给出了较为清晰的背景与缺口论证，但部分段落将基于一般态势感知文献的推论表述为直接支持CASA的证据，且对构念必要性的断言有些过度。建议在必要性宣称和因果命题上增加限定词，以更严格地反映当前研究的探索性。在修正这些表述后，引言能够合理地为后续量表的开发奠定理论基础。"
+    }
+  }
+]
