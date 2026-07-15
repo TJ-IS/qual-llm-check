@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "analysis_version": "explicit-construct-prompt-v3",
+  "input_dir": "../../database_fulltext_construct",
+  "output_dir": "output",
+  "env_file": "../../.env",
+  "prompt_files": {
+    "system": "system_prompt.md",
+    "user_template": "user_prompt_template.md",
+    "chunk_system": "chunk_system_prompt.md"
+  },
+  "model": {
+    "name": "deepseek-v4-pro",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 2600,
+    "chunk_max_tokens": 1800,
+    "timeout": 180
+  },
+  "batch": {
+    "max_concurrency": 4,
+    "retries": 3,
+    "retry_base_delay": 2.0,
+    "direct_max_chars": 500000,
+    "chunk_chars": 180000,
+    "chunk_overlap_chars": 2000
+  }
+}

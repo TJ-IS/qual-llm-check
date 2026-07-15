@@ -29,7 +29,7 @@
 | 51 | `51_dong_paragraph_logic_casa_specific_mismatch_v6.md` | 已被修订 | 具体迁移分析较充分，但将作者的迁移判据、量表细节和相邻构念审计过多写入开篇，且研究背景末段仍显并列散乱 |
 | 52 | `52_dong_misq_academic_layer_casa_opening_v7.md` | 已被修订 | 开篇层级和段落结构较为合适，但 CASA 重要性仍由准确性、检查耗时等间接现象支撑，尚未形成与控制、满意度、持续使用及价值实现相连的证据链 |
 | 53 | `53_casa_importance_evidence_chain_v8.md` | 已被第 54 号替代 | 已采用正式发表的学术证据，但 D5.7 表述冗余，任务判断与满意度的论证落点不够统一 |
-| 54 | `54_casa_task_and_experience_outcomes_v9.md` | 当前写作稿 | 删除 D5.7 的否定式转折，并将论证统一为任务判断、感知控制与满意度、持续使用三个递进层次 |
+| 54 | `54_casa_task_and_experience_outcomes_v9.md` | 第 71 号第一章来源稿 | 删除 D5.7 的否定式转折，并将论证统一为任务判断、感知控制与满意度、持续使用三个递进层次 |
 | 55 | `55_casa_construct_development_article_plan_v1.md` | 已被第 59 号替代 | 第一轮对标 Chen 等（2024）的构念开发稿；结构完整，但文献覆盖和逐句引文分工不足 |
 | 56 | `56_deepseek_casa_construct_article_review.mjs` / `56_deepseek_casa_construct_article_review.json` | 审计记录 | 两个 DeepSeek V4 Pro 分别从 MISQ 写作逻辑和心理测量方法审查第 55 号构念开发稿 |
 | 57 | `57_extract_casa_misq_literature.py` / `57_casa_misq_literature_evidence.csv` / `57_casa_misq_literature_evidence.md` | 核心文献证据 | 从 Top11 数据库精确抽取 21 篇 CASA 论证核心文献，保存摘要、可支持论点及证据边界；同时复核 16 篇态势感知记录 |
@@ -46,6 +46,13 @@
 | 68 | `68_casa_construct_development_article_plan_v5.md` | 当前构念开发稿 | 重写引言第二段，以一般态势感知的行为价值、其他任务中的主观态势感知结果关联和编程智能体中的持续任务判断建立研究动机，并将 CASA 后果保留为待检验关系 |
 | 69 | `69_deepseek_casa_v5_sa_value_review.mjs` / `69_deepseek_casa_v5_sa_value_review.json` | 审计记录 | 两个 DeepSeek V4 Pro 角色复核第 68 号稿的态势感知价值证据、主观构念边界和动机链；人工复核后进一步标明跨情境弱延伸 |
 | 70 | `70_deepseek_casa_paragraph_bridge_review.mjs` / `70_deepseek_casa_paragraph_bridge_review.json` | 审计记录 | 两个 DeepSeek V4 Pro 角色专门复核引言第一、二段的承接、委托到持续判断的推理和相邻态势感知证据边界 |
+| 71 | `71_casa_thesis_chapters_1_to_3_integrated_draft.md` | 当前学位论文前三章稿 | 以第 54 号稿为开篇，补齐 Dong 式第一章；将第 68 号稿拆分为只服务构念开发的第二章理论基础和第三章构念与量表开发方案 |
+| 72 | `72_deepseek_casa_integrated_thesis_review.mjs` / `72_deepseek_casa_integrated_thesis_review.json` | 审计记录 | 两个 DeepSeek V4 Pro 角色分别复核第 71 号稿与 Dong 前三章的结构对应，以及单一基础构念、二手文本维度识别和量表开发程序的严谨性 |
+| 73 | `73_casa_slidev_deck/` | 当前 Slidev 学术汇报 | 使用本地 `slidev-theme-scholarly-main` 主题，以第 54 号第一章为研究动机开篇，并完整讲解第 68 号稿的 CASA 概念化、理论背景与构念开发方案 |
+| 74 | `74_casa_slide_speaker_notes.md` | 当前逐页中文讲稿 | 与第 73 号 Slidev 汇报的 39 页逐页对应，补充证据边界、理论角色、方法实施与失败门槛的口头说明 |
+| 75 | `75_casa_slidev_deck_en_refined/` | 当前英文 Slidev 汇报 | 36 页精简版，以第 68 号构念开发稿为主线，强化研究动机、构念定义失配、理论背景和候选维度，后段仅简要交代 Reddit 编码与量表开发，参考文献分为 9 页完整展示 |
+| 76 | `76_casa_slidev_presentation_script_zh.md` | 当前逐页中文讲稿 | 与第 75 号汇报的 36 页逐页对应；逐页记录统一格式的文献来源、内容摘要、本页作用，并在第 18 页加入态势感知定义原文、翻译及迁移判断 |
+| 77 | `77_sa_primary_source_archive_and_definition_notes.md` | 态势感知原文核对索引 | 记录第 18 页相关论文的原文定义、中文解释、定义性质、全文获取状态，以及 JMIS 经验价值文章对 CASA 维度开发逻辑的补充参照 |
 
 ## 辅助检索材料
 

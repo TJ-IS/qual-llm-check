@@ -1,0 +1,793 @@
+# Demystifying the Dimensions and Roles of Metaverse Gaming Experience Value: A Multi-Study Investigation
+
+Zhongyun Zhou, Zidie Chen, Weichen Li, Yi Zhang & Xiao-Ling Jin 
+
+To cite this article: Zhongyun Zhou, Zidie Chen, Weichen Li, Yi Zhang & Xiao-Ling Jin (2025) Demystifying the Dimensions and Roles of Metaverse Gaming Experience Value: A Multi-Study Investigation, Journal of Management Information Systems, 42:1, 39-69, DOI: 10.1080/07421222.2025.2452014 
+
+To link to this article: https://doi.org/10.1080/07421222.2025.2452014 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/4306ef1f9d57a0bd5641802b7ad36eab61e182b46e45e071c21a55a9e6af5090.jpg)
+
+
+View supplementary material $\complement$ 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/4311eb6b0ebb52d2519b6782a2f4cac5760ff2407bc76e0b11fc9d72e46b3e2c.jpg)
+
+
+Published online: 17 Feb 2025. 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/e829556aab4c2f2d9dd19670d0f12716f7774511d6f85ffa45cdbd29696596fe.jpg)
+
+
+Submit your article to this journal 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/d827548cf1590630b8267b71a3de209212fa5761a00eb924851a796c403f0c96.jpg)
+
+
+Article views: 1573 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/51dfce47fce115603fe0d50125fe57bd1d2146e2520dfc4b8651f649d0ec1e01.jpg)
+
+
+View related articles 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/e0ee894e0f37e2db9039daa3d80f3f47c58a1b02c6c27e9a933eee1c5a87e9d2.jpg)
+
+
+View Crossmark data $\complement$ 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/ec6ed42a0dd3be249a48ab6b7cfceaa580edf61b0a02687f905ba8b306d1c0e3.jpg)
+
+
+Citing articles: 8 View citing articles $\complement$ 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/6d7e03ccebec2c27e2cfd9d69861389014e3e73a41d2bb17f8859fc80e88bf9f.jpg)
+
+
+Check for updates 
+
+# Demystifying the Dimensions and Roles of Metaverse Gaming Experience Value: A Multi-Study Investigation
+
+Zhongyun Zhoua , Zidie Chena , Weichen Lia , Yi Zhangb , and Xiao-Ling Jinc 
+
+a School of Economics and Management, Tongji University, P. R. China; b School of Economics and Management, Tsinghua University, P. R. China; c School of Management, Shanghai University, Baoshan, Shanghai, China 
+
+## ABSTRACT
+
+Understanding metaverse gaming experience value (MGEV) is crucial for the success of metaverse games. However, prior research lacks context-specific theoretical knowledge of MGEV dimensions, roles, and practical guidance for enhancing player experience value. To address this gap, we conducted an abductive, multi-study investigation to develop a multi-dimensional typology of MGEV, demonstrate its nomological validity, and propose a player-centered approach for its investigation. First, we performed qualitative manual coding of online reviews to identify six MGEV dimensions. We developed a twoaxis typology that categorizes these dimensions by motivation- (intrinsic vs. extrinsic) and activeness-focused (active vs. reactive) perspectives. Second, we developed a deep-learning classification model to automate coding and create a panel dataset. We validated the relationships between MGEV dimensions and players’ word-of-mouth (WOM) by analyzing the panel dataset. Third, we applied a playercentered approach with cluster analysis to the coded data. We uncovered three player groups with distinct MGEV profiles (i.e. intrinsic value-dominated, extrinsic value-dominated, and active valueinsensitive), metaverse gaming participation characteristics, and WOM. This paper identifies the context-specific and fine-grained dimensions of MGEV, establishes a valid MGEV framework, and reveals distinct player groups with unique MGEV profiles. 
+
+## KEYWORDS
+
+Metaverse gaming; experience value; deep learning; player-centered approach; online games; online players 
+
+## Introduction
+
+Metaverse gaming (MG) is a hyper-spatiotemporal and three-dimensional immersive virtual-physical combined game created by the convergence of a physically persistent virtual gaming space and virtually enhanced physical reality [3]. As the most important and pioneering application of the metaverse, MG enables users to relax and experience modern information technologies such as virtual reality and augmented reality [12]. Players engage with various MG-related devices to explore diverse games within a fused environment [45]. The MG economy is projected to grow at a compound annual rate of 41.64 percent between 2024 and 2030, with an anticipated market volume of $168.4 billion by 2030.1 Despite this commercial potential, the player penetration rate is currently low at only 4.7 percent, and many MG players report suboptimal gaming experiences [61]. This situation calls for indepth research on metaverse gaming experience value (MGEV), which refers to players’ holistic assessment of the quality and enjoyment of MG experiences [38]. 
+
+Enhancing MGEV is pivotal for increasing players’ pleasure and engagement during gameplay [22]. Experience value is vital to ensuring player satisfaction and engagement in MG and is essential for the widespread adoption and long-term success of the MG industry. Despite the context-dependent nature of experience value [13], previous studies have rarely investigated the experience value in the MG context, notably lacking a context-specific understanding of its dimensionality and roles. The literature on experience value in related contexts (e.g., gaming and virtual worlds) has predominantly focused on a motivationfocused perspective [53], differentiating between intrinsic (hedonic) and extrinsic (utilitarian) values, but has often overlooked the activeness-focused perspective, which distinguishes between active and reactive values. One distinctive characteristic of MG is the coexistence of four-party interactions, including player-player, player-game content, player-surrounding, and player-service provider interactions. Assuming players are active value seekers, prior studies have examined how players actively interact with game content and other players to pursue hedonic or utilitarian/social values in the gaming environment [42, 48]. Nevertheless, the prevalence of player-surrounding and player-service provider interactions in the MG context suggests that players can also behave reactively to the experience of these interactions during gameplay. Therefore, in the MG context, both motivation-focused (intrinsic versus extrinsic value) and activeness-focused (active versus reactive value) perspectives are vital for categorizing experience value [35]. Yet, relying primarily on the motivation-focused perspective, the present literature falls short of capturing a complete portrayal of the connotation of MGEV. 
+
+Moreover, although there is a consensus in the literature that experience value is a multidimensional concept [52], prior research in MG-related contexts has often relied on broad concepts (e.g., utilitarian versus hedonic value) and generic measures, failing to capture the nuanced sub-dimensions of experience value that reflect the MG context’s unique characteristics [38]. This oversight makes it difficult to operationalize the MGEV construct and hinders the design of MG experiences tailored to diverse user needs. Motivated by these theoretical and practical issues, we propose our first research objective: to identify the context-specific dimensions and sub-dimensions of MGEV and develop an MGcontext-specific typology of MGEV by integrating the motivation-focused and activenessfocused perspectives. 
+
+Furthermore, the literature indicates that experience value dimensions can be perceived and combined differently among individuals [13]. For example, early research suggests that people in different occupations differ in their emphasis on intrinsic versus extrinsic values [13]. Similarly, in the MG context, scholars have observed variations in the focus on different experience value dimensions among players [12], suggesting the existence of distinct MGEV profiles. Understanding these player-centered profiles or mindsets regarding MGEV is crucial for attracting a diverse player base, which is vital for the prosperity of the still-nascent MG industry [45]. However, prior research on experience value in MGrelated contexts has mainly adopted a variable-centered approach that assumes a stable and independent relationship between experience value dimensions and behavioral outcomes [42]. This approach falls short of unveiling the varied combinations of MGEV dimensions prioritized by different players, thus offering only a limited view into player-centered profiles or mindsets regarding MGEV. We propose a player-centered approach using cluster analysis to address this vital gap and uncover multiple player groups with distinct MGEV profiles. Our second research objective is to reveal player groups with different profiles of MGEV using a player-centered approach. 
+
+To approach these research objectives, we conducted a multi-study investigation of MGEV using a combination of qualitative coding, machine learning, and econometric analysis. First, through a qualitative investigation using manual coding of online textual reviews, we identified six dimensions (with 21 sub-dimensions) of experience values specific to the MG context. On this basis, we proposed a two-axis typological framework for MGEV by combining motivation-focused (intrinsic/extrinsic value) and activeness-focused (active/ reactive value) perspectives. Second, leveraging a dataset comprising 7,751 reviews of 75 MG service providers over seven years, we developed a deep learning classification model to automatically label the MGEV dimensions from textual data. This enabled us to generate a balanced panel dataset on which we demonstrated the nomological validity of our MGEV typology by confirming the relationship between the six MGEV dimensions and MG players’ word-of-mouth (WOM). Third, adopting a player-centered approach, we identified three distinct player groups with unique MGEV profiles, each with differing MG participation characteristics and WOM. The findings from our multi-study research offer a comprehensive and nuanced understanding of the dimensions and roles of MGEV, laying a theoretical foundation for further research and providing actionable insights for MG design and operations to cater to diverse player needs. 
+
+## Research Background and Literature Review
+
+To comprehend the dimensions and roles of experience value in the MG context, we first refer to the literature on the metaverse and MG to clarify the contextual characteristics. Then, considering the lack of research on experience value in the MG context, we draw upon valuable insights from the literature on experience value in MG-related contexts. 
+
+## Metaverse and MG
+
+The metaverse is envisioned as a convergence of the physical and digital realms, offering users an unprecedented experience of reality [12]. Providing a shared environment and economy accessible to all, irrespective of geographical location, the metaverse has the potential to reshape various aspects of life, including gaming and entertainment [45]. Researchers have identified three defining characteristics of the metaverse. First, it is an immersive environment founded on blended reality, interconnecting the virtual and physical worlds [3]. Second, it represents the amalgamation of multiple digital technologies, creating a network for remote and real-time interactions [3]. Third, it serves as a social space that fosters social presence and interactions among users (and their avatars) across both the digital and physical worlds [3]. 
+
+While the ultimate vision of the metaverse is still in development, various sectors are actively exploring its potential applications. Among these, MG stands out as a key and promising domain, believed to be instrumental in driving the metaverse’s evolution [12]. A catalyst for user acceptance and market expansion of the metaverse, MG exemplifies the dynamic interplay between gaming and technological innovation. For example, the application and advancement of core metaverse technologies, such as extended reality, enhance user immersion in MG and accelerate technological advancements for future metaverse applications [45]. Accordingly, promoting MG designs and enriching MG player experiences are integral to evolving metaverse technologies and expanding its market reach. 
+
+Operated within gaming environments that seamlessly integrate physical and virtual realities [12], MG encompasses four interactive elements: the player, game content, gaming surroundings, and the service provider. The interactions among these elements, as depicted in Figure 1, enable players’ acquisition of diverse values. For example, player-game content interactions would allow players to experience diverse game categories (e.g., gym battles) and rich narrative settings [26]. Player-surrounding interactions enable players to get immersed in a blended environment and enjoy multiple sensories in both the physical and virtual gaming environments [45]. Player-service provider interactions offer players opportunities to engage with cutting-edge interactive technologies, often with guidance from service providers. Player-player interactions foster a sense of social presence, enabling real-time social interactions and collaborative activities among players [45]. In sum, MG is characterized by these dynamic interactions, each contributing to the rich and layered experience that defines MG. 
+
+The coexistence and interaction of these four interactive elements set MG apart from other gaming or virtual worlds (e.g., Second Life). First and foremost, unlike virtual worlds that entail a purely virtual environment [2], MG emphasizes interactions (e.g., playersurrounding interaction) within a blended world characterized by the fusion of both realistic and unrealistic gaming environments [12]. Achieving this virtual-real fusion often requires the support of advanced interactive devices (e.g., head-mounted displays) and well-designed physical surroundings provided by MG service providers, allowing for a continuous physical-digital gaming experience [12, 32]. Unlike traditional virtual worlds that mainly rely on basic hardware interfaces, players in MG are not limited to the confines of their computer screens [2, 12]. Instead, they have the freedom to engage with physical spaces, utilizing tangible equipment that facilitates an immersive gameplay experience [12]. Second, unlike other games where players’ direct interactions with game providers are limited [29], MG has unique service providers who interact intensively with the players, offering guidance on using advanced interactive devices. Thus, player-service provider interactions represent a salient part of players’ gameplay experience. Third, MG can facilitate physical and digital socialization1 , as players often form groups to tackle game challenges. These player-player interactions and the enhanced social connections between players (whether acquaintances or strangers) can go beyond the virtual realm and transcend to the real world [12, 45]. Table 1 summarizes the characteristics of the metaverse, MG, and other gaming or virtual worlds. 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/d3838178329e3f6fe4932abc0ada978d3c751753cb3f44643d5f1bbc85d41523.jpg)
+
+
+
+Figure 1. Four-party interactions in metaverse gaming (MG).
+
+
+In sum, MG aligns with the defining characteristics of the metaverse and is recognized as a prominent application within this domain [45]. Moreover, its unique interactions have offered specific experiences for the players, and understanding the underlying values of these experiences is essential for the development of MG and the broader promotion of the metaverse. 
+
+
+Table 1. The characteristics of the metaverse, metaverse gaming (MG), and other gaming or virtual worlds.
+
+
+<table><tr><td rowspan="2"></td><td colspan="3">Similarities between the metaverse and MG</td><td colspan="4">Differences between MG and other gaming or virtual worlds</td></tr><tr><td>Blended environment</td><td>Advanced interactive devices</td><td>Physical and digital socialization</td><td>Player-game content interaction</td><td>Player-surrounding interaction</td><td>Player-service provider interaction</td><td>Player-player interaction</td></tr><tr><td>The metaverse</td><td>√</td><td>√</td><td>√</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>MG</td><td>√</td><td>√</td><td>√</td><td>√</td><td>√</td><td>√</td><td>√</td></tr><tr><td>Other gaming or virtual worlds</td><td>-</td><td>-</td><td>-</td><td>√</td><td></td><td></td><td>√(only digital)</td></tr></table>
+
+## Experience Value in Related Contexts
+
+User/player experience is a crucial topic in the metaverse and gaming literature [25, 45]. It refers to the psychological state of users/players resulting from their interactions with the (gaming) system [23, 25]. The metaverse, with its capacity to offer immersive and interactive experiences, significantly amplifies the overall user experience [45]. These exceptional experiences, in turn, contribute to the users’ perceived value of the experience [19]. Consequently, the experience value, which arises from user experience, plays an essential role in fostering sustained engagement with metaverse applications [19]. 
+
+The concept of experience value is deeply rooted in the retailing literature. Classical frameworks in this domain decompose experience value into multiple dimensions, categorized along two orthogonal axes: intrinsic versus extrinsic and active versus reactive [35]. The intrinsic versus extrinsic axis is based on a motivation-focused perspective. Intrinsic value is perceived when the experience is sought for its inherent worth, serving as an end goal. Conversely, extrinsic value is attributed to the experience for its practical utility or instrumentality in achieving external objectives [35]. The active versus reactive axis represents an activeness-focused perspective, as active value stems from individuals’ proactive engagement (“I act upon it or I move it”). In contrast, reactive value arises from the experience’s impact on the individual (“the activity acts upon the individual”) [35]. 
+
+Based on this framework, the literature in retailing and marketing has proposed a few nuanced measurements of experience value [47]. Mathwick et al. [35] pioneered the identification of consumer experience value dimensions (including playfulness, aesthetics, customer return on investment, and service value), which were validated in online shopping by examining their relationship with patronage intention. Sweeney and Soutar [47] decomposed experience value into emotional value, social value, quality value, and value for money and examined their influence on consumers’ willingness to buy and recommend. Further research has introduced additional dimensions, such as cognitive, hedonic, social, and ethical values, tailored to specific retail scenarios like fashion retailing [49]. The literature shows that experience value is a multidimensional construct arising from interactions between customers and experience and nurtures long-term user engagement. MG is an experience-based gaming activity that delivers value through gaming experiences [45]. Therefore, understanding and promoting MGEV are essential for MG’s enduring growth and success [35, 49]. 
+
+While experience value is inherently context-dependent, current research lacks a theoretical exploration of the connotations and dimensions of MGEV, presenting an opportunity for further scholarly inquiry. As Online Supplemental Appendix 1 shows, our review of existing literature on experience value in MG-related contexts, including gaming and virtual worlds, reveals a significant growth in theoretical and empirical studies over the past five years. This body of literature consistently underscores the prominent role of experience value in gaming. However, our literature review highlights some important areas that necessitate theoretical development. 
+
+First, current research on experience value predominantly employs a utilitarian versus hedonic value dichotomy, aligning with the aforementioned motivation-focused perspective that distinguishes between intrinsic and extrinsic values [46]. For instance, Molinillo et al. [38] examined the roles of hedonic (i.e., enjoyment and attractiveness) and utilitarian (i.e., effort expectancy and perceived usefulness) values in forming game loyalty intention. This approach, while prevalent, has notable limitations. It neglects the activeness-focused perspective (active versus reactive values). Yet, as evident in the four-party interactions, MGEV includes active and reactive elements essential for players’ collaborative and physical-digital gaming experience [12]. Therefore, considering the active/reactive and intrinsic/ extrinsic axes is critical for understanding MGEV comprehensively and capturing MGspecific characteristics. Further, this body of literature heavily relies on generic measures that do not capture the nuanced context-specific characteristics of MG, indicating a need for a more comprehensive and nuanced understanding of the MGEV dimensions [58]. Given the context-specific nature of experience value [35] and the lack of research on experience value in the MG context, we advocate for a bottom-up identification of MGEV dimensions and developing a context-specific typology. 
+
+Second, the majority of studies that quantitatively assess experience value have employed a variable-centered approach [24], assuming that experience value dimensions are independent of one another and have a stable relationship with outcome variables [38]. However, this approach does not account for the individual variability in how players combine and prioritize these dimensions. In the context of MG, scholars have observed that different players emphasize different values in their gaming experiences [12]. Some players prioritize the MG content [29], whereas others pay more attention to the sensitivity and responsiveness of the gaming devices [41]. Despite these preliminary findings, the typical patterns of MG players’ varied value preferences are poorly understood, indicating a need for a more nuanced understanding. Addressing this gap requires a shift toward a playercentered approach, which allows for analyzing distinct player groups with unique MGEV profiles or mindsets. 
+
+Motivated by the two theoretical issues, this research aims to delineate the dimensions and sub-dimensions of experience value in the MG context. We propose a contextspecific typological framework for MGEV and adopt a player-centered approach to uncover individual MGEV profiles, thereby addressing the theoretical and methodological gaps. 
+
+## Research Methodology
+
+We employed an abductive approach to investigate MGEV through three studies, based on a dataset of public online reviews. This section presents the data collection and preprocessing details and an overview of the multi-study approach. 
+
+## Data Collection and Pre-Processing
+
+We collected a dataset of public online reviews from players regarding their MG experiences in a major Chinese metropolis. The data was sourced from a prominent WOM platform, dianping.com, spanning seven years from January 1, 2016, to December 31, 2022. The comprehensive dataset encompasses 7,751 detailed reviews, along with players’ background information (e.g., VIP status, anonymity, and payment) and details about the reviews (e.g., review length, likes received, responses received, and attached pictures) and MG service providers (e.g., MG location). The MG service providers featured in the reviews have implemented state-of-the-art interactive technologies such as haptic gloves and headmounted displays, offering a wide range of game themes (e.g., The Legend of Sword and Fairy and Whack-a-mole) to cater to a broad player base. Many providers also offer instructional services to assist players in utilizing gaming devices. Consequently, players can immerse themselves in gaming environments to experience gaming-related services, devices, themes, etc. 
+
+To ensure the relevance of the dataset to MG experiences, one of the authors carefully curated the raw data through a systematic process to retain only those reviews directly about the MG experience for subsequent analyses. First, the author reviewed relevant literature on MG and experience value to comprehensively understand the research context and central construct. Second, the author read the reviews and classified them into four categories based on their content: 1) reviews describing non-MG services unrelated to the gaming experience (e.g., prize claws and search notices for missing items during gameplay); 2) reviews focusing on the store atmosphere (e.g., store decoration and facilities) rather than the MG environment (e.g., abundancy for the gaming room); 3) posts from individuals interested in MG but who had not yet experienced MG, despite their expressed willingness to do so in the future; and 4) reviews specifically detailing the MG experience (e.g., regarding the gaming environment, content, and devices). Among these, only the fourth review category, which directly described the MG experience, was deemed relevant to our research objectives and suitable for subsequent analyses. Therefore, in the third step, the author reviewed and labeled all the reviews into one of these four categories. A total of 170 unrelated reviews (consisting of 131 reviews of the first category, 24 of the second, and 15 of the third) were excluded, resulting in a refined dataset of 7,581 reviews suitable for further analysis. During the coding process described in Study 1: Qualitative Data Analysis, the coders doublechecked the content of all coded reviews to confirm their relevance to the MG experience, ensuring the dataset’s integrity and alignment with our research objectives. 
+
+## Multi-Study Approach
+
+We conducted a multi-study investigation toward MGEV comprising three studies, employing a combination of qualitative content analysis, machine learning (including deep learning and cluster analysis), and econometric analysis. Figure 2 illustrates the general workflow of our research approach. 
+
+In Study 1, we aimed to uncover the construct dimensionality and typology of MGEV. Qualitative content analysis was selected for its ability to inductively code content, draw descriptive conclusions, and build theories, including the proposal of typologies [43]. Also, this method is particularly apt for capturing the nuanced concepts present in online reviews, especially in areas with limited prior knowledge [11]. Therefore, we performed a qualitative content analysis of players’ online textual reviews through manual coding to uncover the nuanced dimensionality of MGEV. We then categorized these dimensions and subdimensions into a two-axis typological framework. 
+
+Building on the dimensions and sub-dimensions identified in Study 1, Study 2 transformed the online textual review dataset into a quantitative dataset to validate the MGEV construct. To efficiently process the sizeable textual dataset, we employed a deep learning method utilizing a convolutional neural network (CNN) to automatically label the MGEV dimensions and sub-dimensions. Subsequently, we converted the original cross-sectional data into a panel dataset for deriving causal inferences [1]. We then demonstrated the nomological validity of MGEV, using econometric analysis to examine the statistical relationships between the six MGEV dimensions and players’ WOM [57]. 
+
+Moving beyond the variable-centered analyses in Study 2, Study 3 aimed to identify distinct player groups with unique MGEV profiles. A player-centered approach focused on intra-individual variation and combining antecedents within a variable system [40]. This approach identifies and compares subgroups of individuals sharing similar patterns and is well-suited for understanding how different antecedents combine and result in varied outcomes [40]. Recognizing the possibility of varied combinations of MGEV dimensions among players, we applied cluster analysis to substantiate the player-centered approach. This technique helped to identify and characterize player groups with diverse MGEV profiles, offering a deeper understanding of individual experiences within the MG context. 
+
+## Study 1: Qualitative Data Analysis
+
+In this qualitative study, we analyzed the textual data extracted from online reviews to identify the dimensionality and typology of MGEV. We systematically organized the identified dimensions of MGEV into a two-axis theoretical framework anchored in motivation-focused (the intrinsic/extrinsic axis) and activeness-focused (the active/reactive axis) perspectives. 
+
+## Dimension Extraction
+
+We employed a qualitative approach to extract the dimensions of MGEV embedded in player reviews [15]. Based on the manual coding and thematic analysis of textual data, this approach enabled us to inductively explore and elucidate (sub)dimensions of psychological factors such as experience value [9]. Our data analysis process consisted of two stages. The first stage involved open coding to identify specific labels and sub-dimensions, and the second stage focused on extracting broader dimensions through axial coding. 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/e086c3de0fdb8505d9506a2afad03f96f53e9e7a676662b77d233595bd93ad7b.jpg)
+
+
+
+Figure 2. General workflow of the multi-study investigation.
+
+
+In the first stage (open coding), we conducted simple random sampling, following Bretschneider’s [4] procedure, to select 400 online reviews for manual coding. The sampled reviews were then open-coded by two college-educated, well-trained coders familiar with MG. The coders double-checked the content of each review before coding it to ensure its relevance to MGEV. Textual scripts that tapped into unrelated themes were excluded from coding. For example, player reviews possibly referred to two kinds of services offered by MG service providers, including 1) game-related services (e.g., guidance on using gaming devices during gameplay), which is an integral part of the MG experience, and 2) peripheral services that do not directly enhance the MG experience (e.g., waiting areas). The coders considered only the first kind of services relevant and excluded those texts pertinent to the second. 
+
+The open-coding stage followed a multi-round procedure. We divided the 400 reviews into four subsamples of equal size (i.e., 100 each), each coded in one of four consecutive rounds. In each round, the two coders independently extracted key concepts (dimensions and sub-dimensions), as exemplified in Online Supplemental Appendix 2, from the selected 100 reviews through open coding. They then compared and discussed the coded reviews to achieve consensus on the coding scheme. After three rounds of open coding, a “saturation point” was reached, indicating the emergence of no new concepts [8]. In the final round, the coders agreed upon the final coding scheme containing 21 sub-dimensions and 107 labels. The coders demonstrated a high level of agreement (85.5 percent) and reliability (92.2 percent), reflecting excellent inter-coder reliability [50]. 
+
+In the second stage (axial coding), the coders compared and discussed the subdimensions identified in the open coding stage. Following the principle of axial coding [15], they combined sub-dimensions pertinent to the same aspect of experience value into a broader dimension. Through this integrative process, six distinct dimensions of MGEV were delineated. The research group discussed the coding results and agreed on the final coding scheme in Table 2. 
+
+
+Table 2. Results of axial coding.
+
+
+<table><tr><td>Dimensions</td><td>Sub-dimensions generated from open coding</td></tr><tr><td>Physical environment friendliness</td><td>interior design, space privacy, space abundance</td></tr><tr><td>Game-related service excellence</td><td>in-game attitude, in-game professionalism, value-added service</td></tr><tr><td>Device usability</td><td>ease of use, comfortability, maintenance, reliability, sensitivity</td></tr><tr><td>Immersive sensory appeal</td><td>sound appeal, visual appeal, other sensory appeal</td></tr><tr><td>Game playfulness</td><td>choice diversity, interestingness, innovativeness, content richness</td></tr><tr><td>Ephemeral value</td><td>duration, exploration, socialization</td></tr></table>
+
+## MGEV Framework
+
+An abductive approach facilitates a back-and-forth dialogue between data- and theory-driven insights [27]. Following this approach, we synthesized insights from our empirical analyses and existing theories on experience value. This enabled us to map the six empirically derived MGEV dimensions onto the two established axes of experience value within the experience value literature (intrinsic/extrinsic and active/reactive) and the abovementioned four-party interactions in the MG context. This abductive theorization process resulted in a fourquadrant MGEV framework, as illustrated in Figure 3 and explained below in detail. 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/52320c1b431567bf70958cd996ff95156066183835c8ae6ffcf3142270f70393.jpg)
+
+
+
+Figure 3. A typological framework of metaverse gaming experience value (MGEV) dimensions.
+
+
+## Active Values
+
+The left half of Figure 3 illustrates the two dimensions of active values: game playfulness and ephemeral value. Game playfulness emerges during player-game content interactions, wherein players engage with various choices and interesting, innovative, and rich game content. Game playfulness is an intrinsic and active value, as it refers to the intrinsic enjoyment resulting from players’ cognitive absorption in the MG and is continually transformed into active play [35]. It enables players to identify with their gaming characters and interact actively with game content. In the MG context, game playfulness comprises choice diversity, interestingness, innovativeness, and content richness. Choice diversity refers to the numerous choices of game themes (e.g., real-scene battle and fairy tale adventure) offered by MG service providers, catering to a broad spectrum of player preferences. Interestingness reflects the attractiveness of the game content and narratives (e.g., an exciting storyline). Innovativeness describes whether the game content is unique and characterized by novel elements and distinctive features that set it apart from other games. Content richness denotes the richness of the gaming plot. For instance, when players are exposed to many storylines, diverse gaming themes, and multifaceted interactions, their perception of content richness is markedly enhanced. 
+
+Players perceive ephemeral value through a cost-benefit analysis of their MG experiences. This analysis encompasses both player-game content and player-player interactions, highlighting the active nature of this value. Players actively invest their temporal, behavioral, and social resources, anticipating a return through enhanced experiences within the MG’s blended environment. For example, it can be perceived not only in real-world socialization but also in virtual exploration. Meanwhile, ephemeral value is extrinsic, as it is not valued for its own sake but as an indicator of the benefits derived from the exchange encounter [56]. In the MG context, ephemeral value is manifested in three sub-dimensions: duration, exploration, and socialization. Duration refers to players’ evaluation of the overall “immersive time” [37] spent in MG, reflecting on whether their investment of time is worthwhile. Exploration describes players’ exploratory behaviors within the game. Players explore various gaming environments, scenes, and storylines, seeking a rewarding return on their exploratory efforts. Both duration and exploration reflect players’ evaluation of their interactive experiences with the game content, whereas socialization arises from intimate player-player interactions, whether with acquaintances or strangers. This sub-dimension is exemplified by communication during teamwork games, collaborative efforts to achieve gaming objectives, and interactions with non-player characters to gather clues. These player-player interactions offer a return on players’ social investments and foster a deeper engagement with the MG. 
+
+## Reactive Values
+
+The four dimensions on the right side of Figure 3 represent reactive values, encompassing immersive sensory appeal, physical environment friendliness, device usability, and gamerelated service excellence. Immersive sensory appeal denotes the players’ response to the heightened sensory stimuli provided by the MG environment, surpassing those of the natural world [55]. This sensory richness is generated through player-surrounding interactions and includes various sensory elements contributing to an immersive experience. Immersive sensory appeal represents players’ reactions to the design and sensory attractiveness in the MG setting, providing immediate pleasure as an end in itself [55]. Therefore, it is an intrinsic and reactive value. In the MG context, immersive sensory appeal comprises sound, visual, and other sensory appeals. Sound appeal is generated by an array of sound equipment in the physical space, designed to synchronize with the game scene and enhance the immersive quality of the audio experience. Visual appeal encompasses the visual design elements of the MG, including the gaming scene design, visual action details of the gaming characters, and the representation of player images on the screen, which contribute to the game’s visual attractiveness. Other sensory appeals (e.g., smell and movement) complement players’ overall sensory appeal in the gaming environment, catering to players who seek a comprehensive multi-sensory experience. 
+
+The perception of physical environment friendliness in MG arises from the interaction between players and the gaming surroundings within the physical gaming room. This perception encompasses evaluating the physical environment enabling the MG experience. It reflects players’ reactive responses to physical design elements, representing an extrinsic value accompanying the core gaming experience. It is represented by three sub-dimensions in the MG context: interior design, space privacy, and space abundance. A crucial aspect of MG is that interior design includes sensor layout, decorative arrangement, safety notices, and anti-collision devices. These factors are closely tied to the authenticity and atmospheric quality of players’ MG experience, contributing to the immersive and engaging nature of the environment. Space privacy ensures a quiet and dedicated gaming environment that fully immerses players in the game without external interruptions. This is essential for maintaining the integrity of the gaming experience and allowing players to engage deeply with the game. Space abundance reflects players’ evaluations of whether the gaming space is sufficiently spacious to move, hide, and communicate within the MG. A spacious gaming environment enhances the sense of freedom and exploration, whereas a confined space causes a diminished sense of immersion. 
+
+Device usability is an essential dimension of MGEV, as an optimal MG experience depends on supporting various sophisticated gaming devices within the physical environment. These devices (e.g., head-mounted display devices, virtual reality glasses, and motion sensory devices) facilitate a seamless fusion between virtual and physical aspects, enhancing the overall player experience. The experience value derived from these devices is described as “device usability,” which denotes the ease with which players can learn, operate, and interact with the devices [18]. Gaming devices, typically provided by MG service providers and aligned with the physical gaming setting, are central to players’ interactive experience. Hence, device usability arises from player-surrounding interactions and represents a reactive value, as it reflects players’ immediate and responsive assessments of the devices they utilize to navigate the MG environment. Additionally, device usability is an extrinsic value, as it is not an end in itself but serves as a means to an end—enabling players to seek out and achieve a richer, more immersive gaming experience. In the MG context, device usability is manifested by ease of use, comfort, maintenance, reliability, and sensitivity. Ease of use refers to the simplicity with which players can operate the devices, reducing the learning curve and allowing for swift engagement with the game. Comfort represents players’ physical comfort (i.e., the devices being not too heavy for the players to carry during gameplay) and physiological wellness (e.g., not feeling vertigo) during their use of game devices. Maintenance refers to whether the devices are well-maintained, clean, and efficient. Reliability refers to the consistency and dependability of the devices (e.g., low error rate). Sensitivity reflects the responsiveness of the devices, measured by the infrequency of lags or delays that could disrupt the player’s experience. 
+
+Game-related service excellence is a reactive and extrinsic value reflecting the quality of player-service provider interactions. It is an inherently reactive response to the MG services received [35] and indicates the player’s appreciation for the offerings of the MG service provider [56]. For instance, given the technical complexity often associated with MG devices, players frequently seek guidance from service providers to navigate these sophisticated tools effectively. Thus, the excellence of game-related services received during gameplay is an essential measure of players’ MG experience, encompassing the MG service provider’s in-game attitude, professionalism, and value-added services. In the MG context, players highly value service providers’ attitudes (e.g., kindness and patience) and their accurate and expert guidance throughout the gaming experience. Some providers further enhance their service by offering value-added services such as real-time video recordings of players’ gameplay, adding value to players’ gaming experience. 
+
+## Brief Discussion of Study 1
+
+In Study 1, we identified six dimensions of MGEV and their corresponding sub-dimensions through rigorous open and axial coding of textual reviews. This developmental process led to a context-sensitive typology of MGEV that integrates motivation- (intrinsic/extrinsic) and activeness-focused (active/reactive) perspectives. We matched these dimensions onto four distinct interactions within MG (i.e., player-game content, player-player, playersurrounding, and player-service provider interactions). This enabled us to provide “incontext” interpretations for each of the six dimensions (and their sub-dimensions), including an active and intrinsic value from player-game content interactions (game playfulness), an active and extrinsic value from both player-game content and player-player interactions (ephemeral value), a reactive and intrinsic value from player-surrounding interactions (immersive sensory appeal), two reactive and extrinsic values from player-surrounding interactions (physical environment friendliness and device usability), and a reactive and extrinsic value from player-service provider interactions (game-related service excellence). 
+
+Our typology of MGEV represents a contextualized extension of classical experience value frameworks, thereby laying a conceptual foundation for future studies in this domain. To demonstrate the efficacy of the proposed MGEV construct, it is vital to confirm its nomological validity [31]. In the following study, we will leverage theoretical underpinnings to hypothesize relationships between the six MGEV dimensions and players’ WOM and test these relationships through quantitative analyses to affirm the nomological validity of MGEV. 
+
+## Study 2: MGEV Nomological Validity Validation
+
+Using a combination of deep learning and econometric analysis, Study 2 validated the nomological validity of the MGEV defined in Study 1. This process involved the following steps: First, to assess the nomological validity of a construct, it is crucial to explore the relationship between the focal construct and other constructs in the theoretical structure [18]. Accordingly, we drew upon the Expectancy Value Theory (EVT) and prior research on experience value to develop a nomological net consisting of the effects of the six identified MGEV dimensions on a crucial outcome variable in the MG context, namely players’ WOM (as reported in Theoretical Relationship Development). Second, based on the online reviews reported in Study 1, we trained a deep-learning classifier to automatically measure the six MGEV dimensions and their sub-dimensions. Then, we integrated these measures with players’ ratings (measuring WOM) and other public information about the players and MG service providers to construct a panel dataset (as detailed in Automatic Coding Using Deep Learning and Measurement of Variables and Quantitative Data Cleaning). Finally, we validated the nomological network of the MGEV using the panel dataset mentioned above (as reported in Nomological Validity Test). 
+
+## Theoretical Relationship Development
+
+Originating from psychological paradigms, EVT has grown out of the intersection of information systems (IS), psychology, and sociology domains [51]. This canonical theory provides a theoretical basis for establishing a nomological network for MGEV. Central to EVT is the assertion that individuals’ behaviors are driven by their beliefs about their performance in an activity and the value they place on that activity [5]. This core proposition suggests that the values embedded in an experience can explain individual behavioral outcomes [51]. In the context of MG, players seek value from their gameplay experiences [45]. MGEV encapsulates a set of six different types of value that players may perceive or derive from their MG experience. According to EVT, these values can catalyze players’ behavioral outcomes, such as sustained engagement and the dissemination of WOM. Therefore, we propose that a player’s MGEV influences their behavioral outcomes. 
+
+As detailed in Online Supplemental Appendix 1, a wealth of research in analogous domains, such as gaming and virtual worlds, has delineated the relationship between experience value and a spectrum of psychological (e.g., satisfaction, commitment, and loyalty) and behavioral outcomes (e.g., continuance to play/use and WOM). Our choice of WOM as the outcome variable for assessing the MGEV nomological validity is supported by two primary rationales. First, as MG is a burgeoning industry with a relatively small yet growing player base, fostering positive WOM is essential for service providers to enhance player engagement and expand market presence. Thus, WOM is a critical success metric for MG service providers. Second, prior studies have established a positive correlation between experience value and WOM in analogous contexts (e.g., gaming and virtual worlds) [46, 48]. Therefore, WOM regarding the MG experience is a valid and suitable outcome variable for examining the MGEV nomological validity. 
+
+Prior studies have confirmed the relationship between experience value and WOM, which aligns with EVT. This literature suggests that experience value represents an upbeat assessment of the experience and the pleasure derived from it [51]. This pleasure is a precursor to heightened satisfaction and engagement [7, 22], both of which trigger WOM. Users experiencing high levels of satisfaction tend to express a positive WOM, reflecting their gratifying experiences [54]. Also, user engagement is performed from a sense of commitment, leading users to share their positive experiences through WOM [54]. Therefore, experience value can positively influence WOM through enhanced satisfaction and engagement. 
+
+In conclusion, by integrating the principles of EVT with empirical insights from prior research, we hypothesize that higher MGEV (i.e., game playfulness, ephemeral value, immersive sensory appeal, physical environment friendliness, device usability, and game-related service excellence) positively influence players’ MG WOM. This hypothesis, if supported, would substantiate the nomological network of MGEV and contribute to a deeper understanding of the dynamics within the MG landscape. 
+
+## Automatic Coding Using Deep Learning
+
+We implemented a deep learning-based automatic coding strategy to obtain valid measures of the MGEV dimensions for subsequent quantitative analysis. First, we randomly selected 1,000 online reviews (distinct from the 400 reviews utilized in Study 1) through stratified sampling based on the year of posting. These reviews were then coded by the same two coders as in Study 1, following the MGEV typological framework outlined in Figure 3. If a keyword corresponding to a (sub)dimension appeared in the review, its corresponding value was marked as 1; otherwise, it was marked as 0 [9]. The data were segmented into four subsamples, each comprising 100, 100, 400, and 400 reviews, respectively, and coded in three rounds. In the first round, each coder independently coded a 100-review subsample, compared and discussed their coding to resolve discrepancies, and achieved consensus. The same was repeated in the second round, resulting in a high level of inter-rater reliability, as reported in Online Supplemental Appendix 3. Each coder independently coded one of the two 400-review subsamples in the final round. 
+
+Second, the textual data were preprocessed to eliminate duplicates, stop words, and special characters. We employed Jieba, a natural language word segmentation library in Python, for Chinese word segmentation. To optimize prediction accuracy, we used the CNN with one layer of convolution constructed upon word vectors derived from an unsupervised neural language model [21]. These vectors were trained by Mikolov et al. [36] on 100 billion words sourced from Google News and are publicly available.2 To develop our deep learning classification model, we divided the 1,000 coded reviews into training, validation, and test sets in a 6:2:2 ratio. The hyperparameter values were selected through a grid search on the validation set (see Online Supplemental Appendix 4, Table 4.1). 
+
+Finally, the training of our CNN model was executed using stochastic gradient descent over shuffled mini-batches using the Adadelta update rule. As shown in Online Supplemental Appendix 4 (Table 4.2 and Figure 4.1), our CNN model outperformed the baseline and other classifiers in prior studies. 
+
+## Measurement of Variables and Quantitative Data Cleaning
+
+We applied the CNN model detailed in Automatic Coding Using Deep Learning to automatically code (0 or 1) each sub-dimension within the six MGEV dimensions for the remaining 6,581 reviews. To derive the dimension-level measure for each of the six MGEV dimensions, we summed up the value of all the sub-dimensions corresponding to the dimension. In the IS domain, WOM is often operationalized using rating data from online review platforms [30]. Therefore, in this study, we measured our dependent variable, players’ WOM, utilizing their rating data extracted from dianping.com. Players generated such ratings after their MG gameplay and, thus, reflected their WOM toward the MG experience. To deal with the skewed distribution of ratings (ranging from 0.5 to 5, with a median value of 5), we converted ratings into a binary format where ratings equal to (below) 5 were coded as 1 (0). 
+
+Following three steps, we then transformed the dataset (comprising 0-1 variable corresponding to 7,581 reviews) into a panel dataset for further analysis. First, we utilized Python’s numpy3 and pandas4 packages to aggregate the raw data by MG service providers and players’ experience time (every quarter) based on mean values. Specifically, the processed value of a variable x (e.g., an MGEV dimension) for a provider p in a quarter q represents the mean value of x for all players associated with provider p in that quarter q. As such, we obtained a panel dataset of 75 MG service providers over 28 quarters (from the first quarter of 2016 to the fourth quarter of 2022). Second, to ensure data reliability, we focused on the last seven quarters (i.e., the second quarter of 2021 to the fourth quarter of 2022) in subsequent analyses for two main reasons: (1) the other quarters than these seven contained too many missing values to yield consistent and reliable estimates; (2) many MG service providers had not started their business before the selected time window. Following this data exclusion process, we obtained 210 valid data for 30 MG service providers from the second quarter of 2021 to the fourth quarter of 2022. Third, to address missing values for a variable about a provider in a particular quarter, we utilized the average value of the variable for the same MG service provider across the entire seven-quarter time window. This resulted in a final balanced panel dataset of 210 observations on 30 MG service providers over seven quarters (Online Supplemental Appendix 5, Table 5.1). 
+
+We conducted a correlation analysis and variance inflation factor (VIF) test to assess multicollinearity. As indicated in Online Supplemental Appendix 5 (Table 5.2), the variables exhibit relatively low correlations, and the VIF for all indicators was well below the threshold of 3.3 (ranging from 1.05 to 1.2), indicating no significant concerns regarding multicollinearity [44, 58]. 
+
+## Nomological Validity Test
+
+To validate the nomological validity of the MGEV construct, we examined the proposed relationships between the six MGEV dimensions (as independent variables) and WOM (as the dependent variable) through a fixed-effect panel data analysis in Stata 16. In this analysis, we accounted for a set of control variables that may influence the dependent variable, including review length (numerical), attached pictures (numerical), received likes (numerical), received responses (numerical), anonymity (0 or 1), VIP status (0 or 1), pay by cost (0 or 1), review count in a focal quarter (numerical), and accumulated review count as of the focal quarter (numerical). We used logistic regression, often used by information services (IS) researchers and is particularly suitable for analyzing binary outcomes [6]. Table 3 summarizes the results of the data analysis. 
+
+Our results showed a significantly positive effect of physical environment friendliness (β $= 1 5 . 1 9 7 , \mathrm { ~ } ^ { * * } \mathrm { p } < 0 . 0 1 )$ , device usability $( \beta = 2 . 9 9 1 , \mathrm { { * * } _ { p } } < 0 . 1 )$ ), and immersive sensory appeal $( \beta = 1 2 . 5 5 9 , \mathrm { ~ } ^ { * * * } \mathrm { p } < 0 . 0 0 1 )$ on WOM. According to the MGEV framework established in 
+
+
+Table 3. The result of the panel-data analysis.
+
+
+<table><tr><td rowspan="2">Prob ≥ chi2:</td><td rowspan="2">0.000</td><td>Number of observations</td><td>210</td></tr><tr><td>Number of groups</td><td>30</td></tr><tr><td>WOM</td><td>Coefficient</td><td>Standard error</td><td>p-value</td></tr><tr><td>PEF</td><td>15.197</td><td>5.238</td><td>0.004**</td></tr><tr><td>GRSE</td><td>-3.564</td><td>2.370</td><td>0.133</td></tr><tr><td>DU</td><td>2.991</td><td>1.601</td><td>0.062*</td></tr><tr><td>ISA</td><td>12.559</td><td>2.710</td><td>0.000***</td></tr><tr><td>GP</td><td>1.196</td><td>1.427</td><td>0.402</td></tr><tr><td>EV</td><td>2.993</td><td>2.488</td><td>0.229</td></tr><tr><td colspan="4">Time fixed effects</td></tr><tr><td>2021Q3</td><td>-12.522</td><td>5.101</td><td>0.014*</td></tr><tr><td>2021Q4</td><td>-16.015</td><td>4.575</td><td>0.000***</td></tr><tr><td>2022Q1</td><td>-8.260</td><td>6.913</td><td>0.232</td></tr><tr><td>2022Q2</td><td>-16.496</td><td>5.207</td><td>0.002**</td></tr><tr><td>2022Q3</td><td>-7.336</td><td>4.032</td><td>0.069*</td></tr><tr><td>2022Q4</td><td>-22.233</td><td>6.058</td><td>0.000***</td></tr><tr><td colspan="4">Control variables</td></tr><tr><td>Review length</td><td>-0.047</td><td>0.025</td><td>0.059*</td></tr><tr><td>Attached pictures</td><td>1.005</td><td>1.058</td><td>0.342</td></tr><tr><td>Received likes</td><td>2.560</td><td>0.686</td><td>0.000***</td></tr><tr><td>Received responses</td><td>1.356</td><td>7.921</td><td>0.864</td></tr><tr><td>Anonymity</td><td>4.468</td><td>3.881</td><td>0.250</td></tr><tr><td>VIP status</td><td>-3.936</td><td>3.530</td><td>0.265</td></tr><tr><td>Pay by cost</td><td>11.669</td><td>4.024</td><td>0.004**</td></tr><tr><td>Review count</td><td>2.267</td><td>0.625</td><td>0.000***</td></tr><tr><td>Accumulated review count</td><td>0.436</td><td>0.082</td><td>0.000***</td></tr><tr><td>Constant</td><td>-12.519</td><td>6.419</td><td>0.051*</td></tr></table>
+
+
+Notes: $\ast \ast \ast \mathsf { p } < 0 . 0 0 1 . \mathsf { \Pi } ^ { \ast \ast } \mathsf { p } < 0 . 0 1 . \mathsf { \Pi } ^ { \ast } \mathsf { p } < 0 . 1$ . Abbreviations: WOM, word of mouth; PEF, physical environment friendliness; GRSE, game-related service excellence; DU, device usability; ISA, immersive sensory appeal; GP, game playfulness; EV, ephemeral value. 
+
+
+Study 1, all these three dimensions represent reactive values stemming from playersurrounding interactions. This finding aligns with the discussion on MG-specific interactions in Research Background and Literature Review and underscores the importance of the activeness-focused perspective in understanding MGEV and enhancing players’ WOM in MG. 
+
+Furthermore, game playfulness, ephemeral value, and game-related service excellence showed no significant relationship with WOM despite the positive coefficients for both game playfulness and ephemeral value. However, these insignificant relationships do not necessarily diminish the importance of these dimensions in the MGEV framework. By definition, these values correspond to players’ fundamental needs for MG gameplay (e.g., enjoying an MG experience with friends under the guidance or assistance of an MG service provider). Meeting these basic needs is essential to prevent dissatisfaction. Still, it may not be sufficient to incite more proactive, effort-taking behaviors such as sharing positive WOM. In contrast, the dimensions that showed significant effects are pertinent to players’ interactions with the gaming surroundings, capturing the most distinctive feature of MG from other games. Accordingly, players tend to attach particular salience to these dimensions, which, once satisfied, can motivate players to share positive WOM in these aspects. These findings highlight the necessity of considering the varying importance different players assign to each MGEV dimension, which we will delve into in the subsequent study using a player-centered approach. 
+
+## Brief Discussion of Study 2
+
+Study 2 broadly confirmed the nomological validity of the MGEV concerning a pivotal outcome variable in the MG context: players’ WOM. We affirmed that specific MGEV dimensions, notably those representing reactive values such as physical environment friendliness, device usability, and immersive sensory appeal, significantly and positively influence WOM. While other values, such as game playfulness, ephemeral value, and game-related service excellence, did not considerably impact WOM, we propose that this does not diminish their significance in the MG context. This result provides valuable insights for designing MG applications. MG providers could pay more attention to physical environment friendliness, device usability, and immersive sensory appeal to enhance players’ WOM. 
+
+Our observation aligns with previous research suggesting individual differences among players in prioritizing various dimensions of experience value. Some MG players may prioritize specific dimensions over others, leading to differences in which combination of MGEV dimensions they value. To delve further into this notion, we advocate moving beyond the static variable-centered approach used in Study 2 (and most prior studies) towards a player-centered approach. Consequently, in Study 3, as detailed in the following section, we use the player-centered approach to identify diverse player groups with unique MGEV profiles and to explore the variations in their MG participation characteristics and WOM. 
+
+## Study 3: A Player-Centered Approach to Identifying MGEV Profiles
+
+While different players may prioritize various aspects of MGEV, prior studies have predominantly adopted a variance-centered approach, which assumes a stable relationship between experience value dimensions and their outcomes [40], potentially overlooking the diverse profiles of player priorities. To address this limitation, Study 3 adopted a playercentered approach to explore our second research objective: to reveal player groups defined by their unique MGEV profiles and to explore the differences in WOM among these groups. The player-centered approach transcends the traditional variable-centered approach by offering a holistic perspective on how player groups, each with their unique configuration of MGEV dimensions, may differ in their WOM. This approach facilitates a more comprehensive understanding of the MGEV dimensions and explores intricate interactions among these dimensions and other characteristics of MG participation. From a practical standpoint, insights from this study can inform the design of more personalized MG experiences. In pursuit of this objective, we conducted a cluster analysis on the full dataset comprising 7,581 reviews from the first quarter of 2016 to the fourth quarter of 2022 to unveil multiple MGEV profiles that reflect the diversity in player and MG characteristics. 
+
+## Data Preparation
+
+We used the same measures for the six MGEV dimensions as in Study 2. Each MGEV dimension is measured as an ordinal variable ranging from zero to the total number of subdimensions within that particular MGEV dimension. These variables were subsequently utilized for the cluster analysis. Additionally, we encoded three nominal (categorical) variables representing MG participation characteristics (i.e., VIP status, payment, and MG location) for post-clustering, between-group comparisons. ‘VIP status’ indicates whether a player is a VIP member on dianping.com (1) or not (0). As some MG service providers offered free play opportunities for players, the variable “payment” denotes the player’s participation status in the MG participant service, with three different values: 0 (unknown), 1 (free play), and 2 (paid play). “MG location” represents the geographical location of the reviewed MG service provider: suburban (1), semi-central or semi-suburban (2), and central urban (3). Online Supplemental Appendix 6 (Table 6.1) presents the coding rules and data distributions. 
+
+## Clustering Method
+
+We selected the k-means algorithm, a prototype-based clustering method for detecting clustering structures shaped by a set of prototypes [60]. This approach fits our objective of delineating distinct MG player groups with different MGEV profiles. Moreover, the k-means clustering algorithm presents several advantages [20], rendering it a suitable choice for this study. First, its widespread application across diverse domains, such as privacy protection, customer segmentation, and market research, attests to its versatility and reliability [20]. Second, it boasts computational efficiency and can handle large datasets with rapid convergence and stable clustering outcomes. Third, this algorithm proves particularly effective when the sample data are dense, and the distinction between classes is straightforward. 
+
+The steps of the k-means algorithm are as follows: (1) Centroid initialization: randomly selecting k data points as the initial centroids for the k clusters, where k is a predetermined number; (2) Distance calculation: calculating the distances between all objects and the k centroids; (3) Cluster formation: assigning each object to the cluster whose centroid is closest, thereby forming k distinct clusters based on proximity to these centroids; (4) 
+
+Centroids calculation: calculating the centroid of each new cluster as the mean of all objects assigned to that cluster, ensuring that the centroids represent the central tendency of their respective clusters; (5) Iterating until convergence: iteratively repeating steps (2), (3), and (4) until convergence is achieved, when the centroids and the composition of clusters remain consistent between iterations, indicating that the clustering solution has stabilized [34]. 
+
+A crucial decision in k-means clustering is predetermining the most appropriate number of clusters (k) for a given dataset. A k-value is considered suitable when the resulting k-clusters exhibit high intra-cluster and low inter-cluster similarities [60]. Employing two widely used methods, the elbow method and the silhouette coefficient, we determined k = 3 as the target number of clusters in Study 3 (see Online Supplemental Appendix 6 for details). 
+
+## Identifying Player Groups with Diverse MGEV Profiles
+
+We applied the k-means clustering algorithm (with k = 3) to delineate three distinct profiles of players based on their MGEV profiles. We utilized Python’s scikit-learn package5 to fit and predict our dataset, comprising 7,581 objects characterized by six variables (i.e., the six MGEV dimensions). This analysis resulted in a set of cluster centroids, which provide a representative summary of the characteristics of each player profile. Table 4 presents the coordinates of these cluster centroids, illustrating the mean values of each feature for the data points assigned to each cluster. It provides a clear understanding of the typical MGEV profiles within our dataset. 
+
+To illustrate the differences among the clusters in the six MGEV dimensions, we applied min-max normalization and Z-score normalization to the cluster centroids (Online Supplemental Appendix 6, Figure 6.2). The three clusters exhibit variations when combining the six MGEV dimensions. We interpret the three clusters from the MGEV typological framework in Figure 3. 
+
+First, Cluster 1 demonstrated the highest scores in immersive sensory appeal and game playfulness, which are intrinsic values, yet the lowest in physical environment friendliness and device usability, identified as extrinsic values. This cluster is distinguished by its emphasis on the intrinsic dimensions of MGEV, representing an “intrinsic value-dominated group.” Second, Cluster 2 had the highest scores in physical environment friendliness, game-related service excellence, and ephemeral value, all categorized as extrinsic values, but the lowest in immersive sensory appeal, an intrinsic value. Hence, this cluster represents an “extrinsic value-dominated group.” Third, Cluster 3 stood out for its highest score in device usability, a reactive value, but scored the lowest in two active values (i.e., game playfulness and ephemeral value). Therefore, this cluster is less sensitive to active values and is named an “active valueinsensitive group.” 
+
+
+Table 4. Cluster centroids.
+
+
+<table><tr><td>Cluster</td><td>Sample size</td><td>PEF</td><td>GSE</td><td>DU</td><td>ISA</td><td>GP</td><td>EPV</td><td>WOM</td></tr><tr><td>1: Intrinsic value dominated</td><td>1044</td><td>0.2672</td><td>0.8994</td><td>0.8190</td><td>2.5498</td><td>1.2864</td><td>0.9377</td><td>0.6130</td></tr><tr><td>2: Extrinsic value dominated</td><td>2989</td><td>0.4781</td><td>2.0605</td><td>0.8559</td><td>0.2340</td><td>1.2384</td><td>0.9649</td><td>0.6842</td></tr><tr><td>3: Active value insensitive</td><td>3548</td><td>0.2933</td><td>0.3931</td><td>0.8779</td><td>0.2862</td><td>1.1435</td><td>0.9258</td><td>0.6254</td></tr></table>
+
+Notes: The values corresponding to the cluster with the highest for each MGEV dimension are presented in bold. Abbreviations: PEF, physical environment friendliness; GSE, game-related service excellence; DE, device usability; ISA, immersive sensory appeal; GP, game playfulness; EPV, ephemeral value; WOM, word of mouth. 
+
+## Exploring Inter-Cluster Differences
+
+To investigate inter-cluster differences, we conducted a comparative analysis of the WOM for each cluster. Figure 4a presents a percentage bar stacking chart illustrating each cluster’s relative positive WOM proportions. We also conducted a Chi-square test to assess the statistical differences in WOM among the clusters. Table 5 shows that Cluster 2 (extrinsic value-dominated group) exhibits a significantly higher WOM than the other two clusters. However, Cluster 1 (intrinsic value-dominated group) and Cluster 3 (active valueinsensitive group) showed no significant difference in WOM. These findings empirically validated the notion that different MGEV profiles can exert varying influences on WOM, echoing the result of Study 2. 
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/08e48f347760776dad7b2f73c554255dc1c932ae7c30f83d08d062be708ccaea.jpg)
+
+
+
+(a)WOM
+
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/bcb21537b1d267ce6f01fada9259d811aeec8d4e2c8d3f78fe52f6f2590c22f5.jpg)
+
+
+
+(b) VIP status
+
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/b651e1679d1690779de0420482e90faa0821061967b5605e03517363590b865a.jpg)
+
+
+
+(c) Payment
+
+
+![image](https://cdn-mineru.openxlab.org.cn/result/2026-06-22/6830b7eb-a192-4ddb-8d6e-0cfa77178528/cc17c88e52c89d0a0aa4b01591b4f3c78e4574b2ea7bd9cd2be4e2b88a57b43a.jpg)
+
+
+
+(d) MG location
+
+
+
+Figure 4. Inter-cluster differences in word-of-mouth (WOM), very important person (VIP) Status, Payment, and metaverse gaming (MG) Location. Notes: In Figure 4(a), WOM = 1 indicates ratings = 5; otherwise, it is 0. In Figure 4(b), VIP status = 1 indicates that a player is a VIP member of dianping.com; otherwise, it is 0. In Figure 4(c), payment = 2 indicates that the player is a paid participant in the MG; otherwise, it is 1. In Figure 4(d), “MG location” indicates where the reviewed MG service provider is located – suburban (1), semi-central and semi-suburban (2), or central urban (3)..
+
+
+
+Table 5. P-values of Chi-square tests.
+
+
+<table><tr><td>Compared clusters</td><td>WOM</td><td>VIP status</td><td>Payment</td><td>MG location</td></tr><tr><td>Clusters 1, 2, &amp; 3</td><td>2.28E-07***</td><td>5.84E-08***</td><td>3.84E-43***</td><td>1.27E-03**</td></tr><tr><td>Clusters 1 &amp; 2</td><td>3.22E-05***</td><td>8.31E-01</td><td>7.33E-05***</td><td>2.31E-01</td></tr><tr><td>Clusters 1 &amp; 3</td><td>4.90E-01</td><td>2.70E-04***</td><td>6.29E-10***</td><td>2.27E-03**</td></tr><tr><td>Clusters 2 &amp; 3</td><td>7.70E-07***</td><td>5.00E-08***</td><td>6.05E-45***</td><td>6.99E-03**</td></tr></table>
+
+
+Notes: ***p < 0.001. **p < 0.01. *p < 0.1. 
+
+
+To attain a more profound comprehension of the distinct MGEV profiles, we extended our analysis to examine how the three clusters differ in their MG participation characteristics, including VIP status, payment, and MG location. Because VIP status, payment, and MG location are all nominal variables with frequencies greater than 5 in the crosstabulation (clusters × MG participation characteristics), we conducted contingency-table Chi-square tests to evaluate the overall association between the clusters and each MG participation characteristic [14]. Two-by-two Chi-square tests were employed for each characteristic to scrutinize the specific pairwise relationships between the clusters. These tests were adopted to determine whether the distributions of the MG participation characteristics were significantly different across the clusters. The results are summarized in Table 5 and Figure 4b–d. 
+
+Inter-cluster comparisons revealed significant differences among the three player groups regarding their MG participation characteristics. First, the three clusters show significant differences in the VIP status (Figure 4b). While non-VIP players are predominant in all clusters, the proportion of VIP players in Cluster 3 (active value-insensitive group) is much lower than in the other two clusters (Table 5). This distinction can be attributed to active values in Clusters 1 and 2, which may encourage players to engage more proactively in the gaming experience by opting for VIP status to gain additional privileges [28]. Conversely, players in Cluster 3, less sensitive to active values, may be less inclined to seek a VIP status. The results can guide MG providers in identifying potential VIP players and ensuring longterm retention by enhancing specific MGEV dimensions. 
+
+Second, when dealing with payment, we excluded instances where “payment = 0 (unknown)” due to the lack of clarity on whether these players had paid for their gameplay. This exclusion enabled us to recalculate the percentage of players who paid to play accurately. Utilizing the Chi-square test, we identified significant differences in payment behavior across the clusters, with all pairwise comparisons indicating statistical significance (as shown in Table 5 and Figure 4c). Cluster 3 displayed a higher proportion of paid players than other clusters, while Cluster 2 had more players play MG for free. This disparity may stem from the experiential nature of player-surrounding interactions in MG [12]. The “active valueinsensitive” players in Cluster 3 emphasize these interactions and the usability of devices that enable these interactions, leading to a willingness to pay for the interactive experiences MG offers beyond merely the virtual games displayed on a screen. In comparison, the “extrinsic value-dominated” players in Cluster 2 are more conscientious about their payments and the expected return on investment [35]. Consequently, they prefer to experience MG costeffectively. The varied payment patterns observed across the three clusters indicate the need for diverse payment strategies in MG to cater to players with varying MGEV profiles. 
+
+Third, regarding MG locations (i.e., where players enjoyed the MG experience), most players across all clusters engage in MG experiences in central urban areas, as depicted in 
+
+Figure 4d. This trend is presumably attributed to the superior infrastructure and sophisticated technological settings typically found in such places, which are conducive to the growth of MG, an industry still in its nascent phase. Hence, even in developed metropolises like the one under study, MG service providers are predominantly concentrated in downtown locales, with limited expansion into peripheral or non-central urban areas. Meanwhile, players in central metropolitan areas are generally more cognizant and receptive to MG, exhibiting a greater inclination towards embracing this form of entertainment. Further, our between-group comparisons revealed significant differences in the distribution of MG locations across three clusters. Table 5 shows that Cluster 1 (intrinsic valuedominated group) and Cluster 2 (extrinsic value-dominated group) have no significant differences. Yet, they differ significantly from Cluster 3 (active value-insensitive group) and contain more MG locations in the central urban areas. These results provide insightful suggestions for MG to identify and engage target player segments across different geographical regions. 
+
+## Brief Discussion of Study 3
+
+Study 3 extended the understanding of MGEV by implementing a player-centered approach to identify distinct MGEV profiles across various player groups. Our k-means clustering distinguished three typical player groups with unique MGEV profiles (i.e., intrinsic valuedominated, extrinsic value-dominated, and active value-insensitive), varied MG participation characteristics (e.g., VIP status, payment, and MG location), and different levels of WOM. 
+
+Study 3 has enriched the MGEV framework by demonstrating the theoretical value of the player-centered approach in revealing distinct MGEV profiles. The interpretation of the identified clusters underscores the importance of integrating motivation- and activenessfocused perspectives to build a holistic understanding of MGEV. By comparing WOM across the three clusters, we empirically validated the assertion that different MGEV profiles influence WOM distinctly. These results deepen our understanding of the empirical results of Study 2. 
+
+Moreover, our Study 3 provided actionable insights for MG design and applications. For example, we uncovered that active value-insensitive players are more inclined to pay for their MG experiences, while extrinsic value-dominated players prefer to engage with MG for free. These results guided MG service providers to find potential VIP players and attract various players with varying MGEV profiles through paid or free access to MG experiences. 
+
+## Overall Discussion
+
+This paper presents a novel exploration of MGEV through a multi-study investigation, employing a synthesis of qualitative coding, machine learning, and statistical analyses. Our research findings delineate six dimensions of MGEV, which are systematically organized into a two-axis typological framework that distinguishes intrinsic versus extrinsic and active versus reactive values. The paper confirms the nomological validity of MGEV, with extrinsic and intrinsic values (e.g., game-related service excellence, immersive sensory appeal, and game playfulness) demonstrating significant associations with WOM. Although specific extrinsic values (including physical environment friendliness, device usability, and ephemeral value) show insignificant effects on WOM, we provide reasonable explanations rooted in individual differences in the prioritization of MGEV dimensions. Furthermore, by employing a player-centered approach through cluster analysis, we further investigate these interpersonal differences, showcasing the effectiveness of this method in exploring MGEV and highlighting the presence of multiple player groups with distinct MGEV profiles. Our findings carry significant theoretical and practical implications for future research endeavors. 
+
+## Theoretical Implications
+
+The experience value is a pivotal concept in the IS discipline and is crucial for MG’s design, implementation, and ongoing development [3, 35]. However, our literature review has revealed essential gaps in the nuanced and comprehensive understanding of this construct within the MG context, particularly concerning a player-centered approach. This paper aims to bridge these gaps by providing a context-specific and detailed exploration of MGEV dimensionality within a typological framework. Specifically, we have delineated six MGEV dimensions (game playfulness, ephemeral value, immersive sensory appeal, physical environment friendliness, device usability, and game-related service excellence) with corresponding sub-dimensions characterized by clear definitions and robust nomological validity. Furthermore, this study has identified three distinct player groups with unique MGEV profiles. It is important to note that these results pertain specifically to MG experiences in a physical-virtual blended environment and involve complex interactions among players, gaming content, gaming surroundings, and service providers. While the results may vary in other game contexts (e.g., purely digital or virtual worlds), this paper has significantly advanced the understanding of MGEV in four critical areas of MG literature. 
+
+First, our research extends the traditional IS theoretical studies by emphasizing the theorizing process as proposed by Hassan et al. [16]. Unlike traditional IS studies that focus on “the context of justification with an emphasis on collection and analysis of data in response to a research question with theory often added as an afterthought” [17, p. 198], this paper underscores the importance of “discovery” and abductive dialogue between theory and empirics in theory development [17]. The empirically derived (sub)dimensions of MGEV can serve as a foundational basis for conceptualizing and theorizing this underexplored construct in future research [17]. These dimensions also provide an integrated framework for practitioners to enhance the design and improvement of MG experiences, particularly in critical areas such as physical environment friendliness and device usability, which are crucial for improving players’ WOM. Echoing previous studies that acknowledge the presence of functional, social, and emotional value aspects across various contexts [10], the MGEV sub-dimensions identified in this paper align with these aspects, encompassing elements such as ease of use, socialization, and appeal. Furthermore, our proposed MGEV framework offers a more nuanced understanding of experience value in the MG context, particularly incorporating MG-specific sub-dimensions such as interior design and space privacy. By providing these sub-dimensions, our study paves the way for future research to develop contextspecific metrics for assessing experience value within the MG domain. This endeavor could inspire the formulation of models and theories tailored to the unique characteristics of MGEV. Consequently, our conceptualization of the dimensions and subdimensions of experience value can facilitate the development of a coherent and cumulative research tradition in this burgeoning domain. 
+
+Second, we contribute to the research on experience value in the MG context by integrating the often-overlooked activeness-focused perspective (active versus reactive value) with the widely-utilized motivation-focused perspective (intrinsic versus extrinsic value). This integration leads to formulating a four-quadrant typological framework of MGEV that aligns with the four-party interactions inherent in the MG context: playerplayer, player-game content, player-service provider, and player-surrounding interactions. While traditional gaming research has often assumed players are active value-seekers [29], MG introduces a more reactive dimension to players’ gaming experience, shaped significantly by their interactions with gaming service providers and gaming surroundings (e.g., players may be guided by service providers to engage with sophisticated game devices). By incorporating the activeness-focused perspective, our research captures the essence of MGspecific interactions, thereby contributing to a more holistic understanding of MGEV. Consequently, our two-axis typological framework for MGEV lays a groundwork for future research to develop solid theories on experience value. 
+
+Third, this paper delves into and unveils the presence of various MGEV player profiles that hold significant implications for the customization of MG experiences to cater to the unique preferences of different player types. While previous studies have predominantly adopted a variable-centered perspective to examine experience values [29], the intricate interplay among various MGEV dimensions in shaping distinct MGEV profiles has remained largely unexplored. Echoing prior research on virtual worlds [59], our findings in Study 2 imply possible individual differences in how players prioritize different combinations of MGEV dimensions. This suggests that the traditional variable-centered approach may fail to capture nuanced interpersonal differences. Consistent with previous research in other fields, we demonstrate the efficacy of a player-centered approach in identifying subgroups within the player population that exhibit meaningful differences across various MGEV dimensions. Profiling these subgroups is of considerable significance, as they tend to emerge with regularity across samples and are relatively stable within samples over time [40]. Our playercentered approach diverges from the variable-centered approach by offering a fresh lens through which to understand the preferences of MG players. It opens up a new avenue for research—unearthing individuals’ diverse mindsets toward experience value. 
+
+Fourth, our multi-study research significantly extends the theoretical framework of online reviews by focusing on MG-related content, an area largely overlooked in the existing literature. While previous studies have focused on various aspects of online reviews, such as e-commerce user preferences [33] and product ratings [9], our work pioneers an exploration of online reviews in the MG context. By doing so, our research introduces a novel theoretical and conceptual framework specifically tailored to elucidate players’ experience value in the MG environment. Moreover, our methodology integrates qualitative coding with advanced machine learning techniques and statistical analysis, which has been highly influential in extracting meaningful insights from online reviews’ data. 
+
+## Practical Implications
+
+Our research offers important insights for practitioners to enhance MG design and operations. First, an in-depth and nuanced understanding of the multidimensionality of MGEV can assist practitioners in improving their MG designs and operations. To provide a holistic and optimal gameplay experience, practitioners should consider the game content (e.g., immersive sensory appeal) and the surroundings supporting the game (e.g., physical environment friendliness). For instance, Future Battle, a renowned MG in China, exemplifies this approach by incorporating realistic visual, olfactory, auditory, and tactile stimuli during gameplay, complemented by a spacious playground-like environment. By enhancing the immersive sensory appeal and physical environment friendliness, the company has successfully engaged one million players, with seventy percent of first-time players becoming regular members. It has since emerged as the largest MG in China.6 Moreover, MG providers can amplify players’ experience value by offering highly usable (easy-to-use, comfortable, well-maintained, reliable, and sensitive) gaming devices. 
+
+Second, our research indicates that different MGEV dimensions affect WOM differently. In the six dimensions identified, immersive sensory appeal, physical environment friendliness, and device usability emerge as the most potent predictors of WOM. This finding underscores the significance for practitioners to enhance these MGEV dimensions. To this end, practitioners can include enhanced multi-faceted sensories (e.g., visual, sound, and tactile appeal) and create amiable physical surroundings (e.g., a spacious gaming area with superior interior design and spatial privacy). Some MG practitioners have already embraced these strategies to elevate MGEV. For example, in terms of immersive sensory appeal, Roblox has updated its platform to engage players in awesome, fun adventures through aesthetic visual designs (e.g., using unique colors for different gaming themes and personalized visual design for the player interface) and fantastic sound effects that simulate authentic environmental sounds [39]. These initiatives have been instrumental in delivering a range of engaging and enjoyable experiences, significantly enhancing player satisfaction [39]. 
+
+Third, our player-centered approach has revealed three player groups with distinct MGEV mindsets: intrinsic value-dominated, extrinsic value-dominated, and active valueinsensitive. A general takeaway from this segmentation is that practitioners should tailor gaming services to diverse player types based on their MGEV mindsets and preferences, which can be identified through player feedback mechanisms such as online reviews or survey responses. Specifically, they should ensure excellent services related to the MGEV dimensions players prioritize and strive to improve areas that may not meet their expectations. Our results also suggest that the players’ MGEV mindsets and profiles may be correlated with their patterns of MG participation. For instance, many players who are insensitive to active values are willing to pay for their experiences. In contrast, those with an extrinsic value orientation are more inclined to engage in free participation. These insights enable MG practitioners to attract and retain specific player types by leveraging these participation characteristics. For example, they could offer competitive pricing and strategically locate their facilities in suburban areas to appeal to players insensitive to active values, assuming this demographic is their target. Alternatively, they could invest in highquality equipment to cater to the enthusiasm of technology-savvy players particularly interested in the latest gaming devices. 
+
+## Limitations and Future Studies
+
+As with any other research endeavor, this paper is subject to several limitations that suggest avenues for future research. First, our investigation was confined to the online reviews of MG players within a single metropolitan area in China. Consequently, the findings may be influenced by this region’s specific cultural context or player demographics. To enhance the robustness and generalizability of our findings, future research could replicate this research using MG services in other countries and with diverse player populations. Such cross-cultural and cross-national studies would provide valuable insights into the universal applicability of our results and could reveal any cultural or geographical discrepancies. 
+
+Second, as an initial step toward understanding MGEV, the studies reported in this paper relied on archival data sourced from a single platform (dianping.com). Despite employing multiple data analysis methods that can collectively yield rich insights, our results may still be constrained by the nature of the data source. For instance, while we took measures to ensure the relevance of the selected online reviews by manually excluding unrelated content, there remained a possibility of fake reviews that could not be eliminated. Therefore, we encourage future research to utilize alternative types and data sources (such as data collected through large-scale surveys, experiments, and interviews) for replication and triangulation. 
+
+Third, we could only obtain measurements for certain outcome variables (e.g., WOM) due to the limitation of data sources. However, other outcomes (e.g., satisfaction, engagement, and retention) might also be influenced by MGEV. We call for future research to examine the relationship between MGEV and other outcome variables to provide a more comprehensive understanding of the consequences of MGEV. 
+
+## Conclusion
+
+Through a multi-study investigation, we have examined the MGEV construct through a comprehensive approach that integrates qualitative and quantitative analyses, machine learning techniques, and data derived from online reviews. Specifically, we have identified six MGEV dimensions and their sub-dimensions. By engaging with experience value theories, we have proposed a context-specific, two-axis typological framework for MGEV, anchored on extrinsic versus intrinsic and active versus reactive value perspectives. We have demonstrated the nomological validity of MGEV by validating the relationship between its six dimensions and players’ WOM using a composite panel dataset. Finally, we have applied a playercentered approach to identify three distinct player groups, each characterized by a unique MGEV mindset (i.e., extrinsic value-dominated, intrinsic value-dominated, and active value-insensitive). These findings provide a comprehensive and nuanced understanding of the dimensionality, roles, and profiles of MGEV, highlight the efficacy of the player-centered perspective in investigating the MGEV construct, and provide actionable insights into the design and development of MG. 
+
+## Notes
+
+1. https://www.statista.com/outlook/amo/metaverse/metaverse-gaming/worldwide 
+
+2. https://code.google.com/p/word2vec/ 
+
+3. https://numpy.org/ 
+
+4. https://pandas.pydata.org/ 
+
+5. https://scikit-learn.org/stable/index.html 
+
+6. https://pandaily.com/chinas-stepvr-opens-gate-to-the-metaverse/ 
+
+## Disclosure statement
+
+The authors have no conflicts of interest to disclose. 
+
+## Funding
+
+This work was supported by the National Natural Science Foundation of China [grant numbers 72261160394, 72471136], the Shanghai Philosophy and Social Science Fund [grant number 2023BGL011], and the Fundamental Research Funds for the Central Universities. 
+
+## Notes on contributors
+
+Zhongyun (Phil) Zhou (philzhou@tongji.edu.cn) is Associate Professor at the School of Economics and Management at Tongji University, P. R. China. He holds two PhD degrees from the University of Science and Technology of China and from the City University of Hong Kong. His research interests focus on the usage and impacts of emerging digital technologies, especially those related to the Metaverse and AI. Dr. Zhou’s work appears in such journals as the Journal of Management Information Systems, Journal of Business Ethics, European Journal of Information Systems, Information Systems Journal, Information & Management, Decision Support Systems, Journal of the Association for Information Science and Technology, and others. He is a Senior Editor of Information Systems Journal and Information Technology & People. 
+
+Zidie Chen (chenzidie@tongji.edu.cn) is a PhD student in the School of Economics and Management at Tongji University. Her research focuses on user behavior in the Metaverse and online social commerce. Her papers appear in such journals as the European Journal of Information Systems and Internet Research, and in conference proceedings such as those of Pacific Asia Conference on Information Systems. 
+
+Weichen Li (liweichen@tongji.edu.cn) is a Master’s student in the School of Economics and Management at Tongji University. Her research focuses on user experience and behavior in metaverse games and gamification. 
+
+Yi Zhang (z-yi24@mails.tsinghua.edu.cn) is a Master’s student in the School of Economics and Management at Tsinghua University, China. She holds a Bachelor’s degree from the School of Economics and Management at Tongji University. Her research interests focuse on the usage and impacts of emerging digital technologies such as data analytics. 
+
+Xiao-Ling Jin (kathyjin2011@shu.edu.cn; corresponding author) is a Professor at the School of Management, Shanghai University, China. She holds two PhD degrees: from the University of Science and Technology of China and from the City University of Hong Kong. Dr. Jin’s research interests include the use and impacts of emerging digital technologies such as Metaverse and AI. She has published papers in such journals as the Journal of Management Information Systems, Journal of Business Ethics, Decision Support Systems, European Journal of Information Systems, and Journal of the Association for Information Science and Technology. She is a Senior Editor of Information Technology & People. 
+
+## Acknowledgment
+
+We thank the guest editors and anonymous reviewers for their constructive comments. 
+
+
+
+19. Hsu, C.L., and Chen, M.C. How does gamification improve user experience? An empirical investigation on the antecedences and consequences of user experience and its mediating role. Technological Forecasting and Social Change, 132, (2018), 118–129. 
+
+
+
+
+
+39. Oh, Y.K., Yi, J. and Kim, J. What enhances or worsens the user-generated metaverse experience? An application of BERTopic to Roblox user eWOM. Internet Research ahead-of-print, (2023). 
+
+
+
+## References
+
+
+
+20. Ikotun, A.M., Ezugwu, A.E., Abualigah, L., Abuhaija, B., and Heming, J. K-means clustering algorithms: A comprehensive review, variants analysis, and advances in the era of big data. Information Sciences, 622, (2023), 178–210. 
+
+
+
+
+
+40. Qahri-Saremi, H., and Turel, O. Ambivalence and coping responses in post-adoptive information systems use. Journal of Management Information Systems, 37, 3 (2020), 820–848. 
+
+
+
+
+
+21. Kim, Y. Convolutional neural networks for sentence classification. Conference on Empirical Methods in Natural Language Processing, (2014). 
+
+
+
+
+
+41. Reer, F., Wehden, L., Janzik, R., Tang, W., and Quandt, T. Virtual reality technology and game enjoyment: The contributions of natural mapping and need satisfaction. Computers in Human Behavior, 132, (2022), 107242. 
+
+
+
+
+
+1. Altonji, J.G., and Matzkin, R.L. Cross section and panel data estimators for nonseparable models with endogenous regressors. Econometrica, 73, 4 (2005), 1053–1102. 
+
+
+
+
+
+22. Kim, Y.H., Kim, D.J., and Wachter, K. A study of mobile user engagement (MoEN): Engagement motivations, perceived value, satisfaction, and continued engagement intention. Decision Support Systems, 56, (2013), 361–370. 
+
+
+
+
+
+42. Rezaei, S., and Ghodsi, S.S. Does value matters in playing online game? An empirical study among massively multiplayer online role-playing games (MMORPGs). Computers in Human Behavior, 35, (2014), 252–266. 
+
+
+
+
+
+2. Animesh, A., Pinsonneault, A., Yang, S. B., and Oh, W. An odyssey into virtual worlds: Exploring the impacts of technological and spatial environments on intention to purchase virtual products. MIS Quarterly, 35, 3 (2011), 789–810. 
+
+
+
+
+
+23. Kim, Y.M., Rhiu, I., and Yun, M.H. A systematic review of a virtual reality system from the perspective of user experience. International Journal of Human-Computer Interaction, 36, 10 (2020), 893–910. 
+
+
+
+
+
+43. Romano Jr, N.C., Donovan, C., Chen, H., and Nunamaker Jr, J.F. A methodology for analyzing web-based qualitative data. Journal of Management Information Systems, 19, 4 (2003), 213–246. 
+
+
+
+
+
+3. Barrera, K.G., and Shah, D. Marketing in the metaverse: Conceptual understanding, framework, and research agenda. Journal of Business Research, 155, (2023), 113420. 
+
+
+
+
+
+24. Kock, N., and Lynn, G. Lateral collinearity and misleading results in variance-based SEM: An illustration and recommendations. Journal of the Association for Information Systems, 13, 7 (2012). 
+
+
+
+
+
+44. Shim, J.P., Shin, Y.B., and Nottingham, L. Retailer web site influence on customer shopping: Exploratory study on key factors of customer satisfaction. Journal of the Association for Information Systems, 3, 1 (2022), 3. 
+
+
+
+
+
+4. Bretschneider, S. Management information systems in public and private organizations: An empirical test. Public Administration Review, 50, 5 (1990), 536–545. 
+
+
+
+
+
+25. Kohler, T., Fueller, J., Matzler, K., Stieger, D., and Füller, J. Co-creation in virtual worlds: The design of the user experience. MIS Quarterly, 35, 3 (2011), 773–788. 
+
+
+
+
+
+45. Shin, D. The actualization of meta affordances: Conceptualizing affordance actualization in the metaverse games. Computers in Human Behavior, 133, (2022), 107292. 
+
+
+
+
+
+5. Burton, F. G., Chen, Y. N., Grover, V., and Stewart, K. A. An application of expectancy theory for assessing user motivation to utilize an expert system. Journal of Management Information Systems, 9, 3 (1992), 183–198. 
+
+
+
+
+
+26. Kwak, D.H., Deng, S., Kuem, J., and Kim, S. How to achieve goals in digital games? An empirical test of a goal-oriented model in Pokémon GO. Journal of the Association for Information Systems, 23, 2 (2021), 553–588. 
+
+
+
+
+
+46. Storgårds, J.H. The Influence of the hedonic and utilitarian value of digital games on product recommendation. Americas’ Conference on Information Systems Proceedings, (2011), 245. 
+
+
+
+
+
+6. Chatla, S.B., and Shmueli, G. An extensive examination of regression models with a binary outcome variable. Journal of the Association for Information Systems, 18, 4 (2017), 1. 
+
+
+
+
+
+27. Levallet, N., Denford, J.S., and Chan, Y.E. Following the MAP (methods, approaches, perspectives) in information systems research. Information Systems Research, 32, 1 (2020), 130–146. 
+
+
+
+
+
+47. Sweeney, J.C., and Soutar, G.N. Consumer perceived value: The development of a multiple item scale. Journal of Retailing, 77, 2 (2001), 203–220. 
+
+
+
+
+
+7. Chen, C.F., and Chen, F.S. Experience quality, perceived value, satisfaction and behavioral intentions for heritage tourists. Tourism Management, 31, 1 (2010), 29–35. 
+
+
+
+
+
+28. Li, G., Liu, H., and Li, G. Payment willingness for VIP subscription in social networking sites. Journal of Business Research, 67, 10 (2014), 2179–2184. 
+
+
+
+
+
+48. Valaei, N., Bressolles, G., Khan, H., and Low, Y.M. Ads in gaming apps: The experiential value of gamers. Industrial Management & Data Systems, 122, 1 (2022), 78–106. 
+
+
+
+
+
+8. Chen, Q., Gong, Y.Y., Keil, M., Liu, S., and Lu, Y. Conceptualization and measurement of voice interaction usability: The development of cooperative principle theory for smart product use. MIS Quarterly, 48 3 (2024), 1009–1046. 
+
+
+
+
+
+29. Li, M., Jiang, Q., Tan, C.H., and Wei, K.K. Enhancing user-game engagement through software gaming elements. Journal of Management Information Systems, 30, 4 (2014), 115–150. 
+
+
+
+
+
+49. Varshneya, G., and Das, G. Experiential value: multi-item scale development and validation. Journal of Retailing and Consumer Services, 34, (2017), 48–57. 
+
+
+
+
+
+9. Chen, Q., Yun, G., Lu, J., and Wang, X. Understanding active participation of online dating services: A mixed methods study. Decision Support Systems, 170, (2023), 113960. 
+
+
+
+
+
+30. Lin, Z., and Heng, C. S. The paradoxes of word of mouth in electronic commerce. Journal of Management Information Systems, 32, 4 (2015), 246–284. 
+
+
+
+
+
+50. Venkatesh, V., Brown, S. A., and Bala, H. Bridging the qualitative-quantitative divide: Guidelines for conducting mixed methods research in information systems. MIS Quarterly, 37, 1 (2013), 21–54. 
+
+
+
+
+
+10. Choi, M., Choi, Y., Nosrati, S., Hailu, T.B., and Kim, S. Psychological dynamics in the metaverse: Evaluating perceived values, attitude, and behavioral intention in metaverse events. Journal of Travel & Tourism Marketing, 40, 7 (2023), 602–618. 
+
+
+
+
+
+31. Liu, L., Li, C., and Zhu, D. A new approach to testing nomological validity and its application to a second-order measurement model of trust. Journal of the Association for Information Systems, 13, 12 (2012), 950–975. 
+
+
+
+
+
+51. Verhagen, T., Feldberg, F., van den Hooff, B., Meents, S., and Merikivi, J. Satisfaction with virtual worlds: An integrated model of experiential value. Information & Management, 48, 6 (2011), 201–207. 
+
+
+
+
+
+11. Conboy, K., Fitzgerald, G., and Mathiassen, L. Qualitative methods research in information systems: Motivations, themes, and contributions. European Journal of Information Systems, 21, 2 (2012), 113–118. 
+
+
+
+
+
+32. Lorenz, J., Kruse, L. C., and Recker, J. Creating and capturing value with physical-digital experiential consumer offerings. Journal of Management Information Systems, 41, 3 (2024), 779–811. 
+
+
+
+
+
+52. Wetzels M., Odekerken-Schröder G., and Van Oppen C. Using PLS path modeling for assessing hierarchical construct models: Guidelines and empirical illustration. MIS Quarterly, 33, 1 (2009), 177–195. 
+
+
+
+
+
+12. Dwivedi, Y.K., Hughes, L., Baabdullah, A.M., Ribeiro-Navarrete, S., Giannakis, M., Al-Debei, M.M., . . . and Wamba, S.F. Metaverse beyond the hype: Multidisciplinary perspectives on emerging challenges, opportunities, and agenda for research, practice and policy. International Journal of Information Management, 66, (2022), 102542. 
+
+
+
+
+
+33. Ma, Y., Chen, G., and Wei, Q. Finding users preferences from large-scale online reviews for personalized recommendation. Electronic Commerce Research, 17, (2017), 3–29. 
+
+
+
+
+
+53. Wu, J., and Lu, X. Effects of extrinsic and intrinsic motivators on using utilitarian, hedonic, and dual-purposed information systems: A meta-analysis. Journal of the Association for Information Systems, 14, 3 (2013), 153–191. 
+
+
+
+
+
+13. Elo, J., Lumivalo, J., and Tuunanen, T. A personal values-based approach to understanding users’ co-creative and co-destructive gaming experiences in augmented reality mobile games. Pacific Asia Journal of the Association for Information Systems, 14, 5 (2022), 51–81. 
+
+
+
+
+
+34. MacQueen, J. B. Some methods for classification and analysis of multivariate observations. Proceedings of the fifth Berkeley Symposium on Mathematical Statistics and Probability, (1967), 281–297. 
+
+
+
+
+
+54. Wu, J., Fan, S., and Zhao, J.L. Community engagement and online word of mouth: An empirical investigation. Information & Management, 55, 2 (2018), 258–270. 
+
+
+
+
+
+14. Frey, L., Botan, C., and Kreps, G. Analyzing differences between groups. Investigating Communication: An Introduction to Research Methods, Boston: Allyn & Bacon, (1999). 
+
+
+
+
+
+35. Mathwick, C., Malhotra, N., and Rigdon, E. Experiential value: conceptualization, measurement and application in the catalog and Internet shopping environment. Journal of Retailing, 77, 1 (2001), 39–56. 
+
+
+
+
+
+55. Yoon, S. J., and Park, J. E. Do sensory ad appeals influence brand attitude? Journal of Business Research, 65, 11 (2012), 1534–1542. 
+
+
+
+
+
+15. Glaser, B., and Strauss, A. Discovery of grounded theory: Strategies for qualitative research. (2017). 
+
+
+
+
+
+36. Mikolov, T., Sutskever, I., Chen, K., Corrado, G.S., and Dean, J. Distributed representations of words and phrases and their compositionality. Advances in Neural Information Processing Systems, 26, (2013). 
+
+
+
+
+
+56. Zeithaml, V.A. Consumer perceptions of price, quality, and value: A means-end model and synthesis of evidence. Journal of Marketing, 52, 3 (1988), 2–22. 
+
+
+
+
+
+16. Hassan, N.R., Lowry, P.B., and Mathiassen, L. Useful products in information systems theorizing: A discursive formation perspective. In Advancing Information Systems Theories, Volume II: Products and Digitalisation, (2022), 17–77. 
+
+
+
+
+
+37. Mogaji, E., Wirtz, J., Belk, R.W., and Dwivedi, Y.K. Immersive time (ImT): conceptualizing time spent in the metaverse. International Journal of Information Management, 72, (2023), 102659. 
+
+
+
+
+
+57. Zellner, A. Statistical analysis of econometric models. Journal of the American Statistical Association, 74, 367 (1979), 628–643. 
+
+
+
+
+
+17. Hassan, N.R., Mathiassen, L., and Lowry, P.B. The process of information systems theorizing as a discursive practice. Journal of Information Technology, 34, 3 (2019), 198–220. 
+
+
+
+
+
+38. Molinillo, S., Japutra, A., and Liébana‐Cabanillas, F. Impact of perceived value on casual mobile game loyalty: The moderating effect of intensity of playing. Journal of Consumer Behaviour, 19, 5 (2020), 493–504. 
+
+
+
+
+
+58. Zhang, H., Chau, P.Y., Wang, B., and Luo, X. Social media-enabled customer co-creation experience value: Conceptualisation and measurement. European Journal of Information Systems, 32, 3 (2021), 550–572. 
+
+
+
+
+
+18. Hoehle, H., and Venkatesh, V. Mobile application usability: Conceptualization and instrument development. MIS Quarterly, 39, 2 (2015), 435–472. 
+
+
+
+
+
+59. Zhou, Z., Jin, X.L., Vogel, D.R., Fang, Y., and Chen, X. Individual motivations and demographic differences in social virtual world uses: An exploratory investigation in Second Life. International Journal of Information Management, 31, 3 (2011), 261–271. 
+
+
+
+
+
+60. Zhou, Z.-H. Machine learning. Springer Nature, (2021). 
+
+
+
+
+
+61. Zuo, M., and Shen, Y. How features and affordances of a metaverse portal engage users? Evidence from exergames. Internet Research, 34, 1 (2024), 239–261. 
+

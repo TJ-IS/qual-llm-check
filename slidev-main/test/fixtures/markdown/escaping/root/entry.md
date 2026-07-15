@@ -1,5 +1,0 @@
-# Entry
-
----
-src: ../outside.md
----

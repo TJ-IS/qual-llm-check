@@ -1,0 +1,4 @@
+interface:
+  display_name: "Otero Open API"
+  short_description: "Search and download Otero AIS literature"
+  default_prompt: "Use $otero-open-api to search Otero and download matching article full text."

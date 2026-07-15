@@ -1,0 +1,16 @@
+{
+  "name": "casa-construct-development-slides",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export:png": "slidev export slides.md --format png --output dist-png"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.17.0",
+    "playwright-chromium": "^1.58.0",
+    "slidev-theme-scholarly": "file:./slidev-theme-scholarly-1.3.3.tgz"
+  }
+}

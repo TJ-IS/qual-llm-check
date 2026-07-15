@@ -1,0 +1,196 @@
+{
+  "updated_at": "2026-07-14T04:15:55.801157+00:00",
+  "selected": 23,
+  "available_outputs": 23,
+  "pending_outputs": 0,
+  "all_outputs_complete": true,
+  "completed_this_run": 0,
+  "skipped_this_run": 23,
+  "failed_this_run": 0,
+  "results": [
+    {
+      "source": "00492_2017_whose-online-reviews-to-trust-understanding-reviewer-trustworthiness-and-its-impact-on-business.md",
+      "status": "skipped",
+      "paragraphs": 189,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\00492_2017_whose-online-reviews-to-trust-understanding-reviewer-trustworthiness-and-its-impact-on-business.md",
+      "error": ""
+    },
+    {
+      "source": "01516_2021_impact-of-social-media-on-the-firms-knowledge-exploration-and-knowledge-exploitation-the-role-of.md",
+      "status": "skipped",
+      "paragraphs": 302,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\01516_2021_impact-of-social-media-on-the-firms-knowledge-exploration-and-knowledge-exploitation-the-role-of.md",
+      "error": ""
+    },
+    {
+      "source": "01932_2024_the-impact-of-feature-exploitation-and-exploration-on-mobile-application-evolution-and-success.md",
+      "status": "skipped",
+      "paragraphs": 372,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\01932_2024_the-impact-of-feature-exploitation-and-exploration-on-mobile-application-evolution-and-success.md",
+      "error": ""
+    },
+    {
+      "source": "02496_2013_multicommunicating-juggling-multiple-conversations-in-the-workplace.md",
+      "status": "skipped",
+      "paragraphs": 265,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\02496_2013_multicommunicating-juggling-multiple-conversations-in-the-workplace.md",
+      "error": ""
+    },
+    {
+      "source": "04160_2018_engaging-voluntary-contributions-in-online-communities-a-hidden-markov-model1.md",
+      "status": "skipped",
+      "paragraphs": 303,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\04160_2018_engaging-voluntary-contributions-in-online-communities-a-hidden-markov-model1.md",
+      "error": ""
+    },
+    {
+      "source": "05018_2015_understanding-news-2-0-a-framework-for-explaining-the-number-of-comments-from-readers-on-online.md",
+      "status": "skipped",
+      "paragraphs": 248,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\05018_2015_understanding-news-2-0-a-framework-for-explaining-the-number-of-comments-from-readers-on-online.md",
+      "error": ""
+    },
+    {
+      "source": "05240_2010_changing-the-competitive-landscape-continuous-innovation-through-it-enabled-knowledge-capabiliti.md",
+      "status": "skipped",
+      "paragraphs": 274,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\05240_2010_changing-the-competitive-landscape-continuous-innovation-through-it-enabled-knowledge-capabiliti.md",
+      "error": ""
+    },
+    {
+      "source": "07098_2022_does-it-matter-to-acquisitions-the-impacts-of-it-distance-on-post-acquisition-performance.md",
+      "status": "skipped",
+      "paragraphs": 254,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\07098_2022_does-it-matter-to-acquisitions-the-impacts-of-it-distance-on-post-acquisition-performance.md",
+      "error": ""
+    },
+    {
+      "source": "07116_2021_when-all-products-are-digital-complexity-and-intangible-value-in-the-ecosystem-of-digitizing-fir.md",
+      "status": "skipped",
+      "paragraphs": 275,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\07116_2021_when-all-products-are-digital-complexity-and-intangible-value-in-the-ecosystem-of-digitizing-fir.md",
+      "error": ""
+    },
+    {
+      "source": "07534_2024_consumers-opinion-orientations-and-their-credit-risk-an-econometric-analysis-enhanced-by-multimo.md",
+      "status": "skipped",
+      "paragraphs": 342,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\07534_2024_consumers-opinion-orientations-and-their-credit-risk-an-econometric-analysis-enhanced-by-multimo.md",
+      "error": ""
+    },
+    {
+      "source": "07890_2016_the-dynamic-predictive-power-of-company-comparative-networks-for-stock-sector-performance.md",
+      "status": "skipped",
+      "paragraphs": 271,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\07890_2016_the-dynamic-predictive-power-of-company-comparative-networks-for-stock-sector-performance.md",
+      "error": ""
+    },
+    {
+      "source": "08608_2019_does-superposition-influence-the-success-of-floss-projects-an-examination-of-open-source-softwar.md",
+      "status": "skipped",
+      "paragraphs": 241,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\08608_2019_does-superposition-influence-the-success-of-floss-projects-an-examination-of-open-source-softwar.md",
+      "error": ""
+    },
+    {
+      "source": "09148_2000_an-investigation-of-information-systems-use-patterns-technological-events-as-triggers-the-effect.md",
+      "status": "skipped",
+      "paragraphs": 288,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\09148_2000_an-investigation-of-information-systems-use-patterns-technological-events-as-triggers-the-effect.md",
+      "error": ""
+    },
+    {
+      "source": "09660_2009_popular-concepts-beyond-organizations-exploring-new-dimensions-of-information-technology-innovat.md",
+      "status": "skipped",
+      "paragraphs": 215,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\09660_2009_popular-concepts-beyond-organizations-exploring-new-dimensions-of-information-technology-innovat.md",
+      "error": ""
+    },
+    {
+      "source": "10694_2015_corporate-blogging-and-job-performance-effects-of-work-related-and-nonwork-related-participation.md",
+      "status": "skipped",
+      "paragraphs": 256,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\10694_2015_corporate-blogging-and-job-performance-effects-of-work-related-and-nonwork-related-participation.md",
+      "error": ""
+    },
+    {
+      "source": "14630_2025_how-sentiment-divergence-in-influencers-multimodal-social-media-posts-shapes-follower-engagement.md",
+      "status": "skipped",
+      "paragraphs": 408,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\14630_2025_how-sentiment-divergence-in-influencers-multimodal-social-media-posts-shapes-follower-engagement.md",
+      "error": ""
+    },
+    {
+      "source": "14774_2015_software-process-diversity-conceptualization-measurement-and-analysis-of-impact-on-project-perfo.md",
+      "status": "skipped",
+      "paragraphs": 222,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\14774_2015_software-process-diversity-conceptualization-measurement-and-analysis-of-impact-on-project-perfo.md",
+      "error": ""
+    },
+    {
+      "source": "14794_2014_modeling-the-longitudinality-of-user-acceptance-of-technology-with-an-evidence-adaptive-clinical.md",
+      "status": "skipped",
+      "paragraphs": 160,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\14794_2014_modeling-the-longitudinality-of-user-acceptance-of-technology-with-an-evidence-adaptive-clinical.md",
+      "error": ""
+    },
+    {
+      "source": "16190_2011_information-quality-in-wikipedia-the-effects-of-group-composition-and-task-conflict.md",
+      "status": "skipped",
+      "paragraphs": 217,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\16190_2011_information-quality-in-wikipedia-the-effects-of-group-composition-and-task-conflict.md",
+      "error": ""
+    },
+    {
+      "source": "20373_2021_influence-of-self-efficacy-on-execution-discrepancy-and-decision-performance.md",
+      "status": "skipped",
+      "paragraphs": 191,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\20373_2021_influence-of-self-efficacy-on-execution-discrepancy-and-decision-performance.md",
+      "error": ""
+    },
+    {
+      "source": "25442_2021_when-will-i-get-out-of-the-hospital-modeling-length-of-stay-using-comorbidity-networks.md",
+      "status": "skipped",
+      "paragraphs": 244,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\25442_2021_when-will-i-get-out-of-the-hospital-modeling-length-of-stay-using-comorbidity-networks.md",
+      "error": ""
+    },
+    {
+      "source": "25754_2021_eyes-wide-open-the-role-of-situational-information-security-awareness-for-securityrelated-behavi.md",
+      "status": "skipped",
+      "paragraphs": 350,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\25754_2021_eyes-wide-open-the-role-of-situational-information-security-awareness-for-securityrelated-behavi.md",
+      "error": ""
+    },
+    {
+      "source": "27637_2025_deductive-certainty-exploring-the-boundaries-of-trust-formation-in-smart-contracts-on-blockchain.md",
+      "status": "skipped",
+      "paragraphs": 272,
+      "translated_paragraphs": 0,
+      "output": "E:\\github\\qual-llm-check-IS-utd\\runs\\new_construct_objective_measurement_23_translation\\bilingual_zh\\27637_2025_deductive-certainty-exploring-the-boundaries-of-trust-formation-in-smart-contracts-on-blockchain.md",
+      "error": ""
+    }
+  ]
+}

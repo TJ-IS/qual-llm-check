@@ -2,6 +2,7 @@
 *.jsonl
 .env
 *.log
+database_fulltext_construct/
 
 # Python-generated files
 __pycache__/
@@ -10,6 +11,21 @@ build/
 dist/
 wheels/
 *.egg-info
+
+# Node / Slidev generated dependencies, caches, and QA exports
+node_modules/
+.slidev/
+.vite/
+.vitepress/cache/
+playwright-report/
+test-results/
+runs/coding_agent_ux_misq_isr/*slidev*/dist-png/
+runs/coding_agent_ux_misq_isr/*slidev*/qa/
+runs/coding_agent_ux_misq_isr/*slidev*/slidev-theme-*.tgz
+
+# Local upstream/reference checkouts used while preparing Slidev decks
+slidev-main/
+slidev_ref/
 
 # Virtual environments
 .venv
