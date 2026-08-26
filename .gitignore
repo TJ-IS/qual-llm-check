@@ -81,8 +81,11 @@ runs/ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_fl
 !runs/ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash/research_reviews/v11_iterative_literature_rewrite/audit_artifacts/build_v15_nonintro_predecessor_route.py
 !runs/ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash/research_reviews/v11_iterative_literature_rewrite/audit_artifacts/legacy_AGENTS_pre_v15_goal_workflow.md
 
-# One-off local scans and derived inventories.
-/._*.py
+# One-off local scans, derived inventories, and filesystem metadata.
+.DS_Store
+._*
+/_scan_papers.py
+runs/ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash/research_reviews/_allpaper_syms.txt
 /_accept*.txt
 /_sym*.py
 /_symscan*.txt

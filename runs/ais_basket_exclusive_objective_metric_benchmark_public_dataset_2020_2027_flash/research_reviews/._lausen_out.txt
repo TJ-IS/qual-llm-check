@@ -1,3 +1,0 @@
-Lausen 36 P4 vs P5: 0.525
-34 vs 36 Lausen: 0.698
-34 vs 36 Lausen2: 0.442

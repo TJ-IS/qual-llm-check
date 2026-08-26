@@ -1,6 +1,0 @@
-34_论文一_AgentSh | Adversary: 8 | Anticipate: 0 | Detect: 0
-  标题: # 编码智能体对抗攻击的系统化生成与威胁建模（基于强化学习的攻击仿真框架 AgentShield-Adversary）
-35_论文二_AgentSh | Adversary: 0 | Anticipate: 6 | Detect: 0
-  标题: # 编码智能体攻击面的事前预判与预算化预置防御（基于多模态预测与约束优化的框架 AgentShield-Anticipate）
-36_论文三_AgentSh | Adversary: 0 | Anticipate: 0 | Detect: 6
-  标题: # 编码智能体信息操纵攻击的流式检测与动作门控（基于多通道融合与对抗重训的检测框架 AgentShield-Detect）
