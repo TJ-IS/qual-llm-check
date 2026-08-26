@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85215502819"
+title: "Encoding Domain Knowledge in Log Analysis"
+authors: "Zamfirov F.; Dams D.; Seraj M.; Serebrenik A."
+year: "2024"
+journal: "Proceedings - 2024 IEEE International Conference on Software Maintenance and Evolution, ICSME 2024"
+doi: "10.1109/icsme58944.2024.00030"
+---
+# Scopus title-abstract-keyword metadata
+Title: Encoding Domain Knowledge in Log Analysis
+Abstract: Software developers often use logs to, e.g., investigate bugs, familiarize themselves with the underlying system, or improve performance. To do so, they commonly rely on text editors or their own scripts. This lack of appropriate tooling remains a primary challenge in the industrial application of log analysis (state-of-the-practice), despite many tools and techniques proposed by previous scientific studies (state-of-the-art). To aid in bridging this gap between industry and academia, between state-of-the-practice and state-of-the-art, we zoom in on the ways developers perform log analysis. In particular, we conduct an exploratory case study to understand what structures developers identify in logs and how they utilize their knowledge in this process. Based on the results of the case study, we identify two classes of features, one related to encoding domain knowledge and another one related to sharing domain knowledge. We implement two features from the first class in an open-source log analysis platform designed in collaboration with our industrial partner. To evaluate the impact of the implemented features on log analysis, we conduct a user evaluation with software developers from our industrial partner. During this evaluation developers complete several tasks using the features and complete a usability questionnaire. Results show that users are able to encode their domain knowledge about the logs during their analysis. Furthermore, we observe that participants value highly ease of use and indicate an interest in using the features in their current practice. This sentiment is reflected in the resulting scores of the usability questionnaire, indicating above-average usability. Our findings pave the way to bridge the gap between academia and industry and facilitate the application of advanced log analysis approaches in industry.  © 2024 IEEE.
+Author keywords: Event Logging; Industry Domain; Log Analysis; Software Logs
+Index keywords: Usability engineering; Domain knowledge; Encodings; Event logging; Industrial partners; Industry domain; Log analysis; Software developer; Software logs; State of the art; State of the practice; Open source software
+Document type: Conference paper
+Conference: 40th IEEE International Conference on Software Maintenance and Evolution, ICSME 2024
+Source title: Proceedings - 2024 IEEE International Conference on Software Maintenance and Evolution, ICSME 2024
+Year: 2024
+EID: 2-s2.0-85215502819
+DOI: 10.1109/icsme58944.2024.00030
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

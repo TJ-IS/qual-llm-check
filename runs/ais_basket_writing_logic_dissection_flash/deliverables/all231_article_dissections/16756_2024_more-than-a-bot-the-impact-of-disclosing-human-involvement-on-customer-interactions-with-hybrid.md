@@ -1,0 +1,2261 @@
+# More Than a Bot? The Impact of Disclosing Human Involvement on Customer Interactions with Hybrid Service Agents
+
+- 作者：Ulrich Gnewuch; Stefan Morana; Oliver Hinz; Ralf Kellner; Alexander Maedche
+- 年份 / 期刊：2024 / Information Systems Research
+- DOI：10.1287/isre.2022.0152
+- 源文件：16756_2024_more-than-a-bot-the-impact-of-disclosing-human-involvement-on-customer-interactions-with-hybrid.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：在混合服务代理（AI聊天机器人与后台人工员工共用同一界面的客服系统）中，向顾客披露人工参与（human involvement disclosure, HID）是否、如何以及为何会改变顾客的沟通风格，并进而影响后台员工的 workload？
+
+- 制品与设计：研究并非从零构建系统，而是在真实电信公司已有的混合服务代理上操纵两种披露设计：互动开始前的前置披露（up-front HID）——在欢迎语中加入“如果我不知道答案，我的人类同事会阅读并回复”；以及互动中人工接替时的接替披露（step-in HID）——在转接消息中明确指出“我会把它交给人类同事”。在线实验用 Microsoft Bot Framework 构建自定义聊天机器人，复制相同的披露措辞、同一服务任务和延迟模拟人工介入。
+
+- 客观结果：随机现场实验（8,966名顾客）表明，前置和接替披露均显著提高顾客更“面向人”的沟通风格（用冗长性、复杂度、密度构成的潜变量衡量）；这种沟通风格又显著增加员工工作量（用响应频率、时长、强度构成的潜变量衡量）。受控在线实验（288人）复制了直接效应，并发现披露通过激活顾客的印象管理担忧影响沟通风格。
+
+- 核心贡献：作者声称三点贡献：对IT服务接触研究引入混合服务代理这一新对象；对AI服务自动化研究揭示披露人工参与会增加AI向人类委托的工作量、削弱AI释放员工生产力的能力；对HCI研究识别出印象管理担忧是顾客-混合服务代理互动中的关键心理机制，而不是此前文献强调的能力/温暖感知或期望。
+
+- 整篇论证链：论文从在线客服场景中“聊天机器人应答复杂问题常失败”和“政策要求披露聊天机器人非人身份”这两个现实现象切入，指出真正未被研究的问题是：当客服系统是聊天机器人和后台员工组成的混合服务代理时，企业是否应披露后台人工参与。作者用 audience design theory 推导出披露会让顾客把隐形员工纳入自己的沟通“受众”，因此采用更完整、更自然、更面向人的沟通方式；用 NLP 局限和委派机制推导出这种沟通风格会增加转人工率，从而提高员工工作量；用印象管理文献推导出披露通过激活顾客的“给人类留好印象”的担忧而起作用。为检验这些链条，作者先在真实电信公司做 2×2 随机现场实验，验证 H1–H3；再做一系列稳健性检验排除备择解释；随后用受控在线实验复制直接效应并检验 H4–H5 的中介机制；最后用附加成本、情绪和内容分析扩展业务含义。讨论部分把具体披露设计提升为关于透明披露、AI自动化收益和员工负担的理论与政策含义。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文不是单一制品构建或纯benchmark研究，而是由随机现场实验和受控在线实验两个相互补充的主要研究构成，中间还包含独立操纵检查、额外对照实验、一系列稳健性检验和附加结果分析；现场提供真实环境因果证据，在线提供机制证据，两个Study累积完成贡献，因此判定为多方法/多Study研究项目。
+
+- 主导写作弧线判定：写作主线是从实践和政策两难提出“是否披露人工参与”的问题，引入audience design、印象管理和委派机制等理论并提出假设，把披露设计成前置/接替两种实验操纵，通过两个实验检验，最后在讨论中回到透明披露、AI自动化收益和员工负担等理论含义。这是典型的问题—理论—设计—检验—回到理论的弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：作者先用操纵检查预实验证明披露措辞能改变人工参与感知；随后在真实电信公司平台运行2×2随机现场实验，检验前置HID和接替HID对顾客沟通风格及员工工作量的主效应；再通过一整套稳健性检验排除备择解释；随后补充附加业务结果分析；然后转入受控在线实验，复制现场结果并检验印象管理担忧的中介机制；最后在线实验的附加机制检验和开放题内容分析进一步确认机制并支持实践启示。前一阶段留下的机制不明确和潜在混淆由后一阶段接续解决。
+
+### studies_or_phases
+
+#### 1. 操纵检查预实验
+
+- order：1
+
+- name_cn：操纵检查预实验
+
+- question_cn：用于前置HID和接替HID的披露陈述是否确实使顾客感知到更高的人工参与？
+
+- inputs_and_setting_cn：基于虚构电信公司超额账单场景的四种视频互动版本，120名Clickworker参与者，随机观看一种条件。
+
+- designed_or_compared_object_cn：2×2条件下的四种视频：无披露、仅前置披露、仅接替披露、两者均披露。
+
+- baseline_control_or_counterfactual_cn：无披露条件作为基准。
+
+##### objective_metrics
+
+1. 感知人工参与（7点Likert）
+
+- analysis_method_cn：单因素方差分析（one-way ANOVA）与planned contrasts。
+
+- main_result_cn：感知人工参与在不同条件间差异显著（F(3,116)=64.00，p<0.001）；无披露条件最低（M=1.46），三个披露条件均显著更高。
+
+- argumentative_role_cn：为后续现场实验的因果解释提供处理有效性基础：证明实验所用文本确实让顾客知道背后有人类员工。
+
+- remaining_uncertainty_cn：只验证了感知，未验证这些披露对真实沟通行为的影响。
+
+- link_to_next_phase_cn：操纵有效后，进入真实平台现场实验来检验行为后果。
+
+##### evidence_pointers
+
+1. Section 4.1.2 Manipulation Check
+
+2. Online Appendix A.2
+
+#### 2. 随机现场实验（主研究1）
+
+- order：2
+
+- name_cn：随机现场实验（主研究1）
+
+- question_cn：在实际顾客服务中，前置HID和接替HID是否提高顾客面向人的沟通风格，并因此增加员工工作量？
+
+- inputs_and_setting_cn：跨国电信公司网站的混合服务代理；8,966名真实顾客随机分配到4个条件；采集聊天文本、时间戳、发送者、员工操作日志；数据收集于2019年2月两周。
+
+- designed_or_compared_object_cn：2×2 between-subjects设计：前置HID（有/无）× 接替HID（有/无），在欢迎语和接替消息中插入/不插入披露语句。
+
+- baseline_control_or_counterfactual_cn：无披露条件；同时使用有/无控制变量模型、仅有人工介入子样本、员工固定效应、时间固定效应等。
+
+##### objective_metrics
+
+1. 顾客沟通风格潜变量（verbosity, complexity, density）
+
+2. 员工工作量潜变量（frequency, duration, intensity）
+
+3. SEM拟合指数
+
+4. 前置/接替披露的系数与显著性
+
+5. 沟通风格到工作量的路径系数
+
+- analysis_method_cn：验证性因子分析和结构方程建模（lavaan），FIML估计，固定效应，SEM中介分析。
+
+- main_result_cn：前置HID对沟通风格显著（b=0.143，p<0.001）；接替HID显著（b=0.066，p=0.010）；交互不显著；沟通风格显著增加员工工作量（b=0.380，p<0.001）；SEM中介分析显示两条间接效应显著。
+
+- argumentative_role_cn：在真实顾客服务环境中提供HID影响沟通风格和员工工作量的因果证据。
+
+- remaining_uncertainty_cn：无法直接观测心理机制；存在披露语句本身暗示机器人能力不足、员工语言差异、未解决问题等备择解释；接替HID存在38.5%的一侧不依从。
+
+- link_to_next_phase_cn：需要在线实验复制并检验印象管理中介，同时需要稳健性检验排除备择解释。
+
+##### evidence_pointers
+
+1. Section 4.1.1 Experimental Design and Treatments
+
+2. Section 4.2.2 Structural Model and Hypothesis Testing
+
+3. Table 3
+
+4. Online Appendix A.6
+
+#### 3. 稳健性检验与备择解释排除
+
+- order：3
+
+- name_cn：稳健性检验与备择解释排除
+
+- question_cn：现场实验结果是否稳健？效应确实由“披露人工参与”本身而非披露措辞的负面暗示、员工语言差异或问题未解决驱动？
+
+- inputs_and_setting_cn：现场实验数据；额外410人受控在线实验（中性措辞对照）；员工消息文本相似度变量；人工编码问题解决分数；披露次数信息。
+
+- designed_or_compared_object_cn：LATE模型修正单侧不依从；原始披露语句与中性语句（如“如果情况需要”）对照；加入员工语言一致性控制；加入问题解决分数；用接替披露次数替代二分变量。
+
+- baseline_control_or_counterfactual_cn：无披露组；不加入控制变量模型；原始HID语句与中性措辞版本互为对照。
+
+##### objective_metrics
+
+1. LATE估计下HID对沟通风格和工作量的系数
+
+2. 原始与中性措辞版本间沟通风格差异的p值
+
+3. 加入员工语言控制后主结果是否保持不变
+
+4. 问题解决分数跨条件差异p值
+
+5. 披露次数对沟通风格的系数
+
+- analysis_method_cn：回归式局部平均处理效应（LATE）模型、组间比较、SEM再分析、文本相似度控制、人工内容编码。
+
+- main_result_cn：LATE结果支持H1–H3；原始与中性措辞版本无显著差异（p>0.415）；员工语言无系统差异且加入控制后结果不变；问题解决分数无跨条件差异；接替披露次数越多效应越强（b=0.280，p<0.001）。
+
+- argumentative_role_cn：把主结果从“可能由措辞副作用或员工行为驱动”收紧为“披露人工参与本身的因果效应”，增强内部有效性。
+
+- remaining_uncertainty_cn：仍未直接测量心理机制；中性措辞对照实验是额外在线样本而非现场。
+
+- link_to_next_phase_cn：排除备择解释后，转向受控在线实验说明心理机制并复制结果。
+
+##### evidence_pointers
+
+1. Section 4.2.3 Robustness Checks
+
+2. Online Appendices A.7–A.11
+
+#### 4. 附加业务结果分析
+
+- order：4
+
+- name_cn：附加业务结果分析
+
+- question_cn：HID除影响沟通风格和员工工作量外，是否也影响顾客主动寻求人工、互动长度、顾客情绪和财务成本？
+
+- inputs_and_setting_cn：现场实验的8,966段聊天文本；人工复核识别主动请求员工的消息；自动情绪分析；基于工作量增加的人力成本估算。
+
+- designed_or_compared_object_cn：比较各实验条件在主动寻求人工、互动时长、情绪得分和成本上的差异。
+
+- baseline_control_or_counterfactual_cn：无披露条件。
+
+##### objective_metrics
+
+1. 包含主动请求人工消息的聊天比例
+
+2. 互动时长增量（分钟）
+
+3. 情绪得分系数
+
+4. 人力成本增加百分比
+
+- analysis_method_cn：组间比较/回归、人工文本标注、自动情绪分析、探索性成本估算。
+
+- main_result_cn：前置披露下顾客更可能主动请求员工（虽然96.7%聊天无此请求，p<0.001）；互动平均长约1分钟；前置披露显著降低顾客情绪（b=-0.011，p=0.018）；额外工作量使人工成本增加38–70%。
+
+- argumentative_role_cn：将核心行为效应扩展为管理者关心的业务和成本后果，增强研究的实践重要性。
+
+- remaining_uncertainty_cn：这些是探索性结果，未深入解释主动求人行为和情绪变化的机制。
+
+- link_to_next_phase_cn：核心因果链还需要机制证据，因此进入在线实验。
+
+##### evidence_pointers
+
+1. Section 4.2.4 Additional Analyses
+
+2. Online Appendices A.13–A.16
+
+#### 5. 受控在线实验（主研究2）
+
+- order：5
+
+- name_cn：受控在线实验（主研究2）
+
+- question_cn：在受控条件下，能否复制HID对沟通风格的直接效应？印象管理担忧是否中介前置和接替HID对沟通风格的影响？
+
+- inputs_and_setting_cn：Clickworker招募300人，有效288人；虚构电信账单过高场景；自定义Microsoft Bot Framework聊天机器人，无人类同谋；问卷测量印象管理担忧、人口特征、基线沟通风格、聊天机器人经验和人际需求。
+
+- designed_or_compared_object_cn：与现场实验相同的2×2前置HID×接替HID设计；使用相同披露语句；无披露组使用等长中性语句；引导对话中延迟50秒模拟人工介入。
+
+- baseline_control_or_counterfactual_cn：无披露条件；加入中介前后直接效应比较；bootstrap间接效应CI。
+
+##### objective_metrics
+
+1. 沟通风格潜变量（verbosity, complexity, density）
+
+2. 印象管理担忧（4条目量表）
+
+3. 直接效应系数
+
+4. 间接效应bootstrap 95% CI
+
+- analysis_method_cn：验证性因子分析、SEM、bias-corrected bootstrap mediation（5,000样本）、操纵检查。
+
+- main_result_cn：前置HID b=0.177（p=0.027），接替HID b=0.222（p=0.005）；HID显著提高印象管理担忧（b=0.310/0.299，均p<0.001）；印象管理担忧显著影响沟通风格（b=0.209，p=0.004）；间接效应CI不含0，支持H4/H5；前置HID完全中介，接替HID部分中介。
+
+- argumentative_role_cn：提供心理机制证据并复制现场直接效应，同时排除现场人类同谋行为等混淆。
+
+- remaining_uncertainty_cn：在线实验外部真实性较低；接替HID的直接效应有一部分未被印象管理担忧解释。
+
+- link_to_next_phase_cn：通过附加机制比较和开放题内容分析进一步确证印象管理机制并补充顾客态度。
+
+##### evidence_pointers
+
+1. Section 5.1 Procedure and Hybrid Service Agent Design
+
+2. Section 5.2 Results
+
+3. Table 4
+
+4. Table 5
+
+#### 6. 在线实验附加机制检验与开放反应分析
+
+- order：6
+
+- name_cn：在线实验附加机制检验与开放反应分析
+
+- question_cn：印象管理担忧是否是唯一/主要机制？其他候选机制如主动寻求人工、感知能力/温暖能否解释效应？顾客对披露人工参与的主观态度如何？
+
+- inputs_and_setting_cn：同一在线实验中的额外量表数据和开放题回答文本。
+
+- designed_or_compared_object_cn：在SEM/回归模型中加入候选机制作为替代中介进行比较；对开放题“是否想知道人工参与”的回答做内容分析。
+
+- baseline_control_or_counterfactual_cn：候选机制与印象管理担忧的解释力比较。
+
+##### objective_metrics
+
+1. 候选机制的路径系数与显著性
+
+2. 开放题回答的内容类别和典型陈述
+
+- analysis_method_cn：SEM替代机制检验、内容分析。
+
+- main_result_cn：主动寻求人工、能力/温暖感知等候选机制均无法解释主效应；大多数参与者表示希望被告知人工参与，隐瞒会让人感到被骗并降低信任。
+
+- argumentative_role_cn：进一步确证印象管理担忧是核心心理机制，并为讨论中“顾客要求透明”的实践主张提供定性支持。
+
+- remaining_uncertainty_cn：内容分析是探索性定性证据，不能代表总体分布。
+
+- link_to_next_phase_cn：为讨论部分的理论贡献、实践建议和政策呼吁提供依据。
+
+##### evidence_pointers
+
+1. Section 5.2.3 Additional Analyses
+
+2. Online Appendices B.5–B.6
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. GAP
+
+4. RQ_OR_OBJECTIVE
+
+5. STUDY_OVERVIEW
+
+6. RESULT
+
+7. MECHANISM
+
+8. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. LIMITATION
+
+5. GAP
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. STUDY_OVERVIEW
+
+9. RESULT
+
+10. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. GAP
+
+4. THEORY_INTRO
+
+5. THEORY_PROPOSITION
+
+6. MECHANISM
+
+7. HYPOTHESIS_OR_PROPOSITION
+
+8. STUDY_OVERVIEW
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. METHOD_JUSTIFICATION
+
+4. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. MECHANISM
+
+3. CONTRIBUTION
+
+4. PRACTICAL_STAKES
+
+5. BOUNDARY_CONDITION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Audience design theory (Bell 1984)
+
+2. 人际关系与人-聊天机器人沟通差异研究
+
+3. 印象管理社会心理学（Leary and Kowalski 1990）
+
+4. 人-AI协作与委派机制研究（Baird and Maruping 2021; Fügener et al. 2022）
+
+5. NLP性能和聊天机器人局限研究
+
+6. 先前聊天机器人身份披露研究（Luo et al. 2019; Mozafari et al. 2022 等）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：理论不是事后解释，而是在实验前直接决定了核心设计差异：HID被定义为前置和接替两种时机的披露陈述，并配合audience design和impression management理论推导出对沟通风格的影响；工作负荷假设由NLP局限和委派机制推导。两个实验中的随机组间对比正是对这些理论命题的直接检验。
+
+- 理论到设计翻译链：现实模糊人机边界并存在政策压力 → 提出“是否披露人工参与”问题 → 用audience design说明披露会改变顾客对“受众”的认知 → 把披露操作化为欢迎语和接替语中的具体文本 → 用NLP/委派机制说明更人向沟通增加转人工率 → 用印象管理文献说明披露激活顾客印象管理担忧 → 现场实验检验直接效应和下游工作量，在线实验检验中介机制 → 讨论把结果提升为对IT服务、AI自动化和HCI文献的贡献。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：人们会根据听众身份调整沟通风格；与人类沟通时使用更长、词汇更丰富、语法更完整的句子，与聊天机器人沟通时使用简短关键词式指令。
+
+- mechanism_cn：披露让顾客意识到自己的“受众”不仅包括聊天机器人，还包括可能旁听或介入的隐形员工，于是顾客按人类听众的标准调整沟通方式。
+
+- design_requirement_cn：披露必须让顾客在互动前或人工接替时明确感知到“有后台人类员工会读/回复”。
+
+- artifact_choice_cn：前置HID在欢迎语中加入“如果我不知道答案，我的人类同事会阅读并回复”；接替HID在转接消息中加入“我会把它交给人类同事”。
+
+- evaluated_contrast_cn：有披露 vs 无披露；前置 vs 接替；现场实验和在线实验使用同样的2×2设计。
+
+- objective_result_cn：前置HID显著提高沟通风格（现场b=0.143；在线b=0.177）；接替HID显著提高沟通风格（现场b=0.066；在线b=0.222）。
+
+##### evidence_pointers
+
+1. Section 4.1.1
+
+2. Section 4.2.2 Table 3
+
+3. Section 5.2.1
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：印象管理理论：人们在他人可能在场时更关心给他人留下好印象，并倾向于遵守社交规范；与机器互动时这种担忧较低。
+
+- mechanism_cn：知道有员工在后台工作会激活顾客的“给人类留好印象”的担忧，促使他们使用更自然、更礼貌、更像与人交流的语言。
+
+- design_requirement_cn：披露的作用对象不是聊天机器人的技术能力，而是顾客对“在场人类”的印象管理动机。
+
+- artifact_choice_cn：在线实验中用公共自我意识量表测量印象管理担忧，并比较加入中介前后HID直接效应的变化。
+
+- evaluated_contrast_cn：HID vs 无HID对印象管理担忧和沟通风格的路径；间接效应是否显著。
+
+- objective_result_cn：HID显著提高印象管理担忧；间接效应显著；前置HID完全中介，接替HID部分中介。
+
+##### evidence_pointers
+
+1. Section 3.3
+
+2. Section 5.2.2 Table 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：NLP研究显示聊天机器人对复杂、冗长、自然语言的输入处理更困难；混合服务代理的委派规则通常是把无法自动处理的消息转给人类。
+
+- mechanism_cn：顾客采用更人向、更自然的沟通风格会降低聊天机器人自动理解的概率，提高转人工率，从而增加员工工作量。
+
+- design_requirement_cn：混合服务代理需要保持一个客观的委派机制（如置信度阈值），以便观测沟通风格对工作量的影响。
+
+- artifact_choice_cn：现场实验中保留公司原有意图识别置信度0.95的委派机制；员工可选择确认、编辑或重写聊天机器人建议。
+
+- evaluated_contrast_cn：沟通风格潜变量与员工工作量潜变量之间的路径；有/无控制变量模型；仅有人工介入子样本。
+
+- objective_result_cn：沟通风格对工作量有显著正效应（现场b=0.380；子样本b=0.150）；LATE稳健性进一步支持。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Section 4.1.3
+
+3. Section 4.2.2 Table 3
+
+4. Section 4.2.3 Online Appendix A.7
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 操纵检查预实验
+
+2. 随机现场实验
+
+3. 受控在线实验
+
+4. SEM/CFA测量模型
+
+5. SEM中介分析
+
+6. LATE econometric robustness
+
+7. 中性措辞对照实验
+
+8. 员工语言一致性控制
+
+9. 问题解决人工编码
+
+10. 替代机制比较
+
+11. 开放题内容分析
+
+12. 事后成本估算
+
+- why_these_evaluations_cn：主假设需要真实世界因果证据，所以先做现场实验；但现场实验不能直接观测心理机制且有多个潜在混淆，所以用在线实验复制并测量中介；为了排除“披露措辞本身暗示机器人不行”等备择解释，使用中性措辞对照、员工语言控制、问题解决控制；为了支持中介特异性，比较主动寻求人工和能力/温暖等候选机制；为了帮助管理判断，补充成本和情绪分析。
+
+- benchmark_and_contrast_chain_cn：无披露条件作为所有实验的核心基准；现场和在线实验使用相同2×2设计形成跨上下文复制；稳健性检验把原始披露语句与同长度中性语句对照，确保是“披露人工参与”本身而非负面文本暗示；中介分析把加入印象管理担忧前后的直接效应比较；附加分析比较多个业务结果维度；替代机制检验把印象管理与能力/温暖等进行对比，逐层建立并巩固因果链。
+
+### claim_evidence_ledger
+
+1. H1/H2：前置和接替HID提高人向沟通风格——现场实验和在线实验均显著，操纵检查和中性措辞对照支持，稳健性经LATE、子样本、控制变量保持。
+
+2. H3：更人向的沟通风格增加员工工作量——现场SEM显著，子样本显著，LATE稳健，成本估算显示38–70%人力成本增加。
+
+3. H4/H5：印象管理担忧中介HID对沟通风格的作用——在线实验bootstrap间接效应CI不含0，前置完全中介、接替部分中介，替代机制无法解释。
+
+4. 附加业务结果：主动寻求人工、互动长度、情绪、成本——探索性证据，作者没有将它们作为确认性主张。
+
+5. 透明需求：开放题内容分析显示参与者希望被告知人工参与，隐瞒会降低信任——定性探索性支持，非代表性证据。
+
+- internal_validity_strategy_cn：随机分配；操纵检查确认感知；CFA支持构念效度；加入员工、星期、时段固定效应；多种控制变量；FIML处理缺失；LATE处理接替披露的单侧不依从；中性措辞对照排除文本副作用；员工语言一致性控制排除员工差异；问题解决编码排除未解决问题导致更努力沟通的替代解释。
+
+- external_validity_strategy_cn：现场实验使用真实电信公司、真实顾客和真实聊天记录，样本量大；在线实验复制相同披露设计和同一客服场景；结果在两种模式间一致；同时承认行业和技术边界，并讨论其随大语言模型进步可能变化。
+
+- what_is_not_actually_tested_cn：现场实验中未直接测量印象管理担忧，机制证据主要来自在线实验的自我报告量表；顾客满意度用自动情绪分析代理，未用标准满意度量表；成本增加为探索性估算；语音渠道、其他行业、长期效应和大语言模型聊天机器人未直接测试；开放题内容分析只是定性探索。
+
+## 贡献闭环
+
+- technical_claim_cn：研究没有提出新算法或新系统，技术性主张是：披露人工参与后，顾客更人向的沟通风格会降低聊天机器人的自动处理能力，从而增加委派给人工的频率、时长和强度。
+
+- artifact_claim_cn：具体的披露设计（欢迎语和接替语中加入/不加入人工参与声明）是产生沟通风格差异的原因；中性措辞对照表明这种差异来自“披露人工参与”本身，而不是“机器人可能能力不足”的文本暗示。
+
+- mechanism_claim_cn：印象管理担忧是HID影响沟通风格的心理机制；在线实验中介分析支持该路径，且主动寻求人工、感知能力和温暖等替代机制未能解释结果。
+
+- boundary_claim_cn：在基于文本的客服聊天中、混合服务代理自称是聊天机器人并以意图识别置信度0.95作为委派规则的条件下成立；前置披露的效果即使不保证人工介入也会出现；效果可能随NLP技术改进而减弱，且不一定适用于语音或其他服务场景。
+
+- reusable_design_knowledge_cn：披露设计需区分时机（前置 vs 接替）并考虑其行为后果；透明披露在满足伦理和政治要求的同时会带来隐性人力成本；缓解措施包括训练聊天机器人理解更自然的语言、临时增派员工、用幽默语句降低印象管理担忧、限制顾客消息长度；政策上需要类似电话录音披露的监管框架。
+
+- theoretical_contribution_cn：把IT服务接触研究从纯人工或纯技术渠道扩展到人工与AI共用同一界面的混合服务代理；揭示透明度可能削弱AI对员工工作的替代/解放效果；在HCI领域引入印象管理担忧作为人机混合互动中的关键机制，而不是先前强调的能力/温暖感知。
+
+- how_discussion_closes_intro_gap_cn：讨论重述引言提出的“企业是否应披露人工参与”问题，用现场和在线实验的一致证据回答“会显著改变顾客行为并增加员工负担”，同时用印象管理机制和顾客透明需求说明这不是简单的“披露好”或“披露坏”，从而把“先前只研究聊天机器人身份披露”的缺口闭合为关于混合服务代理透明度的新知识。
+
+- overclaim_or_unsupported_leaps_cn：在线实验的自我报告印象管理担忧推广到现场真实行为有一定间接性；成本增加38–70%依赖较多假设；情绪结果和主动寻求人工的机制未被深入解释；开放题内容分析不能代表总体；作者在文中对附加分析明确标记为探索性，但部分讨论表述仍可能被读成更强的主张。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：混合服务代理的普及使在线服务中人与技术的边界更加模糊。
+
+- rhetorical_function_cn：开场给出核心现象背景，为整篇论文设定讨论对象。
+
+- depends_on_cn：无需前置依赖，直接建立领域语境。
+
+- sets_up_cn：引出后文关于披露问题的讨论。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：当前讨论多聚焦于披露AI的非人身份，较少关注是否披露后台人工参与。
+
+- rhetorical_function_cn：指出现有讨论的偏向，制造研究空白。
+
+- depends_on_cn：依赖混合服务代理这一背景。
+
+- sets_up_cn：为研究问题留出位置。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. Abstract P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：摘要提出“是否应披露人工参与以及披露如何影响顾客和员工”的未回答问题。
+
+- rhetorical_function_cn：把背景转化成一个具体研究缺口。
+
+- depends_on_cn：基于前一句的讨论偏向。
+
+- sets_up_cn：为研究目标提供明确对象。
+
+- evidence_pointer：Abstract P2 S1
+
+### 4. Abstract P2 S2
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P2 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者说明研究聚焦顾客是否会以及为何会有不同沟通方式。
+
+- rhetorical_function_cn：明确研究问题。
+
+- depends_on_cn：依赖已识别的缺口。
+
+- sets_up_cn：预告后文实验结果。
+
+- evidence_pointer：Abstract P2 S2
+
+### 5. Abstract P2 S3
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P2 S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：披露激活顾客的印象管理担忧，进而影响沟通风格。
+
+- rhetorical_function_cn：在摘要中提前给出核心机制。
+
+- depends_on_cn：依赖研究问题。
+
+- sets_up_cn：为H4/H5埋下伏笔。
+
+- evidence_pointer：Abstract P2 S3
+
+### 6. Abstract P2 S4
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P2 S4
+
+- move_code：RESULT
+
+- paraphrase_cn：更人向的沟通风格最终导致更多请求被转给人工，增加员工工作量。
+
+- rhetorical_function_cn：摘要中呈现下游后果，强调实践意义。
+
+- depends_on_cn：依赖沟通风格作为中介。
+
+- sets_up_cn：为贡献声明提供证据。
+
+- evidence_pointer：Abstract P2 S4
+
+### 7. Abstract P2 S5
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P2 S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称提供关于披露如何影响沟通行为、员工负面后果和透明成本的见解。
+
+- rhetorical_function_cn：摘要末尾声明贡献。
+
+- depends_on_cn：依赖全部结果。
+
+- sets_up_cn：引导读者进入全文。
+
+- evidence_pointer：Abstract P2 S5
+
+### 8. Introduction P1 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI在在线服务中快速普及，顾客越来越多地与聊天机器人互动。
+
+- rhetorical_function_cn：建立研究背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为“聊天机器人仍有限”的下一句铺垫。
+
+- evidence_pointer：Introduction P1 S1
+
+### 9. Introduction P1 S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：聊天机器人经常无法处理非例行和复杂请求，导致顾客受挫和体验不佳。
+
+- rhetorical_function_cn：指出纯AI渠道的局限。
+
+- depends_on_cn：依赖聊天机器人普及的背景。
+
+- sets_up_cn：为混合服务代理的出现提供动机。
+
+- evidence_pointer：Introduction P1 S2
+
+### 10. Introduction P1 S3
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：企业开始采用混合服务代理，由AI处理常规请求，困难请求转给人类。
+
+- rhetorical_function_cn：引入核心研究对象。
+
+- depends_on_cn：依赖前两句的矛盾。
+
+- sets_up_cn：定义了全文核心术语。
+
+- evidence_pointer：Introduction P1 S3
+
+### 11. Introduction P2 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：混合服务代理进一步模糊了顾客对人机边界的判断，造成困惑和企业的担忧。
+
+- rhetorical_function_cn：强调问题的现实后果。
+
+- depends_on_cn：依赖混合服务代理的定义。
+
+- sets_up_cn：引出政策背景。
+
+- evidence_pointer：Introduction P2 S1
+
+### 12. Introduction P2 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：政策倡议和“机器人法案”要求披露聊天机器人非人身份，但没有规定是否披露后台人工参与。
+
+- rhetorical_function_cn：指出法规只覆盖一个维度，留下空白。
+
+- depends_on_cn：依赖前一句的企业担忧。
+
+- sets_up_cn：构造出研究空白。
+
+- evidence_pointer：Introduction P2 S2
+
+### 13. Introduction P2 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：GAP
+
+- paraphrase_cn：虽然有不披露引发反感的轶事，但关于披露人工参与影响的研究很少。
+
+- rhetorical_function_cn：明确研究缺口。
+
+- depends_on_cn：依赖政策空白和现有披露研究。
+
+- sets_up_cn：引出研究问题。
+
+- evidence_pointer：Introduction P2 S3
+
+### 14. Introduction P3 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出实证考察HID对混合服务代理顾客互动的影响。
+
+- rhetorical_function_cn：建立全文研究目标。
+
+- depends_on_cn：依赖已识别的缺口。
+
+- sets_up_cn：预告研究的具体关注对象。
+
+- evidence_pointer：Introduction P3 S1
+
+### 15. Introduction P3 S2
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：沟通风格常被忽略，但它可影响服务运营甚至破坏流程。
+
+- rhetorical_function_cn：说明为什么顾客沟通风格是值得研究的结果变量。
+
+- depends_on_cn：依赖研究问题。
+
+- sets_up_cn：为下游工作量假设铺垫。
+
+- evidence_pointer：Introduction P3 S2
+
+### 16. Introduction P3 S3
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告进行了两个实验：随机现场实验和受控在线实验。
+
+- rhetorical_function_cn：向读者展示研究设计的整体结构。
+
+- depends_on_cn：依赖研究目标。
+
+- sets_up_cn：为后续研究方法章节提供预告。
+
+- evidence_pointer：Introduction P3 S3
+
+### 17. Introduction P3 S4
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P3 S4
+
+- move_code：RESULT
+
+- paraphrase_cn：现场实验显示，披露人工参与后顾客表现出更人向的沟通风格，并增加了员工工作量。
+
+- rhetorical_function_cn：在引言即给出核心结果。
+
+- depends_on_cn：依赖研究设计。
+
+- sets_up_cn：为机制在线实验做引子。
+
+- evidence_pointer：Introduction P3 S4
+
+### 18. Introduction P3 S5
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P3 S5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：在线实验揭示该效应由印象管理担忧驱动。
+
+- rhetorical_function_cn：列出核心机制。
+
+- depends_on_cn：依赖现场实验结果。
+
+- sets_up_cn：为理论部分和在线实验章节服务。
+
+- evidence_pointer：Introduction P3 S5
+
+### 19. Introduction P3 S6
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P3 S6
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者说进行多项稳健性检验以排除备择解释，结果在不同分析方法和子样本中稳定。
+
+- rhetorical_function_cn：提前告诉读者结果并非脆弱。
+
+- depends_on_cn：依赖核心结果。
+
+- sets_up_cn：为稳健性检验章节做预告。
+
+- evidence_pointer：Introduction P3 S6
+
+### 20. Introduction P4 S1
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出三点贡献：IT服务接触文献、AI服务自动化文献和HCI文献。
+
+- rhetorical_function_cn：建立论文的贡献地图。
+
+- depends_on_cn：依赖全文研究设计和结果。
+
+- sets_up_cn：为讨论部分的贡献段落提供提纲。
+
+- evidence_pointer：Introduction P4 S1
+
+### 21. Section 2 P1 S1
+
+- order：21
+
+- section：Related Literature
+
+- locator：Section 2 P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：IS服务接触研究长期关注IT自助服务和IT中介服务，以及渠道选择和互动。
+
+- rhetorical_function_cn：总结已有文献主线。
+
+- depends_on_cn：无直接依赖。
+
+- sets_up_cn：后文指出该主线未覆盖混合服务界面。
+
+- evidence_pointer：Section 2 P1 S1
+
+### 22. Section 2 P1 S2
+
+- order：22
+
+- section：Related Literature
+
+- locator：Section 2 P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：很少有研究考察混合服务界面和顾客对其的反应。
+
+- rhetorical_function_cn：指出第一个文献缺口。
+
+- depends_on_cn：依赖文献主线。
+
+- sets_up_cn：为研究动机提供依据。
+
+- evidence_pointer：Section 2 P1 S2
+
+### 23. Section 2 P2 S1
+
+- order：23
+
+- section：Related Literature
+
+- locator：Section 2 P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：新兴研究用AI聊天机器人自动化重复客服任务，以释放员工。
+
+- rhetorical_function_cn：引入AI服务自动化文献。
+
+- depends_on_cn：依赖上一段服务接触背景。
+
+- sets_up_cn：说明聊天机器人仍需人类介入。
+
+- evidence_pointer：Section 2 P2 S1
+
+### 24. Section 2 P2 S2
+
+- order：24
+
+- section：Related Literature
+
+- locator：Section 2 P2 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：聊天机器人面对复杂问题时企业常保留人类在环路中，形成混合服务代理。
+
+- rhetorical_function_cn：引出论文核心概念。
+
+- depends_on_cn：依赖AI自动化文献。
+
+- sets_up_cn：为后续定义和假设做概念铺垫。
+
+- evidence_pointer：Section 2 P2 S2
+
+### 25. Section 2 P3 S1
+
+- order：25
+
+- section：Related Literature
+
+- locator：Section 2 P3 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：HCI研究比较人机与人-聊天机器人互动，发现人们在与人类互动时投入更多时间和努力、使用不同词汇和人格表现。
+
+- rhetorical_function_cn：总结人机互动差异的既有知识。
+
+- depends_on_cn：无直接依赖。
+
+- sets_up_cn：为audience design的应用提供基础。
+
+- evidence_pointer：Section 2 P3 S1
+
+### 26. Section 2 P3 S2
+
+- order：26
+
+- section：Related Literature
+
+- locator：Section 2 P3 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：文献用能力/温暖感知和期望机制解释人与聊天机器人的互动差异。
+
+- rhetorical_function_cn：列出已有解释机制。
+
+- depends_on_cn：依赖前一句的互动差异。
+
+- sets_up_cn：后文将这些机制作为竞争解释加以排除。
+
+- evidence_pointer：Section 2 P3 S2
+
+### 27. Section 2 P3 S3
+
+- order：27
+
+- section：Related Literature
+
+- locator：Section 2 P3 S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：近期研究转向聊天机器人身份披露，显示披露降低购买率、信任和服务评价，但顾客也讨厌被冒充真人。
+
+- rhetorical_function_cn：概括披露研究的正反面结果。
+
+- depends_on_cn：依赖人机差异研究。
+
+- sets_up_cn：为“人工参与披露未被研究”提供对比。
+
+- evidence_pointer：Section 2 P3 S3
+
+### 28. Section 2 P4 S1
+
+- order：28
+
+- section：Related Literature
+
+- locator：Section 2 P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：作者指出两个缺口：研究多集中在纯人工或纯技术渠道，鲜有混合服务代理；披露研究只关注聊天机器人身份，未关注人工参与披露。
+
+- rhetorical_function_cn：形成论文的核心研究缺口。
+
+- depends_on_cn：依赖整节文献综述。
+
+- sets_up_cn：直接引出本文研究任务。
+
+- evidence_pointer：Section 2 P4 S1
+
+### 29. Section 2 P4 S2
+
+- order：29
+
+- section：Related Literature
+
+- locator：Section 2 P4 S2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：混合服务代理日益普遍，顾客互动可能涉及聊天机器人、员工或两者，因此该缺口重要。
+
+- rhetorical_function_cn：说明缺口在实践和理论上的重要性。
+
+- depends_on_cn：依赖前一句缺口。
+
+- sets_up_cn：为研究问题提供正当性。
+
+- evidence_pointer：Section 2 P4 S2
+
+### 30. Section 3 intro P1 S1
+
+- order：30
+
+- section：Theory Development
+
+- locator：Section 3 intro P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告研究模型：结果变量为沟通风格和员工工作量，机制为印象管理担忧，并且区分前置与接替披露。
+
+- rhetorical_function_cn：给出全文假设框架的路线图。
+
+- depends_on_cn：依赖引言和文献缺口。
+
+- sets_up_cn：为H1-H5排列顺序服务。
+
+- evidence_pointer：Section 3 intro, Figure 1
+
+### 31. Section 3.1 P1 S1
+
+- order：31
+
+- section：Theory Development
+
+- locator：Section 3.1 P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：沟通风格指在文本沟通中人们如何组织信息，而受众设计理论认为人会根据听众调整风格。
+
+- rhetorical_function_cn：引入核心理论。
+
+- depends_on_cn：依赖前文HCI差异研究。
+
+- sets_up_cn：为H1的推导提供机制。
+
+- evidence_pointer：Section 3.1 P1 S1
+
+### 32. Section 3.1 P2 S1
+
+- order：32
+
+- section：Theory Development
+
+- locator：Section 3.1 P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：没有披露时，顾客会把对方当作聊天机器人，因而采用简短、任务导向、命令式的沟通。
+
+- rhetorical_function_cn：设定基准沟通风格。
+
+- depends_on_cn：依赖受众设计理论。
+
+- sets_up_cn：为披露后的对比提供参照。
+
+- evidence_pointer：Section 3.1 P2 S1
+
+### 33. Section 3.1 P3 S1
+
+- order：33
+
+- section：Theory Development
+
+- locator：Section 3.1 P3 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：前置披露让顾客意识到受众中有“旁听”的员工，即使员工不一定实际介入，也会促使顾客调整沟通风格。
+
+- rhetorical_function_cn：把理论命题导向前置披露假设。
+
+- depends_on_cn：依赖auditor概念。
+
+- sets_up_cn：为H1铺路。
+
+- evidence_pointer：Section 3.1 P3 S1
+
+### 34. Section 3.1 P4 S1
+
+- order：34
+
+- section：Theory Development
+
+- locator：Section 3.1 P4 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：前置HID相对无披露会使顾客展现更面向人的沟通风格。
+
+- rhetorical_function_cn：提出第一个可检验假设。
+
+- depends_on_cn：依赖受众设计推导。
+
+- sets_up_cn：进入接替披露的讨论。
+
+- evidence_pointer：Section 3.1, Hypothesis 1
+
+### 35. Section 3.1 P5 S1
+
+- order：35
+
+- section：Theory Development
+
+- locator：Section 3.1 P5 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：接替披露让顾客清楚看到自己有两个直接听众，因此更会按人类听众的标准调整语言。
+
+- rhetorical_function_cn：把受众设计理论应用于接替披露。
+
+- depends_on_cn：依赖多听众沟通研究。
+
+- sets_up_cn：为H2铺垫。
+
+- evidence_pointer：Section 3.1 P5 S1
+
+### 36. Section 3.1 P6 S1
+
+- order：36
+
+- section：Theory Development
+
+- locator：Section 3.1 P6 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2：接替HID相对无接替披露会使顾客展现更面向人的沟通风格。
+
+- rhetorical_function_cn：提出第二个假设。
+
+- depends_on_cn：依赖前一句的理论推导。
+
+- sets_up_cn：进入下游工作量假设。
+
+- evidence_pointer：Section 3.1, Hypothesis 2
+
+### 37. Section 3.2 P1 S1
+
+- order：37
+
+- section：Theory Development
+
+- locator：Section 3.2 P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：人-AI协作需要在任务实例层面有有效委派机制，混合服务代理的委派率决定员工工作量。
+
+- rhetorical_function_cn：引入委派机制知识。
+
+- depends_on_cn：依赖人-AI协作文献。
+
+- sets_up_cn：为沟通风格影响工作量提供机制。
+
+- evidence_pointer：Section 3.2 P1 S1
+
+### 38. Section 3.2 P2 S1
+
+- order：38
+
+- section：Theory Development
+
+- locator：Section 3.2 P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：更冗长、更自然的语言会让聊天机器人更难理解，从而提高消息被转给人类的概率。
+
+- rhetorical_function_cn：建立沟通风格到工作量的因果机制。
+
+- depends_on_cn：依赖NLP局限研究。
+
+- sets_up_cn：为H3提供依据。
+
+- evidence_pointer：Section 3.2 P2 S1
+
+### 39. Section 3.2 P3 S1
+
+- order：39
+
+- section：Theory Development
+
+- locator：Section 3.2 P3 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H3：顾客更面向人的沟通风格会增加员工工作量。
+
+- rhetorical_function_cn：提出下游后果假设。
+
+- depends_on_cn：依赖委派机制和NLP局限。
+
+- sets_up_cn：进入中介机制部分。
+
+- evidence_pointer：Section 3.2, Hypothesis 3
+
+### 40. Section 3.3 P1 S1
+
+- order：40
+
+- section：Theory Development
+
+- locator：Section 3.3 P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：社会心理学表明人普遍在意他人评价，甚至在没有实际后果时也渴望被正面看待。
+
+- rhetorical_function_cn：引入印象管理理论。
+
+- depends_on_cn：依赖社会心理学文献。
+
+- sets_up_cn：为中介假设提供理论依据。
+
+- evidence_pointer：Section 3.3 P1 S1
+
+### 41. Section 3.3 P2 S1
+
+- order：41
+
+- section：Theory Development
+
+- locator：Section 3.3 P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：与机器互动时印象管理担忧较低，所以低担忧是聊天机器人互动的一个特征。
+
+- rhetorical_function_cn：建立披露的对比基点。
+
+- depends_on_cn：依赖印象管理理论。
+
+- sets_up_cn：为披露激活担忧的假设铺垫。
+
+- evidence_pointer：Section 3.3 P2 S1
+
+### 42. Section 3.3 P3 S1
+
+- order：42
+
+- section：Theory Development
+
+- locator：Section 3.3 P3 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：披露人工参与会增加顾客的印象管理担忧，即使没有员工实际介入，仅仅是“可能被读”也足以激活这种担忧。
+
+- rhetorical_function_cn：核心机制命题。
+
+- depends_on_cn：依赖前一句的低担忧基准。
+
+- sets_up_cn：支撑H4/H5。
+
+- evidence_pointer：Section 3.3 P3 S1
+
+### 43. Section 3.3 P4 S1
+
+- order：43
+
+- section：Theory Development
+
+- locator：Section 3.3 P4 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H4和H5：前置和接替HID对沟通风格的影响由印象管理担忧中介。
+
+- rhetorical_function_cn：提出两个中介假设。
+
+- depends_on_cn：依赖核心机制命题。
+
+- sets_up_cn：为在线实验的检验提供结构。
+
+- evidence_pointer：Section 3.3, Hypotheses 4 and 5
+
+### 44. Section 4 intro P1 S1
+
+- order：44
+
+- section：Randomized Field Experiment
+
+- locator：Section 4 intro P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者与跨国电信公司合作，在其已上线、自称是聊天机器人的混合服务代理上开展实验。
+
+- rhetorical_function_cn：介绍真实实验场景。
+
+- depends_on_cn：依赖理论假设。
+
+- sets_up_cn：为方法细节做铺垫。
+
+- evidence_pointer：Section 4 intro P1 S1
+
+### 45. Section 4.1.1 P1 S1
+
+- order：45
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.1.1 P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验使用2×2因子设计，前置HID在欢迎语末尾加入披露语句，接替HID在转接消息中加入披露语句。
+
+- rhetorical_function_cn：给出关键设计操纵。
+
+- depends_on_cn：依赖H1/H2的时机区分。
+
+- sets_up_cn：为操纵检查和结果分析提供条件基础。
+
+- evidence_pointer：Section 4.1.1
+
+### 46. Section 4.1.2 P1 S1
+
+- order：46
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.1.2 P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者进行独立操纵检查，用四个视频版本让参与者报告感知到的人工参与。
+
+- rhetorical_function_cn：证明处理有效。
+
+- depends_on_cn：依赖实验设计。
+
+- sets_up_cn：为解释现场结果提供操纵效度。
+
+- evidence_pointer：Section 4.1.2
+
+### 47. Section 4.1.3 P1 S1
+
+- order：47
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.1.3 P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：聊天机器人用意图识别置信度阈值0.95决定自动回复还是转人工；员工可确认、编辑或重写建议回复。
+
+- rhetorical_function_cn：描述混合服务代理的委派机制。
+
+- depends_on_cn：依赖公司已有系统。
+
+- sets_up_cn：为工作量测量和H3检验提供客观机制。
+
+- evidence_pointer：Section 4.1.3
+
+### 48. Section 4.1.4 P1 S1
+
+- order：48
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.1.4 P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：沟通风格用冗长性、复杂度、密度三个指标形成潜变量，工作量用频率、时长、强度三个指标形成潜变量。
+
+- rhetorical_function_cn：说明结果变量的测量方法。
+
+- depends_on_cn：依赖此前人机沟通差异研究。
+
+- sets_up_cn：为SEM分析做测量基础。
+
+- evidence_pointer：Section 4.1.4
+
+### 49. Section 4.2.2 P1 S1
+
+- order：49
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.2 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：SEM结果显示前置和接替HID均显著提高沟通风格，沟通风格显著增加员工工作量，交互不显著。
+
+- rhetorical_function_cn：报告核心假设检验。
+
+- depends_on_cn：依赖测量模型和结构模型。
+
+- sets_up_cn：为随后的中介分析和稳健性做基础。
+
+- evidence_pointer：Section 4.2.2, Table 3
+
+### 50. Section 4.2.2 P2 S1
+
+- order：50
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.2 P2 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：SEM中介分析显示前置和接替HID通过沟通风格对工作量的间接效应均显著。
+
+- rhetorical_function_cn：将主效应连接为因果链。
+
+- depends_on_cn：依赖主效应路径。
+
+- sets_up_cn：强化理论模型的整体支持。
+
+- evidence_pointer：Section 4.2.2, Online Appendix A.6
+
+### 51. Section 4.2.3 P1 S1
+
+- order：51
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.3 P1 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者用回归式LATE处理接替披露的单侧不依从，结果与SEM一致。
+
+- rhetorical_function_cn：证明结果不受分析方法选择影响。
+
+- depends_on_cn：依赖主分析和不依从结构。
+
+- sets_up_cn：为排除备择解释的后续段落做铺垫。
+
+- evidence_pointer：Section 4.2.3, Online Appendix A.7
+
+### 52. Section 4.2.3 P2 S1
+
+- order：52
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.3 P2 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：额外在线实验用中性措辞与原披露措辞比较，结果显示两者无显著差异。
+
+- rhetorical_function_cn：排除文本暗示机器人能力不足的备择解释。
+
+- depends_on_cn：依赖核心结果。
+
+- sets_up_cn：支持“披露本身是原因”。
+
+- evidence_pointer：Section 4.2.3, Online Appendix A.8
+
+### 53. Section 4.2.3 P3 S1
+
+- order：53
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.3 P3 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：员工行为与语言在不同条件间无系统差异，加入语言相似度控制后结果不变。
+
+- rhetorical_function_cn：排除员工语言变化的备择解释。
+
+- depends_on_cn：依赖员工操作数据。
+
+- sets_up_cn：进一步巩固因果归因。
+
+- evidence_pointer：Section 4.2.3, Online Appendix A.9
+
+### 54. Section 4.2.3 P4 S1
+
+- order：54
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.3 P4 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：人工编码问题解决分数，跨条件无显著差异，加入控制后结果仍不变。
+
+- rhetorical_function_cn：排除“无披露组因没解决问题而更用力沟通”的替代解释。
+
+- depends_on_cn：依赖人工编码数据。
+
+- sets_up_cn：支持测量到的沟通风格差异不是问题解决状态造成。
+
+- evidence_pointer：Section 4.2.3, Online Appendix A.10
+
+### 55. Section 4.2.3 P5 S1
+
+- order：55
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.3 P5 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：用接替披露次数替代二分处理变量，结果显示披露次数越多效应越强。
+
+- rhetorical_function_cn：处理重复披露的剂量效应，再次支持主效应。
+
+- depends_on_cn：依赖现场披露次数数据。
+
+- sets_up_cn：为稳健性小结提供额外证据。
+
+- evidence_pointer：Section 4.2.3, Online Appendix A.11
+
+### 56. Section 4.2.4 P1 S1
+
+- order：56
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.4 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：前置披露下顾客更可能主动请求人工介入，尽管总体上请求很少。
+
+- rhetorical_function_cn：扩展结果到另一行为维度。
+
+- depends_on_cn：依赖现场聊天文本标注。
+
+- sets_up_cn：为算法厌恶等未来研究留出空间。
+
+- evidence_pointer：Section 4.2.4, Online Appendix A.13
+
+### 57. Section 4.2.4 P2 S1
+
+- order：57
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.4 P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：有披露的互动平均长约一分钟。
+
+- rhetorical_function_cn：补充沟通长度后果。
+
+- depends_on_cn：依赖聊天时长数据。
+
+- sets_up_cn：指出效率影响。
+
+- evidence_pointer：Section 4.2.4, Online Appendix A.14
+
+### 58. Section 4.2.4 P3 S1
+
+- order：58
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.4 P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：前置HID显著降低顾客情绪，但未澄清原因。
+
+- rhetorical_function_cn：补充情感结果并指出机制不明。
+
+- depends_on_cn：依赖自动情绪分析。
+
+- sets_up_cn：为讨论中的未来研究铺垫。
+
+- evidence_pointer：Section 4.2.4, Online Appendix A.15
+
+### 59. Section 4.2.4 P4 S1
+
+- order：59
+
+- section：Randomized Field Experiment
+
+- locator：Section 4.2.4 P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：披露带来的额外工作量使人力成本增加38–70%。
+
+- rhetorical_function_cn：把工作量转化为财务成本。
+
+- depends_on_cn：依赖工作量估计和公司成本数据。
+
+- sets_up_cn：为实践含义和成本讨论提供证据。
+
+- evidence_pointer：Section 4.2.4, Online Appendix A.16
+
+### 60. Section 5 intro P1 S1
+
+- order：60
+
+- section：Controlled Online Experiment
+
+- locator：Section 5 intro P1 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：在线实验有三个目标：复制现场结果、检验印象管理中介、排除备择解释。
+
+- rhetorical_function_cn：承接现场实验并预告在线实验的论证任务。
+
+- depends_on_cn：依赖现场实验结果和未解机制。
+
+- sets_up_cn：为在线实验方法章节提供路线图。
+
+- evidence_pointer：Section 5 intro P1 S1
+
+### 61. Section 5.1.1 P1 S1
+
+- order：61
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.1.1 P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：在线实验使用与现场相同的2×2设计和相同披露语句，无披露组用等长中性语句。
+
+- rhetorical_function_cn：确保跨实验可比性。
+
+- depends_on_cn：依赖现场实验设计。
+
+- sets_up_cn：为复制效应提供条件。
+
+- evidence_pointer：Section 5.1.1
+
+### 62. Section 5.1.2 P1 S1
+
+- order：62
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.1.2 P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实验被框架为真实平台测试，所有参与者收到同一超额账单问题，聊天由自定义聊天机器人完成，不请人类同谋。
+
+- rhetorical_function_cn：说明如何在受控条件下提高可比性和内部效度。
+
+- depends_on_cn：依赖实验目标。
+
+- sets_up_cn：为测量沟通风格和中介变量提供干净环境。
+
+- evidence_pointer：Section 5.1.2
+
+### 63. Section 5.1.4 P1 S1
+
+- order：63
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.1.4 P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：在线实验用三指标测量沟通风格，用公共自我意识量表测量印象管理担忧。
+
+- rhetorical_function_cn：说明核心变量的测量。
+
+- depends_on_cn：依赖现场测量和量表文献。
+
+- sets_up_cn：为中介分析提供测量基础。
+
+- evidence_pointer：Section 5.1.4
+
+### 64. Section 5.1.5 P1 S1
+
+- order：64
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.1.5 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：操纵检查显示披露条件感知人工参与更高，同时所有条件的直接互动对象都被感知为聊天机器人。
+
+- rhetorical_function_cn：确认操纵有效且顾客没有误以为直接对象是真人。
+
+- depends_on_cn：依赖调查数据。
+
+- sets_up_cn：使后续效应可归因于披露而非身份混淆。
+
+- evidence_pointer：Section 5.1.5
+
+### 65. Section 5.2.1 P1 S1
+
+- order：65
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.2.1 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：在线实验复制了现场效应：前置和接替HID均显著提高沟通风格，交互不显著。
+
+- rhetorical_function_cn：提供直接效应的受控复制。
+
+- depends_on_cn：依赖完整在线实验数据。
+
+- sets_up_cn：为中介分析提供有效基础。
+
+- evidence_pointer：Section 5.2.1
+
+### 66. Section 5.2.2 P1 S1
+
+- order：66
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.2.2 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：中介分析显示HID显著提高印象管理担忧，印象管理担忧显著提高沟通风格，间接效应显著。
+
+- rhetorical_function_cn：检验H4/H5，揭示心理机制。
+
+- depends_on_cn：依赖在线实验测量。
+
+- sets_up_cn：为讨论中的理论贡献提供核心证据。
+
+- evidence_pointer：Section 5.2.2, Table 5
+
+### 67. Section 5.2.3 P1 S1
+
+- order：67
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.2.3 P1 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：主动寻求人工、感知能力和温暖等替代机制都不能解释效应。
+
+- rhetorical_function_cn：排除竞争性心理机制。
+
+- depends_on_cn：依赖在线实验替代模型分析。
+
+- sets_up_cn：支持印象管理担忧的唯一性。
+
+- evidence_pointer：Section 5.2.3, Online Appendix B.5
+
+### 68. Section 5.2.3 P2 S1
+
+- order：68
+
+- section：Controlled Online Experiment
+
+- locator：Section 5.2.3 P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：开放题内容分析显示大多数参与者希望被告知人工参与，隐瞒会让他们感到被骗并失去信任。
+
+- rhetorical_function_cn：补充顾客透明需求的定性证据。
+
+- depends_on_cn：依赖开放题数据。
+
+- sets_up_cn：为讨论中的透明与政策启示提供依据。
+
+- evidence_pointer：Section 5.2.3, Online Appendix B.6
+
+### 69. Section 6 P1 S1
+
+- order：69
+
+- section：Discussion
+
+- locator：Section 6 P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：讨论开头总结核心发现：HID显著改变顾客沟通方式，由印象管理担忧驱动，并增加员工工作量。
+
+- rhetorical_function_cn：把摘要和结果压缩成回答研究问题的总结。
+
+- depends_on_cn：依赖两项实验全部结果。
+
+- sets_up_cn：为贡献和实践含义展开做铺垫。
+
+- evidence_pointer：Section 6 P1 S1
+
+### 70. Section 6.1 P1 S1
+
+- order：70
+
+- section：Discussion
+
+- locator：Section 6.1 P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第一项贡献：把IT服务接触研究扩展到人工与AI共用单界面的混合服务代理。
+
+- rhetorical_function_cn：把结果归入第一个文献流。
+
+- depends_on_cn：依赖结果与文献缺口。
+
+- sets_up_cn：随后两项贡献并列展开。
+
+- evidence_pointer：Section 6.1 P1 S1
+
+### 71. Section 6.1 P2 S1
+
+- order：71
+
+- section：Discussion
+
+- locator：Section 6.1 P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第二项贡献：揭示透明的人工参与披露可能增加委派工作量，削弱AI解放员工的潜力。
+
+- rhetorical_function_cn：把工作负荷结果提升为AI自动化文献的贡献。
+
+- depends_on_cn：依赖H3和成本分析。
+
+- sets_up_cn：支持更广泛的设计知识。
+
+- evidence_pointer：Section 6.1 P2 S1
+
+### 72. Section 6.1 P3 S1
+
+- order：72
+
+- section：Discussion
+
+- locator：Section 6.1 P3 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第三项贡献：在HCI文献中提出印象管理担忧是混合服务代理互动中的关键心理机制。
+
+- rhetorical_function_cn：把中介机制归入HCI理论贡献。
+
+- depends_on_cn：依赖在线实验中介结果。
+
+- sets_up_cn：为讨论中能力/温暖机制不足做结论。
+
+- evidence_pointer：Section 6.1 P3 S1
+
+### 73. Section 6.2 P1 S1
+
+- order：73
+
+- section：Discussion
+
+- locator：Section 6.2 P1 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：管理者面临披露两难：披露触发不良行为和工作量，但不披露可能招致顾客和公众反感。
+
+- rhetorical_function_cn：把实证结果转译为管理决策困境。
+
+- depends_on_cn：依赖所有实证结果和定性透明需求。
+
+- sets_up_cn：引出缓解措施和监管建议。
+
+- evidence_pointer：Section 6.2 P1 S1
+
+### 74. Section 6.2 P2 S1
+
+- order：74
+
+- section：Discussion
+
+- locator：Section 6.2 P2 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：作者建议管理者训练聊天机器人理解自然语言、临时增员、用幽默语句降低顾客印象管理担忧、限制消息长度。
+
+- rhetorical_function_cn：给出可操作实践建议。
+
+- depends_on_cn：依赖机制理解。
+
+- sets_up_cn：为实践部分提供可执行内容。
+
+- evidence_pointer：Section 6.2 P2 S1
+
+### 75. Section 6.2 P3 S1
+
+- order：75
+
+- section：Discussion
+
+- locator：Section 6.2 P3 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：作者呼吁政策制定者建立监管框架，类似电话录音披露法律。
+
+- rhetorical_function_cn：从企业实践提升到政策议题。
+
+- depends_on_cn：依赖伦理和实证后果。
+
+- sets_up_cn：为结论收尾。
+
+- evidence_pointer：Section 6.2 P3 S1
+
+### 76. Section 6.3 P1 S1
+
+- order：76
+
+- section：Discussion
+
+- locator：Section 6.3 P1 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认主要从顾客视角研究，建议未来关注员工感受和算法管理。
+
+- rhetorical_function_cn：明确边界并引导未来研究。
+
+- depends_on_cn：依赖研究范围。
+
+- sets_up_cn：为后续限制段落展开。
+
+- evidence_pointer：Section 6.3 P1 S1
+
+### 77. Section 6.3 P4 S1
+
+- order：77
+
+- section：Discussion
+
+- locator：Section 6.3 P4 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：随着NLP和大语言模型进步，沟通风格对工作量的影响可能减弱。
+
+- rhetorical_function_cn：给结论加上技术时间边界。
+
+- depends_on_cn：依赖当前聊天机器人技术的有限性。
+
+- sets_up_cn：促使未来研究大语言模型聊天机器人。
+
+- evidence_pointer：Section 6.3 P4 S1
+
+### 78. Section 6.3 P5 S1
+
+- order：78
+
+- section：Discussion
+
+- locator：Section 6.3 P5 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：大语言模型可能生成看似正确但错误的答案，未来需研究员工如何介入审校。
+
+- rhetorical_function_cn：把限制与未来研究结合。
+
+- depends_on_cn：依赖技术边界。
+
+- sets_up_cn：为结论留下开放问题。
+
+- evidence_pointer：Section 6.3 P5 S1
+
+### 79. Section 6.3 Final paragraph
+
+- order：79
+
+- section：Discussion
+
+- locator：Section 6.3 Final paragraph
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者称这项研究是理解顾客-混合服务代理互动和人工参与披露影响的第一步。
+
+- rhetorical_function_cn：收束全文，回扣文章标题和引言的问题。
+
+- depends_on_cn：依赖全文论证。
+
+- sets_up_cn：无后续章节，完成总结。
+
+- evidence_pointer：Section 6.3 Final paragraph
+
+## 写作技术
+
+- gap_construction_cn：作者不是简单说“没人研究”，而是把已充分研究的聊天机器人身份披露与未研究的混合服务代理人工参与披露并列，用Table 1列举此前披露研究只有chatbot identity或employee availability，没有HID；同时用政策法规（BOT bill、伦理指南）和“伪AI”媒体批评制造现实紧迫性，让缺口看起来既理论相关又有实践后果。
+
+- signposting_cn：引言末尾直接列出三点贡献；第3节开头用Figure 1展示研究模型；第4节开头说明要测哪些假设；稳健性段落每段先给出备择解释再给出排除证据；第5节开头列出在线实验三个目标；讨论部分每段对应一个贡献。
+
+- transition_logic_cn：从现场实验的“现实因果证据”到“需要机制证据”自然转入在线实验；从主效应到稳健性再到附加结果，用“虽然主结果支持，但仍需排除……”推动；讨论部分从结果总结转向三个文献贡献，再转到实践和政策，最后以局限和未来收尾。
+
+- claim_evidence_rhythm_cn：理论部分先给机制再给假设，结果部分先报测量模型再报路径系数，每段都紧跟统计证据；稳健性段落重复“可能解释→检验→排除”的节奏；贡献段落把已证实的路径重新表述为文献层面的主张，而不是直接宣称。
+
+- benchmark_narrative_cn：“无披露”是所有实验的常设基准；在线实验用等长中性语句作为措辞基线；稳健性分析中原始披露与中性版本对照，把benchmark从“有无披露”扩展到“披露内容本身”；两个实验的相互复制本身也是一种跨情境benchmark。
+
+- theory_return_cn：讨论开头用audience design解释为何披露改变沟通风格，用印象管理担忧解释心理机制，用委派机制解释工作量，随后在贡献部分把这三个机制分别放回IT服务接触、AI自动化和HCI文献，完成从具体实验到抽象理论的回归。
+
+- contribution_positioning_cn：每个贡献都明确对应一个文献流和该文献流的缺口；例如“之前研究IT自助/纯人工，未研究混合界面”“之前强调AI收益，未看到透明披露的隐性成本”“之前用能力/温暖解释，未识别印象管理”。这样贡献不是泛泛的“首次”，而是有明确参照系。
+
+- novelty_protection_cn：作者用双向复制、稳健性检验和竞争机制排除，避免结果被看作单一场合效应；同时把附加分析标记为探索性，防止贡献被过度解读；在限制部分承认技术变化，防止结论在AI快速进步下显得过时；在实践部分给出缓解措施，使披露不是简单“好”或“坏”，而是一种可管理的设计权衡。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：在引言中建立现象、政策背景和已有文献，把一般问题收窄为“是否披露人工参与”的可研究缺口。
+
+- research_job_cn：定义核心概念（混合服务代理、HID），用文献表和实例说明缺口。
+
+- required_evidence_cn：有真实平台采用该现象、政策/法规文本、或商业案例作为证据。
+
+- transition_to_next_cn：从缺口直接引出研究问题和研究模型预告。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用相邻理论（audience design、印象管理、委派机制）推导假设，给出研究模型图。
+
+- research_job_cn：明确自变量、因变量、中介变量和各自的构成指标。
+
+- required_evidence_cn：每个假设都能从文献中提取可检验的因果链条。
+
+- transition_to_next_cn：假设提出后自然进入实验设计部分。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述真实平台现场实验：合作方、2×2实验设计、披露语句、随机分配、数据采集。
+
+- research_job_cn：在真实系统中加入最小干预，确保随机分配并采集聊天和员工日志。
+
+- required_evidence_cn：操纵检查证明处理有效；分组平衡或随机化证据。
+
+- transition_to_next_cn：从操纵有效性转向主模型检验。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用SEM报告测量模型和结构模型，随后用稳健性检验逐项排除备择解释。
+
+- research_job_cn：用潜变量建模、固定效应、控制变量、LATE等处理数据。
+
+- required_evidence_cn：主效应显著，且稳健性分析不推翻主结论。
+
+- transition_to_next_cn：“真实效应已确立，但机制未知”转入在线实验。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告在线实验：相同设计和处理、模拟真实场景、测量中介变量、复制直接效应。
+
+- research_job_cn：在受控条件下复制结果并测量机制，同时避免人类同谋等混淆。
+
+- required_evidence_cn：在线实验的直接效应复制成功；中介间接效应显著。
+
+- transition_to_next_cn：机制已确认，用附加分析和内容分析补充支持。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告附加分析（主动求人工、时长、情绪、成本）、替代机制比较和定性内容分析。
+
+- research_job_cn：扩展业务相关结果，检验竞争机制，收集顾客态度。
+
+- required_evidence_cn：附加结果应与主机制一致，且不能产生新矛盾。
+
+- transition_to_next_cn：从证据转向理论贡献和实践含义。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：讨论部分用结果回答引言缺口，分三条贡献对应文献流，再给出经理和政策含义，最后界限和未来。
+
+- research_job_cn：把具体披露设计提升为一般的设计知识、理论机制和边界条件。
+
+- required_evidence_cn：讨论中的主张都需能回溯到前述实验或稳健性证据。
+
+- transition_to_next_cn：结论一句回扣标题和主题。
+
+### most_transferable_moves_cn
+
+1. 用表格系统梳理已有披露研究并高亮“本研究”所在空位
+
+2. 两研究设计：现场实验提供生态效度，在线实验提供机制和内部效度
+
+3. 在每个稳健性段落先明确备择解释再给出排除证据
+
+4. 把附加分析明确标记为探索性，以保护核心贡献
+
+5. 在讨论前先给出研究模型图，使假设和结果一一对应
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 与跨国电信公司合作，需进入真实客服系统并运行两周现场实验
+
+2. 能采集顾客聊天全文本和员工操作日志，涉及数据隐私和匿名化
+
+3. 需要公司提供意图识别置信度阈值和员工操作细节以构建工作量指标
+
+4. 受控在线实验需要自建聊天机器人并用延迟模拟人工介入
+
+5. 成本估算依赖公司内部成本数据
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“披露改变沟通”而没有真实/受控实验和操纵检查
+
+2. 不能把在线自报印象管理担忧直接当作现场机制证据
+
+3. 不能把探索性附加结果当作确认性贡献
+
+4. 不能忽视单侧不依从而简单对比接替披露条件
+
+5. 不能把结论推广到语音、其他行业或大语言模型时代而不用新的证据
+
+- single_best_description_of_the_routine_cn：用现场实验证明因果效应、用在线实验解锁心理机制、用稳健性检验清扫备择解释，最后在讨论中把具体披露设计提升为关于人机混合服务透明度的设计知识。
+
+## 分析边界
+
+输入为文章全文文本，未包含在线附录A.1–B.6的具体量表、截图和成本估算公式；部分稳健性检验和测量细节只能基于正文转述。表格数值在复制粘贴中有少量OCR/排版噪声，如p值、M、SD符号，但不影响结构和结论判断。

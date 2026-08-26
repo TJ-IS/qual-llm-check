@@ -1,0 +1,620 @@
+{
+  "source_records": 807,
+  "recent_records_2021plus": 176,
+  "screening_reference": {
+    "likely_direct": 30,
+    "possible_direct": 3
+  },
+  "variants": {
+    "Q1_title_high_precision": {
+      "fields": [
+        "Title"
+      ],
+      "all_807_hits": 56,
+      "recent_176_hits": 15,
+      "likely_direct_30_hits": 9,
+      "likely_direct_recall": 0.3,
+      "possible_direct_3_hits": 0,
+      "inclusive_33_hits": 9,
+      "inclusive_recall": 0.2727272727272727,
+      "recent_not_direct_hits": 6,
+      "likely_direct_precision_proxy": 0.6,
+      "missed_likely_direct": [
+        {
+          "title": "DevTales: A Tool for Providing Narrative Code Histories into Developer Workflows",
+          "year": "2025",
+          "source": "Proceedings of IEEE Symposium on Visual Languages and Human-Centric Computing, VL/HCC",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Eye-movement indices of reading while debugging Python source code",
+          "year": "2025",
+          "source": "Journal of Cognitive Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Low-code Development Productivity",
+          "year": "2023",
+          "source": "Queue",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Do developer perceptions have borders? Comparing C code responses across continents",
+          "year": "2024",
+          "source": "Software Quality Journal",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Readable vs.Writable code: A Survey of Intermediate Students' Structure Choices",
+          "year": "2022",
+          "source": "SIGCSE 2022 - Proceedings of the 53rd ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Effect of semantic distance on learning structured query language: An empirical study",
+          "year": "2022",
+          "source": "Frontiers in Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Follow-Up Attention: An Empirical Study of Developer and Neural Model Code Exploration",
+          "year": "2024",
+          "source": "IEEE Transactions on Software Engineering",
+          "actor_type": "human_ai"
+        },
+        {
+          "title": "Are we too focused on single query language? Investigating text-to-SQL/SPARQL/Cypher task complexity via fine-tuning unbiased T5 models",
+          "year": "2026",
+          "source": "Neurocomputing",
+          "actor_type": "agent_only"
+        },
+        {
+          "title": "Growth in Knowledge of Programming Patterns: A Comparison Study of CS1 vs. CS2 Students",
+          "year": "2024",
+          "source": "SIGCSE 2024 - Proceedings of the 55th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "An interview study of how developers use execution logs in embedded software engineering",
+          "year": "2021",
+          "source": "Proceedings - International Conference on Software Engineering",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Unravelling the Computational Thinking and Spatial Thinking Development: An Exploration of a Virtual Robot Programming Environment",
+          "year": "2025",
+          "source": "Journal of Computer Assisted Learning",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Error messages in relational database management systems: A comparison of effectiveness, usefulness, and user confidence",
+          "year": "2021",
+          "source": "Journal of Systems and Software",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Integrating a graph builder into python tutor",
+          "year": "2021",
+          "source": "OpenAccess Series in Informatics",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Ivie: Lightweight Anchored Explanations of Just-Generated Code",
+          "year": "2024",
+          "source": "Conference on Human Factors in Computing Systems - Proceedings",
+          "actor_type": "human_ai"
+        },
+        {
+          "title": "Investigating the Effects of Testing Frequency on Programming Performance and Students' Behavior",
+          "year": "2023",
+          "source": "SIGCSE 2023 - Proceedings of the 54th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Identifying Code Reading Strategies in Debugging using STA with a Tolerance Algorithm",
+          "year": "2022",
+          "source": "APSIPA Transactions on Signal and Information Processing",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Evaluating Logical Structure in Computer Programs Using LLMs",
+          "year": "2026",
+          "source": "Proceedings of the International Florida Artificial Intelligence Research Society Conference, FLAIRS",
+          "actor_type": "human_ai"
+        },
+        {
+          "title": "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course",
+          "year": "2022",
+          "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "FxD: a functional debugger for dysfunctional spreadsheets",
+          "year": "2023",
+          "source": "Proceedings of IEEE Symposium on Visual Languages and Human-Centric Computing, VL/HCC",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "A mental model approach to teaching database querying skills with SQL and Alteryx",
+          "year": "2023",
+          "source": "Journal of Accounting Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Implementation of Test-Driven Approach to Empower Self-Learning in PHP Web Programming Practice",
+          "year": "2025",
+          "source": "International Journal of Computing",
+          "actor_type": "human_only"
+        }
+      ],
+      "missed_possible_direct": [
+        {
+          "title": "Systematically reusing low‐code IT artefacts; A technological and managerial approach",
+          "year": "2023",
+          "source": "CEUR Workshop Proceedings"
+        },
+        {
+          "title": "Low-Code Versus Code-Based Software Development: Which Wins the Productivity Game?",
+          "year": "2022",
+          "source": "IT Professional"
+        },
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    },
+    "Q1_title_abstract_keywords": {
+      "fields": [
+        "Title",
+        "Abstract",
+        "Author Keywords",
+        "Index Keywords"
+      ],
+      "all_807_hits": 100,
+      "recent_176_hits": 30,
+      "likely_direct_30_hits": 19,
+      "likely_direct_recall": 0.6333333333333333,
+      "possible_direct_3_hits": 0,
+      "inclusive_33_hits": 19,
+      "inclusive_recall": 0.5757575757575758,
+      "recent_not_direct_hits": 11,
+      "likely_direct_precision_proxy": 0.6333333333333333,
+      "missed_likely_direct": [
+        {
+          "title": "Eye-movement indices of reading while debugging Python source code",
+          "year": "2025",
+          "source": "Journal of Cognitive Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Low-code Development Productivity",
+          "year": "2023",
+          "source": "Queue",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Effect of semantic distance on learning structured query language: An empirical study",
+          "year": "2022",
+          "source": "Frontiers in Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Follow-Up Attention: An Empirical Study of Developer and Neural Model Code Exploration",
+          "year": "2024",
+          "source": "IEEE Transactions on Software Engineering",
+          "actor_type": "human_ai"
+        },
+        {
+          "title": "Are we too focused on single query language? Investigating text-to-SQL/SPARQL/Cypher task complexity via fine-tuning unbiased T5 models",
+          "year": "2026",
+          "source": "Neurocomputing",
+          "actor_type": "agent_only"
+        },
+        {
+          "title": "An interview study of how developers use execution logs in embedded software engineering",
+          "year": "2021",
+          "source": "Proceedings - International Conference on Software Engineering",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Error messages in relational database management systems: A comparison of effectiveness, usefulness, and user confidence",
+          "year": "2021",
+          "source": "Journal of Systems and Software",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Investigating the Effects of Testing Frequency on Programming Performance and Students' Behavior",
+          "year": "2023",
+          "source": "SIGCSE 2023 - Proceedings of the 54th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Identifying Code Reading Strategies in Debugging using STA with a Tolerance Algorithm",
+          "year": "2022",
+          "source": "APSIPA Transactions on Signal and Information Processing",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course",
+          "year": "2022",
+          "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "A mental model approach to teaching database querying skills with SQL and Alteryx",
+          "year": "2023",
+          "source": "Journal of Accounting Education",
+          "actor_type": "human_only"
+        }
+      ],
+      "missed_possible_direct": [
+        {
+          "title": "Systematically reusing low‐code IT artefacts; A technological and managerial approach",
+          "year": "2023",
+          "source": "CEUR Workshop Proceedings"
+        },
+        {
+          "title": "Low-Code Versus Code-Based Software Development: Which Wins the Productivity Game?",
+          "year": "2022",
+          "source": "IT Professional"
+        },
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    },
+    "Q2_legacy_expanded": {
+      "fields": [
+        "Title",
+        "Abstract",
+        "Author Keywords",
+        "Index Keywords"
+      ],
+      "all_807_hits": 221,
+      "recent_176_hits": 46,
+      "likely_direct_30_hits": 25,
+      "likely_direct_recall": 0.8333333333333334,
+      "possible_direct_3_hits": 0,
+      "inclusive_33_hits": 25,
+      "inclusive_recall": 0.7575757575757576,
+      "recent_not_direct_hits": 21,
+      "likely_direct_precision_proxy": 0.5434782608695652,
+      "missed_likely_direct": [
+        {
+          "title": "Low-code Development Productivity",
+          "year": "2023",
+          "source": "Queue",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Effect of semantic distance on learning structured query language: An empirical study",
+          "year": "2022",
+          "source": "Frontiers in Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Are we too focused on single query language? Investigating text-to-SQL/SPARQL/Cypher task complexity via fine-tuning unbiased T5 models",
+          "year": "2026",
+          "source": "Neurocomputing",
+          "actor_type": "agent_only"
+        },
+        {
+          "title": "Investigating the Effects of Testing Frequency on Programming Performance and Students' Behavior",
+          "year": "2023",
+          "source": "SIGCSE 2023 - Proceedings of the 54th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course",
+          "year": "2022",
+          "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          "actor_type": "human_only"
+        }
+      ],
+      "missed_possible_direct": [
+        {
+          "title": "Systematically reusing low‐code IT artefacts; A technological and managerial approach",
+          "year": "2023",
+          "source": "CEUR Workshop Proceedings"
+        },
+        {
+          "title": "Low-Code Versus Code-Based Software Development: Which Wins the Productivity Game?",
+          "year": "2022",
+          "source": "IT Professional"
+        },
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    },
+    "Q8_ais_professional_refined": {
+      "fields": [
+        "Title",
+        "Abstract",
+        "Author Keywords",
+        "Index Keywords"
+      ],
+      "all_807_hits": 198,
+      "recent_176_hits": 41,
+      "likely_direct_30_hits": 24,
+      "likely_direct_recall": 0.8,
+      "possible_direct_3_hits": 0,
+      "inclusive_33_hits": 24,
+      "inclusive_recall": 0.7272727272727273,
+      "recent_not_direct_hits": 17,
+      "likely_direct_precision_proxy": 0.5853658536585366,
+      "missed_likely_direct": [
+        {
+          "title": "“C”ing the light–assessing code comprehension in novice programmers using C code patterns",
+          "year": "2025",
+          "source": "Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Eye-movement indices of reading while debugging Python source code",
+          "year": "2025",
+          "source": "Journal of Cognitive Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Low-code Development Productivity",
+          "year": "2023",
+          "source": "Queue",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Growth in Knowledge of Programming Patterns: A Comparison Study of CS1 vs. CS2 Students",
+          "year": "2024",
+          "source": "SIGCSE 2024 - Proceedings of the 55th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "An interview study of how developers use execution logs in embedded software engineering",
+          "year": "2021",
+          "source": "Proceedings - International Conference on Software Engineering",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course",
+          "year": "2022",
+          "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          "actor_type": "human_only"
+        }
+      ],
+      "missed_possible_direct": [
+        {
+          "title": "Systematically reusing low‐code IT artefacts; A technological and managerial approach",
+          "year": "2023",
+          "source": "CEUR Workshop Proceedings"
+        },
+        {
+          "title": "Low-Code Versus Code-Based Software Development: Which Wins the Productivity Game?",
+          "year": "2022",
+          "source": "IT Professional"
+        },
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    },
+    "Q3_modern_agent_supplement": {
+      "fields": [
+        "Title",
+        "Abstract",
+        "Author Keywords",
+        "Index Keywords"
+      ],
+      "all_807_hits": 5,
+      "recent_176_hits": 5,
+      "likely_direct_30_hits": 5,
+      "likely_direct_recall": 0.16666666666666666,
+      "possible_direct_3_hits": 0,
+      "inclusive_33_hits": 5,
+      "inclusive_recall": 0.15151515151515152,
+      "recent_not_direct_hits": 0,
+      "likely_direct_precision_proxy": 1.0,
+      "missed_likely_direct": [
+        {
+          "title": "“C”ing the light–assessing code comprehension in novice programmers using C code patterns",
+          "year": "2025",
+          "source": "Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Exploring differences in self-regulated learning strategy use between high- and low-performing students in introductory programming: An analysis of eye-tracking and retrospective think-aloud data from program comprehension",
+          "year": "2024",
+          "source": "Computers and Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "QUANTIFYING THE EFFECT OF TEST-DRIVEN DEVELOPMENT ON SOFTWARE QUALITY",
+          "year": "2025",
+          "source": "Journal of Theoretical and Applied Information Technology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Eye-movement indices of reading while debugging Python source code",
+          "year": "2025",
+          "source": "Journal of Cognitive Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Low-code Development Productivity",
+          "year": "2023",
+          "source": "Queue",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Do developer perceptions have borders? Comparing C code responses across continents",
+          "year": "2024",
+          "source": "Software Quality Journal",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Readable vs.Writable code: A Survey of Intermediate Students' Structure Choices",
+          "year": "2022",
+          "source": "SIGCSE 2022 - Proceedings of the 53rd ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Effect of semantic distance on learning structured query language: An empirical study",
+          "year": "2022",
+          "source": "Frontiers in Psychology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Pair Programming Practiced in Hybrid Work",
+          "year": "2023",
+          "source": "International Symposium on Empirical Software Engineering and Measurement",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Are we too focused on single query language? Investigating text-to-SQL/SPARQL/Cypher task complexity via fine-tuning unbiased T5 models",
+          "year": "2026",
+          "source": "Neurocomputing",
+          "actor_type": "agent_only"
+        },
+        {
+          "title": "Growth in Knowledge of Programming Patterns: A Comparison Study of CS1 vs. CS2 Students",
+          "year": "2024",
+          "source": "SIGCSE 2024 - Proceedings of the 55th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Considerations and Pitfalls in Controlled Experiments on Code Comprehension",
+          "year": "2021",
+          "source": "IEEE International Conference on Program Comprehension",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "An interview study of how developers use execution logs in embedded software engineering",
+          "year": "2021",
+          "source": "Proceedings - International Conference on Software Engineering",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Unravelling the Computational Thinking and Spatial Thinking Development: An Exploration of a Virtual Robot Programming Environment",
+          "year": "2025",
+          "source": "Journal of Computer Assisted Learning",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Providing Information About Implemented Algorithms Improves Program Comprehension: A Controlled Experiment",
+          "year": "2025",
+          "source": "Proceedings of the 29th International Conference on Evaluation and Assessment in Software Engineering , EASE, 2025 edition, EASE 2025",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Error messages in relational database management systems: A comparison of effectiveness, usefulness, and user confidence",
+          "year": "2021",
+          "source": "Journal of Systems and Software",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Integrating a graph builder into python tutor",
+          "year": "2021",
+          "source": "OpenAccess Series in Informatics",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Diversity's Double-Edged Sword: Analyzing Race's Effect on Remote Pair Programming Interactions",
+          "year": "2024",
+          "source": "ACM Transactions on Software Engineering and Methodology",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Investigating the Effects of Testing Frequency on Programming Performance and Students' Behavior",
+          "year": "2023",
+          "source": "SIGCSE 2023 - Proceedings of the 54th ACM Technical Symposium on Computer Science Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Identifying Code Reading Strategies in Debugging using STA with a Tolerance Algorithm",
+          "year": "2022",
+          "source": "APSIPA Transactions on Signal and Information Processing",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course",
+          "year": "2022",
+          "source": "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "FxD: a functional debugger for dysfunctional spreadsheets",
+          "year": "2023",
+          "source": "Proceedings of IEEE Symposium on Visual Languages and Human-Centric Computing, VL/HCC",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "A mental model approach to teaching database querying skills with SQL and Alteryx",
+          "year": "2023",
+          "source": "Journal of Accounting Education",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "Implementation of Test-Driven Approach to Empower Self-Learning in PHP Web Programming Practice",
+          "year": "2025",
+          "source": "International Journal of Computing",
+          "actor_type": "human_only"
+        },
+        {
+          "title": "The Effect of Comments on Program Comprehension: An Eye-tracking Study",
+          "year": "2026",
+          "source": "Empirical Software Engineering",
+          "actor_type": "human_only"
+        }
+      ],
+      "missed_possible_direct": [
+        {
+          "title": "Systematically reusing low‐code IT artefacts; A technological and managerial approach",
+          "year": "2023",
+          "source": "CEUR Workshop Proceedings"
+        },
+        {
+          "title": "Low-Code Versus Code-Based Software Development: Which Wins the Productivity Game?",
+          "year": "2022",
+          "source": "IT Professional"
+        },
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    },
+    "Q9_cross_domain_high_recall": {
+      "fields": [
+        "Title",
+        "Abstract",
+        "Author Keywords",
+        "Index Keywords"
+      ],
+      "all_807_hits": 218,
+      "recent_176_hits": 55,
+      "likely_direct_30_hits": 30,
+      "likely_direct_recall": 1.0,
+      "possible_direct_3_hits": 2,
+      "inclusive_33_hits": 32,
+      "inclusive_recall": 0.9696969696969697,
+      "recent_not_direct_hits": 23,
+      "likely_direct_precision_proxy": 0.5454545454545454,
+      "missed_likely_direct": [],
+      "missed_possible_direct": [
+        {
+          "title": "Modern Software Review: Techniques and Technologies",
+          "year": "2024",
+          "source": "Modern Software Review: Techniques and Technologies"
+        }
+      ]
+    }
+  }
+}

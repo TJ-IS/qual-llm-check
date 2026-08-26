@@ -1,0 +1,1068 @@
+{
+  "record_id": "28640",
+  "source_file": "28640_2025_beyond-complements-and-substitutes-a-graph-neural-network-approach-for-collaborative-retail-sale.md",
+  "title": "Beyond Complements and Substitutes: A Graph Neural Network Approach for Collaborative Retail Sales Forecasting",
+  "authors": "Jing Liu; Gang Wang; Huimin Zhao; Mingfeng Lu; Lihua Huang; Gang Chen",
+  "year": "2025",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2023.0773",
+  "fulltext_chars": 131197,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:09.023164+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在协作式零售销售预测中，如何精准而全面地识别固有或重复的产品关系，并同时利用从关系类型和时间维度分解出的多面复杂产品关系（正/负、间接/非对称、异步/动态）来提升预测性能？",
+    "artifact_and_design_cn": "提出一个基于图神经网络的方法CL4RSF，包含三个核心模块：同步与异步感知时序编码器（SATE）、双通道产品关系学习器（DC-PRL）、方向适用且关系自适应的信息交互器（DRAI）。DC-PRL采用数据驱动的图结构学习并设计图鲁棒性损失和图对比损失；DRAI将正负关系分别映射为低/高频信号，并利用磁拉普拉斯矩阵支持非对称关系；SATE通过虚拟节点和注意力机制处理异步关系。此外，设计了端到端架构MS2RSF，融合多源信息并支持多步预测。",
+    "objective_outcomes_cn": "在两个真实零售数据集（Drugs和Grocery）上，MS2RSF在MAE和RMSE上全面优于Facebook Prophet、Amazon DeepAR以及多个最新GNN/时间序列模型；消融实验验证了DC-PRL、正负关系利用和异步关系利用均带来显著性能提升；解释性分析展示了跨品类效应及多种产品关系的存在。",
+    "core_contribution_cn": "作者声称的主要贡献包括：（1）超越互补/替代二分法，从关系类型和时间维度系统刻画了六种产品关系；（2）提出CL4RSF制品并总结两个可泛化设计原则（“从管道到联合优化”和“旋转与编织”）；（3）提出包含双通道异步图学习、鲁棒图结构学习、以及基于频谱信号建模正负关系的DRAI等方法论创新。",
+    "whole_argument_in_one_paragraph_cn": "文章从零售管理中关系普遍且重要出发，指出传统互补/替代二分法无法覆盖现实中由消费者偏好和外部因素驱动的复杂产品关系，而现有关系识别方法要么引入噪声（如同品类、同品牌或共现行为假设），要么遗漏看似无关但实际相关的产品（如属性相似度方法）。作者借用跨品类选择依赖理论（CCCDT），将产品关系沿关系类型（正/负、间接、非对称）和时间（异步、动态）两个维度展开，并据此提出三个元需求：精确且全面地识别关系、同时利用正负/间接/非对称关系、同时利用异步/动态关系。随后，作者设计图神经网络制品CL4RSF：DC-PRL通过带两个损失约束的图结构学习识别同步和异步关系；DRAI通过低频/高频信号映射和磁拉普拉斯矩阵建模正负与非对称关系；SATE通过虚拟节点和注意力机制表示异步模式与动态关系。为了适应RSF，作者进一步封装为端到端多源多步预测网络MS2RSF。实证部分在两个数据集上先进行整体基准比较（实验1），再通过替换关系识别策略（实验2）、消融正负关系（实验3）、消融异步关系（实验4）验证关键组件价值，随后用解释性分析佐证跨品类效应和关系推断的有效性，最后用经济价值分析展示操作性价值，从而完成从理论到设计再到实证的闭环。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章遵循设计科学范式：先从理论（CCCDT）推导设计需求与设计原理，再构建制品（CL4RSF和MS2RSF），随后通过多组实验评价制品性能与组件价值，最后提炼可泛化的设计原则和知识贡献。虽然使用大量计算基准，但其核心论证是“需求—构建—评价—设计知识”，而非纯粹以benchmark性能为最终贡献。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "全文主线为：从CCCDT与实地问题提炼出Req1、Req2-1、Req2-2三个元需求，再针对每个需求给出具体解决方案（PRL/DC-PRL、DRAI、SATE），接着通过系统实验检验方案的有效性，最后在贡献部分明确总结可泛化的设计原则。这符合“要求—构建—评价—设计原则”的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 8,
+    "overall_sequence_cn": "研究程序先进行理论驱动的需求分析，再完成方法构建，随后进入数据准备与多层实验评估：先以整体性能基准比较确立有效性，再用组件替换/消融实验逐一验证关系识别、正负关系利用和异步关系利用的独立价值，接着用解释性分析补充机制证据，最后以经济价值分析衔接管理实践。各阶段之间呈递进关系：整体性能好不能回答‘为什么好’，因此需要组件实验；组件实验只证明某个模块有效，需要解释性分析说明学习到的产品关系在真实样本中存在；最后经济价值分析将预测增益转化为管理收益，完成贡献闭环。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "理论驱动的需求分析与设计",
+        "question_cn": "面向协作RSF，产品关系应如何从理论上被系统刻画并转化为可计算需求？",
+        "inputs_and_setting_cn": "CCCDT理论文献，零售销售预测的现实问题，无实证数据",
+        "designed_or_compared_object_cn": "产品关系分类体系（正/负、间接/非对称、异步/动态）及对应的三个元需求",
+        "baseline_control_or_counterfactual_cn": "传统互补/替代二分法框架",
+        "objective_metrics": [],
+        "analysis_method_cn": "理论演绎与需求分析",
+        "main_result_cn": "提出六种关系维度，并在表1中建立了“理论依据→需求→方案→新意”的映射",
+        "argumentative_role_cn": "奠定整个设计科学研究的理论基础，为后续方法构建提供设计输入",
+        "remaining_uncertainty_cn": "理论上的关系维度是否真实存在于实际销售数据中，以及能否被计算模型有效识别和利用？",
+        "link_to_next_phase_cn": "这些需求直接驱动下一阶段CL4RSF模型的结构设计",
+        "evidence_pointers": [
+          "Section 1",
+          "Section 3.1",
+          "Table 1",
+          "Figure 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "方法构建：CL4RSF与MS2RSF",
+        "question_cn": "如何将理论需求转化为可执行的图神经网络架构？",
+        "inputs_and_setting_cn": "CCCDT推导的需求、GNN/GSL/注意力机制等机器学习技术",
+        "designed_or_compared_object_cn": "SATE、DC-PRL、DRAI三个模块及其端到端组合MS2RSF",
+        "baseline_control_or_counterfactual_cn": "现有GNN方法、GSL方法（如FAGCN、SGCN）及管道式设计",
+        "objective_metrics": [],
+        "analysis_method_cn": "计算设计（伪代码、网络结构设计、损失函数设计）",
+        "main_result_cn": "完成模型设计：双通道图学习、频谱信号映射、磁拉普拉斯、虚拟节点、注意力激活函数等",
+        "argumentative_role_cn": "将设计需求落实为具体制品，为后续实验提供被检验对象",
+        "remaining_uncertainty_cn": "设计出的每个组件是否真的比替代方案更好？",
+        "link_to_next_phase_cn": "指向实验阶段，需要通过基准比较和消融实验验证制品价值",
+        "evidence_pointers": [
+          "Section 4",
+          "Figure 2",
+          "Figure 3",
+          "Table 1"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "数据准备与实验设计",
+        "question_cn": "在两个不同零售场景下，如何构造能公平检验模型能力的数据与实验流程？",
+        "inputs_and_setting_cn": "Drugs数据（37M交易记录，150 SKUs，240家药店，2016-2018）和Grocery数据（Corporación Favorita，209 SKUs，店18，2014-2016）",
+        "designed_or_compared_object_cn": "两个数据集的不同抽样/聚合方式：聚焦药品两个类别的全域聚合 vs. 单个店铺的多品类聚合",
+        "baseline_control_or_counterfactual_cn": "按时间先后划分训练/验证/测试（6:2:2），避免时序泄漏",
+        "objective_metrics": [],
+        "analysis_method_cn": "数据清洗、周度聚合、SKU筛选、时间序列划分、最大最小归一化",
+        "main_result_cn": "生成用于主实验和组件实验的训练集/验证集/测试集",
+        "argumentative_role_cn": "展示数据选择的合理性，强调两个场景的互补性（“看似不相关但相关”的药品品类 vs. 常规杂货店购物），为模型的外部效度提供基础",
+        "remaining_uncertainty_cn": "抽样后的小规模数据是否足以支持泛化结论？",
+        "link_to_next_phase_cn": "直接进入主实验，用同一数据评估模型与基准",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Endnote 6"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "主实验：全面基准比较",
+        "question_cn": "端到端MS2RSF是否优于统计和最新深度学习方法？",
+        "inputs_and_setting_cn": "Drugs和Grocery数据集，10个基准方法（Prophet、DeepAR、TFT、STGCN、DCRNN、DeepGLO、MTGNN、GTS、Shopper-GAT、MSGNet）",
+        "designed_or_compared_object_cn": "MS2RSF vs. 10个基准，在h=1,4,8,12四种预测视界下的MAE/RMSE",
+        "baseline_control_or_counterfactual_cn": "10个代表性benchmark，覆盖统计、概率RNN、Transformer、时域GNN、图学习GNN、矩阵分解、购物篮模型等",
+        "objective_metrics": [
+          "MAE",
+          "RMSE"
+        ],
+        "analysis_method_cn": "每个深度方法重复10次不同随机种子；报告均值与标准差；逐步比较",
+        "main_result_cn": "MS2RSF在所有数据、所有视界、两个指标上均取得最优；优势随h增大更明显",
+        "argumentative_role_cn": "确立整体性能优越性，证明复杂关系建模对RSF有实际增益",
+        "remaining_uncertainty_cn": "整体性能更好并不能说明哪个组件或哪类关系贡献最大",
+        "link_to_next_phase_cn": "需要组件级实验来分离效应，引出实验2-4",
+        "evidence_pointers": [
+          "Tables 2–3",
+          "Section 5.3.1"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "产品关系识别消融：替换PRI策略",
+        "question_cn": "本文提出的DC-PRL相较现有关系识别策略是否有显著优势？",
+        "inputs_and_setting_cn": "Drugs和Grocery数据；替换DC-PRL为Category-based、Copurchase-based、Shopper-based、Correlation-based、Conventional GSL，保持其他模块不变",
+        "designed_or_compared_object_cn": "关系识别策略（DC-PRL vs. 5种替代策略）",
+        "baseline_control_or_counterfactual_cn": "Category/Copurchase/Shopper/Correlation/CGSL作为baseline，尤其CGSL去掉两个novel loss以分离其作用",
+        "objective_metrics": [
+          "MAE",
+          "RMSE"
+        ],
+        "analysis_method_cn": "控制变量实验，只改变PRI策略，比较预测性能；辅以注意力分数可视化",
+        "main_result_cn": "DC-PRL一致优于所有替代策略；Category和Copurchase引入噪声，Correlation易受瞬态相关干扰，CGSL由于缺少两个loss而性能下降",
+        "argumentative_role_cn": "证明关系识别模块（及两个损失项）的必要性，呼应RQ1",
+        "remaining_uncertainty_cn": "这些策略在更大规模或不同品类上是否同样表现？DC-PRL识别的具体关系是否具有管理学意义？",
+        "link_to_next_phase_cn": "随后通过正负关系消融来检验DRAI中的关系类型建模，而不是仅看关系识别",
+        "evidence_pointers": [
+          "Tables 4–5",
+          "Figure 5",
+          "Figure 6",
+          "Section 5.3.2"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "正负关系消融",
+        "question_cn": "同时利用正关系和负关系是否都为预测性能带来增益？",
+        "inputs_and_setting_cn": "Drugs（两个类别及单独的心血管/呼吸类别）和Grocery数据",
+        "designed_or_compared_object_cn": "完整MS2RSF vs. 去掉正关系利用的变体（w/o positive） vs. 去掉负关系利用的变体（w/o negative）",
+        "baseline_control_or_counterfactual_cn": "两个消融变体作为对照，完整模型作为参照",
+        "objective_metrics": [
+          "MAE",
+          "RMSE"
+        ],
+        "analysis_method_cn": "消融实验，比较不同设置下的预测性能",
+        "main_result_cn": "移除正或负关系都会导致性能下降；在心血管类中正关系影响更大，呼吸类中两者均重要",
+        "argumentative_role_cn": "证明DRAI同时建模正负关系的必要性，并提供了对不同疾病用药场景的领域解释",
+        "remaining_uncertainty_cn": "实验只能在单一数据场景下进行，无法识别这些关系是否在其他零售品类同样重要",
+        "link_to_next_phase_cn": "随后进行异步关系消融（实验4），继续验证时间维度建模的贡献",
+        "evidence_pointers": [
+          "Table 6",
+          "Section 5.3.3"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "异步关系消融",
+        "question_cn": "利用异步产品关系相比仅用同步关系能否带来额外性能提升？",
+        "inputs_and_setting_cn": "Drugs和Grocery数据",
+        "designed_or_compared_object_cn": "完整MS2RSF（含异步图） vs. 去除异步关系的变体（w/o asyn）",
+        "baseline_control_or_counterfactual_cn": "w/o asyn变体，其余模块不变",
+        "objective_metrics": [
+          "MAE",
+          "RMSE"
+        ],
+        "analysis_method_cn": "消融实验，比较不同预测视界上的性能",
+        "main_result_cn": "去除异步关系导致性能下降，尤其在长视界h=8和h=12时下降更显著",
+        "argumentative_role_cn": "验证异步关系利用的独立价值，并解释主实验中长视界优势的来源",
+        "remaining_uncertainty_cn": "异步关系是否真实来源于品牌溢出或消费者学习等机制，而非短暂的相关波动？",
+        "link_to_next_phase_cn": "解释性分析将展示具体异步关系示例，为机制提供补充证据",
+        "evidence_pointers": [
+          "Table 7",
+          "Section 5.3.4"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "解释性分析与经济价值分析",
+        "question_cn": "模型学习到的产品关系是否具有管理学意义，且预测增益能否转化为经济价值？",
+        "inputs_and_setting_cn": "Drugs和Grocery数据；推断的产品关系图、注意力分数、T-SNE可视化；Drugs测试集的经济参数",
+        "designed_or_compared_object_cn": "跨品类效应（同类别内部最佳Topk vs 跨类别整体Topk）；推断的关系图与注意力动态；经济价值情景",
+        "baseline_control_or_counterfactual_cn": "Shopper导出表征（T-SNE）；不同基准模型作为成本对比对象",
+        "objective_metrics": [
+          "成本减少额（ΔValue，人民币元）",
+          "注意力分数",
+          "Topk数值"
+        ],
+        "analysis_method_cn": "K线图/可视化、t-SNE、情景外推（将样本内优势扩展到全年度/全SKU/全门店）",
+        "main_result_cn": "跨品类效应确实存在；模型推断出正、负、异步、动态关系；经济价值分析显示相对最佳benchmark（Shopper-GAT）降低成本超2.5亿元",
+        "argumentative_role_cn": "将统计性能提升转化为管理价值，并补充对机制的理解，强化贡献的实践相关性",
+        "remaining_uncertainty_cn": "经济价值分析依赖简单线性外推和统一单位成本，实际运营效果未经现场实验检验",
+        "link_to_next_phase_cn": "在讨论中自然引出局限与未来研究，尤其是现场实验建议",
+        "evidence_pointers": [
+          "Section 5.4",
+          "Figure 6",
+          "Figure I.2 / I.4 / I.5 / I.11（在线附录）",
+          "Table 9",
+          "Section 6.2.1"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 关系赋能零售管理受到关注",
+      "PRACTICAL_STAKES: 利用相关产品信息可提升RSF，但现有方法有噪声或遗漏风险",
+      "THEORY_INTRO: 基于CCCDT从关系类型和时间维度辨析产品关系",
+      "RQ_OR_OBJECTIVE: 提出三个围绕识别与利用复杂关系的研究问题",
+      "DESIGN_FEATURE: 提出CL4RSF并概述三个核心模块及端到端架构",
+      "RESULT: 两个数据集实证优于基准，验证组件和关系价值",
+      "CONTRIBUTION: 解释性分析提供跨品类效应与管理含义"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 零售管理中各类关系普遍存在且重要（P1）",
+      "PRACTICAL_STAKES: 聚焦协作RSF，为多种决策打基础（P1）",
+      "PRIOR_KNOWLEDGE: 互补/替代二分法是传统分类（P2）",
+      "LIMITATION: 二分法无法覆盖消费者偏好驱动的非本征关系（P3）",
+      "PHENOMENON: 货架相邻或外部驱动导致的销售联动例子（P3）",
+      "GAP: 同类/共现/属性相似等策略存在误引入和漏报问题（P4）",
+      "RQ_OR_OBJECTIVE: 正式提出RQ1（P4）",
+      "DESIGN_FEATURE: 提出PRL并围绕识别一致性设计两个损失（P5）",
+      "THEORY_INTRO: 引入CCCDT来分解关系（P6）",
+      "RQ_OR_OBJECTIVE: 正式提出RQ2（P6）",
+      "GAP: 现有GNN无法同时处理负、异步等关系（P7）",
+      "DESIGN_FEATURE: 设计DRAI、DC-PRL和SATE（P7）",
+      "CONTRIBUTION: 总结研究为理论指导的计算设计并预告实验发现（P8）"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO: CCCDT提供三类跨品类效应（Section 3.1）",
+      "THEORY_PROPOSITION: 产品捆绑与跨品类考虑导致正负关系，并且可能间接、非对称（Section 3.1）",
+      "THEORY_PROPOSITION: 跨品类学习导致异步影响，关系类型和强度具有动态性（Section 3.1）",
+      "REQUIREMENT: 从理论推导Req1、Req2-1、Req2-2（Section 3.1, Table 1）",
+      "METHOD_JUSTIFICATION: 采用GNN来捕捉间接关系（Section 3.2）"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE: 图鲁棒性损失推动一致性，图对比损失抑制瞬态关系（Section 4.3）",
+      "DESIGN_FEATURE: 将正负关系映射到低/高频信号，并通过磁拉普拉斯支持非对称（Section 4.4）",
+      "DESIGN_FEATURE: 双通道PRL分别学习同步和异步图，虚拟节点表示‘previous_’（Section 4.3）",
+      "DESIGN_FEATURE: SATE用GRU提取时序特征并对异步时间窗做注意力融合（Section 4.2）",
+      "DESIGN_FEATURE: DRAI用tanh注意力实现正负关系协同与动态权重的自适应（Section 4.4）",
+      "DESIGN_FEATURE: MS2RSF将多源信息与多步预测整合为端到端框架（Section 4.5）"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 选择两个不同零售场景以增强外部效度（Section 5.1）",
+      "BENCHMARK_OR_CONTRAST: 选择10个覆盖统计、深度学习与关系建模的基准（Section 5.2）",
+      "STUDY_OVERVIEW: 预告实验1整体比较和实验2-4组件效用（Section 5.2）",
+      "RESULT: 主实验全面胜出（Section 5.3.1）",
+      "RESULT: DC-PRL优于其他关系识别策略（Section 5.3.2）",
+      "RESULT: 消融证明正负关系、异步关系均有效（Section 5.3.3/5.3.4）",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 在线附录中补充完整数据集敏感性分析、超参数灵敏度、DM检验（Section 5.2+附录E-H）",
+      "RESULT: 解释性分析显示跨品类效应与多类产品关系存在（Section 5.4）"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 贡献1：拓展产品关系维度（Section 6.1）",
+      "CONTRIBUTION: 贡献2：设计制品和两个可泛化设计原则（Section 6.1）",
+      "CONTRIBUTION: 贡献3：方法论创新（Section 6.1）",
+      "PRACTICAL_STAKES: 管理层面对供应链、定价、推荐等的应用价值（Section 6.2）",
+      "RESULT: 经济价值分析将性能优势转为金钱收益（Section 6.2.1）",
+      "PRACTICAL_STAKES: 下游CSPR推荐场景展示潜力（Section 6.2.2）",
+      "LIMITATION_AND_FUTURE: 讨论动态图、灵活邻居数、现场实验等局限（Section 7）"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "跨品类选择依赖理论（CCCDT，Russell et al. 1999; Shocker et al. 2004）",
+      "产品关系经济学（互补/替代、直接/间接替代、非对称关系）",
+      "图神经网络与图结构学习（GCN、SGCN、FAGCN、MagNet、GTS等）",
+      "对比学习与鲁棒学习（InfoNCE、KL散度）",
+      "时间序列预测方法（VAR、DeepAR、TFT等）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "CCCDT前瞻性地提供了产品关系的分类框架（正/负、间接/非对称、异步/动态），直接影响了对RSF问题的界定和元需求（Req1/Req2-1/Req2-2）的提出；同时，关系类型维度（如正负、异步）也决定了部分核心设计选择（如频谱映射正负关系、虚拟节点处理异步）。但关键的计算技术选择（GNN架构、磁拉普拉斯、对比损失、GRU/注意力等）主要来自机器学习与图深度学习领域的工程启发，并非由CCCDT直接推导。因此，理论作用于问题、变量和需求层面，但对低层算法组件的选择仅起部分约束作用，属于部分耦合。",
+    "translation_chain_cn": "CCCDT中的跨品类考虑与产品捆绑→正/负关系且可能间接非对称→Req2-1同时利用正负/间接/非对称→设计低频/高频信号映射和磁拉普拉斯矩阵（DRAI）。CCCDT中的跨品类学习→异步影响→Req2-2异步关系→设计双通道图学习（DC-PRL）和虚拟节点机制，并用注意力聚合历史时段（SATE）。Shocker等关于关系动态性的论述→关系类型和强度随时间变化→Req2-2动态关系→使用tanh激活的注意力机制使正负关系类型自适应、对邻居信息加权聚合。同时，为了满足Req1的精确和全面识别，从销售数据可外化多种因素的思想出发，设计图结构学习并加入鲁棒性损失（防止邻居不一致）和对比损失（抑制瞬时相关）。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "CCCDT指出跨品类考虑和产品捆绑可产生正、负跨品类效应（Russell et al. 1999）",
+        "mechanism_cn": "消费者在多个候选品类中权衡（负关系）或组合购买满足整体需求（正关系），从而在销售序列上表现为同步或近同步的协同或竞争信号",
+        "design_requirement_cn": "Req2-1：需要同时区分并利用正关系和负关系，同时支持间接传递和非对称依赖",
+        "artifact_choice_cn": "设计DRAI：将正关系映射为低频平滑信号，负关系映射为高频振荡信号；采用磁拉普拉斯矩阵处理非对称有向图；用tanh注意力自适应融合两类信号",
+        "evaluated_contrast_cn": "实验3：去掉正关系（w/o positive） vs. 去掉负关系（w/o negative） vs. 完整模型",
+        "objective_result_cn": "完整模型优于两个消融变体；在心血管品类中正关系影响更大，呼吸品类中正负关系同等重要",
+        "evidence_pointers": [
+          "Table 6",
+          "Section 5.3.3",
+          "Figure 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "CCCDT中的跨品类学习表明先购买的产品可能对后购买产品产生异步影响（Shocker et al. 2004）",
+        "mechanism_cn": "消费者通过使用经验形成品牌态度或品类知识，导致对另一产品的购买存在时间滞后的促进或抑制",
+        "design_requirement_cn": "Req2-2：需要识别异步相关产品并表达其滞后影响模式",
+        "artifact_choice_cn": "在DC-PRL中引入异步图，每个产品使用‘previous_’和‘current_’两个虚拟节点；SATE生成多个滑动窗口序列并利用注意力聚合",
+        "evaluated_contrast_cn": "实验4：完整模型（with asyn） vs. 去除异步（w/o asyn）",
+        "objective_result_cn": "完整模型性能更好，尤其长视界h=8和12时优势明显",
+        "evidence_pointers": [
+          "Table 7",
+          "Figure 3",
+          "Section 4.2/4.3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Shocker et al. (2004)指出产品关系是动态的，关系类型和强度都可能随时间变化",
+        "mechanism_cn": "技术变化、市场环境、消费者偏好迁移使互补变替代或替代变互补，且影响强度不断变化",
+        "design_requirement_cn": "Req2-2：需要动态响应关系类型和强度的变化",
+        "artifact_choice_cn": "在DRAI中使用tanh(·)作为注意力激活，使注意力分数可在[-1,1]内变化，正值表示正关系主导，负值表示负关系主导；同时注意力依赖时间变化的节点表示",
+        "evaluated_contrast_cn": "通过解释性分析展示不同时间窗内注意力分数随关系类型和强度变化的可视化",
+        "objective_result_cn": "模型在在线附录I.4/I.5中展现了动态正负关系和动态强度的attention模式",
+        "evidence_pointers": [
+          "Section 4.4",
+          "Online Appendix I.4/I.5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "现有关系识别方法（同品类、共现行为、属性相似等）容易引入噪声或遗漏信息（Kwark et al. 2021; Voleti et al. 2015）",
+        "mechanism_cn": "同品类/共现并不必然意味着销售关系；可观察属性无法涵盖潜在驱动因素，导致相关产品被遗漏",
+        "design_requirement_cn": "Req1：需要精准且全面地识别固有或重复关系",
+        "artifact_choice_cn": "设计基于GSL的数据驱动PRL，用销售序列监督学习；设计图鲁棒性损失鼓励Topk邻居稳定，设计图对比损失惩罚非连接节点（同时使用绝对相似度以考虑负关系）",
+        "evaluated_contrast_cn": "实验2：DC-PRL vs. Category-based、Copurchase-based、Shopper-based、Correlation-based、Conventional GSL",
+        "objective_result_cn": "DC-PRL在所有数据上取得最优MAE/RMSE；CGSL表现劣于DC-PRL，验证两个损失的必要性",
+        "evidence_pointers": [
+          "Tables 4–5",
+          "Section 5.3.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "产品关系可能间接传递（Ogaki 1990；Samuelson 1974），一阶邻居不足以捕捉多跳影响",
+        "mechanism_cn": "关系通过中间产品传导，例如A→B→C，则A对C存在间接影响",
+        "design_requirement_cn": "需要能建模间接关系的信息传递机制",
+        "artifact_choice_cn": "采用GNN作为整体架构，通过多层传播聚合多跳邻居信息",
+        "evaluated_contrast_cn": "主实验与其他非GNN/浅层模型（Prophet、DeepAR、DeepGLO等）比较",
+        "objective_result_cn": "MS2RSF在多视界上全面优于这些基准，说明深层图传播的有效性",
+        "evidence_pointers": [
+          "Tables 2–3",
+          "Section 5.3.1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "整体基准比较（Experiment 1）：在两种数据集上比较MS2RSF与10个基准，覆盖统计/深度学习/GNN/关系建模方法，多视界（1/4/8/12）和两种指标（MAE/RMSE）",
+      "组件消融与替换（Experiment 2）：固定其他模块，仅替换关系识别策略，检验DC-PRL与两个损失的价值",
+      "正负关系消融（Experiment 3）：构造w/o positive和w/o negative变体，检验DRAI中两类关系利用的贡献",
+      "异步关系消融（Experiment 4）：构造w/o asyn变体，检验异步关系利用的独立贡献",
+      "解释性分析（Explanatory analyses）：通过注意力分数可视化、t-SNE、Topk对比等展示跨品类效应和推断关系的存在",
+      "稳健性与辅助分析：在线附录中包含完整数据集对比（附录E）、超参数敏感性分析（附录G）、Diebold-Mariano显著性检验（附录H）",
+      "经济价值分析（Section 6.2.1）：将预测误差转化为成本，估算相对各benchmark的成本减少额"
+    ],
+    "why_these_evaluations_cn": "这是一个设计科学制品，单一的整体性能比较只能说明‘总体有效’，但无法回答‘为什么有效’以及‘哪些设计决策带来了改进’。因此作者设计了一组递进评价：基准比较确立总体优越性；替换关系识别策略回答‘识别模块是否优于现有方法’；正负关系消融回答‘DRAI中关系类型建模是否必要’；异步关系消融回答‘异步模块是否带来增量收益’；解释性分析为机制提供定性证据；经济价值分析则把性能优势转化为管理语言，增强实践贡献的可行性。",
+    "benchmark_and_contrast_chain_cn": "基准链的设计很细致：将基准按‘如何识别关系’和‘是否利用负/异步关系’编码；例如DeepGLO纳入所有序列、STGCN/DCRNN使用相关图、MTGNN/GTS/MSGNet做图学习、Shopper-GAT从购物篮推断替代/互补。这样，主实验不仅能比较性能数字，还能解释性能差异的来源：大多数基准没有负/异步关系建模。在组件实验中，又通过Category/Copurchase/Correlation/CGSL等策略替代DC-PRL，形成‘关系识别策略’的对照谱系。因此，基准链从‘整体比较’到‘组件级对照’，逐步锁定哪些设计选择是性能增益的来源。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "MS2RSF的预测性能优于当前最先进的统计与深度学习方法",
+        "evidence_cn": "Tables 2–3：在两个数据集、四个预测视界、MAE/RMSE上均优于全部基准，且重复10次的标准差较小",
+        "supported": true
+      },
+      {
+        "claim_cn": "DC-PRL相对于其他关系识别策略能更鲁棒地识别相关产品",
+        "evidence_cn": "Tables 4–5：DC-PRL一致优于Category、Copurchase、Shopper、Correlation和CGSL；Figure 5的注意力分数分布显示其他策略引入较多噪声",
+        "supported": true
+      },
+      {
+        "claim_cn": "同时利用正关系和负关系是有益的",
+        "evidence_cn": "Table 6：w/o positive和w/o negative均比完整模型差，且不同疾病品类的差模式不同",
+        "supported": true
+      },
+      {
+        "claim_cn": "利用异步关系可提升预测性能，尤其在长视界下",
+        "evidence_cn": "Table 7：w/o asyn在h=8/12时loss增大更明显",
+        "supported": true
+      },
+      {
+        "claim_cn": "产品关系是跨品类存在的",
+        "evidence_cn": "Section 5.4.1：分别做单品类实验时最佳Topk为5，整体两品类实验时为7，表明需要更多跨品类邻居；Figure I.2展示相关矩阵",
+        "supported": true
+      },
+      {
+        "claim_cn": "模型推断出的关系具有管理学意义，可用于推荐和品类规划",
+        "evidence_cn": "Section 6.2.2用CSPR例子说明，但仅提供概念性论证，并未在真实推荐系统上实施测试",
+        "supported": false
+      },
+      {
+        "claim_cn": "经济价值分析表明模型可节省大量成本",
+        "evidence_cn": "Table 9：基于简单外推的ΔValue估算，但依赖各种假设（统一成本、推广到全SKU/全门店），没有进行现场实测",
+        "supported": "partial"
+      }
+    ],
+    "internal_validity_strategy_cn": "采用固定数据划分（按时间顺序，避免数据泄漏）；每次深度实验重复10次不同随机种子，报告均值与标准差；使用Diebold-Mariano检验和Bonferroni校正（附录H）确保差异显著；在组件消融中只改变单一变量，保持其他模块不变，因此可较干净地归因性能差异。",
+    "external_validity_strategy_cn": "使用两个性质不同的数据集：Drugs聚焦两个看似无关的疾病药品类别（强调跨品类关系挑战），Grocery是单店铺的多品类常规销售（强调更一般的零售场景）；数据抽样策略特意让两个场景互补；在线附录E在完整数据集上进一步验证，增强结论可迁移性。",
+    "what_is_not_actually_tested_cn": "文章没有直接在真实零售环境做现场部署或随机试验，因此无法证明预测性能改善必然转化为管理决策收益；也没有对推荐任务或品类规划任务进行端到端评价，CSPR相关阐述停留在概念性示例；动态关系与异步关系虽有解释性可视化，但没有定量地验证这些关系推断的准确性（无ground-truth关系标签）。经济价值分析依赖强假设外推，不能代表真实运营收益。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在MAE/RMSE上，提出的MS2RSF/CL4RSF在两个数据集、多个预测视界上均显著优于Prophet、DeepAR、TFT、STGCN、DCRNN、DeepGLO、MTGNN、GTS、Shopper-GAT和MSGNet。",
+    "artifact_claim_cn": "CL4RSF中每个核心模块（DC-PRL、DRAI、SATE）和关键设计要素（两个GSL损失、异步虚拟节点、频谱信号映射、磁拉普拉斯）对最终预测性能有可分离的正面贡献，实验2-4提供了证据。",
+    "mechanism_claim_cn": "正负关系通过低频/高频信号的叠加与扣减来影响聚焦产品；异步关系通过previous节点向current节点的信息传播来体现时滞效应；动态关系通过随时间变化的注意力权重（tanh激活）来自适应调节。解释性分析显示这些关系模式在数据中确实存在。",
+    "boundary_claim_cn": "该方法适用于需要利用产品关系进行销售预测的零售场景；其优势在存在不可靠类别/共现标签、需跨品类信息、以及长预测视界时更为明显；但当前版本不支持新产品（动态图）且固定邻居数Topk，这限制了其在冷启动或高动态目录场景的适用性。",
+    "reusable_design_knowledge_cn": "作者总结两个设计原则：（1）‘从管道到联合优化’——将关系识别与预测端到端联合训练，避免两阶段误差传播；（2）‘旋转与编织’——为同一实体保留‘当前’与‘之前’双节点以建模异步依赖。此外，用距离缩放低频/高频信号映射正负关系也为后续建模提供新思路。",
+    "theoretical_contribution_cn": "将CCCDT从消费选择理论扩展应用到销售预测场景，系统地将跨品类效应细化为六种可计算的关系属性（正/负、间接/非对称、异步/动态），为预测建模提供了理论驱动的变量集合，也丰富了信息系统领域‘理论指导设计’的案例。",
+    "how_discussion_closes_intro_gap_cn": "引言提出的缺口是：现有关系识别引入噪声或遗漏信息，以及现有GNN无法同时处理多面向关系。讨论部分通过实验2回应识别缺口（DC-PRL优于其他策略），通过实验3/4回应利用缺口（正负、异步关系各自有增量价值），同时用解释性分析展示CCCDT指导的关系分解在真实数据中成立，从而将缺口闭合为设计知识与方法论贡献。",
+    "overclaim_or_unsupported_leaps_cn": "部分论述存在跳跃：其一，实验只证明了预测性能提升，但推荐场景和品类规划中的优势只是概念性推理，没有在对应下游任务上评测；其二，经济价值分析用简单线性外推和粗粒度成本估算，得到‘节省2.5亿元’这类具体数字可能过度量化；其三，虽然作者称模型能‘识别’固有或重复关系，但没有外部关系ground-truth进行验证，因此‘识别’实际是预测导向的隐式学习，不能等同于关系发现任务的有标签准确率；其四，将CCCDT作为理论依据时，某些设计细节（如频谱映射）并非理论直接推导，讨论中笼统归功于理论可能夸大theory-driven成分。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Introduction",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "零售管理中各类主体间关系（供应链、渠道、空间）普遍存在，对有效零售管理至关重要。",
+      "rhetorical_function_cn": "开篇建立‘关系很重要’的宏观背景，为后文聚焦产品关系铺路。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引导读者接受‘关系赋能零售管理’是值得研究的问题域。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 2,
+      "section": "Introduction",
+      "locator": "P1 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "本文聚焦利用其他产品信息进行协作式零售销售预测，这为生产、采购、营销、库存等决策提供基础。",
+      "rhetorical_function_cn": "将宽泛的关系话题收缩到具体分析单元：协作RSF，并说明其管理重要性。",
+      "depends_on_cn": "前句强调关系普遍性，此句选择‘产品关系’作为研究对象。",
+      "sets_up_cn": "为后文讨论相关产品识别和关系利用设定应用场景。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 3,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "传统上产品关系主要被视为互补品和替代品两类。",
+      "rhetorical_function_cn": "引入既有分类框架，作为被挑战的基线。",
+      "depends_on_cn": "承接零售产品关系的话题。",
+      "sets_up_cn": "后文将指出该二分法的不足。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "然而互补/替代二分法无法完全覆盖对协作RSF有用的潜在产品关系，因为销售关系还由消费者偏好决定，而非仅由产品固有属性决定。",
+      "rhetorical_function_cn": "点明现有知识框架的结构性缺口。",
+      "depends_on_cn": "依赖P2对传统两分法的定义。",
+      "sets_up_cn": "引出对‘非本征关系’的讨论并引向RQ1。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P3 S2-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "例如因货架邻近而一起被购买的商品虽非固有互补，但销售可能正相关；相反，促销所致的相似波动只是偶然相关，不应视为真实关系。",
+      "rhetorical_function_cn": "用具体零售例子说明二分法之外的关系现象，并区分‘固有/重复’与‘偶然/瞬时’关系。",
+      "depends_on_cn": "承接对二分法局限的论述。",
+      "sets_up_cn": "为后文设定‘精准而全面识别固有或重复关系’的问题标准。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P4 S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有识别相关产品的方法要么假设同品类/共视即替代从而引入噪声，要么依赖可观察属性相似度从而遗漏潜在相关产品。",
+      "rhetorical_function_cn": "系统批判现有关系识别策略，展示准确性和全面性都无法满足。",
+      "depends_on_cn": "由前述现象提炼出‘需要精准全面识别’，再给出反面证据。",
+      "sets_up_cn": "为RQ1的提出提供文献和实践支持。",
+      "evidence_pointer": "Section 1, 引用Kwark et al. 2021和Voleti et al. 2015"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P4 S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "由此提出第一个研究问题：如何持续、精准且全面地识别固有或重复的产品关系？",
+      "rhetorical_function_cn": "将缺口转化为正式研究问题，明确研究的起点。",
+      "depends_on_cn": "依赖前面对识别方法不足的论述。",
+      "sets_up_cn": "后文紧接着给出PRL方案。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P5 S1-S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为回答RQ1，设计数据驱动的关系学习器PRL，以销售作为监督信号，避免类别假设和属性穷举问题。",
+      "rhetorical_function_cn": "介绍第一类设计解决方案，并说明为何优于旧有识别方式。",
+      "depends_on_cn": "直接响应RQ1。",
+      "sets_up_cn": "为后文更详细的技术说明（Section 4.3）做概念铺垫。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P5 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为体现对固有/重复关系的偏好，设计了图鲁棒性损失和图对比损失，分别促进识别一致性和抑制瞬时相关。",
+      "rhetorical_function_cn": "进一步细化解决方案，点出两个损失的作用。",
+      "depends_on_cn": "承接PRL设计。",
+      "sets_up_cn": "为实验2中CGSL对比提供理论依据。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P6 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "识别关系后还需理清并恰当利用关系；文章借鉴跨品类选择依赖理论，从关系类型和时间维度将产品关系分解为正/负、间接/非对称、异步/动态。",
+      "rhetorical_function_cn": "引入理论框架并由此扩展关系类型，是全文理论支撑的关键点。",
+      "depends_on_cn": "前文已说明二分法不足，此处给出更丰富的分类。",
+      "sets_up_cn": "为导出RQ2和后续设计要求提供理论根基。",
+      "evidence_pointer": "Section 1, 引用Russell et al. 1999和Shocker et al. 2004"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P6 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "据此提出第二个研究问题：如何同时利用这些多面复杂的产品关系进行协作RSF？",
+      "rhetorical_function_cn": "将理论分解转化为新的研究问题，推动论证从识别阶段走向利用阶段。",
+      "depends_on_cn": "依赖前句对关系类型的分解。",
+      "sets_up_cn": "引出后续GNN方法设计。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P7 S1-S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "为建模间接关系采用GNN，但现有GNN无法处理负关系、异步关系以及同时容纳所有关系，因此需要定制GNN模块：DRAI、DC-PRL和SATE。",
+      "rhetorical_function_cn": "指出现有技术方案的缺口，并简要勾勒解决方向。",
+      "depends_on_cn": "由RQ2引导到GNN技术域。",
+      "sets_up_cn": "预告方法部分的三模块设计。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P8 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "文章整体定位为计算设计研究，提出端到端方法MS2RSF，并在两个真实数据集上验证其优于多个基准。",
+      "rhetorical_function_cn": "结尾总结研究贡献与方法，并给出核心证据。",
+      "depends_on_cn": "整个引言发展至此，开始收束。",
+      "sets_up_cn": "引导读者进入后续文献综述和方法详述。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 14,
+      "section": "Literature Review",
+      "locator": "Section 2.1, 开头两段",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "文献综述回顾了RSF方法从统计到机器学习再到深度学习的发展，以及外生变量如日历、天气、评论等的研究。",
+      "rhetorical_function_cn": "为读者建立RSF领域既有知识背景。",
+      "depends_on_cn": "引言已框定研究目标，这里扩展技术脉络。",
+      "sets_up_cn": "随后聚焦“相关实体识别”和“他人信息纳入”两个缺口。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 15,
+      "section": "Literature Review",
+      "locator": "Section 2.1, 第四段开始",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有寻找相关实体的研究要么不加区分地纳入所有产品，要么依赖同品类/同品牌/共现等强假设，要么使用属性相似度，但都容易引入噪声或漏掉重要关系。",
+      "rhetorical_function_cn": "集中罗列已有关系识别方法的缺陷。",
+      "depends_on_cn": "承接RSF中相关产品信息重要性的讨论。",
+      "sets_up_cn": "为后文研究缺口部分提供文献证据。",
+      "evidence_pointer": "Section 2.1 第四段"
+    },
+    {
+      "order": 16,
+      "section": "Literature Review",
+      "locator": "Section 2.2, 第二段",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "在关系赋能时序预测中，GNN已在股票、交通、客流等任务上取得优异成绩，但通常依赖预定义图或简单相关图。",
+      "rhetorical_function_cn": "引入GNN作为主要技术背景。",
+      "depends_on_cn": "文献综述从RSF过渡到Re-TSF。",
+      "sets_up_cn": "后文将指出这些GNN方法在零售场景中忽视了负和异步关系。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 17,
+      "section": "Literature Review",
+      "locator": "Section 2.3, 第一段",
+      "move_code": "GAP",
+      "paraphrase_cn": "综合文献后，首先指出有效识别相关产品仍是开放问题，现有策略无法同时兼顾精确性和全面性。",
+      "rhetorical_function_cn": "明确第一类研究缺口。",
+      "depends_on_cn": "前面两节文献梳理的结果。",
+      "sets_up_cn": "支撑RQ1的合法性。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 18,
+      "section": "Literature Review",
+      "locator": "Section 2.3, 第二段",
+      "move_code": "GAP",
+      "paraphrase_cn": "其次指出现有方法不能充分处理多面复杂产品关系，VAR族难以捕捉间接/异步/动态关系，GNN方法又常忽视负和异步关系。",
+      "rhetorical_function_cn": "明确第二类研究缺口。",
+      "depends_on_cn": "延续前段缺口论述。",
+      "sets_up_cn": "支撑RQ2和设计GNN的必要性。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 19,
+      "section": "Literature Review",
+      "locator": "Section 2.3, 第三段",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "尽管GNN成功广泛，但在协作RSF中仍研究不足，最新RSF研究也仅用XGBoost或普通门控GNN，因此需要将管理问题与先进深度学习方法桥接起来。",
+      "rhetorical_function_cn": "说明该缺口对IS研究的重要性，不是简单技术适配问题，而是需要针对零售关系特征专门设计。",
+      "depends_on_cn": "两个缺口共同指向这一判断。",
+      "sets_up_cn": "为第三部分设计理性做铺垫。",
+      "evidence_pointer": "Section 2.3, 引用Lei et al. 2024和Ma 2024"
+    },
+    {
+      "order": 20,
+      "section": "Design Rationales",
+      "locator": "Section 3.1, 第一段",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "健全的设计理性对设计科学贡献至关重要，尤其在AI快速迭代时代，需要有效抽象（如理论指导设计）以保持论文的长期生命力。",
+      "rhetorical_function_cn": "引用Gregor/Hevner和Abbasi等，建立理论指导设计的合法性。",
+      "depends_on_cn": "文献综述的缺口促使需要理论来指导方案。",
+      "sets_up_cn": "引出图1中的理论驱动设计链。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 21,
+      "section": "Design Rationales",
+      "locator": "Section 3.1, 第二段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "设计以CCCDT为起点，将产品关系沿关系类型（正/负）和时间（异步/动态）两个维度分解，并由此确定三个元需求。",
+      "rhetorical_function_cn": "正式描述理论到需求的转化。",
+      "depends_on_cn": "前段强调理论指导的重要性。",
+      "sets_up_cn": "为后文每个需求的解决方案提供索引。",
+      "evidence_pointer": "Section 3.1, Figure 1"
+    },
+    {
+      "order": 22,
+      "section": "Design Rationales",
+      "locator": "Section 3.1, 第三段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "CCCDT识别三类跨品类效应：跨品类考虑、产品捆绑、跨品类学习，分别对应正/负关系、组合关系、先前购买导致的异步影响。",
+      "rhetorical_function_cn": "详细阐述CCCDT三个构念，为关系类型提供理论标签。",
+      "depends_on_cn": "理论引入后需要展开。",
+      "sets_up_cn": "后面关于间接性、非对称性和动态性的讨论均以此为基点。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 23,
+      "section": "Design Rationales",
+      "locator": "Section 3.1, 第四段(1)",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "从关系类型视角，产品捆绑和跨品类考虑产生正负关系，且关系可能是间接的（如茶、咖啡和奶油的例子）和非对称的（如主体产品与附加品）。",
+      "rhetorical_function_cn": "用经济学例子阐释关系的两种属性。",
+      "depends_on_cn": "依赖CCCDT的类型框架。",
+      "sets_up_cn": "为DRAI中的频谱映射和mag laplacian提出理论合法化。",
+      "evidence_pointer": "Section 3.1, 引用Samuelson 1974、Ogaki 1990、Huang et al. 2019等"
+    },
+    {
+      "order": 24,
+      "section": "Design Rationales",
+      "locator": "Section 3.1, 第五段(2)",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "从时间视角，跨品类学习产生异步影响（如品牌溢出效应），且关系类型和强度随时间动态变化（如摄像机与智能手机从互补变替代）。",
+      "rhetorical_function_cn": "补充时间维度，说明为何需要异步和动态建模。",
+      "depends_on_cn": "前段已说明类型维度，此处转向时间维度。",
+      "sets_up_cn": "为SATE和DC-PRL的虚拟节点/注意力机制提供依据。",
+      "evidence_pointer": "Section 3.1, 引用Shocker et al. 2004"
+    },
+    {
+      "order": 25,
+      "section": "Design Rationales",
+      "locator": "Section 3.2, 第一段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "这些关系带来的需求在方法上构成重大挑战，需要专门设计，例如同时处理同步与异步关系时每类产品通常只对应一个嵌入，这是难点。",
+      "rhetorical_function_cn": "将理论需求转化为方法论挑战，引出后续解决方案。",
+      "depends_on_cn": "直接呼应前一小节的关系分类。",
+      "sets_up_cn": "为每个模块的专门设计做铺垫。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 26,
+      "section": "Design Rationales",
+      "locator": "Section 3.2, 第二段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为满足Req1，设计了基于图结构学习的PRL，并引入图鲁棒性损失和图对比损失来增强一致性与去噪能力。",
+      "rhetorical_function_cn": "将第一个需求落实到具体设计。",
+      "depends_on_cn": "基于GSL的技术积累和对噪声问题的分析。",
+      "sets_up_cn": "为实验2中CGSL对照提供理论基础。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 27,
+      "section": "Design Rationales",
+      "locator": "Section 3.2, 第三段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为满足Req2-1，设计DRAI，将正负关系分别映射到低/高频信号，并引入磁拉普拉斯矩阵以适配非对称关系。",
+      "rhetorical_function_cn": "将类型维度需求映射到频谱设计。",
+      "depends_on_cn": "以往GCN低通滤波性质和SGCN不平衡路径的局限。",
+      "sets_up_cn": "为实验3正负关系消融提供设计预期。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 28,
+      "section": "Design Rationales",
+      "locator": "Section 3.2, 第四段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为满足Req2-2，设计双通道PRL，同步图和异步图并行；异步图使用‘previous_’和‘current_’虚拟节点，并用注意力机制聚合多个历史时段以捕捉异步模式；对动态关系使用可正可负的注意力激活函数。",
+      "rhetorical_function_cn": "将时间维度需求压缩为三个子设计和对应实现。",
+      "depends_on_cn": "跨品类学习和动态关系理论。",
+      "sets_up_cn": "为实验4异步关系消融以及在线附录中的动态注意力可视化提供依据。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 29,
+      "section": "Proposed Method",
+      "locator": "Section 4.1, 第一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "CL4RSF整体架构由SATE提供初始表征，DC-PRL分别生成同步和异步图，DRAI在两类图上进行消息传递，两个隐藏嵌入融合后用于预测，所有模块联合训练。",
+      "rhetorical_function_cn": "给出架构总览，让读者理解模块间数据流。",
+      "depends_on_cn": "前文理论需求与解决方案。",
+      "sets_up_cn": "后续小节分别详述每个模块。",
+      "evidence_pointer": "Section 4.1, Figure 3"
+    },
+    {
+      "order": 30,
+      "section": "Proposed Method",
+      "locator": "Section 4.2, 第一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "SATE使用GRU提取时序表示；为捕捉异步影响，在异步图中构造多个滑动的历史序列，并通过注意力机制对它们加权融合。",
+      "rhetorical_function_cn": "解释时序编码器如何处理同步和异步。",
+      "depends_on_cn": "前文提出的异步虚拟节点机制。",
+      "sets_up_cn": "为实验4和解释性注意力分析提供方法基础。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 31,
+      "section": "Proposed Method",
+      "locator": "Section 4.3, 第一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DC-PRL用Topk近邻和归一化点积学习有向同步图与异步图，异步图中只允许从‘previous_’节点到‘current_’节点的边，避免信息泄漏。",
+      "rhetorical_function_cn": "说明图学习的具体机制。",
+      "depends_on_cn": "GSL思想和对异步依赖的定义。",
+      "sets_up_cn": "后文两个损失在此时正式定义。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 32,
+      "section": "Proposed Method",
+      "locator": "Section 4.3.1, 第一句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "图鲁棒性损失通过鼓励每个节点的邻居相似度分布偏离均匀分布，从而保持Topk邻居在不同实验之间的一致性。",
+      "rhetorical_function_cn": "具体化第一个正则化目标。",
+      "depends_on_cn": "对‘识别一致性’的需求。",
+      "sets_up_cn": "为实验2中CGSL结果对比提供归因。",
+      "evidence_pointer": "Section 4.3.1"
+    },
+    {
+      "order": 33,
+      "section": "Proposed Method",
+      "locator": "Section 4.3.2, 第一句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "图对比损失以销售历史为监督，将连接节点作为正样本，非连接节点作为负样本，并改进相似度度量（取绝对值）以考虑负相关产品。",
+      "rhetorical_function_cn": "具体化第二个监督目标，并说明为适应负关系所做的修改。",
+      "depends_on_cn": "对噪声抑制和负关系识别的需求。",
+      "sets_up_cn": "后文将其纳入联合损失函数。",
+      "evidence_pointer": "Section 4.3.2"
+    },
+    {
+      "order": 34,
+      "section": "Proposed Method",
+      "locator": "Section 4.4, 第一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DRAI对同步图和异步图采用不同实现：同步图使用MagNet（基于磁拉普拉斯）以编码方向信息；异步图使用FAGCN以避免信息泄漏。",
+      "rhetorical_function_cn": "说明DRAI如何适配两类图的方向含义差异。",
+      "depends_on_cn": "磁拉普拉斯和FAGCN等已有技术。",
+      "sets_up_cn": "为后文用注意力融合低/高频信号做铺垫。",
+      "evidence_pointer": "Section 4.4"
+    },
+    {
+      "order": 35,
+      "section": "Proposed Method",
+      "locator": "Section 4.4, 公式(15)后",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过tanh激活的注意力系数αG可在[-1,1]变化，正表示正关系主导，负表示负关系主导，且该系数依赖时变节点表示，从而支持动态关系类型和强度。",
+      "rhetorical_function_cn": "解释如何用一个机制同时实现正负关系选择和动态关系适应。",
+      "depends_on_cn": "前面对频谱低/高频对应的说明。",
+      "sets_up_cn": "为实验3和动态关系解释性分析提供依据。",
+      "evidence_pointer": "Section 4.4"
+    },
+    {
+      "order": 36,
+      "section": "Proposed Method",
+      "locator": "Section 4.5, 第一句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为适配RSF，将CL4RSF与多源信息融合和多步预测整合为端到端网络MS2RSF，并以MAE损失加两个正则项联合优化。",
+      "rhetorical_function_cn": "说明从模型到应用架构的封装。",
+      "depends_on_cn": "前面三个模块。",
+      "sets_up_cn": "后文实验部分将被检验的就是这个端到端系统。",
+      "evidence_pointer": "Section 4.5"
+    },
+    {
+      "order": 37,
+      "section": "Experiments",
+      "locator": "Section 5.1, 前两段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "评价使用两个真实数据集：Drugs来自某制药零售商的37M交易记录，抽样150个SKU并突出两个看似无关但可能相关的药品类别；Grocery来自Favorita公司某门店，抽样209个SKU覆盖11个产品族。",
+      "rhetorical_function_cn": "用两个不同场景展示评价构造的合理性。",
+      "depends_on_cn": "研究需要外部效度。",
+      "sets_up_cn": "为不同场景下的实验设计（聚焦 vs. 广泛）提供基础。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 38,
+      "section": "Experiments",
+      "locator": "Section 5.2, 第一段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "设计四个主实验：实验1与基准比较，实验2替换关系识别策略，实验3消融正负关系，实验4消融异步关系。",
+      "rhetorical_function_cn": "提前给出实验路线图，帮助读者理解每一部分证据的目的。",
+      "depends_on_cn": "前文模型设计的需求。",
+      "sets_up_cn": "后文结果部分按此结构展开。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 39,
+      "section": "Experiments",
+      "locator": "Section 5.2, 第二段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用MAE和RMSE作为评价指标，所有深度方法重复10次随机初始化，并用Diebold-Mariano检验和Bonferroni校正做显著性。",
+      "rhetorical_function_cn": "说明指标和统计方法，增强结果可信度。",
+      "depends_on_cn": "时间序列预测领域的标准做法。",
+      "sets_up_cn": "让后文数字比较有了统计基础。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 40,
+      "section": "Experiments",
+      "locator": "Section 5.3.1, 第一段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在两种数据上，MS2RSF在所有视界和两个指标上一致优于所有基准，且优势随预测视界增加而扩大。",
+      "rhetorical_function_cn": "报告最核心的整体性能证据。",
+      "depends_on_cn": "实验1的数据。",
+      "sets_up_cn": "为后续组件归因提供总结果。",
+      "evidence_pointer": "Tables 2–3"
+    },
+    {
+      "order": 41,
+      "section": "Experiments",
+      "locator": "Section 5.3.2, 第一段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "将DC-PRL替换为其他PRI策略后性能均有下降，说明本文方法在关系识别上的稳健性和有效性。",
+      "rhetorical_function_cn": "报告实验2的主要结论。",
+      "depends_on_cn": "表格4-5的数据。",
+      "sets_up_cn": "随后用注意力分布可视化解释为何替代策略更差。",
+      "evidence_pointer": "Tables 4–5"
+    },
+    {
+      "order": 42,
+      "section": "Experiments",
+      "locator": "Section 5.3.2, 第三段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Shopper在Drugs案例中难以有效识别正关系，因为药物购买具有被动性和单一性，而本文基于聚合销售数据的方法不依赖购物篮，因此在该场景更稳健。",
+      "rhetorical_function_cn": "补充解释一个竞争基准失败的原因，同时展示本文方法的非对称场景适应性。",
+      "depends_on_cn": "Shopper-GAT在Drugs中的结果和t-SNE图。",
+      "sets_up_cn": "为后文强调聚合销售比basket数据更具鲁棒性埋下伏笔。",
+      "evidence_pointer": "Section 5.3.2, Figure 6"
+    },
+    {
+      "order": 43,
+      "section": "Experiments",
+      "locator": "Section 5.3.3, 第一句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "排除正或负关系都会导致性能下降，证明两类关系的利用都是有效且必要的。",
+      "rhetorical_function_cn": "报告实验3的结论。",
+      "depends_on_cn": "Table 6的消融结果。",
+      "sets_up_cn": "为不同疾病场景下的关系解释提供入口。",
+      "evidence_pointer": "Table 6"
+    },
+    {
+      "order": 44,
+      "section": "Experiments",
+      "locator": "Section 5.3.4, 第一句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "去掉异步关系会导致预测性能下降，特别是在较长预测视界上。",
+      "rhetorical_function_cn": "报告实验4的结论。",
+      "depends_on_cn": "Table 7的结果。",
+      "sets_up_cn": "将异步模块的增益与长视界预测优势关联。",
+      "evidence_pointer": "Table 7"
+    },
+    {
+      "order": 45,
+      "section": "Experiments",
+      "locator": "Section 5.4.1, 第二句",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "在Drugs数据上，将模型分别应用于单品类时最佳Topk为5，而同时应用于两个品类时最佳Topk为7，说明需要更多跨品类邻居，证实跨品类效应存在。",
+      "rhetorical_function_cn": "用超参数变化作为辅助证据，支持CCCDT理论所提示的跨品类关系。",
+      "depends_on_cn": "实验3中的单品类实验设置。",
+      "sets_up_cn": "为后文强调跨品类推荐多样性做铺垫。",
+      "evidence_pointer": "Section 5.4.1"
+    },
+    {
+      "order": 46,
+      "section": "Experiments",
+      "locator": "Section 5.4.2, 第一句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "进一步解释性分析展示模型能够推断出正、负、异步和动态产品关系，并同时自适应地利用它们。",
+      "rhetorical_function_cn": "总结解释性分析的范围和结论。",
+      "depends_on_cn": "在线附录I.3-I.6的可视化。",
+      "sets_up_cn": "为贡献部分宣称的多关系建模提供证据基础。",
+      "evidence_pointer": "Section 5.4.2"
+    },
+    {
+      "order": 47,
+      "section": "Contributions",
+      "locator": "Section 6.1, 第一段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献之一是超越互补/替代二分法，系统刻画了正负、间接、非对称、异步、动态六种产品关系，拓宽了协作RSF可用的关系视野。",
+      "rhetorical_function_cn": "将理论分解上升为对学科的贡献。",
+      "depends_on_cn": "全文理论与实验结果。",
+      "sets_up_cn": "为后两个贡献提供铺垫。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 48,
+      "section": "Contributions",
+      "locator": "Section 6.1, 第二段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献之二在于提出CL4RSF这个可复制的设计制品，并总结两个可泛化设计原则：‘从管道到联合优化’和‘旋转与编织’。",
+      "rhetorical_function_cn": "突出设计科学意义上的抽象知识贡献。",
+      "depends_on_cn": "前面的设计和实验。",
+      "sets_up_cn": "为未来研究提供可迁移的指导。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 49,
+      "section": "Contributions",
+      "locator": "Section 6.1, 第三段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献之三是方法论层面的创新，包括双通道异步图学习、带两个损失的鲁棒图结构学习，以及用频谱信号建模正负关系的DRAI。",
+      "rhetorical_function_cn": "将具体组件上升为可复用的方法论贡献。",
+      "depends_on_cn": "实验2-4验证各模块有效。",
+      "sets_up_cn": "为表8提供潜力上下文。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 50,
+      "section": "Managerial Implications",
+      "locator": "Section 6.2.1, 前半",
+      "move_code": "RESULT",
+      "paraphrase_cn": "经济价值分析估计，在Drugs场景中，MS2RSF相比最佳基准Shopper-GAT可节省超2.5亿元人民币的成本。",
+      "rhetorical_function_cn": "将预测性能盈余量化为货币价值，强化实践意义。",
+      "depends_on_cn": "误差成本模型和情景外推。",
+      "sets_up_cn": "使贡献部分的管理主张更具说服力。",
+      "evidence_pointer": "Section 6.2.1, Table 9"
+    },
+    {
+      "order": 51,
+      "section": "Managerial Implications",
+      "locator": "Section 6.2.2, 最后一段",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "与仅基于行为数据且局限于类目内的推荐策略相比，CL4RSF派生出的产品关系有望提升推荐的关联性（利用正负关系）、适时性（区分同步/异步）和多样性（跨品类关系）。",
+      "rhetorical_function_cn": "将制品能力映射到一个具体下游应用，展示扩展用途。",
+      "depends_on_cn": "全文模型输出与解释性分析。",
+      "sets_up_cn": "为领域外迁移和未来研究提供案例。",
+      "evidence_pointer": "Section 6.2.2, Figure 7"
+    },
+    {
+      "order": 52,
+      "section": "Limitations",
+      "locator": "Section 7, 第一段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "本研究的局限包括：DC-PRL只处理已有产品，未来应研究支持新节点的动态图；使用固定Topk邻居数，可探索更灵活的图结构学习；预测增益与管理价值的实际联系仍应通过现场实验验证。",
+      "rhetorical_function_cn": "诚实地划定边界并指引未来研究。",
+      "depends_on_cn": "全文的边界条件。",
+      "sets_up_cn": "为读者留下批判空间和改进方向。",
+      "evidence_pointer": "Section 7"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "作者先建立‘关系重要’的背景，然后将互补/替代二分法作为旧框架，用真实反例（货架相邻、促销巧合）指出其不足，再用文献证据（同品类/共现的错误率、属性相似度漏捕）突出‘识别’环节的缺口，最后指出即使识别出关系，现有GNN也无法同时处理负关系和异步关系。由此形成两个层级递进的缺口：识别不全/不精 + 利用不足。",
+    "signposting_cn": "引言末句明确研究定位（计算设计研究）和主要路径；Section 3.1用图1给出理论到需求的映射；Section 3.2用表1串联理论-需求-方案-新颖性；实验部分在5.2开头预告四个实验；每个实验有一个独立小节标题，并在开头或结果中给出清晰结论。",
+    "transition_logic_cn": "段落间常用‘第一...第二...’或‘首先...其次...’；从识别到利用，通过‘Following the identification...’过渡；从组件实验到解释性分析，用‘Moreover, explanatory analyses...’；从贡献到管理启示，用‘On the one hand...On the other hand...’。",
+    "claim_evidence_rhythm_cn": "每个设计模块在提出后，几乎立即说明其预期作用和对应的实验验证；主实验先给出总体性能，然后逐项用消融结果归因于特定设计，形成‘总—分—因’的叙事；讨论部分再把这些局部结果重新整合为设计原则。",
+    "benchmark_narrative_cn": "并不单纯罗列benchmark，而是按‘是否使用跨序列依赖’和‘采用何种关系来源’将benchmark分类，并在主实验结果后逐类解释为何MS2RSF优于它们：例如DeepGLO不加区分纳入所有序列，STGCN/DCRNN用相关图，MTGNN/GTS/MSGNet做图学习但无负关系建模，Shopper依赖basket数据。这样benchmark不仅是性能对照，也是解释架构中特定设计选择的必要证据。",
+    "theory_return_cn": "讨论部分首先把产品关系维度扩展归于CCCDT指导；在解释性分析中，用跨品类效应和注意力可视化回指CCCDT中的三类跨品类效应；在贡献部分再次强调理论指导设计，并两个设计原则作为理论抽象。",
+    "contribution_positioning_cn": "作者将贡献分为三层：领域层面（扩展关系类型）、设计科学层面（可泛化设计原则+制品）、方法论层面（具体模块创新）。每一层都用不同证据支撑：领域层面用实验性能和关系可视化；设计科学层面用组件的稳健性和跨数据集一致性；方法论层面用消融实验和与既有GNN/关系学习方法的比较。",
+    "novelty_protection_cn": "防止贡献退化为一次性性能结果的主要策略包括：将性能差异归因于理论关系维度（正负、异步、动态）而非具体网络技巧；提供两个抽象设计原则（联合优化、双节点旋转编织）可迁移到其他领域；在表8中列出医疗、金融、移动端等潜在应用场景；通过解释性分析说明模型学习的关系具有业务含义，而不只是更好的数值预测。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立关系重要性的背景，用具体零售场景说明产品关系在RSF中的价值",
+        "research_job_cn": "定义焦点现象（协作RSF），回顾关键文献，识别二分法或已有方法的局限",
+        "required_evidence_cn": "至少提供一个现实反例或经验观察，说明传统关系分类不够用",
+        "transition_to_next_cn": "通过“因此，需要更系统地刻画产品关系”引出理论视角"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入一个消费/管理理论，将产品关系沿可操作维度分解（如关系类型和时间维度），并映射为元需求",
+        "research_job_cn": "结合理论文献和零售领域知识，给出每个关系类型的定义和实例",
+        "required_evidence_cn": "理论构念必须能被翻译为具体的计算需求（如：正/负关系需要不同聚合方向）",
+        "transition_to_next_cn": "用‘为满足这些需求，需要设计特定计算模块’进入方法部分"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "将每个元需求转化为一个独立且可检验的算法模块，解释其与现有GNN或深度学习的差异",
+        "research_job_cn": "设计模块架构，必要处用数学公式表达；明确模块在整体流程中的位置",
+        "required_evidence_cn": "必须有实现层面的决定（如损失函数、激活函数、拉普拉斯算子）来对应需求；并可对抗性讨论为什么现有方法不满足",
+        "transition_to_next_cn": "用‘为适配实际RSF，进一步封装为端到端网络’引入系统集成"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计多组实验：第一组整体基准比较，后续组使用替换/消融方式分离每个关键设计的作用",
+        "research_job_cn": "选择适当的真实数据集；每个消融只改变一个模块，其余固定；覆盖多个预测视界和指标",
+        "required_evidence_cn": "至少两个独立数据集；基准方法要涵盖统计、机器学习、深度学习、关系学习等不同类别",
+        "transition_to_next_cn": "从整体性能转向‘为什么有效’，进入组件分析"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "用解释性分析或辅助实验展示模型学到了什么（可视化、注意力分数、特征空间），并从领域角度解释结果",
+        "research_job_cn": "在附录或正文中展示学习到的关系图、注意力分布、T-SNE等，结合领域知识讨论",
+        "required_evidence_cn": "至少一个可视化/定量分析能证明理论构念在数据中可观察（如跨品类效应存在）",
+        "transition_to_next_cn": "将性能改进与业务语义连接，引出经济价值或下游应用讨论"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "贡献部分从‘领域认知扩展、设计知识抽象、方法创新’三个层面总结，避免只谈性能",
+        "research_job_cn": "总结设计原则，尝试用简洁的套路名称（如“从管道到联合优化”）概括抽象知识",
+        "required_evidence_cn": "之前的实验结果和可视化足以支撑每一个贡献主张",
+        "transition_to_next_cn": "以局限性收尾，指出未来研究开放问题"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用理论（如CCCDT）把模糊的‘关系’拆成可计算的维度（正/负、异步/动态），再将每个维度对应到一个可测模块或损失",
+      "在实验设计时采用‘整体基准+组件消融+解释性可视化’三级证据结构，让性能提升不只是‘黑箱结果’",
+      "用可视化（attention、t-SNE）把模型学习的内部表示转化为领域可解释的证据",
+      "将技术优势与管理场景绑定（经济价值分析、CSPR例子），提升论文对IS读者的相关性",
+      "用表1形式将理论依据、需求、解决方案、新颖性横向映射，是设计科学论文常用的高效框架"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "两个真实零售数据集（Drugs的37M交易数据和Favorita公开但规模极大的数据）需要大量数据预处理和计算资源",
+      "Shopper模型需要细粒度购物篮数据，在Grocery数据中不可用，这限制了该基准的适用范围",
+      "GNN训练和10次重复实验、多个视界、多个数据集会产生很大的计算开销",
+      "经济价值分析需要公司内部成本数据（仓储物流成本）和门店/SKU扩展假设，并非一般研究者可轻易获得",
+      "在线附录包含大量额外实验（完整数据集对比、敏感性分析、DM检验、更多可视化），这些内容对审稿人说服力很重要但撰写成本较高"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不应只堆叠GNN模块然后宣称‘多关系建模’，必须让每个模块与某个理论或业务关系维度明确对应，并有消融证据",
+      "不应仅凭性能提升宣称‘识别了关系’，需要至少通过解释性分析展示关系语义（如图、注意力）避免空泛",
+      "两个设计原则（管道到联合优化、旋转与编织）若脱离实际实验结果，会显得空洞；应确保原则确实来自实验中的对比证据",
+      "经济价值分析若没有成本来源假设说明，容易变成夸大数字；应透明展示外推逻辑和不确定性"
+    ],
+    "single_best_description_of_the_routine_cn": "用一个理论把关系世界拆成维度，再把每个维度变成一个可学习的GNN模块，然后用‘整体赢+组件赢+可解释’的三段式实验证明理论到设计的每一环都不是装饰。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "本文分析基于主文全文，但部分在线附录（如Appendix B、D、E、H、I）未直接展示，仅通过引用和描述了解其内容；因此对稳健性分析、DM检验、详细可视化等具体数字和细节无法逐项核查。表格/图中有少量OCR变形，但不影响结构判断。主文中的管理启示与经济价值分析存在较强外推假设，本分析已做标注。",
+  "usage": {
+    "prompt_tokens": 38547,
+    "completion_tokens": 25042,
+    "total_tokens": 63589,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 35219
+  }
+}

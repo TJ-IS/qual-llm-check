@@ -1,0 +1,1801 @@
+# Designing Attentive Information Dashboards
+
+- 作者：Peyman Toreini; Moritz Langner; Alexander Maedche; Stefan Morana; Tobias Vogel
+- 年份 / 期刊：2022 / Journal of the Association for Information Systems
+- DOI：10.17705/1jais.00732
+- 源文件：11474_2022_designing-attentive-information-dashboards.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：如何设计能够基于实时眼动数据为数据探索任务提供个体化视觉注意反馈（VAF）的注意力感知信息仪表板，从而增强用户的注意资源管理与信息处理？
+
+- 制品与设计：提出并实例化一个注意力感知信息仪表板原型：系统架构包括信息仪表板子系统、眼动追踪子系统和注意力感知子系统；设计原则DP1要求实时基于眼动监控计算注意资源分配，DP2要求基于计算的注意资源分配提供个体化、精确、无暗示性的VAF。实验实例化中，个体化VAF以每个AOI上的注视时长形式在首访后呈现给用户。
+
+- 客观结果：92人受控实验室实验中，与只接收一般文字VAF的对照组相比，个体化VAF组在复访阶段显著改善了注意资源分配（首访高注意AOI在复访中减少注意，首访低注意AOI增加注意）、降低了注意转移率，并在任务结束阶段实现了更均匀的注意资源管理；三个假设均得到支持。
+
+- 核心贡献：作者声称贡献为：面向注意力感知信息仪表板的系统架构、两条有理论依据并经实验检验的设计原则、以及将实时眼动数据作为内建能力集成进BI&A仪表板的处方性设计知识；按Gregor和Hevner的DSR贡献框架将其定位为对现有问题的“改进型”解决方案。
+
+- 整篇论证链：文章从注意力稀缺这一普遍现实出发，指出仪表板以高密度可视化支持决策，但用户在面对大量图表时难以自行管理有限注意资源；既有眼动研究在IS和BI&A中主要用于事后诊断，缺少利用实时眼动数据设计内建注意反馈的知识。作者通过一个包含三个设计周期的DSR项目来填补该缺口：第一周期通过文献和试点眼动实验发现用户存在左侧/上方偏差且复访时重复旧行为，因而形成初始元需求；随后在试点中比较一般VAF与个体化VAF，发现个体化VAF更有效。本文聚焦第二周期，将初始元需求细化为四条元需求，推导出两条设计原则，并实例化为具有实时眼动监控与个体化VAF的软件原型；在92名大学生参与的受控实验中，以一般VAF文字提示为对照，通过眼动指标检验两条设计原则。结果表明个体化VAF使复访阶段注意分配更合理、注意转移更少、任务末端注意分布更均匀，从而支持设计原则。讨论部分把结果回接到注意与反馈理论，将贡献提炼为可复用的设计处方，并界定其边界与未来方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学研究范式，按元需求—设计原则—实例化—实验室评价的DSR逻辑推进；核心证据来自软件制品及其受控实验评价，贡献形式是系统架构和设计原则，而非形式模型、平台现场实验或多研究心理机制检验。
+
+- 主导写作弧线判定：全文主线是初始元需求、细化元需求、两条设计原则、系统架构实例化、对照实验评价，最后回到设计原则的可复用性；符合‘要求—构建—评价—设计原则’的DSR写作弧线，而不是以理论预测为主要叙事或仅以benchmark为中心。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：文章属于更大DSR项目：第一周期先用文献和试点眼动实验识别仪表板注意挑战，并比较一般VAF与个体化VAF；第二周期（本文焦点）细化理论、形成设计原则、实例化软件并在大样本受控实验中验证；第三周期计划将场景扩展到多任务任务恢复。四个阶段依次形成‘发现问题—筛选方案—严格验证—扩展边界’的累积关系。
+
+### studies_or_phases
+
+#### 1. 第一设计周期：文献梳理与试点眼动研究
+
+- order：1
+
+- name_cn：第一设计周期：文献梳理与试点眼动研究
+
+- question_cn：用户在探索信息仪表板时存在哪些注意资源分配问题？工作记忆容量是否影响其行为？
+
+- inputs_and_setting_cn：探索性文献回顾；试点眼动实验，被试在仪表板上完成数据探索任务。
+
+- designed_or_compared_object_cn：多图表信息仪表板；按工作记忆容量或暴露次数观察用户视觉行为。
+
+- baseline_control_or_counterfactual_cn：无反馈的重复浏览；既有诊断性眼动研究作为知识背景。
+
+##### objective_metrics
+
+1. 注视位置分布
+
+2. 首访与复访的注视行为一致性
+
+- analysis_method_cn：探索性文献分析与试点眼动数据定性/定量分析。
+
+- main_result_cn：用户倾向于过度关注仪表板左侧和上方的图表；再次浏览同一仪表板时重复原有视觉行为，且与工作记忆容量高低无关。
+
+- argumentative_role_cn：确定用户确实需要注意管理支持，并直接导出初始元需求：仪表板应通过提供个体化VAF来支持注意管理。
+
+- remaining_uncertainty_cn：尚不知哪种VAF形式能有效改善用户的信息处理。
+
+- link_to_next_phase_cn：基于该发现，作者开发并试点比较一般VAF与个体化VAF两种方案。
+
+##### evidence_pointers
+
+1. Section 3, first design cycle paragraphs
+
+2. Toreini & Langner 2019
+
+#### 2. 第一/早期阶段：一般VAF与个体化VAF的试点比较
+
+- order：2
+
+- name_cn：第一/早期阶段：一般VAF与个体化VAF的试点比较
+
+- question_cn：与基于离线眼动数据的一般VAF相比，基于实时眼动数据的个体化VAF是否更能改善数据探索中的信息处理？
+
+- inputs_and_setting_cn：试点眼动实验；三组用户分别接收其他用户正确注意分配示例、其他用户错误注意分配示例、以及本人实时注意分配的个体化VAF。
+
+- designed_or_compared_object_cn：一般VAF（离线他人数据）与个体化VAF（实时本人数据）的反馈方式差异。
+
+- baseline_control_or_counterfactual_cn：一般VAF的两种离线示例组作为非个体化反馈对照。
+
+##### objective_metrics
+
+1. 信息处理表现指标（如注意分配模式）
+
+- analysis_method_cn：组间比较。
+
+- main_result_cn：与一般VAF类型相比，个体化VAF对信息处理有正向影响。
+
+- argumentative_role_cn：早期证据支持把个体化VAF作为第二设计周期的候选设计方案。
+
+- remaining_uncertainty_cn：试点规模有限，尚未在严格受控的大样本实验中证明，也尚缺乏明确的设计原则与理论抽象。
+
+- link_to_next_phase_cn：由此进入第二设计周期，细化理论基础、导出设计原则并开展大样本实验。
+
+##### evidence_pointers
+
+1. Section 3, VAF comparison paragraph
+
+2. Toreini et al. 2020
+
+#### 3. 第二设计周期：提炼设计原则与受控实验室实验（本文主体）
+
+- order：3
+
+- name_cn：第二设计周期：提炼设计原则与受控实验室实验（本文主体）
+
+- question_cn：基于DP1与DP2实例化的注意力感知仪表板，能否通过个体化VAF改善用户的注意资源分配、注意转移率与注意资源管理？
+
+- inputs_and_setting_cn：92名大学生；Tobii Eye Tracker 4C；21英寸屏幕；自研.NET实验软件；六张灰度、静态、复杂度相似的柱状图仪表板；流程为首次浏览120秒、VAF 30秒、复访60秒、工作记忆测试。
+
+- designed_or_compared_object_cn：个体化VAF组（DP1+DP2实例化，呈现各AOI注视时长）与一般VAF组（不实例化DP，仅给一般文字提示）比较；同时比较反馈前后的首访与复访阶段。
+
+- baseline_control_or_counterfactual_cn：一般VAF文字提示作为非个体化反馈对照；首访阶段作为个体内基线；每个AOI理论平均注意比例16.67%作为机会水平。
+
+##### objective_metrics
+
+1. 各AOI注视时长百分比
+
+2. 各AOI注视次数百分比
+
+3. AOI间转移总数
+
+4. 六个AOI注视时长标准差
+
+5. 六个AOI注视次数标准差
+
+- analysis_method_cn：重复测量回归（反馈类型×首访注意交互）、独立t检验、Wilcoxon秩和/符号秩检验、卡方检验、热图与转移矩阵定性分析。
+
+- main_result_cn：H1、H2、H3均得到支持：个体化VAF组在复访阶段显著减少了首访高注意AOI的注意并增加了低注意AOI的注意，注意转移率显著更低，任务末端注意分布更均匀；一般VAF组则表现出行为重复。
+
+- argumentative_role_cn：为两条设计原则和软件实例提供严格因果证据，证明个体化VAF是有效果的设计选择。
+
+- remaining_uncertainty_cn：仪表板为高度受控设计，缺少真实世界色彩、交互与复杂度差异；未测量业务决策结果、心智努力或其他反馈形式；DP1不能脱离DP2单独检验。
+
+- link_to_next_phase_cn：作者在讨论中把这些未解决问题转为限制与未来方向，并衔接第三周期的多任务恢复场景。
+
+##### evidence_pointers
+
+1. Section 5.2, Laboratory Experiment Methodology
+
+2. Section 6.2-6.4, Results
+
+3. Figures 9-12
+
+4. Tables 2-4
+
+#### 4. 第三设计周期：多任务场景与注视可视化扩展（简述）
+
+- order：4
+
+- name_cn：第三设计周期：多任务场景与注视可视化扩展（简述）
+
+- question_cn：在多任务环境中，个体化VAF能否作为记忆提示支持用户从次要任务返回监控仪表板这一主任务？
+
+- inputs_and_setting_cn：文中仅概述计划，未报告完整实验；拟评估多种注视可视化形式。
+
+- designed_or_compared_object_cn：不同注视可视化形式的个体化VAF。
+
+- baseline_control_or_counterfactual_cn：未在本文中明确报告。
+
+##### objective_metrics
+
+1. （本文未报告结果指标）
+
+- analysis_method_cn：（本文未展开）
+
+- main_result_cn：文中未报告该周期结果，仅以研究计划形式说明。
+
+- argumentative_role_cn：扩大个体化VAF的适用边界，表明该设计知识不止于单次数据探索，还能支持任务恢复等注意力管理场景。
+
+- remaining_uncertainty_cn：多任务条件下的VAF效果、最优可视化形式以及任务恢复表现均未在本文验证。
+
+- link_to_next_phase_cn：该周期是后续研究路径；本文结论部分以未来工作方式承接。
+
+##### evidence_pointers
+
+1. Section 3, third design cycle paragraph
+
+2. Toreini et al. 2018a, 2018b
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 先用一句话交代仪表板在BI&A中的关键地位
+
+2. 指出信息量过大带来注意资源管理困难这一现实问题
+
+3. 引入注意力持续时间下降的实践紧迫性
+
+4. 宣布提出个体化视觉注意反馈制品
+
+5. 概述DSR方法与设计原则、实例化和实验评价
+
+6. 报告三类眼动结果均正向
+
+7. 声明系统架构与设计原则贡献
+
+### introduction_moves
+
+1. 以Simon和注意力经济建立宏观背景
+
+2. 用注意力持续时间下降和注意分配重要性说明实践后果
+
+3. 说明UI特征驱动注意以及部分任务需要用户自行管理注意
+
+4. 引入attentive UI概念
+
+5. 把问题收敛到BI&A仪表板的数据探索任务
+
+6. 指出现有BI&A眼动研究以诊断为主、缺少内建反馈设计知识
+
+7. 提出研究问题
+
+8. 预告三周期DSR项目并说明本文聚焦第二周期
+
+9. 预告研究发现与贡献
+
+10. 给出论文结构路线图
+
+### theory_and_knowledge_moves
+
+1. 界定注意力为选择性加工与有限容量
+
+2. 区分目标导向与刺激驱动、显性注意与隐性注意
+
+3. 引入眼-脑一致性假设，说明眼动可近似显性注意
+
+4. 引入Wickens人类信息加工阶段，强调注意资源连接感知、记忆与决策
+
+5. 论述工作记忆容量对注意控制的重要性
+
+6. 区分诊断性与交互性眼动应用
+
+7. 综述attentive UI与VAF现有证据
+
+8. 指出缺少将实时眼动数据用于反馈的IS设计知识
+
+### artifact_design_moves
+
+1. 从第一周期初始元需求出发
+
+2. 细化MR1实时监控注意、MR2基于眼动估计注意
+
+3. 由MR1/MR2导出DP1
+
+4. 细化MR3提供反馈以增强自我意识、MR4要求个体化精确非暗示性VAF
+
+5. 由MR3/MR4导出DP2
+
+6. 用三子系统系统架构对应设计原则
+
+### evaluation_moves
+
+1. 说明两条DP相互依赖，无法单独区分评价
+
+2. 选择个体化VAF组对比一般VAF组
+
+3. 将评价分为首次浏览、反馈、复访、任务结束阶段
+
+4. 推导H1注意资源分配、H2注意转移率、H3注意资源管理
+
+5. 设计等复杂度、灰度、静态六图表仪表板以控制刺激驱动注意
+
+6. 说明被试、设备、校准、排除标准与程序
+
+7. 报告操纵和随机化检查、组间首访等价性
+
+8. 用热图、转移矩阵和统计检验汇报结果
+
+### discussion_and_contribution_moves
+
+1. 把实验结果总结为对设计原则的支持
+
+2. 在7.1回接理论并声明首次将实时眼动集成进仪表板
+
+3. 按Gregor和Hevner框架定位为improvement贡献
+
+4. 在7.2讨论低价格眼动仪带来的实践可落地性
+
+5. 将设计知识外推到SAP、Windows、MyAnalytics、AR/VR等场景
+
+6. 在7.3系统列出设备、仪表板生态、眼动假设、反馈格式、结果变量等边界与未来方向
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 注意力有限容量与选择性注意理论（Broadbent过滤器、Kahneman容量）
+
+2. 目标导向注意与刺激驱动注意区分（Corbetta & Shulman）
+
+3. 显性注意与眼-脑一致性假设（Posner、Just & Carpenter、Kowler）
+
+4. 人类信息加工理论（Wickens adapted stages）
+
+5. 工作记忆容量与注意控制关系（Miller、Kane & Engle）
+
+6. 反馈与自我追踪研究（Nielsen、Preece、Sharma、D'Mello、Deza、Qvarfordt等）
+
+7. 第一周期实证发现：仪表板左侧/上方偏差、复访重复行为
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：设计原则的表述直接以理论命题为前提：从注意资源有限推出现时监控注意的MR1/MR2，从反馈提升自我意识推出个体化精确非暗示性VAF的MR3/MR4；后续实例化与实验对比也直接围绕理论预测展开。虽然具体反馈格式仍受工程可行性影响，但核心设计要求来自理论，而非纯数据驱动。
+
+- 理论到设计翻译链：注意力资源有限且选择性加工 → 眼睛注视近似显性注意 → 实时眼动设备可获取注意状态 → 系统应实时监控并估计用户的注意资源分配（MR1/MR2→DP1） → 通过反馈提升自我意识并支持目标导向注意 → 反馈必须个体化、精确、不具暗示性（MR3/MR4→DP2） → 实例化为三子系统架构，个体化VAF显示用户在每个AOI上的注视时长 → 与一般文字反馈相比，个体化VAF使复访阶段注意从首访高注意AOI转向低注意AOI、减少注意转移、末端注意分布更均匀 → 实验结果回授并支持设计原则。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：注意资源有限，用户无法同时加工仪表板上全部刺激；选择性注意决定信息进入后续加工。
+
+- mechanism_cn：用户通过眼动表现出的显性注意反映其当下的注意资源分配；实时眼动数据可监控这种分配。
+
+- design_requirement_cn：MR1实时监控注意资源分配；MR2基于眼动数据估计注意资源分配。
+
+- artifact_choice_cn：系统加入眼动追踪子系统和注意力感知子系统，实时采集注视并计算用户在每个AOI上的注视指标。
+
+- evaluated_contrast_cn：个体化VAF组（DP1+DP2实例化）对照一般VAF文字组。
+
+- objective_result_cn：复访阶段首访高注意AOI的注视时长/次数在个体化VAF组显著降低，而首访低注意AOI增加；回归交互项显著。
+
+##### evidence_pointers
+
+1. Section 4.1, MR1/MR2/DP1
+
+2. Section 6.2, regression results
+
+3. Figure 10
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：为个体提供关于自身注意分配的反饋能增强自我意识，使注意从无策略重复转向有策略调整。
+
+- mechanism_cn：个体化VAF使用户识别首访中被忽略的仪表板区域，从而在复访阶段重新分配注意并减少无目的切换。
+
+- design_requirement_cn：MR3提供反馈以增强自我意识；MR4要求反馈个体化、精确且无暗示性。
+
+- artifact_choice_cn：DP2实例化为在每个AOI上显示该用户自己的注视时长，并辅以简短文字引导；对照组仅收到一般文字提示。
+
+- evaluated_contrast_cn：个体化注视时长反馈 vs 一般文字注意提醒。
+
+- objective_result_cn：H1和H2支持：个体化VAF组复访阶段注意分配改变且转移次数显著少于对照组。
+
+##### evidence_pointers
+
+1. Section 4.1, MR3/MR4/DP2
+
+2. Section 5.2.4, Treatment Design
+
+3. Section 6.2-6.3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：用户在信息丰富界面上存在左上优先的注意偏差，并在重复浏览时容易固化旧行为。
+
+- mechanism_cn：若没有反馈，用户复访时复制首访行为，持续忽视右侧/下方图表；个体化VAF打破这种行为惯性。
+
+- design_requirement_cn：实验仪表板需控制刺激驱动注意，使目标导向注意可被追踪；反馈需帮助用户把注意扩展到被忽视区域。
+
+- artifact_choice_cn：使用六张灰度、同类型、等大小、静态且复杂度相近的柱状图，并把它们定义为六个AOI。
+
+- evaluated_contrast_cn：对照组复访保留左上偏差与旧转移模式；个体化VAF组复访转向右侧/下方AOI并探索其关系。
+
+- objective_result_cn：热图和转移矩阵显示个体化VAF组复访阶段转移集中于右侧/下方AOI；注意资源管理SD显著下降。
+
+##### evidence_pointers
+
+1. Section 5.2.2, dashboard design
+
+2. Section 6.2, heatmaps
+
+3. Section 6.3, transition matrices
+
+4. Section 6.4, SD results
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控实验室实验
+
+2. 混合设计：组间反馈类型操纵，组内反馈前/后阶段重复测量
+
+3. 眼动热图与AOI转移矩阵定性分析
+
+4. 重复测量回归、t检验、Wilcoxon检验、卡方检验
+
+5. 随机化检查与首访组间等价性检查
+
+- why_these_evaluations_cn：DP1与DP2构成递进关系，技术上不能单独拆开两个设计原则，因此将两条DP打包为个体化VAF组，与不实例化DP但提供一般反馈的对照组比较；同时，个体化VAF必须先采集首访眼动数据，故评价必须分为首访、反馈、复访、任务结束四个环节；为把效应归因于个体化反馈而非刺激驱动注意，作者控制仪表板的复杂度、颜色、大小与交互性。
+
+- benchmark_and_contrast_chain_cn：首先用随机化检查和首访眼动指标确认两组在反馈前等价；随后以一般VAF文字组作为‘反馈发生但非个体化’的对照；再以16.67%每个AOI的理论均值为规范基准，将复访阶段的注意分配解释为向低投入区域补偿；最后以任务末端六AOI注视分布SD作为注意资源管理的量化基准。对照组在首访到复访中表现出的行为重复强化了‘无个体化反馈则问题继续存在’的叙事。
+
+### claim_evidence_ledger
+
+#### 1. 随机化成功，两组在人口学和工作记忆容量上无差异，首访阶段视觉行为相似。
+
+- claim_cn：随机化成功，两组在人口学和工作记忆容量上无差异，首访阶段视觉行为相似。
+
+- evidence_cn：性别卡方p=0.45；年龄、经验、Corsi span、digit span的Wilcoxon检验均不显著；首访注意分配与转移率无显著组间差异。
+
+- support_level_cn：充分支持
+
+#### 2. 个体化VAF改善复访阶段的注意资源分配（H1）。
+
+- claim_cn：个体化VAF改善复访阶段的注意资源分配（H1）。
+
+- evidence_cn：首访注视时长与组别交互b=-0.75，SE=0.138，t(548)=-5.468，p<0.001；注视次数交互b=-0.812，p<0.001；热图定性显示个体化VAF组由高注意AOI转向低注意AOI。
+
+- support_level_cn：支持
+
+#### 3. 个体化VAF降低复访阶段的注意转移率（H2）。
+
+- claim_cn：个体化VAF降低复访阶段的注意转移率（H2）。
+
+- evidence_cn：首访阶段两组无差异，t(86.59)=-1.22，p=0.22；复访阶段个体化VAF组中位数35，一般VAF组中位数45，W=661.5，p=0.002，r=-0.321。
+
+- support_level_cn：支持
+
+#### 4. 个体化VAF改善任务结束阶段的注意资源管理（H3）。
+
+- claim_cn：个体化VAF改善任务结束阶段的注意资源管理（H3）。
+
+- evidence_cn：任务结束时基于注视时长和注视次数的SD在两组间显著更低（p=0.015和p=0.037）；个体化VAF组从首访到任务结束的SD显著下降（p<0.001），一般VAF组未显著下降。
+
+- support_level_cn：支持
+
+#### 5. 两条设计原则共同构成有效解决方案，且具有理论依据。
+
+- claim_cn：两条设计原则共同构成有效解决方案，且具有理论依据。
+
+- evidence_cn：设计原则由理论推导并在实验中实例化；但DP1本身未被单独检验，支持的是DP1+DP2的组合。
+
+- support_level_cn：部分支持
+
+#### 6. 该设计可改善用户的信息处理表现。
+
+- claim_cn：该设计可改善用户的信息处理表现。
+
+- evidence_cn：客观证据全部来自眼动注意指标，未测量任务绩效、回忆、决策质量；故‘信息处理改善’需要谨慎解释。
+
+- support_level_cn：间接支持
+
+- internal_validity_strategy_cn：采用受控实验室环境；多次校准眼动仪；剔除注视覆盖率低、控制题答错和眼部健康问题的被试；在正式实验前增加练习与休息间隔控制练习效应；设计六张等复杂度、同类型、静态、灰度柱状图以抑制刺激驱动注意；用控制题确认被试理解任务；进行随机化检查和首访组间等价性检查。
+
+- external_validity_strategy_cn：选择无仪表板专业训练的学生作为新手用户样本；使用低价格、可大规模部署的Tobii Eye Tracker 4C；在讨论中把知识外推到日常工作场景、企业软件和AR/VR；同时坦诚承认受控仪表板与现实仪表板的差距，并呼吁未来现场研究。
+
+- what_is_not_actually_tested_cn：DP1的单独效果未被检验；仪表板缺乏真实世界中的色彩、动画、交互和复杂度差异；没有测量业务决策质量、记忆成绩、心智努力或情绪反应；只在单一文化、学生样本和单次任务中测试；没有检验不同VAF可视化格式；多任务场景的第三周期没有在本文给出结果；眼动指标只是显性注意的近似，未直接测量隐性注意或认知状态。
+
+## 贡献闭环
+
+- technical_claim_cn：文章展示了一个可工作的注意力感知仪表板系统，能够用低价格眼动仪实时采集注视数据、计算AOI级注意分配、并生成个体化VAF；该技术在实验条件下产生了显著的眼动行为变化。
+
+- artifact_claim_cn：在DP1+DP2实例化的个体化VAF组，与仅一般文字VAF的对照组相比，用户复访阶段注意行为发生改变：低注意区域获得更多注意、高注意区域减少注意、注意转移更少、末端分布更均衡。
+
+- mechanism_claim_cn：个体化VAF通过让用户看到自己先前的注意分配而增强自我意识，使用户识别被忽视区域并有策略地调整目标导向注意；作者用眼动理论和自我追踪反馈文献解释该机制，但实验没有直接测量自我意识或策略选择过程。
+
+- boundary_claim_cn：该设计针对仪表板数据探索任务，在受控实验室条件、等复杂度静态仪表板、学生新手用户和单次反馈循环下得到验证；作者认为可迁移至其他BI&A系统、attentive UI、AR/VR等场景，但承认现实仪表板的复杂性与交互性尚未覆盖。
+
+- reusable_design_knowledge_cn：两条设计原则构成可复用处方：实时监控眼动并计算注意资源分配；基于该分配提供个体化、精确、非暗示性VAF。系统架构中的三子系统划分也可复用于其他注意力感知系统。
+
+- theoretical_contribution_cn：将注意力有限性理论、眼-脑一致性假设和Wickens人类信息加工框架从解释性知识转化为设计知识；以DSR改进型贡献扩展了将实时眼动数据作为IT制品内建能力的IS研究路径。
+
+- how_discussion_closes_intro_gap_cn：引言缺口是缺少把实时眼动数据用于仪表板注意反馈的设计知识；讨论部分明确声称这是首个将实时眼动数据作为仪表板内建能力研究的DSR项目，并用DP1/DP2、系统架构和实验结果直接封住该缺口。
+
+- overclaim_or_unsupported_leaps_cn：把眼动注意指标等同于‘信息处理改善’略有跳跃；将DP1+DP2打包检验，无法单独归因DP1；一般VAF文字提示与个体化VAF在信息量和媒介上都有差异，可能夹带除‘个体化’之外的混淆；从实验室结果外推到企业软件、AR/VR等场景证据不足；第三周期多任务帮助只被预告而未验证。
+
+## 句级写作动作图谱
+
+### 1. S1
+
+- order：1
+
+- section：Abstract
+
+- locator：S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：仪表板是当代BI&A系统中的关键能力。
+
+- rhetorical_function_cn：一开始就把主题置于主流IS情境中
+
+- depends_on_cn：无
+
+- sets_up_cn：为引出仪表板信息过载问题提供背景
+
+- evidence_pointer：Abstract first sentence
+
+### 2. S2
+
+- order：2
+
+- section：Abstract
+
+- locator：S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：仪表板虽能支持决策，但大量信息让用户执行数据探索时面临困难。
+
+- rhetorical_function_cn：概括核心经验问题
+
+- depends_on_cn：承接仪表板的重要性
+
+- sets_up_cn：指向注意资源有限这一理论解释
+
+- evidence_pointer：Abstract second sentence
+
+### 3. S3
+
+- order：3
+
+- section：Abstract
+
+- locator：S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：人类专注时间近年大幅下降，因此需要支持注意管理的界面。
+
+- rhetorical_function_cn：赋予问题实践紧迫性
+
+- depends_on_cn：承接信息过载问题
+
+- sets_up_cn：为设计制品提供现实必要性
+
+- evidence_pointer：Abstract third sentence
+
+### 4. S4
+
+- order：4
+
+- section：Abstract
+
+- locator：S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文提出设计提供个体化视觉注意反馈的注意力感知仪表板作为解决方案。
+
+- rhetorical_function_cn：公布核心制品
+
+- depends_on_cn：前两句建立的问题和紧迫性
+
+- sets_up_cn：引出设计科学项目
+
+- evidence_pointer：Abstract fourth sentence
+
+### 5. S5
+
+- order：5
+
+- section：Abstract
+
+- locator：S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文章提出有理论依据的设计原则，实例化软件制品，并用92名被试做受控实验。
+
+- rhetorical_function_cn：概括研究设计和证据来源
+
+- depends_on_cn：制品需要评价
+
+- sets_up_cn：为结果报告做铺垫
+
+- evidence_pointer：Abstract fifth sentence
+
+### 6. S6
+
+- order：6
+
+- section：Abstract
+
+- locator：S6
+
+- move_code：RESULT
+
+- paraphrase_cn：眼动分析表明个体化VAF对注意分配、注意转移率和注意管理有正向作用。
+
+- rhetorical_function_cn：给出核心实证结论
+
+- depends_on_cn：实验评价
+
+- sets_up_cn：支撑贡献声明
+
+- evidence_pointer：Abstract sixth sentence
+
+### 7. S7
+
+- order：7
+
+- section：Abstract
+
+- locator：S7
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献包括系统架构和两条设计原则，为实践者提供处方性知识。
+
+- rhetorical_function_cn：声明知识贡献
+
+- depends_on_cn：结果支持
+
+- sets_up_cn：界定文章的学术与实践价值
+
+- evidence_pointer：Abstract seventh sentence
+
+### 8. P1 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：引用Simon的论断：信息丰富世界消耗的是接收者的注意力。
+
+- rhetorical_function_cn：用权威引语建立注意力稀缺的宏观框架
+
+- depends_on_cn：无
+
+- sets_up_cn：为整个研究提供元理论前提
+
+- evidence_pointer：Introduction P1
+
+### 9. P2 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：研究显示人的注意力持续时间近年在下降，用户快速转移注意。
+
+- rhetorical_function_cn：把抽象注意力稀缺转成可观察现象
+
+- depends_on_cn：注意力经济背景
+
+- sets_up_cn：强调设计支持的必要性
+
+- evidence_pointer：Introduction P2
+
+### 10. P2 S2
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：合理注意分配对信息处理很重要，因为人们需要聚焦重要信息以完成目标。
+
+- rhetorical_function_cn：解释为什么注意分配影响绩效
+
+- depends_on_cn：注意力下降现象
+
+- sets_up_cn：说明失败后果
+
+- evidence_pointer：Introduction P2
+
+### 11. P3 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：一些任务需要纵观全局，用户必须自己管理注意而非仅靠界面引导。
+
+- rhetorical_function_cn：指出既有界面设计引导注意的局限
+
+- depends_on_cn：UI特征驱动注意的知识
+
+- sets_up_cn：引出attentive UI和反馈需求
+
+- evidence_pointer：Introduction P3
+
+### 12. P4 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：过去研究提出attentive UI应敏感于用户注意并在任务间优化分配注意。
+
+- rhetorical_function_cn：引入既有概念作为设计方向
+
+- depends_on_cn：注意管理难题
+
+- sets_up_cn：给出解决方案的学术来源
+
+- evidence_pointer：Introduction P4
+
+### 13. P5 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：组织从多源收集数据并分析，以支持决策者获得信息。
+
+- rhetorical_function_cn：从一般IS背景进入BI&A领域
+
+- depends_on_cn：注意力问题背景
+
+- sets_up_cn：聚焦仪表板这一具体制品
+
+- evidence_pointer：Introduction P5
+
+### 14. P5 S2
+
+- order：14
+
+- section：Introduction
+
+- locator：P5 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：仪表板支持数据探索，但用户在探索时往往不认识数据包含什么，仍感到信息量大而困难。
+
+- rhetorical_function_cn：明确数据探索情境中的用户体验问题
+
+- depends_on_cn：BI&A和仪表板定义
+
+- sets_up_cn：说明需要注意管理支持
+
+- evidence_pointer：Introduction P5
+
+### 15. P6 S1
+
+- order：15
+
+- section：Introduction
+
+- locator：P6 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：仪表板可能给用户管理注意资源造成困难，因为用户只能关注部分信息并遗漏其他。
+
+- rhetorical_function_cn：指出具体认知限制
+
+- depends_on_cn：数据探索困难
+
+- sets_up_cn：引入BI&A认知研究缺口
+
+- evidence_pointer：Introduction P6
+
+### 16. P6 S2
+
+- order：16
+
+- section：Introduction
+
+- locator：P6 S2
+
+- move_code：GAP
+
+- paraphrase_cn：现有BI&A研究多关注商业意义，对使用系统时用户认知挑战的研究不足。
+
+- rhetorical_function_cn：建立研究缺口
+
+- depends_on_cn：仪表板注意困难
+
+- sets_up_cn：为研究问题提供位置
+
+- evidence_pointer：Introduction P6
+
+### 17. P7 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：P7 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究聚焦设计能感知用户注意并帮助其分配注意的仪表板，并提出用视觉探索自我追踪特征。
+
+- rhetorical_function_cn：从缺口转向本研究的具体导向
+
+- depends_on_cn：注意管理缺口
+
+- sets_up_cn：引入眼动技术方案
+
+- evidence_pointer：Introduction P7
+
+### 18. P8 S1
+
+- order：18
+
+- section：Introduction
+
+- locator：P8 S1
+
+- move_code：GAP
+
+- paraphrase_cn：BI&A中的眼动技术迄今主要用于诊断，但有学者呼吁基于实时眼动数据设计支持决策者的功能。
+
+- rhetorical_function_cn：从技术应用状态挖缺口
+
+- depends_on_cn：眼动可近似视觉注意的文献
+
+- sets_up_cn：把缺口具体到实时反馈
+
+- evidence_pointer：Introduction P8
+
+### 19. P8 S3
+
+- order：19
+
+- section：Introduction
+
+- locator：P8 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出研究问题：如何设计提供个体化VAF的注意力感知仪表板以增强数据探索中的信息处理？
+
+- rhetorical_function_cn：正式固定研究问题
+
+- depends_on_cn：前述缺口
+
+- sets_up_cn：后面各节围绕该问题展开
+
+- evidence_pointer：Introduction P8
+
+### 20. P9 S1
+
+- order：20
+
+- section：Introduction
+
+- locator：P9 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：本文报告一个三设计周期DSR项目中的第二周期，提出两条设计原则、实例化制品并进行大规模实验。
+
+- rhetorical_function_cn：预告研究架构
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：说明本文范围与证据强度
+
+- evidence_pointer：Introduction P9
+
+### 21. P10 S1
+
+- order：21
+
+- section：Introduction
+
+- locator：P10 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献是理论依据并经评价的设计原则、创新制品和面向实践者的设计支持。
+
+- rhetorical_function_cn：提前声明贡献
+
+- depends_on_cn：研究设计与结果预告
+
+- sets_up_cn：为读者提供评价文章价值的框架
+
+- evidence_pointer：Introduction P10
+
+### 22. P11 S1
+
+- order：22
+
+- section：Introduction
+
+- locator：P11 S1
+
+- move_code：OTHER
+
+- paraphrase_cn：文章末尾给出结构路线图，依次是基础、设计周期、设计原则与实例化、假设与实验、结果、讨论。
+
+- rhetorical_function_cn：提供全文路标
+
+- depends_on_cn：所有前序介绍
+
+- sets_up_cn：帮助读者预期章节分工
+
+- evidence_pointer：Introduction P11
+
+### 23. P1 S1
+
+- order：23
+
+- section：Section 2.1.1
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：注意力被视为对传入感觉信息的选择性加工，容量有限。
+
+- rhetorical_function_cn：为设计原则提供理论公理
+
+- depends_on_cn：引言中的注意稀缺背景
+
+- sets_up_cn：说明为何需要注意管理
+
+- evidence_pointer：Section 2.1.1
+
+### 24. P2 S1
+
+- order：24
+
+- section：Section 2.1.1
+
+- locator：P2 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：注意力可区分为目标导向与刺激驱动两种类型。
+
+- rhetorical_function_cn：为实验控制刺激驱动注意提供概念工具
+
+- depends_on_cn：注意力理论引入
+
+- sets_up_cn：解释为何采用等复杂度仪表板
+
+- evidence_pointer：Section 2.1.1
+
+### 25. P3 S1
+
+- order：25
+
+- section：Section 2.1.1
+
+- locator：P3 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：显性注意可通过眼动测量，眼-脑一致性假设认为当前注视对应显性注意。
+
+- rhetorical_function_cn：为用眼动数据作为注意测度提供理论依据
+
+- depends_on_cn：注意力类型区分
+
+- sets_up_cn：支撑DP1和DP2
+
+- evidence_pointer：Section 2.1.1
+
+### 26. P1 S1
+
+- order：26
+
+- section：Section 2.1.2
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：人类心智是信息加工系统，文章采用Wickens改编的信息加工阶段模型。
+
+- rhetorical_function_cn：建立认知加工的理论支架
+
+- depends_on_cn：注意力理论
+
+- sets_up_cn：解释注意资源、记忆和感知如何影响仪表板加工
+
+- evidence_pointer：Section 2.1.2
+
+### 27. P2 S1
+
+- order：27
+
+- section：Section 2.1.2
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：信息加工分为前注意加工和后注意加工；工作记忆容量有限，个体间存在差异。
+
+- rhetorical_function_cn：说明注意资源的加工路径及瓶颈
+
+- depends_on_cn：信息加工理论
+
+- sets_up_cn：为控制工作记忆容量提供理由
+
+- evidence_pointer：Section 2.1.2
+
+### 28. P3 S1
+
+- order：28
+
+- section：Section 2.1.2
+
+- locator：P3 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：工作记忆容量可预测注意控制能力，高/低容量用户控制注意资源的能力不同。
+
+- rhetorical_function_cn：引入控制变量
+
+- depends_on_cn：工作记忆容量理论
+
+- sets_up_cn：评价中测量工作记忆容量作为控制条件
+
+- evidence_pointer：Section 2.1.2
+
+### 29. P1 S1
+
+- order：29
+
+- section：Section 2.2.1
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：眼动应用分诊断与交互两类；IS和仪表板研究主要用离线眼动做诊断评价。
+
+- rhetorical_function_cn：总结既有技术使用现状
+
+- depends_on_cn：眼动理论
+
+- sets_up_cn：说明缺少实时交互式应用
+
+- evidence_pointer：Section 2.2.1
+
+### 30. P2 S1
+
+- order：30
+
+- section：Section 2.2.1
+
+- locator：P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：IS领域尚未研究用眼动数据实现自我追踪型attentive UI，低成本眼动仪现在使这成为可能。
+
+- rhetorical_function_cn：再次收窄技术缺口
+
+- depends_on_cn：诊断/交互分类
+
+- sets_up_cn：为本研究选择实时眼动内建能力提供位置
+
+- evidence_pointer：Section 2.2.1
+
+### 31. P1 S1
+
+- order：31
+
+- section：Section 2.2.2
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：反馈是基本可用性原则，认知反馈能支持任务完成。
+
+- rhetorical_function_cn：引入反馈文献
+
+- depends_on_cn：attentive UI概念
+
+- sets_up_cn：支持设计VAF
+
+- evidence_pointer：Section 2.2.2
+
+### 32. P2 S1
+
+- order：32
+
+- section：Section 2.2.2
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多个学科证明基于眼动的反馈能改善注意分配、学习和搜索绩效。
+
+- rhetorical_function_cn：提供个体化VAF有效性的先行证据
+
+- depends_on_cn：反馈文献
+
+- sets_up_cn：说明将眼动反馈迁移到仪表板是有基础的
+
+- evidence_pointer：Section 2.2.2
+
+### 33. P3 S1
+
+- order：33
+
+- section：Section 2.2.2
+
+- locator：P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：总结发现：缺少关于如何对注意资源分配提供反馈以改善信息处理的设计知识，尤其针对仪表板等密集信息UI。
+
+- rhetorical_function_cn：明确设计知识缺口
+
+- depends_on_cn：前述综述
+
+- sets_up_cn：与引言RQ呼应
+
+- evidence_pointer：Section 2.2.2
+
+### 34. P3 S1
+
+- order：34
+
+- section：Section 3
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：第一周期试点发现用户偏向左侧屏幕图表，并且第二次看同一仪表板时重复旧行为。
+
+- rhetorical_function_cn：报告需求发现
+
+- depends_on_cn：探索性文献与试点
+
+- sets_up_cn：导出需要个体化VAF的结论
+
+- evidence_pointer：Section 3
+
+### 35. P4 S1
+
+- order：35
+
+- section：Section 3
+
+- locator：P4 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：基于上述发现，提出初始元需求：仪表板应在用户探索数据时提供个体化VAF以支持注意管理。
+
+- rhetorical_function_cn：把实证发现转化为设计要求
+
+- depends_on_cn：第一周期结果
+
+- sets_up_cn：进入方案比较与第二周期
+
+- evidence_pointer：Section 3
+
+### 36. P5 S1
+
+- order：36
+
+- section：Section 3
+
+- locator：P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：开发并试点比较一般VAF与个体化VAF后，发现个体化VAF对信息处理有正向影响。
+
+- rhetorical_function_cn：用早期证据筛选设计方向
+
+- depends_on_cn：初始元需求
+
+- sets_up_cn：支持第二周期更严格验证
+
+- evidence_pointer：Section 3
+
+### 37. P6 S1
+
+- order：37
+
+- section：Section 3
+
+- locator：P6 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：第二周期更详细调查个体化VAF的影响，细化理论基础、实例化改进版制品并做大规模实验。
+
+- rhetorical_function_cn：从前期工作过渡到本文主体
+
+- depends_on_cn：前两个阶段结果
+
+- sets_up_cn：引出第4节设计与第5节实验
+
+- evidence_pointer：Section 3
+
+### 38. P1 S1
+
+- order：38
+
+- section：Section 4.1
+
+- locator：P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：根据眼-脑一致性假设和实时眼动技术，提出MR1实时监控注意、MR2基于眼动估计注意，并导出DP1。
+
+- rhetorical_function_cn：将理论转化为设计原则
+
+- depends_on_cn：第一节注意力与眼动理论
+
+- sets_up_cn：规定系统的基础能力
+
+- evidence_pointer：Section 4.1
+
+### 39. P2 S1
+
+- order：39
+
+- section：Section 4.1
+
+- locator：P2 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：反馈能增强自我意识，个体化、精确且无暗示性的VAF才能帮助用户识别注意失败，由此提出MR3、MR4和DP2。
+
+- rhetorical_function_cn：将反馈理论转化为第二条设计原则
+
+- depends_on_cn：反馈文献
+
+- sets_up_cn：说明反馈内容与形式要求
+
+- evidence_pointer：Section 4.1
+
+### 40. P1 S1
+
+- order：40
+
+- section：Section 4.2
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为映射设计原则，提出三子系统系统架构：仪表板子系统、眼动追踪子系统、注意力感知子系统。
+
+- rhetorical_function_cn：把设计原则落实为软件结构
+
+- depends_on_cn：DP1/DP2
+
+- sets_up_cn：为后续实验软件实现提供蓝图
+
+- evidence_pointer：Section 4.2
+
+### 41. P1 S1
+
+- order：41
+
+- section：Section 5.1
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：两条DP相互依赖，无法分别评价，因此将两条DP一起实例化为个体化VAF组，并与仅提供一般反馈的基线比较。
+
+- rhetorical_function_cn：说明评价设计的内在限制与选择
+
+- depends_on_cn：两条DP内容
+
+- sets_up_cn：为实验操纵提供合理性
+
+- evidence_pointer：Section 5.1
+
+### 42. P2 S1
+
+- order：42
+
+- section：Section 5.1
+
+- locator：P2 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：基于用户很难记住先前注意分配并会重复视觉行为，提出H1：个体化VAF相比一般VAF在复访阶段产生更好的注意资源分配。
+
+- rhetorical_function_cn：把机制转化为可检验假设
+
+- depends_on_cn：注意重复行为文献
+
+- sets_up_cn：对应第6.2节检验
+
+- evidence_pointer：Section 5.1
+
+### 43. P3 S1
+
+- order：43
+
+- section：Section 5.1
+
+- locator：P3 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：接收个体化VAF的用户能有目的转向此前较少注意的元素，因此假设H2：复访阶段注意转移率更低。
+
+- rhetorical_function_cn：从策略形成推导第二个结果变量
+
+- depends_on_cn：反馈帮助调整策略
+
+- sets_up_cn：对应第6.3节检验
+
+- evidence_pointer：Section 5.1
+
+### 44. P4 S1
+
+- order：44
+
+- section：Section 5.1
+
+- locator：P4 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：结合F模式阅读和左侧偏好，提出H3：个体化VAF能改善任务结束时的注意资源管理，使注意更均匀分布。
+
+- rhetorical_function_cn：利用界面位置偏差知识推导第三个假设
+
+- depends_on_cn：左侧/上方偏好证据
+
+- sets_up_cn：对应第6.4节检验
+
+- evidence_pointer：Section 5.1
+
+### 45. P1 S1
+
+- order：45
+
+- section：Section 5.2.1
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择学生被试是因为他们没有仪表板专业训练、不易受上下文信息偏置，且容易获得足够统计功效的样本。
+
+- rhetorical_function_cn：说明样本选择的合理性
+
+- depends_on_cn：实验设计
+
+- sets_up_cn：呼应外部效度讨论
+
+- evidence_pointer：Section 5.2.1
+
+### 46. P1 S1
+
+- order：46
+
+- section：Section 5.2.2
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验软件用.NET和Tobii SDK开发，六个图表定义为AOI，实时采集注视时长并传至反馈生成器以呈现个体化VAF。
+
+- rhetorical_function_cn：描述具体实验制品
+
+- depends_on_cn：三子系统架构
+
+- sets_up_cn：解释实验如何实现两条DP
+
+- evidence_pointer：Section 5.2.2
+
+### 47. P2 S1
+
+- order：47
+
+- section：Section 5.2.2
+
+- locator：P2 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过使用同类型、等大小、静态、灰色、六个信息块的仪表板来控制刺激驱动注意，以追踪目标导向注意。
+
+- rhetorical_function_cn：为受控仪表板设计辩护
+
+- depends_on_cn：目标导向/刺激驱动注意区分
+
+- sets_up_cn：说明内部效度优先并承认外部效度代价
+
+- evidence_pointer：Section 5.2.2
+
+### 48. P1 S1
+
+- order：48
+
+- section：Section 5.2.4
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：个体化VAF以时间格式呈现用户在六个视觉特征上的实际注视时长；对照组只收到一般文字性注意提醒。
+
+- rhetorical_function_cn：说明处理操纵的具体内容
+
+- depends_on_cn：DP2
+
+- sets_up_cn：支撑结果差异归因
+
+- evidence_pointer：Section 5.2.4
+
+### 49. P1 S1
+
+- order：49
+
+- section：Section 5.2.5
+
+- locator：P1 S1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：注意资源分配以每个AOI在复访中相对首访的变化衡量，理论平均是16.67%；转移率用AOI间转移次数；资源管理用六AOI注视指标的标准差。
+
+- rhetorical_function_cn：定义客观结果指标与规范基准
+
+- depends_on_cn：AOI和注视数据
+
+- sets_up_cn：为统计检验提供口径
+
+- evidence_pointer：Section 5.2.5
+
+### 50. P1 S1
+
+- order：50
+
+- section：Section 6.1
+
+- locator：P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：随机化检查显示两组在人口学和工作记忆容量上无显著差异。
+
+- rhetorical_function_cn：先确认实验内效度前提
+
+- depends_on_cn：控制变量测量
+
+- sets_up_cn：使后续组间差异可归因于处理
+
+- evidence_pointer：Section 6.1
+
+### 51. P2 S1
+
+- order：51
+
+- section：Section 6.2
+
+- locator：P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：重复测量回归显示，首访注视时长/次数与实验组交互显著；个体化VAF抵消了首访注意对复访注意的预测作用。
+
+- rhetorical_function_cn：提供H1的统计证据
+
+- depends_on_cn：指标定义
+
+- sets_up_cn：支持注意资源分配贡献声明
+
+- evidence_pointer：Section 6.2
+
+### 52. P2 S1
+
+- order：52
+
+- section：Section 6.3
+
+- locator：P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：首访转移率无组间差异，但复访阶段个体化VAF组转移次数显著低于一般VAF组，支持H2。
+
+- rhetorical_function_cn：提供注意转移率假设的统计证据
+
+- depends_on_cn：转移矩阵和转移计数
+
+- sets_up_cn：支持注意聚焦效果
+
+- evidence_pointer：Section 6.3
+
+### 53. P1 S1
+
+- order：53
+
+- section：Section 6.4
+
+- locator：P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：任务结束时个体化VAF组六AOI注视指标的SD显著低于一般VAF组，且组内从首访到末端显著下降，支持H3。
+
+- rhetorical_function_cn：提供注意资源管理假设的统计证据
+
+- depends_on_cn：SD指标定义
+
+- sets_up_cn：支撑任务末端改善声明
+
+- evidence_pointer：Section 6.4
+
+### 54. P1 S1
+
+- order：54
+
+- section：Section 7.1
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：据作者所知，这是首个研究将实时眼动数据作为仪表板内建能力的DSR项目。
+
+- rhetorical_function_cn：突出新颖性
+
+- depends_on_cn：引言缺口
+
+- sets_up_cn：为设计知识贡献定调
+
+- evidence_pointer：Section 7.1
+
+### 55. P3 S1
+
+- order：55
+
+- section：Section 7.1
+
+- locator：P3 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：两条设计原则提供了关于如何设计注意力感知仪表板的处方性知识，并可按Gregor和Hevner框架视为改进型贡献。
+
+- rhetorical_function_cn：把结果贡献升级为可复用设计知识
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：说明对IS理论和实践的辐射
+
+- evidence_pointer：Section 7.1
+
+### 56. P1 S1
+
+- order：56
+
+- section：Section 7.2
+
+- locator：P1 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：商业BI&A工具目前仍主要用眼动理解用户行为，尚未把实时眼动集成进平台；本研究支持实践者设计此类功能。
+
+- rhetorical_function_cn：界定实践适用条件并说明差距
+
+- depends_on_cn：低价格眼动仪趋势
+
+- sets_up_cn：导出具体实践启示
+
+- evidence_pointer：Section 7.2
+
+### 57. P1 S1
+
+- order：57
+
+- section：Section 7.3
+
+- locator：P1 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：使用低成本眼动仪且AOI较宽，限制了更细粒度分析与更复杂仪表板的可迁移性。
+
+- rhetorical_function_cn：承认技术边界
+
+- depends_on_cn：实验设备选择
+
+- sets_up_cn：提出更高精度眼动和瞳孔等未来方向
+
+- evidence_pointer：Section 7.3
+
+### 58. P2 S1
+
+- order：58
+
+- section：Section 7.3
+
+- locator：P2 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：实验仪表板不等于真实仪表板，因缺乏色彩、交互和复杂度差异，未来需在更真实场景中验证。
+
+- rhetorical_function_cn：承认外部效度限制
+
+- depends_on_cn：受控仪表板设计
+
+- sets_up_cn：建议现场研究与信息熵建模
+
+- evidence_pointer：Section 7.3
+
+### 59. P3 S1
+
+- order：59
+
+- section：Section 7.3
+
+- locator：P3 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：眼动只近似显性注意，不保证与注意完全一致；未来可结合EEG/fMRI等多模态信号。
+
+- rhetorical_function_cn：承认理论假设的边界
+
+- depends_on_cn：眼-脑一致性假设
+
+- sets_up_cn：为修改DP1提供方向
+
+- evidence_pointer：Section 7.3
+
+### 60. P1 S1
+
+- order：60
+
+- section：Conclusion
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重申：以DSR方式提出注意力感知仪表板及两条设计原则，并通过92人眼动实验显示个体化VAF对注意资源分配、转移与管理的积极作用。
+
+- rhetorical_function_cn：闭合全文叙事
+
+- depends_on_cn：全文设计、实验与讨论
+
+- sets_up_cn：留给读者最终的知识贡献
+
+- evidence_pointer：Section 8
+
+## 写作技术
+
+- gap_construction_cn：文章分三层制造缺口：第一层是注意力稀缺与注意力持续时间下降带来的普遍问题；第二层是仪表板作为BI&A关键界面让用户面临注意管理困难；第三层是眼动追踪在IS中主要被用于诊断，缺乏实时内建反馈的设计知识。最后用一个研究问题把三层缺口固定下来。
+
+- signposting_cn：引言末尾提供全文路线图；第3节明确三设计周期并说明本文聚焦第二周期；第4.1节用表格压缩元需求到设计原则的映射；第5节先列假设再讲方法；第6节按三个结果变量分别报告；第7节再回到理论与贡献。路标密集但位置固定。
+
+- transition_logic_cn：从宏观问题到仪表板用‘digital world/BI&A’递进；从缺口到方案用‘To support that, studies suggested...’；从第一周期到第二周期用‘These findings support... Subsequently...’；从设计到评估用‘To evaluate the effects of the two proposed design principles...’；从结果到讨论用‘The laboratory experiment’s results demonstrate...’。
+
+- claim_evidence_rhythm_cn：每个假设之前都先给出行为机制和文献依据，再用‘Summing up, we propose...’收束；结果部分先做随机化/控制检查，再给热图/转移矩阵定性证据，最后给回归和Wilcoxon统计证据；讨论部分再把这些证据收编到设计原则和理论贡献。
+
+- benchmark_narrative_cn：对照组一般VAF文字提示保证‘有反馈但无个体化’，从而把效果归因于个体化；首访阶段作为组内基线；16.67%理论均值和等复杂度六图表作为‘合理注意分配’的规范参照；对照组从首访到复访保持旧行为则强化了‘没有VAF问题持续存在’的因果叙事。
+
+- theory_return_cn：讨论部分明确把设计原则回接到Broadbent过滤理论、Wickens信息加工阶段和眼-脑一致性假设，并称结果为这些理论预测的体现；这样就把一次实验室效应转化为理论支持的设计处方，而不是单纯报告某个仪表板更好。
+
+- contribution_positioning_cn：作者在讨论开头即说明‘首个将实时眼动数据作为仪表板内建能力’以突显新颖性；然后用Gregor和Hevner的improvement框架定位贡献强度；最后将设计知识扩展到BI&A、企业软件、MyAnalytics、AR/VR，使贡献不局限于一个实验原型。
+
+- novelty_protection_cn：通过三点防止贡献退化为一次性性能结果：一是DP1/DP2有理论根基，可脱离当前仪表板复用；二是对照组设为一般反馈，排除‘任何反馈都有效’的替代解释；三是把评价结果拆成注意分配、转移率、资源管理三个层面，显示效应不是单一指标偶然现象。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写作任务：用注意力稀缺和注意力持续时间下降建立宏观问题，并快速收束到仪表板数据探索场景。
+
+- research_job_cn：研究任务：收集注意力经济、注意力下降、仪表板信息过载的文献和业界证据。
+
+- required_evidence_cn：需有可引用的注意力稀缺论述、注意力时间下降数据、仪表板重要性和认知困难证据。
+
+- transition_to_next_cn：从‘用户在仪表板前需要注意管理支持’过渡到‘现有眼动技术只做诊断，缺少实时反馈设计知识’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写作任务：综述眼动应用和视觉注意力反馈，构造‘有需求、有技术、但无设计知识’的缺口，并写出研究问题。
+
+- research_job_cn：研究任务：系统梳理诊断性与交互性眼动应用、VAF在不同领域的证据。
+
+- required_evidence_cn：需证明其他领域已有VAF成功案例，而IS/仪表板尚无设计原则。
+
+- transition_to_next_cn：“为回答RQ，我们进行了包含三周期的DSR项目。”
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：写作任务：先用短段落交代DSR项目整体周期，再聚焦本文周期；把初始发现提炼为元需求，再从理论推导出设计原则。
+
+- research_job_cn：研究任务：开展试点研究或文献实证，确认用户行为偏差；用理论把需求转成可操作设计要求。
+
+- required_evidence_cn：需有前期试点结果或强理论支撑说明用户确实存在注意管理失败。
+
+- transition_to_next_cn：“为评估两条DP，我们实例化制品并做受控实验。”
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写作任务：写出实验设计、假设、材料、程序、测量和统计方法；结果部分先做控制检查，再逐条检验假设。
+
+- research_job_cn：研究任务：把DP实例化为可运行软件；设计能隔离机制的对照条件；采集眼动等多维指标。
+
+- required_evidence_cn：需有随机化成功、首访基线等价、统计显著的结果，以及至少一个对照组排除替代解释。
+
+- transition_to_next_cn：“实验结果证实假设，下面进行理论与实践讨论。”
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写作任务：把结果回接到理论，以设计原则和系统架构形式声明贡献；列出设备、情境、指标、可迁移性等边界，并给出未来研究路径。
+
+- research_job_cn：研究任务：对结果进行边界反思，识别未检验的机制和未覆盖场景。
+
+- required_evidence_cn：需明确哪些结论被直接支持、哪些只是推论；需有下一步研究问题。
+
+- transition_to_next_cn：“贡献已声明，限制与未来方向使文章保持严谨。”
+
+### most_transferable_moves_cn
+
+1. 把普适认知概念（注意力）落到具体IS制品（仪表板）的三层收束写法
+
+2. 用两三条设计原则控制设计空间，并用一个对照组隔离核心设计差异的DSR评价设计
+
+3. 内部效度优先的仪表板材料控制策略（等复杂度、静态、非彩色）
+
+4. 先报告首访基线等价和随机化检查，再报告处理效应的结果叙事顺序
+
+5. 讨论中用理论回接把实验效应升级为设计原则
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要实时眼动追踪设备和SDK，并自研实验软件
+
+2. 92名被试的受控实验室实验涉及多次校准、剔除标准和工作记忆测试
+
+3. 需要前期试点和完整三周期DSR项目积累，不是单轮实验可完成
+
+4. 标准化的仪表板材料设计需要大量控制，但又在现实中不常见
+
+5. 眼动数据采集、AOI定义和转移矩阵分析需要专门技能
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写‘理论上奠定了两条设计原则’而没有从理论到指标的翻译链
+
+2. 不能把一般文字提示称为个体化VAF并声称效应来自个体化
+
+3. 不能在没有控制刺激驱动注意的受控仪表板下宣称纯目标导向注意效应
+
+4. 不能把眼动注意指标直接等同于决策或信息处理结果而不加限定
+
+5. 不能把只在学生、单任务、单反馈循环中得到的显著结果直接外推到真实BI&A/AR/VR场景
+
+- single_best_description_of_the_routine_cn：通过‘注意力稀缺→仪表板信息过载→现有眼动技术只诊断不干预→用实时眼动数据设计个体化注意反馈→受控实验验证注意指标改善→提炼成可复用设计原则’的DSR写作链条，把一次实验提升为设计知识贡献。
+
+## 分析边界
+
+分析基于全文文本，无独立附录或补充材料；图表内容只能依据正文描述判断；第三设计周期文中仅有计划概述，无法形成完整阶段；未获得页码，位置引用使用章节和段落层级；对‘信息处理改善’的过度外推判断属于方法论推断。

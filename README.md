@@ -1,10 +1,33 @@
-# qual-llm-check-coding-agent-ux
+# qual-llm-check-IS-utd
+
+本仓库现包含两个相互关联但验收标准不同的研究项目：AIS Basket 全文检索／筛选，以及三篇 Coding Agent 安全设计研究论文。早期的双模型 UX 筛选工作流仍保留在下文，但不再代表整个仓库。
+
+## 当前入口
+
+- [研究项目地图](docs/research_program/README.md)：当前状态、历史任务、工件保留与 GitHub 上传清单。
+- `.agents/skills/coding-agent-manuscript/`：以完整大节为单位、直接比对权威原文的论文写作 skill。
+- `.agents/skills/ais-fulltext-screening/`：范围冻结、全文身份、全量执行和召回／精度审计 skill。
+- `.agents/skills/research-project-continuity/`：从持久工件恢复任务、管理 predecessor/successor 和发布清单的 skill。
+- `.agents/skills/otero-open-api/`：Otero AIS Basket 检索与全文下载 skill。
+
+开放式论文写作不再用一个长期 Goal 代表进度。仓库以“一个可审阅的完整大节 + 原文／引文台账 + 明确接受状态”为检查点。旧文件名中的 `final`、`终稿`、`PASS` 或机械覆盖率都不等于用户已接受；v15 三稿当前是可追踪但未被接受的 predecessor。
+
+## 核心数据与结果
+
+- `database_fulltext_all/` 是 canonical Otero 全文库：13,910 篇 Markdown、13,913 条 metadata/result 记录，3 条不可获取，约 1.085 GiB。旧的 `database_fulltext_construct/` 是重叠查询子库，不作为第二份 canonical 数据上传。
+- public-data/objective-metric 筛选完成 2,475/2,475，严格纳入 51 篇。
+- security-algorithm 集合为 99 篇；broad security-relevance 集合为 388 篇，但后者因 36 篇全文错配／损坏而仍是 provisional standard。
+- 三篇论文的 v11 台账是当前证据路由层；v15 正文没有通过宏观叙事与大节比例验收。
+
+上传前必须阅读 [GitHub 上传清单](docs/research_program/github_upload_checklist.md) 和 [第三方内容说明](THIRD_PARTY_CONTENT.md)。Otero 可公开下载不自动等于可再分发；本仓库没有替第三方全文授予许可证。不要直接执行无差别的 `git add .`。
+
+## 早期双模型 UX 筛选（历史工作流）
 
 用两个独立 LLM 调用筛选 MISQ/ISR 文献，判断每条记录里是否有适合被我们改造成「coding agent 个体用户体验」概念、构念或量表的素材。当前默认任务采取开放式概念发现取向：只要文章包含一个个体 UX 概念或现象，并且它迁移到 coding agent 时有明显不匹配、同时对应重要现实问题，就可以纳入。文章本身不需要做构念开发，也不需要指导我们如何改造。
 
 每次筛选隔离在单独的 run 目录中。run 目录包含源 CSV 副本、模型配置、提示词、进度文件和结果文件，后续可以直接追溯同一批输入和筛选结论。
 
-## 快速流程
+### 快速流程
 
 1. 安装依赖：
 
@@ -49,7 +72,7 @@ uv run python main.py run --run-dir runs/coding_agent_ux_misq_isr
 uv run python main.py run --run-dir runs/coding_agent_ux_misq_isr --reset
 ```
 
-## Run 目录结构
+### Run 目录结构
 
 初始化后会得到类似结构：
 
@@ -84,7 +107,7 @@ runs/coding_agent_ux_misq_isr/
 
 新建 run 默认使用 `row_key_mode: id_with_row_number`，即把 `EID` 和 CSV 行号一起作为断点 key，避免源数据里重复 `EID` 时影响断点续跑。
 
-## 双模型配置
+### 双模型配置
 
 `config.json` 默认启用两个 reviewer，两个都调用 DeepSeek V4 Pro：
 
@@ -99,7 +122,7 @@ runs/coding_agent_ux_misq_isr/
 - `screen_agreement=false`: 两个 reviewer 结论不一致，会进入 `model_disagreements.csv`；
 - 某个 reviewer 失败：写入 `errors.jsonl`，该行不写入 `progress.jsonl`，下次续跑会重新尝试。
 
-## 输出判读
+### 输出判读
 
 每个 reviewer 会输出：
 
@@ -116,7 +139,7 @@ runs/coding_agent_ux_misq_isr/
 - `evidence`: 来自标题、摘要或关键词的简短证据；
 - `reason`: 一句话解释。
 
-## 筛选标准摘要
+### 筛选标准摘要
 
 当前焦点不是一个固定构念，而是开放寻找 coding-agent-specific UX concept opportunities。coding agent 的特殊性在于它不只是聊天、推荐或补全，而是会在可执行、持续变化的代码环境中理解上下文、调用工具、修改产物、跨步骤推进任务，并留下需要用户审查和承担责任的 diff、test、log、commit、PR 等痕迹。
 

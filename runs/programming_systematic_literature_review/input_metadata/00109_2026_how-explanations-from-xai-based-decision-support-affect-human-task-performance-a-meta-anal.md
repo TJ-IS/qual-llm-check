@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105030711165"
+title: "How explanations from XAI-based decision support affect human task performance: a meta-analysis"
+authors: "Haag F."
+year: "2026"
+journal: "Journal of Decision Systems"
+doi: "10.1080/12460125.2026.2616693"
+---
+# Scopus title-abstract-keyword metadata
+Title: How explanations from XAI-based decision support affect human task performance: a meta-analysis
+Abstract: Artificial intelligence (AI) increasingly supports human decision-making across domains. Yet, many AI-based decision support systems (DSS) rely on machine learning models that are ‘black boxes’ to humans. This opacity has driven the development of explainable AI (XAI) methods that explain model outputs in human-understandable terms. Empirical findings, however, remain inconsistent regarding whether and how such explanations affect users’ decision performance: some studies report improvements, while others find negligible or even negative effects. To reconcile these inconsistencies, we conduct a meta-analysis with 4589 participants comparing XAI-supported decisions to unaided decisions and 7706 participants comparing XAI-supported to AI-only supported decisions. Our analyses indicate that, on average, XAI-based decision support is associated with higher task performance compared to no support, whereas the additional gains of explanations over AI-only support are small. We also find that studies’ risk of bias levels are associated with the magnitude of reported effects, suggesting larger reported performance gains in studies with higher risk of bias. Interestingly, explanation type alone does not show a significant moderating effect on task performance across studies. Overall, these findings provide a better understanding of how XAI explanations influence human decision-making and inform the design of XAI-based DSS. © 2026 Informa UK Limited, trading as Taylor & Francis Group.
+Author keywords: decision performance; Explainable artificial intelligence (XAI); explanation types; interpretable machine learning; risk of bias
+Index keywords: Decision making; Learning systems; Machine learning; Risk assessment; Decision performance; Decision supports; Explainable artificial intelligence (XAI); Explanation type; Human decision-making; Interpretable machine learning; Machine-learning; Meta-analysis; Risk of bias; Task performance; Decision support systems
+Document type: Article
+Conference: 
+Source title: Journal of Decision Systems
+Year: 2026
+EID: 2-s2.0-105030711165
+DOI: 10.1080/12460125.2026.2616693
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

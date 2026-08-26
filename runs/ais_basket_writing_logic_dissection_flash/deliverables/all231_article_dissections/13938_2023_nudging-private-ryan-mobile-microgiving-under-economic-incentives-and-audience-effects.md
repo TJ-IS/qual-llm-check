@@ -1,0 +1,1681 @@
+# Nudging Private Ryan: Mobile Microgiving under Economic Incentives and Audience Effects
+
+- 作者：Dongwon Lee; Anandasivam Gopal; Dokyun Lee; Dongwook Shin
+- 年份 / 期刊：2023 / MIS Quarterly
+- DOI：10.25300/misq/2022/16643
+- 源文件：13938_2023_nudging-private-ryan-mobile-microgiving-under-economic-incentives-and-audience-effects.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：在智能手机这一私人、个人化的移动环境中，如何通过经济激励（rebate与matching）和数字助推（push notifications）有效设计和管理小额慈善捐赠（microgiving）？补贴幅度和捐赠决策的可见性（audience effects）如何改变这些机制的效果？
+
+- 制品与设计：与一家美国Android移动奖励应用提供商合作，在应用中新增积分捐赠功能；实验操纵的经济激励为等价的rebate（20%/50%）与matching（25%/100%），数字助推为一次性或每两周一次的push notifications，观众效应通过平台内social feed公开捐赠信息实现；使用两个大规模随机现场实验和一个人为设计的microgiving效用模型。
+
+- 客观结果：主要客观结果为用户是否捐赠（0/1）和捐赠金额（美元），以logistic回归和Tobit模型估计。实验1发现任何激励和推送都显著提高捐赠，低幅度时rebate优于matching；实验2使用更高激励和social feed后发现，无feed时rebate优势消失，有feed时matching显著优于rebate，push始终正向但重复推送无额外效果。
+
+- 核心贡献：作者声称提供移动microgiving的初始实证证据和一个可泛化的分析模型：经济激励的有效性取决于激励幅度和捐赠行为的可见性；智能手机不能视为PC/离线的简单替代渠道；模型将补贴率与观众效应内部化，为组织和服务提供者在移动环境中设计捐赠活动提供指导。
+
+- 整篇论证链：文章从智能手机的私密性和个人性出发，挑战离线捐赠文献中matching通常优于rebate的结论。通过两个与真实应用合作的随机现场实验，作者先证明任何激励和数字助推都能提高小额捐赠；然后在低补贴幅度下发现rebate反而优于matching，说明私密移动环境弱化了观众效应。第二个实验提高补贴幅度并加入social feed，证明高激励消除了rebate优势，而可见的观众效应使matching重新占优；push notifications始终有效但重复推送不增加效果。为了把这一组依赖于特定应用的发现推广为一般知识，作者建立基于impure altruism和信息整合理论的microgiving效用模型，用α和β刻画捐赠温暖感与接受rebate的愧疚感，证明低可见性时偏好会随补贴率从rebate切换到matching，高可见性时matching始终占优。最终文章回到智能手机不只是另一渠道的理论论断，形成经验发现—机制检验—理论模型—设计启示的闭环。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的主要证据是两次大规模随机现场实验，但为了解释实验中的机制和将结果推广到连续补贴率与可见性范围，又加入了一个正式分析模型，属于多研究手段累积完成贡献。它不像纯设计科学那样以构建信息系统制品为中心，也不像纯benchmark论文，而是以现场因果实验为主、理论建模为辅。
+
+- 主导写作弧线判定：写作弧线从移动microgiving现象和手机私密性机制出发，将理论机制转化为rebate/matching、push notification、social feed三种干预，在真实移动平台上做现场因果检验，最后用分析模型把经验结果上升为一般机制性结论。最后的讨论又回到引言中的智能手机非替代性论断。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：第一阶段以低补贴现场实验确立基础效应和意外反转（rebate>matching）；第二阶段用高补贴、social feed和独立推送的现场实验检验机制与边界；第三阶段通过排除social feed的子样本跨实验比较激励幅度；第四阶段在实验2全样本内检验social feed与补贴类型的交互；第五阶段用分析模型把经验规律形式化并推广。阶段间由“结果是否有边界条件/机制是否成立”的问题自然衔接。
+
+### studies_or_phases
+
+#### 1. 实验1：低激励幅度下rebate vs matching与一次性推送
+
+- order：1
+
+- name_cn：实验1：低激励幅度下rebate vs matching与一次性推送
+
+- question_cn：在智能手机私密环境中，等价的低幅度补贴（20% rebate vs 25% matching）和一次性push notification如何影响捐赠概率和捐赠金额？
+
+- inputs_and_setting_cn：52,324名Android奖励应用注册用户，至少2000 points；2016年4月30天；应用内新增捐赠功能；单一慈善组织。
+
+- designed_or_compared_object_cn：2×2 full factorial处理（补贴类型×push），另设无处理控制组；用户随机分到5组。
+
+- baseline_control_or_counterfactual_cn：控制组无激励、无推送；rebate与matching由M=R/(1-R)保持经济等价；push处理与无推送对照。
+
+##### objective_metrics
+
+1. 捐赠决策（0/1）
+
+2. 捐赠金额（美元）
+
+3. 平均兑换金额（稳健性描述）
+
+- analysis_method_cn：随机化检验ANOVA/Tukey HSD；logistic回归估计捐赠决策；Tobit模型估计捐赠金额；cell-by-cell treatment effect（Appendix D）；OLS/SUR稳健性（Appendix G）。
+
+- main_result_cn：所有处理组都显著优于控制组；push和任何激励均显著提高捐赠；低补贴时rebate比matching提高约27%的捐赠概率，与离线文献相反。
+
+- argumentative_role_cn：建立基线效应并制造核心意外：私密移动情境可能反转matching优势，为第二个实验提供理由。
+
+- remaining_uncertainty_cn：无法确定反转是因为补贴太低还是因为手机私密性；只发了一次推送，不知道重复推送是否更有效；没有操纵观众可见性。
+
+- link_to_next_phase_cn：作者明确列出三个未决问题，并以此引出需要提高激励幅度、加入social feed、重复推送的第二个实验。
+
+##### evidence_pointers
+
+1. Table 1 Experiment 1
+
+2. Table 2 Experiment 1 message copy
+
+3. Table 3 randomization checks
+
+4. Table 4 descriptive statistics
+
+5. Figure 1 model-free donation rates
+
+6. Table 5 regression results
+
+#### 2. 实验2：高激励幅度、social feed观众效应与重复推送
+
+- order：2
+
+- name_cn：实验2：高激励幅度、social feed观众效应与重复推送
+
+- question_cn：提高补贴到50% rebate/100% matching后，rebate与matching的相对效果是否改变？在social feed上公开捐赠信息是否会通过观众效应改变补贴效果？重复推送是否比单次更有效？
+
+- inputs_and_setting_cn：60,541名同一应用用户；2018年10月至12月共77天；2016年6月移除捐赠功能后重新开启，减少跨实验污染。
+
+- designed_or_compared_object_cn：2×2×2 full factorial（push×social feed×补贴类型），另有4个控制组；social feed只对同处理组用户可见捐赠者身份与金额；push通知可与激励独立存在。
+
+- baseline_control_or_counterfactual_cn：C1无激励、无推送、无feed作为基线；C2-C4分别加入feed/push；无feed处理组用于跨实验比较；高补贴与实验1低补贴对照；单次推送与每两周一次共5次推送对照。
+
+##### objective_metrics
+
+1. 捐赠决策（0/1）
+
+2. 捐赠金额（美元）
+
+- analysis_method_cn：随机化检验ANOVA/Tukey HSD；logistic/Tobit回归；incentive×social feed和rebate×social feed交互；Appendix F的SUTVA稳健性检验；randomization inference。
+
+- main_result_cn：除T4外所有处理组捐赠率高于控制组；无feed子样本中高补贴下rebate系数不显著，低补贴时的rebate优势消失；全样本中social feed主效应不显著，但rebate×social feed交互显著为负，即有观众时rebate相对于matching的效果下降，matching重新占优；push在所有模型中正向显著。
+
+- argumentative_role_cn：同时检验激励幅度边界和观众效应机制，是文章从反直觉发现升级为机制解释的关键阶段。
+
+- remaining_uncertainty_cn：实验2同时改变激励幅度和加入feed，不能直接与实验1做干净比较；social feed可能带来同组用户之间的干扰（SUTVA）；机制（warm glow/guilt）没有直接测量。
+
+- link_to_next_phase_cn：通过排除feed子样本先检验激励幅度，再在全样本中检验feed交互，并在后续用分析模型对效应切换做一般化解释。
+
+##### evidence_pointers
+
+1. Table 1 Experiment 2
+
+2. Table 2 Experiment 2 message copy
+
+3. Table 3 randomization checks
+
+4. Table 4 descriptive statistics
+
+5. Figure 2 model-free donation rates
+
+6. Table 7 interaction regressions
+
+7. Appendix F robustness tests
+
+#### 3. 跨实验分段比较：激励幅度效应
+
+- order：3
+
+- name_cn：跨实验分段比较：激励幅度效应
+
+- question_cn：在不引入social feed的前提下，从低补贴（25% matching/20% rebate）提高到高补贴（100% matching/50% rebate）是否改变捐赠率和rebate/matching相对效果？
+
+- inputs_and_setting_cn：实验1全部处理组与控制组；实验2中排除social feed后的C1、T1、T3、T5、T7子样本，共30,225/24,177个观测。
+
+- designed_or_compared_object_cn：保留push、incentive、rebate三个处理变量，比较两个实验中的激励幅度差异。
+
+- baseline_control_or_counterfactual_cn：实验1低激励作为对照；实验2高激励子样本与实验1同构的处理组合比较；控制用户余额、使用月数、性别。
+
+##### objective_metrics
+
+1. 捐赠决策（0/1）
+
+2. 捐赠金额（美元）
+
+- analysis_method_cn：与实验1相同设定的logistic/Tobit回归（Table 6）；对跨实验系数不做直接统计比较，只比较方向性和显著性。
+
+- main_result_cn：高激励显著提高捐赠概率和金额；push在高激励子样本中同样正向；但rebate系数不再显著，说明低补贴时的rebate优势随激励幅度增大而消失。
+
+- argumentative_role_cn：隔离激励幅度作为解释变量，回应实验1的“低补贴是否导致反转”的疑问。
+
+- remaining_uncertainty_cn：实验1和实验2的措辞、时长、商家环境不同；跨实验比较存在混淆，作者承认无法做正式跨实验系数检验。
+
+- link_to_next_phase_cn：完成激励幅度解释后，转向social feed全样本分析观众效应。
+
+##### evidence_pointers
+
+1. Field Experiment 2 Results and Discussion倒数第二段
+
+2. Table 6
+
+3. Table 1 Experiment 2 groups C1, T1, T3, T5, T7
+
+#### 4. 实验2全样本内社会可见性（social feed）与补贴类型交互分析
+
+- order：4
+
+- name_cn：实验2全样本内社会可见性（social feed）与补贴类型交互分析
+
+- question_cn：当捐赠行为被social feed公开时，social feed是否调节matching与rebate的相对效果？观众效应是否让matching重新变得优于rebate？
+
+- inputs_and_setting_cn：实验2全部60,541名用户的随机样本；排除控制组后的48,462名处理组用户用于补贴类型比较。
+
+- designed_or_compared_object_cn：加入social feed虚拟变量及其与incentive、rebate的交互项；比较feed组与无feed组。
+
+- baseline_control_or_counterfactual_cn：C1-C4控制组；无feed处理组；交互项提供了“如果rebate用户被公开捐赠”的反事实差异。
+
+##### objective_metrics
+
+1. 捐赠决策（0/1）
+
+2. 捐赠金额（美元）
+
+- analysis_method_cn：logistic/Tobit模型（Table 7）含social feed主效应和交互项；Appendix F的randomization inference、donation time interval、每日捐赠feed面板和协变量匹配处理SUTVA干扰。
+
+- main_result_cn：social feed主效应在捐赠决策和金额上不显著；incentive×social feed不显著；rebate×social feed在捐赠决策上边际显著为负（β=-0.447, p<0.1），在捐赠金额上显著为负（β=-2.445, p<0.05），说明公开可见时rebate相对matching的吸引力下降。
+
+- argumentative_role_cn：直接检验观众效应机制：可见性让依赖社会赞许/合作的matching重新占优，将移动情境拉近到离线情境。
+
+- remaining_uncertainty_cn：social feed直接主效应不显著，主要证据来自交互项；SUTVA虽经多种稳健性检验仍不能完全排除。
+
+- link_to_next_phase_cn：经验结果需要一般化框架，因此引出分析模型来解释为何偏好会随可见性和补贴率切换。
+
+##### evidence_pointers
+
+1. Table 7 columns 3-4, 7-8
+
+2. Appendix F
+
+3. Table 9 summary
+
+#### 5. 分析模型：不纯利他主义下的microgiving补贴偏好
+
+- order：5
+
+- name_cn：分析模型：不纯利他主义下的microgiving补贴偏好
+
+- question_cn：为什么平均用户会在低补贴时偏好rebate、在高补贴或可见环境下偏好matching？如何把实验中的两个离散条件推广到连续的补贴率和可见性范围？
+
+- inputs_and_setting_cn：理论模型，不使用新数据集；基于impure altruism和信息整合理论，构造效用函数U(b,d,x,y)，包括温暖感g(x)=c x^α和rebate愧疚感r(y)=-c y^β。
+
+- designed_or_compared_object_cn：比较matching和rebate的效用U^M与U^R，引入可见性参数β代表手机环境的私密性/观众效应的强度；推导低可见性β>1和高可见性β≤1两种情形。
+
+- baseline_control_or_counterfactual_cn：不捐赠效用U^0=b作为基线；等价补贴M=R/(1-R)；比较不同M阈值下的最优选择。
+
+##### objective_metrics
+
+1. 效用比较U^M, U^R, U^0
+
+2. 补贴率阈值M_bar1, M_bar2, M_tilde
+
+3. Proposition 1的数学命题
+
+- analysis_method_cn：形式化效用模型；对Proposition 1进行解析证明（Appendix B）；用图形展示不同α、β参数下的效用曲线（Figure 3）。
+
+- main_result_cn：低可见性（β>1）时，随M增大个体从不捐赠转向rebate，再转向matching；高可见性（β≤1）时，matching对所有M都优于rebate。该命题在定性上复现实验1和实验2的结果。
+
+- argumentative_role_cn：把两个现场实验的离散发现上升为一般性机制结论，为管理者提供关于补贴率与可见性组合的规范性指南。
+
+- remaining_uncertainty_cn：模型假设α、β、c等参数固定，未用实验数据估计；未考虑捐赠金额内生选择；只捕捉microgiving的窄捐赠范围。
+
+- link_to_next_phase_cn：模型成为讨论部分的理论支撑，回答引言中“移动情境如何改变离线捐赠关系”的总体问题。
+
+##### evidence_pointers
+
+1. A Generalizable Theoretical Model of Microgiving
+
+2. Proposition 1
+
+3. Figure 3
+
+4. Appendix B proof
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. GAP
+
+3. PHENOMENON
+
+4. STUDY_OVERVIEW
+
+5. RESULT
+
+6. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. PHENOMENON
+
+4. RQ_OR_OBJECTIVE
+
+5. THEORY_INTRO
+
+6. GAP
+
+7. STUDY_OVERVIEW
+
+8. RESULT
+
+9. BOUNDARY_CONDITION
+
+10. PRACTICAL_STAKES
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. MECHANISM
+
+4. GAP
+
+5. THEORY_INTRO
+
+6. THEORY_PROPOSITION
+
+7. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. METHOD_JUSTIFICATION
+
+4. BENCHMARK_OR_CONTRAST
+
+5. STUDY_OVERVIEW
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. PRACTICAL_STAKES
+
+4. LIMITATION_AND_FUTURE
+
+5. CONTEXT
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 移动设备与技术增强选择：智能手机作为私密、个人化、非替代性渠道
+
+2. 慈善捐赠经济学：matching与rebate补贴、warm glow、合作框架
+
+3. 观众效应与社会赞许：可观察行为导致亲社会行为
+
+4. 数字助推：choice architecture与salience
+
+5. impure altruism与信息整合理论：主观价值函数、α、β参数
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：离线文献中matching更有效及其背后的warm glow/合作/观众效应机制，直接引出“私密移动环境可能反转matching优势”的理论推断；实验处理的选择（rebate vs matching、push、social feed）和预期方向均由该机制推导。分析模型又把同一机制形式化。虽然具体补贴幅度和是否可行受平台限制，但关键实验设计不是事后包装，而是理论前瞻性决定。
+
+- 理论到设计翻译链：离线matching因为有合作框架和观众效应而更有效 → 智能手机是私密私人领域，观众效应弱 → 预期私密情境下rebate可能更有利 → 设计等价补贴实验（低补贴实验1） → 实证发现低补贴rebate占优 → 怀疑补贴幅度和可见性是边界条件 → 实验2提高补贴并加入social feed → 发现高补贴消除rebate优势、可见性使matching更强 → 用impure altruism模型把机制形式化：rebate带来的愧疚感r(y)受可见性参数β控制，matching的温暖感g(x)不随观众增强 → 模型证明低可见性时偏好随M从rebate切到matching，高可见性时matching始终占优。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：离线慈善捐赠中matching通过合作框架和warm glow比rebate更有效；但该结论依赖可见的观众环境。
+
+- mechanism_cn：观众效应激发社会赞许和合作动机；私密移动环境弱化观众效应，使rebate的私人回报更突出。
+
+- design_requirement_cn：需要操纵补贴类型和捐赠可见性，使rebate与matching经济等价，并能在私密与公共条件间切换。
+
+- artifact_choice_cn：实验1用20% rebate vs 25% matching；实验2用50% rebate vs 100% matching，并增加social feed公开捐赠信息。
+
+- evaluated_contrast_cn：rebate vs matching；低补贴 vs 高补贴；无feed vs feed；feed×rebate交互。
+
+- objective_result_cn：低补贴时rebate优于matching；高补贴无feed时差异消失；有feed时matching显著优于rebate。
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Table 6
+
+3. Table 7
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：数字助推通过改变choice architecture提高选择salience，不改变经济选项。
+
+- mechanism_cn：push notifications低成本、可忽略、吸引注意，让用户注意到捐赠入口和激励信息。
+
+- design_requirement_cn：在移动原生环境中加入低侵入式提醒；推送通知应能与激励独立操纵。
+
+- artifact_choice_cn：实验1第二天发送一次push；实验2每两周发送一次共5次push，并增加无激励的push控制组。
+
+- evaluated_contrast_cn：push vs no push；单次 vs 多次推送。
+
+- objective_result_cn：push显著提高捐赠决策和金额；但多次推送与单次推送效果无显著差异。
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Table 6
+
+3. Table 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：当行为可观察时，个人更倾向社会赞许行为，matching因为利他/合作形象更受青睐。
+
+- mechanism_cn：公开捐赠会带来声誉与避免负面形象的压力；接受rebate在公开时显得贪婪/不纯粹，因此rebate效用下降。
+
+- design_requirement_cn：需要创造一个真实但可控的可见场景，只对处理组公开捐赠者身份与金额。
+
+- artifact_choice_cn：平台内social feed墙显示用户身份和捐赠金额；捐赠页和push文案告知用户“donation information will be shared”。
+
+- evaluated_contrast_cn：social feed组 vs 非feed组；rebate×social feed交互。
+
+- objective_result_cn：social feed直接主效应不显著，但rebate×social feed显著为负，说明可见性削弱rebate相对matching的效果。
+
+##### evidence_pointers
+
+1. Table 2 Experiment 2 message copy
+
+2. Table 7 columns 4 and 8
+
+3. Appendix F
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：impure altruism下捐赠效用同时包含利他与自我动机；主观价值呈幂函数，rebate的愧疚感随可见性变化。
+
+- mechanism_cn：温暖感g(x)=c x^α随自己实际支付比例递减；rebate愧疚感r(y)=-c y^β，β越小表示观众效应越强，rebate愧疚越大。
+
+- design_requirement_cn：需要形式化低可见性与高可见性下的偏好切换，并得到补贴率阈值。
+
+- artifact_choice_cn：构建U(b,d,x,y)=b+d(g(x)-x)+d(r(y)+y)，比较U^M和U^R。
+
+- evaluated_contrast_cn：低可见性β>1 vs 高可见性β≤1；连续M变化下的最优选择。
+
+- objective_result_cn：Proposition 1证明低可见性时存在M阈值使偏好从rebate切换到matching；高可见性时matching始终占优。
+
+##### evidence_pointers
+
+1. Analytical model section
+
+2. Proposition 1
+
+3. Figure 3
+
+4. Appendix B
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 两个大规模随机现场实验
+
+2. 模型无关描述性证据（model-free evidence）
+
+3. logistic回归（捐赠决策）
+
+4. Tobit模型（捐赠金额）
+
+5. 跨实验子样本分段比较
+
+6. 交互项机制检验
+
+7. SUTVA稳健性检验与randomization inference
+
+8. 形式分析模型与命题证明
+
+- why_these_evaluations_cn：需要在真实移动应用中建立因果效应，因此采用随机现场实验；需要判断低补贴反转是否稳健并寻找边界，因此引入高补贴和social feed的第二个实验；需要在不增加第三个实验的情况下区分激励幅度与可见性，因此采用分段子样本比较；需要排除social feed组内用户相互干扰的替代解释，因此做SUTVA检验；最后需要把两个离散实验条件推广到一般区间，因此发展分析模型。
+
+- benchmark_and_contrast_chain_cn：控制组（无激励、无推送、无feed）提供绝对基线；M=R/(1-R)使rebate与matching在经济学价值上可比；实验1低补贴与实验2高补贴形成幅度对比；实验2排除feed子样本用于跨实验幅度比较，全样本用于feed比较；push、incentive、rebate、social feed的虚拟变量和交互项逐步建立从主效应到调节效应的证据链。
+
+### claim_evidence_ledger
+
+1. 任何经济激励都会提高捐赠：由实验1和实验2中incentive变量在logistic和Tobit中显著为正支持。
+
+2. push notifications提高捐赠：两个实验中push系数显著为正支持。
+
+3. 低补贴时rebate优于matching：实验1列2和列4中rebate系数显著为正支持。
+
+4. 高补贴消除rebate优势：实验2排除feed子样本中rebate系数不显著支持。
+
+5. 可见性让matching优于rebate：实验2全样本中rebate×social feed显著为负支持；但social feed主效应不显著，机制主张主要依赖交互项。
+
+6. 重复推送不额外提升效果：实验2多次推送与实验1单次推送的系数统计上不可区分支持。
+
+7. 行为切换可由私密性和补贴率解释：分析模型Proposition 1从理论上支持，但未用实验数据估计参数。
+
+- internal_validity_strategy_cn：使用随机分配和ANOVA/Tukey HSD随机化检验；在回归中控制余额、使用月数、性别；cell-by-cell处理效应比较；使用经济等价补贴公式保证公平比较；通过时间段隔离减少实验1到实验2的污染；对social feed进行SUTVA检验、randomization inference、每日捐赠feed面板分析和协变量匹配，试图排除干扰效应。
+
+- external_validity_strategy_cn：使用真实移动奖励应用的大规模用户样本，跨2016和2018两个时间点；用分析模型把特定补贴率推广到连续M和β范围；在讨论中承认单一应用与自选择限制，但主张目标用户群是移动奖励应用的普遍人群。
+
+- what_is_not_actually_tested_cn：没有直接测量warm glow、愧疚、社会赞许等心理机制；没有测试真实货币现金捐赠，只有应用内reward points；没有在Facebook/Twitter等外部社交平台复制可见性处理；没有覆盖多个慈善机构或多种手机应用；没有足够多的补贴水平精确估计分析模型参数；跨实验比较受到文案和调查时间差异的混淆。
+
+## 贡献闭环
+
+- technical_claim_cn：实证上证明在移动microgiving场景中push notifications和任何经济激励均能提高捐赠，且rebate与matching的相对效果会随激励幅度和可见性改变。
+
+- artifact_claim_cn：捐赠功能、push通知、social feed公开这三个设计组件的组合带来了可观测的捐赠差异；具体来说，私密低补贴下rebate设计更优，公开高补贴下matching加可见性设计更优。
+
+- mechanism_claim_cn：智能手机的私密性降低观众效应，使依赖合作框架的matching失去优势；当社交可见性重新引入时，社会赞许与愧疚感改变补贴类型的效果，matching重新占优。
+
+- boundary_claim_cn：结论适用于移动奖励积分形式的小额捐赠；低补贴、私密环境是rebate占优的边界；高补贴或social feed可见环境是matching占优的边界；重复推送不增加效果。
+
+- reusable_design_knowledge_cn：设计移动捐赠活动时应把补贴类型与可见性匹配：小额度私密场景可考虑rebate；大额补贴或存在社交公开时优先matching；push notifications应低频策略性使用；应利用M=R/(1-R)等价公式设计可比的补贴实验。
+
+- theoretical_contribution_cn：将离线慈善捐赠理论扩展到移动手机生态，说明matching在离线的优势不能自动迁移；用impure altruism模型将观众效应参数化为β，提出低可见性下补贴偏好可随补贴率从rebate切换至matching的理论命题，为后续移动亲社会行为研究提供可检验框架。
+
+- how_discussion_closes_intro_gap_cn：讨论直接回到引言提出的“智能手机是否只是另一个渠道”问题，用实证反转和模型证明：手机私密性改变了离线捐赠理论的前提，因此matching的效果不再无条件占优；同时在可见性恢复时，离线关系又会部分回来。以此闭合了“移动生态如何管理慈善捐赠”的缺口。
+
+- overclaim_or_unsupported_leaps_cn：将低补贴rebate优势归因于私密性，但实验1没有直接操纵可见性，属推断；实验2的social feed主效应不显著，机制证据主要来自交互项；跨实验比较中激励幅度与其他改动混杂；分析模型参数未由数据识别，只能提供定性解释；将结果推广到所有移动app用户时依赖单一app样本。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：技术增强的决策影响商业多方面；移动生态中的经济激励对亲社会行为尤其有效。
+
+- rhetorical_function_cn：开篇把议题放在技术增强决策和移动激励的高层语境。
+
+- depends_on_cn：无
+
+- sets_up_cn：为移动环境下慈善捐赠研究设定领域。
+
+- evidence_pointer：Abstract第一段
+
+### 2. Abstract P1 S3-S4
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S3-S4
+
+- move_code：GAP
+
+- paraphrase_cn：作者在前人工作基础上研究移动激励与环境如何影响慈善捐赠，并定义小额捐赠microgiving。
+
+- rhetorical_function_cn：点出本文切入点是移动环境中的小额捐赠，而非传统募捐。
+
+- depends_on_cn：已有移动亲社会行为研究。
+
+- sets_up_cn：引出随后对补贴和推送的讨论。
+
+- evidence_pointer：Abstract第一段后半
+
+### 3. Abstract P2 S1-S2
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：与合作应用商在app内加入积分捐赠功能，并用rebate/matching补贴和push notifications做两个大型现场实验。
+
+- rhetorical_function_cn：预告实证设计。
+
+- depends_on_cn：microgiving概念。
+
+- sets_up_cn：引出结果概要。
+
+- evidence_pointer：Abstract第二段
+
+### 4. Abstract P2 S3
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P2 S3
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示激励有效性取决于激励幅度和个体决策对他人的可见程度。
+
+- rhetorical_function_cn：一句话概括核心发现，强调条件性而非简单主效应。
+
+- depends_on_cn：两个现场实验设计。
+
+- sets_up_cn：为分析模型做引子。
+
+- evidence_pointer：Abstract第二段末尾
+
+### 5. Abstract P3
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者提出内化补贴率和观众效应的分析模型，以联系传统捐赠媒介并推进技术增强慈善捐赠。
+
+- rhetorical_function_cn：声明理论贡献与一般化目标。
+
+- depends_on_cn：实验结果。
+
+- sets_up_cn：表明论文同时有实证与理论贡献。
+
+- evidence_pointer：Abstract第三段
+
+### 6. Introduction P1 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：2021年全球约38亿智能手机，81%美国成年人拥有智能手机，技术扩散极快。
+
+- rhetorical_function_cn：建立智能手机普及的现实背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：说明研究移动设备影响选择的重要性。
+
+- evidence_pointer：Introduction第一段
+
+### 7. Introduction P1 S3-S5
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S3-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：智能手机具有触觉、便携、金融与社交整合、高度个人化、隐私感等特征，与用户关系超越普通设备。
+
+- rhetorical_function_cn：引入手机私密性和个人性作为理论核心。
+
+- depends_on_cn：智能手机普及数据。
+
+- sets_up_cn：为挑战“手机只是一个渠道”的观念埋伏笔。
+
+- evidence_pointer：Introduction第一段后部
+
+### 8. Introduction P2 S1-S2
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：智能手机在亲社会活动中越发重要，例如SMS促进献血、触觉振动促进运动。
+
+- rhetorical_function_cn：从一般技术背景收缩到移动亲社会行为。
+
+- depends_on_cn：智能手机特征。
+
+- sets_up_cn：引出microgiving场景。
+
+- evidence_pointer：Introduction第二段前两句
+
+### 9. Introduction P2 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者定义microgiving为移动设备上的小额慈善捐赠，研究私密性和推送通知如何激励这种捐赠。
+
+- rhetorical_function_cn：限定研究对象并明确研究问题。
+
+- depends_on_cn：移动亲社会行为例子。
+
+- sets_up_cn：后续理论和实验围绕microgiving展开。
+
+- evidence_pointer：Introduction第二段末尾
+
+### 10. Introduction P3 S1-S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者整合移动设备收益研究与慈善捐赠研究，关注激励、数字助推和私密性三个维度。
+
+- rhetorical_function_cn：说明理论来源和选择变量的依据。
+
+- depends_on_cn：手机私密性文献与慈善捐赠文献。
+
+- sets_up_cn：下一段开始分别讨论激励和观众效应。
+
+- evidence_pointer：Introduction第三段
+
+### 11. Introduction P4 S1-S2
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P4 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：慈善捐赠文献强调经济激励，常见补贴是rebate和matching；离线证据显示matching因为合作感和warm glow往往更有效。
+
+- rhetorical_function_cn：铺垫将被挑战的离线结论。
+
+- depends_on_cn：Eckel & Grossman等文献。
+
+- sets_up_cn：用于对比手机私密环境中的预期。
+
+- evidence_pointer：Introduction第四段前半
+
+### 12. Introduction P4 S3
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：GAP
+
+- paraphrase_cn：智能手机是极度私密媒介，观众效应减弱；因此需要检验matching是否仍然优于rebate。
+
+- rhetorical_function_cn：形成理论缺口：离线关系可能不迁移。
+
+- depends_on_cn：手机私密性和离线matching优势。
+
+- sets_up_cn：引出实验中对rebate/matching的操纵。
+
+- evidence_pointer：Introduction第四段末尾
+
+### 13. Introduction P5
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：nudge通过改变choice architecture影响选择而不改变经济结果；数字助推可用SMS、触觉、视觉提示等方式。
+
+- rhetorical_function_cn：引入数字助推的理论基础。
+
+- depends_on_cn：Thaler & Sunstein nudging文献。
+
+- sets_up_cn：为push notification处理提供依据。
+
+- evidence_pointer：Introduction第五段
+
+### 14. Introduction P6 S1-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出三个具体经验问题：私密性如何影响补贴效果、补贴幅度如何量化、推送和可见性如何改变捐赠行为。
+
+- rhetorical_function_cn：将总体问题分解为可检验的子问题。
+
+- depends_on_cn：前面理论缺口。
+
+- sets_up_cn：定义实验处理组合。
+
+- evidence_pointer：Introduction第六段
+
+### 15. Introduction P6 S4
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P6 S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：文章总问题：移动环境下如何通过经济激励和数字助推有效管理microgiving活动。
+
+- rhetorical_function_cn：以问句形式明确核心研究问题。
+
+- depends_on_cn：三个子问题。
+
+- sets_up_cn：为实证研究提供导向。
+
+- evidence_pointer：Introduction第六段末尾
+
+### 16. Introduction P7
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P7
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者与提供Android奖励应用的美国公司合作，在app中加入捐赠功能，并开展两个随机现场实验。
+
+- rhetorical_function_cn：说明实证合作的来源和实验类型。
+
+- depends_on_cn：核心研究问题。
+
+- sets_up_cn：为实验设计章节铺垫。
+
+- evidence_pointer：Introduction第七段
+
+### 17. Introduction P8 S1-S5
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P8 S1-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示任何激励都有效；低补贴时rebate比matching更有效；引入可见性后matching重新更有效；push通知直接增加捐赠。
+
+- rhetorical_function_cn：在引言中先给出核心结果，抓住读者并预告机制。
+
+- depends_on_cn：两个现场实验。
+
+- sets_up_cn：为讨论和模型提供经验锚点。
+
+- evidence_pointer：Introduction第八段
+
+### 18. Introduction P9
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P9
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：结果表明智能手机不能被看作另一个简单渠道，需要分析模型来理解microgiving这一新现象。
+
+- rhetorical_function_cn：从结果上升到理论定位。
+
+- depends_on_cn：实验结果的非迁移性。
+
+- sets_up_cn：引入分析模型和管理意义。
+
+- evidence_pointer：Introduction第九段
+
+### 19. Lit Review 'Mobile Devices and Technology-Augmented Decision Making' P1-P2
+
+- order：19
+
+- section：Literature Review
+
+- locator：Lit Review 'Mobile Devices and Technology-Augmented Decision Making' P1-P2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：早期研究把移动设备视为PC补充渠道，但智能手机已经成为决策过程本身的一部分。
+
+- rhetorical_function_cn：指出现有移动研究视角的局限。
+
+- depends_on_cn：智能手机特征文献。
+
+- sets_up_cn：为“移动环境需要重新实证”的论点提供依据。
+
+- evidence_pointer：Literature Review第一节
+
+### 20. Lit Review 'Mobile Devices and Prosocial Behavior' P2-P3
+
+- order：20
+
+- section：Literature Review
+
+- locator：Lit Review 'Mobile Devices and Prosocial Behavior' P2-P3
+
+- move_code：GAP
+
+- paraphrase_cn：SMS等移动功能已被证明能促进献血、购票捐赠等，但专门研究移动设备作为慈善捐赠媒介的文献很少。
+
+- rhetorical_function_cn：识别具体研究空白：移动慈善捐赠缺乏整体性研究。
+
+- depends_on_cn：移动亲社会行为综述。
+
+- sets_up_cn：引出后面三方面待讨论问题。
+
+- evidence_pointer：Literature Review第二节
+
+### 21. Lit Review 'Economic Incentives for Charitable Giving' P1-P3
+
+- order：21
+
+- section：Literature Review
+
+- locator：Lit Review 'Economic Incentives for Charitable Giving' P1-P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：经济激励通过降低感知成本提高捐赠，常见形式为matching与rebate，文献总体认为离线时matching优于rebate。
+
+- rhetorical_function_cn：系统整理离线补贴文献结论。
+
+- depends_on_cn：Eckel & Grossman、Karlan & List等。
+
+- sets_up_cn：形成将被移动情境挑战的参照结论。
+
+- evidence_pointer：Literature Review第三节开头
+
+### 22. Lit Review 'Economic Incentives for Charitable Giving' P4
+
+- order：22
+
+- section：Literature Review
+
+- locator：Lit Review 'Economic Incentives for Charitable Giving' P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：matching通过合作框架和warm glow产生效果，rebate则唤起奖赏感和可能的贪婪感。
+
+- rhetorical_function_cn：解释为何离线matching更有效。
+
+- depends_on_cn：framing effect和warm glow文献。
+
+- sets_up_cn：为私密环境弱化这些机制提供理论基础。
+
+- evidence_pointer：Literature Review第三节机制段
+
+### 23. Lit Review 'Economic Incentives for Charitable Giving' P5
+
+- order：23
+
+- section：Literature Review
+
+- locator：Lit Review 'Economic Incentives for Charitable Giving' P5
+
+- move_code：GAP
+
+- paraphrase_cn：matching是否在移动渠道仍优于rebate仍未经验检验；支持matching的机制只在可观察的离线情境中被研究。
+
+- rhetorical_function_cn：把文献缺口定位为移动情境下的迁移未检验问题。
+
+- depends_on_cn：离线matching优势。
+
+- sets_up_cn：引出手机私密性对补贴效果的调节。
+
+- evidence_pointer：Literature Review第三节最后一段
+
+### 24. Lit Review 'Mobile Devices as a Private Realm' P1-P2
+
+- order：24
+
+- section：Literature Review
+
+- locator：Lit Review 'Mobile Devices as a Private Realm' P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：智能手机是私密个人技术，构成“私人领域”，使用时如同cocooning。
+
+- rhetorical_function_cn：引入私密性理论概念。
+
+- depends_on_cn：移动设备个人化文献。
+
+- sets_up_cn：用于预测观众效应弱化。
+
+- evidence_pointer：Literature Review第四节
+
+### 25. Lit Review 'Mobile Devices as a Private Realm' P3
+
+- order：25
+
+- section：Literature Review
+
+- locator：Lit Review 'Mobile Devices as a Private Realm' P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：行动被观察时人们更遵守社会赞许规范；声誉、避免突出和寻求社会认可驱动audience effects。
+
+- rhetorical_function_cn：说明观众效应的心理机制。
+
+- depends_on_cn：Zajonc、Andreoni & Bernheim等。
+
+- sets_up_cn：为social feed处理提供理论预期。
+
+- evidence_pointer：Literature Review第四节第三段
+
+### 26. Lit Review 'Mobile Devices as a Private Realm' P4
+
+- order：26
+
+- section：Literature Review
+
+- locator：Lit Review 'Mobile Devices as a Private Realm' P4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：在私密移动环境中，matching可能不如rebate有效；一旦可见性恢复，matching会重新占优。
+
+- rhetorical_function_cn：把理论直接转化为可检验预期。
+
+- depends_on_cn：私密性与观众效应机制。
+
+- sets_up_cn：实验1和实验2的rebate/matching对比。
+
+- evidence_pointer：Literature Review第四节末尾
+
+### 27. Lit Review 'Evoking Salience Through Digital Nudging' P1-P2
+
+- order：27
+
+- section：Literature Review
+
+- locator：Lit Review 'Evoking Salience Through Digital Nudging' P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：数字助推通过设计、信息和交互元素引导用户行为而不限制选择；push notifications是低成本、易忽略的移动原生nudge。
+
+- rhetorical_function_cn：为push通知处理提供定义和合理性。
+
+- depends_on_cn：Thaler & Sunstein、Schneider等。
+
+- sets_up_cn：预期推送提升捐赠。
+
+- evidence_pointer：Literature Review第五节
+
+### 28. Field Experiments P1
+
+- order：28
+
+- section：Field Experiments
+
+- locator：Field Experiments P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：通过与美国移动应用商合作，分别于2016年4月和2018年10-12月开展两个大型现场实验。
+
+- rhetorical_function_cn：进入实证章节，交代时间与合作平台。
+
+- depends_on_cn：理论预期。
+
+- sets_up_cn：说明实验是随机现场实验，而非实验室。
+
+- evidence_pointer：Field Experiments开头
+
+### 29. Experiment 1 Design P1-P2
+
+- order：29
+
+- section：Field Experiment 1 Design
+
+- locator：Experiment 1 Design P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验1加入捐赠功能，采用2×2全因子设计（rebate/matching × push），另设控制组，共52,324名用户。
+
+- rhetorical_function_cn：描述第一个实验的处理结构和样本。
+
+- depends_on_cn：总体研究问题。
+
+- sets_up_cn：为模型无关证据和回归分析提供设计基础。
+
+- evidence_pointer：Field Experiment 1 Design段
+
+### 30. Experiment 1 Design P2
+
+- order：30
+
+- section：Field Experiment 1 Design
+
+- locator：Experiment 1 Design P2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：用M=R/(1-R)设定25% matching对应20% rebate，使两种补贴经济等价。
+
+- rhetorical_function_cn：建立可比的补贴基准。
+
+- depends_on_cn：Eckel & Grossman等价公式。
+
+- sets_up_cn：使rebate与matching的差异可归因于心理而非经济值。
+
+- evidence_pointer：Experiment 1 Design段，Table 1注
+
+### 31. Experiment 1 Results P1-P2
+
+- order：31
+
+- section：Field Experiment 1 Results
+
+- locator：Experiment 1 Results P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：随机化检验无显著差异；模型无关数据显示控制组捐赠率0.39%，处理组升至0.73%-1.53%。
+
+- rhetorical_function_cn：先验证随机性，再给出描述性结果。
+
+- depends_on_cn：随机分配与数据采集。
+
+- sets_up_cn：为回归结果提供可信基础。
+
+- evidence_pointer：Table 3, Table 4, Figure 1
+
+### 32. Experiment 1 Results P3
+
+- order：32
+
+- section：Field Experiment 1 Results
+
+- locator：Experiment 1 Results P3
+
+- move_code：RESULT
+
+- paraphrase_cn：logistic和Tobit回归显示push和任何激励都显著提高捐赠；在等价低补贴下，rebate的捐赠概率比matching高约27%。
+
+- rhetorical_function_cn：给出核心反直觉结果。
+
+- depends_on_cn：随机化验证。
+
+- sets_up_cn：引出第二个实验。
+
+- evidence_pointer：Table 5 columns 1-4
+
+### 33. Experiment 1 Results P4
+
+- order：33
+
+- section：Field Experiment 1 Results
+
+- locator：Experiment 1 Results P4
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者总结三个未解决问题：更高激励是否使结果符合离线文献、可见性是否会改变matching效果、更频繁推送是否更好。
+
+- rhetorical_function_cn：把第一个实验的发现转化为后续实验的动机。
+
+- depends_on_cn：实验1中rebate优势和高推送效果。
+
+- sets_up_cn：直接引出实验2的高激励、social feed和重复推送。
+
+- evidence_pointer：Field Experiment 1 Results最后一段
+
+### 34. Experiment 2 Design P1-P3
+
+- order：34
+
+- section：Field Experiment 2 Design
+
+- locator：Experiment 2 Design P1-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验2延长到77天，提高补贴到50% rebate和100% matching，每两周发一次push共5次，并加入social feed公开捐赠信息。
+
+- rhetorical_function_cn：说明第二个实验对第一个实验的修改。
+
+- depends_on_cn：实验1的三个未解问题。
+
+- sets_up_cn：使机制检验成为可能。
+
+- evidence_pointer：Field Experiment 2 Design段
+
+### 35. Experiment 2 Design P3
+
+- order：35
+
+- section：Field Experiment 2 Design
+
+- locator：Experiment 2 Design P3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：作者预期social feed会让matching更吸引人、让rebate相对不吸引，因为观众效应会激发亲社会行为。
+
+- rhetorical_function_cn：在随机实验前给出理论预期。
+
+- depends_on_cn：audience effects文献。
+
+- sets_up_cn：为Table 7的交互项分析提供假设。
+
+- evidence_pointer：Field Experiment 2 Design P3
+
+### 36. Experiment 2 Design P4
+
+- order：36
+
+- section：Field Experiment 2 Design
+
+- locator：Experiment 2 Design P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验2把push notification与激励解耦，使无激励控制组也能接收push，从而独立估计nudge效果。
+
+- rhetorical_function_cn：修复实验1中push总是伴随激励的设计缺陷。
+
+- depends_on_cn：实验1设计局限。
+
+- sets_up_cn：更干净的push效应识别。
+
+- evidence_pointer：Field Experiment 2 Design P4
+
+### 37. Experiment 2 Results P1
+
+- order：37
+
+- section：Field Experiment 2 Results
+
+- locator：Experiment 2 Results P1
+
+- move_code：RESULT
+
+- paraphrase_cn：随机化成功；总体捐赠率0.49%低于实验1；除T4外各处理组捐赠率高于控制组。
+
+- rhetorical_function_cn：报告第二个实验的描述性证据。
+
+- depends_on_cn：60,541随机样本。
+
+- sets_up_cn：进入回归分析。
+
+- evidence_pointer：Table 3, Table 4, Figure 2
+
+### 38. Experiment 2 Results P2
+
+- order：38
+
+- section：Field Experiment 2 Results
+
+- locator：Experiment 2 Results P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者承认两个实验同时改变了激励幅度和social feed，无法直接比较；因此采用分段子样本比较，先排除feed研究幅度，再在全样本中研究feed。
+
+- rhetorical_function_cn：解释为何不做简单跨实验对比，并说明分段比较策略。
+
+- depends_on_cn：实验设计约束。
+
+- sets_up_cn：为Table 6和Table 7两类分析提供合法性。
+
+- evidence_pointer：Field Experiment 2 Results P2
+
+### 39. Experiment 2 Results Table 6下
+
+- order：39
+
+- section：Field Experiment 2 Results
+
+- locator：Experiment 2 Results Table 6下
+
+- move_code：RESULT
+
+- paraphrase_cn：在无feed子样本中，高补贴和push显著提高捐赠；rebate系数不显著，说明低补贴时的rebate优势消失。
+
+- rhetorical_function_cn：隔离激励幅度效应。
+
+- depends_on_cn：分段子样本策略。
+
+- sets_up_cn：指向“补贴幅度是边界条件”的解释。
+
+- evidence_pointer：Table 6
+
+### 40. Experiment 2 Results Table 7下
+
+- order：40
+
+- section：Field Experiment 2 Results
+
+- locator：Experiment 2 Results Table 7下
+
+- move_code：RESULT
+
+- paraphrase_cn：全样本中social feed主效应不显著，但rebate×social feed显著为负，说明公开可见时rebate相对matching的效果下降。
+
+- rhetorical_function_cn：检验观众效应调节作用，是机制证据的关键。
+
+- depends_on_cn：实验2全样本。
+
+- sets_up_cn：支持matching在可见情境重新占优的结论。
+
+- evidence_pointer：Table 7 columns 4 and 8
+
+### 41. Experiment 2 Results Table 9后
+
+- order：41
+
+- section：Field Experiment 2 Results
+
+- locator：Experiment 2 Results Table 9后
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者总结结果稳健性后，表示需要用分析模型把发现推广到一般性可迁移洞察。
+
+- rhetorical_function_cn：从经验章节过渡到理论建模章节。
+
+- depends_on_cn：实验1和实验2的全部发现。
+
+- sets_up_cn：引出Gerneralizable Theoretical Model。
+
+- evidence_pointer：Field Experiment 2 Results最后一段
+
+### 42. Model opening P1
+
+- order：42
+
+- section：Analytical Model
+
+- locator：Model opening P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者追问为什么用户会捐赠、为什么激励效果会随补贴率切换、为什么观众会改变捐赠行为。
+
+- rhetorical_function_cn：把经验问题转化为理论建模问题。
+
+- depends_on_cn：实验结果的意外模式。
+
+- sets_up_cn：引入impure altruism效用模型。
+
+- evidence_pointer：A Generalizable Theoretical Model of Microgiving第一节
+
+### 43. Model utility section
+
+- order：43
+
+- section：Analytical Model
+
+- locator：Model utility section
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：基于impure altruism，效用分为私人成分和公共成分；在microgiving中公共成分近似不变，因此聚焦私人成分。
+
+- rhetorical_function_cn：说明采用不纯利他主义模型的原因。
+
+- depends_on_cn：Andreoni的impure altruism。
+
+- sets_up_cn：为后面幂函数效用方程提供基础。
+
+- evidence_pointer：Model utility model with monetary incentives
+
+### 44. Model utility section after Equation (3)-(4)
+
+- order：44
+
+- section：Analytical Model
+
+- locator：Model utility section after Equation (3)-(4)
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：捐赠温暖感由g(x)=c x^α表示，rebate带来的愧疚感由r(y)=-c y^β表示，其中β代表移动环境的私密性或观众效应。
+
+- rhetorical_function_cn：用参数化方式把私密性/可见性纳入效用函数。
+
+- depends_on_cn：信息整合理论和幂函数估值。
+
+- sets_up_cn：为Proposition 1的两种可见性情形提供参数条件。
+
+- evidence_pointer：Analytical Model equations (3)-(4)
+
+### 45. Proposition 1前后
+
+- order：45
+
+- section：Analytical Model
+
+- locator：Proposition 1前后
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：低可见性（β>1）时，存在补贴率阈值使最优选择从不捐赠切换到rebate再切换到matching；高可见性（β≤1）时，matching在所有补贴率下都优于rebate。
+
+- rhetorical_function_cn：给出可证明的一般命题，总结模型核心结论。
+
+- depends_on_cn：效用函数和参数假设。
+
+- sets_up_cn：把实验1和实验2的结果嵌入连续理论空间。
+
+- evidence_pointer：Proposition 1
+
+### 46. Proposition 1后解释段
+
+- order：46
+
+- section：Analytical Model
+
+- locator：Proposition 1后解释段
+
+- move_code：RESULT
+
+- paraphrase_cn：模型的结构性洞见复现实验1和实验2：无social feed时低补贴偏好rebate、高补贴切换至matching；有social feed时matching偏好增强。
+
+- rhetorical_function_cn：让理论模型反哺并解释经验结果。
+
+- depends_on_cn：Proposition 1。
+
+- sets_up_cn：为管理含义提供规范性指导。
+
+- evidence_pointer：Analytical Model Proposition 1后
+
+### 47. Discussion P1-P2
+
+- order：47
+
+- section：Discussion
+
+- locator：Discussion P1-P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：智能手机是变革性技术，影响思维、互动和选择，影响范围延伸到慈善等社会领域。
+
+- rhetorical_function_cn：恢复宏观语境，为贡献定调。
+
+- depends_on_cn：引言中的技术背景。
+
+- sets_up_cn：引出理论贡献和一般化主张。
+
+- evidence_pointer：Discussion and Conclusion第一段
+
+### 48. Discussion P3
+
+- order：48
+
+- section：Discussion
+
+- locator：Discussion P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称展示智能手机私密性如何反转离线matching优势，并在引入可见性后使matching恢复更有效；push notifications是必要的注意力助推。
+
+- rhetorical_function_cn：总结理论贡献。
+
+- depends_on_cn：两个实验和分析模型。
+
+- sets_up_cn：支撑管理含义。
+
+- evidence_pointer：Discussion and Conclusion第三段
+
+### 49. Managerial Implications P1-P2
+
+- order：49
+
+- section：Managerial Implications
+
+- locator：Managerial Implications P1-P2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：管理者应提供较大激励、在matching时利用社交可见性、并低频策略性发送push notifications。
+
+- rhetorical_function_cn：把研究发现转化为可操作建议。
+
+- depends_on_cn：实验和模型的机制结论。
+
+- sets_up_cn：说明实际价值。
+
+- evidence_pointer：Managerial Implications段
+
+### 50. Limitations P1-P3
+
+- order：50
+
+- section：Limitations
+
+- locator：Limitations P1-P3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认受平台约束，无法使用外部社交平台、无法获取深度用户数据、无法做机制调查；跨实验措辞不一致；样本有自选择。
+
+- rhetorical_function_cn：主动界定结论边界，减少过度主张风险。
+
+- depends_on_cn：实证设计与数据限制。
+
+- sets_up_cn：为未来研究提供方向。
+
+- evidence_pointer：Limitations
+
+### 51. Future Research P1-P2
+
+- order：51
+
+- section：Future Research
+
+- locator：Future Research P1-P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可研究真实现金捐赠、与大型募捐活动互补、使用haptics与软件代理、结合外部社交媒体可见性。
+
+- rhetorical_function_cn：提出扩展方向和开放问题。
+
+- depends_on_cn：本文限制与结果。
+
+- sets_up_cn：结束全文并保持研究议程开放。
+
+- evidence_pointer：Future Research
+
+## 写作技术
+
+- gap_construction_cn：文章先在离线捐赠文献中确立“matching比rebate更有效”的结论，再用智能手机私密性指出该结论依赖的观众效应在移动环境缺失，从而把缺口定位为“已有解释是否迁移”而非“无人研究”。
+
+- signposting_cn：引言和文献综述反复使用first/second/third列举研究问题；实验1结尾明确列出三个未解决问题；实验2设计逐一回应；模型前用三个追问过渡。
+
+- transition_logic_cn：每个阶段末尾都留下一个必须由下一阶段回答的不确定性：实验1由低补贴和私密性疑问引出实验2；实验2由跨实验混淆引出分段比较；最后经验结果引向理论模型。
+
+- claim_evidence_rhythm_cn：先报告随机化检验，再展示模型无关表格和图，然后给出logistic/Tobit回归；在关键处用等价补贴公式和cell-by-cell结果加固主张；机制主张放在交互项和稳健性检验之后。
+
+- benchmark_narrative_cn：用M=R/(1-R)创造经济等价基准，使rebate/matching差异只能是心理机制；控制组提供绝对基线；低/高补贴、无/有feed、单次/重复推送形成逐层对比，每个对比都服务于一个理论解释。
+
+- theory_return_cn：经验结果不是停在系数表，而是回到impure altruism模型：β参数把可见性机制形式化，Proposition 1反过来解释实验1/2的偏好切换，形成“理论—实验—理论”的循环。
+
+- contribution_positioning_cn：作者不把贡献定位为“某app上更有效”，而是“智能手机不是另一个渠道”和“microgiving需要新理论”，并用分析模型把结论提升为一般性设计指南。
+
+- novelty_protection_cn：通过加入分析模型和机制检验，防止结果被看作一次性现场实验；用SUTVA稳健性检验保护social feed因果主张；用边界条件（低/高补贴、私密/可见）把偶然结果转化为结构化规律。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：开头用普及数据和设备特征建立“智能手机不是普通渠道”的宏观背景。
+
+- research_job_cn：梳理移动设备决策文献，找出设备特征与目标行为之间的可能联系。
+
+- required_evidence_cn：需要移动设备特征、用户关系或行为差异的已有证据。
+
+- transition_to_next_cn：从一般移动决策收缩到移动亲社会行为。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述目标领域的离线已知结论，并指出其依赖的情境条件。
+
+- research_job_cn：找出一个会被移动情境挑战的稳定离线关系，例如matching vs rebate。
+
+- required_evidence_cn：需要离线文献中该关系及其机制的证据。
+
+- transition_to_next_cn：说明移动设备的私密性会破坏该关系的前提条件，形成缺口。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把缺口转化为可检验的处理设计：补贴类型、推送、可见性。
+
+- research_job_cn：与平台合作确定可操纵的功能和用户群。
+
+- required_evidence_cn：需要有能够随机分配的大样本平台和真实处理变体。
+
+- transition_to_next_cn：进入现场实验章节。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用等价公式和全因子设计描述实验，先给随机化检验再给模型无关证据。
+
+- research_job_cn：执行第一个现场实验，获得初步因果效应。
+
+- required_evidence_cn：需要随机化成功、主效应显著，最好有一个反直觉结果。
+
+- transition_to_next_cn：用未解决机制/边界问题引出第二个实验。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：第二个实验通过提高强度、增加调节变量、解耦处理修复合第一实验的缺陷。
+
+- research_job_cn：执行第二个现场实验，用分段子样本和交互项检验机制。
+
+- required_evidence_cn：需要可比的控制组、独立操纵的变量和足够的样本量。
+
+- transition_to_next_cn：用“需要一般化”引出分析模型或后续理论。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：发展正式模型把经验规律形式化，并证明关键命题。
+
+- research_job_cn：选择可参数化机制的模型（如效用函数），推导与实验一致的结论。
+
+- required_evidence_cn：需要数学命题和证明，且命题方向与实验一致。
+
+- transition_to_next_cn：进入讨论，返回初始理论。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：讨论中重述核心反转和边界条件，给管理者具体建议，并用稳健性检验回应替代解释。
+
+- research_job_cn：总结理论贡献、管理含义和限制。
+
+- required_evidence_cn：需要稳健性检验、边界条件和诚实的局限说明。
+
+- transition_to_next_cn：最后提出未来方向。
+
+### most_transferable_moves_cn
+
+1. 用M=R/(1-R)建立经济等价基准，使心理机制可从比较中分离。
+
+2. 第一个实验制造反直觉结果，再通过第二个实验提高强度/加入调节变量来检验边界。
+
+3. 先用子样本隔离一个混淆因素，再用全样本检验另一个因素，缓解多个改动无法同时做干净实验的问题。
+
+4. 在每个阶段结尾显式列出未解决问题，作为下一阶段的过渡。
+
+5. 把两个离散实验点放入一个连续参数模型，使结果从一次性经验升为可推广理论。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要与真实移动应用提供商建立深度合作，并在app中实际新增捐赠功能。
+
+2. 需要数万名活跃用户和两个时期的大规模随机分配。
+
+3. 需要设置social feed并让同组用户可见捐赠信息，涉及隐私和平台功能开发。
+
+4. 第二个实验与第一个实验相隔两年，需要平台愿意在中间移除并重启捐赠功能。
+
+5. SUTVA稳健性检验和randomization inference需要额外的工程与计量工作。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只复制“rebate比matching好”的结论，因为该结论只在低补贴私密情境成立。
+
+2. 不能在没有可见性操纵的情况下宣称audience effects驱动结果。
+
+3. 不能在没有证明经济等价的情况下直接比较rebate和matching。
+
+4. 不能把单一app样本的结果直接写成普遍规律，必须有分析模型或复制研究支撑。
+
+5. 不能在跨实验比较时忽略时间、措辞、样本构成等混淆。
+
+- single_best_description_of_the_routine_cn：用两个经济等价但幅度/可见性不同的随机现场实验证明一个离线知识在移动私密情境下会被反转，再用形式模型把这种反转转化为可推广的阈值条件。
+
+## 分析边界
+
+本文基于全文文本分析，没有原始页码，位置使用章节和段落描述；附录H截图在OCR中不可见但不影响核心论证；跨实验比较的统计推断受作者说明的混淆限制；对理论模型中参数估计不足的问题只能依据作者声明判断。

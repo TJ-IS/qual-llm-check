@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85134431640"
+title: "Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course"
+authors: "Koutcheme C.; Tilanterä A.; Peltonen A.; Hellas A.; Haaranen L."
+year: "2022"
+journal: "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE"
+doi: "10.1145/3502718.3524748"
+---
+# Scopus title-abstract-keyword metadata
+Title: Exploring How Students Solve Open-ended Assignments: A Study of SQL Injection Attempts in a Cybersecurity Course
+Abstract: Research into computing and learning how to program has been ongoing for decades. Commonly, this research has been focused on novice learners and the difficulties they encounter, especially during CS1. Cybersecurity is a critical aspect in computing - as a topic in university education as well as a core skill in the industry. In this study, we investigate how students solve open-ended assignments on a cybersecurity course offered to university students after two years of CS studies. Specifically, we looked at how students perform SQL injection attacks on an web application system, and study to what extent we can characterize the process in which they come up with successful injections. Our results show that there are distinguishable strategies used by individual students who seek to hack the system, where these approaches revolve around exploration and exploitation tactics. We also find evidence of learning due to a more pronounced use of exploitation in a subsequent similar assignment.  © 2022 ACM.
+Author keywords: database security; education; problem solving; sql injection
+Index keywords: Cybersecurity; Education computing; Network security; Application studies; Cyber security; Database security; Exploration and exploitation; Problem-solving; SQL injection; University education; University students; Web application systems; Students
+Document type: Conference paper
+Conference: 27th ACM Conference on Innovation and Technology in Computer Science Education, ITiCSE 2022
+Source title: Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE
+Year: 2022
+EID: 2-s2.0-85134431640
+DOI: 10.1145/3502718.3524748
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,986 @@
+{
+  "record_id": "7274",
+  "source_file": "07274_2020_antisocial-online-behavior-detection-using-deep-learning.md",
+  "title": "Antisocial online behavior detection using deep learning",
+  "authors": "Elizaveta Zinovyeva; Wolfgang Karl Härdle; Stefan Lessmann",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113362",
+  "fulltext_chars": 60954,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:02.561892+00:00",
+  "article_level_summary": {
+    "central_question_cn": "核心问题是：基于深度学习和自然语言处理（NLP）的自动内容监控在检测反社会在线行为（AOB）方面是否可行，能达到怎样的检测精度，以及如何解释模型预测以支持人工审核和合规。",
+    "artifact_and_design_cn": "制品是一组文本分类模型，包括传统机器学习（LR, RF, SVM, LightGBM, 词典法）、基本深度学习（CNN, GRU）、双向GRU、注意力/池化变体、层次注意力网络（HAN）、新提出的伪句子层次注意力网络（psHAN）、以及预训练Transformer模型（BERT, DistilBERT）。此外，使用LIME作为解释性模块。",
+    "objective_outcomes_cn": "核心客观结果：在Wikipedia、Twitter、Facebook、Formspring四个数据集上，预训练Transformer（尤其是完整微调的BERT）总体取得最高性能；深度学习通常优于传统机器学习，但Formspring上逻辑回归最好；双向性提升有限；注意力机制不如最大池化；HAN不如简单GRU，psHAN优于HAN但仍不如简单架构。",
+    "core_contribution_cn": "作者声称的贡献：整合AOB检测和文本分类的前期工作，提供全面的方法benchmark；引入psHAN作为HAN的简化扩展；系统考察BERT/DistilBERT在AOB检测中的迁移学习潜力；提出用LIME作为AOB检测流程的最后阶段，提供可解释性并帮助检测潜在偏见。",
+    "whole_argument_in_one_paragraph_cn": "作者从在线交流带来的反社会行为问题出发，以统计和法律事例说明这一问题的重要性和人工监控的高成本，提出需要自动筛查系统。文献梳理表明深度学习已在文本分类中流行，但AOB检测缺乏跨方法的系统比较，且很少被实现为决策支持系统。因此，作者构建了一个包含传统方法、基本深度网络、双向/注意力变体、层次模型和预训练Transformer的全面benchmark，并提出psHAN以减少HAN的预处理和截断问题。实验分步累积：先比较传统机器学习与基本深度学习，再检验双向性、注意力和池化，再测试层次模型，最后测试预训练Transformer。结果显示预训练Transformer总体最优，但简单模型在若干场景下仍具竞争力；psHAN优于HAN但层次结构整体不适合短文本。最后，作者通过LIME示例说明解释性如何帮助审核和识别模型偏差，从而闭合了从现实问题到可部署决策支持系统的论证链。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "论文的核心证据来自在多个数据集上对多种计算制品（传统ML和深度学习模型）进行离线benchmark，并使用性能指标和交叉验证作为主要证据；虽然引入了psHAN和LIME组件，但并未基于理论推导或现场干预。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章遵循“性能缺口（自动检测需求）—比较制品（多种模型）—benchmark（四个实验）—一般化设计知识（架构选择建议）”的弧线，并在结尾回到实践意义。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "研究包含五个阶段：实验1比较传统机器学习与基本深度学习；实验2在GRU基础上测试双向性、注意力和池化；实验3测试层次注意力模型（HAN与psHAN）；实验4测试预训练Transformer（BERT/DistilBERT）；最后是解释性分析（LIME示例）。四个实验依次增加模型复杂度，逐步回答“哪种技术能提升AOB检测性能”，解释性分析则回答“如何将模型用于决策支持”。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "实验1：传统机器学习 vs 基本深度学习",
+        "question_cn": "传统机器学习（TML）与基础深度学习网络（CNN, GRU）相比，在AOB检测中的表现如何？",
+        "inputs_and_setting_cn": "四个二值化数据集：Wikipedia（223,549条）、Twitter（24,717条）、Facebook（15,916条）、Formspring（13,159条），均来自平台用户生成文本。",
+        "designed_or_compared_object_cn": "7种模型：词典法（LB）、逻辑回归（LR）、随机森林（RF）、支持向量机（SVM）、LightGBM、GRU、CNN。",
+        "baseline_control_or_counterfactual_cn": "词典法作为最简基线；TML作为与深度学习的对照。",
+        "objective_metrics": [
+          "Av. Prec.",
+          "AUC",
+          "F1-score"
+        ],
+        "analysis_method_cn": "5折分层交叉验证，手动超参数调优。",
+        "main_result_cn": "深度学习在大多数数据集上优于TML（Formspring除外，LR最佳）；词典法最差；GRU在Wikipedia上最佳，CNN在Facebook上最佳，Twitter上GRU/CNN并列。",
+        "argumentative_role_cn": "建立整体性能基线，表明深度学习通常有效但并非普适，为后续复杂度增加提供参照。",
+        "remaining_uncertainty_cn": "更复杂的深度学习结构（双向、注意力、层次、Transformer）能否进一步提升性能？",
+        "link_to_next_phase_cn": "基于实验1结果，实验2引入双向编码和不同池化/注意力机制。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 2"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "实验2：双向性、注意力与池化",
+        "question_cn": "在GRU基础上，双向编码、注意力和池化机制是否提升AOB检测性能？",
+        "inputs_and_setting_cn": "同实验1的四个数据集。",
+        "designed_or_compared_object_cn": "BGRU、BGRU+最大池化、BGRU+注意力、BGRU+平均池化。",
+        "baseline_control_or_counterfactual_cn": "以实验1中的GRU结果作为参照，比较不同增强机制。",
+        "objective_metrics": [
+          "Av. Prec.",
+          "AUC",
+          "F1-score"
+        ],
+        "analysis_method_cn": "5折分层交叉验证，手动调参。",
+        "main_result_cn": "与GRU相比，双向和注意力带来的改善很小；小数据集上最大池化最佳；注意力不一定优于简单池化或无池化。",
+        "argumentative_role_cn": "说明增加模型复杂度未必带来显著收益，为后文质疑层次模型和Transformer的性价比铺垫。",
+        "remaining_uncertainty_cn": "层次注意力模型能否利用文本结构提升性能？",
+        "link_to_next_phase_cn": "实验3测试HAN和psHAN。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "实验3：层次注意力模型（HAN与psHAN）",
+        "question_cn": "层次注意力模型（HAN和psHAN）是否比简单架构更好？psHAN是否优于HAN？",
+        "inputs_and_setting_cn": "同前四个数据集。",
+        "designed_or_compared_object_cn": "HAN（真实句子层次注意力网络）和psHAN（伪句子层次注意力网络）。",
+        "baseline_control_or_counterfactual_cn": "以实验1/2中的GRU、BGRU等简单架构作为对照。",
+        "objective_metrics": [
+          "Av. Prec.",
+          "AUC",
+          "F1-score"
+        ],
+        "analysis_method_cn": "同前；psHAN在预处理中不分割真实句子，而是设置伪句子长度。",
+        "main_result_cn": "HAN性能普遍下降；psHAN优于HAN，但仍不如简单GRU/BGRU；层次结构导致信息丢失过多。",
+        "argumentative_role_cn": "证明AOB文本较短，层次建模不适合；同时引入psHAN作为技术贡献。",
+        "remaining_uncertainty_cn": "预训练Transformer是否能在小数据和大数据上达到最佳性能？",
+        "link_to_next_phase_cn": "实验4测试BERT和DistilBERT。",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Section 5.3",
+          "Table 4"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "实验4：预训练Transformer",
+        "question_cn": "预训练Transformer（BERT和DistilBERT）是否在AOB检测中实现最佳性能？",
+        "inputs_and_setting_cn": "同前四个数据集。",
+        "designed_or_compared_object_cn": "BERT full（全层微调）、BERT last（仅最后一层微调）、DistilBERT full、DistilBERT last。",
+        "baseline_control_or_counterfactual_cn": "与实验1-3中的最优模型对比，以及两种训练模式对比。",
+        "objective_metrics": [
+          "Av. Prec.",
+          "AUC",
+          "F1-score"
+        ],
+        "analysis_method_cn": "同前；使用预训练Transformer微调。",
+        "main_result_cn": "完整微调的BERT在至少一个指标上对所有数据集最优；预训练Transformer整体优于之前模型；Twitter上差异很小。",
+        "argumentative_role_cn": "确立预训练Transformer作为当前最优方法，同时指出性能差距有时较小，需权衡计算成本。",
+        "remaining_uncertainty_cn": "黑盒模型如何解释并用于决策支持？",
+        "link_to_next_phase_cn": "进入解释性分析（LIME）。",
+        "evidence_pointers": [
+          "Section 5.4",
+          "Table 5"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "解释性分析：LIME框架",
+        "question_cn": "如何解释AOB检测模型的预测，并支持审核与识别偏见？",
+        "inputs_and_setting_cn": "假设性示例文本（包括一个含“gay”的句子）和模型输出。",
+        "designed_or_compared_object_cn": "LIME作为模型无关的后验解释框架，应用于已有检测模型。",
+        "baseline_control_or_counterfactual_cn": "无定量对照，仅为示例演示。",
+        "objective_metrics": [
+          "无定量指标，定性展示解释和偏见识别"
+        ],
+        "analysis_method_cn": "局部可解释模型（LIME）高亮重要词。",
+        "main_result_cn": "LIME可以高亮对预测最重要的词，帮助审核；并可通过示例揭示模型过度依赖如“gay”等非恶意词导致偏见。",
+        "argumentative_role_cn": "为AOB检测系统补上可解释性环节，回应合规与公平问题，增强DS系统可行性。",
+        "remaining_uncertainty_cn": "如何将解释性与检测性能集成，如何处理嘈杂标签等。",
+        "link_to_next_phase_cn": "进入结论与未来工作。",
+        "evidence_pointers": [
+          "Section 5.6",
+          "Fig. 4",
+          "Fig. 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "DESIGN_FEATURE",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "DESIGN_FEATURE",
+      "CONTRIBUTION",
+      "WHY_GAP_MATTERS"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "MECHANISM",
+      "LIMITATION",
+      "DESIGN_FEATURE",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE",
+      "REQUIREMENT",
+      "MECHANISM",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "evaluation_moves": [
+      "STUDY_OVERVIEW",
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "BOUNDARY_CONDITION"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT",
+      "BOUNDARY_CONDITION",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "深度学习序列建模知识（RNN, LSTM, GRU, 双向RNN, 注意力机制, 层次模型, Transformer）",
+      "文本分类和NLP迁移学习（预训练语言模型）",
+      "AOB检测现有文献和常用架构",
+      "可解释机器学习（LIME）",
+      "决策支持系统设计（moderator-in-the-loop）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "NLP技术知识前瞻性决定了要测试哪些设计（双向性、注意力、层次结构、预训练模型），并将这些设计作为实验变量；但关键技术选择主要来自文献覆盖和工程启发式（例如加入psHAN是为了解决HAN预处理问题），而非来自单一理论推演。可解释性部分来自法规和公平性需求，并非由检测理论直接推导。",
+    "translation_chain_cn": "NLP技术知识（如RNN长依赖问题、双向编码对语境捕获、注意力机制对长序列记忆、层次结构对文档建模）→ 转化为模型架构差异（GRU vs BGRU vs BGRU+Attention vs HAN vs BERT）→ 通过四个逐级实验比较架构差异 → 得到AOB检测领域的性能结论。可解释性需求（法规/公平）→ 选择LIME作为解释模块 → 通过示例证明其能帮助审核和偏见检测。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "传统RNN存在长依赖问题，LSTM/GRU通过门控缓解这一问题。",
+        "mechanism_cn": "门控机制允许信息跨时间步保留，提高对序列中长程依赖的建模能力。",
+        "design_requirement_cn": "在AOB检测中采用能处理顺序文本的循环网络。",
+        "artifact_choice_cn": "在实验1中使用GRU而非普通RNN。",
+        "evaluated_contrast_cn": "GRU与传统机器学习方法（LR, RF, SVM等）对比。",
+        "objective_result_cn": "GRU在Wikipedia数据集上取得最高Av. Prec.（0.859），通常优于TML。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "双向RNN能同时利用前后文信息，对词义消歧有帮助。",
+        "mechanism_cn": "词的表示同时受左侧和右侧上下文影响，利于区分如“idiot like me”与“idiot like you”。",
+        "design_requirement_cn": "在AOB检测中测试双向编码是否提升分类。",
+        "artifact_choice_cn": "在实验2中使用BGRU（双向GRU）。",
+        "evaluated_contrast_cn": "BGRU与GRU（实验1结果）的对比。",
+        "objective_result_cn": "BGRU在Wikipedia和Facebook上带来轻微提升，但总体微小。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "注意力机制允许模型对序列不同部分赋予不同权重，从而聚焦关键信息。",
+        "mechanism_cn": "通过上下文向量计算注意力权重，加权求和得到序列表示。",
+        "design_requirement_cn": "比较注意力与池化等不同序列压缩方式。",
+        "artifact_choice_cn": "BGRU+Attention 与 BGRU+Max pooling、BGRU+Avg pooling对比。",
+        "evaluated_contrast_cn": "实验2中不同还原技术之间的比较。",
+        "objective_result_cn": "最大池化在小数据上表现最好（如Twitter和Facebook），注意力并不优于简单池化。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "层次注意力网络（HAN）在文档分类中通过词级和句级注意力捕捉文档结构。",
+        "mechanism_cn": "先建词向量和词注意力得到句子表示，再建句向量和句子注意力得到文档表示。",
+        "design_requirement_cn": "测试层次结构是否也适用于AOB文本分类。",
+        "artifact_choice_cn": "在实验3中使用HAN和psHAN。",
+        "evaluated_contrast_cn": "HAN/psHAN与简单GRU/BGRU（前两实验）的对比。",
+        "objective_result_cn": "HAN降低性能；psHAN优于HAN但不如简单架构。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "预训练Transformer（BERT）在大型语料上学习通用语言表示，微调后可迁移至下游分类任务。",
+        "mechanism_cn": "Transformer基于自注意力，能并行建模深层上下文；预训练提供丰富的语言先验。",
+        "design_requirement_cn": "评估预训练语言模型在AOB检测中的效用。",
+        "artifact_choice_cn": "在实验4中使用BERT和DistilBERT，区分全层微调和最后一层微调。",
+        "evaluated_contrast_cn": "BERT/DistilBERT与之前所有模型对比，及两种微调模式对比。",
+        "objective_result_cn": "完整微调的BERT在多数数据集上取得最优；Transformer整体优于其他模型。",
+        "evidence_pointers": [
+          "Section 5.4",
+          "Table 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "决策支持系统需要可解释性，以符合法规并检测模型偏见。",
+        "mechanism_cn": "LIME通过局部近似解释模型预测，高亮对预测最重要的词。",
+        "design_requirement_cn": "为AOB检测系统增加解释模块。",
+        "artifact_choice_cn": "采用LIME作为检测流程的最后阶段。",
+        "evaluated_contrast_cn": "以两个示例展示解释和偏见识别（无定量对比）。",
+        "objective_result_cn": "LIME成功高亮关键词并揭示“gay”一词导致的偏见预测。",
+        "evidence_pointers": [
+          "Section 5.6",
+          "Fig. 4",
+          "Fig. 5"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "离线多数据集benchmark",
+      "可解释性案例演示"
+    ],
+    "why_these_evaluations_cn": "由于研究目标是比较多种检测方法的技术性能，离线benchmark（多数据集、交叉验证）是标准且可复现的方式；可解释性部分通过具体示例展示如何支持人工审核，属于案例演示。",
+    "benchmark_and_contrast_chain_cn": "基准链从传统机器学习和词典法开始，逐步引入基本深度学习、双向/注意力变体、层次模型、预训练Transformer，每一步增加技术复杂度并在相同四个数据集上对比，形成渐进的性能阶梯。",
+    "claim_evidence_ledger": [
+      "技术主张：预训练Transformer（尤其是BERT full）在AOB检测中取得最高性能。证据：Table 5显示BERT full在多个数据集上至少一项指标最优。限制：未做统计显著性检验，且某些差异较小（如Twitter）。",
+      "制品主张：psHAN优于HAN。证据：Table 4显示psHAN的Av. Prec.和AUC均高于HAN。限制：未解释为何伪句子结构有效，且整体仍不如简单模型。",
+      "机制主张：层次结构在短文本中导致过多信息丢失。证据：实验3结果和作者解释。限制：未提供直接信息丢失的测量。",
+      "边界主张：没有唯一最优模型，性能依赖数据集。证据：各实验表格中不同数据集上的最好模型不同。限制：未详尽分析数据集特征与模型性能的关系。",
+      "设计知识：简单模型可作强基线，复杂结构未必有益。证据：GRU、CNN与更复杂模型对比。限制：结果基于有限数据集，可能不适用于其他平台。",
+      "理论贡献：无正式理论修改，主要是领域实证知识。证据：文章没有提出行为或组织理论。"
+    ],
+    "internal_validity_strategy_cn": "采用5折分层交叉验证和标准指标（Av. Prec., AUC, F1），固定实验流程，手动调参减少配置差异；在四个数据集上统一评估。",
+    "external_validity_strategy_cn": "使用来自四个不同平台（Wikipedia、Twitter、Facebook、Formspring）、不同规模、不同类别不平衡程度的数据集，以增强结论的泛化性；开放代码和在线附录支持复现。",
+    "what_is_not_actually_tested_cn": "未测试真实部署环境（如实时审核）；解释性仅为例证，没有用户研究；未比较LIME与其他解释方法；未直接检验偏见缓解的系统效果；未进行统计显著性检验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在规范化benchmark中，预训练Transformer（尤其完整微调BERT）在AOB检测上取得最优或接近最优性能；深度学习整体优于传统机器学习。",
+    "artifact_claim_cn": "psHAN（伪句子层次注意力网络）比原始HAN更高效且性能更好；LIME可作为AOB检测系统的解释性组件。",
+    "mechanism_claim_cn": "双向编码有助于利用前后文，但收益微小；注意力机制不优于简单池化；层次结构不适合短文本，因为多层摘要丢失信息；预训练模型通过语言先验提升性能，尤其有利于小数据集。",
+    "boundary_claim_cn": "不存在对所有数据集都最优的单一模型；模型选择取决于数据集规模、类别不平衡和文本长度；当性能差异较小时，应优先选择计算成本较低的模型。",
+    "reusable_design_knowledge_cn": "AOB检测系统可采用分阶段评估流程，从简单模型开始；可加入可解释性模块以支持审核和偏见检查；对短文本平台数据，层次模型可能适得其反。",
+    "theoretical_contribution_cn": "无正式理论贡献；主要为NLP技术应用于AOB检测的实证benchmark和设计经验。",
+    "how_discussion_closes_intro_gap_cn": "引言提出需要自动检测系统和缺乏系统比较；结论通过综合benchmark结果给出模型选择建议，并通过可解释性模块回应部署和公平性问题，从而闭合了从问题到方案的缺口。",
+    "overclaim_or_unsupported_leaps_cn": "可能过度声称BERT“优越”，但未做显著性检验；将LIME示例视为能“确保”公平可能过度；对注意力机制不如池化的解释是推测，未深入分析；psHAN的性能优势缺乏机制验证。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数字化将人类交流转移到在线平台，也带来反社会在线行为（AOB）的空间。",
+      "rhetorical_function_cn": "开篇建立问题背景，指出AOB伴随数字化产生。",
+      "depends_on_cn": "无，作为全文起点。",
+      "sets_up_cn": "引出后续对AOB检测可行性的讨论。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "在线平台有充分理由监控和审核这类内容。",
+      "rhetorical_function_cn": "说明AOB检测的现实必要性。",
+      "depends_on_cn": "承接上一句AOB存在的事实。",
+      "sets_up_cn": "为自动内容监控的重要性做铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "论文考察自动内容监控使用深度机器学习和NLP的可行性。",
+      "rhetorical_function_cn": "提出研究目标。",
+      "depends_on_cn": "基于监控必要性的背景。",
+      "sets_up_cn": "引出方法比较的empirical study。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S4",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "整合AOB检测前期工作，并设计实证研究比较相关方法。",
+      "rhetorical_function_cn": "预告研究的方法路径。",
+      "depends_on_cn": "研究目标明确之后。",
+      "sets_up_cn": "说明要提供全面benchmark。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "涵盖包括双向编码、注意力、层次表示和预训练Transformer等NLP进展，并提出伪句子层次注意力网络psHAN。",
+      "rhetorical_function_cn": "列出覆盖的技术和新增制品。",
+      "depends_on_cn": "对现有方法的整合。",
+      "sets_up_cn": "强调创新点（psHAN）和前沿模型覆盖。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract, P1, S6",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "提供当前NLP-based AOB检测的技术水平总结，澄清可达到的检测精度，并讨论是否足以部署，以及如何处理可解释性。",
+      "rhetorical_function_cn": "总结论文的贡献。",
+      "depends_on_cn": "前述的方法和实验。",
+      "sets_up_cn": "为读者建立对全文贡献的预期。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction, P1, S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在线沟通转变是一把双刃剑。",
+      "rhetorical_function_cn": "以通俗比喻引入正反两面。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续列出好处和恶意行为做框架。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction, P1, S5",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "在线平台也产生恶意行为空间，如假新闻和假评论，进而引向反社会行为检测。",
+      "rhetorical_function_cn": "从一般问题缩小到AOB检测。",
+      "depends_on_cn": "上一句提到负面面。",
+      "sets_up_cn": "确立本文焦点。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction, P1, S6",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文关注检测在线交流中的侮辱、骚扰、威胁等反社会行为。",
+      "rhetorical_function_cn": "明确研究问题。",
+      "depends_on_cn": "前面描述的问题空间。",
+      "sets_up_cn": "为后续AOB定义和检测方法铺路。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction, P2, S1-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "AOB检测对社会福利重要，具有社会、立法和财务原因，如青少年网络欺凌数据、德国法律要求平台24小时内删除仇恨言论等。",
+      "rhetorical_function_cn": "用数据和法规强调问题重要性。",
+      "depends_on_cn": "问题定义后。",
+      "sets_up_cn": "为自动监控需求提供合理性。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction, P3, S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "人工检测和监控在线内容成本高昂。",
+      "rhetorical_function_cn": "指出人工方法的不可扩展性。",
+      "depends_on_cn": "AOB重要性的背景。",
+      "sets_up_cn": "引出自动决策支持系统的需要。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction, P3, S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "机器学习决策支持系统在欺诈检测等领域有效，有望用于AOB检测。",
+      "rhetorical_function_cn": "借鉴其他领域的成功经验。",
+      "depends_on_cn": "人工成本问题。",
+      "sets_up_cn": "将AOB检测纳入DS系统语境。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction, P4, S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "传统机器学习依赖广泛特征工程，性能受数据表示限制；深度学习可自动化特征学习。",
+      "rhetorical_function_cn": "指出传统方法局限，引出DL动机。",
+      "depends_on_cn": "对已有方法的综述。",
+      "sets_up_cn": "说明为什么DL值得研究。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction, P4, S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "许多DL技术对AOB检测领域而言是新的，先前缺乏对这些技术提升检测精度的系统比较。",
+      "rhetorical_function_cn": "构建文献缺口。",
+      "depends_on_cn": "DL技术清单和领域现状。",
+      "sets_up_cn": "为本文benchmark贡献提供理由。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction, P4, S9",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "提出使用LIME作为AOB检测最终阶段，以提供模型预测的可解释性。",
+      "rhetorical_function_cn": "介绍论文附加组件。",
+      "depends_on_cn": "对模型黑盒问题的关注。",
+      "sets_up_cn": "为解释性实验和讨论做铺垫。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 16,
+      "section": "Related work",
+      "locator": "Related work, 2.3, the system can screen paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "系统可在用户提交内容时计算AOB概率，高概率时要求版主审核后再发布。",
+      "rhetorical_function_cn": "描述AOB检测系统在DS中的工作原理。",
+      "depends_on_cn": "DS系统在欺诈检测的类比。",
+      "sets_up_cn": "为后文提出可解释性组件提供系统框架。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 17,
+      "section": "Related work",
+      "locator": "Related work, 2.3, current research paragraph",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有研究大多关注在不同算法上做benchmark，很少将方法实现为DS系统。",
+      "rhetorical_function_cn": "指出领域内对系统实现和决策支持的忽视。",
+      "depends_on_cn": "对相关文献的回顾。",
+      "sets_up_cn": "为本文增加可解释性模块和系统视角提供动机。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 18,
+      "section": "Related work",
+      "locator": "Related work, 2.3, therefore paragraph",
+      "move_code": "GAP",
+      "paraphrase_cn": "因此不仅提供全面benchmark，还扩展至可解释性模块，以理解DL潜在推理并提供审核支持。",
+      "rhetorical_function_cn": "明确研究缺口和研究目标。",
+      "depends_on_cn": "上一句指出现有研究局限。",
+      "sets_up_cn": "为方法论和实验设计提供目标。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 19,
+      "section": "Methodology",
+      "locator": "Methodology, opening paragraph",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "TML依赖手工特征，DL自动学习抽象表示；传统全连接网络无法处理序列，RNN可处理序列但存在梯度消失问题，LSTM/GRU缓解。",
+      "rhetorical_function_cn": "回顾核心技术基础，为模型选择提供理由。",
+      "depends_on_cn": "相关工作中的技术演进。",
+      "sets_up_cn": "解释为什么要测试GRU/双向/注意力等。",
+      "evidence_pointer": "Methodology"
+    },
+    {
+      "order": 20,
+      "section": "Methodology",
+      "locator": "Methodology, bidirectional paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "双向RNN（BLSTM/BGRU）能利用未来输入，在AOB检测中有助于区分如“idiot like me”和“idiot like you”。",
+      "rhetorical_function_cn": "具体说明双向模型在AOB检测中的潜在价值。",
+      "depends_on_cn": "序列建模知识。",
+      "sets_up_cn": "为实验2中测试BGRU提供动机。",
+      "evidence_pointer": "Methodology"
+    },
+    {
+      "order": 21,
+      "section": "Methodology",
+      "locator": "Methodology, attention and transformer paragraphs",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "注意力机制和层次结构有助于长序列记忆和利用文本层级；Transformer完全依赖注意力，支持预训练和更深模型。",
+      "rhetorical_function_cn": "解释这些先进模型的机制优势。",
+      "depends_on_cn": "深度学习基础。",
+      "sets_up_cn": "为实验3和实验4测试HAN/Transformer做铺垫。",
+      "evidence_pointer": "Methodology"
+    },
+    {
+      "order": 22,
+      "section": "Methodology",
+      "locator": "3.1, next step paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "我们提出psHAN算法，作为HAN的扩展，输入被分割为固定长度的伪句子序列。",
+      "rhetorical_function_cn": "引入新制品。",
+      "depends_on_cn": "对HAN的介绍。",
+      "sets_up_cn": "为实验3中的psHAN测试提供定义。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 23,
+      "section": "Methodology",
+      "locator": "3.1, motivation twofold paragraph",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "调整HAN有两个原因：经典HAN需要按标点预分割句子，预处理复杂；HAN有两个截断阈值，处理高变长文本时可能丢失信息。",
+      "rhetorical_function_cn": "说明psHAN设计的需求来源。",
+      "depends_on_cn": "对HAN局限的分析。",
+      "sets_up_cn": "为psHAN的简化和信息保留优势做论证。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 24,
+      "section": "Methodology",
+      "locator": "3.1, rearranging data paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "通过重排数据成伪句子，既能利用层次结构又不删除信息。",
+      "rhetorical_function_cn": "解释psHAN为何能在保留信息的同时获得层次收益。",
+      "depends_on_cn": "psHAN的定义。",
+      "sets_up_cn": "提出“减少输入截断的影响将超过语义完整性”的预期。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 25,
+      "section": "Methodology",
+      "locator": "3.1, expected effect paragraph",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "作者预期减少输入截断的益处将超过保持语义完整句子的益处。",
+      "rhetorical_function_cn": "提出可检验假设。",
+      "depends_on_cn": "psHAN的设计动机。",
+      "sets_up_cn": "实验3将比较HAN与psHAN来验证。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 26,
+      "section": "Experimental design",
+      "locator": "4.1, binarize sentence",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "将所有数据集二值化为恶意和非恶意，因为研究目标是通用benchmark而非多标签分类。",
+      "rhetorical_function_cn": "解释为何改变原始多类标签。",
+      "depends_on_cn": "数据集介绍。",
+      "sets_up_cn": "统一评估设置，确保各模型可比较。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 27,
+      "section": "Experimental design",
+      "locator": "4.3, evaluation paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用5折分层交叉验证，采用平均精度（Av. Prec.）以应对类别不平衡，并报告AUC和F1。",
+      "rhetorical_function_cn": "说明评估方法的合理性。",
+      "depends_on_cn": "类别不平衡的事实。",
+      "sets_up_cn": "为所有实验的指标解释提供依据。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 28,
+      "section": "Experiments",
+      "locator": "5.1, first sentence",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "第一个实验比较TML方法与CNN、GRU。",
+      "rhetorical_function_cn": "预告实验1内容。",
+      "depends_on_cn": "方法选择和实验设计。",
+      "sets_up_cn": "为报告Table 2结果做引导。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 29,
+      "section": "Experiments",
+      "locator": "5.1, selecting TML sentence",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "选择了AOB文献中常用的SVM、LR、RF，以及表现好的LightGBM和词典法作为对照。",
+      "rhetorical_function_cn": "解释baseline的选择标准。",
+      "depends_on_cn": "对AOB文献的回顾。",
+      "sets_up_cn": "使TLM对照具有代表性。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 30,
+      "section": "Experiments",
+      "locator": "5.1, results paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "结果显示没有对所有数据集都有效的唯一方法；词典法最差；DL除Formspring外优于TML。",
+      "rhetorical_function_cn": "报告核心实验1结果并强调无普适模型。",
+      "depends_on_cn": "Table 2数据。",
+      "sets_up_cn": "引出后续对复杂模型的测试，再次验证是否普适。",
+      "evidence_pointer": "Section 5.1, Table 2"
+    },
+    {
+      "order": 31,
+      "section": "Experiments",
+      "locator": "5.1, dataset-specific results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在大规模Wikipedia数据上GRU最优；Twitter上GRU/CNN并列；Facebook上CNN在Av. Prec.和AUC最优。",
+      "rhetorical_function_cn": "细化不同数据集上的最优模型。",
+      "depends_on_cn": "Table 2数据。",
+      "sets_up_cn": "为后文“无统一最优”提供更多证据。",
+      "evidence_pointer": "Section 5.1, Table 2"
+    },
+    {
+      "order": 32,
+      "section": "Experiments",
+      "locator": "5.2, first sentence",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "第二个实验加入双向性，考察AOB检测是否依赖未来输入。",
+      "rhetorical_function_cn": "提出实验2的具体问题。",
+      "depends_on_cn": "实验1的结果。",
+      "sets_up_cn": "引入双向模型和池化/注意力比较。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 33,
+      "section": "Experiments",
+      "locator": "5.2, comparing reduction techniques",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "将注意力机制与全局最大池化和平均池化进行对比。",
+      "rhetorical_function_cn": "设定实验2的对比结构。",
+      "depends_on_cn": "方法讨论。",
+      "sets_up_cn": "为报告Table 3做铺垫。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 34,
+      "section": "Experiments",
+      "locator": "5.2, results paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "双向和改进带来的性能提升很小；小数据集上最大池化最好，注意力并不总优。",
+      "rhetorical_function_cn": "报告实验2结果，指出复杂化收益有限。",
+      "depends_on_cn": "Table 3数据。",
+      "sets_up_cn": "为质疑层次模型效果做铺垫。",
+      "evidence_pointer": "Section 5.2, Table 3"
+    },
+    {
+      "order": 35,
+      "section": "Experiments",
+      "locator": "5.3, first sentence",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "最后一步研究层次注意力模型，以检验文本层级结构是否提升AOB性能。",
+      "rhetorical_function_cn": "预告实验3目的。",
+      "depends_on_cn": "前两个实验的结果和文献中层次模型成功。",
+      "sets_up_cn": "介绍HAN和psHAN。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 36,
+      "section": "Experiments",
+      "locator": "5.3, results sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "使用层级结构仅降低了Av. Prec.和AUC；HAN表现差于GRU；psHAN优于HAN但仍输给简单架构。",
+      "rhetorical_function_cn": "报告实验3结果，否定了层次结构的优势。",
+      "depends_on_cn": "Table 4数据。",
+      "sets_up_cn": "为解释层次结构为何失败提供动机。",
+      "evidence_pointer": "Section 5.3, Table 4"
+    },
+    {
+      "order": 37,
+      "section": "Experiments",
+      "locator": "5.3, possible explanation sentence",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "可能原因：社交媒体帖子短，HAN原本针对长文档设计，多层摘要导致信息丢失。",
+      "rhetorical_function_cn": "对不利结果提出机制解释。",
+      "depends_on_cn": "实验3结果和数据长度分布。",
+      "sets_up_cn": "引导读者理解为什么短文本不适合层次模型。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 38,
+      "section": "Experiments",
+      "locator": "5.4, first sentence",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "最后一个实验考察基于Transformer的预训练语言模型能否提升性能。",
+      "rhetorical_function_cn": "预告实验4。",
+      "depends_on_cn": "前三个实验的结果和Transformer文献。",
+      "sets_up_cn": "引入BERT和DistilBERT。",
+      "evidence_pointer": "Section 5.4"
+    },
+    {
+      "order": 39,
+      "section": "Experiments",
+      "locator": "5.4, result sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "完整微调的BERT在至少一个指标上对所有数据集最优；但如Twitter等差异很小。",
+      "rhetorical_function_cn": "报告实验4核心结果。",
+      "depends_on_cn": "Table 5数据。",
+      "sets_up_cn": "为后文讨论计算成本与受益的权衡做铺垫。",
+      "evidence_pointer": "Section 5.4, Table 5"
+    },
+    {
+      "order": 40,
+      "section": "Experiments",
+      "locator": "5.4, overall sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "总体看，预训练Transformer优于其他模型，支持其适用于大数据集和小数据集。",
+      "rhetorical_function_cn": "将实验4结果上升为一般结论。",
+      "depends_on_cn": "Table 5和之前实验。",
+      "sets_up_cn": "为最佳模型总结和贡献声明做基础。",
+      "evidence_pointer": "Section 5.4"
+    },
+    {
+      "order": 41,
+      "section": "Experiments",
+      "locator": "5.5, bidirectionality sentence",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "双向性不保证提升，且改进很小，可能选择低复杂度模型。",
+      "rhetorical_function_cn": "综合实验2结果，给出边界条件。",
+      "depends_on_cn": "实验2和实验4。",
+      "sets_up_cn": "强调模型选择需权衡复杂度。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 42,
+      "section": "Experiments",
+      "locator": "5.5, attention negative sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "注意力机制在四个数据集上均输给最大池化，增加复杂度可能反而恶化结果。",
+      "rhetorical_function_cn": "总结注意力的相对劣势。",
+      "depends_on_cn": "实验2和实验3结果。",
+      "sets_up_cn": "为“不总是推荐使用还原技术”的设计知识做铺垫。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 43,
+      "section": "Experiments",
+      "locator": "5.6, black box sentence",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "深度学习模型被视为黑箱，可能阻碍其在DS中的成功部署。",
+      "rhetorical_function_cn": "指出DL模型在决策支持中的主要限制。",
+      "depends_on_cn": "之前实验确定DL有效性。",
+      "sets_up_cn": "为引入LIME提供必要性。",
+      "evidence_pointer": "Section 5.6"
+    },
+    {
+      "order": 44,
+      "section": "Experiments",
+      "locator": "5.6, interpretability twofold sentence",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "可解释性既有助于满足法规和利益相关者要求，也有助于发现是否歧视不同群体。",
+      "rhetorical_function_cn": "解释为什么需要可解释性。",
+      "depends_on_cn": "法规和偏见讨论。",
+      "sets_up_cn": "为LIME框架的提出提供双重理由。",
+      "evidence_pointer": "Section 5.6"
+    },
+    {
+      "order": 45,
+      "section": "Experiments",
+      "locator": "5.6, propose LIME sentence",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "我们建议使用LIME框架作为AOB检测的最后阶段。",
+      "rhetorical_function_cn": "提出具体的解释工具选择。",
+      "depends_on_cn": "可解释性需求。",
+      "sets_up_cn": "为LIME示例和可解释性实验做铺垫。",
+      "evidence_pointer": "Section 5.6"
+    },
+    {
+      "order": 46,
+      "section": "Experiments",
+      "locator": "5.6, moderator help sentence",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "高亮重要词可帮助版主决定是否过滤帖子，建立信任并确认模型逻辑合理。",
+      "rhetorical_function_cn": "说明LIME如何作用于决策支持。",
+      "depends_on_cn": "LIME框架的功能。",
+      "sets_up_cn": "使用图4示例来验证。",
+      "evidence_pointer": "Section 5.6"
+    },
+    {
+      "order": 47,
+      "section": "Experiments",
+      "locator": "5.6, unfair situation sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "图5显示一个含“gay”的句子获得65%恶意分数，LIME显示该词贡献很大，说明模型存在偏见。",
+      "rhetorical_function_cn": "用示例证明LIME能揭示偏见。",
+      "depends_on_cn": "前面对偏见问题的讨论。",
+      "sets_up_cn": "为可解释性在公平性中的作用提供实证。",
+      "evidence_pointer": "Section 5.6, Fig. 5"
+    },
+    {
+      "order": 48,
+      "section": "Conclusion",
+      "locator": "Conclusion, first finding sentence",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "最重要的发现是不存在通用的AOB检测“配方”，架构和指标都依赖具体设置。",
+      "rhetorical_function_cn": "概括全文核心边界主张。",
+      "depends_on_cn": "所有实验的结果。",
+      "sets_up_cn": "为后续“因地制宜”建议提供基础。",
+      "evidence_pointer": "Section 6"
+    },
+    {
+      "order": 49,
+      "section": "Conclusion",
+      "locator": "Conclusion, DL outperform sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "我们展示DL在多数设置中一致优于TML。",
+      "rhetorical_function_cn": "重述核心结果。",
+      "depends_on_cn": "实验1结果。",
+      "sets_up_cn": "强化DL作为检测核心的可行性。",
+      "evidence_pointer": "Section 6"
+    },
+    {
+      "order": 50,
+      "section": "Conclusion",
+      "locator": "Conclusion, psHAN sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "我们提出的psHAN优于原始HAN，但层次结构整体上仍降低性能。",
+      "rhetorical_function_cn": "重述psHAN贡献及边界。",
+      "depends_on_cn": "实验3结果。",
+      "sets_up_cn": "明确psHAN作为改进但非SOTA。",
+      "evidence_pointer": "Section 6"
+    },
+    {
+      "order": 51,
+      "section": "Conclusion",
+      "locator": "Conclusion, pre-trained language models sentence",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "预训练语言模型达到最佳性能，但如Twitter等数据集性能差异小，引发是否需要重型模型的疑问。",
+      "rhetorical_function_cn": "平衡Transformer优越性与成本考量。",
+      "depends_on_cn": "实验4结果。",
+      "sets_up_cn": "为计算成本与边际收益的权衡做最终总结。",
+      "evidence_pointer": "Section 6"
+    },
+    {
+      "order": 52,
+      "section": "Conclusion",
+      "locator": "Conclusion, finally sentence",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "最后引入可解释性模块，帮助理解模型逻辑并提示不公平性需要调整。",
+      "rhetorical_function_cn": "重申可解释性贡献。",
+      "depends_on_cn": "解释性实验。",
+      "sets_up_cn": "将论文贡献收束于DS系统完整性。",
+      "evidence_pointer": "Section 6"
+    },
+    {
+      "order": 53,
+      "section": "Conclusion",
+      "locator": "Conclusion, further work sentence",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来工作将处理噪声标签问题，并探索利用LIME知识设计可解释词典分类器。",
+      "rhetorical_function_cn": "指出不足和后续方向。",
+      "depends_on_cn": "全文发现。",
+      "sets_up_cn": "结束全文并开放后续研究。",
+      "evidence_pointer": "Section 6"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "通过统计和法律数据说明AOB问题重要性，再指出人工检测成本高，进而说明自动检测的紧迫性；在文献部分强调现有研究多聚焦算法benchmark而很少实现为决策支持系统，也缺乏对许多新DL技术的系统比较，从而构建一个综合benchmark缺口。",
+    "signposting_cn": "使用明确的章节标题（如“实验设计”“实验1: TML vs DL”）和段首路标句（如“As a first experiment”“In the last experiment”），让读者始终知道当前处于哪个阶段。",
+    "transition_logic_cn": "每个实验都先提出一个问题或假设，接着报告结果，然后用结果引出下一步；例如实验1发现DL有效，实验2便追问双向/注意力是否更强；实验2显示收益有限，实验3便测试层次结构；实验3不利，实验4便测试预训练Transformer。",
+    "claim_evidence_rhythm_cn": "先给出方法或预期，然后用表格呈现数值证据，接着解释结果背后的可能机制（如短文本导致信息丢失），形成主张—证据—解释的节奏。",
+    "benchmark_narrative_cn": "Benchmark不是一次性列表，而是按“复杂度阶梯”嵌入四个实验，每个实验回答一个递进问题，使结果累积成对技术边界的一致叙述。",
+    "theory_return_cn": "结果返回技术知识，例如“层次结构不适合短文本”回扣HAN原本面向文档分类，“预训练有益”回扣Transformer的迁移能力，形成对技术适用边界的细化。",
+    "contribution_positioning_cn": "将贡献定位为综合benchmark、psHAN架构、BERT评估和LIME解释性多重组合，并通过开放代码和在线附录增强可信度和可复现性。",
+    "novelty_protection_cn": "通过覆盖前沿技术、引入新架构psHAN、提供可解释性模块和开放代码，使论文不只是一次性性能报告；即使简单模型表现也不错，仍通过边界条件讨论保护了贡献的学术价值。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实问题：描述现象，用量化数据或法规说明重要性。",
+        "research_job_cn": "收集类似AOB的领域统计数据、法规或案例，明确痛点。",
+        "required_evidence_cn": "至少一个权威来源（统计、法律、报告）支撑问题严重性。",
+        "transition_to_next_cn": "从“问题重要”过渡到“人工方法不足以解决”从而引出自动方法。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述文献并制造缺口：总结已有方法，指出缺乏系统比较或系统实现。",
+        "research_job_cn": "深入回顾相关文献，识别常见方法和未解决的问题。",
+        "required_evidence_cn": "引用足够文献，说明“没人做”或“现有不足”。",
+        "transition_to_next_cn": "“因此本文要提供全面benchmark”或“因此要引入新组件”。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "设计研究方法和benchmark：说明数据集、基线和评估协议。",
+        "research_job_cn": "选择合适数据集、模型集合、预处理步骤和性能指标。",
+        "required_evidence_cn": "数据集描述、数据规模、评估协议（交叉验证、指标）。",
+        "transition_to_next_cn": "接下来按实验顺序报告结果。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "分步实验并报告：每步提出一个子问题，报告性能表，解释原因。",
+        "research_job_cn": "运行实验，记录多个指标，并逐步增加模型复杂度。",
+        "required_evidence_cn": "每个实验的结果表格，并有文字解读。",
+        "transition_to_next_cn": "“既然X效果有限，下一个实验我们测试Y”的推进逻辑。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "补充非性能组件（如可解释性）：说明其如何支持部署和合规。",
+        "research_job_cn": "实现或演示解释工具，并用案例证明价值。",
+        "required_evidence_cn": "示例输出、案例截图、对审核流程的说明。",
+        "transition_to_next_cn": "从技术性能转向系统可行性。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "总结贡献和边界：重述核心发现，承认限制，指出未来工作。",
+        "research_job_cn": "综合所有结果，提炼可复用建议和适用条件。",
+        "required_evidence_cn": "综合讨论和边界条件；未来方向。",
+        "transition_to_next_cn": "结束全文。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用统计数据/法规构建现实重要性",
+      "分阶段benchmark，每个实验解决一个递进问题",
+      "在性能比较之后增加可解释性或系统组件",
+      "明确给出“无普适配方”的边界条件",
+      "开放代码和在线附录以增强可复现性"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要多个不同平台的数据集（Wikipedia/Twitter/Facebook/Formspring），获取和预处理成本高",
+      "预训练Transformer（BERT）需要较大计算资源",
+      "手动超参数调优和5折交叉验证工作量不小",
+      "LIME示例需要可解释性工具和示例设计"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只为每个模型列出性能数字，而应解释“为什么某个模型更强”或“何时不适用”",
+      "不要在没有统计检验的情况下断言显著优势",
+      "可解释性部分不能只放一张图，必须说明如何支持决策和识别偏见",
+      "不要忽视边界条件（如“无唯一最优”）的讨论，否则贡献会退化为一次性benchmark"
+    ],
+    "single_best_description_of_the_routine_cn": "以分步benchmark增强复杂度并附带解释性模块，证明技术边界和部署可行性。"
+  },
+  "confidence": 0.8,
+  "limitations_cn": "无法访问在线附录和代码库，部分超参数细节和模型架构细节可能未覆盖；数据集具体来源和标注过程仅依赖论文描述；缺少统计显著性检验，因此一些比较性结论的证据强度有限。",
+  "usage": {
+    "prompt_tokens": 18809,
+    "completion_tokens": 27900,
+    "total_tokens": 46709,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 15481
+  }
+}

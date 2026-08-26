@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105011003146"
+title: "Modern Software Review: Techniques and Technologies"
+authors: "Wong Y.K."
+year: "2024"
+journal: "Modern Software Review: Techniques and Technologies"
+doi: "10.4018/978-1-59904-013-4"
+---
+# Scopus title-abstract-keyword metadata
+Title: Modern Software Review: Techniques and Technologies
+Abstract: Software quality is vitally important to the success of a business, as a single undetected error or defect during the software development process could have disastrous consequences during a business operation. Software review is one of the methods used to detect defects. This process maintains the quality of the product by reviewing interim deliverables during development. Modern Software Review: Techniques and Technologies provides an understanding of the critical factors affecting software review performance and gives practical guidelines for software reviews. © 2006 by Idea Group Inc. All rights reserved.
+Author keywords: 
+Index keywords: Computer software selection and evaluation; Software quality; Business operation; Critical factors; Performance; Practical guidelines; Software development process; Software Quality; Software reviews; Software design
+Document type: Book
+Conference: 
+Source title: Modern Software Review: Techniques and Technologies
+Year: 2024
+EID: 2-s2.0-105011003146
+DOI: 10.4018/978-1-59904-013-4
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

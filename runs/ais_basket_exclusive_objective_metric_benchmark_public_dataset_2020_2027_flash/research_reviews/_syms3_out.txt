@@ -1,0 +1,15 @@
+===== 34 =====
+正文 | 全角左括:137, 全角右括:137, 半角分号:16
+参考文献 | 左双引:1, 右双引:1, 全角左括:1, 全角右括:1, 半角冒号:25
+  参考文献L33 (“): [16] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street
+  参考文献L33 (”): [16] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street
+===== 35 =====
+正文 | 全角左括:124, 全角右括:124, 半角分号:24
+参考文献 | 左双引:1, 右双引:1, 全角左括:1, 全角右括:1, 半角冒号:30
+  参考文献L43 (“): [21] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street
+  参考文献L43 (”): [21] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street
+===== 36 =====
+正文 | 全角左括:160, 全角右括:160, 半角分号:15
+参考文献 | 左双引:1, 右双引:1, 全角左括:1, 全角右括:1, 半角冒号:30
+  参考文献L21 (“): [10] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street
+  参考文献L21 (”): [10] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85162622966"
+title: "Mobile App Crowdsourced Test Report Consistency Detection via Deep Image-and-Text Fusion Understanding"
+authors: "Yu S.; Fang C.; Zhang Q.; Cao Z.; Yun Y.; Cao Z.; Mei K.; Chen Z."
+year: "2023"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2023.3285787"
+---
+# Scopus title-abstract-keyword metadata
+Title: Mobile App Crowdsourced Test Report Consistency Detection via Deep Image-and-Text Fusion Understanding
+Abstract: Crowdsourced testing, as a distinct testing paradigm, has attracted much attention in software testing, especially in mobile application (app) testing field. Compared with in-house testing, crowdsourced testing shows superiority with the diverse testing environments when faced with the mobile testing fragmentation problem. However, crowdsourced testing also encounters the low-quality test report problem caused by unprofessional crowdworkers involved with different expertise. In order to handle the submitted reports of uneven quality, app developers have to distinguish high-quality reports from low-quality ones to help the bug inspection. One kind of typical low-quality test report is inconsistent test reports, which means the textual descriptions are not focusing on the attached bug-occurring screenshots. According to our empirical survey, only 18.07% crowdsourced test reports are consistent. Inconsistent reports cause waste on mobile app testing. To solve the inconsistency problem, we propose ReCoDe to detect the consistency of crowdsourced test reports via deep image-and-text fusion understanding. ReCoDe is a two-stage approach that first classifies the reports based on textual descriptions into different categories according to the bug feature. In the second stage, ReCoDe has a deep understanding of the GUI image features of the app screenshots and then applies different strategies to handle different types of bugs to detect the consistency of the crowdsourced test reports. We conduct an experiment on a dataset with over 22 k test reports to evaluate ReCoDe, and the results show the effectiveness of ReCoDe in detecting the consistency of crowdsourced test reports. Besides, a user study is conducted to prove the practical value of ReCoDe in effectively helping app developers improve the efficiency of reviewing the crowdsourced test reports.  © 1976-2012 IEEE.
+Author keywords: Crowdsourced testing; image-and-text fusion understanding; report consistency detection
+Index keywords: Application programs; Crowdsourcing; Image fusion; Inspection; Job analysis; Program debugging; Software testing; Statistical tests; Computer bugs; Crowdsourced testing; Features extraction; Image-and-text fusion understanding; Layout; Low qualities; Mobile application testing; Report consistency detection; Task analysis; Test reports; Feature extraction
+Document type: Article
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2023
+EID: 2-s2.0-85162622966
+DOI: 10.1109/tse.2023.3285787
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

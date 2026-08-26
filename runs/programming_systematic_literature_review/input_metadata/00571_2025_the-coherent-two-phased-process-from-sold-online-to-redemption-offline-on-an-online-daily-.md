@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105008215864"
+title: "The coherent two-phased process from sold online to redemption offline on an online daily-deal platform"
+authors: "Song Y.; Liu Y.; Chen X.; Deveci M.; Ou C.X.; Li L.; Wang W."
+year: "2025"
+journal: "Electronic Commerce Research and Applications"
+doi: "10.1016/j.elerap.2025.101523"
+---
+# Scopus title-abstract-keyword metadata
+Title: The coherent two-phased process from sold online to redemption offline on an online daily-deal platform
+Abstract: Daily-deal platforms closely cooperate with local retailers when issuing daily-deal coupons to profit from selling coupons online and redeeming them offline. However, most research on daily-deal business has only focused on online sales or the offline redemption process. We investigate the coherent two-phased process from selling coupons online to redeeming them offline, grounded in the lens of social judgment theory, to capture the full picture of the daily-deal business. By tracking the sales and redemption of 11,290 deals over a 13-month period on an online daily-deal platform and conducting various data analyses, we find that reputation and price curvilinearly affect the sold online of daily-deal coupons, which consequently positively affects coupon redemption offline. More specifically, the U test empirically indicates that the extreme point of the inverted U-shaped effect of reputation score is 86.0035 within the range [49.7353, 92.7551]. And the extreme point to price demonstrates a U-shaped effect is 399.6082 within the range [4.7060, 829.3651]. We further classify retailers’ daily deals into consumption on a group or individual level. Empirical data demonstrate that the inverted U-shaped effects of reputation and the U-shaped effects of price are weakened by group consumption. Furthermore, we investigate the moderating role of agglomeration on the relationship between daily-deal coupons sold online and redemption offline of daily-deal coupons. We also discussed the theoretical and practical implications. © 2025 The Author(s)
+Author keywords: Agglomeration; Daily-deal business; Group consumption; Redemption offline; Sold online; Two-phased model
+Index keywords: Costs; Decision theory; Sales; Daily-deal business; Extreme points; Group consumption; Group level; Offline; Online sales; Redemption offline; Sell online; Two-phased model; U-shaped; Agglomeration
+Document type: Article
+Conference: 
+Source title: Electronic Commerce Research and Applications
+Year: 2025
+EID: 2-s2.0-105008215864
+DOI: 10.1016/j.elerap.2025.101523
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

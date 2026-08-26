@@ -1,0 +1,1088 @@
+{
+  "record_id": "19708",
+  "source_file": "19708_2021_a-technique-for-determining-relevance-scores-of-process-activities-using-graph-based-neural-netw.md",
+  "title": "A technique for determining relevance scores of process activities using graph-based neural networks",
+  "authors": "Matthias Stierle; Sven Weinzierl; Maximilian Harl; Martin Matzner",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113511",
+  "fulltext_chars": 74054,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "general_or_cross_domain",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:25.638132+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何利用图神经网络从事件日志中为过程活动确定相对于特定绩效指标的相关性分数，以支持流程分析师进行问题聚焦的流程改进分析？",
+    "artifact_and_design_cn": "GRM（Graph Relevance Miner），一种基于门控图神经网络（GGNN）的三步技术：先将事件日志转换为实例图（IGs），再用GGNN进行过程结果预测，最后通过soft-attention机制为每个活动提取并归一化相关性分数。",
+    "objective_outcomes_cn": "在四个真实数据集上，GRM在AUC上优于BiLSTM、RF和XGBoost，尤其在不平衡数据上对少数类预测更优；移除最相关活动显著降低预测质量而移除最不相关活动影响小；案例研究显示GRM帮助流程分析师识别延迟根因并触发流程重设计。",
+    "core_contribution_cn": "提出并验证了GRM技术，弥合过程发现与过程分析之间的差距，提供目标导向、高保真的活动相关性分数，将GNN的解释能力从单实例预测扩展到流程层面的分析。",
+    "whole_argument_in_one_paragraph_cn": "文章首先指出过程模型通常只注释频率或时长等一般信息，无法引导分析师针对绩效问题进行改善；然后提出基于GGNN的GRM技术，将事件日志转为IGs并利用GGNN的soft-attention机制为每个活动赋予相关性分数；定量评估证明其预测质量可媲美甚至超越SOTA模型，并通过删除活动实验验证相关性分数的忠实性；案例研究进一步证明其在真实组织中支持根因分析和流程重设计的效用，最终将贡献定位为弥合过程发现与过程分析之间的缺口。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章遵循设计科学范式：识别实践缺口（过程模型分析缺乏目标导向指导），设计一个新技术GRM，通过定量评估预测质量、移除活动实验和案例研究来评价其有效性与实用性，最终提炼可复用的设计知识。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章的主线是：现有过程模型分析存在性能/分析缺口 → 提出GRM制品 → 用四个数据集和baseline进行benchmark → 通过移除实验验证相关性的有效性 → 通过案例研究一般化为设计知识和实践启示。",
+  "research_program": {
+    "study_or_phase_count": 4,
+    "overall_sequence_cn": "先设计GRM制品，再通过预测质量评估验证其效果，然后通过移除最相关/最不相关活动检验相关性分数的有效性，最后通过案例研究展示其在组织中的实用性。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "GRM技术设计",
+        "question_cn": "如何构建一个基于GGNN的技术，从事件日志中为过程活动确定相对于绩效指标的相关性分数？",
+        "inputs_and_setting_cn": "事件日志（示例：差旅报销流程日志），包含活动、时间戳和标签；GGNN架构（Li等）。",
+        "designed_or_compared_object_cn": "设计GRM的三步流程：事件日志转换（实例图生成、边类型定义、one-hot编码）、GGNN模型创建与训练、预测与相关性确定。",
+        "baseline_control_or_counterfactual_cn": "无，设计阶段。",
+        "objective_metrics": [
+          "步骤完整性",
+          "概念可行性"
+        ],
+        "analysis_method_cn": "架构设计、形式化定义、运行示例。",
+        "main_result_cn": "定义了实例图（IG）和五类边类型，选择GRU+GGNN，通过soft-attention得到节点相关性得分。",
+        "argumentative_role_cn": "建立待评估的技术制品。",
+        "remaining_uncertainty_cn": "设计是否真能给出有效相关性分数，预测质量是否足够？",
+        "link_to_next_phase_cn": "需要定量评估预测质量与相关性分的有效性。",
+        "evidence_pointers": [
+          "Section 3, Fig. 2, Definitions 8, Eq. 13, Table 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "四数据集预测质量评估",
+        "question_cn": "GRM相对于SOTA预测过程结果技术是否具备可接受的预测质量？",
+        "inputs_and_setting_cn": "四个真实事件日志：bpi2017w, bpi2018al, bpi2020pl, sp2020；十折交叉验证；Baseline: BiLSTM, RF, XGBoost。",
+        "designed_or_compared_object_cn": "GRM与三个baseline分类器；指标AUC、Sensitivity、Specificity。",
+        "baseline_control_or_counterfactual_cn": "BiLSTM, Random Forest, XGBoost。",
+        "objective_metrics": [
+          "AUC_ROC",
+          "Sensitivity",
+          "Specificity",
+          "标准差"
+        ],
+        "analysis_method_cn": "Friedman test, Nemenyi post-hoc test。",
+        "main_result_cn": "GRM在所有数据集上的AUC优于所有baseline；在bpi2018al上显著优于；在少数类上显著更好，在多数类上有时更差。",
+        "argumentative_role_cn": "证明GRM作为技术有效：预测质量是相关性分数可信的先决条件。",
+        "remaining_uncertainty_cn": "好的预测质量并非直接证明相关性分数反映真实贡献，尤其对多数类预测。",
+        "link_to_next_phase_cn": "需要直接检验相关性分数的有效性，用移除活动实验。",
+        "evidence_pointers": [
+          "Table 3, Section 4.4"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "移除活动实验（Ablation）",
+        "question_cn": "GRM识别的最相关/最不相关活动是否真的对预测输出贡献不同？",
+        "inputs_and_setting_cn": "基于sp2020数据集，创建两个变体：每个实例移除最相关活动、移除最不相关活动。",
+        "designed_or_compared_object_cn": "原始sp2020 vs 移除最相关 vs 移除最不相关；用GRM重新训练和评估。",
+        "baseline_control_or_counterfactual_cn": "原始sp2020作为对照；移除最不相关作为低影响对照。",
+        "objective_metrics": [
+          "AUC_ROC",
+          "Sensitivity",
+          "Specificity"
+        ],
+        "analysis_method_cn": "Friedman test, Nemenyi post-hoc test。",
+        "main_result_cn": "移除最相关活动显著降低AUC和Specificity；移除最不相关活动影响很小，Sensitivity略升。",
+        "argumentative_role_cn": "证实相关性分数具有忠实性：高分活动与预测输出关键信息相关。",
+        "remaining_uncertainty_cn": "只在单一数据集sp2020上检验；未证明其他数据集上成立；移除操作可能引入数据分布变化。",
+        "link_to_next_phase_cn": "定量忠实性之外还需验证实际使用价值，进入案例研究。",
+        "evidence_pointers": [
+          "Table 4, Section 4.4"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "sp2020案例研究",
+        "question_cn": "GRM在真实组织中的效用如何？能否帮助流程分析师识别延迟根因并促进过程改进？",
+        "inputs_and_setting_cn": "德国中型家用电器供应商的客户服务过程（sp2020事件日志）；流程所有者、分析师和客服人员参与工作坊。",
+        "designed_or_compared_object_cn": "传统DFG频率可视化 vs GRM增强的DFG（活动按相关性着色）。",
+        "baseline_control_or_counterfactual_cn": "图5 DFG频率 vs 图6 GRM增强DFG；没有正式对照组，主要是工作坊讨论。",
+        "objective_metrics": [
+          "根因识别",
+          "流程重设计行动",
+          "参与者反馈"
+        ],
+        "analysis_method_cn": "定性案例研究，工作坊、实施和反馈。",
+        "main_result_cn": "分析师很快注意到高相关活动Approved，发现其导致延迟；公司实施低风险维修无需审批的重设计；其他相关活动（StatusRequest, StockEntry）也带来行动（增加库存）。",
+        "argumentative_role_cn": "证明GRM在支持流程分析方面的有效性（effectiveness），完成设计科学评价。",
+        "remaining_uncertainty_cn": "案例研究无法提供因果证据；结果基于单一公司；未量化改进效果。",
+        "link_to_next_phase_cn": "讨论部分总结贡献、局限和未来研究方向。",
+        "evidence_pointers": [
+          "Section 4.5, Figs. 5-6"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION",
+      "WHY_GAP_MATTERS"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "LIMITATION",
+      "PRIOR_KNOWLEDGE",
+      "REQUIREMENT",
+      "PHENOMENON",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "TRANSITION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_INTRO",
+      "MECHANISM"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION"
+    ],
+    "evaluation_moves": [
+      "RQ_OR_OBJECTIVE",
+      "HYPOTHESIS_OR_PROPOSITION",
+      "STUDY_OVERVIEW",
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "LIMITATION",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE",
+      "WHY_GAP_MATTERS"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "图神经网络（GNN）",
+      "门控图神经网络（GGNN）",
+      "门控循环单元（GRU）",
+      "消息传递神经网络框架（MPNN）",
+      "soft-attention机制",
+      "过程挖掘事件日志表示"
+    ],
+    "theory_design_coupling": "none",
+    "coupling_reason_cn": "GRM的设计不是从某个行为或组织理论推导而来，而是源于工程需求：过程数据具有图结构，GGNN能直接处理图并对节点重要性进行soft-attention解释；因此知识基础仅作为技术选择依据，未前瞻性决定全部设计选择。",
+    "translation_chain_cn": "过程事件日志中的轨迹存在顺序和依赖关系 → 选择能保留图结构的GGNN → 设计IG（节点代表活动，边代表顺序） → 用GGNN的soft-attention得到节点相关性 → 通过移除活动实验验证相关性。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "GNN能直接在图上计算，并允许在输入图结构、网络拓扑和节点重要性之间进行直接推断。",
+        "mechanism_cn": "图结构匹配网络拓扑，soft-attention作为节点相关性机制。",
+        "design_requirement_cn": "需要把事件日志转换为图表示。",
+        "artifact_choice_cn": "将轨迹转换为IG：活动作为节点，时间顺序作为边，附加Start/End节点，并定义边类型。",
+        "evaluated_contrast_cn": "GRM vs BiLSTM/RF/XGBoost预测质量。",
+        "objective_result_cn": "AUC优于baseline。",
+        "evidence_pointers": [
+          "Section 2.2, Section 3.1, Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "GGNN利用GRU处理时序依赖并避免梯度消失。",
+        "mechanism_cn": "GRU门控机制控制信息流过时间。",
+        "design_requirement_cn": "需要高效训练长序列事件日志。",
+        "artifact_choice_cn": "采用Li et al.的GGNN架构（GRU+BPTT）。",
+        "evaluated_contrast_cn": "与LSTM预测质量对比。",
+        "objective_result_cn": "AUC优于BiLSTM。",
+        "evidence_pointers": [
+          "Section 3.2, Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "许多ML/DL算法不分别编码节点和边，忽略边信息，无法完全理解过程语义。",
+        "mechanism_cn": "显式边类型和方向有助于建模过程关系。",
+        "design_requirement_cn": "表示必须保留节点和边的类型/方向信息。",
+        "artifact_choice_cn": "定义边类型（Start, End, Forward, Backward, Recursive）并one-hot编码节点和边标签。",
+        "evaluated_contrast_cn": "移除最相关/最不相关活动的预测质量差异。",
+        "objective_result_cn": "移除最相关显著降低AUC和Specificity，移除最不相关影响小。",
+        "evidence_pointers": [
+          "Section 3.1, Section 4.4, Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "DNN的黑箱问题限制了过程模型分析的指导能力。",
+        "mechanism_cn": "soft-attention可以从最终节点表示中读出每个节点的相关性。",
+        "design_requirement_cn": "需要为流程分析师提供可解释的活动相关性。",
+        "artifact_choice_cn": "在readout函数里用 sig(i(...)) 计算节点相关性得分，再min-max归一化。",
+        "evaluated_contrast_cn": "案例研究：DFG频率 vs GRM增强DFG。",
+        "objective_result_cn": "分析师能快速识别高相关活动Approved并定义重设计。",
+        "evidence_pointers": [
+          "Section 3.3, Section 4.5, Fig. 6"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "基准定量评估",
+      "消融/移除实验",
+      "案例研究"
+    ],
+    "why_these_evaluations_cn": "为了支持设计科学的efficacy和effectiveness：先评估预测质量（相关性分数忠实性的前提），再通过移除活动直接检验相关性分数的有效性，最后用案例研究评估在真实组织中的效用。",
+    "benchmark_and_contrast_chain_cn": "先与三个SOTA过程预测算法比较，用多个指标和统计检验确保GRM基础质量；然后用移除活动实验建立从预测质量到相关性分数的因果联系；最后用案例研究将量化结果转化为组织行动。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "GRM在AUC上优于baseline。",
+        "evidence": "Table 3四个数据集AUC比较；Nemenyi test显著于bpi2018al。",
+        "strength": "中等：部分显著性，某些数据集差异小。"
+      },
+      {
+        "claim": "GRM在少数类上预测更好。",
+        "evidence": "Sensitivity/Specificity比较，四个数据集均显著。",
+        "strength": "强。"
+      },
+      {
+        "claim": "相关性分数反映活动对预测的贡献。",
+        "evidence": "移除最相关活动显著降低AUC和Specificity；移除最不相关影响很小。",
+        "strength": "强但仅限sp2020。"
+      },
+      {
+        "claim": "GRM在真实组织中帮助根因分析。",
+        "evidence": "案例研究：分析师识别Approved活动，实施流程重设计。",
+        "strength": "定性、单一案例。"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用十折交叉验证、早停、统计检验（Friedman/Nemenyi）控制随机性和过拟合；移除活动实验提供对照条件。",
+    "external_validity_strategy_cn": "使用四个不同领域的事件日志（金融、农业、教育报销、家电服务）增加数据多样性；案例研究选择真实公司。",
+    "what_is_not_actually_tested_cn": "未在随机对照实验中测试分析师的绩效改进是否归因于GRM；未测试错误预测对相关性分数的影响；未测量GRM在不同类别比例下所有场景的可靠性；未比较不同阈值选择等。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "GRM在过程结果预测上能达到或超过SOTA预测质量，尤其在不平衡数据上的少数类。",
+    "artifact_claim_cn": "GRM将事件日志转换为IG并使用GGNN的soft-attention，能够产生与过程输出相关的活动相关性分数；移除实验支持相关性分数的有效性。",
+    "mechanism_claim_cn": "GGNN能显式捕获活动间的图结构关系，并通过soft-attention对节点（活动）对图级预测的贡献进行加权，从而提供可解释的相关性。",
+    "boundary_claim_cn": "GRM在类不平衡严重时对少数类预测效果尤佳；但对多数类预测可能较差；训练成本高；活动数量大时可能具有挑战。",
+    "reusable_design_knowledge_cn": "可复用的知识包括：将事件日志转化为带边类型的实例图；使用GGNN的节点级注意力为活动提供相关性分数；以预测质量作为相关性分数的忠实性代理；以移除活动作为验证相关性有效性的方法。",
+    "theoretical_contribution_cn": "不是理论性的新理论，而是将GNN/GGNN的可解释性应用到过程建模中，扩展了过程模型语义分析；证明GNN可以从流程层面提供非频率、目标导向的活动相关性。",
+    "how_discussion_closes_intro_gap_cn": "讨论中回顾现有过程模型分析技术的不足（只显示频率、无法根因分析），并说明GRM通过相关性分数弥合了过程发现与过程分析之间的差距，与引言的缺口对应。",
+    "overclaim_or_unsupported_leaps_cn": "从AUC优势推断相关性分数的忠实性可能过度；移除活动实验仅在sp2020上进行；案例研究缺乏定量结果和对照组；声称GNN优于LSTM在其他任务中不一定成立。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "通过过程挖掘生成的过程模型展示as-is状态，频率和持续时间注释提供通用信息。",
+      "rhetorical_function_cn": "建立过程挖掘与分析的基本背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后文指出这种通用信息不足做铺垫。",
+      "evidence_pointer": "Abstract S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "要改善绩效，分析师需要过程模型的进一步指导。",
+      "rhetorical_function_cn": "指出现有过程模型指导不足。",
+      "depends_on_cn": "依赖S1的通用信息描述。",
+      "sets_up_cn": "引出设计新的注释方式的需求。",
+      "evidence_pointer": "Abstract S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "设计基于图神经网络的GRM，确定过程活动相对于绩效指标的相关性分数。",
+      "rhetorical_function_cn": "明确本文目标和技术手段。",
+      "depends_on_cn": "依赖缺口。",
+      "sets_up_cn": "定义要评价的制品。",
+      "evidence_pointer": "Abstract S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用相关性分数注释过程模型能促进问题聚焦的分析。",
+      "rhetorical_function_cn": "给出设计方案的价值。",
+      "depends_on_cn": "S3的目标。",
+      "sets_up_cn": "为评估标准提供理念。",
+      "evidence_pointer": "Abstract S4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "S5",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用四个数据集定量评估预测质量，证明相关性分数的忠实性。",
+      "rhetorical_function_cn": "预告定量评估。",
+      "depends_on_cn": "S3制品。",
+      "sets_up_cn": "为结果部分设定预期。",
+      "evidence_pointer": "Abstract S5"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "S6",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "案例研究 highlight 对组织的效用。",
+      "rhetorical_function_cn": "预告案例研究。",
+      "depends_on_cn": "S5定量评估。",
+      "sets_up_cn": "为effectiveness评价做准备。",
+      "evidence_pointer": "Abstract S6"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "S7",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "对研究和商业应用有重要影响，因为过程模型分析有需要解决的缺点。",
+      "rhetorical_function_cn": "提升贡献的重要性。",
+      "depends_on_cn": "全文贡献。",
+      "sets_up_cn": "结论部分的实践意义。",
+      "evidence_pointer": "Abstract S7"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "BPM的目的是改善业务流程。",
+      "rhetorical_function_cn": "从BPM大背景出发。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引入过程分析师角色。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S2-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "过程分析师负责监控绩效并识别改进机会，但现在关键挑战是找到改进领域。",
+      "rhetorical_function_cn": "强调实践中的重要性。",
+      "depends_on_cn": "BPM目的。",
+      "sets_up_cn": "引出分析能力不足的缺口。",
+      "evidence_pointer": "Introduction P1 S2-S4"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P2 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "业务流程通过KPI/PPI监控，有效性效率和客户价值通过绩效指标表达。",
+      "rhetorical_function_cn": "提供业务指标的基础知识。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为活动相关性定义提供概念基础。",
+      "evidence_pointer": "Introduction P2 S1-S2"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "要改进过程，分析师必须理解每个活动对绩效指标的影响。",
+      "rhetorical_function_cn": "明确提出需求。",
+      "depends_on_cn": "KPI/PPI概念。",
+      "sets_up_cn": "为设计相关性分数技术提供动机。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P3 S1-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "以差旅报销为例，观察预算违规增加时，分析师需知道哪些活动应重新设计。",
+      "rhetorical_function_cn": "用具体例子使问题具体化。",
+      "depends_on_cn": "前面的需求。",
+      "sets_up_cn": "提出频率注释的不足。",
+      "evidence_pointer": "Introduction P3 S1-S3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P3 S4-S7",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "图1对比频率路径与相关性注释路径，后者能直接指出重要活动（如Permit A）。",
+      "rhetorical_function_cn": "用可视化说明新注释方式的直观价值。",
+      "depends_on_cn": "示例。",
+      "sets_up_cn": "为技术设计提供目标视觉。",
+      "evidence_pointer": "Introduction P3 S4-S7, Fig. 1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "过程模型分析有助于理解过程，但要深入改进，模型必须提供更多信息。",
+      "rhetorical_function_cn": "将具体例子普遍化到一般限制。",
+      "depends_on_cn": "示例和需求。",
+      "sets_up_cn": "直接引出本文目标。",
+      "evidence_pointer": "Introduction P4 S1-S2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P4 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此设计一种技术来确定活动相对于绩效指标的相关性分数。",
+      "rhetorical_function_cn": "正式提出研究目标。",
+      "depends_on_cn": "缺口。",
+      "sets_up_cn": "为后续全文提供方向。",
+      "evidence_pointer": "Introduction P4 S3"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P5 S1-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "活动关系多样（是否发生、位置、次数、顺序），理解复杂关系困难。",
+      "rhetorical_function_cn": "强调任务难度。",
+      "depends_on_cn": "目标。",
+      "sets_up_cn": "合理化选择高级ML方法。",
+      "evidence_pointer": "Introduction P5 S1-S3"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P6 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "ML能自动发现结构，DNN擅长高维数据但也存在黑箱问题。",
+      "rhetorical_function_cn": "引入ML/DL基础。",
+      "depends_on_cn": "任务难度。",
+      "sets_up_cn": "说明需要可解释的深度学习。",
+      "evidence_pointer": "Introduction P6 S1-S2"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P6 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有DL方法在事件日志预测上优于传统ML，但黑箱问题限制了结构表示。",
+      "rhetorical_function_cn": "指出深度学习在可解释性上的不足。",
+      "depends_on_cn": "DL基础。",
+      "sets_up_cn": "为GNN的可解释性引入做铺垫。",
+      "evidence_pointer": "Introduction P6 S3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P7 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "GNN可直接处理图数据，输入图结构与网络拓扑匹配，可建立节点相关性与图节点间的联系。",
+      "rhetorical_function_cn": "引入GNN核心特性。",
+      "depends_on_cn": "黑箱问题。",
+      "sets_up_cn": "论证选择GGNN的合理性。",
+      "evidence_pointer": "Introduction P7 S1-S3"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P7 S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "GGNN是GNN变体，专门处理时间依赖，适合事件日志数据。",
+      "rhetorical_function_cn": "进一步细化技术选择。",
+      "depends_on_cn": "GNN特性。",
+      "sets_up_cn": "为GRM设计提供依据。",
+      "evidence_pointer": "Introduction P7 S4"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P8 S1-S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文主要思想：设计GGNN-based GRM，通过三步确定相关性分数。",
+      "rhetorical_function_cn": "将目标具体化为三步。",
+      "depends_on_cn": "前面技术论证。",
+      "sets_up_cn": "为设计部分提供结构。",
+      "evidence_pointer": "Introduction P8 S1-S3"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P9 S1-S2",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "本文建立在之前GNN解释单实例预测的工作上，但此次转向流程层面为分析师提供洞察。",
+      "rhetorical_function_cn": "说明与前期工作的差异和延续。",
+      "depends_on_cn": "作者先前工作。",
+      "sets_up_cn": "界定本文相对于已有工作的新贡献。",
+      "evidence_pointer": "Introduction P9 S1-S2"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "P9 S3-S4",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "我们正式描述技术并评估其有效性，文章结构预告。",
+      "rhetorical_function_cn": "提供阅读路标。",
+      "depends_on_cn": "前文目标。",
+      "sets_up_cn": "引导读者进入后续章节。",
+      "evidence_pointer": "Introduction P9 S3-S4"
+    },
+    {
+      "order": 24,
+      "section": "Background",
+      "locator": "Section 2.1 Definitions 1-5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "形式化定义事件、轨迹、事件日志和标签。",
+      "rhetorical_function_cn": "提供事件日志的数学基础。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为IG定义和后续转换提供符号。",
+      "evidence_pointer": "Section 2.1 Definitions 1-5"
+    },
+    {
+      "order": 25,
+      "section": "Background",
+      "locator": "Section 2.2 Definitions 6-7",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "定义图和图函数。",
+      "rhetorical_function_cn": "建立GNN所需的基本概念。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为GNN传播模型定义做准备。",
+      "evidence_pointer": "Section 2.2 Definitions 6-7"
+    },
+    {
+      "order": 26,
+      "section": "Background",
+      "locator": "Section 2.2 GNN propagation and output",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "GNN通过传播模型计算节点表示，再用输出模型映射到图级输出。",
+      "rhetorical_function_cn": "解释GNN的工作原理。",
+      "depends_on_cn": "图定义。",
+      "sets_up_cn": "为后文描述GGNN的message passing和readout提供基础。",
+      "evidence_pointer": "Section 2.2 after Eq. 1"
+    },
+    {
+      "order": 27,
+      "section": "Background",
+      "locator": "Section 2.2 MPNN",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "采用MPNN框架描述GNN的传播和输出为消息传递和读出阶段。",
+      "rhetorical_function_cn": "提供通用框架，便于后续设计。",
+      "depends_on_cn": "GNN定义。",
+      "sets_up_cn": "为GRM架构描述提供语言。",
+      "evidence_pointer": "Section 2.2 MPNN para"
+    },
+    {
+      "order": 28,
+      "section": "Background",
+      "locator": "Section 2.3 GRU",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "GRU通过重置门和更新门控制信息流。",
+      "rhetorical_function_cn": "介绍GRU机制。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为GGNN使用GRU提供解释。",
+      "evidence_pointer": "Section 2.3 GRU para"
+    },
+    {
+      "order": 29,
+      "section": "Section 3",
+      "locator": "Intro P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "GRM包括三步：事件日志转换、GGNN创建训练、预测和相关性确定。",
+      "rhetorical_function_cn": "给出技术结构地图。",
+      "depends_on_cn": "前文目标。",
+      "sets_up_cn": "组织设计部分。",
+      "evidence_pointer": "Section 3 intro"
+    },
+    {
+      "order": 30,
+      "section": "Section 3",
+      "locator": "Intro P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "GRM将事件日志转为IGs，训练模型，再计算相关性。",
+      "rhetorical_function_cn": "高层面概述实现流程。",
+      "depends_on_cn": "STUDY_OVERVIEW。",
+      "sets_up_cn": "为后续细节做铺垫。",
+      "evidence_pointer": "Section 3 intro P2"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.1",
+      "locator": "P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "事件日志转换包括导入、IG创建和数值编码。",
+      "rhetorical_function_cn": "列出转换步骤。",
+      "depends_on_cn": "GRM总设计。",
+      "sets_up_cn": "逐步展开。",
+      "evidence_pointer": "Section 3.1 P1"
+    },
+    {
+      "order": 32,
+      "section": "Section 3.1",
+      "locator": "P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "将事件日志转为按时间排序的活动序列，目标属性存为标签向量。",
+      "rhetorical_function_cn": "说明输入处理。",
+      "depends_on_cn": "事件日志定义。",
+      "sets_up_cn": "为IG生成提供基础。",
+      "evidence_pointer": "Section 3.1 P2"
+    },
+    {
+      "order": 33,
+      "section": "Section 3.1",
+      "locator": "Def. 8 and following",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义实例图（IG）：节点表示活动，边表示时间顺序；添加Start/End伪节点。",
+      "rhetorical_function_cn": "核心设计定义。",
+      "depends_on_cn": "轨迹到序列。",
+      "sets_up_cn": "为边类型定义提供基础。",
+      "evidence_pointer": "Section 3.1 Definition 8"
+    },
+    {
+      "order": 34,
+      "section": "Section 3.1",
+      "locator": "Eq. 13",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义五种边类型：递归、开始、结束、向后、向前。",
+      "rhetorical_function_cn": "编码活动间的关系种类。",
+      "depends_on_cn": "IG定义。",
+      "sets_up_cn": "为GGNN边标签输入做准备。",
+      "evidence_pointer": "Section 3.1 Eq. 13"
+    },
+    {
+      "order": 35,
+      "section": "Section 3.1",
+      "locator": "Last para",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "对节点和边标签进行one-hot编码，以满足GGNN输入要求。",
+      "rhetorical_function_cn": "完成数值化转换。",
+      "depends_on_cn": "边类型定义。",
+      "sets_up_cn": "为模型训练准备数据。",
+      "evidence_pointer": "Section 3.1 last para"
+    },
+    {
+      "order": 36,
+      "section": "Section 3.2",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "GGNN可直接处理图结构过程数据，其他算法忽略边信息，因此选择GGNN。",
+      "rhetorical_function_cn": "证明架构选择的合理性。",
+      "depends_on_cn": "GNN特性。",
+      "sets_up_cn": "确定使用的模型。",
+      "evidence_pointer": "Section 3.2 P1"
+    },
+    {
+      "order": 37,
+      "section": "Section 3.2",
+      "locator": "P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用Li等的GGNN，GRU解决梯度消失，BPTT高效训练长序列。",
+      "rhetorical_function_cn": "进一步解释模型选择细节。",
+      "depends_on_cn": "GGNN选择。",
+      "sets_up_cn": "为架构描述做准备。",
+      "evidence_pointer": "Section 3.2 P2"
+    },
+    {
+      "order": 38,
+      "section": "Section 3.2",
+      "locator": "P3-P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "消息传递阶段通过消息函数和GRU更新节点表示。",
+      "rhetorical_function_cn": "描述具体实现。",
+      "depends_on_cn": "MPNN框架。",
+      "sets_up_cn": "为readout和相关性提取做准备。",
+      "evidence_pointer": "Section 3.2 P3-P4"
+    },
+    {
+      "order": 39,
+      "section": "Section 3.2",
+      "locator": "P5-P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "readout阶段将最终节点表示映射为预测，使用MSE损失训练。",
+      "rhetorical_function_cn": "完成模型定义。",
+      "depends_on_cn": "消息传递。",
+      "sets_up_cn": "为预测与相关性提取提供连接。",
+      "evidence_pointer": "Section 3.2 P5-P6"
+    },
+    {
+      "order": 40,
+      "section": "Section 3.3",
+      "locator": "P1-P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "预测时，readout中的soft-attention为每个活动节点计算相关性分数。",
+      "rhetorical_function_cn": "解释相关性分数如何产生。",
+      "depends_on_cn": "readout函数。",
+      "sets_up_cn": "建立技术机制与输出的关系。",
+      "evidence_pointer": "Section 3.3 P1-P2"
+    },
+    {
+      "order": 41,
+      "section": "Section 3.3",
+      "locator": "P3-P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "将相关性分数存入向量并min-max归一化，未出现活动分数为零。",
+      "rhetorical_function_cn": "定义输出的标准化处理。",
+      "depends_on_cn": "soft-attention机制。",
+      "sets_up_cn": "为可视化做准备。",
+      "evidence_pointer": "Section 3.3 P3-P4"
+    },
+    {
+      "order": 42,
+      "section": "Section 4.1",
+      "locator": "P1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "评估目标分为efficacy（预测质量与忠实性）和effectiveness（支持分析师）。",
+      "rhetorical_function_cn": "定义评价标准。",
+      "depends_on_cn": "设计科学评价需求。",
+      "sets_up_cn": "为后面假设和案例研究提供框架。",
+      "evidence_pointer": "Section 4.1 P1"
+    },
+    {
+      "order": 43,
+      "section": "Section 4.1",
+      "locator": "P2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设GRM预测质量不差于SOTA；移除最相关活动比移除最不相关活动对预测质量影响更大。",
+      "rhetorical_function_cn": "将efficacy转化为可检验假设。",
+      "depends_on_cn": "评价目标。",
+      "sets_up_cn": "为定量实验设计提供方向。",
+      "evidence_pointer": "Section 4.1 P2"
+    },
+    {
+      "order": 44,
+      "section": "Section 4.2",
+      "locator": "P1-P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "随机shuffle、十折交叉验证、10%验证早停。",
+      "rhetorical_function_cn": "描述实验协议，提高内部效度。",
+      "depends_on_cn": "假设。",
+      "sets_up_cn": "为结果可信度提供基础。",
+      "evidence_pointer": "Section 4.2 P1-P2"
+    },
+    {
+      "order": 45,
+      "section": "Section 4.2",
+      "locator": "P3",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "用BiLSTM、RF、XGBoost作为baseline，并解释BiLSTM选择理由。",
+      "rhetorical_function_cn": "定义比较标准。",
+      "depends_on_cn": "efficacy评估。",
+      "sets_up_cn": "为AUC对比提供参照。",
+      "evidence_pointer": "Section 4.2 P3"
+    },
+    {
+      "order": 46,
+      "section": "Section 4.2",
+      "locator": "P4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "指标用AUC、Specificity、Sensitivity，因为AUC对不平衡稳健。",
+      "rhetorical_function_cn": "说明指标选择的合理性。",
+      "depends_on_cn": "baseline设定。",
+      "sets_up_cn": "为表格结果解释做准备。",
+      "evidence_pointer": "Section 4.2 P4"
+    },
+    {
+      "order": 47,
+      "section": "Section 4.2",
+      "locator": "P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用Friedman和Nemenyi检验评估显著性。",
+      "rhetorical_function_cn": "增强统计严谨性。",
+      "depends_on_cn": "指标定义。",
+      "sets_up_cn": "为结果中星号解释做准备。",
+      "evidence_pointer": "Section 4.2 P5"
+    },
+    {
+      "order": 48,
+      "section": "Section 4.3",
+      "locator": "P1-P5",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "描述四个真实事件日志及其目标变量，包括自收集的sp2020。",
+      "rhetorical_function_cn": "提供数据多样性，支持外部效度。",
+      "depends_on_cn": "评估目标。",
+      "sets_up_cn": "为结果表提供数据背景。",
+      "evidence_pointer": "Section 4.3, Table 2"
+    },
+    {
+      "order": 49,
+      "section": "Section 4.4",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "GRM在AUC上优于所有baseline，在bpi2018al显著。",
+      "rhetorical_function_cn": "报告主要预测质量结果。",
+      "depends_on_cn": "实验设置。",
+      "sets_up_cn": "为相关性分数有效性提供前提。",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 50,
+      "section": "Section 4.4",
+      "locator": "P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "GRM对少数类显著更好，类别越不平衡优势越明显。",
+      "rhetorical_function_cn": "强调GRM在不平衡数据上的优势。",
+      "depends_on_cn": "表3。",
+      "sets_up_cn": "引出预测质量作为相关性分数忠实性的代理。",
+      "evidence_pointer": "Table 3, Section 4.4 P2"
+    },
+    {
+      "order": 51,
+      "section": "Section 4.4",
+      "locator": "P3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "GRM在多数类上有时显著更差，但该评估仅要求合理质量。",
+      "rhetorical_function_cn": "承认边界，避免过度声称。",
+      "depends_on_cn": "表3结果。",
+      "sets_up_cn": "为讨论中的限制做铺垫。",
+      "evidence_pointer": "Section 4.4 P3"
+    },
+    {
+      "order": 52,
+      "section": "Section 4.4",
+      "locator": "P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "移除最相关活动显著降低AUC和Specificity，移除最不相关活动影响很小。",
+      "rhetorical_function_cn": "用消融实验直接验证相关性分数。",
+      "depends_on_cn": "预测质量结果。",
+      "sets_up_cn": "为案例研究奠定可信度。",
+      "evidence_pointer": "Table 4"
+    },
+    {
+      "order": 53,
+      "section": "Section 4.5",
+      "locator": "P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "案例公司是家用电器供应商，目标是提高五天内完成服务订单的比例。",
+      "rhetorical_function_cn": "建立案例研究背景。",
+      "depends_on_cn": "sp2020数据。",
+      "sets_up_cn": "为说明GRM效用做铺垫。",
+      "evidence_pointer": "Section 4.5 P1-P2"
+    },
+    {
+      "order": 54,
+      "section": "Section 4.5",
+      "locator": "P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "通过工作坊与分析师合作实施GRM。",
+      "rhetorical_function_cn": "描述案例研究执行方式。",
+      "depends_on_cn": "公司合作。",
+      "sets_up_cn": "为结果提供背景。",
+      "evidence_pointer": "Section 4.5 P3"
+    },
+    {
+      "order": 55,
+      "section": "Section 4.5",
+      "locator": "P4",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "频率DFG只提供少量洞察，分析师难以识别根因，过滤是试错。",
+      "rhetorical_function_cn": "对比显示传统可视化的不足。",
+      "depends_on_cn": "案例背景。",
+      "sets_up_cn": "为GRM增强DFG的价值做对照。",
+      "evidence_pointer": "Section 4.5 P4, Fig. 5"
+    },
+    {
+      "order": 56,
+      "section": "Section 4.5",
+      "locator": "P5-P7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "GRM增强DFG中分析师注意到Approved活动，进一步分析后实施重设计；其他活动也触发行动。",
+      "rhetorical_function_cn": "报告案例研究的关键发现。",
+      "depends_on_cn": "GRM可视化。",
+      "sets_up_cn": "为effectiveness结论提供证据。",
+      "evidence_pointer": "Section 4.5 P5-P7, Fig. 6"
+    },
+    {
+      "order": 57,
+      "section": "Section 4.5",
+      "locator": "P8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "分析师发现使用相关性分数更容易分析过程。",
+      "rhetorical_function_cn": "总结案例研究对效用的支持。",
+      "depends_on_cn": "P5-P7。",
+      "sets_up_cn": "为讨论中claims提供依据。",
+      "evidence_pointer": "Section 4.5 P8"
+    },
+    {
+      "order": 58,
+      "section": "Discussion",
+      "locator": "P1-P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "过程分析特别是根因分析是挑战性任务，过程模型是好的起点但决策支持系统需进一步指导。",
+      "rhetorical_function_cn": "重新连接引言中的缺口。",
+      "depends_on_cn": "引言和案例研究。",
+      "sets_up_cn": "为对比现有哪些工作做铺垫。",
+      "evidence_pointer": "Discussion P1-P2"
+    },
+    {
+      "order": 59,
+      "section": "Discussion",
+      "locator": "P3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有技术ProcessExplorer、Mannhardt、van Eck等各有不足，未实现绩效导向的根因分析。",
+      "rhetorical_function_cn": "列举相关工作的局限，突出本文贡献。",
+      "depends_on_cn": "文献。",
+      "sets_up_cn": "定位GRM为gap的解决方案。",
+      "evidence_pointer": "Discussion P3"
+    },
+    {
+      "order": 60,
+      "section": "Discussion",
+      "locator": "P4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "为弥合差距开发GRM；定量评估和案例研究支持其价值。",
+      "rhetorical_function_cn": "重申贡献并连接证据。",
+      "depends_on_cn": "评估结果。",
+      "sets_up_cn": "为限制和未来方向做平衡。",
+      "evidence_pointer": "Discussion P4"
+    },
+    {
+      "order": 61,
+      "section": "Discussion",
+      "locator": "P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "限制包括不平衡假设、错误预测影响、计算开销。",
+      "rhetorical_function_cn": "展示研究的边界。",
+      "depends_on_cn": "讨论P4。",
+      "sets_up_cn": "为未来研究列表提供动机。",
+      "evidence_pointer": "Discussion P5"
+    },
+    {
+      "order": 62,
+      "section": "Discussion",
+      "locator": "P6-P8",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来可以将GNN用于BPM生命周期其他阶段、用Petri net、结合上下文属性。",
+      "rhetorical_function_cn": "展现研究扩展方向。",
+      "depends_on_cn": "限制。",
+      "sets_up_cn": "为结论中的影响做铺垫。",
+      "evidence_pointer": "Discussion P6-P8"
+    },
+    {
+      "order": 63,
+      "section": "Conclusion",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们提出了GRM，一种基于GNN的活动相关性分数技术。",
+      "rhetorical_function_cn": "简洁总结核心贡献。",
+      "depends_on_cn": "全文。",
+      "sets_up_cn": "引入学术和实践意义。",
+      "evidence_pointer": "Conclusion P1"
+    },
+    {
+      "order": 64,
+      "section": "Conclusion",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "方法以问题为中心，模型向业务目标学习而不是使用启发式。",
+      "rhetorical_function_cn": "强调技术设计理念。",
+      "depends_on_cn": "GRM设计。",
+      "sets_up_cn": "说明对分析师的指导价值。",
+      "evidence_pointer": "Conclusion P2"
+    },
+    {
+      "order": 65,
+      "section": "Conclusion",
+      "locator": "P3",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "对商业实践有启示：厂商寻求弥合发现与分析差距，GRM凸显过程模型分析潜力。",
+      "rhetorical_function_cn": "定位到实际应用场景。",
+      "depends_on_cn": "PM发展。",
+      "sets_up_cn": "没有后续，结束全文。",
+      "evidence_pointer": "Conclusion P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "通过展示现有过程模型只注释频率/时长，不足以支持针对绩效指标的根因分析，并对比图1中频率与相关性注释的差距来构建缺口。",
+    "signposting_cn": "在引言末尾预告论文结构；在评估中说明'first...second...'；在每节开头概述步骤。",
+    "transition_logic_cn": "从问题→挑战→ML背景→GGNN适用性→提出GRM→设计→评估→讨论→结论，段落间用'Thus','Therefore','To address this challenge'等衔接。",
+    "claim_evidence_rhythm_cn": "每个主张后紧跟数据（表格）或案例叙事；用显著性和标准差支撑预测质量主张；用移除实验和案例研究支撑相关性有效性。",
+    "benchmark_narrative_cn": "benchmark不是核心贡献，而是为相关性分数可信度提供基线；强调GRM并非在所有指标上优于baseline，但AUC足以竞争，并解释少数类优势。",
+    "theory_return_cn": "讨论部分回到引言提出的过程模型分析不足，阐述GRM弥补差距，并将GNN的优势从单实例预测扩展到流程层面。",
+    "contribution_positioning_cn": "将贡献定位为'技术设计+定量验证+案例验证'，并强调对研究和企业级过程挖掘的意义。",
+    "novelty_protection_cn": "通过对比现有技术（Seeliger, Mannhardt, van Eck）的不足，突出GRM的目标导向学习相关性；通过移除实验和案例展示独特性，避免仅是一次性能增量。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立BPM/过程分析背景和问题，说明现有模型注释的不足。",
+        "research_job_cn": "识别绩效改进中的分析缺口。",
+        "required_evidence_cn": "文献或示例表明频率/时长注释无法指导根因分析。",
+        "transition_to_next_cn": "因此需要一种目标导向的注释技术。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入GNN/GGNN技术基础并论证适配性。",
+        "research_job_cn": "分析技术特性与问题需求的匹配。",
+        "required_evidence_cn": "技术文献证明GNN能处理图结构并解释节点重要性。",
+        "transition_to_next_cn": "所以提出基于GGNN的GRM。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "设计制品：将事件日志转换为IG，定义节点/边/边类型。",
+        "research_job_cn": "实现转换算法。",
+        "required_evidence_cn": "运行示例和形式化定义。",
+        "transition_to_next_cn": "下一步是训练模型。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述GGNN模型创建和训练，并说明soft-attention如何提取相关性。",
+        "research_job_cn": "选择网络架构、损失和训练方法。",
+        "required_evidence_cn": "模型能在合成或真实数据上训练。",
+        "transition_to_next_cn": "评估阶段测试质量。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设置定量评估：baseline、指标、统计检验。",
+        "research_job_cn": "运行多数据集交叉验证。",
+        "required_evidence_cn": "实验数据表，显著性结果。",
+        "transition_to_next_cn": "还需要验证解释的有效性。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计移除最相关/最不相关活动的消融实验。",
+        "research_job_cn": "对比预测质量差异。",
+        "required_evidence_cn": "统计检验显示显著差异。",
+        "transition_to_next_cn": "定量验证之外需要案例研究。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "开展案例研究，展示真实组织中的效用。",
+        "research_job_cn": "与组织合作，工作坊，根因分析和重设计。",
+        "required_evidence_cn": "参与者的反馈和行动。",
+        "transition_to_next_cn": "讨论贡献和边界。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "讨论部分将结果连接回缺口，列出局限和未来方向。",
+        "research_job_cn": "批判性反思。",
+        "required_evidence_cn": "与引言呼应的总结。",
+        "transition_to_next_cn": "无。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "将技术能力映射到业务问题",
+      "用预测质量作为解释质量代理",
+      "用移除实验验证解释",
+      "案例研究补充外部效度"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实事件日志和领域知识",
+      "设计并训练GGNN的计算成本",
+      "进入真实组织进行案例研究"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "声称相关性分数是因果根因而无实验",
+      "声称GRM优于所有模型但不提供显著性和baseline设置",
+      "复制soft-attention机制但未验证忠实性"
+    ],
+    "single_best_description_of_the_routine_cn": "从业务分析缺口出发，设计一个可解释的图神经网络制品，用预测质量作为代理建立可信度，用移除活动实验验证相关性，再用真实案例证明业务价值。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "文章本身没有附录；由于以文本解析为主，表/图细节有限；对于案例研究的严格性无法从文章中完全验证；无OCR问题。",
+  "usage": {
+    "prompt_tokens": 23392,
+    "completion_tokens": 26578,
+    "total_tokens": 49970,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 20064
+  }
+}

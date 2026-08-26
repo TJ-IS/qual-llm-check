@@ -1,0 +1,1637 @@
+# 1 + 1 > 2? Information, Humans, and Machines
+
+- 作者：Tian Lu; Yingjie Zhang
+- 年份 / 期刊：2025 / Information Systems Research
+- DOI：10.1287/isre.2023.0305
+- 源文件：26584_2025_1-1-2-information-humans-and-machines.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.93
+
+## 文章级论证概况
+
+- 核心问题：在人机协作决策中，信息复杂度和机器解释是否以及如何共同激发人类的主动深度思考（rethinking），从而让人类为协作结果贡献额外价值，实现‘1+1>2’？
+
+- 制品与设计：在亚洲某小额贷款公司开展两阶段现场实验，通过同时操纵信息复杂度（小信息量12个特征 vs 大信息量含新增32个购物特征和32个手机/轨迹特征）和机器解释（是否提供基于SHAP的Shapley值特征重要性和特征值对比）两个理论驱动条件，形成8个实验组，包括纯人类决策组、纯机器决策组和人类与机器协作组。
+
+- 客观结果：只有当大信息量和机器解释同时存在时，人类参与才显著降低违约率，使默认率下降2.02%（从5.15%降至3.13%）；单独提供大信息量或单独提供机器解释均不能带来显著改善。机制分析表明，该改善来自人类主动重新思考：人类将机器给出的非熟悉特征（如游戏卡消费）与新关联特征（如虚拟商品消费）联系起来，纠正了机器在女性借款人风险评估上的偏差，同时缩小了性别违约率差距。
+
+- 核心贡献：作者声称：1）揭示并实证了人类在人机协作中的主动重新思考过程，推进人机协作文献；2）提出并验证机器解释的效果依赖于信息复杂度等条件，解释了现有可解释AI文献结论不一致的原因；3）识别并弥补机器在信用评估中产生的性别偏见，体现人类参与的不可替代价值。
+
+- 整篇论证链：文章从人机协作的现实必要性和当前普遍存在的‘算法厌恶/过度依赖’问题出发，指出现有机器解释研究结论不一致且多在实验室环境中进行，缺乏对条件和机制的深入理解。作者以双加工推理理论为基础，论证了同时满足信息复杂度和有用线索两个条件才能诱发人类的系统2主动加工，并据此在真实小额贷款平台上设计两阶段现场实验，通过随机分组操纵信息量、机器建议和机器解释，先用stage 1比较纯人类与纯机器的决策表现，再用stage 2引入人类先做独立决策后查看机器建议并做最终决策的两步协作流程，从而分离出人类增量贡献。基准结果显示协作改进只出现在大信息量+机器解释组。随后，作者通过三步机制分析（probit模型交互项、特征分布可视化、关联新特征分析）解释为何人类与机器决策不同、为何人类在何种条件下跟随机器，以及人类如何通过将机器解释中的非熟悉特征关联到其他特征来实现重新思考并纠正机器错误。最后，通过经验异质性分析和性别公平性（EOR）扩展检验，将结果与理论框架中的个体特征和算法偏见问题沟通，在讨论中重申两个条件缺一不可，并限定结论的边界条件。
+
+- confidence_estimate：0.98
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文的主要证据来源是单一的两阶段现场实验，但整个研究项目包含了多个承担不同论证任务的阶段和补充分析：stage 1与stage 2的现场实验对照、默认率基准比较、决策一致性与跟随行为分析、三步机制检验（特征重要性的probit回归、初始与最终决策差异的参数对比、重新思考过程的分解）、异质性分析（工作经验）以及公平性分析（EOR），实际上构成一个多方法、多阶段累积证据的研究项目。
+
+- 主导写作弧线判定：文章首先描述人机协作中人类从厌恶或过度依赖到应主动贡献的现象与困境，接着用双加工理论建立‘信息复杂度+有用线索→系统2深度思考→改进协作’的机制框架，然后通过在真实小额贷款平台上的随机现场实验（操纵信息量、机器解释）作为数字干预，并在最终部分用机制分析和扩展检验来确认因果机制与边界。整体写作弧线是现象—机制—干预—现场因果检验。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：研究项目顺序：1）理论构建与实验设计阶段，基于双加工理论确定两个条件（信息复杂度、有用线索）并转化为实验处理；2）数据处理与机器学习模型构建阶段，收集训练数据、训练XGBoost模型并提取SHAP解释；3）Stage 1现场实验（纯人类决策 vs 纯机器决策，两种信息量，共4组）；4）Stage 2现场实验（人类先独立决策再看到机器建议/解释再最终决策，共4组）；5）基准结果分析（默认率比较、利润增益）；6）机制分析第一步：人类与机器决策差异的特征归因；7）机制分析第二步：人类为何与机器建议不一致及跟随行为；8）机制分析第三步：重新思考过程的分解（新特征关联）；9）经验异质性分析；10）性别偏差与公平性分析。
+
+### studies_or_phases
+
+#### 1. 理论构建与预处理
+
+- order：1
+
+- name_cn：理论构建与预处理
+
+- question_cn：什么理论条件能够激发人类的深度思考？
+
+- inputs_and_setting_cn：双加工推理理论文献、小额贷款公司平台背景
+
+- designed_or_compared_object_cn：识别两个独立条件：信息复杂度（大信息量）和有用线索（机器解释）
+
+- baseline_control_or_counterfactual_cn：无
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论文献综合、概念映射
+
+- main_result_cn：提出两个理论设计条件：信息复杂度和有用线索
+
+- argumentative_role_cn：为实验操纵提供理论依据，形成因果链的起点
+
+- remaining_uncertainty_cn：理论是否正确、能否在现实中引发效果尚未检验
+
+- link_to_next_phase_cn：转入实验平台和数据构建，将理论条件具体化为可操纵变量
+
+##### evidence_pointers
+
+1. Introduction P4–P5
+
+2. Section 2.4
+
+3. Section 3.2.1
+
+#### 2. 机器学习模型训练与机器解释准备
+
+- order：2
+
+- name_cn：机器学习模型训练与机器解释准备
+
+- question_cn：如何生成用于实验的机器建议与解释？
+
+- inputs_and_setting_cn：2017年6月1日至30日申请贷款的新借款人的基础信息和附加信息，超过9000个训练样本，7天人类评估员训练
+
+- designed_or_compared_object_cn：训练XGBoost模型（小信息量和信息量两种）以生成机器决策；训练人类评估员以掌握不同信息量下的评估
+
+- baseline_control_or_counterfactual_cn：无明确的实验对照，但模型比较了多种算法并选出最优XGBoost
+
+##### objective_metrics
+
+1. 违约预测性能（通过交叉验证、超参数调优达到稳定）
+
+- analysis_method_cn：机器学习建模（10折交叉验证、多算法比较、超参数调优）
+
+- main_result_cn：XGBoost表现最佳并被用于实验；机器解释通过SHAP生成关键特征重要性（图1）
+
+- argumentative_role_cn：确保机器建议质量高且解释可用，为stage 2的协作提供可比较的机器基线
+
+- remaining_uncertainty_cn：机器在实验期间不更新，但机器的真实性能仍可能随数据变化
+
+- link_to_next_phase_cn：模型和解释就绪后，进行正式的两阶段现场实验
+
+##### evidence_pointers
+
+1. Section 3.2.2
+
+#### 3. Stage 1现场实验：纯人类与纯机器决策基线
+
+- order：3
+
+- name_cn：Stage 1现场实验：纯人类与纯机器决策基线
+
+- question_cn：在小信息量和大信息量下，人类与机器的独立决策表现差异如何？
+
+- inputs_and_setting_cn：2017年12月8日至14日新申请贷款样本，随机分配到四个组：人类+小信息、人类+大信息、机器+小信息、机器+大信息
+
+- designed_or_compared_object_cn：人类评估员决策与XGBoost机器学习决策，以及两种信息量
+
+- baseline_control_or_counterfactual_cn：组1（人类+小信息量）作为公司原有流程基准；组3（机器+小信息量）作为机器小信息基线；组2和组4作为大信息条件
+
+##### objective_metrics
+
+1. 默认率（贷后60天未全额还款比例）
+
+2. 批准率（固定47%）
+
+- analysis_method_cn：随机化检验、组间默认率t检验
+
+- main_result_cn：人类在两种信息量下均差于机器；信息量增大后机器绩效提升，人类并未相应提升，导致差距扩大（比较A、B、C、D）
+
+- argumentative_role_cn：建立纯人类和纯机器的表现水平，展示单独增加信息复杂度并不能提升人类绩效，为后续协作效果提供基线
+
+- remaining_uncertainty_cn：人类为何不能利用大信息量？协作能否改善？
+
+- link_to_next_phase_cn：Stage 2在同平台基础上引入机器建议，直接检验协作是否产生额外价值
+
+##### evidence_pointers
+
+1. Section 3.3.1
+
+2. Section 4, Figure 3, Table 2
+
+#### 4. Stage 2现场实验：人机协作（有无机器解释）
+
+- order：4
+
+- name_cn：Stage 2现场实验：人机协作（有无机器解释）
+
+- question_cn：在协作模式下，信息复杂度和机器解释各自以及联合如何影响人类对机器建议的跟随和最终绩效？
+
+- inputs_and_setting_cn：2017年12月15日至28日新贷款申请，随机分配到四组：小组信息量无解释、小信息量有解释、大信息量无解释、大信息量有解释；人类评估员先做独立决策，然后看到机器建议（及解释）后再做最终决策
+
+- designed_or_compared_object_n：人类是否看到机器建议、是否看到机器解释，以及信息量大小
+
+- baseline_control_or_counterfactual_cn：对照组为纯机器决策（组3和组4）以及无机器解释的协作组（组5和组7）
+
+##### objective_metrics
+
+1. 默认率
+
+2. 决策一致性（人类初始决策与机器决策一致比例）
+
+3. 跟随率（初始不一致时人类最终调整为机器建议的比例）
+
+4. 利润增益
+
+- analysis_method_cn：组间t检验（多重假设校正）、描述性统计
+
+- main_result_cn：仅有大信息量或仅有机器解释都不能带来显著改善；当大信息量与机器解释同时存在时，人类参与的最终决策默认率从机器单独的5.15%降至3.13%，且跟随率提高（组7对组8，从81.03%升至85.67%）
+
+- argumentative_role_cn：直接检验核心假设：两个条件缺一不可。这一结果构成全文的核心经验证据
+
+- remaining_uncertainty_cn：为什么这个条件下人类能改善绩效？
+
+- link_to_next_phase_cn：转入机制分析，解释人类如何实现改善
+
+##### evidence_pointers
+
+1. Section 3.3.2
+
+2. Section 4, Figure 3, Table 2, Figure 4
+
+#### 5. 机制分析第一步：人类与机器决策差异的来源
+
+- order：5
+
+- name_cn：机制分析第一步：人类与机器决策差异的来源
+
+- question_cn：为什么人类和机器在决策上不同？这些差异如何解释绩效差异？
+
+- inputs_and_setting_cn：使用所有实验组数据，申请层面的probit模型，因变量IfApprove；加入MInd交互项识别机器决策影响；小信息量模型（组1,3,5,6）与大数据量模型（组2,4,7,8）
+
+- designed_or_compared_object_cn：比较人类和机器在特征权重上的差异
+
+- baseline_control_or_counterfactual_cn：无额外对照，交互项系数显著性衡量相对权重
+
+##### objective_metrics
+
+1. probit回归系数显著性
+
+2. 特征重要性的代理
+
+- analysis_method_cn：probit回归，交互项分析
+
+- main_result_cn：小信息量下，人类与机器使用类似特征（如DPI、收入、教育）；大信息量下，人类倾向于依赖传统特征而机器使用新型特征（游戏卡消费、通话、轨迹等），且有信息量大时人类绩效变差
+
+- argumentative_role_cn：解释了为什么机器在大信息量下表现更好，为人类贡献的潜在空间奠定基础
+
+- remaining_uncertainty_cn：人类为何不采用新特征？在协作中如何改变？
+
+- link_to_next_phase_cn：第二步转向协作中人类对机器建议的反应
+
+##### evidence_pointers
+
+1. Section 5.1, Tables 3–5
+
+#### 6. 机制分析第二步：人类为何与机器建议不一致及何时跟随
+
+- order：6
+
+- name_cn：机制分析第二步：人类为何与机器建议不一致及何时跟随
+
+- question_cn：在协作过程中，人类为什么有时调整决策跟随机器，有时坚持己见？
+
+- inputs_and_setting_cn：仅使用人类初始决策与机器不一致的样本；probit模型因变量IfApprove并引入IfFinal（是否最终决策=1）及其交互项；分组为组5–8
+
+- designed_or_compared_object_cn：比较初始决策与最终决策时特征权重的变化（IfFinal交互项）以及不同实验组的差异
+
+- baseline_control_or_counterfactual_cn：组7（大信息量无解释）作为对照，与组8（大信息量有解释）对照
+
+##### objective_metrics
+
+1. IfFollow回归（见在线附录）
+
+2. IfFinal交互项系数
+
+- analysis_method_cn：probit回归、特征分布可视化
+
+- main_result_cn：在非组8条件下，人类改变决策仍依赖原有人类熟悉特征（如DPI、收入、年龄）；在组8中，人类开始使用机器解释中暗示的新特征（如ATV shopping virtual），这些特征在初始决策或机器独立决策中都不显著
+
+- argumentative_role_cn：揭示人类在何种条件下真正发生主动重新思考，而非单纯跟随机器；将绩效改善与认知机制联系起来
+
+- remaining_uncertainty_cn：人类为何选择新特征ATV shopping virtual？如何具体发生？
+
+- link_to_next_phase_cn：第三步分解重新思考过程，解释新特征的选择机制
+
+##### evidence_pointers
+
+1. Section 5.2, Tables 6–7, Figure 5
+
+#### 7. 机制分析第三步：重新思考过程的分解
+
+- order：7
+
+- name_cn：机制分析第三步：重新思考过程的分解
+
+- question_cn：人类如何将机器解释中的非熟悉特征关联到其他特征并形成新的决策规则？
+
+- inputs_and_setting_cn：对比组7和组8中的人类决策；特征分布（游戏卡消费、ATV购物虚拟）
+
+- designed_or_compared_object_cn：观察组8中人类是否以ATV购物虚拟替代或补充游戏卡消费，以及性别特征的作用
+
+- baseline_control_or_counterfactual_cn：组7（无解释）作为参考，组8（有解释）作为焦点；在线附录C.4比较贷后表现
+
+##### objective_metrics
+
+1. 特征分布的中位数和方差
+
+2. 默认率分解（机器“挽救”的贷款和人类“挽救”的贷款）
+
+- analysis_method_cn：描述性统计、关联分析，在线附录实证
+
+- main_result_cn：人类看到机器对游戏卡消费等密集零值特征难以解释时，联想到与游戏卡紧密相关的虚拟商品消费（ATV购物虚拟），并因后者有更多非零值而采纳；人类更可能正确选择机器曾拒绝的好贷款，而人类推翻机器反而更差
+
+- argumentative_role_cn：将‘人类主动思考’具体化为可操作的特征关联过程，展示人类如何弥补机器盲区，为‘1+1>2’提供机制证据
+
+- remaining_uncertainty_cn：该机制是否是普遍的？是否与人类经验有关？
+
+- link_to_next_phase_cn：进入扩展分析：异质性检验和性别公平性分析
+
+##### evidence_pointers
+
+1. Section 5.3, Online Appendix C.4
+
+#### 8. 扩展分析：经验异质性与性别偏见
+
+- order：8
+
+- name_cn：扩展分析：经验异质性与性别偏见
+
+- question_cn：人类评估员的经验如何调节协作效果？人机协作能否缓解机器产生的性别偏见？
+
+- inputs_and_setting_cn：人类评估员经验（分4档）、性别特征；使用probit模型包括三向交互项；EOR指标
+
+- designed_or_compared_object_cn：比较不同经验水平下人类对机器建议和解释的反应，以及不同实验组的性别公平性（EOR）
+
+- baseline_control_or_counterfactual_cn：组1–2（纯人类）和多组对照；大信息量无解释组作为协作为对照
+
+##### objective_metrics
+
+1. 是否违约
+
+2. 决策一致性IfConsistent
+
+3. 是否跟随IfFollow
+
+4. EOR（Equalized Opportunity Ratio）
+
+- analysis_method_cn：probit回归三向交互、EOR计算
+
+- main_result_cn：经验较丰富者虽然更可能坚持自己的意见，但在大信息量+解释条件下会启动再思考并改善绩效；大信息量纯机器组存在对女性借款人的偏好（EOR 1.201），而加入人类评估员并给予解释后EOR降至1.056，接近性别公平
+
+- argumentative_role_cn：将核心机制与个体差异和公平问题结合，扩展结果的外部有效性，并回应管理意义中的偏见问题
+
+- remaining_uncertainty_cn：这些发现是否可推广到其他环境？
+
+- link_to_next_phase_cn：讨论部分总结条件与推广性，限制与未来研究
+
+##### evidence_pointers
+
+1. Section 6.1, Table 8
+
+2. Section 6.2, Figure 6
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 现象背景：指出人机协作普及和数据爆炸与算法黑箱带来的问题
+
+2. 文献缺口：现有机器解释研究结论不一致，缺乏对影响因素的了解
+
+3. 研究目标：以双加工理论为基础，研究信息复杂度和机器解释的联合作用
+
+4. 方法承诺：两阶段现场实验
+
+5. 主要结果：只有在信息量大且提供机器解释时，人类参与才降低违约率
+
+6. 机制发现：揭示人类主动重新思考、关联新特征、缩小性别差距
+
+7. 贡献声明：理论与实践意义
+
+### introduction_moves
+
+1. 背景1：AI商业化与人机协作普遍性
+
+2. 现象：现实中人机可以互补，但实际协作常因不信任或过度依赖而低于预期
+
+3. 缺口：现有研究多以实验室或模拟为主，且忽略条件和机制；机器解释文献结论不一致
+
+4. 理论引入：任务复杂性（信息复杂度）与有用线索（机器解释）同时作用才能激发深度思考
+
+5. 方法必要性论证：实验室环境局限，需要现场实验
+
+6. 研究问题三个
+
+7. 实验背景与方法概述
+
+8. 主要经验结果
+
+9. 机制预览
+
+10. 异质性与偏见结果
+
+11. 贡献三点
+
+### theory_and_knowledge_moves
+
+1. 文献归类：三类相关文献（协作与厌恶、机器解释、微观金融决策）
+
+2. 理论阐述：双加工理论—系统1/系统2
+
+3. 条件1提出：信息复杂度引发注意和参与
+
+4. 条件2提出：有用线索推动积极认知推理
+
+5. 概念定义：rethinking定义为对已做决策的审查与反思
+
+6. 将理论映射到设计：信息量大和使用SHAP解释
+
+7. 假设陈述：两条件同时满足才可能实现协作增益
+
+### artifact_design_moves
+
+1. 实验背景描述：公司、贷款流程、审批率、特征
+
+2. 处理I：信息复杂度的小/大操作（12个基础特征 vs 新增64个特征）
+
+3. 数据处理：训练集、违约定义、周期
+
+4. 机器模型与解释：模型比较、XGBoost、SHAP
+
+5. St阶段设计：四个实验组（2*2）
+
+6. Stage 2设计：两步决策，人类先独立决策后看机器建议/解释并最终决策
+
+7. 实验材料：SHAP解释显示特征重要性和特征值比较
+
+8. 样本与随机化：贷款数、剔除重复、随机化检查
+
+### evaluation_moves
+
+1. 默认率为主要因变量
+
+2. 组间比较（t检验）
+
+3. 利润增益分析
+
+4. 决策一致性分析
+
+5. 跟随率分析
+
+6. 机制检验中的probit和交互项
+
+7. 特征分布可视化
+
+8. 特征关联分析
+
+9. 异质性分析
+
+10. EOR公平指标
+
+11. 在线附录稳健性检验
+
+### discussion_and_contribution_moves
+
+1. 总结：两个条件同时需要的理论意义
+
+2. 讨论第一条件不可缺：信息量大但不能引发重新思考时，人类坚持旧有规则反而有害
+
+3. 讨论第二条件单独无用：机器解释在信息不足时不能帮助人类超越机器
+
+4. 理论推广：双加工理论从独立决策推广到机器辅助决策
+
+5. 管理启示：投资权衡、数据收集、人才培训、偏见修正
+
+6. 推广条件：任务复杂性适中、存在获取额外信息的可能、算法性能稳定
+
+7. 局限：静态设计、二元信息量、短期实验、文化行业差异
+
+8. 明确声明：无法单独评估AI身份（机器 vs 资深人类），但论述机器优于人类稳定性和可解释性
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 双加工推理理论（Dual-Process Theories of Reasoning, Evans 2003; Kahneman 2011）
+
+2. 系统1/系统2决策机制
+
+3. 信息复杂度与注意力（Levin et al. 2000; Amit & Sagiv 2013; Endsley 1995）
+
+4. 有用参考线索与认知推理（Mantel & Kardes 1999; Chernev 2003; Weiss 1982）
+
+5. SHAP / Shapley value（Roth 1988）
+
+6. 机器学习模型预测性能
+
+7. 微观金融投资者决策与偏见研究
+
+8. 算法公平性（Equalized Opportunity, Teodorescu et al. 2021）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：论文的核心实验处理——信息复杂度（信息量大小）和机器解释（SHAP解释）——直接由双加工理论中的两个条件推导而来，理论明确说明了每个条件如何激活系统2深度思考；实验设计将理论中的‘条件’转化为实验操纵，并直接检验这两条件的因果效果。理论到设计的映射是显性且前瞻性的。
+
+- 理论到设计翻译链：双加工理论：系统2需要任务复杂性吸引注意和有用线索驱动推理 → 设计要求1：提供大信息量以增加任务复杂性；设计要求2：提供机器解释（特征重要性及特征值对比）作为有用线索 → 具体实现：实验组在原有12个特征上增加32个购物特征和32个手机/轨迹特征；机器解释用SHAP值展示前若干重要特征，并附特征均值对比 → 被检验的设计差异：信息量小/大、有无解释、有无机器建议的四组方案 → 客观结果：只有在信息量大且有解释的组中，人类参与显著降低了违约率，且机制分析显示人类使用了新特征（ATV购物虚拟）并改善决策质量。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：系统2需要处理复杂任务，信息复杂度吸引注意力并增强任务参与
+
+- mechanism_cn：人类面对大量、多样、不熟悉的信息，更倾向投入更多认知努力进行推理
+
+- design_requirement_cn：实验应提供大信息量（丰富信息）以增加任务复杂性
+
+- artifact_choice_cn：在小信息量（12个基础特征）之外，从电子商务和通信运营商收集附加数据，提取64个新特征
+
+- evaluated_contrast_cn：比较小信息量组（1/3/5/6）与大信息量组（2/4/7/8）
+
+- objective_result_cn：单靠大信息量不能提升人类绩效，反而拉大人机差距；只有在同时提供机器解释时才有增益
+
+##### evidence_pointers
+
+1. Section 3.2.1
+
+2. Figure 3
+
+3. Table 2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：有用的参考线索能够促使个体仔细重新评估决策，并主动认知推理
+
+- mechanism_cn：机器建议+解释作为参考点，促使人类对不一致决策进行重新思考，而非直接跟随或忽略
+
+- design_requirement_cn：实验应提供清晰、可比较的机器解释，展示机器决策依据
+
+- artifact_choice_cn：使用SHAP值提供特征重要性和特征值对比（borrower值 vs 非违约者均值）
+
+- evaluated_contrast_cn：比较有解释组（6/8）与无解释组（5/7）
+
+- objective_result_cn：单独提供解释在小信息量下无效果；在大信息量下解释显著提升跟随率并降低违约率
+
+##### evidence_pointers
+
+1. Section 3.2.2
+
+2. Section 4
+
+3. Table 2 比较E/F/J
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：当机器解释中的特征不直观或不熟悉时，人类会将其视为非信息性，并寻找关联特征
+
+- mechanism_cn：人类将机器解释中的非熟悉特征（游戏卡消费）与熟悉的虚拟物品消费等关联
+
+- design_requirement_cn：机器解释使得机器决策过程有迹可循，才能触发人类联想
+
+- artifact_choice_cn：SHAP解释展示特征重要性，使人类能识别机器使用的特征，并刺激其对新特征的注意
+
+- evaluated_contrast_cn：组8中人类使用ATV购物虚拟（在独立决策中不用）
+
+- objective_result_cn：人类通过使用ATV购物虚拟修正了机器对女性借款人的信贷评估，减少性别偏见和违约率
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Section 6.2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机现场实验（两阶段）
+
+2. 组间均值比较t检验（多重假设校正）
+
+3. 决策一致性分析
+
+4. 跟随率分析
+
+5. probit回归与交互项
+
+6. 特征分布可视化
+
+7. 利润增益分析（在线附录）
+
+8. 异质性分析（工作经验）
+
+9. 公平性分析（EOR）
+
+10. 在线附录稳健性检验（不同样本、决策树、替代DV）
+
+- why_these_evaluations_cn：核心问题是“两个条件是否同时必要”，因此必须直接比较不同组合下的绩效：小信息量/大信息量 × 无解释/有解释，并通过t检验检验差异显著性。接着，为了解释为什么会有差异，需要打开人类决策黑箱，通过probit交互项分析人类特征权重是否变化，通过一致性/跟随率分析人类对机器的态度，通过特征分布和关联分析检验具体的重新思考过程。最后，为了确认改善不是源自简单跟随机器，而是人类增加的独特价值，补充利润分析和EOR公平性分析，并开展异质性检验以增加因果解释的可信度。
+
+- benchmark_and_contrast_chain_cn：首先以纯人类决策（组1/2）和纯机器决策（组3/4）作为基线；然后在协作条件下对比有无机器解释（组5 vs 6，组7 vs 8）。再把协作结果与机器单独结果对比（组3 vs 5/6，组4 vs 7/8），检验人类增量贡献。在机制部分，通过人类初始决策 vs 机器建议的一致性、初始决策 vs 最终决策的变化、以及有解释 vs 无解释时特征权重变化的差异，逐步建立“重新思考”这一机制的证据链。
+
+### claim_evidence_ledger
+
+#### 1. 在大信息量时机器表现优于人类，且差距更大
+
+- claim_cn：在大信息量时机器表现优于人类，且差距更大
+
+- evidence_cn：Table 2比较B和D：默认率差异显著
+
+##### evidence_pointers
+
+1. Table 2，比较B、D
+
+#### 2. 单独信息复杂度或单独机器解释均不能带来协作增益
+
+- claim_cn：单独信息复杂度或单独机器解释均不能带来协作增益
+
+- evidence_cn：比较I（组4 vs 组7）不显著；比较G、H（组3 vs 组5/6）不显著
+
+##### evidence_pointers
+
+1. Table 2，比较G、H、I
+
+#### 3. 信息复杂度和机器解释同时存在时，人类参与显著降低违约率
+
+- claim_cn：信息复杂度和机器解释同时存在时，人类参与显著降低违约率
+
+- evidence_cn：组8 vs 组4：差异2.02%，p=0.0071；组8也优于组7
+
+##### evidence_pointers
+
+1. Table 2，比较J
+
+#### 4. 人类在大信息量下倾向于使用传统特征，机器使用新特征
+
+- claim_cn：人类在大信息量下倾向于使用传统特征，机器使用新特征
+
+- evidence_cn：Tables 3和4 interaction项：大信息量下人类仅使用#Outgoing contacts一项新特征，机器使用游戏卡、轨迹等
+
+##### evidence_pointers
+
+1. Section 5.1, Tables 3–4
+
+#### 5. 有效协作时，人类会改变决策规则并使用新特征
+
+- claim_cn：有效协作时，人类会改变决策规则并使用新特征
+
+- evidence_cn：Table 7中Models 3–4：组8中ATV shopping virtual和Gender交互项显著，而组7无
+
+##### evidence_pointers
+
+1. Section 5.2, Table 7
+
+#### 6. 人类通过关联非熟悉特征与新特征实现重新思考
+
+- claim_cn：人类通过关联非熟悉特征与新特征实现重新思考
+
+- evidence_cn：特征分布图：游戏卡消费中位数为零而ATV shopping virtual中位数8.70；在线C.4显示人类用新特征选择好贷款
+
+##### evidence_pointers
+
+1. Section 5.3, 图A.1, Online C.4
+
+#### 7. 有经验的评估员在大信息量和解释下更可能启动重新思考
+
+- claim_cn：有经验的评估员在大信息量和解释下更可能启动重新思考
+
+- evidence_cn：Table 8三向交互：L×Expl×Work=3/4在IfDefault回归中显著为负
+
+##### evidence_pointers
+
+1. Section 6.1, Table 8
+
+#### 8. 人机协作缩小了机器产生的性别偏差
+
+- claim_cn：人机协作缩小了机器产生的性别偏差
+
+- evidence_cn：EOR：机器大信息量组为1.201，加入人类并解释后降至1.056
+
+##### evidence_pointers
+
+1. Section 6.2, Figure 6
+
+- internal_validity_strategy_cn：随机分配借贷申请到实验组并检验协变量平衡；两阶段实验控制时间和学习效应；固定审批率保持47%；使用训练样本仅用于训练而不更新；对多个处理组采用多重假设校正的t检验；在在线附录中进行多种稳健性检验（如不同样本、决策树方法、替代因变量）。
+
+- external_validity_strategy_cn：真实小额信贷平台，真实借款人和真实还款表现；在讨论中明确边界条件（任务复杂度不过高、可获取额外信息、算法稳定、解释清晰等）；强调人类评估员对AI知识有限，符合许多真实组织场景；用两阶段设计与单阶段设计进行对比讨论。
+
+- what_is_not_actually_tested_cn：没有直接测量人类的认知过程（如眼动或神经指标），而是通过特征选择的变化推断‘重新思考’；没有操纵AI身份（机器解释 vs 资深人类建议），因此不能完全分离AI身份的影响；只检验了二进制大/小信息量，没有连续变化；实验只有两周，没有检验长期学习和动态演变。
+
+## 贡献闭环
+
+- technical_claim_cn：提出并验证了一种现场实验下的理论驱动的机器解释设计（SHAP特征重要性和值对比），能够实现人类增量贡献。
+
+- artifact_claim_cn：具体设计组成部分（信息复杂度+机器解释）导致协作绩效改进，且机制分析显示人类使用新特征。
+
+- mechanism_claim_cn：人机协作增益源于人类主动的重新思考（rethinking）过程，人类将机器解释中的非熟悉特征关联到其他特征，从而纠正机器错误。
+
+- boundary_claim_cn：只有当信息复杂度足够（大信息量）且存在机器解释时，人类贡献才显现；若任一条件缺失，协作增益消失；此外，该增益依赖于人类的责任意识、算法质量、信息价值、解释清晰度等因素。
+
+- reusable_design_knowledge_cn：设计人与AI协作系统时，应同时考虑任务的信息复杂度（让人类觉得需要认真思考）和提供足够清晰、可比较的机器解释；仅提供解释而不确保任务复杂度可能无效；需对机器解释进行适当展示以支持人类关联和推理。
+
+- theoretical_contribution_cn：将双加工理论拓展到人机协作情境，提出并实证了机器解释与信息复杂度共同作用触发人类系统2加工的条件；为解释先前机器解释文献不一致提供了条件性原因。
+
+- how_discussion_closes_intro_gap_cn：讨论部分重新回到引言提出的现实问题（算法厌恶/过度依赖、机器解释效果不一致），通过解释“两个条件缺一不可”来回应最初提出的矛盾：为什么机器解释有时有效有时无效。同时，将结果与双重过程理论连接，强化了该理论的适用性，明确说明“只有同时满足两个条件才能实现1+1>2”。
+
+- overclaim_or_unsupported_leaps_cn：部分措辞超出证据：如“人类能自动将新特征与其他特征关联”这一机制主要是基于事后特征分析和分布推断，而非直接观察；(但具有合理性)经验分析部分利用三向交互，样本量较小(尤其分组后)；将“重新思考”推断为主动过程，缺乏过程性证据；将机器解释效果推广到任何解释方法时，作者承认“依赖于清晰信号”，但本文只检验了SHAP一种方法。
+
+## 句级写作动作图谱
+
+### 1. P1 S1–S2
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1–S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI商业化和渗透使人类频繁与机器协作，既作为员工也作为消费者
+
+- rhetorical_function_cn：确立研究的宏观背景和时代性
+
+- depends_on_cn：无
+
+- sets_up_cn：为后文提出人机协作的挑战作铺垫
+
+- evidence_pointer：Introduction P1
+
+### 2. P1 S3–S6
+
+- order：2
+
+- section：Introduction
+
+- locator：P1 S3–S6
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：人类和机器在决策中各有优势，机器准确性高，人类擅长低频和灵活处理，人的深度思考有助于提高团队绩效
+
+- rhetorical_function_cn：描述人机互补性的经验现象，说明协作的潜在价值
+
+- depends_on_cn：AI时代背景
+
+- sets_up_cn：引出为何要研究如何让人机互补成为现实
+
+- evidence_pointer：Introduction P1
+
+### 3. P2 S1–S3
+
+- order：3
+
+- section：Introduction
+
+- locator：P2 S1–S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：现实中因信息不透明、算法复杂和人员缺乏经验，协作常因人类不信任或过度依赖而达不到预期，甚至由于人类过于谨慎或细节控而降低绩效
+
+- rhetorical_function_cn：说明人机协作效果不佳的现实后果，强调研究的实践重要性
+
+- depends_on_cn：前景描述的协作潜力
+
+- sets_up_cn：引出需要通过设计来改变人类态度（厌恶或依赖）
+
+- evidence_pointer：Introduction P2
+
+### 4. P3 S1–S3
+
+- order：4
+
+- section：Introduction
+
+- locator：P3 S1–S3
+
+- move_code：GAP
+
+- paraphrase_cn：学者开始用机器学习解释来解决人类对机器的排斥，但既有研究偏重技术解决方案，缺乏对条件和机制的全面检验，且机器解释并非在所有场景有效
+
+- rhetorical_function_cn：构造文献缺口：技术方案多但条件与机制未知
+
+- depends_on_cn：前文现实困境已经提出
+
+- sets_up_cn：为本文强调任务复杂性和机制的必要性埋下伏笔
+
+- evidence_pointer：Introduction P3
+
+### 5. P4 S1–S3
+
+- order：5
+
+- section：Introduction
+
+- locator：P4 S1–S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：强调任务复杂性尤其是信息复杂度，以及机器解释应该共同促进人类深思，从而让协作有效
+
+- rhetorical_function_cn：引入双加工理论的关键变量组合
+
+- depends_on_cn：缺口构造（条件需要被检验）
+
+- sets_up_cn：为后文用理论推导两个设计条件做铺垫
+
+- evidence_pointer：Introduction P4
+
+### 6. P5 S1–S3
+
+- order：6
+
+- section：Introduction
+
+- locator：P5 S1–S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：指出已有研究多采用实验室或模拟实验，存在参与者表现失真问题，因此需要现场实验
+
+- rhetorical_function_cn：论证为何选择现场实验方法
+
+- depends_on_cn：研究问题的性质（需要真实行为）
+
+- sets_up_cn：交代本文研究策略
+
+- evidence_pointer：Introduction P5
+
+### 7. P6 S1–S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P6 S1–S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出三个研究问题：不同信息复杂度和系统设计下协作的绩效，潜在机制，以及人类特征如何影响协作绩效
+
+- rhetorical_function_cn：明确研究问题清单，作为全文结构指引
+
+- depends_on_cn：前面识别的问题缺口
+
+- sets_up_cn：主导后续实验设计和分析部分
+
+- evidence_pointer：Introduction P6
+
+### 8. P7 S1–S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P7 S1–S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：介绍合作的小额贷款公司和两阶段现场实验，以及基于双加工理论设计的三个实验操纵（信息量、是否给机器建议、是否给解释）
+
+- rhetorical_function_cn：预告研究设计和理论来源
+
+- depends_on_cn：三个研究问题
+
+- sets_up_cn：为实验细节部分提供概要
+
+- evidence_pointer：Introduction P7
+
+### 9. P8 S1–S4
+
+- order：9
+
+- section：Introduction
+
+- locator：P8 S1–S4
+
+- move_code：RESULT
+
+- paraphrase_cn：报告三个经验发现：小信息量下人类无增量；只有大信息量和机器解释同时存在时才降低违约率2.02%；不一致率随信息量增大而上升
+
+- rhetorical_function_cn：在摘要之后再次集中呈现核心结果，形成初步冲击
+
+- depends_on_cn：实验设计（P7）
+
+- sets_up_cn：为机制分析做铺垫
+
+- evidence_pointer：Introduction P8
+
+### 10. P9 S1–S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P9 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：介绍三步机制：人类依赖传统特征、机器使用新特征；在解释和大信息量下人类主动重审不一致决策；人类将机器解释与其它特征关联
+
+- rhetorical_function_cn：预览机制框架，呼应三个研究问题中的机制问题
+
+- depends_on_cn：核心结果已经呈现
+
+- sets_up_cn：使读者明白结果的背后不是简单跟随
+
+- evidence_pointer：Introduction P9
+
+### 11. P10 S1–S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P10 S1–S3
+
+- move_code：RESULT
+
+- paraphrase_cn：报告经验丰富的评估员对机器建议的更少跟随但更多重新思考，以及协作能缩小机器产生的性别违约率差距
+
+- rhetorical_function_cn：增加结果边界和实际意义
+
+- depends_on_cn：机制分析
+
+- sets_up_cn：为贡献部分提供更广的论据
+
+- evidence_pointer：Introduction P10
+
+### 12. P11
+
+- order：12
+
+- section：Introduction
+
+- locator：P11
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：概括三点贡献：揭示人类重新思考存在的价值和机制；提出并验证机器解释效果取决于其他条件；识别并弥补机器偏见
+
+- rhetorical_function_cn：将全文贡献明示，直接回应前文缺口
+
+- depends_on_cn：全部结果和机制分析
+
+- sets_up_cn：确立文章在文献中的位置
+
+- evidence_pointer：Introduction P11
+
+### 13. 2.1 P1–P3
+
+- order：13
+
+- section：Related Studies
+
+- locator：2.1 P1–P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：概述人机协作文献：机器在统计判断上通常优于人类，但人类擅长稀有和不确定性案例；人机协作有优势，但也存在算法厌恶和过度依赖
+
+- rhetorical_function_cn：构建第一段文献基础，说明互补性和障碍
+
+- depends_on_cn：引言中的背景
+
+- sets_up_cn：为引入机器解释作为解决障碍的方法做铺垫
+
+- evidence_pointer：Section 2.1
+
+### 14. 2.2 P1–P2
+
+- order：14
+
+- section：Related Studies
+
+- locator：2.2 P1–P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：介绍机器解释文献：解释可增强信任和绩效，但不可解释或解释不直观可能无效，且事后解释可能带有偏差
+
+- rhetorical_function_cn：构建机器解释的文献基础，并指出其局限
+
+- depends_on_cn：前文提出算法厌恶问题
+
+- sets_up_cn：为后文强调条件性提供依据
+
+- evidence_pointer：Section 2.2
+
+### 15. 2.2 P3–P5
+
+- order：15
+
+- section：Related Studies
+
+- locator：2.2 P3–P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：特别比较了最相似的Bauer等(2023)研究，指出其仅考察固定特征集且采用在线实验室实验，本文则引入信息复杂度并采用现场实验
+
+- rhetorical_function_cn：通过直接对比最相关工作来界定本文的增量贡献
+
+- depends_on_cn：机器解释文献的局限
+
+- sets_up_cn：为后文理论与实验设计做差异化
+
+- evidence_pointer：Section 2.2
+
+### 16. 2.3 P1–P2
+
+- order：16
+
+- section：Related Studies
+
+- locator：2.3 P1–P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：介绍微观金融投资者决策文献：关注投资者考虑的因素、偏见，以及机器人顾问的使用与调整
+
+- rhetorical_function_cn：建立研究领域的经验背景，说明为什么选择小额贷款作为实证场景
+
+- depends_on_cn：无
+
+- sets_up_cn：将理论应用到微观金融决策中
+
+- evidence_pointer：Section 2.3
+
+### 17. 2.4 P1
+
+- order：17
+
+- section：Related Studies
+
+- locator：2.4 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入双加工理论核心：系统1快速自动，系统2缓慢深思熟虑
+
+- rhetorical_function_cn：提出理论框架核心概念
+
+- depends_on_cn：前文的文献基础
+
+- sets_up_cn：为两个条件提供理论解释
+
+- evidence_pointer：Section 2.4 P1
+
+### 18. 2.4 P2–P4
+
+- order：18
+
+- section：Related Studies
+
+- locator：2.4 P2–P4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：提出两个条件：任务复杂度（信息复杂度）吸引注意和参与；有用线索驱动系统2加工
+
+- rhetorical_function_cn：从理论中提取可测试的设计原则
+
+- depends_on_cn：系统2概念
+
+- sets_up_cn：为后文实验处理提供理论基础
+
+- evidence_pointer：Section 2.4 P2–P4
+
+### 19. 2.4 P5
+
+- order：19
+
+- section：Related Studies
+
+- locator：2.4 P5
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：将理论映射到实验设计：提供丰富信息对应信息复杂度，提供机器解释对应有用线索，并定义重新思考过程
+
+- rhetorical_function_cn：完成理论到设计的翻译
+
+- depends_on_cn：两个条件的理论阐述
+
+- sets_up_cn：建立实验操纵的合法性
+
+- evidence_pointer：Section 2.4 P5
+
+### 20. 3.1 P1–P4
+
+- order：20
+
+- section：Experimentation
+
+- locator：3.1 P1–P4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述合作的小额贷款公司背景：成立于2011年，服务25万借款人，无抵押小额贷款，年利率12%-16%，审批流程完全由人工评估员完成
+
+- rhetorical_function_cn：设定研究现场，说明贷款审批和绩效指标的天然性
+
+- depends_on_cn：前述理论需要真实平台
+
+- sets_up_cn：为实验操纵提供平台基础
+
+- evidence_pointer：Section 3.1
+
+### 21. 3.2.1 P1–P2
+
+- order：21
+
+- section：Experimentation
+
+- locator：3.2.1 P1–P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：描述处理I：小信息量（原有12个变量），大信息量（新增32个购物特征和32个手机/轨迹特征）
+
+- rhetorical_function_cn：说明信息复杂度操作的具体内容
+
+- depends_on_cn：理论：信息复杂度需要足够的信息量
+
+- sets_up_cn：为后续绩效比较提供明确的处理定义
+
+- evidence_pointer：Section 3.2.1
+
+### 22. 3.2.2 P1–P4
+
+- order：22
+
+- section：Experimentation
+
+- locator：3.2.2 P1–P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：描述机器学习模型训练：用2017年6月训练集，比较多种模型，XGBoost最优；并利用SHAP产生解释
+
+- rhetorical_function_cn：解释机器建议和解释的来源，确保揭示的是机器学习而非简单规则
+
+- depends_on_cn：信息量处理定义
+
+- sets_up_cn：为实验第二阶段提供机器干预工具
+
+- evidence_pointer：Section 3.2.2
+
+### 23. 3.3.1 P1–P3
+
+- order：23
+
+- section：Experimentation
+
+- locator：3.3.1 P1–P3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：介绍stage 1设计：四个组（人类/机器 × 小/大信息量），随机分配，保持47%审批率，跟踪还款表现
+
+- rhetorical_function_cn：描述实验基线阶段
+
+- depends_on_cn：实验平台与模型准备
+
+- sets_up_cn：为stage 2提供对比基线
+
+- evidence_pointer：Section 3.3.1
+
+### 24. 3.3.2 P1–P3
+
+- order：24
+
+- section：Experimentation
+
+- locator：3.3.2 P1–P3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：介绍stage 2设计：四个协作组，先独立决策，后看到机器建议（加或不加解释）再最终决策
+
+- rhetorical_function_cn：展示控制人为干预的步骤
+
+- depends_on_cn：stage 1基线
+
+- sets_up_cn：为后续结果比较定义关键差异
+
+- evidence_pointer：Section 3.3.2
+
+### 25. 3.4 P1–P3
+
+- order：25
+
+- section：Experimentation
+
+- locator：3.4 P1–P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：说明样本最终为23,602笔贷款，报告随机化检查结果（各组间无显著差异）
+
+- rhetorical_function_cn：支持实验随机化和数据可信度
+
+- depends_on_cn：实验设计
+
+- sets_up_cn：为统计比较的可靠性辩护
+
+- evidence_pointer：Section 3.4
+
+### 26. 4 P1–P4
+
+- order：26
+
+- section：Empirical Findings
+
+- locator：4 P1–P4
+
+- move_code：RESULT
+
+- paraphrase_cn：呈现默认率结果：人类独立决策最差，机器大信息量较优，协作组中只有大信息量+解释显著降低违约率（2.02%），并汇报利润增益一致性
+
+- rhetorical_function_cn：给出核心经验事实，回答第一个研究问题
+
+- depends_on_cn：stage 1/2实验数据
+
+- sets_up_cn：为后续机制分析提供待解释的现象
+
+- evidence_pointer：Section 4, Figure 3, Table 2
+
+### 27. 4 P5–P6
+
+- order：27
+
+- section：Empirical Findings
+
+- locator：4 P5–P6
+
+- move_code：RESULT
+
+- paraphrase_cn：分析决策一致性和跟随率：大信息量下不一致比例更高，有解释会显著提高跟随率
+
+- rhetorical_function_cn：展示人对机器建议的行为反应，补充绩效结果
+
+- depends_on_cn：stage 2数据
+
+- sets_up_cn：为决定是否跟随提供描述性证据
+
+- evidence_pointer：Section 4, Figure 4
+
+### 28. 5.1 P1–P4
+
+- order：28
+
+- section：Mechanism Examinations
+
+- locator：5.1 P1–P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用probit模型估计特征重要性的代理，并通过MInd交互项比较人与机决策差异
+
+- rhetorical_function_cn：为机制分析建立实证方法
+
+- depends_on_cn：现有实验数据包含人类和机器决策
+
+- sets_up_cn：为识别人类和机器不同特征依据提供方法
+
+- evidence_pointer：Section 5.1
+
+### 29. 5.1 P5–P7
+
+- order：29
+
+- section：Mechanism Examinations
+
+- locator：5.1 P5–P7
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示小信息量下人与机特征类似；大信息量下人类坚持传统特征，机器采纳新特征，因此机器绩效更优
+
+- rhetorical_function_cn：解释机器为何优于人类，并暗示人类可能因固定规则而错过信息
+
+- depends_on_cn：probit估计
+
+- sets_up_cn：为后文讨论人类在何种条件下能补救奠定基础
+
+- evidence_pointer：Section 5.1, Tables 3–4
+
+### 30. 5.2 P1–P2
+
+- order：30
+
+- section：Mechanism Examinations
+
+- locator：5.2 P1–P2
+
+- move_code：TRANSITION
+
+- paraphrase_cn：从独立决策转向协作决策，研究人类为何不一致以及为何跟随
+
+- rhetorical_function_cn：衔接机制分析第二步与第一步
+
+- depends_on_cn：人类-机器差异已建立
+
+- sets_up_cn：为探讨人类在协作中的决策改变做准备
+
+- evidence_pointer：Section 5.2
+
+### 31. 5.2 P3–P5
+
+- order：31
+
+- section：Mechanism Examinations
+
+- locator：5.2 P3–P5
+
+- move_code：RESULT
+
+- paraphrase_cn：无解释或小信息量下人类改变决策仍基于传统特征；大信息量+解释时，人类开始使用新特征（如ATV购物虚拟）来解释最终决策
+
+- rhetorical_function_cn：表明只有在双条件满足时人类决策规则会发生变化，体现主动思考
+
+- depends_on_cn：probit回归结果
+
+- sets_up_cn：为第三步分解重新思考过程提供线索
+
+- evidence_pointer：Section 5.2, Tables 6–7
+
+### 32. 5.2 P6–P7
+
+- order：32
+
+- section：Mechanism Examinations
+
+- locator：5.2 P6–P7
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：提出人类与机器不一致的两种可能：边界情况缺乏信心而跟随，或特征评估差异而坚持己见
+
+- rhetorical_function_cn：建立解释人类跟随行为的竞争机制，并通过数据检验
+
+- depends_on_cn：人类和机器决策差异的实证
+
+- sets_up_cn：为图5的分组分布证据提供理论预期
+
+- evidence_pointer：Section 5.2
+
+### 33. 5.3 P1–P2
+
+- order：33
+
+- section：Mechanism Examinations
+
+- locator：5.3 P1–P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：解释人类如何将机器解释中的非熟悉特征（游戏卡）与熟悉相关特征（虚拟商品消费）关联起来，从而进行重新思考
+
+- rhetorical_function_cn：打开人类认知黑箱，给出具体联想路径
+
+- depends_on_cn：组8特征显著性证据
+
+- sets_up_cn：为性别偏见和人类价值提供机制基础
+
+- evidence_pointer：Section 5.3
+
+### 34. 5.3 P3–P4
+
+- order：34
+
+- section：Mechanism Examinations
+
+- locator：5.3 P3–P4
+
+- move_code：RESULT
+
+- paraphrase_cn：通过对比组7和组8的贷后表现，证明人类使用新特征后能正确选择机器拒绝的好贷款，而人类坚持旧规则则无改善
+
+- rhetorical_function_cn：将机制与最终绩效直接挂钩，确保机制不仅能解释行为，也导向绩效提升
+
+- depends_on_cn：在线附录C.4
+
+- sets_up_cn：为结论部分‘1+1>2’提供最终经验支柱
+
+- evidence_pointer：Section 5.3, Online Appendix C.4
+
+### 35. 6.1 P1–P4
+
+- order：35
+
+- section：Empirical Extensions
+
+- locator：6.1 P1–P4
+
+- move_code：RESULT
+
+- paraphrase_cn：经验异质性分析结果显示，资深评估员在大信息量下独立决策成绩较差，但在大信息量+解释条件下更可能启动重新思考并降低违约风险
+
+- rhetorical_function_cn：补充边界条件：谁更容易从协作中获益，以及经验的作用机制
+
+- depends_on_cn：Table 8三向交互结果
+
+- sets_up_cn：为管理建议提供依据
+
+- evidence_pointer：Section 6.1, Table 8
+
+### 36. 6.2 P1–P4
+
+- order：36
+
+- section：Empirical Extensions
+
+- locator：6.2 P1–P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：通过EOR分析，机器在大信息量下产生性别偏见，而人类协作（尤其有解释时）能显著降低该偏见
+
+- rhetorical_function_cn：展示人机协作在公平性层面的额外价值，并界定机器偏见的条件
+
+- depends_on_cn：机器使用的特征与性别相关性
+
+- sets_up_cn：为讨论中的实际应用和公平意义服务
+
+- evidence_pointer：Section 6.2, Figure 6
+
+### 37. 7.1 P1–P2
+
+- order：37
+
+- section：Conclusions and Discussion
+
+- locator：7.1 P1–P2
+
+- move_code：THEORY_RETURN
+
+- paraphrase_cn：回顾双加工理论的两个条件，强调单独任何一个都不够，只有同时满足才能实现主动重新思考和协作增益
+
+- rhetorical_function_cn：将实证结果重新抽象为理论命题，闭合理论-实验循环
+
+- depends_on_cn：所有实证和机制结果
+
+- sets_up_cn：为贡献和推广性讨论定调
+
+- evidence_pointer：Section 7.1
+
+### 38. 7.2 P1–P3
+
+- order：38
+
+- section：Conclusions and Discussion
+
+- locator：7.2 P1–P3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：提供管理建议：公司应权衡数据投资、AI技术和人力成本；仅小数据时机器独立可能足够，大数据和解释下协作才能最大化绩效与公平
+
+- rhetorical_function_cn：将研究发现转化为实践启示，增强文章的应用价值
+
+- depends_on_cn：核心结果和异质性/公平性结果
+
+- sets_up_cn：为推广性部分铺路
+
+- evidence_pointer：Section 7.2
+
+### 39. 7.3 P1–P3
+
+- order：39
+
+- section：Conclusions and Discussion
+
+- locator：7.3 P1–P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：讨论结果可推广到任务适中、可获取额外信息、算法稳定、解释清晰的条件，并提醒若这些条件不满足则可能不适用
+
+- rhetorical_function_cn：界定外部效度，防止过度泛化
+
+- depends_on_cn：核心机制和实验结果
+
+- sets_up_cn：为局限部分提供自然过渡
+
+- evidence_pointer：Section 7.3
+
+### 40. 7.3 P4–P5
+
+- order：40
+
+- section：Conclusions and Discussion
+
+- locator：7.3 P4–P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：承认无法分离AI身份（机器建议 vs 资深人类建议），但论述机器的稳定性、可提取性优势，并讨论两阶段设计对结果的影响
+
+- rhetorical_function_cn：明确研究边界，展示方法论反思，减少审稿人对其内部有效性质疑
+
+- depends_on_cn：实验设计
+
+- sets_up_cn：为局限与未来研究部分提供具体条目
+
+- evidence_pointer：Section 7.3
+
+### 41. 7.4 P1–P5
+
+- order：41
+
+- section：Conclusions and Discussion
+
+- locator：7.4 P1–P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：指出静态实验、二值信息量、短期设计、文化差异等局限，并建议未来研究探索学习行为、连续复杂度、长期追踪和跨文化验证
+
+- rhetorical_function_cn：总结文章限制并提供未来研究方向，加强学术诚信和未来可扩展性
+
+- depends_on_cn：全文
+
+- sets_up_cn：无后续段落，但为读者提供继续研究线索
+
+- evidence_pointer：Section 7.4
+
+## 写作技术
+
+- gap_construction_cn：通过指出人类与机器协作的实际障碍（不信任/过度依赖）和技术解释文献的结论不一致，制造一个‘条件性和机制不清楚’的缺口；再通过实验方法和最相似研究的局限（实验室、特征有限）进一步提升研究必要性。
+
+- signposting_cn：引言明确列出三个研究问题；每节开头用一句话说明该节目的（例如‘本节旨在解析机制’）；在关键段落多处使用‘First... Second...’与‘Specifically...’等信号词。
+
+- transition_logic_cn：从背景到理论再到实验设计的过渡采用理论驱动：先给出双加工理论的两个条件，再自然转化为实验操纵；从绩效结果过渡到机制分析时，用‘为了理解这些差异，我们进行...’；从机制分析过渡到扩展分析时，用‘为了进一步确认和丰富机制，我们探讨异质性和偏见’。
+
+- claim_evidence_rhythm_cn：频繁使用‘我们的结果揭示/表明’等主张句，紧跟着给出表格和统计显著性；对关键主张（如核心交互效应）同时展示默认率、p值、幅度和增益金额；对于机制主张，则通过回归系数的显著性逐步支持。
+
+- benchmark_narrative_cn：将机器独立决策（组3/4）和人类独立决策（组1/2）作为自然基线，在协作条件下逐一与其比较，从而将‘人类增量贡献’定义为超过机器的绩效；另外将无解释协作作为第二种对照，隔离解释的作用。
+
+- theory_return_cn：在讨论的开头重新引入双加工理论的两个条件，将实证结果概括为‘两个条件缺一不可’，并明确声称将双加工理论推广到人机协作情境；机制部分使用‘重新思考’概念，将人类联想行为重新归入理论框架。
+
+- contribution_positioning_cn：在引言结尾和讨论中，将贡献分别与三条文献流（人机协作、机器解释、算法偏见）挂钩，指出每个文献流中的具体缺失（纯粹结果、结论不一致、忽视条件），然后声明自己的研究填补了这些空白。
+
+- novelty_protection_cn：通过强调现场实验、真实借贷决策、大规模信息、双条件联合检验、详细机制分解和公平性扩展，使结果不至于被看作简单的‘增加一种解释方式’或仅是小改进；讨论中主动承认未分离AI身份和条件限制，但仍用多个证据链来支持核心现象。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：识别现实问题与文献缺口：描述AI协作中的实际失败（厌恶/依赖），指出现有解释研究局限
+
+- research_job_cn：梳理人机协作、机器解释、目标领域决策文献，提炼出未解决的条件和机制问题
+
+- required_evidence_cn：有代表性的引用显示该领域缺乏条件性和机制理解，尤其有实验室/模拟研究的脆弱性
+
+- transition_to_next_cn：用理论框架回答‘什么条件才能实现人类贡献’
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：提出理论框架：用双过程理论或类似认知理论推导两个条件，并翻译成实验/设计变量
+
+- research_job_cn：明确理论假设：条件A（复杂性）和条件B（有用线索）联合触发目标认知过程
+
+- required_evidence_cn：理论文献支持每个条件与目标认知过程关联，并给出操作性定义
+
+- transition_to_next_cn：进入实验设计，说明平台与操纵方法
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：设计并实施现场实验：描述实验背景、处理、随机化、样本、数据收集和基线条目
+
+- research_job_cn：在真实任务中随机分配参与者不同处理，收集结果变量（如绩效、过程变量）
+
+- required_evidence_cn：随机性成功，协变量平衡；处理组间可比较，结果变量有明确的操作定义
+
+- transition_to_next_cn：汇报核心结果，强调条件联合的重要性
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：汇报核心绩效结果：用清晰的表格/图比较不同处理组合，使用多重假设校正
+
+- research_job_cn：比较各实验组的主要结果变量，验证理论预测的条件必要性
+
+- required_evidence_cn：关键交互效应显著，方向与理论一致；效应量有意义（如违约率绝对差2%）
+
+- transition_to_next_cn：解释为什么存在这些结果，转入机制分析
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：机制分析：用回归/交互项/过程数据打开决策黑箱，区分行为改变与结果来源
+
+- research_job_cn：识别人类与机器决策特征差异、人类对建议的反应模式、以及可能的新知识运用
+
+- required_evidence_cn：回归系数显著且方向与机制假设一致；最好提供可视化（特征分布）和附加稳健性
+
+- transition_to_next_cn：补充异质性和公平性，强化边界与重要性
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：扩展分析：异质性、公平性、管理启示
+
+- research_job_cn：探索哪些人、什么条件下效果更强，以及是否影响偏差/公平
+
+- required_evidence_cn：交互效应显著，EOR等补充指标有方向性变化
+
+- transition_to_next_cn：总结理论贡献、边界和未来研究
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：讨论与结论：返回理论，明确边界条件，给出管理建议和局限
+
+- research_job_cn：将结果与文献联系，讨论可推广性，识别未解决的问题
+
+- required_evidence_cn：无需新数据，但须基于已报告的证据谨慎概括
+
+- transition_to_next_cn：结束
+
+### most_transferable_moves_cn
+
+1. 使用理论框架将关键构念转化为可操纵实验变量并明确操作性定义
+
+2. 采用先独立决策再协作决策的两阶段实验设计，能分离协作中的人类初始判断与最终判断
+
+3. 使用交互项回归识别决策规则是否随实验条件发生实质变化
+
+4. 通过分组对比默认率、一致率和跟随率来同时刻画行为和结果
+
+5. 在讨论中系统化地给出边界条件，防止过度泛化
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 与小额贷款公司深度合作，需要公司允许新数据收集、实验指派、模型介入、长期还款跟踪
+
+2. 两阶段现场实验需要较长时间和庞大数据规模（23,805笔贷款，训练样本9000+），以及持续五个月的贷后观察
+
+3. 对评估员分成四组并训练七天，需要公司内部组织配合
+
+4. 获取多源附加数据（网购、话单、轨迹）依赖公司数据基础设施和合作关系
+
+5. 机器学习模型（XGBoost、SHAP）和多种验证模型需要计算资源和技术能力
+
+### what_not_to_copy_superficially_cn
+
+1. 不要在没有真实随机分配的情况下直接声称‘因果效应’；随机化检查是前提
+
+2. 不要重复‘两个条件缺一不可’而缺乏交互效应显著的统计证据
+
+3. 不要宣称‘人类主动重新思考’而只测量最终绩效；需用过程变量（如特征权重变化）作为证据
+
+4. 不要忽视机器解释的生成方式（SHAP）与理论条件（有用线索）之间的匹配性
+
+5. 不要在缺少控制组或仅用实验室样本时滥用‘现场实验’标签
+
+- single_best_description_of_the_routine_cn：先用理论推导出两个需共同满足的条件，在真实平台现场实验中操纵两者的组合，再用决策过程数据打开机制并扩展到公平性，最后返回理论强调条件必要性。
+
+## 分析边界
+
+全文以文本形式提供，包含完整正文、表格和部分图说明，但部分在线附录和图表细节仅以引用形式出现，无法精确核对图1/图2/图5等视觉内容及在线附录C/D的完整表格；对机制分析的‘重新思考’判断主要依赖作者对表格和回归结果的叙述，可能存在解读偏差。

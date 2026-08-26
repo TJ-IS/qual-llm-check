@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-08-07T11:22:38.244518+00:00",
+  "raw_decision_lines": 2626,
+  "unique_decisions": 2475,
+  "duplicate_lines_removed": 151,
+  "historical_error_lines": 30,
+  "unresolved_error_sources": [],
+  "raw_backup": "decisions_raw_with_duplicates.jsonl"
+}

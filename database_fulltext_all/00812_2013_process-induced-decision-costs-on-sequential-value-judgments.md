@@ -1,0 +1,275 @@
+---
+otero_id: 812
+otero_key: "YMPB34HE"
+title: "Process-induced decision costs on sequential value judgments"
+authors: "Mei-Chun Wu; Feng-Yang Kuo"
+year: "2013"
+journal: "Decision Support Systems"
+doi: "10.1016/j.dss.2013.03.007"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+Mei-Chun Wu <sup>a</sup>, Feng-Yang Kuo <sup>b,</sup>⁎
+
+<sup>a</sup> Department of Information Management, Nanhua University, No. 55, Sec 1, Nanhua Road, Chiayi 62249, Taiwan
+
+<sup>b</sup> Department of Information Management, National Sun Yat-sen University, No. 70 Lien-Hai Road, Kaohsiung 804, Taiwan
+
+## a r t i c l e i n f o
+
+Article history: Received 10 January 2012 Received in revised form 11 November 2012 Accepted 29 March 2013 Available online 6 April 2013
+
+Keywords: Decision cost Value judgment Effort-as-information Resource availability
+
+## a b s t r a c t
+
+Effort-as-information and resource availability have been proposed to explain why people adhere to previously chosen alternatives in repeated-choice situations. These two theories differ in terms of the resource expenditure involved in subsequent decisions. In this study we investigate the impact of the process-induced decision costs of previous decisions on subsequent decisions. Results reveal the occurrence of a lower consistency rate in the layout change condition, implying that resource availability plays a signi<sup>fi</sup>cant role in sequential decision-making situations. Further, when the layout change impedes <sup>fl</sup>uent processing, initial decisions that require longer reaction times produce greater decision inconsistency. Both consumers and managers should be aware that display changes, commonly observed in the popular use of dynamic web pages in online shopping, are likel to increase processing costs, which potentially impede sound consumer judgments.
+
+© 2013 Elsevier B.V. All rights reserved.
+
+## 1. Introduction
+
+Consumers of electronic commerce (EC) rely on processes provided by EC vendors to collect information and make purchasing decisions. How may these processes in<sup>fl</sup>uence the quality of decision making? As online retail market sales in the United States are forecasted to reach US\$226 billion in 2012 (Forrester Research 2012)<sup>1</sup>, this issue is important as increasing numbers of consumers are shopping online and the processes are becoming ever more sophisticated. For instance, one such process is the dynamic displays that many EC websites employ to improve their interfaces' attractiveness. However, dynamic display may increase the degree of processing dif<sup>fi</sup>culty for consumers who make repeated choices and, subsequently, degrade consumer decisions. This is especially critical since previous research has shown decision makers' affective state, which is subjected to the exploitation of changing displays, may in<sup>fl</sup>uence the effective usage of IT artifacts [9]. Thus, dynamic display change may play an important role in consumer choice.
+
+In repeated choice situations, previous research has shown that consumers' prior choices in<sup>fl</sup>uence their current choice processes and outcomes [7,24,38]. Two theories have been proposed to explain this phenomenon. First, according to the effort-as-information explanation [1,17,19], effort spent on prior decisions is deemed as a source of information for subsequent decisions. In contrast, the resource availability theory [5,22] proposes that after depleting resources in initial decisions, people rely on simple decision heuristics to make subsequent decisions. Although these two explanations produce similar results, the manner of resource expenditure involves different coping strategies in subsequent decisions.
+
+The expending of resources on a previous task has the potential to interfere with the present task's cognitive activities, possibly resulting in biased judgments [40]. However, existing research on consumer behavior usually attempts to <sup>fi</sup>nd signi<sup>fi</sup>cant independent or moderating variables toward that decision. There remains a shortage of empirical research into how the prior decision processes or outcomes in<sup>fl</sup>uence subsequent decision making [14]. A review of literature on repeated choice reveals that past research has not examined the speci<sup>fi</sup>c impact of previous choice on subsequent ones. Furthermore, prior studies have focused mostly on the choice outcomes themselves, ignoring the possible effect of the process (e.g., the amount of effort) of previous choices on subsequent choices.
+
+Hence, the present study aims to investigate which theory, effortas-information or resource availability, better explains the impact of previous decisions by examining how increasing processing costs may alter the tendency of the subsequent decision to accord with the previous decision. To control possible contamination, the increased decision costs are generated by engaging in the processing activities themselves, rather than the costs associated with the information evaluation. Specifically, the process-induced decision costs are manipulated by varying the required resources through dynamically changing the locations of objects seen in the initial judgment. Making such changes increases the magnitude of processing effort, allowing us to test whether the proposed effects of processing dif<sup>fi</sup>culty on the subsequent judgment are magni-<sup>fi</sup>ed. Also examined is the interplay of information re-arrangement and decision costs expended in the preceding judgment in subsequent decision-making behavior.
+
+## 2. Conceptual background
+
+## 2.1. Processing difficulty on decision
+
+Judgments are in<sup>fl</sup>uenced by experiences related to mental effort [33,42]. The notion that mental process may generate affect, in addition to affective reactions generated by processing the (con<sup>fl</sup>ict) information itself [20], has gained increasing attention in consumer behavior research [10,12,18]. The process-induced affect view holds that negative affect can be elicited by a process that requires more deliberate thinking. It has been shown to in<sup>fl</sup>uence the choice of equivalent alternatives. Garbarino and Edell [10] demonstrated that people experienced more negative affect when they exerted more cognitive effort in processing an alternative. If the evaluations of the alternatives were equivalent, then the alternative that had less negative affect associated with it was chosen. Thus, effort adversely affected the choice of alternatives that were more dif<sup>fi</sup>cult to process, reducing the likelihood of a dif<sup>fi</sup>cult alternative being selected.
+
+Similarly, dif<sup>fi</sup>culty due to visual presentations that impede <sup>fl</sup>uent processing can defer consumer choices. In the study by Novemsky et al. [27], subjects were presented with descriptions of two cordless phones and asked to choose the one they preferred, allowing them to defer choice if they had no clear preference. They found more than twice as many participants deferred choice when the font was dif<sup>fi</sup>cult rather than easy to read. In another study by Song and Schwarz [35], participants were provided with a description of an exercise routine, printed in an easy or dif<sup>fi</sup>cult to read font. When the font was easy to read, participants reported greater willingness to make the exercise part of their daily routine. Alternatively, when the recipe was printed in a dif<sup>fi</sup>cult to read font, participants inferred that preparing a Japanese lunch roll would require more effort and skill and, subsequently, were less inclined to prepare that dish at home. Dif<sup>fi</sup>culty relating to information processing was therefore mistaken as being indicative of dif<sup>fi</sup>culty relating to the performing of the described behaviors. These studies shed light on how minor aspects of a display may impact on consumer judgment and choice.
+
+## 2.2. Trade-off vs. dominance decision
+
+A decision involving a trade-off relationship requires more cognitive effort or costs than one involving a dominance relationship. Quick reaction times point to dominance decisions where at least one of the alternatives is more appealing than the others, while slow reaction times point to trade-off decisions where the alternatives are equally attractive. Dominance relationships provide decision makers with an easy way of choosing among alternatives. For example, Klein and Yadav [16] found that participants spent less time on decision making when dominated alternatives were included. In addition, Luce [20] found that in a high trade-off dif<sup>fi</sup>culty condition, decision-makers might choose to defer the decision and avoid trade-off con<sup>fl</sup>icts.
+
+Cognitive resources expended in a previous decision promote higher levels of motivation to maintain resources by adhering to the preceding decision. As noted by Samuelson and Zechkhauser [30], “the larger the past resource investment in a decision, the greater the inclination to continue the commitment in subsequent decisions.” Decision dif<sup>fi</sup>culty increases the magnitude of maintaining one's previous decision [20,30]. In brief, the previous decision process or commitment can in<sup>fl</sup>uence the current decision by repeating the course of action. Due to the fact that a trade-off choice requires more effort than a dominance choice, people are more likely to retain their previous decision in a repeated-choice situation.
+
+## 2.3. Effort-as-information
+
+The effort-as-information perspective suggests that after expending effort, people attempt to preserve the decision outcome associated with previous effort in their subsequent tasks. That is, people have a tendency to use “effort” as a cue for their subsequent evaluations or judgments [11,17]. In Kruger et al.'s study [17], participants evaluated a poem more favorably when they thought that the poet took more time (i.e., 18 h) to write the poem than when they thought the poet took less time (i.e., 4 h). Another study by Godek et al. [11] showed that participants were happier with their choices and were willing to pay more for their chosen options when they exerted more effort in making a choice than when they exerted less effort.
+
+## 2.4. Resource availability
+
+There are three different types of decision-related costs. Cognitive cost has been regarded as a basic cost of decision making by many researchers [4,34]. Emotional cost results from facing emotion-laden choices [20]. Trade-off dif<sup>fi</sup>culty (i.e., multiple goals that cannot be achieved at the same time) can produce negative emotions [20].
+
+Recently, researchers have proposed that choices require the expending of self-regulation resources. Self-regulation is de<sup>fi</sup>ned as “the self exerting control to change its own responses in an attempt to pursue goals and standards” [39, p.2]. Since self-regulation resources are limited [2], performing an act requiring intensive self-regulation can impair performance on a subsequent, apparently unrelated, act of self-control.
+
+Making a choice can lead to depleted self-regulation resources, which then impairs the self's ability to manage cognitive activity [31]. In other words, the process of choosing can lead to the expending of some resources, thereby leaving the executive function less capable of carrying out other activities. In Vohs et al.'s [41] study, participants in the self-regulation-resource-depleted condition were instructed to make a binary choice between varieties of consumer products, such as magazines, colored pens, and t-shirts, while those in the selfregulation-resource-not-depleted condition were instructed to rate products. After the task, the participants were asked to drink as much of an unpleasant-tasting beverage as they could. The results showed that participants making binary choices between several products drank fewer ounces of the unpleasant-tasting beverage than those who merely rated the products. Vohs et al. [41] indicated that there was a hidden cost to choosing, which was different from merely thinking about options.
+
+## 2.5. Effort-as-information versus resource availability
+
+The theory of resource availability emphasizes the availability of limited resources for decisions, while the theory of effort-as-information concerns the resources spent on decisions. For repeated choices, the distinct perspectives produce varied impacts of previous decisions on subsequent decisions. The resource availability theory assumes a limited resource for decision making [3]. Resources are depleted after dif<sup>fi</sup>cult decisions and, subsequently, performance on succeeding decisions is impaired until resources can be replenished. In contrast, effortas-information relies on previous effort spending as a source of information for decisions. Effort-as-information predicts a higher tendency to retain a previously chosen alternative after a dif<sup>fi</sup>cult decision. In addition, based on the principle of gradual adaptation [36], people tend to uphold their previous effort spending in a gradual way. This tendency will not decrease within a short time interval between two consecutive decisions.
+
+## 3. Research hypotheses
+
+In this study, we attempted to investigate when consumers were exposed to two alternatives, how their value judgments were in<sup>fl</sup>uenced by process-induced decision costs. An alternative's overall value was a combination of the value of its component objects. Respondents were required to compare two alternatives and to choose the one with a higher value in a two-stage value judgment task (see Fig. 1). Speci<sup>fi</sup>cally, based on half of the component objects, the <sup>fi</sup>rst comparative judgment was made between two alternatives, followed by a second comparative judgment on all component objects. To provide evidence for our evaluation of effort-as-information versus resource availability, we manipulated additional resource consumption between the <sup>fi</sup>rst and the second value judgments to clarify under what kind of situations increasing processing costs may interfere with sequential decision making. Particularly, prior to the second value judgment, the component objects of the <sup>fi</sup>rst value judgment were rearranged either within the same alternative (within-swap) or between alternatives (between-swap). Did the additional effort generated by engaging in the processing activities themselves affect value judgments? If effort expenditure or resource availability had a strong in<sup>fl</sup>uence, it might play a role in sequential value judgments.
+
+In each trial, regardless of the presence or absence of a layout change, the decision sequence was classi<sup>fi</sup>ed as consistent or inconsistent based on whether or not the chosen object pair from Decision 1 was part of the chosen set in Decision 2. In other words, a decision sequence was de<sup>fi</sup>ned as consistent when the chosen objects in Decision 1 were part of the chosen set in Decision 2. In contrast, an inconsistency or a decision reversal occurred when the chosen objects in Decision 1 were part of the non-chosen set in Decision 2.
+
+If resource availability in<sup>fl</sup>uences decision making, manipulation of additional resource expenditure will in<sup>fl</sup>uence choice consistency, i.e. the same alternative is chosen twice or not. In the betweenswap condition, where component objects of the <sup>fi</sup>rst value judgment are rearranged between alternatives, re-mapping objects to alternatives involves the self-exerting control to override a prepotent response. The process of substituting one response with another to keep track of the previous decision depletes self-regulation resources. This additional resource expenditure is expected to reduce choice consistency. In contrast, in the within-swap condition, where component objects of the <sup>fi</sup>rst value judgment are rearranged within the same alternative, there is no need for self-exerting control to override a previous response. The choice consistency of the within-swap condition is predicted to be the same as that of the no-swap condition.
+
+On the other hand, the effort-as-information theory relies on effort spent on a previous decision as a source of information for a subsequent decision. The current decision is in<sup>fl</sup>uenced by prior effort expenditure and should have no interference from subsequent interrupting procedures. Thus, we propose:
+
+Hypothesis 1. There is no difference in choice consistency between within-swap and no-swap conditions.
+
+Hypothesis 2a. The resource availability theory predicts that the choice consistency of the between-swap condition will be lower than those of no-swap and within-swap conditions.
+
+Hypothesis 2b. The effort-as-information theory predicts that the choice consistency of the between-swap condition will be the same as those of no-swap and within-swap conditions.
+
+Furthermore, the resource availability theory suggests that effort expenditure in the initial task incur resource constraints and impair the individual's ability to manage subsequent cognitive activity. If the <sup>fi</sup>rst value judgment involves a trade-off, where two alternatives are equally comparable based on half of the component objects, consumers may devote greater effort in evaluating objects, resulting in longer reaction times (RTs). In addition, both between-swap and within-swap conditions require the executive function of updating. Updating requires monitoring and coding of incoming information and appropriately revising the items held in working memory by replacing no-longer-relevant information with new, more relevant information [25]. The extra mental processing of updating in between-swap and within-swap conditions consumes self-regulation resources [23]. Thus, a trade-off decision of the <sup>fi</sup>rst value judgment will be affected by the extra mental processing of swap conditions, producing choice inconsistency. That is, under swap conditions the average RTs of the <sup>fi</sup>rst value judgment will be longer for inconsistent choices than consistent choices. In sum, the interaction effect of the swap conditions and choice consistency on reaction times indicates that value judgments are affected by constrained resources.
+
+On the other hand, based on the effort-as-information theory, there is no such impact of additional resource expenses on subsequent judgment. As a consequence, there should be no difference in reaction times as a function of swap condition and choice consistency. Therefore, we propose:
+
+![](/api/attachments/YMPB34HE/fulltext/images/2092efaedafedf79b1ded2c7079a58c6113a8a93ec4a5b194f139df91ca84877.jpg)  
+Fig. 1. An illustration of the value judgment task and the layout change manipulation.
+
+Hypothesis 3a. The resource availability explanation predicts there are no RTs differences of the <sup>fi</sup>rst value judgment as a function of choice consistency in the no-swap condition, whereas there are longer RTs on inconsistent choice than consistent choice in both swap conditions.
+
+Hypothesis 3b. The effort-as-information explanation predicts that there are no RTs differences of the <sup>fi</sup>rst value judgment as a function of swap conditions and choice consistency.
+
+## 4. Method
+
+## 4.1. Participants
+
+Twenty undergraduate students at the University of Toronto, Mississauga, participated in the experiment. The participants were paid \$10 (Canadian) per hour.
+
+## 4.2. Materials and design
+
+Stimuli were constructed using an image database containing 192 exemplars from each of four everyday object categories (hats, rings, bags and watches) for a total of 768 images. Several online shopping websites were used to extract these images. Each image displayed a product on a white background and all images subtended 360 × 360 pixels.
+
+For each of the four product categories, 96 object pairs were created. To maintain value comparability, each object pair is of similar or equal retail price. As shown in Fig. 1, four object pairs, one from each category, were then combined to create the display sequence in each of the 96 experimental trials. Speci<sup>fi</sup>cally, in each display, rows of four cells (each cell subtending 400 × 400 pixels) appeared on the top and the bottom of the screen. In each trial, in the <sup>fi</sup>rst display (Screen 1), two object pairs were presented (rings & hats, rings & bags, watches & hats, or watches & bags) either on the left or right of the screen with objects from the same category shown vertically aligned. Participants were asked to decide either the top or the bottom object set as the more expensive (Decision 1). After an intervening blank interval, a second display (Screen 2) was presented. In addition to Screen 1 objects, Screen 2 contained two new object pairs from the remaining object categories, and participants decided the four-object set on the top or bottom as the more expensive (Decision 2).
+
+To manipulate the additional resource expenditure, in two-thirds of the trials, the objects shown in Screen 1 were spatially rearranged in Screen 2. The 96 experimental trials were divided into three groups of 32 trials and assigned to three layout change conditions: no-swap, within-swap and between-swap. As shown in Fig. 1, in the no-swap condition, Screen 1 objects were shown in identical spatial locations in Screen 2. In the within-swap condition, Screen 1 objects on the top or bottom of the display maintained their vertical position in Screen 2 but were horizontally swapped across screens. Finally, in the between-swap condition, Screen 1 objects maintained their horizontal position in Screen 2 but were vertically swapped across screens.
+
+For each participant, objects were randomly assigned to layout change conditions. In addition to the 96 experimental trials, four practice trials were created using objects that were not used in the experimental trials.
+
+## 4.3. Procedure
+
+Stimulus displays were presented on a 19-in. Viewsonic monitor, which was set to a resolution of 1600 × 1200 and a refresh rate of 85 Hz. The participants were seated 60 cm from the monitor. They were instructed to choose the more expensive set of objects on both
+
+Screen 1 and 2 in each trial and to indicate their choice by pressing the corresponding (top or bottom) button on a button box. A participant initiated the trial sequence in each of the four practice trials and the subsequent 96 experimental trials by pressing a button on a button box, which resulted in the presentation of Screen 1. Following the response by participants, the display was blanked for an interval, and then Screen 2 was shown until the participants indicated their <sup>fi</sup>nal choice.
+
+## 4.4. Measures
+
+Decision and reaction time for each judgment were recorded by the computer as dependent measures. Effort expenditure is frequently measured by examining the time spent in completing a task [4]. Additionally, based on participants' choices concerning objects that were presented on both Screen 1 and 2, we distinguished between decisions that were consistent (i.e., the chosen object set in Decision 1 was part of the chosen object set in Decision 2) and decisions that were inconsistent (i.e., the chosen object set in Decision 1 was not part of the chosen object set in Decision 2).
+
+## 5. Results
+
+## 5.1. Choice consistency rates
+
+To explore the <sup>fi</sup>ndings from the experiment, we <sup>fi</sup>rst analyzed choice consistency rates. In each trial, regardless of the presence or absence of a layout change, the decision sequence was classi<sup>fi</sup>ed as consistent or inconsistent based on whether or not the chosen object pair from Decision 1 was part of the chosen set in Decision 2. In other words, a decision sequence was de<sup>fi</sup>ned as consistent when the chosen objects in Decision 1 were part of the chosen set in Decision 2. In contrast, an inconsistency or a decision reversal occurred when the chosen objects in Decision 1 were part of the non-chosen set in Decision 2. The average percentage of consistent trials (consistency rate) was then computed for each layout change condition (no-swap: M = 76.02, SD = 7.6; within-swap: M = 75.71, SD = 10.9; between-swap: M = 62.10, SD = 10.6).
+
+Table 1 shows the choice consistency rates for each display change condition and the results of the paired t-test, which support Hypothesis 1. Consistency rates do not differ across the no-swap and within-swap conditions (t b 1), indicating that the within-swap layout change does not impact the extent to which participants' preliminary decision (Decision 1) <sup>fi</sup>gured in their <sup>fi</sup>nal choice (Decision 2). While Hypothesis 2a suggests that the consistency rate would be lower in the between-swap condition than in the no-swap condition, Hypothesis 2b predicts no difference. Our results support Hypothesis 2a. Both the no-swap and within-swap conditions produced somewhat higher consistency rates than the between-swap condition (both ts > 4.58, both ps b 0.001).
+
+## 5.2. Reaction times
+
+Next, we analyze reaction times (RTs) in Decision 1 and Decision 2 across the layout change by consistency conditions. Table 2 summarizes the RTs for Decision 1 and Decision 2, and the results of the paired t-test across display change by consistency conditions. In Decision 1, RTs do not differ as a function of consistency (t b 1) in the no-swap condition. However, RTs are signi<sup>fi</sup>cantly longer in inconsistent decision sequences than in those that are consistent (both $t s > 2 . 1 2$ , both $p s < 0 . 0 5 )$ in both the within-swap and between-swap conditions (see Fig. 2, left panel). This results in a signi<sup>fi</sup>cant layout change by consistency interaction $( F ( 2 , 3 8 ) = 4 . 1 6 , ~ p < 0 . 0 5 )$ . Consistent with Hypothesis 3a, this effect indicates that some aspect of Decision 1 is predictive of the likelihood of a decision reversal in Decision 2. Speci<sup>fi</sup>cally, a dif<sup>fi</sup>cult preliminary decision (i.e., as re<sup>fl</sup>ected by longer RTs likely due to a smaller perceived difference between alternatives) followed by a layout change is associated with greater likelihood of a decision reversal or inconsistency, a <sup>fi</sup>nding that holds regardless of whether or not the layout change occurred within or between alternatives.
+
+Choice consistency rates for each display change condition and the results of the paired t-test.
+
+<table><tr><td>Swap condition</td><td>No-swap</td><td>Within-swap</td><td>Between-swap</td></tr><tr><td>Consistency rates</td><td>76.02% (7.6)</td><td>75.71% (10.9)</td><td>62.10% (10.6)</td></tr><tr><td>Paired t-test</td><td>No- vs. within-swap</td><td>Within- vs. between-swap</td><td>Between- vs. no-swap</td></tr><tr><td>t-value</td><td>0.1</td><td>4.58***</td><td>5.58***</td></tr></table>
+
+The standard deviations are in parentheses.  
+\*\*\* Signi<sup>fi</sup>cant at p b 0.001 on a one-tailed t-test.
+
+Table 2  
+The reaction times for Decision 1 and Decision 2, and the results of the paired t-test across display change by consistency conditions
+
+<table><tr><td>Decision</td><td></td><td>No-swap</td><td>Within-swap</td><td>Between-swap</td></tr><tr><td rowspan="3">1</td><td>Consistent</td><td>4353.0 (270.6)</td><td>4351.8 (268.1)</td><td>4310.3 (265.8)</td></tr><tr><td>Inconsistent</td><td>4398.9 (345.4)</td><td>4849.0 (394.9)</td><td>5032.3 (364.0)</td></tr><tr><td>t-value</td><td>0.2</td><td>2.12*</td><td>4.32***</td></tr><tr><td rowspan="3">2</td><td>Consistent</td><td>4555.3 (326.6)</td><td>4802.5 (338.4)</td><td>5160.6 (341.6)</td></tr><tr><td>Inconsistent</td><td>5191.1 (359.1)</td><td>5831.7 (399.2)</td><td>5301.6 (414.1)</td></tr><tr><td>t-value</td><td>2.26*</td><td>6.76***</td><td>0.65</td></tr></table>
+
+The standard deviations are in parentheses.  
+⁎⁎⁎ Signi<sup>fi</sup>cant at p b 0.001 on a one-tailed t-test  
+\* Signi<sup>fi</sup>cant at $p < 0 . 0 5$ on a one-tailed t-test.
+
+In addition, examination of RTs in Decision 2 (see Fig. 2, right panel) reveals that the effects of consistency vary across layout change conditions $( F ( 2 , 3 8 ) = 6 . 5 0 , p < 0 . 0 1 )$ . Speci<sup>fi</sup>cally, while in the no-swap and within-swap conditions RTs are longer in inconsistent than in consistent decisions (both $t s > 2 . 2 6 ,$ , both $p s < 0 . 0 5 )$ , in the between-swap condition RTs do not differ as a function of consistency (t b 1). The absence of a consistency effect on RT in the latter condition does not imply an absence of processing costs associated with a decision reversal. Rather it is due to longer RTs in consistent trials in the between-swap condition as compared to the other conditions (both ts > 2.80, both $p s < 0 . 0 5 )$ . This slowing of RTs in consistent trials in the betweenswap condition is likely due to the processing costs involved in the re-mapping of objects to decision alternatives (i.e., top or bottom) that is required in this condition.
+
+## 6. Discussion and implications
+
+In this study, we have investigated the impact of process-induced decision costs of previous decisions on subsequent decisions to examine the accountability of two theories, i.e., effort-as-information and resource availability. A lower consistency rate occurs in the layout change condition, implying that additional resource expenditure plays a signi<sup>fi</sup>cant role in sequential decision-making situations. Furthermore, when layout change impedes <sup>fl</sup>uent processing, initial trade-off decisions produce greater likelihood of inconsistent decision sequences. In sum, the expenditure of self-regulation resources impacts not only on the subsequent performance of cognitive activity, but also on the sequential decision-making results. Most importantly, the study suggests that both consumers and managers should be aware that dynamic display changes, commonly observed in online shopping, are likely to increase self-exerting processing costs, which may subsequently impede sound consumer judgments.
+
+![](/api/attachments/YMPB34HE/fulltext/images/0076e10c162db5908dd410a07c9ebcde3330e3305b44cbfe20ec00a0c05d92e8.jpg)  
+Fig. 2. Reaction times for Decisions 1 and 2 by consistency and layout change conditions.
+
+While our results contradict the predictions based on the theory of effort-as-information, effort investment can often serve as valuable information for judgment and decision making. For instance, people use effort as a heuristic for quality judgments in their daily lives [17]. An endowed object is more highly valued when it is obtained by an individual's endeavor than by chance [19]. Involvement with the initial decision escalates commitment and affects subsequent decisions [6].
+
+However, the effort-as-information theory may be limited by its lack of consideration of the role of human agency. For example, the study by Wilson et al. [45] shows that the subjective feeling of ease experienced while making a decision plays a more prominent role than the reason-based judgment in the short run. As time passes, the reason-based judgment intervenes and strengthens the motivation to preserve previous effort [19]. Similarly, the study by Kim and Kim [15] reveals that the decision-related effort during a decision process in<sup>fl</sup>uences consumers' evaluation and price judgment for decision outcomes. More importantly, the results are moderated by the time interval between decision and subsequent judgment. When there is no time delay, the decision is evaluated more highly in the easy processing condition, supporting processing <sup>fl</sup>uency predictions [27]. On the other hand, when there is time delay, the decision is evaluated more highly in the dif<sup>fi</sup>cult processing condition, supporting the effort-as-information predictions [17]. Their results coincide with the view that affective judgments respond faster than reason-based assessments [28]. In addition, Reber et al. [29] have shown while <sup>fl</sup>uent processing induces positive affect, the processing <sup>fl</sup>uency effect is moderated by the expectation of <sup>fl</sup>uency. In particular, the <sup>fl</sup>uency associated with processing a certain event is likely to elicit a pleasurable experience when the <sup>fl</sup>uency is unexpected in the context [43,44]. For example, seeing one's classmate in a classroom (expected <sup>fl</sup>uency) does not generate a strong pleasant or familiar feeling, whereas unexpectedly seeing the same classmate at the airport does (unexpected <sup>fl</sup>uency).
+
+These various studies suggest that there is a need to consider human agency in the effort-as-information effect on decision-making. If unexpected <sup>fl</sup>uency gives rise to a positive evaluative bias, does it not follow that unexpected absence of <sup>fl</sup>uency will create a negative evaluative bias? Any factors that inhibit an object's ease of processing can be inputs into affective devaluation as well as other judgments [32]. In this study, the layout change impedes <sup>fl</sup>uent processing by imposing additional executive demands on working memory. The unexpected retardation of processing is likely to heighten the negative affect as a result of accommodating the new presentation. This process-induced affect is combined with the resource expenditure of the preliminary decision to form the overall affective state. While the combination of easy decision and unexpected layout change creates a moderate feeling of displeasure, the combination of dif<sup>fi</sup>cult decision and unexpected layout change creates a strong feeling of displeasure. To refrain from the unpleasant feeling, people may alter the engagement of processing activities [13]. Our results indicate that as the heightened negative affect unfavorably in<sup>fl</sup>uences the evaluation of the chosen alternative, there is a greater likelihood of the <sup>fi</sup>nal judgment being contrary to the initial judgment when the initial judgment involves more resources expenditure. Hence, an e-commerce website must pay attention to how the interface design may interact with consumer's affective state [9].
+
+From an empirical perspective, the issue in this respect is how to apply different theories in different judgments and decision-making situations. The effort-as-information theory examines the role of decisionrelated effort on consumer judgments. Resource availability theory contributes to understanding of the impacts of extra processing demands being placed on consumer judgments. In addition, <sup>fi</sup>nding the interplay between resource availability and process-induced effort stretches consecutive decision-making research generally. More research is needed to elucidate the interplay and boundary conditions of multiple theories concerning decision-related costs in sequential and isolated decisionmaking contexts.
+
+Studies of self-regulatory resource capacity as a strength model have examined the detrimental impacts of resource depletion (e.g., making choices, emotional control, and thought suppression) on subsequent self-control behaviors (e.g., impulse buying, reduced task persistence, and more procrastination) [2]. Further work is required to advance our understanding of the strength model of resource capacity [26]. Research on affect as part of a self-regulatory motivational system is changing our conception of the role of affect in judgment and decision making [28]. For instance, anticipating the choice task as enjoyable can reduce the depleting effect [41, Experiment 7]. Perceived ego depletion is a more important determinant of subsequent self-control failure than is actual depletion [8]. Challenging the expectation that prior self-regulatory tasks lead to subsequent decrements in self-control eliminates ego depletion effects [21]. Importantly, resilience beliefs to counter resource depletion can be learned by exercising self-control activities [37]. Taken together, affect and expectation seem to play signi<sup>fi</sup>cant roles in the strength model of resource capacity.
+
+## 7. Limitations and future research
+
+Rather than making preference choices, which are common in consumer behavior research, participants in this study were asked to make value judgments. Further study is necessary to ascertain the extent to which our <sup>fi</sup>ndings with respect to the in<sup>fl</sup>uences of resource availability on subsequent value judgment can be generalized to other types of consumer decision-making situations.
+
+As an initial step toward testing the signi<sup>fi</sup>cance of self-regulation resources and understanding the possible in<sup>fl</sup>uence of increased visual processing dif<sup>fi</sup>culty on decision results, we created a decision task that permitted more precise experimental control. The experimental design of the two-stage decision-making task was used to examine the in<sup>fl</sup>uence of initial decision processes on subsequent decisions. This design has several advantages: <sup>fi</sup>rst, eliciting subtle workload between two decisions is easier. The subtle workload facilitates the distinguishing of two possible explanations of a prior decision on a later decision. Second, decision making requires self-regulation resources. Two sequential decisions are appropriate for addressing our research goal because the impact of a prior decision on a subsequent decision depends more on resource availability than on effort-as-information. Finally, the visual materials of the current design are typical in online shopping environments. An extension of the present setting to test more complex and realistic online environments is encouraged.
+
+## Acknowledgments
+
+This is an extended, journal version of a paper that appeared in the Proceedings of the IADIS International Conference Interfaces and Human Computer Interaction 2011. We acknowledge the support from the National Science Council, Taiwan (NSC 100-2410-H-343-003).
+
+## References
+
+[1] H.R. Arkes, C. Blumer, The psychology of sunk cost, Organizational Behavior and Human Decision Processes 35 (2) (1985) 124–140.
+
+[2] R.F. Baumeister, T.F. Heatherton, Self-regulation failure: an overview, Psychological Inquiry 7 (1) (1996) 1–15.
+
+[3] R.F. Baumeister, E. Bratslavsky, M. Muraven, D.M. Tice, Ego depletion: is the active self a limited resource? Journal of Personality and Social Psychology 74 (5) (1998) 1252–1265
+
+[4] J.R. Bettman, E.J. Johnson, J.W. Payne, A componential analysis of cognitive effort in choice, Organizational Behavior and Human Decision Processes 45 (2) (1990) 111–139.
+
+[5] J.R. Bettman, M.F. Luce, J.W. Payne, Constructive consumer choice processes, Journal of Consumer Research 25 (3) (1998) 187–217.
+
+[6] E. Biyalogorsky, W. Boulding, R. Staelin, Stuck in the past: why managers persist with new product failures, Journal of Marketing 70 (2) (2006) 108–121.
+
+[7] H. Chen, A. Rao, Close encounters of two kinds: false alarms and dashed hopes, Marketing Science 21 (2) (2002) 178–196.
+
+[8] J.J. Clarkson, E.R. Hirt, L. Jia, M.B. Alexander, When perception is more than reality: the effects of perceived versus actual resource depletion on self-regulatory behavior Journal of Personality and Social Psychology 98 (1) (2010) 29–46.
+
+[9] S. Djamasbi, Does positive affect in<sup>fl</sup>uence the effective usage of a decision support system? Decision Support Systems 43 (4) (2007) 1707–1717.
+
+[10] E.C. Garbarino, J.A. Edell, Cognitive effort, affect and choice, Journal of Consumer Research 24 (2) (1997) 147–158.
+
+[11] J. Godek, D. Nayakankuppum, J.F. Yates, Effort as information: the in<sup>fl</sup>uence of perceived decisional effort on willingness to pay, Society for Judgment and Decision Making, 2001, (Orlando, Florida).
+
+[12] H. Im, S.J. Lennon, L. Stoel, The perceptual <sup>fl</sup>uency effect on pleasurable online shopping experience, Journal of Research in Interactive Marketing 4 (4) (2010) 280–295.
+
+[13] A.M. Isen, B. Means, The in<sup>fl</sup>uence of positive affect on decision-making strategy, Social Cognition 2 (1) (1983) 18–31.
+
+[14] J. Kim, The In<sup>fl</sup>uence of Previous Decision on Subsequent Decision, Business Administration, University of Minnesota, Minnesota, 2008, p. 262.
+
+[15] J. Kim, J.-E. Kim, “Effort-as-information: the impact of decision-related effort on subsequent evaluation and price judgment”, in: A.Y. Lee, D. Soman (Eds.), Advances in Consumer Research, Memphis, Tennessee, 2007, pp. 935–936.
+
+[16] N.M. Klein, M.S. Yadav, Context effects on effort and accuracy in choice: an inquiry into adaptive decision making, Journal of Consumer Research 15 (1989) 411–421.
+
+[17] J. Kruger, D. Wirtz, L.V. Boven, T.W. Altermatt, The effort heuristics, Journal of Experimental Social Psychology 40 (1) (2004) 91–98.
+
+[18] G.F. Loewenstein, Out of control: visceral in<sup>fl</sup>uences on behavior, Organizational Behavior and Human Decision Processes 65 (3) (1996) 272–292.
+
+[19] G.F. Loewenstein, S. Issacharoff, Source dependence in the valuation of objects, Journal of Behavioral Decision Making 7 (3) (1994) 157–168.
+
+[20] M.F. Luce, Choosing to avoid: coping with negatively emotion-laden consumer decisions, Journal of Consumer Research 24 (4) (1998) 409–433.
+
+[21] C. Martijn, P. Tenbült, H. Merckelbach, E. Dreezens, N.K. De Vries, Getting a grip on ourselves: challenging expectancies about energy loss after self-control, Social Cognition 20 (6) (2002) 441–460.
+
+[22] J. Meyers-Levy, A.M. Tybout, Context effects at encoding and judgment in consumption settings: the role of cognitive resources, Journal of Consumer Research 24 (1) (1997) 1–14.
+
+[23] A. Miyake, N.P. Friedman, M.J. Emerson, A.H. Witzki, A. Howerter, T. Wager, The unity and diversity of executive functions and their contributions to complex “frontal lobe” tasks: a latent variable analysis, Cognitive Psychology 41 (1) (2000) 49–100.
+
+[24] A. Monga, A.R. Rao, Domain-based asymmetry in expectations of the future, Organizational Behavior and Human Decision Processes 100 (1)(2006) 35–46.
+
+[25] N. Morris, D.M. Jones, Memory updating in working memory: the role of the central executive, British Journal of Psychology 81 (2) (1990) 111–121.
+
+[26] M. Muraven, D.M. Tice, R.F. Baumeister, Self-control as a limited resource: regulatory depletion patterns, Journal of Personality and Social Psychology 74 (3) (1998) 774–789.
+
+[27] N. Novemsky, R. Dhar, N. Schwarz, I. Simonson, Preference <sup>fl</sup>uency in choice, Journal of Marketing Research 44 (3) (2007) 347–356.
+
+[28] M.T. Pham, J.B. Cohen, J.W. Pracejus, G.D. Hughes, Affect monitoring and the primacy of feelings in judgment, Journal of Consumer Research 28 (2) (2001) 167–188.
+
+[29] R. Reber, N. Schwarz, P. Winkielman, Processing <sup>fl</sup>uency and aesthetic pleasure: is beauty in the perceiver's processing experience? Personality and Social Psychology Review 8 (4) (2004) 364–382.
+
+[30] W. Samuelson, R. Zeckhauser, Status quo bias in decision making, Journal of Risk and Uncertainty 1 (1) (1988) 7–59.
+
+[31] B.J. Schmeichel, K.D. Vohs, R.F. Baumeister, Intellectual performance and ego depletion: role of the self in logical reasoning and other information processing, Journal of Personality and Social Psychology 85 (1) (2003) 33–46
+
+[32] N. Schwarz, Metacognitive experiences in consumer judgment and decision making Journal of Consumer Psychology 14 (4) (2004) 332–348.
+
+[33] N. Schwarz, G.L. Clore, Feelings and phenomenal experiences, in: E.T. Higgins, A. Kruglanski (Eds.), Social Psychology, Handbook of Basic PrinciplesGuilford Press, New York 2006 pp.385–407
+
+[34] S.M. Shugan, The cost of thinking, Journal of Consumer Research 7 (2) (1980) 99–111.
+
+[35] H. Song, N. Schwarz, If it's hard to read, it's hard to do: processing <sup>fl</sup>uency affects effort prediction and motivation Psychological Science 19 (10) (2008) 986–988.
+
+[36] M.A. Strahilevitz, G. Loewenstein, The effect of ownership history on the valuation of obiects Journal of Consumer Research 25 (3) (1998) 276–289
+
+[37] A.J. Sultan, J. Joireman, D.E. Sprott, Building consumer self-control: the effect of self-control exercises on impulse buying urges, Marketing Letters (2011) 1–12.
+
+[38] R.H. Thaler, E.J. Johnson, Gambling with the house money and trying to break even: the effects of prior outcomes on risky choice, Management Science 36 (6) (1990) 643–661.
+
+[39] K. Vohs, R.F. Baumeister, Understanding self-regulation: An introduction, in: R.F. Baumeister, K. Vohs (Eds.), Handbook of Self-Regulation: Research, Theory, and Applications, The Guildford Press, New York, 2004, pp. 1–9.
+
+[40] K. Vohs, B.J. Schmeichel, Self-regulation and the extended now: controlling the self alters the subjective experience of time, Journal of Personality and Social Psychology 85 (2) (2003) 217–230.
+
+[41] K. Vohs, R.F. Baumeister, B.J. Schmeichel, J.M. Twenge, N.M. Nelson, D.M. Tice, Making choices impairs subsequent self-control: a limited resource account of decision making, self-regulation, and active initiative, Journal of Personality and Social Psychology 94 (5) (2008) 883–898.
+
+[42] B. Von Helversen, G.H.E. Gendolla, P. Winkielman, R.E. Schmidt, Exploring th hardship of ease: subjective and objective effort in the ease-of-processing paradigm, Motivation and Emotion 32 (1) (2008) 1–10.
+
+[43] B.W.A. Whittlesea, L.D. Williams, Why do strangers feel familiar, but friends don't? The unexpected basis of feelings of familiarity, Acta Psychologica 96 (1998) 141–166.
+
+[44] B.W.A. Whittlesea, L.D. Williams, The source of feelings of familiarity: the discrepancyattribution hypothesis, Journal of Experimental Psychology: Learning, Memory, and Cognition 26 (3) (2000) 547–565.
+
+[45] T.D. Wilson, D.J. Lisle, J.W. Schooler, S.D. Hodges, K.J. Klaaren, S.J. LaFleur, Introspecting about reasons can reduce post-choice satisfaction, Personality and Social Psychology Bulletin 19 (3) (1993) 331–339.
+
+Mei-Chun Wu holds a PhD degree in Information Systems from the National Sun Yat-Sen University, Taiwan. She is currently an assistant professor of Information Management at the Nanhua University, Taiwan. Her research interests include decision support, visual marketing, and human-computer interactions. She has published articles in Journal of Vision, PsychNology Journal, and The DATA BASE for Advances in Information Systems.
+
+Fang-Yan Kuo holds a PhD degree in Information Systems from the University of Arizona. He was in the Faculty of Information Systems at the University of Colorado in Denver from 1985 to 1997 and is currently a professor of Information Management at the National Sun Yat-Sen University, Taiwan. Professor Kuo's research interests include cognition and learning in organizations, information ethics, knowledge management, and human-computer interactions. He has published articles in Communications of the ACM, MIS Quarterly, Decision Support Systems, Journal of the American Society for Information Science and Technology (JASIST), J. of Business Ethics, Information & Management, J. of Systems and Software, Computers in Human Behavior, and Internet Research.

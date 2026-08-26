@@ -1,0 +1,425 @@
+{
+  "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2027
+  ],
+  "base": [
+    {
+      "journal": "Information Systems Research",
+      "abbreviation": "ISR",
+      "counts": {
+        "2020": 4,
+        "2021": 5,
+        "2022": 7,
+        "2023": 15,
+        "2024": 11,
+        "2025": 12,
+        "2026": 3,
+        "2027": 0
+      },
+      "total": 57
+    },
+    {
+      "journal": "Decision Support Systems",
+      "abbreviation": "DSS",
+      "counts": {
+        "2020": 29,
+        "2021": 25,
+        "2022": 14,
+        "2023": 4,
+        "2024": 2,
+        "2025": 1,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 75
+    },
+    {
+      "journal": "European Journal of Information Systems",
+      "abbreviation": "EJIS",
+      "counts": {
+        "2020": 5,
+        "2021": 0,
+        "2022": 0,
+        "2023": 3,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 8
+    },
+    {
+      "journal": "Information & Management",
+      "abbreviation": "I&M",
+      "counts": {
+        "2020": 6,
+        "2021": 4,
+        "2022": 3,
+        "2023": 1,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 14
+    },
+    {
+      "journal": "Information Systems Journal",
+      "abbreviation": "ISJ",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 1,
+        "2023": 1,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 2
+    },
+    {
+      "journal": "Information and Organization",
+      "abbreviation": "I&O",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    },
+    {
+      "journal": "Journal of Information Technology",
+      "abbreviation": "JIT",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    },
+    {
+      "journal": "Journal of Management Information Systems",
+      "abbreviation": "JMIS",
+      "counts": {
+        "2020": 8,
+        "2021": 7,
+        "2022": 3,
+        "2023": 0,
+        "2024": 1,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 19
+    },
+    {
+      "journal": "Journal of the Association for Information Systems",
+      "abbreviation": "JAIS",
+      "counts": {
+        "2020": 2,
+        "2021": 2,
+        "2022": 1,
+        "2023": 5,
+        "2024": 3,
+        "2025": 1,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 14
+    },
+    {
+      "journal": "MIS Quarterly",
+      "abbreviation": "MISQ",
+      "counts": {
+        "2020": 4,
+        "2021": 4,
+        "2022": 6,
+        "2023": 7,
+        "2024": 8,
+        "2025": 9,
+        "2026": 4,
+        "2027": 0
+      },
+      "total": 42
+    },
+    {
+      "journal": "The Journal of Strategic Information Systems",
+      "abbreviation": "JSIS",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    }
+  ],
+  "theory": [
+    {
+      "journal": "Information Systems Research",
+      "abbreviation": "ISR",
+      "counts": {
+        "2020": 1,
+        "2021": 2,
+        "2022": 4,
+        "2023": 12,
+        "2024": 6,
+        "2025": 8,
+        "2026": 1,
+        "2027": 0
+      },
+      "total": 34
+    },
+    {
+      "journal": "Decision Support Systems",
+      "abbreviation": "DSS",
+      "counts": {
+        "2020": 7,
+        "2021": 5,
+        "2022": 4,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 16
+    },
+    {
+      "journal": "European Journal of Information Systems",
+      "abbreviation": "EJIS",
+      "counts": {
+        "2020": 5,
+        "2021": 0,
+        "2022": 0,
+        "2023": 2,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 7
+    },
+    {
+      "journal": "Information & Management",
+      "abbreviation": "I&M",
+      "counts": {
+        "2020": 2,
+        "2021": 2,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 4
+    },
+    {
+      "journal": "Information Systems Journal",
+      "abbreviation": "ISJ",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 1,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 1
+    },
+    {
+      "journal": "Information and Organization",
+      "abbreviation": "I&O",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    },
+    {
+      "journal": "Journal of Information Technology",
+      "abbreviation": "JIT",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    },
+    {
+      "journal": "Journal of Management Information Systems",
+      "abbreviation": "JMIS",
+      "counts": {
+        "2020": 7,
+        "2021": 4,
+        "2022": 0,
+        "2023": 0,
+        "2024": 1,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 12
+    },
+    {
+      "journal": "Journal of the Association for Information Systems",
+      "abbreviation": "JAIS",
+      "counts": {
+        "2020": 1,
+        "2021": 1,
+        "2022": 1,
+        "2023": 4,
+        "2024": 2,
+        "2025": 1,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 10
+    },
+    {
+      "journal": "MIS Quarterly",
+      "abbreviation": "MISQ",
+      "counts": {
+        "2020": 1,
+        "2021": 3,
+        "2022": 3,
+        "2023": 5,
+        "2024": 4,
+        "2025": 6,
+        "2026": 4,
+        "2027": 0
+      },
+      "total": 26
+    },
+    {
+      "journal": "The Journal of Strategic Information Systems",
+      "abbreviation": "JSIS",
+      "counts": {
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0
+      },
+      "total": 0
+    }
+  ],
+  "journal_summary": [
+    {
+      "journal": "Information Systems Research",
+      "abbreviation": "ISR",
+      "corpus_total": 466,
+      "base_total": 57,
+      "theory_total": 34
+    },
+    {
+      "journal": "Decision Support Systems",
+      "abbreviation": "DSS",
+      "corpus_total": 366,
+      "base_total": 75,
+      "theory_total": 16
+    },
+    {
+      "journal": "European Journal of Information Systems",
+      "abbreviation": "EJIS",
+      "corpus_total": 170,
+      "base_total": 8,
+      "theory_total": 7
+    },
+    {
+      "journal": "Information & Management",
+      "abbreviation": "I&M",
+      "corpus_total": 321,
+      "base_total": 14,
+      "theory_total": 4
+    },
+    {
+      "journal": "Information Systems Journal",
+      "abbreviation": "ISJ",
+      "corpus_total": 140,
+      "base_total": 2,
+      "theory_total": 1
+    },
+    {
+      "journal": "Information and Organization",
+      "abbreviation": "I&O",
+      "corpus_total": 56,
+      "base_total": 0,
+      "theory_total": 0
+    },
+    {
+      "journal": "Journal of Information Technology",
+      "abbreviation": "JIT",
+      "corpus_total": 59,
+      "base_total": 0,
+      "theory_total": 0
+    },
+    {
+      "journal": "Journal of Management Information Systems",
+      "abbreviation": "JMIS",
+      "corpus_total": 120,
+      "base_total": 19,
+      "theory_total": 12
+    },
+    {
+      "journal": "Journal of the Association for Information Systems",
+      "abbreviation": "JAIS",
+      "corpus_total": 326,
+      "base_total": 14,
+      "theory_total": 10
+    },
+    {
+      "journal": "MIS Quarterly",
+      "abbreviation": "MISQ",
+      "corpus_total": 403,
+      "base_total": 42,
+      "theory_total": 26
+    },
+    {
+      "journal": "The Journal of Strategic Information Systems",
+      "abbreviation": "JSIS",
+      "corpus_total": 48,
+      "base_total": 0,
+      "theory_total": 0
+    }
+  ]
+}

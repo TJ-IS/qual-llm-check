@@ -1,0 +1,1963 @@
+# A new emergency decision support system: the automatic interpretation and contextualisation of events to model a crisis situation in real-time
+
+- 作者：Audrey Fertier; Anne-Marie Barthe-Delanoë; Aurélie Montarnal; Sébastien Truptil; Frédérick Bénaben
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2020.113260
+- 源文件：10556_2020_a-new-emergency-decision-support-system-the-automatic-interpretation-and-contextualisation-of-ev.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：如何收集、解释并情境化来自已知与未知来源的原始事件流，在管理大数据的4Vs的同时，自动检测并建模某领土上正在发生的危机后果，并为应急管理者连续更新通用作战图？
+
+- 制品与设计：AIC信息系统：一个将事件驱动与模型驱动相结合的新应急决策支持系统，包含(1)扩展自R-IOSUITE元模型的危机情景元模型，(2)运行于Neo4J图数据库之上的复杂事件处理引擎，其规则分为解释规则和能够查询情景模型的情境化规则，(3)基于OASIS发布/订阅机制的消息代理，(4)自动更新的通用作战图，以及(5)建立在R-IOSUITE原有组件上的过程推导与协调工具。
+
+- 客观结果：在法国卢瓦尔河中游洪水场景中，系统用155个洪水预测事件和11条规则测试；定量结果显示解释规则可在1秒内完成解释，情境化规则在3秒内完成，复杂事件可视化在1秒内完成；定性上，系统在2015-2018年向法国各级应急管理者演示，并在2019年向奥尔良与南特市风险管理部门展示，反馈的八个关注点大多已被系统支持或可实现；通过架构映射论证了四个Big Data的V由不同组件分别管理。
+
+- 核心贡献：两个主要贡献：一是将复杂事件处理引擎与保存危机情景模型的图数据库连接，使CEP规则能够参考当前模型内容；二是持续更新通用作战图，以支持应急管理者的情境感知中的感知步骤，同时用组件化的方式管理4Vs。
+
+- 整篇论证链：文章首先指出危机响应中应急管理者需要快速获取并理解大量异构数据，但现实中他们没有时间这样做；随后用四轮系统文献综述建立缺口：现有紧急DSS在感知、事件处理、4Vs管理和实时情景建模方面没有一个能覆盖全部需求。基于法国专家访谈得到十项实践困难，作者将文献缺口转换为系统要求，提出AIC信息系统；通过扩展R-IOSUITE元模型、设计解释与情境化CEP规则、采用发布/订阅机制实现事件获取，最终在卢瓦尔河洪水场景中完成实现。评价分两面：定性层面通过多年专家演示和城市风险管理部门反馈说明系统贴近实践；定量层面通过五场景延迟测量说明系统满足近实时要求，并通过4Vs覆盖矩阵说明架构组件各自承担管理职责。结论将结果拉回情境感知框架，指出系统自动化了感知步骤，但尚未支持投影未来这一限制，同时将系统开放源码并给出可扩展方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章从明确的需求和缺口出发，设计并实现了AIC信息系统的原型，随后使用现实洪水场景进行定性和定量评价，最后形成关于体系结构、规则设计和4Vs管理的可复用设计知识；其核心证据是原型实现及其性能/专家反馈，属于典型的设计科学研究。
+
+- 主导写作弧线判定：全文弧线是先收集实际需求并从文献形成要求，然后选择现有元模型与CEP技术构建AIC，再通过案例和测量评价，最后提炼出可复用的架构与规则设计原则；虽然有情境感知理论作为动机，但主要叙述不是返回理论而是沉淀设计知识。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：研究分八个阶段：专家访谈需求获取 → 文献综述缺口确认 → 需求到系统范围映射 → 元模型设计与扩展 → 解释与情境化规则设计 → 事件获取与系统实现 → 定性评价与领域反馈 → 定量评价与4Vs覆盖。前三个阶段界定问题并设置系统边界，中间三个阶段将要求翻译为设计与实现，后两个阶段从两个互补维度（领域可用性与技术性能）评价系统，最后以4Vs映射把性能结果上升为架构设计知识。
+
+### studies_or_phases
+
+#### 1. 专家访谈需求获取
+
+- order：1
+
+- name_cn：专家访谈需求获取
+
+- question_cn：法国应急管理者在复杂危机响应中的实际困难是什么？
+
+- inputs_and_setting_cn：作为法国GéNéPi研究项目的一部分，受访谈实践者为法国应急管理领域人员，访谈由CEREMA专家Mme. Dolidon主持。
+
+- designed_or_compared_object_cn：不涉及系统设计；将困难条目作为后续需求的候选清单。
+
+- baseline_control_or_counterfactual_cn：专家识别的十项困难作为需求基线。
+
+##### objective_metrics
+
+1. 困难条目数量（十项）
+
+- analysis_method_cn：专家访谈归纳
+
+- main_result_cn：归纳出十项困难，包括经验不足、私人行动者整合、信息分散、预测困难、决策不确定性、多工具多网站查阅和应急计划复杂等。
+
+- argumentative_role_cn：把现实问题固化为需求集合，赋予研究问题的实践重要性，并为设计阶段提供验收标准。
+
+- remaining_uncertainty_cn：这些困难是否代表所有法国应急管理者，访谈没有系统抽样或编码。
+
+- link_to_next_phase_cn：带着这些困难进入文献综述，检查现有DSS能否满足九项需求。
+
+##### evidence_pointers
+
+1. Section 3 P1
+
+2. Section 3 P2
+
+#### 2. 文献综述与缺口确认
+
+- order：2
+
+- name_cn：文献综述与缺口确认
+
+- question_cn：现有紧急决策支持系统能否满足情境感知、实时事件处理和4Vs管理这三个方面的要求？
+
+- inputs_and_setting_cn：基于Web of Science进行四轮系统文献综述，分别检索情境感知DSS、CEP DSS、Big Data DSS和实时情景建模系统。
+
+- designed_or_compared_object_cn：文献中的DSS原型按输入多样性、输出复杂度、实时性、情境化、预测能力、4Vs韧性等维度被比较。
+
+- baseline_control_or_counterfactual_cn：文献系统作为对照；Table 1–4的需求覆盖矩阵作为基线。
+
+##### objective_metrics
+
+1. 系统满足条件数量
+
+2. 输入/输出复杂度维度值
+
+3. 4Vs覆盖情况
+
+- analysis_method_cn：系统文献综述与符合性评价
+
+- main_result_cn：未发现任何系统能同时满足连接多源、实时处理、自动实例化多个危机情景概念并更新COP的全部要求；许多系统只处理单一信息或仅实例化一个概念。
+
+- argumentative_role_cn：建立研究缺口，形成包含六点的研究问题，证明新设计并非重复已有工作。
+
+- remaining_uncertainty_cn：文献筛选具有主观性，可能漏掉部分相关研究。
+
+- link_to_next_phase_cn：把文献缺口带进方法论，与专家需求映射为系统范围。
+
+##### evidence_pointers
+
+1. Section 2.1
+
+2. Section 2.2
+
+3. Section 2.3
+
+4. Section 2.4
+
+5. Section 2.5
+
+6. Table 1–4
+
+#### 3. 需求到系统范围映射
+
+- order：3
+
+- name_cn：需求到系统范围映射
+
+- question_cn：如何将十项实际困难和六点文献研究问题转化为AIC系统的设计目标？
+
+- inputs_and_setting_cn：输入为专家访谈结果、文献研究问题和R-IOSUITE平台信息。
+
+- designed_or_compared_object_cn：系统目标：自动化情境感知中的感知步骤、识别级联效应、更新COP，并接入R-IOSUITE的过程推导能力。
+
+- baseline_control_or_counterfactual_cn：以十项困难的可覆盖性为基线；目标是覆盖其中九项。
+
+##### objective_metrics
+
+1. 需求覆盖数（九/十）
+
+- analysis_method_cn：需求分析映射
+
+- main_result_cn：确定AIC系统将处理事件获取、解释和情境化，并让R-IOSUITE负责响应过程推导，从而覆盖专家访谈中的九项困难。
+
+- argumentative_role_cn：将研究问题转化为可实现的系统边界，并说明了为什么选择在R-IOSUITE基础上改造。
+
+- remaining_uncertainty_cn：映射依赖作者与专家的判断，没有形式化的需求追踪。
+
+- link_to_next_phase_cn：系统范围确定后，进入设计阶段，首先选择并扩展危机情景元模型。
+
+##### evidence_pointers
+
+1. Section 3 P2
+
+2. Section 3 P3
+
+3. Section 3 P4
+
+#### 4. 元模型设计与扩展
+
+- order：4
+
+- name_cn：元模型设计与扩展
+
+- question_cn：如何用统一的元模型表示复杂危机情景并支持系统间互操作？
+
+- inputs_and_setting_cn：R-IOSUITE已有元模型；Web of Science上检索的现有本体用于比较。
+
+- designed_or_compared_object_cn：元模型需能表达复杂概念关系、利益相关者、目标（风险/威胁）、环境组成和事件等；扩展后的元模型增加了Data sources、Critical infrastructure和Sensitive building三个概念。
+
+- baseline_control_or_counterfactual_cn：不能同时满足复杂关系建模和危机信息覆盖的现有本体作为否定基线；R-IOSUITE元模型作为被扩展的起点。
+
+##### objective_metrics
+
+1. 元模型概念数量
+
+2. 实例中环境组件数量（15,569）
+
+- analysis_method_cn：领域建模与实例化测试
+
+- main_result_cn：扩展后的元模型在案例中成功实例化15,569个环境组件，覆盖机场、火车站、医院、学校等法国领土信息。
+
+- argumentative_role_cn：证明互操作能力与信息多样性控制是可行的，为后续规则查询模型内容提供了结构基础。
+
+- remaining_uncertainty_cn：元模型的完备性没有与全部候选本体进行系统比较。
+
+- link_to_next_phase_cn：元模型为CEP规则提供查询目标，因此接下来设计解释与情境化规则。
+
+##### evidence_pointers
+
+1. Section 4.1.1
+
+2. Fig. 1
+
+3. Section 4.2.2
+
+#### 5. 解释与情境化规则设计
+
+- order：5
+
+- name_cn：解释与情境化规则设计
+
+- question_cn：如何将原始事件自动解释为模型更新，并通过情境化推断级联风险？
+
+- inputs_and_setting_cn：输入为CEP范式、专家业务规则、元模型和当前危机情景模型。
+
+- designed_or_compared_object_cn：设计两类规则：解释规则在事件超过阈值时向模型添加Danger；情境化规则查询图数据库，将Danger与模型中的脆弱资产叠加生成Risk。
+
+- baseline_control_or_counterfactual_cn：与文献中仅处理阈值或事件共现的规则相比，新增的是对情景模型内容的主动查询。
+
+##### objective_metrics
+
+1. 规则数量（案例中11条）
+
+2. 检测Danger/Risk/Incident数量（4/6/1）
+
+- analysis_method_cn：规则设计与逻辑公式化
+
+- main_result_cn：设计并列出11条规则，其中第(6)类情境化规则通过查询Neo4J识别危险区域内的道路、水站、养老院和堤坝风险；公式Risk = Danger × Vulnerable asset。
+
+- argumentative_role_cn：实现核心创新——CEP规则与情景模型的双向耦合，从而自动建模危机的级联效应。
+
+- remaining_uncertainty_cn：规则的可移植性只在洪水案例中验证，其他危机类型需要重写规则。
+
+- link_to_next_phase_cn：规则需要实际的事件获取基础设施才能运行，因此进入事件获取与系统实现阶段。
+
+##### evidence_pointers
+
+1. Section 4.1.2
+
+2. Eq. (1)–(9)
+
+#### 6. 事件获取与系统实现
+
+- order：6
+
+- name_cn：事件获取与系统实现
+
+- question_cn：如何接入已知与未知的多源事件流，并将AIC集成到R-IOSUITE中？
+
+- inputs_and_setting_cn：OASIS标准、发布/订阅机制、Java、SIDDHI查询语言、Neo4J图数据库、R-IOSEMIT模拟器等；案例数据来自法国官方洪水预报中心和道路服务，转换为事件流。
+
+- designed_or_compared_object_cn：实现消息代理、CEP引擎、Neo4J API、事件模拟器、COP可视化组件，以及R-IOSUITE中原有过程推导组件。
+
+- baseline_control_or_counterfactual_cn：没有与替代架构做对照，所有组件在R-IOSUITE环境中集成。
+
+##### objective_metrics
+
+1. 组件是否实现
+
+2. 事件流是否成功流转
+
+- analysis_method_cn：软件实现与架构描述
+
+- main_result_cn：构建了完整的AIC系统：消息代理订阅water、weather等主题，CEP引擎处理事件并调用图数据库API更新模型，COP自动刷新；案例中包括交通与水位/流量预测事件流。
+
+- argumentative_role_cn：把设计转化为可运行原型，证明研究问题在现实中可实例化。
+
+- remaining_uncertainty_cn：实现细节依赖具体技术栈，性能可能受版本影响。
+
+- link_to_next_phase_cn：实现完成后，用真实法国洪水和交通数据构造评估场景。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Fig. 2
+
+3. Section 4.2.3–4.2.6
+
+#### 7. 定性评价与领域反馈
+
+- order：7
+
+- name_cn：定性评价与领域反馈
+
+- question_cn：领域专家和潜在用户如何看待系统的可用性、适配性和缺口？
+
+- inputs_and_setting_cn：2015–2018年面向法国各级指挥链应急管理者的年度演示；2019年向CEREMA专家及奥尔良、南特两市风险管理部门展示。
+
+- designed_or_compared_object_cn：系统原型整体，以及用户界面（R-IOSEMIT、R-IOPLAY、R-IODA、R-IOWA、R-IOTA）。
+
+- baseline_control_or_counterfactual_cn：没有对照系统，以真实性演示和用户反馈作为证据。
+
+##### objective_metrics
+
+1. 城市反馈关注点数量（8点）
+
+2. 已实现或可实现的点数（8点均至少被回应）
+
+- analysis_method_cn：演示与利益相关者反馈归纳
+
+- main_result_cn：反馈关注的八点中，五项已直接可用，另外三项（接入外部GIS、发送任务给无系统组织、资源约束调整）也已实现或可通过扩展实现。
+
+- argumentative_role_cn：提供外部有效性证据，表示系统不是纯实验室制品，而是可被实践者理解和接受。
+
+- remaining_uncertainty_cn：不是系统化的可用性测试，没有用户行为或满意度量化测量。
+
+- link_to_next_phase_cn：定性反馈之后，进入量化性能验证，评估实时能力。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Fig. 5
+
+#### 8. 定量评价与4Vs覆盖
+
+- order：8
+
+- name_cn：定量评价与4Vs覆盖
+
+- question_cn：系统能否在近实时内解释和情境化事件，并通过其架构管理4Vs？
+
+- inputs_and_setting_cn：Middle Loire洪水场景，155个洪水预测事件，五种测试情景，事件频率从1到3 evt/ms。
+
+- designed_or_compared_object_cn：解释规则、情境化规则和可视化链路的延迟；架构组件（元模型、CEP、消息代理、COP）对4Vs的承担。
+
+- baseline_control_or_counterfactual_cn：五种场景覆盖不同规则数量和事件频率；Table 7的4Vs覆盖矩阵作为论证基线。
+
+##### objective_metrics
+
+1. 解释延迟(s)
+
+2. 情境化延迟(s)
+
+3. 可视化延迟(s)
+
+4. 4Vs数据层/信息层覆盖标记
+
+- analysis_method_cn：重复三次的延迟测量与组件—4Vs映射分析
+
+- main_result_cn：解释规则始终在1秒内完成，包含图数据库查询的情境化规则在3秒内完成，可视化在1秒内完成；所有事件被正确解释和情境化。Table 7显示每个V在数据层或信息层至少被一个组件管理。
+
+- argumentative_role_cn：用客观指标支撑系统近实时和4Vs管理主张，使贡献从定性描述上升为可测量性能。
+
+- remaining_uncertainty_cn：测试规模较小，没有高负载或真实大数据压力测试；4Vs“覆盖”属于架构推断而非直接测量每个V的数值。
+
+- link_to_next_phase_cn：性能证据完成后，作者转向限制和未来工作，指出系统缺少对近未来的投影能力。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 5.3
+
+3. Table 5
+
+4. Table 6
+
+5. Section 5.4
+
+6. Table 7
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. OBJECTIVE: 提出研究、设计并实现新型应急DSS，以改善应急决策并连接多数据源
+
+2. DESIGN_FEATURE: 系统将事件驱动与模型驱动架构结合，面向危机指挥部
+
+3. STUDY_OVERVIEW: 实现后使用真实危机场景从用户界面、实时数据解释和4Vs管理三个方面评估系统
+
+4. BENCHMARK_OR_CONTRAST: 输入事件包括法国官方部门的交通测量、水位、流量和预测
+
+5. CONTRIBUTION: 两个主要贡献：CEP引擎与图数据库连接，以及持续更新COP
+
+### introduction_moves
+
+1. CONTEXT: 危机管理四阶段，危机指挥部在响应阶段激活并协调措施
+
+2. PRIOR_KNOWLEDGE: Fogli和Guida强调DSS应支持信息共享、系统互操作、行动者协调和后果预测
+
+3. THEORY_INTRO: Endsley的情境意识三步（感知、理解、投影）与D'Aniello的认知过程
+
+4. PHENOMENON: 危机数据呈4Vs特征，数据源多样且持续更新
+
+5. REQUIREMENT: 系统需要自动解释数据、更新情景模型，并用COP呈现
+
+6. PRACTICAL_STAKES: 应急管理者没有时间收集和解释信息
+
+7. RQ_OR_OBJECTIVE: 提出研究问题：如何收集、解释和情境化原始事件流、建模危机后果并管理4Vs
+
+8. STUDY_OVERVIEW: 简介后续章节结构
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO: Endsley情境意识三步用于指导DSS需支持感知、理解与投影
+
+2. THEORY_INTRO: 4Vs of Big Data定义（Volume, Velocity, Variety, Veracity）
+
+3. PRIOR_KNOWLEDGE: COP定义及其对情境感知的支持
+
+4. THEORY_INTRO: 模型驱动互操作与统一本体/元模型方法
+
+5. THEORY_INTRO: CEP范式与事件驱动架构、发布/订阅机制
+
+6. PRIOR_KNOWLEDGE: R-IOSUITE现有元模型和过程推导组件
+
+### artifact_design_moves
+
+1. REQUIREMENT: 元模型必须能表达复杂关系并覆盖危机信息需求
+
+2. DESIGN_FEATURE: 在R-IOSUITE元模型基础上增加Data sources、Critical infrastructure和Sensitive building
+
+3. DESIGN_FEATURE: CEP规则分为解释规则和情境化规则，后者能查询情景模型
+
+4. MECHANISM: 情境化规则公式Risk = Danger × Vulnerable asset，并给出泛化和特化版本
+
+5. DESIGN_FEATURE: 使用OASIS标准、发布/订阅、XML/XSD实现事件获取
+
+6. DESIGN_FEATURE: Neo4J图数据库、消息代理、R-IOSEMIT模拟器、COP界面
+
+7. RESULT: 案例中实例化15,569个环境组件
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST: Middle Loire洪水场景和官方预测数据作为测试基线
+
+2. METHOD_JUSTIFICATION: 使用多年专家演示和城市反馈评估实践契合度
+
+3. RESULT: 城市反馈八点中大部分已支持或可实现
+
+4. METHOD_JUSTIFICATION: 用五场景重复测量解释/情境化/可视化延迟
+
+5. RESULT: 解释<1s、情境化<3s、可视化<1s
+
+6. RESULT: Table 7显示每个4V至少被一个架构组件管理
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 系统回答研究问题和业务需求，并支持情境感知中的感知步骤
+
+2. LIMITATION_AND_FUTURE: 系统缺少将情景模型投影到近未来的能力，未来可使用预报和响应过程事件
+
+3. CONTRIBUTION: 总结两个主要贡献：CEP查询图数据库和持续更新COP
+
+4. BOUNDARY_CONDITION: 系统适用于其他复杂协作如物流、医疗，通过元模型层扩展
+
+5. OTHER: 源代码开放，每6个月发布新功能
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Situation Awareness theory (Endsley 1995)
+
+2. Fogli & Guida的应急DSS设计需求
+
+3. 4Vs of Big Data (Boulila et al.)
+
+4. Model-driven interoperability / unified metamodelling
+
+5. Complex Event Processing paradigm
+
+6. Publish/subscribe (OASIS标准)
+
+7. Common Operational Picture (Wolbers & Boersma)
+
+8. R-IOSUITE现有元模型与组件
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：情境感知理论和4Vs框架明确设置了系统目标（支持感知步骤、管理4Vs）并解释了为什么需要元模型、CEP和COP；但具体的元模型选择来自R-IOSUITE既有模型，CEP规则内容来自专家业务规则，许多架构组件是对现有原型的复用，而非从理论严格演绎。
+
+- 理论到设计翻译链：Fogli和Guida的DSS需求 + Endsley情境意识三步 → 系统需要自动化感知步骤并支持理解/投影 → 遇到数据4Vs挑战 → 用统一元模型控制信息多样性和互操作 → 用CEP规则实现事件实时解释 → 用情境化规则将Danger与脆弱资产叠加生成Risk → 用发布/订阅机制接入已知未知源 → 用COP将模型可视化并允许人工编辑 → 用延迟测量和4Vs映射检验这些设计是否达到近实时与4Vs管理目标。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：情境意识需要感知、理解、投影三步，其中感知是对环境中元素的感知
+
+- mechanism_cn：自动化感知步骤可以节省应急管理者在原始数据采集和初步理解上的时间
+
+- design_requirement_cn：系统需要自动收集并解释事件，并将结果更新到情景模型中
+
+- artifact_choice_cn：AIC的事件获取模块、CEP解释规则、图数据库模型更新API
+
+- evaluated_contrast_cn：与文献中只能手动采集或单源数据系统相比，AIC连接多源并自动实例化Danger/Risk
+
+- objective_result_cn：五场景中解释规则<1s，情境化规则<3s，COP更新<1s
+
+##### evidence_pointers
+
+1. Section 5.3 Table 6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：4Vs要求系统管理数据层的Volume/Velocity/Variety/Veracity以及信息层的对应维度
+
+- mechanism_cn：不同架构组件可以分别承担不同V的削减或验证功能
+
+- design_requirement_cn：系统需要在数据层和信息层都控制4Vs
+
+- artifact_choice_cn：元模型限制信息种类；CEP减少事件量和验证事件真实性；消息代理接入多源；COP允许人工编辑
+
+- evaluated_contrast_cn：Table 7以组件×4Vs矩阵显示覆盖关系，而非单一组件处理所有V
+
+- objective_result_cn：每个V至少被一个组件覆盖，信息层Veracity被三个组件覆盖
+
+##### evidence_pointers
+
+1. Section 5.4 Table 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：统一本体的模型驱动互操作支持不同系统共享信息
+
+- mechanism_cn：共同元模型使异构事件可归一到有限概念集，从而支持自动推理
+
+- design_requirement_cn：元模型必须覆盖危机情景所需的全部信息并允许表达复杂关系
+
+- artifact_choice_cn：采用并扩展R-IOSUITE元模型，增加Data sources、Critical infrastructure和Sensitive building
+
+- evaluated_contrast_cn：与Web of Science检索到的现有本体比较，后者不能同时满足复杂度与覆盖度
+
+- objective_result_cn：实例化15,569个环境组件，覆盖法国领土关键设施
+
+##### evidence_pointers
+
+1. Section 4.1.1
+
+2. Section 4.2.2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：CEP可检测时间、空间和语义模式，但本身不管理输出多样性和模型更新
+
+- mechanism_cn：让CEP规则查询图数据库，可将事件模式与当前模型内容结合，推断级联风险
+
+- design_requirement_cn：规则需要在更新模型时参考已有模型中的资产和关系
+
+- artifact_choice_cn：开发SIDDHI函数向Neo4J发送Cypher查询，情境化规则遍历危险区域内的资产并添加Risk
+
+- evaluated_contrast_cn：与文献中仅用事件共现验证真伪的CEP规则相比，新增模型内容查询
+
+- objective_result_cn：情境化规则在案例中正确生成针对道路、水站、养老院和堤坝的6个风险
+
+##### evidence_pointers
+
+1. Section 4.1.2 Eq. (6)(7)
+
+2. Section 5.1
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：发布/订阅机制允许系统从已知和未知源订阅事件主题
+
+- mechanism_cn：消息代理以主题路由事件，使CEP规则可动态接入新数据源
+
+- design_requirement_cn：事件获取必须支持异构格式和主题订阅
+
+- artifact_choice_cn：遵循OASIS标准，使用XML/XSD描述事件与类型，Java消息代理订阅topic并转发
+
+- evaluated_contrast_cn：与Mohsin等定制采集系统相比，AIC可订阅任意发布者
+
+- objective_result_cn：案例中R-IOSEMIT模拟交通和水文事件流，系统成功接收并处理
+
+##### evidence_pointers
+
+1. Section 4.1.3
+
+2. Section 4.2.3
+
+3. Section 4.2.5
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 定性专家演示与利益相关者反馈
+
+2. 基于真实场景的五情景延迟测量
+
+3. 架构组件-4Vs覆盖映射分析
+
+4. 元模型实例化规模测试（15,569环境组件）
+
+- why_these_evaluations_cn：因为贡献既有技术性能（近实时处理），又有实践可用性（应急管理者接受），还有设计知识（架构如何管理4Vs），单一评价无法覆盖；因此用专家演示说明外部有效性，用延迟测量支撑实时性能，用4Vs矩阵把组件职责提升为可复用设计知识，用元模型实例化规模说明可扩展性。
+
+- benchmark_and_contrast_chain_cn：论文没有设置传统对照系统，而是先用文献综述表建立“现有系统不能满足全部需求”的基线，然后用现实洪水场景作为共同测试平台，在五种情景中比较不同规则负载下的延迟，最后用4Vs矩阵在架构层面比较各组件覆盖情况，形成从缺口定位到性能到架构覆盖的递进证据链。
+
+### claim_evidence_ledger
+
+#### 1. 系统能在近实时内解释和情境化事件
+
+- claim_cn：系统能在近实时内解释和情境化事件
+
+- evidence_cn：Table 6中解释规则均在1秒内，情境化规则在3秒内，可视化在1秒内完成
+
+- support_status_cn：有直接测量的支持，但仅限五场景和小规模数据
+
+#### 2. 系统提供的规则能正确解释和情境化事件
+
+- claim_cn：系统提供的规则能正确解释和情境化事件
+
+- evidence_cn：5.3节报告所有事件被正确解释和情境化
+
+- support_status_cn：作者自评，缺乏独立标注或对照
+
+#### 3. 系统回答法国应急管理者的九项实际需求
+
+- claim_cn：系统回答法国应急管理者的九项实际需求
+
+- evidence_cn：5.2节城市反馈的八点中，五项已支持，三项可实现；架构满足十项中的九项
+
+- support_status_cn：有定性反馈支撑，但不是系统化可用性实验
+
+#### 4. 架构组件管理4Vs
+
+- claim_cn：架构组件管理4Vs
+
+- evidence_cn：Table 7显示MM、CEP、MB、COP在数据层和信息层对4Vs的覆盖标记
+
+- support_status_cn：这是设计推演而非对Volume/Velocity等的直接测量，属于弱证据
+
+#### 5. 元模型能表示法国领土的关键信息
+
+- claim_cn：元模型能表示法国领土的关键信息
+
+- evidence_cn：实例化15,569个环境组件，覆盖机场、车站、医院等
+
+- support_status_cn：有实例化规模证据，但只针对一个地理范围
+
+- internal_validity_strategy_cn：使用统一洪水场景和官方来源数据；采用五个可控情景，调节事件数量、频率和规则数量；延迟测量重复三次以减少误差；解释与情境化分为不同指标。
+
+- external_validity_strategy_cn：使用实践者访谈、多年演示和城市风险管理部门反馈；系统开放源码；强调元模型和规则可修改，适用于其他复杂协作；将案例限定为卢瓦尔河中游洪水，避免过度泛化。
+
+- what_is_not_actually_tested_cn：没有真实危机处置中的现场测试；没有衡量系统对应急决策质量或响应速度的因果影响；没有对手动维护模型与自动模型做对比；4Vs的Volume与Veracity只有架构层面论证，缺乏大数据量压力测试；用户界面的可用性没有用标准化问卷或眼动等指标评估；投影未来能力未实现。
+
+## 贡献闭环
+
+- technical_claim_cn：AIC信息系统的CEP引擎能够在近实时内接收多源事件，通过解释与情境化规则更新Neo4J中的情景模型，并让COP自动刷新。
+
+- artifact_claim_cn：关键构件是情境化规则，它通过在CEP规则中查询图数据库，把Danger与模型中的脆弱资产组合为Risk；该构件导致了自动检测级联风险的改进。
+
+- mechanism_claim_cn：机制为：原始事件经阈值判断生成Danger（解释），Danger与Vulnerable asset的空间/语义共存生成Risk（情境化），再通过消息代理驱动模型更新和COP显示。
+
+- boundary_claim_cn：在法国卢瓦尔河洪水模拟上成立；适用于其他复杂协作（物流、医疗），只要元模型和规则可修改；当前不适用于需要投影未来或“what-if”分析的决策阶段；4Vs覆盖基于该特定架构。
+
+- reusable_design_knowledge_cn：结合事件驱动和模型驱动的DSS架构；将CEP规则与情景模型图数据库连接；统一元模型控制信息多样性的方法；用不同组件分别承担4Vs职责的设计原则；规则可泛化/特化的多层结构。
+
+- theoretical_contribution_cn：将Endsley情境感知的感知步骤自动化，并扩展到信息层的实时COP更新；展示了4Vs框架如何通过组件分工被操作化；但没有修改或扩展情境理论本身。
+
+- how_discussion_closes_intro_gap_cn：结论段回到开头研究问题的六点要求，说明AIC通过多源订阅、实时解释、自动更新模型、COP展示和人工编辑逐项回应；同时诚实指出未覆盖的投影步骤，呼应引言中Endsley的第三步，将缺口转化为未来工作。
+
+- overclaim_or_unsupported_leaps_cn：从“延迟低”跳到“改善决策”未被直接验证；4Vs“覆盖”不等于数值上满足真实大数据；专家反馈是定性演示，不是系统化实验；CEP规则参考模型内容的设计只在一个案例中测试，却宣称适用于其他协作；源代码开放和发布周期属于披露而非贡献证据。
+
+## 句级写作动作图谱
+
+### 1. Abstract S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract S1
+
+- move_code：OBJECTIVE
+
+- paraphrase_cn：本文研究、设计并实现一种新型应急决策支持系统，目的是通过连接新的多数据源提升应急管理者的决策。
+
+- rhetorical_function_cn：第一句直接给出全文目标，让读者知道研究对象和目的。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后文的具体架构和评价铺设期望。
+
+- evidence_pointer：Abstract S1
+
+### 2. Abstract S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：系统结合事件驱动与模型驱动架构，专门面向危机指挥部。
+
+- rhetorical_function_cn：点出核心设计理念，为贡献铺垫。
+
+- depends_on_cn：依赖前一句的研究目标。
+
+- sets_up_cn：为正文4.1节中的双架构设计提供预告。
+
+- evidence_pointer：Abstract S2
+
+### 3. Abstract S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实现后，用真实危机场景从用户界面、实时数据解释能力、4Vs管理三方面评估系统。
+
+- rhetorical_function_cn：预告评价维度，建立可信性。
+
+- depends_on_cn：系统实现是评价的前提。
+
+- sets_up_cn：引导读者关注第五节的多重评价。
+
+- evidence_pointer：Abstract S3
+
+### 4. Abstract S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract S4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：输入事件是法国官方部门公布的交通测量、水位、流量以及水位和流量的预测。
+
+- rhetorical_function_cn：说明评价输入并非合成数据，增强外部有效性。
+
+- depends_on_cn：评价场景的设定。
+
+- sets_up_cn：为案例研究的具体数据源提供线索。
+
+- evidence_pointer：Abstract S4
+
+### 5. Abstract S5-S6
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract S5-S6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：主要贡献是CEP引擎与包含危机情景模型的图数据库的连接，以及持续更新通用作战图以支持应急管理者。
+
+- rhetorical_function_cn：摘要末尾声明两个主要贡献，便于读者记住核心卖点。
+
+- depends_on_cn：前面架构与评价的铺垫。
+
+- sets_up_cn：为结论部分的贡献重述提供提前框架。
+
+- evidence_pointer：Abstract S5-S6
+
+### 6. Introduction P1 S1
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：Wallace和De Balogh最早将危机管理分为预防、准备、响应和恢复四阶段，危机指挥部在响应阶段被激活。
+
+- rhetorical_function_cn：从经典文献切入，为全文问题建立政府应急管理背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出危机指挥部及其信息需求。
+
+- evidence_pointer：Introduction P1 S1
+
+### 7. Introduction P1 S2-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S2-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：危机指挥部由应急服务经理、地方当局代表等组成，负责发起、协调和监督措施，并接收利益相关者信息。
+
+- rhetorical_function_cn：细化危机指挥部的角色，说明其需要信息和协调。
+
+- depends_on_cn：四阶段背景。
+
+- sets_up_cn：为后文“管理者没有时间处理信息”作铺垫。
+
+- evidence_pointer：Introduction P1 S2-S3
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Fogli和Guida强调结构化协调响应管理应建立在DSS之上，DSS需能共享信息、与外部系统交互、协调异构行动者、预测决策后果。
+
+- rhetorical_function_cn：引入外部权威需求，为系统设计目标提供依据。
+
+- depends_on_cn：危机指挥部信息需求背景。
+
+- sets_up_cn：为研究问题的具体需求列表作准备。
+
+- evidence_pointer：Introduction P2 S1
+
+### 9. Introduction P2 S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：Fogli和Guida认为系统可用性取决于概念选择的清晰性和对任何危机情境建模的能力。
+
+- rhetorical_function_cn：把抽象需求与“建模能力”连接，为后续元模型选择埋伏。
+
+- depends_on_cn：DSS能力清单。
+
+- sets_up_cn：引出基于元模型的互操作方案。
+
+- evidence_pointer：Introduction P2 S2
+
+### 10. Introduction P3 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：使用本体或元模型（按Bézivin定义）能够实现互操作性。
+
+- rhetorical_function_cn：引入模型驱动互操作概念，作为系统设计的技术路线。
+
+- depends_on_cn：前一句的建模能力需求。
+
+- sets_up_cn：为4.1.1节的元模型设计做准备。
+
+- evidence_pointer：Introduction P3 S1
+
+### 11. Introduction P3 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：Fogli和Guida的需求与Endsley的情境感知框架结合，后者通过感知、理解和投影三步支持决策者应对复杂动态情境。
+
+- rhetorical_function_cn：将DSS需求与理论框架绑定，为评价指标提供理论语言。
+
+- depends_on_cn：互操作讨论。
+
+- sets_up_cn：后文用“感知步骤”定位系统贡献。
+
+- evidence_pointer：Introduction P3 S2
+
+### 12. Introduction P4 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：要自动化感知和采集步骤，系统必须访问由大量异构、已知和未知来源持续产生的数据。
+
+- rhetorical_function_cn：从理论要求转向数据现实，引入4Vs问题。
+
+- depends_on_cn：Endsley的感知需要数据。
+
+- sets_up_cn：为4Vs定义提供动机。
+
+- evidence_pointer：Introduction P4 S1
+
+### 13. Introduction P4 S2-S5
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P4 S2-S5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：这种数据状况被称为Big Data的4Vs：大量、高速、多样和不确定性的来源挑战系统互操作与决策。
+
+- rhetorical_function_cn：正式引入4Vs概念，作为后续设计约束和评估维度。
+
+- depends_on_cn：对数据现象的观察。
+
+- sets_up_cn：为5.4节的4Vs评估表和设计原则提供术语。
+
+- evidence_pointer：Introduction P4 S2-S5
+
+### 14. Introduction P5
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P5
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：系统需要解释数据以识别当前情况，随后用危机情景模型更新，并通过COP展示；COP是共享相关信息以达成情境意识的显示。
+
+- rhetorical_function_cn：把4Vs约束与情境模型、COP联系起来，形成整体系统要求。
+
+- depends_on_cn：4Vs和情境感知框架。
+
+- sets_up_cn：为研究问题的表述提供组件。
+
+- evidence_pointer：Introduction P5
+
+### 15. Introduction P6
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P6
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Sagun等人指出危机情景模型还可用于支持响应阶段行动者的协调过程。
+
+- rhetorical_function_cn：扩展情景模型的价值，为R-IOSUITE过程推导组件提供根据。
+
+- depends_on_cn：情景模型作为决策支持核心的想法。
+
+- sets_up_cn：后文说明AIC与R-IOSUITE的整合。
+
+- evidence_pointer：Introduction P6
+
+### 16. Introduction P7 S1-S2
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P7 S1-S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：危机中应急管理者没有时间收集和解释信息，尤其在4Vs背景下。
+
+- rhetorical_function_cn：凸显问题紧迫性，说明为何需要自动化系统。
+
+- depends_on_cn：前面所有理论需求的积累。
+
+- sets_up_cn：直接引出研究目标与问题。
+
+- evidence_pointer：Introduction P7 S1-S2
+
+### 17. Introduction P7 S3
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P7 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究目标是提供决策支持环境，在不需要管理者额外努力的情况下，向所有危机指挥部传递最新COP。
+
+- rhetorical_function_cn：从问题到目标的正式转换。
+
+- depends_on_cn：上一句的时间约束。
+
+- sets_up_cn：为具体研究问题做铺垫。
+
+- evidence_pointer：Introduction P7 S3
+
+### 18. Introduction P7 S4
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P7 S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究问题概括为：如何收集、解释并情境化原始事件流，自动检测和建模危机后果，同时管理4Vs。
+
+- rhetorical_function_cn：把目标压缩为一个可回答的研究问题，是全文的聚焦点。
+
+- depends_on_cn：前面的背景与目标。
+
+- sets_up_cn：为第二、三、四节的问题细化提供主线。
+
+- evidence_pointer：Introduction P7 S4
+
+### 19. Introduction P8
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P8
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：介绍后续章节：文献综述、方法论与范围、系统设计与实现、评价。
+
+- rhetorical_function_cn：给出论文地图，方便读者定位。
+
+- depends_on_cn：研究问题已提出。
+
+- sets_up_cn：引导读者进入正文。
+
+- evidence_pointer：Introduction P8
+
+### 20. Section 2 intro S1
+
+- order：20
+
+- section：Related works
+
+- locator：Section 2 intro S1
+
+- move_code：GAP
+
+- paraphrase_cn：本节目标为寻找能够维持情境意识、处理数据以感知/理解情况、或管理4Vs的现有紧急DSS。
+
+- rhetorical_function_cn：把文献综述与三个需求维度绑定，设定筛选标准。
+
+- depends_on_cn：引言中的研究问题。
+
+- sets_up_cn：为四个子综述的组织提供逻辑。
+
+- evidence_pointer：Section 2 intro S1
+
+### 21. Section 2.1 最后段落
+
+- order：21
+
+- section：Related works
+
+- locator：Section 2.1 最后段落
+
+- move_code：LIMITATION
+
+- paraphrase_cn：例如Mohsin等系统能检测毒物或伤员，但事件采集是为自身系统定制的；由于危机不可预测，仍需要接入多个已知和未知来源。
+
+- rhetorical_function_cn：通过一个代表性系统展示现有方案在多源接入上的不足。
+
+- depends_on_cn：Table 1的对比结果。
+
+- sets_up_cn：为“多源订阅”需求提供具体证据。
+
+- evidence_pointer：Section 2.1 最后段落
+
+### 22. Section 2.2 开头段
+
+- order：22
+
+- section：Related works
+
+- locator：Section 2.2 开头段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：CEP用于检测时间、空间和语义模式；事件驱动架构支持发布/订阅，使系统能访问已知和未知来源。
+
+- rhetorical_function_cn：引入CEP和事件驱动架构作为备选技术。
+
+- depends_on_cn：对紧急DSS功能的需求。
+
+- sets_up_cn：为后续CEP引擎和消息代理的选择作理论铺垫。
+
+- evidence_pointer：Section 2.2 开头段
+
+### 23. Section 2.2 末尾段
+
+- order：23
+
+- section：Related works
+
+- locator：Section 2.2 末尾段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：CEP足以跟踪输入事件流的velocity，但不管理输出信息的volume和variety。
+
+- rhetorical_function_cn：指出CEP范式的边界，说明为什么还需要模型和COP。
+
+- depends_on_cn：对CEP文献的总结。
+
+- sets_up_cn：为结合CEP与模型驱动架构提供理由。
+
+- evidence_pointer：Section 2.2 末尾段
+
+### 24. Section 2.3 末尾段
+
+- order：24
+
+- section：Related works
+
+- locator：Section 2.3 末尾段
+
+- move_code：GAP
+
+- paraphrase_cn：第三轮综述只返回两篇综述和一篇文章，没有方案能同时管理4Vs并推断新信息以改善情境意识。
+
+- rhetorical_function_cn：用文献数量少和需求缺口重申4Vs维度未被解决。
+
+- depends_on_cn：前两轮的缺口模式。
+
+- sets_up_cn：为研究问题中的4Vs部分增加证据。
+
+- evidence_pointer：Section 2.3 末尾段
+
+### 25. Section 2.4 末尾段
+
+- order：25
+
+- section：Related works
+
+- locator：Section 2.4 末尾段
+
+- move_code：GAP
+
+- paraphrase_cn：这些系统聚焦单一信息类型，没有哪一个能自动实例化多个概念；Alexopoulos等系统最接近但仍依赖自有设备。
+
+- rhetorical_function_cn：指出模型自动实例化维度的缺口。
+
+- depends_on_cn：Table 4的比较。
+
+- sets_up_cn：为自动实例化多个概念提供研究空间。
+
+- evidence_pointer：Section 2.4 末尾段
+
+### 26. Section 2.5 S1
+
+- order：26
+
+- section：Related works
+
+- locator：Section 2.5 S1
+
+- move_code：GAP
+
+- paraphrase_cn：没有找到能覆盖所有需求的紧急DSS，因此用六点研究问题总结所有需求。
+
+- rhetorical_function_cn：把四轮综述的零散缺口汇总为单一缺口声明。
+
+- depends_on_cn：所有文献综述结果。
+
+- sets_up_cn：进入方法论和系统设计。
+
+- evidence_pointer：Section 2.5 S1
+
+### 27. Section 2.5 研究问题框
+
+- order：27
+
+- section：Related works
+
+- locator：Section 2.5 研究问题框
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究问题细化为六点：接入已知未知源、实时解释、自动检测后果、更新模型、显示COP、允许人工编辑。
+
+- rhetorical_function_cn：将初始问题扩展为可操作需求列表，为后续设计提供验收标准。
+
+- depends_on_cn：文献缺口和初始研究问题。
+
+- sets_up_cn：后续每个设计组件都可以对照这六点。
+
+- evidence_pointer：Section 2.5 研究问题框
+
+### 28. Section 3 P1
+
+- order：28
+
+- section：Methodology
+
+- locator：Section 3 P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作为法国研究项目的一部分，专家访谈了多位法国危机管理从业者，归纳出十项当前困难。
+
+- rhetorical_function_cn：引入实践需求来源，使后续系统要求有现实基础。
+
+- depends_on_cn：前文的文献缺口。
+
+- sets_up_cn：为第五节点的需求-系统对应提供列表。
+
+- evidence_pointer：Section 3 P1
+
+### 29. Section 3 P2-P3
+
+- order：29
+
+- section：Methodology
+
+- locator：Section 3 P2-P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：研究问题中的事件处理方案将自动化感知步骤，识别网络互联导致的级联效应，并用COP缓解理解差异，同时R-IOSUITE可补足响应过程推导与协调。
+
+- rhetorical_function_cn：把文献研究问题与十项困难逐一映射，说明系统范围。
+
+- depends_on_cn：十项困难和研究问题。
+
+- sets_up_cn：为AIC+R-IOSUITE组合的提出提供理由。
+
+- evidence_pointer：Section 3 P2-P3
+
+### 30. Section 3 P4
+
+- order：30
+
+- section：Methodology
+
+- locator：Section 3 P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出通过将R-IOSUITE改造为AIC来回答研究问题：AIC负责事件获取、解释和情境化，并最终在图上显示更新后的COP。
+
+- rhetorical_function_cn：正式提出系统名称与核心组件，标志从问题到解决方案的过渡。
+
+- depends_on_cn：需求映射和前文技术基础。
+
+- sets_up_cn：为软件体系结构描述提供提纲。
+
+- evidence_pointer：Section 3 P4
+
+### 31. Section 3 P5
+
+- order：31
+
+- section：Methodology
+
+- locator：Section 3 P5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：为评估提出现实场景：卢瓦尔河中游百年一遇洪水，水文部分由两个官方洪水预报中心建模，道路服务提供真实交通数据。
+
+- rhetorical_function_cn：设定评估场景和数据来源，增强结果可信度。
+
+- depends_on_cn：需要测试系统的需求。
+
+- sets_up_cn：为后续5.1节的评估数据作准备。
+
+- evidence_pointer：Section 3 P5
+
+### 32. Section 4.1.1 P1
+
+- order：32
+
+- section：Design
+
+- locator：Section 4.1.1 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：AIC遵循模型驱动互操作方法，采用统一本体/元模型方法以支持系统间信息共享。
+
+- rhetorical_function_cn：开宗明义说明互操作设计选择。
+
+- depends_on_cn：绪论中元模型互操作需求。
+
+- sets_up_cn：为元模型选择与扩展提供方法论依据。
+
+- evidence_pointer：Section 4.1.1 P1
+
+### 33. Section 4.1.1 P2
+
+- order：33
+
+- section：Design
+
+- locator：Section 4.1.1 P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：元模型需要支持复杂推理并覆盖危机细胞决策所需的信息，但检索到的本体没有一个满足这两个条件，因此采用R-IOSUITE中已实现的元模型。
+
+- rhetorical_function_cn：用检索结果证明为什么选择并扩展现有元模型而非新造。
+
+- depends_on_cn：模型驱动互操作的总体方法。
+
+- sets_up_cn：为元模型扩展细节和实例化证据作铺垫。
+
+- evidence_pointer：Section 4.1.1 P2
+
+### 34. Section 4.1.1 P3
+
+- order：34
+
+- section：Design
+
+- locator：Section 4.1.1 P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为适应业务需求，在Lauras等人的元模型基础上增加Data sources、Critical infrastructure和Sensitive building三个概念。
+
+- rhetorical_function_cn：说明扩展内容，体现对危机管理特化。
+
+- depends_on_cn：前句的元模型起点。
+
+- sets_up_cn：后文概念定义和实例化规模数据。
+
+- evidence_pointer：Section 4.1.1 P3
+
+### 35. Section 4.1.2 P1
+
+- order：35
+
+- section：Design
+
+- locator：Section 4.1.2 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：部分情景模型可在准备阶段预先建模，AIC重点建模危机期间出现的新风险和事件。
+
+- rhetorical_function_cn：界定自动建模的范围，避免过度承诺。
+
+- depends_on_cn：元模型可表达的静态与动态信息。
+
+- sets_up_cn：为规则设计限定目标：探测风险与事件。
+
+- evidence_pointer：Section 4.1.2 P1
+
+### 36. Section 4.1.2 P2
+
+- order：36
+
+- section：Design
+
+- locator：Section 4.1.2 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：主要贡献是让CEP规则能够参考情景模型内容：通过元模型概念向图数据库发查询；规则分解释规则和情境化规则两类。
+
+- rhetorical_function_cn：点出核心创新机制，并给出规则分类。
+
+- depends_on_cn：元模型和图数据库的存在。
+
+- sets_up_cn：为情境化规则公式和具体规则列出做准备。
+
+- evidence_pointer：Section 4.1.2 P2
+
+### 37. Section 4.1.2 P3
+
+- order：37
+
+- section：Design
+
+- locator：Section 4.1.2 P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：情境化规则表达为Risk = Danger × Vulnerable asset，即风险等于危险与脆弱资产的共存。
+
+- rhetorical_function_cn：用简洁公式说明风险推断逻辑，便于读者理解后续规则。
+
+- depends_on_cn：解释规则生成的Danger。
+
+- sets_up_cn：为Eq. (2)(3)的泛化/特化提供模板。
+
+- evidence_pointer：Section 4.1.2 P3 Eq. (1)
+
+### 38. Section 4.1.2 P4
+
+- order：38
+
+- section：Design
+
+- locator：Section 4.1.2 P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：规则可以泛化到任何协作（Opportunity/Threat = Characteristic × Environment component），也可以特化到道路危机场景（Congestion Risk = Danger of snow × Highway）。
+
+- rhetorical_function_cn：展示规则设计具有抽象层级，支持跨领域复用。
+
+- depends_on_cn：核心公式Risk = Danger × Vulnerable asset。
+
+- sets_up_cn：为不同危机场景可配置规则提供理由。
+
+- evidence_pointer：Section 4.1.2 P4
+
+### 39. Section 4.1.3
+
+- order：39
+
+- section：Design
+
+- locator：Section 4.1.3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为实时获取事件，AIC遵循OASIS标准，使用发布/订阅环境，事件用XML描述，事件类型用XSD描述。
+
+- rhetorical_function_cn：说明事件接入机制的标准化选择。
+
+- depends_on_cn：多源接入需求。
+
+- sets_up_cn：为消息代理实现提供技术规范。
+
+- evidence_pointer：Section 4.1.3
+
+### 40. Section 4.2 intro
+
+- order：40
+
+- section：Design
+
+- locator：Section 4.2 intro
+
+- move_code：RESULT
+
+- paraphrase_cn：图2展示AIC与R-IOSUITE组合的架构，能满足法国应急管理者十项需求中的九项。
+
+- rhetorical_function_cn：提前宣告实现成果，并用需求覆盖数衡量。
+
+- depends_on_cn：设计原则和已有组件。
+
+- sets_up_cn：转入具体组件实现。
+
+- evidence_pointer：Section 4.2 intro, Fig. 2
+
+### 41. Section 4.2.2 末段
+
+- order：41
+
+- section：Design
+
+- locator：Section 4.2.2 末段
+
+- move_code：RESULT
+
+- paraphrase_cn：在Middle Loire案例中，元模型被用于建模15,569个环境组件，覆盖机场、火车站、水站、监狱、夏令营、医院、学校、敏感工业基地、堤坝和危机管理建筑。
+
+- rhetorical_function_cn：用实例化规模证明元模型的覆盖能力。
+
+- depends_on_cn：扩展后的元模型定义。
+
+- sets_up_cn：为后续规则查询这些对象提供数据基础。
+
+- evidence_pointer：Section 4.2.2 末段
+
+### 42. Section 4.2.3 开头段
+
+- order：42
+
+- section：Design
+
+- locator：Section 4.2.3 开头段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：CEP引擎用Java开发，规则用SIDDHI语言描述，并开发了向Neo4J发送Cypher查询的自定义函数。
+
+- rhetorical_function_cn：说明核心技术实现，突出“规则查询模型”这一创新点。
+
+- depends_on_cn：4.1.2的规则分类。
+
+- sets_up_cn：为具体规则示例和性能测量提供技术上下文。
+
+- evidence_pointer：Section 4.2.3 开头段
+
+### 43. Section 4.2.3 规则清单后
+
+- order：43
+
+- section：Design
+
+- locator：Section 4.2.3 规则清单后
+
+- move_code：RESULT
+
+- paraphrase_cn：Middle Loire案例用11条CEP规则识别4个Danger、6个Risk和1个Incident，其中Eq. (6)情境化规则通过查询图数据库获取每个脆弱资产并为每个资产生成Risk。
+
+- rhetorical_function_cn：给出规则数量和产出实体，说明系统在场景中的可操作性。
+
+- depends_on_cn：规则设计公式和元模型实例。
+
+- sets_up_cn：为5.1节的评估输入做铺垫。
+
+- evidence_pointer：Section 4.2.3 规则清单段
+
+### 44. Section 4.2.5-4.2.6
+
+- order：44
+
+- section：Design
+
+- locator：Section 4.2.5-4.2.6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：R-IOSEMIT模拟事件流，R-IOPLAY显示COP并允许手工编辑，R-IODA建模，R-IOWA编排响应过程，R-IOTA监测偏差。
+
+- rhetorical_function_cn：系统化介绍GUI和环境组件，显示系统覆盖响应全链条。
+
+- depends_on_cn：AIC核心组件。
+
+- sets_up_cn：为5.2节用户界面说明提供内容。
+
+- evidence_pointer：Section 4.2.5-4.2.6
+
+### 45. Section 5.1
+
+- order：45
+
+- section：Evaluation
+
+- locator：Section 5.1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：评估输入包括155个洪水预报事件、三个来源同时发送、三个解释规则、五个情境化规则和1122个关注对象。
+
+- rhetorical_function_cn：明确评估规模和规则负载，为性能数据提供上下文。
+
+- depends_on_cn：前文案例实施。
+
+- sets_up_cn：为Table 5的五种情景做铺垫。
+
+- evidence_pointer：Section 5.1
+
+### 46. Section 5.2 P1-P2
+
+- order：46
+
+- section：Evaluation
+
+- locator：Section 5.2 P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：所有接口展示后，R-IOPLAY、R-IODA和R-IOTA现在能够自动接收新Danger、Risk和Incident并更新显示。
+
+- rhetorical_function_cn：从设计转向效果，说明COP自动更新的结果。
+
+- depends_on_cn：系统实现。
+
+- sets_up_cn：为专家反馈提供功能细节。
+
+- evidence_pointer：Section 5.2 P1-P2
+
+### 47. Section 5.2 P3
+
+- order：47
+
+- section：Evaluation
+
+- locator：Section 5.2 P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为实践评估，团队在2015-2018年每年向不同指挥层级的经验丰富的应急管理者演示，并在2019年向两个城市的风险管理部门展示。
+
+- rhetorical_function_cn：说明评价对象和受众，证明外部有效性努力。
+
+- depends_on_cn：实现了可演示系统。
+
+- sets_up_cn：为反馈清单提供来源。
+
+- evidence_pointer：Section 5.2 P3
+
+### 48. Section 5.2 P4-P5
+
+- order：48
+
+- section：Evaluation
+
+- locator：Section 5.2 P4-P5
+
+- move_code：RESULT
+
+- paraphrase_cn：城市反馈关注八点，其中五项（外部GIS接入、手改模型、适应响应过程、自定义危险区形状、威胁优先级）已可用，另三项也可满足。
+
+- rhetorical_function_cn：用具体反馈清单证明系统贴近实践需求。
+
+- depends_on_cn：多年演示和城市展示。
+
+- sets_up_cn：这些反馈部分成为未来工作提示。
+
+- evidence_pointer：Section 5.2 P4-P5
+
+### 49. Section 5.3 P1
+
+- order：49
+
+- section：Evaluation
+
+- locator：Section 5.3 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为测量近实时能力，在五种不同场景中测量解释和情境化时间，每种三次。
+
+- rhetorical_function_cn：说明定量评估设计，增强测量可信度。
+
+- depends_on_cn：评估场景已建立。
+
+- sets_up_cn：为Table 5/6的呈现提供方法依据。
+
+- evidence_pointer：Section 5.3 P1
+
+### 50. Section 5.3 P2-P3
+
+- order：50
+
+- section：Evaluation
+
+- locator：Section 5.3 P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：解释规则处理原始事件均小于1秒，情境化规则处理复杂事件在3秒内，复杂事件被COP接收和显示在1秒内，所有事件被正确解释和情境化。
+
+- rhetorical_function_cn：报告关键性能数字，是全文技术贡献的证据核心。
+
+- depends_on_cn：五种场景的测量设计。
+
+- sets_up_cn：为4Vs覆盖论证提供性能基础。
+
+- evidence_pointer：Section 5.3 P2-P3, Table 6
+
+### 51. Section 5.4 S1
+
+- order：51
+
+- section：Evaluation
+
+- locator：Section 5.4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：架构中所有组件都在管理4Vs上发挥作用，Table 7汇总每个组件对数据层和信息层的影响。
+
+- rhetorical_function_cn：把性能结果提升到架构设计知识层面。
+
+- depends_on_cn：测量结果和组件分解。
+
+- sets_up_cn：分组件解释4Vs管理机制。
+
+- evidence_pointer：Section 5.4 S1, Table 7
+
+### 52. Section 5.4 分组件段
+
+- order：52
+
+- section：Evaluation
+
+- locator：Section 5.4 分组件段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：元模型通过有限概念约束信息多样化，CEP通过事件处理降低事件数量和流速并验证事件真实性，消息代理接入更多来源以增强信息真实性，COP允许人工编辑并选择图层以控制信息量。
+
+- rhetorical_function_cn：解释每个组件如何承担4Vs，使Table 7不只是一张表。
+
+- depends_on_cn：Table 7。
+
+- sets_up_cn：为设计原则总结提供因果逻辑。
+
+- evidence_pointer：Section 5.4 分组件段
+
+### 53. Section 5.5 S1
+
+- order：53
+
+- section：Evaluation
+
+- locator：Section 5.5 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文提出的系统能够回答研究问题、业务问题和法国应急管理者的需求。
+
+- rhetorical_function_cn：在限制节开头先肯定总体贡献，避免被限制削弱。
+
+- depends_on_cn：前面所有评价结果。
+
+- sets_up_cn：为随后限制陈述提供对比。
+
+- evidence_pointer：Section 5.5 S1
+
+### 54. Section 5.5 S2
+
+- order：54
+
+- section：Evaluation
+
+- locator：Section 5.5 S2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：系统仍缺少将当前情景模型投影到近未来的能力，未来可利用预报和响应过程事件生成预期模型，并支持what-if接口。
+
+- rhetorical_function_cn：诚实指出最明显的理论缺口，并给出可行未来方向。
+
+- depends_on_cn：Endsley情境意识三步骤。
+
+- sets_up_cn：为结论第六节限制和展望提供输入。
+
+- evidence_pointer：Section 5.5 S2
+
+### 55. Section 6 P1
+
+- order：55
+
+- section：Conclusion
+
+- locator：Section 6 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究工作总结：AIC将R-IOSUITE连接到事件主题并分析事件，解释规则对应真实业务规则，情境化规则查询图数据库进而识别危险区域中的资产风险并显示在COP上。
+
+- rhetorical_function_cn：浓缩系统功能和贡献，回扣研究问题。
+
+- depends_on_cn：全文设计与评价。
+
+- sets_up_cn：为两个贡献的正式声明做铺垫。
+
+- evidence_pointer：Section 6 P1
+
+### 56. Section 6 P2
+
+- order：56
+
+- section：Conclusion
+
+- locator：Section 6 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：系统的两个贡献是：CEP规则查询图数据库以自动识别风险，以及在实时支持情境感知的感知步骤，并让组件管理4Vs。
+
+- rhetorical_function_cn：正式列出贡献，与摘要呼应。
+
+- depends_on_cn：P1的系统总结。
+
+- sets_up_cn：为可扩展性声明提供基础。
+
+- evidence_pointer：Section 6 P2
+
+### 57. Section 6 P3
+
+- order：57
+
+- section：Conclusion
+
+- locator：Section 6 P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：系统可增强其他复杂协作（如物流、医疗）中用户的情境感知，元模型分层使研究者可添加新的解释和情境化规则。
+
+- rhetorical_function_cn：从洪水案例推广到其他领域，主张设计知识的可复用性。
+
+- depends_on_cn：泛化规则和多层元模型。
+
+- sets_up_cn：为开放源码提供上下文。
+
+- evidence_pointer：Section 6 P3
+
+### 58. Section 6 P4
+
+- order：58
+
+- section：Conclusion
+
+- locator：Section 6 P4
+
+- move_code：OTHER
+
+- paraphrase_cn：系统源代码开放，每六个月发布新功能，供社区使用。
+
+- rhetorical_function_cn：披露资源可用性，增强透明性和可复现性。
+
+- depends_on_cn：系统实现与评价完成。
+
+- sets_up_cn：为读者提供获取途径。
+
+- evidence_pointer：Section 6 P4
+
+## 写作技术
+
+- gap_construction_cn：采用四轮系统文献综述，每一轮用精确检索词和需求符合性表格（Table 1-4）逐一排除现有系统，再用“没有系统覆盖全部六点需求”一句话把分散的不足收束为单一缺口；同时用十项实践困难把技术缺口转化为现实后果，使缺口既有学术价值也有实践紧迫性。
+
+- signposting_cn：引言末尾明确章节地图；每个文献综述小节用小问句开头，评价节用表格预告；设计节用“设计包括三个方面”列出子目标；第五节用“定性—定量—4Vs”三层预告。
+
+- transition_logic_cn：每个文献小节结尾都回到研究问题并说明不足，从而自然进入下一节；方法论中的需求映射把引言与设计连接；设计节内部按“元模型→规则→获取”的依赖顺序推进；评价节以“实现→演示→测量→架构映射”递进。
+
+- claim_evidence_rhythm_cn：先给出设计声明，然后用架构图/规则/公式作为“设计证据”，再在评价节用专家反馈和延迟数字作为“运行证据”，最后用Table 7做“覆盖证据”；结论重新以贡献形式复述这些证据。
+
+- benchmark_narrative_cn：没有传统对照实验，而是用Table 1-4的文献系统作为负例，用官方洪水场景作为共同测试平台，用五种不同规则负载场景作为自比基线；4Vs矩阵作为最后的覆盖性基准。
+
+- theory_return_cn：讨论和结论将结果重新映射到Endsley情境感知的三步骤，明确系统自动化了“感知”却未支持“投影”，因而把限制重新解释为理论框架中的一个待完成部分，而不是单纯的工程缺陷。
+
+- contribution_positioning_cn：贡献定位在“机制层面”（规则查询模型）和“架构层面”（4Vs组件覆盖），而不是单个性能数字；并声称该系统对任何复杂协作都可扩展，从而超越一次性开发报告。
+
+- novelty_protection_cn：通过强调情境化规则对图数据库的主动查询，与文献中单纯阈值规则区分开；将性能结果上升为可复用的设计原则（元模型限制多样性、组件分工管理4Vs），避免贡献被归结为“只是又一个原型表现良好”。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用情境或经典文献引入领域问题，强调现实后果和时间压力，最后压成一个可回答的研究问题。
+
+- research_job_cn：识别一个实际决策者缺乏时间/工具处理信息的问题，并找到理论框架（如情境感知）和数据结构框架（如4Vs）作为后续语言。
+
+- required_evidence_cn：至少一个权威来源描述问题阶段、一个现实后果说明、一个概括性研究问题。
+
+- transition_to_next_cn：用“为回答该问题，需先检查现有系统”转入文献综述。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用多轮系统文献综述，每轮用表格列出候选系统与需求维度的符合性，末尾明确缺口。
+
+- research_job_cn：执行可重复查询，筛选少量代表系统，按固定维度评价，并总结未满足的组合需求。
+
+- required_evidence_cn：每个文献表的行/列设计、筛选数量、具体不符合项；离开这些证据就不能宣称缺口。
+
+- transition_to_next_cn：用“现有缺口+实践访谈需求”转入自己的方案。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把文献缺口和领域需求映射为系统范围，说明哪些需求由哪个模块回应，定义系统名称与高维架构。
+
+- research_job_cn：做需求分析，明确被覆盖/不覆盖的需求清单，描述系统的高层架构（事件驱动+模型驱动等）。
+
+- required_evidence_cn：需求覆盖数、模块与需求对应表或对应段落、系统组成示意图。
+
+- transition_to_next_cn：按“互操作→规则→获取”的顺序进入设计细节。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：选择或建立一个核心元模型/本体，说明为什么已有模型不合适，并展示扩展后的概念与实例化规模。
+
+- research_job_cn：通过模型复用和少量扩展建立领域模型，并用一个复杂场景的大规模实例化证明表达能力。
+
+- required_evidence_cn：元模型图、概念定义、实例化数量；没有实例化会让模型显得抽象。
+
+- transition_to_next_cn：说明规则需要查询该模型，因此转向规则设计。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：把领域规则写成解释规则和情境化规则，用公式和具体案例规则展示，并区分哪部分是已有哪部分是新增。
+
+- research_job_cn：从专家或文档提取业务规则，设计CEP事件模式和查询逻辑，必要时开发自定义查询函数。
+
+- required_evidence_cn：规则清单、事件类型/主题、公式、规则与业务规则对应关系；否则规则会被视为任意。
+
+- transition_to_next_cn：说明这些规则需要事件获取基础设施，转入实现。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：描述系统实现，结合架构图说明各组件如何协作，并指出哪些组件来自已有平台，哪些是新增。
+
+- research_job_cn：完成原型开发，集成图数据库、消息代理、CEP引擎和可视化组件。
+
+- required_evidence_cn：架构图、事件流转说明、关键代码/配置说明、组件可运行性证据。
+
+- transition_to_next_cn：以“为了评价系统，提出现实场景”进入评价。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：先进行定性评价，用演示、专家反馈、多次展示说明实践价值；再在下一节报告量化性能指标。
+
+- research_job_cn：组织演示/访谈，记录反馈；设计多种负载场景并重复测量核心延迟。
+
+- required_evidence_cn：演示年份、受众类型、反馈清单；量化场景数、事件频率、规则数、延迟值和重复次数。
+
+- transition_to_next_cn：用“性能结果进一步说明架构如何管理4Vs”转到架构覆盖论证。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：用表格把架构组件与理论框架/约束维度映射，将单个性能结果上升为设计知识；随后诚实列出未覆盖的理论步骤，并提出未来方向。
+
+- research_job_cn：把已实现的组件、测量和覆盖情况与理论维度对照，识别未实现的理论环节。
+
+- required_evidence_cn：映射表（如组件×4Vs）、设计原则声明、限制和未来方向需与理论步骤对应。
+
+- transition_to_next_cn：结论中重新用贡献声明确认研究问题被回答。
+
+### most_transferable_moves_cn
+
+1. 用四轮需求导向文献综述制造缺口，每个子节都回到研究问题。
+
+2. 把理论知识（情境感知、4Vs）翻译成可验证系统要求，并在结尾返回理论识别未完成步骤。
+
+3. 用公式表达规则（Risk = Danger × Vulnerable asset），使设计主张易于验证和泛化。
+
+4. 用“组件—维度”矩阵（Table 7）把多点绩效汇聚成架构级设计知识。
+
+5. 用现实官方数据场景作为评价平台，增强结果可信度。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要长期项目背景：法国GéNéPi项目、CEREMA专家介入和多年演示，非独立论文易获得。
+
+2. 需要已有R-IOSUITE平台和大量既有组件，否则从零开发的成本高。
+
+3. 需要官方水文和交通数据，以及专家业务规则，这类领域数据和规则获取较困难。
+
+4. 每年向多个城市和指挥层级演示需要大量时间和行政关系。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只复制“四轮综述+缺口”写法而无系统文献检索和表格证据，否则缺口主张无效。
+
+2. 不能只写“CEP查询图数据库”的贡献而无具体规则、公式和性能数据，否则会被视为工程随笔。
+
+3. 不能用Table 7式的4Vs矩阵宣称管理了4V，而无任何性能或组件行为证据支撑每个标记。
+
+4. 不能把专家演示当作系统评价证据，除非说明受众、次数和反馈内容。
+
+5. 不能把“未来可投影”当作已有能力，除非在结果或讨论中分开限定。
+
+- single_best_description_of_the_routine_cn：用实践访谈和四轮文献综述双重确认缺口，用现有平台的元模型和CEP规则把缺口翻译成AIC系统，再用官方洪水场景和专家演示分别提供量化与定性证据，最后用4Vs矩阵把结果沉淀为可复用的架构设计知识。
+
+## 分析边界
+
+全文可读但部分表格在OCR中标题混乱，无法精确判断Table 1-4每行的原始格式；没有页码，位置以章节和段落标识；本文没有严格对照实验或用户行为数据，评价逻辑分析基于文本主张与可用证据对照。

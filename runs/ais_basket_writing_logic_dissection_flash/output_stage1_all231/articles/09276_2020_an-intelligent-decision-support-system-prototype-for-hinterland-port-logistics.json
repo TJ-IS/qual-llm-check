@@ -1,0 +1,961 @@
+{
+  "record_id": "9276",
+  "source_file": "09276_2020_an-intelligent-decision-support-system-prototype-for-hinterland-port-logistics.md",
+  "title": "An intelligent decision support system prototype for hinterland port logistics",
+  "authors": "Elnaz Irannezhad; Carlo G. Prato; Mark Hickman",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2019.113227",
+  "fulltext_chars": 70591,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "operational_efficiency",
+  "source_application_context": "logistics_transport_supply_chain_and_manufacturing",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:03.097864+00:00",
+  "article_level_summary": {
+    "central_question_cn": "智能决策支持系统（DSS）作为港口社区系统（PCS）的增值服务，对腹地集装箱运输中货运代理之间的水平与垂直合作会产生什么影响？如何制定最优合作策略以适应动态供需并实现敏捷性？",
+    "artifact_and_design_cn": "一个多智能体仿真DSS原型：货运代理可选择维持现状、个体最优计划、合作最优计划三种行动；用概率匹配理论的线性强化学习更新行动概率；在每个状态下求解带时间窗、二维容量、同时取送货的动态车辆分配路径问题（DCVRPTW），以最小化物流成本；由布里斯班港两周真实集装箱移动数据驱动。",
+    "objective_outcomes_cn": "100个学习周期仿真显示，如果所有代理采用最优计划，总运输成本和距离节省超过50%；强化学习后，较小货运代理更倾向使用PCS合作，大型代理因已具有规模经济未必受益；合作可提高车辆利用率并减少空驶。",
+    "core_contribution_cn": "为PCS文献提供了一个可量化的概念验证：将agent-based simulation、概率匹配RL和VRP优化结合，在真实大规模案例中内生生成“小代理合作更有利”的结论，并为港口管理者提供DSS潜在影响的估计。",
+    "whole_argument_in_one_paragraph_cn": "作者从港口物流碎片化引出PCS从信息枢纽转向决策支持的趋势，指出现有文献缺少对PCS中DSS增值服务定量影响的概念验证。他们构建了一个多智能体仿真DSS原型，将货运代理建模为通过概率匹配RL学习的自利agent，并由DSS提供个体或合作最优路由方案。以布里斯班港两周数据构建status quo基准后，仿真表明集体最优计划大幅降低成本和距离，但RL内生显示大代理可能不加入合作。通过多个参与构成情景和学习率敏感性检验，作者将结果上升为对合作策略设计和PCS采纳的可复用知识。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章明确呈现一个智能DSS原型，用真实港口数据驱动的agent-based仿真作为评价方式，提取关于PCS增值服务可行性与合作策略的设计知识；证据形态是仿真对比与情景分析，而非标准数据集benchmark或真实平台实验。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文本从港口物流碎片化和PCS文献缺口出发，引入概率匹配强化学习理论，将其翻译为三个行动和RL更新规则，再通过仿真检验DSS影响和合作策略，最后在讨论中回到理论含义（探索-利用权衡）并为未来机制设计提供方向。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段从数据环境构建开始，然后是DSS原型的决策模型与优化模块，再到全场景仿真验证总体收益，接着用RL内生选择揭示异质agent差异，最后通过参与构成情景与学习率检验边界；每个阶段都由前一阶段产出的输入驱动，形成从“是否存在收益”到“谁会采用、何时成立”的递进论证。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "案例数据与现状基准构建",
+        "question_cn": "如何用真实数据刻画布里斯班港腹地集装箱运输的现状？",
+        "inputs_and_setting_cn": "Port of Brisbane Import/Export Logistics Chain Study提供的两周23,833条集装箱移动记录；Google Distance Matrix API提取的时间依赖旅行时间；道路网络与B-double限制。",
+        "designed_or_compared_object_cn": "以观测数据构造status quo基准；定义节点、links、车辆类型（半挂车和B-double）及成本参数。",
+        "baseline_control_or_counterfactual_cn": "status quo（观测数据）作为所有后续比较的基准。",
+        "objective_metrics": [
+          "总运输成本",
+          "总时间",
+          "总距离",
+          "车辆数",
+          "行程数"
+        ],
+        "analysis_method_cn": "数据整理、网络与旅行时间估计、成本参数化。",
+        "main_result_cn": "建立了一个真实规模的仿真环境，status quo性能指标被量化，可作为仿真和比较的底线。",
+        "argumentative_role_cn": "为整个仿真提供真实性和外部效度，并生成后续所有收益比较的基准。",
+        "remaining_uncertainty_cn": "只有两周数据；未包含海运、仓储、行政等成本。",
+        "link_to_next_phase_cn": "该环境成为agent决策和优化模块运行的底图。",
+        "evidence_pointers": [
+          "Section 3.1, Table 1",
+          "Section 3.2, Table 2",
+          "Section 4, simulation software description"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "多智能体模型与强化学习决策规则",
+        "question_cn": "如何将货运代理建模为在信息不对称、动态市场中适应性选择的agent？",
+        "inputs_and_setting_cn": "概率匹配理论和线性RL文献；agent类型（进口商/出口商、运输商、集装箱码头、装卸公司）；14天shipment状态；三种行动定义。",
+        "designed_or_compared_object_cn": "三种行动：维持现状(a1)、个体最优计划(a2)、合作最优计划(a3)；payoff定义为相对status quo的成本节省百分比；线性RL概率更新规则。",
+        "baseline_control_or_counterfactual_cn": "a1 status quo作为行动基准；初始episode随机选择行动。",
+        "objective_metrics": [
+          "payoff（成本节省百分比）",
+          "行动概率P_an(e)"
+        ],
+        "analysis_method_cn": "线性强化学习方程（式1），概率匹配理论形式化。",
+        "main_result_cn": "agent可以在100个学习episode中根据经验累积更新行动概率，形成异质适应性行为。",
+        "argumentative_role_cn": "将行为理论转化为可计算的学习规则，使DSS原型能够模拟agent的探索与学习。",
+        "remaining_uncertainty_cn": "学习率α未定；agent无法观测其他agent的具体行动。",
+        "link_to_next_phase_cn": "RL需要评估每个行动的payoff，因此需要嵌入优化模块计算路径成本。",
+        "evidence_pointers": [
+          "Section 3.2, Table 2",
+          "Equation (1)",
+          "Fig. 1",
+          "Fig. 2"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "优化路由模块与DSS系统集成",
+        "question_cn": "给定agent的行动选择，如何计算最优配送/取货计划及对应成本？",
+        "inputs_and_setting_cn": "各agent的订单集合、车辆类型和成本、时间窗、服务时间、装卸能力Wmax。",
+        "designed_or_compared_object_cn": "带时间窗、二维容量、同时取送货的动态车辆分配路径问题（DCVRPTW）；对a2和a3的订单集合分别求解。",
+        "baseline_control_or_counterfactual_cn": "status quo路径来自观测；优化解作为对比方案。",
+        "objective_metrics": [
+          "总固定成本+运营成本（最小化）",
+          "路由、距离、时间"
+        ],
+        "analysis_method_cn": "ArcGIS VRP求解器基于Tabu Search；伪代码算法描述。",
+        "main_result_cn": "能在每个状态和episode给出近似最优的车辆路径和车队构成，并生成各agent成本。",
+        "argumentative_role_cn": "实现DSS的核心决策支持能力——生成个体或合作最优方案并计算成本节省，为RL提供payoff。",
+        "remaining_uncertainty_cn": "Tabu Search是启发式，未必全局最优；未纳入其他物流过程。",
+        "link_to_next_phase_cn": "优化输出的payoff反馈给RL，驱动下一episode的行动概率更新。",
+        "evidence_pointers": [
+          "Section 3.2, Equations (2)-(17)",
+          "Fig. 2 pseudocode",
+          "Section 4, ArcGIS solver description"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "仿真运行与总体绩效评价",
+        "question_cn": "智能DSS作为PCS增值服务，对总运输成本、距离和时间有何影响？",
+        "inputs_and_setting_cn": "100学习episodes，14天状态；三种行动；ArcGIS求解；status quo为基准。",
+        "designed_or_compared_object_cn": "全部agent合作最优计划；全部agent个体最优计划；status quo。",
+        "baseline_control_or_counterfactual_cn": "status quo。",
+        "objective_metrics": [
+          "总运输成本",
+          "总时间",
+          "总距离",
+          "车辆数",
+          "行程数"
+        ],
+        "analysis_method_cn": "仿真输出对比；图3展示性能指标。",
+        "main_result_cn": "所有agent采用合作最优计划时成本和时间距离减少最大，估计超过50%。",
+        "argumentative_role_cn": "证明DSS在理想全员参与情况下有显著量化收益，为核心概念验证提供证据。",
+        "remaining_uncertainty_cn": "全员参与假设不现实；未纳入管理、延迟、行政成本。",
+        "link_to_next_phase_cn": "需要观察RL内生决定是否所有agent真的愿意采用，进入agent选择分析。",
+        "evidence_pointers": [
+          "Section 4, first results paragraphs",
+          "Fig. 3"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "RL内生合作选择与情景/稳健性分析",
+        "question_cn": "在RL学习后，哪些agent会选择使用PCS？不同参与构成和学习率下，结论是否稳健？",
+        "inputs_and_setting_cn": "最终学习episode各agent成本图；情景：仅top 10 major agents合作、除top10外合作；学习率α=0.2, 0.5, 0.8。",
+        "designed_or_compared_object_cn": "RL内生选择对比全员合作/全员个体/status quo；不同用户参与配置；不同学习率。",
+        "baseline_control_or_counterfactual_cn": "status quo以及全合作情景。",
+        "objective_metrics": [
+          "各agent运输成本",
+          "PCS使用概率随episode的变化",
+          "收敛速度"
+        ],
+        "analysis_method_cn": "图4(a)-(f)成本分布比较；图5概率转移。",
+        "main_result_cn": "小agent更倾向于合作，大agent因规模经济偏好个体最优或现状；不同参与配置影响绩效；α=0.5在100 episodes收敛。",
+        "argumentative_role_cn": "内生生成“小代理合作严格更好”的贡献，并划定边界条件（大代理不参与），为合作策略设计提供洞见。",
+        "remaining_uncertainty_cn": "仿真未验证真实大agent的动机；未做学习率校准；未考虑采纳过程的交易成本。",
+        "link_to_next_phase_cn": "结果进入讨论，解释为何大agent不合作，以及对未来机制设计的启示。",
+        "evidence_pointers": [
+          "Section 4, paragraphs on RL and Fig. 4",
+          "Section 4, learning rate paragraph and Fig. 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "STUDY_OVERVIEW",
+      "RQ_OR_OBJECTIVE",
+      "CONTRIBUTION",
+      "RESULT"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "DESIGN_FEATURE",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "METHOD_JUSTIFICATION",
+      "THEORY_INTRO",
+      "CONTRIBUTION"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "artifact_design_moves": [
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "BENCHMARK_OR_CONTRAST"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "RESULT",
+      "TRANSITION",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTEXT",
+      "STUDY_OVERVIEW",
+      "DESIGN_FEATURE",
+      "RESULT",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE",
+      "BOUNDARY_CONDITION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "概率匹配理论与线性强化学习（Bush-Mosteller, Rivas）",
+      "决策理论与有限理性",
+      "带时间窗和同时取送货的车辆路径问题（VRP）",
+      "多智能体建模（agent-based modelling）",
+      "港口社区系统（PCS）文献"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "概率匹配/强化学习理论直接构成本文agent行为规则（RL更新方程），但DSS的核心决策支持能力——车辆路由优化——来自运筹学和ArcGIS工具，而非该理论；整体设计是行为理论+工程优化的混合，仿真评价无法分离检验理论特定预测。",
+    "translation_chain_cn": "概率匹配理论认为个体在不确定环境中根据历史成败调整选择概率，并在最优与探索之间多样化 → 将agent建模为具有反应性的自我学习者，在episode内根据payoff更新三种行动概率 → 行动a2/a3需要DSS生成优化计划 → 建立DCVRPTW最小化总成本以计算payoff → payoff反馈RL → 仿真中agent收敛到不同行动 → 解释为小agent探索合作、大agent利用规模经济。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "概率匹配理论：若某策略带来理想结果，再使用概率增加；反之减少（Bush-Mosteller; Rivas）。",
+        "mechanism_cn": "个体通过过去payoff更新行动概率，在探索-利用间权衡。",
+        "design_requirement_cn": "需要为每个agent维护三个行动概率并在每episode更新。",
+        "artifact_choice_cn": "式(1)线性RL；P_an(e+1)更新；argmax累积payoff。",
+        "evaluated_contrast_cn": "RL最终选择 vs 随机初始；不同学习率。",
+        "objective_result_cn": "agent收敛到不同行动，小agent更倾向a3，大agent倾向a2/a1。",
+        "evidence_pointers": [
+          "Equation (1)",
+          "Fig. 4(a)-(d)",
+          "Fig. 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "人类决策实验显示个体在不确定环境中会多样化选择而非严格最大化（Rubinstein, Tversky）。",
+        "mechanism_cn": "多样化是信息寻求本能，导致在最优和探索之间随机。",
+        "design_requirement_cn": "行动选择必须是概率性的，而非确定性最优。",
+        "artifact_choice_cn": "在每个episode根据P_an(e+1)随机选择行动。",
+        "evaluated_contrast_cn": "status quo vs a2 vs a3；RL vs 全合作/全个体。",
+        "objective_result_cn": "并非所有agent都选择全合作；大agent不合作。",
+        "evidence_pointers": [
+          "Section 2, diversification paragraphs",
+          "Fig. 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "动态车辆路由问题视角：在时间相关网络中，两维容量和时间窗约束下同时取送货可以最小化固定和运营成本。",
+        "mechanism_cn": "通过订单合并、车辆选择和路径安排实现规模经济和资源共享。",
+        "design_requirement_cn": "DSS需要为个体和合作订单分别求解最优路由，并计算各agent成本分摊。",
+        "artifact_choice_cn": "DCVRPTW目标(2)和约束(3)-(17)，对a2和a3订单集合分别求解；Tabu Search。",
+        "evaluated_contrast_cn": "全合作最优 vs 全个体最优 vs status quo。",
+        "objective_result_cn": "全合作最优时总成本和距离最少，节省>50%。",
+        "evidence_pointers": [
+          "Equations (2)-(17)",
+          "Fig. 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "多agent系统/ABM：自利agent在分布式环境中通过局部交互产生涌现行为。",
+        "mechanism_cn": "agent间资源有限导致相互依赖，协调模型解决依赖。",
+        "design_requirement_cn": "仿真应包含异质agent、状态、环境动态，并允许agent独立学习。",
+        "artifact_choice_cn": "agent集合、14天状态、时间依赖link和B-double限制；PCS协调订单。",
+        "evaluated_contrast_cn": "不同PCS参与配置（top10, except top10）。",
+        "objective_result_cn": "参与配置显著影响成本分布，top10不加入时小agent收益受影响。",
+        "evidence_pointers": [
+          "Table 2",
+          "Fig. 4(e)-(f)"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "仿真对比status quo基准",
+      "多情景counterfactual比较（全员合作、全员个体、仅top10合作、除top10外合作）",
+      "参数敏感性分析（学习率α=0.2, 0.5, 0.8）"
+    ],
+    "why_these_evaluations_cn": "因为无法在真实PCS中做现场实验且缺少已实施DSS的经验数据，作者采用agent-based simulation作为主要评价方式；以status quo作为反事实基准衡量DSS影响；通过全合作、全个体、部分参与等情景分离“合作”与“个体优化”的贡献；通过学习率敏感性检验RL行为参数的稳健性。",
+    "benchmark_and_contrast_chain_cn": "基准是观测到的现状（status quo）。第一层对比是“所有agent合作最优计划”与“所有agent个体最优计划”分别对status quo的改进，证明优化本身和合作加成各自的价值；第二层是RL内生选择后各agent成本分布与status quo及全合作/全个体情景对比，证明异质agent不会一致采纳；第三层是参与构成（top10 vs 非top10）情景，检验部分参与条件下的边界；第四层是学习率扫描，确认模型行为对参数不是过于敏感。这些层次从“总体收益”逐级过渡到“谁会参与、在什么条件下收益”。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "如果所有agent签署合作最优计划，总运输成本、时间和距离显著下降（>50%）",
+        "evidence_cn": "图3性能指标对比",
+        "supported_cn": "支持，但仅针对已建模的transport cost等指标"
+      },
+      {
+        "claim_cn": "RL学习后部分agent选择合作，部分选择个体优化",
+        "evidence_cn": "图4(a)-(d)最终学习episode成本分布",
+        "supported_cn": "支持，模型内生输出"
+      },
+      {
+        "claim_cn": "大agent因已享受规模经济而不合作",
+        "evidence_cn": "图4和文中定性描述",
+        "supported_cn": "部分支持，缺乏对大agent内部机制的直接检验"
+      },
+      {
+        "claim_cn": "较小agent严格更偏好合作",
+        "evidence_cn": "RL结果和讨论",
+        "supported_cn": "部分支持，未报告统计检验或效应量"
+      },
+      {
+        "claim_cn": "α=0.5在100 episode收敛",
+        "evidence_cn": "图5概率转移",
+        "supported_cn": "支持，但未提供形式化收敛准则"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用同源数据构建status quo基准，确保环境和成本计算一致；优化和RL使用相同网络、成本参数和订单数据；以status quo为反事实，通过实验情景控制“是否参与”和“参与类型”；通过学习率敏感性检验算法参数影响。",
+    "external_validity_strategy_cn": "采用澳大利亚布里斯班港真实的两周集装箱移动数据，包含23,833条记录；引用真实道路网络限制、时间依赖旅行时间、车辆类型（半挂车和B-double）和实际成本结构；以实际港口社区系统和港口合作背景进行讨论，使结果可被港口管理者用作概念验证。",
+    "what_is_not_actually_tested_cn": "真实环境中agent的实际采纳行为没有被测试；仅模拟了运输成本节省，未包含管理成本、行政成本、延迟成本、机会主义行为和长期合同约束；没有检验学习率校准是否匹配真实决策者；大agent不合作的机制只是模型内生结果，未被实证证实；没有检验RL与if-then规则或其他行为模型相比的相对优劣。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "开发了一个将概率匹配RL与DCVRPTW优化结合的多agent仿真原型，能在真实规模腹地集装箱网络中运行并量化绩效改进。",
+    "artifact_claim_cn": "DSS原型的合作计划（订单捆绑和车辆共享）带来显著成本节省，且比单纯个体最优计划更好。",
+    "mechanism_claim_cn": "决策机制是探索-利用权衡：小agent通过概率匹配探索发现合作收益更大，大agent因已有规模经济而选择不合作。",
+    "boundary_claim_cn": "收益来自已建模的运输成本（时间+距离+固定成本），且主要在两周数据上；大agent不参与会减少其他agent收益；模型不包含其他成本。",
+    "reusable_design_knowledge_cn": "PCS增值服务应允许agent自愿参与、先试点体验；系统应提供个体优化和合作优化两种选项；合作策略应考虑参与者规模异质性；平台可采用激励相容和定价机制设计来吸引不同类型用户。",
+    "theoretical_contribution_cn": "将概率匹配RL引入港口社区系统文献，为PCS的DSS增值服务提供了可计算的行为模型；内生地展示了探索-利用权衡如何导致大小agent的差异化合作意愿。",
+    "how_discussion_closes_intro_gap_cn": "引言指出PCS文献缺少对DSS增值服务的概念验证，讨论部分用仿真结果直接回应：证明了DSS在真实数据上的成本节省概念，并解释了谁会使用，从而填补“量化影响”和“最优合作策略”两个缺口。",
+    "overclaim_or_unsupported_leaps_cn": "从仿真结果外推“大代理不会受益”时，仅以运输成本为判据，忽略了其他间接收益；将成本节省>50%说成长期“major”略显跳跃；将小agent“strictly better”表述强于模型实际证据，因为模型未包含统计不确定性和其他成本；将α=0.5称为收敛，但没有形式化收敛标准。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "港口物流具有高度碎片化、不确定性和复杂性。",
+      "rhetorical_function_cn": "为决策支持的引入建立问题领域。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引出DSS的价值。",
+      "evidence_pointer": "Abstract S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "在这种背景下决策支持具有重要价值。",
+      "rhetorical_function_cn": "说明研究意义，提升问题紧迫性。",
+      "depends_on_cn": "依赖于前一句对碎片化的描述。",
+      "sets_up_cn": "引出本文制品。",
+      "evidence_pointer": "Abstract S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "研究提出一种促进货运代理横向和纵向合作的智能DSS原型。",
+      "rhetorical_function_cn": "交代本文核心制品。",
+      "depends_on_cn": "决策支持价值。",
+      "sets_up_cn": "为方法介绍做准备。",
+      "evidence_pointer": "Abstract S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract S4",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用多agent仿真模型，通过受人类决策启发的自适应强化学习实现异质行为。",
+      "rhetorical_function_cn": "预告研究方法路线。",
+      "depends_on_cn": "DSS原型概念。",
+      "sets_up_cn": "引出研究问题。",
+      "evidence_pointer": "Abstract S4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract S6",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "明确提出两个研究问题。",
+      "rhetorical_function_cn": "确立研究目标。",
+      "depends_on_cn": "背景和方法概述。",
+      "sets_up_cn": "为贡献声明做铺垫。",
+      "evidence_pointer": "Abstract S6"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract S8",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献是开发真实大规模agent-based仿真模型，使用概率匹配RL模拟agent适应行为。",
+      "rhetorical_function_cn": "宣布理论和方法贡献。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "预告结果。",
+      "evidence_pointer": "Abstract S8"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract S9",
+      "move_code": "RESULT",
+      "paraphrase_cn": "两周集装箱移动仿真显示总成本、距离大幅节省，车辆利用率提高；小代理合作更有利；大代理不必然受益。",
+      "rhetorical_function_cn": "向读者传递最核心的量化发现和非显然结论。",
+      "depends_on_cn": "贡献声明。",
+      "sets_up_cn": "吸引读者继续阅读全文。",
+      "evidence_pointer": "Abstract S9"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "港口陆侧运营碎片化导致额外行程、高成本和延迟，并带来客户不满。",
+      "rhetorical_function_cn": "建立行业现实问题。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引出协调和集成的必要性。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P1 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "运营商倾向于各自规划自己的运营，缺乏与竞争者互动的兴趣或能力。",
+      "rhetorical_function_cn": "将抽象碎片化具象为运营商行为。",
+      "depends_on_cn": "前一句碎片化背景。",
+      "sets_up_cn": "说明需要打破孤岛。",
+      "evidence_pointer": "Introduction P1 S2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有研究和成功案例显示企业间协调能带来显著供应链收益。",
+      "rhetorical_function_cn": "为协调方案提供既有证据。",
+      "depends_on_cn": "之前对碎片化后果的描述。",
+      "sets_up_cn": "引出港口作为协调平台的角色。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "解决方案是通过港口支持的在线商业智能/PCS系统共享信息。",
+      "rhetorical_function_cn": "引入PCS作为具体解决方案。",
+      "depends_on_cn": "协调必要性。",
+      "sets_up_cn": "定义PCS和DSS的关系。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "PCS应用已从信息枢纽演进为DSS，目标仍是促进代理间横向和纵向合作。",
+      "rhetorical_function_cn": "交代领域发展动态。",
+      "depends_on_cn": "PCS概念。",
+      "sets_up_cn": "为指出文献滞后做铺垫。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有PCS文献主要关注优化信息和海关流程，因为这是用户采纳PCS的主要原因。",
+      "rhetorical_function_cn": "概括现有研究重点。",
+      "depends_on_cn": "PCS演进背景。",
+      "sets_up_cn": "定位缺口领域。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P5 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "但很少有关于DSS作为PCS特征之一的概念验证。",
+      "rhetorical_function_cn": "明确研究缺口。",
+      "depends_on_cn": "文献局限陈述。",
+      "sets_up_cn": "为本文目标提供依据。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P6 S3-S4",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "腹地运输成本可能占总运输成本80%，且相关定量合作研究稀缺，因此有必要研究该场景下的智能DSS。",
+      "rhetorical_function_cn": "解释缺口的重要性。",
+      "depends_on_cn": "缺口识别。",
+      "sets_up_cn": "直接引出研究目标。",
+      "evidence_pointer": "Introduction P6 S3-S4"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P7 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为填补上述缺口，研究旨在量化PCS中智能DSS在真实规模腹地集装箱网络上的可能影响。",
+      "rhetorical_function_cn": "正式提出研究目标。",
+      "depends_on_cn": "缺口及其重要性。",
+      "sets_up_cn": "两个具体研究问题。",
+      "evidence_pointer": "Introduction P7 S1"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P8 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为回答这些问题，模拟一个多agent系统，其中agent从PCS经历结果、通过强化学习积累得失并决定是否使用PCS。",
+      "rhetorical_function_cn": "说明研究方法的总体路径。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "解释为什么选择ABM。",
+      "evidence_pointer": "Introduction P8 S1"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P9 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于运输市场动态性，ABM比纯优化模型更适合理解行为如何在重复局部互动中演变，因为agent使用经验法则而非严格最大化。",
+      "rhetorical_function_cn": "从方法论角度论证选择ABM。",
+      "depends_on_cn": "多agent模拟总体路径。",
+      "sets_up_cn": "引入RL作为经验法则的学习机制。",
+      "evidence_pointer": "Introduction P9 S1"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P10 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文贡献在于将基于概率匹配的线性RL agent-based仿真应用于PCS文献，模拟agent对合作的适应性行为。",
+      "rhetorical_function_cn": "在引言末尾声明贡献。",
+      "depends_on_cn": "方法选择和文献缺口。",
+      "sets_up_cn": "为后文理论和方法做直接铺垫。",
+      "evidence_pointer": "Introduction P10 S1"
+    },
+    {
+      "order": 20,
+      "section": "Section 2",
+      "locator": "Section 2 P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "ABM已应用于金融市场、供应链、车队管理、码头管理和多式联运等多个领域。",
+      "rhetorical_function_cn": "展示ABM的广泛适用性。",
+      "depends_on_cn": "引言中ABM方法选择。",
+      "sets_up_cn": "说明货运系统也适合ABM。",
+      "evidence_pointer": "Section 2 P1 S1"
+    },
+    {
+      "order": 21,
+      "section": "Section 2",
+      "locator": "Section 2 P3 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有ABM要么采用if-then规则，要么采用概率RL，二者是两类主要建模路线。",
+      "rhetorical_function_cn": "界定本文研究在建模谱系中的位置。",
+      "depends_on_cn": "前面ABM文献回顾。",
+      "sets_up_cn": "引出本文采用的概率匹配RL。",
+      "evidence_pointer": "Section 2 P3 S1"
+    },
+    {
+      "order": 22,
+      "section": "Section 2",
+      "locator": "Section 2 P4 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "RL是捕捉这些启发式的学习模型，在成功概率未知的迭代决策中是人类行为的主要驱动力之一。",
+      "rhetorical_function_cn": "引入RL理论。",
+      "depends_on_cn": "对ABM建模路线的分类。",
+      "sets_up_cn": "为概率匹配具体机制服务。",
+      "evidence_pointer": "Section 2 P4 S1"
+    },
+    {
+      "order": 23,
+      "section": "Section 2",
+      "locator": "Section 2 P4 S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "概率匹配被实验经济学报告为人类先天启发式：若策略带来理想结果，再使用概率增加；不理想则减少。",
+      "rhetorical_function_cn": "陈述概率匹配的核心命题。",
+      "depends_on_cn": "RL理论引入。",
+      "sets_up_cn": "支撑模型选择。",
+      "evidence_pointer": "Section 2 P4 S2"
+    },
+    {
+      "order": 24,
+      "section": "Section 2",
+      "locator": "Section 2 P4 S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "实验确认适应性行为比例远高于分析性行为（效用最大化、损失规避等）。",
+      "rhetorical_function_cn": "从经验证据解释为什么采用适应性学习。",
+      "depends_on_cn": "概率匹配命题。",
+      "sets_up_cn": "为模型的行为假设提供实证依据。",
+      "evidence_pointer": "Section 2 P4 S3"
+    },
+    {
+      "order": 25,
+      "section": "Section 2",
+      "locator": "Section 2 P5 S1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "学习不必然导致所有agent收益最大化，尤其在payoff变异性增加时，选择行为趋于随机化，个体会多样化选择。",
+      "rhetorical_function_cn": "解释learning与最优化的偏离，为后续大agent不合作做理论基础。",
+      "depends_on_cn": "概率匹配机制。",
+      "sets_up_cn": "引出探索-利用权衡。",
+      "evidence_pointer": "Section 2 P5 S1"
+    },
+    {
+      "order": 26,
+      "section": "Section 2",
+      "locator": "Section 2 P5 last",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "使用PCS的agent越多，捆绑和回程机会越多，节省越大；而大agent退出会使其他agent收益低于预期。",
+      "rhetorical_function_cn": "为模型网络效应和动态参与设定假设。",
+      "depends_on_cn": "多样化选择机制。",
+      "sets_up_cn": "为后续仿真结果中的异质行为提供解释方向。",
+      "evidence_pointer": "Section 2 P5 last"
+    },
+    {
+      "order": 27,
+      "section": "Section 3.1",
+      "locator": "Section 3.1 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "案例研究聚焦布里斯班港集装箱运输，使用港口提供两周完整和空箱进口出口链实际数据。",
+      "rhetorical_function_cn": "确定仿真案例和数据来源。",
+      "depends_on_cn": "研究问题需要真实规模验证。",
+      "sets_up_cn": "表1变量定义。",
+      "evidence_pointer": "Section 3.1 P1 S1"
+    },
+    {
+      "order": 28,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "设计仿真实验以表示真实系统并理解受PCS影响的自主货运代理决策策略。",
+      "rhetorical_function_cn": "说明仿真目的。",
+      "depends_on_cn": "真实数据和RL理论。",
+      "sets_up_cn": "介绍agent类型和表2布局。",
+      "evidence_pointer": "Section 3.2 P1 S1"
+    },
+    {
+      "order": 29,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P1 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "agent包括进口商、出口商、运输商、集装箱码头和装卸公司。",
+      "rhetorical_function_cn": "定义模型中的异质行动者。",
+      "depends_on_cn": "仿真设计目的。",
+      "sets_up_cn": "为agent行动和状态定义提供主体。",
+      "evidence_pointer": "Section 3.2 P1 S2"
+    },
+    {
+      "order": 30,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P4 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "环境是动态的，每个agent不清楚其他agent会做什么，因此需要学习。",
+      "rhetorical_function_cn": "从环境特征推导学习需求。",
+      "depends_on_cn": "agent和状态定义。",
+      "sets_up_cn": "引出RL方法。",
+      "evidence_pointer": "Section 3.2 P4 S1"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P5 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "引入RL方法，并给出图1和图2中的系统结构和仿真算法。",
+      "rhetorical_function_cn": "正式进入算法设计。",
+      "depends_on_cn": "对环境动态和学习需求的论证。",
+      "sets_up_cn": "描述RL更新方程。",
+      "evidence_pointer": "Section 3.2 P5 S1"
+    },
+    {
+      "order": 32,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P6 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "payoff是相对status quo的节省百分比，以status quo作为基准。",
+      "rhetorical_function_cn": "为所有后续比较建立统一基准。",
+      "depends_on_cn": "RL行动定义。",
+      "sets_up_cn": "支撑成本计算和结果呈现。",
+      "evidence_pointer": "Section 3.2 P6 S1"
+    },
+    {
+      "order": 33,
+      "section": "Section 3.2",
+      "locator": "Section 3.2 P9 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "优化部分采用带时间窗、二维容量、同时取送货的动态车辆分配路径问题（DCVRPTW）。",
+      "rhetorical_function_cn": "说明DSS核心优化引擎。",
+      "depends_on_cn": "payoff基准确定。",
+      "sets_up_cn": "列出目标函数和约束。",
+      "evidence_pointer": "Section 3.2 P9 S1"
+    },
+    {
+      "order": 34,
+      "section": "Section 4",
+      "locator": "Section 4 P2 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "仿真结果由自编程序生成，Python调用ArcGIS地理处理工具，VRP求解基于Tabu Search。",
+      "rhetorical_function_cn": "说明技术实现，增加结果可信度。",
+      "depends_on_cn": "优化模型。",
+      "sets_up_cn": "引出性能指标。",
+      "evidence_pointer": "Section 4 P2 S1"
+    },
+    {
+      "order": 35,
+      "section": "Section 4",
+      "locator": "Section 4 P3 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "性能指标关注总运输成本、时间、距离、车辆数和行程数，基准是status quo。",
+      "rhetorical_function_cn": "明确评价指标和比较基准。",
+      "depends_on_cn": "技术实现。",
+      "sets_up_cn": "报告图3结果。",
+      "evidence_pointer": "Section 4 P3 S1"
+    },
+    {
+      "order": 36,
+      "section": "Section 4",
+      "locator": "Section 4 P4 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "有意思的是，所有agent签署合作最优计划时得到最佳结果。",
+      "rhetorical_function_cn": "报告第一个核心结果。",
+      "depends_on_cn": "性能指标。",
+      "sets_up_cn": "解释规模经济机制。",
+      "evidence_pointer": "Section 4 P4 S1"
+    },
+    {
+      "order": 37,
+      "section": "Section 4",
+      "locator": "Section 4 P5 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "RL学习后，一些agent会继续合作，另一些更偏好个体操作但仍可能使用PCS。",
+      "rhetorical_function_cn": "报告内生行为分化。",
+      "depends_on_cn": "全合作最优结果。",
+      "sets_up_cn": "解释大agent不合作的现象。",
+      "evidence_pointer": "Section 4 P5 S1"
+    },
+    {
+      "order": 38,
+      "section": "Section 4",
+      "locator": "Section 4 P5 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "偏好个体操作的是已利用规模经济的大货运主体。",
+      "rhetorical_function_cn": "揭示异质性来源。",
+      "depends_on_cn": "行为分化。",
+      "sets_up_cn": "为小agent合作更有利做对比。",
+      "evidence_pointer": "Section 4 P5 S2"
+    },
+    {
+      "order": 39,
+      "section": "Section 4",
+      "locator": "Section 4 P6 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "由于两个情景成本计算方式一致，成本、时间和距离的下降估计超过50%。",
+      "rhetorical_function_cn": "给出量化收益。",
+      "depends_on_cn": "性能指标。",
+      "sets_up_cn": "讨论长期收益和未纳入成本。",
+      "evidence_pointer": "Section 4 P6 S1"
+    },
+    {
+      "order": 40,
+      "section": "Section 4",
+      "locator": "Section 4 P7 S1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "基于RL的agent仿真还可以观察哪些agent继续使用PCS。",
+      "rhetorical_function_cn": "从总体结果转向内生选择分析。",
+      "depends_on_cn": "总体绩效结果。",
+      "sets_up_cn": "引出图4成本分布。",
+      "evidence_pointer": "Section 4 P7 S1"
+    },
+    {
+      "order": 41,
+      "section": "Section 4",
+      "locator": "Section 4 P8 S1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "又模拟了两种不同PCS用户配置：仅十家主要代理合作，以及除十家外所有代理合作。",
+      "rhetorical_function_cn": "扩展情景检验。",
+      "depends_on_cn": "内生选择结果。",
+      "sets_up_cn": "考察部分参与条件下的绩效和合作策略。",
+      "evidence_pointer": "Section 4 P8 S1"
+    },
+    {
+      "order": 42,
+      "section": "Section 4",
+      "locator": "Section 4 P9 S1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "图5展示不同学习率下PCS使用概率在学习期间的转移。",
+      "rhetorical_function_cn": "检验RL参数敏感性。",
+      "depends_on_cn": "主仿真结果。",
+      "sets_up_cn": "说明学习率收敛性和校准问题。",
+      "evidence_pointer": "Section 4 P9 S1"
+    },
+    {
+      "order": 43,
+      "section": "Section 5",
+      "locator": "Section 5 P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "多agent仿真在DSS中已被证明对整合分布式业务系统很有吸引力。",
+      "rhetorical_function_cn": "将研究放回DSS大背景。",
+      "depends_on_cn": "全部仿真结果。",
+      "sets_up_cn": "总结PCS在港口物流中的作用。",
+      "evidence_pointer": "Section 5 P1 S1"
+    },
+    {
+      "order": 44,
+      "section": "Section 5",
+      "locator": "Section 5 P2 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "本研究通过agent-based仿真检验了港口物流智能DSS原型的作用。",
+      "rhetorical_function_cn": "总结本篇研究工作。",
+      "depends_on_cn": "背景回归。",
+      "sets_up_cn": "重述模型设计动机。",
+      "evidence_pointer": "Section 5 P2 S1"
+    },
+    {
+      "order": 45,
+      "section": "Section 5",
+      "locator": "Section 5 P3 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "开发了自学习DSS算法，结合RL和每个episode中的NP-hard优化问题。",
+      "rhetorical_function_cn": "回顾制品核心特征。",
+      "depends_on_cn": "方法部分。",
+      "sets_up_cn": "说明原型可行性。",
+      "evidence_pointer": "Section 5 P3 S1"
+    },
+    {
+      "order": 46,
+      "section": "Section 5",
+      "locator": "Section 5 P5 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "两周集装箱移动仿真结果表明总成本、距离大幅节省，车辆利用率改善。",
+      "rhetorical_function_cn": "重申主要实证结果。",
+      "depends_on_cn": "图3和图4。",
+      "sets_up_cn": "引出概念验证和异质结论。",
+      "evidence_pointer": "Section 5 P5 S1"
+    },
+    {
+      "order": 47,
+      "section": "Section 5",
+      "locator": "Section 5 P5 last",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们证明小代理使用PCS严格更好，这一结论在模型内部由探索-利用权衡内生生成。",
+      "rhetorical_function_cn": "声明理论性贡献。",
+      "depends_on_cn": "RL内生选择结果。",
+      "sets_up_cn": "讨论实践挑战和未来方向。",
+      "evidence_pointer": "Section 5 P5 last"
+    },
+    {
+      "order": 48,
+      "section": "Section 5",
+      "locator": "Section 5 P6 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "实际部署智能DSS存在信息/服务共享、承诺约束和采纳过程的内在挑战。",
+      "rhetorical_function_cn": "指出实施层面限制。",
+      "depends_on_cn": "贡献声明。",
+      "sets_up_cn": "引出交易成本和采纳问题。",
+      "evidence_pointer": "Section 5 P6 S1"
+    },
+    {
+      "order": 49,
+      "section": "Section 5",
+      "locator": "Section 5 P7 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "现有PCS缺乏实证评估，限制了本研究只能在模拟环境中评价agent决策。",
+      "rhetorical_function_cn": "承认评价方法局限。",
+      "depends_on_cn": "实践挑战。",
+      "sets_up_cn": "提出未来机制设计。",
+      "evidence_pointer": "Section 5 P7 S1"
+    },
+    {
+      "order": 50,
+      "section": "Section 5",
+      "locator": "Section 5 P8 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "概念验证仅基于布里斯班港两周数据，可扩展性需更长规划期、季节趋势和更多成本类型。",
+      "rhetorical_function_cn": "界定研究适用范围。",
+      "depends_on_cn": "所有结果和局限。",
+      "sets_up_cn": "未来研究方向。",
+      "evidence_pointer": "Section 5 P8 S1"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先描述PCS从信息枢纽到DSS的演进，再指出已有研究集中于信息流和海关流程优化，从而构建概念验证缺口；用“little documented proof of concept”和腹地运输成本高达80%的实证来放大缺口。",
+    "signposting_cn": "引言末尾明确列出两个研究问题并概述后续章节；方法部分用表格定义变量；伪代码和图表指引；结果部分用图编号引导读者。",
+    "transition_logic_cn": "从问题到理论由“动态市场需要ABM”过渡；从理论到设计由“概率匹配需要概率性行动选择”过渡；从模型到结果由“payoff计算”连接；从总体结果到内生选择用“进一步观察哪些agent继续使用PCS”；从内生选择到情景用“模拟不同用户构成”过渡；从结果到讨论用“含义与结论”直接重述主要发现。",
+    "claim_evidence_rhythm_cn": "每个结果段落先给claim，再指向图/表作为证据；例如“best results will be obtained if all agents sign up...”后接图3；RL后agent分化后接图4；学习率后接图5。讨论中则先重述claim再给出解释机制。",
+    "benchmark_narrative_cn": "status quo由观测数据构建，作为贯穿全文的基准；所有payoff都用“相对status quo节省百分比”表示；结果部分的每个对比情景都回到status quo，形成统一的“节省”叙事。",
+    "theory_return_cn": "结果不单纯报告绩效，而是用RL的探索-利用权衡解释小agent合作、大agent不合作；在讨论中把agent行为模式归因于概率匹配启发的学习规则，从而将仿真输出上升为对合作策略的理论洞见。",
+    "contribution_positioning_cn": "在前言明确将贡献定位为“对PCS文献的agent-based仿真应用”，摘要中强调“真实规模案例”“概率匹配RL内生产生结论”；讨论中再次强调“概念验证”和“内生生成的结论”。",
+    "novelty_protection_cn": "作者强调模型结合了优化与决策理论、真实数据、概率匹配RL；通过情景模拟展示“全员最优方案”不是唯一故事，从而将工作从一次性性能提升提升为对合作参与动态的理解；用“小代理严格更好”这一非显然结论来区别于简单成本收益计算。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立问题背景与文献缺口：从行业现实问题（碎片化、成本高）跳到具体可研究的gap，写清为何需要DSS概念验证。",
+        "research_job_cn": "收集PCS和ABM文献，明确缺口形态；获取可用的行业数据或案例。",
+        "required_evidence_cn": "文献表明PCS多关注信息/海关，DSS定量影响无概念验证；行业数据可得。",
+        "transition_to_next_cn": "引入两个研究问题，预告用ABM/RL模拟。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入理论/知识基础并翻译为设计要求：介绍概率匹配RL，解释为何ABM+RL适合；将理论转为agent行动/学习规则。",
+        "research_job_cn": "确定agent类型、动作集、状态、payoff定义、学习方程。",
+        "required_evidence_cn": "明确的理论命题（概率匹配）和实验证据；可形式化的更新规则。",
+        "transition_to_next_cn": "说明需要嵌入优化模块计算payoff。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "构建制品：用数学建模描述DCVRPTW，解释约束对应现实限制；给出伪代码和系统结构。",
+        "research_job_cn": "实现路由优化求解器、成本计算和数据接口。",
+        "required_evidence_cn": "能对给定订单集输出路由计划、距离和成本；计算可行。",
+        "transition_to_next_cn": "将优化输出作为payoff反馈给RL。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计仿真实验与基准：定义benchmark status quo；设计情景（全合作、全个体、部分参与）；选择指标。",
+        "research_job_cn": "运行仿真，收集性能指标和agent概率。",
+        "required_evidence_cn": "status quo可复现；全合作/全个体情景结果差异清晰。",
+        "transition_to_next_cn": "从总体结果过渡到“谁会参与”的内生分析。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "内生异质性分析与稳健性：报告RL后agent成本分布和概率收敛；解释大小agent差异；展示情景和学习率敏感性。",
+        "research_job_cn": "绘制不同情景图和分析概率转移；探索参数变化对结论的影响。",
+        "required_evidence_cn": "不同agent类别的选择差异可观察；参数变化不颠覆核心结论。",
+        "transition_to_next_cn": "讨论实践挑战和未来机制设计。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "贡献与边界：将结果归纳为设计知识和理论洞见；明确边界条件和未来方向。",
+        "research_job_cn": "反思局限，提炼可复用规则。",
+        "required_evidence_cn": "与引言gap形成呼应。",
+        "transition_to_next_cn": "无。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "以真实数据构建status quo作为模拟基准，使所有收益表达为相对节省",
+      "将行为理论形式化为概率更新规则，再嵌入优化模块形成闭环",
+      "从总体绩效对比转向异质agent内生选择，再通过情景检验边界",
+      "在讨论中用探索-利用权衡解释内生结果，避免纯工程报告"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要港口提供完整的两周进出口集装箱链数据",
+      "需要时间依赖道路旅行时间（Google API）和车辆操作限制数据",
+      "需要可扩展的VRP求解器（ArcGIS/Tabu Search）和仿真编程资源",
+      "真实PCS部署或试点过程没有被模拟，相关成本与行为数据难以获得"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只在前言声称“缺少概念验证”后就直接仿真，必须有可复现的status quo或反事实",
+      "不能把“全员合作最优”直接等同于DSS最优策略，因为RL显示大agent不会自动参与",
+      "不能把仿真中的“节省>50%”直接外推到真实PCS收益，忽略未建模成本",
+      "不能在没有机制检验的情况下把“大agent不合作”归因为规模经济"
+    ],
+    "single_best_description_of_the_routine_cn": "构建一个由真实数据校准的仿真原型，以现状为基准量化价值，再让异质agent根据强化学习内生选择是否采用，最终提炼出关于合作参与动态的设计知识。"
+  },
+  "confidence": 0.8,
+  "limitations_cn": "分析基于期刊pre-proof全文，部分图表为图片嵌入，无法核实图内具体数值；文献引用部分编号缺失（如[28]未见）可能影响对知识基础的完整理解；原文有少量符号扰动（如式(1)中的argmax书写），不影响主要判断。",
+  "usage": {
+    "prompt_tokens": 20910,
+    "completion_tokens": 27957,
+    "total_tokens": 48867,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 20910
+  }
+}

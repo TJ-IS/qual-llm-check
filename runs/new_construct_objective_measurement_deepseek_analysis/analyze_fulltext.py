@@ -138,6 +138,43 @@ def select_files(input_dir: Path, requested: list[str] | None) -> list[Path]:
     return [selected[name] for name in sorted(selected)]
 
 
+def publication_year(path: Path) -> int | None:
+    """Read the canonical filename year, falling back to frontmatter."""
+    parts = path.name.split("_", 2)
+    if len(parts) >= 3:
+        try:
+            return int(parts[1])
+        except ValueError:
+            pass
+    try:
+        return int(load_article(path).year)
+    except (OSError, TypeError, ValueError):
+        return None
+
+
+def filter_selection(files: list[Path], config: dict[str, Any]) -> list[Path]:
+    selection = config.get("selection")
+    if not isinstance(selection, dict):
+        return files
+    raw_from = selection.get("year_from")
+    raw_to = selection.get("year_to")
+    year_from = int(raw_from) if raw_from is not None else None
+    year_to = int(raw_to) if raw_to is not None else None
+    if year_from is None and year_to is None:
+        return files
+    filtered: list[Path] = []
+    for path in files:
+        year = publication_year(path)
+        if year is None:
+            continue
+        if year_from is not None and year < year_from:
+            continue
+        if year_to is not None and year > year_to:
+            continue
+        filtered.append(path)
+    return filtered
+
+
 def split_fulltext(text: str, chunk_chars: int, overlap_chars: int) -> list[str]:
     if len(text) <= chunk_chars:
         return [text]
@@ -333,11 +370,14 @@ def analyze_article(
     model_config = config["model"]
     batch_config = config["batch"]
     usage: dict[str, int] = {}
-    direct_max_chars = int(batch_config["direct_max_chars"])
+    raw_direct_max_chars = batch_config.get("direct_max_chars")
+    direct_max_chars = (
+        None if raw_direct_max_chars is None else int(raw_direct_max_chars)
+    )
     direct_succeeded = False
     context_fallback = False
 
-    if len(article.fulltext) <= direct_max_chars:
+    if direct_max_chars is None or len(article.fulltext) <= direct_max_chars:
         user_prompt = prompts["user_template"].format(
             **article_metadata(article),
             fulltext_chars=len(article.fulltext),
@@ -559,7 +599,11 @@ def main() -> int:
     output_dir = cli_path(args.output_dir, str(config["output_dir"]))
     env_file = cli_path(args.env_file, str(config["env_file"]))
     all_files = sorted(input_dir.glob("*.md"))
-    selected_files = select_files(input_dir, args.file)[args.offset :]
+    scope_files = filter_selection(all_files, config)
+    scope_names = {path.name for path in scope_files}
+    selected_files = [
+        path for path in select_files(input_dir, args.file) if path.name in scope_names
+    ][args.offset :]
     decisions_path = output_dir / "decisions.jsonl"
     errors_path = output_dir / "errors.jsonl"
     prompts = {
@@ -580,23 +624,29 @@ def main() -> int:
         pending = pending[: args.limit]
 
     print(
-        f"Input full texts: {len(all_files)}; selected: {len(selected_files)}; "
+        f"Input full texts: {len(all_files)}; configured scope: {len(scope_files)}; "
+        f"selected: {len(selected_files)}; "
         f"already completed for current prompt: {len(decisions)}; stale prior results: {stale_count}; "
         f"pending this run: {len(pending)}"
     )
     print(f"Output directory: {output_dir}")
     if args.dry_run:
-        threshold = int(config["batch"]["direct_max_chars"])
+        raw_threshold = config["batch"].get("direct_max_chars")
+        threshold = None if raw_threshold is None else int(raw_threshold)
         for path in pending[:10]:
             article = load_article(path)
-            mode = "single" if len(article.fulltext) <= threshold else "chunked"
+            mode = (
+                "single"
+                if threshold is None or len(article.fulltext) <= threshold
+                else "chunked"
+            )
             print(f"DRY RUN {path.name}: chars={len(article.fulltext)} mode={mode}")
         return 0
     if not pending:
         output_dir.mkdir(parents=True, exist_ok=True)
         write_reports(
             output_dir,
-            all_files,
+            scope_files,
             decisions,
             str(config.get("analysis_version") or ""),
             fingerprint,
@@ -652,7 +702,7 @@ def main() -> int:
 
     write_reports(
         output_dir,
-        all_files,
+        scope_files,
         decisions,
         str(config.get("analysis_version") or ""),
         fingerprint,

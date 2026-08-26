@@ -1,0 +1,1731 @@
+# Preference enhanced hybrid expertise retrieval system in community question answering services
+
+- 作者：Dipankar Kundu; Rajat Kumar Pal; Deba Prasad Mandal
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2019.113164
+- 源文件：05390_2020_preference-enhanced-hybrid-expertise-retrieval-system-in-community-question-answering-services.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：如何设计一个社区问答服务中的专家检索系统，使其在利用文本和网络信息的同时，还能显式纳入回答者对不同术语的偏好，从而在标准评测中超越现有方法？
+
+- 制品与设计：PEHER（偏好增强混合专家检索）系统。它包含三个主要部分：偏好估计器（preferability estimator）计算每个回答者对术语的档案内（intra-profile）和档案间（inter-profile）偏好，并与IDF重要性相乘得到问题偏好；权威估计器（authority estimator）用回答者与已答问题的文本熟悉度作为CBEN网络边的权重，再用PageRank式计算权威；专家估计器（expertise estimator）用查询似然语言模型QLL计算新问题与已答问题的相似度，加权问题偏好得到熟练度，最后通过基于排名的融合算法（若任一排名为1则给1分，否则用加权倒数排名）将熟练度和权威合并为最终专家分。
+
+- 客观结果：在Movie、Music、Celebrity、History四个真实数据集上与20种现有方法比较MRR、P@30、R@30、Accuracy、MSC@30五个指标，PEHER在400个比较场景中的368个（92.00%）上取得最佳；在组件消融中，偏好估计器中的完整熟练度方法在60个场景中100%优于基线（95%显著），权威估计器在20个场景中19个优于CBEN-PageRank基线（15个显著），融合算法在80个场景中62个优于四种替代融合策略（74个优于或持平）。
+
+- 核心贡献：作者宣称的贡献包括：(1) 提出基于回答历史的档案内/档案间偏好得分；(2) 提出基于偏好的文本熟练度估计；(3) 提出融入文本熟悉度的CBEN权威估计网络；(4) 提出新的基于排名的熟练度与权威融合策略。
+
+- 整篇论证链：论文以CQA服务中大量未回答问题为现实问题，将专家检索视为问题路由的关键。作者梳理文本、网络和混合三类方法后指出，现有文本方法忽略回答者对术语的主观偏好，网络方法忽略文本信息，混合方法虽然结合二者但未充分纳入偏好。基于IDF假设、消费者偏好异质性概念、CBEN竞赛网络和融合技术重要性等知识，作者在第三节提出五条可操作的设计哲学，并在第四节将其转化为PEHER系统的具体公式与算法：偏好估计器综合档案内和档案间偏好与IDF重要性计算问题偏好；权威估计器用文本熟悉度作为CBEN边权重；专家估计器用QLL相似度加权问题偏好得到熟练度，再用新融合算法合并权威。实验部分先通过与20种方法在4个数据集上的benchmark对比确立整体优势（92%胜出），随后用三个消融实验分别检验偏好估计、权威估计和融合策略的设计哲学，证明每个组件都贡献了性能提升，从而将整体优势归因于具体设计选择。结论部分重新连接引言缺口，说明PEHER通过纳入偏好和文本熟悉度改进专家推荐，并给出应用场景与局限性。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章以一组设计哲学（assumptions/philosophies）为起点，构建了由三个可分离估计器组成的PEHER制品，然后通过整体基准比较和逐组件消融实验对制品进行评价，最终产出关于偏好、熟悉度和融合策略的可复用设计知识。这符合需求/原则—构建—评价—设计知识的设计科学研究范式。
+
+- 主导写作弧线判定：全文沿着“提出设计需求/哲学→构建PEHER系统→整体评价→组件级验证设计原则→讨论适用性”的弧线展开。第3节明确列出五条设计哲学，第4节将其实现为算法，第5节既做整体benchmark又逐条验证各哲学，第6节总结设计知识和边界条件。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：阶段1用概念分析定义问题与设计哲学；阶段2将哲学翻译成可计算的PEHER系统；阶段3用4个数据集与20种方法相比，确立整体性能优势；阶段4验证偏好估计器内部哲学；阶段5验证权威估计器内部哲学；阶段6验证专家估计器融合策略。整体比较提供外部有效性，三个消融实验提供内部有效性，层层将性能优势归因于具体组件。
+
+### studies_or_phases
+
+#### 1. 问题定义与设计哲学建立
+
+- order：1
+
+- name_cn：问题定义与设计哲学建立
+
+- question_cn：专家检索系统应当遵循哪些可操作的设计哲学，才能同时利用文本信息、回答者偏好和网络结构？
+
+- inputs_and_setting_cn：CQA领域背景、已有分类法（文本/网络/混合）；从信息检索的IDF假设、消费者偏好异质性文献和CBEN思想中抽象出的概念框架。
+
+- designed_or_compared_object_cn：五条哲学/假设，包括术语频率即偏好、跨档案偏好比较、IDF术语重要性、高专业共同回答者提升信用、融合策略重要性。
+
+- baseline_control_or_counterfactual_cn：无直接对照，但这些假设将与后续实验中的无偏好基线对比。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念分析与正式化：引入符号系统，陈述目标函数和假设。
+
+- main_result_cn：确定了PEHER的设计基础，即把偏好、熟悉度和融合作为三个关键机制。
+
+- argumentative_role_cn：为制品构建提供理论/知识正当性，并明确每个组件背后的可检验命题。
+
+- remaining_uncertainty_cn：假设是否在数据上成立尚未检验。
+
+- link_to_next_phase_cn：这些哲学直接指导第4节中PEHER各估计器的公式设计。
+
+##### evidence_pointers
+
+1. Section 3, notations and assumptions 1-5
+
+2. Section 3, contribution list
+
+#### 2. PEHER系统设计与实现
+
+- order：2
+
+- name_cn：PEHER系统设计与实现
+
+- question_cn：如何将五条设计哲学实现为偏好估计、权威估计和专家估计三个组件的具体算法？
+
+- inputs_and_setting_cn：第3节符号系统，CQA档案数据（Q、A、term_freq等）与一个新的问题q_hat。
+
+- designed_or_compared_object_cn：Three estimators: preferability estimator (Eq 2-7), authority estimator (Eq 8-13), expertise estimator (Eq 14-15 and Algorithm 2).
+
+- baseline_control_or_counterfactual_cn：设计本身不包含对照，但内部包含可替换选项（如融合时的max/RRF）。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：算法设计与数学公式推导；同时用离线和在线复杂度分析说明可实现性。
+
+- main_result_cn：形成完整的PEHER计算流程，给出每个子模块的公式、算法和输入输出。
+
+- argumentative_role_cn：证明哲学可以转化为可实现的系统，并在实现层面体现设计选择。
+
+- remaining_uncertainty_cn：尚无实证证据表明这些公式比现有方法更好。
+
+- link_to_next_phase_cn：把系统作为整体和部件送入后续实验。
+
+##### evidence_pointers
+
+1. Section 4.1, Figure 1
+
+2. Section 4.2, Figure 2a
+
+3. Section 4.3, Figure 2b, Algorithm 2
+
+#### 3. 整体benchmark对比实验
+
+- order：3
+
+- name_cn：整体benchmark对比实验
+
+- question_cn：PEHER在真实CQA数据集上是否优于20种代表性文本、网络和混合专家检索方法？
+
+- inputs_and_setting_cn：四个真实数据集：Movie、Music、Celebrity、History；20种比较方法的已有结果（借自[19]）；PEHER的6个参数。
+
+- designed_or_compared_object_cn：PEHER vs 20个基准方法；数据集和指标为共同评价环境。
+
+- baseline_control_or_counterfactual_cn：20种方法包括CBEN-PageRank、CBEN-HITS、Document Model、Adaptive HITS、ExpertiseRank、ExpertRank、HITS、Latent Link Analysis、Personalized PageRank等。
+
+##### objective_metrics
+
+1. MRR
+
+2. P@30
+
+3. R@30
+
+4. Accuracy
+
+5. MSC@30
+
+- analysis_method_cn：统计PEHER在每个（方法×数据集×指标）比较场景中是否优于对方，并汇总胜出次数；不报告显著性检验。
+
+- main_result_cn：PEHER在368/400（92.00%）个场景中胜出；按数据集，Music最好（100%），History最差（72%）；按指标，MRR最好（100%），R@30最差（85%）。
+
+- argumentative_role_cn：建立整体性能优势，说明PEHER至少在现有基准上处于领先水平。
+
+- remaining_uncertainty_cn：优势来自哪个组件（偏好、权威、融合）尚不清楚；比较未用统计检验。
+
+- link_to_next_phase_cn：通过组件消融实验来分解整体优势的来源。
+
+##### evidence_pointers
+
+1. Table 1 comparing methods
+
+2. Table 2 parameter settings
+
+3. Table 3 main results
+
+#### 4. 偏好估计器哲学验证
+
+- order：4
+
+- name_cn：偏好估计器哲学验证
+
+- question_cn：在熟练度计算中加入档案内偏好（IntraP）、档案间偏好（InterP）及两者组合，是否比仅用问题相似度（无偏好）更好？
+
+- inputs_and_setting_cn：与阶段3相同的4个数据集和5个指标；构建四种变体：基线（式16）、IntraP（式17-18）、InterP（式19-20）、完整proficiency（式15）。
+
+- designed_or_compared_object_cn：比较四种熟练度计算方案，它们只在是否使用偏好及使用何种偏好上有差异。
+
+- baseline_control_or_counterfactual_cn：基线：将q_pref设为1，即只用QLL相似度累加。
+
+##### objective_metrics
+
+1. MRR
+
+2. P@30
+
+3. R@30
+
+4. Accuracy
+
+5. MSC@30
+
+- analysis_method_cn：对每种方案计算相对基线的百分比提升；用双尾t检验（α=0.001）检验显著性。
+
+- main_result_cn：60个比较场景中所有改进均为正（100%），57个显著（95%）；完整proficiency在所有数据集和指标上均优于单独的IntraP和InterP。
+
+- argumentative_role_cn：验证偏好估计器中的两个偏好概念和组合方式都有效，且组合优于任一部分。
+
+- remaining_uncertainty_cn：偏好估计器对权威估计和最终融合的贡献尚未在本阶段衡量。
+
+- link_to_next_phase_cn：转向验证权威估计器中的熟悉度哲学。
+
+##### evidence_pointers
+
+1. Section 5.4.1 formulas (16)-(20)
+
+2. Table 4
+
+#### 5. 权威估计器哲学验证
+
+- order：5
+
+- name_cn：权威估计器哲学验证
+
+- question_cn：将文本熟悉度作为CBEN链路权重的权威估计（式13）是否优于原始CBEN-PageRank？
+
+- inputs_and_setting_cn：同样4个数据集和5个指标；对照组为原始CBEN-PageRank结果。
+
+- designed_or_compared_object_cn：比较新权威估计器与原始CBEN-PageRank在使用相同网络结构时，仅链路权重不同（熟悉度加权 vs 均匀/原始权重）。
+
+- baseline_control_or_counterfactual_cn：CBEN-PageRank（原始CBEN，无文本熟悉度）。
+
+##### objective_metrics
+
+1. MRR
+
+2. P@30
+
+3. R@30
+
+4. Accuracy
+
+5. MSC@30
+
+- analysis_method_cn：与阶段4相同的t检验和百分比提升计算。
+
+- main_result_cn：20个场景中19个（95%）优于基线，其中15个显著；唯一更差的场景（History上的Accuracy）也显著。
+
+- argumentative_role_cn：说明权威估计中纳入文本熟悉度具有稳定的正向作用。
+
+- remaining_uncertainty_cn：该权威估计是否在更广泛的网络方法对比中仍占优尚不明确。
+
+- link_to_next_phase_cn：检验最后需要验证的融合策略。
+
+##### evidence_pointers
+
+1. Section 5.4.2
+
+2. Table 5
+
+#### 6. 专家估计器融合策略验证
+
+- order：6
+
+- name_cn：专家估计器融合策略验证
+
+- question_cn：提出的基于排名+条件奖励的融合算法（Algorithm 2）是否优于仅用熟练度、仅用权威、max(·)融合和标准RRF？
+
+- inputs_and_setting_cn：4数据集×5指标；四种替代策略：Proficiency-only、Authority-only、PEHER-max、PEHER-RRF。
+
+- designed_or_compared_object_cn：完整PEHER（使用Algorithm 2）与去掉融合或替换融合的变体之间的差异。
+
+- baseline_control_or_counterfactual_cn：四种替代策略作为对照。
+
+##### objective_metrics
+
+1. MRR
+
+2. P@30
+
+3. R@30
+
+4. Accuracy
+
+5. MSC@30
+
+- analysis_method_cn：两两t检验（α=0.001），计算相对每种策略的百分比提升；统计更优、持平、更差的情形数。
+
+- main_result_cn：80个场景中62个（77.50%）优于最佳替代策略，74个（92.50%）优于或持平；41个改进显著，仅2个显著恶化。
+
+- argumentative_role_cn：验证融合策略的必要性和优越性，排除整体优势仅来自混合本身而非融合设计的可能。
+
+- remaining_uncertainty_cn：未进行参数敏感性分析；未与加权和、对数倒数等更复杂融合比较。
+
+- link_to_next_phase_cn：所有组件验证完成后，进入结论，总结系统适用性和局限。
+
+##### evidence_pointers
+
+1. Section 5.4.3
+
+2. Table 6
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 提出PEHER系统，包含三个估计器。
+
+2. DESIGN_FEATURE: 描述preferability/authority/expertise估计器的核心设计。
+
+3. RESULT: 与20种方法在4数据集上比较，92%胜出。
+
+### introduction_moves
+
+1. CONTEXT: CQA服务允许用户提问和回答。
+
+2. PHENOMENON: 存在大量未回答问题。
+
+3. PRACTICAL_STAKES: 未回答问题损害信息寻求者，需要问题路由。
+
+4. PRIOR_KNOWLEDGE: 专家检索方法分文本、网络、混合三类。
+
+5. LIMITATION: 文本方法忽略回答者偏好；网络方法忽略文本；混合方法未充分纳入偏好。
+
+6. RQ_OR_OBJECTIVE: 提出PEHER系统以填补该缺口。
+
+7. DESIGN_FEATURE: 概述三个估计器的功能。
+
+8. STUDY_OVERVIEW: 预告4数据集、20方法、5指标、92%胜出。
+
+### theory_and_knowledge_moves
+
+1. THEORY_PROPOSITION: 第3节五条哲学/假设。
+
+2. PRIOR_KNOWLEDGE: 引用IDF[32]、消费者偏好异质性[33,34]、CBEN[12]、QLL[26]、RRF[31]。
+
+3. DESIGN_REQUIREMENT: 将哲学转化为术语偏好、熟悉度和融合要求。
+
+4. MECHANISM: 解释为何高频表示偏好、熟悉度作为信用、融合策略影响系统。
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE: 偏好估计器公式(2)-(7)，包括IntraP、InterP、Combined和question preferability。
+
+2. DESIGN_FEATURE: 权威估计器公式(8)-(13)，familiarity作为CBEN边权重，PageRank式更新。
+
+3. DESIGN_FEATURE: 专家估计器公式(14)-(15)和Algorithm 2，QLL相似度、熟练度和条件排名融合。
+
+4. METHOD_JUSTIFICATION: 说明前两个估计器可离线计算，提高实时应用效率。
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 选择4数据集、5指标（MRR、P@30、R@30、Accuracy、MSC@30）。
+
+2. BENCHMARK_OR_CONTRAST: 给出20种比较方法表（Table 1）和参数设置表（Table 2）。
+
+3. RESULT: 报告整体胜出368/400。
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST: 三个消融实验，分别用t检验验证偏好、权威和融合哲学。
+
+5. BOUNDARY_CONDITION: 指出按数据集的最好/最差和按指标的最好/最差。
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 重申四个贡献点。
+
+2. BOUNDARY_CONDITION: 讨论适用场景（推荐回答者、审稿人推荐等）。
+
+3. LIMITATION_AND_FUTURE: 指出偏好仅基于历史、在线成本高、未做参数敏感性分析。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 信息检索中的IDF假设[32]：术语重要性随使用者数量降低。
+
+2. 消费者偏好异质性中的intra/inter-consumer heterogeneity[33,34]：区分个体内部和个体间差异。
+
+3. CBEN竞赛网络[12]：共同回答者之间的竞争关系。
+
+4. PageRank[27]：网络权威迭代计算。
+
+5. 查询似然语言模型QLL[26]：文本相似度测量。
+
+6. RRF融合技术[31]：基于排名的倒数融合。
+
+7. 作者之前混合系统[19]：作为对比和出发点。
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：第3节五条设计哲学直接决定第4节各估计器的核心公式和算法：偏好假设直接给出IntraP/InterP公式，IDF假设直接给出imp[t]，熟悉度假设直接给出fami[a,q]作为CBEN权重，融合假设直接给出Algorithm 2。随后的消融实验也直接检验这些设计选择，因此属于前瞻性理论驱动设计并被评价直接检验。
+
+- 理论到设计翻译链：偏好假设→档案内/档案间偏好公式→与IDF重要性结合→问题偏好；熟悉度假设→Jaccard流行度→CBEN边权重→PageRank权威；融合假设→排名+条件奖励→最终专家分。每一步都有明确的公式和对应的实验对照。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：假设1/2：回答者在某术语上的回答频率越高，对该术语的偏好越强；跨回答者相比，频率高者偏好更强。
+
+- mechanism_cn：用回答历史频率的相对值表示偏好，并通过归一化到个人平均频率或术语平均频率来构造可比较的分数。
+
+- design_requirement_cn：需要计算每个回答者对每个术语的偏好分数，且区分个人内部和个人间层面。
+
+- artifact_choice_cn：式(2) intra-profile preference：term_freq[a,t]/avg_term_freq[a]；式(4) inter-profile preference：term_freq[a,t]/avg_freq[t]。
+
+- evaluated_contrast_cn：在熟练度计算中分别使用IntraP、InterP和完整组合（含两者加IDF）vs 不使用偏好的基线。
+
+- objective_result_cn：60个比较场景中100%正改进，95%显著，完整proficiency始终优于单独IntraP/InterP。
+
+##### evidence_pointers
+
+1. Section 4.1.1-4.1.3
+
+2. Section 5.4.1
+
+3. Table 4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：假设3（IDF）：常用术语区分度低，术语重要性应与其使用人数成反比。
+
+- mechanism_cn：对每个术语计算log(|A|/user_freq[t])，用对数抑制高频术语的影响。
+
+- design_requirement_cn：在偏好计算中按术语重要性加权。
+
+- artifact_choice_cn：式(1) imp[t]=log(|A|/user_freq[t])，在式(6)中乘入combined preference得到term_pref。
+
+- evaluated_contrast_cn：该权重包含在完整proficiency中，但未被单独消融；其贡献是与其他偏好因素捆绑评估。
+
+- objective_result_cn：整体系统在92%场景最优；偏好消融中完整proficiency优于不含IDF的IntraP/InterP变体。
+
+##### evidence_pointers
+
+1. Equation (1)
+
+2. Equation (6)
+
+3. Section 5.4.1
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：假设4：若某回答者击败了高熟悉度的共同回答者，则她应获得更高的权威信用。
+
+- mechanism_cn：将回答者对某问题的熟悉度定义为与该问题相似的历史问题数，并作为竞赛网络中边的权重，使战胜高熟悉度对手的影响更大。
+
+- design_requirement_cn：权威估计需要利用文本信息，而不仅仅是网络结构。
+
+- artifact_choice_cn：式(8)-(10)定义fami[a,q]和加权CBEN边权w_ij，式(13)用PageRank更新权威。
+
+- evaluated_contrast_cn：新的熟悉度加权CBEN vs 原始CBEN-PageRank。
+
+- objective_result_cn：20个场景中19个胜出，其中15个显著；仅1个显著恶化。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Section 5.4.2
+
+3. Table 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：假设5：混合系统的性能依赖信息融合技术；若某回答者在一个维度上排名第一，应给予最高分。
+
+- mechanism_cn：使用基于排名的倒数融合，并对极端情况（任一排名为1）设置满分作为奖励。
+
+- design_requirement_cn：需要设计一种针对熟练度和权威排名的融合机制，而不是简单相加或取最大。
+
+- artifact_choice_cn：Algorithm 2：若r1=1或r2=1则E=1.0，否则E=w_r/r1 + (1-w_r)/r2。
+
+- evaluated_contrast_cn：PEHER vs Proficiency-only, Authority-only, PEHER-max(·), PEHER-RRF。
+
+- objective_result_cn：80个场景中62个更优，74个优于或持平；41个显著改进，仅2个显著恶化。
+
+##### evidence_pointers
+
+1. Section 4.3.3
+
+2. Section 5.4.3
+
+3. Table 6
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：QLL语言模型[26]能衡量新问题与已答问题的文本相关性。
+
+- mechanism_cn：将新问题的每个词在档案问题语言模型下的生成概率相乘，得到相似度。
+
+- design_requirement_cn：需要将新问题与每个已答问题关联起来，以便迁移偏好和熟练度。
+
+- artifact_choice_cn：式(14) sim[q_hat,q]使用QLL，并作为熟练度公式(15)的权重。
+
+- evaluated_contrast_cn：基线只用该相似度（q_pref=1），与加入偏好的方案对比。
+
+- objective_result_cn：加入偏好后所有变体均显著优于纯相似度基线。
+
+##### evidence_pointers
+
+1. Section 4.3.1-4.3.2
+
+2. Section 5.4.1
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 整体基准比较（PEHER vs 20种现有方法，4数据集×5指标）
+
+2. 组件级消融验证（分别验证偏好估计器、权威估计器、融合策略）
+
+3. 统计显著性检验（双尾t检验，α=0.001）
+
+- why_these_evaluations_cn：先要有基准比较证明整体有效性，否则无人关心内部设计；接着必须通过消融把性能优势追溯到具体组件，否则无法断定偏好、熟悉度或融合策略真的产生了作用；t检验则保证观测到的改进不是随机波动。
+
+- benchmark_and_contrast_chain_cn：第一阶段用20种方法覆盖文本、网络、混合三类方法，建立整体性能上限；第二阶段消融偏好估计器，证明在熟练度计算中加入偏好优于纯相似度；第三阶段消融权威估计器，证明熟悉度加权的CBEN优于原始CBEN；第四阶段消融融合策略，证明新融合优于仅用其中一个信号或标准RRF。整个链条由整体到局部，逐步收敛到每个设计哲学的证据。
+
+### claim_evidence_ledger
+
+#### 1. PEHER在400个比较场景中的368个上优于20种方法
+
+- claim_cn：PEHER在400个比较场景中的368个上优于20种方法
+
+- evidence_cn：Table 3：按数据集×指标汇总的最佳次数#B/#T
+
+- adequacy_cn：只报告了胜出次数，未报告这些差异的置信区间或t检验，证据为描述性。
+
+#### 2. 完整proficiency优于纯相似度、IntraP和InterP
+
+- claim_cn：完整proficiency优于纯相似度、IntraP和InterP
+
+- evidence_cn：Table 4：60个场景中100%正改进，95%显著；完整proficiency总是最高
+
+- adequacy_cn：证据充分，但未检验proficiency相对于组合的增量是否来源于IDF权重。
+
+#### 3. 熟悉度加权的CBEN优于原始CBEN-PageRank
+
+- claim_cn：熟悉度加权的CBEN优于原始CBEN-PageRank
+
+- evidence_cn：Table 5：20个场景中19个胜出，15个显著
+
+- adequacy_cn：证据较充分，但与更广泛的权威算法（如HITS）未对比。
+
+#### 4. 新融合算法优于仅用熟练度、仅用权威、max和RRF
+
+- claim_cn：新融合算法优于仅用熟练度、仅用权威、max和RRF
+
+- evidence_cn：Table 6：62/80更优，74/80优于或持平，41个显著
+
+- adequacy_cn：证据较强，但替代融合只有两种，未覆盖加权和、对数融合等。
+
+- internal_validity_strategy_cn：通过消融实验隔离单一设计变量：偏好消融中只改变q_pref的来源；权威消融中只改变CBEN边权重；融合消融中只改变融合函数。同时使用配对t检验控制同一数据上的变异性。
+
+- external_validity_strategy_cn：使用四个不同主题的真实CQA数据集（Movie、Music、Celebrity、History），与20种不同代的算法比较，并在结论中将结果推广到审稿人推荐、学术论文推荐等类似专家发现场景。
+
+- what_is_not_actually_tested_cn：未进行在线部署或用户实验；未直接测量真实回答者的偏好，仅用行为历史做代理；未做参数敏感性分析；未单独检验IDF重要性项imp[t]的增量效应；未检验PEHER在稀疏回答或冷启动回答者上的表现。
+
+## 贡献闭环
+
+- technical_claim_cn：PEHER作为一个包含偏好、熟悉度和融合的混合专家检索系统，在4个数据集上对20种方法取得了92%的胜出率。
+
+- artifact_claim_cn：三个组件各自有效：偏好估计器内的intra/inter偏好组合优于单一偏好和基线；熟悉度加权CBEN优于原始CBEN；新融合算法优于常用替代。
+
+- mechanism_claim_cn：回答历史频率能有效代理回答者的术语偏好；文本熟悉度可以帮助衡量竞争环境中回答者的权威；基于排名的条件奖励融合能更好地结合熟练度和权威。
+
+- boundary_claim_cn：系统在CQA数据上有效，也可类推到审稿人推荐等需要从文档到人匹配的专家发现任务；但偏好仅基于历史，在数据稀疏或同义词场景中会受限。
+
+- reusable_design_knowledge_cn：专家检索系统应考虑回答者的个性化偏好，而不仅仅是文档相似度；网络权威计算应利用文本熟悉度作为边权重；信息融合时应对极端排名给予特殊处理。
+
+- theoretical_contribution_cn：将消费者偏好异质性中intra/inter区分引入专家检索领域，给出基于回答频率的可计算偏好分数；将CBEN扩展为文本熟悉的加权网络；为混合系统设计了一个可复用的排名融合规则。
+
+- how_discussion_closes_intro_gap_cn：结论重新指出引言中现有方法忽略偏好的缺口，并说明PEHER通过偏好估计器产生术语级偏好、通过权威估计器引入文本熟悉度、通过融合器有效结合两者，从而在实验上大幅超越现有方法，因而填补了该缺口。
+
+- overclaim_or_unsupported_leaps_cn：从368/400直接声称“PEHER outperforms”时未提供整体显著性检验；将偏好估计、权威估计、融合三个组件的独立消融结果相加，可能掩盖组件间的交互作用；将QLL相似度基线作为“无偏好”基线，但该基线本身也可能受其他因素影响；未在更多样化或更稀疏的数据上验证，结论部分的推广稍显乐观。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S2
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：社区问答服务让用户发布问题，其他用户给出回答；这样的门户很受欢迎。
+
+- rhetorical_function_cn：建立研究对象和应用场景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为随后指出未回答问题问题做铺垫。
+
+- evidence_pointer：Section 1, first two sentences
+
+### 2. P1 S3
+
+- order：2
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：尽管这些服务有用，但存在大量未回答问题这一麻烦现象。
+
+- rhetorical_function_cn：点出实际痛点，为研究提供动机。
+
+- depends_on_cn：CQA服务的普及。
+
+- sets_up_cn：引出问题路由和专家检索的必要性。
+
+- evidence_pointer：Section 1, sentence 3
+
+### 3. P1 S4-S5
+
+- order：3
+
+- section：Introduction
+
+- locator：P1 S4-S5
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：为缓解该问题，研究者提出问题路由；专家检索是问题路由的关键环节。
+
+- rhetorical_function_cn：将一般问题收缩为具体的专家检索研究目标。
+
+- depends_on_cn：未回答问题现象。
+
+- sets_up_cn：限定本文研究主题为专家检索。
+
+- evidence_pointer：Section 1, sentences 4-5
+
+### 4. P2 S1
+
+- order：4
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有专家检索方法可分为文本、网络和混合三类。
+
+- rhetorical_function_cn：梳理领域分类，为定位空白提供框架。
+
+- depends_on_cn：上一句提出的专家检索主题。
+
+- sets_up_cn：接下来分别指出每一类的局限。
+
+- evidence_pointer：Section 1, P2 first sentence
+
+### 5. P2 S2
+
+- order：5
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：文本方法利用文本反映回答者专长的特定方面，但通常不考虑回答者对自己所用术语的偏好。
+
+- rhetorical_function_cn：指出现有文本方法的缺口。
+
+- depends_on_cn：文本方法类别。
+
+- sets_up_cn：为引入偏好概念铺路。
+
+- evidence_pointer：Section 1, P2 second sentence
+
+### 6. P2 S3
+
+- order：6
+
+- section：Introduction
+
+- locator：P2 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：网络方法主要考虑参与者关系来确定权威，大多忽略文本信息。
+
+- rhetorical_function_cn：指出现有网络方法的缺口。
+
+- depends_on_cn：网络方法类别。
+
+- sets_up_cn：论证需要混合方法并融入文本。
+
+- evidence_pointer：Section 1, P2 third sentence
+
+### 7. P2 S4
+
+- order：7
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：混合方法结合文本和网络，克服部分限制并合并两者优势。
+
+- rhetorical_function_cn：承认混合方法的价值，但为后续指出其仍未纳入偏好作过渡。
+
+- depends_on_cn：前两种方法局限。
+
+- sets_up_cn：引出本文在混合基础上进一步加入偏好。
+
+- evidence_pointer：Section 1, P2 fourth sentence
+
+### 8. P3 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：我们提出PEHER，一个同时使用文本和网络的偏好增强混合专家检索系统。
+
+- rhetorical_function_cn：给出本文的解决办法。
+
+- depends_on_cn：前述三类方法的局限。
+
+- sets_up_cn：之后概述PEHER的组成与实验计划。
+
+- evidence_pointer：Section 1, P3 first sentence
+
+### 9. P3 S2-S5
+
+- order：9
+
+- section：Introduction
+
+- locator：P3 S2-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：PEHER由偏好估计器、权威估计器和专家估计器组成；偏好估计器定义档案内和档案间偏好，权威估计器利用文本熟悉度作为CBEN权重的网络计算权威，专家估计器用问题相似度和偏好估计熟练度并融合权威生成专家列表。
+
+- rhetorical_function_cn：高层次的架构预览，使读者在进入细节前掌握全局。
+
+- depends_on_cn：RQ_OR_OBJECTIVE提出的PEHER。
+
+- sets_up_cn：为第4节的详细算法描述作导览。
+
+- evidence_pointer：Section 1, P3 sentences 2-5
+
+### 10. P3 S6
+
+- order：10
+
+- section：Introduction
+
+- locator：P3 S6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：我们用4个真实数据集评价PEHER，与20种方法比较，使用5项指标，发现92%（368/400）胜出。
+
+- rhetorical_function_cn：预告实验设计和核心结果，激发阅读兴趣。
+
+- depends_on_cn：PEHER设计预览。
+
+- sets_up_cn：全文后续实验部分。
+
+- evidence_pointer：Section 1, last sentence
+
+### 11. P1 S1-S3
+
+- order：11
+
+- section：Section 2
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：综述中把专家检索现有成果分为三类：文本、网络和混合。
+
+- rhetorical_function_cn：系统化文献背景，为后续贡献定位。
+
+- depends_on_cn：引言中的三分类。
+
+- sets_up_cn：详细讨论各类方法的代表工作。
+
+- evidence_pointer：Section 2.1-2.3
+
+### 12. P1 S1-S3
+
+- order：12
+
+- section：Section 2.3
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：混合方法有三种直接混合策略；本文使用前两种，即融合结果或网络计算中融入文本相似度。
+
+- rhetorical_function_cn：明确本文采用的技术路线属于哪类混合策略。
+
+- depends_on_cn：文献综述中混合方法类别。
+
+- sets_up_cn：为第4节同时采用文本相似度和网络权重做铺垫。
+
+- evidence_pointer：Section 2.3 first paragraph
+
+### 13. P1-P2
+
+- order：13
+
+- section：Section 3
+
+- locator：P1-P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者引入问题、问题集合、回答者、术语频率等符号，并将目标定义为对新问题预测每个回答者的专家得分。
+
+- rhetorical_function_cn：形式化研究问题，避免后续公式歧义。
+
+- depends_on_cn：前文的专家检索主题。
+
+- sets_up_cn：为陈述哲学假设提供数学语言。
+
+- evidence_pointer：Section 3, notations and objective
+
+### 14. Philosophies list, item 1
+
+- order：14
+
+- section：Section 3
+
+- locator：Philosophies list, item 1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：回答者在某术语上的历史回答频次越高，表示对该术语的偏好越强。
+
+- rhetorical_function_cn：提出第一个可计算的设计假设。
+
+- depends_on_cn：符号定义中的term_freq。
+
+- sets_up_cn：引导式(2)的档案内偏好定义。
+
+- evidence_pointer：Section 3, philosophy 1
+
+### 15. Philosophies list, item 2
+
+- order：15
+
+- section：Section 3
+
+- locator：Philosophies list, item 2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：两个回答者共同使用的术语上，频率高者的偏好更强。
+
+- rhetorical_function_cn：补充跨用户比较的偏好定义。
+
+- depends_on_cn：philosophy 1。
+
+- sets_up_cn：引导式(4)的档案间偏好定义。
+
+- evidence_pointer：Section 3, philosophy 2
+
+### 16. Philosophies list, item 3
+
+- order：16
+
+- section：Section 3
+
+- locator：Philosophies list, item 3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：根据IDF假设，术语重要性与其使用人数成反比。
+
+- rhetorical_function_cn：引入信息检索中的经典知识。
+
+- depends_on_cn：CQA术语分布。
+
+- sets_up_cn：定义imp[t]公式(1)并用于偏好加权。
+
+- evidence_pointer：Section 3, philosophy 3
+
+### 17. Philosophies list, item 4
+
+- order：17
+
+- section：Section 3
+
+- locator：Philosophies list, item 4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：若最佳回答者战胜了高专业水平的共同回答者，则其应获得更高信用。
+
+- rhetorical_function_cn：将网络竞争关系与文本熟悉度联系起来。
+
+- depends_on_cn：CBEN竞赛网络思想。
+
+- sets_up_cn：引导权威估计器中的熟悉度权重。
+
+- evidence_pointer：Section 3, philosophy 4
+
+### 18. Philosophies list, item 5
+
+- order：18
+
+- section：Section 3
+
+- locator：Philosophies list, item 5
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：混合专家检索系统的性能依赖信息融合技术，因此需要为新组件寻找合适的融合方法。
+
+- rhetorical_function_cn：为设计新融合算法提供动机。
+
+- depends_on_cn：混合系统设计的一般知识。
+
+- sets_up_cn：后文Algorithm 2中的条件奖励融合。
+
+- evidence_pointer：Section 3, philosophy 5
+
+### 19. P4 after philosophies list
+
+- order：19
+
+- section：Section 3
+
+- locator：P4 after philosophies list
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出四个贡献：偏好得分、文本熟练度、修改CBEN和新的融合策略。
+
+- rhetorical_function_cn：明确文章的贡献清单，使读者知道应关注什么。
+
+- depends_on_cn：五条哲学。
+
+- sets_up_cn：第4节按这四块内容展开。
+
+- evidence_pointer：Section 3, contribution list
+
+### 20. Last paragraph
+
+- order：20
+
+- section：Section 3
+
+- locator：Last paragraph
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者将当前工作与其前作[19]对比，指出文本段、网络段和融合策略三方面的差异。
+
+- rhetorical_function_cn：通过与自我先前工作的差异定位新增点，防止贡献被归并到旧作。
+
+- depends_on_cn：作者之前的[19]工作。
+
+- sets_up_cn：突出本文新颖性所在。
+
+- evidence_pointer：Section 3, 'We now discuss the differences...'
+
+### 21. P1 S1-S4
+
+- order：21
+
+- section：Section 4
+
+- locator：P1 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：PEHER以已答问题、回答者列表和新问题为输入，输出专家列表；它分为偏好、权威、专家三个估计器，前两个可离线预处理。
+
+- rhetorical_function_cn：给出系统级架构和计算分界。
+
+- depends_on_cn：第3节的目标和贡献。
+
+- sets_up_cn：后续三个小节分别描述组件。
+
+- evidence_pointer：Section 4, opening paragraph and Figure 1a
+
+### 22. P1 S1-S3
+
+- order：22
+
+- section：Section 4.1
+
+- locator：P1 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：偏好估计器先计算每个回答者每个术语的档案内和档案间偏好，再合并并乘上重要性得到问题偏好。
+
+- rhetorical_function_cn：概括偏好估计器的工作流。
+
+- depends_on_cn：第3节假设1-3。
+
+- sets_up_cn：下面给出各步骤公式。
+
+- evidence_pointer：Section 4.1 intro and Figure 1b
+
+### 23. P2 S1-S2
+
+- order：23
+
+- section：Section 4.1
+
+- locator：P2 S1-S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：档案内和档案间偏好概念受消费者偏好异质性研究[33,34]启发。
+
+- rhetorical_function_cn：为偏好概念提供理论出处。
+
+- depends_on_cn：偏好估计器的需求。
+
+- sets_up_cn：强化读者对偏好概念的接受度。
+
+- evidence_pointer：Section 4.1, sentence mentioning [33,34]
+
+### 24. Equation (2)-(3)
+
+- order：24
+
+- section：Section 4.1.1
+
+- locator：Equation (2)-(3)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：档案内偏好定义为回答者某术语频率除以该回答者的平均术语频率。
+
+- rhetorical_function_cn：将假设1转化为具体公式。
+
+- depends_on_cn：假设1。
+
+- sets_up_cn：用于后续问题偏好计算。
+
+- evidence_pointer：Section 4.1.1
+
+### 25. Equation (4)-(5)
+
+- order：25
+
+- section：Section 4.1.2
+
+- locator：Equation (4)-(5)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：档案间偏好定义为回答者某术语频率除以所有使用该术语回答者的平均频率。
+
+- rhetorical_function_cn：将假设2转化为具体公式。
+
+- depends_on_cn：假设2。
+
+- sets_up_cn：用于后面的偏好合并。
+
+- evidence_pointer：Section 4.1.2
+
+### 26. Algorithm 1 and Eq (1),(6)
+
+- order：26
+
+- section：Section 4.1.3
+
+- locator：Algorithm 1 and Eq (1),(6)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者用一个分段函数合并档案内与档案间偏好，再乘以IDF重要性imp[t]得到最终术语偏好。
+
+- rhetorical_function_cn：设计合并规则和重要性加权，体现假设3。
+
+- depends_on_cn：式(2)、(4)和imp[t]。
+
+- sets_up_cn：为问题偏好计算提供输入。
+
+- evidence_pointer：Section 4.1.3
+
+### 27. Equation (7)
+
+- order：27
+
+- section：Section 4.1.4
+
+- locator：Equation (7)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：回答者对某个已答问题的偏好得分是该问题各术语偏好的平均。
+
+- rhetorical_function_cn：将术语级偏好聚合到问题级。
+
+- depends_on_cn：term_pref公式。
+
+- sets_up_cn：供熟练度公式(15)使用。
+
+- evidence_pointer：Section 4.1.4
+
+### 28. P1 S1-S4
+
+- order：28
+
+- section：Section 4.2
+
+- locator：P1 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：权威估计器包含档案熟悉度估计、网络构建和权威计算三个模块。
+
+- rhetorical_function_cn：给出权威估计器的内部流程。
+
+- depends_on_cn：假设4。
+
+- sets_up_cn：下面详细给出familiarity、CBEN权重和PageRank式更新。
+
+- evidence_pointer：Section 4.2 intro
+
+### 29. Equation (8)-(9)
+
+- order：29
+
+- section：Section 4.2.1
+
+- locator：Equation (8)-(9)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：某个回答者对某问题的熟悉度是其与所有已答问题的Jaccard相似度之和，再归一化到该问题所有回答者的总和。
+
+- rhetorical_function_cn：将文本熟悉度操作化，作为后续网络权重。
+
+- depends_on_cn：CQA中的问答文本。
+
+- sets_up_cn：为CBEN边权重公式(10)提供数值。
+
+- evidence_pointer：Section 4.2.1
+
+### 30. P2 S1-S3
+
+- order：30
+
+- section：Section 4.2.2
+
+- locator：P2 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者指出原始CBEN没有文本信息，并假设将回答者与问题的文本相似度加入权重可能提升性能；因此用熟悉度作为边权。
+
+- rhetorical_function_cn：解释为什么需要修改CBEN，并给出设计动机。
+
+- depends_on_cn：CBEN[12]和熟悉度定义。
+
+- sets_up_cn：给出加权CBEN公式(10)-(12)。
+
+- evidence_pointer：Section 4.2.2 paragraph
+
+### 31. Equation (13)
+
+- order：31
+
+- section：Section 4.2.3
+
+- locator：Equation (13)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用带阻尼因子和收敛条件的PageRank式迭代计算每个回答者的权威。
+
+- rhetorical_function_cn：完成权威估计的可计算部分。
+
+- depends_on_cn：加权CBEN。
+
+- sets_up_cn：供最终融合使用。
+
+- evidence_pointer：Section 4.2.3
+
+### 32. P1 S1-S2
+
+- order：32
+
+- section：Section 4.3
+
+- locator：P1 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：专家估计器由问题相似度、熟练度估计和专家列表生成三个模块组成。
+
+- rhetorical_function_cn：给出专家估计器的流程。
+
+- depends_on_cn：偏好估计器和权威估计器的输出。
+
+- sets_up_cn：随后三个子节说明各模块。
+
+- evidence_pointer：Section 4.3 intro
+
+### 33. Equation (14)
+
+- order：33
+
+- section：Section 4.3.1
+
+- locator：Equation (14)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用QLL模型计算新问题与每个已答问题的相似度。
+
+- rhetorical_function_cn：提供可复用的文本相似度度量。
+
+- depends_on_cn：QLL语言模型[26]。
+
+- sets_up_cn：作为熟练度公式的权重。
+
+- evidence_pointer：Section 4.3.1
+
+### 34. Equation (15)
+
+- order：34
+
+- section：Section 4.3.2
+
+- locator：Equation (15)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：回答者对某个新问题的熟练度是该回答者所有已答问题相似度与问题偏好乘积的累加。
+
+- rhetorical_function_cn：将文本相似度和偏好得分结合成统一的熟练度信号。
+
+- depends_on_cn：式(14)和式(7)。
+
+- sets_up_cn：供最终融合使用。
+
+- evidence_pointer：Section 4.3.2
+
+### 35. Algorithm 2 and preceding sentence
+
+- order：35
+
+- section：Section 4.3.3
+
+- locator：Algorithm 2 and preceding sentence
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：最终专家得分通过一个条件排名融合算法合并熟练度排名和权威排名：任一排名为1则给最高分，否则取加权倒数排名和。
+
+- rhetorical_function_cn：具体化融合策略，响应假设5。
+
+- depends_on_cn：熟练度和权威。
+
+- sets_up_cn：为融合消融实验提供对比对象。
+
+- evidence_pointer：Section 4.3.3
+
+### 36. P1 S1-S2
+
+- order：36
+
+- section：Section 5.1
+
+- locator：P1 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用四个真实数据集（Movie、Music、Celebrity、History）和五个指标（MRR、P@30、R@30、Accuracy、MSC@30）。
+
+- rhetorical_function_cn：说明评价环境和指标选择。
+
+- depends_on_cn：作者之前实验数据集[19]。
+
+- sets_up_cn：为后续比较提供可计算指标。
+
+- evidence_pointer：Section 5.1
+
+### 37. P1 S1-S4
+
+- order：37
+
+- section：Section 5.2
+
+- locator：P1 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：PEHER中偏好估计器和权威估计器可离线执行，新问题到达时只需运行专家估计器，在线成本较低。
+
+- rhetorical_function_cn：说明系统的可实现性和实时性，回应应用需求。
+
+- depends_on_cn：系统架构。
+
+- sets_up_cn：让读者相信性能提升不是以不可接受的计算开销为代价。
+
+- evidence_pointer：Section 5.2
+
+### 38. P1 S1-S2
+
+- order：38
+
+- section：Section 5.3.1
+
+- locator：P1 S1-S2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：将PEHER与20种现有方法比较，这些方法的实验结果借自[19]，参数设置已确定。
+
+- rhetorical_function_cn：确定基线集合和结果来源，避免重复实验。
+
+- depends_on_cn：已有文献结果。
+
+- sets_up_cn：为整体结果表提供参照系。
+
+- evidence_pointer：Section 5.3.1 and Table 1
+
+### 39. P1-P2 before Table 3
+
+- order：39
+
+- section：Section 5.3.2
+
+- locator：P1-P2 before Table 3
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告PEHER在各数据集和指标上优于对比方法的次数，例如Movie上99/100，Music上100/100，汇总为368/400。
+
+- rhetorical_function_cn：用胜出计数呈现整体性能优势。
+
+- depends_on_cn：实验协议。
+
+- sets_up_cn：支撑结论中的性能主张。
+
+- evidence_pointer：Section 5.3.2, Table 3
+
+### 40. After Table 3
+
+- order：40
+
+- section：Section 5.3.2
+
+- locator：After Table 3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：PEHER在Music数据集上表现最好（100%胜出），在History数据集最差（72%）；按指标，MRR最好（100%），R@30最差（85%）。
+
+- rhetorical_function_cn：承认性能随数据集和指标变化，避免绝对化表述。
+
+- depends_on_cn：Table 3结果。
+
+- sets_up_cn：提示存在边界条件，为后文消融和讨论做铺垫。
+
+- evidence_pointer：Section 5.3.2 paragraph after Table 3
+
+### 41. P1 S1
+
+- order：41
+
+- section：Section 5.4
+
+- locator：P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为检验PEHER中不同哲学的有效性，作者设计了三个分组件实验。
+
+- rhetorical_function_cn：预告消融实验，将论证从整体转向内部机制。
+
+- depends_on_cn：整体比较结果。
+
+- sets_up_cn：为5.4.1-5.4.3的消融细节作总起。
+
+- evidence_pointer：Section 5.4 first paragraph
+
+### 42. P1 S1-S6
+
+- order：42
+
+- section：Section 5.4.1
+
+- locator：P1 S1-S6
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：作者构造四个方案：基线（q_pref=1）、IntraP、InterP、完整proficiency，分别用不同偏好来源计算专家分。
+
+- rhetorical_function_cn：定义偏好估计器的消融比较集。
+
+- depends_on_cn：第4章偏好公式。
+
+- sets_up_cn：为Table 4的改进百分比提供方法描述。
+
+- evidence_pointer：Section 5.4.1, formulas (16)-(20)
+
+### 43. After Table 4
+
+- order：43
+
+- section：Section 5.4.1
+
+- locator：After Table 4
+
+- move_code：RESULT
+
+- paraphrase_cn：60个比较场景中所有改进均为正，57个显著，且完整proficiency在所有数据集和指标上都高于单独的IntraP和InterP。
+
+- rhetorical_function_cn：报告偏好消融的核心发现。
+
+- depends_on_cn：Table 4数据。
+
+- sets_up_cn：给出偏好估计器有效的结论。
+
+- evidence_pointer：Section 5.4.1 observations
+
+### 44. Last sentence of 5.4.1
+
+- order：44
+
+- section：Section 5.4.1
+
+- locator：Last sentence of 5.4.1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者认为实验在有限范围内验证了偏好估计同时包含两档案的偏好是有效的。
+
+- rhetorical_function_cn：将数据结果升华为设计结论。
+
+- depends_on_cn：Table 4结果。
+
+- sets_up_cn：支持最终结论中的贡献声明。
+
+- evidence_pointer：Section 5.4.1 last sentence
+
+### 45. P1 S1-S5
+
+- order：45
+
+- section：Section 5.4.2
+
+- locator：P1 S1-S5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：作者将提出的权威估计器与CBEN-PageRank基线比较，用相同方法检验其改进和显著性。
+
+- rhetorical_function_cn：定义权威估计器的消融对照。
+
+- depends_on_cn：第4.2节的权威公式。
+
+- sets_up_cn：为Table 5结果作准备。
+
+- evidence_pointer：Section 5.4.2
+
+### 46. After Table 5
+
+- order：46
+
+- section：Section 5.4.2
+
+- locator：After Table 5
+
+- move_code：RESULT
+
+- paraphrase_cn：提出的权威估计器在20个场景中19个胜出，其中15个显著；唯一的恶化也显著。
+
+- rhetorical_function_cn：报告权威消融结果并指出边界。
+
+- depends_on_cn：Table 5数据。
+
+- sets_up_cn：断言权威估计器的设计哲学有效。
+
+- evidence_pointer：Section 5.4.2 paragraph after Table 5
+
+### 47. P1 S1-S5
+
+- order：47
+
+- section：Section 5.4.3
+
+- locator：P1 S1-S5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：为检验融合策略，作者对比完整PEHER与仅熟练度、仅权威、PEHER-max和PEHER-RRF四种替代方案。
+
+- rhetorical_function_cn：定义融合消融的比较集。
+
+- depends_on_cn：第4.3节融合算法及现有RRF。
+
+- sets_up_cn：为Table 6作方法说明。
+
+- evidence_pointer：Section 5.4.3
+
+### 48. After Table 6
+
+- order：48
+
+- section：Section 5.4.3
+
+- locator：After Table 6
+
+- move_code：RESULT
+
+- paraphrase_cn：新的融合策略在80个场景中62个优于最佳替代，74个优于或持平；41个改进显著，仅2个显著恶化。
+
+- rhetorical_function_cn：报告融合消融的核心结果。
+
+- depends_on_cn：Table 6数据。
+
+- sets_up_cn：为最终融合策略的有效性提供证据。
+
+- evidence_pointer：Section 5.4.3 paragraph after Table 6
+
+### 49. P1 S1-S4
+
+- order：49
+
+- section：Section 6
+
+- locator：P1 S1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论首先总结PEHER系统如何融合偏好、熟悉度、权威和熟练度。
+
+- rhetorical_function_cn：重述系统与贡献，闭合文章。
+
+- depends_on_cn：第4章设计。
+
+- sets_up_cn：用简洁语言强化核心贡献。
+
+- evidence_pointer：Section 6 first paragraph
+
+### 50. P2 S1-S2
+
+- order：50
+
+- section：Section 6
+
+- locator：P2 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：重新报告与20种方法比较的92%胜出率，并强调消融实验验证了各设计哲学。
+
+- rhetorical_function_cn：再次展示实证结论，让结尾收束于证据。
+
+- depends_on_cn：第5章全部实验。
+
+- sets_up_cn：为适用性讨论背书。
+
+- evidence_pointer：Section 6 second paragraph
+
+### 51. P3 S1-S5
+
+- order：51
+
+- section：Section 6
+
+- locator：P3 S1-S5
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者讨论系统适用性：考虑用户偏好可维持回答者兴趣并减少未回答问题，还能用于审稿人推荐等场景。
+
+- rhetorical_function_cn：将结果外推到实际决策支持和相似专家发现任务。
+
+- depends_on_cn：实验结果和系统设计。
+
+- sets_up_cn：引出局限和未来工作。
+
+- evidence_pointer：Section 6 third paragraph
+
+### 52. P4 S1-S4
+
+- order：52
+
+- section：Section 6
+
+- locator：P4 S1-S4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认三项局限：偏好仅来自回答历史、需与全部已答问题比较导致在线成本高、未做参数敏感性分析；未来计划研究参数影响和不同融合技术。
+
+- rhetorical_function_cn：限定贡献边界，展示学术诚实并为未来研究留空间。
+
+- depends_on_cn：全文设计与实验。
+
+- sets_up_cn：结束全文。
+
+- evidence_pointer：Section 6 fourth paragraph
+
+## 写作技术
+
+- gap_construction_cn：作者不是声称“没人研究专家检索”，而是定位一个更细的缺口：现有混合方法已经结合文本和网络，但文本部分没有考虑回答者的术语偏好，网络部分没有利用文本熟悉度。通过逐一列举文本、网络、混合方法的缺点，把缺口精确化。
+
+- signposting_cn：第1节末尾预告“系统由三个估计器构成”和“4数据集、20方法、5指标、92%胜出”；第5.4节开头预告“为了检验不同哲学，我们做三个实验”；结论再次回扣这些预告。
+
+- transition_logic_cn：从引言的三类方法到第3节哲学列表，再到第4节组件描述，每一步由前一步的缺口引导；从整体比较到消融时，用“为了检验PEHER中不同哲学的有效性”作为桥梁；每个消融小节都以“验证X哲学”开头，形成重复节奏。
+
+- claim_evidence_rhythm_cn：整体上先陈述高抽象结果（92%），再通过消融把结论拆散成三个小结果；每个消融小节都是“提出变体—报告改进—判断显著性—下设计结论”的四拍结构。
+
+- benchmark_narrative_cn：Benchmark不是简单堆表，而是放在整体优势之后；作者用胜出次数#B/#T作为叙事锚点，让每个数据集和指标的局部数字都汇入368/400的总数，增强可读性；随后用消融实验把benchmark优势反推出内部机制。
+
+- theory_return_cn：在消融结果之后，作者都将数据结论表述为“验证了哲学”，即将性能数字转化为对设计假设的支持；结尾又用这些已验证的哲学推导系统的应用价值。
+
+- contribution_positioning_cn：贡献列表在引言、第3节、结论出现三次，每次都略有不同：第1次是概述，第2次精确到四个点并与旧作差异，第3次与系统设计绑定，层层强化。
+
+- novelty_protection_cn：通过三点防护：一是与作者前作[19]的详细差异对比；二是用消融实验证明每个新增部件的独立效果；三是用20种广泛方法的大规模benchmark确立相对优势，避免被认为只是一个小改动。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实痛点（未回答问题）引出问题域，建立专家检索的重要性。
+
+- research_job_cn：识别CQA服务中的具体问题；定义专家检索目标。
+
+- required_evidence_cn：文献中关于未回答问题比例或用户困扰的证据；领域基本定义。
+
+- transition_to_next_cn：指出现有方法的分类与局限。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述三类已有方法，说明每类的核心做法和缺陷。
+
+- research_job_cn：选出代表性的文本、网络和混合方法，并概括其机理。
+
+- required_evidence_cn：能够显示类别间差异和具体缺点的文献证据。
+
+- transition_to_next_cn：把缺口具体化为“缺乏偏好/文本熟悉度”。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：明确列出本文的目标、哲学假设和贡献清单。
+
+- research_job_cn：把领域知识转化为可计算的设计原则，并为每个假设提供来源（如IDF、消费者偏好异质性）。
+
+- required_evidence_cn：支撑每个假设的已有理论或常识性原理。
+
+- transition_to_next_cn：说明“下面将这些哲学实现为系统”。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：按子系统/模块详述算法、公式和伪代码，并指出哪些部分可离线。
+
+- research_job_cn：将每个假设转成具体的数学表达式，确保可复现。
+
+- required_evidence_cn：公式的推导逻辑和符号定义；复杂度分析。
+
+- transition_to_next_cn：转入实验：数据集、指标、对比方法。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：执行整体benchmark：给出对比方法表、参数表和总体结果胜出计数。
+
+- research_job_cn：选择多个数据集和指标，运行系统（或复用已有结果），记录每个场景的比较结果。
+
+- required_evidence_cn：每个数据集×指标×方法下的数值或至少胜出次数。
+
+- transition_to_next_cn：指出“整体好但不知道为什么好”，引出消融。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：分组件设计消融实验：对每个核心哲学给出变体、基线和显著性检验。
+
+- research_job_cn：逐一关闭或替换系统中的某个设计选择，测量性能变化。
+
+- required_evidence_cn：对照变体和基线；t检验p值。
+
+- transition_to_next_cn：下结论：每个哲学都有效；综合贡献成立。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在结论中重述系统、实验结果、适用场景和局限。
+
+- research_job_cn：把结果外推到类似任务，同时列出可证伪的边界条件。
+
+- required_evidence_cn：与引言缺口呼应的总结句；局限性清单。
+
+- transition_to_next_cn：文章结束，无需进一步过渡。
+
+### most_transferable_moves_cn
+
+1. 用胜出计数（#B/#T）将大规模benchmark压缩为易读数字（92%）。
+
+2. 让每个哲学假设都有对应的消融实验，避免整体性能归因不清。
+
+3. 在系统描述中区分离线可预处理部分和在线部分，缓解计算效率顾虑。
+
+4. 通过与自己的前作比较来清晰定位增量贡献。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 4个真实CQA数据集的规模和质量需要提前累积；本文数据集来自其前作[19]，属于研究组延续资源。
+
+2. 20种基线方法的复现或结果引用依赖已有公开结果；若需亲自实现成本较高。
+
+3. 大量矩阵运算（Jaccard、QLL、PageRank）和数据清洗，需要相当的工程资源。
+
+### what_not_to_copy_superficially_cn
+
+1. 仅写“我们提出偏好增强系统”但未在实验中单独验证偏好组件，会变成无证据的声明。
+
+2. 仅使用一个数据集或一个指标就宣称92%胜出，可能过拟合特定场景。
+
+3. 没有t检验或置信区间时，消融中的微小百分比提升（如+0.34%）无法支撑结论。
+
+4. 不加说明地引用前作结果作为全部基线，在评审中可能被质疑公平性，除非与前作在同一协议下运行。
+
+- single_best_description_of_the_routine_cn：先定义一组可计算的设计哲学，再将每个哲学实现为系统组件；用大范围benchmark证明整体优势，用逐组件消融把优势拆解回设计哲学；最后把结论同时刻画为“性能更好”和“哲学成立”。
+
+## 分析边界
+
+本文分析基于全文文本，未获取原表4、5、6以外的原始数值；对比方法结果来自文献[19]而非重新运行，可能影响可比性；文章未附超参数敏感性分析。分析中未借助OCR，仅基于提供的文本。

@@ -1,0 +1,1955 @@
+# On the Same Page? What Users Benefit from a Desktop View on Mobile Devices
+
+- 作者：Lior Fink; Daniele Papismedov
+- 年份 / 期刊：2023 / Information Systems Research
+- DOI：10.1287/isre.2022.1140
+- 源文件：28488_2023_on-the-same-page-what-users-benefit-from-a-desktop-view-on-mobile-devices.md
+- 论文主类型：theory_derived_artifact_experiment
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.95
+
+## 文章级论证概况
+
+- 核心问题：移动设备用户在使用桌面信息架构（单页呈现全部信息）时是否比使用移动信息架构（分层多页呈现）做出更准确的决策？
+
+- 制品与设计：核心实验操纵是两种信息架构：桌面IA在单一概览页面呈现11个备选方案的全部8个属性；移动IA仅概览页面呈现3个属性，其余属性需通过访问详情页获取。实验2进一步操纵概览页呈现的属性是与用户偏好一致（最重要的3个属性）还是不一致（最不重要的3个属性）。
+
+- 客观结果：两个实验中，移动IA显著增加决策误差（降低准确性）；实验1中移动IA增加详情页访问次数但减少决策时间；实验2中不一致移动IA比一致移动IA导致更多搜索、更长决策时间和更高感知负荷，但两种移动IA的准确性都低于桌面IA。
+
+- 核心贡献：将努力-准确性框架扩展到信息架构概念，证明简单地将相同信息分层分页即可影响决策行为；发现移动IA与用户偏好的一致性作为边界条件，决定用户是降低努力还是增加努力以维持计算；支持移动端提供桌面视图选项的实践趋势。
+
+- 整篇论证链：论文从行业实践出发：移动端内容适配常通过分层信息架构实现，但最近浏览器和网站提供“桌面视图”选项。作者指出，移动IA虽未减少信息量，但将信息分布到多页迫使移动用户在决策时付出更高认知努力。基于努力-准确性框架，他们假设为平衡努力与准确性，用户会采用更启发式的策略，牺牲准确性，由此预测移动IA降低决策准确性。两个实验室实验用酒店预订的多属性选择任务验证了该假设，并发现当移动IA概览页呈现的属性与用户偏好不一致时，用户反而增加努力以维持一定准确性，构成边界条件。论文由此扩展信息显示与决策行为文献，并建议保留桌面视图选项以提升决策质量。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者从努力-准确性框架推导出预测移动IA降低决策准确性的假设，然后设计两个实验室实验检验这一假设；实验中的差异不是系统性能或benchmark，而是IA设计差异（信息是否分页）以及一致性操纵。整体可归类为理论推导制品差异并通过实验检验。
+
+- 主导写作弧线判定：写作弧线遵循：以行业现象（桌面视图选项出现）和学术问题（内容适配的未识别代价）为起点，引入努力-准确性理论框架，推导假设并设计实验，实施两个实验检验，结果支持假设并发现边界条件，最后回到理论讨论其意义、替代解释和贡献。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：阶段1是为实验准备真实任务材料的预研究（属性选择与备选生成）；阶段2是实验1，用固定移动IA与桌面IA对比来检验主假设；阶段3是实验2，操纵移动IA与用户偏好一致性以复制并探索边界条件；阶段4是对实验结果中决策误差模型的稳健性检验（负二项回归）。阶段之间呈递进关系：预研究提供任务材料，实验1建立主效应，实验2扩展条件范围，稳健性检验增强结果可信度。
+
+### studies_or_phases
+
+#### 1. 预研究：属性选择与备选生成
+
+- order：1
+
+- name_cn：预研究：属性选择与备选生成
+
+- question_cn：哪些属性对酒店选择最重要，以及如何生成现实且反映真实权衡的备选方案？
+
+- inputs_and_setting_cn：36名受访者（与实验同源的大学生）对16个常见酒店属性进行重要性评分；从Booking.com抓取伦敦一晚双人房搜索结果，按价格排序后每16个随机抽样1个，并收集8个属性数据。
+
+- designed_or_compared_object_cn：无正式实验设计；选择属性集和构造备选矩阵。
+
+- baseline_control_or_counterfactual_cn：无对照。
+
+##### objective_metrics
+
+1. 属性重要性评分均值
+
+2. 备选方案的属性值真实性
+
+- analysis_method_cn：描述性统计排序；对搜索结果进行抽样的工程处理。
+
+- main_result_cn：选出8个最重要属性：每晚价格、距市中心距离、位置评分、综合评分、免费Wi-Fi、清洁评分、含免费早餐、星级；生成22个平均化备选并划分为两个等价集合，供被试内两任务使用。
+
+- argumentative_role_cn：为实验任务提供高生态效度的刺激材料，使决策任务接近真实酒店预订，增强结果外部效度。
+
+- remaining_uncertainty_cn：未直接检验属性选择是否完全代表目标用户偏好；备选集合等价的假设未统计验证。
+
+- link_to_next_phase_cn：生成的属性集和备选集成为实验1的决策矩阵基础。
+
+##### evidence_pointers
+
+1. Section 4.1 Participants and Design,  Preliminary steps
+
+2. Introduction of 8 attributes and 22 alternatives
+
+#### 2. 实验1：固定移动IA vs 桌面IA
+
+- order：2
+
+- name_cn：实验1：固定移动IA vs 桌面IA
+
+- question_cn：在固定移动IA（概览页呈现3个固定属性）下，移动IA是否降低决策准确性并减少努力？
+
+- inputs_and_setting_cn：63名工程专业本科生（66.7%女性，平均23.98岁），在实验室用自己的智能手机访问专门开发的酒店预订网站，完成两个多属性选择任务（一个桌面IA、一个移动IA），顺序被被试间平衡。
+
+- designed_or_compared_object_cn：比较桌面IA与移动IA：桌面IA在概览页呈现全部8个属性；移动IA概览页仅呈现价格、距市中心距离、星级（两个最重要和一个最不重要属性，根据预研究）。
+
+- baseline_control_or_counterfactual_cn：桌面IA作为基线条件；无其他对照组。
+
+##### objective_metrics
+
+1. 决策不准确性：错过的更优备选方案数（整数0-10）
+
+2. 信息搜索：访问的详情页数量
+
+3. 决策时间：从概览页呈现到做出选择的时间（秒）
+
+4. 感知信息负荷：单一七点Likert量表
+
+- analysis_method_cn：混合效应Poisson回归（决策不准确性），混合效应OLS回归（三种努力指标）；控制偏好标准差、常用设备、年龄、性别、任务顺序；加入参与者随机效应。
+
+- main_result_cn：移动IA显著增加决策不准确性（β=0.241, p<0.05）；移动IA显著增加信息搜索（β=1.227, p<0.01），显著减少决策时间（β=-0.217, p<0.01），对感知负荷无显著负效应。
+
+- argumentative_role_cn：验证主假设（H1），并初步支持努力-准确性机制（准确性、努力均较低）。
+
+- remaining_uncertainty_cn：移动IA的概览页属性固定，可能与用户真实偏好不匹配，需考察偏好一致性影响。
+
+- link_to_next_phase_cn：实验2将概览页属性改为与用户偏好一致或不一致，以便观察边界条件。
+
+##### evidence_pointers
+
+1. Section 4: Experiment 1
+
+2. Table 1
+
+3. Figure 3
+
+#### 3. 实验2：移动IA与用户偏好的一致性操纵
+
+- order：3
+
+- name_cn：实验2：移动IA与用户偏好的一致性操纵
+
+- question_cn：移动IA概览页呈现的属性与用户偏好一致或不一致时，决策准确性和努力如何变化？是否存在边界条件？
+
+- inputs_and_setting_cn：84名工程专业本科生（42.9%女性，平均25.29岁），未参与实验1；实验材料、设计与程序与实验1相同，但移动IA的概览页属性在一致条件下为被试权重最高的3个属性，不一致条件为权重最低的3个属性；被试随机分配到两个条件。
+
+- designed_or_compared_object_cn：比较三种IA：桌面IA（完整信息）、一致移动IA、不一致移动IA。
+
+- baseline_control_or_counterfactual_cn：桌面IA作为基线；一致与不一致移动IA互为对照。
+
+##### objective_metrics
+
+1. 决策不准确性
+
+2. 信息搜索
+
+3. 决策时间
+
+4. 感知信息负荷
+
+- analysis_method_cn：混合效应Poisson和OLS回归；模型包含两个移动IA系数（一致和不一致），控制与实验1相同的变量。
+
+- main_result_cn：一致和不一致移动IA都显著增加决策不准确性（β=0.459, p<0.01; β=0.605, p<0.01）；不一致移动IA比一致移动IA产生更多信息搜索（β=4.103 vs 1.252），更长决策时间（β=0.045 vs -0.189），更高感知负荷（β=0.263 vs -0.775）但统计显著性不同；不一致组的努力水平接近桌面IA但仍不提高准确性。
+
+- argumentative_role_cn：复制H1并发现边界条件：当IA与偏好不一致时，用户转而增加努力以维持可接受的准确性，但准确性仍低于桌面IA；这一模式支持努力-准确性框架的自适应决策行为。
+
+- remaining_uncertainty_cn：不一致条件下用户为何选择增加努力的机制解释是post hoc，未经预先假设验证。
+
+- link_to_next_phase_cn：为讨论部分提供反事实对比，引导理论比较和边界主张。
+
+##### evidence_pointers
+
+1. Section 5: Experiment 2
+
+2. Table 2
+
+3. Figure 4
+
+#### 4. 稳健性检验：负二项回归
+
+- order：4
+
+- name_cn：稳健性检验：负二项回归
+
+- question_cn：混合效应Poisson回归对决策不准确性建模时，过度离差问题是否影响结论？
+
+- inputs_and_setting_cn：重跑实验1和实验2的决策不准确性模型，改用混合效应负二项回归。
+
+- designed_or_compared_object_cn：比较Poisson与负二项回归结果。
+
+- baseline_control_or_counterfactual_cn：泊松模型作为原分析，负二项作为稳健性检查。
+
+##### objective_metrics
+
+1. 系数显著性
+
+- analysis_method_cn：混合效应负二项回归。
+
+- main_result_cn：实验1中移动IA效应保持显著；实验2中一致移动IA效应在0.05水平显著（原来0.01），不一致移动IA效应保持显著，任务顺序不再显著。
+
+- argumentative_role_cn：增强证据强度，确认过度离散并非主要结果的原因。
+
+- remaining_uncertainty_cn：未进行其他稳健性测试（如感知负荷的分布假设）。
+
+- link_to_next_phase_cn：让结论更稳健，进入总结讨论。
+
+##### evidence_pointers
+
+1. Endnotes 4 and 5
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. GAP
+
+4. RQ_OR_OBJECTIVE
+
+5. THEORY_INTRO
+
+6. HYPOTHESIS_OR_PROPOSITION
+
+7. RESULT
+
+8. BOUNDARY_CONDITION
+
+9. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. GAP
+
+5. WHY_GAP_MATTERS
+
+6. RQ_OR_OBJECTIVE
+
+7. THEORY_INTRO
+
+8. MECHANISM
+
+9. HYPOTHESIS_OR_PROPOSITION
+
+10. STUDY_OVERVIEW
+
+11. RESULT
+
+12. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. THEORY_INTRO
+
+4. THEORY_PROPOSITION
+
+5. MECHANISM
+
+6. REQUIREMENT
+
+7. DESIGN_FEATURE
+
+8. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. METHOD_JUSTIFICATION
+
+2. DESIGN_FEATURE
+
+3. BENCHMARK_OR_CONTRAST
+
+4. REQUIREMENT
+
+5. DESIGN_FEATURE
+
+6. HYPOTHESIS_OR_PROPOSITION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. RESULT
+
+6. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. MECHANISM
+
+3. BOUNDARY_CONDITION
+
+4. THEORY_RETURN
+
+5. CONTRIBUTION
+
+6. PRACTICAL_STAKES
+
+7. LIMITATION_AND_FUTURE
+
+8. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Effort-accuracy framework
+
+2. Information display literature (multiattribute choice)
+
+3. Mobile HCI and information architecture research
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：努力-准确性框架直接推导出移动IA降低决策准确性的假设，并指导了实验设计中信息架构的操纵（单页 vs 多页分层）以及三种努力指标的选择（信息搜索、决策时间、感知负荷）；实验2的一致性操纵也基于该理论关于努力-准确性权衡的预测，因此理论前瞻性地决定了设计与评价指标。
+
+- 理论到设计翻译链：努力-准确性框架 → 决策行为是在努力最小化与准确性最大化之间的权衡 → 移动IA将信息拆分到多页，增加获取与整合信息的认知努力 → 为维持平衡，用户转向启发式策略，减少信息处理 → 准确性下降 → 实验设计将桌面IA（单页）与移动IA（多页）对比，并测量准确性及三个努力指标 → 结果支持该链；进一步考虑移动IA的信息结构与用户偏好的匹配（一致性） → 当概览页信息与偏好不一致时，启发式策略失效，用户转而增加努力以维持可接受准确性 → 形成边界条件。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：相同信息在单页呈现比在多页分层呈现需要更少的认知努力来达到相同的准确性。
+
+- mechanism_cn：多页分层导致用户需要跨页导航并将已见信息存入工作记忆，增加认知负荷；用户倾向采用启发式策略如词典式规则，只处理部分信息，从而降低努力和准确性。
+
+- design_requirement_cn：实验需要操纵IA差异：桌面IA在概览页呈现完整信息；移动IA概览页只呈现部分属性，其余在详情页。
+
+- artifact_choice_cn：酒店预订网站中，桌面概览页显示11×8完整矩阵；移动概览页显示11×3属性矩阵，详情页提供每个备选的其余属性。
+
+- evaluated_contrast_cn：桌面IA vs 移动IA（固定3属性）；实验2加入一致（最重要的3属性）vs 不一致（最不重要的3属性）。
+
+- objective_result_cn：移动IA显著增加决策误差，同时信息搜索增加但决策时间减少；不一致移动IA导致更多搜索和时间，但误差仍高。
+
+##### evidence_pointers
+
+1. Table 1, Figure 3
+
+2. Table 2, Figure 4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：当任务环境使启发式策略不足以达到满意准确性时，决策者会转向增加努力以维持可接受的准确性。
+
+- mechanism_cn：当概览页只呈现最不重要属性时，基于概览页的快速决策会产生过低满意度，触发补偿性加工，增加跨页搜索和信息整合，牺牲努力以保持准确性。
+
+- design_requirement_cn：实验2需要操纵移动IA概览页属性与用户偏好的一致性作为高/低两种条件。
+
+- artifact_choice_cn：一致条件：概览页显示每位被试权重最高的3个属性；不一致条件：显示权重最低的3个属性。
+
+- evaluated_contrast_cn：一致移动IA vs 不一致移动IA；两者又分别与桌面IA对比。
+
+- objective_result_cn：不一致移动IA的信息搜索和时间显著高于一致移动IA，接近桌面IA水平；但决策误差仍显著高于桌面IA，未恢复。
+
+##### evidence_pointers
+
+1. Table 2, Figure 4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控实验室实验
+
+2. 被试内设计（实验1）
+
+3. 被试间设计（实验2）
+
+4. 真实数据驱动的任务材料（Booking.com）
+
+5. 混合效应回归模型
+
+6. 过度离差稳健性检验（负二项回归）
+
+- why_these_evaluations_cn：论文目标是建立IA差异对决策准确性的因果效应，因此采用实验室实验以最大程度控制外部变量和随机分配；多属性选择任务可以量化准确性和努力；两个实验逐步加入偏好一致性操纵，以检验主效应可复制性和边界条件；负二项回归处理计数数据的过度离散，确保结果可靠。
+
+- benchmark_and_contrast_chain_cn：桌面IA是始终存在的基准条件。实验1将固定移动IA与桌面IA对比，确立基本效应。实验2增加一致和不一致两种移动IA，与桌面IA同时对比，提供条件维度的对比链。估计边际均值的组合显示：桌面IA（高准确高努力）、一致移动IA（低准确低努力）、不一致移动IA（低准确中等努力），形成三条路径的累积对比。
+
+### claim_evidence_ledger
+
+#### 1. 移动IA降低决策准确性
+
+- claim_cn：移动IA降低决策准确性
+
+- evidence_cn：实验1和实验2中移动IA系数显著为正（决策不准确性升高）
+
+##### evidence_pointers
+
+1. Table 1 Model (1)
+
+2. Table 2 Model (1)
+
+#### 2. 移动IA降低认知努力（通过更少信息使用和更快决策）
+
+- claim_cn：移动IA降低认知努力（通过更少信息使用和更快决策）
+
+- evidence_cn：实验1中移动IA增加信息搜索但减少决策时间，感知负荷不显著；实验2一致移动IA同样减少时间和负荷
+
+##### evidence_pointers
+
+1. Table 1 Models (2)-(4)
+
+2. Table 2 Models (2)-(4)
+
+#### 3. 不一致性移动IA导致用户增加努力
+
+- claim_cn：不一致性移动IA导致用户增加努力
+
+- evidence_cn：实验2中不一致移动IA的信息搜索、决策时间、感知负荷均高于一致移动IA，且搜索和时间接近桌面IA
+
+##### evidence_pointers
+
+1. Table 2 Models (2)-(4)
+
+2. Figure 4
+
+#### 4. 不一致移动IA的准确性仍低于桌面IA
+
+- claim_cn：不一致移动IA的准确性仍低于桌面IA
+
+- evidence_cn：实验2中不一致移动IA的决策不准确性系数显著为正，且与一致移动IA相差不大
+
+##### evidence_pointers
+
+1. Table 2 Model (1)
+
+2. Figure 4 (inaccuracy panel)
+
+#### 5. 主结果在泊松计数模型下稳健
+
+- claim_cn：主结果在泊松计数模型下稳健
+
+- evidence_cn：负二项回归中移动IA效应仍显著
+
+##### evidence_pointers
+
+1. Endnotes 4 and 5
+
+- internal_validity_strategy_cn：通过随机分配、任务顺序平衡、被试内设计（实验1）、被试间设计（实验2）、控制性别年龄设备使用等变量、统一实验环境和任务流程、使用客观行为记录（详情页点击、时间）和主观量表、验证过离散等策略增强内部有效性。
+
+- external_validity_strategy_cn：使用真实Booking.com备选数据和真实酒店属性；属性选择基于目标人群调查；移动IA的属性数量基于11个流行酒店网站的探索性分析；实验地点为大学实验室，被试为同一目标人群学生；同时承认生态效度受限。
+
+- what_is_not_actually_tested_cn：没有直接测量决策时使用的具体启发式策略，只是从信息搜索和时间推断；没有测量工作记忆负荷；没有在真实互联网环境中观察自愿选择桌面视图的行为；没有测试其他移动IA类型（如hub-and-spoke、bento box等）；没有测试信息数量变化（如每页属性数量的增量）的影响。
+
+## 贡献闭环
+
+- technical_claim_cn：移动IA显著降低决策准确性，且该效应可稳定复制（两个独立样本）；移动IA下用户努力水平变化与IA-偏好一致性有关。
+
+- artifact_claim_cn：IA本身——相同信息是否被分层到多页——就是改变决策行为的制品特征；概览页信息与偏好的匹配度决定用户选择降低努力还是增加努力。
+
+- mechanism_claim_cn：机制是努力-准确性权衡：移动IA增加获取完整信息的认知努力，用户为保持努力-准确性平衡而采用启发式策略，减少努力和准确性；当移动IA与偏好不一致时，启发式策略失效，用户转为增加努力以避免过低准确性，但准确性仍未恢复。
+
+- boundary_claim_cn：移动IA降低准确性的效应在信息与偏好一致和不一致时都存在；但在不一致时，用户体验不再是降低努力，而是增加努力，因此该负效应不伴随努力减少。这一边界意味着移动IA的质量（与用户偏好的对齐）调节努力维度，但不消除准确性损害。
+
+- reusable_design_knowledge_cn：移动端信息架构设计应尽量在概览页呈现用户最关注的属性，使信息获取更高效；应避免仅为了省空间而将关键属性移到二级页面，这会导致用户放弃深度处理；提供桌面视图选项是一种保底手段，尤其在决策准确性要求高的场景。
+
+- theoretical_contribution_cn：扩展努力-准确性框架中信息显示的范畴，将IA作为新的信息显示特征纳入；展示信息结构（分层 vs 扁平）即使内容不变也能改变决策行为；提出IA与偏好一致性作为影响适应性决策的变量。对移动使用文献而言，揭示内容适配的隐蔽代价。
+
+- how_discussion_closes_intro_gap_cn：引言指出桌面视图选项的普遍存在但缺乏系统获益证据，并指出内容适配的代价未被充分研究。讨论通过显示移动IA降低决策准确性，直接为桌面视图提供了一类决策益处；同时讨论成本与边界，把移动IA的负效应归因于努力-准确性机制，回应了内容适配研究者忽视的信息结构维度。
+
+- overclaim_or_unsupported_leaps_cn：虽然准确性下降有数据支持，但机制解释（启发式策略）是间接推断的；不一致条件下用户动机解释（维持满意准确性）是post hoc；将结果外推到其他IA结构和实际网络环境缺乏检验；未检验用户自主选择桌面视图的行为效果；技术主张相对稳固，制品主张和机制主张部分依赖推断。
+
+## 句级写作动作图谱
+
+### 1. S1
+
+- order：1
+
+- section：Abstract
+
+- locator：S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在线内容呈现通常会适应移动设备小屏，借助信息架构来分层重组信息。
+
+- rhetorical_function_cn：设立主题背景，引入信息架构概念。
+
+- depends_on_cn：无依赖。
+
+- sets_up_cn：为后续比较移动与桌面信息架构作铺垫。
+
+- evidence_pointer：Abstract S1
+
+### 2. S2
+
+- order：2
+
+- section：Abstract
+
+- locator：S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：尽管人们普遍认为不适配会带来低可用性和高负荷，近期趋势却是允许用户退出适配并回退到桌面视图。
+
+- rhetorical_function_cn：指出与主流认知相反的经验现象。
+
+- depends_on_cn：S1中适配常态。
+
+- sets_up_cn：为提出桌面视图可能带来好处的问题铺垫。
+
+- evidence_pointer：Abstract S2
+
+### 3. S3
+
+- order：3
+
+- section：Abstract
+
+- locator：S3
+
+- move_code：GAP
+
+- paraphrase_cn：现有理由只说是为访问未优化移动体验的网站，桌面视图可能存在的用户益处尚未被识别或实证。
+
+- rhetorical_function_cn：建立知识缺口。
+
+- depends_on_cn：S2现象。
+
+- sets_up_cn：引出本研究的目标。
+
+- evidence_pointer：Abstract S3
+
+### 4. S4
+
+- order：4
+
+- section：Abstract
+
+- locator：S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文表明桌面视图可能通过提高决策准确性而有益于移动用户。
+
+- rhetorical_function_cn：陈述核心主张。
+
+- depends_on_cn：S3缺口。
+
+- sets_up_cn：预告后续研究聚焦决策准确性。
+
+- evidence_pointer：Abstract S4
+
+### 5. S5
+
+- order：5
+
+- section：Abstract
+
+- locator：S5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：聚焦于单页桌面IA与多页移动IA的差异，假设移动IA导致较低决策准确性，并以努力-准确性框架作为理论支撑。
+
+- rhetorical_function_cn：引入理论并宣告假设。
+
+- depends_on_cn：S4。
+
+- sets_up_cn：将框架作为解释机制。
+
+- evidence_pointer：Abstract S5
+
+### 6. S6
+
+- order：6
+
+- section：Abstract
+
+- locator：S6
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验室实验支持下述假设：移动IA降低决策准确性，且当移动IA与用户偏好一致性不匹配时出现边界条件。
+
+- rhetorical_function_cn：报告结果。
+
+- depends_on_cn：S5假设。
+
+- sets_up_cn：为贡献铺路。
+
+- evidence_pointer：Abstract S6
+
+### 7. S7
+
+- order：7
+
+- section：Abstract
+
+- locator：S7
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：倡议内容适配应获得更多研究重视，尤其从适应决策行为角度。
+
+- rhetorical_function_cn：宣告贡献。
+
+- depends_on_cn：S6结果。
+
+- sets_up_cn：结尾收束。
+
+- evidence_pointer：Abstract S7
+
+### 8. P1 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：移动设备普及促使服务提供者将网页内容适配到小屏，响应式网页设计因此普遍。
+
+- rhetorical_function_cn：建立大背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出信息架构作为适配的一部分。
+
+- evidence_pointer：Introduction P1 S1
+
+### 9. P1 S2
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：小屏无法像大屏那样有效展示大量信息，因此当信息量大时，适配必须对信息进行分层重组，将单页信息拆为多页。
+
+- rhetorical_function_cn：定义信息架构在移动适配中的角色。
+
+- depends_on_cn：S1。
+
+- sets_up_cn：确立研究对象——移动IA。
+
+- evidence_pointer：Introduction P1 S2
+
+### 10. P2 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：内容适配成为通行做法，因为大家理解移动用户若不适配会遭遇更低可用性和更高信息负荷。
+
+- rhetorical_function_cn：总结既有认知。
+
+- depends_on_cn：P1。
+
+- sets_up_cn：作为后续要挑战的部分。
+
+- evidence_pointer：Introduction P2 S1
+
+### 11. P2 S2-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S2-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：然而最近的趋势是允许用户退出适配并回退到桌面视图，例如Chrome的桌面站点选项和AIS eLibrary的浮动按钮。
+
+- rhetorical_function_cn：展示反预期现象。
+
+- depends_on_cn：P2 S1。
+
+- sets_up_cn：引出对桌面视图潜在益处的疑问。
+
+- evidence_pointer：Introduction P2 S2-S3
+
+### 12. P2 S4
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：GAP
+
+- paraphrase_cn：提供桌面视图的常见理由只是应对不提供最佳移动体验的网站，本文指出可能存在尚未识别或验证的桌面视图益处。
+
+- rhetorical_function_cn：建立缺口。
+
+- depends_on_cn：P2 S2-S3现象。
+
+- sets_up_cn：引出研究问题。
+
+- evidence_pointer：Introduction P2 S4
+
+### 13. P3 S1-S2
+
+- order：13
+
+- section：Introduction
+
+- locator：P3 S1-S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究问题是：移动用户使用桌面IA是否比使用移动IA做出更准确决策？回答通过两个实验室实验进行。
+
+- rhetorical_function_cn：明确研究问题。
+
+- depends_on_cn：P2缺口。
+
+- sets_up_cn：预告实验设置。
+
+- evidence_pointer：Introduction P3 S1-S2
+
+### 14. P3 S3-S6
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S3-S6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：任务采用经典多属性选择任务，决策准确性以偏好一致性来定义；实验平台是模拟酒店预订的网站；移动IA在实验1固定、实验2操纵为与偏好一致或不一致。
+
+- rhetorical_function_cn：简述方法策略。
+
+- depends_on_cn：RQ。
+
+- sets_up_cn：为后续实验叙述提供地图。
+
+- evidence_pointer：Introduction P3 S3-S6
+
+### 15. P4 S1-S4
+
+- order：15
+
+- section：Introduction
+
+- locator：P4 S1-S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者提出移动IA虽只是将信息分布到多页，但导航到多页获取信息需要更高努力，为平衡努力和准确性，用户会采用更启发式的决策策略，减少努力并牺牲准确性。
+
+- rhetorical_function_cn：陈述核心机制。
+
+- depends_on_cn：理论框架。
+
+- sets_up_cn：为假设提供逻辑。
+
+- evidence_pointer：Introduction P4 S1-S4
+
+### 16. P5 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验均发现移动IA下决策准确性更低，努力也更低（部分信息搜索、更短决策时间、更低感知负荷），形成努力-准确性机制证据。
+
+- rhetorical_function_cn：提前报告主要发现。
+
+- depends_on_cn：P4机制。
+
+- sets_up_cn：为贡献声明铺路。
+
+- evidence_pointer：Introduction P5 S1
+
+### 17. P5 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：P5 S2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：不一致的移动IA下用户没有保持低努力而是增加努力以维持准确性，显示边界条件。
+
+- rhetorical_function_cn：指出实验2的关键变化。
+
+- depends_on_cn：P5 S1结果。
+
+- sets_up_cn：为讨论部分做铺垫。
+
+- evidence_pointer：Introduction P5 S2
+
+### 18. P6 S1-P7 S3
+
+- order：18
+
+- section：Introduction
+
+- locator：P6 S1-P7 S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献有三：将努力-准确性信息显示文献扩展到IA；揭示移动内容适配的代价；为实践中的桌面视图选项提供理论支持。
+
+- rhetorical_function_cn：宣告领域贡献。
+
+- depends_on_cn：结果。
+
+- sets_up_cn：文章结尾。
+
+- evidence_pointer：Introduction P6 S1-P7 S3
+
+### 19. P1 S1-S3
+
+- order：19
+
+- section：Background 2.1
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：综述移动设备使用行为研究，特别是移动设备与桌面相比的普遍性和小屏可用性两个特征。
+
+- rhetorical_function_cn：总结移动研究文献。
+
+- depends_on_cn：无。
+
+- sets_up_cn：确立内容适配研究的背景。
+
+- evidence_pointer：Section 2.1 P1
+
+### 20. P2 S1
+
+- order：20
+
+- section：Background 2.1
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多项研究显示小屏损害阅读理解、调查完成、学习、导航等表现。
+
+- rhetorical_function_cn：列举小屏负面效应证据。
+
+- depends_on_cn：P1。
+
+- sets_up_cn：解释为何需要内容适配。
+
+- evidence_pointer：Section 2.1 P2
+
+### 21. P3 S1-S2
+
+- order：21
+
+- section：Background 2.1
+
+- locator：P3 S1-S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：近二十年来HCI研究关注如何适配小屏信息以提升可用性，早期研究考察菜单广度和深度的权衡，自适应菜单在小屏上影响更大。
+
+- rhetorical_function_cn：回顾移动界面设计研究。
+
+- depends_on_cn：小屏负面效应。
+
+- sets_up_cn：引入信息架构作为核心概念。
+
+- evidence_pointer：Section 2.1 P3
+
+### 22. P4 S1
+
+- order：22
+
+- section：Background 2.1
+
+- locator：P4 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：虽然智能手机屏幕更大，但普遍认为内容适配仍然是必要的，以减少信息负荷。
+
+- rhetorical_function_cn：说明现状。
+
+- depends_on_cn：P3。
+
+- sets_up_cn：引入响应式设计和信息架构。
+
+- evidence_pointer：Section 2.1 P4
+
+### 23. P4 S2-S4
+
+- order：23
+
+- section：Background 2.1
+
+- locator：P4 S2-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：内容适配通常通过响应式设计实现，但信息量大时会实施信息架构，将单页信息分层到多页；常见移动IA包括层级树、嵌套娃娃、轮毂-辐条、便当盒、过滤视图等。
+
+- rhetorical_function_cn：定义信息架构类型。
+
+- depends_on_cn：P4 S1。
+
+- sets_up_cn：为实验中的移动IA操作提供基础。
+
+- evidence_pointer：Section 2.1 P4
+
+### 24. P1 S1
+
+- order：24
+
+- section：Background 2.2
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：决策研究主流视角是信息处理方式取决于任务和情境特征，努力-准确性框架是核心理论。
+
+- rhetorical_function_cn：引入理论框架。
+
+- depends_on_cn：背景铺垫。
+
+- sets_up_cn：为后续假设提供理论。
+
+- evidence_pointer：Section 2.2 P1
+
+### 25. P1 S2-S3
+
+- order：25
+
+- section：Background 2.2
+
+- locator：P1 S2-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：框架主张决策者在努力最小化与准确性最大化之间权衡，因而会选择一种在两者间最佳平衡的策略，通常启发式策略比规范策略更省力。
+
+- rhetorical_function_cn：陈述理论命题。
+
+- depends_on_cn：THEORY_INTRO。
+
+- sets_up_cn：为后续推断移动IA机制提供支撑。
+
+- evidence_pointer：Section 2.2 P1 S2-S3
+
+### 26. P2 S1-S4
+
+- order：26
+
+- section：Background 2.2
+
+- locator：P2 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：大量研究发现信息显示特征（矩阵/列表、数字/文字、排序、生动度、显著性）影响决策策略和准确性。
+
+- rhetorical_function_cn：系统综述信息显示对决策的影响。
+
+- depends_on_cn：理论框架。
+
+- sets_up_cn：指出现有研究未包含信息架构。
+
+- evidence_pointer：Section 2.2 P2
+
+### 27. P2 S5
+
+- order：27
+
+- section：Background 2.2
+
+- locator：P2 S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：常见逻辑是某些信息显示需要更多努力，本研究将此逻辑扩展到信息架构层面。
+
+- rhetorical_function_cn：指出缺口。
+
+- depends_on_cn：P2综述。
+
+- sets_up_cn：证明本研究新意。
+
+- evidence_pointer：Section 2.2 P2 S5
+
+### 28. P3 S1
+
+- order：28
+
+- section：Background 2.2
+
+- locator：P3 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：移动IA使用户需要更多努力才能获得相同准确性，为平衡努力和准确性用户会降低努力并牺牲准确性。
+
+- rhetorical_function_cn：桥接理论到研究情境。
+
+- depends_on_cn：THEORY_PROPOSITION。
+
+- sets_up_cn：为假设做铺垫。
+
+- evidence_pointer：Section 2.2 P3
+
+### 29. P1 S1-S2
+
+- order：29
+
+- section：Research Hypothesis
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：移动内容适配的一个核心步骤是使用信息架构将桌面单页拆分为移动多页，尤其是层级结构。
+
+- rhetorical_function_cn：重申研究焦点。
+
+- depends_on_cn：Background。
+
+- sets_up_cn：确定假设的实证对象。
+
+- evidence_pointer：Section 3 P1
+
+### 30. P1 S3
+
+- order：30
+
+- section：Research Hypothesis
+
+- locator：P1 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：行业指南建议移动端展示更少结果和更少属性以避免信息过载。
+
+- rhetorical_function_cn：提供实践背景。
+
+- depends_on_cn：内容适配语境。
+
+- sets_up_cn：佐证移动IA的普遍性。
+
+- evidence_pointer：Section 3 P1 S3
+
+### 31. P2 S1
+
+- order：31
+
+- section：Research Hypothesis
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：分段化使用户必须跨页导航才能获得单页上的信息，虽然信息未减少，但导航增加任务复杂度，限制了全局视角。
+
+- rhetorical_function_cn：论证移动IA增加认知成本。
+
+- depends_on_cn：P1。
+
+- sets_up_cn：支撑假设。
+
+- evidence_pointer：Section 3 P2 S1
+
+### 32. P2 S2-S3
+
+- order：32
+
+- section：Research Hypothesis
+
+- locator：P2 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：引用Dillemuth、Schlick、Xu等：小屏导致用户难以维持全局视角和定向，损害准确性。
+
+- rhetorical_function_cn：引证小屏负面效应。
+
+- depends_on_cn：MECHANISM。
+
+- sets_up_cn：支持预测。
+
+- evidence_pointer：Section 3 P2 S2-S3
+
+### 33. P3 S1
+
+- order：33
+
+- section：Research Hypothesis
+
+- locator：P3 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：从认知角度看，用户在心理上整合分布在多页的信息，需要工作记忆，而工作记忆容量有限，因此需要更多努力。
+
+- rhetorical_function_cn：解释认知机制。
+
+- depends_on_cn：P2。
+
+- sets_up_cn：为努力-准确性推断提供逻辑。
+
+- evidence_pointer：Section 3 P3 S1
+
+### 34. P4 S1
+
+- order：34
+
+- section：Research Hypothesis
+
+- locator：P4 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：基于努力-准确性框架，用户面对更高的努力需求时会改用更启发式的策略，牺牲准确性。
+
+- rhetorical_function_cn：连接理论与预测。
+
+- depends_on_cn：P3。
+
+- sets_up_cn：引出具体假设。
+
+- evidence_pointer：Section 3 P4 S1
+
+### 35. P5 S1
+
+- order：35
+
+- section：Research Hypothesis
+
+- locator：P5 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：因此提出假设1：移动IA比桌面IA降低决策准确性。
+
+- rhetorical_function_cn：给出可检验假设。
+
+- depends_on_cn：前文推理。
+
+- sets_up_cn：为后续实验检验提供目标。
+
+- evidence_pointer：Section 3 P5 S1
+
+### 36. P1 S1-S3
+
+- order：36
+
+- section：Experiment 1
+
+- locator：P1 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用实验室实验和多属性选择任务，以保证控制环境且决策准确性可测。
+
+- rhetorical_function_cn：说明方法选择的理由。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：建立实验框架。
+
+- evidence_pointer：Section 4 P1
+
+### 37. P2 S1
+
+- order：37
+
+- section：Experiment 1
+
+- locator：P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验1使用被试内设计，每个被试完成一个桌面IA和一个移动IA任务，任务顺序平衡。
+
+- rhetorical_function_cn：描述实验设计。
+
+- depends_on_cn：P1。
+
+- sets_up_cn：为后续统计分析设定结构。
+
+- evidence_pointer：Section 4.1 P2 S1
+
+### 38. P3 S1
+
+- order：38
+
+- section：Experiment 1
+
+- locator：P3 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：开发了模拟酒店预订的网站作为实验平台，任务为基于信息矩阵的多属性选择。
+
+- rhetorical_function_cn：描述实验平台。
+
+- depends_on_cn：方法选择。
+
+- sets_up_cn：明确任务情境。
+
+- evidence_pointer：Section 4.1 P3 S1
+
+### 39. P4 S1
+
+- order：39
+
+- section：Experiment 1
+
+- locator：P4 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过预调查选出8个最重要的属性，以提高任务对决策者有意义。
+
+- rhetorical_function_cn：解释属性选择的合理性。
+
+- depends_on_cn：预研究。
+
+- sets_up_cn：支持外部效度。
+
+- evidence_pointer：Section 4.1 P4 S1
+
+### 40. P5 S1
+
+- order：40
+
+- section：Experiment 1
+
+- locator：P5 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：基于Booking.com真实数据和抽样生成备选方案并平均化，确保备选集合现实且任务间等价。
+
+- rhetorical_function_cn：说明备选生成方法。
+
+- depends_on_cn：P4。
+
+- sets_up_cn：支持实验材料效度。
+
+- evidence_pointer：Section 4.1 P5 S1
+
+### 41. P6 S1
+
+- order：41
+
+- section：Experiment 1
+
+- locator：P6 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：首先让被试分配100分给8个属性作为权重，并为每个正权重属性选择偏好值，以定义决策准确性的理想点。
+
+- rhetorical_function_cn：描述偏好诱导步骤。
+
+- depends_on_cn：任务设定。
+
+- sets_up_cn：定义准确性度量。
+
+- evidence_pointer：Section 4.2 P6 S1
+
+### 42. P7 S1
+
+- order：42
+
+- section：Experiment 1
+
+- locator：P7 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：任务中展示概览页（11个备选列表），每个备选有详情页显示全部属性，被试可从任意页面选择。
+
+- rhetorical_function_cn：描述界面结构。
+
+- depends_on_cn：实验平台。
+
+- sets_up_cn：为IA操作提供基础。
+
+- evidence_pointer：Section 4.2 P7 S1
+
+### 43. P8 S1-S2
+
+- order：43
+
+- section：Experiment 1
+
+- locator：P8 S1-S2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：桌面IA概览页显示所有8属性，移动IA概览页只显示3属性且详情页提供其余属性，移动IA要求用户往返各详情页才能获取完整信息。
+
+- rhetorical_function_cn：建立实验的操作性对比。
+
+- depends_on_cn：概览页设计。
+
+- sets_up_cn：作为关键自变量操作。
+
+- evidence_pointer：Section 4.2 P8 S1-S2
+
+### 44. P9 S1
+
+- order：44
+
+- section：Experiment 1
+
+- locator：P9 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：决策准确性以决策不准确性即观察选择距离规范选择（WADD策略）的错失备选数来测量。
+
+- rhetorical_function_cn：定义客观因变量。
+
+- depends_on_cn：偏好诱导。
+
+- sets_up_cn：为回归分析提供指标。
+
+- evidence_pointer：Section 4.2 P9 S1
+
+### 45. P10 S1-S3
+
+- order：45
+
+- section：Experiment 1
+
+- locator：P10 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用三个努力指标：信息搜索（详情页访问数）、决策时间、感知信息负荷，以覆盖行为与认知努力。
+
+- rhetorical_function_cn：说明努力测量。
+
+- depends_on_cn：文献。
+
+- sets_up_cn：为机制验证提供证据。
+
+- evidence_pointer：Section 4.2 P10 S1-S3
+
+### 46. P11 S1
+
+- order：46
+
+- section：Experiment 1
+
+- locator：P11 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：补充收集性别、年龄、常用设备、偏好标准差等控制变量。
+
+- rhetorical_function_cn：列出控制变量。
+
+- depends_on_cn：实验设计。
+
+- sets_up_cn：为回归模型加入协变量。
+
+- evidence_pointer：Section 4.2 P11 S1
+
+### 47. P1 S1
+
+- order：47
+
+- section：Experiment 1 Results
+
+- locator：P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：混合效应Poisson回归显示移动IA显著增加决策不准确性，支持假设1。
+
+- rhetorical_function_cn：报告核心结果。
+
+- depends_on_cn：分析方法。
+
+- sets_up_cn：为努力结果提供对照。
+
+- evidence_pointer：Section 4.3 P1 S1; Table 1
+
+### 48. P2 S1-S2
+
+- order：48
+
+- section：Experiment 1 Results
+
+- locator：P2 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：移动IA显著增加信息搜索、显著减少决策时间，对感知负荷无显著负效应。
+
+- rhetorical_function_cn：报告努力结果。
+
+- depends_on_cn：模型估计。
+
+- sets_up_cn：佐证努力减少机制。
+
+- evidence_pointer：Section 4.3 P2 S1-S2; Table 1
+
+### 49. P3 S1
+
+- order：49
+
+- section：Experiment 1 Results
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：边际均值图显示移动IA下准确性和努力均较低，即用户搜索少量详情页就快速决策。
+
+- rhetorical_function_cn：以图形辅助解释结果。
+
+- depends_on_cn：P1-P2。
+
+- sets_up_cn：强化机制叙事。
+
+- evidence_pointer：Section 4.3 P3; Figure 3
+
+### 50. P1 S1-S2
+
+- order：50
+
+- section：Experiment 2
+
+- locator：P1 S1-S2
+
+- move_code：TRANSITION
+
+- paraphrase_cn：实验1移动IA概览页属性固定且可能是重要的，实验2旨在操纵概览页属性与用户偏好的一致性，以考察一致性是否改变行为。
+
+- rhetorical_function_cn：承上启下。
+
+- depends_on_cn：实验1。
+
+- sets_up_cn：引入实验2新变量。
+
+- evidence_pointer：Section 5 P1 S1-S2
+
+### 51. P1 S3
+
+- order：51
+
+- section：Experiment 2
+
+- locator：P1 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：检验一致与不一致移动IA是否会诱发不同努力-准确性平衡，尤其当重要属性需要更多导航时用户是否仍减少努力。
+
+- rhetorical_function_cn：提出实验2研究问题。
+
+- depends_on_cn：P1 S1-S2。
+
+- sets_up_cn：确定边界条件检验目标。
+
+- evidence_pointer：Section 5 P1 S3
+
+### 52. P2 S1
+
+- order：52
+
+- section：Experiment 2
+
+- locator：P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：84名新被试，实验2在被试间操纵一致性：一致条件概览页显示权重最高的3属性，不一致条件显示权重最低的3属性。
+
+- rhetorical_function_cn：描述实验2设计。
+
+- depends_on_cn：实验1平台。
+
+- sets_up_cn：用于比较三种IA。
+
+- evidence_pointer：Section 5.1 P2 S1
+
+### 53. P1 S1
+
+- order：53
+
+- section：Experiment 2 Results
+
+- locator：P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：一致和不一致移动IA均显著增加决策不准确性，假设1稳健。
+
+- rhetorical_function_cn：报告准确性结果。
+
+- depends_on_cn：分析模型。
+
+- sets_up_cn：为努力结果提供背景。
+
+- evidence_pointer：Section 5.2 P1; Table 2
+
+### 54. P1 S2
+
+- order：54
+
+- section：Experiment 2 Results
+
+- locator：P1 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：首次任务的决策不准确性更高，移动设备倾向也与启发式处理相关。
+
+- rhetorical_function_cn：报告控制变量效应。
+
+- depends_on_cn：模型结果。
+
+- sets_up_cn：为后续讨论学习效应提供线索。
+
+- evidence_pointer：Section 5.2 P1 S2
+
+### 55. P2 S1-S3
+
+- order：55
+
+- section：Experiment 2 Results
+
+- locator：P2 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：不一致移动IA的信息搜索远高于一致条件，决策时间和感知负荷也更高，其努力水平与桌面IA相近。
+
+- rhetorical_function_cn：报告努力维度差异。
+
+- depends_on_cn：模型估计。
+
+- sets_up_cn：推导用户为维持准确性而增加努力的结论。
+
+- evidence_pointer：Section 5.2 P2; Table 2; Figure 4
+
+### 56. P2 S4
+
+- order：56
+
+- section：Experiment 2 Results
+
+- locator：P2 S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：结果表明用户面对不一致IA会为维持可接受准确性而增加努力，而不是继续牺牲准确性。
+
+- rhetorical_function_cn：解释结果背后的机制。
+
+- depends_on_cn：P2 S1-S3结果。
+
+- sets_up_cn：为讨论中努力-准确性双路径提供依据。
+
+- evidence_pointer：Section 5.2 P2 S4
+
+### 57. P1 S1
+
+- order：57
+
+- section：General Discussion
+
+- locator：P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验一致支持移动IA降低决策准确性的假设，无论概览页属性固定还是随偏好变化。
+
+- rhetorical_function_cn：汇总主要结果。
+
+- depends_on_cn：两个实验。
+
+- sets_up_cn：开启理论讨论。
+
+- evidence_pointer：Section 6 P1
+
+### 58. P2 S1
+
+- order：58
+
+- section：General Discussion
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者主张机制植根于努力-准确性框架：移动IA需要更多努力去收集和整合信息，用户为保持平衡而降低努力和准确性。
+
+- rhetorical_function_cn：重申机制。
+
+- depends_on_cn：结果。
+
+- sets_up_cn：对比不一致情境。
+
+- evidence_pointer：Section 6 P2 S1
+
+### 59. P3 S1-S4
+
+- order：59
+
+- section：General Discussion
+
+- locator：P3 S1-S4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：当移动IA与偏好不一致时，用户转而更重视准确性，增加搜索和时间，支付努力代价而非准确性代价。
+
+- rhetorical_function_cn：阐述边界行为。
+
+- depends_on_cn：实验2。
+
+- sets_up_cn：引出适应性决策双路径。
+
+- evidence_pointer：Section 6 P3
+
+### 60. P4 S1
+
+- order：60
+
+- section：General Discussion
+
+- locator：P4 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者推测决策者通常偏好省力的降低准确性路径，除非决策不满足满意标准时选择增加努力。
+
+- rhetorical_function_cn：提出解释性推断。
+
+- depends_on_cn：P3矛盾。
+
+- sets_up_cn：承认post hoc并呼吁未来验证。
+
+- evidence_pointer：Section 6 P4 S1
+
+### 61. P5 S1-S2
+
+- order：61
+
+- section：General Discussion
+
+- locator：P5 S1-S2
+
+- move_code：THEORY_RETURN
+
+- paraphrase_cn：双路径结果支持努力-准确性框架优于其他解释，作者比较了满意化、能力理论、自我损耗、认知负荷等替代解释的预测不足。
+
+- rhetorical_function_cn：通过排除法强化理论贡献。
+
+- depends_on_cn：结果模式。
+
+- sets_up_cn：为贡献声明奠基。
+
+- evidence_pointer：Section 6 P5
+
+### 62. P6 S1
+
+- order：62
+
+- section：General Discussion
+
+- locator：P6 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第一贡献是将信息显示的界定扩展到IA，展现分页重组如何影响决策行为。
+
+- rhetorical_function_cn：声明理论贡献。
+
+- depends_on_cn：之前讨论。
+
+- sets_up_cn：区分贡献层次。
+
+- evidence_pointer：Section 6 P6 S1
+
+### 63. P6 S2
+
+- order：63
+
+- section：General Discussion
+
+- locator：P6 S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第二贡献是揭示移动内容适配可能损害决策准确性，丰富移动使用研究。
+
+- rhetorical_function_cn：声明第二贡献。
+
+- depends_on_cn：结果。
+
+- sets_up_cn：引出实践意义。
+
+- evidence_pointer：Section 6 P6 S2
+
+### 64. P7 S1
+
+- order：64
+
+- section：General Discussion
+
+- locator：P7 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：实践上应鼓励移动端提供桌面视图选项，尤其在决策准确性重要时。
+
+- rhetorical_function_cn：提炼实践启示。
+
+- depends_on_cn：贡献。
+
+- sets_up_cn：引导设计建议。
+
+- evidence_pointer：Section 6 P7 S1
+
+### 65. P8 S1
+
+- order：65
+
+- section：General Discussion
+
+- locator：P8 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：主要限制来自实验方法在外部效度与内部效度之间的取舍，以及对单一层级结构的聚焦。
+
+- rhetorical_function_cn：承认边界。
+
+- depends_on_cn：研究设计。
+
+- sets_up_cn：为未来研究留空间。
+
+- evidence_pointer：Section 6 P8 S1
+
+### 66. P9 S1
+
+- order：66
+
+- section：General Discussion
+
+- locator：P9 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者认为效应可能是一种下界，实际响应式设计中的更多布局/大小变化会加剧损害。
+
+- rhetorical_function_cn：扩展结果概括。
+
+- depends_on_cn：设计推理。
+
+- sets_up_cn：建议谨慎外推。
+
+- evidence_pointer：Section 6 P9 S1
+
+### 67. P10 S1-S3
+
+- order：67
+
+- section：General Discussion
+
+- locator：P10 S1-S3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可考察更复杂的IA、其他边界条件、努力-准确性阈值，以及外生与内生内容适配的比较。
+
+- rhetorical_function_cn：提供未来方向。
+
+- depends_on_cn：限制。
+
+- sets_up_cn：结束论文。
+
+- evidence_pointer：Section 6 P10 S1-S3
+
+### 68. P11 S1
+
+- order：68
+
+- section：General Discussion
+
+- locator：P11 S1
+
+- move_code：CONCLUSION
+
+- paraphrase_cn：结论：为移动用户设计的适配技术反而可能损害决策准确性，需要更多研究关注内容适配的代价。
+
+- rhetorical_function_cn：总结全文。
+
+- depends_on_cn：所有前述内容。
+
+- sets_up_cn：无后续。
+
+- evidence_pointer：Section 6 P11
+
+## 写作技术
+
+- gap_construction_cn：作者先描述移动内容适配的常态化认知，再指出与这一认知相反的行业实践——桌面视图选项的流行，由此构建“已知适配被广泛接受，但桌面视图可能提供未被识别益处”的缺口。同时，在文献综述中，作者将信息显示研究限定在内容/格式层面，指出信息架构是缺失维度，从而在理论与文献层面都建立鲜明缺口。
+
+- signposting_cn：引言中直接陈述研究问题（Do users of mobile devices make more accurate decisions with a desktop IA ...?），并在段末预告两个实验。正文每个实验开头都用一句话说明其目的和关系，如实验1检验固定移动IA，实验2重复并操纵一致性。讨论开头重复核心结果，并持续使用“first contribution”、“second contribution”等路标词。
+
+- transition_logic_cn：段落间通过重复概念词（如‘content adaptation’, ‘information architecture’, ‘decision accuracy’, ‘effort-accuracy’）进行衔接。实验1结束处点出“fixed”移动IA作为任务局限，顺势引出“一致性”这一新变量；实验2结果出来后，自然导向理论比较与贡献。
+
+- claim_evidence_rhythm_cn：每个主要主张之前都有理论铺垫，之后立即给回归系数和显著性作为证据。例如假设提出后，实验1模型1直接检验；机制主张则结合三个努力指标的结果。讨论部分用‘why alternative theories cannot explain’来支持机制主张，形成证据链。
+
+- benchmark_narrative_cn：桌面IA始终作为基准，在实验1和实验2中都是基线条件。作者用估计边际均值来对比三种IA的准确性和努力，形成一条“桌面=高准高努力；一致移动=低准低努力；不一致移动=低准中努力”的叙事，使基准不仅用于假设检验，也用于构建边界条件。
+
+- theory_return_cn：讨论部分不是简单复述结果，而是将结果转译为努力-准确性框架的两种路径：降低努力或增加努力。作者用替代理论（满意化、资源池理论、认知负荷论）预测与观察不符，来强化理论关键作用。此外，将一致性作为新的调节变量，反馈给理论，形成理论扩展。
+
+- contribution_positioning_cn：贡献定位在两条线上：对决策研究（将IA纳入信息显示概念）和对移动研究（揭示适配的代价）。每条贡献都回应了引言或文献综述中明确的缺口，且说明不是单纯的技术结果。在讨论中，作者将具体实验条件称为对IA的最小操作，并将效应称为“lower bound”，以提升一般性。
+
+- novelty_protection_cn：作者不断强调本研究显示的是“简单分页重组”就能影响行为，排除了内容量或格式变化等替代解释，从而将贡献锚定在IA结构上。一致性操纵进一步显示同结构下不同信息位置产生不同策略，强化了该效应的机制性和边界性，避免被视为单次性能结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立现象领域背景，介绍关键技术概念（如信息架构），铺垫当前行业对内容适配和桌面视图选项的看法。
+
+- research_job_cn：收集行业实践证据，观察反常规现象。
+
+- required_evidence_cn：现象在真实产品或浏览器中可观察，且未在现有研究中明确解释。
+
+- transition_to_next_cn：引出“现有理由不充分，可能存在未识别益处”的缺口。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：系统综述理论（如努力-准确性框架）和已有信息显示研究，指出理论可应用的空白维度（如IA）。
+
+- research_job_cn：确定理论命题，并提炼可检验的机制主张。
+
+- required_evidence_cn：理论给出清晰预测，且机制可操作化为变量。
+
+- transition_to_next_cn：用机制推演导出具体研究问题和假设。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述实验设计与操作化细节，包括任务、平台、条件、测量指标，提供截图或示意图。
+
+- research_job_cn：构建实验材料（如网站、备选矩阵），可能需预研究确定刺激。
+
+- required_evidence_cn：材料真实可信，有预研究支持，且可将IA差异转化为被试可见的差异。
+
+- transition_to_next_cn：报告第一个实验并接续叙述边界实验的必要性。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：报告统计模型、系数、效应和边际均值，解释结果如何支持假设。
+
+- research_job_cn：进行数据收集和回归分析，执行稳健性检验。
+
+- required_evidence_cn：系数显著，方向符合假设；努力测量能联合支持机制。
+
+- transition_to_next_cn：根据主结果中的残留不确定设计第二个实验。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：在第二个实验中变化关键边界条件，复制主效应并展示不同行为模式。
+
+- research_job_cn：设计并实施操纵，分析条件间差异。
+
+- required_evidence_cn：主效应对新条件仍稳健，且边界条件导致不同努力或准确性结果。
+
+- transition_to_next_cn：基于第二个实验的结果转入综合讨论。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论结果如何闭合缺口，对比替代理论解释，清晰区分机制、边界与理论贡献，并提出限制和未来方向。
+
+- research_job_cn：对全部结果进行理论整合，识别解释范围。
+
+- required_evidence_cn：能排除主要替代预测，能定位理论增量，对未来可检验预测。
+
+- transition_to_next_cn：最终以实际启示和宏大会呼吁结束。
+
+### most_transferable_moves_cn
+
+1. 将现实中的设计差异与理论机制连接，构建可检验假设
+
+2. 用两个实验逐层增加条件，先主效应后边界效应
+
+3. 在报告结果时用多个努力指标，不仅依赖一个因变量
+
+4. 在讨论中用替代理论排除法提升因果解释力度
+
+5. 将实践现象（桌面视图）转化为理论建构（IA一致性）
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要开发定制网站作为实验平台
+
+2. 需要进行预研究（调查属性重要性）以及基于真实平台（Booking.com）的备选生成与抽样
+
+3. 需要招募多批大学生被试（63+84）参与实验室实验
+
+4. 对主流商业网站进行探索性内容分析以确定移动IA概览页属性数
+
+5. 需要获得伦理许可和学校资源支持
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只模仿“桌面更好”结论，必须有理论机制和实验操作支撑
+
+2. 不能只描述移动IA的负面效果而不测量努力-准确性权衡及边界条件
+
+3. 不能只显示两个实验均显著，必须确保任务设计、测量工具和统计模型合理
+
+4. 不能把post hoc解释写作预设假设，必须诚实标注推断性质
+
+- single_best_description_of_the_routine_cn：将理论框架转化为对信息架构这一设计变量的明确假设，通过一系列受控实验逐步检验主效应和边界条件，再用理论比较将局部结果提升为对决策与移动文献的可复用知识。
+
+## 分析边界
+
+分析基于全文文本，但由于原文来自PDF转换，部分图表和附录未提供，可能与原文实际视觉呈现略有差异；句子级映射基于对段落位置的估计，无精确页码；两个实验范式（实验室任务、大学生样本）决定了结论外推度有限，本文在讨论中也承认这一定位。

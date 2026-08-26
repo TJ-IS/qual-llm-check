@@ -1,0 +1,2057 @@
+# LINDA-BN: An interpretable probabilistic approach for demystifying black-box predictive models
+
+- 作者：Catarina Moreira; Yu-Liang Chou; Mythreyi Velmurugan; Chun Ouyang; Renuka Sindhgatta; Peter Bruza
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113561
+- 源文件：19772_2021_linda-bn-an-interpretable-probabilistic-approach-for-demystifying-black-box-predictive-models.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：如何为黑盒预测模型的单个预测生成一种局部、模型无关的事后解释，使解释能够体现特征之间的条件依赖，并帮助决策者评估预测的可信度？
+
+- 制品与设计：提出LINDA-BN框架：对目标数据点施加小范围均匀扰动，生成邻域预测样本并离散化；用Greedy Hill Climbing学习一个局部贝叶斯网络近似黑盒模型局部行为；用马尔可夫毯提取直接作用于类别变量的特征；并根据网络结构与类别变量边际概率定义四条置信度规则。
+
+- 客观结果：在Pima Indians糖尿病和Breast Cancer Wisconsin两个公开数据集上，以深度神经网络（黑盒）和决策树（白盒）作为被解释模型，发现低扰动方差下大多数正确分类对应Rule 1；误分类更多落在Rule 3/4；Rule 2极少出现；对于30特征的高维数据，马尔可夫毯能够提供聚焦且可读的解释。
+
+- 核心贡献：作者声称的主要贡献是提出一种基于贝叶斯网络的事后模型无关局部解释框架：能以条件依赖图揭示‘什么特征’以及‘为什么’影响预测；能用马尔可夫毯应对高维复杂决策；能通过四条规则告知决策者对单点预测的置信水平，从而辅助判断黑盒预测的可靠性。
+
+- 整篇论证链：作者首先以AI/ML高精度但黑盒不可理解造成决策风险为背景，指出现有事后解释方法（LIME、SHAP、反事实）主要输出独立特征权重或假设性场景，不能体现特征之间在深层网络中的相互依赖，也不直接支持‘为什么当前预测值得信任’的判断。随后提出LINDA-BN：通过对目标点局部扰动得到预测分布，再学习局部贝叶斯网络这一概率图模型；利用马尔可夫毯聚焦直接影响类别变量的特征，并基于不同图结构定义高置信、不可靠、对比效应、不确定四条规则。实验分阶段进行：先在两个公开数据集上训练DNN和决策树，再分析扰动方差的影响，再按TP/TN/FP/FN分布检验规则是否与正确/误分类一致，再展示高维场景中的马尔可夫毯，最后与LIME/SHAP对比并承认稳定性与扩展性限制。整篇文章把‘更好的解释形式’落实为‘条件依赖图+可靠性规则’，并用分类混淆结构和案例图作为证据。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：核心贡献是一个新的计算解释算法LINDA-BN，主要证据来自两个公开UCI数据集上的实现、扰动参数敏感性、规则分布统计和与LIME/SHAP的对照案例；没有用户实验、没有理论假设驱动的正式实验，也没有系统的设计科学研究过程，因此最接近计算制品+数据集benchmark的类型。
+
+- 主导写作弧线判定：文章开头指出现有事后解释缺少条件依赖和可靠性判断这一性能/能力缺口，然后提出LINDA-BN制品，在两个公开数据集上以LIME/SHAP为对照进行评价，最后把四条规则总结为可复用的解释设计知识；整体是‘性能缺口—制品—benchmark—一般化设计知识’的弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：9
+
+- 研究阶段总序列：先通过文献分析确立缺口并选择贝叶斯网络作为形式化基础；再设计LINDA-BN算法与四条规则；随后进入实验：训练DNN黑盒→扰动方差敏感性→按混淆类别检验规则→高维马尔可夫毯演示→白盒决策树泛化验证；最后讨论与LIME/SHAP的差异和局限。各阶段依次回答‘为什么要做’‘做什么’‘默认参数是否合理’‘规则是否有效’‘高维能否处理’‘是否模型无关’‘边界在哪’的问题。
+
+### studies_or_phases
+
+#### 1. 问题化与文献缺口分析
+
+- order：1
+
+- name_cn：问题化与文献缺口分析
+
+- question_cn：现有事后解释方法有何不足，为什么需要新的局部解释框架？
+
+- inputs_and_setting_cn：解释性机器学习/XAI文献，LIME、SHAP、PGM反事实解释方法。
+
+- designed_or_compared_object_cn：比较LIME、SHAP、基于概率图模型的反事实解释。
+
+- baseline_control_or_counterfactual_cn：以“独立特征权重”和“反事实假设场景”为对照。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念性文献比较与缺口论证。
+
+- main_result_cn：现有方法不能呈现特征间条件依赖，也不支持对当前预测‘为什么’的可靠性判断。
+
+- argumentative_role_cn：为引入贝叶斯网络解释奠定问题基础。
+
+- remaining_uncertainty_cn：尚未证明贝叶斯网络真能生成这样的解释。
+
+- link_to_next_phase_cn：引出贝叶斯网络和结构学习作为解决方案构件。
+
+##### evidence_pointers
+
+1. Section 1 Introduction
+
+2. Section 2.2 Related work
+
+3. Section 2.2.3 PGM段
+
+#### 2. 贝叶斯网络知识基础与结构学习选择
+
+- order：2
+
+- name_cn：贝叶斯网络知识基础与结构学习选择
+
+- question_cn：用什么概率图形式表达局部依赖关系，以及如何学习该图？
+
+- inputs_and_setting_cn：贝叶斯网络的因子分解、精确推理、结构学习与参数学习文献。
+
+- designed_or_compared_object_cn：在理论上比较精确结构学习（NP-hard）与贪心搜索。
+
+- baseline_control_or_counterfactual_cn：BIC评分、Greedy Hill Climbing为选定的近似学习方法。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：形式化定义与文献综述。
+
+- main_result_cn：选择Greedy Hill Climbing作为BN结构学习方法，基于其简单和有效。
+
+- argumentative_role_cn：为LINDA-BN提供可计算的理论组件。
+
+- remaining_uncertainty_cn：尚无局部样本生成方案，也没有与黑盒模型的接口。
+
+- link_to_next_phase_cn：进入3.3节设计从局部数据点到BN的算法流程。
+
+##### evidence_pointers
+
+1. Section 3.1 Bayesian networks
+
+2. Section 3.2 Structure learning in Bayesian networks
+
+#### 3. LINDA-BN算法与四条规则构建
+
+- order：3
+
+- name_cn：LINDA-BN算法与四条规则构建
+
+- question_cn：如何从单个输入向量和黑盒预测器生成局部可解释贝叶斯网络，并转化为可靠性判断？
+
+- inputs_and_setting_cn：单个数据点X、黑盒预测器、扰动方差ε、置换样本数、四分位离散化。
+
+- designed_or_compared_object_cn：设计置换生成、离散化、BN学习、边际推断、马尔可夫毯计算以及Rule 1-4。
+
+- baseline_control_or_counterfactual_cn：概念上对照LIME的置换思想、SHAP的公理化重要性。
+
+##### objective_metrics
+
+1. 网络结构模式
+
+2. 类别变量边际概率Pr(Class=c)
+
+3. 马尔可夫毯节点集合
+
+- analysis_method_cn：算法设计与概念推导。
+
+- main_result_cn：Algorithm 1给出完整流程；四条规则分别对应高置信、不可靠、对比效应和不确定。
+
+- argumentative_role_cn：把‘依赖关系解释’和‘可靠性判断’转成可操作制品。
+
+- remaining_uncertainty_cn：尚需实验验证规则是否真的与正确/误分类一致。
+
+- link_to_next_phase_cn：进入实验评估部分。
+
+##### evidence_pointers
+
+1. Section 3.3 LINDA-BN
+
+2. Algorithm 1
+
+3. Section 3.5 Rules for local interpretations
+
+#### 4. 实验设置与黑盒/白盒模型训练
+
+- order：4
+
+- name_cn：实验设置与黑盒/白盒模型训练
+
+- question_cn：在什么数据和模型上评估LINDA-BN？
+
+- inputs_and_setting_cn：Pima Indians糖尿病数据集、Breast Cancer Wisconsin数据集；类别平衡、特征缩放、70/15/15划分。
+
+- designed_or_compared_object_cn：训练深度神经网络（黑盒）和决策树（白盒）。
+
+- baseline_control_or_counterfactual_cn：用网格搜索得到DNN结构；决策树作为白盒对照。
+
+##### objective_metrics
+
+1. DNN准确率：糖尿病0.7380，乳腺癌0.9840
+
+2. 决策树准确率：糖尿病60%，乳腺癌94%
+
+- analysis_method_cn：监督学习训练与验证，检查是否过拟合。
+
+- main_result_cn：得到可被解释的高性能DNN和中等性能决策树。
+
+- argumentative_role_cn：为后面的解释实验提供多样化的被解释对象。
+
+- remaining_uncertainty_cn：尚不知道扰动方差应取多少。
+
+- link_to_next_phase_cn：进入扰动方差敏感性分析。
+
+##### evidence_pointers
+
+1. Section 4.1 Design of experiments
+
+2. Table 2
+
+#### 5. 置换方差敏感性分析
+
+- order：5
+
+- name_cn：置换方差敏感性分析
+
+- question_cn：扰动方差ε取何值时，LINDA-BN在‘保持高置信解释’和‘识别边界/误分类’之间取得平衡？
+
+- inputs_and_setting_cn：两个数据集的DNN预测结果，ε在[0,1]变化。
+
+- designed_or_compared_object_cn：比较不同ε下Rule 1-4出现频率。
+
+- baseline_control_or_counterfactual_cn：极小ε与极大ε作为两个极端对照。
+
+##### objective_metrics
+
+1. 各Rule对应的数据点比例
+
+- analysis_method_cn：参数扫描与图示分析。
+
+- main_result_cn：ε=0.1是较好折中；低ε使92%数据点落在Rule 1，高ε导致不确定和对比效应增加；乳腺癌因准确率高更多出现Rule 3而非Rule 4。
+
+- argumentative_role_cn：证明默认参数不是随意选择，并展示解释结果对扰动的敏感性。
+
+- remaining_uncertainty_cn：ε=0.1下规则是否与分类正确性对应尚未检验。
+
+- link_to_next_phase_cn：进入4.2.2的规则与混淆类别分析。
+
+##### evidence_pointers
+
+1. Section 4.2.1 Analysis of the impact of different permutation variances
+
+2. Fig. 7
+
+3. Fig. 8
+
+#### 6. 黑盒模型上的规则与混淆类别分析
+
+- order：6
+
+- name_cn：黑盒模型上的规则与混淆类别分析
+
+- question_cn：四条规则能否指示正确分类或误分类？
+
+- inputs_and_setting_cn：DNN训练集/测试集预测、LINDA-BN生成的局部BN、LIME/SHAP对照解释。
+
+- designed_or_compared_object_cn：将每个数据点按Rule 1-4分类，并按TP/TN/FP/FN交叉统计。
+
+- baseline_control_or_counterfactual_cn：以LIME和SHAP的特征权重解释作为视觉/概念对照。
+
+##### objective_metrics
+
+1. Table 3中各类别在各Rule下的百分比
+
+- analysis_method_cn：混淆矩阵分布统计和案例图分析。
+
+- main_result_cn：Rule 1主要覆盖真阳性和真阴性；Rule 3和Rule 4主要覆盖假阳性和假阴性；Rule 2几乎不出现；误分类中仍有部分落在Rule 1，说明规则不能保证检出所有错误。
+
+- argumentative_role_cn：这是核心证据，证明规则能提供可靠性信号。
+
+- remaining_uncertainty_cn：高维数据下完整网络不可读，需要马尔可夫毯；白盒情况未验证。
+
+- link_to_next_phase_cn：进入4.2.3高维复杂场景。
+
+##### evidence_pointers
+
+1. Section 4.2.2 Analysis of rules for local interpretations
+
+2. Table 3
+
+3. Fig. 9-13
+
+#### 7. 复杂高维场景的马尔可夫毯演示
+
+- order：7
+
+- name_cn：复杂高维场景的马尔可夫毯演示
+
+- question_cn：30个特征时，如何让局部解释保持人类可读？
+
+- inputs_and_setting_cn：乳腺癌数据集30个特征生成的大规模局部BN。
+
+- designed_or_compared_object_cn：比较完整30节点网络与类别变量马尔可夫毯。
+
+- baseline_control_or_counterfactual_cn：完整网络作为‘不可读’对照。
+
+##### objective_metrics
+
+1. 马尔可夫毯中的节点数
+
+2. 类别边际概率
+
+3. 是否对应Rule 1
+
+- analysis_method_cn：案例演示与图形解释。
+
+- main_result_cn：马尔可夫毯将30个特征聚焦为6个直接作用于类别变量的特征，并显示高置信Rule 1。
+
+- argumentative_role_cn：证明框架能扩展到复杂决策场景，并支持不同深度需求。
+
+- remaining_uncertainty_cn：没有用户实验证明不同深度确实适合不同决策者。
+
+- link_to_next_phase_cn：进入白盒模型评估，验证模型无关性。
+
+##### evidence_pointers
+
+1. Section 4.2.3 Interpretations for complex decision scenarios
+
+2. Fig. 14
+
+#### 8. 白盒决策树上的泛化评估
+
+- order：8
+
+- name_cn：白盒决策树上的泛化评估
+
+- question_cn：LINDA-BN是否也能解释白盒可解释模型（决策树）？
+
+- inputs_and_setting_cn：决策树在糖尿病和乳腺癌数据上的预测与决策路径。
+
+- designed_or_compared_object_cn：对每个数据点从决策树路径抽取解释路径，再应用LINDA-BN规则。
+
+- baseline_control_or_counterfactual_cn：决策树本身作为白盒基准。
+
+##### objective_metrics
+
+1. Table 4中各规则在TP/TN/FP/FN的百分比
+
+- analysis_method_cn：与黑盒相同的规则分布分析。
+
+- main_result_cn：正确分类仍主要落在Rule 1；假阴性大量落入Rule 3/4；但部分假阳性仍被高置信解释，说明LINDA-BN只能提供潜在误分类信号。
+
+- argumentative_role_cn：证明该方法模型无关，不依赖DNN内部结构。
+
+- remaining_uncertainty_cn：仍不能保证所有误分类可被识别。
+
+- link_to_next_phase_cn：进入与LIME/SHAP的系统比较和局限讨论。
+
+##### evidence_pointers
+
+1. Section 4.3 Evaluation on a white-box interpretable model
+
+2. Table 4
+
+3. Fig. 15-16
+
+#### 9. 与LIME/SHAP比较及局限讨论
+
+- order：9
+
+- name_cn：与LIME/SHAP比较及局限讨论
+
+- question_cn：相比LIME/SHAP，LINDA-BN的优势、局限和未来方向是什么？
+
+- inputs_and_setting_cn：前文实验结果和已有文献描述。
+
+- designed_or_compared_object_cn：对比LIME、SHAP与LINDA-BN在依赖结构、规则、因果基础、稳定性和可扩展性上的差异。
+
+- baseline_control_or_counterfactual_cn：LIME和SHAP作为state-of-the-art对照。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念比较与批判性讨论。
+
+- main_result_cn：LINDA-BN能提供特征依赖图、可靠性规则和因果扩展可能；但解释稳定性与LIME相似，性能随特征数指数下降，且不具备SHAP的公理化唯一性。
+
+- argumentative_role_cn：定位贡献并主动划定边界，防止被解读为通用万能解释器。
+
+- remaining_uncertainty_cn：规则到人类可读说明的转换尚未实现；真实企业流程数据和用户评估是未来工作。
+
+- link_to_next_phase_cn：收束到结论与未来研究。
+
+##### evidence_pointers
+
+1. Section 5 Comparison with LIME and SHAP
+
+2. Section 6 Conclusions
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. RQ_OR_OBJECTIVE
+
+4. DESIGN_FEATURE
+
+5. CONTRIBUTION
+
+6. STUDY_OVERVIEW
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. WHY_GAP_MATTERS
+
+4. PRIOR_KNOWLEDGE
+
+5. LIMITATION
+
+6. RQ_OR_OBJECTIVE
+
+7. THEORY_PROPOSITION
+
+8. MECHANISM
+
+9. CONTRIBUTION
+
+10. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. PRIOR_KNOWLEDGE
+
+3. LIMITATION
+
+4. METHOD_JUSTIFICATION
+
+5. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. REQUIREMENT
+
+3. MECHANISM
+
+4. HYPOTHESIS_OR_PROPOSITION
+
+5. METHOD_JUSTIFICATION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+6. LIMITATION_AND_FUTURE
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 贝叶斯网络/概率图模型
+
+2. 马尔可夫毯
+
+3. 网络结构学习（Greedy Hill Climbing）
+
+4. 皮尔士溯因推理
+
+5. LIME/SHAP事后解释方法
+
+6. 深度神经网络隐含层导致特征相关性的直觉
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：贝叶斯网络的形式化理论确实决定了核心设计（局部BN、马尔可夫毯、条件依赖解释），但具体技术选择如均匀扰动、四分位离散化、Greedy Hill Climbing、Rule阈值（≈1, <<1）主要来自工程简化、现有LIME思想的借用和实验调参；没有严谨地从理论命题推导出所有设计参数。
+
+- 理论到设计翻译链：“黑盒预测不可理解且现有解释只给独立权重” → “局部解释需要条件依赖图” → “选择BN作为近似黑盒局部行为的表示” → “用局部置换生成邻域样本，离散化后学习BN结构” → “用马尔可夫毯提取直接相关特征” → “根据图结构和类别边际概率定义四条可靠性规则” → “在DNN和决策树、两个数据集上检验规则与分类正确性的一致性”。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：在深度神经网络中，独立输入特征经过第一隐层后不再独立而变得相关，因此局部解释不应只给独立特征权重，而应以依赖结构表示。
+
+- mechanism_cn：特征相关性会影响预测；解释若忽略相关性可能误导用户。
+
+- design_requirement_cn：局部解释必须具备特征之间的条件依赖关系。
+
+- artifact_choice_cn：用局部贝叶斯网络G近似黑盒在数据点邻域的行为，输出条件依赖图。
+
+- evaluated_contrast_cn：对比LIME/SHAP的独立特征权重与LINDA-BN的图结构。
+
+- objective_result_cn：案例图显示LINDA-BN给出依赖结构，而LIME/SHAP仅给出权重排序。
+
+##### evidence_pointers
+
+1. Section 1引言假设部分
+
+2. Section 5第一点优势
+
+3. Fig. 9-13对比示例
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：在BN中，给定马尔可夫毯后，节点与所有其他节点条件独立；缺失于马尔可夫毯的变量与分类无关。
+
+- mechanism_cn：马尔可夫毯提供统计意义上的系统边界，可聚焦直接作用于类别变量的特征。
+
+- design_requirement_cn：复杂高维决策问题需要一种可读的变量子集。
+
+- artifact_choice_cn：当BN节点数>10时返回类别变量的马尔可夫毯。
+
+- evaluated_contrast_cn：完整30节点网络 vs 马尔可夫毯。
+
+- objective_result_cn：乳腺癌数据上马尔可夫毯将30个特征浓缩为6个直接特征，且对应Rule 1。
+
+##### evidence_pointers
+
+1. Section 3.3马尔可夫毯段
+
+2. Section 4.2.3
+
+3. Fig. 14
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：BN中的常见因结构近似Naïve Bayes，V型结构近似线性回归，且溯因推理是解释图结构的一种合理人类推理模式。
+
+- mechanism_cn：图结构类型+类别变量边际概率可反映数据点是否处于稳定决策区域或决策边界附近。
+
+- design_requirement_cn：解释框架需要向决策者提供‘是否可信’的判断信号。
+
+- artifact_choice_cn：定义Rule 1-4，分别对高置信、类别独立、对比效应和高不确定。
+
+- evaluated_contrast_cn：将规则分配与TP/TN/FP/FN交叉统计。
+
+- objective_result_cn：Rule 1集中在TP/TN；Rule 3/4集中在FP/FN；Rule 2极少。
+
+##### evidence_pointers
+
+1. Section 3.4
+
+2. Section 3.5
+
+3. Table 3和Table 4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：LIME和SHAP是主流事后解释方法，但主要输出独立特征贡献，不以依赖结构或误分类信号为导向。
+
+- mechanism_cn：独立权重无法展示特征间相互依赖，也不能直接告诉用户当前预测是否处于决策边界。
+
+- design_requirement_cn：新方法应在依赖结构和可靠性提示上提供增量。
+
+- artifact_choice_cn：用LINDA-BN生成图结构、马尔可夫毯和四条规则，并将其与LIME/SHAP并排展示。
+
+- evaluated_contrast_cn：同一数据点上的三种解释输出比较。
+
+- objective_result_cn：在Rule 2/3/4示例中，LIME/SHAP无法明显提示误分类，而LINDA-BN图规则能给出信号。
+
+##### evidence_pointers
+
+1. Section 4.2.2各案例分析
+
+2. Fig. 11-13
+
+3. Section 5
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 参数敏感性分析
+
+2. 分类混淆矩阵上的规则分布统计
+
+3. 案例研究/可视化对照
+
+4. 高维场景的马尔可夫毯演示
+
+5. 跨模型类型（白盒/黑盒）泛化验证
+
+6. 与LIME/SHAP的概念性和案例式对照
+
+- why_these_evaluations_cn：由于XAI领域没有标准评价指标，作者必须自行建立评价逻辑。他们选择先证明默认参数合理（ε敏感性），再证明规则输出与‘是否分类正确’有关（混淆矩阵），再证明能处理高维（马尔可夫毯），最后用白盒模型证明模型无关性；每一步都补足前一步留下的不确定性，从而把‘新解释形式’转化为‘可用的可靠性信号’。
+
+- benchmark_and_contrast_chain_cn：LIME和SHAP在相关工作中被建立为基准解释方法；在实验阶段，它们没有作为量化打分benchmark出现，而是作为每个案例的并排可视化对照。对照链为：先确认LIME/SHAP输出独立权重→再用LINDA-BN的图结构展示依赖→再用规则区分误分类→最后在讨论中明确差异。这个对照不追求数值优势，而是追求‘现有方法不具备的额外信息’。
+
+### claim_evidence_ledger
+
+#### 1. LINDA-BN能生成体现条件依赖的局部BN解释。
+
+- claim_cn：LINDA-BN能生成体现条件依赖的局部BN解释。
+
+- evidence_cn：多个图例展示从局部置换样本中学到的BN结构和马尔可夫毯。
+
+- assessment_cn：支持，但仅通过案例展示，未量化依赖边与真值的一致性。
+
+#### 2. Rule 1主要对应正确分类。
+
+- claim_cn：Rule 1主要对应正确分类。
+
+- evidence_cn：Table 3和Table 4中TP/TN在Rule 1占比高，乳腺癌尤其明显。
+
+- assessment_cn：支持，但糖尿病中仍有FP/FN落入Rule 1，说明不是充分条件。
+
+#### 3. Rule 3/4可提示误分类。
+
+- claim_cn：Rule 3/4可提示误分类。
+
+- evidence_cn：Table 3/4中FP/FN在Rule 3/4占比明显高于TP/TN。
+
+- assessment_cn：支持为“潜在信号”，作者也承认不能保证检测所有误分类。
+
+#### 4. 特征经过深层网络后会相关，因此解释应基于图结构而非独立权重。
+
+- claim_cn：特征经过深层网络后会相关，因此解释应基于图结构而非独立权重。
+
+- evidence_cn：这一论述是理论直觉，未直接测量黑盒隐层表示的相关性。
+
+- assessment_cn：缺乏直接经验证据，属合理假设。
+
+#### 5. 方法可扩展到复杂高维决策。
+
+- claim_cn：方法可扩展到复杂高维决策。
+
+- evidence_cn：乳腺癌30特征数据上用马尔可夫毯生成可读解释。
+
+- assessment_cn：支持，但只演示一个实例，无规模压力测试。
+
+#### 6. 方法模型无关。
+
+- claim_cn：方法模型无关。
+
+- evidence_cn：同时用于DNN和决策树并得到相似规则分布。
+
+- assessment_cn：支持，但只覆盖两类模型。
+
+#### 7. 与SHAP相比，LINDA-BN不具备公理化唯一性，稳定性类似LIME。
+
+- claim_cn：与SHAP相比，LINDA-BN不具备公理化唯一性，稳定性类似LIME。
+
+- evidence_cn：作者在局限部分主动承认。
+
+- assessment_cn：这是防御性边界声明。
+
+- internal_validity_strategy_cn：使用固定数据划分（70/15/15）和类别平衡；检查DNN训练曲线防止过拟合；用网格搜索选择模型；把分析按TP/TN/FP/FN分层，避免只报告平均正确率；并系统扫描ε，把默认参数选择建立在数据观察上。
+
+- external_validity_strategy_cn：使用两个经典公开数据集（一个9特征低维、一个30特征高维）；使用白盒与黑盒两类代表性模型；开放源代码仓库；并在结论中说明未来要在真实事件日志等复杂数据上扩展。
+
+- what_is_not_actually_tested_cn：没有直接检验人类决策者是否真的能理解或使用这些解释；没有自动生成人类可读说明；没有包含多分类数据；没有验证因果解释能力；没有计算解释稳定性或可扩展性的具体指标；没有报告统计显著性；LIME/SHAP对比主要是定性图示，不是量化benchmark。
+
+## 贡献闭环
+
+- technical_claim_cn：LINDA-BN作为一种基于局部贝叶斯网络的事后模型无关解释方法，可以实现条件依赖解释、马尔可夫毯聚合和基于图结构的可靠性规则。
+
+- artifact_claim_cn：可识别设计部分分别是：置换生成（类LIME局部采样）、四分位离散化、Greedy Hill Climbing结构学习、类别变量马尔可夫毯，以及Rule 1-4判定逻辑。
+
+- mechanism_claim_cn：当数据点位于稳定决策区域时，局部置换预测分布集中，BN呈现出类别概率接近1的V型结构；当数据点接近决策边界时，置换分布分散/偏向相反类，对应Rule 3/4；若黑盒泛化失败，可能出现类别与特征独立的Rule 2。
+
+- boundary_claim_cn：该方法适用于局部单点解释，模型无关但未延伸为完整可解释系统；规则3/4只能作为误分类的潜在信号，不能保证检出全部错误；当特征数量很大时结构学习开销高，且解释稳定性与LIME相当而非SHAP那样唯一。
+
+- reusable_design_knowledge_cn：可复用的设计知识是：用局部置换统计分布近似黑盒边界面，用BN结构表达特征依赖，用马尔可夫毯降低解释复杂度，用图模式+边际概率定义可靠性规则；以及需要根据决策场景设置默认扰动范围并提供参数可调。
+
+- theoretical_contribution_cn：理论贡献有限但有两点：把贝叶斯网络的依赖结构作为局部解释的表示，打破了独立特征重要性假说；将溯因推理与解释图结构相连，并指出向因果模型扩展的方向。它没有修改或扩展贝叶斯网络理论本身，主要是应用性整合。
+
+- how_discussion_closes_intro_gap_cn：讨论部分回到引言提出的‘现有解释缺少依赖关系和可靠性判断’：Section 5明确LIME/SHAP只给独立权重，而LINDA-BN提供依赖图、四条规则和因果基础；结论重申四条规则是主要贡献，并用实验分布说明其与正确/误分类的相关性。
+
+- overclaim_or_unsupported_leaps_cn：以下几点存在跳跃：把‘神经网络隐层使特征相关’作为设计前提但无直接测量；把Rule 2描述为‘分类不正确’是基于极少数案例的结构推断，缺乏形式保证；‘有潜力识别误分类’被表述为独特贡献，但Table 3显示不少FP/FN仍在Rule 1；‘可扩展为因果模型’只是未来方向，不是当前贡献。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：用于关键决策的复杂机器学习模型通常是黑盒，带来挑战。
+
+- rhetorical_function_cn：开场建立问题场景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为解释需求铺垫。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：可解释机器学习和事后模型无关算法成为应对黑盒问题的机制。
+
+- rhetorical_function_cn：把文章放进已知方法脉络。
+
+- depends_on_cn：前一句黑盒问题。
+
+- sets_up_cn：引出本文在该脉络内的定位。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出用贝叶斯网络生成局部事后模型无关解释的新方法。
+
+- rhetorical_function_cn：直接给出论文目标。
+
+- depends_on_cn：已有事后解释方法存在不足。
+
+- sets_up_cn：概括核心制品。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P2 S2
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P2 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：方法展示特征间条件依赖以及它们对类别变量的直接影响。
+
+- rhetorical_function_cn：用一句设计特征突出与现有方法的区别。
+
+- depends_on_cn：目标句。
+
+- sets_up_cn：定义解释的价值主张。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P3 S1-S3
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P3 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献有三：条件依赖图、马尔可夫毯聚焦、四条规则指示置信度。
+
+- rhetorical_function_cn：以三要素结构化声明贡献。
+
+- depends_on_cn：整个摘要前文。
+
+- sets_up_cn：为正文各部分提供组织线索。
+
+- evidence_pointer：Abstract
+
+### 6. Abstract P4 S1
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P4 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者实现方法并在两个公开数据集上分析结果，提供开源仓库。
+
+- rhetorical_function_cn：报告实施和公开可用性，暗示证据来源。
+
+- depends_on_cn：贡献声明。
+
+- sets_up_cn：建立可重复性预期。
+
+- evidence_pointer：Abstract
+
+### 7. Introduction P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI和深度学习的采用带来高精度预测。
+
+- rhetorical_function_cn：建立积极但随后要被质疑的技术背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为黑盒问题铺垫张力。
+
+- evidence_pointer：Introduction 第1段
+
+### 8. Introduction P1 S2-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P1 S2-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：模型通常不透明，导致黑盒问题，可能带来业务损失、失业和不公平群体影响。
+
+- rhetorical_function_cn：把技术问题升华为高利害现实后果。
+
+- depends_on_cn：AI高精度背景。
+
+- sets_up_cn：解释为什么必须解决黑盒。
+
+- evidence_pointer：Introduction 第1段
+
+### 9. Introduction P1 S4
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P1 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：这给数据科学家和分析师带来开放挑战：如何让机器智能解释预测机制以帮助决策者理解和审查预测。
+
+- rhetorical_function_cn：把现实后果转成研究挑战。
+
+- depends_on_cn：PRACTICAL_STAKES。
+
+- sets_up_cn：引出可解释ML文献。
+
+- evidence_pointer：Introduction 第1段
+
+### 10. Introduction P2 S1-S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：文献提出两种机制：直接可解释模型和模型无关/模型特定的事后解释算法。
+
+- rhetorical_function_cn：概述已有解决路径。
+
+- depends_on_cn：前面的开放挑战。
+
+- sets_up_cn：为批评现有事后方法做准备。
+
+- evidence_pointer：Introduction 第2段
+
+### 11. Introduction P2 S3
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有事后解释技巧只给出单个输入特征对预测影响程度的知识。
+
+- rhetorical_function_cn：指出当前方法的知识维度有限。
+
+- depends_on_cn：事后解释分类。
+
+- sets_up_cn：为引入依赖结构解释制造缺口。
+
+- evidence_pointer：Introduction 第2段
+
+### 12. Introduction P3 S1-S2
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出基于贝叶斯网络扩展框架，生成黑盒预测模型的局部事后解释，名为LINDA-BN。
+
+- rhetorical_function_cn：给出本文的核心创新方案。
+
+- depends_on_cn：对现有方法局限的批评。
+
+- sets_up_cn：定义制品名称与目标。
+
+- evidence_pointer：Introduction 第3段
+
+### 13. Introduction P3 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：假设在深度神经网络中独立特征经过第一隐层后不再独立而变得相关，因此局部解释应基于有依赖关系的特征图而非单个特征权重。
+
+- rhetorical_function_cn：给出设计选择的深层理由。
+
+- depends_on_cn：本文选择BN的目标。
+
+- sets_up_cn：支撑后续所有依赖结构设计。
+
+- evidence_pointer：Introduction 第3段
+
+### 14. Introduction P4 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：与现有模型无关解释方法相比，本文贡献有三。
+
+- rhetorical_function_cn：明确贡献清单。
+
+- depends_on_cn：问题与方案已提出。
+
+- sets_up_cn：每条贡献对应后续一节或实验。
+
+- evidence_pointer：Introduction 第4段
+
+### 15. Introduction P4 S2
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P4 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：BN作为概率图模型能表示输入特征与预测之间的条件依赖，回答哪些特征和为什么贡献。
+
+- rhetorical_function_cn：展开第一项贡献。
+
+- depends_on_cn：BN理论与贡献清单。
+
+- sets_up_cn：对应3.3节依赖图解释。
+
+- evidence_pointer：Introduction 第4段
+
+### 16. Introduction P4 S3
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：对高维复杂决策，马尔可夫毯给出直接作用于预测的聚焦特征视图。
+
+- rhetorical_function_cn：展开第二项贡献。
+
+- depends_on_cn：BN/马尔可夫毯概念。
+
+- sets_up_cn：对应4.2.3高维实验。
+
+- evidence_pointer：Introduction 第4段
+
+### 17. Introduction P4 S4
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P4 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提取的BN可识别四条规则，告知决策者预测的置信度并帮助评估可靠性。
+
+- rhetorical_function_cn：展开第三项贡献。
+
+- depends_on_cn：图结构解释思想。
+
+- sets_up_cn：对应3.5节规则。
+
+- evidence_pointer：Introduction 第4段
+
+### 18. Introduction P5 S1
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：预告后续章节：概念与相关工作、框架、实验与结果、结论。
+
+- rhetorical_function_cn：给出全文地图。
+
+- depends_on_cn：贡献已声明。
+
+- sets_up_cn：引导读者预期各节内容。
+
+- evidence_pointer：Introduction 第5段
+
+### 19. Section 2.1 bullets
+
+- order：19
+
+- section：Section 2.1 Concepts
+
+- locator：Section 2.1 bullets
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：定义黑盒预测器、可解释性与可说明性。
+
+- rhetorical_function_cn：统一术语，避免概念混淆。
+
+- depends_on_cn：引言的问题。
+
+- sets_up_cn：为后续解释与说明区别提供基础。
+
+- evidence_pointer：Section 2.1
+
+### 20. Section 2.2 first paragraph
+
+- order：20
+
+- section：Section 2.2 Related work
+
+- locator：Section 2.2 first paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：解释方法分为可解释模型和模型无关模型；本文专注于模型无关事后方法。
+
+- rhetorical_function_cn：定位本文在分类中的位置。
+
+- depends_on_cn：Section 2.1定义。
+
+- sets_up_cn：引出LIME/SHAP基线。
+
+- evidence_pointer：Section 2.2
+
+### 21. Section 2.2.1 first paragraph
+
+- order：21
+
+- section：Section 2.2.1 LIME
+
+- locator：Section 2.2.1 first paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：LIME通过扰动样本在局部边界拟合可解释模型，并给每个特征权重。
+
+- rhetorical_function_cn：介绍主要对照方法之一。
+
+- depends_on_cn：模型无关方法的定位。
+
+- sets_up_cn：为后文指出LIME缺乏依赖结构。
+
+- evidence_pointer：Section 2.2.1
+
+### 22. Section 2.2.1 Tan et al. sentence
+
+- order：22
+
+- section：Section 2.2.1 LIME
+
+- locator：Section 2.2.1 Tan et al. sentence
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有工作指出LIME解释存在多种不确定性来源。
+
+- rhetorical_function_cn：给基线方法标上缺陷。
+
+- depends_on_cn：LIME介绍。
+
+- sets_up_cn：支持新方法必要性。
+
+- evidence_pointer：Section 2.2.1
+
+### 23. Section 2.2.2 first paragraph
+
+- order：23
+
+- section：Section 2.2.2 SHAP
+
+- locator：Section 2.2.2 first paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：SHAP用Shapley值在特征联盟间公平分配预测增益。
+
+- rhetorical_function_cn：介绍第二个主要对照方法。
+
+- depends_on_cn：模型无关方法定位。
+
+- sets_up_cn：为后文对比公理化属性做铺垫。
+
+- evidence_pointer：Section 2.2.2
+
+### 24. Section 2.2.3 final paragraph
+
+- order：24
+
+- section：Section 2.2.3 PGM
+
+- locator：Section 2.2.3 final paragraph
+
+- move_code：LIMITATION
+
+- paraphrase_cn：反事实解释虽然有用，但不能解释为什么当前预测产生；它们假设相反场景。
+
+- rhetorical_function_cn：批判PGM领域当前主导的反事实路径。
+
+- depends_on_cn：PGM反事实文献。
+
+- sets_up_cn：引出本文用概率模型而非反事实来提供洞见。
+
+- evidence_pointer：Section 2.2.3
+
+### 25. Section 3.1 first paragraph
+
+- order：25
+
+- section：Section 3.1 Bayesian networks
+
+- locator：Section 3.1 first paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：BN是有向无环图，节点是变量，边表示直接影响，并配条件概率表。
+
+- rhetorical_function_cn：提供后续设计所需的基础概念。
+
+- depends_on_cn：选择BN作为方案。
+
+- sets_up_cn：支撑因子分解和推断公式。
+
+- evidence_pointer：Section 3.1
+
+### 26. Section 3.1 Eq. 1-2附近
+
+- order：26
+
+- section：Section 3.1 Bayesian networks
+
+- locator：Section 3.1 Eq. 1-2附近
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：BN可表示联合分布并支持通过边缘化进行精确推断。
+
+- rhetorical_function_cn：确立BN可用于概率查询。
+
+- depends_on_cn：BN定义。
+
+- sets_up_cn：为计算类别边际概率提供依据。
+
+- evidence_pointer：Section 3.1
+
+### 27. Section 3.2 first paragraph
+
+- order：27
+
+- section：Section 3.2 Structure learning
+
+- locator：Section 3.2 first paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：BN学习分为结构学习和参数学习；结构学习需最大化Pr(G|D)。
+
+- rhetorical_function_cn：引入学习BN的标准框架。
+
+- depends_on_cn：BN定义。
+
+- sets_up_cn：为选择Greedy Hill Climbing提供背景。
+
+- evidence_pointer：Section 3.2
+
+### 28. Section 3.2 final paragraph
+
+- order：28
+
+- section：Section 3.2 Structure learning
+
+- locator：Section 3.2 final paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于结构学习NP-hard，使用贪心Hill Climbing，简单且有效。
+
+- rhetorical_function_cn：说明关键算法选择的合理性。
+
+- depends_on_cn：NP-hard结论。
+
+- sets_up_cn：进入LINDA-BN算法实现。
+
+- evidence_pointer：Section 3.2
+
+### 29. Section 3.3 first paragraph
+
+- order：29
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 first paragraph
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：重新表述黑盒机制难理解的问题，并提出扩展BN框架LINDA-BN作为解决办法。
+
+- rhetorical_function_cn：在正式方法前重述问题与目标。
+
+- depends_on_cn：引言与Background。
+
+- sets_up_cn：进入算法步骤描述。
+
+- evidence_pointer：Section 3.3
+
+### 30. Section 3.3 second paragraph
+
+- order：30
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 second paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架核心三步：置换生成、BN学习、类别变量马尔可夫毯计算。
+
+- rhetorical_function_cn：给出算法骨架。
+
+- depends_on_cn：BN理论。
+
+- sets_up_cn：为Algorithm 1铺垫。
+
+- evidence_pointer：Section 3.3
+
+### 31. Section 3.3 perturbation paragraph
+
+- order：31
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 perturbation paragraph
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：如果数据点在正确决策区域，则置换预测应接近确定；如果接近决策边界，则预测分布会分散且类别概率低。
+
+- rhetorical_function_cn：建立‘局部概率分布与可靠性’之间的可检验关系。
+
+- depends_on_cn：置换生成设计。
+
+- sets_up_cn：支撑后续四条规则。
+
+- evidence_pointer：Section 3.3
+
+### 32. Section 3.3 dependency paragraph
+
+- order：32
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 dependency paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：网络结构显示特征与类别变量的依赖，因此可提取哪些特征贡献及为什么。
+
+- rhetorical_function_cn：把图结构转成解释能力。
+
+- depends_on_cn：BN结构。
+
+- sets_up_cn：为解释输出作准备。
+
+- evidence_pointer：Section 3.3
+
+### 33. Section 3.3 Markov blanket paragraph
+
+- order：33
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 Markov blanket paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：高维情况下返回马尔可夫毯作为直接作用于类别变量的变量摘要。
+
+- rhetorical_function_cn：提供高维解释机制。
+
+- depends_on_cn：马尔可夫毯理论。
+
+- sets_up_cn：对应Algorithm 1第14-20行和实验4.2.3。
+
+- evidence_pointer：Section 3.3
+
+### 34. Section 3.3 SHAP comparison paragraph
+
+- order：34
+
+- section：Section 3.3 LINDA-BN
+
+- locator：Section 3.3 SHAP comparison paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：LINDA-BN不满足SHAP的公理性质，但满足概率论公理，并能通过条件独立发现直接特征，且可扩展为因果模型。
+
+- rhetorical_function_cn：提前处理与SHAP的公平性比较，防御性定位。
+
+- depends_on_cn：SHAP介绍。
+
+- sets_up_cn：Section 5的对比讨论。
+
+- evidence_pointer：Section 3.3
+
+### 35. Section 3.4 second paragraph
+
+- order：35
+
+- section：Section 3.4 Interpreting graphical representations
+
+- locator：Section 3.4 second paragraph
+
+- move_code：MECHANISM
+
+- paraphrase_cn：常见因结构近似Naïve Bayes，使特征在给定类别后独立；V型结构近似线性回归，特征直接作用类别。
+
+- rhetorical_function_cn：建立图结构与解释语义的对应关系。
+
+- depends_on_cn：BN图结构类型。
+
+- sets_up_cn：为规则定义提供结构判据。
+
+- evidence_pointer：Section 3.4
+
+### 36. Section 3.4 abduction paragraph
+
+- order：36
+
+- section：Section 3.4 Interpreting graphical representations
+
+- locator：Section 3.4 abduction paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引用皮尔士溯因推理，决策者通过图结构寻找最简单最可能的解释。
+
+- rhetorical_function_cn：给解释过程赋予认知理论基础。
+
+- depends_on_cn：图结构解释。
+
+- sets_up_cn：解释马尔可夫毯为何支持人的推理。
+
+- evidence_pointer：Section 3.4
+
+### 37. Section 3.5 introductory paragraph
+
+- order：37
+
+- section：Section 3.5 Rules for local interpretations
+
+- locator：Section 3.5 introductory paragraph
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：图形化框架能识别四种模式，帮助评估数据点离决策边界多远，进而给出可用指导。
+
+- rhetorical_function_cn：提出规则的总体需要。
+
+- depends_on_cn：前文图结构与假设。
+
+- sets_up_cn：列出Rule 1-4。
+
+- evidence_pointer：Section 3.5
+
+### 38. Rule 1 bullet
+
+- order：38
+
+- section：Section 3.5 Rules for local interpretations
+
+- locator：Rule 1 bullet
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Rule 1：黑盒预测类别c且网络中类别节点处于V型结构且Pr(Class=c)≈1，则解释支持预测。
+
+- rhetorical_function_cn：定义第一种高置信规则。
+
+- depends_on_cn：图结构与类别概率假设。
+
+- sets_up_cn：用于后续正确分类分析。
+
+- evidence_pointer：Section 3.5 Rule 1
+
+### 39. Rule 2 bullet
+
+- order：39
+
+- section：Section 3.5 Rules for local interpretations
+
+- locator：Rule 2 bullet
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Rule 2：类别变量与所有特征独立，则预测不可靠，可能表示黑盒泛化失败。
+
+- rhetorical_function_cn：定义识别不可靠预测的结构条件。
+
+- depends_on_cn：BN独立性语义。
+
+- sets_up_cn：用于讨论罕见误分类。
+
+- evidence_pointer：Section 3.5 Rule 2
+
+### 40. Rule 3 bullet
+
+- order：40
+
+- section：Section 3.5 Rules for local interpretations
+
+- locator：Rule 3 bullet
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Rule 3：网络类别变量最大概率指向与黑盒预测相反的类，出现对比效应，说明数据点靠近决策边界。
+
+- rhetorical_function_cn：定义边界误分类信号。
+
+- depends_on_cn：置换分布可能穿过边界的概念。
+
+- sets_up_cn：用于误分类检测分析。
+
+- evidence_pointer：Section 3.5 Rule 3
+
+### 41. Rule 4 bullet
+
+- order：41
+
+- section：Section 3.5 Rules for local interpretations
+
+- locator：Rule 4 bullet
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Rule 4：网络类别概率虽仍指向黑盒类别但Pr<<1，说明预测存在高不确定性。
+
+- rhetorical_function_cn：定义不确定但方向一致的预测。
+
+- depends_on_cn：类别边际概率阈值。
+
+- sets_up_cn：用于Rule 4与误分类的统计关联。
+
+- evidence_pointer：Section 3.5 Rule 4
+
+### 42. Section 4 first paragraph
+
+- order：42
+
+- section：Section 4 Evaluation
+
+- locator：Section 4 first paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于XAI没有标准评价指标，作者按自己提出的规则进行深入分析。
+
+- rhetorical_function_cn：解释为何采用自建规则评价路径。
+
+- depends_on_cn：规则定义。
+
+- sets_up_cn：实验设计合理性。
+
+- evidence_pointer：Section 4
+
+### 43. Section 4.1 first paragraph
+
+- order：43
+
+- section：Section 4.1 Design of experiments
+
+- locator：Section 4.1 first paragraph
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：使用糖尿病和乳腺癌两个公开UCI数据集，并选择代表白盒的决策树和代表黑盒的深度神经网络。
+
+- rhetorical_function_cn：选择具有代表性的评价基准。
+
+- depends_on_cn：模型无关性目标。
+
+- sets_up_cn：所有实验的输入基础。
+
+- evidence_pointer：Section 4.1
+
+### 44. Section 4.2 first paragraph
+
+- order：44
+
+- section：Section 4.2 Evaluation on a black-box model
+
+- locator：Section 4.2 first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：训练的DNN没有过拟合，通过网格搜索找到最佳结构；模型准确率分别为糖尿病0.738、乳腺癌0.984。
+
+- rhetorical_function_cn：报告被解释黑盒模型的基本质量。
+
+- depends_on_cn：实验设置。
+
+- sets_up_cn：后续解释实验的可信基础。
+
+- evidence_pointer：Section 4.2 / Table 2
+
+### 45. Section 4.2.1 first result paragraph
+
+- order：45
+
+- section：Section 4.2.1 Permutation variances
+
+- locator：Section 4.2.1 first result paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：低方差使92%数据点落在Rule 1；方差增加时Rule 1指数下降，Rule 4大幅增加。
+
+- rhetorical_function_cn：报告糖尿病数据集上ε的影响。
+
+- depends_on_cn：ε扫描实验。
+
+- sets_up_cn：解释为何选择ε=0.1。
+
+- evidence_pointer：Section 4.2.1 / Fig. 8
+
+### 46. Section 4.2.1 second result paragraph
+
+- order：46
+
+- section：Section 4.2.1 Permutation variances
+
+- locator：Section 4.2.1 second result paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：乳腺癌数据因黑盒准确率高，方差增加主要表现为Rule 3对比效应增加而非Rule 4。
+
+- rhetorical_function_cn：展示数据集/模型质量对规则分布的影响。
+
+- depends_on_cn：两个数据集的准确率差异。
+
+- sets_up_cn：强化ε=0.1的选择。
+
+- evidence_pointer：Section 4.2.1 / Fig. 8
+
+### 47. Section 4.2.1 choice of ε paragraph
+
+- order：47
+
+- section：Section 4.2.1 Permutation variances
+
+- locator：Section 4.2.1 choice of ε paragraph
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：为了既保持高置信解释又能标记可能误分类，将默认ε设为0.1，用户可修改。
+
+- rhetorical_function_cn：给出参数选择的折中依据。
+
+- depends_on_cn：敏感性实验结果。
+
+- sets_up_cn：后续所有实验固定ε。
+
+- evidence_pointer：Section 4.2.1
+
+### 48. Section 4.2.2 first bullet
+
+- order：48
+
+- section：Section 4.2.2 Analysis of rules for local interpretations
+
+- locator：Section 4.2.2 first bullet
+
+- move_code：RESULT
+
+- paraphrase_cn：正确分类主要落在Rule 1；乳腺癌中所有TP/TN都获得高置信解释，糖尿病中正确分类的Rule 1比例也较高。
+
+- rhetorical_function_cn：用混淆矩阵数据支持Rule 1的判别力。
+
+- depends_on_cn：Table 3。
+
+- sets_up_cn：为‘规则可提示正确分类’提供证据。
+
+- evidence_pointer：Section 4.2.2 / Table 3
+
+### 49. Section 4.2.2 second bullet
+
+- order：49
+
+- section：Section 4.2.2 Analysis of rules for local interpretations
+
+- locator：Section 4.2.2 second bullet
+
+- move_code：RESULT
+
+- paraphrase_cn：Rule 2极少出现，只在糖尿病ε>0.2时出现，乳腺癌中不存在。
+
+- rhetorical_function_cn：说明独立失效结构在实践中很罕见。
+
+- depends_on_cn：图8/Table 3。
+
+- sets_up_cn：限制Rule 2作为主要误分类信号的适用性。
+
+- evidence_pointer：Section 4.2.2
+
+### 50. Section 4.2.2 third and fourth bullets
+
+- order：50
+
+- section：Section 4.2.2 Analysis of rules for local interpretations
+
+- locator：Section 4.2.2 third and fourth bullets
+
+- move_code：RESULT
+
+- paraphrase_cn：Rule 3和Rule 4主要出现在FP/FN中，与误分类强相关；而LIME/SHAP不能清晰提示这些误分类。
+
+- rhetorical_function_cn：给出核心增量证据。
+
+- depends_on_cn：Table 3、案例图11-13。
+
+- sets_up_cn：支撑‘规则可识别潜在误分类’的贡献。
+
+- evidence_pointer：Section 4.2.2 / Table 3 / Fig. 11-13
+
+### 51. Section 4.2.2 evaluation caveat paragraph
+
+- order：51
+
+- section：Section 4.2.2 Analysis of rules for local interpretations
+
+- locator：Section 4.2.2 evaluation caveat paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：XAI评价仍是开放问题，本文评价以四条规则和它们的一致性为主。
+
+- rhetorical_function_cn：为自建评价标准辩护。
+
+- depends_on_cn：XAI度量缺失。
+
+- sets_up_cn：避免读者误以为作者在遵循标准benchmark。
+
+- evidence_pointer：Section 4.2.2
+
+### 52. Section 4.2.3 first paragraph
+
+- order：52
+
+- section：Section 4.2.3 Interpretations for complex decision scenarios
+
+- locator：Section 4.2.3 first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：30特征乳腺癌数据生成的完整网络无法人类阅读，马尔可夫毯与类别边际概率则给出6个直接特征和Rule 1高置信结构。
+
+- rhetorical_function_cn：证明高维可读性机制有效。
+
+- depends_on_cn：马尔可夫毯设计。
+
+- sets_up_cn：支持第二项贡献。
+
+- evidence_pointer：Section 4.2.3 / Fig. 14
+
+### 53. Section 4.3 first paragraph
+
+- order：53
+
+- section：Section 4.3 Evaluation on a white-box interpretable model
+
+- locator：Section 4.3 first paragraph
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：将LINDA-BN应用于决策树（白盒），从根到叶路径抽取解释路径。
+
+- rhetorical_function_cn：建立白盒条件下的泛化验证。
+
+- depends_on_cn：黑盒实验。
+
+- sets_up_cn：检验模型无关性声明。
+
+- evidence_pointer：Section 4.3
+
+### 54. Section 4.3 result summary paragraph
+
+- order：54
+
+- section：Section 4.3 Evaluation on a white-box interpretable model
+
+- locator：Section 4.3 result summary paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：决策树上正确分类大多为Rule 1，假阴性大量落入Rule 3/4，但部分假阳性仍被高置信解释。
+
+- rhetorical_function_cn：报告白盒结果，并诚实指出局限。
+
+- depends_on_cn：Table 4。
+
+- sets_up_cn：总结‘潜在误分类信号’而非保证。
+
+- evidence_pointer：Section 4.3 / Table 4
+
+### 55. Section 5 first bullet
+
+- order：55
+
+- section：Section 5 Comparison with LIME and SHAP
+
+- locator：Section 5 first bullet
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：与LIME/SHAP独立特征重要性不同，LINDA-BN展示特征间条件依赖和直接作用于类别的变量。
+
+- rhetorical_function_cn：在讨论中重申第一项贡献并差异化。
+
+- depends_on_cn：前文实验。
+
+- sets_up_cn：强化本文独特定位。
+
+- evidence_pointer：Section 5
+
+### 56. Section 5 second bullet
+
+- order：56
+
+- section：Section 5 Comparison with LIME and SHAP
+
+- locator：Section 5 second bullet
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：四条规则提供何时信任预测的指导，且难以映射到LIME/SHAP。
+
+- rhetorical_function_cn：再次强调第四类规则贡献。
+
+- depends_on_cn：规则实验结果。
+
+- sets_up_cn：强化‘可靠性评估’主张。
+
+- evidence_pointer：Section 5
+
+### 57. Section 5 limitations paragraph
+
+- order：57
+
+- section：Section 5 Comparison with LIME and SHAP
+
+- locator：Section 5 limitations paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：解释稳定性与LIME类似，换结构学习算法可能得到不同图；SHAP则因公理保证唯一解释。
+
+- rhetorical_function_cn：主动声明稳定性边界。
+
+- depends_on_cn：与SHAP的公理对比。
+
+- sets_up_cn：避免读者误以为方法比SHAP更稳定。
+
+- evidence_pointer：Section 5 limitations
+
+### 58. Section 5 performance limitation paragraph
+
+- order：58
+
+- section：Section 5 Comparison with LIME and SHAP
+
+- locator：Section 5 performance limitation paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：性能随特征数指数下降，BN结构学习NP-hard且耗时。
+
+- rhetorical_function_cn：承认可扩展性硬约束。
+
+- depends_on_cn：结构学习复杂度。
+
+- sets_up_cn：为未来真实大数据验证留出空间。
+
+- evidence_pointer：Section 5 limitations
+
+### 59. Section 6 first paragraph
+
+- order：59
+
+- section：Section 6 Conclusions
+
+- locator：Section 6 first paragraph
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结主要贡献是学习黑盒局部近似BN并提出四条可靠性规则。
+
+- rhetorical_function_cn：用结论复读核心贡献。
+
+- depends_on_cn：全文。
+
+- sets_up_cn：闭合论证。
+
+- evidence_pointer：Section 6
+
+### 60. Section 6 future work paragraph
+
+- order：60
+
+- section：Section 6 Conclusions
+
+- locator：Section 6 future work paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来将把符号规则转为可用于与决策者沟通的论证，并在真实复杂数据集上扩展评估。
+
+- rhetorical_function_cn：指出后续路径并限定当前贡献边界。
+
+- depends_on_cn：当前只做到可解释性未到可说明性。
+
+- sets_up_cn：没有后续文章时给出开放问题。
+
+- evidence_pointer：Section 6
+
+## 写作技术
+
+- gap_construction_cn：作者先建立黑盒预测的严重后果，再指出当前事后解释方法只提供独立特征权重或反事实假设，无法表达深层模型中特征的相关性，也没有给决策者‘是否可信’的明确信号；由此把缺口定义为‘解释形式不足’而非‘预测精度不足’。
+
+- signposting_cn：摘要采用‘贡献有三’的整齐列表；引言结尾预告各节；3.3节用‘三步’列出算法骨架；3.5节逐条给出Rule 1-4；实验部分在节首说明将分析什么。路标极强，便于读者逐层跟进。
+
+- transition_logic_cn：每节末尾留下空白并用下一节开头回答：文献缺口→BN理论→算法→规则→实验设置→参数敏感性→规则验证→高维→白盒→对比→结论；句子如‘在下一节，我们描述…’频繁出现。
+
+- claim_evidence_rhythm_cn：通篇采用‘提出规则/假设→给出算法→用Table/Figure报告比例→用案例图展示→承认例外与失败’的节奏。重要主张后几乎都配有实验或案例证据，尤其是Rule 1/3/4。
+
+- benchmark_narrative_cn：LIME和SHAP在相关工作中被认真介绍，但在评价中不是分数式benchmark，而是作为每类数据点的解释对照；作者用‘LIME/SHAP不能提示误分类’来衬托LINDA-BN的规则信息。由于XAI无标准度量，这一叙事被明确辩护。
+
+- theory_return_cn：在3.4节用图结构和溯因推理将BN结构与人类解释连接；在5节提到图形化模型可作为因果分析基础；结论再次把实验分布与Rule 1-4的理论含义关联，形成理论回到实践再回到理论的循环。
+
+- contribution_positioning_cn：作者将贡献定位为‘解释的形式与可靠性信号’，而不是与LIME/SHAP的精度竞争；反复强调‘依赖关系’‘马尔可夫毯’‘四条规则’三项，使读者记住差异化点。
+
+- novelty_protection_cn：通过三条机制防止贡献退化为一次性性能结果：一是把规则与混淆矩阵相联系，说明误分类信号这一独特功能；二是主动声明与SHAP公理的差异，突出概率图模型特有的条件独立和因果扩展性；三是承认稳定性、可扩展性和误分类检测的不完美，从而把结论限定在‘提供潜在信号’。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：在开篇建立黑盒模型高风险决策背景，并把后果具体化为业务损失、不公平和审查困难。
+
+- research_job_cn：确定要解决的实际问题：黑盒不可解释性及其后果。
+
+- required_evidence_cn：对AI/ML采用和黑盒风险的文献引用。
+
+- transition_to_next_cn：从‘风险’转向‘已有解释方法为什么不够’
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述现有解释方法，逐一点出独立权重和反事实解释的不足。
+
+- research_job_cn：梳理LIME、SHAP、PGM反事实等方法。
+
+- required_evidence_cn：代表性文献及对其局限的具体描述。
+
+- transition_to_next_cn：‘因此需要一个能表达依赖结构的局部解释方法’
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入形式化知识基础（BN、马尔可夫毯、结构学习），并解释其与解释需求的对应。
+
+- research_job_cn：选择能支撑‘依赖结构解释’的形式化工具。
+
+- required_evidence_cn：BN定义和结构学习性质。
+
+- transition_to_next_cn：‘基于这些构件，我们提出以下算法’
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：把算法流程写成三步：扰动、学习BN、计算马尔可夫毯，并用伪代码固化。
+
+- research_job_cn：实现从单一数据点到局部BN的算法管线。
+
+- required_evidence_cn：能够运行的算法和默认参数设置。
+
+- transition_to_next_cn：‘图结构如何被翻译成可靠性判断’
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：定义可解释规则（如Rule 1-4），将图模式和概率阈值转成决策指导。
+
+- research_job_cn：建立图结构到可靠性信号的映射。
+
+- required_evidence_cn：规则的心理学/概率逻辑基础。
+
+- transition_to_next_cn：‘规则需要实验验证’
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：选择公开数据集和两类代表性模型（白盒/黑盒），并报告基本性能。
+
+- research_job_cn：搭建评价环境，确保有真实可解释对象。
+
+- required_evidence_cn：数据统计、模型准确率、训练/测试划分。
+
+- transition_to_next_cn：‘先看参数敏感性，因为解释对扰动范围敏感’
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用参数扫描展示默认值的合理性，同时揭示解释对扰动方差的依赖。
+
+- research_job_cn：运行不同ε并统计规则分布。
+
+- required_evidence_cn：ε变化下各规则频率图。
+
+- transition_to_next_cn：‘固定默认参数后，检验规则与分类状态是否对应’
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：按TP/TN/FP/FN交叉统计规则分布，用表格和案例图支撑核心主张。
+
+- research_job_cn：把规则结果与混淆矩阵关联，探索误分类信号。
+
+- required_evidence_cn：包含各规则在四类样本上百分比的表格。
+
+- transition_to_next_cn：‘低维已验证，再看高维如何用马尔可夫毯’
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：展示高维数据上马尔可夫毯的可读性，论证可扩展性。
+
+- research_job_cn：在高维数据集上生成解释案例。
+
+- required_evidence_cn：马尔可夫毯图与对应规则判断。
+
+- transition_to_next_cn：‘模型无关性还需要白盒验证’
+
+#### 10. 10
+
+- step：10
+
+- writing_job_cn：在另一种模型上重复规则分析，证明不是某类模型专属。
+
+- research_job_cn：将方法套用到白盒模型并统计规则分布。
+
+- required_evidence_cn：白盒模型上的规则-混淆矩阵表。
+
+- transition_to_next_cn：‘与现有baseline对比并承认局限’
+
+#### 11. 11
+
+- step：11
+
+- writing_job_cn：总结与LIME/SHAP的差异、主动声明稳定性和性能局限、规划未来工作。
+
+- research_job_cn：划定贡献边界，防止过度泛化。
+
+- required_evidence_cn：对方法优缺点的诚实描述。
+
+- transition_to_next_cn：结论。
+
+### most_transferable_moves_cn
+
+1. 用‘贡献有三’的清单式开场
+
+2. 在方法节给出三步算法骨架
+
+3. 把图结构翻译成若干可操作规则
+
+4. 用敏感性和混淆分布表证明规则有效
+
+5. 主动承认局限性以保护贡献
+
+6. 用开源仓库增强可重复性
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要实际实现BN结构学习与马尔可夫毯计算，且在高维时面临NP-hard开销
+
+2. XAI没有标准评价指标，必须自建规则评价并承受审稿人对评价方式的质疑
+
+3. 真实业务数据和用户实验并未完成，资源投入主要在算法实现与案例生成上
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写‘提出四条规则’而没有混淆矩阵证据
+
+2. 不能只声称‘能检测误分类’而忽视FP仍落在Rule 1的事实
+
+3. 不能在没有BN实现的情况下声称解释基于条件依赖
+
+4. 不能在无用户实验时声称‘帮助决策者更好理解’
+
+5. 不能把未来因果扩展写成当前贡献
+
+- single_best_description_of_the_routine_cn：从现有解释方法的‘不能做什么’切入，选择一种数学上能表达依赖关系的表示，设计成三步算法，并把图模式转成可验证的规则，再用数据集、混淆矩阵和高维案例证明这些规则确实与预测可信度相关。
+
+## 分析边界
+
+源文件由PDF转文本，个别公式和图片链接有占位符但不影响章节理解；无附录；表格数值可能存在OCR精度问题；对研究阶段的划分是基于论证功能而非作者显式标注。

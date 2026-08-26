@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coding Agent Manuscript"
+  short_description: "Source-grounded ISR manuscript writing and audit"
+  default_prompt: "Use $coding-agent-manuscript to complete one source-grounded major-section checkpoint or bounded whole-manuscript integration pass, loading every applicable registry control, building the complete section argument first, and verifying an authoritative IS writing prototype for every reader-visible sentence before acceptance."

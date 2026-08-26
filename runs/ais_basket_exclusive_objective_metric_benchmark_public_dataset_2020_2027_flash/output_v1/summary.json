@@ -1,0 +1,98 @@
+{
+  "updated_at": "2026-08-17T17:00:41.351179+00:00",
+  "analysis_version": "ais-basket-exclusive-objective-metric-benchmark-public-dataset-2020-2027-flash-v1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 20,
+  "prompt_fingerprint": "8763f0912923546d737bae3375fd7914281f117659d0d336fcb77031a38767c8",
+  "year_range": {
+    "from": 2020,
+    "to": 2027
+  },
+  "input_source": "E:\\github\\qual-llm-check-IS-utd\\database_fulltext_all",
+  "input_fulltexts": 2475,
+  "input_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "completed": 2475,
+  "pending": 0,
+  "completed_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "objective_metric_pass_count": 197,
+  "benchmark_pass_count": 162,
+  "dataset_pass_count": 281,
+  "strict_include_count": 51,
+  "strict_exclude_count": 2424,
+  "strict_include_year_counts": {
+    "2020": 11,
+    "2021": 12,
+    "2022": 6,
+    "2023": 10,
+    "2024": 5,
+    "2025": 5,
+    "2026": 2
+  },
+  "strict_include_journal_counts": {
+    "Decision Support Systems": 18,
+    "Information & Management": 3,
+    "Information Systems Research": 14,
+    "Journal of Management Information Systems": 5,
+    "Journal of the Association for Information Systems": 2,
+    "MIS Quarterly": 9
+  },
+  "metric_status_counts": {
+    "fully_objective_direct": 678,
+    "human_semantic_judgment": 99,
+    "mixed_objective_subjective": 200,
+    "no_qualifying_metric": 774,
+    "objective_fixed_factual_labels": 135,
+    "subjective_construct_with_fixed_labels": 33,
+    "subjective_or_self_report": 540,
+    "unclear": 16
+  },
+  "core_goal_status_counts": {
+    "exclusive_objective_improvement": 198,
+    "objective_improvement_primary_but_not_exclusive": 187,
+    "objective_metric_secondary": 48,
+    "theory_or_explanation_primary": 2010,
+    "unclear": 32
+  },
+  "benchmark_status_counts": {
+    "benchmark_comparison_central": 150,
+    "generic_benchmark_word_only": 270,
+    "named_benchmark_peripheral": 33,
+    "named_public_benchmark_central": 18,
+    "no_benchmark_statement": 1997,
+    "unclear": 7
+  },
+  "dataset_status_counts": {
+    "dataset_not_identifiable": 47,
+    "named_public_dataset_central": 236,
+    "no_real_data_evaluation": 417,
+    "private_or_confidential_core": 538,
+    "public_peripheral_private_core": 68,
+    "publicly_described_source_central": 195,
+    "self_collected_not_obtainable": 885,
+    "synthetic_only": 54,
+    "unclear": 35
+  },
+  "usage": {
+    "prompt_tokens": 77378546,
+    "completion_tokens": 10644816,
+    "total_tokens": 88023362,
+    "prompt_cache_hit_tokens": 9714304,
+    "prompt_cache_miss_tokens": 67664242
+  }
+}

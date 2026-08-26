@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85133533302"
+title: "Social Science Theories in Software Engineering Research"
+authors: "Lorey T.; Ralph P.; Felderer M."
+year: "2022"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1145/3510003.3510076"
+---
+# Scopus title-abstract-keyword metadata
+Title: Social Science Theories in Software Engineering Research
+Abstract: As software engineering research becomes more concerned with the psychological, sociological and managerial aspects of software development, relevant theories from reference disciplines are in-creasingly important for understanding the field's core phenomena of interest. However, the degree to which software engineering research draws on relevant social sciences remains unclear. This study therefore investigates the use of social science theories in five influential software engineering journals over 13 years. It analyzes not only the extent of theory use but also what, how and where these theories are used. While 87 different theories are used, less than two percent of papers use a social science theory, most theories are used in only one paper, most social sciences are ignored, and the theories are rarely tested for applicability to software engineering contexts. Ignoring relevant social science theories may (1) under-mine the community's ability to generate, elaborate and maintain a cumulative body of knowledge; and (2) lead to oversimplified mod-els of software engineering phenomena. More attention to theory is needed for software engineering to mature as a scientific discipline. © 2022 ACM.
+Author keywords: social science; software engineering; theory
+Index keywords: Behavioral research; Engineering research; Social sciences computing; Software design; Body of knowledge; Managerial aspects; Psychological Aspects; Reference discipline; Scientific discipline; Social science theory; Software engineering journals; Software engineering research; Theory; Software testing
+Document type: Conference paper
+Conference: 44th ACM/IEEE International Conference on Software Engineering, ICSE 2022
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2022
+EID: 2-s2.0-85133533302
+DOI: 10.1145/3510003.3510076
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

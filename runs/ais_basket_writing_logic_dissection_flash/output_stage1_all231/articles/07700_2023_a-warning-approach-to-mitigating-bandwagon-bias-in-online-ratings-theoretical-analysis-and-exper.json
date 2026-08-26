@@ -1,0 +1,1089 @@
+{
+  "record_id": "7700",
+  "source_file": "07700_2023_a-warning-approach-to-mitigating-bandwagon-bias-in-online-ratings-theoretical-analysis-and-exper.md",
+  "title": "A Warning Approach to Mitigating Bandwagon Bias in Online Ratings: Theoretical Analysis and Experimental Investigations",
+  "authors": "Ding Wu; Xunhua Guo; Yuejun Wang; Guoqing Chen",
+  "year": "2023",
+  "journal": "Journal of the Association for Information Systems",
+  "doi": "10.17705/1jais.00817",
+  "fulltext_chars": 110517,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:51.529688+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在在线评分情境中，如何设计警告的内容（警告策略）才能既缓解从众偏差（bandwagon bias），又避免在个体初始评估不存在从众偏差时引发新的评分扭曲？",
+    "artifact_and_design_cn": "以警告信息为去偏制品，比较两种内容设计策略：直接风险警告（risk-alert/direct warning）与风险警告加排序任务（risk-alert-with-ranking-task）。核心设计差异是是否要求评分者在评分前对目标产品与可比产品进行相对偏好排序，以提供关于自身未受干扰基线评价的信息。",
+    "objective_outcomes_cn": "四个受控实验表明，直接风险警告在有偏条件下显著降低评分向显示平均分靠拢的程度，但在无偏条件下会引发额外评分扭曲；加入排序任务后的警告同样能在有偏条件下缓解从众偏差，且在无偏条件下不会产生显著额外扭曲。排序警告相比直接警告并未显著更强地去偏（H3b未获支持）。",
+    "core_contribution_cn": "作者声称提出并验证了一种针对从众偏差的警告去偏方法，识别出警告内容设计中的排名任务这一关键设计因子，并扩展了在线评分去偏框架，提供了一种事前的“改变决策者”的去偏途径。",
+    "whole_argument_in_one_paragraph_cn": "论文从在线评分存在严重偏差、而从众偏差因机制复杂且难以检测而缺乏有效去偏方案这一现实问题出发，提出用警告来帮助评分者感知偏差并自我修正。作者以灵活修正模型（FCM）说明偏差修正取决于个体关于偏差存在、方向和大小的朴素理论，进而指出常用的风险警告只提供“存在”和“方向”信息、缺少“大小”信息，因此在无偏条件下可能引发过度调整。为补足这一缺陷，作者引入行为经济学中的“连贯任意性”理论，提出排名任务可以让评分者通过相对偏好反推自身未受干扰的基线评分，从而改进偏差大小感知或增强对初始评分的信心。基于该理论翻译，作者形成四项假设，并通过一个在线主实验和三项补充实验室实验检验。结果显示，风险警告确实能减少有偏条件下的从众偏差但会造成无偏条件下的扭曲，而加入排名任务的警告既能减少有偏条件下的从众偏差又不会造成无偏条件下的扭曲。虽然排序警告相比直接警告没有显著更强的去偏力，但作者将其解释为比较项选择的信息量不足，并将“风险警告加排名任务”推荐为更安全的警告策略，最终把结果回收为对FCM、在线评分去偏框架和设计实践的贡献。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "文章以灵活修正模型和行为经济学价值理论为知识基础，推导出两种警告制品/内容设计策略的不同心理机制，并通过四个受控实验直接检验理论假设。它既不是以系统构建与设计原则表为主的设计科学论文，也不是纯计算制品benchmark，而是典型的理论推导制品差异并通过实验检验的研究。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "论证从现实问题出发，引入FCM和连贯任意性理论推导警告设计，提出假设，用受控实验检验，再在讨论中回到理论解释未支持假设并形成设计启示，形成完整的问题—理论—设计—检验—回到理论弧线。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "研究先通过一个前导实验确立“从众偏差发生/不发生”的操纵方法；随后进行一个大型在线主实验，同时检验四项假设；接着进行三项补充实验室实验S1、S2、S3作为稳健性检验，分别变换目标材料、显示平均分调整方向、比较项来源与数量、警告外观以及线上线下环境；最后在讨论中解释未获支持的H3b并形成设计启示。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "前导实验",
+        "question_cn": "如何可靠地操纵个体初始评估中从众偏差的发生与不发生？",
+        "inputs_and_setting_cn": "71名受试者参与的实验室前导实验，使用微型电影作为材料。",
+        "designed_or_compared_object_cn": "比较显示平均评分大幅偏离被试总体意见效价与接近被试实际意见效价两种情境。",
+        "baseline_control_or_counterfactual_cn": "无显示平均评分的控制情境作为未受干扰评分基线的参考。",
+        "objective_metrics": [
+          "个体评分与显示平均评分的距离（后续主实验采用DDAR）",
+          "前导阶段的偏差发生比例"
+        ],
+        "analysis_method_cn": "前导实验中的组间比较与描述性统计，验证操纵可行性。",
+        "main_result_cn": "当显示平均评分大幅偏离被试总体意见时，多数被试产生从众偏差；当显示平均评分接近其实际意见时，多数被试不产生从众偏差。",
+        "argumentative_role_cn": "为正式实验提供可复用的操纵方法，使主实验可以在“有偏”和“无偏”两种初始评估条件下分别检验警告效果。",
+        "remaining_uncertainty_cn": "前导实验样本量小，且未同时考察警告变量，未知正式实验中操纵能否稳定复现。",
+        "link_to_next_phase_cn": "将“大幅下调显示平均分诱发偏差、显示未经调整的平均分不诱发偏差”的操纵方案用于主实验。",
+        "evidence_pointers": [
+          "Method section, Pilot experiment paragraph",
+          "Manipulations paragraph under Section 4"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "主实验（在线受控实验）",
+        "question_cn": "直接风险警告和带排名任务的风险警告，在从众偏差发生和不发生的两种初始评估条件下，分别对个体评分有什么影响？",
+        "inputs_and_setting_cn": "从中国两所大学招募267名学生，最终纳入240份有效回答；通过Qualtrics在线平台开展，以Singularity为目标微型电影，以Alike、Glue、Ike Interviews God为排名任务比较项；实验日期为2021年12月和2022年1月。",
+        "designed_or_compared_object_cn": "操纵显示平均评分（下调至3.9 vs 不调整）和警告内容（无警告 vs 直接风险警告 vs 风险警告加排序任务），形成七组。",
+        "baseline_control_or_counterfactual_cn": "控制组不显示平均评分且不提供警告，作为未受干扰的评分基线；BNW/NBNW组用于验证偏差操纵；BDW/BRW组相对BNW检验去偏效果；NBDW/NBRW组相对NBNW检验副作用。",
+        "objective_metrics": [
+          "DDAR（个体评分与显示平均评分之差的绝对值）",
+          "警告内容识别操纵检验",
+          "感知加工复杂性量表",
+          "对警告的厌烦感量表"
+        ],
+        "analysis_method_cn": "序数回归模型（probit和negative log-log）、Mann-Whitney U非参数检验、t检验、交叉表分析，并控制人口统计、电影偏好、参与卷入等变量。",
+        "main_result_cn": "有偏条件下，直接警告和带排名任务警告都显著增大DDAR，支持H1和H3a；但带排名任务警告并未比直接警告更显著增大DDAR，H3b未获支持。无偏条件下，直接警告显著增大DDAR，支持H2；带排名任务警告的DDAR不显著，H4未被拒绝。",
+        "argumentative_role_cn": "主实验是整篇论证的核心证据，同时证明风险警告的双刃剑效应以及加入排名任务后能保留去偏效果并避免副作用。",
+        "remaining_uncertainty_cn": "主实验只使用一个目标影片、一种下调方向和在线环境；H3b未获支持，需要解释；需要稳健性检验。",
+        "link_to_next_phase_cn": "通过S1、S2、S3改变材料、评分方向、比较项来源与数量、实验环境，检验主结果的稳健性。",
+        "evidence_pointers": [
+          "Section 4 Experimental design and Table 3",
+          "Section 4 Procedure",
+          "Section 5 Main analyses and Table 8",
+          "Section 5 Supplementary analyses"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "补充实验S1（上调方向、记忆比较项，检验H1/H3）",
+        "question_cn": "在从众偏差发生条件下，改变目标影片、将显示平均评分向上调整、排名比较项来自被试自选记忆中的电影时，两种警告策略的效果是否仍然成立？",
+        "inputs_and_setting_cn": "134名学生参与，133份有效；目标项为Ike Interviews God，显示平均评分从7.4上调至9.2；比较项由被试从40部流行电影中自选三部和目标片一起排序；实验室环境。",
+        "designed_or_compared_object_cn": "比较控制组、BNW、BDW、BRW四组；警告外观不显示警告图标；排名任务比较项来自长期记忆。",
+        "baseline_control_or_counterfactual_cn": "控制组无平均分无警告；BNW作为有偏无警告基线；BDW和BRW相对BNW评价。",
+        "objective_metrics": [
+          "DDAR",
+          "警告内容操纵检验",
+          "感知加工复杂性与厌烦感"
+        ],
+        "analysis_method_cn": "序数回归模型、非参数检验/操纵检验。",
+        "main_result_cn": "再次支持H1和H3a，未支持H3b；直接警告与排名警告在感知加工复杂性上无显著差异。",
+        "argumentative_role_cn": "证明主实验中有偏条件下的去偏效果不是特定影片或特定下调方向造成的，且比较项来自长期记忆时排名任务仍可工作。",
+        "remaining_uncertainty_cn": "仅覆盖上调方向和有偏条件，未覆盖无偏条件。",
+        "link_to_next_phase_cn": "S2继续检验有偏条件但采用下调方向和更少比较项；S3转向无偏条件检验。",
+        "evidence_pointers": [
+          "Section 6 Table 9 row S1",
+          "Section 6 results paragraph for S1/S2",
+          "Appendix E Table E1"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "补充实验S2（下调方向、新见比较项，检验H1/H3）",
+        "question_cn": "在有偏条件下，采用另一个目标影片、下调显示平均评分、仅使用两个实验中新看过的影片作为比较项时，警告策略的效果是否稳健？",
+        "inputs_and_setting_cn": "140名学生参与，137份有效；目标项为Tamah，显示平均评分从7.6下调至4.1；比较项为Alike和Glue；实验室环境。",
+        "designed_or_compared_object_cn": "比较控制组、BNW、BDW、BRW四组；排名任务使用两个而非三个比较项。",
+        "baseline_control_or_counterfactual_cn": "控制组和BNW组分别提供无干扰基线与有偏无警告参照。",
+        "objective_metrics": [
+          "DDAR",
+          "操纵检验"
+        ],
+        "analysis_method_cn": "序数回归模型，非参数检验/操纵检验。",
+        "main_result_cn": "结果再次支持H1和H3a，未支持H3b。",
+        "argumentative_role_cn": "证明即使比较项数量减少且为实验中新遇到的两部影片，排名警告仍能有效缓解从众偏差。",
+        "remaining_uncertainty_cn": "仍只覆盖有偏条件，且未解决排名警告相比直接警告未能更强去偏的问题。",
+        "link_to_next_phase_cn": "与S1共同构成有偏条件下的稳健性证据，接下来S3检验无偏条件下的副作用。",
+        "evidence_pointers": [
+          "Section 6 Table 9 row S2",
+          "Section 6 results paragraph for S1/S2"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "补充实验S3（无偏条件，检验H2/H4）",
+        "question_cn": "在初始评估不存在从众偏差的条件下，变换目标影片并使用两个比较项时，直接警告是否仍会造成额外扭曲、排名警告是否能避免这种扭曲？",
+        "inputs_and_setting_cn": "140名学生参与，259份有效（由于使用两个目标项Leading Lady Parts和97%）；显示未经调整的预测试平均评分；比较项为Alike和Glue；实验室环境。",
+        "designed_or_compared_object_cn": "比较控制组、NBNW、NBDW、NBRW四组；两个目标影片随机呈现。",
+        "baseline_control_or_counterfactual_cn": "控制组作为无平均分无警告基线；NBNW作为无偏无警告参照；NBDW检验直接警告副作用；NBRW检验排名警告副作用。",
+        "objective_metrics": [
+          "DDAR",
+          "操纵检验"
+        ],
+        "analysis_method_cn": "序数回归模型，非参数检验/操纵检验。",
+        "main_result_cn": "再次支持H2，即直接警告在无偏条件下显著增大DDAR；H4未被拒绝，即排名警告在无偏条件下没有显著增大DDAR。",
+        "argumentative_role_cn": "证明主实验中关于无偏条件下警告副作用的结果可以推广到其他材料和双比较项情境，从而支撑“排名任务可避免副作用”的核心设计主张。",
+        "remaining_uncertainty_cn": "仍未验证真实平台中警告的长期影响、最优比较项选择算法和现场有效性。",
+        "link_to_next_phase_cn": "稳健性证据完备后，讨论部分解释H3b未获支持的原因，并把结果提升为设计启示和理论贡献。",
+        "evidence_pointers": [
+          "Section 6 Table 9 row S3",
+          "Section 6 results paragraph",
+          "Appendix E Table E1"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 在线评论系统普遍存在评分偏差并造成信任与商业智能损失。",
+      "GAP: 从众偏差是重要但缺乏有效去偏方案的评分偏差。",
+      "THEORY_INTRO: 引入灵活修正模型、行为经济学价值理论和既有警告研究。",
+      "DESIGN_FEATURE: 先分析风险警告的不足，再补充排名任务并构造带排名任务的警告策略。",
+      "STUDY_OVERVIEW: 预告四项受控实验。",
+      "RESULT: 风险警告去偏但会引发无偏条件扭曲，带排名任务警告既能去偏又不引发扭曲。",
+      "CONTRIBUTION: 提出针对从众偏差的警告去偏方案，扩展在线评分去偏研究。"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 在线评论系统是消费者沟通和商业智能的重要渠道。",
+      "PHENOMENON: 在线评分系统性偏差已被实证研究广泛证明。",
+      "PRACTICAL_STAKES: 有偏评分误导消费决策并削弱信任，平台大量投入去偏。",
+      "PRIOR_KNOWLEDGE: 在线评分去偏已有多个研究方向。",
+      "PHENOMENON: 从众偏差表现为评分被显示平均分吸引。",
+      "LIMITATION: 从众偏差机制复杂且难以检测，现有方法难以适用。",
+      "GAP: 从众偏差的缓解仍未被充分探索，缺少有效解决方案。",
+      "WHY_GAP_MATTERS: 警告方法不需要区分具体偏差机制，成本低，可做事前纠正。",
+      "LIMITATION: 警告有效性文献结论不一致，且可能造成无偏情境下的负面干扰。",
+      "GAP: 尚不知道警告能否缓解在线评分从众偏差，也不知道如何设计警告以避免副作用。",
+      "RQ_OR_OBJECTIVE: 研究警告的内容设计策略，先分析风险警告，再构建带排名任务的警告策略。",
+      "STUDY_OVERVIEW: 预告四个受控实验并报告总体贡献。"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 回顾从众偏差的实证证据及复杂机制。",
+      "GAP: 现有三类评分去偏方法对从众偏差基本不适用。",
+      "THEORY_INTRO: 引入FCM关于偏差修正的核心命题。",
+      "MECHANISM: 人们根据偏差存在、方向、大小的朴素理论进行反向调整。",
+      "MECHANISM: 感知偏差发生与否决定修正与否；实际偏差不等于感知偏差。",
+      "REQUIREMENT: 警告设计应同时考虑有偏/无偏两种初始评估条件，并提升偏差感知准确性。",
+      "THEORY_INTRO: 引入行为经济学中“连贯任意性”理论。",
+      "THEORY_PROPOSITION: 绝对产品评价易受刺激影响，但相对产品评价较稳定。",
+      "DESIGN_FEATURE: 排名任务通过相对偏好反推基线评价，可补充偏差大小信息。",
+      "MECHANISM: 当初始评分偏离推断基线时帮助识别偏差大小，当初始评分接近推断基线时增强信心以避免不必要调整。"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE: 直接警告只提示风险并告知偏差方向。",
+      "REQUIREMENT: 需要补充能提供偏差大小信息的内容设计因子。",
+      "DESIGN_FEATURE: 排名任务要求评分者按总体偏好对目标产品和几个可比产品排序，并参考既往评分。",
+      "DESIGN_FEATURE: 带排名任务的警告由风险提示语和排序任务组成。",
+      "METHOD_JUSTIFICATION: 采用受控实验而非现场实验，以隔离偏差并避免伦理经济问题。",
+      "METHOD_JUSTIFICATION: 前导实验确立偏差发生/不发生的操纵方法。",
+      "DESIGN_FEATURE: 警告用弹窗、红色背景、白字和计时器强制阅读；排名任务需完成后才能关闭。"
+    ],
+    "evaluation_moves": [
+      "STUDY_OVERVIEW: 主实验采用七组被试间设计。",
+      "BENCHMARK_OR_CONTRAST: 控制组提供无平均分无警告基线，BNW/NBNW验证操纵，BDW/BRW与NBDW/NBRW分别检验去偏与副作用。",
+      "METHOD_JUSTIFICATION: 以DDAR作为因变量，同时用于操纵检验和假设检验。",
+      "RESULT: 操纵检验证实偏差发生/不发生与警告内容识别均成功。",
+      "RESULT: 序数回归结果显示直接警告和排名警告在有偏条件下均显著提高DDAR。",
+      "RESULT: 直接警告在无偏条件下显著提高DDAR，而排名警告无显著作用。",
+      "RESULT: 排名警告相比直接警告没有显著更强的去偏效果，H3b未获支持。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: S1、S2、S3分别改变材料、方向、比较项来源与数量，结果总体一致。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 补充分析排除过度修正，并比较感知加工复杂性与厌烦感。"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT: 主结论是风险警告双刃剑，排名警告是更安全策略。",
+      "MECHANISM: H3b未获支持被解释为比较项选择未能提供足够基线信息。",
+      "CONTRIBUTION: 贡献于从众偏差去偏、在线评分去偏框架和FCM的在线评分应用。",
+      "BOUNDARY_CONDITION: 根据事前/事后与个人/情境归因两个维度给出去偏方法选择建议。",
+      "PRACTICAL_STAKES: 平台可通过浏览器插件或在评论页嵌入警告实施；推荐先AB测试。",
+      "LIMITATION_AND_FUTURE: 限制包括情境单一、比较项选择未优化、外部效度需现场验证。",
+      "CONTRIBUTION: 结论重申带排名任务的警告策略能弥补风险警告不足。"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "灵活修正模型（Flexible Correction Model, FCM）",
+      "行为经济学中的价值理论/连贯任意性（coherent arbitrariness）",
+      "警告研究中的信号检测视角与既有风险警告文献",
+      "在线评分偏差与去偏分类框架"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "FCM直接决定了要区分有偏/无偏两类条件并提出偏差存在、方向、大小的感知维度；连贯任意性直接提示用相对排序任务补足基线评价信息。研究假设与警告内容设计均由这些理论命题推导而来，并由实验直接检验，而非事后用理论解释结果。",
+    "translation_chain_cn": "FCM的“理论化修正”命题指出修正依赖于对偏差存在、方向、大小的朴素理论 → 因此警告设计应同时影响这三个感知维度 → 风险警告只能影响存在与方向，缺少大小 → 引入连贯任意性理论：绝对评价不稳定但相对评价稳定 → 让评分者执行相对排序任务可反推基线评价 → 形成带排名任务的警告，在感知到大小的情况下做更准的修正，在没有偏差时增强信心不做调整 → 实验通过有偏/无偏两类条件检验这一因果链。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "FCM认为人们根据关于偏差存在、方向、大小的朴素理论进行修正；感知到偏差就反向调整，未感知到就不调整。",
+        "mechanism_cn": "警告通过塑造感知偏差来触发修正；若感知错误，就会产生不必要的调整。",
+        "design_requirement_cn": "警告必须同时改善偏差存在、方向和大小三方面的感知，并且要避免在无偏时触发不必要的调整。",
+        "artifact_choice_cn": "用直接风险警告提示存在和方向；用排名任务补足大小信息。",
+        "evaluated_contrast_cn": "比较有偏/无偏条件下直接警告、排名警告与无警告之间的DDAR差异。",
+        "objective_result_cn": "直接警告在有偏时增大DDAR、无偏时也增大DDAR；排名警告在有偏时增大DDAR、无偏时不增大DDAR。",
+        "evidence_pointers": [
+          "Section 3.1 FCM propositions",
+          "Section 5 Table 8 Model 2 and Model 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "信号检测与既有警告研究认为风险提示会使人们更可能感知异常事件并告知方向；但直接风险内容不提供偏差大小。",
+        "mechanism_cn": "风险警告使个体更可能感知偏差存在并知道应向远离平均分方向调整，但调整幅度只能靠启发式。",
+        "design_requirement_cn": "仅使用风险警告可能导致有偏时部分去偏、无偏时过度调整。",
+        "artifact_choice_cn": "直接警告文案：提示用户常受平均分影响并请求排除干扰。",
+        "evaluated_contrast_cn": "直接警告 vs 无警告，在有偏和无偏两种操纵条件下分别检验。",
+        "objective_result_cn": "H1和H2均获支持：有偏条件显著去偏，无偏条件显著引发扭曲。",
+        "evidence_pointers": [
+          "Section 3.2 Direct warning development",
+          "Section 5 Table 8 Model 2 DW and Model 4 DW"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "连贯任意性：个体的绝对产品评价容易受无关刺激影响，但相对评价相对稳定。",
+        "mechanism_cn": "对目标产品和可比产品进行相对排序能揭示个体未受干扰的基线评价区间，从而提供偏差大小线索或在无偏时提供准确性信心。",
+        "design_requirement_cn": "在警告中增加一个相对排序任务，使评分者能够把绝对评分重新锚定到自己的相对偏好上。",
+        "artifact_choice_cn": "排名任务：呈现目标产品与几个带“我的评分”的可比产品，要求按总体偏好拖拽排序。",
+        "evaluated_contrast_cn": "带排名任务警告 vs 无警告、带排名任务警告 vs 直接警告，分别在有无偏差条件下。",
+        "objective_result_cn": "H3a获支持（优于无警告），H4未被拒绝（无异副作用）；H3b未获支持（不显著优于直接警告）。",
+        "evidence_pointers": [
+          "Section 3.3 Theory of valuations and Table 2",
+          "Section 3.4 Effects of risk-alert-with-ranking-task",
+          "Section 5 Table 8 Model 2 RW and Model 4 RW"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "FCM强调修正需要动机和能力；警告提供动机，排名任务提供能力/信息。",
+        "mechanism_cn": "当有偏时，排名任务帮助缩小基线评分范围，使个体按更准确幅度调整；当无偏时，排名任务让个体确认初始评分的合理性而不调整。",
+        "design_requirement_cn": "排名任务的比较项应与目标产品可比且携带足够个人评分信息。",
+        "artifact_choice_cn": "主实验使用三部预先评过的比较项；S1使用自选记忆影片；S2/S3使用两部新看影片。",
+        "evaluated_contrast_cn": "不同比较项来源和数量下的警告效果稳定性。",
+        "objective_result_cn": "无论比较项来自实验中新看影片还是长期记忆，排名警告均保持去偏和无副作用；但未显著优于直接警告。",
+        "evidence_pointers": [
+          "Section 6 Table 9 S1/S2/S3",
+          "Section 7.1 explanation of H3b"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "前导实验",
+      "受控在线实验",
+      "受控实验室实验",
+      "操纵检验",
+      "序数回归分析",
+      "非参数检验",
+      "感知加工成本与厌烦感测量",
+      "稳健性检验（变换材料、方向、比较项、环境）"
+    ],
+    "why_these_evaluations_cn": "作者需要同时检验警告能否去偏和是否造成新偏，因此必须区分有偏/无偏两种初始评估条件；现场环境难以隔离从众偏差并存在伦理经济问题，所以采用受控实验提高内部效度；单一实验的外部效度受限，因此又用多个补充实验变换材料、方向、比较项来源与数量，形成稳健性证据链。",
+    "benchmark_and_contrast_chain_cn": "控制组（无平均分、无警告）作为未受干扰基线；BNW/NBNW验证偏差操纵是否成功；在有偏条件下，BDW与BRW分别相对BNW检验两种警告的去偏力，BRW再相对BDW检验排名任务的增量；在无偏条件下，NBDW与NBRW分别相对NBNW检验警告的副作用；S1/S2/S3复制这些对照并变化关键边界条件。这样，从基线到操纵验证再到主假设，最后到稳健性复制，形成逐级累积的证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "H1：有偏条件下，直接警告相比无警告减少从众偏差。",
+        "evidence_cn": "主实验Model 2中DW系数显著为正；S1、S2中DW同样显著为正。",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "H2：无偏条件下，直接警告相比无警告引发额外评分扭曲。",
+        "evidence_cn": "主实验Model 4中DW系数显著为正；S3中DW显著为正。",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "H3a：有偏条件下，带排名任务的警告相比无警告减少从众偏差。",
+        "evidence_cn": "主实验Model 2中RW系数显著为正；S1、S2中RW系数显著或边际显著为正。",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "H3b：有偏条件下，带排名任务的警告相比直接警告更强去偏。",
+        "evidence_cn": "主实验中RW与DW均值差异不显著，非参数U检验不显著；S1、S2亦未发现显著差异。",
+        "status_cn": "不支持"
+      },
+      {
+        "claim_cn": "H4：无偏条件下，带排名任务的警告不会引发额外扭曲。",
+        "evidence_cn": "主实验Model 4中RW系数不显著；S3中RW系数不显著。",
+        "status_cn": "未被拒绝"
+      },
+      {
+        "claim_cn": "排名警告相比直接警告不会增加感知加工负担。",
+        "evidence_cn": "主实验中排名警告的感知加工复杂性反而略低；S1中两者无显著差异；厌烦感无显著差异。",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "未出现过度修正矫正。",
+        "evidence_cn": "BDW和BRW组的DDAR均值秩介于控制组和BNW组之间，而非超过控制组。",
+        "status_cn": "支持"
+      }
+    ],
+    "internal_validity_strategy_cn": "采用随机分组、前后测/预测试一致的材料筛选、操纵检验、不显示历史评论以排除混淆、强制阅读警告的弹出框设计、固定观看时间、序数回归控制人口统计与偏好变量，并在多个实验中保持操纵和测量流程一致。",
+    "external_validity_strategy_cn": "通过四项实验变化目标影片、评分方向（上调/下调）、比较项来源（实验新看/长期记忆）与数量（三个/两个）、警告图标有无、在线/实验室环境，来展示主要结论在不同操作化条件下的稳定性；同时在讨论中明确限制情境为微型电影评分。",
+    "what_is_not_actually_tested_cn": "没有测试真实平台部署中的警告效果；没有直接测量个体感知到的偏差大小和实际修正幅度之间的中介机制；没有优化比较项选择；没有考察长期使用后的习惯化或厌烦累积；H3b失败的解释属于推测，缺乏直接证据；外部效度受限于学生被试和电影评分情境。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出并验证了一种可操作的警告内容设计：风险警告加排名任务，在受控实验中既能显著增大有偏条件下的DDAR，又不会在无偏条件下显著改变DDAR。",
+    "artifact_claim_cn": "排名任务是警告内容设计中的关键设计因子；带排名任务的警告是比单纯风险警告更安全的去偏策略。",
+    "mechanism_claim_cn": "基于FCM，风险警告塑造偏差存在与方向感知，排名任务通过相对偏好提供关于基线评价的信息，从而改进偏差大小感知或增强无偏时的信心，最终决定是否进行修正以及修正幅度。",
+    "boundary_claim_cn": "该结论适用于在线评分中从众偏差的情境，尤其是在电影评分等受社会影响较强的领域；在无偏初始评估条件下，风险警告会产生副作用，而排名警告不会。",
+    "reusable_design_knowledge_cn": "警告去偏不应只提供风险提示，还应帮助用户获得关于自身未受干扰基线评价的信息；可通过浏览器插件或评论页内嵌方式实施；平台应根据事前/事后与个人/情境归因两个维度选择去偏方法，并用AB测试降低风险。",
+    "theoretical_contribution_cn": "将FCM从一般判断修正情境扩展到在线评分去偏；引入“连贯任意性”作为警告内容设计的理论依据；提出并界定“偏差警告方法”这一新的在线评分去偏类别，补充和完善了在线评分去偏框架。",
+    "how_discussion_closes_intro_gap_cn": "引言指出现有去偏方法因从众偏差机制复杂而难以适用，警告方法有潜力但缺乏设计指导；讨论部分用四个实验证明，经过内容设计的警告可以填补这一缺口，并指出单纯风险警告不足，需要排名任务来同时避免副作用，从而回应了引言提出的两个挑战。",
+    "overclaim_or_unsupported_leaps_cn": "H3b未获支持后，作者推测优化比较项选择可提升排名警告效果，但该推测没有实验验证；将带排名任务警告称为“有效警告策略”主要基于它与无警告相比显著去偏且在无偏条件下无副作用，而非基于它优于直接警告；文章也没有直接测量FCM所声称的“理论化修正”中介过程。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在线评论系统已成为消费者沟通与商业智能的重要数据渠道。",
+      "rhetorical_function_cn": "建立研究领域的一般背景。",
+      "depends_on_cn": "无需依赖前文。",
+      "sets_up_cn": "为引出评分偏差问题提供领域框架。",
+      "evidence_pointer": "Introduction第一段"
+    },
+    {
+      "order": 2,
+      "section": "Introduction",
+      "locator": "P1 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "在线评分存在系统性偏差，例如某零售店数据证明评分并不代表真实质量。",
+      "rhetorical_function_cn": "用经验证据说明问题真实存在。",
+      "depends_on_cn": "承接评论系统重要性。",
+      "sets_up_cn": "为之后讨论偏差后果和去偏必要做铺垫。",
+      "evidence_pointer": "Introduction P1引用Moe and Schweidel"
+    },
+    {
+      "order": 3,
+      "section": "Introduction",
+      "locator": "P1 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "有偏评分会误导消费决策并削弱信任，因此平台投入大量资源减少评分噪声。",
+      "rhetorical_function_cn": "说明问题的实践重要性。",
+      "depends_on_cn": "依赖评分偏差确实存在。",
+      "sets_up_cn": "为引出去偏研究价值做铺垫。",
+      "evidence_pointer": "Introduction P1 Amazon/Yelp例子"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "近年来在线评分去偏吸引了大量研究，包括多个研究方向。",
+      "rhetorical_function_cn": "指出已有学术关注。",
+      "depends_on_cn": "问题的重要性已被确立。",
+      "sets_up_cn": "为指出从众偏差缺口提供学术背景。",
+      "evidence_pointer": "Introduction P1末尾引用列表"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "从众偏差是让评分者把评分移向显示平均分的现象，并给出Yelp和新闻评论实验的证据。",
+      "rhetorical_function_cn": "给出本文核心现象的精确界定和严重性例证。",
+      "depends_on_cn": "承接在线评分偏差这一大问题。",
+      "sets_up_cn": "为后续将其定义为需要专门解决的偏差做铺垫。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P2 S3-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "从众偏差影响巨大且具有理论和实践重要性，但其机制复杂且很难检测。",
+      "rhetorical_function_cn": "同时给出重要性和可研究难度。",
+      "depends_on_cn": "依赖前文的实证证据。",
+      "sets_up_cn": "为说明现有方法不适用和存在缺口做铺垫。",
+      "evidence_pointer": "Introduction P2后半"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P2 S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "由于检测困难和机制复杂，从众偏差的去偏探索仍不足，缺少有效解决方法。",
+      "rhetorical_function_cn": "明确研究缺口。",
+      "depends_on_cn": "依赖对从众偏差复杂性的描述。",
+      "sets_up_cn": "为提出警告方法提供直接理由。",
+      "evidence_pointer": "Introduction P2末"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文提出用偏差警告方法缓解从众偏差。",
+      "rhetorical_function_cn": "给出文章的核心解决方案方向。",
+      "depends_on_cn": "缺口已建立。",
+      "sets_up_cn": "后续三句解释警告方法为何有希望。",
+      "evidence_pointer": "Introduction P3开头"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P3 S2-S4",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "警告方法不需要区分具体偏差机制、成本低且容易实施，并提供了事前的“改变决策者”路径。",
+      "rhetorical_function_cn": "论证为什么警告是适合填补缺口的方法。",
+      "depends_on_cn": "缺口在于机制复杂难以用现有方法处理。",
+      "sets_up_cn": "为警告研究的设计挑战做铺垫。",
+      "evidence_pointer": "Introduction P3后半"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "以往警告去偏的研究结果并不一致。",
+      "rhetorical_function_cn": "指出警告方法本身也存在不确定性。",
+      "depends_on_cn": "前面刚提出警告有潜力。",
+      "sets_up_cn": "从而引出两个关键挑战。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P4 S2-S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "尚不确定警告能否缓解在线评分从众偏差，也不确定是否会在无偏情境造成扭曲，以及如何改进警告设计。",
+      "rhetorical_function_cn": "把普遍的警告效果不一致转成本文要解决的具体研究问题。",
+      "depends_on_cn": "依赖警告研究综述。",
+      "sets_up_cn": "引出警告内容设计的研究目标。",
+      "evidence_pointer": "Introduction P4后半"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者将警告作为去偏制品，分两步探索警告内容设计策略：先分析常用风险警告，再构造补充设计因子。",
+      "rhetorical_function_cn": "把研究目标具体化为两步设计路线。",
+      "depends_on_cn": "依赖前文提出的警告挑战。",
+      "sets_up_cn": "预告理论来源与构建策略。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P5 S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "基于FCM，风险警告策略在无偏初始评估中可能引发额外评分扭曲。",
+      "rhetorical_function_cn": "引入核心理论并直接指出常用策略的缺陷。",
+      "depends_on_cn": "FCM作为前文提及的理论基础。",
+      "sets_up_cn": "为第二部分设计策略提供动机。",
+      "evidence_pointer": "Introduction P5中间"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P5 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "基于FCM和价值理论，作者提出排名任务因子并构建风险警告加排名任务的策略。",
+      "rhetorical_function_cn": "快速预告核心设计贡献。",
+      "depends_on_cn": "依赖风险警告存在缺陷的论证。",
+      "sets_up_cn": "为后文详细理论推导做预告。",
+      "evidence_pointer": "Introduction P5末"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "研究问题是有偏/无偏条件下两种警告策略相比无警告或相比彼此对个体评分有什么影响。",
+      "rhetorical_function_cn": "以正式研究问题形式收束引言。",
+      "depends_on_cn": "依赖前文所有铺垫。",
+      "sets_up_cn": "为方法部分提出假设和实验做路标。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P6 S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者进行了四个受控实验，结果支持风险警告不足和排名任务关键作用。",
+      "rhetorical_function_cn": "研究预告与初步结果声明。",
+      "depends_on_cn": "研究问题已提出。",
+      "sets_up_cn": "为全文结构和结论提供预期。",
+      "evidence_pointer": "Introduction P6末"
+    },
+    {
+      "order": 17,
+      "section": "Related Literature",
+      "locator": "Section 2.1 P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "在线评分偏差分为报告偏差和评价偏差，从众偏差属于评价偏差。",
+      "rhetorical_function_cn": "建立概念分类。",
+      "depends_on_cn": "引言已提出从众偏差。",
+      "sets_up_cn": "为比较从众偏差与其他偏差提供框架。",
+      "evidence_pointer": "Section 2.1第一段"
+    },
+    {
+      "order": 18,
+      "section": "Related Literature",
+      "locator": "Section 2.1 P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "从众偏差的来源包括锚定等认知偏差，也包括同伴压力、购后信息更新等非认知机制。",
+      "rhetorical_function_cn": "说明机制复杂性。",
+      "depends_on_cn": "概念分类已建立。",
+      "sets_up_cn": "为解释为什么现有方法难以适用提供依据。",
+      "evidence_pointer": "Section 2.1第二段"
+    },
+    {
+      "order": 19,
+      "section": "Related Literature",
+      "locator": "Section 2.1 P2后半",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "由于基线评价不可见，从众偏差难以检测，因此缓解它很重要。",
+      "rhetorical_function_cn": "指出对象本身的特性限制了客观检测。",
+      "depends_on_cn": "机制复杂性已说明。",
+      "sets_up_cn": "为去偏方法批判做铺垫。",
+      "evidence_pointer": "Section 2.1第二段末"
+    },
+    {
+      "order": 20,
+      "section": "Related Literature",
+      "locator": "Section 2.2 P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "现有评分去偏主要分为设计改变、偏差建模和评分过滤三类方法。",
+      "rhetorical_function_cn": "给出作者构造的分类框架。",
+      "depends_on_cn": "纵向整合已有研究。",
+      "sets_up_cn": "为定位警告方法的位置做准备。",
+      "evidence_pointer": "Section 2.2 Table 1"
+    },
+    {
+      "order": 21,
+      "section": "Related Literature",
+      "locator": "Section 2.2 P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这三类方法对从众偏差基本不适用，因为检测困难、建模复杂、难以事前修改环境。",
+      "rhetorical_function_cn": "批判现有方法无法处理目标偏差。",
+      "depends_on_cn": "依赖从众偏差机制复杂性的前文论述。",
+      "sets_up_cn": "为警告方法作为新类别提供必要空间。",
+      "evidence_pointer": "Section 2.2第二段"
+    },
+    {
+      "order": 22,
+      "section": "Related Literature",
+      "locator": "Section 2.2 P3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "作者提出偏差警告方法，在线平台借警告帮助用户感知偏差存在、方向和大小并自我修正。",
+      "rhetorical_function_cn": "引入本文的核心方法并定义其要素。",
+      "depends_on_cn": "已有三类方法不足。",
+      "sets_up_cn": "为设计要求和后文理论推导做铺垫。",
+      "evidence_pointer": "Section 2.2第三段"
+    },
+    {
+      "order": 23,
+      "section": "Related Literature",
+      "locator": "Section 2.3 P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "警告去偏效果不一致，有些研究发现无效甚至带来额外偏差。",
+      "rhetorical_function_cn": "说明直接照搬警告并不足够。",
+      "depends_on_cn": "前文刚提出警告方法。",
+      "sets_up_cn": "引出内容设计是重要未解问题。",
+      "evidence_pointer": "Section 2.3第二段"
+    },
+    {
+      "order": 24,
+      "section": "Related Literature",
+      "locator": "Section 2.3 P3",
+      "move_code": "GAP",
+      "paraphrase_cn": "即使警告被注意，去偏效果仍取决于内容；以往研究主要优化外观，内容设计很少被探索。",
+      "rhetorical_function_cn": "定位警告研究中的具体缺口。",
+      "depends_on_cn": "依赖警告效果不一致的综述。",
+      "sets_up_cn": "为本文聚焦内容设计做铺垫。",
+      "evidence_pointer": "Section 2.3第三段"
+    },
+    {
+      "order": 25,
+      "section": "Related Literature",
+      "locator": "Section 2.3 P4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "设计缓解从众偏差的警告需要同时满足两个要求：能减少偏差，且不会在无偏时引发扭曲。",
+      "rhetorical_function_cn": "把缺口转化为设计标准。",
+      "depends_on_cn": "依赖警告副作用文献。",
+      "sets_up_cn": "为FCM如何满足这两个要求做理论铺垫。",
+      "evidence_pointer": "Section 2.3末"
+    },
+    {
+      "order": 26,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.1 FCM核心命题段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "FCM认为人们依据关于偏差存在、方向和大小的朴素理论进行修正。",
+      "rhetorical_function_cn": "引入全文最重要的理论命题。",
+      "depends_on_cn": "要求警告改善偏差感知。",
+      "sets_up_cn": "为警告设计提供三个感知维度。",
+      "evidence_pointer": "Section 3.1第二段"
+    },
+    {
+      "order": 27,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.1 FCM机制段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "感知到偏差时向反方向调整，感知不到时保持初始评分。",
+      "rhetorical_function_cn": "说明修正过程取决于感知而非实际偏差。",
+      "depends_on_cn": "依赖朴素理论命题。",
+      "sets_up_cn": "为解释无偏条件下的副作用提供机制。",
+      "evidence_pointer": "Section 3.1第三段"
+    },
+    {
+      "order": 28,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.1 FCM启发段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "FCM给出两个启示：必须考虑无偏情况，以及应帮助用户形成更准确的偏差理论。",
+      "rhetorical_function_cn": "把理论转成设计警告的要求。",
+      "depends_on_cn": "依赖FCM机制命题。",
+      "sets_up_cn": "为直接警告和排名任务的设计选择提供依据。",
+      "evidence_pointer": "Section 3.1末段"
+    },
+    {
+      "order": 29,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.2 直接警告定义段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "直接警告提醒用户评分可能受显示平均分影响。",
+      "rhetorical_function_cn": "给出第一种警告策略的操作定义。",
+      "depends_on_cn": "FCM提出需塑造偏差存在和方向。",
+      "sets_up_cn": "为H1和H2提供对象。",
+      "evidence_pointer": "Section 3.2第一段"
+    },
+    {
+      "order": 30,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.2 信号检测段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "不管偏差是否真实发生，直接警告都让个体更可能感知偏差存在，并告知方向，但不提供大小信息。",
+      "rhetorical_function_cn": "解释直接警告如何影响FCM中的感知维度。",
+      "depends_on_cn": "依赖信号检测和FCM。",
+      "sets_up_cn": "为预测无偏条件下过度调整做铺垫。",
+      "evidence_pointer": "Section 3.2第二段"
+    },
+    {
+      "order": 31,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.2 FCM预测段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "由于修正由感知偏差驱动，有偏和无偏条件下的修正过程可能相同，因此无偏时会产生不必要调整。",
+      "rhetorical_function_cn": "用机制说明风险警告为何可能双刃剑。",
+      "depends_on_cn": "依赖感知偏差决定修正。",
+      "sets_up_cn": "直接支撑H2。",
+      "evidence_pointer": "Section 3.2第三段"
+    },
+    {
+      "order": 32,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.2 H1-H2句",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：有偏条件下直接警告比无警告减小从众偏差；H2：无偏条件下直接警告比无警告产生远离平均分的扭曲。",
+      "rhetorical_function_cn": "把理论预测转化为可检验假设。",
+      "depends_on_cn": "依赖前两段的机制推导。",
+      "sets_up_cn": "为实验设计确定首要检验对象。",
+      "evidence_pointer": "Section 3.2末尾"
+    },
+    {
+      "order": 33,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.3 排名任务引入段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为补足风险警告的信息缺陷，需要引入一个能提供个体基线评价信息的补充因子。",
+      "rhetorical_function_cn": "说明新设计因子要满足的理论条件。",
+      "depends_on_cn": "风险警告缺少大小信息。",
+      "sets_up_cn": "为引入价值理论做铺垫。",
+      "evidence_pointer": "Section 3.3第一段"
+    },
+    {
+      "order": 34,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.3 连贯任意性理论",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "个体对产品的绝对评价具有连贯任意性，易受无关刺激影响，但相对评价比较稳定。",
+      "rhetorical_function_cn": "引入第二个理论基础。",
+      "depends_on_cn": "需要找到基线评价的信息来源。",
+      "sets_up_cn": "为排名任务的设计提供原理。",
+      "evidence_pointer": "Section 3.3第二段"
+    },
+    {
+      "order": 35,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.3 排名任务定义段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "排名任务要求评分者对目标产品和几个可比产品按总体偏好排序，从而揭示未受干扰的基线评价。",
+      "rhetorical_function_cn": "把理论命题变成具体警告内容。",
+      "depends_on_cn": "依赖相对评价稳定。",
+      "sets_up_cn": "为完美案例和假设推导提供操作定义。",
+      "evidence_pointer": "Section 3.3第三段"
+    },
+    {
+      "order": 36,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.3 Table 2说明段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "理想情况下，从排序和已有评分可推断目标产品基线约为7；如果初始评分明显偏离，就能识别偏差；如果接近，就无需调整。",
+      "rhetorical_function_cn": "用具体例子说明排名任务为何能改善偏差理论。",
+      "depends_on_cn": "依赖排名任务的操作定义。",
+      "sets_up_cn": "为排名警告在两类条件下不同效果做铺垫。",
+      "evidence_pointer": "Section 3.3 Table 2前一/后一段"
+    },
+    {
+      "order": 37,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.4 排名警告效果段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "排名警告同时塑造存在、方向和大小感知；有偏时缩小基线范围，无偏时增强信心。",
+      "rhetorical_function_cn": "完整解释排名警告如何避免风险警告缺陷。",
+      "depends_on_cn": "依赖排名任务机制。",
+      "sets_up_cn": "为H3和H4提供理论基础。",
+      "evidence_pointer": "Section 3.4第一至二段"
+    },
+    {
+      "order": 38,
+      "section": "Theory and Hypotheses",
+      "locator": "Section 3.4 H3-H4句",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：有偏条件下排名警告比无警告（H3a）和比直接警告（H3b）更强去偏；H4：无偏条件下排名警告的评分与无警告相似。",
+      "rhetorical_function_cn": "把排名警告机制转化为可检验假设。",
+      "depends_on_cn": "依赖前文的机制推导。",
+      "sets_up_cn": "为七组实验设计确定假设映射。",
+      "evidence_pointer": "Section 3.4末尾"
+    },
+    {
+      "order": 39,
+      "section": "Method",
+      "locator": "Section 4 方法选择理由段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择受控实验是因为现场难分离多种偏差、现场操纵有伦理经济问题、本文聚焦内容设计潜力。",
+      "rhetorical_function_cn": "说明方法选择的原因，回应外部效度质疑。",
+      "depends_on_cn": "假设需要精确操纵有偏/无偏。",
+      "sets_up_cn": "为前导实验和主实验设计提供合法性。",
+      "evidence_pointer": "Section 4第一段"
+    },
+    {
+      "order": 40,
+      "section": "Method",
+      "locator": "Section 4 Pilot实验段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "前导实验证明：显示平均分大幅偏离总体意见时多数人产生从众偏差，接近总体意见时多数人不产生。",
+      "rhetorical_function_cn": "以经验证据支撑操纵方案。",
+      "depends_on_cn": "方法选择已完成。",
+      "sets_up_cn": "为正式实验的BNW/NBNW分组提供依据。",
+      "evidence_pointer": "Section 4 Pilot experiment段"
+    },
+    {
+      "order": 41,
+      "section": "Method",
+      "locator": "Section 4 Experimental design段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "主实验采用七组被试间设计，控制组、有偏无警告、无偏无警告、有偏直接警告、无偏直接警告、有偏排名警告、无偏排名警告。",
+      "rhetorical_function_cn": "给出实验总体结构。",
+      "depends_on_cn": "依赖前导实验操纵方案。",
+      "sets_up_cn": "为Table 3和结果部分的对照分析提供地图。",
+      "evidence_pointer": "Section 4 Experimental design，Table 3"
+    },
+    {
+      "order": 42,
+      "section": "Method",
+      "locator": "Section 4 Manipulations段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "有偏操纵将预测试平均分6.9下调至3.9，无偏操纵显示原平均分；警告分为直接警告和排名警告两类，排名警告嵌入排序任务。",
+      "rhetorical_function_cn": "具体说明核心操纵和警告内容。",
+      "depends_on_cn": "依赖前导实验结果和警告设计。",
+      "sets_up_cn": "为结果部分的操纵检验提供对象。",
+      "evidence_pointer": "Section 4 Manipulations，Table 6"
+    },
+    {
+      "order": 43,
+      "section": "Method",
+      "locator": "Section 4 Procedure段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "警告通过红色弹窗、白字和计时器强制呈现；排名任务完成后才能关闭警告。",
+      "rhetorical_function_cn": "说明警告操纵的严肃性，降低忽略警告的混淆。",
+      "depends_on_cn": "警告设计已经定义。",
+      "sets_up_cn": "为操纵成功率和结果可信度提供保障。",
+      "evidence_pointer": "Section 4 Procedure段"
+    },
+    {
+      "order": 44,
+      "section": "Results",
+      "locator": "Section 5 Dependent variable段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用DDAR（个体评分与显示平均分之差的绝对值）作为因变量，偏差发生时DDAR减小，有效去偏时DDAR增大，无偏时DDAR异常增大表示副作用。",
+      "rhetorical_function_cn": "定义统一结果指标并说明其解释规则。",
+      "depends_on_cn": "假设已定义需要检验的构念。",
+      "sets_up_cn": "为所有操纵检验和主回归模型提供测量基础。",
+      "evidence_pointer": "Section 5 Dependent variable"
+    },
+    {
+      "order": 45,
+      "section": "Results",
+      "locator": "Section 5 Manipulation checks段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "BNW组DDAR显著小于控制组，NBNW组与控制组类似，表明偏差发生与不发生操纵成功；警告内容识别检查也成功。",
+      "rhetorical_function_cn": "先验证操纵有效性，再进入主分析。",
+      "depends_on_cn": "依赖DDAR定义和操纵设计。",
+      "sets_up_cn": "使后续组间差异能被归因于警告而非操纵失败。",
+      "evidence_pointer": "Section 5 Manipulation checks，Table 7"
+    },
+    {
+      "order": 46,
+      "section": "Results",
+      "locator": "Section 5 Main analyses Model 2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "有偏条件下，直接警告和排名警告都显著增加DDAR，支持H1和H3a。",
+      "rhetorical_function_cn": "报告核心有偏条件结果。",
+      "depends_on_cn": "依赖操纵检验成功。",
+      "sets_up_cn": "为随后H3b检验提供参照。",
+      "evidence_pointer": "Section 5 Main analyses，Table 8 Model 2"
+    },
+    {
+      "order": 47,
+      "section": "Results",
+      "locator": "Section 5 Main analyses H3b部分",
+      "move_code": "RESULT",
+      "paraphrase_cn": "非参数检验显示排名警告与直接警告的DDAR分布无显著差异，因此H3b未获支持。",
+      "rhetorical_function_cn": "如实报告未支持的假设。",
+      "depends_on_cn": "依赖有偏条件下的回归结果。",
+      "sets_up_cn": "为讨论部分解释排名任务为何未更强去偏做伏笔。",
+      "evidence_pointer": "Section 5 Main analyses，Table 8后一段"
+    },
+    {
+      "order": 48,
+      "section": "Results",
+      "locator": "Section 5 Main analyses Model 4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "无偏条件下，直接警告显著增加DDAR，支持H2；排名警告不显著，H4未被拒绝。",
+      "rhetorical_function_cn": "报告核心无偏条件结果，验证双刃剑效应。",
+      "depends_on_cn": "依赖无偏操纵成功。",
+      "sets_up_cn": "为“排名警告是安全策略”提供直接支持。",
+      "evidence_pointer": "Section 5 Main analyses，Table 8 Model 4"
+    },
+    {
+      "order": 49,
+      "section": "Results",
+      "locator": "Section 5 Supplementary analyses段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "补充分析显示DDAR均值秩介于控制组和BNW组之间，说明没有过度修正；排名警告在感知加工复杂性上略低于直接警告。",
+      "rhetorical_function_cn": "排除替代解释并比较认知代价。",
+      "depends_on_cn": "依赖主实验数据。",
+      "sets_up_cn": "为讨论中拒绝“加工成本更高”解释做准备。",
+      "evidence_pointer": "Section 5 Supplementary analyses"
+    },
+    {
+      "order": 50,
+      "section": "Robustness Checks",
+      "locator": "Section 6 开段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "在主实验前还进行了多项实验室实验，作为主要发现的稳健性检验。",
+      "rhetorical_function_cn": "引出补充实验群。",
+      "depends_on_cn": "主实验结论已经建立。",
+      "sets_up_cn": "为S1-S3结果汇总提供框架。",
+      "evidence_pointer": "Section 6第一段，Table 9"
+    },
+    {
+      "order": 51,
+      "section": "Robustness Checks",
+      "locator": "Section 6 S1/S2结果段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "S1和S2尽管改变了材料、平均分调整方向、警告图标和比较项构造，仍一致支持H1和H3a，未支持H3b。",
+      "rhetorical_function_cn": "证明有偏条件下结论的稳健性。",
+      "depends_on_cn": "依赖S1/S2实验数据。",
+      "sets_up_cn": "为总讨论中的稳健性声明提供依据。",
+      "evidence_pointer": "Section 6 S1/S2结果段，Table 10"
+    },
+    {
+      "order": 52,
+      "section": "Robustness Checks",
+      "locator": "Section 6 S3结果段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "S3使用两个目标影片和两个比较项，再次支持H2和H4。",
+      "rhetorical_function_cn": "证明无偏条件下结论的稳健性。",
+      "depends_on_cn": "依赖S3实验数据。",
+      "sets_up_cn": "为讨论排名警告安全策略提供跨材料支持。",
+      "evidence_pointer": "Section 6 S3结果段，Table 10"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "Section 7.1 发现总结段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "主实验和补充实验一致表明，风险警告去偏但会造成无偏扭曲，排名警告去偏且不造成无偏扭曲。",
+      "rhetorical_function_cn": "把多个实验归纳为统一发现。",
+      "depends_on_cn": "依赖全部实验结果。",
+      "sets_up_cn": "为贡献声明提供事实基础。",
+      "evidence_pointer": "Section 7.1第一段"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "Section 7.1 H3b解释段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "排名警告未比直接警告更强去偏，可能是比较项选择没有提供足够基线信息，优化比较项选择可能改善去偏力。",
+      "rhetorical_function_cn": "解释未支持假设的原因，并将它转化为未来研究方向。",
+      "depends_on_cn": "H3b未获支持的结果。",
+      "sets_up_cn": "为局限部分和未来工作提供衔接。",
+      "evidence_pointer": "Section 7.1第二段"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "Section 7.2 研究贡献段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究贡献在于填补从众偏差事前缓解的空白，并扩展在线评分去偏框架。",
+      "rhetorical_function_cn": "把结果上升到贡献声明。",
+      "depends_on_cn": "依赖讨论中的发现总结。",
+      "sets_up_cn": "为实践建议和表11提供定位。",
+      "evidence_pointer": "Section 7.2第一段"
+    },
+    {
+      "order": 56,
+      "section": "Discussion",
+      "locator": "Section 7.2 实践建议段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "平台可采用浏览器插件或评论页内嵌警告实施；应对风险警告保持谨慎，推荐排名警告，并上线前进行AB测试。",
+      "rhetorical_function_cn": "将设计知识转化为平台可执行的建议。",
+      "depends_on_cn": "依赖研究贡献。",
+      "sets_up_cn": "为表11中不同条件下选择去偏方法提供实践语境。",
+      "evidence_pointer": "Section 7.2第二段"
+    },
+    {
+      "order": 57,
+      "section": "Discussion",
+      "locator": "Section 7.2 去偏框架表11段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "平台应根据事前/事后、个人/情境归因两个维度选择主要去偏方法，并可组合多种方法。",
+      "rhetorical_function_cn": "提供更一般的去偏决策框架，扩大贡献边界。",
+      "depends_on_cn": "依赖警告方法定位为新类别的讨论。",
+      "sets_up_cn": "说明本方法适合的条件边界。",
+      "evidence_pointer": "Section 7.2末尾，Table 11"
+    },
+    {
+      "order": 58,
+      "section": "Discussion",
+      "locator": "Section 7.3 局限段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括单一电影评分情境、比较项选择未优化、外部效度需要现场验证。",
+      "rhetorical_function_cn": "限定结论的一般化范围。",
+      "depends_on_cn": "依赖本文实验情境与H3b结果。",
+      "sets_up_cn": "为未来研究列出问题。",
+      "evidence_pointer": "Section 7.3第一至三段"
+    },
+    {
+      "order": 59,
+      "section": "Conclusion",
+      "locator": "Section 8 全文",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "从众偏差损害评分信息量，本文提出警告方法并用四个实验证明风险警告不足、排名警告有效，为未来理论和实践奠基。",
+      "rhetorical_function_cn": "以高层总结收束全文。",
+      "depends_on_cn": "依赖全部论证。",
+      "sets_up_cn": "结束论文，无后续设置。",
+      "evidence_pointer": "Section 8 Conclusion"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先用实证表明从众偏差严重但机制复杂，再逐一分析三类现有去偏方法为何不适用，最后指出警告方法虽有潜力但缺乏内容设计指导，从而把一般性“需要去偏”收缩为“警告内容应如何设计才能避免副作用”这个具体缺口。",
+    "signposting_cn": "引言用“分两步设计警告策略”预告研究路线；文献综述用三个子节分别处理偏差、去偏方法和警告制品；方法部分用Table 3直接映射到H1-H4；结果部分按有偏/无偏两个模块报告；讨论部分按发现、贡献、局限三层展开。",
+    "transition_logic_cn": "文献综述末尾以“两个挑战”承上启下；理论部分先讲FCM再讲风险警告，再以“风险警告不足”过渡到排名任务；方法部分由前导实验过渡到主实验；稳健性部分由主实验过渡到S1/S2/S3；讨论部分由结果过渡到解释H3b，再过渡到贡献和局限。",
+    "claim_evidence_rhythm_cn": "每个假设都在理论机制段之后立即以H编号形式出现；结果段先报告操纵检验，再报告主回归，再用非参数检验补充；未支持的H3b也被明确报告，随后在讨论中给出可能解释，避免让读者以为是彻底失败。",
+    "benchmark_narrative_cn": "控制组不是传统算法benchmark，而是作为“无平均分无警告”的未受干扰基线；BNW/NBNW组同时承担操纵验证和no-warning对照功能；BDW/BRW与NBDW/NBRW分别形成“去偏”与“副作用”两条对照链；S1/S2/S3通过复制这些对照并变化边界条件，使benchmark叙述从单一实验扩展到稳健性证据链。",
+    "theory_return_cn": "讨论部分在解释H3b时回到FCM的“偏差感知”机制，提出比较项信息量不足的解释；并把研究结果放入FCM和在线评分去偏框架中，说明设计效果是对预测的验证，而非一次性实验现象。",
+    "contribution_positioning_cn": "贡献定位分三层：针对从众偏差的去偏方案、新的偏差警告方法类别、平台去偏框架；每层都与引言中的缺口一一对应，并通过Table 11给出可操作的设计原则。",
+    "novelty_protection_cn": "作者把核心贡献从“警告有效”转移到“警告内容设计中的排名任务可以弥补风险警告的副作用”；通过有偏/无偏双条件让排名警告具有相对优势，未支持H3b时用比较项选择问题保护设计策略的潜在价值；用多个稳健性实验证明不是一次性结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实证据建立重要但难解决的偏差问题，并说明现有方法为何无法覆盖。",
+        "research_job_cn": "收集目标偏差的机制复杂性和现有去偏方法适用性的文献证据。",
+        "required_evidence_cn": "目标偏差有实证严重性，且至少三类现有方法存在明确适用性缺陷。",
+        "transition_to_next_cn": "因此需要一种不依赖精确机制建模的新方法，例如警告。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "将该偏差拆成“发生”和“不发生”两类初始条件，并指出新方法可能产生的副作用。",
+        "research_job_cn": "从理论或文献中找到偏差感知与实际偏差不一致的机制。",
+        "required_evidence_cn": "有理论预测无偏条件下方法会产生副作用，或有文献报告类似副作用。",
+        "transition_to_next_cn": "因此设计时必须同时考虑去偏力和避免副作用两个要求。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "引入一个能说明偏差修正机制的总体理论，并把机制转成可设计的内容因子。",
+        "research_job_cn": "选择适用理论，并提取存在/方向/大小等可操作维度。",
+        "required_evidence_cn": "理论能够解释现象并指出需要被影响的构念。",
+        "transition_to_next_cn": "常用设计只影响部分维度，因此需要第二个知识基础来补足剩余维度。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "用第二个理论推导新的内容设计因子，并通过示例说明该因子如何提供缺失信息。",
+        "research_job_cn": "设计具体可执行的任务或信息呈现方式，并检验其在理论上能补足信息。",
+        "required_evidence_cn": "该因子至少存在一个说得通的因果路径，能改善偏差大小感知或增强无偏信心。",
+        "transition_to_next_cn": "将新因子与原策略组合成完整策略，并形成假设。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "用受控实验同时检验有偏和无偏两条路径，设计多个组别分别对应无警告、原策略、新策略。",
+        "research_job_cn": "招募被试、选择材料、前导实验验证操纵，并做操纵检验。",
+        "required_evidence_cn": "操纵检验通过；至少一个组别差异能支持核心假设。",
+        "transition_to_next_cn": "单一实验需要稳健性复制，因此进入变化边界条件的补充实验。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "报告补充实验如何变化材料、方向、比较项、环境并保持结论一致。",
+        "research_job_cn": "运行若干补充实验，每次改变一个或几个边界条件。",
+        "required_evidence_cn": "补充实验在核心假设上有稳定方向，即使某个比较性假设未获支持也要说明。",
+        "transition_to_next_cn": "结果稳定后，进入讨论解释未支持假设和边界条件。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "把结果返回理论，解释未支持假设的可能原因，并提炼可复用设计建议与边界条件。",
+        "research_job_cn": "对照理论机制检查结果，识别未被直接检验的中介环节，列出未来研究。",
+        "required_evidence_cn": "讨论中的解释有数据或文献支持，或明确标注为推测；贡献声明与引言缺口对应。",
+        "transition_to_next_cn": "以结论段总结完整论证链。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用二分类条件（有偏/无偏）构造设计评价框架，同时检验有效性和副作用",
+      "先用常用策略作为起点，再理论化其缺陷，从而自然引出新设计因子",
+      "把核心理论命题转成设计要求和具体任务，例如排名任务",
+      "通过前导实验验证操纵方法后再进入正式实验",
+      "用多个补充实验变化材料、方向和环境，使结论不被解释为一次性结果",
+      "未支持假设时给出机制解释并转化为未来研究"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "四个受控实验需要大量被试招募和在线/实验室实验组织",
+      "微型电影材料的筛选、预测试评分和评级数据收集需要前期投入",
+      "前导实验与正式实验多轮运行增加时间和成本",
+      "专门设计的警告弹窗和排名任务界面需要实验平台支持"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“增加排名任务”却不说明它如何提供理论上的信息增益",
+      "不能省略无偏对照组，否则无法证明副作用风险已被解决",
+      "不能在没有操纵检验的情况下宣称偏差发生/不发生",
+      "不能把H3b未支持解释为设计成功，必须有机制或证据说明为什么",
+      "不能把受控实验结论直接等同于平台现场有效性，除非有现场验证"
+    ],
+    "single_best_description_of_the_routine_cn": "先把一个难以纠正的偏差拆成有偏/无偏两种情形，再用心理学理论推导出一种能补足既有方案缺陷的内容设计因子，最后通过多轮对照实验证明它既能去偏又不制造新偏，并把这套逻辑写成可复用的防偏设计建议。"
+  },
+  "confidence": 0.86,
+  "limitations_cn": "文章为完整文本，但附录B、C、F等含图表，部分图像内容未逐字转录；位置证据主要基于章节段落与表号，而非精确页眉页码。H3b未获支持的解释属于作者推测，本文分析已将其标记为未直接检验。",
+  "usage": {
+    "prompt_tokens": 32744,
+    "completion_tokens": 24600,
+    "total_tokens": 57344,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 32744
+  }
+}

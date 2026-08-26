@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-0029723725"
+title: "The chaining approach for software test data generation"
+authors: "Ferguson R.; Korel B."
+year: "1996"
+journal: "ACM Transactions on Software Engineering and Methodology"
+doi: "10.1145/226155.226158"
+---
+# Scopus title-abstract-keyword metadata
+Title: The chaining approach for software test data generation
+Abstract: Software testing is very labor intensive and expensive and accounts for a significant portion of software system development cost. If the testing process could be automated, the cost of developing software could be significantly reduced. Test data generation in program testing is the process of identifying a set of test data that satisfies a selected testing criterion, such as statement coverage and branch coverage. In this article we present a chaining approach for automated software test data generation which builds on the current theory of execution-oriented test data generation. In the chaining approach, test data are derived based on the actual execution of the program under test. For many programs, the execution of the selected statement may require prior execution of some other statements. The existing methods of test data generation may not efficiently generate test data for these types of programs because they only use control flow information of a program during the search process. The chaining approach uses data dependence analysis to guide the search process, i.e., data dependence analysis automatically identifies statements that affect the execution of the selected statement. The chaining approach uses these statements to form a sequence of statements that is to be executed prior to the execution of the selected statement. The experiments have shown that the chaining approach may significantly improve the chances of finding test data as compared to the existing methods of automated test data generation. © 1996 ACM.
+Author keywords: D.2.5 [Software Engineering]: Testing and Debugging - test data generation; Data dependency; Dynamic analysis; Experimentation; Heuristics; Measurement; Performance; Program execution
+Index keywords: Computer software; Computer software selection and evaluation; Data reduction; Heuristic programming; Performance; Software engineering; Chaining approach; Data dependency; Dynamic analysis; Program execution; Software test data generation; Program debugging
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Software Engineering and Methodology
+Year: 1996
+EID: 2-s2.0-0029723725
+DOI: 10.1145/226155.226158
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

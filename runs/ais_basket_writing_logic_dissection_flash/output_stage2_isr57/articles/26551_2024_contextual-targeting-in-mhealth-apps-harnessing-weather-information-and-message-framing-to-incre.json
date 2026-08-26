@@ -1,0 +1,1266 @@
+{
+  "record_id": "26551",
+  "source_file": "26551_2024_contextual-targeting-in-mhealth-apps-harnessing-weather-information-and-message-framing-to-incre.md",
+  "title": "Contextual Targeting in mHealth Apps: Harnessing Weather Information and Message Framing to Increase Physical Activity",
+  "authors": "Nakyung Kyung; Jason Chan; Sanghee Lim; Byungtae Lee",
+  "year": "2024",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2020.0119",
+  "fulltext_chars": 101304,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "healthcare_and_care",
+  "stage": "isr_micro",
+  "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+  "prompt_fingerprint": "8c6c7f01ed07488b679bb551a4b5a1b2a1d4c366f500bf896d100d299a33f8e2",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T07:07:48.948005+00:00",
+  "verified_macro_scaffold_cn": "全文按“公共健康问题—mHealth干预不足—天气情境缺口—营销情境定向的可借鉴与不可照搬—两种对立情绪理论—研究目标—三现场实验—机制与异质性—讨论贡献”推进。引言用五步收缩缺口：先由WHO数据建立久坐危机的紧迫性；再到mHealth技术虽多但效果不持久、对弱势群体差；再聚焦到被忽略的天气情境；随后指出营销领域虽有天气定向但健康消息机制不同；最后叠加情绪一致性与情绪作为资源两种相反理论预测。技术实现层面，作者与合作活动追踪应用获取用户GPS与实时云量，把理论转化为增益/损失/中性三条推送消息。证据链上，Study 1用组间实验证明框架消息优于中性；Study 2用组内实验识别晴天损失、阴天增益的最优搭配；稳健性检验和干预后DID证明效果稳健并延续至少6天；Study 3用55天四期重复实验证明可重复使用；机制分析用工具性与消费性动机调和两种理论；公园可达性排除社会影响；运动水平与收入分层显示策略对低运动、低收入人群更有效。讨论部分把结果回接到引言缺口，依次完成mHealth可持续贡献、心理学理论调和、实践设计指南和边界限制。",
+  "abstract_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Abstract P1 S1",
+      "paraphrase_cn": "本文研究如何利用移动技术获取的实时天气信息增强移动干预对用户健康行为的促进作用。",
+      "move_code": "OPENING_THEME",
+      "statement_status": "author_inference",
+      "why_here_cn": "在摘要开头直接给出研究主题，让读者立即知道核心变量是实时天气与移动健康干预。",
+      "inherits_from_previous_cn": "无",
+      "changes_argument_state_cn": "定义了全文的问题域：移动技术+天气信息+健康行为。",
+      "sets_up_next_cn": "为后续的实验设计和结果预设备了关键词。",
+      "failure_if_removed_cn": "读者无从知道论文在做什么。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "locator": "Abstract P1 S2-S3",
+      "paraphrase_cn": "通过现场实验让同一参与者在两个治疗期经历不同天气并接受增益或损失干预，发现增益/损失干预在晴天与阴天的效果并不均匀分布。",
+      "move_code": "METHOD_AND_CORE_FINDING_FRAME",
+      "statement_status": "empirical_result",
+      "why_here_cn": "一句话交代研究设计类型（现场实验、组内两次治疗期）和基本结论形态（效果不均匀）。",
+      "inherits_from_previous_cn": "承接首句的“实时天气信息与移动干预”。",
+      "changes_argument_state_cn": "把主题宣告转化为可验证的实证设计说明。",
+      "sets_up_next_cn": "为下一句给出晴天/阴天的具体方向差异做铺垫。",
+      "failure_if_removed_cn": "缺少研究设计和总体结论，摘要只剩空洞主题。",
+      "evidence_pointer": "Abstract P1 S2-S3"
+    },
+    {
+      "order": 3,
+      "locator": "Abstract P1 S4",
+      "paraphrase_cn": "晴天时损失框架比增益框架更有利于完成运动目标，阴天时增益框架比损失框架更有效。",
+      "move_code": "CORE_RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "摘要必须给出最有信息量的一行核心结果，这是全文最重要的实证发现。",
+      "inherits_from_previous_cn": "继承“效果不均匀分布”的判断，把不均匀具体化为方向和条件。",
+      "changes_argument_state_cn": "回答最优搭配问题：晴天损失、阴天增益。",
+      "sets_up_next_cn": "需要机制、可重复性和异质性证据来支撑该发现不是偶然。",
+      "failure_if_removed_cn": "摘要失去唯一的核心答案。",
+      "evidence_pointer": "Abstract P1 S4"
+    },
+    {
+      "order": 4,
+      "locator": "Abstract P1 S5",
+      "paraphrase_cn": "提供了揭示底层机制的实证证据并排除了替代解释。",
+      "move_code": "MECHANISM_AND_ALTERNATIVE_ELIMINATION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "让核心结果从“相关/行为规律”升级为“有机制解释的可信结论”。",
+      "inherits_from_previous_cn": "核心结果本身需要解释。",
+      "changes_argument_state_cn": "引入机制证据维度，摘要不再只是结果报告。",
+      "sets_up_next_cn": "为贡献声明中的理论调和提供证据基础。",
+      "failure_if_removed_cn": "核心结果看起来只是偶然行为差异。",
+      "evidence_pointer": "Abstract P1 S5"
+    },
+    {
+      "order": 5,
+      "locator": "Abstract P1 S6",
+      "paraphrase_cn": "后续实验显示基于天气的干预可以随时间重复使用而不失效。",
+      "move_code": "SUSTAINABILITY_RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "回应mHealth文献对干预可持续性的批评，是论文区别于单次实验的关键卖点。",
+      "inherits_from_previous_cn": "建立在核心搭配已被识别的基础上。",
+      "changes_argument_state_cn": "把研究从“短期有效”推进到“长期可用”。",
+      "sets_up_next_cn": "为实践贡献和可持续mHealth主张做准备。",
+      "failure_if_removed_cn": "论文无法回应“干预停止后效果消失”的文献缺口。",
+      "evidence_pointer": "Abstract P1 S6"
+    },
+    {
+      "order": 6,
+      "locator": "Abstract P1 S7",
+      "paraphrase_cn": "结果还表明该效应在低运动水平者和低收入地区居民中更明显。",
+      "move_code": "HETEROGENEITY_RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "把结果与健康公平挂钩，说明策略对风险人群更有效。",
+      "inherits_from_previous_cn": "核心与可持续结果已经成立。",
+      "changes_argument_state_cn": "添加“对谁有效”的边界和异质性信息。",
+      "sets_up_next_cn": "为讨论部分的健康差距贡献提供摘要级证据。",
+      "failure_if_removed_cn": "摘要缺少公平性维度，贡献会显得工具性。",
+      "evidence_pointer": "Abstract P1 S7"
+    },
+    {
+      "order": 7,
+      "locator": "Abstract P1 S8",
+      "paraphrase_cn": "本研究为学者、医疗企业和政策制定者提供了使用基于天气的消息策略提升身体活动的理论指导与实践启示。",
+      "move_code": "CONTRIBUTION_CLOSING",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "摘要以受众和用途结束，声明研究的理论和实践价值。",
+      "inherits_from_previous_cn": "综合全部实证结果后进行价值归位。",
+      "changes_argument_state_cn": "把证据转化为对三类受众的可行动启示。",
+      "sets_up_next_cn": "读者被引导进入正文去检验这些价值是否兑现。",
+      "failure_if_removed_cn": "摘要停在结果层面，缺乏论文存在的意义声明。",
+      "evidence_pointer": "Abstract P1 S8"
+    }
+  ],
+  "introduction_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Introduction P1 S1-S4",
+      "paraphrase_cn": "发达国家多数成年人久坐，WHO称多达85%的人久坐；身体不活动每年关联约200万死亡，并增加心血管病、糖尿病、癌症等风险，因此亟需能够教育和激励人们多运动的健康方案。",
+      "move_code": "OPENING_WITH_PUBLIC_HEALTH_CRISIS",
+      "statement_status": "fact",
+      "why_here_cn": "用流行病学数据建立现实问题的规模和紧迫性，给全文一个公共健康理由。",
+      "inherits_from_previous_cn": "无",
+      "changes_argument_state_cn": "确立了研究的现实重要性，使后文的技术和理论讨论都有意义。",
+      "sets_up_next_cn": "引出mHealth作为潜在解决方案。",
+      "failure_if_removed_cn": "全文缺少现实动机，会被视为纯机制实验。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 2,
+      "locator": "Introduction P2 S1-S6",
+      "paraphrase_cn": "健康IT文献已经尝试可视化、社会比较、社会支持、绩效反馈、经济激励和目标设定等多种mHealth技术，但结果混杂；一篇元分析显示现有效果应用难以长期提升日均步数，干预一旦移除效果就消失，且对低收入等弱势群体效果差，因此学界呼吁更精细、个性化的可持续策略。",
+      "move_code": "PRIOR_WORK_AND_BROAD_GAP",
+      "statement_status": "prior_literature",
+      "why_here_cn": "建立已有干预的不足和持续呼吁，为后文提出“未被考虑的情境因素”提供文献背景。",
+      "inherits_from_previous_cn": "承接第一段的健康危机，说明为什么需要干预研究。",
+      "changes_argument_state_cn": "从“问题严重”推进到“现有方案不够”。",
+      "sets_up_next_cn": "需要找到mHealth失败的具体原因之一，即天气情境的缺失。",
+      "failure_if_removed_cn": "没有“现有不足”，后文的所有贡献无从对标。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 3,
+      "locator": "Introduction P3 S1-S4",
+      "paraphrase_cn": "细看现有干预会发现它们忽略了影响运动决策的情境因素；天气是影响户外运动的基础且被充分记录的变量，对无室内健身房资源的低收入群体影响尤其大；天气还会直接影响情绪，消极情绪降低执行运动这类费力任务的能力；因此忽略天气是健康IT文献中明显且紧迫的缺口。",
+      "move_code": "FOCUSED_GAP_WEATHER",
+      "statement_status": "prior_literature",
+      "why_here_cn": "把宽泛的mHealth不足收窄到一个具体、可操作、有理论支撑的缺口：天气情境。",
+      "inherits_from_previous_cn": "依赖第二段“需要更精细策略”的结论。",
+      "changes_argument_state_cn": "从“现有干预普遍不足”推进到“缺乏天气情境正是问题”。",
+      "sets_up_next_cn": "为第四段引入营销领域已有天气定向做对照。",
+      "failure_if_removed_cn": "论文会失去与“情境定向”最直接的研究缺口。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 4,
+      "locator": "Introduction P4 S1-S3",
+      "paraphrase_cn": "营销领域近年大量使用情境定向，依赖静态位置、购物路径、时段和天气来促进购买；其中Li等证明天气能增强广告文案效果，但这类基于天气的设计在健康IT应用中仍然稀缺。",
+      "move_code": "NEAR_DOMAIN_CONTEXT",
+      "statement_status": "prior_literature",
+      "why_here_cn": "说明天气定向在邻近领域已经成功，使研究“并非无中生有”。",
+      "inherits_from_previous_cn": "承接天气缺口，给出一个看似可借鉴的先例。",
+      "changes_argument_state_cn": "引入“技术可行且已被营销验证”的事实，制造转移的诱惑。",
+      "sets_up_next_cn": "为下一段指出为什么不能直接照搬到健康领域制造张力。",
+      "failure_if_removed_cn": "读者会质疑为什么还需要一篇新的天气研究。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 5,
+      "locator": "Introduction P5 S1-S6",
+      "paraphrase_cn": "但把天气整合进mHealth并不直接，因为健康消息与营销消息的机制不同：运动有即时成本换取延迟回报，个体存在自我控制问题；运动还需要时间和体力资源而不仅是货币；因此购买行为与运动决策的底层机制很可能不同，营销天气策略未必适用于健康场景。",
+      "move_code": "PRACTICAL_THEORY_DIFFERENCE",
+      "statement_status": "author_inference",
+      "why_here_cn": "防止研究被看作营销天气定向的简单复制，论证健康场景需要独立研究。",
+      "inherits_from_previous_cn": "基于营销天气定向的成功证据。",
+      "changes_argument_state_cn": "建立“不可直接移植”的理论和实践理由。",
+      "sets_up_next_cn": "为第六段加入亚群差异和第七、八段的理论冲突做铺垫。",
+      "failure_if_removed_cn": "论文的novelty保护会失效，贡献变成琐碎应用。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 6,
+      "locator": "Introduction P6 S1-S3",
+      "paraphrase_cn": "其次，任何干预策略设计都要考虑对用户亚群的相对影响；营销的目标是利润最大化，而mHealth目标是个人和公共健康；因此在mHealth中低收入和低运动水平亚群的效果是重要的调节因素，这通常与营销设计无关。",
+      "move_code": "EQUITY_SUBGROUP_NEED",
+      "statement_status": "author_inference",
+      "why_here_cn": "增加“对谁有效”和健康公平维度，为后文异质性分析埋下伏笔。",
+      "inherits_from_previous_cn": "延续健康与应用目标不同的论证。",
+      "changes_argument_state_cn": "把研究要求从“是否有效”扩展到“是否对不同亚群公平有效”。",
+      "sets_up_next_cn": "为讨论中的健康差距贡献和异质性结果提供问题依据。",
+      "failure_if_removed_cn": "异质性分析会显得额外，健康公平贡献失去根基。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 7,
+      "locator": "Introduction P7 S1-S4",
+      "paraphrase_cn": "理论上，情绪一致性视角认为情绪状态促进记忆中一致信息的提取，因此积极情绪（晴天）下增益框架更有效，消极情绪（阴天）下损失框架更有效。",
+      "move_code": "THEORY_ONE_MOOD_CONGRUITY",
+      "statement_status": "theory_claim",
+      "why_here_cn": "引入第一种竞争理论，建立“晴天增益/阴天损失”的预测。",
+      "inherits_from_previous_cn": "依赖天气影响情绪的已建立前提。",
+      "changes_argument_state_cn": "给出一个看似合理但可能与健康情境不符的理论预期。",
+      "sets_up_next_cn": "为第八段引入相反的“情绪作为资源”预测制造冲突。",
+      "failure_if_removed_cn": "理论对立不复存在，研究失去张力。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 8,
+      "locator": "Introduction P8 S1-S4",
+      "paraphrase_cn": "相反，情绪作为资源观点认为积极情绪是抵御负面信息情绪成本的缓冲，因此积极情绪者更能处理损失框架；消极情绪者缺乏这种资源，会对损失框架产生防御，这时增益框架更有效。",
+      "move_code": "THEORY_TWO_MOOD_AS_RESOURCE",
+      "statement_status": "theory_claim",
+      "why_here_cn": "引入第二种竞争理论，形成相反预测：晴天损失、阴天增益。",
+      "inherits_from_previous_cn": "与情绪一致性观点构成正反预期。",
+      "changes_argument_state_cn": "把理论从单边推向冲突，使实证研究成为必要。",
+      "sets_up_next_cn": "为研究目标和三实验设计提供直接理由。",
+      "failure_if_removed_cn": "没有理论冲突，现场实验不过是描述性对比。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 9,
+      "locator": "Introduction P9 S1-S6",
+      "paraphrase_cn": "回应上述缺口，本文旨在实证识别最优天气与消息框架组合以随时间促进身体活动，同时评估对异质用户的效果；为此设计并评估考虑用户实时天气的mHealth消息，开展三个现场实验：组间实验先验证框架消息是否优于中性，组内实验研究不同天气下的最优框架，第三个实验检验重复使用是否有效；与合作活动追踪应用合作并随机分配增益/损失消息。",
+      "move_code": "RESEARCH_OBJECTIVE_AND_DESIGN",
+      "statement_status": "method_decision",
+      "why_here_cn": "把理论冲突转化为可检验的研究目标与三阶段设计。",
+      "inherits_from_previous_cn": "来自第七、八段的理论对立和第六段的亚群要求。",
+      "changes_argument_state_cn": "从“不知道该怎么办”进入“我们打算怎么做”。",
+      "sets_up_next_cn": "为第十段的结果预告提供目录。",
+      "failure_if_removed_cn": "研究缺乏明确问题和设计路线，后文无从组织。",
+      "evidence_pointer": "Introduction P9"
+    },
+    {
+      "order": 10,
+      "locator": "Introduction P10 S1-S6",
+      "paraphrase_cn": "基本结果显示任意框架消息都优于中性；组内实验支持情绪作为资源：晴天损失比增益更有效、阴天增益比损失更有效；后续实验在55天四次重复后仍有效；稳健性检验均支持；机制上该效应在工具性动机用户中尤其明显，消费性动机用户中不明显；低运动水平与低收入地区用户效果更强。",
+      "move_code": "RESULT_PREVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "在引言阶段给读者完整的结果路线图，相当于全文摘要的扩展。",
+      "inherits_from_previous_cn": "基于第九段的三实验设计。",
+      "changes_argument_state_cn": "把研究问题转化为已有答案，并预告证据结构。",
+      "sets_up_next_cn": "为三个贡献段落提供具体的实证锚点。",
+      "failure_if_removed_cn": "引言会只提出问题而不展示价值，读者缺乏阅读动力。",
+      "evidence_pointer": "Introduction P10"
+    },
+    {
+      "order": 11,
+      "locator": "Introduction P11 S1-S6",
+      "paraphrase_cn": "第一项贡献是回应mHealth可持续性的呼吁；市场已增长到530亿美元，但现有mHealth设计未考虑天气与最优消息的搭配，情境定向也主要限于营销；本文用随机现场实验填补该缺口，展示低成本天气线索带来的可持续、可重复使用设计。",
+      "move_code": "CONTRIBUTION_1_MHEALTH",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把第一项贡献直接挂在第二段的“可持续mHealth”缺口上。",
+      "inherits_from_previous_cn": "依赖第十段结果特别是重复实验的证据。",
+      "changes_argument_state_cn": "明确本文在健康IT文献中的定位。",
+      "sets_up_next_cn": "让读者期待下一段的心理学理论贡献。",
+      "failure_if_removed_cn": "健康IT方向贡献缺失。",
+      "evidence_pointer": "Introduction P11"
+    },
+    {
+      "order": 12,
+      "locator": "Introduction P12 S1-S4",
+      "paraphrase_cn": "第二项贡献是心理学理论贡献：澄清并调和情绪一致性与情绪作为资源两种视角，指出各自成立的条件，从而为健康和非健康场景的情境定向提供更精确的知识。",
+      "move_code": "CONTRIBUTION_2_THEORY",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把应用结果提升为理论贡献，满足ISR的理论要求。",
+      "inherits_from_previous_cn": "基于机制分析中动机分样本的结果。",
+      "changes_argument_state_cn": "从“找到了策略”上升到“调和了理论”。",
+      "sets_up_next_cn": "为讨论部分的心理学贡献铺设目标。",
+      "failure_if_removed_cn": "论文会缺少理论抽象层次。",
+      "evidence_pointer": "Introduction P12"
+    },
+    {
+      "order": 13,
+      "locator": "Introduction P13 S1-S5",
+      "paraphrase_cn": "第三项贡献是实践贡献：展示如何在mHealth应用中有效利用实时天气信息，证明概念可行性以支持应用开发者的投资决策，提供消息匹配设计指南，并说明该设计对风险人群有效、不会扩大健康差距。",
+      "move_code": "CONTRIBUTION_3_PRACTICE",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "用实践价值收尾，使学术贡献与产业、公共政策连接。",
+      "inherits_from_previous_cn": "依赖异质性分析（低收入、低运动更有效）的结果。",
+      "changes_argument_state_cn": "把证据转化为设计指南和公平性承诺。",
+      "sets_up_next_cn": "全文引言闭环，正文用证据兑现这些贡献。",
+      "failure_if_removed_cn": "实践端贡献和公平性卖点缺失。",
+      "evidence_pointer": "Introduction P13"
+    }
+  ],
+  "introduction_paragraph_map": [
+    {
+      "locator": "Introduction P1",
+      "opening_move_cn": "用WHO与流行病学数字开启公共健康危机。",
+      "development_move_cn": "列举久坐导致的死亡与疾病负担。",
+      "pivot_move_cn": "从问题陈述转向“亟需健康解决方案”。",
+      "closing_move_cn": "把议题引向能够教育和激励运动的健康方案。",
+      "paragraph_job_cn": "建立全文的现实重要性和研究动机。"
+    },
+    {
+      "locator": "Introduction P2",
+      "opening_move_cn": "以文献综述式列举mHealth已有干预技术。",
+      "development_move_cn": "用元分析指出干预效果有限且不持久。",
+      "pivot_move_cn": "从“技术众多”转向“缺乏个性化可持续策略”。",
+      "closing_move_cn": "引出对更精细个性化策略的呼吁。",
+      "paragraph_job_cn": "建立mHealth领域的普遍缺口，为后续具体缺口定位。"
+    },
+    {
+      "locator": "Introduction P3",
+      "opening_move_cn": "以“细看”开启对现有干预共同缺陷的诊断。",
+      "development_move_cn": "论证天气是影响户外运动且被低估的情境变量。",
+      "pivot_move_cn": "从“运动能力”转向“天气还会影响情绪”。",
+      "closing_move_cn": "宣布忽略天气是健康IT研究中的明显缺口。",
+      "paragraph_job_cn": "把宽泛的mHealth不足收缩到天气情境这一具体研究缺口。"
+    },
+    {
+      "locator": "Introduction P4",
+      "opening_move_cn": "引入营销领域的情境定向技术。",
+      "development_move_cn": "列举位置、路径、时段和天气等情境线索的应用。",
+      "pivot_move_cn": "聚焦到Li等用天气增强广告效果的证据。",
+      "closing_move_cn": "指出天气设计在健康IT中尚稀缺。",
+      "paragraph_job_cn": "给出一个“看似可借鉴”的近邻领域的成熟技术。"
+    },
+    {
+      "locator": "Introduction P5",
+      "opening_move_cn": "以“不是简单任务”发起反驳。",
+      "development_move_cn": "比较健康消息与营销消息在即时满足、自我控制和所需资源上的差异。",
+      "pivot_move_cn": "从具体差异转向“机制不同”。",
+      "closing_move_cn": "得出营销天气策略未必适用于健康的结论。",
+      "paragraph_job_cn": "消除“复制营销成果即可”的替代路径，强调需要专门研究。"
+    },
+    {
+      "locator": "Introduction P6",
+      "opening_move_cn": "以“第二”开启对亚群效应的讨论。",
+      "development_move_cn": "对比营销利润目标与mHealth健康目标。",
+      "pivot_move_cn": "指出低收入、低运动人群的效果是mHealth特有调节因素。",
+      "closing_move_cn": "暗示论文会关注异质性。",
+      "paragraph_job_cn": "把健康公平维度纳入研究要求，为异质性分析铺路。"
+    },
+    {
+      "locator": "Introduction P7",
+      "opening_move_cn": "以“理论上的模糊性”开启新段落。",
+      "development_move_cn": "阐述情绪一致性视角及其机制。",
+      "pivot_move_cn": "从机制转向预测：晴天增益、阴天损失。",
+      "closing_move_cn": "给出第一种理论预测。",
+      "paragraph_job_cn": "建立竞争理论中的一方。"
+    },
+    {
+      "locator": "Introduction P8",
+      "opening_move_cn": "以“相反”开启对立理论。",
+      "development_move_cn": "阐述情绪作为资源的心理缓冲机制。",
+      "pivot_move_cn": "从机制转向预测：晴天损失、阴天增益。",
+      "closing_move_cn": "点明两个理论冲突导致定位不明确。",
+      "paragraph_job_cn": "建立竞争理论中的另一方，制造理论张力。"
+    },
+    {
+      "locator": "Introduction P9",
+      "opening_move_cn": "以“回应此前缺口”承接理论冲突。",
+      "development_move_cn": "把研究问题拆成最优组合与异质性两大目标。",
+      "pivot_move_cn": "从目标转向具体三实验设计。",
+      "closing_move_cn": "交代与活动追踪应用合作的实证载体。",
+      "paragraph_job_cn": "把理论冲突转化为可执行的研究路线图。"
+    },
+    {
+      "locator": "Introduction P10",
+      "opening_move_cn": "以“基本结果”开始结果预告。",
+      "development_move_cn": "依次报告框架有效性、最优搭配、重复使用、稳健性和机制。",
+      "pivot_move_cn": "从总体结果转向异质性结果。",
+      "closing_move_cn": "以低运动、低收入人群更有效收束。",
+      "paragraph_job_cn": "用一句话预览全文证据结构，让读者带着答案进入正文。"
+    },
+    {
+      "locator": "Introduction P11",
+      "opening_move_cn": "以“我们旨在贡献”开启贡献列表。",
+      "development_move_cn": "把贡献挂到可持续mHealth和情境定向缺口的回应上。",
+      "pivot_move_cn": "从市场背景转到本文的填补方式。",
+      "closing_move_cn": "点明低成本天气线索与可重复性。",
+      "paragraph_job_cn": "声明健康IT领域的应用性贡献。"
+    },
+    {
+      "locator": "Introduction P12",
+      "opening_move_cn": "以“第二，理论贡献”开始。",
+      "development_move_cn": "强调此前无人说明两种情绪理论各自成立的条件。",
+      "pivot_move_cn": "从心理学文献的未解之谜转到本文的调和方案。",
+      "closing_move_cn": "说明调和产生更精确的情境定向知识。",
+      "paragraph_job_cn": "声明心理学理论层面的贡献。"
+    },
+    {
+      "locator": "Introduction P13",
+      "opening_move_cn": "以“最后，实践贡献”开始。",
+      "development_move_cn": "面向应用开发者、设计者和政策制定者给出可行动价值。",
+      "pivot_move_cn": "从可行性转向成本节省和健康公平。",
+      "closing_move_cn": "以不扩大健康差距作为结尾卖点。",
+      "paragraph_job_cn": "声明实践指导与公共健康价值。"
+    }
+  ],
+  "theory_to_design_sentence_map": [
+    {
+      "locator": "Background & Related Literature, mHealth Nudges P1 S1-S6",
+      "paraphrase_cn": "最优决策受到认知资源有限和自控问题限制；nudge通过引导注意、设定目标和突出未来收益来减少决策偏差，已被整合进Apple Health、MyFitnessPal等应用；关键问题是在不同情境下找到最优消息。",
+      "move_code": "NUDGE_LOGIC_AND_OPTIMAL_MESSAGE_NEED",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为推送消息提供行为科学基础，并确立“情境决定最优消息”的设计要求。",
+      "inherits_from_previous_cn": "引言中mHealth可持续干预的呼吁。",
+      "changes_argument_state_cn": "从一般mHealth干预转向“消息框架+情境”的微观设计问题。",
+      "sets_up_next_cn": "为天气和框架作为设计变量提供理由。",
+      "failure_if_removed_cn": "消息干预的设计逻辑无本可依。",
+      "evidence_pointer": "Background & Related Literature, mHealth Nudges"
+    },
+    {
+      "locator": "Background & Related Literature, mHealth adoption P2 S1-S5",
+      "paraphrase_cn": "2021年mHealth下载量超过25亿，活动追踪应用尤其受关注；移动设备高频使用和客观结果追踪使mHealth成为推动行为改变的理想载体。",
+      "move_code": "TECHNOLOGY_FEASIBILITY",
+      "statement_status": "prior_literature",
+      "why_here_cn": "论证所选干预载体具有规模、触达和客观测量的优势。",
+      "inherits_from_previous_cn": "承接nudge可整合进mHealth的判断。",
+      "changes_argument_state_cn": "把nudge从抽象策略落实到可实现的技术平台。",
+      "sets_up_next_cn": "为下一段“实时情境信息”提供平台基础。",
+      "failure_if_removed_cn": "现场实验的平台可行性和客观结果变量缺乏支撑。",
+      "evidence_pointer": "Background mHealth adoption paragraph"
+    },
+    {
+      "locator": "Background & Related Literature, contextual info P3 S1-S5",
+      "paraphrase_cn": "移动应用除用户层信息外还能收集实时动态情境信息；情境线索结合个体信息能产生高度相关、个性化的消息，且能通过推送通知大规模触达用户并追踪客观结果。",
+      "move_code": "REAL_TIME_CONTEXT_OPPORTUNITY",
+      "statement_status": "prior_literature",
+      "why_here_cn": "说明实时情境信息是mHealth区别于传统媒体的独特优势。",
+      "inherits_from_previous_cn": "基于平台的用户基础和客观追踪能力。",
+      "changes_argument_state_cn": "为“天气作为实时情境”的设计提供技术可用性论证。",
+      "sets_up_next_cn": "转向具体情境变量——天气。",
+      "failure_if_removed_cn": "GPS实时天气干预的可能性缺少铺垫。",
+      "evidence_pointer": "Background contextual info paragraph"
+    },
+    {
+      "locator": "Background & Related Literature, Weather as a Contextual Cue P1 S1-S4",
+      "paraphrase_cn": "天气在人类生活中占核心地位，解释个体情绪40%的变异，并能影响购物、投资等广泛行为。",
+      "move_code": "WEATHER_AS_IMPORTANT_CUE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "把天气从日常现象提升为有量化影响的情境变量。",
+      "inherits_from_previous_cn": "承接实时情境信息的机会。",
+      "changes_argument_state_cn": "定义天气是可用于行为设计的情境线索。",
+      "sets_up_next_cn": "需要解释天气如何影响情绪。",
+      "failure_if_removed_cn": "天气变量选择缺少科学依据。",
+      "evidence_pointer": "Weather as a Contextual Cue P1"
+    },
+    {
+      "locator": "Background & Related Literature, sunlight mechanism P2 S1-S6",
+      "paraphrase_cn": "天气影响情绪最重要的机制是阳光：日晒促进血清素和β-内啡肽分泌，这些物质调节情绪和放松感；短时间日晒就能带来显著心理健康收益，因此晴天使人更积极、更少焦虑。",
+      "move_code": "WEATHER_MOOD_PHYSIOLOGICAL_MECHANISM",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为“晴天=积极情绪、阴天=消极情绪”提供生理-心理机制，是后文两种理论共同的前提。",
+      "inherits_from_previous_cn": "承接天气重要性的总述。",
+      "changes_argument_state_cn": "把天气从情境变量转化为情绪状态的操作化来源。",
+      "sets_up_next_cn": "为阴天消极情绪机制做对照。",
+      "failure_if_removed_cn": "天气如何改变情绪变成黑箱，情绪理论无法进入设计。",
+      "evidence_pointer": "Weather mechanism paragraph"
+    },
+    {
+      "locator": "Background & Related Literature, cloudy mechanism P3 S1-S5",
+      "paraphrase_cn": "阴雨天气减少阳光暴露，干扰β-内啡肽和血清素分泌；研究反复发现阴天会带来紧张、痛苦、疲倦等消极情绪，并可能诱发季节性情绪障碍；天气诱导的情绪直接转化为行为差异。",
+      "move_code": "CLOUDY_NEGATIVE_MOOD_MECHANISM",
+      "statement_status": "prior_literature",
+      "why_here_cn": "完成晴/阴两种天气的情绪赋值，使两个实验条件在理论上对称。",
+      "inherits_from_previous_cn": "阳光机制的反面。",
+      "changes_argument_state_cn": "确立了阴天与消极情绪、运动动机下降的关联。",
+      "sets_up_next_cn": "让信息框架与情绪状态的关系可以被检验。",
+      "failure_if_removed_cn": "阴天条件没有理论内容，最优搭配无从谈起。",
+      "evidence_pointer": "Weather cloudy paragraph"
+    },
+    {
+      "locator": "Background & Related Literature, Intervention Framing P1 S1-S4",
+      "paraphrase_cn": "目标消息通常带框架；消息框架基于前景理论，人们相对于参照点评估预期效用；在健康应用中，增益框架强调从事健康行为的收益，损失框架强调不从事健康行为的成本。",
+      "move_code": "FRAMING_THEORY",
+      "statement_status": "prior_literature",
+      "why_here_cn": "给出增益/损失两条件的形式理论来源。",
+      "inherits_from_previous_cn": "建立在nudge和天气情绪的讨论上。",
+      "changes_argument_state_cn": "把消息设计从任意文案变为理论驱动的刺激。",
+      "sets_up_next_cn": "转向情绪如何与框架交互的理论背景。",
+      "failure_if_removed_cn": "实验消息设计没有理论依据。",
+      "evidence_pointer": "Intervention Framing paragraph"
+    },
+    {
+      "locator": "Theoretical Background P1 S1-S5",
+      "paraphrase_cn": "情绪一致性视角认为情绪是评价、判断和行为的信息输入；积极情绪让人更易回忆和加工正面材料，消极情绪让人处于警觉状态并更易接受负面消息；因此增益框架对好心情更有效、损失框架对坏情绪更有效。",
+      "move_code": "MOOD_CONGRUITY_THEORY",
+      "statement_status": "theory_claim",
+      "why_here_cn": "完整展开引言中的第一种理论预测。",
+      "inherits_from_previous_cn": "天气→情绪机制和框架理论。",
+      "changes_argument_state_cn": "给出可检验的晴天增益/阴天损失预测。",
+      "sets_up_next_cn": "为另一个对立理论做对照。",
+      "failure_if_removed_cn": "理论一方缺失，无法形成竞争检验。",
+      "evidence_pointer": "Theoretical Background P1"
+    },
+    {
+      "locator": "Theoretical Background P2 S1-S5",
+      "paraphrase_cn": "情绪作为资源视角认为积极情绪是面对负面信息的心理缓冲，使人能聚焦于信息本身并追求长期目标；消极情绪者缺乏资源，优先修复情绪，倾向于肤浅加工负面信息，因此更易接受正面信息。",
+      "move_code": "MOOD_AS_RESOURCE_THEORY",
+      "statement_status": "theory_claim",
+      "why_here_cn": "完整展开第二种对立的理论预测。",
+      "inherits_from_previous_cn": "与情绪一致性形成相反机制。",
+      "changes_argument_state_cn": "给出晴天损失/阴天增益的可检验预测。",
+      "sets_up_next_cn": "需要解释“什么时候哪种理论成立”，即动机调节。",
+      "failure_if_removed_cn": "论文没有理论冲突点，实证贡献降级。",
+      "evidence_pointer": "Theoretical Background P2"
+    },
+    {
+      "locator": "Theoretical Background P3 S1-S5",
+      "paraphrase_cn": "心理学文献提示信息接收者的潜在动机可能是决定情绪作为信息还是作为资源的关键；消费性动机追求活动本身的内在满足，工具性动机追求活动之外的长期目标。",
+      "move_code": "MOTIVE_MODERATOR_THEORY",
+      "statement_status": "theory_claim",
+      "why_here_cn": "引入调节变量，为后文调和两种理论提供机制路径。",
+      "inherits_from_previous_cn": "依赖两种理论都成立但条件未知的前提。",
+      "changes_argument_state_cn": "把“哪一种理论正确”转化为“何种动机下哪一种成立”。",
+      "sets_up_next_cn": "为消费性/工具性动机的证据段落做铺垫。",
+      "failure_if_removed_cn": "机制分析缺少理论方向，动机分样本会显得随意。",
+      "evidence_pointer": "Theoretical Background P3"
+    },
+    {
+      "locator": "Theoretical Background P4 S1-S5",
+      "paraphrase_cn": "消费性活动因追求内在享受而更依赖情感线索；个体常使用“我感觉它如何”的启发式，研究显示当被试被启动消费性动机时，心情显著影响观影意愿和产品评价。",
+      "move_code": "CONSUMMATORY_MOOD_AS_INFO_EVIDENCE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "给消费性动机将导致情绪一致性行为提供实证依据。",
+      "inherits_from_previous_cn": "承接动机类型划分。",
+      "changes_argument_state_cn": "为后文消费性动机组“晴天增益、阴天损失”预测提供依据。",
+      "sets_up_next_cn": "需要对照工具性动机下的相反证据。",
+      "failure_if_removed_cn": "消费性动机组的预测缺少文献支持。",
+      "evidence_pointer": "Theoretical Background P4"
+    },
+    {
+      "locator": "Theoretical Background P5 S1-S5",
+      "paraphrase_cn": "工具性动机下个体不以情绪作为评价输入，而把情绪当作加工自我相关信息的背景资源；健康建议正是延迟满足场景，研究发现积极情绪者更可能接受负面健康反馈，消极情绪者更倾向接受正面健康信息。",
+      "move_code": "INSTRUMENTAL_MOOD_AS_RESOURCE_EVIDENCE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为工具性动机导致情绪资源行为提供实证依据。",
+      "inherits_from_previous_cn": "与消费性动机段落形成对照。",
+      "changes_argument_state_cn": "建立工具性动机组“晴天损失、阴天增益”的预测来源。",
+      "sets_up_next_cn": "把理论预测落到mHealth用户动机不确定这一经验问题。",
+      "failure_if_removed_cn": "工具性动机组的预测和机制解释没有根基。",
+      "evidence_pointer": "Theoretical Background P5"
+    },
+    {
+      "locator": "Theoretical Background P6 S1-S4",
+      "paraphrase_cn": "mHealth用户可能出于多种原因使用应用：为享受运动而用则属消费性动机，为健康目标而用则属工具性动机；由于不清楚哪种动机主导，天气诱导情绪与消息框架如何交互在很大程度上仍是经验问题。",
+      "move_code": "MHEALTH_MOTIVE_UNKNOWN_EMPIRICAL_QUESTION",
+      "statement_status": "author_inference",
+      "why_here_cn": "完成从理论到设计的最后一步：理论预测已就位，但适用条件未知，必须用现场实验回答。",
+      "inherits_from_previous_cn": "整合消费性与工具性动机两种证据链。",
+      "changes_argument_state_cn": "把抽象理论冲突转化为需要在真实mHealth用户中检验的经验问题。",
+      "sets_up_next_cn": "直接引出研究情境和实验设计。",
+      "failure_if_removed_cn": "理论部分不会落地为实验设计，论文变成纯文献梳理。",
+      "evidence_pointer": "Theoretical Background P6"
+    }
+  ],
+  "artifact_rationale_sentence_map": [
+    {
+      "locator": "Study Context P1 S1-S3",
+      "paraphrase_cn": "与亚洲最大活动追踪应用之一合作；应用后台常开，约90%用户开启定位和推送，因此能实时获得用户位置并通过气象API匹配天气。",
+      "move_code": "PLATFORM_CAPABILITY_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "说明理论所要求的“用户实时天气”在技术上是可实现的。",
+      "inherits_from_previous_cn": "理论部分要求知道用户当下天气。",
+      "changes_argument_state_cn": "从理论可行推进到技术落地。",
+      "sets_up_next_cn": "为云量度量和干预推送提供平台基础。",
+      "failure_if_removed_cn": "实时情境定向的核心设计没有基础设施支撑。",
+      "evidence_pointer": "Study Context P1"
+    },
+    {
+      "locator": "Study Context P2 S1-S3",
+      "paraphrase_cn": "沿用已有研究，用云量作为天气度量；云量取值范围0到10，与阳光、湿度、降水直接相关，按用户每日经纬度测量日出到日落云量。",
+      "move_code": "WEATHER_MEASURE_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "把“晴天/阴天”这一理论变量转化为可重复的客观指标。",
+      "inherits_from_previous_cn": "需要一种与情绪机制相关的天气操作化。",
+      "changes_argument_state_cn": "确定了实验刺激的分类标准。",
+      "sets_up_next_cn": "为Study 2中云量阈值的划分做准备。",
+      "failure_if_removed_cn": "晴阴分类会变成主观判断，实验不可复制。",
+      "evidence_pointer": "Study Context P2"
+    },
+    {
+      "locator": "Study 1 P1 S1-S5",
+      "paraphrase_cn": "Study 1用组间设计对比增益、损失和中性消息；随机分配1248名用户，每天10点推送，结果由应用客观追踪步数；选择这种设计是因为组间设计简单并能清晰演示刺激的因果效应。",
+      "move_code": "BETWEEN_SUBJECT_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "在引入天气前先干净地验证“框架消息是否有效”。",
+      "inherits_from_previous_cn": "研究目标的第一步：框架 vs 中性。",
+      "changes_argument_state_cn": "为整篇论文奠定基础因果结论。",
+      "sets_up_next_cn": "既然框架有效，Study 2才有理由比较两种框架在不同天气下的相对效果。",
+      "failure_if_removed_cn": "后续天气搭配比较缺少“框架本身有效”的前提。",
+      "evidence_pointer": "Study 1 P1"
+    },
+    {
+      "locator": "Study 1 P1-S2 and Table 1",
+      "paraphrase_cn": "增益消息强调运动带来的健康收益，损失消息强调不运动的疾病风险，中性消息仅邀请参与10000步挑战；统一以参与挑战为结尾。",
+      "move_code": "MESSAGE_DESIGN_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把前景理论和健康框架文献转化为三类刺激，并保证只在框架上有差异。",
+      "inherits_from_previous_cn": "Intervention Framing部分的理论来源。",
+      "changes_argument_state_cn": "确定了实验处理的具体内容和共同结构。",
+      "sets_up_next_cn": "使结果可以归因于框架而非其他文案差异。",
+      "failure_if_removed_cn": "增益/损失/中性的对比没有明确刺激细节。",
+      "evidence_pointer": "Table 1 and Study 1 message paragraph"
+    },
+    {
+      "locator": "Study 1 P1 S4",
+      "paraphrase_cn": "选择10000步挑战作为目标，因为研究显示每日10000步对成人有实质健康益处。",
+      "move_code": "OUTCOME_TARGET_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "给“运动目标完成”赋予既有健康意义，避免任意阈值。",
+      "inherits_from_previous_cn": "公共健康问题中的运动获益。",
+      "changes_argument_state_cn": "定义客观行为结果变量。",
+      "sets_up_next_cn": "为Study 1和Study 2统一的因变量作准备。",
+      "failure_if_removed_cn": "目标达成率缺乏医学合理性。",
+      "evidence_pointer": "Study 1 P1"
+    },
+    {
+      "locator": "Study 2 P1 S1-S4",
+      "paraphrase_cn": "组间设计依赖随机化但不能完全排除与天气相关的地区和个人因素，因为天气不在研究者随机控制之内；因此改用组内设计，让每个用户在相反天气下接受同一框架消息并作为自身对照，同时加入个体、地区和星期固定效应。",
+      "move_code": "WITHIN_SUBJECT_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "核心识别策略转换：用个体固定效应处理天气与个体特质的混淆。",
+      "inherits_from_previous_cn": "Study 1已证明框架有效。",
+      "changes_argument_state_cn": "将研究从“框架是否有效”推进到“天气×框架最优搭配”。",
+      "sets_up_next_cn": "为组内实验的具体流程设计（两期、冷却、分散取样）提供原则。",
+      "failure_if_removed_cn": "晴天与阴天对比会受个体差异污染，无法识别交互效应。",
+      "evidence_pointer": "Study 2 P1"
+    },
+    {
+      "locator": "Study 2 P2 S1-S4",
+      "paraphrase_cn": "为减轻携带效应，交替天气经历顺序并设置15天冷却期；为减少同区域天气相似造成的位置混淆，从全国分散取样；为应对并非所有人都会经历相反天气，预先抽取较大样本。",
+      "move_code": "CARRYOVER_AND_CONFOUND_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "处理组内实验最典型的内部效度威胁：携带效应和位置-天气混淆。",
+      "inherits_from_previous_cn": "组内设计引起的两个新问题。",
+      "changes_argument_state_cn": "保障T1/T2对比能被解释为天气作用而非顺序或区域作用。",
+      "sets_up_next_cn": "给出实验流程和最终样本规模的合理性。",
+      "failure_if_removed_cn": "结果可能是携带效应或地区效应的伪影。",
+      "evidence_pointer": "Study 2 P2"
+    },
+    {
+      "locator": "Study 2 P3-P4 S1-S5",
+      "paraphrase_cn": "选择在9月秋季进行以提供中性天气，避免冬季对阳光过度渴望或夏季对阴冷的脱敏；用云量0-2为晴天、8-10为阴天，排除3-7的模糊天气；T2只给经历相反天气条件的用户发送消息。",
+      "move_code": "SEASON_AND_THRESHOLD_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "最大化晴/阴两种情绪状态的可区分性和理论纯度。",
+      "inherits_from_previous_cn": "云量度量与天气-情绪机制。",
+      "changes_argument_state_cn": "设定实验时间和天气分类的具体边界。",
+      "sets_up_next_cn": "为Figure 1流程和最终2978人分析样本提供依据。",
+      "failure_if_removed_cn": "混淆的春秋季节和模糊云量会削弱情绪机制解释。",
+      "evidence_pointer": "Study 2 P3-P4"
+    },
+    {
+      "locator": "Study 2 P4 S1-S3",
+      "paraphrase_cn": "用户在整个实验中接受同一种框架消息，只是在T1和T2经历不同天气；这样天气差异成为组内唯一变化条件。",
+      "move_code": "MESSAGE_CONSTANCY_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "确保天气比较不被消息内容变化混淆。",
+      "inherits_from_previous_cn": "组内设计的原则。",
+      "changes_argument_state_cn": "把实验处理定义为天气条件的变化而非消息类型的变化。",
+      "sets_up_next_cn": "使回归中的Sunny×Loss交互项可解释。",
+      "failure_if_removed_cn": "同一用户两次收到不同消息会混淆天气效应和消息效应。",
+      "evidence_pointer": "Study 2 experimental procedure"
+    },
+    {
+      "locator": "Study 3 P1-P2 S1-S3",
+      "paraphrase_cn": "为检验最优天气消息是否可以重复使用，55天内对同一用户发送四次最优搭配（晴天损失、阴天增益），每次间隔15天冷却期，以干预前后7天平均步数构成面板数据。",
+      "move_code": "REPEATED_USE_DESIGN_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "用重复治疗设计直接回答“长期使用是否衰减”这一实践问题。",
+      "inherits_from_previous_cn": "Study 2已确定最优搭配。",
+      "changes_argument_state_cn": "把研究从短期优化推进到长期可持续性。",
+      "sets_up_next_cn": "为四期回归结果和“可重复使用”声称提供数据源。",
+      "failure_if_removed_cn": "可持续性贡献没有任何直接实验支撑。",
+      "evidence_pointer": "Study 3 P1-P2"
+    }
+  ],
+  "study_opening_transition_and_closure_map": [
+    {
+      "study": "Study 1",
+      "locator": "Study 1 P1",
+      "opening_move_cn": "直接说明本研究目标：检验框架消息是否优于无框架消息。",
+      "design_rationale_cn": "用组间设计对比增益/损失/中性，因为简单且能建立因果作用。",
+      "result_closure_cn": "增益和损失消息都显著提高目标达成率，步数结果一致。",
+      "transition_to_next_cn": "既然框架消息有效，下一步需要知道不同天气下哪种框架最优。"
+    },
+    {
+      "study": "Study 2",
+      "locator": "Study 2 P1-P4",
+      "opening_move_cn": "用“Having established...”承接Study 1并引入天气×框架问题。",
+      "design_rationale_cn": "因为天气不由研究者控制，组间设计不足，改用组内设计并加入固定效应、冷却期和全国分散取样。",
+      "result_closure_cn": "晴天损失显著优于增益，阴天增益显著优于损失，支持情绪作为资源。",
+      "transition_to_next_cn": "紧接着做稳健性检验和干预后多日DID，确认结果不是模型/样本偶然。"
+    },
+    {
+      "study": "Study 2 Robustness Checks",
+      "locator": "Study 2 Robustness Checks",
+      "opening_move_cn": "列出可能威胁主结果的四类设定。",
+      "design_rationale_cn": "用时间×地点固定效应、Logit/Probit、去异常值、去天气剧变日逐一排除。",
+      "result_closure_cn": "所有稳健性检验结果与主结果一致。",
+      "transition_to_next_cn": "确认交互效应稳健后，考察单次干预在随后几天是否仍有溢出。"
+    },
+    {
+      "study": "Intervention aftermath DID",
+      "locator": "Effectiveness of Intervention on Subsequent Days After Targeting",
+      "opening_move_cn": "提出新问题：干预后没有新消息的日子里是否仍有行为改善。",
+      "design_rationale_cn": "用干预前7天和干预后7天构造面板，以增益为对照做分日DID。",
+      "result_closure_cn": "晴天损失效果延续7天，阴天增益效果延续6天。",
+      "transition_to_next_cn": "既然单次干预能溢出多日，仍要回答同一策略反复推送是否衰减。"
+    },
+    {
+      "study": "Study 3",
+      "locator": "Study 3 P1-P2",
+      "opening_move_cn": "以“虽然nudge效果自然衰减，但更实际的问题是重复使用是否失效”开启。",
+      "design_rationale_cn": "55天四期治疗、15天冷却、每期前后7天步数面板，检验重复使用。",
+      "result_closure_cn": "四期都显著正效应，且效应量未显著下降。",
+      "transition_to_next_cn": "效果成立后转向机制和异质性分析。"
+    },
+    {
+      "study": "Mechanisms",
+      "locator": "Mechanisms and Additional Analyses Mechanisms P1",
+      "opening_move_cn": "说明本节目标是理解底层机制并评估异质性。",
+      "design_rationale_cn": "利用用户安装/使用动机调查，将用户分成工具性动机和消费性动机并分别复制主分析。",
+      "result_closure_cn": "工具性动机组呈情绪资源模式（晴天损失、阴天增益），消费性动机组呈情绪一致性模式（晴天增益、阴天损失）。",
+      "transition_to_next_cn": "机制已支持情绪资源，但还需排除社会影响等替代解释。"
+    },
+    {
+      "study": "Alternative Explanation",
+      "locator": "Alternative Explanation P1-P3",
+      "opening_move_cn": "提出可能的替代解释：晴天看到公园里别人锻炼引发社会比较。",
+      "design_rationale_cn": "按用户500米内可达公园数量分组，比较高/低公园可达组的交互效应。",
+      "result_closure_cn": "高、低公园可达性组的系数无显著差异，排除社会影响机制。",
+      "transition_to_next_cn": "然后进行异质性分析，看低运动水平和低收入人群是否更受策略帮助。"
+    },
+    {
+      "study": "Additional Analysis",
+      "locator": "Additional Analysis P1-P4",
+      "opening_move_cn": "以“一系列附加分析”开始，依次划分运动水平与收入水平。",
+      "design_rationale_cn": "用前一个月步数75/25分位划分低中/高运动水平，用地区收入中位数划分低/高收入。",
+      "result_closure_cn": "最优天气×框架效果在低/中运动水平和低收入地区显著，在对应优势组不显著。",
+      "transition_to_next_cn": "这些异质性结果进入讨论，用于健康公平贡献和理论边界。"
+    },
+    {
+      "study": "Discussion",
+      "locator": "Discussion P1",
+      "opening_move_cn": "重述研究问题和三个现场实验结果。",
+      "design_rationale_cn": "不需要新证据，把分散结果压缩为对研究问题的完整回答。",
+      "result_closure_cn": "综合给出框架有效、最优搭配、可重复、机制、异质性五个层次的结果。",
+      "transition_to_next_cn": "然后逐条展开贡献声明。"
+    }
+  ],
+  "discussion_and_contribution_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Discussion P1 S1-S8",
+      "paraphrase_cn": "总结全文：研究实时天气能否提高mHealth消息效果；三实验显示框架优于中性、晴天损失/阴天增益、重复使用有效、稳健性通过、效应随动机和人群异质。",
+      "move_code": "RESULT_SUMMARY",
+      "statement_status": "empirical_result",
+      "why_here_cn": "讨论开头必须让读者在没有任何新证据的情况下接收完整结论。",
+      "inherits_from_previous_cn": "继承所有实验和机制分析结果。",
+      "changes_argument_state_cn": "把分散证据汇总为一个完整回答。",
+      "sets_up_next_cn": "为贡献声明提供统一梗概。",
+      "failure_if_removed_cn": "讨论缺少上下文，贡献声明无法与结果对应。",
+      "evidence_pointer": "Discussion P1"
+    },
+    {
+      "order": 2,
+      "locator": "Discussion contribution paragraph 1 S1-S6 (health IT)",
+      "paraphrase_cn": "第一贡献：回应可持续mHealth呼吁；文献虽研究移动干预但不确定效益能否持续，干预移除后常回退，且对低收入和不活跃人群效果差；本文提供可重复使用55天且不扩大健康差距的证据，并首次同时考虑精简消息与天气情境。",
+      "move_code": "CONTRIBUTION_HEALTH_IT",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把贡献挂回引言中的可持续性和情境缺失缺口。",
+      "inherits_from_previous_cn": "依赖Study 3重复实验和异质性分析。",
+      "changes_argument_state_cn": "把“有效干预”升级为“可持续且公平的mHealth设计”。",
+      "sets_up_next_cn": "为理论贡献提供应用层面的铺垫。",
+      "failure_if_removed_cn": "最核心的mHealth文献贡献缺失。",
+      "evidence_pointer": "Discussion contribution paragraph 1"
+    },
+    {
+      "order": 3,
+      "locator": "Discussion contribution paragraph 2 S1-S6 (theory)",
+      "paraphrase_cn": "第二贡献：澄清并调和情绪一致性与情绪作为资源两种理论；用户心态决定哪种视角成立；消费性动机时情绪一致性成立，工具性动机时情绪资源成立；这解释了为何营销中一致消息更优而健康中相反策略更优，弥补了心理学文献中无人验证两种理论成立条件的空白。",
+      "move_code": "CONTRIBUTION_THEORY_RECONCILIATION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把动机分样本结果升华为理论贡献，这是全文最重要抽象化步骤。",
+      "inherits_from_previous_cn": "基于Table 5中工具性/消费性动机相反模式。",
+      "changes_argument_state_cn": "从“找到了天气策略”上升为“解释了理论何时成立”。",
+      "sets_up_next_cn": "为实践和营销启示提供理论判断。",
+      "failure_if_removed_cn": "论文只剩工程性结果，缺乏ISR所要求的理论贡献。",
+      "evidence_pointer": "Discussion contribution paragraph 2"
+    },
+    {
+      "order": 4,
+      "locator": "Discussion contribution paragraph 3 S1-S6 (practitioners)",
+      "paraphrase_cn": "第三贡献：mHealth设计者的实践指南；由于多数用户是工具性动机，设计师应把用户情绪作为资源来设计消息，并利用天气等情境信息降低运动障碍；这还解决了过往框架效应结论不一致的问题，对健康和保健专业人士有参考价值。",
+      "move_code": "CONTRIBUTION_PRACTICAL_IMPLEMENTATION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把学术结论转化为可操作的设计规则。",
+      "inherits_from_previous_cn": "继承工具性动机主导的机制证据。",
+      "changes_argument_state_cn": "从理论贡献进入产品设计和职业实践。",
+      "sets_up_next_cn": "为营销实践启示加一并行受众。",
+      "failure_if_removed_cn": "实践贡献部分缺失，应用价值不完整。",
+      "evidence_pointer": "Discussion contribution paragraph 3"
+    },
+    {
+      "order": 5,
+      "locator": "Discussion marketing implications P1 S1-S4",
+      "paraphrase_cn": "研究也启示营销实践：情境定向有效性高度依赖应用场景；营销中天气一致消息通常最有效，但当用户对产品/活动存在工具性动机时，一致策略可能适得其反，需考虑情绪资源效应。",
+      "move_code": "CONTRIBUTION_MARKETING_IMPLICATION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把健康场景结论推广到营销等非健康场景，扩大论文适用范围。",
+      "inherits_from_previous_cn": "基于工具性/消费性动机的理论调和。",
+      "changes_argument_state_cn": "从mHealth设计扩展到跨领域情境定向知识。",
+      "sets_up_next_cn": "为最后的局限和未来研究留下边界。",
+      "failure_if_removed_cn": "理论调和无法显示跨领域价值。",
+      "evidence_pointer": "Discussion marketing implications"
+    },
+    {
+      "order": 6,
+      "locator": "Discussion limitations P1 S1-S4",
+      "paraphrase_cn": "局限包括：样本来自亚洲用户、单一活动追踪应用、仅在秋季实施；未来需扩展到西方用户、其他健康应用类型和其他季节以形成完整视图。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "主动限定边界，防止过度一般化，同时给未来研究指明方向。",
+      "inherits_from_previous_cn": "研究实施条件决定了这些边界。",
+      "changes_argument_state_cn": "从强势贡献声明转向谨慎的边界声明。",
+      "sets_up_next_cn": "以“首个mHealth解决方案”的余音和未来探索期许结束全文。",
+      "failure_if_removed_cn": "论文显得过度声称，可信度和可复制性降低。",
+      "evidence_pointer": "Discussion limitations"
+    }
+  ],
+  "study_accumulation_logic": [
+    {
+      "study_or_phase": "Study 1：组间实验",
+      "evidence_job_cn": "证明框架消息（增益或损失）本身优于无框架中性消息。",
+      "what_it_establishes_cn": "消息框架作为一个设计维度具有因果作用。",
+      "what_it_cannot_establish_cn": "不能说明哪种框架在何种天气下最优。",
+      "why_next_phase_is_needed_cn": "研究目标需要天气×框架的搭配知识，而Study 1未纳入天气。",
+      "transition_wording_function_cn": "“既然框架有效，现在要研究不同天气下使用哪种框架最优”作为过渡。"
+    },
+    {
+      "study_or_phase": "Study 2：组内实验",
+      "evidence_job_cn": "识别晴天与阴天下增益/损失框架的最优搭配。",
+      "what_it_establishes_cn": "晴天损失优于增益、阴天增益优于损失，支持情绪作为资源。",
+      "what_it_cannot_establish_cn": "不能排除时间-地点混淆、模型误设、异常值和天气日变化的威胁，也不能说明持续性。",
+      "why_next_phase_is_needed_cn": "需要用严格固定效应和替代模型确认结果的稳健性。",
+      "transition_wording_function_cn": "“稳健性检验和后续多日分析”承接主结果并测试其边界。"
+    },
+    {
+      "study_or_phase": "Study 2 稳健性检验",
+      "evidence_job_cn": "排除核心搭配是特定模型、异常样本或天气突变产物。",
+      "what_it_establishes_cn": "主交互效应在多种设定下成立。",
+      "what_it_cannot_establish_cn": "不能回答单次干预能持续多久以及重复使用是否衰减。",
+      "why_next_phase_is_needed_cn": "持续性需要干预后DID和重复使用实验。",
+      "transition_wording_function_cn": "在稳健性确认后转入干预后多日行为分析。"
+    },
+    {
+      "study_or_phase": "干预后多日DID",
+      "evidence_job_cn": "证明单次最优干预带来干预后多天的行为溢出。",
+      "what_it_establishes_cn": "晴天损失效果和阴天增益效果在随后6-7天依然存在。",
+      "what_it_cannot_establish_cn": "不能证明同一策略反复推送不会习惯化。",
+      "why_next_phase_is_needed_cn": "需要Study 3直接检验重复使用。",
+      "transition_wording_function_cn": "由“干预后持续有效”过渡到“重复推送是否仍然有效”。"
+    },
+    {
+      "study_or_phase": "Study 3：重复使用实验",
+      "evidence_job_cn": "证明最优天气消息在55天四次重复后仍有效且效应不显著衰减。",
+      "what_it_establishes_cn": "策略可作为长期解决方案使用。",
+      "what_it_cannot_establish_cn": "缺少无干预对照组，无法完全排除季节/时间趋势；也不能解释为什么有效。",
+      "why_next_phase_is_needed_cn": "需要机制分析说明效应来源。",
+      "transition_wording_function_cn": "确认长期效果后转向“为什么有效”的机制问题。"
+    },
+    {
+      "study_or_phase": "机制分析：工具性与消费性动机",
+      "evidence_job_cn": "检验用户动机是否决定情绪作为资源还是作为信息。",
+      "what_it_establishes_cn": "工具性动机符合情绪资源预测，消费性动机符合情绪一致性预测。",
+      "what_it_cannot_establish_cn": "不能排除社会比较等替代解释，也不能直接测量情绪。",
+      "why_next_phase_is_needed_cn": "需要排除替代机制并评估异质性边界。",
+      "transition_wording_function_cn": "从“效果成立”转向“解释机制”和“谁更有效”。"
+    },
+    {
+      "study_or_phase": "替代解释检验：公园可达性",
+      "evidence_job_cn": "排除看到他人运动导致社会比较的替代解释。",
+      "what_it_establishes_cn": "高/低公园可达性组交互效应无显著差异，社会影响不是驱动。",
+      "what_it_cannot_establish_cn": "仍依赖“公园可见性”作为社会影响的代理，不能完全排除所有社会渠道。",
+      "why_next_phase_is_needed_cn": "接下来需要说明策略的目标人群和公平性含义。",
+      "transition_wording_function_cn": "“排除替代解释后，进一步考察不同运动水平和收入人群的效果”。"
+    },
+    {
+      "study_or_phase": "异质性分析：运动水平",
+      "evidence_job_cn": "检验效果是否集中在低/中运动水平等风险人群。",
+      "what_it_establishes_cn": "最优搭配对低/中运动水平者显著，高运动水平者不显著。",
+      "what_it_cannot_establish_cn": "高运动组不显著可能受样本量和功效限制，不能断言无效。",
+      "why_next_phase_is_needed_cn": "还需要收入分层以评估健康公平。",
+      "transition_wording_function_cn": "“接下来考虑另一个重要特征——收入水平”。"
+    },
+    {
+      "study_or_phase": "异质性分析：地区收入水平",
+      "evidence_job_cn": "检验策略是否缩小而非扩大健康差距。",
+      "what_it_establishes_cn": "低经济地位地区用户效应显著，高经济地位地区不显著。",
+      "what_it_cannot_establish_cn": "收入是地区级代理而非个人收入，测量误差存在；高收入组不显著不能等同于无效。",
+      "why_next_phase_is_needed_cn": "这些结果被讨论用于公平性贡献和理论边界。",
+      "transition_wording_function_cn": "结果自然回接到引言中的亚群和公平缺口。"
+    }
+  ],
+  "claim_evidence_ledger": [
+    {
+      "claim_cn": "框架消息（增益或损失）优于无框架中性消息。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "Study 1组间实验：增益系数0.0909、损失系数0.104，均p<0.01；以步数为因变量结果一致。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Introduction P10；Study 1 Results",
+      "where_evidence_is_provided": "Study 1 Results及在线附录表A2"
+    },
+    {
+      "claim_cn": "晴天时损失框架比增益框架更有效。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "Study 2组内实验：晴天β2+β3=0.0702，p<0.01；步数结果β2+β3=0.482，p<0.01；无模型图显示损失21.8% vs 增益15.1%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Introduction P10；Study 2 Results",
+      "where_evidence_is_provided": "Study 2 Figure 2与Table 3"
+    },
+    {
+      "claim_cn": "阴天时增益框架比损失框架更有效。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "Study 2组内实验：阴天β2=-0.052，p<0.05；步数β2=-0.329，p<0.01；无模型图显示增益11.8% vs 损失5.5%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Introduction P10；Study 2 Results",
+      "where_evidence_is_provided": "Study 2 Figure 2与Table 3"
+    },
+    {
+      "claim_cn": "核心交互结果在时间-地点固定效应、Logit/Probit、删除异常值和删除天气剧变日后仍然稳健。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "四组稳健性分析的结果均与主回归一致。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Study 2 Robustness Checks",
+      "where_evidence_is_provided": "Study 2 Robustness Checks及在线附录表A3/A4/A5"
+    },
+    {
+      "claim_cn": "单次最优天气干预在随后至少6天仍能提升运动行为。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "干预后DID：晴天损失相对增益7天显著，阴天增益相对损失6天显著。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Effectiveness of Intervention on Subsequent Days After Targeting",
+      "where_evidence_is_provided": "在线附录表A6/A7"
+    },
+    {
+      "claim_cn": "天气最优干预在55天四次重复后仍然有效且效应不显著衰减。",
+      "claim_level": "design_knowledge",
+      "supporting_evidence_cn": "Study 3四期After系数均显著为正（0.294/0.335/0.265/0.205）；Z-score未显著。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Study 3 Results",
+      "where_evidence_is_provided": "Study 3 Table 4"
+    },
+    {
+      "claim_cn": "用户使用动机决定哪种情绪理论成立：工具性动机符合情绪资源，消费性动机符合情绪一致性。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "工具性组晴天β2+β3=0.077、阴天β2=-0.056；消费性组方向相反（晴天-0.0541、阴天0.0608），均显著。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Mechanisms Results",
+      "where_evidence_is_provided": "Mechanisms Table 5"
+    },
+    {
+      "claim_cn": "社会影响不是驱动天气×框架效应的替代解释。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "高公园可达组与低公园可达组的核心系数在晴/阴天均无显著差异（Z=-0.388、-0.554）。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Alternative Explanation",
+      "where_evidence_is_provided": "在线附录表A8"
+    },
+    {
+      "claim_cn": "天气定向策略对低/中运动水平用户更有效。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "低/中运动组目标达成交互显著；高运动组系数不显著（p>0.1）。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Additional Analysis 第一段",
+      "where_evidence_is_provided": "Additional Analysis Table 6"
+    },
+    {
+      "claim_cn": "天气定向策略对低收入地区用户更有效，不扩大健康差距。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "低收入地区组交互显著；高收入地区组相关系数不显著（p>0.1）。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Additional Analysis 第三段",
+      "where_evidence_is_provided": "Additional Analysis Table 7"
+    }
+  ],
+  "isr_positioning_logic": {
+    "constitutive_is_problem_cn": "论文没有停留在“天气使推送更有效”的技术层面，而是把实时天气信息作为一种数字情境，与用户行为决策相互构成：技术让天气成为可实时获取的干预输入，天气诱导的情绪状态又反过来决定何种消息设计能改变运动决策。问题核心是人、技术设计与数字干预如何在一个真实平台生态中互相构成。",
+    "technology_behavior_or_market_entanglement_cn": "活动追踪应用的后台GPS、推送通知和客观步数追踪使“实时情境定向”成为可能，而该技术能力又被用来检验心理理论；技术不是可替换的工具，而是情绪-行为机制得以实现并规模化的基础设施。研究还通过长期重复使用和群体差异，展示了技术与公共健康公平的纠缠。",
+    "role_of_benchmark_or_objective_evidence_cn": "现场实验的客观步数和目标达成率被用来支持‘最优天气×框架搭配’的行为主张；中性消息、增益框架、干预前基线、高运动/高收入组等对照被用来把结果定位为因果效应和边界条件，而不是单纯的算法或广告性能指标。",
+    "theory_in_design_cn": "理论在实验设计之前便进入设计：情绪一致性与情绪作为资源两种理论分别决定了增益/损失框架作为处理条件、天气作为情绪操作、动机作为分组变量；理论不是事后解释结果的装饰，而是直接决定刺激选择、条件对比和机制检验。",
+    "technical_vs_is_contribution_balance_cn": "技术贡献（GPS天气匹配、推送框架、云量阈值）被压缩为设计与实验的实施条件，篇幅较少；主要篇幅分配在行为结果、因果识别、机制、异质性和对心理学与mHealth文献的理论贡献上。作者有意把天气消息设计写成一种可复制的IS设计知识，而不是单纯的技术原型。",
+    "beyond_transient_performance_cn": "通过Study 3的重复实验、干预后DID、机制分样本和低收入/低运动异质性，作者把结果从“某次推送的即时点击/完成率”升级为“可持续、可解释、对弱势人群有效的设计知识”；因此贡献不只是分数优势，而是可迁移到其他情境线索的理论与设计原则。"
+  },
+  "paragraph_level_mimicry_template": {
+    "abstract_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "用一句话点明研究主题：利用移动技术获取的实时情境信息增强移动干预。",
+        "evidence_needed_cn": "清楚知道核心情境变量与干预形式。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "用两行交代实验设计（组内两期、不同情境、两种条件）和总体结论形态。",
+        "evidence_needed_cn": "已有现场实验设计和核心数据的总体方向。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "给出结果的不均匀分布：情境A下条件X优、情境B下条件Y优。",
+        "evidence_needed_cn": "核心交互效应的显著估计。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "用一句提到机制证据和替代解释排除。",
+        "evidence_needed_cn": "机制分析和排除性检验。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "加入可重复性和异质性结果。",
+        "evidence_needed_cn": "重复使用实验和亚组分样本结果。"
+      },
+      {
+        "step": 6,
+        "what_to_write_cn": "以受众和贡献收尾。",
+        "evidence_needed_cn": "能与结果对应的理论/实践贡献声明。"
+      }
+    ],
+    "introduction_paragraph_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "先用客观社会/健康数据建立问题紧迫性。",
+        "evidence_needed_cn": "权威统计或流行病数据。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "压缩综述已有干预技术与元分析证据，说明总体效果不足。",
+        "evidence_needed_cn": "系统综述或元分析。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "把不足归因到一个被忽略的情境变量。",
+        "evidence_needed_cn": "该情境变量影响行为且有理论机制。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "引入相邻领域已成功使用同一变量的证据，然后立即指出机制差异。",
+        "evidence_needed_cn": "相邻领域的成功研究和自己情境的差异论证。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "引入两种对立理论并分别给出预测。",
+        "evidence_needed_cn": "能产生相反预测的理论文献。"
+      },
+      {
+        "step": 6,
+        "what_to_write_cn": "给出研究目标和实验设计路线。",
+        "evidence_needed_cn": "已经设计好的研究序列。"
+      },
+      {
+        "step": 7,
+        "what_to_write_cn": "用结果预览和三层贡献关闭引言。",
+        "evidence_needed_cn": "至少核心方向的结果和清晰的贡献声明。"
+      }
+    ],
+    "theory_to_design_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "用行为科学基础（如nudge）说明干预设计空间。",
+        "evidence_needed_cn": "相关行为理论。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "说明技术平台能带来的新信息来源。",
+        "evidence_needed_cn": "平台能力和数据可得性。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "给出情境变量的机制链（如天气→神经递质→情绪）并引用证据。",
+        "evidence_needed_cn": "生理/心理机制文献。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "引入两个对立理论，分别分解机制并给出预测。",
+        "evidence_needed_cn": "理论文献及其适用条件。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "加入调节变量（如用户动机）说明两种理论何时成立。",
+        "evidence_needed_cn": "调节变量相关的实证文献。"
+      },
+      {
+        "step": 6,
+        "what_to_write_cn": "以“经验问题”收尾，说明为什么必须用现场实验回答。",
+        "evidence_needed_cn": "真实用户行为数据或平台合作。"
+      }
+    ],
+    "method_and_study_sequence_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "先做一个组间实验证明核心刺激本身有效。",
+        "evidence_needed_cn": "随机分配、客观结局、平衡检验。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "再换组内设计引入情境交互，说明为什么必须用组内。",
+        "evidence_needed_cn": "能令同一主体接受两种情境的实验设计。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "加入冷却、分散取样和对天气的操作化定义。",
+        "evidence_needed_cn": "对携带效应、区域混淆和情境分类的处理。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "用稳健性检验和干预后DID收紧因果结论。",
+        "evidence_needed_cn": "多模型设定和前后多日面板数据。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "用一个重复使用实验回答可持续性。",
+        "evidence_needed_cn": "多期重复治疗数据。"
+      },
+      {
+        "step": 6,
+        "what_to_write_cn": "用机制分样本、排除替代解释和异质性分析转向“为什么与为谁”。",
+        "evidence_needed_cn": "用户动机调查、地理代理、亚组统计。"
+      }
+    ],
+    "results_reporting_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "先报告无模型平均值或图示方向。",
+        "evidence_needed_cn": "组间均值或图形统计。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "再给出回归模型系数与显著性。",
+        "evidence_needed_cn": "回归估计和标准误。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "用替代因变量验证同一结论。",
+        "evidence_needed_cn": "第二个客观结局变量。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "随后摆出稳健性检验清单。",
+        "evidence_needed_cn": "固定效应、替代模型、样本处理。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "最后用后续DID和重复实验扩展时间范围。",
+        "evidence_needed_cn": "面板数据和跨期比较。"
+      }
+    ],
+    "discussion_and_contribution_steps": [
+      {
+        "step": 1,
+        "what_to_write_cn": "按研究问题回到完整结果总结。",
+        "evidence_needed_cn": "全部实验的合成结论。"
+      },
+      {
+        "step": 2,
+        "what_to_write_cn": "先讲所在领域（如健康IT）的应用贡献，挂回引言缺口。",
+        "evidence_needed_cn": "可重复性/公平性结果。"
+      },
+      {
+        "step": 3,
+        "what_to_write_cn": "再讲跨领域理论贡献，解释为什么两种对立理论可以调和。",
+        "evidence_needed_cn": "机制分样本证据。"
+      },
+      {
+        "step": 4,
+        "what_to_write_cn": "实践贡献面向设计者和政策制定者。",
+        "evidence_needed_cn": "明确的设计规则和受众。"
+      },
+      {
+        "step": 5,
+        "what_to_write_cn": "最后限定边界并给未来方向。",
+        "evidence_needed_cn": "样本、平台、季节等实施条件。"
+      }
+    ]
+  },
+  "writing_algorithm": [
+    {
+      "step": 1,
+      "rhetorical_job_cn": "用客观数据建立问题规模和紧迫性。",
+      "research_evidence_required_cn": "权威健康统计、大型调查或元分析显示问题严重且现有方案不足。",
+      "sentence_pattern_function_cn": "先给出事实句，再接后果句，最后下“需要解决”的判断。",
+      "transition_condition_cn": "当读者认可问题的公共重要性时进入下一步。"
+    },
+    {
+      "step": 2,
+      "rhetorical_job_cn": "压缩文献并制造“现有方案不足”的缺口。",
+      "research_evidence_required_cn": "足够的干预技术综述和元分析结论。",
+      "sentence_pattern_function_cn": "用“已有A、B、C，但元分析发现…因此呼吁…”的归纳句收拢文献。",
+      "transition_condition_cn": "当缺口足够具体到下一个变量时进入情境聚焦。"
+    },
+    {
+      "step": 3,
+      "rhetorical_job_cn": "把宽泛缺口收窄到一个被忽略且可操作的情境变量。",
+      "research_evidence_required_cn": "该情境变量影响行为且有生理/心理机制文献。",
+      "sentence_pattern_function_cn": "用“细看发现现有干预忽略X”开启，以“X是明显而紧迫的缺口”结束。",
+      "transition_condition_cn": "当情境变量与情绪机制挂上钩时进入理论冲突。"
+    },
+    {
+      "step": 4,
+      "rhetorical_job_cn": "引入可借鉴但不可照搬的邻近领域技术，并制造机制差异。",
+      "research_evidence_required_cn": "邻近领域的成功证据和自己情境的受众/机制差异论证。",
+      "sentence_pattern_function_cn": "“营销已用天气，但健康消息与购买在即时回报、资源类型和自我控制上存在关键差异”。",
+      "transition_condition_cn": "当读者明白不能简单复制时进入理论对立。"
+    },
+    {
+      "step": 5,
+      "rhetorical_job_cn": "呈现两种对立的理论预测，使实证研究成为必要。",
+      "research_evidence_required_cn": "两种理论文献及其互相矛盾的预测。",
+      "sentence_pattern_function_cn": "“一方面情绪一致性预测A，另一方面情绪资源预测B，因此不清楚…”",
+      "transition_condition_cn": "当理论冲突建立后进入研究目标。"
+    },
+    {
+      "step": 6,
+      "rhetorical_job_cn": "给出研究目标、实验设计和结果预览。",
+      "research_evidence_required_cn": "已经设计好的现场实验和初步结果方向。",
+      "sentence_pattern_function_cn": "“为回答上述问题，我们开展三个现场实验：先…再…最后…”",
+      "transition_condition_cn": "当读者看到路线图后进入正文证据。"
+    },
+    {
+      "step": 7,
+      "rhetorical_job_cn": "把证据结果升级为贡献：应用、理论和实践三层。",
+      "research_evidence_required_cn": "可重复性、机制和异质性证据必须已经存在。",
+      "sentence_pattern_function_cn": "“第一，回应…呼吁；第二，调和…理论；第三，提供…指南。”",
+      "transition_condition_cn": "当每个贡献都能回溯到具体证据时才算完成。"
+    }
+  ],
+  "high_value_moves_to_mimic_cn": [
+    "用‘现实问题→已有方案不足→被忽略情境→邻近领域可借鉴但不照搬→两种理论冲突→三实验设计’构建引言的收缩漏斗。",
+    "在每个Study开头用上一步结论加‘但还没有解决Y’的句法过渡。",
+    "先给无模型的平均值/图形方向，再给回归系数，再用稳健性检验强化，形成三层证据节奏。",
+    "用动机分样本把应用结果转化为理论调和证据。",
+    "用公园可达性等代理指标主动排除替代解释，保护主机制。",
+    "把低运动、低收入异质性结果连接到“不扩大健康差距”的公共健康贡献。",
+    "在摘要中同时给出核心搭配、机制、可持续性和异质性，防止研究被看作单次性能结果。"
+  ],
+  "superficial_moves_not_to_copy_cn": [
+    "不要只复制‘天气×框架’的表述而没有真实随机分配和客观步数测量。",
+    "不要把‘晴天损失、阴天增益’照搬为普适规则；作者自己把边界限定在秋季、亚洲、单应用和特定动机人群。",
+    "不要在缺少无干预对照组的情况下直接声称‘重复使用不衰减’；必须至少比较跨期效应量并承认功效限制。",
+    "不要用‘PSM’或‘匹配’替代随机化和用户自身对照；本文识别策略依赖随机分配与个体固定效应。",
+    "不要把高运动/高收入组不显著解读为‘无效’，应表述为‘证据不足’。"
+  ],
+  "unsupported_or_fragile_moves_cn": [
+    "Study 3缺少无干预对照组，Z-score不显著可能由功效不足导致，不能完全排除季节趋势。",
+    "用户动机来自自报调查且剔除了未回答者，存在选择与测量误差；机制结论依赖间接推断。",
+    "论文未直接测量用户情绪状态，用天气和云量作为情绪代理。",
+    "收入用地区中位数代理个人收入，存在生态谬误风险。",
+    "高运动水平组和高收入地区组不显著被顺带解释为“该策略对这些人群无效”，更稳妥的表述应是统计功效不足或证据不足。",
+    "‘缩小健康差距’属于较强的政策断言，证据是分样本显著，但缺乏正式的不平等指数检验。"
+  ],
+  "single_sentence_description_of_isr_routine_cn": "先用一个简单的组间现场实验证明核心消息设计有效，再用组内实验在真实天气条件下识别最优搭配，随后用稳健性、干预后DID、重复使用实验、动机机制、替代解释排除和异质性分层逐层加固证据，最后把结果回写为调和两种对立理论并产出可重复、不扩健康差距的mHealth设计知识。",
+  "confidence": 0.84,
+  "limitations_cn": "全文OCR可读性整体良好，但正文中的Figure 1/Figure 2和Table 1-7以图片/表格形式出现，无法逐字读取所有数值细节；在线附录表A1-A8只通过正文引用，未包含在本文本中，因此平衡检验、稳健性表和部分统计细节依赖正文描述。段落边界按标题和小标题推断，少量相邻同功能句被合并为一个位置条目。天气API、问卷调查和平台数据的具体字段只能依据正文描述。",
+  "usage": {
+    "prompt_tokens": 42553,
+    "completion_tokens": 26880,
+    "total_tokens": 69433,
+    "prompt_cache_hit_tokens": 42496,
+    "prompt_cache_miss_tokens": 57
+  }
+}

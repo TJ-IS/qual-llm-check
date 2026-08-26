@@ -1,0 +1,1276 @@
+{
+  "record_id": "11058",
+  "source_file": "11058_2023_unlocking-the-power-of-voice-for-financial-risk-prediction-a-theory-driven-deep-learning-design.md",
+  "title": "Unlocking the Power of Voice for Financial Risk Prediction: A Theory-Driven Deep Learning Design Approach",
+  "authors": "Yi Yang; Yu Qin; Yangyang Fan; Zhongju Zhang",
+  "year": "2023",
+  "journal": "MIS Quarterly",
+  "doi": "10.25300/misq/2022/17062",
+  "fulltext_chars": 143105,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "finance_accounting_and_investment",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:12.721537+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何设计一个基于管理者声音（副语言/语音线索）的深度学习信息系统制品，在季度财报电话会议场景中同时利用管理者说了什么（语言线索）和如何说（声音线索），从而显著提高企业金融风险（股价波动率）的样本外预测精度，并产生可验证的经济价值。",
+    "artifact_and_design_cn": "DeepVoice：一个设计科学制品，包含数据采集、文本-音频对齐、焦点管理者识别、27个基本声学特征提取、GloVe文本嵌入、两阶段双向LSTM深度学习模型（第一阶段特征变换，第二阶段语音-语言特征融合），以及与基本面模型和风险模型通过stacking元学习集成。",
+    "objective_outcomes_cn": "在6047个S&P 500公司2015-2018年财报电话会议样本上，DeepVoice相对市场基准在3/5/10/30/60天预测窗口的样本外R²改善分别为7.31%、8.34%、4.28%、2.26%、7.45%；在期权跨式策略中top-10/bottom-10组合收益8.89%，较市场模型4.65%提升91.2%。",
+    "core_contribution_cn": "作者声称的贡献包括：第一，提出并验证了理论驱动的DeepVoice框架，首次在金融风险预测中同时利用声音与文本，且样本外性能显著优于以往方法，并提炼可迁移的设计原则；第二，为金融风险预测实证文献提供了非言语声音线索增量价值的证据，并展示其可转化为期权交易经济收益；第三，回应了非结构化多媒体数据分析的方法挑战。",
+    "whole_argument_in_one_paragraph_cn": "文章从非结构化多媒体数据（文本和音频）应能产生金融决策价值但尚未实现的现象出发，指出音频线索预测价值未被充分证明。作者识别三个设计挑战：时间变化、语音-语言整合、语音复杂度。以Mehrabian沟通模型为内核理论，按照Walls设计理论流程生成元需求、元设计和可检验假设，并实例化DeepVoice系统。随后用6047个真实电话会议样本分步检验三个假设：总体绩效与消融实验证明语音线索增量价值；两阶段LSTM与简单拼接/单阶段LSTM/state-of-the-art多模态模型/注意力变体对比证明架构优势；基本声学特征与高层情感构念对比证明特征设计优势。再通过期权策略、企业截面异质性、声音特征重要性、纯噪声安慰剂和AMD案例，把预测改善升维为经济收益、边界条件和机制理解，最终提炼为三条设计原则，返回IS设计知识库。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章明确采用设计科学范式，以Walls的信息系统设计理论为流程骨架，从内核理论MCM推演出元需求、元设计和可检验假设，再实例化DeepVoice系统，并通过一系列实验评价制品，最后提炼设计原则。属于典型的需求—构建—评价—设计知识循环。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "整篇文章的主线是：从内核理论生成元需求，将元需求转化为元设计，实例化为DeepVoice，用多个对照实验评价，最后在讨论中输出三条设计原则并连接IS知识库。",
+  "research_program": {
+    "study_or_phase_count": 9,
+    "overall_sequence_cn": "第一阶段是理论驱动的设计推演，产出元需求、元设计和假设；第二阶段实例化DeepVoice系统；第三阶段总体预测绩效和消融检验；第四阶段反复验证两阶段LSTM架构有效性；第五阶段比较基本声学特征与高层情感构念；第六阶段检验经济效用；第七阶段分析企业异质性；第八阶段做声音特征重要性和纯噪声稳健性；第九阶段以AMD案例提供可读机制证据；最终在讨论中归纳设计原则。各阶段逐级接续，从‘设计是否可行’推进到‘为什么有效’‘何时更有效’‘有什么价值’。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "理论驱动的设计推演：MCM→元需求→元设计→假设",
+        "question_cn": "如何从非言语沟通理论导出能够应对三个挑战的金融风险预测设计要求？",
+        "inputs_and_setting_cn": "Mehrabian沟通模型、心理学/沟通学关于声音线索的文献、Walls等信息系统设计理论；没有实证数据。",
+        "designed_or_compared_object_cn": "Table 1的设计框架：内核理论、三条元需求、三条元设计、H1-H3可检验假设。",
+        "baseline_control_or_counterfactual_cn": "无；作为后续评价的理论基准。",
+        "objective_metrics": [
+          "理论一致性",
+          "覆盖三大挑战的程度",
+          "可检验性"
+        ],
+        "analysis_method_cn": "设计科学推演：从理论命题到元需求，再到元设计和假设。",
+        "main_result_cn": "确定了三个元需求：整合语音/语言与传统财务特征；学习整个电话会议中声音线索的序列模式和语音-语言交互；使用基本声学线索避免高层构念误差。对应元设计为：元学习集成、两阶段LSTM、基本声学特征。",
+        "argumentative_role_cn": "为后续制品构建提供理论根据，并生成可检验假设，避免音频分析沦为无理论指导的黑箱尝试。",
+        "remaining_uncertainty_cn": "理论推演本身不能保证预测性能，必须通过真实数据实验验证。",
+        "link_to_next_phase_cn": "元设计需要被实例化为可运行系统，才能进入实验评价。",
+        "evidence_pointers": [
+          "Table 1",
+          "Kernel Theory-Based Design section",
+          "Meta-Requirements section",
+          "Metadesigns section",
+          "Testable Hypothesis section"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "DeepVoice系统构建与数据管线",
+        "question_cn": "如何把元设计实例化为可运行的金融风险预测系统？",
+        "inputs_and_setting_cn": "6047个S&P 500公司电话会议文本和音频，Compustat基本面数据，CRSP日度股价数据，Seeking Alpha和EarningsCast来源。",
+        "designed_or_compared_object_cn": "DeepVoice系统：文本-音频对齐、焦点管理者选择、Praat声学特征提取、GloVe嵌入、两阶段LSTM、基本模型/风险模型/深度学习模型的stacking集成。",
+        "baseline_control_or_counterfactual_cn": "无；系统构建阶段。",
+        "objective_metrics": [],
+        "analysis_method_cn": "系统设计与实现：爬虫、迭代强制对齐(IFA)、Praat特征提取、预训练词向量、SVR、LSTM、stacking。",
+        "main_result_cn": "构建了DeepVoice原型，使每个句子对应音频片段和27维基本声学特征，并形成可训练的两阶段LSTM预测管线。",
+        "argumentative_role_cn": "提供可被实验评价的IT制品，使抽象元设计落地为具体系统。",
+        "remaining_uncertainty_cn": "系统未被评价，尚不知道是否比已有方法更好。",
+        "link_to_next_phase_cn": "接下来用6047个样本和外部分割检验系统总性能。",
+        "evidence_pointers": [
+          "Design Instantiation section",
+          "Figure 2",
+          "Table 2",
+          "Data extraction paragraph",
+          "Machine learning prediction paragraph"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "总体样本外预测绩效与消融实验",
+        "question_cn": "DeepVoice是否比仅用基本面、历史风险和语言线索的方法更准确？声音线索是否具备增量预测能力？",
+        "inputs_and_setting_cn": "6047个电话会议样本；按时间顺序80%训练、10%训练stacking、10%样本外测试；预测horizon为3/5/10/30/60天。",
+        "designed_or_compared_object_cn": "DeepVoice完整模型、DeepVoice w/o verbal、DeepVoice w/o vocal、Fundamental模型、市场基准（基本面+风险模型stacking）。",
+        "baseline_control_or_counterfactual_cn": "市场基准模型；对照组为删去语音或删去文本的DeepVoice变体。",
+        "objective_metrics": [
+          "MSE",
+          "Out-of-sample R²相对市场基准",
+          "DM检验显著性"
+        ],
+        "analysis_method_cn": "样本外预测评估、消融比较、Diebold-Mariano检验。",
+        "main_result_cn": "DeepVoice在所有horizon显著优于市场基准，OOS R²为7.31%/8.34%/4.28%/2.26%/7.45%；与DeepVoice w/o vocal相比，语音线索带来边际改善；仅语音而无文本则表现差；基本面单独表现差。H1和Metadesign 1得到支持。",
+        "argumentative_role_cn": "确立DeepVoice整体有效性和语音线索的增量价值，为后续架构和特征归因奠定基础。",
+        "remaining_uncertainty_cn": "总体改善可能是由于深度学习架构、特征设计或数据集成共同作用，尚未分离具体设计来源。",
+        "link_to_next_phase_cn": "需要单独检验两阶段LSTM架构是否优于其他机器学习和多模态模型。",
+        "evidence_pointers": [
+          "Table 4",
+          "Performance Evaluation subsection",
+          "Appendix C",
+          "Appendix D",
+          "Appendix E",
+          "Appendix F"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "两阶段LSTM架构有效性检验",
+        "question_cn": "两阶段LSTM设计是否比简单特征拼接和现有state-of-the-art多模态深度学习模型更好地学习声音/语言的序列模式和交互？",
+        "inputs_and_setting_cn": "同样的训练/测试数据；基线包括Concat-SVR、Concat-GradientBoosting、One-stage LSTM、Contextual LSTM、DeepVoice-Attention；附录补充CNN/GRU/Bi-GRU等层替换和多种注意力机制。",
+        "designed_or_compared_object_cn": "两阶段双向LSTM vs 简单拼接、单阶段LSTM、上下文LSTM、带注意力变体。",
+        "baseline_control_or_counterfactual_cn": "标准拼接ML方法、单阶段LSTM、Poria等上下文LSTM、注意力变体。",
+        "objective_metrics": [
+          "Out-of-sample R²相对市场基准",
+          "DM检验显著性",
+          "附录中相对两阶段LSTM的R²"
+        ],
+        "analysis_method_cn": "受控机器学习对比、超参数调优、不同深度学习层和注意力机制替换实验。",
+        "main_result_cn": "DeepVoice在所有horizon一致优于Concat-SVR、Concat-GradientBoosting、One-stage LSTM、Contextual LSTM和DeepVoice-Attention；one-stage LSTM甚至无法提升，注意力机制不会带来增益。H2和Metadesign 2得到支持。",
+        "argumentative_role_cn": "证明预测提升可归因于两阶段LSTM的设计，而非仅数据规模或多模态简单拼接。",
+        "remaining_uncertainty_cn": "尚未证明所使用的基本声学特征比传统高层情感构念更好。",
+        "link_to_next_phase_cn": "转向特征表示选择检验：基本声学线索 vs 高层情感构念。",
+        "evidence_pointers": [
+          "Table 5",
+          "Performance Evaluation subsection 'Is Two-Stage LSTM...'",
+          "Appendix G",
+          "Appendix H",
+          "Appendix I",
+          "Appendix J"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "基本声学特征 vs 高层情感构念",
+        "question_cn": "使用基本声音线索是否比使用传统高层情感构念更有利于金融风险预测？",
+        "inputs_and_setting_cn": "同一测试平台；高层情感构念基线使用Livingstone & Russo (2018)情感识别模型（RAVDESS）生成管理者情绪，再与文本特征输入SVR。",
+        "designed_or_compared_object_cn": "DeepVoice的基本声学特征表示 vs Emotion模型的高层情感构念表示。",
+        "baseline_control_or_counterfactual_cn": "Emotion baseline模型。",
+        "objective_metrics": [
+          "Out-of-sample R²相对市场基准",
+          "DM检验显著性"
+        ],
+        "analysis_method_cn": "预测性能比较。",
+        "main_result_cn": "Emotion模型R²接近零，几乎没有预测力；DeepVoice显著更高。H3和Metadesign 3得到支持。",
+        "argumentative_role_cn": "说明使用可测量的基本声学特征而非不稳定的高层构念是音频预测成功的关键，也回应了语音复杂度挑战。",
+        "remaining_uncertainty_cn": "预测精度提升是否具有实际经济价值尚不清楚。",
+        "link_to_next_phase_cn": "通过期权交易策略检验经济效用。",
+        "evidence_pointers": [
+          "Table 6",
+          "Performance Evaluation subsection 'Does Using Basic Vocal Cues...'"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "经济效用：期权跨式交易策略",
+        "question_cn": "DeepVoice的波动率预测改善能否转化为可观察的期权交易收益？",
+        "inputs_and_setting_cn": "OptionMetrics期权链数据；基于60天波动率预测的增减排序构建long-short straddle组合；参考Goyal和Saretto (2009)。",
+        "designed_or_compared_object_cn": "DeepVoice驱动策略 vs 市场模型驱动策略 vs DeepVoice w/o vocal驱动策略。",
+        "baseline_control_or_counterfactual_cn": "市场模型（基本面+风险）和文本-only DeepVoice。",
+        "objective_metrics": [
+          "Long-short straddle return",
+          "top-10/bottom-10、Q5/Q1、Q4/Q2组合收益",
+          "不同有效买卖价差下的收益"
+        ],
+        "analysis_method_cn": "组合排序策略、收益显著性检验、Appendix K中的流动性/交易成本敏感性分析。",
+        "main_result_cn": "DeepVoice在top-10/bottom-10组合产生8.89%收益，相对市场模型4.65%提高91.2%；在100%有效价差下仍为正收益，而基准为负。",
+        "argumentative_role_cn": "把统计上的预测改进转化为金融决策者关心的经济价值，强化实践重要性。",
+        "remaining_uncertainty_cn": "经济收益在不同企业特征间是否异质？是否某些企业更适合语音分析？",
+        "link_to_next_phase_cn": "进行企业截面回归，看DeepVoice改善与哪些基本面特征相关。",
+        "evidence_pointers": [
+          "Table 7",
+          "Economic Utility section",
+          "Appendix K"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "企业特征异质性分析",
+        "question_cn": "DeepVoice的样本外预测改善在不同企业特征之间如何变化？",
+        "inputs_and_setting_cn": "605个样本外观测；自变量为EY_std、CMMB_std和cov(EY_std, CMMB_std)；因变量为DeepVoice相对市场基准的预测误差减少。",
+        "designed_or_compared_object_cn": "Improv(DeepVoice)和Improv(DeepVoice w/o vocal)两个模型。",
+        "baseline_control_or_counterfactual_cn": "市场基准模型作为误差减少的参照；DeepVoice w/o vocal作对照。",
+        "objective_metrics": [
+          "回归系数",
+          "R²",
+          "显著性"
+        ],
+        "analysis_method_cn": "线性回归。",
+        "main_result_cn": "DeepVoice的改善与EY_std和CMMB_std显著正相关，与cov负相关；基本面波动大的企业获得更多增量信息。",
+        "argumentative_role_cn": "给出DeepVoice发挥作用的边界条件，明确它更适合财务基本面正在发生较大变化的企业。",
+        "remaining_uncertainty_cn": "尚未解释哪类具体声音特征主导改进。",
+        "link_to_next_phase_cn": "进入声音特征重要性分析和纯噪声安慰剂检验。",
+        "evidence_pointers": [
+          "Table 8",
+          "Cross-Sectional Analysis section"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "声音特征重要性与纯噪声稳健性",
+        "question_cn": "四类基本声学特征各自贡献如何？DeepVoice是否仅仅拟合了噪声？",
+        "inputs_and_setting_cn": "DeepVoice-Amplitude、DeepVoice-Fluency、DeepVoice-Pitch、DeepVoice-Quality；以及把声音特征替换为Uniform(0,1)纯噪声的DeepVoice w/ Pure Noise。",
+        "designed_or_compared_object_cn": "不同声音特征子集和噪声特征替换。",
+        "baseline_control_or_counterfactual_cn": "DeepVoice w/o Vocal和完整DeepVoice。",
+        "objective_metrics": [
+          "Out-of-sample R²相对市场基准"
+        ],
+        "analysis_method_cn": "特征消融和安慰剂检验。",
+        "main_result_cn": "pitch类特征最重要；单独个别特征不一定都有效，但四类一起使用一致优于无语音模型；纯噪声显著降低预测性能。",
+        "argumentative_role_cn": "强化声音特征的真实预测信号而非过拟合噪声，并解释为何需要多维度基本声音特征联合使用。",
+        "remaining_uncertainty_cn": "定量证据尚缺少直观的机制展示。",
+        "link_to_next_phase_cn": "用AMD案例直观展示语音-文本不一致如何帮助风险预测。",
+        "evidence_pointers": [
+          "Table 9",
+          "Table 10",
+          "Additional Analysis: Vocal Cues Importance",
+          "Additional Analysis: Pure Noise Features"
+        ]
+      },
+      {
+        "order": 9,
+        "name_cn": "AMD案例：语音-文本不一致的机制说明",
+        "question_cn": "具体电话会议中，声音线索如何在文本相似的情况下提供额外判别信息？",
+        "inputs_and_setting_cn": "AMD 2017年Q1和Q2电话会议的CEO语音、文本和会后股价波动。",
+        "designed_or_compared_object_cn": "Q1高风险的积极语句与Q2低风险的积极语句在语音音高上的差异。",
+        "baseline_control_or_counterfactual_cn": "文本内容相近但风险结果相反的两个案例互为对照。",
+        "objective_metrics": [
+          "句子的平均音高变化百分比",
+          "会后股票风险"
+        ],
+        "analysis_method_cn": "定性案例对比、语音音高可视化。",
+        "main_result_cn": "Q1中CEO说‘我们对Ryzen发布非常满意’时平均音高比邻句高26.9%，GPU句高21.5%；Q2中类似语句‘对EPYC反响非常满意’音高仅变化2.7%；Q1会后高风险而Q2会后低风险。",
+        "argumentative_role_cn": "把统计模型结果转成可理解的机制：语音与文字的偏离能够帮助区分相似文本在不同情境下的真实风险，从而支持语音-语言整合设计的必要性。",
+        "remaining_uncertainty_cn": "案例是单公司定性证据，不能单独证明模型性能；仍需与大规模实验共同支撑结论。",
+        "link_to_next_phase_cn": "在Discussion中把上述设计经验归纳为可迁移的设计原则。",
+        "evidence_pointers": [
+          "Case Study on Verbal-Vocal Information",
+          "Figure 3",
+          "Figure 4"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "背景：非结构化多媒体数据应产生金融价值但未实现",
+      "现象/方法声明：用设计科学方法开发DeepVoice",
+      "制品特征：同时利用语言线索和声音线索",
+      "结果：6047样本上显著降低预测误差，并转化为期权经济收益",
+      "贡献：分析声音线索的理论与实践价值"
+    ],
+    "introduction_moves": [
+      "从金融科技和大数据背景锚定现实意义",
+      "以对冲基金招聘前CIA人员解读声音的轶事引发关注",
+      "提出研究目标：用声音线索预测金融风险",
+      "界定金融风险为股价波动率并说明下游重要性",
+      "综述已有文本分析，指出非言语声音线索研究不足",
+      "提出三个具体设计挑战：时间变化、语音-语言整合、语音复杂度",
+      "宣布采用设计科学和MCM内核理论",
+      "预告数据集与实验结果",
+      "声明方法论和实证贡献"
+    ],
+    "theory_and_knowledge_moves": [
+      "用Walls ISDT框架组织内核理论、元需求、元设计、可检验假设",
+      "引入MCM三方面：非言语通道重要、声音维度多样、语音-语言需要一致",
+      "引用心理学沟通研究，说明音高、流利度、强度、音质与可信度/情绪的关系",
+      "把认知失调机制转化为机器学习可学习的模式",
+      "从每个理论命题导出具体元需求",
+      "将元需求转化为元设计"
+    ],
+    "artifact_design_moves": [
+      "Metadesign 1：用元学习集成结构化和非结构化模型",
+      "Metadesign 2：两阶段LSTM解决语音/语言维度不平衡和交互学习",
+      "Metadesign 3：用27个基本声学特征避免高层构念误差",
+      "数据管道：IFA对齐、Praat特征、GloVe嵌入、焦点管理者选择",
+      "目标变量：未来τ天波动率",
+      "Stacking集成：线性回归综合DL、Fundamental、Risk模型"
+    ],
+    "evaluation_moves": [
+      "介绍测试平台：6047个S&P 500电话会议样本",
+      "定义评价指标：MSE、OOS R²、DM检验",
+      "总体绩效与消融：DeepVoice vs w/o vocal vs w/o verbal",
+      "架构对照：Concat-SVR、Concat-GradientBoosting、One-stage LSTM、Contextual LSTM、Attention",
+      "特征对照：基本声学特征 vs Emotion构念",
+      "经济效用：期权跨式收益和流动性敏感性",
+      "异质性：企业基本面回归",
+      "特征重要性：分组声学特征和纯噪声安慰剂",
+      "机制案例：AMD音高对比"
+    ],
+    "discussion_and_contribution_moves": [
+      "把设计过程压缩为三条设计原则",
+      "将DeepVoice定位为设计知识而非一次性系统",
+      "连接现有IS设计和多模态研究的通用性",
+      "在结论中重复性能数字，强化实证贡献",
+      "指出局限和未来方向：更长预测周期、更多样样本、其他多媒体数据源"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Mehrabian沟通模型（MCM）",
+      "非言语沟通心理学（音高、流利度、强度、音质、认知失调）",
+      "金融经济学波动率预测（基本面、历史风险、市场风险）",
+      "信息系统设计理论（Walls et al., 1992）",
+      "深度学习和多模态表征学习（LSTM、word embedding、attention）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "MCM被明确指定为内核理论，其三个命题被逐一转换为元需求，进而决定元设计和系统特征；再通过H1-H3直接检验这些设计选择是否带来预测改进。整个设计不是事后包装，而是理论命题→设计要求→制品选择→实验检验的完整链条。",
+    "translation_chain_cn": "MCM命题1（声音通道承载大量信息）→ 元需求1（语音+语言+传统财务特征）→ 元设计1（元学习集成）和语音/语言双通道输入；MCM命题2（声音维度丰富且会变化）→ 元需求2（学习整个电话会议中的序列模式）→ 元设计2（两阶段LSTM，第一层对每个句子的语音和文本分别变换，第二层融合并建模序列）；MCM命题3（语音和语言需要一致，不一致传达额外信息）→ 元需求2（捕捉语音-语言交互）→ 元设计2的第二阶段LSTM融合；语音复杂度文献（高层构念不可靠）→ 元需求3（使用基本声学线索）→ 元设计3（27个Praat特征：音高、响度、流利度、音质）；金融经济学知识（基本面/历史风险预测波动率）→ 元设计1中的基本面模型和风险模型，并通过stacking与DL模型集成。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "MCM：沟通中显著比例信息由非言语声音通道承载",
+        "mechanism_cn": "管理者声音中的副语言线索包含增量信息，可补充文字内容",
+        "design_requirement_cn": "元需求1：把语音线索和语言线索一起纳入预测，并处理结构/非结构化数据异构性",
+        "artifact_choice_cn": "DeepVoice同时输入文本嵌入和27维音频特征，并通过stacking集成基本面/风险模型",
+        "evaluated_contrast_cn": "DeepVoice vs DeepVoice w/o vocal和DeepVoice w/o verbal",
+        "objective_result_cn": "完整模型OOS R²显著更高；语音增量在各horizon存在",
+        "evidence_pointers": [
+          "Table 4",
+          "Introduction Challenge 2",
+          "Meta-Requirements section"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "MCM：声音包含音高、响度、停顿、音质等多维线索，且会随认知状态变化",
+        "mechanism_cn": "电话会议中管理者被分析师质询时声音特征变化能反映认知和情绪状态",
+        "design_requirement_cn": "元需求2：模型应学习整个呼叫过程中声音线索的序列模式，而非使用简单均值",
+        "artifact_choice_cn": "两阶段LSTM：第一阶段双向LSTM对每个句子的音频和文本分别做序列特征变换",
+        "evaluated_contrast_cn": "与Concat-SVR、Concat-GradientBoosting、One-stage LSTM、Contextual LSTM对比",
+        "objective_result_cn": "两阶段LSTM一致最优；单阶段LSTM无提升",
+        "evidence_pointers": [
+          "Table 5",
+          "Metadesign 2 section",
+          "DeepVoice architecture"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "MCM：语音线索和语言线索必须一致才能有效沟通；不一致会被听众识别并改变信息解释",
+        "mechanism_cn": "语音-语言不一致反映认知失调或心理唤醒，可能预示管理者对前景的不确定",
+        "design_requirement_cn": "元需求2：模型应显式捕捉语音-语言交互",
+        "artifact_choice_cn": "两阶段LSTM第二阶段：将变换后的语音/文本向量拼接后再次送入LSTM进行特征融合",
+        "evaluated_contrast_cn": "One-stage LSTM直接拼接原始特征 vs 两阶段先变换再融合；以及注意力机制",
+        "objective_result_cn": "两阶段融合优于直接拼接；注意力机制未带来额外提升",
+        "evidence_pointers": [
+          "Metadesign 2",
+          "Table 5",
+          "Appendix I"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "语音复杂度文献：缺乏把声音线索组合成情绪/信任构念的共识，高层构念测量误差大",
+        "mechanism_cn": "高层情感构念可能引入噪声，掩盖真实预测信号",
+        "design_requirement_cn": "元需求3：使用基本声学线索而不是高层情感构念",
+        "artifact_choice_cn": "用Praat提取27个特征，分属音高、响度、流利度、音质四类",
+        "evaluated_contrast_cn": "DeepVoice基本声学特征 vs Emotion模型（RAVDESS情感构念）",
+        "objective_result_cn": "Emotion模型R²接近零；DeepVoice显著更好",
+        "evidence_pointers": [
+          "Table 6",
+          "Metadesign 3 section",
+          "Table 2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "金融经济学：基本面变量和历史风险可预测未来波动率",
+        "mechanism_cn": "基本面波动和系统性风险是波动率的长期驱动因素，与短期语音信息互补",
+        "design_requirement_cn": "元需求1：除语音/语言外，还要融入企业基本面和历史风险",
+        "artifact_choice_cn": "单独训练Fundamental SVR和Risk SVR，再通过stacking与深度学习模型融合",
+        "evaluated_contrast_cn": "DeepVoice vs Fundamental-only和Market benchmark",
+        "objective_result_cn": "仅基本面表现差；集成模型显著提升预测精度",
+        "evidence_pointers": [
+          "Metadesign 1",
+          "Table 4",
+          "Design Instantiation: Forecast models"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "样本外预测基准对比（OOS R²、MSE、DM检验）",
+      "数据消融（Voice w/o Vocal、w/o Verbal）",
+      "架构对照（Concatenation、One-stage LSTM、Contextual LSTM、Attention）",
+      "特征表示对照（基本声学特征 vs 高层情感构念）",
+      "经济效用模拟（期权跨式策略）",
+      "截面回归（企业基本面异质性）",
+      "特征重要性分析和纯噪声安慰剂",
+      "定性案例机制展示",
+      "附录稳健性（不同数据划分、年度子样本、时序模型、5分钟实现波动率、不同ML/DL模型、超参数、流动性）"
+    ],
+    "why_these_evaluations_cn": "设计科学要求既证明整体有效，也要证明每个元设计都承担因果作用。因此先做总体消融，再做架构对照、特征表示对照，再用经济效用和案例把统计改善升级为实践价值，最后用异质性和安慰剂说明边界与信号真实性。",
+    "benchmark_and_contrast_chain_cn": "以市场基准（基本面+风险）为总参照；表4建立总体改善以及语音/文本各自增量；表5把注意力转向算法架构，用逐级递进的ML/DL基线证明两阶段LSTM的必要性；表6再转向特征类型，说明基本声学特征优于高层构念；表7用经济效用证明改进不是统计游戏；表8-10和案例继续强化边界、重要性和机制。各表形成‘整体有效→架构有效→特征有效→经济有效→边界清晰→机制可解释’的证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "DeepVoice总体优于市场基准",
+        "evidence_cn": "Table 4五个horizon的OOS R²显著为正；DM检验1%显著；附录C/D/E/F不同切分、年份和时序模型稳健"
+      },
+      {
+        "claim_cn": "语音线索带来增量预测价值",
+        "evidence_cn": "DeepVoice vs DeepVoice w/o vocal在所有horizon提高；纯噪声替换后性能下降；AMD案例展示音高增量"
+      },
+      {
+        "claim_cn": "两阶段LSTM设计优于简单拼接和现有多模态模型",
+        "evidence_cn": "Table 5与Concat-SVR、Concat-GradientBoosting、One-stage LSTM、Contextual LSTM对比；Appendix H/I对多种ML/DL层和注意力变体对比"
+      },
+      {
+        "claim_cn": "基本声学特征优于高层情感构念",
+        "evidence_cn": "Table 6中Emotion模型R²接近零，DeepVoice显著更高"
+      },
+      {
+        "claim_cn": "预测改善可转化为经济收益",
+        "evidence_cn": "Table 7跨式策略收益显著；Appendix K在50%/75%/100%有效价差下DeepVoice仍优于基准"
+      },
+      {
+        "claim_cn": "DeepVoice对基本面波动大的企业更有用",
+        "evidence_cn": "Table 8中EY_std和CMMB_std系数显著为正"
+      },
+      {
+        "claim_cn": "声音特征不是噪声拟合",
+        "evidence_cn": "Table 9分特征组有效、Table 10纯噪声性能下降"
+      }
+    ],
+    "internal_validity_strategy_cn": "按时间顺序切分训练/验证/测试以避免前视偏差；固定焦点管理者以排除多说话人混叠；使用DM检验和Newey-West标准误；通过消融、架构替换、特征替换、纯噪声安慰剂把性能提升归因于具体设计；在附录中报告超参数调优和不同数据划分。",
+    "external_validity_strategy_cn": "使用4年6047个S&P 500公司电话会议大样本；覆盖多个预测horizon；做年度子样本、不同训练切分、5分钟高频数据增强等稳健性；通过设计原则和类似多模态场景讨论，把结论推广到其他音频-文本预测领域。",
+    "what_is_not_actually_tested_cn": "没有进行现场部署或真实投资者交易实验，期权收益是模拟策略；没有直接测量认知失调或心理机制，只通过音高模式间接推断；高层情感构念基线不是Mayew和Venkatachalam使用的LVA原版软件；模型只采用焦点管理者（通常CFO/CEO）的声音，未利用整场多人对话；只在S&P 500样本中验证，未测试更长年度预测和小市值/私有企业。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "DeepVoice在金融风险预测上显著优于已有方法，样本外R²提高2.26%-8.34%，且在五个预测horizon上均显著。",
+    "artifact_claim_cn": "每个元设计都有可验证的因果证据：元学习集成（表4）、两阶段LSTM架构（表5）、基本声学特征（表6）分别对应H1-H3并得到支持。",
+    "mechanism_claim_cn": "语音线索通过时间变化、语音-语言一致性和基本声学特征之间的交互提供增量信息；AMD案例直观展示相似文本在不同音高模式下对应不同风险，暗示语音-语言不一致性携带信号。",
+    "boundary_claim_cn": "DeepVoice对基本面波动更大的企业预测改善更强；对有较高基本面方差的企业更有效；样本局限于S&P 500和季度电话会议。",
+    "reusable_design_knowledge_cn": "三条设计原则：1) 用序列模型学习声音数据的时间模式，而不是用均值等描述统计；2) 用两阶段LSTM显式融合多种模态的序列数据；3) 优先使用基本数据特征而非高测量误差的高层构念。",
+    "theoretical_contribution_cn": "把MCM从沟通心理学带入金融风险预测的IS设计知识库，将非言语声音线索从样本内解释性文献推进到样本外预测性设计科学；同时回应了Agarwal和Dhar关于非结构化数据分析的呼吁。",
+    "how_discussion_closes_intro_gap_cn": "引言提出三个挑战和语音线索预测价值未知；讨论通过三条设计原则逐一回应这些挑战，并用实验证据把‘音频能否预测’从开放问题转化为已检验的制品能力，最后说明这些原则可迁移到其他多模态/音频场景。",
+    "overclaim_or_unsupported_leaps_cn": "作者从统计预测提升推到‘设计原则可泛化’，但仅在类似音频-文本领域做合理外推，缺乏不同领域实例；经济效用建立在模拟交易和简化假设上，未考虑实际市场冲击和交易执行限制；案例只有一家公司，主要起说明作用；情感构念基线用自动模型而非原LVA软件，可能低估传统方法的性能。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "非结构化多媒体数据为金融行业提供了前所未有的决策机会。",
+      "rhetorical_function_cn": "开场锚定研究领域，建立高层面价值预期。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续提出‘价值尚未实现’的矛盾做准备。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "但由于方法论挑战，非结构化多媒体数据的商业价值尚未实现，本研究用设计科学方法开发DeepVoice。",
+      "rhetorical_function_cn": "把背景从机会转向障碍，引出设计与科学贡献。",
+      "depends_on_cn": "依赖第一句的机会叙事。",
+      "sets_up_cn": "为设计科学方法的使用提供理由。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DeepVoice同时利用管理者在电话会议中的言语线索和声音线索来预测金融风险。",
+      "rhetorical_function_cn": "一句话描述制品核心设计。",
+      "depends_on_cn": "需要前面说明研究对象。",
+      "sets_up_cn": "为结果和贡献做铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5-S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在6047个样本上，DeepVoice比以往方法显著降低风险预测误差，并可转化为期权交易经济收益。",
+      "rhetorical_function_cn": "摘要中给出最强统计和经济证据，吸引读者。",
+      "depends_on_cn": "依赖之前的设计和数据集声明。",
+      "sets_up_cn": "支撑结论中的贡献。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "金融科技正在改变金融服务世界。",
+      "rhetorical_function_cn": "把研究放入宏观技术趋势。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为大数据分析在金融决策中的重要性铺路。",
+      "evidence_pointer": "Introduction first paragraph"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "有轶事证据表明对冲基金正在雇佣受过声音线索解读训练的前CIA特工来评估管理者的公开陈述。",
+      "rhetorical_function_cn": "用市场实践中的现象激发读者对声音线索预测价值的兴趣。",
+      "depends_on_cn": "依赖大数据背景下投资者寻找优势的铺垫。",
+      "sets_up_cn": "暗示声音线索在现实中已被重视，但缺乏系统方法。",
+      "evidence_pointer": "Introduction P1, anecdotal evidence sentence"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究提出一个利用财报电话会议中管理者声音线索来预测公司金融风险的设计框架。",
+      "rhetorical_function_cn": "首次明确研究目标。",
+      "depends_on_cn": "依赖前面大数据和轶事现象。",
+      "sets_up_cn": "后文定义金融风险和说明重要性。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S4-S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "金融风险在投资组合管理、风险管理和期权定价中至关重要，衍生品市场规模庞大。",
+      "rhetorical_function_cn": "说明预测金融风险的实际价值，尤其是期权交易。",
+      "depends_on_cn": "需要先定义风险为股价波动率。",
+      "sets_up_cn": "为后文经济效用分析埋下伏笔。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "财务与会计文献已证明管理者在电话会议中的措辞与公司表现、市场反应和财务错报相关。",
+      "rhetorical_function_cn": "总结文本分析已有成果，作为对比基础。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "衬托非言语声音线索研究不足。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P3 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "但非言语声音线索在电话会议中的作用研究有限；聚焦声音情绪和音高的研究主要检验样本内解释力。",
+      "rhetorical_function_cn": "指出现有研究没解决预测性问题。",
+      "depends_on_cn": "依赖前句文本研究丰富的对比。",
+      "sets_up_cn": "引出样本外预测价值未知的缺口。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P3 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "非言语声音线索能否提供显著样本外预测力在很大程度上仍是未知数。",
+      "rhetorical_function_cn": "明确提出核心研究缺口。",
+      "depends_on_cn": "依赖前句有限研究。",
+      "sets_up_cn": "为本文的样本外预测设计目标服务。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有声音分析方法和机器学习方法在音频学习上能力不足，面临时间变化、语音-语言整合和语音复杂度三个设计挑战。",
+      "rhetorical_function_cn": "把缺口具体化为可被设计解决的技术挑战。",
+      "depends_on_cn": "依赖前文的样本外预测缺口。",
+      "sets_up_cn": "为理论驱动的元需求提供问题清单。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction Challenge 1 P5",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "管理者声音特征在电话会议中会变化，比如陈述时稳定、Q&A被分析师质询时音高改变。",
+      "rhetorical_function_cn": "说明时间变化挑战的经验基础。",
+      "depends_on_cn": "挑战清单中的第一项。",
+      "sets_up_cn": "支持元需求2中的序列模式学习设计。",
+      "evidence_pointer": "Introduction Challenge 1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction Challenge 2 P6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "根据非言语沟通理论，声音线索可能肯定或否定文字信息，但现有计算模型在整合语音和语言两个通道方面能力有限。",
+      "rhetorical_function_cn": "为语音-语言整合挑战提供理论和计算限制。",
+      "depends_on_cn": "需要MCM的基本断言。",
+      "sets_up_cn": "引出两阶段LSTM特征融合设计。",
+      "evidence_pointer": "Introduction Challenge 2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction Challenge 3 P7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "从声音中识别具体声学构念是复杂过程，文献对如何组合声音线索没有共识，容易产生测量误差。",
+      "rhetorical_function_cn": "指出高层情感构念不可靠，为基本声学特征设计铺路。",
+      "depends_on_cn": "需要声音线索文献综述。",
+      "sets_up_cn": "支撑元需求3和Metadesign 3。",
+      "evidence_pointer": "Introduction Challenge 3"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P8 S1-S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究目标是开发一个使用管理者声音线索预测公司金融风险的有效设计制品，且性能优于以往尝试。",
+      "rhetorical_function_cn": "正式宣告研究目标。",
+      "depends_on_cn": "依赖前面的挑战和缺口。",
+      "sets_up_cn": "为采用设计科学范式提供目的。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P8 S3-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用设计科学范式，选择MCM作为内核理论，并按Walls流程识别元需求和元设计。",
+      "rhetorical_function_cn": "说明为什么需要设计科学和内核理论。",
+      "depends_on_cn": "依赖之前的目标声明。",
+      "sets_up_cn": "为Table 1的设计框架提供依据。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P9 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用6047个2015-2018年S&P 500公司电话会议样本测试DeepVoice，并通过系列实验评价总体有效性和每个元设计。",
+      "rhetorical_function_cn": "预告研究阶段和证据基础。",
+      "depends_on_cn": "依赖系统设计和数据集声明。",
+      "sets_up_cn": "为后文Design Evaluation建立预期。",
+      "evidence_pointer": "Introduction P9"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P10 S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文贡献包括DeepVoice框架、优于以往方法的性能、可泛化的设计原则，以及回应非结构化多媒体数据价值未实现的实践问题。",
+      "rhetorical_function_cn": "在引言末尾总结贡献，为审稿人提供定位。",
+      "depends_on_cn": "依赖前面的目标、方法和结果预告。",
+      "sets_up_cn": "后文用实证支撑这些贡献。",
+      "evidence_pointer": "Introduction P10"
+    },
+    {
+      "order": 20,
+      "section": "Literature Review",
+      "locator": "Literature Review P2 S2-S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有三个研究用LVA软件分析管理者情绪，但LVA作为商业软件的情感构念效度缺乏充分检验。",
+      "rhetorical_function_cn": "指出高层情感构念方法的核心问题。",
+      "depends_on_cn": "需要综述已有音频研究。",
+      "sets_up_cn": "支持本文用基本声学特征而非高层构念。",
+      "evidence_pointer": "Literature Review P2"
+    },
+    {
+      "order": 21,
+      "section": "Literature Review",
+      "locator": "Literature Review P2 S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "本文用新设计制品在样本外数据上检验声音线索的预测力，而不是样本内解释力。",
+      "rhetorical_function_cn": "把本文定位为预测性、样本外贡献。",
+      "depends_on_cn": "依赖前面对LVA效度问题的批评。",
+      "sets_up_cn": "为设计科学方法引入做铺垫。",
+      "evidence_pointer": "Literature Review P2"
+    },
+    {
+      "order": 22,
+      "section": "Literature Review",
+      "locator": "Literature Review P3 S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "Qin和Yang曾尝试用声音线索预测风险，但样本仅约500个电话会议且声音线索不清晰，限制可推广性。",
+      "rhetorical_function_cn": "指出最接近的已有工作的数据和方法局限。",
+      "depends_on_cn": "需要综述金融风险预测文献。",
+      "sets_up_cn": "为本文大规模、理论驱动设计提供必要性。",
+      "evidence_pointer": "Literature Review P3"
+    },
+    {
+      "order": 23,
+      "section": "Literature Review",
+      "locator": "Literature Review P3 S5-S6",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "缺乏理论指导限制了此类风险预测系统的有效性和严谨性，因此需要理论驱动的设计制品。",
+      "rhetorical_function_cn": "把缺口提升到理论层面，说明为什么需要设计科学。",
+      "depends_on_cn": "依赖Qin和Yang的缺陷。",
+      "sets_up_cn": "为引入MCM和Walls框架提供逻辑必然。",
+      "evidence_pointer": "Literature Review P3"
+    },
+    {
+      "order": 24,
+      "section": "Literature Review",
+      "locator": "Literature Review P4 S5-S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有IS设计科学工作大多处理文本数据，本文首次引入同时利用语音和文本的设计制品。",
+      "rhetorical_function_cn": "在IS文献中建立新颖性。",
+      "depends_on_cn": "需要综述IS金融设计工作。",
+      "sets_up_cn": "为后文设计贡献定位。",
+      "evidence_pointer": "Literature Review P4"
+    },
+    {
+      "order": 25,
+      "section": "Kernel Theory-Based Design",
+      "locator": "Kernel Theory-Based Design P1 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "设计科学研究倡导严谨方法解决相关问题；ISDT包含内核理论、元需求、元设计和可检验假设四个成分。",
+      "rhetorical_function_cn": "为后文提供方法框架和术语。",
+      "depends_on_cn": "需要设计科学文献。",
+      "sets_up_cn": "引出Table 1并规定后续小标题。",
+      "evidence_pointer": "Kernel Theory-Based Design P1, Table 1"
+    },
+    {
+      "order": 26,
+      "section": "Kernel Theory: Mehrabian's Communication Model",
+      "locator": "Kernel Theory section P2 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "MCM是非言语沟通中最重要的理论之一，解释声音信号在口头沟通中的重要性，有三个重要方面。",
+      "rhetorical_function_cn": "引入内核理论并预告三个理论命题。",
+      "depends_on_cn": "需要设计科学流程中内核理论的位置。",
+      "sets_up_cn": "为三个元需求提供理论来源。",
+      "evidence_pointer": "Kernel Theory: MCM"
+    },
+    {
+      "order": 27,
+      "section": "Kernel Theory: Mehrabian's Communication Model",
+      "locator": "Kernel Theory P3 S1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "理论认为沟通中的很大一部分信息通过非言语通道（如声音通道）传达。",
+      "rhetorical_function_cn": "给出MCM第一命题。",
+      "depends_on_cn": "需要MCM理论引入。",
+      "sets_up_cn": "支持元需求1中语音与语言并用。",
+      "evidence_pointer": "Kernel Theory P3"
+    },
+    {
+      "order": 28,
+      "section": "Kernel Theory: Mehrabian's Communication Model",
+      "locator": "Kernel Theory P4 S2-S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "声音音调包含不同维度；心理学研究发现低音高更可信，高音高更容易被视为欺骗，其他声音线索也与信心和信任相关。",
+      "rhetorical_function_cn": "从MCM扩展到具体声音维度的实证文献。",
+      "depends_on_cn": "需要MCM第二方面。",
+      "sets_up_cn": "为选择音高、响度、流利度、音质等基本特征提供依据。",
+      "evidence_pointer": "Kernel Theory P4"
+    },
+    {
+      "order": 29,
+      "section": "Kernel Theory: Mehrabian's Communication Model",
+      "locator": "Kernel Theory P5 S1-S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "MCM还认为声音线索和语言线索必须相互支持才能有效沟通，不一致时接收者可能不信任文字信息。",
+      "rhetorical_function_cn": "给出MCM第三命题。",
+      "depends_on_cn": "需要前面两个命题。",
+      "sets_up_cn": "为语音-语言交互学习设计提供理论依据。",
+      "evidence_pointer": "Kernel Theory P5"
+    },
+    {
+      "order": 30,
+      "section": "Kernel Theory: Mehrabian's Communication Model",
+      "locator": "Kernel Theory P5 S6",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "如果管理者说前景强劲但语调和邻句明显不同，而事后风险上升，模型可以学习把这种语音-语言不一致与高风险关联；模式反复出现时模型可泛化。",
+      "rhetorical_function_cn": "把认知失调机制转化为机器学习可学习的预测信号。",
+      "depends_on_cn": "依赖第三命题和认知失调文献。",
+      "sets_up_cn": "为两阶段LSTM融合器和样本外泛化提供机制解释。",
+      "evidence_pointer": "Kernel Theory P5"
+    },
+    {
+      "order": 31,
+      "section": "Meta-Requirements",
+      "locator": "Meta-Requirements P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "第一个元需求是：在金融风险预测系统中整合语音和语言线索，并补充企业基本面和历史风险等传统属性，同时处理结构化与非结构化数据的异构性。",
+      "rhetorical_function_cn": "把MCM第一命题转化为设计要求。",
+      "depends_on_cn": "依赖MCM命题1和金融风险预测知识。",
+      "sets_up_cn": "为Metadesign 1的元学习集成服务。",
+      "evidence_pointer": "Meta-Requirements P1"
+    },
+    {
+      "order": 32,
+      "section": "Meta-Requirements",
+      "locator": "Meta-Requirements P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "第二个元需求是：预测模型应学习整个电话会议中管理者声音线索的序列模式，并显式捕捉声音和语言之间的交互。",
+      "rhetorical_function_cn": "把时间变化和语音-语言整合挑战转化为设计要求。",
+      "depends_on_cn": "依赖MCM命题2、3。",
+      "sets_up_cn": "为Metadesign 2的两阶段LSTM服务。",
+      "evidence_pointer": "Meta-Requirements P2"
+    },
+    {
+      "order": 33,
+      "section": "Meta-Requirements",
+      "locator": "Meta-Requirements P3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "第三个元需求是：使用基本声音线索（如音高、音量、流利度）来表征管理者声音，而不是试图操作化高层情感构念。",
+      "rhetorical_function_cn": "把语音复杂度挑战转化为特征设计原则。",
+      "depends_on_cn": "依赖语音复杂度文献。",
+      "sets_up_cn": "为Metadesign 3的27个声学特征服务。",
+      "evidence_pointer": "Meta-Requirements P3"
+    },
+    {
+      "order": 34,
+      "section": "Metadesigns",
+      "locator": "Metadesigns P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "元设计1：用元学习框架把公司基本面、历史风险和语音/语言线索的风险预测模型集成起来。",
+      "rhetorical_function_cn": "实现第一个元需求的具体设计选择。",
+      "depends_on_cn": "依赖元需求1。",
+      "sets_up_cn": "为DeepVoice的stacking层和总体预测做铺垫。",
+      "evidence_pointer": "Metadesigns P2"
+    },
+    {
+      "order": 35,
+      "section": "Metadesigns",
+      "locator": "Metadesigns P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "元设计2：设计两阶段LSTM神经网络来学习整个电话会议中声音线索的序列模式和语音-语言交互。",
+      "rhetorical_function_cn": "实现第二个元需求的核心架构设计。",
+      "depends_on_cn": "依赖元需求2和深度学习方法。",
+      "sets_up_cn": "为后文模型公式和实验对比做铺垫。",
+      "evidence_pointer": "Metadesigns P3"
+    },
+    {
+      "order": 36,
+      "section": "Metadesigns",
+      "locator": "Metadesigns P3 'First' paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第一阶段LSTM对每个句子的文本和音频分别做特征变换，把两者映射到相同大小的向量，避免文本维度淹没声音维度。",
+      "rhetorical_function_cn": "解释两阶段LSTM中特征变换组件的设计原因。",
+      "depends_on_cn": "依赖文本嵌入维度远大于音频维度的观察。",
+      "sets_up_cn": "为第二阶段特征融合提供输入。",
+      "evidence_pointer": "Metadesigns P3, first-stage description"
+    },
+    {
+      "order": 37,
+      "section": "Metadesigns",
+      "locator": "Metadesigns P3 'Second' paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第二阶段LSTM把变换后的文本向量和音频向量拼接后再次做序列融合，最后接全连接层预测金融风险。",
+      "rhetorical_function_cn": "说明语音-语言交互的具体计算实现。",
+      "depends_on_cn": "依赖第一阶段的等维特征变换。",
+      "sets_up_cn": "为图1架构和训练损失做铺垫。",
+      "evidence_pointer": "Metadesigns P3, second-stage description"
+    },
+    {
+      "order": 38,
+      "section": "Metadesigns",
+      "locator": "Metadesigns, Metadesign 3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "元设计3：使用一组基本声音线索——音高、响度、流利度、音质——来表征管理者声音，而非高层情感构念。",
+      "rhetorical_function_cn": "实现第三个元需求的具体特征选择。",
+      "depends_on_cn": "依赖语音复杂度文献。",
+      "sets_up_cn": "引出Table 2的27个声学特征列表。",
+      "evidence_pointer": "Metadesigns, Metadesign 3, Table 2"
+    },
+    {
+      "order": 39,
+      "section": "Testable Hypothesis",
+      "locator": "Testable Hypothesis P1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：加入管理者声音线索将提高金融风险预测精度，相对只用基本面、历史风险和语言线索的方法。",
+      "rhetorical_function_cn": "把元设计1变成可检验假设。",
+      "depends_on_cn": "依赖元需求1和MCM。",
+      "sets_up_cn": "为表4的总体消融实验提供目标。",
+      "evidence_pointer": "Testable Hypothesis"
+    },
+    {
+      "order": 40,
+      "section": "Testable Hypothesis",
+      "locator": "Testable Hypothesis P2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：两阶段LSTM是更好的序列模式学习和语音-语言整合设计，将提高预测精度。",
+      "rhetorical_function_cn": "把元设计2变成可检验假设。",
+      "depends_on_cn": "依赖元需求2。",
+      "sets_up_cn": "为表5的架构对比实验提供目标。",
+      "evidence_pointer": "Testable Hypothesis"
+    },
+    {
+      "order": 41,
+      "section": "Testable Hypothesis",
+      "locator": "Testable Hypothesis P3",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：使用基本声音线索将提高预测精度，相对使用高层情感构念。",
+      "rhetorical_function_cn": "把元设计3变成可检验假设。",
+      "depends_on_cn": "依赖元需求3。",
+      "sets_up_cn": "为表6的特征表示对比实验提供目标。",
+      "evidence_pointer": "Testable Hypothesis"
+    },
+    {
+      "order": 42,
+      "section": "Design Instantiation",
+      "locator": "Data extraction paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用迭代强制对齐算法把文本句子匹配到对应音频片段，再用Praat提取每个片段的声学特征。",
+      "rhetorical_function_cn": "说明系统如何把非结构化音频变成句子级结构化特征。",
+      "depends_on_cn": "需要数据采集步骤。",
+      "sets_up_cn": "为后文模型输入和实验提供数据基础。",
+      "evidence_pointer": "Design Instantiation, Data extraction"
+    },
+    {
+      "order": 43,
+      "section": "Design Instantiation",
+      "locator": "Executive selection paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于电话会议有多个说话者且声音特征因人而异，作者选择发言最多的焦点管理者，并只使用该管理者的语音和语言线索。",
+      "rhetorical_function_cn": "解释系统如何规避多说话人干扰。",
+      "depends_on_cn": "需要数据抽取基本流程。",
+      "sets_up_cn": "保证后续声学特征反映同一管理者，提高内部效度。",
+      "evidence_pointer": "Design Instantiation, Executive selection"
+    },
+    {
+      "order": 44,
+      "section": "Design Evaluation",
+      "locator": "Testbed Details P1-P3",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "选择S&P 500公司，收集2015-2018年6047个电话会议及其文本和音频，并从Compustat/CRSP取基本面和股价数据。",
+      "rhetorical_function_cn": "建立实验测试床，保证样本规模和数据可信。",
+      "depends_on_cn": "需要DeepVoice系统描述。",
+      "sets_up_cn": "为后续所有性能评价提供同一数据基础。",
+      "evidence_pointer": "Design Evaluation, Testbed Details"
+    },
+    {
+      "order": 45,
+      "section": "Design Evaluation",
+      "locator": "Evaluation Metrics P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "预测性设计科学关注样本外预测精度而非样本内统计推断，因此采用MSE和相对市场基准的OOS R²。",
+      "rhetorical_function_cn": "说明为什么用样本外R²作为主评价指标。",
+      "depends_on_cn": "需要预测设计科学文献。",
+      "sets_up_cn": "为后文所有表格的指标解释提供框架。",
+      "evidence_pointer": "Design Evaluation, Evaluation Metrics"
+    },
+    {
+      "order": 46,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Performance Evaluation, first subsection",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DeepVoice在所有预测horizon上显著优于市场基准，OOS R²范围为2.26%到8.34%。",
+      "rhetorical_function_cn": "报告总体绩效的核心结果。",
+      "depends_on_cn": "依赖测试床和评价指标。",
+      "sets_up_cn": "引出语音/文本消融讨论。",
+      "evidence_pointer": "Table 4"
+    },
+    {
+      "order": 47,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Performance Evaluation, second implication",
+      "move_code": "RESULT",
+      "paraphrase_cn": "比较DeepVoice和DeepVoice w/o vocal，可以看到加入声音线索带来的改进，与设计内核理论一致。",
+      "rhetorical_function_cn": "把表4的消融差异解释为声音线索增量价值。",
+      "depends_on_cn": "依赖完整模型和去除声音模型的对比。",
+      "sets_up_cn": "为H1支持和后文语音价值论证提供依据。",
+      "evidence_pointer": "Table 4 and Performance Evaluation"
+    },
+    {
+      "order": 48,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "End of first performance evaluation",
+      "move_code": "RESULT",
+      "paraphrase_cn": "因此Metadesign 1和H1得到支持。",
+      "rhetorical_function_cn": "明确宣告第一个假说被验证。",
+      "depends_on_cn": "依赖表4和消融结果。",
+      "sets_up_cn": "进入下一个架构有效性实验。",
+      "evidence_pointer": "Performance Evaluation subsection"
+    },
+    {
+      "order": 49,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Is Two-Stage LSTM subsection",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "为评估两阶段LSTM，文章使用简单拼接的SVR/梯度提升、单阶段LSTM、Contextual LSTM和注意力变体作为基线。",
+      "rhetorical_function_cn": "建立架构对比的参照体系。",
+      "depends_on_cn": "需要H2假设。",
+      "sets_up_cn": "为表5的架构效果提供证据。",
+      "evidence_pointer": "Table 5 section"
+    },
+    {
+      "order": 50,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Is Two-Stage LSTM subsection, result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DeepVoice一致优于所有基线；单阶段LSTM不能提升性能，注意力机制也不能提升性能。",
+      "rhetorical_function_cn": "报告架构对比的核心结果。",
+      "depends_on_cn": "依赖基线设置。",
+      "sets_up_cn": "为H2支持提供结果。",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 51,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "End of two-stage LSTM subsection",
+      "move_code": "RESULT",
+      "paraphrase_cn": "因此Metadesign 2和H2得到支持。",
+      "rhetorical_function_cn": "明确宣告第二个假说被验证。",
+      "depends_on_cn": "依赖表5。",
+      "sets_up_cn": "进入特征表示实验。",
+      "evidence_pointer": "Two-stage LSTM subsection"
+    },
+    {
+      "order": 52,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Does Using Basic Vocal Cues subsection",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "用RAVDESS情感模型生成管理者情绪作为高层构念基线，与DeepVoice的基本声学特征比较。",
+      "rhetorical_function_cn": "建立特征类型对比的基线。",
+      "depends_on_cn": "需要H3假设。",
+      "sets_up_cn": "为表6结果提供背景。",
+      "evidence_pointer": "Table 6 section"
+    },
+    {
+      "order": 53,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "Does Using Basic Vocal Cues subsection, result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Emotion模型在所有horizon上OOS R²接近零，无法提升预测性能；DeepVoice则显著更好。",
+      "rhetorical_function_cn": "报告高层构念失败和基本特征成功。",
+      "depends_on_cn": "依赖与Emotion模型对比。",
+      "sets_up_cn": "支持H3和Metadesign 3。",
+      "evidence_pointer": "Table 6"
+    },
+    {
+      "order": 54,
+      "section": "Design Evaluation, Performance Evaluation",
+      "locator": "End of basic vocal cues subsection",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "若没有理论指导的设计，研究者和实践者可能得出音频数据没有预测力的误导性结论。",
+      "rhetorical_function_cn": "把实验结果上升为理论指导价值的论断。",
+      "depends_on_cn": "依赖表6中Emotion模型失败。",
+      "sets_up_cn": "为后文设计原则贡献做铺垫。",
+      "evidence_pointer": "Basic vocal cues subsection"
+    },
+    {
+      "order": 55,
+      "section": "Economic Utility",
+      "locator": "Economic Utility P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "既然DeepVoice风险预测更好，我们检验用其预测构建期权跨式交易策略能否获利。",
+      "rhetorical_function_cn": "预告经济效用分析目的。",
+      "depends_on_cn": "依赖之前预测性能结果。",
+      "sets_up_cn": "为表7收益结果铺垫。",
+      "evidence_pointer": "Economic Utility section"
+    },
+    {
+      "order": 56,
+      "section": "Economic Utility",
+      "locator": "Economic Utility, strategy results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DeepVoice驱动的top-10/bottom-10跨式组合收益8.89%，相对市场模型4.65%提高91.2%；Q5/Q1组合也提高79.1%。",
+      "rhetorical_function_cn": "报告经济价值核心结果。",
+      "depends_on_cn": "依赖策略设计和期权数据。",
+      "sets_up_cn": "说明统计改善有实际回报。",
+      "evidence_pointer": "Table 7"
+    },
+    {
+      "order": 57,
+      "section": "Cross-Sectional Analysis",
+      "locator": "Cross-Sectional Analysis, results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DeepVoice相对市场基准的预测改善与EY_std和CMMB_std正相关，与cov负相关，说明基本面波动大的公司收益更多。",
+      "rhetorical_function_cn": "报告异质性分析的边界条件。",
+      "depends_on_cn": "依赖截面回归模型。",
+      "sets_up_cn": "为后文说明DeepVoice适用场景。",
+      "evidence_pointer": "Table 8"
+    },
+    {
+      "order": 58,
+      "section": "Additional Analysis: Vocal Cues Importance",
+      "locator": "Additional Analysis, results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "pitch类声音特征是最重要的；单独加入并不总能帮助，但四类声音线索一起使用一致优于无语音模型。",
+      "rhetorical_function_cn": "报告声音特征重要性消融结果。",
+      "depends_on_cn": "依赖表9实验。",
+      "sets_up_cn": "说明多维度声音线索联合价值。",
+      "evidence_pointer": "Table 9"
+    },
+    {
+      "order": 59,
+      "section": "Additional Analysis: Pure Noise Features",
+      "locator": "Additional Analysis, pure noise results",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "把声音特征替换为均匀分布的纯噪声后，预测性能下降，说明DeepVoice确实从声音线索中学到信号而非过拟合噪声。",
+      "rhetorical_function_cn": "用安慰剂检验排除‘纯粹噪声拟合’的替代解释。",
+      "depends_on_cn": "依赖表10实验。",
+      "sets_up_cn": "增强对DeepVoice特征有效性的信心。",
+      "evidence_pointer": "Table 10"
+    },
+    {
+      "order": 60,
+      "section": "Case Study on Verbal-Vocal Information",
+      "locator": "Case Study P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "通过AMD 2017年Q1和Q2电话会议的案例，定性说明为什么语音加文本能比纯文本更好预测风险。",
+      "rhetorical_function_cn": "引入定性案例以增强机制可理解性。",
+      "depends_on_cn": "需要前面的定量结果。",
+      "sets_up_cn": "为Figure 3/4的案例证据做铺垫。",
+      "evidence_pointer": "Case Study section"
+    },
+    {
+      "order": 61,
+      "section": "Case Study on Verbal-Vocal Information",
+      "locator": "Case Study P3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "Q1电话会议中文案积极但CEO句子音高比邻句高26.9%和21.5%；Q2类似积极句子音高只变化2.7%，事后风险完全不同。",
+      "rhetorical_function_cn": "展示具体声音-文本不一致的经验现象。",
+      "depends_on_cn": "依赖AMD案例选择。",
+      "sets_up_cn": "为解释语音帮助区分相似文本提供证据。",
+      "evidence_pointer": "Case Study P3, Figures 3-4"
+    },
+    {
+      "order": 62,
+      "section": "Discussion",
+      "locator": "Discussion P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "设计过程可总结为三条设计原则，并贡献给IS知识库。",
+      "rhetorical_function_cn": "把制品结果提升为可复用设计知识。",
+      "depends_on_cn": "依赖整篇设计评价结果。",
+      "sets_up_cn": "为三条原则的详细说明提供总起。",
+      "evidence_pointer": "Discussion P1"
+    },
+    {
+      "order": 63,
+      "section": "Discussion",
+      "locator": "Discussion, Design Principle 1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "设计原则1：学习声音数据的序列模式，而不是用均值等描述统计概括全过程。",
+      "rhetorical_function_cn": "输出第一项可迁移设计知识。",
+      "depends_on_cn": "依赖两阶段LSTM实验。",
+      "sets_up_cn": "呼应对时间变化挑战的解决。",
+      "evidence_pointer": "Discussion, Design Principle 1"
+    },
+    {
+      "order": 64,
+      "section": "Discussion",
+      "locator": "Discussion, Design Principle 2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "设计原则2：整合多模态序列数据时，用两阶段LSTM显式学习模态间交互。",
+      "rhetorical_function_cn": "输出第二项可迁移设计知识。",
+      "depends_on_cn": "依赖语音-语言整合实验。",
+      "sets_up_cn": "连接其他多模态IS研究。",
+      "evidence_pointer": "Discussion, Design Principle 2"
+    },
+    {
+      "order": 65,
+      "section": "Discussion",
+      "locator": "Discussion, Design Principle 3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "设计原则3：在不稳定或高误差的情况下，优先使用基本数据特征而非高层构念。",
+      "rhetorical_function_cn": "输出第三项可迁移设计知识。",
+      "depends_on_cn": "依赖基本声学特征 vs Emotion构念实验。",
+      "sets_up_cn": "为其他特征构念不可靠领域提供启示。",
+      "evidence_pointer": "Discussion, Design Principle 3"
+    },
+    {
+      "order": 66,
+      "section": "Conclusion",
+      "locator": "Conclusion P1 S2-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "结论重复DeepVoice在五个horizon上的OOS R²提升，并强调两阶段LSTM和基本声学特征有效，经济交易策略可行。",
+      "rhetorical_function_cn": "在收尾处凝练核心实证成果。",
+      "depends_on_cn": "依赖全文结果。",
+      "sets_up_cn": "为未来研究和局限铺垫。",
+      "evidence_pointer": "Conclusion P1"
+    },
+    {
+      "order": 67,
+      "section": "Conclusion",
+      "locator": "Conclusion P3 S1-S2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括只预测季度电话会议后数日风险，未来可考虑更长周期、更多多媒体源以及S&P 500之外更多样样本。",
+      "rhetorical_function_cn": "承认边界，防止贡献被理解为无条件普遍。",
+      "depends_on_cn": "依赖全文范围和数据集。",
+      "sets_up_cn": "给后续研究者提供可扩展方向。",
+      "evidence_pointer": "Conclusion P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先展示非结构化音频数据有巨大商业潜力的同时，指出方法论障碍始终未解决；再在文献中强调已有声音研究只做样本内解释力、依赖黑箱LVA软件、样本小且无理论指导；然后把问题转化为三个清晰的设计挑战，使缺口从‘没人做’变成‘有明确技术难题需要设计科学解决’。",
+    "signposting_cn": "使用设计科学的小标题结构：Kernel Theory-Based Design、Meta-Requirements、Metadesigns、Testable Hypothesis、Design Instantiation、Design Evaluation、Discussion；在每段开头重复‘第一/第二/第三’或‘首先/其次’，使读者始终知道当前处于哪个设计环节。",
+    "transition_logic_cn": "每阶段结束都通过一个未解决问题过渡：总体效果之后问‘是否归因于架构’，架构之后问‘特征是否更好’，特征之后问‘是否有经济价值’，经济之后问‘是否有边界’，最后进入案例和设计原则。",
+    "claim_evidence_rhythm_cn": "每个假设先由理论推演生成，然后立即用专门表格检验；每个表格后面都有‘结果有几层含义’的讨论，把数字转成可解读的增量价值和机制含义；在H1/H2/H3结尾都显式写‘Hypothesis supported’。",
+    "benchmark_narrative_cn": "以市场基准为统一参照，所有方法都stacking到同一基本面/风险模型上，保证公平；架构对比中包含越来越强但都不如两阶段LSTM的基线；attention作为热点模型被纳入并证伪，强化两阶段LSTM的必要性。",
+    "theory_return_cn": "实验结果不仅报告性能，还反复回到MCM：语音增量对应非言语通道价值，语音-语言交互对应一致性命题，基本声学特征成功对应构念测量问题；最后在Discussion把设计经验上升为设计原则并连接其他IS工作。",
+    "contribution_positioning_cn": "同时用三条线定位贡献：IS设计科学（新制品和设计原则）、实证金融风险预测（非言语线索样本外证据）、实践（期权经济收益和反欺诈/客服等迁移领域）；在引言和结论重复这三条线，确保读者记住多维贡献。",
+    "novelty_protection_cn": "通过五重防线防止贡献退化为一次性能结果：1) 理论与设计绑定，每个设计选择都有理论理由；2) 显著性检验DM和多个horizon一致；3) 消融/架构替换/特征替换/噪声安慰剂证明具体设计元素有效；4) 经济效用和截面异质性展示非统计价值；5) 提炼设计原则，把结果从具体数据集推广到一类问题。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实问题：非结构化多媒体数据价值未实现，并列出具体挑战",
+        "research_job_cn": "识别领域中的未解决问题和三个设计挑战，找到贴近实践的轶事或现象",
+        "required_evidence_cn": "能说明问题重要且现有方法不足的文献或行业证据",
+        "transition_to_next_cn": "‘因此需要理论驱动设计’自然引出内核理论"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "选择内核理论，并提炼三条可操作命题",
+        "research_job_cn": "从理论文献中提取与设计挑战直接相关的命题",
+        "required_evidence_cn": "理论命题要有心理学/行为学实证支撑",
+        "transition_to_next_cn": "理论命题转向元需求"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "把每个理论命题转换为元需求，并用列表/表格呈现",
+        "research_job_cn": "确定每个设计挑战对应的需求和评价标准",
+        "required_evidence_cn": "元需求能逐一覆盖前面识别的挑战",
+        "transition_to_next_cn": "元需求转向元设计"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "为每个元需求设计具体制品选择，并提供可复现说明",
+        "research_job_cn": "构建系统原型：数据管线、模型架构、特征选择",
+        "required_evidence_cn": "系统可运行，且能生成样本外预测",
+        "transition_to_next_cn": "系统完成后进入设计评价"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "用逐假说实验评价每个设计元素，对比强基线和消融",
+        "research_job_cn": "设计总体绩效、架构对照、特征对照等系列实验",
+        "required_evidence_cn": "每个假设有对应表格和显著性检验",
+        "transition_to_next_cn": "结果后追加经济价值或边界条件"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用经济效用/实践价值、异质性/稳健性、案例/机制把统计结果升维",
+        "research_job_cn": "模拟经济策略、回归异质性、做安慰剂或案例",
+        "required_evidence_cn": "至少一项统计之外的证据说明实践或理论价值",
+        "transition_to_next_cn": "Discussion提炼设计原则"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "把设计经验概括为设计原则，返回IS知识库并讨论可迁移领域",
+        "research_job_cn": "从实验结论中抽象出不受数据集限制的准则",
+        "required_evidence_cn": "每项设计原则都能对应到前面已验证的设计选择",
+        "transition_to_next_cn": "结论中总结核心数字并说明局限"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用‘挑战1/2/3’把模糊GAP转化为可设计的技术问题",
+      "用内核理论命题表/元需求/元设计/假设四层映射贯穿全文",
+      "每个假设都有专门表格，并显式写‘Hypothesis supported’",
+      "统一stacking到基准模型保证比较公平",
+      "用纯噪声/特征替换做安慰剂检验排除欠拟合/过拟合替代解释",
+      "在统计结果后加经济效用和截面异质性分析",
+      "以AMD案例把黑箱模型变成可理解的机制故事",
+      "在Discussion输出三条编号设计原则"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要构建6047个财报电话会议的大规模文本+音频语料，且需文本-音频对齐",
+      "需要商用或高成本金融数据库（Compustat、CRSP、OptionMetrics、TAQ）",
+      "音频特征提取和深度学习训练需要较长的计算资源和GPU",
+      "期权策略经济效用分析依赖期权链和有效价差数据",
+      "S&P 500四年样本覆盖需要长时间数据采集和清洗",
+      "AMD案例依赖人工检查音高曲线，无法规模化"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只喊‘MCM+深度学习’而缺少从理论命题到元需求再到元设计的翻译",
+      "不能只用总体R²就宣称系统有效，必须有消融、架构替换、特征替换或安慰剂",
+      "不能把‘音频数据有效’作为结论，除非做了足够规模的样本外检验",
+      "不能把设计原则写成口号，每条原则都必须有对应的实验证据",
+      "不能把模拟期权收益等同于真实交易收益，必须讨论流动性和交易成本"
+    ],
+    "single_best_description_of_the_routine_cn": "用内核理论生成元需求和元设计，再通过‘总体效果→架构对比→特征对比→经济价值→边界条件→案例机制’的递进实验链，把预测改进转化为可泛化的设计原则。"
+  },
+  "confidence": 0.86,
+  "limitations_cn": "全文完整包含正文和附录，但部分公式、表格和OCR存在排版乱码，尤其公式变量符号有显示错误；没有真实页码，所有位置用章节、段落、表和图表示；分析基于文章文字呈现，未复现实验；未对未列出的附录进行独立验证。",
+  "usage": {
+    "prompt_tokens": 40021,
+    "completion_tokens": 27329,
+    "total_tokens": 67350,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 40021
+  }
+}

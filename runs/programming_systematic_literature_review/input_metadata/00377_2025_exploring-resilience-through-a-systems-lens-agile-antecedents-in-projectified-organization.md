@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105011705023"
+title: "Exploring Resilience Through a Systems Lens: Agile Antecedents in Projectified Organizations"
+authors: "Širovnik N.; Vrečko I."
+year: "2025"
+journal: "Systems"
+doi: "10.3390/systems13070559"
+---
+# Scopus title-abstract-keyword metadata
+Title: Exploring Resilience Through a Systems Lens: Agile Antecedents in Projectified Organizations
+Abstract: As organizations become increasingly projectified, safeguarding the resilience of project professionals and teams emerges as a critical organizational challenge. Adopting a systems lens, we investigate how agile mindsets and agile practices function as systemic antecedents of resilience at the individual and team levels. Eleven semi-structured interviews with experienced project managers, product owners, and team members from diverse industries were analyzed through inductive thematic coding and system mapping. The findings show that mindset supplies psychological resources—self-efficacy, openness and a learning orientation—while practices such as team autonomy, iterative delivery and transparent communication provide structural routines; together they trigger five interlocking mechanisms: empowerment, fast responsiveness, holistic team dynamics, stakeholder-ecosystem engagement and continuous learning. These mechanisms reinforce one another in feedback loops that boost a project system’s adaptive capacity under volatility. The synergy of mindset and practices is especially valuable in hybrid or traditionally governed projects, where cognitive agility offsets structural rigidity. This study offers the first multi-level, systems-based explanation of agile antecedents of resilience and delivers actionable levers for executives, transformation leaders, project professionals, and HR specialists aiming to sustain talent performance in turbulent contexts. © 2025 by the authors.
+Author keywords: agile mindset; agile practices; complex adaptive systems; human sustainability; individual resilience; projectification; socio-technical systems; systems thinking; team resilience
+Index keywords: Adaptive systems; Agile manufacturing systems; Cognitive systems; Human resource management; Information systems; Information use; Iterative methods; Project management; Agile mindset; Agile practices; Complex adaptive systems; Human sustainability; Individual resilience; Organisational; Projectification; Sociotechnical systems; System thinkings; Team resilience; Systems thinking
+Document type: Article
+Conference: 
+Source title: Systems
+Year: 2025
+EID: 2-s2.0-105011705023
+DOI: 10.3390/systems13070559
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

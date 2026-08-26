@@ -1,0 +1,2167 @@
+{
+  "seed": 20260806,
+  "screened_available": 8365,
+  "sample_size": 30,
+  "records": [
+    {
+      "audit_group": "retained_layer:algorithm_or_computational_method",
+      "record_id": "8364",
+      "source_file": "08364_2016_integrating-rich-and-heterogeneous-information-to-design-a-ranking-system-for-multiple-products.md",
+      "title": "Integrating rich and heterogeneous information to design a ranking system for multiple products",
+      "year": "2016",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2016.02.009",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "algorithm_or_computational_method",
+      "research_paradigms": [
+        "computational_or_algorithm_design",
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Spearman rank correlation coefficient between product eWOM ranking and JD.com sales rank",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "相关系数越接近1，表示本文方法生成的产品排名与真实市场销售排名越一致；文章以最大化该系数为目标。",
+          "operationalization_cn": "按式(13)计算Spearman等级相关系数：对每个产品，将本文排名与京东销售排名（1为最畅销）配对，n为产品数；每日采集数据，重复10天计算平均值±标准差，并在不同价位区间和不同产品类别中重复检验。",
+          "comparator_cn": "与多种已有/消融方法比较：仅数值评分(M&G)、仅文本情感(L&T)、仅比较句(Z&G)、文本情感+比较句(Z&N)、本文的T+S、R+T+S、R+T+S+V；另比较不同价位区间和产品类别。",
+          "demonstrated_result_cn": "手机数据上，本文R+T+S+V平均相关系数为0.556±0.022，明显高于仅评分0.290±0.043、仅情感0.249±0.030、仅比较句0.126±0.027、Z&N法0.246±0.030及本文R+T+S消融版0.302±0.034；笔记本平均0.436±0.022，数码相机平均0.367±0.026，均为最高。",
+          "evidence": [
+            "Section 5.2.1, Table 6, Eq. (13)",
+            "Section 5.2.2, Tables 12-13",
+            "Fig. 7 (比较信息量增加时相关系数上升)",
+            "Table 7-10 (不同价位区间)"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "data_driven",
+          "formal_analytical",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "PageRank算法",
+          "马尔可夫链遍历定理 (Ergodic theorem of Markov chains)",
+          "min-max归一化"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者将PageRank式图排序思想推广到产品eWOM排名：节点权重来自描述性信息（数值评分与文本情感融合），边权重来自比较性信息（比较句与在线比较投票融合）；通过构造带权有向图并利用马尔可夫链收敛性证明排序得分的迭代收敛，从而得到全局产品排名。PageRank与马尔可夫链理论直接决定了算法的结构和收敛性；min-max归一化用于统一文本情感分数与评分的量纲。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "在线评论数量庞大且信息异构（数值评分、文本情感、比较句、比较投票），消费者难以通读全部评论；现有产品排名方法要么只用单一信息，要么受限于比较句数量稀少而无法覆盖多数产品，且忽略了数值评分和在线比较投票。",
+        "focal_objective_cn": "设计一种多产品eWOM排名方法，使生成的产品排名尽可能接近真实市场销售排名，以Spearman相关系数为核心客观指标。",
+        "proposed_solution_cn": "提出统一的有向加权图模型：节点权重融合数值评分(R)和文本情感(T)，边权重融合比较句(S)与第三方网站在线比较投票(V)；基于PageRank式迭代计算每个产品的整体eWOM得分并生成排名，同时给出原型系统。新颖之处在于首次引入大规模在线比较投票，并同时整合四类异构信息。",
+        "evaluation_logic_cn": "从Zol.com.cn采集手机（96款）、笔记本（75款）、数码相机（60款）的评论、评分、比较句和比较投票；以京东销售排名为客观基准，用Spearman等级相关系数比较本文方法与四种已有/消融方法的排名一致性；并在不同价位区间、不同产品类别以及改变比较信息覆盖产品数等场景下验证。",
+        "main_finding_cn": "融合R+T+S+V的排名在所有数据集和价位区间中均取得最高Spearman相关系数（手机0.556、笔记本0.436、相机0.367），显著优于仅用评分、仅用情感、仅用比较句以及现有图模型方法；消融实验表明数值评分和比较投票分别能持续提升排名性能。",
+        "multi_study_or_stage_progression_cn": "研究分阶段推进：(1) 数据采集与信息挖掘（情感、比较句的抽取及人工验证）；(2) 图结构与排名算法设计；(3) 手机类别上与多种基线对比；(4) 价位区间和比较信息覆盖度分析；(5) 笔记本和数码相机上的可扩展性验证；(6) 原型系统展示。每阶段均围绕客观排名一致性指标展开。"
+      },
+      "decision_reason_cn": "该文提出了一个明确的信息系统解决方案——多产品eWOM排名算法及原型系统；核心成功标准是排名与京东销售排名的Spearman相关系数这一客观指标；全文以该指标的对比实验为主要证据，展示了相对多个基线的显著改进；满意度、感知有用性等主观变量未作为成功依据。四项门控均通过，客观指标中心性为exclusive。",
+      "confidence": 0.95
+    },
+    {
+      "audit_group": "retained_layer:algorithm_or_computational_method",
+      "record_id": "6616",
+      "source_file": "06616_2006_content-based-object-organization-for-efficient-image-retrieval-in-image-databases.md",
+      "title": "Content-based object organization for efficient image retrieval in image databases",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2006.04.013",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "algorithm_or_computational_method",
+      "research_paradigms": [
+        "computational_or_algorithm_design",
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Total IO Cost / Query Response Time",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "更低的总IO成本和更短的查询响应时间表示更优的检索效率",
+          "operationalization_cn": "基于解析成本模型计算：naive方法成本=BlobSize*NumBlobsPerImage*NumImages/TransRate；representative-blobs方法成本=BlobSize*RatioRepBlobs*NumImages/TransRate；indexed-blobs方法成本≤PageSize*2^n/TransRate + SeekTime*2^n。默认参数见表2。",
+          "comparator_cn": "以naive方法（扫描全部blob）为基线，对比representative-blobs方法和indexed-blobs方法；也对比不同IO带宽、图像数量、代表blob比例、页面大小下的成本。",
+          "demonstrated_result_cn": "representative-blobs方法相比naive方法可将查询响应时间降低90倍（超过90%）；indexed-blobs方法进一步降低数个数量级，且其上限成本不随图像数量增长。",
+          "evidence": [
+            "Section 6.3, Fig. 9",
+            "Section 6.3, Fig. 10",
+            "Section 7, Conclusions: 'over 90% reduction in query response time'"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Blobworld representation",
+          "MB+-tree",
+          "Mahalanobis distance"
+        ],
+        "theory_role": "none",
+        "design_derivation_cn": "解决方案基于图像数据库检索领域的工程知识：采用Blobworld对象表示方法，结合MB+-tree多维索引和B+-树维护算法，通过代表blob减少搜索空间，通过语义层级支持浏览。设计方案直接来源于对IO-bound性质和查询成本的分析，没有引用行为科学或管理理论。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "大规模图像数据库中的内容检索面临严重的IO瓶颈；现有基于低层特征的方法检索质量不佳，而Blobworld等方法未在大规模数据库中高效支持查询和浏览。已有自动分类精度较低（约47%），且没有有效利用代表blob和索引来降低查询成本。",
+        "focal_objective_cn": "以查询响应时间/总IO成本为核心目标，通过设计blob-centric检索方案来显著降低大规模图像数据库的查询成本。",
+        "proposed_solution_cn": "提出了blob-centric图像检索方案，包含：(1) 基于代表blob的图像分类与blob组维护算法（Algorithm 1、2）；(2) 基于MB+-tree的多维索引查询算法（Algorithm 3）；(3) 支持浏览的三层语义数据组织（语义层级、代表blob层、图像类别层）。",
+        "evaluation_logic_cn": "采用解析成本模型和数值对比分析：推导三种方法（naive、representative-blobs、indexed-blobs）的IO成本函数，使用文献中的默认参数（500,000图像、每图像9个blob、传输率1MB/s等）进行计算，并变化IO带宽、图像数量、代表blob比例和页面大小进行敏感性分析。",
+        "main_finding_cn": "representative-blobs方法可将查询响应时间降低90倍；indexed-blobs方法进一步大幅降低IO成本，其上限成本与数据库大小无关，因此特别适合大规模图像数据库。",
+        "multi_study_or_stage_progression_cn": "本文为单阶段设计评估：先提出组成构件（分类、索引、语义层级），再整体推导成本模型进行对比分析；没有实施原型或真实数据集实验，也没有分阶段的实证测试。"
+      },
+      "decision_reason_cn": "该文设计和实现了一个IS相关的解决方案（blob-centric图像检索方案），包含具体算法和数据结构；核心目标是提高客观指标（查询响应时间/IO成本），且通过解析模型和定量对比证明代表blob方法和索引方法相对于naive方法的显著改进；文章的成功主张完全依赖该客观效率指标，无主观结果。因此四个门均通过，centrality为exclusive。",
+      "confidence": 0.9
+    },
+    {
+      "audit_group": "retained_layer:digital_platform_mechanism_or_policy",
+      "record_id": "8542",
+      "source_file": "08542_2018_a-matter-of-equality-linear-pricing-in-combinatorial-exchanges.md",
+      "title": "A Matter of Equality: Linear Pricing in Combinatorial Exchanges",
+      "year": "2018",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.2017.0766",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "digital_platform_mechanism_or_policy",
+      "research_paradigms": [
+        "digital_platform_or_mechanism_design",
+        "computational_or_algorithm_design",
+        "prescriptive_analytics_or_optimization"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "relative efficiency loss (relative loss in gains from trade due to linear prices)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "效率损失越低越好，即实际配置的总贸易利得越接近无线性定价约束的最优配置总贸易利得",
+          "operationalization_cn": "定义3：loss = (G_DP - G_LP)/G_DP，其中G_DP为歧视性价格WDP最大化总贸易利得，G_LP为SL/BL/1L规则下的总贸易利得",
+          "comparator_cn": "基准为WDP（无线性定价约束、歧视性最优配置）；另比较1L与SL/BL之间的效率损失差异",
+          "demonstrated_result_cn": "Table 1显示平均效率损失：SL为0，BL为0.0039，1L为0.0618；最坏情况下1L和单边线性价格可达到100%损失；理论界为(k-1)/(n+1)（Proposition 4），实验显示大市场与低固定投标比例下损失减小",
+          "evidence": [
+            "Definition 3, Section 4.3",
+            "Table 1, Section 5.3",
+            "Table 3, Section 5.3.2",
+            "Appendix C regression"
+          ]
+        },
+        {
+          "metric_name": "computation time (seconds) and MIP gap",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "求解时间与MIP gap越低越好，表明机制可行且可扩展到实际规模",
+          "operationalization_cn": "分支定界求解器Gurobi 7.0的墙钟时间与最优性gap；以500秒为超时限制",
+          "comparator_cn": "比较WDP、BL、SL、1L四种求解问题规模下的计算时间与最大MIP gap",
+          "demonstrated_result_cn": "WDP平均0.28秒，SL平均0.69秒，1L平均8.95秒，BL平均11.3秒；最大MIP gap为BL的36%，大部分实例可快速求解",
+          "evidence": [
+            "Table 1, Section 5.3",
+            "Table 2, Section 5.3.1"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "data_driven",
+          "engineering_or_domain_knowledge",
+          "hybrid"
+        ],
+        "named_theories_or_formalisms": [
+          "Walrasian equilibrium",
+          "Myerson-Satterthwaite impossibility theorem",
+          "order statistics / extremal distribution theory",
+          "integer programming",
+          "market design"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "从公平性（匿名同价）、预算平衡、个体理性、计算可行性等设计需求出发，形式化定义三类线性匿名定价规则（SL、BL、1L）并给出混合整数规划；基于随机序统计的正式模型推导出效率损失上界，指导实验设计和市场机制选择；来自NSW渔业数据的领域知识用于生成真实规模的招标实例。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "组合交易所常采用线性匿名价格以保证简洁、可计算和公平，但非凸性导致不存在瓦尔拉斯均衡价格，可能造成效率损失；已有文献主要关注单向组合拍卖或VCG机制，对组合交易所中线性匿名定价规则的效率影响缺乏系统分析。",
+        "focal_objective_cn": "量化线性匿名价格相对于歧视性价格最优配置造成的效率损失，并确定何种定价规则（单边线性SL/BL或单一线性1L）以及何种投标语言能最小化这一损失。",
+        "proposed_solution_cn": "论文提出了三种可计算的线性匿名定价机制（SL、BL、1L）的MIP形式化表达，并设计了一个带数量上下界、支持单边包投标的柔性投标语言；还提出通过最小化悖论拒绝投标数再最小化价格平方和来确定唯一价格。",
+        "evaluation_logic_cn": "先在理论上证明最坏情形效率损失可达100%，再用随机模型证明期望损失随买方人数增加和包规模减小而下降，最后基于NSW渔业数据的256全因子实验设计生成3840个实例，将SL/BL/1L与无定价约束的WDP基准比较，测量效率损失、计算时间、MIP gap和悖论拒绝投标比例。",
+        "main_finding_cn": "SL和BL规则的平均效率损失几乎为零（BL为0.39%，SL为0%），而1L规则平均损失6.2%且在小市场中更高；效率损失随市场参与规模增大而减小；大市场上1L也可接受；问题规模在实际相关场景中可在平均不到一分钟内求解。",
+        "multi_study_or_stage_progression_cn": "研究按‘最坏情形理论分析 -> 随机模型理论界 -> 基于真实数据的数值实验 -> 回归与稳健性分析’递进：理论界解释了实验结果的量级，实验验证了理论预测的大市场效应和包规模效应，最终给出面向市场设计者的规则选择建议。"
+      },
+      "decision_reason_cn": "论文设计了组合交易所的线性匿名定价机制（SL/BL/1L）和柔性投标语言，属于数字化平台机制设计；其核心目标是效率损失这一客观度量，并以WDP为基准通过理论证明和基于真实数据的数值实验显示SL/BL几乎达到最优、且显著优于1L，同时也展示计算可行性；论文没有依赖主观量表或满意度等指标，成功判断完全基于客观的贸易利得、计算时间和悖论拒绝投标比例等。因此四个门全部通过，客观指标中心性为exclusive。",
+      "confidence": 0.78
+    },
+    {
+      "audit_group": "retained_layer:digital_platform_mechanism_or_policy",
+      "record_id": "7344",
+      "source_file": "07344_2019_mobile-time-based-targeting-matching-product-value-appeal-to-time-of-day.md",
+      "title": "Mobile Time-Based Targeting: Matching Product-Value Appeal to Time of Day",
+      "year": "2019",
+      "journal": "Journal of Management Information Systems",
+      "doi": "10.1080/07421222.2019.1598696",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "digital_platform_mechanism_or_policy",
+      "research_paradigms": [
+        "field_experiment_of_digital_artifact",
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Purchase adoption of 4G mobile Internet service",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好：提高消费者在收到短信推广后回复并订购 4G 服务的概率",
+          "operationalization_cn": "二进制结果：用户回复“Y”并在 60 分钟优惠窗口内订购 4G 套餐记为购买=1，否则为0；由移动运营商后台记录。全样本 4,800 人中 539 人购买（11.2%）。",
+          "comparator_cn": "对照为同一产品的另一价值诉求版本：logit 模型中以 hedonic 诉求为基线，比较各小时块 utilitarian 诉求的交互效应；另与“全时段仅用 utilitarian 诉求”的行业常见做法比较。",
+          "demonstrated_result_cn": "上午 8:00-12:00 各小时块 utilitarian 诉求的交互系数显著为正（β=1.711-2.183，p<0.05 或 p<0.01）；下午 2:00-3:00 和 3:00-4:00 的交互系数显著为负（β=-2.085、-1.907，p<0.01），即 hedonic 诉求更优；按时间匹配的最优策略估计平均购买率为15%，而全时段 utilitarian 诉求的行业常见做法为8.7%。",
+          "evidence": [
+            "Field Experiment and Data: 4,800 users, 539 purchases (11.2%)",
+            "Table 2: logit coefficients for Utilitarian*Hour Blocks",
+            "Discussion: optimal strategy 15% vs. 8.7% industry practice of utilitarian-only content"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Ego Depletion Theory",
+          "Utilitarian-Hedonic Value Framework",
+          "Circadian Rhythms Literature"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "设计推导以自我损耗理论为核心：人们一天中决策与选择会逐渐消耗心理资源，导致上午精力充沛、任务导向，下午更放松、更倾向享乐。因此，面向同一 4G 移动互联网服务的短信推广应根据时间段匹配价值诉求：上午突出 utilitarian 价值（工作、效率），下午突出 hedonic 价值（娱乐、放松）。utilitarian-hedonic 价值框架用于将同一产品操作化为两种短信内容版本，通过预测试验证操作化有效性。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "现有移动定向研究主要关注基于位置或优惠时长的营销，缺乏对“一天中时段”这一情境因素的科学指导；行业实践对何时发送移动推广信息缺乏共识。同时，IS 领域对时间的研究多关注时长，较少关注时间作为情境如何影响用户对 IT 的接受。",
+        "focal_objective_cn": "核心目标是通过将产品价值诉求（utilitarian vs. hedonic）与时段（上午 vs. 下午）匹配，提高消费者对移动互联网服务（4G）的购买采纳率。",
+        "proposed_solution_cn": "提出并实证检验移动时间定向机制：向同一 4G 服务发送内容不同（utilitarian 或 hedonic 价值诉求）的短信，并根据用户所处小时段（8:00-20:00 共 12 个时段）进行匹配；短信含 60 分钟有效促销。其新颖性在于将信息内容与用户一天中的心理状态变化相匹配，而不仅是选择发送时间。",
+        "evaluation_logic_cn": "采用随机实地实验：4,800 名用户随机分配到 12 个时段 × 2 种价值诉求的 24 组，每组 200 人；结果变量为是否购买（客观后台记录）。使用 logit 模型估计时段、诉求及其交互效应，并控制消费使用行为；另进行潜在类别稳健性检验和操纵检验预测试。后续场景问卷调查测量主观购买意愿及精力/放松等心理状态，以检验机制并复现结果。",
+        "main_finding_cn": "上午时段 utilitarian 诉求更有效（8:00-12:00 交互项显著为正），下午 2:00-4:00 hedonic 诉求更有效；按时间匹配的最优策略估计平均购买率为 15%，约为全时段 utilitarian 诉求行业做法（8.7%）的两倍。",
+        "multi_study_or_stage_progression_cn": "研究分为三阶段：第一步通过 227 名用户预测试验证 utilitarian/hedonic 短信内容操纵有效性；第二步进行随机实地实验，以客观购买行为检验 H1/H3；第三步进行场景问卷实验，以主观购买意愿和心理状态检验 H2/H4 的机制并复现模式；最后在 Discussion 中基于实验结果计算最优策略并与行业实践比较。"
+      },
+      "decision_reason_cn": "文章设计并实施了一种 IS 相关的移动时间定向机制——根据时段匹配 utilitarian/hedonic 价值诉求的短信推广，并在随机实地实验中以客观购买行为作为主要成功标准，展示了对行业基线（全时段 utilitarian 诉求）的显著改进（15% vs. 8.7%）。后续问卷中的主观购买意愿仅用于检验心理机制，属于从属地位；因此四个门均通过，客观指标中心性为 dominant。",
+      "confidence": 0.88
+    },
+    {
+      "audit_group": "retained_layer:hybrid",
+      "record_id": "764",
+      "source_file": "00764_2017_cost-effective-quality-assurance-in-crowd-labeling.md",
+      "title": "Cost-Effective Quality Assurance in Crowd Labeling",
+      "year": "2017",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.2016.0661",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "hybrid",
+      "research_paradigms": [
+        "design_science_research",
+        "prescriptive_analytics_or_optimization",
+        "computational_or_algorithm_design",
+        "field_experiment_of_digital_artifact"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Average actual misclassification cost",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越低越好，表示在给定标签数量下对象分类决策的平均误分类成本更低，或达到质量阈值所需标签更少",
+          "operationalization_cn": "对每个对象根据推断标签与真实类计算 ActualCost(\\hat{t}^{(o)}) = c_{t^{(o)}\\hat{t}^{(o)}}，再对所有对象平均；质量阈值 τ_c 约束平均误分类成本；实验采用对称成本矩阵 c(a)=(0,1;1,0) 与非对称成本矩阵 c(b)=(0,1;5,0)",
+          "comparator_cn": "Generalized round-robin (GRR)、New label uncertainty (NLU)、以及文内提出的 MP-Reliab/GLAD-Cost/GLAD-CostV 策略之间的比较；另含已知真实难度的 GLAD-Cost-β* 和 GLAD-CostV-β* 变体",
+          "demonstrated_result_cn": "模拟实验中，EM-Cost 在对称成本下较 GRR/NLU 改进 15%–35%（平均每对象10标签），非对称成本下改进 25%–45%；真实数据上，EM-Cost 在约三分之一标签处较 GRR 改进 15%–27%、较 NLU 改进 15%–50%（不同数据集与成本设置）",
+          "evidence": [
+            "Section 6.2, Figure 2",
+            "Section 7.2, Figure 4 and accompanying text"
+          ]
+        },
+        {
+          "metric_name": "Labeling cost / number of labels required to reach quality threshold",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越少越好；在达到相同平均误分类成本阈值 τ_c 时所需标签数越少，标注费用越低",
+          "operationalization_cn": "动态分配策略在平均估计误分类成本降到 τ_c 以下时停止，比较累计标签数；或在相同标签数下比较实际平均误分类成本",
+          "comparator_cn": "GRR 和 NLU 作为非自适应/现有自适应基线；真实数据实验还以静态等量标签为参照",
+          "demonstrated_result_cn": "真实数据集上，EM-Cost 可在达到同等质量水平时减少标签费用 15%–50%；QBP 现场实验中，相同质量水平下成本下降 50%–70%",
+          "evidence": [
+            "Section 7.2 final paragraph",
+            "Section 8.3 live experiment description"
+          ]
+        },
+        {
+          "metric_name": "Worker lifetime / number of completed tasks (retention)",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "越高越好，表示工人完成更多任务、流失率更低，有利于成本有效的众包质量保障",
+          "operationalization_cn": "在 oDesk 现场实验中，随机分配工人到质量基础定价(QBP)或固定费率控制组，统计工人完成的任务数量及生命周期",
+          "comparator_cn": "控制条件（固定费率，绩效低于80%终止合同） vs 实验条件（QBP，按贡献价值支付）",
+          "demonstrated_result_cn": "QBP 条件下工人生命周期（完成任务数）延长 1.5–3 倍，对应控制组流失率显著更高",
+          "evidence": [
+            "Section 8.3, live production system experiment"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "data_driven",
+          "engineering_or_domain_knowledge",
+          "hybrid"
+        ],
+        "named_theories_or_formalisms": [
+          "Dawid-Skene expectation maximization model",
+          "GLAD generative model of labels, abilities, and difficulties (Whitehill et al., 2009)",
+          "Message passing / belief propagation (Karger et al., 2011)",
+          "Finite-horizon multi-armed bandit formulation",
+          "Decision-theoretic misclassification cost minimization",
+          "Monte Carlo simulation",
+          "Design science research methodology"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "设计由形式化决策问题驱动：将动态标注问题建模为有限期多臂老虎机，因计算不可解而推导启发式；误分类成本基于决策理论（Proposition 1/2）定义；GLAD/EM 提供对象类别和工人质量概率推断；工人贡献价值指标由二项式概率及蒙特卡洛估计达到质量阈值所需冗余工人数导出；QBP 补偿比例直接按贡献价值设定。理论主要用于构造方案，而非仅作事后解释。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "众包标注中验证每个答案质量费用高昂，传统静态冗余标注（等量标签加多数投票）忽视工人质量异质性、对象难易差异和误分类成本不对称；现有动态分配方法（如 Sheng et al.、Ipeirotis et al.）通常假设工人同质且错误成本对称，难以实现成本有效的质量保障；同时缺少能分离可纠正错误并纳入误分类成本的工人绩效标量指标。",
+        "focal_objective_cn": "在保证平均误分类成本不超过阈值 τ_c 的前提下最小化标注费用（标签数）；第二目标是为工人构造可客观排序的价值度量，以支持公平高效的补偿方案。",
+        "proposed_solution_cn": "提出一个两阶段动态决策框架：推断阶段使用 MV/MP/EM/GLAD 估计对象真实类别与工人质量；分配阶段提出 MP-Reliab、EM-Cost、GLAD-Cost、GLAD-CostV 四种启发式动态标签分配策略；并定义基于误分类成本的估计成本指标和基于冗余所需工人数的贡献价值指标，应用于质量基础定价(QBP)补偿方案。",
+        "evaluation_logic_cn": "先用合成数据按标签模型生成标签，比较不同策略在相同平均标签数下的平均实际误分类成本，以 GRR 和 NLU 为基准；再用 bluebird、rte、temp 三个 AMT 真实数据集模拟动态标签获取，固定工人-对象标签池进行多次随机实验以消除混淆因素；最后在 oDesk 真实生产系统上做 QBP 与固定费率对照现场实验，比较完成质量目标所需成本与工人生命周期。",
+        "main_finding_cn": "EM-Cost 等自适应分配策略在模拟中比 GRR/NLU 降低平均误分类成本 15%–45%，在真实数据上节省标签成本 15%–50%；QBP 现场实验在相同质量水平下成本下降 50%–70%，工人生命周期延长 1.5–3 倍。",
+        "multi_study_or_stage_progression_cn": "论文按‘静态推断算法比较 → 动态分配策略模拟 → 真实众包数据集再验证 → 工人价值度量的构造与现场实验’推进：先用静态实验确定 GLAD/EM 作为推断基础，再在动态模拟和真实数据中比较分配策略，最后将价值度量嵌入 QBP 补偿方案并以现场实验验证成本与保留效果。"
+      },
+      "decision_reason_cn": "文章设计并实质改进了众包标注质量保障方案：提出多种动态标签分配算法、推断算法和基于价值的工人绩效度量，并以平均误分类成本、标签成本和工人保留等客观指标作为主要成功标准；通过模拟、真实数据集和现场实验与 GRR/NLU/固定费率等基准比较，展示了明确且大幅度的客观改进。四道门全部通过，且客观指标为中心，因此保留。",
+      "confidence": 0.97
+    },
+    {
+      "audit_group": "retained_layer:hybrid",
+      "record_id": "15986",
+      "source_file": "15986_2014_a-decision-support-system-for-planning-and-coordination-of-hybrid-renewable-energy-systems.md",
+      "title": "A decision support system for planning and coordination of hybrid renewable energy systems",
+      "year": "2014",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2014.04.001",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "hybrid",
+      "research_paradigms": [
+        "prescriptive_analytics_or_optimization",
+        "computational_or_algorithm_design",
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Expected total cost of HRES (installation cost + expected conventional generation cost + expected storage cost)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "期望总成本越低越好",
+          "operationalization_cn": "随机优化模型的目标函数，即安装成本μ(x)加上常规发电成本E[λ(x,ω)]与储能成本E[h(x,ω)]；通过蒙特卡洛模拟生成随机需求、可再生供电和传输损耗，求解每期电力协调模型后按式(5)-(6)估计并累加。",
+          "comparator_cn": "论文未直接将HRES总成本与某个外部基线方案比较；DSS示例中给出该指标的具体求解结果。",
+          "demonstrated_result_cn": "DSS示例解得太阳能和风能发电机总数分别为95和126，总成本为1210.2；该指标是所提出模型、算法和DSS的优化目标。",
+          "evidence": [
+            "Section 3, model Eqs.(1)-(6)",
+            "Section 6.2, Fig.5"
+          ]
+        },
+        {
+          "metric_name": "Convergence gap to true optimum: log(g(x*_k) - g* + 1)",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "该性能指标越小越好，表示算法终止解与真实全局最优之间的函数值差距越小。",
+          "operationalization_cn": "在18个模拟场景（3类多峰测试函数ER/FR/PBS × 3种维度4D/12D/16D × 2种噪声设定）中，每个算法运行20次宏重复，在20000次函数评估预算下按式(14)计算最优差距。",
+          "comparator_cn": "与SAN（传统模拟退火）和MNM（改进Nelder-Mead）两种现有算法比较。",
+          "demonstrated_result_cn": "MSA在所有场景中的平均差距均小于SAN和MNM；例如固定噪声16D的ER函数：MSA=1.77，SAN=6.23，MNM=6.43；变化噪声16D的PBS函数：MSA=2.79，SAN=8.13，MNM=6.34。",
+          "evidence": [
+            "Section 5, Eq.(14), Tables 2 and 3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "stochastic optimization",
+          "Monte Carlo simulation",
+          "simulated annealing",
+          "metamodel / response surface methodology",
+          "fractional factorial design",
+          "central composite design",
+          "signal-to-noise sample size scheme"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "根据HRES的发电、输电、储能和常规电源补缺运行逻辑建立随机规划模型，目标为期望总成本最小，约束保证需求满足和功率平衡；由于期望值无解析形式，使用蒙特卡洛模拟和信噪比样本量方案估计目标函数；MSA在传统模拟退火框架中加入基于析因设计和中心复合设计的响应面元模型，在试验区域内求解元模型最优解以加速收敛，并保留Metropolis准则和随机搜索以避免局部最优；DSS将模型、算法和可视化输出集成，支持参数输入、结果查看、敏感性分析和功率分配可视化。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "HRES的规划协调需要在不确定的需求、可再生供电和传输损耗下决定各电站太阳能/风电机组数量以最小化成本；现有模型多为确定性模型，忽略不确定性会导致实际效果差，而概率模型只能回答what-if问题，未解决优化问题。",
+        "focal_objective_cn": "提出一个决策支持方案，使HRES的期望总成本最小，同时满足各区域电力需求；在算法层面则是最小化最终解与全局最优之间的差距。",
+        "proposed_solution_cn": "提出随机优化模型刻画HRES规划协调问题；开发MSA（基于元模型的模拟退火）启发式算法，结合蒙特卡洛模拟与样本量方案在随机环境下有效求解；并将模型与算法集成为带可视化输出的DSS。",
+        "evaluation_logic_cn": "用18个模拟场景的标准测试函数对比MSA、SAN、MNM，以式(14)的最优解差距为客观评分指标，在相同20000次函数评估预算下进行20次宏重复；随后用一组示例参数展示DSS的求解与可视化输出。",
+        "main_finding_cn": "MSA在所有测试场景中的收敛性能均优于SAN和MNM，且随问题维度和噪声增大优势更明显；DSS可在约40秒内给出示例问题的最优配置和总成本，并支持敏感性分析。",
+        "multi_study_or_stage_progression_cn": "研究按‘问题建模→求解方法设计→仿真对比实验→DSS开发与演示’推进：先建立随机优化模型，再设计MSA算法，然后在标准测试集上客观比较算法优劣，最后将模型与算法封装为DSS并用示例展示其可用输出。"
+      },
+      "decision_reason_cn": "该文设计了一个IS相关的决策支持系统及内嵌的随机优化模型和MSA启发式算法；核心成功标准是客观的期望总成本最小化，且在第5节通过18个模拟场景将MSA与SAN、MNM比较，证明其在最优解差距指标上一致更优。全文没有依赖主观满意度、感知有用性等构念来判断方案是否成功，因此四个门全部通过，客观指标改进是唯一或主导的成功依据。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "retained_layer:interface_or_interaction_design",
+      "record_id": "12792",
+      "source_file": "12792_2007_an-empirical-study-of-web-site-navigation-structures-impacts-on-web-site-usability.md",
+      "title": "An empirical study of web site navigation structures' impacts on web site usability",
+      "year": "2007",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2006.11.004",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "interface_or_interaction_design",
+      "research_paradigms": [
+        "theory_driven_artifact_experiment",
+        "human_computer_interaction_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Correct Answer Ratio (CAR)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示用户在知识获取任务中回答正确的比例更高。",
+          "operationalization_cn": "每个受试者完成一系列在线知识获取任务，CAR = 正确回答的任务数 / 总任务数，由实验平台记录答案并事后判定正确性。",
+          "comparator_cn": "三类导航结构（usage-oriented hierarchy、subject-oriented hierarchy、combined hierarchy）在简单任务和复杂任务下的两两比较，以及相对于任务复杂度主效应的比较；使用MANOVA统计检验。",
+          "demonstrated_result_cn": "第一轮中，usage-oriented hierarchy 的 CAR 比 subject-oriented hierarchy 高 6%，combined hierarchy 比 subject-oriented hierarchy 高 10%；第二轮中分别高 9% 和 7%。两轮MANOVA均显示导航结构主效应显著（第一轮 F=10.67, p<0.001；第二轮 F=3.05, p=0.0184），且 usage 和 combined 均显著优于 subject。",
+          "evidence": [
+            "Section 6.1, Tables 6 and 8",
+            "Section 6.2, Tables 7 and 9",
+            "Section 5.2 dependent variable measurement"
+          ]
+        },
+        {
+          "metric_name": "Navigation Time (NT)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越低越好，表示用户完成每个知识获取任务所需的平均导航时间更短、知识获取效率更高。",
+          "operationalization_cn": "NT = 所有任务的总导航时间 / 任务数；导航时间由实验平台从用户点击“Ready to Navigate”到点击“Ready to Answer”自动计时。",
+          "comparator_cn": "三类导航结构在简单与复杂任务下的比较，以及相对于任务复杂度主效应的比较；使用MANOVA统计检验。",
+          "demonstrated_result_cn": "第一轮中，subject-oriented hierarchy 的平均导航时间比 usage-oriented hierarchy 高 52 秒，比 combined hierarchy 高 36 秒；第二轮中分别高 25.0 秒和 16.4 秒。两轮中 usage 和 combined 均在统计上显著优于 subject。",
+          "evidence": [
+            "Section 6.1, Tables 6 and 8",
+            "Section 6.2, Tables 7 and 9",
+            "Section 5.2 dependent variable measurement"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Mental model theory (structural vs. functional models)",
+          "Schema theory (accretion, tuning, restructuring)",
+          "Wood's task complexity model",
+          "Minimalist approach"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者用心理模型理论区分结构化模型（how-it-works）与功能化模型（how-to-use-it），据此推断 subject-oriented hierarchy 更易诱发费力且有认知负载的结构化心理模型，而 usage-oriented hierarchy 更易借助跨领域类比的功能化模型；同时用图式理论（accretion/tuning 与 restructuring/creation）说明 usage-oriented 结构的学习成本更低。这些理论推导出“usage-oriented 或 combined hierarchy 比 subject-oriented hierarchy 更有用”的假设，并指导了三种导航结构实验站点的构建与假设检验。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "Web 站点的核心功能之一是支持用户获取知识，但现有关于超文本/Web 导航结构的研究规模小、结论不一致，且缺乏针对 Web 环境、尤其是知识获取场景下导航结构设计的可靠处方；设计者缺少关于导航结构语义（subject-oriented vs. usage-oriented）与句法如何影响可用性的实证依据。",
+        "focal_objective_cn": "在控制其他可用性影响因素的情况下，比较 usage-oriented hierarchy、subject-oriented hierarchy 与 combined hierarchy 三种 Web 导航结构在简单和较复杂知识获取任务中的可用性；核心客观结果是正确答案比例（CAR）和平均导航时间（NT）的改善。",
+        "proposed_solution_cn": "构建了包含相同 100 个生产运作管理（POM）领域知识对象的实验平台和三个 Web 站点，三个站点仅在导航结构上不同：subject-oriented hierarchy、usage-oriented hierarchy、combined hierarchy。这是首次在受控 Web 环境中对这三种导航结构语义/句法组合进行系统实验比较，并配有简单与复杂两套知识获取任务。",
+        "evaluation_logic_cn": "采用 3×2 受试间设计（导航结构 × 任务复杂度），受试者随机分配到六个实验单元；平台自动记录每项任务的导航时间和答案，计算 CAR 与 NT；用 MANOVA 检验导航结构主效应、任务复杂度主效应及其交互，并在两个学期重复实验（第一轮 134 人、第二轮 99 人）以验证结果一致性；感知问卷作为次要测量。",
+        "main_finding_cn": "两轮实验一致显示，usage-oriented hierarchy 和 combined hierarchy 在 CAR 上显著更高、在 NT 上显著更低，均优于 subject-oriented hierarchy；简单任务的 CAR 高于复杂任务、NT 低于复杂任务；导航结构与任务复杂度交互不显著。感知数据第一轮无显著差异、第二轮部分显著，但客观绩效结论是主要且可重复的成功依据。",
+        "multi_study_or_stage_progression_cn": "研究包含预测试（pilot test，9名受试者）以优化平台、Web对象和任务；之后进行第一轮正式实验；一个学期后重复第二轮实验以检验结论的可复制性；每轮内部先进行人口学问卷、操作说明、练习任务，再完成正式任务，最后填写感知问卷。"
+      },
+      "decision_reason_cn": "该文设计并构建了三种具有不同导航结构的 Web 站点（有目的的 IS 设计）；其核心成功标准是客观绩效指标 CAR 和 NT，并明确说明研究聚焦于绩效而非感知；两轮受控实验均展示了 usage-oriented 与 combined hierarchy 相对 subject-oriented hierarchy 在客观指标上的显著改进；感知测量是次要的，且第一轮不显著并不影响结论，因此客观绩效改进是主导的成功依据。四个门全部通过，centrality 判定为 dominant。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "retained_layer:interface_or_interaction_design",
+      "record_id": "9894",
+      "source_file": "09894_2008_b-research-note-b-awareness-displays-and-social-motivation-for-coordinating-communication.md",
+      "title": "<b>Research Note</b>—Awareness Displays and Social Motivation for Coordinating Communication",
+      "year": "2008",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.1080.0175",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "interface_or_interaction_design",
+      "research_paradigms": [
+        "theory_driven_artifact_experiment",
+        "human_computer_interaction_experiment",
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Initiator interruption timing (number of jumpers on screen during interruption)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "数值越低越好，表示发起者在目标工作负荷较低时发起沟通，协调性更佳、对目标任务的破坏更小。",
+          "operationalization_cn": "在发起者每次发送提问时，记录目标屏幕上同时出现的跳楼者数量作为工作负荷指标。",
+          "comparator_cn": "无显示条件 vs. 抽象显示和全显示；团队 vs. 独立条件。",
+          "demonstrated_result_cn": "实验1：无显示0.75，抽象0.43，全显示0.42，显示与无显示对比 F=35.7, p<0.001；实验2：团队条件下无显示1.95，抽象1.60，全显示1.69，而独立条件下无显著差异，显示×团队交互显著。",
+          "evidence": [
+            "Table 1 Row A",
+            "Table 2 Row A",
+            "Figure 3(a)"
+          ]
+        },
+        {
+          "metric_name": "Percentage of jumpers saved by Targets",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "数值越高越好，代表减少通信打扰对目标主要任务绩效的损害。",
+          "operationalization_cn": "目标在Jumpers游戏中的客观得分，即成功救起的跳楼者百分比。",
+          "comparator_cn": "无显示 vs. 抽象/全显示；团队 vs. 独立条件。",
+          "demonstrated_result_cn": "实验1：无显示70.7%，抽象75.4%，全显示74.6%，显示条件比无显示多挽救约7%（p=0.02）；实验2：团队条件下无显示53.2%，抽象59.2%，全显示63.3%，约提高10%，但仅团队条件下显著。",
+          "evidence": [
+            "Table 1 Row C",
+            "Table 2 Row C",
+            "Figure 3(b)"
+          ]
+        },
+        {
+          "metric_name": "Initiator puzzle time and accuracy",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "识别图片的时间越短、准确率越高越好；显示设计不应损害发起者自身任务绩效。",
+          "operationalization_cn": "发起者正确猜出图片的比例和完成每张图片猜测所需秒数。",
+          "comparator_cn": "无显示 vs. 抽象 vs. 全显示。",
+          "demonstrated_result_cn": "实验1中全显示使发起者识别时间从约105/110秒增加到121秒（p=0.04），准确率无显著差异；实验2中显示条件对发起者准确率和时间均无显著影响。",
+          "evidence": [
+            "Table 1 Rows D/E",
+            "Table 2 Rows D/E"
+          ]
+        },
+        {
+          "metric_name": "Visual attention (proportion of fixations and mean fixation duration)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "对显示区的注视比例越低、对主任务区的注视比例越高越好；平均注视时长反映认知负荷，过长表示加工困难。",
+          "operationalization_cn": "使用眼动仪记录发起者对显示区与主任务区的注视比例和平均注视时长。",
+          "comparator_cn": "抽象显示 vs. 全显示。",
+          "demonstrated_result_cn": "全显示比抽象显示获得更多显示区注视比例并减少主任务区注视比例，且主任务区平均注视时长增加约36%，表明高信息显示更分散注意力。",
+          "evidence": [
+            "Table 3 Rows A/B/D"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "social identity theory / common in-group identity",
+          "outcome interdependence theory",
+          "attention and visual search theory",
+          "improper linear models of decision making (Dawes 1979)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者从组织沟通、分布式协作和注意力研究的理论出发，对帮助寻求情境中的发起者-目标决策进行任务分析，推导出两个核心设计要素：提供目标工作负荷信息的显示，以及使发起者关心目标福利的激励结构。理论进一步指导了抽象显示与全信息显示的对比设计，并预测抽象显示足以支持中断时机决策且注意力成本更低。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "分布式工作者之间的通信常因信息不对称和激励不兼容而在不当时机发生，造成干扰；尽管awareness display已被广泛提出，但缺乏对其能否改善协调、应如何设计、以及什么社会条件下会使用的系统证据。",
+        "focal_objective_cn": "核心目标是让通信发起者在目标工作负荷较低时发起中断，从而提高目标任务绩效，同时最小化显示对发起者自身任务和注意力的负面影响。",
+        "proposed_solution_cn": "设计了三种awareness display变体：无显示、抽象工作负荷显示（图标表示目标屏幕上的跳楼者数量）、全信息实时屏幕复制显示（VNC），并结合团队激励/共同身份操控，通过实验室实验系统比较其协调效果和注意力成本。关键是首次在受控实验中同时考察信息抽象程度与社会激励对中断时机的影响。",
+        "evaluation_logic_cn": "两个受控实验室实验，每组包含发起者与目标两名参与者；发起者需要猜图并可通过提问打扰目标的Jumpers游戏。显示条件为被试内变量，团队/独立为被试间变量。客观结果包括中断时目标工作负荷、目标挽救跳楼者百分比、发起者猜图准确率与时间、眼动注视指标；比较无显示与显示、抽象与全显示、团队与独立条件。",
+        "main_finding_cn": "提供目标工作负荷信息的显示能够使发起者在目标负荷较低时发起通信，并提高目标的任务绩效（实验1中约7%，实验2团队条件下约10%）；抽象显示与全信息显示在改善中断时机上效果相当，但全信息显示增加注意力负担并在实验1中损害发起者绩效；在实验2中，只有具备团队激励的发起者才会利用显示改善中断时机，显示对目标绩效的收益也只在团队条件下出现。",
+        "multi_study_or_stage_progression_cn": "实验1验证了显示有用性与抽象化设计假设，但团队操控未成功；实验2通过更强的团队身份操控和引入眼动测量，验证了社会激励假设（H5）和注意力机制（H3），从而形成从显示效用到设计优化再到社会条件的完整论证链。"
+      },
+      "decision_reason_cn": "该文明确设计并比较了awareness display的三种界面形态（无显示/抽象/全显示）和团队激励条件，属于有目的的信息系统界面设计；其核心成功标准是客观可测的通信时机（中断时目标负荷）、目标任务绩效、发起者任务绩效和眼动注意力，而非主观满意度或感知；实验中相对于无显示控制条件和抽象/全显示对比展示了显著的客观绩效改进与注意力权衡，且这些客观改进是文章结论的主要乃至唯一依据。因此四个门全部通过，centrality为exclusive。",
+      "confidence": 0.95
+    },
+    {
+      "audit_group": "retained_layer:prediction_model",
+      "record_id": "16308",
+      "source_file": "16308_2012_an-analytic-approach-to-better-understanding-and-management-of-coronary-surgeries.md",
+      "title": "An analytic approach to better understanding and management of coronary surgeries",
+      "year": "2012",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2011.11.004",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "prediction_model",
+      "research_paradigms": [
+        "predictive_analytics"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Classification accuracy on holdout test set",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示正确预测CABG术后死亡/存活类别的比例越高",
+          "operationalization_cn": "使用独立测试集上的混淆矩阵，按 Accuracy = (TP+TN)/(TP+TN+FP+FN) 计算",
+          "comparator_cn": "在同一测试集上相互比较四种模型：ANN、SVM、C5、CART；另外初步实验与传统统计模型（logistic回归、判别分析、Naïve Bayes）比较",
+          "demonstrated_result_cn": "SVM准确率最高为87.74%，优于C5（79.62%）、ANN（74.72%）和CART（71.15%）",
+          "evidence": [
+            "Section 4.1, Table 2, 论文明确指出SVM在保留样本上取得最佳预测准确率87.74%"
+          ]
+        },
+        {
+          "metric_name": "Sensitivity (recall for positive class)",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "越高越好，表示对实际死亡患者的识别能力越强",
+          "operationalization_cn": "基于测试集混淆矩阵计算 Sensitivity = TP/(TP+FN)",
+          "comparator_cn": "四种模型相互比较",
+          "demonstrated_result_cn": "SVM敏感度为89.48%，高于C5（80.29%）、ANN（76.51%）和CART（67.42%）",
+          "evidence": [
+            "Table 2, Section 4.1"
+          ]
+        },
+        {
+          "metric_name": "Specificity (recall for negative class)",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "越高越好，表示对实际存活患者的识别能力越强",
+          "operationalization_cn": "基于测试集混淆矩阵计算 Specificity = TN/(TN+FP)",
+          "comparator_cn": "四种模型相互比较",
+          "demonstrated_result_cn": "SVM特异度为86.01%，高于C5（78.96%）、ANN（72.93%）和CART（74.87%）",
+          "evidence": [
+            "Table 2, Section 4.1"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "data_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Variance-based sensitivity analysis (Saltelli et al.)",
+          "Information fusion-based sensitivity analysis (Eq. 5)",
+          "Support Vector Machines",
+          "Artificial Neural Networks (MLP)",
+          "C5 decision tree",
+          "CART decision tree"
+        ],
+        "theory_role": "none",
+        "design_derivation_cn": "模型设计主要来自数据驱动：使用美国全国住院样本（NIS）大样本数据，依据DRG代码筛选CABG病例，并由领域专家协助决定变量筛选、聚合和排除（如剔除术前未知的住院时长和手术次数）；四种分类模型依据文献报道的预测能力和初步实验结果选定；敏感度分析采用Saltelli方差基敏感度公式（Eq. 4），并进一步提出按各模型预测能力加权的信息融合敏感度（Eq. 5）来综合变量重要性排序。该设计并非从某一理论推演而来，而是基于数据特征、领域知识和已有算法的方法整合。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "CABG手术风险高、费用高，术前准确预测患者术后死亡/存活结果对临床和资源管理决策非常重要；传统风险评分模型（如Parsonnet）存在统计假设限制、对高危患者死亡率高估等问题，而既有数据挖掘研究多使用单一或少量模型、数据集规模有限。",
+        "focal_objective_cn": "以CABG术后死亡/存活的分类预测准确率（以及敏感度和特异度）为核心目标，并在预测模型基础上通过信息融合敏感度分析识别影响预后的关键因素。",
+        "proposed_solution_cn": "构建一个基于四种机器学习分类器（ANN、SVM、C5、CART）的预测模型比较框架，在超过5万条全国住院记录的大规模数据上训练和测试，并引入信息融合敏感度分析对预测因子重要性进行综合排序；相比单模型或小样本研究，该方法强调多模型竞争性评估和大数据下的可推广性。",
+        "evaluation_logic_cn": "将预处理后的平衡数据集按2/3训练、1/3测试划分，所有模型使用相同划分；在测试集上计算准确率、敏感度和特异度，并比较四类模型的混淆矩阵结果；随后对训练好的模型进行敏感度分析，并按各模型预测准确率加权融合变量重要性排序。",
+        "main_finding_cn": "SVM表现最佳，准确率87.74%、敏感度89.48%、特异度86.01%；C5次之，准确率79.62%；ANN与CART准确率分别为74.72%和71.15%。信息融合敏感度分析显示年龄（AGE）、高血压（CM_HTN_C）、肾衰竭（CM_RANLFAIL）和支付类型（PAY1）是最重要的预后因子。",
+        "multi_study_or_stage_progression_cn": "研究按四步流程展开：数据识别与预处理、模型构建与校准、测试集比较评估、敏感度分析与信息融合。各阶段逻辑递进：先保证数据质量和可建模性，再训练多个候选模型，然后基于同一测试集客观比较，最后用敏感度分析解释模型，从而同时回答“能否准确预测”和“哪些因素最重要”两个问题。"
+      },
+      "decision_reason_cn": "本文的核心贡献是设计和构建了面向CABG术后结局的预测模型体系，包含四种机器学习分类器及信息融合敏感度分析，属于IS相关的预测模型设计。主要成功标准是客观的分类准确率、敏感度和特异度，并在固定测试集上与多个基准模型进行对比，证明SVM模型取得最高准确率87.74%。全文没有依赖主观态度、满意度等问卷构念来判断方案是否成功，因此客观指标改善是唯一且核心的成功依据。四个门控条件均满足，客观指标中心性为exclusive。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "retained_layer:prediction_model",
+      "record_id": "950",
+      "source_file": "00950_2010_predicting-the-length-of-hospital-stay-of-burn-patients-comparisons-of-prediction-accuracy-among.md",
+      "title": "Predicting the length of hospital stay of burn patients: Comparisons of prediction accuracy among different clinical stages",
+      "year": "2010",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2010.09.001",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "prediction_model",
+      "research_paradigms": [
+        "predictive_analytics"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Mean Absolute Error (MAE)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "MAE越低表示预测误差越小，预测准确性越高。",
+          "operationalization_cn": "对测试集实例计算预测LOS与实际LOS之差的绝对值，再求平均：MAE = Σ|PredictedLOS_i - ActualLOS_i| / n。采用十折交叉验证重复三次，共30次试验的平均值。",
+          "comparator_cn": "线性回归作为基准；对比三个临床阶段（入院、急性、后期治疗）以及M5与SVM回归技术；另与CFS特征选择后的模型对比。",
+          "demonstrated_result_cn": "后期治疗阶段相对入院/急性阶段MAE降低超过30%（回归从9.532降至6.314，M5从9.246/9.308降至6.331，SVM回归从8.992/8.994降至6.074，p<0.01）。SVM回归在入院阶段的MAE（8.992）低于线性回归（9.532），在p<0.1水平显著；急性与后期阶段MAE也较低但未达到统计显著。",
+          "evidence": [
+            "Table 4(a)-(c)",
+            "Section 4.3"
+          ]
+        },
+        {
+          "metric_name": "Mean Relative Error (MRE)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "MRE越低表示相对于实际LOS的相对预测误差越小。",
+          "operationalization_cn": "对每个测试实例计算绝对误差占实际LOS的比例，再求平均：MRE = Σ(|PredictedLOS_i - ActualLOS_i| / ActualLOS_i) / n。采用十折交叉验证重复三次。",
+          "comparator_cn": "线性回归作为基准；对比三个临床阶段以及不同预测技术；另与CFS特征选择后的模型对比。",
+          "demonstrated_result_cn": "后期治疗阶段MRE显著降低（回归从0.513/0.510降至0.312，M5从0.490/0.491降至0.307，SVM回归从0.439/0.440降至0.282，p<0.01）。SVM回归在各临床阶段的MRE显著低于回归和M5（p<0.01）。",
+          "evidence": [
+            "Table 5(a)-(c)",
+            "Section 4.3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "data_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "M5 model-tree-based regression",
+          "Support vector regression"
+        ],
+        "theory_role": "none",
+        "design_derivation_cn": "预测变量依据文献综述和烧伤中心医师讨论确定，按临床阶段区分：入院阶段使用人口学、既有疾病和烧伤特征变量；急性阶段加入是否手术和首次手术间隔；后期治疗阶段再加入手术次数等治疗变量。预测模型采用机器学习技术M5和SVM回归构建，并以线性回归作为基准。整个设计来源于领域知识和数据驱动的方法选择，而非正式行为理论推导。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "已有烧伤患者住院天数（LOS）预测研究几乎只在入院阶段进行，且方法上仅使用线性回归；但不同临床阶段（入院、急性、后期治疗）的预测时机会影响资源规划与成本控制等决策支持用途，且线性回归可能不足以捕捉复杂非线性关系，需要系统比较不同预测技术与预测时点的效果。",
+        "focal_objective_cn": "以LOS预测的客观准确性为核心目标，具体为提高预测准确性，即降低MAE和MRE，并比较不同临床阶段和不同预测技术之间的准确率差异。",
+        "proposed_solution_cn": "构建针对烧伤患者三个临床阶段（入院、急性、后期治疗）的LOS预测模型，分别采用M5模型树回归和SVM回归，以线性回归为基准；后续还引入CFS特征选择进行稳健性检验，并按TBSA和实际LOS分组进行分解分析。",
+        "evaluation_logic_cn": "使用1080例烧伤患者数据，十折交叉验证重复三次，以MAE和MRE为客观评分指标，通过两尾配对t检验比较不同阶段和不同技术之间的差异。",
+        "main_finding_cn": "后期治疗阶段的LOS预测显著比入院/急性阶段更准确；急性阶段相对入院阶段无显著改进；SVM回归总体优于线性回归，尤其在入院阶段MAE改善边际显著、MRE在所有阶段均显著优于基准；M5表现与线性回归相当。",
+        "multi_study_or_stage_progression_cn": "研究分为多阶段评估：先构建三阶段预测模型并比较技术效果；随后用CFS特征选择检验全变量模型的必要性；最后按TBSA和实际LOS分解分析各技术的适用条件，形成从核心对比到稳健性和边界条件的递进逻辑。"
+      },
+      "decision_reason_cn": "文章提出并评估了针对烧伤患者LOS的预测模型（M5和SVM回归），并将预测准确性（MAE/MRE）作为主要成功标准。全文通过1080例数据的交叉验证，明确展示了后期治疗阶段预测误差显著下降、SVM回归相对线性回归有所改进等客观比较证据。所有四道门均通过，且客观指标是文章成功判断的唯一核心依据。",
+      "confidence": 0.98
+    },
+    {
+      "audit_group": "retained_layer:prescriptive_model_or_optimization",
+      "record_id": "13306",
+      "source_file": "13306_2009_optimal-policy-for-software-patents-model-and-comparative-implications.md",
+      "title": "Optimal Policy for Software Patents: Model and Comparative Implications",
+      "year": "2009",
+      "journal": "Journal of Management Information Systems",
+      "doi": "10.2753/mis0742-1222260304",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "prescriptive_model_or_optimization",
+      "research_paradigms": [
+        "prescriptive_analytics_or_optimization"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Social welfare (ω)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "社会总福利越高越好；目标是在可行专利政策集合内和相对自由市场基准上最大化社会总福利。",
+          "operationalization_cn": "按Equation (9)定义：ω = 创新者与模仿者产品带来的消费者效用积分（需求曲线下方面积） - 创新者开发成本(k·s_n²/2) - 两家企业R&D总支出(h/2·(α1²+α2²))；专利模型版本见Equation (25)。",
+          "comparator_cn": "自由市场无专利均衡（NPE, Table 1）、同一专利长度下的PER内其他政策组合，以及不同专利长度t对应的最优政策点（图8中的rsv线）。",
+          "demonstrated_result_cn": "Proposition 9：社会最优政策为专利长度t=100%，并将专利高度μ和模仿水平λ设置为使创新者与模仿者都生产高于自由市场均衡质量的产品的点；该政策最大化社会总福利，并使创新者、模仿者和消费者均比NPE更优。文中以数值优化和图8-10展示最优位置，未给出单一福利数值幅值。",
+          "evidence": [
+            "Abstract",
+            "Proposition 9 and surrounding text in 'Socially Optimal Patent Policy Design' section",
+            "Figures 8-10"
+          ]
+        },
+        {
+          "metric_name": "Consumer surplus (Ω)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "消费者剩余越高越好；最优政策要求消费者比自由市场更好或至少不更差。",
+          "operationalization_cn": "按Equation (18)（NPE）和Equation (26)（专利模型）计算，消费者剩余是社会总福利减去创新者和模仿者利润。",
+          "comparator_cn": "自由市场NPE下的消费者剩余。",
+          "demonstrated_result_cn": "在最优专利政策下，消费者剩余高于NPE（Proposition 9：consumers better off than in the free market）；图5和图9显示落在消费者等福利曲线上方的好政策区域。",
+          "evidence": [
+            "Proposition 9",
+            "Figure 5",
+            "Figure 9"
+          ]
+        },
+        {
+          "metric_name": "R&D intensity (α1, α2)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "R&D强度不是被最大化或最小化的目标，而是政策设计的权衡结果；在最优政策下R&D强度低于自由市场。",
+          "operationalization_cn": "R&D强度按Equation (27)计算：α1=α2=0.5·sqrt((π_n-π_m)/h)；R&D总支出为(1/2)h(α1²+α2²)。",
+          "comparator_cn": "自由市场NPE中的R&D强度（Table 1, Equation 21）。",
+          "demonstrated_result_cn": "Proposition 10：在最优专利政策下，两家企业的R&D强度均低于自由市场均衡；原因是创新者Stage 2利润不变而模仿者利润上升，缩小了赢得R&D竞赛的收益差。",
+          "evidence": [
+            "Proposition 10",
+            "Equation 27",
+            "Table 1"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "formal_analytical"
+        ],
+        "named_theories_or_formalisms": [
+          "vertical product differentiation model",
+          "R&D race model (Loury; Beath et al.)",
+          "Nordhaus patent-design tradition",
+          "subgame perfect equilibrium and backward induction",
+          "nonlinear optimization (generalized reduced gradient)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者将经济理论（垂直差异化、R&D竞赛、专利设计文献）转化为可解的四阶段博弈模型：先建模自由市场NPE作为基准，再引入专利高度μ、模仿水平λ和长度t三个政策变量，用逆向归纳推导企业质量、价格和R&D决策，构造专利均衡区域（PER）并作为激励约束，最后用非线性规划在PER内最大化社会总福利，从而推导出最优专利政策。理论不是事后解释，而是政策设计的推导基础。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "软件反向工程成本下降使创新者易被低成本模仿，软件专利成为重要保护机制，但政策制定者对专利高度、宽度、长度的最优组合缺乏理论指导；现有IT和经济学文献只研究单一或两个政策工具，尚未同时内生三个政策参数。",
+        "focal_objective_cn": "核心目标是在保证创新者有激励申请专利（PER约束）的前提下，最大化社会总福利，并考察福利在创新者、模仿者、消费者之间的分配。",
+        "proposed_solution_cn": "提出一个将专利长度t与专利高度μ、模仿水平λ同时内生的双寡头质量-价格竞争模型，构造专利均衡区域（PER），并利用非线性优化求解出社会最优专利政策；其新颖之处在于把专利长度作为第三个内生政策工具并系统比较不同长度下的最优政策。",
+        "evaluation_logic_cn": "以自由市场无专利均衡（NPE）为基准；通过解析求解和数值优化比较PER内所有可行政策；用图4-10展示PER随t的扩张、福利等值线、不同t对应的最优政策，并以Proposition 9和10给出最优政策相对NPE的福利改进和R&D强度对比。",
+        "main_finding_cn": "社会最优政策是授予整个产品生命期的专利保护（t=100%），同时把专利高度和模仿水平设得使创新者与模仿者都生产高于自由市场的产品质量；该政策最大化社会总福利并使三方利益相关者都优于自由市场，但R&D强度反而低于自由市场。",
+        "multi_study_or_stage_progression_cn": "文章按分析阶段递进：自由市场基准模型（NPE）→专利模型与PER定义→政策边际变化的比较静态（R&D和社会福利）→三维数值优化找出最优政策→与NPE比较并讨论实施中的数据需求与边界条件；图4-10逐步展示从PER到最优政策点的推理路径。"
+      },
+      "decision_reason_cn": "四个门均通过：作者设计了一个可实施的专利政策决策规则（μ, λ, t）并通过解析与数值优化求解；社会总福利是明确且客观定义的优化目标；以自由市场NPE和PER内替代政策为参照，命题证明最优政策最大化社会福利并改善所有利益相关者；文章成功依据完全是客观福利指标，无主观构念。因此保留。",
+      "confidence": 0.68
+    },
+    {
+      "audit_group": "retained_layer:prescriptive_model_or_optimization",
+      "record_id": "7286",
+      "source_file": "07286_2009_hedging-risks-with-interruptible-load-programs-for-a-load-serving-entity.md",
+      "title": "Hedging risks with interruptible load programs for a load serving entity",
+      "year": "2009",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2009.07.007",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "prescriptive_model_or_optimization",
+      "research_paradigms": [
+        "prescriptive_analytics_or_optimization"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "CVaR_0.95 (Conditional Value at Risk of profit/loss)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "对损失函数（负利润）的CVaR越小越好；文中报告正利润的CVaR越大表示尾部风险越低（损失越小）。",
+          "operationalization_cn": "按Rockafellar-Uryasev公式（式4/14）在95%置信水平下计算多时段损失函数的CVaR，作为目标函数最小化；案例中以CVaR_0.95（利润）报告。",
+          "comparator_cn": "未使用可中断负荷的基本情形（case 1/case 5）与使用可中断负荷的情形（case 2/3/4/6/7）比较；也对比不同C值、不同合同类型和不同远期合约水平。",
+          "demonstrated_result_cn": "正常状态下case 2中ΔCVaR_0.95=201,500美元；供给冲击下case 6中ΔCVaR_0.95在3.925×10^6至4.625×10^6美元之间，对应400MW/30MW方案使CVaR_0.95提高9.1%。",
+          "evidence": [
+            "Table 4",
+            "Table 8",
+            "Section 4.2 results analysis"
+          ]
+        },
+        {
+          "metric_name": "Expected profit",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "期望利润越高越好；作为约束要求PROFIT^int ≥ C，并用于分析风险降低与利润损失的权衡。",
+          "operationalization_cn": "基于场景概率加权求和（式7），由式8-9计算每场景每小时两类可中断合同的利润；总期望利润按场景概率汇总。",
+          "comparator_cn": "基本情形与使用可中断合同情形比较；不同C值下ΔProfit变化。",
+          "demonstrated_result_cn": "正常状态下case 2 ΔProfit=204,852美元；供给冲击下case 6 ΔProfit在4.131×10^6至4.920×10^6美元之间，400MW/30MW方案使期望利润提高8.6%。",
+          "evidence": [
+            "Tables 4-9",
+            "Section 4.2"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "data_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Conditional Value at Risk (Rockafellar-Uryasev)",
+          "Stochastic programming",
+          "Bivariate normal distribution / scenario tree"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者从CVaR作为一致风险测度的性质出发，将其嵌入随机规划目标函数以最小化多时段损失；用场景树刻画现货价格与负荷的不确定性；通过合同约束（式10-12）和接受函数将电力领域知识转化为可计算的采购决策模型。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "LSE以固定售电价从批发市场购电，面临现货价格和需求不确定性，价格冲击可导致严重损失；现有可中断负荷研究多针对可靠性或激励设计，较少面向价格接受型LSE的多时段风险对冲，尤其是结合客户接受函数和CVaR的随机规划方法。",
+        "focal_objective_cn": "在期望利润约束下最小化多时段CVaR，即通过确定可中断负荷的最优采购量、合同类型和补偿/折扣率来对冲市场风险。",
+        "proposed_solution_cn": "提出一个基于随机规划的混合整数优化模型，决定两类可中断负荷合同（按中断量补偿和按折扣补偿）的最优采购政策，并用接受函数刻画客户对补偿/折扣率的响应。",
+        "evaluation_logic_cn": "以美国新英格兰康涅狄格州3个月实际价格和需求数据构建案例，生成100个情景；在正常状态和供给冲击状态下，将不使用可中断负荷的基本情形与使用不同合同组合的情形进行比较，报告期望利润和CVaR_0.95的差值ΔProfit和ΔCVaR。",
+        "main_finding_cn": "正常状态下可中断合同对利润提升和风险降低作用有限；但在供给冲击导致现货价格飙升时，可中断负荷合同能显著提高期望利润并降低CVaR，例如case 6相对case 5在400MW/30MW方案下期望利润提高8.6%、CVaR提高9.1%。",
+        "multi_study_or_stage_progression_cn": "从模型建立到案例研究：case 1-4比较正常状态下的基本情形、单独和联合使用两类合同；case 5-7模拟供给冲击并分析合同效果及更陡峭接受函数的影响；敏感性分析FW1/FW2检验不同远期合约水平下可中断合同的边际价值。"
+      },
+      "decision_reason_cn": "文章提出并求解了一个可中断负荷采购的随机规划优化模型（Gate 1通过）；模型目标函数明确最小化CVaR，并以期望利润为约束，均为客观数值指标，且是文章的核心成功标准（Gate 2通过）；案例研究中通过与不采用可中断负荷的基本情形对比，展示了在供给冲击下ΔProfit和ΔCVaR的明确改善（Gate 3通过）；整篇文章的结论完全基于期望利润和CVaR等客观绩效改进，无主观构念作为成功依据（Gate 4通过）；因此strict_objective_improvement_match为true，centrality为exclusive。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "retained_layer:software_system_or_artifact",
+      "record_id": "10622",
+      "source_file": "10622_2006_developing-maintainable-software-the-readable-approach.md",
+      "title": "Developing maintainable software: The Readable approach",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2005.04.002",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "design_science_research",
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Control-flow understanding score (H1; 5 true/false items)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示维护者对程序控制流的理解越准确，即Readable表示优于传统Java表示。",
+          "operationalization_cn": "20题判断题中5道控制流题；调整分采用每题答对1分、空白0分、答错-1分以校正猜测，另报告只计答对数的原始分；题目要求判断模块之间的可能调用顺序。",
+          "comparator_cn": "同一N皇后问题的传统Java程序（对照组）与采用Readable扩展的Java程序（处理组）。",
+          "demonstrated_result_cn": "调整分：Readable组均值0.800 vs 对照组-0.364，单尾t=1.804，p=0.040，Cohen d=0.537；原始分：3.100 vs 2.318，p=0.038，d=0.575。结论为Readable显著提升控制流理解。",
+          "evidence": [
+            "Section 4.2, Table 7",
+            "Section 4.2, Table 8",
+            "Appendix A.1 (questionnaire items 1,5,9,13,17)"
+          ]
+        },
+        {
+          "metric_name": "Program-states understanding score (H2; 5 true/false items)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "分数越高表示对程序状态的理解越准确；Readable预期不劣于传统Java并可能更好。",
+          "operationalization_cn": "5道判断题考查执行后变量可能值或实际值，需结合控制流推断状态；计分方式同上。",
+          "comparator_cn": "传统Java对照组。",
+          "demonstrated_result_cn": "调整分0.700 vs -0.227，p=0.076；原始分3.000 vs 2.318，p=0.069；差异方向有利但未达到0.05显著性，被解释为不会损害程序状态理解。",
+          "evidence": [
+            "Section 4.2, Table 7",
+            "Section 4.2, Table 8"
+          ]
+        },
+        {
+          "metric_name": "Data-flow understanding score (H3; 5 true/false items)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "分数越高表示对数据流的理解越准确；核心检验是Readable是否使数据流理解变差。",
+          "operationalization_cn": "5道判断题考查跨模块变量传递关系；计分方式同上。",
+          "comparator_cn": "传统Java对照组。",
+          "demonstrated_result_cn": "调整分0.250 vs 0.909，p=0.169（单尾）；原始分2.800 vs 2.818；效应量小，结论为Readable不太可能使数据流理解变差。",
+          "evidence": [
+            "Section 4.2, Table 7",
+            "Section 4.2, Table 8"
+          ]
+        },
+        {
+          "metric_name": "Module understanding score (H4; 5 true/false items)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "分数越高表示对单个模块内部过程的理解越准确；预期两组无实质差异以排除混杂因素。",
+          "operationalization_cn": "5道判断题只涉及单个模块内部行为；计分方式同上。",
+          "comparator_cn": "传统Java对照组。",
+          "demonstrated_result_cn": "调整分0.750 vs 0.545，双尾p=0.760，d=0.094；原始分3.050 vs 2.591，p=0.214，d=0.260；效应量小，认为模块理解无实质差异。",
+          "evidence": [
+            "Section 4.2, Table 7",
+            "Section 4.2, Table 8"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "formal_analytical",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Pennington's program understanding constructs",
+          "Parnas/Peters-Parnas tabular specification",
+          "state-transition formalism",
+          "universal Turing machine"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者将Pennington提出的程序理解四构念（功能/控制流/数据流/程序状态）直接转化为Readable应用结构层的四类表格（控制流表、组件表、变量表、程序状态表）；借鉴Parnas等人的表格化规格说明思想，使表格同时作为文档和可执行规格；执行环境被概念化为通用图灵机式控制器，读取表格并调度Web组件，从而实现代码、文档与执行的一致性。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "软件维护成本高，主要障碍是维护者难以理解他人编写的程序，尤其是Web应用的多范式混合结构与缺乏文档；现有CASE工具、IDE、文字化编程、逆向工程和应用生成器要么只关注单组件文档，要么不能维护代码与文档的对应关系，也没有充分处理控制流这一关键理解构念。",
+        "focal_objective_cn": "设计一种新的软件表示与执行方法，使维护者能够更容易理解程序（尤其是控制流），同时不损害对其他构念的理解，从而改善软件可维护性；核心成功标准是客观理解测试得分。",
+        "proposed_solution_cn": "提出Readable方法及相应执行环境：将程序组件、控制流、变量和程序状态显式表示为可执行的表格（应用结构层），由通用控制器按表格执行；通过扩展Java实现原型，使Web应用的各组件之间连接关系不再散落于HTML/URL/脚本中，而是集中、可修改、自文档化。",
+        "evaluation_logic_cn": "开展受控实验室实验：被试随机分为Readable组和传统Java组，阅读同一N皇后Java程序（传统版或Readable扩展版），在考试条件下完成20道是非题；题目按Pennington四构念分为四组，分别对应H1-H4；采用校正猜测的调整分和原始分，用独立样本t检验和Cohen d评估组间差异，并检验随机化和无应答偏差。",
+        "main_finding_cn": "Readable组的控制流理解得分显著高于传统Java组（H1成立）；程序状态理解呈正向但未达显著（H2）；数据流和模块理解未发现显著变差（H3、H4），效应量小；作者据此认为Readable能改善程序理解，进而有利于软件维护。",
+        "multi_study_or_stage_progression_cn": "研究分阶段推进：先基于理论和已有形式化方法设计Readable方法，再开发Java扩展原型和多个部署应用（如IS Bibliographic Repository）以证明可行性，随后提出假设并进行受控实验比较，最后在讨论中以工程论证补充可扩展性分析。"
+      },
+      "decision_reason_cn": "四个门径均通过：作者有目的地设计了Readable这一IS相关解决方案（可执行表格化表示与执行环境）；主要成功标准是客观打分的是非题理解测试，明确以提升程序理解（尤其是控制流）为目标；实验将Readable与传统Java对照，H1在调整分和原始分上均显著改善，且其余构念未显著受损；结论完全基于客观测试结果，没有依赖主观量表或感知指标，因此objective_metric_centrality为exclusive。",
+      "confidence": 0.93
+    },
+    {
+      "audit_group": "retained_layer:software_system_or_artifact",
+      "record_id": "11228",
+      "source_file": "11228_2017_a-social-route-recommender-mechanism-for-store-shopping-support.md",
+      "title": "A social route recommender mechanism for store shopping support",
+      "year": "2017",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2016.11.004",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "design_science_research",
+        "field_experiment_of_digital_artifact"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Route recommendation accuracy",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "数值越高越好，表示推荐路线与用户实际访问路线在相同顺序上重叠的区域比例越高，即推荐路线越符合用户真实购物偏好。",
+          "operationalization_cn": "由公式(25)计算：Accuracy = |用户实际路线 ∩ 推荐路线（同顺序区域数）| / |推荐区域总数|。用户实际路线由实验参与者在购物过程中通过移动应用报告。",
+          "comparator_cn": "四种信息组合消融对比（SI+PC、SI+PC+SP、SI+PC+SC、SI+PC+SP+SC）以及热门区域最短路径路线和随机路线。",
+          "demonstrated_result_cn": "图7显示采用全部信息（SI+PC+SP+SC）的推荐路线平均准确率高于仅使用部分信息的三种消融方法；图8显示该全信息方法也优于热门区域最短路径法和随机路线法。论文未报告客观准确率的具体数值，但明确说明所提方法准确率更高。",
+          "evidence": [
+            "Section 5.1, Eq. (25), Figure 7",
+            "Section 5.2, Figure 8"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical",
+          "data_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Markov chain model",
+          "hierarchical clustering",
+          "social network analysis"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "系统设计基于多种形式化方法：以顾客轨迹停留次数与时长定义购物偏好向量SP；以社交Like行为和朋友关系强度定义社交偏好向量SI；以人口统计、时间、日期和区域密度定义个人与群体情境信息PC和SC；通过四类向量的距离进行层次聚类；对同一聚类内用户的轨迹构建一阶Markov转移矩阵，并逐步选择转移概率最大的区域生成推荐路线。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "实体零售商面临在线购物竞争，需要提升顾客购物体验；现有基于位置的服务只推荐附近商品，未考虑顾客整体偏好、购物情境和社交影响，难以帮助初次到店或不熟悉环境的顾客规划合适的购物路线。",
+        "focal_objective_cn": "设计并验证一种情境感知的社交购物路线推荐机制，核心目标是提高推荐路线与用户实际购物路线一致的准确率，从而提供更符合用户偏好的购物路线。",
+        "proposed_solution_cn": "提出并实现了一个移动端购物路线推荐系统，融合购物偏好信息（轨迹与停留时长）、情境信息（时间、日期、人群密度）、社交信息（Facebook Like和朋友关系强度），通过层次聚类将相似顾客分组，并利用Markov链为同一聚类内的目标顾客生成购物路线。",
+        "evaluation_logic_cn": "在真实购物商场中开展实验，100名参与者使用移动应用报告购物轨迹；将提出的全信息方法（SI+PC+SP+SC）与三种信息子集消融方法、热门区域最短路径法和随机路线法比较，按公式(25)计算路线推荐准确率（与用户实际路线的重叠比例）；另用5点李克特问卷评估满意度、合适性和接受度。",
+        "main_finding_cn": "全信息模型在客观路线准确率上均高于各消融方法和两种基线方法；用户主观评价也显示该推荐路线显著优于其他路线，但客观准确率是系统有效性的核心证据。",
+        "multi_study_or_stage_progression_cn": "单一现场实验包含两阶段比较：第一阶段比较不同信息组合对聚类与路线准确率的影响（图7），第二阶段将全信息方法与热门区域最短路径法和随机路线法比较（图8），随后补充主观问卷评价（图9和表5-7）。"
+      },
+      "decision_reason_cn": "该文提出并实现了一个社交购物路线推荐系统（Gate 1通过）；核心成功指标是推荐路线准确率，即推荐路线与用户实际访问路线的重叠比例，且该客观指标是系统有效性评价的主要依据（Gate 2通过）；实验将全信息方法与多种消融及基线方法比较，结果显示所提方法准确率更高（Gate 3通过）；文章虽然同时报告了用户满意度等主观评分，但主要结论首先建立在客观路线准确率提升之上，主观结果处于辅助地位，因此客观改进为主导成功依据（Gate 4通过，centrality=dominant）。",
+      "confidence": 0.8
+    },
+    {
+      "audit_group": "retained_theory_driven",
+      "record_id": "13598",
+      "source_file": "13598_2023_designing-conversational-dashboards-for-effective-use-in-crisis-response.md",
+      "title": "Designing Conversational Dashboards for Effective Use in Crisis Response",
+      "year": "2023",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00801",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "design_science_research",
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Transparent interaction (TI)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "更高表示用户导航路径更接近完成信息查找任务所需的最短路径，即交互更透明、更少受界面阻碍。",
+          "operationalization_cn": "对每个任务，分别按仪表盘类型计算完成该任务的最少导航步骤数（如鼠标点击次数、自然语言输入次数）；对每位参与者，计算其实际用于正确求解任务的导航步骤与最短步骤之比的均值，即 TI = 最短步骤数 / 实际步骤数。",
+          "comparator_cn": "传统仪表盘（TDB，仅鼠标）vs 纯自然语言会话仪表盘（CDB-NLO）vs 自然语言增强会话仪表盘（CDB-NLE）；是否提供对话式引导（onboarding）。",
+          "demonstrated_result_cn": "CDB-NLO组的TI均值0.60（SD=0.25）显著高于TDB组的0.31（SD=0.14），t(265)=9.2, p<0.001；CDB-NLE组在有onboarding时TI均值0.42（SD=0.25）显著高于无onboarding时的0.31（SD=0.19），t(265)=2.65, p=0.008；CDB-NLE组整体未显著高于TDB（p=0.10），但事后分析显示自然语言使用比例对TI有显著正向影响（β=0.54, p<0.001）。",
+          "evidence": [
+            "Section 4.2.2, Table 5, Table 6",
+            "Section 4.2.1, Table A3"
+          ]
+        },
+        {
+          "metric_name": "Efficiency (task completion time for correctly solved tasks)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "更低的任务完成时间代表更高的效率。",
+          "operationalization_cn": "计算参与者正确完成的所有任务的平均时间；时间越短效率越高。",
+          "comparator_cn": "以透明交互水平为自变量，效率为因变量的多变量回归。",
+          "demonstrated_result_cn": "透明交互对效率有显著正向影响（β=0.58, p<0.001），即透明交互水平越高，完成任务所需时间越短。",
+          "evidence": [
+            "Section 4.2.2, Hypothesis 5, Table 6"
+          ]
+        },
+        {
+          "metric_name": "Effectiveness (number of correctly solved information-finding tasks)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "更高的正确解题数量代表更高的有效性（任务目标达成程度）。",
+          "operationalization_cn": "参与者完成4项信息查找任务，每项任务有客观正确答案，正确完成的任务数即为有效性。",
+          "comparator_cn": "以透明交互水平为自变量，有效性为因变量的多变量回归。",
+          "demonstrated_result_cn": "透明交互对有效性有显著正向影响（β=0.90, p<0.001），即透明交互水平越高，正确完成的任务数越多。",
+          "evidence": [
+            "Section 4.2.2, Hypothesis 6, Table 6",
+            "Section 4.2.1, Table A2"
+          ]
+        },
+        {
+          "metric_name": "NLP component performance (speech-to-text accuracy, entity extraction F1, intent mapping accuracy/F1, response time)",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "更高的准确率、精确率、召回率、F1值以及更低的响应时间代表自然语言交互技术基础更可靠。",
+          "operationalization_cn": "对3119条自然语言输入进行人工标注为ground truth；计算语音转文字准确率、实体抽取与意图映射的精确率/召回率/F1（微平均），以及平均响应时间。",
+          "comparator_cn": "与相关自然语言可视化交互系统（如Srinivasan & Stasko, 2018）的意图映射性能进行比较。",
+          "demonstrated_result_cn": "语音转文字准确率90.2%；实体抽取总体F1=92%；意图映射准确率82%、总体F1=82%，声称与相关系统相当或更好；平均响应时间0.9秒。",
+          "evidence": [
+            "Section 4.1.2, Table 3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Theory of Effective Use (TEU, Burton-Jones & Grange, 2013)",
+          "Affordances (Gibson, 1977; Hartson, 2003)",
+          "Enactive learning (Gupta & Bostrom, 2009)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "TEU被用作内核理论，从其透明交互维度以及适应表面结构和学习表面结构这两个驱动因素推导出两条元需求（MR1: 调整表面结构以支持自然语言交互；MR2: 主动支持用户学习表面结构）。在此基础上，利用功能可供性概念推导出DP1（提供自然语言交互）和DP2（提供自然语言与鼠标的灵活选择），利用行动学习（enactive learning）思想推导出DP3（提供对话式引导，让用户分步骤练习自然语言交互并接收反馈）。理论不仅用于解释结果，而是直接指导了设计原则和原型功能的形成。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "危机应对仪表盘（如COVID-19仪表盘）面向普通公众，但多数用户缺乏仪表盘使用经验，复杂GUI（下拉菜单、滑块、过滤器等）使其难以透明交互、快速找到所需信息；而现有IS和HCI研究主要面向组织内专家或技术熟练用户，缺乏面向普通公众的、有理论基础的会话式仪表盘设计，也缺乏对学习支持功能（如引导）的严谨评估。",
+        "focal_objective_cn": "核心目标是提高用户与危机应对仪表盘交互时的透明交互水平（以及由此带来的信息查找效率和有效性），使普通公众能更顺畅地获取危机相关信息。",
+        "proposed_solution_cn": "提出并实现一个基于理论的会话式危机应对仪表盘（conversational dashboard），支持用口语或书面自然语言导航仪表盘，并提供可选鼠标交互；同时设计对话式引导（conversational onboarding），让用户通过分步实践学习自然语言交互。具体实现使用D3.js、Microsoft Bot Framework、LUIS等开源/云服务，包含数据可视化、交互管理、NLP和onboarding四个关键组件。",
+        "evaluation_logic_cn": "先对NLP组件进行性能评估：用3119条人工标注的自然语言输入计算语音转文字准确率、实体抽取和意图映射的精确率/召回率/F1及响应时间。随后进行3×2在线用户实验（仪表盘类型TDB/CDB-NLO/CDB-NLE × 有无onboarding），271名Mturk参与者在6种仪表盘版本上完成4项信息查找任务；透明交互通过日志数据按“最短路径/实际路径”比例客观计算，有效性和效率分别由正确解题数和正确完成任务的平均时间衡量。",
+        "main_finding_cn": "相比传统鼠标仪表盘，纯自然语言会话仪表盘显著提高了透明交互（CDB-NLO 0.60 vs TDB 0.31）；自然语言增强仪表盘在提供对话式引导后透明交互显著提高（0.42 vs 0.31）；事后分析表明自然语言使用比例越高透明交互越高（β=0.54）。透明交互显著提升效率和有效性（β=0.58和β=0.90）。NLP组件性能满足要求（总体F1=82%，响应时间0.9秒）。",
+        "multi_study_or_stage_progression_cn": "论文遵循两轮设计-评价循环：第一轮通过文献综述、6名用户访谈和15名参与者think-aloud评估，识别用户缺乏自然语言交互经验的问题，从而在第二轮引入对话式引导；第二轮通过性能评估和271人随机在线实验对最终设计原则进行检验，并加入事后分析（自然语言使用比例、中介分析）解释CDB-NLE条件下的设计权衡。"
+      },
+      "decision_reason_cn": "该文明确设计并实现了会话式危机响应仪表盘这一IS解决方案（Gate 1通过）；核心成功标准是客观度量的透明交互、效率和有效性，NLP性能作为技术支持性指标，而自评自我效能仅作为操纵检验（Gate 2通过）；用户实验直接比较了不同仪表盘类型和有无onboarding的条件，并报告了显著的客观改进，NLP性能也与相关系统基准比较（Gate 3通过）；文章结论和设计理论主要依据客观行为指标的改进，主观指标不构成成功判据（Gate 4通过）。因此，严格客观改进匹配为真，中心性为dominant。",
+      "confidence": 0.95
+    },
+    {
+      "audit_group": "retained_theory_driven",
+      "record_id": "6360",
+      "source_file": "06360_2008_representing-part-whole-relations-in-conceptual-modeling-an-empirical-evaluation.md",
+      "title": "Representing Part-Whole Relations in Conceptual Modeling: An Empirical Evaluation",
+      "year": "2008",
+      "journal": "MIS Quarterly",
+      "doi": "10.2307/25148856",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "interface_or_interaction_design",
+      "research_paradigms": [
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Problem-solving solution accuracy",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "得分越高表示用户从概念模型正确理解领域语义的能力越强",
+          "operationalization_cn": "11道问题，每题需回答\"possible / not possible / not sure\"并给出解释；每题答案正确计1分、解释清晰计1分、解释合理计1分，最高3分，总分0-33分；\"not sure\"计0分。评分依据样本答案，由两位研究者独立评分后协调。",
+          "comparator_cn": "ontologically clear UML class diagram（复合物用实体/类表示）对比 ontologically unclear UML class diagram（复合物用关联/三元关联表示）",
+          "demonstrated_result_cn": "Clear组平均24.533（SD=6.022），Unclear组平均10.700（SD=3.904）；t(28)=7.465，p<.001，eta^2=0.666。8/11题达到p<.05，6/11题在Bonferroni校正后仍显著；两个基线题（4和10）无显著差异。",
+          "evidence": [
+            "Results section, Table 2",
+            "Table 3",
+            "Data Scoring subsection"
+          ]
+        },
+        {
+          "metric_name": "Problem-solving time",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "时间越短表示解答效率越高；但本研究未发现显著的组间差异",
+          "operationalization_cn": "记录每位参与者完成11道问题所需的总时间（分钟）。",
+          "comparator_cn": "ontologically clear vs. ontologically unclear UML class diagram",
+          "demonstrated_result_cn": "Clear组平均33.244分钟（SD=11.464），Unclear组平均38.989分钟（SD=15.258）；t(28)=-1.166，p=.253，无显著差异。",
+          "evidence": [
+            "Results, Quantitative Data Analysis, Table 2"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "formal_analytical"
+        ],
+        "named_theories_or_formalisms": [
+          "Bunge's ontology (Bunge 1977)",
+          "Wand and Weber's theory of ontological clarity (1993)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "从Bunge本体论推出：复合物是有属性的事物（thing），不是属性或关系；根据Wand和Weber的本体清晰度理论，用关系/关联表示复合物会产生construct overload，即一个建模构造映射到两个本体构造（关系和复合物），从而降低用户对概念模型语义的理解。因此推导出命题：用实体/类表示复合物会使用户更好地理解领域语义。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "部分-整体（part-whole）关系是概念建模中的基本构造，但复合物应该用关系/关联还是实体/类表示存在理论争议；已有理论论点（Wand et al. 1999）但缺乏严格的实证评估。",
+        "focal_objective_cn": "核心目标是判断用实体/类表示复合物是否能使用户更好地理解概念模型所表达的领域语义，操作化为问题求解准确率这一客观任务绩效。",
+        "proposed_solution_cn": "提出并检验一种概念建模表示方式：在UML类图中用实体/类显式表示复合物，而不是用关系/关联隐式表示。研究中构造了ontologically clear和ontologically unclear两版项目计划领域类图作为对比方案。",
+        "evaluation_logic_cn": "采用两阶段后测实验，30名行业参与者随机分配到两组；因变量包括问题求解准确率（0-33分客观评分）、解答时间和感知易用性；使用独立样本多元t检验比较两组，并用有声思维协议进行定性分析。",
+        "main_finding_cn": "ontologically clear组的问题求解准确率显著高于ontologically unclear组（24.533 vs. 10.700，p<.001，eta^2=0.666），支持用实体/类表示复合物的命题；时间和感知易用性无显著差异，说明准确率优势不是由速度或主观偏好驱动。",
+        "multi_study_or_stage_progression_cn": "单一实验研究，但内部有清晰递进：从本体论和本体清晰度理论推出命题→由专家检查并构造清晰/不清晰两版UML图→实施受控实验→先做定量分析（准确率/时间/易用性）再做有声思维定性分析；定性结果进一步支持定量结论。"
+      },
+      "decision_reason_cn": "四个门均通过：作者设计并比较了概念模型中复合物的两种信息表示方式（实体/类 vs 关系/关联），以问题求解准确率这一客观评分的任务绩效作为主要成功标准；实验证明ontologically clear表示显著提高准确率（大效应量），时间和感知易用性仅为辅助且不显著，因此客观改进是主要成功依据。中心性为dominant。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "retained_theory_driven",
+      "record_id": "1090",
+      "source_file": "01090_2021_designing-promotional-incentives-to-embrace-social-sharing-evidence-from-field-and-online-experi.md",
+      "title": "Designing Promotional Incentives to Embrace Social Sharing: Evidence from Field and Online Experiments",
+      "year": "2021",
+      "journal": "MIS Quarterly",
+      "doi": "10.25300/misq/2021/15352",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "digital_platform_mechanism_or_policy",
+      "research_paradigms": [
+        "digital_platform_or_mechanism_design",
+        "field_experiment_of_digital_artifact",
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Sender's purchase likelihood",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示发送者使用促销码购买所分享 deal 的概率提升",
+          "operationalization_cn": "字段实验中发送者在实验期内是否购买所分享 deal 的二元变量（0/1），由平台交易日志记录",
+          "comparator_cn": "简单提醒邮件对照组、hold-out 组及其他促销码处理组",
+          "demonstrated_result_cn": "一个不可分享码组购买概率为 0.066，显著高于提醒组 0.049（t=3.470, p=0.001）；回归系数约 0.017-0.018，相对提醒组平均购买概率提高约 34.69%",
+          "evidence": [
+            "Table 2",
+            "Table 4",
+            "Figure 5a",
+            "Results of Study 1"
+          ]
+        },
+        {
+          "metric_name": "Sender's successful referral",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示发送者带来的他人成功购买（成功推荐）的概率提升",
+          "operationalization_cn": "平台通过发送者专属可分享促销码追踪到其他用户兑换购买并归因于该发送者的二元变量（0/1）",
+          "comparator_cn": "简单提醒组、一个不可分享码组、两个码组及 hold-out 组",
+          "demonstrated_result_cn": "一个可分享码组成功推荐概率为 0.036，显著高于提醒组 0.025（t=2.940, p=0.003）和不可分享码组 0.028（t=1.990, p=0.047）；回归系数约 0.011（p<0.01）",
+          "evidence": [
+            "Table 3",
+            "Table 5",
+            "Figure 5b"
+          ]
+        },
+        {
+          "metric_name": "Short-term overall purchase volume and net revenue",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "越高越好，表示发送者自身购买与成功推荐加总后的总体购买量及扣除 15% 折扣后的净收入更高",
+          "operationalization_cn": "总体购买量取值为 0/1/2（发送者购买+成功推荐数）；净收入按总体购买量乘以 0.85（扣除 15% 折扣）进行估算",
+          "comparator_cn": "以简单提醒组为基线（净收入标准化为 1.00）",
+          "demonstrated_result_cn": "一个不可分享码组净收入约为提醒组的 1.09 倍（+9%），一个可分享码组约为 1.05 倍（+5%），两个码组约为 0.95 倍（-5%）",
+          "evidence": [
+            "Table 6",
+            "Table 7"
+          ]
+        },
+        {
+          "metric_name": "Customer lifetime value (CLV)",
+          "metric_role": "primary_success_criterion",
+          "improvement_direction_cn": "越高越好，表示考虑新客户未来交易后的长期价值更高",
+          "operationalization_cn": "CLV = 发送者购买数×1 + 既有客户推荐数×1 + 新客户推荐数×11.2（11.2 为平台五年历史数据中每个用户平均交易次数的下界估计）",
+          "comparator_cn": "各实验组之间的 CLV 比较，以简单提醒组为参照",
+          "demonstrated_result_cn": "一个可分享码组 CLV 为 1029.4，高于提醒组 767.2、不可分享码组 880.8 和两个码组 833.8，表明该组长期价值最高",
+          "evidence": [
+            "Table 8",
+            "Economic Significance section"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "formal_analytical"
+        ],
+        "named_theories_or_formalisms": [
+          "social image theory",
+          "impure altruism",
+          "self-image theory",
+          "perceived exclusivity",
+          "incentive scarcity"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者构建一个包含购买效用与分享效用的消费者效用模型，将消费者同时视为购买者和分享者，并据此推导不同激励设计（可分享性、稀缺性/数量）对购买和推荐的影响；随后引入排他性感知和社交动机等行为因素解释两码设计为何失效，从而生成假设并设计现场实验与在线实验中的具体促销码处理。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "已有 IT 赋能社会分享研究多关注信息分享，而激励分享因具有财务成本、不可随意复制且需要在自购和利他之间权衡，与信息分享有本质区别；企业缺乏如何设计促销激励以同时激活消费者作为购买者和分享者角色的实证指导。",
+        "focal_objective_cn": "核心结果目标是通过激励设计同时提升发送者的自身购买概率和成功推荐概率，并在短期净收入与长期客户终身价值之间进行权衡评估。",
+        "proposed_solution_cn": "在真实在线团购平台上设计并实施大规模随机现场实验，比较五种条件：hold-out、简单提醒、一个不可分享 15% 促销码、一个可分享 15% 促销码、两个 15% 促销码（一不可分享一可分享）；其新颖之处在于将激励的可分享性和稀缺性作为设计维度，并同时刻画消费者的购买者与分享者双重角色。",
+        "evaluation_logic_cn": "超过 20,000 名发送者被随机分配到各组；平台通过专属促销码追踪发送者购买和成功推荐；使用 t 检验、LPM、Logit/Probit 回归及双向固定效应估计平均处理效应；通过整体购买量和 CLV 估算经济价值。",
+        "main_finding_cn": "一个不可分享码显著提高发送者购买概率（约 +34.69%）；一个可分享码显著提高成功推荐概率（0.036 vs 0.025）但未提高自身购买；两个码的设计既未增加购买也未增加推荐。短期净收入方面，不可分享码最高（+9%），可分享码次之（+5%）；但考虑新客户未来价值，可分享码的 CLV 最高（1029.4）。",
+        "multi_study_or_stage_progression_cn": "研究一为大规模随机现场实验，确立激励设计对购买和推荐的因果效应及经济价值；研究二通过 MTurk 在线实验复现购买效应并检验感知排他性的中介机制；研究三通过另一 MTurk 在线实验复现推荐效应并检验利他/社会形象等社交动机的中介机制，从而形成“机制识别->主效应因果证据->机制解释”的完整逻辑链条。"
+      },
+      "decision_reason_cn": "文章设计并测试了数字平台上的促销激励机制（可分享性、稀缺性/数量），属于有意的 IS 相关方案设计；主要成功判据是发送者购买概率、成功推荐概率、短期净收入和长期 CLV 等客观行为/经济指标，并提供了与提醒组、hold-out 组及各处理组相比的显著改进证据。在线实验中的感知排他性和社交动机是解释机制，处于从属地位，因此客观指标改进是主导成功依据。四个门槛均通过，保留为 strict_objective_improvement_match=true。",
+      "confidence": 0.93
+    },
+    {
+      "audit_group": "retained_theory_driven",
+      "record_id": "4378",
+      "source_file": "04378_2006_web-based-intervention-support-system-for-health-promotion.md",
+      "title": "Web-based intervention support system for health promotion",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2005.02.001",
+      "strict_match": true,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "design_science_research",
+        "theory_driven_artifact_experiment",
+        "field_experiment_of_digital_artifact"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "medication discontinuation rate",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越低越好，表示患者更少中断用药",
+          "operationalization_cn": "试验结束时患者是否停用Avonex（继续 vs 停用）的计数；通过电话/在线最终调查确定并用于计算各组停用率",
+          "comparator_cn": "随机对照试验中的无干预对照组",
+          "demonstrated_result_cn": "治疗组停用率1.2%（2/171），对照组8.7%（17/195），χ²=10.55，p=0.001",
+          "evidence": [
+            "Section 4.3 Results, Table 2"
+          ]
+        },
+        {
+          "metric_name": "Stage 1 proportion (readiness to discontinue)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "Stage 1（最不可能停药阶段）的患者比例越高越好",
+          "operationalization_cn": "基于TTM阶段分类（Stage 1/2/3），通过最终电话/在线调查测量并计算各组处于Stage 1的患者比例",
+          "comparator_cn": "随机对照试验中的无干预对照组",
+          "demonstrated_result_cn": "试验结束时治疗组Stage 1比例76.9%（130/169），对照组62.4%（111/178），χ²=9.61，p=0.008",
+          "evidence": [
+            "Section 4.3 Results, Table 3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "data_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Transtheoretical Model (TTM)",
+          "Motivational Interviewing"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "TTM的阶段变化、决策平衡（pros/cons）和自我效能等构念通过第一阶段研究（电话访谈、问卷、因子分析、logistic回归）操作化，并据此编写干预脚本；WISS将基于阶段、重要性评分和pros/cons条目的分支决策规则编码到系统中，生成针对个体患者的定制干预内容，由呼叫中心代表按系统指示执行。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "多发性硬化（MS）患者常过早停用Avonex，而现有干预往往不是量身定制的，且缺乏将行为理论系统性地嵌入Web决策支持系统的成熟方案。",
+        "focal_objective_cn": "降低MS患者的药物停用率，并推动更多患者进入停药风险最低的TTM阶段（Stage 1）。",
+        "proposed_solution_cn": "开发一个基于Web的干预支持系统（WISS），将TTM和动机式访谈知识转化为计算机化的干预脚本和分支算法，通过呼叫中心代表以‘代驾’方式向患者提供定制化干预；系统包括患者管理、调度、干预内容生成和数据库支持。",
+        "evaluation_logic_cn": "采用随机对照纵向实验，将448名MS患者随机分为治疗组和对照组，治疗组接受WISS支持的干预，对照组不接受干预；试验持续三个月，通过卡方检验比较两组的药物停用率和阶段分布。",
+        "main_finding_cn": "治疗组的药物停用率显著低于对照组（1.2% vs 8.7%，p=0.001），且治疗组中处于Stage 1的患者比例显著高于对照组（76.9% vs 62.4%，p=0.008），支持WISS能有效促进药物持续使用。",
+        "multi_study_or_stage_progression_cn": "研究分阶段推进：第一阶段（Phase I）开发并验证TTM测量工具，识别停药风险相关因素；随后基于知识和脚本进行WISS的软件设计、编码、测试与部署；最后通过随机对照试验进行初步效果评估。"
+      },
+      "decision_reason_cn": "文章明确设计并实现了一个Web-based干预支持系统（WISS），属于IS相关解决方案；其首要成功标准是客观指标——药物停用率和TTM阶段分布——并通过随机对照实验证明相对无干预对照组的显著改进；呼叫中心代表的主观满意反馈只是辅助性证据，不构成主要成功判据。因此四个门控均通过，客观指标改进为核心贡献。",
+      "confidence": 0.95
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "10408",
+      "source_file": "10408_2011_online-government-advisory-service-innovation-through-intelligent-support-systems.md",
+      "title": "Online government advisory service innovation through Intelligent Support Systems",
+      "year": "2011",
+      "journal": "Information & Management",
+      "doi": "10.1016/j.im.2010.12.002",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "theory_driven_artifact_experiment",
+        "human_computer_interaction_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Decision Quality (DQ)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "DQ 分越高越好，表示被试在自评任务中正确回答的比例越高。",
+          "operationalization_cn": "DQ = 正确回答的自评题目数 / 自评题目总数（第4.3节）。",
+          "comparator_cn": "在线 ISS 优化解释组（G-EXP） vs 在线 ISS 有限解释组（G-LMT） vs 文本规则组（G-TXT），使用 ANOVA 和 LSD 事后检验进行两两比较。",
+          "demonstrated_result_cn": "DQ 均值分别为 G-EXP=67.4、G-LMT=51.1、G-TXT=29.0；三组间 F(2,159)=94.4, p<0.01；LSD 显示优化解释组显著高于有限解释组，有限解释组显著高于文本组（p<0.05）。",
+          "evidence": [
+            "第3.4节 H3a/H3b 假设",
+            "第4.3节 DQ 测量定义",
+            "表1 ANOVA 结果",
+            "第5节数据分析"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Empowerment theory (psychological empowerment)",
+          "Halo effect"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "作者以授权理论为透镜，结合 Gregor 和 Benbasat、Gönül 等人的解释设计原则，以及从真实政府机构规则中提炼的规则库，设计了三种在线支持工具（优化解释 ISS、有限解释 ISS、文本 PDF）。理论还推导出 DMS、DMT、DQ 对 SoC、PPR、GSPI 的路径假设，构成研究模型。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "已有 ISS 研究多面向组织用户，缺少面向公众的在线政务 ISS 价值研究；政府门户上的文本规则或有限解释工具难以让公众理解复杂规则，需要考察在线 ISS 及优化解释能否带来收益。",
+        "focal_objective_cn": "检验在线 ISS（尤其是优化解释版本）能否提高客观决策质量（DQ），以及 DMS、DMT 等主观感知和授权结果（SoC、PPR、GSPI）是否随之改善；文章的总体论证围绕授权理论模型展开。",
+        "proposed_solution_cn": "设计并实现了三个模拟政府门户的自助评估工具：带优化解释的在线 ISS、带有限解释的在线 ISS、电子文本规则 PDF；规则库基于真实政府法规，网站模拟虚构国家的商务部，以控制先前态度。",
+        "evaluation_logic_cn": "采用被试间实验设计，171 名参与者随机分配到三组，在实验室中使用指定工具完成假设情景的自评任务；DQ 按正确答案比例客观计分，使用 ANOVA/LSD 进行组间比较，并用 PLS-SEM 检验研究模型路径。",
+        "main_finding_cn": "优化解释 ISS 组的 DQ 显著高于有限解释组和文本组（67.4 vs 51.1 vs 29.0），DMS 和 DMT 也显著更高；DMT 是对 SoC、PPR 和 GSPI 最强的预测因子，而 DQ 对授权结果路径无显著影响。",
+        "multi_study_or_stage_progression_cn": "研究分为探索阶段（审查行业报告、检查现有政府 ISS、访谈政府工作人员）、预测试阶段（9 人试点）和正式实验阶段（171 人三组实验），形成“机制识别 -> 构件设计 -> 比较评估 -> 路径检验”的递进逻辑。"
+      },
+      "decision_reason_cn": "Gate 1-3 均通过：作者设计了三种在线政务咨询工具，并利用客观计分的决策质量（DQ）进行三组比较，显著证明了优化解释 ISS 的客观改进。但 Gate 4 失败：文章的核心贡献是授权理论视角下的公民感知模型，DQ 只是多个目标结果之一，主观的 DMS、DMT、SoC、PPR、GSPI 才是主要成功依据；客观改进并非唯一或支配性的成功标准。因此客观指标中心性为 mixed，不能保留。",
+      "confidence": 0.9
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "4164",
+      "source_file": "04164_2020_optimizing-two-sided-promotion-for-transportation-network-companies-a-structural-model-with-cond.md",
+      "title": "Optimizing Two-Sided Promotion for Transportation Network Companies: A Structural Model with Conditional Bayesian Learning",
+      "year": "2020",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.2019.0908",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "digital_platform_mechanism_or_policy",
+      "research_paradigms": [
+        "digital_platform_or_mechanism_design",
+        "prescriptive_analytics_or_optimization"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Fulfillment rate",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示订单被接受且未被取消的联合概率提升",
+          "operationalization_cn": "基于结构模型参数模拟司机依次做出接受、履行决策，计算接受且不取消的概率",
+          "comparator_cn": "原始促销政策（baseline）与调整后的促销政策仿真对比",
+          "demonstrated_result_cn": "最终优化政策的 fulfillment rate 曲线几乎包络原始政策，整体 app 使用改善",
+          "evidence": [
+            "Section 6.3, Figure 8"
+          ]
+        },
+        {
+          "metric_name": "Online-pay rate",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示接受、履行且在线支付的三阶段联合概率提升",
+          "operationalization_cn": "基于结构模型参数模拟司机和乘客决策，计算三段联合概率",
+          "comparator_cn": "原始促销政策与调整后的促销政策仿真对比",
+          "demonstrated_result_cn": "最终优化政策的 online-pay rate 几乎包络原始政策，同时总促销成本从 $285,086 降至 $247,399",
+          "evidence": [
+            "Section 6.3, Figure 8"
+          ]
+        },
+        {
+          "metric_name": "Sales promotion cost",
+          "metric_role": "constraint_or_tradeoff",
+          "improvement_direction_cn": "越低越好，在保持或提升 fulfillment/online-pay 率的前提下降低成本",
+          "operationalization_cn": "对 952 名司机在观测期内发放的现金回扣总额进行仿真核算",
+          "comparator_cn": "原始政策的总成本 $285,086 与最终优化政策的总成本 $247,399 比较",
+          "demonstrated_result_cn": "最终政策节约约 $37,687，且平台利润更高",
+          "evidence": [
+            "Section 6.3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "formal_analytical",
+          "data_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Bayesian learning",
+          "finite-horizon forward-looking structural model (Arcidiacono 2005)",
+          "latent-class discrete-choice model"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "利用 Bayesian learning 刻画司机对匹配、取消和在线支付属性的不确定性更新，结构模型估计结果进一步用于设计促销政策，如早期密集促销和向司机侧倾斜的现金回扣分配。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "TNC 平台在供给侧依赖司机使用 app，但缺乏对司机多阶段决策、新功能属性学习以及双面促销间接效应的微观量化，因此难以设计加速学习且成本有效的促销方案。",
+        "focal_objective_cn": "估计司机接受订单、履行订单和在线支付三阶段决策及其学习过程，并通过政策模拟提出提升 fulfillment rate 和 online-pay rate、同时控制成本的促销政策。",
+        "proposed_solution_cn": "提出重新分配乘客/司机侧现金回扣、以及早期密集促销等平台促销政策；该政策基于结构模型和反事实仿真得出，并非新软件功能。",
+        "evaluation_logic_cn": "使用 942 名司机、198,689 条交易记录估计结构模型；通过 1,000 次仿真比较原始政策与调整政策的 fulfillment rate、online-pay rate 及总促销成本。",
+        "main_finding_cn": "最终优化政策在 fulfillment/online-pay 率上几乎包络原始政策，同时总成本从 $285,086 降至 $247,399，显示改进与成本节约。",
+        "multi_study_or_stage_progression_cn": "模型拟合比较（Table 3）→ 参数估计与学习过程可视化（Table 4, Figure 4）→ 反事实仿真区分直接效应、学习间接效应和前瞻间接效应（Figures 5-7）→ 优化促销策略（Figure 8）。"
+      },
+      "decision_reason_cn": "Gate 1-3 通过：论文提出了可实施的平台促销政策并通过仿真对比展示 objective metric 改进。Gate 4 未通过：文章的核心贡献是结构模型估计和司机学习/促销效应的实证解释，政策优化只是其中一个应用组成部分，客观指标改进不是文章主要结论的排他性或主导性成功依据，因此 centrality 为 mixed。",
+      "confidence": 0.65
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "11476",
+      "source_file": "11476_2017_applying-behavioral-economics-in-predictive-analytics-for-b2b-churn-findings-from-service-qualit.md",
+      "title": "Applying behavioral economics in predictive analytics for B2B churn: Findings from service quality data",
+      "year": "2017",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2017.06.006",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "prediction_model",
+      "research_paradigms": [
+        "predictive_analytics"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "AUC (Area Under the ROC Curve)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "AUC越高表示流失预测的判别/排序能力越好；0.5为随机水平，文中将大于0.6视为有实际意义。",
+          "operationalization_cn": "在十次随机分层子抽样中，用约三分之二数据训练和验证、三分之一测试；以逐步选择按对验证集AUC的贡献加入预测变量，最后报告logit模型和分类树在测试层上的AUC。",
+          "comparator_cn": "未提供明确的基线模型、基准方法或消融对照的AUC；仅有最终测试层AUC的绝对值，以及隐含的随机AUC=0.5，未量化所提方案相对任何参照模型的改进幅度。",
+          "demonstrated_result_cn": "全样本logit测试AUC约为0.6425–0.6639，新客户子样本logit AUC约为0.5853–0.6795；分类树AUC约为0.622–0.639。由于缺少与对照模型的直接比较，无法据此判定所提预测方案客观改进了指标。",
+          "evidence": [
+            "Table 10",
+            "Table 11",
+            "Section 5.2.3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "data_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "neoclassical rationality assumption",
+          "bounded rationality",
+          "representativeness heuristic",
+          "availability heuristic",
+          "peak-end rule",
+          "somatic marker hypothesis",
+          "attribution theory",
+          "dual-system theory (System 1/System 2)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "从行为经济学的理性与有限理性假设出发，将服务质量失败构造为即时疼痛与比例疼痛；基于代表性启发式（峰值、终值、峰值-终值）和可得性启发式（时间频率、事件频率）导出五种流失决策规则；再依据躯体标记假说构造启发式变量与理性评估变量的交互项，并通过ETL从纵向交易数据中提取为预测变量。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "现有B2B流失预测多为契约情景、依赖RFM类特征或纯归纳式变量，非契约B2B服务中心质量与理论驱动的流失预测研究不足。",
+        "focal_objective_cn": "以AUC衡量的B2B流失预测准确性，同时检验理论驱动的服务疼痛变量能否解释和预测组织流失决策。",
+        "proposed_solution_cn": "提出并实现一种理论驱动的流失预测方法：设计理性服务疼痛评估变量（时间平均比例疼痛）和有限理性启发式决策规则变量（代表性/可得性启发式），结合逻辑回归与分类树构建流失预测模型。",
+        "evaluation_logic_cn": "基于近10万家SME的两年纵向服务数据，先通过规则加人工验证识别流失客户及其流失时点，并以匹配抽样构造对照；再通过描述性Measure 1–3比较，随后用十次随机分层子抽样训练/验证/测试logit与树模型，报告测试层AUC，并在新客户子样本上重复逐步选择。",
+        "main_finding_cn": "理性服务疼痛变量和部分扩展性启发式变量显著进入解释与预测模型；模型AUC约为0.58–0.68，处于中等水平；但未报告与任何显式基线或基准模型的AUC对比，因此客观改进未得到直接验证。",
+        "multi_study_or_stage_progression_cn": "研究按“描述性特征证据→解释性建模→预测性建模→敏感性分析→新客户边界检验”推进，逻辑上先用描述性证据筛选决策规则，再用统计检验和AUC评估最终模型。"
+      },
+      "decision_reason_cn": "该文提出了理论驱动的B2B流失预测模型（理性与有限理性服务疼痛特征），并以AUC作为明确的客观预测指标，因此Gate 1和Gate 2通过，且成功判断以客观预测表现为基础，Gate 4也通过。但全文没有与基线、基准、消融或对照组模型直接比较AUC，只报告了测试层AUC绝对值（约0.58–0.68），不满足Gate 3要求的对比改进证据，故strict_objective_improvement_match为false。",
+      "confidence": 0.72
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "5836",
+      "source_file": "05836_2023_sensing-the-future-a-design-framework-for-context-aware-predictive-systems.md",
+      "title": "Sensing the Future: A Design Framework for Context-Aware Predictive Systems",
+      "year": "2023",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00821",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Cost of forecasting errors (COST_FE)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "数值越低越好，代表备件需求预测误差带来的利润损失和库存成本更小",
+          "operationalization_cn": "COST_FE = (HR_IS - HR_SO) × UF_VOL × CM + OF_VOL × (OC + DF)，其中HR为报价转化率，UF_VOL为欠预测量，CM为边际贡献，OF_VOL为过预测量，OC为资金占用成本，DF为折旧/报废因子（见附录）",
+          "comparator_cn": "以传统Croston方法为state-of-the-art基线，并与带淘汰成分的Croston方法进行比较",
+          "demonstrated_result_cn": "带淘汰成分的Croston方法比基线改进4%；基于活动传感器的方法比基线改进20%，比带淘汰成分方案改进17%",
+          "evidence": [
+            "Section 5.2.1",
+            "Figure 7",
+            "Appendix: Calculating the Cost of Forecasting Errors"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven",
+          "engineering_or_domain_knowledge"
+        ],
+        "named_theories_or_formalisms": [
+          "Design Science Research methodology (Hevner et al., 2004)",
+          "Predictive analytics modeling process (Shmueli & Koppius, 2011)"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "CAPS框架由DSR方法论的三个循环与Shmueli和Koppius的预测建模八步骤映射融合而成；案例中的预测方法改进则结合领域知识（发动机活动时间、产品淘汰、数据质量）进行传感器数据驱动的迭代设计。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "传感器/IoT数据日益丰富，但缺乏指导设计师利用传感器情境数据构建预测系统的框架；传统间歇性需求预测方法如Croston仅依赖历史销售数据，没有利用传感器提供的上下文信息。",
+        "focal_objective_cn": "在MAN Diesel & Turbo案例中最小化备件需求预测误差成本（COST_FE），并以该客观指标作为评价CAPS框架所指导设计的预测工件是否改进的核心依据。",
+        "proposed_solution_cn": "提出CAPS设计框架，包含目标定义、IT工件构建、模型评估、模型部署四个步骤；并据此开发了带淘汰成分的Croston方法和基于活动传感器的预测工件。",
+        "evaluation_logic_cn": "将数据划分为学习期和测试期，以COST_FE为目标函数，以传统Croston方法为基线，通过定量比较和定性反馈进行多轮设计迭代。",
+        "main_finding_cn": "带淘汰成分的Croston方法较基线改进4%；活动传感器方法较基线改进20%，较带淘汰成分方案改进17%；后续高级设计（连续多传感器监控、远程监控界面）以五年回本为条件，分别需要8%和30%的预测成本改进。",
+        "multi_study_or_stage_progression_cn": "第一阶段完成三个可部署工件的迭代：基线Croston → 带淘汰成分的Croston → 活动传感器；第二阶段评估两个尚未部署的高级设计（连续多传感器监控、远程监控界面）的可行性；基于两阶段经验提炼出四条设计命题和财务可行性矩阵。"
+      },
+      "decision_reason_cn": "Gate 1、2、3通过：文章提出了CAPS设计框架并据此构建/修改了预测工件，COST_FE是明确目标，且相对Croston基线展示了4%和20%的客观改进。但Gate 4不通过：文章的核心贡献是CAPS框架本身及设计命题，其成功主要依据框架的实用性、可推广性、专家反馈和定性评估；客观指标改进只是作为评价框架的例证之一，而非判定该框架成功的主要或唯一依据。因此objective_metric_centrality为mixed，不能保留。",
+      "confidence": 0.75
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "3102",
+      "source_file": "03102_2020_a-generic-framework-for-sentiment-analysis-leveraging-opinion-bearing-data-to-inform-decision-ma.md",
+      "title": "A generic framework for sentiment analysis: Leveraging opinion-bearing data to inform decision making",
+      "year": "2020",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2020.113304",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "software_system_or_artifact",
+      "research_paradigms": [
+        "design_science_research"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Classification accuracy (proportion of correctly classified sentiment instances)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示框架引导选出的模型对情感类别的判别越准确",
+          "operationalization_cn": "在四个数据集上按80%-20%划分训练与测试集，重复十次随机种子，报告测试集分类正确率；候选模型经网格搜索或手动调参后比较",
+          "comparator_cn": "文献基准（如Pang & Lee 87.15% SVM、Salinca 92.6%）、现成词典方法（Vader, Pattern, SentiWordNet, Hu & Liu）、无预处理基线与不同预处理配置",
+          "demonstrated_result_cn": "PL04上ECCO训练的SVM最高89.2%、均值86.96%（对照87.15%）；Yelp上LogReg最高94%、均值93.15%（对照Salinca 92.6%）；Twitter上LogReg均值82.2%，低于针对该数据集的Vader 86.06%；机器学习模型总体大幅优于现成词典模型；某些预处理配置提升朴素贝叶斯准确率（如SMS从0.8200升至0.8460）",
+          "evidence": [
+            "Section 4.2, Table 3",
+            "Section 4.3, Figure 12",
+            "Section 4.3, text comparing to Pang and Lee [33] and Salinca [34]"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "engineering_or_domain_knowledge",
+          "data_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Data science process (O'Neill and Schutt)",
+          "DSS architecture (Shim et al.; Power)",
+          "Model selection triple (MST, Kumar et al.)",
+          "LDA topic modelling",
+          "Machine learning/NLP techniques"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "ECCO框架从通用数据科学范式与DSS组成结构出发，模块化地划分processing、modelling、analysis；根据Kumar等的MST概念把算法选择、特征工程与超参数调优纳入建模组件；通过领域知识与NLP/ML标准方法（分词、停用词、词干化、词袋、词嵌入、LDA等）填充各模块。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "现有情感分析框架多为特定领域或特定模型，缺少对机器学习MST（算法、特征、超参数）选择的指导；也几乎没有框架支持将情感结果与结构化属性结合进行探索性分析，难以真正支撑决策。",
+        "focal_objective_cn": "证明一个通用的情感分析决策支持框架ECCO能够帮助用户在不同领域开发出分类准确率有竞争力的情感模型，并支持对非结构化文本与结构化数据的综合分析。",
+        "proposed_solution_cn": "提出ECCO框架并实现ECCO系统：GUI+数据库+处理/建模/分析组件，包含预处理配置与效果反馈、十种模型/多种特征与超参数网格搜索比较、主题建模、情感-结构化变量可视化和分类树分析。",
+        "evaluation_logic_cn": "在PL04、Yelp、Twitter、SMS四个数据集上应用该框架；以测试集准确率为主、AUC/F1等为辅进行模型比较；以文献基准和现成词典模型为参照；用表格和箱线图报告十次重复实验的分布，并用案例展示分析组件的功能。",
+        "main_finding_cn": "ECCO引导下选出的模型在PL04、Yelp等基准上达到或超过文献中的对照结果，普遍大幅优于现成词典模型；预处理与MST选择对准确率影响显著；框架在四个异构领域均可运作，并产生可用于决策的附加洞察。",
+        "multi_study_or_stage_progression_cn": "文献综述→框架设计与DFD说明→四案例数据集→预处理效果实验→建模MST对比实验→分析组件示例，呈现从构件设计到整体效用验证的链条。"
+      },
+      "decision_reason_cn": "Gate1-3通过：作者提出并实现了ECCO情感分析框架/系统，以分类准确率为显式目标之一，并在四个数据集上相对于词典方法、无预处理基线和文献基准展示了比较性改进。但Gate4不通过：论文的中央贡献是综合决策支持框架，成功依据既有客观准确率改进，也有对分析组件/可操作洞察的定性示例；客观指标不是唯一或绝对主导的成功基础，因此centrality为mixed，严格保留条件不成立。",
+      "confidence": 0.78
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "8946",
+      "source_file": "08946_1988_exploring-modes-of-facilitative-support-for-gdss-technology.md",
+      "title": "Exploring Modes of Facilitative Support for GDSS Technology",
+      "year": "1988",
+      "journal": "MIS Quarterly",
+      "doi": "10.2307/249800",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "human_computer_interaction_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "post-meeting consensus (fuzzy-set consensus score)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示群体成员在资金分配方案上的最终一致性越好（0=完全不一致，1=完全一致）",
+          "operationalization_cn": "每个成员在GDSS会议后独立对六个项目进行$500,000分配；基于模糊集算法将个体分配向量聚合为0到1的共识分数",
+          "comparator_cn": "facilitator-driven（促进者驱动）支持模式；另与pilot及既往研究中的user-driven、manual、baseline对照",
+          "demonstrated_result_cn": "扩展实验中chauffeur-driven组平均post-consensus=0.650，显著高于facilitator-driven组的0.500（p=0.039）；pilot中分别为0.668 vs 0.557",
+          "evidence": [
+            "Results section, Table 5 and Table 6",
+            "Pilot Study, Table 3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Maier (1970) problem paradigm",
+          "Maier and Maier (1957) developmental vs. free discussion",
+          "Silver (1990) restrictiveness and decisional guidance",
+          "McGrath (1984) task taxonomy",
+          "Allport et al. (1970) competing values theory"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "理论主要用于形成和修正关于支持模式效果的假设（例如判断性任务中低约束、低决策指导的‘自由讨论’更有利于共识），而不是推导新的信息系统设计；驾驶员/促进者角色的操作化是实验操纵而非制品构建。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "GDSS使用日益增多，但用户首次使用GDSS时获得的支持方式（促进者驱动vs驾驶员驱动）对群体绩效的影响尚未被系统研究；既有用户驱动GDSS研究显示共识水平较低。",
+        "focal_objective_cn": "提高首次使用GDSS的群体在偏好/判断型任务上的会后共识水平。",
+        "proposed_solution_cn": "本文并未提出或构建新的信息系统，而是比较两种人类支持模式：facilitator-driven（规定性、结构化的过程引导）和chauffeur-driven（非规定性、仅操作性技术支持）。其核心主张是后一种模式在这类任务中更有效。",
+        "evaluation_logic_cn": "在SAMM GDSS环境下进行实验室实验，36组MBA学生完成foundation资金分配任务；以模糊集算法计算pre/post-consensus，用ANCOVA/ANOVA检验支持模式和引导者对post-consensus的影响，并与pilot研究及先前研究进行跨研究比较。",
+        "main_finding_cn": "chauffeur-driven组平均post-consensus（0.650）显著高于facilitator-driven组（0.500），p=0.039；pilot研究结果一致（0.668 vs 0.557），且跨研究比较显示chauffeur-driven也优于user-driven和baseline。",
+        "multi_study_or_stage_progression_cn": "先导研究（pilot）发现chauffeur-driven优于facilitator-driven，促使研究团队修正原始假设；随后扩大实验（expanded experiment）控制pre-consensus、交叉分配引导者，验证H1-H3；最后通过跨研究汇总表将结果置于更广的GDSS支持模式谱系中。"
+      },
+      "decision_reason_cn": "该文是一项关于GDSS辅助支持模式的受控实验研究，比较了驾驶员驱动与促进者驱动两种人类支持角色对群体共识的影响。研究没有设计、构建或实质修改任何信息系统方案：SAMM是既有系统，操纵的核心变量是外部人类支持角色，而非IS制品或其功能。因此Gate 1（有目的方案设计）未通过。虽然客观共识指标确实是主要成功标准（Gate 2通过），并且chauffeur-driven相对facilitator-driven有显著改进证据（Gate 3通过），客观指标也是结论的主导依据（Gate 4通过），但中心贡献不是IS方案设计，故整体不保留。",
+      "confidence": 0.9
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "1082",
+      "source_file": "01082_2015_integrating-social-networking-support-for-dyadic-knowledge-exchange-a-study-in-a-virtual-communi.md",
+      "title": "Integrating social networking support for dyadic knowledge exchange: A study in a virtual community of practice",
+      "year": "2015",
+      "journal": "Information & Management",
+      "doi": "10.1016/j.im.2014.10.001",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "field_experiment_of_digital_artifact"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Birth rate of dyadic knowledge exchange",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越高越好，表示更多原本无知识交换的二元组开始交换",
+          "operationalization_cn": "某时段内未交换过知识的二元组中，在该时段内发生至少一次知识交换的比例；知识交换由服务器日志中的帖子与评论计数",
+          "comparator_cn": "好友二元组 vs 非好友二元组（非好友为对照组）",
+          "demonstrated_result_cn": "好友二元组出生率159/26,127=0.006，非好友二元组出生率27,048/2,946,900,414≈9×10^-6；卡方检验 p=0.000",
+          "evidence": [
+            "Table 1",
+            "Section 4.2 Hypothesis Testing"
+          ]
+        },
+        {
+          "metric_name": "Activeness (frequency) of dyadic knowledge exchange",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "增幅越高越好，表示好友二元组在整合后交换更频繁",
+          "operationalization_cn": "二元组在T1和T2内知识交换（帖子与评论）的总次数/平均次数；用DID Poisson回归估计整合×好友交互项",
+          "comparator_cn": "好友二元组 vs 非好友二元组，T1 vs T2（difference-in-differences）",
+          "demonstrated_result_cn": "T1到T2好友二元组平均频率从1.66升至6.54（Δ4.88），非好友从1.14升至2.36（Δ1.22）；DID回归交互项b=0.696，p<0.001",
+          "evidence": [
+            "Table 1",
+            "Table 3",
+            "Section 4.2"
+          ]
+        },
+        {
+          "metric_name": "Death rate of dyadic knowledge exchange",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "越低越好，表示原本交换知识的二元组更少停止交换",
+          "operationalization_cn": "T1有知识交换的二元组中在T2没有发生知识交换的比例",
+          "comparator_cn": "好友二元组 vs 非好友二元组",
+          "demonstrated_result_cn": "好友二元组死亡率57/98=0.58，非好友二元组死亡率4,825/4,967=0.97；卡方检验 p=0.000",
+          "evidence": [
+            "Table 1",
+            "Section 4.2"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Social Capital Theory",
+          "Transactive Memory System"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "理论用于解释为何社交网络功能整合会增强好友二元组的知识交换（社交资本与转译记忆机制），并据此提出好友与非好友组间的差异假设；作者并未将理论转化为自己设计的系统或功能。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "传统论坛型VCoP中关系弱、知识交换难以发生和持续；文献多研究个体知识共享的前因，缺乏对实际社交网络技术机制的效果检验。",
+        "focal_objective_cn": "评估社交网络功能整合是否提升好友二元组的出生率、活跃度并降低死亡率。",
+        "proposed_solution_cn": "作者并未设计或实施新系统；所检验的“方案”是Logclub平台在2011年将论坛与社交网络功能整合。文章提出用出生率、活跃度、死亡率三个二元组客观指标来评估该整合效果。",
+        "evaluation_logic_cn": "利用平台服务器日志的准实验数据：T1（2010.10-12）为整合前，T2（2011.4-6）为整合后；好友二元组为处理组，非好友二元组为对照组；卡方检验比较出生率与死亡率，DID Poisson回归比较活跃度变化，并控制历史效应、成熟效应和同质性变量。",
+        "main_finding_cn": "好友二元组出生率0.006显著高于非好友二元组约9×10^-6；死亡率0.58显著低于非好友0.97；DID活跃度交互项系数0.696（p<0.001），支持社交网络整合显著增强好友二元组的知识交换。",
+        "multi_study_or_stage_progression_cn": "单一准实验分两阶段：先通过描述统计和卡方检验验证出生率与死亡率假设，再用DID回归验证活跃度假设，并用bootstrap子样本检验组间规模不平衡的稳健性。"
+      },
+      "decision_reason_cn": "Gate 1失败：文章是观察性/准实验性的因果解释研究，利用Logclub平台已有的社交网络功能整合作为自然实验，作者没有设计、构建、实施或修改任何信息系统方案；尽管客观行为指标的原生性与比较改进证据充分（Gate 2、3、4通过），但这不是一篇提出或实质性修改IS方案的文章，因此不满足保留条件。",
+      "confidence": 0.92
+    },
+    {
+      "audit_group": "near_miss_three_gates",
+      "record_id": "9906",
+      "source_file": "09906_2011_using-last-minute-sales-for-vertical-differentiation-on-the-internet.md",
+      "title": "Using “last-minute” sales for vertical differentiation on the Internet",
+      "year": "2011",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2011.02.008",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "exclusive",
+      "solution_layer": "prescriptive_model_or_optimization",
+      "research_paradigms": [],
+      "objective_metrics": [
+        {
+          "metric_name": "monopolist's profit (π)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "更高的均衡利润表示策略更优；论文通过比较不同销售策略下的利润来确定最优策略。",
+          "operationalization_cn": "在模型假设下，利润由价格、销售概率、需求量和成本计算得出，如式(1)、(8)、(12)、(17)。",
+          "comparator_cn": "非随机化基准策略（β=1或α=1、S_I、S_II）及不同随机化策略之间的比较；还给出了数值例子（如π=4.5 vs 4.505；π=3 vs 3.099）。",
+          "demonstrated_result_cn": "在风险厌恶超过阈值时，随机化策略严格优于确定性策略；例如Lemma 1、Theorem 2以及第2.4节两个数值场景。",
+          "evidence": [
+            "Lemma 1, Eq. (4)-(7)",
+            "Section 2.3, Theorem 2",
+            "Section 2.4 Case I and Case II numerical examples"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "formal_analytical"
+        ],
+        "named_theories_or_formalisms": [
+          "second-degree price discrimination",
+          "constant relative risk aversion utility"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "模型从垄断者面对风险厌恶、异质消费者的价格歧视理论出发，推导出最优的两期销售策略（包含价格和随机销售概率）；没有构建或修改信息系统工件。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "在线卖家（如航空公司）使用last-minute促销，现有文献多假设配给风险仅来自库存耗尽，未考虑卖家主动承诺随机不满足低价需求的策略。",
+        "focal_objective_cn": "在双产品质量、消费者风险厌恶且异质的设定下，刻画垄断者利润最大化的两渠道销售策略。",
+        "proposed_solution_cn": "提出一种带承诺的两期销售策略S=(p1A,p1B,p2A,p2B;α,β,γ)，允许在第二期以概率随机提供产品，并求解最优价格与概率。",
+        "evaluation_logic_cn": "通过解析最优性证明（KKT条件、引理、定理）和参数化数值例子比较不同策略的均衡利润。",
+        "main_finding_cn": "使用随机化销售可以在风险厌恶超过阈值时提升利润；最优随机销售只应提供单一产品（α=0或β=0），不能同时随机提供两种产品（Theorem 2）；风险厌恶程度提高可能加剧或减轻质量扭曲。"
+      },
+      "decision_reason_cn": "Gate 1（purposeful_solution_design）未通过：文章是垄断者基于风险厌恶与质量差异的价格歧视理论模型，虽给出了最优定价/随机销售策略这一‘处方’，但未设计或实质性修改任何信息系统相关解决方案（没有系统、算法、接口、平台机制或可部署工件）。其他三个门在孤立意义下成立：利润是客观且主要的优化目标，文中通过证明和数值算例与确定性及非随机基准比较，且成功判据完全基于利润改进。但由于缺少被设计的IS方案，整体不满足严格保留条件，取保守排除。",
+      "confidence": 0.75
+    },
+    {
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "13262",
+      "source_file": "13262_2020_performance-outcomes-of-test-driven-development-an-experimental-investigation.md",
+      "title": "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+      "year": "2020",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00628",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "other"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Software quality rubric score (0–125)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示代码质量越好",
+          "operationalization_cn": "两名评分者依据附录D的详细rubric对主任务代码进行评分，评分涵盖类设计、方法实现、语法正确性、功能性和可维护性等；评分的Pearson相关系数为0.791",
+          "comparator_cn": "测试在后（test-last）方法对照组",
+          "demonstrated_result_cn": "TDD组平均分93.73（SD=17.40），test-last组平均分76.06（SD=25.78），ANOVA F=13.55, p<0.01，差异显著",
+          "evidence": [
+            "Table 6",
+            "Section 6.2",
+            "Section 5.3"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Kolb's Experiential Learning Theory",
+          "Self-Determination Theory",
+          "Goal Theory"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "本文并未设计或改进任何IS解决方案；理论用于推导关于TDD效果的假设（如满意度和学习），以及事后解释观察到的结果，而非驱动某个新的人工制品的构造。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "已有关于TDD有效性的实证结果不一致，且多数研究只关注外部质量等结果而忽视开发者满意度和学习等过程相关变量。",
+        "focal_objective_cn": "比较TDD与传统test-last方法在软件质量（客观评分）和任务满意度（主观自评）上的差异，并事后考察生产率和学习效果。",
+        "proposed_solution_cn": "没有提出新的解决方案；实验将现有软件工程实践TDD作为处理条件，与传统test-last方法进行对比。",
+        "evaluation_logic_cn": "在受控实验室实验中，随机分配被试到TDD组或test-last组；用预先开发的rubric由两位评分者对代码质量客观打分，用验证过的量表测量满意度，并记录完成时间（生产力代理）和学习测试成绩。",
+        "main_finding_cn": "TDD组在软件质量上显著高于test-last组（93.73 vs 76.06, F=13.55, p<0.01），且任务满意度也显著更高（5.64 vs 4.72, F=7.85, p<0.01）；学习方面，TDD组在理解力上显著更高，但在逐字回忆和问题解决上无显著差异；完成时间上两组无显著差异。",
+        "multi_study_or_stage_progression_cn": "单一实验室实验，包含主假设检验和事后附加分析（生产力与学习），并非多研究递进设计。"
+      },
+      "decision_reason_cn": "Gate 1失败：文章并非设计或实质性修改一个IS解决方案，而是评估已有的TDD实践与传统test-last方法的比较效果。Gate 4失败：文章的主要结论同时依赖客观软件质量提升和主观任务满意度提升，二者是并列的主要假设和贡献，客观指标并非唯一或主导的成功标准。中心性分类为mixed，因此不满足保留条件。",
+      "confidence": 0.9
+    },
+    {
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "256",
+      "source_file": "00256_2008_using-self-regulatory-learning-to-enhance-e-learning-based-information-technology-training.md",
+      "title": "Using Self-Regulatory Learning to Enhance E-Learning-Based Information Technology Training",
+      "year": "2008",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.1070.0141",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "centrality": "dominant",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "theory_driven_artifact_experiment"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Declarative knowledge score",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示对培训内容的概念性理解越好",
+          "operationalization_cn": "由多项选择和填空题组成的书面测试，满分15分，由不知晓实验条件的评分者按标准答案评分",
+          "comparator_cn": "对照组（接收控制脚本）条件，主要对比 T1-T2 与 C1-C2，以及预处理干预汇总对比",
+          "demonstrated_result_cn": "预处理治疗组平均分7.15 (SD 2.44) 高于控制组5.68 (SD 2.62)，p<0.001；T1-T2 与 C1-C2 差异 p=0.002（表4、表5a、表3）",
+          "evidence": [
+            "Table 4",
+            "Table 5a",
+            "Table 3",
+            "Results section"
+          ]
+        },
+        {
+          "metric_name": "Hands-on performance score",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示利用FrontPage完成网站开发任务的实际操作能力越强",
+          "operationalization_cn": "20分钟网站开发任务，按明确的活动清单评分，满分35分，由训练过且不知晓条件的评分者根据附录3B计分",
+          "comparator_cn": "对照组（接收控制脚本）条件，主要对比 T1-T2 与 C1-C2，以及预处理干预汇总对比",
+          "demonstrated_result_cn": "预处理治疗组平均分30.14 (SD 3.94) 高于控制组28.61 (SD 4.87)，p<0.03；T1-T2 与 C1-C2 差异 p=0.040（表4、表5a、表3）",
+          "evidence": [
+            "Table 4",
+            "Table 5a",
+            "Table 3",
+            "Appendix 3B"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Social Cognitive Theory",
+          "Self-Regulatory Learning (Zimmerman's model)",
+          "Alavi and Leidner's TML framework"
+        ],
+        "theory_role": "design_derivation",
+        "design_derivation_cn": "依据Zimmerman的SRL循环阶段模型（前思、表现/意志控制、自我反思）设计了训练前和训练中脚本来引导学习者进行目标设定、注意力聚焦、自我监控和反思；同时基于社会认知理论强调自我效能和动机，在脚本中加入鼓励性信息。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "e-learning培训依赖学习者高度自我导向学习，但学习者往往不能有效自我调节，导致培训效果不佳；现有TML研究忽略了针对个体学习环境下的教学策略设计。",
+        "focal_objective_cn": "提升e-learning IT培训的学习成果，具体表现为陈述性知识测试和实际操作绩效两个客观指标。",
+        "proposed_solution_cn": "设计训练前SRL脚本和训练中反馈脚本，引导学习者使用自我调节学习策略并维持动机与自我效能；这些脚本尚未嵌入e-learning系统，而是以纸质干预形式在实验中测试。",
+        "evaluation_logic_cn": "采用2x2实验设计（训练前干预/控制 × 训练中干预/控制），118名无网站开发经验的学生完成FrontPage e-learning课程后，通过标准答案的陈述性知识测试和按活动清单评分的网站开发任务进行客观评分，并比较不同干预组合的分数差异。",
+        "main_finding_cn": "接受SRL干预的组在陈述性知识和实际操作得分上显著高于对照组；训练前干预效果稳健，训练中反馈也带来显著提升，但个体特质（自我效能等）对学习成果无显著影响。",
+        "multi_study_or_stage_progression_cn": "先进行试点研究检验干预与测量工具，随后开展主实验；另设独立样本进行SRL方法维度的操纵检验，以确认干预确实提升了SRL策略使用。"
+      },
+      "decision_reason_cn": "该文设计并检验的是训练前和训练中纸质脚本这一教学干预，而非对e-learning系统或数字工件的修改；干预本质上是用于验证SRL理论的信息/激励性消息，不属于本筛选标准所要求的IS相关解决方案。因此Gate 1未通过。即使学习成果的客观改善很明显（Gate 2、3、4均通过），由于没有设计或实质性修改IS工件，不能保留。",
+      "confidence": 0.8
+    },
+    {
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "15010",
+      "source_file": "15010_2013_b-research-note-b-an-investigation-of-the-appropriation-of-technology-mediated-training-methods.md",
+      "title": "<b>Research Note</b>—An Investigation of the Appropriation of Technology-Mediated Training Methods Incorporating Enactive and Collaborative Learning",
+      "year": "2013",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.1120.0433",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "mixed",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "other"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Cognitive knowledge quiz score (Excel procedural and declarative knowledge)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "分数越高表示学习效果越好；假设中 WBT/combined 训练方法旨在提高该分数。",
+          "operationalization_cn": "每个训练阶段结束后使用 15 道多选题测验，分数按感知难度加权；三个阶段的测验分数作为重复测量因变量。",
+          "comparator_cn": "视频+练习 (TM1) 对比 WBT (TM2)；个人学习对比协作学习；combined (TM4) 对比其他三种训练方法。",
+          "demonstrated_result_cn": "WBT 比视频组显著提高认知知识（均值差 1.17，p<0.005）；协作学习对认知知识无显著影响；combined 方法优于除个人 WBT 外的所有组。",
+          "evidence": [
+            "Section 3.2.1, Table 3; pairwise comparisons and MANOVA results"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Social Cognitive Theory (Bandura 1986)",
+          "Adaptive Structuration Theory (DeSanctis and Poole 1994)",
+          "Gupta and Bostrom (2009) TML model"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "研究使用社会认知理论和适应性结构化理论操作化训练方法的结构维度（如示范丰富性、反馈、协作维度），但这些理论主要用于解释假设和测量学习过程，而不是由作者设计一个新的信息系统工件。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "现有 TML 研究缺乏对沉浸式模拟环境（enactive learning）、IT 培训中的协作学习以及学习过程的关注；以往研究多为输入-输出设计且结果不一致。",
+        "focal_objective_cn": "比较四种训练方法（视频、WBT、协作、WBT+协作）对认知知识、自我效能和过程满意度的效果，并检验训练方法 appropriation 的调节作用。",
+        "proposed_solution_cn": "作者并未构建或修改信息系统工件；他们使用商业 WBT 系统 elementK 和协作学习指导方案，形成四种训练方法组合。",
+        "evaluation_logic_cn": "2×2 多阶段实验室实验，435 名 Excel 新手，三周每周 75 分钟训练，使用重复测量 MANOVA 比较训练方法均值差异，并用中位数分组检验 appropriation 的调节效应。",
+        "main_finding_cn": "WBT 提高认知知识和自我效能；协作提高自我效能和满意度；combined 方法在所有结果上整体最佳；faithful appropriation 具有调节作用。",
+        "multi_study_or_stage_progression_cn": "单一纵向实验分为三个连续训练阶段；H1–H3 检验训练方法主效应，H4A–H4B 检验学习过程调节效应。"
+      },
+      "decision_reason_cn": "Gate 1 失败：文章是理论驱动的实验研究，比较现有训练方法，作者没有设计、构建或实质性修改信息系统工件；WBT 是商业产品，协作指导是教学方法而非数字工件。Gate 2 和 Gate 3 在狭义上部分通过：认知知识测验分数是客观且为假设中的主要结果之一，且 WBT 相对视频有显著提升；但 Gate 4 失败：文章的主要成功标准同时包括自我效能和过程满意度等主观构念，客观认知分数与主观结果同为主要结果，客观改进不是唯一或主导的成功依据。因此整体不满足保留条件，centrality 为 mixed。",
+      "confidence": 0.93
+    },
+    {
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "4338",
+      "source_file": "04338_2016_computer-related-task-performance-a-new-perspective.md",
+      "title": "Computer-Related Task Performance: A new perspective",
+      "year": "2016",
+      "journal": "Information & Management",
+      "doi": "10.1016/j.im.2015.12.001",
+      "strict_match": false,
+      "gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "centrality": "exclusive",
+      "solution_layer": "none",
+      "research_paradigms": [
+        "other"
+      ],
+      "objective_metrics": [
+        {
+          "metric_name": "Task correctness (binary correct software recommendation)",
+          "metric_role": "primary_target",
+          "improvement_direction_cn": "正确选择唯一满足技术要求的软件包记为1，错误选择记为0；越高表示任务绩效越好。",
+          "operationalization_cn": "实验任务要求被试从两个建筑软件中选出符合假设公司硬件配置的一个，只有唯一正确答案；因变量为二元正确性分数。",
+          "comparator_cn": "处理组（接受SP/CSE测量）与未接受测量的对照组比较；以及SP=1（预测自己会做得好）与SP=0（预测自己做得不好）的比较。",
+          "demonstrated_result_cn": "两个实验的ANOVA均显示处理组与对照组无显著差异（Study 1: F=0.211, p=0.405；Study 2: F=0.236, p=0.32）。Study 2的logistic回归中SP=1相对SP=0的OR=1.912（p=0.026），但这只是预测方向之间的比较，并非SP干预相对无干预的改进。",
+          "evidence": [
+            "Section 3.1.3 ANOVA paragraph",
+            "Section 3.2.3 ANOVA paragraph",
+            "Table 8",
+            "Section 3.1.2.1 dependent variable description"
+          ]
+        }
+      ],
+      "knowledge_and_design_basis": {
+        "basis_types": [
+          "theory_driven"
+        ],
+        "named_theories_or_formalisms": [
+          "Social Cognitive Theory",
+          "Self-Prophecy Theory",
+          "Ideomotor Theory"
+        ],
+        "theory_role": "mechanism_explanation",
+        "design_derivation_cn": "作者从社会认知理论/计算机自我效能文献出发，识别CSE与任务绩效关系的模糊性，并引入消费者心理学中的自我预言（self-prophecy）及ideomotor理论来推导假设。理论主要用于解释为何预测行为会改变后续行为，而非推导某个信息系统工件的设计。"
+      },
+      "research_logic": {
+        "problem_and_gap_cn": "既有IS文献中CSE对计算机相关任务绩效的预测结果不一致，且通过培训提升CSE成本高、效果不稳定；作者尝试引入self-prophecy这一轻量级社会影响策略，检验其能否单独或与CSE共同改善技术相关任务绩效。",
+        "focal_objective_cn": "唯一的客观结果变量是二元任务正确性（正确选择架构软件）；研究围绕SP和CSE能否提高这一客观绩效展开。",
+        "proposed_solution_cn": "所谓解决方案是自我预言（SP）干预：在任务前询问被试是否认为自己会表现良好。它不是信息系统工件、数字功能或可部署的计算方法，而是一个心理学问题/信息提示。",
+        "evaluation_logic_cn": "两个实验均采用学生样本；Study 1在受控受限实验室环境中进行，Study 2在无限制课堂环境中进行。设计包括处理组（不同测量顺序）和对照组，但最终主要分析是SP=1/0自报预测与CSE对二元正确率的logistic回归，并控制决策信心、IT知识和性别。",
+        "main_finding_cn": "Study 1未发现SP主效应，CSE主效应显著且SP×CSE交互显著；Study 2中SP=1与更高正确率相关（OR=1.912, p=0.026），但处理组与对照组的ANOVA无显著差异。总体未稳健证明SP干预本身对客观任务绩效有改善。",
+        "multi_study_or_stage_progression_cn": "Study 1（受限、结构化环境）与Study 2（非受限、非结构化环境）构成边界条件检验序列，用于考察环境限制（H4）是否调节SP和CSE的作用；并非工件设计-评估迭代。"
+      },
+      "decision_reason_cn": "Gate 1未通过：本文没有设计或实质修改任何IS相关解决方案；自我预言只是向被试提出的一个预测问题，属于社会心理学干预/信息提示，而非IS工件、算法、界面或平台机制。Gate 2在狭义上通过，因为二元任务正确性是主要客观因变量；但Gate 3未通过：处理组与对照组比较未显示显著改进，仅SP=1与SP=0的预测方向比较显著，不能证明干预本身改善绩效；Gate 4因此也不成立。该文本质上是理论驱动的行为实验，而非解决方案设计并验证客观改进的IS研究。",
+      "confidence": 0.85
+    }
+  ]
+}

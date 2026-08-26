@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85183781470"
+title: "Evolution of automated weakness detection in Ethereum bytecode: a comprehensive study"
+authors: "di Angelo M.; Durieux T.; Ferreira J.F.; Salzer G."
+year: "2024"
+journal: "Empirical Software Engineering"
+doi: "10.1007/s10664-023-10414-8"
+---
+# Scopus title-abstract-keyword metadata
+Title: Evolution of automated weakness detection in Ethereum bytecode: a comprehensive study
+Abstract: Blockchain programs (also known as smart contracts) manage valuable assets like cryptocurrencies and tokens, and implement protocols in domains like decentralized finance (DeFi) and supply-chain management. These types of applications require a high level of security that is hard to achieve due to the transparency of public blockchains. Numerous tools support developers and auditors in the task of detecting weaknesses. As a young technology, blockchains and utilities evolve fast, making it challenging for tools and developers to keep up with the pace. In this work, we study the robustness of code analysis tools and the evolution of weakness detection on a dataset representing six years of blockchain activity. We focus on Ethereum as the crypto ecosystem with the largest number of developers and deployed programs. We investigate the behavior of single tools as well as the agreement of several tools addressing similar weaknesses. Our study is the first that is based on the entire body of deployed bytecode on Ethereum’s main chain. We achieve this coverage by considering bytecodes as equivalent if they share the same skeleton. The skeleton of a bytecode is obtained by omitting functionally irrelevant parts. This reduces the 48 million contracts deployed on Ethereum up to January 2022 to 248 328 contracts with distinct skeletons. For bulk execution, we utilize the open-source framework SmartBugs that facilitates the analysis of Solidity smart contracts, and enhance it to accept also bytecode as the only input. Moreover, we integrate six further tools for bytecode analysis. The execution of the 12 tools included in our study on the dataset took 30 CPU years. While the tools report a total of 1 307 486 potential weaknesses, we observe a decrease in reported weaknesses over time, as well as a degradation of tools to varying degrees. © 2024, The Author(s).
+Author keywords: Blockchain; Bytecode; Debugging; Detection tools; Ethereum; EVM; Program analysis; Reproducible Bugs; Smart contracts; Vulnerability
+Index keywords: Blockchain; Ethereum; Musculoskeletal system; Program debugging; Supply chain management; Block-chain; Bytecodes; Debugging; Decentralised; Detection tools; EVM; Program analysis; Reproducible bug; Tool support; Vulnerability; Smart contract
+Document type: Article
+Conference: 
+Source title: Empirical Software Engineering
+Year: 2024
+EID: 2-s2.0-85183781470
+DOI: 10.1007/s10664-023-10414-8
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105010318863"
+title: "Constrained LTL Specification Learning from Examples"
+authors: "Zhang C.; Kapoor P.; Dardik I.; Cui L.; Meira-Góes R.; Garlan D.; Kang E."
+year: "2025"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse55347.2025.00160"
+---
+# Scopus title-abstract-keyword metadata
+Title: Constrained LTL Specification Learning from Examples
+Abstract: Temporal logic specifications play an important role in a wide range of software analysis tasks, such as model checking, automated synthesis, program comprehension, and runtime monitoring. Given a set of positive and negative examples, specified as traces, LTL learning is the problem of synthesizing a specification, in linear temporal logic (LTL), that evaluates to true over the positive traces and false over the negative ones. In this paper, we propose a new type of LTL learning problem called constrained LTL learning, where the user, in addition to positive and negative examples, is given an option to specify one or more constraints over the properties of the LTL formula to be learned. We demonstrate that the ability to specify these additional constraints significantly increases the range of applications for LTL learning, and also allows efficient generation of LTL formulas that satisfy certain desirable properties (such as minimality). We propose an approach for solving the constrained LTL learning problem through an encoding in first-order relational logic and reduction to an instance of the maximal satisfiability (MaxSAT) problem. An experimental evaluation demonstrates that ATLAS, an implementation of our proposed approach, is able to solve new types of learning problems while performing better than or competitively with the state-of-the-art tools in LTL learning.  © 2025 IEEE.
+Author keywords: formal methods; formal specifications; linear temporal logic; ltl learning; model-driven engineering; modeling tools; requirements engineering
+Index keywords: Learning systems; Model checking; Problem solving; Software design; Temporal logic; Learning problem; Linear temporal logic; Ltl learning; Model-driven Engineering; Modelling tools; Negative examples; Positive examples; Property; Requirement engineering; Temporal logic formula; Formal specification; Requirements engineering
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2025
+EID: 2-s2.0-105010318863
+DOI: 10.1109/icse55347.2025.00160
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

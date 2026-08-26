@@ -1,0 +1,1913 @@
+# Socialize More, Pay Less: Randomized Field Experiments on Social Pricing
+
+- 作者：Haibing Gao; Subodha Kumar; Yinliang (Ricky) Tan; Huazhong Zhao
+- 年份 / 期刊：2022 / Information Systems Research
+- DOI：10.1287/isre.2021.1089
+- 源文件：28296_2022_socialize-more-pay-less-randomized-field-experiments-on-social-pricing.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.7
+
+## 文章级论证概况
+
+- 核心问题：社交定价（social pricing）是否有效、为何有效、以及如何设计才能更有效？尤其对现有消费者而非仅新客获取，社交定价能否显著提升零售商的销售和利润，并优于常规定价和商家固定折扣？
+
+- 制品与设计：本文提出社交定价框架，并以社交砍价（social bargaining）作为具体实现：焦点消费者可在下单后邀请社区内的社交砍价者点击帮忙砍价，每名砍价者贡献一定比例折扣，单笔订单最高折扣30%，链接一小时内有效；实验采用企业指定消费者社区而非个人社交网络，以封闭社区保证内部效度。Experiment 1允许消费者随意邀请，Experiment 2则要求焦点消费者只能邀请购买频率至少高一个标准差的砍价者。
+
+- 客观结果：Experiment 1中，与常规定价相比，社交砍价使销售提高82.12%、利润提高28.73%；与10%和15%商家折扣相比，利润分别提高40.26%和42.67%。Experiment 2中，与常规定价相比销售提高109.39%、利润提高40.18%；与15%和20%商家折扣相比利润分别提高57.24%和61.32%。机制检验表明感知参与主要提升购买频率，社会成本主要提升订单价值，消费者互动主要受互惠驱动，Experiment 2的异质性规则进一步放大收益。
+
+- 核心贡献：首次概念化社交定价，证明基于消费者社会价值的价格歧视能显著提升现有消费者的购买行为与零售商利润；通过两个随机现场实验克服二手数据无法分离新客与现有客户的识别困难；识别感知参与和社会成本机制；并提出异质性互动规则能进一步放大社交定价收益。
+
+- 整篇论证链：论文从社交定价的产业现象出发，指出现有文献缺乏对其有效性和机制的严格实证研究，并说明二手数据无法干净估计现有消费者的收益。为解决这一缺口，作者与生鲜电商合作，在企业指定的现有消费者社区中开展两个随机现场实验。Experiment 1设置处理组（社交砍价）、常规价格控制组和多个固定折扣控制组，发现社交定价显著提高销售和利润，并通过测量感知参与、社会成本以及排除礼物效应、新奇效应、从众、观察学习、感知控制等替代解释，论证机制在于感知参与和社会成本；同时通过调查和网络分析发现社会互动由互惠驱动且呈购买频率同质性。Experiment 2进一步设计购买频率异质性的互动规则，利用间接互惠和社会比较理论预测并证实异质性规则能更大幅度提升购买频率和订单价值。最后，作者将结果上升为基于社会价值的价格歧视、社会商务机制设计以及可操作的社交定价设计原则。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章在真实在线生鲜零售商平台上操纵社交定价功能的可用性和互动规则，以两个随机现场实验为主要证据来源，直接评估平台定价设计对消费者购买行为和零售商绩效的因果效应。
+
+- 主导写作弧线判定：论文从社交定价现象出发，先提出社会价值价格歧视的概念，再借助社会美元、社会成本、互惠、间接互惠和社会比较等机制，设计现场干预并因果检验；实验1识别机制，实验2检验不同互动规则的增强效果，最后回到理论贡献和设计启示。
+
+## 研究开展程序
+
+- study_or_phase_count：9
+
+- 研究阶段总序列：概念化与缺口界定→研究情境与实施方式→实验1设计→实验1主效应→实验1机制检验→实验1互动动机与稳健性→实验2设计与动机→实验2结果与边界→讨论与贡献。前四步建立社交定价有效性的因果基础，第五和第六步解释为何有效并排除替代解释，第七和第八步回答如何设计更好，最后把结果提升为定价理论与社会商务设计知识。
+
+### studies_or_phases
+
+#### 1. 概念化与缺口界定
+
+- order：1
+
+- name_cn：概念化与缺口界定
+
+- question_cn：社交定价是什么，为什么值得研究？
+
+- inputs_and_setting_cn：产业现象（拼多多、Trip.com、Airbnb China、PUBG等）与三类文献：价格歧视、社交网络营销与定价、社会商务机制设计。
+
+- designed_or_compared_object_cn：提出社交定价框架，并与基于个人价值的传统价格歧视、社交券、可分享券、团购进行概念对比。
+
+- baseline_control_or_counterfactual_cn：传统价格歧视与既有社交促销策略。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念分析与文献定位。
+
+- main_result_cn：界定社交定价为基于消费者社会价值的定价，指出学术界缺少对其是否有效、为何有效、如何设计的实证研究。
+
+- argumentative_role_cn：确定研究问题并建立理论新颖性。
+
+- remaining_uncertainty_cn：缺乏因果证据。
+
+- link_to_next_phase_cn：说明二手数据无法分离现有客户与新客收益，引出随机现场实验。
+
+##### evidence_pointers
+
+1. Introduction 1.1
+
+2. Section 2.1-2.3
+
+#### 2. 研究情境与社会砍价实施
+
+- order：2
+
+- name_cn：研究情境与社会砍价实施
+
+- question_cn：如何在真实平台实施社交定价并保证可以被因果识别？
+
+- inputs_and_setting_cn：亚洲大型生鲜电商，600,000月活用户，基于微信界面，2018年9月至2019年8月；企业指定消费者社区，每组200名现有消费者。
+
+- designed_or_compared_object_cn：社交砍价功能（邀请好友点击帮忙砍价、每次1%-5%折扣、上限30%、一小时内有效）。
+
+- baseline_control_or_counterfactual_cn：常规价格和五个固定折扣（5%、10%、15%、20%、25%）作为对照条件。
+
+##### objective_metrics
+
+1. 活跃用户数
+
+2. 实验期间的销售与利润
+
+- analysis_method_cn：情境选择论证，封闭社区设计，随机化检验。
+
+- main_result_cn：构建与企业指定消费者社区的闭环社交互动，排除新客获取和自选择偏差，保证处理组与对照组在可观测特征和社会价值上可比。
+
+- argumentative_role_cn：为两个现场实验提供识别策略和外部效度依据。
+
+- remaining_uncertainty_cn：企业指定社区与个人社交网络之间的外部效度差异。
+
+- link_to_next_phase_cn：直接进入Experiment 1的设计与主要结果。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Section 3.1
+
+3. Section 3.2
+
+4. Online Appendix B
+
+#### 3. Experiment 1设计与随机化
+
+- order：3
+
+- name_cn：Experiment 1设计与随机化
+
+- question_cn：社交定价是否对现有消费者有因果效应？
+
+- inputs_and_setting_cn：七组各200名随机分配的现有消费者：一个社交砍价处理组、一个常规价格组、五个固定折扣组（5%、10%、15%、20%、25%）。
+
+- designed_or_compared_object_cn：处理组可激活社交砍价，对照组不可；算法确保只有同社区成员能产生有效折扣。
+
+- baseline_control_or_counterfactual_cn：常规价格控制组和商家固定折扣控制组。
+
+##### objective_metrics
+
+1. 销售
+
+2. 利润
+
+3. 购买频率
+
+4. 订单价值
+
+- analysis_method_cn：随机分配、封闭社区、DID设计。
+
+- main_result_cn：处理组96%消费者每次激活砍价；平均4.23名砍价者，平均社交折扣12.58%；折扣与砍价者数量高相关，支持社会价值定价；随机化检验显示各组成熟人口统计与历史购买行为可比。
+
+- argumentative_role_cn：建立干净的因果对比。
+
+- remaining_uncertainty_cn：主效应是否来自折扣本身或其他社会心理过程尚不清楚。
+
+- link_to_next_phase_cn：进入主效应分析与机制检验。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Section 4.1
+
+3. Table 1
+
+4. Online Appendix B
+
+#### 4. Experiment 1主效应结果
+
+- order：4
+
+- name_cn：Experiment 1主效应结果
+
+- question_cn：社交定价是否优于常规定价和商家固定折扣？
+
+- inputs_and_setting_cn：处理组与对照组在实验前后的数据；零售商绩效为组层面，购买行为为个体层面。
+
+- designed_or_compared_object_cn：比较处理组与常规价格控制、10%和15%商家折扣控制。
+
+- baseline_control_or_counterfactual_cn：常规定价和商家折扣。
+
+##### objective_metrics
+
+1. 销售百分比变化
+
+2. 利润百分比变化
+
+3. 购买频率
+
+4. 订单价值
+
+- analysis_method_cn：组层面百分比比较、个体层面DID、t检验。
+
+- main_result_cn：与常规定价相比，销售+82.12%、利润+28.73%；与10%和15%折扣相比，利润分别+40.26%和+42.67%；购买频率和订单价值均显著提升；消费者认为社交折扣比商家折扣更可信（6.11 vs 3.05）。
+
+- argumentative_role_cn：证明社交定价不仅有效，而且优于传统商家折扣。
+
+- remaining_uncertainty_cn：为什么有效仍需机制检验。
+
+- link_to_next_phase_cn：进入机制检验，区分感知参与、社会成本与替代解释。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Section 4.2.1
+
+3. credibility survey paragraph
+
+#### 5. Experiment 1机制检验
+
+- order：5
+
+- name_cn：Experiment 1机制检验
+
+- question_cn：感知参与和社会成本是否为社交定价提升购买行为的主要机制？
+
+- inputs_and_setting_cn：实验前调查测量的感知参与和社会成本；将参与者分为高/低两组；DID比较组间效应；ANCOVA分析。
+
+- designed_or_compared_object_cn：感知参与和社会成本作为调节变量。
+
+- baseline_control_or_counterfactual_cn：常规价格控制组；附录中也对照商家折扣组。
+
+##### objective_metrics
+
+1. 购买频率
+
+2. 订单价值
+
+- analysis_method_cn：调节效应DID、高/低亚组比较、ANCOVA。
+
+- main_result_cn：高参与组购买频率效应显著大于低参与组（0.169 vs 0.108，p<0.05）；高社会成本组订单价值效应显著大于低社会成本组（15.591 vs 7.010，p<0.05）；ANCOVA交互效应一致。
+
+- argumentative_role_cn：识别感知参与和社会成本分别解释购买频率和订单价值。
+
+- remaining_uncertainty_cn：机制是通过调节变量而非直接操作验证，无法完全排除测量误差。
+
+- link_to_next_phase_cn：进一步检验社交互动动机，解释为什么消费者愿意参与砍价。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Section 4.2.2
+
+3. Online Appendix D
+
+4. Online Appendix J
+
+#### 6. Experiment 1互动动机与稳健性检验
+
+- order：6
+
+- name_cn：Experiment 1互动动机与稳健性检验
+
+- question_cn：社交砍价中的社会互动是否由互惠驱动？结果是否稳健？
+
+- inputs_and_setting_cn：100名消费者动机调查；随机抽取100对砍价关系；网络局部聚类系数；另设两种社区形成方式；延长至三个月；最后一周与实验后一周对比；感知控制调查；新商品重复购买分析。
+
+- designed_or_compared_object_cn：互惠vs利他；同质性vs其他替代解释；不同社区形成方式；不同实验时长。
+
+- baseline_control_or_counterfactual_cn：常规价格控制；部分稳健性再对照商家折扣；三个月扩展对一个月；实验后第一周对实验最后一周。
+
+##### objective_metrics
+
+1. 互惠选择比例
+
+2. 互相砍价比例
+
+3. 购买频率差在1个SD内的比例
+
+4. 销售
+
+5. 利润
+
+6. 购买频率
+
+7. 订单价值
+
+- analysis_method_cn：描述统计、网络分析、DID、替代解释排除。
+
+- main_result_cn：87/100选择互惠；92.4%配对互相砍价；84%的购买频率差在1个SD内；替代社区形成方式效果一致；三月扩展结果相似；礼物、新奇、从众、观察学习、感知控制和单纯折扣解释均被排除。
+
+- argumentative_role_cn：证明社会互动的互惠性并排除主要竞争解释，支持同质性互动模式。
+
+- remaining_uncertainty_cn：同质性互动是否最优仍未知。
+
+- link_to_next_phase_cn：以同质性为参照，在Experiment 2中检验异质性互动规则。
+
+##### evidence_pointers
+
+1. Section 4.2.3
+
+2. Section 4.3
+
+3. Table 4
+
+4. Online Appendix F
+
+5. Online Appendix I
+
+#### 7. Experiment 2设计与动机
+
+- order：7
+
+- name_cn：Experiment 2设计与动机
+
+- question_cn：能否通过改变互动规则（要求购买频率异质性）进一步提升社交定价效果？
+
+- inputs_and_setting_cn：同一生鲜电商平台；处理组焦点消费者只能邀请购买频率至少高一个标准差的砍价者；购买频率基于过去七天动态更新；其他设置与Experiment 1相同。
+
+- designed_or_compared_object_cn：异质性规则 vs Experiment 1的同质性互动；同时对比常规价格和15%/20%商家折扣。
+
+- baseline_control_or_counterfactual_cn：常规价格控制组和商家固定折扣控制组。
+
+##### objective_metrics
+
+1. 平均社交折扣
+
+2. 平均砍价者数
+
+3. 销售
+
+4. 利润
+
+5. 购买频率
+
+6. 订单价值
+
+- analysis_method_cn：随机现场实验、间接互惠访谈、购买频率差距分布分析。
+
+- main_result_cn：平均折扣17.08%，平均砍价者5.65；购买频率与砍价者数无相关（rho=0.09）；63%砍价者在1.0-1.5SD之间；访谈支持间接互惠动机。
+
+- argumentative_role_cn：为异质性设计提供动机和可行性证据。
+
+- remaining_uncertainty_cn：异质性规则是否真的带来更高销售和利润尚未报告。
+
+- link_to_next_phase_cn：进入Experiment 2结果部分。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Table 5
+
+3. indirect reciprocity interview
+
+#### 8. Experiment 2结果与边界检验
+
+- order：8
+
+- name_cn：Experiment 2结果与边界检验
+
+- question_cn：异质性规则是否比同质性规则更有效？边界条件是什么？
+
+- inputs_and_setting_cn：Experiment 2处理组与对照组的销售、利润和消费者购买行为数据；另测试2-3个SD差距；反向异质性规则在附录中报告。
+
+- designed_or_compared_object_cn：异质性规则 vs 同质性规则（实验1）；不同SD差距；反向异质性。
+
+- baseline_control_or_counterfactual_cn：常规价格、15%和20%商家折扣；实验1同质性结果。
+
+##### objective_metrics
+
+1. 销售
+
+2. 利润
+
+3. 购买频率
+
+4. 订单价值
+
+- analysis_method_cn：DID与实验间比较。
+
+- main_result_cn：相对常规定价销售+109.39%、利润+40.18%；相对15%和20%折扣利润+57.24%和+61.32%；购买频率和订单价值提升大于实验1；增大SD差距会削弱效果；反向异质性仍有效。
+
+- argumentative_role_cn：验证异质性规则能放大社交定价收益并界定适用边界。
+
+- remaining_uncertainty_cn：仅在企业指定社区与生鲜品类中验证；个人网络和更多异质性维度未检验。
+
+- link_to_next_phase_cn：进入讨论，把结果上升为设计原则与理论贡献。
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Section 5.2
+
+3. Online Appendix G
+
+4. Online Appendix H
+
+#### 9. 讨论、管理启示与未来研究
+
+- order：9
+
+- name_cn：讨论、管理启示与未来研究
+
+- question_cn：研究结果对理论与实践意味着什么？哪些边界内成立？
+
+- inputs_and_setting_cn：综合实验1和实验2的结果，结合理论背景。
+
+- designed_or_compared_object_cn：把结果转化为可操作的设计知识。
+
+- baseline_control_or_counterfactual_cn：传统定价方式和同质性互动规则。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：归纳、边界条件阐明和未来研究议程。
+
+- main_result_cn：提出社交定价的四方面管理启示：目标顾客选择、产品选择、平台建立方式和互动规则设计；指出结果在新客获取、个人网络、更多异质性维度和无折扣上限情境下有待未来研究。
+
+- argumentative_role_cn：闭合引言缺口，把一次性现场结果提升为一般化设计知识。
+
+- remaining_uncertainty_cn：外部效度受限于品类、平台和社区形式。
+
+- link_to_next_phase_cn：结束论文。
+
+##### evidence_pointers
+
+1. Section 6.1
+
+2. Section 6.2
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. GAP
+
+4. RQ_OR_OBJECTIVE
+
+5. RESULT
+
+6. MECHANISM
+
+7. RESULT
+
+8. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. GAP
+
+5. LIMITATION
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. STUDY_OVERVIEW
+
+9. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. THEORY_INTRO
+
+4. THEORY_PROPOSITION
+
+5. MECHANISM
+
+6. GAP
+
+7. CONTRIBUTION
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. REQUIREMENT
+
+3. METHOD_JUSTIFICATION
+
+4. BENCHMARK_OR_CONTRAST
+
+5. STUDY_OVERVIEW
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 价格歧视与消费者个人价值文献
+
+2. 社会资本理论
+
+3. 社会美元效应/social dollar effect
+
+4. 社会污名与社会成本理论
+
+5. 互惠与间接互惠理论
+
+6. 社会比较理论
+
+7. 社会商务机制设计文献
+
+8. 口碑与营销信息可信度研究
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：社交定价的主要处理（社交砍价功能可用性）源于产业实践而非理论推导；理论主要进入机制解释和调节变量选择，以及Experiment 2异质性互动规则的设计。因此理论对核心制品的决定是部分的。
+
+- 理论到设计翻译链：社会价值定价概念→以砍价者数量实现社会资本货币化→随机现场实验比较社交折扣与商家折扣→社会美元效应/感知参与→购买频率机制→社会成本/社会污名→订单价值机制→互惠→同质性互动→间接互惠与社会比较→异质性互动规则→更强销售与利润。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：传统价格歧视基于个人支付意愿；消费者价值还应包含社交网络属性。
+
+- mechanism_cn：低个人支付意愿但高社会价值的消费者可通过展示社交资源获得更低价格。
+
+- design_requirement_cn：定价应能识别消费者的社会价值。
+
+- artifact_choice_cn：社交砍价：邀请越多砍价者，折扣越高。
+
+- evaluated_contrast_cn：社交定价 vs 常规定价和商家固定折扣。
+
+- objective_result_cn：销售与利润显著提升；社交折扣与砍价者数量高度相关。
+
+##### evidence_pointers
+
+1. Table 1
+
+2. Table 2
+
+3. Section 4.2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：消费者社区参与会产生社会美元效应，提高购买频率。
+
+- mechanism_cn：砍价者通过深度参与好友购买而增强参与感和购买意图。
+
+- design_requirement_cn：应测量并检验感知参与作为购买频率机制。
+
+- artifact_choice_cn：实验前调查测量感知参与，按高/低分组比较。
+
+- evaluated_contrast_cn：高参与组 vs 低参与组的处理效应。
+
+- objective_result_cn：高参与组购买频率效应显著更大。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Section 4.2.2
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：公开省钱会带来社会污名成本，消费者通过提高订单金额合理化节约。
+
+- mechanism_cn：社会成本刺激消费者增加订单价值以减少污名。
+
+- design_requirement_cn：应测量并检验社会成本作为订单价值机制。
+
+- artifact_choice_cn：实验前调查测量社会成本，按高/低分组比较。
+
+- evaluated_contrast_cn：高社会成本组 vs 低社会成本组的处理效应。
+
+- objective_result_cn：高社会成本组订单价值效应显著更大，购买频率差异不显著。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Section 4.2.2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：互惠是社会互动的重要动机，人们倾向于回报他人帮助。
+
+- mechanism_cn：焦点消费者与砍价者互相砍价，形成同质性互动。
+
+- design_requirement_cn：应确认社交互动是否由互惠驱动。
+
+- artifact_choice_cn：动机调查、成对砍价记录和聚类系数分析。
+
+- evaluated_contrast_cn：互惠 vs 利他；同质性 vs 其他互动模式。
+
+- objective_result_cn：87/100选择互惠，92.4%配对互相砍价，84%购买频率差在1个SD内。
+
+##### evidence_pointers
+
+1. Section 4.2.3
+
+2. Online Appendix I
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：间接互惠中，我帮你、别人帮我；违反间接互惠会遭受声誉损失。
+
+- mechanism_cn：高频率消费者帮助低频率消费者，希望未来得到更高频率者帮助。
+
+- design_requirement_cn：异质性互动规则应能激发间接互惠。
+
+- artifact_choice_cn：Experiment 2规定只能邀请购买频率至少高1个SD的砍价者。
+
+- evaluated_contrast_cn：异质性规则 vs 实验1同质性规则。
+
+- objective_result_cn：Experiment 2销售利润提升大于Experiment 1；消费者表现出间接互惠模式。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 5.2
+
+3. Table 6
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：社会比较中，上行比较激励低频率者自我提升，下行比较使高频率者避免落后。
+
+- mechanism_cn：1个SD差距使焦点消费者与砍价者之间产生适度的上行和下行比较。
+
+- design_requirement_cn：差距应足够大以激发比较，又不能太大以致无法找到砍价者和丧失激励。
+
+- artifact_choice_cn：选择1个SD作为购买频率差距；另测试2-3个SD。
+
+- evaluated_contrast_cn：1个SD vs 2-3个SD差距。
+
+- objective_result_cn：增大差距削弱处理效应；大多数砍价者集中在1.0-1.5SD。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Online Appendix G
+
+#### 7. 7
+
+- theory_or_knowledge_claim_cn：社交互动比营销信息更具可信度。
+
+- mechanism_cn：社交折扣由同伴产生，比商家折扣更可信。
+
+- design_requirement_cn：应与商家折扣比较以排除折扣强度解释。
+
+- artifact_choice_cn：设置多个固定折扣控制组；调查感知可信度。
+
+- evaluated_contrast_cn：社交折扣 vs 商家折扣的可信度。
+
+- objective_result_cn：社交折扣可信度6.11 vs 商家折扣3.05（p<0.01）。
+
+##### evidence_pointers
+
+1. Section 4.2.1
+
+2. credibility survey
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机现场实验
+
+2. 差中差分析（DID）
+
+3. 亚组调节效应分析
+
+4. ANCOVA
+
+5. 实验前调查测量调节变量
+
+6. 调查动机
+
+7. 网络分析（局部聚类系数）
+
+8. 替代社区形成方式稳健性
+
+9. 替代解释排除
+
+10. 延长实验周期验证
+
+11. 不同SD差距边界检验
+
+12. 反向异质性规则检验
+
+- why_these_evaluations_cn：二手数据无法分离新客获取和现有客户收益，也难以处理自选择、内生性和关联不可观测变量，因此必须用随机现场实验建立因果。为排除折扣强度、礼物、新奇、从众、观察学习、感知控制等竞争解释，作者设置多个固定折扣对照组并进行多种稳健性检验。机制难以在现场实验中用中介变量直接验证，因此采用调节变量和调查相结合。Experiment 2的异质性规则需要比较不同互动结构，所以用第二个现场实验并辅以访谈和SD差距检验。
+
+- benchmark_and_contrast_chain_cn：首先以常规定价为基准，证明社交定价总体有效；然后以10%和15%固定折扣为对照，证明效果不只来自折扣；再用感知参与和社会成本的高/低亚组对比解释机制；随后用动机调查和网络分析支持互惠同质性；最后在Experiment 2中以15%和20%折扣为对照，并直接与Experiment 1同质性效果比较，证明异质性规则增强收益。
+
+### claim_evidence_ledger
+
+#### 1. 社交定价显著提高现有消费者购买频率和订单价值，并提高销售和利润。
+
+- claim_cn：社交定价显著提高现有消费者购买频率和订单价值，并提高销售和利润。
+
+- evidence_cn：Experiment 1和2的DID结果：销售+82.12%/+109.39%，利润+28.73%/+40.18%。
+
+- strength_cn：强：随机现场实验、事前无差异、DID稳健。
+
+#### 2. 社交定价优于商家固定折扣。
+
+- claim_cn：社交定价优于商家固定折扣。
+
+- evidence_cn：与10%/15%（实验1）和15%/20%（实验2）折扣相比，利润提升40%以上。
+
+- strength_cn：强：多个折扣深度对照；可信度调查进一步支持。
+
+#### 3. 感知参与是提高购买频率的主要机制。
+
+- claim_cn：感知参与是提高购买频率的主要机制。
+
+- evidence_cn：高参与组购买频率效应显著大于低参与组；ANCOVA交互显著。
+
+- strength_cn：中等：调节变量而非直接操纵机制；可能遗漏测量误差。
+
+#### 4. 社会成本是提高订单价值的主要机制。
+
+- claim_cn：社会成本是提高订单价值的主要机制。
+
+- evidence_cn：高社会成本组订单价值效应显著大于低社会成本组；购买频率差异不显著。
+
+- strength_cn：中等：基于自我报告测量调节，现场实验中难以严格验证中介链。
+
+#### 5. 社会互动主要由互惠驱动且呈同质性。
+
+- claim_cn：社会互动主要由互惠驱动且呈同质性。
+
+- evidence_cn：87/100动机调查选择互惠；92.4%配对互相砍价；84%购买频率差在1SD内。
+
+- strength_cn：中等偏强：综合调查、行为和网络证据。
+
+#### 6. 异质性互动规则优于同质性互动规则。
+
+- claim_cn：异质性互动规则优于同质性互动规则。
+
+- evidence_cn：Experiment 2相对常规定价的销售和利润增幅高于Experiment 1；购买频率和订单价值提升更大。
+
+- strength_cn：中等偏强：两个实验除互动规则外其他设置一致，但非同一实验组内随机对照。
+
+- internal_validity_strategy_cn：采用企业指定消费者社区、随机分配、禁止自选择、封闭社区闭环、多组固定折扣对照、DID、事前随机化检验、排除多种替代解释、控制无广告促销期、限制最大折扣30%和链接一小时有效期，以降低混淆和污染。
+
+- external_validity_strategy_cn：选择购买频率高、消费者人口多样化的生鲜品类；用三类产品（蔬菜、水果、肉类）和广泛用户基础；社区形成方式稳健性检验；延长至三个月的稳健性；讨论个人网络的未来研究以明确边界。
+
+- what_is_not_actually_tested_cn：未直接测试个人社交网络情境下的社交定价；未测量或检验新客户获取；机制通过调节和调查而非严格中介设计验证；个体层面利润数据不可用，零售商绩效只在组层面比较；未直接操纵社会价值大小，而是通过砍价者数量代理。
+
+## 贡献闭环
+
+- technical_claim_cn：在生鲜电商平台上的随机现场实验中，社交砍价这种社交定价实现方式能显著提高销售和利润，效果优于常规定价和商家固定折扣；异质性购买频率规则能进一步增强效果。
+
+- artifact_claim_cn：社交砍价制品本身（邀请同伴点击帮助砍价并可累积折扣）是驱动购买频率和订单价值增加的关键设计；同质性互动由互惠产生，Experiment 2的异质性规则因激发间接互惠和社会比较而更有效。
+
+- mechanism_claim_cn：感知参与和社会成本是社交定价提升现有消费者购买的两个主要机制：感知参与解释购买频率提升，社会成本解释订单价值提升。
+
+- boundary_claim_cn：效果在支持互惠和感知参与、且公开省钱会产生社会成本的消费者群体中成立；在高购买频率品类中更显著；适用于企业指定社区和类似社区，个人社交网络中的效果方向尚不确定。
+
+- reusable_design_knowledge_cn：零售商可以通过目标消费者选择、产品品类选择、社区平台建立方式和互动规则设计来实施社交定价；具体建议包括识别具有参与感和社会成本的用户、选择高频购买品类、允许社区形成灵活性、以及通过规则（如异质性购买频率）引导互动以实现商业目标。
+
+- theoretical_contribution_cn：将价格歧视从基于个人价值的维度扩展到基于社会价值的维度，提出社交定价作为新的定价框架；为社会商务机制设计提供因果证据，表明企业可主动设计消费者互动规则来影响购买行为。
+
+- how_discussion_closes_intro_gap_cn：讨论重新回到引言中“是否有效、为何有效、如何有效”的缺口：有效性问题由Experiment 1和2的主效应回答；为何有效由感知参与和社会成本机制回答；如何设计由同质性/异质性规则比较和管理启示回答。
+
+- overclaim_or_unsupported_leaps_cn：摘要中“social pricing can increase profit by 40% solely from existing consumers”是从Experiment 1的特定对比中得出，但将其表述为社交定价框架的一般结论略有跳跃；机制结论依赖自我报告调节变量；从生鲜品类和社交砍价到一般性社交定价框架的推广主要依赖推理而非直接证据。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S3
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：越来越多在线零售商将定价与消费者社交网络结合，允许消费者邀请朋友帮忙砍价。
+
+- rhetorical_function_cn：开场即交代产业现象，吸引IS读者关注定价与社交的交汇。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出社交定价概念。
+
+- evidence_pointer：Abstract P1
+
+### 2. P1 S3-S4
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S3-S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：消费者社会资本越高，获得的越好价格；这与基于个人价值的传统价格歧视形成对比。
+
+- rhetorical_function_cn：用一句话给出社交定价的概念核心。
+
+- depends_on_cn：产业现象。
+
+- sets_up_cn：为理论新颖性铺垫。
+
+- evidence_pointer：Abstract P1
+
+### 3. P1 S5-S7
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S5-S7
+
+- move_code：GAP
+
+- paraphrase_cn：社交定价是否有效、为何有效、如何有效仍缺乏严格学术研究。
+
+- rhetorical_function_cn：明确研究缺口。
+
+- depends_on_cn：现象与概念。
+
+- sets_up_cn：引出两个随机现场实验。
+
+- evidence_pointer：Abstract P1
+
+### 4. P1 S8
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S8
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：设计并实施两个随机现场实验以理解社交定价价值。
+
+- rhetorical_function_cn：公布研究设计与目标。
+
+- depends_on_cn：缺口。
+
+- sets_up_cn：后续实验概述。
+
+- evidence_pointer：Abstract P1
+
+### 5. P1 S9-S11
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S9-S11
+
+- move_code：RESULT
+
+- paraphrase_cn：社交定价能将零售商利润提高40%，且感知参与和社会成本是主要机制。
+
+- rhetorical_function_cn：给出最核心的因果证据和机制结论。
+
+- depends_on_cn：实验设计。
+
+- sets_up_cn：报告Experiment 2的进一步收益。
+
+- evidence_pointer：Abstract P1
+
+### 6. P1 S1-S4
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S1-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：社交媒体已成为日常核心，平台用户规模巨大，企业大量投入社交平台营销。
+
+- rhetorical_function_cn：建立时代背景，说明社交定价的土壤。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出企业为何尝试社交定价。
+
+- evidence_pointer：Introduction P1
+
+### 7. P2 S1-S4
+
+- order：7
+
+- section：Introduction
+
+- locator：P2 S1-S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：在线零售商开始把社交网络纳入定价；拼多多等平台允许好友点击砍价而非像团购那样购买。
+
+- rhetorical_function_cn：描述具体现象并界定社交定价操作特征。
+
+- depends_on_cn：社交平台规模背景。
+
+- sets_up_cn：提出社交定价概念。
+
+- evidence_pointer：Introduction P2
+
+### 8. P2 S5-S7
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S5-S7
+
+- move_code：GAP
+
+- paraphrase_cn：虽然实践流行，但学术研究尚处萌芽，效果和机制未被实证分析。
+
+- rhetorical_function_cn：指出实践与研究的落差。
+
+- depends_on_cn：现象描述。
+
+- sets_up_cn：研究目标。
+
+- evidence_pointer：Introduction P2
+
+### 9. 1.1 P1 S1-S4
+
+- order：9
+
+- section：Introduction
+
+- locator：1.1 P1 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：描述社交砍价具体流程：消费者下单后邀请好友帮忙砍价，每名好友贡献固定比例折扣，限时完成。
+
+- rhetorical_function_cn：让读者理解处理组到底做了什么。
+
+- depends_on_cn：拼多多等例子。
+
+- sets_up_cn：后续的机制讨论。
+
+- evidence_pointer：Introduction 1.1
+
+### 10. 1.1 P2 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：1.1 P2 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：社交定价使企业基于消费者社会价值实现价格歧视，区别于基于个人支付意愿的传统价格歧视。
+
+- rhetorical_function_cn：把现象上升为概念和理论定位。
+
+- depends_on_cn：现象与流程。
+
+- sets_up_cn：理论贡献声明。
+
+- evidence_pointer：Introduction 1.1
+
+### 11. 1.1 P3 S1-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：1.1 P3 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：从业者普遍认为社交定价对新客获取有效，但对现有消费者是否有效并不显然。
+
+- rhetorical_function_cn：引入常见假设并挑战其片面性。
+
+- depends_on_cn：概念定义。
+
+- sets_up_cn：聚焦现有消费者的研究问题。
+
+- evidence_pointer：Introduction 1.1
+
+### 12. 1.1 P3 S4
+
+- order：12
+
+- section：Introduction
+
+- locator：1.1 P3 S4
+
+- move_code：GAP
+
+- paraphrase_cn：是否有效、为什么有效、如何有效都不清楚，因为缺乏严格研究。
+
+- rhetorical_function_cn：澄清三类问题。
+
+- depends_on_cn：先前知识。
+
+- sets_up_cn：研究问题列表。
+
+- evidence_pointer：Introduction 1.1
+
+### 13. 1.1 P4 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：1.1 P4 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：二手数据无法分离现有客户的收益与新客获取收益。
+
+- rhetorical_function_cn：说明为什么需要实验。
+
+- depends_on_cn：缺口。
+
+- sets_up_cn：随机现场实验方案。
+
+- evidence_pointer：Introduction 1.1
+
+### 14. 1.1 P4 S2-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：1.1 P4 S2-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：设计并实施两个随机现场实验来识别社交定价对现有消费者的效果。
+
+- rhetorical_function_cn：提出方法目标。
+
+- depends_on_cn：二手数据局限。
+
+- sets_up_cn：论文结构。
+
+- evidence_pointer：Introduction 1.1
+
+### 15. 1.2 P1 S1-S4
+
+- order：15
+
+- section：Introduction
+
+- locator：1.2 P1 S1-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：问题一：社交定价是否提升利润？是否优于常规定价和商家折扣？
+
+- rhetorical_function_cn：首次明确提出研究问题。
+
+- depends_on_cn：总体缺口。
+
+- sets_up_cn：Experiment 1的双控制条件。
+
+- evidence_pointer：Introduction 1.2
+
+### 16. 1.2 P2 S1-S2
+
+- order：16
+
+- section：Introduction
+
+- locator：1.2 P2 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：设置常规价格和与平均社交折扣相当的商家折扣两个控制条件。
+
+- rhetorical_function_cn：预告实验设计。
+
+- depends_on_cn：问题一。
+
+- sets_up_cn：Experiment 1对照组选择依据。
+
+- evidence_pointer：Introduction 1.2
+
+### 17. 1.2 P3 S1-S4
+
+- order：17
+
+- section：Introduction
+
+- locator：1.2 P3 S1-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：问题二：消费者参与社交定价并增加购买的机制是什么？
+
+- rhetorical_function_cn：提出机制问题。
+
+- depends_on_cn：主效应。
+
+- sets_up_cn：机制检验和调节变量。
+
+- evidence_pointer：Introduction 1.2
+
+### 18. 1.2 P4 S1-S4
+
+- order：18
+
+- section：Introduction
+
+- locator：1.2 P4 S1-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：问题三：改变社交互动规则能否进一步提高利润？
+
+- rhetorical_function_cn：提出设计优化问题。
+
+- depends_on_cn：前两个问题。
+
+- sets_up_cn：Experiment 2。
+
+- evidence_pointer：Introduction 1.2
+
+### 19. 最后一段
+
+- order：19
+
+- section：Introduction
+
+- locator：最后一段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究首次探索基于社会价值的定价，用随机现场实验规避识别挑战并提供设计策略。
+
+- rhetorical_function_cn：总结贡献。
+
+- depends_on_cn：三个研究问题。
+
+- sets_up_cn：文献回顾。
+
+- evidence_pointer：Introduction 最后一段
+
+### 20. P1 S1-S3
+
+- order：20
+
+- section：Section 2
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：文献涉及价格歧视、社交网络营销与定价、社会商务机制设计三类，既有研究有助于定位本研究。
+
+- rhetorical_function_cn：绘制文献地图。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：理论贡献的支点。
+
+- evidence_pointer：Section 2 P1
+
+### 21. P1 S1-S2
+
+- order：21
+
+- section：Section 2.1
+
+- locator：P1 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：传统价格歧视基于个人支付意愿等个人价值，是经典定价方式。
+
+- rhetorical_function_cn：建立对比基线。
+
+- depends_on_cn：文献地图。
+
+- sets_up_cn：提出社会价值价格歧视。
+
+- evidence_pointer：Section 2.1 P1
+
+### 22. P2 S1-S3
+
+- order：22
+
+- section：Section 2.1
+
+- locator：P2 S1-S3
+
+- move_code：GAP
+
+- paraphrase_cn：本文研究基于社会价值的价格歧视，这是新领域。
+
+- rhetorical_function_cn：声明研究空白与贡献。
+
+- depends_on_cn：传统价格歧视。
+
+- sets_up_cn：后续实验证据。
+
+- evidence_pointer：Section 2.1 P2
+
+### 23. P1-P2 S1-S5
+
+- order：23
+
+- section：Section 2.2
+
+- locator：P1-P2 S1-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：社交券、可分享券和团购都与社交定价不同：它们不能针对买家、不能通过更多同伴累积折扣，或要求所有参与者同价购买。
+
+- rhetorical_function_cn：差异化定位。
+
+- depends_on_cn：文献综述。
+
+- sets_up_cn：社交定价的独特性。
+
+- evidence_pointer：Section 2.2 P1-P2
+
+### 24. P1 S1-S3
+
+- order：24
+
+- section：Section 2.3
+
+- locator：P1 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：社会商务的重要任务是设计消费者社交互动机制以实现商业目标。
+
+- rhetorical_function_cn：引入机制设计视角。
+
+- depends_on_cn：社会商务定义。
+
+- sets_up_cn：企业可控制互动规则。
+
+- evidence_pointer：Section 2.3 P1
+
+### 25. P1 S1-S4
+
+- order：25
+
+- section：Section 3
+
+- locator：P1 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：与亚洲大型生鲜电商合作，基于微信界面，可获取完整社交互动记录。
+
+- rhetorical_function_cn：说明现场实验数据可得性。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：实验实施基础。
+
+- evidence_pointer：Section 3 P1
+
+### 26. P2 S1-S3
+
+- order：26
+
+- section：Section 3
+
+- locator：P2 S1-S3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：生鲜品类购买频率高、消费者多元，适合短实验期并有助于推广。
+
+- rhetorical_function_cn：论证品类选择的好处。
+
+- depends_on_cn：研究情境。
+
+- sets_up_cn：外部效度主张。
+
+- evidence_pointer：Section 3 P2
+
+### 27. P1 S1-S3
+
+- order：27
+
+- section：Section 3.1
+
+- locator：P1 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：社会资本被定义为社会关系中的义务、互惠期望和合作行为。
+
+- rhetorical_function_cn：用社会资本理论支撑砍价机制。
+
+- depends_on_cn：社交定价概念。
+
+- sets_up_cn：砍价者数量作为社会资本代理。
+
+- evidence_pointer：Section 3.1 P1
+
+### 28. P1 S1-S3
+
+- order：28
+
+- section：Section 3.2
+
+- locator：P1 S1-S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验1允许任意邀请并表现出同质性，实验2只允许异质性购买频率的互动。
+
+- rhetorical_function_cn：预告两个实验的设计对比。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：两个实验的具体结果。
+
+- evidence_pointer：Section 3.2 P1
+
+### 29. P2 S1-S3
+
+- order：29
+
+- section：Section 3.2
+
+- locator：P2 S1-S3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：设置常规价格和五个固定折扣组，以排除潜在效果仅由折扣造成的解释。
+
+- rhetorical_function_cn：建立多个基准对照组。
+
+- depends_on_cn：实验设计。
+
+- sets_up_cn：折扣效应排除。
+
+- evidence_pointer：Section 3.2 P2
+
+### 30. P3 S1-S3
+
+- order：30
+
+- section：Section 3.2
+
+- locator：P3 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：随机分配200名现有消费者到七组，禁止自选择，并进行随机化检验。
+
+- rhetorical_function_cn：说明因果识别策略。
+
+- depends_on_cn：对照组设计。
+
+- sets_up_cn：内部效度声明。
+
+- evidence_pointer：Section 3.2 P3
+
+### 31. P4 S1-S3
+
+- order：31
+
+- section：Section 3.2
+
+- locator：P4 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用企业指定消费者社区而非个人网络，以排除新客获取并保证社会价值同质。
+
+- rhetorical_function_cn：解释社区选择。
+
+- depends_on_cn：识别挑战。
+
+- sets_up_cn：外部效度讨论。
+
+- evidence_pointer：Section 3.2 P4
+
+### 32. P5 S1-S5
+
+- order：32
+
+- section：Section 3.2
+
+- locator：P5 S1-S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：个人网络会引入新客、不可观测社会影响、动态网络和重叠问题，因此不使用个人网络。
+
+- rhetorical_function_cn：防御性论证设计选择。
+
+- depends_on_cn：内部效度要求。
+
+- sets_up_cn：强调封闭社区的必要性。
+
+- evidence_pointer：Section 3.2 P5
+
+### 33. P2-P3
+
+- order：33
+
+- section：Section 4
+
+- locator：P2-P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：砍价者因深度参与好友购买而产生社会美元效应，预期提高购买频率，因此用感知参与作调节。
+
+- rhetorical_function_cn：解释为什么选择感知参与作为机制变量。
+
+- depends_on_cn：社会美元理论。
+
+- sets_up_cn：感知参与调节分析。
+
+- evidence_pointer：Section 4 P2
+
+### 34. P3-P4
+
+- order：34
+
+- section：Section 4
+
+- locator：P3-P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：公开省钱会带来社会污名成本，消费者可能通过增加订单金额来合理化节约，减少社会成本，因此用社会成本作调节。
+
+- rhetorical_function_cn：解释为什么选择社会成本作为第二个机制变量。
+
+- depends_on_cn：社会污名理论。
+
+- sets_up_cn：社会成本调节分析。
+
+- evidence_pointer：Section 4 P3-P4
+
+### 35. P2 S1-S3
+
+- order：35
+
+- section：Section 4.1
+
+- locator：P2 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：处理组下单时可激活砍价，每位砍价者贡献1%-5%折扣，最高30%，平台公开历史购买行为。
+
+- rhetorical_function_cn：明确实验处理的具体参数。
+
+- depends_on_cn：随机分配。
+
+- sets_up_cn：主效应结果。
+
+- evidence_pointer：Section 4.1 P2
+
+### 36. P1 S1-S3
+
+- order：36
+
+- section：Section 4.2
+
+- locator：P1 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：96%消费者每次都激活砍价，平均4.23个砍价者，平均折扣12.58%，折扣与砍价者数高度相关。
+
+- rhetorical_function_cn：报告采用率和社会价值定价的证据。
+
+- depends_on_cn：处理组设计。
+
+- sets_up_cn：主效应比较。
+
+- evidence_pointer：Table 1
+
+### 37. P1 S1-S2
+
+- order：37
+
+- section：Section 4.2.1
+
+- locator：P1 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：与常规定价相比，社交砍价使销售提高82.12%，利润提高28.73%。
+
+- rhetorical_function_cn：报告对常规定价的主效应。
+
+- depends_on_cn：处理组与对照组。
+
+- sets_up_cn：说明社交定价不只促销还盈利。
+
+- evidence_pointer：Table 2
+
+### 38. P2 S1-S4
+
+- order：38
+
+- section：Section 4.2.1
+
+- locator：P2 S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：与10%和15%商家折扣相比，利润分别提升40.26%和42.67%；社交折扣比商家折扣更可信。
+
+- rhetorical_function_cn：证明优于商家折扣。
+
+- depends_on_cn：固定折扣对照。
+
+- sets_up_cn：排除单纯折扣解释。
+
+- evidence_pointer：Table 2, credibility survey
+
+### 39. P1 S1-S2
+
+- order：39
+
+- section：Section 4.2.2
+
+- locator：P1 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：现场实验中直接构造中介不可行，因此使用调节变量和调查测试机制。
+
+- rhetorical_function_cn：说明机制检验方法选择。
+
+- depends_on_cn：机制问题。
+
+- sets_up_cn：后续调节分析。
+
+- evidence_pointer：Section 4.2.2 P1
+
+### 40. P3 S1-S3
+
+- order：40
+
+- section：Section 4.2.2
+
+- locator：P3 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：高参与组购买频率效应显著高于低参与组（0.169 vs 0.108），订单价值效应边际显著。
+
+- rhetorical_function_cn：提供感知参与机制的证据。
+
+- depends_on_cn：调节分组。
+
+- sets_up_cn：感知参与结论。
+
+- evidence_pointer：Table 3 Panel A
+
+### 41. P4 S1-S3
+
+- order：41
+
+- section：Section 4.2.2
+
+- locator：P4 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：高社会成本组订单价值效应显著高于低社会成本组（15.591 vs 7.010），购买频率差异不显著。
+
+- rhetorical_function_cn：提供社会成本机制的证据。
+
+- depends_on_cn：调节分组。
+
+- sets_up_cn：社会成本结论。
+
+- evidence_pointer：Table 3 Panel B
+
+### 42. P1-P3
+
+- order：42
+
+- section：Section 4.2.3
+
+- locator：P1-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：87/100消费者选择互惠动机，92.4%配对互相砍价，84%互动中购买频率差在1个SD内。
+
+- rhetorical_function_cn：证明互动由互惠驱动并呈同质性。
+
+- depends_on_cn：动机调查。
+
+- sets_up_cn：Experiment 2的异质性设计。
+
+- evidence_pointer：Section 4.2.3
+
+### 43. P1-S1-S2, 4.3.2
+
+- order：43
+
+- section：Section 4.3
+
+- locator：P1-S1-S2, 4.3.2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：无论社区如何形成，效果稳健；礼物、新奇、从众、观察学习、感知控制和折扣效应均不能解释结果。
+
+- rhetorical_function_cn：系统排除替代解释。
+
+- depends_on_cn：主效应和机制。
+
+- sets_up_cn：增强因果推断可信度。
+
+- evidence_pointer：Section 4.3, Table 4, Online Appendix F
+
+### 44. P1 S1-S3
+
+- order：44
+
+- section：Section 5
+
+- locator：P1 S1-S3
+
+- move_code：TRANSITION
+
+- paraphrase_cn：实验1证明社交定价有效，但同质性互动未必最优，实验2将要求购买频率不同的砍价者。
+
+- rhetorical_function_cn：从实验1过渡到实验2。
+
+- depends_on_cn：实验1同质性发现。
+
+- sets_up_cn：实验2设计。
+
+- evidence_pointer：Section 5 P1
+
+### 45. P2 S1-S3
+
+- order：45
+
+- section：Section 5.1
+
+- locator：P2 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：间接互惠强调我帮你、别人帮我；低频率消费者帮助更低的，也希望高频率消费者帮助自己。
+
+- rhetorical_function_cn：为异质性规则提供理论依据。
+
+- depends_on_cn：同质性不足。
+
+- sets_up_cn：异质性设计。
+
+- evidence_pointer：Section 5.1 P2
+
+### 46. P4 S1-S3
+
+- order：46
+
+- section：Section 5.1
+
+- locator：P4 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：一个SD的购买频率差距能同时激发上行和下行社会比较，促成积极同伴影响。
+
+- rhetorical_function_cn：解释1个SD选择的机制。
+
+- depends_on_cn：社会比较理论。
+
+- sets_up_cn：实验2的差距参数。
+
+- evidence_pointer：Section 5.1 P4
+
+### 47. P2-P3
+
+- order：47
+
+- section：Section 5.2
+
+- locator：P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：实验2相对常规定价销售提高109.39%、利润提高40.18%；相对15%和20%折扣利润提高57.24%和61.32%。
+
+- rhetorical_function_cn：报告异质性规则的主效应。
+
+- depends_on_cn：实验2设计。
+
+- sets_up_cn：与实验1比较。
+
+- evidence_pointer：Table 6
+
+### 48. P4-P5
+
+- order：48
+
+- section：Section 5.2
+
+- locator：P4-P5
+
+- move_code：RESULT
+
+- paraphrase_cn：购买频率与砍价者数无相关，多数砍价者集中于1.0-1.5SD；顶部消费者自愿帮助；反向异质性仍有效。
+
+- rhetorical_function_cn：验证异质性规则的运行机制和边界。
+
+- depends_on_cn：实验2结果。
+
+- sets_up_cn：设计知识总结。
+
+- evidence_pointer：Section 5.2, Online Appendix G-H
+
+### 49. P1-P2
+
+- order：49
+
+- section：Section 6
+
+- locator：P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究记录了基于社会价值的价格歧视，并给出社交定价设计建议。
+
+- rhetorical_function_cn：回到引言缺口并总结贡献。
+
+- depends_on_cn：两个实验。
+
+- sets_up_cn：管理启示。
+
+- evidence_pointer：Section 6 P1-P2
+
+### 50. P1 S1-S5
+
+- order：50
+
+- section：Section 6.2
+
+- locator：P1 S1-S5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来应研究新客获取、个人网络、更多异质性维度、个体层面利润和无折扣上限等。
+
+- rhetorical_function_cn：划定边界并给出未来方向。
+
+- depends_on_cn：研究设计选择。
+
+- sets_up_cn：论文收束。
+
+- evidence_pointer：Section 6.2
+
+## 写作技术
+
+- gap_construction_cn：先以实践流行程度说明重要性，再指出学术研究刚起步；然后用二手数据无法分离新客与现有客户、以及多种识别挑战（内生性、自选择、反向因果、相关不可观测）构建方法论缺口；最后通过三种竞争性定价策略的对比凸显社交定价的概念新颖性。
+
+- signposting_cn：引言在“Whether it works, why it works, and how it works”三个问题上反复设问；随后在1.2节用First, Second, Third列出三个研究问题；实验部分每个小节前都有预告和总结句；图2用三条件框架统一实验1和实验2的结构。
+
+- transition_logic_cn：从实验1主效应到机制时，先说明Why问题；从机制到互动动机时，用“Next, our experiment examines the pattern of consumer social interactions”；从实验1到实验2时，用“同质性未必最优”作为桥梁；从结果到讨论时，用“我们设计并实施实验以填补这一重要缺口”回扣引言。
+
+- claim_evidence_rhythm_cn：每个贡献主张都紧接具体表格或统计检验；主效应报告销售和利润的百分比变化，机制报告高/低亚组之间的DID差；稳健性部分用“We do not observe”“cannot explain”“results remain consistent”等强断言配合附录证据。
+
+- benchmark_narrative_cn：基准不是单一对比，而是多重累积：常规价格证明总体有效，5%-25%固定折扣梯度证明不只是折扣强度；10%/15%或15%/20%作为与平均社交折扣最接近的对照；实验1的同质性结果又作为实验2异质性效果的隐含基线。
+
+- theory_return_cn：理论在开头界定社交定价，在机制部分引入社会美元、社会成本、互惠、间接互惠和社会比较；结果后讨论部分重新用“价格歧视的新维度”和“社会商务机制设计”概括，把现场结果提升为可迁移的理论知识。
+
+- contribution_positioning_cn：作者将贡献定位为“首次”概念化社交定价、基于社会价值的歧视定价、以及企业可操纵的社交互动机制设计；在引言最后一段和讨论开头重复强调，并用多个形容词如novel、new、first进行锚定。
+
+- novelty_protection_cn：通过多个对照和大量替代解释排除，把结果从“社交定价效果好”升级为“社交折扣因可信度、参与感和社会成本而优于商家折扣”，再通过异质性规则将效果与具体设计参数绑定，避免被认为是一次性的促销效果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用产业现象开场，定义新概念并指出文献缺口。
+
+- research_job_cn：找到尚未被严格实证的定价/社交商务现象，并说明为何二手数据不能回答。
+
+- required_evidence_cn：现象存在、产业重要性、概念上有别于已有构念。
+
+- transition_to_next_cn：引入“是否/为何/如何”三问，预告两个现场实验。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：说明研究情境和产品-平台选择的理由，并详细描述处理操作。
+
+- research_job_cn：获得企业合作，设计封闭社区以隔离新客效应和自选择偏差。
+
+- required_evidence_cn：平台访问记录、随机化分配、封闭社区算法、事前可比性检验。
+
+- transition_to_next_cn：进入实验1设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：构建处理组与多个对照，明确主效应。
+
+- research_job_cn：运行随机现场实验，收集销售、利润和个体购买行为数据。
+
+- required_evidence_cn：对照组至少包括无折扣和固定折扣梯度；DID显示事前无差异、事中显著。
+
+- transition_to_next_cn：报告主效应后追问“为什么”。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用调节变量和调查检验机制，并逐一排除替代解释。
+
+- research_job_cn：在实验前测量理论所暗示的心理变量，设计亚组比较；通过时长、后处理期、产品内容等排除替代机制。
+
+- required_evidence_cn：机制调节变量的交互显著；替代解释证据显示不一致或缺失。
+
+- transition_to_next_cn：解释互动动机，为下一个设计变量铺垫。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：比较不同设计规则，展示“如何设计更好”。
+
+- research_job_cn：设计并运行第二个实验，只改变一个互动规则，其他设置保持一致。
+
+- required_evidence_cn：新规则的主效应优于第一个实验，且机制（间接互惠、社会比较）可观测。
+
+- transition_to_next_cn：把结果转化为设计原则。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论中回扣缺口，分别给出理论贡献、管理启示和边界。
+
+- research_job_cn：综合所有证据，提炼可复用的机制和边界条件。
+
+- required_evidence_cn：结果与理论命题对应，边界条件如个人网络、新客获取等被明确标注为未来研究。
+
+- transition_to_next_cn：结束论文。
+
+### most_transferable_moves_cn
+
+1. 用产业现象高频出现来建立实践急迫性
+
+2. 在引言中同时列出是否/为何/如何三问
+
+3. 设置多个固定折扣梯度以排除“只是折扣”解释
+
+4. 用调节变量检验现场实验机制
+
+5. 通过第二个实验仅改变一个规则来证明设计改进
+
+6. 把结果回扣为价格歧视的新维度
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要与企业紧密合作并获得微信端完整互动记录
+
+2. 需要建立企业指定的现有消费者社区并随机分配200人至7组
+
+3. 需要保证实验期间平台不发其他促销以隔离污染
+
+4. 需要在一小时链接、30%上限、动态购买频率等功能层面进行平台开发
+
+5. 需要多轮调查、三个月延长期和多个替代社区版本，成本较高
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只复制“两个现场实验”的措辞而没有随机化、封闭社区和事前可比性检验
+
+2. 不能只声称“感知参与和社会成本”机制而没有实验前调查和亚组DID证据
+
+3. 不能只宣称“异质性更好”而没有第二个实验保持其他条件一致
+
+4. 不能只写“首次提出社交定价”而没有与社交券、可分享券、团购等概念区分
+
+- single_best_description_of_the_routine_cn：发现一个实践流行但少有人做的数字定价/社交设计现象，用随机现场实验和多重对照证明其因果有效性，再用调节和调查机制解释为什么，再用第二个实验改变一个设计参数回答如何更好，最后把结果提升为新的价格歧视维度和可操作设计原则。
+
+## 分析边界
+
+正文完整，但Online Appendix B-L被频繁引用却未提供全文，无法核对附录中的回归细节、ANCOVA完整模型、网络聚类系数、反向异质性实验和2-3SD差距的具体结果；表4和表6以外的其他折扣组分析依赖附录；无法确认真实平台界面与截图内容；部分位置以段落和表格近似标识，未使用精确页码。

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85124080870"
+title: "VR-enabled engineering consultation chatbot for integrated and intelligent manufacturing services"
+authors: "Trappey A.J.C.; Trappey C.V.; Chao M.-H.; Wu C.-T."
+year: "2022"
+journal: "Journal of Industrial Information Integration"
+doi: "10.1016/j.jii.2022.100331"
+---
+# Scopus title-abstract-keyword metadata
+Title: VR-enabled engineering consultation chatbot for integrated and intelligent manufacturing services
+Abstract: Industrial equipment manufacturing, such as electric power transformers, require highly customized design, assembly, installation and maintenance services for customers. Engineering consultation is an essential manufacturing service which requires deep domain knowledge. This research develops and implements the framework and the prototype of a Virtual Reality (VR) enabled intelligent engineering consultation chatbot system with natural language communication capabilities. The consultation chatbot case focuses on the power transformer knowledge domain. The system is constructed using a comprehensive knowledge base of Frequently Asked Questions (FAQs) and answers from a power transformer manufacturer. A total of 490,000 technical articles (with more than 1.1 billion words) from Wikipedia and a comprehensive domain-specific document set are used to train a word embedding model for retrieving questions and answers (QA) from the FAQ knowledge base. Immersive VR technology provides a highly interactive QA chatbot with realistic graphical views for informative engineering counselling. The case example demonstrates the accuracy of the proposed VR-enabled chatbot for transformer QAs exceeds 91%. © 2022 Elsevier Inc.
+Author keywords: Chatbot; Manufacturing service; Natural language processing; Power transformer; Product-service system; Virtual reality
+Index keywords: Domain Knowledge; Manufacture; Power transformers; Virtual reality; Chatbots; Design services; Electric power transformers; Equipment manufacturing; Frequently asked questions; Industrial equipment; Integrated manufacturing; Intelligent Manufacturing; Manufacturing service; Product-service systems; Natural language processing systems
+Document type: Article
+Conference: 
+Source title: Journal of Industrial Information Integration
+Year: 2022
+EID: 2-s2.0-85124080870
+DOI: 10.1016/j.jii.2022.100331
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

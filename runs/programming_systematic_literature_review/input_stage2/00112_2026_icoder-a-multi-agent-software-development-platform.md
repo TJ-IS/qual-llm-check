@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105041774368"
+title: "iCoder: A multi agent software development platform"
+authors: "You Y.; Ning D.; Cai S.; Bai J.; Zheng J.; Chen J."
+year: "2026"
+journal: "Information and Software Technology"
+doi: "10.1016/j.infsof.2026.108224"
+---
+# Scopus title-abstract-keyword metadata
+Title: iCoder: A multi agent software development platform
+Abstract: Context: Large language model (LLM)-driven AI-Augmented Software Engineering has shown strong potential in automated code generation. However, existing approaches struggle to manage software complexity and maintain code quality when scaling from function-level to system-level software development. Objective: This study aims to investigate whether classic software engineering best practices can effectively improve complexity controllability and code quality in LLM-based multi-agent automated software development. Methods: We propose iCoder, a one-stop multi-agent software development platform that systematically embeds iterative development, software architecture design, reverse code dependency generation, and code review into an automated workflow. iCoder integrates four specialized agents — RABot, UMLBot, DevBot, and ReviewBot — coordinated through a Sprint-based iterative mechanism. The platform is evaluated on the SRDD dataset under GPT-3.5 Turbo and GPT-4o environments using completeness, executability, consistency, and overall quality metrics. Results: Experimental results show that iCoder consistently outperforms baseline models and existing multi-agent frameworks. Under GPT-3.5 Turbo, iCoder improves overall software quality by 3%–7% compared to baselines, while under GPT-4o it achieves the best performance in executability, consistency, and overall quality. Ablation studies demonstrate that iterative development and architectural constraints primarily enhance complexity management, whereas reverse dependency modeling and code review play a decisive role in quality assurance. Conclusion: The results confirm that systematically integrating classic software engineering practices into LLM-driven multi-agent systems significantly enhances both software complexity control and code quality. iCoder provides a validated and scalable engineering paradigm for high-quality AI-augmented software development. © 2026 Elsevier B.V. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+Author keywords: AI augmented software engineering; LLM; Multi agent; Scrum; Sprint
+Index keywords: Automatic programming; Automation; Codes (symbols); Computer aided software engineering; Computer software selection and evaluation; Intelligent agents; Iterative methods; Quality assurance; Quality control; Reverse engineering; Software architecture; Software design; Software quality; Agent software development; AI augmented software engineering; Code quality; Development platform; Language model; Large language model; Multi agent; Multi-agent softwares; Scra; Sprint; Multi agent systems
+Document type: Article
+Conference: 
+Source title: Information and Software Technology
+Year: 2026
+EID: 2-s2.0-105041774368
+DOI: 10.1016/j.infsof.2026.108224
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

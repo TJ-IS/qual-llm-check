@@ -1,0 +1,2065 @@
+# Estimating the Impact of “Humanizing” Customer Service Chatbots
+
+- 作者：Scott Schanke; Gordon Burtch; Gautam Ray
+- 年份 / 期刊：2021 / Information Systems Research
+- DOI：10.1287/isre.2021.1015
+- 源文件：28188_2021_estimating-the-impact-of-humanizing-customer-service-chatbots.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：在真实零售客服场景中，聊天机器人拟人化特征如何因果地影响顾客的交易转化率，以及顾客对现金报价的敏感性？
+
+- 制品与设计：与一家美国双渠道女装二手服装零售商合作，用DialogFlow和Python定制开发了嵌入Facebook Messenger的二手服装回购聊天机器人；将拟人化操作化为三个独立随机化的特征：社交临场感（人名、非正式语言、正在输入和已读回执）、沟通延迟（每分钟70词的动态延迟）和幽默（报价前随机插入笑话），并将特征数量作为处理强度；同时围绕每件3.50美元的基线报价，以均值为0、方差为0.5的正态分布随机扰动现金报价。
+
+- 客观结果：主实验323名顾客中，控制组转化率约2.6%；接受1个拟人化特征提升6.7%（p<0.10），2个特征提升5.0%（不显著），3个特征提升10.8%（p<0.05）。在交互模型中，3个处理与现金报价的交互项显著为正（0.211，p<0.05），表明充分拟人化时顾客对报价更敏感。后续复制实验中，仅社交临场感特征使转化率提升约5%（p=0.046）；操纵检验和随机化检验支持构念效度与随机化有效性；披露实验发现明确披露机器人身份比不披露更讨喜；信息披露里程碑分析显示拟人化处理对提供法定姓名和电话号码显著正向。
+
+- 核心贡献：作者声称提供了零售客服聊天机器人拟人化对交易转化和报价敏感性的因果实地证据；将HCI拟人化研究扩展到真实商业场景；为服务机器人设计、算法反应与智能增强文献作出贡献；并提出拟人化可能通过顾客更愿意披露敏感信息而部分提高转化。
+
+- 整篇论证链：作者从AI聊天机器人被企业广泛采用的现象出发，指出现有HCI文献对拟人化效果的不一致结论，从而将问题收缩为在真实零售客服中拟人化如何影响交易转化与报价敏感性。他们通过在二手服装回购流程中部署可编程聊天机器人，将三种拟人化特征分别随机化并将特征数量作为强度，同时随机扰动现金报价，建立了一个可以因果识别两种效应的现场实验。主结果显示拟人化提高转化率，但充分拟人化也增强了顾客对报价的敏感性；作者用行为经济学中的最后通牒博弈文献解释为人类化代理人引发公平评估和谈判心态。随后通过复制实验、操纵检验、随机化检验、与真人代理的拟人化基准比较、身份披露实验以及信息披露里程碑分析，排除了若干替代解释，并支持敏感信息披露作为部分机制。最后在讨论中将结果重新连接到HCI设计理论、市场中的服务机器人、算法厌恶/欣赏和智能增强等更广泛文献，同时以零售现金报价场景限定边界。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心证据来自在真实零售商的Facebook Messenger平台上，对实际顾客进行的随机现场实验；作者在真实交易流程中操纵聊天机器人拟人化特征与现金报价，以观测实际转化行为，属于在真实平台/组织中操纵数字设计并进行现场因果检验的研究类型。后续的MTurk实验和复制实验只是补充性的机制探索与稳健性证据。
+
+- 主导写作弧线判定：论文先描述聊天机器人拟人化后果不确定的现象，再从最后通牒博弈等文献提出拟人化可能改变顾客公平评估心态的机制，然后通过聊天机器人干预和现场随机实验检验转化与报价敏感性，最后以机制探索和边界讨论收尾，符合“现象—机制—数字干预—现场因果检验”的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：第一阶段是现场背景与制品构建，说明被自动化的二手服装回购流程和聊天机器人的实现；第二阶段是主现场实验设计与数据收集，通过随机化三种拟人化特征和现金报价生成因果识别所需的变化；第三阶段是主结果估计，用LPM估计处理数量对转化的直接效应及处理数量与报价的交互效应；第四阶段是稳健性与复制，包括估计器稳健性、复制实验、操纵/随机化检验；第五阶段是拟人化水平基准与身份披露实验，检验拟人化程度上限及不披露身份这一替代解释；第六阶段是信息披露里程碑分析，探索敏感信息披露作为机制；第七阶段是讨论与边界化，把结果抽象为可复用设计知识和理论贡献。各阶段逐级累积：主实验确立因果，复制实验确保可重复，操纵/随机化检验保证构造效度，基准与披露实验处理外部有效性与替代解释，里程碑分析提供机制证据。
+
+### studies_or_phases
+
+#### 1. 现场背景与制品构建
+
+- order：1
+
+- name_cn：现场背景与制品构建
+
+- question_cn：如何将零售商已有的手工二手服装回购流程转变成可随机化处理的聊天机器人流程？
+
+- inputs_and_setting_cn：一家美国双渠道女装零售商；此前通过网页表单、电子邮件和Facebook Messenger人工客服完成回购；Facebook页面约4.4万关注者。
+
+- designed_or_compared_object_cn：使用DialogFlow和Python定制开发聊天机器人，集成到零售商的Facebook Messenger，包含收集衣物信息、提供现金报价、收集邮寄地址/法定姓名/电话并生成运输标签的对话流程。
+
+- baseline_control_or_counterfactual_cn：无拟人化特征的聊天机器人作为后续实验的控制条件；人工流程仅作为背景，未做正式比较。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：工程实现与流程描述，不涉及统计推断。
+
+- main_result_cn：成功部署可自动化二手服装回购流程的聊天机器人，并预留了三种拟人化特征的随机化接口。
+
+- argumentative_role_cn：建立真实且可推广的零售客服现场，说明为什么聊天机器人是研究拟人化的合适制品。
+
+- remaining_uncertainty_cn：尚不清楚拟人化特征是否会影响顾客行为。
+
+- link_to_next_phase_cn：直接引出在该聊天机器人中随机加入拟人化特征的现场实验设计。
+
+##### evidence_pointers
+
+1. Study Context 第1–2段
+
+2. Figures 1–4及Table 1–2所在的设计描述
+
+#### 2. 主现场随机实验设计与数据收集
+
+- order：2
+
+- name_cn：主现场随机实验设计与数据收集
+
+- question_cn：在真实交易中，随机的拟人化处理数量与现金报价扰动如何产生？
+
+- inputs_and_setting_cn：2018年11月16日至12月31日期间与聊天机器人发起对话的323名顾客；零售商Facebook Messenger页面引流。
+
+- designed_or_compared_object_cn：三种拟人化特征（社交临场感、沟通延迟、幽默）各自独立随机化，顾客被分配0到3个特征；现金报价在基线每件3.50美元基础上加一个N(0,0.5)扰动。
+
+- baseline_control_or_counterfactual_cn：未接受任何拟人化处理的控制条件；不同特征数量之间的对照。
+
+##### objective_metrics
+
+1. Treatment Count（处理数量）
+
+2. Cash Offer（报价扰动）
+
+3. Conversion（二元转化指标）
+
+- analysis_method_cn：描述性统计；总体转化率8.36%，平均处理数量1.50，报价扰动近似正态。
+
+- main_result_cn：产生了可用于因果估计的随机变异；控制组转化率约2.6%。
+
+- argumentative_role_cn：为主结果的因果识别提供实验基础。
+
+- remaining_uncertainty_cn：尚需统计模型估计处理对转化的效应及报价敏感性的调节。
+
+- link_to_next_phase_cn：将随机变异输入到LPM回归模型中，估计直接效应和交互效应。
+
+##### evidence_pointers
+
+1. Methods 4.1 Experiment Design
+
+2. Methods 4.2 数据描述
+
+3. Table 3描述性统计
+
+4. Figure 5报价扰动分布
+
+#### 3. 主结果估计：直接效应与报价敏感性交互
+
+- order：3
+
+- name_cn：主结果估计：直接效应与报价敏感性交互
+
+- question_cn：拟人化处理数量是否提高转化率？拟人化是否改变顾客对现金报价的敏感性？
+
+- inputs_and_setting_cn：323名主实验顾客的随机分配数据。
+
+- designed_or_compared_object_cn：处理数量哑变量（1、2、3个处理）相对于无处理；处理数量哑变量与中心化现金报价的交互项。
+
+- baseline_control_or_counterfactual_cn：控制组（0个处理）；现金报价为0时的平均效应。
+
+##### objective_metrics
+
+1. 转化概率
+
+2. 处理数量主效应系数
+
+3. 处理数量×现金报价交互系数
+
+- analysis_method_cn：线性概率模型（LPM），稳健标准误；先估计主效应模型，再估计带交互的完整模型。
+
+- main_result_cn：主效应模型：1个处理+6.7%（p<0.10），2个处理+5.0%（不显著），3个处理+10.8%（p<0.05）。交互模型：1个处理0.076（p<0.05），2个处理0.060（p<0.05），3个处理0.109（p<0.05）；3个处理×Cash Offer交互显著为正0.211（p<0.05）。
+
+- argumentative_role_cn：确立拟人化提高转化率的核心因果结论，以及拟人化提高报价敏感性的第二结论。
+
+- remaining_uncertainty_cn：结果是否可被单一处理复制？是否受估计器或随机化问题影响？机制是什么？
+
+- link_to_next_phase_cn：需要稳健性检验、复制实验和机制探索来支撑和解释主结果。
+
+##### evidence_pointers
+
+1. Results 第1–2段
+
+2. Table 4 Treatment Count Model (LPM)
+
+#### 4. 稳健性检验、复制实验与操纵/随机化检验
+
+- order：4
+
+- name_cn：稳健性检验、复制实验与操纵/随机化检验
+
+- question_cn：主结果是否稳健？单一拟人化处理是否有可检测效果？操纵是否被感知？随机化是否有效？
+
+- inputs_and_setting_cn：主实验数据样本；复制实验546名新顾客（2019年6月底至7月底）；19名志愿者的操纵检验；来自Facebook的有限顾客信息。
+
+- designed_or_compared_object_cn：复制实验仅比较社交临场感处理与无处理；操纵检验比较幽默/延迟处理与对照；随机化检验检验处理数量与星期几、报价、衣物数量之间的关联。
+
+- baseline_control_or_counterfactual_cn：复制实验中的无处理控制组；无幽默/无延迟条件下的感知评分。
+
+##### objective_metrics
+
+1. 转化率
+
+2. 操纵感知评分（幽默、延迟）
+
+3. 拟人化语义差异量表
+
+4. 随机化关联的显著性
+
+- analysis_method_cn：LPM；Mann-Whitney U检验；OLS回归拟人化感知对处理数量；多元logit、有序logit和成对t检验。
+
+- main_result_cn：复制实验中社交临场感使转化率提升约5%（p=0.046）；幽默与延迟操纵感知显著；拟人化感知随处理数量增加显著上升（β=0.619，p<0.10）；随机化检验均不显著。
+
+- argumentative_role_cn：排除聚合多种处理导致结果的担忧，增强外部可重复性，并为“处理数量=拟人化强度”的构念提供操纵检验。
+
+- remaining_uncertainty_cn：尚未检验拟人化的收益是否依赖不披露机器人身份，也尚未提供行为机制证据。
+
+- link_to_next_phase_cn：引出机制探索部分：与真人比较拟人化水平、披露效应和敏感信息披露。
+
+##### evidence_pointers
+
+1. Robustness 6.1–6.3
+
+2. Table 5操纵检验
+
+3. Table 6随机化检验
+
+#### 5. 拟人化水平基准与身份披露实验
+
+- order：5
+
+- name_cn：拟人化水平基准与身份披露实验
+
+- question_cn：聊天机器人的拟人化水平与真人客服相比如何？不披露机器人身份是否掩盖了拟人化收益？
+
+- inputs_and_setting_cn：54名Amazon Mechanical Turk工人参与人机基准实验；52名MTurk工人参与披露实验；四名研究生助理扮演真人客服。
+
+- designed_or_compared_object_cn：最拟人化聊天机器人 vs. 真人客服；完全拟人化但未披露身份的聊天机器人 vs. 同款但明确披露“customer service chatbot”的聊天机器人。
+
+- baseline_control_or_counterfactual_cn：真人客服；明确披露身份的聊天机器人。
+
+##### objective_metrics
+
+1. 感知拟人化（Powers & Kiesler/Godspeed语义差异量表）
+
+2. 喜欢程度（Mathur & Reichling量表改编）
+
+- analysis_method_cn：Mann-Whitney U检验比较组均值；描述95%置信区间。
+
+- main_result_cn：真人客服被感知为显著更拟人化（3.93 vs. 2.97，p<0.05）；未披露聊天机器人比披露版本显著更不讨喜（p<0.10）。
+
+- argumentative_role_cn：表明当前机器人还有拟人化提升空间；排除“收益完全依赖于不披露机器人身份”的替代解释，并回应监管背景。
+
+- remaining_uncertainty_cn：这些感知实验没有直接测量真实交易行为，也没有说明拟人化为何能提高转化。
+
+- link_to_next_phase_cn：转向原实验内部的信息披露里程碑分析，探索敏感信息披露作为机制。
+
+##### evidence_pointers
+
+1. Mechanism Exploration 第1–4段
+
+2. Figure 6拟人化比较
+
+3. Figure 7喜欢程度比较
+
+#### 6. 信息披露里程碑机制分析
+
+- order：6
+
+- name_cn：信息披露里程碑机制分析
+
+- question_cn：拟人化处理是否通过增强顾客披露个人信息（尤其是敏感信息）的意愿而提高转化？
+
+- inputs_and_setting_cn：主实验323名顾客的完整对话过程数据。
+
+- designed_or_compared_object_cn：以处理数量哑变量为自变量，以顾客在回购流程中是否达到不同披露里程碑作为因变量。
+
+- baseline_control_or_counterfactual_cn：无处理条件；较早的非敏感信息披露里程碑（如箱子尺寸）。
+
+##### objective_metrics
+
+1. 是否提供箱子尺寸
+
+2. 是否提供邮寄地址
+
+3. 是否提供法定姓名
+
+4. 是否提供电话号码
+
+- analysis_method_cn：分别以每个里程碑为因变量估计LPM。
+
+- main_result_cn：处理数量对箱子尺寸和邮寄地址无显著效应，但对法定姓名和电话号码有显著正效应（3个处理分别+13.6%，p<0.05）。
+
+- argumentative_role_cn：为拟人化提高转化提供直接的阶段式机制证据：越靠后越敏感的信息越受拟人化影响，支持自我披露机制。
+
+- remaining_uncertainty_cn：作者明确称这是探索性分析，没有进行正式中介检验，也未排除其他同时发生的机制。
+
+- link_to_next_phase_cn：为讨论部分将结果上升为可复用设计知识和边界条件提供机制支撑。
+
+##### evidence_pointers
+
+1. Mechanism Exploration 最后一段
+
+2. Table 7 Information Disclosure Milestones (LPM)
+
+#### 7. 讨论、贡献与边界化
+
+- order：7
+
+- name_cn：讨论、贡献与边界化
+
+- question_cn：研究结果对设计理论、实践和后续研究意味着什么？在什么条件下成立？
+
+- inputs_and_setting_cn：全部实验与辅助分析结果。
+
+- designed_or_compared_object_cn：将结果置于HCI、服务机器人、算法厌恶/欣赏、智能增强文献中；提出设计启示与边界条件。
+
+- baseline_control_or_counterfactual_cn：无新的实证对照；主要是概念性综合。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论综合、边界条件讨论和未来研究方向。
+
+- main_result_cn：拟人化提高转化但增加报价敏感性；拟人化在敏感信息收集场景最有效；明确披露更讨喜；聊天机器人可作为标准化服务与社交智能的结合。
+
+- argumentative_role_cn：保护核心贡献不被视为一次性结果：通过机制、边界、设计与理论连接回答引言缺口。
+
+- remaining_uncertainty_cn：结果限于零售现金报价场景；其他行业和任务类型需要进一步研究。
+
+- link_to_next_phase_cn：没有下一阶段；以未来研究建议结束。
+
+##### evidence_pointers
+
+1. Discussion and Conclusion 全部段落
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 提出研究对象：AI聊天机器人的拟人化。
+
+2. 交代研究设计与现场：与零售商合作的随机现场实验，自动化二手服装回购流程。
+
+3. 预告因果识别策略：随机暴露于三种拟人化特征。
+
+4. 概括主要结果：拟人化提高转化但增加报价敏感性。
+
+5. 提出机制解释：公平评估/谈判心态。
+
+6. 补充描述性机制证据：敏感信息披露意愿。
+
+### introduction_moves
+
+1. 建立AI和聊天机器人广泛采用的背景。
+
+2. 强调客服聊天机器人将变成主要客户接触点，设计尤其重要。
+
+3. 定义拟人化并综述HCI中正面与负面混合结果。
+
+4. 把混合结果归因于情景因素，从而引出零售客服场景。
+
+5. 正式提出RQ1和RQ2。
+
+6. 描述现场实验和随机设计。
+
+7. 预告两个主要发现和机制解释。
+
+8. 分层声明文献贡献：IS、营销、算法反应、智能增强。
+
+### theory_and_knowledge_moves
+
+1. 引入CASA范式：人会把带社会线索的计算机当社会行动者。
+
+2. 指出社会线索可以提升信任和自我披露，也可能导致失望。
+
+3. 分别综述社交临场感、沟通延迟、幽默的正面与负面证据。
+
+4. 引入算法厌恶/欣赏文献，指出人与算法反应依赖情境和人机介入。
+
+5. 引入最后通牒博弈证据：人类出价者比计算机出价者更容易引发公平情绪和拒绝。
+
+6. 总结为需要现场数据来裁决拟人化方向。
+
+### artifact_design_moves
+
+1. 描述用DialogFlow和Python构建聊天机器人并接入Facebook Messenger。
+
+2. 描述三个主要对话步骤：收集衣物信息、报价、收集个人信息。
+
+3. 说明三种拟人化特征的具体操作化：人名/非正式语言/输入回执、70WPM动态延迟、报价前随机笑话。
+
+4. 说明随机化单位是每个首次发起对话的顾客。
+
+5. 说明采用特征数量而非单一特征强度，并类比医学联合治疗。
+
+6. 说明现金报价扰动服从正态分布及原因。
+
+### evaluation_moves
+
+1. 用LPM估计处理数量哑变量的主效应。
+
+2. 加入处理数量×现金报价交互以估计报价敏感性。
+
+3. 用复制实验检验单一社交临场感处理的可重复性。
+
+4. 用操纵检验验证延迟和幽默被感知。
+
+5. 用拟人化语义差异量表验证处理数量与感知拟人化正相关。
+
+6. 用随机化检验排除处理分配与星期几、报价、衣物数量的系统关联。
+
+7. 用MTurk实验比较机器人与真人客服的拟人化。
+
+8. 用披露实验比较明确披露与不披露的喜欢程度。
+
+9. 用信息披露里程碑分析探索敏感信息机制。
+
+### discussion_and_contribution_moves
+
+1. 重申拟人化对交易转化有直接正向关系。
+
+2. 强调拟人化同时提高报价敏感性，因此不是普遍适用的设计处方。
+
+3. 提出在需要顾客提供敏感信息的场景拟人化尤其有效。
+
+4. 用快速识破机器人的解释围绕披露结果。
+
+5. 把聊天机器人联系到服务标准化与社交智能结合。
+
+6. 把研究设计推广为一种可实验优化客服交互的方法。
+
+7. 明确边界条件：零售现金报价场景，其他场景需更多研究。
+
+8. 总结贡献并呼吁后续研究。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. CASA（computers are social actors）
+
+2. 社会信息处理理论（SIP）与chronemic cues
+
+3. HCI/HRI关于拟人化社会线索的混合证据
+
+4. 最后通牒博弈与行为经济学中的公平/出价者身份研究
+
+5. 算法厌恶与算法欣赏文献
+
+6. 自我披露/说服文献（社交化技术促进自我披露）
+
+7. 服务自助技术中的等待与满意度文献
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：CASA、SIP、最后通牒博弈和披露文献共同影响了研究问题、处理选择与结果解释；但具体制品设计（三种特征组合、以特征数量作为强度、报价扰动范围）主要由工程可行性和合作伙伴约束决定，不是从单一理论演绎出来的。作者自己也承认用联合治疗类比来证明特征数量作为强度的合理性，因而属于知识基础部分引导设计，而非严格理论派生设计。
+
+- 理论到设计翻译链：CASA说明人们会把带对话和轮流等社会线索的计算机视为社会行动者，因此设计者可在界面中加入社会线索；SIP进一步说明在纯文本界面中，用户会利用时间性线索（输入中、已读、延迟）推断社会性；最后通牒博弈文献说明出价者被感知为人类时会引发公平评估和情绪反应，因此拟人化可能改变顾客对报价的敏感度；自我披露文献说明社交化技术能增加信任和信息公开，由此推知拟人化可能促进顾客提供交易所需的敏感信息。这些知识基础被转化为三个具体设计特征：社交临场感、沟通延迟、幽默，以及用特征数量表达拟人化强度；随后通过主实验、复制实验、操纵检验和里程碑分析加以检验。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：CASA：带有对话与轮流等社会线索的计算机被视为社会行动者，社会线索可以引发人际式反应。
+
+- mechanism_cn：用户在交互早期将聊天机器人感知为具有社交性的行动者，进而更愿意融入对话。
+
+- design_requirement_cn：聊天机器人需要具备至少一个可被识别的社会线索，使顾客发生拟人化归因。
+
+- artifact_choice_cn：社交临场感处理：使用随机1990年代人名、非正式语言、正在输入和已读回执。
+
+- evaluated_contrast_cn：有社交临场感特征 vs. 无该特征的自动机器人式问候。
+
+- objective_result_cn：主实验中社交临场感作为3个并列处理之一；复制实验中单独使用社交临场感使转化率提高约5%（p=0.046）。
+
+##### evidence_pointers
+
+1. Methods 4.1.1
+
+2. Robustness 6.2
+
+3. Table 1
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：社会信息处理理论：在缺少面对面线索的文本媒介中，用户会利用chronemic线索（如时间戳、输入延迟）进行社会判断。
+
+- mechanism_cn：动态延迟被解读为“对方正在阅读/输入”，从而增强真实人类代理的感觉。
+
+- design_requirement_cn：聊天机器人不应即时无延迟回复，而应模拟人类打字节奏。
+
+- artifact_choice_cn：沟通延迟处理：按每分钟70词的动态延迟发送消息；非拟人化条件即时回复。
+
+- evaluated_contrast_cn：动态延迟 vs. 即时回复。
+
+- objective_result_cn：操纵检验中延迟处理显著提高了“代理花了很长时间回复”的感知（p=0.0006）；在主模型中延迟与其他人格特征共同提高转化。
+
+##### evidence_pointers
+
+1. Methods 4.1.2
+
+2. Table 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：幽默研究：幽默可以在任务导向交流中建立共同点并提高满意度，但语境不当会适得其反。
+
+- mechanism_cn：报价前的笑话缓解任务压力，使顾客对代理产生正面情感。
+
+- design_requirement_cn：在关键交易节点加入适度、无冒犯性的幽默。
+
+- artifact_choice_cn：幽默处理：在报价前随机插入四个预先批准的笑话之一；无幽默条件为“稍等”加五秒停顿。
+
+- evaluated_contrast_cn：随机笑话 vs. 计算等待提示加停顿。
+
+- objective_result_cn：操纵检验中笑话被感知为幽默（p=0.0045）；主模型中幽默作为共同作用的三种特征之一与转化提升相关。
+
+##### evidence_pointers
+
+1. Methods 4.1.3
+
+2. Figure 4
+
+3. Table 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：最后通牒博弈研究：人类出价者比无拟人化计算机出价者更容易引发不公平感的情绪反应，因此接受/拒绝行为不同。
+
+- mechanism_cn：聊天机器人越拟人化，顾客越可能将其报价视为来自人类代理，从而启动公平评估和谈判心态，对报价高低更敏感。
+
+- design_requirement_cn：需要通过改变拟人化强度来观察报价敏感性的变化，而不是只测平均转化。
+
+- artifact_choice_cn：用处理数量（0–3个特征）作为拟人化强度；同时随机扰动现金报价，使报价敏感性可估计。
+
+- evaluated_contrast_cn：在不同处理水平下，现金报价变化对转化率的不同斜率。
+
+- objective_result_cn：只有3个处理与现金报价的交互项显著为正（0.211，p<0.05），说明充分拟人化时顾客评价更敏感。
+
+##### evidence_pointers
+
+1. Literature Review 2.1.4
+
+2. Table 4
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：自我披露文献：社交化技术会增加用户信任、说服力和亲密信息公开。
+
+- mechanism_cn：拟人化特征使顾客对客服代理感到安心，从而更愿意提供完成交易所需的敏感个人信息。
+
+- design_requirement_cn：收集敏感信息时，拟人化可能降低顾客的披露阻力。
+
+- artifact_choice_cn：在回购流程中，报价后在需要邮寄地址、法定姓名和电话的阶段设计为依次询问。
+
+- evaluated_contrast_cn：不同处理数量下，顾客是否达到越来越敏感的信息披露里程碑。
+
+- objective_result_cn：处理数量对法定姓名和电话号码披露有显著正效应（3个处理+13.6%，p<0.05），对箱子尺寸不显著。
+
+##### evidence_pointers
+
+1. Mechanism Exploration 第5–6段
+
+2. Table 7
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 现场随机实验（主实验）
+
+2. 现场复制实验（单一处理）
+
+3. 操纵检验（问卷调查）
+
+4. 随机化检验（星期几、报价、衣物数量）
+
+5. 受控MTurk基准比较（聊天机器人 vs. 真人客服）
+
+6. 受控MTurk披露实验（未披露 vs. 披露身份）
+
+7. 原实验数据中的信息披露里程碑分析
+
+- why_these_evaluations_cn：主实验用于提供因果识别；复制实验用于排除结果来自多个处理聚合的可能并检验单处理可重复性；操纵检验确保延迟和幽默确实被感知；拟人化量表确保处理数量确实提高感知拟人化；随机化检验排除分配偏差；真人基准用于判断聊天机器人还有多少拟人化提升空间；披露实验用于回应监管变化和Luo et al.的延迟披露负面效应，排除不披露身份是转化收益来源的替代解释；里程碑分析用于在真实行为数据中追踪拟人化起作用的阶段。
+
+- benchmark_and_contrast_chain_cn：首先在控制组（0个处理）与1/2/3个处理之间比较转化率；然后在处理数量框架内检验现金报价斜率的差异；接着用单独的社交临场感处理复制主效应；再用真人客服作为拟人化水平的标尺；再用披露版本作为未披露版本的对照；最后用早期非敏感披露里程碑与后期敏感里程碑的差异来定位机制。每一步的对照都建立在上一阶段确认的因果效应之上，逐步从“是否有因果效应”过渡到“能否重复”“何时更强”“为什么成立”。
+
+### claim_evidence_ledger
+
+#### 1. 拟人化特征提高交易转化率
+
+- claim_cn：拟人化特征提高交易转化率
+
+- evidence_cn：主实验Table 4中3个处理+10.8%，1个处理+6.7%；复制实验社交临场感+5%
+
+- supported_cn：支持
+
+#### 2. 充分拟人化时顾客对现金报价更敏感
+
+- claim_cn：充分拟人化时顾客对现金报价更敏感
+
+- evidence_cn：Table 4中3 Treatments×Cash Offer系数0.211显著；1、2处理交互不显著
+
+- supported_cn：支持
+
+#### 3. 顾客因为公平评估/谈判心态变得更敏感
+
+- claim_cn：顾客因为公平评估/谈判心态变得更敏感
+
+- evidence_cn：报价敏感性交互效应与最后通牒博弈文献一致，但没有直接测量谈判心态
+
+- supported_cn：部分支持（推断性机制）
+
+#### 4. 拟人化收益部分来自顾客更愿意披露敏感信息
+
+- claim_cn：拟人化收益部分来自顾客更愿意披露敏感信息
+
+- evidence_cn：Table 7中法定姓名和电话号码披露显著，箱子尺寸不显著
+
+- supported_cn：部分支持（探索性、非正式中介）
+
+#### 5. 结果不依赖不披露机器人身份
+
+- claim_cn：结果不依赖不披露机器人身份
+
+- evidence_cn：MTurk披露实验中披露版本显著更讨喜
+
+- supported_cn：支持（对感知喜欢程度，而非真实转化）
+
+#### 6. 聊天机器人拟人化水平仍低于真人客服
+
+- claim_cn：聊天机器人拟人化水平仍低于真人客服
+
+- evidence_cn：MTurk人类代理感知拟人化3.93 vs. 机器人2.97，p<0.05
+
+- supported_cn：支持
+
+- internal_validity_strategy_cn：使用个体层面随机分配，独立随机化三个特征，排除回头客的后续对话；现金报价随机化以支持交互效应识别；通过随机化检验排除处理分配与星期几、报价、衣物数量的系统关联；通过操纵检验验证处理确实改变感知；通过复制实验避免多重处理聚合的误导。
+
+- external_validity_strategy_cn：在真实零售商的Facebook Messenger中操作真实回购交易，转化是实际行为而非自报；复制实验在同样现场、不同时间段重复；MTurk实验用于一般化感知效应；作者在讨论中明确将适用范围限定在零售现金报价场景，并警示其他场景需要更多研究。
+
+- what_is_not_actually_tested_cn：公平评估/谈判心态没有被直接测量或中介检验；信息披露里程碑分析只是探索性阶段分析，未做正式统计中介；披露实验使用喜欢程度作为转化代理，并未测量真实购买/回购转化；研究没有检验长期效应、不同行业或复杂任务下的效果；在线附录中关于个别特征组合的模式和估计器稳健性在主文本中未详细展示。
+
+## 贡献闭环
+
+- technical_claim_cn：在真实零售客服聊天机器人中加入社交临场感、沟通延迟和幽默等拟人化特征，能够提高二手服装回购流程的交易转化率；充分拟人化时还会增大顾客对现金报价的敏感性。
+
+- artifact_claim_cn：可识别设计部分（组合多种拟人化线索，尤其是三种同时呈现）导致了转化提升；复制实验中单独社交临场感也足以产生显著效果。
+
+- mechanism_claim_cn：拟人化使顾客将机器人视为社会行动者，进入公平评估/谈判心态，因此对报价更敏感；同时拟人化提高了顾客披露敏感个人信息的意愿，从而推动转化。
+
+- boundary_claim_cn：该效果发生在零售二手服装现金回购场景；高拟人化不是所有客服场景的最优选择；在需要顾客提供敏感信息的场景中收益更明显；明确披露机器人身份比不披露更讨喜。
+
+- reusable_design_knowledge_cn：设计者可以通过组合多个社会线索（而非单一线索强度）来调节感知拟人化；动态延迟、社会临场感和幽默可作为具体操作化；在收集敏感信息阶段拟人化尤其有价值；应尽早明确披露机器人身份；可将随机化聊天机器人部署作为企业测试客服交互模式的手段。
+
+- theoretical_contribution_cn：将CASA和拟人化理论扩展到真实客服交易中，显示拟人化既可能提高转化又可能通过公平心态改变经济决策；为算法厌恶/欣赏文献增加“拟人化”作为调节维度；为智能增强（IA）文献提供了“用人类社交智能增强算法代理”的反向路径。
+
+- how_discussion_closes_intro_gap_cn：引言指出HCI文献对拟人化效果不一致，并用情景因素解释；讨论将报价敏感性、披露结果和敏感信息里程碑重新连接到这些情景因素，说明在零售现金报价这种涉及金钱报价和敏感信息收集的场景中，拟人化既有收益也有成本，从而用因果证据和机制证据回填了文献缺口。
+
+- overclaim_or_unsupported_leaps_cn：将报价敏感性解释为“公平评估/谈判心态”缺乏直接心理测量支撑；信息披露里程碑分析被作者自己限定为探索性，没有做正式中介检验；从MTurk喜欢程度外推到真实转化存在跳跃；将三种特征的组合效应解读为“拟人化”的一般效应，依赖操纵检验中处理数量与感知拟人化的关系，但该关系只在p<0.10水平显著，证据强度有限。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者说明研究的是AI客服聊天机器人“拟人化”的影响。
+
+- rhetorical_function_cn：开门见山指出研究对象。
+
+- depends_on_cn：无
+
+- sets_up_cn：为全文定下核心概念。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者描述与美国双渠道服装零售商合作实施现场实验，自动化二手服装回购流程。
+
+- rhetorical_function_cn：说明研究发生的现场和制品。
+
+- depends_on_cn：上一句确定对象
+
+- sets_up_cn：为因果推断策略提供现场背景。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者通过随机暴露顾客于不同拟人化特征水平来因果估计拟人化对交易转化的影响。
+
+- rhetorical_function_cn：强调随机化设计的因果识别能力。
+
+- depends_on_cn：上一句的现场实验
+
+- sets_up_cn：预告主要实证策略。
+
+- evidence_pointer：Abstract P1 S3
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：RESULT
+
+- paraphrase_cn：作者给出主要发现：拟人化有利于交易结果，但也显著提高报价敏感性。
+
+- rhetorical_function_cn：在摘要中呈现双面结果。
+
+- depends_on_cn：前句的随机实验
+
+- sets_up_cn：引出机制解释。
+
+- evidence_pointer：Abstract P1 S4
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者提出更拟人化的聊天机器人使顾客转向公平评估或谈判心态。
+
+- rhetorical_function_cn：为报价敏感性结果提供机制假设。
+
+- depends_on_cn：上一句的报价敏感性结果
+
+- sets_up_cn：为文献综述中的最后通牒博弈铺垫。
+
+- evidence_pointer：Abstract P1 S5
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：RESULT
+
+- paraphrase_cn：作者提供描述性证据表明拟人化的转化收益可能部分来自顾客更愿意披露完成交易所需的信息。
+
+- rhetorical_function_cn：预告机制探索中的信息里程碑证据。
+
+- depends_on_cn：前句的机制解释
+
+- sets_up_cn：为机制探索部分做索引。
+
+- evidence_pointer：Abstract P1 S6
+
+### 7. P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者指出AI热潮让研究者和组织都希望利用AI创造价值并规避颠覆。
+
+- rhetorical_function_cn：建立宏观背景，说明研究AI主题的重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：让聊天机器人成为AI应用的自然例证。
+
+- evidence_pointer：Introduction P1 S1
+
+### 8. P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：作者指出文本聊天机器人已被各类规模企业广泛采用，能自动化标准客服互动。
+
+- rhetorical_function_cn：将一般AI话题聚焦到具体技术制品。
+
+- depends_on_cn：上一句的AI背景
+
+- sets_up_cn：引出客服聊天机器人设计问题。
+
+- evidence_pointer：Introduction P2 S1
+
+### 9. P3 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：作者预测聊天机器人很快会成为许多零售组织的主要客户接触点，因此设计部署必须小心。
+
+- rhetorical_function_cn：把设计问题提升为有现实后果的商业问题。
+
+- depends_on_cn：前两句的采用速度
+
+- sets_up_cn：特别关注拟人化设计。
+
+- evidence_pointer：Introduction P3 S1
+
+### 10. P4 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者定义拟人化是将人类特质归因于机器、动物等非人实体。
+
+- rhetorical_function_cn：给出核心构念的操作性定义。
+
+- depends_on_cn：前面提到设计方面
+
+- sets_up_cn：为文献综述界定概念。
+
+- evidence_pointer：Introduction P4 S1
+
+### 11. P4 S3–S4
+
+- order：11
+
+- section：Introduction
+
+- locator：P4 S3–S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出过去研究中拟人化有时提升信任和满意度，有时导致焦虑和合作减少。
+
+- rhetorical_function_cn：展示现有文献的不一致。
+
+- depends_on_cn：拟人化定义
+
+- sets_up_cn：论证需要情景化研究。
+
+- evidence_pointer：Introduction P4 S3–S4
+
+### 12. P5 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：GAP
+
+- paraphrase_cn：作者指出这种不一致说明情景因素塑造拟人化效应，因此需要研究零售环境中的客服聊天机器人。
+
+- rhetorical_function_cn：从文献不一致中构造研究缺口。
+
+- depends_on_cn：前段混合证据
+
+- sets_up_cn：引出研究问题。
+
+- evidence_pointer：Introduction P5 S1
+
+### 13. P5 S2–S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P5 S2–S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者正式提出RQ1：交易概率如何依赖聊天机器人拟人化；RQ2：报价敏感性如何随拟人化变化。
+
+- rhetorical_function_cn：明确两个可检验问题。
+
+- depends_on_cn：前句的缺口
+
+- sets_up_cn：为实验设计中的转化和报价敏感性提供靶心。
+
+- evidence_pointer：Introduction P5 S2–S3
+
+### 14. P6 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：P6 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者说明与一家美国双渠道服装零售商合作进行现场实验。
+
+- rhetorical_function_cn：介绍研究场景。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：说明为何可实现因果识别。
+
+- evidence_pointer：Introduction P6 S1
+
+### 15. P6 S3–S5
+
+- order：15
+
+- section：Introduction
+
+- locator：P6 S3–S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者将顾客交互自动化，并随机分配顾客到不同拟人化特征组合，同时随机化现金报价。
+
+- rhetorical_function_cn：强调随机化设计能因果估计转化和报价敏感性。
+
+- depends_on_cn：现场实验
+
+- sets_up_cn：为主结果作方法铺垫。
+
+- evidence_pointer：Introduction P6 S3–S5
+
+### 16. P7 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P7 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告第一个发现：拟人化提高转化率。
+
+- rhetorical_function_cn：先陈述正面结果。
+
+- depends_on_cn：现场实验
+
+- sets_up_cn：为第二个发现做对比。
+
+- evidence_pointer：Introduction P7 S1
+
+### 17. P7 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：P7 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告在足够高的拟人化水平（三个处理）下，顾客对报价更敏感。
+
+- rhetorical_function_cn：提出第二个出人意料的结果。
+
+- depends_on_cn：第一发现
+
+- sets_up_cn：引出公平评估机制。
+
+- evidence_pointer：Introduction P7 S2
+
+### 18. P7 S3–S4
+
+- order：18
+
+- section：Introduction
+
+- locator：P7 S3–S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者解释更拟人化使顾客更仔细审视报价，因为人类报价可能被视为投机或不一致。
+
+- rhetorical_function_cn：为报价敏感性提供初始机制解释。
+
+- depends_on_cn：第二发现
+
+- sets_up_cn：与后文最后通牒博弈联系。
+
+- evidence_pointer：Introduction P7 S3–S4
+
+### 19. P8 S1–S4
+
+- order：19
+
+- section：Introduction
+
+- locator：P8 S1–S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出四类贡献：IS中的聊天机器人设计、营销的服务机器人、算法反应、智能增强。
+
+- rhetorical_function_cn：在引言末尾定位学术贡献。
+
+- depends_on_cn：前面的发现
+
+- sets_up_cn：为文献综述和讨论提供框架。
+
+- evidence_pointer：Introduction P8 S1–S4
+
+### 20. 第3段
+
+- order：20
+
+- section：Literature Review 2.1
+
+- locator：第3段
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者介绍CASA范式：当技术包含对话和轮流等特征时，人会将其视为社会行动者。
+
+- rhetorical_function_cn：引入指导拟人化设计的核心理论。
+
+- depends_on_cn：前文对拟人化的定义
+
+- sets_up_cn：为社交线索作为设计变量提供理论正当性。
+
+- evidence_pointer：Literature Review 2.1 第3段
+
+### 21. 第4段
+
+- order：21
+
+- section：Literature Review 2.1
+
+- locator：第4段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者援引Shneiderman的批评，说明设计师未必理解用户如何感知社会线索，因此可能产生失望等负面后果。
+
+- rhetorical_function_cn：提醒拟人化设计存在风险。
+
+- depends_on_cn：CASA的正向潜力
+
+- sets_up_cn：解释文献结果不一致，也说明需要现场检验。
+
+- evidence_pointer：Literature Review 2.1 第4段
+
+### 22. 第5段
+
+- order：22
+
+- section：Literature Review 2.1
+
+- locator：第5段
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者明确提出评估社交临场感、延迟和幽默三种常用社会线索，并关注它们对交易结果和报价敏感性的影响。
+
+- rhetorical_function_cn：把理论综述聚焦到三种具体设计特征。
+
+- depends_on_cn：前文的CASA和风险讨论
+
+- sets_up_cn：为三种处理的操作化做索引。
+
+- evidence_pointer：Literature Review 2.1 第5段
+
+### 23. 第1段
+
+- order：23
+
+- section：Literature Review 2.1.1
+
+- locator：第1段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者说明社交临场感在本技术语境中指增加敏感的人类接触。
+
+- rhetorical_function_cn：定义社交临场感构念。
+
+- depends_on_cn：前文的三种特征列表
+
+- sets_up_cn：为社交临场感操作化提供依据。
+
+- evidence_pointer：Literature Review 2.1.1 第1段
+
+### 24. 第2段
+
+- order：24
+
+- section：Literature Review 2.1.1
+
+- locator：第2段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出社交临场感是一把双刃剑：界面更吸引人，但用户期望也会提高。
+
+- rhetorical_function_cn：强调社交临场感的可能负面后果。
+
+- depends_on_cn：社交临场感定义
+
+- sets_up_cn：解释为什么拟人化效果不确定。
+
+- evidence_pointer：Literature Review 2.1.1 第2段
+
+### 25. 第4段
+
+- order：25
+
+- section：Literature Review 2.1.1
+
+- locator：第4段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者提到语言选择如礼貌、非正式或社交语言可以影响拟人化感知和社交临场感。
+
+- rhetorical_function_cn：说明语言线索是社交临场感的可操作途径。
+
+- depends_on_cn：社交临场感设计
+
+- sets_up_cn：支撑后人名和非正式语言的操作化。
+
+- evidence_pointer：Literature Review 2.1.1 第4段
+
+### 26. 第6段
+
+- order：26
+
+- section：Literature Review 2.1.1
+
+- locator：第6段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者援引社会信息处理理论，说明在纯文本媒介中用户会用chronemic线索如已读回执和输入中提示来做出社会判断。
+
+- rhetorical_function_cn：为时间性社交线索提供理论基础。
+
+- depends_on_cn：前文人际线索缺失的讨论
+
+- sets_up_cn：支持输入指示和已读回执作为社交临场感特征。
+
+- evidence_pointer：Literature Review 2.1.1 第6段
+
+### 27. 第7段
+
+- order：27
+
+- section：Literature Review 2.1.1
+
+- locator：第7段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出拟人化感知可能让顾客更愿意长期互动，也可能因增加任务开销和误导期望而导致挫败。
+
+- rhetorical_function_cn：呈现拟人化收益与风险的两条路径。
+
+- depends_on_cn：前面双刃剑论点
+
+- sets_up_cn：为现场实验提供必要的实证不确定性。
+
+- evidence_pointer：Literature Review 2.1.1 第7段
+
+### 28. 第1段
+
+- order：28
+
+- section：Literature Review 2.1.2
+
+- locator：第1段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者说明延迟被用作社交线索，正确的动态延迟可以影响说服力和人格感知。
+
+- rhetorical_function_cn：为延迟处理提供先验证据。
+
+- depends_on_cn：三种特征列表
+
+- sets_up_cn：为70WPM延迟操作化做铺垫。
+
+- evidence_pointer：Literature Review 2.1.2 第1段
+
+### 29. 第2段
+
+- order：29
+
+- section：Literature Review 2.1.2
+
+- locator：第2段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出延迟可能被视为服务中断，因此可能增强体验或阻碍任务完成。
+
+- rhetorical_function_cn：说明延迟同样有双面效果。
+
+- depends_on_cn：前段延迟好处
+
+- sets_up_cn：强化研究拟人化不确定性的动机。
+
+- evidence_pointer：Literature Review 2.1.2 第2段
+
+### 30. 第1段
+
+- order：30
+
+- section：Literature Review 2.1.3
+
+- locator：第1段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者指出幽默在语言学和语用学中能建立共同点，并有效使系统人格化、提高满意度。
+
+- rhetorical_function_cn：为幽默处理提供正面证据。
+
+- depends_on_cn：三种特征列表
+
+- sets_up_cn：为报价前插入笑话做铺垫。
+
+- evidence_pointer：Literature Review 2.1.3 第1段
+
+### 31. 第2段
+
+- order：31
+
+- section：Literature Review 2.1.3
+
+- locator：第2段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者引用电子服务接触研究，说明幽默在过程不如意时可能加剧负面情绪。
+
+- rhetorical_function_cn：展示幽默的语境依赖。
+
+- depends_on_cn：前段幽默好处
+
+- sets_up_cn：说明幽默效果不确定，需要实证。
+
+- evidence_pointer：Literature Review 2.1.3 第2段
+
+### 32. 第1–3段
+
+- order：32
+
+- section：Literature Review 2.1.4
+
+- locator：第1–3段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者综述算法厌恶和算法欣赏文献，指出人对算法结果的反应依赖情境和人类参与程度。
+
+- rhetorical_function_cn：把客服报价问题连接到算法反应研究。
+
+- depends_on_cn：前文三项特征文献
+
+- sets_up_cn：为报价敏感性提供更广的算法决策背景。
+
+- evidence_pointer：Literature Review 2.1.4 第1–3段
+
+### 33. 第4–5段
+
+- order：33
+
+- section：Literature Review 2.1.4
+
+- locator：第4–5段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者引用最后通牒博弈证据，说明人类出价者比计算机出价者更容易引发不公平感和拒绝。
+
+- rhetorical_function_cn：为拟人化改变报价敏感性提供行为经济学基础。
+
+- depends_on_cn：前段算法反应综述
+
+- sets_up_cn：为“公平评估/谈判心态”机制提供理论支撑。
+
+- evidence_pointer：Literature Review 2.1.4 第4–5段
+
+### 34. 第7段
+
+- order：34
+
+- section：Literature Review 2.1.4
+
+- locator：第7段
+
+- move_code：GAP
+
+- paraphrase_cn：作者总结拟人化对报价接受与否可能是关键因素，因此需要用数据来决断。
+
+- rhetorical_function_cn：在文献综述末尾重新定义研究缺口。
+
+- depends_on_cn：前面混合证据
+
+- sets_up_cn：过渡到现场实验设计。
+
+- evidence_pointer：Literature Review 2.1.4 第7段
+
+### 35. P1 S2–S3
+
+- order：35
+
+- section：Study Context
+
+- locator：P1 S2–S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者描述用DialogFlow和Python开发聊天机器人，集成到零售商Facebook Messenger页面。
+
+- rhetorical_function_cn：说明制品的实现基础。
+
+- depends_on_cn：前文的实验目标
+
+- sets_up_cn：为随机化处理提供工程平台。
+
+- evidence_pointer：Study Context P1 S2–S3
+
+### 36. P2 S1–S3
+
+- order：36
+
+- section：Study Context
+
+- locator：P2 S1–S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者说明聊天机器人的三步对话：收集衣物信息、提供现金报价、接收地址姓名电话以生成运输标签。
+
+- rhetorical_function_cn：描述被自动化的核心交易流程。
+
+- depends_on_cn：制品实现
+
+- sets_up_cn：为转化和信息披露里程碑提供流程结构。
+
+- evidence_pointer：Study Context P2 S1–S3
+
+### 37. P1 S1
+
+- order：37
+
+- section：Methods 4.1
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者说明三个拟人化特征被独立随机化，顾客可接受0到3个特征的随机组合。
+
+- rhetorical_function_cn：给出实验设计核心。
+
+- depends_on_cn：三步流程和三种特征
+
+- sets_up_cn：为主回归中的处理数量哑变量提供来源。
+
+- evidence_pointer：Methods 4.1 P1 S1
+
+### 38. P2 S1–S4
+
+- order：38
+
+- section：Methods 4.1
+
+- locator：P2 S1–S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者解释为什么关注特征数量而非单一线索强度，并类比医学联合治疗。
+
+- rhetorical_function_cn：为构造效度提供论证。
+
+- depends_on_cn：三种特征随机化
+
+- sets_up_cn：为后续操纵检验埋下伏笔。
+
+- evidence_pointer：Methods 4.1 P2 S1–S4
+
+### 39. P3 S1–S3
+
+- order：39
+
+- section：Methods 4.1
+
+- locator：P3 S1–S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者说明在基线报价基础上用均值为0方差0.5的正态分布随机扰动现金报价。
+
+- rhetorical_function_cn：引入第二个随机化变量。
+
+- depends_on_cn：主实验随机化框架
+
+- sets_up_cn：为报价敏感性交互项提供变异来源。
+
+- evidence_pointer：Methods 4.1 P3 S1–S3
+
+### 40. P1 S1–S3
+
+- order：40
+
+- section：Methods 4.1.1
+
+- locator：P1 S1–S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者描述社交临场感操作化：随机人名、非正式语言、输入指示和已读回执。
+
+- rhetorical_function_cn：把理论构念变成可执行设计。
+
+- depends_on_cn：文献综述中的社交临场感
+
+- sets_up_cn：定义Table 1中的处理条件。
+
+- evidence_pointer：Methods 4.1.1 P1 S1–S3
+
+### 41. P1 S1–S2
+
+- order：41
+
+- section：Methods 4.1.2
+
+- locator：P1 S1–S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者描述沟通延迟用每分钟70词的动态延迟实现，非拟人化条件即时回复。
+
+- rhetorical_function_cn：把延迟线索操作化。
+
+- depends_on_cn：文献综述中延迟研究
+
+- sets_up_cn：与操纵检验中的延迟感知对应。
+
+- evidence_pointer：Methods 4.1.2 P1 S1–S2
+
+### 42. P1 S1–S4
+
+- order：42
+
+- section：Methods 4.1.3
+
+- locator：P1 S1–S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者描述幽默操作化：报价前随机插入四则无冒犯笑话；无幽默条件为等待提示加五秒停顿。
+
+- rhetorical_function_cn：把幽默构念变成可执行设计。
+
+- depends_on_cn：文献综述中幽默研究
+
+- sets_up_cn：与操纵检验中的幽默感知对应。
+
+- evidence_pointer：Methods 4.1.3 P1 S1–S4
+
+### 43. P1 S1–S2
+
+- order：43
+
+- section：Methods 4.2
+
+- locator：P1 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明主要因变量是二元转化，自变量是处理数量哑变量和中心化的现金报价。
+
+- rhetorical_function_cn：确定实证模型中的变量。
+
+- depends_on_cn：随机化设计
+
+- sets_up_cn：为方程(1)做变量定义。
+
+- evidence_pointer：Methods 4.2 P1 S1–S2
+
+### 44. P2 S1–S2
+
+- order：44
+
+- section：Methods 4.2
+
+- locator：P2 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明先估计LPM主效应，再估计带交互的完整模型以恢复报价敏感性。
+
+- rhetorical_function_cn：给出统计识别策略。
+
+- depends_on_cn：变量定义
+
+- sets_up_cn：对应Table 4两列结果。
+
+- evidence_pointer：Methods 4.2 P2 S1–S2
+
+### 45. 第1段
+
+- order：45
+
+- section：Results
+
+- locator：第1段
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告控制组转化率约2.6%，1个处理+6.7%，2个处理+5.0%，3个处理+10.8%。
+
+- rhetorical_function_cn：呈现主效应的核心数字。
+
+- depends_on_cn：方程(1)和Table 4
+
+- sets_up_cn：支撑转化率提升主张。
+
+- evidence_pointer：Results 第1段；Table 4
+
+### 46. 第2段
+
+- order：46
+
+- section：Results
+
+- locator：第2段
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告3个处理与现金报价交互显著为正，说明充分拟人化时顾客对报价更敏感。
+
+- rhetorical_function_cn：呈现第二个核心发现的统计证据。
+
+- depends_on_cn：Table 4交互模型
+
+- sets_up_cn：为后文机制解释提供靶点。
+
+- evidence_pointer：Results 第2段；Table 4
+
+### 47. P1 S1
+
+- order：47
+
+- section：Robustness 6.1
+
+- locator：P1 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者说明检查了多重共线性和估计器选择的稳健性，结果在附录中。
+
+- rhetorical_function_cn：回应计量选择的潜在担忧。
+
+- depends_on_cn：主结果
+
+- sets_up_cn：增强结果可信度。
+
+- evidence_pointer：Robustness 6.1 P1 S1
+
+### 48. P1–P3
+
+- order：48
+
+- section：Robustness 6.2
+
+- locator：P1–P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者描述在同一现场进行只包含社交临场感和控制条件的复制实验，发现社交临场感使转化率提升约5%。
+
+- rhetorical_function_cn：用单一处理复制主效果，排除聚合效应。
+
+- depends_on_cn：主实验
+
+- sets_up_cn：为操纵检验和机制探索铺路。
+
+- evidence_pointer：Robustness 6.2 P1–P3
+
+### 49. P1–P5
+
+- order：49
+
+- section：Robustness 6.3
+
+- locator：P1–P5
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者报告操纵检验显著、拟人化感知随处理数量增加，随机化检验无系统关联。
+
+- rhetorical_function_cn：验证构造效度和随机化有效性。
+
+- depends_on_cn：复制实验
+
+- sets_up_cn：使后续机制解释更有底气。
+
+- evidence_pointer：Robustness 6.3 P1–P5；Tables 5–6
+
+### 50. P1 S1
+
+- order：50
+
+- section：Mechanism Exploration
+
+- locator：P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者宣布将评估边界条件并检验拟人化是否真的是核心机制。
+
+- rhetorical_function_cn：从稳健性转向机制和边界。
+
+- depends_on_cn：前面所有稳健性结果
+
+- sets_up_cn：为接下来三个辅助研究做总领。
+
+- evidence_pointer：Mechanism Exploration P1 S1
+
+### 51. P2–P4
+
+- order：51
+
+- section：Mechanism Exploration
+
+- locator：P2–P4
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告真人客服比最拟人化聊天机器人被感知更拟人化，说明仍有提升空间。
+
+- rhetorical_function_cn：用外部基准解释拟人化水平上限。
+
+- depends_on_cn：MTurk实验
+
+- sets_up_cn：支持进一步增加拟人化可能带来更多收益。
+
+- evidence_pointer：Mechanism Exploration P2–P4；Figure 6
+
+### 52. P5–P6
+
+- order：52
+
+- section：Mechanism Exploration
+
+- locator：P5–P6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明披露检验重要，因为监管要求披露机器人身份，且Luo et al.发现延迟披露有负面影响。
+
+- rhetorical_function_cn：为披露实验提供实践和理论动机。
+
+- depends_on_cn：真人基准实验
+
+- sets_up_cn：为披露实验的结果解读提供语境。
+
+- evidence_pointer：Mechanism Exploration P5–P6
+
+### 53. P7–P8
+
+- order：53
+
+- section：Mechanism Exploration
+
+- locator：P7–P8
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告明确披露身份的聊天机器人比未披露版本更讨喜，说明转化收益不依赖隐瞒身份。
+
+- rhetorical_function_cn：排除一种重要的替代解释。
+
+- depends_on_cn：披露实验
+
+- sets_up_cn：引出快速识破机器人和期望违背的解释。
+
+- evidence_pointer：Mechanism Exploration P7–P8；Figure 7
+
+### 54. P8 S3–S4
+
+- order：54
+
+- section：Mechanism Exploration
+
+- locator：P8 S3–S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者解释用户可能很快识破机器人，人类名字反而造成期望落空甚至感知为欺骗。
+
+- rhetorical_function_cn：把披露结果与期望理论连接。
+
+- depends_on_cn：披露实验结果
+
+- sets_up_cn：为讨论中的边界条件提供机制。
+
+- evidence_pointer：Mechanism Exploration P8 S3–S4
+
+### 55. P9–P10
+
+- order：55
+
+- section：Mechanism Exploration
+
+- locator：P9–P10
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者提出拟人化可能通过增加顾客对自动客服的信任和敏感信息披露意愿来提高转化。
+
+- rhetorical_function_cn：正式引入自我披露机制假设。
+
+- depends_on_cn：前面机制探索
+
+- sets_up_cn：为披露里程碑分析提供理论依据。
+
+- evidence_pointer：Mechanism Exploration P9–P10
+
+### 56. P11–P13
+
+- order：56
+
+- section：Mechanism Exploration
+
+- locator：P11–P13
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告处理数量对法定姓名和电话号码披露显著，对箱子尺寸不显著。
+
+- rhetorical_function_cn：提供阶段式行为机制证据。
+
+- depends_on_cn：自我披露假设
+
+- sets_up_cn：支持敏感信息披露作为部分机制。
+
+- evidence_pointer：Mechanism Exploration P11–P13；Table 7
+
+### 57. P1 S1
+
+- order：57
+
+- section：Discussion and Conclusion
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结研究为真实客服场景中聊天机器人拟人化如何影响商业成果提供了新视角。
+
+- rhetorical_function_cn：重新声明研究价值。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：开始闭合引言缺口。
+
+- evidence_pointer：Discussion and Conclusion P1 S1
+
+### 58. P2 S1–S2
+
+- order：58
+
+- section：Discussion and Conclusion
+
+- locator：P2 S1–S2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者指出拟人化提升转化但增加报价敏感性，因此并非所有客服聊天机器人都该最大化拟人化。
+
+- rhetorical_function_cn：把结果转化为边界条件。
+
+- depends_on_cn：主结果和报价敏感性结果
+
+- sets_up_cn：为设计知识提供情境限定。
+
+- evidence_pointer：Discussion and Conclusion P2 S1–S2
+
+### 59. P2 S3–S4
+
+- order：59
+
+- section：Discussion and Conclusion
+
+- locator：P2 S3–S4
+
+- move_code：DESIGN_KNOWLEDGE
+
+- paraphrase_cn：作者指出拟人化在顾客输入敏感个人信息阶段作用更大，因此在需要收集客户信息的场景可能特别有利。
+
+- rhetorical_function_cn：把机制发现转化为设计启示。
+
+- depends_on_cn：信息披露里程碑结果
+
+- sets_up_cn：支持实务中按需使用拟人化。
+
+- evidence_pointer：Discussion and Conclusion P2 S3–S4
+
+### 60. P3 S1–S3
+
+- order：60
+
+- section：Discussion and Conclusion
+
+- locator：P3 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者解释披露版本更讨喜是因为顾客很快发现自己面对的不是真人，延迟披露可能被解读为欺骗。
+
+- rhetorical_function_cn：将披露实验结果整合进期望理论。
+
+- depends_on_cn：披露实验
+
+- sets_up_cn：为设计者提供明确披露建议。
+
+- evidence_pointer：Discussion and Conclusion P3 S1–S3
+
+### 61. P4 S1–S3
+
+- order：61
+
+- section：Discussion and Conclusion
+
+- locator：P4 S1–S3
+
+- move_code：DESIGN_KNOWLEDGE
+
+- paraphrase_cn：作者提出聊天机器人可作为标准化服务交付与人类社交智能的折中方案。
+
+- rhetorical_function_cn：从研究发现推向设计原则。
+
+- depends_on_cn：前面的转化结果和披露结果
+
+- sets_up_cn：为后续智能增强讨论铺垫。
+
+- evidence_pointer：Discussion and Conclusion P4 S1–S3
+
+### 62. P5 S1–S2
+
+- order：62
+
+- section：Discussion and Conclusion
+
+- locator：P5 S1–S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者指出研究展示用人类社交智能增强AI代理可以提高客服绩效，并提供实验性方法以检验客服交互模式。
+
+- rhetorical_function_cn：声明对智能增强文献的贡献。
+
+- depends_on_cn：前面讨论
+
+- sets_up_cn：把研究设计本身也作为贡献。
+
+- evidence_pointer：Discussion and Conclusion P5 S1–S2
+
+### 63. P6 S1–S2
+
+- order：63
+
+- section：Discussion and Conclusion
+
+- locator：P6 S1–S2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者强调发现限于零售现金报价场景，是否推广到购买、FAQ或医疗场景需要更多研究。
+
+- rhetorical_function_cn：主动限定外部效度。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：为未来研究指明方向。
+
+- evidence_pointer：Discussion and Conclusion P6 S1–S2
+
+### 64. P7 S1–S2
+
+- order：64
+
+- section：Discussion and Conclusion
+
+- locator：P7 S1–S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结工作为理解客服AI系统中社交行为因素提供第一步，并呼吁持续研究。
+
+- rhetorical_function_cn：以元层面贡献收束全文。
+
+- depends_on_cn：前面所有内容和边界
+
+- sets_up_cn：把论文定位为新研究流的起点。
+
+- evidence_pointer：Discussion and Conclusion P7 S1–S2
+
+## 写作技术
+
+- gap_construction_cn：作者不是声称“没人研究拟人化”，而是先呈现HCI/HRI中拟人化对用户结果正负不一致的文献，再指出这种不一致源于情景因素，接着把零售客服聊天机器人定义为有待考察的具体情景，由此形成“需要现场因果证据”的缺口。对报价敏感性，则用最后通牒博弈中人类/计算机出价者反应不同的矛盾证据构造第二个缺口。
+
+- signposting_cn：摘要末尾直接列出RQ1和RQ2；引言按“背景—构念—缺口—问题—设计—发现—贡献”层层预告；文献综述末尾明确宣布“我们采用这一研究并依靠数据得出结论”；Methods和Robustness每个子节用功能标题标出处理；Mechanism Exploration开头总领“评估边界条件、检验机制”。
+
+- transition_logic_cn：从宏观AI到聊天机器人的过渡通过“一个突出例子”；从混合证据到研究问题的过渡通过“这种不一致说明情景因素”；从主结果到稳健性通过“虽然……但需要评估稳健性”；从稳健性到机制通过“虽然证明了因果，但要理解边界和机制”；从机制探索到讨论通过对机制证据的总结和边界化。
+
+- claim_evidence_rhythm_cn：正文采用“先报主效应数字→再报交互效应数字→随后用复制和操纵检验加固→再用感知实验排除替代解释→最后用里程碑分析定位机制”的渐进节奏。每个主张都紧跟相应的表或图，作者在前瞻性声明中会标注“将在后文证明”。
+
+- benchmark_narrative_cn：benchmark不是主要论证核心，但被策略性使用：真人客服作为拟人化上限的基准，明确披露的机器人作为未披露机器人喜欢程度的对照；这些基准服务于边界条件和替代解释，而不是简单地晒性能。
+
+- theory_return_cn：讨论部分将报价敏感性交互结果重新连接到最后通牒博弈中的公平心态，将披露结果重新连接到期望违背理论，将敏感信息披露结果重新连接到自我披露文献，并将整体设计重新连接到CASA和智能增强，使结果从局部实验现象上升为理论可解释的知识。
+
+- contribution_positioning_cn：作者在引言中预设四类文献贡献，在讨论中通过将结果与这些文献对话来兑现贡献：IS设计、营销服务机器人、算法反应、IA。贡献声明都配有具体证据类型：现场因果、复制、机制探索。
+
+- novelty_protection_cn：通过三个手段防止退化为一次性性能结果：一是用复制实验证明单处理也有可重复效应；二是用机制探索（信息披露里程碑、公平心态解释、披露实验）提供超越“这个机器人有效”的深层解释；三是用明确的边界条件和未来方向主动限定适用范围，从而把结果表达为可累积的设计知识而非孤例。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：描述一个被广泛采用但效果不确定的数字技术制品及其商业后果。
+
+- research_job_cn：选择一个有真实交易后果的客服/交互流程，并找到愿意合作的企业现场。
+
+- required_evidence_cn：能够说明该制品正在被快速采用，且现有文献对关键设计属性结论不一致。
+
+- transition_to_next_cn：把不一致归因于情景因素，从而引出具体研究场景和可检验问题。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：为所关注的设计属性提供可操作化的特征集和理论理由。
+
+- research_job_cn：从文献中识别2–3个经典社会线索或设计操作，确定随机化单位。
+
+- required_evidence_cn：每个设计特征都有前人研究支持；说明为什么用特征数量或组合而非单一线索强度。
+
+- transition_to_next_cn：从设计特征过渡到实验设计：描述随机化流程和干扰变量。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述现场实验的随机化方案、处理水平、变量定义与实证模型。
+
+- research_job_cn：实际部署机器人或制品，随机分配处理，收集客观交易行为。
+
+- required_evidence_cn：随机化是可行的；有足够样本量；能够测量主要结果；有操纵/随机化检查计划。
+
+- transition_to_next_cn：呈现结果表，先主效应后交互效应。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：报告主效应和关键交互，解释数字含义，并附统计显著性。
+
+- research_job_cn：运行LPM或其他适合的回归，计算处理效应和交互效应。
+
+- required_evidence_cn：主效应和交互效应有统计证据；结果与理论机制方向一致。
+
+- transition_to_next_cn：转向稳健性：估计器、复制、操纵和随机化检查。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用复制实验、操纵检验和随机化检验净化因果主张。
+
+- research_job_cn：开展单一处理复制；收集操纵感知问卷；检验处理分配与时间/其他变量无关。
+
+- required_evidence_cn：复制结果显著；操纵被感知；随机化无系统偏差。
+
+- transition_to_next_cn：从“是否有效”过渡到“为什么有效/边界在哪”。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计辅助实验或二次分析以探索机制和边界。
+
+- research_job_cn：用受控实验比较机器人与真人/不同披露版本；或在原数据中寻找阶段性行为指标。
+
+- required_evidence_cn：能排除至少一个替代解释；能显示至少一个机制路径或边界条件。
+
+- transition_to_next_cn：把机制和边界综合进讨论。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在讨论中重新连接引言缺口，声明设计知识和理论贡献，限定边界。
+
+- research_job_cn：将结果与创建缺口时的文献对话，必要时补充未来研究方向。
+
+- required_evidence_cn：每个贡献声明都能在正文中找到对应的结果或辅助分析。
+
+- transition_to_next_cn：不需要下一阶段；总结和展望作为结尾。
+
+### most_transferable_moves_cn
+
+1. 从“文献不一致”到“具体研究场景”的缺口构造方式。
+
+2. 把抽象理论构念转成多个可独立随机化设计特征。
+
+3. 用特征数量而非单一强度作为处理水平，并寻找类似联合治疗的类比来正当化。
+
+4. 在真实流程中引入第二个随机化变量（价格/报价）以研究调节机制。
+
+5. 在主实验后安排复制实验和操纵/随机化检查。
+
+6. 用受控小样本实验处理外部有效性和替代解释。
+
+7. 用流程内的阶段性行为指标（信息披露里程碑）做机制探索。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要合作企业允许在其真实客户流程中部署随机化机器人。
+
+2. 需要可编程客服平台（如DialogFlow）和Python定制开发。
+
+3. 需要足够多的真实顾客流量以获得转化率统计功效。
+
+4. 复制实验需要第二次现场接入，耗费更多时间与商家资源。
+
+5. 真人客服基准实验需要招募多名训练有素的研究助理来避免单一真人偏差。
+
+6. 监管披露实验需要额外MTurk样本和问卷设计。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“拟人化提高转化”而不提供随机化和复制证据。
+
+2. 不能把三个特征的组合效应简单说成“拟人化”的普适效应，除非有操纵检验显示处理数量与感知拟人化显著相关。
+
+3. 不能把报价敏感性解释为公平心态而没有最后通牒博弈文献或其他心理测量支撑。
+
+4. 不能用MTurk喜欢程度直接替代真实交易转化，二者证据层级不同。
+
+5. 不能把探索性里程碑分析当作正式中介检验。
+
+6. 不能忽略商业合作伙伴对报价扰动范围的约束，否则随机化可能不切实际。
+
+- single_best_description_of_the_routine_cn：用一种真实客服流程中的随机化机器人，把文献中正反混杂的拟人化问题变成可检验的因果效应，再通过复制、操纵检验和机制实验把性能差异升华为边界与设计知识。
+
+## 分析边界
+
+由于在线附录未包含在提供的全文内，关于估计器稳健性、多重共线性检查、单一线索组合模式等补充细节无法逐一分析；主文本图片中的对话截图（如图2、3、4）仅以图片形式存在，无法提取具体文本；段落位置基于PDF/转换文本的视觉结构推断，个别段落编号可能与最终排版略有差异。

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85177050567"
+title: "Studying the Influence and Distribution of the Human Effort in a Hybrid Fitness Function for Search-Based Model-Driven Engineering"
+authors: "Casamayor R.; Cetina C.; Pastor O.; Perez F."
+year: "2023"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2023.3329730"
+---
+# Scopus title-abstract-keyword metadata
+Title: Studying the Influence and Distribution of the Human Effort in a Hybrid Fitness Function for Search-Based Model-Driven Engineering
+Abstract: Search-Based Software Engineering (SBSE) offers solutions that efficiently explore large complex problem spaces. To obtain more favorable solutions, human participation in the search process is needed. However, humans cannot handle the same number of solutions as an algorithm. We propose the first hybrid fitness function that combines human effort with human simulations. Human effort refers to human participation for providing evaluations of candidate solutions during the search process, whereas human simulations refer to recreations of a scenario in a specific situation for automatically obtaining the evaluation of candidate solutions. We also propose three variants for the hybrid fitness function that vary in the distribution of human effort in order to study whether the variants influence the performance in terms of solution quality. Specifically, we leverage our hybrid fitness function to locate bugs in software models for the video games of game software engineering. Video games are a fertile domain for these hybrid functions because simulated players are naturally developed as part of the video games (e.g., bots in First-Person Shooters). Our evaluation is at the scale of industrial settings with a commercial video game (Play Station 4 and Steam) and 29 professional video game developers. Hybridizing the fitness function outperforms the results of the best baseline by 33.46% in F-measure. A focus group confirms the acceptance of the hybrid fitness function. Hybridizing the fitness function significantly improves the bug localization process by reducing the amount of tedious manual work and by minimizing the number of bugs that go unnoticed. Furthermore, the variant that obtains the best results is a counter-intuitive result that was under the radar of the interactive SBSE community. These results can help not only video game developers to locate bugs, but they can also inspire SBSE researchers to bring hybrid fitness functions to other software engineering tasks.  © 1976-2012 IEEE.
+Author keywords: bug localization; Interactive SBSE; model-driven engineering; search-based software engineering; video games
+Index keywords: Computer games; Human computer interaction; Program debugging; Bug localizations; Computer bugs; Game; Interactive search; Interactive search-based software engineering; Location awareness; Model-driven Engineering; Search-based; Search-based software engineering; Software algorithms; Video-games; Function evaluation
+Document type: Article
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2023
+EID: 2-s2.0-85177050567
+DOI: 10.1109/tse.2023.3329730
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

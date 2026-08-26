@@ -1,0 +1,2047 @@
+# A hybrid decision support system for adaptive trading strategies: Combining a rule-based expert system with a deep reinforcement learning strategy
+
+- 作者：Yuhee Kwon; Zoonky Lee
+- 年份 / 期刊：2024 / Decision Support Systems
+- DOI：10.1016/j.dss.2023.114100
+- 源文件：20052_2024_a-hybrid-decision-support-system-for-adaptive-trading-strategies-combining-a-rule-based-expert-s.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：如何设计一种结合基于规则的专家系统与深度强化学习的混合决策支持系统，使交易策略能在不同市场环境中自适应并提升风险调整后收益？
+
+- 制品与设计：提出一个混合交易系统，核心设计包括三部分：将RB系统（Turtle趋势跟踪）的决策结果——买卖价、信号、仓位——加入RL状态空间；加入投资者可用资产状态（当前盈亏比、持股比例、平均买入价波动率）；用策略梯度网络输出的softmax动作概率动态调整交易量。策略网络采用LSTM，动作空间为买、卖、持有。
+
+- 客观结果：在S&P500测试期，完整混合模型RB+RL+C1+C2的累积收益%AR为59.37%，年化Sharpe Ratio为0.68，最大回撤MDD为-2.82，均优于B&H、RB、RL及渐进消融模型；在上升、下跌和崩盘场景中整体表现更好；在NYSE、DAX、CAC40、HSI、KOSPI五个指数基金上重现相同规律；将RB替换为均值回归策略后仍然成立。
+
+- 核心贡献：作者声称首次结合RB专家系统与深度RL，构造无需标注的自适应交易DSS；通过投资者余额状态与PG动作概率成交量机制，实现市场自适应、降低伪信号与交易成本，并在多市场、多场景、可扩展RB结构上证明可靠性。
+
+- 整篇论证链：作者先指出算法交易已占市场主导，但RB和ML各有缺陷，现有混合研究要么用RB特征提升监督预测精度、依赖困难标注，要么用ML优化固定交易规则、缺乏市场适应能力，而且普遍忽略交易量和余额等现实约束；由此提出将RB决策信息注入深度RL状态空间、加入投资者资产状态、并用PG动作概率调整交易量的混合系统。随后通过S&P500上的消融实验证明三个组件各自有效，通过信号次数与RB信号一致率解释行为机制，再与四类先前的TI+ML混合系统比较以证明优势，最后用多市场、多场景、替代RB模型检验可靠性和可扩展性，从而把一次性性能结果提升为可用于金融及其他自适应决策领域的设计知识。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文以现有设计缺陷为需求，提出一个可运行的混合交易DSS制品，并通过消融、基准比较、场景稳健性、多市场可扩展性和替代RB可延伸性等评价产生设计知识，而非理论驱动行为实验或纯benchmark计算研究。
+
+- 主导写作弧线判定：引言先构造性能与适应性缺口，随后描述制品设计，用消融和基准建立证据，再通过市场场景、跨指数基金和替代RB模型推广为一般化设计知识，符合性能缺口—制品—benchmark—一般化的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：第一阶段从领域知识和算法性质完成混合系统设计；第二阶段在S&P500上做消融实验，验证RB状态、投资者余额状态和成交量机制各自的重要性；第三阶段与先前基于技术指标的机器学习混合系统比较，证明相对优势；第四阶段把测试集按市场状态拆分，检验适应性与崩盘稳健性；第五阶段扩展到五个主要指数基金，证明可扩展性；第六阶段用替代RB模型验证混合结构可延伸。各阶段从内部有效性逐步走向外部泛化。
+
+### studies_or_phases
+
+#### 1. 混合系统设计与构建
+
+- order：1
+
+- name_cn：混合系统设计与构建
+
+- question_cn：如何将RB专家系统与深度RL结合，并纳入投资者资产状态和交易量机制？
+
+- inputs_and_setting_cn：领域文献、Turtle趋势跟踪规则、策略梯度/PG算法、LSTM策略网络、S&P500日线数据结构。
+
+- designed_or_compared_object_cn：RB决策状态、投资者余额状态（C1）、基于PG概率的成交量机制（C2），以及三者组合的混合交易系统。
+
+- baseline_control_or_counterfactual_cn：设计阶段无对照；后续通过消融实验提供反事实。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念设计、数学定义和系统架构构建；状态空间共9个输入单元。
+
+- main_result_cn：形成完整混合架构：市场状态（close、volume）、RB状态（signal、buy/sell price、trading size）、投资者余额状态（当前盈亏比、持股比例、平均买入价波动率），以及基于softmax概率的交易量计算公式。
+
+- argumentative_role_cn：为后续所有实验提供制品和设计变量；把引言中的缺口翻译成可检验的组件。
+
+- remaining_uncertainty_cn：尚不清楚每个组件是否真能带来性能提升，也不清楚组件之间的交互。
+
+- link_to_next_phase_cn：需要通过消融实验将组件逐一加入并比较。
+
+##### evidence_pointers
+
+1. Section 3.1-3.2
+
+2. Section 4.1-4.2
+
+3. Fig.1
+
+4. Fig.2
+
+#### 2. S&P500消融实验与信号分析
+
+- order：2
+
+- name_cn：S&P500消融实验与信号分析
+
+- question_cn：RB决策状态、C1和C2分别对收益、风险和交易信号有什么效果？
+
+- inputs_and_setting_cn：S&P500指数基金日线数据，2007-2022，7:3划分训练/测试；B&H、RB、RL、RB+RL、RB+RL+C1、RB+RL+C1+C2六种模型。
+
+- designed_or_compared_object_cn：在保持超参数一致的情况下，依次加入RB状态、投资者余额状态和成交量机制。
+
+- baseline_control_or_counterfactual_cn：B&H作为市场基准；RB和RL作为单一系统基准；RB+RL作为不含C1/C2的对照。
+
+##### objective_metrics
+
+1. 累积收益%AR
+
+2. 平均年化收益
+
+3. 平均日收益
+
+4. 最大回撤MDD
+
+5. 标准差SD
+
+6. Sharpe Ratio
+
+7. 买卖信号数量
+
+8. 与RB信号一致率
+
+- analysis_method_cn：消融对比、六项宏观绩效指标、微观信号频次分析。
+
+- main_result_cn：RB+RL较RL产生更多动态信号并降低SD，但%AR不如RL；加入C1后%AR升至43.16，信号减少且与RB更一致；再加入C2后完整模型%AR达59.37、SR达0.68、MDD为-2.82，信号最少、与RB信号一致率最高。
+
+- argumentative_role_cn：核心证据：证明三个设计组件各自有效，并将性能差异关联到行为机制（信号触发、交互式学习、概率化调仓）。
+
+- remaining_uncertainty_cn：单一市场上表现好可能仍是偶然；未证明与其他混合系统相比的优势；未检验不同市场情景。
+
+- link_to_next_phase_cn：需要与先前混合系统比较，并扩展到多场景和多市场。
+
+##### evidence_pointers
+
+1. Section 5.4.1
+
+2. Section 6.1.1
+
+3. Section 6.1.2
+
+4. Section 6.1.3
+
+5. Table 5
+
+6. Table 6
+
+7. Table 7
+
+8. Fig.3
+
+#### 3. 与先前TI+ML混合系统比较
+
+- order：3
+
+- name_cn：与先前TI+ML混合系统比较
+
+- question_cn：本文混合系统是否优于以往将技术指标与机器学习结合的混合交易模型？
+
+- inputs_and_setting_cn：S&P500测试期；基准包括TI+SVM、TI+RF、TI+LSTM、TI+XGBoost+CNN+LSTM，以及B&H；采用Park et al.的交易规则将预测转为交易信号。
+
+- designed_or_compared_object_cn：将本文完整混合模型与四类先前混合系统在整体、市场崩盘、上升趋势、下降趋势四种条件下比较。
+
+- baseline_control_or_counterfactual_cn：B&H作为市场基准；四类TI+ML模型作为同类算法基线。
+
+##### objective_metrics
+
+1. 累积收益%AR
+
+2. Sharpe Ratio
+
+- analysis_method_cn：统一交易规则、统一测试期、分市场状态比较。
+
+- main_result_cn：本文模型在整体及各市场条件下%AR和SR均优于或接近B&H，并优于所有四类TI+ML混合模型；在崩盘和下跌期优势尤其明显。
+
+- argumentative_role_cn：证明该混合DSS相比已有“RB特征+监督学习”或“TI+ML”混合路线具有竞争优势，尤其在高波动环境。
+
+- remaining_uncertainty_cn：比较依赖对先前模型的重现和统一交易规则，无法完全排除实现差异；仍未回答在不同指数基金上是否有效。
+
+- link_to_next_phase_cn：需要转向可靠性检验，包括极端市场、跨市场和可替换RB模块。
+
+##### evidence_pointers
+
+1. Section 5.4.2
+
+2. Section 6.2.3
+
+3. Table 11
+
+#### 4. 市场场景适应性与崩盘稳健性
+
+- order：4
+
+- name_cn：市场场景适应性与崩盘稳健性
+
+- question_cn：在上升、下跌和崩盘等不同市场状态下，混合模型是否能保持表现并抵御极端条件？
+
+- inputs_and_setting_cn：把S&P500测试集按一年间隔划分为市场崩盘、上升趋势、下降趋势三个场景。
+
+- designed_or_compared_object_cn：比较B&H、RB、RL、RB+RL、RB+RL+C1、完整混合模型在不同市场状态下的信号和收益。
+
+- baseline_control_or_counterfactual_cn：B&H为市场基准；RB的止损规则作为对比对象；其他消融模型作为内部控制。
+
+##### objective_metrics
+
+1. %AR
+
+2. SD
+
+3. 平均日收益
+
+4. MDD
+
+5. Sharpe Ratio
+
+6. 信号数量
+
+- analysis_method_cn：场景拆分、信号行为图、收益曲线比较和机制解释。
+
+- main_result_cn：上升趋势中完整模型接近B&H；下跌趋势中比其他模型少亏；崩盘期间在止损卖出后低价买入、恢复更快，SR达0.96，显著高于其他模型。
+
+- argumentative_role_cn：回应引言中“现有混合方法难以应对波动场景”的缺口，证明模型在极端市场中的稳健性。
+
+- remaining_uncertainty_cn：场景划分较少且相互重叠，样本量不大，属于描述性证据。
+
+- link_to_next_phase_cn：进一步验证在其他指数基金市场是否同样稳定。
+
+##### evidence_pointers
+
+1. Section 6.2.1
+
+2. Section 6.2.2
+
+3. Table 8
+
+4. Table 9
+
+5. Table 10
+
+6. Fig.4
+
+#### 5. 跨指数基金可扩展性
+
+- order：5
+
+- name_cn：跨指数基金可扩展性
+
+- question_cn：混合系统是否能在不同国家和市场的指数基金上保持一致的组件效应与表现？
+
+- inputs_and_setting_cn：NYSE Composite、DAX Performance、CAC40、Hang Seng Index、KOSPI Composite五组日线数据；采用与S&P500实验相同的超参数和交易约束。
+
+- designed_or_compared_object_cn：复用同一混合结构，在不同指数基金上运行同样的RB、RL、RB+RL、+C1、+C1+C2消融链。
+
+- baseline_control_or_counterfactual_cn：各市场的B&H和RB、RL单模型作为基准；S&P500结果作为一致性参照。
+
+##### objective_metrics
+
+1. %AR
+
+2. 年化收益
+
+3. 年化SD
+
+4. 平均日收益
+
+5. MDD
+
+6. Sharpe Ratio
+
+7. 信号数量
+
+- analysis_method_cn：跨市场重复消融实验，检查五个发现的稳定复现。
+
+- main_result_cn：在五个指数基金中，RB+RL都比RL更动态且SD更低；+C1多数市场提升%AR；完整模型多数市场获得更高%AR和SR；信号数按RB+RL > RB+RL+C1 > RB+RL+C1+C2递减。
+
+- argumentative_role_cn：证明系统不是针对S&P500过拟合，具有跨市场可扩展性。
+
+- remaining_uncertainty_cn：没有报告统计显著性；部分市场仍有例外，无法解释市场特征差异。
+
+- link_to_next_phase_cn：还需证明混合结构对RB模型选择不敏感。
+
+##### evidence_pointers
+
+1. Section 6.2.4
+
+2. Table 12
+
+3. Table 13
+
+#### 6. 替代RB模型的可延伸性
+
+- order：6
+
+- name_cn：替代RB模型的可延伸性
+
+- question_cn：将Turtle趋势跟踪RB替换为均值回归RB后，混合结构是否仍能产生相同效果？
+
+- inputs_and_setting_cn：S&P500指数基金同训练/测试期，使用均值回归交易策略作为替代RB模型，其余参数不变。
+
+- designed_or_compared_object_cn：比较Turtle RB与均值回归RB分别嵌入混合系统后的结果。
+
+- baseline_control_or_counterfactual_cn：替代RB本身、RL和消融链作为对照。
+
+##### objective_metrics
+
+1. %AR
+
+2. 年化收益
+
+3. 年化SD
+
+4. 日收益
+
+5. MDD
+
+6. Sharpe Ratio
+
+7. 信号数量
+
+- analysis_method_cn：替换RB模块的复制实验，检查与Turtle RB版本相同的五点结论。
+
+- main_result_cn：使用均值回归RB后，完整混合模型%AR为62.28、SR为0.80，仍优于消融链和B&H；信号数量同样递减，说明混合结构可延伸。
+
+- argumentative_role_cn：证明贡献不是绑定于Turtle规则，而是一种可复用的混合结构。
+
+- remaining_uncertainty_cn：只测试了一个替代RB；未测试更多RB类型或参数调整。
+
+- link_to_next_phase_cn：结论部分据此提出可扩展到金融其他领域和其他自适应决策问题。
+
+##### evidence_pointers
+
+1. Section 6.2.5
+
+2. Table 14
+
+3. Table 15
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. LIMITATION
+
+4. DESIGN_FEATURE
+
+5. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PRIOR_KNOWLEDGE
+
+4. GAP
+
+5. LIMITATION
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. DESIGN_FEATURE
+
+9. STUDY_OVERVIEW
+
+10. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. MECHANISM
+
+3. REQUIREMENT
+
+### artifact_design_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. MECHANISM
+
+3. REQUIREMENT
+
+4. DESIGN_FEATURE
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. STUDY_OVERVIEW
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+6. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. PRACTICAL_STAKES
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+5. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 规则专家系统与Turtle趋势跟踪交易策略
+
+2. 深度强化学习与策略梯度/REINFORCE算法
+
+3. 金融领域经验：波动率ATR、交易量对收益的影响、投资者可用余额约束
+
+4. 先前混合交易系统文献：RB作为监督特征、ML优化RB规则
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：论文并非从某个统一理论演绎出全部设计，而是把金融领域知识（RB决策信号、投资者余额、交易量重要性）转化为RL状态/动作设计；关键技术选择（LSTM策略网络、PG、warm start）来自ML工程惯例。因此知识基础部分决定设计，但不是完整理论驱动。
+
+- 理论到设计翻译链：从Turtle交易规则提取“何时交易、交易多少、何时止损”的专家决策；将买卖价、信号和仓位大小映射为RL状态，使agent学到趋势和波动信息；从真实交易中的资产约束出发，用当前盈亏比、持股比例、平均买入价波动率构造可交互状态；从交易量重要性和PG输出概率出发，用softmax概率决定成交量，把置信度转化为仓位调整。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：Turtle趋势跟踪规则通过N日突破和ATR波动率决定买卖信号、仓位和止损，蕴含金融专长。
+
+- mechanism_cn：RB决策信号反映市场短期趋势和波动；RL如果没有该信息，容易被长期上涨历史误导，几乎不产生卖出信号，错过短期交易机会。
+
+- design_requirement_cn：应将RB系统的交易结果纳入RL状态空间，使agent能学习专家系统的判断。
+
+- artifact_choice_cn：将RB的signal、buy price、sell price、trading size作为4个RB状态单元加入输入层。
+
+- evaluated_contrast_cn：对比RB+RL与RL、RB在S&P500测试期的收益、风险和信号数量。
+
+- objective_result_cn：RB+RL比RL产生更多动态买卖信号，SD低于RL，RB+RL与RB的信号相似，说明RB状态起到触发和降险作用。
+
+##### evidence_pointers
+
+1. Section 4.2.1
+
+2. Section 6.1.1
+
+3. Table 5
+
+4. Table 6
+
+5. Table 7
+
+6. Fig.3(a)
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：真实交易中投资者可用余额、持股比例和平均买入价等资产状态会影响投资决策和收益；市场价格状态不随agent行动改变，但资产状态会随行动改变。
+
+- mechanism_cn：将当前盈亏比、持股比例、平均买入价波动率作为状态后，agent能根据自身仓位盈亏动态调整行为，实现与环境的持续交互。
+
+- design_requirement_cn：在RL状态中加入投资者可用资产状态，而不只是市场价格状态。
+
+- artifact_choice_cn：引入C1：current PL ratio、shareholding ratio、fluctuation rate of average buy price共3个状态单元。
+
+- evaluated_contrast_cn：对比RB+RL+C1与RB+RL。
+
+- objective_result_cn：加入C1后%AR从29.32增至43.16，信号数量减少且与RB一致率上升，收益曲线更贴近指数增长。
+
+##### evidence_pointers
+
+1. Section 4.2.2
+
+2. Section 6.1.2
+
+3. Table 5
+
+4. Table 6
+
+5. Table 7
+
+6. Fig.3(b)
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：交易量对预测价格方向和投资收益有显著影响；PG算法输出softmax动作概率可视为决策置信度。
+
+- mechanism_cn：较高动作概率表示当前策略更确信某个操作，据此增加交易量；随训练进行策略趋于稳定，置信度提高，从而更高效地捕捉交易机会。
+
+- design_requirement_cn：交易量应随策略置信度动态调整，而不是固定数量。
+
+- artifact_choice_cn：设计C2：trading_volume = min_trading_volume + softmax_prob*(max_trading_volume - min_trading_volume)，max设为10。
+
+- evaluated_contrast_cn：对比RB+RL+C1+C2与RB+RL+C1。
+
+- objective_result_cn：完整模型%AR达59.37、SR最高0.68、MDD最低-2.82，信号更少且与RB的信号一致率更高，说明减少伪信号并提升风险调整收益。
+
+##### evidence_pointers
+
+1. Section 4.2.3
+
+2. Section 6.1.3
+
+3. Table 5
+
+4. Table 6
+
+5. Table 7
+
+6. Fig.3(b)
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 消融实验
+
+2. 六项绩效指标对比
+
+3. 微观信号数量与信号一致率分析
+
+4. 与先前TI+ML混合系统比较
+
+5. 市场情景拆分
+
+6. 跨指数基金复制实验
+
+7. 替换RB模型的可延伸性测试
+
+- why_these_evaluations_cn：作者需要证明：每个组件并非简单堆砌；系统不是只在单一数据集上的偶然结果；相比此前混合系统有实质优势；在极端市场、不同市场环境、不同市场标的和不同RB模块下依然可靠。因此采取从内部因果关系（消融）到外部泛化（场景、多市场、替代组件）的多层评价。
+
+- benchmark_and_contrast_chain_cn：先以B&H作为无策略市场基准；再比较单一RB和RL；随后沿RB+RL、RB+RL+C1、RB+RL+C1+C2的消融链逐级加入组件；再与TI+SVM、TI+RF、TI+LSTM、TI+XGBoost+CNN+LSTM等先前混合系统比较；然后将测试集划分为崩盘、上升、下跌场景；最后扩展到五个指数基金和替代RB模型。每一层对比都把“数值更好”逐步转成“组件有效—相对更优—场景稳健—结构可复用”。
+
+### claim_evidence_ledger
+
+#### 1. 每个设计组件对性能改善都有贡献。
+
+- claim_cn：每个设计组件对性能改善都有贡献。
+
+- evidence_cn：消融表中的%AR、SR、MDD和信号数量随组件加入发生相应变化。
+
+- evidence_status_cn：支持，但缺少统计显著性检验。
+
+#### 2. 混合模型在不同市场条件下都能适应并产生收益。
+
+- claim_cn：混合模型在不同市场条件下都能适应并产生收益。
+
+- evidence_cn：市场崩盘、上升、下跌场景下的表10和图4结果。
+
+- evidence_status_cn：描述性支持，场景样本有限。
+
+#### 3. 模型优于先前基于TI+ML的混合系统。
+
+- claim_cn：模型优于先前基于TI+ML的混合系统。
+
+- evidence_cn：统一交易规则和测试期下，表11显示整体及分场景%AR和SR更高。
+
+- evidence_status_cn：支持，但依赖对先前模型的重现。
+
+#### 4. 模型可扩展到不同指数基金且可替换RB模块。
+
+- claim_cn：模型可扩展到不同指数基金且可替换RB模块。
+
+- evidence_cn：五个指数基金的表12-13和替换均值回归RB的表14-15。
+
+- evidence_status_cn：支持，显示一致模式。
+
+#### 5. 减少交易信号意味着降低交易成本。
+
+- claim_cn：减少交易信号意味着降低交易成本。
+
+- evidence_cn：各表中完整模型信号数最少。
+
+- evidence_status_cn：间接证据，未直接模拟不同交易成本。
+
+- internal_validity_strategy_cn：采用7:3 hold-out划分训练/测试；除加入的组件外，所有模型超参数保持一致；使用warm start、dropout、batch normalization、逐步降低随机探索并依据奖励与cost收敛判断训练是否稳定；对比较模型也使用同一交易规则和约束，意图隔离组件效果。
+
+- external_validity_strategy_cn：将测试期细分市场状态，使用六个指数基金，并用另一种RB策略替换Turtle系统，从而把结论推广到不同市场阶段、不同市场和不同专家规则。
+
+- what_is_not_actually_tested_cn：没有真实在线交易或paper trading；没有统计显著性、置信区间或多次随机种子检验；没有交易成本敏感性分析；没有考虑市场冲击和滑点；没有小市值股票或个股；没有可解释性检验；没有测试其他策略网络结构或PG更新方式；比较模型可能不是原论文的精确复现。
+
+## 贡献闭环
+
+- technical_claim_cn：提出的混合DSS在S&P500及其他指数基金上获得比B&H、单一RB/RL和先前TI+ML混合系统更高的%AR/SR和更低的MDD。
+
+- artifact_claim_cn：RB决策状态、投资者余额状态（C1）和PG概率成交量机制（C2）各自导致了可观察的性能改善。
+
+- mechanism_claim_cn：RB状态触发动态短期交易信号并降低RL风险；C1使agent能与自身资产状态交互、提升适应性；C2利用策略置信度调整仓位，从而捕捉机会并减少伪信号。
+
+- boundary_claim_cn：系统适用于agent交易不影响市场价格的指数基金或大市值标的，不适用于需要基本面估值的小市值股票。
+
+- reusable_design_knowledge_cn：可复用规则：将专家系统的决策结果作为RL状态空间的一部分；将投资者自身资产状态纳入环境交互；用策略网络的动作概率决定交易量；混合结构可以替换RB模型并扩展到其他自适应决策场景。
+
+- theoretical_contribution_cn：文章没有提出严格新理论，但为金融ML/DSS领域提供了“专家知识注入RL状态”和“资产状态/概率调仓”的设计命题，扩展了自适应交易系统设计知识。
+
+- how_discussion_closes_intro_gap_cn：讨论与结论部分逐条回应引言列出的四类缺口：无需标签直接交易、能够适应市场、可应对波动场景、纳入交易量和余额约束；并通过可靠性测试把贡献从单一性能结果提升为设计知识。
+
+- overclaim_or_unsupported_leaps_cn：“首次”声明缺乏穷尽式检索支撑；从描述性结果到“consistently profitable”较快；将更少信号直接解释为交易成本降低未做成本模拟；消融差异未做显著性检验；与先前模型比较依赖未报告细节的重现；跨市场结果并非每个市场都完全一致，但作者将其概括为稳定规律。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：股票交易策略是机器学习在金融领域的重要应用，同时吸引经济学家和计算机科学家。
+
+- rhetorical_function_cn：开头建立领域背景，说明研究意义。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为随后引入智能交易系统做铺垫。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究提出多种智能交易系统，混合方法能成功解决交易策略问题。
+
+- rhetorical_function_cn：承认已有知识，同时为混合路线作合法性铺垫。
+
+- depends_on_cn：背景已建立。
+
+- sets_up_cn：引出本文的混合系统定位。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：先前混合模型主要关注优化交易决策和提升预测精度，存在局限。
+
+- rhetorical_function_cn：直接给出文献缺口，为贡献声明铺路。
+
+- depends_on_cn：前一句的混合方法合法化。
+
+- sets_up_cn：引出本文要克服这些局限的混合方案。
+
+- evidence_pointer：Abstract P2 S1
+
+### 4. P2 S2-S3
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S2-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出将RB决策信息和投资者余额状态纳入RL，并用策略梯度概率调整交易量。
+
+- rhetorical_function_cn：摘要级介绍制品核心设计，让读者形成整体印象。
+
+- depends_on_cn：前一句指出的不足。
+
+- sets_up_cn：为贡献bullet提供设计对应物。
+
+- evidence_pointer：Abstract P2 S2-S3
+
+### 5. P3 S1-S2
+
+- order：5
+
+- section：Abstract
+
+- locator：P3 S1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：宣称模型能适应不同市场、抵御压力、降低交易成本、扩展到多种指数基金并延伸混合结构。
+
+- rhetorical_function_cn：以可靠性术语包装贡献，强调现实应用价值。
+
+- depends_on_cn：前面设计特征。
+
+- sets_up_cn：为正文实验和可靠性框架提供预期。
+
+- evidence_pointer：Abstract P3 S1-S2
+
+### 6. P1 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：数据增加使算法交易更有用，交易量约占美国股市日成交量的80%。
+
+- rhetorical_function_cn：用现实比例说明研究对象的商业重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：说明为什么值得研究算法交易系统。
+
+- evidence_pointer：Introduction P1 S1-S2
+
+### 7. P1 S3-S4
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S3-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：规则模型和机器学习是两类常用方法，分别基于金融专长和先进预测技术。
+
+- rhetorical_function_cn：界定两种主要技术路线。
+
+- depends_on_cn：算法交易背景。
+
+- sets_up_cn：随后指出两者混合的必要性。
+
+- evidence_pointer：Introduction P1 S3-S4
+
+### 8. P1 S5-S6
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S5-S6
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：两种方法各有优劣，许多研究尝试结合，混合方法因其互补优势受到关注。
+
+- rhetorical_function_cn：引出混合路线，承认已有努力。
+
+- depends_on_cn：两种技术路线的界定。
+
+- sets_up_cn：为随后指出混合研究仍有缺口做铺垫。
+
+- evidence_pointer：Introduction P1 S5-S6
+
+### 9. P2 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：混合交易方法的研究仍不成熟，且面临许多挑战。
+
+- rhetorical_function_cn：正式声明缺口，将问题从“有人做过”转向“做得不够”。
+
+- depends_on_cn：混合方法受关注。
+
+- sets_up_cn：引出下一段的四类具体限制。
+
+- evidence_pointer：Introduction P2 S1
+
+### 10. P3 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有混合研究主要分为把RB结果作为监督学习特征，以及用ML优化RB规则两类。
+
+- rhetorical_function_cn：建立文献分类框架，使后续缺口具有结构。
+
+- depends_on_cn：混合研究存在的声明。
+
+- sets_up_cn：为分别批评两类路线提供结构。
+
+- evidence_pointer：Introduction P3 S1
+
+### 11. P3 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：第一类混合依赖标注数据，但金融标注受外部因素和不确定性影响，难以确定唯一真实逻辑。
+
+- rhetorical_function_cn：指出监督式混合的根本困难。
+
+- depends_on_cn：文献分类。
+
+- sets_up_cn：为本文采用无标注RL提供正当性。
+
+- evidence_pointer：Introduction P3 S2
+
+### 12. P3 S3
+
+- order：12
+
+- section：Introduction
+
+- locator：P3 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：第二类混合优化交易规则的方法缺乏市场适应能力，不适合变化的市场状态。
+
+- rhetorical_function_cn：指出规则优化式混合的适应性问题。
+
+- depends_on_cn：文献分类。
+
+- sets_up_cn：为本文RL自适应设计提供空间。
+
+- evidence_pointer：Introduction P3 S3
+
+### 13. P3 S4
+
+- order：13
+
+- section：Introduction
+
+- locator：P3 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：两类方法都难以应用于高波动或显著波动等多样市场场景。
+
+- rhetorical_function_cn：把缺口从技术层面扩展到适用场景。
+
+- depends_on_cn：前两条限制。
+
+- sets_up_cn：为“不同市场场景可靠性”实验作伏笔。
+
+- evidence_pointer：Introduction P3 S4
+
+### 14. P3 S5
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：实际交易中的交易量和当前余额等约束能显著影响表现，但多数研究很少考虑。
+
+- rhetorical_function_cn：提出被忽视的现实约束，作为新贡献点。
+
+- depends_on_cn：实践交易知识。
+
+- sets_up_cn：为投资者资产状态和成交量机制提供缺口。
+
+- evidence_pointer：Introduction P3 S5
+
+### 15. P3 S6
+
+- order：15
+
+- section：Introduction
+
+- locator：P3 S6
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：这些不足表明很有机会发展通过适应市场环境自我改进的混合交易策略。
+
+- rhetorical_function_cn：把四类限制整合为研究机会，强调缺口的重要性。
+
+- depends_on_cn：四类限制。
+
+- sets_up_cn：直接引出本文目标。
+
+- evidence_pointer：Introduction P3 S6
+
+### 16. P4 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究目标是提出一个用于自适应交易策略的混合决策支持系统。
+
+- rhetorical_function_cn：明确提出研究目标。
+
+- depends_on_cn：前段机会陈述。
+
+- sets_up_cn：随后说明三个具体设计。
+
+- evidence_pointer：Introduction P4 S1
+
+### 17. P4 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：P4 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将RB系统的决策信息纳入RL状态空间，使agent高效学习人类专长。
+
+- rhetorical_function_cn：介绍第一个核心设计，回应第一类限制。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：准备状态空间设计细节。
+
+- evidence_pointer：Introduction P4 S2
+
+### 18. P4 S3
+
+- order：18
+
+- section：Introduction
+
+- locator：P4 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：加入投资者可用资产状态，使agent能与环境交互并适应市场。
+
+- rhetorical_function_cn：介绍第二个核心设计，回应现实约束和适应性问题。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：准备C1状态设计细节。
+
+- evidence_pointer：Introduction P4 S3
+
+### 19. P4 S4
+
+- order：19
+
+- section：Introduction
+
+- locator：P4 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设计利用策略梯度动作概率调整交易量的有效投资机制。
+
+- rhetorical_function_cn：介绍第三个核心设计，回应交易量约束。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：准备成交量机制设计细节。
+
+- evidence_pointer：Introduction P4 S4
+
+### 20. P4 S5
+
+- order：20
+
+- section：Introduction
+
+- locator：P4 S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：通过信号发生分析和多种可靠性验证展示模型有效性。
+
+- rhetorical_function_cn：预告证据类型，让读者知道不是只有性能指标。
+
+- depends_on_cn：三个设计特征。
+
+- sets_up_cn：为结果部分的宏观/微观两层次检验布局。
+
+- evidence_pointer：Introduction P4 S5
+
+### 21. P4 bullet 1
+
+- order：21
+
+- section：Introduction
+
+- locator：P4 bullet 1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：声称首次将RB专家系统与深度RL结合成金融模型，RL从RB决策信息中学习并控制风险。
+
+- rhetorical_function_cn：以第一贡献定位研究的原创性。
+
+- depends_on_cn：三个设计特征。
+
+- sets_up_cn：为abstract和结论中的“首次”声明提供预期。
+
+- evidence_pointer：Introduction P4 bullet 1
+
+### 22. P4 bullet 2
+
+- order：22
+
+- section：Introduction
+
+- locator：P4 bullet 2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：把投资者可用余额作为状态空间，促进市场自适应学习并提高累积收益。
+
+- rhetorical_function_cn：单独声明C1贡献。
+
+- depends_on_cn：C1设计。
+
+- sets_up_cn：对应6.1.2的消融证据。
+
+- evidence_pointer：Introduction P4 bullet 2
+
+### 23. P4 bullet 3
+
+- order：23
+
+- section：Introduction
+
+- locator：P4 bullet 3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：设计基于PG概率的成交量调整机制，提高风险调整收益。
+
+- rhetorical_function_cn：单独声明C2贡献。
+
+- depends_on_cn：C2设计。
+
+- sets_up_cn：对应6.1.3的SR和MDD证据。
+
+- evidence_pointer：Introduction P4 bullet 3
+
+### 24. P4 bullet 4
+
+- order：24
+
+- section：Introduction
+
+- locator：P4 bullet 4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：通过交易信号差异分析，模型可减少正向虚假偏差并降低交易成本。
+
+- rhetorical_function_cn：用行为证据副产出的贡献，强调信号效率。
+
+- depends_on_cn：信号分析。
+
+- sets_up_cn：对应表5、表6、表9等信号数证据。
+
+- evidence_pointer：Introduction P4 bullet 4
+
+### 25. P4 bullet 5
+
+- order：25
+
+- section：Introduction
+
+- locator：P4 bullet 5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：模型在多种市场场景下持续跑赢基准和其他混合模型，在崩盘期尤其突出。
+
+- rhetorical_function_cn：预支稳健性贡献。
+
+- depends_on_cn：多场景实验。
+
+- sets_up_cn：对应6.2.1-6.2.3和表10/11。
+
+- evidence_pointer：Introduction P4 bullet 5
+
+### 26. P5 S1
+
+- order：26
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为确保实践性，在六个指数基金上进行大量实验。
+
+- rhetorical_function_cn：提前辩护外部效度和资源投入。
+
+- depends_on_cn：贡献声明。
+
+- sets_up_cn：为5.1数据描述和6.2.4跨市场实验作预告。
+
+- evidence_pointer：Introduction P5 S1
+
+### 27. P1 S1-S2
+
+- order：27
+
+- section：Section 2
+
+- locator：P1 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：适当组合两种方法通常能得到优于单一方法的表现；本文集中评述RB与ML结合的两个研究流。
+
+- rhetorical_function_cn：设置文献综述框架。
+
+- depends_on_cn：引言中的混合路线。
+
+- sets_up_cn：为2.1和2.2两个批评方向服务。
+
+- evidence_pointer：Section 2 P1 S1-S2
+
+### 28. final paragraph
+
+- order：28
+
+- section：Section 2.1
+
+- locator：final paragraph
+
+- move_code：LIMITATION
+
+- paraphrase_cn：第一类混合因监督学习需要标注而受限，市场动态使得标注标准难以定义，预测结果随趋势和滑窗变化。
+
+- rhetorical_function_cn：集中批评监督式混合。
+
+- depends_on_cn：2.1文献列举。
+
+- sets_up_cn：为RL免标注主张作铺垫。
+
+- evidence_pointer：Section 2.1 final paragraph
+
+### 29. final paragraph before RL paragraph
+
+- order：29
+
+- section：Section 2.2
+
+- locator：final paragraph before RL paragraph
+
+- move_code：LIMITATION
+
+- paraphrase_cn：第二类混合虽能优化交易决策，但难以适应其他市场且易过拟合特定情况。
+
+- rhetorical_function_cn：集中批评规则优化式混合。
+
+- depends_on_cn：2.2文献列举。
+
+- sets_up_cn：为RL自适应设计作铺垫。
+
+- evidence_pointer：Section 2.2 final paragraph
+
+### 30. last paragraph
+
+- order：30
+
+- section：Section 2.2
+
+- locator：last paragraph
+
+- move_code：GAP
+
+- paraphrase_cn：缺少关于在高度波动或大幅波动中产生持续盈利交易的研究，这是本文动机。
+
+- rhetorical_function_cn：指出文献空白并连接实践需求。
+
+- depends_on_cn：两类混合的限制。
+
+- sets_up_cn：引入RL作为解决方向。
+
+- evidence_pointer：Section 2.2 last paragraph
+
+### 31. last paragraph
+
+- order：31
+
+- section：Section 2.2
+
+- locator：last paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：近期研究表明RL能成功开发具有自适应策略的自动交易系统。
+
+- rhetorical_function_cn：为本文选用RL提供已有证据。
+
+- depends_on_cn：缺口陈述。
+
+- sets_up_cn：提出RL与其他方法混合仍待探索。
+
+- evidence_pointer：Section 2.2 last paragraph
+
+### 32. last paragraph
+
+- order：32
+
+- section：Section 2.2
+
+- locator：last paragraph
+
+- move_code：GAP
+
+- paraphrase_cn：如何将RL算法与另一种方法混合仍是一个开放问题，是本文核心。
+
+- rhetorical_function_cn：将一般缺口收窄到具体技术组合空白。
+
+- depends_on_cn：RL可行性文献。
+
+- sets_up_cn：进入方法设计和混合系统。
+
+- evidence_pointer：Section 2.2 last paragraph
+
+### 33. P1 S1-S3
+
+- order：33
+
+- section：Section 3.1
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：采用趋势跟踪规则中最具代表性的Turtle策略，以Donchian通道突破决定买卖点，并用ATR管理波动率仓位和止损。
+
+- rhetorical_function_cn：为RB系统提供具体规则基础。
+
+- depends_on_cn：RB相关文献。
+
+- sets_up_cn：为4.2.1提取RB决策状态提供来源。
+
+- evidence_pointer：Section 3.1 P1 S1-S3
+
+### 34. P1-S1
+
+- order：34
+
+- section：Section 3.2.1
+
+- locator：P1-S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：RL可表示为马尔可夫决策过程，agent通过状态、动作、奖励的循环交互学习最优策略。
+
+- rhetorical_function_cn：建立RL的数学基础。
+
+- depends_on_cn：RL文献。
+
+- sets_up_cn：为下文定义RL交易四元组。
+
+- evidence_pointer：Section 3.2.1 P1 S1
+
+### 35. P1-S2
+
+- order：35
+
+- section：Section 3.2.2
+
+- locator：P1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：策略梯度直接参数化策略并输出动作概率，适合随机策略。
+
+- rhetorical_function_cn：说明为何选用PG算法。
+
+- depends_on_cn：RL基础。
+
+- sets_up_cn：为4.2.3用softmax概率调节交易量提供理论接口。
+
+- evidence_pointer：Section 3.2.2 P1-S2
+
+### 36. final paragraph
+
+- order：36
+
+- section：Section 3.2.2
+
+- locator：final paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用LSTM网络建模策略网络，因为LSTM在金融时间序列上表现良好。
+
+- rhetorical_function_cn：选择具体网络结构。
+
+- depends_on_cn：深度学习文献。
+
+- sets_up_cn：为5.3四层LSTM超参数作铺垫。
+
+- evidence_pointer：Section 3.2.2 final paragraph
+
+### 37. P1-S2
+
+- order：37
+
+- section：Section 3.2.3
+
+- locator：P1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：将RL用于交易需要定义agent、状态、动作和奖励，并加入当前盈亏比作为状态。
+
+- rhetorical_function_cn：把抽象RL映射到交易问题。
+
+- depends_on_cn：MDP和PG基础。
+
+- sets_up_cn：为C1中的当前盈亏比状态提供起点。
+
+- evidence_pointer：Section 3.2.3 P1-S2
+
+### 38. P1 S1-S2
+
+- order：38
+
+- section：Section 4.1
+
+- locator：P1 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：提出混合方法模拟人类投资专家分析RB系统行动并改进自身行为。
+
+- rhetorical_function_cn：给出设计的认知机制类比。
+
+- depends_on_cn：RB和RL知识。
+
+- sets_up_cn：为4.2的组件设计提供总体逻辑。
+
+- evidence_pointer：Section 4.1 P1 S1-S2
+
+### 39. S1-S3
+
+- order：39
+
+- section：Section 4.2.1
+
+- locator：S1-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：状态表示对RL交易表现有很大影响，因此把RB系统的买卖价、信号和仓位纳入学习空间。
+
+- rhetorical_function_cn：从状态表示重要性推出RB状态设计。
+
+- depends_on_cn：RL状态表示文献。
+
+- sets_up_cn：定义表3中的RB状态列。
+
+- evidence_pointer：Section 4.2.1 S1-S3
+
+### 40. P1-S1
+
+- order：40
+
+- section：Section 4.2.2
+
+- locator：P1-S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：市场价格状态不受agent行动影响，但投资者可用余额状态会随agent行动变化，因此能促进agent与环境交互。
+
+- rhetorical_function_cn：解释为何需要资产状态而非只依赖市场价格状态。
+
+- depends_on_cn：系统交易的市场中性假设。
+
+- sets_up_cn：引出C1的两个核心变量。
+
+- evidence_pointer：Section 4.2.2 P1-S1
+
+### 41. P2
+
+- order：41
+
+- section：Section 4.2.2
+
+- locator：P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：引入平均买入价波动率和持股比例作为投资者可用资产状态。
+
+- rhetorical_function_cn：将机制落实为可计算状态。
+
+- depends_on_cn：前一句的交互机制。
+
+- sets_up_cn：对应表3的C1列和6.1.2实验。
+
+- evidence_pointer：Section 4.2.2 P2
+
+### 42. P1-S1-S3
+
+- order：42
+
+- section：Section 4.2.3
+
+- locator：P1-S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：交易量对预测未来价格方向和收益很重要；PG输出的softmax概率可表示动作置信度，因此用概率调整交易量。
+
+- rhetorical_function_cn：把交易量知识与PG算法特性连接起来。
+
+- depends_on_cn：交易量文献和PG随机策略性质。
+
+- sets_up_cn：为Eq.(11)的机制方程作铺垫。
+
+- evidence_pointer：Section 4.2.3 P1-S1-S3
+
+### 43. Eq.11附近
+
+- order：43
+
+- section：Section 4.2.3
+
+- locator：Eq.11附近
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：交易量等于最小交易量加上softmax概率乘以最大最小交易量之差。
+
+- rhetorical_function_cn：把机制形式化为算法规则。
+
+- depends_on_cn：前一句的概率置信度机制。
+
+- sets_up_cn：为5.3中max trading volume超参数提供依据。
+
+- evidence_pointer：Section 4.2.3 Eq.11
+
+### 44. S1-S2
+
+- order：44
+
+- section：Section 5.1
+
+- locator：S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用S&P500 2007-2022日线数据，按7:3划分训练和测试。
+
+- rhetorical_function_cn：说明数据来源和验证策略。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：给出表1和表2的数据范围。
+
+- evidence_pointer：Section 5.1 S1-S2
+
+### 45. P1-S1 and following
+
+- order：45
+
+- section：Section 5.3
+
+- locator：P1-S1 and following
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用warm start初始化策略参数，固定超参数，并用dropout、batch normalization和逐渐降低随机探索保证稳定收敛。
+
+- rhetorical_function_cn：控制训练随机性，为后续“组件导致差异”的内部有效性辩护。
+
+- depends_on_cn：RL训练实践。
+
+- sets_up_cn：为所有消融模型可比性提供方法论基础。
+
+- evidence_pointer：Section 5.3 P1-S1 and following
+
+### 46. S1-S2
+
+- order：46
+
+- section：Section 5.4.1
+
+- locator：S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用消融研究，通过控制RB状态、C1和C2来确认各组件效果。
+
+- rhetorical_function_cn：明确内部有效性策略。
+
+- depends_on_cn：三个设计组件。
+
+- sets_up_cn：为6.1的消融结果定义实验逻辑。
+
+- evidence_pointer：Section 5.4.1 S1-S2
+
+### 47. macro level paragraph
+
+- order：47
+
+- section：Section 5.4.1
+
+- locator：macro level paragraph
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：宏观采用累积收益、年均收益、日收益、MDD、标准差和Sharpe Ratio六项指标，微观检查交易信号数量。
+
+- rhetorical_function_cn：建立评价指标体系，让性能判断不只依赖收益。
+
+- depends_on_cn：交易绩效文献。
+
+- sets_up_cn：为表7和表5的结果呈现作准备。
+
+- evidence_pointer：Section 5.4.1 macro level paragraph
+
+### 48. S1-S2
+
+- order：48
+
+- section：Section 5.4.2
+
+- locator：S1-S2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：选择与本文接近的TI+ML混合系统作为基准，并用统一交易规则评估它们的交易盈利。
+
+- rhetorical_function_cn：确保比较公平，把预测模型转化为可交易系统。
+
+- depends_on_cn：文献综述中的TI+ML路线。
+
+- sets_up_cn：为表11中的四类比较模型建立标准。
+
+- evidence_pointer：Section 5.4.2 S1-S2
+
+### 49. S1-S4
+
+- order：49
+
+- section：Section 5.4.3
+
+- locator：S1-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：可靠性研究包括适应性、稳健性、可扩展性和可延伸性四个方面。
+
+- rhetorical_function_cn：预告可靠性实验的分类，使后续结果有清晰框架。
+
+- depends_on_cn：对外部效度的需求。
+
+- sets_up_cn：对应6.2.1至6.2.5各小节。
+
+- evidence_pointer：Section 5.4.3 S1-S4
+
+### 50. S1-S4
+
+- order：50
+
+- section：Section 6.1.1
+
+- locator：S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：RB因固定规则在波动中表现差；RL虽较好但几乎不卖出，因为其状态空间只有历史价格且长期上涨。
+
+- rhetorical_function_cn：报告基线结果并解释RL缺陷。
+
+- depends_on_cn：表7和图3。
+
+- sets_up_cn：引出RB状态加入RL的必要性。
+
+- evidence_pointer：Section 6.1.1 S1-S4
+
+### 51. S5-S8
+
+- order：51
+
+- section：Section 6.1.1
+
+- locator：S5-S8
+
+- move_code：RESULT
+
+- paraphrase_cn：RB+RL产生比RL更动态的信号，与RB信号相似，SD比RL低，说明RB状态提供捕捉短期头寸的触发信息。
+
+- rhetorical_function_cn：给出第一组消融证据并解释机制。
+
+- depends_on_cn：表5-7和图3。
+
+- sets_up_cn：为下一个组件C1埋下“无反馈”的不足。
+
+- evidence_pointer：Section 6.1.1 S5-S8
+
+### 52. last paragraph
+
+- order：52
+
+- section：Section 6.1.1
+
+- locator：last paragraph
+
+- move_code：TRANSITION
+
+- paraphrase_cn：RB状态只提供信息，未提供行动到下个状态的反馈，因此需要考察可与环境交互的状态。
+
+- rhetorical_function_cn：用剩余不足推动下一实验模块。
+
+- depends_on_cn：RB+RL结果。
+
+- sets_up_cn：引入C1投资者余额状态。
+
+- evidence_pointer：Section 6.1.1 last paragraph
+
+### 53. S1-S5
+
+- order：53
+
+- section：Section 6.1.2
+
+- locator：S1-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：加入C1后信号减少、与RB一致率提高，%AR上升，行为更像RB并能自主适应市场。
+
+- rhetorical_function_cn：报告C1的效果，说明资产状态促进交互。
+
+- depends_on_cn：表5-7和图3。
+
+- sets_up_cn：为C2成交量机制作铺垫。
+
+- evidence_pointer：Section 6.1.2 S1-S5
+
+### 54. last paragraph
+
+- order：54
+
+- section：Section 6.1.2
+
+- locator：last paragraph
+
+- move_code：TRANSITION
+
+- paraphrase_cn：仅提供状态仍不足以形成更接近真实交易的策略，因此需要成交量调整机制。
+
+- rhetorical_function_cn：用剩余不足衔接下一设计。
+
+- depends_on_cn：C1结果。
+
+- sets_up_cn：引入C2并报告其效果。
+
+- evidence_pointer：Section 6.1.2 last paragraph
+
+### 55. S1-S7
+
+- order：55
+
+- section：Section 6.1.3
+
+- locator：S1-S7
+
+- move_code：RESULT
+
+- paraphrase_cn：加入C2后信号数量进一步下降，与RB信号更一致，SD和MDD降低，SR最高，说明概率化调仓提升交易效率。
+
+- rhetorical_function_cn：报告第三个组件的消融证据。
+
+- depends_on_cn：表5-7和图3。
+
+- sets_up_cn：完成内部有效性证明，转向可靠性。
+
+- evidence_pointer：Section 6.1.3 S1-S7
+
+### 56. S1-S4
+
+- order：56
+
+- section：Section 6.2.1
+
+- locator：S1-S4
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：上升趋势中混合模型接近B&H，下跌趋势中比其他模型好；RB因止损规则错过快速转变中的收益。
+
+- rhetorical_function_cn：检验不同市场趋势下的适应性。
+
+- depends_on_cn：表8-10和图4。
+
+- sets_up_cn：进一步强调混合模型能同时利用长期和短期趋势。
+
+- evidence_pointer：Section 6.2.1 S1-S4
+
+### 57. S1-S5
+
+- order：57
+
+- section：Section 6.2.2
+
+- locator：S1-S5
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：崩盘期间混合模型不像RB那样死守止损，而是卖出后在低价生成买入信号并更快恢复，风险调整收益更高。
+
+- rhetorical_function_cn：检验极端市场中的稳健性，并解释agent自主探索增益。
+
+- depends_on_cn：图4(a)(d)(g)。
+
+- sets_up_cn：为比较先前混合模型提供铺垫。
+
+- evidence_pointer：Section 6.2.2 S1-S5
+
+### 58. S1-S6
+
+- order：58
+
+- section：Section 6.2.3
+
+- locator：S1-S6
+
+- move_code：RESULT
+
+- paraphrase_cn：本文模型在整体、崩盘、上升和下跌条件下都优于先前的TI+SVM、RF、LSTM、XGBoost+CNN+LSTM混合系统，尤其在高波动和下跌期。
+
+- rhetorical_function_cn：完成外部对比，证明相对已有混合系统的优势。
+
+- depends_on_cn：表11。
+
+- sets_up_cn：为“RL擅长序贯决策”的解释提供证据。
+
+- evidence_pointer：Section 6.2.3 S1-S6
+
+### 59. S1-S6
+
+- order：59
+
+- section：Section 6.2.4
+
+- locator：S1-S6
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：在五个主要指数基金上重复消融链，发现与S&P500相同的五项规律，支持跨市场可扩展性。
+
+- rhetorical_function_cn：证明模型不依赖单一市场。
+
+- depends_on_cn：表12-13。
+
+- sets_up_cn：为下一步替换RB模型提供“结构可复制”铺垫。
+
+- evidence_pointer：Section 6.2.4 S1-S6
+
+### 60. S1-S3
+
+- order：60
+
+- section：Section 6.2.5
+
+- locator：S1-S3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：将RB替换为均值回归策略后，在相同参数和期间上得到与Turtle RB版本相同的五点结论，支持混合结构的可延伸性。
+
+- rhetorical_function_cn：证明贡献依赖的是混合结构而非特定RB规则。
+
+- depends_on_cn：表14-15。
+
+- sets_up_cn：为理论和实践意义中的“可扩展到其他领域”提供依据。
+
+- evidence_pointer：Section 6.2.5 S1-S3
+
+### 61. P1-S1
+
+- order：61
+
+- section：Section 7.1
+
+- locator：P1-S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之一是RB与RL结合建立自适应交易策略，无需标注、可直接交易，并实现决策自改进。
+
+- rhetorical_function_cn：把内部消融结果提升为理论贡献。
+
+- depends_on_cn：6.1和6.2结果。
+
+- sets_up_cn：回应引言中标注和适应性问题。
+
+- evidence_pointer：Section 7.1 P1-S1
+
+### 62. P1-S4
+
+- order：62
+
+- section：Section 7.1
+
+- locator：P1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之二是投资者可用余额状态作为可交互状态，能提升收益并促进自适应学习。
+
+- rhetorical_function_cn：将C1结果表述为对RL状态设计知识的贡献。
+
+- depends_on_cn：6.1.2和跨市场结果。
+
+- sets_up_cn：回应引言中真实交易约束的缺口。
+
+- evidence_pointer：Section 7.1 P1-S4
+
+### 63. P1-S7
+
+- order：63
+
+- section：Section 7.1
+
+- locator：P1-S7
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之三是用PG动作概率确定交易量的机制，能改善Sharpe并减少伪信号。
+
+- rhetorical_function_cn：将C2机制提升为交易量设计知识。
+
+- depends_on_cn：6.1.3结果。
+
+- sets_up_cn：回应引言中交易量被忽视的问题。
+
+- evidence_pointer：Section 7.1 P1-S7
+
+### 64. P1-S1-S3
+
+- order：64
+
+- section：Section 7.2
+
+- locator：P1-S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：管理贡献一是模型跑赢指数基准和多数先前ML模型，并能在不同市场条件下取得持续盈利。
+
+- rhetorical_function_cn：将实验结论转化为管理者使用价值。
+
+- depends_on_cn：表10和表11等。
+
+- sets_up_cn：支持“作为可靠交易系统”的总体主张。
+
+- evidence_pointer：Section 7.2 P1-S1-S3
+
+### 65. P1-S1-S4
+
+- order：65
+
+- section：Section 7.3
+
+- locator：P1-S1-S4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：承认RL需大量数据、未测试神经网络与策略更新变体、可解释性不足、且系统只适用于大市值指数基金。
+
+- rhetorical_function_cn：划定边界并自我保护贡献。
+
+- depends_on_cn：实验限制和系统假设。
+
+- sets_up_cn：为未来研究铺设方向。
+
+- evidence_pointer：Section 7.3 P1-S1-S4
+
+### 66. P1-P2
+
+- order：66
+
+- section：Section 8
+
+- locator：P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论总结混合模型实现无标注自适应交易，降低风险并提升交易效率，未来可扩展到其他自适应决策领域。
+
+- rhetorical_function_cn：收束全文，回到中心贡献并开放推广。
+
+- depends_on_cn：全部实验证据。
+
+- sets_up_cn：给读者留下可复用的DSS设计主张。
+
+- evidence_pointer：Section 8 P1-P2
+
+## 写作技术
+
+- gap_construction_cn：先把已有混合研究划分为两个流派，再逐一给出每派的致命限制，最后补充“忽略交易量和余额约束”这个现实缺口，形成四类缺口，为后续三个设计组件各留一个接缝。
+
+- signposting_cn：在摘要和引言用贡献bullet预告证据链；在方法部分用5.3 training、5.4 verification分类；在结果部分用6.1消融、6.2可靠性分别对应内部和外部验证。
+
+- transition_logic_cn：每个结果小节末尾都指出前一组件“只提供信息但无反馈”“只有状态不够”“只有内部验证不够”，自然推入下一个组件或下一层可靠性检验。
+
+- claim_evidence_rhythm_cn：先报告指标表，再解释信号计数/一致率，最后用一两句机制说明为什么设计产生该结果；形成“结果—机制—贡献”的节奏。
+
+- benchmark_narrative_cn：基准不是随意挑选，而是选择与本文最接近的“TI+ML混合”路线，并用同一交易规则转换预测，强调在先前模型最弱的波动场景中本文更强。
+
+- theory_return_cn：文章无统一理论，但在讨论中把工程组件分别表述为RL状态设计、资产状态交互、概率化交易量知识，从而回到DSS/金融ML的理论化命题。
+
+- contribution_positioning_cn：将贡献同时放入机器学习和金融领域，并用“adaptability、robustness、scalability、extensibility”四类可靠性测试作为支撑。
+
+- novelty_protection_cn：通过消融实验把“混合系统更好”拆成“每个组件都必要”；用多市场和替代RB模型证明不是一次性数据集结果；用信号一致率将黑箱行为变为可解释机制。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写一个能引起共鸣的实践背景，并说明算法交易/金融ML的重要性。
+
+- research_job_cn：收集市场规模或行业证据，如成交量占比。
+
+- required_evidence_cn：至少一个可引用的现实后果或市场规模数字。
+
+- transition_to_next_cn：从“重要”转向“已有方法有哪些”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：把已有研究分成两个清晰流派，并逐条列出各自限制。
+
+- research_job_cn：做结构化文献综述，找到两个可以对比的研究流。
+
+- required_evidence_cn：每个流派有代表性文献，且能提炼共同缺陷。
+
+- transition_to_next_cn：用“因此存在机会”引出研究问题。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：提出DSS制品，将每个限制映射到一个设计特征。
+
+- research_job_cn：构造可运行的算法/系统，明确状态、动作和机制。
+
+- required_evidence_cn：至少为每个主要设计组件给出形式化定义或伪代码。
+
+- transition_to_next_cn：说明需要实验检验组件。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：设计消融实验，用增量加入组件的方式证明每个设计特征的有效性。
+
+- research_job_cn：在同一数据集上实现基线、完整系统和消融版本，控制超参数。
+
+- required_evidence_cn：宏观绩效指标加上微观行为指标（如信号数）支持机制解释。
+
+- transition_to_next_cn：从内部有效性转向外部比较和泛化。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：与最接近的先前系统比较，并说明比较规则公平。
+
+- research_job_cn：复现或接入相关基线，用统一评价流程折算交易结果。
+
+- required_evidence_cn：比较表在整体和分场景上支持“优于现有路线”。
+
+- transition_to_next_cn：下一步证明不是只在单一数据集上偶然成功。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用场景、多数据集和可替换模块构建可靠性叙事。
+
+- research_job_cn：做市场状态拆分、跨市场复制、替换核心模块的附加实验。
+
+- required_evidence_cn：观察到一致的模式，而不只是单一最好结果。
+
+- transition_to_next_cn：在讨论中把结果上升为设计知识并给出边界。
+
+### most_transferable_moves_cn
+
+1. 将已有研究按两个流派分类，再逐条指出共同缺陷，为每个设计组件预留接口。
+
+2. 在每个实验小节用‘结果—机制—剩余不足—下一实验’推进。
+
+3. 用信号数量和行为一致率解释黑箱agent机制。
+
+4. 把可靠性验证命名为适应性、稳健性、可扩展性、可延伸性，对应设计知识维度。
+
+5. 先做内部消融，再做外部比较和泛化，最后再谈理论和实践含义。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要多个全球指数基金的日线数据和较长训练/测试区间。
+
+2. 训练多个PG/LSTM模型并确保收敛需要可观的计算时间。
+
+3. 重新实现多个先前ML混合系统作为基准的复现成本高。
+
+4. 需要金融交易规则和RL状态设计的领域知识，不能靠措辞替代。
+
+### what_not_to_copy_superficially_cn
+
+1. 没有消融证据却声称每个组件有效。
+
+2. 没有统计检验却使用“consistently outperform”和“first”等强表述。
+
+3. 把交易模拟的收益直接等同于真实市场收益。
+
+4. 把‘fewer signals’直接等同于降低交易成本而未做成本敏感性分析。
+
+5. 在未真正实现原论文模型的情况下列出benchmark结果。
+
+- single_best_description_of_the_routine_cn：先以文献分类制造多个缺口，再把每个缺口翻译成状态/机制设计，用渐进消融和信号微观分析建立内部证据，再用场景、多市场、可替换模块建立外部证据，最后回到贡献与边界。
+
+## 分析边界
+
+全文可读，无OCR缺失；但由于没有原始PDF页码，位置标识主要使用章节、表、图而非精确页码；部分基准模型的重现细节依赖参考文献，无法独立核实；消融结果缺少统计检验，因此对该论文贡献强度的判断保留一定不确定性。

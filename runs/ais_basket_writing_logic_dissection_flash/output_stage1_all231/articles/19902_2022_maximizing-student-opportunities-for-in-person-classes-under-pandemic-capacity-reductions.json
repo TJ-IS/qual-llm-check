@@ -1,0 +1,1259 @@
+{
+  "record_id": "19902",
+  "source_file": "19902_2022_maximizing-student-opportunities-for-in-person-classes-under-pandemic-capacity-reductions.md",
+  "title": "Maximizing student opportunities for in-person classes under pandemic capacity reductions",
+  "authors": "Carlos Cardonha; David Bergman; Robert Day",
+  "year": "2022",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113697",
+  "fulltext_chars": 80587,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "operational_efficiency",
+  "source_application_context": "education_training_and_learning",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:06.177061+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在新冠疫情导致教室容量大幅降低、教学模式需要灵活选择（Split-Delivery、在线和面授混合）的情况下，大学如何最优地分配课程教学模式与教室，以最大化学生获得面授学习机会？",
+    "artifact_and_design_cn": "一个为UConn 2020年秋季学期开发的两阶段决策支持系统。第一阶段用混合整数规划（通用模型A或基于区间图压缩的紧凑模型B）最大化加权面授学生座位数；第二阶段在保持第一阶段最优值的前提下最小化教室容量与班级规模之间的平方差异。系统还包括可视化仪表板和与行政人员迭代交互的流程，并由教师提供的教学偏好（IP/SP/OL）驱动。",
+    "objective_outcomes_cn": "该系统为六个校区实际生成了排课方案：共安排1,641门课程和42,985个面授座位，比贪心基线多7%的课程和近9%的座位；Storrs紧凑模型B可在15分钟内求解最优，而通用模型A初始需超过16小时；第二阶段将Storrs平均容量差异从15.6降至12.6；反事实分析显示若全部课程可采用Split-Delivery，多个校区覆盖率可超过95%。",
+    "core_contribution_cn": "作者声称的贡献包括：提出一个含教学模式选择的新排课问题（flexible assignment），给出两个MILP公式，其中紧凑模型直接利用区间图/可行时间面的结构性质；开发并部署了可交互的决策支持系统以解决真实UConn实例；提炼了关于SP教学模式采用率、权重设计和精确方法价值的实用见解。",
+    "whole_argument_in_one_paragraph_cn": "文章从疫情导致教室容量骤降和既有排课方案全部失效的现实问题出发，指出大学既要满足师生面授需求又必须安全限制容量，于是引入Split-Delivery等新模式并接受IP/SP/OL的教学模式选择。作者将问题形式化为加权座位最大化模型，证明其NP-hard且不可近似，然后先提出通用模型A，但在Storrs实例上因求解时间过长而遭遇瓶颈；随后基于区间图理论发展紧凑模型B和小型可行时间面，使Storrs能在15分钟内求得最优。为了检验实际价值，作者用大学原本会采用的贪心算法作为基线，在六个真实校区上显示精确方法带来7%~9%的额外覆盖率；又通过第二阶段优化减少容量差异，提高舒适性和可调整性。反事实分析（SP不可用、SP全可用、SP权重相等）刻画了灵活教学模式的价值和采用限制。最后，作者描述实际部署、add-drop阶段的人工调整和91%课程保持原时段的实际结果，把贡献从一次性计算改进提升为可复用的排课决策知识。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "论文围绕一个真实DSS的设计、构建、求解、交互迭代和实际采纳展开，以UConn六个校区的真实数据作为评估场景，没有随机实验或独立benchmark数据集；核心是制品（模型+流程）被成功部署并产生可观测的实际结果，符合设计科学中\"构建—评价—设计知识\"的弧线。虽然包含数学编程算法和基准对比，但整体并非以算法benchmark为主，而是以实际系统采纳为最终证据。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章一开始指出现有DSS和贪心流程在疫情容量约束和教学模式选择下出现性能缺口；然后开发新的DSS制品（两个MILP模型+两阶段流程）；接着用真实六个校区实例和贪心基线进行对照，展示覆盖率、座位数和计算性能上的优势；最后通过反事实SP情景分析和实际部署经验，将结果一般化为可复用的设计知识与见解。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "研究从真实问题识别开始，经过形式化、数学模型构建、初始求解瓶颈、紧凑模型与对照评估、第二阶段补充优化，最后通过反事实分析和实际部署将结果一般化。各阶段是累积关系：前阶段问题定义和形式化为数学模型提供基础；模型A的性能瓶颈直接引向紧凑模型B的开发；主结果评估检验方法增益；第二阶段补足主目标未覆盖的匹配质量；反事实分析解释机制并界定边界；实际部署记录则把计算结果转化为可接受的实际影响。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "需求识别与实例构建",
+        "question_cn": "疫情导致UConn 2020秋季学期排课面临什么新矛盾？需要哪些决策变量和目标？",
+        "inputs_and_setting_cn": "UConn六个校区（Storrs, Avery Point, Waterbury, Stamford, Hartford, GBLC）的课程、教室、座位和教室COVID容量数据；行政人员与各学院互动产生的教学偏好。",
+        "designed_or_compared_object_cn": "对教学模式的分类（OL、IP、SP），以及IP/SP课程请求和教室分配的关系。",
+        "baseline_control_or_counterfactual_cn": "无，这是问题设定阶段。",
+        "objective_metrics": [],
+        "analysis_method_cn": "与大学行政人员协作的需求分析、对现有DSS（Astra Schedule）和贪心流程的评估。",
+        "main_result_cn": "明确优化目标是最大化按注册人数加权的面授座位数；SP课程可接受IP或SP分配，被拒请求自动变为OL；几乎所有旧排课失效，需要集成化重排。",
+        "argumentative_role_cn": "为后续所有建模建立现实约束和目标函数。",
+        "remaining_uncertainty_cn": "各校区的具体课表规律差异（regular vs flex）尚未处理，需要进一步模型区分。",
+        "link_to_next_phase_cn": "需求直接转化为Section 4的形式化定义。",
+        "evidence_pointers": [
+          "Section 3.2–3.4",
+          "Table 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "形式化定义与复杂性分析",
+        "question_cn": "该灵活教室分配问题在数学上如何定义？是否可有效求解？",
+        "inputs_and_setting_cn": "来自Section 3的符号系统；时间槽、教室容量、班级需求、IP/SP集合。",
+        "designed_or_compared_object_cn": "可行解、效用函数、目标函数。",
+        "baseline_control_or_counterfactual_cn": "无。",
+        "objective_metrics": [],
+        "analysis_method_cn": "理论定义和NP-hard归约（证明是k-interval图着色的扩展）。",
+        "main_result_cn": "问题在一般情形下NP-hard且无法常数近似；但不妨碍利用实际结构设计高效精确模型。",
+        "argumentative_role_cn": "给出问题复杂性的理论边界，同时为后续精确模型和贪心基线的适用性提供依据。",
+        "remaining_uncertainty_cn": "虽然NP-hard，但真实实例的规模与结构是否可被精确求解仍需验证。",
+        "link_to_next_phase_cn": "复杂性结果说明需要设计混合整数规划并利用图结构（区间图）来压缩。",
+        "evidence_pointers": [
+          "Section 4，Proposition 1",
+          "Section 5末尾对贪心近似性的说明"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "数学模型构建",
+        "question_cn": "如何建立两个MILP模型（通用模型A和紧凑模型B），并找到最小可行时间面？",
+        "inputs_and_setting_cn": "Section 4的数学对象；Storrs实例的T=8640, T_bar=456等实际参数。",
+        "designed_or_compared_object_cn": "模型A（独立集约束）与模型B（时间点约束）；模型S-hitting set，用于求最小可行时间面；第二阶段模型(B.2/A.2)。",
+        "baseline_control_or_counterfactual_cn": "模型A作为通用参照；模型B作为利用结构后的改进。",
+        "objective_metrics": [],
+        "analysis_method_cn": "混合整数线性规划；图论中的区间图、可行时间面和hitting set理论；命题2-5的理论证明。",
+        "main_result_cn": "证明可行时间面只需包含冲突班级的公共时间点；最小可行时间面可为很小（Storrs为139个点）；模型B比模型A更紧凑。",
+        "argumentative_role_cn": "提供用于实际求解的算法基础，尤其为性能瓶颈提供理论化解路径。",
+        "remaining_uncertainty_cn": "模型B仅严格适用于每周上课的regular-schedule场景；对flex课表仍需模型A。",
+        "link_to_next_phase_cn": "模型构建为Stage 4和5的计算实验提供求解器。",
+        "evidence_pointers": [
+          "Section 6.1–6.3",
+          "Proposition 2–5",
+          "Model S 描述"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "初始求解与性能瓶颈分析",
+        "question_cn": "模型A在Storrs实例上的表现如何？为什么不能满足实际DSS的时间约束？",
+        "inputs_and_setting_cn": "Storrs实例早期版本的数据；Gurobi 9.0.0（Python 3.6）。",
+        "designed_or_compared_object_cn": "模型A的构建时间和求解时间；预求解效果。",
+        "baseline_control_or_counterfactual_cn": "预期目标是满足行政人员快速迭代；无外部基线。",
+        "objective_metrics": [
+          "求解时间（小时）",
+          "最优性gap（%）",
+          "预求解消除的变量/约束比例"
+        ],
+        "analysis_method_cn": "计算实验与性能剖析。",
+        "main_result_cn": "模型A构建需约1小时；求解超过16小时；2小时内仅能达到5%最优性gap；预求解只能消除15%约束和1%变量。",
+        "argumentative_role_cn": "说明通用模型不能满足交互式DSS的实时需求，从而为模型B提供动因。",
+        "remaining_uncertainty_cn": "是否可以通过改进模型A的参数或预处理解决，还是必须改变模型结构。",
+        "link_to_next_phase_cn": "性能数据促使开发模型B并使用结构压缩。",
+        "evidence_pointers": [
+          "Section 7.2，第2-3段"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "主结果评估：模型B与贪心基线比较",
+        "question_cn": "两阶段框架在六个真实校区上的覆盖率、座位数和计算时间如何？相对大学原本会用的贪心流程有多大改进？",
+        "inputs_and_setting_cn": "六个校区最终版本的输入数据；每个校区独立求解；Storrs/Avery/Waterbury用模型B，Stamford/Hartford/GBLC用模型A。",
+        "designed_or_compared_object_cn": "两阶段精确框架 vs 两阶段贪心算法（IP阶段+SP阶段）。",
+        "baseline_control_or_counterfactual_cn": "贪心算法是行政人员若不合作时最可能采用的方法（Section 5）。",
+        "objective_metrics": [
+          "IP分配课程百分比",
+          "SP分配课程百分比",
+          "IP分配座位百分比",
+          "SP分配座位百分比",
+          "平均差异的平方根",
+          "总分配课程数/座位数"
+        ],
+        "analysis_method_cn": "对每个校区运行模型和贪心，报告百分比；比较相对增益；对Δ进行敏感性分析。",
+        "main_result_cn": "两阶段框架总分配1,641门课程和42,985个座位，贪心为1,532门和39,567个座位（提高7%和9%）；Stamford和Hartford增益最大；模型B在Storrs 15分钟求解最优，模型S 15秒求解。",
+        "argumentative_role_cn": "证明所提出模型在真实数据上远超实际替代方案，并展示图结构压缩带来的计算可行性。",
+        "remaining_uncertainty_cn": "主目标只关注覆盖率，容量差异大的解决方案可能在舒适性和后续调整上存在问题。",
+        "link_to_next_phase_cn": "主结果遗留的容量差异问题直接引向Stage 6的第二阶段优化。",
+        "evidence_pointers": [
+          "Section 7.4–7.6",
+          "Table 2",
+          "Section 7.4 Δ分析"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "第二阶段差异优化",
+        "question_cn": "如何在保持第一阶段最优覆盖率的前提下改善教室容量与班级规模的匹配度？",
+        "inputs_and_setting_cn": "第一阶段得到的IP/SP分配集合；同一组实例；新目标函数为平方差异。",
+        "designed_or_compared_object_cn": "两阶段框架（加入第二阶段） vs 仅第一阶段的方案。",
+        "baseline_control_or_counterfactual_cn": "第一阶段单目标解作为对照。",
+        "objective_metrics": [
+          "平均差异（平方根）"
+        ],
+        "analysis_method_cn": "求解模型(B.2)或(A.2)，最小化在保持第一阶段最优值条件下的差异平方和。",
+        "main_result_cn": "Storrs平均差异从15.6降至12.6（改善超过30%），而在覆盖率上无损失。",
+        "argumentative_role_cn": "补充主目标未覆盖的舒适性和空间灵活性需求，提高系统被行政和院系接受的程度。",
+        "remaining_uncertainty_cn": "第二阶段的差异定义和平方权函数是否最优仍有主观性；不同差异度量可能产生不同结果。",
+        "link_to_next_phase_cn": "第二阶段结果支持实际部署，并为后优化阶段的空间释放创造条件。",
+        "evidence_pointers": [
+          "Section 7.5"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "SP模式反事实情景分析与实际部署观察",
+        "question_cn": "SP教学模式的采用不足和权重选择对结果有多大影响？系统被实际采纳后产生了哪些可见影响？",
+        "inputs_and_setting_cn": "六个校区相同实例；反事实设置：无SP分配、所有课程均可SP、SP与IP同权重；实际部署记录包括add-drop后的调整。",
+        "designed_or_compared_object_cn": "当SP不可用/全可用/同权重时的最优方案和贪心方案。",
+        "baseline_control_or_counterfactual_cn": "表2的实际优化结果作为主基线；表3（无SP）和表4（全SP）作为反事实；同权重作为另一反事实。",
+        "objective_metrics": [
+          "IP/SP课程百分比",
+          "IP/SP座位百分比",
+          "总覆盖率",
+          "平均差异"
+        ],
+        "analysis_method_cn": "反事实场景比较；实际部署过程中的人工调整比例和课程保持率统计。",
+        "main_result_cn": "SP采用率低导致实际SP增量有限；若全部课程允许SP，Storrs等校区总覆盖率可超过95%；同权重会增加约600个座位但学生反馈认为SP体验不如IP；实际部署中商学院仅1.67%课程调整，8.8%课程在add-drop后需要手动添加，91%课程保持原时间槽。",
+        "argumentative_role_cn": "界定主结果的边界（SP采用的现实限制）；将计算方法提升为管理见解；用部署结果证明系统的真实可用性和影响。",
+        "remaining_uncertainty_cn": "反事实基于假设所有课程可选择SP，未考虑教师意愿和教学质量；实际教学效果和长期健康影响未被评估。",
+        "link_to_next_phase_cn": "这些反事实和部署结果最终进入结论，提出未来随机扩展和招生预测需求。",
+        "evidence_pointers": [
+          "Section 8.1–8.3",
+          "Table 3",
+          "Table 4",
+          "Section 7.7"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT：疫情导致容量降低，排课分配不可行。",
+      "PHENOMENON：UConn引入Split-Delivery教学法，问题复杂性增加。",
+      "GAP：现有DSS不能处理新模式优化。",
+      "RQ_OR_OBJECTIVE：描述两个MILP公式和紧凑模型利用的结构性质。",
+      "CONTRIBUTION：介绍交互式DSS和实际洞察。"
+    ],
+    "introduction_moves": [
+      "CONTEXT：COVID-19给大学运行带来挑战。",
+      "PRACTICAL_STAKES：UConn获得白宫赞扬，说明问题重要性。",
+      "PHENOMENON：教室容量减少但教学偏好多样。",
+      "LIMITATION：旧排课全部失效，传统软件无法处理。",
+      "GAP：需要新的教学模式选择和优化问题。",
+      "RQ_OR_OBJECTIVE：提出两阶段DSS。",
+      "STUDY_OVERVIEW：预告文章结构。"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE：排课问题文献与图着色理论。",
+      "LIMITATION：文献未处理教学模式选择。",
+      "THEORY_PROPOSITION：可行时间面、hitting-set与区间图结构。",
+      "MECHANISM：压缩时间面使模型紧凑。"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT：从决策者目标转成效用函数。",
+      "DESIGN_FEATURE：模型A/B、模型S、第二阶段差异目标。",
+      "METHOD_JUSTIFICATION：为何需要两种模型服务于不同校区结构。"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST：贪心算法是实际替代方案。",
+      "RESULT：计算时间和覆盖率对比。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST：SP不可用/全可用/同权重的反事实分析。",
+      "TRANSITION：性能瓶颈到紧凑模型的推进。"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION：实际部署和设计知识。",
+      "BOUNDARY_CONDITION：regular vs flex课表；SP采用限制。",
+      "LIMITATION_AND_FUTURE：随机扩展和招生预测。"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "区间图与k区间图着色理论",
+      "hitting set问题及NP完全性",
+      "混合整数线性规划",
+      "两阶段优化",
+      "贪心算法与近似比",
+      "交互式决策支持系统"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "区间图的结构性质和hitting-set理论直接决定了模型B的设计：Proposition 2-3证明只需极小可行时间面即可保持最优性，作者据此构造Compact Model (B)，并用Model S求最小hitting set；NP-hard证明直接导致采用精确MILP和贪心基线的二阶段结构；这些都不是事后解释，而是模型设计的前置驱动。",
+    "translation_chain_cn": "现实问题（容量受限、教学模式选择）→ 效用函数加权（IP=1, SP=0.5, OL=0）→ MILP决策变量x_{c,r} → 约束表示容量、冲突、唯一分配 → 区间图理论指出冲突可压缩到少量时间点 → 用hitting set求小可行时间面 → 形成紧凑模型B → 第一阶段最优覆盖，第二阶段最小差异 → 对SP权重和可用性做反事实敏感性分析 → 得到实际部署和边界知识。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "k-interval图着色是NP-hard且不可常数近似；本问题可视为其扩展。",
+        "mechanism_cn": "若追求一般情形的近似保证不可行，需要设计基于真实结构的高效精确算法，并以贪心为基线。",
+        "design_requirement_cn": "要获得可部署的算法必须使用MILP，并利用真实实例的课表规律。",
+        "artifact_choice_cn": "提出模型A（独立集约束），并保留贪心作为对照。",
+        "evaluated_contrast_cn": "模型A vs 贪心：覆盖率差异和计算时间。",
+        "objective_result_cn": "模型A能在2小时内得到5% gap，但超过16小时；贪心覆盖率低于精确方案。",
+        "evidence_pointers": [
+          "Section 4 Proposition 1",
+          "Section 7.2",
+          "Section 7.6 Table 2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "在区间图中，冲突可通过每个时间点至多一个班级来表达；并且可行时间面只需包含所有冲突对的公共时间点。",
+        "mechanism_cn": "如果选取的时间点集能覆盖所有冲突，则在这些时间点上逐点约束即可保证无冲突，从而压缩约束规模。",
+        "design_requirement_cn": "构造一个尽量小的可行时间面，使模型B紧凑且在Storrs中可快速求解。",
+        "artifact_choice_cn": "用Model S（hitting set）求最小可行时间面；Storrs得到139个点。",
+        "evaluated_contrast_cn": "Model B vs Model A：求解时间与预求解效果。",
+        "objective_result_cn": "Model B在15分钟内求最优，Model S仅15秒；预求解消除15%变量和65%约束。",
+        "evidence_pointers": [
+          "Section 6.2 Propositions 2-4",
+          "Section 7.4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "决策者希望最大化面授机会，但也需要可接受的空间使用舒适性。",
+        "mechanism_cn": "单一覆盖率目标会忽略容量与班级规模的巨大差异，降低接受度；二次差异惩罚可权衡少量大幅偏差与多个小幅偏差。",
+        "design_requirement_cn": "在保持第一目标最优的前提下增加第二目标，避免破坏覆盖率。",
+        "artifact_choice_cn": "Stage 2 Model (B.2/A.2)，目标为平方差异，约束强制保持原教学模态。",
+        "evaluated_contrast_cn": "两阶段 vs 单阶段：平均差异。",
+        "objective_result_cn": "Storrs平均差异从15.6降到12.6（>30%改善）。",
+        "evidence_pointers": [
+          "Section 6.3",
+          "Section 7.5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "SP教学模式可以提供额外灵活性，但其真实采用率低，权重设定会影响分配结果。",
+        "mechanism_cn": "SP请求只有半权重，但可用教室范围扩大；采用率低限制了其实际贡献；若权重与IP相同，系统会更倾向SP，增加座位覆盖但学生体验可能下降。",
+        "design_requirement_cn": "通过反事实情景检验设计决策的影响。",
+        "artifact_choice_cn": "在目标函数中保留SP权重0.5；反事实中测试SP无、全可用、同权重。",
+        "evaluated_contrast_cn": "实际结果 vs 无SP vs 全SP vs 同权重。",
+        "objective_result_cn": "SP实际仅占<2%类/4%座；若全SP，Storrs总覆盖>95%；同权重增加约600座但学生认为SP体验较差。",
+        "evidence_pointers": [
+          "Section 8.1–8.3",
+          "Tables 3-4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "真实世界实例求解",
+      "与贪心基线对照",
+      "反事实/敏感性分析（SP不可用、全SP、同权重）",
+      "实际部署后的观察与统计（add-drop变化、课程保持率）"
+    ],
+    "why_these_evaluations_cn": "由于没有标准benchmark，真实UConn六个校区实例是唯一有说服力的数据；贪心基线代表行政人员原本会使用的手动流程；反事实分析用来分离SP设计选择的影响；部署观察用来检验系统在真实约束下的可用性。",
+    "benchmark_and_contrast_chain_cn": "第一步用Model A与贪心初步比较，发现性能瓶颈；第二步用Model B实现了15分钟最优，于是Table 2中正式以两阶段框架对比贪心；第三步求主结果后，用Table 3（无SP）对比Table 2来评估SP贡献，用Table 4（全SP）和同权重情景进一步量化灵活性和权重的敏感性；最终依托这些对照说明精确方法的相对增益随SP可用性增大而增强。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "两阶段框架比贪心分配更多课程和座位。",
+        "evidence_cn": "Table 2：总计1,641课程/42,985座位 vs 1,532课程/39,567座位，提升7%和9%。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "模型B比模型A更高效。",
+        "evidence_cn": "Storrs：Model A>16小时并仅到5% gap；Model B 15分钟最优；Model S 15秒。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "第二阶段降低容量差异而保持最优覆盖率。",
+        "evidence_cn": "Storrs平均差异15.6→12.6，且模型约束保证第一阶段目标不变。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "SP模式采用率低（仅84门），因此实际贡献小。",
+        "evidence_cn": "Table 2和Section 8.1：SP class<2%，seat<4%。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "若所有课程允许SP，总覆盖率可超95%。",
+        "evidence_cn": "Table 4：Storrs/Avery/Waterbury/GBLC覆盖>95%。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "同权重会显著增加座位。",
+        "evidence_cn": "Section 8.2：总座位增加近600。",
+        "assessed": true
+      },
+      {
+        "claim_cn": "实际部署中被广泛接受，91%课程保持原时间槽。",
+        "evidence_cn": "Section 7.7：商学院仅1.67%课程调整；8.8%课程需手动添加。",
+        "assessed": true
+      }
+    ],
+    "internal_validity_strategy_cn": "使用Gurobi精确解，保证在给定模型和数据下达到最优或已知gap；对同一真实实例比较不同算法；报告相同硬件和软件参数；对预求解效果、时间面和Δ进行分解分析；第二阶段通过约束保持第一目标，从而隔离第二目标影响。",
+    "external_validity_strategy_cn": "六个校区覆盖不同规模、课表规则（regular vs flex）、房型和专业结构，提供了内部多样性；但所有实例来自同一大学、同一学期，外部推广到其他大学或学期仍需谨慎。",
+    "what_is_not_actually_tested_cn": "并未测试模型在随机生成或跨机构数据集上的表现；SP教学模式的实际教学质量和学生长期体验未测量；add-drop后的最终排课没有重新运行优化以保证事后最优；\"最大面授机会\"只衡量计划座位数，未追踪学生实际参加面授的人次数。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "为疫情容量削减下的教室分配问题设计了两个MILP公式，其中紧凑模型B利用可行时间面压缩，在Storrs实例上15分钟内求得最优，显著优于模型A和贪心基线。",
+    "artifact_claim_cn": "可交互的两阶段DSS被UConn实际采纳，为六个校区生成了可用的优化排课方案，并支持了后续人工调整。",
+    "mechanism_claim_cn": "可行时间面机制：在小时间点集上施加每房每时至多一班的约束即足以保证整周无冲突，因此极大缩小模型规模。第二阶段的机制：在不破坏最优覆盖率的前提下，通过平方差异惩罚引导空间匹配，释放大房间时间槽供后期灵活使用。",
+    "boundary_claim_cn": "Model B适用于regular-schedule校区；Model A适用于包含flex课表的校区（Stamford/Hartford/GBLC）；模型依赖课程-时间分配已给定的前提；SP采用率低和权重设定会显著改变结果，因此这些设计参数构成方法的边界条件。",
+    "reusable_design_knowledge_cn": "（1）排课问题可将教学模式作为内生变量，并用加权座位数表达面授机会；（2）当决策者有时间偏好时，二阶段目标（先优化主目标，再优化次目标）优于加权单目标；（3）可利用图理论中的区间结构将容量冲突压缩到少量时间点，加速精确方法；（4）交互式仪表板和迭代流程对采纳很重要；（5）反事实情景分析有助于判断灵活教学设计的真实价值。",
+    "theoretical_contribution_cn": "将传统课程-教室分配扩展为带教学模式选择的新问题，给出NP-hard与不可近似性证明；提出并形式化了\"可行时间面\"概念，证明最小可行时间面可由时间点子集表达且与hitting set等价；给出高维不可近似的负例。",
+    "how_discussion_closes_intro_gap_cn": "引言指出现有DSS和贪心无法处理容量削减和教学模式选择，结论用实际部署和对比数据表明两阶段MILP确实填补了该缺口；同时，引言中提出的SP灵活性增加了复杂度，第8节通过反事实分析直接回应了这一问题，界定了SP对整体结果的影响和边界。",
+    "overclaim_or_unsupported_leaps_cn": "作者说\"maximizing student opportunities\"实际只优化了计划座位数，学生最终注册变化后并未重新优化；91%课程保持原时段是整体流程结果，未单独归因于优化模型；与贪心的比较隐含假设行政人员手动做法一定与贪心一致，实际人工判断可能更好或更差；SP权重同权的反事实结果是假设性的，未考虑教师和学生的真实策略反应。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "第1句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "文章描述为UConn 2020秋季学期开发的课程-教学模式-教室分配决策支持系统。",
+      "rhetorical_function_cn": "开门见山指出制品和环境。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续的目标和模型描述铺垫。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "第2-3句",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "由于安全标准，教室座位容量减少超过70%，几乎所有旧分配不再可行。",
+      "rhetorical_function_cn": "制造性能缺口。",
+      "depends_on_cn": "背景",
+      "sets_up_cn": "引出问题严重性和为什么需要新方法。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "第4-5句",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "为最大化面授机会，UConn引入教学模式，其中每节课只有50%学生到校。",
+      "rhetorical_function_cn": "描述现实中的设计创新。",
+      "depends_on_cn": "容量不足的现实",
+      "sets_up_cn": "引出新模式带来的灵活性及优化问题。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "第6-7句",
+      "move_code": "GAP",
+      "paraphrase_cn": "决策者有一定教学模式分配自由度，问题复杂度显著增加，真实实例涉及数百房间、数千课程并要求快速求解。",
+      "rhetorical_function_cn": "指出复杂度和实际需求之间的张力。",
+      "depends_on_cn": "新模式引入",
+      "sets_up_cn": "为方法贡献做铺垫。",
+      "evidence_pointer": "Abstract P1 S4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "第8句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "介绍两个MILP公式，其中一个利用结构性质更紧凑；说明算法调整和交互式DSS的动态，并汇报洞察。",
+      "rhetorical_function_cn": "概括贡献。",
+      "depends_on_cn": "前面对问题描述",
+      "sets_up_cn": "给出全文路径。",
+      "evidence_pointer": "Abstract P1 S5"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "2020年疫情几乎扰乱生活方方面面，物理距离规则带来大量运营挑战。",
+      "rhetorical_function_cn": "建立宏大背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引入UConn案例。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P1 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "UConn因高面授课堂参与率被白宫疫情协调员Deborah Birx赞扬。",
+      "rhetorical_function_cn": "通过真实认可说明问题具有实践重要性。",
+      "depends_on_cn": "背景",
+      "sets_up_cn": "突出大学响应成功的现实意义。",
+      "evidence_pointer": "Introduction P1 S2"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S3-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "UConn的成功来自数百名教职员工的努力，本文突出使用优化来最有效地利用稀缺教室容量。",
+      "rhetorical_function_cn": "将叙事聚焦到优化贡献。",
+      "depends_on_cn": "UConn成功",
+      "sets_up_cn": "为后文介绍优化方法铺设道路。",
+      "evidence_pointer": "Introduction P1 S3-S4"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S5-S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "这项工作为尽可能多的师生回校创造条件，并是UConn公卫胜利的前提。",
+      "rhetorical_function_cn": "强调优化成果与公共健康目标的关联。",
+      "depends_on_cn": "前一句关于重要性的表述",
+      "sets_up_cn": "使读者认可优化活动不仅限于排课效率。",
+      "evidence_pointer": "Introduction P1 S5-S6"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S7",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "尽管有社会距离带来的挑战，优化后约34%课程和19%座位仍有一定程度面授。",
+      "rhetorical_function_cn": "给出实际结果数据，暗示优化有效。",
+      "depends_on_cn": "系统部署的成果",
+      "sets_up_cn": "为后文详细实证做预告。",
+      "evidence_pointer": "Introduction P1 S7"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "由于州疫情严重，UConn四月份关闭校园；此时秋季排课和注册已大体完成；物理距离导致容量大幅减少，传统面授大班不可能。",
+      "rhetorical_function_cn": "说明问题的时间压力和现实矛盾。",
+      "depends_on_cn": "疫情背景",
+      "sets_up_cn": "引出必须重新排课的需求。",
+      "evidence_pointer": "Introduction P2 S1-S3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S4",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "由于师生希望面授，大学制定安全重开计划并创建新教学模式。",
+      "rhetorical_function_cn": "从限制转向应对。",
+      "depends_on_cn": "容量不足",
+      "sets_up_cn": "介绍Split-Delivery。",
+      "evidence_pointer": "Introduction P2 S4"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P2 S5-S7",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "Split-Delivery模式让50%学生到校、50%在线并交替；教师可申请偏好，但空间不足时请求可能被拒；SP权重只有IP一半，OL为零。",
+      "rhetorical_function_cn": "定义关键制度设计和目标函数原型。",
+      "depends_on_cn": "新教学模式",
+      "sets_up_cn": "说明这使之前可行性问题转为优化问题。",
+      "evidence_pointer": "Introduction P2 S5-S7"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P2 S8-S9",
+      "move_code": "GAP",
+      "paraphrase_cn": "这种变化使问题变得困难，因为教学模式要在计划层面决定且所有旧房间分配失效；加权组件将可行性问题变成优化问题，人工难以找出高质量解。",
+      "rhetorical_function_cn": "明确指出方法缺口。",
+      "depends_on_cn": "权重设计",
+      "sets_up_cn": "为DSS的必要性做铺垫。",
+      "evidence_pointer": "Introduction P2 S8-S9"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P2 S10",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "Storrs校区有约1500门课、45000座位和约200个房间。",
+      "rhetorical_function_cn": "给出实例规模，说明现实复杂度。",
+      "depends_on_cn": "问题描述",
+      "sets_up_cn": "后文用Storrs作为主要性能测试平台。",
+      "evidence_pointer": "Introduction P2 S10"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P3 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "大学原有排课DSS变得不令人满意，软件需要重大修改且供应商响应慢，因此UConn最初决定手动排课。",
+      "rhetorical_function_cn": "说明现有制品缺陷。",
+      "depends_on_cn": "问题规模",
+      "sets_up_cn": "引入与作者的合作为契机。",
+      "evidence_pointer": "Introduction P3 S1-S2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P3 S3",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "与作者的合作使大学不仅重审决定，还额外引入教学模式分配的灵活性。",
+      "rhetorical_function_cn": "连接现有局限和作者贡献。",
+      "depends_on_cn": "前面DSS缺陷",
+      "sets_up_cn": "进入本文提出的解决方案。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文展示所开发的DSS：两阶段框架，第一阶段最大化面授机会，第二阶段最小化分配偏差；并描述系统如何被实际采纳。",
+      "rhetorical_function_cn": "明确研究目标和主要制品。",
+      "depends_on_cn": "前文缺口",
+      "sets_up_cn": "为全文结构做预告。",
+      "evidence_pointer": "Introduction P4 S1-S2"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P5",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "文章结构预览：文献综述、问题、记号、贪心、理论与算法、结果和洞察。",
+      "rhetorical_function_cn": "给出路线图。",
+      "depends_on_cn": "研究目标",
+      "sets_up_cn": "引导读者。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 20,
+      "section": "Literature Review",
+      "locator": "P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "排课问题有大量应用；本文的问题是时间已给定，只需处理物理冲突；教学模式选择未被文献处理。",
+      "rhetorical_function_cn": "建立文献背景并标记新维度。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "声明文献缺口。",
+      "evidence_pointer": "Section 2 P1"
+    },
+    {
+      "order": 21,
+      "section": "Literature Review",
+      "locator": "P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "元启发式用于难解情况，数学规划也可；我们的多区间图着色问题在一般图上难，但在区间图上可有效求解。",
+      "rhetorical_function_cn": "为后续利用图结构做理论铺垫。",
+      "depends_on_cn": "排课文献",
+      "sets_up_cn": "提示作者要用区间图性质。",
+      "evidence_pointer": "Section 2 P2"
+    },
+    {
+      "order": 22,
+      "section": "Literature Review",
+      "locator": "P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于开发部署时间仅两个月，作者没有采用高级软件工程，而聚焦于DSS功能和结果。",
+      "rhetorical_function_cn": "解释简化方法选择的合理理由。",
+      "depends_on_cn": "时间约束",
+      "sets_up_cn": "让读者按论文目标评价，而非软件工程标准。",
+      "evidence_pointer": "Section 2 P3"
+    },
+    {
+      "order": 23,
+      "section": "Section 3",
+      "locator": "P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "UConn每学期排课包含四步：确定班数、分配教师、排时间、分配教室；秋季注册已在三月至四月完成。",
+      "rhetorical_function_cn": "描述大学排课流程。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "定位本研究只改第四步。",
+      "evidence_pointer": "Section 3 P1-P2"
+    },
+    {
+      "order": 24,
+      "section": "Section 3.1",
+      "locator": "P1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "Astra Schedule虽能分配教室，但许多功能不能直接使用，需要人工调整和what-if场景；不同学院做法不同；需要全校集成方法。",
+      "rhetorical_function_cn": "指出现有DSS的不足。",
+      "depends_on_cn": "排课流程",
+      "sets_up_cn": "解释为什么新DSS需要交互功能。",
+      "evidence_pointer": "Section 3.1 P1"
+    },
+    {
+      "order": 25,
+      "section": "Section 3.1",
+      "locator": "P2-P3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "大学采用分布式决策，学院制定计划，行政汇总调整；通常用去年课表作起点，因此是微调而非从头开始。",
+      "rhetorical_function_cn": "说明正常情况下的迭代过程。",
+      "depends_on_cn": "排课流程",
+      "sets_up_cn": "强调疫情打破了正常微调模式。",
+      "evidence_pointer": "Section 3.1 P2-P3"
+    },
+    {
+      "order": 26,
+      "section": "Section 3.2",
+      "locator": "P1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "物理距离下COVID容量仅为原容量20%-30%，几乎全部过去课堂分配失效。",
+      "rhetorical_function_cn": "指出问题规模的严重性。",
+      "depends_on_cn": "疫情指南",
+      "sets_up_cn": "引出重新分配的必要性。",
+      "evidence_pointer": "Section 3.2 P1"
+    },
+    {
+      "order": 27,
+      "section": "Section 3.2",
+      "locator": "P2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "许多学生和教师强烈偏好面授，因此大学不能简单全部转为在线。",
+      "rhetorical_function_cn": "说明真实需求约束。",
+      "depends_on_cn": "COVID容量",
+      "sets_up_cn": "为优化目标提供依据。",
+      "evidence_pointer": "Section 3.2 P2"
+    },
+    {
+      "order": 28,
+      "section": "Section 3.2",
+      "locator": "P3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "新计划：教师给出教学偏好，行政人员通过定义教学模式和分配教室最大化面授教学。",
+      "rhetorical_function_cn": "明确本文要解的优化问题。",
+      "depends_on_cn": "偏好和容量",
+      "sets_up_cn": "建模目标。",
+      "evidence_pointer": "Section 3.2 P3"
+    },
+    {
+      "order": 29,
+      "section": "Section 3.2",
+      "locator": "P4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这些修改导致原有DSS无法直接解决；时间紧迫；近端空间约束被放弃；容量不足使得许多请求无法满足。",
+      "rhetorical_function_cn": "强化原有方法缺口。",
+      "depends_on_cn": "新计划",
+      "sets_up_cn": "为作者开发新模型铺路。",
+      "evidence_pointer": "Section 3.2 P4"
+    },
+    {
+      "order": 30,
+      "section": "Section 3.3",
+      "locator": "P1-P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "UConn采用三类教学模式：在线（OL）、面授（IP）、拆分（SP）；SP中50%学生到校，50%在线，教师愿意接受IP或SP的灵活性。",
+      "rhetorical_function_cn": "定义关键概念。",
+      "depends_on_cn": "大学政策",
+      "sets_up_cn": "后文建模需要区分这些模式。",
+      "evidence_pointer": "Section 3.3 P1-P2"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.3",
+      "locator": "P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "对于SP和IP请求，优化可能拒绝并降级为OL；SP请求所提供的升级灵活性是本学期分配问题的关键新点。",
+      "rhetorical_function_cn": "强调制度创新。",
+      "depends_on_cn": "教学模态定义",
+      "sets_up_cn": "说明加入作者后才有这种灵活分配。",
+      "evidence_pointer": "Section 3.3 P3"
+    },
+    {
+      "order": 32,
+      "section": "Section 3.4",
+      "locator": "P1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "目标是在给定偏好的情况下最大化面授座位数，按选课人数加权：IP为100%，SP为50%，OL为0%。",
+      "rhetorical_function_cn": "正式确立目标函数。",
+      "depends_on_cn": "模态权重",
+      "sets_up_cn": "Section 4中形式化为效用函数。",
+      "evidence_pointer": "Section 3.4 P1"
+    },
+    {
+      "order": 33,
+      "section": "Section 3.4",
+      "locator": "P2-P3",
+      "move_code": "GAP",
+      "paraphrase_cn": "与文献相比，我们的问题没有内生时间分配，但新增了内生教学模式选择；优化后总会有一些人工重新调整，因此模型解是add-drop期前的基线。",
+      "rhetorical_function_cn": "定位问题的独特性和边界。",
+      "depends_on_cn": "目标函数",
+      "sets_up_cn": "后续探讨人工调整。",
+      "evidence_pointer": "Section 3.4 P2-P3"
+    },
+    {
+      "order": 34,
+      "section": "Section 3.5",
+      "locator": "P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "UConn六个校区，有些校区有灵活课表（flex），因此需要不同模型。",
+      "rhetorical_function_cn": "说明实例差异导致方法选择。",
+      "depends_on_cn": "实例数据",
+      "sets_up_cn": "后文模型A/B的选用。",
+      "evidence_pointer": "Section 3.5, Table 1附近"
+    },
+    {
+      "order": 35,
+      "section": "Section 4",
+      "locator": "P1-P3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义时间集合、槽、类、冲突；引入周维度用于一般情况。",
+      "rhetorical_function_cn": "建立数学记号。",
+      "depends_on_cn": "问题描述",
+      "sets_up_cn": "为模型公式提供语言。",
+      "evidence_pointer": "Section 4 P1-P3"
+    },
+    {
+      "order": 36,
+      "section": "Section 4",
+      "locator": "P4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "定义人工房间φ表示在线，容量无限；教室容量是指COVID容量。",
+      "rhetorical_function_cn": "把在线类别集成到模型。",
+      "depends_on_cn": "教学模态定义",
+      "sets_up_cn": "后文变量构建。",
+      "evidence_pointer": "Section 4 P4"
+    },
+    {
+      "order": 37,
+      "section": "Section 4",
+      "locator": "P5",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "可行解要求每类恰好分配一个房间；IP需要教室容量≥n(c)，SP只需≥n(c)/2；同一教室不允许相交类。",
+      "rhetorical_function_cn": "定义约束条件。",
+      "depends_on_cn": "记号",
+      "sets_up_cn": "后续模型约束的具体化。",
+      "evidence_pointer": "Section 4 P5"
+    },
+    {
+      "order": 38,
+      "section": "Section 4",
+      "locator": "P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "效用函数：OL为0，IP为n(c)，SP为n(c)/2；目标是最大化总效用。",
+      "rhetorical_function_cn": "将目标形式化。",
+      "depends_on_cn": "约束条件",
+      "sets_up_cn": "明确优化方向。",
+      "evidence_pointer": "Section 4 P6"
+    },
+    {
+      "order": 39,
+      "section": "Section 4",
+      "locator": "Proposition 1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "识别最优分配是NP-hard且不能常数近似，因为它是k区间图着色的扩展。",
+      "rhetorical_function_cn": "说明通用问题的计算困难。",
+      "depends_on_cn": "形式定义",
+      "sets_up_cn": "为精确方法设限，并为贪心基线的必要性做铺垫。",
+      "evidence_pointer": "Section 4 Proposition 1"
+    },
+    {
+      "order": 40,
+      "section": "Section 5",
+      "locator": "P1-P2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "行政人员原本会使用的是贪心：按需求降序，每次分配到能容纳且不冲突的最小房间。",
+      "rhetorical_function_cn": "定义对照方法。",
+      "depends_on_cn": "形式定义",
+      "sets_up_cn": "评估新模型的基线。",
+      "evidence_pointer": "Section 5 P1-P2"
+    },
+    {
+      "order": 41,
+      "section": "Section 5",
+      "locator": "P3",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "在未与作者合作前，贪心没有SP灵活性；我们使用两阶段贪心作为实验基线：先IP，后SP。",
+      "rhetorical_function_cn": "将贪心与灵活问题对齐。",
+      "depends_on_cn": "贪心描述",
+      "sets_up_cn": "后面公平对比。",
+      "evidence_pointer": "Section 5 P3"
+    },
+    {
+      "order": 42,
+      "section": "Section 6",
+      "locator": "Intro",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "解决方案是精确的两阶段算法：第一阶段用MILP求解最优目标，第二阶段用不同目标函数和额外约束保持第一阶段最优并最小化容量差异。",
+      "rhetorical_function_cn": "为模型组提供总体架构。",
+      "depends_on_cn": "形式化问题",
+      "sets_up_cn": "随后分别描述模型A/B和第二阶段。",
+      "evidence_pointer": "Section 6 intro"
+    },
+    {
+      "order": 43,
+      "section": "Section 6.1",
+      "locator": "P1-P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "模型A使用独立集约束：每个班分配到一个房间，若班c在房间r则冲突班不能分配到r。",
+      "rhetorical_function_cn": "描述通用模型。",
+      "depends_on_cn": "总框架",
+      "sets_up_cn": "说明模型A的变量和约束逻辑。",
+      "evidence_pointer": "Section 6.1, Model (A)"
+    },
+    {
+      "order": 44,
+      "section": "Section 6.2",
+      "locator": "P1-P2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "当所有班级每周都上课时，可行性等价于每个时间点每个房间至多一个班；模型B直接对每个(r,t)约束。",
+      "rhetorical_function_cn": "引入紧凑模型的基础。",
+      "depends_on_cn": "regular schedule假设",
+      "sets_up_cn": "说明模型B的约束形式。",
+      "evidence_pointer": "Section 6.2 P1-P2"
+    },
+    {
+      "order": 45,
+      "section": "Section 6.2",
+      "locator": "P3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "Proposition 2：模型B只要求对满足条件的时间点子集成立即可。",
+      "rhetorical_function_cn": "为压缩时间面提供理论依据。",
+      "depends_on_cn": "模型B约束",
+      "sets_up_cn": "引入可行时间面概念。",
+      "evidence_pointer": "Section 6.2 Proposition 2"
+    },
+    {
+      "order": 46,
+      "section": "Section 6.2",
+      "locator": "P4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "Proposition 3：最小可行时间面只需包含槽的起始/结束时间点。",
+      "rhetorical_function_cn": "给出构造方向，缩小搜索空间。",
+      "depends_on_cn": "Proposition 2",
+      "sets_up_cn": "模型S用hitting set找最小时间面。",
+      "evidence_pointer": "Section 6.2 Proposition 3"
+    },
+    {
+      "order": 47,
+      "section": "Section 6.2",
+      "locator": "P5-P6",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "Proposition 4：最小可行时间面的识别是NP-hard，用3-hitting set归约；但我们用模型S求最优T'。",
+      "rhetorical_function_cn": "说明即使压缩也不一定易求，但实际可解。",
+      "depends_on_cn": "hitting set理论",
+      "sets_up_cn": "为实验部分模型S的求解做准备。",
+      "evidence_pointer": "Section 6.2 Proposition 4 and Model S"
+    },
+    {
+      "order": 48,
+      "section": "Section 6.2",
+      "locator": "P7-P8",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "Proposition 5显示严格可行时间面可能远大于最小可行时间面；但实验中严格可行时间面在Storrs近似最优，且组合算法达到了最优。",
+      "rhetorical_function_cn": "证明实际中压缩仍然有效。",
+      "depends_on_cn": "Proposition 2-4",
+      "sets_up_cn": "为模型B的高效性提供实证保障。",
+      "evidence_pointer": "Section 6.2 Proposition 5"
+    },
+    {
+      "order": 49,
+      "section": "Section 6.3",
+      "locator": "P1-P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "第二阶段模型（B.2/A.2）在保留第一阶段模态的约束下，最小化容量与需求平方差异。",
+      "rhetorical_function_cn": "设计次目标。",
+      "depends_on_cn": "第一阶段最优解",
+      "sets_up_cn": "评估第二阶段价值。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 50,
+      "section": "Section 7.1",
+      "locator": "P1-P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "DSS处理流程包括过滤输入、构建并求解MILP、输出CSV、可视化仪表板；通过邮件与行政交互。",
+      "rhetorical_function_cn": "描述系统的工程使用方式。",
+      "depends_on_cn": "模型集",
+      "sets_up_cn": "为后续性能瓶颈和交互迭代做背景。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 51,
+      "section": "Section 7.2",
+      "locator": "P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Storrs实例上模型A求解时间不可接受：构建超过1小时，求解超过16小时，2小时仅达5% gap。",
+      "rhetorical_function_cn": "量化模型A的不足。",
+      "depends_on_cn": "Storrs实例",
+      "sets_up_cn": "为模型B提供动因。",
+      "evidence_pointer": "Section 7.2 P2-P3"
+    },
+    {
+      "order": 52,
+      "section": "Section 7.2",
+      "locator": "P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "预求解只消除15%约束和1%变量，说明模型A结构难以被商业求解器利用。",
+      "rhetorical_function_cn": "补充模型A低效的结构原因。",
+      "depends_on_cn": "模型A实验",
+      "sets_up_cn": "强调模型B压缩的必要性。",
+      "evidence_pointer": "Section 7.2 P3"
+    },
+    {
+      "order": 53,
+      "section": "Section 7.3",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "尽管模型A解非最优，但已足够让行政人员向院系提供建设性反馈。",
+      "rhetorical_function_cn": "说明部分成功，仍指示优化价值。",
+      "depends_on_cn": "模型A结果",
+      "sets_up_cn": "转到仪表板功能和使用。",
+      "evidence_pointer": "Section 7.3 P1"
+    },
+    {
+      "order": 54,
+      "section": "Section 7.3",
+      "locator": "P2-P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "仪表板上方显示模态分布，中部显示按学科划分的模态，下方显示每周房间占用；这些视图帮助发现模式、纠正误解和提供预期管理。",
+      "rhetorical_function_cn": "描述可视化设计目标。",
+      "depends_on_cn": "DSS流程",
+      "sets_up_cn": "说明DSS交互功能帮助采纳。",
+      "evidence_pointer": "Section 7.3 P2-P4"
+    },
+    {
+      "order": 55,
+      "section": "Section 7.4",
+      "locator": "P1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "模型A成为迭代瓶颈，这促使了Section 6.2的结构结果和模型B的发展。",
+      "rhetorical_function_cn": "将性能问题与理论开发连接。",
+      "depends_on_cn": "模型A性能",
+      "sets_up_cn": "引出模型B结果。",
+      "evidence_pointer": "Section 7.4 P1"
+    },
+    {
+      "order": 56,
+      "section": "Section 7.4",
+      "locator": "P2-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模型B预处理器在15秒内求解模型S，Storrs最优时间面仅139个点；模型B在15分钟内求解最优，预求解消除15%变量和65%约束。",
+      "rhetorical_function_cn": "证明模型B的高效性。",
+      "depends_on_cn": "紧凑模型",
+      "sets_up_cn": "为Table 2的大规模求解提供基础。",
+      "evidence_pointer": "Section 7.4 P2-P3"
+    },
+    {
+      "order": 57,
+      "section": "Section 7.4",
+      "locator": "P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "用模型B评估缓冲时间Δ影响：Δ=15被采纳，因为更小Δ收益太小、更大Δ覆盖率损失超过10%。",
+      "rhetorical_function_cn": "用实验支持重要参数选择。",
+      "depends_on_cn": "模型B效率",
+      "sets_up_cn": "说明模型B还支持策略校准。",
+      "evidence_pointer": "Section 7.4 P5"
+    },
+    {
+      "order": 58,
+      "section": "Section 7.5",
+      "locator": "P1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "初步结果出现容量差异大（10人课程放50人教室），行政希望留出大房间时间槽。",
+      "rhetorical_function_cn": "引入次目标。",
+      "depends_on_cn": "主模型结果",
+      "sets_up_cn": "添加第二阶段。",
+      "evidence_pointer": "Section 7.5 P1"
+    },
+    {
+      "order": 59,
+      "section": "Section 7.5",
+      "locator": "P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "第二阶段在Storrs将平均差异从15.6降到12.6，改善超过30%。",
+      "rhetorical_function_cn": "量化次目标增益。",
+      "depends_on_cn": "第二阶段模型",
+      "sets_up_cn": "说明实际系统价值。",
+      "evidence_pointer": "Section 7.5 P2"
+    },
+    {
+      "order": 60,
+      "section": "Section 7.6",
+      "locator": "P1-P2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用模型A处理flex课表校区，模型B处理regular校区；表2报告两阶段与贪心的对比。",
+      "rhetorical_function_cn": "告知评估设置。",
+      "depends_on_cn": "校区差异",
+      "sets_up_cn": "展示结果。",
+      "evidence_pointer": "Section 7.6 P1-P2"
+    },
+    {
+      "order": 61,
+      "section": "Section 7.6",
+      "locator": "P3-P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "平均教室容量影响结果：Storrs和GBLC最好，Stamford和Hartford较差，因为它们平均容量小。",
+      "rhetorical_function_cn": "解释跨校区差异。",
+      "depends_on_cn": "Table 2",
+      "sets_up_cn": "引出边界条件。",
+      "evidence_pointer": "Section 7.6 P3-P4"
+    },
+    {
+      "order": 62,
+      "section": "Section 7.6",
+      "locator": "P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "总覆盖课程从1532增至1641，座位从39567增至42985，提升7%和9%；Stamford和Hartford增幅最大。",
+      "rhetorical_function_cn": "给出主结论数据。",
+      "depends_on_cn": "Table 2",
+      "sets_up_cn": "为算法贡献提供核心证据。",
+      "evidence_pointer": "Section 7.6 P5"
+    },
+    {
+      "order": 63,
+      "section": "Section 7.7",
+      "locator": "P1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "Storrs耗时数周，因为数据规模大且整个流程对参与者是新的；后续部门进行人工调整。",
+      "rhetorical_function_cn": "转入部署现实。",
+      "depends_on_cn": "主结果",
+      "sets_up_cn": "引用具体调整案例。",
+      "evidence_pointer": "Section 7.7 P1"
+    },
+    {
+      "order": 64,
+      "section": "Section 7.7",
+      "locator": "P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "商学院案例：一教授想给两节同课程都安排面授，另一教授让出房间；商学院仅1.67%面授课程被调整。",
+      "rhetorical_function_cn": "说明优化结果被大部分接受。",
+      "depends_on_cn": "部署数据",
+      "sets_up_cn": "支持系统有效性。",
+      "evidence_pointer": "Section 7.7 P2"
+    },
+    {
+      "order": 65,
+      "section": "Section 7.7",
+      "locator": "P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Storrs有233门未分配到教室；第二阶段释放的大房间允许后续补充面授。",
+      "rhetorical_function_cn": "说明第二阶段的空间管理有实际用途。",
+      "depends_on_cn": "第二阶段",
+      "sets_up_cn": "引向add-drop后变化。",
+      "evidence_pointer": "Section 7.7 P3"
+    },
+    {
+      "order": 66,
+      "section": "Section 7.7",
+      "locator": "P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "add-drop后8.8%课程需手动加进非分配时间槽，但91%课程保持优化中的时间槽，相比完全重排负担很小。",
+      "rhetorical_function_cn": "提供实际采纳和稳健性证据。",
+      "depends_on_cn": "部署流程",
+      "sets_up_cn": "总结系统实际价值。",
+      "evidence_pointer": "Section 7.7 P4"
+    },
+    {
+      "order": 67,
+      "section": "Section 8.1",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "SP模式影响小：少于2%课程和4%座位采用SP，因为只有84门课选择SP。",
+      "rhetorical_function_cn": "解释表中SP占比。",
+      "depends_on_cn": "Table 2",
+      "sets_up_cn": "讨论采用率原因。",
+      "evidence_pointer": "Section 8.1 P1"
+    },
+    {
+      "order": 68,
+      "section": "Section 8.1",
+      "locator": "P2",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "即使不允许SP，精确方法比贪心仍多8%课程和10%座位（对比Table 3和Table 2），说明改进不依赖SP。",
+      "rhetorical_function_cn": "移除灵活性后验证主结论。",
+      "depends_on_cn": "Table 3",
+      "sets_up_cn": "保护主要贡献不依赖SP使用。",
+      "evidence_pointer": "Section 8.1 P2, Table 3"
+    },
+    {
+      "order": 69,
+      "section": "Section 8.2",
+      "locator": "P1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "若SP与IP权重相同，总座位增加近600，但校区级变化不大。",
+      "rhetorical_function_cn": "测试目标函数权重敏感性。",
+      "depends_on_cn": "模型参数",
+      "sets_up_cn": "讨论学生反馈对权重设定的支持。",
+      "evidence_pointer": "Section 8.2 P1"
+    },
+    {
+      "order": 70,
+      "section": "Section 8.2",
+      "locator": "P2",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "学生反馈SP不如IP，因此坚持原权重更好反映偏好和体验质量。",
+      "rhetorical_function_cn": "界定权重设计边界。",
+      "depends_on_cn": "反事实结果",
+      "sets_up_cn": "保留原模型有效性。",
+      "evidence_pointer": "Section 8.2 P2"
+    },
+    {
+      "order": 71,
+      "section": "Section 8.3",
+      "locator": "P1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "若所有课程均可SP（表4），Storrs等校区总覆盖率可超95%，IP下降约10%，SP大幅增加。",
+      "rhetorical_function_cn": "说明SP完全可获得时能显著提升面授机会，但IP会减少。",
+      "depends_on_cn": "Table 4",
+      "sets_up_cn": "引出关于灵活性的管理启示。",
+      "evidence_pointer": "Section 8.3 P1"
+    },
+    {
+      "order": 72,
+      "section": "Section 8.3",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "精确方法相对贪心的优势随着SP灵活性增加而增大，因为贪心短视会限制第二阶段SP分配。",
+      "rhetorical_function_cn": "将算法优势与灵活性联系起来。",
+      "depends_on_cn": "Table 4",
+      "sets_up_cn": "总结算法优越性的机制解释。",
+      "evidence_pointer": "Section 8.3 P2"
+    },
+    {
+      "order": 73,
+      "section": "Section 9",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "结论总结：优化方法在UConn疫情排课中成功部署，生成了可用于人工微调的优化主计划。",
+      "rhetorical_function_cn": "闭合引言中的承诺。",
+      "depends_on_cn": "所有前面",
+      "sets_up_cn": "结束论文主体。",
+      "evidence_pointer": "Section 9 P1"
+    },
+    {
+      "order": 74,
+      "section": "Section 9",
+      "locator": "P2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来可研究随机扩展：利用预期入学人数建立两阶段随机模型，支持注册变动后的重新分配。",
+      "rhetorical_function_cn": "指出不足和方向。",
+      "depends_on_cn": "add-drop现象",
+      "sets_up_cn": "启发后续研究。",
+      "evidence_pointer": "Section 9 P2"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先建立现实冲突（疫情容量下降 vs 面授需求），继而指出现有DSS和贪心流程不能处理教学模式选择与容量有限条件下的优化；再通过NP-hard证明通用问题困难，但实际结构可被利用，从而为精确MILP建立合理预期。",
+    "signposting_cn": "引言末尾明确给出各节路标；每节开头说明本节目标（如Section 6开头说明两阶段框架）；在模型转换处明确预告（如\"This scenario motivated the structural results...\"）。",
+    "transition_logic_cn": "用性能失败连接模型开发：Model A无法在合理时间求解 → 模型B出现；用实际需求连接第二阶段：容量差异被行政指出 → 加入第二阶段；用反事实连接边界：SP采用率低 → 检验无SP与全SP；用部署连接影响：优化后人工调整说明实际接受度。",
+    "claim_evidence_rhythm_cn": "每个关键主张后紧跟数字或表：\"Table 2 shows...\", \"Storrs平均差异从15.6降到12.6\"；理论命题后紧跟可操作的公式模型；对于非最优解先承认gap再说明仍可用。",
+    "benchmark_narrative_cn": "贪心基线不是学术惯例，而是被刻画为\"行政人员原本会用的方法\"，使对比更有实践说服力；Table 2/3/4通过SP情景变化进一步展示精确方法在更多灵活性下优势更大。",
+    "theory_return_cn": "在结果解释中反复回扣理论：Model B高效被解释为可行时间面很小（139个点）；SP低采用率被解释为可能因新颖性和双倍工作量，并引用student反馈来平衡目标函数设计。",
+    "contribution_positioning_cn": "在文献综述处标出新维度（教学模式选择）；在结论中将贡献表述为实际采用和设计知识；通过反事实情景展示模型解决问题的不是一次性的性能提升，而是可解释的机制。",
+    "novelty_protection_cn": "通过强调新颖问题、结构性质（可行时间面）、理论证明和实际应用来防止被视为一次性调参；通过比较精确与贪心以及多个反事实场景，说明改进并非由于特定数据或单一参数。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实背景和具体数字制造紧迫性（如容量降70%、课程数、房间数）。",
+        "research_job_cn": "与决策者协作，明确决策变量、约束和目标，收集真实实例。",
+        "required_evidence_cn": "真实数据规模、旧方案失效的具体证据、决策者确认的目标。",
+        "transition_to_next_cn": "将现实目标翻译成可形式化的数学问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "形式化问题，定义记号、可行域和目标函数；给出复杂性命题。",
+        "research_job_cn": "证明NP-hard或不可近似性，判断是否需要精确算法或近似策略。",
+        "required_evidence_cn": "复杂性证明或充分论证使精确模型合理。",
+        "transition_to_next_cn": "复杂性结果引导选择模型结构。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述数学模型，并解释每个约束的现实含义。",
+        "research_job_cn": "实现求解器，设计必要的预处理或压缩。",
+        "required_evidence_cn": "可运行的模型和初步计算性能。",
+        "transition_to_next_cn": "如果初步性能不足，用结构理论寻找压缩或更优公式。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "报告真实实例上的计算结果，与最可能使用的baseline对照。",
+        "research_job_cn": "运行基准算法和精确算法，收集覆盖率、时间、目标值。",
+        "required_evidence_cn": "可复现的配置和清晰的对比表。",
+        "transition_to_next_cn": "主目标结果揭示的次优问题引入额外目标或阶段。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "补充额外的目标或约束，说明对原始问题的改进。",
+        "research_job_cn": "实现第二阶段或次要目标，验证不损害主目标。",
+        "required_evidence_cn": "主目标保持不变且次目标有量化改善的证据。",
+        "transition_to_next_cn": "用反事实情景检验模型设计假设。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "描述反事实/敏感性分析，界定结论的边界和条件。",
+        "research_job_cn": "构造不同情景（无关键灵活性、全灵活性、参数变化）并重新求解。",
+        "required_evidence_cn": "不同情景下的覆盖率和目标值变化。",
+        "transition_to_next_cn": "将计算结论与部署和实施观察结合。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "记录实际部署过程、人工调整比例和采纳情况，提炼为设计知识与未来工作。",
+        "research_job_cn": "与用户合作观察系统实际使用，记录偏差和反馈。",
+        "required_evidence_cn": "部署后数据（如调整百分比、课程保持率）和用户意见。",
+        "transition_to_next_cn": "结论中回到引言缺口，总结贡献和限制。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "把实际目标（面授机会）转化为可加权的决策目标，并将新模式编码为不同客观系数。",
+      "利用图结构（如区间图、可行时间面）压缩MILP规模，并用规范化理论命题支持压缩的合法性。",
+      "使用\"替代方案\"作为基线而非学术benchmark，提高实践相关度。",
+      "两阶段目标：先保主目标最优，再优化次目标。",
+      "反事实情景（去掉/加入灵活性、改变权重）来分离设计决策对结果的影响。",
+      "实际部署记录（如人工调整比例）作为DSS成功证据。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实疫情危机情境和UConn大学行政的深度参与是特殊背景，难以复制。",
+      "与约175个院长/系主任、注册员和设施团队的密集协调，以及两个月内完成的紧迫部署。",
+      "真实教室、课程和注册数据的获取和清洗需要大学信息系统支持。",
+      "多校区规模差异和flex课表结构需要不同模型，属特定组织结构。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "如果没有真实数据和决策者的目标确认，仅套用MILP会显得机械。",
+      "没有针对新的实际实例重新证明冲突结构，直接使用\"可行时间面\"压缩可能失败。",
+      "无真实反事实（基线是行政实际会用的方法）的情况下，声称\"改进7%\"可能过于抽象。",
+      "没有部署和用户调整记录，结论会停留在计算实验层面。"
+    ],
+    "single_best_description_of_the_routine_cn": "用真实紧迫问题驱动，先以复杂度理论定位困难，再用图结构设计高效精确模型，通过真实实例和反事实比较证明增益，最后以部署观察提炼可复用设计知识。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "OCR对部分数学符号和公式造成缺失（如某些变量、T^w定义），但模型和论证链仍可完整理解；缺少附录和代码补充；仪表板截图细节无法深究；信息主要依赖论文正文和表格，无法独立核验原始数据。",
+  "usage": {
+    "prompt_tokens": 23424,
+    "completion_tokens": 26214,
+    "total_tokens": 49638,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 20096
+  }
+}

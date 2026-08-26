@@ -1,0 +1,2129 @@
+# Bidder Support in Multi-item Multi-unit Continuous Combinatorial Auctions: A Unifying Theoretical Framework
+
+- 作者：Gediminas Adomavicius; Alok Gupta; Mochen Yang
+- 年份 / 期刊：2022 / Information Systems Research
+- DOI：10.1287/isre.2021.1068
+- 源文件：28268_2022_bidder-support-in-multi-item-multi-unit-continuous-combinatorial-auctions-a-unifying-theoretical.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.72
+
+## 文章级论证概况
+
+- 核心问题：如何在一般化的多物品多单位（MIMU）连续组合拍卖中，为竞拍者提供实时、可计算的投标支持信息（winning level、deadness level、赢家识别），并统一已有MISU/SIMU与OR/XOR拍卖的理论结果？
+
+- 制品与设计：本文构造的不是面向用户的单一软件界面，而是一套基于子auction（subauction）动态追踪的数据结构与算法：用VAL数组保存所有子auction当前价值，用LastWinBid数组保存各子auction最新赢标，并通过增量更新算法在新标到达后动态维护全部子auction状态，从而支持常数时间的winning level查询、较快的deadness level查询和赢家分配回溯。
+
+- 客观结果：理论层面得到MIMU-XOR拍卖中子auction更新的递推定理、winning/deadness level公式、活标紧上界；通过OR等价于唯一bidder的XOR这一化约得到MIMU-OR全部结果；模拟显示所提实现能在实际规模下实时更新（MIMU-OR三到五物品每项三五十单位时增量更新约0.14毫秒至20秒，视规模而定；MIMU-XOR类似但随bidder数指数增长）；与IP/CPLEX按需计算相比，本文方法在计算全部winning/deadness levels时快若干数量级，仅在查询频率极低时IP可能更快。
+
+- 核心贡献：作者声称首次解决一般连续MIMU拍卖的实时bidder support问题，推导出理论基础并设计了高效计算基础设施；以MIMU-XOR为最一般形式统一了MIMU-OR、SIMU、MISU的bidder support结果；结果还可扩展到批量约束、层级约束和反向拍卖。
+
+- 整篇论证链：论文从组合拍卖优点与其在消费市场推广受限的矛盾出发，指出参与复杂性的核心是缺乏实时、客观的投标支持信息；已有研究分别解决了MISU和SIMU两类基础情形，但一般MIMU因同时含多物品和多单位的组合复杂性而未被解决。作者以子auction为统一构件，先在MIMU-XOR模型下建立新标如何更新子auction、如何计算winning/deadness levels、活标数量上界等核心定理；随后证明OR投标可视为每个标由独立bidder提交的XOR投标，从而把MIMU-OR结果从MIMU-XOR直接导出，并通过表示退化和映射把SIMU/MISU纳入同一框架。理论公式进一步转化为增量动态规划式数据结构与算法，使赢家、winning/deadness level可在真实时间中高效查询；模拟实验和与IP/CPLEX的基准对比验证了效率优势。最后，文章把理论扩展到批量约束、层级约束和反向MIMU拍卖，说明该框架适用于更广泛的组合拍卖环境。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文核心交付物是一种计算制品（数据结构和算法），其评价证据主要来自模拟实验和与IP/CPLEX的基准对比，而不是受试者行为实验或现场部署；理论推导服务于制品设计，但主论证链条是‘性能/支撑不足→构造计算制品→benchmark→泛化’。
+
+- 主导写作弧线判定：文章先指出现有bidder support只覆盖MISU/SIMU且IP方法无法满足实时综合支持，形成一个性能/能力缺口；随后构造以子auction动态追踪为基础的计算制品，用模拟和IP基准证明性能；最后把结果一般化到batch、hierarchical、reverse等拍卖变体，并回头宣称统一理论。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：研究从最一般的MIMU-XOR理论出发，用子auction建立拍卖动态与支持指标公式；再将OR化约为XOR，从而把MIMU-OR纳入同一框架，并通过表示退化统一SIMU/MISU；接着把理论公式翻译成MIMU-OR和MIMU-XOR两套增量式数据结构与算法，先完成自身模拟，再与IP/CPLEX做基准对比；最后通过批量约束、层级约束和反向拍卖三个扩展阶段，证明理论框架的边界与可迁移性。各阶段呈累积关系：理论为制品提供递推基础，模拟证明可行性，基准证明优势，扩展证明普适性。
+
+### studies_or_phases
+
+#### 1. MIMU-XOR理论结果推导
+
+- order：1
+
+- name_cn：MIMU-XOR理论结果推导
+
+- question_cn：在一般MIMU-XOR连续组合拍卖中，如何用子auction刻画拍卖动态，并计算winning/deadness levels与活标上界？
+
+- inputs_and_setting_cn：形式化拍卖状态：物品数M、每个物品的单位数向量U、竞标者集合N、按时间到达的投标序列B_k；无实证数据。
+
+- designed_or_compared_object_cn：定义MIMU-XOR的子auction为(span向量, bidder coalition)；设计可行分配、时间公平打破平局规则、VCS概念。
+
+- baseline_control_or_counterfactual_cn：没有外部baseline；内部以‘新标不加入子auction则状态不变’作为反事实。
+
+##### objective_metrics
+
+1. 理论可推导性
+
+2. 活标数上界的紧性（构造达到上界的例子）
+
+- analysis_method_cn：形式定理证明（附录A），例证（Illustration 1、2）。
+
+- main_result_cn：Theorem 1给出子auction更新递推；winning level等于整个拍卖价值减去互补子auction价值；Theorem 2/Corollary 2给出活标条件；deadness level为VCS上子auction价值的最小值；Theorem 3给出跨span活标总数紧上界。
+
+- argumentative_role_cn：建立最一般情形的理论基础，证明子auction确实是理解MIMU动态的核心构件。
+
+- remaining_uncertainty_cn：OR拍卖是否可直接导出；SIMU/MISU是否可由MIMU退化得到；理论公式能否在计算上实时实现。
+
+- link_to_next_phase_cn：Section 4通过‘OR是XOR的特例’将结果扩展到MIMU-OR，并进一步映射到SIMU/MISU。
+
+##### evidence_pointers
+
+1. Section 3.1-3.4
+
+2. Table 1
+
+3. Theorems 1-3
+
+4. Corollary 2
+
+5. Illustrations 1-2
+
+#### 2. MIMU-OR化约与SIMU/MISU统一
+
+- order：2
+
+- name_cn：MIMU-OR化约与SIMU/MISU统一
+
+- question_cn：MIMU-OR的bidder support结果能否从MIMU-XOR推出？一般MIMU结果能否覆盖SIMU/MISU？
+
+- inputs_and_setting_cn：使用同一套形式化MIMU模型，但投标语言改为OR；输入还包括已有MISU/SIMU研究中的概念与结果。
+
+- designed_or_compared_object_cn：将OR投标建模为每个投标由唯一bidder提交的XOR投标；简化的子auction为[span, N_k]；与OR*编码（加dummy item）的做法进行比较。
+
+- baseline_control_or_counterfactual_cn：以OR*编码作为备选统一路线，说明其不适合deadness level推导。
+
+##### objective_metrics
+
+1. OR结果能否由XOR结果直接推导
+
+2. 表示映射是否覆盖OR/XOR和SIMU/MISU
+
+- analysis_method_cn：理论推导、Table 2汇总、Observations 1-3、Illustration 3-4、Figure 2映射。
+
+- main_result_cn：MIMU-OR的winning/deadness公式和活标条件均可由MIMU-XOR导出；MIMU-XOR被确立为最一般情形；SIMU/MISU是MIMU在M=1或所有u_j=1时的退化形式。
+
+- argumentative_role_cn：把两个分离的研究流（MISU和SIMU）以及两种投标语言统一到一个理论框架中，为后续制品设计提供统一公式。
+
+- remaining_uncertainty_cn：统一理论虽已建立，但需要验证计算制品能否在合理拍卖规模下实时提供这些信息。
+
+- link_to_next_phase_cn：Section 5把公式翻译成数据结构和算法，并进行模拟与基准测试。
+
+##### evidence_pointers
+
+1. Section 4.1-4.3
+
+2. Table 2
+
+3. Observations 1-3
+
+4. Figure 2
+
+#### 3. MIMU-OR实现与模拟
+
+- order：3
+
+- name_cn：MIMU-OR实现与模拟
+
+- question_cn：MIMU-OR理论公式能否转化为支持实时查询的计算制品？
+
+- inputs_and_setting_cn：合成的单件标（worst case）和随机活标（average case）各1000个；拍卖规模M=3,4,5，单位数u=30,40,50；C语言，Linux 2.10GHz CPU。
+
+- designed_or_compared_object_cn：设计span向量到整数的混合进制映射；VAL一维数组保存子auction价值；LastWinBid二维数组保存最新赢标；Algorithm 1增量更新；Algorithm 2回溯赢家。
+
+- baseline_control_or_counterfactual_cn：阶段内没有外部baseline；内部对比worst case（single-span活标）和average case（随机span活标）。
+
+##### objective_metrics
+
+1. 每个活标的平均增量更新耗时（毫秒）
+
+2. winning level查询耗时
+
+3. deadness level查询耗时
+
+- analysis_method_cn：模拟计时，报告均值和标准差。
+
+- main_result_cn：Table 3显示更新时间随物品数指数增长；查询winning level极快，deadness level最坏约10毫秒；更新是计算瓶颈。
+
+- argumentative_role_cn：证明MIMU-OR的理论可以落地为实时支持系统，且在实际模拟规模内有可用效率。
+
+- remaining_uncertainty_cn：MIMU-XOR需要处理bidder coalition，复杂度更高，尚未验证。
+
+- link_to_next_phase_cn：下一阶段将实现扩展到MIMU-XOR，处理二维的bidder-set维度。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Table 3
+
+3. Algorithms 1-2
+
+#### 4. MIMU-XOR实现与模拟
+
+- order：4
+
+- name_cn：MIMU-XOR实现与模拟
+
+- question_cn：MIMU-XOR在需要按bidder集合索引子auction时，能否同样提供实时支持？
+
+- inputs_and_setting_cn：合成活标1000个，span和值生成方式同MIMU-OR；bidder从{|N|∈{4,8}}随机抽取；M∈{2,3,4}，u∈{25,50}。
+
+- designed_or_compared_object_cn：VAL和LastWinBid扩展为二维数组，bidder set用bitmap表示；增量更新和赢家回溯类似MIMU-OR，具体算法在附录E。
+
+- baseline_control_or_counterfactual_cn：阶段内无外部baseline；内部继续worst vs average对比。
+
+##### objective_metrics
+
+1. 增量更新平均耗时
+
+2. winning level查询耗时
+
+3. deadness level查询耗时
+
+- analysis_method_cn：模拟计时，报告均值和标准差。
+
+- main_result_cn：Table 4显示更新时间随物品数和bidder数指数增长，但在测试规模下多数情况在毫秒级；WL查询常小于1微秒；DL最坏约10毫秒。
+
+- argumentative_role_cn：证明MIMU-XOR作为最一般情况也能在现实规模内实时计算支持信息，补全制品的适用范围。
+
+- remaining_uncertainty_cn：自己实现的绝对效率已可接受，但需要与领域常用IP方法对比以证明相对优势。
+
+- link_to_next_phase_cn：下一阶段将同一实现与IP/CPLEX按需计算进行基准对比。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 4
+
+3. 在线Appendix E
+
+#### 5. 与IP/CPLEX的性能基准对比
+
+- order：5
+
+- name_cn：与IP/CPLEX的性能基准对比
+
+- question_cn：与常用整数规划（IP）按需计算子auction价值的替代策略相比，增量式子auction追踪是否有实际效率优势？
+
+- inputs_and_setting_cn：模拟30个连续活标；MIMU-OR基准规模为M=2,3和u=5,10；MIMU-XOR基准规模为|N|=4,8、M=2,3、u=10,15；IP使用CPLEX，IP求解时间不计预处理；同一硬件。
+
+- designed_or_compared_object_cn：对比本文方法（增量更新+常数/线性查询）与IP方法（每次查询现算所需子auction价值）；计算所有span（或所有bidder所有span）的WL和DL。
+
+- baseline_control_or_counterfactual_cn：IP基准使用标准winner determination IP公式，XOR用dummy goods处理；未在IP中执行时间公平tie-breaking（对IP有利）。
+
+##### objective_metrics
+
+1. 计算全部WL/DL的平均总耗时（毫秒）
+
+2. 查询频率临界点
+
+- analysis_method_cn：基准模拟，报告均值与标准差，并给出临界查询数量。
+
+- main_result_cn：IP方法通常慢几个数量级，尤其在DL计算上；只有在拍卖规模很大且查询频率极低时IP才可能更快；本文方法适合高频综合支持。
+
+- argumentative_role_cn：将制品的优势从‘自身很快’提升为‘优于领域常规做法’，支撑实际部署价值。
+
+- remaining_uncertainty_cn：基准只针对直接IP公式；更优IP公式、缓存机制或专用启发式未测试；扩展约束拍卖尚未验证。
+
+- link_to_next_phase_cn：既然一般MIMU可行，下一阶段检验带约束的MIMU变体（batch/hierarchical）能否进一步扩展。
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Tables 5-6
+
+3. Endnotes 7-10
+
+4. 在线Appendix K
+
+#### 6. 批量约束MIMU（Batch-based MIMU）扩展
+
+- order：6
+
+- name_cn：批量约束MIMU（Batch-based MIMU）扩展
+
+- question_cn：当合法投标必须满足固定批次容量约束时，一般MIMU理论是否仍适用且能降低计算复杂度？
+
+- inputs_and_setting_cn：以建筑材料容器装运为场景；定义MIMU_B参数U和批次容量Ω，合法span cardinality为Ω的倍数；附录F含证明和模拟。
+
+- designed_or_compared_object_cn：限定permitted spans集合S；增量更新只追踪S中的子auction；复用MIMU-OR的数据结构。
+
+- baseline_control_or_counterfactual_cn：与一般MIMU-OR全span追踪比较（permitted spans约减少到1/Ω）。
+
+##### objective_metrics
+
+1. permitted span数量
+
+2. 增量更新耗时
+
+3. 可处理拍卖规模
+
+- analysis_method_cn：形式结果（Theorem F.1/Corollary F.1）和附录F模拟。
+
+- main_result_cn：批量约束显著减少需追踪的子auction数量，因而能处理比一般MIMU-OR更大规模的拍卖。
+
+- argumentative_role_cn：证明统一框架可平移到现实中的约束拍卖，并展示理论带来的计算红利。
+
+- remaining_uncertainty_cn：层级约束下互补span可能不被允许，更新逻辑更复杂。
+
+- link_to_next_phase_cn：下一阶段处理层级MIMU，讨论互补span非permitted时的分解策略。
+
+##### evidence_pointers
+
+1. Section 6.1
+
+2. 在线Appendix F
+
+#### 7. 层级MIMU（Hierarchical MIMU）扩展
+
+- order：7
+
+- name_cn：层级MIMU（Hierarchical MIMU）扩展
+
+- question_cn：当permitted packages形成树形层级时，一般MIMU理论能否处理互补span非permitted的情况？
+
+- inputs_and_setting_cn：以FCC 700MHz频谱拍卖为动机；定义MIMU_H，层1为singletons，顶层为全集，每层package互斥且被上层包含；OR拍卖。
+
+- designed_or_compared_object_cn：定义permitted span向量；由于互补span可能非permitted，引入将非permitted span分解为permitted span之和的方法；附录G给出细节与模拟。
+
+- baseline_control_or_counterfactual_cn：与一般MIMU-OR全span追踪比较，permitted spans少很多。
+
+##### objective_metrics
+
+1. permitted spans数量
+
+2. 增量更新耗时
+
+3. 可处理规模
+
+- analysis_method_cn：形式化定义、Illustration 5、附录G模拟。
+
+- main_result_cn：层级约束下只需考虑树中父span的更新；能处理比一般MIMU-OR大得多的拍卖。
+
+- argumentative_role_cn：扩展理论到另一类重要约束拍卖，说明子auction思想在非全格span结构下仍可用。
+
+- remaining_uncertainty_cn：反向拍卖中可行性分配、子auction定义和目标函数都需要调整。
+
+- link_to_next_phase_cn：下一阶段转向反向MIMU拍卖。
+
+##### evidence_pointers
+
+1. Section 6.2
+
+2. Illustration 5
+
+3. 在线Appendix G
+
+#### 8. 反向MIMU拍卖扩展
+
+- order：8
+
+- name_cn：反向MIMU拍卖扩展
+
+- question_cn：一般MIMU的bidder support理论能否扩展到反向组合拍卖（多个卖家竞标向买家供货）？
+
+- inputs_and_setting_cn：定义R-MIMU-OR，bid value表示成本，目标是成本最小化；bidder身份约束可通过XOR方式加入；Illustration 6说明朴素的子auction定义不完整。
+
+- designed_or_compared_object_cn：重新定义可行分配为覆盖所有item的投标集合；子auction包含所有与x有非空交集的投标；使用方向减法⊖；WL/DL变成投标价格上界。
+
+- baseline_control_or_counterfactual_cn：以正向前向拍卖结果为对照，说明两者差别仅在目标方向和子auction定义。
+
+##### objective_metrics
+
+1. 理论公式可推导性
+
+2. 与forward结果的结构相似性
+
+- analysis_method_cn：形式定义、Illustration 6、Table 7公式汇总、附录H证明。
+
+- main_result_cn：R-MIMU-OR的winning bids/levels/deadness level公式可从前向MIMU-OR类似导出，只需成本最小化和新的子auction定义。
+
+- argumentative_role_cn：把成果扩展到采购拍卖等实际场景，增加理论覆盖面和现实意义。
+
+- remaining_uncertainty_cn：XOR的反向拍卖仅有提及未完全展开；未来还可扩展到组合交易所。
+
+- link_to_next_phase_cn：结论中引出未来研究方向，没有下一阶段实证。
+
+##### evidence_pointers
+
+1. Section 7
+
+2. Illustration 6
+
+3. Table 7
+
+4. 在线Appendix H
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. LIMITATION: 指出组合拍卖有优势但采纳受限，因缺乏有效bidder support信息
+
+2. RQ_OR_OBJECTIVE: 提出研究一般MIMU拍卖的bidder support问题
+
+3. THEORY_INTRO: 区分OR和XOR两种投标语言
+
+4. THEORY_PROPOSITION: 对XOR推导出支持指标计算的理论结果
+
+5. THEORY_PROPOSITION: 表明OR结果可由XOR结果直接导出
+
+6. CONTRIBUTION: 声明以MIMU-XOR为最一般形式统一各拍卖类型
+
+7. STUDY_OVERVIEW: 预告理论导致高效算法并优于IP
+
+8. CONTRIBUTION: 扩展至batch、hierarchical、reverse拍卖
+
+### introduction_moves
+
+1. CONTEXT: 组合拍卖机制及其应用
+
+2. PRACTICAL_STAKES: 消费市场采纳受限的严重后果
+
+3. PHENOMENON: 参与复杂性来源（指数级组合、动态竞标、活动规则）
+
+4. REQUIREMENT: 连续拍卖需要实时、客观的bidder support信息
+
+5. PRIOR_KNOWLEDGE: 已有MISU/SIMU bidder support方案
+
+6. GAP: 一般MIMU拍卖仍缺乏统一bidder support理论
+
+7. WHY_GAP_MATTERS: 简单叠加MISU/SIMU无法应对多物品+多单位的组合复杂性
+
+8. RQ_OR_OBJECTIVE: 本文研究一般连续MIMU的实时bidder support
+
+9. METHOD_JUSTIFICATION: 说明all-or-nothing、价值最大化、无行为假设等边界
+
+10. STUDY_OVERVIEW: 用Figure 1预告两阶段分解和全文路线
+
+11. CONTRIBUTION: 声明解法、统一框架、实践意义
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 综述winner determination算法及其局限
+
+2. PRIOR_KNOWLEDGE: 综述MISU/SIMU bidder support成果
+
+3. THEORY_INTRO: 引入子auction概念作为建筑模块
+
+4. THEORY_PROPOSITION: 定义MIMU-XOR可行分配、时间公平tie-breaking
+
+5. THEORY_PROPOSITION: Theorem 1子auction更新递推
+
+6. THEORY_PROPOSITION: winning level公式
+
+7. THEORY_INTRO: 定义VCS
+
+8. THEORY_PROPOSITION: Theorem 2/Corollary 2活标条件
+
+9. THEORY_PROPOSITION: deadness level公式
+
+10. THEORY_PROPOSITION: Theorem 3活标紧上界
+
+11. THEORY_PROPOSITION: OR可视为XOR的退化情形
+
+12. THEORY_PROPOSITION: SIMU/MISU是MIMU的退化情形
+
+13. METHOD_JUSTIFICATION: 论证为何选择‘OR作为XOR’而非OR*
+
+### artifact_design_moves
+
+1. REQUIREMENT: 提出三个设计目标：增量更新、赢家确定、按需WL/DL计算
+
+2. DESIGN_FEATURE: span向量到整数的混合进制映射
+
+3. DESIGN_FEATURE: VAL一维/二维数组和LastWinBid数组
+
+4. DESIGN_FEATURE: Algorithm 1增量更新所有子auction
+
+5. DESIGN_FEATURE: Algorithm 2回溯赢家分配
+
+6. DESIGN_FEATURE: MIMU-XOR用bitmap表示bidder set
+
+7. DESIGN_FEATURE: 时间公平tie-breaking通过‘严格优于才更新’自动实现
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 模拟设计解释（worst singleton vs average random活标）
+
+2. BENCHMARK_OR_CONTRAST: 构建与IP/CPLEX对比的替代策略
+
+3. BENCHMARK_OR_CONTRAST: IP公式和XOR dummy goods处理
+
+4. RESULT: MIMU-OR模拟结果Table 3
+
+5. RESULT: MIMU-XOR模拟结果Table 4
+
+6. RESULT: IP基准对比Table 5/6显示数量级差距
+
+7. BOUNDARY_CONDITION: IP在低查询频率大拍卖下可能更快
+
+8. LIMITATION_AND_FUTURE: 缓存机制和专用IP是未来方向
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 解决MIMU bidder support并统一理论
+
+2. CONTRIBUTION: OR as XOR，MIMU-XOR最一般
+
+3. CONTRIBUTION: 计算结果映射到SIMU/MISU
+
+4. CONTRIBUTION: 数据结构和算法支持实时反馈
+
+5. RESULT: 模拟和基准证明优于IP
+
+6. BOUNDARY_CONDITION: 一般MIMU状态空间大，约束变体更适合大规模
+
+7. CONTRIBUTION: 反向拍卖扩展
+
+8. LIMITATION_AND_FUTURE: 专用机制、专用IP、组合交易所、自动投标系统
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 子auction概念（Adomavicius & Gupta 2005）
+
+2. winner determination的复杂度与算法文献
+
+3. OR/XOR投标语言（Nisan 2000）
+
+4. 时间公平tie-breaking原则（Pekec & Rothkopf 2003, Katok & Roth 2004）
+
+5. MISU/SIMU bidder support结果（Adomavicius & Gupta 2005; Petrakis et al. 2013; Adomavicius et al. 2019）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：理论结果（Theorem 1、winning/deadness公式、VCS、OR as XOR）不仅解释现象，还直接规定了需要保存哪些子auction价值、如何更新、如何查询；VAL/LastWinBid数组和两个算法就是这些理论公式的数据结构翻译，模拟和IP基准直接评价该翻译后的制品。
+
+- 理论到设计翻译链：子auction理论→每个新标只改变含它的子auction且需与互补子auction组合→设计目标是增量保存所有子auction的价值与赢家→VAL/LastWinBid数组+Algorithm 1；winning/deadness公式→查询过程对应常数时间查值或遍历较大span；XOR的VCS→需要bidder set维度，故VAL/LastWinBid用bitmap二维化；OR as XOR→VCS退化为全bidder集合，故一维数组足够；时间公平→更新条件设为严格优于旧值。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：子auction是组合拍卖动态的构建模块；新标只影响包含它的子auction，且需与互补子auction组合击败旧赢家。
+
+- mechanism_cn：递推关系：WIN_{k+1} = max(WIN_k, new_bid ∪ WIN_k[complement span, complement coalition])。
+
+- design_requirement_cn：必须增量保存每个子auction的当前价值和赢家，并在新标后更新受影响的子auction。
+
+- artifact_choice_cn：VAL数组存价值，LastWinBid数组存最新赢标，Algorithm 1按递推更新；Algorithm 2回溯赢家分配。
+
+- evaluated_contrast_cn：与IP每次按需计算子auction价值的方式对比。
+
+- objective_result_cn：WL查询常数时间，总计算比IP快若干数量级（Tables 5-6）。
+
+##### evidence_pointers
+
+1. Section 3.2 Theorem 1
+
+2. Section 5.1 Algorithm 1
+
+3. Section 5.3 Tables 5-6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：活标条件：一个bid活 iff 在某种VCS限定的特殊子auction中是赢家。
+
+- mechanism_cn：未来其他投标人可阻塞部分竞标者，因此需要在VCS所包含的bidder集合上计算子auction价值。
+
+- design_requirement_cn：MIMU-XOR必须按(span, bidder set)两个维度保存子auction信息；死度计算需遍历VCS。
+
+- artifact_choice_cn：MIMU-XOR实现的VAL[a,n]和LastWinBid[a,n]，n用bitmap表示。
+
+- evaluated_contrast_cn：worst/average模拟以及IP基准。
+
+- objective_result_cn：在|N|=4,8、M=2-4、u=25/50时多数更新在毫秒级，WL极快，DL约10毫秒内。
+
+##### evidence_pointers
+
+1. Section 3.3 Theorem 2/Corollary 2
+
+2. Section 5.2
+
+3. Table 4
+
+4. Table 6
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：OR投标等价于每个标由唯一bidder提交的XOR投标，因此MIMU-OR是MIMU-XOR的退化。
+
+- mechanism_cn：因未来标不会阻塞已有竞标者，VCS退化为当前bidder集合N_k；不需要按bidder区分支持指标。
+
+- design_requirement_cn：MIMU-OR只需一维span索引，简化WL/DL公式。
+
+- artifact_choice_cn：一维VAL和LastWinBid；Algorithm 1/2简化版本；DL用所有更大span上的差值最小值。
+
+- evaluated_contrast_cn：模拟与IP基准。
+
+- objective_result_cn：Table 3显示更新可实时；Table 5显示比IP快。
+
+##### evidence_pointers
+
+1. Section 4.1-4.2
+
+2. Section 5.1 Table 3
+
+3. Section 5.3 Table 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：SIMU/MISU是MIMU在M=1或所有u_j=1时的退化特殊情况。
+
+- mechanism_cn：表示变换会让span向量和子auction结构退化为单维整数或集合的子集结构。
+
+- design_requirement_cn：统一框架应保留一般MIMU形式，并能通过变换映射到两类经典拍卖。
+
+- artifact_choice_cn：不另建算法；用Figure 2和在线Appendix C说明从MIMU到SIMU/MISU的映射。
+
+- evaluated_contrast_cn：概念性映射，不额外做实验。
+
+- objective_result_cn：MIMU-XOR被确立为最一般形式，SIMU/MISU结果可以由MIMU结果推出。
+
+##### evidence_pointers
+
+1. Section 4.3
+
+2. Figure 2
+
+3. 在线Appendix C
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 形式推导与证明（附录A/B/H/I）
+
+2. 构造性例证（Illustration 1-6）
+
+3. 最坏/平均情况的合成模拟（Table 3/4）
+
+4. 与IP/CPLEX的基准对比（Table 5/6）
+
+5. 边界扩展分析（batch、hierarchical、reverse）
+
+- why_these_evaluations_cn：因为论文主张有两层：理论正确性和计算实用性。理论正确性依靠形式证明与例证；计算实用性不能只靠复杂度表示，所以用模拟测量运行时间；为了让优势有参照，把领域常用的IP/CPLEX作为baseline；最后用扩展场景显示结果不是一次性特例。
+
+- benchmark_and_contrast_chain_cn：先在同一实现内部做worst-case vs average-case，说明自身性能边界；再引入IP/CPLEX作为常规做法，计算同样的全部WL/DL任务；对比结果显示本文方法总时间低若干数量级。随后给出IP可能在低查询频率下更快的临界条件，这使对比看起来更公平。最后通过batch/hierarchical/reverse三种扩展说明该计算原理不限于一般MIMU。
+
+### claim_evidence_ledger
+
+#### 1. MIMU-XOR的winning/deadness level公式正确。
+
+- claim_type_cn：理论正确性
+
+- claim_cn：MIMU-XOR的winning/deadness level公式正确。
+
+- supporting_evidence_cn：Theorem 1-3、VCS定义、Corollary 2，附形式证明和Illustration 1/2。
+
+- appraisal_cn：证据充分；证明在附录，正文给出直觉和例证。
+
+#### 2. OR可从XOR推导，SIMU/MISU可从MIMU导出。
+
+- claim_type_cn：理论统一性
+
+- claim_cn：OR可从XOR推导，SIMU/MISU可从MIMU导出。
+
+- supporting_evidence_cn：Section 4把OR建模为唯一bidder的XOR，Table 2汇总公式，Figure 2映射；并在Section 4.3排除OR*路线。
+
+- appraisal_cn：逻辑上较完整；但OR as XOR需要把每个标视为新bidder，导致N随时间膨胀，论文未充分讨论该表示的理论代价。
+
+#### 3. 本文实现能在现实拍卖规模下实时提供bidder support。
+
+- claim_type_cn：计算效率
+
+- claim_cn：本文实现能在现实拍卖规模下实时提供bidder support。
+
+- supporting_evidence_cn：Table 3/4的worst/average模拟数据显示更新和查询耗时。
+
+- appraisal_cn：证据针对合成数据，规模经过选择；证明‘可扩展至实践中relevant规模’，但没有真实拍卖数据验证。
+
+#### 4. 本文方法优于常用IP方法计算全部WL/DL。
+
+- claim_type_cn：相对优势
+
+- claim_cn：本文方法优于常用IP方法计算全部WL/DL。
+
+- supporting_evidence_cn：Table 5/6对比显示IP慢几个数量级；并给出低查询频率临界说明。
+
+- appraisal_cn：基准公平性做了保守处理（不计CPLEX预处理、不强制tie-breaking），但仅与直接IP公式比较，未与更优IP/caching比较。
+
+#### 5. 理论适用于batch、hierarchical、reverse MIMU。
+
+- claim_type_cn：边界扩展
+
+- claim_cn：理论适用于batch、hierarchical、reverse MIMU。
+
+- supporting_evidence_cn：Section 6/7形式定义、Illustration 5/6、Table 7、附录F/G/H。
+
+- appraisal_cn：扩展主要以理论推导和示意性模拟支撑，没有完整实证。
+
+- internal_validity_strategy_cn：合成数据明确区分最坏情况（singleton活标）和平均情况（随机活标）；控制拍卖规模参数；同一硬件环境；对IP做了有利于它的处理（不计预处理、不强制tie-breaking）；按同一总任务（计算全部WL/DL）比较；多次模拟报告均值和标准差。
+
+- external_validity_strategy_cn：参数范围覆盖3-5个物品、每物品30-50单位、4-8个bidder等现实规模；扩展batch/hierarchical/reverse以显示可迁移性；强调方法不需要行为假设，因此适用于广泛拍卖环境。
+
+- what_is_not_actually_tested_cn：没有真实拍卖数据、真实竞拍者或实际部署；没有在在线/流式环境中测试；没有直接验证公式在真实市场中的结果；IP基准仅覆盖直接IP而非最先进算法；XOR的扩展到reverse仅简单提及；活标上界虽推导，但实现仍追踪所有子auction，没有利用上界做剪枝优化。
+
+## 贡献闭环
+
+- technical_claim_cn：本文提出的增量式子auction追踪算法在计算全部winning/deadness levels时比常用的IP/CPLEX按需计算方法快若干数量级，在模拟的现实拍卖规模下可支持实时查询。
+
+- artifact_claim_cn：VAL/LastWinBid数据结构和Algorithm 1/2是理论结果的有效制品化：每次新标到达时动态更新所有子auction，使后续WL为常数时间、DL在毫秒级、赢家可回溯。
+
+- mechanism_claim_cn：子auction互补组合是决定拍买动态的核心机制：新标要改变子auction赢家，就必须与互补子auction的赢家组合并击败旧赢家；活标/死标取决于bid是否在VCS限定的特殊子auction中获胜。
+
+- boundary_claim_cn：这些机制在连续MIMU拍卖中成立，且MIMU-XOR是最一般形式；适用于OR/XOR两种投标语言，退化为SIMU/MISU；同样适用于批量约束、层级约束和反向拍卖；前提是all-or-nothing、拍卖者价值最大化/成本最小化、自由处置、不考虑博弈行为假设。
+
+- reusable_design_knowledge_cn：可复用的设计知识包括：用子auction作为动态状态表示；用span到整数的混合进制映射压缩索引；增量更新只考虑互补子auction；用bitmap表示bidder coalition以支持XOR；用‘严格优于’自动实现时间公平tie-breaking；以及在约束拍卖中只追踪permitted spans并分解非permitted互补span。
+
+- theoretical_contribution_cn：理论贡献是把MISU和SIMU两个分离研究流统一到MIMU框架下，提出MIMU-XOR为最一般形式；给出S、VCS、活标上界等新概念/结果；证明OR结果可由XOR直接导出，而非通常的OR*方向；还统一了正/反向拍卖的支持指标结构。
+
+- how_discussion_closes_intro_gap_cn：结论重复了引言提出的‘一般MIMU缺乏bidder support’缺口，回指子auction理论、OR as XOR、SIMU/MISU映射和计算基础设施，明确说这些结果解决了缺口并建立了统一框架；同时用约束变体和反向拍卖说明结论不是一次性结果。
+
+- overclaim_or_unsupported_leaps_cn：作者把‘可实时计算支持指标’表述为对竞拍者的‘support’，但没有行为实验证明竞拍者真的能利用这些信息改善决策；‘统一框架’主要通过理论映射建立，缺少跨拍卖类型经验验证；IP基准只对比简单IP公式，不能排除更优IP/缓存/专用求解器；活标紧上界被导出，但算法没有利用该上界做容量压缩。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：组合拍卖虽有其优点，但消费者市场的采纳受限，部分原因是缺乏可辅助竞拍决策的有效支持信息。
+
+- rhetorical_function_cn：开门见山把采纳障碍归因到bidder support缺失。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出全文要解决的bidder support问题。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文研究一般多物品多单位（MIMU）组合拍卖中的bidder support问题。
+
+- rhetorical_function_cn：压缩但明确研究目标。
+
+- depends_on_cn：前句对采纳受限的归因。
+
+- sets_up_cn：说明研究对象是MIMU。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P3-P4
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P3-P4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：对XOR投标导出支持指标的理论结果，并证明OR结果可由XOR结果通过‘每个标视为唯一bidder’推导出来。
+
+- rhetorical_function_cn：给出核心理论关系和统一化路线。
+
+- depends_on_cn：研究目标设定。
+
+- sets_up_cn：为全文理论展开做预告。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：理论结果导出高效算法，并优于常用整数规划方法。
+
+- rhetorical_function_cn：声明计算制品的性能贡献。
+
+- depends_on_cn：理论结果。
+
+- sets_up_cn：预告仿真与基准部分。
+
+- evidence_pointer：Abstract
+
+### 5. Introduction P1 S1-S2
+
+- order：5
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：组合拍卖允许对单个物品和物品束投标，是分配多种资产的市场机制。
+
+- rhetorical_function_cn：建立机制背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后面参与复杂性问题提供对象。
+
+- evidence_pointer：Introduction P1
+
+### 6. Introduction P1 S3-S4
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S3-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：组合拍卖在频谱、运输、采购等场景产生实际经济效益。
+
+- rhetorical_function_cn：说明研究该机制的现实重要性。
+
+- depends_on_cn：机制介绍。
+
+- sets_up_cn：让后续采纳受限更具冲击力。
+
+- evidence_pointer：Introduction P1
+
+### 7. Introduction P2 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：尽管有这些优势，组合拍卖在eBay这类大规模消费者市场应用很有限。
+
+- rhetorical_function_cn：从正面优势转向限制。
+
+- depends_on_cn：前段的应用价值。
+
+- sets_up_cn：引出参与复杂性是原因。
+
+- evidence_pointer：Introduction P2
+
+### 8. Introduction P2 S2-S4
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S2-S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：参与复杂性来自组合爆炸使竞拍者难以跟踪状态，且组合投标产生复杂动态；迭代拍卖的活动规则又增加难度。
+
+- rhetorical_function_cn：具体化限制机制，说明为什么需要bidder support。
+
+- depends_on_cn：上一句指出采纳有限。
+
+- sets_up_cn：为连续拍卖和实时支持做铺垫。
+
+- evidence_pointer：Introduction P2
+
+### 9. Introduction P3 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：研究者因此提倡连续组合拍卖更适合消费者市场。
+
+- rhetorical_function_cn：提出一个可能的机制方向。
+
+- depends_on_cn：对迭代拍卖复杂性的批评。
+
+- sets_up_cn：说明连续拍卖也需要支持信息。
+
+- evidence_pointer：Introduction P3
+
+### 10. Introduction P3 S2-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P3 S2-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：连续拍卖必须有支持竞拍决策的信息，且必须实时提供，否则过时反馈会误导决策。
+
+- rhetorical_function_cn：提出本文设计目标的核心要求。
+
+- depends_on_cn：连续拍卖的倡导。
+
+- sets_up_cn：定义需要计算的支持信息类型。
+
+- evidence_pointer：Introduction P3
+
+### 11. Introduction P4 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Adomavicius和Gupta提出基于实际投标的三类支持信息：赢家、winning level、deadness level。
+
+- rhetorical_function_cn：介绍已有支持方案。
+
+- depends_on_cn：实时信息需求。
+
+- sets_up_cn：说明本文沿用这些核心指标。
+
+- evidence_pointer：Introduction P4
+
+### 12. Introduction P4 S2-S3
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P4 S2-S3
+
+- move_code：GAP
+
+- paraphrase_cn：已有研究只覆盖MISU和SIMU，而同时含多物品多单位的MIMU仍未解决。
+
+- rhetorical_function_cn：明确指出文献空白。
+
+- depends_on_cn：已有工作介绍。
+
+- sets_up_cn：引出本文目标。
+
+- evidence_pointer：Introduction P4
+
+### 13. Introduction P4 S4
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P4 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：MISU和SIMU的复杂度来源根本不同，因此统一它们并支持MIMU是显著挑战。
+
+- rhetorical_function_cn：解释缺口为什么难做、为什么值得做。
+
+- depends_on_cn：前面对缺口的陈述。
+
+- sets_up_cn：为后文‘统一理论’做铺垫。
+
+- evidence_pointer：Introduction P4
+
+### 14. Introduction P5 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文研究一般连续MIMU拍卖的实时bidder support问题。
+
+- rhetorical_function_cn：正式给出研究问题。
+
+- depends_on_cn：前段缺口。
+
+- sets_up_cn：限定研究对象。
+
+- evidence_pointer：Introduction P5
+
+### 15. Introduction P5 S2-S3
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P5 S2-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：考虑OR和XOR两种标准投标语言，并说明其含义。
+
+- rhetorical_function_cn：引入文中最重要的语言区分。
+
+- depends_on_cn：研究问题设定。
+
+- sets_up_cn：为两种语言的分别处理做铺垫。
+
+- evidence_pointer：Introduction P5
+
+### 16. Introduction P6 S1-S3
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：论文假设不允许部分分配，拍卖者最大化价值而非卖出所有物品，且不假设行为策略，只提供基于实际投标的客观信息。
+
+- rhetorical_function_cn：明确模型边界，避免后续被误读为博弈均衡研究。
+
+- depends_on_cn：问题定义。
+
+- sets_up_cn：确保理论结果适用于一般连续拍卖。
+
+- evidence_pointer：Introduction P6
+
+### 17. Introduction P7 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：用Figure 1总览：bidder support分解为跟踪子auction状态和根据最新状态计算支持信息。
+
+- rhetorical_function_cn：给出全文论证结构图。
+
+- depends_on_cn：前面所有问题设定。
+
+- sets_up_cn：预告后面章节。
+
+- evidence_pointer：Introduction P7, Figure 1
+
+### 18. Introduction P7 S2-S4
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P7 S2-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：先推导XOR结果，再从XOR导出OR，再从MIMU导出SIMU/MISU；理论导出计算基础设施；基准优于IP；扩展到batch/hierarchical/reverse。
+
+- rhetorical_function_cn：压缩全文路线图。
+
+- depends_on_cn：图1和问题设定。
+
+- sets_up_cn：为读者建立阅读预期。
+
+- evidence_pointer：Introduction P7
+
+### 19. Introduction P8 S1-S3
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P8 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：主要贡献是求解MIMU of bidder support，统一SIMU/MISU，并从实践上支持更明智的竞拍决策。
+
+- rhetorical_function_cn：在引言末尾预先声明贡献。
+
+- depends_on_cn：全文路线图。
+
+- sets_up_cn：让读者知道评价论文的标准。
+
+- evidence_pointer：Introduction P8
+
+### 20. Section 2 P2 S1-S2
+
+- order：20
+
+- section：Related Literature
+
+- locator：Section 2 P2 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有winner determination算法虽可寻找赢家，却不提供winning/deadness level等支持指标。
+
+- rhetorical_function_cn：把已有算法定位为不解决本文问题。
+
+- depends_on_cn：前段综述。
+
+- sets_up_cn：说明需要更深理论。
+
+- evidence_pointer：Section 2 P2
+
+### 21. Section 2 P3
+
+- order：21
+
+- section：Related Literature
+
+- locator：Section 2 P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：MISU-OR、MISU-XOR、SIMU-OR/XOR均有支持指标结果，Petrakis还证明deadness比winning更难计算，实验也验证指标有用。
+
+- rhetorical_function_cn：展示已有知识资产。
+
+- depends_on_cn：前面指出算法缺支持指标。
+
+- sets_up_cn：为统一这些结果做基础。
+
+- evidence_pointer：Section 2 P3
+
+### 22. Section 2 P4
+
+- order：22
+
+- section：Related Literature
+
+- locator：Section 2 P4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：子auction概念在MISU/SIMU研究中被证明是核心建筑模块。
+
+- rhetorical_function_cn：把子auction提为统一钥匙。
+
+- depends_on_cn：前一节对两类研究的综述。
+
+- sets_up_cn：为第三、四节以子auction为核心铺路。
+
+- evidence_pointer：Section 2 P4
+
+### 23. Section 2 P5 S1-S2
+
+- order：23
+
+- section：Related Literature
+
+- locator：Section 2 P5 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：尽管MIMU是SIMU/MISU的一般化，但没有人明确统一，且这不简单。
+
+- rhetorical_function_cn：明确研究缺口并强调难度。
+
+- depends_on_cn：对两类研究的综述。
+
+- sets_up_cn：说明需要概念重构。
+
+- evidence_pointer：Section 2 P5
+
+### 24. Section 2 P5 S3-S4
+
+- order：24
+
+- section：Related Literature
+
+- locator：Section 2 P5 S3-S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：SIMU等价于背包问题、MISU等价于集合包装，差异巨大；但抽象层面又共享子auction原则，因此统一必须重新审视概念。
+
+- rhetorical_function_cn：解释统一为什么困难以及需要什么策略。
+
+- depends_on_cn：上一缺口句。
+
+- sets_up_cn：为理论重构提供预期。
+
+- evidence_pointer：Section 2 P5
+
+### 25. Section 3.1, after bid tuple definition
+
+- order：25
+
+- section：Section 3.1
+
+- locator：Section 3.1, after bid tuple definition
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在MIMU-XOR中必须追踪bidder身份，以检查XOR约束。
+
+- rhetorical_function_cn：说明XOR模型比OR多的关键信息需求。
+
+- depends_on_cn：投标表示定义。
+
+- sets_up_cn：后文VCS和二维实现需要bidder set。
+
+- evidence_pointer：Section 3.1
+
+### 26. Section 3.1, tie-breaking paragraph
+
+- order：26
+
+- section：Section 3.1
+
+- locator：Section 3.1, tie-breaking paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用时间公平原则打破平局，避免晚标仅靠等值投标替代早标。
+
+- rhetorical_function_cn：定义唯一赢家所需的总序。
+
+- depends_on_cn：可行分配定义。
+
+- sets_up_cn：让所有后续max/min都well-defined。
+
+- evidence_pointer：Section 3.1
+
+### 27. Section 3.2, subauction definition
+
+- order：27
+
+- section：Section 3.2
+
+- locator：Section 3.2, subauction definition
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：在MIMU-XOR中，子auction由物品向量和竞标者联盟共同定义。
+
+- rhetorical_function_cn：把MISU/SIMU的子auction概念扩展到MIMU。
+
+- depends_on_cn：文章早前对子auction的强调。
+
+- sets_up_cn：为Theorem 1提供定义基础。
+
+- evidence_pointer：Section 3.2
+
+### 28. Theorem 1
+
+- order：28
+
+- section：Section 3.2
+
+- locator：Theorem 1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：若新标不进入某个子auction，则该子auction赢家不变；若进入，则新赢家是新标与互补子auction赢家的组合与旧赢家之间的择优。
+
+- rhetorical_function_cn：给出全篇核心递推定理。
+
+- depends_on_cn：子auction定义。
+
+- sets_up_cn：支撑后面所有公式和实现。
+
+- evidence_pointer：Section 3.2 Theorem 1
+
+### 29. Section 3.3, winning level formula
+
+- order：29
+
+- section：Section 3.3
+
+- locator：Section 3.3, winning level formula
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：新标要赢，必须与互补子auction赢家组合击败当前总赢家，因此winning level等于总auction价值减互补子auction价值。
+
+- rhetorical_function_cn：把定理1转成可计算的winning level。
+
+- depends_on_cn：Theorem 1。
+
+- sets_up_cn：实现中常数时间查询winning level。
+
+- evidence_pointer：Section 3.3
+
+### 30. Definition 1
+
+- order：30
+
+- section：Section 3.3
+
+- locator：Definition 1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：定义可行联盟集合VCS，即从全体bidder中移除若干非焦点bidder后的集合。
+
+- rhetorical_function_cn：引入计算deadness的关键概念。
+
+- depends_on_cn：活标直觉。
+
+- sets_up_cn：为Theorem 2和deadness公式服务。
+
+- evidence_pointer：Section 3.3 Definition 1
+
+### 31. Theorem 2
+
+- order：31
+
+- section：Section 3.3
+
+- locator：Theorem 2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：一个标活当且仅当它在某个合适物品范围和VCS联盟的子auction中是赢家。
+
+- rhetorical_function_cn：刻画活标的充分必要条件。
+
+- depends_on_cn：VCS定义。
+
+- sets_up_cn：为化简为Corollary 2和deadness公式做准备。
+
+- evidence_pointer：Section 3.3 Theorem 2
+
+### 32. Corollary 2
+
+- order：32
+
+- section：Section 3.3
+
+- locator：Corollary 2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：活标条件可简化为只需检查恰好等于标的span的子auction和相应VCS。
+
+- rhetorical_function_cn：简化活标判定。
+
+- depends_on_cn：Theorem 2。
+
+- sets_up_cn：让deadness level公式可写为VCS上最小值。
+
+- evidence_pointer：Section 3.3 Corollary 2
+
+### 33. Section 3.3, deadness formula
+
+- order：33
+
+- section：Section 3.3
+
+- locator：Section 3.3, deadness formula
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：deadness level等于在所有可行联盟Q的子auction价值中取最小。
+
+- rhetorical_function_cn：给出deadness level的计算公式。
+
+- depends_on_cn：Corollary 2和VCS。
+
+- sets_up_cn：后续实现中需要遍历VCS。
+
+- evidence_pointer：Section 3.3
+
+### 34. Theorem 3
+
+- order：34
+
+- section：Section 3.4
+
+- locator：Theorem 3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：每个span的活标数不超过min(|U-x|+1,|N|)，总活标数存在紧上界。
+
+- rhetorical_function_cn：量化拍卖动态复杂度。
+
+- depends_on_cn：前文活标条件。
+
+- sets_up_cn：为复杂度直觉和(但实现未利用)潜在优化提供理论。
+
+- evidence_pointer：Section 3.4 Theorem 3
+
+### 35. Section 4.1 P1
+
+- order：35
+
+- section：Section 4.1
+
+- locator：Section 4.1 P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：OR投标可看成每个标由不同bidder提交的XOR投标，因此OR理论可从XOR导出。
+
+- rhetorical_function_cn：这是统一框架的关键化约。
+
+- depends_on_cn：第三节的XOR结果。
+
+- sets_up_cn：支撑第4节所有OR公式。
+
+- evidence_pointer：Section 4.1
+
+### 36. Section 4.1, subauction simplification
+
+- order：36
+
+- section：Section 4.1
+
+- locator：Section 4.1, subauction simplification
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：在OR中，未包含全部当前竞标者的子auction与拍卖动态无关，只需追踪[span, N_k]。
+
+- rhetorical_function_cn：说明OR实现为何比XOR简单。
+
+- depends_on_cn：OR as XOR化约。
+
+- sets_up_cn：为MIMU-OR一维数据结构和简单DL公式服务。
+
+- evidence_pointer：Section 4.1
+
+### 37. Section 4.2, VCS simplification
+
+- order：37
+
+- section：Section 4.2
+
+- locator：Section 4.2, VCS simplification
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：由于未来标不会阻塞现有竞标者，OR拍卖中的VCS退化为当前全部竞标者。
+
+- rhetorical_function_cn：解释为什么OR的deadness公式只需在更大span上取最小。
+
+- depends_on_cn：OR as XOR。
+
+- sets_up_cn：Table 2中DL公式。
+
+- evidence_pointer：Section 4.2
+
+### 38. Observations 1-3
+
+- order：38
+
+- section：Section 4.3
+
+- locator：Observations 1-3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：三种观察总结XOR和OR共有或相异的动态：互补子auction组合、活标等价于在特殊子auction胜出、XOR支持指标因人而异而OR不。
+
+- rhetorical_function_cn：把推导结果提炼为可迁移的理论洞察。
+
+- depends_on_cn：第3-4节所有结果。
+
+- sets_up_cn：为统一框架和实现设计提供定性理解。
+
+- evidence_pointer：Section 4.3 Observations 1-3
+
+### 39. Section 4.3, SIMU/MISU mapping paragraph
+
+- order：39
+
+- section：Section 4.3
+
+- locator：Section 4.3, SIMU/MISU mapping paragraph
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：SIMU和MISU分别是MIMU在单物品多单位、多物品单单位下的退化。
+
+- rhetorical_function_cn：建立从一般到特殊的映射。
+
+- depends_on_cn：MIMU结果。
+
+- sets_up_cn：后文Figure 2和统一声明。
+
+- evidence_pointer：Section 4.3, Figure 2
+
+### 40. Section 4.3, OR* discussion
+
+- order：40
+
+- section：Section 4.3
+
+- locator：Section 4.3, OR* discussion
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：虽然可用OR*（加dummy item）让OR覆盖XOR，但该方向不便于推导deadness level，因此本文选择OR作为XOR的特例。
+
+- rhetorical_function_cn：排除反方向统一方案，为‘XOR更一般’辩护。
+
+- depends_on_cn：对OR/XOR关系分析。
+
+- sets_up_cn：强调MIMU-XOR是最一般形式。
+
+- evidence_pointer：Section 4.3, online Appendix J
+
+### 41. Section 5 P1
+
+- order：41
+
+- section：Section 5
+
+- locator：Section 5 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：实现必须满足三个目标：增量更新子auction、确定任意子auction赢家、按需计算winning/deadness。
+
+- rhetorical_function_cn：把理论结果转化为工程目标。
+
+- depends_on_cn：第3-4节公式。
+
+- sets_up_cn：决定后续数据结构设计。
+
+- evidence_pointer：Section 5 P1
+
+### 42. Section 5 P2, span mapping
+
+- order：42
+
+- section：Section 5
+
+- locator：Section 5 P2, span mapping
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用推广的bitmap表示把span向量映射为唯一整数，并保证加减对应。
+
+- rhetorical_function_cn：解决数组索引问题。
+
+- depends_on_cn：MIMU状态空间定义。
+
+- sets_up_cn：支撑VAL/LastWinBid的数组访问和互补span计算。
+
+- evidence_pointer：Section 5, Properties 1-2
+
+### 43. Section 5.1 P1
+
+- order：43
+
+- section：Section 5.1
+
+- locator：Section 5.1 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：VAL保存子auction价值，LastWinBid保存时间上最新的赢标信息。
+
+- rhetorical_function_cn：明确核心数据结构。
+
+- depends_on_cn：设计目标。
+
+- sets_up_cn：为Algorithm 1/2提供存储条件。
+
+- evidence_pointer：Section 5.1
+
+### 44. Algorithm 1 after pseudocode
+
+- order：44
+
+- section：Section 5.1
+
+- locator：Algorithm 1 after pseudocode
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Algorithm 1遍历互补子auction，把新标与原互补赢家组合的新价值与旧价值比较，严格更大才更新。
+
+- rhetorical_function_cn：把Theorem 1变成可执行算法。
+
+- depends_on_cn：Theorem 1和整数映射。
+
+- sets_up_cn：实现增量更新和自动时间公平tie-breaking。
+
+- evidence_pointer：Section 5.1 Algorithm 1
+
+### 45. Section 5.1, query paragraph
+
+- order：45
+
+- section：Section 5.1
+
+- locator：Section 5.1, query paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：子auction更新完成后，winning level只用两次数组查值即可，deadness level则需遍历所有更大span。
+
+- rhetorical_function_cn：说明查询复杂度并预告高效性。
+
+- depends_on_cn：VAL数组。
+
+- sets_up_cn：后面模拟中对WL/DL时间的解释。
+
+- evidence_pointer：Section 5.1
+
+### 46. Algorithm 2 after pseudocode
+
+- order：46
+
+- section：Section 5.1
+
+- locator：Algorithm 2 after pseudocode
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Algorithm 2通过LastWinBid从最大span回溯得到当前赢家分配，所有子auction赢家并集即活标集合。
+
+- rhetorical_function_cn：解决赢家确定和活标枚举。
+
+- depends_on_cn：LastWinBid数组。
+
+- sets_up_cn：为总览支持信息完整覆盖。
+
+- evidence_pointer：Section 5.1 Algorithm 2
+
+### 47. Section 5.1, simulation setup
+
+- order：47
+
+- section：Section 5.1
+
+- locator：Section 5.1, simulation setup
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：模拟分最坏情况（全部singleton活标）和平均情况（随机span活标），并改变物品数和单位数。
+
+- rhetorical_function_cn：设计有力度的性能测试。
+
+- depends_on_cn：前文算法。
+
+- sets_up_cn：产生Table 3的结果。
+
+- evidence_pointer：Section 5.1 simulation setup
+
+### 48. Section 5.1, results discussion
+
+- order：48
+
+- section：Section 5.1
+
+- locator：Section 5.1, results discussion
+
+- move_code：RESULT
+
+- paraphrase_cn：模拟显示增量更新是瓶颈，随物品数增加而指数变慢，但WL/DL查询足够快。
+
+- rhetorical_function_cn：报告MIMU-OR性能结论。
+
+- depends_on_cn：Table 3。
+
+- sets_up_cn：为XOR模拟和基准比较设参照。
+
+- evidence_pointer：Section 5.1, Table 3
+
+### 49. Section 5.2 P1-P2
+
+- order：49
+
+- section：Section 5.2
+
+- locator：Section 5.2 P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：MIMU-XOR实现把VAL/LastWinBid变成二维数组，用bitmap表示bidder set。
+
+- rhetorical_function_cn：把XOR的VCS需求落实到数据结构。
+
+- depends_on_cn：MIMU-XOR理论。
+
+- sets_up_cn：为XOR模拟提供实现基础。
+
+- evidence_pointer：Section 5.2
+
+### 50. Section 5.2, results discussion
+
+- order：50
+
+- section：Section 5.2
+
+- locator：Section 5.2, results discussion
+
+- move_code：RESULT
+
+- paraphrase_cn：MIMU-XOR更新时间随物品数和bidder数指数增长，但在测试规模下大多在毫秒级，WL查询极快。
+
+- rhetorical_function_cn：报告MIMU-XOR性能结论。
+
+- depends_on_cn：Table 4。
+
+- sets_up_cn：为IP比较提供XOR侧证据。
+
+- evidence_pointer：Section 5.2, Table 4
+
+### 51. Section 5.3 P1
+
+- order：51
+
+- section：Section 5.3
+
+- locator：Section 5.3 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：本文策略是增量保存全部子auction；替代策略是用IP按需计算子auction价值以避免指数存储。
+
+- rhetorical_function_cn：建立基准对比的框架。
+
+- depends_on_cn：自己实现的高效性。
+
+- sets_up_cn：后续IP公式和结果。
+
+- evidence_pointer：Section 5.3 P1
+
+### 52. Section 5.3, IP formulation
+
+- order：52
+
+- section：Section 5.3
+
+- locator：Section 5.3, IP formulation
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：用标准IP公式可解winner determination，XOR通过dummy goods处理，修改auction size即可解任意子auction。
+
+- rhetorical_function_cn：说明baseline是领域常规做法。
+
+- depends_on_cn：目标：对比全部WL/DL计算。
+
+- sets_up_cn：随后比较运行时间。
+
+- evidence_pointer：Section 5.3
+
+### 53. Section 5.3, results discussion
+
+- order：53
+
+- section：Section 5.3
+
+- locator：Section 5.3, results discussion
+
+- move_code：RESULT
+
+- paraphrase_cn：IP计算全部WL/DL的时间比本文方法慢数个数量级，尤其DL计算需要大量子auction价值。
+
+- rhetorical_function_cn：传递核心benchmark结论。
+
+- depends_on_cn：Tables 5-6。
+
+- sets_up_cn：为‘本文方法适合综合实时支持’提供证据。
+
+- evidence_pointer：Section 5.3, Tables 5-6
+
+### 54. Section 5.3, boundary paragraph
+
+- order：54
+
+- section：Section 5.3
+
+- locator：Section 5.3, boundary paragraph
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：IP在拍卖规模很大且查询频率很低时可能更快，例如只关心总赢家或少量WL且无DL查询。
+
+- rhetorical_function_cn：承认方法适用边界，增加可信度。
+
+- depends_on_cn：基准结果。
+
+- sets_up_cn：提示未来可用缓存或专用IP。
+
+- evidence_pointer：Section 5.3
+
+### 55. Section 5.3, future paragraph
+
+- order：55
+
+- section：Section 5.3
+
+- locator：Section 5.3, future paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可设计缓存机制或专用IP公式直接计算支持信息。
+
+- rhetorical_function_cn：为替代策略留下改进空间，避免绝对化声明。
+
+- depends_on_cn：IP弱点分析。
+
+- sets_up_cn：结论中的未来方向之一。
+
+- evidence_pointer：Section 5.3
+
+### 56. Section 6.1, container example and MIMU_B definition
+
+- order：56
+
+- section：Section 6.1
+
+- locator：Section 6.1, container example and MIMU_B definition
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：批量约束MIMU只允许投标span的cardinality为批次容量的倍数，合法span集合S闭合于互补运算，因此只需追踪S中的子auction。
+
+- rhetorical_function_cn：说明一般理论在batch约束下自动成立且计算更省。
+
+- depends_on_cn：MIMU-OR理论。
+
+- sets_up_cn：引出附录F中的规模提升证据。
+
+- evidence_pointer：Section 6.1
+
+### 57. Section 6.2, hierarchical setup
+
+- order：57
+
+- section：Section 6.2
+
+- locator：Section 6.2, hierarchical setup
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：层级MIMU中合法package形成树，每层package互斥并完全包含于上一层；互补span可能非permitted，但可分解为多个permitted spans。
+
+- rhetorical_function_cn：展示另一种约束下理论的可迁移性，同时指出新的技术挑战。
+
+- depends_on_cn：一般MIMU理论。
+
+- sets_up_cn：引出附录G的分解方法和模拟。
+
+- evidence_pointer：Section 6.2, Illustration 5
+
+### 58. Section 7, subauction definition adjustment
+
+- order：58
+
+- section：Section 7
+
+- locator：Section 7, subauction definition adjustment
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：反向拍卖中，子auction必须包含所有与目标span有非空交集的投标，因为成本最小化下这些投标都可能影响该子auction。
+
+- rhetorical_function_cn：修正前向拍卖的子auction定义，使理论适用于reverse。
+
+- depends_on_cn：前向MIMU模型。
+
+- sets_up_cn：为Table 7的reverse公式服务。
+
+- evidence_pointer：Section 7, Illustration 6
+
+### 59. Section 7, summary paragraph
+
+- order：59
+
+- section：Section 7
+
+- locator：Section 7, summary paragraph
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：除成本最小化和子auction定义调整外，前向MIMU-OR/XOR结果可类比扩展到reverse拍卖。
+
+- rhetorical_function_cn：把扩展正式贡献化。
+
+- depends_on_cn：Table 7公式。
+
+- sets_up_cn：结论中的reverse应用。
+
+- evidence_pointer：Section 7
+
+### 60. Section 8 P1-P2
+
+- order：60
+
+- section：Section 8
+
+- locator：Section 8 P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文解决了连续MIMU的实时bidder support，并统一了MIMU-OR/XOR、SIMU/MISU，MIMU-XOR是最一般形式。
+
+- rhetorical_function_cn：在结论中正式宣告核心贡献。
+
+- depends_on_cn：全文理论。
+
+- sets_up_cn：为未来工作做铺垫。
+
+- evidence_pointer：Section 8 P1-P2
+
+### 61. Section 8 P3
+
+- order：61
+
+- section：Section 8
+
+- locator：Section 8 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：模拟实验说明即使在最坏情况下也能实时支持，且比IP基准快很多。
+
+- rhetorical_function_cn：重申计算贡献并给出证据叙事。
+
+- depends_on_cn：第5节模拟与基准。
+
+- sets_up_cn：把技术结论写进总结。
+
+- evidence_pointer：Section 8 P3
+
+### 62. Section 8 P4
+
+- order：62
+
+- section：Section 8
+
+- locator：Section 8 P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：一般MIMU状态空间巨大，而带约束的batch/hierarchical MIMU因permitted bundles更少可扩大到更大规模。
+
+- rhetorical_function_cn：把扩展结果重新框定为方法适用边界。
+
+- depends_on_cn：第6节扩展。
+
+- sets_up_cn：为未来在大规模在线市场应用做铺垫。
+
+- evidence_pointer：Section 8 P4
+
+### 63. Section 8 P5
+
+- order：63
+
+- section：Section 8
+
+- locator：Section 8 P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可研究专用拍卖机制下的理论、专用IP公式、组合交易所和自动投标系统。
+
+- rhetorical_function_cn：列出边界和未来方向。
+
+- depends_on_cn：全文贡献。
+
+- sets_up_cn：收束全文。
+
+- evidence_pointer：Section 8 P5
+
+### 64. Endnote 7-9
+
+- order：64
+
+- section：Endnotes
+
+- locator：Endnote 7-9
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：基准对比中IP不解时间公平tie-breaking，且只计求解LP时间，不计预处理与编译，对IP有利。
+
+- rhetorical_function_cn：预先防御基准不公平的质疑。
+
+- depends_on_cn：第5.3节基准。
+
+- sets_up_cn：增强IP对比结果的稳健性。
+
+- evidence_pointer：Endnotes 7-9
+
+## 写作技术
+
+- gap_construction_cn：作者不是直接说‘没人研究MIMU’，而是先展示一个机制有实际价值（组合拍卖），再指出其落地障碍（参与复杂），再给出已有支持方案只覆盖两个特例，最后才点出一般MIMU空缺且由于复杂度来源不同而non-trivial。这种嵌套式缺口制造让读者感到‘只差最后一步但很重要’。
+
+- signposting_cn：摘要和引言用Figure 1给出两阶段分解（跟踪子auction状态、计算支持信息），并在引言最后直接预告‘先XOR后OR、再SIMU/MISU’的推导顺序；每节开头常说明本节做什么、为什么与前面不同，如Section 4第一句就说要证明OR可由XOR导出。
+
+- transition_logic_cn：Section 3以最一般XOR结束，Section 4开头说‘本节讨论OR，说明可由XOR推导’；Section 5开头说实现直接由理论结果驱动；Section 6开头说MIMU状态空间太大，需讨论约束特例；Section 7开头说前面是forward auction，现在转向reverse。每次过渡都在回答‘为什么还需要下一个部分’。
+
+- claim_evidence_rhythm_cn：理论部分采用‘定义→定理→例证’的节奏，重要定理后紧跟Illustration，公式后立即给数字例子；计算部分采用‘设计目标→数据结构→算法→模拟→结果解释’；benchmark部分先解释为什么IP是合理baseline，再给表格，再讨论临界条件。主张和证据基本绑定。
+
+- benchmark_narrative_cn：Benchmark不是零散比较，而是先定义‘计算全部可查询WL/DL’这一公平任务，再把本文的增量更新成本计入总时间，而IP不存储子auction价值；随后通过‘IP在低查询频率下可能更快’的讨论，使读者相信本文方法在高频综合支持场景下确实占优。
+
+- theory_return_cn：在结果讨论和结论中不断把计算性能拉回到理论贡献：数据结构和算法之所以有效，是因为它们实现了子auction递推；benchmark的胜利不是工程调参的胜利，而是理论公式的自然结果。通过重复‘理论→制品→性能’因果链防止贡献被读成一次性调优。
+
+- contribution_positioning_cn：贡献定位为‘解决MIMU bidder support’并‘统一SIMU/MISU’，同时把扩展（batch/hierarchical/reverse）作为附加证据；这样主贡献始终是理论统一+计算可行性，而不是单纯‘我们提出了一个更快算法’。
+
+- novelty_protection_cn：作者用多个手法防止贡献退化为一次性性能结果：一是把OR as XOR这一化约作为理论创新，解释了为什么比OR*更合适；二是用SIMU/MISU退化来证明不是只在MIMU上works；三是用reverse和约束拍卖说明框架可迁移；四是在benchmark中明确给出IP更快的边界条件，显得结论有边界而非无脑自夸。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写引言：从有实际价值的机制出发，指出采纳障碍，再指出需要某种支持性信息/制品。
+
+- research_job_cn：识别一个真实但未被解决的参与复杂度或性能缺口，并限定到具体机制类型。
+
+- required_evidence_cn：需要文献/实例证明该机制有价值且障碍真实。
+
+- transition_to_next_cn：用‘已有研究只处理特例/现有方法不够’过渡到文献综述。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写文献综述：区分类别，指出已有算法或研究未提供所需指标，凸显空缺。
+
+- research_job_cn：系统梳理相关算法和已有特例结果。
+
+- required_evidence_cn：至少两类先前工作，一类可借鉴，一类不足。
+
+- transition_to_next_cn：提出一个可统一两者的核心概念（如子auction）。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：构造最一般情形的正式理论：定义对象、给出关键定理和公式。
+
+- research_job_cn：选择最一般的模型，推导能解释动态并提供可计算公式的定理。
+
+- required_evidence_cn：定理证明和至少一个构造性例子。
+
+- transition_to_next_cn：用‘其他情形可通过化约得到’引出退化/统一。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写化约与统一：说明特殊情形可以从一般情形推出。
+
+- research_job_cn：找到表示变换或建模等价，把其他语言/特例纳入同一框架。
+
+- required_evidence_cn：公式表、映射图或观察总结。
+
+- transition_to_next_cn：理论到实践：‘这些公式可以转换为数据结构’。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写实现部分：把理论公式翻译成设计目标、数据结构和算法。
+
+- research_job_cn：设计能增量维护理论状态的制品，并分析复杂度。
+
+- required_evidence_cn：伪代码、复杂度推导、设计目标对应表。
+
+- transition_to_next_cn：用‘为验证可行性，进行模拟与基准测试’进入评价。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：写评价：先自身模拟，再与常用baseline基准对比，并给出边界。
+
+- research_job_cn：在受控合成数据上测最坏/平均情况，并设计公平的baseline。
+
+- required_evidence_cn：运行时间表、参数扫描、baseline临界条件。
+
+- transition_to_next_cn：用‘实际中会有约束，因此扩展讨论’进入边界扩展。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：写扩展：把理论/制品应用到相关场景，证明不是一次性结果。
+
+- research_job_cn：选择2-3个紧密相关的变体，展示如何调整定义并保持结论。
+
+- required_evidence_cn：每个变体的形式化定义和至少一个例证/模拟。
+
+- transition_to_next_cn：结论中总结统一贡献并列出未来方向。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：写结论：重述缺口、声明贡献、给出边界和未来。
+
+- research_job_cn：把理论和计算贡献合并成可复用知识，并诚实列出未做之事。
+
+- required_evidence_cn：无新证据；需要与引言逐点呼应。
+
+- transition_to_next_cn：全文收束。
+
+### most_transferable_moves_cn
+
+1. 用‘机制价值→参与障碍→实时支持需求’三层递进构建研究问题
+
+2. 把已有基础概念（子auction）扩展为一般情形，再用退化建立统一
+
+3. 化约策略：OR as XOR不是加dummy item，而是通过唯一bidder映射建立理论可推导性
+
+4. 理论公式直接决定三个工程目标（增量更新、赢家确定、按需查询）
+
+5. 基准设计把IP预处理和tie-breaking成本作有利于baseline的处理，再讨论临界条件
+
+6. 用边界扩展（batch/hierarchical/reverse）证明结果不是特例
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 大量形式定理证明和复杂性证明在附录A/B/H/I，通常一篇IS论文很难做出如此厚的数学推导
+
+2. MIMU-XOR的二维bitmap状态空间在规模大时指数增长，只有适度规模才能模拟
+
+3. IP基准需要CPLEX许可证和精细的计时控制
+
+4. 附录F/G的batch/hierarchical模拟需要额外编程工作
+
+5. 这类理论+算法+benchmark的论文对作者组合要求高（数学、算法、拍卖知识）
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写‘已解决MIMU bidder support’而不给出递推定理和公式
+
+2. 不能只说‘OR可由XOR推出’而不说明唯一bidder映射如何改变VCS和bidder集合增长
+
+3. 不能只展示自己算法快，而不把增量更新总成本计入并与IP的按需计算做同一任务对比
+
+4. 不能仅凭‘我们讨论了reverse/batch/hierarchical’就宣称普适，需要形式定义和证据
+
+5. 不能宣称‘支持竞拍者’却没有任何行为实验，或在结论中把计算可行性等同于用户效用
+
+- single_best_description_of_the_routine_cn：把两个分别被处理的组合拍卖特例统一到一个更具一般性的形式模型（MIMU-XOR）中，用子auction递推刻画动态，再通过等价性化约覆盖另一种语言和两个特例，最后把理论公式改造成增量动态规划式数据结构，用模拟和IP基准证明其在实时综合支持上的优势，并用约束/反向拍卖扩展边界。
+
+## 分析边界
+
+文章由Markdown转录，缺少原始图1/图2的部分视觉细节、附录A-K全文以及部分表格格式信息；因此句子定位使用章节/段落而非精确页码，扩展部分（batch/hierarchical/reverse）的完整证明和模拟细节未在正文出现，只能依据正文叙述和附录引用来推断。

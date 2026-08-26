@@ -1,0 +1,65 @@
+{
+  "updated_at": "2026-08-06T08:44:43.130183+00:00",
+  "analysis_version": "coding-agent-unique-metric-transfer-from-is-v1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 200,
+  "prompt_fingerprint": "89379d470b9937ee1147b3e15c9e20eab84c4d14d45b1ed9f07eb20744e6b887",
+  "candidate_fulltexts": 956,
+  "completed": 945,
+  "pending": 11,
+  "coding_agent_metric_transfer_match_count": 680,
+  "nonmatch_count": 265,
+  "gate_true_counts": {
+    "source_design_outcome_logic_is_transferable": 715,
+    "proposed_metric_is_objective_and_reproducible": 768,
+    "coding_agent_essentiality": 685,
+    "metric_is_manipulable_by_artifact_design": 741,
+    "feasible_objective_benchmark": 761,
+    "supports_a_multi_study_thesis_series": 712
+  },
+  "transfer_strength_counts": {
+    "moderate": 678,
+    "none": 102,
+    "strong": 11,
+    "weak": 154
+  },
+  "coding_agent_necessity_counts": {
+    "moderate": 468,
+    "none": 153,
+    "strong": 216,
+    "weak": 108
+  },
+  "retained_primary_metric_family_counts": {
+    "calibrated_escalation_and_oversight_burden": 141,
+    "cross_artifact_repository_coherence": 28,
+    "failure_recovery_and_workspace_resilience": 10,
+    "human_agent_handoff_and_reviewability": 35,
+    "long_horizon_adaptation_and_memory": 14,
+    "other_coding_agent_specific": 5,
+    "repository_state_and_situational_awareness": 61,
+    "security_safety_and_policy_conformance": 15,
+    "specification_and_change_scope_fidelity": 75,
+    "tool_trajectory_efficiency": 49,
+    "verified_autonomous_change_success": 247
+  },
+  "retained_secondary_metric_family_counts": {
+    "calibrated_escalation_and_oversight_burden": 204,
+    "cross_artifact_repository_coherence": 93,
+    "failure_recovery_and_workspace_resilience": 89,
+    "human_agent_handoff_and_reviewability": 124,
+    "long_horizon_adaptation_and_memory": 30,
+    "other_coding_agent_specific": 1,
+    "repository_state_and_situational_awareness": 110,
+    "security_safety_and_policy_conformance": 13,
+    "specification_and_change_scope_fidelity": 139,
+    "tool_trajectory_efficiency": 242,
+    "verified_autonomous_change_success": 301
+  },
+  "usage": {
+    "prompt_tokens": 26380994,
+    "completion_tokens": 8274449,
+    "total_tokens": 34655443,
+    "prompt_cache_hit_tokens": 6471680,
+    "prompt_cache_miss_tokens": 19909314
+  }
+}

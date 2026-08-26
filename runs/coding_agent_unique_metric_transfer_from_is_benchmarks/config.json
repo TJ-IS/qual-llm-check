@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "analysis_version": "coding-agent-unique-metric-transfer-from-is-v1",
+  "input_dir": "../../database_fulltext_all",
+  "stage2_decisions": "../ais_is_distinctive_benchmark_logic_flash/output_v1/decisions.jsonl",
+  "output_dir": "output_v1",
+  "env_file": "../../.env",
+  "prompt_files": {
+    "system": "system_prompt.md",
+    "user_template": "user_prompt_template.md"
+  },
+  "model": {
+    "name": "deepseek-v4-flash",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 12000,
+    "timeout_seconds": 300
+  },
+  "batch": {
+    "max_concurrency": 200,
+    "retries": 2,
+    "retry_base_delay_seconds": 2.0,
+    "progress_interval": 25,
+    "report_interval": 100
+  }
+}

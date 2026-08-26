@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85032447825"
+title: "\"Recommended mathematical topics for computer science majors\""
+authors: "Davis R.L."
+year: "1977"
+journal: "Proceedings of the 8th SIGCSE Technical Symposium on Computer Science Education, SIGCSE 1977"
+doi: "10.1145/382175.803433"
+---
+# Scopus title-abstract-keyword metadata
+Title: "Recommended mathematical topics for computer science majors"
+Abstract: Although there is not universal agreement on a definition of computer science, I believe that it is the inclusion of a quantitative (mathematical) approach to our discipline that distinguishes "computer science" from "computer programming". Mathematics provides both an established language with which to precisely define terms and established methods for problem solving. For example, the rather vague statement that "algorithm A is better than algorithm B" may be formulated unambiguously and verified or refuted with respect to certain performance measurements using the formalism of algorithm analysis (1). Mathematical methods also point toward the possibility of proving that an algorithm provides acceptable performance for large classes of inputs, a conclusion which often cannot be supported on the basis of caseby-case testing (5). It has been my experience that the study of algorithm analysis and program correctness has had a profound impact on my day-to-day programming. I have come to expect of myself and of my students that any program produced be structured, reasonably efficient and admitting of at least an informal argument of correctness. The majority of my students will enter the data-processing field as programmer/analysts upon graduation rather than continuing on to graduate school. This is probably true of CS graduates at most colleges and universities. Thus I wish to discuss those mathematical concepts and techniques which are relevant to the practicing programmer and which will provide him with a coherent theoretical framework in which to evaluate his programs and the work of others. The CS major requires a knowledge of certain mathematical ideas which are either absent from traditional mathematical courses (structured algorithms, formal languages, graph theory) or are not given significant emphasis (recursion as a basis for computation and proof) or are not perceived as having any relation to computing (combinatorial mathematics and induction). Many mathematics teachers perceive the numerical solution of problems in applied mathematics as the quintessential application of computers and are simply not aware of the richness of mathematical ideas in computer sciences. Most practicing mathematicians would not quarrel with the statement that the study of mathematics requires no external justification. Mathematical ideas or structures are seen to possess an intrinsic beauty. However the undergraduate CS major may lack this perspective on mathematics and should be led to see the usefulness of a formal approach to computer science by seeing the application cf mathematical methods as a tool which leads to the clarification or simplification of programming problems. He should integrate his discovery of new mathematical ideas with the solution of programming problems. I will now discuss certain mathematical ideas which naturally arise in computer science courses and cite relevant examples which will hopefully convince the reader that these ideas are worthy of formal study. Suggestions are then offered regarding the inclusion of these studies in the four-year computer science curriculum.
+Author keywords: 
+Index keywords: Computation theory; Curricula; Formal languages; Mathematical programming; Problem oriented languages; Program debugging; Structured programming; Students; Teaching; Acceptable performance; Algorithm analysis; Colleges and universities; Graduate schools; Mathematical approach; Mathematical method; Performance measurements; Problem-solving; Program correctness; Programming problem; Graph theory
+Document type: Conference paper
+Conference: 
+Source title: Proceedings of the 8th SIGCSE Technical Symposium on Computer Science Education, SIGCSE 1977
+Year: 1977
+EID: 2-s2.0-85032447825
+DOI: 10.1145/382175.803433
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

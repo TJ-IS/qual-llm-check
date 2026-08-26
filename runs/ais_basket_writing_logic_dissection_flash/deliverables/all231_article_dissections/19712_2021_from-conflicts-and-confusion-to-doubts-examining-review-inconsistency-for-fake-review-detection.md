@@ -1,0 +1,1697 @@
+# From conflicts and confusion to doubts: Examining review inconsistency for fake review detection
+
+- 作者：Guohou Shan; Lina Zhou; Dongsong Zhang
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113513
+- 源文件：19712_2021_from-conflicts-and-confusion-to-doubts-examining-review-inconsistency-for-fake-review-detection.md
+- 论文主类型：theory_derived_artifact_experiment
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：在线评论中的“评论不一致”（rating-内容情感、内容、语言三个维度）是否普遍存在，将其作为特征能否提升虚假评论检测性能？
+
+- 制品与设计：一个包含22个不一致特征（分为rating-内容情感不一致、内容不一致、语言不一致三类）的虚假评论检测系统。不一致特征通过z-score标准化绝对偏差的方式定量刻画同一评论内、同产品同星级评论间、同一评论者同星级评论间的不一致程度，并与原有言语/非言语特征共同作为多种分类器的输入。
+
+- 客观结果：所有22个不一致特征均显著存在；虚假评论的rating-内容不一致显著高于真实评论，部分内容/语言不一致也更高；加入不一致特征后，5种分类器的准确率、精确率、召回率和F值在Yelp真实数据上均显著提升，RF+全部不一致特征达到最高F=0.932。
+
+- 核心贡献：提出三类评论不一致并实证检验其存在性；首次将Truth-Default Theory、Leakage theory和Attitude-behavior consistency theory引入虚假评论检测场景，解释不一致为何能作为欺骗线索；证明将不一致特征纳入自动检测模型可显著提升性能。
+
+- 整篇论证链：论文从消费者会因评论内部或评论间的不一致而产生困惑这一现象出发，将不一致概念化为rating-内容情感不一致、内容不一致和语言不一致三类，并基于欺骗理论、态度-行为一致性理论提出不一致在虚假评论中更明显且有助于检测的假设；随后在Yelp真实评论数据上，先用单样本t检验确认三类不一致普遍存在，再用ANCOVA/MANOVA比较虚假与真实评论的不一致水平，最后用5种分类器和5种特征组合的对比实验检验不一致特征对检测性能的提升，并通过敏感性分析和稳健性检验确定关键特征并排除相关性干扰；结果一致支持假设，从而将局部特征增益提升为对欺骗理论和在线评论可信度的理论贡献。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章从Truth-Default Theory、Leakage theory和Attitude-behavior consistency theory出发，推导出虚假评论更可能表现出三种不一致并因此更可检测的假设；随后将这些理论构念转化为可计算的不一致特征，构建传统机器学习检测系统进行实验验证。核心论证是理论推导出的变量关系通过实验检验，而不是纯粹的benchmark或设计科学研究。
+
+- 主导写作弧线判定：文章从现实问题（评论不一致令消费者困惑）出发，引入理论（欺骗与态度-行为一致性）推导假设，将假设转化为具体的特征设计，然后通过真实数据上的统计和分类实验加以检验，最后在讨论中回到理论贡献和局限，形成完整的问题—理论—设计—检验—返回理论的闭环。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：从问题概念化到测量设计，再到数据收集，然后依次通过统计验证不一致的存在性、组间差异、检测性能增益，最后进行特征重要性与稳健性检验。
+
+### studies_or_phases
+
+#### 1. 理论概念化与不一致分类
+
+- order：1
+
+- name_cn：理论概念化与不一致分类
+
+- question_cn：评论不一致是什么？有哪些类型？它是否可以作为虚假评论的线索？
+
+- inputs_and_setting_cn：理论文献（Truth-Default Theory、Leakage theory、Attitude-behavior consistency theory）和OCR结构的常识。
+
+- designed_or_compared_object_cn：提出三种不一致类型的概念定义。
+
+- baseline_control_or_counterfactual_cn：无；概念性工作。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念分析、理论推导。
+
+- main_result_cn：给出三类不一致的操作定义、存在性命题以及H1/H2假设。
+
+- argumentative_role_cn：为后续测量和检验提供概念与理论基础。
+
+- remaining_uncertainty_cn：概念是否能在真实数据中测量、是否真的存在和有效。
+
+- link_to_next_phase_cn：需要将概念转化为可计算的特征和操作化公式。
+
+##### evidence_pointers
+
+1. Section 3, 研究假设；Proposition和H1/H2
+
+#### 2. 特征设计与测量开发
+
+- order：2
+
+- name_cn：特征设计与测量开发
+
+- question_cn：如何用可计算特征量化三类不一致？
+
+- inputs_and_setting_cn：Yelp评论的文本和评分；SentiWordNet词典；已有文献中的内容与语言风格特征（Table 2）。
+
+- designed_or_compared_object_cn：22个不一致特征；公式(1) rating-sentiment inconsistency，公式(2) content inconsistency，公式(3) language inconsistency。
+
+- baseline_control_or_counterfactual_cn：无（特征本身）。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：z-score标准化偏差、均值/标准差偏离度计算。
+
+- main_result_cn：得到三类不一致特征的具体定义和计算方法。
+
+- argumentative_role_cn：将理论构念转译为可输入模型的特征工程制品。
+
+- remaining_uncertainty_cn：特征是否确实能测到不一致、是否与虚假评论相关。
+
+- link_to_next_phase_cn：需要真实标签数据来估计特征分布并检验假设。
+
+##### evidence_pointers
+
+1. Section 4.2.3, Eq. (1)-(3)
+
+2. Table 2
+
+#### 3. 数据集构建
+
+- order：3
+
+- name_cn：数据集构建
+
+- question_cn：能否获得真实场景下带可信标签的虚假评论数据？
+
+- inputs_and_setting_cn：Yelp.com的24,539条餐馆评论（11,641真实，12,898虚假），包含reviewer id、star rating、review content、review labels。
+
+- designed_or_compared_object_cn：真实世界Yelp过滤系统标签。
+
+- baseline_control_or_counterfactual_cn：不采用伪虚假评论（人工标注或AMT生成）作为反事实。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：数据收集与描述统计（图1）。
+
+- main_result_cn：获得大量真实标注评论；多数reviewer有多个评论，支持语言不一致分析。
+
+- argumentative_role_cn：提供经验检验的数据基础，避免伪标签的偏差。
+
+- remaining_uncertainty_cn：Yelp标签可能有噪音；只限餐馆领域。
+
+- link_to_next_phase_cn：用该数据计算不一致特征并检验存在性和差异。
+
+##### evidence_pointers
+
+1. Section 4.1, 数据集描述
+
+2. Fig. 1
+
+#### 4. 存在性检验
+
+- order：4
+
+- name_cn：存在性检验
+
+- question_cn：三类不一致在真实OCR中是否显著存在？
+
+- inputs_and_setting_cn：计算出的22个不一致特征向量。
+
+- designed_or_compared_object_cn：每个特征与0比较（无不一致）。
+
+- baseline_control_or_counterfactual_cn：0（完全一致）。
+
+##### objective_metrics
+
+1. t statistic
+
+2. p值
+
+- analysis_method_cn：单样本t检验，假定均值为0。
+
+- main_result_cn：所有22个特征均值显著大于0（p<0.001），证明不一致普遍存在。
+
+- argumentative_role_cn：验证概念的现实基础，回答RQ1。
+
+- remaining_uncertainty_cn：存在性不等于能区分虚假评论。
+
+- link_to_next_phase_cn：比较虚假与真实评论的不一致水平，检验H1。
+
+##### evidence_pointers
+
+1. Section 6.1, Table 4
+
+#### 5. 虚假与真实差异检验
+
+- order：5
+
+- name_cn：虚假与真实差异检验
+
+- question_cn：虚假评论是否比真实评论显示更大的不一致？
+
+- inputs_and_setting_cn：不一致特征、评论真实性标签。
+
+- designed_or_compared_object_cn：虚假 vs 真实 OCRs。
+
+- baseline_control_or_counterfactual_cn：真实评论组。
+
+##### objective_metrics
+
+1. F statistic
+
+2. p值
+
+- analysis_method_cn：ANCOVA（RSI）、MANOVA（CI/LI）。
+
+- main_result_cn：RSI显著更高；CI除个人代词计数外全部显著更高；LI有8个特征显著更高；因此H1(a)支持，H1(b/c)部分支持。
+
+- argumentative_role_cn：为不一致作为欺骗线索提供直接证据，建立特征有效性的组间效应。
+
+- remaining_uncertainty_cn：组间差异不一定转化为分类性能的提升。
+
+- link_to_next_phase_cn：检验加入不一致特征后检测模型的性能增益。
+
+##### evidence_pointers
+
+1. Section 6.2, Table 5
+
+#### 6. 检测性能增益
+
+- order：6
+
+- name_cn：检测性能增益
+
+- question_cn：将不一致特征加入模型是否能提升虚假评论检测性能？
+
+- inputs_and_setting_cn：基线特征（Tables 2/3，来自Zhang et al. 2016）、不一致特征、5种分类器（RF, CART, SVM, NB, MLPNN）。
+
+- designed_or_compared_object_cn：5种特征组合：B0, RSI, CI, LI, AI。
+
+- baseline_control_or_counterfactual_cn：B0（不含不一致特征）。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F-score
+
+- analysis_method_cn：10折交叉验证，配对样本t检验比较模型性能。
+
+- main_result_cn：所有加入不一致特征的模型在大多数指标上显著优于baseline；AI+RF达到最佳F=0.932；H2(a/b/c)全部支持。
+
+- argumentative_role_cn：核心实证贡献，证明不一致特征的增量价值。
+
+- remaining_uncertainty_cn：哪些特征最重要？相关性是否影响结论？
+
+- link_to_next_phase_cn：通过敏感性分析和稳健性检验明确特征重要性与可靠性。
+
+##### evidence_pointers
+
+1. Section 6.3, Table 6, Fig. 3
+
+#### 7. 特征重要性与稳健性检验
+
+- order：7
+
+- name_cn：特征重要性与稳健性检验
+
+- question_cn：哪些不一致特征对检测最重要？特征相关性和异常值是否影响结论？
+
+- inputs_and_setting_cn：最佳RF模型（AI），所有特征中的不一致子集；Pearson相关矩阵。
+
+- designed_or_compared_object_cn：特征重要性排序；移除高相关特征前后性能对比。
+
+- baseline_control_or_counterfactual_cn：全特征模型。
+
+##### objective_metrics
+
+1. importance scores
+
+2. 性能差异显著性
+
+- analysis_method_cn：post-modeling敏感性分析（VarImp）、Pearson相关分析、移除低重要高相关特征后的性能对比、boxplot观察异常值。
+
+- main_result_cn：rating-sentiment不一致最重要；三类特征均进入top-30；大部分特征相关不显著；移除相关特征后性能无显著变化；boxplot显示不一致存在。
+
+- argumentative_role_cn：加固特征贡献的稳健性，防止贡献被解释为偶然。
+
+- remaining_uncertainty_cn：未在其他领域/平台验证；深度学习中是否有效未知。
+
+- link_to_next_phase_cn：在讨论中界定边界和未来研究。
+
+##### evidence_pointers
+
+1. Section 6.4, Table 7; Section 6.5, Fig. 4; Section 6.6, Figs. 5-6, Tables 8-9
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. RQ_OR_OBJECTIVE
+
+4. THEORY_INTRO
+
+5. METHOD_JUSTIFICATION
+
+6. RESULT
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. RQ_OR_OBJECTIVE
+
+5. GAP
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. CONTRIBUTION
+
+9. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. THEORY_INTRO
+
+4. THEORY_PROPOSITION
+
+5. MECHANISM
+
+6. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. METHOD_JUSTIFICATION
+
+2. DESIGN_FEATURE
+
+3. DESIGN_FEATURE
+
+4. DESIGN_FEATURE
+
+5. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. BENCHMARK_OR_CONTRAST
+
+4. METHOD_JUSTIFICATION
+
+5. RESULT
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. CONTRIBUTION
+
+3. CONTRIBUTION
+
+4. CONTRIBUTION
+
+5. BOUNDARY_CONDITION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Truth-Default Theory (Levine, 2014)
+
+2. Leakage theory of deception (Ekman & Friesen, 1969)
+
+3. Attitude-behavior consistency theory (Fazio & Zanna, 1981)
+
+4. 信息质量/信息操纵理论 (McCornack, 1992; Wang & Strong, 1996)
+
+5. 已有虚假评论检测特征体系 (Zhang et al., 2016)
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：理论提供了不一致概念化的方向和预期作用（H1/H2），但具体22个特征的内容、计算方式和基线特征多继承自以往情感/语言特征工程文献（如Zhang et al. 2016），并非严格由理论逐条推演而来。
+
+- 理论到设计翻译链：Truth-Default Theory的coherence原则→同一评论内rating与内容应一致→rating-sentiment不一致操作化为z-score差值；coherence原则跨评论→同星级同产品内容应一致→内容不一致；Attitude-behavior consistency理论→同星级同reviewer语言行为应一致→语言不一致；deception的leakage观点→不一致是欺骗泄漏线索→将三类不一致作为预测特征→用模型检验增量价值。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：Truth-Default Theory的coherence原则：真实信息应内部一致；correspondence原则：描述应与事实对应。
+
+- mechanism_cn：虚假评论者因缺乏真实体验，容易在rating和内容之间、不同评论之间出现逻辑不一致，这种不一致会泄漏欺骗。
+
+- design_requirement_cn：需要刻画同一评论、同产品同星级、同reviewer同星级等情境下的一致程度。
+
+- artifact_choice_cn：定义rating-sentiment inconsistency、content inconsistency、language inconsistency，并用z-score绝对偏差度量。
+
+- evaluated_contrast_cn：虚假与真实评论的各类不一致水平；加入/不加入不一致特征模型的性能。
+
+- objective_result_cn：RSI显著更高；CI/LI部分显著更高；模型性能显著提升。
+
+##### evidence_pointers
+
+1. Section 3, H1/H2; Table 4-6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：Attitude-behavior consistency theory：态度决定行为，相同态度应伴随一致行为。
+
+- mechanism_cn：虚假评论者动机不同，为伪造经验可能套用模板/复制内容，导致语言风格漂移，从而破坏态度-行为一致性。
+
+- design_requirement_cn：比较同一reviewer在同星级评论中语言特征的稳定性。
+
+- artifact_choice_cn：15个语言风格特征的偏离度（如review length, lexical diversity等）作为语言不一致操作化。
+
+- evaluated_contrast_cn：虚假vs真实评论的语言不一致水平。
+
+- objective_result_cn：8个语言不一致特征显著高于真实评论。
+
+##### evidence_pointers
+
+1. Table 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：Leakage theory和欺骗研究：欺骗与不一致正相关，跨模态不一致可泄露真实情绪。
+
+- mechanism_cn：不一致作为欺骗线索可以增强分类器对虚假评论的辨别力。
+
+- design_requirement_cn：将不一致特征作为判别性输入纳入自动检测模型，而非仅作描述统计。
+
+- artifact_choice_cn：将22个不一致特征加入基线特征集，作为分类器输入，设置B0/RSI/CI/LI/AI组合。
+
+- evaluated_contrast_cn：B0 vs RSI/CI/LI/AI在5种分类器上的性能比较。
+
+- objective_result_cn：所有增量组合显著提升准确率、精确率、召回率和F-score。
+
+##### evidence_pointers
+
+1. Table 6
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. one-sample t-test
+
+2. ANCOVA
+
+3. MANOVA
+
+4. classification performance comparison with paired-sample t-test
+
+5. post-model sensitivity analysis
+
+6. Pearson correlation analysis
+
+7. boxplot visualization
+
+- why_these_evaluations_cn：需要依次回答：不一致是否存在；虚假与真实是否有差异；加入特征是否能提升分类性能；哪些特征重要；结论是否稳健。
+
+- benchmark_and_contrast_chain_cn：先验证特征自身非零，再验证组间差异，然后以Zhang et al. 2016的基线特征为对照，逐步加入RSI/CI/LI/AI形成5种输入集，用5种分类器交叉验证比较；最后用敏感性和相关性检验保护结论。
+
+### claim_evidence_ledger
+
+#### 1. 加入不一致特征能显著提升多种分类模型在Yelp虚假评论检测上的准确率、精确率、召回率和F。
+
+- claim_type_cn：技术主张
+
+- claim_cn：加入不一致特征能显著提升多种分类模型在Yelp虚假评论检测上的准确率、精确率、召回率和F。
+
+- evidence_cn：Table 6中RSI/CI/LI/AI行相对于B0的配对t检验显著性标记；几乎所有指标p<0.05。
+
+- adequate_cn：充分
+
+#### 2. 三类22个不一致特征作为可计算的操作化是检测性能提升的来源。
+
+- claim_type_cn：制品主张
+
+- claim_cn：三类22个不一致特征作为可计算的操作化是检测性能提升的来源。
+
+- evidence_cn：Table 6中CI/LI/RSI单独加入均显著提升；Table 7敏感性显示多个不一致特征进入top-30。
+
+- adequate_cn：较充分，但未单独消融每个特征，仅按类型组合
+
+#### 3. 不一致反映了欺骗者因缺乏真实体验/态度-行为脱节而产生的逻辑和语言泄漏，因此对虚假评论是有效线索。
+
+- claim_type_cn：机制主张
+
+- claim_cn：不一致反映了欺骗者因缺乏真实体验/态度-行为脱节而产生的逻辑和语言泄漏，因此对虚假评论是有效线索。
+
+- evidence_cn：H1检验显示虚假评论的不一致水平更高（ANCOVA/MANOVA）。
+
+- adequate_cn：间接支持，未直接测量心理机制
+
+#### 4. 在Yelp餐厅评论、本地商家/预订服务领域、传统机器学习分类器中成立。
+
+- claim_type_cn：边界主张
+
+- claim_cn：在Yelp餐厅评论、本地商家/预订服务领域、传统机器学习分类器中成立。
+
+- evidence_cn：数据集来自Yelp.com餐厅评论；只使用传统ML分类器。
+
+- adequate_cn：边界清晰，但未验证其他平台
+
+#### 5. 可从评分、内容特征和语言风格三方面定义归一化偏差；将不一致特征作为增量输入可改进检测器；优先使用rating-sentiment不一致和名词比例不一致。
+
+- claim_type_cn：可复用设计知识
+
+- claim_cn：可从评分、内容特征和语言风格三方面定义归一化偏差；将不一致特征作为增量输入可改进检测器；优先使用rating-sentiment不一致和名词比例不一致。
+
+- evidence_cn：敏感性分析显示rating_sentiment_incon和noun_ratio_incon重要性最高；Table 7。
+
+- adequate_cn：充分
+
+#### 6. 扩展Truth-Default Theory到OCR不一致情境，为Leakage theory提供经验证据，并通过语言不一致支持Attitude-behavior consistency theory。
+
+- claim_type_cn：理论贡献
+
+- claim_cn：扩展Truth-Default Theory到OCR不一致情境，为Leakage theory提供经验证据，并通过语言不一致支持Attitude-behavior consistency theory。
+
+- evidence_cn：H1/H2结果在讨论中被重新解释为理论机制。
+
+- adequate_cn：理论贡献依据是间接的，解释性而非确证性
+
+- internal_validity_strategy_cn：使用真实Yelp过滤标签而非人工/AMT伪评论；10折交叉验证重复10次；同一数据集和预处理流程；配对t检验比较模型；控制基线特征；移除高相关特征后重新评估性能以排除多重共线性干扰。
+
+- external_validity_strategy_cn：使用真实在线评论而非实验室生成评论；Yelp是主流平台且样本量大；与以往使用Yelp数据的研究（如Zhang et al. 2016）可比较。
+
+- what_is_not_actually_tested_cn：未在其他平台/产品领域检验；未在深度神经网络嵌入表示中验证；未直接考察消费者困惑或购买决策的中介；Yelp过滤器标签的真实性未做人工审计；部分LI特征不显著却仍被归入整体贡献。
+
+## 贡献闭环
+
+- technical_claim_cn：加入不一致特征能显著提升多种分类模型在Yelp虚假评论检测上的准确率、精确率、召回率和F。
+
+- artifact_claim_cn：三类22个不一致特征作为可计算的操作化，是检测性能提升的来源。
+
+- mechanism_claim_cn：不一致反映了欺骗者因缺乏真实体验或态度-行为脱节而产生的逻辑和语言泄漏，因此对虚假评论是有效线索。
+
+- boundary_claim_cn：在Yelp餐厅评论、本地商家/预订服务领域、传统机器学习分类器中成立；未确认在其他平台、产品、深度学习表示下的普适性。
+
+- reusable_design_knowledge_cn：可从评分、内容特征和语言风格三方面定义归一化偏差作为不一致的度量；将不一致特征作为增量输入可改进检测器；建议优先使用rating-sentiment不一致和名词比例不一致，因为它们贡献最大。
+
+- theoretical_contribution_cn：首次将Truth-Default Theory（coherence/correspondence）应用于OCR不一致情境，为Leakage theory提供新的经验证据，并通过语言不一致给Attitude-behavior consistency theory提供支持。
+
+- how_discussion_closes_intro_gap_cn：引言指出缺乏对不一致的系统研究和实证证据，讨论通过总结三类不一致的存在、差异和检测增益，直接回答了两个RQ，并明确将贡献定位为对欺骗理论的扩展和检测手段的改进，从而闭合缺口。
+
+- overclaim_or_unsupported_leaps_cn：将Yelp单一领域的结果外推至一般OCR；H1(c)仅部分支持却在讨论中被淡化，整体宣称语言不一致有效；Yelp过滤器标签作为真实标签可能带有平台自身偏差；理论解释是事后归因，未直接操纵心理机制。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在线评论中，星级评分和文本内容构成主要信息，但不一致可能给消费者带来不确定性和困惑。
+
+- rhetorical_function_cn：建立研究现象和现实意义。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出被研究的问题。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P1 S3
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有文献对评论不一致缺乏系统、实证的研究。
+
+- rhetorical_function_cn：指出现有知识的缺口。
+
+- depends_on_cn：前面的上下文
+
+- sets_up_cn：文献缺口。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：本研究从欺骗和态度-行为一致性理论出发，刻画不一致并提出假设。
+
+- rhetorical_function_cn：说明理论框架。
+
+- depends_on_cn：缺口
+
+- sets_up_cn：理论框架。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P2 S2-S3
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P2 S2-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：基于真实评论的机器学习实验确认了不一致的存在并显著提升检测性能。
+
+- rhetorical_function_cn：报告核心结论。
+
+- depends_on_cn：假设和实验
+
+- sets_up_cn：展示贡献。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P3
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究对消费者决策有效性和OCR可信度有启示。
+
+- rhetorical_function_cn：声明研究意义。
+
+- depends_on_cn：结果
+
+- sets_up_cn：实践意义。
+
+- evidence_pointer：Abstract
+
+### 6. Introduction P1 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：OCR通常由星级评分和文本内容组成，是第三方产品信息，能帮助消费者减少不确定性。
+
+- rhetorical_function_cn：建立OCR的背景和正面作用。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出不一致的负面作用。
+
+- evidence_pointer：Introduction P1
+
+### 7. Introduction P2 S1-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：给出三个同为1星但内容情感、特征和语言风格差异明显的Yelp评论例子。
+
+- rhetorical_function_cn：用具体例子展示不一致现象。
+
+- depends_on_cn：前面的OCR定义
+
+- sets_up_cn：具体展示消费者困惑的来源。
+
+- evidence_pointer：Introduction P2
+
+### 8. Introduction P2 S4
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：这些不一致会妨碍消费者评估产品，甚至产生困惑。
+
+- rhetorical_function_cn：说明现实后果。
+
+- depends_on_cn：三个例子
+
+- sets_up_cn：研究动机。
+
+- evidence_pointer：Introduction P2
+
+### 9. Introduction P3 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：定义评论不一致为OCR内或OCR间在某一维度上的不一致或冲突。
+
+- rhetorical_function_cn：给出核心概念的操作性定义。
+
+- depends_on_cn：现象
+
+- sets_up_cn：概念基础。
+
+- evidence_pointer：Introduction P3
+
+### 10. Introduction P4 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出三类不一致：rating-内容情感、内容、语言。
+
+- rhetorical_function_cn：将不一致概念细分为可操作的类型。
+
+- depends_on_cn：定义
+
+- sets_up_cn：后文研究假设。
+
+- evidence_pointer：Introduction P4
+
+### 11. Introduction P5 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P5 S2
+
+- move_code：GAP
+
+- paraphrase_cn：已有自动检测虚假评论研究没有关注不一致的作用，缺乏理论和实证。
+
+- rhetorical_function_cn：指出现有检测研究的空白。
+
+- depends_on_cn：虚假评论背景
+
+- sets_up_cn：本研究定位。
+
+- evidence_pointer：Introduction P5
+
+### 12. Introduction P6 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出两个研究问题：不一致有多普遍？是否有助于检测？
+
+- rhetorical_function_cn：把缺口转化为清晰的研究问题。
+
+- depends_on_cn：缺口
+
+- sets_up_cn：研究设计。
+
+- evidence_pointer：Introduction P6
+
+### 13. Introduction P7 S1-S3
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P7 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究提出并验证三类不一致，首次用欺骗理论解释，并提升自动检测。
+
+- rhetorical_function_cn：预告贡献。
+
+- depends_on_cn：研究问题和结果
+
+- sets_up_cn：贡献声明。
+
+- evidence_pointer：Introduction P7
+
+### 14. Introduction P8
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P8
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：预告论文组织结构。
+
+- rhetorical_function_cn：为读者提供阅读路径。
+
+- depends_on_cn：无
+
+- sets_up_cn：后续章节展开。
+
+- evidence_pointer：Introduction P8
+
+### 15. Section 2.1 P1-P2
+
+- order：15
+
+- section：Related Work
+
+- locator：Section 2.1 P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究广泛探索星级评分及其对销量、帮助性和评分行为的影响。
+
+- rhetorical_function_cn：总结星级评分研究现状。
+
+- depends_on_cn：无
+
+- sets_up_cn：指出此领域未涉及不一致。
+
+- evidence_pointer：Section 2.1
+
+### 16. Section 2.2 P1-P2
+
+- order：16
+
+- section：Related Work
+
+- locator：Section 2.2 P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：情感分析方法分为四类，各有优劣。
+
+- rhetorical_function_cn：概述情感分析方法。
+
+- depends_on_cn：无
+
+- sets_up_cn：为选择SentiWordNet提供背景。
+
+- evidence_pointer：Section 2.2, Table 1
+
+### 17. Section 2.3 P1
+
+- order：17
+
+- section：Related Work
+
+- locator：Section 2.3 P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：内容与语言风格特征广泛用于预测评论帮助性和检测虚假评论。
+
+- rhetorical_function_cn：总结内容/语言特征的应用。
+
+- depends_on_cn：无
+
+- sets_up_cn：说明特征工程传统。
+
+- evidence_pointer：Section 2.3
+
+### 18. Section 2.3 P2 last sentence
+
+- order：18
+
+- section：Related Work
+
+- locator：Section 2.3 P2 last sentence
+
+- move_code：GAP
+
+- paraphrase_cn：但很少有研究实证调查内容与语言风格的不一致。
+
+- rhetorical_function_cn：在综述中标记具体缺口。
+
+- depends_on_cn：前述特征研究
+
+- sets_up_cn：明确缺口之一。
+
+- evidence_pointer：Section 2.3
+
+### 19. Section 2.4 P1
+
+- order：19
+
+- section：Related Work
+
+- locator：Section 2.4 P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：虚假评论检测方法可分为机器学习与非机器学习，前者为主。
+
+- rhetorical_function_cn：概述虚假评论检测方法。
+
+- depends_on_cn：无
+
+- sets_up_cn：定位本文方法。
+
+- evidence_pointer：Section 2.4
+
+### 20. Section 2.4 last sentence
+
+- order：20
+
+- section：Related Work
+
+- locator：Section 2.4 last sentence
+
+- move_code：GAP
+
+- paraphrase_cn：在特征来源中，星级和内容最常用，但从未有不一致角度的研究。
+
+- rhetorical_function_cn：直接点出不一致特征的空白。
+
+- depends_on_cn：特征来源综述
+
+- sets_up_cn：引出本文gap。
+
+- evidence_pointer：Section 2.4
+
+### 21. Section 3 P4
+
+- order：21
+
+- section：Research Hypotheses
+
+- locator：Section 3 P4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入Truth-Default Theory的对应与一致原则。
+
+- rhetorical_function_cn：为假设提供理论基础。
+
+- depends_on_cn：前述不一致分类
+
+- sets_up_cn：推导H1。
+
+- evidence_pointer：Section 3
+
+### 22. Section 3 P5
+
+- order：22
+
+- section：Research Hypotheses
+
+- locator：Section 3 P5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：虚假评论者可能用极端评分吸引注意却表达中性或相反情感，因此不一致更高。
+
+- rhetorical_function_cn：解释不一致为何在虚假评论中更明显。
+
+- depends_on_cn：Truth-Default Theory
+
+- sets_up_cn：H1的具体预期。
+
+- evidence_pointer：Section 3
+
+### 23. Section 3 P6
+
+- order：23
+
+- section：Research Hypotheses
+
+- locator：Section 3 P6
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入态度-行为一致性理论说明同星级应伴随一致的语言行为。
+
+- rhetorical_function_cn：为语言不一致提供理论依据。
+
+- depends_on_cn：无
+
+- sets_up_cn：语言不一致假设。
+
+- evidence_pointer：Section 3
+
+### 24. Section 3 P7
+
+- order：24
+
+- section：Research Hypotheses
+
+- locator：Section 3 P7
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：提出H1：虚假评论在三个不一致类型上均比真实评论更大。
+
+- rhetorical_function_cn：明确可检验假设。
+
+- depends_on_cn：两条机制
+
+- sets_up_cn：后续组间比较检验。
+
+- evidence_pointer：Section 3
+
+### 25. Section 3 P8
+
+- order：25
+
+- section：Research Hypotheses
+
+- locator：Section 3 P8
+
+- move_code：MECHANISM
+
+- paraphrase_cn：欺骗通常与不一致正相关，泄漏观点和跨模态不一致可透露欺骗。
+
+- rhetorical_function_cn：将不一致与欺骗检测直接连接。
+
+- depends_on_cn：欺骗文献
+
+- sets_up_cn：H2。
+
+- evidence_pointer：Section 3
+
+### 26. Section 3 P9
+
+- order：26
+
+- section：Research Hypotheses
+
+- locator：Section 3 P9
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：提出H2：加入三类不一致特征会提升检测性能。
+
+- rhetorical_function_cn：明确性能改进假设。
+
+- depends_on_cn：信息操纵/质量推理
+
+- sets_up_cn：评价部分。
+
+- evidence_pointer：Section 3
+
+### 27. Section 4.1 P1-P2
+
+- order：27
+
+- section：Method
+
+- locator：Section 4.1 P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：伪虚假评论不能代表真实欺骗者，因此使用Yelp真实过滤标签。
+
+- rhetorical_function_cn：为数据选择辩护。
+
+- depends_on_cn：缺口
+
+- sets_up_cn：数据来源。
+
+- evidence_pointer：Section 4.1
+
+### 28. Section 4.2 P1 (Fig. 2)
+
+- order：28
+
+- section：Method
+
+- locator：Section 4.2 P1 (Fig. 2)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：系统由特征提取、不一致分析、模型开发和敏感性分析四部分组成。
+
+- rhetorical_function_cn：给出系统架构总览。
+
+- depends_on_cn：研究方法
+
+- sets_up_cn：后文细节。
+
+- evidence_pointer：Section 4.2, Fig. 2
+
+### 29. Section 4.2.1 P1
+
+- order：29
+
+- section：Method
+
+- locator：Section 4.2.1 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：情感分析采用SentiWordNet词典法，因为准确率高且无需训练数据。
+
+- rhetorical_function_cn：为情感工具选择辩护。
+
+- depends_on_cn：Table 1
+
+- sets_up_cn：情感特征提取。
+
+- evidence_pointer：Section 4.2.1
+
+### 30. Section 4.2.2 P1
+
+- order：30
+
+- section：Method
+
+- locator：Section 4.2.2 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：内容特征和语言风格特征按表2选取。
+
+- rhetorical_function_cn：确定基础特征集合。
+
+- depends_on_cn：以往特征工程
+
+- sets_up_cn：不一致计算的基础特征。
+
+- evidence_pointer：Section 4.2.2, Table 2
+
+### 31. Section 4.2.3 Eq. (1)-(3)
+
+- order：31
+
+- section：Method
+
+- locator：Section 4.2.3 Eq. (1)-(3)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用公式(1)-(3)分别将rating-内容情感、内容、语言不一致定义为z-score绝对偏差。
+
+- rhetorical_function_cn：提供可计算的操作化公式。
+
+- depends_on_cn：概念定义
+
+- sets_up_cn：生成22个特征。
+
+- evidence_pointer：Section 4.2.3, Eqs. (1)-(3)
+
+### 32. Section 4.2.4 P1-P2
+
+- order：32
+
+- section：Method
+
+- locator：Section 4.2.4 P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用SVM、NB、CART、RF、MLPNN五种分类器，而不用深度学习，因为黑盒不利于解释特征作用。
+
+- rhetorical_function_cn：说明分类器选择及排除深度学习的理由。
+
+- depends_on_cn：研究目标
+
+- sets_up_cn：性能对比实验。
+
+- evidence_pointer：Section 4.2.4
+
+### 33. Section 4.2.5 P2
+
+- order：33
+
+- section：Method
+
+- locator：Section 4.2.5 P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用事后敏感性分析VarImp识别特征重要性。
+
+- rhetorical_function_cn：说明特征重要性分析方法。
+
+- depends_on_cn：已训练模型
+
+- sets_up_cn：特征排序。
+
+- evidence_pointer：Section 4.2.5
+
+### 34. Section 5 P2
+
+- order：34
+
+- section：Evaluation
+
+- locator：Section 5 P2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：以Zhang et al. (2016)的特征为基线，因为它全面、代表当时最先进，并同样使用Yelp数据。
+
+- rhetorical_function_cn：选择对照基准。
+
+- depends_on_cn：需要对照
+
+- sets_up_cn：定义输入组合。
+
+- evidence_pointer：Section 5
+
+### 35. Section 5 P3
+
+- order：35
+
+- section：Evaluation
+
+- locator：Section 5 P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：定义B0、RSI、CI、LI、AI五种输入设置，以分别检验各类型和整体效果。
+
+- rhetorical_function_cn：建立增量化比较设计。
+
+- depends_on_cn：基线选择
+
+- sets_up_cn：模型对比实验。
+
+- evidence_pointer：Section 5
+
+### 36. Section 5 P4
+
+- order：36
+
+- section：Evaluation
+
+- locator：Section 5 P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过10折交叉验证并重复10次报告平均性能。
+
+- rhetorical_function_cn：说明性能评估程序。
+
+- depends_on_cn：性能对比需要可靠估计
+
+- sets_up_cn：统计检验。
+
+- evidence_pointer：Section 5
+
+### 37. Section 6.1, Table 4
+
+- order：37
+
+- section：Analyses and Results
+
+- locator：Section 6.1, Table 4
+
+- move_code：RESULT
+
+- paraphrase_cn：单样本t检验显示所有22个不一致特征显著非零。
+
+- rhetorical_function_cn：验证不一致的存在性。
+
+- depends_on_cn：特征计算
+
+- sets_up_cn：回答RQ1。
+
+- evidence_pointer：Section 6.1, Table 4
+
+### 38. Section 6.2, Table 5
+
+- order：38
+
+- section：Analyses and Results
+
+- locator：Section 6.2, Table 5
+
+- move_code：RESULT
+
+- paraphrase_cn：ANCOVA显示虚假评论RSI显著高于真实；MANOVA显示多数CI和部分LI显著更高。
+
+- rhetorical_function_cn：检验H1的组间差异。
+
+- depends_on_cn：存在性
+
+- sets_up_cn：H1支持情况。
+
+- evidence_pointer：Section 6.2, Table 5
+
+### 39. Section 6.2 last sentence
+
+- order：39
+
+- section：Analyses and Results
+
+- locator：Section 6.2 last sentence
+
+- move_code：RESULT
+
+- paraphrase_cn：因此H1(a)支持，H1(b)和H1(c)部分支持。
+
+- rhetorical_function_cn：明确假设检验结论。
+
+- depends_on_cn：表5
+
+- sets_up_cn：为H2做铺垫。
+
+- evidence_pointer：Section 6.2
+
+### 40. Section 6.3, Table 6, Fig. 3
+
+- order：40
+
+- section：Analyses and Results
+
+- locator：Section 6.3, Table 6, Fig. 3
+
+- move_code：RESULT
+
+- paraphrase_cn：加入三类不一致特征的各模型大多显著优于基线，AI+RF最优（F=0.932）。
+
+- rhetorical_function_cn：报告检测性能提升结果。
+
+- depends_on_cn：特征组合
+
+- sets_up_cn：H2支持。
+
+- evidence_pointer：Section 6.3, Table 6
+
+### 41. Section 6.3 last sentence
+
+- order：41
+
+- section：Analyses and Results
+
+- locator：Section 6.3 last sentence
+
+- move_code：RESULT
+
+- paraphrase_cn：H2(a)、(b)、(c)全部获得支持。
+
+- rhetorical_function_cn：明确H2检验结论。
+
+- depends_on_cn：表6
+
+- sets_up_cn：贡献。
+
+- evidence_pointer：Section 6.3
+
+### 42. Section 6.4, Table 7
+
+- order：42
+
+- section：Analyses and Results
+
+- locator：Section 6.4, Table 7
+
+- move_code：RESULT
+
+- paraphrase_cn：敏感性分析显示rating-sentiment不一致最重要，三类特征都进入top-30。
+
+- rhetorical_function_cn：报告特征重要性排序。
+
+- depends_on_cn：最佳模型
+
+- sets_up_cn：特征重要性结论。
+
+- evidence_pointer：Section 6.4, Table 7
+
+### 43. Section 6.5, Fig. 4
+
+- order：43
+
+- section：Analyses and Results
+
+- locator：Section 6.5, Fig. 4
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：箱线图展示不同星级下三类不一致的存在与异常值。
+
+- rhetorical_function_cn：用可视化补充验证不一致的存在性。
+
+- depends_on_cn：存在性检验
+
+- sets_up_cn：稳健性说明。
+
+- evidence_pointer：Section 6.5, Fig. 4
+
+### 44. Section 6.6, Tables 8-9
+
+- order：44
+
+- section：Analyses and Results
+
+- locator：Section 6.6, Tables 8-9
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：Pearson相关分析发现多数特征不高度相关，移除高相关低重要特征后性能无显著变化。
+
+- rhetorical_function_cn：排除相关性对结论的干扰。
+
+- depends_on_cn：模型结果
+
+- sets_up_cn：排除混淆。
+
+- evidence_pointer：Section 6.6, Tables 8-9
+
+### 45. Section 7 P1
+
+- order：45
+
+- section：Discussion
+
+- locator：Section 7 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：研究发现三类不一致普遍存在，且显著差异，加入特征提升检测性能。
+
+- rhetorical_function_cn：概括实证发现。
+
+- depends_on_cn：前面所有结果
+
+- sets_up_cn：贡献总结。
+
+- evidence_pointer：Section 7
+
+### 46. Section 7 P3
+
+- order：46
+
+- section：Discussion
+
+- locator：Section 7 P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献一：提出三类不一致并验证其存在，弥补以往仅提及不一致而无实证的不足。
+
+- rhetorical_function_cn：声明概念性贡献。
+
+- depends_on_cn：存在性结果
+
+- sets_up_cn：理论贡献。
+
+- evidence_pointer：Section 7
+
+### 47. Section 7 P4
+
+- order：47
+
+- section：Discussion
+
+- locator：Section 7 P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献二：首次用Truth-Default Theory、Leakage theory和Attitude-behavior consistency理论解释不一致对检测的作用。
+
+- rhetorical_function_cn：声明理论贡献。
+
+- depends_on_cn：H1/H2结果
+
+- sets_up_cn：理论扩展声明。
+
+- evidence_pointer：Section 7
+
+### 48. Section 7 P5
+
+- order：48
+
+- section：Discussion
+
+- locator：Section 7 P5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献三：引入新的可靠特征集提升最先进检测方法。
+
+- rhetorical_function_cn：声明实用贡献。
+
+- depends_on_cn：检测结果
+
+- sets_up_cn：实用贡献。
+
+- evidence_pointer：Section 7
+
+### 49. Section 7 P6
+
+- order：49
+
+- section：Discussion
+
+- locator：Section 7 P6
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限：仅Yelp本地商业/预订服务数据，可能限制推广；未来可扩展到其他平台、产品类型和深度学习特征。
+
+- rhetorical_function_cn：界定范围并指出未来方向。
+
+- depends_on_cn：全部贡献
+
+- sets_up_cn：边界。
+
+- evidence_pointer：Section 7
+
+## 写作技术
+
+- gap_construction_cn：通过“已有特征研究很多，但都没有考虑不一致”的否定句反复构建缺口；先展示不一致的直观例子制造现实困惑，再在文献综述末尾指出三个“none”。以少数提及不一致但未系统研究的文献作为铺垫，突出本文的系统性和实证性。
+
+- signposting_cn：在引言末尾预告五个部分；在方法开头给出Fig. 2系统总览；在每个小节的起始句告诉读者将做什么；在分析部分明确“先验证存在，再检验H1，再检验H2”。
+
+- transition_logic_cn：研究假设末尾设置H1/H2，方法部分直接按特征→模型顺序展开；分析部分按“存在→差异→性能→重要性→稳健性”层层递进；讨论部分重新用“概念→贡献→局限”收束。
+
+- claim_evidence_rhythm_cn：每个假设先给机制推理，再给假设，再在结果中用表格+统计检验对应；在每个结果段落后立即说明支持程度。
+
+- benchmark_narrative_cn：先引述Zhang et al. 2016作为权威且同平台的baseline，再定义B0/RSI/CI/LI/AI，使增量价值可以与SOTA对照；敏感性分析作为benchmark的延伸。
+
+- theory_return_cn：在讨论中将实证发现重新绑定到Truth-Default Theory的coherence/correspondence、Leakage theory和Attitude-behavior consistency，将特征重要性解释为理论机制的显现。
+
+- contribution_positioning_cn：用“first”“first effort”宣称新颖性，将贡献分三层：概念、理论、实用；在讨论中呼应引言缺口。
+
+- novelty_protection_cn：通过真实数据而非伪标签、多分类器一致性、配对比对、敏感性和相关性稳健性，防止特征增益被视为偶然；还主动将部分H1未支持特征归为“部分支持”，避免过度泛化，但在贡献中强化整体正向结论。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用具体例子展示现实问题，建立读者对现象的直观认识。
+
+- research_job_cn：收集或构造典型不一致评论，展示同星级但内容/语言差异。
+
+- required_evidence_cn：能直观显示不一致的评论示例及其来源。
+
+- transition_to_next_cn：由现象提炼出“不一致”概念并指出其后果。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：系统综述相关文献，在每类工作的末尾指出没有处理不一致。
+
+- research_job_cn：阅读并归类星级、情感、内容特征和虚假检测文献，确认空白。
+
+- required_evidence_cn：引用足够近的文献表明该问题未被系统研究。
+
+- transition_to_next_cn：明确两个RQ。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入理论，将概念映射到理论原则，给出可检验的假设。
+
+- research_job_cn：选择与现象匹配的理论，建立从机制到假设的推理链。
+
+- required_evidence_cn：每个假设有至少一个机制或文献支撑。
+
+- transition_to_next_cn：假设需要操作化测量，进入特征设计。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：给出特征定义、公式和特征表，说明如何计算不一致。
+
+- research_job_cn：基于理论概念和既有特征工程，设计归一化偏差指标。
+
+- required_evidence_cn：公式或算法足以复现。
+
+- transition_to_next_cn：需要真实数据来估计分布。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：论述数据集来源和标签有效性，回应伪标签问题。
+
+- research_job_cn：获取真实平台带标签数据并提供描述统计。
+
+- required_evidence_cn：数据集规模、标签机制、基本分布。
+
+- transition_to_next_cn：在数据上计算特征并做统计检验。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告存在性检验和组间差异检验，明确支持程度。
+
+- research_job_cn：执行单样本t检验、ANCOVA/MANOVA，整理均值与显著性。
+
+- required_evidence_cn：显著p值、均值和效应方向。
+
+- transition_to_next_cn：组间差异提示可用于分类，进入性能检验。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：定义baseline和增量组合，报告交叉验证指标和显著性检验。
+
+- research_job_cn：搭建分类流水线，执行多分类器多特征组合实验，配对t检验。
+
+- required_evidence_cn：在多个指标上显著提升，最优模型明确。
+
+- transition_to_next_cn：需要确定哪些特征最重要、结论是否稳健。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：报告特征重要性排序和相关稳健性分析。
+
+- research_job_cn：用VarImp和Pearson相关分析，移除高相关特征后重新评估性能。
+
+- required_evidence_cn：特征重要性top列表和性能无显著变化。
+
+- transition_to_next_cn：进入讨论，总结贡献和局限。
+
+### most_transferable_moves_cn
+
+1. 用具体例子启动问题，让读者迅速理解抽象概念
+
+2. 用三类维度分解模糊概念，并给出可操作定义
+
+3. 在文献综述中用多个“none”定位缺口
+
+4. 将理论命题转化为可计算的特征差异，而非只停留在论述
+
+5. 使用基线+增量特征的组合对比逻辑，清晰展示增量价值
+
+6. 为每个假设安排专门的统计检验和结果段落
+
+7. 用敏感性和稳健性检验保护核心结论
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要带有可信标签的真实Yelp数据（Yelp过滤标签非公开轻易可得）
+
+2. 需要大量评论文本和reviewer维度信息以计算language inconsistency
+
+3. 多分类器（5种）×多特征组合（5种）×10折交叉验证的计算开销
+
+4. 依赖SentiWordNet等外部词典
+
+5. Yelp平台的特殊性（餐馆、本地商家）难以直接推广
+
+### what_not_to_copy_superficially_cn
+
+1. 不能仅把“不一致”作为关键词贴标签，而没有公式化测量
+
+2. 不能在缺少机制推演的情况下直接宣称理论贡献
+
+3. 不能将部分支持的结果包装为完全支持
+
+4. 不能将Yelp单一领域外推至所有OCR
+
+5. 不能在没有敏感性/相关性检验的情况下断言特征贡献稳健
+
+- single_best_description_of_the_routine_cn：用一个消费者困惑现象切入，把模糊的“不一致”拆成三个可计算维度，借用欺骗理论把特征变成信号，然后用真实数据上的两阶段统计和分类实验把特征增益提升为理论贡献。
+
+## 分析边界
+
+全文PDF已提供，但缺少部分页码和附录；表格内某些p值标记被图像替代，可能影响少数细节；但整体结构完整。

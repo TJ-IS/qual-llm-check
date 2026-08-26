@@ -1,0 +1,110 @@
+{
+  "input_articles": 2475,
+  "stage1_matches": 232,
+  "stage2_audited": 232,
+  "objective_measurement_matches_after_stage2": 198,
+  "stage3_artifact_conflicts_audited": 68,
+  "stage3_artifact_conflicts_confirmed": 3,
+  "stage3_artifact_conflicts_removed": 65,
+  "final_matches": 133,
+  "stage2_removed": 34,
+  "prior_matches": 231,
+  "retained_from_prior": 129,
+  "removed_from_prior": 102,
+  "newly_added_vs_prior": 4,
+  "final_year_counts": {
+    "2020": 35,
+    "2021": 31,
+    "2022": 19,
+    "2023": 17,
+    "2024": 15,
+    "2025": 14,
+    "2026": 2
+  },
+  "final_journal_counts": {
+    "Decision Support Systems": 47,
+    "European Journal of Information Systems": 2,
+    "Information & Management": 5,
+    "Information Systems Research": 35,
+    "Journal of Management Information Systems": 11,
+    "Journal of the Association for Information Systems": 8,
+    "MIS Quarterly": 25
+  },
+  "final_objective_status_counts": {
+    "benchmark_objective_with_fixed_labels": 56,
+    "fully_objective": 77
+  },
+  "stage2_removed_status_counts": {
+    "fully_objective": 4,
+    "mixed_objective_subjective": 22,
+    "subjective_or_self_report": 2,
+    "unclear": 6
+  },
+  "stage2_failed_gate_counts": {
+    "all_core_success_outcomes_objective": 30,
+    "comparative_improvement_demonstrated": 16,
+    "core_objective_improvement_target": 23,
+    "designed_software_artifact": 8,
+    "fully_objective_measurement": 29
+  },
+  "stage3_artifact_status_counts": {
+    "algorithm_or_model_only": 59,
+    "analytical_rule_or_method_only": 5,
+    "concept_or_future_design_only": 1,
+    "explicit_component_of_software_artifact": 2,
+    "explicit_software_artifact": 1
+  },
+  "anchor_checks": {
+    "28352_2025_hypercars-using-hyperbolic-embeddings-for-generating-hierarchical-contextual-situations-in-conte.md": {
+      "expected_stage1": true,
+      "actual_stage1": true,
+      "expected_final": true,
+      "actual_final": true,
+      "pass": true
+    },
+    "28480_2023_augmenting-social-bot-detection-with-crowd-generated-labels.md": {
+      "expected_stage1": true,
+      "actual_stage1": true,
+      "expected_final": true,
+      "actual_final": true,
+      "pass": true
+    },
+    "28508_2023_pushing-yourself-harder-the-effects-of-mobile-touch-modes-on-users-self-regulation.md": {
+      "expected_stage1": false,
+      "actual_stage1": false,
+      "expected_final": false,
+      "actual_final": false,
+      "pass": true
+    },
+    "28234_2022_achieving-a-balance-between-privacy-protection-and-data-collection-a-field-experimental-examinat.md": {
+      "expected_stage1": false,
+      "actual_stage1": false,
+      "expected_final": false,
+      "actual_final": false,
+      "pass": true
+    },
+    "28156_2025_improving-students-argumentation-skills-using-dynamic-machine-learningbased-modeling.md": {
+      "expected_stage1": false,
+      "actual_stage1": false,
+      "expected_final": false,
+      "actual_final": false,
+      "pass": true
+    }
+  },
+  "validation": {
+    "old_jsonl_lines": 2475,
+    "old_unique_articles": 2475,
+    "stage1_jsonl_lines": 2480,
+    "stage1_unique_articles": 2475,
+    "stage2_jsonl_lines": 232,
+    "stage2_unique_articles": 232,
+    "stage3_jsonl_lines": 68,
+    "stage3_unique_articles": 68,
+    "stage2_is_exactly_stage1_positive_set": true,
+    "stage3_is_exactly_artifact_disagreement_set": true,
+    "final_is_subset_of_stage1": true,
+    "final_all_pass_objective_audit": true,
+    "final_all_pass_artifact_evidence": true,
+    "all_anchor_checks_pass": true
+  }
+}

@@ -1,0 +1,1355 @@
+{
+  "record_id": "28706",
+  "source_file": "28706_2024_attending-to-customer-attention-a-novel-deep-learning-method-for-leveraging-multimodal-online-re.md",
+  "title": "Attending to Customer Attention: A Novel Deep Learning Method for Leveraging Multimodal Online Reviews to Enhance Sales Prediction",
+  "authors": "Gang Chen; Lihua Huang; Shuaiyong Xiao; Chenghong Zhang; Huimin Zhao",
+  "year": "2024",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2021.0292",
+  "fulltext_chars": 116250,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "isr_micro",
+  "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+  "prompt_fingerprint": "8c6c7f01ed07488b679bb551a4b5a1b2a1d4c366f500bf896d100d299a33f8e2",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T07:02:58.582089+00:00",
+  "verified_macro_scaffold_cn": "文章按“问题—理论—设计—评价—回到理论”展开：引言从在线评论预测销售的潜力与朴素做法的偏差出发，借助信息处理理论提出顾客注意力应替代简单帮助性指标；第2节综述评论影响销售、已有预测方法和注意力机制，归纳三个研究缺口；第3节用过程-粒度框架导出四粒度、四顾客注意力指标及其理论理由与设计挑战；第4节提出DTV-AMI两个组件及四个对应注意力机制；第5节用酒店案例按端到端预测、表征学习、历史销售基线、集成预测、探索性权重和消融分析六层评价；第6、7节把性能升级为概念化贡献、设计科学制品贡献和经验知识贡献，并说明数据要求和局限。",
+  "abstract_sentence_map": [
+    {
+      "locator": "Abstract S1",
+      "paraphrase_cn": "评论帮助性对购买决策和销售的影响已被广泛研究，但帮助性通常依赖评论层面的定量指标衡量。",
+      "move_code": "CONTEXT",
+      "statement_status": "prior_literature",
+      "why_here_cn": "摘要开头建立领域共识，让读者看到文章所处领域。",
+      "inherits_from_previous_cn": "无，独立开局。",
+      "changes_argument_state_cn": "提出“帮助性”作为已有研究的中心概念。",
+      "sets_up_next_cn": "为下一句批判简单量化指标做铺垫。",
+      "failure_if_removed_cn": "若删除，摘要缺乏研究背景与靶子。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "locator": "Abstract S2",
+      "paraphrase_cn": "用这类简单指标衡量的帮助性评论未必带来准确销售预测，因为评论信息质量、顾客需求和产品属性不断演变。",
+      "move_code": "LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "立刻指出共识的局限，完成从背景到问题的转换。",
+      "inherits_from_previous_cn": "承接S1关于量化帮助性指标的表述。",
+      "changes_argument_state_cn": "将“帮助性被广泛研究”升级为“简单帮助性指标不足”。",
+      "sets_up_next_cn": "为提出顾客注意力作为替代机制提供动因。",
+      "failure_if_removed_cn": "若删除，摘要没有研究动机。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "locator": "Abstract S3",
+      "paraphrase_cn": "主张顾客注意力更高的评论对购买意愿和销售更有影响，因此提出利用顾客注意力更好地发挥多模态评论在销售预测中的潜力。",
+      "move_code": "CORE_POSITION_AND_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "给出全文的核心假设和总目标，使摘要从问题转向方案。",
+      "inherits_from_previous_cn": "依赖S2对简单指标的局限判断。",
+      "changes_argument_state_cn": "将讨论对象从“帮助性”切换到“顾客注意力”。",
+      "sets_up_next_cn": "为概念化维度与方法提出做铺垫。",
+      "failure_if_removed_cn": "若删除，摘要没有研究主张。",
+      "evidence_pointer": "Abstract S3"
+    },
+    {
+      "locator": "Abstract S4",
+      "paraphrase_cn": "在整体评论集合、评论子集、单条评论和评论元素四个层次概念化顾客注意力，并导出时效性、语义多样性、投票意识和多模态交互四个指标。",
+      "move_code": "CONCEPTUALIZATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "用一句话压缩概念贡献，让读者立即得到四个可操作指标。",
+      "inherits_from_previous_cn": "承接“顾客注意力”的提法。",
+      "changes_argument_state_cn": "从抽象主张过渡到维度化、可操作的指标集合。",
+      "sets_up_next_cn": "为DTV-AMI设计提供来源。",
+      "failure_if_removed_cn": "若删除，概念贡献不清。",
+      "evidence_pointer": "Abstract S4"
+    },
+    {
+      "locator": "Abstract S5",
+      "paraphrase_cn": "提出一种深度学习方法，用专门设计的神经网络注意力机制把这些顾客注意力指标嵌入多模态评论销售预测中。",
+      "move_code": "ARTIFACT_PROPOSAL",
+      "statement_status": "design_decision",
+      "why_here_cn": "给出制品和方法贡献的名称与性质。",
+      "inherits_from_previous_cn": "依赖S4四个指标的存在。",
+      "changes_argument_state_cn": "从概念层进入设计层。",
+      "sets_up_next_cn": "为摘要最后一句的实证结果做铺垫。",
+      "failure_if_removed_cn": "若删除，读者不知道文章如何操作化。",
+      "evidence_pointer": "Abstract S5"
+    },
+    {
+      "locator": "Abstract S6",
+      "paraphrase_cn": "在预测酒店月度入住率的大规模案例数据上，方法在预测性能和表征学习性能上都超过了先进深度学习基准。",
+      "move_code": "RESULT_PREVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "用实证结果收束摘要，给出文章最有力的支撑。",
+      "inherits_from_previous_cn": "依赖S5中方法的设计。",
+      "changes_argument_state_cn": "将论证升级为经验支持。",
+      "sets_up_next_cn": "结束摘要但激发读者阅读正文。",
+      "failure_if_removed_cn": "若删除，摘要缺少结果证据与吸引力。",
+      "evidence_pointer": "Abstract S6"
+    }
+  ],
+  "introduction_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Introduction P1 S1–S2",
+      "paraphrase_cn": "在线评论已成为连接顾客与产品的最有效信息渠道之一，大量研究证明评论影响购买意愿。",
+      "move_code": "BACKGROUND_AND_LITERATURE_CONSENSUS",
+      "statement_status": "prior_literature",
+      "why_here_cn": "开场确立领域背景与文献共识。",
+      "inherits_from_previous_cn": "无。",
+      "changes_argument_state_cn": "把读者带入评论影响销售的语境。",
+      "sets_up_next_cn": "为下一句评论可预测销售提供前提。",
+      "failure_if_removed_cn": "删去则引言缺少共同语境。",
+      "evidence_pointer": "Section 1 P1 S1–S2"
+    },
+    {
+      "order": 2,
+      "locator": "Introduction P1 S3–S5",
+      "paraphrase_cn": "评论对顾客的不可或缺性赋予其揭示未来销售的潜力；销售预测对零售商运营和商业价值重要；评论能从顾客态度与需求视角揭示销售趋势，不同于传统定量特征。",
+      "move_code": "PRACTICAL_STAKES_AND_OPPORTUNITY",
+      "statement_status": "author_inference",
+      "why_here_cn": "说明研究评论销售预测的实际价值与角度。",
+      "inherits_from_previous_cn": "承接评论影响购买意愿的共识。",
+      "changes_argument_state_cn": "从现象上升到销售预测问题。",
+      "sets_up_next_cn": "为批判“直接使用所有评论”提供目标。",
+      "failure_if_removed_cn": "删去则文章研究目标不突出。",
+      "evidence_pointer": "Section 1 P1 S3–S5"
+    },
+    {
+      "order": 3,
+      "locator": "Introduction P2 S1–S2",
+      "paraphrase_cn": "直接做法是把产品所有评论（量化指标与文本）塞入预测模型，但这会因顾客只感知和消化少数评论而产生预测偏差。",
+      "move_code": "PROBLEM_WITH_NAIVE_APPROACH",
+      "statement_status": "author_inference",
+      "why_here_cn": "在这里立即否定最朴素的基线做法。",
+      "inherits_from_previous_cn": "建立在评论影响销售的文献基础上。",
+      "changes_argument_state_cn": "从“评论有价值”转向“不能不加区分地全用”。",
+      "sets_up_next_cn": "为“需要区分评论”作铺垫。",
+      "failure_if_removed_cn": "删去则后文强调注意力的动机变弱。",
+      "evidence_pointer": "Section 1 P2 S1–S2"
+    },
+    {
+      "order": 4,
+      "locator": "Introduction P2 S3–S5",
+      "paraphrase_cn": "已有评论销售预测方法存在数据与模型双重缺陷：量化处理文本导致语义和图像信息未被充分利用；模型对所有评论不加区分，妨碍预测作用。",
+      "move_code": "TWO_FOLD_RESEARCH_GAP",
+      "statement_status": "prior_literature_and_author_inference",
+      "why_here_cn": "把已有问题细化为两缺口，为方法贡献定位。",
+      "inherits_from_previous_cn": "承接P2 S1-S2对朴素做法的批判。",
+      "changes_argument_state_cn": "从一般偏差转为具体两缺口。",
+      "sets_up_next_cn": "为后续数据模态和新模型需求埋伏笔。",
+      "failure_if_removed_cn": "删去则文章技术贡献缺少靶子。",
+      "evidence_pointer": "Section 1 P2 S3–S5"
+    },
+    {
+      "order": 5,
+      "locator": "Introduction P3 S1–S4",
+      "paraphrase_cn": "销售植根于购买意愿，购买意愿受顾客仔细阅读的评论影响；因此吸引密集注意力的评论应有更高预测力；所以需要探索哪些评论吸引顾客注意力以及是否更利于销售预测。",
+      "move_code": "CORE_MECHANISM_AND_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "提出全文核心机制——顾客注意力中介评论对销售影响。",
+      "inherits_from_previous_cn": "依赖“评论影响购买意愿”并加入“仔细阅读”条件。",
+      "changes_argument_state_cn": "将研究转向注意力机制。",
+      "sets_up_next_cn": "为RQ1和过程-粒度框架铺路。",
+      "failure_if_removed_cn": "删去则全文“注意力”主题缺失。",
+      "evidence_pointer": "Section 1 P3 S1–S4"
+    },
+    {
+      "order": 6,
+      "locator": "Introduction P4 S1–S2",
+      "paraphrase_cn": "评论价值已被信息质量、论证质量和帮助性衡量，且共识是更帮助的评论更影响购买意愿。",
+      "move_code": "PRIOR_HELPFULNESS_CONSENSUS",
+      "statement_status": "prior_literature",
+      "why_here_cn": "引入帮助性研究作为后续批判的靶子。",
+      "inherits_from_previous_cn": "承接“哪种评论更有用”问题。",
+      "changes_argument_state_cn": "建立已有共识。",
+      "sets_up_next_cn": "为批判内容式帮助性指标。",
+      "failure_if_removed_cn": "删去则后面的批判没有基础。",
+      "evidence_pointer": "Section 1 P4 S1–S2"
+    },
+    {
+      "order": 7,
+      "locator": "Introduction P4 S3–S6",
+      "paraphrase_cn": "但基于内容的帮助性指标不一定是顾客群体购买意愿的最强影响因素，因为顾客偏好异质、同一内容可能被相反评价；关于负面评论和长评论有用性的结论也相互冲突。",
+      "move_code": "LIMITATION_OF_CONTENT_INDICATORS",
+      "statement_status": "prior_literature_and_author_inference",
+      "why_here_cn": "直接削弱内容式指标的稳定性，为内容无关指标铺路。",
+      "inherits_from_previous_cn": "依赖P4 S1-S2共识。",
+      "changes_argument_state_cn": "从“帮助性有效”转向“内容指标不稳定”。",
+      "sets_up_next_cn": "引出reception阶段和内容无关注意力。",
+      "failure_if_removed_cn": "删去则内容无关框架缺乏必要性。",
+      "evidence_pointer": "Section 1 P4 S3–S6"
+    },
+    {
+      "order": 8,
+      "locator": "Introduction P5 S1–S2",
+      "paraphrase_cn": "顾客对多模态评论的注意力体现在浏览行为中，可沿时间和空间两个维度刻画，这两维协同描述注意力在多粒度层次和阶段间的转移。",
+      "move_code": "FRAMEWORK_INTRO",
+      "statement_status": "author_inference",
+      "why_here_cn": "引入过程-粒度框架的两个基本维度。",
+      "inherits_from_previous_cn": "承接“注意力”概念。",
+      "changes_argument_state_cn": "将注意力从抽象概念引向可观察行为维度。",
+      "sets_up_next_cn": "为下面reception/yielding阶段和四粒度铺垫。",
+      "failure_if_removed_cn": "删去则框架缺少顶部入口。",
+      "evidence_pointer": "Section 1 P5 S1–S2"
+    },
+    {
+      "order": 9,
+      "locator": "Introduction P5 S3–S5",
+      "paraphrase_cn": "根据信息学习和信息处理理论，评论处理分reception与yielding两阶段；内容式帮助性指标只部分覆盖yielding，未捕捉reception阶段的初始注意。",
+      "move_code": "PROCESS_THEORY_INTRODUCTION",
+      "statement_status": "prior_literature_and_author_inference",
+      "why_here_cn": "引入理论区分，并把研究视角转向reception阶段。",
+      "inherits_from_previous_cn": "承接P5 S1-S2时间维度。",
+      "changes_argument_state_cn": "将评论影响力研究缩小到接收阶段。",
+      "sets_up_next_cn": "为内容无关指标提供理论合法性。",
+      "failure_if_removed_cn": "删去则“内容无关”主张缺少理论支撑。",
+      "evidence_pointer": "Section 1 P5 S3–S5"
+    },
+    {
+      "order": 10,
+      "locator": "Introduction P5 S6–S8",
+      "paraphrase_cn": "据此主张顾客面对海量评论不会逐一评估，而只会关注一个子集并放弃其余，这与有限注意力发现一致；因此顾客初始注意应被纳入销售预测。",
+      "move_code": "AUTHOR_POSITION",
+      "statement_status": "author_inference",
+      "why_here_cn": "明确提出全文核心立场：关注reception阶段。",
+      "inherits_from_previous_cn": "依赖两阶段理论区分。",
+      "changes_argument_state_cn": "从“缺口”到“主张”。",
+      "sets_up_next_cn": "为RQ1和各指标创造需求。",
+      "failure_if_removed_cn": "删去则全文核心论缺少。",
+      "evidence_pointer": "Section 1 P5 S6–S8"
+    },
+    {
+      "order": 11,
+      "locator": "Introduction P6 S1–S3",
+      "paraphrase_cn": "从空间维度看，按自上而下或自下而上的浏览路径，注意力可分解为整体评论集合、评论子集、单条评论和评论元素四个粒度；顾客既可从整体下钻到元素，也可从某信息要素扩展。",
+      "move_code": "GRANULARITY_FRAMEWORK_INTRO",
+      "statement_status": "author_inference",
+      "why_here_cn": "引入粒度维度和四层次。",
+      "inherits_from_previous_cn": "承接P5空间维度。",
+      "changes_argument_state_cn": "将注意力分解为多粒度层次。",
+      "sets_up_next_cn": "为RQ1的四层次表达提供基础。",
+      "failure_if_removed_cn": "删去则四指标的四层来源不明。",
+      "evidence_pointer": "Section 1 P6 S1–S3"
+    },
+    {
+      "order": 12,
+      "locator": "Introduction P6 S4",
+      "paraphrase_cn": "提出RQ1：购买决策过程中，不同粒度层次上什么样的评论符合顾客注意力？",
+      "move_code": "RQ1",
+      "statement_status": "author_inference",
+      "why_here_cn": "正式给出第一个研究问题。",
+      "inherits_from_previous_cn": "依赖过程-粒度框架。",
+      "changes_argument_state_cn": "将目标固化为可被后续探索性分析回答的问题。",
+      "sets_up_next_cn": "为Section 5.4提供标的。",
+      "failure_if_removed_cn": "删去则概念部分缺少被回答的问题标识。",
+      "evidence_pointer": "Section 1 P6 S4"
+    },
+    {
+      "order": 13,
+      "locator": "Introduction P7 S1–S5",
+      "paraphrase_cn": "基于理论分析，顾客可能分别付出时效性、语义多样性、投票意识和多模态交互四类注意，并分别由双加工理论、选择效应、帮助性投票和精细加工可能性模型支持。",
+      "move_code": "THEORY_PROPOSITIONS_FOR_FOUR_INDICATORS",
+      "statement_status": "theory_claim",
+      "why_here_cn": "用多个理论为四个指标提供合法性并建立粒度对应。",
+      "inherits_from_previous_cn": "依赖RQ1和四粒度框架。",
+      "changes_argument_state_cn": "从框架转到四个可操作指标。",
+      "sets_up_next_cn": "为RQ2和DTV-AMI做铺垫。",
+      "failure_if_removed_cn": "删去则四个注意力机制缺乏理论来源。",
+      "evidence_pointer": "Section 1 P7 S1–S5"
+    },
+    {
+      "order": 14,
+      "locator": "Introduction P7 S6–S9",
+      "paraphrase_cn": "概括四指标为时效性、语义多样性、评论帮助性和多模态交互；并指出多模态评论的普遍性引出一个更紧迫的问题RQ2：如何利用顾客注意力提升多模态评论销售预测；为此提出DTV-AMI，由DTV和AMI两个组件对应四个指标。",
+      "move_code": "RQ2_AND_ARTIFACT_PREVIEW",
+      "statement_status": "author_inference_and_design_decision",
+      "why_here_cn": "给出第二个研究问题和制品名称，完成问题定义。",
+      "inherits_from_previous_cn": "承接四指标归纳。",
+      "changes_argument_state_cn": "从“是什么”转向“怎么做”。",
+      "sets_up_next_cn": "为第4节方法细节做预览。",
+      "failure_if_removed_cn": "删去则文章缺少方法目标和路径。",
+      "evidence_pointer": "Section 1 P7 S6–S9"
+    },
+    {
+      "order": 15,
+      "locator": "Introduction P8 S1–S5",
+      "paraphrase_cn": "DTV让模型更关注及时、语义多样、被投票的评论，把每条评论递归作为潜在浏览起点；AMI在每个评论点自适应权衡文本与图像；整体上DTV-AMI把顾客注意力指标嵌入模型。",
+      "move_code": "ARTIFACT_FUNCTION_EXPLANATION",
+      "statement_status": "design_decision",
+      "why_here_cn": "预告制品两个核心组件的工作机制，在引言层面给出设计概要。",
+      "inherits_from_previous_cn": "依赖DTV-AMI命名和四个指标。",
+      "changes_argument_state_cn": "把指标翻译成模型行为。",
+      "sets_up_next_cn": "为实验结果预告提供基础。",
+      "failure_if_removed_cn": "删去则读者不知模型如何工作。",
+      "evidence_pointer": "Section 1 P8 S1–S5"
+    },
+    {
+      "order": 16,
+      "locator": "Introduction P9 S1",
+      "paraphrase_cn": "酒店行业案例中2685家酒店、约120万评论文本和19.7万评论图像显示DTV-AMI优于深度学习基准，证明顾客注意力对多模态评论销售预测的价值。",
+      "move_code": "RESULT_PREVIEW_AND_CONTRIBUTION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "用实证结果预告收束引言，强调贡献。",
+      "inherits_from_previous_cn": "依赖P8模型和RQ2。",
+      "changes_argument_state_cn": "从设计到实证结果预览。",
+      "sets_up_next_cn": "为第2节文献回顾和第5节实验设置期待。",
+      "failure_if_removed_cn": "删去则引言缺乏直接结果吸引力。",
+      "evidence_pointer": "Section 1 P9 S1"
+    }
+  ],
+  "introduction_paragraph_map": [
+    {
+      "opening_move_cn": "建立在线评论作为信息渠道的作用。",
+      "development_move_cn": "叠加文献证据（评论影响购买意愿）并推断其销售预测潜力。",
+      "pivot_move_cn": "从评论现象收窄到销售预测问题。",
+      "closing_move_cn": "提出评论是一个从顾客态度与需求视角揭示销售的新特征，为批评“全部塞入”铺路。",
+      "paragraph_job_cn": "确立研究背景和评论销售预测的总体意义。"
+    },
+    {
+      "opening_move_cn": "指出直接使用所有评论的朴素做法。",
+      "development_move_cn": "两步批评：顾客只感知少数评论造成偏差；已有方法存在数据与模型双重缺陷。",
+      "pivot_move_cn": "从数据缺陷转到模型缺陷。",
+      "closing_move_cn": "用“模型未有效区分评论”收尾，制造对可选择注意机制的需求。",
+      "paragraph_job_cn": "建立研究缺口的两部分。"
+    },
+    {
+      "opening_move_cn": "回到销售根源的购买意愿。",
+      "development_move_cn": "加入“仔细阅读”条件，把注意力引入机制。",
+      "pivot_move_cn": "从机制到“合理期望”的推断，收窄到“哪些评论吸引注意力”。",
+      "closing_move_cn": "以“值得探索”制造RQ1的需要。",
+      "paragraph_job_cn": "提出全文核心机制与目标。"
+    },
+    {
+      "opening_move_cn": "综述评论价值的三类衡量方式。",
+      "development_move_cn": "陈述帮助性共识。",
+      "pivot_move_cn": "用“内容式指标未必最影响群体购买意愿”转折。",
+      "closing_move_cn": "用异质性偏好和冲突性发现削弱内容指标的稳定性。",
+      "paragraph_job_cn": "为“内容无关注意力”替代“内容式帮助性”铺路。"
+    },
+    {
+      "opening_move_cn": "引入时间/空间二维浏览行为刻画。",
+      "development_move_cn": "用信息处理理论划分reception/yielding两阶段，并指出内容指标只覆盖yielding。",
+      "pivot_move_cn": "从理论到主张——顾客只关注子集。",
+      "closing_move_cn": "以“初始注意应纳入销售预测”收束，为RQ1酝酿。",
+      "paragraph_job_cn": "将问题定位到reception阶段，确立内容无关立场。"
+    },
+    {
+      "opening_move_cn": "从空间角度提出四粒度。",
+      "development_move_cn": "用自上而下与自下而上两个例子说明粒度转移。",
+      "pivot_move_cn": "收束到总体研究目标。",
+      "closing_move_cn": "抛出RQ1。",
+      "paragraph_job_cn": "提出过程-粒度框架的四层并引出RQ1。"
+    },
+    {
+      "opening_move_cn": "概述四个粒度上的四类注意力。",
+      "development_move_cn": "逐个粒度给出理论依据。",
+      "pivot_move_cn": "概括四指标后转向RQ2。",
+      "closing_move_cn": "提出方法名称DTV-AMI及其两组件。",
+      "paragraph_job_cn": "把理论指标与研究和制品目标连接起来。"
+    },
+    {
+      "opening_move_cn": "说明DTV如何满足三个指标。",
+      "development_move_cn": "解释递归起点与动态扫描机制。",
+      "pivot_move_cn": "转向AMI的自适应图文权衡。",
+      "closing_move_cn": "总结DTV-AMI整体作用。",
+      "paragraph_job_cn": "预告制品两级功能，为方法章节提供预览。"
+    },
+    {
+      "opening_move_cn": "报告案例数据规模和实验结果。",
+      "development_move_cn": "几乎没有发展，直接给结论。",
+      "pivot_move_cn": "无。",
+      "closing_move_cn": "以“证明顾客注意力的价值”作为整段和引言的收尾。",
+      "paragraph_job_cn": "给出研究概述和结果预告。"
+    }
+  ],
+  "theory_to_design_sentence_map": [
+    {
+      "locator": "Section 2.1 P1 S1",
+      "paraphrase_cn": "评论影响销售，因为顾客购买决策被评论中的产品意见显著影响；帮助性评论通常被期望更影响需求与销售。",
+      "move_code": "PRIOR_KNOWLEDGE_HELPFULNESS_MECHANISM",
+      "statement_status": "prior_literature",
+      "why_here_cn": "建立“帮助性是评论影响销售的中介”这一文献基础，作为后续批判的靶子。",
+      "inherits_from_previous_cn": "从引言“评论影响购买意愿”继续。",
+      "changes_argument_state_cn": "将注意力聚焦到帮助性概念。",
+      "sets_up_next_cn": "为投票意识指标和帮助性批判提供前提。",
+      "failure_if_removed_cn": "缺少则帮助性视角的缺口不成立。",
+      "evidence_pointer": "Section 2.1 P1"
+    },
+    {
+      "locator": "Section 2.1 P2 S4",
+      "paraphrase_cn": "Kuan等发现被投票的评论有显著诊断价值却与销售负相关，说明简单帮助性信号未必与销售一致。",
+      "move_code": "ANOMALY_FROM_LITERATURE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "用反直觉发现削弱“帮助性等于更有用”的假设。",
+      "inherits_from_previous_cn": "承接帮助性共识。",
+      "changes_argument_state_cn": "从共识转向矛盾证据。",
+      "sets_up_next_cn": "为“需要捕捉不同于帮助性的顾客注意力”提供证据缺口。",
+      "failure_if_removed_cn": "没有则文章缺少动机的证据锚点。",
+      "evidence_pointer": "Section 2.1 P2 S4"
+    },
+    {
+      "locator": "Section 2.1 P4–P5",
+      "paraphrase_cn": "文本评论提供丰富属性信息，图像评论提供信息/审美/自我提升价值，图文混合评论通常被认为比纯文本更帮助。",
+      "move_code": "PRIOR_KNOWLEDGE_MULTIMODAL_VALUE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "说明文本和图像各自价值，为多模态预测缺口铺垫。",
+      "inherits_from_previous_cn": "由帮助性讨论扩展到内容与模态。",
+      "changes_argument_state_cn": "将文献基础扩展到多模态评论。",
+      "sets_up_next_cn": "为2.4第一缺口（多模态未充分利用）作铺垫。",
+      "failure_if_removed_cn": "没有则图像模态价值不明确。",
+      "evidence_pointer": "Section 2.1 P4–P5"
+    },
+    {
+      "locator": "Section 2.2 P1–P3",
+      "paraphrase_cn": "已有销售预测多用零售商/宏观市场数据，评论可作为顾客需求直接反映；但已有研究通常定量处理评论文本，图像和深层语义未被充分利用；少数研究注意到评论动态效应。",
+      "move_code": "PRIOR_KNOWLEDGE_SALES_PREDICTION_LIMITATION",
+      "statement_status": "prior_literature_and_author_inference",
+      "why_here_cn": "综述预测文献，指出现有数据/方法局限。",
+      "inherits_from_previous_cn": "承接多模态价值。",
+      "changes_argument_state_cn": "将缺口从“评论研究”扩展到“预测方法”。",
+      "sets_up_next_cn": "为2.4第二缺口作铺垫。",
+      "failure_if_removed_cn": "没有则方法贡献缺少定位。",
+      "evidence_pointer": "Section 2.2 P1–P3"
+    },
+    {
+      "locator": "Section 2.3 P1–P2",
+      "paraphrase_cn": "注意力机制是权重学习方案，具有自动搜索任务相关输入和可解释性优势；它适合建模顾客浏览行为，但顾客注意力不同于神经网络注意力，是本文注意力机制设计的动机。",
+      "move_code": "METHOD_CONCEPT_BRIDGE",
+      "statement_status": "prior_literature_and_author_inference",
+      "why_here_cn": "说明为什么用神经注意力机制作为实现工具，并划清概念边界。",
+      "inherits_from_previous_cn": "承接RQ2对方法的需求。",
+      "changes_argument_state_cn": "将深度注意力机制引入为合法工具。",
+      "sets_up_next_cn": "为2.4第三缺口的兼容函数批判作铺垫。",
+      "failure_if_removed_cn": "没有则技术方案缺少理论联系。",
+      "evidence_pointer": "Section 2.3 P1–P2"
+    },
+    {
+      "locator": "Section 2.4 P1",
+      "paraphrase_cn": "有三类缺口：多模态评论预测未充分研究；现有预测方法不能区分评论；现有注意力兼容函数与顾客注意力指标不兼容。",
+      "move_code": "GAP_SUMMARY",
+      "statement_status": "author_inference",
+      "why_here_cn": "集中声明三缺口，把全文贡献定位清楚。",
+      "inherits_from_previous_cn": "依赖2.1-2.3回顾。",
+      "changes_argument_state_cn": "将综述凝结为研究空间。",
+      "sets_up_next_cn": "为Section 3理论推导和Section 4设计作铺垫。",
+      "failure_if_removed_cn": "没有则提出的方法缺乏明确靶子。",
+      "evidence_pointer": "Section 2.4 P1"
+    },
+    {
+      "locator": "Section 2.4 P3 S3",
+      "paraphrase_cn": "语义多样性要求不冗余且互补的键，时效和投票意识要求关注及时和投票多的键，多模态交互要求自适应权衡；解决这些方法要求构成DTV-AMI贡献。",
+      "move_code": "GAP_OPERATIONALIZATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "把抽象缺口变成工程可实现的需求清单。",
+      "inherits_from_previous_cn": "承接第三缺口。",
+      "changes_argument_state_cn": "从批评转向方案预告。",
+      "sets_up_next_cn": "为Section 3-4的指标与机制建立对应。",
+      "failure_if_removed_cn": "没有则设计目标不明确。",
+      "evidence_pointer": "Section 2.4 P3 S3"
+    },
+    {
+      "locator": "Section 3 P1",
+      "paraphrase_cn": "本研究旨在按顾客接收和处理方式更好地利用多模态评论预测销售；属于设计科学范式，设计理由是制品设计与评价的基础；设计理由来自四个顾客注意力指标，源于过程-粒度框架。",
+      "move_code": "DESIGN_SCIENCE_POSITIONING",
+      "statement_status": "author_inference",
+      "why_here_cn": "声明设计科学范式，为理论到设计的链条提供合法性。",
+      "inherits_from_previous_cn": "延续2.4的方法要求。",
+      "changes_argument_state_cn": "进入理论建构阶段。",
+      "sets_up_next_cn": "为过程-粒度框架作铺垫。",
+      "failure_if_removed_cn": "没有则理论到设计的关系不被视为贡献。",
+      "evidence_pointer": "Section 3 P1"
+    },
+    {
+      "locator": "Section 3 P2",
+      "paraphrase_cn": "依据信息学习和信息处理理论，顾客处理评论分reception和yielding两阶段；reception阶段是基础与关键。",
+      "move_code": "PROCESS_THEORY_PREMISE",
+      "statement_status": "theory_claim",
+      "why_here_cn": "确立两阶段过程，支撑内容无关指标。",
+      "inherits_from_previous_cn": "承接设计科学框架与文献已有两阶段概念。",
+      "changes_argument_state_cn": "从缺口转向理论主张。",
+      "sets_up_next_cn": "为内容无关的注意力指标提供理论依据。",
+      "failure_if_removed_cn": "没有则四个指标的“内容无关”缺少依托。",
+      "evidence_pointer": "Section 3 P2"
+    },
+    {
+      "locator": "Section 3 P3",
+      "paraphrase_cn": "从粒度视角看，多模态评论投递从整体集合逐级到元素或反向；这些步骤发生在具体内容审视之前，因此吸引的注意力大多是内容无关的。",
+      "move_code": "GRANULARITY_AND_CONTENT_FREE",
+      "statement_status": "author_inference",
+      "why_here_cn": "解释四粒度的来源和内容无关属性。",
+      "inherits_from_previous_cn": "依赖P2过程理论和引言的空间维度。",
+      "changes_argument_state_cn": "将过程理论具体化为可观察的浏览路径。",
+      "sets_up_next_cn": "为四个指标的粒度映射作铺垫。",
+      "failure_if_removed_cn": "没有则四粒度缺乏现象学基础。",
+      "evidence_pointer": "Section 3 P3 and Figure1"
+    },
+    {
+      "locator": "Section 3 P4",
+      "paraphrase_cn": "尽管已有大量内容指标衡量yielding阶段的帮助性，本文特别考虑reception阶段的内容无关注意力，因为顾客偏好异质，很难稳定判定哪种内容风格受注意。",
+      "move_code": "CONTENT_FREE_INDICATOR_RATIONALE",
+      "statement_status": "author_inference",
+      "why_here_cn": "说明为何不用内容指标而用内容无关指标。",
+      "inherits_from_previous_cn": "承接P3内容无关。",
+      "changes_argument_state_cn": "从“为什么是内容无关”到“如何统一”。",
+      "sets_up_next_cn": "为四个具体指标作铺垫。",
+      "failure_if_removed_cn": "没有则“内容无关”主张缺少理由。",
+      "evidence_pointer": "Section 3 P4"
+    },
+    {
+      "locator": "Section 3 Timeliness paragraph",
+      "paraphrase_cn": "双加工理论说明顾客决策由快速自动和慢速审慎过程共同完成；过时评论更可能被自动处理，最新评论更受关注；因此引入时效性指标，并要求全局注意力机制与时间衰减效应。",
+      "move_code": "THEORY_TO_REQUIREMENT_TIMELINESS",
+      "statement_status": "theory_claim_and_design_decision",
+      "why_here_cn": "从理论推出时效性指标及设计需求。",
+      "inherits_from_previous_cn": "依赖内容无关框架中的整体集合层。",
+      "changes_argument_state_cn": "把理论转化为设计要求和挑战。",
+      "sets_up_next_cn": "为4.4.2指数衰减公式作铺垫。",
+      "failure_if_removed_cn": "没有则时效性机制缺少理论来源。",
+      "evidence_pointer": "Section 3 Timeliness and Table1"
+    },
+    {
+      "locator": "Section 3 Semantic Diversity paragraph",
+      "paraphrase_cn": "选择效应和差异化效应说明评审者和读者偏好异质，阅读者关注一组语义多样、能提供综合评估的评论；因此语义多样性是顾客注意力的必要部分，要求query更多关注互补且互不冗余的键。",
+      "move_code": "THEORY_TO_REQUIREMENT_DIVERSITY",
+      "statement_status": "theory_claim_and_author_inference",
+      "why_here_cn": "从选择效应推出语义多样性指标与要求。",
+      "inherits_from_previous_cn": "上承主题子集粒度。",
+      "changes_argument_state_cn": "把偏好异质转化为反冗余注意力需求。",
+      "sets_up_next_cn": "为4.4.1的L2兼容函数设计作铺垫。",
+      "failure_if_removed_cn": "没有则多样性机制缺乏机制解释。",
+      "evidence_pointer": "Section 3 Semantic Diversity and Table1"
+    },
+    {
+      "locator": "Section 3 Voting Awareness paragraph",
+      "paraphrase_cn": "在单条评论层面，帮助性高的评论更有说服力并吸引更多注意力；投票数是普遍帮助性信号；被投票评论会吸引更多顾客注意力，因此设计投票意识注意力。",
+      "move_code": "THEORY_TO_REQUIREMENT_VOTING",
+      "statement_status": "theory_claim_and_prior_literature",
+      "why_here_cn": "从帮助性文献推出投票意识指标。",
+      "inherits_from_previous_cn": "承接单条评论粒度。",
+      "changes_argument_state_cn": "把评论帮助性信号纳入注意力权重。",
+      "sets_up_next_cn": "为4.4.3指数投票项作铺垫。",
+      "failure_if_removed_cn": "没有则投票机制缺依据。",
+      "evidence_pointer": "Section 3 Voting and Table1"
+    },
+    {
+      "locator": "Section 3 Varying Text-Image paragraph",
+      "paraphrase_cn": "文本和图像作用不同；ELM启发存在中央和边缘两种加工路径，图文存在替代和互补效应，文本与图像的相对偏好可能因评论而异；因此多模态交互变化是评论元素层的核心因素，AMI应跨评论自适应分配权重。",
+      "move_code": "THEORY_TO_REQUIREMENT_MULTIMODAL",
+      "statement_status": "theory_claim_and_design_decision",
+      "why_here_cn": "从ELM和图文交互文献推出自适应多模态交互指标。",
+      "inherits_from_previous_cn": "承接元素粒度。",
+      "changes_argument_state_cn": "把图文相对重要性变化转化为时间步级自适应权重需求。",
+      "sets_up_next_cn": "为4.4.4的AMI公式作铺垫。",
+      "failure_if_removed_cn": "没有则AMI的设计目标不清晰。",
+      "evidence_pointer": "Section 3 Text-Image and Table1"
+    },
+    {
+      "locator": "Section 3 Table 1",
+      "paraphrase_cn": "表格汇总四个指标的粒度、理论依据、方法论挑战和解决方案。",
+      "move_code": "THEORY_DESIGN_SUMMARY",
+      "statement_status": "theory_claim_and_design_decision",
+      "why_here_cn": "把理论推导压缩为对照索引，便于读者追踪到方法。",
+      "inherits_from_previous_cn": "依赖前四个指标的详细论述。",
+      "changes_argument_state_cn": "从论证转为索引式总结。",
+      "sets_up_next_cn": "为第4节方法组织提供骨架。",
+      "failure_if_removed_cn": "没有则读者很难快速把握理论与方法的对应。",
+      "evidence_pointer": "Section 3 Table1"
+    },
+    {
+      "locator": "Section 3 final paragraph",
+      "paraphrase_cn": "综上，利用顾客注意力增强多模态评论预测需要专门注意力机制；虽然时效和投票等指标在之前行为研究中有概念雏形，但本文基于这些指标设计的注意力机制才是核心设计科学贡献。",
+      "move_code": "DESIGN_CONTRIBUTION_CLAIM",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "提前宣称设计机制是贡献，避免读者低估技术工作。",
+      "inherits_from_previous_cn": "依赖Table1与前文理论推导。",
+      "changes_argument_state_cn": "从设计理由升级为贡献声明。",
+      "sets_up_next_cn": "为第4节完整设计作期待。",
+      "failure_if_removed_cn": "没有则设计科学贡献的定性不清晰。",
+      "evidence_pointer": "Section 3 final paragraph"
+    }
+  ],
+  "artifact_rationale_sentence_map": [
+    {
+      "locator": "Section 4.2.1",
+      "paraphrase_cn": "案例中按酒店-月把预测月之前某时间跨度内的有效评论按时间排序形成评论序列，过滤短评论和不足十条的实例。",
+      "move_code": "DATA_PREPARATION_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "定义输入实例，使模型能按流式序列预测销售。",
+      "inherits_from_previous_cn": "依赖第4.1节模型框架。",
+      "changes_argument_state_cn": "把具体数据转换为模型可用的序列样本。",
+      "sets_up_next_cn": "为后续padding mask和嵌入提取设置输入格式。",
+      "failure_if_removed_cn": "没有则实验数据与预测目标不清。",
+      "evidence_pointer": "Section 4.2.1"
+    },
+    {
+      "locator": "Section 4.2.1 image stacking",
+      "paraphrase_cn": "将同一评论的所有图像堆叠成整体图，使图像可被逐一扫描同时保留联合信息，并与评论文本对齐。",
+      "move_code": "ARTIFACT_IMAGE_ALIGNMENT_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "解决一个评论多图与文本的对应问题。",
+      "inherits_from_previous_cn": "承接数据预处理步骤。",
+      "changes_argument_state_cn": "确定了图像输入表示。",
+      "sets_up_next_cn": "为图像嵌入提取作准备。",
+      "failure_if_removed_cn": "没有则图像与文本无法对齐。",
+      "evidence_pointer": "Section 4.2.1"
+    },
+    {
+      "locator": "Section 4.2.2",
+      "paraphrase_cn": "使用双层序列padding mask：个体评论层处理纯文本/纯图像造成的模态缺失，酒店-月层处理不等长序列。",
+      "move_code": "ARTIFACT_PADDING_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "解决多模态序列建模的两个实际工程难题。",
+      "inherits_from_previous_cn": "依赖标准padding mask技术。",
+      "changes_argument_state_cn": "使异构评论序列能在双GRU中同步训练。",
+      "sets_up_next_cn": "为多模态嵌入提取铺路。",
+      "failure_if_removed_cn": "没有则模态缺失与不等长会使模型失效。",
+      "evidence_pointer": "Section 4.2.2"
+    },
+    {
+      "locator": "Section 4.2.3",
+      "paraphrase_cn": "用BERT和VGG-16预训练模型分别提取768维文本嵌入和4096维图像特征，充分利用预训练模型能力。",
+      "move_code": "ARTIFACT_EMBEDDING_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "用成熟预训练网络获得高质量嵌入。",
+      "inherits_from_previous_cn": "依赖预处理后的文本和图像序列。",
+      "changes_argument_state_cn": "将原始评论映射为深层嵌入。",
+      "sets_up_next_cn": "为GRU序列建模提供输入。",
+      "failure_if_removed_cn": "没有则模型无法从原始数据学习。",
+      "evidence_pointer": "Section 4.2.3"
+    },
+    {
+      "locator": "Section 4.3",
+      "paraphrase_cn": "用两个并行GRU分别处理文本和图像嵌入序列，文本与图像经过各自的GRU后得到平行的GRU嵌入。",
+      "move_code": "ARTIFACT_SEQUENCE_MODEL_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "GRU适合捕捉流式评论的时间序列属性，并能在性能相近时比LSTM更高效。",
+      "inherits_from_previous_cn": "依赖嵌入提取步骤。",
+      "changes_argument_state_cn": "建立一个多模态序列基础模型。",
+      "sets_up_next_cn": "为DTV注意力机制的叠加提供基础。",
+      "failure_if_removed_cn": "没有则无法建模评论序列。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "locator": "Section 4.4.1",
+      "paraphrase_cn": "常用亲和力兼容函数会让模型关注彼此相关的评论，造成语义冗余；因此设计基于L2距离和平均冗余度的逆匹配兼容函数，使与查询互补且彼此不冗余的键获得更大权重。",
+      "move_code": "ARTIFACT_DIVERSITY_MECHANISM_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "直接回应语义多样性挑战。",
+      "inherits_from_previous_cn": "依赖Section 3语义多样性指标。",
+      "changes_argument_state_cn": "用具体公式落实反冗余注意力。",
+      "sets_up_next_cn": "为时效和投票权重叠加提供基础。",
+      "failure_if_removed_cn": "没有则语义多样性指标无法操作化。",
+      "evidence_pointer": "Section 4.4.1 Equations (4)-(5)"
+    },
+    {
+      "locator": "Section 4.4.2",
+      "paraphrase_cn": "引入指数时间衰减项和参数η，使更近评论权重更大并随发布时间衰减。",
+      "move_code": "ARTIFACT_TIMELINESS_MECHANISM_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把时效性注意力转变为可训练的指数衰减项。",
+      "inherits_from_previous_cn": "依赖语义多样性权重。",
+      "changes_argument_state_cn": "在注意力评分中加入时间维度。",
+      "sets_up_next_cn": "为投票项的加入提供结构。",
+      "failure_if_removed_cn": "没有则时效性指标无机制实现。",
+      "evidence_pointer": "Section 4.4.2 Equation (6)"
+    },
+    {
+      "locator": "Section 4.4.3",
+      "paraphrase_cn": "加入指数投票项和参数γ，使高票评论非线性地获得更高权重；并说明时效与投票会交互——低时效评论常伴随更大投票，而投票可抵抗时间衰减。",
+      "move_code": "ARTIFACT_VOTING_MECHANISM_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把投票意识指标落实为指数投票项，并解释为什么需要同时加入而不是舍弃时效。",
+      "inherits_from_previous_cn": "依赖时间衰减项结构。",
+      "changes_argument_state_cn": "把单条评论层面的投票信号引入注意力。",
+      "sets_up_next_cn": "为AMI的跨模态融合提供综合评分。",
+      "failure_if_removed_cn": "没有则投票意识指标无实现。",
+      "evidence_pointer": "Section 4.4.3 Equation (7)"
+    },
+    {
+      "locator": "Section 4.4.4",
+      "paraphrase_cn": "在每个时间步设置自适应权重ξ，折中文本和图像表示，从而满足图文相对重要性跨评论变化的需求。",
+      "move_code": "ARTIFACT_AMI_MECHANISM_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把顾客对图文的自适应注意力实现为参数化融合。",
+      "inherits_from_previous_cn": "依赖DTV得到的文本与图像序列表示。",
+      "changes_argument_state_cn": "将双模态序列融合为时间步预测。",
+      "sets_up_next_cn": "为事后融合策略作铺垫。",
+      "failure_if_removed_cn": "没有则多模态交互指标无实现。",
+      "evidence_pointer": "Section 4.4.4 Equation (8)"
+    },
+    {
+      "locator": "Section 4.4.4 ex post fusion",
+      "paraphrase_cn": "与常见的事前融合不同，模型取所有时间步预测值的平均作为最终预测，因为评论与顾客读者是陆续到达的，每个评论都可能作为浏览起点，且事后融合信息损失更少。",
+      "move_code": "ARTIFACT_FUSION_STRATEGY_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "解释为什么选择事后而不是事前融合。",
+      "inherits_from_previous_cn": "依赖AMI得到各时间步预测。",
+      "changes_argument_state_cn": "确定最终预测的集成方式。",
+      "sets_up_next_cn": "为消融和实验中的比较提供方法一致性。",
+      "failure_if_removed_cn": "没有则融合策略缺乏理论依据。",
+      "evidence_pointer": "Section 4.4.4 final paragraph"
+    },
+    {
+      "locator": "Section 4.5",
+      "paraphrase_cn": "优化算法在反向传播中更新神经元权重、注意力权重和ξ，使用MSE损失和批量梯度。",
+      "move_code": "ARTIFACT_OPTIMIZATION_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "说明整个模型如何训练。",
+      "inherits_from_previous_cn": "依赖模型结构和融合策略。",
+      "changes_argument_state_cn": "将算法设计转化为可训练系统。",
+      "sets_up_next_cn": "为第5节实验评估提供基础。",
+      "failure_if_removed_cn": "没有则读者无法验证可实现性。",
+      "evidence_pointer": "Section 4.5 and Online Appendix C"
+    }
+  ],
+  "study_opening_transition_and_closure_map": [
+    {
+      "locator": "Section 5.1 Data",
+      "paraphrase_cn": "介绍评价数据集：2685家酒店、1252158条评论文本、197584张图片，历史入住率覆盖34个月，预测目标是提前一个月的月度入住率。",
+      "move_code": "STUDY_DATA_OPENING",
+      "statement_status": "method_decision",
+      "why_here_cn": "给出评价实验的真实数据基础。",
+      "inherits_from_previous_cn": "依赖第4节数据处理流程。",
+      "changes_argument_state_cn": "从方法转向实证设定。",
+      "sets_up_next_cn": "为四组实验提供可描述的数据对象。",
+      "failure_if_removed_cn": "没有则实验结果缺少来源。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "locator": "Section 5.2 Main experiments opening",
+      "paraphrase_cn": "说明除多模态评评论外还考虑历史销售和月份指标等动态因素，并预告四组实验：预测性能、表征学习、历史销售时间序列、集成特征预测。",
+      "move_code": "STUDY_ROADMAP_AND_INTEGRATION_RATIONALE",
+      "statement_status": "method_decision",
+      "why_here_cn": "给实证部分提供路线图，并解释为什么需要集成特征。",
+      "inherits_from_previous_cn": "依赖DTV-AMI模型和数据。",
+      "changes_argument_state_cn": "设定后续四个实验的任务边界。",
+      "sets_up_next_cn": "为每个实验的设计理由提供总览。",
+      "failure_if_removed_cn": "没有则读者在四个实验中迷失。",
+      "evidence_pointer": "Section 5.2 P1–P2"
+    },
+    {
+      "locator": "Section 5.2 Benchmarks",
+      "paraphrase_cn": "构造九个对照：GRU、四种标准注意力GRU以及DIIA、CEN、MDL-CW、MCL四种先进多模态深度学习方法。",
+      "move_code": "BENCHMARK_DESIGN",
+      "statement_status": "method_decision",
+      "why_here_cn": "建立多层次基准，用于检验DTV-AMI的相对优势。",
+      "inherits_from_previous_cn": "依赖第5.2节研究目标。",
+      "changes_argument_state_cn": "确定比较对象。",
+      "sets_up_next_cn": "为表2-5的数值比较提供结构。",
+      "failure_if_removed_cn": "没有则性能优势无法进行比较。",
+      "evidence_pointer": "Section 5.2 P3–P5"
+    },
+    {
+      "locator": "Section 5.3.1 Experiment 1",
+      "paraphrase_cn": "报告端到端预测结果：DTV-AMI在所有时间窗和输入类型下优于基线与八个基准；再解释多头略优、半年窗口常见最佳、图像评论与文本相当、多模态结合AMI后更优。",
+      "move_code": "STUDY_RESULT_AND_PATTERN_EXPLANATION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "提供第一层核心证据，并解释性能模式的可能机制。",
+      "inherits_from_previous_cn": "依赖表2数据。",
+      "changes_argument_state_cn": "证明DTV-AMI的预测优势。",
+      "sets_up_next_cn": "为实验2检验表征质量作铺垫。",
+      "failure_if_removed_cn": "没有则全文最直接的预测优势证据缺失。",
+      "evidence_pointer": "Section 5.3.1 Table 2"
+    },
+    {
+      "locator": "Section 5.3.2 Experiment 2",
+      "paraphrase_cn": "报告表征学习结果：将不同方法的表征输入SVM、随机森林和XGBoost，DTV-AMI在所有下游模型和时间窗中最好；逆匹配兼容函数优于激活和乘法函数。",
+      "move_code": "STUDY_RESULT_AND_ALTERNATIVE_EXPLANATION_EXCLUSION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "排除“只是预测头更好”的替代解释，说明表征本身更好。",
+      "inherits_from_previous_cn": "依赖表3数据与实验1结果。",
+      "changes_argument_state_cn": "把优势从端到端延伸到表征质量。",
+      "sets_up_next_cn": "支持语义多样性注意力对表征学习的重要。",
+      "failure_if_removed_cn": "没有则无法排除预测头替代解释。",
+      "evidence_pointer": "Section 5.3.2 Table 3"
+    },
+    {
+      "locator": "Section 5.3.3 Experiment 3",
+      "paraphrase_cn": "报告历史销售时间序列结果：ARIMA年窗口最佳约7.04%，超过仅用评论的预测；因此历史销售是必要的强基准，但它只依赖时序依赖而忽略市场需求扰动。",
+      "move_code": "STUDY_STRONG_BASELINE_AND_TRANSITION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "引入传统强基准，既说明历史销售重要，又为集成评论提供理由。",
+      "inherits_from_previous_cn": "依赖表4结果。",
+      "changes_argument_state_cn": "建立评论增量价值的比较下界。",
+      "sets_up_next_cn": "直接引出实验4的集成设计。",
+      "failure_if_removed_cn": "没有则无法证明评论在历史销售上的增量价值。",
+      "evidence_pointer": "Section 5.3.3 Table 4 and last transition sentence"
+    },
+    {
+      "locator": "Section 5.3.4 Experiment 4",
+      "paraphrase_cn": "报告集成特征预测结果：历史销售隐含特征、DTV-AMI多模态评论表征和月份指标整合后，XGBoost在半年窗口达到5.32% RMSE，比表4最佳ARIMA改进24.4%，比表3评论特征单独最优改进18.5%。",
+      "move_code": "STUDY_INTEGRATED_VALUE_RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出全文最重要应用结果，说明评论表征在传统特征之上的增量价值。",
+      "inherits_from_previous_cn": "依赖表5及实验2和3的最佳值。",
+      "changes_argument_state_cn": "从单任务性能升级为实际预测场景的价值。",
+      "sets_up_next_cn": "为后续探索性分析和贡献总结提供事实基础。",
+      "failure_if_removed_cn": "没有则文章缺少最直接的实际价值证据。",
+      "evidence_pointer": "Section 5.3.4 Table 5"
+    },
+    {
+      "locator": "Section 5.4 Exploratory Analysis",
+      "paraphrase_cn": "从训练后的模型提取四组注意力权重，按时间、多样性、投票排序并平均，用于回答RQ1。",
+      "move_code": "STUDY_OPENING_AND_METHOD_FOR_RQ1",
+      "statement_status": "method_decision",
+      "why_here_cn": "把预测优势与理论机制连接起来，为RQ1提供经验证据。",
+      "inherits_from_previous_cn": "依赖训练好的DTV-AMI。",
+      "changes_argument_state_cn": "从“模型更好”转向“模型学到了顾客注意力”。",
+      "sets_up_next_cn": "为图4-7的证据作方法准备。",
+      "failure_if_removed_cn": "没有则概念贡献缺乏经验检验。",
+      "evidence_pointer": "Section 5.4 P1–P2"
+    },
+    {
+      "locator": "Section 5.4.1–5.4.4",
+      "paraphrase_cn": "四个探索性分析分别显示：模型给更高时效、更低冗余、更多投票的评论更高权重，且图文交互权重ξ随时间步明显变化。",
+      "move_code": "STUDY_RESULT_FOR_RQ1",
+      "statement_status": "empirical_result",
+      "why_here_cn": "把预测性能升华为对RQ1的实证回答。",
+      "inherits_from_previous_cn": "依赖图4-7与5.4方法。",
+      "changes_argument_state_cn": "将模型权重解释为顾客注意力代理。",
+      "sets_up_next_cn": "为引导消融作准备，即需要确认组件贡献。",
+      "failure_if_removed_cn": "没有则概念问题没有经验回应。",
+      "evidence_pointer": "Section 5.4.1–5.4.4 Figures 4–7"
+    },
+    {
+      "locator": "Section 5.5 Ablation Analysis",
+      "paraphrase_cn": "通过移除语义多样性、时效性、投票意识或AMI形成TV-AMI、DV-AMI、DT-AMI、DTV四个变体，检验每个机制的独立贡献。",
+      "move_code": "STUDY_ABLATION_AND_COMPONENT_ATTRIBUTION",
+      "statement_status": "method_decision",
+      "why_here_cn": "把综合模型性能优势归因到具体设计成分，排除整体复杂度解释。",
+      "inherits_from_previous_cn": "依赖完整DTV-AMI和实验1结果。",
+      "changes_argument_state_cn": "将组件贡献与设计指标对应。",
+      "sets_up_next_cn": "为贡献部分“每个机制都有贡献”提供证据。",
+      "failure_if_removed_cn": "没有则无法支撑组件级归因。",
+      "evidence_pointer": "Section 5.5 and Online Appendix I"
+    }
+  ],
+  "discussion_and_contribution_sentence_map": [
+    {
+      "locator": "Section 6 P1 S1–S4",
+      "paraphrase_cn": "第一项贡献：将顾客对多模态评论的注意力概念化，并分解为四个指标，把帮助性研究从单条评论层面扩展到多个粒度层次，开放了顾客注意力用于销售预测的新可能。",
+      "move_code": "THEORETICAL_CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "在讨论开头把方法论和概念工作定义为概念贡献。",
+      "inherits_from_previous_cn": "依赖第3节概念化和第5节实证。",
+      "changes_argument_state_cn": "从经验结果返回概念层。",
+      "sets_up_next_cn": "为第二个方法论贡献作铺垫。",
+      "failure_if_removed_cn": "没有则论文只像是黑箱性能报告。",
+      "evidence_pointer": "Section 6 P1 S1–S4"
+    },
+    {
+      "locator": "Section 6 P2 S1–S5",
+      "paraphrase_cn": "第二项贡献：提出DTV-AMI这一多模态深度学习方法，作为新的设计科学制品，丰富了评论挖掘和设计科学的方法工具集。",
+      "move_code": "DESIGN_SCIENCE_CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把方法提升为制品的贡献，符合设计科学定位。",
+      "inherits_from_previous_cn": "依赖第4节设计和第5节评估。",
+      "changes_argument_state_cn": "从样本外预测优势升华为可复用制品。",
+      "sets_up_next_cn": "为第三项经验贡献作铺垫。",
+      "failure_if_removed_cn": "没有则设计科学贡献被弱化。",
+      "evidence_pointer": "Section 6 P2 S1–S5"
+    },
+    {
+      "locator": "Section 6 P3 S1",
+      "paraphrase_cn": "第三项贡献：大规模真实案例的实证结果加深了对顾客注意力如何随时间、语义多样性和投票变化，以及文本与图像如何被差异化注意、时效与投票如何交互的认识。",
+      "move_code": "EMPIRICAL_KNOWLEDGE_CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把性能结果转译为对顾客注意力机制的经验知识。",
+      "inherits_from_previous_cn": "依赖5.4探索性分析和实验证据。",
+      "changes_argument_state_cn": "从“模型更优”升级为“带来了经验规律”。",
+      "sets_up_next_cn": "为实践含义作铺垫。",
+      "failure_if_removed_cn": "没有则经验贡献不明。",
+      "evidence_pointer": "Section 6 P3 S1"
+    },
+    {
+      "locator": "Section 6 P4 practical implication 1",
+      "paraphrase_cn": "随着图像、音频、买家视频等越来越普遍，DTV-AMI可作为实际工具充分使用多模态数据支持业务决策。",
+      "move_code": "PRACTICAL_IMPLICATION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "扩展方法的实际应用场景。",
+      "inherits_from_previous_cn": "依赖制品的成功评价。",
+      "changes_argument_state_cn": "把方法转化为现实业务价值。",
+      "sets_up_next_cn": "为下一个实践含义作铺垫。",
+      "failure_if_removed_cn": "没有则实践价值不足。",
+      "evidence_pointer": "Section 6 P4 S1"
+    },
+    {
+      "locator": "Section 6 P4 practical implication 2",
+      "paraphrase_cn": "本文为产品创新者和顾客关系管理者理解顾客偏好与需求提供了一个新视角。",
+      "move_code": "PRACTICAL_IMPLICATION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把顾客注意力分析与管理实践连接起来。",
+      "inherits_from_previous_cn": "承接多模态评论分析方法。",
+      "changes_argument_state_cn": "从预测工具延伸到顾客洞察。",
+      "sets_up_next_cn": "为泛化场景作铺垫。",
+      "failure_if_removed_cn": "没有则应用面显得狭窄。",
+      "evidence_pointer": "Section 6 P4 S2"
+    },
+    {
+      "locator": "Section 6 P4 practical implication 3",
+      "paraphrase_cn": "虽然方法在酒店行业设计并评价，但可适应其他有多模态评论数据的领域，如在线零售商销售预测和社交网络热点预测。",
+      "move_code": "GENERALIZATION_CLAIM",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "说明方法可迁移性。",
+      "inherits_from_previous_cn": "依赖案例实验的成功。",
+      "changes_argument_state_cn": "把单行业结果推向多领域。",
+      "sets_up_next_cn": "为平台应用作铺垫。",
+      "failure_if_removed_cn": "没有则通用性不足。",
+      "evidence_pointer": "Section 6 P4 S3"
+    },
+    {
+      "locator": "Section 6 P4 practical implication 4",
+      "paraphrase_cn": "对第三方评论平台，文章提供了优化评价展示的建议——应突出顾客更感兴趣的评论以改善浏览体验。",
+      "move_code": "PRACTICAL_IMPLICATION_FOR_PLATFORM",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把顾客注意力研究成果用于界面和排序设计。",
+      "inherits_from_previous_cn": "依赖顾客注意力高评论更有价值的主张。",
+      "changes_argument_state_cn": "将预测技术转化为平台设计策略。",
+      "sets_up_next_cn": "为第7节结论作铺垫。",
+      "failure_if_removed_cn": "没有则平台价值未体现。",
+      "evidence_pointer": "Section 6 P4 S4"
+    },
+    {
+      "locator": "Section 7 P1",
+      "paraphrase_cn": "总结：文章用顾客注意力在多个粒度层次上揭示多模态评论对销售预测的价值，提出DTV-AMI，并在大样本数据上证明其优势。",
+      "move_code": "CONCLUSION_SUMMARY",
+      "statement_status": "author_inference",
+      "why_here_cn": "用一段话浓缩全文的目标、方法与结果。",
+      "inherits_from_previous_cn": "依赖全部章节。",
+      "changes_argument_state_cn": "把全文收拢为一条主线。",
+      "sets_up_next_cn": "为局限讨论作准备。",
+      "failure_if_removed_cn": "没有则结尾缺少完整概述。",
+      "evidence_pointer": "Section 7 P1"
+    },
+    {
+      "locator": "Section 7 P2 limitation 1",
+      "paraphrase_cn": "局限之一：仅在酒店行业案例评价，普适性需在更广上下文验证；数据还需要足够时间跨度、投票和多模态评论。",
+      "move_code": "BOUNDARY_AND_LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "承认泛化限制并给出数据要求。",
+      "inherits_from_previous_cn": "依赖案例设计。",
+      "changes_argument_state_cn": "从贡献回到边界。",
+      "sets_up_next_cn": "为后续局限。",
+      "failure_if_removed_cn": "没有则文章显得过度宣称。",
+      "evidence_pointer": "Section 7 P2 S1"
+    },
+    {
+      "locator": "Section 7 P2 limitation 2",
+      "paraphrase_cn": "局限之二：只建模样酒店自身评论，未纳入竞争对手评论，后者也可能影响焦点酒店销售。",
+      "move_code": "BOUNDARY_AND_LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "指出模型没有处理竞争环境。",
+      "inherits_from_previous_cn": "承接案例设计。",
+      "changes_argument_state_cn": "明确外部有效性边界。",
+      "sets_up_next_cn": "为下一局限作铺垫。",
+      "failure_if_removed_cn": "没有则忽略竞争因素。",
+      "evidence_pointer": "Section 7 P2 S2"
+    },
+    {
+      "locator": "Section 7 P2 limitation 3",
+      "paraphrase_cn": "局限之三：注意力指标对销售预测的作用本质上依赖领域，需按领域调整λ、η、γ、ξ等参数。",
+      "move_code": "BOUNDARY_AND_LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "说明参数可迁移性限制。",
+      "inherits_from_previous_cn": "承接泛化讨论。",
+      "changes_argument_state_cn": "把特定参数作为边界条件。",
+      "sets_up_next_cn": "为最后一个局限作铺垫。",
+      "failure_if_removed_cn": "没有则读者可能误以为参数无需调节。",
+      "evidence_pointer": "Section 7 P2 S3"
+    },
+    {
+      "locator": "Section 7 P2 limitation 4",
+      "paraphrase_cn": "局限之四：为降低计算复杂度使用固定嵌入，未来可探索词级和图像区域级更细粒度注意力。",
+      "move_code": "BOUNDARY_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "指出方法当前无法提供更细粒度注意力，并给出未来方向。",
+      "inherits_from_previous_cn": "依赖BPT编码选择。",
+      "changes_argument_state_cn": "把限制转为未来研究机会。",
+      "sets_up_next_cn": "结束全文。",
+      "failure_if_removed_cn": "没有则缺少未来方向。",
+      "evidence_pointer": "Section 7 P2 S4"
+    }
+  ],
+  "study_accumulation_logic": [
+    {
+      "study_or_phase": "阶段1：设计理由构建（过程-粒度框架与四个指标）",
+      "evidence_job_cn": "建立理论到设计的桥梁，把顾客注意力分解为四个内容无关指标。",
+      "what_it_establishes_cn": "确立reception阶段的注意力是销售预测的关键，四个理论每个推出一个设计指标与挑战。",
+      "what_it_cannot_establish_cn": "不能说明这些指标是否真的改善预测，也不能证明神经网络可以实现。",
+      "why_next_phase_is_needed_cn": "需要用计算方法把这些指标落地。",
+      "transition_wording_function_cn": "第3节末尾“设计理由产生方法论挑战”引出第4节DTV和AMI。"
+    },
+    {
+      "study_or_phase": "阶段2：制品构建（DTV-AMI）",
+      "evidence_job_cn": "把四个顾客注意力指标翻译为四个可训练的神经网络注意力机制。",
+      "what_it_establishes_cn": "建立一个理论上可证的多模态深度学习方法，能以每条评论为潜在起点动态加权并自适应融合图文。",
+      "what_it_cannot_establish_cn": "不能证明方法优于现有注意力和多模态基线，也不能证明每个成分有效。",
+      "why_next_phase_is_needed_cn": "需要在真实数据上评价制品。",
+      "transition_wording_function_cn": "第5节开头“我们进行了四个实验评价DTV-AMI”。"
+    },
+    {
+      "study_or_phase": "阶段3：实验1端到端预测性能",
+      "evidence_job_cn": "检验DTV-AMI在直接预测酒店入住率时是否优于基线和八种先进基准。",
+      "what_it_establishes_cn": "在所有时间窗、单模态和多模态输入下DTV-AMI预测性能显著领先。",
+      "what_it_cannot_establish_cn": "不能排除优势只来自最终预测头，也不能说明表征质量更好。",
+      "why_next_phase_is_needed_cn": "需要单独评估表征学习性能。",
+      "transition_wording_function_cn": "5.3.2开头说明“DTV-AMI的另一优势是表征学习能力”，引出实验2。"
+    },
+    {
+      "study_or_phase": "阶段4：实验2多模态表征学习",
+      "evidence_job_cn": "检验DTV-AMI学到的多模态表征在下游预测模型中是否更有效。",
+      "what_it_establishes_cn": "DTV-AMI表征在SVM、RF、XGBoost中全部最优，说明表征质量本身更好。",
+      "what_it_cannot_establish_cn": "不能说明评论相对历史销售的价值，因为表4中历史销售更强。",
+      "why_next_phase_is_needed_cn": "需要先给出历史销售时间序列基线，再检验评论增量价值。",
+      "transition_wording_function_cn": "5.3.3引入GRU和ARIMA的历史销售时间序列比较。"
+    },
+    {
+      "study_or_phase": "阶段5：实验3历史销售时间序列基线",
+      "evidence_job_cn": "给出传统销售预测的强基准。",
+      "what_it_establishes_cn": "历史销售（ARIMA年窗口7.04%）超过仅用评论的预测，说明历史销售是必要的下界。",
+      "what_it_cannot_establish_cn": "不能说明评论无价值，因为历史销售只依赖时序依赖，忽略需求波动。",
+      "why_next_phase_is_needed_cn": "评论反映顾客需求，因此需要把评论与历史销售整合。",
+      "transition_wording_function_cn": "5.3.3最后一句“历史销售忽略市场需求扰动，而评论直接反映顾客需求”引出实验4。"
+    },
+    {
+      "study_or_phase": "阶段6：实验4集成特征预测",
+      "evidence_job_cn": "检验评论表征在历史销售和月份指标之上的增量价值。",
+      "what_it_establishes_cn": "集成后在半年窗口达到5.32%，比ARIMA改进24.4%，比评论单独改进18.5%。",
+      "what_it_cannot_establish_cn": "不能说明四个注意力成分的各自贡献。",
+      "why_next_phase_is_needed_cn": "需要用探索性和消融分析回答RQ1并归因组件。",
+      "transition_wording_function_cn": "5.4开头“训练后注意力参数帮助我们理解顾客在什么粒度注意什么”。"
+    },
+    {
+      "study_or_phase": "阶段7：探索性分析（注意力权重）",
+      "evidence_job_cn": "把预测优势带回RQ1：检验模型权重是否确实偏向及时、多样、投票评论且图文交替主导。",
+      "what_it_establishes_cn": "模型学到的注意力模式与理论上的顾客注意力一致，为RQ1提供间接证据。",
+      "what_it_cannot_establish_cn": "模型权重只是顾客注意力的代理，不是直接观测行为；也不能证明每个机制本身必要。",
+      "why_next_phase_is_needed_cn": "需要消融分析确认每个组件对预测都有贡献。",
+      "transition_wording_function_cn": "5.5“为厘清每个机制的预测价值，我们进行消融分析”。"
+    },
+    {
+      "study_or_phase": "阶段8：消融分析",
+      "evidence_job_cn": "把性能优势归因到四个设计成分。",
+      "what_it_establishes_cn": "移除每个组件后性能下降，说明语义多样性、时效、投票和AMI都有贡献。",
+      "what_it_cannot_establish_cn": "正文未给出消融具体数值，依赖附录；无法直接证明顾客注意力行为本身。",
+      "why_next_phase_is_needed_cn": "消融结果支撑贡献部分“每个机制有效”的声明，同时被局限部分限定在特定数据和参数下。",
+      "transition_wording_function_cn": "第6节将消融、预测和探索结果共同升华为概念化、设计科学和经验知识三类贡献。"
+    }
+  ],
+  "claim_evidence_ledger": [
+    {
+      "claim_cn": "DTV-AMI在端到端销售预测中优于现有注意力与多模态方法。",
+      "claim_level": "technical",
+      "supporting_evidence_cn": "表2中所有时间窗和输入类型下RMSE最低，Tukey-Kramer事后检验在0.001水平显著。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 5.3.1",
+      "where_evidence_is_provided": "Table 2 and Online Appendix G"
+    },
+    {
+      "claim_cn": "DTV-AMI学到的多模态表征更有效。",
+      "claim_level": "technical",
+      "supporting_evidence_cn": "表3中三种下游预测模型全部取得最低RMSE。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 5.3.2",
+      "where_evidence_is_provided": "Table 3"
+    },
+    {
+      "claim_cn": "多模态评论在历史销售之外有增量价值。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "表5最优集成模型5.32%比表4最优ARIMA 7.04%改进24.4%，比表3评论特征单独最优6.53%改进18.5%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 5.3.4",
+      "where_evidence_is_provided": "Tables 3, 4, 5"
+    },
+    {
+      "claim_cn": "四个注意力机制确实模仿顾客注意力。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "图4-7显示权重更关注时效、语义多样、投票评论，且ξ随时间步变化；但这是模型权重的模式。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.4",
+      "where_evidence_is_provided": "Figures 4–7"
+    },
+    {
+      "claim_cn": "每个设计成分都有独立贡献。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "消融分析移除每个成分后性能下降（作者报告结果在Online Appendix I）。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.5",
+      "where_evidence_is_provided": "Online Appendix I"
+    },
+    {
+      "claim_cn": "方法的贡献不仅是暂时性能优势，而是可复用的设计知识。",
+      "claim_level": "design_knowledge",
+      "supporting_evidence_cn": "过程-粒度框架、四指标与对应注意力机制构成可复用模式；基于大规模案例和经验权重给出理论解释。",
+      "support_strength": "asserted",
+      "where_claim_is_made": "Sections 3 and 6",
+      "where_evidence_is_provided": "Section 3 Table 1; Section 6 P1–P3"
+    },
+    {
+      "claim_cn": "方法具有普适性，可迁移到其他行业与平台。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "仅在酒店行业验证，作者在实践含义和局限中承认需要扩展。",
+      "support_strength": "asserted",
+      "where_claim_is_made": "Section 6 P4 and Section 7 P2",
+      "where_evidence_is_provided": "Only hotel case study"
+    }
+  ],
+  "isr_positioning_logic": {
+    "constitutive_is_problem_cn": "文章把在线评论、顾客信息处理行为和酒店销售预测构成同一个IS问题：评论不是直接‘被销售吸收’，而是经由顾客选择性注意力中介后才影响购买和销售，因此销售预测问题同时也是顾客行为与信息处理问题。",
+    "technology_behavior_or_market_entanglement_cn": "技术制品（注意力机制）不是可随意替换的工具：它模拟顾客浏览路径中的接收阶段行为，模型参数既是计算组件，又是顾客注意力的代理，形成技术-行为的互相构成循环。",
+    "role_of_benchmark_or_objective_evidence_cn": "RMSE、MAE、显著性检验和多种baseline用于支持‘基于顾客注意力的机制在预测和表征上都有效’的IS主张；历史销售基准用来界定评论增量价值，而不是只报告分数优势。",
+    "theory_in_design_cn": "理论直接进入设计：四个注意力指标由理论推导而来，反过来指导网络机制的选择和公式（时间衰减、冗余惩罚、投票项、自适应图文权重），理论不是事后解释。",
+    "technical_vs_is_contribution_balance_cn": "文章前半部分大规模技术设计（公式、消融），后半部分把性能结果带回到顾客注意力概念化、设计科学范式和经验发现；相对均衡，但技术细节占比高。",
+    "beyond_transient_performance_cn": "作者通过探索性权重分析把性能优势转译成‘模型确实验证了顾客注意力假设’的理论信号，又通过过程-粒度框架给出可复用设计知识，试图让贡献超越单一数据集上的分数优势；但也存在未直接测量顾客注意力的短板。"
+  },
+  "paragraph_level_mimicry_template": {
+    "abstract_steps": [
+      {
+        "step_job_cn": "用领域共识开局。",
+        "research_evidence_required_cn": "需要该领域有公认的概念（如帮助性）及其常用度量。"
+      },
+      {
+        "step_job_cn": "立刻指出共识局限。",
+        "research_evidence_required_cn": "需要指出简单指标不稳的证据或理论原因。"
+      },
+      {
+        "step_job_cn": "提出替代性核心机制。",
+        "research_evidence_required_cn": "需要有一个可操作的核心构念（如顾客注意力）。"
+      },
+      {
+        "step_job_cn": "把机制概念化为可操作维度/指标。",
+        "research_evidence_required_cn": "需要能把这些维度与具体理论或现象对应。"
+      },
+      {
+        "step_job_cn": "描述制品如何落实这些维度。",
+        "research_evidence_required_cn": "需要制品有明确的技术实现依据。"
+      },
+      {
+        "step_job_cn": "给出大规模实证结果预览。",
+        "research_evidence_required_cn": "需要真实数据和性能比较结果。"
+      }
+    ],
+    "introduction_paragraph_steps": [
+      {
+        "step_job_cn": "第1段：建立背景和销售预测价值。",
+        "research_evidence_required_cn": "需要评论影响购买的文献和销售预测重要性的来源。"
+      },
+      {
+        "step_job_cn": "第2段：指出朴素做法和已有方法两缺口。",
+        "research_evidence_required_cn": "需要有限注意力证据和已有预测方法缺陷的文献。"
+      },
+      {
+        "step_job_cn": "第3段：提出核心机制与目标。",
+        "research_evidence_required_cn": "需要将购买意愿与认真阅读的联系作为合理推断。"
+      },
+      {
+        "step_job_cn": "第4段：批判内容式帮助性指标。",
+        "research_evidence_required_cn": "需要帮助性研究中矛盾结论和偏好异质的证据。"
+      },
+      {
+        "step_job_cn": "第5段：引入过程理论并定位到reception阶段。",
+        "research_evidence_required_cn": "需要信息处理理论/信息学习理论。"
+      },
+      {
+        "step_job_cn": "第6段：提出四粒度并给出RQ1。",
+        "research_evidence_required_cn": "需要可观察的浏览路径作为结构来源。"
+      },
+      {
+        "step_job_cn": "第7段：给出四指标的理论依据并引出RQ2与制品名。",
+        "research_evidence_required_cn": "需要四个理论来源和一个方法命名。"
+      },
+      {
+        "step_job_cn": "第8段：说明制品两级功能。",
+        "research_evidence_required_cn": "需要制品组件与指标有明确对应。"
+      },
+      {
+        "step_job_cn": "第9段：用结果预告收束。",
+        "research_evidence_required_cn": "需要初步实验结果和样本规模。"
+      }
+    ],
+    "theory_to_design_steps": [
+      {
+        "step_job_cn": "先声明设计科学范式，使理论推导成为合法贡献。",
+        "research_evidence_required_cn": "需要引用设计科学文献并说明设计理由的作用。"
+      },
+      {
+        "step_job_cn": "引入过程/粒度框架。",
+        "research_evidence_required_cn": "需要理论或观察到的浏览行为能支持两个维度。"
+      },
+      {
+        "step_job_cn": "对每个指标重复四步：理论主张、机制说明、设计需求、对应挑战。",
+        "research_evidence_required_cn": "每个指标都要有独立理论来源和可操作的设计要求。"
+      },
+      {
+        "step_job_cn": "用表格汇总指标到解决方案的映射。",
+        "research_evidence_required_cn": "需要四行对照信息，方便读者追踪。"
+      }
+    ],
+    "method_and_study_sequence_steps": [
+      {
+        "step_job_cn": "先描述数据与预测目标。",
+        "research_evidence_required_cn": "需要真实数据集、预测目标和预处理规则。"
+      },
+      {
+        "step_job_cn": "说明为什么考虑时代特征和历史销售。",
+        "research_evidence_required_cn": "需要选择这些特征的理论或实践理由。"
+      },
+      {
+        "step_job_cn": "给出实验路线图。",
+        "research_evidence_required_cn": "需要四个实验的问题分工。"
+      },
+      {
+        "step_job_cn": "构造多层基准。",
+        "research_evidence_required_cn": "需要基线方法集合和比较逻辑。"
+      }
+    ],
+    "results_reporting_steps": [
+      {
+        "step_job_cn": "先报表，再解释模式，再给机制推断。",
+        "research_evidence_required_cn": "需要统计显著性和对观察模式的合理因果解释。"
+      },
+      {
+        "step_job_cn": "用实验2排除预测头替代解释。",
+        "research_evidence_required_cn": "需要下游模型比较数据。"
+      },
+      {
+        "step_job_cn": "用实验3建立强基线与下界。",
+        "research_evidence_required_cn": "需要ARIMA/GRU时间序列结果。"
+      },
+      {
+        "step_job_cn": "用实验4展示增量价值。",
+        "research_evidence_required_cn": "需要集成特征结果与改进百分比。"
+      },
+      {
+        "step_job_cn": "用探索性权重回答概念问题。",
+        "research_evidence_required_cn": "需要注意力权重可视化。"
+      },
+      {
+        "step_job_cn": "用消融将优势归因组件。",
+        "research_evidence_required_cn": "需要移除各组件的变体比较。"
+      }
+    ],
+    "discussion_and_contribution_steps": [
+      {
+        "step_job_cn": "先把结果归纳为理论贡献（概念化）。",
+        "research_evidence_required_cn": "需要概念框架的完整性。"
+      },
+      {
+        "step_job_cn": "再归纳为方法贡献（设计科学制品）。",
+        "research_evidence_required_cn": "需要制品被评价的证据。"
+      },
+      {
+        "step_job_cn": "然后把实证结果转成经验知识贡献。",
+        "research_evidence_required_cn": "需要注意力权重和实验模式。"
+      },
+      {
+        "step_job_cn": "最后报告实践含义和边界限制。",
+        "research_evidence_required_cn": "需要明确哪些数据与参数是可迁移的，哪些是特定场景的。"
+      }
+    ]
+  },
+  "writing_algorithm": [
+    {
+      "step": 1,
+      "rhetorical_job_cn": "建立领域问题：评论帮助性虽重要但不足以支持销售预测。",
+      "research_evidence_required_cn": "需要综述文献中评论对销售影响、帮助性指标与销售关系不稳定的证据。",
+      "sentence_pattern_function_cn": "先给共识，再用但书转折引出简单指标的局限。",
+      "transition_condition_cn": "当读者认识到简单帮助性指标不足时，进入下一步。"
+    },
+    {
+      "step": 2,
+      "rhetorical_job_cn": "用信息处理理论区分reception与yielding阶段，确立内容无关视角。",
+      "research_evidence_required_cn": "需要信息学习/信息处理理论文本。",
+      "sentence_pattern_function_cn": "用理论划分两个阶段，并指出现有指标只覆盖其中一个阶段。",
+      "transition_condition_cn": "当读者接受‘内容指标未覆盖初始注意’时，进入下一步。"
+    },
+    {
+      "step": 3,
+      "rhetorical_job_cn": "用过程-粒度框架把注意力分解为多个可操作指标。",
+      "research_evidence_required_cn": "需要能支持四个粒度的浏览行为观察或理论。",
+      "sentence_pattern_function_cn": "从空间/粒度维度逐层列举，并说明每层对应一个指标。",
+      "transition_condition_cn": "当四个指标都有理论来源并能对应设计挑战时，进入下一步。"
+    },
+    {
+      "step": 4,
+      "rhetorical_job_cn": "将每个指标翻译为神经网络设计要求。",
+      "research_evidence_required_cn": "需要每个指标可转化为一个兼容函数或权重项。",
+      "sentence_pattern_function_cn": "重复‘指标指引我们的设计……因此我们设计……’结构。",
+      "transition_condition_cn": "当读者看到指标→机制的清晰映射，进入下一步。"
+    },
+    {
+      "step": 5,
+      "rhetorical_job_cn": "实现制品并说明每个设计公式的原因。",
+      "research_evidence_required_cn": "需要模型架构、公式和初步训练可行性。",
+      "sentence_pattern_function_cn": "先给公式，再说明每个符号的含义和它如何满足前文的设计需求。",
+      "transition_condition_cn": "当模型可被读者复现时，进入下一步。"
+    },
+    {
+      "step": 6,
+      "rhetorical_job_cn": "用多层评价证明预测与表征价值，再用传统基线确立增量。",
+      "research_evidence_required_cn": "需要四个实验的数据、baseline比较、显著性和集成结果。",
+      "sentence_pattern_function_cn": "先报表，再解释模式，再用过渡句把结果引向下一步实验。",
+      "transition_condition_cn": "当预测优势和增量价值都被展示后，进入下一步。"
+    },
+    {
+      "step": 7,
+      "rhetorical_job_cn": "用注意力权重和消融把性能优势回连到理论和设计。",
+      "research_evidence_required_cn": "需要训练后权重、消融变体及其性能。",
+      "sentence_pattern_function_cn": "先说明权重可视化方法，再报告模式，再把模式对应到理论。",
+      "transition_condition_cn": "当概念问题RQ1和组件归因RQ2都得到证据回答后，进入下一步。"
+    },
+    {
+      "step": 8,
+      "rhetorical_job_cn": "在讨论中从结果升级为概念/设计科学贡献并诚述边界。",
+      "research_evidence_required_cn": "需要明确哪些是直接证据、哪些是代理、哪些是案例特有。",
+      "sentence_pattern_function_cn": "用First/Second/Third归纳贡献，再用局限清单平衡宣称。",
+      "transition_condition_cn": "当贡献和局限都被清晰陈述后，论文结束。"
+    }
+  ],
+  "high_value_moves_to_mimic_cn": [
+    "用‘理论命题→机制→设计需求→公式→实验证据→消融/探索证据’四步链组织每个设计元素。",
+    "把研究问题分成RQ1（概念/机制）和RQ2（方法/工具）双轨，两者在实证中分别被回答。",
+    "用一组固定基准在预测、表征、集成三个层次反复比较，形成累积证据。",
+    "用传统强基准（历史销售）作为边界，再用集成实验展示增量价值。",
+    "用训练后的注意力权重做探索性分析，使概念问题有经验回应。",
+    "用消融分析把‘整体性能好’归因到具体设计成分，排除复杂度解释。",
+    "在第三部分和第四部分用表格和公式提供理论与设计的可追踪索引。",
+    "通过‘设计科学范式’的定位，让技术设计本身成为IS贡献。",
+    "用‘内容无关’把行为理论用到技术设计，避免依赖易变的内容特征。"
+  ],
+  "superficial_moves_not_to_copy_cn": [
+    "不要只复制‘注意力+指数衰减+投票项’的公式而不说明对应理论指标。",
+    "不要直接说模型权重等于顾客注意力，必须标明是代理或理论推断。",
+    "不要在只有单一行业数据时宣称普适，需要限定边界或做跨域验证。",
+    "不要只把消融数值放附录而不在正文给出关键解释。",
+    "不要用‘所有基准都显著’作为唯一论据，需要解释性能模式为什么出现。",
+    "不要堆砌大量baseline却不解释比较设计的层次逻辑。",
+    "不要把预测改进直接讲成理论贡献，必须用探索性分析和概念框架接回理论。"
+  ],
+  "unsupported_or_fragile_moves_cn": [
+    "从模型权重模式推断‘顾客真实的注意力’属未验证跳跃，作者用‘better prediction can be associated with more underlying customer attention’作为桥，但只是理论假定。",
+    "摘要和引言把‘高顾客注意力评论更有影响力’当作假设，但没有直接测量注意力因果效应。",
+    "Kuan et al. (2015) 的voted reviews与销售负相关与本文投票注意力机制的关系未充分调和，作者用“不同阶段”解释但未展开。",
+    "消融分析正文没有报告具体数值，组件归因的证据强度有限。",
+    "表3中XGBoost的一些标准差异常大（如10.08(6.16)），可能存在稳定性问题，正文未充分解释。",
+    "λ、η、γ、ξ的取值与敏感性讨论有限，对可复现性有影响。"
+  ],
+  "single_sentence_description_of_isr_routine_cn": "先用信息处理/过程-粒度理论把顾客注意力拆成四个内容无关指标，再用四个神经网络注意力机制把它们翻译成可训练制品，最后通过预测、表征、时序基线、集成、权重探索和消融六级证据宣称同时获得预测改进、机制解释和可复用设计知识。",
+  "confidence": 0.78,
+  "limitations_cn": "正文中的图1-7和表格内容因OCR/附件原因无法完整还原，表2-5的数值以提供的Markdown为准但部分单元格可能存在OCR误差；Online Appendices A-I未提供，因此消融和补充分析只能依赖作者叙述，无法核实消融数值和显著性；段落边界基本可靠，图片内容如注意力权重图无法直接检验。",
+  "usage": {
+    "prompt_tokens": 50078,
+    "completion_tokens": 38936,
+    "total_tokens": 89014,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 50078
+  }
+}

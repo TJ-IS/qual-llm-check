@@ -1,0 +1,1209 @@
+{
+  "record_id": "20317",
+  "source_file": "20317_2021_dncp-an-attention-based-deep-learning-approach-enhanced-with-attractiveness-and-timeliness-of-ne.md",
+  "title": "DNCP: An attention-based deep learning approach enhanced with attractiveness and timeliness of News for online news click prediction",
+  "authors": "Jie Xiong; Li Yu; Dongsong Zhang; Youfang Leng",
+  "year": "2021",
+  "journal": "Information & Management",
+  "doi": "10.1016/j.im.2021.103428",
+  "fulltext_chars": 74798,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:22.109617+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何将新闻的吸引力和时效性这两个此前被忽略的因素纳入深度学习模型，从而提升在线新闻点击预测性能？",
+    "artifact_and_design_cn": "DNCP（Deep News Click Prediction）是一种基于注意力机制的深度预测模型：用BiGRU学习新闻文本语义表示，用基于阅读-评论行为的主题模型BTM计算词级吸引力，用搜索热度趋势构造词级时效性向量，并通过CAM注意力机制把吸引力和时效性作为辅助特征与文本语义一起计算注意力权重；其余元特征由因子分解机FM嵌入并建模二阶交互，最终由Softmax层预测高/低点击区间。",
+    "objective_outcomes_cn": "在Sohu News和Toutiao News两个真实数据集上，DNCP在Precision、Recall、F1-score和Accuracy全部指标上显著优于BOW+SVM、Avg.Emb+SVM、CNN-text、RCNN、HAN和DeepFM等基线；消融模型中CAM明显优于AM，加入吸引力和时效性的组合显著改善预测；相关分析显示吸引力与点击数r约0.56–0.62，时效性与点击数r约0.77–0.78，均p<0.001。",
+    "core_contribution_cn": "作者声称的主要贡献是：首次定义并操作化新闻吸引力和时效性，提出DNCP及CAM注意力机制，以及通过实证证明吸引力、时效性和元特征高阶交互对点击预测的有效性，并给出可推广的注意力设计与文本/元特征融合启示。",
+    "whole_argument_in_one_paragraph_cn": "文章从信息过载下新闻点击预测的重要性出发，指出现有经典方法依赖人工特征工程、难以处理文本语义、忽略元特征高阶交互，且从未考虑吸引力和时效性两个关键因素。为填补该缺口，作者提出两个新度量：BTM利用读者的阅读-评论行为通过概率主题模型估计词级吸引力；时效性则由搜索热词趋势按时间衰减并依主题分布聚合得到。随后，DNCP用BiGRU编码文本，用CAM把吸引力、时效性向量与文本语义共同纳入注意力权重计算，同时用FM处理元特征交互，最后以Softmax二分类预测点击区间。评价分三层展开：先用双数据集和六个主流基线证明整体有效性；再用完整消融族（BiGRU、AM、AM*、AM^、CAM*、CAM^、CAM、DNCP）和Tukey HSD检验每个特征和注意力策略的贡献；最后用热力图和相关分析说明注意力关注对象和两种因素与点击数的正相关关系。讨论部分把结果回接到引言提出的缺口，将贡献表述为可泛化的“把辅助特征嵌入注意力机制”及“并行处理文本和元特征”的设计知识，同时承认语言和数据集边界。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章的核心动作是构造一个预测制品DNCP，并对其两个度量（吸引力和时效性）及神经网络组件进行评价，评价方式包括基准对比、消融研究和相关分析，最终生成可复用的设计知识；虽然未使用完整设计科学研究模板，但从需求/缺口、构件、评价到设计知识的路径更接近design science。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "论文的写作主线是：指出传统模型和深度模型在新闻点击预测上的性能/建模缺口，提出DNCP制品，然后以真实数据集上的baseline和消融benchmark为主要证据，最后在讨论部分把性能优势一般化为可迁移的注意力设计和元特征处理原则。",
+  "research_program": {
+    "study_or_phase_count": 6,
+    "overall_sequence_cn": "共六个阶段：先构造两个领域构念的度量（BTM吸引力、时效性热度向量），再构建完整DNCP模型；然后用双数据集基准对比证明整体有效性；再用消融实验分解每个设计成分；最后用相关分析补充构念与结果之间的机制证据。前面阶段为后一阶段提供输入，每个后续阶段回答上一阶段无法回答的问题。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "BTM吸引力度量构建",
+        "question_cn": "如何把新闻吸引力转化为可计算的词级度量？",
+        "inputs_and_setting_cn": "Sohu和Toutiao新闻语料、每篇新闻的阅读（点击）次数和评论行为数据；语料被均分为两部分，一部分用于BTM生词吸引力，另一部分用于点击预测。",
+        "designed_or_compared_object_cn": "BTM概率生成模型：在LDA基础上增加评论可观测变量c和词-主题吸引力η，使用Beta-Binomial共轭。",
+        "baseline_control_or_counterfactual_cn": "与标准LDA相比，BTM增加了评论行为生成过程；没有直接跑LDA作为对照。",
+        "objective_metrics": [
+          "词级吸引力得分c_id（Eq.5）",
+          "Gibbs采样后验估计的η分布"
+        ],
+        "analysis_method_cn": "全生成贝叶斯模型、collapsed Gibbs sampling、Dirichlet-Multinomial和Beta-Binomial共轭推导。",
+        "main_result_cn": "得到每个词在给定主题下的吸引力分布，并通过Eq.5把主题分布、词分布和吸引力相乘得到词吸引力得分。",
+        "argumentative_role_cn": "把抽象构念“吸引力”转化为可输入神经网络的向量c_i，这是后续CAM注意力机制的基础。",
+        "remaining_uncertainty_cn": "吸引力度量是否真的反映读者兴趣尚未被独立验证；评论/阅读比例稳定性的假设没有单独检验。",
+        "link_to_next_phase_cn": "得到的词吸引力向量c_i被送入DNCP的CAM注意力模块，并在消融实验和相关分析中作为可被单独检验的输入。",
+        "evidence_pointers": [
+          "Section 3.1.1",
+          "Fig. 2",
+          "Eq. 1–5",
+          "Section 4.2 BTM hyperparameters"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "时效性热度向量构建",
+        "question_cn": "如何把新闻时效性转化为随时间和主题变化的向量？",
+        "inputs_and_setting_cn": "从Sina Micro index爬取的词热度趋势、新闻发布日期、BTM产生的主题-词分布。",
+        "designed_or_compared_object_cn": "二维热度趋势矩阵T和词级时效性向量t（Eq.6）。",
+        "baseline_control_or_counterfactual_cn": "无法在热度矩阵中查到的词使用零向量作为默认值。",
+        "objective_metrics": [
+          "时效性向量t_i的维度设为90",
+          "衰减参数μ和全局参数λ（分别设为0.03和0.05）"
+        ],
+        "analysis_method_cn": "基于搜索热度矩阵，按新闻发布后天数指数衰减，并用BTM主题聚合得到词与主题的相关性加权。",
+        "main_result_cn": "每个词获得随时间变化的热度向量，反映该词所代表事件的公众兴趣和新闻生命周期。",
+        "argumentative_role_cn": "把构念“时效性”转化为可被神经网络使用的辅助向量t_i，支持CAM注意力机制对热词加权。",
+        "remaining_uncertainty_cn": "搜索热词与新闻正文词之间的映射不完全；缺失词用零向量可能带来测量噪声；衰减形式是人为假设。",
+        "link_to_next_phase_cn": "时效性向量与吸引力、文本语义一起进入CAM的score function，并成为后续消融模型的输入变量。",
+        "evidence_pointers": [
+          "Section 3.1.2",
+          "Eq. 6",
+          "Section 4.1 lexicon and trend matrix",
+          "Section 4.2 timeliness vector settings"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "DNCP神经网络架构构建与训练",
+        "question_cn": "如何把这些异构特征统一进一个端到端深度预测模型？",
+        "inputs_and_setting_cn": "Word2Vec预训练词向量、新闻标题/摘要序列、BTM吸引力向量、时效性向量、新闻元特征（作者、来源、标签、类别、发布日期等）、点击区间标签。",
+        "designed_or_compared_object_cn": "DNCP整体架构：BiGRU文本编码器、CAM注意力层、FM元特征层、Softmax输出层。",
+        "baseline_control_or_counterfactual_cn": "该阶段没有外部基准，只是构建模型；后续消融模型从DNCP中删除不同成分。",
+        "objective_metrics": [
+          "交叉熵损失",
+          "Softmax输出的高/低点击概率"
+        ],
+        "analysis_method_cn": "Adam优化器反向传播训练；文本和元特征表示分别学习后拼接进分类器。",
+        "main_result_cn": "模型能够同时利用文本语义、词吸引力、词时效性和元特征交互进行新闻点击区间预测。",
+        "argumentative_role_cn": "将前两个阶段的度量与已有的深度学习组件集成为一个可训练制品，是后续所有评价的对象。",
+        "remaining_uncertainty_cn": "组件各自的贡献并不清楚，需要基准对比和消融实验来分解。",
+        "link_to_next_phase_cn": "架构完成后面临的是“是否比现有多类方法更好”的问题，引向双数据集基准评价。",
+        "evidence_pointers": [
+          "Section 3",
+          "Fig. 1",
+          "Section 3.1–3.3",
+          "Section 4.2 experiment setup"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "主基准实验：DNCP与六个基线对比",
+        "question_cn": "DNCP是否整体优于经典机器学习和现有深度文本分类模型？",
+        "inputs_and_setting_cn": "两个平衡数据集：Sohu News低点击60,000条、高点击57,163条；Toutiao News低点击60,000条、高点击60,690条。",
+        "designed_or_compared_object_cn": "DNCP与BOW+SVM、Avg.Emb+SVM、CNN-text、RCNN、HAN和DeepFM比较。",
+        "baseline_control_or_counterfactual_cn": "六个基线分别代表传统特征+SVM、平均词向量+SVM、CNN文本分类、RNN+CNN、层级注意力HAN、元特征深度模型DeepFM。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1-score",
+          "Accuracy"
+        ],
+        "analysis_method_cn": "90%训练、10%测试；十折交叉验证；每折训练后用验证集选最优模型；paired-sample t-test检验DNCP与每个基线的差异显著性。",
+        "main_result_cn": "DNCP在所有指标上均高于所有基线，且绝大多数差异p<0.001，部分precision差异p<0.01。",
+        "argumentative_role_cn": "证明DNCP作为完整制品的总体有效性和竞争力，建立后续消融实验的前提。",
+        "remaining_uncertainty_cn": "整体更优并不能说明哪个设计成分起作用，也不能说明吸引力/时效性本身有效。",
+        "link_to_next_phase_cn": "为了回答“哪些部分起作用”，需要专门的消融模型族。",
+        "evidence_pointers": [
+          "Section 4.1 datasets",
+          "Section 4.3 baselines",
+          "Table 2",
+          "Section 5.1 first paragraph"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "消融实验与注意力策略分析",
+        "question_cn": "吸引力、时效性、文本语义、注意力机制和元特征高阶交互分别对预测有多大贡献？",
+        "inputs_and_setting_cn": "两个数据集上的消融模型族：BiGRU、AM、AM*、AM^、CAM*、CAM^、CAM、DNCP；以及热力图示例标题。",
+        "designed_or_compared_object_cn": "不同输入/注意力策略：是否加入吸引力、时效性、文本语义；是否使用经典注意力还是CAM。",
+        "baseline_control_or_counterfactual_cn": "BiGRU是无注意力基线；AM是经典注意力；AM*/AM^是仅用吸引力/时效性计算注意力的不完整版本；CAM*/CAM^是备选组合；CAM是无元特征的注意力版本；DNCP包含全部。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1-score",
+          "Accuracy",
+          "Tukey HSD pairwise mean differences",
+          "注意力权重热力图"
+        ],
+        "analysis_method_cn": "post hoc Tukey HSD检验所有消融模型两两比较；热力图显示不同注意力策略对各词的权重分布。",
+        "main_result_cn": "AM显著优于BiGRU；CAM*优于AM；CAM^在recall上提升更显著但precision提升不显著；CAM结合吸引力和时效性后全面优于AM；DNCP最优；含FM元特征交互的模型显著提升recall。",
+        "argumentative_role_cn": "把整体性能优势分解到具体设计决定，直接回应“吸引力/时效性是否有效”这一核心问题。",
+        "remaining_uncertainty_cn": "部分比较（如AM^对AM*）不显著；热力图基于极少量示例，难以代表一般模式；消融只在两个中文数据集上做。",
+        "link_to_next_phase_cn": "消融结果说明两种因素确实有用，于是需要补充显示它们与点击数正相关的相关分析。",
+        "evidence_pointers": [
+          "Section 4.3 ablation models",
+          "Table 3",
+          "Table 4",
+          "Section 5.1 Tukey and thermodynamic diagram"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "吸引力、时效性与点击数的相关分析",
+        "question_cn": "为什么消融实验中加入吸引力和时效性会提升预测？二者是否真的与新闻点击数正相关？",
+        "inputs_and_setting_cn": "从Sohu和Toutiao原始数据中各随机抽取30,000篇文章；对点击数做对数变换；新闻吸引力由标题词吸引力平均。",
+        "designed_or_compared_object_cn": "新闻级吸引力、新闻级时效性与对数点击数之间的相关关系。",
+        "baseline_control_or_counterfactual_cn": "无干预对照；使用Pearson相关作为关联度量。",
+        "objective_metrics": [
+          "Pearson相关系数r",
+          "显著性p值"
+        ],
+        "analysis_method_cn": "随机抽样、对数变换、Pearson相关分析。",
+        "main_result_cn": "Sohu/Toutiao上吸引力与点击数r=0.6173/0.5570，时效性与点击数r=0.7841/0.7721，均p<0.001。",
+        "argumentative_role_cn": "为消融实验发现的性能提升提供构念层面的一致性证据，说明模型确实捕捉到与点击相关的因素。",
+        "remaining_uncertainty_cn": "相关不等于因果；时效性与点击数计算方式未像吸引力那样详细说明；标题平均吸引力不代表全文吸引力。",
+        "link_to_next_phase_cn": "相关分析的结果在讨论中被用来解释为何DNCP优于部分输入模型，并支撑贡献声明。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Fig. 3",
+          "Table 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 新闻点击/流行度预测对新闻提供方和推荐系统重要",
+      "PRIOR_KNOWLEDGE: 吸引力和时效性是新闻点击的两个主要驱动因素",
+      "LIMITATION: 现有新闻点击预测模型忽略这两个变量",
+      "GAP: 缺乏如何表示它们以及它们对预测性能有效性和价值的理解",
+      "RQ_OR_OBJECTIVE: 提出DNCP，在基于注意力的深度网络中整合吸引力与时效性",
+      "RESULT: 两个真实数据集的实证评价表明DNCP优于多种基线",
+      "CONTRIBUTION: 声称提供多项研究贡献和实用启示"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 数字时代信息过载，新闻数量巨大",
+      "PRACTICAL_STAKES: 内容平台依赖流行度预测分配资源",
+      "PHENOMENON: Google News等门户推荐潜在热门新闻",
+      "RQ_OR_OBJECTIVE: 界定本研究预测时点——新闻发布后，基于已获得关注预测未来点击",
+      "PRIOR_KNOWLEDGE: 预测可视为回归或分类，主要使用文本和元特征",
+      "LIMITATION: 传统方法需要繁重特征工程，对特征质量敏感",
+      "LIMITATION: 没有研究元特征的高阶隐式交互",
+      "GAP: 吸引力和时效性两个关键因素被忽略",
+      "THEORY_INTRO: 定义吸引力和时效性，并区分clickbait和freshness",
+      "RQ_OR_OBJECTIVE: 提出DNCP，包含文本表示和元特征表示两部分",
+      "DESIGN_FEATURE: 用BiGRU、CAM、BTM、热词趋势和FM实现两类表示学习",
+      "CONTRIBUTION: 列出三点理论和技术贡献",
+      "STUDY_OVERVIEW: 预告全文组织结构"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 经典方法用特征工程提取文本和元特征，新闻机构和热门关键词影响点击",
+      "PRIOR_KNOWLEDGE: 回归模型基于早期浏览预测未来点击，后期加入时间加权和时间序列",
+      "PRIOR_KNOWLEDGE: 分类模型如SVM、DT、bagging被用于新闻流行度预测",
+      "LIMITATION: 经典方法对特征选择敏感，词袋法损失语序和语义，忽略元特征高阶交互，忽略吸引力/时效性",
+      "PRIOR_KNOWLEDGE: 深度学习中BiLSTM、CNN、HAN、RCNN在文本表示上取得成功",
+      "METHOD_JUSTIFICATION: 预训练模型计算成本高，本研究重点是吸引力和时效性而非预训练表示，所以使用RNN"
+    ],
+    "artifact_design_moves": [
+      "THEORY_PROPOSITION: 新闻吸引力由词吸引力聚合而成，但词吸引力依赖上下文",
+      "MECHANISM: 高质量、吸引人的新闻会引发更多读者评论，评论行为可反映吸引力",
+      "DESIGN_FEATURE: BTM在LDA基础上加入评论变量c和吸引力变量η，形成全生成贝叶斯模型",
+      "DESIGN_FEATURE: 吸引力得分由主题分布、词分布和主题词吸引力相乘得到",
+      "MECHANISM: 搜索热词热度反映公众兴趣，新闻时效性随时间衰减并与主题相关",
+      "DESIGN_FEATURE: 时效性向量按发布后天数衰减并用BTM主题聚合",
+      "DESIGN_FEATURE: BiGRU从前后两个方向获取上下文词表示",
+      "DESIGN_FEATURE: CAM在注意力score function中同时纳入文本语义、吸引力和时效性向量",
+      "DESIGN_FEATURE: 元特征稀疏且存在交互，FM通过潜向量内积建模二阶交互",
+      "DESIGN_FEATURE: 文本表示h_a与元特征表示h_f拼接后输入Softmax分类器"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 使用两个真实数据集避免单一数据集结论偏差",
+      "BENCHMARK_OR_CONTRAST: 以10000次点击为界划分高低点击类，采用二分类",
+      "METHOD_JUSTIFICATION: 用欠采样处理类别不平衡",
+      "METHOD_JUSTIFICATION: 使用标题和摘要而非正文，因为读者点击前看不到正文",
+      "BENCHMARK_OR_CONTRAST: 基线的选择覆盖传统SVM、CNN、RCNN、HAN和元特征深度模型DeepFM",
+      "BENCHMARK_OR_CONTRAST: 消融模型族从BiGRU到AM、AM*、AM^、CAM*、CAM^、CAM，再到完整DNCP",
+      "METHOD_JUSTIFICATION: 采用P/R/F1/A四指标、90/10划分、十折交叉验证和显著性检验",
+      "RESULT: DNCP在所有指标上显著优于全部基线",
+      "RESULT: Tukey HSD显示注意力机制、吸引力、时效性和组合CAM各有贡献",
+      "RESULT: 热力图显示不同注意力策略对名词、热词和吸引性词的关注差异",
+      "RESULT: 相关分析显示吸引力和时效性与点击数强正相关"
+    ],
+    "discussion_and_contribution_moves": [
+      "PRACTICAL_STAKES: 精确点击预测可显著改善新闻分发效率并发现高价值新闻",
+      "CONTRIBUTION: 定义并度量吸引力和时效性，扩展LDA，纳入时间衰减",
+      "CONTRIBUTION: 提出CAM，将辅助特征嵌入注意力机制，并称该思想可泛化",
+      "CONTRIBUTION: 用FM改进元特征处理，并行处理文本和元特征降低训练复杂度",
+      "CONTRIBUTION: 提出实践启示——资源分配、写作质量、热点识别、文本与元特征融合",
+      "BOUNDARY_CONDITION: 评价数据来自两个中文新闻源，需要多语言验证",
+      "LIMITATION_AND_FUTURE: FM替代方案如AFM/XDeepFM/IFM未来可评估，但本文重点是元特征及其交互是否有效"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "新闻流行度预测实证文献：热门关键词、新闻机构、评论量等对点击有影响",
+      "概率主题模型LDA及Dirichlet-Multinomial共轭",
+      "读者行为：阅读-评论行为可指示内容吸引力",
+      "搜索热词/公众舆论平台热度反映公众兴趣",
+      "深度文本表示：Word2Vec、BiGRU、注意力机制",
+      "因子分解机FM及其在点击率预测中的应用"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "文章没有从正式行为理论推导设计，而是用领域知识（吸引力/时效性影响点击）和工程方法（LDA、BiGRU、注意力、FM）构造模型；先进工程组件选择主要由已有文献和可行性驱动，因此是部分耦合而非直接由理论推出。",
+    "translation_chain_cn": "吸引力影响点击 → 读者更愿意点击和评论有吸引力的内容 → 评论/阅读比例可作吸引力的行为指标 → BTM以Beta-Binomial共轭估计词-主题吸引力η → 词吸引力向量c_i进入注意力score。 新闻热度随时间变化且受公众兴趣驱动 → 搜索热词趋势反映兴趣 → 按时长衰减并按主题分布聚合为时效性向量t_i → t_i进入注意力score。 文本语义需要上下文 → BiGRU双向编码得到h_i → 注意力score同时使用h_i、c_i、t_i → 高权重词构成文本表示h_a。 元特征高维稀疏且存在交叉影响 → 嵌入到稠密向量并用FM建模二阶交互 → 得到h_f。 h_a和h_f拼接后经Softmax输出高低点击概率。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "有吸引力或有趣的新闻更容易被点击，读者评论行为能反映内容吸引力",
+        "mechanism_cn": "读者对更吸引人的内容更可能阅读并评论，评论/阅读行为可作为吸引力的贝叶斯观测",
+        "design_requirement_cn": "模型需要从行为数据中学到词级吸引力信号，并让该信号影响文本表示",
+        "artifact_choice_cn": "BTM：在LDA中增加评论变量c和词-主题吸引力η，用Beta-Binomial共轭得到η后验",
+        "evaluated_contrast_cn": "AM*（仅吸引力）vs AM（仅语义）；CAM*（语义+吸引力）vs AM；CAM* vs AM*",
+        "objective_result_cn": "CAM*显著优于AM，且CAM* vs AM*差异p<0.001；说明吸引力加入注意力带来显著改进",
+        "evidence_pointers": [
+          "Section 3.1.1",
+          "Fig. 2",
+          "Table 3 rows CAM*-AM, CAM*-AM*"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "新闻时效性反映事件热度和生命周期，热词搜索趋势可代表公众兴趣",
+        "mechanism_cn": "公众对热点事件的兴趣随时间衰减，搜索热词上升/下降揭示新闻生命周期",
+        "design_requirement_cn": "模型需要把每个词的时效性按发布时间衰减，并结合主题分布计算",
+        "artifact_choice_cn": "基于Sina Micro index热度矩阵构造热度趋势向量t_i，按μ衰减并用BTM主题-词分布加权",
+        "evaluated_contrast_cn": "AM^（仅时效性）vs AM；CAM^（语义+时效性）vs AM；CAM^ vs CAM*",
+        "objective_result_cn": "CAM^显著提升recall，但对precision/F1/accuracy提升不总是显著；CAM^与CAM*比较时recall提升显著",
+        "evidence_pointers": [
+          "Section 3.1.2",
+          "Eq. 6",
+          "Table 3 rows CAM^-AM, CAM^*-AM, CAM^-CAM*"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "文本语义需要上下文，单一方向RNN无法捕捉完整上下文",
+        "mechanism_cn": "BiGRU通过前向和后向隐藏状态拼接获得每个词的双向上下文表示",
+        "design_requirement_cn": "文本编码器应保留双向上下文信息",
+        "artifact_choice_cn": "使用Word2Vec预训练嵌入和BiGRU，词表示h_i为前向/后向隐藏向量拼接",
+        "evaluated_contrast_cn": "BiGRU vs AM等加入注意力层的模型",
+        "objective_result_cn": "BiGRU显著劣于多数模型，加入注意力层的AM显著提升所有指标",
+        "evidence_pointers": [
+          "Section 3.1.3",
+          "Table 3 rows AM-BiGRU, CAM-BiGRU"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "元特征高维稀疏且存在交叉影响（如类别和发布星期交互）",
+        "mechanism_cn": "FM将特征交互建模为潜向量内积，能在稀疏数据中估计二阶交互",
+        "design_requirement_cn": "元特征应被嵌入成稠密向量，并显式建模order-2交互",
+        "artifact_choice_cn": "元特征嵌入层 + FM层，输出h_f；同时与文本表示拼接进入分类器",
+        "evaluated_contrast_cn": "DeepFM/DNCP（含FM）与不含FM的文本模型对比；DNCP vs CAM",
+        "objective_result_cn": "含FM元特征处理的DeepFM和DNCP在recall上显著更高，DNCP综合指标最优",
+        "evidence_pointers": [
+          "Section 3.2",
+          "Table 2",
+          "Section 5.1 high-order interactions paragraph"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "注意力机制能突出重要词，经典attention只用文本语义计算权重",
+        "mechanism_cn": "吸引力、时效性等辅助特征与语义特征一起进入score function，可改变词的重要性权重",
+        "design_requirement_cn": "注意力score函数应同时接收文本语义、吸引力和时效性向量",
+        "artifact_choice_cn": "CAM：s(h_i,c_i,t_i)=u^T tanh(W_h h_i+W_c c_i+W_t t_i+b)",
+        "evaluated_contrast_cn": "CAM vs AM；CAM vs CAM*；CAM vs CAM^*；以及热力图比较",
+        "objective_result_cn": "CAM在所有指标上显著优于AM；组合吸引力和时效性显著优于只加单因素的CAM*和CAM^的大部分比较",
+        "evidence_pointers": [
+          "Section 3.1.4",
+          "Eq. 9–11",
+          "Table 3 rows CAM-AM, CAM-CAM*, CAM-CAM^",
+          "Table 4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "双真实数据集基准对比",
+      "paired-sample t-test显著性检验",
+      "消融模型族与Tukey HSD事后检验",
+      "注意力权重热力图可视化",
+      "吸引力和时效性与点击数的Pearson相关分析"
+    ],
+    "why_these_evaluations_cn": "需要回答三个递进问题：完整模型是否比现有方法好；如果好，是哪个设计成分造成的；这些成分为什么有用。基准对比回答第一个问题，消融实验回答第二个问题，相关分析和热力图回答第三个问题，同时缓解“仅凭性能提升”的风险。",
+    "benchmark_and_contrast_chain_cn": "先用六个外部基准建立整体性能参照；再构造从BiGRU到AM、AM*、AM^、CAM*、CAM^、CAM的消融族，逐步加入文本语义、吸引力、时效性及CAM组合；最后用DNCP加入元特征交互。外部基准用于证明制品整体竞争力，内部消融用于证明设计决定有效，相关分析用于把性能差异与构念本身联系起来。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "DNCP整体优于现有基线",
+        "evidence_cn": "Table 2显示DNCP在P/R/F1/A上高于全部基线；paired t-test显示大多数差异p<0.001",
+        "support_cn": "充分"
+      },
+      {
+        "claim_cn": "注意力机制能改善预测",
+        "evidence_cn": "AM显著优于BiGRU，所有指标p<0.001（Table 3）",
+        "support_cn": "充分"
+      },
+      {
+        "claim_cn": "吸引力特征有效",
+        "evidence_cn": "CAM*在多个比较中显著优于AM，CAM* vs AM*显著；吸引力与点击数r约0.56–0.62",
+        "support_cn": "较充分，但相关分析不是因果证据"
+      },
+      {
+        "claim_cn": "时效性特征有效",
+        "evidence_cn": "CAM^显著提升recall；时效性与点击数r约0.77–0.78",
+        "support_cn": "较充分；但precision/F1/accuracy提升不总是显著"
+      },
+      {
+        "claim_cn": "元特征高阶交互有效",
+        "evidence_cn": "含FM的DeepFM和DNCP显著提升recall；DNCP优于排除元特征的CAM",
+        "support_cn": "较充分，但FM具体贡献缺乏更细的消融"
+      },
+      {
+        "claim_cn": "CAM思想可泛化到其他文本表示场景",
+        "evidence_cn": "仅在两个新闻数据集和一个热力图上展示，没有跨领域验证",
+        "support_cn": "不足，属于讨论中的推断"
+      },
+      {
+        "claim_cn": "吸引力、时效性与点击强正相关",
+        "evidence_cn": "Pearson r在0.5570–0.7841之间，p<0.001",
+        "support_cn": "充分，但是相关而非因果"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用两个数据集并做随机欠采样平衡类别；固定90/10训练测试划分和十折交叉验证；选择验证集上最优模型再做正式测试；用paired t-test和Tukey HSD控制多重比较；消融模型仅改变一个输入/注意力成分，便于归因；超参数基本固定并由文献或启发式设定。",
+    "external_validity_strategy_cn": "使用Sohu News和Toutiao News两个不同来源的中文新闻数据集；发布时间窗口一致；包含不同内容生态的新闻门户；与多种成熟基线比较；结论在讨论中限定在中文新闻和发布后预测场景。",
+    "what_is_not_actually_tested_cn": "没有检验BTM吸引力度量相对其他简单度量（如评论数）的增量有效性；没有检验预训练模型迁移；没有做跨语言实验；没有A/B或在线部署证据；注意力热力图只基于两个标题，不能证明一般化；FM替代模型（AFM/XDeepFM/IFM）并未被实验比较。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在Sohu和Toutiao数据集上，DNCP在Precision、Recall、F1和Accuracy上显著优于BOW+SVM、Avg.Emb+SVM、CNN-text、RCNN、HAN和DeepFM。",
+    "artifact_claim_cn": "DNCP的改进来自：将吸引力和时效性作为辅助特征加入CAM注意力机制，以及用FM对元特征二阶交互建模；消融模型对比支持这一归因。",
+    "mechanism_claim_cn": "吸引力高的词和时效性强的词能引导注意力权重集中于热点和有趣内容，从而生成更能预测点击的新闻表示；相关分析显示两者与点击数正相关。",
+    "boundary_claim_cn": "结论适用于发布后依据已有关注度预测高低点击区间、以中文新闻门户为场景的情形；对未在热度矩阵中的词使用零向量；FM只考虑order-2交互。",
+    "reusable_design_knowledge_cn": "辅助特征可以通过CAM式score函数并入注意力机制，从而在不改变网络拓扑基本结构情况下强化文本表示；元特征应嵌为稠密向量并用FM建模高阶交互；文本和元特征表示可以并行学习后拼接。",
+    "theoretical_contribution_cn": "把“新闻吸引力”和“新闻时效性”概念化为可计算度量（BTM与热度趋势向量），扩展LDA的生成过程，并为新闻点击预测领域补充了关于这两个因素的实证证据。",
+    "how_discussion_closes_intro_gap_cn": "讨论开头重述“吸引力和时效性被忽略”的缺口，然后分别用BTM、热度趋势、CAM、FM这三个设计动作对应回应，并用相关分析和消融结果作为证据，把结论带回新闻点击预测和推荐系统语境。",
+    "overclaim_or_unsupported_leaps_cn": "“首次纳入”是强声称，文献覆盖有限；CAM思想“可泛化”没有跨领域证据；相关分析被用来解释因果机制略显跳跃；时效性对precision不显著的问题未被充分展开；FM高阶交互的贡献存在其他解释（如DeepFM也包含深度学习组件）。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "预测新闻点击量或流行度对新闻提供方和推荐系统非常重要。",
+      "rhetorical_function_cn": "开篇把任务与现实价值挂钩，吸引IS读者注意。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续指出研究缺口提供价值前提。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "吸引力和时效性是新闻点击的两个突出驱动因素。",
+      "rhetorical_function_cn": "为文章引入两个核心构念。",
+      "depends_on_cn": "承接点击预测重要性。",
+      "sets_up_cn": "引出下文“它们被忽略”的缺口。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有新闻点击预测模型忽略了吸引力和时效性这两个重要变量。",
+      "rhetorical_function_cn": "直接建立缺口。",
+      "depends_on_cn": "依赖前一句对两因素重要性的设定。",
+      "sets_up_cn": "引出论文目标和贡献。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P1 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "缺乏对如何表示这两变量以及它们对预测性能有效性和价值的探索和理解。",
+      "rhetorical_function_cn": "把“忽略”细化为表示与评估两个子缺口。",
+      "depends_on_cn": "承接现有模型忽略两变量。",
+      "sets_up_cn": "为提出DNCP和两个新度量设置具体目标。",
+      "evidence_pointer": "Abstract P1 S4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P1 S5",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究提出DNCP模型，把吸引力和时效性整合进基于注意力的深度神经网络。",
+      "rhetorical_function_cn": "宣布研究目标与制品。",
+      "depends_on_cn": "由前句的缺口决定。",
+      "sets_up_cn": "说明后续评价围绕DNCP展开。",
+      "evidence_pointer": "Abstract P1 S5"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P1 S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "两个真实数据集上的实证评价显示DNCP优于多种基线模型。",
+      "rhetorical_function_cn": "用结果支撑目标。",
+      "depends_on_cn": "依赖前一句提出的模型。",
+      "sets_up_cn": "让读者预期正文中的baseline评价。",
+      "evidence_pointer": "Abstract P1 S6"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "P1 S7",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究发现为提高新闻点击预测提供若干研究贡献和实用启示。",
+      "rhetorical_function_cn": "在摘要末尾做价值概括。",
+      "depends_on_cn": "依赖前面的模型和结果。",
+      "sets_up_cn": "引出正文讨论部分。",
+      "evidence_pointer": "Abstract P1 S7"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数字时代信息爆炸，每天产生大量数据包括海量新闻。",
+      "rhetorical_function_cn": "建立宏观背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为内容流行度预测提供需求背景。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "内容分发和分享平台常依赖流行度预测来更好地分配资源并满足读者信息需求。",
+      "rhetorical_function_cn": "说明问题的重要性。",
+      "depends_on_cn": "由信息爆炸背景引出。",
+      "sets_up_cn": "引入Google News的实例。",
+      "evidence_pointer": "Introduction P1 S2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "Google News等新闻门户推荐可能受欢迎的新闻给读者。",
+      "rhetorical_function_cn": "给出具体现象，帮助读者直观理解任务。",
+      "depends_on_cn": "依赖前句的资源分配需求。",
+      "sets_up_cn": "说明新闻点击预测对推荐系统重要。",
+      "evidence_pointer": "Introduction P1 S3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究聚焦新闻发布后的点击预测，利用新闻已获得的关注度预测未来点击。",
+      "rhetorical_function_cn": "限定研究范围和预测时点，避免方法泛化表述。",
+      "depends_on_cn": "需要先有预测新闻点击的大背景。",
+      "sets_up_cn": "为后续数据集和特征选择提供依据。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "点击预测通常被看作回归或分类问题，使用文本和元特征作为预测特征。",
+      "rhetorical_function_cn": "总结现有任务形式。",
+      "depends_on_cn": "由范围限定引出。",
+      "sets_up_cn": "为批评特征工程和缺失因素做准备。",
+      "evidence_pointer": "Introduction P2 S2"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "常用方法主要是线性回归和决策树，需要繁重临时特征工程，性能对特征质量敏感。",
+      "rhetorical_function_cn": "指出经典方法的第一类局限。",
+      "depends_on_cn": "依赖前句对现有方法的总结。",
+      "sets_up_cn": "为深度学习方法提供登场理由。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P2 S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有研究从未考察元特征之间的高阶隐性交互，例如财经新闻在工作日比周末点击率高。",
+      "rhetorical_function_cn": "提出第二个缺口，并用举例说明交互存在。",
+      "depends_on_cn": "建立在元特征被使用过的文献基础上。",
+      "sets_up_cn": "为FM组件的引入做铺垫。",
+      "evidence_pointer": "Introduction P2 S4"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P2 S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "一些影响点击的关键因素没有纳入已有研究，例如吸引力和时效性。",
+      "rhetorical_function_cn": "明确提出本文的核心缺口。",
+      "depends_on_cn": "前两句的限制积累到此。",
+      "sets_up_cn": "引出对两个构念的定义。",
+      "evidence_pointer": "Introduction P2 S5"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P2 S6",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义吸引力为新闻对个体的吸引性或趣味性，并区分它不只是clickbait。",
+      "rhetorical_function_cn": "澄清构念边界。",
+      "depends_on_cn": "由前句的GAP引出。",
+      "sets_up_cn": "为3.1.1的BTM度量做概念准备。",
+      "evidence_pointer": "Introduction P2 S6"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P2 S7",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义时效性为新闻所报道事件的热度趋势，随时间变化并揭示新闻生命周期，不同于freshness。",
+      "rhetorical_function_cn": "澄清第二个构念并区分相近概念。",
+      "depends_on_cn": "同上，承接GAP。",
+      "sets_up_cn": "为3.1.2的热度向量做概念准备。",
+      "evidence_pointer": "Introduction P2 S7"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为应对上述局限，本文提出新的基于注意力的深度方法DNCP。",
+      "rhetorical_function_cn": "把研究问题转为研究方案。",
+      "depends_on_cn": "依赖引言中的三个局限。",
+      "sets_up_cn": "引出架构概览。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P3 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DNCP由文本表示学习和元特征表示学习两部分组成，前者把吸引力和时效性与BiGRU结合。",
+      "rhetorical_function_cn": "高屋建瓴地展示设计骨架。",
+      "depends_on_cn": "由RQ_OR_OBJECTIVE引出。",
+      "sets_up_cn": "指导3.1和3.2的安排。",
+      "evidence_pointer": "Introduction P3 S2"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P3 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "CAM把吸引力和时效性纳入注意力表示，BTM建模吸引力，热词趋势表示时效性，FM处理元特征交互。",
+      "rhetorical_function_cn": "概述三个关键技术动作。",
+      "depends_on_cn": "依赖骨架结构。",
+      "sets_up_cn": "为正文各小节提供预告。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究有三点贡献：提出吸引力和时效性的概念与度量；提出DNCP集成模型和基于吸引力/时效性的注意力机制；实证证明整体和两个因素的有效性。",
+      "rhetorical_function_cn": "正式声明贡献清单。",
+      "depends_on_cn": "基于所提模型。",
+      "sets_up_cn": "为讨论部分的贡献复述做铺垫。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "预告全文结构：相关工作、方法、评价、结果、讨论与结论。",
+      "rhetorical_function_cn": "给读者阅读地图。",
+      "depends_on_cn": "之前所有引言内容。",
+      "sets_up_cn": "引导进入第2节。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 23,
+      "section": "Related Work",
+      "locator": "Section 2.1 opening",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "经典方法先做特征工程，再把特征输入机器学习模型；特征分文本和元特征两类。",
+      "rhetorical_function_cn": "建立传统方法的分析框架。",
+      "depends_on_cn": "来自引言中的方法概述。",
+      "sets_up_cn": "为后续批评特征工程和缺失变量提供结构。",
+      "evidence_pointer": "Section 2.1 opening"
+    },
+    {
+      "order": 24,
+      "section": "Related Work",
+      "locator": "Section 2.1 Bandari/Tatar sentences",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有研究发现新闻机构是强预测元特征，热门或争议关键词也显著吸引注意。",
+      "rhetorical_function_cn": "展示已有证据与本文构念的直接关联。",
+      "depends_on_cn": "特征分类框架。",
+      "sets_up_cn": "说明吸引力和时效性的重要性并非凭空提出。",
+      "evidence_pointer": "Section 2.1 first two paragraphs"
+    },
+    {
+      "order": 25,
+      "section": "Related Work",
+      "locator": "Section 2.1 regression paragraph",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "回归模型从早期浏览数预测最终点击，后来加入时间加权、ARMA和meta特征，Keneshloo提出freshness特征。",
+      "rhetorical_function_cn": "概括经典预测模型演进。",
+      "depends_on_cn": "已有文献。",
+      "sets_up_cn": "为“多数方法仍以特征工程为核心”的批评做准备。",
+      "evidence_pointer": "Section 2.1 regression paragraph"
+    },
+    {
+      "order": 26,
+      "section": "Related Work",
+      "locator": "Section 2.1 end paragraph",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "经典方法存在四类问题：特征质量敏感、词袋丢失序列和语义、忽略元特征高阶交互、忽视时效性与吸引力。",
+      "rhetorical_function_cn": "总结综述中的缺陷，并直接对应引言缺口。",
+      "depends_on_cn": "前面所有经典方法综述。",
+      "sets_up_cn": "引出2.2深度学习方法。",
+      "evidence_pointer": "Section 2.1 last paragraph"
+    },
+    {
+      "order": 27,
+      "section": "Related Work",
+      "locator": "Section 2.2 opening",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有少数深度学习模型如层次神经网络和BiLSTM用于新闻点击预测文本表示，并取得成功。",
+      "rhetorical_function_cn": "说明深度学习的潜力。",
+      "depends_on_cn": "对照经典方法的不足。",
+      "sets_up_cn": "为本文采用深度网络提供合理性。",
+      "evidence_pointer": "Section 2.2 first paragraph"
+    },
+    {
+      "order": 28,
+      "section": "Related Work",
+      "locator": "Section 2.2 pre-training paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "BERT等预训练模型计算成本高、需要很大训练数据，本文重点不是评估预训练表示，所以用传统RNN。",
+      "rhetorical_function_cn": "主动排除一个可能被质疑的技术选择。",
+      "depends_on_cn": "对Transformer/BERT的综述。",
+      "sets_up_cn": "解释为何正文没有使用BERT。",
+      "evidence_pointer": "Section 2.2 pre-training paragraph"
+    },
+    {
+      "order": 29,
+      "section": "Related Work",
+      "locator": "Section 2.2 last paragraph",
+      "move_code": "GAP",
+      "paraphrase_cn": "HAN、RCNN、APCNN等变体在文本分类上取得显著成果，但未被用于新闻点击预测，且吸引力和时效性从未被研究。",
+      "rhetorical_function_cn": "指出深度表示学习与新闻点击预测任务之间的断裂。",
+      "depends_on_cn": "前面对HAN/RCNN等工作的综述。",
+      "sets_up_cn": "为DNCP中的文本和元特征结合提供直接缺口。",
+      "evidence_pointer": "Section 2.2 last paragraph"
+    },
+    {
+      "order": 30,
+      "section": "Section 3",
+      "locator": "Section 3 opening",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为解决已有研究局限，提出多层深度学习方法DNCP用于新闻点击预测。",
+      "rhetorical_function_cn": "从文献缺口过渡到方法设计。",
+      "depends_on_cn": "依赖相关工作结尾的GAP。",
+      "sets_up_cn": "引出架构整体说明。",
+      "evidence_pointer": "Section 3 opening"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.1.1",
+      "locator": "opening paragraph",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "新闻的吸引力可由词吸引力聚合而成，但词吸引力依赖上下文，例如“Red Sox”在体育新闻中比政治新闻更吸引人。",
+      "rhetorical_function_cn": "给出吸引力度量的底层命题。",
+      "depends_on_cn": "引言对吸引力的定义。",
+      "sets_up_cn": "说明为什么需要主题和上下文，而非简单词频。",
+      "evidence_pointer": "Section 3.1.1 opening paragraph"
+    },
+    {
+      "order": 32,
+      "section": "Section 3.1.1",
+      "locator": "second paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "读者在线阅读行为尤其是评论行为是新闻吸引力的有效指示；更高质量内容、标题和重要议题会引发更多评论。",
+      "rhetorical_function_cn": "为BTM建模提供机制理由。",
+      "depends_on_cn": "前一句关于吸引力的命题。",
+      "sets_up_cn": "引入基于阅读-评论行为的BTM。",
+      "evidence_pointer": "Section 3.1.1 second paragraph"
+    },
+    {
+      "order": 33,
+      "section": "Section 3.1.1",
+      "locator": "BTM description paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "BTM扩展LDA，增加评论可观测变量c和词-主题吸引力η，并把阅读-评论行为建模为Bernoulli/Beta-Binomial共轭。",
+      "rhetorical_function_cn": "把机制转换为模型设计。",
+      "depends_on_cn": "依赖第二个段落的机制。",
+      "sets_up_cn": "给出BTM的生成过程和Gibbs采样公式。",
+      "evidence_pointer": "Section 3.1.1 BTM description paragraph"
+    },
+    {
+      "order": 34,
+      "section": "Section 3.1.1",
+      "locator": "Eq. 5 context",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "最终词吸引力得分是把主题分布、词分布、主题-词吸引力相乘后累加所有主题。",
+      "rhetorical_function_cn": "给出可直接用于CAM的数值化吸引力向量。",
+      "depends_on_cn": "依赖BTM中θ、φ、η的估计。",
+      "sets_up_cn": "为注意力score使用c_i做输入。",
+      "evidence_pointer": "Section 3.1.1 Eq. 5"
+    },
+    {
+      "order": 35,
+      "section": "Section 3.1.1",
+      "locator": "last paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "新闻生命周期短，吸引力用评论数与无评论浏览数之比而非累积评论数，因为该比例随时间更稳定。",
+      "rhetorical_function_cn": "解释度量设计中的一个重要选择，防止“评论总量偏置”的质疑。",
+      "depends_on_cn": "此前BTM使用评论作为观测。",
+      "sets_up_cn": "为相关分析中使用吸引力值提供稳定性理由。",
+      "evidence_pointer": "Section 3.1.1 last paragraph"
+    },
+    {
+      "order": 36,
+      "section": "Section 3.1.2",
+      "locator": "opening paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "搜索查询词热度代表公众兴趣；搜索引擎或舆论平台可提供搜索词趋势。",
+      "rhetorical_function_cn": "为时效性度量提供外部数据机制。",
+      "depends_on_cn": "引言中时效性的定义。",
+      "sets_up_cn": "引出Sina Micro index热度矩阵。",
+      "evidence_pointer": "Section 3.1.2 opening paragraph"
+    },
+    {
+      "order": 37,
+      "section": "Section 3.1.2",
+      "locator": "assumptions paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "时效性向量基于两个假设：新闻时效随时间衰减；时效贡献与文章主题分布相关，因此用BTM主题聚合。",
+      "rhetorical_function_cn": "给出Eq.6的建模假设。",
+      "depends_on_cn": "依赖前面对热词趋势的引入。",
+      "sets_up_cn": "生成具体时效性向量公式。",
+      "evidence_pointer": "Section 3.1.2 assumptions paragraph"
+    },
+    {
+      "order": 38,
+      "section": "Section 3.1.2",
+      "locator": "missing terms sentence",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "无法在热度矩阵中找到的分词结果用零向量作为默认值。",
+      "rhetorical_function_cn": "说明数据覆盖限制下的处理方式。",
+      "depends_on_cn": "热度矩阵的有限覆盖。",
+      "sets_up_cn": "为讨论中的局限性埋下伏笔。",
+      "evidence_pointer": "Section 3.1.2 last sentence"
+    },
+    {
+      "order": 39,
+      "section": "Section 3.1.3",
+      "locator": "text encoder paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DNCP用Word2Vec预训练嵌入初始化，并用BiGRU从两个方向获取上下文，词表示由前后隐藏向量拼接而成。",
+      "rhetorical_function_cn": "给出文本语义表示的具体实现。",
+      "depends_on_cn": "依赖于2.2中RNN的综述。",
+      "sets_up_cn": "为CAM注意力提供输入h_i。",
+      "evidence_pointer": "Section 3.1.3"
+    },
+    {
+      "order": 40,
+      "section": "Section 3.1.4",
+      "locator": "CAM description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "CAM把额外辅助特征向量加入注意力score函数，从而实现更好的序列表示。",
+      "rhetorical_function_cn": "引入本文的核心注意力变体。",
+      "depends_on_cn": "需要前文得到h_i、c_i、t_i三类向量。",
+      "sets_up_cn": "给出Eq.9的具体score函数。",
+      "evidence_pointer": "Section 3.1.4 CAM description"
+    },
+    {
+      "order": 41,
+      "section": "Section 3.1.4",
+      "locator": "Eq. 9–11",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "注意力score同时使用文本语义、吸引力和时效性向量，经Softmax生成权重并加权求和得到文章文本表示。",
+      "rhetorical_function_cn": "形式化DNCP文本表示的核心运算。",
+      "depends_on_cn": "依赖CAM的一般定义。",
+      "sets_up_cn": "为输出层提供文本特征h_a。",
+      "evidence_pointer": "Section 3.1.4 Eq. 9–11"
+    },
+    {
+      "order": 42,
+      "section": "Section 3.2",
+      "locator": "opening paragraphs",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "元特征使用one-hot会导致维度巨大，且元特征之间如类别和发布时间存在影响点击的交互，因此需要表示学习。",
+      "rhetorical_function_cn": "说明为什么需要元特征表示学习。",
+      "depends_on_cn": "引言中元特征交互缺口。",
+      "sets_up_cn": "选择FM作为解决方案。",
+      "evidence_pointer": "Section 3.2 opening paragraphs"
+    },
+    {
+      "order": 43,
+      "section": "Section 3.2",
+      "locator": "FM paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用FM建模两两特征交互，把稀疏元特征嵌入稠密向量，并处理order-2交互。",
+      "rhetorical_function_cn": "给出元特征表示的具体设计。",
+      "depends_on_cn": "前段的高维/交互问题。",
+      "sets_up_cn": "为输出层提供元特征表示h_f。",
+      "evidence_pointer": "Section 3.2 FM paragraph"
+    },
+    {
+      "order": 44,
+      "section": "Section 3.3",
+      "locator": "Output layer paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "文本表示和元特征表示拼接后输入Softmax分类器，用交叉熵损失和Adam优化。",
+      "rhetorical_function_cn": "完成DNCP端到端结构的最后一步。",
+      "depends_on_cn": "依赖3.1和3.2的两个表示。",
+      "sets_up_cn": "为第4节评价确定输出任务。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 45,
+      "section": "Evaluation",
+      "locator": "Section 4.1 first sentence",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为测试DNCP泛化性并避免单一数据集导致的偏差，使用两个真实新闻数据集。",
+      "rhetorical_function_cn": "说明双数据集选择的方法论动机。",
+      "depends_on_cn": "模型构建完成。",
+      "sets_up_cn": "引出数据集规模、来源和时间窗口。",
+      "evidence_pointer": "Section 4.1 first sentence"
+    },
+    {
+      "order": 46,
+      "section": "Evaluation",
+      "locator": "Section 4.1 classification threshold",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "沿用已有研究以10000次点击为界，把预测问题设为高低点击二分类。",
+      "rhetorical_function_cn": "确定与文献一致的预测目标。",
+      "depends_on_cn": "第1节对点击区间预测的界定。",
+      "sets_up_cn": "定义标签和评价指标口径。",
+      "evidence_pointer": "Section 4.1 classification threshold"
+    },
+    {
+      "order": 47,
+      "section": "Evaluation",
+      "locator": "Section 4.1 undersampling",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "原始数据点击分布失衡，使用随机欠采样使两类样本平衡。",
+      "rhetorical_function_cn": "解释数据预处理并保护分类指标有效性。",
+      "depends_on_cn": "数据分布问题。",
+      "sets_up_cn": "为Table 1的平衡样本提供依据。",
+      "evidence_pointer": "Section 4.1 undersampling"
+    },
+    {
+      "order": 48,
+      "section": "Evaluation",
+      "locator": "Section 4.2 first sentence",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "文本表示只使用标题和摘要，因为读者在点击前不会看到新闻正文。",
+      "rhetorical_function_cn": "给出特征范围选择的因果合理性。",
+      "depends_on_cn": "发布后预测场景和读者行为常识。",
+      "sets_up_cn": "解释为何忽略新闻正文。",
+      "evidence_pointer": "Section 4.2 first sentence"
+    },
+    {
+      "order": 49,
+      "section": "Evaluation",
+      "locator": "Section 4.3 baseline list",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "选择SVM、CNN-text、RCNN、HAN和DeepFM作为基线，因为它们是常见的文本分类方法，DeepFM是元特征学习的state-of-the-art。",
+      "rhetorical_function_cn": "说明基线选择的代表性。",
+      "depends_on_cn": "相关工作综述中的方法。",
+      "sets_up_cn": "为结果表中模型列表提供理由。",
+      "evidence_pointer": "Section 4.3 baseline list"
+    },
+    {
+      "order": 50,
+      "section": "Evaluation",
+      "locator": "Section 4.3 ablation list",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "构造从BiGRU到AM、AM*、AM^、CAM*、CAM^、CAM、DNCP的消融模型，以检验注意力组件和特征输入的影响。",
+      "rhetorical_function_cn": "建立内部对照体系。",
+      "depends_on_cn": "依赖3.1.4的模型变体设计。",
+      "sets_up_cn": "为Table 3的Tukey HSD检验做准备。",
+      "evidence_pointer": "Section 4.3 ablation list"
+    },
+    {
+      "order": 51,
+      "section": "Results",
+      "locator": "Section 5.1 first paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Table 2显示DNCP在所有指标上超过所有基线，paired-sample t-test表明绝大多数差异显著。",
+      "rhetorical_function_cn": "报告总体性能结果。",
+      "depends_on_cn": "基准实验设置。",
+      "sets_up_cn": "为消融分析提供“整体有效”的前提。",
+      "evidence_pointer": "Section 5.1, Table 2"
+    },
+    {
+      "order": 52,
+      "section": "Results",
+      "locator": "Section 5.1 Tukey paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Tukey HSD显示BiGRU显著劣于多数模型，AM的加入带来显著改进，说明注意力机制缓解序列偏差。",
+      "rhetorical_function_cn": "分解注意力机制本身的贡献。",
+      "depends_on_cn": "Table 3的消融结果。",
+      "sets_up_cn": "为后续吸引力/时效性归因做铺垫。",
+      "evidence_pointer": "Section 5.1 Tukey paragraph, Table 3"
+    },
+    {
+      "order": 53,
+      "section": "Results",
+      "locator": "Section 5.1 AM*/AM^ sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "只使用吸引力或时效性计算注意力时，与只使用语义的AM相比差异大多不显著。",
+      "rhetorical_function_cn": "避免夸大单特征价值。",
+      "depends_on_cn": "Table 3中AM*-AM和AM^*-AM等行。",
+      "sets_up_cn": "说明需要把辅助特征与文本语义结合。",
+      "evidence_pointer": "Section 5.1, Table 3"
+    },
+    {
+      "order": 54,
+      "section": "Results",
+      "locator": "Section 5.1 CAM*sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "CAM*在文本语义基础上加入吸引力后显著改善recall和accuracy；CAM^进一步用时效性显著提升recall但precision提升不显著。",
+      "rhetorical_function_cn": "清楚地报告特征增量效果和非对称效果。",
+      "depends_on_cn": "Table 3中CAM*-AM和CAM^*-AM等行。",
+      "sets_up_cn": "为讨论中坦率承认时效性对precision贡献不足留下空间。",
+      "evidence_pointer": "Section 5.1, Table 3"
+    },
+    {
+      "order": 55,
+      "section": "Results",
+      "locator": "Section 5.1 CAM vs AM sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "CAM同时结合吸引力和时效性，与AM相比显著改善所有指标，说明两个特征联合作用明显提升预测。",
+      "rhetorical_function_cn": "确立CAM的总体改进。",
+      "depends_on_cn": "Table 3中CAM-AM行。",
+      "sets_up_cn": "支持三贡献中的CAM贡献。",
+      "evidence_pointer": "Section 5.1, Table 3"
+    },
+    {
+      "order": 56,
+      "section": "Results",
+      "locator": "Thermodynamic diagram paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "热力图显示AM聚焦核心名词和动词，AM^关注中国、贸易战等热词，CAM^在语义和热趋势之间折中，CAM最终把吸引力与时效性融入注意力。",
+      "rhetorical_function_cn": "提供定性机制证据，说明注意力权重确实随输入特征变化。",
+      "depends_on_cn": "Table 4热力图和不同注意力策略定义。",
+      "sets_up_cn": "解释为什么CAM组合能提升性能。",
+      "evidence_pointer": "Section 5.1, Table 4"
+    },
+    {
+      "order": 57,
+      "section": "Results",
+      "locator": "High-order interaction sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "包含FM元特征交互的DNCP和DeepFM显著提高recall，证明元特征高阶交互对点击预测有效。",
+      "rhetorical_function_cn": "确认FM组件的贡献。",
+      "depends_on_cn": "Table 2结果。",
+      "sets_up_cn": "为讨论第三点贡献提供依据。",
+      "evidence_pointer": "Section 5.1 high-order interaction paragraph"
+    },
+    {
+      "order": 58,
+      "section": "Results",
+      "locator": "Section 5.2 first sentence",
+      "move_code": "RESULT",
+      "paraphrase_cn": "为探索高点击新闻是否伴随高吸引力和高时效性，对随机抽样的30000篇文章做对数变换和相关分析。",
+      "rhetorical_function_cn": "引入相关分析来补充机制证据。",
+      "depends_on_cn": "消融实验发现两个特征提升性能。",
+      "sets_up_cn": "报告相关系数。",
+      "evidence_pointer": "Section 5.2 first sentence"
+    },
+    {
+      "order": 59,
+      "section": "Results",
+      "locator": "Section 5.2 correlation results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "吸引力和点击数在两个数据集上r≈0.56–0.62，时效性和点击数r≈0.77–0.78，均显著。",
+      "rhetorical_function_cn": "给出构念与目标变量正相关的直接证据。",
+      "depends_on_cn": "随机抽样和对数变换。",
+      "sets_up_cn": "支撑讨论中“两因素确实重要”的结论。",
+      "evidence_pointer": "Section 5.2, Table 5"
+    },
+    {
+      "order": 60,
+      "section": "Discussion",
+      "locator": "opening paragraph",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "新闻点击预测研究不断增加，准确预测可显著改善新闻分发效率和发现高价值新闻。",
+      "rhetorical_function_cn": "讨论开头重新建立现实重要性。",
+      "depends_on_cn": "引言中的实践背景。",
+      "sets_up_cn": "为贡献声明提供价值框架。",
+      "evidence_pointer": "Discussion opening paragraph"
+    },
+    {
+      "order": 61,
+      "section": "Discussion",
+      "locator": "first contribution paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第一项贡献是定义吸引力和时效性，设计BTM和热词趋势分别度量二者，相关分析证明二者与点击强相关。",
+      "rhetorical_function_cn": "把方法贡献与实证结果对应。",
+      "depends_on_cn": "Section 3和Section 5.2。",
+      "sets_up_cn": "回应引言“忽略两变量”的缺口。",
+      "evidence_pointer": "Discussion first contribution paragraph"
+    },
+    {
+      "order": 62,
+      "section": "Discussion",
+      "locator": "second contribution paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第二项贡献是设计并评价DNCP，提出CAM；将辅助特征纳入注意力机制的思想是通用的，可推广到其他文本表示场景。",
+      "rhetorical_function_cn": "在贡献陈述中提高结论的可迁移性。",
+      "depends_on_cn": "消融结果和热力图。",
+      "sets_up_cn": "该“通用”声明随后成为需要限定边界的对象。",
+      "evidence_pointer": "Discussion second contribution paragraph"
+    },
+    {
+      "order": 63,
+      "section": "Discussion",
+      "locator": "third contribution paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第三项贡献是用FM处理元特征稀疏性和高阶交互，并与文本特征并行处理以降低训练复杂度。",
+      "rhetorical_function_cn": "总结FM的贡献。",
+      "depends_on_cn": "Section 3.2和结果中FM相关对比。",
+      "sets_up_cn": "引出实践含义中的“同时使用文本和元特征”。",
+      "evidence_pointer": "Discussion third contribution paragraph"
+    },
+    {
+      "order": 64,
+      "section": "Discussion",
+      "locator": "practical implications paragraph",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "预测结果可帮助新闻机构、营销公司、搜索引擎和推荐系统分配资源、优化内容、排序策略和推荐算法。",
+      "rhetorical_function_cn": "把研究价值落实到实践应用。",
+      "depends_on_cn": "前三项贡献。",
+      "sets_up_cn": "为最后的局限和未来研究收尾。",
+      "evidence_pointer": "Discussion practical implications paragraph"
+    },
+    {
+      "order": 65,
+      "section": "Discussion",
+      "locator": "limitations paragraph",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括仅用两个中文新闻源、没有尝试其他FM变体；未来可验证其他语言和AFM/XDeepFM/IFM。",
+      "rhetorical_function_cn": "划定边界并给出未来方向。",
+      "depends_on_cn": "前文评价设计和结论。",
+      "sets_up_cn": "保护研究不被过度一般化。",
+      "evidence_pointer": "Discussion limitations paragraph"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "在引言和综述中同时使用三层缺口：经典方法性能受特征工程限制、深度方法忽略了元特征高阶交互、所有现有研究都未纳入吸引力和时效性；通过反复出现“从未考虑”将核心缺口放大。",
+    "signposting_cn": "摘要、引言结尾和每个小节开头都有明确预告；第4节用“基线与消融模型”清单预告结果表；讨论按贡献点逐条回扣。",
+    "transition_logic_cn": "每个子模块从机制/需求开始，再给公式和设计选择；评价部分从“整体是否更好”自然过渡到“哪个组件起作用”；消融中发现两个因素有效后，再过渡到“为什么有效”的相关分析。",
+    "claim_evidence_rhythm_cn": "每提出一个设计选择，先用公式或机制解释，然后用结果表、显著性检验或热力图给出证据；结果段通常先报全局性能，再报分解贡献，最后给出定性解释。",
+    "benchmark_narrative_cn": "外部baseline被定位为“常见文本分类方法”和“元特征state-of-the-art”；消融模型则在“注意力策略”维度上逐步变化特征输入，从而把baseline缺少的特征差异转化为内部对照。",
+    "theory_return_cn": "相关分析把“加入特征后性能提升”从预测指标层面回接到“吸引力/时效性确与点击正相关”的构念层面，使结果具有超出特定baseline的解释力。",
+    "contribution_positioning_cn": "贡献以“首次定义与度量”“提出模型和注意力机制”“实证证据”三点排列，使技术、设计和实证各有归属；实践含义单列一节，扩大受众。",
+    "novelty_protection_cn": "通过“首次”“通用”“显著优于所有基线”“消融证明成分有效”等多层话语保护贡献，并用Tukey HSD和双数据集避免被批评为偶然性能。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "引入现实重要的应用场景和具体案例，说明预测任务的价值。",
+        "research_job_cn": "确认问题域和预测时点、预测目标。",
+        "required_evidence_cn": "能说明任务重要性、可获取的数据形态（文本+元特征+点击量）的素材。",
+        "transition_to_next_cn": "用“虽有价值但现有方法有局限”过渡到缺口。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "从文献出发列出经典方法的限制和遗漏因素。",
+        "research_job_cn": "做相关工作综述，识别特征工程、语义表示、高阶交互和缺失构念等具体缺口。",
+        "required_evidence_cn": "能展示每个缺口的文献和示例（如财经新闻工作日效应）。",
+        "transition_to_next_cn": "“为填补缺口，本文提出…”过渡到研究目标。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "把抽象构念操作化为可计算的度量，并给出建模假设和公式。",
+        "research_job_cn": "设计度量模型（如BTM、热度趋势向量），准备辅助数据源和计算流程。",
+        "required_evidence_cn": "构念计算公式、后验/参数估计方法和数据来源。",
+        "transition_to_next_cn": "“基于以上度量，接下来的深度模型将其作为输入”进入架构设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "展示完整模型架构，把文本、辅助特征、元特征的表示学习和输出层连接起来。",
+        "research_job_cn": "实现模型并确定损失函数、优化器、超参、特征工程细节。",
+        "required_evidence_cn": "架构图、公式、各输入维度与超参数设置。",
+        "transition_to_next_cn": "“模型已经构建，下面用真实数据评价”进入评价。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "用双数据集和多个外部基线展示整体有效性，并说明数据划分、评价指标和显著性检验。",
+        "research_job_cn": "收集两个数据集，实现/调用baseline，执行训练验证测试流程。",
+        "required_evidence_cn": "数据统计表、模型性能表、显著性检验结果。",
+        "transition_to_next_cn": "“整体更好，但哪部分起作用需要消融”进入分解实验。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "构造消融模型族，按单一成分差异进行对比，并用事后检验判断显著性。",
+        "research_job_cn": "实现不同特征/注意力变体，跑Tukey HSD，必要时用热力图展示机制。",
+        "required_evidence_cn": "消融表、两两比较显著性、局部定性案例。",
+        "transition_to_next_cn": "“消融显示两个构念确实有效，因此用相关分析补充构念有效性”进入机制补充。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用相关分析或其它非预测证据把性能改进与构念本身联系起来。",
+        "research_job_cn": "随机抽样、变换、计算相关性并解释。",
+        "required_evidence_cn": "相关系数和p值，并报告抽样和变换细节。",
+        "transition_to_next_cn": "“这些证据共同支撑三类贡献”进入讨论。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "在讨论中逐条回应引言缺口，列贡献、实践含义、局限和未来研究。",
+        "research_job_cn": "把模型结果抽象为可复用设计知识，明确适用边界和未检验假设。",
+        "required_evidence_cn": "能在每个贡献句后指向前文对应证据的完整链条。",
+        "transition_to_next_cn": "结束全文，并给出未来方向。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用“文献缺口+具体构念定义”把性能任务转化为研究问题",
+      "把抽象构念先操作化为可计算度量，再进入神经网络输入",
+      "用消融模型族隔离每个设计成分",
+      "用相关分析补充机制解释而非只报性能指标",
+      "贡献声明逐条对应引言缺口与评价证据"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要大规模新闻语料并带点击和评论行为数据",
+      "需要从外部舆论平台（Sina Micro index）爬取词热度时间序列",
+      "需要训练BTM和DNCP两个阶段，并做大量消融组合",
+      "依赖中文分词工具和预训练Word2Vec，工具/数据迁移成本高"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“注意力+吸引力和时效性”而不说明两个词如何计算",
+      "不能宣称“通用”而没有跨领域跨语言验证",
+      "不能把相关分析写成因果证据",
+      "不能只与最强baseline比较而不做消融，否则无法归因组件贡献",
+      "不能忽视时效性在precision上不显著的负面结果"
+    ],
+    "single_best_description_of_the_routine_cn": "先定义并计算两个领域构念，再用改进注意力机制把它们注入深度网络，最后用基准、消融和相关分析一层层证明整体有效、组件有效、构念有效。"
+  },
+  "confidence": 0.72,
+  "limitations_cn": "全文以OCR/HTML表格形式提供，部分公式符号（如向量箭头、上下标）和热力图细节无法完全还原；Table 4以图片/HTML呈现，无法逐格核对注意力权重，相关描述依据正文；文章没有附录或在线代码，研究阶段还原基于正文章节。",
+  "usage": {
+    "prompt_tokens": 22834,
+    "completion_tokens": 26758,
+    "total_tokens": 49592,
+    "prompt_cache_hit_tokens": 22784,
+    "prompt_cache_miss_tokens": 50
+  }
+}

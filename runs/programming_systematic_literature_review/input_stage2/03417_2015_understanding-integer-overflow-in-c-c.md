@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-84951938210"
+title: "Understanding integer overflow in C/C++"
+authors: "Dietz W.; Li P.; Regehr J.; Adve V."
+year: "2015"
+journal: "ACM Transactions on Software Engineering and Methodology"
+doi: "10.1145/2743019"
+---
+# Scopus title-abstract-keyword metadata
+Title: Understanding integer overflow in C/C++
+Abstract: Integer overflow bugs in C and C++ programs are difficult to track down and may lead to fatal errors or exploitable vulnerabilities. Although a number of tools for finding these bugs exist, the situation is complicated because not all overflows are bugs. Better tools need to be constructed - but a thorough understanding of the issues behind these errors does not yet exist. We developed IOC, a dynamic checking tool for integer overflows, and used it to conduct the first detailed empirical study of the prevalence and patterns of occurrence of integer overflows in C and C++ code. Our results show that intentional uses of wraparound behaviors are more common than is widely believed; for example, there are over 200 distinct locations in the SPEC CINT2000 benchmarks where overflow occurs. Although many overflows are intentional, a large number of accidental overflows also occur. Orthogonal to programmers' intent, overflows are found in both well-defined and undefined flavors. Applications executing undefined operations can be, and have been, broken by improvements in compiler optimizations. Looking beyond SPEC, we found and reported undefined integer overflows in SQLite, PostgreSQL, SafeInt, GNU MPC and GMP, Firefox, GCC, LLVM, Python, BIND, and OpenSSL; many of these have since been fixed. Our results show that integer overflow issues in C and C++ are subtle and complex, that they are common even in mature, widely used programs, and that they are widely misunderstood by developers. © 2012 IEEE.
+Author keywords: Integer overflow; Integer wraparound; Undefined behavior
+Index keywords: C++ (programming language); Computer software; Program compilers; Program debugging; C++ codes; Compiler optimizations; Dynamic checking; Empirical studies; Integer overflow; Integer wraparound; PostgreSQL; Undefined behavior; Integer programming
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Software Engineering and Methodology
+Year: 2015
+EID: 2-s2.0-84951938210
+DOI: 10.1145/2743019
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

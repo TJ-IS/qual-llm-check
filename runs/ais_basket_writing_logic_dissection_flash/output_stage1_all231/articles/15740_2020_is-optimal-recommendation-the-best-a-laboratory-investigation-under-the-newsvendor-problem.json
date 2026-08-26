@@ -1,0 +1,1120 @@
+{
+  "record_id": "15740",
+  "source_file": "15740_2020_is-optimal-recommendation-the-best-a-laboratory-investigation-under-the-newsvendor-problem.md",
+  "title": "Is optimal recommendation the best? A laboratory investigation under the newsvendor problem",
+  "authors": "Xiaojing Feng; Jia Gao",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113251",
+  "fulltext_chars": 94326,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "human_task_performance",
+  "source_application_context": "logistics_transport_supply_chain_and_manufacturing",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:04.310622+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在存在理论最优解的不确定决策情境（以报童问题为代表）下，DSS的最优推荐能否消除或改善人类决策者的决策偏差？决策者在使用DSS时会出现哪些心理因素（算法厌恶、遗憾厌恶等），它们如何影响推荐采纳与订货行为，进而决定哪种DSS推荐设计才是有效的？",
+    "artifact_and_design_cn": "文章设计了两轮多轮次实验室DSS。Experiment I提供随轮次变化的最优推荐（X±25），不告知推荐的最优性，允许决策者自由修改推荐，并在每轮同时反馈决策者自身和DSS的订货量及利润表现；Experiment II在保持相同交互特征的基础上，将推荐设计为保守型（X±20，位于均值与最优值之间）或激进型（X±30，位于最优值与同侧需求极端之间）。",
+    "objective_outcomes_cn": "与无DSS基线相比，最优DSS仅显著降低低利润产品的PtC偏差（0.76→0.47），提高利润，并缩小PtC不对称，但高利润组改善不显著且偏差无法消除；被试在高低利润条件下的不完全采纳率分别约为80%和85.22%。保守型DSS相比最优DSS无显著改进；激进型DSS在高利润条件下将PtC效应降至0.075，实际平均订量23.11接近最优值25，即消除PtC偏差，但在低利润条件下无效。遗憾厌恶行为仅在高利润条件下显著出现，且随DSS与本人利润差距增大而增强，这一模式在三种DSS类型下稳健。",
+    "core_contribution_cn": "作者声称：将DSS接受与算法厌恶研究扩展到同时存在不确定性和最优解的情境；提供算法厌恶在最优推荐情境下仍持续存在的经验证据；识别并检验了遗憾厌恶作为使用DSS时的另一心理机制；为行为运营管理提供了一种有效去偏技术（激进型DSS），说明最优推荐并不一定是最佳决策支持，DSS设计需要纳入用户心理因素。",
+    "whole_argument_in_one_paragraph_cn": "文章从算法厌恶和报童PtC两条文献出发，先指出已有算法厌恶证据多来自无最优解的不确定情境，而在最优解存在时DSS成功应以接近最优的程度衡量；随后用实验室实验引入看似更智能、推荐随轮次变化并同时反馈双方绩效的最优DSS，发现其只能部分缓解PtC且无法完全消除，并同时触发算法厌恶与遗憾厌恶；然后针对仍未消除的偏差，围绕最优值设计保守与激进两类推荐，发现激进推荐通过锚定效应、遗憾厌恶主导和算法厌恶被压制，在高利润条件下消除PtC；最后用利润比较频率说明低利润条件下算法厌恶更强，从而解释为什么激进DSS只在特定利润条件下有效，并据此提出DSS设计含义、理论贡献和边界条件。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "文章从算法厌恶、遗憾厌恶、锚定与不充分调整、相似性/从众等理论命题推导出不同推荐位置（最优、保守、激进）的DSS制品差异，并通过两轮受控实验室实验检验这些设计差异对订货行为和心理的影响；主要证据来自实验室实验，而非基准数据集、现场部署或纯形式模型。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "叙事主线是：提出“最优推荐能否消除偏差”的问题，用算法厌恶、遗憾厌恶和报童模型等理论发展假设，设计最优DSS并测试，发现部分效果后设计保守/激进DSS再测试，最后在讨论中返回算法厌恶与遗憾厌恶的交互理论，解释何时DSS有效。虽然Experiment I到II有迭代设计成分，但整体论证闭环是问题—理论—设计—实验—回到理论。",
+  "research_program": {
+    "study_or_phase_count": 4,
+    "overall_sequence_cn": "阶段一建立基线并检验最优DSS对PtC、利润和PtC不对称的整体影响；阶段二在同一最优DSS数据中深入决策过程，检验遗憾厌恶；阶段三用新被试测试保守与激进DSS，比较其相对最优DSS的改进；阶段四在讨论中通过频率分析解释算法厌恶的不对称，并提出整合机制。四个阶段依次回答：最优DSS是否有效且为什么不够有效、过程机制是什么、重新设计能否更好、何时以及为什么更好。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "Experiment I：基线（NDSS）与最优DSS（ODSS）的2×2实验室实验",
+        "question_cn": "提供最优推荐且看似更智能的DSS，能否缓解或消除报童决策者的PtC偏差，提高利润并降低高低利润条件下PtC的不对称？",
+        "inputs_and_setting_cn": "87名高校学生；2（高/低利润）×2（无DSS/最优DSS）被试间设计；每名被试做50轮；高利润单位成本3、低利润单位成本9、售价12；需求为X+Y，X已知，Y服从[-49,50]均匀分布；最优荐为X±25。",
+        "designed_or_compared_object_cn": "比较是否提供最优DSS推荐；最优DSS推荐随已知X变化而非固定，允许自由修改，提供双方绩效反馈，不告知推荐最优性。",
+        "baseline_control_or_counterfactual_cn": "无DSS（NDSS）标准报童实验为基线；同时将实际利润对理论最优利润、实际订货对均值需求与最优订货进行对照。",
+        "objective_metrics": [
+          "PtC效应值β（(q*-q)/(q*-u)）",
+          "实际平均订量与均值、最优值的差异",
+          "实际利润相对理论最优利润的差异",
+          "PtC不对称效应量d",
+          "HN利润与DSS利润之差",
+          "不完全遵循推荐的比例"
+        ],
+        "analysis_method_cn": "Wilcoxon秩和检验；个体层面聚类标准误的普通线性回归；固定效应模型；效应量d；以被试平均为分析单位。",
+        "main_result_cn": "NDSS复制了经典PtC；ODSS下高低利润订量仍显著介于均值与最优值之间；DSS仅显著降低低利润产品的PtC（β从0.76降到0.47），高利润不显著；利润显著提高；PtC不对称从-0.17降到-0.12；HN利润显著低于DSS利润，高低利润下不完全采纳率约80%和85.22%。",
+        "argumentative_role_cn": "确立最优DSS不是万能工具：它能部分改善但不能消除PtC，从而引出心理机制和重新设计问题。",
+        "remaining_uncertainty_cn": "为什么高利润条件下PtC改善不显著？算法厌恶与遗憾厌恶如何运作？能否通过改变推荐位置进一步消除偏差？",
+        "link_to_next_phase_cn": "阶段一的结果直接支持引入过程层面的遗憾厌恶分析，并为Experiment II中围绕最优值重新设计推荐提供了动因。",
+        "evidence_pointers": [
+          "Table 1",
+          "Fig. 1",
+          "Table 2",
+          "Table 3",
+          "Section 3.2",
+          "Section 3.3"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "Experiment I过程分析：遗憾厌恶行为检验（H4）",
+        "question_cn": "决策者是否会因观察到DSS的利润高于自己而在下一轮主动接近推荐，即产生经验性遗憾厌恶？遗憾厌恶的强度是否随利润差距增大而增强？",
+        "inputs_and_setting_cn": "使用ODSS处理的43名被试（高利润20，低利润23）的50轮逐轮数据；每轮同时呈现HN利润和DSS利润；比较相邻两轮绝对距离变化。",
+        "designed_or_compared_object_cn": "根据上一轮DSS利润是否高于HN利润，将观察分为IsDSSBetter=1或0；同时用ProfitDmHlag衡量DSS与HN利润差距。",
+        "baseline_control_or_counterfactual_cn": "DSS没有优于HN时的行为（IsDSSBetter=0）作为反事实；利润差为0时行为作为参照。",
+        "objective_metrics": [
+          "遗憾厌恶测量RA=|q_{t-1}-s_{t-1}|-|q_t-s_t|",
+          "IsDSSBetter系数",
+          "ProfitDmHlag系数",
+          "DSS更好、相同、HN更好的比例"
+        ],
+        "analysis_method_cn": "个体层面聚类标准误的普通线性回归；将RA对IsDSSBetter或ProfitDmHlag分别回归，分高/低利润处理。",
+        "main_result_cn": "高利润条件下，当DSS利润更高时，HN下一轮显著接近推荐（常数与IsDSSBetter之和2.478显著为正）；当DSS未更好时显著远离。低利润条件下无论DSS是否更好，决策者都不显著改变与推荐的距离。RA随利润差增大而增强仅出现在高利润条件。",
+        "argumentative_role_cn": "揭示使用DSS时除算法厌恶外还存在遗憾厌恶，且该机制是有条件的，为解释高/低利润结果差异和Experiment II设计提供过程证据。",
+        "remaining_uncertainty_cn": "遗憾厌恶只在高利润条件被验证，算法厌恶是否也有不对称尚需分析；最优DSS仍不能消除高利润PtC，需要设计干预。",
+        "link_to_next_phase_cn": "既然遗憾厌恶可以把决策者拉向推荐，那么把推荐从最优值向外移动（激进DSS）可能放大锚定与遗憾厌恶的合力，从而设计Experiment II。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Table 4",
+          "公式(4)",
+          "Appendix B"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Experiment II：保守DSS与激进DSS的2×2实验",
+        "question_cn": "围绕最优值重新设计推荐后，保守型DSS和激进型DSS能否比最优DSS更好地消除PtC、提高绩效？遗憾厌恶行为是否仍然存在？",
+        "inputs_and_setting_cn": "新招募80名被试；2（高/低利润）×2（保守DSS/激进DSS）被试间设计；需求结构等设置与ODSS相同，仅推荐改变：保守推荐X±20，激进推荐X±30。",
+        "designed_or_compared_object_cn": "比较三种DSS类型：最优DSS、保守DSS、激进DSS；推荐位置分别位于均值与最优之间、最优值、最优值与需求极端之间。",
+        "baseline_control_or_counterfactual_cn": "以最优DSS为对照，回归中包含IsCDSS和IsRDSS两个虚拟变量；同时用理论最优利润和DSS利润作基准。",
+        "objective_metrics": [
+          "PtC效应值β",
+          "实际平均订货量",
+          "实际利润",
+          "PtC不对称效应量d",
+          "DSS更好/相同/HN更好的比例",
+          "遗憾厌恶RA及其回归系数"
+        ],
+        "analysis_method_cn": "与Experiment I相同的个体聚类回归，用虚拟变量区分三种DSS；用Wilcoxon检验实际订量与均值/最优值的差异；附录中重复遗憾厌恶回归。",
+        "main_result_cn": "保守DSS相对最优DSS在高利润条件下无显著改善，低利润条件下也无显著变化；激进DSS在高利润条件下显著降低PtC（β=0.075，实际订量23.11不显著异于最优值25），即消除高利润PtC，但利润无显著提高；低利润条件下两类DSS均无显著改善。遗憾厌恶的存在和强度模式在CDSS/RDSS下与ODSS一致，仍只在高利润条件显著。",
+        "argumentative_role_cn": "提供了实验证据支持重新设计推荐位置可以改善决策的制品主张，同时划定了适用边界（高利润条件）。",
+        "remaining_uncertainty_cn": "为什么激进DSS只在低利润条件下无效？算法厌恶与遗憾厌恶的不对称如何整合解释这一边界？",
+        "link_to_next_phase_cn": "Experiment II的结果促使讨论部分系统检验算法厌恶的不对称性，并构造两股心理力量的整合解释。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 5",
+          "Table 6",
+          "Fig. 1相关说明",
+          "Appendix B Table B.1"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "讨论中的机制整合：算法厌恶不对称与两力交互解释",
+        "question_cn": "算法厌恶是否也存在高低利润不对称？它如何与遗憾厌恶共同解释DSS去偏效果的条件性？",
+        "inputs_and_setting_cn": "使用Experiment I和Experiment II中三种DSS处理下逐轮利润比较的频率数据（DSS更好/相同/HN更好比例），以及两阶段实验的PtC和RA结果。",
+        "designed_or_compared_object_cn": "比较高利润与低利润条件下DSS表现弱于HN的频率，推断算法厌恶强度；比较遗憾厌恶和算法厌恶的相对主导地位。",
+        "baseline_control_or_counterfactual_cn": "DSS表现不如HN的频率高低作为算法厌恶强弱的间接对照；NDSS的PtC不对称（-0.17）作为去偏效果基准。",
+        "objective_metrics": [
+          "DSS更好/相同/HN更好的百分比",
+          "PtC不对称d",
+          "各条件下PtC消除与否",
+          "RA回归显著性"
+        ],
+        "analysis_method_cn": "描述性频率比较和跨实验推理；将两阶段定量结果整合为机制解释，不新增正式统计。",
+        "main_result_cn": "低利润条件下DSS被HN反超的频率更高（ODSS：51.02% vs 37.24%），所以算法厌恶更强；高利润条件下遗憾厌恶更易主导算法厌恶，配合激进推荐的锚定效应，DSS可消除PtC；低利润条件下算法厌恶主导，DSS无效。",
+        "argumentative_role_cn": "把局部实验结果提升为关于算法厌恶与遗憾厌恶何时主导的一般机制主张，并反过来回答“最优推荐是否最好”的理论问题。",
+        "remaining_uncertainty_cn": "该机制主要通过频率和结果间接推断，未直接测量心理构念；激进推荐的具体最优偏离幅度仍未系统扫描。",
+        "link_to_next_phase_cn": "这些边界和未测量构念为结论中的设计含义和未来研究铺路。",
+        "evidence_pointers": [
+          "Section 5",
+          "Table 4底部",
+          "Appendix Table B.1底部",
+          "Table 2",
+          "Table 6"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "MECHANISM",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "MECHANISM",
+      "DESIGN_FEATURE",
+      "CONTRIBUTION",
+      "TRANSITION"
+    ],
+    "theory_and_knowledge_moves": [
+      "CONTRIBUTION",
+      "LIMITATION",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "PRIOR_KNOWLEDGE",
+      "THEORY_INTRO",
+      "HYPOTHESIS_OR_PROPOSITION",
+      "THEORY_PROPOSITION"
+    ],
+    "artifact_design_moves": [
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "REQUIREMENT",
+      "BEHAVIORAL_DESIGN"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "RESULT"
+    ],
+    "discussion_and_contribution_moves": [
+      "MECHANISM",
+      "BOUNDARY_CONDITION",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE",
+      "PRACTICAL_STAKES",
+      "CONTRIBUTION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "算法厌恶理论（Dietvorst et al., 2015, 2016）",
+      "报童问题与PtC偏差（Schweitzer和Cachon, 2000；Zhang和Siemsen, 2019）",
+      "遗憾理论/预期遗憾与经验遗憾（Bell, 1982；Loomes和Sugden, 1982；Zeelenberg et al., 1996）",
+      "社会比较理论（Festinger, 1954）",
+      "锚定与不充分调整（Schweitzer和Cachon, 2000）",
+      "相似性与从众/模仿（White和Argo, 2011）",
+      "前景理论中负面情绪影响更大（Long和Nasiry, 2014）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "实验的核心差异（推荐位置、反馈结构、推荐是否固定）确实由算法厌恶、遗憾厌恶、锚定和相似性等理论推导而来，但最主要的“最优DSS”设计仍来自已有文献的变体，Experiment II的保守/激进取值（±20、±30）更多是工程式启发而非从理论推出的唯一参数；理论主要用于提出假设和事后解释，而不是给出精确设计参数。",
+    "translation_chain_cn": "算法厌恶理论指出人们不信任算法，因此DSS要做得“更智能”，于是推荐随轮次变化而不是固定；遗憾厌恶和社会比较理论认为同时反馈双方利润会触发比较和遗憾，因此设计加入双方绩效反馈；为了让决策者不因知道最优而完全倒向推荐，设计不告知推荐最优性；Experiment I发现PtC未消除后，利用锚定与不充分调整理论，把推荐放在最优值之外（激进DSS），用极端锚点把行为拉向最优；利用相似性理论推断保守DSS更容易被接受，因此也测试保守DSS。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "人们因算法犯错而更快失去信心，从而抵抗算法建议（算法厌恶）。",
+        "mechanism_cn": "固定推荐显得不智能，强化不信任；若推荐随环境变化且允许修改，可降低算法厌恶。",
+        "design_requirement_cn": "DSS应避免推荐在所有轮次完全相同，并允许用户自由修改推荐。",
+        "artifact_choice_cn": "采用两段需求X+Y，最优推荐X±25随X变化；不告知最优性；用户可修改。",
+        "evaluated_contrast_cn": "比较无DSS与最优DSS的采纳率、利润、PtC。",
+        "objective_result_cn": "仍有约80%/85%的轮次不遵循推荐，利润低于DSS，说明算法厌恶仍存在。",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Table 2",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "社会比较会诱发经验性遗憾，人们会通过调整后续选择来最小化未来遗憾。",
+        "mechanism_cn": "反馈同时显示双方利润，使决策者将自己与机器比较；DSS更好时产生遗憾，下一轮接近推荐。",
+        "design_requirement_cn": "DSS应在每轮提供决策者自身和DSS推荐两套利润表现。",
+        "artifact_choice_cn": "最优DSS反馈页包含HN利润、DSS推荐利润和累计利润。",
+        "evaluated_contrast_cn": "DSS利润更高 vs 不更高时，下一轮距离变化的差异。",
+        "objective_result_cn": "高利润条件下，DSS更好时下一轮显著接近推荐，RA随利润差增大而增大；低利润条件无此效应。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Table 4",
+          "Appendix Table B.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "锚定与不充分调整导致决策者从均值向最优方向调整不足，形成PtC。",
+        "mechanism_cn": "把推荐放在最优值之外的需求极端一侧，可充当锚点，决策者不充分调整后落在最优附近。",
+        "design_requirement_cn": "在最优DSS失效的情境下，可将推荐向需求极端偏移，以利用锚定效应。",
+        "artifact_choice_cn": "激进DSS推荐X±30，位于最优值与同侧需求极端之间。",
+        "evaluated_contrast_cn": "激进DSS相对最优DSS的PtC和订量差异，尤其高利润条件。",
+        "objective_result_cn": "高利润条件下PtC β=0.075，实际订量23.11不显著异于最优25，即消除偏差。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Table 5",
+          "Table 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "相似性和从众会提高对建议的接受度。",
+        "mechanism_cn": "保守推荐更接近决策者无DSS时的自发行为，可能因相似而更容易被采纳。",
+        "design_requirement_cn": "可以测试把推荐放在均值与最优之间是否提高接受度。",
+        "artifact_choice_cn": "保守DSS推荐X±20，位于均值与最优值之间。",
+        "evaluated_contrast_cn": "保守DSS相对最优DSS的PtC和利润差异。",
+        "objective_result_cn": "保守DSS相对最优DSS无显著改进，说明仅相似性不足以改善决策。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Table 5",
+          "Table 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "负面经验（遗憾）对后续行为的影响通常大于正面经验（喜悦）。",
+        "mechanism_cn": "DSS更好产生的遗憾比DSS更差产生的喜悦更强烈地推动下一轮调整。",
+        "design_requirement_cn": "反馈设计可强化遗憾从而抵消算法厌恶。",
+        "artifact_choice_cn": "对话式反馈既显示DSS赢也显示DSS输；设计者可用详细反馈强化遗憾。",
+        "evaluated_contrast_cn": "常数项（DSS未更好时远离推荐）与DSS更好时的接近系数比较。",
+        "objective_result_cn": "高利润条件下，DSS更好时调整幅度大于未更好时的远离幅度（2.478 vs 1.543）。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Table 4",
+          "Table B.1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "受控实验室实验（15轮? 实为50轮多轮实验）",
+      "被试间对照（无DSS/最优DSS/保守DSS/激进DSS）",
+      "基线比较（NDSS为自发PtC基线，理论最优利润与DSS利润为基准）",
+      "跨期动态测量（逐轮距离变化RA）",
+      "回归分析与聚类标准误",
+      "效应量d检验PtC不对称",
+      "附录稳健性检验（Experiment II中重复遗憾厌恶回归）"
+    ],
+    "why_these_evaluations_cn": "文章要回答“推荐是否有效”和“为什么/何时有效”，所以需要基线比较来分离DSS效果；需要高低利润两个被试间条件来测试不对称；需要逐轮反馈和跨轮距离测量来捕捉遗憾厌恶；需要三种DSS类型试验来检验重新设计是否更好。",
+    "benchmark_and_contrast_chain_cn": "无DSS基线建立自发PtC基准 → 理论最优订量/利润作为绝对基准 → DSS利润作为算法表现基准 → 最优DSS作为重新设计的对照 → 保守/激进DSS相对最优DSS回归 → 讨论中用DSS更好/HN更好的频率推断算法厌恶强度。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "最优DSS缓解低利润PtC、增加利润并降低不对称。",
+        "evidence_cn": "Table 3回归显示低利润PtC系数-0.29***，利润+14.15***，不对称d由-0.17变-0.12；高利润PtC不显著。",
+        "strength_cn": "较强；有统计检验和效应量。",
+        "limitation_cn": "仅一个实验室样本；未直接测量心理机制。"
+      },
+      {
+        "claim_cn": "算法厌恶导致决策者不遵循最优推荐。",
+        "evidence_cn": "HN利润显著低于DSS利润，80%/85.22%轮次不完全遵循。",
+        "strength_cn": "中等；属于行为间接证据。",
+        "limitation_cn": "没有直接测量算法厌恶态度，也未对DSS智能感知做操纵检验。"
+      },
+      {
+        "claim_cn": "经验性遗憾导致后续遗憾厌恶行为。",
+        "evidence_cn": "Table 4高利润下IsDSSBetter系数4.021***，利润差系数0.0461***；低利润不显著。",
+        "strength_cn": "较强；有逐轮过程分析。",
+        "limitation_cn": "该构念仍由行为推断，未用问卷或神经数据直接测量。"
+      },
+      {
+        "claim_cn": "激进DSS能在高利润条件下消除PtC。",
+        "evidence_cn": "Table 6高利润RDSS订量23.11，PtC β=0.075，右侧显著性标记显示与最优无显著差异。",
+        "strength_cn": "较强；有直接统计结果。",
+        "limitation_cn": "利润未显著高于最优DSS；推荐偏离幅度只有一个取值（±30），无法确定最优偏离程度。"
+      },
+      {
+        "claim_cn": "低利润下算法厌恶更强，导致DSS无效。",
+        "evidence_cn": "表4和表B.1底部频率：低利润下HN优于DSS比例更高（如ODSS 51.02% vs 37.24%）。",
+        "strength_cn": "较弱；是间接推理而非直接统计检验。",
+        "limitation_cn": "未对算法厌恶进行前后测，也没有操纵算法厌恶。"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配被试到处理组；所有处理组面对相同的X和Y实现，减少需求扰动差异；使用实践轮次熟悉界面；被试间设计避免学习迁移；以个体水平聚类标准误处理重复测量；用被试平均作为主要分析单位减少序列相关；隐私现金支付降低实验者效应。",
+    "external_validity_strategy_cn": "选用报童问题作为同时具有不确定性且存在最优解的一类情境的代表；被试接受过概率统计训练，减少理解需求分布问题；强调结果可扩展到其他存在最优解的不确定决策情境；在结论中给出面向DSS设计者的通用含义。",
+    "what_is_not_actually_tested_cn": "没有直接测量算法厌恶和心理构念，只有行为推断；没有现场数据或真实企业DSS部署；没有系统扫描推荐偏离最优的连续幅度，只测了±20和±30两个点；未检验长期学习中算法厌恶是否会消退；未考虑决策者拥有私有信息等实际条件；利润改善在激进DSS下不显著，故“消除PtC”未必转化为更高利润。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "最优DSS只能部分缓解PtC（低利润显著、高利润不显著），而激进型DSS在高利润条件下可将PtC消除至统计上与最优无明显差异；保守型DSS无显著价值。",
+    "artifact_claim_cn": "推荐位置是造成去偏效果差异的核心设计特征：从最优值向外侧偏移的激进推荐通过锚定效应和遗憾厌恶主导、算法厌恶被压制而消除PtC；相似性驱动的保守推荐不足以改善绩效。",
+    "mechanism_claim_cn": "使用DSS时同时存在两股相反力量：算法厌恶把决策者推离推荐，遗憾厌恶在DSS最近表现更好时把决策者拉向推荐；当遗憾厌恶主导时DSS有效，当算法厌恶主导时DSS无效。",
+    "boundary_claim_cn": "遗憾厌恶行为在三种DSS类型下均只在利润条件为高时显著，低利润下不显著；算法厌恶在低利润条件下更强，因此激进DSS只在低利润条件之外（高利润条件）消除PtC。",
+    "reusable_design_knowledge_cn": "设计决策支持系统时，不应默认最优推荐一定最好；可以通过提供动态推荐和双方绩效反馈来唤起遗憾厌恶，也可把他人的心理偏差（如锚定）纳入推荐位置设计；同时需要评估算法厌恶可能压倒遗憾厌恶的边界条件。",
+    "theoretical_contribution_cn": "扩展了DSS接受和算法厌恶文献：证明了在存在最优解的不确定情境下算法厌恶依然存在且难以消除；提出了遗憾厌恶作为使用DSS时的另一心理机制，并将预期遗憾/经验遗憾文献与报童行为文献连接起来；通过激进推荐对PtC的消除，为行为运营管理中的去偏技术增加了新的理论解释。",
+    "how_discussion_closes_intro_gap_cn": "引言提出的GAP是“最优解存在时DSS成功应看接近最优，而此前不清楚人们是否算法厌恶”。讨论部分用频率分析表明算法厌恶不对称存在，并用两力交互解释了为何最优DSS无法消除偏差、激进DSS只在特定条件下消除偏差，直接回应了“最优推荐是否最好”的问题。",
+    "overclaim_or_unsupported_leaps_cn": "文章从DSS更差频率高推断算法厌恶更强，缺乏直接心理测量；用“dominant regret aversion, dominated algorithm aversion, anchoring”解释激进DSS成功，但回归没有估计三者交互；将报童实验结果推广到所有存在最优解的情境可能过大；激进DSS消除PtC但利润相对最优DSS无显著提高，去偏效果与利润改善之间存在未解释分离。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "作者指出DSS用于帮助人们在不确定且重复的环境中做预测或决策。",
+      "rhetorical_function_cn": "把读者带入DSS研究背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续提出算法厌恶问题铺垫。",
+      "evidence_pointer": "摘要第1句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "S2-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "作者指出尽管算法通常更优，但人们仍倾向于采用更差的人类建议，即算法厌恶。",
+      "rhetorical_function_cn": "建立核心经验现象。",
+      "depends_on_cn": "背景句。",
+      "sets_up_cn": "引出研究问题。",
+      "evidence_pointer": "摘要第2-3句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者说明本文研究最优DSS推荐对决策者心理和决策行为的影响。",
+      "rhetorical_function_cn": "明确研究目标。",
+      "depends_on_cn": "算法厌恶现象。",
+      "sets_up_cn": "规定后续实验的焦点。",
+      "evidence_pointer": "摘要第4句"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "S5-S6",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者预告用报童问题情境和实验室实验研究该问题。",
+      "rhetorical_function_cn": "说明研究场景和方法。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "为摘要中的发现部分做方法交代。",
+      "evidence_pointer": "摘要第5-6句"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "S7-S8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "最优推荐能缓解报童的PtC偏差并减少高低利润条件间不对称，但无法完全消除。",
+      "rhetorical_function_cn": "报告核心实验结果。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "引出心理机制解释。",
+      "evidence_pointer": "摘要第7-8句"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "S9-S10",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "作者解释偏差未消除是因为算法厌恶和遗憾厌恶同时存在。",
+      "rhetorical_function_cn": "给出解释性机制。",
+      "depends_on_cn": "实验结果。",
+      "sets_up_cn": "为Experiment II中的重新设计提供原理。",
+      "evidence_pointer": "摘要第9-10句"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "S11-S12",
+      "move_code": "RESULT",
+      "paraphrase_cn": "重新设计后，激进型DSS可能通过遗憾厌恶主导、算法厌恶被压制和锚定效应消除高利润条件PtC。",
+      "rhetorical_function_cn": "报告第二项实验的核心发现和机制。",
+      "depends_on_cn": "两力机制。",
+      "sets_up_cn": "声明贡献。",
+      "evidence_pointer": "摘要第11-12句"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "DSS服务于不确定且重复的环境中的预测和决策。",
+      "rhetorical_function_cn": "建立论文的大背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为算法厌恶现象提供应用场景。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S2-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "算法型DSS在孤立预测中常胜过人类，但人类对采用其建议存在抵抗。",
+      "rhetorical_function_cn": "引出算法厌恶现象。",
+      "depends_on_cn": "背景句。",
+      "sets_up_cn": "提出全文要研究的问题。",
+      "evidence_pointer": "Introduction P1 S2-S3"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有算法厌恶证据多来自无最优解的不确定情境，很少涉及存在可由DSS轻松求解的最优解的情境。",
+      "rhetorical_function_cn": "指出现有文献缺口。",
+      "depends_on_cn": "算法厌恶现象。",
+      "sets_up_cn": "解释为何要转移到报童问题。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S2",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "当最优解存在时，DSS成功应看用户决策接近最优解的程度，而人们是否仍有算法厌恶是未知的。",
+      "rhetorical_function_cn": "说明缺口的理论重要性。",
+      "depends_on_cn": "缺口句。",
+      "sets_up_cn": "引出研究问题。",
+      "evidence_pointer": "Introduction P2 S2"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者将该研究定位于用报童问题填补这一缺口。",
+      "rhetorical_function_cn": "提出研究目标。",
+      "depends_on_cn": "缺口重要性。",
+      "sets_up_cn": "引入报童模型。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P3 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "报童问题描述销量季节内的过量成本与缺货成本权衡。",
+      "rhetorical_function_cn": "为读者提供基本模型。",
+      "depends_on_cn": "选定研究情境。",
+      "sets_up_cn": "引出最优解概念。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P3 S3-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "报童问题有理论上的最优订货量，取决于成本、价格和需求分布。",
+      "rhetorical_function_cn": "建立“存在最优解”的基准。",
+      "depends_on_cn": "模型描述。",
+      "sets_up_cn": "说明DSS容易算出最优值，但人类不易做到。",
+      "evidence_pointer": "Introduction P3 后半部分"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "DSS容易计算最优订货量，但行为报童研究显示人类并非完全理性，存在PtC偏差。",
+      "rhetorical_function_cn": "构建“DSS能算但人做不到”的张力。",
+      "depends_on_cn": "最优解存在。",
+      "sets_up_cn": "提出即使有最优推荐，人类也可能不采用。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "行为报童问题虽已充分研究，但使用DSS推荐时的报童行为仍被忽视；已有最优推荐实验仍存在PtC。",
+      "rhetorical_function_cn": "把缺口进一步聚焦到DSS推荐下的报童行为。",
+      "depends_on_cn": "PtC现象。",
+      "sets_up_cn": "引出本文的DSS设计改进。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P5 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "作者怀疑固定推荐导致DSS显得不灵活或不够智能，从而引发算法厌恶。",
+      "rhetorical_function_cn": "解释已有文献为何不能消除PtC。",
+      "depends_on_cn": "先前文献结果。",
+      "sets_up_cn": "为“更智能”DSS设计提供动机。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P5 S3-S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者提出两个研究问题：最优推荐能否完全纠正偏差，以及人们使用DSS时有什么心理因素在影响决策。",
+      "rhetorical_function_cn": "正式提出研究问题。",
+      "depends_on_cn": "上述缺口。",
+      "sets_up_cn": "预告两个实验。",
+      "evidence_pointer": "Introduction P5 S3-S4"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者预告两个多轮实验，分别研究最优DSS和重新设计的DSS。",
+      "rhetorical_function_cn": "给出全文研究路线。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "介绍具体实验目的和发现。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P6 S2-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "最优DSS只缓解低利润PtC、提高利润，但无法根除，原因是算法厌恶；同时人们因绩效反馈产生遗憾厌恶。",
+      "rhetorical_function_cn": "提前给出Experiment I的关键结论。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "引出Experiment II的重新设计。",
+      "evidence_pointer": "Introduction P6 S2-S4"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P6 S5-S6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者重新设计推荐使其围绕最优值移动：保守推荐靠近均值，激进推荐靠近需求极端。",
+      "rhetorical_function_cn": "介绍Experiment II的干预设计。",
+      "depends_on_cn": "Experiment I结果。",
+      "sets_up_cn": "报告激进DSS的正面效果。",
+      "evidence_pointer": "Introduction P6 S5-S6"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P6 S7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "保守DSS无价值，激进DSS在高利润条件下可消除PtC。",
+      "rhetorical_function_cn": "给出第二项实验核心结果。",
+      "depends_on_cn": "重新设计。",
+      "sets_up_cn": "宣称去偏技术贡献。",
+      "evidence_pointer": "Introduction P6 S7"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "P7",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "作者说明论文结构：理论发展、实验I、实验II、讨论、结论。",
+      "rhetorical_function_cn": "路标，帮助读者导航。",
+      "depends_on_cn": "全文规划。",
+      "sets_up_cn": "后续各部分。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 24,
+      "section": "2 Theory development",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声明该研究扩展DSS接受文献至同时存在不确定与最优解的情境，并显示算法厌恶的顽固性。",
+      "rhetorical_function_cn": "定位理论贡献。",
+      "depends_on_cn": "引言缺口。",
+      "sets_up_cn": "展开理论推导。",
+      "evidence_pointer": "Theory development P1"
+    },
+    {
+      "order": 25,
+      "section": "2 Theory development",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者还声明对行为运营管理文献贡献了去偏技术，即有效消除PtC的激进DSS。",
+      "rhetorical_function_cn": "声明第二类贡献。",
+      "depends_on_cn": "实验II结果。",
+      "sets_up_cn": "比较本文与Zhang和Siemsen的差异。",
+      "evidence_pointer": "Theory development P2"
+    },
+    {
+      "order": 26,
+      "section": "2 Theory development",
+      "locator": "P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者说明本文DSS与Zhang和Siemsen有三点区别：推荐随轮变化、反馈双方绩效、不告知最优性。",
+      "rhetorical_function_cn": "把贡献落为可操作设计差异。",
+      "depends_on_cn": "先前文献。",
+      "sets_up_cn": "解释为何这些差异能引发新心理过程。",
+      "evidence_pointer": "Theory development P3"
+    },
+    {
+      "order": 27,
+      "section": "2 Theory development",
+      "locator": "P3 后半部分",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "变化推荐和双方反馈可减少算法厌恶，但会引发与机器的社会比较，激活经验遗憾对后续决策的影响。",
+      "rhetorical_function_cn": "提供设计特征通向心理机制的桥梁。",
+      "depends_on_cn": "设计差异。",
+      "sets_up_cn": "为H4遗憾厌恶铺垫。",
+      "evidence_pointer": "Theory development P3 后半部分"
+    },
+    {
+      "order": 28,
+      "section": "2.1 Algorithm aversion",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "作者总结算法厌恶在多个行业普遍存在，并提出多种解释，最终以Dietvorst的实证研究为主要依据。",
+      "rhetorical_function_cn": "建立算法厌恶的文献基础。",
+      "depends_on_cn": "引言中的现象。",
+      "sets_up_cn": "提出算法厌恶在报童DSS中也会存在。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 29,
+      "section": "2.2 Newsvendor problem",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "给出报童目标函数与最优订货量条件，定义critical ratio。",
+      "rhetorical_function_cn": "为PtC测量和利润条件提供正式模型。",
+      "depends_on_cn": "报童背景。",
+      "sets_up_cn": "定义高低利润条件。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 30,
+      "section": "2.3 Pull-to-Center bias and profit",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "综述PtC的稳定存在及其多种行为原因。",
+      "rhetorical_function_cn": "说明偏差是强健现象。",
+      "depends_on_cn": "行为报童文献。",
+      "sets_up_cn": "提出需要去偏。",
+      "evidence_pointer": "Section 2.3 前两段"
+    },
+    {
+      "order": 31,
+      "section": "2.3 Pull-to-Center bias and profit",
+      "locator": "P3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "多种DSS形式都只能部分纠正PtC。",
+      "rhetorical_function_cn": "指出去偏技术不足。",
+      "depends_on_cn": "PtC文献。",
+      "sets_up_cn": "说明本文DSS与已有研究的差异。",
+      "evidence_pointer": "Section 2.3 P3"
+    },
+    {
+      "order": 32,
+      "section": "2.3 Pull-to-Center bias and profit",
+      "locator": "P4-P5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "本文采用与Zhang和Siemsen类似但随轮变化的最优推荐，使用两段需求X+Y实现变化。",
+      "rhetorical_function_cn": "说明制品的构造选择。",
+      "depends_on_cn": "固定推荐缺乏智能的批评。",
+      "sets_up_cn": "让推荐随轮次看起来更智能。",
+      "evidence_pointer": "Section 2.3 P4-P5"
+    },
+    {
+      "order": 33,
+      "section": "2.3 Pull-to-Center bias and profit",
+      "locator": "P6-P7",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "作者提出H1：最优DSS能缓解但不能消除PtC；H2：最优DSS能提高利润。",
+      "rhetorical_function_cn": "将理论推演转为可检验假设。",
+      "depends_on_cn": "算法厌恶和PtC文献。",
+      "sets_up_cn": "Experiment I的统计检验。",
+      "evidence_pointer": "Section 2.3 H1-H2"
+    },
+    {
+      "order": 34,
+      "section": "2.3 Pull-to-Center bias and profit",
+      "locator": "P8",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "作者提出H3：最优DSS会降低高低利润之间的PtC不对称。",
+      "rhetorical_function_cn": "将DSS与PtC不对称联系起来。",
+      "depends_on_cn": "元分析结论。",
+      "sets_up_cn": "后续d指标检验。",
+      "evidence_pointer": "Section 2.3 H3"
+    },
+    {
+      "order": 35,
+      "section": "2.4 Regret aversion",
+      "locator": "P1-P2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "作者引入TAM和感知有用性，说明反馈、解释、修改算法可提高接受度。",
+      "rhetorical_function_cn": "为DSS交互设计提供理论依据。",
+      "depends_on_cn": "算法厌恶和TAM。",
+      "sets_up_cn": "引出本文DSS的修改与反馈设计。",
+      "evidence_pointer": "Section 2.4 P1-P2"
+    },
+    {
+      "order": 36,
+      "section": "2.4 Regret aversion",
+      "locator": "P2 末",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DSS允许自由修改推荐，并提供DSS自身和决策者双方绩效反馈。",
+      "rhetorical_function_cn": "描述实验制品的具体交互特性。",
+      "depends_on_cn": "TAM和修改算法文献。",
+      "sets_up_cn": "探索动态决策调整。",
+      "evidence_pointer": "Section 2.4 P2"
+    },
+    {
+      "order": 37,
+      "section": "2.4 Regret aversion",
+      "locator": "P3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "同时反馈引发决策者与DSS进行社会比较；DSS更好时产生遗憾，否则产生喜悦。",
+      "rhetorical_function_cn": "给出遗憾厌恶的机制。",
+      "depends_on_cn": "社会比较理论。",
+      "sets_up_cn": "提出经验遗憾影响后续决策。",
+      "evidence_pointer": "Section 2.4 P3"
+    },
+    {
+      "order": 38,
+      "section": "2.4 Regret aversion",
+      "locator": "P4-P5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "区分预期遗憾与经验遗憾，说明两者都导致遗憾厌恶，且经验遗憾影响更大。",
+      "rhetorical_function_cn": "为H4提供理论来源。",
+      "depends_on_cn": "遗憾理论。",
+      "sets_up_cn": "与报童文献中的遗憾研究区分。",
+      "evidence_pointer": "Section 2.4 P4-P5"
+    },
+    {
+      "order": 39,
+      "section": "2.4 Regret aversion",
+      "locator": "P6-P7",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "报童实验中已有预期遗憾和预期社会遗憾的研究，本文聚焦经验遗憾、与机器而非人比较、以及决策动态。",
+      "rhetorical_function_cn": "定义本文与既往文献的差异。",
+      "depends_on_cn": "遗憾理论。",
+      "sets_up_cn": "H4表述。",
+      "evidence_pointer": "Section 2.4 P6-P7"
+    },
+    {
+      "order": 40,
+      "section": "2.4 Regret aversion",
+      "locator": "P8",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "作者提出H4：经验性遗憾会导致后续的遗憾厌恶行为。",
+      "rhetorical_function_cn": "把过程机制转为假设。",
+      "depends_on_cn": "前文理论。",
+      "sets_up_cn": "Experiment I的RA测量。",
+      "evidence_pointer": "Section 2.4 H4"
+    },
+    {
+      "order": 41,
+      "section": "3.1 Experimental design and implementation",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用2×2被试间设计变化利润条件和DSS可用性，以分离DSS效果并复制自发PtC。",
+      "rhetorical_function_cn": "证明实验设计能回答H1-H3。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "后续具体实验参数。",
+      "evidence_pointer": "Section 3.1 P1"
+    },
+    {
+      "order": 42,
+      "section": "3.1 Experimental design and implementation",
+      "locator": "P4-P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "采用X+Y的两部分需求，X已知、Y随机，使推荐X±25随轮次变化；不告知推荐最优。",
+      "rhetorical_function_cn": "实现更智能DSS的操作化。",
+      "depends_on_cn": "前文设计思想。",
+      "sets_up_cn": "说明试验如何控制多变推荐。",
+      "evidence_pointer": "Section 3.1 P4-P6"
+    },
+    {
+      "order": 43,
+      "section": "3.1 Experimental design and implementation",
+      "locator": "P5-P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "ODSS下每轮额外显示DSS推荐订量、DSS利润和累计DSS利润。",
+      "rhetorical_function_cn": "操作化社会比较和遗憾厌恶所需反馈。",
+      "depends_on_cn": "H4机制。",
+      "sets_up_cn": "为RA测量提供数据。",
+      "evidence_pointer": "Section 3.1 P5-P6"
+    },
+    {
+      "order": 44,
+      "section": "3.2 Basic experimental results",
+      "locator": "Table 2附近",
+      "move_code": "RESULT",
+      "paraphrase_cn": "无DSS基线复现经典PtC；ODSS下订量也介于均值与最优之间，实际利润低于理论最优利润。",
+      "rhetorical_function_cn": "报告初步结果。",
+      "depends_on_cn": "实验数据。",
+      "sets_up_cn": "检验假设。",
+      "evidence_pointer": "Table 2"
+    },
+    {
+      "order": 45,
+      "section": "3.3 Test Hypotheses 1-3",
+      "locator": "第一段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "算法厌恶证据：HN利润低于DSS，80%/85.22%轮次未完全采纳推荐，6名被试从未采用推荐。",
+      "rhetorical_function_cn": "为PtC不可消除提供机制证据。",
+      "depends_on_cn": "基础结果。",
+      "sets_up_cn": "解释H1部分支持。",
+      "evidence_pointer": "Section 3.3第一段"
+    },
+    {
+      "order": 46,
+      "section": "3.3 Test Hypotheses 1-3",
+      "locator": "公式(1)附近",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "引入PtC标准测量β，并解释不同取值含义。",
+      "rhetorical_function_cn": "为跨处理组比较提供统一指标。",
+      "depends_on_cn": "报童文献。",
+      "sets_up_cn": "表格中的PtC值。",
+      "evidence_pointer": "公式(1)"
+    },
+    {
+      "order": 47,
+      "section": "3.3 Test Hypotheses 1-3",
+      "locator": "Table 3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "低利润条件下ODSS显著降低PtC和订量、提高利润；高利润条件下PtC降低不显著，利润提升显著。",
+      "rhetorical_function_cn": "检验H1、H2。",
+      "depends_on_cn": "回归分析。",
+      "sets_up_cn": "判断最优DSS的部分有效性。",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 48,
+      "section": "3.3 Test Hypotheses 1-3",
+      "locator": "公式(2)-(3)附近",
+      "move_code": "RESULT",
+      "paraphrase_cn": "PtC不对称d由NDSS的-0.17变为ODSS的-0.12，DSS降低了不对称，支持H3。",
+      "rhetorical_function_cn": "检验H3。",
+      "depends_on_cn": "PtC效应量。",
+      "sets_up_cn": "说明DSS效果的方向。",
+      "evidence_pointer": "Table 2最后列"
+    },
+    {
+      "order": 49,
+      "section": "3.4 Test Hypothesis 4",
+      "locator": "公式(4)",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "定义跨轮RA测量：相邻两轮绝对距离变化，正值表示接近推荐。",
+      "rhetorical_function_cn": "将遗憾厌恶操作化为动态过程指标。",
+      "depends_on_cn": "H4。",
+      "sets_up_cn": "后续回归。",
+      "evidence_pointer": "公式(4)"
+    },
+    {
+      "order": 50,
+      "section": "3.4 Test Hypothesis 4",
+      "locator": "Table 4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高利润下DSS更好时下一轮显著接近推荐，DSS未更好时显著远离；低利润下无显著变化；RA随利润差增加仅在高利润显著。",
+      "rhetorical_function_cn": "检验H4并划出边界。",
+      "depends_on_cn": "RA测量。",
+      "sets_up_cn": "解释为何最优DSS无法完全消除偏差。",
+      "evidence_pointer": "Table 4"
+    },
+    {
+      "order": 51,
+      "section": "3.4 Test Hypothesis 4",
+      "locator": "末段",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "作者总结Experiment I的五点结论，指出遗憾厌恶只在高利润条件出现。",
+      "rhetorical_function_cn": "收束Experiment I。",
+      "depends_on_cn": "全部Experiment I结果。",
+      "sets_up_cn": "引出Experiment II。",
+      "evidence_pointer": "Section 3.4末段"
+    },
+    {
+      "order": 52,
+      "section": "4.1 Experimental design for two redesigned DSSs",
+      "locator": "P1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者提出用保守和激进两类推荐重新设计DSS，检验它们能否比最优DSS进一步消除PtC。",
+      "rhetorical_function_cn": "形成Experiment II目标。",
+      "depends_on_cn": "Experiment I遗留问题。",
+      "sets_up_cn": "设计细节。",
+      "evidence_pointer": "Section 4.1 P1"
+    },
+    {
+      "order": 53,
+      "section": "4.1 Experimental design for two redesigned DSSs",
+      "locator": "P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "保守推荐因与自发行为相似可能更容易被跟随；激进推荐则通过锚定让决策者不充分调整后靠近最优。",
+      "rhetorical_function_cn": "给出两种设计背后的机制。",
+      "depends_on_cn": "相似性和锚定理论。",
+      "sets_up_cn": "具体推荐取值。",
+      "evidence_pointer": "Section 4.1 P2"
+    },
+    {
+      "order": 54,
+      "section": "4.1 Experimental design for two redesigned DSSs",
+      "locator": "P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "保守DSS用X±20，激进DSS用X±30，其余设置与ODSS相同。",
+      "rhetorical_function_cn": "给出可操作的推荐设计差异。",
+      "depends_on_cn": "前文机制。",
+      "sets_up_cn": "Experiment II的统计比较。",
+      "evidence_pointer": "Section 4.1 P3"
+    },
+    {
+      "order": 55,
+      "section": "4.2 Results and analysis",
+      "locator": "Table 5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "相对最优DSS，保守DSS无显著影响；激进DSS在高利润条件下显著降低PtC，但利润无显著提高；低利润下两类均不显著。",
+      "rhetorical_function_cn": "检验Experiment II核心问题。",
+      "depends_on_cn": "回归分析。",
+      "sets_up_cn": "进一步报告激进DSS消除偏差。",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 56,
+      "section": "4.2 Results and analysis",
+      "locator": "Table 6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高利润激进DSS下PtC β=0.075，订量23.11与最优25无显著差异，即消除PtC；保守DSS降低不对称但未消除；激进DSS未降低不对称。",
+      "rhetorical_function_cn": "报告最引人注目的去偏效果。",
+      "depends_on_cn": "实验数据。",
+      "sets_up_cn": "讨论为何激进DSS只在特定条件有效。",
+      "evidence_pointer": "Table 6"
+    },
+    {
+      "order": 57,
+      "section": "4.2 Results and analysis",
+      "locator": "末段+Appendix B",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "CDSS和RDSS下的遗憾厌恶存在与强度模式与ODSS一致，仍只在高利润条件显著。",
+      "rhetorical_function_cn": "证明遗憾厌恶机制跨DSS类型稳健。",
+      "depends_on_cn": "Experiment II数据。",
+      "sets_up_cn": "讨论中的边界解释。",
+      "evidence_pointer": "Appendix B Table B.1"
+    },
+    {
+      "order": 58,
+      "section": "5 Discussion",
+      "locator": "P1-P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "低利润条件下DSS被HN反超的频率更高，因此推断算法厌恶在低利润条件下更强。",
+      "rhetorical_function_cn": "解释算法厌恶不对称。",
+      "depends_on_cn": "表4和表B.1底部频率。",
+      "sets_up_cn": "整合两股力量。",
+      "evidence_pointer": "Section 5 P1-P2"
+    },
+    {
+      "order": 59,
+      "section": "5 Discussion",
+      "locator": "P3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "算法厌恶和遗憾厌恶相反，高利润下遗憾厌恶更易主导，配合锚定可消除PtC；低利润下算法厌恶主导，DSS无效。",
+      "rhetorical_function_cn": "构造一般机制解释。",
+      "depends_on_cn": "前文两阶段结果。",
+      "sets_up_cn": "结论中的设计含义。",
+      "evidence_pointer": "Section 5 P3"
+    },
+    {
+      "order": 60,
+      "section": "6 Conclusion",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "最优推荐不一定最好，因为算法厌恶和遗憾厌恶同时存在；激进推荐可通过多重心理机制消除偏差。",
+      "rhetorical_function_cn": "总结全文主张。",
+      "depends_on_cn": "所有实验结果。",
+      "sets_up_cn": "展开具体贡献。",
+      "evidence_pointer": "Section 6 P1"
+    },
+    {
+      "order": 61,
+      "section": "6 Conclusion",
+      "locator": "P2-P4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声明对DSS接受文献和行为运营管理的贡献，并给出DSS设计者三条含义。",
+      "rhetorical_function_cn": "定位贡献与设计启示。",
+      "depends_on_cn": "前文结果。",
+      "sets_up_cn": "限制与未来研究。",
+      "evidence_pointer": "Section 6 P2-P4"
+    },
+    {
+      "order": 62,
+      "section": "6 Conclusion",
+      "locator": "P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "作者承认被试不持有私有信息可能加重算法厌恶，并提出竞争、供应链、牛鞭效应等未来方向。",
+      "rhetorical_function_cn": "界定适用范围。",
+      "depends_on_cn": "研究设计。",
+      "sets_up_cn": "无，论文结束。",
+      "evidence_pointer": "Section 6 P5"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先展示算法厌恶的普遍性和DSS绩效优势，再指出现有算法厌恶证据来自无最优解情境；随后指出现有最优推荐实验仍不能消除PtC，并将原因初步归于“固定推荐不够智能”，从而把缺口定位在“最优解存在时，更智能的最优DSS能否消除偏差以及心理机制是什么”。",
+    "signposting_cn": "摘要在开头直接预告实验、结果和贡献；引言末尾明确列出研究问题和实验目的；理论部分明确说明将引入算法厌恶、报童问题、PtC、利润和遗憾厌恶；每个实验节末都有小结和过渡；论文结构段也清晰预告。",
+    "transition_logic_cn": "以“最优DSS部分有效但不能消除”作为桥：先总结Experiment I的五个结果，再指出遗留的不确定性，自然引出Experiment II；Experiment II结果后，又以高/低利润条件下DSS反超频率的对比较为逻辑桥，进入讨论；讨论最后用两股力量交互把两轮实验统一起来。",
+    "claim_evidence_rhythm_cn": "先提出假设，再报告对应表格；在报告回归结果前先说明测量公式和统计方法；用“显著/不显著”区分“部分支持/不支持”；在主要结果后立即补充算法厌恶和采纳率的间接证据，使“不能消除偏差”不只是负结果，而是有机制解释。",
+    "benchmark_narrative_cn": "NDSS作为自然实验基线，理论最优利润/最优订量作为绝对标准，DSS利润作为算法表现基准；Experiment II中以最优DSS作为对照，而不是NDSS，这样能直接回答“重新设计是否优于最优”。这种benchmark链条让每个结果都相对更明确的参照物。",
+    "theory_return_cn": "讨论部分没有止于“激进DSS有效”，而是从DSS与HN利润比较的频率推断算法厌恶不对称，并与遗憾厌恶不对称结合成一般机制，把两轮实验的局部结果上升为对“最优推荐是否最好”的理论回答。",
+    "contribution_positioning_cn": "在理论发展开头直接声明两类贡献（DSS接受、行为运营管理），在结论中重复并加上设计者含义；通过强调“最优推荐不一定最好”和“经验遗憾作为新心理因素”来突出新颖性。",
+    "novelty_protection_cn": "通过三个设计差异（变化推荐、双方反馈、不告知最优）与Zhang和Siemsen区分；用“更智能”DSS避免算法厌恶；再用Experiment II激进推荐来证明不是简单的绩效改进，而是通过心理机制发挥去偏作用，从而防止结论退化为“提升性能”的一次性结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "选择一个同时具备不确定性和理论最优解的代表性决策情境，说明DSS成功标准应为接近最优。",
+        "research_job_cn": "确认情境中已有稳定行为偏差（如PtC），并找到已有DSS干预但无效的原因。",
+        "required_evidence_cn": "文献证据表明算法厌恶普遍、已有DSS只部分纠正、存在可操作的理论最优值。",
+        "transition_to_next_cn": "用“尚未研究/虽有研究仍不彻底”引向自己的研究问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "从算法厌恶、遗憾厌恶、锚定等理论推导DSS设计差异和假设。",
+        "research_job_cn": "把理论命题转成具体推荐位置、反馈结构和推荐变化方式。",
+        "required_evidence_cn": "每个设计特征都有文献机制支持，并能对应可检验假设。",
+        "transition_to_next_cn": "假设陈述后自然过渡到实验设计。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "设计多轮实验室实验，包含无干预基线、干预处理，并说明被试、需求过程、反馈和激励。",
+        "research_job_cn": "用被试间设计分离利润条件和DSS类型；用逐轮反馈收集动态数据。",
+        "required_evidence_cn": "基线能复制已知偏差；处理组能显示偏差改善和利润变化。",
+        "transition_to_next_cn": "用“为什么改善有限”引出过程分析和重新设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "在数据中构造过程指标（如距离变化）检验心理机制，并报告其边界条件。",
+        "research_job_cn": "用本阶段数据逐轮编码后悔/喜悦并回归后续行为。",
+        "required_evidence_cn": "机制指标显著且方向符合假设；边界条件得到说明。",
+        "transition_to_next_cn": "用“机制只在某条件下出现”解释偏差未消除，并预告新设计。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "根据阶段四的机制重新设计制品，并在同一实验室范式中比较新旧设计。",
+        "research_job_cn": "新设计操作化理论推测的锚定/相似性机制；保持其他设置不变以隔离设计差异。",
+        "required_evidence_cn": "新设计相对旧设计在主要指标上显著改善，且机制模式稳健或可解释差异。",
+        "transition_to_next_cn": "用“何时有效”引向讨论中的边界与机制整合。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "在讨论中把统计结果解释为心理力量之间的相对强弱，并返回理论贡献。",
+        "research_job_cn": "使用辅助证据（如频率、系数大小）说明为何特定条件下成功或失败。",
+        "required_evidence_cn": "辅助证据能支撑边界解释，而不是凭空声称。",
+        "transition_to_next_cn": "过渡到结论中的设计含义、限制和未来研究。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用“已有文献只给否定答案但未解释机制”构造缺口",
+      "把心里构念操作化为跨轮行为指标（如距离变化）",
+      "用“更智能”的设计消除一个已有失败原因，再设计偏离最优的干预",
+      "在同一范式下保持干扰最小、仅改变推荐位置来比较新旧设计",
+      "用DSS与人类绩效比较的频率推断算法厌恶强度",
+      "用两个实验间的“部分有效—重新设计—边界解释”推动论证"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "实验室实验需要招募大量被试（87+80名）",
+      "需要Ztree等实验软件和多轮实验实施能力",
+      "逐轮反馈和双方绩效显示需要精细的界面与指令设计",
+      "两段需求结构虽简单但需要保证所有被试面对相同实现，操作成本较高",
+      "如果要得到稳健的遗憾厌恶动态，需要足够轮次（50轮）和逐轮数据"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“最优推荐未必最好”而没有对推荐偏离幅度的实验比较",
+      "不能把“激进推荐”包装成普适去偏技术而不报告利润未显著提高和低利润无效的边界",
+      "不能仅凭DSS反超频率就声称算法厌恶不对称，应在可能的条件下加入直接心理测量或操纵检验",
+      "不能复制“实验I最优，实验II偏激”的叙事而不提供过程机制指标",
+      "不能把报童结果直接外推到所有存在最优解情境而不说明情境相同性"
+    ],
+    "single_best_description_of_the_routine_cn": "先建立“最优推荐照理应帮助人类但人类仍偏差”的问题，用理论拆出两股相反心理力量，设计实验中先证明最优推荐只能部分有效并诱出遗憾厌恶，再设计激进推荐去放大锚定和遗憾、压制算法厌恶，最终用边界条件把实验结果升华为一般DSS设计知识。"
+  },
+  "confidence": 0.93,
+  "limitations_cn": "文章全文、主要图表和附录指令均可用，但部分表格注脚中的显著性符号和数据表格式在OCR中可能不够精确，可能影响个别数值表述的核对；作者对算法厌恶和遗憾厌恶主要为行为推断，这本是文章本身的可批评点，而非本文分析错误。",
+  "usage": {
+    "prompt_tokens": 26141,
+    "completion_tokens": 26025,
+    "total_tokens": 52166,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 26141
+  }
+}

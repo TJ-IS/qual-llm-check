@@ -1,0 +1,1141 @@
+{
+  "record_id": "28396",
+  "source_file": "28396_2025_customer-acquisition-via-explainable-deep-reinforcement-learning.md",
+  "title": "Customer Acquisition via Explainable Deep Reinforcement Learning",
+  "authors": "Yicheng Song; Wenbo Wang; Song Yao",
+  "year": "2025",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.0529",
+  "fulltext_chars": 101290,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "economic_and_welfare",
+  "source_application_context": "finance_accounting_and_investment",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:34:53.084533+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何在顾客获取的序列化定向投放中，构建一个既能优化长期收益又具有内在可解释性的强化学习模型，并让管理者理解模型为何选择特定广告曝光时机与渠道？",
+    "artifact_and_design_cn": "提出DRQN-attention模型：在深度循环Q网络（DRQN）中引入定制注意力机制，以静态特征和历史交互构造query，以当前广告曝光机会的one-hot特征构造key和value，形成注意力瓶颈，使模型在估计长期Q值时显式聚焦于进入交互中最可能带来最优长期收益的特征。",
+    "objective_outcomes_cn": "基于一家数字银行约5万潜在客户、355万次交互和81次客户获取的点击流数据，采用离策略评估（Fixed-M PERS）显示：DRQN-attention在AR@6上达到0.3999，超过公司现有上下文多臂老虎机（0.3406）及其他RL基准；联邦学习版本性能仅有微小下降；注意力权重匹配组在AR@3和AR@6上显著优于未匹配组，也优于关联规则匹配组；行业、动态行为、农业季节性三类渠道案例均在测试集上验证。",
+    "core_contribution_cn": "作者声称的主要贡献是：首次为顾客获取问题提供具有内在可解释性的RL模型，既优化长期收益，又通过定制注意力机制揭示决策依据；模型能够学习按行业、动态行为和农业季节性调整广告渠道，从而把注意力权重转化为管理者可用的洞察。",
+    "whole_argument_in_one_paragraph_cn": "文章先指出顾客获取成本高、单次干预实验不足以应对序列化定向投放，从而把问题聚焦到既能优化长期收益又具备可解释性的RL模型上；接着通过文献综述指出现有RL用于顾客获取多为黑箱，注意力RL多用于视频游戏，尚未有内在可解释的顾客获取模型；随后基于DRQN和注意力机制构建DRQN-attention，在数字银行数据上用离策略评估证明其长期收益优势；再用联邦学习证明隐私受限场景依然可用；之后通过注意力权重与关联规则的比较论证注意力相当于‘前向规划’；最后用三个渠道案例和测试集匹配/未匹配验证，把可解释性转化为广告渠道选择的管理洞察，并在结论中回应最初的可解释性缺口。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "本文核心是提出一个新的RL制品DRQN-attention，从问题需求、设计动机、模型构建、基准评估、稳健性检验到可解释性案例分析，整体遵循‘需求—构建—评价—设计知识’的设计科学路径。虽然包含多个分析阶段，但并非多方法完全并列，而是以制品构建和评价为主线。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章主要弧线是：指出顾客获取RL缺乏可解释性与长期收益优化之间的性能/知识缺口，构建DRQN-attention制品，用基准模型和离策略评估证明性能优势，再通过注意力权重分析和渠道案例把局部性能结果一般化为可迁移的机制洞察与管理知识。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段1建立RL问题形式化并设计DRQN-attention制品；阶段2在同一真实数据上进行离策略基准评价，证明长期收益性能；阶段3加入联邦学习，检验隐私敏感条件下是否仍可部署；阶段4转入可解释性机制，证明注意力权重捕捉的是面向长期收益的前向规划而非简单关联；阶段5通过三类渠道案例把注意力权重转化为可操作的管理洞察，并用测试集匹配/未匹配验证。五阶段依次回答：能否构建、是否更优、是否可部署、为何可解释、解释是否有用。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "RL问题形式化与DRQN-attention制品构建",
+        "question_cn": "如何把顾客获取的序列化定向投放表达为RL问题，并设计一个能优化长期收益且可解释的模型？",
+        "inputs_and_setting_cn": "来自数字银行的顾客获取背景、潜在顾客点击流、广告渠道、广告库约200条广告消息；研究情境是中小企业贷款服务的在线获客。",
+        "designed_or_compared_object_cn": "设计RL形式化中的状态、动作、奖励；在DRQN基础上定制注意力机制，包括query、key、value的构造方式。",
+        "baseline_control_or_counterfactual_cn": "概念上与经典DQN、DRQN、视频游戏注意力RL模型形成对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "形式化建模、算法设计、前向规划机制说明。",
+        "main_result_cn": "得到完整可训练的DRQN-attention模型：query由静态特征和历史交互嵌入生成，key/value来自当前交互one-hot特征，注意力权重显式作用于输入特征。",
+        "argumentative_role_cn": "为后续所有实证评价提供制品基础，也决定了可解释性的具体来源。",
+        "remaining_uncertainty_cn": "模型是否真的在数据上提升长期收益、注意力权重是否真的揭示决策逻辑，尚未被检验。",
+        "link_to_next_phase_cn": "需要真实数据上的离策略评价来证明性能，因而进入阶段2。",
+        "evidence_pointers": [
+          "Section 3",
+          "Section 4.1",
+          "Section 4.2",
+          "Figure 2",
+          "Figure 4"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "离策略基准评价：长期收益优化",
+        "question_cn": "相比公司现有系统和state-of-the-art RL方法，DRQN-attention能否更优地优化长期收益？",
+        "inputs_and_setting_cn": "50,000名潜在客户，2019年6至12月点击流，355万次交互，168万次广告曝光，77,210次点击，81次客户获取；奖励校准为曝光成本¥0.075、点击收益¥2.60、客户获取收益¥260。",
+        "designed_or_compared_object_cn": "DRQN-attention与上下文MAB、DQN、I-DQN、DRQN、Dyna-DRQN、ST-ADRQN六类基准比较。",
+        "baseline_control_or_counterfactual_cn": "公司当前采用的上下文MAB是最主要的实用基线；DQN对应Wang et al.(2023)的序列促销模型；I-DQN和ST-ADRQN分别代表其他注意力RL设计。",
+        "objective_metrics": [
+          "AR@1",
+          "AR@3",
+          "AR@6"
+        ],
+        "analysis_method_cn": "固定M每幕拒绝抽样（Fixed-M PERS）离策略评价，在20%留出样本上比较平均奖励；统计显著性检验。",
+        "main_result_cn": "Table 3显示DRQN-attention在AR@3和AR@6上最高或与DRQN无显著差异，显著优于MAB；Q-learning类模型在长幕长下超过MAB；DRQN和DRQN-attention优于DQN。",
+        "argumentative_role_cn": "证明制品在长期收益优化上的有效性，回答‘是否更优’。",
+        "remaining_uncertainty_cn": "仅证明性能，未证明可解释性内容的实际含义，也没有考虑隐私约束。",
+        "link_to_next_phase_cn": "需要验证隐私敏感环境下是否依然可用，同时后续阶段需要解释注意力权重为何有效。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Section 5.2",
+          "Table 2",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "联邦学习鲁棒性评价：隐私敏感部署",
+        "question_cn": "在需要保护用户数据隐私的联邦学习设定下，DRQN-attention是否仍能保持服务质量？",
+        "inputs_and_setting_cn": "与阶段2相同的训练/测试划分；引入联邦学习，模型参数在本地设备间聚合，不交换原始数据。",
+        "designed_or_compared_object_cn": "联邦版DQN、I-DQN、DRQN、ST-ADRQN、DRQN-attention与原始版本对照。",
+        "baseline_control_or_counterfactual_cn": "同一批模型的非联邦版本（Table 3结果）作为对照。",
+        "objective_metrics": [
+          "AR@1",
+          "AR@3",
+          "AR@6"
+        ],
+        "analysis_method_cn": "联邦RL训练流程，同样的离策略评价，比较联邦版与非联邦版平均奖励。",
+        "main_result_cn": "Table 4显示联邦版性能与原始版接近，只有微小下降，说明可以在隐私敏感设定下应用。",
+        "argumentative_role_cn": "增加部署可行性和外部有效性，回应监管和隐私趋势。",
+        "remaining_uncertainty_cn": "联邦学习本身的安全性和抗攻击性仅部分讨论，且仍未揭示注意力权重的解释内容。",
+        "link_to_next_phase_cn": "性能与部署均得到支持后，需要回答‘注意力权重到底捕捉了什么’，进入阶段4。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Table 4",
+          "Figure 5"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "注意力权重作为前向规划的机制验证",
+        "question_cn": "注意力权重是否识别出能带来更高长期收益的进入交互特征，而非仅仅捕捉即时关联？",
+        "inputs_and_setting_cn": "已训练DRQN-attention对每个交互产生的注意力权重；将交互按高权重特征是否匹配实际one-hot特征分为匹配组和未匹配组；用关联规则作为简单基线。",
+        "designed_or_compared_object_cn": "注意力权重匹配组、未匹配组、关联规则匹配组三类分组。",
+        "baseline_control_or_counterfactual_cn": "关联规则基于即时收益识别特征，作为非RL的替代解释基线。",
+        "objective_metrics": [
+          "AR@1",
+          "AR@3",
+          "AR@6"
+        ],
+        "analysis_method_cn": "按注意力权重top 10与one-hot特征匹配数量分组，计算各组平均奖励；与关联规则置信度权重排序比较；参考Serrano and Smith (2019)的注意力验证程序（附录F）。",
+        "main_result_cn": "Table 5显示匹配组奖励高于未匹配组；关联规则匹配组在AR@1稍高但在AR@3和AR@6被注意力匹配组主导，说明注意力面向长期最优轨迹。",
+        "argumentative_role_cn": "把可解释性从表面权重上升为机制主张：注意力发挥着‘前向规划’功能。",
+        "remaining_uncertainty_cn": "仍未说明注意力如何转化为具体的广告渠道选择。",
+        "link_to_next_phase_cn": "需要展示注意力权重对渠道决策的直观含义，进入阶段5。",
+        "evidence_pointers": [
+          "Section 6",
+          "Table 5"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "广告渠道选择案例分析及测试集验证",
+        "question_cn": "注意力权重能否帮助管理者理解模型如何选择在线广告渠道，并且这些理解在留出测试集上是否成立？",
+        "inputs_and_setting_cn": "以注意力权重定义‘最重要特征(MIF)’和‘奇异特征’；针对行业（IT、金融法律、教育）、动态行为（LiveStream1、CCTV1等）、农业季节性（prepeak vs peak）三类场景提取top特征；在测试集上做匹配/未匹配验证。",
+        "designed_or_compared_object_cn": "三组案例的推荐渠道特征集合；匹配组为潜在客户落入推荐渠道且展示广告，未匹配组为未落入或不展示。",
+        "baseline_control_or_counterfactual_cn": "每个案例的未匹配组作为内部反事实；同时与后验可解释模型对比（附录G）。",
+        "objective_metrics": [
+          "AR@1",
+          "AR@3",
+          "AR@6"
+        ],
+        "analysis_method_cn": "计算各组平均注意力权重并列出top 10特征；在测试集按匹配/未匹配分组比较平均奖励。",
+        "main_result_cn": "Table 6-8显示模型能按行业差异选择渠道、根据用户先前的未点击或点击行为调整渠道、捕捉农业贷款的季节性；Table 9显示各案例匹配组平均奖励普遍高于未匹配组。",
+        "argumentative_role_cn": "把可解释性落地为管理者可用的渠道定向见解，并在留出集上验证洞察有效性。",
+        "remaining_uncertainty_cn": "注意力权重本身不是决策树那样的直接解释规则；数据未完全覆盖状态-动作空间，策略未必全局最优；没有在线on-policy部署。",
+        "link_to_next_phase_cn": "这些未决问题被收束到结论中的局限与未来研究。",
+        "evidence_pointers": [
+          "Section 7",
+          "Table 6",
+          "Table 7",
+          "Table 8",
+          "Table 9"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "先用顾客获取的重要性确立背景",
+      "指出RL在序列化定向投放中的潜力",
+      "指出RL决策缺乏可解释性",
+      "给出DRQN-attention及其核心思想",
+      "报告数据、主要结果和三类注意力洞察"
+    ],
+    "introduction_moves": [
+      "从现实商业问题出发：顾客获取成本高、对增长关键",
+      "说明随机实验的局限：忽略干预间交互、序贯策略组合爆炸",
+      "引用因果决策文献，论证优化目标不必然需要精确因果效应",
+      "指出现有监督学习只适合单次干预，顾客转化通常需要序列信息",
+      "引出RL的探索-利用框架",
+      "指出RL黑箱问题及其对采用与信任的阻碍",
+      "引入DARPA和IS学界对可解释ML的呼吁",
+      "区分可解释性不必等于因果效应，而是洞察决策过程",
+      "陈述DRQN-attention的模型选择和注意力瓶颈设计",
+      "用章节预告建立阅读路径"
+    ],
+    "theory_and_knowledge_moves": [
+      "综述RL用于商业决策：从MAB到Q-learning序列定向",
+      "指出现有RL商业研究多为事后解释，缺少内在可解释模型",
+      "综述可解释RL和注意力机制基本组件",
+      "通过与其他注意力RL的对比提炼本文三个定制差异",
+      "强调尚无针对顾客获取的内在可解释RL模型"
+    ],
+    "artifact_design_moves": [
+      "把顾客获取形式化为状态、动作、奖励三元组",
+      "用Q-learning定义长期收益目标",
+      "指出MDP在真实顾客状态中的局限，引入DRQN/POMDP",
+      "定制注意力机制：query由静态+历史交互生成，key/value来自当前交互",
+      "用one-hot编码保证注意力权重可解释",
+      "给出多头注意力、状态生成和完全可微的训练性质",
+      "强调query机制等价于‘前向规划’"
+    ],
+    "evaluation_moves": [
+      "用真实数字银行数据校准奖励",
+      "选择六类基准覆盖公司现状、经典RL、其他注意力RL和模型化RL",
+      "采用Fixed-M PERS离策略评价以适配留出样本",
+      "以AR@1、AR@3、AR@6分别检查即时和长期表现",
+      "增加联邦学习评价验证隐私敏感部署",
+      "使用注意力匹配/未匹配和关联规则对比验证机制",
+      "使用行业、行为和季节性案例加测试集匹配/未匹配验证渠道洞察"
+    ],
+    "discussion_and_contribution_moves": [
+      "总结模型性能和可解释性双重优势",
+      "将注意力机制归纳为前向规划",
+      "将三类渠道洞察转化为管理者行动建议",
+      "承认注意力权重非直接解释、数据未覆盖全状态动作空间、需on-policy验证",
+      "提出公平性、未来探索等后续方向"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Q-learning与深度Q网络",
+      "部分可观测马尔可夫决策过程POMDP与DRQN",
+      "注意力机制（query-key-value）",
+      "内在可解释机器学习与可解释强化学习",
+      "联邦学习作为隐私增强技术"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "模型的关键设计几乎直接由DRQN处理POMDP和注意力机制的可解释性能力推导而来：作者明确提出根据顾客获取场景把query设为静态+历史、key/value设为当前交互，并让注意力瓶颈直接作用于one-hot输入；后续评价也直接检验了该设计是否带来长期收益和可解释性。",
+    "translation_chain_cn": "顾客决策是部分可观测的，因此需要用RNN/DRQN处理历史交互来总结状态；长期收益优化需要Q值函数，因此把DRQN嵌入Q-learning；黑箱问题需要解释决策依据，因此加入注意力机制；为了让注意力真正解释决策，设计为query由静态+历史交互产生，key/value由当前交互产生，并以one-hot编码使权重可直接映射到特征；这一设计再被离策略评价、联邦学习、关联规则对比和渠道案例验证。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "顾客状态不能仅由最近观测完全描述，需用POMDP/RNN处理历史",
+        "mechanism_cn": "RNN把历史交互压缩为状态表征，使Q值估计依据更完整的顾客状态",
+        "design_requirement_cn": "RL模型必须能处理历史交互序列而非只使用最后几次观测",
+        "artifact_choice_cn": "采用DRQN和GRU处理交互序列得到状态s_it",
+        "evaluated_contrast_cn": "DRQN/DRQN-attention vs DQN只使用最近四次交互",
+        "objective_result_cn": "DRQN类模型在AR@3和AR@6上高于DQN",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "注意力机制可通过显式加权输入特征提供内在解释",
+        "mechanism_cn": "注意力权重直接与one-hot输入特征相乘，使高权重特征成为决策依据",
+        "design_requirement_cn": "注意力组件必须让研究者能直接观察到模型使用了什么输入特征",
+        "artifact_choice_cn": "定制query-key-value：query由静态+历史生成，key/value由当前交互one-hot特征生成",
+        "evaluated_contrast_cn": "DRQN-attention vs I-DQN和ST-ADRQN的不同注意力构造",
+        "objective_result_cn": "DRQN-attention在AR@6最高，且I-DQN、ST-ADRQN因注意力设计不当而表现更差",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "可解释性需要验证权重确实对决策有因果影响，而非事后相关",
+        "mechanism_cn": "如果注意力权重指向的特征确实重要，则高权重匹配交互的长期奖励应更高",
+        "design_requirement_cn": "需要把注意力权重和收益结果关联验证",
+        "artifact_choice_cn": "按注意力权重top 10匹配程度分组，并与关联规则基线比较",
+        "evaluated_contrast_cn": "注意力匹配组 vs 未匹配组；注意力匹配组 vs 关联规则匹配组",
+        "objective_result_cn": "匹配组奖励更高；长幕长下注意力匹配组优于关联规则匹配组",
+        "evidence_pointers": [
+          "Section 6",
+          "Table 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "优化长期收益需要平衡即时反馈和未来回报，Q-learning优于即时奖励优化",
+        "mechanism_cn": "Q值包含当前奖励和折现未来最大Q值，从而选择长期最优动作",
+        "design_requirement_cn": "模型必须使用Q-learning类价值函数训练，而不是仅优化CTR",
+        "artifact_choice_cn": "采用Q-learning损失函数，结合double Q-learning和dueling架构",
+        "evaluated_contrast_cn": "Q-learning模型 vs 上下文MAB（单状态即时奖励模型）",
+        "objective_result_cn": "H=1时MAB最好，H=3和H=6时Q-learning模型超过MAB",
+        "evidence_pointers": [
+          "Section 4",
+          "Table 3"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "离策略RL评价",
+      "多基准模型对照",
+      "联邦学习鲁棒性检验",
+      "注意力权重分组验证",
+      "关联规则基线对比",
+      "测试集匹配/未匹配外部验证",
+      "案例解释"
+    ],
+    "why_these_evaluations_cn": "先需要证明模型在长期收益上确实优于公司和当前SOTA，因此采用离策略评价和多种基准；接着考虑到商业部署的隐私要求，加入联邦学习检验鲁棒性；之后只证明性能还不够，需要证明注意力权重确实对应长期收益相关特征，因此引入匹配组和关联规则基线；最后需要说明注意力权重对管理者的实际用处，所以用三类渠道案例并在测试集上验证洞察，形成从性能到机制再到应用的完整证据链。",
+    "benchmark_and_contrast_chain_cn": "第一个对照是MAB vs Q-learning，证明长期收益优化需要序列模型；第二个对照是DQN vs DRQN，证明处理历史交互的必要性；第三个对照是DRQN vs DRQN-attention，证明加入注意力不损失性能；第四个对照是不同注意力设计（I-DQN、ST-ADRQN），证明本文注意力定制更适合顾客获取；第五个对照是注意力匹配组 vs 关联规则匹配组，证明注意力捕捉长期而非即时关联；第六个对照是各渠道案例匹配/未匹配组，证明解释性洞察在留出集上有效。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "DRQN-attention在长期收益优化上超过公司现有系统和多数RL基准",
+        "evidence_cn": "Table 3中DRQN-attention AR@6为0.3999，高于MAB的0.3406且超过除DRQN外的所有基准；与DRQN无显著差异",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 5.2"
+        ]
+      },
+      {
+        "claim_cn": "注意力机制并不会牺牲模型性能",
+        "evidence_cn": "DRQN-attention与DRQN平均奖励差异不显著，p=0.708",
+        "evidence_pointers": [
+          "Section 5.2"
+        ]
+      },
+      {
+        "claim_cn": "联邦学习下模型性能几乎不受影响",
+        "evidence_cn": "Table 4中各联邦版RL模型的AR值与Table 3接近，只有微小下降",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Table 4"
+        ]
+      },
+      {
+        "claim_cn": "注意力权重识别的是面向长期收益的特征，而非即时关联",
+        "evidence_cn": "Table 5中注意力匹配组AR@3为0.2298、AR@6为0.4815，均高于关联规则匹配组的0.1939和0.3946",
+        "evidence_pointers": [
+          "Section 6",
+          "Table 5"
+        ]
+      },
+      {
+        "claim_cn": "模型学习到的渠道选择洞察在留出集上有效",
+        "evidence_cn": "Table 9中七个案例的匹配组AR@1、AR@3、AR@6几乎全部高于未匹配组",
+        "evidence_pointers": [
+          "Section 7",
+          "Table 9"
+        ]
+      }
+    ],
+    "internal_validity_strategy_cn": "使用80/20随机划分、离策略评价Fixed-M PERS使采样幕与评价策略对齐；用多种基准控制不同解释因素；用注意力匹配/未匹配和关联规则基线控制‘仅仅是即时相关’这一替代解释；用测试集匹配/未匹配验证案例洞察，降低过拟合解释风险。",
+    "external_validity_strategy_cn": "数据来自真实数字银行、覆盖312个城市、96个App、195条广告，较贴近真实获客场景；增加联邦学习检验隐私敏感部署；用三类不同渠道案例展示跨行业、跨行为、跨季节的可迁移性；同时在结论中承认单数据源、未覆盖状态动作空间等边界。",
+    "what_is_not_actually_tested_cn": "未进行在线域内或现场部署检验，策略在真实环境中的表现仍是开放的；注意力权重无法像决策树那样直接生成规则，需要额外分组和后处理；模型对公平性没有约束；联邦学习的抗攻击和安全保证主要依赖文献，未做直接实验；所有结果来自离策略评估，可能受行为策略和数据覆盖限制。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "DRQN-attention在相同离线数据上取得了不逊于甚至优于state-of-the-art RL方法的长期平均奖励，且在可解释性上提供直接可见的注意力权重。",
+    "artifact_claim_cn": "DRQN-attention中‘query来自静态+历史、key/value来自当前交互’的定制注意力设计是性能不损失且可解释的关键；替代注意力设计（I-DQN、ST-ADRQN）表现更差。",
+    "mechanism_claim_cn": "注意力权重发挥前向规划作用：它基于固定不变的静态和历史信息，主动扫描下一个广告曝光机会中的特征，选择更可能带来最优长期收益的路径。",
+    "boundary_claim_cn": "该模型适用于需要序列化信息传递、长期收益优化且需要解释决策逻辑的顾客获取场景；在隐私敏感环境下可通过联邦学习部署；但注意力权重不是直接规则式解释，且结果受数据状态-动作空间覆盖限制。",
+    "reusable_design_knowledge_cn": "为顾客获取RL模型增加内在可解释性的可行路径是：用历史交互和静态特征构造查询，对当前交互的one-hot特征施加注意力瓶颈；可解释性验证可以用匹配组、关联规则基线和测试集匹配/未匹配完成；注意力权重可以转化为渠道选择、行业差异和季节性等管理洞察。",
+    "theoretical_contribution_cn": "理论上，文章把注意力机制从视频游戏等完全可观测环境迁移到顾客获取的POMDP场景，并阐明在这种场景下应如何构造query、key、value；同时提出用受约束注意力瓶颈实现‘可解释的长期收益RL’这一设计思路，而不是事后解释黑箱。",
+    "how_discussion_closes_intro_gap_cn": "引言指出RL用于顾客获取缺少内在可解释性；结论和前面证据表明DRQN-attention既保持长期收益性能，又通过注意力权重让研究者和管理者看到模型依据哪些进入交互特征做决策，并且在行业、行为和季节案例中给出可行动渠道洞察，直接回应了‘为什么采用该模型’和‘模型如何决策’两个缺口。",
+    "overclaim_or_unsupported_leaps_cn": "作者把注意力权重解释为‘前向规划’有一定跳跃：虽然匹配组长期奖励更高，但没有直接展示模型在每一时刻如何显式模拟未来多条路径；把案例中的top特征解读为渠道选择因果关系也偏强，因为注意力权重本质上仍是模型内部的注意力分数，并非被随机实验证明的因果效应；另外，声称‘可广泛应用’超出了单一银行数据和离策略评估的支持范围。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "有效的顾客获取在很大程度上取决于序列化定向投放，以保证合适的营销信息触达合适的顾客。",
+      "rhetorical_function_cn": "开篇即把‘序列化定向投放’确立为顾客获取的核心问题。",
+      "depends_on_cn": "无，直接建立话题。",
+      "sets_up_cn": "为后续引入RL和序列决策做铺垫。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "RL在用户获取中促进序列化定向投放方面展现出巨大潜力。",
+      "rhetorical_function_cn": "把RL与顾客获取问题连接，为方案做理论铺垫。",
+      "depends_on_cn": "P1 S1的序列化投放背景。",
+      "sets_up_cn": "使RL成为候选方案。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "然而，RL在此过程中做出的决策往往缺乏可解释性。",
+      "rhetorical_function_cn": "点出已有RL方案的关键缺陷，形成问题缺口。",
+      "depends_on_cn": "P1 S2提出RL潜力。",
+      "sets_up_cn": "为解释性成为文章核心目标提供动机。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "引入DRQN-attention模型，目标是在优化长期奖励的同时增强决策可解释性。",
+      "rhetorical_function_cn": "直接陈述文章构建的制品和双重目标。",
+      "depends_on_cn": "前面的背景和缺口。",
+      "sets_up_cn": "为全文的模型设计、评价和解释性分析提供主线。",
+      "evidence_pointer": "Abstract P2 S1"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P2 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "核心思想是在Q-learning中加入注意力机制形成瓶颈，迫使模型聚焦于能带来最优长期奖励的下一次广告曝光特征。",
+      "rhetorical_function_cn": "用一句话概括模型机制，让读者预知可解释性来自何处。",
+      "depends_on_cn": "P2 S1的目标定义。",
+      "sets_up_cn": "为后续注意力瓶颈和one-hot特征设计做预告。",
+      "evidence_pointer": "Abstract P2 S2"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P3 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "使用一家数字银行的综合数据集估计模型。",
+      "rhetorical_function_cn": "引入实证来源，表明不是玩具数据。",
+      "depends_on_cn": "模型提出。",
+      "sets_up_cn": "为后续结果报告设置数据基础。",
+      "evidence_pointer": "Abstract P3 S1"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "P3 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实证结果显示模型具有可解释性，并且在长期收益优化上优于现有方法。",
+      "rhetorical_function_cn": "给出抽象级别的主要实证结论。",
+      "depends_on_cn": "数据估计。",
+      "sets_up_cn": "为摘要中的三类具体洞察作总起。",
+      "evidence_pointer": "Abstract P3 S2"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "P3 S3-S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模型中的注意力机制相当于前向规划，能找出下一次广告曝光中最可能带来最优结果的特征，并据此学习行业、动态行为和季节性对应的渠道选择。",
+      "rhetorical_function_cn": "把结果从性能提升扩展到机制和管理洞察。",
+      "depends_on_cn": "P3 S2的结果声明。",
+      "sets_up_cn": "暗示第6和第7节的分析结构。",
+      "evidence_pointer": "Abstract P3 S3-S5"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数字时代顾客获取是业务增长的关键因素，涉及识别潜在顾客并引导其通过购买漏斗。",
+      "rhetorical_function_cn": "将文章置于商业增长的大背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续强调获客成本和效率做铺垫。",
+      "evidence_pointer": "Introduction P1 S1-S2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "许多数字平台上的顾客获取成本极高，因此确保获客成本不超过获客客户的平均生命周期价值非常重要。",
+      "rhetorical_function_cn": "给出现实利益攸关，说明为什么需要优化获客模型。",
+      "depends_on_cn": "顾客获取是增长关键这一背景。",
+      "sets_up_cn": "为替代随机实验的模型方法做现实动机。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "随机实验常用于评估顾客获取中的各种干预策略，但通常关注单个干预的效果而忽略干预之间的相互作用。",
+      "rhetorical_function_cn": "总结现有评价手段并指出其局限。",
+      "depends_on_cn": "前文的获客问题。",
+      "sets_up_cn": "为引入序列化干预寻找空间。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S2-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "当需要寻找多个干预的最优序列时，策略空间指数增长，随机实验难以克服维数灾难。",
+      "rhetorical_function_cn": "说明随机实验在序列化定向投放中的本质困难。",
+      "depends_on_cn": "P2 S1对随机实验的批评。",
+      "sets_up_cn": "为模型驱动方法提供合理入口。",
+      "evidence_pointer": "Introduction P2 S2-S3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P2 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "因果决策文献认为，通过随机实验精确估计每个干预的因果效应通常并非决定干预内容与顺序所必需；优化只需要区分不同干预在不同情境下的效果。",
+      "rhetorical_function_cn": "引用方法论文献为模型优化而非因果识别提供正当性。",
+      "depends_on_cn": "随机实验维数灾难的讨论。",
+      "sets_up_cn": "为RL模型最大化业务结果而非估计因果效应的做法辩护。",
+      "evidence_pointer": "Introduction P2 S4"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P2 S5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "因此，以期望业务结果为导向的模型方法可能成为顾客获取问题的有前途解决方案。",
+      "rhetorical_function_cn": "为由随机实验转向模型方法设定方法论转折。",
+      "depends_on_cn": "P2 S4关于因果决策的论点。",
+      "sets_up_cn": "为后续机器学习与RL方法做铺垫。",
+      "evidence_pointer": "Introduction P2 S5"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "机器学习模型已成为开发经济高效的顾客获取策略的重要工具。",
+      "rhetorical_function_cn": "引入机器学习作为已经存在的解决方案。",
+      "depends_on_cn": "模型方法作为替代方案的结论。",
+      "sets_up_cn": "为随后指出监督学习的不足做铺垫。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P3 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "现有基于机器学习的定向技术常用监督学习预测潜在顾客在单一营销干预下的盈利性。",
+      "rhetorical_function_cn": "概括当前技术路线。",
+      "depends_on_cn": "机器学习工具的背景。",
+      "sets_up_cn": "为指出单次干预不足以促进转化做铺垫。",
+      "evidence_pointer": "Introduction P3 S2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P3 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "顾客购买产品或服务往往需要投入大量时间和金钱，因此转化不太可能由单次干预触发。",
+      "rhetorical_function_cn": "用真实消费决策特征说明为什么需要序列化干预。",
+      "depends_on_cn": "监督学习的局限。",
+      "sets_up_cn": "为序列化投放和RL引入提供经验基础。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P3 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有研究将顾客获取视为通过一系列营销信息在不同情境下逐步转化潜在顾客。",
+      "rhetorical_function_cn": "引用先前工作将问题框定为序列决策。",
+      "depends_on_cn": "单次干预不足以转化的现象。",
+      "sets_up_cn": "为RL作为序列决策框架做理论铺垫。",
+      "evidence_pointer": "Introduction P3 S4"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P3 S5",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "潜在顾客对不同信息的响应未知或仅部分显现，企业需要在利用已知响应稳定收益和探索不确定但可能更有利的消息之间权衡。",
+      "rhetorical_function_cn": "解释序列化投放中的探索-利用机制。",
+      "depends_on_cn": "序列化决策的问题框架。",
+      "sets_up_cn": "为RL解决探索-利用权衡做铺垫。",
+      "evidence_pointer": "Introduction P3 S5"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P3 S6",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "为此，研究者转向强化学习，它是一个在有限预算下平衡探索和利用的框架。",
+      "rhetorical_function_cn": "正式引入RL作为解决方案。",
+      "depends_on_cn": "探索-利用权衡的机制。",
+      "sets_up_cn": "为后文RL文献和模型构建铺路。",
+      "evidence_pointer": "Introduction P3 S6"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "RL已在点击率优化、序列促销和基于历史实验分配被试等商业问题上表现出潜力。",
+      "rhetorical_function_cn": "列举RL在商业中的应用证明其可行。",
+      "depends_on_cn": "RL框架引入。",
+      "sets_up_cn": "为接下来指出黑箱问题提供对照。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P4 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "尽管有这些成功，多数用于商业决策的RL模型仍是缺乏透明度的黑箱模型。",
+      "rhetorical_function_cn": "指出RL应用的共同局限。",
+      "depends_on_cn": "P4 S1中的RL成功案例。",
+      "sets_up_cn": "为可解释性成为本文目标形成张力。",
+      "evidence_pointer": "Introduction P4 S2"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "P4 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "企业采用RL模型必须理解决策如何做出、使用了哪些信息以及为何出错。",
+      "rhetorical_function_cn": "把可解释性上升为企业采用条件。",
+      "depends_on_cn": "黑箱问题的提出。",
+      "sets_up_cn": "为解释不足导致信任下降做铺垫。",
+      "evidence_pointer": "Introduction P4 S3"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "P4 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "缺乏可解释性会令用户困惑并降低对智能系统的信任，阻碍模型未来应用。",
+      "rhetorical_function_cn": "说明可解释性缺口的现实后果。",
+      "depends_on_cn": "企业采用需要透明这一前提。",
+      "sets_up_cn": "为DARPA和IS学者呼吁可解释ML提供依据。",
+      "evidence_pointer": "Introduction P4 S4"
+    },
+    {
+      "order": 25,
+      "section": "Introduction",
+      "locator": "P4 S5-S6",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "DARPA启动可解释AI项目，信息系统学者也呼吁为深度学习赋予可解释性。",
+      "rhetorical_function_cn": "用外部权威和学科动态增强可解释性研究的必要性。",
+      "depends_on_cn": "可解释性缺乏的现实后果。",
+      "sets_up_cn": "为文章的可解释性目标提供合法性。",
+      "evidence_pointer": "Introduction P4 S5-S6"
+    },
+    {
+      "order": 26,
+      "section": "Introduction",
+      "locator": "P4 S7",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "这类可解释性并不一定需要来自实地实验的干净因果效应，也可以是通过模型输出窥探决策过程的洞察。",
+      "rhetorical_function_cn": "提前界定本文所主张的可解释性类型，降低读者期望偏差。",
+      "depends_on_cn": "可解释AI讨论。",
+      "sets_up_cn": "为后文用注意力权重作为解释而非因果识别做辩护。",
+      "evidence_pointer": "Introduction P4 S7"
+    },
+    {
+      "order": 27,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文提出DRQN-attention模型，旨在增强顾客获取RL模型的可解释性，同时保持优化长期奖励的主要目标。",
+      "rhetorical_function_cn": "正式宣告研究目标。",
+      "depends_on_cn": "全部引言铺垫。",
+      "sets_up_cn": "定义全文的核心贡献对象。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 28,
+      "section": "Introduction",
+      "locator": "P5 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "模型旨在把正确的信息在正确的背景下展示给正确的潜在客户，转化与否仍由客户自己决定。",
+      "rhetorical_function_cn": "阐述模型的功能定位和使用边界。",
+      "depends_on_cn": "P5 S1的研究目标。",
+      "sets_up_cn": "为后续行动空间含‘不展示广告’做铺垫。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 29,
+      "section": "Introduction",
+      "locator": "P5 S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "模型采用DRQN处理客户状态部分可观测的POMDP。",
+      "rhetorical_function_cn": "引入第一个技术理论基础。",
+      "depends_on_cn": "P5 S1的模型目标。",
+      "sets_up_cn": "为Section 4.1的DRQN形式化提供引路。",
+      "evidence_pointer": "Introduction P5 S3"
+    },
+    {
+      "order": 30,
+      "section": "Introduction",
+      "locator": "P5 S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为在RL智能体中制造瓶颈并结合注意力机制，模型将Q-learning与注意力机制结合。",
+      "rhetorical_function_cn": "介绍第二个技术设计核心。",
+      "depends_on_cn": "P5 S3的DRQN基础。",
+      "sets_up_cn": "为Section 4.2的定制注意力埋下伏笔。",
+      "evidence_pointer": "Introduction P5 S4"
+    },
+    {
+      "order": 31,
+      "section": "Introduction",
+      "locator": "P5 S5",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "定制的注意力机制允许直接观察模型决策所用的信息，使模型比传统RL更可解释。",
+      "rhetorical_function_cn": "把注意力瓶颈与可解释性需求联系起来。",
+      "depends_on_cn": "P5 S4的注意力集成。",
+      "sets_up_cn": "为后续可解释性分析和案例解释提供标准。",
+      "evidence_pointer": "Introduction P5 S5"
+    },
+    {
+      "order": 32,
+      "section": "Section 2.1",
+      "locator": "最后两段",
+      "move_code": "GAP",
+      "paraphrase_cn": "当前RL商业决策文献主要做事后解释，内在可解释RL模型在顾客获取场景中几乎没有进展。",
+      "rhetorical_function_cn": "明确指出文献缺口。",
+      "depends_on_cn": "对RL商业文献和事后解释的综述。",
+      "sets_up_cn": "为本文‘内在可解释RL’贡献定位。",
+      "evidence_pointer": "Section 2.1 last two paragraphs"
+    },
+    {
+      "order": 33,
+      "section": "Section 2.1",
+      "locator": "最后一句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文提出一个面向顾客获取的内在可解释RL模型，填补文献空白并满足商业需求。",
+      "rhetorical_function_cn": "把缺口直接转化为贡献声明。",
+      "depends_on_cn": "缺口陈述。",
+      "sets_up_cn": "为后文模型构建设定目标。",
+      "evidence_pointer": "Section 2.1 final sentence"
+    },
+    {
+      "order": 34,
+      "section": "Section 2.2",
+      "locator": "P1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "RL可解释性困难源自黑箱基础模型和序列决策长期优化的设计复杂性。",
+      "rhetorical_function_cn": "解释为什么RL可解释性比一般ML更难。",
+      "depends_on_cn": "RL应用综述。",
+      "sets_up_cn": "为引入注意力机制作为解释手段做铺垫。",
+      "evidence_pointer": "Section 2.2 P1"
+    },
+    {
+      "order": 35,
+      "section": "Section 2.2",
+      "locator": "P2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "注意力机制包含query、key、value三部分，注意力权重的大小与输入区域对预测的相关性相关。",
+      "rhetorical_function_cn": "给出后续定制注意力设计的通用框架。",
+      "depends_on_cn": "可解释性讨论。",
+      "sets_up_cn": "为本文定制query/key/value提供概念语言。",
+      "evidence_pointer": "Section 2.2 P2"
+    },
+    {
+      "order": 36,
+      "section": "Section 2.2",
+      "locator": "三个差异点",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "与视频游戏注意力RL不同，本文用RNN处理历史交互构造query，直接把注意力应用于原始进入交互特征，并使用不同来源构造query与key/value。",
+      "rhetorical_function_cn": "通过对比说明本文注意力机制的情境化定制。",
+      "depends_on_cn": "注意力机制通用框架。",
+      "sets_up_cn": "为Section 4.2的具体设计做预告。",
+      "evidence_pointer": "Section 2.2 three bullet differences"
+    },
+    {
+      "order": 37,
+      "section": "Section 2.2",
+      "locator": "P4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "近年已有在医疗、NLP、股票交易等领域定制注意力的可解释RL研究。",
+      "rhetorical_function_cn": "展示注意力定制在不同应用中的可行性，也铺垫本文在顾客获取领域的新颖性。",
+      "depends_on_cn": "注意力机制介绍。",
+      "sets_up_cn": "为最后结论‘没有顾客获取领域的内在可解释RL’做比较。",
+      "evidence_pointer": "Section 2.2 P4"
+    },
+    {
+      "order": 38,
+      "section": "Section 2.2",
+      "locator": "最后段落",
+      "move_code": "GAP",
+      "paraphrase_cn": "据作者所知，尚无专门针对顾客获取问题的内在可解释RL模型。",
+      "rhetorical_function_cn": "明确本文独特定位。",
+      "depends_on_cn": "前面对比了视频游戏和其他领域的注意力RL。",
+      "sets_up_cn": "为贡献声明和模型设计建立必要性。",
+      "evidence_pointer": "Section 2.2 final paragraph"
+    },
+    {
+      "order": 39,
+      "section": "Section 3",
+      "locator": "P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "研究与中国一家数字银行合作，该银行服务传统银行忽视的中小企业，而中小企业融资缺口巨大且是增长障碍。",
+      "rhetorical_function_cn": "建立实证场景的现实重要性。",
+      "depends_on_cn": "前文顾客获取问题。",
+      "sets_up_cn": "为后文模型评价提供真实数据来源和业务意义。",
+      "evidence_pointer": "Section 3 P1-P2"
+    },
+    {
+      "order": 40,
+      "section": "Section 3",
+      "locator": "P3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "合作方现有获客系统基于上下文MAB优化CTR，广告库近200条，渠道为第三方App。",
+      "rhetorical_function_cn": "描述基线系统的技术现状。",
+      "depends_on_cn": "研究场景介绍。",
+      "sets_up_cn": "为后文MAB作为主要业务基线和RL改进提供参照。",
+      "evidence_pointer": "Section 3 P3"
+    },
+    {
+      "order": 41,
+      "section": "Section 3",
+      "locator": "P4 and Figure 1 note",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "点击流数据显示潜在顾客获取前往往接收多个不同广告、活跃于多个渠道，很多客户获取前有多次点击，说明仅CTR不是好指标。",
+      "rhetorical_function_cn": "用数据观察说明序列化、跨渠道和长期目标的重要性。",
+      "depends_on_cn": "数据描述。",
+      "sets_up_cn": "为后文RL目标优化长期收益而非CTR提供实证依据。",
+      "evidence_pointer": "Section 3 P4, Figure 1"
+    },
+    {
+      "order": 42,
+      "section": "Section 4",
+      "locator": "P1 and bullet list",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "把顾客获取形式化为RL问题，定义状态、动作、奖励：状态是交互历史和当前情境，动作是展示某广告或不展示，奖励来自点击和客户获取并扣除广告成本。",
+      "rhetorical_function_cn": "把现实问题翻译成RL形式语言。",
+      "depends_on_cn": "前面的现象和RL框架。",
+      "sets_up_cn": "为Q-learning和DRQN模型提供正式基础。",
+      "evidence_pointer": "Section 4 P1, bullet list"
+    },
+    {
+      "order": 43,
+      "section": "Section 4",
+      "locator": "P2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "RL学习价值函数估计当前状态下动作的期望累计奖励，从而选择最优长期收益的动作。",
+      "rhetorical_function_cn": "陈述RL的核心理论命题。",
+      "depends_on_cn": "状态动作奖励定义。",
+      "sets_up_cn": "为Q-learning公式做理论铺垫。",
+      "evidence_pointer": "Section 4 P2"
+    },
+    {
+      "order": 44,
+      "section": "Section 4.1",
+      "locator": "P2-P3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "DQN基于MDP假设，但真实顾客状态难以仅由最近观测完全描述，因此需要用RNN处理交互历史的DRQN来建模POMDP。",
+      "rhetorical_function_cn": "引入DRQN的理论动机。",
+      "depends_on_cn": "价值函数定义。",
+      "sets_up_cn": "为DRQN-attention提供基础架构。",
+      "evidence_pointer": "Section 4.1 P2-P3"
+    },
+    {
+      "order": 45,
+      "section": "Section 4.2",
+      "locator": "P1-P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为了使RL模型内在可解释，需要在模型中增加解释组件；注意力机制通过显式加权输入特征满足这一要求。",
+      "rhetorical_function_cn": "把可解释性需求转化为加入注意力机制的模型要求。",
+      "depends_on_cn": "DRQN架构和注意力机制文献。",
+      "sets_up_cn": "为具体customized attention设计做总起。",
+      "evidence_pointer": "Section 4.2 P1-P2"
+    },
+    {
+      "order": 46,
+      "section": "Section 4.2",
+      "locator": "P3-P5 and Figure 4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "针对顾客获取场景，用静态特征和历史交互构造query，用当前交互的one-hot特征构造key和value，并对所有特征施加注意力权重，最终生成状态表征。",
+      "rhetorical_function_cn": "提出本文核心制品设计。",
+      "depends_on_cn": "通用注意力机制和DRQN。",
+      "sets_up_cn": "为后续可解释性分析提供可直接检视的注意力权重。",
+      "evidence_pointer": "Section 4.2 P3-P5, Figure 4"
+    },
+    {
+      "order": 47,
+      "section": "Section 4.2",
+      "locator": "P5 properties",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "query是静态特征和历史交互的函数，这相当于自动前向规划，主动查询下一个广告曝光机会中的哪些特征能优化长期奖励。",
+      "rhetorical_function_cn": "把注意力设计解读为前向规划机制，为第6节埋下伏笔。",
+      "depends_on_cn": "query构造和注意力机制。",
+      "sets_up_cn": "为第6节‘注意力权重捕捉什么’和第7节渠道案例做机制铺垫。",
+      "evidence_pointer": "Section 4.2 final properties"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.1",
+      "locator": "P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "根据银行实际支付和咨询数据设置曝光成本、点击收益和客户获取收益，从而让RL奖励与真实收入一致。",
+      "rhetorical_function_cn": "解释奖励校准方法，使离线评价结果可解释。",
+      "depends_on_cn": "数据描述。",
+      "sets_up_cn": "为后文AR指标比较提供货币化基础。",
+      "evidence_pointer": "Section 5.1 P2"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.2",
+      "locator": "P1-P2 and Online Appendix D",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "将数据随机分成训练和留出样本，采用Fixed-M PERS离策略评价，并与MAB、DQN、I-DQN、DRQN、Dyna-DRQN、ST-ADRQN等基准比较。",
+      "rhetorical_function_cn": "建立评价方法和对照体系。",
+      "depends_on_cn": "数据与模型构建。",
+      "sets_up_cn": "为Table 3结果报告提供方法基础。",
+      "evidence_pointer": "Section 5.2 P1-P2"
+    },
+    {
+      "order": 50,
+      "section": "Section 5.2",
+      "locator": "Table 3 observations (1)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "MAB在H=1时表现最好，但Q-learning模型在H=3和H=6时超过MAB。",
+      "rhetorical_function_cn": "报告第一组关键结果，说明长期收益需要Q-learning。",
+      "depends_on_cn": "离策略评价。",
+      "sets_up_cn": "为论证RL长期收益优于CTR优化提供证据。",
+      "evidence_pointer": "Section 5.2 observations (1), Table 3"
+    },
+    {
+      "order": 51,
+      "section": "Section 5.2",
+      "locator": "Table 3 observations (2)-(3)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DRQN和DRQN-attention优于DQN，且DRQN-attention与DRQN性能无显著差异。",
+      "rhetorical_function_cn": "证明历史交互处理和注意力机制不会损害性能。",
+      "depends_on_cn": "Table 3结果。",
+      "sets_up_cn": "为后文说明‘注意力带来可解释性而不牺牲收益’做证据。",
+      "evidence_pointer": "Section 5.2 observations (2)-(3), Table 3"
+    },
+    {
+      "order": 52,
+      "section": "Section 5.2",
+      "locator": "Table 3 observations (4)-(6)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "I-DQN、ST-ADRQN、Dyna-DRQN等替代设计在顾客获取场景表现不佳。",
+      "rhetorical_function_cn": "通过负面对照凸显本文注意力定制的优势。",
+      "depends_on_cn": "基准模型运行。",
+      "sets_up_cn": "为解释注意力设计差异重要性提供证据。",
+      "evidence_pointer": "Section 5.2 observations (4)-(6), Table 3"
+    },
+    {
+      "order": 53,
+      "section": "Section 5.3",
+      "locator": "P1-P3 and Table 4",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "为应对隐私监管趋势，采用联邦学习训练RL模型，结果显示联邦版与原始版性能接近，只有微小下降。",
+      "rhetorical_function_cn": "检验模型在隐私敏感部署条件下的鲁棒性。",
+      "depends_on_cn": "模型评价结果。",
+      "sets_up_cn": "为结论中‘模型可广泛应用’提供另一层支持。",
+      "evidence_pointer": "Section 5.3, Table 4"
+    },
+    {
+      "order": 54,
+      "section": "Section 6",
+      "locator": "P1-P2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "本节探索注意力权重捕捉到了什么，并说明高权重元素显著影响状态构建和模型决策。",
+      "rhetorical_function_cn": "宣告从性能转向机制分析。",
+      "depends_on_cn": "前文模型和注意力权重定义。",
+      "sets_up_cn": "为匹配/未匹配分析和关联规则对比做铺垫。",
+      "evidence_pointer": "Section 6 P1-P2"
+    },
+    {
+      "order": 55,
+      "section": "Section 6",
+      "locator": "P3 and Table 5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "与注意力权重匹配的交互序列在AR@1、AR@3、AR@6上都高于未匹配组。",
+      "rhetorical_function_cn": "直接证据表明注意力权重确实指向收益更高的特征。",
+      "depends_on_cn": "注意力权重分组法。",
+      "sets_up_cn": "为‘注意力是前向规划’的结论提供核心证据。",
+      "evidence_pointer": "Section 6 P3, Table 5"
+    },
+    {
+      "order": 56,
+      "section": "Section 6",
+      "locator": "P4 and Table 5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "关联规则匹配组在AR@1略高，但在AR@3和AR@6被注意力匹配组超过，说明注意力捕捉长期最优轨迹而非即时关联。",
+      "rhetorical_function_cn": "用替代解释基线排除‘仅是即时关联’的竞争解释。",
+      "depends_on_cn": "注意力结果和关联规则计算。",
+      "sets_up_cn": "为前向规划机制的核心贡献提供支持。",
+      "evidence_pointer": "Section 6 P4, Table 5"
+    },
+    {
+      "order": 57,
+      "section": "Section 6",
+      "locator": "P4 last sentence",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "模型通过扫描可能的未来路径并选择有前途的最优路径，而不是仅看即时收益。",
+      "rhetorical_function_cn": "明确把结果提升为‘前向规划’机制声明。",
+      "depends_on_cn": "注意力与关联规则对比结果。",
+      "sets_up_cn": "为后续渠道案例提供机制标签。",
+      "evidence_pointer": "Section 6 P4"
+    },
+    {
+      "order": 58,
+      "section": "Section 7",
+      "locator": "P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用三个案例展示注意力机制如何选择广告渠道，并定义最重要特征和奇异特征两个概念。",
+      "rhetorical_function_cn": "从机制验证转向管理洞察展示。",
+      "depends_on_cn": "前向规划机制。",
+      "sets_up_cn": "为三小节案例做总体预告。",
+      "evidence_pointer": "Section 7 P1"
+    },
+    {
+      "order": 59,
+      "section": "Section 7.1",
+      "locator": "P1 and Table 6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "IT、金融法律、教育行业的top奇异特征显示模型能学习按行业特征选择不同广告渠道和地点。",
+      "rhetorical_function_cn": "第一个案例证明注意力权重包含可解释的行业定向模式。",
+      "depends_on_cn": "注意力权重提取和奇异特征定义。",
+      "sets_up_cn": "为行业维度管理者洞察提供支持。",
+      "evidence_pointer": "Section 7.1, Table 6"
+    },
+    {
+      "order": 60,
+      "section": "Section 7.2",
+      "locator": "P1 and Table 7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "当用户在LiveStream1多次曝光但未点击时，该App从top特征消失；当用户曾在CCTV1点击后，CCTV1和Trans1成为top特征，显示模型能根据动态行为调整渠道并发现跨渠道协同。",
+      "rhetorical_function_cn": "第二个案例证明注意力权重能反映动态行为适应。",
+      "depends_on_cn": "案例2的交互分组。",
+      "sets_up_cn": "为动态渠道调整这一管理洞察提供证据。",
+      "evidence_pointer": "Section 7.2, Table 7"
+    },
+    {
+      "order": 61,
+      "section": "Section 7.3",
+      "locator": "P1-P2 and Table 8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "面向农业企业家的注意力权重在prepeak和peak阶段不同，prepeak偏向电商、直播等消费娱乐App，peak阶段转向金融保险地点和金融新闻App。",
+      "rhetorical_function_cn": "第三个案例说明模型捕捉行业季节性并相应调整渠道。",
+      "depends_on_cn": "农业季节性和注意力权重分组。",
+      "sets_up_cn": "为‘模型洞察帮助监控行业趋势和产品设计’提供内容基础。",
+      "evidence_pointer": "Section 7.3, Table 8"
+    },
+    {
+      "order": 62,
+      "section": "Section 7",
+      "locator": "验证段落",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "借鉴可解释ML的实践验证策略，在训练集上生成解释，再在测试集上通过匹配/未匹配渠道比较平均奖励验证洞察。",
+      "rhetorical_function_cn": "为案例洞察提供验证方法，防止解释仅具启发性。",
+      "depends_on_cn": "Allen et al. (2023)的验证策略。",
+      "sets_up_cn": "为Table 9的匹配/未匹配结果做方法说明。",
+      "evidence_pointer": "Section 7 validation paragraph"
+    },
+    {
+      "order": 63,
+      "section": "Section 7",
+      "locator": "Table 9之后的说明",
+      "move_code": "RESULT",
+      "paraphrase_cn": "所有案例中匹配组平均奖励均高于未匹配组，说明从注意力权重得出的推荐渠道洞察在留出集上成立。",
+      "rhetorical_function_cn": "提供渠道洞察的外部有效性证据。",
+      "depends_on_cn": "测试集匹配/未匹配比较。",
+      "sets_up_cn": "强化结论中的‘模型具有可解释性和适用性’主张。",
+      "evidence_pointer": "Section 7, Table 9"
+    },
+    {
+      "order": 64,
+      "section": "Conclusion",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结DRQN-attention在优化长期收益和提供解释两方面的贡献，并称模型可广泛用于顾客获取。",
+      "rhetorical_function_cn": "把全文证据收束为总体贡献声明。",
+      "depends_on_cn": "前文所有模型、评价和案例。",
+      "sets_up_cn": "为随后的局限和未来研究做对照。",
+      "evidence_pointer": "Conclusion P1"
+    },
+    {
+      "order": 65,
+      "section": "Conclusion",
+      "locator": "P2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "注意力权重并非像决策树那样直接可解释；数据未完全覆盖状态动作空间；未来可引入Boltzmann探索、公平性优化以及在不同平台内的序列消息应用。",
+      "rhetorical_function_cn": "诚实界定贡献边界并给出后续研究方向。",
+      "depends_on_cn": "贡献声明。",
+      "sets_up_cn": "保护模型不被误解为万灵药，也为后续研究留下入口。",
+      "evidence_pointer": "Conclusion P2"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先指出随机实验在序列化干预和组合爆炸上的局限，再指出现有监督学习只适用于单次干预，最后聚焦到RL的可解释性缺口；通过文献矩阵（Table 1）和对比分析说明已有注意力RL均未针对顾客获取，且本文的query/key/value构造与前人不同。",
+    "signposting_cn": "引言末尾用一段路标明确各节任务；每个主要部分开头用一句话预告该节目标，如第6节‘本节探索注意力权重捕捉什么’、第7节‘用三个案例展示渠道选择’；结论处用‘贡献—局限—未来’标准桥接。",
+    "transition_logic_cn": "从性能到隐私再到可解释性，再到管理洞察，每次都先用上一阶段的‘未解决问题’驱动下一阶段：性能证明后需要隐私，性能+隐私后需要机制，机制后需要案例。",
+    "claim_evidence_rhythm_cn": "每个大主张先给方法或设计，再给表格或验证结果，最后用小结性句子把结果解释为机制或贡献；如第5.2节先列观察项目再对应表格，第6节先分组再给AR比较，第7节先列案例再给匹配/未匹配验证。",
+    "benchmark_narrative_cn": "benchmark不是简单的‘我们更好’，而是被赋予论证角色：MAB表示公司现状和即时优化，DQN表示无历史信息的深度RL，DRQN表示历史信息但无解释，I-DQN和ST-ADRQN表示其他注意力设计，Dyna-DRQN表示模型化RL的采样效率。这样每个对照都回答一个独立问题。",
+    "theory_return_cn": "结果不仅回到RL和注意力机制，还回到‘可解释性’概念：用注意力权重匹配组证明权重指向高收益特征，用关联规则对比证明其面向长期而非即时，用案例证明这些机制能转化为具体渠道决策，从而把局部结果提升为‘前向规划’的一般机制表述。",
+    "contribution_positioning_cn": "贡献被定位在‘内在可解释RL模型’这一交叉点：既非纯RL算法，也非纯事后解释方法；通过强调‘尚无针对顾客获取的内在可解释模型’和‘注意力设计三个差异’来保持独特性。",
+    "novelty_protection_cn": "通过多个负面对照保护新颖性：I-DQN和ST-ADRQN设计在数据上表现较差，说明简单的注意力移植不够；同步说明DRQN-attention与DRQN性能无显著差异，从而把价值放在‘不牺牲性能的可解释性’上，而不是性能单独提升。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实问题和现有方法局限建立研究动机，把一般问题收缩为可研究的RL+可解释性缺口。",
+        "research_job_cn": "选择真实业务场景，确认序列化、长期收益和解释需求的必要性。",
+        "required_evidence_cn": "行业数据或现实案例表明单次干预不足、长期指标比CTR更重要。",
+        "transition_to_next_cn": "从‘需要模型’过渡到‘需要什么样的模型’。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述RL商业应用和可解释RL，构造文献缺口，并用对比表显示差异。",
+        "research_job_cn": "梳理已有RL模型的可解释性手段，明确哪些设计不能直接用于顾客获取。",
+        "required_evidence_cn": "现有方法在机制、情境或应用领域上的具体差异；本文与已有注意力RL的本质不同。",
+        "transition_to_next_cn": "缺口明确后，自然引出‘我们构建什么样的制品’。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "形式化问题，给出RL的状态、动作、奖励，并详细描述制品设计，包括可解释组件的工作原理。",
+        "research_job_cn": "把业务问题映射到技术设计；用正式公式和图展示模型结构，确保可解释组件是模型的一部分而非事后附加。",
+        "required_evidence_cn": "清晰的数学定义、结构图和可训练性说明。",
+        "transition_to_next_cn": "制品建好后，需要真实数据证明其有效。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "选择合适评价方法（离策略评价、基准、指标），报告性能结果并做多角度解释。",
+        "research_job_cn": "用留出数据和多个基线验证长期收益；说明每个基线回答的不同问题。",
+        "required_evidence_cn": "至少一个适合该RL问题的离策略评价指标；多个基准的规范化对比。",
+        "transition_to_next_cn": "性能证明之后，需要证明模型决策可解释且解释有效。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "构造解释验证机制：把可解释组件输出与结果关联，并用简单基线排除替代解释。",
+        "research_job_cn": "提出可量化分组方法（如注意力匹配/未匹配），并与关联规则等简单解释法比较长期表现。",
+        "required_evidence_cn": "分组后奖励差异、与简单解释法的长期差异、可重复的验证程序。",
+        "transition_to_next_cn": "机制成立后，进一步展示解释对管理者的实际含义。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用案例或场景把可解释输出转译为管理者可用洞察，并在留出集上做匹配/未匹配验证。",
+        "research_job_cn": "选择有业务含义的细分（行业、动态行为、季节性），展示模型输出如何对应现实渠道选择，并量化验证。",
+        "required_evidence_cn": "每个案例的top特征表；测试集上匹配/未匹配的平均奖励差异。",
+        "transition_to_next_cn": "最后回到贡献、边界和未来研究。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "把随机实验维数灾难转化为‘优化不需要精确因果效应’的方法论辩护",
+      "用文献对比表（Table 1）快速建立本文与其他注意力RL的差异",
+      "在基准设计中让每个对照模型承担不同论证功能",
+      "用注意力匹配/未匹配和关联规则基线把解释性从定性说明变成可检验机制",
+      "用测试集匹配/未匹配验证案例洞察"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要真实企业渠道数据和点击流数据，以及合作企业提供的奖励校准信息",
+      "离策略评价（Fixed-M PERS）和多种RL基准的实现成本较高",
+      "联邦学习模拟和多模型训练需要较多计算资源",
+      "行业、行为和季节三类案例依赖于充足且分层的用户行为数据",
+      "与合作企业的沟通（农业季节产品设计）难以标准化复制"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能仅靠加注意力层就声称可解释，必须证明权重与收益或决策相关",
+      "不能仅报告‘我们比MAB好’，需要解释为什么MAB是合适基线，并刻画长期与短期差异",
+      "不能把注意力top特征直接解释为因果渠道效果，因为缺乏随机实验或干预验证",
+      "不能在没有覆盖state-action空间的证据时宣称策略全局最优",
+      "不能把单一数字银行场景的结论无边界推广到所有获客问题"
+    ],
+    "single_best_description_of_the_routine_cn": "先用真实业务数据和文献漏斗把问题收窄为‘长期收益+可解释性’的RL制品缺口，再通过定制注意力机制构建DRQN-attention，用离策略基准证明性能，用联邦学习证明部署可行性，用关联规则对比证明注意力是前向规划，最终用渠道案例和测试集验证把可解释性提升为可复用管理洞察。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "只分析主文，未包含在线附录B、D、F、G、H的细节；OCR可能影响部分表格和公式的精确呈现；无法提供精确页码，只能以章节、段落和表号定位；对‘联邦学习安全性’和‘注意力验证程序’只能依赖主文复述。",
+  "usage": {
+    "prompt_tokens": 27983,
+    "completion_tokens": 22613,
+    "total_tokens": 50596,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 24655
+  }
+}

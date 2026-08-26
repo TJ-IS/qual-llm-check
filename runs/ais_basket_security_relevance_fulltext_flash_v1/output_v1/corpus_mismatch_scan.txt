@@ -1,0 +1,111 @@
+0.00	03166_2010_editorial.md	Editorial
+0.00	04476_2019_jais-author-template.md	JAIS Author Template
+0.00	07284_2019_jais-author-template.md	JAIS Author Template
+0.00	09592_2013_introduction.md	Introduction
+0.00	11884_2019_jais-author-template.md	JAIS Author Template
+0.00	12408_2012_commentary.md	Commentary
+0.00	14704_2013_mml-math-xmlns-mml-http-www-w3-org-1998-math-mathml-altimg-si1-gif-overflow-scroll-mml-mrow-mml.md	<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.gif\" overflow=\"s
+0.00	17191_1991_introduction.md	Introduction
+0.00	18704_1991_draining-the-swamp.md	Draining the swamp
+0.00	19395_1993_case-study.md	Case study
+0.00	19598_2015_selecting-infrastructure-maintenance-projects-with-robust-portfolio-modeling.md	Selecting infrastructure maintenance projects with Robust Portfolio Modeling
+0.00	19636_2021_exploring-recommendations-for-circular-supply-chain-management-through-interactive-visualisation.md	Exploring recommendations for circular supply chain management through interactive visuali
+0.00	19650_2021_link-prediction-in-heterogeneous-information-networks-an-improved-deep-graph-convolution-approac.md	Link prediction in heterogeneous information networks: An improved deep graph convolution 
+0.00	19834_2021_regression-imputation-optimizing-sample-size-and-emulation-demonstrations-and-comparisons-to-pro.md	Regression imputation optimizing sample size and emulation: Demonstrations and comparisons
+0.00	19836_2021_a-mixed-heterogeneous-factorization-model-for-non-overlapping-cross-domain-recommendation.md	A mixed heterogeneous factorization model for non-overlapping cross-domain recommendation
+0.00	19838_2021_aligning-the-interests-of-newsvendors-and-forecasters-through-blockchain-based-smart-contracts-a.md	Aligning the interests of newsvendors and forecasters through blockchain-based smart contr
+0.00	19841_2021_promotional-pricing-strategies-for-platform-vendors-competition-between-first-and-third-party-pr.md	Promotional pricing strategies for platform vendors: Competition between first- and third-
+0.00	19846_2022_measuring-the-sustainability-and-resilience-of-blood-supply-chains.md	Measuring the sustainability and resilience of blood supply chains
+0.00	19853_2021_improving-fake-news-detection-with-domain-adversarial-and-graph-attention-neural-network.md	Improving fake news detection with domain-adversarial and graph-attention neural network
+0.00	19857_2022_a-holistic-approach-to-interpretability-in-financial-lending-models-visualizations-and-summary-e.md	A holistic approach to interpretability in financial lending: Models, visualizations, and 
+0.00	19858_2022_understanding-the-interplay-between-online-reviews-and-growth-of-independent-and-branded-hotels.md	Understanding the interplay between online reviews and growth of independent and branded h
+0.00	19861_2021_bitcoin-price-forecasting-a-perspective-of-underlying-blockchain-transactions.md	Bitcoin price forecasting: A perspective of underlying blockchain transactions
+0.00	19862_2022_a-text-mining-based-cyber-risk-assessment-and-mitigation-framework-for-critical-analysis-of-onli.md	A text-mining based cyber-risk assessment and mitigation framework for critical analysis o
+0.00	19866_2022_pnrank-unsupervised-ranking-of-person-name-entities-from-noisy-ocr-text.md	PNRank: Unsupervised ranking of person name entities from noisy OCR text
+0.00	19868_2022_aggregating-user-preferences-in-group-recommender-systems-a-crowdsourcing-approach.md	Aggregating user preferences in group recommender systems: A crowdsourcing approach
+0.00	19870_2022_a-constraint-programming-model-for-making-recommendations-in-personal-process-management-a-desig.md	A constraint programming model for making recommendations in personal process management: 
+0.00	19872_2022_models-to-address-rfid-based-ticket-switching-in-retailing.md	Models to address RFID-based ticket-switching in retailing
+0.00	19874_2022_the-impact-of-hierarchical-privilege-levels-and-non-hierarchical-incentives-on-continued-contrib.md	The impact of hierarchical privilege levels and non-hierarchical incentives on continued c
+0.00	19876_2022_impact-of-it-governance-process-capability-on-business-performance-theory-and-empirical-evidence.md	Impact of IT governance process capability on business performance: Theory and empirical e
+0.00	20399_2021_pathways-to-individual-performance-examining-the-interplay-between-knowledge-bases-and-repositor.md	Pathways to individual performance: Examining the interplay between knowledge bases and re
+0.00	20405_2021_impact-of-enjoyment-on-the-usage-continuance-intention-of-video-on-demand-services.md	Impact of enjoyment on the usage continuance intention of video-on-demand services
+0.00	20425_2021_an-appraisal-mechanism-for-a-social-marketplace.md	An appraisal mechanism for a social marketplace
+0.00	20431_2021_decisional-guidance-for-detecting-discriminatory-data-analytics-recommendations.md	Decisional guidance for detecting discriminatory data analytics recommendations
+0.00	20435_2021_online-channel-expansion-strategy-an-empirical-investigation.md	Online channel expansion strategy: An empirical investigation
+0.00	20437_2021_medical-practitioner-s-adoption-of-intelligent-clinical-diagnostic-decision-support-systems-a-mi.md	Medical practitioner's adoption of intelligent clinical diagnostic decision support system
+0.00	20653_2020_ambidextrous-governance-of-it-enabled-services-a-pragmatic-approach.md	Ambidextrous governance of IT-enabled services: A pragmatic approach
+0.00	20681_2021_overcoming-resource-challenges-in-peer-production-communities-through-bricolage-the-case-of-home.md	Overcoming resource challenges in peer-production communities through bricolage: The case 
+0.00	20795_2021_the-lifecycle-of-algorithmic-decision-making-systems-organizational-choices-and-ethical-challeng.md	The lifecycle of algorithmic decision-making systems: Organizational choices and ethical c
+0.00	23364_1989_the-on-line-consultant.md	The On-Line Consultant
+0.00	24178_2001_editorial.md	Editorial
+0.00	24286_1997_editorial.md	Editorial
+0.00	26339_2005_toward-comprehensive-real-time-bidder-support-in-iterative-combinatorial-auctions.md	Toward Comprehensive Real-Time Bidder Support in Iterative Combinatorial Auctions
+0.00	26342_2007_the-choice-of-sourcing-mechanisms-for-business-processes.md	The Choice of Sourcing Mechanisms for Business Processes
+0.00	27955_2024_the-impacts-of-internet-monitoring-on-employees-cyberloafing-and-organizational-citizenship-beha.md	The Impacts of Internet Monitoring on Employees’ Cyberloafing and Organizational Citizensh
+0.00	28448_2022_about-our-authors.md	About Our Authors
+0.17	01942_2017_partners-of-humans-a-realistic-assessment-of-the-role-of-robots-in-the-foreseeable-future.md	Partners of Humans: A Realistic Assessment of the Role of Robots in the Foreseeable Future
+0.17	08796_2025_ruckus-in-the-rentals-seeking-new-arrangements-remedying-the-impact-of-home-sharing-on-urban-noi.md	Ruckus in the Rentals, Seeking New Arrangements: Remedying the Impact of Home-Sharing on U
+0.17	19632_2021_bankruptcy-prediction-for-smes-using-transactional-data-and-two-stage-multiobjective-feature-sel.md	Bankruptcy prediction for SMEs using transactional data and two-stage multiobjective featu
+0.17	19656_2021_real-time-temperature-prediction-in-a-cold-supply-chain-based-on-newton-s-law-of-cooling.md	Real-time temperature prediction in a cold supply chain based on Newton's law of cooling
+0.17	19678_2021_leveraging-online-review-platforms-to-support-public-policy-predicting-restaurant-health-violati.md	Leveraging online review platforms to support public policy: Predicting restaurant health 
+0.17	19820_2021_time-preference-based-on-spot-bundled-cloud-service-provisioning.md	Time-preference-based on-spot bundled cloud-service provisioning
+0.17	19842_2021_why-do-organizations-leverage-social-media-to-create-business-value-an-external-factor-centric-e.md	Why do organizations leverage social media to create business value? An external factor-ce
+0.17	19848_2021_developing-a-decision-support-system-to-detect-material-weaknesses-in-internal-control.md	Developing a decision support system to detect material weaknesses in internal control
+0.17	19854_2022_how-guest-host-interactions-affect-consumer-experiences-in-the-sharing-economy-new-evidence-from.md	How guest-host interactions affect consumer experiences in the sharing economy: New eviden
+0.17	19864_2022_ai-based-industrial-full-service-offerings-a-model-for-payment-structure-selection-considering-p.md	AI-based industrial full-service offerings: A model for payment structure selection consid
+0.17	20273_2020_ehr-application-portfolio-and-hospital-performance-effects-across-hospitals-with-varying-adminis.md	EHR application portfolio and hospital performance: Effects across hospitals with varying 
+0.17	20397_2021_construing-online-consumers-information-privacy-decisions-the-impact-of-psychological-distance.md	Construing online consumers’ information privacy decisions: The impact of psychological di
+0.17	20401_2021_informational-cues-or-content-examining-project-funding-decisions-by-crowdfunders.md	Informational cues or content? Examining project funding decisions by crowdfunders
+0.17	20409_2021_acceptance-of-technological-agency-beyond-the-perception-of-utilitarian-value.md	Acceptance of technological agency: Beyond the perception of utilitarian value
+0.17	20413_2021_the-paradox-of-word-of-mouth-in-social-commerce-exploring-the-juxtaposed-impacts-of-source-credi.md	The Paradox of Word-of-Mouth in Social Commerce: Exploring the Juxtaposed Impacts of Sourc
+0.17	20433_2021_intra-platform-competition-the-role-of-innovative-and-refinement-evolution-in-app-success.md	Intra-platform competition: the role of innovative and refinement evolution in app success
+0.17	20649_2020_exploring-the-role-of-it-in-the-front-end-of-innovation-an-empirical-study-of-it-enabled-creativ.md	Exploring the Role of IT in the Front-End of Innovation: An Empirical Study of IT-Enabled 
+0.17	20651_2020_open-government-data-platforms-a-complex-adaptive-sociomaterial-systems-perspective.md	Open government data platforms – A complex adaptive sociomaterial systems perspective
+0.17	20675_2021_from-sites-to-vibes-technology-and-the-spatial-production-of-coworking-spaces.md	From sites to vibes: Technology and the spatial production of coworking spaces
+0.17	20683_2021_engaging-with-uncertainty-information-practices-in-the-context-of-disease-surveillance-in-burkin.md	Engaging with uncertainty: Information practices in the context of disease surveillance in
+0.17	20787_2021_digital-opportunities-for-incumbents-a-resource-centric-perspective.md	Digital opportunities for incumbents – A resource-centric perspective
+0.17	20791_2021_were-engaged-following-the-path-to-a-successful-information-management-capability.md	We’re engaged! Following the path to a successful information management capability
+0.17	23323_1988_desk-top-publishing-current-approaches-and-future-trends.md	Desk-Top Publishing: Current Approaches and Future Trends
+0.17	26340_2006_understanding-conceptual-schemas-exploring-the-role-of-application-and-is-domain-knowledge.md	Understanding Conceptual Schemas: Exploring the Role of Application and IS Domain Knowledg
+0.17	28692_2023_the-janus-effect-of-generative-ai-charting-the-path-for-responsible-conduct-of-scholarly-activit.md	The Janus Effect of Generative AI: Charting the Path for Responsible Conduct of Scholarly 
+0.25	10840_2009_coppers-context-and-conjoints-a-reassessment-of-tam.md	Coppers Context, and Conjoints: A Reassessment of Tam
+0.25	13412_2018_who-delivers-the-bigger-bang-for-the-buck-cmo-or-cio.md	Who delivers the bigger bang for the buck: CMO or CIO?
+0.25	24180_2001_officetech-a-new-paradigm-in-office-services.md	OFFICETECH®: a new paradigm in office services?
+0.33	00408_2008_locking-the-door-but-leaving-the-computer-vulnerable-factors-inhibiting-home-users-adoption-of-s.md	Locking the door but leaving the computer vulnerable: Factors inhibiting home users' adopt
+0.33	00776_2010_strategic-impacts-of-it-enabled-consumer-power-insight-from-internet-distribution-in-the-u-s-lod.md	Strategic impacts of IT-enabled consumer power: Insight from Internet distribution in the 
+0.33	03524_2015_big-data-revisited-a-rejoinder.md	Big Data Revisited: A Rejoinder
+0.33	05192_2019_never-never-together-again-how-postpurchase-affect-drives-consumer-outcomes-within-the-context-o.md	Never, Never Together Again: How Postpurchase Affect Drives Consumer Outcomes Within the C
+0.33	05638_2011_how-much-to-spend-on-flexibility-determining-the-value-of-information-system-flexibility.md	How much to spend on flexibility? Determining the value of information system flexibility
+0.33	06876_2020_toward-a-refined-conceptualization-of-is-discontinuance-reflection-on-the-past-and-a-way-forward.md	Toward a refined conceptualization of IS discontinuance: Reflection on the past and a way 
+0.33	07104_2023_same-but-different-variations-in-reactions-to-digital-transformation-within-an-organizational-fi.md	Same but Different: Variations in Reactions to Digital Transformation Within an Organizati
+0.33	08008_2021_mining-online-social-networks-deriving-user-preferences-through-node-embedding.md	Mining Online Social Networks: Deriving User Preferences through Node Embedding
+0.33	09232_2019_the-turf-is-always-greener-predicting-decommitments-in-college-football-recruiting-using-twitter.md	The turf is always greener: Predicting decommitments in college football recruiting using 
+0.33	11082_2019_see-no-evil-hear-no-evil-dissecting-the-impact-of-online-hacker-forums1.md	See No Evil, Hear No Evil? Dissecting the Impact of Online Hacker Forums1
+0.33	11132_2010_software-sports-day-and-sheera.md	Software, sports day and sheera
+0.33	13936_2014_a-matter-of-life-and-death-exploring-conceptualizations-of-sociomateriality-in-the-context-of-cr.md	A MATTER OF LIFE AND DEATH: EXPLORING CONCEPTUALIZATIONS OF SOCIOMATERIALITY IN THE CONTEX
+0.33	14182_2021_early-bird-versus-late-owl-an-empirical-investigation-of-individual-shopping-time-habit-and-its.md	Early Bird Versus Late Owl: An Empirical Investigation of Individual Shopping Time Habit a
+0.33	14772_2018_have-your-cake-and-eat-it-too-simultaneously-pursuing-the-knowledge-sharing-benefits-of-agile-an.md	Have your cake and eat it too? Simultaneously pursuing the knowledge-sharing benefits of a
+0.33	15112_2020_is-user-generated-content-always-helpful-the-effects-of-online-forum-browsing-on-consumers-trave.md	Is user-generated content always helpful? The effects of online forum browsing on consumer
+0.33	15662_2015_knowing-about-your-food-from-the-farm-to-the-table-using-information-systems-that-reduce-informa.md	Knowing about your food from the farm to the table: Using information systems that reduce 
+0.33	16991_1988_ai-concepts-and-or-tools-in-advanced-dss.md	AI-Concepts and OR-tools in advanced DSS
+0.33	17787_1977_a-forecast-of-the-future-of-computation.md	A forecast of the future of computation
+0.33	20403_2021_when-does-social-desirability-become-a-problem-detection-and-reduction-of-social-desirability-bi.md	When does social desirability become a problem? Detection and reduction of social desirabi
+0.33	20419_2022_blockchain-technology-for-bridging-trust-traceability-and-transparency-in-circular-supply-chain.md	Blockchain technology for bridging trust, traceability and transparency in circular supply
+0.33	20479_2022_scratch-my-back-and-i-ll-scratch-yours-the-impact-of-user-effort-and-recommendation-agent-effort.md	Scratch my back and I'll scratch yours: The impact of user effort and recommendation agent
+0.33	20529_2022_white-knight-in-dark-days-supply-chain-finance-firms-blockchain-and-the-covid-19-pandemic.md	White knight in dark days? Supply chain finance firms, blockchain, and the COVID-19 pandem
+0.33	20685_2021_who-needs-the-help-desk-tackling-one-s-own-technological-problem-via-self-it-service.md	Who needs the help desk? Tackling one's own technological problem via self IT service
+0.33	20793_2021_digital-strategy-aligning-in-smes-a-dynamic-capabilities-perspective.md	Digital strategy aligning in SMEs: A dynamic capabilities perspective
+0.33	22910_2001_the-textual-attitude-and-new-technology.md	The ‘textual attitude’ and new technology
+0.33	23246_1987_it-consultancy-challenges-and-opportunities.md	IT Consultancy – Challenges and Opportunities
+0.33	23721_2011_methodological-practice-and-policy-for-organisationally-and-socially-relevant-is-research-an-inc.md	Methodological Practice and Policy for Organisationally and Socially Relevant is Research:
+0.33	23851_1999_flogging-a-dead-horse-the-implications-of-epistemological-relativism-within-information-systems.md	Flogging a dead horse: the implications of epistemological relativism within information s
+0.33	27626_2026_seizing-growth-opportunities-a-risky-business-effects-of-cloud-sourcing-on-mergers-and-acquisiti.md	Seizing Growth Opportunities: A Risky Business? Effects of Cloud Sourcing on Mergers and A
+0.33	28248_2024_effect-of-online-professional-network-recommendations-on-the-likelihood-of-an-interview-a-field.md	Effect of Online Professional Network Recommendations on the Likelihood of an Interview: A
+0.33	28414_2025_gaining-a-seat-at-the-table-enhancing-the-attractiveness-of-online-lending-for-institutional-inv.md	Gaining a Seat at the Table: Enhancing the Attractiveness of Online Lending for Institutio
+0.33	28436_2022_a-hashtag-is-worth-a-thousand-words-an-empirical-investigation-of-social-media-strategies-in-tra.md	A Hashtag Is Worth a Thousand Words: An Empirical Investigation of Social Media Strategies
+0.33	28482_2023_impressionable-or-immune-examining-the-influence-of-marquee-sellers-in-b2b-secondary-market-plat.md	Impressionable or Immune? Examining the Influence of Marquee Sellers in B2B Secondary Mark
+0.33	28690_2024_when-the-clock-strikes-a-multimethod-investigation-of-on-the-hour-effects-in-online-learning.md	When the Clock Strikes: A Multimethod Investigation of On-the-Hour Effects in Online Learn
+0.40	01830_2015_classifying-generalization-paradigm-war-or-abuse-of-terminology.md	Classifying Generalization: Paradigm War or abuse of Terminology?
+0.40	10602_2019_what-we-talk-about-when-we-talk-about-big-data.md	What we talk about when we talk about (big) data
+0.40	19203_1995_the-ceo-cio-relationship-revisited-an-empirical-assessment-of-satisfaction-with-is.md	The CEO/CIO relationship revisited: An empirical assessment of satisfaction with IS
+0.40	23298_1988_declarative-languages-for-advanced-information-technologies.md	Declarative Languages for Advanced Information Technologies

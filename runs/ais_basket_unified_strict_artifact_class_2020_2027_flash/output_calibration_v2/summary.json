@@ -1,0 +1,85 @@
+{
+  "updated_at": "2026-08-07T11:36:25.812691+00:00",
+  "analysis_version": "ais-basket-unified-strict-artifact-class-calibration-v2",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 52,
+  "prompt_fingerprint": "66a3b44ee50032c77f59f5b81b0bccb460aed2405b0fdecf0ab46b3b5b13f356",
+  "year_range": {
+    "from": 2020,
+    "to": 2027
+  },
+  "input_source": "E:\\github\\qual-llm-check-IS-utd\\database_fulltext_all",
+  "input_fulltexts": 52,
+  "input_year_counts": {
+    "2020": 17,
+    "2021": 10,
+    "2022": 7,
+    "2023": 8,
+    "2024": 5,
+    "2025": 5
+  },
+  "completed": 52,
+  "pending": 0,
+  "completed_year_counts": {
+    "2020": 17,
+    "2021": 10,
+    "2022": 7,
+    "2023": 8,
+    "2024": 5,
+    "2025": 5
+  },
+  "objective_metric_pass_count": 41,
+  "software_artifact_pass_count": 22,
+  "class_level_contribution_pass_count": 12,
+  "strict_include_count": 11,
+  "strict_exclude_count": 41,
+  "strict_include_year_counts": {
+    "2020": 2,
+    "2021": 1,
+    "2022": 1,
+    "2023": 3,
+    "2024": 3,
+    "2025": 1
+  },
+  "strict_include_journal_counts": {
+    "Decision Support Systems": 1,
+    "Information Systems Research": 5,
+    "Journal of Management Information Systems": 2,
+    "Journal of the Association for Information Systems": 1,
+    "MIS Quarterly": 2
+  },
+  "metric_status_counts": {
+    "fully_objective_direct": 37,
+    "human_semantic_judgment": 3,
+    "mixed_objective_subjective": 3,
+    "objective_fixed_factual_labels": 8,
+    "subjective_or_self_report": 1
+  },
+  "core_goal_status_counts": {
+    "objective_improvement_primary": 42,
+    "objective_metric_secondary": 6,
+    "theory_or_explanation_primary": 4
+  },
+  "artifact_status_counts": {
+    "algorithm_or_model_only": 15,
+    "analytical_or_simulation_method_only": 1,
+    "concept_or_future_design_only": 1,
+    "implemented_artifact_component": 10,
+    "implemented_software_artifact": 19,
+    "platform_only_context": 6
+  },
+  "contribution_target_status_counts": {
+    "algorithm_or_analytical_method": 18,
+    "behavioral_or_theory_explanation": 9,
+    "case_specific_solution": 3,
+    "domain_mechanism_or_policy": 10,
+    "software_artifact_class": 12
+  },
+  "usage": {
+    "prompt_tokens": 1545798,
+    "completion_tokens": 299026,
+    "total_tokens": 1844824,
+    "prompt_cache_hit_tokens": 216448,
+    "prompt_cache_miss_tokens": 1329350
+  }
+}

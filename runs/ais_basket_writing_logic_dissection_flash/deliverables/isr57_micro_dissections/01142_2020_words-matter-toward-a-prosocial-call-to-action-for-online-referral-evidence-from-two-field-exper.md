@@ -1,0 +1,5157 @@
+# Words Matter! Toward a Prosocial Call-to-Action for Online Referral: Evidence from Two Field Experiments：ISR 句段级微观图谱
+
+- 作者：Jaehwuen Jung; Ravi Bapna; Joseph M. Golden; Tianshu Sun
+- 年份：2020
+- DOI：10.1287/isre.2019.0873
+- 源文件：01142_2020_words-matter-toward-a-prosocial-call-to-action-for-online-referral-evidence-from-two-field-exper.md
+- 置信度：0.82
+
+## 核实后的宏观骨架
+
+全文以‘内在—外在动机困境’为理论支点，将在线推荐拆解为激励设计、CTA设计、接收者消息设计三个维度，指出CTA是被忽视的缺口；随后用两个大规模随机田野实验（Collage.com，各10万客户）固定等分激励和接收者消息，只改变CTA措辞框架（利己、公平、亲社会、控制），建立主效应；再用档案数据调节分析、MTurk动机实验、第三方人口匹配与漏斗分析、第二个更高吸引力奖励实验、欺诈行为检验和行业实践扫描，把主效应逐步升级为机制解释、边界条件和可复用设计知识；最后回到内在—外在动机理论，给出‘何时、对谁、如何发送’的实践原则并开放未来研究。
+
+## 摘要逐句图谱
+
+### 1. Abstract S1
+
+- order：1
+
+- locator：Abstract S1
+
+- paraphrase_cn：推荐营销的基本前提是瞄准现有的、表面上满意的顾客，让他们在朋友中传播意识并影响对焦点产品的采纳，而朋友也可能从采纳中受益。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：开篇给出整个研究领域的经验基础，让读者理解推荐营销的原始意图。
+
+- inherits_from_previous_cn：无前置依赖，直接建立常识背景。
+
+- changes_argument_state_cn：把‘推荐’定义为基于满意顾客的有机传播。
+
+- sets_up_next_cn：为下一句‘推荐计划用财务激励加速有机WOM’提供对照。
+
+- failure_if_removed_cn：读者无法理解推荐营销与有机WOM的关系，后续困境缺乏落点。
+
+- evidence_pointer：Abstract 第1句
+
+### 2. Abstract S2
+
+- order：2
+
+- locator：Abstract S2
+
+- paraphrase_cn：换句话说，推荐计划是用财务激励加速有机口碑传播。
+
+- move_code：CONTEXT
+
+- statement_status：author_inference
+
+- why_here_cn：把第1句的有机传播与财务激励并置，为困境埋下伏笔。
+
+- inherits_from_previous_cn：承接第1句‘满意顾客传播’这一内在动机基础。
+
+- changes_argument_state_cn：引入外在激励，使‘推荐计划’成为混合动机装置。
+
+- sets_up_next_cn：为第3句‘这带来挑战’提供具体所指。
+
+- failure_if_removed_cn：读者不知道推荐计划与有机WOM的差异，动机困境无从谈起。
+
+- evidence_pointer：Abstract 第2句
+
+### 3. Abstract S3
+
+- order：3
+
+- locator：Abstract S3
+
+- paraphrase_cn：这带来了挑战，因为它把内在动机过程（分享产品愉悦的愿望）与外在激励混合在一起。
+
+- move_code：LIMITATION
+
+- statement_status：author_inference
+
+- why_here_cn：明确指出混合动机是问题所在，为引入理论困境做铺垫。
+
+- inherits_from_previous_cn：承接第2句的财务激励与有机WOM并置。
+
+- changes_argument_state_cn：把‘推荐计划’从普通营销工具转为理论上可疑的设计。
+
+- sets_up_next_cn：引出第4句的既有研究证据。
+
+- failure_if_removed_cn：缺少对‘挑战’的说明，读者无法理解为什么需要研究CTA。
+
+- evidence_pointer：Abstract 第3句
+
+### 4. Abstract S4
+
+- order：4
+
+- locator：Abstract S4
+
+- paraphrase_cn：先前研究表明混合内在和外在动机会导致次优结果，这给推荐计划设计带来概念困境。
+
+- move_code：PRIOR_KNOWLEDGE
+
+- statement_status：prior_literature
+
+- why_here_cn：用文献共识强化第3句的挑战，说明这不是臆想而是有理论依据的困境。
+
+- inherits_from_previous_cn：承接第3句的混合动机描述。
+
+- changes_argument_state_cn：把‘挑战’升格为‘概念困境’，为本文贡献定位。
+
+- sets_up_next_cn：为第5句‘本文展示如何受益’提供需要解决的问题。
+
+- failure_if_removed_cn：困境缺乏理论支撑，本文的解决贡献显得无的放矢。
+
+- evidence_pointer：Abstract 第4句
+
+### 5. Abstract S5
+
+- order：5
+
+- locator：Abstract S5
+
+- paraphrase_cn：本文展示企业如何通过框架化推荐CTA来更接近有机、内在动机的WOM营销原意，同时仍能获得财务激励提高推荐率的好处。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：在摘要中直接宣告核心贡献：在保留激励收益的同时回归内在动机。
+
+- inherits_from_previous_cn：依赖第4句的困境，指出解决方向。
+
+- changes_argument_state_cn：从‘问题’转向‘解决方案’。
+
+- sets_up_next_cn：为第6句‘亲社会CTA优于常见CTA’做铺垫。
+
+- failure_if_removed_cn：读者不知道本文要解决什么，摘要失去主干。
+
+- evidence_pointer：Abstract 第5句
+
+### 6. Abstract S6
+
+- order：6
+
+- locator：Abstract S6
+
+- paraphrase_cn：特别地，在固定激励方案和其余条件相同的情况下，我们展示亲社会CTA相对于实践中一些更常用CTA的有效性。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把贡献具体化为‘亲社会框架胜过常见框架’，并交代识别策略。
+
+- inherits_from_previous_cn：承接第5句的解决方案，给出具体形式。
+
+- changes_argument_state_cn：把贡献从‘框架化’细化为‘亲社会CTA’。
+
+- sets_up_next_cn：引出第7句的因果证据。
+
+- failure_if_removed_cn：贡献过于抽象，读者不知道本文究竟证明什么具体设计。
+
+- evidence_pointer：Abstract 第6句
+
+### 7. Abstract S7
+
+- order：7
+
+- locator：Abstract S7
+
+- paraphrase_cn：我们假设并通过一个涉及10万客户的大规模随机田野实验因果证明，CTA框架中的内在亲社会元素是成功发起推荐的必要条件。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出证据类型、样本规模和核心因果主张，增强可信度。
+
+- inherits_from_previous_cn：承接第6句的亲社会CTA有效性主张。
+
+- changes_argument_state_cn：从‘主张’升级为‘因果证明的必要条件’。
+
+- sets_up_next_cn：为第8句的具体对比结果做铺垫。
+
+- failure_if_removed_cn：摘要缺乏证据支撑，贡献显得是断言而非实证。
+
+- evidence_pointer：Abstract 第7句
+
+### 8. Abstract S8
+
+- order：8
+
+- locator：Abstract S8
+
+- paraphrase_cn：与利己和公平框架相比，亲社会框架产生显著更高的发起推荐倾向，以及显著更高数量的成功推荐。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告核心对比结果，把‘必要条件’具体化为可量化的优势。
+
+- inherits_from_previous_cn：承接第7句的必要条件主张，给出具体对比对象。
+
+- changes_argument_state_cn：从‘亲社会有效’细化为‘亲社会优于利己与公平’。
+
+- sets_up_next_cn：为第9句的机制证据做铺垫。
+
+- failure_if_removed_cn：读者不知道亲社会到底比谁好、好多少，主结果缺失。
+
+- evidence_pointer：Abstract 第8句
+
+### 9. Abstract S9
+
+- order：9
+
+- locator：Abstract S9
+
+- paraphrase_cn：额外的机制层面分析（将处理与重复购买、NPS、距上次购买时间等客户特征交互）、一个使用更有吸引力推荐奖励的额外田野实验和一个MTurk实验，确认利他元素在产生更高质量倡导和减少推荐摩擦中的重要性。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：说明不仅有主效应，还有多层证据支持机制，增强贡献的完整性。
+
+- inherits_from_previous_cn：承接第8句的行为结果，转向‘为什么’。
+
+- changes_argument_state_cn：从‘是什么’扩展到‘为什么’。
+
+- sets_up_next_cn：为第10句的具体机制发现做铺垫。
+
+- failure_if_removed_cn：摘要只呈现行为差异而无机制，贡献不够深入。
+
+- evidence_pointer：Abstract 第9句
+
+### 10. Abstract S10
+
+- order：10
+
+- locator：Abstract S10
+
+- paraphrase_cn：亲社会组被试报告更低的内疚感，更能识别家庭和朋友利益作为分享动机，因此更选择性地分享推荐消息。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出具体的心理机制证据，把‘为什么亲社会有效’落到内疚和利他。
+
+- inherits_from_previous_cn：承接第9句的机制分析预告。
+
+- changes_argument_state_cn：从‘利他元素重要’细化为‘降低内疚、增强利他、促进选择性’。
+
+- sets_up_next_cn：为正文中MTurk和漏斗分析提供预期。
+
+- failure_if_removed_cn：机制链条不完整，读者不知道亲社会为何带来更好结果。
+
+- evidence_pointer：Abstract 第10句
+
+## 引言逐句图谱
+
+### 1. Introduction P1 S1
+
+- order：1
+
+- locator：Introduction P1 S1
+
+- paraphrase_cn：人们在做购买决定前咨询朋友是普遍被接受的现象。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：从常识切入，建立WOM研究的现实基础。
+
+- inherits_from_previous_cn：无前置依赖。
+
+- changes_argument_state_cn：引入‘朋友影响购买’这一基本现象。
+
+- sets_up_next_cn：为第2句‘企业重视推荐计划’提供背景。
+
+- failure_if_removed_cn：引言缺乏出发点，读者不知道为何研究推荐。
+
+- evidence_pointer：Section 1 第1段第1句
+
+### 2. Introduction P1 S2
+
+- order：2
+
+- locator：Introduction P1 S2
+
+- paraphrase_cn：伴随数字社交网络增长和WOM产品扩散的重要性，企业认识到用推荐计划增加新业务的必要性。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：把常识转换为企业实践，说明推荐计划的普遍性。
+
+- inherits_from_previous_cn：承接第1句的朋友影响购买现象。
+
+- changes_argument_state_cn：把‘咨询朋友’升级为‘企业推荐计划’。
+
+- sets_up_next_cn：引出第3句的CTA定义。
+
+- failure_if_removed_cn：研究对象的现实重要性缺失。
+
+- evidence_pointer：Section 1 第1段第2句
+
+### 3. Introduction P1 S3
+
+- order：3
+
+- locator：Introduction P1 S3
+
+- paraphrase_cn：这类方案通过带激励的CTA鼓励现有客户发动社交网络，告知朋友产品并影响其购买决定。
+
+- move_code：CONTEXT
+
+- statement_status：author_inference
+
+- why_here_cn：正式引入CTA作为推荐计划的关键环节。
+
+- inherits_from_previous_cn：承接第2句的推荐计划。
+
+- changes_argument_state_cn：定义CTA在推荐计划中的位置。
+
+- sets_up_next_cn：为第4句‘用激励加速有机WOM’做铺垫。
+
+- failure_if_removed_cn：CTA概念缺失，后续研究缺口无法定位。
+
+- evidence_pointer：Section 1 第1段第3句
+
+### 4. Introduction P1 S4
+
+- order：4
+
+- locator：Introduction P1 S4
+
+- paraphrase_cn：换句话说，推荐计划是用财务激励加速有机WOM。
+
+- move_code：CONTEXT
+
+- statement_status：author_inference
+
+- why_here_cn：把推荐计划定性为‘加速有机WOM’，为动机困境铺垫。
+
+- inherits_from_previous_cn：承接第3句的激励性CTA。
+
+- changes_argument_state_cn：引入‘内在有机’与‘外在激励’的并置。
+
+- sets_up_next_cn：引出第5句的挑战。
+
+- failure_if_removed_cn：动机混合的张力无法建立。
+
+- evidence_pointer：Section 1 第1段第4句
+
+### 5. Introduction P1 S5
+
+- order：5
+
+- locator：Introduction P1 S5
+
+- paraphrase_cn：这带来了挑战：它把内在动机过程（分享产品愉悦的愿望）与外在激励混合。
+
+- move_code：LIMITATION
+
+- statement_status：author_inference
+
+- why_here_cn：明确指出问题的本质是动机混合。
+
+- inherits_from_previous_cn：承接第4句的财务激励与有机WOM并置。
+
+- changes_argument_state_cn：把推荐计划定义为存在内在冲突的设计。
+
+- sets_up_next_cn：引出第6句的既有研究证据。
+
+- failure_if_removed_cn：读者不知道推荐计划有什么理论问题。
+
+- evidence_pointer：Section 1 第1段第5句
+
+### 6. Introduction P1 S6
+
+- order：6
+
+- locator：Introduction P1 S6
+
+- paraphrase_cn：先前研究表明混合内在和外在动机会导致次优结果（Gneezy等，2011），这给推荐计划设计带来概念困境。
+
+- move_code：PRIOR_KNOWLEDGE
+
+- statement_status：prior_literature
+
+- why_here_cn：用权威文献把‘挑战’升格为‘理论困境’。
+
+- inherits_from_previous_cn：承接第5句的动机混合。
+
+- changes_argument_state_cn：为本文提供理论支点。
+
+- sets_up_next_cn：引出第7句‘发送者需厘清动机’的推论。
+
+- failure_if_removed_cn：理论困境缺少证据支撑。
+
+- evidence_pointer：Section 1 第1段第6句
+
+### 7. Introduction P1 S7
+
+- order：7
+
+- locator：Introduction P1 S7
+
+- paraphrase_cn：推荐者现在必须在心里厘清：自己传播产品信息是因为内在愉悦与为朋友利益，还是因为财务激励。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：把宏观困境转化为发送者的微观心理冲突，为亲社会CTA提供作用点。
+
+- inherits_from_previous_cn：承接第6句的困境。
+
+- changes_argument_state_cn：从‘设计困境’转向‘发送者心理冲突’。
+
+- sets_up_next_cn：为第2段‘本文首次指出该困境’做铺垫。
+
+- failure_if_removed_cn：亲社会框架为何能解决困境缺乏微观解释。
+
+- evidence_pointer：Section 1 第1段第7句
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- locator：Introduction P2 S1
+
+- paraphrase_cn：据我们所知，这是第一篇通过改变CTA框架来突出内在—外在困境的论文。
+
+- move_code：GAP
+
+- statement_status：contribution_claim
+
+- why_here_cn：宣告新颖性，把贡献定位到CTA框架层面。
+
+- inherits_from_previous_cn：承接第1段的困境与心理冲突。
+
+- changes_argument_state_cn：建立‘没有人研究CTA框架’的缺口。
+
+- sets_up_next_cn：引出第2句‘我们不仅指出困境还提供解法’。
+
+- failure_if_removed_cn：本文的学术新颖性无法确立。
+
+- evidence_pointer：Section 1 第2段第1句
+
+### 9. Introduction P2 S2
+
+- order：9
+
+- locator：Introduction P2 S2
+
+- paraphrase_cn：我们不仅指出这一困境，还通过两个大规模随机田野实验提供解决它的具体方案。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：contribution_claim
+
+- why_here_cn：把新颖性从‘指出问题’扩展到‘提供因果证据’。
+
+- inherits_from_previous_cn：承接第1句的缺口。
+
+- changes_argument_state_cn：从‘缺口’转向‘解法与证据’。
+
+- sets_up_next_cn：为第3句‘亲社会CTA优于常见替代’做铺垫。
+
+- failure_if_removed_cn：读者不知道本文是否只是理论讨论。
+
+- evidence_pointer：Section 1 第2段第2句
+
+### 10. Introduction P2 S3
+
+- order：10
+
+- locator：Introduction P2 S3
+
+- paraphrase_cn：具体而言，在两种广泛使用的促销激励下，我们提供稳健的因果证据表明内在动机的亲社会CTA优于其他更常见的替代方案。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出结论性主张，预告核心发现。
+
+- inherits_from_previous_cn：承接第2句的解决方案。
+
+- changes_argument_state_cn：把贡献具体化为亲社会CTA优于其他框架。
+
+- sets_up_next_cn：为第4句‘机制分析和MTurk实验’做铺垫。
+
+- failure_if_removed_cn：贡献主张不明确，读者不知道本文证明什么。
+
+- evidence_pointer：Section 1 第2段第3句
+
+### 11. Introduction P2 S4
+
+- order：11
+
+- locator：Introduction P2 S4
+
+- paraphrase_cn：我们还进行额外的机制层面分析和MTurk实验，以理解顾客在不同CTA下为何分享或不分享。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：contribution_claim
+
+- why_here_cn：预告除了主效应还有机制证据。
+
+- inherits_from_previous_cn：承接第3句的核心因果证据。
+
+- changes_argument_state_cn：从‘是什么’拓展到‘为什么’。
+
+- sets_up_next_cn：为第3段实验设计做铺垫。
+
+- failure_if_removed_cn：读者以为文章只有两个田野实验。
+
+- evidence_pointer：Section 1 第2段第4句
+
+### 12. Introduction P3 S1
+
+- order：12
+
+- locator：Introduction P3 S1
+
+- paraphrase_cn：我们的操纵，简言之，是一场文字游戏。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：强调操纵的极简性，突出‘只有措辞变化’。
+
+- inherits_from_previous_cn：承接第2段的亲社会CTA。
+
+- changes_argument_state_cn：把贡献落到‘文字框架’这一具体设计元素。
+
+- sets_up_next_cn：为第2句‘固定激励与消息’做铺垫。
+
+- failure_if_removed_cn：读者对操纵的本质没有直观认识。
+
+- evidence_pointer：Section 1 第3段第1句
+
+### 13. Introduction P3 S2
+
+- order：13
+
+- locator：Introduction P3 S2
+
+- paraphrase_cn：我们设计大规模随机田野实验，固定(1)激励分配为行业标准的等分奖励（双方各得相同奖励）和(2)发送者给接收者的推荐消息。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明设计原则：固定一切非目标因素，只改变CTA。
+
+- inherits_from_previous_cn：承接第1句的文字游戏。
+
+- changes_argument_state_cn：确立等分激励与固定消息为实验常量。
+
+- sets_up_next_cn：为第3句‘只操纵CTA措辞’做铺垫。
+
+- failure_if_removed_cn：因果识别的干净性无法建立，无法把效果归因于CTA。
+
+- evidence_pointer：Section 1 第3段第2句
+
+### 14. Introduction P3 S3
+
+- order：14
+
+- locator：Introduction P3 S3
+
+- paraphrase_cn：我们只操纵CTA中的框架——即使用的文字和强调的部分——来促使发送者发起推荐。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：明确操纵变量的唯一性。
+
+- inherits_from_previous_cn：承接第2句的固定设计。
+
+- changes_argument_state_cn：把CTA措辞确立为唯一处理。
+
+- sets_up_next_cn：为第4句‘所有被试收到相同激励’做铺垫。
+
+- failure_if_removed_cn：变量定义不清，实验结果无法解释。
+
+- evidence_pointer：Section 1 第3段第3句
+
+### 15. Introduction P3 S4
+
+- order：15
+
+- locator：Introduction P3 S4
+
+- paraphrase_cn：需要说明的是，两个田野实验中所有被试收到完全相同的行业标准等分激励。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：重复强调均衡性，防止读者误解各组激励不同。
+
+- inherits_from_previous_cn：承接第2句的等分激励设定。
+
+- changes_argument_state_cn：强化‘组间唯一差异是CTA框架’。
+
+- sets_up_next_cn：为第5句‘隔离内在亲社会驱动价值’做铺垫。
+
+- failure_if_removed_cn：读者可能误以为亲社会组有不同激励，削弱因果主张。
+
+- evidence_pointer：Section 1 第3段第4句
+
+### 16. Introduction P3 S5
+
+- order：16
+
+- locator：Introduction P3 S5
+
+- paraphrase_cn：这一设计让我们能在外在财务激励存在的情况下，隔离内在亲社会驱动力的价值。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：author_inference
+
+- why_here_cn：解释为什么固定激励能识别亲社会成分的增量效应。
+
+- inherits_from_previous_cn：承接第4句的等分激励。
+
+- changes_argument_state_cn：把实验设计升格为‘隔离内在驱动’的识别策略。
+
+- sets_up_next_cn：为第4段‘三设计维度’的缺口做铺垫。
+
+- failure_if_removed_cn：实验设计的因果识别逻辑缺失。
+
+- evidence_pointer：Section 1 第3段第5句
+
+### 17. Introduction P4 S1
+
+- order：17
+
+- locator：Introduction P4 S1
+
+- paraphrase_cn：总之，推荐营销在增长，但其各维度背后的科学仍处于萌芽阶段。
+
+- move_code：TRANSITION
+
+- statement_status：author_inference
+
+- why_here_cn：从实验设计过渡到文献缺口，强调研究不足。
+
+- inherits_from_previous_cn：承接第3段的实验设计必要性。
+
+- changes_argument_state_cn：把话题从‘我们的设计’转向‘文献缺口’。
+
+- sets_up_next_cn：为第2句‘三设计维度’做铺垫。
+
+- failure_if_removed_cn：段落间缺乏过渡，读者不知道为何突然谈文献。
+
+- evidence_pointer：Section 1 第4段第1句
+
+### 18. Introduction P4 S2
+
+- order：18
+
+- locator：Introduction P4 S2
+
+- paraphrase_cn：在线推荐程序的最优设计取决于三个关键设计选择：激励设计、CTA设计和接收者消息设计。
+
+- move_code：GAP
+
+- statement_status：author_inference
+
+- why_here_cn：把推荐设计拆成三个维度，为缺口定位提供框架。
+
+- inherits_from_previous_cn：承接第1句的科学萌芽状态。
+
+- changes_argument_state_cn：建立三设计维度框架。
+
+- sets_up_next_cn：为第3句‘前人研究前两个维度但未研究CTA’做铺垫。
+
+- failure_if_removed_cn：CTA缺口无法被系统定位。
+
+- evidence_pointer：Section 1 第4段第2句
+
+### 19. Introduction P4 S3
+
+- order：19
+
+- locator：Introduction P4 S3
+
+- paraphrase_cn：先前研究已经调查了激励设计和接收者消息设计，但没有研究如何最优设计CTA来让客户首先发起推荐。
+
+- move_code：GAP
+
+- statement_status：prior_literature
+
+- why_here_cn：明确文献缺口：CTA从未被研究。
+
+- inherits_from_previous_cn：承接第2句的三维度框架。
+
+- changes_argument_state_cn：确立本文填补CTA缺口的定位。
+
+- sets_up_next_cn：引出第4句‘我们进一步研究CTA框架’。
+
+- failure_if_removed_cn：本文的学术贡献失去靶心。
+
+- evidence_pointer：Section 1 第4段第3句
+
+### 20. Introduction P4 S4
+
+- order：20
+
+- locator：Introduction P4 S4
+
+- paraphrase_cn：本研究更进一步，考察在固定激励结构和推荐消息的情况下，通过操纵CTA框架能否提高推荐程序的有效性。
+
+- move_code：RQ_OR_OBJECTIVE
+
+- statement_status：author_inference
+
+- why_here_cn：把缺口转化为本文的研究问题。
+
+- inherits_from_previous_cn：承接第3句的缺口。
+
+- changes_argument_state_cn：明确研究目标：CTA框架的有效性。
+
+- sets_up_next_cn：引出第5段‘因此我们保持激励结构相同’。
+
+- failure_if_removed_cn：研究问题不明确，全文失去方向。
+
+- evidence_pointer：Section 1 第4段第4句
+
+### 21. Introduction P5 S1
+
+- order：21
+
+- locator：Introduction P5 S1
+
+- paraphrase_cn：因此，我们对发送者和接收者保持相同的激励结构，只改变CTA中的强调内容。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把研究问题直接转化为实验设计：固定激励、只变CTA。
+
+- inherits_from_previous_cn：承接第4段的研究目标。
+
+- changes_argument_state_cn：从‘研究什么’过渡到‘如何操作’。
+
+- sets_up_next_cn：为第2句‘发送者仍感知公平但受CTA影响’做铺垫。
+
+- failure_if_removed_cn：实验设计的核心原则缺失。
+
+- evidence_pointer：Section 1 第5段第1句
+
+### 22. Introduction P5 S2
+
+- order：22
+
+- locator：Introduction P5 S2
+
+- paraphrase_cn：这样发送者仍会认为激励是公平的，但可能被CTA影响而采取特定视角做推荐决定。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：说明为什么固定激励仍能观察到框架效应：CTA改变视角而非激励感知。
+
+- inherits_from_previous_cn：承接第1句的设计。
+
+- changes_argument_state_cn：把设计逻辑连接到心理机制。
+
+- sets_up_next_cn：为第3句‘填补缺口至关重要’做铺垫。
+
+- failure_if_removed_cn：读者不明白既然激励相同，CTA为何会有作用。
+
+- evidence_pointer：Section 1 第5段第2句
+
+### 23. Introduction P5 S3
+
+- order：23
+
+- locator：Introduction P5 S3
+
+- paraphrase_cn：鉴于在线推荐程序日益重要，填补这一缺口至关重要。
+
+- move_code：WHY_GAP_MATTERS
+
+- statement_status：author_inference
+
+- why_here_cn：强调缺口的重要性，为引言的动机部分收尾。
+
+- inherits_from_previous_cn：承接第2句的CTA视角。
+
+- changes_argument_state_cn：把缺口重要性提升到‘必须研究’。
+
+- sets_up_next_cn：引出第6段的理论基础。
+
+- failure_if_removed_cn：研究动机不足。
+
+- evidence_pointer：Section 1 第5段第3句
+
+### 24. Introduction P6 S1
+
+- order：24
+
+- locator：Introduction P6 S1
+
+- paraphrase_cn：我们把在线推荐视为带激励的WOM机制。
+
+- move_code：THEORY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：给出理论视角：在线推荐是WOM的一种。
+
+- inherits_from_previous_cn：承接第5段的推荐程序。
+
+- changes_argument_state_cn：把研究问题置于WOM理论中。
+
+- sets_up_next_cn：为第2句‘顾客愉悦是WOM扩散基石’做铺垫。
+
+- failure_if_removed_cn：理论定位缺失，后续机制缺乏根基。
+
+- evidence_pointer：Section 1 第6段第1句
+
+### 25. Introduction P6 S2
+
+- order：25
+
+- locator：Introduction P6 S2
+
+- paraphrase_cn：成功的WOM产品扩散的基本构建块是现有客户群体中的愉悦，然后传给社交网络中可能同样受益的人。
+
+- move_code：THEORY_INTRO
+
+- statement_status：prior_literature
+
+- why_here_cn：提出顾客愉悦是WOM扩散的前提。
+
+- inherits_from_previous_cn：承接第1句的WOM视角。
+
+- changes_argument_state_cn：确立‘愉悦’为机制核心。
+
+- sets_up_next_cn：为第3句‘为他人福利的利他考虑’做铺垫。
+
+- failure_if_removed_cn：亲社会CTA的理论依据缺失。
+
+- evidence_pointer：Section 1 第6段第2句
+
+### 26. Introduction P6 S3
+
+- order：26
+
+- locator：Introduction P6 S3
+
+- paraphrase_cn：这种对他人福利的关心表明，成功在线推荐的必要条件是发送者对接收者福利的亲社会考虑。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：把‘愉悦’与‘利他考虑’连接，为亲社会CTA提供理论必要。
+
+- inherits_from_previous_cn：承接第2句的愉悦传播。
+
+- changes_argument_state_cn：把亲社会考虑确立为必要条件。
+
+- sets_up_next_cn：为第4句‘温光利他’和第5句‘内疚减少’做铺垫。
+
+- failure_if_removed_cn：亲社会CTA为何必要缺乏理论支撑。
+
+- evidence_pointer：Section 1 第6段第3句
+
+### 27. Introduction P6 S4
+
+- order：27
+
+- locator：Introduction P6 S4
+
+- paraphrase_cn：亲社会CTA可能起作用的另一机制是纯粹或温光利他（Andreoni 1988, 1990）。
+
+- move_code：MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：引入利他理论作为候选机制。
+
+- inherits_from_previous_cn：承接第3句的利他考虑。
+
+- changes_argument_state_cn：增加一条候选机制路径。
+
+- sets_up_next_cn：为第5句‘内疚减少’做铺垫。
+
+- failure_if_removed_cn：机制解释不够丰富。
+
+- evidence_pointer：Section 1 第6段第4句
+
+### 28. Introduction P6 S5
+
+- order：28
+
+- locator：Introduction P6 S5
+
+- paraphrase_cn：亲社会CTA也可能减少顾客因获得推荐奖励而感到内疚的心理成本（Ryu和Feick 2007）。
+
+- move_code：MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：引入内疚作为另一候选机制。
+
+- inherits_from_previous_cn：承接第4句的利他机制。
+
+- changes_argument_state_cn：增加第二条机制路径。
+
+- sets_up_next_cn：为第6句‘研究设计捕捉总效应’做铺垫。
+
+- failure_if_removed_cn：H3a的内疚机制无来源。
+
+- evidence_pointer：Section 1 第6段第5句
+
+### 29. Introduction P6 S6
+
+- order：29
+
+- locator：Introduction P6 S6
+
+- paraphrase_cn：读者需注意，我们的研究设计旨在捕捉亲社会CTA在两种广泛使用的促销类型下的总效应。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明设计目标不是分离单一机制，而是估计总效应，为后文机制分析预留空间。
+
+- inherits_from_previous_cn：承接第4-5句的候选机制。
+
+- changes_argument_state_cn：界定研究设计的证据范围。
+
+- sets_up_next_cn：引出第7段‘综合这些理论想法’。
+
+- failure_if_removed_cn：读者可能误以为研究能完全分解机制。
+
+- evidence_pointer：Section 1 第6段第6句
+
+### 30. Introduction P7 S1
+
+- order：30
+
+- locator：Introduction P7 S1
+
+- paraphrase_cn：综合来看，这些理论想法表明内在亲社会心态可能导致更高质量的倡导，可能与更少的内疚、更好的目标选择、更多的沟通努力或这些因素的混合有关。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：把多条机制整合为可检验的预期。
+
+- inherits_from_previous_cn：承接第6段的所有机制。
+
+- changes_argument_state_cn：形成‘亲社会框架→更高质量倡导’的理论预测。
+
+- sets_up_next_cn：为第2句‘实践并未体现这一洞见’做铺垫。
+
+- failure_if_removed_cn：理论预期不完整，后续假设缺乏方向。
+
+- evidence_pointer：Section 1 第7段第1句
+
+### 31. Introduction P7 S2
+
+- order：31
+
+- locator：Introduction P7 S2
+
+- paraphrase_cn：然而，对实践中影响力的推荐计划的仔细审视显示，企业并不一定聚焦于这一理论洞见，且在三个设计维度上表现出显著的异质性。
+
+- move_code：PHENOMENON
+
+- statement_status：author_inference
+
+- why_here_cn：用实践与理论的矛盾制造研究张力。
+
+- inherits_from_previous_cn：承接第1句的理论预期。
+
+- changes_argument_state_cn：从‘理论应有’转向‘实践现实’。
+
+- sets_up_next_cn：引出第3句‘前人研究发现激励中的亲社会成分更优’。
+
+- failure_if_removed_cn：研究动机缺乏现实对照。
+
+- evidence_pointer：Section 1 第7段第2句
+
+### 32. Introduction P7 S3
+
+- order：32
+
+- locator：Introduction P7 S3
+
+- paraphrase_cn：与前述理论论证一致，Bapna等（2014）和Hong等（2017）表明，激励方案中的亲社会成分（等分或只奖励接收者）显著优于只奖励发送者。
+
+- move_code：PRIOR_KNOWLEDGE
+
+- statement_status：prior_literature
+
+- why_here_cn：用已有激励设计证据支持亲社会成分的有效性，为CTA层面做类比。
+
+- inherits_from_previous_cn：承接第2句的实践观察。
+
+- changes_argument_state_cn：表明亲社会成分在相邻设计中已被证实有效。
+
+- sets_up_next_cn：为第4句‘Sun等发现可分享代码’做铺垫。
+
+- failure_if_removed_cn：亲社会CTA的合理性缺乏实证类比的支撑。
+
+- evidence_pointer：Section 1 第7段第3句
+
+### 33. Introduction P7 S4
+
+- order：33
+
+- locator：Introduction P7 S4
+
+- paraphrase_cn：同样地，Sun等（2018）发现，当面向客户的单次促销代码可分享时，大量客户愿意把代码转给朋友而不是自己使用。
+
+- move_code：PRIOR_KNOWLEDGE
+
+- statement_status：prior_literature
+
+- why_here_cn：提供另一条亲社会行为的实证证据，丰富理论基础。
+
+- inherits_from_previous_cn：承接第3句的亲社会成分证据。
+
+- changes_argument_state_cn：进一步支持‘利他分享’的普遍性。
+
+- sets_up_next_cn：为第8段‘聚焦CTA框架的现状’做铺垫。
+
+- failure_if_removed_cn：亲社会行为的证据链不够充分。
+
+- evidence_pointer：Section 1 第7段第4句
+
+### 34. Introduction P8 S1
+
+- order：34
+
+- locator：Introduction P8 S1
+
+- paraphrase_cn：就CTA框架而言，当前的现实是企业在使用多种CTA‘做实验’，但亲社会CTA——强调接收者货币收益——很少被观察到。
+
+- move_code：PHENOMENON
+
+- statement_status：author_inference
+
+- why_here_cn：把实践观察聚焦到本文的核心变量CTA框架。
+
+- inherits_from_previous_cn：承接第7段的实践异质性。
+
+- changes_argument_state_cn：确立亲社会CTA在实践中稀缺这一事实基础。
+
+- sets_up_next_cn：为第2句‘企业认为强调发送者收益更有效’做铺垫。
+
+- failure_if_removed_cn：‘实践与理论矛盾’缺乏具体指向。
+
+- evidence_pointer：Section 1 第8段第1句
+
+### 35. Introduction P8 S2
+
+- order：35
+
+- locator：Introduction P8 S2
+
+- paraphrase_cn：这可能是由于企业认为，如果突出发送者自身的货币收益，发送者更可能发起推荐。
+
+- move_code：PHENOMENON
+
+- statement_status：author_inference
+
+- why_here_cn：解释实践为何偏爱利己框架，为‘与传统智慧相反’做铺垫。
+
+- inherits_from_previous_cn：承接第1句的亲社会罕见。
+
+- changes_argument_state_cn：把实践现状归因于‘利己假设’。
+
+- sets_up_next_cn：为第3句‘利己CTA和公平CTA的流行’做铺垫。
+
+- failure_if_removed_cn：读者不知道为什么企业只用利己/公平框架。
+
+- evidence_pointer：Section 1 第8段第2句
+
+### 36. Introduction P8 S3
+
+- order：36
+
+- locator：Introduction P8 S3
+
+- paraphrase_cn：与此一致，我们看到所谓利己CTA（强调发送者获得奖励）和公平CTA（强调双方都获得奖励）的普遍存在。
+
+- move_code：PHENOMENON
+
+- statement_status：author_inference
+
+- why_here_cn：定义利己与公平框架，为实验操纵提供概念基础。
+
+- inherits_from_previous_cn：承接第2句的利己假设。
+
+- changes_argument_state_cn：确立两种常见CTA框架的类型学。
+
+- sets_up_next_cn：为第4句‘无法获取分布但可进行马赛’做铺垫。
+
+- failure_if_removed_cn：后续四组操纵缺少概念定义。
+
+- evidence_pointer：Section 1 第8段第3句
+
+### 37. Introduction P8 S4
+
+- order：37
+
+- locator：Introduction P8 S4
+
+- paraphrase_cn：虽然由于缺乏全面专有数据，三种CTA的确切分布未知，但更有研究兴趣的是在这三种方案与通用CTA之间进行一场受控的科学‘马赛’。
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- statement_status：author_inference
+
+- why_here_cn：把实践观察转化为研究设计：用随机实验比较四种框架。
+
+- inherits_from_previous_cn：承接第3句的三种框架。
+
+- changes_argument_state_cn：确立控制组与三个处理组的比较框架。
+
+- sets_up_next_cn：为第5句‘随机田野实验是黄金标准’做铺垫。
+
+- failure_if_removed_cn：实验设计缺乏‘马赛’概念。
+
+- evidence_pointer：Section 1 第8段第4句
+
+### 38. Introduction P8 S5
+
+- order：38
+
+- locator：Introduction P8 S5
+
+- paraphrase_cn：我们使用随机田野实验的方法论进行这场马赛，这是因果推断的‘黄金标准’，并在IS文献中越来越常用。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：为方法选择提供权威依据，强调因果识别能力。
+
+- inherits_from_previous_cn：承接第4句的马赛。
+
+- changes_argument_state_cn：确定研究方法为随机田野实验。
+
+- sets_up_next_cn：为第6句‘额外分析和MTurk实验’做铺垫。
+
+- failure_if_removed_cn：方法选择缺乏正当性，因果主张不可信。
+
+- evidence_pointer：Section 1 第8段第5句
+
+### 39. Introduction P8 S6
+
+- order：39
+
+- locator：Introduction P8 S6
+
+- paraphrase_cn：我们还进行额外分析和MTurk在线受控实验来研究解释主结果的潜在机制。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：预告机制证据，说明不止有主效应。
+
+- inherits_from_previous_cn：承接第5句的田野实验。
+
+- changes_argument_state_cn：把证据类型扩展到机制实验。
+
+- sets_up_next_cn：引出第9段‘两种对立的实践预测’。
+
+- failure_if_removed_cn：机制研究缺失，贡献深度不足。
+
+- evidence_pointer：Section 1 第8段第6句
+
+### 40. Introduction P9 S1
+
+- order：40
+
+- locator：Introduction P9 S1
+
+- paraphrase_cn：如前所述，我们特别关注内在亲社会框架在驱动顾客推荐决定中的作用，因为它与传统智慧和实践规范相矛盾。
+
+- move_code：WHY_GAP_MATTERS
+
+- statement_status：author_inference
+
+- why_here_cn：重新聚焦研究兴趣，说明为什么值得检验。
+
+- inherits_from_previous_cn：承接第8段的马赛。
+
+- changes_argument_state_cn：把焦点放在‘反常识’的亲社会框架上。
+
+- sets_up_next_cn：为第2句‘理论上可解决困境，但实践中可能利己有效’做铺垫。
+
+- failure_if_removed_cn：研究问题失去张力。
+
+- evidence_pointer：Section 1 第9段第1句
+
+### 41. Introduction P9 S2
+
+- order：41
+
+- locator：Introduction P9 S2
+
+- paraphrase_cn：理论上，来自动机混合次优性的研究给了我们解决困境的方向，但实践中起作用的有可能是经济学风格的自我最大化思维（行业规范是强调发送者收益）。
+
+- move_code：WHY_GAP_MATTERS
+
+- statement_status：author_inference
+
+- why_here_cn：给出对立的理论预测：利己可能有效。
+
+- inherits_from_previous_cn：承接第1句的矛盾。
+
+- changes_argument_state_cn：建立‘理论预测’与‘实践假设’的竞争。
+
+- sets_up_next_cn：为第3句‘公平框架是合理折中’做铺垫。
+
+- failure_if_removed_cn：对立假设缺失，经验研究失去必要性。
+
+- evidence_pointer：Section 1 第9段第2句
+
+### 42. Introduction P9 S3
+
+- order：42
+
+- locator：Introduction P9 S3
+
+- paraphrase_cn：另外，实践中也可能强调双方收益是合理的折中，正如公平寻求所支持的那样。
+
+- move_code：WHY_GAP_MATTERS
+
+- statement_status：author_inference
+
+- why_here_cn：给出第二个对立预测：公平框架合理。
+
+- inherits_from_previous_cn：承接第2句的对立预测。
+
+- changes_argument_state_cn：建立第三种可能：公平折中。
+
+- sets_up_next_cn：为第4句‘因此是经验问题’做铺垫。
+
+- failure_if_removed_cn：公平框架的竞争假设缺失。
+
+- evidence_pointer：Section 1 第9段第3句
+
+### 43. Introduction P9 S4
+
+- order：43
+
+- locator：Introduction P9 S4
+
+- paraphrase_cn：鉴于上述权衡和对立的理论预测，亲社会框架是否带来更多推荐或更好结果是一个有趣的经验问题。
+
+- move_code：RQ_OR_OBJECTIVE
+
+- statement_status：author_inference
+
+- why_here_cn：把对立预测收束为经验问题，为提出假设做铺垫。
+
+- inherits_from_previous_cn：承接第2-3句的对立预测。
+
+- changes_argument_state_cn：把问题定义为需要通过实验回答。
+
+- sets_up_next_cn：引出第5句‘我们检验以下假设’。
+
+- failure_if_removed_cn：经验研究的目的缺失。
+
+- evidence_pointer：Section 1 第9段第4句
+
+### 44. Introduction P9 S5
+
+- order：44
+
+- locator：Introduction P9 S5
+
+- paraphrase_cn：具体地，我们通过研究设计检验以下假设。
+
+- move_code：TRANSITION
+
+- statement_status：method_decision
+
+- why_here_cn：过渡到假设陈述。
+
+- inherits_from_previous_cn：承接第4句的经验问题。
+
+- changes_argument_state_cn：从问题转向假设。
+
+- sets_up_next_cn：引出H1a。
+
+- failure_if_removed_cn：从问题到假设的过渡缺失。
+
+- evidence_pointer：Section 1 第9段第5句
+
+### 45. Introduction H1a
+
+- order：45
+
+- locator：Introduction H1a
+
+- paraphrase_cn：假设1a（主效应）：亲社会CTA在发起推荐的可能性和推荐数量上优于控制、利己和公平CTA。
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出核心待检验主张。
+
+- inherits_from_previous_cn：承接第9段的经验问题。
+
+- changes_argument_state_cn：建立H1a作为主效应假设。
+
+- sets_up_next_cn：为表2第(1)-(4)列提供检验目标。
+
+- failure_if_removed_cn：主效应检验没有明确假设。
+
+- evidence_pointer：Section 1 假设1a
+
+### 46. Introduction P11 S1
+
+- order：46
+
+- locator：Introduction P11 S1
+
+- paraphrase_cn：因为推荐营销是两阶段过程，自然要问某类CTA是否带来接收者侧的更好结果，如购买可能性和金额。
+
+- move_code：THEORY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：把研究从发送者行为扩展到接收者结果。
+
+- inherits_from_previous_cn：承接H1a的推荐行为。
+
+- changes_argument_state_cn：引入两阶段视角。
+
+- sets_up_next_cn：为第2句‘可选择性和更好目标’做铺垫。
+
+- failure_if_removed_cn：H1b缺乏动机。
+
+- evidence_pointer：Section 1 第11段第1句
+
+### 47. Introduction P11 S2
+
+- order：47
+
+- locator：Introduction P11 S2
+
+- paraphrase_cn：顾客可能变得更选择性地推荐，因为他们更看重朋友也体验同等愉悦。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：提出亲社会框架可能减少推荐数量的机制：选择性。
+
+- inherits_from_previous_cn：承接第1句的两阶段。
+
+- changes_argument_state_cn：引入‘选择性分享’概念。
+
+- sets_up_next_cn：为第3句‘数量减少可被转化率抵消’做铺垫。
+
+- failure_if_removed_cn：亲社会可能减少推荐数量的反事实缺失。
+
+- evidence_pointer：Section 1 第11段第2句
+
+### 48. Introduction P11 S3
+
+- order：48
+
+- locator：Introduction P11 S3
+
+- paraphrase_cn：如果是这样，亲社会CTA可能导致更少的推荐，但这个潜在缺点可以被更好的目标定位和更高转化率所抵消。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：解释为什么虽然数量可能减少但结果仍更好。
+
+- inherits_from_previous_cn：承接第2句的选择性。
+
+- changes_argument_state_cn：把选择性从劣势转为优势。
+
+- sets_up_next_cn：为第4句‘视为经验问题并检验’做铺垫。
+
+- failure_if_removed_cn：H1b的理论预期不完整。
+
+- evidence_pointer：Section 1 第11段第3句
+
+### 49. Introduction P11 S4
+
+- order：49
+
+- locator：Introduction P11 S4
+
+- paraphrase_cn：因此我们将其视为经验问题并检验以下假设。
+
+- move_code：TRANSITION
+
+- statement_status：method_decision
+
+- why_here_cn：过渡到H1b。
+
+- inherits_from_previous_cn：承接第3句的权衡。
+
+- changes_argument_state_cn：从机制讨论转向假设。
+
+- sets_up_next_cn：引出H1b。
+
+- failure_if_removed_cn：H1b引入缺乏过渡。
+
+- evidence_pointer：Section 1 第11段第4句
+
+### 50. Introduction H1b
+
+- order：50
+
+- locator：Introduction H1b
+
+- paraphrase_cn：假设1b（主效应）：亲社会CTA在WOM推荐结果上优于控制、利己和公平CTA。
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出接收者结果维度的假设。
+
+- inherits_from_previous_cn：承接第11段的经验问题。
+
+- changes_argument_state_cn：把主效应扩展到接收者结果。
+
+- sets_up_next_cn：为表2第(5)-(6)列提供检验目标。
+
+- failure_if_removed_cn：接收者结果维度缺乏假设。
+
+- evidence_pointer：Section 1 假设1b
+
+### 51. Introduction P13 S1
+
+- order：51
+
+- locator：Introduction P13 S1
+
+- paraphrase_cn：如果利他是在线推荐的可能驱动因素，我们应该看到内在亲社会框架对产品亲和度更高的顾客影响更大，因为顾客会投射自己的评价到他人。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：提出产品亲和作为调节变量的理论机制。
+
+- inherits_from_previous_cn：承接第6段的利他理论。
+
+- changes_argument_state_cn：引入‘投射’和‘产品亲和’机制。
+
+- sets_up_next_cn：为第2句‘高亲和客户更可能推断朋友受益’做铺垫。
+
+- failure_if_removed_cn：H2a的调节机制缺失。
+
+- evidence_pointer：Section 1 第13段第1句
+
+### 52. Introduction P13 S2
+
+- order：52
+
+- locator：Introduction P13 S2
+
+- paraphrase_cn：更高产品亲和的顾客更可能推断朋友也会从产品中获得正效用，因此更可能分享。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：细化‘投射’机制：高亲和→推断朋友受益→分享。
+
+- inherits_from_previous_cn：承接第1句的投射。
+
+- changes_argument_state_cn：把机制具体化为因果链。
+
+- sets_up_next_cn：为第3句‘亲和的度量’做铺垫。
+
+- failure_if_removed_cn：H2a的推理链不完整。
+
+- evidence_pointer：Section 1 第13段第2句
+
+### 53. Introduction P13 S3
+
+- order：53
+
+- locator：Introduction P13 S3
+
+- paraphrase_cn：顾客的高产品亲和可以用重复购买次数和高NPS来代表。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：prior_literature
+
+- why_here_cn：给出亲和的实证操作化。
+
+- inherits_from_previous_cn：承接第2句的亲和概念。
+
+- changes_argument_state_cn：把理论概念转化为可测量变量。
+
+- sets_up_next_cn：为第4句‘检验H2a’做铺垫。
+
+- failure_if_removed_cn：调节变量无法测量。
+
+- evidence_pointer：Section 1 第13段第3句
+
+### 54. Introduction P13 S4
+
+- order：54
+
+- locator：Introduction P13 S4
+
+- paraphrase_cn：受‘愉悦顾客与亲社会CTA之间不存在内在—外在困境’这一事实的启发，我们通过探索处理效应的异质性来检验以下假设。
+
+- move_code：TRANSITION
+
+- statement_status：author_inference
+
+- why_here_cn：把机制与困境理论连接，并过渡到H2a。
+
+- inherits_from_previous_cn：承接第3句的亲和度量。
+
+- changes_argument_state_cn：将亲和机制与核心困境理论绑定。
+
+- sets_up_next_cn：引出H2a。
+
+- failure_if_removed_cn：H2a的理论动机不充分。
+
+- evidence_pointer：Section 1 第13段第4句
+
+### 55. Introduction H2a
+
+- order：55
+
+- locator：Introduction H2a
+
+- paraphrase_cn：假设2a（机制）：顾客亲和力正向调节亲社会CTA对推荐行为的影响。
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出调节机制假设。
+
+- inherits_from_previous_cn：承接第13段的机制。
+
+- changes_argument_state_cn：把机制转化为可检验的调节假设。
+
+- sets_up_next_cn：为表4列(1)-(2)提供检验目标。
+
+- failure_if_removed_cn：客户愉悦机制缺乏假设。
+
+- evidence_pointer：Section 1 假设2a
+
+### 56. Introduction P15 S1
+
+- order：56
+
+- locator：Introduction P15 S1
+
+- paraphrase_cn：此外，我们预期亲社会框架的效果可能取决于顾客最近一次购买的时点，而其他框架的效果不太可能有这种关联。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：提出购买新鲜度作为另一调节变量。
+
+- inherits_from_previous_cn：承接H2a的调节逻辑。
+
+- changes_argument_state_cn：引入时间维度。
+
+- sets_up_next_cn：为第2句‘愉悦随时间衰减’做铺垫。
+
+- failure_if_removed_cn：H2b缺乏理论起点。
+
+- evidence_pointer：Section 1 第15段第1句
+
+### 57. Introduction P15 S2
+
+- order：57
+
+- locator：Introduction P15 S2
+
+- paraphrase_cn：这是因为亲社会考虑下的分享更受内在愉悦和热情驱动，而这种愉悦和热情会随购买后时间增加而衰减。
+
+- move_code：MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：解释亲社会效果为何依赖时间。
+
+- inherits_from_previous_cn：承接第1句的时间预期。
+
+- changes_argument_state_cn：把时间机制与内在愉悦绑定。
+
+- sets_up_next_cn：为第3句‘亲社会效果对近期购买者最高’做铺垫。
+
+- failure_if_removed_cn：时间衰减机制缺失。
+
+- evidence_pointer：Section 1 第15段第2句
+
+### 58. Introduction P15 S3
+
+- order：58
+
+- locator：Introduction P15 S3
+
+- paraphrase_cn：因此我们预期亲社会框架的效果对最近购买并收到产品的客户最高，对较早购买的客户较低。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：把衰减机制转化为具体方向预期。
+
+- inherits_from_previous_cn：承接第2句的衰减。
+
+- changes_argument_state_cn：确立亲社会效果随新鲜度递减。
+
+- sets_up_next_cn：为第4句‘利己框架不随时间衰减’做对比。
+
+- failure_if_removed_cn：H2b的方向预期不明确。
+
+- evidence_pointer：Section 1 第15段第3句
+
+### 59. Introduction P15 S4
+
+- order：59
+
+- locator：Introduction P15 S4
+
+- paraphrase_cn：相反，我们预期通过外部动机激发推荐的利己框架不会随时间下降。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：建立利己框架与亲社会框架在时间维度上的对比。
+
+- inherits_from_previous_cn：承接第3句的亲社会衰减。
+
+- changes_argument_state_cn：区分内外动机的时间行为。
+
+- sets_up_next_cn：为第5句‘物质回报永不衰减’做铺垫。
+
+- failure_if_removed_cn：缺乏对比组，时间机制无法凸显。
+
+- evidence_pointer：Section 1 第15段第4句
+
+### 60. Introduction P15 S5
+
+- order：60
+
+- locator：Introduction P15 S5
+
+- paraphrase_cn：此时可以说，顾客发起推荐的外在动机独立于购买时间；换句话说，物质回报的价值永不衰减，而内在动机预期会衰减。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：解释利己框架为何不随时间衰减。
+
+- inherits_from_previous_cn：承接第4句的利己框架。
+
+- changes_argument_state_cn：把‘外在动机不衰减’确立为理论预期。
+
+- sets_up_next_cn：为第6句‘因此我们假设并检验’做铺垫。
+
+- failure_if_removed_cn：利己框架不衰减的理由缺失。
+
+- evidence_pointer：Section 1 第15段第5句
+
+### 61. Introduction P15 S6
+
+- order：61
+
+- locator：Introduction P15 S6
+
+- paraphrase_cn：因此我们假设并检验以下内容。
+
+- move_code：TRANSITION
+
+- statement_status：method_decision
+
+- why_here_cn：过渡到H2b。
+
+- inherits_from_previous_cn：承接第5句的预期。
+
+- changes_argument_state_cn：从机制讨论转向假设。
+
+- sets_up_next_cn：引出H2b。
+
+- failure_if_removed_cn：H2b引入缺乏过渡。
+
+- evidence_pointer：Section 1 第15段第6句
+
+### 62. Introduction H2b
+
+- order：62
+
+- locator：Introduction H2b
+
+- paraphrase_cn：假设2b（机制）：过去购买的时点正向调节亲社会CTA对顾客推荐行为的影响。
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出时间调节假设。
+
+- inherits_from_previous_cn：承接第15段的机制。
+
+- changes_argument_state_cn：把时间机制转化为可检验假设。
+
+- sets_up_next_cn：为表4列(3)提供检验目标。
+
+- failure_if_removed_cn：时间机制缺乏假设。
+
+- evidence_pointer：Section 1 假设2b
+
+### 63. Introduction P17 S1
+
+- order：63
+
+- locator：Introduction P17 S1
+
+- paraphrase_cn：此外，与我们对CTA效果机制的理论一致，我们假设亲社会框架会减少发送者参与带激励推荐程序的内疚感，尤其与其他框架相比。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：提出内疚作为亲社会CTA的机制。
+
+- inherits_from_previous_cn：承接第6段的内疚机制。
+
+- changes_argument_state_cn：把内疚机制转化为假设。
+
+- sets_up_next_cn：为第2句‘亲社会下更关注他人利益’做铺垫。
+
+- failure_if_removed_cn：H3a缺乏理论依据。
+
+- evidence_pointer：Section 1 第17段第1句
+
+### 64. Introduction P17 S2
+
+- order：64
+
+- locator：Introduction P17 S2
+
+- paraphrase_cn：同样可能的是，在亲社会框架下分享的人更可能关注他人（家人/朋友）的收益而非自己的回报。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：提出利他动机作为另一机制。
+
+- inherits_from_previous_cn：承接第1句的内疚。
+
+- changes_argument_state_cn：引入利他关注。
+
+- sets_up_next_cn：为第3句‘因此更选择性’做铺垫。
+
+- failure_if_removed_cn：H3b的利他动机缺失。
+
+- evidence_pointer：Section 1 第17段第2句
+
+### 65. Introduction P17 S3
+
+- order：65
+
+- locator：Introduction P17 S3
+
+- paraphrase_cn：作为结果，这些顾客在推荐时可能更有选择性，因为他们更关心朋友的利益。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：连接利他动机与选择性分享。
+
+- inherits_from_previous_cn：承接第2句的利他关注。
+
+- changes_argument_state_cn：把利他动机与选择性行为绑定。
+
+- sets_up_next_cn：为第4句‘因此检验以下假设’做铺垫。
+
+- failure_if_removed_cn：选择性分享的机制链条缺失。
+
+- evidence_pointer：Section 1 第17段第3句
+
+### 66. Introduction P17 S4
+
+- order：66
+
+- locator：Introduction P17 S4
+
+- paraphrase_cn：因此，带着揭示特定CTA成功背后动机的目标，我们检验以下内容。
+
+- move_code：TRANSITION
+
+- statement_status：method_decision
+
+- why_here_cn：过渡到H3a和H3b。
+
+- inherits_from_previous_cn：承接第3句的选择性。
+
+- changes_argument_state_cn：从机制讨论转向动机假设。
+
+- sets_up_next_cn：引出H3a和H3b。
+
+- failure_if_removed_cn：动机假设缺乏引入。
+
+- evidence_pointer：Section 1 第17段第4句
+
+### 67. Introduction H3a H3b
+
+- order：67
+
+- locator：Introduction H3a H3b
+
+- paraphrase_cn：假设3a：被亲社会CTA瞄准的顾客报告更低的内疚。假设3b：在亲社会CTA下分享的顾客更可能把家人和朋友收益识别为动机。
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出两个动机假设，为MTurk实验提供目标。
+
+- inherits_from_previous_cn：承接第17段的内疚与利他。
+
+- changes_argument_state_cn：把动机机制转化为可测量假设。
+
+- sets_up_next_cn：为第19段‘我们严格检验并理解动机’做铺垫。
+
+- failure_if_removed_cn：MTurk实验没有检验目标。
+
+- evidence_pointer：Section 1 假设3a和3b
+
+### 68. Introduction P19 S1
+
+- order：68
+
+- locator：Introduction P19 S1
+
+- paraphrase_cn：在本研究中，我们严格检验、识别并理解在线推荐最优CTA背后的动机。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：author_inference
+
+- why_here_cn：开启研究设计的描述，预告实证策略。
+
+- inherits_from_previous_cn：承接所有假设。
+
+- changes_argument_state_cn：从假设转向实证研究。
+
+- sets_up_next_cn：为第2句‘与平台合作’做铺垫。
+
+- failure_if_removed_cn：研究设计段落缺乏总起。
+
+- evidence_pointer：Section 1 第19段第1句
+
+### 69. Introduction P19 S2
+
+- order：69
+
+- locator：Introduction P19 S2
+
+- paraphrase_cn：我们与美国一家大型在线照片处理平台合作（2015年收入2200万美元）。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：介绍实验现场，建立外部有效性基础。
+
+- inherits_from_previous_cn：承接第1句的研究设计。
+
+- changes_argument_state_cn：引入具体平台背景。
+
+- sets_up_next_cn：为第3句‘耐用品类产品’做铺垫。
+
+- failure_if_removed_cn：实验场景不具体。
+
+- evidence_pointer：Section 1 第19段第2句
+
+### 70. Introduction P19 S3
+
+- order：70
+
+- locator：Introduction P19 S3
+
+- paraphrase_cn：该公司专门从事照片处理和相关‘耐用品’类产品。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：说明产品类型，为边界讨论做铺垫。
+
+- inherits_from_previous_cn：承接第2句的平台。
+
+- changes_argument_state_cn：确定产品为耐用品。
+
+- sets_up_next_cn：为第4句‘操纵CTA措辞’做铺垫。
+
+- failure_if_removed_cn：边界条件缺少产品类型基础。
+
+- evidence_pointer：Section 1 第19段第3句
+
+### 71. Introduction P19 S4
+
+- order：71
+
+- locator：Introduction P19 S4
+
+- paraphrase_cn：我们的处理操纵框架——即只操纵CTA中某些短语的文字和强调——保持激励和消息的所有其他方面不变。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：重申实验操纵的唯一性。
+
+- inherits_from_previous_cn：承接第3段的操纵说明。
+
+- changes_argument_state_cn：强化处理变量的纯净性。
+
+- sets_up_next_cn：为第5句‘随机实验识别因果效应’做铺垫。
+
+- failure_if_removed_cn：操纵定义不清。
+
+- evidence_pointer：Section 1 第19段第4句
+
+### 72. Introduction P19 S5
+
+- order：72
+
+- locator：Introduction P19 S5
+
+- paraphrase_cn：随机田野实验设计让我们能识别CTA框架对顾客推荐决定、分享程度和成功推荐数的因果效应。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明实验设计能支持因果推断。
+
+- inherits_from_previous_cn：承接第4句的操纵。
+
+- changes_argument_state_cn：把设计升格为因果识别工具。
+
+- sets_up_next_cn：为第6句‘随机分配10万客户’做铺垫。
+
+- failure_if_removed_cn：因果主张缺乏方法论支撑。
+
+- evidence_pointer：Section 1 第19段第5句
+
+### 73. Introduction P19 S6
+
+- order：73
+
+- locator：Introduction P19 S6
+
+- paraphrase_cn：具体地，我们随机分配10万名过去在平台上有购买记录的客户到四组，并向每组发送不同CTA邮件。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：给出实验规模与分配，展示实证力度。
+
+- inherits_from_previous_cn：承接第5句的设计。
+
+- changes_argument_state_cn：把实验设计具体化为样本与处理。
+
+- sets_up_next_cn：为第7句‘收集5周数据’做铺垫。
+
+- failure_if_removed_cn：样本规模和随机分配缺失。
+
+- evidence_pointer：Section 1 第19段第6句
+
+### 74. Introduction P19 S7
+
+- order：74
+
+- locator：Introduction P19 S7
+
+- paraphrase_cn：我们收集实验后5周窗口内顾客的推荐行为和结果数据。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：说明观察窗口和数据覆盖。
+
+- inherits_from_previous_cn：承接第6句的实验。
+
+- changes_argument_state_cn：定义结果测量时间。
+
+- sets_up_next_cn：为第8句‘档案数据补充’做铺垫。
+
+- failure_if_removed_cn：结果测量的时间框架缺失。
+
+- evidence_pointer：Section 1 第19段第7句
+
+### 75. Introduction P19 S8
+
+- order：75
+
+- locator：Introduction P19 S8
+
+- paraphrase_cn：我们进一步用丰富档案数据补充田野实验数据，包括产品特征、个人特征、过去购买和NPS分数。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：说明数据来源多样，支持调节分析。
+
+- inherits_from_previous_cn：承接第7句的实验数据。
+
+- changes_argument_state_cn：引入档案数据。
+
+- sets_up_next_cn：为第9句‘额外实验提高可推广性’做铺垫。
+
+- failure_if_removed_cn：调节作用分析缺乏数据。
+
+- evidence_pointer：Section 1 第19段第8句
+
+### 76. Introduction P19 S9
+
+- order：76
+
+- locator：Introduction P19 S9
+
+- paraphrase_cn：此外，着眼于可推广性，并本着通过更严格证伪检验推进知识的精神（Popper 2005），我们进行额外实验。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：引出一个更广泛的稳健性理念，为第二实验设置理论动机。
+
+- inherits_from_previous_cn：承接第8句的数据。
+
+- changes_argument_state_cn：把额外实验定位为证伪检验。
+
+- sets_up_next_cn：为第10句‘稳健性检查作为检测门槛’做铺垫。
+
+- failure_if_removed_cn：第二实验的动机不明确。
+
+- evidence_pointer：Section 1 第19段第9句
+
+### 77. Introduction P19 S10
+
+- order：77
+
+- locator：Introduction P19 S10
+
+- paraphrase_cn：这些稳健性检验作为检测亲社会框架效应的门槛。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：定义稳健性检验的作用：提高证伪标准。
+
+- inherits_from_previous_cn：承接第9句的证伪精神。
+
+- changes_argument_state_cn：把稳健性检验置于研究设计的核心。
+
+- sets_up_next_cn：为第11句‘实验2激励对所有用户有吸引力’做铺垫。
+
+- failure_if_removed_cn：稳健性检验的意义不明确。
+
+- evidence_pointer：Section 1 第19段第10句
+
+### 78. Introduction P19 S11
+
+- order：78
+
+- locator：Introduction P19 S11
+
+- paraphrase_cn：我们通过精心设计实验来检验当推荐激励对所有用户（包括已购买发送者）都有吸引力时结果是否成立。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：预告第二个实验的关键设计变化。
+
+- inherits_from_previous_cn：承接第10句的门槛。
+
+- changes_argument_state_cn：把稳健性检验具体化为第二实验。
+
+- sets_up_next_cn：为第12句‘MTurk实验识别机制’做铺垫。
+
+- failure_if_removed_cn：第二实验的描述缺失。
+
+- evidence_pointer：Section 1 第19段第11句
+
+### 79. Introduction P19 S12
+
+- order：79
+
+- locator：Introduction P19 S12
+
+- paraphrase_cn：我们还进行MTurk受控实验来识别提出的机制。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：预告机制实验。
+
+- inherits_from_previous_cn：承接第11句的第二实验。
+
+- changes_argument_state_cn：把证据类型扩展到受控实验。
+
+- sets_up_next_cn：为第13句‘数据来源整合’做铺垫。
+
+- failure_if_removed_cn：机制证据缺失。
+
+- evidence_pointer：Section 1 第19段第12句
+
+### 80. Introduction P19 S13
+
+- order：80
+
+- locator：Introduction P19 S13
+
+- paraphrase_cn：随机实验、档案数据和MTurk实验的数据让我们能识别不同CTA的因果效应并探索潜在机制。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：总结数据来源如何支撑全文论证。
+
+- inherits_from_previous_cn：承接第8、11、12句的数据。
+
+- changes_argument_state_cn：把多来源数据整合为统一证据基础。
+
+- sets_up_next_cn：为第20段‘主要发现’做铺垫。
+
+- failure_if_removed_cn：多证据来源的整合逻辑缺失。
+
+- evidence_pointer：Section 1 第19段第13句
+
+### 81. Introduction P20 S1
+
+- order：81
+
+- locator：Introduction P20 S1
+
+- paraphrase_cn：我们的主要发现，在多个计量规格下一致，与理论预测一致并与传统智慧相反。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：在引言中给出核心结论，引导读者读方法。
+
+- inherits_from_previous_cn：承接第19段的证据基础。
+
+- changes_argument_state_cn：从‘研究设计’转向‘研究发现’。
+
+- sets_up_next_cn：为第2句‘三个结果维度’做铺垫。
+
+- failure_if_removed_cn：引言缺乏核心发现，读者无法快速理解价值。
+
+- evidence_pointer：Section 1 第20段第1句
+
+### 82. Introduction P20 S2
+
+- order：82
+
+- locator：Introduction P20 S2
+
+- paraphrase_cn：如果把三个结果看成一个整体，亲社会CTA框架在驱动推荐行为和产生最佳结果方面最有效。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：综合报告主效应。
+
+- inherits_from_previous_cn：承接第1句的发现。
+
+- changes_argument_state_cn：把亲社会框架确立为整体最优。
+
+- sets_up_next_cn：为第3句‘与控制组比较’做铺垫。
+
+- failure_if_removed_cn：主效应不明确。
+
+- evidence_pointer：Section 1 第20段第2句
+
+### 83. Introduction P20 S3
+
+- order：83
+
+- locator：Introduction P20 S3
+
+- paraphrase_cn：与控制组相比，突出朋友收益的邮件显著提高发送者发起推荐的可能性和成功推荐总数。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出与控制组的对比结果。
+
+- inherits_from_previous_cn：承接第2句的整体最优。
+
+- changes_argument_state_cn：量化亲社会相对于控制组的优势。
+
+- sets_up_next_cn：为第4句‘高于利己和公平’做铺垫。
+
+- failure_if_removed_cn：控制组基准缺失。
+
+- evidence_pointer：Section 1 第20段第3句
+
+### 84. Introduction P20 S4
+
+- order：84
+
+- locator：Introduction P20 S4
+
+- paraphrase_cn：此外，亲社会框架的效果显著高于利己和公平框架，覆盖所有推荐行为和总体结果（H1a和H1b）。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告成对比较结果，支持H1a和H1b。
+
+- inherits_from_previous_cn：承接第3句的对比。
+
+- changes_argument_state_cn：确立亲社会在竞争框架中的优势。
+
+- sets_up_next_cn：为第5句‘异质性分析’做铺垫。
+
+- failure_if_removed_cn：H1a和H1b的支持证据缺失。
+
+- evidence_pointer：Section 1 第20段第4句
+
+### 85. Introduction P20 S5
+
+- order：85
+
+- locator：Introduction P20 S5
+
+- paraphrase_cn：第二，我们在不同客户细分中发现处理效应的显著异质性，为支持主发现提供机制洞见。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：引入异质性结果，为机制做铺垫。
+
+- inherits_from_previous_cn：承接第4句的主效应。
+
+- changes_argument_state_cn：从主效应转向异质性。
+
+- sets_up_next_cn：为第6句‘重复购买和高NPS客户’做铺垫。
+
+- failure_if_removed_cn：机制证据缺失。
+
+- evidence_pointer：Section 1 第20段第5句
+
+### 86. Introduction P20 S6
+
+- order：86
+
+- locator：Introduction P20 S6
+
+- paraphrase_cn：与顾客愉悦作为有效WOM必要条件的前提一致，亲社会框架对重复购买客户和高NPS客户更有效（H2a）。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告H2a的支持证据。
+
+- inherits_from_previous_cn：承接第5句的异质性。
+
+- changes_argument_state_cn：把异质性连接到顾客愉悦机制。
+
+- sets_up_next_cn：为第7句‘高亲和客户更愿意分享’做铺垫。
+
+- failure_if_removed_cn：客户愉悦机制缺乏实证证据。
+
+- evidence_pointer：Section 1 第20段第6句
+
+### 87. Introduction P20 S7
+
+- order：87
+
+- locator：Introduction P20 S7
+
+- paraphrase_cn：这与产品亲和度更高的客户在亲社会框架下更可能向朋友分享产品的观点一致。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：解释异质性背后的机制。
+
+- inherits_from_previous_cn：承接第6句的结果。
+
+- changes_argument_state_cn：把调节结果转化为机制解释。
+
+- sets_up_next_cn：为第8句‘内外动机对齐’做铺垫。
+
+- failure_if_removed_cn：异质性结果的解释缺失。
+
+- evidence_pointer：Section 1 第20段第7句
+
+### 88. Introduction P20 S8
+
+- order：88
+
+- locator：Introduction P20 S8
+
+- paraphrase_cn：换句话说，他们的有机动机与外在财务激励的内在导向框架之间存在对齐。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：把机制连接到核心的内在—外在困境。
+
+- inherits_from_previous_cn：承接第7句的亲和机制。
+
+- changes_argument_state_cn：用‘对齐’解释亲社会的优势。
+
+- sets_up_next_cn：为第9句‘利己/公平下无对齐’做对比。
+
+- failure_if_removed_cn：亲社会优势的理论解释不完整。
+
+- evidence_pointer：Section 1 第20段第8句
+
+### 89. Introduction P20 S9
+
+- order：89
+
+- locator：Introduction P20 S9
+
+- paraphrase_cn：相反，利己和公平框架下的愉悦客户面临内在—外在困境，无法体验到这种对齐。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：用对比强化‘对齐’机制。
+
+- inherits_from_previous_cn：承接第8句的对齐。
+
+- changes_argument_state_cn：解释为什么其他框架效果较弱。
+
+- sets_up_next_cn：为第10句‘时间调节’做铺垫。
+
+- failure_if_removed_cn：其他框架为何较弱缺乏解释。
+
+- evidence_pointer：Section 1 第20段第9句
+
+### 90. Introduction P20 S10
+
+- order：90
+
+- locator：Introduction P20 S10
+
+- paraphrase_cn：最后，我们发现亲社会框架的效果被购买的时点正向调节（H2b）。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告H2b的支持证据。
+
+- inherits_from_previous_cn：承接第6句的亲和机制。
+
+- changes_argument_state_cn：把时间维度加入机制。
+
+- sets_up_next_cn：为第11句‘其他框架无显著衰减’做对比。
+
+- failure_if_removed_cn：时间机制缺乏实证。
+
+- evidence_pointer：Section 1 第20段第10句
+
+### 91. Introduction P20 S11
+
+- order：91
+
+- locator：Introduction P20 S11
+
+- paraphrase_cn：相反，我们没有观察到强调发送者激励的其他框架有这种显著衰减。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：用对比支持亲社会依赖内在愉悦的解释。
+
+- inherits_from_previous_cn：承接第10句的时间调节。
+
+- changes_argument_state_cn：区分亲社会与其他框架的时间行为。
+
+- sets_up_next_cn：为第12句‘内在热情随时间衰减’做铺垫。
+
+- failure_if_removed_cn：对比证据缺失，时间机制不完整。
+
+- evidence_pointer：Section 1 第20段第11句
+
+### 92. Introduction P20 S12
+
+- order：92
+
+- locator：Introduction P20 S12
+
+- paraphrase_cn：这与顾客谈论产品的内在热情会随购买后时间衰减的事实一致。
+
+- move_code：MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：用文献解释时间衰减机制。
+
+- inherits_from_previous_cn：承接第11句的衰减。
+
+- changes_argument_state_cn：把实证结果连接到理论机制。
+
+- sets_up_next_cn：为第21段‘MTurk动机实验’做铺垫。
+
+- failure_if_removed_cn：衰减机制缺乏理论支撑。
+
+- evidence_pointer：Section 1 第20段第12句
+
+### 93. Introduction P21 S1
+
+- order：93
+
+- locator：Introduction P21 S1
+
+- paraphrase_cn：我们通过MTurk实验进一步研究潜在动机。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：开启机制实验的描述。
+
+- inherits_from_previous_cn：承接第20段的机制线索。
+
+- changes_argument_state_cn：从行为机制转向动机实验。
+
+- sets_up_next_cn：为第2句‘内疚减少’做铺垫。
+
+- failure_if_removed_cn：动机实验的引入缺失。
+
+- evidence_pointer：Section 1 第21段第1句
+
+### 94. Introduction P21 S2
+
+- order：94
+
+- locator：Introduction P21 S2
+
+- paraphrase_cn：受控实验结果提示，与在线推荐相关的亲社会CTA与其他CTA相比与顾客内疚感降低相关（H3a）。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告H3a的支持证据。
+
+- inherits_from_previous_cn：承接第1句的MTurk。
+
+- changes_argument_state_cn：确立内疚机制。
+
+- sets_up_next_cn：为第3句‘家人朋友收益作为动机’做铺垫。
+
+- failure_if_removed_cn：内疚机制缺乏证据。
+
+- evidence_pointer：Section 1 第21段第2句
+
+### 95. Introduction P21 S3
+
+- order：95
+
+- locator：Introduction P21 S3
+
+- paraphrase_cn：我们还发现亲社会框架下的顾客更可能报告家人和朋友收益作为分享动机（H3b）。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：报告H3b的支持证据。
+
+- inherits_from_previous_cn：承接第2句的内疚结果。
+
+- changes_argument_state_cn：确立利他动机机制。
+
+- sets_up_next_cn：为第4句‘利他驱动在线推荐’做总结。
+
+- failure_if_removed_cn：利他动机缺乏证据。
+
+- evidence_pointer：Section 1 第21段第3句
+
+### 96. Introduction P21 S4
+
+- order：96
+
+- locator：Introduction P21 S4
+
+- paraphrase_cn：总体而言，证据表明利他在推动在线推荐增加中很重要，并且可以被亲社会CTA激发。
+
+- move_code：RESULT
+
+- statement_status：author_inference
+
+- why_here_cn：把动机实验结果总结为利他机制确认。
+
+- inherits_from_previous_cn：承接第2-3句的结果。
+
+- changes_argument_state_cn：从个体结果提升为总体机制结论。
+
+- sets_up_next_cn：为第22段‘管理含义’做铺垫。
+
+- failure_if_removed_cn：机制总结缺失，理论贡献不完整。
+
+- evidence_pointer：Section 1 第21段第4句
+
+### 97. Introduction P22 S1
+
+- order：97
+
+- locator：Introduction P22 S1
+
+- paraphrase_cn：除了理论洞见，我们的研究还为企业提供了清晰的管理含义。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：引入管理贡献。
+
+- inherits_from_previous_cn：承接第21段的理论结论。
+
+- changes_argument_state_cn：从理论贡献转向实践贡献。
+
+- sets_up_next_cn：为第2句‘提供何时、对谁、如何建议’做铺垫。
+
+- failure_if_removed_cn：实践贡献缺失。
+
+- evidence_pointer：Section 1 第22段第1句
+
+### 98. Introduction P22 S2
+
+- order：98
+
+- locator：Introduction P22 S2
+
+- paraphrase_cn：基于实验结果，我们就企业应如何、对谁、何时发起分享号召以及为什么这样做提供具体指导。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出管理建议的结构。
+
+- inherits_from_previous_cn：承接第1句的管理含义。
+
+- changes_argument_state_cn：把管理贡献结构化。
+
+- sets_up_next_cn：为第3句‘更多使用亲社会成分’做铺垫。
+
+- failure_if_removed_cn：管理建议不具体。
+
+- evidence_pointer：Section 1 第22段第2句
+
+### 99. Introduction P22 S3
+
+- order：99
+
+- locator：Introduction P22 S3
+
+- paraphrase_cn：首先，我们的主结果建议，与传统智慧相反，企业应比现状更频繁地在CTA框架中使用亲社会成分。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出第一条管理建议。
+
+- inherits_from_previous_cn：承接第2句的建议结构。
+
+- changes_argument_state_cn：把主结果转化为‘使用亲社会CTA’。
+
+- sets_up_next_cn：为第4句‘优先高亲和客户’做铺垫。
+
+- failure_if_removed_cn：第一条管理建议缺失。
+
+- evidence_pointer：Section 1 第22段第3句
+
+### 100. Introduction P22 S4
+
+- order：100
+
+- locator：Introduction P22 S4
+
+- paraphrase_cn：其次，我们在客户细分中的异质性发现表明，企业应首先瞄准产品亲和度更高的客户。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出第二条管理建议。
+
+- inherits_from_previous_cn：承接第3句的建议。
+
+- changes_argument_state_cn：把异质性结果转化为目标策略。
+
+- sets_up_next_cn：为第5句‘购买后不久发送’做铺垫。
+
+- failure_if_removed_cn：目标策略建议缺失。
+
+- evidence_pointer：Section 1 第22段第4句
+
+### 101. Introduction P22 S5
+
+- order：101
+
+- locator：Introduction P22 S5
+
+- paraphrase_cn：第三，关于时机，企业应在顾客购买后不久向顾客发送推荐亲社会CTA。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出第三条管理建议。
+
+- inherits_from_previous_cn：承接第4句的建议。
+
+- changes_argument_state_cn：把时间结果转化为发送时机建议。
+
+- sets_up_next_cn：为第6句‘与购买CTA互补’做铺垫。
+
+- failure_if_removed_cn：时机建议缺失。
+
+- evidence_pointer：Section 1 第22段第5句
+
+### 102. Introduction P22 S6
+
+- order：102
+
+- locator：Introduction P22 S6
+
+- paraphrase_cn：有趣的是，正如我们在结论中讨论的，推荐的理想CTA也与购买的理想CTA互补。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：预告购买CTA与推荐CTA的整合，为结论的讨论埋线。
+
+- inherits_from_previous_cn：承接第5句的时机建议。
+
+- changes_argument_state_cn：把研究贡献扩展到更广的营销沟通。
+
+- sets_up_next_cn：为第7句‘这些洞见可能改变营销沟通’做铺垫。
+
+- failure_if_removed_cn：购买CTA互补性这一卖点缺失。
+
+- evidence_pointer：Section 1 第22段第6句
+
+### 103. Introduction P22 S7
+
+- order：103
+
+- locator：Introduction P22 S7
+
+- paraphrase_cn：整体而言，这些洞见有可能显著影响和改变企业的营销沟通。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：强调管理贡献的广泛影响。
+
+- inherits_from_previous_cn：承接第6句的整合。
+
+- changes_argument_state_cn：把管理建议升格为行业影响。
+
+- sets_up_next_cn：为第8句‘利己是主导’做铺垫。
+
+- failure_if_removed_cn：管理贡献的重要性不足。
+
+- evidence_pointer：Section 1 第22段第7句
+
+### 104. Introduction P22 S8
+
+- order：104
+
+- locator：Introduction P22 S8
+
+- paraphrase_cn：鉴于利己框架是行业主导CTA类型，这些发现可能提供改变目前实践的重要含义。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把‘改变实践’与行业现状对比。
+
+- inherits_from_previous_cn：承接第7句的行业影响。
+
+- changes_argument_state_cn：确立贡献的现实紧迫性。
+
+- sets_up_next_cn：为第9句‘平台已实施’做铺垫。
+
+- failure_if_removed_cn：贡献与实践现状的对比缺失。
+
+- evidence_pointer：Section 1 第22段第8句
+
+### 105. Introduction P22 S9
+
+- order：105
+
+- locator：Introduction P22 S9
+
+- paraphrase_cn：事实上，基于我们的实验结果，合作平台已实施亲社会CTA，每年影响数十万客户并产生显著经济回报。
+
+- move_code：CONTRIBUTION
+
+- statement_status：fact
+
+- why_here_cn：用平台实施证明贡献的现实落地。
+
+- inherits_from_previous_cn：承接第8句的改变实践。
+
+- changes_argument_state_cn：把贡献从‘建议’变为‘实际采用’。
+
+- sets_up_next_cn：为第23段‘文献贡献’做铺垫。
+
+- failure_if_removed_cn：实践落地的证据缺失。
+
+- evidence_pointer：Section 1 第22段第9句
+
+### 106. Introduction P23 S1
+
+- order：106
+
+- locator：Introduction P23 S1
+
+- paraphrase_cn：我们的研究汲取并贡献于信息系统、营销和经济学交叉领域的若干文献。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：开启文献贡献的定位。
+
+- inherits_from_previous_cn：承接第22段的实践贡献。
+
+- changes_argument_state_cn：从实践贡献转向文献贡献。
+
+- sets_up_next_cn：为第2句‘丰富数字WOM文献’做铺垫。
+
+- failure_if_removed_cn：文献贡献缺失。
+
+- evidence_pointer：Section 1 第23段第1句
+
+### 107. Introduction P23 S2
+
+- order：107
+
+- locator：Introduction P23 S2
+
+- paraphrase_cn：首先，我们的研究通过识别CTA——在线推荐程序中的关键元素——的因果效应，丰富了数字WOM文献。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：具体化第一项文献贡献。
+
+- inherits_from_previous_cn：承接第1句的文献定位。
+
+- changes_argument_state_cn：确立CTA因果效应作为贡献。
+
+- sets_up_next_cn：为第3句‘WOM因果识别困难’做铺垫。
+
+- failure_if_removed_cn：第一项贡献不明确。
+
+- evidence_pointer：Section 1 第23段第2句
+
+### 108. Introduction P23 S3
+
+- order：108
+
+- locator：Introduction P23 S3
+
+- paraphrase_cn：虽然设计在线推荐程序的关键元素以驱动社会传染一直受到学术和实践关注，但由于反射问题，识别WOM社会扩散的因果效应在方法上很困难。
+
+- move_code：PRIOR_KNOWLEDGE
+
+- statement_status：prior_literature
+
+- why_here_cn：说明方法难度，凸显本文的贡献。
+
+- inherits_from_previous_cn：承接第2句的CTA贡献。
+
+- changes_argument_state_cn：把贡献置于方法难度的背景下。
+
+- sets_up_next_cn：为第4句‘我们展示亲社会成分正向关联’做铺垫。
+
+- failure_if_removed_cn：贡献的难度背景缺失。
+
+- evidence_pointer：Section 1 第23段第3句
+
+### 109. Introduction P23 S4
+
+- order：109
+
+- locator：Introduction P23 S4
+
+- paraphrase_cn：通过两个大规模随机实验，我们表明与传统智慧和当前实践相反，CTA中的亲社会成分与驱动在线推荐和转化正相关。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把文献贡献落实为具体发现。
+
+- inherits_from_previous_cn：承接第3句的方法难度。
+
+- changes_argument_state_cn：把文献贡献与主结果绑定。
+
+- sets_up_next_cn：为第5句‘看似微小的措辞改变带来收入增长’做铺垫。
+
+- failure_if_removed_cn：文献贡献缺乏实证锚点。
+
+- evidence_pointer：Section 1 第23段第4句
+
+### 110. Introduction P23 S5
+
+- order：110
+
+- locator：Introduction P23 S5
+
+- paraphrase_cn：框架中一个看似微小的措辞改变就能带来推荐收入的显著增长。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：突出‘小改变大效果’，增强贡献的可读性和影响力。
+
+- inherits_from_previous_cn：承接第4句的实证结果。
+
+- changes_argument_state_cn：把贡献浓缩为‘词语重要’。
+
+- sets_up_next_cn：为第6句‘关闭最优设计缺口’做铺垫。
+
+- failure_if_removed_cn：贡献的冲击力不足。
+
+- evidence_pointer：Section 1 第23段第5句
+
+### 111. Introduction P23 S6
+
+- order：111
+
+- locator：Introduction P23 S6
+
+- paraphrase_cn：这样，我们的研究也补上了识别在线推荐程序最优设计的缺口（与Bapna等的激励结构、Sun等的消息设计、Belo和Li的阈值设计并列）。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把本文与相邻文献连接，定位为三设计维度中的CTA补齐。
+
+- inherits_from_previous_cn：承接第5句的贡献。
+
+- changes_argument_state_cn：把贡献定位到推荐设计文献体系。
+
+- sets_up_next_cn：为第24段‘论文结构’做铺垫。
+
+- failure_if_removed_cn：文献定位不完整，贡献显得孤立。
+
+- evidence_pointer：Section 1 第23段第6句
+
+### 112. Introduction P24 S1
+
+- order：112
+
+- locator：Introduction P24 S1
+
+- paraphrase_cn：本文其余部分结构如下。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：提供路线图，帮助读者导航。
+
+- inherits_from_previous_cn：承接第23段的贡献。
+
+- changes_argument_state_cn：从贡献摘要转向论文结构。
+
+- sets_up_next_cn：为第2-5句的章节预览做铺垫。
+
+- failure_if_removed_cn：读者缺乏阅读导航。
+
+- evidence_pointer：Section 1 第24段第1句
+
+### 113. Introduction P24 S2
+
+- order：113
+
+- locator：Introduction P24 S2
+
+- paraphrase_cn：第2节描述制度细节和实验设计，第3节给出实证策略，第4节报告结果，第5节给出额外稳健性检验，第6节讨论含义并得出结论。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：给出完整的结构预览。
+
+- inherits_from_previous_cn：承接第1句的路线图。
+
+- changes_argument_state_cn：确定全文结构。
+
+- sets_up_next_cn：引导读者进入正文。
+
+- failure_if_removed_cn：全文结构不清晰。
+
+- evidence_pointer：Section 1 第24段第2-5句
+
+## 引言逐段图谱
+
+### 1. 1
+
+- paragraph：P1
+
+- opening_move_cn：从常识切入：人们购买前咨询朋友。
+
+- development_move_cn：逐步把常识转为企业推荐计划，并定义CTA。
+
+- pivot_move_cn：在‘用激励加速有机WOM’处转折，指出动机混合。
+
+- closing_move_cn：用Gneezy等文献把挑战升格为概念困境，并落到发送者的心理冲突。
+
+- paragraph_job_cn：建立全文的理论问题：推荐计划的内在—外在动机困境。
+
+### 2. 2
+
+- paragraph：P2
+
+- opening_move_cn：宣告本文首次在CTA框架层面指出困境。
+
+- development_move_cn：说明本文不仅指出问题还提供两个田野实验的解决方案。
+
+- pivot_move_cn：从‘指出困境’转向‘因果证明亲社会CTA更优’。
+
+- closing_move_cn：预告机制分析和MTurk实验，为后文多层次证据铺设。
+
+- paragraph_job_cn：在引言开头直接给出核心贡献声明。
+
+### 3. 3
+
+- paragraph：P3
+
+- opening_move_cn：用‘文字游戏’强调操纵的极简性。
+
+- development_move_cn：说明固定等分激励和接收者消息，只操纵CTA措辞。
+
+- pivot_move_cn：从‘我们做了什么’转向‘这一设计能隔离什么’。
+
+- closing_move_cn：指出设计可以在外在激励存在下隔离内在亲社会驱动力的价值。
+
+- paragraph_job_cn：解释实验操纵的核心设计原则，为因果识别奠定基础。
+
+### 4. 4
+
+- paragraph：P4
+
+- opening_move_cn：用‘科学仍萌芽’过渡到文献缺口。
+
+- development_move_cn：把推荐设计拆成激励、CTA、消息三个维度，并指出CTA无人研究。
+
+- pivot_move_cn：从‘三个维度’收窄到‘CTA缺口’。
+
+- closing_move_cn：把缺口转化为本文研究问题：固定激励和消息，只变CTA框架。
+
+- paragraph_job_cn：系统构造文献缺口，定位本文的研究空隙。
+
+### 5. 5
+
+- paragraph：P5
+
+- opening_move_cn：承接研究问题，给出核心设计决定：保持激励结构相同，只变CTA强调。
+
+- development_move_cn：解释发送者仍会感知公平但可能被CTA影响视角。
+
+- pivot_move_cn：从‘设计’转向‘重要性’。
+
+- closing_move_cn：强调填补缺口至关重要。
+
+- paragraph_job_cn：把文献缺口翻译为具体实验设计原则，并强化研究动机。
+
+### 6. 6
+
+- paragraph：P6
+
+- opening_move_cn：把在线推荐定义为带激励的WOM机制。
+
+- development_move_cn：提出顾客愉悦是WOM扩散基石，并推导出利他考虑是成功推荐的必要条件。
+
+- pivot_move_cn：从‘愉悦’扩展到‘温光利他’和‘内疚减少’两条附加机制。
+
+- closing_move_cn：说明研究设计旨在捕捉总效应。
+
+- paragraph_job_cn：建立亲社会CTA的理论基础：为什么强调接收者收益能起作用。
+
+### 7. 7
+
+- paragraph：P7
+
+- opening_move_cn：综合前述理论，预期亲社会心态带来更高质量倡导。
+
+- development_move_cn：用实践观察说明企业并未体现理论洞见，并用已有激励设计研究支持亲社会成分。
+
+- pivot_move_cn：从‘理论应有’转向‘实践现实’再转向‘已有证据支持’。
+
+- closing_move_cn：用Sun等的可分享代码发现进一步佐证亲社会行为。
+
+- paragraph_job_cn：用理论与实践的反差制造研究张力，并用相邻文献为亲社会成分提供实证类比。
+
+### 8. 8
+
+- paragraph：P8
+
+- opening_move_cn：聚焦CTA框架的实践现状：亲社会CTA很少见。
+
+- development_move_cn：解释企业偏爱利己框架的原因，并定义利己与公平CTA。
+
+- pivot_move_cn：从‘实践分布’转向‘可控马赛’。
+
+- closing_move_cn：宣布用随机田野实验进行四组马赛，并辅以机制分析。
+
+- paragraph_job_cn：把实践观察转化为实验设计，确立四种框架的比较方案。
+
+### 9. 9
+
+- paragraph：P9
+
+- opening_move_cn：重申研究兴趣：亲社会框架与传统智慧相矛盾。
+
+- development_move_cn：给出两种对立预测：利己自我最大化与公平折中。
+
+- pivot_move_cn：从‘对立预测’收束为‘有趣的经验问题’。
+
+- closing_move_cn：宣布检验假设。
+
+- paragraph_job_cn：把理论对立转化为可检验的经验问题，为假设铺垫。
+
+### 10. 10
+
+- paragraph：P10-P12
+
+- opening_move_cn：给出H1a主效应假设。
+
+- development_move_cn：用两阶段过程说明接收者结果的重要性，并讨论选择性可能降低数量但提高转化。
+
+- pivot_move_cn：从‘数量可能减少’转向‘结果仍可能更好’。
+
+- closing_move_cn：给出H1b。
+
+- paragraph_job_cn：建立行为与结果两个维度的主效应假设。
+
+### 11. 11
+
+- paragraph：P13-P14
+
+- opening_move_cn：从利他驱动出发，提出产品亲和作为调节变量。
+
+- development_move_cn：解释高亲和顾客更可能投射自身评价到朋友，并用重复购买和NPS度量亲和。
+
+- pivot_move_cn：从‘机制’转向‘度量’。
+
+- closing_move_cn：给出H2a。
+
+- paragraph_job_cn：建立客户愉悦作为机制的调节假设。
+
+### 12. 12
+
+- paragraph：P15-P16
+
+- opening_move_cn：提出购买新鲜度作为另一调节变量。
+
+- development_move_cn：解释内在愉悦随时间衰减而外在激励不衰减。
+
+- pivot_move_cn：从‘亲社会衰减’转向‘利己不衰减’的对比。
+
+- closing_move_cn：给出H2b。
+
+- paragraph_job_cn：建立时间维度调节假设，为‘购买后不久发送’建议提供依据。
+
+### 13. 13
+
+- paragraph：P17-P18
+
+- opening_move_cn：提出亲社会框架减少内疚和增强利他动机。
+
+- development_move_cn：说明利他动机导致选择性分享。
+
+- pivot_move_cn：从‘动机’转向‘行为结果’。
+
+- closing_move_cn：给出H3a和H3b。
+
+- paragraph_job_cn：建立动机层面的假设，为MTurk实验设定目标。
+
+### 14. 14
+
+- paragraph：P19
+
+- opening_move_cn：宣布严格检验动机并理解最优CTA。
+
+- development_move_cn：介绍合作平台、产品类型、操纵和数据收集，并说明额外实验与MTurk实验。
+
+- pivot_move_cn：从‘我们怎么做’转向‘这些数据能识别什么’。
+
+- closing_move_cn：总结多来源数据支撑因果识别与机制探索。
+
+- paragraph_job_cn：系统描述研究设计和数据来源，预告多层实证策略。
+
+### 15. 15
+
+- paragraph：P20
+
+- opening_move_cn：报告主要发现：与理论预测一致而与传统智慧相反。
+
+- development_move_cn：依次报告主效应、异质性（H2a）和时间调节（H2b）。
+
+- pivot_move_cn：从‘主效应’转向‘机制解释’。
+
+- closing_move_cn：用兴奋衰减文献解释时间结果。
+
+- paragraph_job_cn：在引言中预告核心实证结果，让读者带着结论读方法。
+
+### 16. 16
+
+- paragraph：P21
+
+- opening_move_cn：引入MTurk动机实验。
+
+- development_move_cn：报告内疚降低和利他动机识别的结果。
+
+- pivot_move_cn：从‘个体结果’转向‘总体机制结论’。
+
+- closing_move_cn：总结利他在推动在线推荐中的重要性。
+
+- paragraph_job_cn：预告心理机制证据，补全‘为什么亲社会有效’。
+
+### 17. 17
+
+- paragraph：P22
+
+- opening_move_cn：引入管理含义。
+
+- development_move_cn：给出三条建议：使用亲社会成分、优先高亲和客户、购买后不久发送。
+
+- pivot_move_cn：从‘建议’转向‘行业影响’。
+
+- closing_move_cn：用平台实施证明贡献落地。
+
+- paragraph_job_cn：把研究结果转化为可操作的管理建议。
+
+### 18. 18
+
+- paragraph：P23
+
+- opening_move_cn：开始文献贡献定位。
+
+- development_move_cn：说明本文丰富数字WOM文献，克服反射问题，并补上推荐设计三维度中的CTA缺口。
+
+- pivot_move_cn：从‘一般贡献’转向‘具体文献位置’。
+
+- closing_move_cn：把本文与激励设计、消息设计、阈值设计并列。
+
+- paragraph_job_cn：把贡献嵌入IS、营销和经济学的交叉文献。
+
+### 19. 19
+
+- paragraph：P24
+
+- opening_move_cn：提供路线图。
+
+- development_move_cn：逐节说明结构。
+
+- pivot_move_cn：无转折，直接列出章节。
+
+- closing_move_cn：引导读者进入正文。
+
+- paragraph_job_cn：给出全文导航。
+
+## 理论到设计逐句图谱
+
+### 1. Section 2 P1 S1
+
+- order：1
+
+- locator：Section 2 P1 S1
+
+- paraphrase_cn：我们的实验设计受到经济学中将个体按自利/他人偏好分类的研究启发。
+
+- move_code：THEORY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：说明CTA类型学的理论来源，避免设计沦为工程启发。
+
+- inherits_from_previous_cn：承接引言中的三设计维度。
+
+- changes_argument_state_cn：把操纵变量上升到理论分类。
+
+- sets_up_next_cn：为三类CTA的操作化提供依据。
+
+- failure_if_removed_cn：CTA三类划分缺乏理论正当性。
+
+- evidence_pointer：Section 2 第1段第1句
+
+### 2. Section 2 P1 S2
+
+- order：2
+
+- locator：Section 2 P1 S2
+
+- paraphrase_cn：基于此，我们测试三类CTA：利己（强调发送者奖励）、公平（强调双方奖励）、亲社会（强调接收者奖励）。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把理论分类直接翻译为三种框架。
+
+- inherits_from_previous_cn：承接第1句的理论分类。
+
+- changes_argument_state_cn：确立三种处理框架的操作定义。
+
+- sets_up_next_cn：为图3的邮件操纵提供依据。
+
+- failure_if_removed_cn：处理组的定义缺失。
+
+- evidence_pointer：Section 2 第1段第2句
+
+### 3. Section 2 P3 S1
+
+- order：3
+
+- locator：Section 2 P3 S1
+
+- paraphrase_cn：我们创建四个版本的邮件和网页，只改变同一激励方案的框架，即双方各得70%折扣券的等分奖励。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把理论要求转化为具体实验材料。
+
+- inherits_from_previous_cn：承接第1段的三类CTA。
+
+- changes_argument_state_cn：确定激励类型和操纵材料。
+
+- sets_up_next_cn：为随机分配10万客户做铺垫。
+
+- failure_if_removed_cn：实验材料不明确。
+
+- evidence_pointer：Section 2 第3段第1句
+
+### 4. Section 2 P3 S3
+
+- order：4
+
+- locator：Section 2 P3 S3
+
+- paraphrase_cn：关键是，所有其他因素（等分激励和接收者消息）在四个实验组中保持恒定。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：确保唯一差异是CTA框架，这是因果识别的核心。
+
+- inherits_from_previous_cn：承接第3句的实验材料。
+
+- changes_argument_state_cn：把‘只有措辞变化’确立为设计铁律。
+
+- sets_up_next_cn：为第5段‘邮件发送控制’做铺垫。
+
+- failure_if_removed_cn：因果归因不再干净。
+
+- evidence_pointer：Section 2 第3段第3句
+
+### 5. Section 2 P5 S1
+
+- order：5
+
+- locator：Section 2 P5 S1
+
+- paraphrase_cn：邮件实现给了我们很强的实验控制：目标预先抽取的随机客户、私有且只与邮件链接的网页、只发送一次邮件。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明设计如何排除干扰、跨组污染和重复试验选择偏差。
+
+- inherits_from_previous_cn：承接第4句的恒定设计。
+
+- changes_argument_state_cn：把内部有效性从原则落到实施细节。
+
+- sets_up_next_cn：为第6段‘随机化保证正交性’做铺垫。
+
+- failure_if_removed_cn：内部有效性的实施细节缺失。
+
+- evidence_pointer：Section 2 第5段第1-3句
+
+### 6. Section 2 P6 S1
+
+- order：6
+
+- locator：Section 2 P6 S1
+
+- paraphrase_cn：随机化确保邮件中的CTA与客户过去行为正交，因此任何差异都只归因于收到的CTA。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：给出因果推断的识别逻辑。
+
+- inherits_from_previous_cn：承接第5段的控制。
+
+- changes_argument_state_cn：确立结果的因果解释。
+
+- sets_up_next_cn：为第3节回归模型提供依据。
+
+- failure_if_removed_cn：因果主张失去机制基础。
+
+- evidence_pointer：Section 2 第6段第1句
+
+### 7. Section 3 P1
+
+- order：7
+
+- locator：Section 3 P1
+
+- paraphrase_cn：为识别不同CTA的效果，我们在发送者层面运行带或不带控制变量的回归模型，用线性和OLS。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：给出估计方程，把随机设计与统计推断连接。
+
+- inherits_from_previous_cn：承接第2节的随机化。
+
+- changes_argument_state_cn：确立估计方法。
+
+- sets_up_next_cn：为表2的主效应结果做铺垫。
+
+- failure_if_removed_cn：统计方法缺失，结果不可解释。
+
+- evidence_pointer：Section 3 式(1)
+
+### 8. Section 3 P2
+
+- order：8
+
+- locator：Section 3 P2
+
+- paraphrase_cn：我们用NPS、过去购买行为和购买新鲜度等协变量增强估计精度并检验调节。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明调节变量的来源和用途。
+
+- inherits_from_previous_cn：承接第1句的回归框架。
+
+- changes_argument_state_cn：把客户亲和与时间维度引入模型。
+
+- sets_up_next_cn：为表2带控制和表4调节分析提供依据。
+
+- failure_if_removed_cn：调节分析缺少统计基础。
+
+- evidence_pointer：Section 3 式(2)及相关文字
+
+### 9. Section 3 P3
+
+- order：9
+
+- locator：Section 3 P3
+
+- paraphrase_cn：我们用交互模型检验不同客户特征如何调节CTA效果（H2a和H2b）。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：给出调节效应的估计方程。
+
+- inherits_from_previous_cn：承接第2句的协变量。
+
+- changes_argument_state_cn：把调节假设转化为可估计模型。
+
+- sets_up_next_cn：为表4结果做铺垫。
+
+- failure_if_removed_cn：调节假设无法被检验。
+
+- evidence_pointer：Section 3 式(3)
+
+## 制品设计理由逐句图谱
+
+### 1. Section 2 P1 S2
+
+- order：1
+
+- locator：Section 2 P1 S2
+
+- paraphrase_cn：按Andreoni-Miller的自我/他人偏好分类，将CTA操作化为利己、公平、亲社会三类。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：说明三种CTA的类型学来自经济学理论，而非随意选择。
+
+- inherits_from_previous_cn：承接第1句的理论动机。
+
+- changes_argument_state_cn：把操纵变量理论化。
+
+- sets_up_next_cn：为邮件内容的措辞差异提供依据。
+
+- failure_if_removed_cn：三类框架的划分缺乏理论支撑。
+
+- evidence_pointer：Section 2 第1段第2句
+
+### 2. Section 2 P3 S2
+
+- order：2
+
+- locator：Section 2 P3 S2
+
+- paraphrase_cn：我们随机抽取过去四个月购买过的10万客户并随机分配到四组。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明样本选择和随机分配，保证基线可比。
+
+- inherits_from_previous_cn：承接第3段第1句的实验材料。
+
+- changes_argument_state_cn：建立实验样本和分组。
+
+- sets_up_next_cn：为随机化检查做铺垫。
+
+- failure_if_removed_cn：样本与随机化缺失，因果推断不可行。
+
+- evidence_pointer：Section 2 第3段第2句
+
+### 3. Section 2 P3 S4
+
+- order：3
+
+- locator：Section 2 P3 S4
+
+- paraphrase_cn：每封邮件改变主题，强调同一激励方案的不同方面，并使用不同的CTA按钮措辞。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：说明CTA操纵的具体维度：主题、正文强调和按钮措辞。
+
+- inherits_from_previous_cn：承接第3段第3句的恒定设计。
+
+- changes_argument_state_cn：具体化操纵的实现方式。
+
+- sets_up_next_cn：为图3的邮件示例做铺垫。
+
+- failure_if_removed_cn：操纵的具体内容不明确，读者无法评估构念效度。
+
+- evidence_pointer：Section 2 第3段第4句
+
+### 4. Section 2 P4 S1
+
+- order：4
+
+- locator：Section 2 P4 S1
+
+- paraphrase_cn：邮件在同一天同一时间只发送一次，网页是私有的且只与相应邮件链接。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：防止跨组干扰和重复试验选择偏差。
+
+- inherits_from_previous_cn：承接第3段的设计。
+
+- changes_argument_state_cn：确立内部有效性的实施保障。
+
+- sets_up_next_cn：为第5段‘邮件实现给强控制’做铺垫。
+
+- failure_if_removed_cn：跨组污染和选择偏差的风险无法排除。
+
+- evidence_pointer：Section 2 第4段第1句
+
+### 5. Section 2 P4 S2
+
+- order：5
+
+- locator：Section 2 P4 S2
+
+- paraphrase_cn：每个客户有一周时间发送最多五个推荐，接收者消息不包含发送者激励信息且各组相同。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：标准化推荐过程和接收者消息，确保结果差异来自CTA。
+
+- inherits_from_previous_cn：承接第4段第1句的邮件控制。
+
+- changes_argument_state_cn：消除接收者消息差异和推荐上限差异。
+
+- sets_up_next_cn：为第6段‘随机化保证正交’做铺垫。
+
+- failure_if_removed_cn：接收者消息差异会污染结果。
+
+- evidence_pointer：Section 2 第4段第2句
+
+### 6. Section 2 P5 S2
+
+- order：6
+
+- locator：Section 2 P5 S2
+
+- paraphrase_cn：通过目标预先抽取的随机客户，我们能确保随机化程序有效。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：解释为什么随机抽客户能保证内部效度。
+
+- inherits_from_previous_cn：承接第5段第1句的强控制。
+
+- changes_argument_state_cn：把随机化与结果有效性连接。
+
+- sets_up_next_cn：为表1的平衡检验做铺垫。
+
+- failure_if_removed_cn：随机化合理性无法评估。
+
+- evidence_pointer：Section 2 第5段第2句
+
+## Study开头、过渡与收束图谱
+
+### 1. Section 4.1 开头至末尾
+
+- study_or_phase：主田野实验（Experiment 1）
+
+- locator：Section 4.1 开头至末尾
+
+- opening_cn：“我们首先报告不同CTA对三个结果的主效应”并先做随机化平衡检查。
+
+- design_rationale_cn：用表1证明随机化有效，再用表2报告主效应。
+
+- metric_rationale_cn：用三个结果变量（是否推荐、推荐总数、接收者购买数）分别刻画行为与结果，并报告T3-T1、T3-T2、T2-T1的成对p值。
+
+- closure_cn：总结CTA措辞改变能显著影响推荐行为与结果，预告调节分析。
+
+- transition_to_next_cn：“有趣的是，如果预算受限企业想瞄准高亲和客户……调节分析显示亲社会框架占优。”
+
+- evidence_pointers：Section 4.1, Tables 1-3, Figure 2
+
+### 2. Section 4.2 开头至末尾
+
+- study_or_phase：异质性/调节分析
+
+- locator：Section 4.2 开头至末尾
+
+- opening_cn：“已经识别亲社会框架的有效性，我们进一步通过调节分析检验顾客愉悦的作用。”
+
+- design_rationale_cn：用重复购买、NPS和购买新鲜度与处理组交互，检验H2a和H2b。
+
+- metric_rationale_cn：使用总推荐数作为结果变量；重复购买者以中位数2次以上定义；NPS来自实验前调查；WeeksSinceLastPurchase衡量时点。
+
+- closure_cn：总结亲社会框架对高亲和客户和近期购买客户更有效，给出目标与时机建议。
+
+- transition_to_next_cn：“为了进一步调查解释主结果的机制，我们招募2000名Turker进行受控在线实验。”
+
+- evidence_pointers：Section 4.2, Table 4
+
+### 3. Section 4.3 开头至末尾
+
+- study_or_phase：MTurk动机实验与中介分析
+
+- locator：Section 4.3 开头至末尾
+
+- opening_cn：“为进一步调查解释主结果的机制，我们招募2000名Turker进行受控在线实验。”
+
+- design_rationale_cn：在去情境化环境中重复相同的四组CTA邮件，测量假设性分享意愿和四类动机。
+
+- metric_rationale_cn：用7点Likert量表测量激励满意、利他、公平感和内疚；用Baron-Kenny四步中介分析。
+
+- closure_cn：亲社会CTA减少内疚并增强利他，从而同时影响分享决策和推荐结果。
+
+- transition_to_next_cn：“为进一步理解某组用户是否更选择性地分享，我们与第三方数据商合作。”
+
+- evidence_pointers：Section 4.3, Figure 5, Tables 5-7
+
+### 4. Section 4.4 开头至末尾
+
+- study_or_phase：目标受众与推荐漏斗分析
+
+- locator：Section 4.4 开头至末尾
+
+- opening_cn：“为进一步理解用户是否更选择性地分享，我们与第三方数据商合作，用邮箱匹配人口信息。”
+
+- design_rationale_cn：构造target_audience和verified_email两个变量，并分析打开、条件发送、好友转化和发送者转化。
+
+- metric_rationale_cn：把平台多数客户人口特征（35-44岁女性）定义为目标受众；用回归比较各组。
+
+- closure_cn：亲社会框架既分享更多也分享到更可能受益的朋友，总体上带来最高总转化。
+
+- transition_to_next_cn：“由于折扣券可能对发送者吸引力低，我们用免费相册书进行第二实验。”
+
+- evidence_pointers：Section 4.4, Table 8, Figure 6, Table 9
+
+### 5. Section 5.1 开头至末尾
+
+- study_or_phase：第二个田野实验（Experiment 2）
+
+- locator：Section 5.1 开头至末尾
+
+- opening_cn：“由于我们研究的是耐用品平台，折扣券可能对发送者吸引力较低，因此我们进行额外实验检验当激励对所有用户有吸引力时结果是否成立。”
+
+- design_rationale_cn：用免费相册书作为更高吸引力奖励，并纳入过去14个月购买未接触过推荐计划的客户。
+
+- metric_rationale_cn：使用与主实验相同的三个结果变量，并重复调节分析。
+
+- closure_cn：在发送端公平框架与亲社会接近，但接收者结果端亲社会仍唯一占优；调节分析在第二实验中重现。
+
+- transition_to_next_cn：“为排除自我推荐和虚假邮箱的污染，我们进行欺诈行为检验。”
+
+- evidence_pointers：Section 5.1, Figure 4, Tables 10-12
+
+### 6. Section 5.2 开头至末尾
+
+- study_or_phase：欺诈行为稳健性检验
+
+- locator：Section 5.2 开头至末尾
+
+- opening_cn：“在我们的设计中，接收者不转化发送者也受益，因此可能有发送者输入虚假邮箱或自己邮箱。”
+
+- design_rationale_cn：用第三方数据构造verified_email变量，并核查使用好友折扣券的订单送货地址。
+
+- metric_rationale_cn：验证邮箱匹配率>75%；检查订单地址是否等于发送者历史地址。
+
+- closure_cn：无效邮箱极少且无自我推荐订单，主结果不受作弊污染。
+
+- transition_to_next_cn：“为进一步理解潜在影响和可推广性，我们调查了80多个推荐计划。”
+
+- evidence_pointers：Section 5.2, Table 8 column (2)
+
+### 7. Section 5.3 开头至末尾
+
+- study_or_phase：行业实践扫描
+
+- locator：Section 5.3 开头至末尾
+
+- opening_cn：“为进一步理解潜在影响和可推广性，我们调查并识别了80多个不同情境的推荐计划。”
+
+- design_rationale_cn：筛选货币激励与本文类似的计划，人工编码CTA框架为利己、公平、亲社会。
+
+- metric_rationale_cn：统计各框架占比，与本文结果对比。
+
+- closure_cn：利己和公平框架占约89%，亲社会仅约11%，说明实践与理论最优存在差距。
+
+- transition_to_next_cn：“我们在下一节提供更多讨论。”
+
+- evidence_pointers：Section 5.3, 相关脚注
+
+## 讨论与贡献逐句图谱
+
+### 1. Conclusion P1 S1
+
+- order：1
+
+- locator：Conclusion P1 S1
+
+- paraphrase_cn：企业日益依赖数字WOM来增加客户基础和产品销量。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：重述背景，为结论收拢话题。
+
+- inherits_from_previous_cn：承接全文的推荐营销背景。
+
+- changes_argument_state_cn：重新定位讨论的现实场景。
+
+- sets_up_next_cn：引出第2句‘理解CTA效果很重要’。
+
+- failure_if_removed_cn：结论缺乏背景重现。
+
+- evidence_pointer：Section 6 第1段第1句
+
+### 2. Conclusion P1 S2
+
+- order：2
+
+- locator：Conclusion P1 S2
+
+- paraphrase_cn：鉴于已有激励设计和消息设计的知识，理解不同CTA对顾客推荐行为和结果的影响很重要。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把结论与引言的三设计维度缺口连接。
+
+- inherits_from_previous_cn：承接第1句的推荐营销。
+
+- changes_argument_state_cn：重申CTA缺口的理论意义。
+
+- sets_up_next_cn：为第3句‘两个随机实验的证伪设计’做铺垫。
+
+- failure_if_removed_cn：结论与引言缺口的连接断裂。
+
+- evidence_pointer：Section 6 第1段第2句
+
+### 3. Conclusion P1 S3
+
+- order：3
+
+- locator：Conclusion P1 S3
+
+- paraphrase_cn：我们设计并实施了证伪门槛不断提高的两个随机田野实验。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：强调证据的严谨性。
+
+- inherits_from_previous_cn：承接第2句的研究问题。
+
+- changes_argument_state_cn：把结论建立在严格证伪基础上。
+
+- sets_up_next_cn：为第4句‘10万客户样本’做铺垫。
+
+- failure_if_removed_cn：结论的证据强度缺乏说明。
+
+- evidence_pointer：Section 6 第1段第3句
+
+### 4. Conclusion P1 S4
+
+- order：4
+
+- locator：Conclusion P1 S4
+
+- paraphrase_cn：每个实验中我们向不同组别的10万客户发送只在CTA措辞上不同的邮件。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：重申实验设计和样本规模。
+
+- inherits_from_previous_cn：承接第3句的实验。
+
+- changes_argument_state_cn：强化操纵纯净性和样本力度。
+
+- sets_up_next_cn：为第5句‘设计降低内部效度风险’做铺垫。
+
+- failure_if_removed_cn：实验细节在结论中缺失。
+
+- evidence_pointer：Section 6 第1段第4句
+
+### 5. Conclusion P1 S5
+
+- order：5
+
+- locator：Conclusion P1 S5
+
+- paraphrase_cn：我们的设计降低了随机化有效性、干扰可能性和跨组选择偏差等风险。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明设计为何值得信赖。
+
+- inherits_from_previous_cn：承接第4句的实验设计。
+
+- changes_argument_state_cn：确立内部有效性。
+
+- sets_up_next_cn：为第6句‘亲社会CTA最有效’做铺垫。
+
+- failure_if_removed_cn：内部有效性主张缺失。
+
+- evidence_pointer：Section 6 第1段第5句
+
+### 6. Conclusion P1 S6
+
+- order：6
+
+- locator：Conclusion P1 S6
+
+- paraphrase_cn：我们发现亲社会CTA框架在驱动更多推荐和更好结果方面最有效。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：总结核心实证发现。
+
+- inherits_from_previous_cn：承接第5句的设计可信度。
+
+- changes_argument_state_cn：重申主效应。
+
+- sets_up_next_cn：为第7句‘MTurk和机制分析’做铺垫。
+
+- failure_if_removed_cn：核心结论在讨论中缺失。
+
+- evidence_pointer：Section 6 第1段第6句
+
+### 7. Conclusion P1 S7
+
+- order：7
+
+- locator：Conclusion P1 S7
+
+- paraphrase_cn：此外，我们进行了MTurk实验并进行了多项分析来检验潜在机制。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：提醒读者机制证据也存在。
+
+- inherits_from_previous_cn：承接第6句的主效应。
+
+- changes_argument_state_cn：把结论扩展到机制层面。
+
+- sets_up_next_cn：为第8句‘减少内疚和更好目标选择’做铺垫。
+
+- failure_if_removed_cn：机制结论缺失。
+
+- evidence_pointer：Section 6 第1段第7句
+
+### 8. Conclusion P1 S8
+
+- order：8
+
+- locator：Conclusion P1 S8
+
+- paraphrase_cn：我们发现亲社会框架通过减少发送者的内疚和鼓励更好的目标选择来提高推荐过程，进而带来更高转化率。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：总结机制路径。
+
+- inherits_from_previous_cn：承接第7句的机制分析。
+
+- changes_argument_state_cn：确立内疚与目标选择两条机制。
+
+- sets_up_next_cn：为第2段‘理论贡献’做铺垫。
+
+- failure_if_removed_cn：机制结论缺失，贡献不完整。
+
+- evidence_pointer：Section 6 第1段第8句
+
+### 9. Conclusion P2 S1
+
+- order：9
+
+- locator：Conclusion P2 S1
+
+- paraphrase_cn：我们的发现具有与假设相关的理论和实践含义。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：开启理论贡献部分。
+
+- inherits_from_previous_cn：承接第1段的总结。
+
+- changes_argument_state_cn：从结果转向贡献。
+
+- sets_up_next_cn：为第2句重述推荐营销前提做铺垫。
+
+- failure_if_removed_cn：贡献部分缺乏引入。
+
+- evidence_pointer：Section 6 第2段第1句
+
+### 10. Conclusion P2 S2-S7
+
+- order：10
+
+- locator：Conclusion P2 S2-S7
+
+- paraphrase_cn：重述推荐营销的有机WOM前提、动机混合困境和先前研究的次优结论，然后指出本文展示如何通过框架化CTA接近有机WOM原意并保留激励收益。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把全文的核心理论困境重新放到贡献中心，说明解决方案。
+
+- inherits_from_previous_cn：承接第1句的理论含义。
+
+- changes_argument_state_cn：把贡献定义为‘解决内在—外在困境’。
+
+- sets_up_next_cn：为第8句‘亲社会成分是必要条件’做铺垫。
+
+- failure_if_removed_cn：理论贡献无法与引言困境闭环。
+
+- evidence_pointer：Section 6 第2段第2-7句
+
+### 11. Conclusion P2 S8
+
+- order：11
+
+- locator：Conclusion P2 S8
+
+- paraphrase_cn：我们假设并通过两个大规模随机田野实验和MTurk实验因果证明，亲社会成分（强调接收者收益）是成功推荐程序设计的必要条件。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出全文最强的因果主张。
+
+- inherits_from_previous_cn：承接第2段第2-7句的困境。
+
+- changes_argument_state_cn：把贡献升格为‘必要条件’。
+
+- sets_up_next_cn：为第9句‘亲社会心态与顾客愉悦对齐创造社会传染’做铺垫。
+
+- failure_if_removed_cn：最强贡献主张缺失。
+
+- evidence_pointer：Section 6 第2段第8句
+
+### 12. Conclusion P2 S9
+
+- order：12
+
+- locator：Conclusion P2 S9
+
+- paraphrase_cn：实验结果为亲社会心态与顾客愉悦对齐在创造社会传染中迄今未被充分研究的角色提供了具体因果支持。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：把结果与理论中的‘对齐’概念绑定，强化理论贡献。
+
+- inherits_from_previous_cn：承接第8句的必要条件。
+
+- changes_argument_state_cn：把贡献连接到社会传染文献。
+
+- sets_up_next_cn：为第3段‘关闭推荐设计缺口’做铺垫。
+
+- failure_if_removed_cn：理论贡献缺乏与文献的连接。
+
+- evidence_pointer：Section 6 第2段第9句
+
+### 13. Conclusion P3 S1
+
+- order：13
+
+- locator：Conclusion P3 S1
+
+- paraphrase_cn：此外，我们的研究补上了推荐程序最优设计文献中的缺口。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：重申三设计维度缺口并宣布补齐。
+
+- inherits_from_previous_cn：承接第2段的理论贡献。
+
+- changes_argument_state_cn：把贡献定位到推荐设计文献。
+
+- sets_up_next_cn：为第2句‘前人研究了激励和消息但没研究CTA’做铺垫。
+
+- failure_if_removed_cn：CTA缺口的封闭声明缺失。
+
+- evidence_pointer：Section 6 第3段第1句
+
+### 14. Conclusion P3 S2
+
+- order：14
+
+- locator：Conclusion P3 S2
+
+- paraphrase_cn：先前研究调查了激励设计和消息设计，但没有研究如何最优设计CTA来让客户发起推荐。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：重述缺口，强调本文的位置。
+
+- inherits_from_previous_cn：承接第1句的缺口。
+
+- changes_argument_state_cn：明确本文填补CTA缺口。
+
+- sets_up_next_cn：为第3句‘我们保持其他方面恒定’做铺垫。
+
+- failure_if_removed_cn：缺口重述缺失，贡献不清晰。
+
+- evidence_pointer：Section 6 第3段第2句
+
+### 15. Conclusion P3 S3
+
+- order：15
+
+- locator：Conclusion P3 S3
+
+- paraphrase_cn：我们通过保持激励分配和接收者消息恒定，研究如何最优框架CTA。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：强调设计的识别策略，突出贡献的因果性。
+
+- inherits_from_previous_cn：承接第2句的缺口。
+
+- changes_argument_state_cn：把贡献与干净识别绑定。
+
+- sets_up_next_cn：为第4句‘亲社会CTA带来更高推荐可能性和更好结果’做铺垫。
+
+- failure_if_removed_cn：贡献的方法基础缺失。
+
+- evidence_pointer：Section 6 第3段第3句
+
+### 16. Conclusion P3 S4
+
+- order：16
+
+- locator：Conclusion P3 S4
+
+- paraphrase_cn：我们的结果显示推荐亲社会CTA带来更高推荐可能性和更好推荐结果，且效果显著高于利己和公平框架。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：把贡献重新挂回实证结果。
+
+- inherits_from_previous_cn：承接第3句的设计。
+
+- changes_argument_state_cn：重申主效应。
+
+- sets_up_next_cn：为第5句‘企业应使用亲社会框架’做铺垫。
+
+- failure_if_removed_cn：贡献缺少实证锚点。
+
+- evidence_pointer：Section 6 第3段第4句
+
+### 17. Conclusion P3 S5
+
+- order：17
+
+- locator：Conclusion P3 S5
+
+- paraphrase_cn：因此公司应在其推荐CTA中使用亲社会框架。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出直接的管理建议。
+
+- inherits_from_previous_cn：承接第4句的结果。
+
+- changes_argument_state_cn：把实证结果转化为行动建议。
+
+- sets_up_next_cn：为第6句‘亲社会对忠诚和近期客户更有效’做铺垫。
+
+- failure_if_removed_cn：管理建议缺失。
+
+- evidence_pointer：Section 6 第3段第5句
+
+### 18. Conclusion P3 S6
+
+- order：18
+
+- locator：Conclusion P3 S6
+
+- paraphrase_cn：此外，我们发现亲社会框架对重复购买、高NPS和刚购买的客户更有效，因此企业应在购买后不久向忠诚客户发起推荐活动。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：给出目标与时机建议，并呼应H2a和H2b。
+
+- inherits_from_previous_cn：承接第5句的建议。
+
+- changes_argument_state_cn：把建议细化到目标客户和时机。
+
+- sets_up_next_cn：为第4段‘局限’做铺垫。
+
+- failure_if_removed_cn：目标与时机建议缺失。
+
+- evidence_pointer：Section 6 第3段第6句
+
+### 19. Conclusion P4 S1
+
+- order：19
+
+- locator：Conclusion P4 S1
+
+- paraphrase_cn：我们也承认本研究存在一些局限。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：主动限定贡献边界。
+
+- inherits_from_previous_cn：承接第3段的建议。
+
+- changes_argument_state_cn：从贡献转向边界。
+
+- sets_up_next_cn：为第2句‘特定情境需要共同创造’做铺垫。
+
+- failure_if_removed_cn：贡献显得过度扩张。
+
+- evidence_pointer：Section 6 第4段第1句
+
+### 20. Conclusion P4 S2
+
+- order：20
+
+- locator：Conclusion P4 S2
+
+- paraphrase_cn：首先，我们的实验在需要客户共同创造的特定情境中进行。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：指出情境局限。
+
+- inherits_from_previous_cn：承接第1句的局限。
+
+- changes_argument_state_cn：定义边界条件之一。
+
+- sets_up_next_cn：为第3句‘未来可跨行业研究’做铺垫。
+
+- failure_if_removed_cn：情境局限缺失。
+
+- evidence_pointer：Section 6 第4段第2句
+
+### 21. Conclusion P4 S3
+
+- order：21
+
+- locator：Conclusion P4 S3
+
+- paraphrase_cn：虽然我们认为情境重要，因为电商共同创造趋势增长，但未来研究可在其他情境测试我们的发现。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：为情境局限辩护并提出未来方向。
+
+- inherits_from_previous_cn：承接第2句的情境局限。
+
+- changes_argument_state_cn：把局限转化为未来研究机会。
+
+- sets_up_next_cn：为第4句‘跨行业研究’做铺垫。
+
+- failure_if_removed_cn：情境局限的化解缺失。
+
+- evidence_pointer：Section 6 第4段第3句
+
+### 22. Conclusion P4 S4
+
+- order：22
+
+- locator：Conclusion P4 S4
+
+- paraphrase_cn：未来研究可扩展我们的框架，跨行业研究CTA应如何根据行业特征定制。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：给出具体的跨行业研究方向。
+
+- inherits_from_previous_cn：承接第3句的未来方向。
+
+- changes_argument_state_cn：把边界延伸到行业差异。
+
+- sets_up_next_cn：为第5句‘低频高价格行业更倾向利己’做铺垫。
+
+- failure_if_removed_cn：跨行业方向缺失。
+
+- evidence_pointer：Section 6 第4段第4句
+
+### 23. Conclusion P4 S5
+
+- order：23
+
+- locator：Conclusion P4 S5
+
+- paraphrase_cn：例如，行业实践分析显示某些购买频率较低、价格较高的行业（如Uber、家居、教育）更可能使用利己框架。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：empirical_result
+
+- why_here_cn：用行业扫描结果说明行业差异，为未来研究提供线索。
+
+- inherits_from_previous_cn：承接第4句的跨行业方向。
+
+- changes_argument_state_cn：把边界讨论落到具体行业特征。
+
+- sets_up_next_cn：为第6句‘行业特征与CTA效果的关系有价值’做铺垫。
+
+- failure_if_removed_cn：行业差异缺乏具体例证。
+
+- evidence_pointer：Section 6 第4段第5句
+
+### 24. Conclusion P4 S6
+
+- order：24
+
+- locator：Conclusion P4 S6
+
+- paraphrase_cn：更多关于行业特征与CTA有效性的洞见将很有价值。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：总结行业方向的重要性。
+
+- inherits_from_previous_cn：承接第5句的行业差异。
+
+- changes_argument_state_cn：强化未来研究动机。
+
+- sets_up_next_cn：为第7句‘奖励滥用可能’做铺垫。
+
+- failure_if_removed_cn：行业未来方向缺乏总结。
+
+- evidence_pointer：Section 6 第4段第6句
+
+### 25. Conclusion P4 S7
+
+- order：25
+
+- locator：Conclusion P4 S7
+
+- paraphrase_cn：第二，因为发送者无论接收者行为如何都能获得收益，有些发送者可能滥用系统获取奖励。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：指出奖励设计的局限。
+
+- inherits_from_previous_cn：承接第4段的局限列表。
+
+- changes_argument_state_cn：新增边界条件：欺诈风险。
+
+- sets_up_next_cn：为第8句‘我们已用分析确认但未来需验证’做铺垫。
+
+- failure_if_removed_cn：欺诈局限缺失。
+
+- evidence_pointer：Section 6 第4段第7句
+
+### 26. Conclusion P4 S8
+
+- order：26
+
+- locator：Conclusion P4 S8
+
+- paraphrase_cn：我们用额外分析确认欺诈行为未影响发现，但未来研究应在接收者需转化发送者才能受益的条件下验证结果一致性。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：为欺诈局限提供已有保障并给出未来条件。
+
+- inherits_from_previous_cn：承接第7句的局限。
+
+- changes_argument_state_cn：把局限转化为可检验的未来情境。
+
+- sets_up_next_cn：为第5段‘CTA整合’做铺垫。
+
+- failure_if_removed_cn：欺诈局限的应对缺失。
+
+- evidence_pointer：Section 6 第4段第8句
+
+### 27. Conclusion P5 S1
+
+- order：27
+
+- locator：Conclusion P5 S1
+
+- paraphrase_cn：本研究还提供了几个进一步研究的机会。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：开启未来研究方向。
+
+- inherits_from_previous_cn：承接第4段的局限。
+
+- changes_argument_state_cn：从局限转向未来研究。
+
+- sets_up_next_cn：为第2句‘推荐CTA与购买CTA整合’做铺垫。
+
+- failure_if_removed_cn：未来研究方向缺失。
+
+- evidence_pointer：Section 6 第5段第1句
+
+### 28. Conclusion P5 S2
+
+- order：28
+
+- locator：Conclusion P5 S2
+
+- paraphrase_cn：逻辑上的一步是考察两种广泛使用的CTA（推荐号召和购买号召）的整合。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：提出最重要的未来方向：CTA整合。
+
+- inherits_from_previous_cn：承接第1句的未来研究。
+
+- changes_argument_state_cn：把未来方向具体化。
+
+- sets_up_next_cn：为第3句‘顾客扮演购买者和影响者双重角色’做铺垫。
+
+- failure_if_removed_cn：未来研究缺少核心议题。
+
+- evidence_pointer：Section 6 第5段第2句
+
+### 29. Conclusion P5 S3
+
+- order：29
+
+- locator：Conclusion P5 S3
+
+- paraphrase_cn：顾客在生命周期中扮演购买者和影响者双重角色，企业可能在不同时点用推荐号召或购买号召接触顾客，但两者因客户注意力有限而存在权衡。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：解释整合研究的动机。
+
+- inherits_from_previous_cn：承接第2句的整合方向。
+
+- changes_argument_state_cn：把整合方向问题化。
+
+- sets_up_next_cn：为第4句‘两类号召的权衡’做铺垫。
+
+- failure_if_removed_cn：整合研究的动机缺失。
+
+- evidence_pointer：Section 6 第5段第3句
+
+### 30. Conclusion P5 S4
+
+- order：30
+
+- locator：Conclusion P5 S4
+
+- paraphrase_cn：由于营销沟通带宽有限，比较推荐号召与购买号召（尤其促销广告）很重要且有趣。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：说明整合研究的现实意义。
+
+- inherits_from_previous_cn：承接第3句的权衡。
+
+- changes_argument_state_cn：把整合研究定位为营销沟通的重要议题。
+
+- sets_up_next_cn：为第5句‘识别三类差异’做铺垫。
+
+- failure_if_removed_cn：整合研究的重要性不足。
+
+- evidence_pointer：Section 6 第5段第4句
+
+### 31. Conclusion P5 S5
+
+- order：31
+
+- locator：Conclusion P5 S5
+
+- paraphrase_cn：基于实验，我们识别了两类沟通的三个差异：购买号召在购买后不久一般无效而推荐号召正当时；促销邮件对不忠诚客户更有效而推荐号召对忠诚客户更有效；购买号召强调自身收益而推荐号召应强调朋友收益。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：用本研究结果给出整合研究的初始洞见。
+
+- inherits_from_previous_cn：承接第4句的比较。
+
+- changes_argument_state_cn：把未来方向建立在本研究的发现上。
+
+- sets_up_next_cn：为第6句‘这些差异使推荐CTA与购买CTA互补’做铺垫。
+
+- failure_if_removed_cn：整合研究缺乏初始假设。
+
+- evidence_pointer：Section 6 第5段第5句
+
+### 32. Conclusion P5 S6
+
+- order：32
+
+- locator：Conclusion P5 S6
+
+- paraphrase_cn：有趣的是，这三个差异——时机、目标、设计——使推荐亲社会CTA与购买CTA在营销沟通中互补。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：把三个差异整合为互补性命题。
+
+- inherits_from_previous_cn：承接第5句的三个差异。
+
+- changes_argument_state_cn：把CTA整合升级为理论命题。
+
+- sets_up_next_cn：为第7句‘企业可整合两种CTA’做铺垫。
+
+- failure_if_removed_cn：互补性命题缺失。
+
+- evidence_pointer：Section 6 第5段第6句
+
+### 33. Conclusion P5 S7
+
+- order：33
+
+- locator：Conclusion P5 S7
+
+- paraphrase_cn：因此企业可以最优地组合它们，形成整合沟通策略，在顾客整个生命周期中与之互动。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：给出整合策略的管理愿景。
+
+- inherits_from_previous_cn：承接第6句的互补性。
+
+- changes_argument_state_cn：把未来研究方向与管理实践连接。
+
+- sets_up_next_cn：为第8句‘尚无实证检验’做铺垫。
+
+- failure_if_removed_cn：整合策略的实践价值缺失。
+
+- evidence_pointer：Section 6 第5段第7句
+
+### 34. Conclusion P5 S8
+
+- order：34
+
+- locator：Conclusion P5 S8
+
+- paraphrase_cn：虽然这两种营销沟通在实践中广泛使用，但还没有实证检验比较它们同时使用时的表现。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：prior_literature
+
+- why_here_cn：指出整合研究的空白，为未来研究提供靶心。
+
+- inherits_from_previous_cn：承接第7句的整合愿景。
+
+- changes_argument_state_cn：确立未来研究的空白。
+
+- sets_up_next_cn：为第9句‘期待未来研究’做铺垫。
+
+- failure_if_removed_cn：整合研究的空白不明确。
+
+- evidence_pointer：Section 6 第5段第8句
+
+### 35. Conclusion P5 S9
+
+- order：35
+
+- locator：Conclusion P5 S9
+
+- paraphrase_cn：我们期待未来研究通过提供如何最优整合两种CTA的指南来深化理解。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：以邀请性话语结束未来研究方向。
+
+- inherits_from_previous_cn：承接第8句的空白。
+
+- changes_argument_state_cn：为未来研究提供具体任务。
+
+- sets_up_next_cn：为最后一段总结收尾做铺垫。
+
+- failure_if_removed_cn：未来研究的收束缺失。
+
+- evidence_pointer：Section 6 第5段第9句
+
+### 36. Conclusion P6 S1
+
+- order：36
+
+- locator：Conclusion P6 S1
+
+- paraphrase_cn：理解哪种推荐号召对通过WOM创造社会传染最有效以及为什么，是发展最优推荐营销策略的关键一步。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：以概括性主张收尾，把全文贡献放在更大主题下。
+
+- inherits_from_previous_cn：承接第5段的未来方向。
+
+- changes_argument_state_cn：把具体贡献升格为领域关键问题。
+
+- sets_up_next_cn：为第2句‘本研究贡献于IS与营销文献’做铺垫。
+
+- failure_if_removed_cn：结论缺乏收束性主张。
+
+- evidence_pointer：Section 6 第6段第1句
+
+### 37. Conclusion P6 S2
+
+- order：37
+
+- locator：Conclusion P6 S2
+
+- paraphrase_cn：我们相信，通过大规模随机田野实验，本研究可以通过提供不同CTA效果和机制的洞见，贡献于IS和营销中丰富的WOM与社会传染文献。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：最后重申文献贡献，与引言闭环。
+
+- inherits_from_previous_cn：承接第1句的关键问题。
+
+- changes_argument_state_cn：把贡献嵌入IS与营销交叉文献。
+
+- sets_up_next_cn：无后续，结束全文。
+
+- failure_if_removed_cn：全文在文献贡献上失去收束。
+
+- evidence_pointer：Section 6 第6段第2句
+
+## Study累积逻辑
+
+### 1. 1
+
+- study_or_phase：主田野实验（Experiment 1）
+
+- evidence_job_cn：证明CTA措辞框架对推荐行为与推荐结果的因果主效应。
+
+- what_it_establishes_cn：亲社会CTA在推荐发起率、推荐总数和接收者购买数上显著优于控制、利己和公平框架。
+
+- what_it_cannot_establish_cn：无法揭示机制：是利他、内疚、公平感还是选择性分享在起作用；也无法排除奖励对发送者吸引力低带来的替代解释。
+
+- why_next_phase_is_needed_cn：需要解释主效应背后的心理机制，因此引入调节分析。
+
+- transition_wording_function_cn：“我们已经识别有效性……我们进一步检验顾客愉悦的作用”把读者从‘是什么’引向‘为什么’。
+
+### 2. 2
+
+- study_or_phase：异质性/调节分析
+
+- evidence_job_cn：用档案数据支持‘客户愉悦/内在动机’机制。
+
+- what_it_establishes_cn：重复购买者、高NPS客户和近期购买客户中亲社会效应更强，与内在愉悦机制一致。
+
+- what_it_cannot_establish_cn：购买历史和NPS是间接代理，未直接测量心理动机。
+
+- why_next_phase_is_needed_cn：需要直接测量动机，因此引入MTurk实验。
+
+- transition_wording_function_cn：“为进一步调查解释主结果的机制，我们招募2000名Turker”直接承接间接证据的不足。
+
+### 3. 3
+
+- study_or_phase：MTurk动机实验与中介分析
+
+- evidence_job_cn：在受控、去情境化环境中直接检验心理机制。
+
+- what_it_establishes_cn：亲社会CTA减少内疚、增强利他，且利他与内疚中介分享意愿。
+
+- what_it_cannot_establish_cn：测量的是假设性意图而非真实行为；参与者也无需承担真实分享成本。
+
+- why_next_phase_is_needed_cn：需要用真实推荐数据验证‘选择性/利他’是否真的转化为更好的推荐对象。
+
+- transition_wording_function_cn：“为进一步理解用户是否更选择性地分享，我们与第三方数据商合作”把假设性动机引向真实行为。
+
+### 4. 4
+
+- study_or_phase：目标受众与推荐漏斗分析
+
+- evidence_job_cn：用真实漏斗和第三方人口数据检验选择性分享机制。
+
+- what_it_establishes_cn：亲社会组发送给目标受众朋友更多，打开后发送更多，朋友转化率最高，总转化数最高。
+
+- what_it_cannot_establish_cn：第三方人口匹配是粗粒度代理，不能完全排除其他未观测分享动机。
+
+- why_next_phase_is_needed_cn：需要改变奖励吸引力来排除‘利己框架天然劣势’的替代解释。
+
+- transition_wording_function_cn：“因为折扣券可能对发送者吸引力低，我们用免费相册书进行第二实验”给出更高的证伪门槛。
+
+### 5. 5
+
+- study_or_phase：第二个田野实验（Experiment 2）
+
+- evidence_job_cn：用更高吸引力的奖励提高证伪标准，检验可推广性与边界。
+
+- what_it_establishes_cn：即使奖励对发送者也很有吸引力，亲社会在接收者购买结果上仍唯一占优；公平在发送端接近亲社会。
+
+- what_it_cannot_establish_cn：仍在同一平台和同一商品类别，不能直接外推到低频高频或不同行业。
+
+- why_next_phase_is_needed_cn：需要排除自我推荐和虚假邮箱对结果的污染。
+
+- transition_wording_function_cn：“为排除自我推荐和虚假邮箱，我们进行欺诈行为检验”保护测量效度。
+
+### 6. 6
+
+- study_or_phase：欺诈行为稳健性检验
+
+- evidence_job_cn：保护主结果不受激励游戏污染。
+
+- what_it_establishes_cn：无效邮箱比例极低且无自我推荐订单，主结果真实。
+
+- what_it_cannot_establish_cn：邮箱验证是代理变量，不能完全排除其他隐蔽作弊。
+
+- why_next_phase_is_needed_cn：需要把结果放回现实实践，说明论文的现实意义。
+
+- transition_wording_function_cn：“为进一步理解潜在影响和可推广性，我们调查80多个推荐计划”引入行业参照系。
+
+### 7. 7
+
+- study_or_phase：行业实践扫描
+
+- evidence_job_cn：用行业分布定位本文的现实贡献。
+
+- what_it_establishes_cn：亲社会框架在实践中仅占约11%，利己和公平占约89%，说明实践与理论最优存在差距。
+
+- what_it_cannot_establish_cn：样本来自公开列表，可能不具全行业代表性。
+
+- why_next_phase_is_needed_cn：为结论中的设计原则与未来研究方向提供现实背景。
+
+- transition_wording_function_cn：“我们在下一节提供更多讨论”把实证结果引入结论。
+
+## 主张—证据台账
+
+### 1. 亲社会CTA提高发起推荐的概率和推荐数量。
+
+- claim_cn：亲社会CTA提高发起推荐的概率和推荐数量。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：表2主效应：T3显著为正，T3-T1和T3-T2显著；概率增加超过60%。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction H1a; Section 4.1
+
+- where_evidence_is_provided：Table 2 columns (1)-(4)
+
+### 2. 亲社会CTA提高接收者购买等推荐结果。
+
+- claim_cn：亲社会CTA提高接收者购买等推荐结果。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：表2列(5)-(6)：T3显著高于控制、利己、公平；表3转化率亲社会最高。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction H1b; Section 4.1
+
+- where_evidence_is_provided：Table 2 columns (5)-(6); Table 3
+
+### 3. 产品亲和（重复购买、NPS）正向调节亲社会效应。
+
+- claim_cn：产品亲和（重复购买、NPS）正向调节亲社会效应。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：表4列(1)-(2)交互显著；表12第二实验重现。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction H2a; Section 4.2
+
+- where_evidence_is_provided：Table 4 columns (1)-(2); Table 12
+
+### 4. 购买新鲜度正向调节亲社会效应。
+
+- claim_cn：购买新鲜度正向调节亲社会效应。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：表4列(3)WeeksSinceLastPurchase×T3显著为负；利己无显著衰减。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction H2b; Section 4.2
+
+- where_evidence_is_provided：Table 4 column (3)
+
+### 5. 亲社会CTA减少内疚并增强利他动机。
+
+- claim_cn：亲社会CTA减少内疚并增强利他动机。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：MTurk表5-6均值差异和表7中介分析。
+
+- support_strength：partial
+
+- where_claim_is_made：Introduction H3a/H3b; Section 4.3
+
+- where_evidence_is_provided：Tables 5-7
+
+### 6. 亲社会框架促进更选择性、更精准的推荐。
+
+- claim_cn：亲社会框架促进更选择性、更精准的推荐。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：表8目标受众回归；图6漏斗和转化率；表9总转化。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 4.4 结论句
+
+- where_evidence_is_provided：Table 8; Figure 6; Table 9
+
+### 7. 在奖励对发送者也很有吸引力时，亲社会框架仍然有效。
+
+- claim_cn：在奖励对发送者也很有吸引力时，亲社会框架仍然有效。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：表11第二实验：T3在三个结果上显著优于控制；在接收者结果上唯一显著。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 5.1 结论段
+
+- where_evidence_is_provided：Table 11
+
+### 8. 主结果不受自我推荐或虚假邮箱污染。
+
+- claim_cn：主结果不受自我推荐或虚假邮箱污染。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：表8列(2)有效邮箱比例高；订单地址核查无自我推荐。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 5.2 结论句
+
+- where_evidence_is_provided：Table 8 column (2); 送货地址核查
+
+### 9. CTA中的内在亲社会成分是成功推荐计划的必要条件。
+
+- claim_cn：CTA中的内在亲社会成分是成功推荐计划的必要条件。
+
+- claim_level：design_knowledge
+
+- supporting_evidence_cn：两个实验中只有含亲社会成分的框架能稳定带来结果；利己始终不足。但第二实验中公平在发送端与亲社会并列。
+
+- support_strength：partial
+
+- where_claim_is_made：Abstract S7; Conclusion P2 S8
+
+- where_evidence_is_provided：Tables 2 and 11; 第二实验公平接近亲社会的边界讨论
+
+## ISR定位逻辑
+
+- constitutive_is_problem_cn：把‘CTA措辞’这一数字营销界面元素与人的内在—外在动机冲突相互构成，形成典型的IS问题：企业通过数字设计触发用户行为，但设计元素的语义框架会改变用户的内在动机状态。
+
+- technology_behavior_or_market_entanglement_cn：邮件CTA不是可随意替换的工具，而是通过‘措辞框架’改变了发送者将推荐解释为利己还是利他的心理账户，进而改变推荐数量和质量；技术界面与用户心理动机深度纠缠。
+
+- role_of_benchmark_or_objective_evidence_cn：随机田野实验、成对p值、第三方人口匹配、推荐漏斗和行业扫描都被用来支持‘亲社会框架更优’这一IS层面的设计主张，而非单纯的性能分数；客观证据服务于‘设计如何重新激活内在动机’的理论叙事。
+
+- theory_in_design_cn：理论直接进入设计：内在—外在动机困境和利他偏好决定了亲社会CTA的措辞方向；理论不是事后解释结果，而是先于实验塑造了处理组和对照组的构造。
+
+- technical_vs_is_contribution_balance_cn：技术贡献极小（只是文字变化），绝大部分篇幅用于行为结果、机制测量和边界条件；这正说明IS贡献在于行为/组织效应而非技术新颖性。
+
+- beyond_transient_performance_cn：通过第二实验提高证伪门槛、MTurk直接测机制、漏斗分析验证选择性分享、行业扫描说明实践差距，作者把一次性的分数优势升级为可复用的设计知识与理论命题。
+
+## 段落级仿写模板
+
+### abstract_steps
+
+1. 第1句：用领域常识或前提建立研究背景。
+
+2. 第2-3句：用‘换句话说’把背景转化为研究对象，并指出其内在矛盾。
+
+3. 第4句：引用已有文献把矛盾升格为理论困境。
+
+4. 第5-6句：宣告本文的解决方案与核心贡献。
+
+5. 第7-8句：给出证据类型、样本规模和核心结果。
+
+6. 第9-10句：预告机制证据并给出具体心理机制。
+
+### introduction_paragraph_steps
+
+1. 第1段：从常识切入，定义研究对象并引入核心困境。
+
+2. 第2段：宣告新颖性和核心贡献。
+
+3. 第3段：用‘操纵简单’建立因果识别的干净性。
+
+4. 第4-5段：拆解设计维度，制造文献缺口，翻译为实验设计。
+
+5. 第6-8段：建立理论基础，用实践观察制造矛盾，转化为实验‘马赛’。
+
+6. 第9段：把对立预测收束为经验问题。
+
+7. 假设段：分块给出主效应、机制和动机假设。
+
+8. 研究设计段：介绍现场、样本、数据与额外实验。
+
+9. 结果预告段：按主效应-异质性-机制顺序报告核心发现。
+
+10. 贡献段：先管理贡献后文献贡献。
+
+11. 结尾段：路线图。
+
+### theory_to_design_steps
+
+1. 第1步：用经济学或行为理论对设计空间进行分类。
+
+2. 第2步：把理论分类翻译为具体操纵变量。
+
+3. 第3步：固定所有非目标因素，使理论与设计一一对应。
+
+4. 第4步：给出识别策略，说明随机化为何能隔离理论机制。
+
+5. 第5步：把调节变量与理论机制绑定。
+
+### method_and_study_sequence_steps
+
+1. 第1步：描述研究现场和样本抽取。
+
+2. 第2步：给出主实验设计，强调唯一操纵变量。
+
+3. 第3步：报告随机化检查和主效应。
+
+4. 第4步：用调节分析检验机制，说明间接证据的不足。
+
+5. 第5步：用受控实验直接测机制，说明假设性测量的局限。
+
+6. 第6步：用真实漏斗数据把机制落到行为结果。
+
+7. 第7步：用边界实验提高证伪标准。
+
+8. 第8步：用稳健性检验保护测量效度。
+
+9. 第9步：用行业扫描定位现实贡献。
+
+### results_reporting_steps
+
+1. 第1步：先做随机化平衡检查。
+
+2. 第2步：按结果变量分列报告主效应。
+
+3. 第3步：报告成对比较p值。
+
+4. 第4步：加入控制变量验证稳健性。
+
+5. 第5步：补充替代规格模型。
+
+6. 第6步：用调节分析报告机制。
+
+7. 第7步：用受控实验报告动机与中介。
+
+8. 第8步：用漏斗与转化率报告行为链路。
+
+9. 第9步：每次报告后把结果与假设对应。
+
+### discussion_and_contribution_steps
+
+1. 第1步：重述背景与研究问题。
+
+2. 第2步：重申证据设计与内部有效性。
+
+3. 第3步：总结主效应与机制。
+
+4. 第4步：把结论与引言的理论困境闭环，给出‘必要条件’主张。
+
+5. 第5步：重申文献缺口并说明补齐。
+
+6. 第6步：给出管理建议（如何、对谁、何时）。
+
+7. 第7步：主动列局限并把每个局限转化为未来研究。
+
+8. 第8步：提出更宏大的未来议题并以贡献收尾。
+
+## 可执行写作算法
+
+### 1. 1
+
+- step：1
+
+- rhetorical_job_cn：建立研究背景并指出核心矛盾。
+
+- research_evidence_required_cn：领域常识或基本事实；关于矛盾的理论文献。
+
+- sentence_pattern_function_cn：先用常识断言，再用‘换句话说’把常识转为研究对象，然后用‘这带来挑战’引出矛盾。
+
+- transition_condition_cn：读者已接受研究对象存在内在矛盾时，可进入下一步。
+
+### 2. 2
+
+- step：2
+
+- rhetorical_job_cn：宣告新颖性与贡献。
+
+- research_evidence_required_cn：已确认文献空白和本文的解决方向。
+
+- sentence_pattern_function_cn：用‘据我们所知’宣告新颖，用‘我们不仅指出困境还提供解法’给出贡献结构。
+
+- transition_condition_cn：读者已知道本文填补何缺口后，可进入下一步。
+
+### 3. 3
+
+- step：3
+
+- rhetorical_job_cn：说明因果识别的干净性。
+
+- research_evidence_required_cn：实验设计原则：固定非目标因素，只变目标变量。
+
+- sentence_pattern_function_cn：用‘我们的操纵只是X’强调极简，用‘我们固定A和B，只操纵C’说明识别策略。
+
+- transition_condition_cn：读者已理解为何差异可归因于目标变量后，可进入下一步。
+
+### 4. 4
+
+- step：4
+
+- rhetorical_job_cn：构造文献缺口。
+
+- research_evidence_required_cn：能把领域设计拆成维度，并引用前人工作证明某维度缺失。
+
+- sentence_pattern_function_cn：用‘最优设计取决于三个维度’拆解，用‘前人研究了A和B，但没有人研究C’定位空白。
+
+- transition_condition_cn：读者已清楚C维度是空白后，可进入下一步。
+
+### 5. 5
+
+- step：5
+
+- rhetorical_job_cn：建立理论基础并制造实践矛盾。
+
+- research_evidence_required_cn：支撑目标设计元素的理论机制；现实实践的描述或分布。
+
+- sentence_pattern_function_cn：用‘我们视目标为X机制’建立理论，用‘然而实践显示……’制造矛盾，用‘因此进行一场马赛’转化为实验方案。
+
+- transition_condition_cn：读者已接受‘理论预测与实践现实对立’后，可进入下一步。
+
+### 6. 6
+
+- step：6
+
+- rhetorical_job_cn：给出假设。
+
+- research_evidence_required_cn：能把机制转化为可检验的行为预期。
+
+- sentence_pattern_function_cn：先给机制推理，再用‘因此我们检验以下假设’引出分块假设。
+
+- transition_condition_cn：所有假设可被后续实验检验时，可进入下一步。
+
+### 7. 7
+
+- step：7
+
+- rhetorical_job_cn：描述研究设计和数据来源。
+
+- research_evidence_required_cn：实验现场、样本、操纵、结果变量和数据来源。
+
+- sentence_pattern_function_cn：先介绍现场和产品，再说明操纵与随机化，然后列出数据来源和额外实验。
+
+- transition_condition_cn：读者已理解实验能识别因果后，可进入下一步。
+
+### 8. 8
+
+- step：8
+
+- rhetorical_job_cn：报告主效应和成对比较。
+
+- research_evidence_required_cn：随机化平衡检验、主效应系数和成对p值。
+
+- sentence_pattern_function_cn：先做平衡检验，再按结果变量报告系数、百分比和成对p值，最后把结果对应到假设。
+
+- transition_condition_cn：主效应已建立并支持假设后，可进入下一步。
+
+### 9. 9
+
+- step：9
+
+- rhetorical_job_cn：用调节、中介、漏斗或补充数据检验机制。
+
+- research_evidence_required_cn：调节变量、中介测量或漏斗数据。
+
+- sentence_pattern_function_cn：先用‘为检验机制’引入，再报告调节/中介/漏斗结果，最后说明每项分析支持哪条机制路径。
+
+- transition_condition_cn：机制证据已与主效应一致后，可进入下一步。
+
+### 10. 10
+
+- step：10
+
+- rhetorical_job_cn：设计稳健性或边界检验。
+
+- research_evidence_required_cn：改变一个关键边界参数后的实验或数据。
+
+- sentence_pattern_function_cn：先说明‘可能威胁结论的替代解释’，再用改变参数后的证据排除或限定边界。
+
+- transition_condition_cn：核心结果在稳健性检验中不消失或边界可解释后，可进入下一步。
+
+### 11. 11
+
+- step：11
+
+- rhetorical_job_cn：回到理论，给出贡献和管理建议。
+
+- research_evidence_required_cn：所有实证阶段的结果和对理论困境的闭环。
+
+- sentence_pattern_function_cn：先重述初始困境，再把结果解释为解决困境，然后给出‘如何、对谁、何时’的建议，最后列出局限与未来研究。
+
+- transition_condition_cn：贡献与引言缺口闭环，且局限与未来方向清晰后，可结束。
+
+## 应模仿的高价值动作
+
+1. 用三设计维度框架构造文献缺口，而不是简单说‘无人研究’。
+
+2. 把理论（内在—外在动机、利他偏好）直接翻译为操纵变量的措辞选择。
+
+3. 固定所有非目标因素，只改变CTA文字，使因果解释极其干净。
+
+4. 用行业实践分布（利己/公平占89%）作为现实参照，说明研究不是无的放矢。
+
+5. 主效应后立即用调节分析检验机制，再用MTurk直接测动机，再用漏斗验证选择性分享。
+
+6. 第二个实验故意改变奖励吸引力来证明‘不是折扣对发送者不吸引才导致利己失败’。
+
+7. 用欺诈行为检验保护测量效度，用行业扫描定位实践意义。
+
+8. 把结果翻译为‘如何、对谁、何时发送CTA’的可操作管理建议，并由合作平台实施佐证。
+
+9. 结论中把具体结果重新连接回内在—外在困境，并给出购买CTA与推荐CTA的互补性未来方向。
+
+## 不要只复制的表面动作
+
+1. 不要只把CTA文字改成‘帮助朋友’而不做随机化和等分激励控制，否则无法识别措辞效应。
+
+2. 不要只报告主效应而不做机制检验，否则亲社会框架会像一次性措辞实验。
+
+3. 不要用MTurk假设意图替代真实行为证据，文中也承认其局限。
+
+4. 不要忽略第二实验中公平框架在发送端与亲社会接近的边界，否则会过度声称‘亲社会唯一’。
+
+5. 不要只在结论里说‘必要成分’而没有在两个实验中证明去掉该成分会产生明显更差结果。
+
+6. 不要把行业扫描当作因果证据，它只是描述性现状。
+
+## 证据薄弱或跳跃的动作
+
+1. ‘亲社会成分是必要条件’是一个较重的理论断言，第二实验中公平框架在推荐发起和推荐数量上与亲社会无显著差异，说明强调‘双方收益’也能在发送端产生相近效果。
+
+2. MTurk意图与实际行为之间的鸿沟未被完全弥合。
+
+3. 第三方人口匹配作为目标受众的证据较粗。
+
+4. 作者承认漏斗末端统计功效有限，但仍在结论中强调经济回报。
+
+5. 行业扫描只是描述性分布，不能证明企业因采用利己CTA而绩效更差。
+
+## 一句话套路
+
+用理论制造内在—外在动机困境，把‘措辞’作为唯一操纵变量，以随机田野实验证明亲社会CTA优于利己/公平，然后用调节、中介、漏斗、第二实验和行业扫描把一次性性能结果升级为可复用的设计原则与理论贡献。
+
+## 分析边界
+
+输入文件为OCR排版，部分图表（图3/图4邮件截图）的具体文字无法逐字识别，只能依赖正文说明；附录A/B/C未完整提供，替代规格和补充调查细节依赖正文描述；精确页码无法给出，定位使用章节和小标题；结论部分与摘要存在大量文字重复，逐句映射时做了合并处理。

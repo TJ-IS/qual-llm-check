@@ -1,0 +1,893 @@
+# High-precision core: detailed evidence profiles
+
+These 20 records are a derived high-precision review stratum, not a model output label. They satisfy all post-screening rules documented in `screening_analysis_report.md`.
+
+## 1. Inverse Transparency and the Quest for Empowerment through the Design of Digital Workplace Technologies
+
+- Metadata: 2024 · Journal of the Association for Information Systems · 10.17705/1jais.00879
+- Authors: Maren Gierlich-Joas; Abayomi Baiyere; Thomas Hess
+- Design classification: explicit_design_science
+- Artifact/intervention: 为德国软件公司SoftCo的Jira开发的一个'逆向透明度'仪表盘插件（含Monitor、Overseer、专家搜索、访问策略调整、可定制仪表盘等），用于让员工和经理双向查看数据访问并控制数据访问。
+- Theory-to-design strength: strong
+- Theories:
+  - Stewardship Theory (Davis et al., 1997): 作为内核理论，其六个维度（ST1内在动机、ST2认同、ST3个人权力、ST4赋能型控制、ST5低权力距离、ST6目标一致）直接推导出设计需求DR1/DR2和设计原则DP1-DP4；例如DP1和DP2标注ST1/ST4，DP3标注ST1/ST4/ST5，DP4标注ST3/ST4。
+  - Inverse Transparency (concept; Gierlich-Joas et al., 2020): 作为核心设计概念，定义了一种双向透明度，即员工可以控制对自己数据的访问；它直接构成DR1，并通过DP1-DP3和功能DF1-DF3实现为'Watch the watcher'、专家搜索和访问策略调整。
+- Source outcome: Inverse transparency (bidirectional transparency/access visibility)
+- Source definition: 一种新的透明度类型：数据主体（员工）和经理都能看到谁访问了哪些数据，且数据主体可以控制对其数据的访问；目标是减少信息不对称、克服全景监视并赋能员工。
+- Source evaluation role: qualitatively_evaluated
+- Source operationalization: 通过DP1-DP3评估：是否实现数据可及性（员工与经理能访问类似数据）、数据流可见性（Monitor记录访问日志）和透明化设计（数据所有者可调整访问策略）；在两组确认性焦点小组和专家访谈中收集定性反馈（如'可以监督谁访问了哪些数据并识别潜在的偷窥者'）。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的意义依赖于工作场所中雇主-员工之间的权力不对称、数据所有权、隐私保护和'全景监视'问题；它不是一般的可用性或透明度，而是针对员工数据权利的民主化机制。
+- Coding-agent outcome: 智能体逆向透明度（agentic inverse transparency）：用户可查看并控制编码智能体对代码库、数据和工具的访问与操作
+- Coding-agent definition: 在编码智能体的委托-自治工作流中，人类用户能够像'看监视者的人'一样查看智能体访问了哪些文件、数据源、命令和API，并能够按自己的偏好设置访问策略和撤销授权；目标是减少人与智能体之间的信息不对称，避免'代理方'对代码库的不可见操作和隐蔽副作用。
+- Transfer type: construct_extension
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, tool use and actions with real environment or repository side effects, coordination among multiple specialized agents
+- Mechanism mapping: Stewardship theory的'赋能型控制'（ST4）与'目标一致'（ST6）-> 源设计需求DR1/DR2与设计原则DP1-DP3（相同数据可及、数据流可见、透明化设计）-> 源功能'Monitor/Overseer/Watch the watcher'和访问策略 -> 编码智能体设计含义：为智能体的每次仓库读取、命令执行和工具调用提供用户可见的访问日志，并让用户在任务前/任务中定义和调整智能体可访问的资源范围；由此产生'智能体逆向透明度'这一设计目标。
+- Proposed observables:
+  - 用户在智能体运行时/之后可查看按时间排序的访问轨迹（哪些文件/目录/数据源/命令被访问，由哪个智能体访问），并可按文件类型或敏感度过滤
+  - 用户可在运行前设置基于角色的访问策略（如只读某些目录、禁止读取密钥文件、禁止执行危险命令），并在运行时收到越权请求的审批提示
+  - 在多智能体协作中，用户能看到某个智能体对其他智能体输出/共享数据的访问记录，并能实时撤销某个智能体的访问权限
+- Coding-agent counterfactual: 如果将编码智能体替换为静态IDE、普通聊天机器人或常规工作技术，就没有自主的、多步骤的仓库级代理需要被'监视'；用户自己发起每个动作，动作本身可见，逆向透明度的机制会退化为普通的权限提示或日志，失去了'看监视者的人'的意义。
+- Caveat: 源论文讨论的是组织内员工-经理关系，完全没有提及编码智能体；将'逆向透明度'扩展到智能体行为是本文的分析推断，需要为智能体的'访问'与'操作'建立新的本体（文件读取、工具调用、命令执行等），并注意不要将组织权力关系简单地拟人化到人机关系。
+- Flash decision reason: 该文是明确的设计科学研究（DSR），采用Peffers等人的流程，以Stewardship Theory为内核理论并显式推导DR/DP/DF，定性评估了逆向透明度、自我决定和管家行为等结果。其中'逆向透明度'在源领域具有领域构成性意义（工作场所数据权力、反监视、员工赋能），且可以强映射到编码智能体：自主智能体对代码库/数据/工具的不可见访问需要'智能体逆向透明度'这一设计目标。因此满足强候选条件。
+- Confidence: 0.9
+- Design evidence:
+  - "Following a design science research process... we derive design requirements, design principles, and design features for an artifact that instantiates inverse transparency" (Abstract)
+  - "The artifact was demonstrated as a proof of concept. Next, it was evaluated as a proof of value in a summative, naturalistic manner using qualitative expert interviews and two confirmatory focus groups" (Section 1/3)
+  - "We chose the DSR methodology to instantiate the proposed design" and "followed the methodology by Peffers et al. (2007)" (Section 3)
+  - "Once a data user (e.g., Sarah) requests a datum from the data source (Jira), this is observed by the Monitor... Data owners (e.g., Jonathan) can retrieve this usage information via the interface 'Watch the watcher'" (Section 5.3, Figure 4)
+- Evaluation evidence:
+  - "The evaluation of the artifact was guided by the framework for evaluation in design science research (FEDS)... we selected summative, naturalistic evaluation methods, such as expert interviews and focus groups" (Section 3)
+  - "We referred to our DPs, embedded them in our kernel theory of stewardship theory with its six dimensions..., and used them as evaluation criteria" (Section 6.2)
+  - "In sum, the DPs were successfully implemented. However, despite the positive evaluation of the DPs, the stakeholders had some contentious discussions during the proof-of-value focus group" (Section 6.2)
+  - "We propose three theoretical conjectures: Inverse transparency reinforces prior dynamics in contexts of mutual stewardship; amplifies prior dynamics...; equalizes prior dynamics in contexts of mutual agency" (Section 7.1)
+- Outcome evidence:
+  - "It is possible to oversee who has accessed which data and to identify potential 'stalkers.'" (Marketing Employee, Focus Group I, ID 33, Section 6.2)
+  - "The benefit of the tool is that it creates a mutual basis for managers and employees, so everyone has similar information." (Director of Globalization, Focus Group II, ID 38, Section 6.2)
+  - "DR1: Enable inverse transparency so that employees and managers can view access to their data." (Section 5.1)
+
+## 2. Sustainability Design Principles for a Wildlife Management Analytics System: An Action Design Research
+
+- Metadata: 2021 · European Journal of Information Systems · 10.1080/0960085x.2020.1811786
+- Authors: Shan L. Pan; Mingwei Li; L.G. Pee; M.S. Sandeep
+- Design classification: explicit_design_science
+- Artifact/intervention: 一个野生动物管理分析系统（WMAS）原型，包含wildlife status、threat identification、patrol三个分析模块及六个系统功能，经过两轮设计/实现迭代；同时产出一套以material property、action potential、boundary condition表述的设计原则。
+- Theory-to-design strength: strong
+- Theories:
+  - Affordance theory / Affordance-based design model (Gibson; Maier & Fadel; Seidel et al.; Markus & Silver): 作为设计透镜，识别用户所需的action potentials（assessing, anticipating, practising affordances），并据此决定系统的material properties（功能与算法），使设计原则同时包含行动潜力、物质属性和边界条件。
+  - Design principle template (Chandra et al., 2015): 提供设计原则的形式化模板：material property、user activity/action potential、boundary conditions；本文据以表述初始和修订后的设计原则。
+  - Big data analytics typology: descriptive, predictive, prescriptive (Watson, 2014): 将三类分析能力分别对应对assessing、anticipating、practising affordances的支持，决定系统特征和算法的类型。
+- Source outcome: Anticipating affordances: identify threat of poaching on wildlife; identify threat of human-wildlife conflict on wildlife
+- Source definition: 系统使能的能力：提前识别偷猎和人兽冲突可能发生的风险区域，以便采取预防性措施。
+- Source evaluation role: qualitatively_evaluated
+- Source operationalization: 第一轮通过四场workshop讨论“what does the system features allow you to do”，确认用户能识别偷猎热区/冲突高频区；第二轮通过7次半结构化访谈，比较WMAS引入前后“identifying threat on wildlife”场景的变化，并引用“Illegal activities are now mappable to geo-locations”等表述（Section 6.3, 7.3, Table 7）。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 偷猎风险和人兽冲突是野生动物保护地管理的核心威胁；其利益相关者（护林员、森林部门、村民）、风险对象（濒危物种、人身安全）和操作化（poaching-prone areas, conflict magnitude, vegetation/terrain types）都高度依赖保护地领域知识。
+- Coding-agent outcome: 代码变更前的风险预判与计划调整能力
+- Coding-agent definition: 编码智能体在自主执行多步开发任务前/中，识别其拟修改区域中可能导致构建失败、测试失败、依赖破坏或安全/权限问题的风险点，并据此调整计划或请求人工审批的能力。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: 来源理论：affordance-based design（Maier & Fadel; Seidel et al.）要求先识别用户所需的action potentials，再通过material properties实现。来源设计机制：DP2-a/b通过将历史偷猎地点/冲突区域及环境特征（植被、地形、冲突程度）可视化，使护林员得以提前识别威胁；并经第二轮“human complementing algorithm”原则加入领域知识修正。对编码智能体的启示：为让智能体获得“风险预判”这一action potential，应设计material property——在计划生成前/中向其呈现历史缺陷/失败高发模块、依赖路径、测试覆盖等上下文特征，并允许人类设定的风险阈值和人工审批介入；智能体据此调整行动路径。候选结果：智能体在自主修改前能标注高风险区域并调整计划。
+- Proposed observables:
+  - 智能体在自主任务中预先标记的高风险文件/模块中，实际发生测试失败或构建失败的比例（精确率）与实际失败中被预先标记的比例（召回率）
+  - 因智能体自身风险评估而发生的计划修订次数/频率（例如主动绕开高风险模块、增加防御性测试）与未修订继续执行的对比
+  - 当风险评估超过人工阈值时智能体发起人工审批/交接的频率，以及智能体风险标记与人类专家判断的一致性
+- Coding-agent counterfactual: 若把编码智能体替换为静态IDE或通用聊天机器人，就不存在被委派的多步目标、可修订的计划、对仓库产生副作用的修改循环和测试反馈；“基于风险预判调整计划”这一结果及其测量（如计划修订率、审批交接率）将失去意义。静态IDE只能显示当前错误，不能评估“拟议的多步修改”的风险并主动避险。
+- Caveat: 来源论文不涉及编码智能体；风险类型的定义需要从偷猎/人兽冲突重新映射到构建失败、回归、依赖冲突、安全边界等软件工程风险，且需要与软件工程风险预测文献结合。评估证据是定性的，迁移后的量化指标需要另行设计。
+- Flash decision reason: 该文采用明确的elaborated action design research方法，实际构建并两轮迭代一个野生动物管理分析系统（WMAS），并通过workshop和访谈进行前后对比评估，属于explicit design science。Affordance theory和Chandra的设计原则模板直接用于推导设计原则，theory-to-design强度为strong。在评估结果中，“anticipating affordances”（识别偷猎与人兽冲突威胁）是领域构成性的：其利益相关者、风险、操作化都依赖野生动物保护地管理。将该结果向编码智能体迁移时，可形成“代码变更前风险预判与计划调整能力”：智能体自主多步修改、工具副作用、测试反馈等条件使该结果的定义、机制和测量均与静态IDE/普通聊天机器人有实质区别，非替代性强。因此整体为strong_candidate，target_match=true。
+- Confidence: 0.87
+- Design evidence:
+  - This study followed the elaborated action design research (ADR) method (Mullarkey et al., 2019) (Section 3)
+  - we attempt to co-create an instantiation of WMAS with an Indian forest department based on the guidelines of the elaborated action design research (ADR) approach (Section 1)
+  - we identify the initial design principles ... and iteratively refine them based on an instantiation of WMAS through two iterations of design and implementation cycles (Abstract)
+- Evaluation evidence:
+  - we conducted four workshops ... to see whether the intended designed affordance was perceived by users (Section 6.3)
+  - we compared the improvements in three operational scenarios in wildlife management before and after the introduction of the WMAS to evaluate our intervention (Section 7.3)
+  - we conducted a before-after analysis to gauge the change vis-à-vis the three types of WMAS affordances ... based on qualitative interviews (Section 8.3)
+- Outcome evidence:
+  - the system facilitated the identification of the poaching-prone areas by mapping previous poaching locations. In this test, users identified two potential poaching hotspots (Section 6.3)
+  - Uncover useful patterns for taking preventive measures to mitigate risks of human-wildlife conflict (Table 7)
+  - we now have the flexibility to look at the same data using different lenses ... this allows us to act proactively to mitigate risks of conflict (Section 7.3, Manager D)
+
+## 3. Digital Institutionalization: The Case of E-Prescribing
+
+- Metadata: 2024 · Journal of the Association for Information Systems · 10.17705/1jais.00845
+- Authors: Owen Eriksson; Sten-Erik Öhlund
+- Design classification: explicit_design_science
+- Artifact/intervention: 新的电子处方交换契约（NEF, National E-prescription Format）及其配套的XML schema、构成性规则（分类、结构、数据、动态一致性、标识规则）、自动校验与错误反馈机制、认证流程，以及对处方登记法规的修改推动。
+- Theory-to-design strength: strong
+- Theories:
+  - Speech Act Theory (Searle, 1969): 启发设计者定义如何执行高质量沟通行为（speech act）的显式规则系统，直接塑造了新交换契约中的构成性规则（结构、数据、动态一致性、标识规则），以及将验证推至处方创建点的设计。
+  - Institutional Theory / Neo-institutional Theory (Barley & Tolbert, 1997; Thornton et al., 2012; Searle, 2005/2006; Hasselbladh & Kallinikos, 2000): 提供制度上下文、制度逻辑、构成性/调节性规则、制度实体、制度化过程等核心概念，用于设计交换契约、指导数字制度化双向过程，并推导出三条设计原则（DP1-DP3）。
+  - Legitimacy Theory (Suchman, 1995; Deephouse & Suchman, 2008): 规范合法性与实用合法性作为设计目标和评估标准，决定了交换契约的规则细化、自动校验、认证、药房反馈、法规修改以及双向反馈机制的设计。
+- Source outcome: Quality of e-prescriptions (compliance with the exchange contract / errors)
+- Source definition: 电子处方这一数字制度实体在创建时对交换合同构成性规则的符合程度；偏离规则的错误被分为警告（W）和拒绝（R）两类，直接影响药师发放实践和患者安全。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 在NEF实施前后各连续一个月收集所有XML电子处方样本，计算处方集/处方的错误数量、错误类型分布、错误状态（W/R），以及至少含一个错误的处方集百分比。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果不是泛化的数据质量，而是由瑞典医疗处方制度上下文构成：电子处方是承载处方者主张和药师配药义务的制度实体；错误可能导致严重不良药物反应和住院，且药师作为把关者必须处理警告和拒绝，所有规则均来自国家法规和交换合同。
+- Coding-agent outcome: 变更契约合规性（agent生成代码变更的质量与合法性）
+- Coding-agent definition: 将代码变更（commit/PR）视为需要在开发者、审阅者、CI、部署环境间传递的数字制度实体；其质量/合法性定义为在生成时符合一个显式的“变更交换契约”（结构规则、数据/内容规则、动态一致性规则、标识规则），从而被下游接受而无须依赖人工审阅或CI作为纠错网关。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 源理论/机制：Speech Act Theory + Institutional Theory -> 设计交换契约，规定构成性规则（如何执行高质量的创建行为）-> 将自动校验推至处方创建点、去掉隐藏错误的网关、提供接受/警告/拒绝反馈 -> 降低下游错误、提升制度实体质量与合法性。编码智能体映射：为agent生成代码变更定义“变更契约”和构成性规则（PR结构、数据内容、跨文件动态一致性、对仓库实体/标识的引用）-> 要求agent在生成时自动校验并依据反馈自纠，而不是由审阅/CI网关事后修补 -> 产出候选结果：生成变更的契约合规性（类似从98.6%错误率降到0.9%）。
+- Proposed observables:
+  - agent生成PR/commit的规则违反率在引入变更契约前后的变化
+  - 错误类型分布（结构/数据/动态一致性/标识）以及警告与拒绝状态比例
+  - agent在收到拒绝/警告反馈后的自我修正率与返工次数
+- Coding-agent counterfactual: 若将编码智能体替换为静态IDE或普通聊天机器人，静态IDE只能在单文件层面做静态语法检查，不能在仓库规模上执行多步规划、产生真实副作用、运行测试并根据拒绝反馈自我修正；普通聊天机器人也没有自主的仓库级工具调用和迭代闭环，因此“将验证推至创建点并消除下游网关”的机制会丧失其核心效果。
+- Caveat: 代码变更不像电子处方那样具有法定的制度实体地位，需要组织层面显式定义“变更契约”和合法性标准；并非所有规则都能自动验证，仍需要人类监督和责任分配；源论文的测量基于前后各一个月的抽样对照，在软件开发环境中需要构造类似的对照评价。
+- Flash decision reason: 该文是明确的行动设计研究（ADR）：构建并评估了电子处方交换契约（NEF）这一干预；Speech Act Theory直接塑造了构成性规则和通信行为设计，Institutional Theory与Legitimacy Theory塑造了交换契约、自动校验、反馈机制及设计原则，theory-to-design强度为强。核心被评估结果——电子处方实体质量/合规性（错误率从98.6%降至0.9%）——在医疗处方制度语境中具有领域构成性含义，并能通过“将验证从下游网关推向创建点”的机制映射到编码智能体的变更契约合规性（如agent生成PR/commit的规则符合率），该映射依赖agent的多步规划、仓库级上下文、工具副作用、测试反馈与自我修正等独特条件，因此为strong_candidate。第二候选合法性转移为中等，但不影响总体判断。
+- Confidence: 0.86
+- Design evidence:
+  - Section 3.3.1: 'ADR is a research approach for generating design knowledge through building and evaluating IT artifacts (Sein et al., 2011)'
+  - Section 4.3: 'the core of the new exchange contract defines several constitutive rules, which must be followed'
+  - Section 4.4.1: 'The new exchange contract was used as a governance mechanism when the software modules and institutional entities were implemented.'
+  - Section 4.5: 'The decision to implement automated validation required errors to be reported back to the e-prescription modules.'
+- Evaluation evidence:
+  - Section 4.5: 'Before the implementation, the percentage of prescription sets with at least one error was 98.6%, whereas after the implementation, it was just 0.9%.'
+  - Section 4.5, Table 3: 'The total number of errors found under the old system was 5,970,737, compared with just 13,764 under the new system.'
+  - Section 4.5: 'a survey of the pharmacies (Hammar et al., 2010) ... A majority of the respondents believed that e-prescribing is safe for patients, provides patient benefits, is cost‐effective for pharmacies'
+  - Section 4.6: 'e-prescriptions had become conventional because 80% of all prescriptions were e-prescriptions'; Abstract: 'the adoption rate of e-prescribing in Sweden is now 99%'
+- Outcome evidence:
+  - Section 4.5: 'Before the implementation, the percentage of prescription sets with at least one error was 98.6%, whereas after the implementation, it was just 0.9%.'
+  - Section 4.5, Table 3: 'The total number of errors found under the old system was 5,970,737, compared with just 13,764 under the new system.'
+  - Section 4.5: 'The error status directly impacted practice as it clarified which types of error led to rejection...'
+
+## 4. Timely, Granular, and Actionable: Designing a Social Listening Platform for Public Health 3.0
+
+- Metadata: 2024 · MIS Quarterly · 10.25300/misq/2023/17381
+- Authors: Brent Kitchens; Jennifer L. Claggett; Ahmed Abbasi
+- Design classification: explicit_design_science
+- Artifact/intervention: HealthSense：面向公共卫生3.0的社交倾听平台，由相关性评估模块（RAM）、可信度评估模块（CAM）和渠道景观评估模块（LAM）组成，结合活动理论扩展、上下文信息质量要求、图传播和图神经网络（GNN）实现。
+- Theory-to-design strength: strong
+- Theories:
+  - Activity theory (Engeström's expanded activity theory): 作为核心设计理论，将在线内容创作理解为主体、工具（渠道）、社区、内容之间的活动，并扩展为包含多重交互关系的通信活动网络；该扩展直接转化为相关性、可信度和渠道景观评估的设计元素以及多层级图传播机制。
+  - Context-based information quality (contextual information quality literature): 提供元需求：及时性、相关性、可信度、完整性；这些需求分别对应HealthSense的总体设计目标以及RAM、CAM、LAM模块的功能边界。
+- Source outcome: Completeness of task-relevant information collection across fragmented online channels (landscape coverage)
+- Source definition: 在跨越多个在线渠道时，能够收集到完整、相关且不遗漏稀疏连接“口袋”中关键信息的程度；避免聚焦爬虫的局部最优陷阱。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 以37,064,742个URL为测试床，比较HealthSense与基线方法在收集到5M/10M URL时的recall/precision/F值；并通过去除LAM/CAM模块的消融分析量化性能退化。
+- Source contextual specificity: contextualized
+- Why source-specific: “完整性/覆盖度”本身是通用信息质量维度，但本文将其置于公共卫生3.0语境：相关信息分布在高度动态、稀疏连接、易被删除的毒品论坛/网站中（例如bitcointalk.org作为桥接节点），缺失信息会导致公共健康判断错误。
+- Coding-agent outcome: 仓库级任务相关上下文覆盖率（避免局部最优的自主信息搜集）
+- Coding-agent definition: 编码代理在自主完成软件开发目标时，能够跨越仓库中稀疏连接、表面不相关但实际关键的文件/依赖/测试/文档，收集足够完整的任务相关上下文，避免因局部视角产生错误修改的程度。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: repository-scale and dependency-sensitive context, autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects
+- Mechanism mapping: 活动理论扩展：信息存在于通信活动的多重交互关系和信息传播中 -> HealthSense的LAM用GNN评估“tunneling potential”，并通过多层级双向图传播识别通向相关内容的桥接节点 -> 编码代理设计应建立文件/模块/测试/依赖/问题的异质图，用图传播或类似机制对“表面无关但通向关键代码”的文件进行优先级排序 -> 候选结果：更完整的上下文覆盖，减少因遗漏依赖或相关测试导致的错误。
+- Proposed observables:
+  - 在ground-truth受影响文件集合中，代理最终计划/上下文包含的相关文件比例
+  - 代理在达到所有相关代码簇前的探索步数/工具调用次数
+  - 因未探索的关键依赖或测试导致的失败/回归数量
+- Coding-agent counterfactual: 如果用静态IDE或普通聊天机器人，用户需要手动搜索和导航；没有代理自主的、基于图传播的多步探索决策，也没有仓库级工具副作用。该结果和机制会显著改变。
+- Caveat: 源论文处理的是网页/社交媒体渠道，而非代码仓库；将“渠道景观”映射为“仓库依赖/调用图”需要明确异质图构建和信号设计，且GNN方法在代码库上可能面临标签稀疏和规模问题。
+- Flash decision reason: 该文是明确的设计科学/计算设计研究：设计和实现了HealthSense社交倾听平台，并通过数据实验、用户实验和事件检测实验进行了评估。活动理论和上下文信息质量理论对元需求和具体设计元素具有强生成性作用。最具转移潜力的结果“碎片化渠道中的任务相关信息完整性/景观覆盖”在源域中被情境化为公共卫生3.0下的稀疏动态在线渠道问题，并可通过“图传播与隧道潜力”机制映射到编码代理的仓库级上下文覆盖，该机制依赖代理的自主多步探索和仓库副作用，移除代理条件会显著改变定义与测量，因此是强候选。
+- Confidence: 0.85
+- Design evidence:
+  - Introduction: 'Following a computational design research approach (Rai, 2017; Padmanabhan et al., 2022), we propose HealthSense, a design artifact for social listening to collect timely, granular, actionable data in support of Public Health 3.0 analytics.'
+  - Requirements & Design: 'In artifact design, kernel theories from the natural or social sciences are often used to guide meta-requirements and metadesign (Walls et al., 1992).'
+  - Table 2 maps activity-theoretic meta-requirements and information-quality meta-requirements to design elements (a)-(j).
+  - The HealthSense Artifact section describes the three modules RAM, CAM, LAM and their GNN implementations.
+- Evaluation evidence:
+  - Applications and Evaluation: 'we constructed a large-scale test bed and used it to explore two Public Health 3.0 tasks: (1) postmarketing drug surveillance (PMDS) and (2) synthetic opioid batch surveillance.'
+  - Data Experiment: Table 6 reports precision, recall, f-measure at 5M/10M URLs; HealthSense reached 99.9% recall at 10M for both tasks.
+  - Field Study, User Experiment: Table 10 reports 77 PharmCo safety team members' precision/recall/F in identifying true-positive and false-positive adverse-event cases.
+  - Disproportionality Analysis Case Study: Table 11 reports case recall and signal precision using reporting odds ratio.
+- Outcome evidence:
+  - Data Experiment, Table 6: HealthSense identified 75.1% of PMDS relevant pages within first 5 million URLs and 99.9% at 10M; for opioids, 2.4× better than HGAN at 5M.
+  - Data Experiment, Table 8: Excluding CAM and/or LAM causes substantial degradation in F1, precision, and recall.
+  - Discussion: 'HealthSense identified over 90% of relevant information for specified tasks by analyzing less than 20% of data.'
+
+## 5. Explainability and fairness of RegTech for regulatory enforcement: Automated monitoring of consumer complaints
+
+- Metadata: 2022 · Decision Support Systems · 10.1016/j.dss.2022.113782
+- Authors: Michael Siering
+- Design classification: explicit_design_science
+- Artifact/intervention: 用于预测金融消费者投诉是否导致金钱赔偿的RegTech文本分类器及其设计原则/设计特征：分类器A（信息诊断性理论特征）、分类器B（词袋模型）、分类器C（集成模型）以及针对“老年美国人”子群体的公平分类器。
+- Theory-to-design strength: strong
+- Theories:
+  - Information Diagnosticity Theory: 作为核心理论（kernel theory）推导可解释的分类特征：评论深度、情感、时间焦点、主动/不确定/感知/知识相关词汇等被用来构建分类器A，使分类结果可以根据文本的诊断性进行解释；其假设是更有帮助/诊断性的投诉更可能获得赔偿。
+- Source outcome: Consumer complaint outcome: monetary compensation paid to consumer
+- Source definition: 预测消费者投诉是否导致公司向消费者支付金钱赔偿；这是监管机构决定是否进一步调查的靶子，也是有限监管资源配置的优化目标。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 以CFPB投诉数据库中是否获得金钱赔偿为二元标签；用准确率、精确率、召回率、F1（10折交叉验证）以及McNemar检验评估；在非平衡holdout样本上用lift chart评估按置信度排序后的监管筛选效果。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的含义、利害关系人和操作化完全依赖于美国CFPB消费者投诉—监管执法情境：金钱赔偿是监管行动的重要触发信号，监管资源有限，投诉文本和赔偿结果之间的关系由金融消费者保护制度定义；换成一般企业IT情景，该结果没有对应语义。
+- Coding-agent outcome: 编码智能体待审查变更的人类监督优先级（triage）质量
+- Coding-agent definition: 在自治/半自治编码智能体产生多个代码变更或动作建议的场景下，人类开发者能够依据智能体提供的置信度和诊断性解释，优先审查哪些最可能在仓库中引入缺陷、安全风险或不符合意图的变更，从而用有限人力覆盖尽可能多的高风险动作。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: 源理论（信息诊断性理论）-> 源设计机制（用理论推导的文本特征构建可解释分类器A，并用分类置信度对投诉进行排序，使监管者优先处理高概率获得赔偿的投诉）-> 编码智能体设计启示（设计智能体对其计划/已做变更的“诊断性”自述：具体、面向实际变更经验、平衡情绪、适度而非过度自信，同时输出变更风险置信度，使人类审阅者能快速判断哪些变更需要亲自检查）-> 候选结果（人类审查覆盖的高风险变更比例提升，即审查triage质量）。
+- Proposed observables:
+  - 人类审阅者仅检查智能体按置信度排序的前10%变更时，能发现多大比例的“有害变更”（如破坏测试、引入安全漏洞）——对应源论文lift chart指标
+  - 智能体生成的变更说明中包含具体文件/行号/依赖影响等“可诊断性”特征的频率与深度
+  - 人类审阅者对智能体自述风险的置信度校准程度（如高置信但实际有害的比例）
+- Coding-agent counterfactual: 如果用静态IDE或普通聊天机器人替代编码智能体，则不存在“多个自治产生的、带有仓库副作用的变更需要被优先人工审查”这一对象；IDE不产生动作集合，聊天机器人不修改代码，因此“针对智能体动作的triage”这一结果定义和度量都会消失。
+- Caveat: 源论文中的“解释性”更多来自理论特征本身而非置信度排名，而本迁移把理论用于设计智能体生成的变更说明；这一迁移需要额外假设：智能体有动机和方式输出可用的自我解释/置信度，且人类审查行为可被类似lift指标度量。另外，源论文triage机制主要依赖分类置信度，信息诊断性理论在其中是解释性特征来源，而非排序机制本身。
+- Flash decision reason: 该论文是显式设计科学研究（explicit_design_science），遵循Hevner/Peffers DSR范式，提出并评估了设计原则和特征。信息诊断性理论被明确用作核心理论来推导可解释的分类特征（DP1），理论到设计的联系强。评价的核心结果——预测消费者投诉是否导致金钱赔偿（以及基于置信度排序的监管人工筛查lift值）——是金融监管执法情境中领域构成性的结果。该结果和“高置信度案例优先人工处理”机制可以迁移到编码智能体：智能体产生的自治代码变更需要人类审阅者进行triage，用置信度和诊断性变更说明来优先检查高风险变更，且该triage对象在静态IDE/普通聊天机器人中不存在，因此编码智能体特异性强。故评为strong_candidate。
+- Confidence: 0.85
+- Design evidence:
+  - Section 3.1: 'we follow the design science research paradigm... propose design principles guiding the process to build and evaluate a RegTech approach'
+  - Section 3.3: DP1 'Information Diagnosticity as Kernel Theory Guiding Classifier Configuration', DP2 'Application of comprehensive machine learning models', DP3 'Consideration of potential discriminatory properties'
+  - Section 3.4: design features DF1a, DF1b, DF2a, DF2b, DF3 operationalize the design principles
+- Evaluation evidence:
+  - Section 4.1: evaluation uses three datasets (1500 CreditKarma reviews, 6000 CFPB complaints balanced sample, 75,000 holdout sample) to validate/evaluate classifiers A, B, C
+  - Sections 4.3–4.5: tests of hypotheses H1–H3 with accuracy/precision/recall/F1 and McNemar's test
+  - Section 4.6: 'Practical evaluation' with lift chart showing that selecting 10% of high-confidence complaints covers more than 65% of compensation cases
+- Outcome evidence:
+  - Section 3.2: 'the question of whether a complaint is substantial and results in a compensation paid to the consumer'
+  - Section 4.1: 'we acquire a random balanced sample of 6000 consumer complaints... 3000 complaints resulting in a compensation paid, 3000 not'
+  - Section 4.6: 'The lift chart shows that if only 1.00% of all complaints are selected, about 13.00% of all complaints resulting in monetary compensations are included... a regulator can use the classifiers to reduce the amount of cases to be analyzed manually'
+
+## 6. The Design of a System for Online Psychosocial Care: Balancing Privacy and Accountability in Sensitive Online Healthcare Environments
+
+- Metadata: 2022 · Journal of the Association for Information Systems · 10.17705/1jais.00717
+- Authors: Jonas Sjöström; Pär Ågerfalk; Alan R. Hevner
+- Design classification: explicit_design_science
+- Artifact/intervention: U-CARE 在线心理社会护理系统：一个支持匿名患者社区、在线CBT治疗、临床试验管理、基于动作的日志与审计、角色授权和'打破玻璃'隐私泄露记录的软件平台；同时包括配套的组织治理实践（政策文件、管理审计流程）。
+- Theory-to-design strength: strong
+- Theories:
+  - Action-Oriented Conceptual Modelling (AOCM): 作为核心理念指导动作导向的概念建模，使社交动作成为数据库和日志中的一等实体，从而支持对用户、角色、动作类型和活动的追溯审计。
+  - Role-Based Access Control (RBAC) with Model-View-Controller (MVC): 提供授权和架构机制：RBAC 将动作权限与角色绑定，MVC 作为系统架构模式，两者与 AOCM 结合形成动作授权与日志的动态过滤器。
+  - Theory of Scrutiny (ToS) with scrutiny levels, protocol matrix, control flows, and design principles P1-P4: 作为涌现的设计理论，将隐私与问责的平衡操作化为四层审视、问责信息流/隐私期望流以及四条设计原则，指导 Cycle 2 的系统实现与治理实践。
+  - Information Accountability (Weitzner et al., 2008): 其三个架构特征（策略感知事务日志、通用策略规则框架、策略推理工具）启发了 U-CARE 对信息使用记录、策略澄清和合法使用支持的强调。
+- Source outcome: Sustained audit practice (privacy breach auditing)
+- Source definition: 组织持续执行隐私泄露审计的实践：管理团队定期审查系统记录的潜在隐私泄露，执行'违规报告—措施—闭合'三步审计流程，并以此维持问责。
+- Source evaluation role: mixed_evaluation
+- Source operationalization: 对20份管理团队会议纪要（2014.1-2016.2）进行开放/轴向编码，结合政策文件、系统日志、待办数据和SVN仓库数据分析；定量统计了1875次潜在隐私泄露中的1819次被审计；识别出报告—措施—闭合的审计流程和合规/非合规案例。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的核心对象是心理社会护理中患者的敏感健康数据；隐私泄露的类型、触发条件、审计理由和闭合标准都取决于匿名患者社区、治疗紧急情况、心理学家与支持人员的职业角色、伦理审查和医疗法规等源领域特征。
+- Coding-agent outcome: 编码代理敏感/受限操作的可审计正当性
+- Coding-agent definition: 编码代理在被委托执行多步开发任务时，对其访问敏感资源、跨越权限边界或执行不可逆操作的行为，系统能够以动作日志和'打破玻璃'理由记录的形式保留完整问责信息，并由人类通过定期审查流程进行确认或质疑。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects, dynamic human-agent delegation, supervision, interruption, and handoff, persistent or asynchronous work
+- Mechanism mapping: ToS的问责信息流和P1/P4原则 → 源设计中的动作日志框架、受限信息环境、'打破玻璃'理由记录和管理层月度审计 → 编码代理设计：将代理作为动作主体纳入动作日志；限制代理对敏感文件/服务/凭据的访问；当代理需要越权访问或执行高风险命令时，强制记录理由并生成待人工审计事件 → 候选结果：代理敏感/受限操作的可审计正当性。
+- Proposed observables:
+  - 每个代理工具调用（尤其是文件写入、命令执行、API访问）都记录代理标识、所属委托目标、目标路径/资源、动作类型和权限范围，并标记是否越权。
+  - 代理在权限边界外执行操作前必须填写结构化'打破玻璃'理由，类似源系统中心理学家或IT支持人员的隐私泄露理由记录。
+  - 定期（如每日/每周）人工审查仪表盘展示未审计的受限代理动作，要求负责人逐项确认或关闭，类似U-CARE管理团队的月度审计闭环。
+- Coding-agent counterfactual: 若将编码代理替换为静态IDE、普通聊天机器人或通用企业IT工具，则不存在代理自主多步执行、真实仓库/环境副作用、权限边界跨越和委派人机交接等条件，'敏感/受限操作的可审计正当性'这一结果及其测量方式将失去意义或大幅改变。
+- Caveat: 源领域针对的是人类医疗人员的隐私泄露审计；迁移时需要明确编码代理语境中'敏感操作'的范围（如生产密钥、客户数据、破坏性重构、覆盖他人代码），并确保人工审查能够适应代理操作的频率和规模；此迁移为分析推断，原文未涉及编码代理。
+- Flash decision reason: 该文是明确的设计科学研究（DSR），构建并自然主义评估了U-CARE软件系统；AOCM、RBAC/MVC、信息问责和涌现的ToS理论对设计原则、动作日志架构和'打破玻璃'机制有直接生成性作用。最有前景的源结果是'持续审计实践'，其意义和操作化高度依赖心理社会护理中的患者敏感数据、伦理审查和医疗问责语境。该结果的问责信息流与打破玻璃机制可迁移到编码代理场景，形成'代理敏感/受限操作的可审计正当性'，依赖代理的自主多步执行、真实环境副作用、委派监督等非替代性条件，因此判定为强候选。
+- Confidence: 0.85
+- Design evidence:
+  - Via a design science research approach, we build and evaluate a sophisticated software system for the online provision of psychosocial healthcare to distributed and vulnerable populations. (Abstract)
+  - In order to construct a solid foundation for accountability, we draw on the pragmatic and action-oriented approach to conceptual modeling (AOCM) described by Ågerfalk and Eriksson (2004) as a kernel theory to support design. (Section 4.2)
+  - The U-CARE design promotes accountability by being ingrained with three kernel theories: AOCM, RBAC, and MVC, resulting in a novel authorization scheme; governing access to perform accountable social actions using the software based on the actor role. (Section 4.2)
+  - ToS consists of different elements serving as an instrument to support inquiry into scrutiny practices and software design. ... Section 5.4 is a design-oriented operationalization of the multilayered protocol into scrutiny design principles. (Section 5)
+- Evaluation evidence:
+  - The practical use of the system over three years provides data for a rigorous naturalistic evaluation of the artifact and its use in practice. (Section 6)
+  - To establish proof of value, we conducted a qualitative analysis of management operations in the U-CARE practice. The analysis is based on monthly management team meeting minutes from January 2014 to February 2016 (N=20). (Section 6.2)
+  - The study period (26 months) provided 1875 potential privacy breaches logged in the U-CARE system during the core RCTs. Management scrutinized and audited 1819 of these breaches. (Section 6.2.1)
+  - Our analysis of steering meeting protocols revealed a three-step audit process for Level 2 Scrutiny that enabled the breaking the glass design principle. (Section 6.2.1)
+  - The extensive use of the software outside the original context of design provides clear evidence supporting the effectiveness of U-CARE and the theory of scrutiny. (Section 6.3)
+- Outcome evidence:
+  - The study period (26 months) provided 1875 potential privacy breaches logged in the U-CARE system during the core RCTs. Management scrutinized and audited 1819 of these breaches. (Section 6.2.1)
+  - Our analysis of steering meeting protocols revealed a three-step audit process for Level 2 Scrutiny that enabled the breaking the glass design principle, as shown in Figure 4. (Section 6.2.1)
+  - The establishment of an outlined audit process and its continued enactment by the management team clearly shows that management found considerable value in the ability to report and follow up on privacy breaches. (Section 6.2.1)
+
+## 7. An Activity Theory Approach to Leak Detection and Mitigation in Patient Health Information (PHI)
+
+- Metadata: 2021 · Journal of the Association for Information Systems · 10.17705/1jais.00687
+- Authors: Rohit Valecha; Shambhu Upadhyaya; H. Raghav Rao
+- Design classification: explicit_design_science
+- Artifact/intervention: 基于活动理论（Activity Theory）的访问控制模型（ACM），包括 access request 与 access response 两个交互活动系统、基于 privilege set 的泄漏检测机制和基于 policy set 的泄漏缓解机制，以及用 Java 实现的 PHI 泄漏检测与缓解原型系统。
+- Theory-to-design strength: strong
+- Theories:
+  - Activity Theory (AT): 活动理论的六个构件（subject、object、community、rules、tools、division of labor）被映射到访问控制策略要素，从而形成 AT-based ACM；第三代活动理论的交互活动系统概念被用来把访问控制重构为 access request 与 access response 两个交互子系统，进而推导出泄漏检测和泄漏缓解的设计机制。
+- Source outcome: PHI leak detection and mitigation
+- Source definition: PHI 泄漏被定义为患者健康信息被不适当地（无意或有意）或未经授权地披露给不可信用户；检测与缓解即通过访问控制识别此类未授权信息流并施加阻止、通知或脱敏等策略。
+- Source evaluation role: qualitatively_evaluated
+- Source operationalization: 通过 AT 模型将泄漏场景分解为 subject/object/community/rules/tools/division of labor；访问请求系统与 privilege set 匹配发现泄漏，访问响应系统生成 policy set 并强制执行；使用四名医疗管理者的访谈场景、20 多个 PHI 泄漏场景、事务测试和 Java 原型进行验证。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: PHI 泄漏的定义和危害绑定在患者健康信息、医疗隐私法规、患者污名化和医疗危机上；其利益相关者（患者、医生、医疗机构）、风险与运行化方式都是医疗领域特有的，而不仅仅是通用数据泄漏。
+- Coding-agent outcome: 编码智能体敏感信息泄漏的检测与缓解
+- Coding-agent definition: 在编码智能体被委托完成软件开发目标时，检测并缓解其对敏感信息（密钥、凭据、个人数据、专有代码/配置）的未经授权或不适当访问、传递或写入，包括通过工具调用、命令执行、生成文件和外部服务产生的信息流泄漏。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects, repository-scale and dependency-sensitive context, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 活动理论 -> AT-based ACM（将 subject/object/community/rules/tools/division of labor 映射到访问控制策略，并分解为 access request/access response 交互系统；通过 privilege set 匹配检测泄漏，通过 policy set 强制缓解） -> 编码智能体设计：把 agent 的每次工具调用/文件写入/命令执行建模为活动系统，subject=agent 角色，object=代码/数据，tools=shell/API/编辑器，rules=安全策略，community=仓库/组织，division=职责；请求集与权限集不匹配即判为敏感信息泄漏并触发阻断/通知/脱敏 -> 候选结果：对编码智能体信息流中敏感信息未授权流动的检测与缓解。
+- Proposed observables:
+  - agent 的工具调用（如 shell、curl、git push、文件写入）被记录并与 AT 权限集匹配，产生 allow/deny 判定日志
+  - 当 agent 尝试将包含密钥、PHI 或专有代码的内容发送到外部端点或写入非授权路径时，策略引擎阻断并触发告警
+  - 缓解动作（脱敏、隔离、通知管理员/用户）被自动执行并纳入活动系统审计轨迹
+- Coding-agent counterfactual: 静态 IDE 或普通聊天机器人通常不能自主执行 shell、网络请求、git push 等带副作用的操作，也无法在多步骤委托中把敏感信息携带到外部端点；因此去掉代理性工具使用、自治规划和委托目标后，该类泄漏通道和运行期强制策略机制会消失。
+- Caveat: 源文在医疗 PHI 访问控制场景验证，未涉及软件工程仓库或编码智能体；需要重新定义敏感数据类别、agent 权限与策略规则，并在真实 agent 环境中评估误报/漏报和执行成本。
+- Flash decision reason: 该文是显式设计科学研究（应用 Hevner 等 2004 的 DSR 方法），活动理论从设计需求、构件映射到访问控制模型特征和检测/缓解机制，理论到设计链条强；评估了具有医疗领域特异性的 PHI 泄漏检测与缓解结果；将该机制映射到编码智能体的工具调用和信息流泄漏场景具有强非替代性，因此构成 strong candidate。
+- Confidence: 0.85
+- Design evidence:
+  - Introduction: 'we adopt the design science research method (Hevner et al., 2004) to articulate the design of an access control model (ACM) to aid in the detection and mitigation of PHI leaks'
+  - Section 2.4: 'we propose activity theory (AT) as a framework to inform the design of access control models'; Section 4 explicitly designs the 'access request' and 'access response' interacting systems.
+  - Section 5.4: 'We built the prototype system coded in Java programming language to evaluate the proposed framework.'
+- Evaluation evidence:
+  - Section 5: 'we evaluated the model through both participant review and transaction testing using PHI leak scenarios to determine how well the model represents the domain'
+  - Section 5.3: 'The manager confirmed that the raw details of the enforcement points within the PHI leak scenario were completely represented by the model. In addition, she also confirmed that the concepts were accurately extracted.'
+  - Section 5.4: transaction testing steps (privilege set matching, policy generation) and prototype screens demonstrate PHI leak detection and mitigation.
+- Outcome evidence:
+  - Abstract: 'use the lens of activity theory to articulate the design of an access control model for detecting and mitigating PHI leaks. Subsequently, we follow up with a prototype as a proof of concept.'
+  - Section 5.4: 'This request is verified against privilege set... For mismatch information, policies are generated based on AT...' and Figure 7e illustrates a PHI leak mitigation case.
+  - Section 5.3 case application: the manager confirmed that the model completely and accurately represented enforcement points in a real PHI leak scenario.
+
+## 8. The Phishing Funnel Model: A Design Artifact to Predict User Susceptibility to Phishing Websites
+
+- Metadata: 2021 · Information Systems Research · 10.1287/isre.2020.0973
+- Authors: Ahmed Abbasi; David Dobolyi; Anthony Vance; Fatemeh Mariam Zahedi
+- Design classification: explicit_design_science
+- Artifact/intervention: 设计工件 PFM（Phishing Funnel Model）：一个预测用户对钓鱼网站易感性的预测分析模型，以四阶段钓鱼漏斗（访问、浏览、认为合法、意图交易）为序数因变量，使用带自定义复合核的支持向量序数回归（SVORCK/CLMM）；同时在实验二中作为实时个性化警告干预的预测引擎。
+- Theory-to-design strength: strong
+- Theories:
+  - Technology Acceptance Model (TAM): 用于推导工具相关变量：感知有用性、感知易用性、工具错误成本；这些变量被纳入 PFM 的输入特征，以预测用户对防钓鱼工具的依赖及后续易感性。
+  - Protection Motivation Theory (PMT): 用于推导威胁相关变量：威胁严重性、威胁易感性、先前的威胁经历、感知严重性；这些变量被纳入 PFM 以预测用户沿钓鱼漏斗的决策。
+  - Human-in-the-Loop Security Framework (HITLSF): 用于推导用户相关变量：人口统计特征（年龄、性别、教育）、知识/经验（领域熟悉度、网站熟悉度、过去损失、对机构的信任）；这些变量被纳入 PFM 以刻画用户特征对警告有效性的调节作用。
+- Source outcome: Phishing susceptibility (final funnel stage)
+- Source definition: 用户与某次钓鱼攻击互动的程度，操作化为一次用户-钓鱼遭遇的最终漏斗阶段：未访问、访问、浏览、认为合法、意图交易（以及观察到的交易行为）。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 在 12 个月纵向现场实验中，用点击流日志记录访问/浏览，用会话后弹窗询问“是否认为网站合法/是否意图交易”，并记录观察到的交易；最终以序数因变量（五类漏斗终点）训练/测试 PFM，用多分类 ROC/AUC 评估预测性能，并通过特征消融检验各特征类别的贡献。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的意义和操作化完全依赖钓鱼攻击情境：涉及恶意网站、用户点击/浏览/交易决策、组织安全风险；换成通用企业 IT 后，“钓鱼漏斗”和“用户-钓鱼遭遇”不再存在。
+- Coding-agent outcome: 编码代理对恶意/欺骗性开发指令的易感性（有害行动漏斗遍历）
+- Coding-agent definition: 在自主编码代理被委派软件开发目标时，代理沿一系列渐进危险行动阶段（接受/关注指令、探索仓库、认为指令合法、生成并执行代码/修改仓库/运行命令）前进的程度；该结果用于预测代理可能执行恶意或未授权操作的风险，并据此设计干预。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: PFM 用 TAM（工具有用性/易用性/错误成本）、PMT（威胁严重性/易感性/先前经验）和 HITLSF（用户特征调节警告效果）构造工具-威胁-用户特征，并通过带 CLMM 的序数回归预测用户沿钓鱼漏斗的最终阶段。迁移到编码代理：将代理的任务上下文/历史、任务威胁特征（如提示注入、依赖投毒）、防护工具信号（如漏洞扫描、权限提示）作为特征，预测代理在恶意指令漏斗中会走多深，并按预测阶段调整干预（如要求人工审批、沙箱、升级验证），从而降低有害代码变更的执行风险。
+- Proposed observables:
+  - 代理对可疑 issue/PR/命令的响应与继续探索率（如打开文件、运行命令、安装依赖）
+  - 代理在安全警告或权限提示后继续执行的比例，以及最终仓库 diff 中被标记为危险/未授权的变更占比
+  - 人工审查/事后审计中识别出的恶意或越权操作数量及对应的漏斗阶段日志
+- Coding-agent counterfactual: 若换成静态 IDE 或普通聊天机器人，则不存在受委派目标的自主多步执行、工具调用和仓库副作用，“沿漏斗遍历”无法定义，预测-干预机制无法实施；因此该结果和机制强依赖编码代理条件。
+- Caveat: 源理论涉及人类感知与人口学变量，迁移到代理需要把“感知”重构为模型上下文、配置和日志特征；源论文未涉及编码代理，本迁移为分析性推断，需在代理环境中重新操作化漏斗阶段。
+- Flash decision reason: 该文是明确的设计科学研究：PFM 工件由 TAM、PMT、HITLSF 直接推导变量设计，并在两个纵向现场实验中评估了预测性能、干预效果和成本效益。其核心结果“用户对钓鱼网站的易感性/漏斗遍历”是领域构成性的；可将其机制迁移到编码代理对恶意/欺骗性开发指令的易感性及干预校准，且该迁移依赖代理的自主多步执行、工具副作用和人类监督交接，非静态 IDE/普通聊天机器人可替代。因此为 strong_candidate，target_match=true。
+- Confidence: 0.85
+- Design evidence:
+  - We propose the phishing funnel model (PFM), a design artifact for predicting user susceptibility to phishing websites. (Abstract)
+  - We adopted the design science paradigm (Hevner et al. 2004) to guide the development of the proposed phishing funnel model (PFM) artifact. (Section 1)
+  - PFM incorporates user, threat, and tool related factors to predict actions during four key stages of the phishing process: visit, browse, consider legitimate, and intention to transact. (Abstract)
+  - The development of PFM follows guidelines mentioned in recent design science papers that promote the development of novel design artifacts (Gregor and Hevner 2013, Goes 2014). (Section 7.2)
+- Evaluation evidence:
+  - We evaluated the efficacy of PFM in a 12-month longitudinal field experiment in two organizations involving 1,278 employees and 49,373 phishing interactions. (Abstract)
+  - PFM significantly outperformed competing models/methods by 8%–52% in area under the curve, correctly predicting visits to high-severity threats 96% of the time. (Abstract)
+  - A follow-up three-month field study revealed that employees using PFM were significantly less likely to interact with phishing threats relative to comparison models and baseline warnings. (Abstract)
+  - a cost-benefit analysis showed that interventions guided by PFM resulted in phishing-related cost reductions of nearly $1,900 per employee more than comparison prediction methods. (Abstract)
+  - We evaluated performance by examining actual phishing funnels for participants assigned to the six settings... Participants using PFM for susceptibility prediction were less likely to traverse the phishing funnel stages and had lower visitation, browsing, legitimacy consideration, and transaction intention rates. (Section 6.2)
+- Outcome evidence:
+  - We define phishing susceptibility as the extent to which a user interacts with a phishing attack. (Section 2)
+  - PFM incorporates user, threat, and tool related factors to predict actions during four key stages of the phishing process: visit, browse, consider legitimate, and intention to transact. (Abstract)
+  - PFM significantly outperformed competing models/methods by 8%–52% in area under the curve, correctly predicting visits to high-severity threats 96% of the time. (Abstract)
+  - Figure 5 depicts the observed funnel stage traversal frequencies and percentages across the 12-month field experiment.
+
+## 9. Improving Students’ Argumentation Skills Using Dynamic Machine-Learning–Based Modeling
+
+- Metadata: 2025 · Information Systems Research · 10.1287/isre.2021.0615
+- Authors: Thiemo Wambsganss; Andreas Janson; Matthias Söllner; Ken Koedinger; Jan Marco Leimeister
+- Design classification: explicit_design_science
+- Artifact/intervention: ArgueLearn：一个基于机器学习/NLP的动态论证建模学习系统，采用服务导向架构，包含教学场景、论证注释方案、标注语料库、论证挖掘算法模块和学生中心界面（仪表板、高亮、论证图等）。
+- Theory-to-design strength: strong
+- Theories:
+  - Social Cognitive Theory (Bandura 1986, 2001): 作为核心内核理论，通过“行为建模”和“观察学习”机制推导动态论证建模的设计需求：系统应提供个体化、动态的期望行为模型，并用高亮、论证图、错误反馈等方式支持注意、保持、产出和动机等观察学习过程。
+  - Toulmin's Argumentation Theory (Toulmin 1984, 2003): 提供论证结构的形式化模型（claim、premise等），用于设计注释方案、论证挖掘模型、反馈界面以及客观论证质量的测量指标。
+- Source outcome: Objective quality of argumentation
+- Source definition: 根据 Toulmin 形式论证结构衡量学习者文本中正式论证的质量，即论证是否由 claim 和 premise 构成、claim 是否有充分的前提支撑。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 使用 Weinberger 和 Fischer (2006) 的论证知识建构注释方案，区分未支持的 claim、支持的 claim、限制的 claim 等，并统计文本中有效论证数量；由两名注释者根据注释指南进行标注。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的操作化高度依赖论证理论中的 claim-premise 结构、Toulmin 模型以及教育写作/同行评审场景；如果换成通用企业IT场景，'正式论证质量'没有直接对应的含义或测量。
+- Coding-agent outcome: 代码变更的证据支撑完备性（supported-change ratio）
+- Coding-agent definition: 自主代码代理生成的每个变更主张（代码修改、计划步骤、配置变更）被可核验证据（失败测试、需求条目、执行日志、依赖约束、运行时结果）明确支撑的程度；缺乏证据支撑的变更被视为“unsupported claim”，可供代理修正或人工审查。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, production or modification of executable, interdependent artifacts, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 社会认知理论中的动态行为建模 -> ArgueLearn 通过 ML 识别文本中的 claim 和 premise，高亮未获支持的 claim 并提供图表化反馈，使学习者观察理想行为并自我修正 -> 编码代理设计：构建一个动态论证建模模块，持续分析代理的计划和提交，将代码改动视为 claim、测试/需求/日志视为 premise，对缺乏支持的改动给出反馈 -> 目标结果是代理输出中无支撑改动比例降低、证据支撑完备性提高。
+- Proposed observables:
+  - 最终提交中有测试/需求/日志支撑的代码行或文件比例
+  - 代理在收到“unsupported claim”反馈后新增测试、补充说明或调整代码的频次
+  - 人工审查中因缺少支撑证据而被拒绝或回滚的改动数量
+- Coding-agent counterfactual: 若替换为静态IDE或普通聊天机器人，则不存在多步自主目标追求、仓库级变更、执行反馈和自我修正循环，'变更作为需要证据支撑的主张'这一现象基本消失；静态代码补全不会对仓库产生持久影响。
+- Caveat: 源结果关注人的写作技能提升，而转译后更关注代理输出的可验证质量和自我修正行为；'premise'需明确为测试、需求、日志等编码域证据，避免退化为单纯测试覆盖率指标；社会认知理论是否直接适用于非人类代理仍需边界条件论证。
+- Flash decision reason: 该文是明确的设计科学研究，构建并评估了基于ML的动态论证建模系统 ArgueLearn；设计由社会认知理论和 Toulmin 论证理论强驱动；评估结果'客观论证质量'具有源域特定性，并能通过'代码变更作为主张、测试/需求/日志作为前提'这一映射转化为编码代理特有的设计目标，因此构成 strong candidate。
+- Confidence: 0.82
+- Design evidence:
+  - 在“Implementation of a Theory-Driven Dynamic Argumentation Modeling System Based on ML”部分，作者提出“For the system class of dynamic argumentation modeling approaches, we propose a service-oriented architecture approach... we refer to the modules as artifacts, following the design science research paradigm (Gregor and Hevner 2013).”
+  - 同节提到“The specific instantiation was informed by 30 semistructured interviews with students...”，并构建了 ArgueLearn。
+  - “User Interface Design”部分描述了 ArgueLearn 的功能 F1-F7，包括高亮、论证图、评分仪表板等由理论驱动的设计特征。
+- Evaluation evidence:
+  - 在“Experimental Design”部分，作者报告了“one pilot study, one eye-tracking study, and three experimental studies (study 1, study 2, and study 3) with a total of 366 students”。
+  - 研究1用实验室实验比较动态建模与脚本化建模；研究2用2×2实验比较动态建模与自适应支持及任务难度；研究3用三个月现场实验比较动态建模、静态建模和无建模。
+  - “Results”部分给出了客观论证质量和主观论证质量的统计检验结果，如研究1的 t-value = -3.622, p < 0.001；研究3的 p = 0.0150 等。
+- Outcome evidence:
+  - 测量部分："Objective Quality of Argumentation. The written peer reviews were analyzed for the objective quality of argumentation measured by assessing the formal structure of the arguments, for example, if argumentative claims are sufficiently bagged up by premises."
+  - 研究1结果："The mean number of arguments in texts from participants using ArgueLearn was 5.08 (SD = 1.76)... A linear regression confirmed that the treatment group wrote texts with a statistically significantly higher objective argumentation quality: t-value = -3.622 and p < 0.001."
+  - 研究3结果："The number of formal arguments in texts from participants using the dynamic argumentation modeling tool (TG1) is significantly higher than students receiving static modeling (TG2) and no modeling (CG)."
+
+## 10. Dealing with Complexity in Design Science Research: A Methodology Using Design Echelons
+
+- Metadata: 2024 · MIS Quarterly · 10.25300/misq/2023/16700
+- Authors: Tuure Tuunanen; Robert Winter; Jan vom Brocke
+- Design classification: explicit_design_science
+- Artifact/intervention: eDSR方法论（echeloned design science research methodology）：一种基于等级多级系统理论的DSR项目组织逻辑，将复杂DSR项目分解为五类设计梯队（问题分析、目标与需求定义、设计与开发、演示、评估），并为每个梯队规定中间工件、验证标准、验证技术和设计知识输出。
+- Theory-to-design strength: strong
+- Theories:
+  - Theory of Hierarchical, Multilevel Systems: 提供了层级、层、梯队的三维系统分解逻辑，直接用于定义设计梯队概念及五类设计梯队；每个梯队是自包含的分析/设计与验证活动簇，产出中间工件并支持分层验证。
+  - General Systems Theory: 作为理解复杂社会技术系统的总体框架，支持将复杂DSR项目视为具有涌现属性的系统，从而论证需要基于等级多级系统理论的补充组织逻辑。
+- Source outcome: Consistency between problem understanding and solution design
+- Source definition: 在DSR项目中，问题分析与方案设计之间的一致性（coherency），即解决方案设计是否与经过验证的问题陈述和目标需求保持一致。
+- Source evaluation role: mixed_evaluation
+- Source operationalization: 博士生实验中，独立评估者盲评学生研究计划的任务1（分析设计问题）和任务2（勾画问题解决方案），并据此推断问题理解与方案设计的一致性；治疗组得分显著高于对照组（Table 3）。
+- Source contextual specificity: contextualized
+- Why source-specific: 问题理解与方案设计的一致性在DSR中具体化为设计知识各中间工件之间的coherency验证（问题陈述→设计目标→设计规格），不仅仅是通用的需求对齐；但类似概念（需求可追溯性）也存在于其他IS项目中。
+- Coding-agent outcome: 问题-方案一致性保持度（issue-to-design traceability in agentic code changes）
+- Coding-agent definition: 编码智能体在自主多步开发中，从委托目标/问题陈述到需求、设计、代码实现与验证之间保持一致可追溯的程度；每个中间工件均按显式标准验证并与上一层级对齐。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 源文：等级多级系统理论→eDSR将项目分解为问题分析/需求/设计/演示/评估梯队，每个梯队产出经验证的中间工件并以coherency标准约束上下层拟合→编码agent设计启示：将委托目标分解为显式梯队（issue分析、需求、设计、实现、验证），每步产出可追溯中间工件（问题陈述、需求清单、设计说明、补丁/PR、测试报告），并用自动/人工验证门保证上一层与下一层一致→候选结果：问题-方案一致性保持度。
+- Proposed observables:
+  - 每次状态切换/PR中，问题陈述与需求条目、设计说明、代码改动之间的显式链接数量和断裂率
+  - 人工或LLM评审对'改动是否解决原始问题'的判断一致率
+  - 需求变更后，代码改动中未同步更新的设计/测试的追踪失败次数
+- Coding-agent counterfactual: 若用静态IDE或普通聊天机器人，不存在自主多步委托目标与可执行工件生产，因此'问题-方案一致性'无法作为动态过程结果被设计、观测或干预；只有智能体在多个步骤中持续偏离目标时，该结果才有实质意义。
+- Caveat: 源文面向DSR研究项目，不是软件工程；'一致性'在DSR中是设计知识coherency，转到编码agent需要把'问题/方案'具体化为issue/需求/代码/测试，且需处理agent概率性生成带来的不确定性。
+- Flash decision reason: 该文是显式DSR研究，构建并评估了eDSR方法论；等级多级系统理论直接导出设计梯队概念和五类梯队，属于强理论-设计关联。至少一个被评估的结果（问题理解与方案设计的一致性）在源域中有语境化含义，并且可以映射为编码智能体特有设计目标（问题-方案一致性保持度），该目标依赖agent的自主多步执行、仓库级上下文、可执行工件生成和概率性错误等特征，去除agent条件后目标定义、机制和度量都将实质性改变。故判为strong_candidate。
+- Confidence: 0.82
+- Design evidence:
+  - Introduction: 'We designed a DSR methodology that extends existing approaches by adding a complementary organizing logic to address complexity.'
+  - Research Design: 'The echeloned DSR (eDSR) methodology was developed in five iterations, involving seven design and evaluation episodes.'
+  - The eDSR Model section: describes five design echelon types, each with intermediate artifact, validation criteria, validation techniques, and design knowledge output.
+- Evaluation evidence:
+  - Evaluating eDSR section: 'We conducted a three-phased validation of the PoV using 1) formative and 2) summative evaluation approaches (Venable et al., 2016).'
+  - Doctoral Student Experiment: Table 3 reports t-test results showing treatment groups outperformed control groups on DSR planning tasks.
+  - Author Interviews: Table 2 summarizes perceived process-, outcome-, and contribution-related efficacy.
+  - Expert Panels: Table 4 summarizes feedback from four expert panels on eDSR.
+- Outcome evidence:
+  - Doctoral Student Experiment section: 'the students performance (especially with Tasks 1 and 2) indicates that those in the treatment groups obtained better consistency between problem understanding and solution design than those in the control groups.'
+  - Table 3: treatment group overall averages 72.96 vs 56.05 (Location 1) and 65.83 vs 50.00 (Location 2).
+
+## 11. Explainable Deep Learning for False Information Identification: An Argumentation Theory Approach
+
+- Metadata: 2024 · Information Systems Research · 10.1287/isre.2020.0097
+- Authors: Kyuhan Lee; Sudha Ram
+- Design classification: explicit_design_science
+- Artifact/intervention: G-FINDER：基于 Toulmin 论辩模型和结构平衡理论（SBT）的可解释深度学习框架，用于虚假信息识别。它从 claim 和 evidence 句子中抽取三元组，构建带符号词网络，计算结构平衡得分作为特征输入，并可与多种 ML/DL 模型结合；同时提供基于结构平衡的解释 SBTX，用于人类-AI 协作场景。
+- Theory-to-design strength: strong
+- Theories:
+  - Toulmin's model of argumentation: 提供 claim、evidence、warrant 等论证结构，使 FII 任务被概念化为“判断主张是否被证据支持/反驳”，并驱动设计一个显式建模这种论证关系的计算框架，而不是依赖纯黑盒。
+  - Structural Balance Theory (SBT): 作为设计隐喻，将 claim 与 evidence 的句子转换为三元组并构建带符号词网络，用网络的平衡/不平衡状态计算两者的一致性，从而作为 G-FINDER 的输入特征和解释依据。
+  - Theory of reference (Frege): 为 SBT 隐喻提供语言学支撑：谓词可看作真值函数，同一主词下语义相反的谓词只能一真一假，从而支持用词向量语义相似度给网络边赋符号。
+- Source outcome: Task accuracy (human FII task performance)
+- Source definition: 在 AI 推荐和模型解释辅助下，人类参与者正确判断 claim 是 rumor 还是 nonrumor 的比例；本文中为 5 道 FII 问题中正确分类的数量。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 通过 MTurk 受试者完成 5 道 FII 问题，计算正确分类数量；使用多元线性回归比较 SBTX 与 ATTNX/ATTNXL/对照组的系数（β = 0.361, p < 0.01）。
+- Source contextual specificity: contextualized
+- Why source-specific: 这不是泛化的模型精度，而是人类在“依据证据判断主张真伪”这一特定论证任务上的准确率；其操作化依赖 claim 与 evidence 之间的支持/反驳关系，而不只是通用分类正确率。
+- Coding-agent outcome: 基于论证结构的代码变更审查准确率
+- Coding-agent definition: 在编码代理产生多步骤代码修改并给出证据（测试结果、依赖关系、构建日志等）后，人类审查者借助论证式解释，正确判断该变更所声称的意图/效果是否被证据支持或反驳的程度。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, test/execution feedback and agent self-correction, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: Toulmin 模型 → G-FINDER 将 claim 与 evidence 分解为三元组并用 SBT 计算结构平衡，判断证据是否支持主张 → 在编码代理场景中，将代理的变更（PR 描述/commit message）视为 claim，将仓库现状、测试输出、依赖约束视为 evidence，构建带符号依赖网络并计算一致性分数 → 设计论证式解释，帮助人类审查者判断变更是否被证据支持，从而提升审查准确率。
+- Proposed observables:
+  - 在模拟代码审查任务中，审查者对代理变更是否满足声明目标的判断与隐藏测试/专家判定的一致性（准确率/ROC）
+  - 审查者能否正确指出被测试证据支持/反驳的具体代码片段（命中率）
+  - 审查者接受/拒绝代理变更的决策与真实构建/测试结果的匹配度
+- Coding-agent counterfactual: 若用静态 IDE 或普通聊天机器人替代编码代理，则不存在自主、多文件、带副作用的代码变更，也不存在需要核验的“变更主张”与仓库证据链；论证式解释将退化为对单条建议的说明，无法定义“审查者验证代理变更是否被证据支持”这一结果。
+- Caveat: 源论文的 SBT 特征针对自然语言句子三元组，迁移到代码需要重新定义实体/关系（如文件、函数、测试断言、依赖边），且代码证据的“真值”往往不是二值的；需要将 Toulmin 的 warrant 具体化为测试/构建/依赖验证规则。
+- Flash decision reason: 该文明确采用设计科学方法，构建了 G-FINDER 这一理论驱动的人工制品，Toulmin 模型、结构平衡理论和指称理论共同导出具体设计原则和实现，理论到设计的关联是显式的。实验评估包含人类在 FII 任务上的准确率（SBTX 显著提升），该结果具有语境界定性和特定操作化。将该论证-证据一致性机制迁移到编码代理的变更审查场景，可形成“论证式代码变更审查准确率”这一编码代理特有目标，依赖代理的仓库级上下文、执行反馈、人-代理委托等关键条件，非静态 IDE 或普通聊天机器人可替代。因此判定为 strong_candidate。
+- Confidence: 0.82
+- Design evidence:
+  - Introduction: “we, following the design science approach, develop a theory-driven DL framework”
+  - Section 2.3: 给出明确设计原则“In a cyclic (closed) network consisting of three words, we can infer the ground truth of a link ... by examining the network’s state of balance”，并由 SBT/Toulmin 模型导出。
+  - Section 3: 详细描述 G-FINDER 方法架构，包括三元组分解、带符号词网络构建和结构平衡得分计算。
+- Evaluation evidence:
+  - Section 4.1 Experiment I: 在 PHEME Twitter 和 Wikipedia 数据集上评估 G-FINDER 与多种基线组合的性能，Table 2 报告 precision/recall/F1/AUC/accuracy，并显示 G-FINDER 带来显著提升。
+  - Section 4.2 Experiment II: 通过 254 名 MTurk 参与者的受控实验，比较 SBTX、ATTNX、ATTNXL 和对照组的任务准确性、完成时间、对 AI 的信任和决策信心，Table 3 报告回归结果，SBTX 对准确性、信任和信心有正向影响。
+- Outcome evidence:
+  - Section 4.2.2: “SBTX showed positive influences on accuracy (β = 0.361, p < 0.01)”
+  - Section 4.2.2: “when the participants were provided with SBTX, they were able to obtain approximately one more correct answer out of every 14 FII questions than the others without model explanation”
+  - Table 3 Accuracy 列回归结果。
+
+## 12. Designing Attentive Information Dashboards
+
+- Metadata: 2022 · Journal of the Association for Information Systems · 10.17705/1jais.00732
+- Authors: Peyman Toreini; Moritz Langner; Alexander Maedche; Stefan Morana; Tobias Vogel
+- Design classification: explicit_design_science
+- Artifact/intervention: 设计了'专注型信息仪表盘'(attentive information dashboard):一个实时利用眼动数据监测用户在仪表盘各区域(六张图表)上的注意资源分配,并在探索任务结束后向用户提供个性化视觉注意反馈(individualized visual attention feedback, VAF)的软件工件;同时给出系统架构(仪表盘子系统、眼动跟踪子系统、注意感知子系统)和两条设计原则。
+- Theory-to-design strength: strong
+- Theories:
+  - Human Information Processing Theory (Wickens et al., 2016, adapted): 将仪表盘信息处理建模为包含注意力资源、感知和记忆的阶段,说明注意力在数据探索中的关键作用;用于推导系统应监测并反馈用户注意资源分配(meta-requirements 和 DP1/DP2)的理论基础。
+  - Eye-Mind Assumption (Just & Carpenter, 1980): 论证可用眼动数据作为用户显性注意的代理,从而支撑 MR1(实时监测注意资源分配)与 MR2(基于眼动估计注意资源分配),并直接形成 DP1。
+  - Filter Theory of Selective Attention / Limited Attention Capacity (Broadbent, 1958): 作为问题框架:注意是有限资源,用户面对仪表盘大量信息时需要选择性处理;这为'通过反馈支持注意管理'的总体设计目标提供了理论动机。
+- Source outcome: Attentional resource allocation (performance)
+- Source definition: 用户在首次浏览仪表盘后,能够在 revisit 阶段将注意更多地分配到先前低关注的 AOI(图表),并减少对先前高关注 AOI 的投入;即注意资源随任务相关性的再分配能力。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 基于眼动数据,计算六个 AOI 上的注视时长百分比和注视次数百分比,并以理论均值(100/6=16.67%)为中心化;在 revisit 阶段用重复测量回归分析首次访问分配与实验条件(个性化VAF vs 一般VAF)的交互效应。
+- Source contextual specificity: contextualized
+- Why source-specific: 注意资源分配本身是通用认知心理学构念,但本文将其操作化为用户在BI仪表盘六张同等复杂度图表AOI上的注视时长/次数分布,并通过'个性化VAF'在数据探索任务中的再分配来衡量;其含义、机制和测量都绑定在仪表盘数据探索场景中。
+- Coding-agent outcome: 编码智能体在仓库探索/修改中的'注意力资源再分配'——即在持续多步任务中对先前覆盖不足的仓库区域(文件、模块、测试、依赖)进行补偿性关注
+- Coding-agent definition: 编码智能体在解决委派任务时,对仓库各相关区域(文件、函数、测试、配置、依赖)的信息访问和修改投入应与其任务相关性匹配;在获得关于自身过去关注分布的反馈后,能够在后续迭代中增加对先前低关注但相关区域的关注,而不是重复聚焦于上下文开头的文件或常用路径。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: repository-scale and dependency-sensitive context, autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 源文理论(注意资源有限 + 眼-心假设)指导设计:实时监测用户对仪表盘各AOI的注意分配,并在探索结束后提供个性化VAF,促使用户在revisit阶段重新分配注意到低关注区域。映射到编码智能体:智能体的'注意'体现为对仓库不同区域的上下文读取、工具调用与修改投入;其上下文窗口和迭代预算有限,容易像仪表盘用户一样偏向先出现/左侧(如README、项目根目录、首个搜索结果)而忽略其他相关文件。可设计'仓库级注意反馈'——记录智能体在各文件/测试/函数上的覆盖度,在继续行动前或反思阶段以可视化/结构化形式反馈,促使它在后续计划中对低覆盖但高相关区域进行补偿性探索。候选结果即'注意资源再分配'在代码仓库探索中的新操作化。
+- Proposed observables:
+  - 在后续迭代中,智能体对先前低覆盖但任务相关文件的读取/检索次数占比上升
+  - 智能体生成的最终diff覆盖文件集合与任务相关性分布之间的基尼/方差下降
+  - 智能体在反馈后主动检索或查看先前遗漏的测试、依赖或边界情况文件的工具调用
+- Coding-agent counterfactual: 如果换成静态IDE或普通聊天机器人:静态IDE没有自主多步迭代和工具调用,不存在'智能体在后续探索中重新分配注意'这一行为;普通问答机器人没有仓库级上下文和修改副作用,也无法定义对仓库区域的注意覆盖。该结果只有在委派多步编码任务、智能体自主选择信息源并产生代码修改时才有意义。
+- Caveat: 源文中的'注意'是人眼注视,而编码智能体的'注意'是计算/上下文分配,隐喻需要严格转为可观测的覆盖度与相关性;需要避免把'覆盖所有文件'作为目标,因为过度覆盖反而浪费上下文。
+- Flash decision reason: 这项研究是显式DSR:作者给出两条基于理论的设计原则,实例化为实时眼动VAF的专注型仪表盘,并在92人受控实验中评估。理论到设计链条清晰(注意力有限/人信息处理理论+眼-心假设导出MR1-MR4和DP1/DP2)。三个被评估结果(注意资源分配、注意转移率、注意资源管理)都在仪表盘数据探索情境中有具体操作化。其中'注意资源再分配'可机制化迁移到编码智能体:智能体的上下文与迭代预算有限,容易在仓库探索中偏向先接触区域而忽略相关文件;源文'监测注意分配->个性化反馈->后续重新分配'的设计机制可转化为'记录智能体对仓库工件的覆盖->反馈覆盖率/相关性->后续迭代补偿探索'。该结果依赖编码智能体的仓库级上下文、自主多步规划和工具调用,去掉代理条件后不再成立,故为强候选。
+- Confidence: 0.82
+- Design evidence:
+  - Section 3: 'we propose two theoretically grounded design principles for attentive information dashboards. We instantiate both design principles in an artifact and evaluate the proposed design in a largescale, rigorous lab experiment.'
+  - Section 4.1 / Table 1: 作者从理论导出MR1-MR4,并据此提出DP1和DP2,例如'Provide the system with the capability of computing users’ attentional resource allocation based on monitoring their eye movement with an eye tracking device in real time...'
+  - Section 4.2 / Figure 3: 提出包含三个子系统的系统架构,并将DP1/DP2映射到具体组件:'The first design principle maps onto... The second design principle specifically maps onto the individualized VAF capability building on the feedback generator component.'
+- Evaluation evidence:
+  - Section 5: 'we instantiated the design in a running software artifact and conducted a controlled laboratory experiment'; 92 participants in 2x mixed design comparing individualized VAF vs general VAF.
+  - Section 6.2: repeated-measures regression on fixation duration and number of fixations shows significant interaction effect supporting H1.
+  - Section 6.3: Wilcoxon rank-sum test shows individualized VAF group had significantly lower attention shift rates (W=661.5, p=0.002), H2 supported.
+  - Section 6.4: between- and within-subject Wilcoxon tests show improved attentional resource management for individualized VAF (p=0.015 / p<0.001), H3 supported.
+- Outcome evidence:
+  - Table 2: 'Attentional resource allocation | Users’ performance in allocating attention to previously low-attended AOIs and ignoring previously high-attended AOIs. | Eye tracking (fixation duration, number of fixations)'
+  - Section 6.2: 'There was a significant interaction of fixation duration percentage in the first visit and the individualized VAF group; b = -0.75 percentage, SE = 0.138 percentage, t(548) = -5.468, p < 0.001'; 'H1 is supported.'
+
+## 13. Tapping into the wealth of employees’ ideas: Design principles for a digital intrapreneurship platform
+
+- Metadata: 2022 · Information & Management · 10.1016/j.im.2020.103287
+- Authors: Victoria Reibenspiess; Katharina Drechsler; Andreas Eckhardt; Heinz-Theo Wagner
+- Design classification: explicit_design_science
+- Artifact/intervention: 通过行动设计研究（ADR）在金融行业IT服务商中构建、迭代和评估的数字内创业平台“Brainstation”，嵌入企业wiki，包含想法工作流、实时提醒、评论/投票、奖励系统、创新控制面板、闲置时间（slack time）、披露设置、想法挑战等功能，并以5条设计原则的形式形式化设计知识。
+- Theory-to-design strength: strong
+- Theories:
+  - Socio-technical system (STS) theory (Leavitt 1964; Lyytinen and Newman 2008): STS理论提供了五个工作系统组件（actors, structure, technology, task, environment），用于构建探索性访谈、归类组织挑战、匹配文献设计洞见并推导五项设计原则；平台设计以保持各组件平衡为目标。
+- Source outcome: User control over the system's representations of one's own innovation contributions (user control mechanisms in DP1′–DP3′) 
+- Source definition: 想法贡献者能够在多大程度上控制其提交的想法对其他人的可见性、谁可以评论/修改该想法，以及是否接受他人提出的改动；这一结果来自透明性、实时追踪和社区整合带来的意外后果，如害怕工作负担加重、隐私侵犯、被微观管理和想法被恶意篡改。
+- Source evaluation role: qualitatively_evaluated
+- Source operationalization: 通过访谈和讨论轮次评估员工对用户控制的感受，例如Table 7中“Appreciation that the main control rests with the contributor”“Appreciation of contributor's control over their submitted idea and prereview option by administrators”，以及员工关于防止监控的表述“I would wish for a function that prevents that”。
+- Source contextual specificity: contextualized
+- Why source-specific: 在组织内创业想法平台上，控制权涉及员工对其创新想法的知识产权、避免被管理层监视和避免因高潜力而被分配更多工作的特殊社会风险；虽然隐私/控制是常见概念，但其对象和风险在此场景中有实质性特化。
+- Coding-agent outcome: 开发者对编码代理仓库级操作的可见性控制与变更接受权
+- Coding-agent definition: 在编码代理自主执行多步开发任务时，委托开发的开发者能够控制代理行为日志和生成变更的可见范围，并保留对代理所产生修改的接受/拒绝/修改权，从而在不产生监视感或不可逆副作用的前提下实现透明的人机协作。
+- Transfer type: construct_extension
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: STS理论强调技术与演员之间的平衡 -> 源论文通过DP1′/DP2′/DP3′加入用户控制，因为透明性和实时追踪引发了监视/微观管理/想法篡改担忧 -> 对编码代理的设计启示是：代理过程应透明，但人类委托方必须控制代理生成的哪些变更可见、哪些文件可被改动、哪些修改可以被合并 -> 候选结果：开发者对代理修改的可见性控制与变更接受权，保持自主代理对开发者的可问责性和信任。
+- Proposed observables:
+  - 代理生成的补丁/合并请求需经用户批准才能合入主干，记录用户接受/拒绝率
+  - 用户可配置代理日志与状态可见级别（如仅本人可见/团队可见/组织可见），并可查看配置是否生效
+  - 代理在触及用户设定的保护文件或超出原始任务范围前自动暂停并请求授权，形成可追踪的授权事件
+- Coding-agent counterfactual: 若用静态IDE或普通聊天机器人替代编码代理，则不存在自主多步修改仓库和真实工具副作用，'可见性控制与变更接受权'没有可作用的对象；普通企业技术中该控制只是常规文档权限，不涉及代理行为、工具执行和仓库级影响。
+- Caveat: 源论文的'控制'主要保护员工想法不被他人擅自更改或避免被管理层监视；编码代理场景还需结合版本控制、合并冲突、测试反馈等工程机制，不能简单照搬为偏好设置开关。
+- Flash decision reason: 该文是明确的显性设计科学研究（ADR），构建并评估了数字内创业平台；STS理论作为内核理论系统地用于推导五项设计原则，理论到设计的连接是强/显性的。评价中一个重要结果——用户对自身想法可见性和修改的控制——源领域含义具有组织创新/监视风险的特定上下文，并且能够通过STS平衡机制迁移到编码代理的“开发者对代理仓库级操作的可见性控制与变更接受权”，该迁移依赖代理的自主多步执行、真实副作用、动态人机委派等独特条件，非静态IDE或普通聊天机器人可替代。因此判定为strong_candidate，target_match=true。
+- Confidence: 0.82
+- Design evidence:
+  - “we follow a design science research (DSR) approach as recommended by de Reuver et al. [11]. Specifically, we apply the action design research (ADR) methodology developed by Sein et al. [18]” (Section 1; Abstract)
+  - “we implemented a digital intrapreneurship platform artifact in the case organization together with the organization’s project team” (Section 3.2)
+  - “we formalized design knowledge in the form of validated design principles derived from theory and practice” (Section 3.3.4)
+  - “we could match challenges derived in the interviews sessions with the design insights found in literature, because both data sources were structured in accordance with the 5 STS components, to derive design instructions and inform the design of adequate features” (Section 4.2.1)
+- Evaluation evidence:
+  - “we followed the FEDS strategy … which proposes conducting an evaluation in 4 steps” (Section 3.3.2)
+  - “we conducted a 3-month pilot study with the beta prototype” and later “a naturalistic, ex post evaluation … based on a field study … semi-structured interviews with end users” (Sections 3.3.2, 3.3.3, 4.4)
+  - “Table 7 summarizes the overall feedback on digital intrapreneurship platforms that we collected in the final evaluation based on discussion rounds, interviews, and log files” (Section 4.4)
+  - Log-file indicators: “82 % increase in time that users spent on the platform … 93 % of users stayed active … 80 % of users actively contribute to the generation and the development of ideas” (Table 7)
+- Outcome evidence:
+  - “Employees expected that they would need to provide additional information or be pressured to develop their idea … the perception arose that innovative individuals might risk facing a heavier workload when their high potential becomes visible” (Section 4.2.3)
+  - “Some employees feared privacy violation and employee monitoring because of real-time tracking of idea submission” (Section 4.2.3)
+  - “Appreciation of contributor's control over their submitted idea and prereview option by administrators” (Table 7)
+
+## 14. Design principles for learning analytics information systems in higher education
+
+- Metadata: 2021 · European Journal of Information Systems · 10.1080/0960085x.2020.1816144
+- Authors: Andy Nguyen; Tuure Tuunanen; Lesley Gardner; Don Sheridan
+- Design classification: explicit_design_science
+- Artifact/intervention: 一套针对高等教育学习分析信息系统（LAIS）的设计原则、一个基于服务导向架构（SOA）的LAIS技术架构，以及一个基于Open edX平台开发的可操作原型系统。设计原则在演示和评估过程中被迭代修订。
+- Theory-to-design strength: strong
+- Theories:
+  - Intervention Theory (Argyris, 1970): 作为核心kernel theory被用于推导设计原则：干预应提供有效且有用的信息、允许用户自由知情选择、促进内在承诺。据此制定了DP1（可行动信息）、DP2（信息传递/时效）、DP3（互操作性）、DP4（信息匿名与保护）。
+- Source outcome: Student engagement with learning (via lecture recording interaction events)
+- Source definition: 学生对讲座录像（LTR）的交互行为，如播放、暂停、快进、重放等事件数量，以及由此反映的学习参与度；系统通过报告这些数据使讲师能够监测参与度并进行教学干预。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 从服务器日志统计学生与LTR视频的交互事件总数、平均观看次数、唯一观看者数、重放片段等；通过干预前后交互事件数量的变化（例如LTR.A从153增至1,987）来评估系统支持的干预效果。
+- Source contextual specificity: contextualized
+- Why source-specific: 该结果变量不是一般性的用户参与度，而是特指高等教育中混合课程里学生对讲座录像的学习参与，其含义与教学干预、学业表现、拖延行为等教育语境紧密相关。
+- Coding-agent outcome: 人类开发者对自主智能体工作的有效干预（校准式监督）
+- Coding-agent definition: 编码智能体在自主执行多步任务时，开发者能够基于智能体提供的可行动、及时、可理解的过程信息，做出知情的、有时间限制的干预（如调整计划、纠正错误、批准或回滚变更），从而提升任务成功率和代码质量。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: 干预理论（Argyris 1970）-> LAIS设计原则：提供有效且有用的可行动信息，让用户自由知情选择，而非系统直接干预 -> 编码智能体设计启示：智能体不应在无监督下擅自完成不可逆操作，而应向开发者提供关于计划、进度、风险、测试结果的及时可行动报告，支持开发者随时干预 -> 结果：开发者的有效干预能力（calibrated oversight）成为设计目标。
+- Proposed observables:
+  - 开发者在收到智能体过程报告后调整任务指令或回滚变更的次数和时机；
+  - 干预前后任务成功率或代码缺陷率的改变（类比源论文中交互事件数从153增至1,987）；
+  - 开发者对智能体报告的可行动性评分（如是否需要额外请求更多信息、误解率）。
+- Coding-agent counterfactual: 如果用一个静态IDE或普通聊天机器人替代编码智能体，则不存在需要监督的多步自主行动，'干预有效性'就退化为普通的'反馈有用性'；该结果只有在智能体自主产生可观察过程并可能犯错的前提下才有意义。
+- Caveat: 源论文测量的是学生参与度这一下游结果，而不是干预质量本身；将'干预有效性'作为目标需要在编码智能体场景中重新定义和测量，且需避免把监督负担全部转移给开发者。
+- Flash decision reason: 该论文是显式的设计科学研究（DSR），采用Peffers et al. (2007)方法论，构建并评估了一套设计原则和可操作原型；干预理论（Argyris 1970）被明确用作kernel theory，从有效/有用信息、自由知情选择、内在承诺三条原理推导出设计原则，理论到设计的映射强。评估中，学生参与度（LTR交互事件）作为量化结果展示了系统支持的讲师干预效果，且该结果具有教育领域的情境化含义。将该理论/设计机制迁移到编码智能体，可形成'校准式监督/有效人工干预'这一强智能体特定设计目标：智能体自主多步执行、有环境副作用、可能产生隐蔽错误，需要向开发者提供可行动、及时、可理解的信息支持其干预。编码反事实（静态IDE或聊天机器人）会消除该目标的意义，因此智能体特异性强。虽然源结果变量与学生参与度是下游指标，但机制迁移明确，整体为强候选。
+- Confidence: 0.82
+- Design evidence:
+  - This paper reports a design science research (DSR) study that develops, demonstrates and evaluates a set of design principles for information systems (IS) that utilise learning analytics to support learning and teaching in higher education. (Abstract)
+  - We adopted PEFFERS et al. (2007)’s iterative research process that allowed for the development of both design principles and system artefact. (Section 3)
+  - The design principles were translated into technical architecture and an operational prototype, that established the base for the subsequent phase of demonstrating and evaluating the artefact. (Section 3)
+  - An operational prototype was built based on the Open edX platform... The prototype captures defined events and metrics to provide analytical reports of students’ engagement with LTR. (Section 6.1.1)
+- Evaluation evidence:
+  - We evaluated the developed artefact in four courses with a total enrolment of 1,173 students. (Abstract)
+  - we used three data sources including usage data (server logs), survey data from the students, and interviews with the lecturers, to formally evaluate the design principles and its artefact by adopting the evaluation criteria suggested by VENABLE et al. (2012). (Section 3)
+  - The more than 300% increase in the total number of interaction events demonstrates the effect of the lecturer’s pedagogic actions on engagement with this particular LTR. (Section 6.2.1)
+  - The survey reported positive results regarding students’ perception of system quality of the artefact. (Section 6.2.1)
+  - The interviews explored the lecturers’ use of the LAIS and its perceived usefulness. (Section 6.2.2)
+- Outcome evidence:
+  - we looked at students’ engagement with each LTR over time. Figure 6 illustrates the total number of interaction events performed by students for each LTR... (Section 6.2.1)
+  - The more than 300% increase in the total number of interaction events demonstrates the effect of the lecturer’s pedagogic actions on engagement with this particular LTR. (Section 6.2.1)
+
+## 15. FairPlay: Detecting and Deterring Online Customer Misbehavior
+
+- Metadata: 2021 · Information Systems Research · 10.1287/isre.2021.1035
+- Authors: Ji Wu; Zhiqiang (Eric) Zheng; J. Leon Zhao
+- Design classification: explicit_design_science
+- Artifact/intervention: FairPlay：一个集成文本、内容、情境和用户特征的深度学习不当行为检测框架；以及基于规范执行的干预消息策略（惩罚、共同身份、组合）和AI检测披露设计。
+- Theory-to-design strength: strong
+- Theories:
+  - Focus Theory of Normative Conduct: 区分了禁令性规范（通过惩罚执行）和描述性规范（通过共同身份执行），直接推导出PN、ID和PN+ID三种干预消息设计，并预测其对减少后续违规的机制。
+  - Social Identity Theory (Tajfel 2010) and Economics of Identity (Akerlof and Kranton 2000): 指导共同身份消息的具体设计：通过提醒社区成员身份来激活身份认同，使顾客内化并遵守社区规范。
+  - Economic Theory of Deterrence: 为惩罚政策提供理论依据，指导惩罚消息设计（告知违规已被检测并删除帖子），预期能威慑未来的不当行为。
+- Source outcome: Customer repeat violation (Re_Violation)
+- Source definition: 顾客在收到规范信息后，在短期（3个月）或长期（6个月）窗口内再次发布违反品牌社区发帖规范的帖子（重复违规）的概率或次数。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 使用逻辑回归（Equation 3）估计再次违规的二值指示变量；稳健性检验使用违规帖数作为替代因变量（Online Table J3）。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 该结果的界定和测量高度依赖特定品牌社区公布的发帖规范（Figure 3），并在客户–供应商关系情境中由专家标注违规帖子；这些社区规范、成员身份与客户关系是构念的核心。
+- Coding-agent outcome: 自主编码代理的规范违反复发率
+- Coding-agent definition: 编码代理在执行委派的软件开发目标时，因违反仓库/项目规范（如越权修改、执行不安全命令、未授权依赖变更、规避测试）而被纠正或收到规范性反馈后，在后续自主任务中再次出现同类违规的次数或概率。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 源理论（焦点规范理论）→ 源设计机制：向违规顾客发送惩罚通知（禁令性规范）或共同身份提醒（描述性规范），实验显示可减少后续违规 → 编码代理设计：在代理违规后，治理层施加禁令性规范（如回滚变更、标记违规、限制权限）和/或描述性规范（在上下文中强化团队共同目标和规范），形成闭环反馈 → 候选结果：代理后续违规复发率降低。
+- Proposed observables:
+  - 干预后每个任务中安全审查/评审标记的代理违规动作数量
+  - 同一代理在后续会话中重复相同违规类型的频率
+  - 需要人工干预回滚或权限撤销的次数
+- Coding-agent counterfactual: 若用静态IDE、代码补全工具或普通聊天机器人替代编码代理，代理不会自主执行多步更改并产生仓库副作用，'违规动作复发'无法定义；只有自治代理持续执行任务时才存在重复违规。
+- Caveat: 源理论是关于人类规范遵从的，LLM代理是否存在内部规范内化机制尚不清楚；该转移可能依赖外部治理系统或人类监督者作为规范执行者。
+- Flash decision reason: 该文采用设计科学与实验结合的方法，明确构建并评估了FairPlay检测框架和三种基于规范理论的干预策略；焦点规范理论、社会身份理论和威慑理论直接指导了干预消息的设计，理论到设计的联系强；评估结果不仅是检测性能，还包括在品牌社区情境中具有领域构成性的'重复违规'结果，可转化为编码代理的规范违反复发目标，并利用代理的自主多步操作、真实副作用和工具使用等独特条件，非静态IDE或普通聊天机器人可替代。因此判定为strong_candidate。
+- Confidence: 0.82
+- Design evidence:
+  - We propose an integrative analytics framework, FairPlay, to automatically identify customer misbehavior in the firm’s OBC. (Section 4.1)
+  - We then designed intervention strategies using two types of norms—injunctive (i.e., punishment of individuals) and descriptive (i.e., establishment of a common identity within a group)—to mitigate customer misbehavior. (Introduction)
+  - The design of our normative messages was motivated by punishment and identity enforcement. (Section 5.1)
+- Evaluation evidence:
+  - The results show that the proposed algorithmic solution is effective in detecting online customer misbehavior with a satisfactory macroaverage F-score in the range of 82% to 86%, outperforming various benchmark methods. (Section 1 or Results)
+  - The experimental results indicate that punishment considerably reduces customer misbehavior in the short term, but this effect decays over time, whereas common identity has a smaller but more persistent effect on misbehavior reduction. (Abstract)
+  - For the treatment effect of punishment ... in the short time frame, we found a statistically significant effect of punishment on deterring customer violations in column (1)... However, the coefficient in column (2) suggests that the effect of punishment decays over time and becomes insignificant in the long run. (Section 5.3.1, Table 6)
+- Outcome evidence:
+  - We tracked whether a customer posted inappropriate material again in the short (within three months) or long term (within six months) after receiving a normative message. (Section 5.2)
+  - The results show that normative messages consistently reduce customer violations in the short term. (Section 5.3.1)
+  - For the treatment effect of punishment ... we found a statistically significant effect of punishment on deterring customer violations in column (1)... However, the coefficient in column (2) suggests that the effect of punishment decays over time and becomes insignificant in the long run. (Section 5.3.1, Table 6)
+
+## 16. Bringing Machine Learning Systems into Clinical Practice: A Design Science Approach to Explainable Machine Learning-Based Clinical Decision Support Systems
+
+- Metadata: 2023 · Journal of the Association for Information Systems · 10.17705/1jais.00820
+- Authors: Luisa Pumplun; Felix Peters; Joshua F. Gawlitza; Peter Buxmann
+- Design classification: explicit_design_science
+- Artifact/intervention: 五条用于可解释 ML-CDSS 设计的设计原则（多用途解释、视觉分离、按需提供、心智对齐、确定性解释），以及两个实例化原型：Balsamiq 线框原型和基于 Web 的 RadiologyAI 肺结节分类可解释 ML 临床决策支持系统原型。
+- Theory-to-design strength: strong
+- Theories:
+  - Cognitive effort perspective: 核心设计理论之一：用户心理资源有限，认知努力被定义为完成任务所需的基本信息处理数量；用户会在认知努力与收益之间做成本-收益权衡。该视角直接导出第二个元需求（最小化认知努力），并支撑设计原则2（视觉分离）、3（按需提供）、4（心智对齐）和5（确定性事实）的推导。
+  - Usability concept and design heuristics (e.g., Shneiderman's information visualization mantra): 提供用户中心设计原则，如相似/相关功能信息应在邻近位置显示、细节应按需提供。这些启发式直接用于推导设计原则2（视觉分离）和3（按需提供）。
+  - XAI explanation ontology (model/global/local explanations): 作为设计知识基础：表1中的解释本体论提供了解释类型的分类学，直接支撑设计原则1（多用途解释）和2（视觉分离），并在原型中实例化为模型卡、热力图、相似结节等元素。
+- Source outcome: Explainability
+- Source definition: 医生感知到的 ML-CDSS 可解释性，即系统使其推理过程、预测生成方式和内部工作原理清晰可理解的程度。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 使用源自 Wang & Benbasat (2016) 的 7 个条目 7 点 Likert 量表测量（如 'RadiologyAI made its reasoning process clear to me'）；采用组间实验（22 名医生使用带解释版本，23 名使用不带解释版本），t 检验比较均值：M=4.916 vs M=3.037，t(43)=4.633，p<0.001，Cohen's d=1.382；并用光标轨迹数据确认解释被注意到。
+- Source contextual specificity: contextualized
+- Why source-specific: 可解释性本身是 XAI 的通用概念，但在本文中其意义被临床高风险场景具体化：由于 ML-CDSS 的局部输出可能出错且误诊代价极高，可解释性对医生意味着逐例验证错误输出的能力，并直接关联患者安全、医生责任和对高风险系统的信任。尽管如此，其操作化仍是通用感知量表，因此是情境化而非领域构成性。
+- Coding-agent outcome: 编程代理行为与变更的可解释性/可审查性（developer-perceived explainability of agent plans and repository changes）
+- Coding-agent definition: 开发者能够理解并验证编程代理在委托目标下所采取的多步骤计划、各步骤修改仓库文件的理由以及可能存在的错误，并据此判断是否接受、纠正或撤销代理产出的程度。
+- Transfer type: construct_extension
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: 源理论（认知努力视角）与源设计机制（解释本体论、五条设计原则）表明：解释应按模型/全局/局部分类、视觉分离、按需提供、与用户心智对齐，并包含确定性事实。对编程代理而言，这意味着设计代理行为解释层：模型级解释（代理能力、数据集、验证/基准）按需提供；全局计划解释（代理整体策略）按需展开；局部解释（每个文件修改的原因、具体 diff、测试结果）默认可见并与开发者的 code review 心智模型对齐；用确定性证据（实际 diff、命令记录、测试输出）补充概率性理由。这样可提升开发者对代理行为的可解释性与可审查性。
+- Proposed observables:
+  - 开发者在审查代理生成的仓库级变更时，正确识别预先植入缺陷的比例
+  - 针对代理计划/变更解释的感知可解释性量表（如 '我能理解代理为何修改这个文件'）
+  - 开发者是否以及何时展开全局计划解释或请求更多推理细节的日志记录
+- Coding-agent counterfactual: 若编码代理被替换为静态 IDE、普通聊天机器人或常见办公技术，则不存在委托目标、多步骤仓库级修改、工具副作用或概率性伪正确产物；'解释代理行为与变更'的机制和测量将退化为普通的代码建议透明度或聊天解释，失去代理特有的计划、工具执行和变更验证维度。
+- Caveat: 源论文评估的是针对单次 ML 预测的解释，而非多步骤代理行为；将解释设计原则扩展到代理计划/工具轨迹需要额外验证。代理行为解释可能引入新的认知负担，源论文中'解释降低认知努力'的结论不一定直接成立。
+- Flash decision reason: 本文是明确的设计科学研究：采用两轮 DSR，提出五条设计原则并实例化为 RadiologyAI 原型，通过 6 名放射科医生 walk-throughs 和 45 名放射科医生实验进行评价。认知努力视角、可用性文献和 XAI 解释本体论对设计原则有明确的生成性作用（theory-to-design strong）。评估结果中'可解释性'虽用通用量表测量，但在临床高风险决策中具有情境化意义（逐例验证错误输出、患者安全与医生责任）。该机制可扩展到编程代理：设计原则映射为代理计划/行为的解释分层、按需展示、心智对齐和确定性证据，产生'代理行为可解释性/可审查性'这一强编码代理特异性结果，因此目标匹配。'认知努力'作为第二候选特异性较弱，不改变整体判断。
+- Confidence: 0.8
+- Design evidence:
+  - Section 3: 'we chose the iterative design science approach according to Peffers et al. (2007) and combined it with that of Vaishnavi and Kuechler (2007), resulting in six design science phases'
+  - Table 2: Final set of design principles for explainable ML-based CDSSs (five design principles).
+  - Section 4.2: 'To show how the design principles can be operationalized, we demonstrate a web-based prototype named RadiologyAI'
+- Evaluation evidence:
+  - Section 3: 'it was evaluated as an instantiation of the design principles using guided walk-throughs with six radiologists'
+  - Section 5: 'we were able to show that the radiologists perceived the explainability of the prototype with explanations as higher (M = 4.916, SD = 1.122) than the one without explanations (M = 3.037, SD = 1.553)... t(43) = 4.633, p = 0.000... Cohen's d = 1.382'
+  - Section 5: 'the cognitive effort was lower for the prototype with explanations (M = 2.121, SD = 0.651) than for the prototype without (M = 2.580, SD = 0.924), with t(43) = -1.917, p = 0.062... Cohen's d = -0.57'
+- Outcome evidence:
+  - Section 5: 'we were able to show that the radiologists perceived the explainability of the prototype with explanations as higher (M = 4.916, SD = 1.122) than the one without explanations (M = 3.037, SD = 1.553)... t(43) = 4.633, p = 0.000... Cohen's d = 1.382'
+  - Table 3: explainability items including 'RadiologyAI made its reasoning process clear to me' and 'The logic of RadiologyAI was clear to me' (source: Wang & Benbasat, 2016).
+
+## 17. Patient health locus of control: the design of information systems for patient-provider interactions
+
+- Metadata: 2023 · European Journal of Information Systems · 10.1080/0960085x.2022.2088416
+- Authors: James Wallace; Matthew T Mullarkey; Alan Hevner
+- Design classification: explicit_design_science
+- Artifact/intervention: 采用eADR方法构建并评估了两套医疗信息系统：1) 患者外部控制点(LOC)识别与评估系统，包括LOC问卷（Figure 3）、LOC风险评估矩阵（Figure 4）以及患者-提供者互动流程（Figure 5）；2) 患者-提供者参与系统，包括临床参与/干预工具（Figure 6）和患者参与流程（Figure 7）。另外还包括诊断周期的LOC管理协议（Figure 2）。
+- Theory-to-design strength: strong
+- Theories:
+  - Locus of Control (Rotter, 1966; Multidimensional Health Locus of Control, Wallston et al., 1978): 直接决定系统要测量的核心构念（内部、机会、强大他人三个子维度），并派生设计需求：评估LOC子维度、识别情境因素、测量关键决定因素；进而形成问卷条目、风险评估矩阵和干预措施（推动外部LOC转向内部LOC）。
+  - HCI interior/exterior design modes (Adam et al., 2021; Simon, 1996): 区分内部（技术）工件和外部（交互）工件，指导系统设计：将LOC问卷/风险矩阵设计为内部界面工件，将医患互动流程设计为外部交互工件，强调两者的协同。
+  - Control theories (cognitive dissonance, health education, behavioural therapy, mindfulness, social services): 为每个LOC风险匹配‘控制’（理论机制）和干预措施（效果），形成临床参与工具（Table 1, Figure 6）中排序和红绿灯显示的干预行动。
+- Source outcome: patient engagement
+- Source definition: 患者在护理过程中对自身治疗计划的积极参与程度，即患者面向行动的取向（orientation to action）以及其对治疗计划的参与、投入、信念和信任。
+- Source evaluation role: qualitatively_evaluated
+- Source operationalization: 通过两个IRB批准的焦点小组（每组6名有经验的护理人员/行为科学家）对设计工件进行讨论；参与者对LOC问卷和临床参与工具能否影响患者参与、信任、意愿和行动给出定性判断。详见第6.4节和7.3节。未使用量化量表。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: '患者参与'的意义、利益相关者和风险高度依赖医患关系、治疗依从性和临床结果；它关乎患者对自己健康结局的责任感，这种责任感在治疗情境中有特定的操作性定义（如是否愿意执行推荐的治疗行为、是否信任治疗计划）。
+- Coding-agent outcome: 开发者在智能体辅助编码中的内化责任与认知投入
+- Coding-agent definition: 开发者在多大程度上将最终代码质量的最终责任视为自己的责任（而非归因于AI智能体），并因此对智能体生成的变更进行审慎的验证、质疑、测试和整合，而非盲目接受或拒绝。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, probabilistic generation of plausible but subtly incorrect artifacts, test/execution feedback and agent self-correction
+- Mechanism mapping: 源理论：Locus of control (Rotter, 1966; 多维度健康LOC, Wallston et al., 1978) -> 源设计机制：用问卷评估患者内/外部LOC，用风险评估矩阵识别风险，用临床参与工具提供'内化'干预（如健康教育、认知失调、行为疗法）以增强外部LOC患者对治疗计划的参与 -> 编码智能体设计启示：智能体系统应当评估开发者的归因模式（例如通过交互行为或显式问卷），并设计'内化化'反馈机制（如要求开发者解释或复述智能体的修改理由、在合并前提示审查、提供可控的自主级别），以鼓励开发者在委托自主编码时保持对代码正确性的内在责任感 -> 候选结果：开发者的内化责任与认知投入。
+- Proposed observables:
+  - 开发者对智能体生成的diff提出审查评论或质疑的数量和质量
+  - 开发者在合并前检查、运行测试或修改代码所花费的时间/频率
+  - 开发者在事后问卷中对自己(而非智能体)承担最终代码质量责任的认同度
+- Coding-agent counterfactual: 如果替换为静态IDE或通用聊天机器人，不存在对整个编码目标的委托和智能体生成的端到端变更，开发者没有明确的'外部责任主体'可归因；该结果的定义（对智能体输出保持内化责任）和干预机制（调整自主性、要求复述理由）将失去意义。
+- Caveat: 源论文评估的是患者参与而非直接评估LOC本身；将LOC理论转移到'开发者责任归因'需要开发新的测量工具；需要区分病理性外化（过度信任）与合理委托（信任智能体），并非所有外部归因都应被消除。
+- Flash decision reason: 该文是明确的行动设计研究(eADR)，明确构建并评估了LOC评估与参与两套信息系统；LOC理论及多种控制理论直接产生设计需求与干预措施，理论到设计链条强；被评估的结果（患者参与）具有医疗领域特定的含义和操作化，属领域构成性结果；将其机制迁移到编码智能体，可形成'开发者在智能体辅助编码中的内化责任与认知投入'这一强编码智能体特异性设计目标，因此保留为强候选。
+- Confidence: 0.8
+- Design evidence:
+  - We apply action design research (ADR) methods to build the LOC identification and treatment systems (Abstract/Introduction)
+  - The first design cycle builds and evaluates the interior instruments and the exterior interaction processes for identifying a patient’s LOC and assessing options for mitigating potential issues when external forms of LOC are found (Section 6)
+  - The second design cycle builds and evaluates the interior instrument and the exterior interaction processes for engaging with the patient in a treatment plan that addresses a patient’s unique LOC risk profile (Section 7)
+  - The artefact of the diagnosis cycle is the LOC Management Protocol as seen in Figure 2 (Section 5)
+- Evaluation evidence:
+  - The protocol artefact was evaluated via a series of interviews with healthcare professionals, practice personnel, and patients (n = 19) ... Qualitative feedback was highly positive (Section 5)
+  - We performed a rigorous evaluation of the three design artefacts via an IRB-approved focus group (Tremblay et al., 2010). The participants were five licenced nurse care managers and one Ph.D. behavioural scientist (Section 6.4)
+  - The objectives of the second design evaluation focus group shifted to confirming the format, medium, and delivery mechanism for the Clinical Engagement artefact (Section 7.3)
+  - Two rigorous Focus Group evaluations of the interior and exterior artefacts were performed (Tremblay et al., 2010) ... (Section 9)
+- Outcome evidence:
+  - Focus group members felt that the questionnaire could influence in a positive direction how patients feel about participating in their course of care with improved belief and trust in the care treatment plan (Section 6.4, insight 1)
+  - Focus group members felt the questionnaire could impact participation and engagement, and focus patient interaction (Section 6.4, insight 2)
+  - the instrument could be used by providers to improve the effectiveness of patient involvement by providing information that facilitated defining and communicating the treatment plan (Section 7.3, insight 2)
+
+## 18. Wearable Sensor-Based Chronic Condition Severity Assessment: An Adversarial Attention-Based Deep Multisource Multitask Learning Approach
+
+- Metadata: 2022 · MIS Quarterly · 10.25300/misq/2022/15763
+- Authors: Shuo Yu; Yidong Chai; Hsinchun Chen; Scott J. Sherman; Randall A. Brown
+- Design classification: explicit_design_science
+- Artifact/intervention: AADMML：一个对抗注意力深度多源多任务学习框架，由CNN-LSTM多源特征提取、任务特定注意力早期融合、多任务回归层和对抗注意力竞争训练机制组成，用于可穿戴传感器数据的慢性病（帕金森病）严重度评估。
+- Theory-to-design strength: strong
+- Theories:
+  - Attention mechanism: 用于推导Stage 2的任务特定注意力早期融合：为每个数据源分配注意力权重，反映各源对预测输出的相对贡献，从而满足可解释性设计要求。
+  - Adversarial learning (zero-sum game): 用于推导Stage 4的对抗注意力竞争机制：各数据源分支在零和博弈中交替更新参数以增大自身注意力权重，从而提升所学特征的相关性和训练收敛速度。
+  - Multitask learning: 用于推导Stage 3的多任务学习：共享特征层和任务特定层联合优化nM-EDL与M-EDL两个任务，利用任务间关联提升整体评估性能。
+  - Multisource learning: 用于推导Stage 1和Stage 2的多源整合：各自独立的CNN-LSTM分支处理五种传感器/麦克风数据源，通过注意力早期融合实现更全面的严重度评估。
+- Source outcome: Model interpretability via attention weights (source-level contribution transparency)
+- Source definition: 模型预测结果对输入数据源的可归因程度：每个任务上五种可穿戴传感器/麦克风源获得注意力权重，指示哪些源对严重度评估贡献最大，从而为临床医生和患者提供可解释性。
+- Source evaluation role: mixed_evaluation
+- Source operationalization: 注意力权重A_{j,i}按任务j和源i计算并归一化到1；在案例研究1中，注意力权重与准确的严重度评估一起呈现并解释为临床指标；在案例研究3中，注意力权重按总样本、年龄组和性别组汇总统计。
+- Source contextual specificity: contextualized
+- Why source-specific: 可解释性虽是通用关注点，但此处被具体化为临床意义上的源相关性：步行、站立、语音等PD相关运动信号对严重度评分的贡献，直接影响治疗优先级；若换成普通企业IT，这种临床意义将消失。
+- Coding-agent outcome: 证据来源归因透明性（source-attribution transparency of autonomous code changes）
+- Coding-agent definition: 对于一次自治代码修改，编码智能体能够为影响其决策的各证据来源（用户指令、相关文件、测试结果、静态分析、执行日志、外部工具输出）产生可解释的贡献权重或归因，使人类审查者能判断是什么证据驱动了该修改。
+- Transfer type: same_construct_contextualized
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: tool use and actions with real environment or repository side effects, repository-scale and dependency-sensitive context, probabilistic generation of plausible but subtly incorrect artifacts, dynamic human-agent delegation, supervision, interruption, and handoff
+- Mechanism mapping: 源文：注意力机制→Stage 2对多数据源分配任务相关注意力权重→提高可解释性。编码智能体设计意涵：在多证据源（文件、测试、日志、工具输出）上配置注意力竞争机制，使各证据源为解释一次代码修改而竞争注意力，产生可审查的归因权重。候选结果：证据来源归因透明性，即审查者能识别驱动修改的关键证据。
+- Proposed observables:
+  - 智能体输出的按来源贡献权重与人类专家判断的根因来源的一致率
+  - 当某个证据源被污染或过时（如失效测试）时，归因权重和修改行为随之发生可预测变化
+  - 人类审查者仅凭归因信息能预测智能体下一步会修改哪个文件或组件
+- Coding-agent counterfactual: 如果替换为静态IDE或普通聊天机器人，用户自己发出命令并查看完整上下文，不需要“自治多步修改”产生的原因归因；没有仓库级副作用和自主迭代，证据来源归因就失去了管理自治代理风险的作用。
+- Caveat: 源文的注意力权重优化预测性能并指示传感器相关性，并非面向用户的解释系统；将注意力权重直接用作人类可审查的因果归因存在“相关性≠因果”风险，可能需要额外的校准和验证。
+- Flash decision reason: 该文明确采用计算设计科学范式，构建并严格评估AADMML框架；注意力机制、对抗学习、多任务学习和多源学习等被具名使用并直接形成Stage 1-4的设计机制。评价结果包括PD特异性严重度评估、注意力权重解释性和早期PD识别经济效益，均具有领域构成性/情境化意义。最具迁移潜力的是注意力权重带来的来源归因透明性：在编码智能体中可重新实例化为对多证据来源贡献的透明归因，支持人类审查自治代码修改；如果去掉智能体自治性、仓库级副作用和概率性错误生成等条件，该设计目标不再成立。因此为强候选，需人工复核。
+- Confidence: 0.8
+- Design evidence:
+  - 摘要：“we adopt the computational design science paradigm and propose a novel adversarial attention-based deep multisource multitask learning (AADMML) framework.”
+  - 引言：“Following the computational design science paradigm… we propose and rigorously evaluate a novel deep learning framework.”
+  - 研究设计部分：“Our main methodological contribution is Stage 4: Adversarial Attention Competition”，并给出四阶段框架（Stage 1特征学习，Stage 2注意力早期融合，Stage 3多任务学习，Stage 4对抗注意力竞争）。
+- Evaluation evidence:
+  - 实验设计：“we systematically evaluated our proposed AADMML framework… with three experiments and three case studies.”
+  - 实验1：基于mPower数据集与特征基和深度基准模型比较，报告MAE/RMSE/LMAE/LRMSE并做配对t检验（表9，Table 9）。
+  - 案例研究2：早期帕金森病识别经济效益分析，表12（Table 12）报告召回率、识别人数、净经济效益。
+  - 案例研究1和3：注意力权重被用于展示模型可解释性和人口统计模式。
+- Outcome evidence:
+  - 引言：“attention mechanism improves model interpretability”.
+  - 案例研究1：“the attention weights can help stakeholders interpret the model’s decision-making process and potentially guide effective therapies”.
+  - 案例研究3：“we report the statistics of the attention weights … grouped by age or gender.”
+
+## 19. Designing Personalized Treatment Plans for Breast Cancer
+
+- Metadata: 2021 · Information Systems Research · 10.1287/isre.2021.1002
+- Authors: Wei Chen; Yixin Lu; Liangfei Qiu; Subodha Kumar
+- Design classification: explicit_design_science
+- Artifact/intervention: 一个用于早期乳腺癌放疗个体化治疗计划决策支持的框架，包含基于肿瘤控制概率(TCP)的预测模型和基于Adam优化算法的最优化模型；整个框架作为IT人工物被实例化并通过模拟实验评价。
+- Theory-to-design strength: strong
+- Theories:
+  - Design Science Paradigm / kernel theory (Hevner et al. 2004; Gregor and Hevner 2013): 提供构建和评价IT人工物的方法论结构，指导将临床领域知识作为kernel theory用于设计预测与优化相整合的决策支持框架。
+  - Tumor Control Probability (TCP) model (radiobiological model; Zaider and Hanin 2011; Webb and Nahum 1993): 作为预测模型的核心领域理论，将辐射剂量、残余微型肿瘤细胞(MTC)体积、密度、克隆源细胞比例和放射敏感性映射到局部肿瘤控制概率，从而形成优化模型的临床目标约束。
+  - Decision-theoretic optimization with dose-painting concept (Jaffray 2012): 将治疗计划制定建模为在给定TCP目标约束下最小化平均剂量（正常组织毒性指标）的决策优化问题，决定设计中的目标函数和约束条件。
+- Source outcome: average radiation dose to organs at risk (breast/lung/heart) as indicator of radiation-induced adverse effects
+- Source definition: 在给定TCP目标下，治疗计划对正常组织（乳腺、肺、心脏）的平均辐射剂量；论文将其作为辐射诱发副作用（肺癌、心脏病等）的关键指标。
+- Source evaluation role: quantitatively_measured
+- Source operationalization: 在模拟实验中计算平均剂量 AvgDose = Σ_d (V_d^breast * D(d)) / Σ_d V_d^breast，并比较标准均匀计划、无约束最优计划、约束最优计划和剂量绘画计划下的平均剂量（Gy）。
+- Source contextual specificity: domain_constitutive
+- Why source-specific: 平均剂量的意义来自放射治疗中的剂量-体积-反应关系：同一剂量对肺、心等不同器官和不同患者产生特定毒性风险；脱离放疗领域，'平均剂量'不再有对应的临床后果与风险含义。
+- Coding-agent outcome: 编辑副作用足迹（edit blast radius / collateral exposure）最小化下的目标达成
+- Coding-agent definition: 编码智能体在完成委托开发目标（如通过测试、实现功能）的同时，对其所改动仓库中非目标模块、依赖和既有行为产生的'风险暴露'——即可能引发回归、破坏依赖或引入隐蔽错误的改动范围与概率加权度量——应被最小化。
+- Transfer type: mechanism_transfer_new_outcome
+- Theory reuse: analogy_only
+- Distinctive affordances: delegated goal pursuit, autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 源机制：TCP模型把剂量分布映射到肿瘤控制概率，优化模型在满足TCP目标约束下最小化平均剂量（正常组织毒性）。编码智能体映射：用预测模型把'编辑计划（改动分布）'映射到'目标完成概率（如测试通过）'；优化选择编辑方案，在满足目标完成概率约束下最小化'风险足迹/回归暴露'。由此生成的设计原则是预测+约束优化的双模型框架，而非贪婪生成代码。
+- Proposed observables:
+  - 按文件/函数/依赖计算的风险加权改动暴露量，例如 依赖反向依赖数×是否被改动 的加权和
+  - 目标测试套件通过率/回归测试失败率与未触及代码区域失败数的比值
+  - 人工评审或agent自报中标记的'非预期行为变化'数量
+- Coding-agent counterfactual: 若把编码智能体替换为静态IDE或普通聊天机器人，则不存在自主多步修改可执行、相互依赖的仓库的'副作用足迹'问题；该结果的定义、测量和优化机制都会崩塌。
+- Caveat: 源文中的平均剂量是物理剂量，编码域没有公认的'剂量-反应'定律；需要为软件仓库建立风险暴露度量，且TCP模型不能直接挪用，只能作为类比机制。
+- Flash decision reason: 该文明确采用设计科学范式构建并评价了预测+优化联合框架（explicit_design_science）；TCP放射生物学模型作为kernel theory直接塑造了预测模型和优化目标（theory-to-design strong）；核心结果'平均辐射剂量/辐射诱发副作用风险'是放疗领域特有且定量评价的结果（domain_constitutive）。虽然文章不涉及编码智能体，但从'预测患者反应+在目标约束下最小化副作用暴露'的机制可以转化为编码智能体的'目标达成约束下最小化编辑副作用足迹'设计目标，且该目标在静态IDE/聊天机器人条件下不成立，具有强编码智能体特异性。
+- Confidence: 0.8
+- Design evidence:
+  - 摘要：'we follow the information systems design science paradigm and propose a novel framework for decision support of treatment planning for early stage breast cancer patients undergoing radiotherapy.'
+  - 第3章：'Our research draws upon the information systems design science paradigm (Hevner et al. 2004, Gregor and Hevner 2013).'
+  - 第3章：'When there are insufficient guidelines for the creation of new IT artifacts, the design science paradigm suggests that kernel theories can facilitate the development process... In our case, given the lack of guidelines for the design of effective decision support systems for personalized radiotherapy planning, we first draw upon the clinical oncology literature to model the intrinsic relationship between radiation dose and tumor progression.'
+  - 第3.2节给出优化模型和Algorithm 1（Dose Optimization），完成从设计到实例化的步骤。
+- Evaluation evidence:
+  - 第4章：'we follow the guidelines from Hevner et al. (2004) and perform a series of evaluations using different benchmarks.'
+  - 第4.1.1节表3：比较标准均匀计划与最优计划的平均剂量，'compared with the standard uniform plan, the average dose required to achieve the TCP target of 90% under the no-constraint optimal plan decreases by approximately 94.7%'。
+  - 第4.1.2节表4：剂量绘画计划在TCP目标90%、5mm误差下平均剂量3.0 Gy，标准均匀计划为54 Gy。
+  - 第3.1.2节预测模型验证：交叉验证RMSE为1.3%；Polgar等试验外验证的95%置信区间为[93.7%, 94.4%]，与报告的94.1%接近。
+- Outcome evidence:
+  - 公式(11)：'AvgDose := Σ_d (V_d^breast · D(d)) / Σ_d V_d^breast'
+  - 表3标题：'Comparison of Average Doses (Group Plans)'，表4标题：'Comparison of Average Doses with TCP Target 90% (Individual Plans)'
+  - 第4.1.2节：'the average dose required to achieve a TCP target of 90% under the dose-painting plan is approximately 94.4% lower than the average dose required under the standard uniform plan when the setup errors are set to 5 mm.'
+
+## 20. Fall Detection with Wearable Sensors: A Hierarchical Attention-based Convolutional Neural Network Approach
+
+- Metadata: 2021 · Journal of Management Information Systems · 10.1080/07421222.2021.1990617
+- Authors: Shuo Yu; Yidong Chai; Hsinchun Chen; Randall A. Brown; Scott J. Sherman; Jay F. Nunamaker
+- Design classification: explicit_design_science
+- Artifact/intervention: 提出了一个用于可穿戴传感器跌倒检测的层级注意力卷积神经网络（HACNN）模型，包含CNN、层级注意力机制和输出三层组件，并在MobiFall和UMAFall两个公开数据集上进行了基准对比、消融实验和案例分析。
+- Theory-to-design strength: strong
+- Theories:
+  - Convolutional Neural Networks (CNN) / Representation Learning: CNN作为自动特征提取器，利用传感器数据的网格状拓扑自动学习表征，避免人工特征工程，构成HACNN的基础组件。
+  - Hierarchical Attention Mechanism: 层级注意力机制直接决定HACNN的两层注意力设计：轴级注意力和传感器级注意力，用于识别哪些传感器轴和传感器位置/类型对跌倒判定贡献最大，从而提升模型可解释性。
+- Source outcome: Explainability (hierarchical attention weights)
+- Source definition: 模型在做出跌倒/非跌倒判断时，能够通过轴级和传感器级注意力权重指出哪些传感轴、哪些传感器位置/类型对决策贡献最大，从而让使用者理解模型为何判定为跌倒。
+- Source evaluation role: mixed_evaluation
+- Source operationalization: 案例研究中报告MobiFall和UMAFall上各传感器/轴的平均注意力权重及95%置信区间，并按向前/向后/侧向跌倒类型分解；讨论这些权重与传感器物理意义（如y轴对应内外侧方向）是否吻合。
+- Source contextual specificity: contextualized
+- Why source-specific: 可解释性的操作化依赖于可穿戴传感器特有的层级结构（轴、传感器位置/类型）和跌倒类型（前向、后向、侧向），其意义与生物力学特征相关，而非一般的特征重要性。
+- Coding-agent outcome: 自治代码修改的分层归因可审查性（hierarchical attribution transparency of autonomous code changes）
+- Coding-agent definition: 编码智能体在执行被委托的软件开发目标时，能够生成并呈现对自身多步行动的归因解释：在仓库的层级结构（如函数、文件、模块）以及测试/执行反馈上，指出哪些证据和哪些代码位置驱动了最终的变更，从而支持人的审查、信任校准和错误定位。
+- Transfer type: construct_extension
+- Theory reuse: boundary_condition_extension
+- Distinctive affordances: autonomous multi-step planning and iteration, repository-scale and dependency-sensitive context, production or modification of executable, interdependent artifacts, tool use and actions with real environment or repository side effects, test/execution feedback and agent self-correction, probabilistic generation of plausible but subtly incorrect artifacts
+- Mechanism mapping: 来源：层次注意力机制→HACNN在轴级和传感器级施加两层注意力→模型输出不仅给出跌倒/非跌倒判断，还提供每个轴/传感器的贡献权重，从而解释决策。编码智能体映射：在智能体设计中使用类似的分层归因/注意力机制，对规划步骤、代码编辑位置、测试反馈进行层级加权，使最终补丁附带'为什么修改这些文件/函数、哪些证据最重要'的解释。由此导出候选结果：分层归因透明性。
+- Proposed observables:
+  - 在最终补丁中，文件/函数级归因权重与智能体实际修改位置的一致性（例如top-k命中率）
+  - 人工审查者根据分层解释识别智能体错误/多余修改的准确率或可理解性评分
+  - 在同一任务多次运行中，归因解释结构的稳定性和对关键测试失败的敏感性
+- Coding-agent counterfactual: 静态IDE或普通聊天机器人没有委托目标下的多步规划、仓库级改动和测试反馈回路，因此不存在'智能体为什么在仓库范围内改了这些相互依赖的代码'这一解释对象；最多只能对单次补全或静态建议做局部说明。
+- Caveat: 来源模型的可解释性是在神经网络内通过注意力权重实现的，而编码智能体的决策过程包含符号化规划、外部工具调用和副作用；需要把'注意力'转化为对动作和制品的归因，不能照搬。另外，来源论文没有讨论人类监督、责任归属和错误可追责性，这些是编码智能体可审查性需要补充的维度。
+- Flash decision reason: 该文明确采用计算设计科学范式，构建并评估了HACNN人工制品；'层次注意力机制'和'CNN/表征学习'对模型架构和可解释性目标有直接设计作用。被评估的注意力权重可解释性在跌倒检测领域具有情境化操作化（传感器轴/位置/跌倒类型），且可映射为编码智能体对仓库级多步代码修改的分层归因透明性，移除智能体条件后该结果无意义。因此为strong_candidate。F-measure虽被评估但属通用性能，不用于转移。
+- Confidence: 0.8
+- Design evidence:
+  - 摘要：'we follow the computational design science paradigm and develop a deep learning model to detect falls based on wearable sensor data'
+  - Research Design：'we propose a novel Hierarchical Attention-based Convolutional Neural Networks (HACNN) model for wearable sensor-based fall detection'
+  - The Proposed HACNN Model：图1及CNN、Hierarchical Attention Mechanism、Output三个组件的详细公式与结构
+- Evaluation evidence:
+  - Evaluation：'We compared the performance of our HACNN model with state-of-the-art baseline models for fall detection'，并采用十折交叉验证
+  - Tables 2/3：HACNN在F-measure上显著优于经典机器学习和替代深度学习模型
+  - Case Study: Attention Weight Statistics：'we report attention weights that reflect the relative importance of different sensors and their axes for both datasets'（图2-4）
+- Outcome evidence:
+  - Case Study: 'we report attention weights that reflect the relative importance of different sensors and their axes for both datasets'
+  - Case Study: 'The aggregated attention statistics demonstrate populational patterns that could contribute to further understanding of falls, such as how placement and types of sensors can affect fall detection.'
+  - The Proposed HACNN Model: 'By adding two attention layers beyond CNN, we are able to identify which part of sensor data contribute the most to the decision made by the model'
+

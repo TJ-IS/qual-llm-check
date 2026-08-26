@@ -1,0 +1,9 @@
+{
+  "stage1_candidates": 3036,
+  "local_fulltexts_resolved": 31,
+  "fulltexts_missing": 3005,
+  "match_basis_counts": {
+    "doi": 11,
+    "recorded_local_filename": 20
+  }
+}

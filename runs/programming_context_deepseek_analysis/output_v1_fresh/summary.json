@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-07-22T10:08:08.772585+00:00",
+  "analysis_version": "programming-context-v1",
+  "prompt_fingerprint": "c0d39d4acefac26f5e814d38cd42e912ec1d8b519f817ca6d23fb87723a7ceb6",
+  "input_fulltext_files": 13910,
+  "completed": 13910,
+  "pending": 0,
+  "programming_context_true": 264,
+  "required_fields_incomplete": 0,
+  "situation_awareness_relation_counts": {
+    "conceptually_related": 31,
+    "explicit": 1,
+    "none": 232
+  },
+  "usage": {
+    "prompt_tokens": 293269184,
+    "completion_tokens": 6022632,
+    "total_tokens": 299291816
+  }
+}

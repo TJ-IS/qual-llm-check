@@ -1,0 +1,37 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "jsonl_parses": true,
+    "record_count_matches_input": true,
+    "source_files_unique": true,
+    "record_ids_unique": true,
+    "all_input_files_covered": true,
+    "strict_gate_logic_valid": true,
+    "single_prompt_fingerprint": true,
+    "single_model": true,
+    "summary_matches_recomputation": true,
+    "csv_row_count_matches": true,
+    "retained_markdown_count_matches": true
+  },
+  "counts": {
+    "input_fulltexts": 13910,
+    "decision_records": 13910,
+    "strict_matches": 1976,
+    "strict_nonmatches": 11934,
+    "csv_data_rows": 13910,
+    "retained_markdown_entries": 1976
+  },
+  "prompt_fingerprints": {
+    "d863ce55e69db3678bb2e808b9bd427a574df987dd1f237d7deda5aeebd76162": 13910
+  },
+  "models": {
+    "deepseek-v4-flash": 13910
+  },
+  "parse_errors": [],
+  "duplicate_source_files": [],
+  "duplicate_record_ids": [],
+  "missing_source_files": [],
+  "unexpected_source_files": [],
+  "logical_violations": [],
+  "summary_mismatches": {}
+}

@@ -1,0 +1,2279 @@
+# Interleaved Design for E-Learning: Theory, Design, and Empirical Findings
+
+- 作者：Andy Tao Li; De Liu; Sean Xin Xu; Cheng Yi
+- 年份 / 期刊：2024 / MIS Quarterly
+- DOI：10.25300/misq/2023/17206
+- 源文件：08352_2024_interleaved-design-for-e-learning-theory-design-and-empirical-findings.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：如何从交错练习（interleaving）的视角优化在线学习会话结构，提高e-learning学习效果，并降低弱学习者的认知过载风险？
+
+- 制品与设计：提出并实现一种“相关交错”（related-interleaving）个性化在线学习系统：用HMM动态检测弱知识点，用专家知识+模糊关联规则构建并动态更新知识图谱以刻画主题相关性，用调度引擎为每个学习者选择在同一会话中混合相关主题的练习题；同时以非交错和无关注重交错作为基准设计。
+
+- 客观结果：两个月现场实验（510名八年级学生，三组随机分配）显示：相关交错的posttest比非交错高7.08分、比无关注重交错高10.05分；H1/H2得到支持；弱学习者从相关交错中获益更大，强弱学习者成绩差距从18.04分缩小到2.18分。
+
+- 核心贡献：作者声称提出了理论驱动、个性化且自适应的相关交错设计，扩展了e-learning活动结构研究、交错学习文献和认知负荷理论的应用，并提供了可直接复用的HMM弱知识点检测、知识图谱和调度引擎等工具。
+
+- 整篇论证链：文章先指出e-learning虽然快速增长但学习效果有限，在线学习者更容易分心和认知过载；随后引入教育领域的交错学习，说明它虽有促进主动辨别和深层理解的好处，但可能增加认知负荷，而现有平台仍以非交错为主，且传统交错设计既不考虑认知负荷也不利用数据做个性化。作者以认知负荷理论为内核理论，提出相关交错设计：在同一会话中混合相关主题，既保留交错学习的schema构建机会，又通过已有schema的部分复用降低基本加工负荷。作者接着按设计科学范式将这一设计命题转化为元需求（动态检测弱主题、提高会话内主题相关性、按弱主题和相关标准调度材料）和元设计（HMM弱主题检测、专家+模糊关联规则的知识图谱、调度引擎），并实际构建系统。现场实验以非交错和无关注重交错为基准，结果显示相关交错显著提升posttest成绩；进一步分析发现弱学习者受益更大，成绩差距缩小；基于主题掌握度和会话正确率的间接指标支持CLT机制。讨论部分将结果回接到e-learning设计、交错学习与CLT文献，提出相关交错可解释交错效果不一致的现象，并给出了学习者类型和主题相关性两个边界条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确遵循设计科学范式，以CLT为内核理论，从研究目标、元需求、元设计、系统实例化到现场实验评价，形成完整的设计知识产出链条；核心贡献是设计制品和可复用设计原则，而非单纯验证理论机制。
+
+- 主导写作弧线判定：全文从e-learning效果问题和交错学习设计缺口出发，用CLT推导相关交错设计，实例化系统后进行现场实验检验，最后在讨论中回到CLT和交错学习文献，解释混合证据并提出理论扩展；符合“问题—理论—设计—检验—回到理论”的弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：第一阶段完成理论命题推导；第二至第四阶段将该命题转化为三个相互衔接的系统组件（HMM弱主题检测、知识图谱相关度建模、调度引擎）；第五阶段开展现场实验并确认处理有效性；第六阶段检验主效应；第七阶段检验弱/强学习者异质性；第八阶段用间接机制指标和敏感性分析增强理论与边界支持。各阶段成递进关系：理论命题需要系统实例化，实例化需要现场评价，主效应需要异质性检验，异质性又需要机制证据来解释。
+
+### studies_or_phases
+
+#### 1. 理论推导：CLT视角下的相关交错设计
+
+- order：1
+
+- name_cn：理论推导：CLT视角下的相关交错设计
+
+- question_cn：交错学习为什么可能增加认知负荷，以及如何设计以减轻负荷并保持schema构建机会？
+
+- inputs_and_setting_cn：认知负荷理论文献与交错学习实证文献（Rohrer、Sana、Firth等）
+
+- designed_or_compared_object_cn：概念设计：related-interleaving vs non-interleaving vs unrelated-interleaving
+
+- baseline_control_or_counterfactual_cn：非交错与无关注重交错作为概念参照
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论分析和命题推导
+
+- main_result_cn：提出相关交错概念：同一会话中混合相关主题可以降低基本加工负荷并增加schema构建机会；弱学习者获益更大。
+
+- argumentative_role_cn：为整个制品提供设计原理和可检验假设，决定后续元需求与元设计。
+
+- remaining_uncertainty_cn：设计尚未实例化，无法确知在真实系统中的学习效果。
+
+- link_to_next_phase_cn：进入元需求与元设计，把命题转化为可实现的系统组件。
+
+##### evidence_pointers
+
+1. Introduction P5
+
+2. Design section: A Brief Overview of CLT
+
+3. Design section: CLT and Interleaving
+
+#### 2. 元设计I：基于HMM的弱知识点动态检测
+
+- order：2
+
+- name_cn：元设计I：基于HMM的弱知识点动态检测
+
+- question_cn：如何根据学习者历史表现动态识别当前未掌握的知识点？
+
+- inputs_and_setting_cn：前两周约20,000条答题记录用于训练；协变量含性别、年龄、期末考试分数、作答历史等；主题为14个英语阅读知识点。
+
+- designed_or_compared_object_cn：HMM隐藏掌握状态模型：有序logit转移、高斯混合/逻辑发射，输出每个学习者各主题的动态弱主题概率。
+
+- baseline_control_or_counterfactual_cn：与阈值法、协同过滤、Bayesian knowledge tracing等先前方法作概念对比
+
+##### objective_metrics
+
+1. 似然值
+
+2. BIC选择隐藏状态数
+
+- analysis_method_cn：最大似然估计HMM
+
+- main_result_cn：最优隐藏状态数为2（未掌握/掌握），系统能输出个性化弱主题列表。
+
+- argumentative_role_cn：满足元需求1，使相关交错能够聚焦于学习者当前未掌握的主题并随时间自适应。
+
+- remaining_uncertainty_cn：仅有弱主题列表无法构成会话设计，还需要主题相关度。
+
+- link_to_next_phase_cn：引出知识图谱建模，以决定哪些弱主题可以混合。
+
+##### evidence_pointers
+
+1. Meta-Design I section
+
+2. Figure 1
+
+3. Appendix A
+
+#### 3. 元设计II：知识图谱与模糊关联规则的主题相关性建模
+
+- order：3
+
+- name_cn：元设计II：知识图谱与模糊关联规则的主题相关性建模
+
+- question_cn：如何刻画主题之间的依赖/相关性，并动态更新以支持相关交错？
+
+- inputs_and_setting_cn：学校资深教师提供的专家规则；每日汇总的历史学习记录；支持度/置信度阈值。
+
+- designed_or_compared_object_cn：知识图谱图模型；混合专家规则与数据驱动规则；模糊关联规则挖掘。
+
+- baseline_control_or_counterfactual_cn：纯人工专家图谱、纯文本挖掘、纯数据驱动方法作为先前替代方案
+
+##### objective_metrics
+
+1. 支持度
+
+2. 置信度
+
+3. 提升度lift
+
+4. 专家规则与数据规则的交集置信度
+
+- analysis_method_cn：模糊关联规则挖掘、阈值启发式优化
+
+- main_result_cn：成功构建并更新知识图谱（如“making inferences”依赖“retrieving relevant information”），终态图谱得到资深教师认可。
+
+- argumentative_role_cn：满足元需求2，提供主题相关度的可操作化，使相关交错区别于无关注重交错。
+
+- remaining_uncertainty_cn：知识图谱与调度算法如何结合仍需明确。
+
+- link_to_next_phase_cn：进入调度引擎设计，把弱主题列表与知识图谱转换为具体练习题选择。
+
+##### evidence_pointers
+
+1. Meta-Design II section
+
+2. Figure 2
+
+3. Appendix B
+
+#### 4. 元设计III：调度引擎与系统原型
+
+- order：4
+
+- name_cn：元设计III：调度引擎与系统原型
+
+- question_cn：如何为每个学习者选择覆盖弱知识点且满足相关交错要求的练习题？
+
+- inputs_and_setting_cn：HMM输出的弱主题列表、知识图谱、未做过练习题数据库。
+
+- designed_or_compared_object_cn：调度算法：GetRefinedTopicList与ScheduleExercises；同一系统内实现相关交错、非交错、无关注重交错三种会话设计。
+
+- baseline_control_or_counterfactual_cn：非交错选最高弱主题浓度练习；无关注重交错选覆盖最多未掌握主题的练习；相关交错在弱主题排序中插入依赖主题后选练习。
+
+##### objective_metrics
+
+1. 每个练习覆盖主题数
+
+2. 每个练习覆盖主题依赖数
+
+- analysis_method_cn：排序/贪心算法，伪代码说明
+
+- main_result_cn：系统能生成三种可对比的会话设计；相关交错会选择同时覆盖最高弱主题及其依赖主题的练习。
+
+- argumentative_role_cn：完成制品实例化，并创造实验所需的三个处理条件。
+
+- remaining_uncertainty_cn：系统是否真实有效还需要现场实验证据。
+
+- link_to_next_phase_cn：进入现场实验设计与数据收集。
+
+##### evidence_pointers
+
+1. Meta-Design III section
+
+2. Figures 3-4
+
+3. Appendix C
+
+#### 5. 现场实验实施与数据收集
+
+- order：5
+
+- name_cn：现场实验实施与数据收集
+
+- question_cn：在真实中学e-learning场景中，相关交错是否优于两个基准设计？
+
+- inputs_and_setting_cn：510名八年级学生、17个班、9位英语教师；2017年暑假7月13日至8月31日；26个学习会话；pre/posttest、期末考试成绩、系统日志。
+
+- designed_or_compared_object_cn：三组间随机分配：非交错、无关注重交错、相关交错；界面相同；学生和教师不知道分组。
+
+- baseline_control_or_counterfactual_cn：非交错与无关注重交错作为基准；同班内随机分配以抵消教师效应。
+
+##### objective_metrics
+
+1. posttest成绩
+
+2. 完成练习数
+
+3. 正确率
+
+4. 每练习覆盖主题数
+
+5. 每练习主题依赖数
+
+- analysis_method_cn：随机化检验、操纵检验、描述统计
+
+- main_result_cn：435人至少完成一次练习；随机化总体成功（Class 15边际差异经稳健性处理）；操纵检验确认交错组每练习覆盖3.40主题 vs 非交错1.16，相关交错每练习2.29依赖 vs 无关注重0.47。
+
+- argumentative_role_cn：提供内部有效性强的因果证据基础。
+
+- remaining_uncertainty_cn：还需要正式回归检验主效应与异质性。
+
+- link_to_next_phase_cn：进入主效应回归分析。
+
+##### evidence_pointers
+
+1. Experimental Evaluation
+
+2. Experiment Design and Procedure
+
+3. Appendix E
+
+4. Table 2
+
+#### 6. 主效应检验：H1/H2
+
+- order：6
+
+- name_cn：主效应检验：H1/H2
+
+- question_cn：相关交错是否显著优于非交错和无关注重交错？
+
+- inputs_and_setting_cn：306名同时参加pretest和posttest的学习者；三组样本；FinalScore、Pretest、Female和班级固定效应。
+
+- designed_or_compared_object_cn：Interleaving虚拟变量与Interleaving×Relatedness交互，在回归中分离交错效应和相关效应。
+
+- baseline_control_or_counterfactual_cn：非交错与无关注重交错为基准；相关交错相对无关注重交错的差异由相关效应识别。
+
+##### objective_metrics
+
+1. posttest得分（百分制）
+
+- analysis_method_cn：模型自由均值比较、OLS回归、班级固定效应
+
+- main_result_cn：相关交错比无关注重交错高10.05分（p=0.002），比非交错高7.08分（p=0.038）；无关注重交错与非交错无显著差异（β=-2.97，p=0.374）；H1/H2成立。
+
+- argumentative_role_cn：确立了制品整体有效性，说明混合主题需要关注相关性。
+
+- remaining_uncertainty_cn：平均效应可能掩盖学习者类型差异。
+
+- link_to_next_phase_cn：进行弱/强学习者异质性分析。
+
+##### evidence_pointers
+
+1. Model-Free Evidence
+
+2. Effect of Related-Interleaving on Posttest Scores
+
+3. Table 3 Column 1
+
+4. Figures 6-7
+
+#### 7. 异质性分析：弱学习者获益更大
+
+- order：7
+
+- name_cn：异质性分析：弱学习者获益更大
+
+- question_cn：相关交错对不同能力学习者的影响是否不同？
+
+- inputs_and_setting_cn：同一306人样本；StrongLearner按期末成绩是否高于班级中位数划分；附录G用40%-60%分位做敏感性分析。
+
+- designed_or_compared_object_cn：三向交互Interleaving×Relatedness×StrongLearner。
+
+- baseline_control_or_counterfactual_cn：弱学习者与强学习者在无关注重交错和非交错条件下的对比。
+
+##### objective_metrics
+
+1. posttest得分
+
+2. 强弱学习者成绩差
+
+- analysis_method_cn：OLS三向交互回归，图示比较，敏感性分析
+
+- main_result_cn：三向交互显著为负；弱学习者相关交错比无关注重交错高18.81分，强学习者仅高2.94分且不显著；强弱差距从18.04分缩至2.18分；无关注重交错伤害弱学习者（-19.86）但帮助强学习者（+5.31）。
+
+- argumentative_role_cn：建立了边界条件，支持CLT关于弱学习者更易过载的预测。
+
+- remaining_uncertainty_cn：机制是否真由认知负荷驱动仍需间接证据。
+
+- link_to_next_phase_cn：使用主题掌握度和会话正确率做间接机制检验。
+
+##### evidence_pointers
+
+1. Effect of Related-Interleaving by Learner Type
+
+2. Table 3 Column 2
+
+3. Figure 8
+
+4. Appendix G
+
+#### 8. 机制与稳健性检验
+
+- order：8
+
+- name_cn：机制与稳健性检验
+
+- question_cn：相关交错是否如CLT预测那样增加了schema构建，结果是否稳健？
+
+- inputs_and_setting_cn：会话级HMM主题掌握度、练习正确率；每日学习记录；移除Class 15的子样本；不同强学习者切点。
+
+- designed_or_compared_object_cn：相关交错组与非交错、无关注重交错组在主题掌握度和会话正确率上的比较。
+
+- baseline_control_or_counterfactual_cn：非交错与无关注重交错为基准。
+
+##### objective_metrics
+
+1. 主题掌握概率
+
+2. 会话练习正确率
+
+3. 三向交互系数的敏感性
+
+- analysis_method_cn：含班级、日期、主题固定效应的回归；敏感性分析
+
+- main_result_cn：相关交错使主题掌握概率比非交错高3.8%、比无关注重交错高4.3%；会话正确率分别高3.1%和2.6%；敏感性分析一致。
+
+- argumentative_role_cn：用间接指标支持CLT机制，提升理论解释力，并确认异质性结果不依赖切点。
+
+- remaining_uncertainty_cn：未直接测量认知负荷；长期效果、其他学科、其他相关度实现方式未检验。
+
+- link_to_next_phase_cn：进入讨论，将结果总结为设计知识与理论贡献。
+
+##### evidence_pointers
+
+1. Appendix F
+
+2. Table F1
+
+3. Figure F1
+
+4. Appendix E/G
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT：e-learning高速发展使活动结构问题凸显
+
+2. RQ_OR_OBJECTIVE：从交错视角优化学习会话
+
+3. THEORY_INTRO：以CLT为内核理论
+
+4. DESIGN_FEATURE：提出相关交错设计并实例化系统
+
+5. STUDY_OVERVIEW：现场实验三组比较
+
+6. RESULT：相关交错优于两个基准
+
+7. BOUNDARY_CONDITION：弱学习者获益更大、差距缩小
+
+### introduction_moves
+
+1. CONTEXT：e-learning增长与优势
+
+2. PRACTICAL_STAKES：e-learning效果受批评
+
+3. PHENOMENON：在线学习者被动学习、迁移能力弱
+
+4. PRIOR_KNOWLEDGE：交错学习定义与益处
+
+5. LIMITATION：平台仍以非交错为主
+
+6. LIMITATION：传统交错不适用e-learning且未个性化
+
+7. GAP：缺少降低认知负荷的交错设计与数据驱动实现
+
+8. RQ_OR_OBJECTIVE：提出理论驱动、个性化、自适应的相关交错
+
+9. STUDY_OVERVIEW：预告设计与现场实验
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO：选择CLT为内核理论
+
+2. PRIOR_KNOWLEDGE：工作记忆与长时记忆、schema
+
+3. MECHANISM：基本加工与schema构建竞争工作记忆
+
+4. REQUIREMENT：管理基本加工负荷
+
+5. MECHANISM：非交错降低负荷但限制schema构建
+
+6. MECHANISM：交错增加schema机会但提高过载风险
+
+7. DESIGN_FEATURE：相关交错降低过载并维持连接机会
+
+### artifact_design_moves
+
+1. REQUIREMENT：动态检测弱主题
+
+2. DESIGN_FEATURE：HMM弱主题检测
+
+3. REQUIREMENT：建模主题相关性
+
+4. DESIGN_FEATURE：专家+模糊关联规则知识图谱
+
+5. REQUIREMENT：调度引擎按弱主题与相关度选材
+
+6. DESIGN_FEATURE：相关交错与非交错/无关注重交错的调度算法
+
+7. METHOD_JUSTIFICATION：混合专家与数据驱动、阈值启发式
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW：三组随机现场实验
+
+2. BENCHMARK_OR_CONTRAST：非交错与无关注重交错作为基准
+
+3. METHOD_JUSTIFICATION：同班随机化、界面相同、教师与学生不知情
+
+4. RESULT：操纵检验与随机化检验
+
+5. RESULT：主效应支持H1/H2
+
+6. RESULT：异质性检验与成绩差距缩小
+
+7. ROBUSTNESS_OR_BOUNDARY_TEST：间接机制指标与敏感性分析
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION：设计制品与e-learning设计贡献
+
+2. CONTRIBUTION：扩展e-learning活动结构研究
+
+3. CONTRIBUTION：贡献于交错学习文献，解释混合证据
+
+4. CONTRIBUTION：扩展CLT到会话主题设计
+
+5. BOUNDARY_CONDITION：相关交错适合强学习者；弱学习者应避免无关注重交错
+
+6. LIMITATION_AND_FUTURE：学科、时长、调度启发式、直接认知负荷测量等限制
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 认知负荷理论（CLT）
+
+2. 交错学习与教育心理学文献
+
+3. Bayesian knowledge tracing / HMM
+
+4. 知识图谱与模糊关联规则挖掘
+
+5. 设计科学（kernel theory, meta-requirements, meta-design）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：CLT作为内核理论直接决定了核心设计差异——相关交错，即通过提高会话内主题相关性降低基本加工负荷并增加schema构建机会；H1/H2也是由CLT推导。但具体技术实现，如HMM弱主题检测、模糊关联规则构建知识图谱、调度贪心算法，主要来自教育数据挖掘、知识图谱和系统工程等既有方法，并非由CLT严格推导。因此属于理论影响核心设计变量、但关键技术选择来自其他来源的部分耦合。
+
+- 理论到设计翻译链：CLT关于工作记忆有限和基本加工/schema构建竞争资源的命题被转译为：交错学习虽然增加schema构建机会，却提高基本加工负荷；因此设计要求是降低负荷的同时保留交错。具体化为“提高会话内主题相关性”。这一要求进一步转译成三个元需求：动态检测弱主题、提高弱主题相关度、按弱主题与相关度调度材料。元需求再映射到系统组件：HMM弱主题检测、知识图谱+模糊关联规则、调度引擎。最后用现场实验比较相关交错与无关注重交错/非交错，并用主题掌握度与会话正确率作为CLT机制的间接指标。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：CLT：工作记忆容量有限，基本加工与schema构建竞争有限资源。
+
+- mechanism_cn：高主题相关性允许学习者复用已有schema，降低基本加工负荷，为schema构建留出资源。
+
+- design_requirement_cn：同一交错会话中应混合相关主题，而不是任意混合。
+
+- artifact_choice_cn：调度引擎基于知识图谱选择有依赖关系的弱主题进入同一练习。
+
+- evaluated_contrast_cn：相关交错 vs 无关注重交错（同为交错，只改变主题相关性）。
+
+- objective_result_cn：相关交错posttest高10.05分；主题掌握度与会话正确率更高。
+
+##### evidence_pointers
+
+1. Design section: CLT and Interleaving
+
+2. Table 3 Column 1
+
+3. Appendix F
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：交错学习可增加schema构建机会，但可能因基本加工负荷过高而损害学习。
+
+- mechanism_cn：相关交错保留交错学习的对照/连接机会，同时通过主题依赖降低负荷，因此应优于非交错。
+
+- design_requirement_cn：设计应保持学习会话内多个主题混合，但必须选择相关主题。
+
+- artifact_choice_cn：同一系统实现三种设计：非交错、无关注重交错、相关交错。
+
+- evaluated_contrast_cn：相关交错 vs 非交错。
+
+- objective_result_cn：相关交错posttest高7.08分（p=0.038）。
+
+##### evidence_pointers
+
+1. Testable Hypotheses
+
+2. Table 3 Column 1
+
+3. Figure 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：知识图谱中的依赖关系（Topic B depends on Topic A if mastering A helps master B）与CLT的schema复用一致。
+
+- mechanism_cn：知识图谱中的边表示主题间可复用的知识结构，适合用来定义“相关”。
+
+- design_requirement_cn：需要动态建模并更新主题相关度。
+
+- artifact_choice_cn：专家规则初始化知识图谱，模糊关联规则从学习记录中挖掘新依赖并更新。
+
+- evaluated_contrast_cn：操纵检验：相关交错组 vs 无关注重交错组的每练习主题依赖数。
+
+- objective_result_cn：相关交错2.29依赖 vs 无关注重0.47，差异显著。
+
+##### evidence_pointers
+
+1. Meta-Design II
+
+2. Appendix B
+
+3. Figure E5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：CLT：弱学习者已有schema较少、工作记忆更容易过载，因此从减少负荷的设计中获益更大。
+
+- mechanism_cn：相关主题降低了基本加工负荷，同时并置相关主题帮助弱学习者建立连接，而强学习者资源充足，获益较小。
+
+- design_requirement_cn：设计应动态识别弱主题并针对弱学习者优化；相关交错应降低而非增加其负荷。
+
+- artifact_choice_cn：HMM弱主题检测 + 相关交错调度；对强学习者无关注重也可用，但弱学习者要避免无关注重。
+
+- evaluated_contrast_cn：相关交错 vs 无关注重交错在弱/强学习者之间的差异。
+
+- objective_result_cn：弱学习者获益18.81分，强学习者2.94分不显著；成绩差距从18.04降至2.18。
+
+##### evidence_pointers
+
+1. Effect by Learner Type
+
+2. Table 3 Column 2
+
+3. Figure 8
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：Bayesian knowledge tracing/HMM可从个体练习序列追踪隐藏掌握状态随时间变化。
+
+- mechanism_cn：利用过去正确率估计当前掌握概率，使学习会话聚焦于未掌握主题，提高学习效率。
+
+- design_requirement_cn：动态检测每个学习者的弱主题，并随学习记录更新。
+
+- artifact_choice_cn：基于HMM的弱主题检测模块，采用有序logit转移和逻辑发射。
+
+- evaluated_contrast_cn：该组件不单独实验比较，而是作为系统组件通过整体实验体现。
+
+- objective_result_cn：系统能够输出个性化弱主题列表；实验完成率61%、平均正确率65%。
+
+##### evidence_pointers
+
+1. Meta-Design I
+
+2. Appendix A
+
+3. Table 2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机现场实验（三组间设计）
+
+2. 模型自由均值比较
+
+3. OLS回归+班级固定效应
+
+4. 随机化检验与操纵检验
+
+5. 异质性/三向交互分析
+
+6. 间接机制检验（主题掌握度、会话正确率）
+
+7. 敏感性分析（强学习者切点、剔除异常班）
+
+- why_these_evaluations_cn：设计科学制品需要在真实使用场景中证明价值，因此选择现场实验；三组对照能分离“是否交错”和“交错是否相关”两个设计维度；操纵检验确保处理确实按设计实施；随机化检验保证因果识别；异质性分析把平均效应推广到学习者类型；间接机制检验连接CLT理论；敏感性分析保证结论不依赖人为切点。
+
+- benchmark_and_contrast_chain_cn：非交错是传统e-learning的现状基准，无关注重交错是朴素交错基准，相关交错是理论驱动的目标设计。操纵检验确认非交错每练习约1.16个主题、交错组约3.40个主题，相关交错组每练习2.29个依赖 vs 无关注重0.47，说明对比确实识别了“相关度”的作用。随后主效应回归在控制先前成绩和班级后比较三组；异质性分析进一步比较弱/强学习者；附录F通过主题掌握度与会话正确率支持机制；附录G通过不同切点检验边界。
+
+### claim_evidence_ledger
+
+1. H1（相关交错优于无关注重交错）：表3列1系数10.05，p=0.002；模型自由比较+10.90，p<0.001。证据充分。
+
+2. H2（相关交错优于非交错）：表3列1系数7.08，p=0.038；模型自由比较+8.28，p=0.021。证据充分但p值边缘。
+
+3. 无关注重交错与非交错无显著差异：β=-2.97，p=0.374。证据支持“随意交错并不更好”。
+
+4. 弱学习者从相关交错获益更大：三向交互-15.86，p<0.05；弱学习者+18.81，强学习者2.94 n.s.；敏感性分析一致。证据较强。
+
+5. CLT机制（降低基本负荷、增加schema构建）：附录F显示相关交错提高主题掌握度和会话正确率；这是间接证据，作者也承认未直接测量认知负荷。
+
+6. 相关交错缩小强弱差距：从18.04到2.18；该结果由三向交互模型预测，证据与互动结果一致。
+
+- internal_validity_strategy_cn：同一班内随机分配以消除教师和班级效应；学生和教师均不知情；三组界面相同，难以推断分组；回归控制FinalScore、Pretest、Female和班级固定效应；随机化检查确认三组在先前成绩、pretest、性别上没有显著差异；操纵检查确认主题数和相关度确实不同；Class 15异常通过剔除后稳健性处理。
+
+- external_validity_strategy_cn：使用真实中学、真实英语课程、自然练习题数据库和两个月实际学习过程，提高了生态效度；但样本为特定学科和年龄段，结论向其他学科和人群推广需要复制；长期效果未检验。
+
+- what_is_not_actually_tested_cn：没有直接测量学习者的认知负荷，CLT机制仅由主题掌握度与会话正确率间接推断；没有检验长期保持效果；没有检验不同主题数量、不同相关度定义、不同调度算法；没有检验不同学科和不同年龄人群；没有直接检验无关注重交错与相关交错在主观学习难度上的差异。
+
+## 贡献闭环
+
+- technical_claim_cn：基于HMM弱主题检测、知识图谱相关度和调度引擎的相关交错系统，在真实e-learning环境中能显著提高posttest成绩。
+
+- artifact_claim_cn：使会话内混合主题更具相关性的设计元素（而非单纯交错或单纯个性化）是带来改进的关键；操纵检验和对比设计支持这一可识别设计差异。
+
+- mechanism_claim_cn：相关交错通过降低基本加工负荷和增加schema构建机会改善学习；间接证据显示相关交错提高主题掌握度和会话正确率，但未直接测量认知负荷。
+
+- boundary_claim_cn：相关交错的优势对弱学习者更显著，能缩小与强学习者的成绩差距；无关注重交错对弱学习者有害；强学习者即使无关注重交错也能获益。
+
+- reusable_design_knowledge_cn：可复用的元需求：动态检测弱主题、提高会话内主题相关性、按弱主题与相关度调度材料；可复用组件：HMM弱主题检测、专家+模糊关联规则知识图谱、调度引擎。
+
+- theoretical_contribution_cn：将CLT扩展到学习会话的主题设计层面，并用主题相关性和学习者类型解释交错学习文献中的混合结果；提出相关交错作为降低认知负荷的设计变体。
+
+- how_discussion_closes_intro_gap_cn：引言指出e-learning平台未采用交错且传统交错不适合e-learning；讨论部分用相关交错回应这两个缺口：相关交错是为e-learning设计的、降低负荷且数据驱动的设计，并通过异质性结果说明其如何减轻弱学习者过载；同时回扣CLT文献，说明会话主题设计是新的CLT设计维度。
+
+- overclaim_or_unsupported_leaps_cn：作者承认未直接检验CLT机制，但从间接指标推断机制仍需谨慎；H2的p=0.038边缘显著；模型自由证据中弱学习者相关交错 vs 非交错p=0.200不显著，但回归中整体显著；将“topic relatedness”操作化为知识依赖关系，可能不能覆盖所有相关度定义；减少成绩差距的说法基于posttest推断，未追踪长期保持。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：e-learning的迅速发展使如何用技术更好地组织学习活动成为重要问题。
+
+- rhetorical_function_cn：开场建立研究背景，把读者引入e-learning设计议题。
+
+- depends_on_cn：无，独立开场。
+
+- sets_up_cn：为后面强调“学习会话结构”这一研究切入点做铺垫。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究聚焦于通过交错（在一个会话中混合不同主题）优化学习会话结构，以提升e-learning表现。
+
+- rhetorical_function_cn：明确研究目标和核心概念。
+
+- depends_on_cn：承接第一句对活动结构的关注。
+
+- sets_up_cn：预告交错是全文的设计透镜。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者遵循设计科学范式，选择认知负荷理论作为内核理论，提出相关交错设计。
+
+- rhetorical_function_cn：在摘要中亮明方法论和理论起点。
+
+- depends_on_cn：需要已提出交错设计目标。
+
+- sets_up_cn：预告“理论到设计”的论证路径和核心设计变体。
+
+- evidence_pointer：Abstract P1 S3
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：基于理论预测，设计并实例化了一个融合教育策略和机器学习技术的个性化学习系统。
+
+- rhetorical_function_cn：说明理论命题被落实为可运行制品。
+
+- depends_on_cn：依赖相关交错设计概念。
+
+- sets_up_cn：为摘要中的实验评价提供对象。
+
+- evidence_pointer：Abstract P1 S4
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：RESULT
+
+- paraphrase_cn：两个月现场实验确认相关交错优于非交错和无关注重交错。
+
+- rhetorical_function_cn：给出核心实证结果。
+
+- depends_on_cn：依赖系统实例化和现场实验。
+
+- sets_up_cn：为弱学习者异质性结果过渡。
+
+- evidence_pointer：Abstract P1 S5
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：相比无关注重交错，相关交错对弱学习者更有利，因此缩小了学习绩效差距。
+
+- rhetorical_function_cn：给出边界条件和额外贡献。
+
+- depends_on_cn：依赖前面平均效应结果。
+
+- sets_up_cn：突出理论价值与公平性含义。
+
+- evidence_pointer：Abstract P1 S6
+
+### 7. P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：e-learning产业快速增长，超过60%的美国高等教育学位追求者参与某种形式的e-learning。
+
+- rhetorical_function_cn：用数据建立现实重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后续“效果不佳”矛盾埋下背景。
+
+- evidence_pointer：Introduction P1 S1
+
+### 8. P1 S2
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：相比传统课堂，e-learning能随时随地上课并能更好地个性化学习活动。
+
+- rhetorical_function_cn：承认e-learning的优势，避免单边批评。
+
+- depends_on_cn：承接第一句。
+
+- sets_up_cn：为后面提出利用数据做个性化设计做铺垫。
+
+- evidence_pointer：Introduction P1 S2
+
+### 9. P1 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：尽管有优势，e-learning仍因学习效果有限而受到批评。
+
+- rhetorical_function_cn：引出本文要解决的核心实践问题。
+
+- depends_on_cn：依赖前两句构建的“期望vs现实”。
+
+- sets_up_cn：为后续提出通过设计提高效果的动机提供基础。
+
+- evidence_pointer：Introduction P1 S3
+
+### 10. P1 S4-S5
+
+- order：10
+
+- section：Introduction
+
+- locator：P1 S4-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：在线学习者常采用被动学习模式，更多消费和记录信息而不是反思，导致理解深度和迁移能力有限。
+
+- rhetorical_function_cn：描述具体经验现象，为设计缺口提供行为证据。
+
+- depends_on_cn：基于“效果有限”的现实问题。
+
+- sets_up_cn：说明需要能激发主动思考的会话设计。
+
+- evidence_pointer：Introduction P1 S4-S5
+
+### 11. P2 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：教育研究者提倡交错练习，即在同一学习会话中混合不同主题的练习。
+
+- rhetorical_function_cn：引入一个候选改进策略。
+
+- depends_on_cn：前文已经指出被动学习是问题。
+
+- sets_up_cn：引出交错定义为后文分析做准备。
+
+- evidence_pointer：Introduction P2 S1
+
+### 12. P2 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：解释交错学习的定义和Python数据结构示例。
+
+- rhetorical_function_cn：用例子降低抽象概念的理解成本。
+
+- depends_on_cn：需要已提出交错概念。
+
+- sets_up_cn：让读者知道交错的具体形态。
+
+- evidence_pointer：Introduction P2 S2
+
+### 13. P2 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P2 S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：交错学习鼓励学习者基于已有知识主动识别不同主题和对应策略，因此能改善对主题边界和联系的理解。
+
+- rhetorical_function_cn：说明交错为何有效，建立机制预期。
+
+- depends_on_cn：基于交错定义。
+
+- sets_up_cn：为后文用CLT分析其认知成本做对照。
+
+- evidence_pointer：Introduction P2 S3
+
+### 14. P2 S4
+
+- order：14
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：然而据作者所知，e-learning平台尚未采用交错，主流设计仍是非交错。
+
+- rhetorical_function_cn：指出现状与潜在改进之间的落差。
+
+- depends_on_cn：需要在已介绍交错好处之后提出。
+
+- sets_up_cn：形成第一个缺口：平台未利用交错。
+
+- evidence_pointer：Introduction P2 S4
+
+### 15. P2 S5
+
+- order：15
+
+- section：Introduction
+
+- locator：P2 S5
+
+- move_code：GAP
+
+- paraphrase_cn：既然交错有潜在好处，需要研究如何在e-learning中利用它提升效果。
+
+- rhetorical_function_cn：明确指出研究空白。
+
+- depends_on_cn：依赖平台未采用交错的现实。
+
+- sets_up_cn：引出本研究目标。
+
+- evidence_pointer：Introduction P2 S5
+
+### 16. P3 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：为传统面授设计的交错方式可能不适用于e-learning。
+
+- rhetorical_function_cn：把缺口从“未使用”扩展到“现有设计不适应”。
+
+- depends_on_cn：基于前文已确立e-learning有特殊情境。
+
+- sets_up_cn：为后文引入认知负荷与个性化缺口做铺垫。
+
+- evidence_pointer：Introduction P3 S1
+
+### 17. P3 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：P3 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：过去研究发现交错效果并不总是正向，部分原因是学生觉得交错比非交错更难。
+
+- rhetorical_function_cn：引用实证混合证据，说明交错有成本。
+
+- depends_on_cn：需要已有交错文献。
+
+- sets_up_cn：引出成本/认知负荷视角。
+
+- evidence_pointer：Introduction P3 S2
+
+### 18. P3 S3-S4
+
+- order：18
+
+- section：Introduction
+
+- locator：P3 S3-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：在线学习者更容易分心和认知过载，因为学习环境不专设且平台本身有竞争性信息。
+
+- rhetorical_function_cn：把一般性交错困难提升为e-learning中的特殊风险。
+
+- depends_on_cn：基于前一句关于难以度的实证。
+
+- sets_up_cn：为CLT介入提供必要性。
+
+- evidence_pointer：Introduction P3 S3-S4
+
+### 19. P3 S5
+
+- order：19
+
+- section：Introduction
+
+- locator：P3 S5
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：设计e-learning交错时必须考虑交错如何影响学习者的认知负荷。
+
+- rhetorical_function_cn：从风险推导出设计约束。
+
+- depends_on_cn：依赖前文认知过载风险论述。
+
+- sets_up_cn：为“相关交错”提供设计原则。
+
+- evidence_pointer：Introduction P3 S5
+
+### 20. P3 S6
+
+- order：20
+
+- section：Introduction
+
+- locator：P3 S6
+
+- move_code：GAP
+
+- paraphrase_cn：需要更好地从理论上理解交错与认知资源的关系，并设计能缓解过载的交错方式。
+
+- rhetorical_function_cn：明确理论缺口和设计缺口。
+
+- depends_on_cn：依赖上一句的设计要求。
+
+- sets_up_cn：引出CLT和related-interleaving。
+
+- evidence_pointer：Introduction P3 S6
+
+### 21. P4 S1
+
+- order：21
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有交错设计要求教师为每个会话挑选主题，并对所有学习者提供相同设计。
+
+- rhetorical_function_cn：指出传统设计的一刀切特征。
+
+- depends_on_cn：基于对传统面授设计的回顾。
+
+- sets_up_cn：引出“未利用数据”的第二个缺口。
+
+- evidence_pointer：Introduction P4 S1
+
+### 22. P4 S2
+
+- order：22
+
+- section：Introduction
+
+- locator：P4 S2
+
+- move_code：GAP
+
+- paraphrase_cn：传统设计未利用e-learning平台丰富的历史学习数据，而这些数据本可用于更个性化的学习会话。
+
+- rhetorical_function_cn：指出数据利用缺口。
+
+- depends_on_cn：需要e-learning数据可得这一前提。
+
+- sets_up_cn：为引入ML组件提供动机。
+
+- evidence_pointer：Introduction P4 S2
+
+### 23. P4 S3
+
+- order：23
+
+- section：Introduction
+
+- locator：P4 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：因此需要将交错设计现代化，以适配动态e-learning环境。
+
+- rhetorical_function_cn：综合之前缺口，提出研究任务。
+
+- depends_on_cn：依赖前两个缺口。
+
+- sets_up_cn：为“理论驱动、个性化、自适应”目标做铺垫。
+
+- evidence_pointer：Introduction P4 S3
+
+### 24. P5 S1
+
+- order：24
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究的目的是提供一个理论驱动、个性化、自适应且关注认知负荷的交错设计。
+
+- rhetorical_function_cn：正式宣告研究目标。
+
+- depends_on_cn：综合P3和P4的缺口。
+
+- sets_up_cn：为后文选择CLT做铺垫。
+
+- evidence_pointer：Introduction P5 S1
+
+### 25. P5 S2
+
+- order：25
+
+- section：Introduction
+
+- locator：P5 S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者首先使用CLT发展交错学习与认知负荷关系的理解。
+
+- rhetorical_function_cn：明确理论选择。
+
+- depends_on_cn：研究目标要求关注认知负荷。
+
+- sets_up_cn：引出CLT的核心命题。
+
+- evidence_pointer：Introduction P5 S2
+
+### 26. P5 S3
+
+- order：26
+
+- section：Introduction
+
+- locator：P5 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：据此提出相关交错设计：交错会话由相关主题构成，以减少基本加工所需认知资源，同时保留连接不同主题的机会。
+
+- rhetorical_function_cn：从理论命题直接导出设计变体。
+
+- depends_on_cn：依赖CLT对认知负荷的解释。
+
+- sets_up_cn：为后续元需求提供核心设计思想。
+
+- evidence_pointer：Introduction P5 S3
+
+### 27. P5 S4
+
+- order：27
+
+- section：Introduction
+
+- locator：P5 S4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：作者预期弱学习者更可能从相关交错中获益，因为他们编码新知识的工作记忆更少。
+
+- rhetorical_function_cn：预告异质性假设。
+
+- depends_on_cn：基于CLT个体差异推论。
+
+- sets_up_cn：为实验中的弱/强学习者分析埋下伏笔。
+
+- evidence_pointer：Introduction P5 S4
+
+### 28. P6 S1
+
+- order：28
+
+- section：Introduction
+
+- locator：P6 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者遵循设计科学指南，实现数据驱动、个性化、自适应的交错设计。
+
+- rhetorical_function_cn：标注研究路线从理论到构建。
+
+- depends_on_cn：已提出相关交错概念。
+
+- sets_up_cn：预告系统组件。
+
+- evidence_pointer：Introduction P6 S1
+
+### 29. P6 S2
+
+- order：29
+
+- section：Introduction
+
+- locator：P6 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设计框架包含HMM动态检测弱主题、知识图谱捕获主题相关度并动态更新、调度引擎自适应个性化组装练习。
+
+- rhetorical_function_cn：概述系统组成部分。
+
+- depends_on_cn：依赖研究目标和CLT推导。
+
+- sets_up_cn：为后文三节元设计提供地图。
+
+- evidence_pointer：Introduction P6 S2
+
+### 30. P7 S1
+
+- order：30
+
+- section：Introduction
+
+- locator：P7 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为评价设计，作者在随机现场实验中比较相关交错与非交错、无关注重交错。
+
+- rhetorical_function_cn：预告实验设计与三个条件。
+
+- depends_on_cn：系统已可生成三种设计。
+
+- sets_up_cn：为结果陈述做铺垫。
+
+- evidence_pointer：Introduction P7 S1
+
+### 31. P7 S2
+
+- order：31
+
+- section：Introduction
+
+- locator：P7 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示相关交错带来更好的学习表现。
+
+- rhetorical_function_cn：提前告知核心结论。
+
+- depends_on_cn：依赖现场实验。
+
+- sets_up_cn：与摘要呼应，引导读者关注证据。
+
+- evidence_pointer：Introduction P7 S2
+
+### 32. P7 S3
+
+- order：32
+
+- section：Introduction
+
+- locator：P7 S3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：相关交错相比无关注重交错的优势对弱学习者更突出，从而减少绩效差距。
+
+- rhetorical_function_cn：提前给出异质性结论。
+
+- depends_on_cn：依赖前面结果。
+
+- sets_up_cn：为讨论中的公平性与设计含义铺垫。
+
+- evidence_pointer：Introduction P7 S3
+
+### 33. E-learning Design P1
+
+- order：33
+
+- section：Literature Review
+
+- locator：E-learning Design P1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：e-learning低效是教育者和研究者的主要担忧。
+
+- rhetorical_function_cn：强调研究主题的现实重要性。
+
+- depends_on_cn：无，文献综述独立开场。
+
+- sets_up_cn：为综述e-learning设计研究做铺垫。
+
+- evidence_pointer：Literature Review: Research on E-learning Design P1
+
+### 34. E-learning Design P2
+
+- order：34
+
+- section：Literature Review
+
+- locator：E-learning Design P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：IS学者从多角度研究e-learning设计，包括行为助推、协作支持，以及本研究所属的活动结构设计。
+
+- rhetorical_function_cn：定位本文在文献中的位置。
+
+- depends_on_cn：需要已有e-learning设计文献。
+
+- sets_up_cn：随后指出本研究的差异点。
+
+- evidence_pointer：Literature Review: Research on E-learning Design P2
+
+### 35. E-learning Design P3
+
+- order：35
+
+- section：Literature Review
+
+- locator：E-learning Design P3
+
+- move_code：GAP
+
+- paraphrase_cn：先前研究处理会话长度、主动学习、弱主题推荐和会话间排序，但不关注单会话内如何交错不同主题。
+
+- rhetorical_function_cn：明确本研究的专门化缺口。
+
+- depends_on_cn：基于第三流文献的梳理。
+
+- sets_up_cn：引出下一节的交错会话设计综述。
+
+- evidence_pointer：Literature Review: Research on E-learning Design P3
+
+### 36. Interleaved Session Design P1
+
+- order：36
+
+- section：Literature Review
+
+- locator：Interleaved Session Design P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：交错学习在一个会话中呈现多个不同主题，而非交错设计重复呈现同一主题。
+
+- rhetorical_function_cn：给出核心术语定义。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后续混合证据和设计缺口提供基础。
+
+- evidence_pointer：Literature Review: Interleaved Session Design P1
+
+### 37. Interleaved Session Design P2
+
+- order：37
+
+- section：Literature Review
+
+- locator：Interleaved Session Design P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多数研究检验交错是否优于非交错，结果有正向也有不显著；当概念区分度高时交错可能不利。
+
+- rhetorical_function_cn：总结交错效果的混合证据。
+
+- depends_on_cn：需要交错文献。
+
+- sets_up_cn：为CLT解释混合结果做铺垫。
+
+- evidence_pointer：Literature Review: Interleaved Session Design P2
+
+### 38. Interleaved Session Design P3
+
+- order：38
+
+- section：Literature Review
+
+- locator：Interleaved Session Design P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：近期研究指出工作记忆有限的个体可能难以处理交错信息，从而稀释交错好处。
+
+- rhetorical_function_cn：指出资源约束是交错有效性的边界。
+
+- depends_on_cn：基于混合证据。
+
+- sets_up_cn：为选择CLT作为内核理论提供依据。
+
+- evidence_pointer：Literature Review: Interleaved Session Design P3
+
+### 39. Interleaved Session Design P4
+
+- order：39
+
+- section：Literature Review
+
+- locator：Interleaved Session Design P4
+
+- move_code：GAP
+
+- paraphrase_cn：如何设计交错很少被研究；Yan和Sana虽研究域内/跨域交错，但未回答同一域内如何选主题。
+
+- rhetorical_function_cn：准确刻画设计层面的空白。
+
+- depends_on_cn：依赖前一节综述。
+
+- sets_up_cn：为本文设计相关交错确立文献位置。
+
+- evidence_pointer：Literature Review: Interleaved Session Design P4
+
+### 40. P1 S1-S2
+
+- order：40
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：P1 S1-S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者遵循设计科学研究，选择CLT作为内核理论来激励相关交错设计。
+
+- rhetorical_function_cn：正式公布设计科学路线和内核理论。
+
+- depends_on_cn：文献综述已经指出资源约束和设计缺口。
+
+- sets_up_cn：进入理论分析部分。
+
+- evidence_pointer：Designing Related-Interleaving for E-learning P1 S1-S2
+
+### 41. P1 S3-S5
+
+- order：41
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：P1 S3-S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告将识别元需求、提出元设计、报告系统实例化并给出设计框架表。
+
+- rhetorical_function_cn：用设计科学术语组织后文结构。
+
+- depends_on_cn：基于设计科学范式。
+
+- sets_up_cn：对应Table 1及后续三节元设计。
+
+- evidence_pointer：Designing Related-Interleaving for E-learning P1 S3-S5; Table 1
+
+### 42. A Brief Overview of CLT P1-P2
+
+- order：42
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：A Brief Overview of CLT P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：CLT指出工作记忆用于接收处理新信息，长时记忆以schema存储组织信息，基本加工之后才可能发生schema构建。
+
+- rhetorical_function_cn：为机制分析提供理论基础。
+
+- depends_on_cn：已选定CLT。
+
+- sets_up_cn：为基本加工负荷与schema构建的权衡做铺垫。
+
+- evidence_pointer：A Brief Overview of Cognitive Load Theory P1-P2
+
+### 43. A Brief Overview of CLT P3
+
+- order：43
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：A Brief Overview of CLT P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：基本加工和schema构建都需要有限的工作记忆；当基本加工消耗过多时，schema构建减少。
+
+- rhetorical_function_cn：建立认知负荷与学习绩效之间的直接机制。
+
+- depends_on_cn：依赖前一CLT概述。
+
+- sets_up_cn：为设计原则“管理基本加工负荷”提供依据。
+
+- evidence_pointer：A Brief Overview of Cognitive Load Theory P3
+
+### 44. A Brief Overview of CLT P4
+
+- order：44
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：A Brief Overview of CLT P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：有效学习会话设计的基本原则是管理基本加工负荷，为schema构建留足资源。
+
+- rhetorical_function_cn：把理论命题上升为设计原则。
+
+- depends_on_cn：依赖上一条机制。
+
+- sets_up_cn：为后续“相关交错降低基本加工”提供规范依据。
+
+- evidence_pointer：A Brief Overview of Cognitive Load Theory P4
+
+### 45. CLT and Interleaving P1
+
+- order：45
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：CLT and Interleaving P1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：非交错让学习者反复使用同一主题的schema，极大降低基本加工负荷，但也限制了新schema构建。
+
+- rhetorical_function_cn：解释非交错为何低成本却少收益。
+
+- depends_on_cn：需要CLT基本概念。
+
+- sets_up_cn：为对比交错成本做铺垫。
+
+- evidence_pointer：CLT and Interleaving P1
+
+### 46. CLT and Interleaving P2
+
+- order：46
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：CLT and Interleaving P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：交错让学习者处理多个主题，能构建更高级schema和精细化对照，但也因无法跨主题复用schema而提高基本加工负荷。
+
+- rhetorical_function_cn：解释交错的收益与成本并存。
+
+- depends_on_cn：依赖前一条机制。
+
+- sets_up_cn：引出需要设计来缓解过载。
+
+- evidence_pointer：CLT and Interleaving P2
+
+### 47. CLT and Interleaving P3
+
+- order：47
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：CLT and Interleaving P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者提出相关交错：刻意选择高相关主题放入同一交错会话，使已构建schema可部分复用，降低基本加工负荷。
+
+- rhetorical_function_cn：从CLT机制推出核心设计变体。
+
+- depends_on_cn：依赖上一条成本分析。
+
+- sets_up_cn：为相关交错与无关注重交错之分提供定义。
+
+- evidence_pointer：CLT and Interleaving P3
+
+### 48. CLT and Interleaving P4
+
+- order：48
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：CLT and Interleaving P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：高主题相关性还提供更多schema构建机会，因为相关主题之间可连接、比较和纠正误解。
+
+- rhetorical_function_cn：强调相关交错不仅降负荷，还能增强收益。
+
+- depends_on_cn：依赖前一条设计概念。
+
+- sets_up_cn：为H1/H2提供理论预期。
+
+- evidence_pointer：CLT and Interleaving P4
+
+### 49. Meta-Requirements P1
+
+- order：49
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Requirements P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在内核理论指导下，作者提出相关交错设计的元需求。
+
+- rhetorical_function_cn：从理论到设计的正式转折。
+
+- depends_on_cn：依赖CLT推导。
+
+- sets_up_cn：引出三个组件需求。
+
+- evidence_pointer：Meta-Requirements for Related-Interleaving P1
+
+### 50. Meta-Requirements P1 end
+
+- order：50
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Requirements P1 end
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设计包含弱主题检测、主题相关度建模和调度引擎三部分，分别服务于个性化、相关性和自适应选材。
+
+- rhetorical_function_cn：把元需求具体化为系统组件。
+
+- depends_on_cn：依赖研究目标与CLT。
+
+- sets_up_cn：为后面三节元设计提供组织。
+
+- evidence_pointer：Meta-Requirements for Related-Interleaving P1
+
+### 51. Meta-Design I P1
+
+- order：51
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design I P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：根据CLT，学习发生在新信息促使学习者构建或增强schema时；检测弱主题并让学生聚焦未掌握主题能提高时间利用效率。
+
+- rhetorical_function_cn：为弱主题检测提供学习理论依据。
+
+- depends_on_cn：依赖CLT的schema构建观点。
+
+- sets_up_cn：引出HMM实现。
+
+- evidence_pointer：Meta-Design I: Weak Topic Detection Using Hidden Markov Model P1
+
+### 52. Meta-Design I P3-P4
+
+- order：52
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design I P3-P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者选用HMM是因为它能捕获掌握状态的隐藏转移和观测表现，并随时间更新掌握概率。
+
+- rhetorical_function_cn：解释为什么采用HMM而非简单阈值。
+
+- depends_on_cn：需要弱主题检测需求。
+
+- sets_up_cn：为后续HMM公式说明做铺垫。
+
+- evidence_pointer：Meta-Design I P3-P4
+
+### 53. Meta-Design II P1
+
+- order：53
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design II P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：检测到弱主题后，下一个问题是什么主题可以混合，因此需要建模主题相关性。
+
+- rhetorical_function_cn：把设计链条从弱主题引向相关性。
+
+- depends_on_cn：依赖前一组件。
+
+- sets_up_cn：引出知识图谱。
+
+- evidence_pointer：Meta-Design II: Topic Relatedness Learning Using a Knowledge Map P1
+
+### 54. Meta-Design II P3-P4
+
+- order：54
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design II P3-P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者选择专家知识初始化知识图谱并用模糊关联规则从学习记录中动态补充规则，以平衡可靠性与完备性。
+
+- rhetorical_function_cn：解释知识图谱构建方法的混合策略。
+
+- depends_on_cn：需要主题相关性需求。
+
+- sets_up_cn：为阈值选择和validating提供支持。
+
+- evidence_pointer：Meta-Design II P3-P4
+
+### 55. Meta-Design II P5
+
+- order：55
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design II P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者用启发式目标函数选择支持度和置信度阈值，在规则质量与专家规则一致性之间做权衡。
+
+- rhetorical_function_cn：给出知识图谱更新的可操作细节。
+
+- depends_on_cn：依赖模糊关联规则方法。
+
+- sets_up_cn：为附录B的计算细节做铺垫。
+
+- evidence_pointer：Meta-Design II P5
+
+### 56. Meta-Design III P1
+
+- order：56
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design III P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：调度引擎的目标是根据会话设计目标（主题数、掌握水平和相关度）选择每节学习的题目。
+
+- rhetorical_function_cn：把相关交错原则落实为算法任务。
+
+- depends_on_cn：依赖前两个组件的输出。
+
+- sets_up_cn：引出三种设计的调度规则。
+
+- evidence_pointer：Meta-Design III: Scheduling Engine for Choosing Learning Materials P1
+
+### 57. Meta-Design III P2-P3
+
+- order：57
+
+- section：Designing Related-Interleaving for E-learning
+
+- locator：Meta-Design III P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：系统实现了相关交错和两个基准设计：非交错选最高弱主题浓度，无关注重交错选覆盖最多弱主题，相关交错在弱主题排序中插入依赖主题后再选练习。
+
+- rhetorical_function_cn：提供三种可对比会话设计的具体算法。
+
+- depends_on_cn：依赖调度引擎需求。
+
+- sets_up_cn：为操纵检验和实验对比提供实现基础。
+
+- evidence_pointer：Meta-Design III P2-P3; Figure 3
+
+### 58. Testable Hypotheses P1-P2
+
+- order：58
+
+- section：Experimental Evaluation
+
+- locator：Testable Hypotheses P1-P2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：作者正式提出H1：相关交错优于无关注重交错；H2：相关交错优于非交错。
+
+- rhetorical_function_cn：给出可检验的实证假设。
+
+- depends_on_cn：依赖CLT推导和设计框架。
+
+- sets_up_cn：为现场实验的回归分析提供目标。
+
+- evidence_pointer：Testable Hypotheses P1-P2
+
+### 59. Testable Hypotheses P3
+
+- order：59
+
+- section：Experimental Evaluation
+
+- locator：Testable Hypotheses P3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：作者预期相关交错的优势对弱学习者更明显，因为他们更缺schema、更容易过载，且更需要相关并置来促进归纳。
+
+- rhetorical_function_cn：给出异质性理论预测。
+
+- depends_on_cn：依赖CLT个体差异假设。
+
+- sets_up_cn：为三向交互分析做铺垫。
+
+- evidence_pointer：Testable Hypotheses P3
+
+### 60. Study Context and System Instantiation P1-P2
+
+- order：60
+
+- section：Experimental Evaluation
+
+- locator：Study Context and System Instantiation P1-P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者与一所中国中学合作，用e-learning系统替代纸质练习册，练习包含英语阅读文章和选择题，题目覆盖14个阅读技能主题。
+
+- rhetorical_function_cn：描述实验场地和材料，增强生态效度。
+
+- depends_on_cn：系统已完成实例化。
+
+- sets_up_cn：为实验设计和操纵检验提供背景。
+
+- evidence_pointer：Study Context and System Instantiation P1-P2
+
+### 61. Experiment Design and Procedure P1
+
+- order：61
+
+- section：Experimental Evaluation
+
+- locator：Experiment Design and Procedure P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者采用三组间随机设计，同一班学生等概率随机分入三组，学生和教师均不知情，界面相同。
+
+- rhetorical_function_cn：解释实验设计如何保证内部有效性。
+
+- depends_on_cn：系统能生成三种设计。
+
+- sets_up_cn：为随机化检查与因果推断做铺垫。
+
+- evidence_pointer：Experiment Design and Procedure P1
+
+### 62. Experiment Design and Procedure P2
+
+- order：62
+
+- section：Experimental Evaluation
+
+- locator：Experiment Design and Procedure P2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验包含26个学习会话；每次会话前HMM重新计算掌握度，知识图谱更新，系统按分组选择个性化练习题；结束后进行posttest。
+
+- rhetorical_function_cn：描述实验流程和数据生成机制。
+
+- depends_on_cn：依赖系统三个组件。
+
+- sets_up_cn：为后续结果分析提供时间结构。
+
+- evidence_pointer：Experiment Design and Procedure P2; Figure 5
+
+### 63. P1-P2
+
+- order：63
+
+- section：Results and Analysis
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者聚焦于同时参加pretest和posttest的306名学习者，并用期末成绩中位数划分弱/强学习者。
+
+- rhetorical_function_cn：说明分析样本和变量操作。
+
+- depends_on_cn：需要说明参与者流失。
+
+- sets_up_cn：为回归分析确立样本。
+
+- evidence_pointer：Results and Analysis P1-P2
+
+### 64. Appendix E summary
+
+- order：64
+
+- section：Results and Analysis
+
+- locator：Appendix E summary
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：随机化检查显示各组在先前成绩、pretest和性别上无显著差异；操纵检查确认交错组和非交错组在主题数、相关组在依赖数上有显著差异。
+
+- rhetorical_function_cn：证明处理确实按设计实施且分组近似随机。
+
+- depends_on_cn：依赖实验设计和学习记录。
+
+- sets_up_cn：为因果解释提供前提。
+
+- evidence_pointer：Results P2; Appendix E Figures E1-E5
+
+### 65. Model-Free Evidence P1
+
+- order：65
+
+- section：Results and Analysis
+
+- locator：Model-Free Evidence P1
+
+- move_code：RESULT
+
+- paraphrase_cn：模型自由比较显示相关交错比非交错高8.28分，比无关注重交错高10.90分；无关注重与非交错无显著差异。
+
+- rhetorical_function_cn：在回归前先呈现直观证据。
+
+- depends_on_cn：依赖posttest数据。
+
+- sets_up_cn：为回归结果提供直观对照。
+
+- evidence_pointer：Model-Free Evidence; Figure 6
+
+### 66. Effect of Related-Interleaving on Posttest Scores P2-P3
+
+- order：66
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving on Posttest Scores P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：回归显示Relatedness显著调节Interleaving效应：相关交错比无关注重高10.05分，比非交错高7.08分；H1和H2得到支持。
+
+- rhetorical_function_cn：给出假设检验的核心结果。
+
+- depends_on_cn：依赖回归模型。
+
+- sets_up_cn：为后续异质性分析做铺垫。
+
+- evidence_pointer：Effect of Related-Interleaving on Posttest Scores; Table 3 Column 1; Figure 7
+
+### 67. Effect of Related-Interleaving on Posttest Scores P4
+
+- order：67
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving on Posttest Scores P4
+
+- move_code：RESULT
+
+- paraphrase_cn：无关注重交错与非交错相比没有显著差异，说明传统随机交错并不一定更好。
+
+- rhetorical_function_cn：排除“交错本身”作为充分条件。
+
+- depends_on_cn：依赖主回归。
+
+- sets_up_cn：强化“相关度”的必要性。
+
+- evidence_pointer：Effect of Related-Interleaving on Posttest Scores P4
+
+### 68. Effect of Related-Interleaving on Posttest Scores P5
+
+- order：68
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving on Posttest Scores P5
+
+- move_code：RESULT
+
+- paraphrase_cn：作者用主题掌握度和会话正确率作为schema构建负荷的间接指标，发现相关交错优于另外两组，支持CLT预测。
+
+- rhetorical_function_cn：提供机制层面的间接证据。
+
+- depends_on_cn：依赖HMM掌握度估计与会话记录。
+
+- sets_up_cn：为讨论中的理论贡献提供支撑。
+
+- evidence_pointer：Effect of Related-Interleaving on Posttest Scores P5; Appendix F
+
+### 69. Effect of Related-Interleaving by Learner Type P1-P2
+
+- order：69
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving by Learner Type P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者加入三向交互项以检验相关交错是否因学习者类型而异。
+
+- rhetorical_function_cn：说明异质性分析方法。
+
+- depends_on_cn：依赖主效应模型。
+
+- sets_up_cn：引出弱/强对比结果。
+
+- evidence_pointer：Effect of Related-Interleaving by Learner Type P1-P2
+
+### 70. Effect of Related-Interleaving by Learner Type P2-P3
+
+- order：70
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving by Learner Type P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：三向交互显著为负；弱学习者从相关交错获益18.81分，强学习者2.94分不显著；成绩差距从18.04缩至2.18。
+
+- rhetorical_function_cn：给出异质性的核心结果。
+
+- depends_on_cn：依赖三向交互模型。
+
+- sets_up_cn：为CLT个体差异解释提供证据。
+
+- evidence_pointer：Effect of Related-Interleaving by Learner Type; Table 3 Column 2; Figure 8
+
+### 71. Effect of Related-Interleaving by Learner Type P4
+
+- order：71
+
+- section：Results and Analysis
+
+- locator：Effect of Related-Interleaving by Learner Type P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：无关注重交错损害弱学习者却帮助强学习者，这与CLT关于认知过载风险的预测一致。
+
+- rhetorical_function_cn：用异质性结果反推机制。
+
+- depends_on_cn：依赖三向交互结果。
+
+- sets_up_cn：为讨论中的边界条件做铺垫。
+
+- evidence_pointer：Effect of Related-Interleaving by Learner Type P4
+
+### 72. Contributions to the Literature P1-P4
+
+- order：72
+
+- section：Discussion
+
+- locator：Contributions to the Literature P1-P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者逐条列出四方面贡献：设计制品、e-learning活动结构研究、交错学习文献、CLT文献。
+
+- rhetorical_function_cn：系统总结贡献并回应引言缺口。
+
+- depends_on_cn：依赖前文全部设计与实证结果。
+
+- sets_up_cn：为实践含义和限制做结构铺垫。
+
+- evidence_pointer：Discussion: Contributions to the Literature P1-P4
+
+### 73. Implications for Practice P1-P4
+
+- order：73
+
+- section：Discussion
+
+- locator：Implications for Practice P1-P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者给出实践含义：平台不应盲目混合主题，应确保相关度；对强学习者相关交错最好，对弱学习者应避免无关注重交错。
+
+- rhetorical_function_cn：把实验结果转化为可操作建议。
+
+- depends_on_cn：依赖异质性结果。
+
+- sets_up_cn：为后续限制部分做必要性说明。
+
+- evidence_pointer：Discussion: Implications for Practice P1-P4
+
+### 74. Limitations and Future Research P1-P5
+
+- order：74
+
+- section：Discussion
+
+- locator：Limitations and Future Research P1-P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者列出学科/人群、实验时长、调度启发式、动态适应、直接理论检验等限制。
+
+- rhetorical_function_cn：划定结论适用范围并指明未来研究。
+
+- depends_on_cn：需要已有结果。
+
+- sets_up_cn：给全文一个谨慎收尾。
+
+- evidence_pointer：Discussion: Limitations and Future Research P1-P5
+
+## 写作技术
+
+- gap_construction_cn：先建立现实问题（e-learning效果差）和潜在策略（交错）之间的落差，再从“平台未采用交错”“传统交错会增加认知负荷”“传统交错未个性化”三个层次逐步收敛到可研究缺口，最后用CLT把缺口定义为需要设计上的“相关交错”来填补。
+
+- signposting_cn：摘要、引言末尾、设计部分开头和实验部分开头都有明确的路线图；Table 1在正文前提供设计科学框架的总览；每节使用“First...Second...Third...”和“Next, we...”等标记。
+
+- transition_logic_cn：理论与设计之间用“根据CLT，因此设计必须……”转换；组件之间用“检测到弱主题后，下一个问题是……”串联；从设计到实验用“下一步是评估设计”；从主效应到异质性用“除了平均效应，我们还关注……”；从结果到讨论用“基于这些发现，我们贡献于……”。
+
+- claim_evidence_rhythm_cn：几乎每个设计声明后都会在实验部分找到对应检验：相关交错设计→H1/H2；负荷机制→主题掌握度/正确率；弱学习者预期→三向交互/敏感性；操纵有效性→操纵检查。结果呈现先模型自由后回归，先平均后异质性，先主证后稳健性。
+
+- benchmark_narrative_cn：非交错代表现状，无关注重交错代表朴素交错，相关交错代表理论驱动设计；通过操纵检验证明两个基准确实差异明显，从而把结果归因于“相关度”而非“是否交错”。
+
+- theory_return_cn：结果不仅报告效应量，还用CLT解释为何弱学习者获益更大、为何无关注重交错有害；在讨论中把主题相关性和学习者类型作为解释文献混合证据的调节因素，从而让实证结果回馈理论。
+
+- contribution_positioning_cn：贡献段落按设计科学、IS e-learning、交错学习、CLT四个文献层次组织，每个贡献都直接对应此前指出的缺口；同时强调艺术制品和可复用工具，不只展示一次性实验。
+
+- novelty_protection_cn：通过“相关交错”这一新概念与两个基准的差异，以及异质性分析（弱vs强、差距缩小）和间接机制检验，把结果从“某个系统有效”升级为“理论驱动的设计知识和边界条件”；还通过贡献定位说明其可以在其他e-learning设计元素、其他交错研究中迁移。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实数据和已有文献建立e-learning效果问题，指出某种被忽视但重要的设计维度。
+
+- research_job_cn：选择一个实践中有真实重要性且IS文献尚未充分处理的设计对象。
+
+- required_evidence_cn：现实数据或权威引文说明问题严重性；文献表明该设计维度存在缺口。
+
+- transition_to_next_cn：从“这个维度重要但没人做”过渡到“现有设计为何不适用”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：把一般问题收缩为具体设计缺口，并指出现有制品/设计的局限。
+
+- research_job_cn：识别传统设计在新技术情境下的不匹配点（如认知负荷、数据未利用）。
+
+- required_evidence_cn：引用混合发现和情境风险，表明不能简单照搬传统方案。
+
+- transition_to_next_cn：用“因此需要理论理解+新设计”引出理论。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：选择内核理论，解释收益与成本的机制，推导新的设计变体。
+
+- research_job_cn：提炼理论命题，说明新设计为何降低成本、保留收益。
+
+- required_evidence_cn：理论逻辑清晰，能转化为可操作设计要求。
+
+- transition_to_next_cn：“基于该命题，我们提出元需求……”进入设计阶段。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：把理论命题转成元需求、元设计和系统组件。
+
+- research_job_cn：设计满足元需求的算法/组件，并实现至少一个基准设计用于对照。
+
+- required_evidence_cn：每个组件有输入、输出和可运行逻辑；能生成不同处理条件。
+
+- transition_to_next_cn：“为了评估设计，我们开展现场实验……”进入评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：说明实验设置：场地、样本、随机化、处理、操纵检验。
+
+- research_job_cn：部署系统，收集行为数据和前后测，进行随机化/操纵检查。
+
+- required_evidence_cn：随机化检验无显著差异，操纵检验确认处理间差异。
+
+- transition_to_next_cn：“我们首先看模型自由证据，然后用回归检验……”进入结果。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：展示模型自由证据和回归结果，支持核心假设。
+
+- research_job_cn：用统计模型比较处理组均值，控制混淆变量和固定效应。
+
+- required_evidence_cn：核心假设得到显著支持；基准对比清晰。
+
+- transition_to_next_cn：“平均效应之外，我们进一步探讨异质性……”进入边界。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：展示异质性、机制指标和稳健性，把结果升级为边界与理论贡献。
+
+- research_job_cn：做交互分析、间接中介/机制指标、敏感性分析。
+
+- required_evidence_cn：异质性有理论预测且结果稳定；机制指标与理论一致。
+
+- transition_to_next_cn：总结贡献并讨论限制与未来研究。
+
+### most_transferable_moves_cn
+
+1. 用内核理论同时解释现有设计的收益和成本，再提出变体设计
+
+2. 把理论命题明确转译为元需求和元设计，使设计与理论可追溯
+
+3. 设置两个基准（现状基准和朴素版本基准）来隔离核心设计特征
+
+4. 用操纵检验证明处理确实按设计实施
+
+5. 用异质性分析寻找边界条件，避免只报平均效应
+
+6. 用间接机制指标和敏感性分析增强理论解释力
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 与真实中学合作开展两个月现场实验，涉及510名学生和9名教师
+
+2. 需要自建e-learning系统、练习数据库、专家编码题目和知识图谱
+
+3. 需要训练HMM弱主题检测模型和每日更新模糊关联规则知识图谱
+
+4. 随机化、盲实验、操纵检验等执行成本高
+
+5. 这类长期现场部署对一般研究者较难复制
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只在摘要里说“相关交错”而缺少知识图谱/依赖关系操作化
+
+2. 不要把任何混合主题都宣称是相关交错，必须证明主题间有依赖或相关关系
+
+3. 不要在没有认知负荷间接指标的情况下宣称机制得到支持
+
+4. 不要忽视随机化和操纵检验；否则现场实验的内部有效性难以成立
+
+5. 不要从单一学科单一时长结果过度推广到所有e-learning情境
+
+- single_best_description_of_the_routine_cn：用核心理论同时解释现有设计的成本与收益，据此提出一个可操作的设计变体，把理论命题转成元需求并实现为系统，再通过现场实验与基准设计对比，用异质性和机制检验把平均效应升级为边界条件和理论贡献。
+
+## 分析边界
+
+文章全文文本完整，但部分图表和公式由OCR转换，附录A-C中的公式与伪代码可能存在格式损失；未提供期刊页码，句子位置以章节和段落标识为准；作者未直接测量认知负荷，因此机制判断只能依赖文中间接指标；分析基于文章可见内容，未对未公开的附加材料进行核对。

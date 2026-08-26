@@ -1,0 +1,1803 @@
+# Unveiling the Hidden Truth of Drug Addiction: A Social Media Approach Using Similarity Network-Based Deep Learning
+
+- 作者：Jiaheng Xie; Zhu Zhang; Xiao Liu; Daniel Zeng
+- 年份 / 期刊：2021 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2021.1870388
+- 源文件：25390_2021_unveiling-the-hidden-truth-of-drug-addiction-a-social-media-approach-using-similarity-network-ba.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.8
+
+## 文章级论证概况
+
+- 核心问题：如何从匿名药物论坛的患者叙事中自动、细粒度地识别阿片类使用障碍（OUD）治疗障碍，从而弥补基于调查的患者视角缺失和morphs词汇造成的语义鸿沟？
+
+- 制品与设计：作者设计并实现了SINDEL（SImilarity Network-based DEep Learning）。其核心设计是双分支多视图深度学习架构：一个分支用可训练的word2vec 300维词嵌入表征词义；另一个分支基于词嵌入余弦相似度构建词语相似性网络，以top-K相似词的带权求和作为该词的网络表示；两个分支分别经过独立BLSTM后以元素级求和融合，再经Softmax做BIO序列标注；最后用k-means对平均词向量的障碍短语聚类，得到一般障碍类型。
+
+- 客观结果：在Drugs-Forum标注测试集上，SINDEL的精确率为85.31%，召回率70.14%，F1为76.97，显著优于SVM、LR、NB、CRF以及RNN、LSTM、BLSTM等基线；消融显示相似性网络分支是主要增益来源，注意力机制反而损害词级预测；最优相似网络大小为3个相似词；最终识别出13类OUD治疗障碍，独立专家对随机1000条障碍标注与聚类标签一致率为87.6%；在WebMD用药依从性第二案例中F1为88.10，继续优于全部基线。
+
+- 核心贡献：作者声称的贡献有三层：一是提出SINDEL这一可用于含morphs专业论坛文本的深度学习方法，显著提升障碍提取性能；二是将研究定位为计算设计科学，提供可复用的社会媒体分析设计原则；三是通过患者视角揭示13类OUD治疗障碍，包括若干调查法未捕获的新障碍，为医疗与政策干预提供依据。
+
+- 整篇论证链：文章从OUD的高社会成本与治疗保留率极低入手，指出现有调查法受污名和患者不可及性限制，无法提供细粒度、及时、患者中心的治疗障碍认识；随后以匿名药物论坛患者叙事作为替代数据源，并指出其中的核心技术困难是患者自创morphs导致字面含义与语境含义分离。作者借助形态学、分布式假设、词嵌入与BLSTM序列学习的知识，设计了包含相似性网络表示与多视图深度学习的SINDEL系统，把理论缺口转化为具体算法构件。在专家标注的Drugs-Forum语料上，作者通过与传统机器学习、深度学习的基准对比、消融、超参数网格、嵌入模型替换和网络大小敏感性分析，证明SINDEL的稳定优势并把增益归因于相似性网络分支。随后用k-means加医学专家小组把提取出的障碍聚成13类，经独立研究者验证后形成领域洞察；再用WebMD药物依从性数据作为第二案例检验外部效度。讨论部分把结果抽象为四条设计原则，返回IS设计科学与文本分析方法论，并针对患者、医生、保险公司和政策制定者给出管理含义。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确以Hevner et al.、Gregor和Hevner、Rai等的计算设计科学框架自我定位，把SINDEL视为IT制品，先由现实问题与文献缺口形成设计需求，再构建制品，随后用基准、消融、稳健性和专家验证评价制品，最后在讨论中提炼四条可复用的设计原则。虽然主要证据来自数据集和benchmark，但其整体论证结构和贡献陈述是典型的设计科学研究路径。
+
+- 主导写作弧线判定：全文主线是：高影响社会问题（阿片危机与调查局限）→理论/知识基础（形态学、分布式假设、意见挖掘、设计科学）→设计SINDEL →在多数据集与多种对照下检验 →回到IS设计理论、方法论与设计原则。理论不仅出现在文献综述，还直接推动相似性网络和多视图架构的提出，结果部分又返回理论贡献，因此用问题—理论—设计—检验—回到理论来描述最贴切。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：研究按七个阶段累积：1）把OUD治疗障碍挖掘形式化为提取+聚类两个计算任务；2）收集并专家标注Drugs-Forum语料；3）基于形态学和深度学习方法构建SINDEL制品；4）在主基准评测中证明SINDEL优于传统机器学习和深度学习基线；5）通过消融、超参数、嵌入和网络大小敏感性分析解释优势来源并检验稳健性；6）对全语料提取的障碍做聚类和专家验证，形成13类领域发现；7）在WebMD用药依从性第二案例上验证泛化性，为设计原则提供外部证据。
+
+### studies_or_phases
+
+#### 1. 问题形式化与任务设计
+
+- order：1
+
+- name_cn：问题形式化与任务设计
+
+- question_cn：如何把OUD治疗障碍挖掘定义成可计算的问题？
+
+- inputs_and_setting_cn：药物论坛患者评论、治疗障碍的经验概念、意见挖掘的提取与聚类流程
+
+- designed_or_compared_object_cn：将任务分解为序列标注任务（预测B/I/O标签）和聚类任务（把相似障碍分组）
+
+- baseline_control_or_counterfactual_cn：无对照，属于概念建模
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：集合符号与任务形式化定义
+
+- main_result_cn：定义了两个子任务，明确输出为障碍短语和障碍类型簇
+
+- argumentative_role_cn：为SINDEL的输入输出、评价目标和后续算法模块奠定形式基础
+
+- remaining_uncertainty_cn：尚未有标注数据和算法，无法判断可计算性
+
+- link_to_next_phase_cn：要求构建能够完成这两个任务的深度学习系统
+
+##### evidence_pointers
+
+1. Research Method: OUD Treatment Barrier Mining Problem Formulation
+
+#### 2. 数据收集与专家标注
+
+- order：2
+
+- name_cn：数据收集与专家标注
+
+- question_cn：如何获得训练和验证SINDEL所需的真实OUD治疗障碍语料？
+
+- inputs_and_setting_cn：Drugs-Forum上27,154篇帖子，随机抽取3,000篇；四位专家标注，第五位专家裁决分歧
+
+- designed_or_compared_object_cn：按IOB标签体系对每个词进行B/I/O标注
+
+- baseline_control_or_counterfactual_cn：无对照；用Cohen's Kappa检验标注信度
+
+##### objective_metrics
+
+1. Cohen's Kappa=0.92
+
+2. 训练/验证/测试集规模
+
+3. 障碍提及数
+
+- analysis_method_cn：随机数生成器抽样、NLTK分句、专家标注、信度检验、70/10/20划分
+
+- main_result_cn：得到2,100篇训练帖、900篇测试帖，训练集1,581个障碍提及，测试集678个障碍提及
+
+- argumentative_role_cn：为后续所有模型比较提供可信的数据基础
+
+- remaining_uncertainty_cn：单平台语料可能不覆盖所有morphs和患者群体
+
+- link_to_next_phase_cn：把数据输入到SINDEL和基线模型中做基准评测
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Figure 5
+
+3. Data Preparation
+
+#### 3. SINDEL制品构建
+
+- order：3
+
+- name_cn：SINDEL制品构建
+
+- question_cn：怎样设计一个能处理morphs的深度文本分析系统？
+
+- inputs_and_setting_cn：来自形态学/词嵌入/BLSTM的理论知识、Drugs-Forum句子输入、word2vec预训练向量
+
+- designed_or_compared_object_cn：双分支表示（词嵌入+相似性网络表示）、多视图BLSTM、元素级求和融合、k-means聚类模块
+
+- baseline_control_or_counterfactual_cn：常规单分支BLSTM、注意力变体作为后续对照
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：深度学习架构设计与数学方程定义
+
+- main_result_cn：形成SINDEL制品，包含300维可训练词嵌入、基于余弦相似度的词网络表示、独立BLSTM分支和融合层
+
+- argumentative_role_cn：实现理论到设计的翻译，是全文核心创新载体
+
+- remaining_uncertainty_cn：设计是否真的有效尚未经过实证
+
+- link_to_next_phase_cn：需要进入基准评测来检验性能
+
+##### evidence_pointers
+
+1. Similarity Network-Based Representation
+
+2. Multi-view Deep Learning Architecture
+
+3. Figure 2
+
+4. Figure 4
+
+#### 4. 主基准评测
+
+- order：4
+
+- name_cn：主基准评测
+
+- question_cn：SINDEL在专家标注的真实语料上是否优于现有模型？
+
+- inputs_and_setting_cn：Drugs-Forum标注训练/验证/测试集
+
+- designed_or_compared_object_cn：训练并比较SINDEL与SVM、LR、NB、CRF、RNN、LSTM、BLSTM
+
+- baseline_control_or_counterfactual_cn：7个基线模型；每个模型重复训练20次取平均
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F1 score
+
+4. t-test p值
+
+- analysis_method_cn：scikit-learn、CRFSuite、Keras实现基线；R语言t检验
+
+- main_result_cn：SINDEL F1达76.97%，比最优传统基线LR高53.91%，比最优深度基线BLSTM高8.44%，差异均显著
+
+- argumentative_role_cn：确立技术主张：新方法在任务上确实更优
+
+- remaining_uncertainty_cn：不知道增益来自哪个组件，也不确定是否受超参数影响
+
+- link_to_next_phase_cn：通过消融和稳健性检验解释优劣来源
+
+##### evidence_pointers
+
+1. Table 4
+
+2. Table 5
+
+3. Evaluation of Extracting OUD Treatment Barriers
+
+#### 5. 消融与稳健性分析
+
+- order：5
+
+- name_cn：消融与稳健性分析
+
+- question_cn：SINDEL的优势是否由相似性网络带来？在不同表示、超参数和网络大小下是否稳定？
+
+- inputs_and_setting_cn：同一Drugs-Forum语料；SINDEL-Left、SINDEL-Right、SINDEL-ATT变体；word2vec、Skip-gram、GloVe、FastText、SeVeN嵌入；多种超参数组合
+
+- designed_or_compared_object_cn：左分支（word embedding only）、右分支（similarity network only）、融合版、注意力增强版
+
+- baseline_control_or_counterfactual_cn：左分支/右分支/注意力变体；不同嵌入模型；不同网络大小；36种超参数网格
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F1 score
+
+4. t-test p值
+
+5. Sensitivity曲线
+
+- analysis_method_cn：消融实验、grid search、t检验、敏感性分析
+
+- main_result_cn：右分支显著优于左分支，融合后最好；attention损害性能；word2vec最优；网络大小3、7、8无显著差异，选择3以降低复杂度
+
+- argumentative_role_cn：支持制品主张和机制解释，并给出边界条件
+
+- remaining_uncertainty_cn：仍停留在模型性能层面，尚未转化为领域知识
+
+- link_to_next_phase_cn：把SINDEL部署到全语料，提取障碍并聚类
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Table 6
+
+3. Figures 6-12
+
+4. Table 7
+
+5. Table 8
+
+#### 6. 障碍聚类与领域发现
+
+- order：6
+
+- name_cn：障碍聚类与领域发现
+
+- question_cn：从大量提取的障碍短语中能归纳出哪些一般类型？这些发现是否可信？
+
+- inputs_and_setting_cn：SINDEL从整个Drugs-Forum语料中提取的障碍短语
+
+- designed_or_compared_object_cn：k-means聚类生成40簇，医学专家小组合并为13类；独立研究者对随机1000条障碍再标注
+
+- baseline_control_or_counterfactual_cn：无算法对照；用独立专家复标衡量聚类信度
+
+##### objective_metrics
+
+1. 专家合并簇数
+
+2. 独立复标一致率87.6%
+
+3. 各类障碍百分比
+
+- analysis_method_cn：k-means、医学专家小组判定、独立复标评估
+
+- main_result_cn：得到13类OUD治疗障碍；最常见是缺乏动机24.67%和缺乏医疗素养21.88%；发现治疗副作用、医患关系差、抑郁状态等调查未覆盖的障碍
+
+- argumentative_role_cn：把技术性能上升为患者视角的领域知识和干预启示
+
+- remaining_uncertainty_cn：只在一个领域验证，能否推广未知
+
+- link_to_next_phase_cn：用第二个案例检验SINDEL的泛化性
+
+##### evidence_pointers
+
+1. Table 9
+
+2. Clustering OUD Treatment Barriers
+
+#### 7. 泛化性第二案例
+
+- order：7
+
+- name_cn：泛化性第二案例
+
+- question_cn：SINDEL能否推广到另一个含morphs的障碍提取任务？
+
+- inputs_and_setting_cn：WebMD论坛53,180条评论、233,325个句子；随机选取5,400句标注用药依从性障碍
+
+- designed_or_compared_object_cn：用SINDEL提取用药依从性障碍，与SVM、LR、NB、CRF、RNN、LSTM、BLSTM、SINDEL-ATT、SINDEL-Right比较
+
+- baseline_control_or_counterfactual_cn：同类型基线模型；6位专家标注；Kappa=0.98；36种超参数与多种嵌入稳健性检查
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F1 score
+
+4. Cohen's Kappa=0.98
+
+- analysis_method_cn：相同标注与评估协议、基准比较、附录中的超参数稳健性检验
+
+- main_result_cn：SINDEL的F1为88.10%，在全部基线和全部超参数设置下一致最优
+
+- argumentative_role_cn：支持外部效度与方法论设计原则，防止SINDEL退化为单数据集的一次性结果
+
+- remaining_uncertainty_cn：尚未测试hacker forum、产品评论等更多领域；没有直接测试干预效果
+
+- link_to_next_phase_cn：讨论部分把两案例的共性抽象为设计原则并返回IS理论
+
+##### evidence_pointers
+
+1. Table 10
+
+2. Second Case Study
+
+3. Online Supplemental Appendices A4-A10
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. LIMITATION
+
+4. GAP
+
+5. DESIGN_FEATURE
+
+6. RESULT
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. RQ_OR_OBJECTIVE
+
+4. PRACTICAL_STAKES
+
+5. LIMITATION
+
+6. GAP
+
+7. REQUIREMENT
+
+8. MECHANISM
+
+9. DESIGN_FEATURE
+
+10. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. STUDY_OVERVIEW
+
+2. PRIOR_KNOWLEDGE
+
+3. LIMITATION
+
+4. GAP
+
+5. PHENOMENON
+
+6. THEORY_INTRO
+
+7. THEORY_PROPOSITION
+
+8. MECHANISM
+
+9. REQUIREMENT
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. STUDY_OVERVIEW
+
+3. DESIGN_FEATURE
+
+4. MECHANISM
+
+5. METHOD_JUSTIFICATION
+
+6. CONTRIBUTION
+
+### evaluation_moves
+
+1. PHENOMENON
+
+2. METHOD_JUSTIFICATION
+
+3. BENCHMARK_OR_CONTRAST
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+6. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. REQUIREMENT
+
+5. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. OUD治疗障碍领域知识与调查文献
+
+2. 形态学与morphs研究
+
+3. 分布语义假说与词嵌入
+
+4. RNN/LSTM/BLSTM序列学习
+
+5. 意见挖掘中的方面提取与方面聚类
+
+6. 计算设计科学与Hevner设计准则
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：形态学与分布式假说直接催生了相似性网络表示和多视图架构这两个核心设计，BLSTM和方面聚类也来自既有知识；但具体嵌入模型选择（word2vec vs GloVe等）、网络大小、是否加入attention以及超参数取值，主要依靠基准测试和敏感性分析确定，因此属于理论部分决定设计、工程与经验选择补全其余部分。
+
+- 理论到设计翻译链：调查法覆盖率低且无法处理患者自创词汇 → 使用匿名论坛患者叙事作为数据源 → 识别出morphs造成字面/语境语义分裂 → 由分布式假说和形态学知识推出需要用词向量和显式词网络捕捉同类morphs → 设计相似性网络表示（余弦相似度top-K带权和）作为第二分支 → 由BLSTM序列学习推出用双向结构捕捉句子级依赖 → 设计双分支多视图BLSTM并在Softmax层做BIO预测 → 由方面聚类惯例推出用k-means对平均词向量聚类 → 通过基准、消融、稳健性和第二案例检验这些翻译后的设计选择。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：分布式假说：具有相似含义的词倾向于出现在相似邻居中；词嵌入可表示含拼写变体和社区词汇的实体
+
+- mechanism_cn：通过邻近词向量将morphs的语境含义编码进稠密向量，缓解字面与语境语义的分离
+
+- design_requirement_cn：需要一种能保留OUD语境并适应morphs的语义表示
+
+- artifact_choice_cn：使用可训练的word2vec 300维词嵌入，并在OUD障碍挖掘目标下微调
+
+- evaluated_contrast_cn：SINDEL vs RNN/LSTM/BLSTM；SINDEL vs 左分支（word2vec only）
+
+- objective_result_cn：F1从BLSTM 70.98提升到SINDEL 76.97；左分支F1 70.98低于右分支和融合版
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Similarity Network-Based Representation
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：形态学研究表明同一药物类别的morphs语义更近；网络关系能显式建模这些相近关系
+
+- mechanism_cn：以余弦相似度构建词网络，用最相似词的带权求和替换焦点词表示，使Oxy和Oxycet的联系被显式利用
+
+- design_requirement_cn：需弥补词嵌入只考虑局部邻居而忽略实体间网络关系的不足
+
+- artifact_choice_cn：基于word2vec余弦相似度构建词相似性网络，对每个词取top-K相似词进行加权求和作为网络表示
+
+- evaluated_contrast_cn：SINDEL-Right（仅相似网络分支）vs SINDEL-Left（仅词嵌入分支）vs 融合SINDEL
+
+- objective_result_cn：右分支F1 74.43，左分支70.98，融合76.97；表8示例显示可捕获heroin→H、chinawhite等morphs
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Table 8
+
+3. Figure 3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：BLSTM通过双向隐藏状态能够利用前后文信息，适合噪声用户文本的命名实体识别
+
+- mechanism_cn：双向LSTM在词级预测中整合左右上下文，提高障碍短语边界识别能力
+
+- design_requirement_cn：需要在两个独立表示上分别做序列建模，并融合信息
+
+- artifact_choice_cn：采用双分支BLSTM，每个分支独立处理一种表示，输出经元素级求和融合后进入Softmax
+
+- evaluated_contrast_cn：SINDEL vs RNN/LSTM/BLSTM；SINDEL-ATT
+
+- objective_result_cn：SINDEL优于所有深度基线；加入注意力反而使F1降至72.18，说明词级预测不需要整句注意力
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Multi-view Deep Learning Architecture
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：意见挖掘的方面提取+方面聚类流程可迁移到治疗障碍挖掘
+
+- mechanism_cn：先把障碍短语作为序列标签提取出来，再用语义聚类聚合同义表达
+
+- design_requirement_cn：需要输出可解释的障碍类型而不只是短语片段
+
+- artifact_choice_cn：在SINDEL提取后，用障碍短语内词向量的平均向量作为特征，执行k-means聚类
+
+- evaluated_contrast_cn：专家小组合并k-means生成的40簇为13类；独立研究者复标1000条
+
+- objective_result_cn：13类障碍；独立复标一致率87.6%
+
+##### evidence_pointers
+
+1. Table 9
+
+2. OUD Treatment Barrier Clustering
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：计算设计科学要求IT制品经过严格评价并提炼设计原则
+
+- mechanism_cn：通过基准、消融、超参数网格、嵌入替换、跨领域第二案例建立可靠制品主张
+
+- design_requirement_cn：不能只报告单点性能，必须检验增益来源与边界
+
+- artifact_choice_cn：设计一组系统评价协议：传统ML基线、深度基线、消融、网格搜索、敏感性分析、专家验证、第二案例
+
+- evaluated_contrast_cn：多基线与多设置对照
+
+- objective_result_cn：SINDEL在OUD和WebMD两个数据集上均一致领先，并在多数设置中稳健
+
+##### evidence_pointers
+
+1. Tables 4-7
+
+2. Table 10
+
+3. Figures 6-12
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 主基准评测（conventional ML + deep learning baselines）
+
+2. 消融实验（left branch / right branch / attention）
+
+3. 超参数网格稳健性检验
+
+4. 嵌入模型替换（word2vec vs Skip-gram/GloVe/FastText/SeVeN）
+
+5. 相似网络大小敏感性分析
+
+6. 领域专家聚类合并与独立复标验证
+
+7. 跨领域第二案例（WebMD用药依从性）
+
+- why_these_evaluations_cn：作者需要同时支撑三种主张：技术性能主张、制品组件归因主张、泛化设计知识主张。因此先用多基线建立性能优势；再用消融把增益归因到相似性网络分支；再用网格、嵌入替换和网络大小敏感性检验优势不是偶然参数选择；随后用专家聚类把技术输出转成领域知识；最后用第二案例证明方法可迁移，避免贡献被限定在单一OUD语料。
+
+- benchmark_and_contrast_chain_cn：基准链从传统ML（SVM/LR/NB/CRF）推进到深度模型（RNN/LSTM/BLSTM），然后进入SINDEL内部变体（左/右/注意力），再扩展到不同嵌入模型和不同网络大小，最后在WebMD第二案例里重复同一套基准和超参数检查。这种逐步收窄又逐步外推的对照链，使“SINDEL更好”从单点结果累积为“相似性网络贡献明确、跨设置稳健、跨领域可泛化”的结论。
+
+### claim_evidence_ledger
+
+#### 1. SINDEL在OUD障碍提取上显著优于传统机器学习和深度模型
+
+- claim_cn：SINDEL在OUD障碍提取上显著优于传统机器学习和深度模型
+
+- evidence_cn：表4：F1 76.97 vs LR 50.01、CRF 49.90；表5：F1 76.97 vs BLSTM 70.98；t检验p<0.001
+
+- supported_cn：强支持
+
+#### 2. 相似性网络分支是性能提升的来源
+
+- claim_cn：相似性网络分支是性能提升的来源
+
+- evidence_cn：表5消融：SINDEL-Right 74.43高于SINDEL-Left 70.98，融合后76.97最高
+
+- supported_cn：部分支持；基于消融设计而非因果干预，仍可能存在交互效应
+
+#### 3. 注意力机制不利于词级障碍提取
+
+- claim_cn：注意力机制不利于词级障碍提取
+
+- evidence_cn：表5：SINDEL-ATT F1 72.18低于SINDEL 76.97
+
+- supported_cn：支持，但只能说明在该任务和该数据上self-attention无效，不能推广到所有注意力机制
+
+#### 4. word2vec是SINDEL最佳嵌入模型
+
+- claim_cn：word2vec是SINDEL最佳嵌入模型
+
+- evidence_cn：表6：word2vec F1 76.97优于Skip-gram 73.87、GloVe 69.33、FastText 73.10、SeVeN 74.51；图9-11
+
+- supported_cn：支持，但限于当前语料和超参数范围
+
+#### 5. SINDEL能通过相似性网络捕获morphs
+
+- claim_cn：SINDEL能通过相似性网络捕获morphs
+
+- evidence_cn：表8列出heroin→dopesick/H/chinawhite、methadone→meth/M/MMT等示例
+
+- supported_cn：部分支持；证据为示例性，缺乏系统性量化
+
+#### 6. 识别出13类OUD治疗障碍，含调查未覆盖的新障碍
+
+- claim_cn：识别出13类OUD治疗障碍，含调查未覆盖的新障碍
+
+- evidence_cn：表9聚类结果；独立研究者1000条障碍复标一致率87.6%；与少数文献对照
+
+- supported_cn：支持聚类信度，但“未被调查发现”缺乏对既有调查文献的系统性严格对照
+
+#### 7. 方法可推广到其他含morphs的领域
+
+- claim_cn：方法可推广到其他含morphs的领域
+
+- evidence_cn：WebMD第二案例表10：F1 88.10，一致领先全部基线和超参数设置
+
+- supported_cn：部分支持；hacker forum、产品评论等推广仍属推论
+
+- internal_validity_strategy_cn：采用随机抽样、多位专家独立标注、Cohen's Kappa检验、第五位专家仲裁分歧、固定训练/验证/测试划分、每个模型重复训练20次取平均、t检验、消融设计、超参数网格和敏感性分析，确保性能差异不是标注噪声或单次随机初始化造成的。
+
+- external_validity_strategy_cn：使用第二个完全不同的文本场景（WebMD用药依从性障碍）检验泛化性；同时比较多种embedding与超参数设置，并用附录报告稳健性，最后在讨论中把方法抽象为可迁移到网络安全、电商评论等领域的设计原则。
+
+- what_is_not_actually_tested_cn：没有直接测试SINDEL在hacker forum、产品评论等声称可推广领域上的真实表现；没有进行干预实验或现场部署，因此无法证明SINDEL能直接改善治疗结果；没有对“过去调查未发现的新障碍”进行系统文献比对；“相似性网络弥合morphs语义”是机制推测，主要通过消融和示例支持，没有过程级因果证据。
+
+## 贡献闭环
+
+- technical_claim_cn：SINDEL在OUD治疗障碍提取和WebMD用药依从性障碍提取两个数据集上均显著优于现有传统机器学习和深度学习基线。
+
+- artifact_claim_cn：相似性网络表示和多视图BLSTM融合是性能提升的关键；右分支显著优于左分支，完整融合又优于任一单独分支。
+
+- mechanism_claim_cn：相似性网络通过显式连接同一药物类别的morphs，把焦点词用最相似词的加权表示替代，从而弥合morphs字面含义与语境含义之间的差距，使稀疏患者叙事中的障碍短语更易被识别。
+
+- boundary_claim_cn：该方法适用于含丰富社区morphs、非正式拼写和长噪音句子的社交文本；在词级BIO预测任务中整句注意力机制没有帮助；最佳相似网络规模为3（与7、8无显著差异），且word2vec嵌入在该任务上最优。
+
+- reusable_design_knowledge_cn：提炼出四条可复用设计原则：1）把词网络纳入语言模型可解构复杂词义；2）多维数据表示（词嵌入与网络表示）可丰富表示学习；3）分类模块后接聚类模块可提供可解释、可行动的分析结果；4）社交媒体知识发现可补充基于调查的人类行为理解。
+
+- theoretical_contribution_cn：把形态学和分布式语义知识引入IS文本分析，证明显式词语相似网络可以解决专业论坛中的语义异质问题；同时将计算设计科学框架应用于健康社会媒体分析，为IT制品设计知识的产生提供了实例。
+
+- how_discussion_closes_intro_gap_cn：讨论重新回到引言提出的调查法低响应、患者视角缺失和morphs技术障碍，用两个数据集上的SINDEL表现、专家验证的13类障碍以及四条设计原则，论证SINDEL是一种可扩展、自动化的患者障碍发现机制，从而把开头的方法缺口转化为已实现的IS设计科学贡献。
+
+- overclaim_or_unsupported_leaps_cn：存在几处跳跃：把只在drug forum和WebMD验证过的方法推广到hacker forum、产品评论等未测试场景；用几个morphs示例支撑“相似性网络弥合morphs语义”的机制断言；把“调查未覆盖的新障碍”表述为定论而未进行系统文献对照；在摘要和引言中使用“隐藏真相”等较强修辞，可能超过直接证据。
+
+## 句级写作动作图谱
+
+### 1. 摘要S1
+
+- order：1
+
+- section：Abstract
+
+- locator：摘要S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：指出OUD是每年给美国医疗系统造成约5040亿美元损失并带来严重死亡风险的流行病。
+
+- rhetorical_function_cn：开篇用巨额成本和死亡风险建立问题的现实紧迫性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后文引入调查局限和新数据源提供价值背景。
+
+- evidence_pointer：Abstract S1
+
+### 2. 摘要S2
+
+- order：2
+
+- section：Abstract
+
+- locator：摘要S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：既有研究通过调查了解OUD治疗障碍，但因阿片类药物相关社会污名，调查回复率低。
+
+- rhetorical_function_cn：点出现有方法的核心数据缺陷。
+
+- depends_on_cn：依赖S1的现实紧迫性。
+
+- sets_up_cn：引出社交媒体用户生成内容作为替代数据源。
+
+- evidence_pointer：Abstract S2
+
+### 3. 摘要S3
+
+- order：3
+
+- section：Abstract
+
+- locator：摘要S3
+
+- move_code：GAP
+
+- paraphrase_cn：作者提出把社交媒体用户生成内容作为研究OUD的新数据源。
+
+- rhetorical_function_cn：在调查法缺口处提出新的数据路径。
+
+- depends_on_cn：依赖S2的调查局限。
+
+- sets_up_cn：为SINDEL系统的提出做铺垫。
+
+- evidence_pointer：Abstract S3
+
+### 4. 摘要S4
+
+- order：4
+
+- section：Abstract
+
+- locator：摘要S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设计一种名为SINDEL的新型IT系统，从患者叙事中发现障碍并应对morphs挑战。
+
+- rhetorical_function_cn：点出制品名称、任务和关键技术。
+
+- depends_on_cn：依赖S3的数据源选择。
+
+- sets_up_cn：为摘要中的性能结果提供主语。
+
+- evidence_pointer：Abstract S4
+
+### 5. 摘要S5
+
+- order：5
+
+- section：Abstract
+
+- locator：摘要S5
+
+- move_code：RESULT
+
+- paraphrase_cn：SINDEL显著优于SOTA NLP模型，F1达到76.79/76.97，识别出13类治疗障碍并经领域专家验证。
+
+- rhetorical_function_cn：用数字和专家验证支撑制品主张。
+
+- depends_on_cn：依赖S4的制品设计。
+
+- sets_up_cn：让读者在摘要阶段就看到技术与领域双重成果。
+
+- evidence_pointer：Abstract S5
+
+### 6. 摘要S6
+
+- order：6
+
+- section：Abstract
+
+- locator：摘要S6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称对IS文本分析方法、社交媒体分析设计原则和患者障碍揭示均有贡献。
+
+- rhetorical_function_cn：总结贡献层级并预告正文贡献结构。
+
+- depends_on_cn：依赖S4-S5。
+
+- sets_up_cn：为正文Contributions部分的三个层次设定框架。
+
+- evidence_pointer：Abstract S6
+
+### 7. 引言P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：引言P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：社交媒体正从根本上改变企业沟通、协作、消费和创造方式。
+
+- rhetorical_function_cn：把研究放入IS的社交媒体大背景中。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为社交媒体分析在医疗与管理中的应用做背景铺垫。
+
+- evidence_pointer：Introduction P1 S1
+
+### 8. 引言P1 S2-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：引言P1 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有IS研究用社交媒体分析实现消费者偏好推断、营销与股价预测等；医疗领域也在用患者自我报告构建医学知识。
+
+- rhetorical_function_cn：展示社交媒体分析的既有成果和医疗可行性。
+
+- depends_on_cn：依赖S7的社交媒体背景。
+
+- sets_up_cn：说明本研究的IS血脉并引入Kallinikos和Tempini。
+
+- evidence_pointer：Introduction P1 S2-S3
+
+### 9. 引言P1 S4-S5
+
+- order：9
+
+- section：Introduction
+
+- locator：引言P1 S4-S5
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出利用在线患者自我报告网络来理解OUD治疗体验。
+
+- rhetorical_function_cn：从泛背景收束到本文具体研究目标。
+
+- depends_on_cn：依赖S8的既有医疗社交分析基础。
+
+- sets_up_cn：建立全文要解决的问题。
+
+- evidence_pointer：Introduction P1 S4-S5
+
+### 10. 引言P2 S1-S5
+
+- order：10
+
+- section：Introduction
+
+- locator：引言P2 S1-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：描述阿片类药物滥用规模、OUD成本超过5040亿美元、治疗保留率仅17.5%，并列出治疗保留挑战和访问障碍。
+
+- rhetorical_function_cn：用统计数字说明问题的社会经济后果和干预必要性。
+
+- depends_on_cn：依赖S9的目标设定。
+
+- sets_up_cn：为后文“理解障碍是干预前提”提供依据。
+
+- evidence_pointer：Introduction P2 S1-S5
+
+### 11. 引言P3 S1-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：引言P3 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：既有调查难以触及未接受治疗的患者；社交媒体可桥接这一缺口，59%成年人参与健康社交平台。
+
+- rhetorical_function_cn：指出现有调查法的样本局限，并给出社交媒体的替代潜力。
+
+- depends_on_cn：依赖S10的现实后果。
+
+- sets_up_cn：引出匿名论坛患者叙事作为新数据源。
+
+- evidence_pointer：Introduction P3 S1-S3
+
+### 12. 引言P3 S4-S5
+
+- order：12
+
+- section：Introduction
+
+- locator：引言P3 S4-S5
+
+- move_code：GAP
+
+- paraphrase_cn：匿名论坛中患者愿意分享用药与治疗决策，但OUD研究仍缺少社交媒体分析方法。
+
+- rhetorical_function_cn：明确方法缺口。
+
+- depends_on_cn：依赖S11。
+
+- sets_up_cn：为SINDEL的出现提供缺口理由。
+
+- evidence_pointer：Introduction P3 S4-S5
+
+### 13. 引言P4 S1-S2
+
+- order：13
+
+- section：Introduction
+
+- locator：引言P4 S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：OUD治疗障碍随时间与生活事件变化，需要细粒度、及时、自动化的监控模型。
+
+- rhetorical_function_cn：把方法缺口转成系统功能要求。
+
+- depends_on_cn：依赖S12。
+
+- sets_up_cn：为SINDEL的自动化属性提供论证。
+
+- evidence_pointer：Introduction P4 S1-S2
+
+### 14. 引言P4 S3-S7
+
+- order：14
+
+- section：Introduction
+
+- locator：引言P4 S3-S7
+
+- move_code：MECHANISM
+
+- paraphrase_cn：患者使用的morphs（如Oxy、O.C.、chocolate chip cookies）字面义与语境义分离，造成语义鸿沟；这种morphs可通过表示学习习得。
+
+- rhetorical_function_cn：解释为什么morphs是核心难点，并指出可行的学习路径。
+
+- depends_on_cn：依赖S13的自动化需求。
+
+- sets_up_cn：为相似性网络和词嵌入设计提供机制原因。
+
+- evidence_pointer：Introduction P4 S3-S7
+
+### 15. 引言P5 S1-S3
+
+- order：15
+
+- section：Introduction
+
+- locator：引言P5 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出SINDEL：相似性网络组件连接morphs字面与语境语义，多视图深度学习架构在稀疏OUD叙事上提升学习。
+
+- rhetorical_function_cn：用制品回应前述机制缺口。
+
+- depends_on_cn：依赖S14的机制分析。
+
+- sets_up_cn：预告Research Method中的架构细节。
+
+- evidence_pointer：Introduction P5 S1-S3
+
+### 16. 引言P6 S1-S4
+
+- order：16
+
+- section：Introduction
+
+- locator：引言P6 S1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者预告三方面贡献：SINDEL方法、计算设计科学IT制品、发现13类障碍并打开患者异质性。
+
+- rhetorical_function_cn：在引文末段承诺贡献层级，引导读者期待。
+
+- depends_on_cn：依赖S15的制品概述。
+
+- sets_up_cn：为文献综述和讨论部分的贡献声明提供提纲。
+
+- evidence_pointer：Introduction P6 S1-S4
+
+### 17. 文献综述首段
+
+- order：17
+
+- section：Literature Review
+
+- locator：文献综述首段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告综述覆盖四个研究领域：OUD治疗、在线社区与设计科学、意见挖掘、形态学。
+
+- rhetorical_function_cn：给出文献地图，帮助读者导航。
+
+- depends_on_cn：依赖引言贡献框架。
+
+- sets_up_cn：为后续四个子领域分别设置路标。
+
+- evidence_pointer：Literature Review 首段
+
+### 18. 表1前一段
+
+- order：18
+
+- section：Literature Review
+
+- locator：表1前一段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：总结已有调查识别的OUD治疗障碍，归纳为系统、提供方、患者三类。
+
+- rhetorical_function_cn：承认既有领域知识并建立分类框架。
+
+- depends_on_cn：依赖S10的现实问题。
+
+- sets_up_cn：作为后文批评调查法局限的对照基础。
+
+- evidence_pointer：Table 1前一段
+
+### 19. 表1后一段
+
+- order：19
+
+- section：Literature Review
+
+- locator：表1后一段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：批评调查法只能快照、以提供方为中心、患者因污名不愿披露，因而不能全面获得患者视角。
+
+- rhetorical_function_cn：从知识综述转向方法限制。
+
+- depends_on_cn：依赖S18。
+
+- sets_up_cn：支持社交媒体数据源和患者视角的正当性。
+
+- evidence_pointer：Barriers to OUD Treatments第二段
+
+### 20. 在线社区与设计科学首段
+
+- order：20
+
+- section：Literature Review
+
+- locator：在线社区与设计科学首段
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：匿名社交媒体上许多患者包括非法药物使用者在网上分享用药体验。
+
+- rhetorical_function_cn：描述经验现象，说明患者数据可得。
+
+- depends_on_cn：依赖S19。
+
+- sets_up_cn：为患者自我报告语料的存在和规模提供现象依据。
+
+- evidence_pointer：Online Social Community and Design Science首段
+
+### 21. 在线社区与设计科学第二段
+
+- order：21
+
+- section：Literature Review
+
+- locator：在线社区与设计科学第二段
+
+- move_code：GAP
+
+- paraphrase_cn：OUD研究中仍无社交媒体分析方法，而IS文献强调需要更强的算法和知识表示处理异构健康信息。
+
+- rhetorical_function_cn：把领域方法缺口与IS技术需求对接。
+
+- depends_on_cn：依赖S20。
+
+- sets_up_cn：引出Hevner、Gregor、Chen等设计科学准则。
+
+- evidence_pointer：Online Social Community and Design Science第二段
+
+### 22. 在线社区与设计科学第二段后部
+
+- order：22
+
+- section：Literature Review
+
+- locator：在线社区与设计科学第二段后部
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入计算设计科学范式，Hevner等准则主张通过算法和IT制品解决有重大社会影响的问题。
+
+- rhetorical_function_cn：为论文提供设计科学理论框架。
+
+- depends_on_cn：依赖S21。
+
+- sets_up_cn：讨论部分再返回该理论进行贡献定位。
+
+- evidence_pointer：Online Social Community and Design Science第二段后部
+
+### 23. 意见挖掘首段
+
+- order：23
+
+- section：Literature Review
+
+- locator：意见挖掘首段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：意见挖掘通常包括数据收集、意见识别、方面提取、方面聚类和摘要；OUD治疗障碍可视为方面。
+
+- rhetorical_function_cn：引入方法学基础，为SINDEL的两个子任务提供类比。
+
+- depends_on_cn：依赖综述框架。
+
+- sets_up_cn：后面的方面提取技术评述都围绕此展开。
+
+- evidence_pointer：Opinion Mining and Social Media Analytics首段
+
+### 24. 高频名词短语提取段
+
+- order：24
+
+- section：Literature Review
+
+- locator：高频名词短语提取段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：基于高频名词短语的方法在方面表达一致时有效，但无法捕捉新出现的方面或变体。
+
+- rhetorical_function_cn：排除一类传统方面提取方法。
+
+- depends_on_cn：依赖S23。
+
+- sets_up_cn：强调OUD文本中morphs变体对这类方法的破坏。
+
+- evidence_pointer：Extraction Based on High-Frequency Noun Phrases
+
+### 25. 关系提取段
+
+- order：25
+
+- section：Literature Review
+
+- locator：关系提取段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：基于观点词与方面句法关系的方法受用户不遵守语法规则限制。
+
+- rhetorical_function_cn：排除第二类方面提取方法。
+
+- depends_on_cn：依赖S23。
+
+- sets_up_cn：继续收窄可用方法范围。
+
+- evidence_pointer：Extraction Based on Relations Between Opinion Words and Aspects
+
+### 26. 主题模型段
+
+- order：26
+
+- section：Literature Review
+
+- locator：主题模型段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：主题模型在论坛长噪音句子上会产生大量无关主题，且无标签时不能定位障碍词。
+
+- rhetorical_function_cn：排除第三类方面提取方法，并说明其计算上的不可行。
+
+- depends_on_cn：依赖S23。
+
+- sets_up_cn：为有监督序列标注打开空间。
+
+- evidence_pointer：Extraction Based on Topic Modeling
+
+### 27. 序列学习段
+
+- order：27
+
+- section：Literature Review
+
+- locator：序列学习段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：序列学习方法有前景，但CRF把词当作离散原子符号，无法正确处理morphs。
+
+- rhetorical_function_cn：排除第四类方法并提炼出技术困难核心。
+
+- depends_on_cn：依赖S23-S26。
+
+- sets_up_cn：为形态学和深度学习方法做铺垫。
+
+- evidence_pointer：Extraction Based on Sequence Learning
+
+### 28. 形态学与深度学习首段前部
+
+- order：28
+
+- section：Literature Review
+
+- locator：形态学与深度学习首段前部
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：形态学研究网络俚语、同义词等文字变体；分布式假说认为相似词有相似邻居，词嵌入可用向量表示词。
+
+- rhetorical_function_cn：引入解决morphs问题的理论工具。
+
+- depends_on_cn：依赖S27的技术困难。
+
+- sets_up_cn：为SINDEL词嵌入分支奠定理论。
+
+- evidence_pointer：Morphology and Deep Learning首段
+
+### 29. 形态学与深度学习首段后部
+
+- order：29
+
+- section：Literature Review
+
+- locator：形态学与深度学习首段后部
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：RNN/LSTM/BLSTM在噪声用户生成文本的命名实体识别上表现领先。
+
+- rhetorical_function_cn：提供深度序列模型背景。
+
+- depends_on_cn：依赖S28。
+
+- sets_up_cn：为多视图BLSTM架构选择提供依据。
+
+- evidence_pointer：Morphology and Deep Learning首段后部
+
+### 30. 形态学与深度学习第二段
+
+- order：30
+
+- section：Literature Review
+
+- locator：形态学与深度学习第二段
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：同一药物类别的morphs语义更近，但词嵌入只考虑局部邻居而忽略词间网络关系，因此需要词相似性网络。
+
+- rhetorical_function_cn：把理论机制转化为具体设计需求。
+
+- depends_on_cn：依赖S28-S29。
+
+- sets_up_cn：引出相似性网络表示和多视图架构。
+
+- evidence_pointer：Morphology and Deep Learning第二段
+
+### 31. 问题形式化
+
+- order：31
+
+- section：Research Method
+
+- locator：问题形式化
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：把OUD障碍挖掘形式化为序列标注（B/I/O）和障碍聚类两类任务。
+
+- rhetorical_function_cn：明确算法要解决的问题边界。
+
+- depends_on_cn：依赖S15和S30。
+
+- sets_up_cn：确定后续算法模块和评价输出。
+
+- evidence_pointer：OUD Treatment Barrier Mining Problem Formulation
+
+### 32. 方法总览段
+
+- order：32
+
+- section：Research Method
+
+- locator：方法总览段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：方法遵循意见挖掘的提取和聚类两步；输入句子，经过两个并行表示后融合识别障碍，再聚类。
+
+- rhetorical_function_cn：给出制品流程总览，对应图2。
+
+- depends_on_cn：依赖S31。
+
+- sets_up_cn：为子模块细节提供地图。
+
+- evidence_pointer：Research Method SINDEL总览段
+
+### 33. 相似性网络表示第一段
+
+- order：33
+
+- section：Research Method
+
+- locator：相似性网络表示第一段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第一个分支用可训练的word2vec 300维词向量表示每个词，以保留OUD语境特征。
+
+- rhetorical_function_cn：实现词嵌入分支的具体设计。
+
+- depends_on_cn：依赖S28的分布式假说。
+
+- sets_up_cn：与第二个相似性网络分支形成对照。
+
+- evidence_pointer：Similarity Network-Based Representation第一段
+
+### 34. 相似性网络表示第二段及公式1-2
+
+- order：34
+
+- section：Research Method
+
+- locator：相似性网络表示第二段及公式1-2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第二个分支按余弦相似度构建词网络，每个词用最相似的前K个词的带权求和表示，从而显式联系Oxy和Oxycet等同类morphs。
+
+- rhetorical_function_cn：描述全文核心创新点：相似性网络表示。
+
+- depends_on_cn：依赖S30。
+
+- sets_up_cn：为后面多视图融合和网络大小敏感性分析提供对象。
+
+- evidence_pointer：Similarity Network-Based Representation第二段及公式1-2
+
+### 35. 多视图深度学习架构
+
+- order：35
+
+- section：Research Method
+
+- locator：多视图深度学习架构
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：两个分支分别用独立BLSTM处理词嵌入和相似网络表示，再以元素级求和融合，最后Softmax预测B/I/O。
+
+- rhetorical_function_cn：定义SINDEL最终的序列标注架构。
+
+- depends_on_cn：依赖S33-S34。
+
+- sets_up_cn：为基准评测中的SINDEL和消融变体提供实现基础。
+
+- evidence_pointer：Multi-view Deep Learning Architecture
+
+### 36. 障碍聚类模块
+
+- order：36
+
+- section：Research Method
+
+- locator：障碍聚类模块
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用k-means对障碍短语内词向量的平均向量进行聚类，得到一般障碍类型。
+
+- rhetorical_function_cn：把提取到的短语组织成可解释类别。
+
+- depends_on_cn：依赖S31和S34。
+
+- sets_up_cn：为后续13类障碍发现提供聚类模块。
+
+- evidence_pointer：OUD Treatment Barrier Clustering
+
+### 37. 方法末段
+
+- order：37
+
+- section：Research Method
+
+- locator：方法末段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结三方面方法创新：相似性网络表示、多视图学习框架、完整的障碍挖掘系统。
+
+- rhetorical_function_cn：在方法章节内先声明创新点。
+
+- depends_on_cn：依赖S33-S36。
+
+- sets_up_cn：为实验评价设置预期。
+
+- evidence_pointer：Research Method末段
+
+### 38. 数据准备首段
+
+- order：38
+
+- section：Empirical Analyses
+
+- locator：数据准备首段
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：选择Drugs-Forum作为研究平台，因其匿名性和专注性，患者会讨论阿片类、成瘾和治疗经历。
+
+- rhetorical_function_cn：说明数据场地及其对患者表达的重要性。
+
+- depends_on_cn：依赖S20。
+
+- sets_up_cn：为数据规模和代表性辩护。
+
+- evidence_pointer：Data Preparation首段
+
+### 39. 数据准备第二段
+
+- order：39
+
+- section：Empirical Analyses
+
+- locator：数据准备第二段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：从27154帖中随机抽3000帖，四位专家按IOB标注，Kappa为0.92，第五位专家裁决分歧，并按70/10/20划分。
+
+- rhetorical_function_cn：说明数据标注和质量控制流程。
+
+- depends_on_cn：依赖S38。
+
+- sets_up_cn：建立后续基准评价的可信数据基础。
+
+- evidence_pointer：Data Preparation第二段及Table 3
+
+### 40. 基线与指标段
+
+- order：40
+
+- section：Empirical Analyses
+
+- locator：基线与指标段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：选择SVM、LR、NB、CRF和RNN/LSTM/BLSTM作为基线，并列出SINDEL-Left/Right/ATT变体；以F1为主要指标。
+
+- rhetorical_function_cn：建立评价参照系并说明为何F1最重要。
+
+- depends_on_cn：依赖S39。
+
+- sets_up_cn：使结果比较系统化、可复现。
+
+- evidence_pointer：Baseline Models for Extracting OUD Treatment Barriers与Evaluation Metrics
+
+### 41. 主评测第一段及表4
+
+- order：41
+
+- section：Empirical Analyses
+
+- locator：主评测第一段及表4
+
+- move_code：RESULT
+
+- paraphrase_cn：SINDEL在F1和精确率上大幅超过传统ML方法，显著优于CRF和LR等基线。
+
+- rhetorical_function_cn：用第一个结果支持技术主张。
+
+- depends_on_cn：依赖S40的基线设置。
+
+- sets_up_cn：建立“新方法确实更好”的第一个证据。
+
+- evidence_pointer：Evaluation of Extracting OUD Treatment Barriers第一段及Table 4
+
+### 42. 主评测第二段及表5
+
+- order：42
+
+- section：Empirical Analyses
+
+- locator：主评测第二段及表5
+
+- move_code：RESULT
+
+- paraphrase_cn：与RNN、LSTM、BLSTM相比，SINDEL在三个指标上都更好，t检验显著。
+
+- rhetorical_function_cn：在深度基线比较中确认优势。
+
+- depends_on_cn：依赖S41。
+
+- sets_up_cn：排除“只是比传统方法好”的解释。
+
+- evidence_pointer：Evaluation of Extracting OUD Treatment Barriers第二段及Table 5
+
+### 43. 消融与attention段
+
+- order：43
+
+- section：Empirical Analyses
+
+- locator：消融与attention段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：右分支（相似网络）显著优于左分支，融合最好；加入attention反而损害性能，因词级预测不需要整句注意。
+
+- rhetorical_function_cn：通过消融和注意力对照把性能归因到相似性网络，并说明注意力为何不适用。
+
+- depends_on_cn：依赖S42。
+
+- sets_up_cn：支持制品主张和机制解释。
+
+- evidence_pointer：Evaluation of Extracting OUD Treatment Barriers消融与attention段
+
+### 44. 稳健性/嵌入/网络大小段
+
+- order：44
+
+- section：Empirical Analyses
+
+- locator：稳健性/嵌入/网络大小段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：在多种超参数组合下SINDEL仍稳定领先；word2vec优于其他嵌入；网络大小3、7、8无显著差异，故选3以降低复杂度。
+
+- rhetorical_function_cn：用稳健性检验保护核心结论并给出边界条件。
+
+- depends_on_cn：依赖S43。
+
+- sets_up_cn：为最终SINDEL配置提供依据。
+
+- evidence_pointer：Robustness and Sensitivity段，Table 6，Figures 6-12，Table 7
+
+### 45. 聚类与专家验证段
+
+- order：45
+
+- section：Empirical Analyses
+
+- locator：聚类与专家验证段
+
+- move_code：RESULT
+
+- paraphrase_cn：k-means先产生40簇，医学专家小组合并为13类；独立研究者复标随机1000条障碍，87.6%与聚类一致。
+
+- rhetorical_function_cn：把无监督聚类与专家验证结合，提高领域发现可信度。
+
+- depends_on_cn：依赖S44的提取结果。
+
+- sets_up_cn：为领域发现提供可靠分类基础。
+
+- evidence_pointer：Clustering OUD Treatment Barriers及Table 9
+
+### 46. 聚类解释段
+
+- order：46
+
+- section：Empirical Analyses
+
+- locator：聚类解释段
+
+- move_code：RESULT
+
+- paraphrase_cn：报告最常见障碍是缺乏动机和医疗素养，并指出治疗副作用、医患关系差、抑郁状态等调查未覆盖的新障碍。
+
+- rhetorical_function_cn：把聚类结果转化为患者视角的领域新知识。
+
+- depends_on_cn：依赖S45。
+
+- sets_up_cn：支持引言中的“隐藏真相”和干预含义。
+
+- evidence_pointer：Clustering OUD Treatment Barriers解释段
+
+### 47. 第二案例首段
+
+- order：47
+
+- section：Empirical Analyses
+
+- locator：第二案例首段
+
+- move_code：TRANSITION
+
+- paraphrase_cn：为检验泛化性，作者用SINDEL在WebMD上提取用药依从性障碍，数据来自53,180条评论、233,325个句子，随机标注5,400句。
+
+- rhetorical_function_cn：引入新场景验证外部效度。
+
+- depends_on_cn：依赖S46。
+
+- sets_up_cn：防止贡献被限定在OUD单一语料。
+
+- evidence_pointer：Second Case Study首段
+
+### 48. 第二案例结果段及表10
+
+- order：48
+
+- section：Empirical Analyses
+
+- locator：第二案例结果段及表10
+
+- move_code：RESULT
+
+- paraphrase_cn：在WebMD数据上SINDEL再次领先全部基线，并在36种超参数设置下稳健。
+
+- rhetorical_function_cn：用第二案例增强泛化主张。
+
+- depends_on_cn：依赖S47。
+
+- sets_up_cn：为讨论中的设计原则提供跨领域证据。
+
+- evidence_pointer：Second Case Study表10及后段
+
+### 49. 设计理论贡献段
+
+- order：49
+
+- section：Discussion
+
+- locator：设计理论贡献段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出四项设计原则：词网络增强语义、多视图表示丰富表示学习、分类后接聚类提供可解释洞察、社交媒体发现补充调查。
+
+- rhetorical_function_cn：把具体实验结果抽象为可复用设计知识。
+
+- depends_on_cn：依赖S44-S48。
+
+- sets_up_cn：闭环回应引言中的IS方法论贡献。
+
+- evidence_pointer：Discussion Contributions to Design Theory
+
+### 50. 局限与未来段
+
+- order：50
+
+- section：Discussion
+
+- locator：局限与未来段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认只测试两个领域，未来可探索其他表示融合机制，且识别到的是最直接障碍而非深层间接原因。
+
+- rhetorical_function_cn：主动划定边界，保护主张不过度。
+
+- depends_on_cn：依赖S49。
+
+- sets_up_cn：为后续研究留出空间。
+
+- evidence_pointer：Discussion Limitations and Future Directions
+
+### 51. 结论段
+
+- order：51
+
+- section：Conclusion
+
+- locator：结论段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结SINDEL提取障碍、在两个数据集上的显著优势、13类障碍和可推广性。
+
+- rhetorical_function_cn：收束全文并重复核心贡献。
+
+- depends_on_cn：依赖S48-S49。
+
+- sets_up_cn：让读者记住主要贡献。
+
+- evidence_pointer：Conclusion
+
+## 写作技术
+
+- gap_construction_cn：文章先构造现实缺口（OUD高成本与低治疗保留率），再构造数据缺口（调查法因污名和不可及性无法覆盖患者），然后构造方法缺口（现有意见挖掘方法无法处理morphs），最后构造理论缺口（形态学/词嵌入虽可处理变体但缺乏显式词网络关系），形成一个多层嵌套缺口。
+
+- signposting_cn：作者频繁使用路标句：文献综述预告四个研究领域；方法部分说明两个任务和两个表示；评价部分列出三类基线、三个指标、多个变体；讨论部分用“三点贡献”和“四条设计原则”做数字路标。
+
+- transition_logic_cn：段落间基本遵循“排除法过渡”：先介绍意见挖掘四类方法，再逐一排除前三类并指出第四类的不足，最后用形态学和深度学习方法解决剩余困难；实证阶段则用“结果→困惑→下一测试”推进，例如主结果引出消融，消融引出稳健性，聚类引出第二案例。
+
+- claim_evidence_rhythm_cn：每个主张后紧跟表格或图：技术优势紧跟表4/表5；组件归因紧跟消融和t检验；稳健性紧跟网格图和嵌入对比；领域发现紧跟表9和专家一致率；泛化性紧跟表10。作者还在每段结果后用一两句话解释结果含义，形成“结果—解释—下一步”的节奏。
+
+- benchmark_narrative_cn：benchmark不是一次性比较，而是被编织成一条证据链：传统ML基线建立基本性能；深度基线建立领域先进性；SINDEL内部变体建立组件归因；不同嵌入和超参数建立稳健性；第二案例建立外部效度。每个benchmark都服务于一个论证目的。
+
+- theory_return_cn：讨论部分不是简单重复结果，而是把SINDEL的具体设计选择抽象成四条设计原则，并把问题重新嵌入Hevner和Rai的计算设计科学框架，完成从具体制品到一般知识的理论返回。
+
+- contribution_positioning_cn：作者将贡献放在三个不同层面：对IS文本分析方法（方法论）、对设计科学（设计知识）、对医疗实践（领域发现），避免论文被只看作一个NLP算法。
+
+- novelty_protection_cn：通过消融证明相似性网络不是装饰；通过t检验证明差异不是噪声；通过超参数网格和多种嵌入证明不是参数调优的结果；通过第二案例证明不是单语料偶然；通过设计原则把具体系统提升为可复用知识，防止贡献退化为一次性性能结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写作任务：用统计数据和高成本建立现实问题的紧迫性，并指出现有数据或方法的系统局限。
+
+- research_job_cn：研究任务：找到有社会影响的真实问题，并明确现有方法为何无法满足细粒度、及时、自动化的需求。
+
+- required_evidence_cn：问题严重性的可靠统计；现有方法局限的文献或实例证据。
+
+- transition_to_next_cn：从“现有方法不够”过渡到“需要新数据源或新方法”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写作任务：围绕问题综述相关领域，用排除法说明已有技术为何不适用。
+
+- research_job_cn：研究任务：识别核心技术障碍，并从相邻文献（如形态学、词嵌入、深度学习）中寻找可迁移的知识。
+
+- required_evidence_cn：对每类现有方法都给出具体的失效机制；理论或领域知识能指向可行的解决方向。
+
+- transition_to_next_cn：从技术障碍过渡到设计对象。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：写作任务：把理论命题转化为可操作的设计要求，再写成制品的具体结构。
+
+- research_job_cn：研究任务：设计包含新组件的计算机系统，并明确定义输入、输出、子任务和关键算法。
+
+- required_evidence_cn：至少一个与既有方法不同的核心设计组件；能解释该组件如何回应前述技术障碍。
+
+- transition_to_next_cn：从设计描述过渡到实证评价。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写作任务：报告数据来源、标注流程、基线和指标，用表格列出性能比较。
+
+- research_job_cn：研究任务：构建专家标注数据集，选择多个基线，进行重复训练和显著性检验。
+
+- required_evidence_cn：数据标注信度；多基线比较；统计显著性。
+
+- transition_to_next_cn：从“更好”过渡到“为什么更好、何时不再好”。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写作任务：用消融、稳健性测试和敏感性分析保护核心主张，并解释失败变体。
+
+- research_job_cn：研究任务：设计消融变体、超参数网格、不同表示模型和网络大小检验。
+
+- required_evidence_cn：组件消融对比；多设置下的结果稳定性；对负结果（如attention失败）给出机制解释。
+
+- transition_to_next_cn：从模型性能过渡到领域发现。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：写作任务：把模型输出转化为领域洞察，再在第二场景验证泛化性，最后抽象成设计原则。
+
+- research_job_cn：研究任务：用聚类或解释方法从输出中产生可验证的领域知识；用第二个数据集检验外部效度；把结果提升为设计知识。
+
+- required_evidence_cn：领域专家的验证或独立复标；第二个数据集的对比结果；可表述为可复用原则的抽象。
+
+- transition_to_next_cn：从具体结果返回理论贡献和边界条件。
+
+### most_transferable_moves_cn
+
+1. 多层缺口构造：现实问题→数据局限→方法失效→理论机会
+
+2. 排除法文献综述：逐类说明既有方法为何不适用于新场景
+
+3. 主张—证据节奏：每个贡献声明后紧跟表格、显著性检验和解释
+
+4. 消融加第二案例的双重保护：先证明组件有用，再证明跨场景有效
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. Drugs-Forum全站数据抓取和随机抽样需要社区数据可得性
+
+2. 多位领域专家对IOB标签的标注和仲裁成本较高
+
+3. WebMD大规模评论数据收集与第二套专家标注
+
+4. 大量超参数网格和敏感性实验需要计算资源（如El Gato超算）
+
+5. 医学专家小组对k-means簇的语义合并依赖领域知识
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“设计科学”标签而没有Hevner式评价循环
+
+2. 不能只报告单点F1而不做t检验、消融和稳健性检验
+
+3. 不能在未测试hacker forum和产品评论的情况下直接声称可推广
+
+4. 不能用几个morphs示例断言“相似性网络机制已被证明”
+
+5. 不能用“未被调查发现的新障碍”说法而缺少与既有调查文献的系统对照
+
+- single_best_description_of_the_routine_cn：以高社会影响问题为入口，用多层缺口和文献排除法推导出技术设计空间，构造带相似性网络的新型深度学习制品，通过多基线、消融、稳健性和第二案例建立技术主张，再借助聚类与专家验证形成领域发现，最后把具体系统抽象为设计原则并返回IS设计科学理论。
+
+## 分析边界
+
+文章全文已提供，但图表为图片/渲染，附录A1-A10的具体内容未在正文中一并给出；摘要中F1写作76.79，正文表4/表5为76.97，存在轻微不一致；由于没有页码，本文定位使用章节、段落和表图作为证据指针。对morphs机制的解释主要依赖消融和示例，无法确认是否存在更深层交互效应。

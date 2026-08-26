@@ -1,0 +1,1286 @@
+# 审计 v2（修正版）：388 金标准 × 三层检索（标题主通道匹配）
+
+- 修正内容：decisions.jsonl 的 doi 字段来自全文库 md 头部，存在 166 处与 CSV（按标题映射）不一致；本审计以『归一化标题→CSV→CSV DOI』为主通道，DOI 仅作辅助。
+- M1 候选：2494 个唯一 DOI（2495 条记录）
+- F2 head-8000：4896 篇；F3 全文：10093 篇
+
+| 检索层 | 金标准召回 | 召回率 | 命中数 | 精度(命中∩金/命中) |
+|---|---|---|---|---|
+| M1 元数据 | 364/388 | 93.8% | 2494 | 14.6% |
+| F2 head-8000 | 381/388 | 98.2% | 4896 | 7.8% |
+| F3 全文 | 387/388 | 99.7% | 10093 | 3.8% |
+
+## 金标准 388 中 DOI 错配（decisions.doi ≠ CSV.doi，1 篇）
+
+- 00358_2020_why-individual-employees-commit-malicious-computer-abuse-a-routine-activity-theory-perspective.md | Why individual employees commit malicious computer abuse: A routine activity theory perspective
+  - decisions.doi=10.17705/1jais.00646 → CSV.doi=10.17705/1jais.000646 | M1命中=True
+
+## M1 漏检（修正后 24 篇）
+
+- 01704_2024_doxing-on-social-networking-sites-an-extension-of-the-social-cognitive-theory-of-moral-thought-a.md | Doxing on Social Networking Sites: An Extension of the Social Cognitive Theory of Moral Thought and Action | 2024 | Journal of the Association for Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Doxing on social networking sites (SNS doxing) has attracted scholarly and public attention due to the devastating consequences that this behavior can have on individuals and society. SNS doxing occur
+- 04526_2011_multi-tag-and-multi-owner-rfid-ownership-transfer-in-supply-chains.md | Multi-tag and multi-owner RFID ownership transfer in supply chains | 2011 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: In any supply chain, there is a high likelihood for individual objects to change ownership at least once in their lifetime. As RFID tags enter the supply chain, these RFID-tagged objects should ideall
+- 05690_2005_model-checking-for-design-and-assurance-of-e-business-processes.md | Model checking for design and assurance of e-Business processes | 2005 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Use of the Internet for electronic business has the potential to revolutionize the way many businesses are conducted. Yet, several businesses have fallen victim to problems in information systems that
+- 06092_2008_online-reputation-systems-design-and-strategic-practices.md | Online reputation systems: Design and strategic practices | 2008 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: This paper provides a comprehensive framework for evaluating the effects of feedback systems, and the potential problems with feedback systems, on seller incentives to provide high quality products un
+- 06126_2016_internet-aggression-in-online-communities-a-contemporary-deterrence-perspective.md | Internet aggression in online communities: a contemporary deterrence perspective | 2016 | Information Systems Journal
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Internet users' activities are critical to the development and success of Web 2.0 systems, such as online communities. Within the community's participation, knowledge sharing, and communications, user
+- 09872_2021_information-technology-and-government-corruption-in-developing-countries-evidence-from-ghana-cus.md | INFORMATION TECHNOLOGY AND GOVERNMENT CORRUPTION IN DEVELOPING COUNTRIES: EVIDENCE FROM GHANA CUSTOMS | 2021 | MIS Quarterly: Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: The literature on information technology (IT) and government corruption in developing countries indicates contradictory evidence about the realization of anti-corruption effects. So far, there is no t
+- 10238_2011_does-ethical-ideology-affect-software-piracy-attitude-and-behaviour-an-empirical-investigation-o.md | Does ethical ideology affect software piracy attitude and behaviour An empirical investigation of computer users in China | 2011 | European Journal of Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: This study empirically examines Chinese computer users ethical ideology and its relationship to their software piracy attitude and behaviour. The investigation reveals several important findings. Firs
+- 10634_2009_griefing-in-virtual-worlds-causes-casualties-and-coping-strategies.md | Griefing in virtual worlds: Causes, casualties and coping strategies | 2009 | Information Systems Journal
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: A virtual world is a computer-simulated three-dimensional environment. They are increasingly being used for social and commercial interaction, in addition to their original use for game playing. This 
+- 12724_2019_an-economic-analysis-of-platform-protection-in-the-presence-of-content-substitutability.md | An Economic Analysis of Platform Protection in the Presence of Content Substitutability | 2019 | Journal of Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: Online platforms, such as App Store and Kindle, are facing a common dilemma: while the implementation of technology-based protection impedes piracy and hence boosts demand from legal users (positive e
+- 13670_2016_intellectual-property-norms-in-online-communities-how-user-organized-intellectual-property-regul.md | Intellectual property norms in online communities: How user-organized intellectual property regulation supports innovation | 2016 | Information Systems Research
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: In many online communities, users reveal innovative and potentially valuable intellectual property (IP) under conditions that entail the risk of theft and imitation. When there is rivalry and formal I
+- 14334_2009_pricing-schemes-for-digital-content-with-drm-mechanisms.md | Pricing schemes for digital content with DRM mechanisms | 2009 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: In this paper, utilizing game-theoretic model, we examine the impact of collaborative structure, content quality, and network environment on the development of pricing scheme and DRM protection policy
+- 15370_2019_an-integrative-theory-addressing-cyberharassment-in-the-light-of-technology-based-opportunism.md | An Integrative Theory Addressing Cyberharassment in the Light of Technology-Based Opportunism | 2019 | Journal of Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Scholars are increasingly calling for a deeper understanding of cyberharassment (CH) with the goal of devising policies, procedures, and technologies to mitigate it. Accordingly, we conducted CH resea
+- 15516_2022_technological-entitlement-its-my-technology-and-ill-ab-use-it-how-i-want-to.md | TECHNOLOGICAL ENTITLEMENT: IT’S MY TECHNOLOGY AND I’LL (AB)USE IT HOW I WANT TO | 2022 | MIS Quarterly: Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Entitlement has been identified as a potentially valuable employee characteristic in the prediction of computer abuse but has not been studied systematically in the IS domain. We introduce the constru
+- 20849_2000_edi-controls-design-support-system-using-relational-database-system.md | EDI controls design support system using relational database system | 2000 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: The purpose of this paper is to introduce EDIRDB (EDI controls design support system using a relational database system), a prototype audit support system based on a relational database designed to ac
+- 21281_2004_sdmi-based-rights-management-systems.md | SDMI-based rights management systems | 2004 | Decision Support Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Building digital rights management (DRM) systems for electronic commerce is still a complex task because such systems are usually required to manage a large set of different media contents, rights inf
+- 22211_2003_the-is-risk-analysis-based-on-a-business-model.md | The IS risk analysis based on a business model | 2003 | Information and Management
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: The disruption of operations due to IS failure becomes more important as IS has become an increasingly essential component of the organization's operations and can affect its strategic objectives. Nev
+- 22611_2000_flaming-among-first-time-group-support-system-users.md | Flaming among first-time group support system users | 2000 | Information and Management
+  - 分类: 全文也未命中 | F2=False F3=False
+  - 摘要前200字: Numerous benefits, including increases in efficiency, effectiveness, and participant satisfaction, have been noted in the literature when electronic meetings are used in place of traditional, oral mee
+- 23404_1990_information-systems-forensics.md | Information systems forensics | 1990 | Journal of Information Technology
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: This paper discusses some current issues and methods related to the investigation and successful prosecution of crimes committed with or against computerized information systems. The paper maintains t
+- 25278_2003_identification-of-comment-authorship-in-anonymous-group-support-systems.md | Identification of comment authorship in anonymous group support systems | 2003 | Journal of Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=False F3=True
+  - 摘要前200字: This study examines whether technically "anonymous" comments entered by participants during group support system (GSS) brainstorming sessions are, in fact, unidentifiable. Hypotheses are developed and
+- 25539_2021_exposing-patterns-of-adult-solicitor-behaviour-towards-a-theory-of-control-within-the-cybersexua.md | Exposing patterns of adult solicitor behaviour: towards a theory of control within the cybersexual abuse of youth | 2021 | European Journal of Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: The online solicitation of youth has been established as an unintended consequence of the connectedness afforded individuals through computer-mediated conversation. Information systems research focuse
+- 26923_2018_identity-management-and-tradable-reputation1.md | Identity management and tradable reputation | 2018 | MIS Quarterly: Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: Online reputation trading is a new phenomenon facilitated by the prosperity of e-commerce and social networks. Whether reputations will be reliable when people can purchase rather than build them orig
+- 27203_1983_the-data-dictionary-an-evaluation-from-the-edp-audit-perspective.md | The data dictionary: An evaluation from the EDP audit perspective | 1983 | MIS Quarterly: Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: The data dictionary system Is a documentation source that is useful for management reviews of existing and proposed systems, EDP audits, and system development functions. Early data dictionary systems
+- 27242_1981_online-computer-auditing-through-continuous-and-intermittent-simulation.md | Online computer auditing through continuous and intermittent simulation | 1981 | MIS Quarterly: Management Information Systems
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: A new computer auditing technique, called Continuous and Intermittent Simulation (CIS), is introduced. It has been specifically designed as a compliance auditing technique for timesharing systems that
+- 28238_2022_an-economic-analysis-of-rebates-conditional-on-positive-reviews.md | Racial Bias in Customer Service: Evidence from Twitter | 2022 | Information Systems Research
+  - 分类: 摘要无词表命中(全文命中) | F2=True F3=True
+  - 摘要前200字: This paper provides the first large-scale evidence of business-to-customer racial bias (B2C bias) on a digital platform, on which the perpetrators are individual employees who act on behalf of a compa
+
+## B 完整复核：M1 命中但金标准排除的疑似安全文献（595 条）
+
+> 判定标准：标题或摘要前600字命中强安全词。以下逐条给出金标准判定理由，供判断是否漏判。
+
+- A branch-and-cut algorithm for the Winner Determination Problem | 2009 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究的是组合拍卖赢家决定问题的整数规划与分支切割算法，不涉及任何恶意或对抗行为者，也没有攻击、漏洞或安全防御内容。
+- A computational model for financial reporting fraud detection | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究财务报表欺诈检测，属于会计与审计欺诈/财务造假范畴，不涉及对信息系统或用户的网络攻击与防御。
+- A decision support framework for misstatement identification in financial reporting: A hybrid tree-augmented Bayesian belief approach | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- A hybrid framework using explainable AI (XAI) in cyber-risk management for defence and recovery against phishing attacks | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- A knowledge based scheme for risk assessment in loan processing by banks | 2016 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是银行信贷审批中的合规审计与欺诈风险评估，属于金融欺诈范畴，未围绕信息系统的攻击或防御展开。
+- A multistate modeling approach for organizational cybersecurity exploration and exploitation | 2022 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- A new approach for a proxy-level web caching mechanism | 2008 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文聚焦于代理级Web缓存机制以优化网络性能，无任何恶意行为者、攻击或安全威胁内容。
+- A novel approach for fraudulent reviewer detection based on weighted topic modelling and nearest neighbors with asymmetric Kullback–Leibler divergence | 2022 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- A problem-solving perspective on knowledge management practices | 2001 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文聚焦知识管理实践的分类与验证，未涉及任何恶意行为者、攻击或防御内容。
+- A relative patterns discovery for enhancing outlier detection in categorical data | 2014 | Decision Support Systems | status=security_peripheral_context
+  - reason: 全文核心是通用分类数据离群点检测算法，仅在摘要提及'调查网络犯罪'作为应用背景，没有恶意行为者、攻击模型或安全防御的实质研究内容。
+- A scalable decision tree system and its application in pattern recognition and intrusion detection | 2005 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究核心是可扩展决策树算法（SURPASS）的规模性与分类精度，入侵检测仅作为大型数据集应用场景，未围绕攻击行为或检测防御机制展开。
+- A system for intergroup prejudice detection: The case of microblogging under terrorist attacks | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是社会心理学中的群体间偏见检测，针对的是社会群体的负面言论，而非针对信息系统、系统用户或数据的恶意攻击或防御。
+- A text-mining based cyber-risk assessment and mitigation framework for critical analysis of online hacker forums | 2022 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文为葡萄牙语哲学文章，讨论'界限/confim'概念，未涉及任何信息系统攻击或防御内容。
+- A visual analytics system to support tax evasion discovery | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是税务稽查中的偷漏税模式发现，属于金融/财政欺诈检测，不涉及针对信息系统、系统用户或数据的恶意攻击或攻防安全。
+- Allocation of resources to cyber-security: The effect of misalignment of interest between managers and investors | 2015 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是代理理论下经理与投资者对网络安全资源分配的激励错位，网络安全仅作为成本背景，恶意行为者不是研究核心对象。
+- An ANN-based auditor decision support system using Benford's law | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是使用Benford定律和ANN进行财务欺诈检测的审计决策支持，属于会计与审计欺诈检测，不涉及信息系统攻击或漏洞对抗。
+- An agent model based on ideas of concordance and discordance for group ranking problems | 2005 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文提出基于一致性和不一致性思想的模糊偏好群体排名代理模型，核心是群体决策中的共识排序问题，不涉及任何恶意行为者或信息系统攻击/防御。
+- An experimental comparison of real and artificial deception using a deception generation model | 2012 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章聚焦财务援助申请中的欺骗数据生成与比较，属于金融欺诈检测领域，不涉及信息系统攻击或漏洞。
+- An explainable framework for assisting the detection of AI-generated textual content | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- An exploration and exploitation of value cocreation-based machine learning framework for automated idea screening | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- An investigation of email processing from a risky decision making perspective | 2011 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章以风险决策理论解释用户对商业邮件的态度和阅读意愿，网络犯罪仅是背景，研究核心不是攻击、漏洞或防御。
+- Argumentation-based negotiation planning for autonomous agents | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究多智能体协商中的论证规划，旨在提高协商效率与冲突解决能力，涉及劝说、承诺、威胁等协商策略，但不存在针对信息系统或用户的恶意攻击或对抗行为，不属于攻防安全研究。
+- Attentive statement fraud detection: Distinguishing multimodal financial data with fine-grained attention | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Behavioral trajectories of phishing victims on Ethereum: Evidence of escalation and adaptive scam strategies | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Building data warehouses with semantic web data | 2012 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究从语义Web数据构建数据仓库和OLAP分析，全文不涉及任何恶意行为者、攻击或安全防御。
+- Building trust in online auction markets through an economic incentive mechanism | 2003 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是在线拍卖市场中的经济欺诈与信任问题，通过经济激励机制和数字证书实现声誉管理，属于一般信誉与信任改进，而非信息系统攻击、漏洞或安全防御研究。
+- Business social media analytics: Characterization and conceptual framework | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文核心是商业社交媒体分析（SMA）的概念定义与决策支持框架，主要关注情报搜集、问题识别、意义建构、洞察生成和决策制定，不涉及恶意行为者、攻击行为或漏洞攻防。
+- CATCHM: A novel network-based credit card fraud detection method using node representation learning | 2023 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是一般信用卡欺诈检测，属于金融欺诈范畴，全文未涉及钓鱼、账户盗用或网络攻击等信息系统攻击成分，不符合攻防安全纳入标准。
+- Can earnings conference calls tell more lies? A contrastive multimodal dialogue network for advanced financial statement fraud detection | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Capturing the essence of word-of-mouth for social commerce: Assessing the quality of online e-commerce reviews by a semi-supervised approach | 2013 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是电商评论质量分级与预测，不属于攻防安全；提及垃圾评论仅作为低质量评论的一类，并非以恶意攻击者为研究核心。
+- Characterization of unknown values with implicit predicate | 1991 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究数据库未知值（null）的语义表达与推理，属于数据库理论和不完全信息处理，不涉及恶意行为者或攻防安全。
+- Collaborative response to disruption propagation (CRDP) in cyber-physical systems and complex networks | 2019 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究的是复杂网络与信息物理系统中一般的扰动传播及协同响应调度，恶意攻击/安全攻防只是列举的应用背景之一，并非研究核心。
+- Complementing search engines with online web mining agents | 2003 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是改进Web信息检索的新型多智能体爬虫系统，属于一般信息检索和优化问题，无恶意行为者或攻防安全内容。
+- Computational intelligent hybrid model for detecting disruptive trading activity | 2017 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究核心是金融市场中的破坏性交易行为（如spoofing、ramping、quote stuffing）的检测，属于金融市场监管与欺诈检测，不涉及信息系统攻击或漏洞。
+- Constructing a reliable Web graph with information on browsing behavior | 2012 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是利用浏览行为构建可靠Web图以改进页面质量估计，虽有垃圾页面识别作为评估任务，但恶意行为者并非研究核心，攻击/防御不是研究焦点。
+- Contextual drivers of employees' phishing susceptibility: Insights from a field study | 2022 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Corrigendum to “‘Decoding LLMs’ verbal deception in online reviews” (Decision Support Systems (2026) 200, (S0167923625001307), (10.1016/j.dss.2025.114529)) | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Cyber hygiene: The concept, its measure, and its initial tests | 2020 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究核心是概念化和测量用户的网络卫生（Cyber Hygiene）意识，恶意行为者仅作为背景被提及，未聚焦于攻击或漏洞的检测、防御、缓解等攻防安全问题本身。
+- Cyber resilience framework for online retail using explainable deep learning approaches and blockchain-based consensus protocol | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Cyber threat detection: Unsupervised hunting of anomalous commands (UHAC) | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Cyberinfrastructure for homeland security: Advances in information sharing, data mining, and collaboration systems | 2007 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- DISCO: Decoupling representation learning and risk control for reliable credit card fraud detection | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- DarkNetExplorer (DNE): Exploring dark multi-layer networks beyond the resolution limit | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究核心是犯罪/恐怖网络的社区检测，目标是辅助执法机构的现实世界打击行动，而非信息系统的攻击或防御。
+- Data misrepresentation detection for insurance underwriting fraud prevention | 2022 | Decision Support Systems | status=no_security_relevance
+  - reason: 该文研究保险承保中的保费欺诈（客户故意虚报信息以获取低保费），属于一般金融欺诈检测，不涉及信息系统攻击或漏洞，且属于金融欺诈排除类。
+- Decision support for improvisation in response to extreme events: Learning from the response to the 2001 World Trade Center attack | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究极端事件应急响应中的即兴决策支持，以基础设施恢复为对象，无信息系统攻击或漏洞对抗核心。
+- Decision support for long-range, community-based planning to mitigate against and recover from potential multiple disasters | 2016 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是多灾种（洪水、海啸、恐怖袭击）社区防灾减灾与恢复的决策支持数学模型，不涉及信息系统攻击或漏洞，损害对象为现实世界社区与基础设施，属公共安全范畴。
+- Decision support for risk analysis on dynamic alliance | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究动态联盟运营风险的评价决策支持，风险因素为市场、金融、政治、关系、投资等一般商业风险，不涉及恶意行为者或信息系统攻防。
+- Decision support for siting problems | 1998 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是工业废物处理设施选址的多准则决策支持与组合优化，不涉及恶意行为者或攻防安全。
+- Decoding LLMs' verbal deception in online reviews | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Deep learning for detecting financial statement fraud | 2020 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文核心是检测财务报表欺诈，属于会计与审计欺诈检测，不涉及信息系统攻击或漏洞。
+- DeepSecure: A computational design science approach for interpretable threat hunting in cybersecurity decision making | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Detecting evolutionary financial statement fraud | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究的是财务报表舞弊的数据挖掘检测，属于金融/会计欺诈范畴，不涉及针对信息系统或其安全属性的攻击、漏洞利用或网络对抗。
+- Detecting fake reviewers from the social context with a graph neural network method | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Detection of financial statement fraud and feature selection using data mining techniques | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文围绕财务报表欺诈（财务造假）的机器学习检测，属于金融欺诈范畴，无信息系统安全攻击或漏洞相关对抗行为。
+- Determinants of escrow service adoption in consumer-to-consumer online auction market: An experimental study | 2006 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究在线拍卖中买家采用在线托管服务（OES）的行为决定因素，以欺诈率为市场风险背景，核心是风险感知和采纳决策，而非攻击或漏洞的检测、防御或建模。
+- Developing a decision support system to detect material weaknesses in internal control | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章为哲学讨论，聚焦'边界/界限'概念与全球化、空间和政治哲学，不涉及任何信息系统攻击或防御。
+- Discovering emerging business ideas based on crowdfunded software projects | 2019 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究从众筹软件项目中挖掘新兴商业创意，属于产品创新与市场偏好分析，全文无恶意行为者或攻防安全核心。
+- Distinguishing good from bad in federated learning: A novel data fraud detection method using prototype learning and variational autoencoder | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Distributed knowledge management based on product state models - The case of decision support in health care administration | 2001 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是分布式知识管理模型在医疗管理中的应用，虽然包含医疗欺诈检测系统，但研究焦点是知识共享与决策支持，不涉及信息系统攻击或攻防安全。
+- Effective data clustering measure for temporal selection and projection queries | 2000 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Effectiveness of privacy assurance mechanisms in users' privacy protection on social networking sites from the perspective of protection motivation theory | 2020 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究核心是SNS用户隐私保护行为（保护动机理论），而非恶意行为者或攻击/漏洞的检测与防御。
+- Effects of artificial intelligence usage and knowledge-based dynamic capabilities on organizational innovation: A configurational approach | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Effects of assurance mechanisms and consumer concerns on online purchase decisions: An empirical study | 2016 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究在线购买决策中保证机制对消费者隐私、安全和产品服务担忧的影响，核心是消费者行为与电子商务营销，而非针对恶意行为者的攻防安全研究。
+- Efficient fraud detection using deep boosting decision trees | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Electronic health records in IS research: Quality issues, essential thresholds and remedial actions | 2019 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是EHR数据质量问题的分类、阈值和补救措施，不涉及任何恶意行为者、攻击或威胁，属于一般数据质量管理。
+- Emotion aware session based news recommender systems | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Enhanced (cyber) situational awareness: Using interpretable principal component analysis (iPCA) to automate vulnerability severity scoring | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Enhancing cybersecurity risk assessment using temporal knowledge graph-based explainable decision support system | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Examining the validity of the Needleman-Wunsch algorithm in identifying decision strategy with eye-movement data | 2010 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究的是利用眼动数据与Needleman–Wunsch算法识别决策策略的方法学验证，面向行为决策与DSS设计，不涉及任何恶意或对抗行为者，也无攻击、漏洞或安全属性损害。
+- Explainable artificial intelligence and agile decision-making in supply chain cyber resilience | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Exploitation vs. exploration: Choosing a supplier in an environment of incomplete information | 2004 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究核心是电子市场中买方在质量未知的供应商间进行探索与利用的决策优化，不涉及恶意行为者或攻防安全。
+- Exploiting poly-lingual documents for improving text categorization effectiveness | 2014 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是多语言文本分类的准确率提升，通过特征增强技术改进分类模型，未涉及任何恶意行为者、攻击或防御。
+- Exploring the motivations behind behavior: A theory-driven deep-learning framework for cyberviolence behavior detection | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Facilitating Complex Product Choices on E-commerce Sites: An Unconscious Thought and Circadian Preference Perspective | 2020 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究电商环境中消费者无意识思维与昼夜节律偏好对复杂产品选择质量的影响，属于消费者决策行为研究，不涉及任何恶意或对抗行为者，也无信息系统安全属性损害。
+- Fake review detection system for online E-commerce platforms: A supervised general mixed probability approach | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Feature construction for fraudulent credit card cash-out detection | 2019 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究信用卡套现欺诈的特征工程与检测，属于一般金融欺诈检测，未涉及钓鱼、社交工程、账户盗用或网络攻击等信息系统安全对抗行为，损害主要是经济损失而非安全属性。
+- Financial fraud detection using vocal, linguistic and financial cues | 2015 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究聚焦于金融欺诈检测，即利用财务、语音和语言特征识别会计违规重述，其核心是财务报告舞弊，而非面向信息系统或网络安全的攻击/防御。
+- Financial statement fraud detection using topic-driven financial sentiment analysis | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Focusing on the fundamentals? An investigation of the relationship between corporate social irresponsibility and data breach risk | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Follow the vine to get the melon: A deep framework for blockchain phishing fraud detection | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Freedom of speech or freedom of reach? Strategies for mitigating malicious content in social networks | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- From fake to AI-generated: Leveraging information manipulation theory and explainable AI for robust detection of manipulated reviews | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Geo-semantic-parsing: AI-powered geoparsing by traversing semantic knowledge graphs | 2020 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章提出地理语义解析（GSP）从文本中提取位置坐标，核心是自然语言处理与地理信息检索，不涉及恶意行为者、攻击或漏洞。
+- Getting the most out of third party trust seals: An empirical analysis | 2015 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究第三方信任印章对电商购买完成率的影响，属于消费者信任与电子商务营销研究，不涉及恶意行为者或攻防安全。
+- Guiding decisions in empirical research: A precision-driven app with context-specific criteria for confirmatory factor analysis and structural equation modeling | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- How credibility assessment technologies affect decision fairness in evidence-based investigations: A Bayesian perspective | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- How to leverage digital platforms in enhancing organizational resilience: The roles of supply chain integration and market orientation | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Identification of fraudulent financial statements using linguistic credibility analysis | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文研究财务报表舞弊的语言特征识别，属于传统财务欺诈检测，不涉及信息系统攻击、漏洞或对抗性网络安全行为。
+- Identification of influencers - Measuring influence in customer networks | 2008 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是病毒式营销中识别有影响力的客户，以优化营销信息传播，不涉及恶意行为者或攻击防御。
+- Identifying generic routings for product families based on text mining and tree matching | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究的是制造企业中基于文本挖掘和树匹配的产品族通用工艺路线识别，属于生产流程优化与数据挖掘应用，不涉及恶意行为者或信息系统攻防。
+- Improving fake news detection with domain-adversarial and graph-attention neural network | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文是哲学论文，讨论边界、场所和全球化概念，未涉及任何信息系统攻击、防御或漏洞。
+- Incorporating domain knowledge into data mining classifiers: An application in indirect lending | 2008 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究如何将贷款专家的领域知识（信用评级）作为额外输入融入数据挖掘分类器以改进间接贷款的好坏分类，属于一般金融风险管理与分类优化，不涉及任何恶意行为者、攻击或信息系统安全防护。
+- Information, decision-making and deception in games | 2009 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文是零和博弈中信息、决策与欺骗的数学建模研究，只把欺骗抽象为博弈一方对另一方观测的操纵，未涉及信息系统、网络攻击、漏洞、恶意软件或安全属性损害，故不属于攻防安全。
+- Integrating artificial neural networks with rule-based expert systems | 1994 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是将神经网络与规则系统集成为专家系统，用于股价表现预测，不涉及任何恶意或对抗行为者，也不属于攻防安全范畴。
+- Investigating interactions of trust and interest similarity | 2007 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是研究人际信任与兴趣相似性的相关性，应用于推荐系统，不涉及恶意行为者或攻击/防御。
+- Isolation-based conditional anomaly detection on mixed-attribute data to uncover workers’ compensation fraud | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是工人赔偿保险欺诈检测，属于金融欺诈，无信息系统攻击或攻防安全成分，应排除。
+- Leveraging deep learning with LDA-based text analytics to detect automobile insurance fraud | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文核心是汽车保险欺诈检测，属于金融欺诈领域，无信息系统攻击或信息安全属性损害，欺诈者针对保险公司经济利益而非信息系统。
+- Living a private life in public social networks: An exploration of member self-disclosure | 2013 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究社交网站用户自愿自我披露行为的影响因素（态度、外向性、感知临界质量、感知互联网风险、隐私价值），不涉及恶意行为者、攻击或防御。
+- Making words work: Using financial text as a predictor of financial events | 2010 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究用财务文本预测破产和管理欺诈，属于财务事件预测，不涉及信息系统攻击或漏洞。
+- Manipulative Imputation in Distributed Decision Support Settings: The Implications of Information Asymmetry and Aggregation Complexity | 2016 | Decision Support Systems | status=security_peripheral_context
+  - reason: 该研究考察分布式决策支持中成员通过提交不真实信息操纵群体决策的行为，属于组织行为学中的欺骗研究，不涉及信息系统安全属性或攻击防御。
+- Methodology for refining subject terms and supporting subject indexing with taxonomy: A case study of the APO digital repository | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究数字仓储中主题词的精炼与主题分类法的自动构建，属于一般信息组织与检索优化，不涉及任何恶意行为者或攻击防御。
+- Mitigating algorithmic bias in credit scoring support systems through adversarial learning | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Model alignment of anthrax attack simulations | 2006 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是炭疽生物恐怖袭击后的疾病传播模拟模型对齐，属于生物恐怖主义公共健康应急响应，而非面向信息系统攻击或漏洞的攻防安全研究。
+- Modeling the role of generative AI in organizational privacy and security | 2025 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Multi-faceted trust and distrust prediction for recommender systems | 2015 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究推荐系统中多面信任与不信任预测，核心是改进推荐准确性，不涉及恶意攻击者或信息系统攻防安全。
+- New approach for the sequential pattern mining of high-dimensional sequence databases | 2010 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是股票序列数据库的序列模式挖掘算法，无任何恶意或对抗行为者，也不涉及信息安全攻防。
+- OO/DEVS: A platform for industry simulation and strategic modelling | 1995 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章介绍一种用于行业模拟和战略建模的面向对象/DEVS软件平台，整个研究围绕企业策略和市场互动建模，未涉及任何恶意攻击、漏洞或安全防御。
+- Online shopping intention in the context of data breach in online retail stores: An examination of older and younger adults | 2016 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究数据泄露后消费者在线购物意愿的年龄差异，核心是消费者感知、信任、风险与意图，黑客攻击仅作为背景情境，未涉及攻击或漏洞的检测、防御、缓解、评估与建模。
+- OrdinoR: A framework for discovering, evaluating, and analyzing organizational models using event logs | 2022 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文聚焦于从业务流程事件日志中挖掘、评估和分析组织模型（人力资源分组），属于过程挖掘与组织管理优化，未涉及任何恶意行为者、攻击、漏洞或安全防御。
+- Personalized finance advisory through case-based recommender systems and diversification strategies | 2015 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究的是基于案例推理和多样化策略的金融投资组合推荐系统，旨在提升投资建议的收益和多样性，不涉及任何恶意行为者、攻击或防御。
+- Personalized location-based brokering using an agent-based intermediary architecture | 2003 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Polarity classification using structure-based vector representations of text | 2015 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文研究情感分析中的文本极性分类，利用基于修辞结构树的特征改进机器学习分类性能，不涉及任何恶意行为者、攻击、漏洞或安全防御。
+- Predicting consumer sentiments from online text | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是情感分析/文本分类的机器学习方法，不涉及恶意行为者或攻击防御；提及网络安全风险仅是泛化应用背景。
+- Predicting home-appliance acquisition sequences: Markov/Markov for Discrimination and survival analysis for modeling sequential information in NPTB models | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究家庭电器客户购买序列预测以支持交叉销售，未涉及任何恶意行为者、攻击或安全防御，属于一般营销预测优化，与攻防安全无关。
+- Predicting stock market returns from malicious attacks: A comparative analysis of vector autoregression and time-delayed neural networks | 2011 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是研究恶意攻击强度对信息安全企业股票收益的影响并构建股票预测模型，属于金融/投资决策研究，而非攻击实施、威胁检测或防御。
+- Principal-agent learning | 2009 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究的是在存在策略性自利主体时最大化分类学习器效用的博弈模型，典型场景为信用审批和大学申请，其关注点是决策者的经济效用而非信息系统的安全属性，不存在恶意攻击信息系统的行为者。
+- Quantitative methods for Detection of Financial Fraud | 2011 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Responding to identity theft: A victimization perspective | 2019 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究聚焦于身份盗窃受害者的情绪与行为应对，身份盗窃仅作为背景事件，未以攻击者或其对抗行为为核心，也未围绕攻击技术或威胁检测防御展开。
+- Search & Verify: Misinformation and source evaluations in Internet search results | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Security defense against long-term and stealthy cyberattacks | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Sensitivity analysis in logic-based models | 1987 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章讨论的是决策支持系统中逻辑模型的敏感性分析方法，不涉及任何恶意行为者或信息安全攻防内容。
+- Simple decision forests for multi-relational classification | 2013 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究多关系数据分类中的决策森林与逻辑回归方法，属于一般机器学习预测任务，未涉及任何恶意行为者、攻击或安全防护。
+- Soccer strategies that live in the B2B world of negotiation and decision-making | 2003 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章将足球比赛策略映射到B2B谈判决策，使用Q学习和Nash均衡建模协作与谈判，未涉及任何恶意行为者或信息安全攻防内容。
+- Social structural behavior of deception in computer-mediated communication | 2014 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究的是在线游戏（Mafia）中欺骗行为的社会网络特征，虽涉及对抗性欺骗，但损害对象是游戏中的信任与胜负，不构成信息系统安全属性（机密性、完整性、可用性、真实性）的攻击或漏洞。
+- Strategic team design for sustainable effectiveness: A data-driven analytical perspective and its implications | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Success factors for information logistics strategy - An empirical investigation | 2013 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究信息物流策略的成功因素，属于组织IT战略与绩效管理范畴，全文未涉及任何攻击、漏洞或恶意行为者。
+- Telecom traffic pumping analytics via explainable data science | 2021 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是电信流量泵欺诈的检测，欺诈者通过人为制造呼叫获取非法接入费，损害的是运营商经济利益，而非信息系统安全属性，且不涉及攻击或漏洞环节。
+- The application of data mining techniques in financial fraud detection: A classification framework and an academic review of literature | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文为金融欺诈检测（信用卡、保险、公司欺诈等）数据挖掘技术的文献综述，核心是金融欺诈而非信息系统攻防，无恶意或对抗行为者针对信息系统。
+- The generic/actual argument model of practical reasoning | 2006 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文提出一种通用/实际论证模型（GAAM），用于法律和决策支持中的推理结构化，全文不涉及任何恶意行为者或信息系统攻防内容。
+- The information content of financial statement fraud risk: An ensemble learning approach | 2024 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究财务报表舞弊风险预测及其与运营效率的关系，属于金融会计欺诈检测，不涉及针对信息系统或用户的攻击、防御或漏洞。
+- The personalization privacy paradox: An exploratory study of decision making process for location-aware marketing | 2011 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章是消费者对位置感知营销的隐私决策行为研究，关注个性化与隐私担忧的权衡，没有恶意/对抗行为者，也没有攻击或防御建模。
+- The strength of weak ties and fake news believability | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Topological analysis and visualization of interfirm collaboration networks in the electronics industry | 2016 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究电子行业企业间协作网络的拓扑特征与可视化，不涉及任何恶意行为者、攻击或安全防御。
+- Towards a thematic dimensional framework of online fraud: An exploration of fraudulent email attack tactics and intentions | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Towards explainable artificial intelligence through expert-augmented supervised feature selection | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Transaction security investments in online marketplaces: An analytical examination of financial liabilities | 2016 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究聚焦于不同法律责任制度（举证责任分配）对企业安全投资、利润和社会福利的经济分析，虽有欺诈和安全漏洞背景，但恶意行为者仅是损失函数中的参数，非研究核心，也不涉及具体攻击或防御检测机制。
+- Transparent Safe | 2008 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是设计资金-物品交换机制以防止在线拍卖欺诈，属于经济激励机制与协议设计，未以信息系统攻击或漏洞为研究核心。
+- Trust and deception with high stakes: Evidence from the friend or foe dataset | 2023 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- Trust violation and repair: The information privacy perspective | 2015 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章以隐私泄露为背景，核心研究信任违背与修复的心理过程及公司回应策略，不涉及攻击实施或系统防御。
+- Typing or messaging? Modality effect on deception detection in computer-mediated communication | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究计算机媒介通信中人类对一般人际欺骗的检测，不涉及针对信息系统或用户的恶意攻击或漏洞攻防。
+- Understand your shady neighborhood: An approach for detecting and investigating hacker communities | 2024 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- User acceptance of knowledge-based system recommendations: Explanations, arguments, and fit | 2015 | Decision Support Systems | status=security_peripheral_context
+  - reason: 本文核心是KBS解释与用户认知风格的匹配如何影响推荐接受度，欺骗检测仅作为背景任务，未涉及针对信息系统的恶意攻击或攻防研究。
+- Using domain-specific knowledge in generalization error bounds for support vector machine learning | 2009 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章研究利用领域知识收紧SVM泛化误差界，属于机器学习理论，不涉及任何恶意行为者或攻击防御安全。
+- Veracity assessment of online data | 2020 | Decision Support Systems | status=no_security_relevance
+  - reason: 本文是一篇关于在线数据真实性评估的系统文献综述，其核心是信息质量、谣言与虚假新闻检测，但未针对恶意行为者、攻击行为或攻防对抗进行建模，属于一般内容质量分析而非攻防安全研究。
+- Visual e-mail authentication and identification services: An investigation of the effects on e-mail use | 2009 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是用户对电子邮件认证服务感知有用性及对电子邮件使用态度的影响，钓鱼/垃圾邮件仅作为背景动机，未围绕攻击或防御机制本身展开研究。
+- What does it take for successful executive information systems? | 1995 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究执行信息系统（EIS）成功开发与运营的关键因素，不涉及任何恶意行为者、攻击、漏洞或安全防御。
+- βp: A novel approach to filter out malicious rating profiles from recommender systems | 2013 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- “Language is the dress of thought”: A new method for automatic detection of AI-generated text | 2026 | Decision Support Systems | status=?
+  - reason: （无判定记录）
+- A field experiment on ISP training designs for enhancing employee information security compliance | 2025 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 研究核心是员工信息安全政策合规培训设计，评估威慑与威胁论点对培训效果的影响，属于组织安全治理与合规范畴，而非以攻击或漏洞为核心的研究。
+- A research framework for analysing eBusiness models | 2004 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- A study of information systems issues, practices, and leadership in Europe | 2019 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 全文为欧洲IT管理实践调查，主要关注CIO、IT预算、云服务、绩效等管理议题，网络安全仅作为受访者关注事项之一列出，未以恶意行为者或攻击/防御为核心。
+- A systematic methodology for privacy impact assessments: A design science approach | 2014 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- ALTAR: Achieving learning through action research | 2007 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 本文是行动研究方法论在知识管理项目中的应用研究，核心是组织学习和KM软件采纳，不涉及任何恶意行为者、攻击或安全防御。
+- Adversarial knowledge-sharing in a coopetitive environment: a darknet hacker context | 2025 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Affective information processing of fake news: evidence from NeuroIS | 2024 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Assessing and controlling social desirability bias in self-reported survey research: common practices, recommendations, and an application in cyberbullying research | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Balancing exploration and exploitation of IT resources: The influence of Digital Business Intensity on perceived organizational performance | 2017 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究IT能力通过数字业务强度（DBI）对组织绩效的影响，属于IS/战略管理研究，未涉及任何恶意行为者、攻击、漏洞或安全防御。
+- Balancing information privacy and operational utility in healthcare: proposing a privacy impact assessment (PIA) framework | 2023 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 研究核心是医疗保健组织中平衡隐私保护与运营效用的决策框架，属于组织治理而非具体攻击或漏洞的攻防研究。
+- Becoming a blockchain user: understanding consumers’ benefits realisation to use blockchain-based applications | 2023 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 研究核心是消费者对区块链银行应用好处的感知及采用意愿，属于技术采纳行为研究，网络攻击和数据泄露仅作为背景，未围绕攻击、漏洞或防御机制展开。
+- Behavioral and policy issues in information systems security: The insider threat | 2009 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Beyond technical measures: a value-focused thinking appraisal of strategic drivers in improving information security policy compliance | 2022 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章核心是采用价值聚焦思维方法探究改进员工信息安全政策合规的战略驱动因素，属于组织安全治理与合规行为研究，未围绕恶意行为者、攻击或漏洞攻防。
+- Building contextual ambidexterity in a software company to improve firm-level coordination | 2011 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 全文为软件企业通过协调组与流程改进构建组织双元性以改善企业级协调的行动研究，不涉及攻击、恶意行为者或安全防御。
+- Client as designer in collaborative design science research projects: What does social science design theory tell us? | 2008 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究设计科学项目中客户作为设计合作者的社会过程与协作经验，核心是设计理论、用户参与和跨学科协作，无恶意行为者、无信息系统攻击或漏洞主题。全文中的“attack”仅指“解决地球科学数据处理问题”，并非信息安全意义的攻击。
+- Contextual dynamics during health information systems implementation: An event-based actor-network approach | 2008 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 全文研究的是医院放射科网络系统实施过程中的上下文动态、职业群体利益冲突和组织变革，不涉及任何恶意或对抗行为者，也不以攻击、漏洞或安全防御为研究核心。
+- Deterrence effects of social media interventions on health misinformation dissemination by bots and humans | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Efficiency creep and shadow innovation: enacting ambidextrous IT Governance in the public sector | 2020 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究公共部门IT治理中效率与创新的平衡机制，核心概念是效率蔓延和影子创新，均指组织内非正式/未经批准的创新活动，不涉及任何恶意行为者、攻击或防御。
+- Enabling a Kleinian integration of interpretivist and socio-critical IS research: The contribution of Dooyeweerd's philosophy | 2011 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章讨论IS研究范式（实证主义、解释主义、社会批判）的哲学整合，未涉及任何恶意行为者、攻击或安全防御。
+- Enabling cybersecurity incident response agility through dynamic capabilities: the role of real-time analytics | 2024 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Examining the intended and unintended consequences of organisational privacy safeguards | 2017 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 全文研究组织隐私保障措施的实施后果（含意外后果）对合规的影响，核心是医疗工作流与合规平衡，而非恶意攻击或防御。
+- Exploitation and exploration of IT in times of pandemic: from dealing with emergency to institutionalising crisis practices | 2020 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究疫情期间高校在线教学转型中的IT探索与利用过程，不涉及任何恶意行为者、攻击或安全防御。
+- From cyber benign to cyber malicious: unveiling the evolution of insider cyber maliciousness from a stage theory perspective | 2025 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- How can governments prevent the spread of fake news? A situational cyberdeviance prevention analysis | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- How do technology use patterns influence phishing susceptibility? A two-wave study of the role of reformulated locus of control | 2024 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- How users perceive and respond to security messages: A NeuroIS research agenda and empirical study | 2016 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- IS integration and knowledge sharing in multi-unit firms: The winner's curse † | 2013 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究企业内IS集成、业务相关性和工作流相互依赖对跨部门知识共享的影响，完全未涉及攻击、漏洞或防御。
+- IT-leveraged network value cocreation: a case study of the value cocreation process and value capture in the South Korean broadcast advertising industry | 2019 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究IT驱动的网络价值共创与组织二元性，核心是商业协作和效率/创新提升，不涉及任何恶意攻击者或信息安全攻防问题。
+- Information system development agility as organizational learning | 2006 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究信息系统开发敏捷性作为组织学习，聚焦探索与利用、过程目标权衡，未涉及任何恶意行为者或安全攻击/防御。
+- Open source movements as a model for organising | 2000 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究开源软件运动作为组织形式和商业模式，不涉及恶意行为者、攻击或安全防御。
+- Opinion seeking in a social network-enabled product review website: a study of word-of-mouth in the era of digital social networks | 2018 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 研究核心是消费者在社交网络产品评论网站上的意见寻求行为及其有用性与享受体验，不涉及攻击、威胁或安全防御。
+- Organisational learning—a critical systems thinking discipline | 2001 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章讨论组织学习与知识管理的批判性系统思考方法论（BSPA），聚焦权力、意识形态和组织冲突，不涉及任何恶意行为者、攻击或安全防御。
+- Perceived network externalities and communication technology acceptance | 2007 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Personality traits and concern for privacy: An empirical study in the context of location-based services | 2008 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 文章研究个性特质对位置服务隐私担忧的影响，属于用户隐私态度的实证研究，不涉及攻击者、攻击行为或防御技术。
+- Phishing detection in multitasking contexts: the impact of working memory load, goal activation, and message framing cue on detection performance | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Privacy concerns and digital government: exploring citizen willingness to adopt the COVIDSafe app | 2021 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 研究核心是公民对COVIDSafe接触追踪应用的隐私关注、信任和风险感知对其采用意愿的影响，属于用户行为与隐私态度研究，不涉及恶意攻击者或攻防技术。
+- Responsible cognitive digital clones as decision-makers:a design science research study | 2023 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 文章核心是设计用于复制人类决策者的认知克隆（Pi-Mind agent），对抗训练和安全性仅是提升克隆鲁棒性的背景或应用场景，而非以攻击或防御为研究核心。
+- Security fatigue: manifestation of emotional exhaustion and cynicism by depletion of self-regulation capacity | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Strategic aspirations for net-enabled business | 2004 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 全文研究企业网络化业务的战略愿景、动态能力与渐进/跳跃式创新路径，无任何恶意行为者或攻击防御内容。
+- The effects of cyber regulations and security policies on organizational outcomes: a knowledge management perspective | 2023 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 文章核心是知识管理流程与组织效能/绩效的关系，安全政策和网络法规仅作为调节变量，未涉及攻击或漏洞研究。
+- The impact of cognitive biases on the believability of fake news | 2025 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- The influence of affective processing on phishing susceptibility | 2025 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- The role of managerial activities in achieving Information technology ambidexterity and new product development performance in small and medium-sized enterprises | 2024 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究管理活动、IT双元性与新产品开发绩效的关系，全程未涉及恶意行为者、攻击或信息安全属性，属于组织管理与IT能力研究。
+- Towards a cybercontextual transmission model for online scamming | 2024 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Understanding dark side of artificial intelligence (AI) integrated business analytics: assessing firm’s operational inefficiency and competitiveness | 2022 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 全文研究AI业务分析不透明性导致的企业运营低效与竞争劣势，未涉及恶意或对抗行为者对信息系统、用户或数据的攻击、检测或防御，安全风险仅为感知风险的背景成分。
+- Unravelling the dynamics of incivility on social networking sites: the role of malicious envy | 2026 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- Weathering the storm: examining how organisations navigate the sea of cybersecurity regulations | 2025 | European Journal of Information Systems | status=?
+  - reason: （无判定记录）
+- What drives unverified information sharing and cyberchondria during the COVID-19 pandemic? | 2020 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 研究核心是COVID-19疫情期间用户分享未经验证信息及网络疑病症的心理社会驱动因素，不涉及恶意行为者或信息系统攻击/防御。
+- When crowds play god: a Promethean perspective on crowdfunding | 2022 | European Journal of Information Systems | status=security_peripheral_context
+  - reason: 全文以普罗米修斯神话和辩证法分析众筹项目所有者的公共叙事，虽提及欺诈、隐私等安全相关词汇，但仅为叙事背景或批评，并非围绕恶意行为者或攻击/防御展开。
+- A Qualitative Examination of Stressors Contributing to Burnout Among Chief Information Security Officers (CISOs) | 2026 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- A reflection on information systems strategizing: the role of power and everyday practices | 2017 | Information Systems Journal | status=no_security_relevance
+  - reason: 文章研究IS战略制定中的权力与日常实践，不涉及任何恶意或对抗行为者，也没有攻击或防御内容。
+- A typology of disinformation intentionality and impact | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Accountability mobilization, guanxi and social media-induced polarization: Understanding the bystander's prosocial punishment to misinformation spreader | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- An Internet retailing data framework for supporting consumers and business processes | 2003 | Information Systems Journal | status=no_security_relevance
+  - reason: 文章围绕互联网零售数据框架，旨在收集和分析消费者行为数据以支持营销和业务流程，未涉及恶意行为者、攻击或安全防御。
+- Artificial immune systems for the detection of credit card fraud: An architecture, prototype and preliminary results | 2012 | Information Systems Journal | status=no_security_relevance
+  - reason: 文章核心是一般信用卡欺诈检测，属于金融欺诈范畴，未涉及钓鱼、社交工程、账户盗用或网络攻击等信息系统攻防安全环节。
+- Digital innovation: A review and synthesis | 2019 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Email adaptation for conflict handling: A case study of cross-border inter-organisational partnership in East Asia | 2018 | Information Systems Journal | status=no_security_relevance
+  - reason: 文章研究跨组织伙伴关系中的电子邮件适应与冲突处理，核心是组织沟通行为，不涉及任何恶意或对抗行为者，也未针对信息系统攻击或防御。
+- Ethical norms and issues in crowdsourcing practices: A Habermasian analysis | 2019 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Exploration–Exploitation: How business analytics powers organisational ambidexterity for environmental sustainability | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Governance Processes and Technologies for Cyber Resilience in the Financial Sector: The Italian Scenario | 2026 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Heeding the Messenger: The Influence of Sender Characteristics on Security Message Compliance Intentions | 2026 | Information Systems Journal | status=security_peripheral_context
+  - reason: 文章研究安全消息发送者特征对用户合规意图的影响，属于安全行为与说服研究，核心不是攻击者行为或漏洞的检测、防御与建模。
+- Hybrid managers — what do we know about them? | 1992 | Information Systems Journal | status=no_security_relevance
+  - reason: 全文讨论的是信息管理领域中的混合管理者角色、能力与职业发展，无任何恶意行为者、攻击或防御内容。
+- In search of Europe's information technology leaders: Review of methods and empirical evidence | 1996 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Information sharing and political polarisation on social media: The role of falsehood and partisanship | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Information technology as a resource to counter domestic sex trafficking in the United States | 2023 | Information Systems Journal | status=no_security_relevance
+  - reason: 研究核心是执法部门对反人口贩卖信息技术（P.A.T.H.）的采用与使用行为，而非信息安全攻击或漏洞的检测与防御。
+- Integrating truth bias and elaboration likelihood to understand how political polarisation impacts disinformation engagement on social media | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Linking information systems and entrepreneurship: A review and agenda for IT-associated and digital entrepreneurship research | 2019 | Information Systems Journal | status=no_security_relevance
+  - reason: 本文是信息系统与创业领域的文献综述，核心是梳理IT在创业企业中的角色、定义和研究议程，不涉及任何攻击、漏洞或防御问题。
+- Managing paradoxes in bi-modal information technology functions: A multi-case study | 2022 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Narrowing the age-based digital divide: Developing digital capability through social activities | 2023 | Information Systems Journal | status=no_security_relevance
+  - reason: 研究核心是老年人通过社交活动发展数字能力以缩小数字鸿沟，全文未涉及任何恶意行为者、攻击或信息安全攻防内容。
+- Proposing the control-reactance compliance model (CRCM) to explain opposing motivations to comply with organisational information security policies | 2015 | Information Systems Journal | status=security_peripheral_context
+  - reason: 文章研究员工对信息安全政策的遵从与不遵从动机（控制-对抗模型），核心是组织行为与心理反应，不涉及恶意攻击者、攻击行为或威胁的检测/防御，属于组织安全治理范畴。
+- Resilient IT: Winning With People and Process | 2026 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Responsible innovation with digital platforms: Cases in India and Canada | 2023 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- Security services as coping mechanisms: An investigation into user intention to adopt an email authentication service | 2014 | Information Systems Journal | status=security_peripheral_context
+  - reason: 研究核心是用户采用电子邮件认证服务的意图，恶意邮件威胁仅作为背景动机，未聚焦于攻击或防御机制本身。
+- That's interesting: An examination of interest theory and self-determination in organisational cybersecurity training | 2022 | Information Systems Journal | status=security_peripheral_context
+  - reason: 该文研究组织网络安全培训中兴趣与自我决定动机对学习效果的影响，属于SETA培训动机与教育研究，不以攻击、漏洞或防御为核心对象。
+- The antecedents of employees' proactive information security behaviour: The perspective of proactive motivation | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- The effects of knowledge mechanisms on employees' information security threat construal | 2023 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- The ‘hijacking’ of the Scandinavian Journal of Information Systems: Implications for the information systems community | 2024 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- To sell or not to sell: Exploring sellers' trust and risk of chargeback fraud in cross-border electronic commerce | 2018 | Information Systems Journal | status=no_security_relevance
+  - reason: 文章研究卖家对买家拒付欺诈（chargeback fraud）的信任与感知风险，核心是电商信任与制度机制，而非信息系统攻击/漏洞的攻防安全研究。
+- Towards a framework for evaluating investments in data warehousing | 2002 | Information Systems Journal | status=no_security_relevance
+  - reason: 全文围绕数据仓库投资评估框架，未涉及任何恶意行为者、攻击或安全防御。
+- User behaviour towards protective information technologies: The role of national cultural differences | 2009 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- ‘What a waste of time’: An examination of cybersecurity legitimacy | 2023 | Information Systems Journal | status=?
+  - reason: （无判定记录）
+- A Theory-Driven Deep Learning Method for Voice Chat-Based Customer Response Prediction | 2023 | Information Systems Research | status=no_security_relevance
+  - reason: 文章核心是客户响应预测，基于语音聊天和满意度理论，无任何恶意或对抗行为者，也不涉及攻击或防御。
+- A tangled web: Should online review portals display fraudulent reviews? | 2020 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Advancing the Theory of Adaptive Structuration: The Development of a Scale to Measure Faithfulness of Appropriation | 1997 | Information Systems Research | status=no_security_relevance
+  - reason: 全文是开发测量适应性结构理论中'appropriation的忠实性'量表的心理计量学研究，核心是技术使用理论而非任何攻击或恶意行为。
+- An Investigation of p-Hacking in E-Commerce A/B Testing | 2025 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Are Neighbors Alike? A Semisupervised Probabilistic Collaborative Learning Model for Online Review Spammers Detection | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Bilateral liability-based contracts in information security outsourcing | 2019 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Bystanders Join in Cyberbullying on Social Networking Sites: The Deindividuation and Moral Disengagement Perspectives | 2023 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Chilling Effect of the Enforcement of Computer Misuse Act: Evidence from Publicly Accessible Hack Forums | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Conceptualizing and testing a social cognitive model of the digital divide | 2011 | Information Systems Research | status=no_security_relevance
+  - reason: 本文研究数字鸿沟对计算机自我效能和学习成果的影响，属于IT采用与教育结果研究，不涉及恶意或对抗行为者，也不涉及攻击防御。
+- Configurations for achieving organizational ambidexterity with digitization | 2020 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究数字化与组织内外因素配置对组织双元性的影响，未涉及任何恶意行为者、攻击、漏洞或安全防御，全文不存在攻防安全内容。
+- Countering State-Controlled Media Propaganda Through Labeling: Evidence from Facebook | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Deeper Down the Rabbit Hole: How Technology Conspiracy Beliefs Emerge and Foster a Conspiracy Mindset | 2025 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Developing and validating trust measures for e-commerce: An integrative typology | 2002 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章核心是电子商务信任的心理测量与结构验证，黑客风险仅作为背景提及，不构成攻防安全研究。
+- Discriminating IT governance | 2015 | Information Systems Research | status=no_security_relevance
+  - reason: 研究核心是IT治理决策权与外围知识对IT战略敏捷性的影响，不涉及恶意行为者、攻击或漏洞，安全仅作为基础设施特征之一被提及。
+- Does Social Bot Help Socialize? Evidence from a Microblogging Platform | 2026 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Does platform owner's entry crowd out innovation? Evidence from Google Photos | 2018 | Information Systems Research | status=no_security_relevance
+  - reason: 研究平台所有者进入互补市场对互补者创新的影响，完全未涉及恶意行为者、攻击或安全防御。
+- Effects of information revelation policies under cost uncertainty | 2012 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究采购拍卖中信息揭示政策对投标行为、采购者剩余和社会福利的影响，属于拍卖理论与信息系统经济学，无恶意或对抗行为者，不涉及攻击、漏洞或系统安全损害。
+- Electronic commerce, spatial arbitrage, and market efficiency | 2017 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究电子商务对市场效率和空间套利的影响，不涉及任何恶意行为者或信息安全攻击、防御。
+- Engineering optimal network effects via social media features and seeding in markets for digital goods and services | 2013 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究企业如何通过社交媒体功能和播种策略优化网络效应与定价，属于市场策略与网络效应经济学，不涉及任何恶意行为者、攻击或防御。
+- Examining the impact of television-program-induced emotions on online word-of-mouth toward television advertising | 2021 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Exploiting and defending open digital platforms with boundary resources: Android's five platform forks | 2018 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章将平台分叉视为敌对商业策略，而非信息系统攻击；损害对象是商业利益与竞争优势，而非安全属性。
+- Exploring Contrasting Effects of Trust in Organizational Security Practices and Protective Structures on Employees’ Security-Related Precaution Taking | 2024 | Information Systems Research | status=security_peripheral_context
+  - reason: 研究核心是员工对组织信息安全实践的信任如何通过承诺、自满和正念影响预防行为，属于组织安全行为管理，而非围绕攻击者、漏洞或具体攻防技术研究。
+- Fake news, investor attention, and market reaction | 2021 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究证券市场中的假新闻，属于金融欺诈与市场操纵范畴，损害对象是投资者经济利益和市场效率，不涉及信息系统安全属性，且不涉及钓鱼、社交工程、账户盗用等网络攻击手段。
+- Generating Shareable Statistical Databases for Business Value: Multiple Imputation with Multimodal Perturbation | 2012 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Hope or hype: On the viability of escrow services as trusted third parties in online auction environments | 2004 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- How does IT ambidexterity impact organizational agility? | 2015 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究IT双元性（IT探索与利用）通过运营双元性影响组织敏捷性的机制，属于一般组织IT能力与业务绩效研究，全文未涉及任何恶意/对抗行为者、攻击、漏洞或系统安全攻防。
+- How is the mobile internet different? Search costs and local activities | 2013 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究移动互联网与PC在搜索成本和本地活动上的行为差异，属于一般互联网商业/营销研究，无任何恶意行为者或攻防安全内容。
+- Influence techniques in phishing attacks: An examination of vulnerability and resistance | 2014 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Information technology, network structure, and competitive action | 2010 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究企业联盟网络结构与IT能力对竞争行动的影响，不涉及任何恶意或对抗行为者，也无信息系统安全属性损害或攻防焦点。
+- Informing privacy research through information systems, psychology, and behavioral economics: Thinking outside the "APCO" box | 2015 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Juggling Information Technology (IT) Exploration and Exploitation: A Proportional Balance View of IT Ambidexterity | 2022 | Information Systems Research | status=no_security_relevance
+  - reason: 全文研究IT探索与利用的比例平衡对组织敏捷性的影响，属于一般组织战略与IT能力研究，完全不涉及恶意行为者、攻击或漏洞防御。
+- Knowledge exploration and exploitation: The impacts of psychological climate and knowledge management system access | 2011 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Leveraging standard electronic business interfaces to enable adaptive supply chain partnerships | 2007 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究标准电子业务接口对供应链伙伴适应性的作用，核心是组织间信息交换与知识创造，未涉及任何恶意行为者、攻击或漏洞防御。
+- Leveraging the Digital Tracing Alert in Virus Fight: The Impact of COVID-19 Cell Broadcast on Population Movement | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Mandatory standards and organizational information security | 2016 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究强制性安全标准对企业安全投资的影响，属于安全政策/标准评估，攻击者仅作为风险背景而非研究核心对象。
+- Migration of service to the internet: Evidence from a federal natural experiment | 2015 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Morality and Computers: Attitudes and Differences in Moral Judgments | 1999 | Information Systems Research | status=security_peripheral_context
+  - reason: 研究核心是用户对计算机相关行为的道德判断（伦理态度），病毒、加密等仅作为道德判断情境，不涉及攻击实施或防御技术。
+- Motion Sensor–Based Fall Prevention for Senior Care: A Hidden Markov Model with Generative Adversarial Network Approach | 2024 | Information Systems Research | status=no_security_relevance
+  - reason: 研究核心是老年人跌倒预防的医疗健康预测分析，不存在恶意或对抗行为者，也没有信息系统攻击或漏洞相关的内容。
+- Ontology-Based Information Extraction for Labeling Radical Online Content Using Distant Supervision | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Ontology-Based Intelligent Interface Personalization for Protection Against Phishing Attacks | 2024 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Optimal information structures for the seller of a search good | 1990 | Information Systems Research | status=no_security_relevance
+  - reason: 论文研究搜索品销售者如何设计最优信息结构（划分属性区间）以最小化预期损失，属于信息经济学与信息系统设计优化，未涉及任何恶意行为者或攻击防御安全问题。
+- Platform Loophole Exploitation, Recovery Measures, and User Engagement: A Quasi-Natural Experiment in Online Gaming | 2024 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究游戏平台漏洞利用后惩罚措施对用户参与度的影响，核心是平台治理和用户行为，而非信息系统的攻击、漏洞利用或防御机制。
+- Predicting Web page status | 2010 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究网页状态（in-links）的预测，不涉及恶意行为者、攻击或安全防御。
+- Predicting Web page status | 2010 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究网页状态（in-links）的预测，不涉及恶意行为者、攻击或安全防御。
+- Promoting Security Behaviors in Remote Work Environments: Personal Values Shaping Information Security Policy Compliance | 2025 | Information Systems Research | status=security_peripheral_context
+  - reason: 研究核心是员工信息安全政策遵从行为及个人价值观影响，属于组织安全政策合规与安全行为研究，没有针对恶意攻击者的攻击/防御/检测焦点。
+- Psychological contract violation in online marketplaces: Antecedents, consequences, and moderating role | 2005 | Information Systems Research | status=no_security_relevance
+  - reason: 研究核心是买方对卖家未履行交易义务的心理契约违背感知及其对信任、风险、交易行为的影响，不涉及恶意攻击者或攻防安全。
+- Real options models for proactive uncertainty-reducing mitigations and applications in cybersecurity investment decision making | 2018 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究核心是网络安全投资中的实物期权决策模型，关注缓解措施的经济价值评估而非攻击或漏洞本身。
+- Reidentification Risk in Panel Data: Protecting for k-Anonymity | 2023 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Ridesharing and Digital Resilience for Urban Anomalies: Evidence from the New York City Taxi Market | 2023 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Shedding Light on the Dark: The Impact of Legal Enforcement on Darknet Transactions | 2024 | Information Systems Research | status=security_peripheral_context
+  - reason: 全文研究的是执法逮捕对暗网毒品交易量的威慑效应，以犯罪经济学和威慑理论为核心，而非针对信息系统攻击或漏洞的攻防安全研究。
+- Socially nudged: A quasi-experimental study of friends' social influence in online product ratings | 2018 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究在线评分中朋友的社会影响，属于正常用户行为，不涉及恶意或对抗行为者，也没有攻击、漏洞或安全防御内容。
+- Software patents and firm value: A real options perspective on the role of innovation orientation and environmental uncertainty | 2019 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究软件专利组合的探索/利用导向与环境不确定性对企业市场价值（Tobin's q）的影响，属于技术创新管理与知识产权估值研究，不涉及任何恶意或对抗行为者、攻击或漏洞。
+- Standing up or standing by: Understanding bystanders’ proactive reporting responses to social media harassment | 2021 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Switching costs, network effects, and competition in the european mobile telecommunications industry | 2012 | Information Systems Research | status=no_security_relevance
+  - reason: 文章研究欧洲移动通信行业中的转换成本与网络效应对市场竞争的影响，核心是产业经济和竞争政策，不涉及任何恶意行为者、攻击或安全防御。
+- The Illusion of Authenticity in Online Reviews: Truth Bias and the Role of Valence | 2026 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究消费者对虚假评论的感知偏见（truth bias），而非虚假评论的检测、防御或攻击建模，恶意行为者只是背景，研究核心属于一般评论感知/内容质量领域。
+- The Impacts of Internet Monitoring on Employees’ Cyberloafing and Organizational Citizenship Behavior: A Longitudinal Field Quasi-Experiment | 2024 | Information Systems Research | status=no_security_relevance
+  - reason: 全文为干扰素-γ对BPAG1基因表达调控的分子生物学研究，与信息系统安全无关。
+- The cost impact of spam filters: Measuring the effect of information system technologies in organizations | 2012 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- The deterrent effect of ride-sharing on sexual assault and investigation of situational contingencies | 2021 | Information Systems Research | status=no_security_relevance
+  - reason: 研究核心是网约车对性侵犯（人身犯罪）的威慑作用，属于公共安全领域，不涉及针对信息系统或数据的攻击与防御。
+- The economic incentives for sharing security information | 2005 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章核心是安全信息共享与安全技术投资的经济激励博弈，恶意攻击者仅作为背景威胁，并非研究问题的核心对象。
+- The impact of executives’ IT expertise on reported data security breaches | 2021 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- The influence of professional subculture on information security policy violations: A field study in a healthcare context | 2020 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究专业亚文化对信息安全政策违规行为的影响，属于员工行为合规研究，未涉及恶意或对抗行为者，也未围绕攻击实施或威胁检测/防御。
+- The value of third-party assurance seals in online retailing: An empirical investigation | 2013 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- Too Tired and in Too Good of a Mood to Worry About Privacy: Explaining the Privacy Paradox Through the Lens of Effort Level in Information Processing | 2023 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究隐私悖论的心理机制（认知耗竭与积极情绪对隐私关注与披露行为关联的调节），核心是用户决策过程，不涉及恶意或对抗行为者，也无攻击或防御环节。
+- When Sharing Economy Meets Traditional Business: Coopetition Between Ride-Sharing Platforms and Car-Rental Firms | 2024 | Information Systems Research | status=no_security_relevance
+  - reason: 全文研究共享出行平台与租车公司之间的竞合策略，聚焦价格竞争、司机工资与利润分配，不涉及恶意行为者或信息系统攻击/防御。
+- “Extortionality” in Ransomware Attacks: A Microeconomic Study of Extortion and Externality | 2026 | Information Systems Research | status=?
+  - reason: （无判定记录）
+- A field experiment on response strategy in non-alternative environments: A moderated-mediation model | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- A review of cybercrime research: Synthesis and future directions | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- A study of social networking site use from a three-pronged security and privacy threat assessment perspective | 2021 | Information and Management | status=security_peripheral_context
+  - reason: 文章核心是SNS用户对网络攻击和隐私泄露的风险感知及其对使用行为的影响，恶意行为者是威胁背景而非研究问题本身，未聚焦攻击实施或防御检测，且属于隐私担忧感知类研究，故排除。
+- Achieving novelty and efficiency in business model design: Striking a balance between IT exploration and exploitation | 2022 | Information and Management | status=no_security_relevance
+  - reason: 全文研究IT探索与利用对商业模式设计及企业绩效的影响，未涉及任何恶意或对抗行为者，也不涉及系统安全攻防。
+- Actively open-minded thinking is key to combating fake news: A multimethod study | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- An appraisal mechanism for a social marketplace | 2021 | Information and Management | status=no_security_relevance
+  - reason: 全文为哲学论文，探讨'界限/地方/全球化'概念，不涉及任何信息系统、恶意行为者或攻防安全内容。
+- An empirical investigation of anti-spyware software adoption: A multitheoretical perspective | 2008 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是用户采纳反间谍软件的行为决定因素，而非攻击、威胁检测或防御技术本身，间谍软件威胁仅作为应用背景。
+- An empirical investigation of competency factors affecting e-business success in European SMEs | 2007 | Information and Management | status=no_security_relevance
+  - reason: 全文研究欧洲中小企业电子商务成功的胜任力因素，属于一般IS/管理成功因素研究，不涉及任何恶意行为者、攻击或防御。
+- An enhanced governance measure for deep synthesis applications: Addressing the moderating effect of moral sensitivity through message framing | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- An ensemble deep learning model for fast classification of Twitter spam | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- An exploration of the relationship between software development process maturity and project performance | 2004 | Information and Management | status=no_security_relevance
+  - reason: 文章研究CMM软件过程成熟度与项目绩效的关系，属于软件工程管理范畴，未涉及任何恶意行为者、攻击或安全防御。
+- Antecedents and consequences of data breaches: A systematic review | 2022 | Information and Management | status=?
+  - reason: （无判定记录）
+- Are we ready for cyberterrorist attacks?—Examining the role of individual resilience | 2018 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究个体对网络恐怖袭击的心理韧性和经济韧性行为，攻击仅作为情境背景，核心是心理学和家庭财务行为，而非攻击或防御。
+- Bystander pro-celebrity cyberbullying: An integrated perspective of susceptibility to retaliation and social capital gains | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- Case-based learning for cybersecurity leaders: A systematic review and research agenda | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Checking the facts! exploring social media users' sharing of verified COVID-19 information from the comprehensive action determination model | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- Collaborating with Bounty Hunters: How to Encourage White Hat Hackers’ Participation in Vulnerability Crowdsourcing Programs through Formal and Relational Governance | 2022 | Information and Management | status=?
+  - reason: （无判定记录）
+- Communicative practices in an online financial forum during abnormal stock market behavior | 2011 | Information and Management | status=security_peripheral_context
+  - reason: 文章核心是金融论坛中的沟通实践和操纵行为，属于金融欺诈/市场操纵范畴，而非信息系统安全属性的攻击或防御。
+- Computer infectors. Prevention, detection, and recovery | 1992 | Information and Management | status=?
+  - reason: （无判定记录）
+- Cyberbullying impacts on victims’ satisfaction with information and communication technologies: The role of Perceived Cyberbullying Severity | 2018 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究网络欺凌受害者感知严重性对ICT满意度的影响，核心是用户体验与心理反应，未涉及攻击实施、检测、防御或安全属性损害。
+- Cyberbullying perpetration on social media: A situational action perspective | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Cybersecurity end-user compliance: Password management versus update compliance | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Detecting fake news on social media: a novel uncertainty-aware machine-crowd hybrid-intelligence-based method | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Diffusion of E-mail: An organisational learning perspective | 1996 | Information and Management | status=no_security_relevance
+  - reason: 文章从组织学习视角分析E-mail扩散中的政治冲突与权力博弈，员工利用E-mail进行组织内反抗，但并非针对信息系统或用户安全的攻击、操纵或滥用。
+- Discourse cues to deception in the case of multiple receivers | 2014 | Information and Management | status=no_security_relevance
+  - reason: 文章研究在线多人游戏（杀人游戏）中的欺骗话语线索，核心是一般性欺骗检测，不涉及信息系统安全攻击或漏洞，也没有针对信息系统安全属性的损害。
+- Discovering the interplay between defensive avoidance and continued use intention of anti-malware software among experienced home users: A moderated mediation model | 2022 | Information and Management | status=?
+  - reason: （无判定记录）
+- Does centralization of online content regulation affect political hate speech in a country? A public choice perspective | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Does privacy breach affect firm performance? An analysis incorporating event-induced changes and event clustering | 2022 | Information and Management | status=?
+  - reason: （无判定记录）
+- E-participation and corruption: Unravelling the role of power dynamics and disinformation | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- Estimating the impact of cloud computing on firm performance: An empirical investigation of listed firms | 2022 | Information and Management | status=no_security_relevance
+  - reason: 文章实证研究云计算采用对公司盈利能力与市场价值的影响，核心是IT投资与公司绩效，完全不涉及攻击、恶意行为者或系统安全。
+- Estimating the market impact of security breach announcements on firm values | 2009 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是估计安全漏洞公告对公司市场价值的影响，属于金融事件研究，而非攻击或防御技术本身。
+- Ethical consumerism, supply chains, and deceptions with RFID-based systems | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Evolution of the impact of e-business technology on operational competence and firm profitability: A panel data investigation | 2018 | Information and Management | status=no_security_relevance
+  - reason: 全文研究的是e-business技术投资对运营能力和企业盈利能力的动态影响，属于IT商业价值研究，不涉及任何恶意行为者、攻击或安全防御。
+- Exploitative and exploratory learning in transactive memory systems and project performance | 2013 | Information and Management | status=no_security_relevance
+  - reason: 文章研究跨记忆系统、利用性与探索性学习对新产品开发项目绩效的影响，属于组织学习与创新管理研究，全文未涉及任何恶意行为者、信息系统攻击、漏洞或攻防安全问题。
+- Exploiting organizational knowledge in developing IS project cost and schedule estimates: An empirical study | 2007 | Information and Management | status=no_security_relevance
+  - reason: 研究核心是信息系统项目成本与工期估算中的组织知识利用，不涉及任何恶意行为者、攻击或安全防御。
+- Fake news believability: The effects of political beliefs and espoused cultural values | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- Falsifying and withholding: exploring individuals’ contextual privacy-related decision-making | 2019 | Information and Management | status=no_security_relevance
+  - reason: 文章研究用户在隐私决策中提供虚假信息或拒绝披露的行为，属于个人隐私保护行为研究，不涉及恶意攻击者或信息系统攻防。
+- Have your cake and eat it too? Simultaneously pursuing the knowledge-sharing benefits of agile and traditional development approaches | 2018 | Information and Management | status=no_security_relevance
+  - reason: 文章研究敏捷与传统开发混合方法中的知识共享过程，属于软件开发项目管理，无恶意行为者、攻击或防御内容。
+- How information technology influences opportunity exploration and exploitation firm's capabilities | 2018 | Information and Management | status=no_security_relevance
+  - reason: 论文研究IT基础设施对企业机会探索和开发能力及绩效的影响，不涉及恶意行为者、攻击或安全防御。
+- How should companies deploy their digital supply chain platforms to gain competitive advantages? An asset orchestration perspective | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- How to enhance antiphishing training performance? The roles of performance facilitators and message-specific coping responses | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- How “What you think you know about cybersecurity” can help users make more secure decisions | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- I'm not fluent: How linguistic fluency, new media literacy, and personality traits influence fake news engagement behavior on social media | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- IT-enabled knowledge ambidexterity and innovation performance in small U.S. firms: The moderator role of social media capability | 2018 | Information and Management | status=no_security_relevance
+  - reason: 全文研究IT基础设施、知识双元性、社交媒体能力与创新绩效的关系，未涉及任何恶意行为者、攻击、漏洞或安全防御内容。
+- Identifying the peripheral cues in the credibility assessment of online health information | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Information security breaches and IT security investments: Impacts on competitors | 2019 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究信息安全漏洞和IT安全投资公告对竞争对手股价的市场影响，属于安全事件的经济后果分析，并非以攻击实施或威胁检测/防御/评估为核心。
+- Information technology and interorganizational learning: An investigation of knowledge exploration and exploitation processes | 2015 | Information and Management | status=no_security_relevance
+  - reason: 文章研究组织间学习中IT支持的学习机制与知识探索/利用策略，完全不涉及恶意行为者、攻击或安全防御。
+- Information transfer in B2B procurement: An empirical analysis and measurement | 2005 | Information and Management | status=no_security_relevance
+  - reason: 研究围绕B2B采购中电子信息传递（EIT）测量工具的开发，关注组织间协调与交易风险（如机会主义），不涉及任何恶意/对抗行为者或信息系统的攻击与防御。
+- Informing cybersecurity strategic commitment through top management perceptions: The role of institutional pressures | 2021 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是高层管理者对网络保险作为风险转移策略的承诺，属于组织安全治理与战略决策，未以攻击、漏洞或防御技术为核心。
+- Learning for healthy outcomes: Exploration and exploitation with electronic medical records | 2015 | Information and Management | status=no_security_relevance
+  - reason: 全文研究EMR采用中的组织学习（探索与利用）对用户收益的影响，不涉及恶意行为者、攻击或安全防御。
+- Lost at the cyber-crossing? Understanding individuals’ internet security threat ambivalence and its impact on threat avoidance and approach behavior | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Mapping Sentiments to Themes of Customer reactions on Social Media during a Security Hack: A Justice Theory Perspective | 2020 | Information and Management | status=security_peripheral_context
+  - reason: 文章以安全黑客事件为背景，研究顾客在社交媒体上的反应、公平感知和情感，核心是品牌管理与客户关系，而非攻击或防御本身。
+- Market reactions to E-business outsourcing announcements: An event study | 2006 | Information and Management | status=no_security_relevance
+  - reason: 文章研究电子商务外包公告的股票市场反应，属于企业IT外包与市场回报的实证研究，未涉及恶意行为者或信息安全攻防。
+- No Rose without a thorn: Board IT competence and market reactions to operational IT failures | 2021 | Information and Management | status=?
+  - reason: （无判定记录）
+- One size does not fit all: Rethinking recognition system design for behaviorally heterogeneous online communities | 2020 | Information and Management | status=no_security_relevance
+  - reason: 研究核心是在线社区的多准则分段式识别系统设计，旨在优化用户激励，不涉及恶意行为者、攻击或安全防御。
+- Prevalence, perceived seriousness, justification and regulation of cyberloafing in Singapore: An exploratory study | 2005 | Information and Management | status=?
+  - reason: （无判定记录）
+- Self-control, organizational context, and rational choice in Internet abuses at work | 2018 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究员工互联网滥用（IUP违规）的合规行为，是对安全政策遵从的组织行为研究，而非攻击或漏洞为核心，安全仅作为风险背景。
+- Smart tourism technologies in travel planning: The role of exploration and exploitation | 2017 | Information and Management | status=no_security_relevance
+  - reason: 文章研究智能旅游技术在旅行规划中的使用与满意度，安全/隐私仅作为用户担忧变量，无任何攻击者、恶意行为或攻防内容。
+- Social emotion classification of short text via topic-level maximum entropy model | 2016 | Information and Management | status=no_security_relevance
+  - reason: 文章研究社交媒体短文本的社交情绪分类，属于一般文本情感分析，无恶意行为者或攻击/防御内容。
+- Socio-technical investigation of cyberbullying among adults: A qualitative content analysis of the legal responses to a complex social problem | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Store selection criteria and sales prediction in virtual worlds | 2014 | Information and Management | status=no_security_relevance
+  - reason: 文章研究虚拟世界中的商店选择标准和销售预测，属于消费者行为与零售研究；安全与隐私仅作为消费者感知的商店选择因素之一被提及，不涉及任何恶意行为者或攻击防御。
+- Surges and sediments: Shaping the reception of reengineering | 2001 | Information and Management | status=no_security_relevance
+  - reason: 文章研究管理时尚BPR在荷兰的传播和接收，属于组织管理知识扩散，不涉及任何恶意行为者或信息系统攻防。
+- System usage behavior as a proxy for user satisfaction: An empirical investigation | 1999 | Information and Management | status=no_security_relevance
+  - reason: 文章研究用户满意度测量方法，以系统使用行为作为满意度的代理，不涉及任何恶意或对抗行为者、攻击、漏洞或安全防御。
+- Tapping into the wealth of employees’ ideas: Design principles for a digital intrapreneurship platform | 2022 | Information and Management | status=no_security_relevance
+  - reason: 文章聚焦数字内创业平台的设计原则，旨在促进员工创意生成与协作，未涉及任何恶意行为者、攻击或安全防御，属于组织创新管理而非攻防安全。
+- The effect of intention analysis-based fraud detection systems in repeated supply Chain quality inspection: A context of learning and contract | 2020 | Information and Management | status=no_security_relevance
+  - reason: 研究关注供应链质量检验中的供应商产品欺诈与买方检测决策支持系统，属于供应链质量管理与经济欺诈，不涉及信息系统安全攻击或漏洞利用。
+- The human firewall: Investigating the impact of chronic motivational orientation, message framing, and cognitive constraints on phishing detection | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- The impact of ambidexterity on bid-winning performance: Evidence from an online crowdsourcing platform | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- The information processing of fake news: How intervention order influences perception over time | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- The nexus of mindfulness, affect, and information processing in phishing identification: An empirical examination | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- The relative values of big data analytics versus traditional marketing analytics to firm innovation: An empirical study | 2023 | Information and Management | status=no_security_relevance
+  - reason: 文章讨论大数据分析与传统营销分析对企业创新的相对价值，全文为商业分析、创新战略与绩效研究，不涉及任何恶意行为者或信息安全攻防内容。
+- To monitor or not to monitor: Effectiveness of a cyberloafing countermeasure | 2015 | Information and Management | status=no_security_relevance
+  - reason: 文章研究的是员工网络闲逛（cyberloafing）的管理对策，即互联网过滤与监控系统的有效性，不涉及恶意行为者或对信息系统安全属性的攻击/防御。
+- To shine or not to shine: Startup success prediction by exploiting technological and venture-capital-related features | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- Token fraud identification and implications for post-crowdfunding performance | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Toward it support for coordination in network organizations | 1996 | Information and Management | status=no_security_relevance
+  - reason: 文章研究网络组织中的协调与IT支持，核心是声誉评价和伙伴选择，不涉及任何恶意或对抗行为者，也不涉及信息系统的攻击、防御或漏洞。
+- Toward trustworthy web attack detection: An uncertainty-aware ensemble deep kernel learning model | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Towards developing fake and satire news detection policies using component-based SEM and interpersonal detection theory | 2026 | Information and Management | status=?
+  - reason: （无判定记录）
+- Transactive directories of organizational memory: Towards a working data model | 2012 | Information and Management | status=no_security_relevance
+  - reason: 全文围绕组织记忆的实体关系模型和知识管理，不涉及任何恶意行为者、攻击或安全防御。
+- Treasury management information systems and the contribution of information technology | 1987 | Information and Management | status=no_security_relevance
+  - reason: 文章研究企业司库管理中的信息流与IT使用，不涉及任何恶意行为者或攻击防御。
+- Trust calibration of automated security IT artifacts: A multi-domain study of phishing-website detection tools | 2021 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究用户对钓鱼网站检测工具的信任校准，恶意行为者（钓鱼攻击者）仅是背景，研究核心是用户信任与检测工具使用行为，而非攻击、漏洞或防御技术本身。
+- Two faces of freemium strategy in social games: The interplay between perceived enjoyment, envy, and in-app purchase intention | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- Understanding Web 2.0 service models: A knowledge-creating perspective | 2011 | Information and Management | status=no_security_relevance
+  - reason: 文章从知识创造视角分类 Web 2.0 服务模型，研究用户参与、知识管理和平台控制机制，不涉及任何恶意或对抗行为者，也不涉及攻击或漏洞的检测与防御。
+- Unraveling the behavioral influence of social media on phishing susceptibility: A Personality-Habit-Information Processing model | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- Unraveling the psychological links between organizational security climate and extra-role security behaviors | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- User opinion classification in social media: A global consistency maximization approach | 2016 | Information and Management | status=no_security_relevance
+  - reason: 文章研究社交媒体用户意见分类，属于一般观点挖掘与社交网络分析，无恶意行为者或信息系统安全攻击/防御内容。
+- Using information and information technology for sustainable competitive advantage: Some empirical evidence | 1989 | Information and Management | status=no_security_relevance
+  - reason: 文章研究企业利用信息与信息技术获取竞争优势，属于战略管理与组织因素研究，无恶意行为者或攻击防御内容。
+- VISTA: An inclusive insider threat taxonomy, with mitigation strategies | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- Variously and freely to use: Exploring routine and innovative use of fitness apps from a self-management perspective | 2024 | Information and Management | status=?
+  - reason: （无判定记录）
+- What are the trend and core knowledge of information security? A citation and co-citation analysis | 2023 | Information and Management | status=?
+  - reason: （无判定记录）
+- Who cares if we get hacked? The development and testing of a measure of information security apathy | 2025 | Information and Management | status=?
+  - reason: （无判定记录）
+- Your posts betray you: Detecting influencer-generated sponsored posts by finding the right clues | 2022 | Information and Management | status=?
+  - reason: （无判定记录）
+- “Standardizing information security – a structurational analysis” | 2022 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是信息安全标准制定过程中的组织合法性问题，不涉及恶意行为者或攻击/防御技术，属于组织安全治理范畴。
+- Above and beyond compliance: Investigating how non-market privacy activities impact consumer trust, privacy concerns and behavior intentions | 2026 | Information and Organization | status=?
+  - reason: （无判定记录）
+- Data governance and the secondary use of data: The board influence | 2023 | Information and Organization | status=?
+  - reason: （无判定记录）
+- Future directions for scholarship on data governance, digital innovation, and grand challenges | 2023 | Information and Organization | status=no_security_relevance
+  - reason: 全文围绕数据治理、数据共享、开放数据和社会挑战，属于组织与宏观层面的治理与政策研究，未以攻击或防御为核心。
+- Navigating the extended reach: Target experiences of cyberbullying at work | 2013 | Information and Organization | status=security_peripheral_context
+  - reason: 研究聚焦于职场网络欺凌的目标体验，虽然涉及恶意行为和信息滥用，但核心是组织行为学与心理学视角，而非信息系统安全的攻击、检测或防御。
+- Platform governance as institutional custodianship: multi-actor collaboration in combating AI-enabled mis/disinformation | 2025 | Information and Organization | status=?
+  - reason: （无判定记录）
+- Scaling a tech-mediated community: Prefigurative enrolling atop evolving institutional logics | 2026 | Information and Organization | status=?
+  - reason: （无判定记录）
+- The domestication of online technologies by smaller businesses and the 'busy day' | 2011 | Information and Organization | status=no_security_relevance
+  - reason: 全文研究小型住宿企业对在线技术的采用与驯化过程，属于技术采纳/组织行为研究，无恶意行为者或攻防安全核心。
+- The interface between technology and customer cyberbullying: Evidence from India | 2014 | Information and Organization | status=no_security_relevance
+  - reason: 研究核心是呼叫中心员工遭受客户言语欺凌的主观经历，属于职场虐待与组织行为研究，不涉及对信息系统、用户数据或系统安全属性的攻击或防御。
+- Unto the breach: What the COVID-19 pandemic exposes about digitalization | 2021 | Information and Organization | status=no_security_relevance
+  - reason: 文章以新冠疫情作为天然破坏性实验，讨论数字化进程中的不平等、模拟残留、算法脆弱性和全景监控，属于组织与社会层面的评论分析，不涉及恶意行为者或信息系统攻防。
+- A methodology for the evaluation of IT for strategic implementation | 1995 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章提出的是评估IT技术战略适用性的方法论，聚焦业务需求匹配、加权评分和投资风险，完全没有恶意行为者、攻击或信息安全损害相关内容。
+- A taxonomy of financial market manipulations: Establishing trust and market integrity in the financialized economy through automated fraud detection | 2017 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 本文核心是金融市场操纵分类与欺诈检测，属于金融市场监管与欺诈范畴，没有针对信息系统或安全属性的攻击-防御环节。
+- Big-data business models: A critical literature review and multiperspective research framework | 2020 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Buy the book: Electronic commerce in the book trade | 1999 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文为图书零售业的电子商务商业案例，聚焦网站建设、营销、竞争和版权，无恶意行为者或攻防安全内容。
+- Catalyst: A programme for change within british airways | 1991 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章描述英国航空公司的IT管理教育项目Catalyst，聚焦提升管理者对IT的战略理解与业务应用，未涉及任何恶意行为者、攻击或防御。
+- Crafting and executing an offshore IT sourcing strategy: GlobShop's experience | 2007 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章核心是离岸IT外包战略、供应商治理和变革管理，不涉及任何信息系统攻击或安全防御内容。
+- DCXNET: E-transformation at DaimlerChrysler | 2006 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Engaging scientometrics in information systems | 2017 | Journal of Information Technology | status=no_security_relevance
+  - reason: 本文是信息系统领域科学计量学与引文分析的理论综述，核心是学术评价与知识发展，不涉及恶意行为者或信息安全攻防。
+- How do IT outsourcing vendors develop capabilities? An organizational ambidexterity perspective on a multi-case study | 2020 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文研究IT外包供应商通过组织二元性发展能力以提升价值链，不涉及任何恶意行为者、攻击或安全防御。
+- Impact of ICT-enabled product and process innovations at the Bottom of the Pyramid: A market separations perspective | 2013 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Internationalization of the firm and impacts of videotex networks | 1992 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章研究videotex网络在企业国际化中的商业应用与影响，不涉及恶意行为者或攻击防御。
+- It’s not what you say, but how you say it: Using artifact intelligence to detect deception in natural speech in an HR recruiting context | 2026 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Legal aspects of knowledge-based technology | 1988 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 文章讨论知识型技术的法律所有权与责任问题，未涉及恶意行为者或攻防安全。
+- Local sociotechnical system development in the NHS National Programme for Information Technology | 2007 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 文章核心是NHS信息技术项目中的本地社会技术系统设计、组织变革和用户采纳行为，仅偶发提及保密担忧或智能卡访问限制，但这些是组织流程背景，并非以攻击、漏洞或防御为研究核心。
+- Management and the hybridization of expertise: EFTPOS in retrospect | 1997 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 文章核心是英国银行EFTPOS网络设计中的专业知识管理与组织位置问题，属于IT管理/创新研究，仅顺带提及PIN安全和加密算法选择，无恶意行为者，亦不以攻击或防御为研究核心。
+- Management and the hybridization of expertise: EFTPOS in retrospect | 1997 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 文章核心是英国银行EFTPOS网络设计中的专业知识管理与组织位置问题，属于IT管理/创新研究，仅顺带提及PIN安全和加密算法选择，无恶意行为者，亦不以攻击或防御为研究核心。
+- Marketing translation services internationally: Exploiting IT to achieve a smart network | 2004 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章是翻译服务公司的商业与IT案例研究，聚焦智能业务网络、营销策略和系统集成，未涉及任何恶意行为者、攻击或安全防御。
+- Network evolution towards ISDN services: A management perspective | 1998 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文是ISDN实施的管理案例研究，聚焦规划、供应商支持、网络演进等，安全仅作为运营考虑因素之一，没有恶意行为者或攻防研究核心。
+- Network evolution towards ISDN services: A management perspective | 1998 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文是ISDN实施的管理案例研究，聚焦规划、供应商支持、网络演进等，安全仅作为运营考虑因素之一，没有恶意行为者或攻防研究核心。
+- Orchestrating a digital platform ecosystem to address societal challenges: A robust action perspective | 2022 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Reforming work patterns or negotiating workloads? Exploring alternative pathways for digital productivity assistants through a problematization lens | 2024 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Risks inherent in the digital surveillance economy: A research agenda | 2019 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章关注数字监控经济中企业对个人数据的商业采集与利用，核心是隐私、消费者权益和社会影响，并非信息系统攻防安全。
+- The Indian software industry: Moving towards maturity | 1997 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文研究印度软件产业的成熟度、外包、市场与政策，未涉及攻击、漏洞或防御等攻防安全内容。
+- The anatomy of ‘fake news’: Studying false messages as digital objects | 2022 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- The attack on understanding: How big data and theory have led us astray: A comment on Gary Smith’s Data Mining Fool’s Gold | 2021 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- The four P9s revisited: Business value assessment of the infrastructure impact of IT investments | 1998 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- The regulation of and through information technology: Towards a conceptual ontology for IS research | 2023 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- The role of management accountants in information strategy | 1988 | Journal of Information Technology | status=no_security_relevance
+  - reason: 全文讨论管理会计师在信息战略中的作用与IT适应，未涉及任何攻击、漏洞或恶意行为者，安全仅作为一般管理职能提及。
+- The uptake and application of work flow management systems in the UK financial services sector | 1999 | Journal of Information Technology | status=no_security_relevance
+  - reason: 本文研究英国金融服务业中工作流管理系统的采用与应用，聚焦业务流程自动化、生产率提升和客户服务改进，未涉及恶意行为者或信息安全攻击/防御。
+- The uptake and application of work flow management systems in the UK financial services sector | 1999 | Journal of Information Technology | status=no_security_relevance
+  - reason: 本文研究英国金融服务业中工作流管理系统的采用与应用，聚焦业务流程自动化、生产率提升和客户服务改进，未涉及恶意行为者或信息安全攻击/防御。
+- Theory - Still king but needing a revolution | 2014 | Journal of Information Technology | status=?
+  - reason: （无判定记录）
+- Understanding information disclosure behaviour in Australian facebook users | 2010 | Journal of Information Technology | status=security_peripheral_context
+  - reason: 研究核心是用户信息披露行为与隐私感知，身份盗窃等威胁仅为背景动机，未涉及攻击或防御的技术研究。
+- What drives the configuration of information technology projects? Exploratory research in 10 organizations | 2003 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章研究IT项目配置的管理驱动因素，不涉及恶意行为者、攻击或安全防御。
+- A comparison of classification methods for predicting deception in computer-mediated communication | 2004 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 研究核心是通用人际交流中的欺骗检测（谎言识别），而非针对信息系统、系统用户或数据的恶意攻击或防御。
+- Antecedents and effects of CIO supply-side and demand-side leadership: A staged maturity model | 2010 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Approaching IT Security & Avoiding Threats in the Smart Home Context | 2022 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Artificial Intelligence Recommendations Amplify the Sharing of True and Fake News on Social Media by Appealing to Fast Cognition | 2025 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Biased Credibility and Sharing of Fake News on Social Media: Considering Peer Context and Self-Objectivity State | 2021 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究社交媒体用户对假新闻的可信度与分享偏见，属于行为心理研究，未涉及攻击者、系统漏洞或攻防评估。
+- Can Correction Messages Reduce the Spread of Fake News on Social Media? The Impact of Information Updates on the Effectiveness of Corrections | 2025 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Chain of Values: Examining the Economic Impacts of Blockchain on the Value-Added Tax System | 2021 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章核心是区块链在增值税系统应用的经济博弈与福利分析，VAT少报仅作为背景，并非网络安全意义上的攻击或防御研究。
+- Competition and Cognition in the Market for Online News | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Cyber Failures and Information Technology Capability Reputation: Examining Ex Ante and Ex Post Interplay Effects | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Dark Clouds on the Horizon? Effects of Cloud Storage on Security Breaches | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Defending Deep Learning-Based Raw Malware Detectors Against Adversarial Attacks: A Sequence Modeling Approach | 2025 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Dependency Network Structure and Security Vulnerabilities in Software Supply Chains | 2025 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Development of a measure for the organizational learning construct | 2002 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章聚焦组织学习构念的测量工具开发，全文无恶意攻击者、安全损害或攻防检测内容，与攻防安全无关。
+- Emotions: The Unexplored Fuel of Fake News on Social Media | 2021 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Enhancing Vulnerability Prioritization in Cloud Computing Using Multi-View Representation Learning | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Environmental Scanning for Information Technology: An Empirical Investigation | 1997 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究组织如何扫描外部IT环境以识别和采用新兴信息技术，属于一般战略管理/信息系统采纳研究，不涉及任何恶意或对抗行为者，也不涉及攻击、漏洞或安全防御。
+- Exploitation and exploration networks in open source software development: An artifact-level analysis | 2015 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 全文研究OSS项目中补丁开发与功能请求活动的社会网络结构对项目成功的影响，未涉及恶意行为者、攻击或安全防御。
+- Gaining Competitive Advantage for Trading in Emerging Capital Markets with Neural Networks | 1999 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 全文研究神经网络利用外部市场信号预测新兴股市指数以获取交易优势，属于金融预测与优化，不涉及任何恶意行为者或信息系统攻防安全。
+- Health of electronic communities: An evolutionary game approach | 2004 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章以演化博弈模型研究电子社区中诚实成员与欺诈者的信任动态和社区健康，核心是经济激励与声誉惩罚，而非信息系统安全属性的攻击或防御。
+- Health-care security strategies for data protection and regulatory compliance | 2013 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- How posture-profile misalignment in IT innovation diminishes returns: Conceptual development and empirical demonstration | 2014 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 全文研究IT创新姿态与资源画像错位对IT采用收益（生产力）的影响，未涉及任何恶意行为者、攻击或安全防御。
+- Impact of information systems on market structure and function: Developing and testing theories | 2008 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Improving Imbalanced Machine Learning with Neighborhood-Informed Synthetic Sample Placement | 2022 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Improving Phishing Reporting Using Security Gamification | 2022 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Improving Threat Mitigation Through a Cybersecurity Risk Management Framework: A Computational Design Science Approach | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Influence of Firm’s Recovery Endeavors upon Privacy Breach on Online Customer Behavior | 2016 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 本文核心是企业隐私泄露后的服务恢复措施对顾客口碑与转换行为的影响，黑客攻击仅作为事件背景，不涉及攻击实施、检测、防御或威胁建模。
+- Information Technology Innovativeness and Data-Breach Risk: A Longitudinal Study | 2023 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Information exploitation and interorganizational systems ownership | 2004 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究跨组织系统所有权和信息利用的经济激励，核心是商业机会主义而非恶意攻击或防御。
+- Information technology at rosenbluth travel: Competitive advantage in a rapidly growing global service company | 1991 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章为罗森布鲁斯旅行社利用信息技术获取竞争优势的商业案例，不涉及任何恶意行为者或攻击防御安全内容。
+- Investments in information security: A real options perspective with Bayesian postaudit | 2009 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 研究核心是信息安全投资的实物期权估值与贝叶斯后审计，属于安全经济学与投资决策，而非攻击、漏洞的检测、防御或评估。
+- Leveraging Financial Social Media Data for Corporate Fraud Detection | 2018 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是企业财务欺诈检测，利用金融社交媒体文本特征识别虚假财务报表，属于会计/金融欺诈领域，不涉及信息系统攻击、漏洞利用或对抗性安全行为。
+- Managing interdependent information security risks: Cyberinsurance, managed security services, and risk pooling arrangements | 2013 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究信息安全风险的风险管理经济学（网络保险、风险池、安全外包），黑客仅作为背景动机，核心不是攻击行为或攻防技术。
+- Market Dominance as a Precursor of a Firm's Failure: Emerging Technologies and the Competitive Advantage of New Entrants | 1996 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是市场竞争战略，新进入者通过商业手段（如低价格、细分客户）削弱主导企业，没有针对信息系统的恶意行为者，不涉及攻防安全。
+- Mining Semantic Soft Factors for Credit Risk Evaluation in Peer-to-Peer Lending | 2020 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究P2P借贷中基于描述性贷款文本的信用风险（违约）预测，属于一般金融信用风险评估，无恶意行为者或攻防安全内容。
+- Organizational Learning during Advanced System Development: Opportunities and Obstacles | 1996 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究高级信息系统开发中的组织学习，没有涉及任何恶意行为者、攻击或安全防御。
+- Organizations' information security policy compliance: Stick or carrot approach? | 2012 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究员工对信息安全政策的合规意愿，聚焦于惩罚与奖励等管理控制机制，未将恶意或对抗行为者作为研究对象，属于安全政策合规的组织治理范畴。
+- Patch release behaviors of software vendors in response to vulnerabilities: An empirical analysis | 2012 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Protecting Against Threats to Information Security: An Attitudinal Ambivalence Perspective | 2021 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章核心是保护动机理论与态度矛盾对用户采用双因素认证行为的影响，属于信息安全行为研究，并非以攻击实施或威胁检测/防御为研究核心，恶意行为者仅作为背景威胁出现。
+- Risk of Cyberattacks Arising from Strategic Alliances with Big Tech | 2025 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Role of Monetary Incentives in the Digital and Physical Inter-Border Labor Flows | 2018 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是货币激励对跨境数字与物理劳动力供给的影响，属于在线劳动力市场经济分析，不涉及任何恶意行为者、攻击或安全防御问题。
+- Situational Contingencies in Susceptibility of Social Media to Phishing: A Temptation and Restraint Model | 2023 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Special Issue: Information Systems for Deception Detection | 2016 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Strategizing Responses to Data Breaches: A Multi-Method Study of Organizational Responsibility and Effective Communication with Stakeholders | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- The Empowering and Competition Effects of the Platform-Based Sharing Economy on the Supply and Demand Sides of the Labor Market | 2021 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究共享经济平台Uber进入对劳动力市场的影响，属经济学/劳动力市场实证研究，全文不涉及任何恶意行为者、攻击、漏洞或安全防御。
+- The Role of Corporate Reputation and Crisis Response Strategies in Data Breach Management | 2018 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 数据泄露仅作为危机背景，研究核心是企业声誉和危机响应策略对股价的影响，而非攻击行为本身或其检测、防御、缓解。
+- The effect of communication frequency and channel richness on the convergence between chief executive and chief information officers | 2005 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究CEO与CIO沟通频率和渠道丰富性对双方关于IT角色共识的影响，属于组织沟通与IS战略领域，不涉及任何恶意行为者或攻击防御。
+- The influence of experiential and dispositional factors in phishing: An empirical investigation of the deceived | 2010 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- The relationship of e-commerce competence to customer value and firm performance: An empirical investigation | 2005 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究电子商务能力、客户价值与公司绩效的关系，属于组织绩效与顾客价值研究，全文无攻击者、恶意行为或攻防安全问题。
+- The “Darth” Side of Technology Use: An Inductively Derived Typology of Cyberdeviance | 2018 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 文章核心是归纳推导工作场所网络越轨行为的类型学，属于组织行为与IS使用研究；虽然包含计算机滥用、黑客入侵等安全威胁行为，但研究问题不是攻击实施或防御检测，安全威胁仅作为行为背景而非研究对象。
+- Too Busy to Be Manipulated: How Multitasking with Technology Improves Deception Detection in Collaborative Teamwork | 2020 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究多任务处理对团队内欺骗检测的影响，属于人际沟通与团队行为研究，不涉及信息系统攻击或漏洞的攻防安全。
+- Understanding nonmalicious security violations in the workplace: A composite behavior model | 2011 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 研究聚焦非恶意安全违规（NMSV）的行为动机，明确排除恶意意图，属于组织安全政策与用户行为研究，而非攻防安全。
+- Unintended Consequences of Disclosing Recommendations by Artificial Intelligence versus Humans on True and Fake News Believability and Engagement | 2024 | Journal of Management Information Systems | status=?
+  - reason: （无判定记录）
+- Versioning: Go Vertical in a Horizontal Market? | 2016 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究信息商品版本化与消费者学习的经济模型，不涉及任何恶意行为者或信息安全攻击/防御，属于一般商业策略研究。
+- Who Do You Think You Are? Common and Differential Effects of Social Self-Identity on Social Media Usage | 2017 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 本文研究社会自我认同（社会认同、关系认同）与惯性对社交媒体强化使用和多样化使用的影响，属于一般用户行为研究，不含恶意行为者、攻击或防御内容。
+- Whose and What Social Media Complaints Have Happier Resolutions? Evidence from Twitter | 2017 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究社交媒体上客户投诉解决满意度的影响因素（影响力、先前投诉、投诉类型），核心是消费服务与投诉管理，不涉及任何恶意或对抗行为者，也没有信息系统安全属性攻击或防御。
+- Capital One Financial and a decade of experience with newly vulnerable markets: Some propositions concerning the competitive advantage of new entrants | 2008 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章研究Capital One利用信息战略进入新脆弱商业市场的案例，属于竞争战略与信息经济学，不涉及信息系统安全意义上的攻击或防御。
+- Decision-making and biases in cybersecurity capability development: Evidence from a simulation game experiment | 2019 | Journal of Strategic Information Systems | status=security_peripheral_context
+  - reason: 研究聚焦于管理者在网络安全能力投资中的决策偏差与学习效果，网络安全情境仅是模拟背景，恶意行为者并非研究核心，属于组织决策与培训研究。
+- Digital new market creation by incumbent firms: A political lens on the effect of formalization on agility | 2023 | Journal of Strategic Information Systems | status=?
+  - reason: （无判定记录）
+- Enterprise reputation threats on social media: A case of data breach framing | 2019 | Journal of Strategic Information Systems | status=security_peripheral_context
+  - reason: 文章研究数据泄露危机后社交媒体公众舆论与声誉威胁的框架和情绪传播，核心是危机沟通与声誉管理，不属于攻击或漏洞检测/防御。
+- Factors of stickiness in transfers of know-how between MNC units | 2012 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章研究跨国公司单元间知识转移的粘性因素，核心是组织知识管理与社会资本，不涉及恶意行为者或信息安全攻防。
+- Firm diversity and data breach risk: A longitudinal study | 2022 | Journal of Strategic Information Systems | status=?
+  - reason: （无判定记录）
+- How do IT misalignments and IT ambidexterity imbalances lead to organizational agility? Substitution, complementarity, and contingency interdependencies with a configurational approach | 2025 | Journal of Strategic Information Systems | status=?
+  - reason: （无判定记录）
+- Internet privacy concerns and beliefs about government surveillance - An empirical investigation | 2008 | Journal of Strategic Information Systems | status=security_peripheral_context
+  - reason: 文章为互联网隐私担忧与政府监控态度的实证研究，核心是用户主观感知而非攻击/防御，属于排除的隐私态度类型。
+- Mobility at work: A typology of mobile communities of practice and contextual ambidexterity | 2013 | Journal of Strategic Information Systems | status=?
+  - reason: （无判定记录）
+- Paradoxical effects of institutionalisation on the strategic awareness of technology in organisations | 2010 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章研究内网技术制度化后战略意识下降及运营风险，不涉及攻击者、恶意行为或攻防对抗，属于组织战略管理研究。
+- Problems, knowledge, solutions: Solving complex problems | 1998 | Journal of Strategic Information Systems | status=security_peripheral_context
+  - reason: 文章以毒品和网络犯罪为例讨论一般复杂问题解决方法论，网络犯罪仅作为例证，未以攻击或防御为核心。
+- Seeking strategic advantage in the post-net era: Viewing ERP systems from the resource-based perspective | 2004 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章讨论ERP系统能否带来持续竞争优势，属于战略信息系统与资源基础观研究，无恶意行为者或攻防安全内容。
+- Site-shifting as the source of ambidexterity: Empirical insights from the field of ticketing | 2014 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章研究的是企业通过IT实践变化实现双元性（探索与利用）的战略管理案例，不涉及恶意行为者或攻防安全。
+- Sustaining collaborative software development through strategic consortium | 2021 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 全文围绕Kuali联盟式开源软件开发的探索与利用平衡，不涉及攻击、漏洞或恶意行为者。
+- The whole of cyber defense: Syncing practice and theory | 2024 | Journal of Strategic Information Systems | status=?
+  - reason: （无判定记录）
+- Transforming the organization: the contribution of the information systems function | 1995 | Journal of Strategic Information Systems | status=no_security_relevance
+  - reason: 文章讨论组织转型、业务流程重构和信息系统功能对齐，无任何攻击、威胁或信息安全防御研究内容。
+- A behavioral analysis of passphrase design and effectiveness | 2009 | Journal of the Association for Information Systems | status=security_peripheral_context
+  - reason: 文章核心是用户对passphrase的记忆、打字错误及感知的行为学实验，密码攻击仅作为强度评估背景，恶意行为者不是研究问题本身的核心对象。
+- A framework for validating information systems research based on a pluralist account of truth and correctness | 2020 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章讨论信息系统研究验证的哲学框架（真理与正确性），不涉及任何恶意行为者、攻击或防御，与攻防安全无关。
+- An information diffusion-based recommendation framework for micro-blogging | 2011 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究的是基于信息扩散的微博推荐系统，旨在帮助用户在紧急事件中寻找高质量新闻源，未涉及任何恶意行为者或信息系统攻击/防御。
+- Business value of IT: An essay on expanding research directions to keep up with the times | 2008 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文讨论IT商业价值、投资回报、价值共创等，无任何恶意行为者或攻击防御内容。
+- Cyberbullying victimization through social networking sites and adjustment difficulties: The role of parental mediation | 2018 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 研究核心是网络欺凌受害者的抑郁焦虑及父母中介策略，属于心理学/行为研究，未涉及信息系统攻击或防御。
+- Designing social nudges for enterprise recommendation agents: An investigation in the business intelligence systems context | 2018 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究企业推荐代理中利用社会影响设计助推以引导用户选择报告，属于行为经济学与信息系统设计研究，不涉及任何恶意或对抗行为者、攻击或防御。
+- Examining Solver Performance in Crowdsourcing Contests: Does Ambidexterity Matter? | 2025 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究众包竞赛中求解者的探索与利用（ambidexterity）对绩效的影响，完全不涉及恶意行为者、攻击、漏洞或安全防御。
+- How to Develop IT Ambidexterity: Insights from the Perspective of CIO-TMT Mutual Communication | 2025 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 研究聚焦CIO与TMT正式/非正式沟通对IT双元能力（利用与探索）的影响，属于组织IT管理研究，全文无任何恶意行为者、攻击、漏洞或安全防御内容。
+- IT-enabled knowledge creation for open innovation | 2014 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究开放源代码团队的知识创造与开放创新，关注知识管理而非任何攻击、漏洞或防御。
+- Impact of social media on the firm’s knowledge exploration and knowledge exploitation: The role of business analytics talent | 2021 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究企业社交媒体能力对知识探索与知识开发的影响及商业分析人才的调节作用，涉及组织知识管理和IT价值，未涉及任何恶意行为者、攻击或安全防御。
+- Knowing What to Acquire in the Digital Technology Industry: Balancing Exploitation and Exploration for Superior Performance | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究数字科技企业并购、知识探索与利用的平衡及企业绩效，属于组织战略与管理研究，不涉及恶意或对抗行为者，也未围绕攻击、漏洞或安全防御。
+- Management misinformation systems: A time to revisit? | 2017 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 本文是重新审视Ackoff经典论文的管理信息系统评论，核心讨论管理者决策中的信息过载、大数据分析、数据发现与共享等，未涉及任何恶意或对抗行为者，也非攻击或漏洞研究。
+- Mechanisms for Achieving Ambidexterity in the Context of Digital Transformation: Insights from Digital Innovation Labs | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究数字化转型中的组织双元性机制，核心是数字创新实验室的员工轮换与探索/利用平衡，不涉及任何攻击、威胁或信息安全防御内容。
+- Online comment moderation policies for deliberative discussion–seed comments and identifiability | 2018 | Journal of the Association for Information Systems | status=security_peripheral_context
+  - reason: 文章研究提升在线评论审慎讨论质量（种子评论与可识别性），恶意评论仅作为背景动机，不涉及攻击、漏洞或威胁检测防御等攻防安全核心。
+- Optimal Launch Timing of Bug Bounty Programs for Software Products under Different Licensing Models | 2024 | Journal of the Association for Information Systems | status=security_peripheral_context
+  - reason: 文章以软件企业利润最大化为核心，研究漏洞赏金计划（BBP）的最佳启动时机，虽涉及漏洞检测但属于安全投资经济学，恶意攻击者仅作为背景，未成为研究核心。
+- Product Differentiation in IT Industries: The Interplay between M&As and In-House Innovation and Exploitative Innovation Orientation | 2023 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究并购与产品差异化的关系，属于商业创新战略，不涉及任何恶意行为者或信息系统安全攻击/防御。
+- Revisiting the impact of system use on task performance: an exploitative-explorative system use framework | 2019 | Journal of the Association for Information Systems | status=?
+  - reason: （无判定记录）
+- Robbing peter to pay paul: Surrendering privacy for security’s sake in an identity ecosystem | 2017 | Journal of the Association for Information Systems | status=security_peripheral_context
+  - reason: 文章研究个体在身份生态系统中为获取安全而放弃隐私的决策影响因素，核心是用户行为与信任感知，而非攻击或防御技术本身。
+- The Backstory of “An Adversarial Dance” | 2023 | Journal of the Association for Information Systems | status=?
+  - reason: （无判定记录）
+- The Impact of Feature Exploitation and Exploration on Mobile Application Evolution and Success | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 研究聚焦移动应用更新中利用与探索活动的平衡对市场成功的影响，全篇无恶意行为者、无攻击或漏洞相关研究核心。
+- The Influences of Public and Institutional Pressure on Firms’ Cybersecurity Disclosures | 2022 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究企业网络安全披露的驱动因素（公众压力和制度压力），核心是合法性理论与自愿披露行为，数据泄露仅作为情境事件，未涉及攻击技术或具体攻防机制。
+- The Role of Online and Geographically Distant Social Networks in Political Decision-Making: Empirical Evidence from the 2016 United States Presidential Election | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究社交连接（Facebook SCI）对选举投票决策的影响，不涉及任何恶意行为者、攻击或信息安全攻防。
+- Tragedy, Truth, and Technology: The 3T Theory of Social Media-Driven Misinformation | 2023 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文核心是提出一种理论解释社交媒体错误信息如何通过用户怀疑、辩证、强化等认知过程导致有害行为，没有以恶意行为者或对信息系统的攻击与防御为研究问题。
+- Understanding ambidexterity: Managing contradictory tensions between exploration and exploitation in the evolution of digital infrastructure | 2019 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究的是企业数字基础设施演化中的组织双元能力（探索与利用的平衡），不涉及任何恶意行为者或攻防安全问题。
+- Understanding information security policy violation from a situational action perspective | 2021 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究的是员工违反信息安全政策的行为意图及其道德、威慑、自我控制等前因，未涉及恶意行为者或攻击/漏洞防御等攻防安全核心内容，仅为组织安全政策遵从的行为研究。
+- A deep learning approach for recognizing activity of daily living (adl) for senior care: Exploiting interaction dependency and temporal patterns | 2021 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是面向老年人照护的日常活动识别（ADL）深度学习框架，不涉及任何恶意或对抗行为者、攻击或漏洞，安全仅作为未来设计原则的次要提及。
+- AN EMPIRICAL INVESTIGATION OF COMPANY RESPONSE TO DATA BREACHES1 | 2022 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- AUTOMATICALLY DETECTING VOICE PHISHING: A LARGE AUDIO MODEL APPROACH | 2026 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Addressing the personalization-privacy paradox: An empirical assessment from a field experiment on smartphone users | 2013 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Adoption of identity theft countermeasures and its short- And long-term impact on firm value | 2019 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- An empirical investigation of net-enabled business value | 2004 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Avoidance of information technology threats: A theoretical perspective | 2009 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- BEHAVIOR TOWARD NEWCOMERS AND CONTRIBUTIONS TO ONLINE COMMUNITIES | 2025 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 研究核心是在线社区中通过新手提示干预促进新人社会化，关注评论数量、情感、留存和贡献质量，不涉及对信息系统或用户的恶意攻击或安全防御。
+- Beyond deterrence: An expanded view of employee computer abuse | 2013 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Beyond sabre: An empirical test of expertise exploitation in electronic channels | 2002 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Bidding behavior evolution in sequential auctions: Characterization and analysis | 2012 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文研究在线序贯拍卖中投标者的行为演化与策略选择，属于正常拍卖机制与用户行为分析，不涉及任何恶意或对抗行为者，也没有系统安全属性损害。
+- CROSS-LINGUAL CYBERSECURITY ANALYTICS IN THE INTERNATIONAL DARK WEB WITH ADVERSARIAL DEEP REPRESENTATION LEARNING1 | 2022 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Circuits of power: A study of mandated compliance to an information systems security de jure standard in a government organization | 2010 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 研究核心是政府机构对信息安全标准强制合规过程中的权力、抵抗与组织文化，属于安全治理与合规研究，未以攻击或漏洞的检测、防御、评估为核心。
+- Cocreation of valueina platform ecosystem : the case of enterprise software | 2012 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文研究独立软件厂商加入SAP平台生态系统对销售和IPO绩效的影响，以及知识产权和下游能力的调节作用，未涉及恶意行为者、攻击、漏洞或安全防御。
+- Creation of favorable user perceptions: Exploring the role of intrinsic motivation | 1999 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文聚焦于通过游戏化培训提升用户对系统的易用性感知、有用性感知和使用意向，是技术接受模型与动机理论的用户行为研究，未涉及任何攻击者、恶意行为或信息安全威胁。
+- Cybercrime deterrence and international legislation: Evidence from distributed denial of service attacks | 2017 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- DICE-E: A framework for conducting Darknet identification, collection, evaluation with ethics | 2019 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- DIFFERENT BUT THE SAME? AN EVENT-DRIVEN APPROACH TO DETERMINE PROBABILITIES OF DATA DUPLICATION | 2025 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是数据质量领域的重复检测（data duplication detection），基于事件驱动的概率模型识别重复数据记录，不涉及恶意或对抗行为者或信息安全攻防。
+- DISCOVERING EMERGING THREATS IN THE HACKER COMMUNITY: A NONPARAMETRIC EMERGING TOPIC DETECTION FRAMEWORK1 | 2022 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- DISINFORMATION SPILLOVER: UNCOVERING THE RIPPLE EFFECT OF BOT-ASSISTED FAKE SOCIAL ENGAGEMENT ON PUBLIC ATTENTION1 | 2024 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- DOES RANSOMWARE MAKE INVESTORS “WANNACRY”? ON INVESTORS’ DIVERGENT REACTIONS TO RANSOMWARE HITS AND NEAR MISSES | 2025 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究投资者对勒索软件事件披露的股票市场反应，属于行为金融/事件研究，勒索软件攻击仅作为背景事件，核心是投资者决策偏差，而非攻击实施或安全防御。
+- DOES SHARING MAKE MY DATA MORE INSECURE? AN EMPIRICAL STUDY ON HEALTH INFORMATION EXCHANGE AND DATA BREACHES1 | 2024 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Design capital and design moves: The logic of digital business strategy | 2013 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Developing capabilities to use information strategically | 1988 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章讨论企业如何战略性地利用信息技术获取竞争优势，属于一般管理和组织能力研究，不涉及任何恶意行为者或攻防安全内容。
+- EXAMINING THE NEURAL BASIS OF INFORMATION SECURITY POLICY VIOLATIONS: A NONINVASIVE BRAIN STIMULATION APPROACH1 | 2021 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- EXPLOITING EXPERT KNOWLEDGE FOR ASSIGNING FIRMS TO INDUSTRIES: A NOVEL DEEP LEARNING METHOD | 2023 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文研究的是将企业分配到行业分类体系（NAICS/GICS）的深度学习分类方法，属于一般预测与分类优化，不涉及任何恶意或对抗行为者，也不涉及信息系统的攻防安全。
+- Ethics and information systems: The corporate domain | 1999 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章聚焦企业领域IS伦理决策，应用商业伦理理论分析数据使用与隐私问题，不涉及恶意行为者、攻击或防御。
+- Examining the relational benefits of improved interfirm information processing capability in buyer-supplier Dyads | 2013 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Fake news on social media: People believe what they want to believe when it makes no sense at All | 2019 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- HOW MERGERS AND ACQUISITIONS INCREASE DATA BREACHES: A COMPLEXITY PERSPECTIVE | 2025 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章核心是并购活动导致的组织复杂性如何增加数据泄露次数，属于企业战略与安全结果间的关系研究；恶意行为者仅在背景机制中被提及，并非研究问题核心，且未围绕攻击、防御、检测或漏洞建模展开。
+- How do suppliers benefit from information technology use in supply chain relationships? | 2004 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- How ethics can enhance organizational privacy: Lessons from the ChoicePoint and TJX data breaches | 2009 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- How should technology-mediated organizational change be explained? A comparison of the contributions of critical realism and activity theory | 2013 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章比较批判实在论与活动理论解释技术中介的组织变革，核心是理论框架与组织变革案例，不涉及恶意行为者或攻击/防御。
+- IMPACT OF CUSTOMER COMPENSATION STRATEGIES ON OUTCOMES AND THE MEDIATING ROLE OF JUSTICE PERCEPTIONS: A LONGITUDINAL STUDY OF TARGET’S DATA BREACH | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章研究核心是数据泄露后顾客对补偿策略的公平感知及行为意向，属于组织响应/服务恢复/消费者行为研究，不涉及攻击者、攻击实施或检测防御。
+- Inducing sensitivity to deception in order to improve decision making performance: A field study | 2002 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Information spillover and semi-collaborative networks in insurer fraud detection | 2018 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Is cybersecurity A team sport? A multilevel examination of workgroup information security effectiveness | 2020 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 研究核心是工作群体信息安全有效性，考察个体自我效能感通过集体效能和知识协调对安全评估绩效的影响，属于组织行为/安全管理，未以恶意行为者或攻击/漏洞检测防御为研究对象。
+- Is hidden safe? Location protection against machine-learning prediction attacks in social networks | 2021 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- LINKING EXPLOITS FROM THE DARK WEB TO KNOWN VULNERABILITIES FOR PROACTIVE CYBER THREAT INTELLIGENCE: AN ATTENTION-BASED DEEP STRUCTURED SEMANTIC MODEL1 | 2022 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Management of large software development efforts | 1980 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章讨论大型软件开发的项目管理、软件工程实践与组织设计，未涉及任何攻击、恶意行为者或信息安全威胁。
+- Managing the knowledge supply chain: An organizational learning model of information technology offshore outsourcing | 2008 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Meaningful healthcare security: Does meaningful-use attestation improve information security performance? | 2018 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Metafraud: A meta-learning framework for detecting financial fraud | 2012 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是财务报表欺诈检测，属于金融欺诈与会计审计领域，不涉及针对信息系统、用户或数据的恶意对抗行为或安全属性的攻防。
+- NO NEWS IS BAD NEWS: THE INTERNET, CORRUPTION, AND THE DECLINE OF THE FOURTH ESTATE | 2024 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 研究核心是报纸关闭与腐败指控增加的关系，腐败属于现实世界政治/经济犯罪，不涉及对信息系统、用户或数据的安全攻击，亦非攻防安全研究。
+- Organizational strategies for personal computing in decision support systems | 1981 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章讨论组织中个人计算与决策支持系统的策略，涉及管理控制和数据完整性，但未以恶意行为者或攻击防御为核心。
+- Peer-to-Peer Loan Fraud Detection: Constructing Features from Transaction Data | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是P2P贷款欺诈检测（金融欺诈），欺诈者通过虚假借款请求和虚假投标骗取资金，不涉及对信息系统安全属性（机密性、完整性、可用性、真实性）的攻击，因此排除。
+- Performance effects of information technology synergies in multibusiness firms | 2006 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章研究多业务企业IT资源相关性与互补性对企业绩效的影响，主题是IT协同与企业绩效，不涉及任何恶意行为者、攻击、漏洞或安全防御。
+- Product-related deception in E-commerce: A theoretical perspective | 2011 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- REGULATING DIGITAL PLATFORM ECOSYSTEMS THROUGH DATA SHARING AND DATA SILOING: CONSEQUENCES FOR INNOVATION AND WELFARE1 | 2025 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Reconstructing the systems development organization | 1989 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章讨论信息系统开发组织的维护与开发工作结构重构，属于组织管理优化，不涉及任何攻击、漏洞或防御。
+- SEEING IS BELIEVING? HOW INCLUDING A VIDEO IN FAKE NEWS INFLUENCES USERS’ REPORTING OF FAKE NEWS TO SOCIAL MEDIA PLATFORMS1 | 2022 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- SOCIAL MEDIA MODERATION AND CONTENT GENERATION: EVIDENCE FROM USER BANS | 2026 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 研究核心是用户封禁策略对内容生成行为的影响，属于平台治理研究，未涉及攻击或威胁的检测与防御。
+- Says who? The effects of presentation format and source rating on fake news in social media | 2019 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- See no evil, hear no evil? Dissecting the impact of online hacker forums | 2019 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Show me the way to go home: An empirical investigation of ride-sharing and alcohol related motor vehicle fatalities | 2017 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Surge Pricing and Short-Term Wage Elasticity of Labor Supply in Real-Time Ridesharing Markets | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章研究网约车司机劳动力供给对工资的弹性，属于行为经济学和共享经济研究，不涉及任何恶意行为者或信息系统攻防安全问题。
+- THE OPM DATA BREACH: AN INVESTIGATION OF SHARED EMOTIONAL REACTIONS ON TWITTER | 2022 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章以2015年OPM数据泄露为背景，研究公众在Twitter上的情绪反应、情绪共享和情绪驱动因素，核心是危机沟通与情感分析，而非攻击实施或安全防御。
+- THE PATH OF THE RIGHTEOUS: USING TRACE DATA TO UNDERSTAND FRAUD DECISIONS IN REAL TIME | 2022 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 研究核心是通过鼠标轨迹检测在线保险索赔等场景中的欺诈决策，虽然没有网络攻击成分，但属于对信息系统数据真实性的操纵与滥用；然而欺诈性质为传统金融欺诈，未被纳入攻防安全核心。
+- TIME WILL TELL: THE CASE FOR AN IDIOGRAPHIC APPROACH TO BEHAVIORAL CYBERSECURITY RESEARCH | 2024 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究行为网络安全中的员工信息安全政策遵从及其中立化机制，属于安全政策合规和行为研究，不围绕恶意行为者、攻击或漏洞，也未以攻防检测/防御为核心。
+- The effects of communication media and culture on deception detection accuracy | 2018 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- The effects of virtual reality on consumer learning: An empirical investigation | 2005 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- The impact of malicious agents on the enterprise software industry | 2010 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- The impact of the sharing economy on household bankruptcy | 2021 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- The transformation of open source software | 2006 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Tweet to the top? Social media personal branding and career outcomes | 2021 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文研究社交媒体个人品牌对高管职业成果的影响，未涉及任何恶意行为者、攻击或安全防御。
+- UNITED WE STAND, DIVIDED WE FALL: AN AUTOGENIC PERSPECTIVE ON EMPOWERING CYBERSECURITY IN ORGANIZATIONS | 2024 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章以网络安全为背景，但研究核心是网络安全小组的心理赋权及其组织生成过程，属于组织行为与安全治理研究，而非攻击或漏洞的检测、防御、评估或建模。
+- USER compensation as a data breach recovery action: An investigation of the sony playstation network breach | 2017 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- Understanding the CEO/CIO relationship | 1992 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章研究CEO与CIO之间的管理关系，不涉及任何恶意行为者、攻击或安全防御。
+- WEARABLE SENSOR-BASED CHRONIC CONDITION SEVERITY ASSESSMENT: AN ADVERSARIAL ATTENTION-BASED DEEP MULTISOURCE MULTITASK LEARNING APPROACH | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文聚焦于可穿戴传感器和深度学习模型的帕金森病严重程度评估，不涉及任何恶意行为者、信息系统攻击或安全防御内容。
+- WHERE IS IT IN INFORMATION SECURITY? THE INTERRELATIONSHIP AMONG IT INVESTMENT, SECURITY AWARENESS, AND DATA BREACHES1 | 2023 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- When do it security investments matter? Accounting for the influence of institutional factors in the context of healthcare data breaches | 2017 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）
+- “COMPLEXITY IS THE WORST ENEMY OF SECURITY”: STUDYING CYBERSECURITY THROUGH THE LENS OF ORGANIZATIONAL COMPLEXITY | 2025 | MIS Quarterly: Management Information Systems | status=?
+  - reason: （无判定记录）

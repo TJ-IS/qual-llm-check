@@ -1,0 +1,1795 @@
+# Impact of Incentive Mechanism in Online Referral Programs: Evidence from Randomized Field Experiments
+
+- 作者：Jaehwuen Jung; Ravi Bapna; Alok Gupta; Soumya Sen
+- 年份 / 期刊：2021 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2021.1870384
+- 源文件：25382_2021_impact-of-incentive-mechanism-in-online-referral-programs-evidence-from-randomized-field-experim.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.84
+
+## 文章级论证概况
+
+- 核心问题：在线推荐项目中，推荐奖励如何在邀请者与受邀者之间分配（纯自利、均分、纯慷慨）才能最大化口碑传播所带来的数字产品采纳？其背后的行为机制是什么？
+
+- 制品与设计：本文的制品不是软件系统，而是数字激励制度设计。作者与两家移动社交游戏公司合作，在真实App中随机分配用户进入无奖励无提醒控制组（C1）、仅提醒控制组（C2）、自利奖励组（T1，邀请者得全部）、均分奖励组（T2，双方各半）、慷慨奖励组（T3，受邀者得全部）。实验1利用App无在线邀请功能的特点测量线下面对面口碑；实验2在App内嵌入在线邀请渠道，追踪邀请发送、接受和转化。
+
+- 客观结果：两个随机田野实验一致显示：均分与慷慨方案比控制组和自利方案产生显著更多的成功转化；慷慨方案比均分方案略高但差异不显著；自利方案中邀请者发送的邀请最少；受邀者接受率在均分和慷慨方案中显著更高；邀请者App使用经验与均分/慷慨方案的交互显著为正，表明亲社会方案部分通过更精准的选择性推荐提升转化。
+
+- 核心贡献：作者声称首次用两个随机田野实验直接比较纯自利、均分、纯慷慨三种推荐奖励结构对WOM驱动采纳的因果效应，并打开机制黑箱：亲社会奖励提高受邀者接受率，且部分来自邀请者更努力、更精准的推荐；研究补充了同伴影响估计和推荐激励设计两个病毒营销研究流，并为在线推荐奖励设计提供管理含义。
+
+- 整篇论证链：作者先指出已有随机实验证明同伴效应存在，但如何通过具体机制创造或最大化社会传染仍未解决；现实企业已在用不同推荐奖励方式，但效果未知，甚至出现负面反应。基于Andreoni和Miller关于自利/利他偏好的三分类型，以及愧疚、元感知、公平、亲社会幸福等理论，作者把奖励分配收缩为纯自利、均分、纯慷慨三个离散方案。实验1在依赖线下共同在场的社交游戏中测出口碑净效应，证明均分和慷慨比仅提醒控制组和自利方案带来更高转化；实验2在可追踪的在线推荐环境中复制该结果，并把总效应分解为邀请发送、邀请接受两个环节，发现亲社会方案的转化优势主要来自受邀者接受率提高。进一步用邀请者App经验交互分析提供选择性推荐机制的证据，最后将结果送回亲社会行为与愧疚理论，形成两种情境一致的激励设计知识。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心证据来自与两家真实移动游戏公司合作、在真实App用户群中进行的随机化田野实验：操纵的是推荐奖励分配、提醒通知和邀请文案等数字设计要素，在真实用户推广活动中观察邀请发送、接受和转化，而不是在实验室或仅有离线仿真数据。
+
+- 主导写作弧线判定：写作主线是：先描述不同推荐奖励方案在实践中并存的现实现象，并从理论中提取愧疚、元感知、亲社会幸福等机制，再通过两个随机田野干预检验这些机制，最后用机制分析把结果送回理论。该主线更接近“现象—机制—数字干预—现场因果检验”。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：第一阶段以实验1在难以测量的线下口碑情境建立主效应；第二阶段以实验2在可追踪的在线推荐情境复制主效应并分解发送/转化；第三阶段在邀请者—受邀者对偶层检验接受机制；第四阶段用邀请者经验交互支持选择性推荐机制；第五阶段通过多种稳健性检验把因果与机制主张收拢。五个阶段从“是否有效”推进到“为什么有效”。
+
+### studies_or_phases
+
+#### 1. 实验1：线下口碑场景中的奖励分配随机田野实验
+
+- order：1
+
+- name_cn：实验1：线下口碑场景中的奖励分配随机田野实验
+
+- question_cn：在必须线下共处游玩的社交移动游戏中，纯自利、均分、纯慷慨三种奖励分配方案相比无奖励/仅提醒控制组，是否提升成功转化的推荐数量？
+
+- inputs_and_setting_cn：美国一家移动社交游戏公司；1633名下载或更新App的用户；用户被随机分到C1、C2、T1、T2、T3；游戏要求至少三人共处一地，App无在线邀请功能，用地理感应和邀请归属屏幕识别邀请者。
+
+- designed_or_compared_object_cn：奖励分配方式：0/0（无奖励）、100/0（自利）、50/50（均分）、0/100（慷慨），外加是否收到提醒；固定每次推荐总奖励1000虚拟币（约1美元）。
+
+- baseline_control_or_counterfactual_cn：C1（无奖励、无提醒）衡量自然口碑扩散；C2（无奖励、有提醒）作为主要基线，分离提醒通知效应与奖励分配效应；治疗组之间也互为对照。
+
+##### objective_metrics
+
+1. invitation_converted（成功转化邀请数）
+
+2. OLS回归系数
+
+3. Poisson回归系数
+
+- analysis_method_cn：前测行为变量平衡检验；邀请者层面的OLS和Poisson回归，稳健标准误；以C2为基线。
+
+- main_result_cn：均分（T2）和慷慨（T3）比C2和T1产生显著更多转化；慷慨比均分略高但不显著；自利（T1）相比C2没有显著提升。
+
+- argumentative_role_cn：在现实线下口碑渠道中建立了核心因果主效应，证明亲社会奖励方案可促进WOM驱动采纳，为后续在线复制提供基础。
+
+- remaining_uncertainty_cn：无法数字追踪邀请发送和接受两个环节；线上情境是否同样成立；转化结果依赖用户自主归属，可能受报告偏差影响。
+
+- link_to_next_phase_cn：作者明确说实验1无法完全追踪推荐过程中的用户行为，因此需要设计实验2在相似社交游戏情境中做在线WOM复制，并追踪机制。
+
+##### evidence_pointers
+
+1. Table 1
+
+2. Table 2
+
+3. Figure 2a-b
+
+4. Online Supplemental Appendix A Table A2
+
+5. Online Supplemental Appendix B
+
+#### 2. 实验2：在线口碑场景中的主效应复制与发送/转化分解
+
+- order：2
+
+- name_cn：实验2：在线口碑场景中的主效应复制与发送/转化分解
+
+- question_cn：在纯在线社交游戏App中，三种奖励分配方案是否一致地改变邀请者的发送数量和成功转化数量？
+
+- inputs_and_setting_cn：印度一家移动社交游戏公司；2817名首次下载App的用户；App原本已有均分推荐项目，实验只对新用户随机分配C1、T1、T2、T3；邀请通过App内嵌在线渠道发送。
+
+- designed_or_compared_object_cn：不同组的Call-to-Action文案和受邀者收到的推荐消息：无奖励、自利（邀请者得Rs 200）、均分（各得Rs 100）、慷慨（受邀者得Rs 200）；用户不能修改发送给朋友的推荐消息。
+
+- baseline_control_or_counterfactual_cn：C1无奖励控制组；治疗组互为对照；同时用发送数量和转化数量将“邀请者行为”和“受邀者行为”分离。
+
+##### objective_metrics
+
+1. invitation_sent（邀请发送数）
+
+2. invitation_converted（邀请转化数）
+
+- analysis_method_cn：邀请者层面OLS回归，稳健标准误；补充Poisson回归。
+
+- main_result_cn：邀请发送数在组间无显著差异，但自利组绝对发送数低于控制组；转化数上均分和慷慨组显著高于控制组和自利组，慷慨组略高但不显著。
+
+- argumentative_role_cn：在在线WOM情境中复制实验1结论，排除线下共处与干扰因素，并首次分解出总效应不是来自发送数量的显著增加，而来自单位邀请的转化差异。
+
+- remaining_uncertainty_cn：为什么均分/慷慨转化更高？是受邀者得到奖励本身，还是邀请者选择了更匹配的对象？需要进入对偶层和机制分析。
+
+- link_to_next_phase_cn：作者收集405条邀请者—受邀者对偶数据，采用接收者层面随机效应模型，直接检验受邀者接受率。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 4
+
+3. Table 5
+
+4. Figure 4
+
+5. Online Supplemental Appendix A Table A4/A5
+
+#### 3. 实验2对偶层分析：受邀者接受推荐的可能性
+
+- order：3
+
+- name_cn：实验2对偶层分析：受邀者接受推荐的可能性
+
+- question_cn：在收到邀请后，不同奖励方案是否显著改变受邀者接受推荐的概率？
+
+- inputs_and_setting_cn：实验2中所有推荐构成的405个邀请者—受邀者对偶；包含发出邀请的组别、是否接受、受邀者/邀请者特征。
+
+- designed_or_compared_object_cn：以被接受的邀请为因变量；核心解释变量为治疗组虚拟变量；采用接收者层面随机效应模型。
+
+- baseline_control_or_counterfactual_cn：控制组C1为基线；同时报告条件接受率（Figure 4）作为补充。
+
+##### objective_metrics
+
+1. accept_invitation（受邀者是否接受推荐）
+
+2. 各治疗组条件转化率
+
+- analysis_method_cn：对偶层面随机效应模型；Hausman检验支持随机效应。
+
+- main_result_cn：均分和慷慨方案显著提高受邀者接受推荐的概率；自利方案系数为负但不显著；条件转化率图与回归一致。
+
+- argumentative_role_cn：把主效应定位到“接受”环节：亲社会方案的转化优势主要不是发送更多，而是受邀者更愿意接受。
+
+- remaining_uncertainty_cn：仍无法区分接受率提升是纯粹来自“受邀者得到钱”，还是邀请者筛选了更合适的人；需进一步检验邀请者努力/选择性推荐。
+
+- link_to_next_phase_cn：引入邀请者App经验与治疗组的交互项，检验是否亲社会方案促使更有经验的用户发送更精准的推荐。
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Figure 4
+
+3. Equation 4
+
+4. Online Supplemental Appendix A Table A6
+
+#### 4. 实验2机制分析：邀请者经验与选择性推荐
+
+- order：4
+
+- name_cn：实验2机制分析：邀请者经验与选择性推荐
+
+- question_cn：亲社会方案带来的更高转化率是否部分来自邀请者付出更多努力、做出更精准的选择性推荐？
+
+- inputs_and_setting_cn：实验2的对偶数据；邀请者发送推荐前玩过的游戏次数作为App经验代理；用注册时长做稳健性替代。
+
+- designed_or_compared_object_cn：不是新治疗组，而是比较不同组中邀请者经验分布，以及在回归中加入治疗组×App经验交互项。
+
+- baseline_control_or_counterfactual_cn：模型在交互项中不以控制组为基准比较，而是检验交互项系数是否显著异于0；另在附录中报告包含主效应的模型。
+
+##### objective_metrics
+
+1. accept_invitation
+
+2. 治疗组×app_experience交互系数
+
+- analysis_method_cn：扩展随机效应模型Equation 5；图5比较各组邀请者发送时App经验；用tenure做替代经验的稳健性检验。
+
+- main_result_cn：均分与慷慨组中，邀请者经验对接受概率有显著正向作用；图5显示均分/慷慨用户发送推荐时App经验略高但不显著；替代经验指标结果一致。
+
+- argumentative_role_cn：为“选择性推荐/更好匹配”机制提供间接证据，说明高转化不单是受邀者奖励的直接效应，也包含邀请者行为改变。
+
+- remaining_uncertainty_cn：App经验只是努力/匹配精度的代理，无法直接观察邀请者是否主动筛选；仍缺人口统计和更大奖励情境。
+
+- link_to_next_phase_cn：机制证据完成后，进入稳健性检验和讨论，把局部经验证据上升为可复用的设计知识与理论贡献。
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Figure 5
+
+3. Equation 5
+
+4. Online Supplemental Appendix A Table A7
+
+#### 5. 稳健性检验与替代样本分析
+
+- order：5
+
+- name_cn：稳健性检验与替代样本分析
+
+- question_cn：主结果对计量模型选择、激励期重置、替代变量和样本窗口是否稳健？
+
+- inputs_and_setting_cn：实验1和实验2的数据；实验1的仅前7天样本、Poisson模型；实验2的Poisson模型、tenure替代经验、包含主效应的交互模型。
+
+- designed_or_compared_object_cn：改变估计方法、样本窗口和核心变量的测度。
+
+- baseline_control_or_counterfactual_cn：同一对照组与治疗组，但在不同估计设定下重估。
+
+##### objective_metrics
+
+1. 回归系数的显著性和方向
+
+2. AIC
+
+3. 稳健标准误
+
+- analysis_method_cn：OLS对照、Poisson回归、前7天样本限制、替代经验变量、交互模型设定检验。
+
+- main_result_cn：主结论保持一致：均分/慷慨优于自利和控制；激励期重置并未驱动结果；替代经验指标不改变机制结论。
+
+- argumentative_role_cn：排除激励期重置导致的内生处理时长、计数模型误设和测度选择等替代解释，巩固因果与机制主张。
+
+- remaining_uncertainty_cn：稳健性检验不能解决所有外部效度问题，例如更高奖励金额、其他产品类别和人口统计异质性。
+
+- link_to_next_phase_cn：稳健性结果支持讨论部分把结论概括为稳定的设计知识和管理建议。
+
+##### evidence_pointers
+
+1. Table 2 Column (2)
+
+2. Note 11（前7天样本）
+
+3. Online Supplemental Appendix A Table A5/A6/A7
+
+4. Online Supplemental Appendix B
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. GAP
+
+3. RQ_OR_OBJECTIVE
+
+4. STUDY_OVERVIEW
+
+5. RESULT
+
+6. MECHANISM
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. TRANSITION
+
+4. RQ_OR_OBJECTIVE
+
+5. BOUNDARY_CONDITION
+
+6. PHENOMENON
+
+7. PRACTICAL_STAKES
+
+8. GAP
+
+9. THEORY_INTRO
+
+10. THEORY_PROPOSITION
+
+11. DESIGN_FEATURE
+
+12. STUDY_OVERVIEW
+
+13. METHOD_JUSTIFICATION
+
+14. RESULT
+
+15. MECHANISM
+
+16. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. THEORY_INTRO
+
+3. THEORY_PROPOSITION
+
+4. MECHANISM
+
+5. LIMITATION
+
+6. GAP
+
+7. REQUIREMENT
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. BENCHMARK_OR_CONTRAST
+
+3. METHOD_JUSTIFICATION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. MECHANISM
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+5. RESULT
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Andreoni & Miller 自利/利他偏好与CES效用分类
+
+2. Dunn & Norton 亲社会幸福效应
+
+3. Equity theory 公平理论
+
+4. Rational choice theory 理性选择理论
+
+5. Metaperception theory 元感知理论
+
+6. Ryu & Feick 推荐奖励与愧疚
+
+7. Kornish & Li 邀请者关心好友匹配
+
+8. Van den Bulte et al. 更好匹配与社会资本
+
+9. Hong et al. 均分激励与关系强度
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：实验的三个奖励分配方案（100/0、50/50、0/100）直接由Andreoni和Miller关于自利/利他偏好的分类转化而来；同时元感知理论与愧疚理论直接用于解释为何要设置纯自利组、为何在实验1的自利组中不向受邀者透露邀请者获奖励。设计不是事后贴标签，而是理论先行并成为检验对象。
+
+- 理论到设计翻译链：偏好类型与心理机制（自利、均分、慷慨；愧疚、公平、亲社会幸福）→ 离散奖励分配方案（T1/T2/T3）→ 随机田野实验（真实App、固定总奖励、提醒控制）→ 结果分解（发送数、转化数、对偶接受率）→ 机制检验（邀请者经验交互）→ 返回理论（亲社会行为主导、愧疚降低、选择性匹配）。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：Andreoni和Miller：人们可分为纯自利、完美替代（可慷慨可自利）、Leontief（总是均分）等类型。
+
+- mechanism_cn：邀请者对奖励分配有异质的自利/利他偏好，因此奖励如何分给对方会改变邀请行为与接受行为。
+
+- design_requirement_cn：实验必须包含“完全给邀请者”“完全给受邀者”“双方均分”三个可明确解释的极端分配。
+
+- artifact_choice_cn：T1（100/0）、T2（50/50）、T3（0/100），固定每次推荐总奖励1000虚拟币或Rs 200。
+
+- evaluated_contrast_cn：T1/T2/T3与C2（仅提醒）及C1（自然口碑）对比；三个治疗组彼此对比。
+
+- objective_result_cn：T2和T3的转化数显著高于C2和T1；慷慨略高但不显著。
+
+##### evidence_pointers
+
+1. Table 1
+
+2. Table 2
+
+3. Table 3
+
+4. Table 5
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：元感知理论和Ryu & Feick：只奖励邀请者会让邀请者觉得受邀者会把自己看成为了钱而推荐，产生愧疚，降低推荐意愿。
+
+- mechanism_cn：自利方案提高邀请者的心理成本，从而减少邀请发送；若告知受邀者邀请者得利，可能进一步恶化。
+
+- design_requirement_cn：设置自利治疗组以检验该机制；同时为控制愧疚，实验1中成功推荐时不向受邀者显示邀请者获得奖励。
+
+- artifact_choice_cn：T1组：邀请者得到全部奖励；实验1奖励消息只发给邀请者；实验2自利组受邀者消息不提及任何现金奖励。
+
+- evaluated_contrast_cn：T1 vs C1/C2/T2/T3，尤其是发送数量。
+
+- objective_result_cn：T1发送邀请数量最低；相比控制组未显著提升转化；对偶层接受率系数为负但不显著。
+
+##### evidence_pointers
+
+1. Table 1
+
+2. Figure 2b
+
+3. Table 4
+
+4. Table 5 Column (1)
+
+5. Table 6
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：Dunn & Norton 亲社会幸福效应和公平理论：把钱花在别人身上或公平分配能增强幸福感和公平感知；理性选择理论则相反，主张奖励发送者。
+
+- mechanism_cn：把奖励分给受邀者会降低邀请者愧疚、提升亲社会动机，同时受邀者获得奖励增强接受意愿；但纯理性自利预测只奖励邀请者应该增加发送。
+
+- design_requirement_cn：亲社会方案既要测发送数量也要测转化数量；公平分配应单独成为一个可识别处理。
+
+- artifact_choice_cn：T2（对半）、T3（全部给受邀者）；在实验2中配合“give Rs 200”的Call-to-Action和“you will get Rs 200”的受邀者消息。
+
+- evaluated_contrast_cn：T2/T3与T1/C1/C2在发送、转化和接受三个环节的差异。
+
+- objective_result_cn：T2/T3转化显著更高；条件接受率更高；但T2/T3发送数量与控制组无显著差异。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Table 5 Column (1)-(2)
+
+3. Table 6
+
+4. Figure 4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：Kornish & Li和Van den Bulte et al.：邀请者会关心好友的匹配与满足，经验丰富的用户能做更好的推荐。
+
+- mechanism_cn：亲社会激励让邀请者更努力寻找合适对象，发送更少但更准的邀请，从而提高接受率。
+
+- design_requirement_cn：需要测量邀请者努力/匹配质量的代理变量，并与治疗交互，才能检验选择性推荐。
+
+- artifact_choice_cn：收集邀请者发送推荐前玩过的游戏数作为App经验；用注册时长做替代。
+
+- evaluated_contrast_cn：T2×app_experience和T3×app_experience交互项的显著性与大小。
+
+- objective_result_cn：均分和慷慨组的经验交互显著为正，支持亲社会方案下更有经验的用户发出更易被接受的推荐。
+
+##### evidence_pointers
+
+1. Figure 5
+
+2. Table 7
+
+3. Online Supplemental Appendix A Table A7
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机田野实验（真实App、真实用户、随机分配）
+
+2. 双重控制组设计（C1自然口碑、C2提醒基线）
+
+3. 邀请者层面OLS/Poisson回归
+
+4. 邀请者—受邀者对偶层面随机效应模型
+
+5. 条件转化率比较
+
+6. 治疗组与邀请者经验交互的异质性分析
+
+7. 前7天样本、替代变量、Poisson模型等稳健性检验
+
+- why_these_evaluations_cn：因为需要因果识别而非相关证据；因为成功推荐是邀请者与受邀者双方行动的结果，所以在邀请者层面衡量发送和转化、在对偶层面衡量接受；因为实验1无法观察内部过程，所以需要实验2做在线复制和机制追踪；因为“选择性推荐”不能被直接看到，所以用邀请者经验交互提供间接证据；因为总效应可能由提醒通知、激励期重置或计数模型设定驱动，所以需要多种稳健性检验。
+
+- benchmark_and_contrast_chain_cn：C1给出无提醒、无奖励的自然口碑扩散基线；C2作为主要分析基线，分离提醒的“拉动”效应；T1/T2/T3与C2相比得到奖励分配的净效应；然后在接受率回归中，T1/T2/T3与控制组互为对照；最后用经验交互把“均分/慷慨之所以有效”进一步从受邀者奖励效应中分离出邀请者匹配效应。整个链条从“有没有净效果”推进到“净效果来自哪一方、为什么”。
+
+### claim_evidence_ledger
+
+1. 主张：均分与慷慨方案产生更高转化；证据：实验1 Table 2 OLS/Poisson、实验2 Table 5 Column (2)；局限：实验1依赖自我归属报告。
+
+2. 主张：自利方案不能提升转化，甚至发送最少；证据：实验2 Table 5 Column (1)、图4；局限：发送差异未达到统计显著。
+
+3. 主张：亲社会方案提高受邀者接受率；证据：实验2 Table 6随机效应模型、图4条件转化率；局限：对偶样本只有405个。
+
+4. 主张：高转化部分来自受邀者获得奖励本身，也部分来自邀请者选择更精准的对象；证据：Table 7经验交互显著、Figure 5经验分布；局限：App经验只是努力/匹配的代理。
+
+5. 主张：结论跨线下与在线、美国和印度情境一致；证据：实验1与实验2主效应方向一致；局限：两个情境均为移动社交游戏，奖励额度小。
+
+- internal_validity_strategy_cn：随机分配、前测行为特征平衡检验、使用C2控制提醒通知、在自利组不向受邀者透露奖励以减少愧疚混淆、固定总奖励避免“做大蛋糕”、实验1用前7天样本排除激励期重置的内生处理时长、实验2不允许用户修改推荐消息、Hausman检验支持随机效应模型。
+
+- external_validity_strategy_cn：两个独立公司、两个国家（美国/印度）、两种口碑渠道（线下与在线）、两类样本（含已有用户和新用户；仅新用户）重复同一实验；主结果方向一致；讨论中明确边界条件，建议未来研究在低网络效应产品、更大奖励金额和不同人口结构中检验。
+
+- what_is_not_actually_tested_cn：邀请者的愧疚/心理成本未被直接测量；选择性推荐未被直接观察，只用App经验做代理；邀请者发送邀请时的实时动机未知；奖励金额只有小额度虚拟币或Rs 200，未检验大额奖励；缺乏人口统计信息，无法检验年龄、性别等异质性；线下WOM过程在实验1中未被数字追踪。
+
+## 贡献闭环
+
+- technical_claim_cn：在真实移动社交游戏环境中，随机分配推荐奖励分配方式后，均分和慷慨方案相对于控制组和自利方案产生显著更高的成功邀请转化数；Poisson和OLS结论一致。
+
+- artifact_claim_cn：不是提醒通知本身，而是奖励在邀请者与受邀者之间的亲社会分配方式，尤其是把奖励给予或分给受邀者，驱动了转化增加；固定总奖励预算下，分配结构是有效的设计杠杆。
+
+- mechanism_claim_cn：亲社会方案提高转化主要通过提高受邀者接受率；部分机制是邀请者被激励去发送更精准、更有针对性的推荐，体现为更有经验用户发送的推荐更易被接受；自利方案则通过愧疚/心理成本抑制发送。
+
+- boundary_claim_cn：结论适用于移动社交游戏中的小额度虚拟/现金奖励，覆盖线下与在线口碑、美国和印度情境；不一定推广到低网络效应产品、更大奖励金额、不同人口结构或非游戏类别。
+
+- reusable_design_knowledge_cn：预算固定的推荐激励应优先考虑带亲社会成分的分配方式，例如对半分或全给受邀者；应避免只奖励邀请者；设计提醒通知和Call-to-Action时，可以通过让邀请者“代表朋友送出奖励”的文案来触发亲社会动机；自利组应避免让受邀者看到邀请者得利。
+
+- theoretical_contribution_cn：把同伴影响的因果存在性推进到“如何用奖励设计制造同伴影响”；在田野环境中检验其他关注偏好（Andreoni & Miller）和元感知/愧疚机制；结果支持亲社会幸福效应，反驳纯理性自利代理人假设，并扩展了推荐激励设计中关于匹配和社会资本的研究。
+
+- how_discussion_closes_intro_gap_cn：引言提出实践界在未经验证的多种奖励方案中摇摆、学界缺少如何用激励创造传染的证据；讨论部分明确回到两个文献流，指出本研究第一次在真实数字商品WOM中比较纯自利、均分、纯慷慨三种方案，并用机制分析解释为何亲社会方案占优，从而闭合了“有效激励设计”缺口。
+
+- overclaim_or_unsupported_leaps_cn：“亲社会方案主导且慷慨优于均分”在统计上并不显著区分慷慨与均分；机制中的“选择性推荐”只有间接证据，App经验交互不等同于实际努力或匹配质量；自利组“愧疚”是解释性推断而非直接心理测量；作者称“首次”研究此类问题，可能需要在更广文献搜索下谨慎对待。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在线推荐项目日益流行，但支撑成功推荐关键动作的理论基础仍很少被了解。
+
+- rhetorical_function_cn：把问题定位在理论缺口而非单纯技术性能。
+
+- depends_on_cn：无
+
+- sets_up_cn：为整篇文章提出需要理论化激励设计做铺垫。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P2 S1
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文用两个随机实验研究哪种推荐奖励结构在移动游戏情境中最能最大化口碑。
+
+- rhetorical_function_cn：直接给出研究问题与方法。
+
+- depends_on_cn：前一动作建立的理论缺口
+
+- sets_up_cn：预告三种激励结构的比较。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P3 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P3 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：比较自利、均分、慷慨三种奖励方案。
+
+- rhetorical_function_cn：列出核心实验设计维度。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为主结果提供操作化对象。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P4 S1
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验一致表明亲社会方案（均分和慷慨）在创造口碑方面优于纯自利方案。
+
+- rhetorical_function_cn：先给结论，吸引读者继续看证据。
+
+- depends_on_cn：实验设计
+
+- sets_up_cn：为机制层面的解释提供总结果。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P5 S1
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P5 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：机制分析显示均分和慷慨方案通过显著提高受邀者接受推荐的可能性来增加转化，部分归因于选择性且更精准的推荐。
+
+- rhetorical_function_cn：从总效果转向解释为什么有效。
+
+- depends_on_cn：主结果
+
+- sets_up_cn：预告机制检验是贡献的一部分。
+
+- evidence_pointer：Abstract
+
+### 6. Abstract P6 S1
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P6 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结果有助于理解在线推荐项目的最优设计，并为数字世界设计有效推荐奖励方案提供启示。
+
+- rhetorical_function_cn：定位贡献层级为设计与实践知识。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：对应引言和讨论中的贡献声明。
+
+- evidence_pointer：Abstract
+
+### 7. Introduction P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在线社交网络的增长重新激发了人们对社会传染作为个体和集体行动力量的学术兴趣。
+
+- rhetorical_function_cn：从大背景进入主题。
+
+- depends_on_cn：无
+
+- sets_up_cn：为“已有同伴效应证据”铺垫。
+
+- evidence_pointer：Introduction P1
+
+### 8. Introduction P1 S2-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P1 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：许多研究者已转向大规模现场随机实验，以因果识别在线社交网络中的同伴效应；这些文献让人相信同伴效应在普通用户群体中确实存在。
+
+- rhetorical_function_cn：承认第一波文献的成就，为缺口做铺垫。
+
+- depends_on_cn：背景句
+
+- sets_up_cn：下一句从“是否存在”转向“如何制造”。
+
+- evidence_pointer：Introduction P1
+
+### 9. Introduction P2 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：既然同伴效应的因果存在已被确立，自然要追问如何用具体机制创造甚至最大化社会传染。
+
+- rhetorical_function_cn：完成文献从存在性到可设计性的推进。
+
+- depends_on_cn：上一句的已有证据
+
+- sets_up_cn：引出本文研究问题。
+
+- evidence_pointer：Introduction P2
+
+### 10. Introduction P2 S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文研究哪种奖励激励设计最能最大化基于口碑的产品认知与采纳。
+
+- rhetorical_function_cn：明确研究问题。
+
+- depends_on_cn：过渡句
+
+- sets_up_cn：为奖励机制比较提供目标。
+
+- evidence_pointer：Introduction P2
+
+### 11. Introduction P2 S3-S4
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P2 S3-S4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：同伴影响可通过模仿、地位、认知等多种机制实现，但本文聚焦朋友邀请朋友这一口碑机制；线下口碑因难以数字化而面临测量挑战。
+
+- rhetorical_function_cn：限制研究范围，并预告实验1的线下测量设计。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为实验1的独特场景做铺垫。
+
+- evidence_pointer：Introduction P2
+
+### 12. Introduction P3 S1-S2
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：现实中Dropbox、Groupon、Lyft、Blue Apron等公司采用不同的推荐奖励方式。
+
+- rhetorical_function_cn：用行业例子说明奖励方案多样但未被系统检验。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为“效果开放”的缺口提供现实素材。
+
+- evidence_pointer：Introduction P3
+
+### 13. Introduction P4 S1-S2
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P4 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：尽管这些方案被广泛使用，其效果仍是开放问题；Intuit CEO称各种经济刺激效果不佳，甚至出现“我不会为了钱出卖朋友”的负面反应。
+
+- rhetorical_function_cn：以业界证词制造缺口，强调需要系统研究。
+
+- depends_on_cn：行业例子
+
+- sets_up_cn：引出本文的随机对照设计。
+
+- evidence_pointer：Introduction P4
+
+### 14. Introduction P5 S1-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P5 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：成功推荐依赖发送与接受双方；常识和实务偏向激励邀请者，但外在金钱激励可能让邀请者改变推荐方式，甚至因只奖励自己而产生愧疚，从而降低发起推荐的意愿。
+
+- rhetorical_function_cn：建立“自利奖励可能失败”的机制路径。
+
+- depends_on_cn：缺口句
+
+- sets_up_cn：为自利组的假设和后续失败结果做铺垫。
+
+- evidence_pointer：Introduction P5
+
+### 15. Introduction P6 S1-S3
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：把奖励分给受邀者可能降低邀请者的心理成本、促进更好匹配；但邀请者也可能因此更挑剔，减少推荐数量，不过更高的转化率可以抵消这一缺点。
+
+- rhetorical_function_cn：建立“利他奖励可能成功”的机制路径。
+
+- depends_on_cn：上一段的自利失败路径
+
+- sets_up_cn：形成两种相反预测，凸显需要实验。
+
+- evidence_pointer：Introduction P6
+
+### 16. Introduction P7 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：设计动机来自经济学中把个体按自利/利他偏好分成三类的经典研究。
+
+- rhetorical_function_cn：为实验设计提供理论来源。
+
+- depends_on_cn：前文机制不确定
+
+- sets_up_cn：引出三种具体奖励方案。
+
+- evidence_pointer：Introduction P7
+
+### 17. Introduction P7 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P7 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：据此测试自利、均分、慷慨三种方案。
+
+- rhetorical_function_cn：将理论分类转成可操作处理。
+
+- depends_on_cn：理论分类
+
+- sets_up_cn：为Table 1实验分组提供基础。
+
+- evidence_pointer：Introduction P7
+
+### 18. Introduction P8 S1
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P8 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者与两家社交游戏公司合作，用两个随机田野实验分别考察线下和线上口碑。
+
+- rhetorical_function_cn：预告实证研究结构与情境。
+
+- depends_on_cn：理论设计
+
+- sets_up_cn：为实验1/2分别介绍做路标。
+
+- evidence_pointer：Introduction P8
+
+### 19. Introduction P9 S1
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P9 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实验1的App没有在线邀请功能，因此能测量线下口头邀请；实验2的在线推荐可追踪完整推荐过程，帮助理解机制。
+
+- rhetorical_function_cn：为两个实验的顺序提供方法论理由。
+
+- depends_on_cn：情境选择
+
+- sets_up_cn：说明实验2比实验1多出机制追踪能力。
+
+- evidence_pointer：Introduction P9
+
+### 20. Introduction P10 S1
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P10 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验一致发现亲社会方案主导纯自利方案。
+
+- rhetorical_function_cn：在引言中提前报告核心结论。
+
+- depends_on_cn：两个实验的结果
+
+- sets_up_cn：让读者知道主要发现后再看细节。
+
+- evidence_pointer：Introduction P10
+
+### 21. Introduction P10 S4-S5
+
+- order：21
+
+- section：Introduction
+
+- locator：Introduction P10 S4-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：自利组发送的推荐数最少；均分和慷慨组在条件发送上并不比控制组多，但收到这些组邀请的人更可能接受。
+
+- rhetorical_function_cn：把总效应分解为发送减少和接受增加两层。
+
+- depends_on_cn：核心结论
+
+- sets_up_cn：引导后续机制分析。
+
+- evidence_pointer：Introduction P10
+
+### 22. Introduction P11 S1
+
+- order：22
+
+- section：Introduction
+
+- locator：Introduction P11 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：额外分析用邀请者App经验表明亲社会方案也激励邀请者更努力寻找合适受邀者。
+
+- rhetorical_function_cn：提前预告机制检验的存在。
+
+- depends_on_cn：接受率结果
+
+- sets_up_cn：为“选择性推荐”机制做伏笔。
+
+- evidence_pointer：Introduction P11
+
+### 23. Introduction P12 S1
+
+- order：23
+
+- section：Introduction
+
+- locator：Introduction P12 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究是首批用两个随机田野实验直接检验激励方案效果的文献，补充病毒营销两个研究流。
+
+- rhetorical_function_cn：在引言末尾声明贡献。
+
+- depends_on_cn：全部前文
+
+- sets_up_cn：为文献综述讨论设下框架。
+
+- evidence_pointer：Introduction P12
+
+### 24. P1 S1-S2
+
+- order：24
+
+- section：Literature Review: Social Contagion
+
+- locator：P1 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：因果识别同伴效应很难，因为同质性混淆；随机化是有效方法，近年已有大型现场随机实验。
+
+- rhetorical_function_cn：重申第一波文献的方法论进展。
+
+- depends_on_cn：引言中的已有证据
+
+- sets_up_cn：为“但缺少机制证据”的缺口做铺垫。
+
+- evidence_pointer：Literature Review, Social Contagion
+
+### 25. P2 S1
+
+- order：25
+
+- section：Literature Review: Social Contagion
+
+- locator：P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：尽管已证明同伴效应存在，但驱动行为传染的机制以及如何促进传染仍缺乏实证证据。
+
+- rhetorical_function_cn：形成文献缺口。
+
+- depends_on_cn：前一动作的成就
+
+- sets_up_cn：引出WOM作为重要机制。
+
+- evidence_pointer：Literature Review, Social Contagion
+
+### 26. P3 S1-S3
+
+- order：26
+
+- section：Literature Review: Social Contagion
+
+- locator：P3 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：WOM是重要且可能主导的社会传染机制，能改变同伴对产品的认知和期望；但传统上线下WOM难以测量。
+
+- rhetorical_function_cn：把WOM定位为重要机制，并指出测量难点。
+
+- depends_on_cn：机制缺口
+
+- sets_up_cn：为实验1的线下WOM测量价值做铺垫。
+
+- evidence_pointer：Literature Review, Social Contagion
+
+### 27. P1 S1-S5
+
+- order：27
+
+- section：Literature Review: Referral Program and Incentive Design
+
+- locator：P1 S1-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究分析推荐奖励最优性、更好匹配、社会资本、受邀者终身价值、关系强度等。
+
+- rhetorical_function_cn：总结参考点，说明领域已有积累。
+
+- depends_on_cn：无
+
+- sets_up_cn：为找出实验设计和激励极端的缺口。
+
+- evidence_pointer：Literature Review, Referral Program
+
+### 28. P2 S1-S2
+
+- order：28
+
+- section：Literature Review: Referral Program and Incentive Design
+
+- locator：P2 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：这些研究多在实验室；少数田野实验只采用均分方案，未包含实践中常见的纯自利和纯慷慨方案。
+
+- rhetorical_function_cn：指出现有研究的两个限制：情境与方案覆盖。
+
+- depends_on_cn：文献总结
+
+- sets_up_cn：突出本文的独特设计。
+
+- evidence_pointer：Literature Review, Referral Program
+
+### 29. P1 S1-S3
+
+- order：29
+
+- section：Literature Review: User Behaviors and Incentive Design
+
+- locator：P1 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：Andreoni和Miller实验发现只有约四分之一受试者表现为纯自利，其余表现出理性的利他行为；近一半行为符合三种CES效用之一。
+
+- rhetorical_function_cn：用实证行为经济学理论支撑三分法实验设计。
+
+- depends_on_cn：引言中的理论引子
+
+- sets_up_cn：为自利/均分/慷慨三种处理提供理论合法性。
+
+- evidence_pointer：Literature Review, User Behaviors
+
+### 30. P1 S4
+
+- order：30
+
+- section：Literature Review: User Behaviors and Incentive Design
+
+- locator：P1 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：这一观察提供了本文三种奖励机制设计的理论基础。
+
+- rhetorical_function_cn：把理论命题直接连接到实验设计。
+
+- depends_on_cn：上一句理论命题
+
+- sets_up_cn：让读者预期三个命名治疗组。
+
+- evidence_pointer：Literature Review, User Behaviors
+
+### 31. P2 S1-S3
+
+- order：31
+
+- section：Literature Review: User Behaviors and Incentive Design
+
+- locator：P2 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：亲社会幸福理论、公平理论和理性选择理论分别预测慷慨、均分和自利会更有效，因此先验并不清楚。
+
+- rhetorical_function_cn：制造理论冲突，提高实验必要性。
+
+- depends_on_cn：理论分类
+
+- sets_up_cn：为随机实验作为裁决方式铺垫。
+
+- evidence_pointer：Literature Review, User Behaviors
+
+### 32. P3 S1-S2
+
+- order：32
+
+- section：Literature Review: User Behaviors and Incentive Design
+
+- locator：P3 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：元感知理论预测只奖励邀请者可能使邀请者觉得受邀者会认为该推荐出于奖励动机，从而增加愧疚、降低推荐概率。
+
+- rhetorical_function_cn：提供自利方案可能失败的机制解释。
+
+- depends_on_cn：理论冲突
+
+- sets_up_cn：为解释实验1/2中自利组发送少做伏笔。
+
+- evidence_pointer：Literature Review, User Behaviors
+
+### 33. P4 S1
+
+- order：33
+
+- section：Literature Review: User Behaviors and Incentive Design
+
+- locator：P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：没有稳健随机实验，无法调和这些不同观点；本文开展两个随机田野实验来解决应如何分配激励的问题。
+
+- rhetorical_function_cn：明确把随机实验作为裁决工具。
+
+- depends_on_cn：理论冲突
+
+- sets_up_cn：过渡到实验部分。
+
+- evidence_pointer：Literature Review, User Behaviors
+
+### 34. P1-P2
+
+- order：34
+
+- section：Experiment 1: Institutional Details
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：合作的App要求玩家共处一地且没有在线邀请功能，因此下载用户必须线下邀请朋友；地理感应和邀请归属屏幕让新玩家识别邀请者。
+
+- rhetorical_function_cn：说明实验1如何把难测量的线下口碑变成可观测数据。
+
+- depends_on_cn：文献中线下WOM难测量的点
+
+- sets_up_cn：为Table 1随机分组提供测量前提。
+
+- evidence_pointer：Experiment 1, Institutional Details
+
+### 35. P1 S1
+
+- order：35
+
+- section：Experiment 1: Experimental Design
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用户下载或更新App时按概率随机分入C1、C2、T1、T2、T3五组，奖励结构如Table 1。
+
+- rhetorical_function_cn：交代随机分配与处理组结构。
+
+- depends_on_cn：理论三分法
+
+- sets_up_cn：为统计方程和结果表做准备。
+
+- evidence_pointer：Table 1
+
+### 36. P2 S1-S2
+
+- order：36
+
+- section：Experiment 1: Experimental Design
+
+- locator：P2 S1-S2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：C1衡量自然邀请扩散；C2作为主要基线，把提醒通知效应与奖励激励效应分开。
+
+- rhetorical_function_cn：设立两个控制组，强化因果解释。
+
+- depends_on_cn：随机分组
+
+- sets_up_cn：确保后续治疗组系数可解释为激励净效应。
+
+- evidence_pointer：Table 1
+
+### 37. P4 S1-S2
+
+- order：37
+
+- section：Experiment 1: Experimental Design
+
+- locator：P4 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：成功邀请会重置邀请者的一周激励期；为排除内生处理时长，作者用前7天样本做稳健性检验。
+
+- rhetorical_function_cn：主动处理制度设计带来的内生性风险。
+
+- depends_on_cn：激励期设计
+
+- sets_up_cn：为稳健性结果提供依据。
+
+- evidence_pointer：Experiment 1, Experimental Design
+
+### 38. P5 S1
+
+- order：38
+
+- section：Experiment 1: Experimental Design
+
+- locator：P5 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：每次推荐总奖励固定为1000虚拟币，约1美元；不考虑双方各得1000，因为那是做大蛋糕而非分配蛋糕。
+
+- rhetorical_function_cn：确保处理差异来自分配比例而非奖励总量。
+
+- depends_on_cn：激励设计
+
+- sets_up_cn：使T1/T2/T3之间可比较。
+
+- evidence_pointer：Experiment 1, Experimental Design
+
+### 39. P6 S1-S2
+
+- order：39
+
+- section：Experiment 1: Experimental Design
+
+- locator：P6 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：治疗组收到提醒通知；自利组成功推荐后只通知邀请者，不向受邀者显示邀请者得奖，以降低社交情境中的愧疚。
+
+- rhetorical_function_cn：补充一个减少自利组污染的设计细节。
+
+- depends_on_cn：元感知/愧疚理论
+
+- sets_up_cn：使自利组的结果更干净。
+
+- evidence_pointer：Figure 2b
+
+### 40. P1 S1
+
+- order：40
+
+- section：Experiment 1: Analyses and Results
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用前测行为数据检查治疗组和控制组的特征是否统计等价。
+
+- rhetorical_function_cn：检验随机化质量。
+
+- depends_on_cn：随机分配
+
+- sets_up_cn：为后续回归提供内部效度基础。
+
+- evidence_pointer：Online Supplemental Appendix A Table A2
+
+### 41. P2-P3
+
+- order：41
+
+- section：Experiment 1: Analyses and Results
+
+- locator：P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：OLS和Poisson回归都显示均分与慷慨方案显著增加成功转化，而自利方案不比控制组好。
+
+- rhetorical_function_cn：报告主结果，并用两种模型交叉验证。
+
+- depends_on_cn：随机化
+
+- sets_up_cn：为实验2复制主效应做铺垫。
+
+- evidence_pointer：Table 2
+
+### 42. P4 S1
+
+- order：42
+
+- section：Experiment 1: Analyses and Results
+
+- locator：P4 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：转化结果可能受自我报告影响，但在必须共处社交的情境中，不承认他人应得奖励有显著社交成本，因此偏差有限。
+
+- rhetorical_function_cn：预先回应测量有效性质疑。
+
+- depends_on_cn：主结果
+
+- sets_up_cn：为实验2的在线追踪数据作为更强证据做伏笔。
+
+- evidence_pointer：Experiment 1, Analyses and Results
+
+### 43. P1 S1
+
+- order：43
+
+- section：Experiment 2: Institutional Details
+
+- locator：P1 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：实验1虽然能捕捉线下WOM，但共处要求可能限制普适性且无法观察发送与接受过程；实验2在经典在线推荐情境中复制并探索机制。
+
+- rhetorical_function_cn：把实验1的局限转为实验2的动机。
+
+- depends_on_cn：实验1结果与限制
+
+- sets_up_cn：为实验2的在线追踪设计做铺垫。
+
+- evidence_pointer：Experiment 2, Institutional Details
+
+### 44. P1-P2
+
+- order：44
+
+- section：Experiment 2: Experimental Design
+
+- locator：P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：新用户下载时随机分入C1/T1/T2/T3；Call-to-Action和邀请消息由组别决定，且用户不能修改消息文本。
+
+- rhetorical_function_cn：说明在线版本的随机分配与信息控制。
+
+- depends_on_cn：实验2动机
+
+- sets_up_cn：为统计模型的处理变量提供来源。
+
+- evidence_pointer：Table 3, Table 4
+
+### 45. P2 S1-S2
+
+- order：45
+
+- section：Experiment 2: Analyses and Results
+
+- locator：P2 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：邀请发送数量组间没有显著差异，但自利组绝对数量低于控制组，说明自利方案可能增加心理成本。
+
+- rhetorical_function_cn：报告发送端结果并给出初步机制解释。
+
+- depends_on_cn：实验2数据
+
+- sets_up_cn：推动读者关注发送数量背后动机。
+
+- evidence_pointer：Table 5 Column (1)
+
+### 46. P3 S1
+
+- order：46
+
+- section：Experiment 2: Analyses and Results
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：与实验1一致，均分和慷慨组的转化数显著高于控制组和自利组，慷慨组略高但不显著。
+
+- rhetorical_function_cn：报告在线情境的主结果，完成复制。
+
+- depends_on_cn：实验1结果
+
+- sets_up_cn：为对偶接受率分析提供铺垫。
+
+- evidence_pointer：Table 5 Column (2)
+
+### 47. P4 S1
+
+- order：47
+
+- section：Experiment 2: Analyses and Results
+
+- locator：P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：对偶层回归显示只有均分和慷慨显著提高受邀者接受推荐的概率；条件转化率图也支持这一点。
+
+- rhetorical_function_cn：将主效应定位到接受环节。
+
+- depends_on_cn：总转化结果
+
+- sets_up_cn：进入“为什么接受率更高”的机制检验。
+
+- evidence_pointer：Table 6, Figure 4
+
+### 48. P5 S1-S3
+
+- order：48
+
+- section：Experiment 2: Analyses and Results
+
+- locator：P5 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：自利方案降低发送和转化，可能因愧疚；均分提高发送和接受；慷慨不增加发送但条件转化最高。
+
+- rhetorical_function_cn：把三组结果整合成机制故事。
+
+- depends_on_cn：Table 5/6结果
+
+- sets_up_cn：为更严格的经验交互机制检验做铺垫。
+
+- evidence_pointer：Experiment 2, Analyses and Results
+
+### 49. P1 S1
+
+- order：49
+
+- section：Exploring Mechanisms
+
+- locator：P1 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：高转化率可能来自受邀者拿到奖励，也可能来自邀请者发送更有针对性的推荐，需要进一步区分。
+
+- rhetorical_function_cn：提出下一个待解决问题。
+
+- depends_on_cn：接受率机制结果
+
+- sets_up_cn：引出App经验交互分析方法。
+
+- evidence_pointer：Exploring Mechanisms
+
+### 50. P3 S1
+
+- order：50
+
+- section：Exploring Mechanisms
+
+- locator：P3 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：借用经验用户能做更好推荐的研究，使用邀请者App经验作为其努力和匹配质量的代理。
+
+- rhetorical_function_cn：为机制检验选择可测量变量。
+
+- depends_on_cn：机制问题
+
+- sets_up_cn：为Figure 5和Table 7提供方法依据。
+
+- evidence_pointer：Exploring Mechanisms
+
+### 51. P4 S1
+
+- order：51
+
+- section：Exploring Mechanisms
+
+- locator：P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：图5显示均分和慷慨组用户发送推荐时的App经验略高；Table 7显示这两组的经验交互显著为正，说明更有经验的邀请者发出的推荐更易被接受。
+
+- rhetorical_function_cn：提供选择性推荐机制的间接证据。
+
+- depends_on_cn：App经验变量
+
+- sets_up_cn：为讨论中“亲社会方案促进更好匹配”的贡献做支撑。
+
+- evidence_pointer：Figure 5, Table 7
+
+### 52. P1-P3
+
+- order：52
+
+- section：Discussion: Theoretical Contributions
+
+- locator：P1-P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究补充了两个文献流：同伴影响因果估计和推荐激励设计，首次比较纯自利/均分/纯慷慨三种奖励分配方案。
+
+- rhetorical_function_cn：把实证结果提升为对文献的理论贡献。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：为管理含义和边界条件提供框架。
+
+- evidence_pointer：Discussion
+
+### 53. P1-S2
+
+- order：53
+
+- section：Discussion: Managerial Implications
+
+- locator：P1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：慷慨亲社会推荐奖励方案优于纯自利方案；企业应倾向采用有显著亲社会成分的奖励结构来促进病毒式采纳。
+
+- rhetorical_function_cn：形成可直接使用的管理建议。
+
+- depends_on_cn：理论贡献
+
+- sets_up_cn：为结论部分重复核心发现做铺垫。
+
+- evidence_pointer：Discussion, Managerial Implications
+
+### 54. P1 S1-S3
+
+- order：54
+
+- section：Discussion: Limitations and Directions
+
+- locator：P1 S1-S3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：结论可能不适用于低网络效应情境、更大奖励金额或不同人口结构；研究者应测试这些边界。
+
+- rhetorical_function_cn：主动限定外部效度，防止过度推广。
+
+- depends_on_cn：研究情境
+
+- sets_up_cn：为未来研究提供方向。
+
+- evidence_pointer：Discussion, Limitations
+
+### 55. P1-P2
+
+- order：55
+
+- section：Conclusions
+
+- locator：P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：两个实验一致证明亲社会奖励方案通过提高受邀者接受率部分来自精准推荐，从而贡献于在线推荐项目最优设计。
+
+- rhetorical_function_cn：压缩全文发现，重复贡献声明。
+
+- depends_on_cn：实验1/2及机制分析
+
+- sets_up_cn：收束全文，不留开放主问题。
+
+- evidence_pointer：Conclusions
+
+## 写作技术
+
+- gap_construction_cn：先承认“同伴效应存在”已被随机实验证明，再指出“如何创造/最大化传染”是下一个关键问题；用行业实例和Intuit CEO的负面经历说明推荐奖励方案广用但有效性开放；文献综述进一步压缩为“实验室为主、未覆盖纯自利/纯慷慨、缺少线下WOM测量”。
+
+- signposting_cn：引言用“After establishing... it becomes natural to evolve towards asking how...”完成阶段转移；随后用“In Experiment 1... Experiment 2... Our main finding...”预告研究序列；每个实验前都有“设计这个实验是为了解决前一个实验的什么问题”的说明。
+
+- transition_logic_cn：实验1结尾点出其不能完全追踪机制，实验2开头明确“复制并探索机制”；机制分析开头又提出两个相互竞争的解释，然后用经验交互检验；讨论部分先归入两个文献流，再转化为管理建议，最后用边界条件收敛。
+
+- claim_evidence_rhythm_cn：先给主结果，再附回归表；每个表后紧跟解释；在每一个机制解释后立即放条件转化率或交互项结果，避免只讲理论故事。
+
+- benchmark_narrative_cn：C1和C2被嵌入实验设计一节，而不是事后找对照组；分析时明确C2为基线，理由是把提醒通知效应分离出去；后续对偶层和交互分析继续使用同一控制组，使benchmark链条一致。
+
+- theory_return_cn：机制分析后，讨论部分把Table 5/6/7的结果重新装回元感知愧疚、亲社会幸福和更好匹配理论，并说明结果反驳纯理性自利模型。
+
+- contribution_positioning_cn：贡献定位为对病毒营销两个研究流的补充：因果同伴影响与推荐激励设计；强调“首批”“三个方案首次同框”“两个随机田野实验”，而不是单点性能改进。
+
+- novelty_protection_cn：通过两个实验的跨情境一致性、C1/C2控制、机制层对偶分析与经验交互，以及Poisson/前7天等稳健性检验，把“均分和慷慨更好”从一个实验的具体现象提升为可复用的设计知识；同时主动声明边界条件，避免被看成一次性情境结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立由已有因果证据到设计问题的递进：先综述同伴效应存在，再问如何通过奖励制造和最大化传染。
+
+- research_job_cn：找到领域内已确立的因果事实与尚未解决的设计问题之间的落差。
+
+- required_evidence_cn：有代表性的随机田野实验文献和一个具体的设计问题。
+
+- transition_to_next_cn：用“既然存在已经成立，接下来是怎么做”引出理论选择。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：从理论或知识基础推导出离散、清晰的的设计空间。
+
+- research_job_cn：选择能支撑设计空间的理论，例如偏好类型或社会心理机制，并排除连续空间。
+
+- required_evidence_cn：理论命题能明确对应到可操作的处理水平，且各水平在实践中有对应案例。
+
+- transition_to_next_cn：宣布用随机实验检验这些理论预测。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述随机化、控制组、基线选择和制度细节，让读者相信因果识别。
+
+- research_job_cn：在真实合作环境中部署实验，设置自然对照和分离干扰的控制组，记录随机化概率和奖励制度。
+
+- required_evidence_cn：完整的实验分组表、随机化概率、处理组与控制组特征平衡结果。
+
+- transition_to_next_cn：用第一个情境的局限引出第二个情境。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：有意选择两个互补情境，第一个提供难测机制，第二个提供可追踪机制。
+
+- research_job_cn：寻找能分别测量总效应和内部过程的环境；第二个情境尽量与第一个情境在产品类型和用户群上相似。
+
+- required_evidence_cn：第一个情境的架构约束和测量方案；第二个情境的日志追踪能力。
+
+- transition_to_next_cn：指出第二个实验不仅能复制，还能分解和追问机制。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：在不同分析层面报告结果：发送层面、转化层面、对偶接受层面。
+
+- research_job_cn：建立与理论机制对应的多个因变量，分别做回归。
+
+- required_evidence_cn：每个因变量有清晰定义和回归模型，结果表能支撑分解逻辑。
+
+- transition_to_next_cn：从“哪些组更高”转向“为什么更高”。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用异质性/交互分析为机制提供间接证据。
+
+- research_job_cn：找到能够区分竞争机制的可观察变量，例如经验、关系强度、活跃度，检验其与处理的交互。
+
+- required_evidence_cn：交互项结果和可视化，能排除完全由直接奖励驱动的替代解释。
+
+- transition_to_next_cn：用稳健性检验排除制度细节和测量问题。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：报告稳健性检验，并主动列出边界条件。
+
+- research_job_cn：变换模型、样本窗口、替代变量；诚实说明人口统计、奖励规模等未覆盖范围。
+
+- required_evidence_cn：稳健性结果一致；边界条件与数据可得性对应。
+
+- transition_to_next_cn：把结果送回理论和管理建议。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：在讨论中把结果重新连接到引言缺口，声明理论贡献、管理含义和边界。
+
+- research_job_cn：用机制证据保护贡献，明确指出最佳实践应偏向亲社会分配。
+
+- required_evidence_cn：主结果、机制结果和稳健性结果的综合解释。
+
+- transition_to_next_cn：无，文章收束。
+
+### most_transferable_moves
+
+1. 用“已证明存在效应→应研究如何设计机制”两步法构造研究问题
+
+2. 把连续设计空间压缩为理论上明确、实践中有对应的离散方案
+
+3. 设两个控制组把提醒/通知等拉动机制与核心处理分开
+
+4. 把总效应分解为发送、转化、接受三个层次
+
+5. 用经验/活跃度交互给“选择性推荐”这类不可直接观察机制提供间接证据
+
+6. 在贡献部分把结果归入两个文献流，而不是只声称表现更好
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要与真实移动游戏公司建立合作并获得App内随机分配权限
+
+2. 需要跨国家/跨情境的两个现场实验，样本量分别达1633和2817
+
+3. 实验1依赖地理感应和邀请归属屏幕测量线下WOM，普通平台难以复制
+
+4. 实验2需要完整的邀请发送→接受日志和对偶数据
+
+5. 需要在自利组隐藏“邀请者得奖”这一精细设计，需要产品端支持
+
+6. 需要获取前测行为数据用于平衡性检验，并非所有企业都会提供
+
+7. 无法获得人口统计信息是移动游戏生态的公共约束
+
+### what_not_to_copy_superficially_cn
+
+1. 不能在没有随机分配的情况下声称“亲社会方案优于自利方案”
+
+2. 不能只比较转化总数而不区分发送数与接受率，否则机制主张不成立
+
+3. 不能把App经验交互等同于“选择性推荐”的直接证据，需谨慎表述
+
+4. 不能在有多个统计不显著差异的情况下仍声称“慷慨优于均分”
+
+5. 不能忽略提醒通知等干扰机制，必须设计出分离它的控制组
+
+6. 不能把两个游戏的结论无条件推广到所有推荐奖励场景，需保留边界
+
+- single_best_description_of_the_routine_cn：先用理论划分奖励分配空间，再以两个随机田野实验建立因果主效应，再用接受率与经验交互拆开机制黑箱，最后把结果送回亲社会与愧疚理论，形成可复用的激励设计知识。
+
+## 分析边界
+
+本分析基于提供的全文和表格/图；无法访问在线补充附录A/B中的具体数据表，因此部分稳健性细节只能依据正文指认；图表以图片形式呈现，未核对所有数值；文末参考文献与致谢未纳入论证动作编码；定位以章节、段、表、图描述，不包含真实期刊页码。

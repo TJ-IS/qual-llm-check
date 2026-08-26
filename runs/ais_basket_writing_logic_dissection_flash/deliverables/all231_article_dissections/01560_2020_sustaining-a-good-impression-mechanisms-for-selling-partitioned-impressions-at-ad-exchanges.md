@@ -1,0 +1,2175 @@
+# Sustaining a Good Impression: Mechanisms for Selling Partitioned Impressions at Ad Exchanges
+
+- 作者：Sameer Mehta; Milind Dawande; Ganesh Janakiraman; Vijay Mookerjee
+- 年份 / 期刊：2020 / Information Systems Research
+- DOI：10.1287/isre.2019.0878
+- 源文件：01560_2020_sustaining-a-good-impression-mechanisms-for-selling-partitioned-impressions-at-ad-exchanges.md
+- 论文主类型：analytical_mechanism_or_optimization
+- 主导写作弧线：formal_model_mechanism_simulation_policy
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：移动广告交易所在实时拍卖中把一次印象整个卖给单一广告主，忽略了广告主支付意愿在印象生命周期内的变化，造成配置低效；如何设计可分时段出售印象、且适合实时竞价的收益最优机制，并同时保障广告主长期福利？
+
+- 制品与设计：论文提出了两类广告拍卖机制：OPT-IR（每个拍卖满足个体理性约束的最优机制）和OPT-MB（长期互惠最优机制）。两者都把印象切成多个时间槽，用动态规划决定广告序列；OPT-IR使用虚拟价值分配并采用随机化支付以解决实时支付计算困难；OPT-MB采用VCG分配并固定转移每个广告主的期望BASE效用，实现一阶最优分配和简单支付。
+
+- 客观结果：理论证明OPT-IR和OPT-MB分别是两个设置下的收益最优机制；解析示例展示OPT-IR相对BASE既可能给交易所和广告主双赢，也可能让部分广告主受损；数值实验表明相对BASE，交易所收入增益在7%到33%左右，广告异构性和竞争越强增益越大，OPT-MB在完全保留广告主BASE效用的同时给交易所更高收益。
+
+- 核心贡献：作者声称的核心贡献是：提出利用分区印象消除传统单一广告拍卖配置低效的机制设计框架；推导出在两种不同广告主福利保障下的最优机制；提出数字广告领域新颖的随机化支付规则，使其能实时实现并兼容CPC/CPM；识别广告主在收益型最优机制下可能受损的问题并构造互惠机制；量化机制在现实参数下的收益和福利边界。
+
+- 整篇论证链：论文从移动广告交易所按一个印象只卖给一个广告主的现状出发，用两广告示例说明广告在会话不同时段的即时价值不同，单一广告分配会造成交易所收入损失。由此提出把印象切分为时间槽顺序展示多个广告的机制设计问题。作者先用Myerson机制设计框架将问题形式化为IC/IR约束下的期望收入最大化问题（P^IR），并给出OPT-IR机制：用虚拟价值最大化做分配、用Myerson支付公式收费。由于第二项积分依赖广告序列在出价变化时的多次跳变而难以实时计算，论文引入随机化支付，使期望支付与原最优机制相同，并可转化为CPC或CPM执行。随后，作者构造并分析两种替代机制：一种是每个时间槽独立拍卖的SEQ机制，证明它是近视的，在估值与点击概率负相关时收入显著低于OPT-IR，从而说明不能简单套用现有拍卖；另一种是沿用现状的BASE机制（同一广告全程展示），证明它对交易所是P^IR的可行解，因此OPT-IR总给交易所更高收益，但广告主可能更好也可能更差，并通过两个解析场景分别给出win-win和win-lose。为弥补广告主可能受损的问题，作者提出第二个设置P^MB：要求广告主长期至少获得BASE效用，并证明由VCG分配加固定BASE效用转移构成的OPT-MB机制达到上界，是一阶最优且互惠的机制。最后，在基于行业参数的同质/异构广告测试床上用100万样本的数值仿真量化两个机制相对BASE的收入增益、广告主效用增益和社会福利水平，并分析参数变化如何影响增益。文章把局部性能差逐级上升为机制性质、福利权衡和适用边界，最终回到配置低效的消除与实时可实施性。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：全文以机制设计形式模型为主线：定义参与者、私人类型、机制、IC/IR约束，推导收益最优机制，用定理证明最优性，并用解析示例和数值仿真评估。没有构建软件制品、不依赖数据集benchmark，也没有现场实验。
+
+- 主导写作弧线判定：论文遵循“形式化机制问题→设计最优机制→解析/仿真评估→管理含义”的弧线：先建立P^IR和P^MB，再给出OPT-IR/OPT-MB/S EQ/BASE四种机制，用定理、示例和数值测试床完成比较，最后在结论中讨论该类机制可否迁移到共享资源、共享空间等其他场景。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：论文分为六个论证阶段：第一阶段把真实问题抽象成机制设计问题；第二阶段求解并实现第一类最优机制OPT-IR；第三阶段引入myopic SEQ机制作为反面对照；第四阶段以BASE现状机制为基准并分析利益相关者福利；第五阶段构建互惠机制OPT-MB；第六阶段用数值实验量化所有机制。各阶段按“问题→求解→基准→福利→补偿→量化”的顺序累积。
+
+### studies_or_phases
+
+#### 1. Setting 1问题形式化
+
+- order：1
+
+- name_cn：Setting 1问题形式化
+
+- question_cn：如何把分区印象出售建模为广告交易所的收益最大化机制设计问题？
+
+- inputs_and_setting_cn：印象被分为N个等长时间槽；广告主拥有私人估值r_a，点击概率p_{a,n}共同知识；用户以概率λ留在会话，点击后会话结束。
+
+- designed_or_compared_object_cn：直接机制μ=(Π, M)：分配规则给出每个时间槽展示哪个广告，支付规则给出各广告主期望支付。
+
+- baseline_control_or_counterfactual_cn：无——本阶段只做形式化设定，传统机制和VCG机制作为后续参照。
+
+##### objective_metrics
+
+1. ad exchange expected revenue
+
+2. incentive compatibility (IC)
+
+3. individual rationality (IR)
+
+- analysis_method_cn：机制设计建模；用revelation principle把注意力限制在IC/IR直接机制；定义虚拟价值并假设正则分布使虚拟价值单调。
+
+- main_result_cn：形成问题(P^IR)：在IC/IR约束下最大化广告主期望支付之和；同时给出VCG效率机制的动态规划形式作为参照。
+
+- argumentative_role_cn：将现实中的“分区印象”转化为标准机制设计问题，建立后续机制求解和比较的统一框架。
+
+- remaining_uncertainty_cn：没有给出最优机制的具体形式，也没有考虑支付规则是否可实时计算。
+
+- link_to_next_phase_cn：为Section 4求解OPT-IR提供了被优化的目标函数和约束条件。
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Section 3.2
+
+3. Section 3.3
+
+#### 2. OPT-IR最优机制推导与实时实现
+
+- order：2
+
+- name_cn：OPT-IR最优机制推导与实时实现
+
+- question_cn：在P^IR下如何得到交易所收益最优且能实时运行的机制？
+
+- inputs_and_setting_cn：同Setting 1假设：正则分布、虚拟价值单调、动态规划状态为当前时间槽和剩余价值。
+
+- designed_or_compared_object_cn：OPT-IR机制：分配规则最大化虚拟价值加权的总点击概率；支付规则按Myerson公式；随机化支付规则RAND；CPC/CPM实现。
+
+- baseline_control_or_counterfactual_cn：VCG效率机制作为效率参照；非随机化的Myerson支付作为实现难度对照。
+
+##### objective_metrics
+
+1. expected revenue optimality
+
+2. allocation computation complexity O(AN)
+
+3. expected payment equality
+
+4. IC/IR preservation under randomized payments
+
+- analysis_method_cn：Myerson最优拍卖理论；动态规划；随机化期望相等论证；CPC/CPM支付转化。
+
+- main_result_cn：Theorem 1证明OPT-IR是P^IR最优；分配规则可用O(AN)动态规划计算；原始支付规则因广告序列随出价多次跳变而难以实时计算，随机化支付RAND在保持IC/IR下实现相同期望收入，并可在CPC/CPM格式下执行。
+
+- argumentative_role_cn：给出第一类设置的最优机制，并解决实时实现这一关键设计挑战。
+
+- remaining_uncertainty_cn：尚未说明广告主福利相对现状如何，也没有与更自然的myopic机制或现状BASE机制比较。
+
+- link_to_next_phase_cn：由于随机支付和实时实现已经解决，接下来可以评估比OPT-IR更简单的SEQ机制，以及实际使用的BASE机制。
+
+##### evidence_pointers
+
+1. Section 4 Theorem 1
+
+2. Section 4.1
+
+3. Section 4.2
+
+4. Section 4.2.1-4.2.3
+
+#### 3. SEQ近视机制与OPT-IR比较
+
+- order：3
+
+- name_cn：SEQ近视机制与OPT-IR比较
+
+- question_cn：如果每个时间槽独立拍卖，是否会达到近似最优？何时会失败？
+
+- inputs_and_setting_cn：两个/多个广告、两个或十个时间槽；点分布或常数衰减率；负相关参数α,β。
+
+- designed_or_compared_object_cn：SEQ机制：每槽独立用Myerson单物品拍卖选出当槽广告并收取最小出价。
+
+- baseline_control_or_counterfactual_cn：OPT-IR机制作为最优基准；Example 1、Example 2、Example 3作为反例；Theorem 2/3和数值表8作为边界测试。
+
+##### objective_metrics
+
+1. revenue ratio REVENUE(SEQ)/REVENUE(OPT-IR)
+
+2. strict suboptimality conditions
+
+3. optimality sufficient condition
+
+- analysis_method_cn：解析反例、充分条件定理、数值模拟（100万个实例）。
+
+- main_result_cn：SEQ是近视的：在Example 1中收益可仅为OPT-IR的一半；负相关不是充分条件；Theorem 2给出常数衰减和W函数条件下SEQ严格次优，Theorem 3给出估值与各槽点击概率同序时SEQ最优；数值显示负相关越强，SEQ相对OPT-IR越差。
+
+- argumentative_role_cn：排除“天然但短视”的槽级拍卖，强调OPT-IR考虑未来价值的重要性，并给出可预测次优的边界条件。
+
+- remaining_uncertainty_cn：仍然没有以当前交易所使用的BASE机制为基准，也没有评估广告主福利。
+
+- link_to_next_phase_cn：转向当前实践的BASE机制，进入利益相关者福利分析。
+
+##### evidence_pointers
+
+1. Section 5
+
+2. Section 6 Example 1
+
+3. Section 6.2 Theorem 2
+
+4. Section 6.4 Theorem 3
+
+5. Section 6.5 Table 8
+
+#### 4. BASE机制与广告主福利影响
+
+- order：4
+
+- name_cn：BASE机制与广告主福利影响
+
+- question_cn：相对传统BASE机制，OPT-IR总改善交易所收入吗？广告主是否一定会受益？
+
+- inputs_and_setting_cn：两个广告、两个时间槽；虚拟价值非负；两类参数场景（win-win和win-lose）。
+
+- designed_or_compared_object_cn：BASE机制：强制所有时间槽展示同一广告的最优拍卖；OPT-IR机制。
+
+- baseline_control_or_counterfactual_cn：BASE机制作为现状基准；两个解析场景分别构造广告主全受益和受损的参数。
+
+##### objective_metrics
+
+1. expected revenue
+
+2. expected advertiser utility
+
+3. social welfare
+
+4. win-win/win-lose classification
+
+- analysis_method_cn：约束优化求解BASE；解析推导两个场景下的期望效用和收益；表格总结。
+
+- main_result_cn：BASE是可建模为P^IR加同槽约束的问题，最优解是最高虚拟价值广告全程展示并按最小胜出价收费；因为BASE是P^IR可行解，OPT-IR收益总不低于BASE；但广告主可能更好也可能更差，win-win和win-lose场景均被解析验证。
+
+- argumentative_role_cn：确认当前实践的缺陷并不足以保证广告主在收入型最优机制下受益，为设置2的互惠机制提供动机。
+
+- remaining_uncertainty_cn：尚未给出如何构造保证广告主长期受益的最优机制。
+
+- link_to_next_phase_cn：自然引出长期BASE效用约束下的P^MB设置和OPT-MB机制。
+
+##### evidence_pointers
+
+1. Section 7 Theorem 4
+
+2. Section 8
+
+3. Section 8.1 Table 9
+
+4. Section 8.2 Table 10
+
+#### 5. OPT-MB互惠机制
+
+- order：5
+
+- name_cn：OPT-MB互惠机制
+
+- question_cn：能否设计一个机制，使交易所收益不低于BASE、同时每个广告主长期至少得到BASE效用？
+
+- inputs_and_setting_cn：同Setting 1的估值分布和点击概率结构，但用长期期望BASE效用代替单次IR约束。
+
+- designed_or_compared_object_cn：OPT-MB机制：VCG效率分配加上固定转移E[U_VCG]-E[U_BASE]；与OPT-IR和BASE比较。
+
+- baseline_control_or_counterfactual_cn：BASE机制作为互惠底线；OPT-IR作为非互惠最优机制；VCG作为效用上界来源。
+
+##### objective_metrics
+
+1. revenue optimality under P^MB
+
+2. first-best allocation
+
+3. BASE utility guarantee
+
+4. computation simplicity
+
+5. win-win and win-lose scenario contrast
+
+- analysis_method_cn：构造P^MB的上界并用VCG实现；重新分析之前两类场景，比较OPT-MB与OPT-IR。
+
+- main_result_cn：Theorem 5：OPT-MB是P^MB最优；分配为VCG一阶最优；每个广告主长期恰得BASE效用，交易所获取剩余社会福利；在win-win场景OPT-MB给交易所更高收益，在win-lose场景广告主免受损失但交易所收益涨幅更小。
+
+- argumentative_role_cn：提供可吸引广告主长期参与的现实可行机制，补足OPT-IR对广告主福利不设防的缺口。
+
+- remaining_uncertainty_cn：还没有在更现实的多广告、异构广告环境下量化相对收益。
+
+- link_to_next_phase_cn：进入数值测试床，系统量化两个机制相对BASE的收益和福利。
+
+##### evidence_pointers
+
+1. Section 9 Theorem 5
+
+2. Section 9.1 Tables 11-12
+
+#### 6. 数值测试床与边界分析
+
+- order：6
+
+- name_cn：数值测试床与边界分析
+
+- question_cn：在接近行业实践的参数下，OPT-IR和OPT-MB相对BASE能带来多大收益与福利增益？增益随广告异构性和竞争如何变化？
+
+- inputs_and_setting_cn：A=10, N=10；估值U[0,1]；λ=0.9；同质/异构广告场景；常数衰减率；额外变化：衰减率六种分布，A=10,20,30；100万个采样实例。
+
+- designed_or_compared_object_cn：OPT-IR机制、OPT-MB机制、BASE机制；同质与异构广告测试床。
+
+- baseline_control_or_counterfactual_cn：BASE机制作为收入/效用增益的分母；同质广告场景作为异构广告的反事实对照；衰减率系数变化和广告主数量变化作为边界测试。
+
+##### objective_metrics
+
+1. revenue gain ρ^μ vs BASE
+
+2. utility gain η^μ vs BASE
+
+3. percentage of first-best social welfare
+
+- analysis_method_cn：蒙特卡洛样本平均（1,000,000实例）；参数扫描表（Table 13, 14, Figure 3）。
+
+- main_result_cn：OPT-IR在同质和异构场景分别带来7.01%和18.22%的交易所收入增益；OPT-MB为23.02%和33.60%，而广告主效用增益近似为0（只获得BASE效用）；OPT-IR下广告主效用增益同质13.72%、异构55.61%；社会福祉BASE为84.48%/77.45%，OPT-IR为91.54%/95.46%，OPT-MB为100%；衰减率变异越大、广告主数量越多，增益越大。
+
+- argumentative_role_cn：用量化结果证明机制不是理论空想，并把收益边界与广告异构性、竞争强度联系起来；也为机制选择提供管理启示。
+
+- remaining_uncertainty_cn：没有真实广告交易数据；假设click probabilities为共同知识且估值静态；未考虑动态机制设计和变长slot优化。
+
+- link_to_next_phase_cn：由数值结果进入结论，讨论适用边界、未来扩展和应用场景。
+
+##### evidence_pointers
+
+1. Section 10.1
+
+2. Table 13
+
+3. Figure 3
+
+4. Table 15
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 移动广告生态中广告交易所作用增大。
+
+2. PHENOMENON: 传统机制把一个印象全程只展示一个广告。
+
+3. LIMITATION: 这种机制忽略广告主在印象生命周期中支付意愿变化，造成配置低效。
+
+4. RQ_OR_OBJECTIVE: 提出顺序展示多个广告的机制以消除效率损失。
+
+5. STUDY_OVERVIEW: 考虑个体理性和长期互惠两种设置并推导收益最优机制。
+
+6. RESULT: OPT-IR使用随机化支付，OPT-MB保证长期win-win。
+
+7. CONTRIBUTION: 两种机制的分配和支付可高效计算，适合RTB。
+
+### introduction_moves
+
+1. CONTEXT: 移动出版商依赖广告收入；行业增长。
+
+2. PRACTICAL_STAKES: 移动广告已占广告总收入重要比例。
+
+3. PHENOMENON: 传统广告交易所单个广告全程展示的销售方式。
+
+4. LIMITATION: 用图例展示不同广告在不同时段的即时价值差异。
+
+5. GAP: 缺少能利用随时间变化的支付意愿的机制。
+
+6. RQ_OR_OBJECTIVE: 提出分区出售印象的机制设计目标。
+
+7. STUDY_OVERVIEW: 贡献部分预告OPT-IR和OPT-MB。
+
+8. CONTRIBUTION: 实时可计算、互惠性、数值增益。
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 赞助搜索拍卖、位置槽分配文献。
+
+2. LIMITATION: 已有文献处理空间槽而非时间槽，且没有考虑广告主激励或只考虑效率。
+
+3. GAP: 信息不对称下销售分区印象的最优机制缺失。
+
+4. THEORY_INTRO: Myerson机制设计、revelation principle、虚拟价值、VCG。
+
+5. THEORY_PROPOSITION: 以IC/IR约束刻画广告主激励。
+
+6. REQUIREMENT: 分配必须是动态的，支付必须在150ms内可计算。
+
+7. DESIGN_FEATURE: 虚拟价值最大化分配加随机化支付。
+
+### artifact_design_moves
+
+1. REQUIREMENT: 机制需实时竞价、简单结构、可兼容CPC/CPM。
+
+2. DESIGN_FEATURE: OPT-IR的分配DP与随机支付规则。
+
+3. DESIGN_FEATURE: SEQ逐槽拍卖。
+
+4. DESIGN_FEATURE: BASE全程同一广告的最优单物品拍卖。
+
+5. DESIGN_FEATURE: OPT-MB的VCG分配+固定BASE效用转移。
+
+6. LIMITATION: OPT-IR支付规则无法直接实时计算。
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST: SEQ机制作为自然但潜在的次优基准。
+
+2. BENCHMARK_OR_CONTRAST: BASE机制作为现状基准。
+
+3. BENCHMARK_OR_CONTRAST: VCG作为效用上界。
+
+4. METHOD_JUSTIFICATION: 用解析例子证明win-win/win-lose的可能性存在。
+
+5. RESULT: Example 1、Theorem 2、Table 8说明SEQ次优。
+
+6. RESULT: Tables 9-12说明福利分配。
+
+7. RESULT: Table 13和Figure 3量化收益增益。
+
+8. ROBUSTNESS_OR_BOUNDARY_TEST: Section 6.3说明负相关不是必要条件；Section 6.4给出最优性充分条件。
+
+9. BOUNDARY_CONDITION: 异构广告和竞争越强增益越大；OPT-MB牺牲部分交易所收益换取广告主保障。
+
+### discussion_and_contribution_moves
+
+1. RESULT: 两个机制都显著提升交易所收入和社会福利。
+
+2. CONTRIBUTION: 随机支付、互惠机制、实时实现。
+
+3. BOUNDARY_CONDITION: 机制适用于估值静态、点击概率共同已知、会话有界等假设。
+
+4. LIMITATION_AND_FUTURE: 动态机制设计、slot长度优化、header bidding互动。
+
+5. CONTRIBUTION: 转化为一般共享资源/空间分配问题，给出其他应用。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Myerson (1981) 最优拍卖理论：虚拟价值、IC/IR直接机制、收益等价。
+
+2. Revelation principle（Myerson 1981）
+
+3. VCG机制（Krishna and Perry 1998）
+
+4. Sun et al. (2017) 移动应用内广告最优序列动态规划
+
+5. 单物品拍卖中payment rule的经典推导
+
+6. CPC/CPM数字广告定价实践
+
+7. McAfee and Vassilvitskii (2012) 交易所设计原则
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：机制设计理论直接规定了机制的形式：目标函数、可行集、分配规则和支付规则都从Myerson/VCG框架推导；随机化支付也由保持期望收益和IC/IR约束的设计原则推导；OPT-MB更是直接用VCG上界和BASE效用转移构造。理论不是事后解释，而是分配的生成来源。
+
+- 理论到设计翻译链：传统单个广告全程展示导致低效 → 把印象分为N个时间槽并顺序展示多个广告 → 用机制设计框架把问题形式化为P^IR → 用虚拟价值最大化得到OPT-IR分配 → 用Myerson支付公式得到支付 → 因支付积分难以实时计算，用均匀随机化U(0,r_a)重构支付保持期望收益 → 适配CPC/CPM → 同时构造逐槽独立拍卖的SEQ作为myopic反例 → 把现状BASE建模为同槽约束的P^IR → 证明由BASE约束推出广告主可能受损，引入P^MB设置 → 用VCG分配保证社会最优，再用固定转移E[U_VCG]-E[U_BASE]满足长期BASE效用约束，得到OPT-MB → 用动态规划和固定转移保证实时计算。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：广告主拥有私人每点击估值，广告交易所不知道真实估值。
+
+- mechanism_cn：信息不对称要求激励兼容，否则广告主会谎报估值。
+
+- design_requirement_cn：机制必须通过分配和支付规则使真实报告是BNE。
+
+- artifact_choice_cn：所有机制都被限定为IC直接机制。
+
+- evaluated_contrast_cn：相对无IC约束的基准更有效率。
+
+- objective_result_cn：定理证明OPT-IR/OPT-MB在各自约束下收益最优。
+
+##### evidence_pointers
+
+1. Section 3.1 IC constraints
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：最优拍卖应最大化虚拟价值加权的分配。
+
+- mechanism_cn：虚拟价值ψ(r)=r-(1-F)/f将信息租金和分配目标结合。
+
+- design_requirement_cn：分配规则应选择使总虚拟价值最大的广告序列。
+
+- artifact_choice_cn：OPT-IR分配规则：在每个槽选argmax{ψ_a(r_a)p_{a,n}+λ(1-p_{a,n})R(n+1)}。
+
+- evaluated_contrast_cn：与按真实估值最大化的VCG效率分配对比。
+
+- objective_result_cn：OPT-IR在P^IR下是收益最优。
+
+##### evidence_pointers
+
+1. Section 4 Theorem 1
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：Myerson支付规则r_aΘ_a-∫Θ_a(t)dt实现IC/IR并提取信息租金。
+
+- mechanism_cn：积分项代表必须支付给广告主的期望信息租金。
+
+- design_requirement_cn：支付必须在150ms内计算。
+
+- artifact_choice_cn：使用随机化支付RAND：以U(0,r_a)随机样本替代积分。
+
+- evaluated_contrast_cn：相对原始逐点积分支付的计算难度；并与CPC/CPM格式对照。
+
+- objective_result_cn：期望支付相同，IC/IR保持，计算只需一次动态规划。
+
+##### evidence_pointers
+
+1. Section 4.2.1
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：经典单物品Myerson拍卖是每个时间槽的最优独立拍卖。
+
+- mechanism_cn：逐槽独立拍卖只考虑当前槽最大化，不跨槽关联。
+
+- design_requirement_cn：如果要为每个槽分别拍卖，则需要将印象视为N个独立拍卖。
+
+- artifact_choice_cn：SEQ机制：每槽用ψ_a(r_a)p_{a,n}选广告并收取最小胜出价。
+
+- evaluated_contrast_cn：与OPT-IR动态分配比较。
+
+- objective_result_cn：SEQ是近视的，可在特定条件下收益减半；存在充分次优条件。
+
+##### evidence_pointers
+
+1. Section 5-6
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：现状机制等价于P^IR加同一广告全程展示约束。
+
+- mechanism_cn：约束使每个槽虚拟价值比较退化为全程总点击概率比较。
+
+- design_requirement_cn：可通过求解约束优化得到最优BASE机制。
+
+- artifact_choice_cn：BASE机制：选择使ψ_aΘ_a总和最大的广告并在所有槽展示。
+
+- evaluated_contrast_cn：BASE作为P^IR可行解，因此OPT-IR收益总不低。
+
+- objective_result_cn：BASE机制公式由Theorem 4给出，且广告主可能受损。
+
+##### evidence_pointers
+
+1. Section 7 Theorem 4
+
+2. Section 8
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：VCG机制效率最优，能实现最大社会福利。
+
+- mechanism_cn：VCG的分配最大化和支付外部性使真实报告成为占优策略。
+
+- design_requirement_cn：希望收益最优且广告主长期至少得到BASE效用，则广告主总效用不能超过VCG社会福利减BASE效用。
+
+- artifact_choice_cn：OPT-MB：采用VCG分配（一阶最优），支付=M_VCG+E[U_VCG]-E[U_BASE]。
+
+- evaluated_contrast_cn：与OPT-IR、BASE比较广告主效用和交易所收益。
+
+- objective_result_cn：OPT-MB达到P^MB上界，广告主恰得BASE效用，交易所取得剩余剩余，社会福祉达到100%。
+
+##### evidence_pointers
+
+1. Section 9 Theorem 5
+
+2. Table 15
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 标准机制设计最优性证明（Theorem 1, 4, 5）
+
+2. 解析反例（Example 1/2/3）和解析场景（win-win/win-lose）
+
+3. 充分条件定理（Theorem 2, 3）
+
+4. 基于行业参数的蒙特卡洛数值仿真（100万个实例）
+
+5. 参数敏感性分析（衰减率分布变化、广告主数量变化）
+
+- why_these_evaluations_cn：机制设计问题很难用真实市场实验评价最优性，因此先以证明保证契约理论性质；再用解析例子说明现象存在；最后用数值测试床在接近行业实践的环境下量化收益和边界，弥补纯理论缺乏现实尺度的问题。
+
+- benchmark_and_contrast_chain_cn：先引入“想当然”的SEQ机制作为第一对照，证明它不最优；再以现状BASE机制作为第二对照，证明OPT-IR收益更高但广告主福利不确定；然后引入VCG作为效率上界和OPT-MB构造的基础；数值上BASE是分母，OPT-IR和OPT-MB互相比较，并进一步改变广告异构性、竞争者和衰减率来检验边界。
+
+### claim_evidence_ledger
+
+#### 1. 1
+
+- claim：OPT-IR是P^IR收益最优
+
+- evidence：Theorem 1证明；实际由虚拟价值单调性给出
+
+- status：形式证明
+
+#### 2. 2
+
+- claim：OPT-MB是P^MB收益最优且一阶最优分配
+
+- evidence：VCG上界加固定转移构造；Theorem 5
+
+- status：形式证明
+
+#### 3. 3
+
+- claim：SEQ是近视的且可能大幅次优
+
+- evidence：Example 1、Theorem 2、Table 8数值
+
+- status：解析示例+充分条件+数值
+
+#### 4. 4
+
+- claim：广告主在OPT-IR下可能更好或更差
+
+- evidence：win-win场景和win-lose场景解析表
+
+- status：解析示例
+
+#### 5. 5
+
+- claim：OPT-IR/OPT-MB相对BASE带来7%-33%收入增益
+
+- evidence：Table 13蒙特卡洛100万实例
+
+- status：数值模拟
+
+#### 6. 6
+
+- claim：广告异构性和竞争增强收益增益
+
+- evidence：Figure 3、Table 14变化分析
+
+- status：数值模拟
+
+#### 7. 7
+
+- claim：OPT-MB使广告主恰得BASE效用
+
+- evidence：支付公式(15)和数值η≈0
+
+- status：构造+数值
+
+- internal_validity_strategy_cn：使用Myerson最优性理论的充分条件（虚拟价值单调）和严格定理证明；用随机化支付的期望等价论证保持IC/IR；在解析场景中完全控制参数，因此win-win/win-lose结果不依赖噪声；数值实验固定seed逻辑并使用100万样本，使样本均值稳定。
+
+- external_validity_strategy_cn：采用行业公开参数构造测试床：30秒最低广告展示、300秒最大app会话、0.05%移动显示CTR、DoubleClick/OpenX刷新机制；广告主数量设为10；考虑同质/异构广告两类情境；衰减率结构采用Sun et al. (2017)的微观基础，从而把结果连接到真实广告生态。
+
+- what_is_not_actually_tested_cn：没有真实广告交易数据或现场实验；没有测试广告主估值随时间变化的动态机制设计；没有考虑slot长度可调；click probabilities为共同知识且与展示历史无关；随机化支付只验证期望收益，单次支付方差和广告主风险厌恶未讨论；真实RTB延迟下动态规划是否满足150ms只是复杂度推断。
+
+## 贡献闭环
+
+- technical_claim_cn：两个机制的分配规则都能在O(AN)动态规划内计算，支付规则分别通过随机化或固定转移实现，适合150ms内的实时竞价。
+
+- artifact_claim_cn：OPT-IR与OPT-MB是两种可实际运行的分区印象拍卖机制；随机化支付规则是数字广告文献中的新设计，支持CPC/CPM。
+
+- mechanism_claim_cn：导致改进的机制机制是：用虚拟价值分配替代简单出价拍卖可提取跨时间槽的信息租金；用动态规划代替逐槽近视拍卖可保留未来槽的机会价值；用BASE效用固定转移可将剩余从广告主转移给交易所而不破坏激励。
+
+- boundary_claim_cn：收益增益随广告点击概率随时间的异构性增强而增大，随广告主竞争增强而增大；SEQ在估值与点击概率负相关时表现不佳，但负相关并非必要；OPT-MB在win-win场景可给交易所更高收益，在win-lose场景牺牲部分交易所收益以保障广告主。
+
+- reusable_design_knowledge_cn：出售可分且有依赖关系的时间资源时，设计者应：将其建模为序列动态决策并用虚拟价值最大化；若Myerson支付不可实时计算，可用随机化支付保持期望收益；若要保障长期双边参与，可用VCG分配加固定效用转移构造互惠机制；实现上需考虑广告主重复参与和CPC/CPM格式兼容。
+
+- theoretical_contribution_cn：把最优拍卖从单物品或空间槽扩展到同一印象的多个时间槽；提出时间维度上的随机化支付机制；定义并求解了“互惠最优”机制，展示收益型最优机制与广告主福利保障之间的权衡；区分了myopic槽级拍卖与全局最优序列拍卖的收益差和条件。
+
+- how_discussion_closes_intro_gap_cn：结论部分重新指向引言中的配置低效：通过把印象切分并顺序出售，机制可让交易所利用广告主随时间变化的支付意愿，数值和理论均表明低效被消除；同时讨论动态机制设计、slot长度和header bidding，回应了引言提出的实时性和行业适应性要求。
+
+- overclaim_or_unsupported_leaps_cn：数值增益7%到33%来自仿真而非真实数据，推广需谨慎；OPT-MB虽保证了广告主长期BASE效用，但假设交易所和广告主都接受以BASE为参照，现实中BASE本身可能随市场变化；文章未讨论广告主风险厌恶和随机化支付在单次拍卖中的方差；click probabilities共同知识假设虽然被部分放宽，但最优性证明仍依赖它，不能过度宣称适用所有现实。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S2
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：移动出版商靠应用内广告获得收入，移动广告收入近年快速增长。
+
+- rhetorical_function_cn：把读者带入移动广告行业背景，建立研究的重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后面强调广告交易所的地位和收益损失铺路。
+
+- evidence_pointer：Introduction paragraph 1
+
+### 2. P1 S3-S4
+
+- order：2
+
+- section：Introduction
+
+- locator：P1 S3-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：过去发布商通过广告网络长期合同卖印象，现在广告交易所成为流行的实时拍卖方式。
+
+- rhetorical_function_cn：说明研究对象的真实平台已经大量出现。
+
+- depends_on_cn：移动广告增长背景
+
+- sets_up_cn：引入广告交易所作为后续机制设计的环境。
+
+- evidence_pointer：Introduction paragraph 1
+
+### 3. P2 S1-S3
+
+- order：3
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：广告交易所能给发布商提供流动性、透明度和更好价格，给广告主提供大规模库存和定向能力，因此增长迅猛。
+
+- rhetorical_function_cn：说明研究交易所机制不仅理论有趣，而且有重要实践影响。
+
+- depends_on_cn：前面提到的行业增长
+
+- sets_up_cn：决定后文以交易所收益最大化为目标。
+
+- evidence_pointer：Introduction paragraph 2
+
+### 4. P3 S1-S2
+
+- order：4
+
+- section：Introduction
+
+- locator：P3 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：本研究聚焦移动设备显示广告，移动应用内广告尤其能从消除低效中获益，因为app会话比网页访问长得多。
+
+- rhetorical_function_cn：从一般广告交易所收缩到移动应用内广告这一具体场景，并给出时间维度的重要性。
+
+- depends_on_cn：广告交易所背景
+
+- sets_up_cn：强化‘整个印象只展示一个广告会造成浪费’的观点。
+
+- evidence_pointer：Introduction paragraph 3
+
+### 5. P3 S3
+
+- order：5
+
+- section：Introduction
+
+- locator：P3 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：传统点击广告拍卖只从广告主处征集每点击价值报价，胜者广告在整个印象期间展示。
+
+- rhetorical_function_cn：用一句话陈述当前机制的核心。
+
+- depends_on_cn：移动广告场景
+
+- sets_up_cn：作为后续要挑战的现状。
+
+- evidence_pointer：Introduction paragraph 3
+
+### 6. P1-P2, Figure 1
+
+- order：6
+
+- section：Introduction 1.1
+
+- locator：P1-P2, Figure 1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：用两广告例子说明：B广告赢得拍卖后，随着会话进行，B的瞬时价值变化，而败者A的广告在某个区间瞬时价值高于B。
+
+- rhetorical_function_cn：用图形直观建立配置低效的现象。
+
+- depends_on_cn：传统机制描述
+
+- sets_up_cn：引出分区出售想法的动机。
+
+- evidence_pointer：Section 1.1, Figure 1
+
+### 7. P2末句
+
+- order：7
+
+- section：Introduction 1.1
+
+- locator：P2末句
+
+- move_code：LIMITATION
+
+- paraphrase_cn：因为B在整段展示，A在价值更高时段无法展示，这个阴影区域就是交易所的配置低效。
+
+- rhetorical_function_cn：将图形转化为正式低效定义。
+
+- depends_on_cn：两广告示例
+
+- sets_up_cn：定义论文要解决的问题。
+
+- evidence_pointer：Section 1.1, after Figure 1
+
+### 8. P3
+
+- order：8
+
+- section：Introduction 1.1
+
+- locator：P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：一个自然想法是拍卖时把印象分成多个时间槽，每个槽展示不同广告，只有印象持续到该槽时才实际显示。
+
+- rhetorical_function_cn：提出核心设计方向。
+
+- depends_on_cn：低效识别
+
+- sets_up_cn：为全文机制定义奠定基础。
+
+- evidence_pointer：Section 1.1, paragraph starting 'This brings us'
+
+### 9. P4
+
+- order：9
+
+- section：Introduction 1.1
+
+- locator：P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：技术上没有障碍——DoubleClick和OpenX允许发布商动态刷新广告。
+
+- rhetorical_function_cn：排除技术不可行性，告知读者设计是可实施的。
+
+- depends_on_cn：分区印象想法
+
+- sets_up_cn：后面实时计算要求。
+
+- evidence_pointer：Section 1.1, paragraph starting 'Furthermore, there is no technological hurdle'
+
+### 10. P5
+
+- order：10
+
+- section：Introduction 1.1
+
+- locator：P5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：对每个槽独立分配广告的myopic机制会因忽略当前槽对将来槽的影响而给交易所带来次优收入。
+
+- rhetorical_function_cn：提前排除看似简单的槽级拍卖。
+
+- depends_on_cn：分区印象设计
+
+- sets_up_cn：后文Section 5-6详细比较SEQ。
+
+- evidence_pointer：Section 1.1, paragraph starting 'Given the discussion above'
+
+### 11. P6
+
+- order：11
+
+- section：Introduction 1.1
+
+- locator：P6
+
+- move_code：GAP
+
+- paraphrase_cn：还需要考虑广告主福利：交易所肯定比传统更好，但广告主可能受损，因此要考虑机制保证广告主至少得到传统机制下效用。
+
+- rhetorical_function_cn：提出第二个缺口，引导后续互惠机制设置。
+
+- depends_on_cn：myopic机制不足
+
+- sets_up_cn：为Section 8/9的win-lose和OPT-MB作铺垫。
+
+- evidence_pointer：Section 1.1, paragraph starting 'A related issue'
+
+### 12. P7
+
+- order：12
+
+- section：Introduction 1.1
+
+- locator：P7
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：在广告交易所主导的现实下，设计消除低效、适合实时竞价、结构简单的机制有重大意义。
+
+- rhetorical_function_cn：提炼研究目标并加诸现实重要性。
+
+- depends_on_cn：前文低效和福利问题
+
+- sets_up_cn：贡献列表的顺序。
+
+- evidence_pointer：Section 1.1 final paragraph
+
+### 13. P1
+
+- order：13
+
+- section：Introduction 1.2
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出分区出售印象的框架以解决单一广告主全程占有造成的低效。
+
+- rhetorical_function_cn：正式列出第一项贡献。
+
+- depends_on_cn：研究目标
+
+- sets_up_cn：让读者知道后文机制的新颖点。
+
+- evidence_pointer：Section 1.2 first paragraph
+
+### 14. P2
+
+- order：14
+
+- section：Introduction 1.2
+
+- locator：P2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：设置1要求每次拍卖IR，设置2要求长期至少BASE效用；分别得到OPT-IR和OPT-MB两个最优机制。
+
+- rhetorical_function_cn：预告两种设置和两种机制。
+
+- depends_on_cn：贡献列表
+
+- sets_up_cn：后文Section 4和Section 9的结构。
+
+- evidence_pointer：Section 1.2 second paragraph
+
+### 15. P3
+
+- order：15
+
+- section：Introduction 1.2
+
+- locator：P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：两个机制都适合RTB：分配可用O(AN)动态规划计算，OPT-MB的分配还是一阶最优。
+
+- rhetorical_function_cn：强调实际可部署性。
+
+- depends_on_cn：机制定义
+
+- sets_up_cn：后文实时实现讨论。
+
+- evidence_pointer：Section 1.2 third paragraph
+
+### 16. P4
+
+- order：16
+
+- section：Introduction 1.2
+
+- locator：P4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：OPT-IR支付规则难算，因为广告序列随出价变化多次跳变，没有序列改变时机的刻画。
+
+- rhetorical_function_cn：说明得到的机制不能直接使用，制造实现挑战。
+
+- depends_on_cn：OPT-IR机制
+
+- sets_up_cn：为随机化支付引入做铺垫。
+
+- evidence_pointer：Section 1.2 fourth paragraph
+
+### 17. P5
+
+- order：17
+
+- section：Introduction 1.2
+
+- locator：P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：开发随机支付规则，保持最优性且易实施，可兼容CPC和CPM；OPT-MB支付则因不需要信息租金而可简单预计算。
+
+- rhetorical_function_cn：展示解决实现问题的具体设计。
+
+- depends_on_cn：支付计算难题
+
+- sets_up_cn：后文Section 4.2详细说明。
+
+- evidence_pointer：Section 1.2 fifth paragraph
+
+### 18. P6-P7
+
+- order：18
+
+- section：Introduction 1.2
+
+- locator：P6-P7
+
+- move_code：RESULT
+
+- paraphrase_cn：预先宣告：交易所总受益，广告主可能受益也可能受损；数值研究显示收入增益可达7%-33%。
+
+- rhetorical_function_cn：在引言中给出关键结果，吸引读者并预告福利权衡。
+
+- depends_on_cn：机制设计结果
+
+- sets_up_cn：为后文的福利分析提供方向。
+
+- evidence_pointer：Section 1.2 sixth and seventh paragraphs
+
+### 19. P1
+
+- order：19
+
+- section：Introduction 1.3
+
+- locator：P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：列出论文结构：文献、形式化、OPT-IR、SEQ比较、BASE、福利、OPT-MB、数值、结论。
+
+- rhetorical_function_cn：路标章节，帮助读者导航。
+
+- depends_on_cn：全部贡献预告
+
+- sets_up_cn：为正文的顺序做模板。
+
+- evidence_pointer：Section 1.3
+
+### 20. P1
+
+- order：20
+
+- section：Literature Review
+
+- locator：P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：赞助搜索拍卖文献设计网页空间位置槽的机制。
+
+- rhetorical_function_cn：总结已有机制设计知识。
+
+- depends_on_cn：无
+
+- sets_up_cn：用于和本文时间槽分配形成对比。
+
+- evidence_pointer：Section 2 first paragraph
+
+### 21. P1 bullets
+
+- order：21
+
+- section：Literature Review
+
+- locator：P1 bullets
+
+- move_code：GAP
+
+- paraphrase_cn：与空间槽不同，本文时间槽顺序展示需要动态规划、依赖用户是否离开或点击、且一个广告可出现在多个槽。
+
+- rhetorical_function_cn：说明现有空间槽文献的差异意味着不能直接照搬。
+
+- depends_on_cn：已有文献
+
+- sets_up_cn：突出本文问题的新颖性。
+
+- evidence_pointer：Section 2 bullets
+
+### 22. P2
+
+- order：22
+
+- section：Literature Review
+
+- locator：P2
+
+- move_code：GAP
+
+- paraphrase_cn：Aumann等拍卖时间资源但目标是效率而非收益，且只允许连续时间区间分配，并证明NP难。
+
+- rhetorical_function_cn：把和本文最接近的文献及其局限摆出，强调目标不同。
+
+- depends_on_cn：时间资源拍卖知识
+
+- sets_up_cn：说明本文用单维私人信息、预定长度槽和收益目标能获得可解最优机制。
+
+- evidence_pointer：Section 2 paragraph 2
+
+### 23. P4-P5
+
+- order：23
+
+- section：Literature Review
+
+- locator：P4-P5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Sun等求解已知每点击价值的广告网络最优序列问题，但完全没有广告主激励和支付设计。
+
+- rhetorical_function_cn：指出最接近的动态规划问题仅是子问题。
+
+- depends_on_cn：动态规划文献
+
+- sets_up_cn：强调本文必须处理信息不对称和支付设计。
+
+- evidence_pointer：Section 2 paragraph 4
+
+### 24. P5
+
+- order：24
+
+- section：Literature Review
+
+- locator：P5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文的随机化支付在数字广告文献中是新颖的，且适合CPM/CPC。
+
+- rhetorical_function_cn：将解决方案贡献与传统机制设计实践连接。
+
+- depends_on_cn：识别Sun等的局限
+
+- sets_up_cn：让读者记住随机支付是核心创新。
+
+- evidence_pointer：Section 2 paragraph 5
+
+### 25. P5末句
+
+- order：25
+
+- section：Literature Review
+
+- locator：P5末句
+
+- move_code：GAP
+
+- paraphrase_cn：Sun等也完全忽略广告主福利；本文研究供给方和需求方福利，并引出互惠机制。
+
+- rhetorical_function_cn：引入福利研究缺口。
+
+- depends_on_cn：已有文献
+
+- sets_up_cn：为后文win-lose场景和OPT-MB做铺垫。
+
+- evidence_pointer：Section 2 paragraph 5 end
+
+### 26. Preliminaries
+
+- order：26
+
+- section：Section 3
+
+- locator：Preliminaries
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：定义印象由N个等长时间槽组成，每槽点击概率p_{a,n}，用户以概率λ停留且点击广告后会话结束。
+
+- rhetorical_function_cn：建立模型的基础变量。
+
+- depends_on_cn：引言中的分区印象想法
+
+- sets_up_cn：后续机制定义和动态规划。
+
+- evidence_pointer：Section 3 first list
+
+### 27. Advertisers paragraph
+
+- order：27
+
+- section：Section 3
+
+- locator：Advertisers paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：每个广告主有私人每点击估值r_a，独立同分布，已知分布函数；点击概率共同已知。
+
+- rhetorical_function_cn：引入信息不对称的模型结构。
+
+- depends_on_cn：基础变量
+
+- sets_up_cn：为该假设的后续放宽说明和机制最优性证明做基础。
+
+- evidence_pointer：Section 3 advertiser definition
+
+### 28. Click probabilities paragraph
+
+- order：28
+
+- section：Section 3
+
+- locator：Click probabilities paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：共同知识假设基于重复交互学习；即使点击概率私有，机制仍保持IC，只是最优性需要共同知识。
+
+- rhetorical_function_cn：为本假设的合理性辩护并界定其角色。
+
+- depends_on_cn：信息结构
+
+- sets_up_cn：避免读者认为机制适用范围太窄。
+
+- evidence_pointer：Section 3 click probabilities paragraph
+
+### 29. P1
+
+- order：29
+
+- section：Section 3.1
+
+- locator：P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：采用正则分布假设，保证虚拟价值单调且风险率非降。
+
+- rhetorical_function_cn：为Myerson最优拍卖可行提供条件。
+
+- depends_on_cn：估值分布
+
+- sets_up_cn：使Theorem 1的单调性证明成立。
+
+- evidence_pointer：Section 3.1 regularity assumption
+
+### 30. P2
+
+- order：30
+
+- section：Section 3.1
+
+- locator：P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：利用revelation principle，可以无损失地只考虑IC/IR直接机制。
+
+- rhetorical_function_cn：限定机制搜索空间，使问题可解。
+
+- depends_on_cn：机制设计理论
+
+- sets_up_cn：为定义机制μ和IC/IR约束提供理论基础。
+
+- evidence_pointer：Section 3.1 second paragraph
+
+### 31. P3-P4
+
+- order：31
+
+- section：Section 3.1
+
+- locator：P3-P4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：直接机制由分配规则和支付规则组成，并定义广告a在所有时段的期望点击概率Θ_a。
+
+- rhetorical_function_cn：把抽象机制落实到广告序列和支付函数。
+
+- depends_on_cn：直接机制概念
+
+- sets_up_cn：用于写出IC/IR数学约束。
+
+- evidence_pointer：Section 3.1 mechanism definition
+
+### 32. IC/IR formulas
+
+- order：32
+
+- section：Section 3.1
+
+- locator：IC/IR formulas
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：IC约束要求每个广告主真实报告估值是最优反应，IR约束要求参与拍卖的期望收益非负。
+
+- rhetorical_function_cn：把激励约束正式化。
+
+- depends_on_cn：期望点击概率定义
+
+- sets_up_cn：是P^IR问题的约束条件。
+
+- evidence_pointer：Section 3.1 IC/IR equations
+
+### 33. P1
+
+- order：33
+
+- section：Section 3.2
+
+- locator：P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：交易所目标是在IC/IR约束下最大化所有广告主的期望支付之和。
+
+- rhetorical_function_cn：正式提出P^IR问题。
+
+- depends_on_cn：IC/IR约束
+
+- sets_up_cn：后续最优机制求解的目标函数。
+
+- evidence_pointer：Section 3.2
+
+### 34. VCG paragraph
+
+- order：34
+
+- section：Section 3.3
+
+- locator：VCG paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：社会福利被定义为所有广告主期望价值之和，VCG机制实现IC/IR和社会福利最大化。
+
+- rhetorical_function_cn：引入效率机制作为参照。
+
+- depends_on_cn：P^IR框架
+
+- sets_up_cn：后文OPT-IR用虚拟价值替代真实估值，OPT-MB用VCG分配。
+
+- evidence_pointer：Section 3.3
+
+### 35. DP formula (5)
+
+- order：35
+
+- section：Section 3.3
+
+- locator：DP formula (5)
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：VCG分配可通过后向动态规划递归求解，每槽选择使当前价值加未来期望价值最大的广告。
+
+- rhetorical_function_cn：给出效率分配的计算方法。
+
+- depends_on_cn：社会福利定义
+
+- sets_up_cn：OPT-IR和OPT-MB分配计算直接复用该结构。
+
+- evidence_pointer：Section 3.3 equation (5)
+
+### 36. Theorem 1
+
+- order：36
+
+- section：Section 4
+
+- locator：Theorem 1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：用虚拟价值加权的总点击概率最大化分配，并用Myerson支付公式得到OPT-IR机制，它是P^IR最优解。
+
+- rhetorical_function_cn：给出第一设置的核心理论结果。
+
+- depends_on_cn：虚拟价值定义和IC/IR约束
+
+- sets_up_cn：后续实现和比较都基于这一机制。
+
+- evidence_pointer：Section 4 Theorem 1
+
+### 37. P1
+
+- order：37
+
+- section：Section 4 proof
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为证明最优性，只需验证每个广告主的期望点击概率在虚拟价值单调时关于出价单调。
+
+- rhetorical_function_cn：说明证明路径，降低读者理解成本。
+
+- depends_on_cn：Myerson最优拍卖条件
+
+- sets_up_cn：证明的核心是单调性。
+
+- evidence_pointer：Section 4 proof paragraph
+
+### 38. P1
+
+- order：38
+
+- section：Section 4.1
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：OPT-IR分配是VCG分配把估值换成虚拟价值后的结果，可通过O(AN)动态规划实现。
+
+- rhetorical_function_cn：把理论最优转化为可计算的算法。
+
+- depends_on_cn：Theorems和VCG DP
+
+- sets_up_cn：满足实时性要求。
+
+- evidence_pointer：Section 4.1
+
+### 39. P1-P2, Table 2-3
+
+- order：39
+
+- section：Section 4.2
+
+- locator：P1-P2, Table 2-3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：支付规则需要计算积分，但广告序列随广告主出价变化多次改变且无规律，只有离散化近似，成本极高。
+
+- rhetorical_function_cn：突出现实实施障碍。
+
+- depends_on_cn：OPT-IR支付规则
+
+- sets_up_cn：为随机支付引入提供动机。
+
+- evidence_pointer：Section 4.2, Tables 2-3
+
+### 40. P1
+
+- order：40
+
+- section：Section 4.2.1
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：由于广告主每天参与大量拍卖，可从U(0,r_a)随机抽取u_a，把积分替换为期望，构造RAND支付。
+
+- rhetorical_function_cn：提出随机化支付这一关键设计。
+
+- depends_on_cn：积分难以计算
+
+- sets_up_cn：证明期望收益等价且保持IC/IR。
+
+- evidence_pointer：Section 4.2.1
+
+### 41. P2
+
+- order：41
+
+- section：Section 4.2.1
+
+- locator：P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：RAND支付的期望等于OPT-IR支付，且因为分配函数单调，随机样本不超过真实出价，IR也保持。
+
+- rhetorical_function_cn：验证新支付规则没有破坏激励。
+
+- depends_on_cn：虚拟价值单调性
+
+- sets_up_cn：使随机支付成为合法最优机制。
+
+- evidence_pointer：Section 4.2.1 equations
+
+### 42. P1
+
+- order：42
+
+- section：Section 4.2.2
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：可把RAND支付转化为CPC：只在点击发生时收取M/Θ，使期望支付不变。
+
+- rhetorical_function_cn：连接主流定价格式。
+
+- depends_on_cn：RAND支付
+
+- sets_up_cn：说明机制对实践友好。
+
+- evidence_pointer：Section 4.2.2
+
+### 43. P1-P2
+
+- order：43
+
+- section：Section 4.2.3
+
+- locator：P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：也可转换为CPM：按槽位展示收费，若槽未实现则不收，概率加权使期望支付等于RAND支付。
+
+- rhetorical_function_cn：提供第二种主流格式的实现。
+
+- depends_on_cn：RAND支付和槽概率
+
+- sets_up_cn：强调OPT-IR可在行业常见格式下运行。
+
+- evidence_pointer：Section 4.2.3
+
+### 44. P1
+
+- order：44
+
+- section：Section 5
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：自然想到的SEQ机制是把N个槽当作N次独立拍卖，每个槽用单物品Myerson最优拍卖。
+
+- rhetorical_function_cn：提出一个直觉上的候选机制。
+
+- depends_on_cn：OPT-IR存在
+
+- sets_up_cn：为后续比较SEq和OPT-IR做铺垫。
+
+- evidence_pointer：Section 5 first paragraph
+
+### 45. P末
+
+- order：45
+
+- section：Section 5
+
+- locator：P末
+
+- move_code：LIMITATION
+
+- paraphrase_cn：SEQ虽与现有技术结构相似、易实施，但会忽略当前槽对未来的影响，收入可能显著低于OPT-IR。
+
+- rhetorical_function_cn：给出SEQ的缺陷总结。
+
+- depends_on_cn：SEQ定义
+
+- sets_up_cn：下一节需要证明和量化这个缺陷。
+
+- evidence_pointer：Section 5 last paragraph
+
+### 46. Example 1
+
+- order：46
+
+- section：Section 6
+
+- locator：Example 1
+
+- move_code：RESULT
+
+- paraphrase_cn：在两广告、两槽的极端例子中，SEQ把印象给点击概率为1但价值较低的广告，而OPT-IR选择低点击概率稳态广告，OPT-IR收入约为SEQ两倍。
+
+- rhetorical_function_cn：用反例直接证明SEQ不最优。
+
+- depends_on_cn：SEQ和OPT-IR定义
+
+- sets_up_cn：为寻找次优条件提供直觉。
+
+- evidence_pointer：Section 6 Example 1
+
+### 47. Theorem 2
+
+- order：47
+
+- section：Section 6.2
+
+- locator：Theorem 2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：在估值与首槽点击概率负相关、点击概率常数衰减、W值函数满足一定不等式时，OPT-IR严格优于SEQ。
+
+- rhetorical_function_cn：给出SEQ次优的充分条件。
+
+- depends_on_cn：Example 1观察
+
+- sets_up_cn：说明并非所有负相关都导致次优，需要额外条件。
+
+- evidence_pointer：Section 6.2 Theorem 2
+
+### 48. Example 3
+
+- order：48
+
+- section：Section 6.3
+
+- locator：Example 3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：即使估值与点击概率不满足负相关，SEQ仍可能次优，所以Theorem 2条件不是必要的。
+
+- rhetorical_function_cn：扩大次优现象的适用范围。
+
+- depends_on_cn：Theorem 2
+
+- sets_up_cn：推动读者接受SEQ整体不稳健。
+
+- evidence_pointer：Section 6.3 Example 3
+
+### 49. Theorem 3
+
+- order：49
+
+- section：Section 6.4
+
+- locator：Theorem 3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：如果高估值广告在每个槽都有较高点击概率，则SEQ最优。
+
+- rhetorical_function_cn：给出SEQ最优的充分条件，界定其有效场景。
+
+- depends_on_cn：SEQ和OPT-IR比较
+
+- sets_up_cn：数值实验中，偏离这种同序条件会导致收益下降。
+
+- evidence_pointer：Section 6.4 Theorem 3
+
+### 50. Table 8
+
+- order：50
+
+- section：Section 6.5
+
+- locator：Table 8
+
+- move_code：RESULT
+
+- paraphrase_cn：数值显示随着估值与首槽点击概率负相关程度增加，SEQ相对OPT-IR的收入比从100%降到约75%。
+
+- rhetorical_function_cn：用数值量化SEQ次优程度。
+
+- depends_on_cn：负相关参数α,β
+
+- sets_up_cn：再次确认OPT-IR动态考虑未来价值是重要的。
+
+- evidence_pointer：Section 6.5 Table 8
+
+### 51. P1-P2
+
+- order：51
+
+- section：Section 7
+
+- locator：P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：BASE机制就是现状：所有槽展示同一广告；它对应P^IR加同一槽约束的优化。
+
+- rhetorical_function_cn：把现状正式化到同一理论框架。
+
+- depends_on_cn：P^IR框架
+
+- sets_up_cn：后续与OPT-IR比较的基准。
+
+- evidence_pointer：Section 7 problem (P^BASE)
+
+### 52. Theorem 4
+
+- order：52
+
+- section：Section 7
+
+- locator：Theorem 4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：最优BASE机制选择虚拟价值与总点击概率乘积最大的广告，并向胜者收取最小必要价格。
+
+- rhetorical_function_cn：给出BASE机制的解。
+
+- depends_on_cn：约束优化
+
+- sets_up_cn：作为后面收益和福利比较的BASE定义。
+
+- evidence_pointer：Section 7 Theorem 4
+
+### 53. P1
+
+- order：53
+
+- section：Section 8
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：因为BASE只是P^IR的可行解，OPT-IR的总收入总不低于BASE；但广告主可能更好或更差。
+
+- rhetorical_function_cn：从结构上确认交易所收益比较，同时引出广告主福利问题。
+
+- depends_on_cn：Theorem 1和4
+
+- sets_up_cn：定义win-win和win-lose并展示实例。
+
+- evidence_pointer：Section 8 opening paragraph
+
+### 54. Table 9
+
+- order：54
+
+- section：Section 8.1
+
+- locator：Table 9
+
+- move_code：RESULT
+
+- paraphrase_cn：解析例子显示两个广告主在OPT-IR下效用均提高75%，交易所收入提高18.75%。
+
+- rhetorical_function_cn：证明win-win场景存在。
+
+- depends_on_cn：BASE和OPT-IR公式
+
+- sets_up_cn：为OPT-MB比较保留对照组。
+
+- evidence_pointer：Section 8.1 Table 9
+
+### 55. Table 10
+
+- order：55
+
+- section：Section 8.2
+
+- locator：Table 10
+
+- move_code：RESULT
+
+- paraphrase_cn：另一个解析例子中广告主X在OPT-IR下效用下降100q%，广告主Y不变，交易所收入上升100q%，说明win-lose也可能发生。
+
+- rhetorical_function_cn：证明广告主可能受损，否定OPT-IR对广告主的普遍优越性。
+
+- depends_on_cn：BASE和OPT-IR公式
+
+- sets_up_cn：为互惠机制提供直接动机。
+
+- evidence_pointer：Section 8.2 Table 10
+
+### 56. summary paragraph
+
+- order：56
+
+- section：Section 8
+
+- locator：summary paragraph
+
+- move_code：TRANSITION
+
+- paraphrase_cn：存在win-win和win-lose两种可能，因此值得设计保证双方长期至少与BASE一样好的机制。
+
+- rhetorical_function_cn：把前文比较过渡到新问题。
+
+- depends_on_cn：Tables 9-10
+
+- sets_up_cn：Section 9的P^MB设置。
+
+- evidence_pointer：Section 8 final paragraph
+
+### 57. P1
+
+- order：57
+
+- section：Section 9
+
+- locator：P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：新的机制设计问题在IC约束下最大化交易所收益，并要求每个广告主长期期望效用不低于BASE效用。
+
+- rhetorical_function_cn：正式定义P^MB。
+
+- depends_on_cn：win-lose问题
+
+- sets_up_cn：为OPT-MB机制定义目标。
+
+- evidence_pointer：Section 9 problem (P^MB)
+
+### 58. before Theorem 5
+
+- order：58
+
+- section：Section 9
+
+- locator：before Theorem 5
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：把BASE效用约束求和后，得到交易所收益的上界等于VCG社会福利减去各广告主BASE效用之和。
+
+- rhetorical_function_cn：用VCG社会福利给出可实现的收益上界。
+
+- depends_on_cn：VCG效率性质
+
+- sets_up_cn：构造OPT-MB达到该上界。
+
+- evidence_pointer：Section 9 upper bound argument
+
+### 59. Theorem 5
+
+- order：59
+
+- section：Section 9
+
+- locator：Theorem 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：OPT-MB采用VCG分配，并把支付调整为VCG支付加期望VCG效用减期望BASE效用，达到P^MB上界。
+
+- rhetorical_function_cn：给出互惠最优机制的具体设计。
+
+- depends_on_cn：VCG和上界论证
+
+- sets_up_cn：证明其最优性和可实现性。
+
+- evidence_pointer：Section 9 Theorem 5, equations (14)-(15)
+
+### 60. after Theorem 5
+
+- order：60
+
+- section：Section 9
+
+- locator：after Theorem 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：OPT-MB分配是一阶最优，支付等于广告主从分配中获得的价值减去其期望BASE效用，因此广告主长期恰好得到BASE效用。
+
+- rhetorical_function_cn：提炼机制的主要性质。
+
+- depends_on_cn：Theorem 5
+
+- sets_up_cn：为数值结果解释whyη≈0。
+
+- evidence_pointer：Section 9 salient features
+
+### 61. Tables 11-12
+
+- order：61
+
+- section：Section 9.1
+
+- locator：Tables 11-12
+
+- move_code：RESULT
+
+- paraphrase_cn：在win-win场景，OPT-MB给交易所159.38%收益增益，高于OPT-IR的18.75%，但广告主效用增益为零；在win-lose场景，OPT-MB保住广告主效用，交易所收益增益83.33q%低于OPT-IR的100q%。
+
+- rhetorical_function_cn：展示两种机制在福利分配上的权衡。
+
+- depends_on_cn：OPT-MB设计
+
+- sets_up_cn：帮助用户理解何时选择OPT-IR或OPT-MB。
+
+- evidence_pointer：Section 9.1 Tables 11-12
+
+### 62. P1-10.1
+
+- order：62
+
+- section：Section 10
+
+- locator：P1-10.1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：定义收入增益和效用增益；基于行业参数构造测试床：10个广告主、10个槽、估值U[0,1]、λ=0.9、点击概率常数衰减。
+
+- rhetorical_function_cn：说明数值实验的设计来源，增加结果可信度。
+
+- depends_on_cn：行业引用和文献
+
+- sets_up_cn：为表13和图3提供可复现参数。
+
+- evidence_pointer：Section 10.1
+
+### 63. Homogeneous vs Heterogeneous ads
+
+- order：63
+
+- section：Section 10.1
+
+- locator：Homogeneous vs Heterogeneous ads
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：同质广告从相同分布取首槽点击概率和衰减率；异构广告把首槽概率升序、衰减率降序，形成稳态广告与脉冲广告的对比。
+
+- rhetorical_function_cn：构造最重要的反事实维度。
+
+- depends_on_cn：测试床参数
+
+- sets_up_cn：用于检验“异构性增强收益增益”的假设。
+
+- evidence_pointer：Section 10.1 homogeneous/heterogeneous bullets
+
+### 64. Table 13
+
+- order：64
+
+- section：Section 10
+
+- locator：Table 13
+
+- move_code：RESULT
+
+- paraphrase_cn：数值显示OPT-IR在同质和异构广告下分别给交易所7.01%和18.22%收入增益；OPT-MB为23.02%和33.60%；广告主在OPT-IR下获得13.72%和55.61%效用增益，在OPT-MB下约0%。
+
+- rhetorical_function_cn：给出核心量化证据。
+
+- depends_on_cn：测试床
+
+- sets_up_cn：支撑管理启示：两个机制都有效，但福利分配不同。
+
+- evidence_pointer：Section 10 Table 13
+
+### 65. Figure 3
+
+- order：65
+
+- section：Section 10
+
+- locator：Figure 3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：衰减率变异越大、广告主数量越多，两个机制相对BASE的收入增益越高；边际收益随变异增加而增加。
+
+- rhetorical_function_cn：用敏感性分析给出机制优势的边界条件。
+
+- depends_on_cn：Table 13
+
+- sets_up_cn：总结收益何时最大。
+
+- evidence_pointer：Section 10, Figure 3
+
+### 66. Table 15
+
+- order：66
+
+- section：Section 10
+
+- locator：Table 15
+
+- move_code：RESULT
+
+- paraphrase_cn：社会福祉方面，BASE实现84.48%（同质）和77.45%（异构）的一阶最优；OPT-IR为91.54%和95.46%；OPT-MB达到100%。
+
+- rhetorical_function_cn：把收入指标扩展到效率指标，展示机制的社会效益。
+
+- depends_on_cn：所有机制分配
+
+- sets_up_cn：总结机制在效率和收益上的整体改善。
+
+- evidence_pointer：Section 10 Table 15
+
+### 67. P1
+
+- order：67
+
+- section：Section 11
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文分析了单一广告主全程占有印象的配置低效，并给出适合RTB的机制。
+
+- rhetorical_function_cn：重述核心贡献，呼应引言的低效问题。
+
+- depends_on_cn：全部研究
+
+- sets_up_cn：转向未来方向。
+
+- evidence_pointer：Section 11 first paragraph
+
+### 68. P2
+
+- order：68
+
+- section：Section 11
+
+- locator：P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：假设广告主估值在会话中不变，未来可研究私人信息随时间变化的动态机制设计。
+
+- rhetorical_function_cn：承认模型简化的限制并提出理论扩展。
+
+- depends_on_cn：静态估值假设
+
+- sets_up_cn：把读者引向更高级建模。
+
+- evidence_pointer：Section 11 second paragraph
+
+### 69. P3-P4
+
+- order：69
+
+- section：Section 11
+
+- locator：P3-P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：时间槽长度由发布商控制；本文可推广到具有可分子资源、依赖关系和异质价值的其他场景如共享计算资源或共享实体空间。
+
+- rhetorical_function_cn：把机制上升到通用资源分配问题，扩大贡献适用面。
+
+- depends_on_cn：模型结构
+
+- sets_up_cn：为未来跨领域应用做铺垫。
+
+- evidence_pointer：Section 11 third and fourth paragraphs
+
+### 70. P5
+
+- order：70
+
+- section：Section 11
+
+- locator：P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可研究分区印象机制与header bidding等需求侧厚度机制的互动。
+
+- rhetorical_function_cn：连接产业最新发展，提出联合研究问题。
+
+- depends_on_cn：整个机制框架
+
+- sets_up_cn：结束全文，留下开放方向。
+
+- evidence_pointer：Section 11 final paragraph
+
+## 写作技术
+
+- gap_construction_cn：先建立正常稳定的行业背景，再用图1示意传统机制的时间价值差异，制造低效认知；随即否定“按槽独立拍卖”的自然解法，指出其近视性；再提出广告主福利的不确定性，形成机制设计空间上的多重缺口。
+
+- signposting_cn：引言贡献部分用编号方式预告两种机制和随机支付；1.3节完整列出章节路线；每节开头用“we now…”或“our next task”预告；定理前说明动机，从而让读者始终知道当前论证目的。
+
+- transition_logic_cn：从OPT-IR到SEQ是因为SEQ是“最自然”的候选；从SEQ到BASE是因为要做“current practice”比较；从BASE到OPT-MB是因为win-lose场景表明广告主需要保障；从OPT-MB到数值是因为理论性质已知，需要量化规模。
+
+- claim_evidence_rhythm：每个机制或性质都用“定义—定理/推导—示例/数值”的节奏：先给机制公式，再用Theorem证明最优性或次优性，然后用小例子或表格展示数值幅度。论文避免只作宣称，每个重要声明都能指向定理或表格。
+
+- benchmark_narrative：基准是分层建立：VCG作为效率上限；SEQ作为myopic但自然的上限；BASE作为现状底线；OPT-MB又作为互惠性上限。每个后续基准都解决前一个基准留下的疑问，最终形成完整比较链条。
+
+- theory_return：结果不是停留在机制性能，而是回到机制设计理论：虚拟价值单调性、支付计算复杂度、VCG上界、动态机制设计；同时把机制抽象为“可分资源+依赖+异质价值”，从而让理论贡献超出具体广告场景。
+
+- contribution_positioning：贡献定位在“消除真实交易低效”的方法层：不是简单应用Myerson，而是解决时间维度上的实时支付和福利保障两个实施问题；同时强调与Sun et al.相比的信息不对称差异。
+
+- novelty_protection：通过以下方式防止一次性性能结果：一是用最优性定理而非单纯仿真说话；二是同时展示OPT-IR和OPT-MB的福利权衡，避免宣称单一机制绝对好；三是用行业参数做测试床并通过参数变化展示增益的边界条件；四是把结论推广到其他资源分配场景。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用行业背景+图形示例建立现有机制的低效；写清楚“当前做法→浪费哪里→为什么值得解决”。
+
+- research_job_cn：确认现实中确实存在可计算的机会损失，并确定可变的资源维度（如时间槽）。
+
+- required_evidence_cn：至少一个可复现的配置低效示例，来自行业数据或参数。
+
+- transition_to_next_cn：指出自然解法不足，导向形式化模型。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：定义参与者、私人信息、效用、机制、约束，把低效问题写成标准机制设计问题。
+
+- research_job_cn：确保目标函数、IC/IR约束、分配和支付规则都有清晰数学表示。
+
+- required_evidence_cn：能够写出问题和可行性论证；如果使用VCG或Myerson，需保证假设满足。
+
+- transition_to_next_cn：声称存在最优机制但尚未给出构造。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：推导最优机制：用虚拟价值/等价变换求解，证明最优性并说明计算复杂度。
+
+- research_job_cn：构造机制并用标准定理验证最优性；分析实现瓶颈。
+
+- required_evidence_cn：定理证明或充分条件；列出一个实现层面的障碍。
+
+- transition_to_next_cn：发现理论上最优但实践不可实时计算，引出实现改进。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：为不可实时计算的支付规则设计替代实现，如随机化、预先计算或固定转移。
+
+- research_job_cn：验证替代规则保持期望收益和激励性质，并讨论与行业格式的兼容。
+
+- required_evidence_cn：期望等价证明，IC/IR保持论证；如有必要，用小例子演示。
+
+- transition_to_next_cn：声称机制已可部署，但仍需要与朴素机制和现状机制比较。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：引入一个“自然候选”机制和一个“现状基准”机制，分别分析其与最优机制的关系。
+
+- research_job_cn：给出次优性/最优性充分条件，解析示例和数值边界。
+
+- required_evidence_cn：反例、定理或数值表证明最优机制确有优势，并明确何时优势消失。
+
+- transition_to_next_cn：若最优机制会伤害某些参与者，转入福利补偿机制。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：提出第二个设置，定义参与者的长期效用下界，构造互惠机制并证明其最优性。
+
+- research_job_cn：用效率机制（如VCG）作为分配，用固定转移满足参与约束；证明达到上界。
+
+- required_evidence_cn：最优性定理和福利分配表。
+
+- transition_to_next_cn：理论性质完备后，进行数值量化。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用行业参数构造测试床，报告收益/福利增益、敏感性分析和适用边界。
+
+- research_job_cn：设计仿真或实验，变化关键参数（异构性、竞争者数目、衰减率等）并报告边界。
+
+- required_evidence_cn：大样本数值结果，支撑“收益不是一次性的”说法。
+
+- transition_to_next_cn：回到引言的低效问题，总结贡献并指出限制和未来。
+
+### most_transferable_moves_cn
+
+1. 用图形演示机制浪费机会收益，建立研究价值。
+
+2. 用最优性定理+可计算性讨论把理论机制落地。
+
+3. 以自然候选机制作为替罪羊，再用定理和示例否定它。
+
+4. 设计随机化支付解决实现瓶颈，同时保持理论性质。
+
+5. 用“现状基准+参与约束”设计互惠机制，回应利益相关者关切。
+
+6. 用行业参数测试床和敏感性分析界定边界条件。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要熟练的机制设计理论，特别是Myerson虚拟价值、VCG、IC/IR约束和随机化支付构造。
+
+2. 解析推导win-win和win-lose场景需要设计精巧的参数，通常需要在线附录支持。
+
+3. 动态规划计算和百万级样本蒙特卡洛仿真需要编程能力。
+
+4. 不需要真实公司数据，但合理测试床依赖行业报告、先前文献和产业公开参数。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只说“我们提出随机支付”而不验证期望不变和IC/IR保持。
+
+2. 不能在没有充分条件下断言SEQ总是次优；应有定理2/3这样的充分/必要条件。
+
+3. 不能把仿真收益直接当作真实市场收益；要用行业参数构造测试床并展示边界。
+
+4. 不能把“互惠机制”当作必然高级；文中明确说明在不同场景下OPT-IR和OPT-MB各有取舍。
+
+- single_best_description_of_the_routine_cn：把一个现实资源分配低效转成标准机制设计问题，先用理论构造收益最优机制，再用随机化等技巧解决实时实现，接着以朴素候选和现状基准做分层反驳，发现利益相关者福利缺陷后改用固定效用转移构造互惠机制，最后用行业参数仿真量化边界，从而完成从理论到可部署设计的闭环。
+
+## 分析边界
+
+全文以PDF文本提供，图表细节（Figure 1/2/3）主要通过文字转述；部分数学公式因PDF/HTML转换可能稍有变体，但符号和推导关系清晰；未提供在线附录内容，Theorem 2/3和win-win/win-lose的完整证明细节依赖附录，因此解析证明部分的还原以正文结论为准。

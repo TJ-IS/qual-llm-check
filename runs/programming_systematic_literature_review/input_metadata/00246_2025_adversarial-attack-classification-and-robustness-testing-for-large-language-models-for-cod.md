@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105012918546"
+title: "Adversarial attack classification and robustness testing for large language models for code"
+authors: "Liu Y.; Foundjem A.; Khomh F.; Li H."
+year: "2025"
+journal: "Empirical Software Engineering"
+doi: "10.1007/s10664-025-10693-3"
+---
+# Scopus title-abstract-keyword metadata
+Title: Adversarial attack classification and robustness testing for large language models for code
+Abstract: Context: In the rapidly evolving landscape of software development, Large Language models have become essential tools for code tasks such as code generation, completion, analysis, and suggestion. The growing integration of Large Language models for Code into development workflows highlights the critical need for ensuring robustness against potential vulnerabilities–specifically, weaknesses in how these models handle various inputs that could lead to incorrect or insecure code completion. In this context, vulnerabilities can manifest as the model’s susceptibility to producing flawed code when faced with adversarial inputs or subtle perturbations in task descriptions, code, or comments. Objective: Existing works have neglected the role of natural language inputs that guide code tasks. This study explores the impact of natural language, such as prompts, on adversarial attacks against Large Language models for Code. It assesses how perturbations at the level of character, word, and sentence affect model output. Identifying the most harmful vulnerabilities will inform the development of more resilient code-generation tools. Method: We analyzed several key projects (including ReCode and Openattack) and datasets (including HumanEval and MBPP), to systematically examine how different types of attacks affect model performance. The first dimension of our taxonomy categorizes adversarial attacks based on the content type–whether the attack targets the code, natural language prompts, or comments. The second dimension classifies these attacks by their granularity, such as character-level, word-level, or sentence/statement-level perturbations. We employed a mixed-methods approach, combining quantitative analysis of model performance metrics with qualitative assessments to identify specific vulnerabilities across different types of inputs. Results: Our analysis revealed that Large Language models for Code (LLM4Code) exhibit varying levels of robustness depending on the type and granularity of adversarial perturbations. Sentence-level perturbations were generally met with the highest resilience, indicating that LLM4Code can maintain code integrity when faced with broader contextual disruptions. However, word-level perturbations posed significant challenges, revealing vulnerabilities in the models’ ability to handle disruptions at this semantic level. Character-level perturbations showed mixed results, with models displaying both strengths and weaknesses in addressing minor syntactical deviations. These findings underscore the need for continued advancements in model robustness, particularly against semantic perturbations, to ensure reliable performance in diverse adversarial scenarios. Conclusions: This study presents a comprehensive framework for evaluating the robustness of Large Language models for Code. It highlights the significance of incorporating code and natural language inputs in adversarial testing, which is essential for improving security and reliability in real-world applications. © The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature 2025.
+Author keywords: Adversarial attack classification; Large language models; Large language models for code; Model robustness; Perturbation
+Index keywords: Classification (of information); Codes (symbols); Computational linguistics; Efficiency; Natural language processing systems; Adversarial attack classification; Affect modeling; Attack classifications; Language model; Large language model; Large language model for code; Model robustness; Natural languages; Perturbation; Software design
+Document type: Article
+Conference: 
+Source title: Empirical Software Engineering
+Year: 2025
+EID: 2-s2.0-105012918546
+DOI: 10.1007/s10664-025-10693-3
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

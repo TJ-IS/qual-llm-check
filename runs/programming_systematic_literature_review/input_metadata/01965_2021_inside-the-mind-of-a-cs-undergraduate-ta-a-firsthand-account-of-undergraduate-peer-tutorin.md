@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85103307112"
+title: "Inside the Mind of a CS Undergraduate TA: A Firsthand Account of Undergraduate Peer Tutoring in Computer Labs"
+authors: "Markel J.M.; Guo P.J."
+year: "2021"
+journal: "SIGCSE 2021 - Proceedings of the 52nd ACM Technical Symposium on Computer Science Education"
+doi: "10.1145/3408877.3432533"
+---
+# Scopus title-abstract-keyword metadata
+Title: Inside the Mind of a CS Undergraduate TA: A Firsthand Account of Undergraduate Peer Tutoring in Computer Labs
+Abstract: As CS enrollments continue to grow, introductory courses are employing more undergraduate TAs. One of their main roles is performing one-on-one tutoring in the computer lab to help students understand and debug their programming assignments. What goes on in the mind of an undergraduate TA when they are helping students with programming? In this experience report, we present firsthand accounts from an undergraduate TA documenting her 36 hours of in-lab tutoring for a CS2 course, where she engaged in 69 one-on-one help sessions. This report provides a unique perspective from an undergraduate's point-of-view rather than a faculty member's. We summarize her experiences by constructing a four-part model of tutoring interactions: A) The tutor begins the session with an initial state of mind (e.g., their energy/focus level, perceived time pressure). b) They observe the student's outward state upon arrival (e.g., how much they seem to care about learning). c) Using that observation, the tutor infers what might be going on inside the student's mind. d) The combination of what goes on inside the tutor's and student's minds affects tutoring interactions, which progress from diagnosis to planning to an explain-code-react loop to post-resolution activities. We conclude by discussing ways that this model can be used to design scaffolding for training novice TAs and software tools to help TAs scale their efforts to larger classes. © 2021 ACM.
+Author keywords: lab tutoring; peer tutoring; undergraduate teaching assistants
+Index keywords: Education computing; Laboratories; Program debugging; Scaffolds; Computer lab; CS2 course; Experience report; Faculty members; Introductory course; Lab tutoring; One-on-one tutoring; Peer tutoring; Programming assignments; Undergraduate teaching assistants; Students
+Document type: Conference paper
+Conference: 
+Source title: SIGCSE 2021 - Proceedings of the 52nd ACM Technical Symposium on Computer Science Education
+Year: 2021
+EID: 2-s2.0-85103307112
+DOI: 10.1145/3408877.3432533
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

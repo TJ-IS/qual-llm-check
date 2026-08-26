@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85051376098"
+title: "Chaff from the Wheat: Characterizing and Determining Valid Bug Reports"
+authors: "Fan Y.; Xia X.; Lo D.; Hassan A.E."
+year: "2020"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2018.2864217"
+---
+# Scopus title-abstract-keyword metadata
+Title: Chaff from the Wheat: Characterizing and Determining Valid Bug Reports
+Abstract: Developers use bug reports to triage and fix bugs. When triaging a bug report, developers must decide whether the bug report is valid (i.e., a real bug). A large amount of bug reports are submitted every day, with many of them end up being invalid reports. Manually determining valid bug report is a difficult and tedious task. Thus, an approach that can automatically analyze the validity of a bug report and determine whether a report is valid can help developers prioritize their triaging tasks and avoid wasting time and effort on invalid bug reports. In this study, motivated by the above needs, we propose an approach which can determine whether a newly submitted bug report is valid. Our approach first extracts 33 features from bug reports. The extracted features are grouped along 5 dimensions, i.e., reporter experience, collaboration network, completeness, readability and text. Based on these features, we use a random forest classifier to identify valid bug reports. To evaluate the effectiveness of our approach, we experiment on large-scale datasets containing a total of 560,697 bug reports from five open source projects (i.e., Eclipse, Netbeans, Mozilla, Firefox and Thunderbird). On average, across the five datasets, our approach achieves an F1-score for valid bug reports and F1-score for invalid ones of 0.74 and 0.67, respectively. Moreover, our approach achieves an average AUC of 0.81. In terms of AUC and F1-scores for valid and invalid bug reports, our approach statistically significantly outperforms two baselines using features that are proposed by Zanetti et al. [104]. We also study the most important features that distinguish valid bug reports from invalid ones. We find that the textual features of a bug report and reporter's experience are the most important factors to distinguish valid bug reports from invalid ones.  © 1976-2012 IEEE.
+Author keywords: Bug report; feature generation; machine learning
+Index keywords: Computer software; Feature extraction; Forestry; Job analysis; Learning systems; Support vector machines; Bug reports; Collaboration; Computer bugs; Feature generation; Task analysis; Program debugging
+Document type: Article
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2020
+EID: 2-s2.0-85051376098
+DOI: 10.1109/tse.2018.2864217
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

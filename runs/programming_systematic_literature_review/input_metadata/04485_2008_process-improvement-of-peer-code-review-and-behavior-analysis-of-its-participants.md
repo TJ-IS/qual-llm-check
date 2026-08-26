@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-57449104560"
+title: "Process improvement of peer code review and behavior analysis of its participants"
+authors: "Yan-qing W.; Yi-jun L.; Collins M.; Pei-jie L."
+year: "2008"
+journal: "SIGCSE'08 - Proceedings of the 39th ACM Technical Symposium on Computer Science Education"
+doi: "10.1145/1352135.1352171"
+---
+# Scopus title-abstract-keyword metadata
+Title: Process improvement of peer code review and behavior analysis of its participants
+Abstract: The software industry is urging on universities and colleges to cultivate software engineers who can write high quality programs. Peer code review (PCR) is accepted as an ideal way to maximize the learning outcome of students in writing quality code. Using this learning process, students improve their skills while scientific and efficient management removes the extra burden from instructors such as checking programs written by every student. In this paper, the previous PCR process was improved and the definitions of the relevant roles and documents were refined as well. After implementing this process in two academic years, some problems were found. By means of summarizing the email submissions by the students and also interviewing a few students, the behavior of all participants was preliminarily analyzed. With regards to the further quality assurance and high efficiency, a web-based management information system with a built-in blind review mechanism was discussed for solving the problems with process control, and also a game theoiy model was proposed for addressing the ethical issues in the whole PCR process.
+Author keywords: Behavior analysis; Computer science education; Learning outcome; Peer code review (PCR); Software quality assurance (SQA)
+Index keywords: Computer software selection and evaluation; Information management; Behavior analysis; Computer Science Education; Learning outcome; Peer code review; Process Improvement; Review process; Software industry; Software quality assurance; Students
+Document type: Conference paper
+Conference: 
+Source title: SIGCSE'08 - Proceedings of the 39th ACM Technical Symposium on Computer Science Education
+Year: 2008
+EID: 2-s2.0-57449104560
+DOI: 10.1145/1352135.1352171
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

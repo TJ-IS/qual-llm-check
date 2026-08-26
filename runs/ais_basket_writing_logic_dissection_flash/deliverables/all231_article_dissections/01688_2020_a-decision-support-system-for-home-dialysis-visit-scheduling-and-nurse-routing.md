@@ -1,0 +1,1773 @@
+# A decision support system for home dialysis visit scheduling and nurse routing
+
+- 作者：Ahmet Kandakoglu; Antoine Sauré; Wojtek Michalowski; Michael Aquino; Janet Graham; Brendan McCormick
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2019.113224
+- 源文件：01688_2020_a-decision-support-system-for-home-dialysis-visit-scheduling-and-nurse-routing.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.78
+
+## 文章级论证概况
+
+- 核心问题：如何为加拿大渥太华医院肾病科的家庭透析项目构建一个日常家访排程与护士路径决策支持系统，以替代耗时且低效的人工排程，并改善行驶距离、护士数量和工作量分布等运营目标？
+
+- 制品与设计：HDSS（Home Dialysis Scheduler System）：一个独立安装的决策支持系统，核心是带四个加权目标（总行驶距离、总行程与加班成本、所需护士数、最大护士工作量）的混合整数线性规划（MILP）模型；模型涵盖患者-护士兼容性、时间窗、班次、用餐休息、加班、浮动护士、团队区域限制等现实约束；系统采用电子表格式界面、地图可视化、报表模块，并使用 Gurobi 求解器。
+
+- 客观结果：在2018年典型周中，与人工排程相比，HDSS将总行驶距离减少约27%、总行驶时间减少约25%、所需护士数减少约16%；在以工作量均衡为主要目标时，仍能减少距离17%、时间19%、护士11%；在2019年八周真实数据上，距离减少约38%、时间减少约33%、护士数减少约11%，估计每周节省近1900加元，年化约10万加元。
+
+- 核心贡献：作者声称这是首个面向家庭透析家访排程与护士路径问题的、以真实医院数据验证并实际部署的决策支持系统；其创新在于将家庭透析作为专门的家庭医疗护理排程问题、在MILP中参数化处理多个优化标准、引入“浮动护士”概念，并通过用户中心设计开发了可用的DSS。
+
+- 整篇论证链：文章先建立家庭透析因成本与患者便利性上升、但因患者脆弱性和资金压力而需要更高效资源管理的现实背景，再指出现行手工排程面对约40-50名患者、9名护士、多种服务类型和时间窗时非常耗时且困难。随后通过文献综述指出，虽然家庭医疗护理排程与路径问题被广泛研究，但绝大多数工作使用启发式算法和虚构数据，很少开发决策支持系统，且很少同时处理休息、加班、工作量均衡和护士数量等实际约束。为填补这一缺口，作者与渥太华医院合作，通过快速原型和用户中心设计迭代提取需求，构建了一个以MILP为核心的HDSS。模型将总距离、成本、护士数和工作量均衡四个目标加权组合，并纳入团队区域、浮动护士、班次、休息、时间窗和加班等约束。系统实现后，作者用2018年典型周和2019年八周真实数据，将HDSS生成的排程与人工排程进行对比，证明其在距离、时间、护士数上的改善，并通过不同目标权重和更长时段展示稳健性。最后，文章将结果上升为管理意涵、可移植性和设计知识，同时承认单周期、固定护士名册、团队划分和确定性旅行时间等限制。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的主要目的不是提出和检验行为理论，而是描述一个真实决策支持系统HDSS的构建过程：从领域问题与用户需求出发，建立MILP模型，实现软件系统，并在真实医院环境中与人工排程进行对比评价。这符合设计科学研究的基本结构：问题-需求-构建-评价-设计知识。
+
+- 主导写作弧线判定：全文明显遵循“需求提取—系统构建—对比评价—设计知识与管理意涵”的弧线：第2节定义领域问题和运营要求，第4-5节构建数学模型和系统，第6节用真实数据对比评价，第6.3节和第7节讨论管理意涵、可移植性和未来方向。虽然作者没有明确列出“设计原则”，但论证结构仍是需求、构建、评价、一般化。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：研究从真实领域问题出发，先进行需求分析与迭代原型设计，再建立MILP模型，随后实现HDSS系统，接着在三个评价场景中逐步增加证据强度：典型周距离目标→典型周工作量均衡目标→八周扩展数据验证，最后将结果转化为管理意涵和边界条件。前一个阶段为后一个阶段提供输入：需求阶段产生模型要求；模型阶段产生优化核心；系统阶段使模型可操作；评价阶段用同一批数据的人工排程作为基准检验系统；扩展数据和替代目标检验稳健性。
+
+### studies_or_phases
+
+#### 1. 需求分析与迭代原型设计
+
+- order：1
+
+- name_cn：需求分析与迭代原型设计
+
+- question_cn：家庭透析排程与护路问题需要满足哪些运营要求和用户需求？
+
+- inputs_and_setting_cn：渥太华医院肾脏病科家透析项目的管理者、临床领导和护理协调员；真实家访数据；多种模型版本和界面原型。
+
+- designed_or_compared_object_cn：比较和迭代不同版本的MILP模型、HDSS原型和用户界面mock-up。
+
+- baseline_control_or_counterfactual_cn：以现行手工排程流程和需求清单为基准，判断新原型是否覆盖未明确表达的需求。
+
+##### objective_metrics
+
+1. 需求覆盖度（定性）
+
+2. 原型迭代轮数
+
+3. 用户共识达成度
+
+- analysis_method_cn：快速原型法、用户中心设计、多轮利益相关者会议、替代方案对比。
+
+- main_result_cn：达到稳定状态：需求不再增加，界面设计获批；模型变量、目标和核心约束被确立；同时发现例外情况和额外需求。
+
+- argumentative_role_cn：建立制品的真实需求基础，证明HDSS不是凭空构造，而是从实际运营过程中提炼。
+
+- remaining_uncertainty_cn：尚不清楚这些需求能否被数学模型和系统完整实现。
+
+- link_to_next_phase_cn：需求收敛后进入MILP数学建模阶段。
+
+##### evidence_pointers
+
+1. Section 5.1 Analysis and Design
+
+2. Section 2 Problem Definition
+
+#### 2. MILP数学建模
+
+- order：2
+
+- name_cn：MILP数学建模
+
+- question_cn：如何用精确优化模型表达家庭透析排程与护士路径问题？
+
+- inputs_and_setting_cn：渥太华医院的患者家访类型、护士班次、区域团队、休息、加班、时间窗和行驶数据。
+
+- designed_or_compared_object_cn：构建单周期、多准则、混合整数线性规划模型，包括七个决策变量、多个目标和约束。
+
+- baseline_control_or_counterfactual_cn：以不同目标权重、不同服务时长、不同班次假设的替代方案作为对比，识别模型无法处理的例外。
+
+##### objective_metrics
+
+1. 模型可行性
+
+2. 约束覆盖率
+
+3. Gurobi求解时间（最终不超过3分钟）
+
+- analysis_method_cn：数学规划建模，精确求解。
+
+- main_result_cn：得到一个能同时表达总距离、总成本、护士数和工作量均衡四个目标，并包含休息、加班、浮动护士、团队区域、时间窗等约束的MILP模型。
+
+- argumentative_role_cn：模型是HDSS的核心智能组件；该阶段把领域需求转化为可计算的优化结构。
+
+- remaining_uncertainty_cn：模型在真实数据和实际使用中能否产生可接受的排程仍需系统实现和对比评价。
+
+- link_to_next_phase_cn：MILP模型需要嵌入软件系统，于是进入HDSS实现阶段。
+
+##### evidence_pointers
+
+1. Section 4 Mathematical Model
+
+#### 3. HDSS系统实现与用户界面开发
+
+- order：3
+
+- name_cn：HDSS系统实现与用户界面开发
+
+- question_cn：如何使MILP模型能够被医院管理员方便地使用？
+
+- inputs_and_setting_cn：Java 8、Gurobi 8.0、GraphHopper/OpenStreetMap、JXMapViewer、JFreeChart、Apache POI等开源库；医院的地址和患者护士数据库。
+
+- designed_or_compared_object_cn：设计并实现六个模块：用户界面、可视化、报表、优化、数据、地图模块，并组织为展示层、执行层、数据层三层架构。
+
+- baseline_control_or_counterfactual_cn：以先前手工排程的表格流程和纸质地图为参照，评估界面可用性。
+
+##### objective_metrics
+
+1. 系统模块完整性
+
+2. 界面可用性
+
+3. 求解执行时间（不超过3分钟）
+
+- analysis_method_cn：以用户中心设计为基础的快速原型；系统架构设计。
+
+- main_result_cn：HDSS成为独立安装的软件，可读取数据、自动生成地图距离/时间、调用Gurobi产生每日排程，并以表格、地图和报表形式展示。
+
+- argumentative_role_cn：证明优化模型可以被封装为面向管理员的实用决策支持工具。
+
+- remaining_uncertainty_cn：系统在目标环境中能否真正优于人工排程仍未量化。
+
+- link_to_next_phase_cn：进入对比评价阶段，用真实数据检验HDSS输出。
+
+##### evidence_pointers
+
+1. Section 5 HDSS
+
+2. Figure 1
+
+3. Figure 2
+
+#### 4. 典型周距离目标对比评价
+
+- order：4
+
+- name_cn：典型周距离目标对比评价
+
+- question_cn：在以最小化总行驶距离为主要目标时，HDSS是否比人工排程更优？
+
+- inputs_and_setting_cn：2018年某个典型周，共53名患者、208次家访、15名护士；每日患者数与护士数见表3。
+
+- designed_or_compared_object_cn：将HDSS生成的每日排程与护理协调员人工创建的排程进行对比。
+
+- baseline_control_or_counterfactual_cn：人工排程作为基准；同一批患者、护士、时间窗和服务数据分别输入人工流程和HDSS。
+
+##### objective_metrics
+
+1. 总行驶距离 (km)
+
+2. 总行驶时间 (min)
+
+3. 所需护士数
+
+- analysis_method_cn：对比同一周逐日的数据，计算总节约百分比；使用Gurobi精确求解。
+
+- main_result_cn：HDSS使平均总距离减少约27%，总行驶时间减少约25%，平均每天释放1.3名护士（护士总数减少16%）；周三示例显示路线更简单。
+
+- argumentative_role_cn：这是核心证据，证明HDSS在主要管理目标上显著优于人工排程。
+
+- remaining_uncertainty_cn：只使用了一个目标权重设定和一个星期，可能无法代表长期表现或替代目标。
+
+- link_to_next_phase_cn：为检验其他目标下的表现，引入工作量均衡目标对比。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 4
+
+3. Figure 3
+
+#### 5. 典型周工作量均衡目标对比评价
+
+- order：5
+
+- name_cn：典型周工作量均衡目标对比评价
+
+- question_cn：当以护士工作量均衡为主要目标时，HDSS是否仍能改善效率？
+
+- inputs_and_setting_cn：与阶段4相同的2018年典型周数据。
+
+- designed_or_compared_object_cn：将目标权重从距离成本切换到工作量均衡，重新生成HDSS排程并对比人工排程。
+
+- baseline_control_or_counterfactual_cn：人工排程仍为基准；同时与阶段4的距离优化结果形成对照，观察多目标权衡。
+
+##### objective_metrics
+
+1. 总行驶距离 (km)
+
+2. 总行驶时间 (min)
+
+3. 所需护士数
+
+- analysis_method_cn：改变MILP目标权重，重新求解；对比两种目标下的节约幅度。
+
+- main_result_cn：即使以工作量均衡为主要目标，HDSS仍减少距离约17%、时间约19%、护士数约11%，但效率改善幅度略低于纯距离目标。
+
+- argumentative_role_cn：表明HDSS的多目标参数化设计有效，也揭示目标之间的权衡；增强对系统灵活性的信心。
+
+- remaining_uncertainty_cn：没有直接测量每位护士实际工作量的个体分布，只使用模型中的最大工作量指标。
+
+- link_to_next_phase_cn：为确认结果并非某一周偶然，进入八周扩展数据验证。
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Section 6.2
+
+#### 6. 八周扩展数据验证
+
+- order：6
+
+- name_cn：八周扩展数据验证
+
+- question_cn：在更长时间窗口的真实数据上，HDSS相对于人工排程的改善是否稳定？
+
+- inputs_and_setting_cn：2019年6月1日至7月26日共八周的每日家访数据；每周患者和护士规模见表6。
+
+- designed_or_compared_object_cn：将HDSS八周排程与人工排程逐周对比。
+
+- baseline_control_or_counterfactual_cn：人工排程为基准；与2018年典型周结果互为外推验证。
+
+##### objective_metrics
+
+1. 总行驶距离 (km)
+
+2. 总行驶时间 (min)
+
+3. 所需护士数
+
+4. 估算每周/年度节约金额
+
+- analysis_method_cn：逐周汇总对比，计算节约百分比和可能成本节约。
+
+- main_result_cn：HDSS减少距离约38%、时间约33%、护士数约11%；按每公里0.45加元补偿计算，每周节省约1900加元，年化约10万加元。
+
+- argumentative_role_cn：提供跨时间的稳健性证据，并给出管理决策者关心的成本含义。
+
+- remaining_uncertainty_cn：仍为单一医院、确定性旅行时间、固定护士名册；没有随机对照和临床结果测量。
+
+- link_to_next_phase_cn：评价结果进入管理意涵与限制讨论，将改善量化为实际价值并界定适用边界。
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Section 6.2
+
+3. Section 6.3
+
+4. Section 6.4
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. RQ_OR_OBJECTIVE
+
+5. METHOD_JUSTIFICATION
+
+6. RESULT
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. LIMITATION
+
+5. GAP
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. DESIGN_FEATURE
+
+9. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. GAP
+
+4. WHY_GAP_MATTERS
+
+5. CONTRIBUTION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. METHOD_JUSTIFICATION
+
+4. MECHANISM
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST
+
+2. METHOD_JUSTIFICATION
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. BOUNDARY_CONDITION
+
+6. LIMITATION_AND_FUTURE
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 家庭医疗护理排程与路径问题（HHC SRP）文献
+
+2. 车辆路径与排程问题的运筹学建模知识（MILP、精确求解）
+
+3. 以用户为中心的设计和快速原型方法
+
+4. 渥太华医院肾脏病科的本地运营流程、团队结构、护理分工知识
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：模型设计主要由真实领域需求和数学规划工程驱动，而不是由某种行为理论或组织理论前瞻性推导。文献提供了问题分类和常用目标/约束的参考，但关键技术选择（MILP、Gurobi、浮动护士建模、UI设计）主要来自工程经验和利益相关者需求；用户中心设计原则影响了界面，但没有形成正式可检验的理论假设。
+
+- 理论到设计翻译链：领域文献显示常见目标和约束缺口 → 与医院管理者召开多轮会议提取实际需求 → 将需求表述为四个优化目标和一组约束 → 用数学符号和MILP约束具体化 → 嵌入HDSS系统模块 → 在真实数据上与人工排程对比 → 将改进结果归纳为管理意涵、可移植设计知识和未来研究方向。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：HHC SRP文献普遍使用总成本、行驶距离、时间窗、技能要求、工作时间法规等目标和约束，但很少同时考虑用餐休息、加班、工作量均衡和护士数量。
+
+- mechanism_cn：模型必须在满足医疗时间敏感性和护士劳动约束的前提下，通过优化路径和任务分配减少无效行驶和资源浪费。
+
+- design_requirement_cn：需要一个能整合多目标、多约束，并允许管理员调整目标优先级的模型。
+
+- artifact_choice_cn：带权重参数λ1-λ4的加权MILP目标函数，以及约束(6)(7)(13)(14)(15)(16)(17)(18)(19)。
+
+- evaluated_contrast_cn：HDSS排程 vs 人工排程；距离目标 vs 工作量均衡目标。
+
+- objective_result_cn：距离减少27%-38%，时间减少25%-33%，护士数减少11%-16%。
+
+##### evidence_pointers
+
+1. Table 4
+
+2. Table 5
+
+3. Table 6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：家庭透析患者需要按时连接/断开循环机，存在硬时间窗；两次访问之间的间隔必须满足临床要求。
+
+- mechanism_cn：违反时间窗会导致患者无法按时开始或结束透析，产生安全隐患。
+
+- design_requirement_cn：模型必须把访问开始时间限制在患者允许区间内，且两次访问建模为两个独立但有时间依赖的访问。
+
+- artifact_choice_cn：约束(13)硬时间窗；将每日两次访问拆分为两个患者节点的建模决策。
+
+- evaluated_contrast_cn：HDSS生成的时间表与人工生成的访问时间表对比。
+
+- objective_result_cn：在满足临床时间要求的前提下，HDSS仍显著减少行驶距离和时间。
+
+##### evidence_pointers
+
+1. Section 4, Constraint (13)
+
+2. Table 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：护士按区域团队提供服务，且患者熟悉固定护士有助于连续性护理；同时存在跨区域的浮动护士和晚班护士。
+
+- mechanism_cn：区域限制减少可选指派，但浮动护士提供跨区域灵活性，避免过度加班。
+
+- design_requirement_cn：需要同时表达区域限制、浮动护士全区域可用、加班与浮动护士作为备选解机制。
+
+- artifact_choice_cn：参数Rik、约束(18)(19)，以及加班变量overk和浮动/晚班护士的全区域Rik=1建模。
+
+- evaluated_contrast_cn：HDSS在真实团队结构下与人工排程对比。
+
+- objective_result_cn：在区域限制下仍能减少所需护士数和行驶距离。
+
+##### evidence_pointers
+
+1. Section 4, constraints (18)(19)
+
+2. Table 4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：用户中心设计和快速原型有助于发现未明确表达的需求，并让最终用户接受系统。
+
+- mechanism_cn：通过反复展示原型和mock-up，用户能更早指出操作细节和界面偏好，降低后期返工。
+
+- design_requirement_cn：系统界面应模拟管理员熟悉的电子表格工作方式，并提供地图和报表辅助理解。
+
+- artifact_choice_cn：HDSS的电子表格式工作区、导航树、地图可视化、报表生成模块。
+
+- evaluated_contrast_cn：界面由最终用户和管理层审查；系统最终获批并部署。
+
+- objective_result_cn：用户接受并批准系统；系统进入日常使用。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 6.2 最后一段
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：人工排程在40-50名患者、9名护士的情况下需要大量技能和时间，且容易产生交错复杂路径。
+
+- mechanism_cn：人工优化只能考虑局部和启发式顺序，无法系统性搜索可行解空间。
+
+- design_requirement_cn：需要一种能自动搜索全局最优/近优解的计算方法。
+
+- artifact_choice_cn：使用MILP和Gurobi精确求解器，生成完整护士路径。
+
+- evaluated_contrast_cn：HDSS路线 vs 人工路线（周三图例）。
+
+- objective_result_cn：HDSS路线更简单、更短，距离和所需护士数显著下降。
+
+##### evidence_pointers
+
+1. Figure 3
+
+2. Table 4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 真实数据对比评价（HDSS vs 人工排程）
+
+2. 替代目标敏感性分析（距离目标 vs 工作量均衡目标）
+
+3. 跨时期稳健性检验（2018典型周 vs 2019八周）
+
+4. 最终用户与管理层批准/实际部署（定性接受度评价）
+
+- why_these_evaluations_cn：由于文章属于设计科学而非行为实验，评价必须证明制品在真实运营环境中优于现有做法。首先用同一周数据与人工排程对比，建立核心绩效差异；然后用替代目标权重展示多目标参数化并不是只对某个特定目标有效；再用八周数据排除单周偶然性；最后用实际部署批准说明系统在组织上被接受。
+
+- benchmark_and_contrast_chain_cn：人工排程是贯穿全文的基准。先以距离/成本为主要目标，对比一周七天；随后把目标切换为工作量均衡，表明即使牺牲部分距离目标，HDSS仍优于人工；最后扩展到八周数据，证明改善持续存在。三个对比层层递进，从单目标、替代目标到长时间窗口，强化“HDSS稳健优于人工”的结论。
+
+### claim_evidence_ledger
+
+#### 1. HDSS显著减少总行驶距离和总行驶时间。
+
+- claim_cn：HDSS显著减少总行驶距离和总行驶时间。
+
+- evidence_cn：2018典型周距离减少27%、时间减少25%；2019八周距离减少38%、时间减少33%。
+
+- status_cn：有直接数据支持
+
+#### 2. HDSS减少所需护士数，释放护理人力资源。
+
+- claim_cn：HDSS减少所需护士数，释放护理人力资源。
+
+- evidence_cn：典型周护士数减少16%，八周减少11%；管理员每周可释放约1.3名护士。
+
+- status_cn：有直接数据支持
+
+#### 3. HDSS改善护士工作量分布。
+
+- claim_cn：HDSS改善护士工作量分布。
+
+- evidence_cn：当工作量均衡作为目标时，模型优化最大工作量变量μ；但文中没有单独报告个体护士工作量分布表。
+
+- status_cn：部分支持，属于模型目标而非直接证据
+
+#### 4. HDSS产生的路径更简单。
+
+- claim_cn：HDSS产生的路径更简单。
+
+- evidence_cn：周三示例图显示人工路线交错，HDSS路线更规整；这属于示例性可视化。
+
+- status_cn：部分支持，主要靠图3的定性展示
+
+#### 5. HDSS可带来显著成本节约。
+
+- claim_cn：HDSS可带来显著成本节约。
+
+- evidence_cn：由距离减少量和每公里0.45加元补偿推算，每周约1900加元、年化约10万加元。
+
+- status_cn：基于距离差估算，未直接测量财务数据
+
+#### 6. HDSS是首个家庭透析排程与护士路径DSS。
+
+- claim_cn：HDSS是首个家庭透析排程与护士路径DSS。
+
+- evidence_cn：文献综述表1、表2显示此前只有Issabakhsh等考虑家庭透析但使用虚构数据且无DSS。
+
+- status_cn：基于文献综述的主张，有较强支持但依赖于综述完整性
+
+#### 7. HDSS可移植到其他医院。
+
+- claim_cn：HDSS可移植到其他医院。
+
+- evidence_cn：作者声称模型一般适用，只需一次性生成当地位置与距离表；但未在其他机构测试。
+
+- status_cn：断言未验证
+
+- internal_validity_strategy_cn：使用同一批患者、护士、服务类型和时间窗数据分别输入人工流程和HDSS，避免数据不一致；在同一周内逐日对比，减少单日异常；在距离目标之外切换工作量均衡目标，检验系统不是只对单目标有效。但由于没有随机分配、盲评或重复测量，且开发者和评价者可能重叠，内部有效性仍有局限。
+
+- external_validity_strategy_cn：使用两段不同时间（2018年典型周和2019年八周）的真实医院数据；样本覆盖不同星期和更长时段；系统最终被医院管理层批准并部署，提供组织接受的证据。但所有数据来自单一家医院，团队结构和流程可能特殊，因此外部推广主要依赖逻辑论证而非跨机构验证。
+
+- what_is_not_actually_tested_cn：未直接测量护士个体的实际工作量差异、护理质量、患者满意度、管理员实际节省的时间、随机化临床结果或长期部署后的绩效；未测试随机旅行/服务时间；未在其他医院进行移植验证；未测试与护士排班（rostering）系统联动。
+
+## 贡献闭环
+
+- technical_claim_cn：多准则MILP模型可以在不到3分钟的求解时间内，为约40-50名患者和约9名护士的每日家访排程生成可行且更优的路线。
+
+- artifact_claim_cn：HDSS作为一个包含数据、地图、优化、可视化、报表模块的完整决策支持系统，是使MILP模型在实际医疗管理中可用的关键设计。
+
+- mechanism_claim_cn：改进来自对路径顺序和护士-患者指派的系统性全局搜索，替代人工的局部启发式判断；同时通过硬时间窗、休息、加班和区域约束保证解的可行性。
+
+- boundary_claim_cn：该结果适用于与渥太华医院类似的家透析项目：单周期日计划、固定护士名册、团队分区、确定性旅行时间、需要每日一到两次家访。若引入多周期、随机旅行时间或与排班系统联动，当前模型需要扩展。
+
+- reusable_design_knowledge_cn：可复用的设计知识包括：用加权多目标MILP表达现实中相互冲突的运营目标；用浮动护士建模处理跨区域应急需求；用快速原型和用户中心设计迭代提炼需求；用电子表格式界面降低临床管理员使用优化系统的门槛。
+
+- theoretical_contribution_cn：理论贡献有限，主要是将HHC SRP文献扩展到“家庭透析”这一具体医疗场景，并指出文献中少见的约束组合（用餐休息、加班、工作量均衡、护士数量和浮动护士）可以在真实数据上被精确求解。
+
+- how_discussion_closes_intro_gap_cn：引言指出，人工排程在规模增长和资金变化下变得困难且缺乏决策支持工具。讨论部分通过展示HDSS在距离、时间、护士数和成本上的量化改善，以及最终获得批准和部署，直接回应了“需要能高效利用资源的决策支持工具”这一缺口，并把单点案例提升为可移植的管理意涵和未来扩展方向。
+
+- overclaim_or_unsupported_leaps_cn：“首次同类系统”依赖于文献表但不完全可证伪；将距离节约直接外推为年化10万加元成本节约，没有考虑实际报销、油价、车辆维护等；将“路线更简单”作为工作量改善的证据是示例性的；声称可轻松移植到其他医院，但没有任何跨机构数据；工作量和护理质量的改善更多是预期而非测量。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：过去几年家庭透析已成为部分肾衰竭患者的首选治疗方式，但制定高效且有效的每日家透析服务计划对医院管理者构成多重挑战，因为涉及护士数量和行车路线等相互关联的决策。
+
+- rhetorical_function_cn：开篇交代医疗背景和管理难题，让读者快速进入问题域。
+
+- depends_on_cn：无；独立起点。
+
+- sets_up_cn：为引出HDSS作为解决方案做背景铺垫。
+
+- evidence_pointer：Abstract 第一段
+
+### 2. Abstract P2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者与渥太华医院合作，开发了名为HDSS的系统，该系统使用MILP模型为预先指定的患者群体创建每日护士路径，以最小化提供家庭透析的成本。
+
+- rhetorical_function_cn：直接陈述研究动作和核心制品。
+
+- depends_on_cn：问题背景要求一个决策支持工具。
+
+- sets_up_cn：引出模型和系统是论文主题。
+
+- evidence_pointer：Abstract 第二段
+
+### 3. Abstract P3 P1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P3 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：模型用渥太华医院肾脏病科提供的数据验证，界面按照用户中心设计原则开发，并用一组最终用户验证。
+
+- rhetorical_function_cn：说明验证方式和系统开发的用户参与，为可信度铺路。
+
+- depends_on_cn：此前HDSS的存在。
+
+- sets_up_cn：为后文的对比评价和界面设计提供逻辑依据。
+
+- evidence_pointer：Abstract 第三段前半
+
+### 4. Abstract P3 P2
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P3 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：验证阶段将HDSS生成的每日排程和护士路径与管理员人工创建的路径比较，结果改善了工作量分布、简化了路线并减少了总行驶距离，从而降低项目成本。
+
+- rhetorical_function_cn：在摘要中给出最核心的实证结果。
+
+- depends_on_cn：对比评价设计。
+
+- sets_up_cn：暗示论文将详细报告这些结果。
+
+- evidence_pointer：Abstract 第三段后半
+
+### 5. Abstract P4
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文提供MILP模型细节、HDSS描述、实施结果和管理意涵。
+
+- rhetorical_function_cn：预告论文内容和贡献。
+
+- depends_on_cn：结果已陈述。
+
+- sets_up_cn：为读者提供整篇论文的路线图。
+
+- evidence_pointer：Abstract 第四段
+
+### 6. Introduction P2
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：透析是终末期肾病的救生治疗，分血液透析和腹膜透析；血透在体外机器净化血液，腹透利用腹腔膜做自然过滤器。
+
+- rhetorical_function_cn：建立医学基本概念，避免读者对家庭透析不理解。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为说明为什么腹膜透析更适合居家治疗提供基础。
+
+- evidence_pointer：Introduction 第二段
+
+### 7. Introduction P3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：腹膜透析可在家里完成，更灵活、方便且成本效益更高，但由于一些年老体弱患者无法独立操作，其广泛使用受限。
+
+- rhetorical_function_cn：给出家庭透析被推广的临床与经济原因，同时指出现实阻碍。
+
+- depends_on_cn：透析类型定义。
+
+- sets_up_cn：引出政府资助和家访护士的需求。
+
+- evidence_pointer：Introduction 第三段
+
+### 8. Introduction P4
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：许多卫生当局为扩展家庭透析提供额外资金，导致加拿大安大略省等地区家透析利用率上升；但资助方式变化把服务责任转移到医院，增加对资源高效利用决策支持工具的需求。
+
+- rhetorical_function_cn：把一般医疗趋势转化为组织资源压力，指出缺口的重要性。
+
+- depends_on_cn：家庭透析的优势与患者限制。
+
+- sets_up_cn：论证建设DSS的必要性。
+
+- evidence_pointer：Introduction 第四段
+
+### 9. Introduction P5
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：很多家透析患者每天接受护士探访，访问可能时间敏感，患者熟悉固定护士，连续性护理影响满意度；再叠加地理位置、班次、休息、加班和工作量均衡，人工排程非常困难且费时。
+
+- rhetorical_function_cn：具体化问题现象，强调人工方式的局限。
+
+- depends_on_cn：项目背景和资助压力。
+
+- sets_up_cn：为HDSS的约束和优化目标做铺垫。
+
+- evidence_pointer：Introduction 第五段
+
+### 10. Introduction P6
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P6
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文描述HDSS，该系统用MILP优化护士路径，目标组合总距离、旅行与加班成本、护士人数和工作量均衡，并考虑兼容性、可用性、患者时间偏好和访问时长。
+
+- rhetorical_function_cn：正式提出研究目标和制品。
+
+- depends_on_cn：前面已建立的问题和需求。
+
+- sets_up_cn：为后面模型和评价章节预告。
+
+- evidence_pointer：Introduction 第六段
+
+### 11. Introduction P7
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P7
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：其余部分内容包括：TOH家透析交付方式、相关工作、MILP模型、HDSS开发、渥太华的排程与路径使用及管理意涵、结论。
+
+- rhetorical_function_cn：给读者明确的章节路线图。
+
+- depends_on_cn：文章整体框架。
+
+- sets_up_cn：便于读者按图索骥。
+
+- evidence_pointer：Introduction 最后一段
+
+### 12. Section 2 P1
+
+- order：12
+
+- section：Problem Definition
+
+- locator：Section 2 P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：TOH家透析项目是北美最大之一，服务超过220名患者，接近18名全职护士；开发HDSS前，排程由家透析临床护理协调员手工完成。
+
+- rhetorical_function_cn：界定问题场景的规模与当前做法。
+
+- depends_on_cn：引言建立的一般背景。
+
+- sets_up_cn：说明问题具有实际管理意义。
+
+- evidence_pointer：Section 2, 第一段
+
+### 13. Section 2 P2
+
+- order：13
+
+- section：Problem Definition
+
+- locator：Section 2 P2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：协调员每天先为护士安排家访或门诊任务，再根据护士住址和患者住址创建路线；当天临时变化由附近护士或门诊护士处理；日程通常提前一天制定。
+
+- rhetorical_function_cn：描述人工流程的步骤和现实约束。
+
+- depends_on_cn：当前以人工操作为主的背景。
+
+- sets_up_cn：为模型中的每日排程逻辑提供领域输入。
+
+- evidence_pointer：Section 2, 第二段
+
+### 14. Section 2 P3
+
+- order：14
+
+- section：Problem Definition
+
+- locator：Section 2 P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：护士组成团队覆盖渥太华东、西、中三个区域；同时有浮动护士和晚班护士提供跨区域服务，以应对紧急情况和减少加班。
+
+- rhetorical_function_cn：提出模型必须表达的团队结构和浮动护士需求。
+
+- depends_on_cn：TOH运营实践。
+
+- sets_up_cn：为Rik参数和浮动护士建模提供依据。
+
+- evidence_pointer：Section 2, 第三段
+
+### 15. Section 2 P4
+
+- order：15
+
+- section：Problem Definition
+
+- locator：Section 2 P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：该项目的两个主要排程标准是护士间工作量均衡和总行驶距离最短；距离最短用于控制按公里补偿的成本并减少加班；有时也需要最小化护士人数。
+
+- rhetorical_function_cn：导出模型的目标函数结构。
+
+- depends_on_cn：医院管理者关切的成本与人力。
+
+- sets_up_cn：为四个加权目标中的D、C、R、A做领域铺垫。
+
+- evidence_pointer：Section 2, 第四段
+
+### 16. Section 2 P5
+
+- order：16
+
+- section：Problem Definition
+
+- locator：Section 2 P5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：协调员每天要为约40-50名患者和约9名护士排程，任务非常耗时，需要了解路径、行驶时间、护士起始位置和服务类型；病人服务类型差异大。
+
+- rhetorical_function_cn：强调人工排程的性能缺口和技能门槛。
+
+- depends_on_cn：项目规模和流程描述。
+
+- sets_up_cn：引出需要自动化DSS。
+
+- evidence_pointer：Section 2, 最后一段
+
+### 17. Section 3 P1
+
+- order：17
+
+- section：Related Work
+
+- locator：Section 3 P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：家庭医疗护理涉及多种护理人员上门服务，通常构成有趣的排程与路径问题（SRP），已有综述按方法、时间范围、目标和约束分类。
+
+- rhetorical_function_cn：引入领域文献作为知识基础。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为对比本文与现有研究的差异做铺垫。
+
+- evidence_pointer：Section 3 第一段
+
+### 18. Section 3 P2
+
+- order：18
+
+- section：Related Work
+
+- locator：Section 3 P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：SRP按时间范围分为单周期和多周期，按求解方法分为精确、元启发式或混合；本文是单周期MILP并用精确方法求解。
+
+- rhetorical_function_cn：对本文在方法论分类中的位置做自我定位。
+
+- depends_on_cn：综述框架。
+
+- sets_up_cn：为后文评估本文贡献限定范围。
+
+- evidence_pointer：Section 3 第二段
+
+### 19. Section 3 P3 表1附近
+
+- order：19
+
+- section：Related Work
+
+- locator：Section 3 P3 表1附近
+
+- move_code：LIMITATION
+
+- paraphrase_cn：近期大多数研究使用元启发式优化和机构数据，只有少数研究开发了决策支持系统。
+
+- rhetorical_function_cn：指出文献中的一类缺口：优化模型与可用系统之间存在断层。
+
+- depends_on_cn：表1文献分类。
+
+- sets_up_cn：为本文开发DSS的独特贡献提供依据。
+
+- evidence_pointer：Table 1 附近
+
+### 20. Section 3 P4 表2附近
+
+- order：20
+
+- section：Related Work
+
+- locator：Section 3 P4 表2附近
+
+- move_code：GAP
+
+- paraphrase_cn：表2显示虽然行驶时间、成本、距离、等待、加班和偏好是常见目标，但只有少数模型最小化所需护理人员数；同时用餐休息、加班、工作量均衡、首末次访问开始时间等实际考虑较少被处理。
+
+- rhetorical_function_cn：在目标与约束层面制造具体缺口。
+
+- depends_on_cn：表2文献对比。
+
+- sets_up_cn：为本文多目标、多约束模型提供必要性论证。
+
+- evidence_pointer：Table 2 附近
+
+### 21. Section 3 P5
+
+- order：21
+
+- section：Related Work
+
+- locator：Section 3 P5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文是独特的：专门考虑家庭透析问题，开发DSS工具，通过目标函数参数化支持多种优化标准，并引入浮动护士概念。
+
+- rhetorical_function_cn：在文献缺口后直接声明本文贡献。
+
+- depends_on_cn：表1和表2识别的缺口。
+
+- sets_up_cn：为后续模型和系统章节提供预期。
+
+- evidence_pointer：Section 3 最后一段
+
+### 22. Section 4 P1
+
+- order：22
+
+- section：Mathematical Model
+
+- locator：Section 4 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型是单周期模型，用于确定一组每日护士路径：护士何时离家、访问哪些患者、何时休息以及何时回家；定义了患者、护士、距离、时间和服务时间等参数。
+
+- rhetorical_function_cn：开始正式描述核心优化制品。
+
+- depends_on_cn：问题定义中的运营流程。
+
+- sets_up_cn：为后面目标函数和约束形式化奠基。
+
+- evidence_pointer：Section 4 第一段
+
+### 23. Section 4 P2
+
+- order：23
+
+- section：Mathematical Model
+
+- locator：Section 4 P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：假设一天内行驶距离和时间固定，并用常量补偿时间处理交通、事故、道路施工和天气带来的变化。
+
+- rhetorical_function_cn：处理现实可变性，简化模型但指出补偿机制。
+
+- depends_on_cn：需要可计算的行驶时间。
+
+- sets_up_cn：为确定性模型和后续局限性讨论埋下伏笔。
+
+- evidence_pointer：Section 4 第二段
+
+### 24. Section 4 P3
+
+- order：24
+
+- section：Mathematical Model
+
+- locator：Section 4 P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：护士按团队服务各自区域，Rik表示护士能否访问患者；加班和浮动/晚班护士是保证问题有解的替代方式。
+
+- rhetorical_function_cn：将区域团队和浮动护士知识转化为模型参数与可行解机制。
+
+- depends_on_cn：问题定义中的团队结构。
+
+- sets_up_cn：为约束(18)(19)和加班变量提供解释。
+
+- evidence_pointer：Section 4 第三段
+
+### 25. Section 4 P4
+
+- order：25
+
+- section：Mathematical Model
+
+- locator：Section 4 P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：需要每日两次访问的患者被建模为两个独立患者，分别有最早和最晚服务时间，以确保连接和断开循环机之间有足够间隔；连续性护理通过区域团队实现。
+
+- rhetorical_function_cn：处理临床时间依赖和连续性问题。
+
+- depends_on_cn：两类患者访问需求。
+
+- sets_up_cn：为后续单周期局限讨论提供伏笔。
+
+- evidence_pointer：Section 4 第四段
+
+### 26. Section 4 Objective Function
+
+- order：26
+
+- section：Mathematical Model
+
+- locator：Section 4 Objective Function
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：目标函数是四个准则的加权和：总距离、总行程与加班成本、所需护士数、最大工作量；权重λ1到λ4决定各准则相对重要性，也允许层次优化。
+
+- rhetorical_function_cn：给出多目标参数化设计的核心表达式。
+
+- depends_on_cn：问题定义中的两个主要标准及护士人数关注。
+
+- sets_up_cn：为第6节切换权重进行敏感性分析做准备。
+
+- evidence_pointer：Section 4, Objective Function
+
+### 27. Section 4 Constraints (2)-(3)
+
+- order：27
+
+- section：Mathematical Model
+
+- locator：Section 4 Constraints (2)-(3)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：约束确保每个患者恰好被一名护士访问，且护士进入和离开患者节点的流量平衡。
+
+- rhetorical_function_cn：建立基本路径可行性框架。
+
+- depends_on_cn：路径问题的基础结构。
+
+- sets_up_cn：为更复杂的时间、班次和负荷约束提供基础。
+
+- evidence_pointer：Section 4, Constraint (2)-(3)
+
+### 28. Section 4 Constraint (13)
+
+- order：28
+
+- section：Mathematical Model
+
+- locator：Section 4 Constraint (13)
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：约束(13)将患者服务开始时间限制在最早和最晚允许区间内，且因为是医疗时间敏感连接，被视为硬约束。
+
+- rhetorical_function_cn：突出临床安全要求对模型的强制约束作用。
+
+- depends_on_cn：引言中描述的访问时间敏感性。
+
+- sets_up_cn：为HDSS能够满足临床时间要求提供模型证据。
+
+- evidence_pointer：Section 4, Constraint (13)
+
+### 29. Section 4 Constraints (15)-(16)
+
+- order：29
+
+- section：Mathematical Model
+
+- locator：Section 4 Constraints (15)-(16)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：约束将护士首次访问时间与从家到门诊的通勤时间关联，并将最后一次访问后的回家时间和加班联系起来，从而避免不可行路线并计算加班量。
+
+- rhetorical_function_cn：把班次和通勤现实纳入路径可行性。
+
+- depends_on_cn：护士从家出发和返回的运营事实。
+
+- sets_up_cn：为成本目标中的加班项提供模型基础。
+
+- evidence_pointer：Section 4, Constraints (15)-(16)
+
+### 30. Section 4 Constraints (17)-(19)
+
+- order：30
+
+- section：Mathematical Model
+
+- locator：Section 4 Constraints (17)-(19)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：约束(17)与目标函数联动计算最大护士工作量以实现均衡；约束(18)限定护士只能访问其覆盖区域的患者，浮动护士除外；约束(19)限定只能在访问的患者处休息。
+
+- rhetorical_function_cn：把工作量均衡和区域限制转化为模型约束。
+
+- depends_on_cn：问题定义中的区域团队和均衡目标。
+
+- sets_up_cn：为第6节工作量均衡目标对比提供模型依据。
+
+- evidence_pointer：Section 4, Constraints (17)-(19)
+
+### 31. Section 5 P1
+
+- order：31
+
+- section：HDSS
+
+- locator：Section 5 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：HDSS采用快速原型与用户中心界面设计结合，每个阶段的原型和界面选项都提交给医院管理员、管理层和临床领导讨论，达成共识后再修订。
+
+- rhetorical_function_cn：说明系统开发方法，强化用户参与和实用性。
+
+- depends_on_cn：设计科学传统。
+
+- sets_up_cn：为系统满足真实需求提供方法论保障。
+
+- evidence_pointer：Section 5 第一段
+
+### 32. Section 5.1 P1
+
+- order：32
+
+- section：HDSS
+
+- locator：Section 5.1 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：迭代阶段从学习MILP模型需求和预期功能开始，多轮呈现不同版本模型、原型和界面mock-up，每轮修订后用真实数据测试并与利益相关者分享简报，直到不再发现新需求且界面获批。
+
+- rhetorical_function_cn：展示需求如何通过迭代被收敛。
+
+- depends_on_cn：设计开发背景。
+
+- sets_up_cn：为模型变量、目标和约束的来源提供依据。
+
+- evidence_pointer：Section 5.1 第一段
+
+### 33. Section 5.1 P2-P3
+
+- order：33
+
+- section：HDSS
+
+- locator：Section 5.1 P2-P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：MILP模型开发从基本需求开始，定义变量、优化标准和核心约束，再建立数据需求；通过比较不同权重、服务时长和班次假设的替代方案，发现例外和额外需求。
+
+- rhetorical_function_cn：说明模型设计是需求驱动和迭代校准的。
+
+- depends_on_cn：需求迭代方法。
+
+- sets_up_cn：凸显模型复杂性和现实关联。
+
+- evidence_pointer：Section 5.1 P2-P3
+
+### 34. Section 5.2 Architecture
+
+- order：34
+
+- section：HDSS
+
+- locator：Section 5.2 Architecture
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：HDSS是独立单机系统，包含用户界面、可视化、报表、优化、数据和地图六个模块，并按展示、执行、数据三层组织；用Java和若干开源库实现。
+
+- rhetorical_function_cn：给出系统的技术架构，展示可实现的软件制品。
+
+- depends_on_cn：前期需求分析。
+
+- sets_up_cn：为后续系统输出和评价做准备。
+
+- evidence_pointer：Section 5.2, Figure 1
+
+### 35. Section 5.2 Optimization and Map Modules
+
+- order：35
+
+- section：HDSS
+
+- locator：Section 5.2 Optimization and Map Modules
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：地图模块用GraphHopper和OpenStreetMap数据生成所有地址组合的距离与行驶时间；优化模块读取患者护士数据和参数，生成MILP并调用Gurobi 8.0求解，再写回数据库。
+
+- rhetorical_function_cn：说明地理数据与优化求解如何集成。
+
+- depends_on_cn：整体架构。
+
+- sets_up_cn：为评价数据来源和求解效率提供技术细节。
+
+- evidence_pointer：Section 5.2
+
+### 36. Section 5.3 User Interface
+
+- order：36
+
+- section：HDSS
+
+- locator：Section 5.3 User Interface
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：界面分为主菜单/快速工具栏、导航树和工作区，工作区包含电子表格式表单、图表、地图路线和报表，支持管理员日常操作。
+
+- rhetorical_function_cn：强调系统对最终用户的可操作性和界面友好性。
+
+- depends_on_cn：用户中心设计原则。
+
+- sets_up_cn：支撑管理意涵中提到的管理员任务变化。
+
+- evidence_pointer：Section 5.3, Figure 2
+
+### 37. Section 6 P1
+
+- order：37
+
+- section：Comparative Evaluation
+
+- locator：Section 6 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：在开发周期结束时，将HDSS生成的排程与医院管理员手工创建的排程进行比较；计算在普通台式机上完成，执行时间从未超过3分钟。
+
+- rhetorical_function_cn：宣布评价方法和基准。
+
+- depends_on_cn：系统开发完成。
+
+- sets_up_cn：为后续表格和结果设定对比框架。
+
+- evidence_pointer：Section 6 第一段
+
+### 38. Section 6.1 Data
+
+- order：38
+
+- section：Comparative Evaluation
+
+- locator：Section 6.1 Data
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：比较首先使用2018年典型周，然后使用2019年6月1日至7月26日共八周数据；典型周有53名不同患者、208次访问和15名护士。
+
+- rhetorical_function_cn：界定评价数据范围和规模。
+
+- depends_on_cn：评价设计。
+
+- sets_up_cn：为后期扩展验证做铺垫。
+
+- evidence_pointer：Section 6.1, Table 3
+
+### 39. Section 6.1 数据输入描述
+
+- order：39
+
+- section：Comparative Evaluation
+
+- locator：Section 6.1 数据输入描述
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：每个案例都使用护理协调员用于日常排程的同一批数据输入HDSS，包括时间窗偏好、服务类型和自动生成的距离/时间信息；行驶时间未考虑实时交通但包含补偿时间。
+
+- rhetorical_function_cn：确保对比的公平性和数据一致性。
+
+- depends_on_cn：确保人工与系统输入一致。
+
+- sets_up_cn：提高内部有效性，使结果差异可归因于排程方法。
+
+- evidence_pointer：Section 6.1
+
+### 40. Section 6.2 距离目标开头
+
+- order：40
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 距离目标开头
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：因为项目管理层主要关心距离相关的直接成本，所以除成本权重外其他目标权重都设为零；表4给出典型周的对比结果。
+
+- rhetorical_function_cn：说明评价使用的目标权重设置，并引出表4。
+
+- depends_on_cn：问题定义中的距离/成本标准。
+
+- sets_up_cn：为结果百分比解释提供上下文。
+
+- evidence_pointer：Section 6.2, Table 4前
+
+### 41. Section 6.2 距离目标结果
+
+- order：41
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 距离目标结果
+
+- move_code：RESULT
+
+- paraphrase_cn：使用HDSS使平均总距离减少约27%，平均总行驶时间减少约25%，同时每天平均释放1.3名护士。
+
+- rhetorical_function_cn：报告核心绩效改善。
+
+- depends_on_cn：表4数据。
+
+- sets_up_cn：引出系统对管理者的特别意义。
+
+- evidence_pointer：Section 6.2 第一段
+
+### 42. Section 6.2 周三示例
+
+- order：42
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 周三示例
+
+- move_code：RESULT
+
+- paraphrase_cn：周三示例显示人工路线相互交错，HDSS路线更简单高效；调整团队组成后，该日距离还可再减少41%。
+
+- rhetorical_function_cn：用可视化示例补充表格结果，并展示系统可支持团队构成实验。
+
+- depends_on_cn：表4中的周三数据。
+
+- sets_up_cn：为管理意涵中的“敏感性分析和快速响应”铺垫。
+
+- evidence_pointer：Figure 3 附近
+
+### 43. Section 6.2 工作量均衡目标
+
+- order：43
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 工作量均衡目标
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：当以工作量均衡为主要目标时，距离减少仍达到17%、时间减少19%、护士数减少11%，但比纯距离目标略低。
+
+- rhetorical_function_cn：检验替代目标下系统是否仍然有效。
+
+- depends_on_cn：MILP目标权重可调。
+
+- sets_up_cn：展示多目标权衡，并为讨论提供边界。
+
+- evidence_pointer：Table 5
+
+### 44. Section 6.2 八周结果
+
+- order：44
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 八周结果
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：在2019年八周数据上，HDSS使距离减少约38%、时间减少约33%、护士数减少约11%；按每公里0.45加元补偿估算，每周可节省近1900加元，年化约10万加元。
+
+- rhetorical_function_cn：用更长时段验证结果稳定性，并给出财务含义。
+
+- depends_on_cn：典型周结果。
+
+- sets_up_cn：为管理意涵和推广价值提供证据。
+
+- evidence_pointer：Table 6
+
+### 45. Section 6.2 最后一段
+
+- order：45
+
+- section：Comparative Evaluation
+
+- locator：Section 6.2 最后一段
+
+- move_code：RESULT
+
+- paraphrase_cn：上述结果表明HDSS表现良好，排程与路径决策相比人工方式得到改善；系统已获项目管理批准并正部署用于日常使用。
+
+- rhetorical_function_cn：总结评价结果并宣布实际采纳。
+
+- depends_on_cn：前三个评价结果。
+
+- sets_up_cn：为管理意涵和结论提供现实依据。
+
+- evidence_pointer：Section 6.2 最后一段
+
+### 46. Section 6.3 P1
+
+- order：46
+
+- section：Managerial Implications
+
+- locator：Section 6.3 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：除成本下降外，HDSS的日常使用将给管理员和护士带来管理影响：管理员可腾出时间处理患者互动，护士可更多到门诊教学和照顾不能在家接受护理的患者，程序层面减少文书返工、提高工作量和协调。
+
+- rhetorical_function_cn：将数值结果扩展为组织和管理层面的影响。
+
+- depends_on_cn：评价结果和系统功能。
+
+- sets_up_cn：为“改善护理质量”的总体主张做铺垫。
+
+- evidence_pointer：Section 6.3 第一段
+
+### 47. Section 6.3 P2-P3
+
+- order：47
+
+- section：Managerial Implications
+
+- locator：Section 6.3 P2-P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者表示该系统至今主要改善护理质量而非节省金钱，并认为HDSS可转移到其他类似家透析项目，但位置特定流程会影响实施程度。
+
+- rhetorical_function_cn：概括适用范围和推广条件。
+
+- depends_on_cn：单中心经验。
+
+- sets_up_cn：为第7章的可移植性主张埋下伏笔。
+
+- evidence_pointer：Section 6.3 P2-P3
+
+### 48. Section 6.4
+
+- order：48
+
+- section：Limitations
+
+- locator：Section 6.4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限包括模型是单周期的，两次访问患者被拆成独立患者；系统假设护士名册已给定；互斥区域团队可能导致次优；使用确定性行驶和服务时间可能不如随机值时贴近现实。
+
+- rhetorical_function_cn：明确保护结论的边界，避免过度推广。
+
+- depends_on_cn：模型设计和评价设定。
+
+- sets_up_cn：为未来研究方向提供输入。
+
+- evidence_pointer：Section 6.4
+
+### 49. Section 7 P1
+
+- order：49
+
+- section：Conclusion
+
+- locator：Section 7 P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：家庭透析使用增加，因为其灵活性和成本效益；制定好的访问排程和护士路径是家透析协调员的关键任务，因为这些决策驱动运营成本、服务质量和护士工作满意度。
+
+- rhetorical_function_cn：回到开篇问题，重申问题重要性。
+
+- depends_on_cn：引言背景。
+
+- sets_up_cn：为总结HDSS贡献做铺垫。
+
+- evidence_pointer：Section 7 第一段
+
+### 50. Section 7 P2
+
+- order：50
+
+- section：Conclusion
+
+- locator：Section 7 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文描述了HDSS，以解决TOH家透析项目面临的真实排程与路径问题；系统使用多目标MILP，考虑总距离、总成本、护士数、工作量均衡以及其他现实约束。
+
+- rhetorical_function_cn：总结核心制品和贡献。
+
+- depends_on_cn：前文所有章节。
+
+- sets_up_cn：为最后的结果总结和推广声明提供基础。
+
+- evidence_pointer：Section 7 第二段
+
+### 51. Section 7 P3
+
+- order：51
+
+- section：Conclusion
+
+- locator：Section 7 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：HDSS已获管理批准，除降低距离和均衡工作量外，还能快速响应新运营需求，将排程时间从数小时缩短到几分钟，并提供易于理解的路线图。
+
+- rhetorical_function_cn：总结实证结果和实用价值。
+
+- depends_on_cn：第6节评价。
+
+- sets_up_cn：增强系统说服力。
+
+- evidence_pointer：Section 7 第三段
+
+### 52. Section 7 P3 后半
+
+- order：52
+
+- section：Conclusion
+
+- locator：Section 7 P3 后半
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：虽然为TOH开发，但HDSS可较容易移植到其他医院，因为MILP模型通用且界面可编辑参数；唯一额外工作是建立当地位置和距离表。
+
+- rhetorical_function_cn：划定可推广范围并强调移植条件。
+
+- depends_on_cn：系统架构和模型结构。
+
+- sets_up_cn：为读者提供迁移预期。
+
+- evidence_pointer：Section 7 第三段后半
+
+### 53. Section 7 P4
+
+- order：53
+
+- section：Conclusion
+
+- locator：Section 7 P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：护士排班与护士路径问题相互关联，未来计划扩展HDSS，同时考虑人员配置和路径问题。
+
+- rhetorical_function_cn：指出当前单周期固定名册假设的局限并预告未来研究。
+
+- depends_on_cn：第6.4节局限。
+
+- sets_up_cn：表明研究仍在演进，避免贡献封闭。
+
+- evidence_pointer：Section 7 最后一段
+
+## 写作技术
+
+- gap_construction_cn：通过两张文献分类表制造双重缺口：一是大多数研究只做优化模型而很少开发DSS；二是常见目标/约束组合中，护士人数、用餐休息、加班和工作量均衡等现实问题被忽略。文章还把“家庭透析”与泛化的家庭医疗护理区分开，称只有一篇使用虚构数据且无DSS的研究，从而凸显本文的唯一性。
+
+- signposting_cn：摘要末尾预告模型、系统、结果和意涵；引言末尾给出完整章节路线；在每个评价小节开头用一句话说明目标权重设置；结论段落用总结性信号词重述贡献。
+
+- transition_logic_cn：从一般医疗背景移动到TOH具体问题，再从问题定义移动到文献对比，文献缺口引出模型，模型需要软件载体，软件需要实证评价，评价结果上升为管理意涵，最后以局限和未来研究收尾。每个阶段都依赖上一阶段留下的未决问题。
+
+- claim_evidence_rhythm_cn：先陈述目标权重和对比基准，再给出表格，随后立即把表格数字转成百分比节约和护士释放量；每个大结果后伴随解释性例子或管理含义，避免让读者停留在原始数据。
+
+- benchmark_narrative_cn：手工排程被反复作为“现状基准”；评价叙述先给出一周距离目标，再给出替代目标，最后给出更长期数据，使基准对比形成阶梯式证据链。成本节约叙述也直接嵌入benchmark结果。
+
+- theory_return_cn：文章没有行为理论可返回，但在结论和局限中把模型结果回扣到HHC SRP文献缺口，声称填补了家庭透析DSS空白，并把局限转化为未来研究问题（如排班与路径协同）。
+
+- contribution_positioning_cn：在文献综述最后用四个项目符号明示独特贡献，在摘要和引言用“first-of-its-kind”定位，在结论中用“已获批准并部署”增强现实贡献。
+
+- novelty_protection_cn：通过真实数据、真实机构、用户中心设计、多个目标权重、浮动护士建模和长期数据验证，把结果从“一个MILP更优”提升为“一个实用且稳健的DSS设计”。即使承认局限，仍然强调可移植性和一般性。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：描述真实运营问题：规模、人工流程、关键挑战和管理者关心的目标。
+
+- research_job_cn：与领域机构合作，记录现有流程、约束和痛点。
+
+- required_evidence_cn：机构规模、人工排程流程、患者/护士数量、当前绩效问题。
+
+- transition_to_next_cn：指出人工排程困难，自然引向需要决策支持工具。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述相关文献，用表格对研究进行分类，指出缺口。
+
+- research_job_cn：系统检索家庭医疗护理排程与路径文献，提取目标、约束、数据来源、DSS开发情况。
+
+- required_evidence_cn：足以说明本文在目标、约束、现实数据和DSS开发上独特的文献分类表。
+
+- transition_to_next_cn：用“本文是独特的”承接缺口，引出数学模型。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：形式化描述数学模型：集合、参数、决策变量、目标函数、约束，并逐个解释约束的现实含义。
+
+- research_job_cn：将领域需求转化为可计算优化模型，选择合适求解器。
+
+- required_evidence_cn：模型能覆盖已识别的目标和约束，且可被求解器求解。
+
+- transition_to_next_cn：说明模型需要系统化封装，进入DSS开发。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述系统架构、实现技术、界面和用户参与过程。
+
+- research_job_cn：快速原型开发、用户中心设计迭代、与现实数据连接。
+
+- required_evidence_cn：系统模块、求解器、地图数据、界面截图和用户反馈。
+
+- transition_to_next_cn：系统开发完成后，进入对比评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：设计并报告对比评价：描述数据、基准、目标权重、结果表格和百分比改善。
+
+- research_job_cn：用同一数据集将系统输出与人工排程对比，并进行替代目标和扩展时段检验。
+
+- required_evidence_cn：至少一段时间的真实数据、人工排程记录、系统输出、核心指标（距离、时间、人数）和可解释的节约。
+
+- transition_to_next_cn：评价结果引出管理意涵、边界条件和未来研究。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论管理意涵、可移植性、局限性和未来方向。
+
+- research_job_cn：与机构讨论系统实际使用影响，识别模型假设和边界。
+
+- required_evidence_cn：管理员/管理层批准，或至少定性反馈；明确局限。
+
+- transition_to_next_cn：收束全文，把单点结果升华为设计知识和未来议程。
+
+### most_transferable_moves_cn
+
+1. 用结构化文献分类表制造可观察的缺口
+
+2. 用“问题定义-模型-系统-评价-意涵”五段式结构组织设计科学论文
+
+3. 以最终用户的当前人工流程作为最强基准
+
+4. 同时报告主要目标和替代目标，展示系统灵活性
+
+5. 把数字结果翻译成管理者和患者能感知的收益
+
+6. 在结论前主动列出限制，保护贡献不被过度推广
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要真实医院家透析项目中的患者、护士地址和每日排程数据
+
+2. 需要护理协调员手工排程的历史记录作为对比基准
+
+3. 需要持续多轮与医院管理者、临床领导的会面进行需求迭代
+
+4. 需要地图道路网络数据（如OpenStreetMap）和商业求解器（如Gurobi）
+
+5. 需要机构许可和伦理/隐私安排来使用患者级位置和服务数据
+
+### what_not_to_copy_superficially_cn
+
+1. 不能在没有真实人工排程作为基准的情况下声称效率提升
+
+2. 不能在缺少用户迭代反馈的情况下宣称采用用户中心设计
+
+3. 不能把单周结果直接外推为年度成本节约，必须说明估算假设
+
+4. 不能在没有跨机构数据的情况下宣称“可轻松移植”
+
+5. 不能用模型目标替代实际测量来宣称工作量分布改善
+
+- single_best_description_of_the_routine_cn：用一个真实机构的昂贵且耗时的人工排程问题作为性能基准，建立一个可由用户参与的MILP决策支持系统，并用多组真实数据和替代目标证明效率改善，最后将其包装为可移植的设计知识和管理意涵。
+
+## 分析边界
+
+全文为期刊预校样，主要图表和表格完整；但OCR表格单元格存在少量信息缺失，可能影响文献分类的精确核对；文章没有附录或在线补充材料；实际部署后的长期效果没有量化数据，因此对“最终部署”的判断主要依赖作者陈述。

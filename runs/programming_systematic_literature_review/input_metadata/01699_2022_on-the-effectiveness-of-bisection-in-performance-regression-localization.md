@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85129183679"
+title: "On the Effectiveness of Bisection in Performance Regression Localization"
+authors: "Ocarizar F.S."
+year: "2022"
+journal: "Empirical Software Engineering"
+doi: "10.1007/s10664-022-10152-3"
+---
+# Scopus title-abstract-keyword metadata
+Title: On the Effectiveness of Bisection in Performance Regression Localization
+Abstract: Performance regressions can have a drastic impact on the usability of a software application. The crucial task of localizing such regressions can be achieved using bisection, which attempts to find the bug-introducing commit using binary search. This approach is used extensively by many development teams, but it is an inherently heuristical approach when applied to performance regressions, and therefore, does not have correctness guarantees. Unfortunately, bisection is also time-consuming, which implies the need to assess its effectiveness prior to running it. To this end, the goal of this study is to analyze the effectiveness of bisection for performance regressions. This goal is achieved by first formulating a metric that quantifies the probability of a successful bisection, and extracting a list of input parameters – the contributing properties – that potentially impact its value; a sensitivity analysis is then conducted on these properties to understand the extent of their impact. Furthermore, an empirical study of 310 bug reports describing performance regressions in 17 real-world applications is conducted, to better understand what these contributing properties look like in practice. The results show that while bisection can be highly effective in localizing real-world performance regressions, this effectiveness is sensitive to the contributing properties, especially the choice of baseline and the distributions at each commit. The results also reveal that most bug reports do not provide sufficient information to help developers properly choose values and metrics that can maximize the effectiveness, which implies the need for measures to fill this information gap. © 2022, The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature.
+Author keywords: Bisection; Bug localization; Empirical study; Software performance
+Index keywords: Application programs; Program debugging; Sensitivity analysis; Binary search; Bisection; Bug localizations; Bug reports; Empirical studies; Localisation; Performance; Property; Software applications; Software performance; Regression analysis
+Document type: Article
+Conference: 
+Source title: Empirical Software Engineering
+Year: 2022
+EID: 2-s2.0-85129183679
+DOI: 10.1007/s10664-022-10152-3
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

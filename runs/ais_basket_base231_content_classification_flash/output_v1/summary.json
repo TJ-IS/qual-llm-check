@@ -1,0 +1,120 @@
+{
+  "updated_at": "2026-08-07T03:54:26.662225+00:00",
+  "analysis_version": "ais-basket-base231-content-classification-flash-v1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 100,
+  "prompt_fingerprint": "912ec81050682192146b65eeee770cbb3b315f50a6c935ef690cf2e115c4269c",
+  "input_candidates": 231,
+  "input_theory_guided_subset": 110,
+  "completed": 231,
+  "pending": 0,
+  "function_counts": {
+    "data_knowledge_representation_and_integration": 12,
+    "human_facing_information_and_interaction": 72,
+    "other_software_function": 1,
+    "planning_optimization_and_allocation": 24,
+    "platform_mechanism_and_governance": 12,
+    "prediction_detection_and_assessment": 75,
+    "recommendation_search_and_matching": 34,
+    "security_privacy_and_access_control": 1
+  },
+  "objective_counts": {
+    "analytic_quality": 95,
+    "behavioral_response": 63,
+    "economic_and_welfare": 15,
+    "human_task_performance": 19,
+    "multi_objective_or_tradeoff": 9,
+    "operational_efficiency": 14,
+    "risk_security_and_safety": 4,
+    "substantive_domain_outcome": 8,
+    "technical_system_performance": 4
+  },
+  "context_counts": {
+    "commerce_marketing_and_customer_service": 48,
+    "cybersecurity_fraud_and_compliance": 27,
+    "digital_platform_social_media_and_crowdfunding": 32,
+    "education_training_and_learning": 11,
+    "enterprise_work_and_knowledge": 13,
+    "finance_accounting_and_investment": 9,
+    "general_or_cross_domain": 29,
+    "healthcare_and_care": 33,
+    "logistics_transport_supply_chain_and_manufacturing": 20,
+    "other_context": 3,
+    "public_sector_crisis_and_humanitarian": 6
+  },
+  "theory_subset_function_counts": {
+    "data_knowledge_representation_and_integration": 2,
+    "human_facing_information_and_interaction": 61,
+    "other_software_function": 1,
+    "planning_optimization_and_allocation": 4,
+    "platform_mechanism_and_governance": 6,
+    "prediction_detection_and_assessment": 21,
+    "recommendation_search_and_matching": 14,
+    "security_privacy_and_access_control": 1
+  },
+  "non_theory_function_counts": {
+    "data_knowledge_representation_and_integration": 10,
+    "human_facing_information_and_interaction": 11,
+    "planning_optimization_and_allocation": 20,
+    "platform_mechanism_and_governance": 6,
+    "prediction_detection_and_assessment": 54,
+    "recommendation_search_and_matching": 20
+  },
+  "isr_count": 57,
+  "isr_function_counts": {
+    "data_knowledge_representation_and_integration": 2,
+    "human_facing_information_and_interaction": 20,
+    "planning_optimization_and_allocation": 3,
+    "platform_mechanism_and_governance": 6,
+    "prediction_detection_and_assessment": 9,
+    "recommendation_search_and_matching": 17
+  },
+  "isr_objective_counts": {
+    "analytic_quality": 17,
+    "behavioral_response": 25,
+    "economic_and_welfare": 6,
+    "human_task_performance": 2,
+    "multi_objective_or_tradeoff": 2,
+    "operational_efficiency": 2,
+    "substantive_domain_outcome": 2,
+    "technical_system_performance": 1
+  },
+  "isr_context_counts": {
+    "commerce_marketing_and_customer_service": 18,
+    "cybersecurity_fraud_and_compliance": 2,
+    "digital_platform_social_media_and_crowdfunding": 15,
+    "education_training_and_learning": 5,
+    "enterprise_work_and_knowledge": 2,
+    "finance_accounting_and_investment": 3,
+    "general_or_cross_domain": 4,
+    "healthcare_and_care": 5,
+    "logistics_transport_supply_chain_and_manufacturing": 2,
+    "other_context": 1
+  },
+  "journal_counts": {
+    "Decision Support Systems": 75,
+    "European Journal of Information Systems": 8,
+    "Information & Management": 14,
+    "Information Systems Journal": 2,
+    "Information Systems Research": 57,
+    "Journal of Management Information Systems": 19,
+    "Journal of the Association for Information Systems": 14,
+    "MIS Quarterly": 42
+  },
+  "year_counts": {
+    "2020": 58,
+    "2021": 47,
+    "2022": 35,
+    "2023": 36,
+    "2024": 25,
+    "2025": 23,
+    "2026": 7
+  },
+  "usage": {
+    "prompt_tokens": 6683478,
+    "completion_tokens": 1129262,
+    "total_tokens": 7812740,
+    "prompt_cache_hit_tokens": 600064,
+    "prompt_cache_miss_tokens": 6083414
+  }
+}

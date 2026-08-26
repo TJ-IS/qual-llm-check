@@ -1,0 +1,672 @@
+{
+  "searched_fields": [
+    "Title",
+    "Abstract",
+    "Author Keywords",
+    "Index Keywords"
+  ],
+  "basket_metadata_records": 17745,
+  "variants": {
+    "S1_strict_distinctive": {
+      "basket_hits": 19,
+      "2016+": 5,
+      "2021+": 3,
+      "top_journals": [
+        [
+          "Information Systems Research",
+          5
+        ],
+        [
+          "Journal of Management Information Systems",
+          5
+        ],
+        [
+          "Information and Management",
+          3
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          2
+        ],
+        [
+          "Decision Support Systems",
+          2
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          1
+        ],
+        [
+          "Information Systems Journal",
+          1
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 7,
+        "recall": 0.25,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Performance implications of stage-wise lead user participation in software development problem solving",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "Role of collective ownership and coding standards in coordinating expertise in software project teams",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "A software complexity model of object-oriented systems",
+          "COD — A dynamic data flow analysis system for Cobol",
+          "On end-user computing productivity",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 7,
+        "recall": 0.3333333333333333,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "On end-user computing productivity",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use"
+        ]
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 7,
+        "recall": 0.35,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "On end-user computing productivity",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use"
+        ]
+      }
+    },
+    "S2_expanded_direct_activity": {
+      "basket_hits": 253,
+      "2016+": 31,
+      "2021+": 17,
+      "top_journals": [
+        [
+          "Decision Support Systems",
+          74
+        ],
+        [
+          "Information and Management",
+          61
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          26
+        ],
+        [
+          "Information Systems Research",
+          22
+        ],
+        [
+          "Journal of Management Information Systems",
+          21
+        ],
+        [
+          "European Journal of Information Systems",
+          13
+        ],
+        [
+          "Information Systems Journal",
+          10
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          9
+        ],
+        [
+          "Journal of Information Technology",
+          8
+        ],
+        [
+          "Journal of Strategic Information Systems",
+          7
+        ],
+        [
+          "Information & management",
+          1
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 23,
+        "recall": 0.8214285714285714,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "A software complexity model of object-oriented systems",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 20,
+        "recall": 0.9523809523809523,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development"
+        ]
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    },
+    "S3_expanded_plus_open_source_development": {
+      "basket_hits": 293,
+      "2016+": 44,
+      "2021+": 23,
+      "top_journals": [
+        [
+          "Decision Support Systems",
+          75
+        ],
+        [
+          "Information and Management",
+          65
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          33
+        ],
+        [
+          "Information Systems Research",
+          27
+        ],
+        [
+          "Journal of Management Information Systems",
+          24
+        ],
+        [
+          "Information Systems Journal",
+          16
+        ],
+        [
+          "European Journal of Information Systems",
+          14
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          13
+        ],
+        [
+          "Journal of Strategic Information Systems",
+          11
+        ],
+        [
+          "Journal of Information Technology",
+          10
+        ],
+        [
+          "Information and Organization",
+          4
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 24,
+        "recall": 0.8571428571428571,
+        "missed_titles": [
+          "A software complexity model of object-oriented systems",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 21,
+        "recall": 1.0,
+        "missed_titles": []
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    },
+    "S4_broad_software_development": {
+      "basket_hits": 1063,
+      "2016+": 169,
+      "2021+": 76,
+      "top_journals": [
+        [
+          "Information and Management",
+          214
+        ],
+        [
+          "Decision Support Systems",
+          157
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          118
+        ],
+        [
+          "Information Systems Journal",
+          103
+        ],
+        [
+          "Information Systems Research",
+          102
+        ],
+        [
+          "Journal of Management Information Systems",
+          98
+        ],
+        [
+          "European Journal of Information Systems",
+          86
+        ],
+        [
+          "Journal of Information Technology",
+          78
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          39
+        ],
+        [
+          "Information and Organization",
+          38
+        ],
+        [
+          "Journal of Strategic Information Systems",
+          28
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 26,
+        "recall": 0.9285714285714286,
+        "missed_titles": [
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 21,
+        "recall": 1.0,
+        "missed_titles": []
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    },
+    "S5_modern_programming_agents": {
+      "basket_hits": 2,
+      "2016+": 2,
+      "2021+": 2,
+      "top_journals": [
+        [
+          "Information and Management",
+          1
+        ],
+        [
+          "Decision Support Systems",
+          1
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 0,
+        "recall": 0.0,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "Are Two Heads Better than One for Software Development? The Productivity Paradox of Pair Programming1",
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Performance implications of stage-wise lead user participation in software development problem solving",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "Role of collective ownership and coding standards in coordinating expertise in software project teams",
+          "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "A software complexity model of object-oriented systems",
+          "COD — A dynamic data flow analysis system for Cobol",
+          "On end-user computing productivity",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Hitting the wall: errors in developing and code inspecting a `simple' spreadsheet model",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use",
+          "The Relevance of Application Domain Knowledge: Characterizing the Computer Program Comprehension Process",
+          "Applying Code Inspection to Spreadsheet Testing",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Research Report—The Relevance of Application Domain Knowledge: The Case of Computer Program Comprehension",
+          "Why Is Programming (Sometimes) So Difficult? Programming as Scientific Discovery in Multiple Problem Spaces",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 0,
+        "recall": 0.0,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "Are Two Heads Better than One for Software Development? The Productivity Paradox of Pair Programming1",
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "On end-user computing productivity",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Hitting the wall: errors in developing and code inspecting a `simple' spreadsheet model",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use",
+          "The Relevance of Application Domain Knowledge: Characterizing the Computer Program Comprehension Process",
+          "Applying Code Inspection to Spreadsheet Testing",
+          "Research Report—The Relevance of Application Domain Knowledge: The Case of Computer Program Comprehension",
+          "Why Is Programming (Sometimes) So Difficult? Programming as Scientific Discovery in Multiple Problem Spaces"
+        ]
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 0,
+        "recall": 0.0,
+        "missed_titles": [
+          "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+          "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+          "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+          "Are Two Heads Better than One for Software Development? The Productivity Paradox of Pair Programming1",
+          "The Effects of Information Request Language and Template Usage on Query Formulation",
+          "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+          "Developing maintainable software: The Readable approach",
+          "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+          "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+          "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+          "On end-user computing productivity",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "Hitting the wall: errors in developing and code inspecting a `simple' spreadsheet model",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The Influence of Database Structure Representation on Database System Learning and Use",
+          "The Relevance of Application Domain Knowledge: Characterizing the Computer Program Comprehension Process",
+          "Applying Code Inspection to Spreadsheet Testing",
+          "Research Report—The Relevance of Application Domain Knowledge: The Case of Computer Program Comprehension",
+          "Why Is Programming (Sometimes) So Difficult? Programming as Scientific Discovery in Multiple Problem Spaces"
+        ]
+      }
+    },
+    "S6_ais_professional_vocabulary": {
+      "basket_hits": 258,
+      "2016+": 26,
+      "2021+": 15,
+      "top_journals": [
+        [
+          "Information and Management",
+          88
+        ],
+        [
+          "Journal of Management Information Systems",
+          46
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          36
+        ],
+        [
+          "Decision Support Systems",
+          35
+        ],
+        [
+          "Information Systems Research",
+          23
+        ],
+        [
+          "Journal of Information Technology",
+          7
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          7
+        ],
+        [
+          "Information Systems Journal",
+          6
+        ],
+        [
+          "European Journal of Information Systems",
+          6
+        ],
+        [
+          "Journal of Strategic Information Systems",
+          3
+        ],
+        [
+          "Information & management",
+          1
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 20,
+        "recall": 0.7142857142857143,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "Performance implications of stage-wise lead user participation in software development problem solving",
+          "Role of collective ownership and coding standards in coordinating expertise in software project teams",
+          "A software complexity model of object-oriented systems",
+          "COD — A dynamic data flow analysis system for Cobol",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 20,
+        "recall": 0.9523809523809523,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development"
+        ]
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    },
+    "S7_ais_professional_plus_open_source": {
+      "basket_hits": 298,
+      "2016+": 40,
+      "2021+": 21,
+      "top_journals": [
+        [
+          "Information and Management",
+          92
+        ],
+        [
+          "Journal of Management Information Systems",
+          49
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          43
+        ],
+        [
+          "Decision Support Systems",
+          36
+        ],
+        [
+          "Information Systems Research",
+          27
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          12
+        ],
+        [
+          "Information Systems Journal",
+          12
+        ],
+        [
+          "Journal of Information Technology",
+          9
+        ],
+        [
+          "European Journal of Information Systems",
+          7
+        ],
+        [
+          "Journal of Strategic Information Systems",
+          7
+        ],
+        [
+          "Information and Organization",
+          3
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 21,
+        "recall": 0.75,
+        "missed_titles": [
+          "Performance implications of stage-wise lead user participation in software development problem solving",
+          "Role of collective ownership and coding standards in coordinating expertise in software project teams",
+          "A software complexity model of object-oriented systems",
+          "COD — A dynamic data flow analysis system for Cobol",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 21,
+        "recall": 1.0,
+        "missed_titles": []
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    },
+    "S8_ais_professional_refined": {
+      "basket_hits": 80,
+      "2016+": 11,
+      "2021+": 7,
+      "top_journals": [
+        [
+          "Decision Support Systems",
+          26
+        ],
+        [
+          "Information and Management",
+          17
+        ],
+        [
+          "Information Systems Research",
+          11
+        ],
+        [
+          "Journal of Management Information Systems",
+          10
+        ],
+        [
+          "Journal of the Association for Information Systems",
+          5
+        ],
+        [
+          "MIS Quarterly: Management Information Systems",
+          5
+        ],
+        [
+          "Journal of Information Technology",
+          3
+        ],
+        [
+          "European Journal of Information Systems",
+          2
+        ],
+        [
+          "Information Systems Journal",
+          1
+        ]
+      ],
+      "direct_programming_28": {
+        "total": 28,
+        "covered": 20,
+        "recall": 0.7142857142857143,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+          "Performance implications of stage-wise lead user participation in software development problem solving",
+          "Role of collective ownership and coding standards in coordinating expertise in software project teams",
+          "A software complexity model of object-oriented systems",
+          "COD — A dynamic data flow analysis system for Cobol",
+          "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+          "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+          "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote"
+        ]
+      },
+      "direct_human_programming_21": {
+        "total": 21,
+        "covered": 20,
+        "recall": 0.9523809523809523,
+        "missed_titles": [
+          "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development"
+        ]
+      },
+      "manually_confirmed_core_20": {
+        "total": 20,
+        "covered": 20,
+        "recall": 1.0,
+        "missed_titles": []
+      }
+    }
+  }
+}

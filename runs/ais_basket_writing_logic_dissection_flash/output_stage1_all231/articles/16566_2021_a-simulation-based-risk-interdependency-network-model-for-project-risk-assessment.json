@@ -1,0 +1,1091 @@
+{
+  "record_id": "16566",
+  "source_file": "16566_2021_a-simulation-based-risk-interdependency-network-model-for-project-risk-assessment.md",
+  "title": "A simulation-based risk interdependency network model for project risk assessment",
+  "authors": "Li Guan; Alireza Abbasi; Michael J. Ryan",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113602",
+  "fulltext_chars": 92375,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "general_or_cross_domain",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:34.814259+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何在考虑项目风险相互依赖性的前提下，构建一个能够支持风险评估与风险处理决策的智能决策支持系统，以克服传统分析方法无法处理风险随机行为和风险环路的问题。",
+    "artifact_and_design_cn": "提出一个基于蒙特卡洛模拟的风险相互依赖网络模型（MCS-based RIN模型）。该模型先通过解释结构建模（ISM）将风险及因果依赖转化为层次化风险网络，再通过改进的MCS动态计算风险发生概率（COP），用假设-检验方法处理环路，最终输出五个风险指标：SOP、SLI、SGI、TRL、TRPL。",
+    "objective_outcomes_cn": "通过两个案例（16风险含环路、91风险无环路）展示模型可行性；与经典P-I模型、Wang等[5]、FSE、FBBN等对比，模型产生不同的风险排序，且基于模型设计的风险处理行动使项目TRL和TRPL降低最多；敏感性分析显示模型对输入不确定性的敏感度相对较低。",
+    "core_contribution_cn": "作者声称的主要贡献是：首次将ISM与MCS集成用于项目风险评估，提出考虑风险相互依赖的新风险指标，并建立一个可评估风险处理行动有效性的集成决策支持系统，为复杂相互依赖项目的风险管理提供方法论贡献。",
+    "whole_argument_in_one_paragraph_cn": "作者首先指出项目风险之间存在复杂因果依赖，忽略它们会导致风险评估不准确和风险处理失效；现有方法各有缺陷：传统解析法无法建模依赖，网络方法如BBN/SNA无法处理随机性和环路，MCS虽能捕捉随机性但通常假设风险独立。因此作者提出用ISM构建层次化RIN表达直接和间接依赖，通过改进的MCS动态计算风险发生阈值（COP）并处理环路，生成五个指标。两个案例验证表明，与经典方法相比，新模型得出的风险排序发生显著变化，基于新模型设计的风险处理行动在降低项目总风险损失和传播损失上更优，从而论证了考虑风险相互依赖的必要性和模型的有效性。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "本文构建了一个信息系统制品（MCS-based RIN模型），并通过两个案例研究评价其有效性、稳健性和与传统方法的优劣，属于典型的设计科学研究。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章遵循“现有方法的性能缺口→提出制品→案例/对比基准→一般化设计知识”的路径，强调提出的模型相比现有方法在风险评估和处理方面的性能提升，并在讨论中泛化为方法论贡献。",
+  "research_program": {
+    "study_or_phase_count": 6,
+    "overall_sequence_cn": "整个研究包括两个方法构建阶段、一个敏感性设计阶段、两个案例应用阶段和一个额外风险处理验证阶段。前两个阶段建立模型的核心技术路线，第三个阶段为输入不确定性提供稳健性分析；第四个阶段用案例1完整展示模型输出并对比基准；第五个阶段用案例1验证风险处理行动优势；第六个阶段用案例2验证模型在不同规模、无环路场景下的风险处理效果，逐层累积证据。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "ISM-based RIN构建方法设计",
+        "question_cn": "如何将识别出的项目风险及其因果关系到系统化的层次风险网络？",
+        "inputs_and_setting_cn": "项目风险列表、风险间两两因果关系、专家意见（通过德尔菲等获得）",
+        "designed_or_compared_object_cn": "ISM应用过程：SSIM构建、可达矩阵（RM）、层级划分（reachability/antecedent/intersection sets）",
+        "baseline_control_or_counterfactual_cn": "无直接对比；相对于传统P-I风险清单，突出网络结构对直接/间接依赖的表达能力",
+        "objective_metrics": [],
+        "analysis_method_cn": "矩阵运算、传递闭包、层级划分",
+        "main_result_cn": "得到包含直接和间接因果关系的层级RIN，环路内的风险位于同一层级，源风险位于底层",
+        "argumentative_role_cn": "为后续MCS模拟提供网络拓扑，证明ISM能够将模糊的因果心理模型转成可见模型",
+        "remaining_uncertainty_cn": "该网络是静态的，未定量评估依赖强度，也未考虑风险发生的随机性",
+        "link_to_next_phase_cn": "生成的RIN节点和边将作为MCS模拟的输入结构",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Eq.1-4",
+          "Fig.2"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "MCS-based RIN模拟模型设计（含风险指标）",
+        "question_cn": "如何在RIN中模拟风险随机发生并计算风险传播及其影响？",
+        "inputs_and_setting_cn": "SP、TP、IO参数，随机数生成，RIN结构",
+        "designed_or_compared_object_cn": "CAM（MCS算法）中的动态阈值（COP）计算、环路假设-检验方法、五个风险指标定义",
+        "baseline_control_or_counterfactual_cn": "传统MCS（假设风险独立，风险发生一次以上）",
+        "objective_metrics": [
+          "SOP",
+          "SLI",
+          "SGI",
+          "TRL",
+          "TRPL"
+        ],
+        "analysis_method_cn": "蒙特卡洛模拟，收敛性判定（Eq.8）",
+        "main_result_cn": "模型能够通过动态COP反映风险依赖导致的概率变化，并通过假设检验保留一致环路场景，输出五个指标",
+        "argumentative_role_cn": "提供风险评估的核心计算能力，解决传统解析方法无法处理的两个难题（随机性、环路）",
+        "remaining_uncertainty_cn": "模型依赖输入的SP/TP/IO准确性；指标基于假设（每个风险仅发生一次）",
+        "link_to_next_phase_cn": "下一阶段专门针对输入不确定性设计敏感性分析",
+        "evidence_pointers": [
+          "Section 3.2.1-3.2.3",
+          "Eq.5-12",
+          "Fig.A.1"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "敏感性分析设计",
+        "question_cn": "输入参数不确定性（SP/TP/IO）如何影响风险评估结果？",
+        "inputs_and_setting_cn": "每个参数的乐观、最可能、悲观三层值",
+        "designed_or_compared_object_cn": "单个风险SLI/SGI对参数变动的敏感性，以及项目TRL/TRPL对参数变动的敏感性",
+        "baseline_control_or_counterfactual_cn": "以最可能情景为基准，比较乐观和悲观情景",
+        "objective_metrics": [
+          "敏感性百分比"
+        ],
+        "analysis_method_cn": "情景比较分析、雷达图",
+        "main_result_cn": "IO对SLI和整体结果影响最大，SP次之，TP再次；不同风险对不同参数敏感度不同",
+        "argumentative_role_cn": "为模型输入不确定性提供稳健性证据，并指出需重点核实的高敏感参数",
+        "remaining_uncertainty_cn": "乐观/悲观值在案例中是人为假设，缺乏真实分布依据",
+        "link_to_next_phase_cn": "在讨论中用于与经典P-I模型敏感性对比，支持模型更稳定的主张",
+        "evidence_pointers": [
+          "Section 3.2.4",
+          "Section 4.2.3",
+          "Fig.7"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "案例1：风险评估应用（含敏感性分析）",
+        "question_cn": "提出的模型在一个医疗物流AI项目（16风险含环路）上的表现如何？",
+        "inputs_and_setting_cn": "取自Wang等[5]的16个风险及SP/TP/IO数据；MATLAB模拟30万次",
+        "designed_or_compared_object_cn": "应用ISM构建两级层次RIN；运行MCS生成所有风险场景；与经典P-I模型（SP、RC）及Wang等指标Sij比较",
+        "baseline_control_or_counterfactual_cn": "经典P-I指标（SP、RC）、文献[5]的Sij指标",
+        "objective_metrics": [
+          "SOP",
+          "SLI",
+          "SGI",
+          "TRL",
+          "TRPL"
+        ],
+        "analysis_method_cn": "排序对比、Spearman秩相关检验、敏感性分析",
+        "main_result_cn": "SOP和SLI普遍高于SP和RC，风险排序发生显著变化；SOP与SP无显著相关，SOP与SGI显著正相关；TRL期望约$2207，TRPL期望约$24002；敏感性分析指出关键参数",
+        "argumentative_role_cn": "核心实证证据，证明考虑相互依赖会改变风险认知，并展示模型输出丰富信息",
+        "remaining_uncertainty_cn": "单个案例，风险数据为二手文献，未与真实风险发生结果对比",
+        "link_to_next_phase_cn": "基于新风险评估结果设计风险处理行动",
+        "evidence_pointers": [
+          "Table 1-3",
+          "Fig.3-7",
+          "Section 4.1-4.2"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "案例1：风险处理行动评估",
+        "question_cn": "基于模型设计的风险处理行动是否比其他方法更有效？",
+        "inputs_and_setting_cn": "案例1网络；构造四种行动：Action1基于经典P-I，Action2基于[13]，Action3基于[5]，Action4基于提出的模型",
+        "designed_or_compared_object_cn": "设定每种行动对SP和TP的削减（设为0），通过模拟评估剩余SOP/SLI/SGI及项目TRL/TRPL下降量",
+        "baseline_control_or_counterfactual_cn": "Action1-3作为对照",
+        "objective_metrics": [
+          "剩余SOP/SLI/SGI",
+          "减少的TRL",
+          "减少的TRPL"
+        ],
+        "analysis_method_cn": "比较模拟结果",
+        "main_result_cn": "Action4减少TRL$826、TRPL$14717，均高于其他行动，效果最好",
+        "argumentative_role_cn": "证明新模型不仅用于评估，还能用于制定和评估更有效的风险处理行动，拓展应用价值",
+        "remaining_uncertainty_cn": "假设SP和TP可完全降为零，未考虑风险处理成本和时间",
+        "link_to_next_phase_cn": "在更大规模无环路项目中检验同样的处理优势",
+        "evidence_pointers": [
+          "Fig.8",
+          "Table 4",
+          "Section 4.3"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "案例2：风险处理行动评估（规模/无环路验证）",
+        "question_cn": "在大规模无环路项目（91风险高速铁路项目）上，基于模型设计的行动是否仍优于其他方法？",
+        "inputs_and_setting_cn": "取自Guan等[3]的土耳其高速铁路项目（91风险，无环路，含项目失败风险）",
+        "designed_or_compared_object_cn": "四种行动：Action1基于经典P-I，Action2基于FSE，Action3基于FBBN，Action4基于提出的模型",
+        "baseline_control_or_counterfactual_cn": "Action1-3",
+        "objective_metrics": [
+          "项目失败风险的SOP",
+          "减少的TRL评级",
+          "减少的TRPL评级"
+        ],
+        "analysis_method_cn": "模拟对比",
+        "main_result_cn": "Action4使项目失败风险SOP降为0，减少的TRL和TRPL评级均最大",
+        "argumentative_role_cn": "验证模型在大规模、无环路场景下的可扩展性和有效性，增强外部效度",
+        "remaining_uncertainty_cn": "仅展示风险处理评估，未展示完整风险评估结果；网络结构未在文中给出",
+        "link_to_next_phase_cn": "支撑结论中模型普适性声明",
+        "evidence_pointers": [
+          "Table 5",
+          "Section 4.3最后段"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "DESIGN_FEATURE",
+      "RESULT",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "DESIGN_FEATURE",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "REQUIREMENT",
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "STUDY_OVERVIEW",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "CONTEXT"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "项目风险管理理论（概率-影响模型）",
+      "风险相互依赖与传播理论（链反应/多米诺效应）",
+      "解释结构建模（ISM）方法论",
+      "蒙特卡洛模拟（MCS）",
+      "网络分析方法（SNA、BBN等）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "风险相互依赖知识促使作者将ISM与MCS集成，但具体算法选择（COP动态阈值、假设-检验环路处理）更接近工程启发式；P-I模型为风险指标定义提供了概念基础，但并未前瞻性推导整个模型的技术构件。理论与实践之间是部分耦合，知识基础部分塑造设计，部分只是事后解释。",
+    "translation_chain_cn": "风险相互依赖导致风险概率放大和环路（理论命题）→ 需要建模直接和间接依赖（要求）→ 选择ISM构建层次RIN（设计）→ 需要模拟风险随机发生（要求）→ 使用MCS，并引入动态COP阈值（设计）→ 需要处理环路 → 设计假设-检验方法（设计）→ 基于P-I模型概念定义SOP/SLI/SGI/TRL/TRPL（设计）→ 通过案例评价与经典方法对比（验证）",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "项目风险不是独立的，而是通过因果链相互触发，导致链反应或多米诺效应",
+        "mechanism_cn": "上游风险触发下游风险，风险概率和影响沿网络传播放大",
+        "design_requirement_cn": "风险网络应显式表达直接和间接依赖，并能评估传播影响",
+        "artifact_choice_cn": "ISM构建层级RIN，基于传递闭包包含间接依赖",
+        "evaluated_contrast_cn": "与独立假设的P-I模型排序对比",
+        "objective_result_cn": "SOP和SLI普遍高于SP和RC，排序显著不同",
+        "evidence_pointers": [
+          "Table 2",
+          "Section 4.2.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "风险发生具有随机性，且依赖网络动态变化",
+        "mechanism_cn": "风险的发生概率取决于是否已有上游风险发生，即动态依赖",
+        "design_requirement_cn": "需要动态计算风险发生概率，而不是静态P-I中的固定概率",
+        "artifact_choice_cn": "定义COP = 1-(1-SP)*∏(1-TP)，用随机数与动态阈值比较决定风险是否发生",
+        "evaluated_contrast_cn": "对比传统MCS（固定概率、独立风险）",
+        "objective_result_cn": "除源风险外，所有风险的模拟发生概率增加",
+        "evidence_pointers": [
+          "Eq.5-6",
+          "Table 2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "风险环路使解析模型（如BBN）失效，因存在闭环因果路径",
+        "mechanism_cn": "环路导致无限循环传播，无法用DAG表示",
+        "design_requirement_cn": "模拟需要处理环路中的相互依赖",
+        "artifact_choice_cn": "设计假设-检验方法，对环路中风险状态进行假设，保留与假设一致的模拟运行",
+        "evaluated_contrast_cn": "案例1包含环路，案例2无环路，两者均成功模拟",
+        "objective_result_cn": "模型在含环路RIN中收敛并输出评估结果",
+        "evidence_pointers": [
+          "Section 3.2.2",
+          "Fig.A.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "决策者需要量化风险处理行动的效用，而不仅是评估风险",
+        "mechanism_cn": "通过改变SP/TP/IO参数模拟行动效果，观察风险指标变化",
+        "design_requirement_cn": "风险指标应能反映整体项目和传播层面的损失",
+        "artifact_choice_cn": "定义TRL和TRPL，并设计行动比较框架",
+        "evaluated_contrast_cn": "与其他方法（经典P-I、[13]、[5]、FSE、FBBN）设计的行动比较",
+        "objective_result_cn": "基于新模型设计的Action 4在降低TRL/TRPL上最优",
+        "evidence_pointers": [
+          "Table 4",
+          "Table 5"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "案例研究（两个案例）",
+      "对比基准（经典P-I模型、文献[13]、[5]、FSE、FBBN）",
+      "统计检验（Spearman秩相关）",
+      "敏感性分析",
+      "稳健性检验（不同规模和有无环路的第二个案例）"
+    ],
+    "why_these_evaluations_cn": "因为模型面向现有方法难以处理的随机性和环路问题，需要案例证明可运行性；通过多方法对比证明相对优势；用相关性检验证明排序改变并非随机噪声；用敏感性分析处理输入不确定性；用第二个案例验证可扩展性。",
+    "benchmark_and_contrast_chain_cn": "先与经典P-I模型和[5]的Sij指标对比单个风险排序；接着用Spearman相关检验证明新指标与传统指标低相关，说明提供了新信息；再通过敏感性分析对比模型与经典P-I模型的稳定性，显示模型敏感性更低；最后通过风险处理行动对比，证明基于新模型设计的行动更有效，两个案例中均成立。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "忽略相互依赖会低估风险发生概率和影响",
+        "evidence": "Table 2中除源风险外所有风险SOP>SP、SLI>RC；TRL/TRPL分布显示风险损失可能较大",
+        "status": "supported"
+      },
+      {
+        "claim": "新风险指标的排序与传统指标显著不同",
+        "evidence": "Spearman相关分析显示SOP与SP相关系数-0.017，SOP与SGI 0.929**，SLI与RC 0.681**（因共用IO）",
+        "status": "partially_supported"
+      },
+      {
+        "claim": "模型能够处理风险环路",
+        "evidence": "案例1包含环路，模拟收敛（Fig.4），输出有效结果",
+        "status": "supported"
+      },
+      {
+        "claim": "基于模型设计的风险处理行动更有效",
+        "evidence": "Table 4中Action4的TRL减少$826、TRPL减少$14717均最高；Table5中Action4使项目失败SOP为0且TRL/TRPL减少最大",
+        "status": "supported"
+      },
+      {
+        "claim": "模型比经典P-I模型更稳健",
+        "evidence": "SP变化下模型敏感性61%对比经典模型96%；单个风险敏感性对比Fig.9显示除R13外均更低",
+        "status": "supported"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用文献中已有的成熟项目数据，控制其他输入不变；通过随机数分布选择（均匀）并说明分布类型不影响结果；使用收敛准则决定模拟次数；通过直接修改SP/TP参数模拟处理行动效果，避免外部干扰。",
+    "external_validity_strategy_cn": "使用两个不同领域（医疗物流AI、高铁）、不同规模（16风险、91风险）、是否含环路的案例，并与多种基准方法对比，支持模型通用性。",
+    "what_is_not_actually_tested_cn": "未在真实项目中部署模型或由真实决策者实际使用；风险处理行动的效果是通过模拟参数变化而非实际执行；对输入参数（SP/TP/IO）的客观性未验证；假设风险仅发生一次可能不适用所有项目；未检验除均匀分布外的随机数分布影响。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的MCS-based RIN模型能解决传统PRA方法在风险相互依赖、随机行为和风险环路方面的性能缺口，提高风险评估准确性。",
+    "artifact_claim_cn": "ISM+MCS集成、COP动态阈值、假设-检验环路处理及五个风险指标共同构成了有效的风险评估与处理支撑制品。",
+    "mechanism_claim_cn": "风险相互依赖通过动态概率传播机制使风险发生概率和影响放大，因此显式建模依赖是必要的。",
+    "boundary_claim_cn": "适用于具有复杂相互依赖、尤其含风险环路的大中型项目；不适用于同时处理正负两种风险的项目；对风险处理行动在SP/TP可降为0的简化假设下成立。",
+    "reusable_design_knowledge_cn": "可复用的设计知识包括：将ISM和MCS集成以支持PRA的技术框架；五个风险指标的定义与计算方式；用敏感性分析验证参数不确定性的方法；基于风险类别（源/过渡/累积）规划处理行动的策略。",
+    "theoretical_contribution_cn": "扩展了项目风险评估理论中对风险相互依赖的处理方式，证明解析方法无法处理的风险环路和随机性可通过仿真集成得以解决，并为风险传播量化提供了操作性概念。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分重新回到引言中“忽略相互依赖导致评估不准确”的命题，用案例1中SOP>SP、SLI>RC等结果说明模型揭示了低估现象，并进一步用风险处理行动对比展示从评估到处理的闭环，从而闭合了引言中提出的性能和决策支持缺口。",
+    "overclaim_or_unsupported_leaps_cn": "“提高风险评估准确性”的表述可能过度，因为缺乏与真实风险发生结果的比对；将模型稳健性归因于考虑相互依赖，但对比的是不同模拟机制；两个案例数据皆来自二手文献，可能影响外部效度；从两个案例推广到所有项目类型的“universality”声明证据不足。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "项目风险通常被视为相互独立，忽略了它们之间的依赖关系。",
+      "rhetorical_function_cn": "开篇点明全文针对的核心背景：风险管理中普遍存在的独立性假设。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后文指出这种假设带来的后果埋下伏笔。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这种忽略依赖的做法会导致风险评估不当并降低风险处理的有效性。",
+      "rhetorical_function_cn": "指出独立性假设的负面后果，强调研究动机。",
+      "depends_on_cn": "继承前句的独立性假设。",
+      "sets_up_cn": "引出需要新模型来解决该问题。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究引入一个新的基于蒙特卡洛模拟的风险相互依赖网络模型，以支持决策者更有效地评估项目风险和规划处理措施。",
+      "rhetorical_function_cn": "明确研究对象和研究目标。",
+      "depends_on_cn": "建立在前面指出的问题之上。",
+      "sets_up_cn": "为摘要后续的技术构成概述做总起。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P2 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "模型中集成了解释结构建模（ISM），用于开发基于风险及因果关系的层次化风险网络。",
+      "rhetorical_function_cn": "介绍模型的第一个技术支柱ISM。",
+      "depends_on_cn": "承接模型引入。",
+      "sets_up_cn": "说明网络结构如何建立。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P2 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "使用蒙特卡洛方法模拟风险发生的随机行为，生成大量可能的风险情景。",
+      "rhetorical_function_cn": "介绍模型的第二个技术支柱MCS。",
+      "depends_on_cn": "依赖ISM网络结构。",
+      "sets_up_cn": "为输出风险指标提供基础。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P3 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为了评估单个风险和整体项目风险，提出五个主要风险指标：SOP、SLI、SGI、TRL和TRPL。",
+      "rhetorical_function_cn": "定义模型的输出指标体系。",
+      "depends_on_cn": "依赖MCS模拟结果。",
+      "sets_up_cn": "为后续案例中的指标展示做铺垫。",
+      "evidence_pointer": "Abstract P3"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "P4 S1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "还包含敏感性分析以检验模型输入不确定性对结果的影响。",
+      "rhetorical_function_cn": "提及稳健性检验，增强模型可信度。",
+      "depends_on_cn": "基于已提出的风险指标。",
+      "sets_up_cn": "为后文敏感性分析结果提供暗示。",
+      "evidence_pointer": "Abstract P4"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "P5 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "提供两个案例来展示模型的应用与有效性。",
+      "rhetorical_function_cn": "宣告评价方法为案例研究。",
+      "depends_on_cn": "前面已介绍模型组成。",
+      "sets_up_cn": "为Section 4的案例应用做预告。",
+      "evidence_pointer": "Abstract P5"
+    },
+    {
+      "order": 9,
+      "section": "Abstract",
+      "locator": "P6 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究结果强调考虑风险依赖的重要性并验证了模型在复杂关联风险项目中的鲁棒性和可行性。",
+      "rhetorical_function_cn": "总结贡献和结果，收束摘要。",
+      "depends_on_cn": "基于全部研究内容。",
+      "sets_up_cn": "无，结束摘要。",
+      "evidence_pointer": "Abstract P6"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "项目风险被定义为不确定性对目标的影响，若不能通过系统方法有效管理，则难以实现项目目标。",
+      "rhetorical_function_cn": "建立领域背景，说明风险管理的重要性。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引出风险管理过程及风险评估的核心地位。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P1 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "真实项目中风险常通过复杂的因果关系相互联系，一个可能触发多个，形成多米诺效应。",
+      "rhetorical_function_cn": "描述经验现象，凸显风险依赖的普遍性。",
+      "depends_on_cn": "风险管理背景。",
+      "sets_up_cn": "为论证忽略依赖的危害提供现实依据。",
+      "evidence_pointer": "Introduction P1 S3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "为提高风险评估准确性和及时预测严重传播，不应忽略风险依赖，尤其复杂项目。",
+      "rhetorical_function_cn": "说明研究问题的实践后果。",
+      "depends_on_cn": "前一现象。",
+      "sets_up_cn": "为提出研究方向做铺垫。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "传统的概率-影响(P-I)风险模型是主流，通过发生概率和影响评估风险，但已被逐步扩展。",
+      "rhetorical_function_cn": "概括现有知识基础。",
+      "depends_on_cn": "背景铺垫。",
+      "sets_up_cn": "为后续说明这些方法的不足提供对比。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P2 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "相比风险清单和P-I矩阵，风险网络(RIN)更适合建模和揭示项目风险间的复杂依赖。",
+      "rhetorical_function_cn": "指出传统方法的不足，转而肯定网络结构。",
+      "depends_on_cn": "前句P-I模型介绍。",
+      "sets_up_cn": "引出风险网络概念。",
+      "evidence_pointer": "Introduction P2 S2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "在RIN中，一个风险的评估结果随可触发它的风险数量而变化，并非恒定。",
+      "rhetorical_function_cn": "描述风险依赖导致的动态评估现象。",
+      "depends_on_cn": "RIN概念。",
+      "sets_up_cn": "为指出解析式方法无法处理随机动态提供依据。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "RIN中可能存在风险环路，即多个风险处于封闭因果路径，如成本超支触发技术风险进而引发进度延迟，反过来又放大成本超支。",
+      "rhetorical_function_cn": "引入风险环路这一特殊挑战。",
+      "depends_on_cn": "RIN复杂性论述。",
+      "sets_up_cn": "为说明解析方法失效做铺垫。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P3 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这类环路无法用解析式PRA方法充分处理。",
+      "rhetorical_function_cn": "明确指出技术缺口。",
+      "depends_on_cn": "风险环路现象。",
+      "sets_up_cn": "引出对智能风险建模方法的需求。",
+      "evidence_pointer": "Introduction P3 S2"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P3 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "因此必须开发能够提供客观、可重复、可见决策支持的风险建模方法。",
+      "rhetorical_function_cn": "形成研究缺口声明。",
+      "depends_on_cn": "前两句的不足。",
+      "sets_up_cn": "为本文目标提供方向。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文探索基于仿真的决策支持系统，在考虑风险依赖的情况下评估项目风险并支持处理决策。",
+      "rhetorical_function_cn": "正式提出研究目标。",
+      "depends_on_cn": "前面缺口。",
+      "sets_up_cn": "引出后续方法概要。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P4 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "使用ISM方法将复杂风险依赖表示成层次化RIN。",
+      "rhetorical_function_cn": "介绍第一个方法组件。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "为模型框架做铺垫。",
+      "evidence_pointer": "Introduction P4 S2"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P4 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "开发新的MCS-based RIN模型，解决风险随机行为和风险环路两个难题。",
+      "rhetorical_function_cn": "介绍核心设计的直接目标。",
+      "depends_on_cn": "ISM和MCS的引入。",
+      "sets_up_cn": "为后文详细描述模型做总起。",
+      "evidence_pointer": "Introduction P4 S3"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "模型输入包括风险自发概率(SP)、触发概率(TP)和对项目目标的影响(IO)。",
+      "rhetorical_function_cn": "定义模型的数据需求。",
+      "depends_on_cn": "模型设计。",
+      "sets_up_cn": "为后续参数评估提供输入列表。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "P5 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "主要输出是五个新风险指标：SOP、SLI、SGI、TRL和TRPL。",
+      "rhetorical_function_cn": "列出模型输出，强调创新点。",
+      "depends_on_cn": "模型设计。",
+      "sets_up_cn": "为案例的指标展示提供预期。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "模型还嵌入敏感性分析以检验输入不确定性影响，并依据风险在RIN中的输入输出链接将风险分为源、过渡、累积三类，辅助制定处理措施。",
+      "rhetorical_function_cn": "补充模型的两个实用性功能。",
+      "depends_on_cn": "核心模型。",
+      "sets_up_cn": "引出风险处理行动计划。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 25,
+      "section": "Introduction",
+      "locator": "P6 S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "开发这些新风险指标用于风险评估和处理是本文的另一主要贡献。",
+      "rhetorical_function_cn": "提前声明贡献，强化创新点。",
+      "depends_on_cn": "指标定义。",
+      "sets_up_cn": "为结论中的贡献总结做铺垫。",
+      "evidence_pointer": "Introduction P6 S2"
+    },
+    {
+      "order": 26,
+      "section": "Introduction",
+      "locator": "P7 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "介绍论文结构：第二节综述，第三节提出模型，第四节两个案例，第五节讨论，第六节结论。",
+      "rhetorical_function_cn": "提供阅读路线图。",
+      "depends_on_cn": "全文内容。",
+      "sets_up_cn": "帮助读者预期后续章节。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 27,
+      "section": "Related works",
+      "locator": "2.1 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "传统方法用概率和影响表征风险，如RC、风险矩阵，FST、FSE、AHP、TOPSIS等被提出，但主要弱点是不能考虑风险相互依赖。",
+      "rhetorical_function_cn": "总结传统解析PRA方法的现状并指出其局限。",
+      "depends_on_cn": "引言背景。",
+      "sets_up_cn": "为2.4研究缺口提供第一类证据。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 28,
+      "section": "Related works",
+      "locator": "2.2 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "网络化方法如BBN能可视化不确定性，但因其有向无环要求无法建模环路、链反应或非线性耦合；DSM等被引入。",
+      "rhetorical_function_cn": "说明网络方法虽具表达能力但仍有结构性限制。",
+      "depends_on_cn": "2.1的局限。",
+      "sets_up_cn": "为解释为何需要仿真方法做铺垫。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 29,
+      "section": "Related works",
+      "locator": "2.3 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "MCS是PRA中广泛使用的模拟方法，能够处理风险和不确定性，但通常假设风险独立。",
+      "rhetorical_function_cn": "介绍MCS的优点与局限。",
+      "depends_on_cn": "2.2的网络方法讨论。",
+      "sets_up_cn": "为提出结合ISM和MCS提供理由。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 30,
+      "section": "Related works",
+      "locator": "2.4 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "总体来看，现有方法各有缺陷：解析法无法分析依赖，网络法无法处理随机性和环路，MCS无法明确建模复杂依赖。",
+      "rhetorical_function_cn": "综合三类方法的缺口，形成研究机会。",
+      "depends_on_cn": "2.1-2.3的综述。",
+      "sets_up_cn": "为本文方法选择提供直接依据。",
+      "evidence_pointer": "Section 2.4 S1"
+    },
+    {
+      "order": 31,
+      "section": "Related works",
+      "locator": "2.4 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有PRA方法通常止于风险评估阶段，很少关注风险处理行动的规划与评估。",
+      "rhetorical_function_cn": "指出另一个实践缺口。",
+      "depends_on_cn": "2.1-2.3综述。",
+      "sets_up_cn": "为模型增加风险处理功能提供动机。",
+      "evidence_pointer": "Section 2.4 S2"
+    },
+    {
+      "order": 32,
+      "section": "Related works",
+      "locator": "2.4 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文通过结合MCS与ISM建立一个集成决策支持系统来填补这些空白。",
+      "rhetorical_function_cn": "明确研究回应。",
+      "depends_on_cn": "两处缺口。",
+      "sets_up_cn": "预告Section 3的模型开发。",
+      "evidence_pointer": "Section 2.4 S3"
+    },
+    {
+      "order": 33,
+      "section": "Design",
+      "locator": "3.1.2 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "ISM的优势在于能将模糊的、不清晰的心理模型转换成可见的、明确定义的系统模型，通过考虑所有可能的成对关系。",
+      "rhetorical_function_cn": "为选择ISM提供理论和方法论理由。",
+      "depends_on_cn": "文献中ISM的应用。",
+      "sets_up_cn": "为随后SSIM/RM算法描述铺路。",
+      "evidence_pointer": "Section 3.1.2"
+    },
+    {
+      "order": 34,
+      "section": "Design",
+      "locator": "3.1.2 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过SSIM矩阵和可达矩阵计算，按式(1)-(4)划分层级，最终得到ISM-based RIN。",
+      "rhetorical_function_cn": "具体设计RIN构建算法。",
+      "depends_on_cn": "ISM理论。",
+      "sets_up_cn": "为案例中的网络结构提供方法支撑。",
+      "evidence_pointer": "Section 3.1.2, Eq.1-4"
+    },
+    {
+      "order": 35,
+      "section": "Design",
+      "locator": "3.2.1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "改进传统MCS，提出用动态阈值COP来评估风险是否发生：COP基于SP和已发生上游风险的TP计算。",
+      "rhetorical_function_cn": "说明核心算法创新点。",
+      "depends_on_cn": "MCS和RIN。",
+      "sets_up_cn": "为解释如何建模风险随机行为奠定基础。",
+      "evidence_pointer": "Section 3.2.1, Eq.5-6"
+    },
+    {
+      "order": 36,
+      "section": "Design",
+      "locator": "3.2.1 S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当多个上游风险发生时，COP按概率公式综合提高，因为每个触发关系都降低了不发生风险的概率。",
+      "rhetorical_function_cn": "解释依赖如何动态影响发生概率。",
+      "depends_on_cn": "COP公式。",
+      "sets_up_cn": "为后续SOP提升的解释提供机制。",
+      "evidence_pointer": "Section 3.2.1, Eq.5"
+    },
+    {
+      "order": 37,
+      "section": "Design",
+      "locator": "3.2.2 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "针对环路问题，设计了一种假设-检验方法，通过对环路中风险状态做出假设，保留与假设一致的模拟运行。",
+      "rhetorical_function_cn": "提出应对环路的具体技术方案。",
+      "depends_on_cn": "COP动态逻辑。",
+      "sets_up_cn": "为含环路案例模拟提供理论基础。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 38,
+      "section": "Design",
+      "locator": "3.2.3 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义SOP、SLI、SGI、TRL和TRPL五个指标，分别用于衡量单风险发生概率、局部影响、全局影响以及项目总损失和总传播损失。",
+      "rhetorical_function_cn": "完善模型输出层。",
+      "depends_on_cn": "MCS模拟结果和P-I模型概念。",
+      "sets_up_cn": "为案例中的指标展示和排序对比做铺垫。",
+      "evidence_pointer": "Section 3.2.3, Eq.7-12"
+    },
+    {
+      "order": 39,
+      "section": "Design",
+      "locator": "3.3.1 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "风险处理行动应基于风险排序和风险类别（源、过渡、累积）来制定，以控制风险传播。",
+      "rhetorical_function_cn": "将评估结果转化为处理行动的设计要求。",
+      "depends_on_cn": "前文风险指标和风险分类。",
+      "sets_up_cn": "为Section 4.3的风险处理对比做铺垫。",
+      "evidence_pointer": "Section 3.3.1"
+    },
+    {
+      "order": 40,
+      "section": "Evaluation",
+      "locator": "4.1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "第一个案例的数据（风险识别、依赖、SP/TP/IO）直接取自Wang等[5]，由负责项目计划、实施和风险管理的项目成员提供。",
+      "rhetorical_function_cn": "说明案例数据来源，增强可复现性。",
+      "depends_on_cn": "案例选择。",
+      "sets_up_cn": "为后续结果展示建立数据基础。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 41,
+      "section": "Evaluation",
+      "locator": "4.1 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "基于ISM构建了两级层次RIN，所有的风险环路位于顶层，R01作为无上游影响的源风险位于底层。",
+      "rhetorical_function_cn": "报告案例1的网络构建结果。",
+      "depends_on_cn": "ISM算法。",
+      "sets_up_cn": "为后续模拟提供输入结构。",
+      "evidence_pointer": "Section 4.1, Fig.3"
+    },
+    {
+      "order": 42,
+      "section": "Evaluation",
+      "locator": "4.2.1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "模拟中使用均匀分布随机数，同时说明其他分布类型不会影响结果，只是需要定义适当参数。",
+      "rhetorical_function_cn": "为随机数选择提供辩护，排除干扰。",
+      "depends_on_cn": "MCS方法论。",
+      "sets_up_cn": "保证结果可复现，并支持后续结果有效性。",
+      "evidence_pointer": "Section 4.2.1"
+    },
+    {
+      "order": 43,
+      "section": "Evaluation",
+      "locator": "4.2.1 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "风险排序发生显著变化，部分SP低的风险（如R14、R05）在SOP中排名上升，说明它们更多受其他风险影响。",
+      "rhetorical_function_cn": "报告核心结果，展示考虑依赖后排序改变。",
+      "depends_on_cn": "模拟输出。",
+      "sets_up_cn": "为后续相关性检验和讨论中的低估论点提供证据。",
+      "evidence_pointer": "Table 2, Section 4.2.1"
+    },
+    {
+      "order": 44,
+      "section": "Evaluation",
+      "locator": "4.2.1 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "除源风险R01外，所有风险的SOP都高于其SP，说明风险依赖会增加风险发生概率。",
+      "rhetorical_function_cn": "量化风险传播对概率的放大效应。",
+      "depends_on_cn": "Table 2数据。",
+      "sets_up_cn": "支撑讨论中“忽略依赖会低估风险”的主张。",
+      "evidence_pointer": "Section 4.2.1, Table 2"
+    },
+    {
+      "order": 45,
+      "section": "Evaluation",
+      "locator": "4.2.1 S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Spearman秩相关检验显示SOP与SGI显著正相关，而SOP与SP、SLI与Sij等无明显相关，表明新指标提供了不同于传统评估的信息。",
+      "rhetorical_function_cn": "用统计检验证明新指标与传统指标的系统性差异。",
+      "depends_on_cn": "风险指标排序。",
+      "sets_up_cn": "为“考虑相互依赖的必要性”提供统计证据。",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 46,
+      "section": "Evaluation",
+      "locator": "4.2.2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "项目TRL的PDF/CDF显示潜在损失主要分布在\\$1500-\\$2820区间，期望TRL约\\$2207。",
+      "rhetorical_function_cn": "报告项目整体风险损失水平的评估结果。",
+      "depends_on_cn": "模拟TRL。",
+      "sets_up_cn": "为TRPL和后续风险处理行动中的基准数据做铺垫。",
+      "evidence_pointer": "Fig.5, Section 4.2.2"
+    },
+    {
+      "order": 47,
+      "section": "Evaluation",
+      "locator": "4.2.3 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "敏感性分析表明IO对整体TRL和TRPL的影响最大（敏感性100%），SP次之（61%和95%），TP再次（49%和88%）。",
+      "rhetorical_function_cn": "报告整体模型对输入参数的敏感性。",
+      "depends_on_cn": "敏感性分析设计。",
+      "sets_up_cn": "为讨论中与经典P-I模型敏感性比较提供数据。",
+      "evidence_pointer": "Section 4.2.3"
+    },
+    {
+      "order": 48,
+      "section": "Evaluation",
+      "locator": "4.3 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "设计四种风险处理行动，分别基于经典P-I、文献[13]、文献[5]和提出的模型，以比较有效性。",
+      "rhetorical_function_cn": "说明风险处理行动对比的实验设置。",
+      "depends_on_cn": "前文风险评估结果。",
+      "sets_up_cn": "为展示行动效果数据做前提。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 49,
+      "section": "Evaluation",
+      "locator": "4.3 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "案例1中Action 4将项目TRL减少$826、TRPL减少$14717，优于Action 1-3。",
+      "rhetorical_function_cn": "提供模型在风险处理方面的优势证据。",
+      "depends_on_cn": "四种行动模拟。",
+      "sets_up_cn": "支撑模型集成决策支持系统的整体价值。",
+      "evidence_pointer": "Table 4"
+    },
+    {
+      "order": 50,
+      "section": "Evaluation",
+      "locator": "4.3 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在案例2中，基于模型的Action 4使项目失败风险的SOP降至0，且减少的TRL和TRPL最大，优于P-I、FSE和FBBN。",
+      "rhetorical_function_cn": "通过第二个案例验证模型的稳健性和可扩展性。",
+      "depends_on_cn": "案例2数据。",
+      "sets_up_cn": "为讨论中的普适性声明提供支撑。",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 51,
+      "section": "Discussion",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "项目风险很少独立，随着项目复杂性增加，风险评估成为信息密集型过程。",
+      "rhetorical_function_cn": "在讨论部分重新连接背景，强调研究问题的重要性。",
+      "depends_on_cn": "全文结果。",
+      "sets_up_cn": "为讨论模型贡献和意义设定基调。",
+      "evidence_pointer": "Section 5 P1"
+    },
+    {
+      "order": 52,
+      "section": "Discussion",
+      "locator": "P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "与经典P-I模型相比，忽略相互依赖会必然低估部分风险评级。",
+      "rhetorical_function_cn": "将案例结果抽象为一般性发现。",
+      "depends_on_cn": "Table 2数据。",
+      "sets_up_cn": "支撑模型必要性的理论表述。",
+      "evidence_pointer": "Section 5 P2"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "P3 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "对SP变化，提出模型的敏感性(61%)远低于经典P-I模型(96%)，且对单个风险的敏感性也大多更低。",
+      "rhetorical_function_cn": "通过敏感性对比论证模型稳健性。",
+      "depends_on_cn": "4.2.3和经典模型计算。",
+      "sets_up_cn": "为模型更稳健的贡献声明提供证据。",
+      "evidence_pointer": "Section 5 P3, Fig.9"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "P4 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本研究对项目风险管理特别是风险评估领域做出了方法论贡献，首次探索了ISM和MCS的混合方法。",
+      "rhetorical_function_cn": "正式声明方法论贡献。",
+      "depends_on_cn": "全部结果。",
+      "sets_up_cn": "为后续细致对比现有方法做总起。",
+      "evidence_pointer": "Section 5 P4"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "P5 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "虽然本文聚焦负向风险，但提出的过程也适用于正风险的建模与评估。",
+      "rhetorical_function_cn": "界定适用范围的扩展声明。",
+      "depends_on_cn": "模型原理。",
+      "sets_up_cn": "说明模型的可扩展性。",
+      "evidence_pointer": "Section 5 P5"
+    },
+    {
+      "order": 56,
+      "section": "Discussion",
+      "locator": "P6 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "模型不能同时建模正负风险；处理行动假设SP和TP可降为0。未来可将RIN动态行为纳入，并优化处理决策考虑成本预算。",
+      "rhetorical_function_cn": "在讨论和结论中共同声明局限性与未来方向。",
+      "depends_on_cn": "全文模型。",
+      "sets_up_cn": "结束全文，提出展望。",
+      "evidence_pointer": "Section 5/6"
+    },
+    {
+      "order": 57,
+      "section": "Conclusion",
+      "locator": "P1 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究开发了集成ISM和MCS的智能仿真决策支持系统，为风险评估和风险处理提供了学术与实践贡献。",
+      "rhetorical_function_cn": "在结论中重新强调贡献。",
+      "depends_on_cn": "全文。",
+      "sets_up_cn": "引出局限性。",
+      "evidence_pointer": "Section 6 P1"
+    },
+    {
+      "order": 58,
+      "section": "Conclusion",
+      "locator": "P2 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "指出两个局限性：无法同时建模正负风险；处理计划中假设SP和TP可完全降为0。",
+      "rhetorical_function_cn": "诚实地限定适用条件。",
+      "depends_on_cn": "模型设定。",
+      "sets_up_cn": "为未来研究提供方向。",
+      "evidence_pointer": "Section 6 P2"
+    },
+    {
+      "order": 59,
+      "section": "Conclusion",
+      "locator": "P3 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来研究包括将项目生命周期中RIN的动态行为纳入模型，并考虑预算、处理成本等参数优化处理决策。",
+      "rhetorical_function_cn": "提出具体扩展路线。",
+      "depends_on_cn": "局限性。",
+      "sets_up_cn": "结束论文。",
+      "evidence_pointer": "Section 6 P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "作者采用“三类方法各有缺陷”的缺口构建方式：先分别指出解析法（无法依赖）、网络法（无法随机/环路）、MCS（无法建模依赖）的不足，然后综合为“需要集成方法”的研究缺口；同时额外提出“现有方法止于评估，未处理风险后处理”的实践缺口。",
+    "signposting_cn": "在摘要末尾预告两个案例；在引言末尾按章节概述结构；在2.4明确列出各子领域缺口并说明如何填补；在3节开头用图1展示三阶段框架；每个阶段用小节标题清晰指路。",
+    "transition_logic_cn": "从综述到缺口再到方法，采用问题-方案式过渡；从方法到案例用“本文提出的系统应用于两个案例”预告；从案例1到案例2用“为了验证可扩展性”过渡；从评估到讨论用结果重述作为承接。",
+    "claim_evidence_rhythm_cn": "在每个关键主张后紧跟表格或图：先陈述结论，再引用表/图作为证据。如“风险排序发生变化”后紧接Table 2；在“模型更稳定”后接Fig.9和敏感性百分比。在讨论中再次引用具体数值支撑理论主张。",
+    "benchmark_narrative_cn": "benchmark并不是简单的平均对比，而是分层次嵌入：先与经典P-I指标对比排序，再通过相关性检验证明新信息，再对比敏感性，最后通过风险处理行动设计对比整体决策价值。每个层面的对比都服务于不同的论证目标。",
+    "theory_return_cn": "在讨论部分将案例结果提升为“忽略依赖会低估风险评级”的一般性发现，并与现有文献支持保持一致；同时用敏感性对比将技术结果上升为“模型更稳健”的方法论结论。",
+    "contribution_positioning_cn": "将贡献定位为“方法论贡献”而非单纯风险指标，并强调“首次集成ISM和MCS”这一新颖组合，同时列出与现有方法（FSE、BBN、SEM、SNA）的具体不同，使贡献边界清晰。",
+    "novelty_protection_cn": "通过两个不同规模和特征的案例、多种基准对比、敏感性分析以及扩展到风险处理行动，避免贡献被视为一次性性能结果；同时明确说明未来扩展（动态网络、成本优化），显示框架的可延续性。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "在引言中建立“风险相互依赖被忽视”的背景，并使用现象描述（多米诺效应、风险环路）说明问题的重要性。",
+        "research_job_cn": "收集现实或文献中风险依赖案例，定义研究问题为“如何建模和评估相互依赖风险”。",
+        "required_evidence_cn": "至少一组风险相互依赖导致后果不利的案例或权威引证。",
+        "transition_to_next_cn": "从问题引出对现有方法的综述。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "在相关工作中按方法类别综述，并明确指出每类的局限，归纳成研究缺口。",
+        "research_job_cn": "系统比较解析法、网络法、仿真法等方法在风险依赖处理上的能力差异。",
+        "required_evidence_cn": "每种方法对应的代表性文献及其明确限制。",
+        "transition_to_next_cn": "从缺口过渡到“本文通过整合两种方法填补”。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "提出总体框架，通过图和文字说明三阶段流程（网络构建、模拟评估、处理计划）。",
+        "research_job_cn": "设计模型整体架构，确定输入输出和交互关系。",
+        "required_evidence_cn": "框架图或流程图，能连接方法步骤与决策支持目标。",
+        "transition_to_next_cn": "框架图后自然进入分阶段方法细节。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "详细说明每个方法组件（ISM构建、MCS模拟、指标定义、敏感性分析），配以公式和算法伪代码。",
+        "research_job_cn": "实现模型，确定公式和算法步骤，确保可计算。",
+        "required_evidence_cn": "通过小示例或伪代码验证方法可操作。",
+        "transition_to_next_cn": "方法完备后，转入“案例应用”章节。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "报告第一个案例的完整应用：展示网络、输出指标、对比基准、统计检验和敏感性分析。",
+        "research_job_cn": "在仿真环境运行模型，收集并分析结果。",
+        "required_evidence_cn": "完整的输入数据、收敛图、结果表和相关检验p值。",
+        "transition_to_next_cn": "在案例结果基础上，说明如何用于风险处理行动规划。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "展示风险处理行动评估，构造多种行动（包括基于基准方法的行动），比较效果。",
+        "research_job_cn": "设计行动情景，模拟参数变化，计算指标。",
+        "required_evidence_cn": "行动效果对比表（TRL/TRPL下降量）。",
+        "transition_to_next_cn": "用第二个案例验证结果的稳健性。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "提供第二个案例（不同规模/特征），至少验证处理行动的通用性。",
+        "research_job_cn": "重新收集一套项目数据，应用模型进行风险处理评估。",
+        "required_evidence_cn": "第二个案例的行动效果对比表。",
+        "transition_to_next_cn": "案例全部结束后，进入讨论。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "讨论将案例结果上升到一般性发现：忽略依赖会低估风险；模型更稳健；方法论贡献。同时声明适用边界与局限。",
+        "research_job_cn": "提炼模式，结合文献比较和敏感性对比，形成结论。",
+        "required_evidence_cn": "能够回指引言缺口的证据链。",
+        "transition_to_next_cn": "结论总结并展望。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用“三类方法各有缺陷”构建综合缺口，而不是简单说“无人研究”。",
+      "在方法层面使用公式和伪代码，让制品可复现。",
+      "通过多指标与多 benchmark 对比，使贡献不仅停留在单一指标。",
+      "将敏感性分析作为稳健性论证的一部分，增强说服力。",
+      "用两个特征不同的案例（含环路/无环路，小规模/大规模）展示普适性。",
+      "将风险评估结果直接延伸到风险处理行动，形成决策闭环。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要可靠的专家风险数据（SP/TP/IO），缺乏真实项目数据时只能借用文献数据，影响独立性。",
+      "需要实现仿真算法并处理环路，对编程和计算资源有一定要求。",
+      "两个案例数据来自其他文献，并非本团队采集，可能限制研究贡献的独立性。",
+      "敏感性分析中乐观/悲观值的人为设定具有一定主观性，需要合理假设。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只复制“首次集成ISM和MCS”的说法而没有实际算法与收敛性证据。",
+      "不能仅列举五个指标而不提供指标的计算公式和模拟实现。",
+      "不能声称“更有效”而没有与多个基准方法的定量对比。",
+      "不能忽视案例中的二手数据来源，应明确数据局限性。"
+    ],
+    "single_best_description_of_the_routine_cn": "先指出现有风险评估方法在处理风险相互依赖上的性能缺口，再构建一个将网络建模与随机模拟相结合的决策支持模型，并通过多个案例与基准的逐级对比，将性能优势上升为可复用的设计知识。"
+  },
+  "confidence": 0.9,
+  "limitations_cn": "本文基于论文全文进行分析；图像中的表格已部分转录，但个别图表（如雷达图、网络图）的数值细节无法完全读取，可能影响对SGI敏感性描述的具体数值判断；两个案例数据皆来自二手文献，可能影响对模型外部效度的评估。",
+  "usage": {
+    "prompt_tokens": 27296,
+    "completion_tokens": 23638,
+    "total_tokens": 50934,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 27296
+  }
+}

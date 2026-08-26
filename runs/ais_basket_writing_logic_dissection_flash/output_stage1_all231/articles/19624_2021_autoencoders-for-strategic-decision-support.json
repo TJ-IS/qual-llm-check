@@ -1,0 +1,1089 @@
+{
+  "record_id": "19624",
+  "source_file": "19624_2021_autoencoders-for-strategic-decision-support.md",
+  "title": "Autoencoders for strategic decision support",
+  "authors": "Sam Verboven; Jeroen Berrevoets; Chris Wuytens; Bart Baesens; Wouter Verbeke",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113422",
+  "fulltext_chars": 71571,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "enterprise_work_and_knowledge",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:54.521914+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在缺乏标注、依赖同行比较且决策后果重大而难以定义的战略决策中，能否用一种无监督学习方法——自编码器——根据与相关同行的相对常态性，为管理者提供可操作、可解释且能与人协同的细粒度异常诊断？",
+    "artifact_and_design_cn": "基于欠完备自编码器重建误差的战略决策支持框架。自编码器对每个观察输出整体离群分，并提供每个原始维度上的重构偏差，从而给出偏离方向、偏离幅度以及相对同行的总体排序；LOF和Isolation Forest作为基准方法。",
+    "objective_outcomes_cn": "专家标注实验表明：专家之间高度不一致、专家内部一致性仅为71.11%和60.00%，且只依赖少数维度。盲法专家验证中自编码器与加权专家集成的匹配度最高；数据质量事件中方向准确率100%、维度排名准确率85.39%；合成异常中方向准确率100%、维度排名准确率70%；透明专家组未对任何输出提出异议，并发现数据质量问题。",
+    "core_contribution_cn": "首次将自编码器引入战略决策支持，提出并验证了集整体异常排序、维度级细粒度反馈和人机协同于一体的无监督决策支持框架；同时以实验证据表明人类专家在战略相关数据判断上不一致、依赖启发式，从而论证了该支持系统的必要性。",
+    "whole_argument_in_one_paragraph_cn": "作者从数据驱动方法擅长操作性决策、而战略决策仍主要由专家主观判断这一现实缺口出发，将战略决策的核心问题转化为'相对于同行群体什么是正常'的异常诊断问题。由于战略决策标签缺失、复杂高维且需要为管理者提供可解释和可接受的信息，作者选择自编码器作为解决方案：其重建误差既能给出总体异常排序，又能逐维输出偏差的大小和方向。然后，作者先用专家标注实验证明人类专家在该任务上不一致、依赖启发式；随后设计四个彼此补充的验证实验——盲法专家验证、透明专家面板、数据质量事件、合成异常注入——从异常检测性能、维度级反馈和人机协同三个维度评价自编码器。结果显示自编码器在多数设置下优于两类传统无监督基准，且能稳定提供维度级反馈。最后讨论部分将各实验证据汇总为'方法具有跨语义稳定性、良好人机协同和细粒度反馈能力'的一般性主张，并返回引言中的缺口，提出无监督决策支持的研究议程。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "论文从战略决策支持的设计需求出发，构建了自编码器制品，并用多源证据（专家、数据质量、合成数据）对其进行评价，以形成关于'面向战略决策支持的制品应该满足哪些要求以及如何验证'的设计知识。它不是纯粹的理论推导实验，也不是单一benchmark计算任务，而是以需求—构建—多方式评价—设计知识为骨架。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "论证主线是：先提炼战略决策支持的四项要求（是否异常、如何异常、异常程度、人机协同），再引入自编码器作为满足这些要求的制品，随后设计四个实验分别评价排序、维度反馈和协同，最后回归关于可复用设计知识与边界的讨论。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "共有5个研究阶段。第一阶段（Section 4）实验证明专家在战略相关数据上判断不一致，制造并确认问题缺口。第二阶段（5.1）用盲法专家集成作为代理ground truth，验证自编码器异常排序的相对准确性。第三阶段（5.2）用透明专家面板验证输出的可理解性与可接受性，并意外发现数据质量事件。第四阶段（5.3）利用该自然事件作为相对客观的异常标签，检验检测性能和维度级反馈。第五阶段（5.4）用合成异常注入提供受控的另一种异常语义，检验跨语义稳定性。四个解决方案阶段分别支撑异常检测性能、协同、维度反馈三个评价维度，并在5.5汇总成一般性结论。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "专家战略判断一致性检验",
+        "question_cn": "人类专家能否一致、可靠地判断高维战略相关数据的常态性？",
+        "inputs_and_setting_cn": "10名来自HR服务公司咨询/BI/主管角色的专家；两个HR数据集：D1包含128820名员工、5个维度，D2包含1864名雇主、11个维度；选取覆盖高/中/低异常排序且模型间存在分歧的子集；加入重复观察。",
+        "designed_or_compared_object_cn": "专家对子集观察的标签（正常/异常/无法决定）、专家内部一致性、专家使用的维度组合、自评相关性。",
+        "baseline_control_or_counterfactual_cn": "随机一致性50%；模型排序用于构造有分歧的子集。",
+        "objective_metrics": [
+          "一致性率（重复观察同标签比例）",
+          "专家间Spearman秩相关",
+          "专家自评难度、相关性、一致性之间的相关",
+          "维度使用分布"
+        ],
+        "analysis_method_cn": "描述性统计、相关性矩阵、可视化（标签热图、维度使用分布）。",
+        "main_result_cn": "专家间无任何观察达到一致；D1和D2的一致率分别为71.11%和60.00%，勉强高于随机；专家只使用少量且不同的维度；自评与一致性关系在两数据集上不一致。",
+        "argumentative_role_cn": "验证问题假设：人无法可靠处理复杂的战略同行信息，因此需要数据驱动的战略决策支持。",
+        "remaining_uncertainty_cn": "只证明人有缺陷，没有证明自编码器能弥补此缺陷。",
+        "link_to_next_phase_cn": "引出解决方案验证：需要评价自编码器在排序、细粒度反馈和协同上是否满足需求。",
+        "evidence_pointers": [
+          "Table 1",
+          "Figure 5",
+          "Figure 6",
+          "Table 8",
+          "Table 9"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "盲法专家集成验证",
+        "question_cn": "在没有客观ground truth的战略数据中，自编码器的异常排序是否能够匹配一组专家的集体判断？",
+        "inputs_and_setting_cn": "上一阶段10名专家的标签；自编码器、LOF、Iforest在D1/D2上的异常排序；截断为5%、10%、15%作为异常标签。",
+        "designed_or_compared_object_cn": "未加权多数投票与两种加权多数投票（按自评相关性、按难度倒数）构成的专家集成；比较模型异常标签与集成标签。",
+        "baseline_control_or_counterfactual_cn": "未加权集成、随机分类、LOF和Iforest作为方法基准。",
+        "objective_metrics": [
+          "准确率（模型前x%异常标签与专家集成标签的匹配度）",
+          "加权带来的准确率增益与百分比提升"
+        ],
+        "analysis_method_cn": "多数投票集成；不同截断下的准确率比较；箱线图展示个体专家准确率分布。",
+        "main_result_cn": "自编码器在加权集成下准确率最高（例如按难度加权时0.77/0.79/0.79），加权提升幅度也最大；个体专家准确率中位数仅略高于随机，只有1个组合超过集成加权AE的稳定水平。",
+        "argumentative_role_cn": "用群体智慧替代单一专家标签，为自编码器排序提供相对有效的外部效标，同时支撑人机协同主张。",
+        "remaining_uncertainty_cn": "专家集成只是代理ground truth，不是真异常；没有涉及专家对输出内容的理解和接受。",
+        "link_to_next_phase_cn": "需要让专家直接看输出，检验透明可解释性，即透明专家验证。",
+        "evidence_pointers": [
+          "Table 3",
+          "Figure 7"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "透明专家面板验证",
+        "question_cn": "专家能否理解、接受并从自编码器输出中提取决策信息？",
+        "inputs_and_setting_cn": "两小时专家小组会议；自编码器对D1/D2的异常排序和维度级反馈；使用BI互动可视化展示。",
+        "designed_or_compared_object_cn": "专家对自编码器输出（总体异常分和逐维偏差）的定性反应；是否提出异议、能否解释、是否提出新应用。",
+        "baseline_control_or_counterfactual_cn": "无定量基线；以专家是否拒绝输出作为可接受性的直接证据。",
+        "objective_metrics": [
+          "专家是否对任何输出提出异议",
+          "专家能否解释结果",
+          "是否发现数据质量问题",
+          "专家提出的新应用数量"
+        ],
+        "analysis_method_cn": "定性面板分析。",
+        "main_result_cn": "专家组没有反对任何一条自编码器评估，认为输出可解释、可辩护；在查看输出时发现员工数据质量问题，并提出了多类新应用场景。",
+        "argumentative_role_cn": "直接支撑协同需求：输出被最终使用者接受和理解；同时意外产生了下一阶段可用的真实数据质量异常事件。",
+        "remaining_uncertainty_cn": "面板结果来自单一小组，且未定量测量理解程度或决策改进；需要更客观的异常标签来检验检测性能。",
+        "link_to_next_phase_cn": "数据质量事件本身成为自然实验的数据来源，用于检验检测和维度反馈。",
+        "evidence_pointers": [
+          "Section 5.2.2",
+          "Section 5.3开场"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "数据质量事件作为自然实验",
+        "question_cn": "利用透明验证中发现的数据质量问题，自编码器能否识别受影响观察，并准确指出异常维度及方向？",
+        "inputs_and_setting_cn": "员工数据集D1；已知数据质量问题影响的89个观察；受影响维度及方向作为ground truth。",
+        "designed_or_compared_object_cn": "AE、Iforest、LOF三者的异常检测性能；AE的维度排名准确率与方向准确率。",
+        "baseline_control_or_counterfactual_cn": "其他两种方法；5%/10%/15%截断阈值；能否将受影响观察放入最高异常分位。",
+        "objective_metrics": [
+          "受影响观察在top x%异常分位中的占比（检测性能）",
+          "维度排名准确率",
+          "方向准确率"
+        ],
+        "analysis_method_cn": "top-x命中率；受已知受影响维度标记下的维度准确率计算。",
+        "main_result_cn": "AE和Iforest检测性能较好，LOF很差；AE维度排名准确率85.39%，方向准确率100%；即使对未被AE判为高异常的观察，维度级反馈仍稳定准确。",
+        "argumentative_role_cn": "提供真实而非人为的异常语义，验证了AE的检测能力和细粒度反馈价值，并说明细粒度反馈可延伸到全体观察而不仅是顶部异常。",
+        "remaining_uncertainty_cn": "数据质量语义是'数据被污染'，不完全是战略层面的异常；需要受控合成异常来检验一般化。",
+        "link_to_next_phase_cn": "合成异常实验用另一种严格受控的异常语义弥补自然事件的不可重复性。",
+        "evidence_pointers": [
+          "Table 4A",
+          "Table 5"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "合成异常注入验证",
+        "question_cn": "在专家定义的、严格受控的异常语义下，自编码器能否保持检测性能和维度级反馈准确率？",
+        "inputs_and_setting_cn": "雇主数据集D2；从三种方法都判为非异常的观察中，由四名专家构造10个合成异常：5个单维扰动、3个二维扰动、2个三维扰动，扰动达到不可能/不合逻辑/不可信程度。",
+        "designed_or_compared_object_cn": "AE、Iforest、LOF在合成异常上的检测；AE维度排名准确率和方向准确率。",
+        "baseline_control_or_counterfactual_cn": "其他两种方法；5%/10%/15%截断；已知扰动维度和方向作为ground truth。",
+        "objective_metrics": [
+          "合成异常在top x%中的命中率",
+          "维度排名准确率",
+          "方向准确率"
+        ],
+        "analysis_method_cn": "受控注入后的重训练；分类命中率；准确率表。",
+        "main_result_cn": "AE表现良好；LOF在15%截断达到完美区分，Iforest表现差；AE维度排名准确率70%，方向准确率100%。",
+        "argumentative_role_cn": "用独立于数据质量事件的受控异常语义证明方法不是偶然匹配某一类异常，同时展现无监督方法跨语义不稳定的问题，以支持AE的相对稳健性。",
+        "remaining_uncertainty_cn": "合成异常数量很少，且由专家主观构造；未覆盖全部可能的异常语义。",
+        "link_to_next_phase_cn": "实验结果在讨论中汇总为跨实验的性能、协同和细粒度反馈结论。",
+        "evidence_pointers": [
+          "Table 4B",
+          "Table 6"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "GAP",
+      "RQ_OR_OBJECTIVE",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRIOR_KNOWLEDGE",
+      "GAP",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "REQUIREMENT",
+      "LIMITATION",
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "BENCHMARK_OR_CONTRAST",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "OTHER"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "LIMITATION",
+      "METHOD_JUSTIFICATION"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "BENCHMARK_OR_CONTRAST"
+    ],
+    "evaluation_moves": [
+      "STUDY_OVERVIEW",
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT",
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "TRANSITION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "战略决策中的同行影响与最优独特性理论",
+      "人类决策心理学与启发式偏差文献",
+      "异常检测/离群点检测文献",
+      "无监督学习与自编码器表示学习",
+      "集成学习与群体智慧",
+      "无监督异常检测评价与数据质量方法"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "战略管理和人类决策理论研究界定了问题边界：需要相对同行的'常态性'、需要简单可解释信息、人存在偏差。但从这些需求到具体选择自编码器，主要是依据自编码器在异常检测文献中的性质（重构误差可提供整体分数与逐维偏差）以及无标签数据的约束，而非由理论形式化推导出网络结构、损失函数和超参数。因此属于需求层面的部分耦合，而非理论到设计的直接演绎。",
+    "translation_chain_cn": "战略决策依赖同行比较 → 核心问题是'什么是正常'→ 人类启发式无法处理高维复杂数据 → 需要无监督、可解释、粒度化、可接受的系统 → 自编码器重建误差提供整体离群分和逐维偏差 → 用整体排序、维度反馈和人机协同三个维度评价 → 用专家集成、透明面板、数据质量事件和合成异常四种证据三角互证。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "战略决策中的组织会模仿或差异化于同行，最优独特性要求准确理解'同行中什么是正常'；管理者缺乏学习式的常态化定义。",
+        "mechanism_cn": "高维多变量同行数据超过人类信息处理能力，管理者只能使用启发式和简单描述性统计，因此产生系统性偏差和不一致。",
+        "design_requirement_cn": "需要数据驱动的相对常态性度量，能回答'是否异常、如何异常、异常到何种程度'，并提供同行比较。",
+        "artifact_choice_cn": "自编码器：用重建误差作为总体异常分数，用逐维重建偏差作为维度级反馈，展现偏离大小和方向。",
+        "evaluated_contrast_cn": "AE与LOF、Iforest在整体排序和维度反馈上的对比；与专家集体判断的匹配度。",
+        "objective_result_cn": "AE在多数设置与加权专家集成匹配度最高；维度排名准确率85.39%/70%，方向准确率100%。",
+        "evidence_pointers": [
+          "Section 1.2",
+          "Table 3",
+          "Table 5",
+          "Table 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "决策支持系统的输出必须可解释、可辩护并被决策者接受；管理者可能不信任算法。",
+        "mechanism_cn": "输出只有被理解并置于管理者的更丰富语境中，才可能被采纳并改变决策。",
+        "design_requirement_cn": "系统输出必须提供与原始特征空间一致的、行动导向的细粒度信息，而不仅是黑箱分数。",
+        "artifact_choice_cn": "AE输出逐维重构误差及偏差方向；透明面板中使用BI可视化呈现排序和维度反馈。",
+        "evaluated_contrast_cn": "透明专家验证中专家是否反对、能否解释输出；对照盲法的暗盒接受程度。",
+        "objective_result_cn": "专家组没有反对任何输出，能解释结果并发现数据质量问题，提出新应用。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Section 5.2.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "战略决策环境中标注数据缺失、昂贵或不可靠，因此监督和主动学习难以实施。",
+        "mechanism_cn": "无标签意味着必须依赖数据内在分布结构来定义常态性，训练目标是重建而非分类。",
+        "design_requirement_cn": "算法必须能在完全无监督条件下运行并给出连续异常分数。",
+        "artifact_choice_cn": "欠完备自编码器：通过瓶颈层压缩输入，以重建误差衡量偏离常态的程度。",
+        "evaluated_contrast_cn": "在盲法、数据质量、合成观测中，与同为无监督的LOF、Iforest比较，而不用监督标签训练。",
+        "objective_result_cn": "AE在多个无监督设置下表现良好，且能提供额外维度反馈。",
+        "evidence_pointers": [
+          "Section 1.3",
+          "Section 2.4",
+          "Table 4A",
+          "Table 4B"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "无监督异常检测方法在不同领域和异常语义下性能不稳定，每种方法隐含不同的常态定义。",
+        "mechanism_cn": "若方法对不同异常语义高度敏感，则可能只适用于单一任务，作为战略支持工具不可靠。",
+        "design_requirement_cn": "方法应在不针对特定异常语义大幅调参的情况下具有跨语义稳定性。",
+        "artifact_choice_cn": "对AE采用统一的结构和超参数，不做针对已知异常的大规模调参；将LOF/Iforest作为对照。",
+        "evaluated_contrast_cn": "同一种AE在数据质量事件（真实污染）和合成异常（专家构造）两种不同语义下的表现，对照LOF/Iforest在同一语义下的波动。",
+        "objective_result_cn": "AE在两个语义下均表现良好，而LOF在数据质量下差、在合成下好，Iforest则反过来，显示AE相对稳健。",
+        "evidence_pointers": [
+          "Section 5.5",
+          "Table 4A",
+          "Table 4B"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "盲法专家验证：以专家标签的加权集成作为代理ground truth，与模型排序比较",
+      "透明专家面板：以专家是否理解、接受和能解释输出来验证协同与可解释性",
+      "自然数据质量事件：将实际被发现的数据质量问题作为相对客观的异常标签",
+      "合成异常注入：由专家构造不可能/不合逻辑/不可信的受控异常，提供可验证ground truth",
+      "与传统无监督方法（LOF、Iforest）的对比",
+      "多截断点（5%/10%/15%）下的稳定性分析"
+    ],
+    "why_these_evaluations_cn": "战略数据没有可靠标签，且单一专家的判断本身不准确。因此需要三角互证：用专家集成近似群体智慧，用透明面板验证社会接受性，用数据质量事件和合成异常提供两类可证实的异常语义，再通过不同截断点和方法基准检验稳定性。",
+    "benchmark_and_contrast_chain_cn": "LOF和Iforest作为算法基准贯穿盲法、数据质量和合成实验；专家集成内部比较未加权、自评相关性加权、难度倒加权；不同截断点检验阈值不敏感性；数据质量事件和合成异常构成两种对照异常语义；最后在讨论中通过跨表对比说明AE的稳定性优于基准。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "自编码器在异常排序上表现好，且优于两种基准方法。",
+        "evidence_cn": "盲法集成中AE准确率最高；数据质量中AE与Iforest接近且高于LOF；合成数据中AE优于Iforest。",
+        "supported_level_cn": "中等支持：专家集成只是代理真值，且LOF在合成数据15%截断达到完美，AE并非全胜。"
+      },
+      {
+        "claim_cn": "自编码器提供准确的维度级反馈，包括主要异常维度及方向与幅度。",
+        "evidence_cn": "数据质量实验方向100%、维度排名85.39%；合成实验方向100%、维度排名70%。",
+        "supported_level_cn": "较强支持：两项实验都直接检验了维度反馈，且对低排序观察也保持稳定。"
+      },
+      {
+        "claim_cn": "自编码器输出具有人机协同性，专家能理解并接受。",
+        "evidence_cn": "透明面板无异议，专家能解释输出并发现数据质量问题；盲法中用加权集成提升准确率也显示一致性。",
+        "supported_level_cn": "中等支持：单个面板、少量专家，定性证据为主。"
+      },
+      {
+        "claim_cn": "人类专家在战略相关数据判断上不一致、依赖启发式，因而需要支持系统。",
+        "evidence_cn": "专家内部一致性71%/60%，无任何观察全体一致，维度使用少且分散。",
+        "supported_level_cn": "较强支持：有重复观察和专家间相关性证据。"
+      },
+      {
+        "claim_cn": "自编码器能跨不同异常语义稳定工作，适合战略决策支持。",
+        "evidence_cn": "同一个模型在数据质量和合成两种语义下都较好，基准方法表现波动。",
+        "supported_level_cn": "有限支持：只有两个数据集、两类语义，10个合成观察，未覆盖全部领域。"
+      }
+    ],
+    "internal_validity_strategy_cn": "用重复观察测量专家内部一致性；选择同时覆盖高/中/低异常排名且模型分歧大的子集；盲法与透明法分离以减少反应偏差；以已知数据质量问题和受控合成扰动提供相对客观的ground truth；使用多种截断点和加权方案降低单阈值/单权重风险；报告专家相关矩阵并与已有文献一致。",
+    "external_validity_strategy_cn": "采用来自欧洲HR服务提供商的两个不同粒度和维度的数据集；专家来自咨询、BI和主管角色；透明面板中专家主动提出其他应用领域（疲劳、招聘、入职等）；论文在讨论和结论中强调方法可推广到财务战略、公司文化等领域。",
+    "what_is_not_actually_tested_cn": "没有直接检验系统是否改善真实战略决策结果；没有衡量长期采纳与信任变化；没有在HR以外的领域做实证；没有对自编码器架构/超参数做系统消融；'优于人类'基于一致性和专家集成而非决策收益；没有随机因果设计；合成异常只有10条，统计效力有限。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "自编码器在战略数据异常排序上，尤其在与加权专家集体判断匹配时，优于LOF和Iforest；并且在数据质量和合成异常两类设置下具有较好的检测稳定性。",
+    "artifact_claim_cn": "自编码器的逐维重构误差能准确提供维度级反馈：以高比例识别主要异常维度，并在所有实验中对受影响维度的方向判断达到100%。",
+    "mechanism_claim_cn": "欠完备自编码器因瓶颈层而只能重建靠近数据分布的正常输入，因此离正常模式越远的输入重建误差越大；该误差可在原始特征空间分解为各维度偏差，从而同时提供整体异常程度和细粒度方向/幅度。",
+    "boundary_claim_cn": "该方法的有效性在HR员工和雇主两类数据集上、在真实数据污染与专家构造的异常语义下得到验证；在方法层面可迁移到其他战略领域，但需要针对具体战略问题重新选择相关维度。",
+    "reusable_design_knowledge_cn": "面对缺乏标签的战略决策支持任务，选择基于重建误差的无监督方法可以同时满足整体排序、维度级反馈和可解释性；评价此类系统时应从异常检测性能、细粒度反馈、人机协同三个维度出发，并用专家集成、透明面板、自然数据质量事件和合成注入四类证据进行三角验证。",
+    "theoretical_contribution_cn": "将异常检测从面向单条观察的离散分类扩展为面向战略决策的群体级、维度级诊断；用实验证据支持了人类在高维战略判断中的不一致性；提出无监督决策支持这一尚少探索的研究方向。",
+    "how_discussion_closes_intro_gap_cn": "引言指出战略决策缺少学习系统支持且人类判断有限；Section 4用专家一致性数据把'人类有限'变成证据；Section 5.5把四个实验的证据按三个需求维度归并，说明AE在性能、协同和维度反馈上都满足要求；结论再次回到无监督决策支持的研究缺口，并给出挑战与未来方向。",
+    "overclaim_or_unsupported_leaps_cn": "将'专家内部一致性低'等同于'人类不符合决策支持需求'，没有测量决策质量；'优于人类'的依据主要是与专家集成标签的匹配，而集成标签本身也是主观判断；'自编码器在不同语义下稳定'只基于两类数据集和有限合成样本；'方法可迁移'是作者推论而非实证；'协同'依赖单次面板和定性判断。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "多数高管领域中的战略决策都涉及规范或常态概念，但可用的数据驱动战略决策工具很少。",
+      "rhetorical_function_cn": "在摘要开头同时建立现实背景和核心缺口。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引出自编码器方案。",
+      "evidence_pointer": "Abstract第一句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "引入并扩展自编码器，以提供具有战略相关性的细粒度反馈。",
+      "rhetorical_function_cn": "直接宣布本文的解决方案定位。",
+      "depends_on_cn": "前一句中的缺口。",
+      "sets_up_cn": "摘要后续的评价声明。",
+      "evidence_pointer": "Abstract第二句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "首个实验显示专家决策不一致，说明需要战略决策支持；随后用两个HR数据集评价排序准确性、专家协同和维度级反馈。",
+      "rhetorical_function_cn": "以压缩方式预告问题验证和解决方案验证两部分。",
+      "depends_on_cn": "引入的方法。",
+      "sets_up_cn": "摘要中的四类验证声明。",
+      "evidence_pointer": "Abstract第三句"
+    },
+    {
+      "order": 4,
+      "section": "Introduction 1.1",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "机器学习等数据驱动方法正被用于信贷评分和客户流失预测等操作决策。",
+      "rhetorical_function_cn": "建立熟悉的应用场景，为后续对比做准备。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "对比战略决策的独特困难。",
+      "evidence_pointer": "Section 1.1第一段"
+    },
+    {
+      "order": 5,
+      "section": "Introduction 1.1",
+      "locator": "P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "数据驱动方法最适合定义明确、重复且有短期可测效果的任务；战略决策则不频繁、定义不清、影响大且长期。",
+      "rhetorical_function_cn": "给战略决策下操作定义，并解释为何现有方法不匹配。",
+      "depends_on_cn": "前文的ML成功案例。",
+      "sets_up_cn": "指出战略决策缺乏学习系统支持。",
+      "evidence_pointer": "Section 1.1第二段"
+    },
+    {
+      "order": 6,
+      "section": "Introduction 1.1",
+      "locator": "P3 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "尽管技术进步使操作性任务支持普及，战略决策仍主要在没有学习系统基础的情况下做出。",
+      "rhetorical_function_cn": "点明论文要解决的学术与实践缺口。",
+      "depends_on_cn": "前面对两类决策的对比。",
+      "sets_up_cn": "强调高影响力问题。",
+      "evidence_pointer": "Section 1.1第三段"
+    },
+    {
+      "order": 7,
+      "section": "Introduction 1.1",
+      "locator": "P4 S1",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "组织中最重要的长期决策恰恰最缺少学习系统支持，而人类决策者易受偏差影响。",
+      "rhetorical_function_cn": "抬升缺口的重要性，说明为什么需要IS介入。",
+      "depends_on_cn": "缺口句。",
+      "sets_up_cn": "后续对决策支持需求的拆解。",
+      "evidence_pointer": "Section 1.1第四段"
+    },
+    {
+      "order": 8,
+      "section": "Introduction 1.2",
+      "locator": "P1 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "组织在战略决策中深受同行影响：既会模仿同行，也会以同行为差异化的基线。",
+      "rhetorical_function_cn": "引入'同行比较'这一经验现象。",
+      "depends_on_cn": "战略决策定义。",
+      "sets_up_cn": "把问题转化为'什么正常'。",
+      "evidence_pointer": "Section 1.2第一段"
+    },
+    {
+      "order": 9,
+      "section": "Introduction 1.2",
+      "locator": "P2 S2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "管理者需要一种能准确代表复杂多变量关系的常态概念，而目前只能依赖启发式和描述性统计。",
+      "rhetorical_function_cn": "从现象中推导第一个设计要求。",
+      "depends_on_cn": "同行影响现象。",
+      "sets_up_cn": "链接到异常检测领域。",
+      "evidence_pointer": "Section 1.2第二段"
+    },
+    {
+      "order": 10,
+      "section": "Introduction 1.2",
+      "locator": "P3 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "异常检测能识别异常行为，但离散的异常分类不足以提供战略决策所需的详细信息。",
+      "rhetorical_function_cn": "指出传统异常检测对战略支持的限制。",
+      "depends_on_cn": "常态性需求。",
+      "sets_up_cn": "构建从异常检测到战略支持的桥。",
+      "evidence_pointer": "Section 1.2第三段"
+    },
+    {
+      "order": 11,
+      "section": "Introduction 1.3",
+      "locator": "P1 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "异常检测中的决策通常只针对单条观察，重点是正确划分是否异常。",
+      "rhetorical_function_cn": "进一步限定传统异常检测的任务假设。",
+      "depends_on_cn": "前一段的异常检测界定。",
+      "sets_up_cn": "对比战略支持需要整体和细粒度信息。",
+      "evidence_pointer": "Section 1.3第一段"
+    },
+    {
+      "order": 12,
+      "section": "Introduction 1.3",
+      "locator": "P2 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "战略决策支持需要刻画整个同行环境，且不偏离同行的含义取决于具体战略。",
+      "rhetorical_function_cn": "说明为什么需要超越单条分类。",
+      "depends_on_cn": "同行影响现象。",
+      "sets_up_cn": "引入维度级偏差信息。",
+      "evidence_pointer": "Section 1.3第二段"
+    },
+    {
+      "order": 13,
+      "section": "Introduction 1.3",
+      "locator": "P3 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为提供可操作战略信息，管理者需要每个实体在整个总体中的离群性细粒度反馈，即是否异常、如何异常、异常程度。",
+      "rhetorical_function_cn": "把需求具体化为三个子要求。",
+      "depends_on_cn": "前一句对战略含义的分析。",
+      "sets_up_cn": "对应评价体系中的排序和维度反馈。",
+      "evidence_pointer": "Section 1.3第三段"
+    },
+    {
+      "order": 14,
+      "section": "Introduction 1.3",
+      "locator": "P4 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "系统输出必须可操作、可解释、可辩护，并最终被决策者接受，即具备'协同'。",
+      "rhetorical_function_cn": "加入第四个关键需求，弥补纯技术评价的不足。",
+      "depends_on_cn": "管理者对算法不信任的文献。",
+      "sets_up_cn": "透明专家验证的必要性。",
+      "evidence_pointer": "Section 1.3第四段"
+    },
+    {
+      "order": 15,
+      "section": "Introduction 1.3",
+      "locator": "P5 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "战略决策支持中标签通常缺失、昂贵或错误，因此无法采用主动学习或有标签噪声策略，必须用无监督方法。",
+      "rhetorical_function_cn": "为选择无监督范式提供数据约束依据。",
+      "depends_on_cn": "战略数据缺乏标签。",
+      "sets_up_cn": "自编码器方案的选择。",
+      "evidence_pointer": "Section 1.3第五段"
+    },
+    {
+      "order": 16,
+      "section": "Introduction 1.4",
+      "locator": "P1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "本文引入自编码器框架，利用其重建误差在与相关同行比较时提供细粒度基于数据的诊断。",
+      "rhetorical_function_cn": "正式提出解决方案。",
+      "depends_on_cn": "无监督前提和细粒度需求。",
+      "sets_up_cn": "评价框架。",
+      "evidence_pointer": "Section 1.4第一段"
+    },
+    {
+      "order": 17,
+      "section": "Introduction 1.4",
+      "locator": "P2 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "Isolation Forest和LOF只关注分类性能，不能为战略支持提供额外反馈。",
+      "rhetorical_function_cn": "以基准方法的短板突显AE的优势。",
+      "depends_on_cn": "AE方案。",
+      "sets_up_cn": "后续用LOF/Iforest作为基准。",
+      "evidence_pointer": "Section 1.4第二段"
+    },
+    {
+      "order": 18,
+      "section": "Introduction 1.4",
+      "locator": "P3 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "为评价该方法，设计了一个广泛实验框架，专门检验是否满足战略决策支持的每一个需求。",
+      "rhetorical_function_cn": "预告评价阶段。",
+      "depends_on_cn": "四项需求。",
+      "sets_up_cn": "引向Section 5。",
+      "evidence_pointer": "Section 1.4第三段"
+    },
+    {
+      "order": 19,
+      "section": "Introduction 1.4",
+      "locator": "P4 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "从欧洲HR服务提供商获得员工和雇主两个专有数据集，用于评价如何在无标签数据上提供战略输入。",
+      "rhetorical_function_cn": "说明实证数据来源，建立可信度。",
+      "depends_on_cn": "评价框架。",
+      "sets_up_cn": "具体实验。",
+      "evidence_pointer": "Section 1.4第四段"
+    },
+    {
+      "order": 20,
+      "section": "Introduction 1.5",
+      "locator": "P1 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文引入自编码器用于战略决策支持，并提出一套评估方法。",
+      "rhetorical_function_cn": "在引言末正式声明贡献。",
+      "depends_on_cn": "前文的方案。",
+      "sets_up_cn": "三类具体贡献。",
+      "evidence_pointer": "Section 1.5第一段"
+    },
+    {
+      "order": 21,
+      "section": "Introduction 1.5",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "数据显示AE在多个实验中超越人类和其他基准，在维度层面提供详细反馈，并输出被认为相关可解释、与专家高度协同的信息。",
+      "rhetorical_function_cn": "把贡献具体化为三个可验证命题。",
+      "depends_on_cn": "论文提出的框架和评估。",
+      "sets_up_cn": "三个评价维度。",
+      "evidence_pointer": "Section 1.5第二段"
+    },
+    {
+      "order": 22,
+      "section": "Introduction 1.5",
+      "locator": "P3 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "应用领域是人力资源管理，但方法论具有通用性，可扩展到财务战略或公司文化等。",
+      "rhetorical_function_cn": "设定适用范围并预告迁移性。",
+      "depends_on_cn": "HR实证。",
+      "sets_up_cn": "结论中的泛化主张。",
+      "evidence_pointer": "Section 1.5第三段"
+    },
+    {
+      "order": 23,
+      "section": "Introduction 1.5",
+      "locator": "P4",
+      "move_code": "OTHER",
+      "paraphrase_cn": "预告文章结构：文献、方法、问题验证、方案实验、讨论、结论。",
+      "rhetorical_function_cn": "提供阅读路标。",
+      "depends_on_cn": "全文结构。",
+      "sets_up_cn": "各章节阅读预期。",
+      "evidence_pointer": "Section 1.5第四段"
+    },
+    {
+      "order": 24,
+      "section": "Related Work 2.1",
+      "locator": "P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "监督学习用于建模频繁定义明确决策的文献很多，而战略决策支持多针对一次性、定义不清问题。",
+      "rhetorical_function_cn": "说明现有决策支持文献偏向操作型，突出战略支持的空白。",
+      "depends_on_cn": "引言中的战略定义。",
+      "sets_up_cn": "无监督决策支持的必要性。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 25,
+      "section": "Related Work 2.2",
+      "locator": "P1 S1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "战略决策并非纯理性，情绪或直觉影响判断，面对复杂信息时人会使用简单启发式。",
+      "rhetorical_function_cn": "引入人类决策偏差的理论基础。",
+      "depends_on_cn": "决策心理学文献。",
+      "sets_up_cn": "决策支持应提供简单相关信息。",
+      "evidence_pointer": "Section 2.2第一段"
+    },
+    {
+      "order": 26,
+      "section": "Related Work 2.2",
+      "locator": "P2 S1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "组织获得更多环境信息会提升绩效，并用同伴信息做模仿或创新的有意识选择；战略管理文献称这种取舍为最优独特性。",
+      "rhetorical_function_cn": "建立'同伴常态性'的理论正当性。",
+      "depends_on_cn": "战略管理和组织理论。",
+      "sets_up_cn": "把问题形式化为异常检测。",
+      "evidence_pointer": "Section 2.2第二段"
+    },
+    {
+      "order": 27,
+      "section": "Related Work 2.2",
+      "locator": "P3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "总结两点影响：人类判断需要客观信息支持；战略决策强烈受同行信息影响。",
+      "rhetorical_function_cn": "把文献转化为本文的研究假设。",
+      "depends_on_cn": "前两段的理论。",
+      "sets_up_cn": "Section 4的假设检验。",
+      "evidence_pointer": "Section 2.2第三段"
+    },
+    {
+      "order": 28,
+      "section": "Related Work 2.3",
+      "locator": "P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "异常检测已广泛用于欺诈、视觉、入侵检测和医疗，其价值在于识别异常并转化行动。",
+      "rhetorical_function_cn": "说明异常检测是成熟领域，可借用于战略支持。",
+      "depends_on_cn": "常态性概念。",
+      "sets_up_cn": "扩展异常检测到群体级决策。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 29,
+      "section": "Related Work 2.4",
+      "locator": "P2 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "无监督异常检测产生的排序其性质尚未被充分理解，每种方法有隐式常态定义，且最优定义随领域变化；自编码器结合了强性能与细粒度反馈可能。",
+      "rhetorical_function_cn": "既指出文献不足，又为AE选择提供技术依据。",
+      "depends_on_cn": "异常检测综述。",
+      "sets_up_cn": "引入自编码器和基准。",
+      "evidence_pointer": "Section 2.4第二段"
+    },
+    {
+      "order": 30,
+      "section": "Related Work 2.4",
+      "locator": "P3 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用专家输入评价无监督模型依赖两个假设：专家标签正确且专家的语义理解相关可取。",
+      "rhetorical_function_cn": "为后文使用专家集成而非单个专家提供方法论前提。",
+      "depends_on_cn": "无标签评价问题。",
+      "sets_up_cn": "盲法专家验证的集成设计。",
+      "evidence_pointer": "Section 2.4第三段"
+    },
+    {
+      "order": 31,
+      "section": "Methodology 3.1",
+      "locator": "P1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "自编码器在整体异常分和排序之外提供细粒度可操作信息，使输出在原始特征空间中可解释；LOF和Iforest只用于基准排序。",
+      "rhetorical_function_cn": "明确AE的艺术特征和基准分工。",
+      "depends_on_cn": "需求分析。",
+      "sets_up_cn": "架构与机制说明。",
+      "evidence_pointer": "Section 3.1第一段"
+    },
+    {
+      "order": 32,
+      "section": "Methodology 3.1",
+      "locator": "P2-P4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "欠完备自编码器通过瓶颈限制重建能力，最小化重建损失时隐式偏向重建最接近数据分布的输入，因此偏离越大则重建误差越大；它可以处理混合类型数据，且逐维误差给出偏离大小和方向。",
+      "rhetorical_function_cn": "解释AE为何能同时提供整体和细粒度异常信息。",
+      "depends_on_cn": "自编码器架构。",
+      "sets_up_cn": "后续可检验的维度反馈指标。",
+      "evidence_pointer": "Section 3.1第二至四段"
+    },
+    {
+      "order": 33,
+      "section": "Section 4 开头",
+      "locator": "P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "如果管理者能快速一致地处理大量复杂同行信息，则不需要支持系统；这一假设最终决定本文的增量价值、算法选择和评价策略。",
+      "rhetorical_function_cn": "把文献假设转化为需要实证检验的条件。",
+      "depends_on_cn": "Section 2.2的理论。",
+      "sets_up_cn": "专家实验。",
+      "evidence_pointer": "Section 4第一段"
+    },
+    {
+      "order": 34,
+      "section": "Section 4.1",
+      "locator": "P2-P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "取三方法在各数据上的排序，选出覆盖高/中/低排序且方法间分歧大的子集，请专家标注；重复观察用来测内部一致性，一致性被当作任务熟练度的代理。",
+      "rhetorical_function_cn": "说明问题验证实验的设计逻辑。",
+      "depends_on_cn": "问题是'人是否一致'。",
+      "sets_up_cn": "专家实验结果。",
+      "evidence_pointer": "Section 4.1第二至五段"
+    },
+    {
+      "order": 35,
+      "section": "Section 4.2",
+      "locator": "Result 1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "专家之间经常分歧，甚至没有任何单条观察被所有专家一致标注；Spearman秩相关普遍较低。",
+      "rhetorical_function_cn": "给出专家间不一致的证据。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "强化支持系统的必要性。",
+      "evidence_pointer": "Figure 5; Table 8; Table 9"
+    },
+    {
+      "order": 36,
+      "section": "Section 4.2",
+      "locator": "Result 2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "专家自我一致性只有71.11%和60.00%，几乎只高于随机50%；所有14条重复观察都至少被不一致标记过。",
+      "rhetorical_function_cn": "提供专家内部不一致的量化证据。",
+      "depends_on_cn": "一致性公式。",
+      "sets_up_cn": "说明'专家判断需要被替代/支持'。",
+      "evidence_pointer": "Table 1; Section 4.2第二点"
+    },
+    {
+      "order": 37,
+      "section": "Section 4.2",
+      "locator": "Result 3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "专家只关注少数维度且使用的维度组合各异，显示启发式决策。",
+      "rhetorical_function_cn": "用维度使用分布验证启发式假设。",
+      "depends_on_cn": "专家自报维度使用。",
+      "sets_up_cn": "引入维度级反馈需求。",
+      "evidence_pointer": "Figure 6"
+    },
+    {
+      "order": 38,
+      "section": "Section 4.2",
+      "locator": "末段",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "这些结果显示人类专家依赖启发式，无法处理复杂战略相关同行信息，因此需要战略决策支持。",
+      "rhetorical_function_cn": "把问题证据转化为进入解决方案的理由。",
+      "depends_on_cn": "前四条结果。",
+      "sets_up_cn": "Section 5。",
+      "evidence_pointer": "Section 4.2末段"
+    },
+    {
+      "order": 39,
+      "section": "Section 5 开头",
+      "locator": "P1-P2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Section 4证明问题存在；现在用三个维度验证解决方案：异常检测性能、维度级反馈、人机协同。",
+      "rhetorical_function_cn": "统领整个解决方案评价。",
+      "depends_on_cn": "Section 4结果。",
+      "sets_up_cn": "四个实验。",
+      "evidence_pointer": "Section 5第一至二段"
+    },
+    {
+      "order": 40,
+      "section": "Section 5",
+      "locator": "Table 2前一段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "四个实验对三个验证维度的贡献各不相同，表2总结了这种映射关系。",
+      "rhetorical_function_cn": "提供实验矩阵，防止读者在多个实验中迷失。",
+      "depends_on_cn": "三个验证维度。",
+      "sets_up_cn": "依次进入四个实验。",
+      "evidence_pointer": "Table 2"
+    },
+    {
+      "order": 41,
+      "section": "Section 5.1",
+      "locator": "P1 S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "因为数据无标注，可以用一组专家作为集成分类器；集成分类器受益于准确且多样的成员，因此群体智慧可能比单个专家更好。",
+      "rhetorical_function_cn": "为使用专家集成作为代理真值提供理论依据。",
+      "depends_on_cn": "无标签困境。",
+      "sets_up_cn": "多数投票设计。",
+      "evidence_pointer": "Section 5.1第一段"
+    },
+    {
+      "order": 42,
+      "section": "Section 5.1.1",
+      "locator": "末段",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "将模型最高5%、10%、15%异常分作为异常标签，与未加权/加权的专家集成标签比较；若模型有效且人类错误可平均化，应出现收敛。",
+      "rhetorical_function_cn": "把抽象的'准确性'操作化为人与模型的标签一致度。",
+      "depends_on_cn": "多数投票公式。",
+      "sets_up_cn": "表3结果。",
+      "evidence_pointer": "Section 5.1.1末段"
+    },
+    {
+      "order": 43,
+      "section": "Section 5.1.2",
+      "locator": "P1 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "表3显示自编码器一般取得最高准确率，尤其在加权集成下；说明它最匹配人类专家的加权集体判断。",
+      "rhetorical_function_cn": "给出AE排序准确性的核心证据。",
+      "depends_on_cn": "多数组标签。",
+      "sets_up_cn": "AE优于基准的初步主张。",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 44,
+      "section": "Section 5.1.2",
+      "locator": "Figure 7段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "个体专家准确率中位数仅略高于随机；90个专家×方法×截断组合中只有一个超过集成加权AE，说明AE能稳定代表多数专家意见。",
+      "rhetorical_function_cn": "将个体专家的不稳定与AE的稳定形成对比。",
+      "depends_on_cn": "个体专家结果。",
+      "sets_up_cn": "人类需要支持、AE适合支持的双重主张。",
+      "evidence_pointer": "Figure 7"
+    },
+    {
+      "order": 45,
+      "section": "Section 5.2",
+      "locator": "P1 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为了评价协同，本章评估专家是否理解并同意自编码器系统的输出。",
+      "rhetorical_function_cn": "将协同需求转化为可观测目标。",
+      "depends_on_cn": "第四项需求。",
+      "sets_up_cn": "透明面板实验。",
+      "evidence_pointer": "Section 5.2第一段"
+    },
+    {
+      "order": 46,
+      "section": "Section 5.2.1",
+      "locator": "P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "在两小时小组会议中向专家展示系统输出，并使用互动可视化，以观察专家能否提取决策信息。",
+      "rhetorical_function_cn": "说明协同验证的具体操作。",
+      "depends_on_cn": "协同目标。",
+      "sets_up_cn": "面板结果。",
+      "evidence_pointer": "Section 5.2.1"
+    },
+    {
+      "order": 47,
+      "section": "Section 5.2.2",
+      "locator": "P1 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "专家组能够解释系统结果，没有对任何一条自编码器评估（整体分或维度级）提出反对。",
+      "rhetorical_function_cn": "为协同和可解释性提供直接定性证据。",
+      "depends_on_cn": "面板实验。",
+      "sets_up_cn": "数据质量事故的发现。",
+      "evidence_pointer": "Section 5.2.2"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.2.2",
+      "locator": "P1 S2-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "研究过程中发现员工数据存在质量问题；专家还提出了对工作疲劳、招聘等新主题的分析应用。",
+      "rhetorical_function_cn": "将协同验证扩展为真实环境收益和新应用证据。",
+      "depends_on_cn": "无异议面板结果。",
+      "sets_up_cn": "下一节利用数据质量事件做自然实验。",
+      "evidence_pointer": "Section 5.2.2"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.3",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "数据质量问题与离群性密切相关，可以利用发现的问题作为相对客观的ground truth来检验方法。",
+      "rhetorical_function_cn": "把意外发现转化为评价资源。",
+      "depends_on_cn": "5.2中发现的真实问题。",
+      "sets_up_cn": "检测和维度反馈实验。",
+      "evidence_pointer": "Section 5.3第一段"
+    },
+    {
+      "order": 50,
+      "section": "Section 5.3.1",
+      "locator": "P2-P4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "定义维度排名准确率和方向准确率：前者要求AE错误最大的维度恰好是受影响维度，后者要求受影响维度方向符合实际偏差方向。",
+      "rhetorical_function_cn": "把细粒度反馈变成可测量的指标。",
+      "depends_on_cn": "数据质量ground truth。",
+      "sets_up_cn": "表5的结果。",
+      "evidence_pointer": "Section 5.3.1"
+    },
+    {
+      "order": 51,
+      "section": "Section 5.3.2",
+      "locator": "P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "数据质量检测中Iforest和AE表现良好、LOF很差；AE方向准确率100%，维度排名85.39%，且即使对未被归入top异常分的观察，细粒度反馈也稳定。",
+      "rhetorical_function_cn": "同时支持检测性能和细粒度反馈，并强调反馈对非顶部观察也有价值。",
+      "depends_on_cn": "维度指标。",
+      "sets_up_cn": "合成实验的必要性。",
+      "evidence_pointer": "Table 4A; Table 5"
+    },
+    {
+      "order": 52,
+      "section": "Section 5.4",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于文献表明无监督异常检测在不同领域表现不稳定，只靠数据质量数据集不足以评价一般表现，因此需要注入合成异常。",
+      "rhetorical_function_cn": "为受控实验提供必要性论证。",
+      "depends_on_cn": "Campos等关于不稳定性的文献。",
+      "sets_up_cn": "合成异常设计。",
+      "evidence_pointer": "Section 5.4第一段"
+    },
+    {
+      "order": 53,
+      "section": "Section 5.4.1",
+      "locator": "P1-P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择三种方法都判为非异常的观察，由四名专家设计微小但足够使其不可能、不合逻辑或不可信的扰动，覆盖单维到三维扰动。",
+      "rhetorical_function_cn": "说明合成异常如何获得ground truth并保证方法间可分。",
+      "depends_on_cn": "需要受控异常。",
+      "sets_up_cn": "表4B和表6。",
+      "evidence_pointer": "Section 5.4.1"
+    },
+    {
+      "order": 54,
+      "section": "Section 5.4.2",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "表4B显示AE表现良好，LOF在15%截断达到完美识别，Iforest表现差；AE方向准确率100%，维度排名准确率70%。",
+      "rhetorical_function_cn": "提供第二种异常语义下的受控证据，并显示基准不稳定。",
+      "depends_on_cn": "合成异常设计。",
+      "sets_up_cn": "讨论中关于跨设置稳定性的结论。",
+      "evidence_pointer": "Table 4B; Table 6"
+    },
+    {
+      "order": 55,
+      "section": "Section 5.5",
+      "locator": "第一点",
+      "move_code": "RESULT",
+      "paraphrase_cn": "综合专家、数据质量和合成实验的表4A、4B、3，AE在多种设置下表现强劲，并显著优于两个基准；基准方法在不同异常语义间表现波动，印证了文献中的不稳定性，而AE在无需大调参情况下跨设置表现良好。",
+      "rhetorical_function_cn": "把分实验证据提升为跨设置稳健性主张。",
+      "depends_on_cn": "5.3与5.4的表格。",
+      "sets_up_cn": "策略含义：不应过度调参。",
+      "evidence_pointer": "Section 5.5第一点"
+    },
+    {
+      "order": 56,
+      "section": "Section 5.5",
+      "locator": "第二点",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "自编码器因三条证据被证明具有高度协同性：与加权人类决策高度相关、在两小时面板中被一致接受、与合成异常的语义定义匹配。",
+      "rhetorical_function_cn": "将协同需求总结为正式贡献。",
+      "depends_on_cn": "盲法、透明面板、合成实验。",
+      "sets_up_cn": "结论中的总体评价。",
+      "evidence_pointer": "Section 5.5第二点"
+    },
+    {
+      "order": 57,
+      "section": "Section 5.5",
+      "locator": "第三点",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "AE能识别主要异常维度和偏差方向，方向判断在本实验中全部正确，且维度反馈对低排序观察也稳定，这支持利用无监督方法获取超出顶部异常的行动信息。",
+      "rhetorical_function_cn": "把细粒度反馈结果总结为可复用设计知识。",
+      "depends_on_cn": "表5、表6。",
+      "sets_up_cn": "结论中的未来方向。",
+      "evidence_pointer": "Section 5.5第三点"
+    },
+    {
+      "order": 58,
+      "section": "Conclusion 6",
+      "locator": "P1 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "提出用自编码器支持战略决策的无监督方法，能够对相对同行的偏差提供从现状到目标状态的反馈。",
+      "rhetorical_function_cn": "在结论中重新断言核心贡献。",
+      "depends_on_cn": "全文。",
+      "sets_up_cn": "总结实证贡献。",
+      "evidence_pointer": "Section 6第一段"
+    },
+    {
+      "order": 59,
+      "section": "Conclusion 6",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "利用HR服务商的独特数据集和十名专家，观察到人类专家判断不一致且不可比，这是对该领域的第一项贡献，并强烈证明商业问题分析阶段需要支持。",
+      "rhetorical_function_cn": "把专家实验上升为独立贡献，回扣引言缺口。",
+      "depends_on_cn": "Section 4。",
+      "sets_up_cn": "总结四个验证实验。",
+      "evidence_pointer": "Section 6第二段"
+    },
+    {
+      "order": 60,
+      "section": "Conclusion 6",
+      "locator": "P3-P4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "鉴于没有单一公认评价方法，作者设计并进行了透明专家验证、盲法专家验证、数据质量分类和合成观测四个实验；结果显示方法满足检测、协同和维度反馈需求且具有通用性。",
+      "rhetorical_function_cn": "回顾客观局限并重申评价三角互证的正当性。",
+      "depends_on_cn": "四个实验的表格。",
+      "sets_up_cn": "挑战与未来研究。",
+      "evidence_pointer": "Section 6第三至四段"
+    },
+    {
+      "order": 61,
+      "section": "Conclusion 6",
+      "locator": "P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "无监督决策支持仍少有人研究；挑战包括缺乏统一的评价基准、模型鲁棒性、与高层战略对齐的系统开发、从业者对无监督方法的熟悉度；未来可加入时间维度、因果效应、扩展其他无监督算法、研究不同常态语义的泛化、并与bandit模型对比。",
+      "rhetorical_function_cn": "界定贡献边界的开放议题。",
+      "depends_on_cn": "本文方法及其限制。",
+      "sets_up_cn": "后续研究议程。",
+      "evidence_pointer": "Section 6第五段"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先以ML在操作性任务的成功为对照，把战略决策定义成'不频繁、非良构、高影响、长期'，从而制造'最重要决策最不受学习系统支持'的落差；再通过同行影响理论把问题收缩成'什么是正常'，最后指出离散异常分类不足以支撑战略反馈，从而形成从技术到应用的梯形缺口。",
+    "signposting_cn": "多次使用'我们提出三维验证'、'表2总结了四个实验对三个维度的贡献'、'在下一节验证解决方案'等路标；引言末尾给出全文结构；每个实验都有clear setup/results结构。",
+    "transition_logic_cn": "Section 4证明问题后，Section 5开头明确说'这是我们要解决的问题'；5.1到5.2从'排序是否准确'过渡到'人能否理解'；5.2的数据质量事故自然过渡到5.3；5.3后以'不稳定性'过渡到5.4合成异常；最后讨论将各表交叉汇总。",
+    "claim_evidence_rhythm_cn": "每个贡献声明前至少有一个实验表格支撑；讨论不从单一实验推出结论，而是引用多个表做三角互证；对每个结论先给'结果'再给'解释'再给'边界'。",
+    "benchmark_narrative_cn": "LOF/Iforest从一开始被定位为'只能排序、不能反馈'的基准；在盲法、数据质量、合成三个实验中重复出现，使'AE优于基准'从单次对比变成跨设置累积；同时利用基准在不同语义下的波动，反衬AE稳健。",
+    "theory_return_cn": "在讨论中把实验结果重新连接到无监督异常检测的不稳定性文献和人类决策偏差理论；结论再次回到'无监督决策支持未被充分探索'，从而把具体实验成果提升为研究方向。",
+    "contribution_positioning_cn": "贡献不是简单的'新算法性能更好'，而是'引入并验证一个满足四项战略支持需求的框架'；通过将人类不一致性作为第一个贡献，把问题验证本身也变成学术贡献。",
+    "novelty_protection_cn": "通过多实验三角验证防止被理解为一次性性能结果：既有专家集成替代真值，又有自然数据质量事件，又有受控合成异常；讨论中明确表示不主张单一语义上的最优，而是跨语义稳定性，从而避免基准在某一个实验中被反超的伤害。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立'操作型任务已被ML支持、战略型任务几乎未被支持'的落差，并定义战略决策特征。",
+        "research_job_cn": "确定一个存在同行比较且缺乏标签的决策领域，说明管理者依赖启发式和描述性统计。",
+        "required_evidence_cn": "领域文献或案例表明战略决策依赖同行常态、缺乏数据驱动支持。",
+        "transition_to_next_cn": "把问题压缩为'什么是正常'，指出离散异常分类不足。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "把'什么是正常'转化为四个设计需求：是否异常、如何异常、异常程度、人机协同。",
+        "research_job_cn": "从战略管理、人类决策心理学和异常检测文献中提取可支持这些需求的理论依据。",
+        "required_evidence_cn": "需求能回指文献，且能对应后续可测量的输出形式。",
+        "transition_to_next_cn": "说明无标签约束要求无监督方法，然后引入自编码器。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "解释自编码器为何能同时提供总体排序和逐维偏差，并说明为什么LOF/Iforest只能作为排序基准。",
+        "research_job_cn": "实现自编码器、LOF、Iforest，并固定可行的超参数。",
+        "required_evidence_cn": "AE重构误差客观上可分解到原始维度；基准方法无法提供同等的逐维方向信息。",
+        "transition_to_next_cn": "预告需要先验证问题真实存在。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计专家标注实验：选择覆盖模型分歧面和排序范围的子集，加入重复观察，并收集自评难度与相关性。",
+        "research_job_cn": "招募领域专家，收集标签、一致性和维度使用数据。",
+        "required_evidence_cn": "专家内部/外部不一致性数据和维度使用分布，证明人类无法可靠处理该任务。",
+        "transition_to_next_cn": "宣称问题成立，随后进入解决方案验证。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "构造'实验×验证维度'矩阵，使每个实验至少对一个维度有贡献；用盲法、透明面板、自然异常事件、合成异常四类证据交叉验证。",
+        "research_job_cn": "运行算法、构建专家集成、组织面板、记录数据质量事件、构造合成异常并计算指标。",
+        "required_evidence_cn": "每个评价维度至少被两个独立证据来源支持，且能看到跨语义的稳定性。",
+        "transition_to_next_cn": "汇总各表，讨论哪个性能差异来自算法机制，哪个来自数据语义。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "讨论中把局部实验提升为跨设置稳健性、协同和细粒度贡献；结论中返回引言缺口，给出挑战与未来。",
+        "research_job_cn": "识别未验证的边界（如因果关系、其他领域、长期采纳），并明确哪些是推到。",
+        "required_evidence_cn": "讨论中的每项一般性主张都能引用至少两个实验；不能只依赖单个最优结果。",
+        "transition_to_next_cn": "无。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用'哪类任务ML做得好、哪类做得差'的对比制造研究缺口",
+      "把战略问题重述为异常检测问题，并推理出离散分类不足",
+      "将'可解释/可接受'作为正式设计需求纳入评价",
+      "通过盲法/透明面板区分'系统与专家一致'和'专家理解系统'两种不同协同证据",
+      "把意外发现的数据质量问题转化为自然实验",
+      "用合成异常注入提供受控的第二种异常语义",
+      "用表2这样的实验×评价维度矩阵管理复杂验证结构"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要真实战略领域专家的标注和两小时小组会议，成本高",
+      "需要企业提供的专有HR大数据集（128820员工、1864雇主），一般研究者难以获得",
+      "自然数据质量事件是可遇不可求的意外",
+      "合成异常依赖多名专家设计'不可能/不合逻辑'扰动，无法简单复现",
+      "BI互动可视化需要特定商业软件支持"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只声称自编码器适合战略支持而不做专家标注/面板/数据质量/合成验证",
+      "不能把'与专家集成一致'说成'客观准确'，除非有第二种ground truth",
+      "不能把HR领域两个数据集上的结果直接推广到财务或文化战略",
+      "没有重复观察和多个异常语义时，不应写'人类不一致'或'方法稳健'",
+      "若只复制'自编码器+重构误差'而没有相应的可解释性证据，讨论部分的协同主张会失去支撑"
+    ],
+    "single_best_description_of_the_routine_cn": "先用专家标注实验证明人类处理战略性同伴数据不一致，再把异常检测从离散分类扩展为'整体排序+逐维方向/幅度'的自编码器支持系统，并用盲法、透明面板、数据质量事件和合成异常四种证据三角验证其排序性能、维度反馈与专家协同。"
+  },
+  "confidence": 0.72,
+  "limitations_cn": "输入为期刊预印本PDF转成的markdown，部分数学公式和图中文字信息可能有损失；论文中少量引用编号不连续（如引用[37]在正文未明确出现），可能因OCR或预印本格式导致；没有完整的附录说明，部分相关性矩阵和超参数表只能按表头理解；研究阶段划分依赖章节标题，不能完全排除隐性补充分析。",
+  "usage": {
+    "prompt_tokens": 22242,
+    "completion_tokens": 27622,
+    "total_tokens": 49864,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 18914
+  }
+}

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85192516807"
+title: "Problem Specification in Crowdsourcing Contests: A Natural Experiment"
+authors: "Ye K.; Koh T.K."
+year: "2023"
+journal: "International Conference on Information Systems, ICIS 2023: \"Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies\""
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: Problem Specification in Crowdsourcing Contests: A Natural Experiment
+Abstract: Problem specification is a key aspect in crowdsourcing contests through which seekers convey their requirements and taste for the desired submissions. Hence, it is important to understand how problem specification should be framed to achieve better crowdsourcing contest outcomes. In this empirical study, we investigate the effects of a relatively more structured problem specification on contest quantity, solver quantity, and idea quality. We leverage a natural experiment set up on a major crowdsourcing contest platform where the problem specification of logo design contests changed from open-ended to structured. Our results show that the specification change impacts both seekers and solvers. Specifically, the number of contests increases after the change but solver quantity and idea quality in the respective contests tend to be lower. We discuss the theoretical and practical contributions of this research. © 2023 International Conference on Information Systems, ICIS 2023: "Rising like a Phoenix: Emerging from the Pandemic and Reshaping Hu. All Rights Reserved.
+Author keywords: Crowdsourcing contests; problem specifications; seeker; solver behaviors
+Index keywords: Information systems; Information use; Specifications; Crowdsourcing contest; Design contests; Empirical studies; Experiment set-up; Logo design; Natural experiment; Problem specification; Seeker; Solv behavior; Structured problems; Crowdsourcing
+Document type: Conference paper
+Conference: 44th International Conference on Information Systems: Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies, ICIS 2023
+Source title: International Conference on Information Systems, ICIS 2023: "Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies"
+Year: 2023
+EID: 2-s2.0-85192516807
+DOI: 
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

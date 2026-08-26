@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+import io
+def sec(fn, start, end):
+    t = io.open(fn, encoding='utf-8').read()
+    main = t.split('## 参考文献')[0]
+    i = main.find(start); j = main.find(end, i+1) if end else len(main)
+    return main[i:j] if i>=0 else 'NOT FOUND: '+start
+print('==================== 35 第七章 ====================')
+print(sec('35_论文二_AgentShield-Anticipate_编码智能体攻击面的事前预判与预算化预置防御_v3.1.md', '## 七、', '## 八、'))

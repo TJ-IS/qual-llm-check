@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85214376711"
+title: "Eye-movement indices of reading while debugging Python source code"
+authors: "Dempsey J.; Tsiola A.; Bosch N.; Christianson K.; Stites M."
+year: "2025"
+journal: "Journal of Cognitive Psychology"
+doi: "10.1080/20445911.2024.2447117"
+---
+# Scopus title-abstract-keyword metadata
+Title: Eye-movement indices of reading while debugging Python source code
+Abstract: Unlike text reading, the eye-movement behaviours associated with reading Python, a computer programming language, are largely understudied through a psycholinguistic lens. A general understanding of the eye movements involved in reading while troubleshooting Python, and how these behaviours compare to proofreading text, is critical for developing educational interventions and interactive tools for helping programmers debug their code. These data may also highlight to what extent humans use their underlying text reading ability when reading source code. The current work provides a profile of global reading behaviours associated with reading Python source code for debugging purposes. To this end, we recorded experienced programmers’ eye movements while they determined whether 21 different Python functions would produce the desired output, an incorrect output, or an error message. Some reading behaviours seem to mirror those found in text reading (e.g. effects of stimulus complexity), while others may be specific to reading code. Results suggest that semantic errors that produce undesired outputs in programming source code may influence early stages of processing, likely due to the largely top-down strategy employed by experienced programmers when reading source code. The findings are framed to invigorate discussion and further exploration into psycholinguistic analysis of human source code reading. © 2025 Informa UK Limited, trading as Taylor & Francis Group.
+Author keywords: debugging; Eye-tracking; programming languages; python; reading
+Index keywords: adult; Article; comprehension; computer language; controlled study; eye movement; eye movement control; eye tracking; female; gaze; human; Likert scale; literacy; male; psycholinguistics; reading
+Document type: Article
+Conference: 
+Source title: Journal of Cognitive Psychology
+Year: 2025
+EID: 2-s2.0-85214376711
+DOI: 10.1080/20445911.2024.2447117
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

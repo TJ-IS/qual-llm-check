@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-86000650360"
+title: "Detecting Refactoring Commits in Machine Learning Python Projects: A Machine Learning-Based Approach"
+authors: "Noei S.; Li H.; Zou Y."
+year: "2025"
+journal: "ACM Transactions on Software Engineering and Methodology"
+doi: "10.1145/3705309"
+---
+# Scopus title-abstract-keyword metadata
+Title: Detecting Refactoring Commits in Machine Learning Python Projects: A Machine Learning-Based Approach
+Abstract: Refactoring aims to improve the quality of software without altering its functional behaviors. Understanding developers' refactoring activities is essential to improve software maintainability. The use of machine learning (ML) libraries and frameworks in software systems has significantly increased in recent years, making the maximization of their maintainability crucial. Due to the data-driven nature of ML libraries and frameworks, they often undergo a different development process compared to traditional projects. As a result, they may experience various types of refactoring, such as those related to the data. The state-of-the-art refactoring detection tools have not been tested in the ML technical domain, and they are not specifically designed to detect ML-specific refactoring types (e.g., data manipulation) in ML projects; therefore, they may not adequately find all potential refactoring operations, specifically the ML-specific refactoring operations. Furthermore, a vast number of ML libraries and frameworks are written in Python, which has limited tooling support for refactoring detection. PyRef, a rule-based and state-of-the-art tool for Python refactoring detection, can identify 11 types of refactoring operations with relatively high precision. In contrast, for other languages such as Java, state-of-the-art tools are capable of detecting a much more comprehensive list of refactorings. For example, Rminer can detect 99 types of refactoring for Java projects. Inspired by previous work that leverages commit messages to detect refactoring, we introduce MLRefScanner, a prototype tool that applies ML techniques to detect refactoring commits in ML Python projects. MLRefScanner detects commits involving both ML-specific refactoring operations and additional refactoring operations beyond the scope of state-of-the-art refactoring detection tools. To demonstrate the effectiveness of our approach, we evaluate MLRefScanner on 199 ML open source libraries and frameworks and compare MLRefScanner against other refactoring detection tools for Python projects. Our findings show that MLRefScanner outperforms existing tools in detecting refactoring-related commits, achieving an overall precision of 94% and recall of 82% for identifying refactoring-related commits. MLRefScanner can identify commits with ML-specific and additional refactoring operations compared to state-of-the-art refactoring detection tools. When combining MLRefScanner with PyRef, we can further increase the precision and recall to 95% and 99%, respectively. MLRefScanner provides a valuable contribution to the Python ML community, as it allows ML developers to detect refactoring-related commits more effectively in their ML Python projects. Our study sheds light on the promising direction of leveraging machine learning techniques to detect refactoring activities for other programming languages or technical domains where the commonly used rule-based refactoring detection approaches are not sufficient.  © 2025 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+Author keywords: Code Quality; Code Refactoring; Machine Learning; Python Refactoring; Refactoring Detection
+Index keywords: Computer software selection and evaluation; Failure rate; Fault tolerance; Java programming language; Model checking; Negative bias temperature instability; Open source software; Problem oriented languages; Reliability analysis; Code quality; Code re-factoring; Detection tools; Machine-learning; Python refactoring; Refactoring detection; Refactorings; Rule based; State of the art; Python
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Software Engineering and Methodology
+Year: 2025
+EID: 2-s2.0-86000650360
+DOI: 10.1145/3705309
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

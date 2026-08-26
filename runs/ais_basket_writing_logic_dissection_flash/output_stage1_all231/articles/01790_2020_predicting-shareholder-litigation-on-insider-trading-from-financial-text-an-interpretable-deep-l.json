@@ -1,0 +1,1337 @@
+{
+  "record_id": "1790",
+  "source_file": "01790_2020_predicting-shareholder-litigation-on-insider-trading-from-financial-text-an-interpretable-deep-l.md",
+  "title": "Predicting shareholder litigation on insider trading from financial text: An interpretable deep learning approach",
+  "authors": "Rong Liu; Feng Mai; Zhe Shan; Ying Wu",
+  "year": "2020",
+  "journal": "Information & Management",
+  "doi": "10.1016/j.im.2020.103387",
+  "fulltext_chars": 114498,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "cybersecurity_fraud_and_compliance",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:28:05.524128+00:00",
+  "article_level_summary": {
+    "central_question_cn": "能否从公司财务文本（主要为10-K年度报告）中提取信号，结合公开数值、关系与时间序列数据，对潜在的、可被股东诉讼指控的内幕交易进行事前预测，并保证模型可解释？",
+    "artifact_and_design_cn": "一个可解释的深度文本分析框架：分层注意力网络（词级和段落级）对MD&A文本建模；基于WMD文本相似度构建的业务邻近网络并用node2vec学习节点嵌入表示公司竞争环境；用WMD序列和双向GRU编码MD&A在五年内的时序变化；最后与八个财务数值变量和行业变量融合，输出下一年内幕交易诉讼概率。",
+    "objective_outcomes_cn": "在1996-2015年美国上市公司90,152个公司-年样本上，仅文本的注意力模型AUC为75.75%，加入时变和节点向量后文本模型达到76.81%，再加入数值变量后完整模型AUC为81.22%，显著高于最优数值基线神经网络（78.95%）和文本基线（平均嵌入72.51%）；十分位表显示第一十分位捕获45.63%的阳性案例。",
+    "core_contribution_cn": "作者声称：提出并评价了一个兼具预测力与可解释性的监管科技制品；证明财务文本能补充数值变量预测内幕交易；将深度学习与注意力机制融合，调和性能与可解释性的矛盾；通过业务邻近网络和时序GRU处理竞争环境与报告动态变化；为内幕交易预测这一IS研究主题提供理论与实证基础。",
+    "whole_argument_in_one_paragraph_cn": "文章从内幕交易危害和监管资源不足出发，指出现有法律执行困难、监管者只能被动等待，而非法内幕交易又缺乏从公开档案预测的工具。作者先通过行为心理学和财务文献论证内幕交易并非随机、可以从环境线索预测；再以信息操纵理论、竞争环境理论和lazy prices说明10-K文本、业务邻近关系和报告时序变化是预测信号的重要载体。基于这些理论，作者构建了一个可解释的深度文本分析框架：分层注意力同时提供状态预测和解释，WMD业务邻近网络与node2vec将竞争环境向量化，双向GRU编码五年的文本变化，并与数值财务指标融合。在1996-2015年美国上市公司90,152个公司-年数据上，通过分层五折交叉验证，完整模型取得81.22% AUC，显著超过数值和文本基线；增量消融、架构变体、误差分析表明各模块均有边际贡献且输入互补。注意力权重和LDA主题显示模型关注管理者风险披露和避责性语言，节点度和时序差异进一步支持竞争与变化机制。文章最终将结果返回理论，提出监管科技制品、方法论和IS研究新主题三类贡献，并承认代理变量和边界限制。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章从监管问题出发，将理论命题转化为三项设计决策，构建一个多重输入的可解释深度学习制品，并通过离线交叉验证、消融、配置变体、误差分析和可解释性检验进行设计评价，最后以设计知识和理论启示收束，属于设计科学研究而非单纯算法benchmark。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章先建立监管检测困难的问题，再用行为理论和信息操纵理论论证内幕交易可预测且文本可用，接着把理论要求转化为三个模型设计修改，随后用系列实验验证并解释设计，在讨论中返回理论张力与理论含义。",
+  "research_program": {
+    "study_or_phase_count": 9,
+    "overall_sequence_cn": "第一阶段建立预测目标并识别股东诉讼中的内幕交易案例；第二阶段整合四个数据库并完成文本预处理；第三阶段将理论翻译为可解释深度学习架构；第四阶段用数值和文本baseline建立性能参照；第五阶段对深度模型进行增量消融和完整模型评价；第六阶段用架构配置变体检验设计的稳健性；第七阶段用误差分析证明多源输入互补；第八阶段用注意力权重和LDA解释文本信号；第九阶段用节点度与时序差异解释竞争环境和文件变化的机制。各阶段层层递进：只有上一阶段证明某种预测信号存在或设计合理，下一阶段才进一步拆解其机制。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "预测目标与案件识别",
+        "question_cn": "哪些股东集体诉讼案件属于内幕交易指控，可作为非法内幕交易的代理变量？",
+        "inputs_and_setting_cn": "SCAC证券集体诉讼数据库，1996-2015年PSLRA之后所有案件摘要。",
+        "designed_or_compared_object_cn": "在内幕交易相关案件（正例）与非内幕交易证券案件（负例）之间建立二分类目标。",
+        "baseline_control_or_counterfactual_cn": "文章没有使用SEC执法案例，只以股东诉讼案件摘要中是否提及Section 20A或Rule 10b5-1的正则表达式匹配作为正例识别。",
+        "objective_metrics": [
+          "案件数量",
+          "firm-year正例数量",
+          "类别不平衡率"
+        ],
+        "analysis_method_cn": "正则表达式关键词匹配，按fiscal year归类。",
+        "main_result_cn": "从4,903起证券案件中识别1,151起内幕交易相关案件，最终846个firm-year正例。",
+        "argumentative_role_cn": "建立预测目标，使“非法内幕交易”能被公开可得的历史诉讼记录操作化。",
+        "remaining_uncertainty_cn": "股东诉讼代理无法覆盖SEC执法目标，可能遗漏或包含弱案件；未考虑案件严重性。",
+        "link_to_next_phase_cn": "将这一二元目标与10-K文本、Compustat和CRSP数据合并，形成建模样本。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "样本构建与文本预处理",
+        "question_cn": "如何把多元公开数据源整合为一个可用于预测建模的大规模不平衡样本？",
+        "inputs_and_setting_cn": "Compustat、CRSP、EDGAR 10-K filings、SCAC。",
+        "designed_or_compared_object_cn": "90,152个公司-年观测；每个观测是滞后一年的数值与文本特征和下一年的诉讼标签。",
+        "baseline_control_or_counterfactual_cn": "只保留CRSP覆盖、无缺失数值变量、能匹配10-K的公司。",
+        "objective_metrics": [
+          "样本量",
+          "firm-year数",
+          "正例比例",
+          "词表约45,000"
+        ],
+        "analysis_method_cn": "CIK和GVKEY关联、正则表达式抽取Item 1和Item 7、spaCy分词、词形还原、停用词、短语提取、词频过滤。",
+        "main_result_cn": "构建包含11,612家公司、90,152个公司-年、0.94%正例的数据集；文本语料来自Item 1和Item 7。",
+        "argumentative_role_cn": "实证研究的数据基础，决定了大样本和GPU扩展性需求。",
+        "remaining_uncertainty_cn": "文本预处理（如剔除表格、截断段落）可能丢失部分语义；词表过滤可能损失低频关键信号。",
+        "link_to_next_phase_cn": "预处理后的文本和数值输入进入深度学习架构设计。",
+        "evidence_pointers": [
+          "Section 4",
+          "Figure 1",
+          "Table 2"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "可解释深度学习模型设计",
+        "question_cn": "如何将理论命题转换为具有预测力且可解释的深层神经网络架构？",
+        "inputs_and_setting_cn": "预处理后的10-K文本（MD&A、业务描述）、8个数值变量、行业变量。",
+        "designed_or_compared_object_cn": "六个模块：词嵌入、词注意力、业务邻近网络节点嵌入、段落注意力、时序变化GRU、数值指标模块。",
+        "baseline_control_or_counterfactual_cn": "在设计内部，通过模块是否存在进行消融（后续检验）。",
+        "objective_metrics": [
+          "架构设计",
+          "参数维度",
+          "可解释性能力"
+        ],
+        "analysis_method_cn": "分层注意力网络、Word Mover's Distance、node2vec、双向GRU、任务导向的词向量预训练与微调。",
+        "main_result_cn": "得到完整模型架构，将词、段落、竞争环境和时序变化合并。",
+        "argumentative_role_cn": "把理论/机制转成可计算的制品设计；每个模块对应一个理论通道。",
+        "remaining_uncertainty_cn": "设计选择是否最优和模块贡献大小有待实验检验。",
+        "link_to_next_phase_cn": "设定baseline、评价指标后进行预测性能比较。",
+        "evidence_pointers": [
+          "Section 5",
+          "Figure 3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "基准模型对比",
+        "question_cn": "相对于常用文本分类和数值预测baseline，本文模型是否有竞争力？",
+        "inputs_and_setting_cn": "相同训练样本和交叉验证。",
+        "designed_or_compared_object_cn": "数值baselines：Logistic、决策树、SVM、神经网络；文本baselines：Naïve Bayes、SVM、平均嵌入、doc2vec、CNN。",
+        "baseline_control_or_counterfactual_cn": "以bag-of-words和仅数值预测模型作为最低基准。",
+        "objective_metrics": [
+          "AUC",
+          "十分位表"
+        ],
+        "analysis_method_cn": "五折交叉验证，平均测试AUC，十分位累积阳性比例。",
+        "main_result_cn": "数值NN AUC 78.95最好；文本baselines中平均嵌入72.51最优；CNN和LSTM在长文档上表现差。",
+        "argumentative_role_cn": "建立性能门槛，说明需要深度模型才能从文本中提取更多信号。",
+        "remaining_uncertainty_cn": "深度注意力模型是否超过baseline尚未回答。",
+        "link_to_next_phase_cn": "转向注意力深度模型及其增量消融。",
+        "evidence_pointers": [
+          "Section 6.2",
+          "Table 4"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "深度模型增量与完整模型评价",
+        "question_cn": "文本、时序变化、节点向量和数值变量分别对预测性能有何增量贡献？",
+        "inputs_and_setting_cn": "同一交叉验证框架。",
+        "designed_or_compared_object_cn": "模型K（仅文本）、L（+时序）、M（+节点向量）、N（+时序+节点）、O（+全部）。",
+        "baseline_control_or_counterfactual_cn": "模型K是注意力文本基线；模型D是最优数值baseline。",
+        "objective_metrics": [
+          "AUC",
+          "DeLong p-value",
+          "十分位1/2累积比率"
+        ],
+        "analysis_method_cn": "分层五折交叉验证，增量添加预测因子，DeLong检验比较ROC。",
+        "main_result_cn": "文本K AUC 75.75；L 76.19；M 75.96；N 76.81；O 81.22，显著高于D约2.27个百分点，第一十分位45.63%。",
+        "argumentative_role_cn": "证明每个设计模块对预测性能都有贡献；完整模型平衡多源信息。",
+        "remaining_uncertainty_cn": "不同架构配置是否还能更好。",
+        "link_to_next_phase_cn": "通过配置变体实验验证架构选择的稳健性。",
+        "evidence_pointers": [
+          "Table 5",
+          "Section 6.2"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "架构配置变体实验",
+        "question_cn": "节点向量与段落处理的最优整合方式是什么？",
+        "inputs_and_setting_cn": "基于Model M（文本+节点）的五个变体（M1-M5）。",
+        "designed_or_compared_object_cn": "M1节点作GRU初始状态；M2无GRU自注意力；M3 BiGRU；M4 BiGRU+节点初始；M5节点并行拼接到文档表示。",
+        "baseline_control_or_counterfactual_cn": "原始Model M作为基线。",
+        "objective_metrics": [
+          "AUC",
+          "十分位表"
+        ],
+        "analysis_method_cn": "实验配置比较，计算平均测试AUC。",
+        "main_result_cn": "原始M（75.96）最优，M5最差（71.02），说明节点向量应影响段落信息提取而不仅是最终拼接。",
+        "argumentative_role_cn": "支持架构选择的合理性，强化“竞争环境语境影响文本解读”这一设计逻辑。",
+        "remaining_uncertainty_cn": "其他模块的变体实验仅简要提及省略。",
+        "link_to_next_phase_cn": "转向误差分析以理解多源输入关系。",
+        "evidence_pointers": [
+          "Section 6.2 additional configurations",
+          "Table 6"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "误差分析与输入互补性",
+        "question_cn": "数值和文本预测器是互补还是可替代？",
+        "inputs_and_setting_cn": "Model D（最优数值）和Model N（完整文本+节点+时序）。",
+        "designed_or_compared_object_cn": "两类模型在阈值0.5下的正负例召回与误报。",
+        "baseline_control_or_counterfactual_cn": "比较两模型正确/错误分类的集合，结合合并模型性能。",
+        "objective_metrics": [
+          "正例召回百分比",
+          "负例误报百分比",
+          "Venn重叠"
+        ],
+        "analysis_method_cn": "决策阈值0.5下的召回率与错误分类分析的集合比较。",
+        "main_result_cn": "数值模型识别了部分文本模型漏掉的正例但误报更高；文本模型弥补约8%误报；合并模型最佳，证明互补。",
+        "argumentative_role_cn": "说明多输入融合不是无谓叠加，而是具有增量价值。",
+        "remaining_uncertainty_cn": "模型预测依据的内容是否理论上可解释。",
+        "link_to_next_phase_cn": "进入注意力解释分析。",
+        "evidence_pointers": [
+          "Section 6.3",
+          "Figure 4"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "注意力机制的可解释性分析",
+        "question_cn": "模型所注意的词语和段落是否与理论预期一致并能为监管提供细节？",
+        "inputs_and_setting_cn": "Model N在测试集上的注意力权重，结合Fama-French行业分类和高预测概率案例，LDA主题模型。",
+        "designed_or_compared_object_cn": "三个行业的高注意力词，高注意力段落的LDA主题分布 vs 全体MD&A主题比例，案例。",
+        "baseline_control_or_counterfactual_cn": "将高注意力段落主题混合物与整个样本的主题混合物比较。",
+        "objective_metrics": [
+          "Top 25%高注意力词",
+          "主题比例差异",
+          "案例定性支持"
+        ],
+        "analysis_method_cn": "注意力权重聚合、LDA话题推断、比较高低组主题比例。",
+        "main_result_cn": "高注意力词与管理者风险披露、不确定性、合规与裁量词一致；高注意力段落更多强调责任/监管风险、更少内部运营和合伙细节，与信息操纵理论和避责假说一致。",
+        "argumentative_role_cn": "证明模型不只是黑箱性能，其注意力确实指向符合理论的行为信号。",
+        "remaining_uncertainty_cn": "节点嵌入和时序变化的实际信号机制尚未直接展示。",
+        "link_to_next_phase_cn": "进一步分析节点向量和时序变化。",
+        "evidence_pointers": [
+          "Section 6.4",
+          "Table 7",
+          "Figure 5",
+          "Appendix A/B"
+        ]
+      },
+      {
+        "order": 9,
+        "name_cn": "节点嵌入与时序变化解释性检验",
+        "question_cn": "竞争环境和报告时序差如何具体影响内幕交易预测？",
+        "inputs_and_setting_cn": "Model N的高注意力样本与全体公司；按预测概率top decile组 vs 其余组。",
+        "designed_or_compared_object_cn": "高预测公司节点度分布；两组公司MD&A连续年度WMD相似度序列。",
+        "baseline_control_or_counterfactual_cn": "全体公司的节点度分布与全体样本的平均时变相似度作为参照。",
+        "objective_metrics": [
+          "节点度分布",
+          "WMD相似度差值",
+          "统计显著性"
+        ],
+        "analysis_method_cn": "比较分布和均值差异，t检验显著性。",
+        "main_result_cn": "高预测公司有更高节点度（更多竞争者）；top decile预测组的历年MD&A相似度显著低于其余组（约0.08-0.11差距）。",
+        "argumentative_role_cn": "将预测性能升华为机制证据：竞争压力增加风险，报告变化越大风险越高；也调和了竞争环境理论的矛盾。",
+        "remaining_uncertainty_cn": "文本相关性不等于因果；未测试个体交易者层面。",
+        "link_to_next_phase_cn": "进入讨论，连接开头的监管问题并声明贡献和边界。",
+        "evidence_pointers": [
+          "Section 6.5",
+          "Figure 6",
+          "Figure 7"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      {
+        "move": "CONTEXT",
+        "note": "内幕交易危害及监管资源受限"
+      },
+      {
+        "move": "RQ_OR_OBJECTIVE",
+        "note": "开发基于文本的机器学习框架，预测潜在机会主义内幕交易"
+      },
+      {
+        "move": "DESIGN_FEATURE",
+        "note": "注意力机制、业务邻近网络表示、时序变化"
+      },
+      {
+        "move": "RESULT",
+        "note": "经验结果提供新见解"
+      },
+      {
+        "move": "CONTRIBUTION",
+        "note": "调和性能与可解释性、为监管者提供方法"
+      }
+    ],
+    "introduction_moves": [
+      {
+        "move": "CONTEXT",
+        "note": "定义内幕交易并强调危害"
+      },
+      {
+        "move": "LIMITATION",
+        "note": "法律执行力有限、监管资源受限"
+      },
+      {
+        "move": "RQ_OR_OBJECTIVE",
+        "note": "提出机器学习预测框架"
+      },
+      {
+        "move": "LIMITATION",
+        "note": "建模挑战：多因素、上下文、动态、黑箱"
+      },
+      {
+        "move": "STUDY_OVERVIEW",
+        "note": "三项设计适应"
+      },
+      {
+        "move": "CONTRIBUTION",
+        "note": "三大贡献"
+      }
+    ],
+    "theory_and_knowledge_moves": [
+      {
+        "move": "PRIOR_KNOWLEDGE",
+        "note": "内幕交易成本与先前预测研究"
+      },
+      {
+        "move": "GAP",
+        "note": "缺乏对非法内幕交易可预测性的检验"
+      },
+      {
+        "move": "THEORY_INTRO",
+        "note": "行为心理学、信息操纵理论、竞争环境、lazy prices"
+      },
+      {
+        "move": "MECHANISM",
+        "note": "激励线索、披露质量、内控、竞争、并购、报告变化"
+      },
+      {
+        "move": "REQUIREMENT",
+        "note": "需要高维文本、动态网络、时序编码和可解释性"
+      }
+    ],
+    "artifact_design_moves": [
+      {
+        "move": "DESIGN_FEATURE",
+        "note": "嵌入层解决维度灾难"
+      },
+      {
+        "move": "DESIGN_FEATURE",
+        "note": "分层注意力生成可解释词/段表示"
+      },
+      {
+        "move": "DESIGN_FEATURE",
+        "note": "WMD业务邻近网络+node2vec"
+      },
+      {
+        "move": "DESIGN_FEATURE",
+        "note": "MD&A时序WMD+BiGRU"
+      },
+      {
+        "move": "BENCHMARK_OR_CONTRAST",
+        "note": "与bag-of-words和数值baseline对比"
+      },
+      {
+        "move": "METHOD_JUSTIFICATION",
+        "note": "AUC指标选择与十分位表"
+      }
+    ],
+    "evaluation_moves": [
+      {
+        "move": "BENCHMARK_OR_CONTRAST",
+        "note": "baseline模型建立性能参照"
+      },
+      {
+        "move": "RESULT",
+        "note": "深度模型增量与完整模型性能"
+      },
+      {
+        "move": "ROBUSTNESS_OR_BOUNDARY_TEST",
+        "note": "配置变体、误差分析"
+      },
+      {
+        "move": "RESULT",
+        "note": "注意力和网络/时序解释"
+      }
+    ],
+    "discussion_and_contribution_moves": [
+      {
+        "move": "PRACTICAL_STAKES",
+        "note": "Equifax案例重新连接监管问题"
+      },
+      {
+        "move": "CONTRIBUTION",
+        "note": "设计科学制品、方法论、理论"
+      },
+      {
+        "move": "THEORY_PROPOSITION",
+        "note": "威慑效应通过提高查处确定性"
+      },
+      {
+        "move": "BOUNDARY_CONDITION",
+        "note": "代理变量、企业层面、数据源、模型更新"
+      },
+      {
+        "move": "LIMITATION_AND_FUTURE",
+        "note": "未来扩展方向"
+      }
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "行为心理学不道德行为可预测性",
+      "信息操纵理论",
+      "竞争环境与内幕交易文献",
+      "lazy prices/报告变化文献",
+      "文本挖掘与金融欺诈预测文献",
+      "监管可解释性需求"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "理论不是事后包装；作者在Section 3明确从理论推导出需要高维文本、动态竞争网络和时序变化，并在Section 5将这些要求直接转化为具体模块，之后通过增量消融和可解释性分析评价。",
+    "translation_chain_cn": "机会主义内幕交易可预测（行为心理学）→ 环境线索存在于财务文本与市场数据 → 需要高维文本表示而不是聚合语气 → 端到端深度学习和MD&A文本 → 信息操纵理论指出披露选择会揭示/隐藏 → 需要局部词和段落权重 → 分层注意力 → 竞争环境理论存在对立预测 → 需要动态企业间关系表示 → WMD业务邻近网络和node2vec → lazy prices表明报告变动有信息 → 需要时间序列编码 → WMD序列和BiGRU → 监管决策要求解释 → 注意力权重和LDA可解释性分析。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "信息操纵理论认为机会主义内部人倾向通过选择性披露和包装维持信息优势（McCornack, 1992）。",
+        "mechanism_cn": "管理者在文本中会用风险词、不确定性词和裁量词来‘揭示或隐藏’，整体情感会把正负信号抵消。",
+        "design_requirement_cn": "需要能保留高维、局部语义的模型，而不是聚合语气特征。",
+        "artifact_choice_cn": "端到端深度模型直接从原始词嵌入学习；选择MD&A文本；分层注意力提取关键词与段落。",
+        "evaluated_contrast_cn": "文本注意力模型 vs 词袋/平均嵌入baseline；高注意力段落 vs 全体段落主题比例。",
+        "objective_result_cn": "文本模型AUC 75.75%，优于Naïve Bayes/SVM；高注意力词与风险词/裁量词对应；LDA高注意力段落更强调责任/监管风险，少内部运营细节。",
+        "evidence_pointers": [
+          "Section 3.2 P1",
+          "Table 5 Model K",
+          "Table 7",
+          "Figure 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "公司竞争环境会影响内幕交易：同行监控可能抑制，复杂环境与并购可能创造机会。",
+        "mechanism_cn": "竞争者的存在影响信息不对称、分析师关注和并购事件频率，从而改变内部人交易动机。",
+        "design_requirement_cn": "需要以企业而非行业代码的方式动态表示竞争关系。",
+        "artifact_choice_cn": "用10-K业务描述和WMD相似度构建业务邻近网络，node2vec学习节点嵌入。",
+        "evaluated_contrast_cn": "文本模型加/不加节点向量的增量比较；高注意力公司 vs 全体公司的节点度。",
+        "objective_result_cn": "加入节点向量后AUC从75.75升至75.96（文本+节点）；高预测公司节点度更高。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Table 5 Model M",
+          "Figure 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Lazy prices：10-K文件变化预测未来盈利、新闻和内部人出售。",
+        "mechanism_cn": "投资者对报告变化消化滞后，内部人掌握变化原因，因而报告变动大小与内部交易相关。",
+        "design_requirement_cn": "需要编码公司自身报告的历时时序变化。",
+        "artifact_choice_cn": "连续年份MD&A的WMD距离序列，经双向GRU编码，窗口五年。",
+        "evaluated_contrast_cn": "文本模型加/不加时序变化的增量；预测高组 vs 其余组的MD&A相似度序列。",
+        "objective_result_cn": "加入时序后AUC达到76.19；高预测组的历年相似度显著低约0.08-0.11。",
+        "evidence_pointers": [
+          "Section 5.5",
+          "Table 5 Model L",
+          "Figure 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "行为和实验研究表明不道德行为可由环境线索预测。",
+        "mechanism_cn": "外部/内部奖励、惩罚概率、不诚实显著性等线索会引致或抑制内幕交易。",
+        "design_requirement_cn": "需要从历史公开档案中学习风险概率。",
+        "artifact_choice_cn": "以股东诉讼指控为代理，用滞后一年的公开文本与数值数据做预测任务。",
+        "evaluated_contrast_cn": "模型AUC是否显著高于随机/基线。",
+        "objective_result_cn": "完整模型AUC 81.22，远高于0.5并超过最优基线。",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Table 5 Model O"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "监管与组织接受研究显示，可解释性是文本挖掘系统被组织采纳的关键前提。",
+        "mechanism_cn": "决策者需要理解预测依据，尤其执法机构必须为自己的行动辩护。",
+        "design_requirement_cn": "模型需要性能与可解释性兼得。",
+        "artifact_choice_cn": "分层注意力机制在词和段落层面提供上下文权重；节点向量也获得注意力权重。",
+        "evaluated_contrast_cn": "注意力权重是否指向理论一致词语/主题；案例可说明具体预测。",
+        "objective_result_cn": "注意力词与理论一致；LDA和案例均支持可解释性。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Section 5.4",
+          "Section 6.4",
+          "Appendix A"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "金融文本（10-K）已显示能预测信用风险和财务舞弊，但简单文本特征利用不足。",
+        "mechanism_cn": "文本包含数值缺失的软信息，MD&A自由度高、反映管理意图。",
+        "design_requirement_cn": "需要大规模端到端文本建模以捕捉深层语义。",
+        "artifact_choice_cn": "结合10-K的Item 1和Item 7，使用端到端深度学习。",
+        "evaluated_contrast_cn": "文本模型 vs 数值模型；融合模型 vs 单源模型；误差重叠分析。",
+        "objective_result_cn": "文本模型AUC 75.75-76.81；数值模型78.95；融合模型81.22且误差互补。",
+        "evidence_pointers": [
+          "Section 4.3",
+          "Table 5",
+          "Figure 4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "离线历史数据预测性能评价",
+      "分层五折交叉验证",
+      "AUC和十分位表评价",
+      "增量消融评价",
+      "架构变体稳健性检验",
+      "误差互补性分析",
+      "注意力可解释性分析",
+      "理论一致性检验（LDA/节点度/时序差）"
+    ],
+    "why_these_evaluations_cn": "因为目标是建立可解释、可预测、可扩展的监管决策工具；单一性能指标不足以判断设计是否每一项都有贡献，也需要解释模型是否以符合理论的方式使用文本。",
+    "benchmark_and_contrast_chain_cn": "先由数值和文本baselines设定性能下界；再通过深度模型逐模块增量叠加证明每个设计特征的边际价值；再通过配置变体排除可选架构；再通过误差分析证明多源互补；最后用注意力、LDA、网络指标和时变差异把性能优势转译为理论可解释信号。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "端到端深度学习模型优于文本基线",
+        "evidence_cn": "表4/5；模型K vs E/F，AUC 75.75% vs 70.38%/70.80%；DeLong检验",
+        "strength_cn": "强（有交叉验证和统计检验）"
+      },
+      {
+        "claim_cn": "每个模块有增量贡献",
+        "evidence_cn": "表5模型K/L/M/N/O逐步增加；表6配置实验排除替代",
+        "strength_cn": "中强（增量幅度较小，其中节点向量单独增量仅0.21个百分点）"
+      },
+      {
+        "claim_cn": "高注意力词语体现信息操纵理论",
+        "evidence_cn": "表7和figure5的LDA主题差异",
+        "strength_cn": "中（解释性证据，而非因果证据）"
+      },
+      {
+        "claim_cn": "竞争环境重要，且高预测公司竞争更多",
+        "evidence_cn": "Model M vs K增量；figure6节点度差异显著",
+        "strength_cn": "中（注意力权重与预测概率共变）"
+      },
+      {
+        "claim_cn": "时序变化重要，报告变动预测内幕交易",
+        "evidence_cn": "Model L vs K增量；figure7年度相似度差异显著",
+        "strength_cn": "中强（统计显著）"
+      },
+      {
+        "claim_cn": "实践可部署和威慑",
+        "evidence_cn": "AUC/十分位表（决策支持）；Becker理论（推理）",
+        "strength_cn": "弱（没有现场试验）"
+      }
+    ],
+    "internal_validity_strategy_cn": "分层五折交叉验证、DeLong显著性检验、对照组（baseline、无模块变体）、统一数据划分、类权重和正则化控制过拟合。",
+    "external_validity_strategy_cn": "使用1996-2015年美国全部上市公司的10-K与公开诉讼数据，覆盖多种行业；结果与已有行为/财务文献可衔接。",
+    "what_is_not_actually_tested_cn": "SEC执法案件未被纳入目标；未检验案件严重性；未进行真实监管机构试用；未对个体层面内幕交易者建模；模型对新语料的适应仅作为未来方向。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "端到端可解释深度学习框架在90,152公司-年上AUC 81.22%，优于数值和文本baselines。",
+    "artifact_claim_cn": "注意力、业务邻近网络、时序变化和数值输入四个模块各有增量贡献；node vector必须参与段落处理而非仅拼接才有效。",
+    "mechanism_claim_cn": "高注意力词/主题显示管理者在披露中平衡“revealing”与“concealing”；竞争高度相关的公司更易被预测；MD&A变化越大风险越高。",
+    "boundary_claim_cn": "基于美国上市公司1996-2015年公开数据；代理变量是股东诉讼而非SEC执法；未来需fine-tune以适应语料变化。",
+    "reusable_design_knowledge_cn": "监管预测任务应优先考虑可解释性；文本维度需要高维表示；竞争环境可用文本网络表示；文档时序变化需要显式编码；多个输入要允许交互而非后融合。",
+    "theoretical_contribution_cn": "为内幕交易可预测性提供大样本证据；信息操纵理论在文本注意力中的体现；调和竞争环境抑制/促进内幕交易的对立观点；扩展lazy prices观察到内幕交易。",
+    "how_discussion_closes_intro_gap_cn": "开头指出监管者被动等待、资源受限；讨论通过Equifax案例重新唤起该问题，把预测模型表述为主动监测、威慑和发现其他舞弊的工具，并强调公开数据和解释性，使贡献回到监管情境。",
+    "overclaim_or_unsupported_leaps_cn": "把股东诉讼指控近似为“非法内幕交易”存在构造效度风险；将模型注意力与理论一致性当作机制证据可能过度（attention是否因果性解释仍存疑）；从离线AUC跃迁到“威慑效果”和“实际监管有效性”缺乏现场检验。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "定义内幕交易：基于重大、非公开信息的公司证券交易。",
+      "rhetorical_function_cn": "界定研究对象的边界。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续论述其危害作铺垫。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "内幕交易严重损害市场公平，可能导致投资者信心下降、资本成本上升、创新受阻和金融不稳定。",
+      "rhetorical_function_cn": "建立严重后果，说明为何需要监管工具。",
+      "depends_on_cn": "前句内幕交易定义",
+      "sets_up_cn": "凸显法律和监管的必要性。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 3,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "尽管多国有法律，但起诉和定罪困难；只有少数国家真正起诉过。",
+      "rhetorical_function_cn": "指出法律执行不足，与危害形成张力。",
+      "depends_on_cn": "内幕交易危害",
+      "sets_up_cn": "监管者在现行制度下难以发挥作用。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "监管机构如SEC资源严重受限，依赖人员判断选择案件。",
+      "rhetorical_function_cn": "说明问题的结构性原因：资源约束。",
+      "depends_on_cn": "执行困难",
+      "sets_up_cn": "需要数据驱动的预测工具来分配资源。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "文章提出用机器学习从历史数据学习，预测未来内幕交易违规概率。",
+      "rhetorical_function_cn": "正式提出研究目标。",
+      "depends_on_cn": "监管困境",
+      "sets_up_cn": "后续模型构建。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P3 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "当前监管者只能被动等待举报或大额可疑交易，而预测模型能让监管者主动监督。",
+      "rhetorical_function_cn": "解释预测模型的实践价值。",
+      "depends_on_cn": "主动预测目标",
+      "sets_up_cn": "解释为什么是IS相关重大问题。",
+      "evidence_pointer": "Introduction P3 S4"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "构建预测模型困难：因素多样，难以仅靠数值信息捕捉；是否可预测是开放问题。",
+      "rhetorical_function_cn": "指出技术挑战与认识论问题。",
+      "depends_on_cn": "预测模型目标",
+      "sets_up_cn": "需要文本等新数据源。",
+      "evidence_pointer": "Introduction P4 S1-S2"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P4 S4-S6",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "模型需要纳入竞争环境和历史报告变化，并捕获动态关系。",
+      "rhetorical_function_cn": "将环境与时间维度转成建模要求。",
+      "depends_on_cn": "挑战描述",
+      "sets_up_cn": "后文三项设计调整。",
+      "evidence_pointer": "Introduction P4 S4-S6"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P4 S7",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "监管机构要求模型可解释，不能是黑箱。",
+      "rhetorical_function_cn": "增加可解释性要求。",
+      "depends_on_cn": "监管背景",
+      "sets_up_cn": "注意力机制设计。",
+      "evidence_pointer": "Introduction P4 S7"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出用10-K年度报告语料自动提取模式并进行预测。",
+      "rhetorical_function_cn": "明确数据源和方法方向。",
+      "depends_on_cn": "要求",
+      "sets_up_cn": "后续模型细节与benchmark。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P5 S5",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "文章将比较多个baseline，展示深度学习模型的样本外优势。",
+      "rhetorical_function_cn": "预告评价方式。",
+      "depends_on_cn": "研究目标",
+      "sets_up_cn": "结果部分基线比较。",
+      "evidence_pointer": "Introduction P5 S5"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者把模型设计映射到问题逻辑，做了三个适应性修改。",
+      "rhetorical_function_cn": "预告设计的三条主线。",
+      "depends_on_cn": "挑战",
+      "sets_up_cn": "三个模块介绍。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P6 S2-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第一，加分层注意力机制，自动给词和段落分配上下文权重，使模型可解释。",
+      "rhetorical_function_cn": "解释为什么需要注意力。",
+      "depends_on_cn": "可解释性要求",
+      "sets_up_cn": "5.2和5.4注意力层。",
+      "evidence_pointer": "Introduction P6 S2-S3"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P6 S5-S7",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第二，用图方法表示公司动态竞争环境：WMD文本相似度构建业务邻近网络，再用神经网络得到低维节点向量。",
+      "rhetorical_function_cn": "把竞争环境理论转为网络表示。",
+      "depends_on_cn": "竞争环境要求",
+      "sets_up_cn": "5.3模块C。",
+      "evidence_pointer": "Introduction P6 S5-S7"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P6 S8-S10",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第三，用GRU编码公司财务报告历史的时序变化。",
+      "rhetorical_function_cn": "把lazy prices主张转成时序模型。",
+      "depends_on_cn": "历史报告变化要求",
+      "sets_up_cn": "5.5模块E。",
+      "evidence_pointer": "Introduction P6 S8-S10"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P7 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献一：为市场监管者提供预测工具，表明文本披露包含数量变量缺失的信息。",
+      "rhetorical_function_cn": "定位第一类学术贡献。",
+      "depends_on_cn": "三个设计",
+      "sets_up_cn": "用文本预测非法行为的可行性。",
+      "evidence_pointer": "Introduction P7 S1-S2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P8 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献二：提出注意力深度学习整合文本、数值和关系数据，平衡性能与可解释性。",
+      "rhetorical_function_cn": "强调方法论贡献。",
+      "depends_on_cn": "三个设计",
+      "sets_up_cn": "IS方法论讨论。",
+      "evidence_pointer": "Introduction P8 S1-S2"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P9 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献三：证明内幕交易预测是重要且可行的IS话题，应从公开数据中可预测。",
+      "rhetorical_function_cn": "将话题推向IS学科。",
+      "depends_on_cn": "整篇研究",
+      "sets_up_cn": "文献与理论部分。",
+      "evidence_pointer": "Introduction P9 S1-S2"
+    },
+    {
+      "order": 19,
+      "section": "Background and Related Work",
+      "locator": "2.1 P2 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有研究主要关注内幕交易活动的变因，很少检验非法内幕交易的可预测性。",
+      "rhetorical_function_cn": "指出文献缺口。",
+      "depends_on_cn": "前文内幕交易成本综述",
+      "sets_up_cn": "本文以预测为目标。",
+      "evidence_pointer": "Section 2.1 P2 S4"
+    },
+    {
+      "order": 20,
+      "section": "Background and Related Work",
+      "locator": "2.1 P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究用股东诉讼作为代理，提供非法内幕交易可预测性的证据，而不是用事后交易记录识别。",
+      "rhetorical_function_cn": "说明研究切入角度。",
+      "depends_on_cn": "前句缺口",
+      "sets_up_cn": "预测目标的合理性。",
+      "evidence_pointer": "Section 2.1 P3 S1"
+    },
+    {
+      "order": 21,
+      "section": "Background and Related Work",
+      "locator": "2.2 P2 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "与已有欺诈检测研究相比，本文设计更大样本、端到端模型、并纳入关系数据。",
+      "rhetorical_function_cn": "在文献中区分自己的方法。",
+      "depends_on_cn": "欺诈检测文献",
+      "sets_up_cn": "模型设计选择。",
+      "evidence_pointer": "Section 2.2 P2 S1-S3"
+    },
+    {
+      "order": 22,
+      "section": "Background and Related Work",
+      "locator": "2.3 P1 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "先前文本分析依赖词数、情感和可读性等简单摘要，信息利用不足。",
+      "rhetorical_function_cn": "指出技术局限。",
+      "depends_on_cn": "文本披露重要性",
+      "sets_up_cn": "引入深度学习。",
+      "evidence_pointer": "Section 2.3 P1 S3"
+    },
+    {
+      "order": 23,
+      "section": "Background and Related Work",
+      "locator": "2.3 P3 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "深度模型因黑箱而受到批评，尤其在执法和金融等领域需要解释。",
+      "rhetorical_function_cn": "引出文章核心方法挑战。",
+      "depends_on_cn": "深度学习方法综述",
+      "sets_up_cn": "注意力机制设计。",
+      "evidence_pointer": "Section 2.3 P3 S3"
+    },
+    {
+      "order": 24,
+      "section": "Theoretical Foundation",
+      "locator": "3.1 P1 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者先回答“为什么内幕交易可预测”这一前提问题。",
+      "rhetorical_function_cn": "在方法细节前建立理论合法性。",
+      "depends_on_cn": "文献缺口",
+      "sets_up_cn": "行为与财务理论。",
+      "evidence_pointer": "Section 3.1 P1 S1"
+    },
+    {
+      "order": 25,
+      "section": "Theoretical Foundation",
+      "locator": "3.1 P1 S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "行为实验显示不道德行为不是随机，环境线索可预测不诚实行为。",
+      "rhetorical_function_cn": "用行为心理学支持可预测性前提。",
+      "depends_on_cn": "前提问题",
+      "sets_up_cn": "进一步论证公司层面线索。",
+      "evidence_pointer": "Section 3.1 P1 S3"
+    },
+    {
+      "order": 26,
+      "section": "Theoretical Foundation",
+      "locator": "3.1 P2 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "具体的预测机制包括：财务文件中的激励线索、披露质量预示后续交易、内控弱点、公司文化、破产等重大事件前的交易。",
+      "rhetorical_function_cn": "建立从文本到内幕交易行为的因果/相关链。",
+      "depends_on_cn": "可预测性理论",
+      "sets_up_cn": "选择10-K文本与MD&A。",
+      "evidence_pointer": "Section 3.1 P2 S1-S4"
+    },
+    {
+      "order": 27,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P1 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "信息操纵理论认为机会主义内部人为了维持信息优势而操纵披露，使投资者产生错误推断。",
+      "rhetorical_function_cn": "引入核心文本理论，解释为什么要用原始文本而非聚合语气。",
+      "depends_on_cn": "可预测性论证",
+      "sets_up_cn": "深度学习适合高维文本。",
+      "evidence_pointer": "Section 3.2 P1 S2"
+    },
+    {
+      "order": 28,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P1 S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "聚合变量如整体情感维度太低，会抵消主题间的正负信号；深度学习可从原始文本学习新表征来同时识别两种效应。",
+      "rhetorical_function_cn": "将理论转为模型需求。",
+      "depends_on_cn": "信息操纵理论",
+      "sets_up_cn": "端到端深度学习设计。",
+      "evidence_pointer": "Section 3.2 P1 S4"
+    },
+    {
+      "order": 29,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P2 S1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "MD&A可贡献预测力：提供管理层的前瞻视角、符合投资者有限注意、管理者在文本上自由度高。",
+      "rhetorical_function_cn": "论证选择MD&A的合理性。",
+      "depends_on_cn": "文本有用性理论",
+      "sets_up_cn": "文本预处理与特征选择。",
+      "evidence_pointer": "Section 3.2 P2 S1"
+    },
+    {
+      "order": 30,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P3 S1-S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "业务描述段落能够捕捉公司竞争环境，而竞争既可抑制也可促进内幕交易。",
+      "rhetorical_function_cn": "引入竞争环境理论并承认张力。",
+      "depends_on_cn": "环境作为预测因素",
+      "sets_up_cn": "业务邻近网络设计。",
+      "evidence_pointer": "Section 3.2 P3 S1-S2"
+    },
+    {
+      "order": 31,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P3 S4-S5",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "复杂和竞争环境可能因预防措施失效或并购前信息优势而创造内幕交易机会。",
+      "rhetorical_function_cn": "解释竞争为何可能增加违规。",
+      "depends_on_cn": "竞争环境理论",
+      "sets_up_cn": "节点向量用于预测。",
+      "evidence_pointer": "Section 3.2 P3 S4-S5"
+    },
+    {
+      "order": 32,
+      "section": "Theoretical Foundation",
+      "locator": "3.2 P4 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "Cohen等人的lazy prices现象表明10-K变动能够预测未来盈利、新闻和最重要的内部人卖出。",
+      "rhetorical_function_cn": "论证报告时序变化的价值。",
+      "depends_on_cn": "文本时间维度",
+      "sets_up_cn": "时序GRU模块设计。",
+      "evidence_pointer": "Section 3.2 P4 S1"
+    },
+    {
+      "order": 33,
+      "section": "Data and Preprocessing",
+      "locator": "4 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "数据库由四类来源合并而成，覆盖1996-2015所有上市公司。",
+      "rhetorical_function_cn": "说明数据来源和覆盖范围。",
+      "depends_on_cn": "研究问题",
+      "sets_up_cn": "具体变量构造。",
+      "evidence_pointer": "Section 4 P1 S1"
+    },
+    {
+      "order": 34,
+      "section": "Data and Preprocessing",
+      "locator": "4.1 P2 S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用正则表达式在案件摘要中搜索Section 20A或Rule 10b5-1以标注内幕交易相关案件。",
+      "rhetorical_function_cn": "解释代理变量的可操作化。",
+      "depends_on_cn": "提出预测目标",
+      "sets_up_cn": "样本正例生成。",
+      "evidence_pointer": "Section 4.1 P2 S2"
+    },
+    {
+      "order": 35,
+      "section": "Data and Preprocessing",
+      "locator": "4.1 P3 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "作者承认股东诉讼代理不完美，但有意不使用SEC执法案例，以提供不同于执法历史的补充支持。",
+      "rhetorical_function_cn": "限定代理变量的适用范围。",
+      "depends_on_cn": "目标构念",
+      "sets_up_cn": "分析解释时避免过度声称。",
+      "evidence_pointer": "Section 4.1 P3 S1"
+    },
+    {
+      "order": 36,
+      "section": "Data and Preprocessing",
+      "locator": "4.3 P2 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "模型聚焦Item 1业务描述和Item 7 MD&A，分别服务于竞争网络、文本语义和时序变化三个目的。",
+      "rhetorical_function_cn": "将文本源分配到理论机制。",
+      "depends_on_cn": "理论选择",
+      "sets_up_cn": "文本预处理和各模块。",
+      "evidence_pointer": "Section 4.3 P2 S1"
+    },
+    {
+      "order": 37,
+      "section": "Method",
+      "locator": "5.1 P1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "词嵌入层把词表示为100维稠密向量，解决词袋维度灾难并利用语义。",
+      "rhetorical_function_cn": "说明深度学习的第一层设计。",
+      "depends_on_cn": "需要对原始文本建模",
+      "sets_up_cn": "注意力层建立在嵌入上。",
+      "evidence_pointer": "Section 5.1 P1 S1"
+    },
+    {
+      "order": 38,
+      "section": "Method",
+      "locator": "5.2 P2 S1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "注意力机制允许特征权重随上下文改变，从而动态聚焦最相关的词。",
+      "rhetorical_function_cn": "解释注意力如何超越固定词权重。",
+      "depends_on_cn": "可解释性与性能目标",
+      "sets_up_cn": "分层注意力结构。",
+      "evidence_pointer": "Section 5.2 P2 S1"
+    },
+    {
+      "order": 39,
+      "section": "Method",
+      "locator": "5.2 P4 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "MD&A太长（约200段8000词），因此将文档拆成40个段落块，截断/补齐到统一长度。",
+      "rhetorical_function_cn": "解决RNN处理长序列的工程困难。",
+      "depends_on_cn": "底层网络限制",
+      "sets_up_cn": "段落注意力层。",
+      "evidence_pointer": "Section 5.2 P4 S1"
+    },
+    {
+      "order": 40,
+      "section": "Method",
+      "locator": "5.3 P1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "每年用10-K业务描述构建业务邻近网络，以描述公司间产品、市场和技术重叠。",
+      "rhetorical_function_cn": "把竞争环境定义为网络位置。",
+      "depends_on_cn": "竞争环境理论",
+      "sets_up_cn": "node2vec节点嵌入。",
+      "evidence_pointer": "Section 5.3 P1 S1"
+    },
+    {
+      "order": 41,
+      "section": "Method",
+      "locator": "5.3 P3 S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "与余弦相似度和主题建模相比，WMD方法更稳健地处理同义词，并自然融入深度学习框架。",
+      "rhetorical_function_cn": "为选择WMD提供理由。",
+      "depends_on_cn": "网络构建",
+      "sets_up_cn": "节点嵌入质量论证。",
+      "evidence_pointer": "Section 5.3 P3 S2"
+    },
+    {
+      "order": 42,
+      "section": "Method",
+      "locator": "5.4 P1 S3-S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "文档表示由GRU按顺序处理节点向量作为“前言”后接段落，以模拟读者先了解整体背景再逐个理解段落的过程。",
+      "rhetorical_function_cn": "解释竞争语境如何影响文本理解。",
+      "depends_on_cn": "节点向量和段落表示",
+      "sets_up_cn": "段落注意力层在GRU之后。",
+      "evidence_pointer": "Section 5.4 P1 S3-S4"
+    },
+    {
+      "order": 43,
+      "section": "Method",
+      "locator": "5.5 P1 S1-S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "时序变化用连续年份MD&A的WMD距离序列表示，并用双向GRU编码，窗口设为五年。",
+      "rhetorical_function_cn": "实现lazy prices的建模。",
+      "depends_on_cn": "时序变化理论",
+      "sets_up_cn": "与文档表示拼接后进入稠密层。",
+      "evidence_pointer": "Section 5.5 P1 S1-S2"
+    },
+    {
+      "order": 44,
+      "section": "Method",
+      "locator": "5.7 P1 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "将注意力深度学习模型与多个词袋文本baseline和仅数值模型对比。",
+      "rhetorical_function_cn": "建立评价参照系。",
+      "depends_on_cn": "模型设计",
+      "sets_up_cn": "结果部分性能比较。",
+      "evidence_pointer": "Section 5.7 P1 S1"
+    },
+    {
+      "order": 45,
+      "section": "Method",
+      "locator": "5.7 P4 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "排除kNN、决策树和逻辑回归等baseline，因为它们在词袋或长文档上过拟合或距离失效。",
+      "rhetorical_function_cn": "保证baseline比较公平。",
+      "depends_on_cn": "baseline选择",
+      "sets_up_cn": "最终选用NB和SVM及嵌入类模型。",
+      "evidence_pointer": "Section 5.7 P4 S1"
+    },
+    {
+      "order": 46,
+      "section": "Empirical Results",
+      "locator": "6.1 P2 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "因正例稀少且监管者认为漏报成本高于误报，使用准确实率有偏，故用AUC评价模型整体区分能力并配十分位表。",
+      "rhetorical_function_cn": "为指标选择提供监管合理性。",
+      "depends_on_cn": "不平衡样本",
+      "sets_up_cn": "结果报告。",
+      "evidence_pointer": "Section 6.1 P2 S1-S4"
+    },
+    {
+      "order": 47,
+      "section": "Empirical Results",
+      "locator": "6.2 P1 S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "数值baseline中神经网络最好，AUC 78.95%。",
+      "rhetorical_function_cn": "建立数值预测性能上限。",
+      "depends_on_cn": "数值特征构造和baseline实验",
+      "sets_up_cn": "与文本和融合模型比较。",
+      "evidence_pointer": "Table 4 Panel A"
+    },
+    {
+      "order": 48,
+      "section": "Empirical Results",
+      "locator": "6.2 P2 S2-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "文本baseline中平均嵌入模型AUC 72.51最优，doc2vec和CNN较差；LSTM长序列效果差。",
+      "rhetorical_function_cn": "说明简单嵌入和序列模型不能充分利用长文本。",
+      "depends_on_cn": "文本baseline实验",
+      "sets_up_cn": "需要注意力深度模型。",
+      "evidence_pointer": "Table 4 Panel B"
+    },
+    {
+      "order": 49,
+      "section": "Empirical Results",
+      "locator": "6.2 P3 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "仅文本的注意力模型AUC 75.75，比朴素贝叶斯和SVM高约5%。",
+      "rhetorical_function_cn": "证明注意力深度模型在文本预测上的优势。",
+      "depends_on_cn": "baseline结果",
+      "sets_up_cn": "继续加入其他输入。",
+      "evidence_pointer": "Table 5 Model K"
+    },
+    {
+      "order": 50,
+      "section": "Empirical Results",
+      "locator": "6.2 P4 S1-S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "加入时序变化和节点向量分别提升AUC；加入数值后完整模型AUC 81.22，显著高于数值baseline约2.27个百分点。",
+      "rhetorical_function_cn": "验证每个设计模块的边际贡献和整体性能。",
+      "depends_on_cn": "增量消融实验",
+      "sets_up_cn": "配置变体检验。",
+      "evidence_pointer": "Table 5 Model L/M/N/O and DeLong test"
+    },
+    {
+      "order": 51,
+      "section": "Empirical Results",
+      "locator": "6.2 P5 S1-S8",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "对节点向量如何整合进段落处理的多种配置M1-M5进行测试，原配置最优而M5最差，说明节点向量应参与段落信息提取。",
+      "rhetorical_function_cn": "排除替代架构，强化设计理由。",
+      "depends_on_cn": "模型N结果",
+      "sets_up_cn": "可以认为架构合理。",
+      "evidence_pointer": "Table 6"
+    },
+    {
+      "order": 52,
+      "section": "Empirical Results",
+      "locator": "6.3 P1 S1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "通过错误分析判断数值和文本预测器是互补还是替代。",
+      "rhetorical_function_cn": "补充证据说明多输入融合价值。",
+      "depends_on_cn": "完整模型性能",
+      "sets_up_cn": "误差分析图。",
+      "evidence_pointer": "Section 6.3 P1"
+    },
+    {
+      "order": 53,
+      "section": "Empirical Results",
+      "locator": "6.3 P3 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "文本模型减少数值模型约8%的负例误报，且两者各自识别对方错过的正例，因此互补。",
+      "rhetorical_function_cn": "证明多源数据不是冗余叠加。",
+      "depends_on_cn": "误差分析",
+      "sets_up_cn": "转至可解释性。",
+      "evidence_pointer": "Figure 4"
+    },
+    {
+      "order": 54,
+      "section": "Empirical Results",
+      "locator": "6.4 P1 S1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "在训练后提取注意力权重，以理解单个样本预测如何形成。",
+      "rhetorical_function_cn": "从预测性能转向可解释性。",
+      "depends_on_cn": "性能结果",
+      "sets_up_cn": "行业词和主题分析。",
+      "evidence_pointer": "Section 6.4 P1"
+    },
+    {
+      "order": 55,
+      "section": "Empirical Results",
+      "locator": "6.4 P3 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高注意力词系统性地包括负面/不确定词和合规/裁量词，与管理者在披露中平衡揭示与隐藏的理论假设一致。",
+      "rhetorical_function_cn": "将注意力证据连接信息操纵理论。",
+      "depends_on_cn": "注意力提取",
+      "sets_up_cn": "行业差异和LDA分析。",
+      "evidence_pointer": "Table 7"
+    },
+    {
+      "order": 56,
+      "section": "Empirical Results",
+      "locator": "6.4 P5 S4-S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "LDA显示高注意力段落更强调责任和监管风险，更少涉及内部运营和合伙细节，支持信息操纵理论和避责假说。",
+      "rhetorical_function_cn": "在话题层面验证文本信号。",
+      "depends_on_cn": "LDA分析",
+      "sets_up_cn": "说明模型可解释性为监管提供细节。",
+      "evidence_pointer": "Figure 5"
+    },
+    {
+      "order": 57,
+      "section": "Empirical Results",
+      "locator": "6.5 P1 S3-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高预测概率公司的节点度显著高于平均公司，表明竞争更激烈的公司值得监管关注。",
+      "rhetorical_function_cn": "把节点嵌入的注意力转化为竞争环境机制证据。",
+      "depends_on_cn": "节点向量注意力",
+      "sets_up_cn": "调和对立竞争理论。",
+      "evidence_pointer": "Figure 6"
+    },
+    {
+      "order": 58,
+      "section": "Empirical Results",
+      "locator": "6.5 P2 S3-S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "预测概率高组的MD&A历年相似度显著更低，表明报告变化大的公司更可能发生内幕交易。",
+      "rhetorical_function_cn": "用时序差异验证lazy prices机制。",
+      "depends_on_cn": "时序变化GRU",
+      "sets_up_cn": "讨论理论贡献。",
+      "evidence_pointer": "Figure 7"
+    },
+    {
+      "order": 59,
+      "section": "Discussion and Conclusion",
+      "locator": "7 P1 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "以Equifax事件说明内幕交易发生但监管机构因资源有限而难追责。",
+      "rhetorical_function_cn": "重新连接开头的监管问题。",
+      "depends_on_cn": "整个研究结论",
+      "sets_up_cn": "总结发现和贡献。",
+      "evidence_pointer": "Section 7 P1 S1-S3"
+    },
+    {
+      "order": 60,
+      "section": "Discussion and Conclusion",
+      "locator": "7 P1 S5-S6",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结发现：文本有用、联合模型更强、网络与时序增加预测力、注意力可解释。",
+      "rhetorical_function_cn": "把结果提炼为论文核心主张。",
+      "depends_on_cn": "全部实验",
+      "sets_up_cn": "文献与实践含义。",
+      "evidence_pointer": "Section 7 P1 S5-S6"
+    },
+    {
+      "order": 61,
+      "section": "Discussion and Conclusion",
+      "locator": "7.1 P1 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "从设计科学视角，为实践者和研究者创造同时具备预测性、可解释性和可扩展性的制品。",
+      "rhetorical_function_cn": "将工作框定为设计科学贡献。",
+      "depends_on_cn": "研究定位",
+      "sets_up_cn": "说明对IS文献的影响。",
+      "evidence_pointer": "Section 7.1 P1 S1-S2"
+    },
+    {
+      "order": 62,
+      "section": "Discussion and Conclusion",
+      "locator": "7.2 P1 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "可预测性让监管者从被动等待转向主动锁定可疑公司和预防。",
+      "rhetorical_function_cn": "强调实践应用价值。",
+      "depends_on_cn": "模型结果",
+      "sets_up_cn": "威慑效应讨论。",
+      "evidence_pointer": "Section 7.2 P1 S1-S3"
+    },
+    {
+      "order": 63,
+      "section": "Discussion and Conclusion",
+      "locator": "7.2 P3 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "根据Becker犯罪经济学，提高查处确定性比加重惩罚更能威慑违法，预测模型由此产生威慑效应。",
+      "rhetorical_function_cn": "理论连接实践后果。",
+      "depends_on_cn": "可解释预测模型",
+      "sets_up_cn": "扩展解释预测的社会福利。",
+      "evidence_pointer": "Section 7.2 P3 S1-S3"
+    },
+    {
+      "order": 64,
+      "section": "Discussion and Conclusion",
+      "locator": "7.3 P1 S1-S4",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未预测案件严重性和SEC执法；仅公司层面；只用10-K单一来源；新语料需fine-tune。",
+      "rhetorical_function_cn": "界定贡献的边界并给未来方向。",
+      "depends_on_cn": "贡献声明",
+      "sets_up_cn": "论文收束。",
+      "evidence_pointer": "Section 7.3 P1 S1-S4"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认内幕交易法律存在但执行困难，再指出监管资源受限；然后在文献中定位：现有研究很少预测非法内幕交易，现有预测模型是黑箱且使用的文本特征简单；从而形成三重缺口：目标缺口、文本利用缺口和可解释性缺口。",
+    "signposting_cn": "引言末尾列出三大贡献；每节开头告诉读者本节要做什么；方法部分说模块A-F逐个介绍；结果部分用“now we turn to”等。",
+    "transition_logic_cn": "每个实验以“上一阶段留下什么问题”开头；例如baseline之后“现在看深度模型”，增量之后“是否有更好配置”，性能之后“预测依据是什么”，解释之后“节点与时序如何工作”。",
+    "claim_evidence_rhythm_cn": "先给结论句，再用表/图数据支撑，再解释机制；如“文本有预测力，AUC 75.75比baseline高5%”，表5确认；讨论中使用理论词汇解释结果。",
+    "benchmark_narrative_cn": "benchmark不是简单并列，而是分层次：数值baseline、文本baseline、深度模型变体、配置变体；每一步比较都服务于下一个问题。",
+    "theory_return_cn": "在可解释性分析中，注意力词和LDA主题重新联系信息操纵理论；在节点度分析中联系竞争环境两派理论；在时序分析中联系lazy prices。",
+    "contribution_positioning_cn": "在引言和讨论中分别按“面向监管的新应用”“方法论贡献”“IS研究新主题”三条线定位，并将自己的设计与解释性要求、端到端、大规模数据等比较。",
+    "novelty_protection_cn": "不仅说性能更高，还展示每个设计模块的增量价值、注意力词与理论吻合、配置实验排除替代架构，从而把一次性性能结果提升为可复用设计知识和理论洞察。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "描述现象、危害、现状不足。",
+        "research_job_cn": "确认领域有真实成本和监管缺口。",
+        "required_evidence_cn": "引用实证/案例说明问题。",
+        "transition_to_next_cn": "引出“现有手段不够，需要预测工具”。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "文献回顾显示很少预测非法内幕交易、现有文本方法简单、黑箱问题。",
+        "research_job_cn": "梳理文献并定位缺口。",
+        "required_evidence_cn": "具体引用显示gap。",
+        "transition_to_next_cn": "提出可预测性理论前提并论证文本信息有用。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "用行为理论、信息操纵理论、竞争环境、lazy prices论证。",
+        "research_job_cn": "构建理论命题到设计需求的翻译链条。",
+        "required_evidence_cn": "引用理论和机制证据。",
+        "transition_to_next_cn": "告诉读者这些理论导致需要哪些输入。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "详细说明数据源、案例识别、预处理。",
+        "research_job_cn": "合并数据库、建立ground truth。",
+        "required_evidence_cn": "足够大的样本、正例定义可操作。",
+        "transition_to_next_cn": "指向模型设计。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "解释每个模块为什么对应某个知识/机制。",
+        "research_job_cn": "实现网络、设计消融变量。",
+        "required_evidence_cn": "模型能实际训练并产出预测。",
+        "transition_to_next_cn": "进入benchmark评价。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "解释为什么用AUC/decile，为什么这些baselines。",
+        "research_job_cn": "运行baseline。",
+        "required_evidence_cn": "baseline结果形成参照。",
+        "transition_to_next_cn": "结果显示深度模型需要评价。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用表、图展示性能、显著性和解释结果。",
+        "research_job_cn": "系统消融和深入分析。",
+        "required_evidence_cn": "每个设计特征有边际证据，解释有理论对应。",
+        "transition_to_next_cn": "将结果连接回理论/实践。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "回到问题、声明贡献、局限、未来。",
+        "research_job_cn": "评估贡献边界，避免过度外推。",
+        "required_evidence_cn": "讨论中的主张能回溯到前面证据。",
+        "transition_to_next_cn": "论文结束。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "先说明为什么可能预测，再设计模型",
+      "每个设计模块对应一个理论机制，并在评价中单独消融",
+      "可解释性分析不是候补，而是证据链的一部分",
+      "用AUC和十分位而不是准确率适配不对称成本",
+      "配置变体排除替代设计"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "90,152公司-年的大规模数据和十年以上窗口需要长期数据积累",
+      "WMD和node2vec的计算开销高",
+      "SCAC案件摘要正则识别需要法律领域知识",
+      "GPU训练与多个模型变体计算资源"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只声称“可解释深度学习”而不提供注意力权重与理论一致性证据",
+      "不能只报告AUC而不说明不平衡和成本结构",
+      "不能把股东诉讼代理当作SEC执法ground truth",
+      "不能在无消融的情况下宣称模块贡献"
+    ],
+    "single_best_description_of_the_routine_cn": "把监管痛点翻译成一组理论驱动的设计选择，用大规模公开数据训练可解释深度模型，并通过逐模块消融和注意力解释让性能结果重新成为理论证据。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "Journal Pre-proof版本部分图表和公式为图片或格式化文本，无法从OCR恢复准确公式符号；但主要文字结构完整。附录A和附录B未包含在PDF中，案例和词云仅能根据正文说明推断。网络节点阈值等细节可能受OCR符号影响。",
+  "usage": {
+    "prompt_tokens": 31394,
+    "completion_tokens": 38886,
+    "total_tokens": 70280,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 31394
+  }
+}

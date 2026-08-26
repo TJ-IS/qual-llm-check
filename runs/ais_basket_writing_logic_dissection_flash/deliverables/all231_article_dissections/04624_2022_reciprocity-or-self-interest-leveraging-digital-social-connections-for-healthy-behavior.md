@@ -1,0 +1,1891 @@
+# Reciprocity or Self-Interest? Leveraging Digital Social Connections for Healthy Behavior
+
+- 作者：Che-Wei Liu; Guodong (Gordon) Gao; Ritu Agarwal
+- 年份 / 期刊：2022 / MIS Quarterly
+- DOI：10.25300/misq/2022/16177
+- 源文件：04624_2022_reciprocity-or-self-interest-leveraging-digital-social-connections-for-healthy-behavior.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：在数字社交平台上，互惠式激励是否比适度奖励的自利式激励更能促进健康行为？朋友之间的社交亲近度如何调节互惠激励的效果？
+
+- 制品与设计：移动跑步社交平台上的随机现场实验，包含三组设计：平台发起自利激励（Plat-SelfInt）、朋友发起自利激励（Frnd-SelfInt）、朋友发起互惠激励（Frnd-Recip）。核心操纵是第二枚虚拟金币的受益人：自己还是送金币的朋友。
+
+- 客观结果：Frnd-Recip组挑战完成率40.4%，显著高于Plat-SelfInt组30.6%和Frnd-SelfInt组34.4%；相对Plat-SelfInt提高31.4%，相对Frnd-SelfInt提高19.8%。在匹配样本中，Frnd-Recip组比Frnd-SelfInt组多跑3.06公里（11.5%）。社交亲近度与完成率呈倒U型关系，适度亲近时完成率最高（超过44%），过于疏远或过于亲近时降至34%-37%。
+
+- 核心贡献：表明互惠可被数字平台用于促进健康行为，并在等额财务支出条件下优于适度自利激励；首次在真实现场实验中量化互惠与自利的相对效果；发现社交亲近度对互惠效果呈倒U型影响，将关系强度从二分法扩展为连续体。
+
+- 整篇论证链：论文从不健康生活方式带来的经济负担和现有财务激励结果不一致出发，指出互惠这一普遍社会规范很少被用于健康促进，原因是传统环境难以低成本触发互动和精确观察结果。作者利用可穿戴设备、GPS和在线社交网络解决上述障碍，基于社会交换理论提出两个假设：互惠激励优于适度奖励的自利激励，社交亲近度对互惠效果呈倒U型影响。在一个跑步社交平台对超过1700对用户进行三组随机现场实验，通过朋友送金币和跑步挑战操纵互惠与自利。结果显示互惠组完成率和实际距离显著更高，且亲近度倒U型关系在多种测量下稳健。多个稳健性检验和事后调查支持机制解释。讨论将结果提升为对互惠文献、数字激励设计和健康行为精准干预的贡献，并界定边界条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文在真实移动跑步社交平台上操纵数字设计（金币礼物、挑战、受益人身份），通过随机分配三种激励方式，测量真实运动结果，属于典型的平台现场实验。
+
+- 主导写作弧线判定：文章从健康行为激励不足的现象出发，提出互惠机制及其社会交换理论解释，然后设计数字干预并开展现场因果检验，最后回到理论边界和贡献，符合现象—机制—干预—现场检验的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：阶段1建立实验设计和三组对照；阶段2用主要Probit模型检验H1；阶段3用CommonFriends/IOS检验H2倒U；阶段4用PSM/IPW处理预处理距离不平衡；阶段5比较运行距离性能；阶段6做系列稳健性检验（普通用户基线、作弊排除、持续弱跑者）；阶段7用手事后调查验证机制和主观亲近度；阶段8在附录补充登录选择、替代亲近度、网络影响等分析。这些阶段从核心因果效应到边界检验，逐步排除替代解释，加强机制解释和外部有效性。
+
+### studies_or_phases
+
+#### 1. 实验设计与随机化
+
+- order：1
+
+- name_cn：实验设计与随机化
+
+- question_cn：如何构造能够区分互惠、朋友身份和平台来源的现场实验？
+
+- inputs_and_setting_cn：台湾跑步社交平台RunningPlatform；2017年7月24日至9月3日，三阶段各两周；3514名合格发送者，2744名同意，1738名登录接收者构成最终样本。
+
+- designed_or_compared_object_cn：三组消息设计：Plat-SelfInt（平台发金币、完成给自己）、Frnd-SelfInt（朋友发金币、完成给自己）、Frnd-Recip（朋友发金币、完成给朋友）。
+
+- baseline_control_or_counterfactual_cn：Plat-SelfInt为惯例激励基准；Frnd-SelfInt为控制朋友赠送者身份效应并隔离互惠的对照。
+
+##### objective_metrics
+
+1. 登录率
+
+2. 条件平衡的ANOVA F统计量
+
+- analysis_method_cn：随机化检验（ANOVA），对发送者和接收者特征检查组间平衡。
+
+- main_result_cn：三组登录率62.0%-64.4%无显著差异；15个平衡变量中只有接收者预处理距离显著差异（18.74 vs 20.13 vs 18.59, p=0.02）。
+
+- argumentative_role_cn：建立因果推断的基础：随机化、发送者信息屏蔽、三组消息唯一差异是第二枚金币受益人。
+
+- remaining_uncertainty_cn：预处理距离不平衡可能使Frnd-SelfInt组更容易完成挑战，从而低估互惠效果；需要后续匹配/加权校正。
+
+- link_to_next_phase_cn：由于存在一个关键变量不平衡，后续阶段在检验主效应后专门用PSM/IPW处理。
+
+##### evidence_pointers
+
+1. Figure 1
+
+2. Table 2
+
+3. Table 5
+
+#### 2. 主效应：互惠 vs 自利（H1）
+
+- order：2
+
+- name_cn：主效应：互惠 vs 自利（H1）
+
+- question_cn：Frnd-Recip组是否比Plat-SelfInt和Frnd-SelfInt组有更高的挑战完成概率？
+
+- inputs_and_setting_cn：1738名登录接收者；三组样本571/590/577。
+
+- designed_or_compared_object_cn：三组激励机制的因果效应。
+
+- baseline_control_or_counterfactual_cn：Plat-SelfInt为模型基准；Frnd-Recip vs Frnd-SelfInt通过Wald检验比较。
+
+##### objective_metrics
+
+1. 挑战完成率
+
+2. Probit系数
+
+3. 边际效应
+
+4. Wald检验统计量
+
+- analysis_method_cn：Probit模型，控制发送者/接收者特征和挑战类型；另以拒绝者重新定义完成变量做稳健性。
+
+- main_result_cn：完成率：Plat-SelfInt 30.6%，Frnd-SelfInt 34.4%，Frnd-Recip 40.4%；Frnd-Recip相比Plat-SelfInt边际效应9.6pp（31.4%提升），相比Frnd-SelfInt边际效应6.8pp（19.8%提升），均显著。
+
+- argumentative_role_cn：核心因果证据，直接回答RQ1。
+
+- remaining_uncertainty_cn：该效应是否依赖关系条件？是否仅为二元完成指标，而非实际距离？
+
+- link_to_next_phase_cn：接下来检验社会亲近度作为调节变量，并随后报告距离表现。
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Figure 3
+
+#### 3. 调节效应：社会亲近度倒U（H2）
+
+- order：3
+
+- name_cn：调节效应：社会亲近度倒U（H2）
+
+- question_cn：在Frnd-Recip组中，亲近度增加是否先提高后降低完成概率？
+
+- inputs_and_setting_cn：Frnd-Recip组577名接收者；事后调查中IOS子样本166名。
+
+- designed_or_compared_object_cn：使用CommonFriends（共同好友数）和主观IOS得分作为亲近度连续指标。
+
+- baseline_control_or_counterfactual_cn：在统一Frnd-Recip组内通过一次项和二次项检验凸性；Lind-Mehlum正式检验倒U。
+
+##### objective_metrics
+
+1. CommonFriends一次项/二次项系数
+
+2. IOS一次项/二次项系数
+
+3. Lind-Mehlum斜率检验
+
+- analysis_method_cn：Probit模型包括亲近度平方项；Haans/Lind-Mehlum检验。
+
+- main_result_cn：二次项显著为负；Lind-Mehlum确认倒U：低端斜率0.305显著正，高端斜率-0.493显著负，总体p=0.038；完成率在适度亲近时>44%，远/近约34-37%。
+
+- argumentative_role_cn：支持H2，揭示互惠效果的条件性，指导精确配对的实践含义。
+
+- remaining_uncertainty_cn：需要验证其他亲近度指标，避免单一网络结构度量偏差。
+
+- link_to_next_phase_cn：后续用DaysKnowEachOther、ClosenessIndex和IOS（调查）等替代测量补充验证。
+
+##### evidence_pointers
+
+1. Table 7 column (1)
+
+2. Figure 4
+
+3. Table 7 column (2)
+
+4. Appendix Table A5
+
+#### 4. 处理不平衡：PSM与IPW
+
+- order：4
+
+- name_cn：处理不平衡：PSM与IPW
+
+- question_cn：预处理距离的组间差异是否足以动摇主效应结论？
+
+- inputs_and_setting_cn：Frnd-SelfInt和Frnd-Recip匹配样本各531；IPW使用全部1738观察。
+
+- designed_or_compared_object_cn：对Frnd-SelfInt与Frnd-Recip进行倾向得分匹配和逆概率加权。
+
+- baseline_control_or_counterfactual_cn：匹配后的Frnd-SelfInt为对照。
+
+##### objective_metrics
+
+1. 匹配后协变量平衡检验
+
+2. Probit系数
+
+3. 边际效应
+
+4. IPW平均处理效应
+
+- analysis_method_cn：第一阶段Probit估计倾向得分；最近邻匹配；IPW两阶段估计。
+
+- main_result_cn：匹配后预处理距离不再显著；Frnd-Recip仍比Frnd-SelfInt完成率高8.9pp（27.5%提升），IPW估计7.0pp显著。
+
+- argumentative_role_cn：排除不平衡解释，说明主效应稳健且可能被低估。
+
+- remaining_uncertainty_cn：是否完成率提升也体现在连续距离指标上？
+
+- link_to_next_phase_cn：进入性能比较，用OLS检验运行距离。
+
+##### evidence_pointers
+
+1. Table 8
+
+2. Table 9 column (1)
+
+#### 5. 性能比较：运行距离
+
+- order：5
+
+- name_cn：性能比较：运行距离
+
+- question_cn：互惠激励是否增加接收者的实际总跑步距离？
+
+- inputs_and_setting_cn：匹配样本1062名接收者。
+
+- designed_or_compared_object_cn：Frnd-Recip vs Frnd-SelfInt在治疗期总距离上的差异。
+
+- baseline_control_or_counterfactual_cn：Frnd-SelfInt匹配样本为基线。
+
+##### objective_metrics
+
+1. 治疗期总运行距离
+
+2. OLS回归系数
+
+3. IPW效应
+
+- analysis_method_cn：匹配样本OLS，IPW。
+
+- main_result_cn：Frnd-Recip组平均多跑3.06km（11.5%，p<0.05）；IPW估计2.26km。
+
+- argumentative_role_cn：将结果从二值完成指标扩展到连续行为，增强实际健康意义。
+
+- remaining_uncertainty_cn：未与普通未通知用户比较，无法知道总效果大小。
+
+- link_to_next_phase_cn：下一阶段增加普通应用用户作为基线并做各种稳健性子样本。
+
+##### evidence_pointers
+
+1. Table 9 column (2)
+
+#### 6. 稳健性检验：普通用户基线、作弊、弱跑者
+
+- order：6
+
+- name_cn：稳健性检验：普通用户基线、作弊、弱跑者
+
+- question_cn：互惠效果在与普通未通知用户比较时是否依然强大？排除作弊和样本选择后是否依然稳健？
+
+- inputs_and_setting_cn：未被选为接收者的合格朋友用户作为普通用户对照组；排除手动记录、私人记录、异常速度记录的子样本；持续弱跑者子样本。
+
+- designed_or_compared_object_cn：多个子样本分析中的Frnd-Recip效果。
+
+- baseline_control_or_counterfactual_cn：普通用户组为纯基线；其他子样本以Plat-SelfInt或Frnd-SelfInt为基线。
+
+##### objective_metrics
+
+1. 挑战完成率
+
+2. 治疗期距离
+
+3. Probit系数
+
+4. 边际效应
+
+- analysis_method_cn：PSM匹配普通用户与Frnd-Recip，Probit/OLS；子样本Probit。
+
+- main_result_cn：Frnd-Recip比普通用户完成率高29.5pp，距离高9.54km（48.7%）；排除手动/私人/异常记录后效应仍显著；持续弱跑者子样本完成率提升22.3%。
+
+- argumentative_role_cn：排除作弊与样本波动，提高内部和外部有效性。
+
+- remaining_uncertainty_cn：机制过程未直接验证；仍需要调查。
+
+- link_to_next_phase_cn：用事后调查检查动机、情绪和主观亲近度。
+
+##### evidence_pointers
+
+1. Table 10 columns (1)-(6)
+
+#### 7. 事后调查：机制过程与主观亲近度
+
+- order：7
+
+- name_cn：事后调查：机制过程与主观亲近度
+
+- question_cn：互惠组参与者是否确实出于感恩/内疚动机？主观亲近度是否也呈现倒U？
+
+- inputs_and_setting_cn：526名参与者回答问卷（35.9%），其中Frnd-Recip 166名。
+
+- designed_or_compared_object_cn：问卷动机选择、情绪量表、IOS量表。
+
+- baseline_control_or_counterfactual_cn：组间动机与情绪比较；IOS回归中使用平方项。
+
+##### objective_metrics
+
+1. 动机选择比例
+
+2. 情绪差异p值
+
+3. IOS一次/二次项系数
+
+- analysis_method_cn：描述性统计、比例比较、Probit模型。
+
+- main_result_cn：64.5% Frnd-Recip受访者选择感恩动机；两组负面情绪无显著差异；IOS二次项显著负，与CommonFriends一致。
+
+- argumentative_role_cn：提供互惠机制的过程证据，排除负面副作用，并使用主观亲近度验证H2。
+
+- remaining_uncertainty_cn：调查响应存在自选；动机测量非随机实验。
+
+- link_to_next_phase_cn：附录进一步处理登录选择、网络影响和替代亲近度测量。
+
+##### evidence_pointers
+
+1. Post-Treatment Surveys section
+
+2. Table 7 column (2)
+
+#### 8. 附录补充分析与边界检验
+
+- order：8
+
+- name_cn：附录补充分析与边界检验
+
+- question_cn：登录选择、社交网络影响、替代亲近度测量是否改变结论？
+
+- inputs_and_setting_cn：未登录样本2744、DaysKnowEachOther、ClosenessIndex、网络中心性、互动变量。
+
+- designed_or_compared_object_cn：多种额外模型规格。
+
+- baseline_control_or_counterfactual_cn：相应组别基线，如Plat-SelfInt或Frnd-SelfInt。
+
+##### objective_metrics
+
+1. Probit/OLS系数
+
+2. Wald检验
+
+3. 交互项显著性
+
+- analysis_method_cn：Probit/OLS，加入网络中心性、阅读消息交互、HighFollower交互、Like交互；入选未登录样本模型。
+
+- main_result_cn：结果保持稳健；DaysKnowEachOther和ClosenessIndex也呈倒U；网络中心性、阅读、粉丝数、挑战期Like交互均不显著调节。
+
+- argumentative_role_cn：排除登录选择、网络干扰、印象管理和社会压力作为主要替代解释。
+
+- remaining_uncertainty_cn：仍不能完全排除社会影响与互惠的混淆，也不能观测离线互惠补偿。
+
+- link_to_next_phase_cn：无后续阶段；进入讨论，将证据整合为贡献和边界。
+
+##### evidence_pointers
+
+1. Appendix Table A3-A6
+
+2. Appendix Figure A4
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 背景与问题：健康生活方式和激励需求
+
+2. 提出互惠机制并说明实验设计
+
+3. 实验概述：超过1700对用户随机现场实验
+
+4. 主要结果：互惠优于自利，完成率显著提升
+
+5. 调节发现：社交亲近度倒U影响
+
+6. 贡献与机制设计启示
+
+### introduction_moves
+
+1. 健康威胁→激励需求
+
+2. 财务激励效果不一致
+
+3. 引入互惠并对比自利
+
+4. 技术与数据优势使其可行
+
+5. 三点文献差异：健康行为、与自利比较、社会亲近度
+
+6. 研究问题与实验概述
+
+7. 预览关键结果
+
+### theory_and_knowledge_moves
+
+1. 回顾mHealth和游戏化干预文献，指出本文提出新机制
+
+2. 回顾互惠和礼物交换理论
+
+3. 识别互惠的三个心理机制：规范、感恩、避免内疚
+
+4. 引入社会交换理论成本收益框架
+
+5. 论证互惠与自利激励的利益差异
+
+6. 引入关系维护视角预测亲近度倒U
+
+7. 以Chen et al. 的二分法不足作为理论拓展入口
+
+### artifact_design_moves
+
+1. 利用平台关注功能识别朋友对
+
+2. 发送者与接收者的资格条件
+
+3. 三组消息设计（金币来源与受益人）
+
+4. 对发送者隐藏挑战内容以避免施压
+
+5. push通知标题相同以减少选择偏差
+
+6. 增加Plat-SelfInt作为惯例激励基准
+
+7. 基于健康指南设置挑战距离
+
+8. 时间线、提醒消息和功率分析
+
+### evaluation_moves
+
+1. 随机化平衡检验
+
+2. Probit主效应模型与Wald检验
+
+3. Lind-Mehlum倒U检验
+
+4. PSM/IPW处理不平衡
+
+5. 匹配样本OLS距离检验
+
+6. 普通用户基线和多种子样本稳健性
+
+7. 事后调查动机、情绪和IOS
+
+8. 附录登录选择、网络影响和替代亲近度分析
+
+### discussion_and_contribution_moves
+
+1. 重述主要发现并闭合引言缺口
+
+2. 理论贡献：新情境、相对表现、关系连续体
+
+3. 实践意义：精准激励和平台价值
+
+4. 限制与未来研究：长期习惯、礼物类型、其他健康行为、陌生人边界
+
+5. 结论：数字技术使互惠激励可行
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 社会交换理论（SET）
+
+2. 互惠规范（Gouldner）
+
+3. 礼物交换理论（Mauss）
+
+4. 心理负债/内疚机制（Becker, Dahl）
+
+5. 关系维护视角
+
+6. 健康行为激励文献
+
+7. mHealth/社交平台研究
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：SET和互惠文献决定了核心实验结构：需要朋友作为礼物发送者，接收者通过完成挑战来返还礼物；但具体实现（金币、抽奖、跑步挑战、平台配对、共同好友测量）依赖数字平台特性和健康行为可测量性，不是完全由理论推导出来的。
+
+- 理论到设计翻译链：互惠规范/心理负债/感恩 → 社会交换成本-收益分析 → 礼物必须来自有意义的他人，失败会产生内疚 → 设计朋友送金币并请求返还金币的挑战 → 对照组改变受益人以分离自利和互惠 → 通过平台数据测量亲近度 → 检验完成率和距离。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：互惠可产生超过适度自利奖励的动机（SET，Gneezy & Rustichini）
+
+- mechanism_cn：避免心理负债、表达感恩 vs 获得小奖励
+
+- design_requirement_cn：需要创造来自朋友的不可推卸的礼物，并将奖励归属设置为朋友
+
+- artifact_choice_cn：Frnd-Recip组朋友发送金币，完成挑战则朋友获得金币
+
+- evaluated_contrast_cn：Frnd-Recip vs Frnd-SelfInt/Plat-SelfInt
+
+- objective_result_cn：完成率提高19.8%/31.4%
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Figure 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：互惠是关系性机制，社交亲近度影响成本收益计算
+
+- mechanism_cn：关系维护/内疚/感恩的强度随亲近度变化，疏远无动机，极近无需维持
+
+- design_requirement_cn：需要在真实朋友之间进行，并测量亲近度连续体
+
+- artifact_choice_cn：用CommonFriends和IOS量表度量亲近度
+
+- evaluated_contrast_cn：亲近度一次项与二次项
+
+- objective_result_cn：倒U关系，适度亲近时完成率最高
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Figure 4
+
+3. Appendix Table A5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：为了分离互惠和朋友身份本身的影响，需要控制朋友是否发送礼物的效应
+
+- mechanism_cn：朋友身份本身可能带来好感或社会压力，需与互惠归属区分
+
+- design_requirement_cn：增加朋友发送金币但自己保留奖励的组
+
+- artifact_choice_cn：Frnd-SelfInt组
+
+- evaluated_contrast_cn：Frnd-Recip vs Frnd-SelfInt
+
+- objective_result_cn：Frnd-Recip高出6.8pp，即19.8%
+
+##### evidence_pointers
+
+1. Table 6 Wald test
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：常规激励通常由第三方（平台/雇主）发送并给自己奖励
+
+- mechanism_cn：实际干预设计需要与标准实践对比
+
+- design_requirement_cn：增加传统激励对照组
+
+- artifact_choice_cn：Plat-SelfInt组
+
+- evaluated_contrast_cn：Frnd-Recip vs Plat-SelfInt
+
+- objective_result_cn：31.4%提升
+
+##### evidence_pointers
+
+1. Table 6
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：作弊和不真实记录会威胁数字健康数据的有效性
+
+- mechanism_cn：自报或异常记录可能造成测量噪音
+
+- design_requirement_cn：记录应尽量可验证
+
+- artifact_choice_cn：保留数字设备自动记录、公开记录、过滤异常速度
+
+- evaluated_contrast_cn：子样本 vs 全样本
+
+- objective_result_cn：结果定性一致
+
+##### evidence_pointers
+
+1. Table 10 columns (3)-(5)
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机现场实验
+
+2. 三组对照
+
+3. Probit回归
+
+4. Wald检验
+
+5. PSM/IPW
+
+6. 匹配样本OLS
+
+7. Lind-Mehlum倒U检验
+
+8. 多个子样本稳健性检验
+
+9. 事后调查
+
+- why_these_evaluations_cn：需要因果验证互惠机制，并用多个对照分离朋友身份效应、平台来源效应和互惠归属效应；用PSM/IPW处理预处理距离不平衡；用多种子样本排除作弊、样本选择和替代解释；用调查验证机制过程。
+
+- benchmark_and_contrast_chain_cn：Plat-SelfInt代表传统第三方自利激励；Frnd-SelfInt代表朋友发送但自己获益，用于分离礼物来源；Frnd-Recip与两者比较；再与普通未通知用户比较，显示总体效果；多个基准形成从局部到总体的证据链。
+
+### claim_evidence_ledger
+
+#### 1. 互惠激励在完成率上优于自利激励
+
+- claim_cn：互惠激励在完成率上优于自利激励
+
+- evidence_cn：主Probit模型、Wald检验、完成比例z-test、匹配样本
+
+- alignment_cn：充分
+
+#### 2. 社会亲近度对互惠效果呈倒U型影响
+
+- claim_cn：社会亲近度对互惠效果呈倒U型影响
+
+- evidence_cn：CommonFriends、IOS、DaysKnow、ClosenessIndex多种测量和Lind-Mehlum检验
+
+- alignment_cn：充分
+
+#### 3. 效果来自互惠而非社交压力或观察性
+
+- claim_cn：效果来自互惠而非社交压力或观察性
+
+- evidence_cn：多个交互项不显著、发送者不知情、未接受消息仍有效
+
+- alignment_cn：间接证据，不能完全排除
+
+#### 4. 心理机制是感恩/内疚
+
+- claim_cn：心理机制是感恩/内疚
+
+- evidence_cn：事后调查中感恩动机比例高
+
+- alignment_cn：描述性证据，受自选偏差影响
+
+- internal_validity_strategy_cn：随机化、发送者不知道接收者挑战内容/结果、push通知标题相同、控制发送者特征、拒绝者计失败、处理预处理距离不平衡、排除作弊和网络干扰。
+
+- external_validity_strategy_cn：与其他现场实验效应大小比较、普通应用用户对照、持续弱跑者子样本、与健康指南对应挑战设计、讨论边界条件。
+
+- what_is_not_actually_tested_cn：长期习惯维持；不同礼物类型/金额；不同人群和健康行为（如戒烟、健康饮食）；完全陌生人间的互惠；离线互惠补偿；真正不可观测的社会压力；因果机制内部心理过程仅靠调查，未直接操纵心理状态。
+
+## 贡献闭环
+
+- technical_claim_cn：互惠型数字激励相比自利型激励能更有效促进运动完成（提高完成率和距离）。
+
+- artifact_claim_cn：核心设计元素是“朋友作为礼物发送者”和“完成挑战后金币归朋友”，而不仅是朋友赠送礼物本身；使用Frnd-SelfInt对照证明。
+
+- mechanism_claim_cn：互惠通过感恩、避免内疚和关系维护产生动机；社交亲近度的倒U支持这个机制。
+
+- boundary_claim_cn：效果在适度亲近时最强；对疏远或极近朋友减弱；在需要大量努力、可观察并能在线连接的环境中适用；对负面行为或隐私敏感行为可能不适用；两周期限。
+
+- reusable_design_knowledge_cn：数字平台可以设计“好友赠送-接受-返还”的礼物链；在激励时需考虑发送者身份和关系强度；中等亲近度配对是精准激励的最佳点。
+
+- theoretical_contribution_cn：将互惠从实验室/第三方/一次性行为扩展到真实的健康行为、连续关系和长期付出；将SET用于数字健康场景；调和了Chen et al.的朋友/陌生人无差异结果，指出需连续测亲近度。
+
+- how_discussion_closes_intro_gap_cn：讨论重新回到引言中“现有金融激励结果不一致、健康行为需要新机制”的缺口，指出互惠是一种不增加成本却能显著提高效果的机制，并给出关系条件。
+
+- overclaim_or_unsupported_leaps_cn：虽然声称互惠而非社交压力驱动，但观察性/社会压力并未完全排除；调查证据自选择；倒U解释中“太近无需维持”是推测性的；对长期健康行为是否成立未测试。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：指出不健康生活方式如饮食、缺乏运动、烟酒对健康和经济成本有负面影响。
+
+- rhetorical_function_cn：开篇将健康行为问题定义为重要现实问题。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后文“需要更好激励设计”提供问题背景。
+
+- evidence_pointer：Introduction第1段
+
+### 2. P2 S1-S2
+
+- order：2
+
+- section：Introduction
+
+- locator：P2 S1-S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：政府和雇主等利益相关者正通过财务激励推动健康行为，自利型激励已被广泛研究。
+
+- rhetorical_function_cn：说明现实行动者已投入大量资源，激励问题具有实践紧迫性。
+
+- depends_on_cn：依赖第1段的健康成本背景。
+
+- sets_up_cn：引出后续对财务激励效果不一致的批评。
+
+- evidence_pointer：Introduction第2段前半
+
+### 3. P2 S3-S4
+
+- order：3
+
+- section：Introduction
+
+- locator：P2 S3-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：财务激励研究结果不一致，体重管理项目流失率可高达68%，工作场所健康项目结论不确定，需要改进干预设计。
+
+- rhetorical_function_cn：建立现有激励的不足，形成问题缺口。
+
+- depends_on_cn：依赖第2段“自利激励被广泛使用”的铺垫。
+
+- sets_up_cn：为引入替代机制互惠提供动机。
+
+- evidence_pointer：Introduction第2段后半
+
+### 4. P3 S1-S2
+
+- order：4
+
+- section：Introduction
+
+- locator：P3 S1-S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：提出互惠这种社会规则，强调偿还他人给予的重要性，是多数社会认可的基本规范。
+
+- rhetorical_function_cn：引入核心替代机制并赋予其理论根基。
+
+- depends_on_cn：依赖第2段对自利激励不足的讨论。
+
+- sets_up_cn：为后续研究问题提供候选机制。
+
+- evidence_pointer：Introduction第3段前半
+
+### 5. P3 S3-S4
+
+- order：5
+
+- section：Introduction
+
+- locator：P3 S3-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：测试互惠是否能激励健康行为，尤其与适度自利激励相比，并进一步识别关系条件。
+
+- rhetorical_function_cn：将一般机制转化为本文研究目标。
+
+- depends_on_cn：依赖互惠机制介绍。
+
+- sets_up_cn：为全文两个研究问题和假设做预告。
+
+- evidence_pointer：Introduction第3段后半
+
+### 6. P4 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：P4 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：尽管互惠在多种行为中显著，却很少用于健康促进；原因是互动触发成本高、结果观察困难。
+
+- rhetorical_function_cn：建立互惠应用于健康领域的缺口及其技术障碍。
+
+- depends_on_cn：依赖前面互惠已被验证的知识。
+
+- sets_up_cn：为信息技术解决方案出场铺路。
+
+- evidence_pointer：Introduction第4段
+
+### 7. P5 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P5 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：可穿戴设备、GPS和社交网络使低成本精确跟踪和在线互动成为可能，互惠激励在今天更可行。
+
+- rhetorical_function_cn：说明技术成熟消除了互惠应用的历史障碍。
+
+- depends_on_cn：依赖前段指出的两个挑战。
+
+- sets_up_cn：为现场实验方法提供可行性依据。
+
+- evidence_pointer：Introduction第5段
+
+### 8. P6 S1-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：与先前互惠研究有三点差异：一是延伸到需精确追踪的健康行为；二是可比较互惠与自利；三是可研究发送者-接收者关系强度。
+
+- rhetorical_function_cn：将缺口转化为本文的具体贡献空间。
+
+- depends_on_cn：依赖技术可行性和互惠文献回顾。
+
+- sets_up_cn：为实验设计和假设提供逻辑框架。
+
+- evidence_pointer：Introduction第6段
+
+### 9. P7 S1-S2
+
+- order：9
+
+- section：Introduction
+
+- locator：P7 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：在台湾跑步社区进行超过1700对用户的随机现场实验，提出两个研究问题：互惠与自利孰优，亲近度如何调节。
+
+- rhetorical_function_cn：正式预告研究设计和两个RQ。
+
+- depends_on_cn：依赖前文的贡献空间。
+
+- sets_up_cn：为结果预览和后续假设做铺垫。
+
+- evidence_pointer：Introduction第7段
+
+### 10. P8 S1-S4
+
+- order：10
+
+- section：Introduction
+
+- locator：P8 S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：预览主要发现：互惠组完成率相对传统自利提升31.4%，控制朋友效应后仍提升19.8%，亲近度呈倒U影响。
+
+- rhetorical_function_cn：用亮点结果吸引读者，并设定全文证据目标。
+
+- depends_on_cn：依赖两个RQ的提出。
+
+- sets_up_cn：为正文展示数据和检验做承诺。
+
+- evidence_pointer：Introduction第8段
+
+### 11. P1 S1
+
+- order：11
+
+- section：Prior Literature and Hypotheses
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：回顾用移动技术干预健康行为和疾病管理的文献，以及游戏化元素研究，指出本文通过新机制互惠有所区别。
+
+- rhetorical_function_cn：将研究定位在mHealth和游戏化文献中。
+
+- depends_on_cn：引入部分已经提出互惠机制。
+
+- sets_up_cn：为后续比较社会/行为干预与财务激励的文献定位。
+
+- evidence_pointer：Prior Literature第1段
+
+### 12. P2 S1
+
+- order：12
+
+- section：Prior Literature and Hypotheses
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：本文属于比较社会或行为干预与财务激励的文献，旨在通过互惠激发偿还倾向。
+
+- rhetorical_function_cn：建立与现有激励比较的学术脉络。
+
+- depends_on_cn：依赖前段的mHealth定位。
+
+- sets_up_cn：为下一节的互惠综述和社会交换理论引路。
+
+- evidence_pointer：Prior Literature第2段
+
+### 13. P1 S1
+
+- order：13
+
+- section：Reciprocity subsection
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：互惠概念源于礼物交换理论，从人类学经典出发，包括给予、接受和回赠一系列行动。
+
+- rhetorical_function_cn：为互惠机制提供理论源头。
+
+- depends_on_cn：无需前文，独立理论引入。
+
+- sets_up_cn：为三个互惠心理原因提供背景。
+
+- evidence_pointer：Reciprocity subsection第1段
+
+### 14. P3 S1
+
+- order：14
+
+- section：Reciprocity subsection
+
+- locator：P3 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：个体互惠的三个主要原因：遵守普遍规范、表达感恩、避免心理痛苦（内疚）。
+
+- rhetorical_function_cn：揭示互惠的行为机制。
+
+- depends_on_cn：依赖礼物交换理论。
+
+- sets_up_cn：为后文论证互惠优于自利提供心理机制基础。
+
+- evidence_pointer：Reciprocity subsection第3段
+
+### 15. P5 S1
+
+- order：15
+
+- section：Reciprocity subsection
+
+- locator：P5 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：信息系统文献将开源、在线社区和知识共享视为礼物经济，并区分广义互惠与直接互惠。
+
+- rhetorical_function_cn：将互惠机制接入IS领域已有研究。
+
+- depends_on_cn：依赖前文对互惠概念的介绍。
+
+- sets_up_cn：说明本研究在IS中的定位是直接互惠。
+
+- evidence_pointer：Reciprocity subsection第5段
+
+### 16. P7 S1
+
+- order：16
+
+- section：Reciprocity subsection
+
+- locator：P7 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：健康领域中的互惠通常通过社会支持视角理解，互惠平衡与身心健康相关。
+
+- rhetorical_function_cn：说明互惠在健康研究中的既有联系。
+
+- depends_on_cn：依赖互惠一般机制。
+
+- sets_up_cn：为将互惠作为健康行为激励提供领域根据。
+
+- evidence_pointer：Reciprocity subsection第7段
+
+### 17. P1 S1
+
+- order：17
+
+- section：Reciprocity Versus Self-Interest
+
+- locator：P1 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：互惠与自利激励的相对表现很少被理解，唯一例外是销售绩效中的比较。
+
+- rhetorical_function_cn：点明相对比较的文献缺口。
+
+- depends_on_cn：依赖前文互惠综述。
+
+- sets_up_cn：为本文的比较目标提供缺口依据。
+
+- evidence_pointer：Reciprocity Versus Self-Interest第1段
+
+### 18. P2 S2-S3
+
+- order：18
+
+- section：Reciprocity Versus Self-Interest
+
+- locator：P2 S2-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入社会交换理论（SET），认为交换产生经济和社会结果，双方进行成本收益分析。
+
+- rhetorical_function_cn：为比较互惠与自利提供统一理论框架。
+
+- depends_on_cn：依赖文献缺口。
+
+- sets_up_cn：为利益差异论证提供分析工具。
+
+- evidence_pointer：Reciprocity Versus Self-Interest第2段后半
+
+### 19. P4 S1-S2
+
+- order：19
+
+- section：Reciprocity Versus Self-Interest
+
+- locator：P4 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：自利机制的利益是自己获得奖励；互惠机制除给朋友赢得奖励外，还包括表达感恩和减少心理债务。
+
+- rhetorical_function_cn：区分两种机制带来的不同收益。
+
+- depends_on_cn：依赖SET成本收益框架。
+
+- sets_up_cn：为H1提供机制基础。
+
+- evidence_pointer：Reciprocity Versus Self-Interest第4段
+
+### 20. P5 S1-S3
+
+- order：20
+
+- section：Reciprocity Versus Self-Interest
+
+- locator：P5 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：日托中心罚款案例显示，小罚款替代了内疚，反而增加迟到；说明小金钱激励可能不如社会/心理压力有效。
+
+- rhetorical_function_cn：用经典证据支持互惠优于适度自利奖励的推测。
+
+- depends_on_cn：依赖前段利益差异。
+
+- sets_up_cn：为H1的预测提供实证类比。
+
+- evidence_pointer：Reciprocity Versus Self-Interest第5段
+
+### 21. P6 S1
+
+- order：21
+
+- section：Reciprocity Versus Self-Interest
+
+- locator：P6 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：基于互惠的激励比基于适度奖励的自利激励更能提高完成身体活动挑战的概率。
+
+- rhetorical_function_cn：将理论转化为可检验假设。
+
+- depends_on_cn：依赖前文机制和例证。
+
+- sets_up_cn：为随机实验中的主要分析提供目标。
+
+- evidence_pointer：H1段落
+
+### 22. P1 S1
+
+- order：22
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：大量研究表明在线社交连接与行为相关，如客户流失和信任，且受连接强度影响。
+
+- rhetorical_function_cn：建立社交关系对行为影响的一般背景。
+
+- depends_on_cn：无需前文直接进入关系机制。
+
+- sets_up_cn：为亲近度调节互惠效果的论点提供文献基础。
+
+- evidence_pointer：Role of Social Closeness第1段
+
+### 23. P2 S1
+
+- order：23
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：社交亲近度对互惠效果的影响尚未被实证检验，原因可能是传统环境中难以低成本利用社交连接。
+
+- rhetorical_function_cn：明确第二个研究缺口。
+
+- depends_on_cn：依赖前段社会连接重要性。
+
+- sets_up_cn：为H2的理论推导提供缺口。
+
+- evidence_pointer：Role of Social Closeness第2段
+
+### 24. P3 S1-S2
+
+- order：24
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P3 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Chen等人的实验发现朋友与陌生人互惠无差异，可能是因为关系测量过于粗糙，应将亲近度视为连续体。
+
+- rhetorical_function_cn：通过批判既有结果建立理论必要性。
+
+- depends_on_cn：依赖社交亲近度缺口。
+
+- sets_up_cn：为H2的倒U预测提供动机。
+
+- evidence_pointer：Role of Social Closeness第3段
+
+### 25. P4 S1-S2
+
+- order：25
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P4 S1-S2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：沿用SET，同一挑战的完成收益中，无形部分（心理债务和感恩）会随与发送者的亲近度改变。
+
+- rhetorical_function_cn：将亲近度纳入成本收益分析。
+
+- depends_on_cn：依赖SET和Chen等人批评。
+
+- sets_up_cn：为倒U的非单调推理做理论铺垫。
+
+- evidence_pointer：Role of Social Closeness第4段
+
+### 26. P5 S1-S3
+
+- order：26
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P5 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：对疏远朋友渴望低，对中等亲近朋友内疚强，对非常亲近朋友关系已牢固且可用其他方式归还，因此互惠效果先升后降。
+
+- rhetorical_function_cn：具体阐述倒U机制。
+
+- depends_on_cn：依赖SET和心理债务机制。
+
+- sets_up_cn：直接导向H2。
+
+- evidence_pointer：Role of Social Closeness第5段
+
+### 27. P6 S1
+
+- order：27
+
+- section：The Role of Social Closeness in Reciprocity
+
+- locator：P6 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2：亲近度增加时挑战完成概率先增后减，呈倒U关系。
+
+- rhetorical_function_cn：将机制论证转化为可检验假设。
+
+- depends_on_cn：依赖前段倒U推理。
+
+- sets_up_cn：为H2回归模型提供目标。
+
+- evidence_pointer：H2段落
+
+### 28. P1 S1-S2
+
+- order：28
+
+- section：Research Methodology: Study Context
+
+- locator：P1 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择跑步社交平台，因为它提供类Twitter的关注功能，可识别朋友对，这是检验二元互惠的必要条件。
+
+- rhetorical_function_cn：说明平台选择的合理性。
+
+- depends_on_cn：依赖H1/H2对朋友关系的需求。
+
+- sets_up_cn：为后续发送者/接收者配对设计铺垫。
+
+- evidence_pointer：Study Context段
+
+### 29. P1 S1-S3
+
+- order：29
+
+- section：Research Methodology: Experimental Design
+
+- locator：P1 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：以预处理两周跑量40公里区分发送者和接收者；发送者转发邀请后随机选择一位弱跑者朋友作为接收者。
+
+- rhetorical_function_cn：建立符合礼物交换过程的一对一配对机制。
+
+- depends_on_cn：依赖平台关注功能和跑量数据。
+
+- sets_up_cn：为三组随机分配和结果测量提供对象。
+
+- evidence_pointer：Experimental Design第1段
+
+### 30. P2 S1-S2
+
+- order：30
+
+- section：Research Methodology: Experimental Design
+
+- locator：P2 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：发送者只知道接收者身份，不知道挑战内容、分组和完成情况；通知标题相同，以减少发送者施压和选择偏差。
+
+- rhetorical_function_cn：说明实验如何排除社交压力这个替代解释。
+
+- depends_on_cn：依赖配对和随机化流程。
+
+- sets_up_cn：为内部有效性奠定基础。
+
+- evidence_pointer：Experimental Design第2段前半
+
+### 31. Table 2前的段落
+
+- order：31
+
+- section：Research Methodology: Experimental Design
+
+- locator：Table 2前的段落
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：三组消息的唯一差异是金币来源（平台还是朋友）和第二枚金币受益人（自己还是朋友），对照组命名明确。
+
+- rhetorical_function_cn：清晰定义实验操纵。
+
+- depends_on_cn：依赖发送者/接收者配对。
+
+- sets_up_cn：为结果比较提供操纵定义。
+
+- evidence_pointer：Table 2前两段
+
+### 32. 第三组说明段
+
+- order：32
+
+- section：Research Methodology: Experimental Design
+
+- locator：第三组说明段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：增加Plat-SelfInt组作为传统惯例激励基准，以便衡量朋友礼物和互惠的总体效应。
+
+- rhetorical_function_cn：建立与常规实践的对比基准。
+
+- depends_on_cn：依赖三组设计。
+
+- sets_up_cn：为报告31.4%的相对提升提供基准组。
+
+- evidence_pointer：Experimental Design中Plat-SelfInt说明段
+
+### 33. P1 P2
+
+- order：33
+
+- section：Research Methodology: Timeline
+
+- locator：P1 P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实验分为预处理、配对、治疗三个两周期；挑战距离依据健康指南分配到30或45公里；发送提醒消息是常用做法。
+
+- rhetorical_function_cn：说明时间线和挑战设计的科学性。
+
+- depends_on_cn：依赖三组实验操纵。
+
+- sets_up_cn：为后续样本描述和结果分析确定时间窗口。
+
+- evidence_pointer：Timeline段
+
+### 34. P1-P2
+
+- order：34
+
+- section：Research Methodology: Sample Description
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过功效分析确定所需样本量，最终1738名登录接收者进入样本，每组约570人，超过保守功效需求。
+
+- rhetorical_function_cn：证明统计功效和样本规模。
+
+- depends_on_cn：依赖实验设计确定的三组结构。
+
+- sets_up_cn：为随机化平衡检验提供基础。
+
+- evidence_pointer：Sample Description第1-2段
+
+### 35. P3
+
+- order：35
+
+- section：Research Methodology: Sample Description
+
+- locator：P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：随机化平衡检验显示三组在发送者和接收者特征上基本平衡，仅接收者预处理距离有差异。
+
+- rhetorical_function_cn：保证随机化质量，识别需要后续处理的变量。
+
+- depends_on_cn：依赖最终样本确定。
+
+- sets_up_cn：为后文PSM/IPW处理不平衡做伏笔。
+
+- evidence_pointer：Table 5及相关段落
+
+### 36. P1-S1
+
+- order：36
+
+- section：Results: Comparison of Reciprocity vs Self-Interest
+
+- locator：P1-S1
+
+- move_code：RESULT
+
+- paraphrase_cn：三组挑战接受率无显著差异；因变量定义为是否完成挑战，拒绝者被计为未完成。
+
+- rhetorical_function_cn：设置结果测量的保守口径。
+
+- depends_on_cn：依赖实验设计和消息设计。
+
+- sets_up_cn：为后续完成率比较提供因变量定义。
+
+- evidence_pointer：Results第一部分第1段
+
+### 37. P2 S1
+
+- order：37
+
+- section：Results: Comparison of Reciprocity vs Self-Interest
+
+- locator：P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：完成率分别为30.6%、34.4%、40.4%，Frnd-Recip组显著高于其他两组。
+
+- rhetorical_function_cn：提供主结果的初步描述性证据。
+
+- depends_on_cn：依赖因变量定义。
+
+- sets_up_cn：为Probit回归做铺垫。
+
+- evidence_pointer：Results第一部分第2段
+
+### 38. P3-S4
+
+- order：38
+
+- section：Results: Comparison of Reciprocity vs Self-Interest
+
+- locator：P3-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：Probit模型显示Frnd-Recip系数显著；边际效应9.6pp对应31.4%提升，Wald检验确认优于Frnd-SelfInt 6.8pp即19.8%。
+
+- rhetorical_function_cn：正式检验H1并量化效应。
+
+- depends_on_cn：依赖描述性完成率。
+
+- sets_up_cn：为核心结论的数字基础提供模型证据。
+
+- evidence_pointer：Table 6及相关段落
+
+### 39. P5
+
+- order：39
+
+- section：Results: Comparison of Reciprocity vs Self-Interest
+
+- locator：P5
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：将拒绝者按治疗期达标重新定义为完成，结果与主模型一致。
+
+- rhetorical_function_cn：排除拒绝者处理方式造成的结果偏倚。
+
+- depends_on_cn：依赖主模型。
+
+- sets_up_cn：增强主要结论的稳健性。
+
+- evidence_pointer：Table 6 column (2)
+
+### 40. Figure 3前一段
+
+- order：40
+
+- section：Results: Comparison of Reciprocity vs Self-Interest
+
+- locator：Figure 3前一段
+
+- move_code：RESULT
+
+- paraphrase_cn：累计完成率曲线显示互惠组在整个14天中始终领先，排除了最后几天突击完成的可能性。
+
+- rhetorical_function_cn：提供时间维度的证据，说明效应非短期冲刺。
+
+- depends_on_cn：依赖主结果。
+
+- sets_up_cn：支持互惠产生持续动机的解释。
+
+- evidence_pointer：Figure 3及相关段落
+
+### 41. P1-S1
+
+- order：41
+
+- section：Results: Curvilinear Relationship between Closeness and Reciprocity Effects
+
+- locator：P1-S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用共同好友数测量亲近度，将其作为网络结构中反映信任和合作水平的连续指标。
+
+- rhetorical_function_cn：定义亲近度测量及其合理性。
+
+- depends_on_cn：依赖社会网络文献。
+
+- sets_up_cn：为H2回归模型提供自变量。
+
+- evidence_pointer：Curvilinear Relationship第一部分第1段
+
+### 42. P2-S4
+
+- order：42
+
+- section：Results: Curvilinear Relationship between Closeness and Reciprocity Effects
+
+- locator：P2-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：Probit二次项显著为负，Lind-Mehlum检验确认倒U形状。
+
+- rhetorical_function_cn：正式检验H2。
+
+- depends_on_cn：依赖亲近度测量。
+
+- sets_up_cn：为图4和替代测量提供结果支撑。
+
+- evidence_pointer：Table 7 column (1)及相关段落
+
+### 43. Figure 4前一段
+
+- order：43
+
+- section：Results: Curvilinear Relationship between Closeness and Reciprocity Effects
+
+- locator：Figure 4前一段
+
+- move_code：RESULT
+
+- paraphrase_cn：图示显示疏远和非常亲近时完成率约34%-37%，中度亲近时超过44%。
+
+- rhetorical_function_cn：可视化倒U关系，便于理解效应大小。
+
+- depends_on_cn：依赖H2回归。
+
+- sets_up_cn：为讨论关系条件和实践建议提供视觉证据。
+
+- evidence_pointer：Figure 4及相关段落
+
+### 44. P2
+
+- order：44
+
+- section：Results: Addressing Imbalance in Pretreatment Distances
+
+- locator：P2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：指出Frnd-SelfInt组预处理距离更高，如果不处理会低估互惠效果；使用PSM和IPW校正。
+
+- rhetorical_function_cn：识别并解决随机化中的不平衡问题。
+
+- depends_on_cn：依赖随机化平衡检验中发现的差异。
+
+- sets_up_cn：为匹配样本结果和距离比较提供方法保障。
+
+- evidence_pointer：Dealing with Imbalance Problem段
+
+### 45. P1
+
+- order：45
+
+- section：Results: Performance Comparisons
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：匹配样本OLS显示Frnd-Recip组治疗期距离比Frnd-SelfInt组多3.06公里，IPW验证为2.26公里。
+
+- rhetorical_function_cn：将主结果扩展到连续运动距离。
+
+- depends_on_cn：依赖PSM匹配样本。
+
+- sets_up_cn：为总体效果和普通用户基线比较提供距离指标。
+
+- evidence_pointer：Table 9 column (2)
+
+### 46. Treatment Effects when Compared to Normal App Users
+
+- order：46
+
+- section：Results: Robustness Checks
+
+- locator：Treatment Effects when Compared to Normal App Users
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：将Frnd-Recip与未被选中的合格朋友（普通用户）匹配比较，完成率高29.5pp，距离多9.54公里。
+
+- rhetorical_function_cn：提供纯基线对照，量化互惠设计的总效果。
+
+- depends_on_cn：依赖随机选接收者形成的自然对照。
+
+- sets_up_cn：增强外部有效性，显示总体干预效果。
+
+- evidence_pointer：Table 10 columns (1)-(2)
+
+### 47. Potential for Cheating Behavior
+
+- order：47
+
+- section：Results: Robustness Checks
+
+- locator：Potential for Cheating Behavior
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：排除手动记录、私人记录和异常速度记录后，结果仍显著；这些子样本比例三组无差异。
+
+- rhetorical_function_cn：排除作弊和数据质量威胁。
+
+- depends_on_cn：依赖平台记录的可选可见性和GPS数据。
+
+- sets_up_cn：保证结果真实性。
+
+- evidence_pointer：Table 10 columns (3)-(5)
+
+### 48. P2
+
+- order：48
+
+- section：Post-Treatment Surveys
+
+- locator：P2
+
+- move_code：RESULT
+
+- paraphrase_cn：事后调查中，64.5%的Frnd-Recip受访者表示希望向朋友表达感恩；情绪上未发现负面副作用。
+
+- rhetorical_function_cn：提供机制过程证据，说明感恩动机主导。
+
+- depends_on_cn：依赖主结果和调查数据。
+
+- sets_up_cn：为讨论中的机制解释提供支持。
+
+- evidence_pointer：Post-Treatment Surveys第2段
+
+### 49. P3
+
+- order：49
+
+- section：Post-Treatment Surveys
+
+- locator：P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：用IOS量表作为主观亲近度测量，结果也显示倒U关系。
+
+- rhetorical_function_cn：验证H2不依赖单一客观测量。
+
+- depends_on_cn：依赖调查数据和H2模型。
+
+- sets_up_cn：为结论中关系连续体的理论贡献提供多测量支持。
+
+- evidence_pointer：Table 7 column (2)
+
+### 50. P1 S2-S3
+
+- order：50
+
+- section：Discussion and Conclusion: Main Findings and Contributions
+
+- locator：P1 S2-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结核心发现：互惠相对传统自利提升31.4%，控制朋友效应后仍提升19.8%；等额财务支出下互惠更强。
+
+- rhetorical_function_cn：将实证结果压缩为贡献主张。
+
+- depends_on_cn：依赖全部结果。
+
+- sets_up_cn：为理论贡献和边界条件铺路。
+
+- evidence_pointer：Discussion第1段
+
+### 51. P3-P4
+
+- order：51
+
+- section：Discussion and Conclusion: Main Findings and Contributions
+
+- locator：P3-P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献包括将互惠扩展到需要大量努力的健康行为、首次与自利激励比较、将社交关系作为连续体并发现倒U。
+
+- rhetorical_function_cn：把结果升华为三个理论贡献点。
+
+- depends_on_cn：依赖前文的实证结果和文献缺口。
+
+- sets_up_cn：为实践含义和未来研究做框架。
+
+- evidence_pointer：Discussion第3-4段
+
+### 52. P1
+
+- order：52
+
+- section：Discussion and Conclusion: Limitations
+
+- locator：P1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：治疗期仅两周，不足以验证长期习惯形成，需要未来研究考察重复互惠干预。
+
+- rhetorical_function_cn：界定时间边界，保护贡献不致过度泛化。
+
+- depends_on_cn：依赖实验设计的时间线。
+
+- sets_up_cn：为未来研究提出第一个方向。
+
+- evidence_pointer：Limitations第1段
+
+### 53. P2
+
+- order：53
+
+- section：Discussion and Conclusion: Limitations
+
+- locator：P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：虚拟金币和抽奖类型可能影响效果，未来应改变礼物价值和类型进行检验。
+
+- rhetorical_function_cn：界定激励形式边界。
+
+- depends_on_cn：依赖实验中的激励具体化。
+
+- sets_up_cn：为后续研究提供变体设计思路。
+
+- evidence_pointer：Limitations第2段
+
+### 54. 整段
+
+- order：54
+
+- section：Discussion and Conclusion: Conclusion
+
+- locator：整段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结：利用可穿戴和社交网络，本文设计并检验了基于互惠的激励，证明它能显著改进传统激励，并可通过合理配对进一步增强。
+
+- rhetorical_function_cn：闭合全文，回顾研究设计、发现和价值。
+
+- depends_on_cn：依赖全部结果和贡献。
+
+- sets_up_cn：无，结束全文。
+
+- evidence_pointer：Conclusion段
+
+## 写作技术
+
+- gap_construction_cn：先通过健康负担和激励不确定性引入问题，指出“互惠是普遍规范但很少用于健康促进”；然后列出两个技术和成本障碍，再用新技术能力填补；最后通过与先前互惠文献的三点差异建立贡献空间。
+
+- signposting_cn：引言最后列出两个研究问题；文献结尾提出H1/H2；方法中明确三组标签；结果部分按假设顺序组织；稳健性检验和附录都有清晰标题。
+
+- transition_logic_cn：从“为什么互惠可能优于自利”到H1，再到“因为互惠是关系机制，所以社会亲近度很重要”到H2；从主效应到调节，再到稳健性、调查、边界。
+
+- claim_evidence_rhythm_cn：每个假设后直接给出统计模型、表格和边际效应；先百分比差异，后回归系数，再用图展示时间过程；每段结果后有解释。
+
+- benchmark_narrative_cn：Plat-SelfInt作为实践基准，Frnd-SelfInt作为机制基准，普通未通知用户作为总效果基准；基准之间形成分层比较，让每个数字都有意义。
+
+- theory_return_cn：将倒U解释为关系维护成本收益，并将结果与Chen等人实验室结果不一致归于测量粗粒度；提出连续体是理论贡献。
+
+- contribution_positioning_cn：在讨论中将贡献分为健康行为新情境、与自利比较、调节关系三层，并在每层用“据我们所知/首次”等定位。
+
+- novelty_protection_cn：强调“等价财务支出”下依然有效，排除朋友身份单独效应，并通过多个稳健性检验证明不是一次性/短期效应或作弊；用图3排除最后几天冲刺。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立现实问题和现有激励不完全有效
+
+- research_job_cn：收集健康成本统计和激励效果系统综述
+
+- required_evidence_cn：健康负担数据、激励效果不一致的证据
+
+- transition_to_next_cn：现有激励效果有限，需要探索其他机制
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：提出候选机制并说明技术可行性
+
+- research_job_cn：梳理互惠/礼物交换文献，连接数字平台能力
+
+- required_evidence_cn：互惠普遍性、可穿戴/社交网络可行性
+
+- transition_to_next_cn：机制可衡量且可在数字平台操作
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：用理论推导假设
+
+- research_job_cn：引入SET，识别机制差异和调节变量
+
+- required_evidence_cn：理论命题和可检验假设
+
+- transition_to_next_cn：需要通过实验比较
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：设计随机现场实验，含多组对照
+
+- research_job_cn：定义操纵、对照、样本、随机化流程
+
+- required_evidence_cn：平台数据、三组消息、随机化协议
+
+- transition_to_next_cn：先看主效应
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：检验主效应并用多个基准表示
+
+- research_job_cn：Probit回归、Wald检验、完成率比较
+
+- required_evidence_cn：显著系数和边际效应
+
+- transition_to_next_cn：主效应背后是否存在关系条件？
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：检验调节效应并使用标准倒U检验
+
+- research_job_cn：选择合适的亲近度测量，建立二次项模型
+
+- required_evidence_cn：二次项负且通过Lind-Mehlum检验
+
+- transition_to_next_cn：是否有混淆？
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：处理不平衡、作弊、替代解释
+
+- research_job_cn：PSM/IPW、子样本分析、排除作弊
+
+- required_evidence_cn：结果保持一致
+
+- transition_to_next_cn：机制是什么？
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：用调查和附录加固机制与外部有效性
+
+- research_job_cn：事后调查动机、情绪、主观亲近度，补充网络影响和登录选择分析
+
+- required_evidence_cn：调查动机比例高、情绪无差异、替代测量仍倒U
+
+- transition_to_next_cn：写贡献和边界
+
+### most_transferable_moves_cn
+
+1. 两个RQ的预制预告
+
+2. 用对照组分离核心机制（朋友效应 vs 互惠）
+
+3. 多重基准使数字可解释
+
+4. 稳健性检验对应潜在反解释
+
+5. 讨论中将实证结果升华为设计知识
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 大规模真实跑步社交平台及两周精确追踪
+
+2. 超过1700对用户（实际2744对同意配对）
+
+3. 平台内置金币抽奖机制
+
+4. 事前事中提醒消息系统
+
+5. GPS和社交网络结构数据
+
+6. 长期现场部署和IT基础设施
+
+### what_not_to_copy_superficially_cn
+
+1. 没有真实随机化和适当对照组，仅用互惠关键词无法支撑因果主张
+
+2. 没有亲近度测量，不能声称倒U
+
+3. 没有朋友不知情设计，无法排除社交压力
+
+4. 没有多种稳健性检验，不能排除作弊/样本选择
+
+5. 不要将小调查视为机制证据
+
+- single_best_description_of_the_routine_cn：用现场实验把‘互惠优于自利’的一般假设置入真实数字社交平台，通过多层对照将机制从朋友效应和基准效应中剥离，再用关系强度和一系列稳健性检验把结果升华为可复用设计知识。
+
+## 分析边界
+
+全文和附录完整，但图表中的图像细节（图2、A1-A4）无法从文本完全重现，句子位置为段落级别估计而非精确页码。

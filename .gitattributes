@@ -1,0 +1,31 @@
+* text=auto
+
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+
+*.pdf binary
+*.pptx binary
+*.docx binary
+*.xlsx binary
+*.zip binary
+*.pkl binary
+
+# The canonical Otero corpus and raw decision streams are source evidence, not
+# hand-edited code. Keep them compressible in ordinary Git while suppressing
+# noisy web diffs and language statistics. No Git LFS is configured because the
+# corpus consists of many small text files rather than large individual objects.
+database_fulltext_all/*.md text eol=lf -diff linguist-generated=true
+database_fulltext_all/*.jsonl text eol=lf -diff linguist-generated=true
+runs/**/output_v1/decisions.csv text eol=lf -diff linguist-generated=true
+runs/**/output_v1/decisions.jsonl text eol=lf -diff linguist-generated=true
+runs/ais_basket_final_audit_133_flash/**/*.csv text eol=lf -diff linguist-generated=true
+runs/ais_basket_final_audit_133_flash/**/*.jsonl text eol=lf -diff linguist-generated=true

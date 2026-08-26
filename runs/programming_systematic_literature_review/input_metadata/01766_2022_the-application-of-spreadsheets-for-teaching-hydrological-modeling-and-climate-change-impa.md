@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85130471861"
+title: "The application of spreadsheets for teaching hydrological modeling and climate change impacts on streamflow"
+authors: "Pérez-Sánchez J.; Senent-Aparicio J.; Jimeno-Sáez P."
+year: "2022"
+journal: "Computer Applications in Engineering Education"
+doi: "10.1002/cae.22541"
+---
+# Scopus title-abstract-keyword metadata
+Title: The application of spreadsheets for teaching hydrological modeling and climate change impacts on streamflow
+Abstract: Hydrology teaching currently relies upon educators' background, requiring a change in training future professionals to manage water resources to address climate change, among other issues. In the teaching experience described in this paper, traditional lectures in a postgraduate civil engineering master's degree were replaced by the development and assessment of a lumped hydrological model implemented into an Excel spreadsheet. Although the primary activity evaluated the long-term impacts of climate change on streamflow in a watershed, the students were required to address several specific issues such as calibration and validation processes, goodness-of-fit metrics, uncertainties of parameters, and sensitivity analysis. The learning experience's efficacy was assessed by conducting two surveys comparing the participants' knowledge before and after the exercise. The results revealed that 92.3% of the students considered that their hydrological skills had improved significantly following the exercise. Furthermore, the acquisition of hydrological modeling concepts was satisfactorily appreciated by all the participants, 97.6% of whom considered it useful or highly useful. Using a spreadsheet as a complementary tool in hydrology teaching increases student participation and motivation provided it is a contemporary and appealing issue, and the teacher clearly defines, monitors, and follows up on the class objectives. © 2022 Wiley Periodicals LLC.
+Author keywords: civil engineering; conceptual thinking; hydrology education; hydrology modeling; spreadsheet
+Index keywords: Climate change; Curricula; Sensitivity analysis; Spreadsheets; Stream flow; Students; Surveys; Uncertainty analysis; Water resources; Climate change impact; Conceptual thinking; Excel spreadsheets; Hydrological models; Hydrology education; Hydrology modeling; Long-term impacts; Master degree; Teaching experience; Waters resources; Hydrology
+Document type: Article
+Conference: 
+Source title: Computer Applications in Engineering Education
+Year: 2022
+EID: 2-s2.0-85130471861
+DOI: 10.1002/cae.22541
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

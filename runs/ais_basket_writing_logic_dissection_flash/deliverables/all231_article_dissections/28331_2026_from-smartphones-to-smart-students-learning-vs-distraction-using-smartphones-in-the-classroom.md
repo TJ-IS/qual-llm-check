@@ -1,0 +1,1841 @@
+# From Smartphones to Smart Students: Learning vs. Distraction Using Smartphones in the Classroom
+
+- 作者：Zhe Deng; Zhi (Aaron) Cheng; Pedro Ferreira; Paul A. Pavlou
+- 年份 / 期刊：2026 / Information Systems Research
+- DOI：10.1287/isre.2022.0078
+- 源文件：28331_2026_from-smartphones-to-smart-students-learning-vs-distraction-using-smartphones-in-the-classroom.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：智能手机进入课堂会如何影响学生的学习与分心，进而影响学业表现？教师引导、渠道/内容以及学生群体异质性如何调节这一影响？
+
+- 制品与设计：作者在两个真实课堂随机对照试验中，将职业中学语文课学生随机分配到四种条件：禁用手机、允许随意使用、允许使用且教师提示用手机辅助教学、禁用手机但使用纸版词典辅助教学；开发了与纸版内容完全相同的智能手机词典app，并用前后测相同试题的成绩差衡量学习收益，用录像编码客观测量学生用手机/不用手机时的学习与分心时间。
+
+- 客观结果：实验1中，相比禁用，允许随意使用使成绩增益下降6.729分（约0.32个标准差），教师引导使用则提高5.528分（约0.26个标准差）；智能手机学习时间占比每提高1个百分点使成绩增益提高2.7分，分心时间占比每提高1个百分点使成绩增益下降0.15分。实验2复制出类似结果：随意使用下降4.592分，教师引导提高8.914分；学习占比效应为3.2分，分心占比效应为-0.11分；纸版词典条件与禁用条件无显著差异，而教师引导手机条件显著优于纸版条件。
+
+- 核心贡献：作者声称首次在真实课堂中用两个RCT提供智能手机使用对学生成绩的因果证据；将智能手机的总效应分解为智能手机辅助学习的正效应与智能手机诱发分心的负效应；用录像而非自我报告测量学生学习和分心时间；为教师、学校管理者和政策制定者制定课堂手机使用政策提供实证依据。
+
+- 整篇论证链：论证从ICT对学生成绩的混合证据和全球学校禁用智能手机的政策争论出发，指出现有研究多为相关研究、依赖自我报告、聚焦ICT投资总量而非学生个体如何使用技术，因而不能区分课堂中的学习与分心机制。作者用两个职业中学课堂RCT建立政策层面的因果效应：无引导允许使用降低成绩，教师引导使用提高成绩；然后通过录像编码和两阶段最小二乘/LATE估计证明，成绩变化主要来自智能手机学习时间的边际收益远大于分心损失；第二实验加入内容相同但渠道为纸版的Tp条件，分离内容效应与渠道效应，证明正的效应来自智能手机渠道；教师面部和姿态分析排除教师跨条件学习造成的混淆；最后用交互项揭示IT专业、城市出生、男性和低成绩学生在教师引导条件下获益更多，既可能缩小性别和成绩差距，也可能造成IT/城市学生的富者愈富动态，从而在讨论中回扣政策缺口并限定结论边界。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章核心是在真实职业中学课堂中随机分配四种智能手机政策，以现场实验方式操纵数字设备和教学辅助方式，并用前后测和录像测量因果效应；它不是设计科学制品或benchmark为主，也不是纯形式模型，而是政策干预的现场因果检验。
+
+- 主导写作弧线判定：写作弧线从课堂智能手机使用这一现象出发，将其拆为学习和分心两种机制，设计随机化干预（政策条件）在现场课堂中检验因果，并用视频数据、IV和异质性分析深化机制与边界，最后回到政策含义。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：研究依次展开为：第一RCT建立政策总效应；视频编码和IV/LATE揭示学习vs分心的机制；第二RCT复制总效应并加入纸版词典条件分离渠道与内容；教师一致性检验排除教师学习混淆；异质性分析刻画群体边界与政策启示。每一阶段都承接前一阶段留下的未解决问题，并使因果主张逐步从总效应走向机制和边界。
+
+### studies_or_phases
+
+#### 1. 第一实验：三种智能手机政策的总效应
+
+- order：1
+
+- name_cn：第一实验：三种智能手机政策的总效应
+
+- question_cn：在真实语文课堂中，相比禁用手机，允许随意使用和教师引导使用分别如何影响学生成绩增益？
+
+- inputs_and_setting_cn：中国某职业中学2019级482名学生中随机抽取375名，三场各90分钟语文课，同一教师、同一大教室、连续三个工作日同一时间；前测/后测成绩、学生人口学数据、教室监控录像。
+
+- designed_or_compared_object_cn：三种实验条件：B禁用手机、Ta允许随意使用、Ti允许使用且教师提示使用词典app辅助教学。
+
+- baseline_control_or_counterfactual_cn：以禁用手机条件B为基线；Ta和Ti分别代表无引导分心与教师引导学习；前测用于平衡检验。
+
+##### objective_metrics
+
+1. 前测分数
+
+2. 后测分数
+
+3. 成绩增益=后测-前测
+
+4. 录像编码得到的智能手机学习时间、非智能手机学习时间、智能手机分心时间、非智能手机分心时间
+
+- analysis_method_cn：OLS回归，对Ta和Ti做虚拟变量，控制人口学变量，Bonferroni校正多重检验。
+
+- main_result_cn：前测在各条件间平衡；Ta相对B使成绩增益下降约0.32个标准差；Ti相对B使成绩增益提高约0.26个标准差；Ta与Ti差异显著。
+
+- argumentative_role_cn：用RCT在真实课堂建立政策层面的因果总效应，证明无引导允许使用有害、教师引导使用有益。
+
+- remaining_uncertainty_cn：为什么Ta和Ti会产生这些效应？是否真的源于智能手机学习/分心时间的变化，而不是教师差异、内容或其他混淆？
+
+- link_to_next_phase_cn：为解释机制，需要录像编码得到每位学生的学习与分心时间，并用三阶段回归估计时间分配的中介/边际效应。
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Figure 1
+
+3. Table 2
+
+4. Table 3
+
+5. Table 4
+
+#### 2. 机制分解：视频编码与IV/LATE分析
+
+- order：2
+
+- name_cn：机制分解：视频编码与IV/LATE分析
+
+- question_cn：智能手机政策如何改变学生的学习/分心时间占比，而这些时间占比又如何影响成绩增益？
+
+- inputs_and_setting_cn：第一实验的359名有有效视频编码的学生；20名编码员对180段30分钟视频片段独立编码；录像包括学生桌面和手机屏幕画面。
+
+- designed_or_compared_object_cn：以政策条件Ta/Ti作为工具变量，分析智能手机学习时间占比%LS和智能手机分心时间占比%DS对成绩增益的影响。
+
+- baseline_control_or_counterfactual_cn：阶段一以B为基线估计政策对%LS/%DS的影响；阶段二用政策条件的预测值估计LATE。
+
+##### objective_metrics
+
+1. %LS = LS/(LS+LO)
+
+2. %DS = DS/(DS+DO)
+
+3. 成绩增益
+
+4. Cragg-Donald弱工具变量统计量
+
+- analysis_method_cn：两阶段最小二乘/LATE；第一阶段回归政策条件对%LS和%DS，第二阶段回归成绩增益对第一阶段预测值；控制人口学变量与Bonferroni校正。
+
+- main_result_cn：教师提示使%LS从Ta到Ti增加约3.8个百分点；%LS每增加1个百分点提高成绩增益2.7分，%DS每增加1个百分点降低0.15分，学习收益约为分心损失的18倍；总学习时间占比不预测成绩。
+
+- argumentative_role_cn：将政策总效应分解为智能手机学习收益和分心损失，证明教师引导之所以有效是因为学习收益远超分心代价。
+
+- remaining_uncertainty_cn：第一实验结果是否可复制？智能手机与纸质工具之间的差异是来自渠道还是内容？教师是否在Ta和Ti之间因学习而改变授课？
+
+- link_to_next_phase_cn：需要第二实验复制原三条件并新增纸版词典条件，以分离渠道与内容并排除教师学习混淆。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Section 5.2
+
+3. Table 4
+
+4. Table 5
+
+5. Section 4.1 Cohen's kappa
+
+#### 3. 第二实验：复制主效应并分离渠道与内容
+
+- order：3
+
+- name_cn：第二实验：复制主效应并分离渠道与内容
+
+- question_cn：第一实验的效应能否在不同年级、不同教师、不同场次下复制？相同内容经由智能手机渠道还是纸版渠道造成差异？
+
+- inputs_and_setting_cn：2024级524名学生，八场语文课，两位新教师，第一周和第二周各四天；包含B、Ta、Ti、Tp四种条件；同一大教室；前测/后测、录像、教师面部摄像头；30名编码员编码480段视频。
+
+- designed_or_compared_object_cn：复制B/Ta/Ti，并新增Tp条件：禁用手机但教师提示使用与智能手机app内容相同的纸版词典辅助教学。
+
+- baseline_control_or_counterfactual_cn：以B为基线比较Ta、Ti、Tp；用Ti对Tp的比较分离渠道效应（智能手机vs纸版），因为内容相同。
+
+##### objective_metrics
+
+1. 前测分数
+
+2. 后测分数
+
+3. 成绩增益
+
+4. %LS/%DS（或第Tp条件下纸版工具使用时间）
+
+5. Ti vs Tp差异
+
+- analysis_method_cn：与实验1相同OLS；加入Tp虚拟变量；比较Ti与Tp；用包含工具使用时间的第一阶段回归查看工具使用差异。
+
+- main_result_cn：Ta相对B降低成绩增益约0.21个标准差，Ti相对B提高约0.41个标准差；Tp与B无显著差异，Ti显著大于Tp；纸版工具使用率低，分心时间可忽略。
+
+- argumentative_role_cn：复制增加稳健性；Tp条件显示正效应来自智能手机渠道而非额外学习内容。
+
+- remaining_uncertainty_cn：教师可能从先实施的Ta中学习而在Ti中讲得更好；异质性群体是否对政策反应不同？
+
+- link_to_next_phase_cn：用教师面部和姿态数据检验教师一致性，然后用交互项分析群体异质性。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Table 6
+
+3. Table 7
+
+4. Table 8
+
+5. Table 9
+
+6. Table 10
+
+7. Table 11
+
+#### 4. 教师一致性检验：排除教师侧学习混淆
+
+- order：4
+
+- name_cn：教师一致性检验：排除教师侧学习混淆
+
+- question_cn：教师在Ta和Ti条件下是否真正以相同方式授课，从而排除教师从先前条件中学习导致的混淆？
+
+- inputs_and_setting_cn：第二实验中面向教师的摄像头，每五秒采样；对教师面部表情、头部姿态、嘴唇距离、视线注视进行自动化提取。
+
+- designed_or_compared_object_cn：比较同一教师在Ta和Ti条件下的面部情绪、头部姿态、眼动、唇动等12个协变量。
+
+- baseline_control_or_counterfactual_cn：无差异是理想反事实；随机选择课堂内两个时刻比较Ta和Ti的协变量，并bootstrap 10,000次。
+
+##### objective_metrics
+
+1. 各协变量在Ta和Ti之间p值大于0.05的比例
+
+2. 12个协变量包括愤怒、厌恶、恐惧、快乐、悲伤、惊讶、中性、头部姿态x/y、唇距、眼动x/y
+
+- analysis_method_cn：随机抽取讲座内两个时间点，比较Ta与Ti的均值差异；重复10,000次并统计p值大于0.05的百分比。
+
+- main_result_cn：绝大多数协变量在Ta与Ti间无系统差异（例如快乐87%/84%，中性86%/87%，头部姿态和眼动大多接近100%），表明教师授课行为相似。
+
+- argumentative_role_cn：排除教师侧学习这一替代解释，增强因果推断的内部有效性。
+
+- remaining_uncertainty_cn：主效应和机制对哪些学生群体更强或更弱尚不清楚；政策含义需要异质性证据。
+
+- link_to_next_phase_cn：转向异质性分析，检验IT专业、城乡、性别、内容熟悉度和先前成绩的调节作用。
+
+##### evidence_pointers
+
+1. Section 6.4
+
+2. Table 12
+
+3. Online Appendix C
+
+#### 5. 异质性分析：谁从教师引导的智能手机使用中获益或受损
+
+- order：5
+
+- name_cn：异质性分析：谁从教师引导的智能手机使用中获益或受损
+
+- question_cn：智能手机政策效果是否因学生信息技术熟悉度、城乡出生、性别、内容熟悉度和先前成绩而不同？
+
+- inputs_and_setting_cn：两个实验的学生人口学变量；专业（IT/非IT）、出生地（农村Hukou/城市）、性别、前测成绩；第一实验还使用入学考试成绩AES代理先前成绩。
+
+- designed_or_compared_object_cn：在回归中加入Ta/Ti与各调节变量的交互项，同时估计多个异质性；对先前成绩用Table 13回归残差做进一步分析。
+
+- baseline_control_or_counterfactual_cn：以B为基线，比较不同子群体在Ta和Ti中的表现差异；IT/非IT、城市/农村、男/女、熟悉/不熟悉、低/高成绩均为分组变量。
+
+##### objective_metrics
+
+1. 成绩增益
+
+2. 交互项系数
+
+3. AES（第一实验）
+
+- analysis_method_cn：带交互项和控制变量的OLS；Bonferroni校正；Simultaneous heterogeneity estimation；使用残差回归估计低/高成绩异质性。
+
+- main_result_cn：IT专业和城市学生在Ti中获益更多，形成富者愈富；男性在Ti中获益更多而女性在Ta中相对更好，可能缩小性别差距；低成绩学生在Ti中获益更多，可能缩小成绩差距；对内容熟悉度未见显著异质性。
+
+- argumentative_role_cn：把因果效应扩展为边界条件和政策含义：既指出缩小差距的可能性，也警告数字鸿沟加剧的风险。
+
+- remaining_uncertainty_cn：结论局限于特定语文课、词典app、90分钟课堂和职业中学样本；长期效应和其他设备/学科未测。
+
+- link_to_next_phase_cn：进入讨论与结论，回扣引言中的ICT混合证据和学校禁用政策争论，给出教师、学校和政策的针对性建议，并声明局限。
+
+##### evidence_pointers
+
+1. Section 7
+
+2. Figure 2
+
+3. Table 13
+
+4. Table 14
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. RQ_OR_OBJECTIVE: 开篇点明调查课堂智能手机使用对学生学业表现的影响。
+
+2. STUDY_OVERVIEW: 介绍与职业中学合作、随机分配四种实验条件。
+
+3. DESIGN_FEATURE: 说明使用自定义词典app与纸版词典作为辅助工具。
+
+4. METHOD_JUSTIFICATION: 用前后相同测试衡量成绩增益。
+
+5. RESULT: 允许随意用降低成绩，教师引导使用提高成绩。
+
+6. RESULT: 纸版辅助与禁用成绩相似。
+
+7. METHOD_JUSTIFICATION: 用录像编码追踪学习与分心时间。
+
+8. MECHANISM: 教师引导下智能手机学习的边际收益超过分心损失。
+
+9. RESULT: 可能弥合性别和成绩差距。
+
+10. BOUNDARY_CONDITION: 可能造成IT/城市学生富者愈富。
+
+11. CONTRIBUTION: 为技术辅助学习文献和政策制定提供启示。
+
+### introduction_moves
+
+1. CONTEXT: 智能手机拥有率快速上升，课堂在场性普遍。
+
+2. GAP: 关于教室中智能手机对学生成绩的影响所知甚少。
+
+3. LIMITATION: ICT生产率研究多集中在国家/行业/企业层面而非个体注意力。
+
+4. LIMITATION: ICT教育研究多关注投资和可及性，而非使用方式。
+
+5. GAP: 需要学生层面的研究，把学习收益和分心进行对比。
+
+6. RQ_OR_OBJECTIVE: 用两个RCT回答三个研究问题。
+
+7. STUDY_OVERVIEW: 概述四个实验条件和前后测设计。
+
+8. RESULT: 报告两个实验的总效应和边际效应数字。
+
+9. MECHANISM: 教师提示增加学习用手机，收益超过分心。
+
+10. METHOD_JUSTIFICATION: 用视频编码测学习与分心，并检查教师一致性。
+
+11. RESULT: 纸版条件与禁用类似。
+
+12. BOUNDARY_CONDITION: IT、城市、男性、低成绩学生获益更多，也存在富者愈富。
+
+13. CONTRIBUTION: 因果RCT、机制分解、客观测量、政策启示四点贡献。
+
+### theory_and_knowledge_moves
+
+1. CONTEXT: ICT在学校已普及但教育效果证据混杂。
+
+2. PRIOR_KNOWLEDGE: 列出负面、零效应和正面的ICT研究。
+
+3. LIMITATION: 不同设置和程序使比较困难，缺乏因果证据。
+
+4. THEORY_PROPOSITION: 多任务处理增加任务切换成本并减少认知控制，损害学习。
+
+5. PRIOR_KNOWLEDGE: 笔记电脑多任务和智能手机使用与更低GPA相关。
+
+6. LIMITATION: 多数相关研究依赖自我报告，可能偏差。
+
+7. GAP: 纵向研究也不能区分学习型与分心型智能手机使用。
+
+8. THEORY_PROPOSITION: 智能手机也可通过移动性、个性和社交渠道帮助学习。
+
+9. THEORY_PROPOSITION: 训练注意力假说提出多任务可能提升认知灵活性。
+
+10. LIMITATION: 支持训练注意力假说的实证证据有限。
+
+11. CONTRIBUTION: 本研究的RCT和丰富数据可填补因果和机制缺口。
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE: 设置B/Ta/Ti/Tp四条件，代表禁用、随意用、教师引导用、纸版辅助。
+
+2. DESIGN_FEATURE: 智能手机词典app与纸版词典内容完全相同。
+
+3. REQUIREMENT: Ta和Ti的唯一差别是教师是否提示使用app。
+
+4. METHOD_JUSTIFICATION: 条件按B、Ta、Ti顺序实施以减少干扰。
+
+5. METHOD_JUSTIFICATION: 使用教室监控摄像头和视频编码客观测量学习/分心。
+
+6. DESIGN_FEATURE: 第二实验用教师面部摄像头监测授课一致性。
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 随机分配使OLS系数可作因果解释，并检验前测平衡。
+
+2. BENCHMARK_OR_CONTRAST: B为基线，Ta/Ti/Tp作为政策对比。
+
+3. METHOD_JUSTIFICATION: 三阶段回归：先政策对成绩，再政策对时间分配，再用IV估计时间分配对成绩的LATE。
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST: Cragg-Donald检验排除弱工具变量。
+
+5. RESULT: 第一实验和第二实验系数方向一致，复制成功。
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST: Tp条件分离渠道与内容。
+
+7. ROBUSTNESS_OR_BOUNDARY_TEST: 教师面部/姿态分析排除教师学习。
+
+8. RESULT: 异质性交互项揭示群体差异。
+
+### discussion_and_contribution_moves
+
+1. RESULT: 总结四条件效应：禁用优于随意用，教师引导最佳，纸版与禁用无显著差异。
+
+2. MECHANISM: 总学习时间不预测成绩，关键在于学习和分心是否发生在智能手机上。
+
+3. CONTRIBUTION: 用RCT、分解学习/分心、客观视频测量、政策启示回应引言缺口。
+
+4. BOUNDARY_CONDITION: 结果受限于语文课、词典app、90分钟课堂和特定学生样本。
+
+5. LIMITATION_AND_FUTURE: 长期效应、其他学科/应用/设备、课外使用等留待未来研究。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 多任务处理与认知负荷文献
+
+2. 注意力稀缺与训练注意力假说
+
+3. ICT与教育绩效的混合证据
+
+4. 自我报告偏差与纵向研究局限
+
+5. 渠道与内容区分逻辑
+
+6. 数字鸿沟、性别与IT使用差异文献
+
+7. 吸收能力理论
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：理论主要塑造了机制预期和研究变量（学习vs分心、多任务、注意力、数字鸿沟等），但核心实验设计不是从理论推导出的技术制品，而是围绕课堂智能手机政策争论和RCT逻辑构造的四种条件；教师提示和词典app属于政策操作化，而非由理论严格导出的设计要求。
+
+- 理论到设计翻译链：多任务/认知负荷理论指出手机会诱发分心，因此需要设计“允许随意使用”与“禁用”对比，并客观测量分心时间；注意力稀缺和教师提示思想指出引导可以重新定向注意力，因此需要设计“教师提示使用”条件；为区分技术渠道与学习内容，需要保持app和纸版词典内容一致；为验证学习收益大于分心损失，需要用随机政策作为工具变量做IV/LATE；为处理数字鸿沟、性别和吸收能力，需要收集人口学/户籍/AES等变量并做交互分析。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：多任务处理和认知负荷理论：智能手机诱发多任务，增加任务切换和认知负荷，损害学习。
+
+- mechanism_cn：无引导使用手机时，学生把注意从课堂学习转向分心内容。
+
+- design_requirement_cn：需要设置无引导允许使用条件，并测量分心时间。
+
+- artifact_choice_cn：Ta条件：手机允许但不做任何限制或提示。
+
+- evaluated_contrast_cn：Ta vs B（禁用）。
+
+- objective_result_cn：Ta显著降低成绩增益（实验1 -6.729，实验2 -4.592）。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 7
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：注意力是稀缺资源，教师提示可以重新定向学生注意力到学习任务。
+
+- mechanism_cn：教师提示增加智能手机学习时间，即使分心时间也可能增加。
+
+- design_requirement_cn：需要设置教师主动提示使用学习工具的条件，且与Ta的唯一差别是提示。
+
+- artifact_choice_cn：Ti条件：教师提示学生使用词典app查询生词。
+
+- evaluated_contrast_cn：Ti vs B 和 Ti vs Ta。
+
+- objective_result_cn：Ti显著提高成绩增益，%LS从Ta到Ti增加约4个百分点；学习边际效应远大于分心边际效应。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 4
+
+3. Table 5
+
+4. Table 7
+
+5. Table 8
+
+6. Table 9
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：效果可来自学习内容，也可来自技术渠道；为区分需要保持内容相同而渠道不同。
+
+- mechanism_cn：纸版词典缺乏智能手机的互动性和吸引力，使用率低，分心少但学习辅助也少。
+
+- design_requirement_cn：需要构造与app内容完全相同的纸版词典，并由教师同样提示使用。
+
+- artifact_choice_cn：Tp条件：禁用手机但使用纸版词典。
+
+- evaluated_contrast_cn：Tp vs B 和 Ti vs Tp。
+
+- objective_result_cn：Tp与B无显著差异，Ti显著高于Tp，说明正效应来自智能手机渠道而非额外内容。
+
+##### evidence_pointers
+
+1. Section 6.3
+
+2. Table 10
+
+3. Table 11
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：技术辅助学习的收益可能超过分心损失（训练注意力假说及相关理论）。
+
+- mechanism_cn：在教师提示下，智能手机学习的边际生产力很高，分心边际损失相对小。
+
+- design_requirement_cn：需要估计%LS与%DS各自的边际效应，而不是只估计总效应。
+
+- artifact_choice_cn：以随机分配条件作为工具变量估计LATE。
+
+- evaluated_contrast_cn：%LS和%DS对成绩增益的IV回归。
+
+- objective_result_cn：%LS每1 p.p.提高2.7/3.2分，%DS每1 p.p.降低0.15/0.11分，收益约为损失的18倍和29倍。
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Table 9
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：数字鸿沟、性别差异和吸收能力会影响谁从技术中获益。
+
+- mechanism_cn：IT专业和城市学生更熟悉智能手机，可能更快把学习工具用于学习；男生和低成绩学生在提示下可能获得额外边际收益。
+
+- design_requirement_cn：需要收集专业、户籍、性别、AES等变量并做交互分析。
+
+- artifact_choice_cn：异质性交互项回归。
+
+- evaluated_contrast_cn：Ta/Ti与IT、城市、男性、低成绩的交互项。
+
+- objective_result_cn：Ti对IT专业、城市、男生、低成绩学生收益更大；既可能缩小性别/成绩差距，也可能扩大IT/城市优势。
+
+##### evidence_pointers
+
+1. Section 7
+
+2. Table 13
+
+3. Table 14
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. RCT field experiment with two experiments
+
+2. Pre/post identical tests within each lecture
+
+3. Video coding of L.S./L.O./D.S./D.O.
+
+4. First-stage policy-to-time-allocation regressions
+
+5. IV/LATE estimation for %LS and %DS
+
+6. Replication across cohorts, teachers, and lecture sessions
+
+7. Channel vs content isolation via paper dictionary condition
+
+8. Teacher consistency check using facial emotion/head pose/gaze/lip movement
+
+9. Heterogeneous treatment effect analysis by demographics and prior performance
+
+- why_these_evaluations_cn：主要挑战是因果识别和机制分解。RCT解决政策层面的因果关系；前后测试题相同解决学习收益的可比测量；视频编码替代自我报告以客观化学习和分心时间；三阶段回归和IV/LATE把总效应分解为学习收益与分心损失；第二实验复制解决单一样本风险；Tp条件分离渠道和内容；教师面部分析排除教师学习；异质性分析提供边界和公平含义。
+
+- benchmark_and_contrast_chain_cn：B（禁用）是贯穿全文的基线；Ta是“允许但不引导”的分心对照；Ti是“允许+教师引导”的学习处理；Tp是“禁用+纸版辅助”的渠道对照；第二阶段用政策条件作为工具变量估计%LS和%DS的边际效应；异质性分析在相同基准上比较各子群体的交互项。这样，证据链从“政策是否有影响”推进到“为什么影响”，再到“通过什么渠道影响”，最后到“对谁影响更大”。
+
+### claim_evidence_ledger
+
+#### 1. 允许随意使用智能手机降低成绩增益。
+
+- claim_cn：允许随意使用智能手机降低成绩增益。
+
+- evidence_cn：实验1 Table 3 Ta系数-6.729；实验2 Table 7 Ta系数-4.592；前测平衡。
+
+- tested_cn：直接检验，RCT+OLS
+
+#### 2. 教师引导使用智能手机提高成绩增益。
+
+- claim_cn：教师引导使用智能手机提高成绩增益。
+
+- evidence_cn：实验1 Table 3 Ti系数5.528；实验2 Table 7 Ti系数8.914；Ti vs Ta显著。
+
+- tested_cn：直接检验，RCT+OLS
+
+#### 3. 纸版词典辅助与禁用无显著差异。
+
+- claim_cn：纸版词典辅助与禁用无显著差异。
+
+- evidence_cn：Table 10 Tp系数不显著；Ti vs Tp显著。
+
+- tested_cn：直接检验，通道/内容隔离
+
+#### 4. 成绩提高源于智能手机学习收益大于分心损失。
+
+- claim_cn：成绩提高源于智能手机学习收益大于分心损失。
+
+- evidence_cn：Table 4/8第一阶段：Ti增加%LS约4p.p.；Table 5/9第二阶段：%LS正、%DS负且收益远大于损失；Cragg-Donald不弱。
+
+- tested_cn：直接检验，IV/LATE机制估计
+
+#### 5. 教师没有因Ta先实施而在Ti中教得不同。
+
+- claim_cn：教师没有因Ta先实施而在Ti中教得不同。
+
+- evidence_cn：Table 12教师面部/姿态/眼动比较，p>0.05比例普遍很高。
+
+- tested_cn：直接检验，但仅针对第二实验的两位教师
+
+#### 6. IT专业、城市、男性和低成绩学生在Ti中获益更多。
+
+- claim_cn：IT专业、城市、男性和低成绩学生在Ti中获益更多。
+
+- evidence_cn：Table 13交互项系数；Table 14低成绩学生交互项。
+
+- tested_cn：探索性异质性分析；内容熟悉度不显著且作者承认样本量限制
+
+#### 7. 本研究首次用RCT提供真实课堂因果证据，并分解学习和分心机制。
+
+- claim_cn：本研究首次用RCT提供真实课堂因果证据，并分解学习和分心机制。
+
+- evidence_cn：全文的实验设计、视频测量、IV估计和贡献段落。
+
+- tested_cn：设计层面的主张，未通过统计检验直接验证
+
+- internal_validity_strategy_cn：使用随机分配、前测平衡检验、同一教师与相同授课节奏指令、条件顺序实施以减少干扰、前后测试题由经验教师设计且由授课教师匿名统一评分、Bonferroni校正、Cragg-Donald弱工具变量检验、教师面部/姿态一致性检验。
+
+- external_validity_strategy_cn：在第二实验用不同年级、不同教师、更多场次复制第一实验；报告多个异质性维度；说明研究情境为90分钟语文课、词典app、职业中学；并在讨论中明确这些边界，避免过度推广。
+
+- what_is_not_actually_tested_cn：长期累积效应未被测量；结果未推广到其他学科、其他app、更短/更长课堂、平板或其他设备；第一实验没有像第二实验那样的教师面部一致性验证；编码者是否对实验条件保持盲法未在正文中说明；纸版词典的低使用率可能混入了工具可用性/吸引力因素，而不单纯是渠道效应。
+
+## 贡献闭环
+
+- technical_claim_cn：结合真实课堂RCT、视频客观编码和IV/LATE，可以估计智能手机学习时间与分心时间的边际效应，并在两个实验中复制出相近结果（学习收益2.7/3.2，分心损失-0.15/-0.11）。
+
+- artifact_claim_cn：教师引导使用智能手机词典app（Ti）显著提高成绩增益，且优于无引导允许使用和相同内容的纸版词典；纸版词典条件与禁用无显著差异。
+
+- mechanism_claim_cn：智能手机的总效应不是由总学习时间变化驱动，而是由学习/分心是否发生在智能手机上驱动；教师提示增加智能手机学习时间，其边际收益远超智能手机分心的边际损失。
+
+- boundary_claim_cn：效应在90分钟语文课、词典app、职业中学样本中成立；对IT专业、城市、男性和低成绩学生更有利；不能外推到其他学科、其他设备、更长/短课堂或长期效应。
+
+- reusable_design_knowledge_cn：课堂手机政策不应简单二分禁用/允许；教师提示是把手机从分心工具转为学习工具的关键设计；相同学习内容经由不同渠道（智能手机vs纸版）会产生不同使用率和学习效果；政策应根据学生群体特征（专业、城乡、性别、成绩）定制。
+
+- theoretical_contribution_cn：将智能手机对学生成绩的总效应分解为学习收益与分心损失，用机制证据支持“技术辅助学习收益大于分心”的观点；通过异质性把结果与数字鸿沟、性别差异和吸收能力理论连接，说明技术既可能缩小部分差距也可能扩大另一些差距。
+
+- how_discussion_closes_intro_gap_cn：引言指出现有文献缺乏个体层面、能区分学习和分心的因果证据；讨论部分用两个RCT证明禁用优于随意用、教师引导优于禁用、纸版无效，并用视频编码和IV说明收益来自智能手机学习而非总学习时间，直接回扣缺口，同时给出教师、学校和政策建议。
+
+- overclaim_or_unsupported_leaps_cn：把“纸版词典无显著效果”解释为渠道效应时，可能忽略了纸版词典体验差、使用率低这一中介，不完全等同于纯渠道效应；用两个实验的系数比较（18倍/29倍）宣传“收益远超损失”依赖于LATE框架和局部样本；异质性分析多为探索性，作者承认内容熟悉度不显著且需要更大样本；长期效应和跨设备推广在讨论中被声明为局限，但正文某些政策建议语气可能超出直接证据。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者开篇说明研究课堂内智能手机使用对学生学业表现的影响。
+
+- rhetorical_function_cn：一句话确定全文研究主题。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为摘要后续的实验设计提供主题框架。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者介绍与中国职业中学合作，将学生随机分配到四种条件。
+
+- rhetorical_function_cn：表明证据来自RCT而非观察数据。
+
+- depends_on_cn：研究主题。
+
+- sets_up_cn：为因果主张奠定方法基础。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：四种条件分别是禁用、允许随意用、允许但在教师提示下用于教学、禁用但使用纸版工具。
+
+- rhetorical_function_cn：让读者看到政策对照的完整设计。
+
+- depends_on_cn：随机分配介绍。
+
+- sets_up_cn：后面报告各条件的结果差异。
+
+- evidence_pointer：Abstract P1 S3
+
+### 4. P2 S1
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者用讲座开始和结束时相同测试的分数差度量成绩增益。
+
+- rhetorical_function_cn：说明结果变量的构造方式及其可比性。
+
+- depends_on_cn：实验设计。
+
+- sets_up_cn：使成绩增益成为核心因变量。
+
+- evidence_pointer：Abstract P2 S1
+
+### 5. P2 S2
+
+- order：5
+
+- section：Abstract
+
+- locator：P2 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：允许随意使用智能手机而不加引导降低了成绩增益，相比禁用条件。
+
+- rhetorical_function_cn：给出第一个核心负向发现。
+
+- depends_on_cn：成绩增益测量。
+
+- sets_up_cn：引出教师引导条件作为对策。
+
+- evidence_pointer：Abstract P2 S2
+
+### 6. P2 S3
+
+- order：6
+
+- section：Abstract
+
+- locator：P2 S3
+
+- move_code：RESULT
+
+- paraphrase_cn：当教师要求学生用智能手机辅助教学时，成绩增益显著增加。
+
+- rhetorical_function_cn：给出第二个核心正向发现。
+
+- depends_on_cn：无条件允许的负效应。
+
+- sets_up_cn：支持“引导使用能够转化分心为学习”的核心命题。
+
+- evidence_pointer：Abstract P2 S3
+
+### 7. P2 S4
+
+- order：7
+
+- section：Abstract
+
+- locator：P2 S4
+
+- move_code：RESULT
+
+- paraphrase_cn：使用纸版词典辅助的学生与禁用手机的学生表现相似。
+
+- rhetorical_function_cn：说明纸版工具效果有限。
+
+- depends_on_cn：四种条件设置。
+
+- sets_up_cn：为渠道与内容分离的讨论铺垫。
+
+- evidence_pointer：Abstract P2 S4
+
+### 8. P3 S1
+
+- order：8
+
+- section：Abstract
+
+- locator：P3 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为揭示机制，作者分析课堂录像，追踪学生学习和分心的时间。
+
+- rhetorical_function_cn：说明机制证据来自客观视频编码。
+
+- depends_on_cn：政策效应结果。
+
+- sets_up_cn：引入学习vs分心的机制框架。
+
+- evidence_pointer：Abstract P3 S1
+
+### 9. P3 S2
+
+- order：9
+
+- section：Abstract
+
+- locator：P3 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：教师引导下的成绩提高来自智能手机辅助学习的边际收益超过分心带来的负效应。
+
+- rhetorical_function_cn：给出全文的机制性解释。
+
+- depends_on_cn：视频编码数据。
+
+- sets_up_cn：为政策建议提供因果机制依据。
+
+- evidence_pointer：Abstract P3 S2
+
+### 10. P3 S3-S4
+
+- order：10
+
+- section：Abstract
+
+- locator：P3 S3-S4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：允许智能手机辅助教学可能帮助弥合性别和成绩差距，但也可能造成IT专业或城市学生获益更多的富者愈富动态。
+
+- rhetorical_function_cn：在摘要中就引入异质性边界。
+
+- depends_on_cn：主效应与机制。
+
+- sets_up_cn：暗示政策需要因群体而异。
+
+- evidence_pointer：Abstract P3 S3-S4
+
+### 11. P4
+
+- order：11
+
+- section：Abstract
+
+- locator：P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结研究贡献于技术辅助学习文献，并对教师、学校管理者和政策制定者有启示。
+
+- rhetorical_function_cn：摘要结尾声明贡献与受众。
+
+- depends_on_cn：全部结果。
+
+- sets_up_cn：引导读者关注政策含义。
+
+- evidence_pointer：Abstract final paragraph
+
+### 12. P1 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：过去十年全球智能手机拥有率大幅增长，例如美国从35%升至90%。
+
+- rhetorical_function_cn：建立技术普及的现实背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：说明课堂手机使用是普遍且重要的问题。
+
+- evidence_pointer：Introduction P1
+
+### 13. P1 S2-S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P1 S2-S3
+
+- move_code：GAP
+
+- paraphrase_cn：虽然已有研究讨论智能手机价值，但对教室中手机如何影响学业成绩知之甚少；ICT生产率研究多在宏观层面，结果混杂。
+
+- rhetorical_function_cn：制造核心知识缺口。
+
+- depends_on_cn：智能手机普及背景。
+
+- sets_up_cn：引出需要个体层面和注意力层面的研究。
+
+- evidence_pointer：Introduction P1 S2-S3
+
+### 14. P2 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：关于ICT和学生成绩的研究结果混杂，可能因为关注投资和可及性而非学生如何使用技术学习。
+
+- rhetorical_function_cn：限制已有文献的因果解释力。
+
+- depends_on_cn：宏观混合证据。
+
+- sets_up_cn：呼吁转向使用方式。
+
+- evidence_pointer：Introduction P2
+
+### 15. P2 S2-P3 S1
+
+- order：15
+
+- section：Introduction
+
+- locator：P2 S2-P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出需要通过学生层面研究，用两个RCT回答三个研究问题，并收集个体层面数据揭示因果机制。
+
+- rhetorical_function_cn：把缺口转成明确的研究目标。
+
+- depends_on_cn：前文缺口。
+
+- sets_up_cn：预告实验设计和贡献。
+
+- evidence_pointer：Introduction P2-P3
+
+### 16. P4 S1-S3
+
+- order：16
+
+- section：Introduction
+
+- locator：P4 S1-S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者描述第一实验三条件和第二实验新增纸版条件，且智能手机app与纸版词典内容相同。
+
+- rhetorical_function_cn：让读者在进入正文前掌握实验设计全貌。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：为结果数字提供设计依据。
+
+- evidence_pointer：Introduction P4
+
+### 17. P5 S1-S4
+
+- order：17
+
+- section：Introduction
+
+- locator：P5 S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：两个实验均显示无引导允许使用降低成绩，教师引导使用提高成绩；学习时间占比正效应大于分心占比负效应。
+
+- rhetorical_function_cn：在引言给出最重要的实证结果。
+
+- depends_on_cn：实验设计。
+
+- sets_up_cn：为机制讨论做铺垫。
+
+- evidence_pointer：Introduction P5
+
+### 18. P6 S1-S3
+
+- order：18
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明用视频编码测量学习和分心时间，并记录教师表情姿态以排除教师侧学习。
+
+- rhetorical_function_cn：强调机制测量的客观性和内部有效性。
+
+- depends_on_cn：政策效应结果。
+
+- sets_up_cn：为机制分析和稳健性检验作预告。
+
+- evidence_pointer：Introduction P6
+
+### 19. P7 S1-S3
+
+- order：19
+
+- section：Introduction
+
+- locator：P7 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：纸版条件用来区分内容效应和渠道效应；结果纸版与禁用类似。
+
+- rhetorical_function_cn：解释第二个实验的核心设计逻辑。
+
+- depends_on_cn：第二实验设计。
+
+- sets_up_cn：为渠道效应主张建立结构。
+
+- evidence_pointer：Introduction P7
+
+### 20. P8 S1-S5
+
+- order：20
+
+- section：Introduction
+
+- locator：P8 S1-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：作者报告IT专业、城市、男性和低成绩学生在引导使用中获益更多，并警示富者愈富。
+
+- rhetorical_function_cn：在引言就引入群体异质性。
+
+- depends_on_cn：主效应结果。
+
+- sets_up_cn：为后文异质性分析和政策建议埋伏笔。
+
+- evidence_pointer：Introduction P8
+
+### 21. P9
+
+- order：21
+
+- section：Introduction
+
+- locator：P9
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出四点贡献：RCT因果证据、分解学习/分心、客观视频测量、为政策提供实证依据。
+
+- rhetorical_function_cn：在引言末尾定位全文贡献。
+
+- depends_on_cn：所有引言中预告的结果。
+
+- sets_up_cn：让读者按四层贡献评价正文。
+
+- evidence_pointer：Introduction P9
+
+### 22. P1-P4
+
+- order：22
+
+- section：Section 2.1
+
+- locator：P1-P4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者系统梳理ICT对学生成绩的负面、零效应和正面证据。
+
+- rhetorical_function_cn：建立文献混杂的证据格局。
+
+- depends_on_cn：引言的问题背景。
+
+- sets_up_cn：说明为什么需要新的因果证据。
+
+- evidence_pointer：Section 2.1
+
+### 23. P1-P3
+
+- order：23
+
+- section：Section 2.2
+
+- locator：P1-P3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者用手机拥有率数据说明智能手机比其他设备更普及，并介绍各国学校禁用政策。
+
+- rhetorical_function_cn：把学术缺口连接到现实政策争论。
+
+- depends_on_cn：ICT混合证据。
+
+- sets_up_cn：为“需要更好理解如何有效使用手机”提供实践理由。
+
+- evidence_pointer：Section 2.2
+
+### 24. P1
+
+- order：24
+
+- section：Section 2.3
+
+- locator：P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：多任务处理会因任务切换而降低效率并削弱认知控制，从而可能引发分心和错误。
+
+- rhetorical_function_cn：引入解释手机负面效应的认知机制。
+
+- depends_on_cn：文献回顾。
+
+- sets_up_cn：预告分心是负效应来源。
+
+- evidence_pointer：Section 2.3 P1
+
+### 25. P2-P3
+
+- order：25
+
+- section：Section 2.3
+
+- locator：P2-P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：笔记本电脑多任务和智能手机使用的研究普遍发现与学生成绩负相关，但许多研究依赖自我报告。
+
+- rhetorical_function_cn：提供相关证据并指出测量局限。
+
+- depends_on_cn：多任务理论。
+
+- sets_up_cn：为RCT和视频测量提供必要性。
+
+- evidence_pointer：Section 2.3 P2-P3
+
+### 26. P5
+
+- order：26
+
+- section：Section 2.3
+
+- locator：P5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：这些研究多为相关研究；纵向研究虽改善因果但未区分课堂手机用于学习和用于分心。
+
+- rhetorical_function_cn：点明现有证据的因果和机制缺陷。
+
+- depends_on_cn：文献综述。
+
+- sets_up_cn：引出本文RCT和机制分解的贡献。
+
+- evidence_pointer：Section 2.3 P5
+
+### 27. P7-P8
+
+- order：27
+
+- section：Section 2.3
+
+- locator：P7-P8
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：智能手机也可能通过移动性、个性化学习和社会分享帮助学习；训练注意力假说认为频繁多任务可能提高认知灵活性。
+
+- rhetorical_function_cn：给出智能手机正效应的理论可能。
+
+- depends_on_cn：负效应证据。
+
+- sets_up_cn：说明需要同时检验学习与分心。
+
+- evidence_pointer：Section 2.3 P7-P8
+
+### 28. P2-P3
+
+- order：28
+
+- section：Section 3.1
+
+- locator：P2-P3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者描述第一实验从482人中随机抽取375人，条件B、Ta、Ti均由同一教师在同一教室讲授相同语文内容。
+
+- rhetorical_function_cn：说明实验设计和随机化。
+
+- depends_on_cn：研究问题。
+
+- sets_up_cn：为因果推断建立条件。
+
+- evidence_pointer：Section 3.1
+
+### 29. P4-P5
+
+- order：29
+
+- section：Section 3.1
+
+- locator：P4-P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于只有一位教师，三个条件按B、Ta、Ti顺序实施以减少干扰；前测后宣布政策，Ti中教师示范词典app。
+
+- rhetorical_function_cn：解释顺序设计和程序操作。
+
+- depends_on_cn：实验条件定义。
+
+- sets_up_cn：保护课堂实验的内部有效性。
+
+- evidence_pointer：Section 3.1 P4-P5
+
+### 30. P7
+
+- order：30
+
+- section：Section 3.1
+
+- locator：P7
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：教室的监控摄像头和编码员用于测量学生使用手机学习或分心的时间。
+
+- rhetorical_function_cn：引入客观行为测量。
+
+- depends_on_cn：实验环境。
+
+- sets_up_cn：为后续视频编码数据和方法做铺垫。
+
+- evidence_pointer：Section 3.1 P7
+
+### 31. P1-P2
+
+- order：31
+
+- section：Section 3.2
+
+- locator：P1-P2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：第二实验用新一批524名学生、两位新教师和四条件，并在Tp中使用内容与app相同的纸版词典。
+
+- rhetorical_function_cn：介绍复制实验和新增处理。
+
+- depends_on_cn：第一实验的经验。
+
+- sets_up_cn：为复制、渠道分离和教师检验提供基础。
+
+- evidence_pointer：Section 3.2
+
+### 32. P1-P3
+
+- order：32
+
+- section：Section 4.1
+
+- locator：P1-P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明数据集包括人口学、前后测成绩和视频；视频编码将行为分为L.S.、L.O.、D.S.、D.O.，并由多组编码员独立编码，信度很高。
+
+- rhetorical_function_cn：定义变量和测量方法。
+
+- depends_on_cn：实验实施。
+
+- sets_up_cn：为机制分析提供数据结构。
+
+- evidence_pointer：Section 4.1
+
+### 33. P1
+
+- order：33
+
+- section：Section 4.2
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：第一步用OLS估计政策条件对后测和成绩增益的影响，以B为基线并控制学生特征。
+
+- rhetorical_function_cn：给出政策总效应的估计模型。
+
+- depends_on_cn：随机设计。
+
+- sets_up_cn：为第二步机制分析提供总效应。
+
+- evidence_pointer：Section 4.2 P1
+
+### 34. P2-P3
+
+- order：34
+
+- section：Section 4.2
+
+- locator：P2-P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：第二/三步先用政策条件预测%LS和%DS，再用两阶段最小二乘估计这些时间占比对成绩增益的LATE。
+
+- rhetorical_function_cn：说明机制分解的识别策略。
+
+- depends_on_cn：随机政策工具。
+
+- sets_up_cn：为LATE结果做方法铺垫。
+
+- evidence_pointer：Section 4.2 P2-P3
+
+### 35. P4
+
+- order：35
+
+- section：Section 4.2
+
+- locator：P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：如果政策对%LS和%DS影响小，第一阶段就无法工作；影响大才能识别学习与分心的相对作用。
+
+- rhetorical_function_cn：解释第一阶段估计的意义。
+
+- depends_on_cn：IV框架。
+
+- sets_up_cn：让读者理解为什么第一阶段结果重要。
+
+- evidence_pointer：Section 4.2 P4
+
+### 36. P1-P2
+
+- order：36
+
+- section：Section 5.1
+
+- locator：P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：第一实验的描述统计显示前测约28.9、后测约80.8，学生约76%时间学习；各条件总学习时间相似。
+
+- rhetorical_function_cn：提供样本结果概览并引出注意力资源有限性解释。
+
+- depends_on_cn：数据编码。
+
+- sets_up_cn：说明总学习时间不是成绩差异来源。
+
+- evidence_pointer：Section 5.1, Table 2
+
+### 37. P1
+
+- order：37
+
+- section：Section 5.2
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：第一实验主结果显示前测平衡，Ta降低成绩增益6.729分，Ti提高5.528分。
+
+- rhetorical_function_cn：报告核心因果效应。
+
+- depends_on_cn：OLS模型。
+
+- sets_up_cn：为第一阶段和第二阶段机制分析提供总效应。
+
+- evidence_pointer：Table 3
+
+### 38. P2
+
+- order：38
+
+- section：Section 5.2
+
+- locator：P2
+
+- move_code：RESULT
+
+- paraphrase_cn：第一阶段结果显示教师提示使智能手机学习时间占比从Ta到Ti增加3.8个百分点，而分心占比有所下降。
+
+- rhetorical_function_cn：证明政策确实改变了智能手机学习的相对使用。
+
+- depends_on_cn：政策效应。
+
+- sets_up_cn：为第二阶段LATE提供有效工具变量。
+
+- evidence_pointer：Table 4
+
+### 39. P3
+
+- order：39
+
+- section：Section 5.2
+
+- locator：P3
+
+- move_code：RESULT
+
+- paraphrase_cn：第二阶段结果显示智能手机学习时间占比每增加1个百分点提高成绩增益2.7分，分心占比每增加1个百分点降低0.15分，收益约为损失18倍。
+
+- rhetorical_function_cn：报告机制分解的核心数字。
+
+- depends_on_cn：IV/LATE。
+
+- sets_up_cn：支持“引导学习收益超过分心损失”的机制主张。
+
+- evidence_pointer：Table 5
+
+### 40. P1-P3
+
+- order：40
+
+- section：Section 6.2
+
+- locator：P1-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：第二实验复制出Ta降低、Ti提高的效应；第一阶段%LS增加3.9个百分点；第二阶段学习效应3.2、分心效应-0.11，收益约损失29倍。
+
+- rhetorical_function_cn：用独立样本复制第一实验。
+
+- depends_on_cn：第二实验设计。
+
+- sets_up_cn：增强结果稳健性。
+
+- evidence_pointer：Table 7, Table 8, Table 9
+
+### 41. P4
+
+- order：41
+
+- section：Section 6.2
+
+- locator：P4
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者强调两个实验结果高度一致，提供实证复制支持。
+
+- rhetorical_function_cn：把复制作为稳健性论据。
+
+- depends_on_cn：两个实验的结果。
+
+- sets_up_cn：为后续渠道分离和异质性提供信心。
+
+- evidence_pointer：Section 6.2 final paragraph
+
+### 42. P1-P2
+
+- order：42
+
+- section：Section 6.3
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：Tp条件使用与app内容相同的纸版词典，使作者能分离渠道和内容；结果显示Tp与B无显著差异，Ti显著更大。
+
+- rhetorical_function_cn：说明渠道分离设计及其结果。
+
+- depends_on_cn：第二实验四条件。
+
+- sets_up_cn：把正效应归因于智能手机渠道。
+
+- evidence_pointer：Table 10
+
+### 43. P1-P3
+
+- order：43
+
+- section：Section 6.4
+
+- locator：P1-P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者担忧教师从Ta到Ti可能因学习而改变授课，因此用第二实验教师面部表情、头部姿态、嘴唇和眼动数据，在不同时刻比较Ta与Ti，并通过bootstrap得到高比例p值大于0.05。
+
+- rhetorical_function_cn：排除教师侧学习这一替代解释。
+
+- depends_on_cn：第二实验教师录像。
+
+- sets_up_cn：保护因果推断并引向异质性。
+
+- evidence_pointer：Section 6.4, Table 12
+
+### 44. P1-P3
+
+- order：44
+
+- section：Section 7
+
+- locator：P1-P3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者扩展分析到五个学生特征：信息技术熟悉度、城乡、性别、内容熟悉度、先前成绩，用交互项同时估计异质性。
+
+- rhetorical_function_cn：预告异质性分析的维度。
+
+- depends_on_cn：主效应和机制结果。
+
+- sets_up_cn：为政策公平含义提供证据。
+
+- evidence_pointer：Section 7 start
+
+### 45. P1
+
+- order：45
+
+- section：Section 7.1
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：IT专业学生在教师引导条件下比非IT专业获益更多，形成富者愈富。
+
+- rhetorical_function_cn：报告第一类异质性。
+
+- depends_on_cn：交互项回归。
+
+- sets_up_cn：为数字鸿沟政策讨论提供依据。
+
+- evidence_pointer：Section 7.1, Table 13
+
+### 46. P1
+
+- order：46
+
+- section：Section 7.2
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：城市出生学生在Ta和Ti中都比农村学生获益更多，可能加剧城乡数字鸿沟。
+
+- rhetorical_function_cn：报告第二类异质性。
+
+- depends_on_cn：户籍数据。
+
+- sets_up_cn：为针对性政策提供依据。
+
+- evidence_pointer：Section 7.2, Table 13
+
+### 47. P1
+
+- order：47
+
+- section：Section 7.3
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：女性在无引导条件下相对受益更多，而男性在教师引导条件下受益更多，因此引导可能缩小性别差距。
+
+- rhetorical_function_cn：报告性别异质性及其解释。
+
+- depends_on_cn：性别交互项。
+
+- sets_up_cn：为缩小教育差距的论点提供证据。
+
+- evidence_pointer：Section 7.3, Table 13
+
+### 48. P1
+
+- order：48
+
+- section：Section 7.4
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：内容熟悉度未显示显著异质性，但系数方向提示无引导可能不利于不熟悉内容的学生，引导则可能有利。
+
+- rhetorical_function_cn：报告无显著发现并承认检验力有限。
+
+- depends_on_cn：前测作为熟悉度代理。
+
+- sets_up_cn：说明需要更大样本。
+
+- evidence_pointer：Section 7.4, Table 13
+
+### 49. P1
+
+- order：49
+
+- section：Section 7.5
+
+- locator：P1
+
+- move_code：RESULT
+
+- paraphrase_cn：使用AES数据，低成绩学生在教师引导条件下比高成绩学生获益更多，可能缩小成绩差距。
+
+- rhetorical_function_cn：报告先前成绩的异质性。
+
+- depends_on_cn：AES和Table 13残差。
+
+- sets_up_cn：说明技术可能帮助低成绩学生。
+
+- evidence_pointer：Section 7.5, Table 14
+
+### 50. P1-P2
+
+- order：50
+
+- section：Discussion
+
+- locator：P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：作者重申四个条件的结果：禁用优于随意用，教师引导最佳，纸版与禁用无显著差异。
+
+- rhetorical_function_cn：在讨论开头总结核心发现。
+
+- depends_on_cn：全部实证结果。
+
+- sets_up_cn：支撑机制和政策含义。
+
+- evidence_pointer：Section 8 P1-P2
+
+### 51. P3
+
+- order：51
+
+- section：Discussion
+
+- locator：P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：总学习时间在各条件间相似，不能预测成绩；成绩取决于学习和分心是否发生在智能手机上，教师引导增加智能手机学习并带来收益。
+
+- rhetorical_function_cn：把结果上升为机制解释。
+
+- depends_on_cn：视频编码和IV结果。
+
+- sets_up_cn：为政策建议提供因果机制。
+
+- evidence_pointer：Section 8 P3
+
+### 52. P4
+
+- order：52
+
+- section：Discussion
+
+- locator：P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者把发现总结为对技术辅助学习的贡献，并提出教师、学校和政策制定者的建议。
+
+- rhetorical_function_cn：讨论部分回扣引言贡献。
+
+- depends_on_cn：主效应、机制和异质性结果。
+
+- sets_up_cn：结尾处处理局限和未来研究。
+
+- evidence_pointer：Section 8 P4
+
+### 53. P5
+
+- order：53
+
+- section：Discussion
+
+- locator：P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认结果受限于特定学科、词典app、90分钟课堂，并指出长期效应、其他设备和其他情境需要未来研究。
+
+- rhetorical_function_cn：限定结论的适用范围。
+
+- depends_on_cn：研究设计和结果。
+
+- sets_up_cn：保护论文不过度推广。
+
+- evidence_pointer：Section 8 P5
+
+## 写作技术
+
+- gap_construction_cn：先用ICT混合证据和学校禁用政策争论制造现实张力，再指出既有文献关注宏观层面或ICT投资/可及性、依赖自我报告、多为相关研究、不能区分学习与分心，从而把缺口定位为“个体层面、因果性、机制可分解”的空白。
+
+- signposting_cn：摘要和引言列出三个RQ；文献综述末尾预告RCT和丰富数据；每个实验用小标题标注；实证策略三步骤在分析前说明；异质性分析在开头列出五个维度；讨论回扣贡献。
+
+- transition_logic_cn：从总效应到机制用“为什么”和“时间分配”过渡；从第一实验到第二实验用复制与渠道分离过渡；从机制到异质性用“扩展分析”过渡；从异质性到讨论用政策含义和局限过渡。
+
+- claim_evidence_rhythm_cn：每个主结果先给出表格系数，再换算为标准差或百分比；机制结果先报告第一阶段政策对时间分配的影响，再报告第二阶段IV边际效应；异质性按五个维度逐节给出交互系数并解释差异方向。
+
+- benchmark_narrative_cn：B始终是基线；Ta代表无引导分心，Ti代表教师引导学习，Tp代表纸版渠道；两个实验复用同一套对比结构，使Benchmark叙事在复制中自然成立。
+
+- theory_return_cn：结果返回多任务/认知负荷、注意力稀缺、训练注意力假说、数字鸿沟、性别差异和吸收能力等理论概念，说明为什么教师提示能重定向注意力、为什么某些群体获益更大。
+
+- contribution_positioning_cn：在引言末尾用四点贡献清单定位：因果RCT、机制分解、客观测量、政策启示；在讨论中再次复述，使每个贡献都有对应证据。
+
+- novelty_protection_cn：通过复制实验、客观视频编码、IV/LATE机制分解、纸版渠道对照和教师一致性检验，防止结果被解释为一次性相关、自我报告偏差或教师效应；同时主动声明边界，降低过度推广风险。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立现实问题：用技术普及、政策争论和ICT混合证据说明为什么课堂智能手机使用重要且悬而未决。
+
+- research_job_cn：系统综述ICT教育、智能手机与成绩、多任务和注意力的文献，定位缺口。
+
+- required_evidence_cn：证明已有研究多为宏观/相关/自我报告，无法分离学习与分心。
+
+- transition_to_next_cn：从缺口直接引出需要RCT+个体层面机制数据。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：设计干预：详细描述实验环境、参与者、随机分配、实验条件、前测/后测和课时安排。
+
+- research_job_cn：在真实课堂建立B、Ta、Ti（必要时Tp）等对照，并保证教师、内容和测试一致。
+
+- required_evidence_cn：基线平衡、政策宣布时间线、同一教师/同一内容/同一教室等事实。
+
+- transition_to_next_cn：从政策总效应进入“为什么”机制问题。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：测量机制：说明视频编码变量、编码流程、信度，并报告政策对时间分配的第一阶段影响。
+
+- research_job_cn：用录像编码得到学习/分心时间，验证教师提示确实增加了智能手机学习时间。
+
+- required_evidence_cn：高Cohen's kappa、第一阶段系数显著、%LS变化幅度。
+
+- transition_to_next_cn：需要估计这些时间分配对成绩的边际效应。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：因果机制估计：报告IV/LATE模型、弱工具变量检验、边际效应及其经济意义。
+
+- research_job_cn：用随机政策条件作为工具变量，估计%LS/%DS对成绩的LATE。
+
+- required_evidence_cn：Cragg-Donald统计量大于临界值，%LS正、%DS负且方向一致。
+
+- transition_to_next_cn：用第二实验复制并加入渠道对照。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：复制和边界：描述第二实验、新增纸版条件、教师一致性检验，并用表格报告复制结果。
+
+- research_job_cn：在不同年级/教师下复制主效应；用内容一致的纸版词典分离渠道与内容；用教师面部/姿态数据排除教师学习。
+
+- required_evidence_cn：Ti vs B显著、Tp vs B不显著、Ti vs Tp显著、教师一致性p值比例高。
+
+- transition_to_next_cn：从平均效应转向谁受益/谁受损。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：异质性分析：按人口学和技术熟悉度分组报告交互效应，并解释对公平和政策的意义。
+
+- research_job_cn：收集专业、户籍、性别、前测/AES等变量，估计交互项。
+
+- required_evidence_cn：交互项系数及其显著性，以及对缩小/扩大差距的可靠解释。
+
+- transition_to_next_cn：进入讨论和局限，回扣引言缺口。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：定位贡献和边界：总结主要发现，声明因果/机制/测量/政策四层贡献，并明确适用范围和未来方向。
+
+- research_job_cn：把结果与引言缺口对应，提供政策建议，列出未测条件和长期效应。
+
+- required_evidence_cn：只声称被证据支持的内容，不把单一情境结果推广为普适结论。
+
+- transition_to_next_cn：论文结束；读者获得可操作的边界化知识。
+
+### most_transferable_moves_cn
+
+1. 把政策争论转译为可随机分配的离散条件：禁用、允许、允许+引导、纸版对照。
+
+2. 用前后相同测试的成绩差作为短期学习收益指标。
+
+3. 用视频编码替代自我报告，定义L.S./L.O./D.S./D.O.四类行为。
+
+4. 用三阶段回归和IV/LATE分离两个同时发生的行为机制。
+
+5. 用第二实验复制+渠道对照保护因果推断。
+
+6. 在贡献清单中明确因果、机制、测量、政策四层，分别对应证据。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要学校合作、真实课堂和教室监控摄像头。
+
+2. 需要大量人工视频编码员（20-30人）并保证高信度。
+
+3. 需要开发与研究内容完全一致的智能手机app和纸版词典。
+
+4. 需要同一教师连续多天在同一教室授课，且能安排随机抽取的多个学生群体。
+
+5. 需要完整的行政数据（人口学、专业、户籍、AES）。
+
+6. 需要第二实验的教师面部/姿态分析工具和bootstrap检验。
+
+### what_not_to_copy_superficially_cn
+
+1. 只写“教师引导提高成绩”而没有真实随机分配、前测平衡和同一教师控制，会失败。
+
+2. 只用自我报告时间数据却声称分解了学习与分心，会缺少机制有效性。
+
+3. 把纸版词典结果解释为渠道效应时，必须保证内容完全一致和教师提示相同，否则混淆。
+
+4. 没有复制实验时不宜宣称稳健性。
+
+5. 未收集群体人口学特征时不能做异质性政策建议。
+
+- single_best_description_of_the_routine_cn：用真实课堂RCT把“智能手机禁用还是允许”的政策争论转化为可分离的学习-分心机制，再以视频测量和IV估计证明教师引导下的学习收益超出分心损失，最后按群体异质性给出边界化的政策建议。
+
+## 分析边界
+
+分析基于提供的全文OCR，表格和排版可能有微小数字误差；在线附录中的图3、Table 15以及部分盒图未包含在正文，只能依据正文引用推断；作者未在正文中明确说明视频编码员是否对实验条件盲法，因此内部有效性描述仅基于已有文本；第7.5节低成绩分析使用AES亚样本，样本量较小；以上限制可能影响对部分稳健性细节的完全重建。

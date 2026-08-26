@@ -1,0 +1,1097 @@
+{
+  "record_id": "28654",
+  "source_file": "28654_2024_motion-sensorbased-fall-prevention-for-senior-care-a-hidden-markov-model-with-generative-adversa.md",
+  "title": "Motion Sensor–Based Fall Prevention for Senior Care: A Hidden Markov Model with Generative Adversarial Network Approach",
+  "authors": "Shuo Yu; Yidong Chai; Sagar Samtani; Hongyan Liu; Hsinchun Chen",
+  "year": "2024",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2023.1203",
+  "fulltext_chars": 90491,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "healthcare_and_care",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:34:59.615760+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何设计一种基于可穿戴运动传感器的智能信息处理制品，在无需大量人工特征工程、能够处理尖峰谷值的复杂传感器数据分布，并支持提前触发保护装置的情况下，更有效地预防老年人跌倒伤害？",
+    "artifact_and_design_cn": "两阶段跌倒预防框架。第一阶段是HMM-GAN：将传统隐马尔可夫模型（HMM）中的高斯混合模型（GMM）替换为熵正则生成对抗网络（entropic GAN），用HMM状态转移矩阵捕获跨snippet的顺序信息，用entropic GAN为每个状态生成观测似然（surrogate likelihood），从而自动提取特征并识别normal/collapse/impact/inactivity四种snippet状态；配套一个新EM算法实例，可进行半监督和全监督联合训练。第二阶段是逻辑回归：基于最近J=5个snippet状态标签（one-hot编码）决定是否及何时触发保护装置，以留出至少320毫秒的领先时间。",
+    "objective_outcomes_cn": "在TST和SisFall两个公开数据集上，HMM-GAN在snippet状态识别中于半监督/监督模式下AUC均超过全部对比模型（半监督TST 0.8530、SisFall 0.9247，监督TST 0.8752、SisFall 0.9472）；HMM-GAN+LR在跌倒预防触发任务中的AUC同样超过全部baseline（半监督TST 0.8995、SisFall 0.8718，监督TST 0.9034、SisFall 0.9120）；案例研究声称可减少老年人跌倒并产生超过3300万美元的经济效益。",
+    "core_contribution_cn": "为IS知识库提供新的计算设计科学制品：HMM-GAN模型和配套EM参数学习算法，能够自动提取运动传感器数据中的独立与序列信息，在监督/半监督模式下工作，并推广到ADL识别和跌倒检测等其它传感器分析任务；同时证明了运动传感器数据是IS慢性病管理研究中尚未充分利用的数据源。",
+    "whole_argument_in_one_paragraph_cn": "作者从人口老龄化和慢性病管理中的跌倒问题出发，指出现有运动传感器防跌倒方法要么依赖人工特征工程、要么用GMM建模表现有限、要么不能提供触发保护装置所需的领先时间、要么只能全监督训练。为回应这些缺口，作者采用计算设计科学范式，构建了一个两阶段框架：HMM-GAN先自动从80毫秒snippet中推断四种状态，再用逻辑回归决定触发时机。两阶段分别在两个公开ground truth数据集上、在监督与半监督模式下，与CS/IS领域的传感器分析模型和专门防跌倒模型进行大规模benchmark；结果显示HMM-GAN及HMM-GAN+LR在准确率、F1和AUC上全面占优。为证明方法不只是一次性性能提升，作者还通过附录中的额外实验展示模型在ADL识别和跌倒检测中同样有效，并用案例研究把性能优势转化为3300万美元经济效益，最终将贡献定位为对IS知识库的制品和方法论贡献。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "论文明确采用计算设计科学范式，核心活动是提出一个计算制品（HMM-GAN+LR）并设计配套算法，主要证据来自两个大型公开数据集上的系统benchmark以及与大量SOTA方法的性能比较；虽然有案例研究，但并未进行真实现场部署或平台干预，因此最符合计算制品+benchmark主导的论文类型。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "论证主线是：先指出既有方法在性能或能力上的缺口，然后设计新制品，再通过两个数据集和多个任务的benchmark证明性能改进，最后用泛化实验、经济案例和设计知识主张把局部性能提升一般化为IS贡献。这符合性能缺口—制品—benchmark—一般化设计知识的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "研究先完成数据准备（阶段1），再完成制品构建（阶段2），然后依次进行组件级评估（实验1：snippet状态识别）、端到端评估（实验2：跌倒预防触发）、机制性评估（实验3：数据分布学习）、泛化评估（实验4：ADL和跌倒检测），最后用经济案例说明实践价值。阶段之间是累积关系：只有状态识别足够好，触发的防跌倒结果才可能好；只有防跌倒主任务结果好，泛化任务和经济案例才有说服力。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "数据收集与预处理",
+        "question_cn": "如何获得可作ground truth的、覆盖跌倒各阶段的运动传感器片段数据？",
+        "inputs_and_setting_cn": "TST和SisFall两个公开数据集；TST为100Hz，SisFall为200Hz；对每个样本按80毫秒窗口切分为snippet。",
+        "designed_or_compared_object_cn": "数据切分和标注流程；TST采用两名有健康研究经验的研究生独立观看视频标注，SisFall采用自动化重标注将impact后的normal点重标为inactivity。",
+        "baseline_control_or_counterfactual_cn": "不适用；这里建立的是后续所有实验共同依赖的ground truth。",
+        "objective_metrics": [
+          "标注片段数",
+          "Cohen's kappa"
+        ],
+        "analysis_method_cn": "多数投票确定snippet标签；Cohen's kappa评价标注者一致性。",
+        "main_result_cn": "TST得到19,590个标注snippet，SisFall得到269,888个标注snippet；TST标注Cohen's kappa为0.9781。",
+        "argumentative_role_cn": "为后续模型训练和测试提供大规模、可靠、可复现的基准数据，并把snippet级分析作为整个方法的操作粒度。",
+        "remaining_uncertainty_cn": "数据来自公开实验环境，不能完全代表真实世界的连续跌倒/日常活动场景。",
+        "link_to_next_phase_cn": "标注完成后的数据被组织为监督与半监督两种训练设置，供阶段2的模型构建和阶段3、4的实验使用。",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Table 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "模型构建：HMM-GAN、EM参数学习算法与LR触发决策",
+        "question_cn": "如何把HMM与GAN结合起来，设计新的EM实例，并确定基于snippet状态的触发策略？",
+        "inputs_and_setting_cn": "文献中的HMM、GMM、entropic GAN、Baum-Welch算法和传感器数据特征；无直接数据输入，是算法设计阶段。",
+        "designed_or_compared_object_cn": "HMM-GAN架构（HMM转移矩阵+每个状态一个entropic GAN）、面向HMM-GAN的EM实例、以及第二阶段逻辑回归决策器。",
+        "baseline_control_or_counterfactual_cn": "概念上的对照是传统HMM-GMM和Baum-Welch算法；实际数值对照留到实验1和2中。",
+        "objective_metrics": [
+          "模型可运行性和参数学习可行性（定性）",
+          "LR窗口长度J的经验选择"
+        ],
+        "analysis_method_cn": "基于概率推导构造状态后验，利用entropic GAN的surrogate likelihood近似观测似然；EM的E步处理未标注状态，M步更新参数；LR对最近J个状态做触发决策。",
+        "main_result_cn": "给出HMM-GAN的递归状态推断公式、半监督EM算法，以及监督模式作为特例；经验上选择J=5。",
+        "argumentative_role_cn": "把研究问题转化为具体可实现的制品设计，是后续所有实验的对象。",
+        "remaining_uncertainty_cn": "设计是否真正有效仍需在数据上检验；J=5的确定依赖经验与延迟权衡。",
+        "link_to_next_phase_cn": "制品构建完成后，先由实验1单独检验HMM-GAN的状态识别能力，再由实验2检验两阶段全流程。",
+        "evidence_pointers": [
+          "Section 3.2",
+          "Section 3.2.2",
+          "Section 3.2.3",
+          "Figure 3",
+          "Online Appendix E",
+          "Online Appendix H",
+          "Online Appendix I"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "实验1：Snippet状态推断",
+        "question_cn": "HMM-GAN能否比现有传感器分析模型和传统HMM/GMM更准确地识别normal、collapse、impact、inactivity四种snippet状态？",
+        "inputs_and_setting_cn": "TST和SisFall两个数据集；分别在监督和半监督模式下训练与测试；半监督模式随机保留30%样本标注用于训练。",
+        "designed_or_compared_object_cn": "HMM-GAN与14个CS传感器分析模型、3个IS模型（HA-CNN、I-CNN、CNN-LSTM）、NB/SVM/RF/XGBoost/HMM/HMM-GMM/GAN等baseline比较。",
+        "baseline_control_or_counterfactual_cn": "包括CS和IS领域SOTA模型、传统机器学习模型、传统HMM和HMM-GMM、单独GAN。",
+        "objective_metrics": [
+          "Accuracy",
+          "F1-score",
+          "AUC"
+        ],
+        "analysis_method_cn": "十折交叉验证；宏平均四个状态；配对t检验比较显著性。",
+        "main_result_cn": "半监督HMM-GAN在TST上AUC 0.8530、SisFall上0.9247；监督HMM-GAN在TST上0.8752、SisFall上0.9472，均高于所有baseline；HMM-GMM明显较差（半监督0.6589/0.7133，监督0.6413/0.6986）。",
+        "argumentative_role_cn": "验证核心组件HMM-GAN的状态识别能力，证明替换GMM为entropic GAN具有可度量的性能优势。",
+        "remaining_uncertainty_cn": "状态识别准确并不自动等于实际防跌倒成功，因为还需考虑触发时机和领先时间。",
+        "link_to_next_phase_cn": "在状态识别有效的基础上，实验2加入第二阶段LR，评估端到端的防跌倒触发能力。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Section 4.1",
+          "Table 2",
+          "Online Appendix K1",
+          "Online Appendix P"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "实验2：跌倒预防触发",
+        "question_cn": "HMM-GAN+LR能否在满足最少领先时间约束的前提下，比专门防跌倒模型和传感器分析模型更成功地触发保护装置、预防跌倒？",
+        "inputs_and_setting_cn": "TST和SisFall；监督与半监督模式；最小领先时间t_m=320毫秒，并在80到800毫秒之间按80毫秒变化。",
+        "designed_or_compared_object_cn": "HMM-GAN+LR两阶段框架与传感器分析模型+LR、六个专门防跌倒模型比较。",
+        "baseline_control_or_counterfactual_cn": "实验1中的传感器分析模型加LR，以及IoTE-Fall、MCNNE、H-ConvLSTM、FisherDA、NLSVM、HMM-Fall等专门防跌倒模型；也包含HMM-GMM+LR和GAN+LR。",
+        "objective_metrics": [
+          "Accuracy",
+          "F1-score",
+          "AUC"
+        ],
+        "analysis_method_cn": "定义一个fall被成功预防的条件为：是fall样本且触发信号与首次impact之间的领先时间t_l >= t_m；除固定t_m外，还按t_m变化取平均性能；十折交叉验证和配对t检验。",
+        "main_result_cn": "半监督HMM-GAN+LR在TST上AUC 0.8995、SisFall上0.8718；监督模式在TST上0.9034、SisFall上0.9120，均超过所有baseline；HMM-GMM+LR表现差（半监督0.7124/0.6315，监督0.7047/0.6388）。",
+        "argumentative_role_cn": "验证两阶段框架端到端有效，说明状态识别优势可以转化为触发决策优势，即真正的防跌倒效果。",
+        "remaining_uncertainty_cn": "实验基于离线数据，未包含真实保护装置激活延迟、无线传输延迟、真实用户佩戴等现场因素。",
+        "link_to_next_phase_cn": "端到端效果确认后，作者进一步在实验3中解释为什么生成模型能学习数据分布，并在实验4中检验泛化性。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Section 4.2",
+          "Table 3",
+          "Online Appendix K2",
+          "Online Appendix Q"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "实验3：数据分布学习",
+        "question_cn": "entropic GAN能否比GMM更好地拟合四个状态对应的传感器信号分布，尤其是尖峰和低谷？",
+        "inputs_and_setting_cn": "TST和SisFall上属于不同snippet状态的数据；详情在Online Appendix L。",
+        "designed_or_compared_object_cn": "HMM-GAN中的entropic GAN生成模型与传统GMM等生成模型的分布学习能力。",
+        "baseline_control_or_counterfactual_cn": "传统GMM或HMM-GMM的分布拟合结果。",
+        "objective_metrics": [
+          "分布拟合质量指标（具体见附录L）"
+        ],
+        "analysis_method_cn": "比较生成分布与真实传感器信号的拟合情况（附录L）。",
+        "main_result_cn": "主文未给出结果，但作者用此实验支持entropic GAN能够更好处理传感器信号中的峰值/谷值，从而解释实验1的性能优势。",
+        "argumentative_role_cn": "为HMM-GAN的优势提供机制性解释，防止性能优势只停留在指标层面。",
+        "remaining_uncertainty_cn": "主文不可见，无法独立验证分布学习的量化结果。",
+        "link_to_next_phase_cn": "在解释清楚机制后，转向检验制品是否可迁移到其他IS传感器分析任务。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Online Appendix L"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "实验4：泛化到ADL识别与跌倒检测",
+        "question_cn": "HMM-GAN能否推广到IS学者研究的其他运动传感器任务，如ADL识别和跌倒后检测？",
+        "inputs_and_setting_cn": "ADL识别和跌倒检测各自的数据集/benchmark；细节在Online Appendices M和N。",
+        "designed_or_compared_object_cn": "HMM-GAN与相关benchmark模型在ADL识别和fall detection任务上的表现。",
+        "baseline_control_or_counterfactual_cn": "各任务中的SOTA sensor analytics模型。",
+        "objective_metrics": [
+          "Accuracy",
+          "F1-score",
+          "AUC"
+        ],
+        "analysis_method_cn": "与benchmark模型对比的监督/半监督实验（附录M和N）。",
+        "main_result_cn": "主文仅预告在附录中报告效果，作者用它支持HMM-GAN不是一次性防跌倒制品。",
+        "argumentative_role_cn": "把技术制品的贡献从防跌倒延展到更一般的传感器分析设计知识，回应计算设计科学要求的方法泛化性。",
+        "remaining_uncertainty_cn": "主文不可见；泛化实验覆盖的任务有限。",
+        "link_to_next_phase_cn": "在证明技术有效和可泛化后，用案例研究把性能优势转成经济价值。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Online Appendix M",
+          "Online Appendix N"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "案例研究：经济效益",
+        "question_cn": "HMM-GAN的性能优势能否转化为可量化的社会经济效益？",
+        "inputs_and_setting_cn": "基于模型在基准数据集上表现的防跌倒成功率、老年人跌倒率、跌倒医疗成本等参数；细节在Online Appendix O。",
+        "designed_or_compared_object_cn": "使用HMM-GAN的防跌倒系统与使用竞争模型的系统在减少跌倒数量和成本节约上的差异。",
+        "baseline_control_or_counterfactual_cn": "竞争模型对应的防跌倒表现作为反事实。",
+        "objective_metrics": [
+          "减少的跌倒人数",
+          "经济收益（美元）"
+        ],
+        "analysis_method_cn": "案例/仿真估算，比较HMM-GAN与竞争模型的经济结果。",
+        "main_result_cn": "声称可显著减少老年人潜在灾难性跌倒，并在与竞争模型对比中产生超过3300万美元经济效益。",
+        "argumentative_role_cn": "满足计算设计科学范式中utility demonstration的要求，把技术指标的领先上升为实践影响。",
+        "remaining_uncertainty_cn": "经济收益依赖大量假设，缺少真实现场部署验证。",
+        "link_to_next_phase_cn": "经济价值支撑讨论部分的IS知识贡献与实践含义，最后进入结论和未来方向。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Online Appendix O"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "DESIGN_FEATURE",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "LIMITATION",
+      "GAP",
+      "REQUIREMENT",
+      "DESIGN_FEATURE"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "METHOD_JUSTIFICATION",
+      "HYPOTHESIS_OR_PROPOSITION",
+      "STUDY_OVERVIEW"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "TRANSITION"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "TRANSITION",
+      "PRACTICAL_STAKES",
+      "CONTEXT"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "隐马尔可夫模型与Baum-Welch/EM算法",
+      "高斯混合模型及其在传感器峰值/谷值数据上的局限",
+      "生成对抗网络与entropic GAN的surrogate likelihood理论",
+      "运动传感器数据的三级粒度（data point/snippet/sample）",
+      "防跌倒的三阶段状态（collapse/impact/inactivity）与领先时间约束",
+      "计算设计科学范式"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "HMM-GAN的核心设计是由既有理论/方法局限直接推导出来的：因为HMM能建模状态转移、GMM对尖峰谷值数据建模能力不足、深度学习模型缺少可解释的转移结构且不能直接嵌入EM，因此作者用entropic GAN替换GMM，并重新设计EM实例。评价也直接针对这套设计选择（HMM-GAN vs HMM-GMM等）。",
+    "translation_chain_cn": "传感器数据中单点信息少、snippet才包含独立信息；snippet之间存在状态转移，因此需要HMM。GMM在传感器数据中不能刻画尖峰谷值，且特征工程劳动密集，因此要求新观测模型能够自动学习分布并输出似然。entropic GAN可提供surrogate likelihood，但Baum-Welch不能更新GAN参数，因此必须设计新的EM实例。最后，单纯状态识别不能保证保护装置提前触发，因此加入LR作为第二阶段的触发决策器。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "HMM能够通过状态转移矩阵建模时间序列的顺序信息，并可提供可观测的决策过程。",
+        "mechanism_cn": "snippet之间的状态并非独立，例如impact后很可能进入inactivity；利用转移概率可提高当前状态推断。",
+        "design_requirement_cn": "模型必须同时使用snippet内独立信息与snippet间顺序信息。",
+        "artifact_choice_cn": "在HMM-GAN中保留HMM状态转移矩阵，并用递归公式综合前序snippet与当前snippet推断状态。",
+        "evaluated_contrast_cn": "HMM-GAN vs 只用独立snippet的CNN/LSTM等模型 vs 传统HMM-GMM。",
+        "objective_result_cn": "HMM-GAN在实验1半监督/监督模式AUC均高于所有baseline，传统HMM-GMM最低。",
+        "evidence_pointers": [
+          "Table 2",
+          "Section 3.2.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "GMM假设数据服从高斯混合分布，难以刻画传感器信号中的尖峰和谷值；手动特征工程是ad hoc且劳动密集。",
+        "mechanism_cn": "当真实分布与高斯假设不符时，观测似然估计偏差会传导到状态推断；手工特征可能丢失原始信号中的精细模式。",
+        "design_requirement_cn": "需要一种无需人工特征工程、能拟合非高斯、多峰/尖峰分布的观测生成模型。",
+        "artifact_choice_cn": "用entropic GAN替代HMM中每个状态的GMM作为观测模型，利用surrogate likelihood近似观测似然。",
+        "evaluated_contrast_cn": "HMM-GAN vs HMM-GMM，以及HMM-GAN vs 单独GAN和深度传感器模型。",
+        "objective_result_cn": "HMM-GAN大幅优于HMM-GMM，并优于仅用GAN、深度模型等baseline。",
+        "evidence_pointers": [
+          "Section 2.2",
+          "Section 2.3",
+          "Table 2",
+          "Experiment 3 in Online Appendix L"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Baum-Welch算法是EM在HMM-GMM中的实例，不能更新GAN参数；现有半监督HMM训练方法也不适合GAN的大量参数。",
+        "mechanism_cn": "EM需要E步计算未标注状态的后验，M步最大化完整数据似然；当观测模型是GAN时，M步需要优化GAN参数，标准Baum-Welch做不到。",
+        "design_requirement_cn": "必须设计新的HMM-GAN联合参数学习算法，支持半监督与监督模式。",
+        "artifact_choice_cn": "提出新的EM实例：E步用当前参数推断未标注snippet状态，M步联合更新HMM转移矩阵与各状态GAN参数；监督模式作为全标注特例。",
+        "evaluated_contrast_cn": "半监督HMM-GAN vs 监督HMM-GAN，以及半监督HMM-GAN vs 半监督baseline。",
+        "objective_result_cn": "半监督HMM-GAN与监督HMM-GAN的AUC差距很小，显著超过半监督baseline。",
+        "evidence_pointers": [
+          "Section 3.2.2",
+          "Table 2",
+          "Online Appendix E"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "防跌倒必须在impact之前触发保护装置，领先时间必须覆盖数据采集、模型执行和设备激活的延迟。",
+        "mechanism_cn": "仅识别出跌倒状态还不够，需要在合适的提前量上发出触发信号；触发太晚会失效，触发太早会造成误报。",
+        "design_requirement_cn": "需要一个基于状态序列的触发决策器，以最近若干snippet状态为输入，在满足最小领先时间的前提下权衡误报与漏报。",
+        "artifact_choice_cn": "在HMM-GAN之后加入逻辑回归分类器，输入最近J=5个状态的一热向量，输出是否触发保护装置；J的选择平衡性能与执行延迟。",
+        "evaluated_contrast_cn": "HMM-GAN+LR vs 传感器模型+LR vs 专门防跌倒模型；并变化t_m从80到800毫秒。",
+        "objective_result_cn": "HMM-GAN+LR在两种模式和两个数据集上AUC均超过所有baseline。",
+        "evidence_pointers": [
+          "Section 3.2.3",
+          "Table 3",
+          "Online Appendix Q"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "组件级评估：实验1只评估Stage 1的snippet状态识别",
+      "端到端评估：实验2同时检验Stage 1+Stage 2的防跌倒触发",
+      "机制解释：实验3检验生成模型对数据分布的拟合",
+      "泛化评估：实验4检验ADL识别和跌倒检测",
+      "示范评估：案例研究把性能转成经济效益"
+    ],
+    "why_these_evaluations_cn": "需要先确认核心状态识别组件有效，才能解释端到端触发优势不是来自LR或偶然因素；需要把state inference和fall prevention分开，才能分别回答四个研究问题；需要分布学习和泛化实验才能说明HMM-GAN是通用制品而非一次性的性能工程；需要经济案例才能满足计算设计科学对artifact utility的展示。",
+    "benchmark_and_contrast_chain_cn": "实验1先建立状态识别性能的上界，baseline包括CS/IS领域SOTA模型、传统ML、HMM、HMM-GMM和GAN；实验2在实验1的baseline基础上再加LR和专门防跌倒模型，从而把状态识别优势传导到最终触发结果；实验3解释为什么HMM-GAN优于GMM；实验4用其他任务证明泛化；案例研究用经济收益把benchmark差距放大为社会价值。三张主表和多个附录形成从组件到全流程、从主任务到泛化任务、从技术指标到经济指标的证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "HMM-GAN在snippet状态识别上优于SOTA传感器分析模型和传统HMM/GMM。",
+        "evidence_cn": "Table 2在两个数据集、两种模式下报告Accuracy/F1/AUC；配对t检验标出显著性。",
+        "level_cn": "技术主张+制品主张"
+      },
+      {
+        "claim_cn": "HMM-GAN+LR在防跌倒触发上优于SOTA防跌倒模型。",
+        "evidence_cn": "Table 3报告固定t_m=320以及t_m变化后的平均AUC等；配对t检验。",
+        "level_cn": "技术主张+制品主张"
+      },
+      {
+        "claim_cn": "用entropic GAN替代GMM能够更好学习传感器数据分布，因而解释状态识别提升。",
+        "evidence_cn": "实验3在Online Appendix L中报告分布学习结果；主文只有推断性论述。",
+        "level_cn": "机制主张"
+      },
+      {
+        "claim_cn": "HMM-GAN可泛化到ADL识别和fall detection。",
+        "evidence_cn": "Online Appendices M和N中的实验；主文仅提及。",
+        "level_cn": "边界主张+设计知识"
+      },
+      {
+        "claim_cn": "HMM-GAN可产生超过3300万美元经济效益。",
+        "evidence_cn": "Online Appendix O中的案例研究；主文只报告结论。",
+        "level_cn": "实用价值主张"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用公开且常用的ground truth数据集；TST用两名经验标注者并报告高Cohen's kappa；SisFall用自动规则重标inactivity，避免人工偏差；所有模型在同一数据划分和十折交叉验证下比较；采用配对t检验判断显著性；用accuracy/F1/AUC多指标避免单指标偏差。",
+    "external_validity_strategy_cn": "选择两个采样频率和规模不同的公开数据集；同时运行半监督与监督模式；变化t_m从80到800毫秒；增加ADL识别和fall detection两个额外任务；用案例研究展示实践价值。",
+    "what_is_not_actually_tested_cn": "没有在真实养老院、家庭或医院现场部署并测量实际保护装置激活延迟；没有与真实气袋/可穿戴设备进行端到端联调；实验3、实验4和经济案例的主文证据不完整，依赖Online Appendix；经济收益建立在仿真假设上，而非随机对照试验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "HMM-GAN在snippet状态识别和防跌倒触发任务上的Accuracy/F1/AUC优于当前SOTA模型。",
+    "artifact_claim_cn": "用entropic GAN替代HMM中的GMM，并配套新的EM实例，是性能提升的制品来源。",
+    "mechanism_claim_cn": "entropic GAN能更好拟合运动传感器信号中的尖峰/谷值数据分布，同时保存snippet间转移信息，因此提升状态识别；状态识别改善又传导为触发决策改善。",
+    "boundary_claim_cn": "适用于运动传感器数据中的snippet级分析，能够支持领先时间保护；在TST/SisFall两个数据集和多个任务上有效；未来可扩展到环境传感器融合与个性化医疗。",
+    "reusable_design_knowledge_cn": "为IS学者设计健康信息制品提供一条路径：用HMM转移矩阵捕获序列依赖、用深度生成模型替代分布假设过强的观测模型、用新的EM实例支持半监督学习、用轻量分类器做有延迟约束的决策。",
+    "theoretical_contribution_cn": "把entropic GAN的surrogate likelihood理论引入HMM框架，形成HMM-GAN；扩展了EM算法在深度生成型隐马尔可夫模型上的可学习性；为运动传感器数据作为IS慢性病管理数据源提供了方法论示范。",
+    "how_discussion_closes_intro_gap_cn": "引言提出手工特征工程、GMM分布局限、缺少领先时间、半监督HMM与GAN结合空白等缺口；讨论部分对应以HMM-GAN自动特征提取、entropic GAN替换GMM、LR阶段提供领先时间、新EM实例支持半监督，并借助泛化实验把结论从防跌倒扩大到其他医疗传感分析，从而闭合缺口。",
+    "overclaim_or_unsupported_leaps_cn": "经济收益3300万美元高度依赖案例假设，未在真实环境验证；“显著减少跌倒”并非现场随机对照试验结果；HMM-GAN优于所有baseline的主文证据充分，但机制主张（分布学习更好）和泛化主张的证据主要在附录，主文读者无法直接核验；把技术性能优势直接等同于实际伤情减少存在跳跃。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "现代医学延长了人类寿命，但慢性护理成本不断上升。",
+      "rhetorical_function_cn": "开篇建立广泛卫生经济学背景，为后续聚焦慢性病相关跌倒做铺垫。",
+      "depends_on_cn": "无依赖，是全文最宏观起点。",
+      "sets_up_cn": "引出需要预防慢性病威胁（跌倒）的现实必要性。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "预防跌倒等行动能力威胁对慢性病管理至关重要。",
+      "rhetorical_function_cn": "把宽泛背景收缩到防跌倒这一具体领域，并说明其价值。",
+      "depends_on_cn": "依赖第一句的慢性护理背景。",
+      "sets_up_cn": "使读者期待一种能帮助预防跌倒的信息系统。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "以往防跌倒研究因数据分布建模能力有限而性能欠佳。",
+      "rhetorical_function_cn": "在摘要中即点出核心研究缺口。",
+      "depends_on_cn": "需要先有防跌倒研究作为背景。",
+      "sets_up_cn": "为提出HMM-GAN提供问题靶子。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文采用计算设计科学范式开发新的防跌倒框架，包括HMM-GAN和逻辑回归。",
+      "rhetorical_function_cn": "首次给出文章的核心制品与研究目标。",
+      "depends_on_cn": "依赖前面缺口：需要新框架解决分布建模局限。",
+      "sets_up_cn": "把读者注意力引向两阶段框架及其组件。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "研究者将框架与现有防跌倒模型、将HMM-GAN与SOTA传感器分析模型在大型ground truth数据上比较。",
+      "rhetorical_function_cn": "预告评价设计，说明贡献将被benchmark支撑。",
+      "depends_on_cn": "依赖制品描述。",
+      "sets_up_cn": "为结果和贡献作铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "通过案例研究表明可减少跌倒并产生超过3300万美元经济效益，同时提供方法论贡献。",
+      "rhetorical_function_cn": "在摘要末尾同时声明实践价值与IS知识库贡献。",
+      "depends_on_cn": "依赖前面的框架和benchmark预告。",
+      "sets_up_cn": "告诉读者文章最终会交付什么。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "1. Introduction",
+      "locator": "Introduction P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "现代医学延长寿命，但慢性护理成本持续增加。",
+      "rhetorical_function_cn": "用与摘要平行的背景开头，建立政策与实践重要性。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引出慢性病和跌倒预防议题。",
+      "evidence_pointer": "Section 1, first paragraph"
+    },
+    {
+      "order": 8,
+      "section": "1. Introduction",
+      "locator": "Introduction P1 S3-S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "跌倒是老年人受伤和死亡的主因，美国每年约有三分之一老年人跌倒，相关成本约500亿美元。",
+      "rhetorical_function_cn": "用统计数据量化问题严重性。",
+      "depends_on_cn": "依赖慢性病背景。",
+      "sets_up_cn": "防跌倒研究必要性的证据基础。",
+      "evidence_pointer": "Section 1"
+    },
+    {
+      "order": 9,
+      "section": "1. Introduction",
+      "locator": "Introduction P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "IS学者已证明可穿戴运动传感器可用于监测慢性病患者、预测不良事件和预防疾病。",
+      "rhetorical_function_cn": "把防跌倒放入IS研究脉络。",
+      "depends_on_cn": "需要现实问题作为兴趣前提。",
+      "sets_up_cn": "说明运动传感器是合理的信息系统基础。",
+      "evidence_pointer": "Section 1, second paragraph"
+    },
+    {
+      "order": 10,
+      "section": "1. Introduction",
+      "locator": "Introduction P2 S3-S5",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "运动传感器每秒产生高达200个数据点，数据是流式高速的，粒度分为数据点、片段和样本。",
+      "rhetorical_function_cn": "介绍运动传感器数据的独特经验现象，为后续snippet级方法做前提。",
+      "depends_on_cn": "依赖传感器在健康监测中的应用。",
+      "sets_up_cn": "解释为什么单点信息少、样本级分析难以定位跌倒时间，需要snippet级分析。",
+      "evidence_pointer": "Section 1, Figure 1"
+    },
+    {
+      "order": 11,
+      "section": "1. Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "snippet级分析可利用两类信息：snippet内部独立特征和snippet之间顺序影响。",
+      "rhetorical_function_cn": "建立方法设计的核心机制概念。",
+      "depends_on_cn": "依赖三级粒度定义。",
+      "sets_up_cn": "为HMM的引入提供理由：需要同时处理两类信息。",
+      "evidence_pointer": "Section 1, P3"
+    },
+    {
+      "order": 12,
+      "section": "1. Introduction",
+      "locator": "Introduction P3 S3-S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有方法中，HMM-GMM是同时使用两类信息的常见方法，但需要手工特征，且GMM对数据尖峰/谷值建模能力不足。",
+      "rhetorical_function_cn": "对当前主导方法提出具体批评。",
+      "depends_on_cn": "需要先讲清两种信息类型。",
+      "sets_up_cn": "为用GAN替换GMM埋伏笔。",
+      "evidence_pointer": "Section 1, P3"
+    },
+    {
+      "order": 13,
+      "section": "1. Introduction",
+      "locator": "Introduction P3 S6-S8",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "深度学习模型虽然可自动提取特征，但多数不支持领先时间，且只能全监督学习，标注成本高。",
+      "rhetorical_function_cn": "补充说明其他替代方案的不足，使缺口更完整。",
+      "depends_on_cn": "依赖GMM局限。",
+      "sets_up_cn": "引出需要同时满足自动特征、领先时间、半监督的新制品。",
+      "evidence_pointer": "Section 1, P3"
+    },
+    {
+      "order": 14,
+      "section": "1. Introduction",
+      "locator": "Introduction P3 S9",
+      "move_code": "GAP",
+      "paraphrase_cn": "这些挑战要求一种新的健康信息技术来预防慢性病相关跌倒。",
+      "rhetorical_function_cn": "把多种局限整合成一个明确缺口。",
+      "depends_on_cn": "依赖前述所有局限。",
+      "sets_up_cn": "正式引出研究目标。",
+      "evidence_pointer": "Section 1, P3"
+    },
+    {
+      "order": 15,
+      "section": "1. Introduction",
+      "locator": "Introduction P4 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "设计新型IT制品是IS研究核心，计算设计科学范式为设计算法和系统提供指导。",
+      "rhetorical_function_cn": "给出论文的方法论框架。",
+      "depends_on_cn": "需要识别出实践缺口。",
+      "sets_up_cn": "把后面的制品开发放入合规的IS研究范式。",
+      "evidence_pointer": "Section 1, P4"
+    },
+    {
+      "order": 16,
+      "section": "1. Introduction",
+      "locator": "Introduction P4 S4-S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "本文提出两阶段框架：HMM-GAN识别snippet状态，逻辑回归决定触发保护装置。",
+      "rhetorical_function_cn": "首次在正文中给出制品的总体设计。",
+      "depends_on_cn": "依赖计算设计科学范式和前面缺口。",
+      "sets_up_cn": "为后续研究设计章节提供总览。",
+      "evidence_pointer": "Section 1, P4"
+    },
+    {
+      "order": 17,
+      "section": "1. Introduction",
+      "locator": "Introduction P4 S6-S8",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "文章将在大规模数据上评估防跌倒框架，也将单独评估HMM-GAN与其他传感器分析模型，并展示经济收益。",
+      "rhetorical_function_cn": "预告评价方案，强调评估的多层次。",
+      "depends_on_cn": "依赖制品描述。",
+      "sets_up_cn": "让读者对实验章节有预期。",
+      "evidence_pointer": "Section 1, P4"
+    },
+    {
+      "order": 18,
+      "section": "1. Introduction",
+      "locator": "Introduction bullet list",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者列出两条主要方法论贡献：用entropic GAN替换GMM，以及新EM实例支持半监督学习。",
+      "rhetorical_function_cn": "提前锁定贡献边界，避免读者期待过低或过高。",
+      "depends_on_cn": "依赖HMM-GAN和EM设计。",
+      "sets_up_cn": "为讨论部分贡献段落提供引子。",
+      "evidence_pointer": "Section 1, bullet list"
+    },
+    {
+      "order": 19,
+      "section": "2. Literature Review",
+      "locator": "Section 2 opening P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "文献综述沿三条线展开：HIT与计算设计科学、运动传感器防跌倒、GANs。",
+      "rhetorical_function_cn": "为读者提供综述地图。",
+      "depends_on_cn": "承接引言末尾的论文结构预告。",
+      "sets_up_cn": "让三条文献线分别准备问题、数据特性和技术方案。",
+      "evidence_pointer": "Section 2, first paragraph"
+    },
+    {
+      "order": 20,
+      "section": "2.1",
+      "locator": "Section 2.1 P3-S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "IS学者已用传感器和计算设计科学在ADL识别、身份识别、跌倒检测和慢性病严重度评估上取得进展。",
+      "rhetorical_function_cn": "说明IS领域已有相关制品研究，但防跌倒未得到充分关注。",
+      "depends_on_cn": "依赖计算设计科学介绍。",
+      "sets_up_cn": "定位防跌倒为IS文献中的空白之一。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 21,
+      "section": "2.2",
+      "locator": "Section 2.2 P2-S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "跌倒包含collapse、impact和inactivity三个阶段。",
+      "rhetorical_function_cn": "引入防跌倒任务的领域知识。",
+      "depends_on_cn": "需要理解跌倒是一种特殊人类活动。",
+      "sets_up_cn": "为snippet状态标签设定提供理论依据。",
+      "evidence_pointer": "Section 2.2, P2"
+    },
+    {
+      "order": 22,
+      "section": "2.2",
+      "locator": "Section 2.2 P3-S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "跌倒检测是在impact后识别跌倒，而防跌倒必须在impact前触发保护装置；系统必须满足数据采集、模型执行和设备激活三种延迟之和。",
+      "rhetorical_function_cn": "解释为什么防跌倒独特且需要领先时间。",
+      "depends_on_cn": "依赖跌倒三阶段定义。",
+      "sets_up_cn": "为第二阶段LR触发决策提供明确约束，也为评价指标中的t_m做铺垫。",
+      "evidence_pointer": "Section 2.2, P3"
+    },
+    {
+      "order": 23,
+      "section": "2.2",
+      "locator": "Section 2.2 P4-S3-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "多数防跌倒研究在snippet级分析，且依赖监督学习；半监督学习对高流速传感器数据更实用。",
+      "rhetorical_function_cn": "说明现有研究的分析粒度和学习范式。",
+      "depends_on_cn": "需要理解snippet信息重要性。",
+      "sets_up_cn": "引出对半监督HMM-GAN的需求。",
+      "evidence_pointer": "Section 2.2, P4"
+    },
+    {
+      "order": 24,
+      "section": "2.2",
+      "locator": "Section 2.2 P5-S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "常见做法是手工提取snippet特征后使用阈值或分类器；独立处理时态依赖数据会丢失状态转移信息。",
+      "rhetorical_function_cn": "批评独立snippet方法。",
+      "depends_on_cn": "依赖两种信息类型的区分。",
+      "sets_up_cn": "为HMM建模顺序信息提供依据。",
+      "evidence_pointer": "Section 2.2, P5"
+    },
+    {
+      "order": 25,
+      "section": "2.2",
+      "locator": "Section 2.2 P6-S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "HMM是贝叶斯网络特例，适合时间模式识别，且决策过程通过转移矩阵和观测模型完全可观测。",
+      "rhetorical_function_cn": "引入HMM作为解决方案核心。",
+      "depends_on_cn": "需要确定需要序列信息。",
+      "sets_up_cn": "为HMM-GAN提供基础理论。",
+      "evidence_pointer": "Section 2.2, P6"
+    },
+    {
+      "order": 26,
+      "section": "2.2",
+      "locator": "Section 2.2 P8-S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "HMM-GMM有两个主要缺点：需要手工特征工程，以及GMM假设高斯混合分布但传感器信号常含尖锐峰值和谷值。",
+      "rhetorical_function_cn": "把HMM-GMM的批评明确化。",
+      "depends_on_cn": "依赖HMM和GMM的介绍。",
+      "sets_up_cn": "引出用深度生成模型替代GMM。",
+      "evidence_pointer": "Section 2.2, P8"
+    },
+    {
+      "order": 27,
+      "section": "2.3",
+      "locator": "Section 2.3 P1-S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "GAN是生成对抗训练的深度生成模型，G与D在零和博弈中交替改进。",
+      "rhetorical_function_cn": "引入GAN作为新的观测模型候选。",
+      "depends_on_cn": "需要GMM局限作为动机。",
+      "sets_up_cn": "为entropic GAN和surrogate likelihood作铺垫。",
+      "evidence_pointer": "Section 2.3, P1"
+    },
+    {
+      "order": 28,
+      "section": "2.3",
+      "locator": "Section 2.3 P2-S1-S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "entropic GAN以最优传输损失和Shannon熵正则化提供surrogate likelihood，可以近似真实观测似然。",
+      "rhetorical_function_cn": "引入解决GAN不能直接替换GMM的关键理论。",
+      "depends_on_cn": "需要GAN和HMM的衔接问题。",
+      "sets_up_cn": "为HMM-GAN用entropic GAN计算似然提供依据。",
+      "evidence_pointer": "Section 2.3, P2"
+    },
+    {
+      "order": 29,
+      "section": "2.3",
+      "locator": "Section 2.3 P2-S5-S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "但如何把entropic GAN的surrogate likelihood嵌入HMM尤其是半监督HMM并不清楚；Baum-Welch也不能更新GAN参数。",
+      "rhetorical_function_cn": "明确技术与方法上的双重缺口。",
+      "depends_on_cn": "依赖entropic GAN理论。",
+      "sets_up_cn": "唤起新EM实例的研究需要。",
+      "evidence_pointer": "Section 2.3, P2"
+    },
+    {
+      "order": 30,
+      "section": "2.4",
+      "locator": "Section 2.4 P1-S1-S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有模型不支持领先时间或依赖手工特征，GAN不能直接由Baum-Welch训练，半监督HMM与GAN结合仍是空白。",
+      "rhetorical_function_cn": "把文献综述收束成正式研究缺口列表。",
+      "depends_on_cn": "依赖三部分文献综述。",
+      "sets_up_cn": "直接引出四个研究问题。",
+      "evidence_pointer": "Section 2.4"
+    },
+    {
+      "order": 31,
+      "section": "2.4",
+      "locator": "Section 2.4 P2-Q1-Q4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者提出四个问题：如何结合HMM与GAN、如何设计EM实例、如何半监督学习、如何用状态触发保护装置并保证领先时间。",
+      "rhetorical_function_cn": "用研究问题把缺口转化为可开展工作。",
+      "depends_on_cn": "依赖研究缺口列表。",
+      "sets_up_cn": "为研究设计章节提供章节地图。",
+      "evidence_pointer": "Section 2.4"
+    },
+    {
+      "order": 32,
+      "section": "3. Research Design and Testbed",
+      "locator": "Section 3 P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者概述三部分研究框架：数据预处理、两阶段模型、多个实验和案例分析。",
+      "rhetorical_function_cn": "为整个实证部分提供结构。",
+      "depends_on_cn": "依赖四个研究问题。",
+      "sets_up_cn": "分别对应数据、制品、评估三个模块。",
+      "evidence_pointer": "Section 3, first paragraph"
+    },
+    {
+      "order": 33,
+      "section": "3.1",
+      "locator": "Section 3.1 P1-S1-S2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "选用TST和SisFall两个公开数据集作为常用ground truth testbed。",
+      "rhetorical_function_cn": "选择外部可复现的基准数据。",
+      "depends_on_cn": "需要可评估的ground truth。",
+      "sets_up_cn": "为结果的外部有效性提供支撑。",
+      "evidence_pointer": "Section 3.1, within Paragraph beginning 'We use two publicly available...'"
+    },
+    {
+      "order": 34,
+      "section": "3.1",
+      "locator": "Section 3.1 P2-S2-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "所有样本切为80毫秒snippet，并标注normal/collapse/impact/inactivity；SisFall用自动重标，TST用两名标注者并报告Cohen's kappa。",
+      "rhetorical_function_cn": "说明标注可靠性和自动化，减少对ground truth质量的质疑。",
+      "depends_on_cn": "需要处理原始数据。",
+      "sets_up_cn": "让后续实验结果可归因于模型而不是标注误差。",
+      "evidence_pointer": "Section 3.1, P2-P3"
+    },
+    {
+      "order": 35,
+      "section": "3.1",
+      "locator": "Section 3.1 P4-S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为了支持半监督实验，随机选择30%的样本保留标签，70%的snippet视为未标注。",
+      "rhetorical_function_cn": "定义半监督评价的具体数据设置。",
+      "depends_on_cn": "依赖已标注snippet数据。",
+      "sets_up_cn": "实验1和实验2的半监督模式条件。",
+      "evidence_pointer": "Section 3.1, P4"
+    },
+    {
+      "order": 36,
+      "section": "3.2.1",
+      "locator": "Section 3.2.1 P1-S1-S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "现有模型有三方面不足：未综合snippet内外信息、GMM不灵活、手工特征低效；因此需要新的状态推断模型。",
+      "rhetorical_function_cn": "把文献中的缺陷转成设计需求。",
+      "depends_on_cn": "依赖文献综述和研究问题。",
+      "sets_up_cn": "引出HMM-GAN两大组件。",
+      "evidence_pointer": "Section 3.2.1"
+    },
+    {
+      "order": 37,
+      "section": "3.2.1",
+      "locator": "Section 3.2.1 P1-S4-S6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "HMM-GAN由HMM状态转移矩阵和每个状态内的entropic GAN组成，以替代传统GMM。",
+      "rhetorical_function_cn": "给出核心设计选择。",
+      "depends_on_cn": "依赖entropic GAN的surrogate likelihood。",
+      "sets_up_cn": "为后续公式推导和实验定义对象。",
+      "evidence_pointer": "Section 3.2.1, Figure 3"
+    },
+    {
+      "order": 38,
+      "section": "3.2.1",
+      "locator": "Section 3.2.1 P3-S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "给定时间戳τ，HMM状态的后验概率由上一状态、转移矩阵和entropic GAN的surrogate likelihood共同计算。",
+      "rhetorical_function_cn": "解释HMM-GAN如何融合独立与顺序信息。",
+      "depends_on_cn": "依赖HMM和entropic GAN的定义。",
+      "sets_up_cn": "使后续递归推断公式可理解。",
+      "evidence_pointer": "Section 3.2.1, equations near Figure 3"
+    },
+    {
+      "order": 39,
+      "section": "3.2.2",
+      "locator": "Section 3.2.2 P1-S1-S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者设计新EM实例，用E步推断未标注状态的后验，用M步联合更新HMM转移矩阵和GAN参数。",
+      "rhetorical_function_cn": "解决Baum-Welch无法更新GAN参数的技术缺口。",
+      "depends_on_cn": "依赖EM算法理论和GAN参数优化。",
+      "sets_up_cn": "为半监督HMM-GAN提供算法基础。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 40,
+      "section": "3.2.3",
+      "locator": "Section 3.2.3 P1-S1-S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "HMM-GAN只输出状态标签，不能直接决定触发时机；因此需要决策过程。",
+      "rhetorical_function_cn": "引入第二阶段触发决策的必要性。",
+      "depends_on_cn": "依赖阶段1的状态推断。",
+      "sets_up_cn": "引出LR与J=5的选择。",
+      "evidence_pointer": "Section 3.2.3"
+    },
+    {
+      "order": 41,
+      "section": "3.2.3",
+      "locator": "Section 3.2.3 P1-S4-S6",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者比较了LR、ARIMA、SVM、LSTM和GRU，最终选择逻辑回归，并经验性选择J=5平衡性能与延迟。",
+      "rhetorical_function_cn": "为决策器选择和窗口大小提供方法依据。",
+      "depends_on_cn": "需要比较多个候选决策器。",
+      "sets_up_cn": "减少读者对触发策略选择的质疑。",
+      "evidence_pointer": "Section 3.2.3, Online Appendices H and I"
+    },
+    {
+      "order": 42,
+      "section": "3.3",
+      "locator": "Section 3.3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "端到端示例展示每个snippet如何从接收、状态概率推断、选择最大概率标签，再到LR触发保护装置。",
+      "rhetorical_function_cn": "用具体操作流程把抽象模型翻译成可想象的系统行为。",
+      "depends_on_cn": "依赖HMM-GAN和LR设计。",
+      "sets_up_cn": "为实验2中的领先时间计算提供直观画面。",
+      "evidence_pointer": "Section 3.3, Figure 4"
+    },
+    {
+      "order": 43,
+      "section": "3.4",
+      "locator": "Section 3.4 P1-S1-S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者设计了四个实验：状态推断、防跌倒触发、分布学习、泛化到ADL和跌倒检测，外加案例研究。",
+      "rhetorical_function_cn": "枚举整个评价计划。",
+      "depends_on_cn": "依赖研究框架。",
+      "sets_up_cn": "为结果部分和附录分别建立预期。",
+      "evidence_pointer": "Section 3.4"
+    },
+    {
+      "order": 44,
+      "section": "3.4",
+      "locator": "Section 3.4 P1-S4-S8",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "实验1的baseline包括CS领域的14个代表模型、IS领域的I-CNN/HA-CNN/CNN-LSTM，以及NB、SVM、RF、XGBoost、HMM、HMM-GMM和GAN。",
+      "rhetorical_function_cn": "构建覆盖面广的对比集合，增强技术主张权威性。",
+      "depends_on_cn": "需要已有模型目录。",
+      "sets_up_cn": "使HMM-GAN的优势不被怀疑为选择性对比。",
+      "evidence_pointer": "Section 3.4, Experiment 1 paragraph"
+    },
+    {
+      "order": 45,
+      "section": "3.4",
+      "locator": "Section 3.4 P2-S1-S3",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "实验2把防跌倒成功定义为fall样本且领先时间t_l不小于t_m，t_m在320毫秒基础上还从80到800毫秒变化。",
+      "rhetorical_function_cn": "定义严格的端到端成功标准，处理领先时间约束。",
+      "depends_on_cn": "依赖领先时间理论和实验1的状态识别。",
+      "sets_up_cn": "为Table 3的AUC等指标下明确含义。",
+      "evidence_pointer": "Section 3.4, Experiment 2 paragraph"
+    },
+    {
+      "order": 46,
+      "section": "3.4",
+      "locator": "Section 3.4 P4-S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "所有实验用accuracy、F1、AUC，并使用十折交叉验证和配对t检验。",
+      "rhetorical_function_cn": "统一评价标准，表明统计显著性。",
+      "depends_on_cn": "需要实验设计。",
+      "sets_up_cn": "让读者可以比较所有表格中的一致性。",
+      "evidence_pointer": "Section 3.4, P4"
+    },
+    {
+      "order": 47,
+      "section": "4.1",
+      "locator": "Section 4.1 P2-S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "半监督HMM-GAN在TST和SisFall上AUC为0.8530和0.9247，显著优于大多数baseline；HMM-GMM表现较差。",
+      "rhetorical_function_cn": "报告实验1的主要结果。",
+      "depends_on_cn": "依赖实验1数据和对比集。",
+      "sets_up_cn": "支撑HMM-GAN在状态识别上的优势。",
+      "evidence_pointer": "Table 2, Section 4.1"
+    },
+    {
+      "order": 48,
+      "section": "4.1",
+      "locator": "Section 4.1 P4-S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "监督HMM-GAN结果与半监督一致，并且半监督与监督AUC差距很小。",
+      "rhetorical_function_cn": "证明新的EM实例在半监督条件下接近全监督效果。",
+      "depends_on_cn": "依赖半监督数据划分和EM设计。",
+      "sets_up_cn": "为半监督HMM-GAN的实际价值提供证据。",
+      "evidence_pointer": "Section 4.1, Table 2"
+    },
+    {
+      "order": 49,
+      "section": "4.2",
+      "locator": "Section 4.2 P2-S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "半监督HMM-GAN+LR在TST和SisFall上AUC为0.8995和0.8718，优于所有baseline。",
+      "rhetorical_function_cn": "报告端到端防跌倒的主要结果。",
+      "depends_on_cn": "依赖HMM-GAN状态识别和LR触发决策。",
+      "sets_up_cn": "证明状态识别优势可以传导到最终防跌倒效果。",
+      "evidence_pointer": "Table 3, Section 4.2"
+    },
+    {
+      "order": 50,
+      "section": "4.2",
+      "locator": "Section 4.2 P3-S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "监督HMM-GAN+LR同样超过所有baseline，而HMM-GMM+LR表现较差。",
+      "rhetorical_function_cn": "在另一模式中复现优势，增加稳健性。",
+      "depends_on_cn": "依赖实验2结果。",
+      "sets_up_cn": "巩固HMM-GAN+LR优于传统HMM-GMM+LR的结论。",
+      "evidence_pointer": "Table 3, Section 4.2"
+    },
+    {
+      "order": 51,
+      "section": "5. Discussion",
+      "locator": "Section 5 P1-S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声明其遵循计算设计科学范式，为有影响力的社会问题设计了新型IT制品HMM-GAN。",
+      "rhetorical_function_cn": "把结果重新接入设计科学范式，为贡献声明定位。",
+      "depends_on_cn": "依赖前文实验证据。",
+      "sets_up_cn": "开始逐一陈述IS知识库贡献。",
+      "evidence_pointer": "Section 5, first paragraph"
+    },
+    {
+      "order": 52,
+      "section": "5.1",
+      "locator": "Section 5.1 Contribution 1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "HMM-GAN为运动传感器这一IS中未被充分利用的数据源提供了独特的特征提取与学习途径，有助于开辟慢性病跌倒预防的新研究领域。",
+      "rhetorical_function_cn": "把技术制品贡献上升到数据源与方法论贡献。",
+      "depends_on_cn": "需要实验证明HMM-GAN有效。",
+      "sets_up_cn": "支撑IS知识库贡献主张。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 53,
+      "section": "5.1",
+      "locator": "Section 5.1 Contribution 2",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "HMM-GAN虽然以防跌倒为背景，但可扩展到ADL识别、跌倒检测，甚至有潜力用于疾病进展监测和康复评估。",
+      "rhetorical_function_cn": "界定方法的适用范围与推广性。",
+      "depends_on_cn": "依赖实验4及对泛化任务的讨论。",
+      "sets_up_cn": "防止读者把贡献限制在单一应用领域。",
+      "evidence_pointer": "Section 5.1, Contribution 2"
+    },
+    {
+      "order": 54,
+      "section": "5.2",
+      "locator": "Section 5.2 P1-S1",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "HMM-GAN可以分别惠及老年人、家庭和提供老年人护理的组织。",
+      "rhetorical_function_cn": "把技术优势翻译成不同利益相关者的具体收益。",
+      "depends_on_cn": "需要前述性能和案例结果。",
+      "sets_up_cn": "为实践含义提供结构。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 55,
+      "section": "5.2.1",
+      "locator": "Section 5.2.1 P1",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "老年人可穿戴含气囊的保护服装，当系统预测到跌倒时智能手机会立即充气，减少受伤并增强活动信心。",
+      "rhetorical_function_cn": "描述具体部署场景，使实践含义具象化。",
+      "depends_on_cn": "需要防跌倒框架的触发机制。",
+      "sets_up_cn": "为未来现场应用留下想象空间。",
+      "evidence_pointer": "Section 5.2.1"
+    },
+    {
+      "order": 56,
+      "section": "6. Conclusion",
+      "locator": "Section 6 P2-S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文采用计算设计科学范式开发HMM-GAN，自动捕获独立与顺序信息，并用LR触发保护装置；模型在大型ground truth数据上优于现有模型。",
+      "rhetorical_function_cn": "在结论中复述核心贡献，回扣研究问题和摘要。",
+      "depends_on_cn": "依赖全部研究证据。",
+      "sets_up_cn": "引出未来方向。",
+      "evidence_pointer": "Section 6, P2"
+    },
+    {
+      "order": 57,
+      "section": "6. Conclusion",
+      "locator": "Section 6 P3-S1-S4",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来研究可融合环境传感器、关联身体评估获得个性化方案、用更先进算法改进HMM-GAN训练、解释深度模型的黑箱。",
+      "rhetorical_function_cn": "列出可扩展方向，同时承认当前模型仍有局限。",
+      "depends_on_cn": "依赖本文的HMM-GAN和结果。",
+      "sets_up_cn": "让文章以开放和可延续的方式结束。",
+      "evidence_pointer": "Section 6, P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先建立防跌倒的现实紧迫性，再把问题拆成数据粒度、独立/顺序信息、分布假设、领先时间、学习模式五个技术维度，逐维度指出既有方法的不足；最后用GAN的surrogate likelihood与Baum-Welch不适配制造一个精确的算法级缺口，从而形成别人没有解决的可研究问题。",
+    "signposting_cn": "引言末明确列出论文结构；文献综述开头预告三条文献线；研究设计开头列出三组件框架；实验部分用“Experiment 1/2/3/4”小标题；在讨论开头和贡献列表中反复回到计算设计科学术语。",
+    "transition_logic_cn": "从现实问题到HIT背景；从HIT背景到运动传感器；从数据分析粒度到snippet级；从snippet级到HMM；从HMM到GAN；从GAN到EM缺口；从模型设计到数据准备；从状态识别实验到防跌倒触发实验；从主任务到泛化任务；从技术指标到经济案例。每个过渡都由前一个环节遗留的未解决问题驱动。",
+    "claim_evidence_rhythm_cn": "先给出具体结果数值，再给出对照baseline区间，再用t检验标注显著性，最后给出解释性原因（如GMM不擅长尖峰）。表格中同时报告多个指标，文字只突出AUC和主要结论，避免信息过载。",
+    "benchmark_narrative_cn": "benchmark不只是性能对比，还被设计成证据链：组件级benchmark证明状态识别；端到端benchmark证明防跌倒；t_m变化和双数据集增强稳健性；额外任务benchmark证明泛化；经济案例把benchmark优势量化成美元。",
+    "theory_return_cn": "在讨论中不重复公式，而是把结果映射回三条贡献：运动传感器数据源、HMM-GAN的方法论贡献、半监督EM实例；结论再简要复述，使技术结果可以承载IS知识库层面的主张。",
+    "contribution_positioning_cn": "文章把贡献定位为“面向IS知识库的计算设计科学制品”，既包括通用传感器分析能力，也包括医疗应用价值；刻意强调不是一次性性能工程，用ADL和fall detection泛化实验支撑。",
+    "novelty_protection_cn": "通过三方面防止贡献退化为一次性性能结果：一是同时做组件级与端到端评估，使改进来源可定位；二是用分布学习实验解释为什么新模型有效；三是用泛化任务和未来潜力把HMM-GAN写成通用方法，而非只为跌倒数据集调参。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用具体统计数字建立现实问题重要性，并引出信息系统中已存在的相关数据源。",
+        "research_job_cn": "划定问题领域（如老年人跌倒），说明其社会经济影响，指出IS可介入。",
+        "required_evidence_cn": "权威统计数据、领域文献证据，说明问题规模。",
+        "transition_to_next_cn": "从“问题重要”转向“现有系统/方法仍不够好”。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "拆解问题数据特征和现有方法局限，形成技术缺口。",
+        "research_job_cn": "系统综述领域文献，识别方法在数据分布、序列建模、延迟约束、学习模式等方面的不足。",
+        "required_evidence_cn": "文献中的方法类别、已知技术限制，最好用一个统一维度表对比已有研究。",
+        "transition_to_next_cn": "用“这些缺口促使我们提出…”引出研究问题。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "把研究问题翻译成制品设计需求，并给出总体框架图。",
+        "research_job_cn": "选择/设计核心算法结构，使每个设计选择针对一个缺口。",
+        "required_evidence_cn": "理论或可引用机制表明设计选择能解决缺口（如entropic GAN可近似似然）。",
+        "transition_to_next_cn": "从“我们设计什么”进入“我们如何准备数据和评估”。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "说明数据来源、预处理、标注可靠性、训练/测试模式，以及实验任务和指标。",
+        "research_job_cn": "构建ground truth数据集或找到公开数据集，完成标签，定义成功标准。",
+        "required_evidence_cn": "数据统计表、标注一致性指标、最小需求（如领先时间）的文献依据。",
+        "transition_to_next_cn": "“我们进行了四个实验…”预告结果。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "先报告核心组件级结果，再报告端到端结果；每个结果都给出baseline比较和显著性。",
+        "research_job_cn": "设计组件级和全流程benchmark，覆盖SOTA方法、传统方法和消融式对照。",
+        "required_evidence_cn": "详细结果表、AUC/F1/Accuracy、t检验、不同参数变化的稳健性分析。",
+        "transition_to_next_cn": "用“这可能是因为…”引出机制解释，再用“为证明泛化”进入额外任务。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用机制实验、泛化实验和经济案例扩展贡献，防止被读作一次性性能改进。",
+        "research_job_cn": "增加分布学习或消融分析、额外任务实验、经济效益估算或现场证据。",
+        "required_evidence_cn": "机制/附录实验、其他任务benchmark、经济模型/案例。",
+        "transition_to_next_cn": "回到文章开头的IS知识库贡献和设计科学范式。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "在讨论和结论中重述贡献，明确边界和未来方向。",
+        "research_job_cn": "把技术结果定位为可复用设计知识/方法论，说明什么条件下成立、什么未验证。",
+        "required_evidence_cn": "前续所有实验结果的汇总，以及边界条件分析。",
+        "transition_to_next_cn": "文章以未来方向自然结束。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用现实统计数据引入研究价值",
+      "把数据特征拆成粒度/信息类型/分布约束等维度，使方法选择有依据",
+      "对现有方法逐条列出局限，再映射为设计需求",
+      "在主任务之外增加泛化任务和经济案例，防止贡献窄化",
+      "用组件级+端到端双层benchmark证明优势来源"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "两个大型公开传感器数据集和大量人工标注（TST视频标注耗时一周）",
+      "覆盖CS/IS多个SOTA模型的重复实验，计算成本高",
+      "需要复现较多baseline（14个CS模型+IS模型+专门防跌倒模型）",
+      "在线附录中还有分布学习、泛化任务和经济案例，工作量很大",
+      "经济收益案例依赖大量假设，不是简单benchmark能替代"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只宣称“HMM+GAN”而不实现和验证新的EM算法，否则核心算法贡献不成立",
+      "不能只报告最终AUC而不做组件级实验，否则无法区分优势来自状态识别还是触发决策",
+      "不能省略对GMM局限的机制检验，否则entropic GAN的选择看起来像随意替换",
+      "不能在没有额外任务实验的情况下声称方法通用",
+      "不能把经济收益当作真实部署结果，必须说明假设和仿真性质"
+    ],
+    "single_best_description_of_the_routine_cn": "用计算设计科学框架把传感器数据特有的分布/序列/领先时间问题转成制品设计，再用两个大数据集做组件级与全流程benchmark，最后用泛化实验和经济案例把性能筹码兑换成IS知识贡献。"
+  },
+  "confidence": 0.78,
+  "limitations_cn": "主文没有包含实验3、实验4和经济案例的具体结果，只能依据正文中的引用和附录标记进行描述；这些附录在本输入中缺失，无法独立核验其具体指标。正文无页码，只能以章节、段落和小标题定位句子级证据。表2和表3中的baseline名称及星号显著性是通过OCR表格读取的，个别数字可能存在识别误差。",
+  "usage": {
+    "prompt_tokens": 30314,
+    "completion_tokens": 24316,
+    "total_tokens": 54630,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 26986
+  }
+}

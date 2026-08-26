@@ -1,0 +1,109 @@
+# -*- coding: utf-8 -*-
+import io
+content = u"""# 92 号 34 第二章文献综述句级对照与跨文献对比记录
+
+- 版本。2026-08-20，在 91 号记录基础上继续句级对照模式，以 34 的第二章文献综述为对象，以 RADAR 研究背景节与 Yang 等（2023）文献综述节为模板，句级对照并跨文献对比，修改三项，复跑验收后留档。
+- 背景。延续用户对每段回到原文、落到每一句、跨文献多次对比并严格优化的要求。本轮对象为综述五节，模板原文覆盖综述组织句、逐研究归纳句、综合句与边界句四种句式。
+- 范围。34 的 2.0 节引言句、2.1 至 2.5 节。模板为 RADAR 研究背景引言段、防御 IT 基础设施段、AAE 段与研究缺口段，Yang 等（2023）文献综述四段。
+- 文件。34 论文与两份模板原文。
+
+## 1. 句级对照表
+
+### 2.0 节
+
+2.0 S1 组织句。34 说明将文献组织为四个主题并依次综述。RADAR 以 Four major areas of research are examined. First, ... Second, ... Third, ... Lastly, ... 承担同一功能，Yang 等（2023）以 We organize prior related literature into three main categories 承担同一功能。34 以压缩列举对应 RADAR 的展开列举。达到模板水平。
+
+2.0 S2 方法句。修改前为指出其有效边界，有效边界为金融学有效前沿的标准译法，用于文献局限表述易生歧义。Yang 等（2023）以 While reviewing these studies, we also highlight the need to use a design science approach ... 承担同类方法声明。修改后为指出其适用边界。详见第三节 N2。
+
+### 2.1 节
+
+2.1 段一第一句。34 给出编码智能体定义。Yang 等（2023）以 topic sentence 加定义的方式组织综述段。达到模板水平。
+
+2.1 段一第二句。34 以 SWE-bench 说明基准层面的能力衡量。RADAR 以 Table 1 与七维综述表承担同类基准引用功能。达到模板水平。
+
+2.1 段一第三句至第五句。34 说明安全边界、输入通道与供应链后果。RADAR 以 However, these artifacts are often not designed to be deployed in adversarial environments ... As a result, the security of these IT artifacts can be compromised ... 承担同类边界句功能。达到模板水平。
+
+2.1 段二第一句与第二句。34 以两大类组织攻击类型。RADAR 以 additive or editing 的二分组织同类攻击分类。达到模板水平。
+
+2.1 段二第三句至第八句。34 依次列举 AgentDojo、SWExploit、IssueTrojanBench 与 MalSkillBench 并给出真实事件与综合句。RADAR 以 Table 2 汇总先研究并给出检测器与数据集的综述句。34 的修改点见 N1。
+
+2.1 段三第一句。修改前为存在明显边界，与 2.0 节的边界表述同病。RADAR 以 our review ... identifies several research opportunities 承担同类局限声明。修改后为存在明显局限。详见第三节 N3。
+
+2.1 段三第二句与第三句。34 以两项局限组织资源边界。RADAR 以 First ... Second ... Third ... Fourth ... 的四项机会组织同类枚举。34 以两项压缩对应，达到模板水平的可行版本。
+
+2.1 段三第四句。34 说明缺乏统一的攻击生成方法与基准并指出切入点。RADAR 以 Based on the review, we identify research gaps and formalize our research questions 承担同类收束功能。达到模板水平。
+
+### 2.2 节
+
+2.2 段一第一句。34 以情境总起句引出数据操纵文献。Yang 等（2023）以 The role of vocal information in financial markets 段首主题句承担同一功能。达到模板水平。
+
+2.2 段一第二句至第四句。34 逐研究归纳 Ghoshal 等（2020）与 Menon 等（2022）并给出综合句。Yang 等（2023）以 In a lab study, Elliott et al. (2012) showed that ... In a series of related research, Hobson et al. (2012) analyzed ... and found that ... 承担同一逐研究归纳句式。达到模板水平。
+
+2.2 段一第五句。34 以 Qu 等（2026）承担特征级细化。达到模板水平。
+
+2.2 段二第一句至第三句。34 以理论命名句引出 Lausen 等（2020）并给出真值与检测性能。Yang 等（2023）以 Mayew and Venkatachalam (2012) used the same LVA software ... and found that ... 承担同一句式。达到模板水平。
+
+2.2 段二第四句至第五句。34 以 Li 与 Chai（2022）承担文本分类鲁棒性情境并以边界句收束。Yang 等（2023）以 However, all three studies relied on the black box third-party voice analysis software LVA ... 承担同一边界句功能。达到模板水平。
+
+2.2 段三第一句至第四句。34 以两项可迁移原则综合并映射到本文设计。Yang 等（2023）以 Since the literature ... is still in its infancy, there are tremendous opportunities ... 承担同一综合与映射功能。达到模板水平。
+
+### 2.3 节
+
+2.3 段一第一句至第三句。34 以对抗样本历史与对抗训练范式组织传统机器学习语境。RADAR 以 AAE 定义段承担同类概念铺垫功能。达到模板水平。
+
+2.3 段一第四句至第七句。34 以三个本质区别组织情境差异。RADAR 以 actions can be sensitive to order ... 承担同类差异说明。达到模板水平。
+
+2.3 段一第八句。34 以直接沿用不可行收束。达到模板水平。
+
+2.3 段二第一句至第四句。34 以三类方法组织智能体攻击生成研究。RADAR 以 Fourth, prevalent AAE methods fall into three categories: (1) heuristic-based optimization algorithms ... (2) deep generative architectures ... (3) deep RL ... 承担同一分类句式。达到模板水平。
+
+2.3 段二第五句至第八句。34 逐类说明局限并以供应链后果收束。RADAR 以 limited in their coverage of emulated adversarial attacks 承担同类局限句式。达到模板水平。
+
+2.3 段三第一句至第四句。34 以 Ebrahimi 等（2025）与 Kwon 和 Lee（2024）两项研究综合并给出边界句。Yang 等（2023）以逐研究加综合句的句式承担同一功能。达到模板水平。
+
+### 2.4 节
+
+2.4 段一第一句至第四句。34 以基础设施总起句与 Ampel 等（2024）、Ebrahimi 等（2025）逐研究归纳。Yang 等（2023）以 IS design science for financial tasks 段首总起句承担同一功能。达到模板水平。
+
+2.4 段二第一句至第五句。34 以外部验证信息作为真值来源组织检测类任务。RADAR 以 However, there is a lack of research on how to strengthen the robustness ... 承担同类真值缺口功能。达到模板水平。
+
+2.4 段三第一句至第四句。34 说明编码智能体领域基准研究刚刚起步并以 D_att 回应真值缺失。RADAR 以 In the cyber defense context ... 的框架回应句承担同类功能。达到模板水平。
+
+### 2.5 节
+
+2.5 第一句。34 说明三个相互关联的缺口且现有研究未整合相关范式。RADAR 以 Our review ... suggests a vital need ... 承担同一缺口总起功能。达到模板水平。
+
+2.5 第二句至第四句。34 以方法缺口、攻击面刻画缺口与评估真值缺口三项组织。RADAR 以 While ... there lacks ... Also ... Furthermore ... In addition ... 承担同一枚举功能。34 的其一其二其三列举与引言第三段三个特征、第四章三个研究问题一一对应。达到模板水平。
+
+2.5 第五句。34 说明在第 4 节形式化研究问题并在第 5 节开发框架。RADAR 以 Given these gaps, the following research questions are posed 承担同一功能。达到模板水平。
+
+## 2. 跨文献对比结论
+
+RADAR 研究背景节按综述组织句、防御文献、RO 理论、AAE 文献与研究缺口组织，每节以对本研究的启示句收束。Yang 等（2023）文献综述节按三大类组织，逐研究归纳后以综合句与边界句收束，并在综述末尾引出设计科学范式。
+
+34 的第二章按四主题组织，与 RADAR 的四领域结构同构；逐研究归纳与综合边界句式与 Yang 等（2023）同构。2.1 节的攻击分类与基准列举对应 RADAR 的 AAE 分类与基准综述，2.5 节的三缺口对应 RADAR 研究缺口段的枚举结构，并保持与引言第三段三特征、第四章三研究问题的三对三映射。修改后第二章的边界表述与局限表述统一，2.1 节补丁表述与 2.3 节一致。
+
+## 3. 修改明细
+
+N1 2.1 节 SWExploit 句。原句为诱导自动修复智能体生成带漏洞补丁。问题为缺助词，读作带漏洞补丁时语义含混，且与 2.3 节诱导智能体生成带漏洞的补丁表述不一致。改为诱导自动修复智能体生成带漏洞的补丁。
+
+N2 2.0 节方法句。原句为指出其有效边界。问题为有效边界是金融学有效前沿（efficient frontier）的标准译法，用于文献局限表述易生歧义。改为指出其适用边界。
+
+N3 2.1 段三首句。原句为这些攻击资源在支撑系统防御研究方面存在明显边界。问题为边界用作局限表述与 2.0 节同病，且边界一词在本文另有安全边界、边界条件等含义。改为这些攻击资源在支撑系统防御研究方面存在明显局限。
+
+## 4. 验收结果
+
+复跑验收。34 禁词为零，符号全零，Walls 一处，占位 61，引用组 95，参考文献 30，设计科学方法一处。35 占位 61，引用组 82。36 占位 65，引用组 83。跨篇相同句零对，近义句七对，全部为刻意保留的系列签名句。总体通过。本记录符号与禁词清零。
+
+## 5. 遗留观察项
+
+其一，下一段按同一方法推进 34 的第四章研究问题，模板为 RADAR 研究缺口段的研究问题句。
+
+其二，2.4 节以 Ebrahimi 等（2025）以公开语料构建检测评估基准概括其测试床，RADAR 原文为经学术许可获取的 VirusTotal 语料，实施时若评审要求严格措辞可改为以大规模恶意软件语料。
+
+其三，2.1 段三以两项局限组织攻击资源边界，与 2.5 节三缺口为压缩映射关系，实施时若篇幅允许可扩展为三项以显式对应。
+
+其四，2.3 节三类方法的出处均以占位标注，实施时按 RADAR 基线分类段的引用格式补齐 SWExploit、FCV 与 RLbreaker 的公开出处。
+"""
+io.open("92_34第二章文献综述_句级对照与跨文献对比记录.md","w",encoding="utf-8",newline="").write(content)
+print("write92 done")

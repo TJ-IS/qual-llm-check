@@ -1,0 +1,979 @@
+{
+  "record_id": "8796",
+  "source_file": "08796_2025_ruckus-in-the-rentals-seeking-new-arrangements-remedying-the-impact-of-home-sharing-on-urban-noi.md",
+  "title": "Ruckus in the Rentals, Seeking New Arrangements: Remedying the Impact of Home-Sharing on Urban Noise",
+  "authors": "Yi Ding; Moksh Matta; Ram Gopal; Haifeng Xu",
+  "year": "2025",
+  "journal": "MIS Quarterly",
+  "doi": "10.25300/misq/2024/18049",
+  "fulltext_chars": 103291,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "multi_objective_or_tradeoff",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:55.262927+00:00",
+  "article_level_summary": {
+    "central_question_cn": "共享住宿平台（如Airbnb）的房产使用是否增加城市噪音？如果是，其影响如何随空间与时间集中程度而变化；平台能否设计一种信息推送（nudging）机制，在维持用户偏好与收入增长的同时缓解噪音外部性？",
+    "artifact_and_design_cn": "本文的‘制品’并非一个可直接部署的软件系统，而是一个基于经验估计的模拟性平台治理机制：一种基于房产相似度评分与偏好评分对搜索结果进行重排序的‘助推’（nudging）算法。该算法旨在将潜在客人导向与既有集中房产邻近、同时满足客人属性偏好的房源，从而提高空间集中度，借助执法吓阻效应减少噪音投诉，同时基本保持收入。",
+    "objective_outcomes_cn": "基于纽约市2014-2019年zip code-日面板数据，PPML估计显示Reservations每增加1个标准差，噪音投诉增加约2%；空间集中度（Ripley's K）与时间集中度（Clumpiness）交互项显著为负，说明集中缓解噪音；建筑层面交错DiD证实平台进入增加噪音投诉；模拟实验表明在相似度阈值w=0.75时，噪音举报预测减少约7.9%-9.7%（局部）、纽约市总体约6.6%，偏好得分平均提升25.3%，收入差异仅0.31%。",
+    "core_contribution_cn": "作者声称的贡献是：首次系统检验共享住宿对城市噪音的影响及其异质性；识别空间/时间集中度作为关键边界条件，并揭示执法‘吓阻效应’机制；提出empirically informed的nudging算法，展示平台自治理与制度治理的互补性，为平台提供替代声誉成本高昂的客人惩罚措施。",
+    "whole_argument_in_one_paragraph_cn": "文章从噪音污染的健康危害和共享平台可能放大土地用途改变的外部性出发，先建立‘平台房产使用增加噪音’这一基本命题，然后通过发现空间与时间集中度缓解噪音，引入执法吓阻机制作为解释，再利用机制检验区分吓阻与社区适应，最后将这一经验机制转化为可操作的nudging信息推送算法，并通过仿真实验展示其能在偏好与收入约束下降低噪音，从而把实证发现升级为平台治理设计知识。"
+  },
+  "paper_archetype": "multi_method_or_multi_study_program",
+  "paper_archetype_reason_cn": "论文不局限于单一证据模式；它包含大样本面板计量分析（PPML+IV+DiD）、机制检验、基于机器学习预测的仿真实验以及设计科学式的nudging机制展示。多个Study（实证、机制、仿真）协同累积，从关联到因果再到设计干预，符合multi_method_or_multi_study_program。",
+  "dominant_writing_arc": "phenomenon_mechanism_intervention_field_test",
+  "dominant_writing_arc_reason_cn": "全文主线是‘现象（平台使用与噪音）→机制（空间/时间集中的吓阻效应）→数字干预（信息推送nudging）→现场/仿真检验’，尽管主要因果证据来自大样本观测数据而非随机现场实验，但文章以机制识别和仿真外推完成闭环，符合phenomenon_mechanism_intervention_field_test的变体。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "第1阶段建立核心关联与调节：zip code-日PPML估计，证明Reservations增加噪音且空间/时间集中度负向调节。第2阶段用IV处理内生性，进一步确认主关系与调节关系。第3阶段用建筑级交错DiD和事件研究法处理因果识别与平行趋势，将关联提升为进入效应。第4阶段拆分噪音类型，确认主要来自住宅区享乐活动。第5阶段进行机制检验，支持执法吓阻效应并排除社区适应。第6阶段进行多种稳健性检验（替代估计量、排除公共事件、灵敏度、Airbnb Neighbors前后对比）。第7阶段基于经验参数进行仿真实验，检验nudging算法的效果与规模外推。各阶段逐级解决上一阶段留下的识别、机制与设计问题。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "核心面板回归与调节（zip code-日）",
+        "question_cn": "平台房产使用是否增加噪音？空间集中的房产使用是否减轻噪音？时间集中的房产使用是否减轻噪音？",
+        "inputs_and_setting_cn": "纽约市2014年10月-2019年12月205个zip code日面板；AirDNA交易数据、NYC Open Data投诉数据、多来源控制变量。",
+        "designed_or_compared_object_cn": "比较Reservations、Reservations×K、Reservations×C等模型设定（Table 3的模型2-6）。",
+        "baseline_control_or_counterfactual_cn": "模型(1)仅含控制变量和FE，模型(2)加入Reservations，模型(3)-(6)逐步加入集中度及其交互。",
+        "objective_metrics": [
+          "Noise_Complaints",
+          "Reservations",
+          "Ripley's K",
+          "Clumpiness C",
+          "交互项系数"
+        ],
+        "analysis_method_cn": "固定效应泊松伪极大似然（PPML），zip code聚类标准误，标准化变量。",
+        "main_result_cn": "Reservations每增1SD使噪音投诉增加约2%；空间集中度交互-5.104，时间集中度交互-0.041，均显著为负。",
+        "argumentative_role_cn": "确立基本关联和两个核心调节效应的证据，支撑后续机制和设计分析。",
+        "remaining_uncertainty_cn": "可能存在反向因果和遗漏变量；交互项机制不明。",
+        "link_to_next_phase_cn": "内生性威胁促使IV分析和建筑级DiD；机制不明促使机制检验。",
+        "evidence_pointers": [
+          "Data, Variables, and Model section, Formula (3)",
+          "Table 3, Models (2)-(6)",
+          "Results section, first paragraph"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "工具变量（IV）与主关系/调节内生性检验",
+        "question_cn": "在控制反向因果和遗漏变量后，主效应和调节效应是否仍然成立？",
+        "inputs_and_setting_cn": "全样本或Q3/Q4子样本；IVs包括航班取消数、飓风Irma、Host回复率、Listing Purge、离水体距离、新listing空间/时间集中度等。",
+        "designed_or_compared_object_cn": "比较不同IV组合下的第一阶段和第二阶段估计。",
+        "baseline_control_or_counterfactual_cn": "使用外生IV形成的反事实路径。",
+        "objective_metrics": [
+          "First-stage F statistic",
+          "J statistic",
+          "Reservations系数",
+          "交互项系数"
+        ],
+        "analysis_method_cn": "控制函数法（control function approach），Poisson第一或OLS第一，bootstrap标准误；同时GMM复核。",
+        "main_result_cn": "主效应与调节效应在IV分析中均保持显著，排除内生性解释。",
+        "argumentative_role_cn": "增强核心估计的因果可解释性。",
+        "remaining_uncertainty_cn": "IV强度与排除性仍依赖领域假设；仍未识别机制。",
+        "link_to_next_phase_cn": "转向建筑级DiD以提供准实验证据。",
+        "evidence_pointers": [
+          "Robustness Tests > Tests for Endogeneity",
+          "Table 4",
+          "Table 5"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "建筑级交错DiD与事件研究",
+        "question_cn": "在建筑层面，平台进入是否增加噪音投诉，并且进入效应随时间是否显著？",
+        "inputs_and_setting_cn": "860,303幢纽约建筑，11.49%有Airbnb进入；建筑-月度数据；按最近距离匹配Airbnb房源和投诉到建筑。",
+        "designed_or_compared_object_cn": "Entry（平台是否进入某建筑月）作为处理变量；事件研究dummies。",
+        "baseline_control_or_counterfactual_cn": "未进入建筑/未处理建筑；限制在500m和200m范围内的可比控制组；Callaway-Sant'Anna双重稳健DiD。",
+        "objective_metrics": [
+          "Noise_Complaints",
+          "Entry系数",
+          "事件研究前/后系数"
+        ],
+        "analysis_method_cn": "建筑固定效应+时间固定效应Poisson/回归；事件研究；Callaway-Sant'Anna估计。",
+        "main_result_cn": "进入后噪音投诉增加约3%；平行趋势成立；进入后效应随时间持续。",
+        "argumentative_role_cn": "提供更强因果证据，证明平台商业活动确实导致噪音。",
+        "remaining_uncertainty_cn": "未能检验集中度调节；仍不明为何集中会减轻噪音。",
+        "link_to_next_phase_cn": "机制检验需要细化噪音类型和集中度背后的行为过程。",
+        "evidence_pointers": [
+          "Robustness Tests > Difference-in-differences (DiD) analysis at building level",
+          "Table 6"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "主机制分解：噪音类型分析",
+        "question_cn": "平台使用带来的噪音主要来自享乐活动还是出行活动？发生在住宅区还是商业区？",
+        "inputs_and_setting_cn": "将NYC Open Data噪音投诉按描述词和tax class、餐厅检查数据等分成住宅区享乐、商业区享乐、移动出行三类。",
+        "designed_or_compared_object_cn": "分别以三类噪音投诉作为因变量的模型。",
+        "baseline_control_or_counterfactual_cn": "三类噪音模型彼此互为对照。",
+        "objective_metrics": [
+          "Reservations系数在各类噪音模型中的显著性"
+        ],
+        "analysis_method_cn": "固定效应PPML按三类因变量分别估计。",
+        "main_result_cn": "仅住宅区享乐型噪音投诉显著增加（系数0.021），商业区与移动出行类不显著。",
+        "argumentative_role_cn": "支持‘游客在住宅区进行享乐行为产生噪音’这一行为机制。",
+        "remaining_uncertainty_cn": "尚未区分为什么集中度减轻噪音的具体机制。",
+        "link_to_next_phase_cn": "为调节效应的机制检验提供必要背景。",
+        "evidence_pointers": [
+          "Robustness Tests > Tests for Mechanisms > Main relationship",
+          "Table 8, Models (1)-(3)"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "调节机制检验：吓阻效应vs社区适应",
+        "question_cn": "空间/时间集中的房产使用为什么减轻噪音：是因为执法吓阻效应，还是社区适应？",
+        "inputs_and_setting_cn": "以zip code 11211为主要焦点；使用房产100米范围为awareness zone；Deterred_Today、Deterred_Yesterday；共享房间比例、多房源host比例；持续集中期后投诉变化。",
+        "designed_or_compared_object_cn": "用执法暴露代理变量替换集中度；三向交互检验共享房间/多房源host是否增强吓阻；长期集中后投诉是否减少且持续下降。",
+        "baseline_control_or_counterfactual_cn": "社区适应假设的检验：频繁前投诉地区在后续月是否报告更少投诉。",
+        "objective_metrics": [
+          "Deterred_Today交互系数",
+          "Deterred_Yesterday交互系数",
+          "Shared/ Multi_listing三向交互系数",
+          "前后30天投诉均值差异",
+          "相关系数"
+        ],
+        "analysis_method_cn": "固定效应PPML；均值差异t检验与相关性分析。",
+        "main_result_cn": "执法暴露显著缓解噪音（当日-0.098、昨日-0.032）；共享房间与多房源host增强缓解；社区适应证据不支持。",
+        "argumentative_role_cn": "识别出集中度减轻噪音的理论机制是执法‘吓阻’以及host作为信息扩散渠道。",
+        "remaining_uncertainty_cn": "执法代理变量有限；无法直接观察host转达行为。",
+        "link_to_next_phase_cn": "为后续nudging算法设计提供理论依据——通过提升集中度增强吓阻来减少噪音。",
+        "evidence_pointers": [
+          "Robustness Tests > Tests for Mechanisms > Moderating relationship",
+          "Table 7",
+          "Table 8, Models (4)-(9)"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "稳健性检验",
+        "question_cn": "主结果在不同估计量、排除公共事件、不同集中度参数和平台功能引入前后是否依然稳健？",
+        "inputs_and_setting_cn": "负二项回归、去除公园/街道/室内公共事件、变化Ripley K半径与Clumpiness观察期、Airbnb Neighbors上线前后数据（2015-2017或2016）。",
+        "designed_or_compared_object_cn": "比较PPML、NB、OLS；排除事件；不同r与观察期；Post_Feature前后。",
+        "baseline_control_or_counterfactual_cn": "排除事件后的样本作为反事实噪声来源控制；Airbnb Neighbors作为投诉分流渠道的前后对比。",
+        "objective_metrics": [
+          "Reservations系数",
+          "交互项系数",
+          "Post_Feature交互系数"
+        ],
+        "analysis_method_cn": "重新估计核心模型；预-后对比。",
+        "main_result_cn": "所有稳健性检验结果与主发现一致，包括Airbnb Neighbors上线后政府噪音投诉显著减少。",
+        "argumentative_role_cn": "排除替代解释、测量参数敏感性和遗漏第三变量，保障结果稳健。",
+        "remaining_uncertainty_cn": "仍无法完全排除其他平台功能或政策变化。",
+        "link_to_next_phase_cn": "以稳健的实证参数为基础，进入仿真实验设计。",
+        "evidence_pointers": [
+          "Additional Robustness Tests",
+          "Table 9",
+          "Table 10"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "仿真实验与nudging算法",
+        "question_cn": "平台能否通过信息重排序nudging算法在满足偏好、保持收入的情况下减少噪音？效果规模如何？",
+        "inputs_and_setting_cn": "zip code 11211在2019年12月31日的实际预定数据（1,219/5,454房源）；属性向量、价格、评分等；全纽约12月数据用于外推。",
+        "designed_or_compared_object_cn": "比较不同相似度阈值w（0.55-0.95）下的nudged属性集合与真实预定集合的空间分布、噪音预测、偏好得分、收入变化。",
+        "baseline_control_or_counterfactual_cn": "真实预定集合作为对照；w=0.95代表几乎不改变选择的极端情况；w=0.55代表较宽松相似度。",
+        "objective_metrics": [
+          "预测噪音投诉变化%",
+          "偏好得分变化%",
+          "Ripley's K变化",
+          "收入变化%",
+          "100米内投诉调查曝光房产数"
+        ],
+        "analysis_method_cn": "余弦相似度矩阵、Probit偏好评分模型、贪心算法选择最高Ripley K属性、SVR预测噪音、模拟迭代、跨时段/跨区域外推。",
+        "main_result_cn": "w=0.75时噪音减少7.89%（局部），偏好得分提升25.3%，收入差异0.31%；外推到NYC日、周、月分别减少6.6%、5.6%、6.2%。",
+        "argumentative_role_cn": "将实证发现的机制转化为可操作平台设计，提供“如何做”的证据，并展示三赢。",
+        "remaining_uncertainty_cn": "仿真依赖历史预定和静态属性，未考虑用户拒绝推荐、平台动态、长期行为反应。",
+        "link_to_next_phase_cn": "不再有下一阶段；结果返回讨论部分，与平台治理文献和贡献对接。",
+        "evidence_pointers": [
+          "Simulation Experiments",
+          "Figure 1",
+          "Figure 2",
+          "Experiment 1 and Experiment 2 paragraphs"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "PRACTICAL_STAKES",
+      "RQ_OR_OBJECTIVE",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRIOR_KNOWLEDGE",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "MECHANISM",
+      "RESULT",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "THEORY_PROPOSITION",
+      "MECHANISM"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION",
+      "THEORY_PROPOSITION"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "THEORY_PROPOSITION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "平台外部性文献（Burtch et al., 2018; Zervas et al., 2017等）",
+      "城市噪音健康影响文献（Basner et al., 2014; Fan & Weinhold, 2022）",
+      "执法吓阻效应文献（Sherman & Weisburd, 1995; Ariel et al., 2020）",
+      "信息提供作为平台治理机制的文献（Cui et al., 2020; Edelman & Luca, 2014）",
+      "搜索行为与眼球追踪信息（PRweb, 2005; Schwartz, 2014）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "执法吓阻理论和信息提供文献并非仅用于事后解释；论文在发现集中度与噪音负相关后，明确预测执法暴露会增强吓阻，并通过Deterred_Today/Yesterday、共享房间和多房源host三向交互进行机制检验；随后将这些机制直接转化为nudging算法的设计要求——提高空间集中度、保持偏好匹配、不损害收入。因此知识基础前瞻性地决定了算法特征和评价指标。",
+    "translation_chain_cn": "平台外部性理论→平台房产使用可能改变土地用途并增加噪音→执法行动在集中房产附近形成视觉和意识上的吓阻→更高空间/时间集中度通过提高执法可见性减少噪音→设计要求：选择与既有集中房产邻近、且满足客人偏好的属性进行推荐→算法选择：相似度评分+偏好评分+最大化Ripley's K→仿真评价：预测噪音下降、偏好得分提升、收入基本不变。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "平台外部性（negative externalities）是平台经济的重要社会影响，传统监管之外还可平台自治理。",
+        "mechanism_cn": "平台通过降低交易成本扩大土地非住宅使用，产生噪音外部性。",
+        "design_requirement_cn": "需要一种不依赖昂贵惩罚、能平衡收入与外部性的机制。",
+        "artifact_choice_cn": "信息重排序（rank-ordering）作为nudging，而非惩罚或区域性禁令。",
+        "evaluated_contrast_cn": "不同相似度阈值下nudged属性vs真实属性。",
+        "objective_result_cn": "w=0.75时预测噪音减少7.9%-9.7%，收入差异0.31%。",
+        "evidence_pointers": [
+          "Simulation Experiments section",
+          "Figure 2a-2c"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "执法吓阻效应在热点地区有效，临近违法点的人会改变行为。",
+        "mechanism_cn": "集中房产提高投诉处理的可见性，host/guest因担心执法而减少噪音行为。",
+        "design_requirement_cn": "应增加被推荐房产与已集中房产的空间邻近性，使执法曝光范围扩大。",
+        "artifact_choice_cn": "在满足相似度与偏好阈值前提下，选择使Ripley K最大的属性作为推荐项。",
+        "evaluated_contrast_cn": "w=0.95（几乎不集中）vs w=0.55（高集中）时，房产空间分布和100米内曝光房产数。",
+        "objective_result_cn": "曝光房产数从8.7升至10.8；预测噪音减少从0.01%升至9.72%。",
+        "evidence_pointers": [
+          "Figure 1b-1d",
+          "Figure 2c",
+          "Simulation Experiments > Results of Experiment 1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "用户在线搜索时注意力集中在结果顶部，信息顺序影响选择。",
+        "mechanism_cn": "将目标属性置顶可提高可见性；偏好评分高则增强选择概率。",
+        "design_requirement_cn": "算法需在保证目标属性与客人选择属性相似（功能、质量）的情况下推荐。",
+        "artifact_choice_cn": "构建属性余弦相似度评分和Probit偏好评分双重约束。",
+        "evaluated_contrast_cn": "不同w阈值下相似度与偏好评分的平衡。",
+        "objective_result_cn": "偏好评分在w=0.75达到峰值25.3%提升；w两端改善小。",
+        "evidence_pointers": [
+          "Simulation Experiments > Nudging algorithm",
+          "Figure 2b"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "大规模观察性面板回归（PPML）",
+      "工具变量控制函数法",
+      "建筑级交错DiD与事件研究",
+      "机制检验（区分吓阻与适应）",
+      "稳健性检验（替代估计量、排除事件、参数灵敏度）",
+      "基于真实历史数据的仿真实验",
+      "跨区域/跨时段外推分析"
+    ],
+    "why_these_evaluations_cn": "主回归只能提供关联，因此引入IV和DiD以提高因果识别；机制未知需要用机制检验确认吓阻；机制确认后需要用仿真实验证明该设计能在多目标约束下工作；最后用跨区域外推展示可扩展性。每一层评价都解决上一层留下的不确定性。",
+    "benchmark_and_contrast_chain_cn": "以‘无平台使用’和‘无集中’为逻辑基准：主回归使用固定效应模型构成第一对比；DiD使用未进入建筑作为控制组；机制检验用执法暴露替代集中度；仿真实验以真实预定集合（w=0.95近似不干预）为对照。各阶段对比累积起来，从关联可靠地推进到机制和设计有效性。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "平台房产使用增加噪音投诉",
+        "evidence_cn": "PPML显著正效应；IV一致；建筑级DiD显著；Airbnb Neighbors前-后对比显著减弱；稳健性一致",
+        "tested_or_asserted_cn": "tested"
+      },
+      {
+        "claim_cn": "空间/时间集中度缓解噪音",
+        "evidence_cn": "主模型交互显著负；IV交互显著负；Table 10不同参数下显著负",
+        "tested_or_asserted_cn": "tested"
+      },
+      {
+        "claim_cn": "集中度通过执法吓阻效应缓解噪音",
+        "evidence_cn": "Deterred_Today/Yesterday显著；共享房间/多房源host三向交互显著；社区适应检验不显著",
+        "tested_or_asserted_cn": "tested"
+      },
+      {
+        "claim_cn": "噪音主要来自住宅区享乐活动",
+        "evidence_cn": "住宅区噪音投诉因变量显著，商业/移动类不显著",
+        "tested_or_asserted_cn": "tested"
+      },
+      {
+        "claim_cn": "nudging算法能在保持偏好与收入下减少噪音",
+        "evidence_cn": "仿真实验预测噪音减少、偏好得分提升、收入变化小",
+        "tested_or_asserted_cn": "simulation-based, not field-tested"
+      },
+      {
+        "claim_cn": "平台自治理与制度治理互补",
+        "evidence_cn": "nudging通过提升集中度放大执法吓阻效应",
+        "tested_or_asserted_cn": "partially tested via simulation"
+      }
+    ],
+    "internal_validity_strategy_cn": "依靠固定效应、IV、交错DiD、平行趋势检验、机制检验和排除公共事件/替代解释来提升内部效度；利用Airbnb Neighbors上线作为自然分流证据。",
+    "external_validity_strategy_cn": "以纽约市多zip code和多建筑为样本，并在不同子样本、不同集中度参数和时间窗口下重复检验；仿真实验从单个zip code外推到全纽约和更长时间范围。",
+    "what_is_not_actually_tested_cn": "nudging算法没有在真实平台部署，没有真实用户行为反应，没有平台收入的实际测量；‘host把吓阻信息传递给后续客人’的扩散渠道是通过共享房间/多房源比例间接推断，而非直接观测；算法对长期用户满意度、市场动态和法规变化的影响未直接检验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出并仿真验证了一种基于重排序的nudging算法，能在满足用户偏好和保持收入的情况下降低预测噪音投诉，且可跨区域、跨时段外推。",
+    "artifact_claim_cn": "算法的关键设计要素——相似度阈值w、偏好评分、最大化Ripley K——共同影响效果；w=0.75时达到偏好与集中度的较好平衡。",
+    "mechanism_claim_cn": "空间/时间集中的房产使用通过提高执法行动可见性增强吓阻效应，从而减少噪音；共享房间和多房源host作为信息扩散渠道强化该效应。",
+    "boundary_claim_cn": "该效应在纽约市都市环境中成立，在住宅区享乐活动导致的噪音上表现最明显；集中度与吓阻效应的关系受执法与host传播渠道制约。",
+    "reusable_design_knowledge_cn": "平台治理应以空间/时间集中度作为设计参数；可通过信息重排序而非惩罚来增强制度执法效果；设计时需同时考虑偏好匹配、集中度和收入之间的权衡。",
+    "theoretical_contribution_cn": "扩展平台外部性文献，将噪音识别为平台外部性；为平台自治理与制度治理互补性提供经验证据；将执法吓阻理论引入共享住宿治理语境。",
+    "how_discussion_closes_intro_gap_cn": "引言提出平台是否增加噪音、如何增加、平台能否缓解三个问题；讨论部分明确以噪音外部性填补平台外部性文献空白，以集中度边界条件和nudging设计回应‘如何缓解’问题，并用平台-制度互补性回应治理争论。",
+    "overclaim_or_unsupported_leaps_cn": "从仿真到建议平台实际采用nudging存在跳跃，因为仿真未考虑真实用户拒绝推荐、动态市场调整、长期体验下降；‘平台自治理与制度治理互补’这一表述主要基于机制和仿真，尚缺乏现场证据；将执法吓阻作为唯一机制虽通过排除适应检验，但仍有其他潜在机制未排除。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "共享住宿平台将闲置住房引入旅游经济，创造经济价值，但也产生负外部性。",
+      "rhetorical_function_cn": "开头建立平台正负两面性的框架。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出外部性主题，为噪音作为外部性铺垫。",
+      "evidence_pointer": "Abstract第一句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S4-S6",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文研究使用平台房产对噪音外部性的影响，以及空间/时间集中是否缓解它。",
+      "rhetorical_function_cn": "浓缩研究问题。",
+      "depends_on_cn": "外部性框架",
+      "sets_up_cn": "预告后续经验发现。",
+      "evidence_pointer": "Abstract中间部分"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S7-S10",
+      "move_code": "RESULT",
+      "paraphrase_cn": "基于平台交易数据，显示房产使用增加噪音，但空间/时间集中可缓解；执法行动在集中时更有效。",
+      "rhetorical_function_cn": "提前给出核心结果。",
+      "depends_on_cn": "前句问题",
+      "sets_up_cn": "为仿真实验预告经验基础。",
+      "evidence_pointer": "Abstract中间继续"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P1 S11-S13",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "通过经验校准的仿真实验提出nudging算法，在满足偏好和收入的同时减少噪音。",
+      "rhetorical_function_cn": "给出解决途径与贡献。",
+      "depends_on_cn": "前面结果",
+      "sets_up_cn": "为阅读正文提供贡献框架。",
+      "evidence_pointer": "Abstract末句"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "市场交易常产生负外部性，已有大量传统业务外部性研究，但数字平台外部性研究刚开始。",
+      "rhetorical_function_cn": "建立研究背景并指出新方向。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "将本文定位在平台外部性新兴文献中。",
+      "evidence_pointer": "Introduction第一段"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出研究问题：平台是否增加城市噪音？如何增加？平台能做什么缓解？",
+      "rhetorical_function_cn": "直接声明研究问题。",
+      "depends_on_cn": "前句文献背景",
+      "sets_up_cn": "统领全文研究和后续所有阶段。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P2 S1-S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "噪音对人类健康有短期到长期危害，城市更为严重。",
+      "rhetorical_function_cn": "给研究问题赋予健康和社会重要性。",
+      "depends_on_cn": "问题提出",
+      "sets_up_cn": "论证为什么IS/平台研究需要关注噪音。",
+      "evidence_pointer": "Introduction第二段"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P3 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "平台因降低交易成本和网络效应改变土地用途，把住宅转为旅游用途，产生噪音潜力。",
+      "rhetorical_function_cn": "解释平台为何特别可能产生噪音。",
+      "depends_on_cn": "平台外部性框架",
+      "sets_up_cn": "为‘平台使用-噪音’提供机制理由。",
+      "evidence_pointer": "Introduction第三段"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "仅研究平台进入区域会忽略区域内部在时间和空间上的异质性。",
+      "rhetorical_function_cn": "指出文献缺口：异质性机制被忽视。",
+      "depends_on_cn": "平台进入外部性的既有研究",
+      "sets_up_cn": "引出本文聚焦财产使用模式而非仅进入。",
+      "evidence_pointer": "Introduction第四段"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P5 S1-S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "文献强调监管治理，但也指出平台有信息优势可自治理；平台治理需要在社会福祉和收入间权衡。",
+      "rhetorical_function_cn": "引入平台自治理与权衡问题。",
+      "depends_on_cn": "异质性缺口",
+      "sets_up_cn": "为研究和仿真设计铺垫治理机制目标。",
+      "evidence_pointer": "Introduction第五段"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P6 S1-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "利用纽约市样本发现，房产使用增加噪音，但空间/时间集中减弱这一影响；机制是增强执法吓阻。",
+      "rhetorical_function_cn": "预告核心实证结果和机制。",
+      "depends_on_cn": "研究问题、理论框架",
+      "sets_up_cn": "为后续方法细节和讨论做知识准备。",
+      "evidence_pointer": "Introduction第六段"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P7 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "通过经验校准的仿真发现，nudging算法能将偏好评分与集中房产邻近性结合，实现噪音与收入的平衡。",
+      "rhetorical_function_cn": "预告设计干预结果。",
+      "depends_on_cn": "前述机制",
+      "sets_up_cn": "引出仿真实验部分和贡献。",
+      "evidence_pointer": "Introduction第七段"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P7 S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者将进行经验推断与仿真实验，说明平台如何达到最优平衡。",
+      "rhetorical_function_cn": "为读者提供路线图。",
+      "depends_on_cn": "研究问题与已有发现",
+      "sets_up_cn": "为Simulation Experiments部分设定预期。",
+      "evidence_pointer": "Introduction P7最后"
+    },
+    {
+      "order": 14,
+      "section": "Literature Review",
+      "locator": "P1 S1-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "总结共享平台外部性的研究：拼车、歧视、出租车收入、创业、事故、拥堵、租金、酒店收入、犯罪等。",
+      "rhetorical_function_cn": "系统梳理已有文献。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "用于识别文献缺口。",
+      "evidence_pointer": "Literature Review第一段"
+    },
+    {
+      "order": 15,
+      "section": "Literature Review",
+      "locator": "P1最后",
+      "move_code": "GAP",
+      "paraphrase_cn": "指出三个缺口：噪音研究稀缺、区域内异质性机制被忽视、平台自治理被忽略。",
+      "rhetorical_function_cn": "明确缺口类型。",
+      "depends_on_cn": "前文文献总结",
+      "sets_up_cn": "将研究定位在三个缺口上。",
+      "evidence_pointer": "Literature Review第一段末"
+    },
+    {
+      "order": 16,
+      "section": "Literature Review",
+      "locator": "P2 S1-S6",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "噪音对健康的损害在实验和城市各类噪声源文献中已充分证明，但平台作为噪声源被忽视。",
+      "rhetorical_function_cn": "为研究提供噪音健康文献基础。",
+      "depends_on_cn": "缺口识别",
+      "sets_up_cn": "强调研究新颖性。",
+      "evidence_pointer": "Literature Review第二段"
+    },
+    {
+      "order": 17,
+      "section": "Data, Variables, and Model",
+      "locator": "Data段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "介绍数据来源：NYC Open Data噪音投诉和AirDNA房产交易。",
+      "rhetorical_function_cn": "说明数据基础。",
+      "depends_on_cn": "研究问题",
+      "sets_up_cn": "建立因变量和自变量度量。",
+      "evidence_pointer": "Data and Variables段"
+    },
+    {
+      "order": 18,
+      "section": "Data, Variables, and Model",
+      "locator": "Dependent and independent variables段",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "定义因变量为噪音投诉数，自变量为预定房产数，并说明噪音投诉作为城市噪音暴露的常用指标。",
+      "rhetorical_function_cn": "提供指标合理性依据。",
+      "depends_on_cn": "数据来源",
+      "sets_up_cn": "为模型检验提供变量定义。",
+      "evidence_pointer": "Dependent and independent variables段"
+    },
+    {
+      "order": 19,
+      "section": "Data, Variables, and Model",
+      "locator": "Spatial and temporal concentration段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义空间集中度（Ripley K）和时间集中度（Clumpiness）。",
+      "rhetorical_function_cn": "建立关键调节变量的测度。",
+      "depends_on_cn": "数据集",
+      "sets_up_cn": "为交互项检验提供工具。",
+      "evidence_pointer": "Table 1相关段落"
+    },
+    {
+      "order": 20,
+      "section": "Data, Variables, and Model",
+      "locator": "Control variables段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "纳入五类控制变量，以吸收房产吸引力和社区噪音潜在因素。",
+      "rhetorical_function_cn": "解释为什么要控制这些变量。",
+      "depends_on_cn": "干扰因素担忧",
+      "sets_up_cn": "后续模型估计的说明。",
+      "evidence_pointer": "Control variables段"
+    },
+    {
+      "order": 21,
+      "section": "Data, Variables, and Model",
+      "locator": "Model specification段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "给出PPML模型设定，使用zip code固定效应、时间固定效应和聚类标准误。",
+      "rhetorical_function_cn": "说明估计方法与固定效应策略。",
+      "depends_on_cn": "变量定义",
+      "sets_up_cn": "为结果表提供统计基础。",
+      "evidence_pointer": "Formula (3)"
+    },
+    {
+      "order": 22,
+      "section": "Results",
+      "locator": "Results段P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "报告主效应：Reservations每增一标准差，噪音投诉增加2%。",
+      "rhetorical_function_cn": "给出核心关联证据。",
+      "depends_on_cn": "模型估计",
+      "sets_up_cn": "加入交互项检验调节。",
+      "evidence_pointer": "Table 3 Model 2"
+    },
+    {
+      "order": 23,
+      "section": "Results",
+      "locator": "Results段P2-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "报告空间集中度与时间集中度的交互显著为负。",
+      "rhetorical_function_cn": "识别调节效应。",
+      "depends_on_cn": "主效应",
+      "sets_up_cn": "为机制检验提供现象。",
+      "evidence_pointer": "Table 3 Models 4 and 6"
+    },
+    {
+      "order": 24,
+      "section": "Robustness Tests > Endogeneity",
+      "locator": "Tests for Endogeneity第一段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "为处理内生性，采用四个IV和三个IV集合。",
+      "rhetorical_function_cn": "说明因果识别策略。",
+      "depends_on_cn": "核心结果",
+      "sets_up_cn": "为IV分析结果铺垫。",
+      "evidence_pointer": "Robustness Tests first paragraph"
+    },
+    {
+      "order": 25,
+      "section": "Robustness Tests > Endogeneity",
+      "locator": "Moderating relationships段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "为调节变量使用额外IV并进行控制函数估计。",
+      "rhetorical_function_cn": "将IV扩展到调节效应。",
+      "depends_on_cn": "主IV策略",
+      "sets_up_cn": "保证调节关系不是内生性产物。",
+      "evidence_pointer": "Moderating relationships段"
+    },
+    {
+      "order": 26,
+      "section": "Robustness Tests > DiD",
+      "locator": "DiD building level段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "说明使用建筑级交错DiD作为自然实验。",
+      "rhetorical_function_cn": "提供独立于zip code面板的因果证据。",
+      "depends_on_cn": "IV结果",
+      "sets_up_cn": "为进入效应随时间变化的动态提供证据。",
+      "evidence_pointer": "DiD分析段"
+    },
+    {
+      "order": 27,
+      "section": "Robustness Tests > DiD",
+      "locator": "DiD results段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "报告DiD结果：进入后噪音投诉增加约3%，平行趋势成立。",
+      "rhetorical_function_cn": "确认平台进入的因果效应。",
+      "depends_on_cn": "DiD设计",
+      "sets_up_cn": "强化主关系的因果主张。",
+      "evidence_pointer": "Table 6 Models 1-3"
+    },
+    {
+      "order": 28,
+      "section": "Robustness Tests > Tests for Mechanisms",
+      "locator": "Main relationship段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "列出三种可能噪音渠道，并通过分类型噪音投诉进行识别。",
+      "rhetorical_function_cn": "将主效应分解到具体行为渠道。",
+      "depends_on_cn": "主效应证据",
+      "sets_up_cn": "为调节机制检验做铺垫。",
+      "evidence_pointer": "Tests for Mechanisms first paragraph"
+    },
+    {
+      "order": 29,
+      "section": "Robustness Tests > Tests for Mechanisms",
+      "locator": "Moderating relationship段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "提出两种可能机制：执法吓阻和社区适应。",
+      "rhetorical_function_cn": "为调节效应提供竞争性解释。",
+      "depends_on_cn": "调节效应结果",
+      "sets_up_cn": "设计六个检验区分机制。",
+      "evidence_pointer": "Tests for Mechanisms second paragraph"
+    },
+    {
+      "order": 30,
+      "section": "Robustness Tests > Tests for Mechanisms",
+      "locator": "Overall conclusion段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "总结：证据支持吓阻机制，不支持社区适应。",
+      "rhetorical_function_cn": "明确机制归宿。",
+      "depends_on_cn": "六个检验",
+      "sets_up_cn": "为nudging算法的机制依赖提供理论依据。",
+      "evidence_pointer": "Tests for Mechanisms末段"
+    },
+    {
+      "order": 31,
+      "section": "Additional Robustness Tests",
+      "locator": "Alternative models段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "采用负二项和OLS替代估计。",
+      "rhetorical_function_cn": "排除估计方法敏感。",
+      "depends_on_cn": "主结果",
+      "sets_up_cn": "增加结果稳健性。",
+      "evidence_pointer": "Table 9"
+    },
+    {
+      "order": 32,
+      "section": "Additional Robustness Tests",
+      "locator": "Excluding public events段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "排除公园、街道和室内公共事件后的样本重新估计。",
+      "rhetorical_function_cn": "排除混杂事件。",
+      "depends_on_cn": "主结果",
+      "sets_up_cn": "增强噪音来源归因。",
+      "evidence_pointer": "Table 9 Models 4-9"
+    },
+    {
+      "order": 33,
+      "section": "Additional Robustness Tests",
+      "locator": "Sensitivity of concentration measures段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "改变空间半径和时间窗口重新计算集中度并检验。",
+      "rhetorical_function_cn": "排除测量参数选择导致结果偶然。",
+      "depends_on_cn": "集中度定义",
+      "sets_up_cn": "支撑集中度调节的稳健性。",
+      "evidence_pointer": "Table 10 Models 1-4"
+    },
+    {
+      "order": 34,
+      "section": "Additional Robustness Tests",
+      "locator": "Pre-post analysis段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "利用Airbnb Neighbors上线将投诉分流，检验噪音确实源于房产使用。",
+      "rhetorical_function_cn": "提供一种准自然实验验证路径。",
+      "depends_on_cn": "Airbnb功能历史",
+      "sets_up_cn": "进一步确证噪音归因。",
+      "evidence_pointer": "Table 10 Models 5-6"
+    },
+    {
+      "order": 35,
+      "section": "Simulation Experiments",
+      "locator": "仿真段落开头",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者说明基于经验估计进行仿真，目标是提出平衡收入与噪音的治理机制。",
+      "rhetorical_function_cn": "从实证转向设计验证。",
+      "depends_on_cn": "全部实证结果",
+      "sets_up_cn": "介绍两个实验。",
+      "evidence_pointer": "Simulation Experiments第一段"
+    },
+    {
+      "order": 36,
+      "section": "Simulation Experiments",
+      "locator": "Nudging algorithm段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "算法需通过可见性和选择概率来引导客人；视觉注意集中顶部，因此通过重排序实现。",
+      "rhetorical_function_cn": "从信息科学和行为知识提炼设计要求。",
+      "depends_on_cn": "信息搜索文献",
+      "sets_up_cn": "引出相似度与偏好评分。",
+      "evidence_pointer": "Simulation Experiments > Nudging algorithm"
+    },
+    {
+      "order": 37,
+      "section": "Simulation Experiments",
+      "locator": "Similarity and preference scores段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "构造属性余弦相似度评分与Probit偏好评分。",
+      "rhetorical_function_cn": "将算法机制具象化为可计算评分。",
+      "depends_on_cn": "设计要求",
+      "sets_up_cn": "为贪心选择步骤提供输入。",
+      "evidence_pointer": "Nudging algorithm段落内"
+    },
+    {
+      "order": 38,
+      "section": "Simulation Experiments",
+      "locator": "Simulation procedure段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "描述贪心迭代程序：每轮实际选择已知，选择满足相似度和偏好约束且最大化Ripley K的房产作为推荐。",
+      "rhetorical_function_cn": "解释模拟算法如何运行。",
+      "depends_on_cn": "评分定义",
+      "sets_up_cn": "为Experiment 1结果提供操作细节。",
+      "evidence_pointer": "Simulation procedure段"
+    },
+    {
+      "order": 39,
+      "section": "Simulation Experiments",
+      "locator": "Experiment 1 results段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "给出预测噪音减少百分比的U形/单调变化：w越低减少越多，w=0.75时偏好提升最高。",
+      "rhetorical_function_cn": "验证nudging有效性。",
+      "depends_on_cn": "模拟程序",
+      "sets_up_cn": "为Experiment 2外推提供参数选择依据。",
+      "evidence_pointer": "Figure 2a-2b"
+    },
+    {
+      "order": 40,
+      "section": "Simulation Experiments",
+      "locator": "Experiment 1 results段后半",
+      "move_code": "RESULT",
+      "paraphrase_cn": "报告收入差异小，nudging公告不损害平台收入。",
+      "rhetorical_function_cn": "回应平台权衡文献。",
+      "depends_on_cn": "模拟结果",
+      "sets_up_cn": "强调三赢。",
+      "evidence_pointer": "Experiment 1 results"
+    },
+    {
+      "order": 41,
+      "section": "Simulation Experiments",
+      "locator": "Deterrence validation段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模拟显示集中后投诉调查附近房产曝光数从8.7升至10.8，支持吓阻解释。",
+      "rhetorical_function_cn": "将仿真结果与机制检验连接。",
+      "depends_on_cn": "实验1结果",
+      "sets_up_cn": "巩固机制主张。",
+      "evidence_pointer": "Figure 2c"
+    },
+    {
+      "order": 42,
+      "section": "Simulation Experiments",
+      "locator": "Experiment 2段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "外推到全纽约日、周、月，预测噪音投诉分别减少约6.6%、5.6%、6.2%。",
+      "rhetorical_function_cn": "展示规模可扩展性。",
+      "depends_on_cn": "实验1参数（w=0.75, K提升33.2%）",
+      "sets_up_cn": "讨论部分进行贡献定位。",
+      "evidence_pointer": "Experiment 2结果段"
+    },
+    {
+      "order": 43,
+      "section": "Implications and Limitations",
+      "locator": "P1 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "与‘技术黑暗面’、平台治理、合法性挑战三线文献关联。",
+      "rhetorical_function_cn": "将结果放置到IS/管理学术对话中。",
+      "depends_on_cn": "全部结果",
+      "sets_up_cn": "定位理论贡献。",
+      "evidence_pointer": "Implications and Limitations第一段"
+    },
+    {
+      "order": 44,
+      "section": "Implications and Limitations",
+      "locator": "P2 S1-S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "强调空间/时间分布是‘房产使用-噪音’关系的关键边界条件。",
+      "rhetorical_function_cn": "提炼边界知识。",
+      "depends_on_cn": "调节效应",
+      "sets_up_cn": "为治理设计提供参数。",
+      "evidence_pointer": "Implications第二段"
+    },
+    {
+      "order": 45,
+      "section": "Implications and Limitations",
+      "locator": "P3 S1-S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "提出平台自治理与制度治理互补的混合治理观点。",
+      "rhetorical_function_cn": "回应引言中平台自治理争议。",
+      "depends_on_cn": "机制检验与仿真",
+      "sets_up_cn": "提供超越单一惩罚的治理选项。",
+      "evidence_pointer": "Implications第三段"
+    },
+    {
+      "order": 46,
+      "section": "Implications and Limitations",
+      "locator": "P4-P7",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "列出城市单一、未测声誉影响、未测心理因素、nudging可能降低满意度等限制与未来方向。",
+      "rhetorical_function_cn": "承认边界并规划未来研究。",
+      "depends_on_cn": "前文贡献",
+      "sets_up_cn": "为后续研究提供议程。",
+      "evidence_pointer": "Implications and Limitations末四段"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "通过文献综述归纳三个具体缺口：噪音研究缺失、区域内异质性机制缺失、平台自治理有效性缺失；在每个缺口处强调理论或实践后果。",
+    "signposting_cn": "在引言最后一段预告经验与仿真两个计划；在Robustness Tests和Simulation Experiments开头明确写作任务；每个子标题直指目的。",
+    "transition_logic_cn": "从主恢复到内生性、再到因果DiD、再到机制、再到稳健性、最后到仿真，每一步用‘尚未解决’问题推动；例如机制检验前先说明调节效应机制不明。",
+    "claim_evidence_rhythm_cn": "先报告点估计与显著性，再以表格为主要证据；在涉及机制与设计时，先陈述理论预测，然后用检验结果支持，最后用仿真补充。",
+    "benchmark_narrative_cn": "主回归中未用对照，而是通过模型序列比较逐步加入调节项；仿真中以真实预定属性为benchmark，用w=0.95作为不干预参考，用RMSE/MAE选择SVR保证预测可靠性。",
+    "theory_return_cn": "在讨论中将‘集中度增强吓阻’上升为平台治理设计原理，并与平台-制度互补、合法性挑战等理论话语对话。",
+    "contribution_positioning_cn": "在引言和讨论中反复与已有平台外部性、噪音文献、平台自治理文献比较，强调本研究是第一批研究噪音且提供可操作机制的。",
+    "novelty_protection_cn": "将结论从‘减少噪音的方法’提升为‘平台治理与制度执法互补的一般机制’；通过机制检验、稳健性、多种数据和仿真外推，避免被当作一次性 NYC 数据分析。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "引言：用一般外部性理论锚定平台，提出三个递进问题。",
+        "research_job_cn": "建立平台外部性文献脉络，说明噪音健康危害。",
+        "required_evidence_cn": "需要文献证据支持噪音是重要且被忽略的外部性。",
+        "transition_to_next_cn": "问题无法仅靠平台进入分析回答，需异质性。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "文献综述：总结相关外部性和噪音研究，明确缺口。",
+        "research_job_cn": "整理已有平台外部性目录，识别噪音等空白。",
+        "required_evidence_cn": "需要文献中不同平台的负外部性证据。",
+        "transition_to_next_cn": "缺口需要新数据和模型检验。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "数据与模型：定义DV、IV、调节变量和控制变量。",
+        "research_job_cn": "整合交易、投诉、社区等多源数据并构建面板。",
+        "required_evidence_cn": "需要统计上显著的描述性和数据可用性说明。",
+        "transition_to_next_cn": "数据建立后可进行基准回归。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "主结果与调节：表格化核心效应，展示交互。",
+        "research_job_cn": "估计PPML模型并检验稳健聚类。",
+        "required_evidence_cn": "需要主效应、交互显著且经济意义可解释。",
+        "transition_to_next_cn": "主效应可能受内生性影响。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "内生性处理：IV与DiD。",
+        "research_job_cn": "选择外生IV并做建筑级DiD。",
+        "required_evidence_cn": "需要第一阶段F、排除性检验和事件研究平行趋势。",
+        "transition_to_next_cn": "因果确立但机制不明。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "机制检验：分类型、分机制。",
+        "research_job_cn": "设计竞争性机制检验。",
+        "required_evidence_cn": "需要支持一种机制并排除另一种的结果。",
+        "transition_to_next_cn": "机制确立后可转化为设计。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "稳健性检验：覆盖估计量、事件、参数敏感性。",
+        "research_job_cn": "系统性排除替代解释。",
+        "required_evidence_cn": "需要结果一致性。",
+        "transition_to_next_cn": "稳健的基础可用于仿真。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "仿真与设计：将机制转成算法并做仿真。",
+        "research_job_cn": "构建算法并评估预期效果。",
+        "required_evidence_cn": "需要与真实数据一致的预测性能和效果大小。",
+        "transition_to_next_cn": "仿真效果引出治理含义。"
+      },
+      {
+        "step": 9,
+        "writing_job_cn": "讨论与限制：连接文献，提炼边界和未来。",
+        "research_job_cn": "避免过度声明，承认限制。",
+        "required_evidence_cn": "需要回到引言缺口和理论对话。",
+        "transition_to_next_cn": "结束论证。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "先以外部性理论将所有平台效应接入，再逐步聚焦到具体外部性；",
+      "用三个缺口（结果缺失、机制缺失、治理缺失）组织文献综述；",
+      "主回归后立即用IV和DiD建立因果可信度；",
+      "发现调节效应后立即设计机制检验，而非仅报告交互；",
+      "将机制证据转化为设计参数，用仿真演示可利用性；",
+      "使用真实历史数据作为仿真输入，避免纯抽象建模。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需长期、多源城市级数据（AirDNA、NYC Open Data、交通/人口/地产等）；",
+      "需构建建筑级匹配（BIN、坐标、860,303栋建筑）；",
+      "需IV构造（如外部航班取消、Hurricane Irma、平台listing purge）；",
+      "需大规模建筑DiD计算（Callaway-Sant'Anna）；",
+      "需嵌入真实验证渠道（Airbnb Neighbors上线）作为准自然实验；",
+      "仿真所需属性级房源数据和预定记录非公开可得。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只复制‘集中度-减少噪音’表述却没有机制检验；",
+      "不要只报告交互显著而未分离渠道；",
+      "不要声称‘nudging’有效却没有用户行为或仿真模拟数据；",
+      "不要在没有外生IV或自然实验时宣称因果；",
+      "不要将仿真等效于现场验证；"
+    ],
+    "single_best_description_of_the_routine_cn": "先找到一个大外部性现象，用多源数据建立面板回归和调节效应，再用IV/DiD和机制检验锁定因果与机制，最后把机制编码成可行的平台算法并用真实数据仿真展示多目标优化效果。"
+  },
+  "confidence": 0.78,
+  "limitations_cn": "文章为PDF/HTML全文，部分数学公式和表格在文本转换中略有乱码，但所有正文段落、表格、图表和标题均在；仿真图像未完全显示，但不影响主要分析；作者未公开代码或复制包，无法复核具体数值。",
+  "usage": {
+    "prompt_tokens": 33198,
+    "completion_tokens": 14287,
+    "total_tokens": 47485,
+    "prompt_cache_hit_tokens": 33152,
+    "prompt_cache_miss_tokens": 46
+  }
+}

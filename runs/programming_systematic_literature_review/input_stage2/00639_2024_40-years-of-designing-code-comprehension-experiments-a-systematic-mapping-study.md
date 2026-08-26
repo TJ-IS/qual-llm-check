@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85175604691"
+title: "40 Years of Designing Code Comprehension Experiments: A Systematic Mapping Study"
+authors: "Wyrich M.; Bogner J.; Wagner S."
+year: "2024"
+journal: "ACM Computing Surveys"
+doi: "10.1145/3626522"
+---
+# Scopus title-abstract-keyword metadata
+Title: 40 Years of Designing Code Comprehension Experiments: A Systematic Mapping Study
+Abstract: The relevance of code comprehension in a developer's daily work was recognized more than 40 years ago. Consequently, many experiments were conducted to find out how developers could be supported during code comprehension and which code characteristics contribute to better comprehension. Today, such studies are more common than ever. While this is great for advancing the field, the number of publications makes it difficult to keep an overview. Additionally, designing rigorous code comprehension experiments with human participants is a challenging task, and the multitude of design options can make it difficult for researchers, especially newcomers to the field, to select a suitable design.We therefore conducted a systematic mapping study of 95 source code comprehension experiments published between 1979 and 2019. By structuring the design characteristics of code comprehension studies, we provide a basis for subsequent discussion of the huge diversity of design options in the face of a lack of basic research on their consequences and comparability. We describe what topics have been studied, as well as how these studies have been designed, conducted, and reported. Frequently chosen design options and deficiencies are pointed out to support researchers of all levels of domain expertise in designing their own studies.  © 2023 held by the owner/author(s). Publication rights licensed to ACM.
+Author keywords: code comprehension; empirical study design; program comprehension; Systematic mapping study
+Index keywords: Computer programming; Code comprehension; Design characteristics; Design deficiencies; Design option; Empirical studies; Empirical study design; Program comprehension; Source code comprehensions; Study design; Systematic mapping studies; Mapping
+Document type: Article
+Conference: 
+Source title: ACM Computing Surveys
+Year: 2024
+EID: 2-s2.0-85175604691
+DOI: 10.1145/3626522
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "analysis_version": "low-barrier-method-v16",
+  "input_dir": "../../database_fulltext_all",
+  "output_dir": "output_v16_2017_2026_fresh",
+  "env_file": "../../.env",
+  "selection": {
+    "year_from": 2017,
+    "year_to": 2026
+  },
+  "prompt_files": {
+    "system": "system_prompt.md",
+    "user_template": "user_prompt_template.md",
+    "chunk_system": "chunk_system_prompt.md"
+  },
+  "model": {
+    "name": "deepseek-v4-pro",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 5200,
+    "chunk_max_tokens": 3400,
+    "timeout": 180
+  },
+  "batch": {
+    "max_concurrency": 12,
+    "retries": 3,
+    "retry_base_delay": 2.0,
+    "direct_max_chars": null,
+    "chunk_chars": 180000,
+    "chunk_overlap_chars": 3000
+  }
+}

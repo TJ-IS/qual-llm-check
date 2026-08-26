@@ -1,0 +1,1565 @@
+# Assuring quality and waiting time in real-time spatial crowdsourcing
+
+- 作者：Zhibin Wu; Lijie Peng; Chuankai Xiang
+- 年份 / 期刊：2023 / Decision Support Systems
+- DOI：10.1016/j.dss.2022.113869
+- 源文件：20016_2023_assuring-quality-and-waiting-time-in-real-time-spatial-crowdsourcing.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：如何基于历史数据实时预测工人到达任务位置的旅行时间，并据此设计任务分配策略，从而同时保障空间众包中结果的质量和请求者的等待时间？
+
+- 制品与设计：提出时间预测型空间众包任务分配框架TP-TASC：预测阶段使用LightGBM模型，利用空间、时间和气候三类特征预测工人旅行时间；任务分配阶段采用一个考虑工人信誉、时空约束和预算上限的启发式算法，按任务优先级排序，先向高信誉工人分配，再向中信誉工人分配，并在分配同时确定支付。
+
+- 客观结果：在成都滴滴GAIA真实订单数据集上，LightGBM预测模型得到RMSLE=0.2368、MAE=0.0236；与RB-TPSC基线相比，TP-TASC在不同任务半径、任务有效时间、工人有效时间和工人信誉均值下，均降低了平均请求者等待时间，提高了选中工人的平均信誉值。
+
+- 核心贡献：作者声称的贡献包括：(1) 使用LightGBM基于历史数据预测工人旅行时间，替代恒定速度或实时路网假设，节省信息成本并提高预测精度；(2) 设计综合考虑信誉、时空信息和预算的启发式任务分配算法，同时优化等待时间和结果质量，并自动确定工人支付；(3) 通过真实数据集模拟实验验证了TP-TASC的有效性。
+
+- 整篇论证链：文章首先指出现有空间众包任务分配在距离评估和时间处理上的局限：或使用欧氏距离，或假设工人速度恒定，或依赖成本高昂的实时路网信息，导致请求者等待时间无法被准确控制。接着指出结果质量可由工人信誉机制保证，因此需要同时考虑旅行时间和工人信誉。作者随后构造了TP-TASC框架，先用LightGBM依据空间、时间、气候特征从历史数据中预测旅行时间，然后设计一个启发式分配算法，在预算约束下优先将任务分配给高信誉且能在时限内到达的工人，从而最小化等待时间并最大化质量。模拟实验以RB-TPSC作为对照，在多个参数场景中比较五个指标，结果支持TP-TASC在等待时间和质量上的优势。最后将结果提炼为对平台、工人和请求者的决策支持含义，并指出动态环境与预测精度等边界条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心是一个计算制品（时间预测模型+任务分配算法），主要证据是在真实出租车订单数据集上进行的离线仿真与基准对比，没有现场部署或行为实验，也没有正式理论推导。
+
+- 主导写作弧线判定：引言首先建立现有方法在等待时间处理上的性能缺口，然后提出TP-TASC制品，再用RB-TPSC等基准做对比实验验证性能，最后在结论和讨论中将结果一般化为任务分配的设计知识与平台决策建议。
+
+## 研究开展程序
+
+- study_or_phase_count：3
+
+- 研究阶段总序列：研究分为三个阶段：预测阶段、分配阶段和比较/敏感性分析阶段。预测阶段先构建并评估LightGBM旅行时间预测器；分配阶段实现启发式分配算法并在模拟环境中验证其与基线的差异；比较阶段通过改变多个关键参数系统测试算法的鲁棒性和边界。
+
+### studies_or_phases
+
+#### 1. 预测模型构建与评估
+
+- order：1
+
+- name_cn：预测模型构建与评估
+
+- question_cn：如何利用历史数据和多类特征预测工人到达任务位置的旅行时间？
+
+- inputs_and_setting_cn：成都滴滴GAIA数据集（2016年11月前10个工作日，1467309条订单），天气数据（温度、空气质量），经过异常值过滤和旅行时间对数变换。
+
+- designed_or_compared_object_cn：LightGBM预测模型，特征包括空间（经纬度、距离、方向）、时间（月日、时、分、秒）、气候（最高/最低/平均温度、空气质量指数）共14个特征。
+
+- baseline_control_or_counterfactual_cn：无明确基线，只报告预测模型自身的RMSLE和MAE数值。
+
+##### objective_metrics
+
+1. RMSLE
+
+2. MAE
+
+- analysis_method_cn：回归训练与评估；选择LightGBM作为集成学习模型，设定学习率0.1、n_estimators=500、num_leaves=1000、max_depth=25。
+
+- main_result_cn：RMSLE=0.2368，MAE=0.0236。
+
+- argumentative_role_cn：验证时间预测模型的准确性，为后续分配中等待时间计算提供基础。
+
+- remaining_uncertainty_cn：预测误差如何影响任务分配最终效果尚未体现。
+
+- link_to_next_phase_cn：利用该预测模型产生的旅行时间输入到分配算法中，推动分配阶段的模拟实验。
+
+##### evidence_pointers
+
+1. Section 4.3 超参数
+
+2. Section 5.2 预测结果
+
+3. Section 5.1 数据预处理
+
+#### 2. 任务分配算法设计与默认场景模拟
+
+- order：2
+
+- name_cn：任务分配算法设计与默认场景模拟
+
+- question_cn：在给定预测旅行时间和工人信誉后，如何分配任务以同时最小化请求者等待时间与最大化结果质量？
+
+- inputs_and_setting_cn：从GAIA订单中随机选取2000个工人和1000个任务，任务半径2km，工人和任务有效时间1800秒，工人信誉服从N(0.8, 0.2)，阈值Th_HM=0.7, Th_ML=0.6，预算限制，补偿比例e=1。
+
+- designed_or_compared_object_cn：TP-TASC启发式分配算法：先过滤候选工人，再按任务优先级排序，先分配给高信誉工人，再分配给中信誉工人，同时计算支付并检查预算。
+
+- baseline_control_or_counterfactual_cn：RB-TPSC（预算感知任务包分配方法，不考虑时间限制）。
+
+##### objective_metrics
+
+1. 平均等待时间α
+
+2. 平均信誉值β
+
+3. 平均成本γ
+
+4. 分配率δ
+
+5. 平均行驶距离ε
+
+- analysis_method_cn：模拟实验，比较TP-TASC与RB-TPSC在默认参数下的五个指标。
+
+- main_result_cn：TP-TASC在平均等待时间和平均信誉上优于RB-TPSC，且分配率随任务半径增加而增加，等待时间随半径增加而上升。
+
+- argumentative_role_cn：证明在默认设置下TP-TASC能同时改善等待时间和质量。
+
+- remaining_uncertainty_cn：在不同参数条件下是否依然有效尚不明确。
+
+- link_to_next_phase_cn：通过改变任务半径、有效时间、工人信誉均值等参数进行敏感性分析，检验边界。
+
+##### evidence_pointers
+
+1. Section 5.3 指标定义
+
+2. Section 5.4 图3-6
+
+3. Table 3 默认参数
+
+#### 3. 参数敏感性比较实验
+
+- order：3
+
+- name_cn：参数敏感性比较实验
+
+- question_cn：TP-TASC相对于RB-TPSC的优势在不同任务半径、任务有效时间、工人有效时间和工人信誉均值下是否稳健？
+
+- inputs_and_setting_cn：同一数据集上，分别将任务半径从0.5变到5km，任务有效时间从300变到1800秒，工人有效时间从300变到1800秒，工人信誉均值从0.7变到0.9（标准差0.2）。
+
+- designed_or_compared_object_cn：TP-TASC与RB-TPSC在四个参数维度上的对比。
+
+- baseline_control_or_counterfactual_cn：RB-TPSC在同一参数变化下作为基线。
+
+##### objective_metrics
+
+1. 平均等待时间α
+
+2. 平均信誉值β
+
+3. 平均成本γ
+
+4. 分配率δ
+
+5. 平均行驶距离ε
+
+- analysis_method_cn：控制变量模拟实验，图形对比各指标随参数变化的趋势。
+
+- main_result_cn：TP-TASC在绝大多数设置下平均等待时间更低，平均信誉更高；任务半径和有效时间的增加导致等待时间上升，因为更多远程工人被分派；工人信誉均值变化时TP-TASC仍保持优势。
+
+- argumentative_role_cn：验证算法在不同操作条件下的稳健性和边界，强化贡献的一般性。
+
+- remaining_uncertainty_cn：未考虑动态任务流、任务取消概率和不同城市数据集。
+
+- link_to_next_phase_cn：结论部分据此推广到平台实际决策和未来动态研究。
+
+##### evidence_pointers
+
+1. Section 5.4 图3-6
+
+2. Section 5.4 各实验描述
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 众包已成为数据收集的重要方式
+
+2. CONTEXT: 任务分配是空间众包的重要方面，但现有研究多假设恒速或已知实时路网
+
+3. STUDY_OVERVIEW: 提出TP-TASC框架，包括LightGBM预测和启发式分配
+
+4. RESULT: 基于真实出租车数据集实验显示能同时最小化等待时间和最大化结果质量
+
+### introduction_moves
+
+1. CONTEXT: 众包定义与发展
+
+2. PHENOMENON: 移动设备普及催生空间众包
+
+3. PRIOR_KNOWLEDGE: 任务分配定义及平台中心化责任
+
+4. LIMITATION: 最短距离分配忽略时间导致请求者等待时间增长
+
+5. LIMITATION: 欧氏距离不准确、恒定速度假设不现实、实时路网成本高
+
+6. RQ_OR_OBJECTIVE: 提出TP-TASC框架和两个阶段
+
+7. THEORY_INTRO: 工人信誉可保障结果质量
+
+8. CONTRIBUTION: 三点贡献声明
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 任务分为简单和复杂任务，本文聚焦简单任务
+
+2. PRIOR_KNOWLEDGE: 三种质量保证方法，本文采用信誉机制
+
+3. PRIOR_KNOWLEDGE: 基于信誉和距离的现有研究（Miao等、Wu等）
+
+4. LIMITATION: 现有时间研究或假设常数速度或需要实时路网
+
+5. MECHANISM: 历史数据可反映通常交通状况并用于估计到达时间
+
+6. REQUIREMENT: 需要根据预测旅行时间进行任务分配
+
+### artifact_design_moves
+
+1. STUDY_OVERVIEW: TP-TASC由预测模型和任务分配模型构成
+
+2. REQUIREMENT: 预测模型需高精度和高运行速度，故选用LightGBM
+
+3. DESIGN_FEATURE: 特征分为空间、时间、气候三类，共14个
+
+4. DESIGN_FEATURE: Hyperparameters设置
+
+5. REQUIREMENT: 目标函数为最小化平均等待时间和最大化平均信誉
+
+6. DESIGN_FEATURE: 算法包含候选筛选、高信誉优先、中信誉补充三个阶段
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 使用真实GAIA出租车订单数据，以订单起终点模拟工人和任务
+
+2. BENCHMARK_OR_CONTRAST: 采用RMSLE和MAE评估预测
+
+3. BENCHMARK_OR_CONTRAST: 定义五个任务分配指标
+
+4. BENCHMARK_OR_CONTRAST: 与RB-TPSC对比
+
+5. RESULT: 预测结果数值
+
+6. RESULT: 不同参数下的对比图和趋势描述
+
+7. ROBUSTNESS_OR_BOUNDARY_TEST: 四个参数敏感性实验
+
+### discussion_and_contribution_moves
+
+1. PRACTICAL_STAKES: DSS对平台、工人、请求者的好处
+
+2. CONTRIBUTION: 总结三点贡献
+
+3. PRACTICAL_STAKES: 平台可用性、交通监测、外卖平台扩展
+
+4. BOUNDARY_CONDITION: 静态环境假设
+
+5. LIMITATION_AND_FUTURE: 动态环境平衡、预测精度、任务取消概率
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 声誉机制：高信誉工人更可能产生高质量结果
+
+2. 时空特征与气候特征影响旅行时间
+
+3. LightGBM作为快速高效的集成学习回归模型
+
+4. 历史数据可反映通常交通状况
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：文章没有建立正式的理论模型，但声誉机制、特征影响及LightGBM的适用性等经验知识直接决定了设计选择。启发式分配算法本身更多是从工程直觉（高信誉优先过滤，距离和时间约束）出发，没有严格的理论推导。
+
+- 理论到设计翻译链：声誉机制→将工人信誉作为质量代理→在目标函数中最大化平均信誉→在算法中优先分配高信誉工人。历史数据反映交通状况→用LightGBM预测旅行时间→用预测值计算等待时间→在分配时筛选不超过任务/工人有效时间的候选。特征对旅行时间的影响→提取空间/时间/气候特征→训练预测模型。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：高信誉工人更可能产生高质量结果
+
+- mechanism_cn：信誉值作为历史成功概率，高信誉工人更有能力完成好任务
+
+- design_requirement_cn：任务分配应优先选择高信誉工人以提高结果质量
+
+- artifact_choice_cn：在分配算法中设置信誉阈值并将工人分为高、中、低三类，优先向高信誉工人分配任务
+
+- evaluated_contrast_cn：TP-TASC优先高信誉 vs RB-TPSC不考虑时间但考虑信誉打包
+
+- objective_result_cn：TP-TASC在各场景下平均信誉值β均高于RB-TPSC
+
+##### evidence_pointers
+
+1. Section 4.4 Algorithm 1
+
+2. Fig. 3-6 (b)
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：旅行时间受空间、时间、气候因素影响，且恒定速度假设不现实
+
+- mechanism_cn：不同路段、时段、天气导致交通速度变化，从而影响到达时间
+
+- design_requirement_cn：需要动态预测旅行时间而非假设固定速度
+
+- artifact_choice_cn：使用LightGBM基于14个特征预测旅行时间
+
+- evaluated_contrast_cn：预测误差可接受（RMSLE=0.2368），间接通过分配结果验证
+
+- objective_result_cn：预测模型给出有限误差；TP-TASC等待时间优于RB-TPSC
+
+##### evidence_pointers
+
+1. Section 4.3
+
+2. Section 5.2
+
+3. Section 5.4 图3-6 (a)
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：历史数据包含通常交通状况，可用于估计到达时间
+
+- mechanism_cn：利用历史订单的起终点和时间推断旅行时间，替代实时路网
+
+- design_requirement_cn：应基于历史数据构建预测模型，避免实时路网的高信息成本
+
+- artifact_choice_cn：使用GAIA历史订单数据训练LightGBM
+
+- evaluated_contrast_cn：与依赖实时路网的文献对比（如Seow等[37]）
+
+- objective_result_cn：TP-TASC在不需实时路网情况下实现较低等待时间
+
+##### evidence_pointers
+
+1. Section 2 相关work
+
+2. Section 5.1 数据集
+
+3. Section 5.4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 预测模型精度评估（RMSLE, MAE）
+
+2. 模拟对比实验（TP-TASC vs RB-TPSC）
+
+3. 参数敏感性/边界分析（task radius, valid time, reputation distribution）
+
+- why_these_evaluations_cn：预测精度是分配质量的基础，必须单独验证；对比实验证明整体算法优于既有方法；参数敏感性实验展示算法在不同运行条件下的稳健性和适用范围，避免一次性结论。
+
+- benchmark_and_contrast_chain_cn：先用RMSLE/MAE证明预测器可用，再用RB-TPSC作为基线在五个指标上对比，随后通过四组参数变化验证优势是否持续。这形成了从微观组件到宏观系统、再到边界条件的递进证据链。
+
+### claim_evidence_ledger
+
+#### 1. LightGBM能有效预测工人旅行时间
+
+- claim_cn：LightGBM能有效预测工人旅行时间
+
+- evidence_cn：RMSLE=0.2368, MAE=0.0236
+
+- level_cn：技术主张
+
+- tested_cn：是
+
+#### 2. TP-TASC能最小化请求者等待时间
+
+- claim_cn：TP-TASC能最小化请求者等待时间
+
+- evidence_cn：与RB-TPSC相比，在图3-6(a)中平均等待时间更低
+
+- level_cn：制品主张
+
+- tested_cn：是
+
+#### 3. TP-TASC最大化结果质量
+
+- claim_cn：TP-TASC最大化结果质量
+
+- evidence_cn：平均信誉β高于RB-TPSC
+
+- level_cn：制品主张（以信誉作为代理）
+
+- tested_cn：是
+
+#### 4. 算法在不同参数下稳健
+
+- claim_cn：算法在不同参数下稳健
+
+- evidence_cn：四组敏感性实验均保持TP-TASC优势
+
+- level_cn：边界主张
+
+- tested_cn：是
+
+#### 5. 节省实时路网信息成本
+
+- claim_cn：节省实时路网信息成本
+
+- evidence_cn：仅使用历史数据预测，无需实时路网
+
+- level_cn：技术/边界主张
+
+- tested_cn：否
+
+#### 6. 可提高平台任务完成率和收益
+
+- claim_cn：可提高平台任务完成率和收益
+
+- evidence_cn：仅从等待时间降低逻辑外推，未直接测量平台收益
+
+- level_cn：理论/实践主张
+
+- tested_cn：否
+
+- internal_validity_strategy_cn：在模拟环境中控制参数（任务半径、有效时间、信誉分布），保持除目标变量外的其他条件一致，以确保差异由算法策略而非外部因素造成。
+
+- external_validity_strategy_cn：使用真实出租车订单数据产生工人和任务位置/时间，增加场景真实性；通过与已有RB-TPSC算法对比，以及多个参数范围覆盖，提高结果外部适用性。
+
+- what_is_not_actually_tested_cn：没有在真实众包平台或现场环境进行部署，因此未测试动态任务到达、工人取消、实时通信延迟等真实动态因素；结果质量仅以信誉值代理，未直接评估任务产出的实际质量；信息成本节省是定性的，没有量化对比实时路网成本。
+
+## 贡献闭环
+
+- technical_claim_cn：基于历史数据的LightGBM旅行时间预测能有效预测工人到达时间，指标为RMSLE=0.2368和MAE=0.0236。
+
+- artifact_claim_cn：TP-TASC的启发式任务分配算法在模拟实验中相对于RB-TPSC能降低平均等待时间并提高选中工人的平均信誉。
+
+- mechanism_claim_cn：通过优先分配高信誉工人并利用预测旅行时间筛选能在任务时限内到达的工人，实现了质量与等待时间的同时改善。
+
+- boundary_claim_cn：在静态任务分配环境下，对不同任务半径、任务/工人有效时间和工人信誉分布，TP-TASC均优于RB-TPSC；对动态环境和任务取消概率未作检验。
+
+- reusable_design_knowledge_cn：历史数据可替代实时路网进行到达时间预测；任务分配应融合旅行时间预测、信誉阈值和预算约束；优先高信誉工人并在预算内分配可提高质量。
+
+- theoretical_contribution_cn：将时间预测引入空间众包任务分配，扩展了信誉机制与预算感知的研究脉络；为“基于预测的分配”提供了实证案例，但未提出新的正式理论。
+
+- how_discussion_closes_intro_gap_cn：结论重申引言中指出的现有方法局限（恒速、欧氏距离、实时路网成本），并逐一说明TP-TASC如何通过历史数据预测和信誉优先分配解决这些问题，且以实验数据支撑。
+
+- overclaim_or_unsupported_leaps_cn：将等待时间缩短直接与请求者满意度提升、平台效率提升、收益增加挂钩，但没有直接测量满意度或收益；将信誉值等同于结果质量也是一种间接推断；对成本节省的声明没有量化。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：移动设备迅速发展使空间众包成为重要数据收集方式。
+
+- rhetorical_function_cn：建立总体背景，指出研究对象的重要性。
+
+- depends_on_cn：无需前置
+
+- sets_up_cn：引出任务分配的重要性
+
+- evidence_pointer：摘要第一句
+
+### 2. P1 S2-S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：任务分配是空间众包的重要方面，现有研究关注质量和距离，但多假设速度恒定或已知实时路网。
+
+- rhetorical_function_cn：指出现有研究的主要简化假设，为提出创新点做铺垫。
+
+- depends_on_cn：依赖于空间众包背景
+
+- sets_up_cn：为本研究的预测方法提供问题空间
+
+- evidence_pointer：摘要第二至三句
+
+### 3. P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：提出基于时间预测的任务分配框架TP-TASC，包含LightGBM预测和启发式分配两部分。
+
+- rhetorical_function_cn：提纲挈领地说明本文的主要制品和组成。
+
+- depends_on_cn：前置背景和问题
+
+- sets_up_cn：预告后续的预测模型和分配算法
+
+- evidence_pointer：摘要第二段
+
+### 4. P2 S2-S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S2-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：利用真实出租车出行数据集进行的模拟实验显示，该方法能最小化请求者等待时间并最大化结果质量。
+
+- rhetorical_function_cn：快速给出核心实证结果，吸引读者。
+
+- depends_on_cn：依赖TP-TASC框架
+
+- sets_up_cn：强化贡献的可信度
+
+- evidence_pointer：摘要最后一句
+
+### 5. P1 S1-S3
+
+- order：5
+
+- section：Introduction
+
+- locator：P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：众包自2006年提出，已被广泛应用于多个领域，通过电子方式将大量任务分发给信息工作者。
+
+- rhetorical_function_cn：建立众包领域背景，说明其发展起源和有效性。
+
+- depends_on_cn：无需
+
+- sets_up_cn：为空间众包的出现做铺垫
+
+- evidence_pointer：Introduction第一段
+
+### 6. P2 S1-S3
+
+- order：6
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：智能移动设备普及使人们能参与与位置和时间相关的任务，因此产生了空间众包系统，由请求者、工人和平台组成。
+
+- rhetorical_function_cn：介绍空间众包的具体现象和系统结构。
+
+- depends_on_cn：众包背景
+
+- sets_up_cn：引出任务分配这一重要环节
+
+- evidence_pointer：Introduction第二段
+
+### 7. P4 S1-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P4 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：平台统分配任务比工人自选任务更有利于整体效用，因此任务分配是空间众包的核心问题。
+
+- rhetorical_function_cn：明确任务分配在系统中的作用，并说明平台负责分配。
+
+- depends_on_cn：系统组成
+
+- sets_up_cn：为后文讨论分配策略问题做铺垫
+
+- evidence_pointer：Introduction第四段
+
+### 8. P5 S1-S4
+
+- order：8
+
+- section：Introduction
+
+- locator：P5 S1-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：最短距离策略可能不是最短时间，且忽略任务过期和请求者满意度，因此需要减少等待时间。
+
+- rhetorical_function_cn：指出现有最短距离分配策略的缺陷，引出等待时间的重要性。
+
+- depends_on_cn：任务分配背景
+
+- sets_up_cn：为需求分析奠定基础
+
+- evidence_pointer：Introduction第五段
+
+### 9. P6 S1-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有方法或使用欧氏距离，或假设恒定速度，或依赖实时路网信息，这些都在真实世界中不准确或成本过高。
+
+- rhetorical_function_cn：全面批评现有距离和时间评估方法的不足，形成技术缺口。
+
+- depends_on_cn：前文对距离和时间问题的初步讨论
+
+- sets_up_cn：指出需要基于历史数据的预测方法
+
+- evidence_pointer：Introduction第六段
+
+### 10. P7 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P7 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：为解决上述问题提出TP-TASC，包括预测阶段和分配阶段，预测阶段用历史数据预测工人到达时间，分配阶段用启发式算法。
+
+- rhetorical_function_cn：正式提出本文的研究目标和制品框架。
+
+- depends_on_cn：基于前述缺口
+
+- sets_up_cn：预告后续模型细节
+
+- evidence_pointer：Introduction第七段
+
+### 11. P8 S1-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P8 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：结果质量受工人可靠性影响，信誉建模可估计可靠性，因此高信誉工人应得到更多分配机会。
+
+- rhetorical_function_cn：引入信誉机制作为质量保障的理论基础。
+
+- depends_on_cn：需要同时考虑质量与时间
+
+- sets_up_cn：为分配算法中的信誉优先策略提供依据
+
+- evidence_pointer：Introduction第八段
+
+### 12. P9 S1-S4
+
+- order：12
+
+- section：Introduction
+
+- locator：P9 S1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结三点贡献：基于LightGBM的时间预测、启发式分配算法、真实数据集实验验证。
+
+- rhetorical_function_cn：显式声明贡献，便于读者快速把握论文价值。
+
+- depends_on_cn：依据前文提出的方法和目标
+
+- sets_up_cn：为后续章节结构做指引
+
+- evidence_pointer：Introduction最后一段
+
+### 13. P1 S1-S5
+
+- order：13
+
+- section：Related work
+
+- locator：P1 S1-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：众包任务分为简单任务和复杂任务，本文关注可由单个工人完成的简单任务。
+
+- rhetorical_function_cn：界定研究对象和任务类型范围。
+
+- depends_on_cn：引言中的问题背景
+
+- sets_up_cn：说明模型适用的任务假设
+
+- evidence_pointer：Related work第一段
+
+### 14. P2 S1-S5
+
+- order：14
+
+- section：Related work
+
+- locator：P2 S1-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：介绍三种结果质量保障方法：重复标注、个体导向和信誉机制，现有方法有效且适用于简单任务。
+
+- rhetorical_function_cn：概括质量保障的主要技术路线。
+
+- depends_on_cn：任务类型
+
+- sets_up_cn：为本文选择信誉机制提供文献支持
+
+- evidence_pointer：Related work第二段
+
+### 15. P3 S1-S3
+
+- order：15
+
+- section：Related work
+
+- locator：P3 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Alt等发现工人倾向在位置附近工作；GeoTruCrowd在分配时考虑工人信誉和位置约束。
+
+- rhetorical_function_cn：列举基于位置和信誉的空间众包代表性研究。
+
+- depends_on_cn：质量保障讨论
+
+- sets_up_cn：作为后续比较和批评的对象
+
+- evidence_pointer：Related work第三段
+
+### 16. P4 S1-S4
+
+- order：16
+
+- section：Related work
+
+- locator：P4 S1-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Miao等和Wu等的预算感知任务分配考虑了信誉和欧氏距离，但忽略了时间和任务过期。
+
+- rhetorical_function_cn：指出基于信誉和距离的现有研究未考虑时间因素。
+
+- depends_on_cn：前文对位置/信誉工作的介绍
+
+- sets_up_cn：突出时间维度的重要性
+
+- evidence_pointer：Related work第四段
+
+### 17. P5 S1-S5
+
+- order：17
+
+- section：Related work
+
+- locator：P5 S1-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：一些时间敏感的分配方法要么假设速度恒定，要么假设已知实时路网，但实际平台往往缺乏实时地图信息且成本高。
+
+- rhetorical_function_cn：批评现有时间处理方法的不现实性。
+
+- depends_on_cn：时间维度讨论
+
+- sets_up_cn：为基于历史数据的预测方法铺路
+
+- evidence_pointer：Related work第五段
+
+### 18. P6 S1-S5
+
+- order：18
+
+- section：Related work
+
+- locator：P6 S1-S5
+
+- move_code：GAP
+
+- paraphrase_cn：历史数据可以反映通常交通状况，因此可用历史数据估计到达时间，进行更准确的任务分配，这正是本研究的目的。
+
+- rhetorical_function_cn：明确研究缺口和解决方案方向。
+
+- depends_on_cn：对现有局限的批评
+
+- sets_up_cn：正式引出TP-TASC
+
+- evidence_pointer：Related work最后一段
+
+### 19. P1 S1-S4
+
+- order：19
+
+- section：Section 3
+
+- locator：P1 S1-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：TP-TASC由两部分组成：基于历史信息的工人旅行时间预测模型，以及最小化等待时间、最大化质量的分配模型。
+
+- rhetorical_function_cn：提供框架概览，明确两个核心组件。
+
+- depends_on_cn：引言和文献缺口
+
+- sets_up_cn：为第四节详细数学模型做过渡
+
+- evidence_pointer：Section 3第一段
+
+### 20. P1 S1-S3
+
+- order：20
+
+- section：Section 4.2
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：简单任务如交通监测或街景拍照可由智能手机完成，本文研究此类任务的分配。
+
+- rhetorical_function_cn：再次明确任务类型，限定模型适用范围。
+
+- depends_on_cn：相关工作中的任务分类
+
+- sets_up_cn：定义任务元组
+
+- evidence_pointer：Section 4.2第一段
+
+### 21. P2 S1-S5
+
+- order：21
+
+- section：Section 4.2
+
+- locator：P2 S1-S5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：工人信誉定义为历史被选中完成任务的概率，分为高、中、低三类，决定了任务分配的优先顺序。
+
+- rhetorical_function_cn：明确信誉变量的定义和分类。
+
+- depends_on_cn：引言中声誉机制引入
+
+- sets_up_cn：为分配算法中的分级分配提供基础
+
+- evidence_pointer：Section 4.2第二段
+
+### 22. P3 S1-S2
+
+- order：22
+
+- section：Section 4.2
+
+- locator：P3 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：任务与工人的距离通过Haversine公式计算，使用经纬度。
+
+- rhetorical_function_cn：给出距离计算的具体方法。
+
+- depends_on_cn：需要位置信息
+
+- sets_up_cn：用于候选工人筛选和行驶距离指标
+
+- evidence_pointer：Section 4.2第三段
+
+### 23. P4 S1-S2
+
+- order：23
+
+- section：Section 4.2
+
+- locator：P4 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：请求者等待时间由工人出现时间与任务开始时间的差和旅行时间组成。
+
+- rhetorical_function_cn：定义了核心目标变量等待时间的构成。
+
+- depends_on_cn：旅行时间预测
+
+- sets_up_cn：为优化目标提供公式
+
+- evidence_pointer：Section 4.2第四段
+
+### 24. P5 S1-S3
+
+- order：24
+
+- section：Section 4.2
+
+- locator：P5 S1-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为降低计算复杂度，设计了候选工人过滤方法，将距离超过任务接受半径的工人排除。
+
+- rhetorical_function_cn：说明提高计算效率的必要性和具体策略。
+
+- depends_on_cn：距离计算
+
+- sets_up_cn：为算法中的候选集Q_j准备
+
+- evidence_pointer：Section 4.2第五段
+
+### 25. P6 S1-S2
+
+- order：25
+
+- section：Section 4.2
+
+- locator：P6 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：工人支付由旅行时间、补偿比例和信誉共同决定，公式为支付=补偿比例×旅行时间×信誉。
+
+- rhetorical_function_cn：定义支付机制，与信誉挂钩。
+
+- depends_on_cn：旅行时间和信誉定义
+
+- sets_up_cn：为预算约束提供基础
+
+- evidence_pointer：Section 4.2第六段
+
+### 26. P1 S1-S6
+
+- order：26
+
+- section：Section 4.3
+
+- locator：P1 S1-S6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：LightGBM因其高预测精度和高运行速度被选为时间预测模型，且在多个领域应用中可靠性已得到证明。
+
+- rhetorical_function_cn：论证选择LightGBM的合理性。
+
+- depends_on_cn：预测需求
+
+- sets_up_cn：介绍LightGBM技术细节
+
+- evidence_pointer：Section 4.3第一段
+
+### 27. P2 S1-S6
+
+- order：27
+
+- section：Section 4.3
+
+- locator：P2 S1-S6
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：分析影响旅行时间的因素，分为空间、时间和气候三个方面，用于指导特征抽取。
+
+- rhetorical_function_cn：将领域知识转化为特征设计要求。
+
+- depends_on_cn：旅行时间影响因素知识
+
+- sets_up_cn：列出14个具体特征
+
+- evidence_pointer：Section 4.3第二段
+
+### 28. P3 S1-S4
+
+- order：28
+
+- section：Section 4.3
+
+- locator：P3 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：列出14个特征：6个空间特征，4个时间特征，4个气候特征，目标变量为旅行时间。
+
+- rhetorical_function_cn：具体化特征工程，明确模型的输入输出。
+
+- depends_on_cn：特征影响因素分析
+
+- sets_up_cn：为实验的数据处理提供依据
+
+- evidence_pointer：Section 4.3第三段
+
+### 29. P4 S1-S4
+
+- order：29
+
+- section：Section 4.3
+
+- locator：P4 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：给出LightGBM主要超参数设置：学习率0.1，n_estimators=500，num_leaves=1000，max_depth=25。
+
+- rhetorical_function_cn：记录超参数选择，保证可复现性。
+
+- depends_on_cn：LightGBM介绍
+
+- sets_up_cn：供实验评估使用
+
+- evidence_pointer：Section 4.3第四段
+
+### 30. P1 S1-S4
+
+- order：30
+
+- section：Section 4.4
+
+- locator：P1 S1-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：任务分配的目标是最小化请求者平均等待时间和最大化选中工人平均信誉。
+
+- rhetorical_function_cn：正式定义优化目标。
+
+- depends_on_cn：等待时间和信誉定义
+
+- sets_up_cn：为算法设计提供目标函数
+
+- evidence_pointer：Section 4.4第一段
+
+### 31. P2 S1-S4
+
+- order：31
+
+- section：Section 4.4
+
+- locator：P2 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：算法1分为三个阶段：训练LightGBM并计算候选工人，高信誉工人优先分配，剩余任务分配给中信誉工人。
+
+- rhetorical_function_cn：概括算法的总体流程和关键决策。
+
+- depends_on_cn：目标函数和组件
+
+- sets_up_cn：供实验实现和验证
+
+- evidence_pointer：Section 4.4第二段和Algorithm 1
+
+### 32. Remark 1
+
+- order：32
+
+- section：Section 4.4
+
+- locator：Remark 1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：说明本文考虑静态分配环境，因此启发式算法比强化学习更适合，未来可扩展到强化学习。
+
+- rhetorical_function_cn：界定当前方法适用边界，承认动态环境的局限。
+
+- depends_on_cn：分配算法设计
+
+- sets_up_cn：为结论中的未来方向做铺垫
+
+- evidence_pointer：Section 4.4 Remark 1
+
+### 33. P1 S1-S5
+
+- order：33
+
+- section：Section 4.5
+
+- locator：P1 S1-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：描述空间众包决策支持系统的典型流程，指出TP-TASC可嵌入任务分配环节。
+
+- rhetorical_function_cn：将方法置于DSS场景，强调实际应用价值。
+
+- depends_on_cn：框架设计
+
+- sets_up_cn：引出对平台、工人和请求者的好处
+
+- evidence_pointer：Section 4.5第一段及Fig.2
+
+### 34. P2-P4
+
+- order：34
+
+- section：Section 4.5
+
+- locator：P2-P4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：平台通过自动分配提高任务完成率和效率；工人通过更快到达完成更多任务并获得更多支付；请求者通过更短等待时间提高满意度。
+
+- rhetorical_function_cn：分别从三个主体出发论证方法的实际收益。
+
+- depends_on_cn：DSS流程
+
+- sets_up_cn：为结论中的应用推广提供依据
+
+- evidence_pointer：Section 4.5第二至四段
+
+### 35. P1 S1-S5
+
+- order：35
+
+- section：Section 5.1
+
+- locator：P1 S1-S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用GAIA真实数据集（成都2016年11月前10个工作日）模拟空间众包任务和工人，并匹配天气数据。
+
+- rhetorical_function_cn：说明实验数据的来源和真实性，增强外部效度。
+
+- depends_on_cn：实验需求
+
+- sets_up_cn：描述数据预处理步骤
+
+- evidence_pointer：Section 5.1第一段
+
+### 36. P2 S1-S5
+
+- order：36
+
+- section：Section 5.1
+
+- locator：P2 S1-S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：数据预处理包括添加气象特征、日期格式转换、剔除异常旅行时间、计算距离和方向，以及对旅行时间做对数变换。
+
+- rhetorical_function_cn：交代数据清洗和特征工程，确保预测模型输入有效。
+
+- depends_on_cn：数据集
+
+- sets_up_cn：为后续预测和分配实验做准备
+
+- evidence_pointer：Section 5.1列表
+
+### 37. P1 S1-S3
+
+- order：37
+
+- section：Section 5.2
+
+- locator：P1 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用RMSLE和MAE作为旅行时间预测的评估指标。
+
+- rhetorical_function_cn：定义预测性能度量。
+
+- depends_on_cn：回归问题性质
+
+- sets_up_cn：用于报告预测结果
+
+- evidence_pointer：Section 5.2第一段
+
+### 38. P2 S1-S2
+
+- order：38
+
+- section：Section 5.2
+
+- locator：P2 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：在给定超参数下，LightGBM预测的RMSLE为0.2368，MAE为0.0236。
+
+- rhetorical_function_cn：报告预测模型的具体性能数值。
+
+- depends_on_cn：评估指标
+
+- sets_up_cn：证明预测器可用
+
+- evidence_pointer：Section 5.2第二段
+
+### 39. P1 S1-S5
+
+- order：39
+
+- section：Section 5.3
+
+- locator：P1 S1-S5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：定义五个任务分配评价指标：平均等待时间、平均信誉、平均成本、分配率、平均行驶距离。
+
+- rhetorical_function_cn：给出分配仿真实验的评估系统。
+
+- depends_on_cn：目标函数和实验需求
+
+- sets_up_cn：用于后续对比实验
+
+- evidence_pointer：Section 5.3指标列表
+
+### 40. P1 S1-S3
+
+- order：40
+
+- section：Section 5.4
+
+- locator：P1 S1-S3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：将TP-TASC与RB-TPSC在五个指标上进行比较，通过在多个参数场景下仿真来评估。
+
+- rhetorical_function_cn：明确实验对照方法和目的。
+
+- depends_on_cn：评估指标
+
+- sets_up_cn：为逐步呈现结果做准备
+
+- evidence_pointer：Section 5.4第一段
+
+### 41. P2 S1-S3
+
+- order：41
+
+- section：Section 5.4
+
+- locator：P2 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：当任务半径变化时，TP-TASC的平均信誉优于RB-TPSC，但半径增大导致更多远程工人被分配，因此分配率上升而等待时间也上升。
+
+- rhetorical_function_cn：报告第一个敏感性实验的结果并解释机制。
+
+- depends_on_cn：任务半径参数
+
+- sets_up_cn：为平台设置合适半径提供建议
+
+- evidence_pointer：Fig. 3
+
+### 42. P3 S1-S2
+
+- order：42
+
+- section：Section 5.4
+
+- locator：P3 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：任务有效时间增加时，TP-TASC的平均信誉仍优于RB-TPSC，等待时间相近，且平均距离和等待时间趋势相似。
+
+- rhetorical_function_cn：报告任务有效时间变化下的结果。
+
+- depends_on_cn：任务有效时间参数
+
+- sets_up_cn：说明时间约束对分配的影响
+
+- evidence_pointer：Fig. 4
+
+### 43. P4 S1-S2
+
+- order：43
+
+- section：Section 5.4
+
+- locator：P4 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：工人有效时间变化时，TP-TASC的平均等待时间优于RB-TPSC，表明算法能更好地分配任务。
+
+- rhetorical_function_cn：报告工人有效时间变化下的结果。
+
+- depends_on_cn：工人有效时间参数
+
+- sets_up_cn：强化TP-TASC的有效性
+
+- evidence_pointer：Fig. 5
+
+### 44. P5 S1-S3
+
+- order：44
+
+- section：Section 5.4
+
+- locator：P5 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：当工人信誉均值从0.7变化到0.9时，TP-TASC的平均等待时间低于RB-TPSC，平均信誉高于RB-TPSC。
+
+- rhetorical_function_cn：报告工人信誉分布变化下的结果。
+
+- depends_on_cn：信誉均值参数
+
+- sets_up_cn：证明算法对工人质量分布具有鲁棒性
+
+- evidence_pointer：Fig. 6
+
+### 45. P6 S1-S3
+
+- order：45
+
+- section：Section 5.4
+
+- locator：P6 S1-S3
+
+- move_code：TRANSITION
+
+- paraphrase_cn：该任务分配方法可在预测区域短期需求后用于工人提前调度，低等待时间区域可调出工人到其他区域，提高整体分配率。
+
+- rhetorical_function_cn：将实验结论上升到区域供需调度建议，拓展应用价值。
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：为结论中的平台意义做衔接
+
+- evidence_pointer：Section 5.4最后一段
+
+### 46. P1 S1-S3
+
+- order：46
+
+- section：Conclusions
+
+- locator：P1 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结TP-TASC包含预测和分配两阶段，能优化供需关系、提高任务质量、降低等待时间。
+
+- rhetorical_function_cn：开篇复述框架和核心目标。
+
+- depends_on_cn：全文工作
+
+- sets_up_cn：引出贡献总结
+
+- evidence_pointer：Conclusions第一段
+
+### 47. P2 S1-S3
+
+- order：47
+
+- section：Conclusions
+
+- locator：P2 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：再次列出三点贡献，强调历史数据预测替代恒速或实时路网、启发式算法综合考虑信誉与时空信息、真实数据实验验证。
+
+- rhetorical_function_cn：正式重申贡献以闭合论文结构。
+
+- depends_on_cn：研究结果
+
+- sets_up_cn：为平台影响和未来工作留出空间
+
+- evidence_pointer：Conclusions第二段
+
+### 48. P3 S1-S5
+
+- order：48
+
+- section：Conclusions
+
+- locator：P3 S1-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：指出该方法可用于交通和道路监测，并可修改用于外卖平台等场景，提高平台收益和请求者满意度。
+
+- rhetorical_function_cn：将结果推广至更广泛的实际应用。
+
+- depends_on_cn：贡献总结
+
+- sets_up_cn：引出局限性讨论
+
+- evidence_pointer：Conclusions第三段
+
+### 49. P4 S1-S5
+
+- order：49
+
+- section：Conclusions
+
+- locator：P4 S1-S5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：指出局限：静态环境未考虑动态任务和未来的收益平衡；预测精度影响分配质量；未来可考虑数据分布差异和任务取消概率。
+
+- rhetorical_function_cn：坦诚方法边界，指出未来研究方向。
+
+- depends_on_cn：全文方法和结果
+
+- sets_up_cn：为未来研究提供指引
+
+- evidence_pointer：Conclusions第四段
+
+## 写作技术
+
+- gap_construction_cn：分两步制造缺口：先从时间角度批评最短距离分配，再从预测角度批评恒速和实时路网假设，最终落脚到“历史数据预测”这一未被充分利用的机会，从而建立本研究的位置。
+
+- signposting_cn：引言末尾明确列出三点贡献；正文每节开头用一句话说明该节内容；结论部分再次重复贡献，形成清晰的“前景-正文-回声”结构。
+
+- transition_logic_cn：在相关工作末尾从现有局限过渡到历史数据的可能性；在框架部分由整体框架过渡到详细模型；实验部分先报告预测再报告分配，逐层推进。
+
+- claim_evidence_rhythm_cn：每个主要主张后面都紧接实验数值或图形引用，如预测精度后接RMSLE/MAE，分配优势后接图3-6；在解释趋势时辅以机制推理，使结果不显得偶然。
+
+- benchmark_narrative_cn：引入RB-TPSC作为对照时说明其不考虑时间限制，从而凸显TP-TASC的时间预测优势；五个指标全面覆盖请求者、平台和工人视角，且通过参数敏感性测试增强对比的说服力。
+
+- theory_return_cn：讨论环节将结果重新与声誉机制和历史数据价值相连接，说明为什么高信誉优先和基于历史预测能带来质量与时间改善；结论部分又将这种设计知识抽象为平台决策支持的一般含义。
+
+- contribution_positioning_cn：贡献定位在“第一个将历史数据驱动的LightGBM时间预测嵌入空间众包任务分配，并同时优化质量与等待时间”，区别于只考虑距离或只考虑信誉的工作。
+
+- novelty_protection_cn：强调预测模型的贡献在特征与超参数而非算法本身（明确承认LightGBM不是新方法）；通过真实数据集和多参数敏感性实验展示鲁棒性，防止贡献被看作一次性性能优化。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立领域背景，说明空间众包任务分配的重要性
+
+- research_job_cn：明确所研究任务类型与系统结构
+
+- required_evidence_cn：至少给出领域定义和代表性应用
+
+- transition_to_next_cn：从一般众包过渡到空间众包的具体任务分配问题
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：批评现有方法的局限，突出缺口
+
+- research_job_cn：梳理现有算法在距离、时间、质量处理上的不足
+
+- required_evidence_cn：至少两类文献比较（距离优先 vs 时间优先）并指出现有假设不合理
+
+- transition_to_next_cn：提出使用历史数据预测时间的新方向
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：提出构建制品的总体框架和组成部分
+
+- research_job_cn：设计预测模型与分配算法的接口
+
+- required_evidence_cn：框架图或文字描述，明确组件输入输出
+
+- transition_to_next_cn：进入数学模型和算法细节
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：形式化定义问题，给出符号、目标函数和约束
+
+- research_job_cn：定义任务/工人元组、等待时间、支付函数和优化目标
+
+- required_evidence_cn：需要清晰的目标函数和至少一个算法伪代码
+
+- transition_to_next_cn：解释预测模型如何与分配模型连接
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：说明预测模型的选择理由、特征工程和超参数
+
+- research_job_cn：构建或选取预测模型，训练并报告预测精度
+
+- required_evidence_cn：至少在某个真实数据集上给出预测误差指标
+
+- transition_to_next_cn：将预测结果输入分配算法并设计对比实验
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计实验方案，定义评估指标和基线
+
+- research_job_cn：选择真实或合成数据集，确定对照算法和参数变化范围
+
+- required_evidence_cn：需要至少一个基线算法、五个左右评估指标
+
+- transition_to_next_cn：详细报告实验结果和机制解释
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：报告实验结果，解释趋势，做参数敏感性分析
+
+- research_job_cn：运行仿真/实验，绘制图表，分析原因
+
+- required_evidence_cn：不同参数下的结果图表及对应解释
+
+- transition_to_next_cn：将结果抽象为平台决策支持含义
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：结论中重申贡献、实际意义和局限
+
+- research_job_cn：提炼可复用设计知识，明确适用条件
+
+- required_evidence_cn：需要总结与引言缺口对应的回应
+
+- transition_to_next_cn：结束全文或给出未来研究方向
+
+### most_transferable_moves_cn
+
+1. 从现实局限（如欧氏距离、恒速假设）逐步收紧到可研究的缺口
+
+2. 将质量的客观测度替换为信誉代理并明确说明假设
+
+3. 用历史数据预测替代实时信息，并以信息成本作为卖点
+
+4. 在实验部分将单个对比扩展为参数敏感性分析，强化稳健性
+
+5. 在结论中将算法性能转化为平台、工人、请求者三方的决策价值
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要大规模真实轨迹/订单数据集（如GAIA），普通研究团队难以获得类似数据
+
+2. 需要匹配天气、空气质量等多源数据，数据预处理工作量较大
+
+3. 需要实现基准算法RB-TPSC并保证复现公平性，可能依赖作者提供的代码或细节
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“我们使用了LightGBM”而不提供特征设计和超参数；必须展示特征如何从领域知识中导出
+
+2. 不能只声称“优于基线”而不做多参数敏感性测试，否则结论容易被质疑
+
+3. 不能把等待时间缩短直接等同于满意度提升，除非有相应的满意度数据或测量
+
+4. 不能只在讨论中宣称节省实时路网成本，需要至少定性估算或对比信息获取成本
+
+- single_best_description_of_the_routine_cn：构造一个由预测模型和启发式分配算法组成的计算制品，用真实数据离线仿真，通过与未考虑时间维度的基准算法比较并扫描关键参数，证明其在等待时间和质量上的同时改进，最后把性能优势重述为平台决策支持设计原则。
+
+## 分析边界
+
+文章全文包含数学公式和图片，OCR可能造成个别符号误差；实验部分图表细节在文本中没有完整数值，只能依据文字描述；部分位置证据（如Table 3的页码）无法提供。

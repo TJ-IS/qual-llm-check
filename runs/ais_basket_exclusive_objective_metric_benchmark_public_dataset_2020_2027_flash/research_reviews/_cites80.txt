@@ -1,0 +1,116 @@
+===== 34 =====
+  叙述性引用 21 处:
+    Ghoshal 等（2020）
+    与 Menon 等（2022）
+    Qu 等（2026）
+    Lausen 等（2020）
+    Li 与 Chai（2022）
+    Ampel 等（2024）
+    Ebrahimi 等（2025）
+    Ghoshal 等（2020）
+    Menon 等（2022）
+    Qu 等（2026）
+    Lausen 等（2020）
+    Li 与 Chai（2022）
+    Ebrahimi 等（2025）
+    Kwon 与 Lee（2024）
+    Ampel 等（2024）
+    Ebrahimi 等（2025）
+    Lausen 等（2020）
+    Benjamin 与 Raghu（2023）
+    Li 与 Chai（2022）
+    Yang 等（2023）
+    与 Ebrahimi 等（2025）
+  括注引用 49 处（样本）:
+    （Jimenez et al., 2024）
+    （Yang et al., 2024）
+    （Yuan et al., 2019）
+    （Greshake et al., 2023; Yang et al., 2024）
+    （Greshake et al., 2023）
+    （Goodfellow et al., 2018）
+    （Yang et al., 2024）
+    （Kolter & Madry, 2018; Li & Chai, 2022）
+    （Bertsimas et al., 2011）
+    （Madry et al., 2018）
+    （Kolter & Madry, 2018）
+    （Ebrahimi et al., 2025）
+  叙述位置英文格式 0 处:
+  括注位置中文格式 0 处:
+===== 35 =====
+  叙述性引用 20 处:
+    Ray 等（2021）
+    与 Wu 等（2023）
+    Qu 等（2026）
+    Wang 等（2020）
+    Shangguan 等（2022）
+    Yang 与 Subramanyam（2023）
+    Yang 等（2023a）
+    Lin 与 Fang（2021）
+    Ampel 等（2024）
+    Zhang 等（2024）
+    Ray 等（2021）
+    Wu 等（2023）
+    Tsagkarakis 等（2021）
+    Qu 等（2026）
+    Ghoshal 等（2020）
+    与 Menon 等（2022）
+    Li 与 Chai（2022）
+    Lausen 等（2020）
+    Lin 与 Fang（2021）
+    以 Yang 等（2023b）
+  括注引用 41 处（样本）:
+    （Jimenez et al., 2024; Yang et al., 2024）
+    （Yang et al., 2024）
+    （Yang et al., 2024）
+    （Lin & Fang, 2021）
+    （Zhang et al., 2024）
+    （Ampel et al., 2024）
+    （Wang et al., 2020; Shangguan et al., 2022; Yang & Subramanyam, 2023; Yang et al., 2023a; du Jardin, 2021）
+    （Zhang et al., 2024）
+    （Tsagkarakis et al., 2021）
+    （Qu et al., 2026）
+    （Gregor & Hevner, 2013; Rai, 2017）
+    （Yang et al., 2024）
+  叙述位置英文格式 0 处:
+  括注位置中文格式 0 处:
+===== 36 =====
+  叙述性引用 24 处:
+    Zhang 等（2023）
+    Kumar 等（2022）
+    Gopal 等（2022）
+    Benjamin 与 Raghu（2023）
+    Liang 与 Xue（2009）
+    Li 与 Chai（2022）
+    Lausen 等（2020）
+    Zhang 等（2023）
+    Kumar 等（2022）
+    Gopal 等（2022）
+    Gupta 等（2025）
+    Vamosi 等（2022）
+    Zhu 等（2021）
+    Benjamin 与 Raghu（2023）
+    Shan 等（2020）
+    Lausen 等（2020）
+    Lausen 等（2020）
+    Ebrahimi 等（2025）
+    Ghoshal 等（2020）
+    与 Menon 等（2022）
+    Qu 等（2026）
+    Li 与 Chai（2022）
+    Yang 等（2023b）
+    Li 与 Chai（2022）
+  括注引用 43 处（样本）:
+    （Jimenez et al., 2024）
+    （Yang et al., 2024）
+    （Yang et al., 2024）
+    （Yang et al., 2024）
+    （Li & Chai, 2022）
+    （Li & Chai, 2022）
+    （McCornack, 1992; Walther et al., 2009）
+    （Walther et al., 2009）
+    （Liang & Xue, 2009）
+    （Li & Chai, 2022）
+    （Gregor & Hevner, 2013; Rai, 2017）
+    （Yang et al., 2024）
+  叙述位置英文格式 0 处:
+  括注位置中文格式 0 处:

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85188131025"
+title: "Emerging Tools and Technologies in Data Science"
+authors: "Ullah M.; Rahman N."
+year: "2022"
+journal: "Encyclopedia of Data Science and Machine Learning"
+doi: "10.4018/978-1-7998-9220-5.ch099"
+---
+# Scopus title-abstract-keyword metadata
+Title: Emerging Tools and Technologies in Data Science
+Abstract: Business intelligence (BI) is inevitable to the business organizations to make the most effective decisions with the highest level of efficiency, and to find ways to make continuous improvement in their decision-making processes based on data science (DS). So, it is very important for them to search for the latest BI and DS tools and technologies. They expect to get increasingly improved performance from these emerging tools and technologies in the field of DS, which consequently helps them to drive down their information technology (IT) budget to run their businesses. The advent of computing technologies, software engineering, DS technologies, cloud computing, etc., and very rapid emergence and adoption of smartphones around the globe, have made the modern day business environment much more competitive than ever before, and have resulted into enormous increase in the use of the advanced BI and DS tools and technologies, which will be steadily increasing further in the future. This article attempts to make an analytical discussion of these ever-improving DS tools and technologies © 2023 by IGI Global. All rights reserved.
+Author keywords: 
+Index keywords: 
+Document type: Book chapter
+Conference: 
+Source title: Encyclopedia of Data Science and Machine Learning
+Year: 2022
+EID: 2-s2.0-85188131025
+DOI: 10.4018/978-1-7998-9220-5.ch099
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

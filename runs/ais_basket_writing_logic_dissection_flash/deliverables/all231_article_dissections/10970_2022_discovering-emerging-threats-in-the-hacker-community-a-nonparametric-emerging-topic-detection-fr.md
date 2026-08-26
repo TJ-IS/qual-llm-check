@@ -1,0 +1,1779 @@
+# Discovering Emerging Threats in the Hacker Community: A Nonparametric Emerging Topic Detection Framework
+
+- 作者：Weifeng Li; Hsinchun Chen
+- 年份 / 期刊：2022 / MIS Quarterly
+- DOI：10.25300/misq/2022/15642
+- 源文件：10970_2022_discovering-emerging-threats-in-the-hacker-community-a-nonparametric-emerging-topic-detection-fr.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.92
+
+## 文章级论证概况
+
+- 核心问题：如何从黑客社区的海量内容流中有效且高效地检测出尚未被已知威胁类别覆盖的新兴威胁（即新兴话题）？
+
+- 制品与设计：提出NPETD框架，包含两个组件：1) 基于条件层次狄利克雷过程（conditional HDP）的话题建模组件，能够非参数地推断灵活数量的话题并随时间传递话题；2) 基于贝叶斯因子检验和随机变分推断（SVI）的新兴话题检测组件，统计过滤噪声并提高效率。
+
+- 客观结果：在Alphabay暗网市场测试集上，NPETD比AOLDA、ATD、TopicSketch、BBTM有更高召回率、F值和话题一致性，同时运行时间远低于最接近的基线ATD；在Altenens论坛应用中识别出多个有意义的新兴话题。
+
+- 核心贡献：作者声称贡献在于：设计并评估了一个面向黑客社区文本流的新兴话题检测框架；回应对“黑帽研究”的呼吁，为网络安全威胁情报提供方法；并将框架推广到其他需要检测未知数量新兴话题的IS语境。
+
+- 整篇论证链：作者先说明网络犯罪与暗网黑客社区的关联，指出黑客生成内容对威胁情报的价值，然后指出现有威胁分类方法依赖人工标签无法检测未知威胁；接着论证TDT方法有潜力但存在两个局限：固定话题数与低效/限制性推理；基于设计科学范式，引入非参数HDP解决话题数未知问题，引入SVI和贝叶斯因子检验分别解决效率和显著性检验；构建NPETD框架后，在Alphabay测试集上对比基线方法，证明有效性和效率优势；最后在Altenens论坛上展示实际效用；结论声称对网络安全、TDT和设计科学均有贡献。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者明确以Hevner等设计科学范式为基础，提出NPETD框架作为IT制品，通过受控实验（DNM benchmark）和真实应用（Altenens论坛）进行评价，并将结果抽象为可复用设计知识，符合需求—构建—评价—设计知识的设计科学路径。
+
+- 主导写作弧线判定：文章首先建立现有威胁分类和TDT方法在检测新兴威胁上的性能/能力缺口，然后提出NPETD制品，用DNM benchmark量化对比，最后将框架一般化为适用于更多IS情境的设计知识，属于性能缺口—制品—benchmark—一般化设计知识的主要写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：3
+
+- 研究阶段总序列：整个项目分为三个累积阶段：第一阶段是框架设计与算法构建，基于HDP/SVI/贝叶斯因子等知识形成NPETD制品；第二阶段是在Alphabay暗网市场测试集上开展受控量化实验，对比四个最先进基线，验证有效性和效率；第三阶段是在Altenens真实黑客论坛上展示实际应用，识别有现实意义的新兴话题，提供外部效度和实用价值。三个阶段从设计制品到经验评价再到现实演示，层层递进。
+
+### studies_or_phases
+
+#### 1. 框架设计与算法构建
+
+- order：1
+
+- name_cn：框架设计与算法构建
+
+- question_cn：如何设计一个无需预设话题数且能及时检测新兴话题的框架？
+
+- inputs_and_setting_cn：学术文献中的HDP、SVI和贝叶斯因子检验知识；黑客社区文档流按时间切片的基本假设。
+
+- designed_or_compared_object_cn：条件HDP模型、EM/SVI推理算法、贝叶斯因子检验阈值。
+
+- baseline_control_or_counterfactual_cn：与标准HDP和LDA进行理论对比，说明条件HDP如何通过先前时间片后验作为先验来支持时间比较。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：数学建模、算法推导、形式化生成过程与伪代码。
+
+- main_result_cn：形成NPETD框架和算法：条件HDP以G_{t-1}为基分布实现话题继承，SVI小批量优化实现高效推理，贝叶斯因子K>3确认显著新兴话题。
+
+- argumentative_role_cn：提出并定义制品，为后续所有评价提供对象。
+
+- remaining_uncertainty_cn：框架是否真的有效和高效尚不清楚，需要经验数据检验。
+
+- link_to_next_phase_cn：自然引出需要构造测试集并运行对比实验来验证框架的有效性和效率。
+
+##### evidence_pointers
+
+1. The Nonparametric Emerging Topic Detection Framework 一节
+
+2. Figure 1
+
+3. Figure 2
+
+#### 2. DNM受控实验评估
+
+- order：2
+
+- name_cn：DNM受控实验评估
+
+- question_cn：相比最先进的基线方法，NPETD在检测暗网市场新兴威胁列表上的有效性和效率如何？
+
+- inputs_and_setting_cn：从Alphabay收集的6,777条列表，其中163条正例（六类黑客相关产品/服务：exploits, hosting services, botnet and malware, socks, VPN, security software），6,614条负例；随机选择约60%负例作为第一训练时间片，其余负例与全部正例作为第二测试时间片。
+
+- designed_or_compared_object_cn：NPETD vs AOLDA、ATD、TopicSketch、BBTM四个基线方法；另对BBTM和AOLDA实现了SVI加速以公平比较。
+
+- baseline_control_or_counterfactual_cn：四个state-of-the-art基线方法；通过两个相邻时间片模拟新兴话题出现的过程。
+
+##### objective_metrics
+
+1.  Precision
+
+2.  recall
+
+3.  F-measure
+
+4.  UMass topic coherence
+
+5.  processor time
+
+- analysis_method_cn：宏平均性能比较、单侧Wilcoxon符号秩检验、逐类别F-measure与处理器时间散点图。
+
+- main_result_cn：NPETD在召回率、F值、话题一致性上优于所有基线，精确率排第二；比最佳基线ATD在F上高0.087；在botnet/malware检测上只需51秒而ATD需24分钟。
+
+- argumentative_role_cn：量化证明框架的有效性和效率，是核心评价证据。
+
+- remaining_uncertainty_cn：在真实论坛上是否具有实际价值仍未知，且没有单独验证各组件贡献。
+
+- link_to_next_phase_cn：转向完全不同类型的真实黑客社区（Altenens论坛）展示实用价值。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Figure 3
+
+3. Experiment Results 小节
+
+#### 3. Altenens论坛实际应用展示
+
+- order：3
+
+- name_cn：Altenens论坛实际应用展示
+
+- question_cn：NPETD能否在真实黑客论坛中发现有现实意义的新兴话题？
+
+- inputs_and_setting_cn：Altenens论坛（大型carding社区）收集的8,778个英文帖子，2018年7月至2020年3月，按月划分为22个时间片。
+
+- designed_or_compared_object_cn：NPETD在论坛数据上输出的新兴话题，以主题标签和top words呈现。
+
+- baseline_control_or_counterfactual_cn：无模型对比；通过人工解释和与现实事件关联验证话题意义。
+
+##### objective_metrics
+
+1. 定性话题标签
+
+2. top words
+
+- analysis_method_cn：人工解释、与时间背景和现实事件关联。
+
+- main_result_cn：检测出2019年11月信用卡/借记卡征求话题、2020年1月Gmail/Hotmail/Yahoo被盗邮箱话题、2020年3月新卡贩（ICQ号）及高级银行卡和Netflix账号话题，并对零售商、邮箱/Netflix公司和执法有启示。
+
+- argumentative_role_cn：提供外部效度和实用价值，展示框架在真实场景中的效用，支撑设计科学“utility”主张。
+
+- remaining_uncertainty_cn：话题是人工解释而非ground truth；没有将检测到的话题与现实攻击/损失建立因果联系。
+
+- link_to_next_phase_cn：进入结论部分，将两个评价结果综合上升为贡献并讨论推广场景。
+
+##### evidence_pointers
+
+1. An Emerging Topic Detection Example Using NPETD 小节
+
+2. Table 3
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. RQ_OR_OBJECTIVE
+
+5. DESIGN_FEATURE
+
+6. RESULT
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. PRIOR_KNOWLEDGE
+
+5. LIMITATION
+
+6. GAP
+
+7. WHY_GAP_MATTERS
+
+8. RQ_OR_OBJECTIVE
+
+9. THEORY_INTRO
+
+10. DESIGN_FEATURE
+
+11. STUDY_OVERVIEW
+
+12. RESULT
+
+13. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. MECHANISM
+
+4. GAP
+
+5. REQUIREMENT
+
+6. THEORY_PROPOSITION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. METHOD_JUSTIFICATION
+
+5. HYPOTHESIS_OR_PROPOSITION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. TRANSITION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 设计科学范式（Hevner et al., 2004）
+
+2. 主题检测与跟踪（TDT）方法论
+
+3. 贝叶斯参数/非参数主题模型（LDA/HDP）
+
+4. 随机变分推断（SVI）
+
+5. 贝叶斯因子检验
+
+6. 黑客社区领域知识（论坛/市场形态、威胁类别）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：HDP的非参数灵活性和TDT的时间流框架直接决定了条件HDP的设计目标；SVI和贝叶斯因子检验的选择直接源于对HDP无限维和效率的需求；这些设计决策随后被DNM实验直接检验，因此属于知识基础前瞻性决定明确设计并由评价直接验证的直接耦合。
+
+- 理论到设计翻译链：HDP理论（无限话题灵活推断）→ 设计需求：无需预设话题数 → 制品选择：条件HDP时间切片建模；TDT的时间流分割 → 时间切片的相邻比较 → 条件HDP以先前切片后验为先验；贝叶斯因子检验适合无限维 → 显著性测试过滤噪声；SVI提供可扩展推理 → 小批量优化提高效率 → 与基线相比更高效。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：HDP等非参数贝叶斯模型允许灵活数量的主题
+
+- mechanism_cn：通过语料级和文档级DP的堆叠，后验可归纳主题数，避免主题数预设错误
+
+- design_requirement_cn：新兴话题数量事先未知，需要自动从数据中学习
+
+- artifact_choice_cn：采用conditional HDP，以先前时间片的后验作为当前时间片的先验
+
+- evaluated_contrast_cn：NPETD vs LDA-based基线（AOLDA, ATD, TopicSketch, BBTM）
+
+- objective_result_cn：NPETD在recall, F-measure, coherence上显著优于基线
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Experiment Results
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：SVI随机变分推断可将全数据迭代替换为小批量更新
+
+- mechanism_cn：通过ELBO近似难以处理的边缘似然，实现在线学习，降低每轮成本
+
+- design_requirement_cn：新威胁情报需要及时性，推理不能太慢
+
+- artifact_choice_cn：在NPETD中实例化SVI，E-step更新局部变量，M-step自然梯度上升更新整体话题分布
+
+- evaluated_contrast_cn：NPETD的运行时间 vs ATD等
+
+- objective_result_cn：NPETD检测botnet/malware列表只需51秒，而ATD需24分钟等
+
+##### evidence_pointers
+
+1. Figure 3
+
+2. Experiment Results
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：贝叶斯因子检验适合比较无限维非参数模型的拟合优度
+
+- mechanism_cn：通过比较带候选新兴话题的模型与不带的模型在新文档上的边际似然比，判断话题是否显著
+
+- design_requirement_cn：需要统计检验来过滤随机噪声导致的假阳性话题
+
+- artifact_choice_cn：贝叶斯因子统计量K，阈值3
+
+- evaluated_contrast_cn：候选话题被确认或拒绝（通过整体precision等体现）
+
+- objective_result_cn：NPETD达到0.926 precision，说明假阳性较少
+
+##### evidence_pointers
+
+1. Emergence Detection 小节
+
+2. Algorithm in Figure 2
+
+3. Table 2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控实验（benchmark）
+
+2. 案例应用/现场演示
+
+3. 显著性统计检验
+
+- why_these_evaluations_cn：设计科学要求同时评价有效性、效率和实用效用；DNM实验可量化比较有效性/效率，Altenens应用可展示在真实世界情境中的可用性和实际意义。
+
+- benchmark_and_contrast_chain_cn：作者先选择最先进的TDT方法作为基线，然后经过预处理构造包含正负例的DNM测试集，以两个相邻时间片模拟新兴话题出现；用5个指标对比；接着用Wilcoxon检验确认差异显著；最后在另一个完全不同类型的黑客社区（论坛）中运行，展示可发现现实有意义的话题。
+
+### claim_evidence_ledger
+
+#### 1. NPETD在DNM数据上优于基线
+
+- claim_type：技术主张
+
+- claim_cn：NPETD在DNM数据上优于基线
+
+- evidence_cn：Table 2宏平均与Wilcoxon检验，Figure 3逐类别结果
+
+#### 2. NPETD更快
+
+- claim_type：效率主张
+
+- claim_cn：NPETD更快
+
+- evidence_cn：Figure 3的时间对比，如botnet/malware 51s vs 24min
+
+#### 3. 框架能识别真实论坛中的新兴威胁
+
+- claim_type：效用主张
+
+- claim_cn：框架能识别真实论坛中的新兴威胁
+
+- evidence_cn：Table 3例子和现实对应（假期季、被盗邮箱、ICQ号、高级卡标签）
+
+#### 4. 改进来源于HDP灵活话题数和SVI效率
+
+- claim_type：机制主张
+
+- claim_cn：改进来源于HDP灵活话题数和SVI效率
+
+- evidence_cn：作者在结果中解释AOLDA与ATD对比、以及NPETD的非参数捕捉多话题能力，属于推测性论证而非直接消融
+
+#### 5. 当新兴话题与既有话题差异大且一个listing可能包含多个话题时NPETD更有效
+
+- claim_type：边界主张
+
+- claim_cn：当新兴话题与既有话题差异大且一个listing可能包含多个话题时NPETD更有效
+
+- evidence_cn：基于结果的后验解释，非单独检验
+
+- internal_validity_strategy_cn：随机划分训练/测试；正例比例符合真实场景；对BBTM/AOLDA也使用SVI以公平比较；使用单侧Wilcoxon检验比较显著差异；尽量控制预处理统一。
+
+- external_validity_strategy_cn：使用两个不同形式的黑客社区（暗网市场和论坛）；Alphabay作为最大DNM；Altenens实际数据；结果话题与真实世界事件关联。
+
+- what_is_not_actually_tested_cn：没有在真实运营环境中让分析师使用系统；没有与真实攻击或损失数据关联；没有用户研究；Altenens话题是人工解释，缺乏ground truth；没有消融实验单独评估conditional HDP、SVI、Bayes因子各自贡献；没有对话题数估计的准确性进行直接测量。
+
+## 贡献闭环
+
+- technical_claim_cn：NPETD在检测暗网市场新兴威胁列表上比state-of-art基线更有效（更高召回/F/一致性）且更高效（更少处理器时间）。
+
+- artifact_claim_cn：框架的非参数条件HDP组件、SVI推理和贝叶斯因子检验构成了一个可复用的新兴话题检测制品。
+
+- mechanism_claim_cn：非参数灵活性使得话题数不被预设，从而避免话题误表示；SVI减少迭代成本；贝叶斯因子检验过滤噪声。
+
+- boundary_claim_cn：在话题数未知、文档可能多话题、需要及时检测的情境中，NPETD优于固定话题数方法；但具体适用边界（如语料大小、时间粒度）未被严格刻画。
+
+- reusable_design_knowledge_cn：当IS文档流中的新兴话题数量事前未知时，应采用非参数主题模型并将相邻时间片的后验作为先验，同时耦合高效推理与统计显著性检验，以兼顾有效性和效率。
+
+- theoretical_contribution_cn：将TDT与非参数贝叶斯模型结合，扩展了emerging topic detection方法；回应黑帽研究呼吁，为网络安全领域提供实证；为设计科学提供新兴话题检测框架实例。
+
+- how_discussion_closes_intro_gap_cn：引言指出现有威胁分类无法处理未知威胁、TDT有两大局限；结论通过报告NPETD的成功评价来证明这些局限已被缓解，并将框架推广到其他IS场景（专利、社交媒体疫情等）来提升一般性。
+
+- overclaim_or_unsupported_leaps_cn：可能跳跃：从两个数据集的成功表现过度宣称“框架有潜力赋能组织战略预见”；将Altenens话题解释为现实威胁是推测性的，缺乏与真实欺诈或攻击的直接联系；宣称Bayes因子检验过滤噪声，但仅在整体precision中间接支持；没有做消融却将全部改进归于HDP和非参数灵活性。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：网络犯罪的普遍与快速增长主要归因于暗网黑客社区。
+
+- rhetorical_function_cn：开篇建立现实背景，指出黑客社区在犯罪增长中的中心地位。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后续说明黑客生成内容作为威胁情报源的价值提供背景。
+
+- evidence_pointer：摘要第一句
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：黑客生成内容流是开发威胁情报、支持组织风险管理和主动防御的宝贵数据来源。
+
+- rhetorical_function_cn：将背景转化为实际利害关系，说明研究这项数据源的重要性。
+
+- depends_on_cn：依赖前句黑客社区的背景。
+
+- sets_up_cn：引出需要分析方法来利用该数据源。
+
+- evidence_pointer：摘要第二句
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：基于设计科学范式，提出用于检测黑客社区内容流新兴话题的非参数新兴话题检测框架NPETD。
+
+- rhetorical_function_cn：明确研究目标和制品种类。
+
+- depends_on_cn：依赖威胁情报数据源的重要性和设计科学范式。
+
+- sets_up_cn：为后文介绍框架组件做铺垫。
+
+- evidence_pointer：摘要第三句
+
+### 4. P1 S4-S5
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架扩展了非参数话题模型HDP，无需事先指定话题数量，并包含联合推断话题与检测话题涌现的高效算法。
+
+- rhetorical_function_cn：概述制品的两个关键技术点：非参数灵活性和高效算法。
+
+- depends_on_cn：依赖研究目标。
+
+- sets_up_cn：为后续框架详细描述设定预览。
+
+- evidence_pointer：摘要第四、五句
+
+### 5. P1 S6
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：RESULT
+
+- paraphrase_cn：实验表明，在暗网市场检测新兴威胁列表时，NPETD在召回率、F值、话题一致性和处理器时间上优于基线方法。
+
+- rhetorical_function_cn：报告核心量化结果，为有效性主张提供证据。
+
+- depends_on_cn：依赖框架设计和实验执行。
+
+- sets_up_cn：支撑摘要随后声明的贡献。
+
+- evidence_pointer：摘要第六句
+
+### 6. P1 S7
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S7
+
+- move_code：RESULT
+
+- paraphrase_cn：框架在主流黑客论坛中的应用发现了多个具有重要含义的新兴话题。
+
+- rhetorical_function_cn：补充实际效用证据，扩展外部效度。
+
+- depends_on_cn：依赖框架在论坛数据上的应用。
+
+- sets_up_cn：为摘要中的贡献声明增加实用面向。
+
+- evidence_pointer：摘要第七句
+
+### 7. P1 S8
+
+- order：7
+
+- section：Abstract
+
+- locator：P1 S8
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：框架贡献于网络安全、话题检测与追踪以及设计科学。
+
+- rhetorical_function_cn：声明整体贡献，为摘要收尾。
+
+- depends_on_cn：依赖前面所有设计和结果。
+
+- sets_up_cn：引导读者进入全文以理解贡献细节。
+
+- evidence_pointer：摘要第八句
+
+### 8. P1 S1-S2
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：网络犯罪数量和损失数据（如2021年企业平均遭270次攻击、FBI 2020年报告）显示网络犯罪成为组织和社会重大关切。
+
+- rhetorical_function_cn：用统计数据建立现实问题的严重性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为引出黑客社区作为网络犯罪源头提供铺垫。
+
+- evidence_pointer：Introduction第一段
+
+### 9. P1 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究指出黑客社区用于交换勒索软件、泄露数据等资源、分享知识和组织犯罪活动。
+
+- rhetorical_function_cn：总结已有关于黑客社区现象的知识。
+
+- depends_on_cn：依赖前句的网络安全背景。
+
+- sets_up_cn：说明黑客社区内容是值得挖掘的数据源。
+
+- evidence_pointer：Introduction第一段末尾
+
+### 10. P2 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：黑客生成内容已成为构建威胁情报的来源，驱动了基于黑客社区的计算方法发展。
+
+- rhetorical_function_cn：描述领域现状，指出现有计算方法的涌现。
+
+- depends_on_cn：依赖黑客社区数据源的价值。
+
+- sets_up_cn：引出威胁分类方法及其局限。
+
+- evidence_pointer：Introduction第二段第一句
+
+### 11. P2 S2-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S2-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有方法主要将黑客内容归类到预设威胁类别，依赖人工标注，无法检测超出已知类别的新威胁。
+
+- rhetorical_function_cn：指出现有方法的根本能力局限。
+
+- depends_on_cn：依赖威胁分类方法的介绍。
+
+- sets_up_cn：制造新兴威胁检测的缺口。
+
+- evidence_pointer：Introduction第二段第二、三句
+
+### 12. P2 S4
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：新目标、漏洞、利用和黑客资源不断出现，检测新兴威胁对组织风险评估和主动防御具有特别价值。
+
+- rhetorical_function_cn：解释为什么这个能力缺口重要。
+
+- depends_on_cn：依赖前句指出的方法局限。
+
+- sets_up_cn：为引入TDT方法提供动机。
+
+- evidence_pointer：Introduction第二段最后一句
+
+### 13. P3 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：话题检测与追踪（TDT）方法论通过检测黑客社区中的新兴话题，有潜力推进新兴威胁检测。
+
+- rhetorical_function_cn：引入TDT作为潜在解决工具。
+
+- depends_on_cn：依赖新兴威胁检测缺口。
+
+- sets_up_cn：接着分析TDT现有方法的局限。
+
+- evidence_pointer：Introduction第三段第一句
+
+### 14. P3 S2-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S2-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有TDT方法大多假设固定数量新兴话题，这在黑客社区中有问题；且推理算法要么耗时（如吉布斯采样）要么依赖严格假设（如一文一话题）。
+
+- rhetorical_function_cn：指出TDT应用于黑客社区时的两个技术局限。
+
+- depends_on_cn：依赖TDT介绍。
+
+- sets_up_cn：为NPETD的两个设计目标（非参数和高效）铺垫。
+
+- evidence_pointer：Introduction第三段第二、三句
+
+### 15. P3 S4
+
+- order：15
+
+- section：Introduction
+
+- locator：P3 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：无效且低效的新兴话题检测削弱了组织的态势感知和对攻击的及时响应。
+
+- rhetorical_function_cn：强调技术局限带来的实践后果。
+
+- depends_on_cn：依赖前句的两个局限。
+
+- sets_up_cn：将技术问题提升为需要设计科学方法解决的实践问题。
+
+- evidence_pointer：Introduction第三段最后一句
+
+### 16. P4 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：基于设计科学范式，提出NPETD框架以检测黑客社区内容流中的新兴话题。
+
+- rhetorical_function_cn：正式提出本文研究目标和制品。
+
+- depends_on_cn：依赖背景、局限和后果。
+
+- sets_up_cn：为后续方法和评价做总体指引。
+
+- evidence_pointer：Introduction第四段第一句
+
+### 17. P4 S2-S4
+
+- order：17
+
+- section：Introduction
+
+- locator：P4 S2-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架的方法贡献含两个方面：扩展HDP以无需预设话题数；设计将随机话题推断与统计涌现检测耦合的高效算法。
+
+- rhetorical_function_cn：概括制品的两个核心设计。
+
+- depends_on_cn：依赖研究目标。
+
+- sets_up_cn：为框架章节中的技术细节提供预告。
+
+- evidence_pointer：Introduction第四段第二至四句
+
+### 18. P4 S5
+
+- order：18
+
+- section：Introduction
+
+- locator：P4 S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为评价方法，基于两种主要黑客社区形式构建研究测试台；在暗网市场列表实验并与基线比较，并在主流黑客论坛演示实用性。
+
+- rhetorical_function_cn：预告评估路径，建立文章结构预期。
+
+- depends_on_cn：依赖框架陈述。
+
+- sets_up_cn：为后面的Evaluation部分提供路线图。
+
+- evidence_pointer：Introduction第四段第五句
+
+### 19. P4 S6-S7
+
+- order：19
+
+- section：Introduction
+
+- locator：P4 S6-S7
+
+- move_code：RESULT
+
+- paraphrase_cn：实验结果表明HDP引入的灵活性提高了检测新兴威胁列表的有效性，算法比最佳基线快得多且效果相当；论坛应用识别出多个重要新兴话题。
+
+- rhetorical_function_cn：提前报告核心结果，支撑贡献声明。
+
+- depends_on_cn：依赖实验和演示。
+
+- sets_up_cn：为结尾贡献段提供依据。
+
+- evidence_pointer：Introduction第四段第六至七句
+
+### 20. P4 S8
+
+- order：20
+
+- section：Introduction
+
+- locator：P4 S8
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：这些发现和方法贡献于网络安全、话题检测与追踪以及设计科学。
+
+- rhetorical_function_cn：宣布整体贡献，结束引言。
+
+- depends_on_cn：依赖结果和框架。
+
+- sets_up_cn：引导读者进入相关工作和详细论证。
+
+- evidence_pointer：Introduction第四段最后一句
+
+### 21. Hacker Community-Based Threat Intelligence P1
+
+- order：21
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：暗网黑客社区为全球黑客提供交换资源、分享知识、组织犯罪的虚拟平台，存在论坛和市场两种形式。
+
+- rhetorical_function_cn：建立领域情境，为威胁情报研究提供对象。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为区分威胁分类和新兴威胁检测两流文献奠定基础。
+
+- evidence_pointer：Related Work第一小节第一段
+
+### 22. Hacker Community-Based Threat Intelligence P2 S1
+
+- order：22
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：黑客生成内容已成为开发威胁情报的机会，涌现出两流计算方法：威胁分类和新兴威胁检测。
+
+- rhetorical_function_cn：概括现有研究格局。
+
+- depends_on_cn：依赖黑客社区背景。
+
+- sets_up_cn：分别评述两流方法。
+
+- evidence_pointer：Related Work第一小节第二段第一句
+
+### 23. Hacker Community-Based Threat Intelligence P2 S2-S4
+
+- order：23
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P2 S2-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：威胁分类方法多监督，利用网络安全知识预设类别并在标注数据上训练。
+
+- rhetorical_function_cn：总结威胁分类方法的基本范式。
+
+- depends_on_cn：依赖研究格局。
+
+- sets_up_cn：为指出其局限提供参照。
+
+- evidence_pointer：Related Work第一小节第二段第二至四句
+
+### 24. Hacker Community-Based Threat Intelligence P3 S1
+
+- order：24
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：新目标、漏洞、利用和资源不断出现，威胁分类方法无法检测这些从未见过的威胁。
+
+- rhetorical_function_cn：指出现有方法的能力边界。
+
+- depends_on_cn：依赖威胁分类方法介绍。
+
+- sets_up_cn：引出新兴威胁检测这一更需要的分支。
+
+- evidence_pointer：Related Work第一小节第三段第一句
+
+### 25. Hacker Community-Based Threat Intelligence P3 S2
+
+- order：25
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P3 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：现有新兴威胁检测多集中于检测新兴关键词，如受害者名称和威胁术语。
+
+- rhetorical_function_cn：概述当前新兴威胁检测的主要做法。
+
+- depends_on_cn：依赖新兴威胁检测的必要性。
+
+- sets_up_cn：指出关键词方法的不足。
+
+- evidence_pointer：Related Work第一小节第三段第二句
+
+### 26. Hacker Community-Based Threat Intelligence P3 S3
+
+- order：26
+
+- section：Related Work
+
+- locator：Hacker Community-Based Threat Intelligence P3 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：关键词方法很少捕捉关键词间的语义关联，无法将每个威胁的关键词聚成主题，因此难以识别单独的新兴威胁。
+
+- rhetorical_function_cn：指出现有关键词方法的技术局限。
+
+- depends_on_cn：依赖关键词方法综述。
+
+- sets_up_cn：为引入TDT方法提供缺口。
+
+- evidence_pointer：Related Work第一小节第三段第三句
+
+### 27. Topic Detection and Tracking P1
+
+- order：27
+
+- section：Related Work
+
+- locator：Topic Detection and Tracking P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：TDT是研究从新闻和社交媒体等文档流中发现主题结构的领域，包含多个任务。
+
+- rhetorical_function_cn：正式引入TDT方法论。
+
+- depends_on_cn：依赖前段对主题检测的诉求。
+
+- sets_up_cn：为后续讨论监督与无监督方法及概率主题模型提供框架。
+
+- evidence_pointer：Related Work第二小节第一段
+
+### 28. Topic Detection and Tracking P2 S2-S3
+
+- order：28
+
+- section：Related Work
+
+- locator：Topic Detection and Tracking P2 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：监督方法适合已标注的指定类型，但在真实环境中标注空间可能因新话题漂移而变化，因此无监督方法更适合探索未标注数据。
+
+- rhetorical_function_cn：总结监督与无监督方法的适用性。
+
+- depends_on_cn：依赖TDT任务概述。
+
+- sets_up_cn：为选择无监督概率主题模型做依据。
+
+- evidence_pointer：Related Work第二小节第二、三句
+
+### 29. Topic Detection and Tracking P3 S1-S2
+
+- order：29
+
+- section：Related Work
+
+- locator：Topic Detection and Tracking P3 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：概率主题表示比关键词表示更能捕捉关键词及其语义关系，有助于探索未标注数据。
+
+- rhetorical_function_cn：解释概率主题表示的优势机制。
+
+- depends_on_cn：依赖无监督方法选择。
+
+- sets_up_cn：引入LDA与HDP。
+
+- evidence_pointer：Related Work第二小节第三段第一、二句
+
+### 30. Bayesian Parametric Topic Modeling: LDA
+
+- order：30
+
+- section：Related Work
+
+- locator：Bayesian Parametric Topic Modeling: LDA
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：LDA假设K个潜在主题在文档中共享，文档词由主题的多项式混合生成，通过后验推断捕捉主题分布。
+
+- rhetorical_function_cn：陈述LDA模型的基本假设和推断思路。
+
+- depends_on_cn：依赖概率主题表示机制。
+
+- sets_up_cn：为LDA主题预设问题提供解释背景。
+
+- evidence_pointer：Related Work第三小节第一段
+
+### 31. Bayesian Parametric Topic Modeling: LDA P2
+
+- order：31
+
+- section：Related Work
+
+- locator：Bayesian Parametric Topic Modeling: LDA P2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：LDA必须预设主题数K，误设会导致主题误表示（欠拟合或过拟合），并影响新兴话题解释。
+
+- rhetorical_function_cn：指出参数模型的根本缺陷。
+
+- depends_on_cn：依赖LDA模型介绍。
+
+- sets_up_cn：为非参数HDP引入提供动机。
+
+- evidence_pointer：Related Work第三小节第二段
+
+### 32. Bayesian Nonparametric Topic Modeling: HDP P1
+
+- order：32
+
+- section：Related Work
+
+- locator：Bayesian Nonparametric Topic Modeling: HDP P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：贝叶斯非参数建模使用狄利克雷过程（DP），它允许潜在变量数量无限，满足聚类和无限性两个性质。
+
+- rhetorical_function_cn：引入DP作为非参数建模的核心构件。
+
+- depends_on_cn：依赖对LDA局限的批评。
+
+- sets_up_cn：为HDP堆叠DP提供基础。
+
+- evidence_pointer：Related Work第四小节第一段
+
+### 33. Bayesian Nonparametric Topic Modeling: HDP P2
+
+- order：33
+
+- section：Related Work
+
+- locator：Bayesian Nonparametric Topic Modeling: HDP P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：HDP通过堆叠DP，使文档级主题分布以语料级主题分布为基础，从而可对无限多话题建模并后验推断实际话题数。
+
+- rhetorical_function_cn：解释HDP如何避免主题数预设问题的机制。
+
+- depends_on_cn：依赖DP性质。
+
+- sets_up_cn：为后续条件HDP扩展提供依据。
+
+- evidence_pointer：Related Work第四小节第二段
+
+### 34. Probabilistic Emerging Topic Detection P1
+
+- order：34
+
+- section：Related Work
+
+- locator：Probabilistic Emerging Topic Detection P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：新兴话题检测主要捕捉先前未见且有增长趋势的话题，通过时间切片建模和相邻时间片比较来识别。
+
+- rhetorical_function_cn：定义新兴话题检测任务和一般流程。
+
+- depends_on_cn：依赖TDT综述。
+
+- sets_up_cn：为后续分类现有方法提供基准。
+
+- evidence_pointer：Related Work第五小节第一段
+
+### 35. Baseline Model 段
+
+- order：35
+
+- section：Related Work
+
+- locator：Baseline Model 段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有方法大多以固定话题数的LDA变体为基础，少数允许额外话题但数量仍需预设，非参数HDP研究极少。
+
+- rhetorical_function_cn：指出现有baseline模型的话题数灵活性不足。
+
+- depends_on_cn：依赖新兴话题检测分类。
+
+- sets_up_cn：为NPETD采用HDP提供文献空位。
+
+- evidence_pointer：Related Work第五小节Baseline Model段
+
+### 36. Inference Algorithm 段
+
+- order：36
+
+- section：Related Work
+
+- locator：Inference Algorithm 段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：吉布斯采样耗时长，SVD需强假设（如一文一话题），EM在效率和泛化间取得平衡。
+
+- rhetorical_function_cn：比较三类推理算法的优劣，指出效率与假设的张力。
+
+- depends_on_cn：依赖baseline模型分类。
+
+- sets_up_cn：为选择EM类SVI提供依据。
+
+- evidence_pointer：Related Work第五小节Inference Algorithm段
+
+### 37. Emergence Detection 段
+
+- order：37
+
+- section：Related Work
+
+- locator：Emergence Detection 段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有涌现检测多基于阈值或状态转移，难以捕获从未出现的新话题；统计检验（如bootstrap）不能直接用于非参数模型。
+
+- rhetorical_function_cn：指出现有涌现检测机制的不足。
+
+- depends_on_cn：依赖emergence detection综述。
+
+- sets_up_cn：为贝叶斯因子检验选择提供缺口。
+
+- evidence_pointer：Related Work第五小节Emergence Detection段
+
+### 38. Summary
+
+- order：38
+
+- section：Related Work
+
+- locator：Summary
+
+- move_code：GAP
+
+- paraphrase_cn：总结四项缺口：TDT潜力未用于黑客社区新兴威胁检测、话题数缺乏灵活性、推理效率低、涌现检测可改进。
+
+- rhetorical_function_cn：将文献综述汇总为明确的四大research gaps，直接指导框架设计。
+
+- depends_on_cn：依赖前面所有综述。
+
+- sets_up_cn：为NPETF框架的需求与设计提供直接依据。
+
+- evidence_pointer：Related Work Summary
+
+### 39. P1
+
+- order：39
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：框架假设黑客社区文档按时间顺序到达并划分为时间片，每个时间片建模话题并与相邻时间片比较。
+
+- rhetorical_function_cn：设定框架的基本输入假设和时间结构。
+
+- depends_on_cn：依赖TDT的时间片模式。
+
+- sets_up_cn：为后续条件HDP的时间传递提供上下文。
+
+- evidence_pointer：Framework第一段
+
+### 40. P2
+
+- order：40
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架包括话题建模和涌现检测两个组件：前者用条件HDP对每个时间片建模，后者用贝叶斯因子检验识别显著新兴话题，并将SVI用于高效推理。
+
+- rhetorical_function_cn：总体描绘架构，作为框架章节的路线图。
+
+- depends_on_cn：依赖四大gap需求。
+
+- sets_up_cn：为后文详细描述两组件做框架。
+
+- evidence_pointer：Framework第二段及Figure 1
+
+### 41. Topic Modeling 段第二段
+
+- order：41
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Topic Modeling 段第二段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：传统HDP不考虑时间顺序，因此无法比较相邻时间片；因而扩展为条件HDP，使当前时间片的整体话题分布以先前时间片为基分布。
+
+- rhetorical_function_cn：解释为什么需要条件HDP及它如何实现时间比较。
+
+- depends_on_cn：依赖HDP相关知识和框架需求。
+
+- sets_up_cn：为形式化生成过程提供逻辑。
+
+- evidence_pointer：Framework Topic Modeling段
+
+### 42. Topic Modeling 段生成过程
+
+- order：42
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Topic Modeling 段生成过程
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第一个时间片的整体话题分布从对称Dirichlet先验抽取，后续时间片则以前一时间片的话题分布为基分布；文档话题分布和词话题依DP生成。
+
+- rhetorical_function_cn：给出条件HDP的概率生成过程，使设计可计算。
+
+- depends_on_cn：依赖条件HDP机制。
+
+- sets_up_cn：为后文的贝叶斯因子检验和算法提供模型形式。
+
+- evidence_pointer：Framework Topic Modeling生成过程
+
+### 43. Topic Modeling 段最后部分
+
+- order：43
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Topic Modeling 段最后部分
+
+- move_code：MECHANISM
+
+- paraphrase_cn：若新时间片无新兴话题，当前后验模型与前一后验模型话题相同；若有，则当前模型会学习到额外话题，从而通过比较两个相邻切片的后验模型来检测 emergência。
+
+- rhetorical_function_cn：说明cHDP之间的比较如何实现新兴话题检测。
+
+- depends_on_cn：依赖条件HDP生成过程。
+
+- sets_up_cn：为涌现检测组件提供理论依据。
+
+- evidence_pointer：Framework Topic Modeling段末尾
+
+### 44. Emergence Detection 第一段
+
+- order：44
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Emergence Detection 第一段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：由于贝叶斯因子检验适合比较无限维非参数模型，通过比较cHDP_t和cHDP_{t-1}在新文档上的似然比，可判断候选话题是显著真实话题还是随机噪声。
+
+- rhetorical_function_cn：引入贝叶斯因子检验并解释其在非参数模型中的适用性。
+
+- depends_on_cn：依赖cHDP模型和非参数无限维特性。
+
+- sets_up_cn：为后续ELBO近似和算法提供依据。
+
+- evidence_pointer：Framework Emergence Detection第一段
+
+### 45. Emergence Detection 第二、三段
+
+- order：45
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Emergence Detection 第二、三段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：边缘似然积分难以处理，故用SVI和ELBO近似；ELBO可获得计算效率和潜在变量的统计性质。
+
+- rhetorical_function_cn：说明为什么选择SVI与ELBO近似，兼顾效率与可解释性。
+
+- depends_on_cn：依赖贝叶斯因子检验需要计算似然。
+
+- sets_up_cn：为算法伪代码提供技术基础。
+
+- evidence_pointer：Framework Emergence Detection第二、三段
+
+### 46. Emergence Detection 算法段（Figure 2）
+
+- order：46
+
+- section：The Nonparametric Emerging Topic Detection Framework
+
+- locator：Emergence Detection 算法段（Figure 2）
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：算法初始化使用前一话题分布，循环执行小批量E步和M步至收敛，然后计算两个似然并求贝叶斯因子统计量，返回显著新兴话题。
+
+- rhetorical_function_cn：将框架操作化为可直接运行的算法流程。
+
+- depends_on_cn：依赖SVI和贝叶斯因子细节。
+
+- sets_up_cn：为评价部分提供明确实现。
+
+- evidence_pointer：Figure 2伪代码
+
+### 47. Experiment Design 第一段
+
+- order：47
+
+- section：Evaluation
+
+- locator：Experiment Design 第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：遵循已有文献设计两个相邻时间片的实验：第一片学习既有话题，第二片检测带新兴话题的未见列表。
+
+- rhetorical_function_cn：说明实验设计的基本逻辑，使评价可复现。
+
+- depends_on_cn：依赖框架的新兴话题比较机制。
+
+- sets_up_cn：为测试集构造和指标选择提供框架。
+
+- evidence_pointer：Evaluation Experiment Design第一段
+
+### 48. Experiment Design 第二、三段
+
+- order：48
+
+- section：Evaluation
+
+- locator：Experiment Design 第二、三段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：由于缺乏含新兴话题ground truth的DNM基准，构造Alphabay测试集：选6类黑客相关列表为正例，其余为负例，并按比例划分训练和测试集。
+
+- rhetorical_function_cn：建立有ground truth的benchmark，支撑量化比较。
+
+- depends_on_cn：依赖实验设计逻辑。
+
+- sets_up_cn：为后续方法比较提供数据基础。
+
+- evidence_pointer：Evaluation Experiment Design第二、三段
+
+### 49. Experiment Design 第四段
+
+- order：49
+
+- section：Evaluation
+
+- locator：Experiment Design 第四段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：基线包括AOLDA、ATD、TopicSketch和BBTM，并对BBTM和AOLDA实现SVI以加快基线运行时间。
+
+- rhetorical_function_cn：定义对照方法，并对基线进行公平加速处理。
+
+- depends_on_cn：依赖文献中的state-of-art方法。
+
+- sets_up_cn：为结果表中的性能对比选定对照组。
+
+- evidence_pointer：Evaluation Experiment Design第四段
+
+### 50. Experiment Design 第五段
+
+- order：50
+
+- section：Evaluation
+
+- locator：Experiment Design 第五段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用精度、召回、F、UMass话题一致性和处理器时间分别评估有效性与效率，并说明UMass coherence适用原因。
+
+- rhetorical_function_cn：解释每个指标的选择和用途，使评价标准透明。
+
+- depends_on_cn：依赖benchmark构造。
+
+- sets_up_cn：为结果报告提供指标定义。
+
+- evidence_pointer：Evaluation Experiment Design第五段
+
+### 51. Experiment Results 第一段（Table 2）
+
+- order：51
+
+- section：Evaluation
+
+- locator：Experiment Results 第一段（Table 2）
+
+- move_code：RESULT
+
+- paraphrase_cn：NPETD在宏平均上优于基线，召回、F、一致性最高，精度第二。
+
+- rhetorical_function_cn：报告主要量化结果，支撑有效性主张。
+
+- depends_on_cn：依赖实验执行和指标计算。
+
+- sets_up_cn：为机制解释和逐类别分析提供总览。
+
+- evidence_pointer：Table 2
+
+### 52. Experiment Results 第一段后半
+
+- order：52
+
+- section：Evaluation
+
+- locator：Experiment Results 第一段后半
+
+- move_code：MECHANISM
+
+- paraphrase_cn：AOLDA与ATD差异可归结为话题处理方式；NPETD的优势可能源于利用非参数建模捕捉同一列表中多个话题的灵活性。
+
+- rhetorical_function_cn：将性能差异解释到设计机制层面，回扣HDP灵活性。
+
+- depends_on_cn：依赖宏平均结果。
+
+- sets_up_cn：为贡献中的机制主张提供解释。
+
+- evidence_pointer：Experiment Results第一段末尾
+
+### 53. Experiment Results 第二段（Figure 3）
+
+- order：53
+
+- section：Evaluation
+
+- locator：Experiment Results 第二段（Figure 3）
+
+- move_code：RESULT
+
+- paraphrase_cn：逐类别显示NPETD在exploits、hosting、socks、VPN上F最高，并在多个类别上时间复杂度显著更低，如botnet/malware 51秒对24分钟。
+
+- rhetorical_function_cn：展示结果的一致性和效率优势，增强稳健性。
+
+- depends_on_cn：依赖宏平均结果和逐类别数据。
+
+- sets_up_cn：引出对稳定有效性和效率的结论。
+
+- evidence_pointer：Figure 3
+
+### 54. An Emerging Topic Detection Example Using NPETD 开头
+
+- order：54
+
+- section：Evaluation
+
+- locator：An Emerging Topic Detection Example Using NPETD 开头
+
+- move_code：TRANSITION
+
+- paraphrase_cn：为展示框架的实际效用，将其应用于主要黑客论坛Altenens。
+
+- rhetorical_function_cn：从受控量化实验转向真实世界应用，扩展外部效度。
+
+- depends_on_cn：依赖之前实验结果。
+
+- sets_up_cn：为案例的具体描述和发现铺垫。
+
+- evidence_pointer：Evaluation Example首段
+
+### 55. An Emerging Topic Detection Example Using NPETD 第二段
+
+- order：55
+
+- section：Evaluation
+
+- locator：An Emerging Topic Detection Example Using NPETD 第二段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：收集Altenens论坛8,778条英文帖子，按月划分为22个时间片，进行预处理后应用NPETD检测每月新兴话题。
+
+- rhetorical_function_cn：说明案例数据的来源、预处理和时间粒度，保证可复现。
+
+- depends_on_cn：依赖框架的输入要求。
+
+- sets_up_cn：为Table 3中的检测结果提供数据基础。
+
+- evidence_pointer：Evaluation Example第二段
+
+### 56. An Emerging Topic Detection Example Using NPETD 第三段（Table 3）
+
+- order：56
+
+- section：Evaluation
+
+- locator：An Emerging Topic Detection Example Using NPETD 第三段（Table 3）
+
+- move_code：RESULT
+
+- paraphrase_cn：NPETD检测出多个新兴话题，如2019年11月新征求信用卡/借记卡、2020年1月新被盗邮箱账号、2020年3月新卡贩和高级卡列表，并给出top words。
+
+- rhetorical_function_cn：报告案例检测到的话题实例，展示具体价值。
+
+- depends_on_cn：依赖论坛测试床。
+
+- sets_up_cn：为讨论这些发现对各利益相关者的启示提供素材。
+
+- evidence_pointer：Table 3
+
+### 57. An Emerging Topic Detection Example Using NPETD 第四段
+
+- order：57
+
+- section：Evaluation
+
+- locator：An Emerging Topic Detection Example Using NPETD 第四段
+
+- move_code：CONTEXT
+
+- paraphrase_cn：这些发现对网上零售商、邮箱/Netflix公司、执法部门等有不同用途，如假日季防欺诈、保护用户和调查新兴卡贩。
+
+- rhetorical_function_cn：将检测到的话题连接到实际利益相关者，强化实践意义。
+
+- depends_on_cn：依赖Table 3中的话题。
+
+- sets_up_cn：为结论中的实践贡献提供支撑。
+
+- evidence_pointer：Evaluation Example第四段
+
+### 58. P1
+
+- order：58
+
+- section：Conclusion
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结提出NPETD框架并基于DNM实验和Altenens演示验证其有效性和实用性。
+
+- rhetorical_function_cn：在结论中重申核心贡献和整体论证。
+
+- depends_on_cn：依赖全部前文。
+
+- sets_up_cn：为分点贡献声明做总体引言。
+
+- evidence_pointer：Conclusion第一段
+
+### 59. P2
+
+- order：59
+
+- section：Conclusion
+
+- locator：P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第一贡献是新兴话题检测框架的设计、开发与评价；第二贡献是回应“黑帽研究”呼吁，展示在黑客社区中开展IS安全研究的可行性与价值。
+
+- rhetorical_function_cn：明确两条贡献，分别对应方法领域和IS安全领域。
+
+- depends_on_cn：依赖结论总述。
+
+- sets_up_cn：为后续一般化推广和边界声明提供基础。
+
+- evidence_pointer：Conclusion第二段
+
+### 60. P3
+
+- order：60
+
+- section：Conclusion
+
+- locator：P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：框架可扩展到其他IS语境，如专利中新技术出现、社交媒体症状话题、组织战略预见等。
+
+- rhetorical_function_cn：界定框架的一般适用性，并迁移到其他IS问题。
+
+- depends_on_cn：依赖框架和网络安全应用的经验。
+
+- sets_up_cn：为未来研究提供方向。
+
+- evidence_pointer：Conclusion第三段
+
+### 61. P3 后半
+
+- order：61
+
+- section：Conclusion
+
+- locator：P3 后半
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：指出新兴话题对时间视角的动态研究也很重要，隐含未来理论研究方向。
+
+- rhetorical_function_cn：将框架的应用从实践延伸到理论探索，暗示更广泛的未来价值。
+
+- depends_on_cn：依赖一般化推广。
+
+- sets_up_cn：收尾全文。
+
+- evidence_pointer：Conclusion第三段末尾
+
+## 写作技术
+
+- gap_construction_cn：通过分层构建：从黑客社区威胁现实，到威胁分类方法的局限性，再到TDT方法的两个技术局限，最后落到四个研究缺口；缺口类型是“现有制品不能实现”（无法检测未知威胁）+“现有方法效率不足”+“现有方法假设限制”。
+
+- signposting_cn：摘要末尾预告；引言末段用“To evaluate...”预告评估；每个major section开头用总结句引导；相关工作总结出四个gaps；框架部分先给总体图再分组件。
+
+- transition_logic_cn：段落间以“Equally important”、“Albeit”、“To that end”、“Taken together”等连接；从威胁分类流转向新兴威胁检测流，从TDT引向非参数模型，从实验转向案例。
+
+- claim_evidence_rhythm_cn：每个主要主张后紧跟表格/图/具体数字；在实验部分先给宏平均，再逐类别解释，再归因机制；在案例部分先给话题列表，再给现实解释。
+
+- benchmark_narrative_cn：benchmark不是孤立存在，而是嵌在“设计科学评价”叙事中，先说明为什么需要该benchmark（基于Alphabay类别结构构造ground truth），再说明指标为何合适，再与state-of-art对比，最后将benchmark结果作为有效性证据。
+
+- theory_return_cn：在结果讨论中，将性能差异回扣到HDP灵活性和SVI效率；在结论中将结果上升为一般设计知识并推广到其他IS现象。
+
+- contribution_positioning_cn：明确把贡献定位为三类：方法框架贡献、网络安全“黑帽”研究贡献、设计科学/IS语境推广贡献；并引用Mahmood et al.的呼吁来提高合法性。
+
+- novelty_protection_cn：通过将框架与state-of-art基线对比、记录具体运行时间、展示真实论坛发现，把贡献锚定在可观察差异上；同时用设计科学语言将其表述为可复用的设计知识而非一次性调参结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写研究背景与问题重要性：使用现实犯罪/损失数据，描述黑客社区数据源
+
+- research_job_cn：找到领域中的真实危害和机会
+
+- required_evidence_cn：行业报告、FBI数据、已有文献
+
+- transition_to_next_cn：从数据源引到已有计算方法
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述现有方法与指出缺口：分类现有威胁情报方法并指出它们无法处理新兴威胁
+
+- research_job_cn：系统梳理威胁分类和新兴威胁检测方法并识别技术局限
+
+- required_evidence_cn：对LDA/HDP/TDT方法的比较和gap总结
+
+- transition_to_next_cn：用“Taken together”引出四个gap
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入理论基础并翻译为设计要求：选择HDP/SVI/贝叶斯因子并说明为何适合解决gap
+
+- research_job_cn：将方法知识映射为框架组件
+
+- required_evidence_cn：HDP无限维、SVI效率、贝叶斯因子适应非参数
+
+- transition_to_next_cn：从需求到框架
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：构建制品并形式化算法：详细设计条件HDP、ELBO近似和算法伪代码
+
+- research_job_cn：实现可运行框架
+
+- required_evidence_cn：数学公式和算法步骤
+
+- transition_to_next_cn：从设计到评价
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：构造受控基准测试并运行实验：根据领域知识构造ground truth测试集，选择baseline和指标
+
+- research_job_cn：收集数据、预处理、运行实验、统计检验
+
+- required_evidence_cn：表/图结果
+
+- transition_to_next_cn：从量化评估到实际应用
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：在第二个真实环境展示效用：选择不同类型黑客社区，运行框架，解释发现
+
+- research_job_cn：收集论坛数据、解释话题与现实关联
+
+- required_evidence_cn：代表性话题表
+
+- transition_to_next_cn：从结果到贡献
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：撰写贡献与边界：将结果定位为设计知识，回扣引言缺口，提出推广场景和局限
+
+- research_job_cn：根据证据限定主张
+
+- required_evidence_cn：已展示的结果
+
+- transition_to_next_cn：结束
+
+### most_transferable_moves_cn
+
+1. 从现实问题到技术缺口的层层收窄
+
+2. 文献综述以四个gap结束并直接映射到设计目标
+
+3. 在实验中对基线也做公平加速（如给BBTM/AOLDA实现SVI）
+
+4. 用两个不同类型数据展示有效性和效用
+
+5. 用设计科学语言把benchmark结果抽象为设计知识
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 暗网数据获取和预处理（Alphabay已关闭，数据收集涉及法律/伦理风险）
+
+2. 真实黑客论坛数据的访问（需合法合规）
+
+3. 理解HDP/SVI/贝叶斯因子的深度数学功底
+
+4. 构建高质量ground truth需要领域知识
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只声称“非参数”而不展示话题数灵活性的证据
+
+2. 不能只做benchmark而没有第二个场景证明实用价值
+
+3. 不能把性能提升完全归于单一组件而不做消融
+
+4. 不能在无真实威胁事件关联时把话题解释为实际攻击
+
+5. 不能在没有统计检验时声称显著优于基线
+
+- single_best_description_of_the_routine_cn：先指出真实世界的威胁场景与方法缺口，用理论方法知识构造设计制品，再用受控benchmark证明有效和高效，最后用第二个现场应用证明实用价值，并将结果提升为可复用设计知识。
+
+## 分析边界
+
+文章正文完整，但PDF转写公式和图片可能不完整；Table 1/2/3和Figure 1/2/3均可辨认；算法伪代码完整。对句子级定位主要依据章节和段落，无法提供精确页码。

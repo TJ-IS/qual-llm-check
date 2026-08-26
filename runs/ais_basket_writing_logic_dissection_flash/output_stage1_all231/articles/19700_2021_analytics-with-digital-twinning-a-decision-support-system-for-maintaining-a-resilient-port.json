@@ -1,0 +1,1038 @@
+{
+  "record_id": "19700",
+  "source_file": "19700_2021_analytics-with-digital-twinning-a-decision-support-system-for-maintaining-a-resilient-port.md",
+  "title": "Analytics with digital-twinning: A decision support system for maintaining a resilient port",
+  "authors": "Chenhao Zhou; Jie Xu; Elise Miller-Hooks; Weiwen Zhou; Chun-Hung Chen; Loo Hay Lee; Ek Peng Chew; Haobin Li",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113496",
+  "fulltext_chars": 78867,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "operational_efficiency",
+  "source_application_context": "logistics_transport_supply_chain_and_manufacturing",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:50.879392+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何为港口构建一个能够计算韧性并推荐事件后恢复行动的决策支持系统，从而克服传统数学建模在捕获操作细节和普通运营不确定性方面的局限？",
+    "artifact_and_design_cn": "一个基于数字孪生（digital twin）和最优计算预算分配（OCBA）的港口韧性决策支持系统（DSS）。系统包含恢复分析模块（通过高保真数字孪生评估候选恢复行动）和韧性分析模块（计算事件前后性能比等韧性指标），并集成OCBA以在有限仿真预算下高效分配仿真次数、最大化正确选择最佳行动的概率。数字孪生采用开源O2DES.Net框架，包含码头、堆场、AGV交通网络等层次化详细子模型。",
+    "objective_outcomes_cn": "在三个电力短缺情景下，DSS推荐的最佳恢复行动比默认的4:1配置行动分别提高BoA率12.51、15.74和12.06个百分点；确定性数字孪生会高估BoA率最多约24.97个百分点、导致次优行动选择；OCBA在同等预算下比等分配（EQ）实现更高的正确选择概率（如情景1从0.65提升至0.88），并在达到相同PCS时可加速2.40倍以上。",
+    "core_contribution_cn": "作者声称首次以数字孪生粒度计算港口韧性，并首次在韧性评估中纳入普通运营不确定性；同时集成OCBA使高保真数字孪生在实际规模应用中的实时韧性计算和更新成为可能。",
+    "whole_argument_in_one_paragraph_cn": "文章首先指出港口在面临电力中断等灾害时需要韧性评估，但精确预测中断影响和恢复行动效果需要捕获复杂操作细节，传统数学建模无法做到。接着引入数字孪生和OCBA两个知识基础，构建了由恢复分析和韧性分析组成的DSS。数字孪生通过离散事件仿真高保真复制港口操作及不确定性，OCBA在有限仿真预算下智能分配重复次数以选出最佳恢复行动。随后在真实规模合成数据案例中，三个电力短缺情景表明DSS推荐行动显著优于遵循4:1惯例的默认行动；与固定均值的确定性数字孪生比较，证明忽略普通运营不确定性会高估韧性并可能误选行动；进一步通过bootstrap实验证明OCBA比等分配显著提升正确选择概率和计算效率。结论将研究成果提升为对港口韧性计算方法、数字孪生应用边界以及仿真优化价值的一般性贡献，并讨论未来扩展。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章主要活动是提出一个DSS制品（恢复分析+韧性分析，集成数字孪生和OCBA），通过案例研究进行评价，并总结可复用的设计知识（如OCBA用于高保真仿真决策支持）。不是纯理论推导实验，也不是以计算benchmark为主要贡献，而是明确面向构建和评价设计科学制品。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "叙事主线为：现有数学建模和确定性方法在韧性计算中存在性能缺口（无法处理操作细节和不确定性）→ 构建数字孪生DSS制品 → 通过案例研究benchmark（默认行动、确定性模型、EQ分配）→ 一般化到设计知识和理论贡献。符合性能缺口—制品—benchmark—一般化设计知识的弧线。",
+  "research_program": {
+    "study_or_phase_count": 4,
+    "overall_sequence_cn": "阶段1为设计构建阶段，确立DSS架构和数字孪生/OCBA集成；阶段2为案例研究，验证DSS在三个电力短缺情景下能提升BoA率和韧性评估；阶段3通过随机vs确定性数字孪生比较，说明随机建模的必要性；阶段4通过OCBA vs EQ比较，解决计算效率问题。各阶段累积形成：有效制品—价值机制—可行性的完整论证。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "DSS架构设计与数字孪生构建（设计阶段）",
+        "question_cn": "如何设计一个能够捕捉港口操作细节和不确定性的DSS？",
+        "inputs_and_setting_cn": "韧性定义文献（Chen/Miller-Hooks）、数字孪生概念、OCBA理论、已有C4NGP数字孪生模型及港口运营专家知识",
+        "designed_or_compared_object_cn": "DSS架构（恢复分析模块+韧性分析模块）、数字孪生层次模型（QC/YQ/AGV网络）、OCBA集成设计",
+        "baseline_control_or_counterfactual_cn": "与传统数学建模、商业仿真软件进行概念对比",
+        "objective_metrics": [
+          "架构模块完整性",
+          "保真度（能否模拟操作细节与不确定性）",
+          "可集成性（能否与OCBA和TOS集成）"
+        ],
+        "analysis_method_cn": "设计科学与基于已有验证的定性描述",
+        "main_result_cn": "得到包含数字孪生和OCBA的完整DSS架构，数字孪生基于已验证的O2DES.Net模型进一步升级支持AGV充电策略",
+        "argumentative_role_cn": "确立制品构造，为后续实证评价提供对象",
+        "remaining_uncertainty_cn": "DSS和数字孪生在实际规模情景下的有效性和计算可行性尚未验证",
+        "link_to_next_phase_cn": "需要案例研究验证DSS能否产生优于常规实践的最佳恢复行动",
+        "evidence_pointers": [
+          "Section 3",
+          "Fig. 2",
+          "Fig. 3",
+          "Section 3.1验证说明"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "案例研究：电力短缺情景下恢复行动评估与韧性计算",
+        "question_cn": "在真实规模港口中，DSS能否评估韧性并选择优于默认行动的恢复行动？",
+        "inputs_and_setting_cn": "真实但合成的港口数据（7个泊位、700万TEU年吞吐量），三个电力短缺情景（70%、60%、50%短缺），每个情景的候选恢复行动（不同QC/AGV组合），随机数字孪生模型",
+        "designed_or_compared_object_cn": "每个候选恢复行动（表1），比较DSS选择的最佳行动 vs 默认4:1行动",
+        "baseline_control_or_counterfactual_cn": "默认恢复行动（4:1 AGV/QC比例）作为常见工业实践基准；以事件前BoA率98.58%作为韧性基线",
+        "objective_metrics": [
+          "BoA率",
+          "韧性R(s)=Y(x*)/Y0",
+          "固有应对能力（默认行动BoA/事件前BoA）"
+        ],
+        "analysis_method_cn": "每个行动1000次IID仿真重复，样本均值选最佳行动，计算BoA和韧性",
+        "main_result_cn": "DSS最佳行动BoA率在三个情景为91.90%、76.66%、55.45%，分别比默认行动高12.51、15.74、12.06个百分点；默认行动在三个情景中均非最佳。",
+        "argumentative_role_cn": "证明DSS能产生更优恢复行动，从而提升韧性水平估计",
+        "remaining_uncertainty_cn": "结果基于合成数据，未在实际中断事件中部署验证；未说明韧性提升是否仅在小规模问题上成立",
+        "link_to_next_phase_cn": "由于DSS使用随机数字孪生，需要证明随机性建模的不可替代性，引入与确定性数字孪生的对比",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 1",
+          "Table 2",
+          "Section 4.3",
+          "Fig. 5",
+          "Fig. 6"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "随机解决方案价值：随机 vs 确定性数字孪生",
+        "question_cn": "在韧性评估中考虑普通运营不确定性是否必要？忽略随机性会如何影响行动选择和韧性估计？",
+        "inputs_and_setting_cn": "同一情景和候选行动；确定性数字孪生（将船舶到达、卡车到达和服务率固定为均值，但仍保留随机操作规则以避免拥堵）",
+        "designed_or_compared_object_cn": "随机数字孪生（S-DT）与确定性数字孪生（D-DT）选择的行动和BoA估计",
+        "baseline_control_or_counterfactual_cn": "以随机数字孪生结果视为考虑真实随机性的基准；确定性版本近似传统简化模型",
+        "objective_metrics": [
+          "BoA率",
+          "行动选择是否一致",
+          "BoA高估/低估幅度"
+        ],
+        "analysis_method_cn": "两种模型各1000次重复，比较最佳行动和BoA值",
+        "main_result_cn": "确定性模型在情景1和3选错行动（情景1选行动9实际BoA仅87.39% vs 随机选行动11为91.90%）；情景2和3中确定性高估BoA（87.96% vs 76.66%，72.35% vs 55.45%），可能导致运营商误判韧性。",
+        "argumentative_role_cn": "证明普通运营不确定性显著影响韧性评估，忽略它会造成次优行动和过度自信",
+        "remaining_uncertainty_cn": "确定性模型并非完全确定（含有随机决策规则），减弱了对照的纯粹性；没有与纯数学模型比较",
+        "link_to_next_phase_cn": "随机数字孪生需要大量仿真运行，需解决计算效率，引出OCBA比较",
+        "evidence_pointers": [
+          "Section 4.4",
+          "Fig. 5",
+          "Appendix B Table B.5"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "OCBA计算效率比较",
+        "question_cn": "在有限仿真预算下，OCBA能否比等分配（EQ）更高效地选择最佳恢复行动？",
+        "inputs_and_setting_cn": "阶段2中每个行动的1000次BoA仿真输出；bootstrap重采样经验分布；M=10000",
+        "designed_or_compared_object_cn": "OCBA与等分配（EQ）在不同总预算下的正确选择概率（PCS）和加速因子",
+        "baseline_control_or_counterfactual_cn": "EQ作为朴素基线；bootstrap重采样替代昂贵的新仿真",
+        "objective_metrics": [
+          "PCS（正确选择最佳行动的概率）",
+          "加速因子（达到相同PCS时EQ消耗仿真次数 / OCBA消耗仿真次数）"
+        ],
+        "analysis_method_cn": "从阶段2的1000次输出构造经验分布，通过bootstrap重复选择（M=10000）估计PCS，比较EQ和OCBA",
+        "main_result_cn": "在每行动60次预算下，OCBA的PCS为0.88/0.56/0.92，EQ为0.65/0.52/0.78；加速因子随预算增加而增大，最高达2.61/2.31/2.40。",
+        "argumentative_role_cn": "证明OCBA使高保真数字孪生在实时决策时间窗内可行，弥补了计算昂贵这一短板",
+        "remaining_uncertainty_cn": "PCS基于bootstrap而非新仿真；OCBA的正态性和渐近最优性假设在BoA等指标上近似成立但未严格验证",
+        "link_to_next_phase_cn": "为结论中的贡献总结和未来工作提供实证基础",
+        "evidence_pointers": [
+          "Section 4.5",
+          "Fig. 7",
+          "Table 3",
+          "Eqs. (7)-(9)"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "提出DSS制品并概括功能",
+      "说明数字孪生的作用",
+      "指出纳入普通运营不确定性的方法贡献",
+      "描述计算挑战及OCBA应对",
+      "预告案例研究结果"
+    ],
+    "introduction_moves": [
+      "建立港口重要性和韧性评估背景",
+      "引用已有韧性定义，指出依赖数学建模的局限",
+      "引入数字孪生概念并指出现有应用未覆盖港口韧性",
+      "具体化电力中断场景，说明缺乏经验和决策支持需求",
+      "提出DSS目标和两个关键贡献（普通不确定性、OCBA）",
+      "描述OCBA机制和预告案例效果",
+      "将研究置于工业4.0背景，提升意义"
+    ],
+    "theory_and_knowledge_moves": [
+      "综述港口/航运DSS、数字孪生、仿真优化、韧性研究",
+      "识别Nair等的缺陷（确定性假设、粒度不足）",
+      "指出文献缺口：无数字孪生粒度港口韧性，无普通不确定性纳入"
+    ],
+    "artifact_design_moves": [
+      "介绍DSS架构和两个模块",
+      "描述数字孪生层次结构和操作规则",
+      "验证数字孪生可信度",
+      "引入OCBA公式和顺序分配算法",
+      "定义韧性度量公式和概率扩展"
+    ],
+    "evaluation_moves": [
+      "案例研究设计（情景、行动、实验参数）",
+      "恢复分析结果比较",
+      "随机价值分析",
+      "OCBA效率分析"
+    ],
+    "discussion_and_contribution_moves": [
+      "重申贡献（首次数字孪生粒度、首次普通不确定性）",
+      "总结案例结果并量化提升",
+      "讨论未来方向（准备决策、实时反馈、OCBA元模型）"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "韧性定义与度量：Miller-Hooks等、Chen和Miller-Hooks提出的事件后/事件前性能比",
+      "数字孪生概念：Glaessgen和Stargel描述的物理模型集成与高保真仿真",
+      "OCBA理论：Chen和Lee等提出的最优计算预算分配用于最大化正确选择概率",
+      "港口运营领域知识：BoA指标、设备配置惯例、80-20堆存规则等"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "韧性定义直接决定了DSS中韧性分析模块的度量公式；数字孪生概念直接决定了制品使用高保真仿真而非数学约束；OCBA理论直接决定了恢复分析模块的仿真预算分配策略；这些知识被前瞻性纳入设计，并通过案例实验直接检验。",
+    "translation_chain_cn": "韧性定义（需求：计算事件前后性能比）→ 需要精确预测事件前后性能 → 数字孪生提供高保真操作仿真（需求：替代数学约束）→ 高保真仿真成本高（需求：有限预算下高效选优）→ OCBA分配仿真次数（需求：快速实时决策）→ 案例实验验证每个环节。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "韧性为事件后性能与事件前性能之比",
+        "mechanism_cn": "通过KPI比率量化恢复能力，从而比较不同恢复行动",
+        "design_requirement_cn": "DSS必须能估计事件前后的KPI值",
+        "artifact_choice_cn": "韧性分析模块采用公式(4)计算R(s)=Y(x*)/Y0",
+        "evaluated_contrast_cn": "DSS最佳行动 vs 默认行动下的韧性",
+        "objective_result_cn": "DSS行动使BoA率提升12-16个百分点，韧性显著高于默认",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Section 4.3 Table 2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "数字孪生通过高保真仿真镜像真实系统，可捕获复杂交互和不确定性",
+        "mechanism_cn": "详细模拟QC/YC/AGV等设备交互及操作随机性，提供更真实的性能估计",
+        "design_requirement_cn": "需要使用高保真仿真替代数学约束来预测中断影响",
+        "artifact_choice_cn": "采用O2DES.Net构建层次化数字孪生模型，包含QC子模型、YC子模型、AGV网络",
+        "evaluated_contrast_cn": "随机数字孪生 vs 确定性数字孪生（传统简化）",
+        "objective_result_cn": "确定性模型高估BoA或选错行动，随机数字孪生提供更准确韧性估计",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Section 4.4 Fig. 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "OCBA在有限预算下最大化正确选择最佳行动的概率",
+        "mechanism_cn": "基于样本均值和方差按渐近最优比例分配仿真次数，避免在明显差的行动上浪费预算",
+        "design_requirement_cn": "DSS必须在短时间内返回恢复行动建议，不能对所有行动等量运行大量仿真",
+        "artifact_choice_cn": "恢复分析模块集成OCBA顺序分配算法",
+        "evaluated_contrast_cn": "OCBA vs 等分配（EQ）",
+        "objective_result_cn": "OCBA在相同预算下PCS更高，达到相同PCS可节省2.4倍以上预算",
+        "evidence_pointers": [
+          "Section 3.2",
+          "Section 4.5 Fig. 7 Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "港口运营中存在经验规则（如80-20堆存、QC分配、车辆池）",
+        "mechanism_cn": "这些规则影响设备利用率和操作效率，必须在仿真中体现",
+        "design_requirement_cn": "数字孪生必须包含实际运营策略",
+        "artifact_choice_cn": "在数字孪生中显式建模80-20规则、动态车辆池等",
+        "evaluated_contrast_cn": "未设置直接对照；作为模型可信度论据",
+        "objective_result_cn": "模型通过港口运营商验证，BoA等指标匹配实际",
+        "evidence_pointers": [
+          "Section 3.1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "案例研究（三个电力短缺情景）",
+      "基准对照（默认行动 vs DSS推荐行动）",
+      "消融/反事实（确定性数字孪生 vs 随机数字孪生）",
+      "算法比较（OCBA vs EQ通过bootstrap重采样）"
+    ],
+    "why_these_evaluations_cn": "需要分别回答三个问题：DSS是否优于现行实践？随机不确定性是否重要？计算效率是否足以支持实时决策？每个评价对应一个论证缺口，从有效性到机制到可行性逐步推进。",
+    "benchmark_and_contrast_chain_cn": "首先用默认4:1行动作为工业实践基准，证明DSS能提升BoA；然后用确定性数字孪生代表传统数学简化，证明随机建模的必要性；最后用EQ代表朴素仿真预算分配，证明OCBA的效率优势。三个对照互相独立但共同支撑DSS的整体价值：能提供更优行动、准确评估不确定性，且计算可行。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "DSS推荐的最佳恢复行动优于默认行动",
+        "evidence_cn": "表2三个情景BoA率分别提升12.51、15.74、12.06个百分点",
+        "status_cn": "直接支持"
+      },
+      {
+        "claim_cn": "考虑普通运营不确定性对于韧性评估必不可少",
+        "evidence_cn": "图5和附录B显示确定性模型选错行动或高估BoA（情景2高估11.3，情景3高估16.9个百分点）",
+        "status_cn": "直接支持，但确定性模型仍含部分随机性，对照不完美"
+      },
+      {
+        "claim_cn": "OCBA能显著提高计算效率",
+        "evidence_cn": "图7和表3显示OCBA在相同预算下PCS更高，加速因子最高2.61/2.40",
+        "status_cn": "直接支持，但基于bootstrap而非新仿真"
+      },
+      {
+        "claim_cn": "数字孪生提供数学建模无法获得的粒度",
+        "evidence_cn": "未直接对比数学建模，仅通过确定性模型近似论证",
+        "status_cn": "部分支持，主要是概念论证"
+      }
+    ],
+    "internal_validity_strategy_cn": "通过大量IID重复（1000次）稳定估计BoA；使用固定种子和预热期确保稳态；使用bootstrap重采样避免额外仿真成本；明确定义KPI和候选行动集。",
+    "external_validity_strategy_cn": "使用基于真实港口数据合成但逼真的参数，模型经过港口运营商验证；情景由港口经验派生；物理规模为中型到大型码头。",
+    "what_is_not_actually_tested_cn": "数字孪生与真实纯数学建模的定量比较；实际港口部署或真实电力中断事件中的表现；OCBA假设（正态性、独立性）在复杂数字孪生中的严格验证；韧性度量本身的验证。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的DSS能够有效计算港口韧性并选择最佳恢复行动；OCBA能显著减少仿真预算同时保持高正确选择概率。",
+    "artifact_claim_cn": "数字孪生高保真地复制了港口操作和不确定性，优于依赖确定性假设的数学建模；OCBA的集成使高保真DSS在实时场景下可行。",
+    "mechanism_claim_cn": "普通运营不确定性会显著影响韧性估计，忽略它会导致高估韧性并可能采用次优行动。",
+    "boundary_claim_cn": "结果适用于电力短缺情景下的集装箱码头，情景集和候选行动集由用户外部指定；方法对KPI可定制；可扩展至其他传统行业。",
+    "reusable_design_knowledge_cn": "将数字孪生与仿真预算分配结合的双模块DSS架构；OCBA与高保真仿真集成可作为复杂系统实时决策支持的计算策略。",
+    "theoretical_contribution_cn": "将数字孪生引入韧性计算，扩展了韧性度量方法以纳入普通运营不确定性；显示OCBA可应用于韧性分析的高维决策问题。",
+    "how_discussion_closes_intro_gap_cn": "结论重提引言中提出的数学建模局限和缺少数字孪生粒度韧性研究的缺口，并以案例证据表明本DSS填补了该缺口，同时将电力中断作为新兴威胁强调其现实意义。",
+    "overclaim_or_unsupported_leaps_cn": "作者声称“首次在韧性评估中考虑普通不确定性”，但仅通过一个合成案例支持，未与其他不确定性处理方式（如分布鲁棒优化）对比；断言数字孪生优于数学建模，但未直接与数学建模实验比较；OCBA的效率基于bootstrap而非真实重复运行。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出一个基于数字孪生韧性分析的DSS，用于港口韧性计算和更新。",
+      "rhetorical_function_cn": "摘要开头直接声明研究的核心制品和目标。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续描述DSS功能定下主题。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DSS在给定港口设计、运营和预设恢复措施的情况下，评估可能中断事件下的港口韧性。",
+      "rhetorical_function_cn": "说明DSS的输入和功能范围。",
+      "depends_on_cn": "上一句提出的制品",
+      "sets_up_cn": "强调韧性计算依赖设计、运营和恢复行动。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "数字孪生提供足够保真度，以推测在潜在中断事件下采取恢复行动后的港口性能。",
+      "rhetorical_function_cn": "解释数字孪生为什么能支持DSS。",
+      "depends_on_cn": "韧性的预测需求",
+      "sets_up_cn": "为后文强调数字孪生建模价值铺垫。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P1 S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "除对冲概率已知的中断事件外，该方法还能在日常运营不确定性中纳入韧性评估。",
+      "rhetorical_function_cn": "突出方法创新点之一。",
+      "depends_on_cn": "数字孪生的随机建模能力",
+      "sets_up_cn": "与后文确定性方法对比形成张力。",
+      "evidence_pointer": "Abstract P1 S4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P1 S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这种纳入日常不确定性的能力是现有其他韧性量化方法通常不具备的。",
+      "rhetorical_function_cn": "指出文献缺口以抬高贡献。",
+      "depends_on_cn": "上一句声称的能力",
+      "sets_up_cn": "为贡献声明做铺垫。",
+      "evidence_pointer": "Abstract P1 S5"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P1 S6",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为应对数字孪生在实际规模应用中的计算挑战，采用最优计算预算分配策略提高计算效率。",
+      "rhetorical_function_cn": "引出计算问题及解决方案。",
+      "depends_on_cn": "高保真仿真运行耗时",
+      "sets_up_cn": "预告OCBA的引入。",
+      "evidence_pointer": "Abstract P1 S6"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "P1 S7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "真实规模港口的数值实验证明了DSS的有效性和在韧性估计中考虑日常操作不确定性的关键性。",
+      "rhetorical_function_cn": "概要给出证据，增强可信度。",
+      "depends_on_cn": "前文的设计和方法",
+      "sets_up_cn": "为正文的案例研究做预告。",
+      "evidence_pointer": "Abstract P1 S7"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "港口是支持全球和区域贸易的关键角色，是陆海货物流动的主要接口。",
+      "rhetorical_function_cn": "建立研究领域的重要背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为下面强调中断影响提供宏大规模。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "危险和中断原因可能显著影响港口运营。",
+      "rhetorical_function_cn": "引入具体现实问题。",
+      "depends_on_cn": "港口重要性",
+      "sets_up_cn": "为韧性评估需求铺垫。",
+      "evidence_pointer": "Introduction P1 S2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "为助力减少灾害影响，采用韧性概念来评估港口在潜在灾害情景下的准备程度和适应策略。",
+      "rhetorical_function_cn": "引出韧性作为解决中断问题的概念框架。",
+      "depends_on_cn": "中断影响",
+      "sets_up_cn": "定义韧性研究的核心地位。",
+      "evidence_pointer": "Introduction P1 S3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P1 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "基于Chen和Miller-Hooks的铁路联运网络工作，Nair等认识到港口韧性来自快速且经济地恢复功能到接近事件前水平。",
+      "rhetorical_function_cn": "引入已有韧性定义和来源。",
+      "depends_on_cn": "韧性评估背景",
+      "sets_up_cn": "为后文说明韧性度量奠定基础。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P1 S5",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "这种特性取决于港口的设计、运营和事件后响应能力。",
+      "rhetorical_function_cn": "将韧性归因于可管理的因素，为DSS设计提供理论依据。",
+      "depends_on_cn": "韧性定义",
+      "sets_up_cn": "说明DSS需要覆盖设计、运营和恢复行动。",
+      "evidence_pointer": "Introduction P1 S5"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P1 S6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "韧性通过数学建模方法计算，但该方法需要预测中断对运营的影响和恢复行动的有效性，而这需要详细模型。",
+      "rhetorical_function_cn": "指出现有数学建模的预测限制。",
+      "depends_on_cn": "韧性计算方式",
+      "sets_up_cn": "为引入数字孪生做铺陈。",
+      "evidence_pointer": "Introduction P1 S6"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P1 S7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这种预测需要详细操作和设施影响模型，难以在封闭数学形式中表述。",
+      "rhetorical_function_cn": "深化数学建模局限的具体理由。",
+      "depends_on_cn": "上一句的预测需求",
+      "sets_up_cn": "为数字孪生作为替代方案提供直接动因。",
+      "evidence_pointer": "Introduction P1 S7"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P1 S8",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为此开发了一个利用数字孪生能力和仿真优化进展的港口韧性量化DSS。",
+      "rhetorical_function_cn": "直接提出研究目标和制品。",
+      "depends_on_cn": "数学建模局限",
+      "sets_up_cn": "引出本文的核心方法。",
+      "evidence_pointer": "Introduction P1 S8"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P1 S9",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "数字孪生取代原模型中的相关约束以捕获操作细节，从而复制复杂的交互活动，提高韧性估计的真实性。",
+      "rhetorical_function_cn": "解释数字孪生如何弥补数学建模不足。",
+      "depends_on_cn": "DSS引入",
+      "sets_up_cn": "说明制品的技术机制。",
+      "evidence_pointer": "Introduction P1 S9"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "Glaessgen和Stargel将数字孪生概念描述为通过多物理、多尺度和随机仿真集成物理模型，并利用历史和传感器数据。",
+      "rhetorical_function_cn": "正式介绍数字孪生知识基础。",
+      "depends_on_cn": "数字孪生名词首次出现",
+      "sets_up_cn": "建立数字孪生的学术定义。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P2 S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "计算技术进步使数字孪生已应用于制造、海洋和建筑等领域的复杂决策。",
+      "rhetorical_function_cn": "展示数字孪生已有应用领域。",
+      "depends_on_cn": "数字孪生定义",
+      "sets_up_cn": "为“扩展至港口韧性”提供先例背景。",
+      "evidence_pointer": "Introduction P2 S3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P2 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "本文旨在将其应用扩展到港口韧性分析。",
+      "rhetorical_function_cn": "明确数字孪生应用领域的空白。",
+      "depends_on_cn": "原领域应用综述",
+      "sets_up_cn": "为全文核心创新点铺垫。",
+      "evidence_pointer": "Introduction P2 S4"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P3 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "绿色港口倡议推动码头电气化，但这也带来了因电力中断导致的新运营脆弱点。",
+      "rhetorical_function_cn": "引入具体的新兴问题场景。",
+      "depends_on_cn": "绿色港口背景",
+      "sets_up_cn": "为案例研究提供现实场景。",
+      "evidence_pointer": "Introduction P3 S2"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P3 S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "由于设备和过程交互复杂，无法清楚知道有限电力的最佳分配，传统数学建模也无法捕捉所需操作细节。",
+      "rhetorical_function_cn": "点出电力中断场景下现有方法的主要不足。",
+      "depends_on_cn": "电气化场景",
+      "sets_up_cn": "为DSS的恢复行动推荐功能提供需求。",
+      "evidence_pointer": "Introduction P3 S5"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P3 S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "电力中断很少见且电气化较新，许多港口运营商没有应对经验。",
+      "rhetorical_function_cn": "说明实践中的知识匮乏，强化DSS价值。",
+      "depends_on_cn": "电气化背景",
+      "sets_up_cn": "引出运营商可能暂停运营的默认行为。",
+      "evidence_pointer": "Introduction P3 S6"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "P3 S7",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "重新分配有限电力以维持或恢复功能是韧性关键，但缺乏DSS支持时运营商很可能完全暂停运营直至电力恢复。",
+      "rhetorical_function_cn": "强调决策支持的实际必要性。",
+      "depends_on_cn": "缺乏经验",
+      "sets_up_cn": "为DSS的推荐功能提供现实意义。",
+      "evidence_pointer": "Introduction P3 S7"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文提出的DSS能够计算港口对给定中断或情景的韧性，并为任何给定情景选择最佳事件后行动。",
+      "rhetorical_function_cn": "明确DSS的功能目标。",
+      "depends_on_cn": "前述缺口",
+      "sets_up_cn": "为后文DSS架构设计提供规范。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 25,
+      "section": "Introduction",
+      "locator": "P4 S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "另一个方法贡献是在建模事件后运营时纳入普通运营不确定性，这是通过数字孪生实现的。",
+      "rhetorical_function_cn": "提前声明理论/方法贡献。",
+      "depends_on_cn": "数字孪生能力",
+      "sets_up_cn": "与后文随机vs确定性比较相呼应。",
+      "evidence_pointer": "Introduction P4 S2"
+    },
+    {
+      "order": 26,
+      "section": "Introduction",
+      "locator": "P4 S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "评估众多恢复行动需要大量仿真运行，而数字孪生运行耗时，因此存在准确性和计算时间之间的权衡。",
+      "rhetorical_function_cn": "提出计算挑战。",
+      "depends_on_cn": "恢复行动评估需求",
+      "sets_up_cn": "为引入OCBA做铺垫。",
+      "evidence_pointer": "Introduction P4 S4"
+    },
+    {
+      "order": 27,
+      "section": "Introduction",
+      "locator": "P4 S6",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "如果仿真次数不足以保证统计精度，DSS可能选到次优恢复行动，并产生错误偏低的韧性评估。",
+      "rhetorical_function_cn": "说明计算挑战的后果严重性。",
+      "depends_on_cn": "计算挑战",
+      "sets_up_cn": "论证必须解决计算效率问题。",
+      "evidence_pointer": "Introduction P4 S6"
+    },
+    {
+      "order": 28,
+      "section": "Introduction",
+      "locator": "P4 S7",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为应对这一挑战，DSS集成了OCBA这一先进的仿真优化方法，以在给定仿真预算下确定每个候选行动的运行次数。",
+      "rhetorical_function_cn": "提出计算挑战的解决方案。",
+      "depends_on_cn": "前述计算挑战",
+      "sets_up_cn": "为后文OCBA理论和实验铺路。",
+      "evidence_pointer": "Introduction P4 S7"
+    },
+    {
+      "order": 29,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "OCBA形成自身的优化问题，决策变量是每个行动仿真运行次数，目标函数是在噪声仿真估计中使用正确选择最佳行动的概率最大化。",
+      "rhetorical_function_cn": "介绍OCBA的核心思想。",
+      "depends_on_cn": "OCBA引入",
+      "sets_up_cn": "为3.2节详细公式提供高层面解释。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 30,
+      "section": "Introduction",
+      "locator": "P5 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "案例研究显示，OCBA减少了准确识别最佳恢复行动所需的运行次数，从而使高保真数字孪生方法变得可行。",
+      "rhetorical_function_cn": "预告案例中OCBA的效果。",
+      "depends_on_cn": "OCBA理论",
+      "sets_up_cn": "为后续效率实验提供预期。",
+      "evidence_pointer": "Introduction P5 S3"
+    },
+    {
+      "order": 31,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "这项研究展示了像海事物流这样的传统行业如何通过工业4.0/工业互联网时代的数字技术实现转型。",
+      "rhetorical_function_cn": "将研究置于更宏大的技术趋势中，提升意义。",
+      "depends_on_cn": "DSS能力",
+      "sets_up_cn": "为贡献定位增加宏观价值。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 32,
+      "section": "Introduction",
+      "locator": "P7 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "论文剩余部分组织如下：第2节综述，第3节描述DSS，第4节展示数值实验，第5节总结。",
+      "rhetorical_function_cn": "提供阅读路线图。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引导读者进入正文。",
+      "evidence_pointer": "Introduction P7 S1"
+    },
+    {
+      "order": 33,
+      "section": "Literature review",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "海事行业是成熟但传统的行业，主要活动决策高度依赖人类经验。",
+      "rhetorical_function_cn": "建立行业现状，与后文数字化形成对比。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为DSS的引入提供行业背景。",
+      "evidence_pointer": "Literature review P1 S1"
+    },
+    {
+      "order": 34,
+      "section": "Literature review",
+      "locator": "P1 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "近年已提出多种DSS来支持港口和航运决策以提高效率和吞吐量。",
+      "rhetorical_function_cn": "概括已有DSS文献。",
+      "depends_on_cn": "行业背景",
+      "sets_up_cn": "为后续指出缺乏韧性DSS做铺垫。",
+      "evidence_pointer": "Literature review P1 S2"
+    },
+    {
+      "order": 35,
+      "section": "Literature review",
+      "locator": "P3 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "过去十年虽然开发了大量土木基础设施的韧性度量和模型，但专门针对港口的很少。",
+      "rhetorical_function_cn": "指出港口韧性研究的空白。",
+      "depends_on_cn": "韧性研究综述",
+      "sets_up_cn": "为本文填补港口韧性缺口做铺垫。",
+      "evidence_pointer": "Literature review P3 S2"
+    },
+    {
+      "order": 36,
+      "section": "Literature review",
+      "locator": "P3 S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "Nair等的港口韧性模型假设除灾害事件及其影响外，所有运营方面均为确定性的，所有活动速率已知且恒定。",
+      "rhetorical_function_cn": "指出先前港口韧性研究的确定性缺陷。",
+      "depends_on_cn": "Nair等的介绍",
+      "sets_up_cn": "为本文纳入普通运营不确定性提供对比。",
+      "evidence_pointer": "Literature review P3 S4"
+    },
+    {
+      "order": 37,
+      "section": "Literature review",
+      "locator": "P4 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "作者不知道任何以前的工作尝试以数字孪生提供的粒度计算港口韧性，也没有任何工作考虑在港口韧性评估中纳入普通运营不确定性。",
+      "rhetorical_function_cn": "明确文献中的双重缺口。",
+      "depends_on_cn": "韧性文献综述",
+      "sets_up_cn": "为本文贡献声明提供直接依据。",
+      "evidence_pointer": "Literature review P4 S1"
+    },
+    {
+      "order": 38,
+      "section": "Literature review",
+      "locator": "P4 S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文提出的DSS填补了这些空白，并创造了实时韧性计算和更新的可能，这以往未被考虑。",
+      "rhetorical_function_cn": "连接文献缺口和本文贡献。",
+      "depends_on_cn": "双重缺口",
+      "sets_up_cn": "引导读者进入DSS设计部分。",
+      "evidence_pointer": "Literature review P4 S2"
+    },
+    {
+      "order": 39,
+      "section": "Section 3",
+      "locator": "P1 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DSS架构包含两个关键模块：恢复分析和韧性分析。",
+      "rhetorical_function_cn": "介绍DSS顶层结构。",
+      "depends_on_cn": "文献缺口和设计目标",
+      "sets_up_cn": "为各子模块描述提供框架。",
+      "evidence_pointer": "Section 3 P1 S1"
+    },
+    {
+      "order": 40,
+      "section": "Section 3.1",
+      "locator": "P2 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "商业仿真软件缺乏与外部分析算法集成的灵活性，因此DSS使用开源O2DES.Net框架。",
+      "rhetorical_function_cn": "解释技术选型原因。",
+      "depends_on_cn": "数字孪生基础",
+      "sets_up_cn": "说明数字孪生实现方式并支持后续与OCBA的集成。",
+      "evidence_pointer": "Section 3.1 P2 S1"
+    },
+    {
+      "order": 41,
+      "section": "Section 3.1",
+      "locator": "P6 S5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "模型中的大多数操作策略基于世界最繁忙港口的实际操作方式。",
+      "rhetorical_function_cn": "提高数字孪生的现实有效性。",
+      "depends_on_cn": "操作策略列述",
+      "sets_up_cn": "为案例研究中的默认行动设定提供依据。",
+      "evidence_pointer": "Section 3.1 P6 S5"
+    },
+    {
+      "order": 42,
+      "section": "Section 3.2",
+      "locator": "P1 S1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "每个恢复行动的价值由数字孪生评估，并明确考虑普通运营不确定性，通过多次IID重复估计KPI。",
+      "rhetorical_function_cn": "将随机数字孪生与KPI估计联系起来。",
+      "depends_on_cn": "数字孪生模型",
+      "sets_up_cn": "为后续OCBA必要性提供机制。",
+      "evidence_pointer": "Section 3.2 P1 S1"
+    },
+    {
+      "order": 43,
+      "section": "Section 3.2",
+      "locator": "P3 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "恢复分析模块集成OCBA来确定每个行动的仿真运行次数，给定总预算T，最大化正确选择概率。",
+      "rhetorical_function_cn": "正式引入OCBA作为DSS组件。",
+      "depends_on_cn": "计算挑战",
+      "sets_up_cn": "为OCBA算法细节和实验作准备。",
+      "evidence_pointer": "Section 3.2 P3 S1"
+    },
+    {
+      "order": 44,
+      "section": "Section 3.3",
+      "locator": "P1 S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "沿用Miller-Hooks和Chen等的定义，韧性水平定义为事件后性能与事件前性能之比。",
+      "rhetorical_function_cn": "将已有理论作为韧性度量基础。",
+      "depends_on_cn": "韧性定义文献",
+      "sets_up_cn": "为公式(4)和后续韧性计算奠定基础。",
+      "evidence_pointer": "Section 3.3 P1 S2"
+    },
+    {
+      "order": 45,
+      "section": "Section 3.3",
+      "locator": "P3 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "中断情景集和候选恢复行动集由港口运营者外部指定，DSS专注于有效评估给定情景的韧性。",
+      "rhetorical_function_cn": "界定DSS的应用边界和外部依赖。",
+      "depends_on_cn": "DSS架构",
+      "sets_up_cn": "为案例研究中情景定义留出空间。",
+      "evidence_pointer": "Section 3.3 P3 S1"
+    },
+    {
+      "order": 46,
+      "section": "Section 4.1",
+      "locator": "P4 S2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "默认恢复行动设置为AGV与QC比例约4:1，此比例基于常见工业实践，并作为评估DSS有效性的基准。",
+      "rhetorical_function_cn": "建立基准对照以衡量DSS增益。",
+      "depends_on_cn": "工业实践经验",
+      "sets_up_cn": "为表2中的默认行动比较提供来源。",
+      "evidence_pointer": "Section 4.1 P4 S2"
+    },
+    {
+      "order": 47,
+      "section": "Section 4.2",
+      "locator": "P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "每个仿真重复包含三天预热期和一天运行期，运行期内测量BoA率。",
+      "rhetorical_function_cn": "说明仿真参数以获取统计有效估计。",
+      "depends_on_cn": "数字孪生输入参数",
+      "sets_up_cn": "为后续1000次重复提供合理性。",
+      "evidence_pointer": "Section 4.2 P1 S1"
+    },
+    {
+      "order": 48,
+      "section": "Section 4.2",
+      "locator": "P1 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在表1中标记的默认行动在三类情景中均非最佳恢复行动。",
+      "rhetorical_function_cn": "给出初步结果，说明默认惯例非最优。",
+      "depends_on_cn": "1000次重复仿真",
+      "sets_up_cn": "为韧性比较提供关键事实。",
+      "evidence_pointer": "Section 4.2 P1 S2"
+    },
+    {
+      "order": 49,
+      "section": "Section 4.3",
+      "locator": "P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "情景1中DSS最佳行动比默认行动高12.51个百分点；情景2和3分别高15.74和12.06个百分点。",
+      "rhetorical_function_cn": "量化DSS带来的性能提升。",
+      "depends_on_cn": "表2结果",
+      "sets_up_cn": "支持DSS有效性的主要结论。",
+      "evidence_pointer": "Section 4.3 P2 S1"
+    },
+    {
+      "order": 50,
+      "section": "Section 4.4",
+      "locator": "P1 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为考察完全随机方法的价值，将随机数字孪生选出的最佳行动与确定性数字孪生版本选出的行动进行比较。",
+      "rhetorical_function_cn": "提出新的研究子问题。",
+      "depends_on_cn": "随机数字孪生有效性",
+      "sets_up_cn": "引入另一个对照实验。",
+      "evidence_pointer": "Section 4.4 P1 S1"
+    },
+    {
+      "order": 51,
+      "section": "Section 4.4",
+      "locator": "P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "确定性模型在情景1和3建议了次优行动。",
+      "rhetorical_function_cn": "报告随机性缺失造成的主要问题。",
+      "depends_on_cn": "随机vs确定性比较实验",
+      "sets_up_cn": "为后续高估韧性论点提供证据。",
+      "evidence_pointer": "Section 4.4 P2 S1"
+    },
+    {
+      "order": 52,
+      "section": "Section 4.4",
+      "locator": "P3 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在情景2和3中，确定性模型高估BoA率，可能导致运营商错误地认为港口有韧性。",
+      "rhetorical_function_cn": "强调确定性假设的危险性。",
+      "depends_on_cn": "图5和附录B",
+      "sets_up_cn": "为结论中的“过度自信”风险提供论据。",
+      "evidence_pointer": "Section 4.4 P3 S1"
+    },
+    {
+      "order": 53,
+      "section": "Section 4.5",
+      "locator": "P1 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "中断发生时运营商必须在短时间窗内做决策，因此运行1000次重复不可行，需要减少运行次数同时保持准确性。",
+      "rhetorical_function_cn": "引出计算效率需求的必要性。",
+      "depends_on_cn": "实时决策时间约束",
+      "sets_up_cn": "为OCBA效率实验设定目标。",
+      "evidence_pointer": "Section 4.5 P1 S1"
+    },
+    {
+      "order": 54,
+      "section": "Section 4.5",
+      "locator": "P3 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为估计PCS使用bootstrap重采样，从经验分布抽样，避免运行新的数字孪生。",
+      "rhetorical_function_cn": "解释如何在不产生巨大计算量的情况下测量PCS。",
+      "depends_on_cn": "1000次已有仿真输出",
+      "sets_up_cn": "为图7和表3的实验结果提供方法基础。",
+      "evidence_pointer": "Section 4.5 P3 S1"
+    },
+    {
+      "order": 55,
+      "section": "Section 4.5",
+      "locator": "P5 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在每行动60次预算下，OCBA在三个情景中的PCS分别为0.88、0.56和0.92，均高于EQ的0.65、0.52和0.78。",
+      "rhetorical_function_cn": "报告OCBA的主要效率优势。",
+      "depends_on_cn": "bootstrap实验",
+      "sets_up_cn": "支持OCBA作为计算效率解决方案。",
+      "evidence_pointer": "Section 4.5 P5 S1"
+    },
+    {
+      "order": 56,
+      "section": "Section 4.5",
+      "locator": "P6 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "表3显示加速因子随仿真预算增加而增大，OCBA在最高PCS处获得最大加速，最高达2.61。",
+      "rhetorical_function_cn": "进一步量化OCBA带来的计算节省。",
+      "depends_on_cn": "表3",
+      "sets_up_cn": "为结论中“2.40倍计算减少”提供依据。",
+      "evidence_pointer": "Section 4.5 P6 S1"
+    },
+    {
+      "order": 57,
+      "section": "Conclusions",
+      "locator": "P1 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "作者重申不知道任何先前工作以数字孪生粒度计算韧性或在韧性计算中考虑普通运营不确定性。",
+      "rhetorical_function_cn": "在结论中再次强调文献缺口，标示贡献的独特性。",
+      "depends_on_cn": "全文工作",
+      "sets_up_cn": "为最终贡献定性。",
+      "evidence_pointer": "Conclusions P1 S3"
+    },
+    {
+      "order": 58,
+      "section": "Conclusions",
+      "locator": "P2 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "与常规设备配置相比，最优配置将BoA率提高了15.74个百分点；相对确定性数字孪生，随机方法避免高达24.97个百分点的高估。",
+      "rhetorical_function_cn": "总结最关键的量化结果。",
+      "depends_on_cn": "案例研究和随机价值分析",
+      "sets_up_cn": "支撑主要结论的可信度。",
+      "evidence_pointer": "Conclusions P2 S3"
+    },
+    {
+      "order": 59,
+      "section": "Conclusions",
+      "locator": "P3 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来工作包括优化准备决策、实现带反馈的实时恢复行动，以及探索更灵活的OCBA元模型。",
+      "rhetorical_function_cn": "提出后续研究方向，避免封闭式结局。",
+      "depends_on_cn": "当前DSS局限",
+      "sets_up_cn": "为读者提供后续可进行的扩展。",
+      "evidence_pointer": "Conclusions P3 S1"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "采用双重缺口：一是实践缺口（港口电力中断缺乏经验和决策支持），二是文献缺口（无数字孪生粒度韧性计算、无普通不确定性纳入）。引言先建立现实问题，再在文献综述中明确空白，并反复强调其后果。",
+    "signposting_cn": "在引言末给出结构预览；在DSS设计中明确“两个关键模块”；在案例研究每一节开头说明该节要回答的问题；用结论重申核心贡献。",
+    "transition_logic_cn": "从数学建模局限过渡到数字孪生；从案例研究有效性过渡到随机价值分析，再到计算效率分析；每个过渡都建立在上一阶段留下的未解决问题上。",
+    "claim_evidence_rhythm_cn": "每提出一项贡献后，即用专门的实验或对比提供证据；证据以数据表格和图表形式呈现，并在叙述中明确量化差异。",
+    "benchmark_narrative_cn": "默认4:1行动被描述为“常见工业实践”，作为评估DSS有效性的基准；确定性数字孪生被描述为传统简化方法；EQ被视为朴素但标准的仿真预算分配；通过层层对照，DSS的优势逐渐凸显。",
+    "theory_return_cn": "在结论中将韧性定义和OCBA理论回扣为DSS设计的理论基础，并将数字孪生粒度视为对韧性计算理论的扩展。",
+    "contribution_positioning_cn": "贡献被定位为“首次”将数字孪生用于港口韧性计算和“首次”纳入普通运营不确定性，同时将效果推广到工业4.0转型，提升研究的战略意义。",
+    "novelty_protection_cn": "作者不断重复双重缺口的填补，并将性能提升（BoA率、PCS、加速因子）作为制品有效性的直接证据，而非仅仅讨论技术性能，从而将贡献从一次性结果提升为一般性方法贡献。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立领域重要性并指向一个新兴的具体问题（如电力中断）。",
+        "research_job_cn": "识别现实中的新脆弱点或未被充分管理的风险。",
+        "required_evidence_cn": "现实事件、行业趋势或初步观察文件。",
+        "transition_to_next_cn": "指出该问题无法被现有方法充分解决。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "批判现有方法（数学建模、确定性仿真）的局限。",
+        "research_job_cn": "综述现有韧性/仿真研究，明确具体缺陷。",
+        "required_evidence_cn": "文献分析或简单示例证明局限。",
+        "transition_to_next_cn": "引入新的知识基础（数字孪生、OCBA）作为解决方案。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "介绍知识基础并翻译成设计需求。",
+        "research_job_cn": "明确韧性定义、数字孪生和OCBA原理。",
+        "required_evidence_cn": "理论定义和算法机制说明。",
+        "transition_to_next_cn": "将需求具体化为DSS模块。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述DSS架构和各模块，并说明设计选择理由。",
+        "research_job_cn": "构建系统，选择实现技术（如O2DES.Net）。",
+        "required_evidence_cn": "架构图、伪代码、模型验证经历。",
+        "transition_to_next_cn": "需要实证评价其有效性。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设计案例研究，定义情景、候选行动和KPI。",
+        "research_job_cn": "基于领域知识设定现实参数和对照基准。",
+        "required_evidence_cn": "数据来源、专家输入、默认行动合理性。",
+        "transition_to_next_cn": "运行仿真并报告结果。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "报告性能提升：比较DSS推荐行动与默认行动。",
+        "research_job_cn": "执行多重复仿真，统计显著性分析。",
+        "required_evidence_cn": "表格和图，量化增益。",
+        "transition_to_next_cn": "说明该收益依赖随机建模，引出下一个对照。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "设计随机性消融：比较随机与确定性模型。",
+        "research_job_cn": "构建确定性版本并运行相同实验。",
+        "required_evidence_cn": "对照图/表，高估幅度。",
+        "transition_to_next_cn": "指出随机数字孪生的计算成本，引出效率问题。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "设计算法比较：OCBA vs EQ。",
+        "research_job_cn": "用bootstrap或新仿真评估PCS和加速因子。",
+        "required_evidence_cn": "PCS曲线和加速因子表。",
+        "transition_to_next_cn": "汇总所有证据形成最终结论。"
+      },
+      {
+        "step": 9,
+        "writing_job_cn": "在结论中重申贡献、证据和未来方向。",
+        "research_job_cn": "将局部实验结果上升为一般化设计知识。",
+        "required_evidence_cn": "所有关键结果和文献缺口闭环。",
+        "transition_to_next_cn": "结尾提出未来工作保持开放。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "将现实问题塑造为现有方法的明确局限，并以新兴场景（如电力中断）赋予紧迫性。",
+      "设置多个对照（默认行动、确定性模型、EQ）使每个贡献都有独立证据。",
+      "使用“本文首次……”和“无先前工作……”强化新颖性。",
+      "在结论中将具体结果量化为一般贡献，并连接宏观技术趋势。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "构建经过港口运营商验证的高保真数字孪生需要持续多年的项目积累和行业合作。",
+      "运行大量仿真需要高性能计算资源（案例中1000次重复仍需数天）。",
+      "获得真实但合成数据依赖领域专家深度参与和保密协议。",
+      "OCBA实验依赖bootstrap重采样，虽降低计算成本但需要已有大量仿真输出。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能仅宣称“数字孪生”而缺乏验证细节；必须展示模型如何与真实运营匹配。",
+      "不能照搬“首次”声明，需要确证文献空白。",
+      "不能只比较默认行动而无对照基准（如确定性模型、EQ）。",
+      "不能把bootstrap估计直接等同于真实仿真结果；需要说明统计精度和局限。"
+    ],
+    "single_best_description_of_the_routine_cn": "用高保真仿真解决传统建模无法处理的复杂操作问题，再用系统化对照（基准、消融、算法比较）证明新制品在有效性、机制和可行性上均优于现状，最后将结果包装为对现实行业的一般化设计知识。"
+  },
+  "confidence": 0.88,
+  "limitations_cn": "原文图表（图1-7）和公式以文本形式嵌入，位置说明基于段落近似；未提供附录完整内容（仅有Table B.5部分），可能遗漏部分细节；研究阶段划分基于论证逻辑而非作者显式标签，存在一定解释空间。",
+  "usage": {
+    "prompt_tokens": 23169,
+    "completion_tokens": 27270,
+    "total_tokens": 50439,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 19841
+  }
+}

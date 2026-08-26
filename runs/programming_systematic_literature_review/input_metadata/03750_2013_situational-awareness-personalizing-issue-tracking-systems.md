@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-84886426513"
+title: "Situational awareness: Personalizing issue tracking systems"
+authors: "Baysal O.; Holmes R.; Godfrey M.W."
+year: "2013"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse.2013.6606674"
+---
+# Scopus title-abstract-keyword metadata
+Title: Situational awareness: Personalizing issue tracking systems
+Abstract: Issue tracking systems play a central role in ongoing software development; they are used by developers to support collaborative bug fixing and the implementation of new features, but they are also used by other stakeholders including managers, QA, and end-users for tasks such as project management, communication and discussion, code reviews, and history tracking. Most such systems are designed around the central metaphor of the 'issue' (bug, defect, ticket, feature, etc.), yet increasingly this model seems ill fitted to the practical needs of growing software projects; for example, our analysis of interviews with 20 Mozilla developers who use Bugzilla heavily revealed that developers face challenges maintaining a global understanding of the issues they are involved with, and that they desire improved support for situational awareness that is difficult to achieve with current issue management systems. In this paper we motivate the need for personalized issue tracking that is centered around the information needs of individual developers together with improved logistical support for the tasks they perform. We also describe an initial approach to implement such a system - extending Bugzilla - that enhances a developer's situational awareness of their working context by providing views that are tailored to specific tasks they frequently perform; we are actively improving this prototype with input from Mozilla developers. © 2013 IEEE.
+Author keywords: 
+Index keywords: Project management; Tracking (position); Bug-fixing; Code review; Issue managements; Issue Tracking; Logistical support; Situational awareness; Software project; Specific tasks; Software engineering
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2013
+EID: 2-s2.0-84886426513
+DOI: 10.1109/icse.2013.6606674
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

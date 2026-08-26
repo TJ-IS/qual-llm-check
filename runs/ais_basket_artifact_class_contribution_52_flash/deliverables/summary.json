@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-08-07T10:37:21.813985+00:00",
+  "input_count": 52,
+  "audit_a_include_count": 21,
+  "audit_b_include_count": 16,
+  "independent_disagreement_count": 9,
+  "final_include_count": 16,
+  "final_exclude_count": 36,
+  "resolution_counts": {
+    "independent_agreement_exclude": 29,
+    "adjudicated_exclude": 7,
+    "independent_agreement_include": 14,
+    "adjudicated_include": 2
+  },
+  "contribution_target_status_counts": {
+    "domain_mechanism_or_policy": 8,
+    "algorithm_or_analytical_method": 19,
+    "behavioral_or_theory_explanation": 9,
+    "software_artifact_class": 16
+  },
+  "generalization_status_counts": {
+    "method_or_domain_only": 35,
+    "explicit_within_artifact_class": 14,
+    "implicit_but_well_supported": 2,
+    "single_case_only": 1
+  },
+  "artifact_role_status_counts": {
+    "experimental_treatment_or_context": 19,
+    "delivery_or_demo_wrapper": 5,
+    "computation_or_optimization_vehicle": 12,
+    "core_research_contribution": 16
+  },
+  "included_year_counts": {
+    "2024": 3,
+    "2021": 3,
+    "2020": 3,
+    "2023": 3,
+    "2022": 2,
+    "2025": 2
+  },
+  "included_journal_counts": {
+    "MIS Quarterly": 1,
+    "Journal of the Association for Information Systems": 2,
+    "Decision Support Systems": 6,
+    "Journal of Management Information Systems": 1,
+    "Information Systems Research": 6
+  }
+}

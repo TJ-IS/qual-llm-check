@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85167696858"
+title: "On the Reproducibility of Software Defect Datasets"
+authors: "Zhu H.-N.; Rubio-Gonzalez C."
+year: "2023"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse48619.2023.00195"
+---
+# Scopus title-abstract-keyword metadata
+Title: On the Reproducibility of Software Defect Datasets
+Abstract: Software defect datasets are crucial to facilitating the evaluation and comparison of techniques in fields such as fault localization, test generation, and automated program repair. However, the reproducibility of software defect artifacts is not immune to breakage. In this paper, we conduct a study on the reproducibility of software defect artifacts. First, we study five state-of-the-art Java defect datasets. Despite the multiple strategies applied by dataset maintainers to ensure reproducibility, all datasets are prone to breakages. Second, we conduct a case study in which we systematically test the reproducibility of 1,795 software artifacts during a 13-month period. We find that 62.6% of the artifacts break at least once, and 15.3% artifacts break multiple times. We manually investigate the root causes of breakages and handcraft 10 patches, which are automatically applied to 1,055 distinct artifacts in 2,948 fixes. Based on the nature of the root causes, we propose automated dependency caching and artifact isolation to prevent further breakage. In particular, we show that isolating artifacts to eliminate external dependencies increases reproducibility to 95% or higher, which is on par with the level of reproducibility exhibited by the most reliable manually curated dataset. © 2023 IEEE.
+Author keywords: software defects; software maintenance; software quality; software reproducibility
+Index keywords: Computer software selection and evaluation; Defects; Software testing; Fault localization; Five state; In-field; Reproducibilities; Root cause; Software defects; Software Quality; Software reproducibility; State of the art; Test generations; Computer software maintenance
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2023
+EID: 2-s2.0-85167696858
+DOI: 10.1109/icse48619.2023.00195
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

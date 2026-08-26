@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85135744097"
+title: "Estimating Efforts for Various Activities in Agile Software Development: An Empirical Study"
+authors: "Cao L."
+year: "2022"
+journal: "IEEE Access"
+doi: "10.1109/access.2022.3196923"
+---
+# Scopus title-abstract-keyword metadata
+Title: Estimating Efforts for Various Activities in Agile Software Development: An Empirical Study
+Abstract: Effort estimation is an important practice in agile software development. The agile community believes that developers' estimates get more accurate over time due to the cumulative effect of learning from short and frequent feedback. However, there is no empirical evidence of an improvement in estimation accuracy over time, nor have prior studies examined effort estimation in different development activities, which are associated with substantial costs. This study fills the knowledge gap in the field of software estimation in agile software development by investigating estimations across time and different development activities based on data collected from a large agile project. This study investigated effort estimation in various development activities, including feature development, bug fixing, and refactoring in agile software development. The results indicate that estimation of agile development does not improve over time, as claimed in the literature. Our data also indicate that no difference exists in the magnitude of estimation errors between feature tasks and bug-fixing/refactoring tasks, while bug-fixing and refactoring tasks are overestimated more frequently than feature tasks. This study also contributes to our knowledge about overestimation and underestimation patterns in agile software development.  © 2013 IEEE.
+Author keywords: Agile software effort estimation; bug-fixing effort estimation; refactoring effort estimation
+Index keywords: Software design; Agile software development; Agile software effort estimation; Agile softwares; Bug-fixing; Bug-fixing effort estimation; Effort Estimation; Refactoring effort estimation; Refactorings; Software effort estimation; Estimation
+Document type: Article
+Conference: 
+Source title: IEEE Access
+Year: 2022
+EID: 2-s2.0-85135744097
+DOI: 10.1109/access.2022.3196923
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

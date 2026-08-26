@@ -1,0 +1,1274 @@
+{
+  "record_id": "28502",
+  "source_file": "28502_2023_the-attraction-effect-in-crowdfunding.md",
+  "title": "The Attraction Effect in Crowdfunding",
+  "authors": "Markus Weinmann; Abhay Nath Mishra; Lena Franziska Kaiser; Jan vom Brocke",
+  "year": "2023",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.1152",
+  "fulltext_chars": 116396,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:08.624411+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在奖励型众筹（RBC）的实际数字市场中，吸引力效应（吸引效应/诱饵效应）是否出现，以及数值/非数值属性和假设/真实经济选择如何调节该效应？",
+    "artifact_and_design_cn": "数字奖励菜单（reward menu），通过在众筹奖励菜单中插入一个被目标主导的诱饵选项（价格诱饵或质量诱饵）来引导支持者选择更高价格的奖励。",
+    "objective_outcomes_cn": "在七项在线实验和一项Kickstarter实地研究中，添加诱饵使选择高价格目标奖励的比例显著增加18.8%至28.2%；非数值属性与数值属性效果相当，真实经济后果在一定程度上增强效应。",
+    "core_contribution_cn": "证明吸引力效应在具非数值属性和经济后果的众筹等数字市场中有效，扩展了显著性理论在非数值属性上的适用性，并强调数字奖励菜单设计对个体选择行为的显著影响，为数字设计/助推文献做出贡献。",
+    "whole_argument_in_one_paragraph_cn": "作者从已有吸引力效应在应用场景内证据混杂、批评集中在简化数值属性和假设选择这一学术缺口出发，选取奖励型众筹作为具备非数值属性、经济后果和真实数字平台的典型情境；他们引入显著性理论，推导出添加被目标支配的诱饵会改变参考质量-价格比、翻转属性显著性从而增加目标选择的核心机制，提出四个假设；为兼顾内部效度和生态效度，研究序列从纯数值属性受控实验开始，逐步引入非数值属性、经济后果、真实产品情境和Kickstarter真实活动，使用八个研究（n=3998）反复检验；结果一致显示诱饵显著提高高价格奖励选择率，同时发现非数值属性不削弱效应、经济后果有调节作用；讨论将发现回接到数字市场便于比较的属性表示能力，并宣称对吸引力效应文献、显著性理论、众筹和IS设计做出贡献，同时承认缺少对照、只考虑价格-质量两属性等局限。"
+  },
+  "paper_archetype": "multi_method_or_multi_study_program",
+  "paper_archetype_reason_cn": "本文依靠八个不同方法（假设实验、真实选择实验、真实Kickstarter实地研究、复现）和递增的生态效度，而非单一实验或单一计算制品；每个研究解决前一个研究留下的不足，累积支持同一个理论假设体系。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "写作主线为：指出问题（吸引力效应在应用场景中存疑）→ 介绍理论（显著性理论）→ 推导设计（诱饵选项）→ 用八个研究检验 → 回到理论扩展（非数值属性也适用）和设计/数字市场含义。",
+  "research_program": {
+    "study_or_phase_count": 8,
+    "overall_sequence_cn": "8个研究按真实主义递增：Study1纯数值、假设选择；Study2引入非数值属性；Study3引入经济后果；Study4用真实产品做试点；Study5在真实Kickstarter活动中操纵菜单；Study6复现并合并属性类型比较；Study7提高赌注并加入退出选项；Study8在更真实的Kickstarter模拟网站上复现经济后果条件。前三个研究建立基础因果机制并检验调节，后两个研究提供生态效度，最后三个复现增强稳健性。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "Study 1: 数值属性假设选择实验",
+        "question_cn": "仅用数值属性（歌曲数）时，价格或质量诱饵是否增加选择高价格目标奖励的概率？",
+        "inputs_and_setting_cn": "679名Prolific参与者；在线实验；虚构音乐专辑众筹项目；三个独立条件（无诱饵、价格诱饵、质量诱饵）。",
+        "designed_or_compared_object_cn": "价格诱饵（同12首歌但12币）和质量诱饵（10首歌但10币） vs 无诱饵（竞争者5首歌3币，目标12首歌10币）。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件作为基线。",
+        "objective_metrics": [
+          "选择高奖励（目标）的二进制比例",
+          "logistic回归系数",
+          "95%贝叶斯可信区间"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归，将目标/诱饵选择合并为目标选择，对条件作虚拟变量。",
+        "main_result_cn": "无诱饵43.8%，价格诱饵72.4%，质量诱饵71.6%；两个诱饵条件显著提高目标选择（价格β=0.99，质量β=0.95），支持H1和H2。",
+        "argumentative_role_cn": "在受控、纯数值环境中建立吸引力效应的基础因果证据，验证显著理论预测。",
+        "remaining_uncertainty_cn": "只用了数值属性，缺少非数值属性和真实经济后果，可能不符合实际众筹场景。",
+        "link_to_next_phase_cn": "为了回击批评，Study2将质量属性改为非数值（自动下载/CD）。",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 5.5",
+          "Table 4",
+          "Figure 2",
+          "Online Appendix C"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "Study 2: 非数值属性实验",
+        "question_cn": "加入非数值属性（CD/数字下载）后，诱饵是否仍有效？属性类型是否调节吸引力效应？",
+        "inputs_and_setting_cn": "668名Prolific参与者；与Study1相同的项目描述，但将质量从歌曲数改为奖励的内容版本（数字下载/ CD）。",
+        "designed_or_compared_object_cn": "价格诱饵（CD+下载22币）和质量诱饵（只有CD 20币） vs 无诱饵（数字下载13币，CD+下载20币）。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件；同时由Study1数据提供数值属性对照。",
+        "objective_metrics": [
+          "目标选择比例",
+          "logistic回归系数",
+          "交互项显著性"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归；合并Study1数据进行属性和条件交互检验（混合效应模型）。",
+        "main_result_cn": "无诱饵48.2%，价格诱饵71.4%，质量诱饵73.7%；支持H1-H2；交互项不显著（β=0.08，CI含0），拒绝H3，即非数值属性与数值属性效果相同。",
+        "argumentative_role_cn": "证明吸引力效应能扩展到非数值属性，为实际众筹中普遍存在的属性类型提供了可应用性。",
+        "remaining_uncertainty_cn": "选择仍是假设的，无经济后果；但显示了非数值属性不削弱效应。",
+        "link_to_next_phase_cn": "Study3引入真实经济后果，检验选择类型调节。",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 6.3",
+          "Section 6.4",
+          "Table 5",
+          "Online Appendix C"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Study 3: 有经济后果的实验（keep-it-all机制）",
+        "question_cn": "当选择具有真实经济后果时，诱饵效应是否更强？选择类型（假设/真实）是否调节？",
+        "inputs_and_setting_cn": "675名Prolific参与者；材料与Study2相同，但通过keep-it-all机制加入经济后果；参与者获得25币，项目以50%概率成功，成功则返还投资并支付奖励，失败则失去投资。",
+        "designed_or_compared_object_cn": "价格诱饵和质量诱饵 vs 无诱饵，与Study2相同的奖励结构。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件；Study2作为假设选择对照。",
+        "objective_metrics": [
+          "目标选择比例",
+          "logistic回归系数",
+          "交互项显著性（90% CI）"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归；合并Study2数据检验选择类型交互。",
+        "main_result_cn": "无诱饵44.2%，价格诱饵76.1%，质量诱饵78.9%；支持H1-H2；交互项在90% CI显著（β=0.47，90% CI [0.06,0.88]），支持H4，即经济后果增强吸引力效应。",
+        "argumentative_role_cn": "增加结果与真实众筹决策的相关性，证明诱饵效应在有财务风险的情境中更强。",
+        "remaining_uncertainty_cn": "实验环境仍然是低风险、简化支付，没有退出选项，奖励种类有限。",
+        "link_to_next_phase_cn": "转向真实Kickstarter活动和更高生态效度的实地研究（Study4/5）。",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 7.4",
+          "Section 7.5",
+          "Online Appendix C"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Study 4: 真实产品试点实验",
+        "question_cn": "在实际众筹产品（豪华手表）的试点中，质量诱饵是否有效？",
+        "inputs_and_setting_cn": "199名Prolific参与者（初始200，1个未通过注意力检查）；在线实验；用瑞士手表制造商的真实产品设置奖励（钥匙扣 vs 手表+钥匙扣）。",
+        "designed_or_compared_object_cn": "诱饵条件（手表单独CHF999） vs 无诱饵（钥匙扣49，手表+钥匙扣999）；由于合作限制只操纵质量（捆绑内容）。",
+        "baseline_control_or_counterfactual_cn": "无诱饵对照组。",
+        "objective_metrics": [
+          "目标选择比例",
+          "logistic回归系数",
+          "95% CI"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归。",
+        "main_result_cn": "无诱饵34%选择高奖励，诱饵条件69%；β=0.83显著；表明诱饵在真实产品上也产生明显效应。",
+        "argumentative_role_cn": "把实验转化到更真实的产品刺激，在进入现场前验证新的诱饵设计，也为实地提供贝叶斯先验。",
+        "remaining_uncertainty_cn": "仍是非现场实验，低赌注；但获得了真实产品的初步验证。",
+        "link_to_next_phase_cn": "为Study5真实Kickstarter活动提供可控证据和先验。",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 8.3",
+          "Section 8.5",
+          "Table 6"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "Study 5: Kickstarter实地研究",
+        "question_cn": "在真实Kickstarter活动中加入诱饵选项，是否使更多真实支持者选择高价格目标奖励？",
+        "inputs_and_setting_cn": "727名真实Kickstarter支持者；瑞士豪华手表真实活动（募资CHF 495,557，超过目标60,000）；奖励菜单包括竞争者、目标、诱饵以及其他常见奖励（早期鸟、限量版等）。",
+        "designed_or_compared_object_cn": "添加诱饵“CHF 969：仅手表”以突出目标“CHF 999：手表+钥匙扣”；竞争者“CHF 49：钥匙扣”。",
+        "baseline_control_or_counterfactual_cn": "无控制组；使用Study4试点数据作为反事实先验（贝叶斯更新）。",
+        "objective_metrics": [
+          "选择目标的比例",
+          "选择竞争者的比例",
+          "多项logit系数",
+          "贝叶斯后验预测"
+        ],
+        "analysis_method_cn": "第一分析：多项逻辑回归（以竞争者参考）；第二分析：用试点数据作先验，用实地数据更新的贝叶斯模型。",
+        "main_result_cn": "实地中54%的目标、25%的竞争者和22%的诱饵；目标显著区别于竞争者（β=0.78）。贝叶斯后验预测显示无诱饵时目标选择38%、有诱饵74%左右，差异显著（β=1.07）。",
+        "argumentative_role_cn": "提供最高生态效度的证据，证明吸引力效应在真实众筹平台、真实金钱和真实奖励下依然显著。",
+        "remaining_uncertainty_cn": "缺乏真正的随机对照，其他奖励带来的噪声，潜在混杂因素未被控制。",
+        "link_to_next_phase_cn": "结合所有实验和实地证据，讨论将回归到理论扩展和设计启示。",
+        "evidence_pointers": [
+          "Table 3",
+          "Section 8.2",
+          "Section 8.7",
+          "Section 8.8",
+          "Table 7",
+          "Figure 3"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "Study 6: 单实验中合并属性类型的复现",
+        "question_cn": "在单个实验中同时加入数值/非数值属性，验证属性类型是否真的没有调节效应？",
+        "inputs_and_setting_cn": "296名Prolific参与者；所有条件（属性类型×诱饵条件）在一次实验中执行，减少跨实验情境效应。",
+        "designed_or_compared_object_cn": "数值（歌曲数）vs 非数值（CD/下载），同时无诱饵、价格诱饵、质量诱饵。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件。",
+        "objective_metrics": [
+          "目标选择比例",
+          "交互项显著性"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归，检验条件×属性类型交互。",
+        "main_result_cn": "交互不显著（β=0.03，95% CI不含零？实际上是[-0.73,0.66]），确认数值和非数值属性效果相同。",
+        "argumentative_role_cn": "加强H3拒绝结论，排除跨实验比较时情境差异的影响。",
+        "remaining_uncertainty_cn": "仍然是假设选择；但作为复现支持先前发现。",
+        "link_to_next_phase_cn": "为整体稳健性提供更多证据。",
+        "evidence_pointers": [
+          "Table 3",
+          "Online Appendix E"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "Study 7: 高赌注和退出选项的复现",
+        "question_cn": "当提高潜在收益（25倍）并允许参与者选择退出（不承诺）时，质量诱饵是否仍然有效？",
+        "inputs_and_setting_cn": "169名Prolific参与者（202入选，33选择退出）；高额奖金；提供“不承诺”选项。",
+        "designed_or_compared_object_cn": "质量诱饵 vs 无诱饵（复现Study2结构）。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件。",
+        "objective_metrics": [
+          "目标选择比例",
+          "logistic回归系数"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归。",
+        "main_result_cn": "质量诱饵显著提高目标选择（β=0.74，95% CI [0.19,1.29]），证明在高风险和退出选项存在下效应依然存在。",
+        "argumentative_role_cn": "增加生态效度，排除不承诺选项会消除效应的担心。",
+        "remaining_uncertainty_cn": "仅测试质量诱饵，且非现场；只作为复现。",
+        "link_to_next_phase_cn": "继续补充稳健性。",
+        "evidence_pointers": [
+          "Table 3",
+          "Online Appendix E"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "Study 8: 在Kickstarter模拟网站上复现经济后果实验",
+        "question_cn": "在更真实的Kickstarter模拟网站（书籍项目）且经济后果下，吸引力效应是否仍出现？",
+        "inputs_and_setting_cn": "585名Prolific参与者；模拟Kickstarter外观的网站；书籍产品；经济后果通过keep-it-all机制实现。",
+        "designed_or_compared_object_cn": "复现Study3的诱饵条件（价格/质量诱饵）vs 无诱饵。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件。",
+        "objective_metrics": [
+          "目标选择比例",
+          "logistic回归系数"
+        ],
+        "analysis_method_cn": "贝叶斯逻辑回归。",
+        "main_result_cn": "吸引力效应显著，但效应量比先前实验稍小，可能在更真实的界面中噪声更大；仍支持H1-H2。",
+        "argumentative_role_cn": "在真实界面和书籍产品上复制经济后果效应，增加外部有效性。",
+        "remaining_uncertainty_cn": "模拟环境，非真实活动；但结合现场和实验强化结论。",
+        "link_to_next_phase_cn": "所有研究共同列入讨论，提出整体结论。",
+        "evidence_pointers": [
+          "Table 3",
+          "Online Appendix F"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_INTRO",
+      "METHOD_JUSTIFICATION",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION"
+    ],
+    "evaluation_moves": [
+      "STUDY_OVERVIEW",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT",
+      "MECHANISM",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE",
+      "PRACTICAL_STAKES",
+      "BOUNDARY_CONDITION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "显著性理论/情境依赖选择理论 (Bordalo et al., 2012, 2013)",
+      "吸引力效应/诱饵效应文献 (Huber et al., 1982; Frederick et al., 2014)",
+      "众筹成功因素文献",
+      "诱导价值理论 (Smith, 1976)",
+      "数字市场/比较成本文献 (Bakos, 1997; Xu et al., 2020)",
+      "Lichters et al. (2015) 吸引力效应实验设计指南"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "诱饵的具体设计（价格诱饵、质量诱饵）和H1-H2直接从显著性理论推导；理论中关于参考质量—价格比翻转的机制被用来构造满足约束的诱饵选项，并通过实验直接检验。非数值属性和经济后果的调节则部分来自其他文献，但也是该理论在数字市场的扩展验证，并未改变核心设计。",
+    "translation_chain_cn": "显著性理论认为消费者将属性与参考值比较，质量与价格比值高于参考值则质量显著；当诱饵降低参考比值，使目标比值高于参考，质量变得显著，从而增加目标选择 → 设计要求：诱饵应被目标支配，即与目标相似但在价格（范围策略）或质量（频率策略）上不如目标 → 具体制品：在奖励菜单中插入“同质量、较高价格”的价格诱饵或“同价格、较低质量”的质量诱饵 → 被比较的设计差异：无诱饵 vs 价格诱饵 vs 质量诱饵 → 客观结果：所有实验显示目标选择比例上升18.8%-28.2%。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "显著性理论：当添加一个被目标支配的诱饵时，诱饵的低质价比会降低参考质价比，使目标质价比高于参考，从而质量显著，目标更吸引。",
+        "mechanism_cn": "参考点变化：诱饵拉低参考质价比，翻转目标与参考的比较符号，使目标质量（或价格）变得显著，消费者更看重目标优势。",
+        "design_requirement_cn": "诱饵必须被目标支配且不被竞争者支配；在价格或质量上略差于目标；使诱饵质价比低于目标质价比。",
+        "artifact_choice_cn": "价格诱饵：与目标相同的质量，但价格更高；质量诱饵：与目标相同的价格，但质量更低。",
+        "evaluated_contrast_cn": "无诱饵条件 vs 价格诱饵条件 vs 质量诱饵条件。",
+        "objective_result_cn": "在Study 1-3、8中，两种诱饵均显著提高目标选择比例（如43.8%→72.4%等）。",
+        "evidence_pointers": [
+          "Table 4",
+          "Table 5",
+          "Section 5.5",
+          "Section 6.3",
+          "Section 7.4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Frederick et al. (2014) 和 Ha et al. (2009) 认为非数值属性降低可比性，削弱吸引力效应。",
+        "mechanism_cn": "非数值属性让消费者难以形成质价比，注意力分散，salience可能失去作用。",
+        "design_requirement_cn": "（作为调节假设而非直接设计要求）需检验非数值属性是否减弱效果。",
+        "artifact_choice_cn": "在Study 2中，将质量属性改为非数值（CD/下载）而价格仍是数值。",
+        "evaluated_contrast_cn": "数值属性（Study 1） vs 非数值属性（Study 2），并采用同一实验设计的复现（Study 6）。",
+        "objective_result_cn": "交互项不显著，非数值属性同样有效，拒绝H3。",
+        "evidence_pointers": [
+          "Section 6.4",
+          "Study 6 (Online Appendix E)"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Lichters et al. (2017) 提出经济后果可能增强吸引力效应；显著性理论也提示经济风险提高注意力。",
+        "mechanism_cn": "经济风险使决策者更加审慎、注意力更集中地比较选项，从而更易受诱饵造成的salience变化影响。",
+        "design_requirement_cn": "将选择从假设变为有真实金钱后果。",
+        "artifact_choice_cn": "Study 3使用keep-it-all机制，支付与决策结果挂钩。",
+        "evaluated_contrast_cn": "无后果（Study 2） vs 有后果（Study 3）。",
+        "objective_result_cn": "交互项在90% CI显著，支持H4；效应量略微增大（增加25.7和28.2个百分点）。",
+        "evidence_pointers": [
+          "Section 7.5",
+          "Online Appendix C Table C2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Huber et al. (2014) 提供了诱饵设计的可操作原则（使用真实经济后果、真实产品呈现、相关样本等）。",
+        "mechanism_cn": "遵循设计原则使诱饵在更真实环境中更有效。",
+        "design_requirement_cn": "现实的产品呈现、真实奖励、允许退出/多选项等。",
+        "artifact_choice_cn": "Study 4-5使用真实手表产品和Kickstarter菜单；Study 8使用模拟网站。",
+        "evaluated_contrast_cn": "模仿现实环境 vs 纯实验环境。",
+        "objective_result_cn": "实地研究和模拟网站均显示显著效应，但效应有所波动。",
+        "evidence_pointers": [
+          "Section 8",
+          "Online Appendix F"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "受控实验室实验（Study 1-4, 6-8）",
+      "真实平台实地研究（Study 5）",
+      "贝叶斯和后验分析（Study 5）",
+      "复现实验（Study 6-8）"
+    ],
+    "why_these_evaluations_cn": "为了同时满足内部效度和生态效度：实验室实验隔离诱饵效应，排除平台动态和并发因素的干扰；逐步增加真实属性、真实经济和真实平台，消除以往批评中的简化和假设缺陷；实地研究缺乏对照，因此用贝叶斯法使用前序实验作为先验补偿反事实；复现用于检验结果稳健性。",
+    "benchmark_and_contrast_chain_cn": "以无诱饵条件作为基准，每个研究比较诱饵条件与无诱饵；通过研究序列比较，属性类型（数值 vs 非数值）和经济后果（假设 vs 真实）两个调节变量被依次引入；最终用试点数据作为先验与实地数据形成贝叶斯反事实对比，从而在无对照组场景中重建期望差。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "诱饵选项显著提升高价格目标奖励选择概率（H1/H2）",
+        "evidence_cn": "8个研究中，除实地研究无对照组外，均有显著逻辑回归系数；比例增加18.8%-28.2%",
+        "status": "充分支持"
+      },
+      {
+        "claim_cn": "非数值属性不会削弱吸引力效应（H3被拒绝）",
+        "evidence_cn": "Study 2与Study 1交互不显著；Study 6单实验交互不显著",
+        "status": "充分支持（原假设被拒绝）"
+      },
+      {
+        "claim_cn": "经济后果增强吸引力效应（H4）",
+        "evidence_cn": "Study 2 vs Study 3交互项在90% CI显著",
+        "status": "较弱支持（90% CI而非95%）"
+      },
+      {
+        "claim_cn": "吸引力效应在真实Kickstarter活动中有效",
+        "evidence_cn": "实地中目标选择54%显著高于竞争者25%；贝叶斯后验显示有诱饵比无诱饵高约36%",
+        "status": "支持（但缺乏随机对照）"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配参与者到实验条件；每个参与者只参加一个研究；使用注意力检查；对decoy和target的合并处理；贝叶斯分析提供完整后验分布；混合效应模型处理跨实验嵌套；可复现实验（Study 6）排除跨实验情境效应。",
+    "external_validity_strategy_cn": "从数值到非数值属性、从假设到经济后果、从虚构产品到真实产品、从在线实验到真实Kickstarter平台；使用Prolific成人样本而非学生；用真实活动和真实金钱；包含退出选项和更现实界面；多个研究者复现。",
+    "what_is_not_actually_tested_cn": "实际现场没有随机对照，诱饵效应主要在历史比较和贝叶斯先验下识别；缺乏对支持者个体特征（如经验、偏好）的调节检验；只检查了价格和数量两维属性，未扩展到三维以上；未纳入项目动态（进度更新、评论、FAQ）对诱饵效应的影响。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "利用显著性理论构造的诱饵选项在众筹奖励菜单中能显著提高高价格奖励的选择率，幅度在18.8%到28.2%之间。",
+    "artifact_claim_cn": "数字奖励菜单本身是一个可操纵的设计对象；插入被目标支配的诱饵选项（价格诱饵或质量诱饵）是该设计对象的核心干预。",
+    "mechanism_claim_cn": "诱饵通过降低参考质价比，使目标奖励的质价比高于参考，从而让质量（或价格）变得显著，引导支持者选择高价格目标。",
+    "boundary_claim_cn": "效应独立于属性类型（数值/非数值），但在经济后果存在时略强；效应在真实众筹平台、真实产品、经济后果下仍存在，但可能受真实界面额外选项影响而略有减弱。",
+    "reusable_design_knowledge_cn": "设计者可以通过在众筹奖励菜单中增加一个被目标支配、但不被竞争者支配的诱饵来引导支持者选择更贵奖励；诱饵可以操纵价格或质量；菜单应保持少量选项以便消费者比较质价比；非数值属性同样可形成诱饵。",
+    "theoretical_contribution_cn": "将Bordalo et al. (2013)的显著性理论从纯数值属性扩展到非数值属性，显示salience机制在数字市场中同样适用，从而扩大理论适用范围；同时提供了吸引力效应在应用场景存在的强证据，缓解了以往对其实用性的质疑。",
+    "how_discussion_closes_intro_gap_cn": "讨论明确回指引言：批评者质疑吸引力效应在应用环境中不可靠，因为简化属性和假设选择；研究序列逐一加入非数值属性、经济后果和真实平台，结果显示效应持续存在，从而填补了这些缺口。声明贡献时直接对应最初提出三个研究问题（效应是否存在、数值/非数值是否不同、假设/真实选择是否不同）。",
+    "overclaim_or_unsupported_leaps_cn": "虽然实验证据强，但作者将结果概括到其他数字市场（Uber、航空公司）属于外推；H4只在90%置信水平下显著，支持程度有限；实地研究无对照，贝叶斯先验依赖试点，可能高估效度；非数值属性“同样有效”的结论基于交互不显著，这属于接受零假设，严格来说只是未发现差异；理论扩展“非数值属性同样适用”缺少对salience机制的独立测量。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "第一段第1句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "奖励型众筹的核心是奖励菜单，精心构建的奖励菜单会显著影响募资。",
+      "rhetorical_function_cn": "引入本文主题并指出重要性。",
+      "depends_on_cn": "无（起始句）",
+      "sets_up_cn": "为后文描述奖励菜单设计作为操纵干预建立基础。",
+      "evidence_pointer": "Abstract first sentence"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "第一段第2句",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "常被讨论的方法是引入一个无关的诱饵选项，这种现象叫做吸引力效应。",
+      "rhetorical_function_cn": "定义关键现象，让读者知道要研究什么。",
+      "depends_on_cn": "依赖上句背景。",
+      "sets_up_cn": "随后引出文献中的争议。",
+      "evidence_pointer": "Abstract second sentence"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "第一段第3句",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有研究因使用简化数值属性和纯假设选择，从而在应用场景中证据混杂，研究者对其实用性提出质疑。",
+      "rhetorical_function_cn": "点出文献缺口和批评。",
+      "depends_on_cn": "诱饵现象介绍。",
+      "sets_up_cn": "为本文要填补的应用缺口做铺垫。",
+      "evidence_pointer": "Abstract third sentence"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "第一段第4句",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文研究吸引力效应是否会在众筹这一应用场景中显现，其中属性既有数字也有非数字，选择有经济后果，且组织提供多个菜单选项。",
+      "rhetorical_function_cn": "明确研究目标。",
+      "depends_on_cn": "依赖前述批评。",
+      "sets_up_cn": "引出方法和结果。",
+      "evidence_pointer": "Abstract fourth sentence"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "第一段第5句",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "我们基于显著性理论提出四个假设：在数字奖励菜单中加入无关诱饵可能促使支持者选择更高价选项。",
+      "rhetorical_function_cn": "介绍理论视角并预告假设。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "后续理论部分展开。",
+      "evidence_pointer": "Abstract fifth sentence"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "第一段第6句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "我们进行了七项在线实验和一项Kickstarter实地研究，参与总数为3998，情境与RBC相似度逐渐提高。",
+      "rhetorical_function_cn": "介绍研究设计。",
+      "depends_on_cn": "理论假设。",
+      "sets_up_cn": "让人期待证据强度。",
+      "evidence_pointer": "Abstract sixth sentence"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "第一段第7句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "我们发现在不同设定中吸引力效应显著将支持者偏好从低价转向高价奖励，幅度18.8%到28.2%。",
+      "rhetorical_function_cn": "报告核心结果。",
+      "depends_on_cn": "研究设计。",
+      "sets_up_cn": "为贡献声明提供证据。",
+      "evidence_pointer": "Abstract seventh sentence"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "第一段最后一句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "鉴于研究者对应用情景中吸引力效应存疑，我们的结果特别重要，说明信息系统设计可以影响选择行为；本文对众筹、吸引力效应和数字设计文献做出贡献。",
+      "rhetorical_function_cn": "声明贡献并显式连接开场缺口。",
+      "depends_on_cn": "结果。",
+      "sets_up_cn": "正文将详细展开贡献。",
+      "evidence_pointer": "Abstract final sentence"
+    },
+    {
+      "order": 9,
+      "section": "1. Introduction",
+      "locator": "第1段第1句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在多个选项中做选择是消费者购买过程中的基本方面。",
+      "rhetorical_function_cn": "建立选择行为的普遍背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "与数字市场扩张连接。",
+      "evidence_pointer": "Introduction paragraph 1, sentence 1"
+    },
+    {
+      "order": 10,
+      "section": "1. Introduction",
+      "locator": "第1段第2-3句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数字市场随处可得，消费者在线购买时面临大量选择，这给在线商家提供了展示选择集的灵巧机会。",
+      "rhetorical_function_cn": "将普遍选择背景转向数字市场。",
+      "depends_on_cn": "上一句。",
+      "sets_up_cn": "随后引入数字设计影响行为。",
+      "evidence_pointer": "Introduction paragraph 1, sentences 2-3"
+    },
+    {
+      "order": 11,
+      "section": "1. Introduction",
+      "locator": "第1段第4句",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "Benartzi和Bhargava (2020)认为当代公司低估数字设计对消费、投资、隐私等行为结果的影响。",
+      "rhetorical_function_cn": "说明数字设计影响行为的实际意义和重要性。",
+      "depends_on_cn": "数字市场背景。",
+      "sets_up_cn": "为把吸引力效应作为数字设计干预作铺垫。",
+      "evidence_pointer": "Introduction paragraph 1, sentence 4"
+    },
+    {
+      "order": 12,
+      "section": "1. Introduction",
+      "locator": "第2段第1句",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "引入一个无关选项以使原来更贵选项更具吸引力，是一种流行的购买影响方法；这就是吸引力效应。",
+      "rhetorical_function_cn": "定义核心现象。",
+      "depends_on_cn": "前文关于设计影响行为。",
+      "sets_up_cn": "随后概述吸引力效应文献及其争议。",
+      "evidence_pointer": "Introduction paragraph 2, sentence 1"
+    },
+    {
+      "order": 13,
+      "section": "1. Introduction",
+      "locator": "第2段第2-3句",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "吸引力效应解释当诱饵被目标支配时，消费者偏好如何在竞争者和目标之间变化，且违背理性选择假设。",
+      "rhetorical_function_cn": "解释效应的机制定义。",
+      "depends_on_cn": "吸引力效应定义。",
+      "sets_up_cn": "为后文批评和理论解释建立基础。",
+      "evidence_pointer": "Introduction paragraph 2, sentences 2-3"
+    },
+    {
+      "order": 14,
+      "section": "1. Introduction",
+      "locator": "第3段第1句",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "虽然吸引力效应已被广泛研究，但实证研究对它在应用情境中的出现提供了混杂证据。",
+      "rhetorical_function_cn": "引出文献缺口。",
+      "depends_on_cn": "定义。",
+      "sets_up_cn": "随后列举三点批评。",
+      "evidence_pointer": "Introduction paragraph 3, sentence 1"
+    },
+    {
+      "order": 15,
+      "section": "1. Introduction",
+      "locator": "第3段第2-4句",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "批评包括：属性常被简化成纯数字；使用无背景的简单文本表示，缺少真实网站；大多数选择是假设的，没有经济后果。",
+      "rhetorical_function_cn": "具体说明现有研究局限。",
+      "depends_on_cn": "文献缺口总述。",
+      "sets_up_cn": "使应用场景（众筹）成为解决这些局限的理想环境。",
+      "evidence_pointer": "Introduction paragraph 3, sentences 2-4"
+    },
+    {
+      "order": 16,
+      "section": "1. Introduction",
+      "locator": "第4段第1句",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究使用奖励型众筹（RBC）这一互联网数字市场平台来研究吸引力效应。",
+      "rhetorical_function_cn": "提出选择众筹作为研究情境。",
+      "depends_on_cn": "三种缺失。",
+      "sets_up_cn": "解释为什么数字市场需要吸引力效应研究。",
+      "evidence_pointer": "Introduction paragraph 4, sentence 1"
+    },
+    {
+      "order": 17,
+      "section": "1. Introduction",
+      "locator": "第4段第2-3句",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "数字市场的选择集通常是明确定义的，便于比较，与传统市场非结构化选择不同；参与者面对经济后果。",
+      "rhetorical_function_cn": "论证数字市场情境使吸引力效应更可能且更有必要研究。",
+      "depends_on_cn": "选择数字市场。",
+      "sets_up_cn": "过渡到具体研究问题。",
+      "evidence_pointer": "Introduction paragraph 4, sentences 2-3"
+    },
+    {
+      "order": 18,
+      "section": "1. Introduction",
+      "locator": "第5段第1-4句",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "在RBC中，支持者从数字奖励菜单中选择奖励；我们提出三个研究问题：效应是否在众筹中出现？数值与非数值属性是否都有？假设与真实选择是否有差异？",
+      "rhetorical_function_cn": "正式提出研究问题。",
+      "depends_on_cn": "数字市场特点。",
+      "sets_up_cn": "引出后面理论。",
+      "evidence_pointer": "Introduction paragraph 5, sentences 1-4"
+    },
+    {
+      "order": 19,
+      "section": "1. Introduction",
+      "locator": "第5段最后一句",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "我们基于行为经济学中的显著性理论（Bordalo et al., 2012）来研究RBC中的吸引力效应。",
+      "rhetorical_function_cn": "引入理论视角。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "为理论假设部分做准备。",
+      "evidence_pointer": "Introduction paragraph 5, final sentence"
+    },
+    {
+      "order": 20,
+      "section": "1. Introduction",
+      "locator": "第6段第1句",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "RBC是研究数字市场中吸引力效应的合适场景，因为其具备清晰的奖励编码、真实经济后果和真实组织数据。",
+      "rhetorical_function_cn": "论证众筹情境的理论可用性。",
+      "depends_on_cn": "理论引入。",
+      "sets_up_cn": "为实验设计提供情境优点。",
+      "evidence_pointer": "Introduction paragraph 6, sentence 1"
+    },
+    {
+      "order": 21,
+      "section": "1. Introduction",
+      "locator": "第7段第1-3句",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于平台动态使观察数据难以隔离处理，实验法更适合控制环境；为了克服单个实验只解决一个方面的局限，我们运行了一系列八项研究。",
+      "rhetorical_function_cn": "解释为什么采用多项实验而不是单一大规模研究。",
+      "depends_on_cn": "RBC情境特殊性。",
+      "sets_up_cn": "为后续研究序列提供总体设计。",
+      "evidence_pointer": "Introduction paragraph 7, sentences 1-3"
+    },
+    {
+      "order": 22,
+      "section": "1. Introduction",
+      "locator": "第7段第4句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "我们逐步增加真实度，先做纯数值受控实验，再用非数值属性，再引入经济后果，最后在真实Kickstarter上操纵菜单。",
+      "rhetorical_function_cn": "概述研究序列。",
+      "depends_on_cn": "方法选择。",
+      "sets_up_cn": "让读者期待每个研究的累积证据。",
+      "evidence_pointer": "Introduction paragraph 7, sentence 4"
+    },
+    {
+      "order": 23,
+      "section": "1. Introduction",
+      "locator": "第8段第1-3句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文对吸引力效应文献、IS/众筹文献、行为经济学文献做出三点贡献。",
+      "rhetorical_function_cn": "在引言结尾声明贡献。",
+      "depends_on_cn": "研究结果（提前预告）。",
+      "sets_up_cn": "为讨论部分的贡献详述奠定基调。",
+      "evidence_pointer": "Introduction paragraph 8, sentences 1-3"
+    },
+    {
+      "order": 24,
+      "section": "2.1. Attraction Effect",
+      "locator": "第1句",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "吸引力效应在消费者选择研究中有广泛证据，影响餐厅、啤酒、汽车等选择。",
+      "rhetorical_function_cn": "总结先前文献范围。",
+      "depends_on_cn": "引言已定义效应。",
+      "sets_up_cn": "随后转入对应用有效性的质疑。",
+      "evidence_pointer": "Section 2.1, first paragraph"
+    },
+    {
+      "order": 25,
+      "section": "2.1. Attraction Effect",
+      "locator": "最后一段第1句",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "虽然文献提供了证据，但学者质疑其稳健性；批评者称它只在数值表征下有效。",
+      "rhetorical_function_cn": "指出吸引力效应的应用限制。",
+      "depends_on_cn": "PRIOR_KNOWLEDGE。",
+      "sets_up_cn": "为本文设置研究必要性。",
+      "evidence_pointer": "Section 2.1, final paragraph"
+    },
+    {
+      "order": 26,
+      "section": "2.2. Crowdfunding Success Factors",
+      "locator": "第3段第1句",
+      "move_code": "GAP",
+      "paraphrase_cn": "尽管众筹研究中已有大量成功因素，但奖励菜单的构成受到的关注非常少。",
+      "rhetorical_function_cn": "指出众筹文献中的研究空白。",
+      "depends_on_cn": "众筹成功因素综述。",
+      "sets_up_cn": "将本文与众筹成功因素文献接合。",
+      "evidence_pointer": "Section 2.2, paragraph 3, sentence 1"
+    },
+    {
+      "order": 27,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第1段第1句",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "我们的论证基于显著性理论（context-dependent choice），该理论认为消费者会根据选择情境中最显著的属性进行决策。",
+      "rhetorical_function_cn": "正式介绍理论框架。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "用于推导后续假设。",
+      "evidence_pointer": "Section 3, first paragraph"
+    },
+    {
+      "order": 28,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第2段第1句",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "Bordalo et al. (2013) 表明，消费者的注意力会投向质量-价格比更高的产品，即“物有所值”。",
+      "rhetorical_function_cn": "陈述理论的核心命题。",
+      "depends_on_cn": "理论引入。",
+      "sets_up_cn": "应用于众筹奖励选择。",
+      "evidence_pointer": "Section 3, paragraph 2"
+    },
+    {
+      "order": 29,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第3-5段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "显著性函数比较属性与参考平均值；当诱饵加入时，参考质量-价格比降低，使目标比参考更物有所值，从而质量显著，目标更有吸引力。",
+      "rhetorical_function_cn": "解释机制并给出数学表达。",
+      "depends_on_cn": "核心命题。",
+      "sets_up_cn": "为H1和H2提供推导基础。",
+      "evidence_pointer": "Section 3, paragraphs 3-5"
+    },
+    {
+      "order": 30,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第6段（假设1前）",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "我们用5首歌3币和12首歌10币的奖励示例，计算原参考质价比为1.31，加入价格诱饵后降至1.17，于是质量变得显著，支持者更倾向于选12首歌的目标。",
+      "rhetorical_function_cn": "实例化机制，为假设提供直观例证。",
+      "depends_on_cn": "理论机制。",
+      "sets_up_cn": "直接引出H1。",
+      "evidence_pointer": "Section 3, paragraph before Hypothesis 1"
+    },
+    {
+      "order": 31,
+      "section": "3. Theory and Hypotheses",
+      "locator": "Hypothesis 1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1: 添加一个价格稍差于目标的诱饵会增加支持者选择目标（高价）奖励的可能性。",
+      "rhetorical_function_cn": "提出第一个可检验假设。",
+      "depends_on_cn": "价格诱饵机制。",
+      "sets_up_cn": "为下一假设提供结构对称。",
+      "evidence_pointer": "Section 3, Hypothesis 1"
+    },
+    {
+      "order": 32,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第7段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "使用频率策略，降低诱饵的质量但保持价格相同，同样使参考质价比下降，质量变得显著。",
+      "rhetorical_function_cn": "变换操纵方式，推导第二种设计。",
+      "depends_on_cn": "基础机制。",
+      "sets_up_cn": "引出H2。",
+      "evidence_pointer": "Section 3, paragraph before Hypothesis 2"
+    },
+    {
+      "order": 33,
+      "section": "3. Theory and Hypotheses",
+      "locator": "Hypothesis 2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2: 添加一个质量稍差于目标的诱饵会增加选择目标（高价）奖励的可能性。",
+      "rhetorical_function_cn": "提出第二个假设。",
+      "depends_on_cn": "质量诱饵机制。",
+      "sets_up_cn": "为后续属性类型/经济后果调节做铺垫。",
+      "evidence_pointer": "Section 3, Hypothesis 2"
+    },
+    {
+      "order": 34,
+      "section": "3. Theory and Hypotheses",
+      "locator": "第8段第1句",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Bordalo等人的理论假设质量数值量化，但Frederick等人发现非数值属性会降低吸引力效应；Ha等人认为数值/非数值混合会削弱可比性。",
+      "rhetorical_function_cn": "引用已有知识，形成调节假设。",
+      "depends_on_cn": "先前文献。",
+      "sets_up_cn": "引出H3。",
+      "evidence_pointer": "Section 3, paragraph before Hypothesis 3"
+    },
+    {
+      "order": 35,
+      "section": "3. Theory and Hypotheses",
+      "locator": "Hypothesis 3",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3: 众筹中的吸引力效应在使用非数值属性时比使用数值属性时更弱。",
+      "rhetorical_function_cn": "提出属性类型调节假设。",
+      "depends_on_cn": "PRIOR_KNOWLEDGE。",
+      "sets_up_cn": "后面Study1 vs Study2比较将检验它。",
+      "evidence_pointer": "Section 3, Hypothesis 3"
+    },
+    {
+      "order": 36,
+      "section": "3. Theory and Hypotheses",
+      "locator": "最后一段第1-3句",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "Lichters等人发现经济后果会增强吸引力效应；显著性理论提示经济后果会提高注意力。",
+      "rhetorical_function_cn": "引入经济后果调节的理论依据。",
+      "depends_on_cn": "外部文献和理论。",
+      "sets_up_cn": "引出H4。",
+      "evidence_pointer": "Section 3, final paragraph"
+    },
+    {
+      "order": 37,
+      "section": "3. Theory and Hypotheses",
+      "locator": "Hypothesis 4",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H4: 当选择有经济后果时，吸引力效应比假设选择时更强。",
+      "rhetorical_function_cn": "提出第二个调节假设。",
+      "depends_on_cn": "经济后果理论。",
+      "sets_up_cn": "Study2 vs Study3将检验它。",
+      "evidence_pointer": "Section 3, Hypothesis 4"
+    },
+    {
+      "order": 38,
+      "section": "4. Overview of Studies",
+      "locator": "第1段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于众筹平台的动态性，几乎不可能运行两个并行且唯一处理不同的真实活动，因此需要受控实验；我们采用多方法（实验+实地）来检验显著性理论。",
+      "rhetorical_function_cn": "解释研究设计选择。",
+      "depends_on_cn": "RBC特性。",
+      "sets_up_cn": "为表3中的研究概览做说明。",
+      "evidence_pointer": "Section 4, first paragraph"
+    },
+    {
+      "order": 39,
+      "section": "4.1. Purpose of the Studies",
+      "locator": "第1段第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study1使用数值属性测试H1和H2；Study2加入非数值属性；比较两者测试H3。",
+      "rhetorical_function_cn": "预告前三个研究的关系。",
+      "depends_on_cn": "方法选择。",
+      "sets_up_cn": "具体描述各研究。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 40,
+      "section": "4.1. Purpose of the Studies",
+      "locator": "第2段第1-3句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study3引入经济后果，并与Study2比较测试H4；之后Study4/5在真实Kickstarter活动中操纵菜单；Study6-8为复现。",
+      "rhetorical_function_cn": "形成完整研究序列概览。",
+      "depends_on_cn": "前一个研究。",
+      "sets_up_cn": "让读者预期累积证据。",
+      "evidence_pointer": "Section 4.1, paragraph 2"
+    },
+    {
+      "order": 41,
+      "section": "4.2. Summary of Participants",
+      "locator": "第1句",
+      "move_code": "OTHER",
+      "paraphrase_cn": "总共分析了3998名参与者数据，除Study5外均通过Prolific招募。",
+      "rhetorical_function_cn": "提供样本信息。",
+      "depends_on_cn": "研究设计。",
+      "sets_up_cn": "为统计效力提供背景。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 42,
+      "section": "4.3. Summary of Results",
+      "locator": "第1段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "我们发现引入诱饵显著影响消费者选择目标高奖励的概率，形成从竞争者到目标的需求转移，并且无论操纵价格还是质量都有效。",
+      "rhetorical_function_cn": "提前给出总体结果。",
+      "depends_on_cn": "所有研究。",
+      "sets_up_cn": "为后续详细每个研究叙述预期。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 43,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "5.1 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "实验1使用数值属性来测试Bordalo et al. (2013)的理论，因为该理论建立在数值属性上。",
+      "rhetorical_function_cn": "说明实验1的目的。",
+      "depends_on_cn": "理论。",
+      "sets_up_cn": "作为理论检验的基准。",
+      "evidence_pointer": "Section 5.1, first sentence"
+    },
+    {
+      "order": 44,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "5.2 第1句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "我们选择音乐项目，因为音乐是Kickstarter上热门类别，并创建一个包含图片、文字描述和奖励菜单的简化音乐专辑众筹项目。",
+      "rhetorical_function_cn": "描述实验材料。",
+      "depends_on_cn": "实验目的。",
+      "sets_up_cn": "为奖励属性和条件设计提供上下文。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 45,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "5.3 第1-3句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "设置三个条件（无诱饵、价格诱饵、质量诱饵），奖励由价格和歌曲数区分；具体数值来自理论部分。",
+      "rhetorical_function_cn": "设计实验条件。",
+      "depends_on_cn": "理论推导的诱饵结构。",
+      "sets_up_cn": "为统计分析提供输入。",
+      "evidence_pointer": "Section 5.3, Table 4"
+    },
+    {
+      "order": 46,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "5.4 第1句",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "我们对二进制响应（零=竞争者，一=目标）拟合逻辑回归模型来估计条件对选择高奖励概率的影响。",
+      "rhetorical_function_cn": "说明统计方法。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "呈现结果。",
+      "evidence_pointer": "Section 5.4, Equation 1"
+    },
+    {
+      "order": 47,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "5.5 第1-5句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "无诱饵时43.8%选择高奖励，价格诱饵72.4%，质量诱饵71.6%；逻辑回归系数显著，预测概率分别约为47%、71%、70%，增加约23.4和22.7个百分点。",
+      "rhetorical_function_cn": "报告核心结果。",
+      "depends_on_cn": "统计模型。",
+      "sets_up_cn": "支持H1、H2，并引出局限。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 48,
+      "section": "5. Study 1: Quantitative Reward Attributes",
+      "locator": "最后一段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "但实验1只用了数值属性；为回击吸引力效应只适合数值属性的批评，后续实验将引入非数值奖励。",
+      "rhetorical_function_cn": "承认局限并预告下一步。",
+      "depends_on_cn": "结果有效但范围有限。",
+      "sets_up_cn": "过渡到Study2。",
+      "evidence_pointer": "End of Section 5"
+    },
+    {
+      "order": 49,
+      "section": "6. Study 2: Nonnumerical Reward Attributes",
+      "locator": "6.1 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "实验2扩展实验1，引入非数值奖励属性，用产品内容版本替代歌曲数，其他设置相同。",
+      "rhetorical_function_cn": "描述研究延长。",
+      "depends_on_cn": "实验1。",
+      "sets_up_cn": "为测试H3建立对比。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 50,
+      "section": "6. Study 2: Nonnumerical Reward Attributes",
+      "locator": "6.2 第1-3句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "奖励属性改为“数字下载”、“CD+下载”、“仅CD”，并相应调整价格诱饵和质量诱饵的构成。",
+      "rhetorical_function_cn": "描述新属性设计。",
+      "depends_on_cn": "实验1条件。",
+      "sets_up_cn": "让参与者面对非数值质量。",
+      "evidence_pointer": "Section 6.2, Table 5"
+    },
+    {
+      "order": 51,
+      "section": "6. Study 2: Nonnumerical Reward Attributes",
+      "locator": "6.3 第1-4句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "非数值属性下，无诱饵48.2%，价格诱饵71.4%，质量诱饵73.7%，均显著支持H1和H2。",
+      "rhetorical_function_cn": "报告分析结果。",
+      "depends_on_cn": "实验2设计。",
+      "sets_up_cn": "为进一步测试H3。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 52,
+      "section": "6. Study 2: Nonnumerical Reward Attributes",
+      "locator": "6.4 第1句",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "合并实验1和2的数据，检验条件与属性类型的交互；交互不显著，说明非数值属性效果不比数值弱。",
+      "rhetorical_function_cn": "测试调节假设H3。",
+      "depends_on_cn": "两个实验的数据可比性。",
+      "sets_up_cn": "拒绝H3并讨论意义。",
+      "evidence_pointer": "Section 6.4"
+    },
+    {
+      "order": 53,
+      "section": "6. Study 2: Nonnumerical Reward Attributes",
+      "locator": "6.4 最后一句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "这一发现与Frederick等人不同，是吸引力效应在非数值属性上可用性的关键前提，也支持RBC中的适用性。",
+      "rhetorical_function_cn": "解释结果的理论意义。",
+      "depends_on_cn": "交互结果。",
+      "sets_up_cn": "为理论扩展奠定。",
+      "evidence_pointer": "End of Section 6"
+    },
+    {
+      "order": 54,
+      "section": "7. Study 3: Introducing Economic Consequences",
+      "locator": "7.1 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "实验3引入经济后果，模仿众筹中的keep-it-all机制，让选择直接影响报酬。",
+      "rhetorical_function_cn": "描述目的。",
+      "depends_on_cn": "Study2。",
+      "sets_up_cn": "为测试H4。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 55,
+      "section": "7. Study 3: Introducing Economic Consequences",
+      "locator": "7.3 第1-3句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "参与者获25币初始，项目以50%概率成功；若成功，按承诺得到奖励返还，否则损失投入，从而产生真实经济后果。",
+      "rhetorical_function_cn": "具体化经济后果设计。",
+      "depends_on_cn": "诱导价值理论。",
+      "sets_up_cn": "提供与假设选择的对比。",
+      "evidence_pointer": "Section 7.3"
+    },
+    {
+      "order": 56,
+      "section": "7. Study 3: Introducing Economic Consequences",
+      "locator": "7.4 第1-4句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "无诱饵44.2%，价格诱饵76.1%，质量诱饵78.9%，显著支持H1和H2。",
+      "rhetorical_function_cn": "报告结果。",
+      "depends_on_cn": "Study3条件。",
+      "sets_up_cn": "测试H4。",
+      "evidence_pointer": "Section 7.4"
+    },
+    {
+      "order": 57,
+      "section": "7. Study 3: Introducing Economic Consequences",
+      "locator": "7.5 第1-3句",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "合并Study2和3数据，检验条件与选择类型的交互；交互在90%置信水平显著，表明经济后果情境内诱饵效果更强。",
+      "rhetorical_function_cn": "测试H4。",
+      "depends_on_cn": "两个实验数据。",
+      "sets_up_cn": "为后续生态效度研究提供理由。",
+      "evidence_pointer": "Section 7.5"
+    },
+    {
+      "order": 58,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.1 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "为了增加生态效度，我们与瑞士奢侈品手表制造商合作，在其真实Kickstarter活动中操纵奖励菜单。",
+      "rhetorical_function_cn": "引入实地研究。",
+      "depends_on_cn": "前几项实验。",
+      "sets_up_cn": "解决实验面对低赌注、人工支付、无退出等担忧。",
+      "evidence_pointer": "Section 8.1"
+    },
+    {
+      "order": 59,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.2 第1-2句",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "合作伙伴制造高级手表，活动非常成功，菜单提供三种产品；我们选择钥匙扣和自动手表作为竞争者和目标。",
+      "rhetorical_function_cn": "描述现场设定。",
+      "depends_on_cn": "合作机会。",
+      "sets_up_cn": "为添加诱饵设置背景。",
+      "evidence_pointer": "Section 8.2"
+    },
+    {
+      "order": 60,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.3 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "我们首先在试点实验中测试诱饵设计（Study4），随后在真实活动中部署（Study5）。",
+      "rhetorical_function_cn": "区分试点和主研究。",
+      "depends_on_cn": "现场限制。",
+      "sets_up_cn": "解释为什么需要试点先验。",
+      "evidence_pointer": "Section 8.3"
+    },
+    {
+      "order": 61,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.5 第1句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "试点中无诱饵选择高奖励34%，有诱饵69%，β=0.83显著。",
+      "rhetorical_function_cn": "报告试点结果。",
+      "depends_on_cn": "试点条件。",
+      "sets_up_cn": "为实地提供先验。",
+      "evidence_pointer": "Section 8.5"
+    },
+    {
+      "order": 62,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.6 第1句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "现场不允许平行对照，因此我们与试点结果对照，并在主分析中通过贝叶斯方法利用试点先验。",
+      "rhetorical_function_cn": "解释实地研究无对照条件下的策略。",
+      "depends_on_cn": "现场限制和试点结果。",
+      "sets_up_cn": "为贝叶斯分析做铺垫。",
+      "evidence_pointer": "Section 8.6"
+    },
+    {
+      "order": 63,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.8.1 第1-4句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实地中发现54%选择目标、25%选择竞争者、22%选择诱饵；目标显著区别于竞争者（β=0.78）。",
+      "rhetorical_function_cn": "报告主分析1。",
+      "depends_on_cn": "现场数据。",
+      "sets_up_cn": "与贝叶斯分析互相验证。",
+      "evidence_pointer": "Section 8.8.1"
+    },
+    {
+      "order": 64,
+      "section": "8. Studies 4 and 5: Real-World Campaign",
+      "locator": "8.8.2 第1-3句",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "用试点数据作为先验，用主研究数据更新后，预测无诱饵时38%会选择高奖励，有诱饵时74%，差异显著。",
+      "rhetorical_function_cn": "弥补缺少对照的反事实。",
+      "depends_on_cn": "试点先验和实地数据。",
+      "sets_up_cn": "支持现场中诱饵有效。",
+      "evidence_pointer": "Section 8.8.2"
+    },
+    {
+      "order": 65,
+      "section": "9. General Discussion",
+      "locator": "9.1 第1句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "总结所有研究：吸引力效应在众筹中显著存在，且非数值属性有效、经济后果增强效应。",
+      "rhetorical_function_cn": "汇总全部结果。",
+      "depends_on_cn": "所有研究。",
+      "sets_up_cn": "为机制解释和贡献打基础。",
+      "evidence_pointer": "Section 9.1"
+    },
+    {
+      "order": 66,
+      "section": "9. General Discussion",
+      "locator": "9.1 第3段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "数字市场降低了比较成本，使消费者能轻松比较数值和非数值属性，这就是为什么吸引力效应在这些市场中有效，之前的观点可能不成立。",
+      "rhetorical_function_cn": "为结果提供机制层面的解释。",
+      "depends_on_cn": "结果。",
+      "sets_up_cn": "将实验结论推广到其他数字市场。",
+      "evidence_pointer": "Section 9.1"
+    },
+    {
+      "order": 67,
+      "section": "9. General Discussion",
+      "locator": "9.2 第1段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "实验方法缺乏一定的现实性，但本研究通过系列实验和真实活动进行弥补；未来研究应考虑动态环境和其他产品属性。",
+      "rhetorical_function_cn": "指出局限并保护效用。",
+      "depends_on_cn": "整个研究。",
+      "sets_up_cn": "过渡到贡献部分。",
+      "evidence_pointer": "Section 9.2"
+    },
+    {
+      "order": 68,
+      "section": "9. General Discussion",
+      "locator": "9.3 第1段第1句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们为吸引力效应文献提供了在应用环境中的强证据，表明非数值属性下也有效。",
+      "rhetorical_function_cn": "第一贡献声明。",
+      "depends_on_cn": "结果。",
+      "sets_up_cn": "连续声明其他贡献。",
+      "evidence_pointer": "Section 9.3"
+    },
+    {
+      "order": 69,
+      "section": "9. General Discussion",
+      "locator": "9.3 第2段第1句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们扩展了Bordalo等人的显著性理论，证明在数字市场中非数值属性也适用。",
+      "rhetorical_function_cn": "理论贡献。",
+      "depends_on_cn": "非数值属性结果。",
+      "sets_up_cn": "强调理论扩展性。",
+      "evidence_pointer": "Section 9.3, paragraph 2"
+    },
+    {
+      "order": 70,
+      "section": "9. General Discussion",
+      "locator": "9.3 第3段第1句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们为众筹文献带来数字奖励菜单设计的重要性，通过个体层面选择而非总体效果研究。",
+      "rhetorical_function_cn": "众筹文献贡献。",
+      "depends_on_cn": "结果。",
+      "sets_up_cn": "为IS文献贡献。",
+      "evidence_pointer": "Section 9.3, paragraph 3"
+    },
+    {
+      "order": 71,
+      "section": "9. General Discussion",
+      "locator": "9.3 第4段第1句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "我们为信息系统的数字市场文献提供证据，显示IS设计（奖励菜单）对用户决策有持久影响。",
+      "rhetorical_function_cn": "IS贡献。",
+      "depends_on_cn": "所有结果。",
+      "sets_up_cn": "巩固文章在IS领域的定位。",
+      "evidence_pointer": "Section 9.3, paragraph 4"
+    },
+    {
+      "order": 72,
+      "section": "9.4. Implications for Practice",
+      "locator": "第1段",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "项目创造者可以使用诱饵引导支持者选择更高价奖励；项目支持者应注意菜单设计的认知偏差；平台可提供菜单设计指南。",
+      "rhetorical_function_cn": "给出实践建议。",
+      "depends_on_cn": "研究结果。",
+      "sets_up_cn": "提升研究现实意义。",
+      "evidence_pointer": "Section 9.4"
+    },
+    {
+      "order": 73,
+      "section": "9.5. Conclusion",
+      "locator": "第1段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "结论重申：在奖励菜单中插入诱饵可以显著影响支持者选择，效果独立于属性类型但依赖于选择类型；信息系统设计可以影响选择行为。",
+      "rhetorical_function_cn": "收束全文，重述核心主张。",
+      "depends_on_cn": "所有结果。",
+      "sets_up_cn": "无后续，是结语。",
+      "evidence_pointer": "Section 9.5"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先陈述吸引力效应的理论重要性，然后立即引用批评者关于应用不可靠的三大原因（数值属性、简化为文本、假设选择），以此制造缺口；再指出数字市场的两个特点（结构化选择集、经济后果）恰好能补足，从而把研究场景锁定在众筹。",
+    "signposting_cn": "在摘要、引言末尾和Overview of Studies中明确预告八个研究的目的和递增逻辑；每个研究小节以“Overview”开头说明本阶段性任务；用Table 3汇总全部研究，并在每次结果后说明是否支持假设。",
+    "transition_logic_cn": "每个实验结尾指出前一个实验留下的局限，自然过渡到下一个实验（如数值→非数值→经济后果→真实活动→复现）；研究序列以术语“level of realism”串联，逻辑清晰。",
+    "claim_evidence_rhythm_cn": "先提出假设，然后每个实验按“概述→材料/条件→分析→结果→局限/下一步”循环；每个结果同时给出描述统计、系数、可信区间和概率换算，形成证据密度；关键调节检验使用交互图和统计交互项。",
+    "benchmark_narrative_cn": "以无诱饵条件作为每个实验的内在benchmark；研究间benchmark通过比较Study1 vs 2、Study2 vs 3形成调节效应的对比；真实研究没有benchmark时，用试点作为贝叶斯先验构造反事实benchmark。",
+    "theory_return_cn": "在讨论中不仅报告效应显著，还将结果回接到salience theory：数字市场使非数值属性容易比较，因此理论可扩展到非数值属性；还指出Bordalo理论原本假设数值，本文扩展其边界。",
+    "contribution_positioning_cn": "贡献分别面向四个领域：吸引力效应文献（实证稳健性）、众筹文献（奖励菜单）、行为经济学（理论扩展）、IS（数字设计影响行为）；每个贡献都对应引言中的缺口或质疑，形成闭合。",
+    "novelty_protection_cn": "防护一次性结果的方法包括：八项研究逐步增加生态效度，重复验证；使用真实Kickstarter活动；对调节进行显式统计检验；使用贝叶斯分析强调证据；在讨论中重申数字市场的普遍特征使效应不局限于众筹。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立数字设计/选择菜单的重要性，并指出目标效应在应用场景中存在争议。",
+        "research_job_cn": "找到有明确理论但应用证据不足的心理学/行为经济学现象。",
+        "required_evidence_cn": "领域文献中的批评列表，能确定三个具体局限。",
+        "transition_to_next_cn": "指出所选现实情境（如众筹）天然满足这些局限的相反条件。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入核心理论，推导诱饵/干预对参考点的影响，并用数值例子展示机制。",
+        "research_job_cn": "选定正式理论（如显著性理论），并将理论公式映射到具体设计参数（如价格和质量）。",
+        "required_evidence_cn": "能计算参考变化和显著性翻转的示例。",
+        "transition_to_next_cn": "通过两个操纵方式（价格/质量）引出主效应假设，再根据文献加入调节假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "设计一系列实验，从最简化受控到最真实情境，逐步增加生态效度。",
+        "research_job_cn": "规划研究序列：基础实验（效度）、属性变更（检验边界）、后果变更（检验另一种边界）、真实情境（外效度）、复现。",
+        "required_evidence_cn": "每个实验有预设假设、对照条件和可比较的指标。",
+        "transition_to_next_cn": "每个实验结尾明确未解决的新问题。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "每个实验按统一模板报告：目的、材料、条件、分析方法、结果、局限。",
+        "research_job_cn": "分配参与者，收集数据，使用同一统计模型（如逻辑回归）和贝叶斯估计，保证可比性。",
+        "required_evidence_cn": "描述统计、系数、可信区间和比例变化。",
+        "transition_to_next_cn": "用“为了克服上一实验的局限”引出下一实验。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "在讨论中把所有结果回接到理论，解释机制为何在现实数字市场中有效，并声明多领域贡献。",
+        "research_job_cn": "将实验结果抽象为对理论的扩展（如非数值属性）和对设计的启示（菜单设计影响行为）。",
+        "required_evidence_cn": "跨研究一致的效应方向和调节效应。",
+        "transition_to_next_cn": "通过局限和未来研究保持学术审慎。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "将抽象理论用数值例子翻译成可操作的设计参数，再提出假设",
+      "用逐级增加真实度的一系列小实验代替一个大型实验，每个实验只解决一个缺口",
+      "在无真实对照条件下用贝叶斯法补偿反事实",
+      "使用统一的逻辑回归和可信区间报告，使结果可比较",
+      "每个实验末尾明确下一步要克服的局限"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "与真实众筹平台/Kickstarter项目合作进行实地操纵（需要企业伙伴）",
+      "运行八个实验涉及大量参与者（3998人）和资金投入（如高额奖金）",
+      "真实平台活动无法完全随机和设立对照组，必须依赖统计技巧",
+      "对真实世界结果获得组织数据的隐私等限制"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只报告‘诱饵显著’而不提供理论推导和数值例子",
+      "不要没有对照组却宣称因果，除非使用贝叶斯先验或其他方法",
+      "不要将显著性理论直接套在非数值属性上，而应像原文那样用交互检验证明扩展",
+      "不要照搬‘八项研究’外壳，但没有每个研究特有的目的和累积逻辑"
+    ],
+    "single_best_description_of_the_routine_cn": "用一个有力的理论缺口开头，用一系列逐渐贴近真实场景的受控实验检验同一个机理，再通过一个真实世界干预和贝叶斯法补足外部效度，最后回到理论边界和设计启示。"
+  },
+  "confidence": 0.9,
+  "limitations_cn": "由于无法访问在线附录（Online Appendices C-F），对Study 6-8及其他稳健性检验的细节只能依赖文中摘要；部分位置指示（如段落和句子编号）为人工估算，可能不精确；文章OCR存在轻微字符错乱，但总体不影响分析。",
+  "usage": {
+    "prompt_tokens": 33055,
+    "completion_tokens": 26800,
+    "total_tokens": 59855,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 29727
+  }
+}

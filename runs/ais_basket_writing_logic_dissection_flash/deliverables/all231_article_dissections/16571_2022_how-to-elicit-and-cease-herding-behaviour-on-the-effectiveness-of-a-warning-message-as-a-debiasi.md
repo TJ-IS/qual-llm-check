@@ -1,0 +1,1333 @@
+# How to elicit and cease herding behaviour? On the effectiveness of a warning message as a debiasing decision support system
+
+- 作者：Boukje Compen; Francisco Pitthan; Wouter Schelfhout; Kristof De Witte
+- 年份 / 期刊：2022 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113652
+- 源文件：16571_2022_how-to-elicit-and-cease-herding-behaviour-on-the-effectiveness-of-a-warning-message-as-a-debiasi.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：在金融决策情境下，同伴信息是否以及在多大程度上会引发羊群行为，并且以警告信息为形式的去偏决策支持系统能否减少这种羊群行为？
+
+- 制品与设计：将同伴信息（随机10%-90%百分比）嵌入两个金融模拟DSS（伤残保险和退休计划）中，并在初始选择后将警告信息作为第二个DSS弹出。
+
+- 客观结果：实验条件选择被羊群选项的优势比是控制条件的1.876倍；百分比50%-89%时才出现显著羊群效应；警告信息对改变选择没有显著影响（OR≈0.97，仅10人切换）。
+
+- 核心贡献：通过实地随机对照试验证明同伴信息可以可靠地引发金融决策中的羊群效应，量化了‘至少50%’的阈值，并表明简单的警告信息不足以作为去偏策略，从而为DSS设计提出更强的去偏需求。
+
+- 整篇论证链：作者从行为经济学中羊群效应的普遍性和金融在线环境下易受错误信息影响的事实出发，指出现有文献缺乏对同伴信息强度阈值和羊群去偏DSS的研究。他们在一个真实金融教育网站上，利用两个模拟工具作为DSS，进行随机对照试验：随机向实验组提供显示为10%-90%同伴百分比的选项，并在选择后弹出警告信息。Logit回归显示实验组选择被操纵选项的概率显著更高，且只有当百分比达到50%以上才显著；警告信息没有显著改变选择。作者由此主张，羊群效应容易被同伴信息诱发且对警告免疫，设计者需要更强烈的干预策略。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：该研究是在真实金融教育网站上进行的随机对照试验，操纵现场决策中的同伴信息和警告信息，并非基于虚构场景或仅计算仿真，因此属于平台现场实验。
+
+- 主导写作弧线判定：文章按‘现象（羊群效应）—机制（社会影响/信息级联）—数字干预（同伴信息和警告消息）—现场因果检验（RCT）’的顺序展开，并在讨论中回到机制解释。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：首先通过随机对照试验确认同伴信息能够引发羊群（主效应）；然后在同一实验设置中使用随机百分比，识别羊群发生的阈值；接下来在实验组内部用警告信息作为去偏DSS，通过前后选择对比检验其效果；最后通过多个稳健性分析确认主结果的模式和边界条件。阶段1和2使用同一人群进行连续分析，阶段3仅使用实验组，阶段4是补充检验。
+
+### studies_or_phases
+
+#### 1. 同伴信息是否能够引发羊群行为（主效应）
+
+- order：1
+
+- name_cn：同伴信息是否能够引发羊群行为（主效应）
+
+- question_cn：在财务决策（伤残保险和退休规划）中，提供同伴信息是否显著提高对特定选项的选择概率？
+
+- inputs_and_setting_cn：在真实金融教育网站上进行随机对照试验，768名完成完整干预的访问者，随机分配到控制组428人和实验组340人；实验组在Premium选项上附加随机10%-90%的‘其他用户选择此选项’百分比。
+
+- designed_or_compared_object_cn：比较控制条件（无同伴信息）与实验条件（有同伴信息）下选择Premium（被羊群选项）的比例；实验条件是数字场景线索的设计操纵。
+
+- baseline_control_or_counterfactual_cn：控制条件：显示三个选项但不显示任何同伴百分比。
+
+##### objective_metrics
+
+1. 选择被羊群选项的优势比
+
+2. 拟合边际概率
+
+- analysis_method_cn：Logit回归（模型1），控制变量逐步加入（模型4-5）。
+
+- main_result_cn：实验组选择被羊群选项的优势比为1.876（p<0.001），相比控制组高88%；基于拟合值，概率高38%。
+
+- argumentative_role_cn：确立了核心随机对照试验的主效应，证明同伴信息是影响金融选择的有效操纵。
+
+- remaining_uncertainty_cn：是否任何百分比都能引发羊群，还是存在一个强度阈值？
+
+- link_to_next_phase_cn：模型1的效果整体显著，但将处理组按百分比分组才能检验阈值，因此进入第二阶段。
+
+##### evidence_pointers
+
+1. Figure 1 Panel B
+
+2. Table 2 Model 1
+
+3. Section 3.3 paragraph 1
+
+#### 2. 羊群效应出现的百分百阈值（剂量-反应分析）
+
+- order：2
+
+- name_cn：羊群效应出现的百分百阈值（剂量-反应分析）
+
+- question_cn：同伴信息显示多少百分比时，人们才开始显著倾向于跟随之？
+
+- inputs_and_setting_cn：实验条件中随机显示的百分比在10%-90%之间，作者按0-29%、30-49%、50-69%、70-89%分为四组。
+
+- designed_or_compared_object_cn：将实验组的4个百分比区间哑变量与控制组进行比较，并检验随百分比增加的趋势。
+
+- baseline_control_or_counterfactual_cn：控制组（无百分比）作为参考类别；此外在部分模型中加入DSS类型、年龄、家庭结构协变量。
+
+##### objective_metrics
+
+1. 各百分比区间相对于控制组的优势比
+
+2. 连续百分比变量的优势比
+
+- analysis_method_cn：带有不同百分比区间哑变量的Logit模型（模型2-5），以及以连续百分比为解释变量的补充模型。
+
+- main_result_cn：10-29%和30-49%组不显著；50-69%组OR≈1.95（p<0.01）；70-89%组OR≈2.46（p<0.001）；连续百分比OR=1.011。
+
+- argumentative_role_cn：识别羊群效应的强度门槛，说明不是任意同伴信息都能引发羊群，填补了Frey & Meier和Beshears等人研究中的阈值缺口。
+
+- remaining_uncertainty_cn：百分比阈值是否因决策领域、样本或选项特征而异？低百分比为何不显著？
+
+- link_to_next_phase_cn：既然确认羊群可以在特定百分比下被可靠引发，下一步需要测试去偏机制（警告信息）能否削弱这种效应。
+
+##### evidence_pointers
+
+1. Figure 3
+
+2. Table 2 Models 2-5
+
+3. Section 3.3 paragraph 2-3
+
+4. Robustness tests paragraph
+
+#### 3. 警告信息作为去偏DSS的有效性
+
+- order：3
+
+- name_cn：警告信息作为去偏DSS的有效性
+
+- question_cn：在初始选择后显示一条警告信息（揭示百分比是随机生成的）能否促使人们改变选择，从而减少羊群？
+
+- inputs_and_setting_cn：仅针对实验组中收到同伴信息的340人；在初始选择后弹出警告信息，随后允许修改最终选择；265人完成最终选择。
+
+- designed_or_compared_object_cn：比较同一个体在警告前（初始选择）和警告后（最终选择）选择被羊群选项的情况。
+
+- baseline_control_or_counterfactual_cn：以初始选择作为基线；在稳健性检查中，还限制为初始被羊群选项概率最高的百分比区间（50-89%）的受访者，并使用了单独的‘是否变更选择’作为因变量。
+
+##### objective_metrics
+
+1. 警告前后选择被羊群选项的优势比
+
+2. 实际变更选择的次数
+
+- analysis_method_cn：条件Logit模型（表3），控制百分比区间、DSS类型、年龄、家庭结构；稳健性检验使用变更选择作为因变量。
+
+- main_result_cn：警告消息的优势比接近1且不显著（OR≈0.97）；只有10/265人改变选择，其中6人从被羊群选项离开；即使限制在50-89%区间，警告也不显著。
+
+- argumentative_role_cn：证明简单的警告信息不足以作为羊群去偏工具，确立羊群效应的稳健性，为DSS设计提出必须使用更强去偏策略的建议。
+
+- remaining_uncertainty_cn：未能区分警告消息本身和给予变更机会的效果；没有经济激励也可能导致人们不改变选择。
+
+- link_to_next_phase_cn：该阶段结果直接进入讨论，用于解释羊群为何难以克服，并提出未来研究的方向。
+
+##### evidence_pointers
+
+1. Figure 2 overview
+
+2. Table 1 Panel C
+
+3. Table 3 Models 1-5
+
+4. Section 3.3 paragraph 4-5
+
+#### 4. 稳健性与边界检验
+
+- order：4
+
+- name_cn：稳健性与边界检验
+
+- question_cn：主要结果在不同决策工具、模型规格和样本子集中是否保持一致？
+
+- inputs_and_setting_cn：使用相同数据库，分别按残疾保险和退休DSS拆分，估计多项Logit，将百分比作为连续变量和二次项，以及仅包含高百分比区间的子样本。
+
+- designed_or_compared_object_cn：对不同模型规格和样本拆分的检查。
+
+- baseline_control_or_counterfactual_cn：稳健性参照是基准Logit模型中的对照比较。
+
+##### objective_metrics
+
+1. 系数显著性和方向
+
+2. 模型拟合指标
+
+- analysis_method_cn：分别运行的Logit、多项Logit、连续/二次百分比模型、子样本条件Logit。
+
+- main_result_cn：在退休DSS中，平均羊群效应不显著，仅在70-89%区间显著；多项Logit支持类似模式；连续百分比显著且二次项不显著；警告消息在限制的子样本中仍不显著。
+
+- argumentative_role_cn：表明主要发现对多种规格是稳健的，同时揭示退休DSS中的领域异质性，以及警告无效结论的稳健性。
+
+- remaining_uncertainty_cn：退休DSS中低百分比不显著的原因未被充分检验；可能的机制无法从数据中确定。
+
+- link_to_next_phase_cn：稳健性结果作为结果部分的收尾，引出讨论中的外部效度和机制解释。
+
+##### evidence_pointers
+
+1. Section 3.3 robustness paragraph
+
+2. Table 2 robustness
+
+3. Table 3 robustness
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. GAP
+
+3. RQ_OR_OBJECTIVE
+
+4. METHOD_JUSTIFICATION
+
+5. RESULT
+
+6. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. WHY_GAP_MATTERS
+
+5. RQ_OR_OBJECTIVE
+
+6. LIMITATION
+
+7. CONTRIBUTION
+
+8. STUDY_OVERVIEW
+
+9. HYPOTHESIS_OR_PROPOSITION
+
+10. RESULT
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. PRIOR_KNOWLEDGE
+
+3. MECHANISM
+
+4. THEORY_PROPOSITION
+
+5. LIMITATION
+
+6. GAP
+
+7. REQUIREMENT
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. METHOD_JUSTIFICATION
+
+3. REQUIREMENT
+
+4. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. STUDY_OVERVIEW
+
+3. BENCHMARK_OR_CONTRAST
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. MECHANISM
+
+3. BOUNDARY_CONDITION
+
+4. CONTRIBUTION
+
+5. LIMITATION_AND_FUTURE
+
+6. BOUNDARY_CONDITION
+
+7. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 行为经济学/行为决策理论
+
+2. 羊群行为与从众心理文献
+
+3. DSS去偏研究
+
+4. 社会影响与同伴效应文献
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：理论指导了干预的选择和假设方向：羊群文献启发了同伴信息操纵，去偏文献启发了警告信息操纵；但具体DSS模拟工具、三个选项的选择、警告消息措辞以及现场网站环境均由领域背景和现有系统决定，并非由理论前瞻性推导。
+
+- 理论到设计翻译链：人类具有模仿他人决策的倾向（羊群）→ 提供同伴选择信息可以触发观察学习/从众 → 在模拟DSS的选项上显示‘x%的人选择此选项’ → 随机百分比10-90造成信息强度差异 → 与无信息控制组比较，并在区间间比较，证明‘50%以上’阈值。 与此同时，去偏文献认为警示可以降低偏差影响 → 在初始选择后弹出警告信息 → 警告揭示百分比随机生成并指出商业机构可能滥用 → 将警告后选择与初始选择比较，得到无效结果。 最后通过选择支持偏差和锚定机制解释为何警告无效。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：人类倾向于以他人行为为决策依据，即羊群效应。
+
+- mechanism_cn：信息瀑布（信息不对称）和从众偏好使个体追随群体。
+
+- design_requirement_cn：要让羊群效应成为可观察的决策变量，需要呈现群体选择信息。
+
+- artifact_choice_cn：在模拟DSS中，对Premium选项附加显示随机10%-90%的‘其他用户选择’信息。
+
+- evaluated_contrast_cn：控制组（无信息）vs 实验组（有信息）；以及不同百分比区间之间的差异。
+
+- objective_result_cn：实验组选择被羊群选项的OR=1.876；仅在50%-69%和70%-89%区间显著。
+
+##### evidence_pointers
+
+1. Figure 1 Panel B
+
+2. Table 2 Models 1-5
+
+3. Figure 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：羊群的强度可能取决于群体证据的可信度（群体规模/比例）。
+
+- mechanism_cn：更高的比例会增强社会证明，强化从众压力。
+
+- design_requirement_cn：需要对群体信息的强度进行系统变化，以估计触发羊群的临界点。
+
+- artifact_choice_cn：以10%-90%随机生成百分比，并按20%区间（0-29,30-49,50-69,70-89）编码。
+
+- evaluated_contrast_cn：各区间哑变量与控制组比较；连续百分比变量作为解释变量。
+
+- objective_result_cn：低区间（10-49）不显著；50-69和70-89显著；连续百分比OR=1.011。
+
+##### evidence_pointers
+
+1. Table 2 Models 2-5
+
+2. Robustness tests
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：对偏差的警告可能提高反思性，帮助降低认知偏差影响。
+
+- mechanism_cn：通过警告使个体意识到潜在的误导，促使其重新评估初始选择。
+
+- design_requirement_cn：需要在与决策相关的时刻提供警告，并允许修改决策。
+
+- artifact_choice_cn：在初始选择后弹出警告信息，揭示百分比随机生成并重申羊群风险，随后让用户重新选择。
+
+- evaluated_contrast_cn：同一实验组个体警告前后的选择对比；以及是否存在更改。
+
+- objective_result_cn：警告前后选择被羊群选项的OR≈0.97，不显著；仅极少数人改变选择。
+
+##### evidence_pointers
+
+1. Table 1 Panel C
+
+2. Table 3 Models 1-5
+
+3. Figure 2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：去偏干预的效果可能受到心理机制（选择支持偏差、锚定）的抑制。
+
+- mechanism_cn：选择后人们倾向于维护已选选项；初始同伴信息作为锚点使调整不足。
+
+- design_requirement_cn：设计去偏DSS时应考虑认知稳定性，可能需要更强或更早的干预。
+
+- artifact_choice_cn：由于本文警告无效，建议更强烈的去偏策略（例如个性化反馈或训练）。
+
+- evaluated_contrast_cn：严格来说并没有直接测试更强策略；但这一需要仅作为推论。
+
+- objective_result_cn：警告无效，因此为未来更强烈去偏策略提供了必要性的证据。
+
+##### evidence_pointers
+
+1. Discussion section
+
+2. Section 4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 现场随机对照试验
+
+2. 剂量-反应分析（随机百分比）
+
+3. 前后对比设计（警告）
+
+4. 多项稳健性分析
+
+- why_these_evaluations_cn：为了将羊群效应从单纯的描述性相关转化为可验证的因果证据，作者采用随机对照试验；为了判断信息强度的阈值，利用随机百分比构建剂量-反应；为了检验去偏DSS，在同一处理组中进行警告前后对比；最后通过多样本/多模型检验提升结果可信度并揭示边界条件。
+
+- benchmark_and_contrast_chain_cn：控制组作为无信息基线，实验组作为干预组；随后实验组内部百分比区间形成了递增的‘证据强度’对照；第三步以个体自身初始选择作为警告前的基线，警告后选择为治疗效果；稳健性检验中分别以连续百分比、更换选择概率和限制高百分比子样本作为补充对照，从而累积构建出‘主效应—阈值—去偏无效—稳健性’的证据链。
+
+### claim_evidence_ledger
+
+1. 同伴信息引发羊群：有Table 2 Model 1的OR=1.876、p<.001支持，以及Table 1 Panel B描述性统计的差异。
+
+2. 羊群阈值大约在50%：有Table 2 Models 2-5中50-69%和70-89%区间显著、低区间不显著支持；讨论中用此解释触发点。
+
+3. 警告信息不能去偏：有Table 3 Model 1的OR≈0.97不显著，Table 1 Panel C只有10人改变选择，且限制在50-89%的子样本中也无效支持。
+
+4. 结果不是由特定工具单独驱动：稳健性分DSS检验表明退休DSS中平均效应不显著，但高百分比区间仍然显著；多项Logit显示模式与主Logit相似。
+
+5. '至少50%阈值'是一种推论：因为50-69%显著而30-49%不显著，故此推断；但未精确估计最优阈值。
+
+6. 警告无效的原因未被直接测试：文章讨论中引入选择支持偏差和锚定，这些机制不是由数据直接测量的。
+
+- internal_validity_strategy_cn：通过随机分配、cookie防溢出、流失分析、协变量控制提高内部有效性；并在讨论中承认缺乏变更激励和未单独分离警告效应等限制。
+
+- external_validity_strategy_cn：使用真实网站、真实金融产品，跨两个模拟DSS（残疾和退休），并对比先前经典研究（Beshears等）来讨论外部可推广性。
+
+- what_is_not_actually_tested_cn：从众偏好与信息瀑布等具体机制没有被直接测试；没有测试其他更强烈的去偏DSS（如个性化反馈或训练）的实际效果；也没有测试在无警告但具备变更机会的控制组中，变更率是否不同，因此无法完全分离警告效应。
+
+## 贡献闭环
+
+- technical_claim_cn：同伴信息导致对特定选项的选择显著增加，且百分比越高效果越强；警告信息没有显著改变选项偏好。
+
+- artifact_claim_cn：作为DSS的模拟工具中加入随机同伴百分比，能够引发放大后的羊群决策；作为DSS的警告消息不能降低羊群选择率。
+
+- mechanism_claim_cn：文章用选择支持性偏差和锚定调整偏差解释警告的失败，但这些机制并非实证检验，而是文献支持的侧面解释。
+
+- boundary_claim_cn：羊群引发需要同伴信息至少达到50%，并在更高百分比（70-89%）表现最强；退休DSS中的平均效应不明显，仅在最高区间显著；样本以比利时退休/伤残规划用户为主。
+
+- reusable_design_knowledge_cn：DSS开发者应意识到同伴信息具有强烈的操纵效应，简单警告不足以作为去偏工具；要引导或纠正羊群，需要更强烈、更早或更个人化的干预，或者避免使用非真实同伴信息。
+
+- theoretical_contribution_cn：为羊群效应在金融决策中的强健性和去偏难度提供了新的实证证据，扩展了Beshears等（2015）的同伴信息研究，并填补了关于信息强度阈值和羊群去偏DSS的缺口。
+
+- how_discussion_closes_intro_gap_cn：引言提到文献没有研究同伴信息需要多强才能引发羊群，以及没有研究羊群去偏DSS；讨论直接报告了这两个问题的结果——50%以上才显著，警告无效——从而闭合缺口。
+
+- overclaim_or_unsupported_leaps_cn：从数据推导出‘至少50%阈值’可能过度简化，因为区间是20%离散分组，未测试50%的精确边界；将警告失败归因于选择支持偏差/锚定缺乏直接证据；讨论中建议‘更强烈去偏’是合理外推，但不是本研究直接验证的。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：行为经济学常被用作DSS研究的基础；传统经济学假定人独立决策，但行为经济学家发现人会跟随群体。
+
+- rhetorical_function_cn：建立宏观背景，将行为经济学和DSS联系起来，为后文羊群偏差做铺垫。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出‘羊群偏差’这一核心概念。
+
+- evidence_pointer：Abstract 前两句
+
+### 2. P1 S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：GAP
+
+- paraphrase_cn：文献没有说明同伴信息需要多强才能引发羊群，也没有说明警告能否减少羊群。
+
+- rhetorical_function_cn：直接指出两个研究空白，形成本文的问题定位。
+
+- depends_on_cn：前文羊群偏差的存在
+
+- sets_up_cn：定义研究问题，预告三项贡献。
+
+- evidence_pointer：Abstract 第三句
+
+### 3. P1 S4
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：本文通过随机对照试验，将768名受访者随机分配到同伴信息条件。
+
+- rhetorical_function_cn：说明利用随机对照试验作为因果检验方法。
+
+- depends_on_cn：需要回答阈值和去偏问题
+
+- sets_up_cn：为结果部分提供方法预期。
+
+- evidence_pointer：Abstract 第四句
+
+### 4. P1 S5
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：RESULT
+
+- paraphrase_cn：干预成功引发羊群，羊群在至少有50%他人选择时才出现；警告信息去偏不足。
+
+- rhetorical_function_cn：言简意赅地报告三项核心结果。
+
+- depends_on_cn：随机对照试验设计
+
+- sets_up_cn：为结论和贡献提供证据。
+
+- evidence_pointer：Abstract 第五句
+
+### 5. P1 S1-S2
+
+- order：5
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：传统经济学假设理性独立，但认知偏差、启发式和情绪会导致系统性偏离理性决策。
+
+- rhetorical_function_cn：搭建行为经济学与传统经济学的对立，阐述研究动机。
+
+- depends_on_cn：无
+
+- sets_up_cn：为羊群偏差在行为决策理论中的定位做铺垫。
+
+- evidence_pointer：Introduction P1 S1-S2
+
+### 6. P1 S3
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：行为决策理论表明人类会模仿他人行动或将决策建立在他人行动之上。
+
+- rhetorical_function_cn：给出羊群偏差的定义性文献依据。
+
+- depends_on_cn：前一句关于行为偏差的表述
+
+- sets_up_cn：引入羊群概念，作为全文干预目标。
+
+- evidence_pointer：Introduction P1 S3，引用Spyrou 2013
+
+### 7. P1 S4
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：作者强调行为经济学洞见应更深入整合到DSS研究中。
+
+- rhetorical_function_cn：把行为经济学和DSS研究联系起来，说明缺口的重要性。
+
+- depends_on_cn：前文羊群偏差的理论背景
+
+- sets_up_cn：为本文的DSS背景做铺垫。
+
+- evidence_pointer：Introduction P1 S4
+
+### 8. P2 S1-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：群体智慧可能误导；在金融决策中，股票投资、创业等领域羊群都很普遍；在线金融产品增加，用户越来越易受未证实信息影响。
+
+- rhetorical_function_cn：将羊群偏差从学术概念转化为现实金融决策中的实际风险。
+
+- depends_on_cn：前文羊群定义
+
+- sets_up_cn：论证为什么要研究去偏，以及为什么金融决策是重要场景。
+
+- evidence_pointer：Introduction P2 S1-S3
+
+### 9. P2 S4-S5
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S4-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：一些组织会策略性管理线索来诱发消费者的羊群效应，羊群也被认为与金融危机的形成有关。
+
+- rhetorical_function_cn：说明羊群不仅有个人决策风险，还有企业操纵和宏观后果。
+
+- depends_on_cn：前文羊群在金融领域中的普遍性
+
+- sets_up_cn：使去偏更加必要。
+
+- evidence_pointer：Introduction P2 S4-S5
+
+### 10. P3 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P3 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究使用随机同伴信息干预评估羊群行为，设计DSS支持金融决策，并检查同伴信息强度与警告信息效果。
+
+- rhetorical_function_cn：给出研究目标，明确要回答的三个具体问题。
+
+- depends_on_cn：前文缺口和现实重要性
+
+- sets_up_cn：作为全文导航，三个贡献分别对应这些目标。
+
+- evidence_pointer：Introduction P3 S1-S3
+
+### 11. P4 S1-S4
+
+- order：11
+
+- section：Introduction
+
+- locator：P4 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究中只有Beshears等人使用同伴信息干预个人金融场景，但其结果发现储蓄反而下降，可能源于向上比较带来的泄气效应。
+
+- rhetorical_function_cn：综述最接近的先前研究，说明结果尚不一致。
+
+- depends_on_cn：前面的一般同伴信息文献
+
+- sets_up_cn：为第一贡献——避免反弹效应和跨领域验证——做好铺垫。
+
+- evidence_pointer：Introduction P4 S1-S4
+
+### 12. P5 S1-S3
+
+- order：12
+
+- section：Introduction
+
+- locator：P5 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第一贡献是使用DSS个性化选项，避免反向比较效应，并在伤残保险场景检验外部效度。
+
+- rhetorical_function_cn：明确提出第一项贡献，与Beshears等人形成差异。
+
+- depends_on_cn：P4中Beshears结果的限制
+
+- sets_up_cn：解释本文DSS的设计意图。
+
+- evidence_pointer：Introduction P5 S1-S3
+
+### 13. P6 S1-S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第二贡献是随机呈现10%-90%的百分比，以精确估计羊群发生需要的强度。
+
+- rhetorical_function_cn：确立阈值研究的贡献，并指出先前Frey & Meier和Beshears等人只用了少数百分比。
+
+- depends_on_cn：P4-P5同伴信息干预的缺口
+
+- sets_up_cn：为方法中的随机百分比设计提供依据。
+
+- evidence_pointer：Introduction P6 S1-S3
+
+### 14. P7 S1-S5
+
+- order：14
+
+- section：Introduction
+
+- locator：P7 S1-S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第三贡献是实证检验警告信息能否减少羊群；利用DSS优势设计去偏，但此前没有DSS研究针对羊群。
+
+- rhetorical_function_cn：在三项贡献中突出去偏DSS的新颖性。
+
+- depends_on_cn：P3的第三个研究目标
+
+- sets_up_cn：为方法中的警告信息干预提供理论依据。
+
+- evidence_pointer：Introduction P7 S1-S5
+
+### 15. P8 S1-S5
+
+- order：15
+
+- section：Introduction
+
+- locator：P8 S1-S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者概述了现场实验：网站提供金融教育，两个模拟工具作为DSS，第一步测试同伴信息，第二步测试警告信息，并给出假设。
+
+- rhetorical_function_cn：将三个贡献转化为具体的实验设计和假设。
+
+- depends_on_cn：前面的研究目标和三项贡献
+
+- sets_up_cn：为方法部分的详细阐述做预告。
+
+- evidence_pointer：Introduction P8 S1-S5
+
+### 16. P8 S6
+
+- order：16
+
+- section：Introduction
+
+- locator：P8 S6
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：假设实验组中被羊群选项的选择比例高于控制组，且百分比越高选择可能性越大。
+
+- rhetorical_function_cn：将研究问题转成可检验的假设。
+
+- depends_on_cn：上文关于羊群效应的理论
+
+- sets_up_cn：为结果部分的统计检验提供预期方向。
+
+- evidence_pointer：Introduction P8 S6
+
+### 17. P9 S1-S3
+
+- order：17
+
+- section：Introduction
+
+- locator：P9 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：结果证实实验组更可能选择被羊群选项，且差异主要由50%-89%的百分比驱动；警告信息未显著影响选择。
+
+- rhetorical_function_cn：提前给出关键结论，让读者对全文有整体预期。
+
+- depends_on_cn：假设和实验设计
+
+- sets_up_cn：表明三个研究目标实现情况，为讨论做铺垫。
+
+- evidence_pointer：Introduction P9 S1-S3
+
+### 18. 2.1 S1-S3
+
+- order：18
+
+- section：Method
+
+- locator：2.1 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：开发网站和两个模拟工具（伤残保险和退休）作为DSS，提供个性化收入损失和可持续生活水平信息。
+
+- rhetorical_function_cn：说明DSS的核心功能。
+
+- depends_on_cn：概念上把DSS引入实验
+
+- sets_up_cn：为后续分析明确决策背景。
+
+- evidence_pointer：Method 2.1 S1-S3
+
+### 19. 2.1 S4-S6
+
+- order：19
+
+- section：Method
+
+- locator：2.1 S4-S6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DSS给出Basic、Premium和Custom三种选项，并以月度储蓄或价格区间展示；用户点击选择后预约顾问。
+
+- rhetorical_function_cn：定义最终决策选项，为结果中‘被羊群选项’的度量奠定基础。
+
+- depends_on_cn：DSS计算功能
+
+- sets_up_cn：设定实验中用户必须在三个选项间选择的任务结构。
+
+- evidence_pointer：Methods 2.1 S4-S6
+
+### 20. 2.2 S1-S2
+
+- order：20
+
+- section：Method
+
+- locator：2.2 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：随机分配基于浏览器cookies以避免回访者进入不同处理组和溢出效应。
+
+- rhetorical_function_cn：说明随机分配的具体技术细节，增强因果效度。
+
+- depends_on_cn：需要随机分配以进行因果推断
+
+- sets_up_cn：为样本流失和重复处理处理做铺垫。
+
+- evidence_pointer：Method 2.2 S1-S2
+
+### 21. 2.2 S3-S5
+
+- order：21
+
+- section：Method
+
+- locator：2.2 S3-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验条件下，Premium选项附带一个随机10%-90%的同伴百分比；这是关键处理操纵。
+
+- rhetorical_function_cn：精确描述同伴信息干预的呈现形式。
+
+- depends_on_cn：羊群效应文献中同伴信息的用法
+
+- sets_up_cn：为阈值分析中的百分比分组提供依据。
+
+- evidence_pointer：Method 2.2 S3-S5; Figure 1 Panel B
+
+### 22. 2.2 S6-S7
+
+- order：22
+
+- section：Method
+
+- locator：2.2 S6-S7
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验组在初始选择后收到警告信息，信息揭示百分比是随机生成、可能是错误的，并提醒商业机构可能滥用。
+
+- rhetorical_function_cn：定义去偏干预的具体内容和目标。
+
+- depends_on_cn：去偏文献和第三项贡献
+
+- sets_up_cn：为前后选择比较定义输入。
+
+- evidence_pointer：Method 2.2 S6-S7; Figure 2
+
+### 23. 2.3 S1-S3
+
+- order：23
+
+- section：Method
+
+- locator：2.3 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用Logit模型，以选择被羊群选项的概率为因变量，并使用优势比解释估计结果。
+
+- rhetorical_function_cn：确立统计学分析框架。
+
+- depends_on_cn：二元决策结局
+
+- sets_up_cn：为结果部分的Table 2和3铺垫。
+
+- evidence_pointer：Method 2.3 S1-S3
+
+### 24. 2.3 S4-S6
+
+- order：24
+
+- section：Method
+
+- locator：2.3 S4-S6
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：第二种模型用20%区间哑变量替代总处理变量，以识别百分比强度；第三种模型在实验组中加入对警告前后时间的指示。
+
+- rhetorical_function_cn：为两个关键问题（阈值和去偏）定义统计对照。
+
+- depends_on_cn：基础Logit模型
+
+- sets_up_cn：为结果中相应表格的解释提供框架。
+
+- evidence_pointer：Method 2.3 equations (2) and (3)
+
+### 25. 3.1 S1-S4
+
+- order：25
+
+- section：Results
+
+- locator：3.1 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：从8385个观察中去除重复、未完成者，得到768个唯一受访者最终样本，其中约88%的流失率。
+
+- rhetorical_function_cn：说明样本筛选过程，增强透明性。
+
+- depends_on_cn：网页原始数据
+
+- sets_up_cn：为流失分析和后续结果建立分析样本。
+
+- evidence_pointer：Results 3.1 S1-S4
+
+### 26. 3.1 S5-S6
+
+- order：26
+
+- section：Results
+
+- locator：3.1 S5-S6
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：流失检验显示退休DSS和实验组受访者更可能流失，低百分比组流失也更多。
+
+- rhetorical_function_cn：检查样本流失是否造成偏误，并为实验组的不平衡提供线索。
+
+- depends_on_cn：最终样本
+
+- sets_up_cn：使结果解释更谨慎。
+
+- evidence_pointer：Results 3.1 S5-S6
+
+### 27. 3.2 S1-S2
+
+- order：27
+
+- section：Results
+
+- locator：3.2 S1-S2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：除18-25岁年龄组外，控制组和实验组在主要特征上大体平衡。
+
+- rhetorical_function_cn：支持随机化的成功，并说明需要在回归中加入协变量控制。
+
+- depends_on_cn：样本描述数据
+
+- sets_up_cn：为加入年龄、家庭结构协变量的模型作出解释。
+
+- evidence_pointer：Results 3.2 S1-S2; Table 1 Panel A
+
+### 28. 3.2 S3-S4
+
+- order：28
+
+- section：Results
+
+- locator：3.2 S3-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：描述性统计显示两个条件下被羊群选项都被多数人选择，但实验组选择它的人数比例显著更高。
+
+- rhetorical_function_cn：给出主效应的描述性证据，同时也指出中位选项/妥协效应可能导致基线偏好。
+
+- depends_on_cn：样本数据
+
+- sets_up_cn：引出后续Logit模型以控制混杂。
+
+- evidence_pointer：Results 3.2 S3-S4; Table 1 Panel B
+
+### 29. 3.2 S5-S6
+
+- order：29
+
+- section：Results
+
+- locator：3.2 S5-S6
+
+- move_code：RESULT
+
+- paraphrase_cn：图3显示除10-29%外，百分比越高选择被羊群选项的比例越高，且低百分比也可能诱导羊群。
+
+- rhetorical_function_cn：直观呈现剂量-反应关系，并提示低百分比也能引发羊群的现象。
+
+- depends_on_cn：实验组内按百分比分组的描述性统计
+
+- sets_up_cn：为模型2-5及阈值讨论提供图形证据。
+
+- evidence_pointer：Results 3.2 S5-S6; Figure 3
+
+### 30. 3.3 S1-S2
+
+- order：30
+
+- section：Results
+
+- locator：3.3 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：模型1显示实验组选择被羊群选项的优势比是1.876（高88%），拟合概率高38%。
+
+- rhetorical_function_cn：用统计模型量化主效应，把描述性结果显著化。
+
+- depends_on_cn：Logit模型
+
+- sets_up_cn：为后续百分比区间阈值判断建立主效应。
+
+- evidence_pointer：Results 3.3 S1-S2; Table 2 Model 1
+
+### 31. 3.3 S3-S6
+
+- order：31
+
+- section：Results
+
+- locator：3.3 S3-S6
+
+- move_code：RESULT
+
+- paraphrase_cn：只有50-69%和70-89%区间显著，70-89%的OR最高（2.464，概率高53%），趋势总体随百分比增加。
+
+- rhetorical_function_cn：识别统计显著的百分比区间，形成阈值结论。
+
+- depends_on_cn：模型2-5的区间哑变量
+
+- sets_up_cn：随后讨论中推广为‘至少50%’的阈值。
+
+- evidence_pointer：Results 3.3 S3-S6; Table 2 Models 2-5
+
+### 32. 3.3 Robustness paragraph
+
+- order：32
+
+- section：Results
+
+- locator：3.3 Robustness paragraph
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：分开残疾/退休DSS后，退休DSS的平均效应不显著，仅70-89%显著；多项Logit得到类似模式；连续百分比显著，二次项不显著。
+
+- rhetorical_function_cn：证明主结果在多种规格下基本稳健，同时暴露领域异质性。
+
+- depends_on_cn：主Logit模型
+
+- sets_up_cn：为讨论中外部效度边界提供证据。
+
+- evidence_pointer：Results 3.3 Robustness paragraph
+
+### 33. 3.3 Table 3 paragraph S1-S4
+
+- order：33
+
+- section：Results
+
+- locator：3.3 Table 3 paragraph S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：警告信息前后选择被羊群选项的优势比接近1且不显著，控制变量后仍不显著。
+
+- rhetorical_function_cn：关键否定结果：警告信息不能去偏。
+
+- depends_on_cn：实验组中警告前后对比的Logit模型
+
+- sets_up_cn：后续讨论中解释为什么警告不奏效。
+
+- evidence_pointer：Results 3.3 Table 3 nearby; Table 3 Models 1-5
+
+### 34. 3.3 Extra robustness sentences
+
+- order：34
+
+- section：Results
+
+- locator：3.3 Extra robustness sentences
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：将因变量改为是否变更选择，以及将样本限制在50-89%高羊群区间，警告仍不显著。
+
+- rhetorical_function_cn：进一步排除警告效果被混合因变量或低效应群体掩盖的可能性。
+
+- depends_on_cn：警告无效的主结果
+
+- sets_up_cn：强化警告无效这一核心结论。
+
+- evidence_pointer：Results 3.3 最后两段
+
+### 35. P1 S1-S3
+
+- order：35
+
+- section：Discussion
+
+- locator：P1 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者重新概括研究目的，并报告同伴信息成功引发羊群、羊群需要50%以上信息、警告无效这三点核心发现。
+
+- rhetorical_function_cn：将结果叙述回接到研究问题和引言中的三个贡献。
+
+- depends_on_cn：结果部分的三张表和补充分析
+
+- sets_up_cn：为后续机制解释和实际含义做铺垫。
+
+- evidence_pointer：Discussion P1 S1-S3
+
+### 36. P2
+
+- order：36
+
+- section：Discussion
+
+- locator：P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者猜测选择支持性偏差和锚定调整偏差可能解释了警告无效：人们倾向于维护已选选项，而同伴信息作为锚点难以调整。
+
+- rhetorical_function_cn：为无效结果提供合理的理论解释，保护贡献不至于被简单归因于实验噪声。
+
+- depends_on_cn：前文警告无效的发现
+
+- sets_up_cn：引出DSS设计建议和未来研究方向。
+
+- evidence_pointer：Discussion P2
+
+### 37. P3-P4
+
+- order：37
+
+- section：Discussion
+
+- locator：P3-P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：讨论指出羊群效应可能在多领域中起助推作用，但同伴信息也可能误导；因此DSS开发者应权衡使用，并考虑更强的去偏策略。
+
+- rhetorical_function_cn：将结果转化为对DSS设计和管理实践的建议。
+
+- depends_on_cn：结果核心发现
+
+- sets_up_cn：为贡献声明赋予实践意义。
+
+- evidence_pointer：Discussion P3-P4
+
+### 38. P5-P7
+
+- order：38
+
+- section：Discussion
+
+- locator：P5-P7
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限性包括没有变更激励、没有无警告但可变更的控制条件、以及缺乏金融知识数据；未来研究可探索金融知识与羊群敏感性的关系。
+
+- rhetorical_function_cn：诚实承认研究方法不足，避免贡献被高估，并为后续研究指明方向。
+
+- depends_on_cn：实验设计和结果
+
+- sets_up_cn：结束文章，给出未来议程。
+
+- evidence_pointer：Discussion P5-P7
+
+## 写作技术
+
+- gap_construction_cn：通过三个层次的缺口构造：一是在摘要和引言开头直接指出‘文献对信息强度阈值和羊群去偏保持沉默’；二是借助已有一项同伴信息研究（Beshears等）的结果不一致和百分比范围有限来铺陈；三是强调没有DSS研究针对羊群去偏，从而把缺口定义为‘理论盲区+实践需求’。
+
+- signposting_cn：在引言中以‘第一贡献…第二贡献…第三贡献…’明确给出全文结构；在方法中以‘第一步…第二步…’拆解实验；结果中以‘模型1…模型5’展开；讨论中以‘结果…解释…含义…限制’逐层递进，使读者始终清楚当前位置和论证阶段。
+
+- transition_logic_cn：每段结尾会给出下一段问题的必要性。例如，主效应确立后自然出现‘是否取决于强度’，从而引出百分比区间分析；羊群被引发后自然引申出‘能否被减少’，从而引出警告信息；无效结果后讨论用机制解释，再过渡到设计建议。
+
+- claim_evidence_rhythm_cn：作者通常先给出一个概括性结论（claim），紧接具体的优势比、p值、样本量和表格位置（evidence），然后再用一两句解释机制或边界，形成‘结论-证据-机制’的节奏。
+
+- benchmark_narrative_cn：把控制组作为‘无同伴信息’的客观基线，把百分比区间作为剂量梯度，把初始选择作为警告前的个体自我基线；并在稳健性中用连续百分比和子样本高区间检验，从而构建一个从无到有、从弱到强、从有到无的对比链。
+
+- theory_return_cn：在讨论中，作者将统计结果映射回行为经济学机制：羊群的发生用社会影响/信息瀑布解释，警告的失败用支持选择偏差和锚定解释；这使得经验结果不只是‘某个网站上的实验’，而变成对理论预期边界的一个检验。
+
+- contribution_positioning_cn：强调三项贡献分别对应三个缺口：第一项扩展了同伴信息干预在金融决策中的证据范围；第二项填补了百分比阈值证据；第三项首次考察羊群去偏DSS。每个贡献都明确与某项已有文献的空缺挂钩。
+
+- novelty_protection_cn：通过刻意区分：与他人实验相比（百分比较少、结果相反），本文使用了随机10%-90%的大范围百分比以及两个现场金融工具；同时承认警告无效不是第一个，但强调这是羊群去偏领域首次尝试；最后用机制解释和强化建议防止该结果被看成‘一次无效实验’。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用行为经济学中的某种偏差将DSS研究与传统理性框架连接起来，并指明该偏差可能导致的现实损失。
+
+- research_job_cn：选择一个人群中的可测量偏差（如羊群）和适合的决策上下文（如金融决策）。
+
+- required_evidence_cn：存在相关文献表明该偏差的现实重要性，以及现有DSS研究尚未充分处理它。
+
+- transition_to_next_cn：将该偏差转化成两个可操作问题：触发条件和是否能去偏。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：形成一个‘现有研究有限制，特别是X和Y没有做过’的文献缺口，并明确提出三项贡献。
+
+- research_job_cn：系统检查最近的相关现场实验和DSS去偏研究，找出一个已有但证据薄弱的具体缺口。
+
+- required_evidence_cn：至少有一两个先例实验供借鉴，但没有直接回答本文问题的研究。
+
+- transition_to_next_cn：从贡献引出现场实验设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把干预措施嵌入真实或仿真DSS中，说明DSS的功能、选项和操纵。
+
+- research_job_cn：开发或选择一个实际可操作的决策环境（如模拟器、网站），并预设一个处理组和对照组。
+
+- required_evidence_cn：系统可运行、能够记录用户选择、随机分组机制健全。
+
+- transition_to_next_cn：处理操纵后，自然需要统计模型来估计因果效应。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述Logit/回归模型，解释优势比和主要对照。
+
+- research_job_cn：建立主效应模型，以及剂量-反应和前后比较模型。
+
+- required_evidence_cn：有足够样本量和能被对照处理的结局变量。
+
+- transition_to_next_cn：结果部分用一系列表格和图形报告估计。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：按照‘主效应-剂量反应-去偏-稳健性’的顺序书写结果，并在每个发现后插入表格位置和显著性说明。
+
+- research_job_cn：运行Logit、区间分析、前后对比和稳健性分析。
+
+- required_evidence_cn：主要假设的可信统计证据；稳健性检验未推翻主发现。
+
+- transition_to_next_cn：结果导回机制讨论和理论意义。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：在讨论中把统计结果回溯到行为经济学机制，对比已有文献，给出DSS设计建议，并列出局限性。
+
+- research_job_cn：解释为什么结果发生（即使只是推测），并识别研究的边界条件和潜在的机制解释。
+
+- required_evidence_cn：有足够的文献支持机制解释；承认方法局限。
+
+- transition_to_next_cn：以具体未来研究方向收尾。
+
+### most_transferable_moves_cn
+
+1. 通过‘第一/第二/第三贡献’的显式结构将文献缺口串联到具体实验阶段
+
+2. 使用随机剂量（百分比区间）把一个总体效应变为阈值结论
+
+3. 在一个处理组内用前后选择比较来测试去偏工具，并通过描述性统计和回归同时呈现
+
+4. 在讨论中用机制解释（如锚定、选择支持偏差）来防止无效结果被低估
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实金融教育网站和可供集成的DSS模拟工具需要开发或合作
+
+2. 在真实网站中收集800多个完整完成用户，需要巨额流量或长期运行
+
+3. 随机百分比和警告消息编程，以及cookies分配机制，需要技术团队支持
+
+4. 现场实验需要伦理和隐私政策合规
+
+### what_not_to_copy_superficially_cn
+
+1. 不能仅用‘人们在有同伴信息时更倾向选某选项’的图或描述性比例代替随机对照试验；没有随机化则因果推理不成立
+
+2. 不能在没有前后对比或合理控制的情况下声称警告无效
+
+3. 不能在没有处理比例区间设计的情况下断言50%阈值
+
+4. 不能忽略流失、不平衡和协变量控制就直接报告优势比
+
+- single_best_description_of_the_routine_cn：用行为经济学偏差作为设计来源，把干预嵌入真实DSS，通过RCT建立主效应，用剂量反应估计触发阈值，用前-后对比测试去偏工具，再用稳健性检验保障结论。
+
+## 分析边界
+
+无特别说明。

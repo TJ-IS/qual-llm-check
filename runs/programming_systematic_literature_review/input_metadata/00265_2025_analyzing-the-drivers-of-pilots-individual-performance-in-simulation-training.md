@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105008585419"
+title: "Analyzing the drivers of pilots' individual performance in simulation training"
+authors: "Lopes N.M.; Aparicio M.; Neves F.T."
+year: "2025"
+journal: "Computers in Human Behavior Reports"
+doi: "10.1016/j.chbr.2025.100731"
+---
+# Scopus title-abstract-keyword metadata
+Title: Analyzing the drivers of pilots' individual performance in simulation training
+Abstract: Simulation is a cornerstone of pilot training and safety in aviation. This study investigates the determinants of pilots' individual performance in simulation environments through a novel theoretical model grounded in the Information Systems Success Model, Cognitive Fit Theory, and Situation Awareness (SA). Using survey data from 233 pilots and structural equation modeling (SEM-PLS), we find that SA, perceived task technological fit, and musical intelligence significantly and directly influence performance. Our model explains 40 % of the variance in individual performance. Notably, technostress does not significantly impact SA, but trust in technology influences both technostress and perceived fit. These findings highlight the critical roles of digital tools, cognitive alignment, and musical intelligence in enhancing simulation training outcomes. © 2025 The Authors
+Author keywords: Individual performance; Musical intelligence; Pilot training; Simulation; Situation awareness; Technostress
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Computers in Human Behavior Reports
+Year: 2025
+EID: 2-s2.0-105008585419
+DOI: 10.1016/j.chbr.2025.100731
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

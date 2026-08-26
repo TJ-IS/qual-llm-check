@@ -1,0 +1,200 @@
+{
+  "generated_at_utc": "2026-08-25T11:42:24.225544+00:00",
+  "audit_script": "E:\\github\\qual-llm-check-IS-utd\\runs\\ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash\\research_reviews\\v11_iterative_literature_rewrite\\audit_artifacts\\audit_reference_coverage.py",
+  "audit_script_sha256": "2bc4ad18f6a494f077d1cdd89478db808045f1cb5e951c6641cedab1fa92e77c",
+  "manuscripts": [
+    {
+      "path": "runs\\ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash\\research_reviews\\v11_iterative_literature_rewrite\\184_论文一_异质工作空间攻击路径发现_v15权威原文句级重构稿.md",
+      "sha256": "fc98edefa84d7b10ca063eb4f4d2d2fb57a99cb3dbd76276e8887509eef07028",
+      "reference_entries": 60,
+      "orphan_references": [],
+      "missing_reference_candidates": [],
+      "unresolved_citation_groups": [],
+      "ambiguous_reference_keys": [
+        {
+          "author": "hu",
+          "year": "2020",
+          "count": 2
+        }
+      ],
+      "ambiguous_reference_resolution": [
+        {
+          "author": "Hu",
+          "year": "2020",
+          "entries": [
+            {
+              "entry_index": 0,
+              "reference_prefix": "Hu, Zhenguo, Razvan Beuran, and Yasuo Tan. 2020.",
+              "unique_given_markers_before_surname": [
+                "zhenguo"
+              ],
+              "unique_markers_after_surname": [
+                "beuran",
+                "tan",
+                "zhenguo"
+              ],
+              "resolved_in_body": true
+            },
+            {
+              "entry_index": 1,
+              "reference_prefix": "Hu, Ziniu, Yuxiao Dong, Kuansan Wang, and Yizhou Sun. 2020.",
+              "unique_given_markers_before_surname": [
+                "ziniu"
+              ],
+              "unique_markers_after_surname": [
+                "dong",
+                "sun",
+                "wang",
+                "ziniu"
+              ],
+              "resolved_in_body": true
+            }
+          ],
+          "mentions": [
+            {
+              "line": 37,
+              "context": "于搜索新的攻击路径。自动渗透测试先用系统拓扑和已知漏洞形成攻击树，再由深度强化学习选择可达路径（Hu, Beuran, and Tan 2020）。多步自动红队将攻击成功和多样性写入自",
+              "matched_entry_indices": [
+                0
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 136,
+              "context": "向量。类型相关参数和时间编码已有异质图学习先例，但本文的节点语义与安全事件仍由工作空间契约规定（Hu, Dong, Wang, and Sun 2020）。该编码使搜索策略能够利用对象之间的任",
+              "matched_entry_indices": [
+                1
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 340,
+              "context": "证据控制器和证据塑形。无证据塑形版本保留完整状态与控制器，只令 $\\lambda_e=0$。 Hu、Beuran 与 Tan（2020）的攻击树深度强化学习和 Beutel",
+              "matched_entry_indices": [
+                0
+              ],
+              "resolution": "resolved"
+            }
+          ],
+          "unresolved_mentions": [],
+          "resolution_status": "resolved"
+        }
+      ],
+      "unresolved_ambiguous_reference_mentions": [],
+      "mechanical_reference_identity_pass": true,
+      "interpretation_note": "Unique first-author-year keys use surname-year matching. Same-author same-year entries require a unique given-name or coauthor marker in each body mention; unresolved identity is a mechanical blocker. Semantic support still requires direct original-source review."
+    },
+    {
+      "path": "runs\\ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash\\research_reviews\\v11_iterative_literature_rewrite\\185_论文二_多模态潜藏操纵执行前识别_v15权威原文句级重构稿.md",
+      "sha256": "19327210b4df2961b7bacf6c696d7c678d9f420d8c450c25745a93b37c7e8974",
+      "reference_entries": 79,
+      "orphan_references": [],
+      "missing_reference_candidates": [],
+      "unresolved_citation_groups": [],
+      "ambiguous_reference_keys": [
+        {
+          "author": "liu",
+          "year": "2025",
+          "count": 2
+        }
+      ],
+      "ambiguous_reference_resolution": [
+        {
+          "author": "Liu",
+          "year": "2025",
+          "entries": [
+            {
+              "entry_index": 0,
+              "reference_prefix": "Liu, Rong, Jingjing Li, Marko Zivkovic, and Ahmed Abbasi. 2025.",
+              "unique_given_markers_before_surname": [
+                "rong"
+              ],
+              "unique_markers_after_surname": [
+                "abbasi",
+                "li",
+                "rong",
+                "zivkovic"
+              ],
+              "resolved_in_body": true
+            },
+            {
+              "entry_index": 1,
+              "reference_prefix": "Liu, Yinuo, Ruohan Xu, Xilong Wang, Yuqi Jia, and Neil Zhenqiang Gong. 2025.",
+              "unique_given_markers_before_surname": [
+                "yinuo"
+              ],
+              "unique_markers_after_surname": [
+                "gong",
+                "jia",
+                "wang",
+                "xu",
+                "yinuo"
+              ],
+              "resolved_in_body": true
+            }
+          ],
+          "mentions": [
+            {
+              "line": 7,
+              "context": "载风险内容（Cheng et al. 2026, Jia et al. 2026, Yinuo Liu et al. 2025）。由于三类研究的对象、标签和观察时点不",
+              "matched_entry_indices": [
+                1
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 40,
+              "context": "性图像及检测协议，支持资源内的视觉内容标签 $Y_{l,WA}^{visual}$（Yinuo Liu et al. 2025）。CyberSecEval 3 论文公",
+              "matched_entry_indices": [
+                1
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 388,
+              "context": "冲突 | | WAInjectBench 视觉内容 | WAInjectBench（Yinuo Liu et al. 2025） | $p_{l,WA}^{visua",
+              "matched_entry_indices": [
+                1
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 437,
+              "context": "is and Goadrich（2006）给出精确率召回率曲线与 ROC 曲线的关系，Rong Liu et al.（2025）在近期 MISQ 计算设计研究中把 P",
+              "matched_entry_indices": [
+                0
+              ],
+              "resolution": "resolved"
+            },
+            {
+              "line": 523,
+              "context": "Bench 的恶意与良性图像上评价资源原生 $Y_{l,WA}^{visual}$（Yinuo Liu et al. 2025）。比较整图、OCR、区域、直接图文拼接",
+              "matched_entry_indices": [
+                1
+              ],
+              "resolution": "resolved"
+            }
+          ],
+          "unresolved_mentions": [],
+          "resolution_status": "resolved"
+        }
+      ],
+      "unresolved_ambiguous_reference_mentions": [],
+      "mechanical_reference_identity_pass": true,
+      "interpretation_note": "Unique first-author-year keys use surname-year matching. Same-author same-year entries require a unique given-name or coauthor marker in each body mention; unresolved identity is a mechanical blocker. Semantic support still requires direct original-source review."
+    },
+    {
+      "path": "runs\\ais_basket_exclusive_objective_metric_benchmark_public_dataset_2020_2027_flash\\research_reviews\\v11_iterative_literature_rewrite\\186_论文三_运行中反馈安全控制_v15权威原文句级重构稿.md",
+      "sha256": "8a15df9400b2bfbf708378abe17d651ccb07637772617eb1b6667acb27495753",
+      "reference_entries": 54,
+      "orphan_references": [],
+      "missing_reference_candidates": [],
+      "unresolved_citation_groups": [],
+      "ambiguous_reference_keys": [],
+      "ambiguous_reference_resolution": [],
+      "unresolved_ambiguous_reference_mentions": [],
+      "mechanical_reference_identity_pass": true,
+      "interpretation_note": "Unique first-author-year keys use surname-year matching. Same-author same-year entries require a unique given-name or coauthor marker in each body mention; unresolved identity is a mechanical blocker. Semantic support still requires direct original-source review."
+    }
+  ]
+}

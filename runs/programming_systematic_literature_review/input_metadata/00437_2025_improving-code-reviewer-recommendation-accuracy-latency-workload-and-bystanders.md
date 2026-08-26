@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105028039436"
+title: "Improving Code Reviewer Recommendation: Accuracy, Latency, Workload, and Bystanders"
+authors: "Rigby P.C.; Rogers S.; Saleem S.; Suresh P.; Suskin D.; Riggs P.; Maddila C.; Nagappan N.; Mockus A."
+year: "2025"
+journal: "ACM Transactions on Software Engineering and Methodology"
+doi: "10.1145/3736405"
+---
+# Scopus title-abstract-keyword metadata
+Title: Improving Code Reviewer Recommendation: Accuracy, Latency, Workload, and Bystanders
+Abstract: Aim. The code review team at Meta is continuously improving the code review process. In this work, we report on three randomized controlled experimental trials to improve code reviewer recommendation. Method. To evaluate the recommenders, we conduct three A/B tests which are a type of randomized controlled experimental trial. The unit is either the code diff (Meta’s term for a pull-request) or all the diffs that an author creates during the experimental period. We set goal metrics, i.e., those we expect to improve, and guardrail metrics, those that we do not want to negatively impact, i.e., analogous to safety metrics in medical trials. We test the outcomes using a t-test, Wilcoxon test, or Fisher test depending on the type of data. Expt. 1. We developed a new recommender, RevRecV2, based on features that had been successfully used in the literature and that could be calculated with low latency. In an A/B test on 82k diffs in Spring 2022, we found that the new recommender was more accurate and had lower latency. The new recommender did not impact the amount of time a diff was under review. The results allowed us to roll-out the recommender in the Summer 2022 to all of Meta. Expt. 2. Reviewer workload is not evenly distributed, our goal was to reduce the workload of top reviewers. Based on the literature and using historical data, we conducted backtests to determine the best measure of reviewer workload. We then ran an A/B test on 28k diff authors in Winter 2023 on a workload-balanced recommender, RevRecWL. Our A/B test led to mixed results. When a low workload reviewer had reasonable expertise, authors selected them, however, the top recommended low workload reviewer was often not selected. There was no impact on our guardrail metrics of the amount of time to perform a review. This workload-balancing replaced the recommender from the first experiment as the recommender in production at Meta. Expt. 3. Engineers at Meta often select a team rather than an individual reviewer to review a diff. We suspected the bystander effect might be slowing down reviews of these diffs because no single individual was assigned the review. On diffs that only had a team assigned, we randomly selected one of the top three recommended reviewers to review the diff with BystanderRecRnd. We conducted an A/B test on 12.5k authors in Spring 2023 and found a large decrease in the amount of time it took for diffs to be reviewed. We did not find that reviewers rushed reviews. The results were strong enough to roll this recommender out to all diffs that only have a team assigned for review. Implications. Aside from the direct findings from our work, our findings suggest there can be a discrepancy between historical backtesting and A/B test experimental findings, and that more A/B tests are necessary to test recommenders in production. Outcome measures beyond accuracy are important. This is especially true in understanding how recommenders change a reviewer’s workload. We also see that the latency in displaying a recommendation can have a large impact on how often authors select recommendations making the reporting of latency an important metric for future work. © 2025 Copyright held by the owner/author(s).
+Author keywords: A/B Testing; Code Review; Experimentation; Recommender Systems
+Index keywords: Codes (symbols); Fisher information matrix; Guard rails; Reviews; A/B testing; Code review; Experimental trials; Experimentation; Low latency; Medical trials; Recommendation accuracy; Review process; Review teams; Safety metrics; Recommender systems
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Software Engineering and Methodology
+Year: 2025
+EID: 2-s2.0-105028039436
+DOI: 10.1145/3736405
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

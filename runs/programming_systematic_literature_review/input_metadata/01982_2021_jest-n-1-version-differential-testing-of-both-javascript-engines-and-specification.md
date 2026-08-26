@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85106421990"
+title: "JEST: N+1-Version Differential Testing of Both JavaScript Engines and Specification"
+authors: "Park J.; An S.; Youn D.; Kim G.; Ryu S."
+year: "2021"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse-companion52605.2021.00065"
+---
+# Scopus title-abstract-keyword metadata
+Title: JEST: N+1-Version Differential Testing of Both JavaScript Engines and Specification
+Abstract: Modern programming follows the continuous integration (CI) and continuous deployment (CD) approach rather than the traditional waterfall model. Even the development of modern programming languages uses the CI/CD approach to swiftly provide new language features and to adapt to new development environments. Unlike in the conventional approach, in the modern CI/CD approach, a language specification is no more the oracle of the language semantics because both the specification and its implementations (interpreters or compilers) can co-evolve. In this setting, both the specification and implementations may have bugs, and guaranteeing their correctness is non-trivial. In this paper, we propose a novel N+1-version differential testing to resolve the problem. Unlike the traditional differential testing, our approach consists of three steps: 1) to automatically synthesize programs guided by the syntax and semantics from a given language specification, 2) to generate conformance tests by injecting assertions to the synthesized programs to check their final program states, 3) to detect bugs in the specification and implementations via executing the conformance tests on multiple implementations, and 4) to localize bugs on the specification using statistical information. We actualize our approach for the JavaScript programming language via JEST, which performs N+1-version differential testing for modern JavaScript engines and ECMAScript, the language specification describing the syntax and semantics of JavaScript in a natural language. We evaluated JEST with four JavaScript engines that support all modern JavaScript language features and the latest version of ECMAScript (ES11, 2020). JEST automatically synthesized 1,700 programs that covered 97.78% of syntax and 87.70% of semantics from ES11. Using the assertion-injected JavaScript programs, it detected 44 engine bugs in four different engines and 27 specification bugs in ES11.  © 2021 IEEE.
+Author keywords: conformance test generation; differential testing; JavaScript; mechanized specification
+Index keywords: Engines; High level languages; Program compilers; Program debugging; Semantics; Software testing; Syntactics; Conformance test generation; Continuous integrations; Differential testing; Javascript; Language features; Language specification; Mechanized specification; Synthesised; Test generations; Waterfall model; Specifications
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2021
+EID: 2-s2.0-85106421990
+DOI: 10.1109/icse-companion52605.2021.00065
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

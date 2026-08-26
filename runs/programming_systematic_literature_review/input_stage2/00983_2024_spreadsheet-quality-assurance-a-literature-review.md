@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85180547232"
+title: "Spreadsheet quality assurance: a literature review"
+authors: "Poon P.-L.; Lau M.F.; Yu Y.T.; Tang S.-F."
+year: "2024"
+journal: "Frontiers of Computer Science"
+doi: "10.1007/s11704-023-2384-6"
+---
+# Scopus title-abstract-keyword metadata
+Title: Spreadsheet quality assurance: a literature review
+Abstract: Spreadsheets are very common for information processing to support decision making by both professional developers and non-technical end users. Moreover, business intelligence and artificial intelligence are increasingly popular in the industry nowadays, where spreadsheets have been used as, or integrated into, intelligent or expert systems in various application domains. However, it has been repeatedly reported that faults often exist in operational spreadsheets, which could severely compromise the quality of conclusions and decisions based on the spreadsheets. With a view to systematically examining this problem via survey of existing work, we have conducted a comprehensive literature review on the quality issues and related techniques of spreadsheets over a 35.5-year period (from January 1987 to June 2022) for target journals and a 10.5-year period (from January 2012 to June 2022) for target conferences. Among other findings, two major ones are: (a) Spreadsheet quality is best addressed throughout the whole spreadsheet life cycle, rather than just focusing on a few specific stages of the life cycle. (b) Relatively more studies focus on spreadsheet testing and debugging (related to fault detection and removal) when compared with spreadsheet specification, modeling, and design (related to development). As prevention is better than cure, more research should be performed on the early stages of the spreadsheet life cycle. Enlightened by our comprehensive review, we have identified the major research gaps as well as highlighted key research directions for future work in the area. © 2023, The Author(s).
+Author keywords: decision support system; end-user computing; end-user programming; Excel; spreadsheet
+Index keywords: Computer programming; Decision making; Decision support systems; Expert systems; Fault detection; Life cycle; Quality assurance; Applications domains; Business-intelligence; Decision-based; Decisions makings; End user computing; End-user programming; End-users; Excel; Literature reviews; Quality issues; Spreadsheets
+Document type: Review
+Conference: 
+Source title: Frontiers of Computer Science
+Year: 2024
+EID: 2-s2.0-85180547232
+DOI: 10.1007/s11704-023-2384-6
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

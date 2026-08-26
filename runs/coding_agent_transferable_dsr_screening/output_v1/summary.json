@@ -1,0 +1,39 @@
+{
+  "updated_at": "2026-08-04T09:09:59.130732+00:00",
+  "analysis_version": "coding-agent-transferable-theory-driven-dsr-v1",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "f74b402ac4c38595e5975449c1f6de304ab008e992e4a64943225af8d3fe34e7",
+  "input_fulltexts": 1832,
+  "completed": 1832,
+  "pending": 0,
+  "overall_screening_decision_counts": {
+    "exclude": 1347,
+    "strong_candidate": 155,
+    "promising_candidate": 132,
+    "inspiration_only": 178,
+    "unclear": 20
+  },
+  "design_research_type_counts": {
+    "conceptual_or_review": 207,
+    "evaluation_of_existing_system": 233,
+    "non_design_empirical": 883,
+    "design_oriented_build_evaluate": 344,
+    "explicit_design_science": 116,
+    "design_principles_without_instantiation": 28,
+    "unclear": 21
+  },
+  "theory_to_design_strength_counts": {
+    "weak": 507,
+    "none": 867,
+    "strong": 219,
+    "moderate": 222,
+    "unclear": 17
+  },
+  "usage": {
+    "prompt_tokens": 56802581,
+    "completion_tokens": 14867508,
+    "total_tokens": 71670089,
+    "prompt_cache_hit_tokens": 7108224,
+    "prompt_cache_miss_tokens": 49694357
+  }
+}

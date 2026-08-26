@@ -1,0 +1,1140 @@
+{
+  "record_id": "790",
+  "source_file": "00790_2020_who-is-the-next-wolf-of-wall-street-detection-of-financial-intermediary-misconduct.md",
+  "title": "Who Is the Next “Wolf of Wall Street”? Detection of Financial Intermediary Misconduct",
+  "authors": "Jens Lausen; Benjamin Clapham; Michael Siering; Peter Gomber",
+  "year": "2020",
+  "journal": "Journal of the Association for Information Systems",
+  "doi": "10.17705/1jais.00633",
+  "fulltext_chars": 156566,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "cybersecurity_fraud_and_compliance",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:00.643595+00:00",
+  "article_level_summary": {
+    "central_question_cn": "金融中介在LinkedIn上自我披露的信息，在不同水平的外部验证（未验证、用户确认、监管确认）下，能否用于自动检测那些可能实施不当行为的金融中介？",
+    "artifact_and_design_cn": "本文构建了多个机器学习分类器（Classifier A-D），其设计差异是按外部验证水平递增加入特征集：A仅使用LinkedIn自我披露信息，B加入用户确认信息，C加入监管确认信息，D同时加入用户与监管确认信息；另设只含监管确认的E和含用户与监管确认的F作为辅助。特征包括个人资料、网络活动、职业信息、个人简介文本线索、用户推荐/技能认可、以及LinkedIn与BrokerCheck之间的偏差。",
+    "objective_outcomes_cn": "在自然分布留出样本上，Classifier D（随机森林）表现最好：准确率77.96%，召回率75.18%，特异性78.17%，AUC 82.83%；Classifier A显著优于随机分类，支持H1；Classifier B未显著优于A，不支持H2；Classifier C和D显著优于A和B，支持H3；经济评价显示所有分类器都有显著正平均经济收益，且Classifier D在搜索成本变化下最稳健。",
+    "core_contribution_cn": "作者声称首次将自我披露信息与信息操纵理论和 warrants 理论结合，验证了不同水平外部验证对金融中介不当行为检测的价值；同时为投资者提供筛选工具，为监管者提供预测性监管（predictive supervision）支持，从而有助于重建金融体系信任。",
+    "whole_argument_in_one_paragraph_cn": "作者从金融中介不当行为对投资者和金融系统信任的严重危害出发，指出现有自动欺诈检测研究集中于信用卡欺诈、会计欺诈和公司欺诈，忽视了对单个金融中介不当行为的预测，而BrokerCheck公开数据本身不足以保护投资者。基于信息操纵理论，作者论证不当行为者的自我披露会不同于诚实者；基于warranting理论，论证外部验证程度越高，信息越难操纵、越有价值。为此，作者匹配LinkedIn自我披露资料与FINRA BrokerCheck监管记录，构建了未验证、用户确认、监管确认三类特征集，训练多种机器学习分类器，并用平衡样本做交叉验证、用自然分布样本做留出检验，再以受害者赔偿金和罚款为基础进行经济评价。结果显示仅自我披露信息已能显著优于随机分类，监管确认信息进一步显著提升性能，用户确认信息单独没有改善性能，但在与监管信息结合时对部分算法有帮助。文章据此宣称其分类器既可帮助投资者提前识别风险中介，也可帮助监管者进行预测性监管，同时用证据回应并确认了信息操纵理论和warranting理论在金融中介不当行为检测中的适用性。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章的核心动作是构建具有不同特征配置的自动检测分类器这一人工制品，并通过统计评价、曲线分析、经济评价和敏感性分析来评估其性能与价值；虽然理论假设引导了特征选择，但整体论证依然遵循构建—评价—设计知识的模式，而不是在受控实验中操纵理论变量。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "论文从金融中介不当行为这一现实问题出发，引入信息操纵理论与warranting理论推导特征与假设，构建分类器并设计数据与评价流程，用平衡样本和自然分布样本检验假设，最后在讨论和结论中回到理论确认、边界条件与实践含义。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "研究分七个累积阶段：数据获取与匹配→理论驱动的特征工程→训练与调参→平衡样本交叉验证→自然分布留出样本统计评价与曲线/AUC分析→经济评价与敏感性分析→讨论与理论化收束。前一阶段解决数据有效性问题，后一阶段解决特征可操作性问题，再通过训练和两层次评价逐级验证假设，最后用经济价值评价把统计性能转化为实践意义。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "数据获取与样本构建",
+        "question_cn": "能否构建一个无选择偏差、可代表真实总体的金融中介不当行为检测数据集？",
+        "inputs_and_setting_cn": "FINRA BrokerCheck注册经纪人记录与LinkedIn职业社交网络档案；扫描4,729名注册经纪人，成功匹配2,851个LinkedIn档案；训练用平衡样本含400名不当行为者和400名无不当行为者，测试用自然分布样本含2,051人（141名不当行为者，1,910名无不当行为者）。",
+        "designed_or_compared_object_cn": "比较有LinkedIn档案与无LinkedIn档案的经纪人特征，以及有不当行为与无不当行为群体的特征分布；对可疑虚假LinkedIn档案进行筛选。",
+        "baseline_control_or_counterfactual_cn": "无LinkedIn档案的经纪人群体作为选择偏差检验参照；随机抽样保证代表性。",
+        "objective_metrics": [
+          "自我披露特征在训练/测试样本中的分布",
+          "有/无LinkedIn档案的不当行为比例差异",
+          "LinkedIn档案匹配成功率"
+        ],
+        "analysis_method_cn": "随机抽样、描述性统计比较、虚假档案定性检查与连接数阈值排除。",
+        "main_result_cn": "有LinkedIn档案者中6.87%曾发生不当行为，无档案者中6.77%，依赖变量几乎一致；其他特征总体可比，仅平均任职时长和州牌照数有差异；只排除三个明显可疑档案。",
+        "argumentative_role_cn": "建立后续分类器训练和验证所需的数据基础，并预先排除因LinkedIn覆盖导致的样本选择偏差。",
+        "remaining_uncertainty_cn": "有LinkedIn档案者在任职时长和州牌照数上的差异可能限制对无LinkedIn经纪人总体的推广；自我披露信息本身是否有预测力仍未知。",
+        "link_to_next_phase_cn": "样本建成后，下一阶段把这些数据转换成基于理论的特征集合。",
+        "evidence_pointers": [
+          "Section 3.2 Data Acquisition",
+          "Table 1 Comparison of Brokers With and Without LinkedIn Profiles",
+          "Figure 1 Data Mining Process"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "理论驱动的特征工程",
+        "question_cn": "如何把信息操纵理论和warranting理论的可操作化命题转化为可被分类器使用的特征集合？",
+        "inputs_and_setting_cn": "LinkedIn档案中的结构化字段和文本简介，以及BrokerCheck上的监管确认字段。",
+        "designed_or_compared_object_cn": "将特征设计为三个层级：未验证的自我披露特征、用户确认特征（收到的推荐数、每项技能认可数）、监管确认特征（投资顾问资格、任职时长、岗位数、考试数、牌照数、LinkedIn与BrokerCheck偏差）。",
+        "baseline_control_or_counterfactual_cn": "以未验证的自我披露特征作为基线，再逐级加入用户确认和监管确认特征。",
+        "objective_metrics": [
+          "特征类别与理论原则的对应关系",
+          "文本特征的词典与可读性指标",
+          "偏差特征的可用性"
+        ],
+        "analysis_method_cn": "基于理论命题进行特征映射；用Harvard IV-4词典、Zhou等不确定性词表、Fog index等进行文本量化；用one-hot编码和标准化处理分类与数值特征。",
+        "main_result_cn": "信息操纵理论的四个沟通原则分别映射到数量型特征、职业信息真实性、信息相关性和模糊性文本线索；warranting理论映射到用户确认和监管确认以及偏差特征。",
+        "argumentative_role_cn": "让理论不再只是解释标签，而是直接决定分类器可检测的信号来源，为H1-H3提供可测特征基础。",
+        "remaining_uncertainty_cn": "这些特征在实际分类中是否带来统计上显著性能提升仍未验证。",
+        "link_to_next_phase_cn": "特征集合确定后，需要选择并训练机器学习模型来检验这些特征的实际判别力。",
+        "evidence_pointers": [
+          "Section 3.3 Feature Selection",
+          "Table 2 Features Based on Self-Disclosed Structured Data and Linguistic Cues",
+          "Table 3 Features Based on User- and Regulator-Confirmed Data"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "分类器训练、配置与超参数调优",
+        "question_cn": "在平衡样本上，不同机器学习算法和分类器配置能否被稳健地训练并避免过拟合？",
+        "inputs_and_setting_cn": "平衡样本（400/400）；六种机器学习算法：逻辑回归、支持向量机、决策树、随机森林、朴素贝叶斯、人工神经网络。",
+        "designed_or_compared_object_cn": "每个分类器A-D分别使用不同特征集；对每种算法使用bagging策略和网格搜索，以F1分数为目标调整超参数。",
+        "baseline_control_or_counterfactual_cn": "Classifier A（仅自我披露信息）作为外部验证的基线；平衡样本中的随机猜测为50%准确率。",
+        "objective_metrics": [
+          "十折分层交叉验证的准确率、召回率、精确率、特异性、F1"
+        ],
+        "analysis_method_cn": "十折分层交叉验证、bagging集成、网格搜索、标准化与异常值剔除。",
+        "main_result_cn": "所有算法在所有配置下都得到有意义的交叉验证分数；决策树和随机森林多数指标最高，逻辑回归和神经网络紧随其后；包含监管确认信息的Classifier C和D明显高于A和B。",
+        "argumentative_role_cn": "证明模型训练流程稳健，并为后续自然分布样本的验证提供最优模型配置。",
+        "remaining_uncertainty_cn": "交叉验证结果可能因平衡训练样本而产生乐观偏差，需要在真实类别分布下确认；H2和H3还不能最终判定。",
+        "link_to_next_phase_cn": "交叉验证只提供初步指示，作者明确将其降级为“初始指示”，从而引出自然分布留出样本上的正式假设检验。",
+        "evidence_pointers": [
+          "Section 3.5 Machine Learning Techniques Applied",
+          "Section 3.6 Classifier Configuration and Hyperparameter Tuning",
+          "Table 4 Classifier Configuration",
+          "Table 6 Cross-Validation Results Based on the Balanced Sample",
+          "Appendix B Table B1 Hyperparameter Tuning"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "平衡样本交叉验证的初步统计评价",
+        "question_cn": "在训练数据内部，不同外部验证水平的特征集是否显示出检测不当行为的初步证据？",
+        "inputs_and_setting_cn": "平衡样本、十折交叉验证结果、六种机器学习算法。",
+        "designed_or_compared_object_cn": "比较Classifier A、B、C、D的性能，并解释A类达到有意义水平、B类未改善、C/D类提升。",
+        "baseline_control_or_counterfactual_cn": "以随机猜测作为隐性基准；Classifier A作为外部验证递增的起点。",
+        "objective_metrics": [
+          "Accuracy",
+          "Recall",
+          "Precision",
+          "Specificity",
+          "F1"
+        ],
+        "analysis_method_cn": "描述性比较交叉验证指标，不进行正式假设检验。",
+        "main_result_cn": "Classifier A的F1约为62.96%-66.50%，说明自我披露信息有初步价值；Classifier B与A接近甚至略低；Classifier C和D的F1明显升高（约67.61%-75.21%）。",
+        "argumentative_role_cn": "为H1和H3提供方向性支持，同时提醒H2证据不明确，需进一步检验。",
+        "remaining_uncertainty_cn": "结论只基于平衡样本的交叉验证，不能代表真实类别分布，也未考虑经济价值。",
+        "link_to_next_phase_cn": "交叉验证结果的这种“初始指示”定位，直接引导作者转向自然分布样本的正式假设检验。",
+        "evidence_pointers": [
+          "Section 4.2.1 Cross-Validation Results Based on the Balanced Sample",
+          "Table 6",
+          "Section 4.2.1 final paragraph"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "自然分布留出样本统计评价与阈值/曲线分析",
+        "question_cn": "在真实类别分布下，H1、H2、H3是否成立？哪种分类器配置和算法最优？",
+        "inputs_and_setting_cn": "自然分布样本2,051名经纪人（141名不当行为者，占6.87%）；已训练好的分类器A-D及辅助分类器E、F。",
+        "designed_or_compared_object_cn": "在留出样本上评估A/B/C/D；使用Naive分类器作为基准；通过McNemar检验比较A vs Naive、B vs A、C/D vs A/B、D vs C、D vs E/F；使用PR曲线、ROC曲线、AUC进行全阈值比较。",
+        "baseline_control_or_counterfactual_cn": "Naive分类器按历史6.83%不当行为比例随机分类；Classifier A作为外部验证递增起点；Classifier E/F用于确认自我披露信息的增量价值。",
+        "objective_metrics": [
+          "Accuracy",
+          "Recall",
+          "Precision",
+          "Specificity",
+          "F1",
+          "AUC",
+          "McNemar检验p值"
+        ],
+        "analysis_method_cn": "留出样本评估、McNemar显著性检验、精确率-召回率曲线、ROC曲线、AUC比较。",
+        "main_result_cn": "Classifier A显著优于Naive，支持H1；Classifier B在六种算法中有五种被A显著超越，且特征稀疏分析显示用户确认信息信息增益不足，不支持H2；Classifier C和D在所有算法上都显著优于A和B，支持H3；Classifier D的随机森林最优，AUC为82.83%。",
+        "argumentative_role_cn": "这是对研究假设的直接检验，是全文核心证据；通过多算法、多基准和全阈值比较提升结论稳健性。",
+        "remaining_uncertainty_cn": "统计性能提升是否等于经济价值尚不清楚；不同阈值会影响实际取舍；用户确认信息在部分算法上与监管信息结合时出现价值。",
+        "link_to_next_phase_cn": "统计评价之后需要回答“这些分类器是否真的值得使用”，于是引入经济评价。",
+        "evidence_pointers": [
+          "Section 4.2.2 Classifier Evaluation and Analysis Based on the Naturally Distributed Sample",
+          "Tables 7-11",
+          "Figures 3-4",
+          "Table 12 AUC Scores"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "经济评价与敏感性分析",
+        "question_cn": "分类器的统计性能能否转化为投资者和社会可量化的经济收益？该收益对搜索成本和分类阈值是否稳健？",
+        "inputs_and_setting_cn": "自然分布样本的分类结果、每起不当行为的赔偿金/罚款金额、设定搜索成本参数。",
+        "designed_or_compared_object_cn": "定义四种分类结果（TP、FN、FP、TN）下的经济收益函数；比较各分类器的平均经济收益；改变搜索成本从0到20,000美元和分类阈值0.40-0.60进行敏感性分析。",
+        "baseline_control_or_counterfactual_cn": "与Naive分类器的经济收益比较；以搜索成本为0作为基准，再逐步提高搜索成本；以不同分类阈值作为反事实。",
+        "objective_metrics": [
+          "平均经济收益（美元）",
+          "Wilcoxon Rank-Sum检验",
+          "不同搜索成本下的收益曲线",
+          "不同阈值下的收益与精确率/召回率"
+        ],
+        "analysis_method_cn": "按公式(3)计算每个经纪人的经济收益；WRS检验显著性；敏感性图展示搜索成本和阈值的联合影响。",
+        "main_result_cn": "所有分类器相对Naive都有显著正平均经济收益；Classifier A约4,525美元，Classifier D最高约4,711美元，但C/D并未显著高于A/B；Classifier D在搜索成本高达18,477美元时仍保持正收益；最优阈值随搜索成本上升而提高。",
+        "argumentative_role_cn": "把分类性能转化为投资者避免损失和监管者资源分配效率，支撑“预测性监管”和“社会信任”贡献。",
+        "remaining_uncertainty_cn": "赔偿金/罚款只是投资者损失的近似，搜索成本难以精确量化；经济收益差异在分类器间并不显著。",
+        "link_to_next_phase_cn": "经济证据完成后，讨论部分综合H1-H3、方法论选择、伦理边界和局限性，把结果上升为理论确认与设计知识。",
+        "evidence_pointers": [
+          "Section 3.7.2 Economic Evaluation",
+          "Section 4.3 Economic Evaluation Based on the Naturally Distributed Sample",
+          "Table 13",
+          "Figures 5-6"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "讨论、理论化与结论",
+        "question_cn": "实验结果如何回到理论并转化为可复用的设计知识和边界条件？",
+        "inputs_and_setting_cn": "前述统计与经济评价的全部结果。",
+        "designed_or_compared_object_cn": "将结果对照H1、H2、H3；讨论选择平衡训练样本、召回率优先、负面预测值、伦理问题、反操纵机制和平台适用性。",
+        "baseline_control_or_counterfactual_cn": "以Naive分类器和零召回率的朴素策略作为方法论比较基准。",
+        "objective_metrics": [
+          "无新指标，综合解释"
+        ],
+        "analysis_method_cn": "理论回归、边界条件分析、局限性与未来研究方向梳理。",
+        "main_result_cn": "确认信息操纵理论：诚实与不诚实的金融中介自我披露存在差异；确认warranting理论：监管确认信息最难操纵，因而最有价值；用户确认信息单独不足但可结合监管信息；随机森林是最优算法；分类器符合召回率和负面预测值要求，无特定人群偏见；可通过偏差特征抵御策略性修改；可迁移到其他类似商业网络。",
+        "argumentative_role_cn": "完成从局部性能差异到理论贡献和设计知识的提升，同时划定限定条件，防止贡献被理解为一次性项目结果。",
+        "remaining_uncertainty_cn": "未观察到的历史不当行为、当被检测者意识到模型后的策略性行为、其他平台差异、以及实际部署效果仍未直接验证。",
+        "link_to_next_phase_cn": "讨论与结论将这些不确定性转化为未来研究问题，形成完整研究链闭环。",
+        "evidence_pointers": [
+          "Section 4.4 Discussion",
+          "Section 5 Conclusion",
+          "Appendix A and C for extra robustness information"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "用金融中介的重要性与不当行为的宏观危害建立现实背景",
+      "引入信息操纵理论和warranting理论，说明研究采用的理论工具",
+      "介绍数据来源（LinkedIn自我披露与BrokerCheck监管记录匹配）",
+      "预先概括主要发现：自我披露信息有价值，监管确认下性能最好，经济评价支持",
+      "把结果定位到投资者、监管者和重建金融信任的社会挑战"
+    ],
+    "introduction_moves": [
+      "从金融中介对投资者财富和生活规划的影响切入",
+      "指出网络化交流削弱人际信任，金融危机和公众丑闻进一步侵蚀信任",
+      "用“华尔街之狼”电影和真实案例把抽象危害具象化",
+      "提出IS和分析在识别不当行为、增强信任中的角色",
+      "综述已有欺诈检测研究，指出其对金融中介个体预测的忽视",
+      "指出社交网络自我披露信息尚未被用于中介不当行为检测",
+      "引入两个理论并正式提出研究问题",
+      "概述数据集、分类器、经济评价和主要结果",
+      "分研究与实践两层面预告贡献",
+      "交代论文结构"
+    ],
+    "theory_and_knowledge_moves": [
+      "定义金融中介不当行为的经济后果和类型",
+      "引用监管制度和BrokerCheck信息，指出现有公开信息不足以自我防护",
+      "综述数据挖掘欺诈检测中信用卡、会计、公司欺诈的成果",
+      "指出证券欺诈特别是金融中介不当行为的自动检测文献稀缺",
+      "定义自我披露并说明社交网络自我披露动因",
+      "介绍信息操纵理论的核心沟通原则及其在财务报告和众筹中的实证",
+      "说明为何人际欺骗理论不适用：LinkedIn档案是静态独白",
+      "介绍warranting理论并提出信息确认层级",
+      "从两个理论分别推导H1、H2、H3"
+    ],
+    "artifact_design_moves": [
+      "用KDD流程组织数据挖掘任务",
+      "描述两阶段抽样与选择偏差检验",
+      "定义不当行为操作化为最终、已解决或判定赔偿/罚款的客户争议或监管行动",
+      "展示LinkedIn与BrokerCheck信息并说明匹配与虚假档案控制",
+      "把信息操纵理论四条原则映射到个人、网络活动、职业信息、简介文本等特征",
+      "把warranting理论映射为用户推荐、技能认可和监管确认特征",
+      "构建LinkedIn与BrokerCheck偏差特征来捕获隐瞒和粉饰",
+      "描述文本预处理和词典选择",
+      "列示六种机器学习算法与bagging策略",
+      "定义Classifier A-D四级验证配置并解释附加E/F配置"
+    ],
+    "evaluation_moves": [
+      "用平衡样本十折分层交叉验证获得初步结果",
+      "用自然分布留出样本还原真实类别不平衡",
+      "以Naive随机分类作为基准，用McNemar检验显著性",
+      "用PR曲线和ROC曲线/AUC覆盖所有分类阈值",
+      "增加只含监管确认和用户+监管确认的分类器验证自我披露增量价值",
+      "设计经济收益函数，把四种分类结果换算为投资者收益/损失",
+      "用搜索成本和阈值敏感性分析测试经济价值稳健性"
+    ],
+    "discussion_and_contribution_moves": [
+      "将统计结果分别对应H1、H2、H3，并联系理论确认",
+      "指出随机森林对本问题最优",
+      "解释为什么经济评价中没有出现C/D显著优于A/B但实践上仍应偏好外部验证信息",
+      "用召回率和负面预测值论证分类器对投资者/监管者的实际有用性",
+      "加入伦理讨论，说明算法没有群体偏见且不会自动惩罚被误判者",
+      "列出BrokerCheck未观测不当行为、策略性自我披露变化、平台差异等局限",
+      "在结论中重新把贡献链接到研究缺口和预测性监管",
+      "提出跨平台、跨领域和具体不当行为类型检测等未来方向"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "信息操纵理论（Information Manipulation Theory, McCornack 1992）",
+      "warranting理论（Walther et al. 2009）",
+      "数据挖掘欺诈检测文献（Ngai et al. 2011; Bhattacharyya et al. 2011; Humpherys et al. 2011）",
+      "自我披露与社交网络研究（Bazarova & Choi 2014; Krasnova et al. 2010）",
+      "金融中介不当行为类型学与监管制度背景（Cumming & Johan 2008; FINRA BrokerCheck; Egan et al. 2019）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "信息操纵理论和warranting理论不仅被用于事后解释，而是前瞻性地决定了特征类别的选择、外部验证层级的设计以及H1-H3假设的形成；最终评价直接检验这些理论驱动的设计差异，因此属于直接耦合。",
+    "translation_chain_cn": "信息操纵理论：不当行为者会少报/夸大信息量、降低信息真实性、提供不相关信息、表达模糊→需要从自我披露结构化数据和文本中提取数量、真实性、相关性、模糊性信号→形成个人资料、网络活动、职业信息、简介文本四大类自我披露特征→通过Classifier A（仅自我披露特征）与Naive随机分类器的比较检验H1。warranting理论：信息越难操纵越可信→用户确认（推荐、技能认可）构成弱外部验证→形成li_rec_ob和li_end_skill特征→通过Classifier B与A的比较检验H2。warranting理论在更强层级：监管数据不可操纵→形成BrokerCheck结构特征和LinkedIn-BrokerCheck偏差特征→通过Classifier C/D与A/B的比较检验H3。最终，经济评价把这些统计性能差异转化为避免投资者损失和搜索成本权衡，从而把理论命题扩展为设计知识。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "信息操纵理论：欺骗者会以夸大/淡化信息量、说谎、提供无关信息、模糊表达等方式与诚实者不同（McCornack 1992）。",
+        "mechanism_cn": "不当行为倾向的金融中介在LinkedIn上自我披露时会产生可观测的数量、真实性和可读性异常。",
+        "design_requirement_cn": "分类器需要包含能反映信息量、真实性、相关性和模糊性的自我披露特征。",
+        "artifact_choice_cn": "个人资料、网络活动、职业信息、简介文本长度/情感/复杂/不确定性/模态词等特征，构成Classifier A。",
+        "evaluated_contrast_cn": "Classifier A vs Naive随机分类器；以及交叉验证中A是否达到有意义水平。",
+        "objective_result_cn": "Classifier A对所有算法都显著优于Naive；在自然分布样本上，RF召回率74.47%，AUC约73.99%。",
+        "evidence_pointers": [
+          "Section 3.3 Table 2",
+          "Section 4.2.2 Table 7",
+          "Table 12"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "warranting理论：自我披露信息若被他人确认则更难操纵，因此更可信（Walther et al. 2009）。",
+        "mechanism_cn": "不当行为者可能粉饰技能和履历，但其他用户只会为工作表现好者提供推荐和技能认可，因此用户确认信号应能区分两类中介。",
+        "design_requirement_cn": "需要加入由其他LinkedIn用户确认的特征作为弱外部验证。",
+        "artifact_choice_cn": "Classifier B加入收到的推荐数li_rec_ob和每技能认可数li_end_skill。",
+        "evaluated_contrast_cn": "Classifier B vs Classifier A。",
+        "objective_result_cn": "B没有显著优于A，甚至多数算法被A显著超越；原因是超过90%样本无推荐、超过50%样本无技能认可，信息增益不足。",
+        "evidence_pointers": [
+          "Section 3.3 Table 3",
+          "Section 4.2.2 H2部分",
+          "Table 8",
+          "Table 9"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "warranting理论在更强验证层级：监管确认信息最难操纵，偏差最不可伪造，因此应该最有判别力。",
+        "mechanism_cn": "不当行为者常在LinkedIn上隐瞒部分岗位、缩短任职时长、隐瞒事件前后经历或夸大经验，这些行为会产生LinkedIn与BrokerCheck之间的偏差。",
+        "design_requirement_cn": "分类器需要加入监管确认的结构特征和偏差特征作为强外部验证。",
+        "artifact_choice_cn": "Classifier C加入投资顾问资格、监管平均任职时长、监管岗位数、考试数、州牌照数、经验偏差、岗位数偏差；Classifier D再加入用户确认特征。",
+        "evaluated_contrast_cn": "Classifier C/D vs A/B；D vs C；D vs E/F。",
+        "objective_result_cn": "C/D在所有算法上显著优于A/B；D的RF达到AUC 82.83%、召回率75.18%；D在多种算法上优于C；D也优于只用监管确认的E/F，证实了自我披露增量价值。",
+        "evidence_pointers": [
+          "Section 3.3 Table 3",
+          "Section 4.2.2 H3部分",
+          "Tables 10-12",
+          "Appendix D Tables D2-D5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "欺诈检测中的经济价值评价：分类器应不仅在统计指标上有效，还应能在真实成本结构下产生净收益。",
+        "mechanism_cn": "真阳性避免投资者损失，假阴性造成损失，假阳性增加搜索成本，真阴性无额外成本；以赔偿金和罚款近似损失，以搜索成本代表换中介成本。",
+        "design_requirement_cn": "在统计评价外增加经济评价，并按搜索成本和分类阈值进行敏感性分析。",
+        "artifact_choice_cn": "经济收益函数公式(3)；在不同搜索成本和阈值下计算各分类器平均经济收益。",
+        "evaluated_contrast_cn": "各分类器与Naive比较；改变搜索成本和阈值后的收益曲线比较。",
+        "objective_result_cn": "所有分类器显著优于Naive；Classifier D在高达18,477美元搜索成本下仍为正收益；最优阈值随搜索成本上升而升高。",
+        "evidence_pointers": [
+          "Section 3.7.2",
+          "Section 4.3",
+          "Table 13",
+          "Figures 5-6"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "统计分类性能评价（准确率、召回率、精确率、特异性、F1）",
+      "显著性检验（McNemar检验）",
+      "全阈值性能分析（PR曲线、ROC曲线、AUC）",
+      "留出样本外部验证（自然分布样本）",
+      "经济价值评价（基于赔偿金/罚款的投资者损失避免）",
+      "敏感性分析（搜索成本与分类阈值变化）",
+      "辅助分类器消融式对比（E/F对照）"
+    ],
+    "why_these_evaluations_cn": "由于目标类别在现实中高度不平衡（6.83%），单独准确率会产生误导；因此需要召回率、精确率、F1和AUC。由于要回答“特征是否真的有效”，需要Naive和层级化对照配置并通过McNemar检验。由于统计改善未必等于实际价值，又引入经济评价和敏感性分析。由于训练是在平衡样本上进行的，必须用自然分布留出样本证明可推广性。",
+    "benchmark_and_contrast_chain_cn": "评价链条从内部到外部、从统计到经济逐步累积：首先以随机猜测为最小基准，表明Classifier A有意义；然后以A为基准检验用户确认增量（B vs A）；再以A/B为基准检验监管确认增量（C/D vs A/B）；再通过D vs C检验用户信息在强验证下的增量价值；最后通过D vs E/F说明自我披露信息本身仍有增量价值，形成完整消融链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "仅使用自我披露信息即可有效检测不当行为（H1）",
+        "evidence_cn": "自然分布样本上所有算法的Classifier A都显著优于按历史比例随机分类的Naive；RF召回率74.47%，AUC约73.99%。",
+        "status": "充分支持"
+      },
+      {
+        "claim_cn": "用户确认信息能显著提高检测性能（H2）",
+        "evidence_cn": "Classifier B相对A在六种算法中有五种反而更差；推荐特征90%以上为零，技能认可特征50%以上为零；信息增益不足。",
+        "status": "不支持"
+      },
+      {
+        "claim_cn": "监管确认信息能显著提高检测性能（H3）",
+        "evidence_cn": "Classifier C和D在自然分布样本上对所有算法都显著优于A和B；D-RF达到AUC 82.83%。",
+        "status": "充分支持"
+      },
+      {
+        "claim_cn": "结合用户与监管确认信息最有利于检测",
+        "evidence_cn": "Classifier D在RF、DT、ANN等算法上优于C；但D与C的AUC差异不大，部分算法C反而更好。",
+        "status": "部分支持"
+      },
+      {
+        "claim_cn": "自我披露信息相对纯监管信息仍有增量价值",
+        "evidence_cn": "Classifier D在多数算法上显著优于仅用监管信息的E和仅用用户+监管信息的F。",
+        "status": "充分支持"
+      },
+      {
+        "claim_cn": "分类器具有显著经济价值",
+        "evidence_cn": "所有分类器平均经济收益显著大于零；但C/D并未显著高于A/B。",
+        "status": "部分支持：有价值但这部分不支撑“监管确认带来显著更高经济收益”的细分主张"
+      },
+      {
+        "claim_cn": "随机森林是最优算法",
+        "evidence_cn": "D-RF在AUC、准确率、精确率、F1上总体最高。",
+        "status": "充分支持，但仅针对本文特征与数据"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用平衡样本训练以避免类别不平衡导致分类器偏向多数类；使用十折分层交叉验证和独立自然分布留出样本；超参数网格搜索固定于训练样本；对LinkedIn匹配采取姓名、履历、地理位置等多重确认；通过定性检查与连接数阈值剔除疑似虚假档案；对缺失值用0和哑变量控制；对特征标准化并剔除高距离异常值。",
+    "external_validity_strategy_cn": "训练和测试样本都随机抽取；测试样本保持自然类别分布以反映真实使用环境；通过比较有/无LinkedIn档案群体排除选择偏差；经济评价以随机留出样本为输入，使收益估计具有代表性；通过敏感性分析覆盖不同搜索成本和阈值；讨论中给出向其他类似商业网络迁移的说明。",
+    "what_is_not_actually_tested_cn": "未直接测试分类器在真实投资者或监管机构工作流中的部署效果；未观察历史上未被发现/未被披露的不当行为；未检验当不当行为者意识到模型后主动改变LinkedIn披露行为时的对抗稳健性；未测试其他平台（如Xing、Maimai）上的表现；经济评价中的损失以赔偿金/罚款近似，可能低估投资者真实损失；分类器间经济收益差异不显著，作者仍偏好外部验证信息，这种偏好未被统计证据完全支撑。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "本文构建的机器学习分类器可以在类别高度不平衡的真实数据中检测金融中介不当行为，最佳配置是加入监管确认和用户确认信息的随机森林分类器，AUC达82.83%。",
+    "artifact_claim_cn": "外部验证水平是制品设计的核心差异：监管确认信息显著提升检测性能，而单独的用户确认信息不会；当用户确认与监管确认结合时，对树模型和神经网络有增量价值。",
+    "mechanism_claim_cn": "信息操纵理论解释了不当行为者自我披露的可识别差异；warranting理论解释了外部验证强度与信息可信度之间的关系，监管信息因最难操纵而最有判别力。",
+    "boundary_claim_cn": "结论依赖于美国注册经纪人在LinkedIn上公开可获取的自我披露信息以及FINRA BrokerCheck的监管记录；对无LinkedIn档案的经纪人需谨慎推广；在用户推荐/认可非常稀疏的数据中，用户确认信息不足以单独发挥作用。",
+    "reusable_design_knowledge_cn": "在预测性监管和欺诈检测中，设计者应把“信息验证层级”作为特征构建的基本原则：先使用自我披露信息作为广度信号，再引入不可操纵的权威验证和偏差特征作为强信号；同时用自然分布样本和经济评价检验分类器，而不是只依赖平衡样本和统计指标。",
+    "theoretical_contribution_cn": "把信息操纵理论和warranting理论从财务报告欺诈、众筹欺诈等场景扩展到金融中介不当行为检测，实证确认了理论在静态职业社交网络自我披露中的解释力，并进一步区分了用户确认与监管确认两种不同强度的外部验证。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分重新回到引言中“已有欺诈检测忽视了中介个体”和“BrokerCheck公开信息不足”的缺口，用自建数据集和分类器证明自我披露加外部验证可以填补个体层面检测的空白；结论部分再次把方法定位为投资者保护和预测性监管工具，回应引言中的信任危机。",
+    "overclaim_or_unsupported_leaps_cn": "尽管C/D在统计指标上显著优于A/B，经济评价中C/D并未显著高于A/B，作者仍建议实践者偏好含外部验证信息的分类器，存在轻微跳跃；H2被拒绝，但讨论中又说用户确认信息在结合监管信息时对部分算法有价值，需要依赖D vs C的间接证据；低精确率（最高约20%）与“有效检测”的公共表述之间存在张力；把赔偿金/罚款当作投资者损失近似值可能高估或低估经济价值，但文中未充分讨论该近似误差的方向和大小。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "金融中介对投资者参与市场必不可少，但中介不当行为既伤害投资者也破坏对金融系统的信任，进而损害经济。",
+      "rhetorical_function_cn": "开篇用宏观危害建立研究的重要性。",
+      "depends_on_cn": "无需前置。",
+      "sets_up_cn": "为后续“检测不当行为=社会挑战”的定位铺垫。",
+      "evidence_pointer": "Abstract, first two sentences"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "基于信息操纵理论和warranting理论，并利用不同外部验证水平的自我披露数据，本文提出自动检测金融中介不当行为的分类器。",
+      "rhetorical_function_cn": "在摘要阶段就显示理论、数据和制品三要素。",
+      "depends_on_cn": "依赖前句的不当行为危害。",
+      "sets_up_cn": "预告检测方案与理论来源。",
+      "evidence_pointer": "Abstract, second paragraph"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P3 S1-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "聚焦LinkedIn自我披露数据，与监管披露匹配后训练和评估，发现自我披露信息有价值，加入监管确认信息后预测性能最好，经济评价支持结论。",
+      "rhetorical_function_cn": "提前给出核心结果，让读者知道证据链完整。",
+      "depends_on_cn": "依赖前句提到的数据和方法。",
+      "sets_up_cn": "为结论中的社会价值报告作铺垫。",
+      "evidence_pointer": "Abstract, third paragraph"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P4 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "结果对投资者和监管者高度相关，可用于识别不当行为并帮助建立金融系统信任。",
+      "rhetorical_function_cn": "在摘要尾部把技术结果提升为社会实践贡献。",
+      "depends_on_cn": "依赖前句结果。",
+      "sets_up_cn": "点明目标受众和社会意义。",
+      "evidence_pointer": "Abstract, final paragraph"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "金融中介对投资者影响很大，投资顾问筛选机会，经纪人提供交易渠道，使投资者能参与金融市场。",
+      "rhetorical_function_cn": "建立金融中介在个人财富中的中心地位。",
+      "depends_on_cn": "无需前置。",
+      "sets_up_cn": "说明如果中介不当行为会同时影响个体和市场。",
+      "evidence_pointer": "Section 1, first paragraph"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4-S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "互联网和电子通信使投资者与中介面对面互动减少，信任建设受阻；全球金融危机和市场操纵进一步削弱投资者信心。",
+      "rhetorical_function_cn": "引入信任危机作为现代金融中的现实问题。",
+      "depends_on_cn": "依赖前句中介重要性。",
+      "sets_up_cn": "为治理不端行为提供迫切性。",
+      "evidence_pointer": "Section 1, first paragraph, sentences 4-5"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P1 S6-S10",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "以《华尔街之狼》中Jordan Belfort欺骗1513名客户造成约2亿美元损失为例，说明欺诈和不当行为降低投资者参与意愿，损害资源配置和经济整体。",
+      "rhetorical_function_cn": "用具体案例将抽象危害具象化并吸引读者。",
+      "depends_on_cn": "依赖前句提出的信任危机。",
+      "sets_up_cn": "引出监管干预和信息系统/分析技术能帮助识别不当行为、防止下一个“华尔街之狼”。",
+      "evidence_pointer": "Section 1, first paragraph, sentence about Wolf of Wall Street"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1-S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "以往研究提出多种识别金融市场操纵的方法，但忽略了对可能实施不当行为的金融中介个体的识别；社交网络现在被广泛用于选择中介，但自我披露且经不同外部验证的信息尚未被用于识别中介不当行为。",
+      "rhetorical_function_cn": "指出现有文献两种缺口：对象缺口和数据缺口。",
+      "depends_on_cn": "依赖前段问题背景。",
+      "sets_up_cn": "为本文研究问题和理论引入建立位置。",
+      "evidence_pointer": "Section 1, second paragraph"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1-S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "基于信息操纵理论认为不当行为者的披露不同于可靠市场参与者；基于warranting理论认为外部验证增加识别价值；正式提出研究问题：不同验证水平的自我披露信息能否用于检测可能实施不当行为的金融中介。",
+      "rhetorical_function_cn": "把一般问题压缩为有理论支撑的可研究问题。",
+      "depends_on_cn": "依赖前段缺口。",
+      "sets_up_cn": "引导全文假设和特征设计。",
+      "evidence_pointer": "Section 1, third paragraph"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为投资者和监管者构建区分不当行为者与可靠者的特征集，建立LinkedIn自我披露与FINRA BrokerCheck匹配的综合数据集。",
+      "rhetorical_function_cn": "说明研究如何从数据层面回答问题。",
+      "depends_on_cn": "依赖研究问题。",
+      "sets_up_cn": "引出分类器评价。",
+      "evidence_pointer": "Section 1, fourth paragraph"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "评估了包含不同外部验证水平的多个特征集下的分类模型，并进行基于赔偿金和罚款的经济评价，发现自我披露信息有价值，加入外部验证后性能高且有可观经济价值。",
+      "rhetorical_function_cn": "在引言中给出答案摘要，满足期刊对导言结果预告的要求。",
+      "depends_on_cn": "依赖前段数据方法。",
+      "sets_up_cn": "为后续贡献声明铺路。",
+      "evidence_pointer": "Section 1, fifth paragraph"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P6 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究贡献在于用信息操纵理论和warranting理论说明自我披露信息和不同外部验证水平对中介不当行为检测的相关性，并实证确认理论。",
+      "rhetorical_function_cn": "明确理论贡献。",
+      "depends_on_cn": "依赖前句结果。",
+      "sets_up_cn": "与后文实践贡献形成呼应。",
+      "evidence_pointer": "Section 1, sixth paragraph"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P7 S1-S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "结果有社会与经济相关性：投资者可预筛中介，监管者可利用有限资源进行预测性监管并更高效配置审查力量。",
+      "rhetorical_function_cn": "说明为什么研究缺口值得IS研究而非纯技术性能改进。",
+      "depends_on_cn": "依赖前段理论贡献。",
+      "sets_up_cn": "为结论中的实践建议打下基础。",
+      "evidence_pointer": "Section 1, seventh paragraph"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P8 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "文章结构：第二节提供背景并发展假设，第三节介绍数据集和方法，第四节报告和讨论结果，第五节总结。",
+      "rhetorical_function_cn": "给出路线图。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "建立读者预期。",
+      "evidence_pointer": "Section 1, final paragraph"
+    },
+    {
+      "order": 15,
+      "section": "Background",
+      "locator": "Section 2.1 P1 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "不当行为直接伤害投资者、侵蚀市场信任，抑制家庭参与金融市场，提高资本成本并降低经济增长。",
+      "rhetorical_function_cn": "进一步量化不当行为的宏观后果。",
+      "depends_on_cn": "引言已提出信任问题。",
+      "sets_up_cn": "说明为何监管与检测是社会挑战。",
+      "evidence_pointer": "Section 2.1, first paragraph"
+    },
+    {
+      "order": 16,
+      "section": "Background",
+      "locator": "Section 2.1 P2 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "金融不当行为普遍且代价高昂，零售投资者年损失数十亿美元，冲突性退休投资建议的年度总成本估计达170亿美元。",
+      "rhetorical_function_cn": "用具体经济数字支撑问题严重性。",
+      "depends_on_cn": "依赖前句宏观后果。",
+      "sets_up_cn": "为经济评价中的赔偿金逻辑提供现实基础。",
+      "evidence_pointer": "Section 2.1, second paragraph"
+    },
+    {
+      "order": 17,
+      "section": "Background",
+      "locator": "Section 2.1 P3-P4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "列出了虚假信息、不适当推荐、过收费、抢先交易、搅动、倒卖等中介不当行为类型及其委托-代理特征。",
+      "rhetorical_function_cn": "界定研究对象的具体行为谱系。",
+      "depends_on_cn": "前文已强调不当行为危害。",
+      "sets_up_cn": "为操作化“misconduct”做概念准备。",
+      "evidence_pointer": "Section 2.1, third and fourth paragraphs"
+    },
+    {
+      "order": 18,
+      "section": "Background",
+      "locator": "Section 2.1 P5 S1-S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "美国经纪人和投资顾问受FINRA监管且必须披露不当行为；已有研究用FINRA公开和非公开数据基于过去行为检测，但McCann等指出BrokerCheck公开信息不足以识别可能不当行为的中介，不能保护投资者。",
+      "rhetorical_function_cn": "指出既有监管数据使用路径的不足。",
+      "depends_on_cn": "依赖不当行为类型介绍。",
+      "sets_up_cn": "引出本文用自我披露信息的替代/补充路径。",
+      "evidence_pointer": "Section 2.1, fifth paragraph"
+    },
+    {
+      "order": 19,
+      "section": "Background",
+      "locator": "Section 2.2 P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "由于手动检测耗时、昂贵且不适合海量数据，数据挖掘技术被证明对识别金融市场欺诈活动有效。",
+      "rhetorical_function_cn": "为使用机器学习提供方法正当性。",
+      "depends_on_cn": "前文已描述不当行为。",
+      "sets_up_cn": "进入文献综述。",
+      "evidence_pointer": "Section 2.2, first paragraph"
+    },
+    {
+      "order": 20,
+      "section": "Background",
+      "locator": "Section 2.2 P2 S1-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "数据挖掘已广泛用于信用卡欺诈和会计欺诈，包括随机森林、SVM、决策树、神经网络、贝叶斯网络以及文本挖掘方法，近期还加入金融社交媒体用户生成内容。",
+      "rhetorical_function_cn": "展示自动欺诈检测领域的已有成果与可借用方法。",
+      "depends_on_cn": "依赖首句方法正当性。",
+      "sets_up_cn": "与后句证券欺诈文献稀缺形成对比。",
+      "evidence_pointer": "Section 2.2, second paragraph"
+    },
+    {
+      "order": 21,
+      "section": "Background",
+      "locator": "Section 2.2 P3 S1-S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "相对信用卡和会计欺诈，证券欺诈自动检测研究稀缺，特别是金融中介个体层面的不当行为检测几乎被忽视；已有研究只关注单个欺诈事件，不识别可能实施不当行为的单个中介。",
+      "rhetorical_function_cn": "把一般文献缺口收窄到本文填补的具体研究对象。",
+      "depends_on_cn": "依赖综述成果。",
+      "sets_up_cn": "直接引出本文目标。",
+      "evidence_pointer": "Section 2.2, final paragraph"
+    },
+    {
+      "order": 22,
+      "section": "Theory",
+      "locator": "Section 2.3 P1 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "数百万用户通过社交网络例行披露个人信息，自我披露被定义为向他人揭示个人信息的行为，动机包括吸引注意和维持关系；金融中介也用商业网络展示自己。",
+      "rhetorical_function_cn": "为自我披露数据作为信号源提供传播学基础。",
+      "depends_on_cn": "无需前置。",
+      "sets_up_cn": "随后引入两种理论解释这些披露信号的异质性。",
+      "evidence_pointer": "Section 2.3, first paragraph"
+    },
+    {
+      "order": 23,
+      "section": "Theory",
+      "locator": "Section 2.3 P2 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "特征选择建立在两个理论流上：信息操纵理论解释不当行为者为何与诚实者沟通不同，warranting理论解释外部验证水平如何影响特征集效用。",
+      "rhetorical_function_cn": "明确列出本文理论支柱并预告其分工。",
+      "depends_on_cn": "依赖自我披露知识。",
+      "sets_up_cn": "决定之后两段分别介绍两个理论。",
+      "evidence_pointer": "Section 2.3, second paragraph"
+    },
+    {
+      "order": 24,
+      "section": "Theory",
+      "locator": "Section 2.3 P3 S1-S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "信息操纵理论认为欺骗者违反四个沟通原则：夸大或淡化信息量、改变信息质量或说谎、提供脱离语境的信息、故意以模糊方式沟通。",
+      "rhetorical_function_cn": "给出理论命题的四个可操作维度。",
+      "depends_on_cn": "依赖理论引入。",
+      "sets_up_cn": "为后文特征映射和H1提供命题依据。",
+      "evidence_pointer": "Section 2.3, third paragraph"
+    },
+    {
+      "order": 25,
+      "section": "Theory",
+      "locator": "Section 2.3 P4 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "信息操纵理论已在财务报告欺诈和众筹欺诈中被实证支持；人际欺骗理论因依赖双向互动不适合LinkedIn这种静态独白，因此排除。",
+      "rhetorical_function_cn": "证明理论在欺诈领域的迁移力，同时排除替代理论。",
+      "depends_on_cn": "依赖理论命题。",
+      "sets_up_cn": "为“不当行为者与诚实者沟通不同”的假设提供合法性。",
+      "evidence_pointer": "Section 2.3, fourth paragraph"
+    },
+    {
+      "order": 26,
+      "section": "Theory",
+      "locator": "Section 2.3 P5 S1-S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "即使不当行为者试图让档案看起来像诚实者，其虚构档案也必然比真实档案更不详细和不精确，因此二者在LinkedIn自我披露上应存在差异。",
+      "rhetorical_function_cn": "从理论机制推出具体可检验结论。",
+      "depends_on_cn": "依赖信息操纵理论和人际欺骗理论排除。",
+      "sets_up_cn": "为H1提供直接机制。",
+      "evidence_pointer": "Section 2.3, fifth paragraph"
+    },
+    {
+      "order": 27,
+      "section": "Theory",
+      "locator": "Section 2.3 P6 S1-S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "warranting理论认为，个体越难操纵的自我披露信息越可信；社交平台其他用户可确认信息，而监管机构等可靠外部来源提供更强验证。",
+      "rhetorical_function_cn": "给出第二个理论命题并区分验证强度。",
+      "depends_on_cn": "依赖前文自我披露与外部验证谱系。",
+      "sets_up_cn": "为H2和H3的验证层级设计提供理论依据。",
+      "evidence_pointer": "Section 2.3, final paragraph"
+    },
+    {
+      "order": 28,
+      "section": "Hypotheses",
+      "locator": "Section 2.4 P1 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "为回答研究问题，发展一组假设，每个假设代表一个外部验证水平。",
+      "rhetorical_function_cn": "说明假设结构与验证水平的对应关系。",
+      "depends_on_cn": "依赖前节两种理论。",
+      "sets_up_cn": "引导读者阅读H1-H3。",
+      "evidence_pointer": "Section 2.4, first paragraph"
+    },
+    {
+      "order": 29,
+      "section": "Hypotheses",
+      "locator": "Section 2.4 H1段落",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：未经第三方验证的自我披露信息对检测可能实施不当行为的金融中介是有价值的。",
+      "rhetorical_function_cn": "正式提出研究假设，对应信息操纵理论的基线命题。",
+      "depends_on_cn": "依赖信息操纵理论机制。",
+      "sets_up_cn": "将用Classifier A vs Naive检验。",
+      "evidence_pointer": "Section 2.4, H1 statement"
+    },
+    {
+      "order": 30,
+      "section": "Hypotheses",
+      "locator": "Section 2.4 H2段落",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：同时使用未验证自我披露信息和用户确认信息的分类器，优于只使用未验证自我披露信息的分类器。",
+      "rhetorical_function_cn": "正式提出用户确认层级的假设。",
+      "depends_on_cn": "依赖warranting理论的弱验证命题。",
+      "sets_up_cn": "将用Classifier B vs A检验。",
+      "evidence_pointer": "Section 2.4, H2 statement"
+    },
+    {
+      "order": 31,
+      "section": "Hypotheses",
+      "locator": "Section 2.4 H3段落",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：进一步加入监管机构确认信息的分类器，优于仅使用自我披露和用户确认信息的分类器。",
+      "rhetorical_function_cn": "正式提出监管确认层级的假设。",
+      "depends_on_cn": "依赖warranting理论的强验证命题。",
+      "sets_up_cn": "将用Classifier C/D vs A/B检验。",
+      "evidence_pointer": "Section 2.4, H3 statement"
+    },
+    {
+      "order": 32,
+      "section": "Methodology",
+      "locator": "Section 3.1 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "文章采用KDD流程组织数据挖掘任务，因为它适合需要大量数据预处理的学术研究。",
+      "rhetorical_function_cn": "为整个方法层提供过程框架。",
+      "depends_on_cn": "前面已提出假设。",
+      "sets_up_cn": "衔接数据获取、预处理、建模和评价。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 33,
+      "section": "Methodology",
+      "locator": "Section 3.2 P1-P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "从BrokerCheck随机抽取平衡样本用于训练和初始评价，以及自然分布样本用于真实世界评价，因为实际只有6.83%的中介有不当行为。",
+      "rhetorical_function_cn": "解释为什么需要两种样本以及如何处理类别不平衡。",
+      "depends_on_cn": "依赖研究问题和KDD流程。",
+      "sets_up_cn": "为后续留出样本验证提供数据设计理由。",
+      "evidence_pointer": "Section 3.2, first two paragraphs"
+    },
+    {
+      "order": 34,
+      "section": "Methodology",
+      "locator": "Section 3.2 P4-P5",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "作者检查有/无LinkedIn档案的经纪人在不当行为比例和其他特征上的可比性，以排除选择偏差。",
+      "rhetorical_function_cn": "在数据层预先回应外部有效性威胁。",
+      "depends_on_cn": "依赖样本构建。",
+      "sets_up_cn": "让后续分类结果可以推广到LinkedIn使用者总体。",
+      "evidence_pointer": "Section 3.2, paragraphs about selection bias and Table 1"
+    },
+    {
+      "order": 35,
+      "section": "Methodology",
+      "locator": "Section 3.2 P6-P8",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "把不当行为操作化为最终状态、已解决或判定赔偿/罚款的客户争议和监管行动，以保证记录反映真实过错；不区分具体类型，因为各类型损害严重程度可比。",
+      "rhetorical_function_cn": "明确因变量定义，保证标签可靠性。",
+      "depends_on_cn": "依赖前期不当行为类型学。",
+      "sets_up_cn": "为经济评价中使用赔偿金提供定义基础。",
+      "evidence_pointer": "Section 3.2, misconduct definition paragraph"
+    },
+    {
+      "order": 36,
+      "section": "Methodology",
+      "locator": "Section 3.2 final paragraphs",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "通过姓名、履历、地点和FINRA编号多条件匹配LinkedIn档案，并用逻辑检查和连接数阈值剔除疑似虚假档案。",
+      "rhetorical_function_cn": "增强数据质量，防止虚假档案污染标签和特征。",
+      "depends_on_cn": "依赖匹配步骤。",
+      "sets_up_cn": "提高后续分类结果的可信度。",
+      "evidence_pointer": "Section 3.2, profile matching and fake profile paragraphs"
+    },
+    {
+      "order": 37,
+      "section": "Methodology",
+      "locator": "Section 3.3 Table 2前一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "Table 2列出了个人资料、网络活动、职业信息和简介摘要四类自我披露结构化及语言特征，所有特征均未经外部验证。",
+      "rhetorical_function_cn": "给出Classifier A的特征设计。",
+      "depends_on_cn": "依赖信息操纵理论。",
+      "sets_up_cn": "为Classifier B/C/D的对比提供基线。",
+      "evidence_pointer": "Section 3.3, paragraph before Table 2"
+    },
+    {
+      "order": 38,
+      "section": "Methodology",
+      "locator": "Section 3.3 Table 2后一段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "信息操纵理论的第一到第四原则被映射到数量特征、职业信息真实性、信息相关性和简介文本模糊性上。",
+      "rhetorical_function_cn": "展示理论到特征生成的直接翻译链。",
+      "depends_on_cn": "依赖理论命题和特征表。",
+      "sets_up_cn": "为H1的机制提供具体特征证据。",
+      "evidence_pointer": "Section 3.3, mapping paragraph"
+    },
+    {
+      "order": 39,
+      "section": "Methodology",
+      "locator": "Section 3.3 Table 3前一段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "Table 3定义了用户确认特征和监管确认特征；用户推荐/技能认可数量可能区分不当行为者，监管数据不可操纵所以更可靠，LinkedIn与BrokerCheck偏差最能捕获隐瞒。",
+      "rhetorical_function_cn": "给出H2和H3的制品操作化。",
+      "depends_on_cn": "依赖warranting理论。",
+      "sets_up_cn": "为Classifier B/C/D的比较提供特征构成。",
+      "evidence_pointer": "Section 3.3, paragraph before Table 3"
+    },
+    {
+      "order": 40,
+      "section": "Methodology",
+      "locator": "Section 3.4 S1-S10",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "对非数值特征进行分箱、one-hot编码；对个人简介做文本清理并用Harvard IV-4词典、不确定性词表和Fog index计算语言特征；缺失值用0和哑变量处理，标准化并剔除极端异常值。",
+      "rhetorical_function_cn": "说明预处理细节，保证机器学习方法可用和结果可复现。",
+      "depends_on_cn": "依赖特征工程。",
+      "sets_up_cn": "为模型训练和评价提供已处理好的输入。",
+      "evidence_pointer": "Section 3.4"
+    },
+    {
+      "order": 41,
+      "section": "Methodology",
+      "locator": "Section 3.5 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择六种常见机器学习算法，并用bagging策略避免过拟合；随机森林特殊处理，神经网络不用独立bagging。",
+      "rhetorical_function_cn": "说明算法集合与集成策略的合理性。",
+      "depends_on_cn": "依赖预处理后的数据。",
+      "sets_up_cn": "为超参数调优和后续评价做方法准备。",
+      "evidence_pointer": "Section 3.5"
+    },
+    {
+      "order": 42,
+      "section": "Methodology",
+      "locator": "Section 3.6 Table 4前一段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "根据外部验证水平定义Classifier A-D：A仅自我披露，B加用户确认，C加监管确认，D同时加用户与监管确认；另设只含监管确认的E和含用户+监管确认的F。",
+      "rhetorical_function_cn": "把假设转化为可比较的制品配置。",
+      "depends_on_cn": "依赖特征表。",
+      "sets_up_cn": "成为所有评价表格的列结构。",
+      "evidence_pointer": "Section 3.6, Table 4"
+    },
+    {
+      "order": 43,
+      "section": "Methodology",
+      "locator": "Section 3.7.1 S1-S5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用十折分层交叉验证调优模型，用自然分布样本做最终评价；计算混淆矩阵指标，用McNemar检验比较分类器，并报告方向；用PR曲线和ROC曲线/AUC覆盖所有阈值。",
+      "rhetorical_function_cn": "明确统计评价协议，说明为何选这些指标以应对不平衡数据。",
+      "depends_on_cn": "依赖分类器配置。",
+      "sets_up_cn": "为结果部分各表列和显著性检验提供依据。",
+      "evidence_pointer": "Section 3.7.1"
+    },
+    {
+      "order": 44,
+      "section": "Methodology",
+      "locator": "Section 3.7.2 S1-S6",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "设计经济评价：TP避免损失等于赔偿金减去搜索成本，FN造成赔偿损失，FP造成搜索成本，TN无成本；搜索成本初始设为零并做敏感性分析。",
+      "rhetorical_function_cn": "把分类错误转化为可量化的经济损益。",
+      "depends_on_cn": "依赖统计评价和不当行为赔偿数据。",
+      "sets_up_cn": "为经济结果表与敏感性图提供公式基础。",
+      "evidence_pointer": "Section 3.7.2, Equation (3)"
+    },
+    {
+      "order": 45,
+      "section": "Empirical Study",
+      "locator": "Section 4.1 P1-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "描述性统计显示约三分之一的自我披露特征在不当行为与无不当行为群体间差异显著；不当行为者简介更长但更难读，倾向粉饰；用户确认特征中技能认可显著更低；监管确认特征全部分布显著且有方向差异。",
+      "rhetorical_function_cn": "用单变量证据预示多变量分类器中的信号方向。",
+      "depends_on_cn": "依赖数据与特征定义。",
+      "sets_up_cn": "为后文分类性能结果做直观铺垫。",
+      "evidence_pointer": "Section 4.1, Table 5, Table C1"
+    },
+    {
+      "order": 46,
+      "section": "Empirical Study",
+      "locator": "Section 4.2.1 P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "交叉验证结果给出初步证据：A有意义，B未提高，C/D提高；但作者明确说这还需用自然分布样本进一步分析。",
+      "rhetorical_function_cn": "把训练集结果定位为“初步指示”，防止过度解读。",
+      "depends_on_cn": "依赖Table 6。",
+      "sets_up_cn": "过渡到留出样本检验。",
+      "evidence_pointer": "Section 4.2.1, final paragraph"
+    },
+    {
+      "order": 47,
+      "section": "Empirical Study",
+      "locator": "Section 4.2.2 H1部分",
+      "move_code": "RESULT",
+      "paraphrase_cn": "自然分布样本上Classifier A的准确率、召回率和特异性都高于随机水平，McNemar检验显示A显著优于Naive；虽精确率低，但从监管者角度看命中率从1/15提升到1/7，从投资者看负面预测值很高，因此支持H1。",
+      "rhetorical_function_cn": "用统计显著性和实践指标双重论证自我披露信息的价值。",
+      "depends_on_cn": "依赖Table 7。",
+      "sets_up_cn": "为经济评价中Classifier A的正收益作准备。",
+      "evidence_pointer": "Section 4.2.2, H1 subsection, Table 7"
+    },
+    {
+      "order": 48,
+      "section": "Empirical Study",
+      "locator": "Section 4.2.2 H2部分",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Classifier B在多数算法上被A显著超越，不能支持H2；Table 9显示推荐数大多为零、技能认可数一半以上为零，信息稀疏导致信息增益不足。",
+      "rhetorical_function_cn": "用一个未验证假设的负面结果增强理论边界，并用数据解释机制。",
+      "depends_on_cn": "依赖Table 8和Table 9。",
+      "sets_up_cn": "引出监管确认更强验证层级的对比。",
+      "evidence_pointer": "Section 4.2.2, H2 subsection, Tables 8-9"
+    },
+    {
+      "order": 49,
+      "section": "Empirical Study",
+      "locator": "Section 4.2.2 H3部分",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Classifier C和D在所有算法上显著优于A和B；D-RF总体最优，准确率77.96%，召回率75.18%，AUC 82.83%；D在部分算法上优于C，说明用户确认信息在结合监管信息时有增量价值。",
+      "rhetorical_function_cn": "用主要表格完成H3的正式支持，并指出最优配置。",
+      "depends_on_cn": "依赖Tables 10-12。",
+      "sets_up_cn": "为经济评价选择RF作为代表算法提供依据。",
+      "evidence_pointer": "Section 4.2.2, H3 subsection, Tables 10-12"
+    },
+    {
+      "order": 50,
+      "section": "Empirical Study",
+      "locator": "Section 4.2.2 curves段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "PR曲线与ROC曲线显示A与B无清晰差异，C/D相对A/B有清晰差异；AUC表进一步支持监管确认信息的价值，D-RF在所有算法中AUC最高。",
+      "rhetorical_function_cn": "用全阈值分析补充单阈值指标，提高结论稳健性。",
+      "depends_on_cn": "依赖Figures 3-4和Table 12。",
+      "sets_up_cn": "为经济评价做统计层面的收尾。",
+      "evidence_pointer": "Section 4.2.2, curves and AUC paragraphs"
+    },
+    {
+      "order": 51,
+      "section": "Empirical Study",
+      "locator": "Section 4.3 P1-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "经济评价显示所有分类器的平均经济收益显著为正；A为4,525美元，B略低，C和D更高，D约4,711美元；但C/D并未显著高于A/B。",
+      "rhetorical_function_cn": "把统计性能转化为可量化的社会价值，同时诚实报告不显著差异。",
+      "depends_on_cn": "依赖Table 13。",
+      "sets_up_cn": "引出搜索成本和阈值敏感性分析。",
+      "evidence_pointer": "Section 4.3, Table 13"
+    },
+    {
+      "order": 52,
+      "section": "Empirical Study",
+      "locator": "Section 4.3 sensitivity paragraphs后",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "敏感性分析显示分类器正经济收益在广泛搜索成本和阈值范围内稳健；阈值越高越有利于高搜索成本场景，但过高的阈值会以召回损失抵消精确率收益；D类曲线更平滑，便于按搜索成本调整阈值。",
+      "rhetorical_function_cn": "测试经济结论的边界条件，并为投资者提供定制化建议。",
+      "depends_on_cn": "依赖Figures 5-6。",
+      "sets_up_cn": "为讨论中的实践定制策略提供依据。",
+      "evidence_pointer": "Section 4.3, Figures 5-6"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "Section 4.4 P1-P4",
+      "move_code": "THEORY_RETURN",
+      "paraphrase_cn": "结果在统计上支持H1和H3，不支持H2；这既确认信息操纵理论也确认warranting理论；监管验证最难操纵因此最有价值，用户验证单独不足但可在某些配置下与监管信息结合产生增量。",
+      "rhetorical_function_cn": "把统计结果重新连接到理论命题，形成理论贡献。",
+      "depends_on_cn": "依赖4.2全部结果。",
+      "sets_up_cn": "随后讨论方法论、伦理和局限。",
+      "evidence_pointer": "Section 4.4, first four paragraphs"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "Section 4.4 methodology段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者解释为何在高度不平衡数据中使用平衡训练集，并论证在不正当行为检测中召回率和负面预测值比精确率和准确率更重要：漏掉不当行为者代价远高于额外审查少数可靠者。",
+      "rhetorical_function_cn": "回应用户可能对低精确率的担忧。",
+      "depends_on_cn": "依赖自然分布样本结果。",
+      "sets_up_cn": "为分类器实践有用性辩护。",
+      "evidence_pointer": "Section 4.4, research methodology paragraph"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "Section 4.4 ethics段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "分类器不包含贫困、失业、社会边缘化等敏感变量，目标群体本身同质，且误判只导致更严格检查而非自动处罚，因此不存在类似司法算法中的群体偏见。",
+      "rhetorical_function_cn": "主动回应AI伦理关切，划定伦理边界。",
+      "depends_on_cn": "依赖特征列表。",
+      "sets_up_cn": "区分自动筛查与自动惩罚的适用场景。",
+      "evidence_pointer": "Section 4.4, ethics paragraph"
+    },
+    {
+      "order": 56,
+      "section": "Discussion",
+      "locator": "Section 4.4 limitations段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括：BrokerCheck无法覆盖未观测不当行为；中介可能策略性改变自我披露以规避检测；分类器特征来自LinkedIn，其他平台可能影响结果；但基于外部验证和偏差特征可部分抵御操纵，且可迁移到类似网络。",
+      "rhetorical_function_cn": "列出边界条件和反制机制，保护贡献不被视为一次性。",
+      "depends_on_cn": "依赖全文结果和特征机制。",
+      "sets_up_cn": "为结论中的未来研究铺路。",
+      "evidence_pointer": "Section 4.4, limitations paragraphs"
+    },
+    {
+      "order": 57,
+      "section": "Conclusion",
+      "locator": "Section 5 P2-P3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文补充了金融中介不当行为自动检测文献，用自我披露信息成功检测不当行为；最佳分类器在自然分布样本上达到召回率75.18%、准确率77.96%，并确认了信息操纵理论和warranting理论。",
+      "rhetorical_function_cn": "把论文成果压缩为明确的理论与制品贡献。",
+      "depends_on_cn": "依赖4.2结果。",
+      "sets_up_cn": "引出实践意义和未来方向。",
+      "evidence_pointer": "Section 5, second and third paragraphs"
+    },
+    {
+      "order": 58,
+      "section": "Conclusion",
+      "locator": "Section 5 P4-P6",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "实践上投资者可预筛中介、监管者可进行预测性监管；仅靠自我披露的分类器在不公开监管数据的国家也有用；方法还可扩展到企业合规、其他社交网络和具体不当行为类型。",
+      "rhetorical_function_cn": "把结论推广到真实应用场景，同时给出适用条件。",
+      "depends_on_cn": "依赖经济评价和讨论。",
+      "sets_up_cn": "结束文章并引导未来研究。",
+      "evidence_pointer": "Section 5, final paragraphs"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先建立“金融中介不当行为危害巨大”的现实背景，再通过文献综述把缺口精确化为三层：对象缺口（没有针对单个中介个体的预测）、数据缺口（BrokerCheck公开数据不够）、方法缺口（已有欺诈检测多用于信用卡/会计/公司欺诈）；然后提出“自我披露+外部验证”作为可行但未被利用的信号源。",
+    "signposting_cn": "文章在摘要、引言结尾和每个小节开头都有明确的路线图；在4.2.1末尾明确说交叉验证结果只是“初始指示”，需要自然分布样本进一步验证；在每个假设检验小节开头用H1、H2、H3作为小标题，让读者随时知道当前检验的命题。",
+    "transition_logic_cn": "段落间采用“缺口→理论→操作化→样本→训练→统计→经济→理论回归”的链条；每个阶段结尾常留下未被回答的问题并由下一阶段承接，例如交叉验证只给初步指示，于是转入留出样本；统计提升不能证明价值，于是转入经济评价。",
+    "claim_evidence_rhythm_cn": "每提出一个主张（如H1支持）后立刻给出对应表号、指标方向和显著性方向（如McNemar A>Naive）；对不支持的主张（H2）不只报无效，还用Table 9给出数据稀疏机制解释；对低精确率问题先用领域文献解释，再从监管者和投资者两个视角重新定义有用性。",
+    "benchmark_narrative_cn": "Benchmark不是单一静态的，而是按验证层级逐步累积：Naive随机分类器→Classifier A→B→C/D→E/F；每个基准解决一个不同问题（随机基线证明整体有效，A/B证明用户信息增量，A/B与C/D证明监管信息增量，E/F证明自我披露增量）；经济评价还加入搜索成本和阈值为反事实。",
+    "theory_return_cn": "讨论部分不使用新数据，而是把分类性能分解为“哪些特征为何有效”：信息操纵理论解释自我披露信号，warranting理论解释监管验证最强、用户验证弱；同时把H2的拒绝解释为平台激励不足，并为未来平台增加验证工具提出预测，从而让理论不只是标签而是可发展的命题。",
+    "contribution_positioning_cn": "贡献被放在三个层面：理论（确认两个理论）、制品/方法（分类器与外部验证层级）、社会（投资者保护与预测性监管）；通过“稀缺文献”“社会挑战”“信任重建”等标签把论文抬升到高层面，而不仅是又一组分类器。",
+    "novelty_protection_cn": "通过多种方式防止贡献退化为一次性性能结果：用自然分布样本和全阈值曲线说明不是调参巧合；用经济评价和敏感性分析说明有现实价值；用E/F消融说明自我披露有独立增量；用对抗性讨论说明偏差特征和外部验证难以被欺骗；用其他平台迁移和多场景扩展说明方法通用。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用具体案例和宏观损失描述一个社会-技术问题，并把问题归结到IS/分析技术可以干预的位置。",
+        "research_job_cn": "找到真实数据集和明确的后果指标（如监管处罚、赔偿金、事件记录）。",
+        "required_evidence_cn": "能证明问题规模的数据来源、过去文献中的对象/数据/方法缺口。",
+        "transition_to_next_cn": "“已有研究忽略了X，但Y数据源可能补充缺口”引出研究问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入两个理论并明确各自负责的命题：一个解释信号差异，一个解释信号验证层级。",
+        "research_job_cn": "把理论原则映射到可提取的特征类别，并形成H1-H3式的层级假设。",
+        "required_evidence_cn": "理论在相关领域有先例实证支持，且特征映射逻辑可推演。",
+        "transition_to_next_cn": "“为了检验这些假设，需要构建数据集和分类器。”"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述数据来源、抽样原则、标签定义和选择偏差检验。",
+        "research_job_cn": "建立训练样本和保留真实验分布的自然样本；匹配多源身份；剔除虚假数据。",
+        "required_evidence_cn": "训练与测试样本的可比性、依赖变量在覆盖与未覆盖群体间分布一致。",
+        "transition_to_next_cn": "数据可靠后，进入特征工程和建模。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "把理论命题翻译成具体特征，并给出特征表、映射段落和预处理细节。",
+        "research_job_cn": "从结构化字段、文本、网络互动、外部权威记录及其偏差中生成特征。",
+        "required_evidence_cn": "每个特征至少与一个理论机制或领域机制对应，而不是随意堆砌。",
+        "transition_to_next_cn": "“用这些特征训练多种分类器，并定义不同验证水平的配置。”"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "说明算法选择、调参协议、验证方法和评价指标，尤其是类别不平衡下的指标选择。",
+        "research_job_cn": "用平衡样本交叉验证调优，用自然分布留出样本正式评价；使用Naive和层级化对照。",
+        "required_evidence_cn": "每个假设都有指定对照配置和显著性检验；至少有一个全阈值分析（PR/ROC/AUC）。",
+        "transition_to_next_cn": "“统计性能提升是否真的有意义，需要用经济评价回答。”"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计经济评价公式，把TP/FN/FP/TN转换为收益/损失，并做敏感性分析。",
+        "research_job_cn": "找到可量化的损失（赔偿金、罚款、搜索成本），在真实分布样本上计算平均收益。",
+        "required_evidence_cn": "收益函数被清楚定义；搜索成本与阈值变化下有稳健性图。",
+        "transition_to_next_cn": "用结果回扣理论、方法论选择和实际应用。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "讨论中逐条处理H1-H3，解释反直觉结果（如H2失败），并给出伦理和局限。",
+        "research_job_cn": "把特征机制、算法表现、经济价值整合为设计知识，并划定适用边界。",
+        "required_evidence_cn": "不回避负面结果和不显著差异；局限被转化为未来可检验命题。",
+        "transition_to_next_cn": "结论中重新表述核心贡献和预测性监管意义。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用“缺口三重化”（对象、数据、方法）让研究问题显得必要且具体",
+      "把理论四条原则明确映射到特征类别，避免特征工程与理论脱节",
+      "采用“初始交叉验证→自然分布留出样本→经济评价”的三级证据升级",
+      "对不支持的假设仍用数据稀疏性给出机制解释，而不是只报无结果",
+      "用Naive和消融式对照配置（A-D-E/F）逐步证明每个特征层的增量价值",
+      "把统计性能转化为监管者视角的命中率提升和投资者视角的负面预测值",
+      "用搜索成本和阈值敏感性分析展示模型使用的定制方式"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "获取完整BrokerCheck注册经纪人名单和FINRA处罚/赔偿记录，需要监管数据权限或公开数据库长期访问",
+      "手动或半自动匹配LinkedIn档案与监管记录，包括处理重名、后缀、昵称、FINRA编号，工作量较大",
+      "对LinkedIn个人简介进行文本标注和词典处理，需要文本分析工具",
+      "手动筛选虚假档案需要定性和网络连接数据",
+      "金融赔偿金/罚款数据的经济评价依赖监管记录中的金额字段，很多数据集不公开"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只列LinkedIn特征而不说明每个特征对应信息操纵理论的哪一条原则，否则会变成天真的特征堆砌",
+      "不能只用平衡样本准确率宣称有效，必须用自然分布样本和PR/ROC/AUC说明不平衡表现",
+      "不能只报告分类器A/B/C/D的统计显著差异而忽略经济评价，否则实践贡献会显得空洞",
+      "不能把H2的拒绝隐藏，而应像作者一样报告并解释为什么用户确认信息不足",
+      "不能在讨论中宣称监管确认带来更高经济收益，因为C/D相对A/B在经济指标上并不显著；若没有类似证据，过度宣称会损害可信度",
+      "不能声称算法没有偏见而不检查敏感变量和误判后果；需要明确误判只是审查而非自动惩罚"
+    ],
+    "single_best_description_of_the_routine_cn": "把一个现实危害问题压缩为理论驱动的特征设计问题，构建具有外部验证梯度的分类器制品，用统计留出检验和基于真实赔偿的经济评价逐级证明其性能与价值，再回到理论确认和边界条件，形成“问题—理论—设计—测试—回扣”的完整写作回路。"
+  },
+  "confidence": 0.78,
+  "limitations_cn": "分析基于提供的全文文本和表格；正文中没有精确页码，句子定位使用段落和小标题位置；部分附录图片（Figure D1、Figure D2等）在文本中只以图像引用出现，无法从OCR文本直接解析曲线细节，但表格和文字结果已足够支撑结构判断；未访问附录中少数图片的具体数值。",
+  "usage": {
+    "prompt_tokens": 47913,
+    "completion_tokens": 24314,
+    "total_tokens": 72227,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 47913
+  }
+}

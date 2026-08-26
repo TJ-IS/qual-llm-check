@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "status": "READY_FOR_SEMANTIC_INDEX_BUILD",
+  "authorization": "semantic_index_build_only_no_gold_scoring_no_training",
+  "manifest_sample_count": 16,
+  "verified_snapshot_count": 16,
+  "repository_count": 5,
+  "tree_file_rows": 24668,
+  "unique_blob_objects_read": 13421,
+  "unique_blob_bytes_read": 209590988,
+  "python_file_rows": 15230,
+  "python_ast_parsed": 15230,
+  "python_ast_parse_rate": 1.0,
+  "minimum_python_parse_rate": 0.99,
+  "all_query_paths_present": true,
+  "all_query_python_ast_ready": true,
+  "wall_seconds": 46.55378800001927,
+  "snapshots": [
+    {
+      "sample_id": "dd57d697481176a1c52bd8d0",
+      "task_type": "code2test",
+      "repo": "fastapi/fastapi",
+      "base_commit": "cbd64b09a32681d3b0ea097608bc62eb0d1587e0",
+      "tree_oid": "b550662810ba48e16c37956e343e242202f841f9",
+      "file_count": 2981,
+      "python_file_count": 1118,
+      "python_ast_parsed": 1118,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "fastapi/_compat/v2.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "fastapi/_compat/v2.py",
+          "oid": "535af0784991d953ff2d34b9e06700e6d1fbc644",
+          "sha256": "a95ca23aad944d1c26923a82cbc06e61474ba732a2d9fde1f98a504a50404bd1",
+          "bytes": 17110,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "7f2b7ed09afc0e1e57683529",
+      "task_type": "code2test",
+      "repo": "fastapi/fastapi",
+      "base_commit": "bc06e4296d588f39f38c7ac2fc96d3913c565962",
+      "tree_oid": "cac1a745f81c2ac504ce548da1a4106cc53a5e23",
+      "file_count": 2868,
+      "python_file_count": 1081,
+      "python_ast_parsed": 1081,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "fastapi/responses.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "fastapi/responses.py",
+          "oid": "6c8db6f3353fffa953aa8efdd89739e2bda4c476",
+          "sha256": "40d410970a4a850a083d94d35a4a5cf5dfd019e199fda5503da0d5de743c9bb7",
+          "bytes": 1761,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "c60a8891f2e4fc1229f51fa7",
+      "task_type": "code2test",
+      "repo": "huggingface/diffusers",
+      "base_commit": "bbbcdd87bd9d960fa372663a50b9edbdcb1391c6",
+      "tree_oid": "73304e11ad6cdebf0ab6f788438f213a2b4ab84c",
+      "file_count": 2443,
+      "python_file_count": 1746,
+      "python_ast_parsed": 1746,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "src/diffusers/modular_pipelines/modular_pipeline.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "src/diffusers/modular_pipelines/modular_pipeline.py",
+          "oid": "2daf62c5023bc8d1fe289c80bfb4eb556fd0fdea",
+          "sha256": "3dc9232e7b8b107a86b4fdd460b517273110cc6dcd6aaf16e1fae58ff48230cd",
+          "bytes": 122252,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "81051ce9f995fdb7e2deba4b",
+      "task_type": "code2test",
+      "repo": "huggingface/diffusers",
+      "base_commit": "357b6818903f0990a5e4815f31d1655555a035a7",
+      "tree_oid": "7bbc83ea93bb6d4ecfd89946e5858e9fc5d5ae44",
+      "file_count": 2500,
+      "python_file_count": 1800,
+      "python_ast_parsed": 1800,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "src/diffusers/pipelines/hunyuan_video/pipeline_hunyuan_video_image2video.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "src/diffusers/pipelines/hunyuan_video/pipeline_hunyuan_video_image2video.py",
+          "oid": "c599488c2379ee2ef436f74fae72efe52680f869",
+          "sha256": "c228f11f603b3bee008fa1fa5800cc559e009eb5bf457402bce4d903486be454",
+          "bytes": 47336,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "896a5d9f9bfa6cb68a4775ee",
+      "task_type": "code2test",
+      "repo": "huggingface/transformers",
+      "base_commit": "79f90bc68a652285f85ab7779bb2f07bed255e4f",
+      "tree_oid": "5851533c6d6eca312b7e0cb725f71f050e9f5f31",
+      "file_count": 5755,
+      "python_file_count": 4233,
+      "python_ast_parsed": 4233,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "src/transformers/integrations/tensor_parallel.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "src/transformers/integrations/tensor_parallel.py",
+          "oid": "39a2e696941bd7da470cd0a4795cbd4729ee8d26",
+          "sha256": "587edc92a76f93ed5e2d242270132a1b81804e2579869f6b9a0a159f7814ec8c",
+          "bytes": 64907,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "a82117a5d29dd98d94ceb931",
+      "task_type": "code2test",
+      "repo": "huggingface/transformers",
+      "base_commit": "a553395766001116a719c82870171f8d6b458c98",
+      "tree_oid": "1a641e2afac0f2b53944072b2ea96f00a75bf773",
+      "file_count": 5752,
+      "python_file_count": 4231,
+      "python_ast_parsed": 4231,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "src/transformers/models/pe_audio_video/modeling_pe_audio_video.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "src/transformers/models/pe_audio_video/modeling_pe_audio_video.py",
+          "oid": "e840baecd41bd3a5a4078f338125cddbf7441670",
+          "sha256": "009bbf1717a0161ab800e0793ee3f4a40329ff334390b60653bf7bfd6b35c8ea",
+          "bytes": 42446,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "461a1aafd27445f29ef24020",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "b625b9f39082f366dd85ad13024e43c8f5e78b87",
+      "tree_oid": "873b3f13b9578cefd46c073585d1be249e44ee76",
+      "file_count": 134,
+      "python_file_count": 63,
+      "python_ast_parsed": 63,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_utils.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_utils.py",
+          "oid": "3150b09c8682a059186d6e1d1560f33f001362eb",
+          "sha256": "45aeb43930d1a1139846834a56918bdbb177bd170497131f6dd440f9b1244994",
+          "bytes": 13828,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "6d3773a91bd26a4977aa45af",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "08ecfd0e7c238a2444886d239de6d0e9d83530ec",
+      "tree_oid": "3caf3bafd5e062d6b967ad0dddc975c35eebe843",
+      "file_count": 135,
+      "python_file_count": 63,
+      "python_ast_parsed": 63,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_options.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_options.py",
+          "oid": "7367a32a4b90ba157453899a298d9d80927fea12",
+          "sha256": "0b39d0f22fa420a64ca0a4a457614165781ee500c4101f965e5971ba6c0fc1cd",
+          "bytes": 27067,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "8882930f15d1cd0966e4ff81",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "a1235aacb1be55dc66ddcfefbf64dec44b6ab54d",
+      "tree_oid": "202f15945ebdfafbd94fa51f7d41ccd7e81b068b",
+      "file_count": 141,
+      "python_file_count": 61,
+      "python_ast_parsed": 61,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_options.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_options.py",
+          "oid": "f5017384d82c0e80ba5c04328dae266889afdab3",
+          "sha256": "57568f9c03856658c360d6668dca3d735e2c375d0f29ec44e6e2dcb505180aa7",
+          "bytes": 45237,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "ed5f5fce7ddb0be735cf98c7",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "7d7183604158f064390539d83d4a19a978c6b08a",
+      "tree_oid": "3670a7f3016132dcd7eb5eea109f6ba43a6df58e",
+      "file_count": 142,
+      "python_file_count": 62,
+      "python_ast_parsed": 62,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_commands.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_commands.py",
+          "oid": "a5aa43f8a6878ec9d792990291d1337d3aa6a45e",
+          "sha256": "368de90aa3a0e074a03aca59e871c2c1aad5c0d691f9c074a0e79fb952158f8c",
+          "bytes": 17012,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "e50d9d504a467c632442042e",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "1a4d8c1bb1e8f8e214ede7223bd2c05dc2ce006a",
+      "tree_oid": "487f84e0b52147bfbd526aebe381605f33430c00",
+      "file_count": 145,
+      "python_file_count": 60,
+      "python_ast_parsed": 60,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_termui.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_termui.py",
+          "oid": "7cfa939949f9d4ba1fe1f685acccf9f2182ff9f0",
+          "sha256": "3558d784d7aca9972248e87162e33d8a3926789b768d2ec6e887297ae3124035",
+          "bytes": 13891,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "4dfab03e69e4615b806dbab1",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "a8c05427602d12842c53ce48b03b5d6b5c0c6693",
+      "tree_oid": "3b6871808a72d0505768ae2c4ee546a937a67e4a",
+      "file_count": 145,
+      "python_file_count": 60,
+      "python_ast_parsed": 60,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_context.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_context.py",
+          "oid": "df8b497e0b8e97cf3b9a5cab59fda5f5995704a8",
+          "sha256": "0f40aa32456f0597233a006fa11ca641b3a93034ceedd92df11ba38b382d6b42",
+          "bytes": 8680,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "dfa7089d7bf0b3dad96e2bb8",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "bf9da4838986af3bc09a1b16974d154c61dcbe3f",
+      "tree_oid": "11d574836746486a49a7ef8535e42afee7650245",
+      "file_count": 135,
+      "python_file_count": 63,
+      "python_ast_parsed": 63,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_chain.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_chain.py",
+          "oid": "343100999b3d816caf3f00d8f2182f19453eefb2",
+          "sha256": "015d3d292f6a7c3438011650cf09d081a9c150db20881c44481be79524e6b4fd",
+          "bytes": 5796,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "2bf38b97ba88b8246c44e306",
+      "task_type": "trace2code",
+      "repo": "pallets/click",
+      "base_commit": "422cb2064eed146dbe03ba3aed5be35daeb70414",
+      "tree_oid": "b41a8f02edb1f81924992870e2aee25580c98420",
+      "file_count": 135,
+      "python_file_count": 63,
+      "python_ast_parsed": 63,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "tests/test_options.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "tests/test_options.py",
+          "oid": "ab230c41cffe40d74eda90fa97f43fd3769ed5cc",
+          "sha256": "4c854c106cf9ea166918039f1fda331cddb2bf78278b58833d90019bc5e086f0",
+          "bytes": 27738,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "5a834c2130d04105906a9240",
+      "task_type": "code2test",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "7bc02cca0dd92ec505b4556c054b4e06e9cb8d4d",
+      "tree_oid": "531a8af548bbe724151e630efdea4ff9452d1c96",
+      "file_count": 633,
+      "python_file_count": 263,
+      "python_ast_parsed": 263,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "testing/test_subtests.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "testing/test_subtests.py",
+          "oid": "c480bb0165855903c1a647083ab09eae11c30c2c",
+          "sha256": "98796e21ae8914fb878957a74ca9e8acf3502273071abaea23800a3195b26612",
+          "bytes": 32858,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    },
+    {
+      "sample_id": "e6b3d0834b130dd9a2b7015d",
+      "task_type": "code2test",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "4d386750cb390bf72119ff6bb11b06da64fb6941",
+      "tree_oid": "dfcbb792be288362e7c32d5f4744f2922b19f574",
+      "file_count": 624,
+      "python_file_count": 263,
+      "python_ast_parsed": 263,
+      "python_ast_parse_rate": 1.0,
+      "query_paths_expected": [
+        "src/_pytest/fixtures.py"
+      ],
+      "query_paths_missing": [],
+      "query_paths": [
+        {
+          "path": "src/_pytest/fixtures.py",
+          "oid": "bb9daa84726132104c581bb564863f9e7df96074",
+          "sha256": "feb2867b36b7f7fd86a6c9aecf8027002f0771c798d5d327ca7554286be7ee8a",
+          "bytes": 79621,
+          "python_ast_parse": true,
+          "encoding": "utf-8",
+          "parse_error": null
+        }
+      ],
+      "query_python_ast_ready": true
+    }
+  ],
+  "reserve_manifest_sha256": "99e86eb181249cf1f91c944ed0f178f3f4332ca314f03468765b2535adedf212",
+  "blob_manifest_sha256": "96751292475db1d6b143017375367dcfb6871764cbcbaf792c280d1910291ec1",
+  "blob_manifest_rows": 24668
+}

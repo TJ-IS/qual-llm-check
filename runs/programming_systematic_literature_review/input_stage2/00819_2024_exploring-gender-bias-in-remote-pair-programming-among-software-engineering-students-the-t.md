@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85184159995"
+title: "Exploring Gender Bias In Remote Pair Programming Among Software Engineering Students: The twincode Original Study And First External Replication"
+authors: "Durán Toro A.; Fernández P.; Bernárdez B.; Weinman N.; Akalın A.; Fox A."
+year: "2024"
+journal: "Empirical Software Engineering"
+doi: "10.1007/s10664-023-10416-6"
+---
+# Scopus title-abstract-keyword metadata
+Title: Exploring Gender Bias In Remote Pair Programming Among Software Engineering Students: The twincode Original Study And First External Replication
+Abstract: Context: Women have historically been underrepresented in Software Engineering, due in part to the stereotyped assumption that women are less technically competent than men. Pair programming is both widely used in industry and has been shown to increase student interest in Software Engineering, particularly among women; but if those same gender biases are also present in pair programming, its potential for attracting women to the field could be thwarted. Objective: We aim to explore the effects of gender bias in pair programming. Specifically, in a remote setting in which students cannot directly observe the gender of their peers, we study whether the perception of the partner, the behavior during programming, or the style of communication of Software Engineering students differ depending on the perceived gender of their remote partner. To our knowledge, this is the first study specifically focusing on the impact of gender stereotypes and bias within pairs in pair programming. Method: We have developed an online pair-programming platform (twincode) that provides a collaborative editing window and a chat pane, both of which are heavily instrumented. Students in the control group had no information about their partner’s gender, whereas students in the treatment group could see a gendered avatar representing the other participant as a man or as a woman. The gender of the avatar was swapped between programming tasks to analyze 45 variables related to the collaborative coding behavior, chat utterances, and questionnaire responses of 46 pairs in the original study at the University of Seville, and 23 pairs in the external replication at the University of California, Berkeley. Results: We did not observe any statistically significant effect of the gender bias treatment, nor any interaction between the perceived partner’s gender and subject’s gender, in any of the 45 response variables measured in the original study. In the external replication, we observed statistically significant effects with moderate to large sizes in four dependent variables within the experimental group, comparing how subjects acted when their partners were represented as a man or a woman. Conclusions: The results in the original study do not show any clear effect of the treatment in remote pair programming among current Software Engineering students. In the external replication, it seems that students delete more source code characters when they have a woman partner, and communicate using more informal utterances, reflections and yes/no questions when they have a man partner, although these results must be considered inconclusive because of the small number of subjects in the replication, and because when multiple test corrections are applied, only the result about informal utterances remains significant. In any case, more mixed methods replications are needed in order to confirm or refute the results in the same and other Software Engineering students populations. © 2024, The Author(s).
+Author keywords: Distributed pair programming; Experiment replication; Gender bias; Pair programming; Remote pair programming; Software Engineering education
+Index keywords: Behavioral research; Codes (symbols); Distributed computer systems; Engineering education; Professional aspects; Software engineering; Distributed pair programming; Experiment replication; External replication; Gender bias; Pair-programming; Remote pair programming; Software engineering education; Software engineering students; Students
+Document type: Article
+Conference: 
+Source title: Empirical Software Engineering
+Year: 2024
+EID: 2-s2.0-85184159995
+DOI: 10.1007/s10664-023-10416-6
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

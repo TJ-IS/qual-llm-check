@@ -1,0 +1,23 @@
+[
+  {
+    "output_dir": "output_stage1_batch_v2",
+    "error_events_logged": 10,
+    "unique_records_ever_in_failed_batches": 160,
+    "resolved_records": 160,
+    "unresolved_records": []
+  },
+  {
+    "output_dir": "output_stage2_batch_v2",
+    "error_events_logged": 1,
+    "unique_records_ever_in_failed_batches": 16,
+    "resolved_records": 16,
+    "unresolved_records": []
+  },
+  {
+    "output_dir": "output_fulltext_local_v1",
+    "error_events_logged": 0,
+    "unique_records_ever_in_failed_batches": 0,
+    "resolved_records": 0,
+    "unresolved_records": []
+  }
+]

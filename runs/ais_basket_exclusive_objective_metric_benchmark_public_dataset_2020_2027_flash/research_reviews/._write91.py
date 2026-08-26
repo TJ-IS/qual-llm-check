@@ -1,0 +1,131 @@
+# -*- coding: utf-8 -*-
+import io
+content = u"""# 91 号 34 第一章引言句级对照与跨文献对比记录
+
+- 版本。2026-08-20，在 90 号记录基础上继续句级对照模式，以 34 的第一章引言为对象，以 RADAR 引言五段与研究缺口段为模板，句级对照并跨文献对比，修改三项，复跑验收后留档。
+- 背景。延续用户对每段回到原文、落到每一句、跨文献多次对比并严格优化的要求。本轮对象为引言七段，其中前三段与第五段、第七段与 RADAR 原文存在直接对应，第四段与第六段为情境特有扩展段。
+- 范围。34 的引言第一至第七段。模板为 RADAR 引言五段与研究缺口段。
+- 文件。34 论文与 RADAR 原文。
+
+## 1. 句级对照表
+
+### 引言第一段
+
+P1 S1 采用情境句。34 说明编码智能体被广泛引入软件开发流程并给出用途。RADAR 以 With the recent increase in the scale and severity of cyber attacks, artificial intelligence (AI) agents have been developed to automate cyber defense in information technology (IT) infrastructure (Apruzzese et al., 2019; Rai, 2017) 承担同一功能。达到模板水平。
+
+P1 S2 能力句。34 说明给定问题与仓库上下文自主规划执行。RADAR 以 demonstrated the ability to effectively detect and remediate threats at an unprecedented scale (Tolido et al., 2019) 承担同一功能。达到模板水平。
+
+P1 S3 基准实例句。34 以 SWE-bench Verified 为例给出成功率提升区间并标注占位。RADAR 以 For instance, ... 96% precision ... (Narayanan et al., 2018) 承担同一功能。34 以占位标注待核对数字，达到模板水平的可行版本。
+
+P1 S4 与 S5 厂商句。34 说明领先厂商嵌入开发者工作流并举例。RADAR 以 Today, leading cybersecurity and IT firms are weaving AI-enabled cyber defense into their operational fabric ... For example, Avast and Symantec ... 承担同一功能。达到模板水平。
+
+P1 S6 开源句。34 说明开源编码智能体在同一基准上的表现。RADAR 以 Endgame uses gradient boosting trees in its open-source malware detector (Anderson et al., 2018; Bloomberg, 2018; Song et al., 2022) 承担同一功能。达到模板水平。
+
+P1 S7 调研句。34 说明大型调研中开发者对编码智能体的依赖度。RADAR 以 A large-scale international survey of IT firms revealed that 69% of them believe they cannot accomplish cyber defense without AI agents (Tolido et al., 2019) 承担同一功能。达到模板水平。
+
+### 引言第二段
+
+P2 S1 脆弱性总起句。34 说明对抗性输入由对手精心修改以误导决策。RADAR 以 However, AI agents have been found to be vulnerable to adversarial attacks ... (Yuan et al., 2019) 承担同一功能。34 以逗号从句替代破折号同位语，符合符号纪律。达到模板水平。
+
+P2 S2 例外句。34 说明编码智能体亦不例外并引用两篇。RADAR 以 Cyber defense AI agents are no exception (Apruzzese et al., 2019) 承担同一功能。达到模板水平。
+
+P2 S3 与 S4 实例句。34 给出缺陷报告伪装与仓库文件、工具描述注入两类实例。RADAR 以恶意可执行文件修改与网络包修改两个实例承担同一功能。34 的实例与 2.1 节攻击分类一致。达到模板水平。
+
+P2 S5 共性句。34 说明对手通过一系列不易察觉的修改逐步操纵信息环境。RADAR 以 In both cases, an adversary crafts adversarial inputs by taking steps of meticulous and hard-to-notice changes ... 承担同一功能。达到模板水平。
+
+P2 S6 新兴威胁句。34 说明脆弱性被视为自主软件开发的新兴威胁。RADAR 以 construed as an emerging threat to autonomous cyber defense (Goosen et al., 2018) 承担同一功能。达到模板水平。
+
+P2 S7 知之甚少句。34 说明对系统化生成攻击并据此度量与提升安全性知之甚少。RADAR 以 While ... increasingly relied on ... little is known about strengthening the robustness ... 承担同一功能。达到模板水平。
+
+### 引言第三段
+
+P3 S1 自然方案句。34 说明将现有攻击实例直接用于防御评估与训练的自然方案。RADAR 研究缺口段以 Our review ... suggests a vital need ... 承担同类缺口起句功能。达到模板水平。
+
+P3 S2 共同偏差句。34 说明现有方法依赖静态模板与启发式规则，将攻击视为单次内容修改。RADAR 研究缺口段以 only a few AAE methods comply with a realistic threat model 等句承担同类局限归纳功能。达到模板水平。
+
+P3 S3 特征一句。34 说明攻击者按目标函数序贯决策并以循环过程说明。RADAR 研究缺口段以 most AAE methods are limited in their ability to model the adversary's sequential decision-making process 承担同一功能。34 的修改点见 N2。
+
+P3 S4 特征二句。34 说明功能与隐蔽性双重约束。RADAR 以 many AAE methods are mainly additive and thus limited in their coverage of generated attacks 承担同类功能保持局限。达到模板水平。
+
+P3 S5 特征三句。34 说明攻击有效性缺乏统一度量。RADAR 无直接对应句，34 以基准口径差异承担同类统一性缺口。达到模板水平的可行版本。
+
+P3 S6 后果句。34 说明防御研究无法系统度量防护水平与训练鲁棒防御。RADAR 以 As such, using deep RL to model the sequence of actions and RO to enhance defense could address these gaps 承担同类收束功能。达到模板水平。
+
+### 引言第四段
+
+P4 S1 目的句。34 说明攻击生成目的在于提供可复用的威胁证据。RADAR 以 In this study, we aim to strengthen the robustness ... by leveraging the theories of robust optimization (RO) and reinforcement learning (RL) 承担同类目的功能。达到模板水平。
+
+P4 S2 理论句。34 说明借鉴鲁棒优化与强化学习两种理论。RADAR 以同句承担同一功能。达到模板水平。
+
+P4 S3 至 S6 鲁棒优化句组。34 以分析框架、双人博弈、情境适配与攻击仿真原则四句展开。RADAR 以 rigorous framework ... (Bertsimas et al., 2010)、two-player game ... (Madry et al., 2018)、RO introduces an adversary ...、RO establishes that robust defense requires effective adversarial attack emulation (Kolter & Madry, 2018) 承担同一功能。34 以情境适配句替代恶意软件情境句。达到模板水平。
+
+P4 S7 与 S8 原则落实句。34 说明缺乏系统攻击的后果与动作序列建模的关键性。RADAR 以 As adversarial attacks often involve taking a sequence of actions ... AAE can benefit from modeling the steps ... 承担同一功能。达到模板水平。
+
+### 引言第五段
+
+P5 S1 至 S7 文献锚定句组。34 按数据操纵、检测与攻击生成三类情境组织 IS 文献。RADAR 引言无对应段，34 以 2.2 节至 2.4 节综述内容压缩为三情境锚定，承担 IS 定位功能。达到模板水平的可行版本。
+
+P5 S8 综合句。34 说明学习式方法在 IS 文献中既有技术基础也有评估先例。RADAR 研究缺口段以 As such ... could address these gaps 承担同类综合功能。达到模板水平。
+
+P5 S9 与 S10 边界句。34 说明现有框架的攻击空间与攻击对象无法直接迁移，并指出三重缺失。RADAR 以 However, state-of-the-art deep RL methods ... need enhancement ... Additionally, it is unclear how RO can be extended ... 承担同类边界功能。达到模板水平。
+
+### 引言第六段
+
+P6 S1 引入句。34 说明引入威胁驱动设计并以威胁模型作为中间状态。3.2 节以同一表述落实主张，引言与理论章以关键词呼应，属于顶刊常用回指做法。达到模板水平。
+
+P6 S2 维度句。34 说明威胁模型刻画三个维度。修改点见 N3，与 5.4 节手法粗分类对齐。
+
+P6 S3 至 S5 转化句组。34 说明威胁模型将模糊目标转化为可计算对象并约束算法。RADAR 以 In the cyber defense context, RO introduces an adversary ... 承担同类转化功能。达到模板水平。
+
+P6 S6 至 S8 强化学习句组。34 以序贯交互、适配性与策略学习三句展开。RADAR 以 RL specializes in examining the sequential interaction of an actor ... over discrete time steps (Sutton & Barto, 2018)、RL is thus well-suited for emulating the steps ... 承担同一功能。达到模板水平。
+
+P6 S9 洞见句。34 说明学到的动作序列蕴含攻击者策略信息。RADAR 以 Additionally, the sequence of actions captured by RL is useful for gaining insights into the adversary's strategies and further enhancing the cyber defense AI agent (Anderson et al., 2018) 承担同一功能。达到模板水平。
+
+### 引言第七段
+
+P7 S1 研究问题句。修改前以完整三问列举，与第四章 RQ1 至 RQ3 逐句相同。RADAR 在研究缺口段一次列出研究问题，引言未重复。修改后以议题映射句替代完整列举。详见第三节 N1。
+
+P7 S2 工件句。34 说明基于计算设计科学范式设计 AgentShield-Adversary。RADAR 以 Drawing on the computational design science paradigm, we leverage RO and RL to develop a novel RL-based adversarial attack robustness (RADAR) framework 承担同一功能。达到模板水平。
+
+P7 S3 组件句。34 说明框架以强化学习、危害判定器与攻击面地图交付威胁证据。RADAR 以 RADAR discovers effective adversarial attacks and prepares cyber defense AI agents to remediate them ... 承担同一功能。达到模板水平。
+
+P7 S4 实例化句。34 说明在公开编码基准与公开攻击基准上实例化并给出比较网格。RADAR 以 Given that malware attacks are the leading threat to IT infrastructure (Bissell et al., 2019), we instantiate our RADAR framework ... evaluate the effectiveness ... against state-of-the-art ... benchmark methods 承担同一功能。达到模板水平。
+
+P7 S5 预期发现句。34 以三方面预期发现承担结果概述。RADAR 以 Our experiments showed that RADAR increased the robustness ... by seven times, on average, and provided useful insights ... 承担同一功能。34 以预期表述适配方案框架。达到模板水平。
+
+P7 S6 贡献总起与第一贡献句。34 以三点贡献与据我们所知句式组织。RADAR 以 Overall, this study makes three major contributions. First, ... To our knowledge, this is the first robustification framework ... 承担同一功能。达到模板水平。
+
+P7 S7 第二贡献句。34 说明带隐蔽性约束的对抗动作序列建模方法。RADAR 以 Second, we develop a novel RL method for emulating sequences of adversarial attack actions ... In addition to outperforming ... provides actionable insights ... 承担同一功能。达到模板水平。
+
+P7 S8 第三贡献与收束句。34 说明 D_att 基准贡献与对实践者的实用洞见。RADAR 以 Third, ... The study provides cyber defense practitioners with practical insights, including ... 承担同一功能。达到模板水平。
+
+## 2. 跨文献对比结论
+
+RADAR 引言按情境、脆弱性、理论一、理论二与工件贡献五段组织，研究问题一次列于研究缺口段。34 引言按情境、脆弱性、缺口、理论、IS 锚定、理论展开与工件贡献七段组织，其中缺口段、IS 锚定段与理论展开段为情境特有扩展。
+
+34 引言与 RADAR 引言的直接对应句在句式与引用结构上保持同构。修改后引言不再与第四章逐句重复研究问题，第三段与第六段的维度口径与 RQ2、5.0 节、5.4 节及 6.2 节一致。引言第三段的三个系统性特征与 2.5 节三个缺口、第四章三个研究问题保持一一对应。
+
+## 3. 修改明细
+
+N1 引言第七段研究问题句。原句为针对上述缺口，本文提出三个研究问题，后接与第四章 RQ1 至 RQ3 逐句相同的完整三问列举。问题为引言与第四章逐句重复。RADAR 在研究缺口段一次列出研究问题，引言未重复。改为针对上述缺口，本文提出三个研究问题，分别对应攻击生成、攻击面刻画与攻击基准构建。
+
+N2 引言第三段特征一句。原句为模板化方法无法覆盖通道、载体与操纵手法的组合空间。问题为该句与 RQ2、5.0 节、5.4 节及 6.2 节的通道、载体与手法列举口径不一致。改为模板化方法无法覆盖通道、载体与手法的组合空间。
+
+N3 引言第六段维度句。原句为操纵载体与手法（改写、注入、篡改）以及攻击预算与功能保持约束。问题为 5.4 节手法粗分类为改写、注入、篡改与组合，原句缺组合。改为操纵载体与手法（改写、注入、篡改、组合）以及攻击预算与功能保持约束。
+
+## 4. 验收结果
+
+复跑验收。34 禁词为零，符号全零，Walls 一处，占位 61，引用组 95，参考文献 30，设计科学方法一处。35 占位 61，引用组 82。36 占位 65，引用组 83。跨篇相同句零对，近义句七对，全部为刻意保留的系列签名句。总体通过。本记录符号与禁词清零。
+
+## 5. 遗留观察项
+
+其一，下一段按同一方法推进 34 的第二章文献综述，模板覆盖 RADAR 研究背景节与 Yang 等（2023）文献综述节。
+
+其二，引言第六段与 3.2 节均使用威胁模型作为理论限定的中间状态表述，属关键词回指，实施时保持两处一致即可。
+
+其三，引言第七段的预期发现三句与 6.1 节、6.2 节预期发现存在概括对应，实施后以真实结果替换占位时需同步核对两处表述。
+
+其四，引言第一段厂商句中的 GitHub、OpenAI 与 Anthropic 名单与调研句的占位出处需在投稿前按 RADAR 厂商句的引用格式补齐来源。
+"""
+io.open("91_34第一章引言_句级对照与跨文献对比记录.md","w",encoding="utf-8",newline="").write(content)
+print("write91 done")

@@ -1,0 +1,1039 @@
+{
+  "record_id": "14428",
+  "source_file": "14428_2020_automated-dynamic-approach-for-detecting-ransomware-using-finite-state-machine.md",
+  "title": "Automated dynamic approach for detecting ransomware using finite-state machine",
+  "authors": "Gowtham Ramesh; Anjali Menen",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113400",
+  "fulltext_chars": 59145,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "cybersecurity_fraud_and_compliance",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:41.149385+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何设计一种不依赖静态签名、能够检测多种勒索软件变体且对混淆和多态攻击具有鲁棒性的动态检测方法？",
+    "artifact_and_design_cn": "一个基于有限状态机（FSM）的动态勒索软件检测系统：系统由行为分析模块和决策模块组成。行为分析模块监控用户文件操作、横向移动、系统资源利用和程序持久化；决策模块通过FSM对系统状态转移进行建模，当状态到达最终状态时判定勒索软件攻击。",
+    "objective_outcomes_cn": "在包含1500个合法应用和475个勒索软件样本（覆盖66个家族）的实验数据集上，正确检出466个勒索软件，误报为0，准确率99.54%，FPR 0%，FNR 1.9%。",
+    "core_contribution_cn": "作者声称提出了一种新颖的、基于动态分析的通用勒索软件检测模型；利用FSM表示勒索软件的多态行为特征；能够检测不同勒索软件变体，弥补现有方法在资源监控、文件访问控制、持久性、混淆、权限提升和时间检测等方面的不足。",
+    "whole_argument_in_one_paragraph_cn": "文章先以大量攻击统计和财务损失表明勒索软件威胁的严重性，指出现有静态和动态检测方案因签名依赖、特定变体导向、混淆规避等缺陷而无法实现泛化。接着提出基于FSM的检测框架：通过四个监听器捕获勒索软件典型行为（文件加密、伪装文件、持久化、系统资源篡改、进程终止），并将这些行为映射为FSM中的cause-response状态转移，任何到达最终状态的路径都意味着勒索软件攻击。作者在Windows虚拟机中实现系统，收集1975个样本进行实验，报告99.54%准确率和0%误报，并通过WannaCry和Cerber的案例展示具体状态转移路径。讨论部分承认对不改变系统资源和文件的勒索软件（如NotPetya、锁屏恶意软件）会失效，但仍强调针对可观察行为模式的通用检测价值。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "论文遵循了‘需求/限制识别—系统构建—实验评价—设计知识总结’的路径：先从文献和相关工作中归纳现有方法的不足，提出设计需求，然后构建由监听器和FSM决策模块组成的检测制品，并在自建数据集上进行评价。文中没有严格的多阶段受试者实验，也没有形式化理论假设，更接近设计科学的研究范式。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "引言和相关工作主要建立性能缺口（现有方法无法检测未知/混淆变体），随后呈现制品（FSM检测系统），用自建样本集进行性能评价，并与其他已发表方法进行比较，最后把结果泛化为通用检测设计知识。这一顺序符合性能缺口—制品—benchmark—一般化设计知识的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 8,
+    "overall_sequence_cn": "文章没有标号study，但论证链条包含8个功能阶段：问题与需求分析→行为观察与FSM建模→检测组件设计→实现与数据集构建→受控实验评估→典型案例行为验证→与已有方法比较→边界与贡献总结。前一阶段为后一阶段提供必要性、输入或组件。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题背景与需求分析",
+        "question_cn": "为什么现有勒索软件检测方法不足以应对当前威胁？",
+        "inputs_and_setting_cn": "勒索软件攻击统计、网络安全报告、已有检测技术文献。",
+        "designed_or_compared_object_cn": "静态分析、网络参数分析、动态分析下的三类方法；未设计新对象。",
+        "baseline_control_or_counterfactual_cn": "现有各类检测方法的能力和局限。",
+        "objective_metrics": [],
+        "analysis_method_cn": "文献综合与归纳。",
+        "main_result_cn": "现有方法在资源监控、文件访问控制、持久性、混淆、提权、时间检测等方面存在不足；尤其对未知变体和混淆攻击失效。",
+        "argumentative_role_cn": "建立研究缺口，说明需要一种通用动态检测方案。",
+        "remaining_uncertainty_cn": "尚不清楚如何组合多个行为维度实现通用检测。",
+        "link_to_next_phase_cn": "引出用FSM综合多源行为信号的设计目标。",
+        "evidence_pointers": [
+          "Introduction P1-P7",
+          "Related work Section 2 P1-P8",
+          "Table 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "勒索软件行为观察与FSM建模",
+        "question_cn": "如何把勒索软件的多态行为形式化表达为可计算的状态转移模型？",
+        "inputs_and_setting_cn": "来自文献[5-7]、技术报告，以及在受控环境中手动执行勒索软件的观察结果。",
+        "designed_or_compared_object_cn": "FSM模型，包括状态集、原因集、响应集、转移函数和最终状态。",
+        "baseline_control_or_counterfactual_cn": "无显式对比；基于经验观察建立。",
+        "objective_metrics": [],
+        "analysis_method_cn": "定性行为分析和状态转移建模。",
+        "main_result_cn": "定义了FSM模型 M=(Q,S0,X,Y,δ,F)，确定了两个原因（外部文件下载、活动进程）和七种响应（可疑扩展名、持久化注册、加密文件、删除文件、终止进程、修改文件、删除阴影副本），以及最终状态 S1/S4/S6。",
+        "argumentative_role_cn": "提供检测决策的形式化基础，使多个行为信号能被组合判断。",
+        "remaining_uncertainty_cn": "FSM状态是否覆盖所有真实变体行为尚未验证。",
+        "link_to_next_phase_cn": "根据FSM要求设计能够产生这些状态转移的系统事件监听器。",
+        "evidence_pointers": [
+          "Section 5.1 P1-P6",
+          "Tables 2 and 3",
+          "Figure 3"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "行为监测组件设计",
+        "question_cn": "如何实时捕获FSM状态转移所需的系统事件？",
+        "inputs_and_setting_cn": "Windows文件系统事件、注册表路径、系统进程状态和IRP数据结构。",
+        "designed_or_compared_object_cn": "四个监听器组件：文件监控、横向移动跟踪、系统资源监控、程序持久性监控。",
+        "baseline_control_or_counterfactual_cn": "针对FSM中响应事件设计，面向事件触发有效性的定性验证。",
+        "objective_metrics": [
+          "事件触发正确性",
+          "检测阈值"
+        ],
+        "analysis_method_cn": "Windows API和内核模式编程，阈值设置来自经验观察。",
+        "main_result_cn": "各组件能够识别文件熵异常、伪装扩展名、系统还原关闭、进程批量终止、注册表/启动目录新增项等行为，并触发状态转移请求。",
+        "argumentative_role_cn": "将FSM形式化模型落地为可运行的信号采集机制。",
+        "remaining_uncertainty_cn": "阈值设定可能造成误报或漏报；未在多样化环境中验证鲁棒性。",
+        "link_to_next_phase_cn": "决策模块接收这些事件并进行状态转移判定。",
+        "evidence_pointers": [
+          "Section 4.1-4.4",
+          "Figure 2"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "实现与数据集构建",
+        "question_cn": "系统是否能在一个真实Windows环境中运行，并且评价数据集是否具有代表性？",
+        "inputs_and_setting_cn": "C# Visual Studio 2013、Windows Driver Kit 10、64位Windows 7 guest OS；475个勒索软件样本（66个家族）和1500个合法应用。",
+        "designed_or_compared_object_cn": "系统原型；包含现实样本的数据集。",
+        "baseline_control_or_counterfactual_cn": "合法应用作为负样本，勒索软件作为正样本；用VirusTotal验证恶意性/无害性。",
+        "objective_metrics": [
+          "样本数量",
+          "家族覆盖数"
+        ],
+        "analysis_method_cn": "自动化沙箱和受控执行，VirusTotal交叉验证。",
+        "main_result_cn": "系统可在guest OS中运行；样本覆盖主流勒索软件家族和常用合法应用。",
+        "argumentative_role_cn": "为后续定量评估提供可复现的工具和语料。",
+        "remaining_uncertainty_cn": "仅在Windows 7 VM上测试，未涉及现代Windows版本；数据集来源是公开样本库，可能有偏差。",
+        "link_to_next_phase_cn": "将构建好的系统用于受控评估。",
+        "evidence_pointers": [
+          "Section 6.1-6.2",
+          "Tables 5-7"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "受控运行评估",
+        "question_cn": "系统在独立测试样本上能否准确区分勒索软件和合法应用？",
+        "inputs_and_setting_cn": "1975个样本，逐一注入guest OS，记录系统警告。",
+        "designed_or_compared_object_cn": "提出的检测系统。",
+        "baseline_control_or_counterfactual_cn": "没有显式现场对照，但通过混淆矩阵将分类结果与真实标签比较。",
+        "objective_metrics": [
+          "TPR",
+          "FNR",
+          "FPR",
+          "TNR",
+          "Accuracy"
+        ],
+        "analysis_method_cn": "二分类混淆矩阵计算。",
+        "main_result_cn": "466个勒索软件被正确检出，9个漏报，1500个合法应用全部正确，FPR=0%，准确率=99.54%。",
+        "argumentative_role_cn": "提供核心性能证据，证明系统的整体检测能力。",
+        "remaining_uncertainty_cn": "只在离线VM环境测试，未检验运行时间、资源开销以及真实使用中的隐蔽性。",
+        "link_to_next_phase_cn": "用WannaCry和Cerber案例解释状态转移机制为何导致检测成功。",
+        "evidence_pointers": [
+          "Section 6.4",
+          "Figure 4",
+          "Figure 5"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "典型案例行为验证",
+        "question_cn": "系统的状态转换机制能否对应具体勒索软件的实际行为？",
+        "inputs_and_setting_cn": "WannaCry和Cerber两个样本的受控执行；系统在干净guest OS上的检测轨迹。",
+        "designed_or_compared_object_cn": "检测系统对两个具体攻击的响应。",
+        "baseline_control_or_counterfactual_cn": "无对照；以两个已知样本作为验证基准。",
+        "objective_metrics": [
+          "状态转移序列",
+          "是否触发警报"
+        ],
+        "analysis_method_cn": "定性事件追踪与FSM状态映射。",
+        "main_result_cn": "WannaCry触发S0→S2→S3→S4，Cerber触发S0→S5→S6，系统发出警报。",
+        "argumentative_role_cn": "说明系统并非黑箱，状态转移路径是可解释的且与已知行为一致。",
+        "remaining_uncertainty_cn": "两个案例不足以证明对所有变体的机制适用性，但已有大规模统计支持。",
+        "link_to_next_phase_cn": "从案例回到总体精度，再与已有方法比较以强化贡献。",
+        "evidence_pointers": [
+          "Section 6.4.1",
+          "Section 6.4.2"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "与既有检测方法比较",
+        "question_cn": "所提方法相比其他动态分析方法是否有优势？",
+        "inputs_and_setting_cn": "已发表论文中报告的检测性能数据（Continella et al., Lu et al., Hampton et al., Al-rimy et al., Shaila et al.）。",
+        "designed_or_compared_object_cn": "本文方法与其他方法的性能指标。",
+        "baseline_control_or_counterfactual_cn": "各文献的结果作为比较基准。",
+        "objective_metrics": [
+          "TPR",
+          "FPR",
+          "FNR",
+          "Accuracy"
+        ],
+        "analysis_method_cn": "表格对比（各数据集不同，属文献间接比较）。",
+        "main_result_cn": "本文方法在Accuracy (99.54%) 和 FPR (0%) 上优于所列对比方法。",
+        "argumentative_role_cn": "定位新方法的相对优势，但弱化了数据集不可比的问题。",
+        "remaining_uncertainty_cn": "数据集规模、年份、环境均不同，直接比较并不严谨。",
+        "link_to_next_phase_cn": "为结论部分的总体贡献声明提供依据。",
+        "evidence_pointers": [
+          "Section 6.5",
+          "Table 8"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "边界分析与贡献总结",
+        "question_cn": "方法的适用边界是什么，它仍然能声称哪些贡献？",
+        "inputs_and_setting_cn": "讨论中的漏检样本（9个）和未检出案例。",
+        "designed_or_compared_object_cn": "方法的边界条件和总体贡献。",
+        "baseline_control_or_counterfactual_cn": "漏检样本作为反例，说明失败场景。",
+        "objective_metrics": [],
+        "analysis_method_cn": "定性解释失败原因和适用条件。",
+        "main_result_cn": "漏检主因是高度混淆、不干扰系统资源或不加密文件的勒索软件（如NotPetya、锁屏勒索软件）。",
+        "argumentative_role_cn": "界定方法边界，避免过度泛化，同时重申针对可观察行为模式的通用检测价值。",
+        "remaining_uncertainty_cn": "未提供改进措施或未来工作路线。",
+        "link_to_next_phase_cn": "结束论文并回到开头的攻击威胁和检测需求。",
+        "evidence_pointers": [
+          "Section 7",
+          "Section 8"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "PRACTICAL_STAKES",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "RESULT"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "WHY_GAP_MATTERS",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "MECHANISM",
+      "THEORY_INTRO",
+      "REQUIREMENT"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "METHOD_JUSTIFICATION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "LIMITATION_AND_FUTURE"
+    ],
+    "discussion_and_contribution_moves": [
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "CONTRIBUTION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "勒索软件行为领域知识（文件加密、持久化、系统还原关闭、进程终止等）",
+      "有限状态机理论（状态、转移、最终状态）",
+      "Windows系统监控机制（文件系统事件、注册表、IRP/Minifilter）",
+      "信息熵理论（加密文件高熵特性）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "FSM提供了形式化表示框架，但四个监听器的选择和阈值设定主要来自经验观察和领域知识，而不是从某一统一理论推导出的可检验设计命题；理论对设计的指导是部分的。",
+    "translation_chain_cn": "勒索软件行为特征 → 识别需要监控的信号（文件变化、伪装扩展、持久化、系统资源篡改、进程终止） → 将每个信号定义为FSM中的响应Y和原因X → 根据信号时序组合成状态转移路径 → 到达最终状态即判定攻击。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "勒索软件读取用户文件并写入加密版本，加密文件熵值通常高于正常文件",
+        "mechanism_cn": "文件读/写操作中的熵变化可以作为异常信号",
+        "design_requirement_cn": "系统必须监控文件系统事件并计算读写熵",
+        "artifact_choice_cn": "文件系统watcher和基于熵的阈值触发",
+        "evaluated_contrast_cn": "当平均写熵超过读熵时触发状态请求",
+        "objective_result_cn": "检测到Y3/Y4/Y6并导致S3/S4/S6状态",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Section 4.1.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "勒索软件常通过带有伪扩展名的可执行文件进入系统",
+        "mechanism_cn": "伪装扩展名（如invoice.pdf.exe）可识别恶意投放",
+        "design_requirement_cn": "需要监控具备多扩展名的可执行文件",
+        "artifact_choice_cn": "横向移动跟踪组件，使用ZwQueryDirectoryFile",
+        "evaluated_contrast_cn": "发现可疑扩展名即触发Y1和状态S1",
+        "objective_result_cn": "识别并尝试删除可疑文件",
+        "evidence_pointers": [
+          "Section 4.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "勒索软件通过修改注册表项/启动目录实现在系统重启后持续运行",
+        "mechanism_cn": "Run注册键和Startup目录新增项是持久化信号",
+        "design_requirement_cn": "周期检查Run键和启动目录",
+        "artifact_choice_cn": "持久性组件，使用WqlEventQuerry和ManagementEventWatcher",
+        "evaluated_contrast_cn": "发现新条目即触发Y2并进入S2",
+        "objective_result_cn": "检测WannaCry持久化行为",
+        "evidence_pointers": [
+          "Section 4.4",
+          "Section 6.4.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "勒索软件通过禁用系统还原消除恢复机制",
+        "mechanism_cn": "修改系统还原配置导致系统无法恢复",
+        "design_requirement_cn": "监控SystemRestore注册表配置变化",
+        "artifact_choice_cn": "系统资源监控组件",
+        "evaluated_contrast_cn": "检测到配置修改即触发Y7进入S7",
+        "objective_result_cn": "检测系统性还原关闭行为",
+        "evidence_pointers": [
+          "Section 4.3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "勒索软件会终止活动进程以便加密文件",
+        "mechanism_cn": "短时间内大量进程终止是异常信号",
+        "design_requirement_cn": "监控进程异常终止事件",
+        "artifact_choice_cn": "系统资源监控组件中的进程终结检测",
+        "evaluated_contrast_cn": "检测到大量进程终止触发Y5进入S5",
+        "objective_result_cn": "检测Cerber进程终止行为",
+        "evidence_pointers": [
+          "Section 4.3",
+          "Section 6.4.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "FSM的状态转移可以整合多个低层事件，降低单事件误报",
+        "mechanism_cn": "多个状态转移组合成攻击路径，路径比单点事件更可靠",
+        "design_requirement_cn": "用FSM决策模块聚合所有监听器事件",
+        "artifact_choice_cn": "FSM模型和状态监听器",
+        "evaluated_contrast_cn": "达到最终状态S1/S4/S6才触发警报",
+        "objective_result_cn": "0% FPR和99.54%准确率",
+        "evidence_pointers": [
+          "Section 5.1-5.3",
+          "Section 6.5"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "受控实验（自建数据集上的二分类评估）",
+      "典型案例研究（WannaCry/Cerber）",
+      "文献间接比较（表8）"
+    ],
+    "why_these_evaluations_cn": "受控实验提供整体性能和泛化证据；案例研究使状态转移机制可解释；文献比较用于定位新方法相对已发表方法的优势。",
+    "benchmark_and_contrast_chain_cn": "首先用大规模数据集建立基准性能（TPR/FPR/ACC），然后通过两个具体样本展示机制，最后与不同文献中的结果进行表格式对比，形成从总体到个案再到相对优势的累积证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "技术主张：系统能准确检测不同勒索软件变体",
+        "evidence_cn": "475个样本检出466个，准确率99.54%，FPR=0%",
+        "support_level": "strong"
+      },
+      {
+        "claim_cn": "制品主张：FSM模型是提高通用性和减少误报的关键",
+        "evidence_cn": "案例分析表明状态转移路径与具体行为一致，但没有FSM的消融实验",
+        "support_level": "partial"
+      },
+      {
+        "claim_cn": "机制主张：多个行为信号组合能区分勒索软件和正常应用",
+        "evidence_cn": "0%误报以及WannaCry/Cerber的路径捕捉",
+        "support_level": "moderate"
+      },
+      {
+        "claim_cn": "边界主张：仅适用于改变文件、资源或持久性状态的行为",
+        "evidence_cn": "讨论中NotPetya和锁屏勒索软件失败案例",
+        "support_level": "strong"
+      },
+      {
+        "claim_cn": "设计知识：监控资源、文件、持久性、横向移动并综合状态转移是可复用的检测策略",
+        "evidence_cn": "文章结论和Table 1的对比",
+        "support_level": "moderate"
+      },
+      {
+        "claim_cn": "理论贡献：FSM建模勒索软件行为优于传统分类方法",
+        "evidence_cn": "没有严格理论比较，只有精度优势",
+        "support_level": "weak"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用VirusTotal交叉验证样本标签；在受控VM中执行，减少环境干扰；记录系统警告并映射到真实标签。",
+    "external_validity_strategy_cn": "数据集覆盖66个勒索软件家族和主流合法应用；单一环境（Windows 7 VM）限制了推广；与文献方法比较时未控制数据集异质性。",
+    "what_is_not_actually_tested_cn": "未直接测试对高级混淆、打包、rootkit、API混淆的鲁棒性；未测试在线和实时部署的时间开销；未在Windows 10等现代系统上验证；未比较不同阈值设定的敏感性。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的动态检测框架在TPR、FPR、准确率上表现优异，能检测多种活跃勒索软件样本。",
+    "artifact_claim_cn": "由四个行为监听器和FSM决策模块构成的可运行系统，能够实现通用勒索软件检测。",
+    "mechanism_claim_cn": "FSM状态转换序列对应勒索软件行为链条，组合多个信号可减少误报并提高检出率。",
+    "boundary_claim_cn": "方法对被攻击系统文件、资源或持久化状态的勒索软件有效；对不改变这些状态的勒索软件（如NotPetya、锁屏）无效。",
+    "reusable_design_knowledge_cn": "综合监控文件、横向移动、系统资源、持久性四类信号，并用FSM聚合为状态转移路径，是一种可迁移的检测设计模式。",
+    "theoretical_contribution_cn": "主要贡献是应用FSM对勒索软件多态行为进行形式化表示，而并非提出新的行为理论；属于应用导向的知识贡献。",
+    "how_discussion_closes_intro_gap_cn": "讨论直接回应引言提出的“现有方法无法泛化”问题：通过说明系统对多数变体有效、并承认特定边界，表明FSM聚合多信号能缓解单一信号方法的误报和漏检，但仍需面对高级混淆的挑战。",
+    "overclaim_or_unsupported_leaps_cn": "表8在数据集不可比的情况下直接比较准确率并声称优势；FSM机制没有经过消融验证；将0%误报归因于FSM可能忽略阈值设置和样本选择的影响。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "勒索软件修改、删除或锁定受害者数据，造成关键数据和财务损失。",
+      "rhetorical_function_cn": "开头唤起紧迫性，吸引读者注意。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为检测方法的必要性做铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4-S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有技术大多针对特定变体，缺乏通用性，原因在于混淆技术和静态分析。",
+      "rhetorical_function_cn": "指出领域内技术缺口。",
+      "depends_on_cn": "前一句的紧迫性。",
+      "sets_up_cn": "引出本文要解决的通用检测问题。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出一种利用FSM评估系统当前状态来检测勒索软件的新方法。",
+      "rhetorical_function_cn": "明确研究目标。",
+      "depends_on_cn": "缺口描述。",
+      "sets_up_cn": "形成论文核心主张。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P2 S2-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "方法监控系统在利用率、持久性和资源横向移动方面的变化。",
+      "rhetorical_function_cn": "概述制品如何运作。",
+      "depends_on_cn": "检测目标。",
+      "sets_up_cn": "为后文四个监听器伏笔。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P2 S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实验结果证明方法能准确检测多种变体，错误预测很少。",
+      "rhetorical_function_cn": "提前给出结果承诺。",
+      "depends_on_cn": "制品描述。",
+      "sets_up_cn": "让读者期待证据。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1-S4",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "恶意软件是攻击者开发的软件，勒索软件通过加密文件、删除原文件或锁定系统来勒索钱财。",
+      "rhetorical_function_cn": "定义核心对象并建立基础语境。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "解释后续为何需要检测。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P2-P3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "勒索软件攻击从2011年起增长四倍，金融损失从3亿多美元增至50亿美元，预测2021年超200亿美元。",
+      "rhetorical_function_cn": "用量化数据说明现实威胁规模。",
+      "depends_on_cn": "勒索软件定义。",
+      "sets_up_cn": "为“现有解决方案无效、需要主动方案”提供依据。",
+      "evidence_pointer": "Introduction P2-P3"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P3 S4-S5",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "全球机构预测损失巨大，且当前方案保护不足，需要积极开发主动方案。",
+      "rhetorical_function_cn": "说明为什么研究缺口具有实际后果。",
+      "depends_on_cn": "攻击统计。",
+      "sets_up_cn": "强调开发新的检测方法的必要性。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "勒索软件目标正转向医疗、政府、企业等更有价值的实体，企业感染率增长到81%。",
+      "rhetorical_function_cn": "强调受影响面从个人扩大至组织，提高问题严重性。",
+      "depends_on_cn": "前面的攻击规模。",
+      "sets_up_cn": "使解决方案不仅对个人，也对企业有意义。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P5 S3-S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "基于签名的静态分析无法检测代码混淆和针对性攻击的新变体。",
+      "rhetorical_function_cn": "指出传统方案的直接局限。",
+      "depends_on_cn": "签名分析的描述。",
+      "sets_up_cn": "引出动态分析的需求。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P6 S1-S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此本文提出一种动态分析范式，监控文件、保留状态、横向移动和系统资源变化，用FSM表示状态变化。",
+      "rhetorical_function_cn": "正式提出研究方案。",
+      "depends_on_cn": "前文的局限。",
+      "sets_up_cn": "给出系统架构概要。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P7",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本研究贡献包括：动态分析检测模型、FSM表示勒索软件多态特性、通用保护系统能检测不同变体。",
+      "rhetorical_function_cn": "简洁列出作者声称的贡献。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "作为后文各章节的预告。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 13,
+      "section": "Related work",
+      "locator": "Related work P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "现有对策可分为静态、网络参数分析和动态分析三类。",
+      "rhetorical_function_cn": "为后续对每类方法的局限分析提供分类框架。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "组织相关工作叙述。",
+      "evidence_pointer": "Section 2 P1"
+    },
+    {
+      "order": 14,
+      "section": "Related work",
+      "locator": "Related work P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "静态分析难以检测未知勒索软件和代码混淆，因为真实行为只有执行时才显现。",
+      "rhetorical_function_cn": "否定静态分析的适用性。",
+      "depends_on_cn": "分类框架。",
+      "sets_up_cn": "支持动态分析的必要性。",
+      "evidence_pointer": "Section 2 P2"
+    },
+    {
+      "order": 15,
+      "section": "Related work",
+      "locator": "Related work P3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "网络参数方法依赖黑名单，对动态域生成算法效果差，且流量增长影响响应。",
+      "rhetorical_function_cn": "指出网络分析路径的缺陷。",
+      "depends_on_cn": "Cabaj和Mazurczyk的工作。",
+      "sets_up_cn": "说明不能只靠网络侧检测。",
+      "evidence_pointer": "Section 2 P3"
+    },
+    {
+      "order": 16,
+      "section": "Related work",
+      "locator": "Related work P4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "动态分析又细分为过程、数据和资源中心方法。",
+      "rhetorical_function_cn": "建立细粒度分类，便于逐类说明局限。",
+      "depends_on_cn": "动态分析总类。",
+      "sets_up_cn": "引出后续三个子类的工作。",
+      "evidence_pointer": "Section 2 P4"
+    },
+    {
+      "order": 17,
+      "section": "Related work",
+      "locator": "Related work P5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "过程中心方法在定时执行、等待用户操作、API掩码等情况下失效。",
+      "rhetorical_function_cn": "否定单纯API序列监控的泛化性。",
+      "depends_on_cn": "Hampton、Al-rimy等过程方法。",
+      "sets_up_cn": "表明需要跨维度信号。",
+      "evidence_pointer": "Section 2 P5"
+    },
+    {
+      "order": 18,
+      "section": "Related work",
+      "locator": "Related work P6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "数据中心方法无法区分用户行为和勒索软件行为，并漏检部分文件加密。",
+      "rhetorical_function_cn": "指出文件监控路径的误报和漏报。",
+      "depends_on_cn": "ShieldFS、CryptoDrop等。",
+      "sets_up_cn": "说明单一数据信号不够。",
+      "evidence_pointer": "Section 2 P6"
+    },
+    {
+      "order": 19,
+      "section": "Related work",
+      "locator": "Related work P7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "资源中心方法因良性应用与恶意程序行为相似而容易误报。",
+      "rhetorical_function_cn": "指出资源监控路径的固有困难。",
+      "depends_on_cn": "Rhode、Kolodenker等。",
+      "sets_up_cn": "提示组合信号可能降低误报。",
+      "evidence_pointer": "Section 2 P7"
+    },
+    {
+      "order": 20,
+      "section": "Related work",
+      "locator": "Related work P8",
+      "move_code": "GAP",
+      "paraphrase_cn": "恶意软件能通过指纹识别规避沙箱；本文方法正是为克服这些局限而设计，表1对比了多维度能力。",
+      "rhetorical_function_cn": "总结现有方法统一缺口，并预告自己的覆盖维度。",
+      "depends_on_cn": "前三个子类局限。",
+      "sets_up_cn": "引入系统设计章节。",
+      "evidence_pointer": "Related work P8, Table 1"
+    },
+    {
+      "order": 21,
+      "section": "System designs",
+      "locator": "Section 3 P1 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "系统根据与正常模式显著偏离且与勒索软件行为模式匹配的变化来识别攻击，使用FSM描述状态和事件触发的转移。",
+      "rhetorical_function_cn": "给出系统核心设计思想。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "引出两个模块的架构介绍。",
+      "evidence_pointer": "Section 3 P1"
+    },
+    {
+      "order": 22,
+      "section": "System designs",
+      "locator": "Section 3 P1 S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "方法由行为分析和决策两个模块组成。",
+      "rhetorical_function_cn": "架构分层。",
+      "depends_on_cn": "FSM设计。",
+      "sets_up_cn": "为第4、5节做结构支撑。",
+      "evidence_pointer": "Figure 1"
+    },
+    {
+      "order": 23,
+      "section": "Behaviour analysis",
+      "locator": "Behaviour analysis P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "行为分析模块包含四个组件，分别监控用户文件、横向移动、系统资源和程序保留状态。",
+      "rhetorical_function_cn": "并列式介绍监测组件。",
+      "depends_on_cn": "系统总体架构。",
+      "sets_up_cn": "逐个展开组件细节。",
+      "evidence_pointer": "Section 4 P1"
+    },
+    {
+      "order": 24,
+      "section": "Behaviour analysis - monitoring user files",
+      "locator": "Section 4.1 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "文件系统watcher记录事件，当由进程或进程组导致的删除、重命名或类似扩展名新建文件数超过阈值时触发处理程序。",
+      "rhetorical_function_cn": "说明文件监听的具体操作方式。",
+      "depends_on_cn": "勒索软件大量操作文件的知识。",
+      "sets_up_cn": "为阈值测量小节提供触发条件。",
+      "evidence_pointer": "Section 4.1 P2"
+    },
+    {
+      "order": 25,
+      "section": "Behaviour analysis - threshold measurement",
+      "locator": "Section 4.1.1 P1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "加密文件具有高熵分布，这一特性用于确定阈值。",
+      "rhetorical_function_cn": "解释为什么熵能作为区分信号。",
+      "depends_on_cn": "加密算法性质。",
+      "sets_up_cn": "介绍熵计算公式。",
+      "evidence_pointer": "Section 4.1.1 P1"
+    },
+    {
+      "order": 26,
+      "section": "Behaviour analysis - threshold measurement",
+      "locator": "Section 4.1.1 P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "系统每500毫秒计算读/写熵的平均值，当平均写熵超过读熵时触发处理程序。",
+      "rhetorical_function_cn": "将熵知识转化为具体检测条件。",
+      "depends_on_cn": "高熵特征。",
+      "sets_up_cn": "作为文件监控组件的判定规则。",
+      "evidence_pointer": "Section 4.1.1 P2"
+    },
+    {
+      "order": 27,
+      "section": "Behaviour analysis - lateral movement tracking",
+      "locator": "Section 4.2 P1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "勒索软件常通过伪装图标和扩展名的可执行文件进入系统，横向移动组件监控这类可疑文件的属性并记录操作。",
+      "rhetorical_function_cn": "解释横向移动攻击的社会工程机制，并对应设计组件。",
+      "depends_on_cn": "恶意软件传播方式。",
+      "sets_up_cn": "引出内核级实现细节。",
+      "evidence_pointer": "Section 4.2 P1"
+    },
+    {
+      "order": 28,
+      "section": "Behaviour analysis - lateral movement tracking",
+      "locator": "Section 4.2 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "使用内核态编程和ZwQueryDirectoryFile例程检查文件元信息，一旦确定为恶意文件就发起状态请求并删除。",
+      "rhetorical_function_cn": "说明横向移动检测的技术实现。",
+      "depends_on_cn": "横向移动策略。",
+      "sets_up_cn": "提供Y1对应的具体操作。",
+      "evidence_pointer": "Section 4.2 P2"
+    },
+    {
+      "order": 29,
+      "section": "Behaviour analysis - monitoring system resources",
+      "locator": "Section 4.3 P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "此组件监控系统还原功能和进程活动，任何可疑的还原设置更改或进程大量终止都会触发状态请求。",
+      "rhetorical_function_cn": "列举资源监控的两个核心任务。",
+      "depends_on_cn": "勒索软件对系统还原的破坏。",
+      "sets_up_cn": "后续段落分别展开。",
+      "evidence_pointer": "Section 4.3 P1"
+    },
+    {
+      "order": 30,
+      "section": "Behaviour analysis - monitoring system resources",
+      "locator": "Section 4.3 P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "勒索软件通过禁用系统还原阻止恢复，因此系统监控特定注册表路径的配置变化。",
+      "rhetorical_function_cn": "建立攻击行为与监控点的因果联系。",
+      "depends_on_cn": "Windows系统还原知识。",
+      "sets_up_cn": "为Y7响应提供依据。",
+      "evidence_pointer": "Section 4.3 P2"
+    },
+    {
+      "order": 31,
+      "section": "Behaviour analysis - persistence of active program",
+      "locator": "Section 4.4 P1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "勒索软件通过修改Run注册表键或添加启动目录项来确保重启后继续运行，系统周期检查这些位置。",
+      "rhetorical_function_cn": "解释持久化机制与监控逻辑。",
+      "depends_on_cn": "勒索软件持久化生存策略。",
+      "sets_up_cn": "引出Y2响应。",
+      "evidence_pointer": "Section 4.4 P1"
+    },
+    {
+      "order": 32,
+      "section": "Behaviour analysis - persistence of active program",
+      "locator": "Section 4.4 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "相关进程由受保护进程监督，使用Filesystem Minifilter驱动过滤IRP请求，防止用户模式进程篡改。",
+      "rhetorical_function_cn": "增加自保护设计，说明系统对抗旁路的鲁棒性。",
+      "depends_on_cn": "持久性监控组件。",
+      "sets_up_cn": "增强制品可信度。",
+      "evidence_pointer": "Section 4.4 P2"
+    },
+    {
+      "order": 33,
+      "section": "Decision-making module - FSM model",
+      "locator": "Section 5.1 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "FSM模型基于文献、技术报告和受控环境下手动执行勒索软件的行为观察开发。",
+      "rhetorical_function_cn": "解释FSM来源，增强模型合理性。",
+      "depends_on_cn": "前文监听器行为观察。",
+      "sets_up_cn": "读者知道FSM不是任意构造。",
+      "evidence_pointer": "Section 5.1 P1"
+    },
+    {
+      "order": 34,
+      "section": "Decision-making module - FSM model",
+      "locator": "Section 5.1 P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "FSM状态代表系统当前状态，状态转移由系统动作和响应触发，到达任一最终状态表示攻击。",
+      "rhetorical_function_cn": "解释FSM与检测结果之间的关联。",
+      "depends_on_cn": "FSM模型定义。",
+      "sets_up_cn": "为最终状态判定提供理论基础。",
+      "evidence_pointer": "Section 5.1 P2"
+    },
+    {
+      "order": 35,
+      "section": "Decision-making module - FSM model",
+      "locator": "Section 5.1 P3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "给出完全指定FSM的形式化定义，包括状态集、初始状态、原因集、响应集、转移函数和最终状态集。",
+      "rhetorical_function_cn": "引入FSM数学框架。",
+      "depends_on_cn": "FSM概念。",
+      "sets_up_cn": "为后文cause-response表示提供符号。",
+      "evidence_pointer": "Section 5.1 P3"
+    },
+    {
+      "order": 36,
+      "section": "Decision-making module - FSM model",
+      "locator": "Section 5.1 P4-P5",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "原因X包括外部下载和活动进程；响应Y由第4节各模块识别，两者组合构成转移输入。",
+      "rhetorical_function_cn": "将领域事件映射到FSM输入。",
+      "depends_on_cn": "行为分析组件。",
+      "sets_up_cn": "定义转移标签如何形成。",
+      "evidence_pointer": "Section 5.1 P4-P5, Tables 2-3"
+    },
+    {
+      "order": 37,
+      "section": "Decision-making module - FSM model",
+      "locator": "Section 5.1 P6",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "例如，从S0接收创建文件通知并处在活动进程原因下时，转移标签为X2,Y3，状态变为S3。",
+      "rhetorical_function_cn": "用实例说明状态转移计算。",
+      "depends_on_cn": "FSM形式定义。",
+      "sets_up_cn": "为表4测试场景做铺垫。",
+      "evidence_pointer": "Section 5.1 P6, Eq. (2)"
+    },
+    {
+      "order": 38,
+      "section": "Decision-making module - state transition",
+      "locator": "Section 5.2 Table 4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "表4列举了勒索软件状态转移的测试场景，覆盖下载可疑文件、持久化后加密删除、终止进程后修改文件、删除阴影副本后加密等多种路径。",
+      "rhetorical_function_cn": "将FSM状态路径具体化为可操作测试。",
+      "depends_on_cn": "前文转移标签和响应集。",
+      "sets_up_cn": "说明系统告警的判定依据。",
+      "evidence_pointer": "Section 5.2, Table 4"
+    },
+    {
+      "order": 39,
+      "section": "Decision-making module - state-change listener",
+      "locator": "Section 5.3 P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "状态变化监听器检查每次转移后是否到达最终状态，若是则警告用户并终止非必要进程。",
+      "rhetorical_function_cn": "说明如何从FSM状态生成用户可感知警报。",
+      "depends_on_cn": "FSM最终状态。",
+      "sets_up_cn": "为第6节检测结果提供机制。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 40,
+      "section": "Implementation and evaluation",
+      "locator": "Section 6.1 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "系统用C#和Windows Driver Kit在Windows 7 VM中实现，并准备包含特定扩展名的用户文档。",
+      "rhetorical_function_cn": "交代实现的平台和测试环境。",
+      "depends_on_cn": "系统设计。",
+      "sets_up_cn": "说明实验的可操作性。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 41,
+      "section": "Implementation and evaluation",
+      "locator": "Section 6.2 P1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "数据集包含1500个合法应用和475个勒索软件样本，勒索软件来自在线来源并覆盖多个家族。",
+      "rhetorical_function_cn": "建立评估语料。",
+      "depends_on_cn": "实现环境。",
+      "sets_up_cn": "介绍后续指标计算的前提。",
+      "evidence_pointer": "Section 6.2, Tables 5-7"
+    },
+    {
+      "order": 42,
+      "section": "Implementation and evaluation",
+      "locator": "Section 6.3 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用TPR、FNR、FPR、TNR和准确率作为评价指标。",
+      "rhetorical_function_cn": "定义效果度量，便于解读实验结果。",
+      "depends_on_cn": "数据集和分类任务。",
+      "sets_up_cn": "为混淆矩阵结果提供工具。",
+      "evidence_pointer": "Section 6.3, Eqs. (4)-(8)"
+    },
+    {
+      "order": 43,
+      "section": "Implementation and evaluation",
+      "locator": "Section 6.4 P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "通过注入勒索软件和合法应用，观察系统警告并计算指标。",
+      "rhetorical_function_cn": "描述实验执行和结果测量方式。",
+      "depends_on_cn": "数据集和指标。",
+      "sets_up_cn": "引出后续具体分析。",
+      "evidence_pointer": "Section 6.4"
+    },
+    {
+      "order": 44,
+      "section": "Implementation and evaluation - WannaCry",
+      "locator": "Section 6.4.1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "WannaCry创建WNCRY加密文件、删除原文件并添加注册表持久化；系统依次检测到S0→S2、S2→S3、S3→S4，确认攻击并发出警告。",
+      "rhetorical_function_cn": "用具体样本展示状态转移路径并验证系统有效。",
+      "depends_on_cn": "FSM状态和监听器。",
+      "sets_up_cn": "为系统可解释性提供证据。",
+      "evidence_pointer": "Section 6.4.1"
+    },
+    {
+      "order": 45,
+      "section": "Implementation and evaluation - Cerber",
+      "locator": "Section 6.4.2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Cerber终止进程、重写文件内容并改名；系统检测到S0→S5→S6后发出警告。",
+      "rhetorical_function_cn": "验证另一种行为模式的系统响应。",
+      "depends_on_cn": "系统资源和文件监控组件。",
+      "sets_up_cn": "证明不同家族能够被同一FSM覆盖。",
+      "evidence_pointer": "Section 6.4.2"
+    },
+    {
+      "order": 46,
+      "section": "Implementation and evaluation - detection accuracy",
+      "locator": "Section 6.5 P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "系统在475个恶意样本中检出466个，对1500个合法样本全部未误报，达到99.54%准确率和0% FPR。",
+      "rhetorical_function_cn": "报告核心总体性能，支撑摘要中的承诺。",
+      "depends_on_cn": "所有实验样本。",
+      "sets_up_cn": "作为全文最重要的定量证据。",
+      "evidence_pointer": "Section 6.5, Figure 4, Figure 5"
+    },
+    {
+      "order": 47,
+      "section": "Implementation and evaluation - comparison",
+      "locator": "Section 6.5 P2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "与其他动态检测方法的结果比较显示本方法在TPR、FPR、准确率上更具优势。",
+      "rhetorical_function_cn": "建立相对基线并强调贡献。",
+      "depends_on_cn": "已发表论文结果。",
+      "sets_up_cn": "为结论中的优势声明提供依据。",
+      "evidence_pointer": "Table 8"
+    },
+    {
+      "order": 48,
+      "section": "Discussion",
+      "locator": "Discussion P1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "系统基于观察行为构建，虽能识别多数勒索软件，但错过了一些通过其他隐蔽方式进入的样本。",
+      "rhetorical_function_cn": "诚实承认性能边界，避免过度声称。",
+      "depends_on_cn": "检测结果。",
+      "sets_up_cn": "引出具体漏检原因。",
+      "evidence_pointer": "Section 7 P1"
+    },
+    {
+      "order": 49,
+      "section": "Discussion",
+      "locator": "Discussion P2",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "9个漏检样本主要来自更复杂的混淆、增量解包或在用户模式下不修改系统资源的勒索软件，如NotPetya。",
+      "rhetorical_function_cn": "界定方法的适用边界。",
+      "depends_on_cn": "漏检样本分析。",
+      "sets_up_cn": "保护贡献不被泛化为对所有恶意软件有效。",
+      "evidence_pointer": "Section 7 P2"
+    },
+    {
+      "order": 50,
+      "section": "Discussion",
+      "locator": "Discussion P3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "锁屏勒索软件不修改文件和不影响系统资源，因此系统无法检测。",
+      "rhetorical_function_cn": "进一步明确方法失效场景。",
+      "depends_on_cn": "监控组件的覆盖范围。",
+      "sets_up_cn": "辅助读者理解方法的前提假设。",
+      "evidence_pointer": "Section 7 P3"
+    },
+    {
+      "order": 51,
+      "section": "Conclusion",
+      "locator": "Conclusion P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结系统用FSM监控系统状态变化，实验显示99.5%准确率和0% FPR，证明对多种勒索软件家族有效。",
+      "rhetorical_function_cn": "闭合论证，重申核心贡献。",
+      "depends_on_cn": "全文所有段落。",
+      "sets_up_cn": "结束文章。",
+      "evidence_pointer": "Section 8"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "文章不是从‘没人研究’出发，而是指出现有方法在具体能力维度上（资源监控、文件控制、持久性、混淆、提权、时间检测）存在组合缺失，通过Table 1直观展示自己的覆盖性优势；这属于‘现有制品不能全面实现需求’型缺口。",
+    "signposting_cn": "引言末尾以编号列表列出贡献；每个章节开头告诉读者即将介绍的内容（如‘本节介绍相关工作中的技术需求’），评估部分用表格和公式提前预告指标。",
+    "transition_logic_cn": "从宏大的攻击威胁过渡到现有方案局限，再从局限引出设计目标；行为分析四个组件分别对应FSM中的响应；案例研究后回到总体精度；讨论部分从漏检反推边界条件。",
+    "claim_evidence_rhythm_cn": "先给摘要结论，再通过引言提供动机，中间用系统设计建立原理，最后用混淆矩阵和案例同时支撑概括性主张；讨论部分用反例修正声称强度。",
+    "benchmark_narrative_cn": "无正式基准数据集，但创造了自建测试集（合法+恶意）作为‘ground truth’，并将其他论文的已发表数字并列表格作为间接基准；通过‘sample size’和‘live samples’的措辞暗示自己的测试更真实。",
+    "theory_return_cn": "理论（FSM）在第5节进入后主要用于组织事件，结果部分并未返回理论去验证FSM本身；只是在讨论中重新说明行为观察构建FSM的合理性。理论返回较弱。",
+    "contribution_positioning_cn": "在引言、摘要和结论中重复‘通用检测’、‘多态特征’、‘不同变体’的定位，用Table 1将自己与现有研究进行能力矩阵对比，使贡献显得是体系性的而非单点指标。",
+    "novelty_protection_cn": "通过同时覆盖六个检测能力维度并将FSM作为统一框架，把贡献从‘又一个检测器’提升为‘通用表示方法’；即使存在检测缺陷，仍强调其为多数变体提供方案。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用攻击统计和损失数据建立问题紧迫性，并简要描述攻击行为。",
+        "research_job_cn": "收集权威报告和文献，量化威胁规模和典型攻击链。",
+        "required_evidence_cn": "至少一组多年趋势数据或代表性事件（如WannaCry）。",
+        "transition_to_next_cn": "从威胁规模转向现有保护方案不足。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "将已有解决方案按技术路线分类，逐类指出局限。",
+        "research_job_cn": "文献综述并归纳每类方法的失败模式。",
+        "required_evidence_cn": "每类方法至少有一个具体文献支持其局限。",
+        "transition_to_next_cn": "用一张能力对比表总结缺口，并引出本文制品的全覆盖。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "提出一个统一表示框架（此处为FSM），并给出形式化定义。",
+        "research_job_cn": "从领域观察中提取状态、原因、响应和转移路径。",
+        "required_evidence_cn": "至少两个真实样本的状态转移路径作为示例。",
+        "transition_to_next_cn": "形式框架之后，说明如何用系统组件捕获其输入。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "按框架要求设计一组监听器/传感器，对应框架中的每个输入。",
+        "research_job_cn": "选择可实现的技术手段（如API、注册表监视、熵计算）并设定触达条件。",
+        "required_evidence_cn": "每个组件能引起某个状态变化的定性验证即可。",
+        "transition_to_next_cn": "将组件整合进决策模块，解释状态如何转成警报。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "实现系统并构建包含正负样本的数据集。",
+        "research_job_cn": "在目标平台上部署原型；收集一定规模、覆盖多家族的样本并经交叉验证。",
+        "required_evidence_cn": "证明数据集来自可信来源且样本标签可靠。",
+        "transition_to_next_cn": "数据集可支撑后续指标计算。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "报告混淆矩阵和TPR/FPR/ACC等指标，并补充两个典型案例的状态路径。",
+        "research_job_cn": "运行受控实验，记录预测标签；对典型案例做事件追踪。",
+        "required_evidence_cn": "总体性能数字和至少一个可解释的状态转移例子。",
+        "transition_to_next_cn": "将结果放入已有方法比较表。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "在讨论中承认漏检案例并界定适用边界。",
+        "research_job_cn": "分析错误样本，提取失败原因的共同模式。",
+        "required_evidence_cn": "至少一个反例类别或漏检列表。",
+        "transition_to_next_cn": "在结论中重申在可观察行为空间内的贡献。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用能力对比矩阵（Table 1）将多个单点局限汇总成结构缺口",
+      "先形式化定义状态机和转移输入，再把领域事件映射到形式模型",
+      "在总体性能之外用两个典型案例解释机制，避免黑箱印象",
+      "把失败样本归纳为边界条件，防止读者因为个别漏检否定整体方法"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "收集475个活跃勒索软件样本并逐一在受控VM中执行，需要恶意软件样本库、隔离环境和时间成本",
+      "使用Windows Driver Kit和Minifilter驱动开发受保护进程，需要内核驱动开发和调试资源",
+      "基于手工观察勒索软件行为构建FSM，过程费时且难以大规模自动化"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只复制‘FSM动态检测’概念而不提供具体的状态/响应表，否则无法评估检测能力",
+      "不能照搬‘与其他论文结果比较’的叙事，因为数据集异质性很容易让审稿人质疑公平性",
+      "不能省略失败案例讨论，否则贡献声明会显得过度泛化"
+    ],
+    "single_best_description_of_the_routine_cn": "先用量化威胁建立必要，再用分类法展示现有方法能力缺失，然后引入一个形式化状态框架把多维行为信号整合为攻击路径，以受控实验加案例展示性能，最后用失败反例圈定边界。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "文章全文和表格可用，但内嵌图（Fig.1、Fig.2、Fig.3、Fig.4、Fig.5）未在文本中展开，FSM图和架构图的细节分析主要依赖文字描述；此外，表8的对比来自不同文献，数据集不可比，导致对‘优于其他方法’的判断需谨慎。",
+  "usage": {
+    "prompt_tokens": 17970,
+    "completion_tokens": 24166,
+    "total_tokens": 42136,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 17970
+  }
+}

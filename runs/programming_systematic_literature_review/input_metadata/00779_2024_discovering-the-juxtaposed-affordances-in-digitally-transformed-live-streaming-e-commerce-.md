@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85149363858"
+title: "Discovering the Juxtaposed Affordances in Digitally Transformed Live Streaming E-commerce: a Mixed-Methods Study from a Vicarious Learning Perspective"
+authors: "Hua Y.; Wang D.; Luo X.; Chang F.-K.; Xie Y."
+year: "2024"
+journal: "European Journal of Information Systems"
+doi: "10.1080/0960085x.2023.2178978"
+---
+# Scopus title-abstract-keyword metadata
+Title: Discovering the Juxtaposed Affordances in Digitally Transformed Live Streaming E-commerce: a Mixed-Methods Study from a Vicarious Learning Perspective
+Abstract: Live streaming technologies transform the information processing of customers by changing the way they interact with and acquire information. However, this emerging technological artefact may induce both positive and negative consequences for customer decision making. It is yet unknown what constitutes the dimensions of the juxtaposed IT affordances and how they affect customer behaviours in this new social phenomenon. This paper contributes to IS research by uncovering the specific bright and dark sides of IT affordances in live streaming e-commerce and by explaining the cognitive mechanisms underpinning customer purchase and brand citizenship behaviours. We employed a sequential mixed-methods design to embrace and contextualise the theory of affordance, vicarious learning, and cognitive load to rigorously develop a theoretical framework of the juxtaposed IT affordance in live streaming e-commerce. The results indicate that positive affordances (e.g., interactivity, visibility, and entertainment) have stronger effects on both economic and non-economic value. However, the potential dark side (e.g., broadcasting and source diversity) has more negative effects on purchase intention than brand citizenship behaviour, underscoring the importance of involving customers in co-creating brand-related value in live streaming e-commerce. Our findings contribute considerably to the emerging literature on live streaming e-commerce and provide actionable recommendations for practitioners. © The Operational Research Society 2023.
+Author keywords: affordance; Digital transformation; live streaming e-commerce; vicarious learning
+Index keywords: Decision making; E-learning; Electronic commerce; Affordances; Customer decisions; Decisions makings; Digital transformation; E- commerces; Live streaming; Live streaming e-commerce; Mixed method; Streaming technology; Vicarious learning; Sales
+Document type: Article
+Conference: 
+Source title: European Journal of Information Systems
+Year: 2024
+EID: 2-s2.0-85149363858
+DOI: 10.1080/0960085x.2023.2178978
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

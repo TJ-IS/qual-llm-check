@@ -1,0 +1,1058 @@
+{
+  "record_id": "20036",
+  "source_file": "20036_2023_cost-based-analysis-of-the-impact-of-data-completeness-and-representational-consistency.md",
+  "title": "Cost-based analysis of the impact of data completeness and representational consistency",
+  "authors": "Yoram Timmerman; Rihem Nasfi; Guy De Tré; Filip Pattyn; Antoon Bronselaer",
+  "year": "2023",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2023.114044",
+  "fulltext_chars": 79991,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "data_knowledge_representation_and_integration",
+  "source_primary_objective_family": "human_task_performance",
+  "source_application_context": "general_or_cross_domain",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:43.857938+00:00",
+  "article_level_summary": {
+    "central_question_cn": "数据质量分析如何从规则符合性测量转向“fitness for use/成本”视角，并通过实际人类任务求解成本来量化完整性与表示一致性问题的真实影响？",
+    "artifact_and_design_cn": "以PubMed、ORCID、GRID三个公开科学数据集为基础构建集成关系数据库D_A，再通过去重作者、添加GRID ID、改善规范化、标准化标识符等动作得到D_B和D_C；围绕需要至少跨两个数据集连接的任务设计六道SQL问题；由218名学生在在线SQL平台上求解，记录能否解决、解决时间、尝试次数/查询数。",
+    "objective_outcomes_cn": "不同版本数据库在Pcorrect、Tsolved和查询次数上出现显著差异；部分任务中质量改进带来最高约65%的时间下降和0.43的效应量，但也出现改进几乎无影响的任务；solution path分析显示数据质量相关错误随质量提升大幅减少，同时存在学习效应和任务间传播等情境因素。",
+    "core_contribution_cn": "首次对基于成本的数据质量分析框架进行实际应用与检验，证明它能提供与规则式测量互补的、面向经济决策的量化信息，并揭示数据质量影响受任务、用户能力和上下文调节。",
+    "whole_argument_in_one_paragraph_cn": "作者先指出现有规则式数据质量测量的三大不足（序数尺度、脱离用途、主观评价），从而主张需要一种从fitness for use出发、以任务求解成本衡量质量的框架；接着将这一框架落实到一个真实的科学数据集整合场景中，构建三个质量逐步改进的集成数据库。作者安排随机实验，让218名志愿者在SQL平台上解决六道需要跨库连接的任务，记录能否解决、解决时间和查询路径；随后用二项逻辑回归和ANCOVA检验数据库版本间的差异，并通过solution path分析把查询错误归因于数据质量问题还是其他原因。结果显示，质量改进的效果并非总是符合规则式指标的预期：结构化标识符的引入产生巨大收益，而只补全缺失值但不解决表示不一致时可能几乎无效；此外，学习效应、任务顺序、剩余时间、SQL能力等上下文因素会影响测量值。最终作者主张基于成本的分析能把数据质量与真实使用成本联系起来，为管理者提供更直接的投资判断依据，同时必须谨慎解释规则式测量。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章不是以假设检验为主的传统实验研究，也不是形式建模；它“practically implements and evaluates”一种基于成本的数据质量分析方法。作者从fitness-for-use和既有成本式框架出发，构建了三个集成数据库版本和一套测量流程，并通过随机实验和路径分析进行评价；最终贡献是可复用的设计知识：如何用任务求解成本测量数据质量影响。因此最接近“需求/原则—构建—评价—设计知识”的设计科学型论文。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "引言以规则式测量的问题开篇，引入fitness-for-use和成本式理论，随后设计三版数据库与实验，通过实验检验质量改进的实际影响，最后在讨论和结论中回到理论并提炼边界条件。整体弧线是“问题—理论—设计—检验—回到理论”。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "论文没有分成多个独立Study，而是由一个主实验加上支撑性分析串联。第一阶段把理论框架转化为用例和任务设计；第二阶段构建质量等级递增的三个数据库并用规则式指标刻画质量差距；第三阶段实施随机实验并检验成本指标差异；第四阶段通过solution path分析把统计差异归因到数据质量问题；第五阶段检查偏差和边界条件。各阶段依次为后续阶段提供材料、对照、机制证据和限定条件。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "用例与任务设计",
+        "question_cn": "如何把“成本即质量”理论转化为一个可信的具体分析场景？",
+        "inputs_and_setting_cn": "三个公开数据集的概念描述（PubMed、ORCID、GRID）以及Bronselaer等人的成本式数据质量形式化框架。",
+        "designed_or_compared_object_cn": "六项SQL任务，每项至少要求合并两个数据集。",
+        "baseline_control_or_counterfactual_cn": "无明确baseline；任务集需要覆盖不同跨库连接方式以保证代表性。",
+        "objective_metrics": [],
+        "analysis_method_cn": "概念推理/任务设计。",
+        "main_result_cn": "确定六项任务，覆盖作者、文章、机构、国家、基金ID等跨库连接，构成可信的分析上下文。",
+        "argumentative_role_cn": "把fitness-for-use原则从抽象理论落实为可操作的任务求解场景。",
+        "remaining_uncertainty_cn": "还需要实际数据库和参与者数据来暴露质量影响。",
+        "link_to_next_phase_cn": "任务集定义了数据库需要支持的查询需求，因而引出数据库构建。",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Table 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "集成数据库构建与规则式质量测量",
+        "question_cn": "如何获得同一用例下质量等级不同但任务需求一致的三个数据库版本？",
+        "inputs_and_setting_cn": "原始PubMed、ORCID、GRID数据；作者执行的数据质量改善动作。",
+        "designed_or_compared_object_cn": "D_A（原始质量）、D_B（中间质量）、D_C（高质量、标识符完全标准化）。",
+        "baseline_control_or_counterfactual_cn": "D_A作为原始质量基线；D_B和D_C是逐步质量改进的反事实版本。",
+        "objective_metrics": [
+          "完整性百分比",
+          "表示一致性百分比"
+        ],
+        "analysis_method_cn": "规则式质量统计；随机抽取100条新增值进行人工校验。",
+        "main_result_cn": "得到三套质量等级：相关属性上D_A缺失和不一致严重，D_B部分改善，D_C完整且一致。",
+        "argumentative_role_cn": "提供实验对比物，同时给出规则式测量对预期影响的预测值。",
+        "remaining_uncertainty_cn": "质量改善是否真的提升用户任务绩效尚未可知。",
+        "link_to_next_phase_cn": "质量表为随机实验提供了具体可比较的“处理”差异。",
+        "evidence_pointers": [
+          "Section 3.2.1",
+          "Section 3.2.2",
+          "Table 2",
+          "Fig. 1"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "随机实验与成本指标检验",
+        "question_cn": "数据库质量差异对参与者的解决能力、解决时间和查询次数有什么影响？",
+        "inputs_and_setting_cn": "218名大学生；在线SQL查询平台；六项任务；三组数据库随机分配。",
+        "designed_or_compared_object_cn": "数据库分配（D_A vs D_B vs D_C）；同时控制SQL能力与剩余时间。",
+        "baseline_control_or_counterfactual_cn": "两两数据库对比；统计模型中的协变量作为控制；异常值排除后检验结果稳定性。",
+        "objective_metrics": [
+          "Pcorrect 能解决任务百分比",
+          "Tsolved 平均解决时间",
+          "提交查询次数"
+        ],
+        "analysis_method_cn": "二项逻辑回归；单因素ANCOVA；调节效应分析；异常值敏感性检验。",
+        "main_result_cn": "16次Pcorrect比较中11次Database显著；16次Tsolved比较中7次显著；效应量最大0.434；部分任务无显著差异，且调节效应基本不显著。",
+        "argumentative_role_cn": "提供成本式测量的主要实证证据，说明质量改进的影响并非单一模式。",
+        "remaining_uncertainty_cn": "统计差异是否源于数据质量本身，还是查询策略、学习等替代因素。",
+        "link_to_next_phase_cn": "需要查看查询内容以归因差异，引出solution path分析。",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Section 4.1",
+          "Section 4.2",
+          "Tables 3-5"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "解决方案路径分析",
+        "question_cn": "查询内容和错误类型如何随数据库质量而变化？",
+        "inputs_and_setting_cn": "参与者提交的所有SQL查询，尤其是错误查询。",
+        "designed_or_compared_object_cn": "错误类型分类：数据质量相关错误 vs 其他错误。",
+        "baseline_control_or_counterfactual_cn": "同一任务在不同数据库上的错误分布。",
+        "objective_metrics": [
+          "平均查询总数N",
+          "平均数据质量相关查询数N_DQ",
+          "平均其他查询数N_other"
+        ],
+        "analysis_method_cn": "人工内容分析/编码；多错误查询按等分计数；最终分为DQ相关与DQ无关两类。",
+        "main_result_cn": "D_A上DQ相关错误远高于D_B/D_C，D_C多数任务接近零；从任务1到任务2的DQ相关查询数大幅下降，提示学习效应。",
+        "argumentative_role_cn": "提供机制层面的归因证据，把统计差异与数据质量问题联系起来。",
+        "remaining_uncertainty_cn": "人工编码存在主观性；错误分类不是统计检验。",
+        "link_to_next_phase_cn": "为讨论非显著性结果、学习效应和偏差提供素材。",
+        "evidence_pointers": [
+          "Section 4.3",
+          "Table 6"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "偏差与边界分析",
+        "question_cn": "剩余时间、SQL能力、样本量等是否威胁成本估计的有效性？",
+        "inputs_and_setting_cn": "同一实验数据；调节分析；各任务起始人数统计。",
+        "designed_or_compared_object_cn": "不同参与者子组、不同任务起始时间、全样本与可解决问题子组。",
+        "baseline_control_or_counterfactual_cn": "调节效应假设：数据库效应在不同SQL能力/剩余时间水平下应相似。",
+        "objective_metrics": [
+          "调节效应p值",
+          "子组均值比较",
+          "样本量/统计功效评估"
+        ],
+        "analysis_method_cn": "线性回归交互项分析；描述性比较；统计功效推理。",
+        "main_result_cn": "除任务1 D_A-D_C的SQL能力调节显著外无显著调节；剩余时间影响12/16能力比较；SQL能力影响哪些人能进入Tsolved子组；任务6样本量不足导致无法比较D_A。",
+        "argumentative_role_cn": "界定结论的边界，防止把成本式测量结果过度泛化。",
+        "remaining_uncertainty_cn": "无法完全排除选择偏差；需要更大样本和替代实验设计。",
+        "link_to_next_phase_cn": "进入结论，在总结贡献的同时列出未来研究方向。",
+        "evidence_pointers": [
+          "Section 5.7.1",
+          "Section 5.7.2",
+          "Section 5.7.3",
+          "Table 4"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 数据质量对企业重要，需要合适的分析工具。",
+      "LIMITATION: 规则式系统不反映实际可用性影响，不适合经济决策。",
+      "RQ_OR_OBJECTIVE: 本文实际实现并评估基于成本的数据质量分析。",
+      "STUDY_OVERVIEW: 218名志愿者在三个数据库版本上解决SQL任务，测量解决能力、时间和尝试次数。",
+      "RESULT: 结果与规则式预期不同，时间最多降低65%，效应量达0.43。"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 数据推动决策，数据质量影响决策质量和企业竞争力。",
+      "PRACTICAL_STAKES: 低质量数据代价高昂，Gartner估计每年每组织损失1500万美元。",
+      "PRIOR_KNOWLEDGE: 主流数据质量测量是预先定义规则的序数评价。",
+      "LIMITATION: 序数尺度无法量化差异，结果难以联系实际用途和投资判断。",
+      "LIMITATION: 规则式测量将质量视为内在属性，忽视使用目的和上下文。",
+      "LIMITATION: 规则式评价依赖主观判断，可靠性低。",
+      "THEORY_INTRO: fitness-for-use和成本式框架可弥补上述不足。",
+      "GAP: 成本式框架虽被提出，但从未被实际应用。",
+      "RQ_OR_OBJECTIVE: 本文在科学数据集整合用例中实际应用成本式分析。",
+      "STUDY_OVERVIEW: 构建三个数据库版本，让三组用户解决跨库SQL任务。",
+      "CONTRIBUTION: 首次实用化成本式分析并提供与规则式互补的洞见。"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 完整性和一致性是两个核心质量维度，现有测量多为缺失值百分比或格式替换比例。",
+      "LIMITATION: 这些测量仍有序数、脱离用途和主观性的问题。",
+      "PRIOR_KNOWLEDGE: 数据质量成本研究包括Eppler-Helfert分类模型和Haug等的最优维护模型。",
+      "LIMITATION: 相关实证研究依赖主观评估、样本小、未控制能力。",
+      "GAP: fitness-for-use实践稀缺，成本式框架未被用于真实质量评估。",
+      "THEORY_INTRO: 采用Bronselaer等的正式框架，质量与求解任务的变换成本成反比。"
+    ],
+    "artifact_design_moves": [
+      "PHENOMENON: PubMed/ORCID/GRID相互指涉但整合困难，构成可信用例。",
+      "REQUIREMENT: 需要代表科学家常见查询的跨库任务集。",
+      "DESIGN_FEATURE: 构建D_A，仅保留任务相关属性和记录。",
+      "DESIGN_FEATURE: D_B和D_C分别通过去重、补GRID ID、标准化标识符和规范化逐步改善质量。",
+      "DESIGN_FEATURE: 使用在线SQL平台和模型解自动判断查询正确性。",
+      "METHOD_JUSTIFICATION: 选择70分钟时限和三项成本指标以反映任务复杂度和可用性。"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST: 用规则式完整性/一致性百分比建立预期。",
+      "METHOD_JUSTIFICATION: 二项逻辑回归和ANCOVA用于控制SQL能力与剩余时间。",
+      "RESULT: Pcorrect和Tsolved有多项显著差异，效应量最大0.434。",
+      "TRANSITION: 进入solution path分析以解释差异来源。",
+      "METHOD_JUSTIFICATION: 手工编码错误查询并区分DQ相关和其他错误。",
+      "RESULT: D_A的DQ相关查询远高于D_B/D_C，D_C接近零。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 检查调节效应、选择偏差和样本量对结论的威胁。"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT: 用任务1说明成本式结果可为投资决策提供直接收益估计。",
+      "RESULT: 任务1显示填充缺失但不解决不一致时影响很小，反衬规则式高估。",
+      "RESULT: 任务3/5说明结构化标识符大幅提升可用性。",
+      "RESULT: 任务6说明一个完美标识符优于两个交替使用的互补标识符。",
+      "BOUNDARY_CONDITION: 任务2提示学习效应，用户会适应数据缺陷。",
+      "BOUNDARY_CONDITION: 任务5显示质量影响可传播到后续任务。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 剩余时间、SQL能力和样本量影响估计精度。",
+      "CONTRIBUTION: 提出并验证了连接数据质量与使用成本的路径。",
+      "LIMITATION_AND_FUTURE: 需要更多用例、更大样本和扩展质量维度。"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "数据质量维度理论（completeness, representational consistency, Wang & Strong）",
+      "fitness for use原则（Juran; Wang & Strong）",
+      "成本式数据质量测量框架（Bronselaer et al., 2018）",
+      "数据质量成本分类模型（Eppler & Helfert; Haug et al.）",
+      "既有实证DQ影响研究（Borek; Hazen; Samitsch）",
+      "关系数据库规范化与可用性研究"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "成本式框架确实直接决定了评价方式（测量求解任务的成本）和实验的总体结构，三版数据库的对比也来自fitness-for-use思想。但具体采用哪些质量改善动作（去重、加GRID ID、标准化标识符），以及选择PubMed/ORCID/GRID这个用例，主要来自工程判断、领域知识和数据可得性，并非由理论严格推导。比较的结果也并非用于检验理论命题，而是展示一种测量方法。因此属于理论影响部分设计而非完全前瞻性决定。",
+    "translation_chain_cn": "形式化成本模型（质量=完成任务的逆成本）→ 在实际场景中测量任务求解成本 → 设计三版数据库和六项跨库任务 → 用能力/时间/尝试次数作为成本指标 → 用随机实验和路径分析检验 → 从显著和非显著结果中识别上下文调节与边界条件。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "成本式数据质量理论：数据质量与求解任务所需最小变换成本成反比。",
+        "mechanism_cn": "低质量数据迫使使用者进行额外变换（如手工标准化标识符、从非结构化机构字符串中抽取值），消耗时间和尝试；这种额外成本即为低质量的使用成本。",
+        "design_requirement_cn": "评价数据质量必须测量真实任务求解成本，而非只统计缺失值。",
+        "artifact_choice_cn": "采用Pcorrect、Tsolved、查询次数/尝试次数作为成本指标，使用在线SQL任务平台。",
+        "evaluated_contrast_cn": "D_A vs D_B vs D_C两两比较。",
+        "objective_result_cn": "多项任务中Database显著影响Pcorrect和Tsolved；时间最多降低约65%；效应量最大0.434。",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Section 4.1",
+          "Section 4.2",
+          "Tables 3-5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "完整性和表示一致性分别指数据不缺失和值被一致表示；它们影响跨库等值连接。",
+        "mechanism_cn": "缺失/非标准标识符导致不能直接用ID做等值连接，用户只能改用作者姓名或手动转换，增加复杂度和出错率。",
+        "design_requirement_cn": "构造质量逐步变化的三版数据库，并让任务跨越PubMed/ORCID/GRID。",
+        "artifact_choice_cn": "D_A原始质量；D_B去重并补GRID ID、规范化；D_C彻底统一标识符。",
+        "evaluated_contrast_cn": "同一任务上比较三库的完成率、时间和查询数。",
+        "objective_result_cn": "任务3中补GRID ID使完成率8%→73%、时间降低60%；任务1中B版改进未显著提升绩效。",
+        "evidence_pointers": [
+          "Section 3.2.2",
+          "Table 2",
+          "Sections 5.2-5.3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "以往实证研究不足：主观评估、样本小、未控制参与者能力。",
+        "mechanism_cn": "没有随机化和客观控制时，能力、时间压力等混淆变量会掩盖或夸大质量效应。",
+        "design_requirement_cn": "需要随机分配、较大样本、客观记录、控制SQL能力和剩余时间。",
+        "artifact_choice_cn": "218名受试随机分三组；平台记录所有查询；协变量纳入回归/ANCOVA。",
+        "evaluated_contrast_cn": "Database分配在控制协变量后的净效应。",
+        "objective_result_cn": "Pcorrect 11/16次显著；Tsolved 7/16次显著；SQL能力与剩余时间在部分任务中显著。",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Section 4.1",
+          "Section 4.2",
+          "Tables 4-5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "数据质量是上下文/用途依赖的；用户经验与任务顺序会影响感知质量。",
+        "mechanism_cn": "用户能学习适应数据缺陷；先前任务的难度会产生疲劳或预期，使质量效应外溢到新任务。",
+        "design_requirement_cn": "必须分析查询过程本身并检查上下文调节。",
+        "artifact_choice_cn": "solution path analysis；调节效应检验；讨论剩余时间/SQL能力/样本量偏差。",
+        "evaluated_contrast_cn": "数据质量相关错误 vs 其他错误；不同任务之间错误变化；不同子组效应。",
+        "objective_result_cn": "从任务1到任务2的DQ相关查询大幅下降；D_B/D_C在任务5仍有显著差异；任务4差异受子组能力影响。",
+        "evidence_pointers": [
+          "Section 4.3",
+          "Table 6",
+          "Sections 5.5-5.7"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "随机对照实验（between-subjects, 三组数据库）",
+      "二项逻辑回归（Pcorrect）",
+      "单因素ANCOVA（Tsolved）",
+      "调节效应分析",
+      "基于查询日志的定性路径分析/solution path analysis",
+      "异常值敏感性检验和偏差讨论"
+    ],
+    "why_these_evaluations_cn": "成本式框架要求测量真实求解成本，因此需要人类受试在可控条件下实际执行任务；随机分配和协变量控制保证组间可比；路径分析提供机制证据；偏差讨论明确结论边界。",
+    "benchmark_and_contrast_chain_cn": "先用规则式质量表（Table 2）建立“预期影响”；随后用三库两两对比测量成本指标（Tables 3-5）；再用solution path（Table 6）把时间/能力差异归因于DQ错误；最后用调节和偏差分析排除替代解释。整个过程不是单一benchmark，而是“预期—组间对照—机制归因—边界检验”的累积链条。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "成本式框架可以实际实施并产生规则式无法给出的经济相关结果",
+        "evidence": "Tables 3-5显示多种任务上的显著差异和效应量",
+        "supported": "partial",
+        "note": "没有与规则式测量进行形式化对比，仅展示互补性"
+      },
+      {
+        "claim": "数据质量改进（如GRID ID）显著提升可用性",
+        "evidence": "任务3/5/6的完成率、时间和查询次数差异",
+        "supported": "true"
+      },
+      {
+        "claim": "填充缺失ORCID ID但在仍存在不一致时几乎没有可测量收益",
+        "evidence": "任务1 D_A vs D_B各指标无显著差异，效应量小",
+        "supported": "true",
+        "note": "由路径分析补充解释为作者姓名连接替代"
+      },
+      {
+        "claim": "用户会学习适应数据质量问题",
+        "evidence": "从任务1到2的DQ相关错误数急剧下降",
+        "supported": "partial",
+        "note": "推断性解释，未直接操纵学习"
+      },
+      {
+        "claim": "数据质量问题会传播到后续任务",
+        "evidence": "任务5 D_B vs D_C差异显著但两库在该任务数据相同",
+        "supported": "partial",
+        "note": "替代解释包括疲劳和预期"
+      },
+      {
+        "claim": "剩余时间和SQL能力会影响成本估计",
+        "evidence": "Tables 4-5中协变量显著；任务4子组分析",
+        "supported": "true"
+      },
+      {
+        "claim": "单一定义良好的标识符优于两个互补标识符",
+        "evidence": "任务6 D_B vs D_C显著差异",
+        "supported": "true",
+        "note": "D_A因0人解决无法比较"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配参与者到数据库版本；统计模型纳入SQL能力和剩余时间作为协变量；检查回归/ANCOVA假设；必要时对时间做log变换；排除异常值并进行敏感性检验；用调节分析检验效应是否只存在于特定子组。",
+    "external_validity_strategy_cn": "使用真实公开科学数据集（PubMed/ORCID/GRID）和代表性跨库查询任务；参与者都修过数据库课程，接近目标用户；OSF仓库公开材料和知情同意等补充信息；讨论特别指出需要其他用例来验证推广。",
+    "what_is_not_actually_tested_cn": "没有把成本式框架与规则式框架在同一任务上做正式的统计对比；没有测试除完整性和一致性外的质量维度；没有在真实企业中验证；没有直接测量形式框架中的“最小变换序列”，而是用人工任务中的时间/查询数近似成本；D_A在任务6上因无人解决而无法比较。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "成本式数据质量分析可以被实际实施，产生可量化的指标（解决能力、解决时间、尝试/查询次数），并能检测到规则式测量无法反映的影响，包括时间降低65%和效应量0.43。",
+    "artifact_claim_cn": "三版数据库之间的差异表明：补充GRID ID、标准化标识符等具体质量改善动作会带来明显可用性提升；但单纯补全缺失值而不解决表示不一致时，用户可通过替代连接路径绕过，实际收益很小。",
+    "mechanism_claim_cn": "数据质量缺陷会增加用户提交错误/额外查询的次数和时间；solution path分析显示D_A的DQ相关错误远高于D_B/D_C，且用户会选择更容易的连接路径（如作者姓名）来规避质量问题。",
+    "boundary_claim_cn": "质量影响不是绝对的：它取决于任务是否存在替代连接方式、用户先前的任务经验（学习效应）、先前任务难度（疲劳/传播）、用户SQL能力、剩余时间和样本量。",
+    "reusable_design_knowledge_cn": "测量数据质量影响时应使用成本式指标（能力、时间、尝试次数）而非只依赖规则式百分比；应设计真实任务集、加入随机化和协变量；应通过solution path分析识别哪些错误由质量造成；在解读结果时要对学习效应、传播效应和选择偏差做边界检验。",
+    "theoretical_contribution_cn": "将fitness-for-use和成本式数据质量框架从形式理论推进到实证操作化，展示其结果与规则式测量互补，并识别了质量影响的情境调节因素，从而丰富了对数据质量影响机制的理解。",
+    "how_discussion_closes_intro_gap_cn": "引言认为规则式测量不能反映实际影响；讨论用任务1说明规则式完整性/一致性百分比会高估补全缺失值的好处，又用任务3/5说明成本式结果能识别真正高回报的质量改进，如结构化标识符；结论由此声称成本式分析能直接为投资决策提供成本和收益信息，从而闭合“规则式结果不辅助经济决策”的缺口。",
+    "overclaim_or_unsupported_leaps_cn": "学习效应和传播效应主要从查询计数模式推断，而非直接操纵或测量心理状态；任务4的非显著差异被归因于参与者能力选择，但只做了间接描述性证据；solution path分析是人工编码，存在主观性，没有报告编码可靠性；任务6的结论基于很少的参与者，作者也承认功效不足。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数据质量对企业重要，需要合适的分析工具。",
+      "rhetorical_function_cn": "建立实务背景并引出分析工具议题。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为批评现有工具做铺垫。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3-S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "规则式系统测量存在，但结果不反映真实可用性影响，不适合经济决策。",
+      "rhetorical_function_cn": "指出既有方案的根本不足。",
+      "depends_on_cn": "背景",
+      "sets_up_cn": "引出替代的成本式方法。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5-S7",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文实际实施并评估基于成本的数据质量分析，从fitness-for-use出发。",
+      "rhetorical_function_cn": "宣布研究目标。",
+      "depends_on_cn": "既有方案的不足",
+      "sets_up_cn": "引出实验内容。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1-S6",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用218名志愿者在三个数据库上解决SQL任务，测量解决问题能力、时间和尝试次数。",
+      "rhetorical_function_cn": "概览研究设计。",
+      "depends_on_cn": "目标声明",
+      "sets_up_cn": "为结果做铺垫。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P2 S7-S8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "结果显示与规则式预期不同，时间最多降低65%，效应量达0.43。",
+      "rhetorical_function_cn": "提前给出核心结果。",
+      "depends_on_cn": "实验方法",
+      "sets_up_cn": "让读者预期成本式方法的增量价值。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "巨量数据影响业务流程，数据驱动决策，数据质量直接影响决策质量。",
+      "rhetorical_function_cn": "建立宏观背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "论证数据质量研究的必要性。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P1 S4-S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "现实中数据质量低，Gartner估计每组织每年因低质量数据损失1500万美元，因此研究受关注。",
+      "rhetorical_function_cn": "制造现实紧迫性。",
+      "depends_on_cn": "宏观背景",
+      "sets_up_cn": "为测量方法改进提供动机。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P2 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "数据质量是多维概念，主流测量用预定义规则判断，给出序数质量等级。",
+      "rhetorical_function_cn": "刻画主流范式。",
+      "depends_on_cn": "背景",
+      "sets_up_cn": "后续批判其三大缺点。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P2 S4-S7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "规则式测量只能比较不能量化差异，结果无法帮助管理者判断是否投资。",
+      "rhetorical_function_cn": "指出第一个缺陷：序数尺度和实际意义不明。",
+      "depends_on_cn": "主流范式描述",
+      "sets_up_cn": "引出对成本显性化的需求。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P2 S8-S9",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "Eppler和Helfert呼吁把低质量成本显性化，但后续研究集中于技术指标或效用理论，应用不清晰。",
+      "rhetorical_function_cn": "用权威文献和现状说明缺口持续存在。",
+      "depends_on_cn": "前面缺点",
+      "sets_up_cn": "突出成本式框架的潜力。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S10-S12",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "规则式测量把质量当作纯内在属性，但质量取决于使用目的和上下文。",
+      "rhetorical_function_cn": "指出第二个缺陷：脱离用途。",
+      "depends_on_cn": "主流范式",
+      "sets_up_cn": "引入context-aware的fitness-for-use。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S13-S14",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "规则式评价需要人判断，主观且不同工具间可靠性低。",
+      "rhetorical_function_cn": "指出第三个缺陷：主观性。",
+      "depends_on_cn": "主流范式",
+      "sets_up_cn": "需要不依赖主观评分的测量。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P3 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "fitness-for-use源自Juran，指数据在给定情境中服务用途的合适程度，但一直难以实践。",
+      "rhetorical_function_cn": "引入替代理论视角。",
+      "depends_on_cn": "规则式不足",
+      "sets_up_cn": "介绍形式化框架。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P3 S4-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "最近有人提出形式化fitness-for-use的框架，超越序数尺度和主观评价，用求解任务的成本分析质量。",
+      "rhetorical_function_cn": "概括理论资源。",
+      "depends_on_cn": "fitness-for-use",
+      "sets_up_cn": "指出其未被应用。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P3 S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "据作者所知，还没有研究调查这种成本式框架的实际可用性。",
+      "rhetorical_function_cn": "明确文献缺口。",
+      "depends_on_cn": "理论资源",
+      "sets_up_cn": "将本文定位为首次应用。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P3 S7-S9",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文在科学与数据集完整性和一致性用例中应用成本式分析，描述实际实现并展示与规则式结果互补。",
+      "rhetorical_function_cn": "宣告目标与贡献类型。",
+      "depends_on_cn": "缺口",
+      "sets_up_cn": "需要选择具体用例。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "实践中整合多个相互指涉的数据集很困难，例如PubMed、ORCID和GRID存在缺失和不同表示。",
+      "rhetorical_function_cn": "描述经验现象，使抽象缺口具象化。",
+      "depends_on_cn": "目标",
+      "sets_up_cn": "选择该用例。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P4 S3-S5",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "2011年调查显示63%金融机构提到不一致和数据源多样性是主要挑战，因此完整性和一致性是合适用例。",
+      "rhetorical_function_cn": "用行业数据论证用例代表性。",
+      "depends_on_cn": "现象",
+      "sets_up_cn": "为实验设计提供合理性。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P4 S6-S9",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "一组使用原始集成库，两组使用质量改进后的数据库，所有任务都需至少合并两个数据集。",
+      "rhetorical_function_cn": "预告实验结构。",
+      "depends_on_cn": "用例论证",
+      "sets_up_cn": "为第三、四节衔接。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P4 S10-S12",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "主要贡献是首个实用成本式分析、量化质量改进对可用性的影响，以及发现上下文因素。",
+      "rhetorical_function_cn": "提前声明贡献。",
+      "depends_on_cn": "全文设置",
+      "sets_up_cn": "读者预期。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P5",
+      "move_code": "OTHER",
+      "paraphrase_cn": "预告剩余结构：相关工作、方法、结果、讨论、结论。",
+      "rhetorical_function_cn": "路标。",
+      "depends_on_cn": "全文计划",
+      "sets_up_cn": "章节阅读地图。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 22,
+      "section": "Section 2.1",
+      "locator": "paragraph 1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "完整性定义为数据不缺失且覆盖任务所需广度和深度；本文在封闭世界假设下把完整性视为缺失值缺失。",
+      "rhetorical_function_cn": "界定研究对象。",
+      "depends_on_cn": "引言多维概念",
+      "sets_up_cn": "后续质量表构建。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 23,
+      "section": "Section 2.1",
+      "locator": "paragraph 2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "表示一致性定义为数据总是以相同格式呈现；几乎没有专门测量研究。",
+      "rhetorical_function_cn": "界定第二个维度并指出空白。",
+      "depends_on_cn": "多维概念",
+      "sets_up_cn": "把一致性纳入本文分析。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 24,
+      "section": "Section 2.2",
+      "locator": "paragraph 1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Eppler和Helfert把数据质量成本分为低质量导致的成本和改善/保证成本，并推论存在理论最优质量水平。",
+      "rhetorical_function_cn": "介绍成本分类理论。",
+      "depends_on_cn": "数据质量重要性",
+      "sets_up_cn": "指出其缺少实证。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 25,
+      "section": "Section 2.2",
+      "locator": "paragraph 1 end",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "Haug等在此基础上建立了最优维护模型，但这些研究基于其他领域观察而非实证。",
+      "rhetorical_function_cn": "批判成本理论的证据基础。",
+      "depends_on_cn": "成本分类模型",
+      "sets_up_cn": "说明需要经验实验。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 26,
+      "section": "Section 2.2",
+      "locator": "paragraph 2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "实证研究包括Borek的主观风险模型、Hazen的军事纵向调查、Samitsch的产量决策实验，但均有主观性、小样本或未控制能力的问题。",
+      "rhetorical_function_cn": "总结已有实证并批判其局限。",
+      "depends_on_cn": "文献综述",
+      "sets_up_cn": "说明本文在证据质量上的提升。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 27,
+      "section": "Section 2.2",
+      "locator": "paragraph 3",
+      "move_code": "GAP",
+      "paraphrase_cn": "fitness-for-use实践很少，现有DQ-aware系统仍依赖规则式度量，成本式框架只在理论上被提出，未用于真实质量影响评估。",
+      "rhetorical_function_cn": "再次收窄文献缺口。",
+      "depends_on_cn": "前两段",
+      "sets_up_cn": "本文的独特定位。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 28,
+      "section": "Section 3.1",
+      "locator": "paragraph 1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "PubMed、ORCID、GRID部分重叠，可产生协同，但现实中因标识符缺失或非结构化表示而难以组合。",
+      "rhetorical_function_cn": "描述具体用例。",
+      "depends_on_cn": "引言用例",
+      "sets_up_cn": "任务设计。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 29,
+      "section": "Section 3.1",
+      "locator": "paragraph 2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "需要定义合适上下文，于是设计六项至少涉及两个数据集、覆盖不同方面的任务。",
+      "rhetorical_function_cn": "把fitness-for-use转化为任务需求。",
+      "depends_on_cn": "用例",
+      "sets_up_cn": "数据库构建和实验。",
+      "evidence_pointer": "Section 3.1, Table 1"
+    },
+    {
+      "order": 30,
+      "section": "Section 3.2.1",
+      "locator": "paragraph 1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "D_A由下载数据转换得到，只存任务相关属性和记录；PubMed限定microbiome且2018年后的文章，共31,128篇。",
+      "rhetorical_function_cn": "说明初始数据库构建。",
+      "depends_on_cn": "任务需求",
+      "sets_up_cn": "为后续版本差异提供基线。",
+      "evidence_pointer": "Section 3.2.1"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.2.1",
+      "locator": "paragraph 2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过ORCID API下载关联作者，并下载完整GRID数据。",
+      "rhetorical_function_cn": "补充数据来源。",
+      "depends_on_cn": "D_A构建",
+      "sets_up_cn": "跨库连接。",
+      "evidence_pointer": "Section 3.2.1"
+    },
+    {
+      "order": 32,
+      "section": "Section 3.2.2",
+      "locator": "steps 1-4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "D_B从D_A合并姓名和机构相同的重复作者、通过字符串匹配补GRID ID、改善规范化；D_C再按相同ORCID ID合并作者。",
+      "rhetorical_function_cn": "定义质量改进动作。",
+      "depends_on_cn": "D_A",
+      "sets_up_cn": "质量差异是实验处理。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 33,
+      "section": "Section 3.2.2",
+      "locator": "paragraph after steps",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "这些动作可能引入极少量错误，但随机抽取100条新增值检查无一错误，因此改进有效。",
+      "rhetorical_function_cn": "验证制品操作的可信度。",
+      "depends_on_cn": "改进动作",
+      "sets_up_cn": "质量表可信。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 34,
+      "section": "Section 3.2.2",
+      "locator": "last paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "还小规模地标准化标识符表示，并替换缺失或替代标识符。",
+      "rhetorical_function_cn": "细化质量改进。",
+      "depends_on_cn": "结构动作",
+      "sets_up_cn": "Table 2的完整性/一致性数值。",
+      "evidence_pointer": "Section 3.2.2, Table 2"
+    },
+    {
+      "order": 35,
+      "section": "Section 3.2.2",
+      "locator": "Table 2前一段",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "针对每个任务相关属性给出完整性/一致性百分比；D_A和D_B大部分任务同时有两类问题。",
+      "rhetorical_function_cn": "建立规则式预期。",
+      "depends_on_cn": "数据库构建",
+      "sets_up_cn": "实验比较的基准。",
+      "evidence_pointer": "Section 3.2.2, Table 2"
+    },
+    {
+      "order": 36,
+      "section": "Section 3.3",
+      "locator": "paragraph 1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "采用近年提出的框架，用变换序列的最小成本定义任务完成难度，数据质量与最小成本成反比。",
+      "rhetorical_function_cn": "引入正式成本模型。",
+      "depends_on_cn": "引言缺口",
+      "sets_up_cn": "成本指标的选择依据。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 37,
+      "section": "Section 3.3",
+      "locator": "paragraph 2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "若任务不能直接完成，就必须使用带成本的数据变换；任务可无变换完成即代表完美质量。",
+      "rhetorical_function_cn": "解释成本概念的作用机制。",
+      "depends_on_cn": "理论框架",
+      "sets_up_cn": "把质量映射为实验成本。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 38,
+      "section": "Section 3.3",
+      "locator": "paragraph 3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "实验通过伦理批准，218名受试随机分配，用在线查询平台提交SQL并与模型解比对。",
+      "rhetorical_function_cn": "说明实验执行方式。",
+      "depends_on_cn": "成本模型",
+      "sets_up_cn": "数据记录和成本指标。",
+      "evidence_pointer": "Section 3.3, Fig. 2"
+    },
+    {
+      "order": 39,
+      "section": "Section 3.3",
+      "locator": "paragraph 4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择70分钟和三项成本指标以反映任务复杂度；所有受试几周前修过SQL课程并熟悉平台。",
+      "rhetorical_function_cn": "论证实验材料的可行性。",
+      "depends_on_cn": "实验设计",
+      "sets_up_cn": "统计检验。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 40,
+      "section": "Section 4.1",
+      "locator": "intro",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "结果部分先汇报能解决任务的参与者比例，再检验统计显著性，最后做查询内容定性分析。",
+      "rhetorical_function_cn": "设立结果叙述顺序。",
+      "depends_on_cn": "结果部分结构",
+      "sets_up_cn": "依次呈现Pcorrect、Tsolved、路径分析。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 41,
+      "section": "Section 4.1",
+      "locator": "关于模型的段落",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用二项逻辑回归预测能否解决，纳入Database、SQL能力、剩余时间，并检查回归假设。",
+      "rhetorical_function_cn": "解释统计模型选择。",
+      "depends_on_cn": "Pcorrect指标",
+      "sets_up_cn": "Table 4结果。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 42,
+      "section": "Section 4.1",
+      "locator": "results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "16次比较中Database显著11次，剩余时间显著12次，SQL能力显著4次。",
+      "rhetorical_function_cn": "报告Pcorrect的主要结果。",
+      "depends_on_cn": "回归模型",
+      "sets_up_cn": "揭示Database的影响。",
+      "evidence_pointer": "Section 4.1, Table 4"
+    },
+    {
+      "order": 43,
+      "section": "Section 4.2",
+      "locator": "intro",
+      "move_code": "RESULT",
+      "paraphrase_cn": "以Tsolved作为成本测量，只纳入能解决问题的参与者。",
+      "rhetorical_function_cn": "引入第二个成本指标。",
+      "depends_on_cn": "成本理论",
+      "sets_up_cn": "ANCOVA分析。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 44,
+      "section": "Section 4.2",
+      "locator": "results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "ANCOVA显示7/16次Database显著，最大效应量0.434；调节分析基本不显著，仅任务1 D_A-D_C中SQL能力有调节作用。",
+      "rhetorical_function_cn": "报告时间指标结果。",
+      "depends_on_cn": "ANCOVA模型",
+      "sets_up_cn": "说明效应并非只存在于特定子组。",
+      "evidence_pointer": "Section 4.2, Table 5"
+    },
+    {
+      "order": 45,
+      "section": "Section 4.3",
+      "locator": "intro",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "还需要看查询内容如何反映难度差异，因此引入solution path分析。",
+      "rhetorical_function_cn": "从统计结果转向机制归因。",
+      "depends_on_cn": "Tables 4-5结果",
+      "sets_up_cn": "错误编码和表6。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 46,
+      "section": "Section 4.3",
+      "locator": "method",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "人工检查所有错误查询，分类错误原因，对多错误等分计数，最终归为DQ相关或非相关。",
+      "rhetorical_function_cn": "定义路径分析的编码逻辑。",
+      "depends_on_cn": "查询日志",
+      "sets_up_cn": "Table 6结果。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 47,
+      "section": "Section 4.3",
+      "locator": "result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "D_A上DQ相关查询远高于D_B/D_C，D_C多数任务接近零；任务1到任务2的DQ相关查询大幅下降。",
+      "rhetorical_function_cn": "提供机制证据。",
+      "depends_on_cn": "编码结果",
+      "sets_up_cn": "讨论学习效应。",
+      "evidence_pointer": "Section 4.3, Table 6"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.1",
+      "locator": "第一段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "以任务1为例，替换不同表示ORCID ID使时间降低30%、查询数减少50%。",
+      "rhetorical_function_cn": "展示成本式结果的直接管理用途。",
+      "depends_on_cn": "成本指标",
+      "sets_up_cn": "5.2的复杂性。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.2",
+      "locator": "正文",
+      "move_code": "RESULT",
+      "paraphrase_cn": "任务1中D_A和D_B无显著差异，因为用户主要选择作者姓名连接，所以填充缺失但在不一致时收益有限。",
+      "rhetorical_function_cn": "给出反直觉结果并解释。",
+      "depends_on_cn": "Tables 3-6",
+      "sets_up_cn": "论证规则式测量可能高估影响。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 50,
+      "section": "Section 5.3",
+      "locator": "正文",
+      "move_code": "RESULT",
+      "paraphrase_cn": "任务3中引入GRID ID使完成率从8%到73%、时间减少60%，DQ相关查询从19降到2。",
+      "rhetorical_function_cn": "给出结构化标识符价值的强证据。",
+      "depends_on_cn": "Tables 3-6",
+      "sets_up_cn": "设计知识：结构化标识符。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 51,
+      "section": "Section 5.4",
+      "locator": "正文",
+      "move_code": "RESULT",
+      "paraphrase_cn": "任务6中一个统一正确标识符优于两个互补但交替使用的标识符；D_B与D_C差异显著，D_A无人解决。",
+      "rhetorical_function_cn": "深化标识符设计知识。",
+      "depends_on_cn": "Tables 3-5",
+      "sets_up_cn": "标识符单一化原则。",
+      "evidence_pointer": "Section 5.4"
+    },
+    {
+      "order": 52,
+      "section": "Section 5.5",
+      "locator": "正文",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "任务2表现提示学习效应：用户在经历任务1后知道数据不完美并调整策略，DQ相关查询大幅下降。",
+      "rhetorical_function_cn": "指出用户适应性边界。",
+      "depends_on_cn": "Table 6",
+      "sets_up_cn": "对ROI计算的警示。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 53,
+      "section": "Section 5.6",
+      "locator": "正文",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "D_B和D_C在任务3/5数据相同但任务5完成率仍显著不同，说明先前任务难度和疲劳可传播到后续任务。",
+      "rhetorical_function_cn": "指出质量影响传播。",
+      "depends_on_cn": "Tables 3-4",
+      "sets_up_cn": "需要情境化评估。",
+      "evidence_pointer": "Section 5.6"
+    },
+    {
+      "order": 54,
+      "section": "Section 5.7",
+      "locator": "5.7.1-5.7.3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "剩余时间、SQL能力和样本量均会影响成本估计；任务6样本不足限制结论。",
+      "rhetorical_function_cn": "做稳健性和边界检验。",
+      "depends_on_cn": "所有结果",
+      "sets_up_cn": "结论中的谨慎表述。",
+      "evidence_pointer": "Section 5.7"
+    },
+    {
+      "order": 55,
+      "section": "Conclusion",
+      "locator": "第一段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文提出从fitness-for-use视角以任务求解复杂度分析质量，并通过实验实施；证实并量化了质量改进的收益。",
+      "rhetorical_function_cn": "回扣引言的目标。",
+      "depends_on_cn": "全文结果",
+      "sets_up_cn": "管理启示。",
+      "evidence_pointer": "Conclusion P1"
+    },
+    {
+      "order": 56,
+      "section": "Conclusion",
+      "locator": "第二段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "首个用成本式原则建立数据质量与实际影响联系的工作，为管理者提供投资决策信息，并警示规则式测量可能误导。",
+      "rhetorical_function_cn": "强化贡献并闭合引言缺口。",
+      "depends_on_cn": "讨论中的例子",
+      "sets_up_cn": "未来研究。",
+      "evidence_pointer": "Conclusion P2"
+    },
+    {
+      "order": 57,
+      "section": "Conclusion",
+      "locator": "第三段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "这是初步印象，需其他用例验证、研究心理效应、克服偏差、扩展到其他质量维度。",
+      "rhetorical_function_cn": "设置边界和开放议题。",
+      "depends_on_cn": "贡献声明",
+      "sets_up_cn": "后续研究议程。",
+      "evidence_pointer": "Conclusion P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先从规则式测量的三个缺点（序数、与用途脱节、主观）出发，再引出fitness-for-use作为替代，并指出现有成本式框架从未被实际应用，从而制造缺口。",
+    "signposting_cn": "在引言末用编号贡献+章节路标；在每个结果子节开头说明分析对象；讨论中用5.1-5.7小标题逐条给出insight。",
+    "transition_logic_cn": "从规则式不足→成本理论→用例选择→数据库构建→实验→成本指标→路径归因→偏差边界→结论；每一节末尾都预留下一节需要解决的问题。",
+    "claim_evidence_rhythm_cn": "先报告统计显著性，再用具体任务解释，最后用effect size和路径数据支撑；对不显著结果也解释可能机制，防止读者误读。",
+    "benchmark_narrative_cn": "规则式质量表不是作为正式baseline模型，而是作为“预期”；成本结果用以说明预期可能错误；solution path作为归因benchmark。",
+    "theory_return_cn": "讨论的5.2-5.6每个finding都与fitness-for-use/上下文依赖理论挂钩；5.7反思方法偏差；结论回到理论：成本式视角可补充规则式框架。",
+    "contribution_positioning_cn": "将贡献定位为首次实际应用、对管理决策的直接帮助、以及对规则式测量的警示，避免被当成纯算法性能。",
+    "novelty_protection_cn": "通过展示规则式百分比与实际影响不一致、识别学习效应和传播效应，说明成本式分析提供了额外的、质的不同信息，而不是一次性性能结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "论证主导测量方法/制品的不足，并引入替代视角。",
+        "research_job_cn": "系统梳理现有方法的尺度、使用情境和主观性缺陷。",
+        "required_evidence_cn": "需要文献或行业数据证明现有方法无法回答某一类决策问题。",
+        "transition_to_next_cn": "从替代视角引出一种尚未被实际应用的理论框架。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "选择一个真实、可信的用例，并设计代表性任务集。",
+        "research_job_cn": "构造能触发目标质量问题的具体操作场景。",
+        "required_evidence_cn": "任务需要覆盖真实用户的操作类型，并依赖待测质量维度。",
+        "transition_to_next_cn": "任务集决定数据制品需要支持的查询。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述数据制品的多个版本，并用规则式指标量化差异。",
+        "research_job_cn": "构建基线版本和一个或多个质量改善版本，保留可追溯的处理动作。",
+        "required_evidence_cn": "质量差异应被量化（如完整性/一致性百分比），并检查处理动作的准确性。",
+        "transition_to_next_cn": "质量差异构成实验的处理变量。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计并实施随机实验，测量成本类指标。",
+        "research_job_cn": "随机分配受试，记录时间、能力、尝试次数，并纳入协变量。",
+        "required_evidence_cn": "需要客观日志、足够样本量、随机分配和对混淆变量的控制。",
+        "transition_to_next_cn": "如果只报告总体差异，还缺少对差异来源的机制解释。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "增加一条“过程证据”通道，把统计差异归因于目标构念。",
+        "research_job_cn": "对日志/中间产物进行定性编码，区分由质量问题导致的错误与其他错误。",
+        "required_evidence_cn": "编码规则清晰，能展示不同处理组的过程差异。",
+        "transition_to_next_cn": "需要检查结果是否受参与者特征、学习、疲劳或样本量影响。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "讨论偏差和边界条件，并给出可复用的设计知识。",
+        "research_job_cn": "做调节分析、子组分析、功效讨论，明确结论成立的范围。",
+        "required_evidence_cn": "需要能排除替代解释或至少承认无法排除的局限性。",
+        "transition_to_next_cn": "最后回扣引言缺口，声明贡献和未来研究。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用规则式指标建立预期，再用成本式实验展示不一致",
+      "引入solution path analysis作为机制证据",
+      "对每个非显著性结果都给出可检验的机制解释",
+      "把协变量和偏差检验写为讨论小节以保护结论边界"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要真实数据集和人工数据库构建",
+      "需要大量受试（218人）和在线查询平台",
+      "人工solution path编码耗时",
+      "伦理审批和知情同意流程"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只宣称“成本视角”而不设计真实任务",
+      "不要用学生样本却声称企业决策可直接推广",
+      "不要用规则式百分比当作成本式结果",
+      "不要在样本量不足时做强结论"
+    ],
+    "single_best_description_of_the_routine_cn": "用规则式指标构造预期、用跨库真实任务和三个质量递增数据库制造对照、用随机实验测成本、用查询路径归因、用偏差讨论限定边界。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "OCR/复制的表格中有少量残缺字符（例如Table 6表头、Table 5中的符号），但不影响结构和主要数值；未获取OSF附录，无法核验知情同意、SQL平台等补充材料；由于文本未提供出版社页码，位置标注以章节、段落和表/图编号为准。",
+  "usage": {
+    "prompt_tokens": 23087,
+    "completion_tokens": 32371,
+    "total_tokens": 55458,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 19759
+  }
+}

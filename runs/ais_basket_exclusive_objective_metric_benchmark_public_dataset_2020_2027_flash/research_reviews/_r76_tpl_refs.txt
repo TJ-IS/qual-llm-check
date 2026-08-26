@@ -1,0 +1,26 @@
+### RADAR | refs chars=39772 | 全角冒号=0 半角冒号=107 引号=24 破折号=0
+   colon-title: Detecting fake websites: The contribution of statistical learning theory.
+   colon-title: Creating proactive cyber threat intelligence with hacker exploit labels: A deep transfer learning approach.
+   colon-title: Ninth annual cost of cybercrime study: Unlocking the value of improved cybersecurity protection.
+   colon-title: Seeing the forest and the trees: A meta-analysis of the antecedents to information security policy compliance.
+   quoted-title: “Action Reparameterization.”
+   quoted-title: "mineru-algorithm"
+   quoted-title: "white-space: pre-wrap; font-family:monospace;"
+### ARText | refs chars=12157 | 全角冒号=0 半角冒号=38 引号=2 破折号=1
+   colon-title: Springer International Publishing, Cham,: New York, NY, 2018, pp.
+   colon-title: Induction over strategic agents: A genetic algorithm solution.
+   colon-title: When the machine meets the expert: An ethnography of developing AI for hiring.
+   colon-title: In 2017 IEEE Symposium on Security and Privacy (SP), IEEE: San Jose, CA, 2017, pp.
+   quoted-title: “Mariam”
+### DSDL | refs chars=14688 | 全角冒号=0 半角冒号=100 引号=0 破折号=0
+   colon-title: References
+
+Adadi A, Berrada M (2018) Peeking inside the black-box: A survey on explainable artificial intelligence (XAI
+   colon-title: IEEE Access 6:52138–52160.
+   colon-title: Management 25(4):85–101.
+   colon-title: Azad MA, Alazab M, Riaz F, Arshad J, Abullah T (2020) Socioscope: I know who you are, a robo, human caller or service nu
+### ACAA | refs chars=15413 | 全角冒号=0 半角冒号=102 引号=0 破折号=0
+   colon-title: Preprint, submitted Sep tember 1, https://arxiv.
+   colon-title: Berger J, Sorensen AT, Rasmussen SJ (2010) Positive effects of negative publicity: When negative reviews increase sales.
+   colon-title: Preprint, submitted April 5, https:// arxiv.
+   colon-title: Management 54(2):228–240.

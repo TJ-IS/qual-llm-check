@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-77951748838"
+title: "A two-process view of trust and distrust building in recommendation agents: A process-tracing study"
+authors: "Komiak S.Y.X.; Benbasat I."
+year: "2008"
+journal: "Journal of the Association for Information Systems"
+doi: "10.17705/1jais.00180"
+---
+# Scopus title-abstract-keyword metadata
+Title: A two-process view of trust and distrust building in recommendation agents: A process-tracing study
+Abstract: Prior literature focuses on trust, while largely ignoring distrust, partly because of the assumption that an Information Technology (IT) design that builds trust in the IT will also prevent distrust-building. However, this assumption may not be true if trust-building processes and distrust-building processes in the context of IT usage are different. This paper proposes a two-process view of trust and distrust building, i.e., that trust-building and distrust-building processes are distinct and separate. In the context of recommendation agent (RA) usage in electronic commerce, a trust (distrust) process is defined as a customer’s favorable (unfavorable) interpretation of his or her interactions with an RA, resulting in a positive (negative) expectation that the RA can be relied upon for his or her shopping decisions. This study empirically tests a process theory rather than a variance theory. Variance theory research relies on logical arguments to explain and test the causality relationships among variables. Process theory research complements variance theory research by revealing and testing the mechanisms that constitute the processes by which certain variables influence others. In this processtracing study, we collected and analyzed the concurrent verbal protocols from 49 participants using two RAs. The results of our protocol analysis support the proposed two-process view. The pattern of trust-building processes in RA usage is systematically different from that of distrust-building processes, which may suggest that some RA features should be designed to increase trust, and others to decrease distrust. The findings also suggest that distrust deserves research attention on its own merit. In a complex relationship involving both trust building and distrust building, understanding both trust and distrust processes, rather than focusing on trust alone, can lead to a more accurate representation and improved management of that complex relationship. © 2008, by the Association for Information Systems.
+Author keywords: Distrust; Process tracing; Protocol analysis; Recommendation agents; Trust building
+Index keywords: Intelligent agents; Building process; Complex relationships; Distrust; Process theory; Process tracing; Process-view; Protocol analyze; Recommendation agents; Trust building; Trust building process; Buildings
+Document type: Article
+Conference: 
+Source title: Journal of the Association for Information Systems
+Year: 2008
+EID: 2-s2.0-77951748838
+DOI: 10.17705/1jais.00180
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

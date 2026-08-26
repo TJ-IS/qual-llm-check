@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-08-07T09:04:06.180443+00:00",
+  "analysis_version": "ais-basket-strict-fully-objective-2020-2027-flash-v2",
+  "stage": "stage3",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 100,
+  "prompt_fingerprint": "d2c07f352b782609937ffd55f1d2e5e877c7a6b7f65723d1c69ddc537558a4b8",
+  "eligible_inputs": 68,
+  "completed": 68,
+  "pending": 0,
+  "match_count": 3,
+  "nonmatch_count": 65,
+  "status_counts": {
+    "algorithm_or_model_only": 59,
+    "analytical_rule_or_method_only": 5,
+    "concept_or_future_design_only": 1,
+    "explicit_component_of_software_artifact": 2,
+    "explicit_software_artifact": 1
+  },
+  "core_role_counts": {},
+  "match_year_counts": {
+    "2020": 1,
+    "2021": 1,
+    "2024": 1
+  },
+  "match_journal_counts": {
+    "Decision Support Systems": 3
+  },
+  "usage": {
+    "prompt_tokens": 2139398,
+    "completion_tokens": 148028,
+    "total_tokens": 2287426,
+    "prompt_cache_hit_tokens": 21504,
+    "prompt_cache_miss_tokens": 2117894
+  }
+}

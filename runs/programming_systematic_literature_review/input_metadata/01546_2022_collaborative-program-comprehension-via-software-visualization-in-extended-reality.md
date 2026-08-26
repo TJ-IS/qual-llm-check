@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85134783086"
+title: "Collaborative program comprehension via software visualization in extended reality"
+authors: "Krause-Glau A.; Hansen M.; Hasselbring W."
+year: "2022"
+journal: "Information and Software Technology"
+doi: "10.1016/j.infsof.2022.107007"
+---
+# Scopus title-abstract-keyword metadata
+Title: Collaborative program comprehension via software visualization in extended reality
+Abstract: Context: In software visualization research, various approaches strive to create immersive environments by employing extended reality devices. In that context, only few research has been conducted on the effect of collaborative, i.e., multi-user, extended reality environments. Objective: We present our journey toward a web-based approach to enable (location-independent) collaborative program comprehension using desktop, virtual reality, and mobile augmented reality devices. Method: We designed and implemented three multi-user modes in our web-based live trace visualization tool ExplorViz. Users can employ desktop, mobile, and virtual reality devices to collaboratively explore software visualizations. We conducted two preliminary user studies in which subjects evaluated our VR and AR modes after solving common program comprehension tasks. Results: The VR and AR environments can be suitable for collaborative work in the context of program comprehension. The analyzed feedback revealed problems regarding the usability, e.g., readability of visualized entities and performance issues. Nonetheless, our approach can be seen as a blueprint for other researchers to replicate or build upon these modes and results. Conclusions: ExplorViz's multi-user modes are our approach to enable heterogeneous collaborative software visualizations. The preliminary results indicate the need for more research regarding effectiveness, usability, and acceptance. Unlike related work, we approach the latter by introducing a multi-user augmented reality environment for software visualizations based on off-the-shelf mobile devices. © 2022 The Author(s)
+Author keywords: Augmented reality; City metaphor; Extended reality; Program comprehension; Software visualization; Virtual reality
+Index keywords: Blueprints; Computer programming; Virtual reality; Visualization; Websites; City metaphor; Collaborative programs; Extended reality; Immersive environment; Multiusers; Program comprehension; Software visualization; User mode; Visualization research; Web-based approach; Augmented reality
+Document type: Article
+Conference: 
+Source title: Information and Software Technology
+Year: 2022
+EID: 2-s2.0-85134783086
+DOI: 10.1016/j.infsof.2022.107007
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

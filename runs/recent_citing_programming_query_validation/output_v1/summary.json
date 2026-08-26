@@ -1,0 +1,33 @@
+{
+  "updated_at": "2026-07-26T05:41:08.720675+00:00",
+  "analysis_version": "recent-citing-programming-abstract-screen-v1",
+  "prompt_fingerprint": "30a5c14bc59e1066e7e7606bdad83797383c43b393104e964132de16a07f8804",
+  "input_records": 176,
+  "completed": 176,
+  "pending": 0,
+  "screening_label_counts": {
+    "likely_direct": 30,
+    "not_direct": 143,
+    "possible_direct": 3
+  },
+  "candidate_actor_counts": {
+    "human_ai": 4,
+    "human_only": 27,
+    "unclear": 1,
+    "agent_only": 1
+  },
+  "candidate_action_counts": {
+    "generate": 3,
+    "write": 14,
+    "debug_or_repair": 7,
+    "understand": 17,
+    "test": 2,
+    "modify_or_refactor": 2,
+    "inspect_or_review": 5
+  },
+  "usage": {
+    "prompt_tokens": 222175,
+    "completion_tokens": 92100,
+    "total_tokens": 314275
+  }
+}

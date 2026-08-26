@@ -1,0 +1,1115 @@
+{
+  "record_id": "28568",
+  "source_file": "28568_2023_the-decoy-effect-and-recommendation-systems.md",
+  "title": "The Decoy Effect and Recommendation Systems",
+  "authors": "Nasim Mousavi; Panagiotis Adamopoulos; Jesse Bockstedt",
+  "year": "2023",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.1197",
+  "fulltext_chars": 110432,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:29.797668+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在推荐系统中，诱饵效应（decoy effect）是否以及如何改变用户对目标商品和整体推荐集合的需求，尤其是个性化推荐与非个性化推荐这两种情境下是否存在不同表现？",
+    "artifact_and_design_cn": "作者构建了一个电影推荐实验平台：个性化推荐使用SVD协同过滤预测评分，非个性化推荐使用MovieTweetings数据库中的平均评分/流行度；每位用户面对包含5部电影的推荐列表，列表按评分降序排列，在有诱饵条件下将一个同类型但低评分的电影放置在第二位作为诱饵，并设置目标项、竞争项、诱饵以及无选择选项；实验采用四条件（个性化/非个性化 × 有/无诱饵）的受试者内设计，辅以受试者间分析、AMT复制和多个附加实验。",
+    "objective_outcomes_cn": "非个性化推荐中加入诱饵显著提高目标电影选择概率（实验室：0.25→0.31，模型估计0.33→0.45）；个性化推荐中加入诱饵显著降低目标电影选择概率（实验室：0.34→0.20，模型估计0.51→0.25）并显著提高无选择选项概率（0.05→0.16）；感知推荐质量和系统可靠性在个性化条件下下降更严重。",
+    "core_contribution_cn": "首次将诱饵效应引入推荐系统情境，证明诱饵效应不是普适有利于推荐系统：在非个性化推荐中沿用传统诱饵效应，但在个性化推荐中发生反转，诱饵会降低目标项需求并增加无选择倾向；机制是低适配诱饵破坏了用户对个性化系统可靠性和信息质量的期望；同时强调了推荐集合的组成应被视为整体而非独立项目来设计。",
+    "whole_argument_in_one_paragraph_cn": "作者从电商选择过载和推荐系统局限出发，指出推荐系统通常给出太多高相似高吸引力选项，而决策科学中的诱饵效应可以在传统选择环境中通过增加一个非对称支配选项来引导用户选择目标项。然而，现有文献没有在推荐系统情境中检验诱饵效应，而推荐情境中用户对信息可靠性和个性化匹配有特殊期待，因此诱饵可能有益也可能有害。作者用说服理论（来源可信度、内容质量、匹配度）作为理论透镜，认为个性化推荐中用户对系统可靠性和内容匹配有更高期望，加入低匹配诱饵会引发负面期望不一致，导致传统诱饵效应反转；非个性化推荐中系统只是重复其他消费者的质量信息，诱饵仍可能产生传统效应。作者用632名商学院学生的受试者内实验验证两个假设，用固定效应logit、multinomial logit发现非个性化中诱饵提升目标项选择，个性化中诱饵降低目标项选择并提升无选择选项；随后通过感知推荐吸引力和系统可靠性问卷检验机制，通过AMT复制验证推广性，通过受试者间分析、控制电影质量、前后端质量/匹配分离实验和诱饵显著性实验排除替代解释并界定边界条件。最终在讨论中回到初始缺口：诱饵在推荐系统中并非普遍有效，推荐情境与个性化情境需要区别对待，系统设计应关注推荐集合整体而非单个项目。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "文章的核心不是提出新算法或新系统架构，而是以说服理论及诱饵效应文献为基础，推导出个性化/非个性化推荐情境下诱饵效应会呈现不同方向的假设，然后通过构建实验平台和随机化受试者行为实验对这些理论假设进行检验；所谓“制品”是带有诱饵/无诱饵的个性化与非个性化推荐界面/选择集合，理论提前决定了要比较的设计差异。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章遵循从实践问题（选择过载/推荐系统局限）到理论（诱饵效应、说服理论），再到实验设计（四条件平台），到检验（lab实验、复制、稳健性），最后回到理论和设计启示的完整闭环；讨论部分重新连接引言中提出的推荐情境期望差异问题，并把结果上升为推荐集合整体设计知识。",
+  "research_program": {
+    "study_or_phase_count": 9,
+    "overall_sequence_cn": "研究先构建实验平台和推荐集合生成方式（阶段1），再执行主实验室实验（阶段2），对主实验数据进行操纵检验和选择模型分析（阶段3），用问卷感知指标检验机制（阶段4），用AMT复验推广性（阶段5），用主实验第一轮数据做受试者间分析（阶段6），再通过三个附加实验分别排除电影质量的替代解释（阶段7）、在前端同时展示质量与匹配度以区分两者作用（阶段8）、以及验证诱饵显著性依赖匹配度而非质量（阶段9）。各个阶段从建立现象、验证主效应，到机制解释、排除混淆、界定边界，逐步累积证据。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "实验平台与推荐集合设计阶段",
+        "question_cn": "如何构造可控的个性化/非个性化推荐，并让诱饵在两种情境中都可被用户识别且形成非对称支配？",
+        "inputs_and_setting_cn": "MovieTweetings数据库（2018版，4079部2000-2018年电影），被试需先对100部热门电影中至少20部打分以种子化推荐系统；平台展示电影海报、简介、预测分/平均分和YouTube预告片。",
+        "designed_or_compared_object_cn": "推荐生成器：个性化用SVD协同过滤，非个性化用聚合平均评分/流行度；诱饵定义为与目标项同类型、预测分/平均分较低、放在列表第二位、故意让评分显眼。",
+        "baseline_control_or_counterfactual_cn": "无诱饵版本；非个性化条件作为常规选择情境的基线。",
+        "objective_metrics": [
+          "SVD在测试集上的预测误差（预告选择依据）",
+          "用户感知个性化操纵检验得分",
+          "用户感知诱饵存在/适配性得分"
+        ],
+        "analysis_method_cn": "算法比较选择；操纵检查的固定效应模型。",
+        "main_result_cn": "SVD预测误差最低，被选为个性化算法；诱饵能显著降低用户感知适配性，操纵成功。",
+        "argumentative_role_cn": "为后续因果推断提供可控的推荐系统环境，保证个性化与非个性化、诱饵与无诱饵差异可归因于处理。",
+        "remaining_uncertainty_cn": "平台自建可能削弱外部效度；算法选择是否会影响用户对诱饵的反应尚不清楚。",
+        "link_to_next_phase_cn": "直接将四条件设计交付给主实验，由后续行为数据检验假设。",
+        "evidence_pointers": [
+          "Section 4.1-4.2",
+          "Table C1 in online appendix",
+          "Figures B1-B8 in online appendix"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "主实验室随机对照实验",
+        "question_cn": "在个性化与非个性化推荐中，诱饵是否分别导致传统方向和反转方向的效应？",
+        "inputs_and_setting_cn": "632名美国商学院本科生，年龄17-25岁，348名女性；受试者内设计，四条件顺序随机但个性化两条件捆绑、非个性化两条件捆绑。",
+        "designed_or_compared_object_cn": "2×2设计：个性化/非个性化 × 有诱饵/无诱饵；推荐列表含5部电影，诱饵置于第二位，之后询问用户最想看的电影并给出无选择选项。",
+        "baseline_control_or_counterfactual_cn": "无诱饵的个性化和非个性化条件；非个性化条件被视为传统诱饵效应的参照。",
+        "objective_metrics": [
+          "目标项选择概率",
+          "无选择选项选择概率",
+          "全部选项的选择份额分布"
+        ],
+        "analysis_method_cn": "模型无关描述统计；固定效应logit（用户固定效应、session哑变量、聚类标准误）；multinomial logit。",
+        "main_result_cn": "非个性化中诱饵使目标项选择概率从0.25增至0.31；个性化中诱饵使目标项从0.34降至0.20，无选择从0.05升至0.16。",
+        "argumentative_role_cn": "直接检验两个假设，是全文核心因果证据。",
+        "remaining_uncertainty_cn": "受试者内设计可能有顺序/疲劳效应；单一学生样本可能不具普遍代表性；电影是体验品，推广性未知。",
+        "link_to_next_phase_cn": "主效应确立后需要解释机制并检验稳健性，因此引入感知问卷、AMT复制和边界条件实验。",
+        "evidence_pointers": [
+          "Section 4 and 5.2",
+          "Figure 4",
+          "Tables 3-5"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "操纵检验与选择模型分析阶段",
+        "question_cn": "主实验中的效应在statistically上是否显著？个性化调节是否显著改变诱饵方向和大小？",
+        "inputs_and_setting_cn": "主实验全部2,528个条件-用户观测；操纵检验使用1-7点Likert题；目标项和无选择项作为因变量。",
+        "designed_or_compared_object_cn": "Decoy、Personalized及Decoy×Personalized交互项；固定效应logit模型；multinomial logit以目标项为基准。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件；非个性化×无诱饵作为参照单元。",
+        "objective_metrics": [
+          "目标项选择",
+          "无选择项选择",
+          "各选项相对目标项的选择比"
+        ],
+        "analysis_method_cn": "固定效应logit、随机效应logit（稳健性）、multinomial logit、AIC/似然比较。",
+        "main_result_cn": "操纵检查成功；目标项模型中Decoy×Personalization系数为-1.005（p<0.001）；无选择模型中交互系数为1.544（p<0.001）；multinomial logit显示无选择选项相对变化最大。",
+        "argumentative_role_cn": "把描述性模型证据转化为统计推断，支撑两个假设并量化效应大小。",
+        "remaining_uncertainty_cn": "交互作用虽然显著，但没有同时检验中介效应；只能说明行为结果与理论预期方向一致。",
+        "link_to_next_phase_cn": "需要进一步回答为什么反转发生，从而进入机制测试。",
+        "evidence_pointers": [
+          "Tables 1-5",
+          "Figures 5-6",
+          "Section 5.3-5.6"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "机制测试阶段（感知质量与感知可靠性）",
+        "question_cn": "诱饵是否通过降低用户对推荐质量和系统可靠性的感知来驱动行为变化？",
+        "inputs_and_setting_cn": "主实验每条件结束后两道Likert问题：系统能识别好电影、我依赖系统选择电影；以及条件内推荐吸引力/感知适配问题。",
+        "designed_or_compared_object_cn": "比较有诱饵与无诱饵条件下感知推荐吸引力和系统可靠性；Decoy×Personalization交互项。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件下的同题评分。",
+        "objective_metrics": [
+          "感知推荐吸引力评分",
+          "感知系统可靠性评分"
+        ],
+        "analysis_method_cn": "固定效应线性回归模型。",
+        "main_result_cn": "诱饵显著降低感知推荐吸引力（-0.556, p<0.001），且个性化中下降更大（交互-0.638, p<0.001）；诱饵显著降低系统感知可靠性（-0.673, p<0.001），个性化中下降更大（交互-0.815, p<0.001）。",
+        "argumentative_role_cn": "为“个性化期望不一致导致反转”提供过程证据，把行为结果与理论机制连接起来。",
+        "remaining_uncertainty_cn": "感知测量是事后报告，并非实时中介；没有正式做中介分析，因果链只是理论+相关性；未完全排除其他心理机制（如单纯对诱饵的反感）。",
+        "link_to_next_phase_cn": "仍需通过复制和排除混淆来保证机制不是样本或实验设计特有的人为产物。",
+        "evidence_pointers": [
+          "Section 6",
+          "Figures 7-8",
+          "Tables 6-7"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "AMT复制研究",
+        "question_cn": "实验室结果能否在人口背景更多样的在线被试中复现？",
+        "inputs_and_setting_cn": "Amazon Mechanical Turk，195名通过质量检查的参与者，年龄19-50岁，平均34岁，103名女性；用相同流程运行四条件实验并支付报酬。",
+        "designed_or_compared_object_cn": "与主实验相同的推荐系统、诱饵操作和选择任务。",
+        "baseline_control_or_counterfactual_cn": "无诱饵条件；实验室结果作为内部参照。",
+        "objective_metrics": [
+          "目标项选择概率",
+          "无选择选项选择概率"
+        ],
+        "analysis_method_cn": "描述性对比；与实验室数据进行图形和数值对比。",
+        "main_result_cn": "非个性化中诱饵使目标项选择从0.27升至0.29；个性化中从0.27降至0.22；个性化中无选择从0.06升至0.14，与实验室方向一致。",
+        "argumentative_role_cn": "证明主效应并非学生样本或实验室环境的人工产物，增强外部效度。",
+        "remaining_uncertainty_cn": "AMT样本仍非真实购买场景；效应幅度较实验室小；没有把AMT数据纳入统一统计模型，仅做描述性比较。",
+        "link_to_next_phase_cn": "外部效度初步确认后，需要排除实验设计层面（受试者内）和电影质量混淆。",
+        "evidence_pointers": [
+          "Section 7",
+          "Figures 9-10",
+          "Online Appendix Figures E1-E4"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "受试者间稳健性分析",
+        "question_cn": "受试者内设计中的顺序和对比效应会不会造成假象？如果只看每个用户的第一个条件，结果是否仍成立？",
+        "inputs_and_setting_cn": "主实验632名用户的第一个条件观测；控制变量包括RS熟悉度、年龄、性别、电影经验、母语等。",
+        "designed_or_compared_object_cn": "用第一轮数据模拟受试者间设计；Decoy×Personalization交互项。",
+        "baseline_control_or_counterfactual_cn": "第一个条件为无诱饵的组。",
+        "objective_metrics": [
+          "目标项选择",
+          "无选择选项选择"
+        ],
+        "analysis_method_cn": "logit回归，控制用户特征。",
+        "main_result_cn": "目标项模型中交互系数为-1.610（p<0.001），无选择模型中交互系数为2.489（p<0.05），方向与主分析一致，显著性因样本量下降而减弱。",
+        "argumentative_role_cn": "排除受试者内设计特有的顺序效应，证明结果对设计选择不敏感。",
+        "remaining_uncertainty_cn": "第一轮样本量小，效应量估计较不精确；控制变量可能不完整。",
+        "link_to_next_phase_cn": "接着需要处理电影质量与匹配混淆，因为个性化设置中诱饵的低预测分可能同时意味着低平均质量。",
+        "evidence_pointers": [
+          "Section 8.1",
+          "Tables 8-10"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "后端控制电影质量的附加实验",
+        "question_cn": "在个性化设置中真正驱动用户负面反应的是低适配（低预测分）还是低电影质量（低平均评分）？",
+        "inputs_and_setting_cn": "更新版MovieTweetings数据库（4,432部2000-2021电影），AMT 201名有效被试；三组：控制组（所有电影高适配高平均质量）、处理组I（诱饵高平均质量但低预测分）、处理组II（诱饵低平均质量且低预测分）；引入彩票增强激励兼容性。",
+        "designed_or_compared_object_cn": "在前端只展示个性化预测分；平均质量在后端控制但不展示给用户。",
+        "baseline_control_or_counterfactual_cn": "控制组无诱饵。",
+        "objective_metrics": [
+          "目标项选择",
+          "无选择选项选择"
+        ],
+        "analysis_method_cn": "logit回归，控制用户特征。",
+        "main_result_cn": "无论诱饵平均质量是高还是低，低预测分诱饵都显著提高无选择选项（处理组I β=1.320，p<0.05；处理组II β=1.636，p<0.05）并显著降低目标项选择。",
+        "argumentative_role_cn": "排除诱饵质量作为替代解释，将关键刺激属性锁定为低适配（预测分）。",
+        "remaining_uncertainty_cn": "用户没有看到平均评分，因此现实世界中同时呈现质量和预测分的情况下效应是否仍如此尚不清楚。",
+        "link_to_next_phase_cn": "下一步在前端同时展示质量和预测分，更接近真实平台。",
+        "evidence_pointers": [
+          "Section 8.2.2",
+          "Table 13"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "前端同时展示质量与匹配度的附加实验",
+        "question_cn": "当用户同时看到平均评分和个性化预测分时，诱饵效应是否仍然由低匹配而非低质量驱动？",
+        "inputs_and_setting_cn": "AMT 203名有效被试；四组：控制组（全部高质高匹配）、处理I（诱饵低质量高匹配）、处理II（诱饵高质量低匹配）、处理III（诱饵低质量低匹配）；前端同时展示平均评分和预测分；彩票激励。",
+        "designed_or_compared_object_cn": "诱饵的质量和匹配度在4个组中正交变化。",
+        "baseline_control_or_counterfactual_cn": "控制组无诱饵。",
+        "objective_metrics": [
+          "无选择选项选择",
+          "目标项选择"
+        ],
+        "analysis_method_cn": "logit回归，控制用户特征。",
+        "main_result_cn": "只有低匹配诱饵（处理II、III）显著提高无选择选项并降低目标项；低质量但高匹配的诱饵（处理I）不显著，说明用户更看重匹配度而非平均质量。",
+        "argumentative_role_cn": "进一步证明在个性化推荐中，低匹配本身才是诱发反转效应的关键，质量不是必要因素。",
+        "remaining_uncertainty_cn": "样本量较小导致部分系数只是边际显著；仍未在真实平台检验。",
+        "link_to_next_phase_cn": "还需验证诱饵显著性来源：是否因为预测分被显眼展示才产生反转效应。",
+        "evidence_pointers": [
+          "Section 8.2.3",
+          "Table 14"
+        ]
+      },
+      {
+        "order": 9,
+        "name_cn": "诱饵显著性附加实验",
+        "question_cn": "如果个性化推荐中诱饵的显著维度不是预测分而是平均评分，传统诱饵效应是否恢复？",
+        "inputs_and_setting_cn": "AMT 202名有效被试；个性化推荐仍按用户偏好生成，但前端只展示平均评分并标注为平均评分；控制组无诱饵，处理组诱饵为高匹配但低平均评分的电影。",
+        "designed_or_compared_object_cn": "诱饵的低属性通过平均质量来呈现，而不是预测分。",
+        "baseline_control_or_counterfactual_cn": "控制组无诱饵。",
+        "objective_metrics": [
+          "目标项选择",
+          "无选择选项选择"
+        ],
+        "analysis_method_cn": "logit回归，控制用户特征。",
+        "main_result_cn": "处理组目标项选择显著提高（β=0.651，p<0.05），无选择选项没有显著增加，即出现传统诱饵效应。",
+        "argumentative_role_cn": "证明反转效应依赖于诱饵在“匹配度”维度上被显著呈现；当诱饵只在质量维度上显著时，传统诱饵效应复现，从而强化对机制的信心。",
+        "remaining_uncertainty_cn": "该实验没有展示预测分，现实中许多个性化界面同时展示两类分数；诱饵维度显著性可能与界面设计交互。",
+        "link_to_next_phase_cn": "至此形成完整证据链：效应存在、机制为期望不一致、边界为个性化中的低匹配且匹配度可见时产生反转。",
+        "evidence_pointers": [
+          "Section 8.3",
+          "Table 15"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 界定研究对象为推荐系统中的诱饵效应",
+      "PRIOR_KNOWLEDGE: 综述既有诱饵效应在传统选择情境中稳定且正向",
+      "GAP: 指出推荐系统情境尚未检验诱饵效应",
+      "WHY_GAP_MATTERS: 推荐情境中用户对信息可靠性和质量期望不同，诱饵可能产生不同甚至负面效果",
+      "STUDY_OVERVIEW: 预告随机对照实验和说服理论透镜",
+      "RESULT: 给出个性化与非个性化推荐中诱饵效应方向截然相反的发现",
+      "CONTRIBUTION: 宣称对推荐系统设计和消费者决策理解有重要启示"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 从电商选择过载和推荐系统普遍使用切入",
+      "PRACTICAL_STAKES: 用54%放弃购买、70%转向竞争者、Netflix 80%观看量来自推荐等数据说明问题重要性",
+      "LIMITATION: 指出现有推荐系统常推荐太相似的高吸引力选项，导致决策瘫痪",
+      "GAP: 说明行为因素和推荐集合组成被忽视，诱饵效应未被引入推荐设置",
+      "WHY_GAP_MATTERS: 个性化推荐中的用户期望不同于传统选择环境，诱饵可能带来帮助也可能损害系统可信度",
+      "RQ_OR_OBJECTIVE: 连续提出两个研究问题：诱饵如何改变推荐情境中的需求，以及个性化/非个性化是否不同",
+      "STUDY_OVERVIEW: 预告四条件实验",
+      "RESULT: 提前报告主要发现的方向",
+      "MECHANISM: 用用户对个性化系统的期望解释结果",
+      "CONTRIBUTION: 声明首次研究、回答学者呼吁、提供实践指引"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 用相对判断、视觉错觉和餐厅选择例子建立“情境影响判断”",
+      "THEORY_PROPOSITION: 诱饵效应违反IIA，由Huber等人首次证明",
+      "MECHANISM: 诱饵与目标项可比较，创造非对称支配，使目标项成为清晰赢家",
+      "GAP: 既有诱饵研究均不在推荐设置中",
+      "PRIOR_KNOWLEDGE: Economist订阅实验展示经典诱饵效应",
+      "PRIOR_KNOWLEDGE: 推荐系统领域已有关于呈现格式、熟悉度、解释等情境因素研究",
+      "GAP: 仍无人将诱饵作为推荐集合组成因素检验",
+      "THEORY_INTRO: 引入说服理论，列出来源可信度、内容质量、匹配度作为决定说服力的因素",
+      "THEORY_PROPOSITION: 高可信来源和内容质量提升说服力，个人相关性强时用户更敏感",
+      "MECHANISM: 可信来源中的低匹配内容导致期望不一致和回旋镖效应",
+      "HYPOTHESIS_OR_PROPOSITION: 提出非个性化中诱饵推动目标项、个性化中诱饵远离目标项的两个假设"
+    ],
+    "artifact_design_moves": [
+      "STUDY_OVERVIEW: 介绍实验室实验和AMT复制的总体安排",
+      "DESIGN_FEATURE: 使用MovieTweetings，要求用户偏好打分以种子化个性化系统",
+      "DESIGN_FEATURE: 四条件受试者内设计，个性化两条件和非个性化两条件分别捆绑随机",
+      "DESIGN_FEATURE: 个性化用SVD，非个性化用平均评分/流行度",
+      "DESIGN_FEATURE: 诱饵与目标同类型、低预测/低平均评分、放在第二位、评分显眼",
+      "DESIGN_FEATURE: 推荐列表含5部电影并提供无选择选项",
+      "METHOD_JUSTIFICATION: 不随机化列表顺序以保证跨条件可比性，并让诱饵对比更明显"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 用操纵检验确认个性化感知和诱饵感知有效",
+      "RESULT: 报告模型无关证据，给出四条件选择概率",
+      "RESULT: 用固定效应logit估计目标项和无选择项的交互效应",
+      "RESULT: 用multinomial logit展示所有选项相对变化",
+      "RESULT: 机制测试显示诱饵降低感知吸引力和可靠性",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: AMT复制、受试者间分析、控制质量、前后端分离实验、显著性实验依次排除替代解释",
+      "CONTRIBUTION: 讨论部分把结果上升为设计知识"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 宣称是首个在推荐系统中探索诱饵效应的研究",
+      "BOUNDARY_CONDITION: 指出诱饵在非个性化中可用、但在个性化中慎用",
+      "PRACTICAL_STAKES: 用11%购买概率下降和Netflix收入推算强调经济损失",
+      "CONTRIBUTION: 强调推荐集合组成的重要性，指出当前推荐研究过于关注单一项目",
+      "BOUNDARY_CONDITION: 强调个性化情境中消费者期待系统不偏不倚、高匹配，混入其他内容需谨慎",
+      "LIMITATION_AND_FUTURE: 提出未来研究可探索其他情境因素、其他产品类型和其他消费者行为"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "诱饵效应/吸引效应文献（Huber et al. 1982; Simonson and Tversky 1992; Ariely 2009）",
+      "说服理论（source credibility, content quality, fit; Petty et al. 1979; Pornpitakpan 2004; Petty 2018）",
+      "个性化推荐系统与用户期望研究（Xiao and Benbasat 2007; Komiak and Benbasat 2006; Adomavicius et al. 2013）",
+      "期望不一致理论与建议采纳文献（Fitzsimons and Lehmann 2004; Bonaccio and Dalal 2006; Brown et al. 2014）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "说服理论和个性化期望理论直接决定了研究问题、情境变量（个性化/非个性化）和两个假设，但实验平台的具体实现（SVD推荐算法、MovieTweetings数据库、诱饵同类型第二位放置、评分显著展示）主要来自推荐系统工程实践和诱饵效应实验惯例；同时理论没有精确指定诱饵的阈值、数量、列表长度等具体设计参数。因此属于理论引导关键变量和假设、但技术/制品设计部分来自其他来源。",
+    "translation_chain_cn": "说服理论：来源可信度×内容质量×匹配度决定说服力 → 用户面对个性化系统时会期望高可靠来源、高匹配内容 → 低匹配诱饵是来自“应知用户偏好”的可信源的低质量低匹配信息 → 引发负面期望不一致和反说服 → 在个性化推荐中，诱饵应降低目标选择并增加无选择；相反，非个性化推荐来源是“其他用户的集体评价”，不承载同样的个性化承诺 → 低匹配诱饵不会触发同样的可靠性指责 → 传统诱饵效应仍成立。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "诱饵效应：非对称支配的诱饵通过与目标项形成清晰对比，使目标项获得更多选择权重。",
+        "mechanism_cn": "用户认知负荷高，诱饵作为与目标项可比较但明显更差的选项，简化目标项的优势比较。",
+        "design_requirement_cn": "诱饵需要与目标项高度可比，并让用户容易看出目标项的支配关系。",
+        "artifact_choice_cn": "诱饵选择与目标项同类型电影，采用低预测分/低平均分，并放置在第二位紧邻目标项；评分信息显著展示。",
+        "evaluated_contrast_cn": "非个性化推荐中有诱饵 vs 无诱饵。",
+        "objective_result_cn": "目标项选择概率从0.25提升到0.31（实验室），AMT中从0.27到0.29。",
+        "evidence_pointers": [
+          "Section 4.2.2",
+          "Figure 4",
+          "Section 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "说服理论：来源可信度和内容质量影响说服力；用户对高个人相关信息的质量更敏感。",
+        "mechanism_cn": "个性化系统被感知为应了解用户偏好的专家来源；低匹配诱饵在此来源中是不可靠信号，引发负面期望不一致。",
+        "design_requirement_cn": "个性化推荐中的诱饵应表现为与用户预测偏好得分低匹配的项目，且这个低匹配信号必须可见。",
+        "artifact_choice_cn": "在个性化条件中使用预测分作为推荐评分显示；诱饵是预测分低但同类型的电影。",
+        "evaluated_contrast_cn": "个性化推荐中有诱饵 vs 无诱饵。",
+        "objective_result_cn": "目标项选择概率从0.34降至0.20，无选择从0.05升至0.16；感知可靠性和质量显著下降。",
+        "evidence_pointers": [
+          "Figure 4",
+          "Tables 3-4",
+          "Tables 6-7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "非个性化推荐本质是重复其他消费者产生的质量信息，不承载对个人偏好的精准承诺。",
+        "mechanism_cn": "用户对非个性化信息来源期待较低，低质量诱饵不被视作系统能力缺陷，仍可通过对比提高目标项吸引力。",
+        "design_requirement_cn": "非个性化条件使用平均评分/流行度排序，突出“很多人看过”的信息源。",
+        "artifact_choice_cn": "非个性化推荐由聚合平均评分/流行度生成，诱饵为低平均评分同类型电影。",
+        "evaluated_contrast_cn": "非个性化有诱饵 vs 无诱饵。",
+        "objective_result_cn": "目标项选择概率上升，无选择选项无明显变化，符合传统诱饵效应。",
+        "evidence_pointers": [
+          "Section 4.2.1",
+          "Table 3",
+          "Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "期望不一致理论/建议采纳文献：来自专家的低准确建议会被折价，导致对系统接受度下降。",
+        "mechanism_cn": "用户向系统提供偏好后期待高匹配推荐，观察低匹配诱饵会怀疑系统知识能力，产生回旋镖效应。",
+        "design_requirement_cn": "需要测量用户对系统可靠性和推荐吸引力的感知，以捕捉期望不一致的内心过程。",
+        "artifact_choice_cn": "在每条件后加入“系统能识别好电影”“我依赖系统决定看什么”等问卷问题。",
+        "evaluated_contrast_cn": "有诱饵 vs 无诱饵，在个性化/非个性化条件下交互比较。",
+        "objective_result_cn": "感知推荐吸引力和系统可靠性均在有诱饵时下降，且个性化中下降更显著。",
+        "evidence_pointers": [
+          "Section 6",
+          "Tables 6-7",
+          "Figures 7-8"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "受试者内随机对照实验室实验",
+      "固定效应logit/随机效应logit模型",
+      "Multinomial logit相对选择模型",
+      "感知机制问卷分析",
+      "AMT受试者间复制研究",
+      "受试者间稳健性分析（使用首轮数据）",
+      "控制电影平均质量的附加实验",
+      "前端/后端质量与匹配度分离实验",
+      "诱饵显著性边界实验"
+    ],
+    "why_these_evaluations_cn": "主实验用于在没有高成本现场环境干扰的情况下分离个性化/非个性化与诱饵的因果关系；固定效应模型和操纵检验保证处理真实有效且个体异质性被控制；感知问卷用于揭示黑箱中的心理机制；AMT复制用于外部效度；受试者间和附加实验用于排除设计选择、电影质量、评分展示方式等替代解释；显著性实验用于确定边界条件，使结论不只停留在“一次实验发现”。",
+    "benchmark_and_contrast_chain_cn": "无诱饵的推荐列表作为基线；非个性化条件作为传统诱饵效应的参照；个性化条件被用来检验反转效应；后续实验中无诱饵控制组作为基准，低质量/低匹配诱饵处理组作为条件对比；最后显著性实验中，用平均质量作为诱饵维度与先前用预测分作为诱饵维度形成对比，从而把传统效应恢复与低匹配显著维度联系起来。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "非个性化推荐中诱饵提高目标项需求",
+        "evidence_cn": "实验室固定效应logit中Decoy主效应为正（β=0.300, p<0.05），模型无关数据0.25→0.31；AMT复制显示0.27→0.29；受试者间分析和质量受控分析均一致。",
+        "strength_cn": "较强，多个样本与分析方式一致。"
+      },
+      {
+        "claim_cn": "个性化推荐中诱饵降低目标项需求并提高无选择选项",
+        "evidence_cn": "实验室logit中Decoy×Personalization对目标项为负（-1.005），对无选择为正（1.544）；AMT复制方向一致；受试者间分析交互为负（-1.610）和正（2.489）。",
+        "strength_cn": "较强，但AMT中效应幅度略小，受试者间分析显著性下降。"
+      },
+      {
+        "claim_cn": "机制为个性化期望不一致降低系统可靠性感知",
+        "evidence_cn": "感知推荐吸引力和系统可靠性在个性化中下降更大（交互-0.638、-0.815）。",
+        "strength_cn": "中等，测量的是自我报告感知而不是正式中介模型。"
+      },
+      {
+        "claim_cn": "反转效应由低匹配驱动而非低质量驱动",
+        "evidence_cn": "后端质量受控实验中高质量低匹配诱饵和低质量低匹配诱饵都产生负效应；前端双展示实验中低匹配处理显著、低质量高匹配处理不显著。",
+        "strength_cn": "较强，多个附加实验交叉验证。"
+      },
+      {
+        "claim_cn": "诱饵显著性必须通过匹配度展示才会引发个性化反转",
+        "evidence_cn": "在个性化设置中只展示平均质量的实验里，诱饵恢复传统正效应（目标项β=0.651）。",
+        "strength_cn": "较强，该实验直接操纵显著性维度。"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配、受试者内设计、用户固定效应、session控制、操纵检验、受试者间首轮分析、诱饵与目标同类型并固定第二位、不随机化列表顺序以保证跨条件可比、排除用户已评分电影且各条件展示不同电影。",
+    "external_validity_strategy_cn": "使用MovieTweetings真实电影评分数据、覆盖热门电影、AMT多样本复制、更新数据库至2021、用彩票提升激励兼容、在真实平台类似的界面呈现电影海报/预告/评分。",
+    "what_is_not_actually_tested_cn": "没有直接测量实际购买或收入变化，收入推算依赖电影选择概率的假设；没有在真实电商/流媒体平台做现场实验；没有正式中介分析，感知机制只是事后问卷；没有测试除电影之外的产品类型；没有检验长期使用推荐系统后的重复暴露效应。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "构造了能同时生成个性化与非个性化推荐并在列表中插入可控诱饵的实验平台；SVD预测误差低于候选算法。",
+    "artifact_claim_cn": "推荐列表中诱饵的位置、类型匹配和低预测分展示共同创造了可识别的非对称支配，诱发行为改变；个性化情境中的低匹配诱饵是一个关键设计特征。",
+    "mechanism_claim_cn": "在个性化推荐中，低匹配诱饵触发用户对系统知识水平和可靠性的负面推断，降低感知推荐质量和系统可靠性，导致目标项需求下降、无选择项需求上升；非个性化推荐中没有这种个性化承诺，因此诱饵仍通过对比简化选择。",
+    "boundary_claim_cn": "诱饵效应在非个性化推荐中成立，在个性化推荐中反转；反转效应取决于诱饵是否在“匹配度”维度上显著可见；电影质量（平均评分）不是驱动反转的必要条件。",
+    "reusable_design_knowledge_cn": "推荐列表中的选项不是相互独立的；设计者应该把推荐集合作为整体进行选择与呈现；在个性化推荐中应避免加入低预测匹配度项目，除非有意触发被拒反应；在非个性化推荐中可以通过低质量诱饵提升目标项需求；相似的策略不能不加区分地跨推荐情境挪用。",
+    "theoretical_contribution_cn": "扩展了诱饵效应理论，证明在一个来源可信度期望更高的信息系统中，诱饵效应的方向可以反转；为说服理论和期望不一致理论在推荐系统中的应用提供了行为证据；回应了学界关于在推荐系统中研究认知偏差的呼吁；强调上下文因素（个性化/非个性化、用户对系统的期望）决定了理论是否迁移。",
+    "how_discussion_closes_intro_gap_cn": "引言提出诱饵在推荐系统中可能有益可能有害的两个竞争可能，讨论部分明确给出答案：对非个性化推荐有益，对个性化推荐有害；并解释了这一差异与个性化系统可靠性期望有关，从而使最初的缺口闭合为可复用的边界知识。",
+    "overclaim_or_unsupported_leaps_cn": "从11%选择概率下降直接推算超过1.1亿美元收入损失，把选择概率等同于购买/收入，缺乏真实购买价格和转化率；称Apple、Netflix、Spotify使用诱饵效应缺乏正式证据；将“诱饵降低感知可靠性”作为机制，但未做正式中介检验；多个附加实验样本量较小，个别系数只有边际显著。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "论文探索推荐系统中的诱饵效应。",
+      "rhetorical_function_cn": "一句话点明研究领域和核心对象。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续的文献缺口和理论框架限定主题。",
+      "evidence_pointer": "Abstract, opening sentence"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract S2–S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "既有研究发现诱饵效应在传统选择情境中稳健且总体正向，实践者也常用来引导需求。",
+      "rhetorical_function_cn": "建立传统知识的权威性，为反向发现制造张力。",
+      "depends_on_cn": "主题界定。",
+      "sets_up_cn": "为“推荐系统情境可能不同”提供对比基线。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract S4–S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "此前没有研究在推荐系统情境中考察诱饵效应。",
+      "rhetorical_function_cn": "明确指出空白点。",
+      "depends_on_cn": "传统知识综述。",
+      "sets_up_cn": "引出本文的研究必要性。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract S6–S7",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "推荐情境中的用户对信息可靠性和质量有不同期待，诱饵可能产生负面信号。",
+      "rhetorical_function_cn": "说明为什么推荐系统不是一个可以简单搬运传统诱饵效应的环境。",
+      "depends_on_cn": "GAP的建立。",
+      "sets_up_cn": "为提出“个性化/非个性化不同方向”的发现做铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract S8",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者用随机受控实验室实验并以说服理论为透镜进行研究。",
+      "rhetorical_function_cn": "预告研究方法和理论立场。",
+      "depends_on_cn": "缺口与理论重要性已经说明。",
+      "sets_up_cn": "告诉读者接下来将看到实验证据。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract S9–S10",
+      "move_code": "RESULT",
+      "paraphrase_cn": "诱饵效应在推荐情境中表现不同：个性化中诱饵降低目标需求，非个性化中诱饵提升目标需求。",
+      "rhetorical_function_cn": "提前给出核心结论，吸引继续阅读。",
+      "depends_on_cn": "方法预告。",
+      "sets_up_cn": "为后续机制和稳健性检验提供结论锚点。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract final sentence",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究发现对推荐系统设计和消费者决策理解有重要启示。",
+      "rhetorical_function_cn": "概括贡献范围。",
+      "depends_on_cn": "结果陈述。",
+      "sets_up_cn": "给出读者期待的研究价值。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1–S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "电商平台目录庞大，消费者面临选择过载，产生商业后果。",
+      "rhetorical_function_cn": "从现实痛点切入，建立问题背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为推荐系统作为解决方案的出现做铺垫。",
+      "evidence_pointer": "Introduction paragraph 1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P1 S3–S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "54%的消费者因难找产品而停止购买，70%以上转向竞争对手；Netflix和Amazon大量消费来自推荐。",
+      "rhetorical_function_cn": "用统计数字将问题变成高优先级的商业问题。",
+      "depends_on_cn": "选择过载背景。",
+      "sets_up_cn": "说明研究推荐系统设计的重要性。",
+      "evidence_pointer": "Introduction paragraph 1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P1 S5–S6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "推荐系统也存在局限：推荐太多相似的高吸引力选项会导致决策瘫痪。",
+      "rhetorical_function_cn": "从解决方案转而指出当前方案的不足，引出新的设计问题。",
+      "depends_on_cn": "推荐系统的重要性。",
+      "sets_up_cn": "为诱饵效应作为缓解手段做铺垫。",
+      "evidence_pointer": "Introduction paragraph 1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1–S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "已有推荐系统研究多关注预测精度，较少关注行为因素；推荐集合组成尤其被忽视。",
+      "rhetorical_function_cn": "点出文献中的行为视角空白。",
+      "depends_on_cn": "对推荐系统局限的讨论。",
+      "sets_up_cn": "把本文研究对象定位为推荐集合中的诱饵效应。",
+      "evidence_pointer": "Introduction paragraph 2"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P2 S3–S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "诱饵效应在传统选择环境中可以简化选择并改善顾客结果。",
+      "rhetorical_function_cn": "引入被看好的理论工具。",
+      "depends_on_cn": "行为视角缺口的陈述。",
+      "sets_up_cn": "形成“诱饵或许可用来修正推荐系统局限”的思路。",
+      "evidence_pointer": "Introduction paragraph 2"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P2 S5",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "推荐设置具有独特特征，可能改变诱饵效应。",
+      "rhetorical_function_cn": "说明不能简单照搬传统结论。",
+      "depends_on_cn": "传统诱饵效应知识。",
+      "sets_up_cn": "引出个性化/非个性化两个具体情境。",
+      "evidence_pointer": "Introduction paragraph 2"
+    },
+    {
+      "order": 14,
+      "section": "Introduction, Research Motivation",
+      "locator": "Research Motivation P1–P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "推荐系统算法通常假设理性效用最大化，忽略消费者心理边界；实际中消费者行为受上下文影响。",
+      "rhetorical_function_cn": "从系统设计角度说明为什么需要行为因素。",
+      "depends_on_cn": "引言中推荐系统局限性。",
+      "sets_up_cn": "为将诱饵效应引入推荐系统提供动机。",
+      "evidence_pointer": "Research Motivation section"
+    },
+    {
+      "order": 15,
+      "section": "Introduction, Research Motivation",
+      "locator": "Research Motivation final paragraphs",
+      "move_code": "GAP",
+      "paraphrase_cn": "虽然没有行业报告或学术论文确凿证明诱饵在推荐设置中有用，但实践者已经在讨论利用这一策略。",
+      "rhetorical_function_cn": "把实践讨论与学术空白并置，形成研究机会。",
+      "depends_on_cn": "实践和学术之间的张力。",
+      "sets_up_cn": "指出诱饵也可能因质量期望而有害。",
+      "evidence_pointer": "Research Motivation section"
+    },
+    {
+      "order": 16,
+      "section": "Introduction, Research Questions and Contributions",
+      "locator": "RQ paragraph",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "明确提出研究问题：诱饵效应如何改变推荐系统中的项目需求？",
+      "rhetorical_function_cn": "把一般问题收敛为可检验问题。",
+      "depends_on_cn": "前述研究和实践讨论。",
+      "sets_up_cn": "为后续两个具体假设确定目标。",
+      "evidence_pointer": "Research Questions and Contributions section"
+    },
+    {
+      "order": 17,
+      "section": "Introduction, Research Questions and Contributions",
+      "locator": "RQ paragraph, following sentences",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "两种理论情形都合理：诱饵可能降低选择难度、提升满意度，也可能因用户对可靠性的期待而适得其反。",
+      "rhetorical_function_cn": "说明答案对实践者和系统设计者都重要。",
+      "depends_on_cn": "研究问题的提出。",
+      "sets_up_cn": "为实验的竞争性假设做铺垫。",
+      "evidence_pointer": "Research Questions and Contributions section"
+    },
+    {
+      "order": 18,
+      "section": "Introduction, Research Questions and Contributions",
+      "locator": "RQ paragraph, personalized/nonpersonalized definition",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "个性化与非个性化是两种常见推荐类型，用户对两者可能有不同期待，因此需要回答第二个问题：诱饵效应在两种情境下是否不同表现。",
+      "rhetorical_function_cn": "将情境差异转化为具体研究问题。",
+      "depends_on_cn": "第一种研究问题的建立。",
+      "sets_up_cn": "为实验的四条件设计做逻辑铺垫。",
+      "evidence_pointer": "Research Questions and Contributions section"
+    },
+    {
+      "order": 19,
+      "section": "Introduction, Research Questions and Contributions",
+      "locator": "Concluding paragraphs",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者进行随机对照选择实验，构建平台提供两种推荐类型并追踪诱饵后的用户行为。",
+      "rhetorical_function_cn": "把概念问题转化为实验方案。",
+      "depends_on_cn": "两个研究问题。",
+      "sets_up_cn": "预告结果和后续稳健性。",
+      "evidence_pointer": "Research Questions and Contributions section"
+    },
+    {
+      "order": 20,
+      "section": "Introduction, Research Questions and Contributions",
+      "locator": "Result paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "非个性化中诱饵提升目标项需求，个性化中诱饵反而降低目标项需求并增加无选择概率。",
+      "rhetorical_function_cn": "在引言末尾提前给出主要发现，制造“反直觉”吸引力。",
+      "depends_on_cn": "实验方案预告。",
+      "sets_up_cn": "为机制解释和贡献声明提供结论基础。",
+      "evidence_pointer": "Research Questions and Contributions section"
+    },
+    {
+      "order": 21,
+      "section": "Literature Review, Decoy Effect",
+      "locator": "Section 2.1, context/relative judgment",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "消费者基于相对比较做判断，同一选项在不同参照集合中的吸引力不同。",
+      "rhetorical_function_cn": "用基础心理学现象为诱饵效应铺路。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "解释为什么加入诱饵可以改变对目标项的评价。",
+      "evidence_pointer": "Section 2.1, first paragraphs"
+    },
+    {
+      "order": 22,
+      "section": "Literature Review, Decoy Effect",
+      "locator": "Section 2.1, definition of decoy effect",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "诱饵效应违反IIA假设：加入一个非对称支配的诱饵会提高目标项的相对选择概率。",
+      "rhetorical_function_cn": "正式引入核心理论概念。",
+      "depends_on_cn": "相对判断背景。",
+      "sets_up_cn": "为后续H1/H2提供传统理论基线。",
+      "evidence_pointer": "Section 2.1, Huber et al. 1982 description"
+    },
+    {
+      "order": 23,
+      "section": "Literature Review, Decoy Effect",
+      "locator": "Section 2.1, mechanism explanation",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "诱饵与目标项可比、与其他项不可比，因此目标项成为清晰赢家并获得更多正权重。",
+      "rhetorical_function_cn": "解释传统诱饵效应的因果机制。",
+      "depends_on_cn": "诱饵效应定义。",
+      "sets_up_cn": "为推荐设置中如何构造诱饵提供设计依据。",
+      "evidence_pointer": "Section 2.1, after Huber et al. description"
+    },
+    {
+      "order": 24,
+      "section": "Literature Review, Decoy Effect",
+      "locator": "Section 2.1, final paragraph",
+      "move_code": "GAP",
+      "paraphrase_cn": "既有诱饵研究在许多领域都展示稳健性，但没有研究在推荐系统情境中放置诱饵。",
+      "rhetorical_function_cn": "把传统文献收敛到本文空白。",
+      "depends_on_cn": "诱饵效应的稳健性综述。",
+      "sets_up_cn": "指出推荐系统的重要性要求填补该空白。",
+      "evidence_pointer": "Section 2.1, final paragraph"
+    },
+    {
+      "order": 25,
+      "section": "Literature Review, Contextual Factors in Recommendation Systems",
+      "locator": "Section 2.2, Economist example",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Economist订阅实验证明相对于纯打印版诱饵，用户更可能选择打印加在线版本。",
+      "rhetorical_function_cn": "用著名案例强化诱饵效应的生态效度。",
+      "depends_on_cn": "前文诱饵效应机制。",
+      "sets_up_cn": "承接推荐系统时代后的问题转移。",
+      "evidence_pointer": "Section 2.2, Ariely 2009 description"
+    },
+    {
+      "order": 26,
+      "section": "Literature Review, Contextual Factors in Recommendation Systems",
+      "locator": "Section 2.2, contextual factors summary",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "推荐系统的呈现格式、商品熟悉度、解释类型和情绪等情境因素会影响消费者选择。",
+      "rhetorical_function_cn": "说明推荐系统情境因素研究已存在，但还缺少诱饵策略。",
+      "depends_on_cn": "推荐系统重要性。",
+      "sets_up_cn": "把本文定位为情境因素研究的一个新成员。",
+      "evidence_pointer": "Section 2.2, Cooke et al. 2002 and Tam and Ho 2005"
+    },
+    {
+      "order": 27,
+      "section": "Literature Review, Contextual Factors in Recommendation Systems",
+      "locator": "Section 2.2, final paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者宣称本文是第一篇在推荐设置中检验诱饵效应的研究。",
+      "rhetorical_function_cn": "在文献综述末尾锁定新颖性。",
+      "depends_on_cn": "前文空白陈述。",
+      "sets_up_cn": "自然过渡到理论框架和假设。",
+      "evidence_pointer": "Section 2.2, final sentence"
+    },
+    {
+      "order": 28,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, opening",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "推荐系统和诱饵都能帮助决策，但两者结合是否产生协同效应仍是问题。",
+      "rhetorical_function_cn": "把文献综述引向本文核心的理论问题。",
+      "depends_on_cn": "文献综述中的两个研究线索。",
+      "sets_up_cn": "引入说服理论作为解释框架。",
+      "evidence_pointer": "Section 3, first paragraph"
+    },
+    {
+      "order": 29,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, persuasion theory intro",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "说服理论指出来源可信度、内容质量和匹配度是影响说服力的主要因素。",
+      "rhetorical_function_cn": "选择理论透镜并提取关键因子。",
+      "depends_on_cn": "推荐系统需要说服性内容。",
+      "sets_up_cn": "为个性化/非个性化差异提供理论词汇。",
+      "evidence_pointer": "Section 3, paragraph starting “We apply persuasion theory…”"
+    },
+    {
+      "order": 30,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, credibility/quality/fit proposition",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "高可信来源和高质量高匹配内容能增加用户接受度；低匹配内容会降低说服力。",
+      "rhetorical_function_cn": "建立理论命题，为诱饵作为低匹配内容的负面效应作铺垫。",
+      "depends_on_cn": "说服理论的引入。",
+      "sets_up_cn": "推导诱饵在推荐系统中降低可靠性。",
+      "evidence_pointer": "Section 3, after persuasion theory intro"
+    },
+    {
+      "order": 31,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, personalized vs nonpersonalized expectations",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "非个性化推荐传达的是其他消费者的质量评价；个性化推荐传递的是系统对用户个人偏好的匹配承诺。",
+      "rhetorical_function_cn": "界定两种情境下用户期望的结构性差异。",
+      "depends_on_cn": "说服理论中的匹配度概念。",
+      "sets_up_cn": "为H1和H2提供机制桥梁。",
+      "evidence_pointer": "Section 3, paragraph about personalized and nonpersonalized recommendations"
+    },
+    {
+      "order": 32,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, personally relevant conditions",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "在个人相关性强时，用户更渴望精准信息，低匹配内容会造成负面期望不一致并引发回旋镖效应。",
+      "rhetorical_function_cn": "与个性化情境建立对应，解释为何诱饵在个性化中会反转。",
+      "depends_on_cn": "来源可信度理论和建议采纳文献。",
+      "sets_up_cn": "直接支撑H2。",
+      "evidence_pointer": "Section 3, paragraph on personally relevant conditions"
+    },
+    {
+      "order": 33,
+      "section": "Theoretical Framework",
+      "locator": "Section 3, hypotheses paragraph",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "提出H1：非个性化推荐中诱饵会如传统情境那样推动目标项需求；提出H2：个性化推荐中诱饵会推动需求远离目标项。",
+      "rhetorical_function_cn": "将理论转化为两个可检验的假设。",
+      "depends_on_cn": "前文机制推导。",
+      "sets_up_cn": "为实验设计和结果分析提供明确检验对象。",
+      "evidence_pointer": "Section 3, Hypothesis 1 and Hypothesis 2"
+    },
+    {
+      "order": 34,
+      "section": "Experiment Design",
+      "locator": "Section 4, opening",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "研究使用632名商学院学生的受试者内随机对照实验，之后用AMT复制。",
+      "rhetorical_function_cn": "给出总体实验策略和样本。",
+      "depends_on_cn": "两个假设。",
+      "sets_up_cn": "后续各小节描述平台、程序和分析。",
+      "evidence_pointer": "Section 4, first paragraph"
+    },
+    {
+      "order": 35,
+      "section": "Experiment Design",
+      "locator": "Section 4.1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "使用MovieTweetings电影评分数据库并要求用户先评分20部以上热门电影，以种子化个性化系统和训练用户。",
+      "rhetorical_function_cn": "说明实验数据来源和推荐系统初始化方式。",
+      "depends_on_cn": "实验总体策略。",
+      "sets_up_cn": "为个性化推荐生成提供个人输入。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 36,
+      "section": "Experiment Design",
+      "locator": "Section 4.2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "采用受试者内设计，四个条件随机排序，但个性化两个条件和非个性化两个条件分别捆绑在一起出现。",
+      "rhetorical_function_cn": "明确实验设计的关键选择及其理由。",
+      "depends_on_cn": "需同时比较个性化/非个性化。",
+      "sets_up_cn": "保证用户能区分推荐类型，减少混淆。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 37,
+      "section": "Experiment Design",
+      "locator": "Section 4.2.1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "个性化推荐用SVD生成，非个性化推荐用聚合平均评分/流行度排序；排除用户已评分的电影，确保每条件看到不同电影。",
+      "rhetorical_function_cn": "说明两种推荐类型的操作性实现。",
+      "depends_on_cn": "推荐系统平台构建。",
+      "sets_up_cn": "使个性化/非个人化操纵可被后续操纵检验验证。",
+      "evidence_pointer": "Section 4.2.1"
+    },
+    {
+      "order": 38,
+      "section": "Experiment Design",
+      "locator": "Section 4.2.2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "诱饵选为与目标项同类型、预测分或平均分低，并放置在列表第二位，且评分显眼以使其可识别。",
+      "rhetorical_function_cn": "按照诱饵效应理论操作化“非对称支配”。",
+      "depends_on_cn": "诱饵效应机制和Ariely设计惯例。",
+      "sets_up_cn": "为后续诱饵显著性边界实验提供操作基础。",
+      "evidence_pointer": "Section 4.2.2"
+    },
+    {
+      "order": 39,
+      "section": "Experiment Design",
+      "locator": "Section 4.2.3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用户从5部电影中选择最想看的电影，同时提供无选择选项，并随后填写感知问卷。",
+      "rhetorical_function_cn": "加入无选择选项用于捕捉用户放弃推荐的倾向。",
+      "depends_on_cn": "个性化反转效应的理论预期。",
+      "sets_up_cn": "为无选择项作为关键因变量创造条件。",
+      "evidence_pointer": "Section 4.2.3"
+    },
+    {
+      "order": 40,
+      "section": "Analysis and Results",
+      "locator": "Section 5.1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "操纵检验显示个性化条件下感知个性化显著更高，有诱饵条件下感知适配显著更低。",
+      "rhetorical_function_cn": "证明实验操纵有效，为后续因果解释提供前提。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "确保行为结果不是由于操纵无效导致。",
+      "evidence_pointer": "Tables 1 and 2"
+    },
+    {
+      "order": 41,
+      "section": "Analysis and Results",
+      "locator": "Section 5.2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模型无关数据显示非个性化中诱饵提升目标项选择，个性化中诱饵降低目标项选择并提升无选择选项选择。",
+      "rhetorical_function_cn": "先给直观证据，为复杂的logit模型做铺垫。",
+      "depends_on_cn": "操纵检验成功。",
+      "sets_up_cn": "为统计模型分析指明要验证的模式。",
+      "evidence_pointer": "Figure 4"
+    },
+    {
+      "order": 42,
+      "section": "Analysis and Results",
+      "locator": "Section 5.4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "固定效应logit模型显示诱饵×个人化交互项对目标项选择显著为负，说明个性化中诱饵降低目标项需求。",
+      "rhetorical_function_cn": "给出支持H1和H2的主要统计证据。",
+      "depends_on_cn": "模型无关证据和操纵检验。",
+      "sets_up_cn": "随后分析无选择选项以强化反转效应。",
+      "evidence_pointer": "Table 3, Figure 5"
+    },
+    {
+      "order": 43,
+      "section": "Analysis and Results",
+      "locator": "Section 5.5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "无选择选项模型中，诱饵×个人化交互显著为正，说明个性化中诱饵特别增加了放弃选择的行为。",
+      "rhetorical_function_cn": "显示诱饵不只是改变目标项，而是降低整个推荐集合的接受度。",
+      "depends_on_cn": "目标项模型结果。",
+      "sets_up_cn": "强化“个性化诱饵反效果”的结论。",
+      "evidence_pointer": "Table 4, Figure 6"
+    },
+    {
+      "order": 44,
+      "section": "Analysis and Results",
+      "locator": "Section 5.6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "以目标项为基准的multinomial模型显示，加入诱饵后各选项相对目标项的概率增加，其中无选择选项的增加最大，且主要发生在个性化情境。",
+      "rhetorical_function_cn": "处理“选择转移去向”问题，补充全选项图景。",
+      "depends_on_cn": "前两个二值模型。",
+      "sets_up_cn": "为机制测试中“整体系统接受度下降”提供行为证据。",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 45,
+      "section": "Underlying Mechanism Test",
+      "locator": "Section 6, opening and results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "诱饵在有诱饵条件下显著降低感知推荐吸引力和系统可靠性，且在个性化条件下下降更严重；作者将此解释为个性化期望不一致的证据。",
+      "rhetorical_function_cn": "把行为结果连接到机制解释。",
+      "depends_on_cn": "行为模型结果。",
+      "sets_up_cn": "为后续AMT复制和稳健性检验提供机制故事。",
+      "evidence_pointer": "Figures 7-8, Tables 6-7"
+    },
+    {
+      "order": 46,
+      "section": "Replication Study",
+      "locator": "Section 7",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "AMT复制实验得到方向一致的结论：非个性化中诱饵提升目标项，个性化中诱饵降低目标项并提升无选择项。",
+      "rhetorical_function_cn": "检验结果对样本是否稳健。",
+      "depends_on_cn": "主实验机制。",
+      "sets_up_cn": "为后续排除设计选择和混淆因素提供信心。",
+      "evidence_pointer": "Figures 9-10"
+    },
+    {
+      "order": 47,
+      "section": "Robustness Checks",
+      "locator": "Section 8.1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "只使用每个用户第一个条件数据的受试者间分析仍显示相同交互方向。",
+      "rhetorical_function_cn": "排除受试者内设计可能带来的顺序效应和对比效应。",
+      "depends_on_cn": "主实验数据。",
+      "sets_up_cn": "为后续附加实验排除质量混淆建立方法论信任。",
+      "evidence_pointer": "Tables 9-10"
+    },
+    {
+      "order": 48,
+      "section": "Robustness Checks",
+      "locator": "Section 8.2.1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "在原始模型中控制电影平均评分后，诱饵×个人化的负向和正向效应仍然显著。",
+      "rhetorical_function_cn": "排除电影质量与匹配度混淆的替代解释。",
+      "depends_on_cn": "原始模型设定。",
+      "sets_up_cn": "为质量/匹配分离实验做铺垫。",
+      "evidence_pointer": "Tables 11-12"
+    },
+    {
+      "order": 49,
+      "section": "Robustness Checks",
+      "locator": "Section 8.2.2",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "在后端控制诱饵平均质量的新实验中，低预测分的诱饵无论平均质量高低都增加无选择并减少目标项选择。",
+      "rhetorical_function_cn": "证明关键驱动因素是低预测匹配而非低平均质量。",
+      "depends_on_cn": "质量控制需求。",
+      "sets_up_cn": "为前端双指标展示实验做进一步区分。",
+      "evidence_pointer": "Table 13"
+    },
+    {
+      "order": 50,
+      "section": "Robustness Checks",
+      "locator": "Section 8.2.3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "当前端同时显示质量和匹配分时，只有低匹配的诱饵显著提升无选择并降低目标项；低质量但高匹配的诱饵不显著。",
+      "rhetorical_function_cn": "进一步分离质量和匹配的独立作用。",
+      "depends_on_cn": "后端控制实验。",
+      "sets_up_cn": "确认用户更重视预测匹配度。",
+      "evidence_pointer": "Table 14"
+    },
+    {
+      "order": 51,
+      "section": "Robustness Checks",
+      "locator": "Section 8.3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "在个性化设置中只展示平均评分作为诱饵显著维度时，传统诱饵效应恢复，目标项选择提升。",
+      "rhetorical_function_cn": "证明反转效应依赖于低匹配信号是否在界面上显著可见。",
+      "depends_on_cn": "诱饵显著性文献和前面的附加实验。",
+      "sets_up_cn": "为讨论中“不能把诱饵策略泛化到所有推荐情境”提供边界证据。",
+      "evidence_pointer": "Table 15"
+    },
+    {
+      "order": 52,
+      "section": "Discussion",
+      "locator": "Discussion, first paragraphs",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者强调这是首次在推荐系统中考察诱饵效应，并表明诱饵在非个性化可用、在个性化中却适得其反。",
+      "rhetorical_function_cn": "将全部实验结果凝结为对既有文献的增量贡献。",
+      "depends_on_cn": "全文实证证据。",
+      "sets_up_cn": "为实践启示和设计建议提供依据。",
+      "evidence_pointer": "Section 9"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "Discussion, managerial implications paragraphs",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "作者用个性化中购买概率下降11%和Netflix收入规模推算可能损失超过1.1亿美元，强调实践后果。",
+      "rhetorical_function_cn": "把结果转化为有吸引力的商业意义。",
+      "depends_on_cn": "目标项选择概率变化。",
+      "sets_up_cn": "为平台管理者提供强烈信号——不要盲目在个性化推荐中加诱饵。",
+      "evidence_pointer": "Section 9, discussion of revenue"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "Discussion, broader design implications",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者指出推荐集合中的项目并非相互独立，设计时应整体考虑项目间的选择和关系。",
+      "rhetorical_function_cn": "把具体实验结果上升为可复用的设计知识。",
+      "depends_on_cn": "诱饵效应反转与机制证据。",
+      "sets_up_cn": "回应引言中“推荐集合组成被忽视”的缺口。",
+      "evidence_pointer": "Section 9, broader implications"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先描述传统诱饵效应的稳定性和商业成功，再用一句‘然而没有研究在推荐系统中检验’制造空白；同时在同一个段落里给出‘推荐系统在商业中越来越重要’的背景，使空白显得必须填补。",
+    "signposting_cn": "引言最后明确写出两个研究问题，并在结尾段落预告‘paper is organized as follows’；理论部分明确给出H1/H2；每个实验小标题都说明其目的，如‘Replication Study’‘Robustness Checks’。",
+    "transition_logic_cn": "从操纵检验过渡到模型无关证据，再到固定效应模型，最后到机制测试；每个部分开头重新强调上一个部分留下的未解问题，如“虽然统计显著，但为什么发生”引出机制测试；从实验室到AMT复制，再到受试者间和逐项排除混淆，形成层层递进的过渡。",
+    "claim_evidence_rhythm_cn": "每个核心主张都遵循“提出假设/需要排除的替代解释→展示模型和系数→用图和表展示交互→简要解释为什么这样发生→指出对设计的意义”的节奏；先报告模型无关数字再上计量模型，让读者先看到直观差异再看到统计显著性。",
+    "benchmark_narrative_cn": "Nopersonalized condition被定位为传统选择情境的代理，因为非个性化推荐重复其他用户的质量信号；因此非个性化中的诱饵效应成为检验“传统诱饵效应是否迁移”的基准；个性化条件则作为理论预测会发生反转的试验性情境；后续附加实验把无诱饵控制组作为基准，将不同诱饵属性彼此对比。",
+    "theory_return_cn": "讨论部分把行为结果重新放回说服理论：个性化系统是来源可信度高的沟通者，低匹配诱饵是低质量内容，因此说服力下降；同时回到期望不一致理论，解释用户对系统的信任如何被破坏；最终提出“推荐集合整体设计”的抽象原则，使结果超越单次实验。",
+    "contribution_positioning_cn": "作者将自己定位为“first study”、回应学者呼吁、填补实践争议，并通过机制测试和多个附加实验把贡献从一次性现象升级为可解释、有边界条件的设计知识。",
+    "novelty_protection_cn": "通过以下方式防止贡献退化为一次性性能结果：不仅报告主效应，还报告交互效应和相对选择模型；用AMT复制和受试者间分析证明稳健；用质量前后端分离实验排除替代解释；用显著性实验找到边界条件；最后把结果纳入说服理论和期望不一致理论解释框架，形成理论贡献而非单纯经验发现。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "引言从现实问题切入，用数据表明问题严重性，再指出现有系统/工具的局限。",
+        "research_job_cn": "确定一个有商业后果、有理论潜力的行为/系统设计问题。",
+        "required_evidence_cn": "有说明问题规模的行业数据或学术统计，有对现有制品的具体批评。",
+        "transition_to_next_cn": "用“虽然已有解决方案，但仍有行为层面空白”过渡到文献缺口。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述两个文献流：核心理论（诱饵效应）和情境文献（推荐系统情境因素），并指出交叉空白。",
+        "research_job_cn": "确认哪个经典理论/效应还没在目标情境中被检验，且目标情境可能改变理论方向。",
+        "required_evidence_cn": "传统理论有大量稳健证据，目标情境有明确且未被检验的特征差异。",
+        "transition_to_next_cn": "用“因此我们用某理论透镜推导假设”引出理论框架。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "选择理论透镜，列出决定情境效应的关键机制，并推导出竞争性/差异化的假设。",
+        "research_job_cn": "明确理论中的来源可信度、内容质量、匹配度等构念，并映射到目标情境的不同水平。",
+        "required_evidence_cn": "理论能够解释为什么情境变量（如个性化/非个性化）会改变方向。",
+        "transition_to_next_cn": "用“为验证这些假设，我们设计了一个…实验”进入方法。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述实验平台、条件、流程、数据和操纵；强调每一个设计选择是为了保持内部效度。",
+        "research_job_cn": "构造能操纵关键变量的实验平台/制品，确保操纵有效并有可对比的基线。",
+        "required_evidence_cn": "平台能生成预期差异，操纵检验数据可用。",
+        "transition_to_next_cn": "用“先报告操纵检验，再给出模型无关证据”进入结果。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "先报告操纵检验，再报告描述性证据，然后用固定效应/混合效应模型检验交互作用，再用multinomial模型展示整体转移。",
+        "research_job_cn": "用多个计量模型交叉验证同一个行为模式。",
+        "required_evidence_cn": "交互项方向与假设一致，主要备择解释被控制。",
+        "transition_to_next_cn": "用“为什么会出现这个结果”引出机制测试。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用问卷或其他过程变量把行为结果与理论机制连接起来。",
+        "research_job_cn": "在实验流程中收集感知/态度中介指标，并检验条件间差异。",
+        "required_evidence_cn": "中介变量在不同条件下的变化与行为结果一致。",
+        "transition_to_next_cn": "用“结果是否只在学生样本中成立”引出复制。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用不同样本复制，并用受试者间分析、控制混淆变量、分离前端/后端属性、操纵边界条件逐一加固结论。",
+        "research_job_cn": "设计系列稳健性和边界实验，排除常见替代解释。",
+        "required_evidence_cn": "每个稳健性检验都至少维持核心交互方向；关键边界条件的操纵显示效应出现或消失。",
+        "transition_to_next_cn": "用“这些发现对设计和实践意味着什么”进入讨论。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "回到引言缺口和理论透镜，把结果重新表述为可复用的设计知识和边界条件。",
+        "research_job_cn": "识别哪些条件下理论预测成立、哪些条件下反转，并总结对系统的设计要求。",
+        "required_evidence_cn": "边界条件有实验证据支撑，而不是仅靠逻辑推断。",
+        "transition_to_next_cn": "最后总结主要发现和未来方向。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用模型无关证据先让读者看到现象，再用计量模型给出统计推断；",
+      "在引言中给出两个研究问题并在结尾用“paper organized as follows”设置路标；",
+      "假设形成之前在两种情境之间建立理论机制上的区别，而非仅说“可能有不同”；",
+      "针对每个替代解释（质量、受试者内、样本、维度显著性）做一个专门实验；",
+      "讨论部分把结果纳入既有理论并总结为“推荐集合应整体设计”的知识，而非只报告系数。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要能生成个性化与非个性化推荐的实验平台，包含MovieTweetings数据库和SVD算法；",
+      "632名商学院学生的实验室被试和3亿美元级平台搭建不具普适复制性；",
+      "AMT支付、彩票激励和多个附加实验需要较多成本和时间；",
+      "受试者内设计配合用户固定效应模型需要样本量较大。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要仅在引言声称“首次”而缺少文献综述证明；",
+      "不要在没有操纵检验的情况下直接解释行为结果；",
+      "不要只报告主效应而忽略交互效应和无选择选项；",
+      "不要把11%概率下降直接等同于收入损失而没有经济模型；",
+      "不要把事后问卷中的感知差异当作已检验的中介机制。"
+    ],
+    "single_best_description_of_the_routine_cn": "用理论透镜锁定会在新情境中改变方向的经典效应，用受试者随机实验验证方向反转，用复制和多轮排除实验保护边界，再用讨论把现象升华为可复用的系统设计原则。"
+  },
+  "confidence": 0.88,
+  "limitations_cn": "分析基于论文正文和图表，在线附录的细节（如Table A1、C1、B图）只能从正文推断；部分表格和图的OCR文本可能不完整；对研究阶段的具体拆分存在一定主观性；未能获取实际实验代码或完整问卷。",
+  "usage": {
+    "prompt_tokens": 30330,
+    "completion_tokens": 26775,
+    "total_tokens": 57105,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 27002
+  }
+}

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85194847702"
+title: "Energy Consumption of Automated Program Repair"
+authors: "Martinez M.; Martínez-Fernández S.; Franch X."
+year: "2024"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1145/3639478.3643114"
+---
+# Scopus title-abstract-keyword metadata
+Title: Energy Consumption of Automated Program Repair
+Abstract: The problem addressed: In the last decade, following current societal needs, software sustainability has emerged as research field [2]. In this paper, we particularly focus on environmental sustainability, defined as "how software product development, maintenance, and use affect energy consumption and the consumption of other natural resources. [...] This dimension is also known as Green Software" [2]. The study of environmental sustainability is of paramount importance in the realm of automated software engineering, i.e. the application of computation to software engineering activities with the objective of partially or fully automating these activities, thereby significantly increasing both quality and productivity [3]. One of these automation-prone activities is bug fixing through automated program repair (APR) tools. This is due to the high economic cost that fixing bugs entails. APR tools take as input a buggy program and deliver one or more patches that repair the bugs, when they are found, using test cases as correctness oracle (i.e, to validate candidate patches). To evaluate their tools, APR researchers usually report the number of bugs that are repaired with a) a plausible patch (that is, a patch valid w.r.t. the correctness oracle), and b) a correct patch. However, to our knowledge, there is no previous work in the APR area that focuses on the study of the energy consumption of APR tools. The APR research community has been oriented towards accuracy, with a strong focus on obtaining stateof- the-art results, as happened in the AI community [10]. According to current societal demands and the computational demanding nature of state-of-the-art techniques, we argue that APR researchers should also consider energy consumption as a main driver when designing and implementing APR tools, carefully analyzing whether a minor gain in accuracy justifies high levels of energy consumption. The inclusion of energy as a driver of APR research is important for several reasons. First, APR tools use expensive correctness oracles, executed each time a candidate patch is synthesized. As APR tools synthesize a considerable amount of patches before finding the correct one [8], the amount of energy up to that point could be considered wasteful. Second, even with the impressive progress of the field, state-of-the-art APRs do not achieve high accuracy [5] and are complementary (as shown, for example, in Fig. 2 from [11]). This means that a practitioner aiming to deploy APR would need to consider not just one tool, but several. Third, connecting APRs with CI/CD (e.g., via a bot [9]) would require to invoke APRs tools for each failing build caused by test cases with failure or error. For example, the study by Moritz et al. [1] in Travis CI builds reports a median (resp. mean) of 2.9% (resp. 10.3%) for builds with failed tests in Java projects. Triggering APRs for each of these failed builds would require a large amount of repair attempt execution. Unfortunately, the impact that APR usage has on the environment is unknown. To achieve green software development, we believe that it is essential to understand the energy consumption of APR activity. This work is a first step in that direction. © 2024 IEEE Computer Society. All rights reserved.
+Author keywords: 
+Index keywords: Application programs; Automation; Program debugging; Repair; Software design; Software testing; Sustainable development; 'current; Energy; Energy-consumption; Engineering activities; Environmental sustainability; Repair tools; Research fields; Software product development; State of the art; Test case; Energy utilization
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2024
+EID: 2-s2.0-85194847702
+DOI: 10.1145/3639478.3643114
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

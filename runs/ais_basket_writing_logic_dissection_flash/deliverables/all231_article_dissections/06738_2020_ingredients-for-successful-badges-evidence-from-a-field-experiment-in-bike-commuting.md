@@ -1,0 +1,1819 @@
+# Ingredients for successful badges: evidence from a field experiment in bike commuting
+
+- 作者：Zachary J. Sheffler; De Liu; Shawn P. Curley
+- 年份 / 期刊：2020 / European Journal of Information Systems
+- DOI：10.1080/0960085x.2020.1808539
+- 源文件：06738_2020_ingredients-for-successful-badges-evidence-from-a-field-experiment-in-bike-commuting.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：在徽章被广泛用于游戏化但缺乏设计研究的情况下，不同的徽章设计组件（奖励、能指、完成逻辑）如何影响目标行为（自行车骑行天数）？
+
+- 制品与设计：在一个大学自行车通勤项目中设计并部署一套每周邮件+仪表盘徽章系统，针对徽章的三个组件分别进行2×2×2随机现场实验：奖励设计为是否有Facebook分享链接；能指设计为自我利益导向（Star Rider奖杯）vs. 亲环境导向（Eco Healer环保图像）；完成逻辑设计为固定目标（每周骑行3次）vs. 相对目标（进入前25%）。
+
+- 客观结果：在1,975名参与者、7周、13,825个用户-周观测中：有分享链接比无分享链接显著增加骑行天数（β=0.044, p=0.022）；亲环境能指与自我利益能指无显著差异（β=0.015, p=0.443）；相对目标总体主效应不显著（β=-0.029, p=0.168），但与上周是否高频骑行者的交互显著（β=0.122, p=0.001），高频骑行者中相对目标优于固定目标，低频骑行者相反。零膨胀泊松稳健性检验结果基本一致。
+
+- 核心贡献：本文是首批聚焦徽章设计维度而非仅徽章有无的研究之一，通过大样本随机现场实验分离出奖励、能指、完成逻辑三个设计维度的效果；发现社交分享预期能够提升行为，亲环境能指无显著效果，相对目标的效应取决于使用者骑行频率；从而为游戏化设计实践提供指导，并指出混合结果可能来自设计差异和用户特征交互。
+
+- 整篇论证链：作者从徽章在游戏化中极其普及但设计知识稀缺的现实出发，指出现有研究大多只比较徽章的有无，而实践中设计师面对大量徽章设计选择却缺乏依据。文章从游戏化与说服系统文献出发，将徽章分解为奖励、能指、完成逻辑三个组件，并指出现有研究尚未系统检验这三个组件的有效性。作者引入期望-价值理论来解释奖励和能指如何通过提高徽章的感知价值来增加骑行，引入内在动机与目标不确定性文献来解释相对目标的激励及对高频使用者的差异化影响。随后作者在一个大学自行车通勤项目中改造每周邮件和仪表盘，按2×2×2组间设计随机分配1,975名用户，用面板随机效应模型分析每周骑行天数。结果显示：额外社交分享选项产生显著但较小的正向影响；亲环境能指无显著差异；相对目标总体无主效应但与之前骑行频率交互——对高频骑行者有利、对低频骑行者不利。讨论中作者将结果回接到期望-价值理论、内在动机和社交奖励文献，主张奖励增强、能指效果有限、相对目标需要个性化匹配；贡献被定位为对徽章设计维度的实证分离和对游戏化混合结果的一种解释。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：本文在真实运行的大学自行车通勤项目中部署改造后的徽章系统，以每周邮件和在线仪表盘为数字干预载体，对1,975名真实用户进行2×2×2随机分配并追踪七周真实骑行行为；证据核心是现场随机实验中的行为结果，而非理论推导、离线benchmark或多Study累积。
+
+- 主导写作弧线判定：文章从徽章设计效果不明的现象和文献缺口出发，识别期望-价值、内在动机等机制，将机制翻译为分享链接、亲环境能指、相对/固定目标三种设计操作，在真实通勤平台进行现场随机实验检验，并在讨论中返回机制解释和边界条件。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：研究先是文献与理论阶段（界定徽章组件，引入期望-价值理论和目标/内在动机文献，形成四个假设），然后是情境与制品改造阶段（改造大学自行车通勤项目的新闻邮件和仪表盘，嵌入三种徽章设计操纵），随后是随机分配与实施阶段（2×2×2组间设计的七周现场实验），接着是主数据分析阶段（随机效应面板模型检验主效应和交互），再次是交互分解与稳健性阶段（对高频/低频骑行者分别检验、零膨胀泊松模型），最后是理论与设计知识阐释阶段（将结果回接到理论并给出实践含义）。各阶段并非各自独立Study，而是同一现场实验由论证需求拆成的连续动作。
+
+### studies_or_phases
+
+#### 1. 文献梳理与组件界定阶段
+
+- order：1
+
+- name_cn：文献梳理与组件界定阶段
+
+- question_cn：徽章设计包括哪些可操作的组件，已有研究在这些组件上的证据缺口是什么？
+
+- inputs_and_setting_cn：游戏化、徽章、说服系统、教育/在线社区/交易平台的实证文献。
+
+- designed_or_compared_object_cn：将徽章概念拆分为奖励、能指、完成逻辑三个组件，并区分'引入徽章'与'设计徽章'两种研究传统。
+
+- baseline_control_or_counterfactual_cn：现有文献中'仅引入徽章'的研究作为对照；Hamari 2013和Kyewski & Krämer 2018的两个设计比较研究作为最接近的参照。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：叙述性文献综合和概念分解。
+
+- main_result_cn：发现：大多数研究只检验徽章有无，只有两项研究比较徽章设计，且仅涉及目标清晰度和可见性；缺乏对奖励、能指、完成逻辑的系统检验；同时已有研究无一致理论解释。
+
+- argumentative_role_cn：建立研究缺口，说明徽章设计是一个未系统研究但重要的问题，并为三个设计维度提供合法性和操作性定义。
+
+- remaining_uncertainty_cn：尚未回答不同设计组件是否以及如何影响行为。
+
+- link_to_next_phase_cn：引出需要用期望-价值理论等知识基础来推导具体设计假设。
+
+##### evidence_pointers
+
+1. 2.1-2.4节全节
+
+2. Section 2.4末尾“only two studies…”段落
+
+#### 2. 理论假设发展阶段
+
+- order：2
+
+- name_cn：理论假设发展阶段
+
+- question_cn：为什么分享选项、亲环境能指、相对目标会影响骑行天数？对谁影响更大？
+
+- inputs_and_setting_cn：期望-价值理论、自我信号与社会形象文献、亲社会/亲环境框架文献、目标设定与内在动机文献。
+
+- designed_or_compared_object_cn：提出H1-H4：H1奖励分享选项；H2亲环境能指；H3相对目标主效应；H4相对目标与骑行频率的交互。
+
+- baseline_control_or_counterfactual_cn：每个假设都以对应设计特质的缺省版本为比较基准。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论推导和假设演绎。
+
+- main_result_cn：形成四个可检验假设，并各自说明机制（增加感知价值、温暖光辉、不确定性刺激、比较有利性/不利性）。
+
+- argumentative_role_cn：让三个设计操纵不只是任意工程选择，而是有理论依据的可检验差异。
+
+- remaining_uncertainty_cn：假设尚未被数据检验；尤其是亲环境效果和相对目标交互依赖特定人群。
+
+- link_to_next_phase_cn：要检验假设就需要一个能进行大规模随机分配并测量真实行为的环境。
+
+##### evidence_pointers
+
+1. Section 3.1-3.3
+
+2. H1-H4声明
+
+3. 图1-3的提示性说明
+
+#### 3. 现场环境选择与制品改造阶段
+
+- order：3
+
+- name_cn：现场环境选择与制品改造阶段
+
+- question_cn：在哪里、以何种技术方式可以高保真地操作徽章组件并测量骑行行为？
+
+- inputs_and_setting_cn：美国中西部某大型大学的自行车通勤项目：RFID芯片与读站、中央数据库、已有周邮件和仪表盘、4,235名注册用户。
+
+- designed_or_compared_object_cn：改造每周电子邮件新闻信和在线仪表盘，加入用户姓名、上周骑行天数、本周徽章（未获得则灰色显示）、徽章获得说明；并设计三种操纵的界面呈现。
+
+- baseline_control_or_counterfactual_cn：没有社交分享链接的徽章邮件；自我利益能指；固定目标；以及各因素之间的组合形成完整2×2×2交叉。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：技术环境描述与界面工程改造。
+
+- main_result_cn：成功将三种徽章设计操纵嵌入常规沟通渠道，且记录每周骑行天数由RFID自动生成。
+
+- argumentative_role_cn：使后续实验结果具有生态效度，证明操纵对应真实游戏化系统可能采用的设计。
+
+- remaining_uncertainty_cn：改造是否真正改变用户感知需待行为结果验证。
+
+- link_to_next_phase_cn：具备实施条件后进入参与者筛选和随机分配阶段。
+
+##### evidence_pointers
+
+1. 4.1 Research context and technology
+
+2. 4.2 Participants
+
+3. Appendix 1-2
+
+#### 4. 随机分配与七周现场实施阶段
+
+- order：4
+
+- name_cn：随机分配与七周现场实施阶段
+
+- question_cn：如何确保三个设计因素被无混淆地比较，同时防止社交污染和结构性丢失？
+
+- inputs_and_setting_cn：4,235名注册用户中排除上个学年无骑行记录的2,260人，保留1,975人；七周（2016-03-19至2016-05-06）；每周日发送改造后邮件。
+
+- designed_or_compared_object_cn：用户被随机分配到2×2×2八个条件之一；分享链接设置为非功能性（点击后提示功能建设中）；所有用户实际获奖规则统一为每周骑行3天即得徽章，只改变用户面对的描述。
+
+- baseline_control_or_counterfactual_cn：无分享 vs 有分享；固定 vs 相对；自我利益 vs 亲环境，完全交叉。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：随机分配、条件化界面操纵、用非功能性链接隔离预期效应并减少污染。
+
+- main_result_cn：最终获得1,975用户在七周内13,825个用户-周观测；各条件人数基本均衡（230-269人）。
+
+- argumentative_role_cn：提供随机化证据基础，满足因果推断的前提；非功能性链接说明效应来自分享预期而非实际分享。
+
+- remaining_uncertainty_cn：分享选项的真实生态效应可能被低估；相对目标没有配套排行榜等生态化特征。
+
+- link_to_next_phase_cn：实施完成后需要模型设定来分析面板数据。
+
+##### evidence_pointers
+
+1. 4.2 Participants
+
+2. 4.3 Experiment conditions
+
+3. Table 1
+
+#### 5. 主数据分析阶段（随机效应面板模型）
+
+- order：5
+
+- name_cn：主数据分析阶段（随机效应面板模型）
+
+- question_cn：三个设计因素以及相对目标与骑行频率的交互是否影响每周骑行天数？
+
+- inputs_and_setting_cn：13,825个用户-周观测；因变量RidingDays；自变量withSharing、proEnv、relative、freqRider_{t-1}、relative*freqRider_{t-1}。
+
+- designed_or_compared_object_cn：随机效应面板数据回归模型；因变量为计数型骑行天数。
+
+- baseline_control_or_counterfactual_cn：无分享、自我利益、固定目标作为参考类；freqRider滞后一期控制过去骑行水平。
+
+##### objective_metrics
+
+1. withSharing系数
+
+2. proEnv系数
+
+3. relative系数
+
+4. relative*freqRider交互系数
+
+5. Wald chi-square
+
+6. R²
+
+- analysis_method_cn：随机效应面板回归；考虑同一用户周间相关；常数项人均效应；使用滞后freqRider。
+
+- main_result_cn：withSharing显著正（0.044*）；proEnv不显著（0.015）；relative主效应不显著（-0.029）；relative*freqRider交互显著正（0.122***）；freqRider_{t-1}强显著（3.473***）。
+
+- argumentative_role_cn：提供对H1支持、H2不支持、H3不支持但H4支持的统计证据。
+
+- remaining_uncertainty_cn：交互的方向和大小需要进一步分解；计数模型适用性需要稳健性检验。
+
+- link_to_next_phase_cn：通过绘图和分组t检验解释交互，并用零膨胀泊松模型做稳健性检查。
+
+##### evidence_pointers
+
+1. 4.5 Model specification
+
+2. 4.6 Results
+
+3. Table 2
+
+#### 6. 交互分解、稳健性与理论阐释阶段
+
+- order：6
+
+- name_cn：交互分解、稳健性与理论阐释阶段
+
+- question_cn：相对目标的效果在两类骑行者中如何表现？结论是否对模型设定稳健？结果如何返回理论和实践？
+
+- inputs_and_setting_cn：同一面板数据；图5交互图；按一周骑行是否≥3天分组t检验；Appendix 3的零膨胀泊松模型。
+
+- designed_or_compared_object_cn：对高频骑行者、低频骑行者分别比较相对和固定目标；将主模型与零膨胀泊松模型对比；讨论贡献、实践含义和限制。
+
+- baseline_control_or_counterfactual_cn：固定目标作为对照；主模型的结果作为稳健性检验的比较基准。
+
+##### objective_metrics
+
+1. 分组t统计量
+
+2. 零膨胀泊松中的Sharable、Pro-env、Relative、Relative*freqRider系数及显著性
+
+- analysis_method_cn：交互图示；frequent/infrequent子组t检验；零膨胀泊松两阶段模型；理论解释与边界讨论。
+
+- main_result_cn：高频骑行者中相对目标显著增加骑行（t=2.833, p=0.002）；低频骑行者中相对目标显著降低骑行（t=-2.160, p=0.015）；零膨胀泊松模型镜像主结果（Sharable 0.027+；Pro-env 0.005不显著；Relative -0.08*；交互0.107**）。
+
+- argumentative_role_cn：将统计交互转化为可理解的方向性结论，并确认结论对计数模型设定稳健；讨论将结果提升为关于奖励预期、能指价值、个性化完成逻辑的设计知识。
+
+- remaining_uncertainty_cn：能指无效的机制原因未直接测量；分享链接的非功能性限制了实际分享的外部效度；自我报告里程等可能测量误差；未测试其他徽章设计。
+
+- link_to_next_phase_cn：结束论证；以限制和未来研究方向收尾。
+
+##### evidence_pointers
+
+1. 4.6 Results交互分解段落
+
+2. Figure 5
+
+3. Appendix 3
+
+4. Section 5全部
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 指出徽章在游戏化中流行但设计研究缺乏
+
+2. GAP: 存在'如何设计徽章增加目标行为'的研究缺口
+
+3. STUDY_OVERVIEW: 预告大样本现场实验，在自行车通勤项目中检验三种徽章设计组件
+
+4. RESULT: 报告三个主要发现：分享选项增加骑行、亲环境能指无差异、相对目标只对高频骑行者有效
+
+5. CONTRIBUTION: 声明对游戏化设计和动机研究有直接含义
+
+### introduction_moves
+
+1. CONTEXT: 定义徽章并列举Xbox、军队、童子军、Fitbit、LinkedIn、Moodle等广泛应用
+
+2. PRIOR_KNOWLEDGE: 徽章是游戏化中最常用设计元素，61%研究使用成就类机制
+
+3. PHENOMENON: 徽章虽普及但设计研究有限，徽章有奖励、能指、完成逻辑三组件
+
+4. LIMITATION: 除Hamari 2013和Kyewski & Krämer 2018外，多数徽章设计方面未被检验
+
+5. PRACTICAL_STAKES: 徽章系统有效性是设计函数；学术研究未能参与设计层面；实践中大量游戏化因设计差而失败
+
+6. WHY_GAP_MATTERS: 缺乏设计知识使研究者无法在最优状态下评估游戏化，也无法解释混合结果；设计师面对大量选择缺乏依据
+
+7. METHOD_JUSTIFICATION: 检验设计有效性需要完全随机化和控制条件，但现有多数徽章研究依赖定性访谈或分层设计，随机实验稀缺
+
+8. STUDY_OVERVIEW: 本文在大学自行车通勤项目中实施徽章系统，用2×2×2组间设计的七周大规模现场实验
+
+9. CONTRIBUTION: 贡献一是首批聚焦徽章设计层面并分离各设计维度效果；贡献二是大规模随机现场实验接近商业游戏化系统
+
+10. RQ_OR_OBJECTIVE: 目标是检验不同徽章设计如何影响教师、员工、学生的自行车骑行天数
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 回顾徽章在电子游戏中的历史，说明徽章作为可选成就和展示机制
+
+2. THEORY_INTRO: 引入游戏化定义和说服系统概念，强调游戏化目的是影响行为而非娱乐
+
+3. LIMITATION: 先前研究关注添加结构而非结构设计
+
+4. PRIOR_KNOWLEDGE: 教育领域徽章效果混合：增加自我效能和参与，但对学习结果不显著；在线社区中徽章产生目标梯度效应，临近徽章时贡献增、获得后降
+
+5. WHY_GAP_MATTERS: 交易平台中单纯徽章无效果，用户对徽章看法不一，说明徽章效果比元分析更细致
+
+6. THEORY_PROPOSITION: 引入期望-价值理论：坚持和努力取决于期望与价值
+
+7. MECHANISM: 分享选项增加徽章的感知价值（社会接受、地位、关系维护）；亲环境能指通过温暖光辉增加价值；相对目标通过不确定性刺激内在动机
+
+8. MECHANISM: 相对目标对高频和低频骑行者产生不同比较有利性，支持交互假设H4
+
+### artifact_design_moves
+
+1. CONTEXT: 描述大学自行车通勤项目的RFID基础设施、激励政策和门户
+
+2. DESIGN_FEATURE: 改造每周电子新闻信：姓名、上周骑行天数、徽章、灰色未获徽章、说明；仪表盘同步
+
+3. DESIGN_FEATURE: 奖励操纵：有分享链接显示'Share This!'和Facebook图标，链接可见但非功能性
+
+4. DESIGN_FEATURE: 能指操纵：Star Rider奖杯 vs Eco Healer环保图像
+
+5. DESIGN_FEATURE: 完成逻辑操纵：固定目标'Ride 3+ times' vs 相对目标'Be in the top 25% of riders'
+
+6. METHOD_JUSTIFICATION: 实际获奖规则统一为3天，保持徽章授予机制不变，只改变用户面对的设计；分享链接非功能性是为了避免污染并隔离预期效应
+
+7. METHOD_JUSTIFICATION: 选择3天和top25%，因为历史上约25%用户完成3天/周
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 因变量为每周骑行天数，因RFID能可靠捕捉且与通勤兴趣一致
+
+2. METHOD_JUSTIFICATION: 用随机效应面板回归而非混合回归或固定效应模型，因为同一用户观测相关且处理无个体内变异
+
+3. METHOD_JUSTIFICATION: 用滞后freqRider检验交互；用零膨胀泊松模型做稳健性检验
+
+4. BENCHMARK_OR_CONTRAST: 有分享 vs 无分享，亲环境 vs 自我利益，固定 vs 相对，以及相对×freqRider交互
+
+5. RESULT: withSharing显著正支持H1
+
+6. RESULT: proEnv不显著不支持H2
+
+7. RESULT: relative主效应不显著不支持H3
+
+8. RESULT: relative*freqRider交互显著支持H4
+
+9. ROBUSTNESS_OR_BOUNDARY_TEST: 图5分解交互方向；高频组相对目标显著正、低频组显著负
+
+10. ROBUSTNESS_OR_BOUNDARY_TEST: 零膨胀泊松模型镜像主结果
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 对游戏化文献贡献：徽章设计组件有效性的新洞察
+
+2. CONTRIBUTION: 能指效果有限，需要价值对齐和显著性；指出未发现能指对行为的持续驱动
+
+3. CONTRIBUTION: 奖励与社交分享的协同潜力；保守估计下分享预期仍有效
+
+4. CONTRIBUTION: 强调徽章设计与用户特征交互，混合结果可能来自交互；呼吁个性化设计
+
+5. CONTRIBUTION: 对实践：丰富徽章奖励、谨慎对待能指、按用户绩效选择目标结构
+
+6. BOUNDARY_CONDITION: 限制：分享链接非功能性、相对目标无排行榜等生态特征、测量只有骑行天数而非距离
+
+7. LIMITATION_AND_FUTURE: 只选择三种徽章操纵；未来研究应探索更多设计边界和潜在机制
+
+8. CONTRIBUTION: 结语指出设计徽章可以影响目标行为，敦促研究者考虑徽章设计的具体细节
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 期望-价值理论（expectancy-value theory）
+
+2. 社会形象、自我信号和社交奖励文献
+
+3. 亲社会/亲环境框架和温暖光辉文献
+
+4. 目标设定、内在动机与不确定性/挑战文献
+
+5. 游戏化与说服系统设计文献
+
+6. 目标梯度假说和小区域假说
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：期望-价值理论为三个设计维度的预期效果提供了总体框架，并直接指导了分享选项和部分能指假设；但完成逻辑选择（固定vs相对、top25%）在很大程度上来自游戏/竞争、内在动机领域知识和现场实际阈值；能指设计（Star Rider vs Eco Healer）则是领域要求和设计惯例的选择。理论不是每个技术细节的唯一来源。
+
+- 理论到设计翻译链：期望-价值理论认为坚持取决于结果期望和感知价值→分享选项增加徽章的社会价值→要求设计一个可感知的分享入口→在邮件/仪表盘中显示'Share This!'和Facebook图标→比较有分享与无分享条件→显著但很小的骑行天数增加。亲环境框架通过温暖光辉增加价值→要求改变徽章标题、图像、说明→Eco Healer和环保图像→比较亲环境与自我利益能指→无显著差异。相对目标通过不确定性激发内在动机，但依赖比较有利性→要求用百分比表示目标→'Be in the top 25% of riders'→比较相对与固定目标→主效应不显著，但与骑行频率交互显著：高频者受益、低频者受损。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：期望-价值理论：任务价值提高会增加坚持和努力（Eccles 1983）
+
+- mechanism_cn：分享徽章可带来社会认可、地位和关系维护，提高徽章感知价值
+
+- design_requirement_cn：徽章界面需要包含一个可感知的社交分享选项
+
+- artifact_choice_cn：在徽章邮件/仪表盘中添加'Share This!'链接和Facebook图标；链接可见但非功能性
+
+- evaluated_contrast_cn：有分享链接 vs 无分享链接
+
+- objective_result_cn：有分享条件每周骑行天数显著高于无分享（β=0.044, p=0.022）
+
+##### evidence_pointers
+
+1. 3.1节
+
+2. 4.3节
+
+3. Table 2
+
+4. Figure 1
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：亲社会/亲环境框架可通过温暖光辉增加行为价值（Taufik et al. 2015; Grant & Hofmann 2011）
+
+- mechanism_cn：亲环境能指提高环保行为对环保倾向用户的吸引力和价值
+
+- design_requirement_cn：徽章标题、图像、文本应承载亲环境语义
+
+- artifact_choice_cn：Eco Healer徽章+环境主题图像 vs Star Rider奖杯自我利益图像
+
+- evaluated_contrast_cn：亲环境能指 vs 自我利益能指
+
+- objective_result_cn：无显著差异（β=0.015, p=0.443）
+
+##### evidence_pointers
+
+1. 3.2节
+
+2. 4.3节
+
+3. Table 2
+
+4. Figure 2
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：内在动机需要挑战和不确定目标；相对目标比固定目标更有刺激（Malone & Lepper 1987; Hsee et al. 2013）
+
+- mechanism_cn：相对目标产生结果不确定性，增加挑战和兴奋；但对低频者造成不利社会比较
+
+- design_requirement_cn：完成逻辑表述应体现相对绩效而非绝对阈值
+
+- artifact_choice_cn：固定目标'Ride 3+ times' vs 相对目标'Be in the top 25% of riders'
+
+- evaluated_contrast_cn：相对目标主效应及相对×上一周高频骑行者交互
+
+- objective_result_cn：主效应不显著（-0.029, p=0.168）；交互显著（0.122, p=0.001），高频组增加、低频组减少
+
+##### evidence_pointers
+
+1. 3.3节
+
+2. 4.3节
+
+3. Table 2
+
+4. Figure 5
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 大规模随机现场实验（2×2×2 between-subjects）
+
+2. 随机效应面板数据回归
+
+3. 交互作用分解（分组t检验和交互图）
+
+4. 零膨胀泊松模型稳健性检验
+
+- why_these_evaluations_cn：文章需要同时完成三重任务：对三个徽章设计维度进行因果识别（需要随机分配和对照）；处理同一用户跨周相关（需要面板模型）；解释相对目标的条件效应（需要交互项和分组分解）。最后需要确认结论不是特定模型设定的产物（需要零膨胀泊松）。
+
+- benchmark_and_contrast_chain_cn：基准从文献中的'仅徽章有无'推进到本文的'设计维度对比'：每个维度都选择一个缺省版本作为对照，再用完整交叉设计让三个对比在同一样本中同时生效；显著性结果进一步与频次分组比较，最终用替代模型确认同一模式。
+
+### claim_evidence_ledger
+
+#### 1. 增加社交分享选项提高骑行天数
+
+- claim_cn：增加社交分享选项提高骑行天数
+
+- supported_cn：是
+
+- evidence_cn：随机效应面板模型withSharing系数0.044, p=0.022；零膨胀泊松Sharable系数0.027, p=0.081方向一致
+
+- evidence_gap_cn：只有14/967人点击分享链接，效应虽显著但很小；分享链接是非功能性的，只测预期而非实际分享
+
+#### 2. 亲环境能指优于自我利益能指
+
+- claim_cn：亲环境能指优于自我利益能指
+
+- supported_cn：否
+
+- evidence_cn：proEnv系数0.015, p=0.443不显著；零膨胀泊松同样不显著
+
+- evidence_gap_cn：未直接测量用户对能指的情感或环保价值认同；可能图形/标题变化太弱
+
+#### 3. 相对目标总体优于固定目标
+
+- claim_cn：相对目标总体优于固定目标
+
+- supported_cn：否
+
+- evidence_cn：relative系数-0.029, p=0.168不显著；零膨胀泊松中甚至显著负（-0.08, p=0.016）
+
+- evidence_gap_cn：主效应不显著，且被交互效应所覆盖
+
+#### 4. 相对目标对高频骑行者更有效、对低频骑行者不利
+
+- claim_cn：相对目标对高频骑行者更有效、对低频骑行者不利
+
+- supported_cn：是
+
+- evidence_cn：relative*freqRider交互0.122, p=0.001；高频组t=2.833, p=0.002正向；低频组t=-2.160, p=0.015负向；零膨胀泊松交互0.107, p=0.004
+
+- evidence_gap_cn：freqRider采用滞后一周是否完全捕捉习惯性骑行水平仍是操作化选择；未直接检验'不利社会比较'心理机制
+
+#### 5. 结果来自预期价值而非实际分享
+
+- claim_cn：结果来自预期价值而非实际分享
+
+- supported_cn：部分是
+
+- evidence_cn：实际分享被禁止（链接非功能性），所以效应不可能来自实际分享传播
+
+- evidence_gap_cn：没有过程测量证实'预期价值'中介；非功能性链接也可能带来好奇或失望等混杂反应
+
+- internal_validity_strategy_cn：随机分配到八个条件消除选择偏差；完全随机化避免分层设计的课堂污染；分享链接非功能性防止社交网络条件泄漏；实际徽章授予规则统一（3天/周）而只改变用户界面文本，从而隔离设计感知效应；随机效应面板模型利用个人随机截距处理重复观测；滞后freqRider控制过去行为习惯；零膨胀泊松模型和阈值敏感性（2+/4+）作为稳健性检查。
+
+- external_validity_strategy_cn：选择真实自行车通勤项目而非实验室；参与者包括教师、员工、学生，共1,975人；徽章嵌入每周邮件和仪表盘，接近商业游戏化系统的高频接触方式；选择历史约25%的完成率使相对目标与固定目标难度对等；讨论中通过将结果与既有现场实验和游戏化框架（Liu et al. 2017）结合来扩展一般性。
+
+- what_is_not_actually_tested_cn：没有直接测量期望、价值、温暖光辉、社会比较等心理机制；没有检验实际社交媒体分享发生后的传播效应和同伴效应；能指设计没有测量用户对环保价值的认同度，也没有对徽章图片美感进行操纵；相对目标没有配套排行榜、进度反馈等生态化特征；只测量骑行天数，未测骑行距离、强度或长期保持；未检验徽章可见性、层级、美学等其他设计维度。
+
+## 贡献闭环
+
+- technical_claim_cn：使用随机效应面板模型和零膨胀泊松模型，在大样本现场数据中识别出分享选项的显著正效应、能指的无显著效应和相对目标的条件效应。
+
+- artifact_claim_cn：在真实徽章系统中，增加社交分享链接这一具体设计元素提高骑行行为；亲环境能指替换无效果；相对目标vs固定目标的效果取决于用户先前表现。
+
+- mechanism_claim_cn：分享选项通过预期社会奖励（期望-价值理论）起作用；相对目标通过不确定性和社会比较影响动机，对高频骑行者有利、对低频骑行者不利。
+
+- boundary_claim_cn：相对目标的正面效应适用于频繁骑行者，负面效应适用于低频骑行者；亲环境能指的效果可能依赖价值对齐与显著性；分享效应在禁止实际分享的保守设计下仍存在，可能被低估。
+
+- reusable_design_knowledge_cn：徽章设计者应增加额外奖励（如社交分享）来增强徽章价值；不应依赖简单替换能指图像/标题来改变行为；完成逻辑应个性化：高绩效用户使用相对目标，低绩效用户使用固定目标，或采用分级徽章系统。
+
+- theoretical_contribution_cn：将期望-价值理论扩展到徽章设计中的奖励预期；将内在动机的不确定性/挑战理论转化为相对目标的差异化假设；用用户特征与设计元素的交互解释游戏化研究中混合结果。
+
+- how_discussion_closes_intro_gap_cn：引言提出徽章设计研究缺乏和丰富设计选择缺乏依据；讨论通过三个组件各自的实证结果回应该缺口：奖励组件有明确见效方向，能指组件被证伪并给出细化条件，完成逻辑组件被证明需要个性化；同时将混合结果归因于设计与用户特征交互，呼应引言中‘混合发现可能来自不同设计’的判断。
+
+- overclaim_or_unsupported_leaps_cn：将分享效应归因于预期价值而没有中介测量；将能指的零结果解读为‘设计能指可能不足以驱动行为’，但承认需要更多能指种类研究；将相对目标的交互归因于不确定性和社会比较但没有直接心理测量；零膨胀泊松中relative主效应为显著负，文中未充分展开这一差异；分享链接非功能性可能造成用户困惑。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：徽章在游戏化应用中流行，但关于如何设计徽章来增加目标行为的研究缺乏。
+
+- rhetorical_function_cn：摘要开头建立主题和缺口，让读者一开始就了解文章要解决的问题。
+
+- depends_on_cn：无
+
+- sets_up_cn：为摘要剩余部分提供断言基础。
+
+- evidence_pointer：ABSTRACT 第1句
+
+### 2. P1 S2-S4
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：受该缺口驱动，作者在自行车通勤项目中开展大规模现场实验，系统变化徽章的奖励、能指、完成逻辑组件。
+
+- rhetorical_function_cn：预告研究设计和三大操纵，表明这是一项实证论文。
+
+- depends_on_cn：缺口存在
+
+- sets_up_cn：为摘要中的结果呈现做铺垫。
+
+- evidence_pointer：ABSTRACT 第2-4句
+
+### 3. P1 S5-S7
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S5-S7
+
+- move_code：RESULT
+
+- paraphrase_cn：报告三个发现：Facebook分享选项增加骑行；亲环境能指无差异；相对目标仅对高频骑行者增加骑行。
+
+- rhetorical_function_cn：浓缩核心客观结果，让摘要具有信息量。
+
+- depends_on_cn：实验设计已预告
+
+- sets_up_cn：为贡献声明提供依据。
+
+- evidence_pointer：ABSTRACT 第5-7句
+
+### 4. P1 S8
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S8
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：这些发现对游戏化设计和设计元素背后动机研究有直接意义。
+
+- rhetorical_function_cn：将结果升级为理论和实践贡献。
+
+- depends_on_cn：三个结果
+
+- sets_up_cn：让读者期待正文中的讨论。
+
+- evidence_pointer：ABSTRACT 最后一句
+
+### 5. P1 S1-S2
+
+- order：5
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：徽章是标记成就、身份或成员资格的令牌，从军事勋章和童子军徽章到Xbox、PlayStation等平台广泛应用。
+
+- rhetorical_function_cn：定义核心现象并提供广泛历史例子，使徽章显得直观且重要。
+
+- depends_on_cn：无
+
+- sets_up_cn：为下一句游戏化中的流行程度做铺垫。
+
+- evidence_pointer：Section 1 P1
+
+### 6. P1 S3-S4
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S3-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：徽章是游戏化中最常用的设计元素；61%的游戏化研究使用了成就机制；Fitbit、LinkedIn、Moodle等商业产品都包含徽章。
+
+- rhetorical_function_cn：用调查和商业实例证明徽章在实践中和研究中的普及。
+
+- depends_on_cn：徽章定义
+
+- sets_up_cn：与下一句缺乏设计研究形成对比。
+
+- evidence_pointer：Section 1 P1后段
+
+### 7. P2 S1-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：尽管徽章广泛部署，但徽章设计研究很有限；徽章有奖励、能指、完成逻辑三个组件，每个都有多种实现方式；只有极少数研究直接处理徽章设计，除Hamari 2013和Kyewski & Krämer 2018外，许多设计方面仍未检验。
+
+- rhetorical_function_cn：引入本研究的概念分解框架并界定文献缺口。
+
+- depends_on_cn：徽章的普遍性
+
+- sets_up_cn：让读者知道本文将从三个组件出发。
+
+- evidence_pointer：Introduction P2
+
+### 8. P3 S1-S4
+
+- order：8
+
+- section：Introduction
+
+- locator：P3 S1-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：徽章系统有效性是其设计的结果；学术研究在游戏化设计方面参与不足，无法评估最优状态或解释混合结果；实践中许多游戏化预计因设计差失败，设计师面临大量选择。
+
+- rhetorical_function_cn：说明设计研究缺口既有理论后果（无法解释混合结果）又有实践后果（设计师没有依据）。
+
+- depends_on_cn：设计研究缺乏
+
+- sets_up_cn：为下文的方法论呼吁和现场实验做铺垫。
+
+- evidence_pointer：Introduction P3
+
+### 9. P4 S1-S4
+
+- order：9
+
+- section：Introduction
+
+- locator：P4 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：评估设计有效性需要完全随机化和对照条件；现有徽章研究多为定性访谈或分层设计，随机实验稀缺。
+
+- rhetorical_function_cn：为使用大规模随机现场实验提供方法论合理性，并强化缺口。
+
+- depends_on_cn：设计有效性问题
+
+- sets_up_cn：引出本文的实验设计选择。
+
+- evidence_pointer：Introduction P4
+
+### 10. P5 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P5 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文变化徽章三个组件的两个流行实现，用2×2×2组间设计开展七周大规模现场实验，检验不同徽章设计如何影响骑行天数。
+
+- rhetorical_function_cn：正式提出研究目标和操作设计。
+
+- depends_on_cn：前面的缺口和方法呼吁
+
+- sets_up_cn：为贡献声明提供对象。
+
+- evidence_pointer：Introduction P5
+
+### 11. P6 S1-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献之一是首批专注于徽章设计层面并隔离各设计维度效果；贡献之二是大规模随机现场实验，接近商业游戏化系统。
+
+- rhetorical_function_cn：提前声明贡献，让审稿人和读者知道预期收益。
+
+- depends_on_cn：研究目标和设计
+
+- sets_up_cn：引出下一节的文献综述。
+
+- evidence_pointer：Introduction P6
+
+### 12. 2.1 全节
+
+- order：12
+
+- section：Literature
+
+- locator：2.1 全节
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：回顾徽章在游戏中的起源：Xbox 360的Achievements、Assassin's Creed例子；徽章是可选的、无惩罚、用于激励挑战和展示成就。
+
+- rhetorical_function_cn：建立徽章的正统/历史语境，为其在游戏化中的可选性和易叠加性作铺垫。
+
+- depends_on_cn：引言中的徽章定义
+
+- sets_up_cn：解释徽章为什么容易被加入现有系统。
+
+- evidence_pointer：Section 2.1
+
+### 13. 2.2 P1-P2
+
+- order：13
+
+- section：Literature
+
+- locator：2.2 P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：游戏化是说服系统，区别于游戏；游戏化设计关注元素的说服力及对信念/行为的影响。
+
+- rhetorical_function_cn：为后续用动机理论解释徽章设计提供系统观基础。
+
+- depends_on_cn：游戏化定义文献
+
+- sets_up_cn：将徽章设计定性为说服设计问题。
+
+- evidence_pointer：Section 2.2
+
+### 14. 2.2 P3-P4
+
+- order：14
+
+- section：Literature
+
+- locator：2.2 P3-P4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：以往研究主要关注添加游戏化结构而不是结构设计；关于单一元素设计的研究很薄。
+
+- rhetorical_function_cn：进一步限定文献空白是设计层面而非有无层面。
+
+- depends_on_cn：游戏化说服设计视角
+
+- sets_up_cn：聚焦到徽章作为常见而有前景的元素。
+
+- evidence_pointer：Section 2.2末段
+
+### 15. 2.3 P1-P3
+
+- order：15
+
+- section：Literature
+
+- locator：2.3 P1-P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：教育领域加入徽章增加自我效能和参与，但对学习结果无显著关系，有的是分层设计而非完全随机；在线社区中徽章增加目标行为但存在获得前后波动；交易平台中单纯徽章不增加行为，主动监控徽章者有增加。
+
+- rhetorical_function_cn：总结徽章效果证据并指出混杂的方法和结果。
+
+- depends_on_cn：2.2设计研究薄弱的判断
+
+- sets_up_cn：为2.4徽章设计差异可解释混合结果做铺垫。
+
+- evidence_pointer：Section 2.3
+
+### 16. 2.4 P1-P2
+
+- order：16
+
+- section：Literature
+
+- locator：2.4 P1-P2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：徽章设计在实践中差异很大：Fitbit从数字改成鞋主题；奖励可见性有别人可见和自己可见；完成逻辑可用不同框架呈现同一行为。
+
+- rhetorical_function_cn：让设计差异问题具体化和现象化。
+
+- depends_on_cn：徽章三组件框架
+
+- sets_up_cn：为三个操纵提供现实参照。
+
+- evidence_pointer：Section 2.4 P1
+
+### 17. 2.4 P3-P4
+
+- order：17
+
+- section：Literature
+
+- locator：2.4 P3-P4
+
+- move_code：GAP
+
+- paraphrase_cn：徽章设计可变化较大，但现有研究对替代设计的效果很薄；只有Hamari 2013和Kyewski & Krämer 2018探索过不同设计且无显著差异；文献对徽章动机来源也无共识。
+
+- rhetorical_function_cn：将所有前述问题压缩成精确的文献缺口。
+
+- depends_on_cn：2.3和2.4前面的混合证据
+
+- sets_up_cn：为期望-价值理论等理论引入创造空间。
+
+- evidence_pointer：Section 2.4 P3-P4
+
+### 18. 2.4 P5
+
+- order：18
+
+- section：Literature
+
+- locator：2.4 P5
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：徽章可作为内在动机和外在奖励，动机来源不统一使设计无法依据单一理论。
+
+- rhetorical_function_cn：说明动机来源争论使设计知识缺失更严重。
+
+- depends_on_cn：前面效果的混合证据
+
+- sets_up_cn：引出下一节期望-价值理论作为整合框架。
+
+- evidence_pointer：Section 2.4末段
+
+### 19. 3 P1-P2
+
+- order：19
+
+- section：Research hypotheses
+
+- locator：3 P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：引入期望-价值理论：坚持和精力取决于期望和结果价值；价值可来自外在奖励和内在奖励；不同徽章奖励设计可影响感知价值从而影响骑行。
+
+- rhetorical_function_cn：为三个设计假设提供统一理论底座。
+
+- depends_on_cn：2.4动机来源争论
+
+- sets_up_cn：分别推导奖励、能指、完成逻辑三个假设。
+
+- evidence_pointer：Section 3开头段
+
+### 20. P1-P3
+
+- order：20
+
+- section：3.1 Rewards
+
+- locator：P1-P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：徽章奖励提供清晰目标和自我信号；当徽章可分享时，获得额外社会接受、地位和关系维护奖励；社会形象是强大动机。
+
+- rhetorical_function_cn：解释为什么分享选项应增加感知价值。
+
+- depends_on_cn：期望-价值理论
+
+- sets_up_cn：为H1提供机制。
+
+- evidence_pointer：Section 3.1
+
+### 21. P4
+
+- order：21
+
+- section：3.1 Rewards
+
+- locator：P4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：带Facebook分享链接的徽章比不带链接的导致更高骑行。
+
+- rhetorical_function_cn：正式陈述第一个可检验假设。
+
+- depends_on_cn：前面的期望价值论证
+
+- sets_up_cn：后续结果中直接检验H1。
+
+- evidence_pointer：Section 3.1末尾
+
+### 22. P1-P2
+
+- order：22
+
+- section：3.2 Signifiers
+
+- locator：P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：能指是徽章标题、图像和文本；自我利益与亲社会/亲环境框架在健康、环保、疫苗等领域的证据混合。
+
+- rhetorical_function_cn：提供亲环境框架的既有证据并显示不确定性。
+
+- depends_on_cn：徽章三组件框架
+
+- sets_up_cn：引出本研究中亲环境优势假设。
+
+- evidence_pointer：Section 3.2
+
+### 23. P3-P4
+
+- order：23
+
+- section：3.2 Signifiers
+
+- locator：P3-P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：骑自行车同时有自我利益和环保利益；考虑到大学对可持续发展的承诺，成员可能倾向于环保；因此亲环境能指提高环保利益的凸显和可及性。
+
+- rhetorical_function_cn：在具体现场中把亲环境框架翻译成研究假设。
+
+- depends_on_cn：亲社会框架证据
+
+- sets_up_cn：为H2提供具体机制。
+
+- evidence_pointer：Section 3.2 P3-P4
+
+### 24. 末尾
+
+- order：24
+
+- section：3.2 Signifiers
+
+- locator：末尾
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2：亲环境能指徽章比自我利益徽章导致更高骑行。
+
+- rhetorical_function_cn：正式陈述第二个假设。
+
+- depends_on_cn：大学环保承诺和框架证据
+
+- sets_up_cn：为后续检验亲环境能指。
+
+- evidence_pointer：Section 3.2末尾
+
+### 25. P1
+
+- order：25
+
+- section：3.3 Completion logic
+
+- locator：P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：固定目标如走10000步，相对目标如比朋友走最多；相对目标的结果依赖他人表现，具有不确定性。
+
+- rhetorical_function_cn：定义两种完成逻辑并引入不确定性维度。
+
+- depends_on_cn：完成逻辑组件定义
+
+- sets_up_cn：为相对目标激励效应做概念铺垫。
+
+- evidence_pointer：Section 3.3 P1
+
+### 26. P2-P3
+
+- order：26
+
+- section：3.3 Completion logic
+
+- locator：P2-P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：相对目标的不确定性可激发内在动机和挑战；固定目标易显得简单或困难；高频骑行者尤其能从相对目标中获得刺激。
+
+- rhetorical_function_cn：从内在动机理论推导相对目标假设。
+
+- depends_on_cn：目标确定性/不确定性文献
+
+- sets_up_cn：形成H3主效应。
+
+- evidence_pointer：Section 3.3 P2-P3
+
+### 27. P3末尾
+
+- order：27
+
+- section：3.3 Completion logic
+
+- locator：P3末尾
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H3：相对目标徽章比固定目标徽章导致更高骑行。
+
+- rhetorical_function_cn：正式陈述第三个假设。
+
+- depends_on_cn：内在动机论证
+
+- sets_up_cn：随后检验主效应。
+
+- evidence_pointer：Section 3.3 H3
+
+### 28. P4
+
+- order：28
+
+- section：3.3 Completion logic
+
+- locator：P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：高频骑行者与总体比较有利，把不确定性看作可达的挑战；低频骑行者面临不利比较，相对目标使目标更难达。
+
+- rhetorical_function_cn：引入用户类型交互机制。
+
+- depends_on_cn：社会比较和期望价值理论
+
+- sets_up_cn：为H4提供理论依据。
+
+- evidence_pointer：Section 3.3 P4
+
+### 29. 末尾
+
+- order：29
+
+- section：3.3 Completion logic
+
+- locator：末尾
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H4：相比固定目标，相对目标对高频骑行者比低频骑行者更有效。
+
+- rhetorical_function_cn：正式陈述第四个假设。
+
+- depends_on_cn：比较有利性机制
+
+- sets_up_cn：后续用交互项检验H4。
+
+- evidence_pointer：Section 3.3末尾
+
+### 30. 4.1 P1-P3
+
+- order：30
+
+- section：Methods
+
+- locator：4.1 P1-P3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述大学自行车通勤项目及其RFID技术：芯片、读站、中央数据库、骑行天数度量。
+
+- rhetorical_function_cn：提供实验环境和数据采集的物理基础。
+
+- depends_on_cn：选择自行车通勤作为研究场景
+
+- sets_up_cn：为测量骑行天数提供合法性。
+
+- evidence_pointer：Section 4.1
+
+### 31. 4.1 P4-P6
+
+- order：31
+
+- section：Methods
+
+- locator：4.1 P4-P6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：项目原有保险报销等激励和新闻邮件；本研究改造新闻邮件和仪表盘加入徽章。
+
+- rhetorical_function_cn：说明干预载体是真实项目中的现有沟通渠道，不是一次性实验装置。
+
+- depends_on_cn：RFID基础设施
+
+- sets_up_cn：为操纵细节提供上下文。
+
+- evidence_pointer：Section 4.1后段
+
+### 32. 4.3 P1
+
+- order：32
+
+- section：Methods
+
+- locator：4.3 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：进行随机现场实验，参与者随机分配到2（分享）×2（目标）×2（能指）八个条件；最终分析1,975名既有注册用户，7周13,825个用户-周观测。
+
+- rhetorical_function_cn：正式给出实验设计和样本规模。
+
+- depends_on_cn：4.1-4.2的背景
+
+- sets_up_cn：为模型和结果做设计框架。
+
+- evidence_pointer：4.3 P1
+
+### 33. 4.3 奖励操纵段落
+
+- order：33
+
+- section：Methods
+
+- locator：4.3 奖励操纵段落
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：奖励操纵为分享链接的可用性；有分享条件显示'Share This!'和Facebook图标，链接可见但非功能性；无分享条件不显示。
+
+- rhetorical_function_cn：详细描述第一个设计操纵。
+
+- depends_on_cn：H1和期望价值理论
+
+- sets_up_cn：让结果能够指向此操纵。
+
+- evidence_pointer：Section 4.3奖励段
+
+### 34. 4.3 奖励操纵段落
+
+- order：34
+
+- section：Methods
+
+- locator：4.3 奖励操纵段落
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：分享链接非功能性是为了避免社交网络污染，并隔离‘预期分享’而非实际分享的效应。
+
+- rhetorical_function_cn：为关键设计决策提供方法论辩护。
+
+- depends_on_cn：随机实验的污染威胁
+
+- sets_up_cn：后续讨论中说明该设计是保守估计。
+
+- evidence_pointer：Section 4.3奖励段
+
+### 35. 4.3 能指操纵段落
+
+- order：35
+
+- section：Methods
+
+- locator：4.3 能指操纵段落
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：能指操纵为徽章图像和标题：自我利益组可获Star Rider奖杯，亲环境组可获Eco Healer环保图像。
+
+- rhetorical_function_cn：详细描述第二个设计操纵。
+
+- depends_on_cn：H2和能指定义
+
+- sets_up_cn：让结果能够指向该操纵。
+
+- evidence_pointer：Section 4.3能指段
+
+### 36. 4.3 完成逻辑操纵段落
+
+- order：36
+
+- section：Methods
+
+- locator：4.3 完成逻辑操纵段落
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：完成逻辑操纵为获得说明：固定条件写'Ride 3+ times'，相对条件写'Be in the top 25% of riders'。
+
+- rhetorical_function_cn：详细描述第三个设计操纵。
+
+- depends_on_cn：H3/H4和目标类型定义
+
+- sets_up_cn：让结果能够指向完成逻辑。
+
+- evidence_pointer：Section 4.3完成逻辑段
+
+### 37. 4.3 完成逻辑操纵段落末尾
+
+- order：37
+
+- section：Methods
+
+- locator：4.3 完成逻辑操纵段落末尾
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实际授予规则统一为骑行3天即发徽章，无论条件；选择top25%是因为历史上约25%用户完成3天/周，目的是只改变用户面对的设计。
+
+- rhetorical_function_cn：说明处理的是设计感知而非客观授予机制，并确保难度对等。
+
+- depends_on_cn：历史数据
+
+- sets_up_cn：强化内部有效性。
+
+- evidence_pointer：Section 4.3末尾
+
+### 38. 4.5 P1-P2
+
+- order：38
+
+- section：Methods
+
+- locator：4.5 P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因变量选择每周骑行天数，因为RFID能可靠捕捉且与兴趣一致；混合回归和固定效应模型不适用，采用随机效应面板回归；用零膨胀泊松做稳健性检查。
+
+- rhetorical_function_cn：为模型选择提供统计理由。
+
+- depends_on_cn：RFID数据性质
+
+- sets_up_cn：为结果表格提供模型说明。
+
+- evidence_pointer：Section 4.5
+
+### 39. 4.5 模型公式段
+
+- order：39
+
+- section：Methods
+
+- locator：4.5 模型公式段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：模型包含withSharing、proEnv、relative、freqRider_{t-1}以及relative*freqRider交互项。
+
+- rhetorical_function_cn：把假设转成可估计的回归方程。
+
+- depends_on_cn：H1-H4
+
+- sets_up_cn：让结果表格可以直接解释。
+
+- evidence_pointer：4.5模型公式
+
+### 40. 4.6 P1
+
+- order：40
+
+- section：Results
+
+- locator：4.6 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：全部13,825个用户-周中有3,058个徽章（22.1%），接近25%估计；967名有分享用户中14人点击分享链接（1.45%）。
+
+- rhetorical_function_cn：先报告操纵的接受率和徽章授予情况，说明操纵有效且符合预期。
+
+- depends_on_cn：实验设计
+
+- sets_up_cn：为效应大小讨论提供背景。
+
+- evidence_pointer：4.6 P1
+
+### 41. 4.6 P2
+
+- order：41
+
+- section：Results
+
+- locator：4.6 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：withSharing显著正效应（β=0.044, p=0.022）支持H1，但效应量小。
+
+- rhetorical_function_cn：报告第一个假设检验结果并立即解释为预期分享价值。
+
+- depends_on_cn：回归模型
+
+- sets_up_cn：为讨论部分奖励与社交分享结论铺垫。
+
+- evidence_pointer：Table 2和4.6 P2
+
+### 42. 4.6 P3
+
+- order：42
+
+- section：Results
+
+- locator：4.6 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：proEnv系数不显著（β=0.015, p=0.443），H2未获支持。
+
+- rhetorical_function_cn：报告第二个假设失败，并指出能指是设计师常关心的领域。
+
+- depends_on_cn：回归模型
+
+- sets_up_cn：为讨论中能指无效的解释做材料。
+
+- evidence_pointer：Table 2和4.6 P3
+
+### 43. 4.6 P4
+
+- order：43
+
+- section：Results
+
+- locator：4.6 P4
+
+- move_code：RESULT
+
+- paraphrase_cn：上一周频繁骑行者主效应显著（β=3.473），符合惯性预期；相对目标主效应不显著，不支持H3，但需结合交互解释。
+
+- rhetorical_function_cn：排除高频骑行者主效应的机械解释，并显示H3需在交互中理解。
+
+- depends_on_cn：回归模型
+
+- sets_up_cn：引向交互项结果。
+
+- evidence_pointer：Table 2和4.6 P4
+
+### 44. 4.6 P5
+
+- order：44
+
+- section：Results
+
+- locator：4.6 P5
+
+- move_code：RESULT
+
+- paraphrase_cn：relative*freqRider交互显著（β=0.122, p=0.001）支持H4；高频组相对目标增加骑行，低频组相对目标降低骑行。
+
+- rhetorical_function_cn：报告最关键的交互结果并给出方向。
+
+- depends_on_cn：模型和freqRider滞后变量
+
+- sets_up_cn：为图5和分组t检验提供统计基础。
+
+- evidence_pointer：4.6 P5和Table 2
+
+### 45. 4.6 P5后半段
+
+- order：45
+
+- section：Results
+
+- locator：4.6 P5后半段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：图5展示交互反转；高频组t=2.833, p=0.002正向；低频组t=-2.160, p=0.015负向；因此相对目标并非普遍有利。
+
+- rhetorical_function_cn：用子组t检验和可视化分解交互，避免交互项仅停留在统计层面。
+
+- depends_on_cn：交互系数
+
+- sets_up_cn：为讨论中个性化建议提供证据。
+
+- evidence_pointer：Figure 5和4.6末段
+
+### 46. 5 P1
+
+- order：46
+
+- section：Discussion
+
+- locator：5 P1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：首段总结问题、设计、三个结果，并说明分享结果符合期望-价值理论。
+
+- rhetorical_function_cn：从结果回到整体研究问题和理论框架。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：为贡献和实践含义铺路。
+
+- evidence_pointer：Section 5 P1
+
+### 47. 5 P2
+
+- order：47
+
+- section：Discussion
+
+- locator：5 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：解释能指无效的几种可能：两种能指效果相当、图形变化太微妙、或太少用户认同环保价值。
+
+- rhetorical_function_cn：为未获支持的假设提供合理机制解释，保护研究价值。
+
+- depends_on_cn：proEnv零结果
+
+- sets_up_cn：为5.1中能指贡献的相对化解释铺垫。
+
+- evidence_pointer：Section 5 P2
+
+### 48. 5 P3
+
+- order：48
+
+- section：Discussion
+
+- locator：5 P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：解释相对目标的交互：高频者有利比较受不确定性激励；低频者因不利比较和更难目标而受挫。
+
+- rhetorical_function_cn：将统计交互回接到社会比较和内在动机机制。
+
+- depends_on_cn：H4结果
+
+- sets_up_cn：为5.1和5.2的个性化结论做理论支撑。
+
+- evidence_pointer：Section 5 P3
+
+### 49. 5.1 贡献1段
+
+- order：49
+
+- section：Discussion
+
+- locator：5.1 贡献1段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献一：未发现能指持续驱动行为的证据；并指出能指可能需要价值对齐和显著性，不能仅靠替换标题和图像。
+
+- rhetorical_function_cn：将零结果转化为有条件的负面设计知识。
+
+- depends_on_cn：proEnv零结果
+
+- sets_up_cn：强调能指研究的边界。
+
+- evidence_pointer：Section 5.1第一段
+
+### 50. 5.1 贡献2段
+
+- order：50
+
+- section：Discussion
+
+- locator：5.1 贡献2段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献二：徽章奖励与社交分享协同；保守设计下预期分享仍有效，实际分享可能更强。
+
+- rhetorical_function_cn：将分享正效应提升为设计知识和未来机会。
+
+- depends_on_cn：withSharing正结果
+
+- sets_up_cn：为实践建议中的额外奖励部分铺垫。
+
+- evidence_pointer：Section 5.1第二段
+
+### 51. 5.1 贡献3段
+
+- order：51
+
+- section：Discussion
+
+- locator：5.1 贡献3段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献三：徽章设计与用户特征交互；相对目标对高频者和低频者效果相反；混合结果可能来自这类交互并为个性化提供依据。
+
+- rhetorical_function_cn：将交互结果提升为对游戏化混合发现的一般解释，并呼吁个性化设计。
+
+- depends_on_cn：H4交互结果
+
+- sets_up_cn：为实践建议中的个性化完成逻辑做铺垫。
+
+- evidence_pointer：Section 5.1第三段
+
+### 52. 5.2 P1
+
+- order：52
+
+- section：Discussion
+
+- locator：5.2 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：实践建议：奖励方面增加与徽章相关的额外奖励如社交分享、积分、代金券。
+
+- rhetorical_function_cn：将奖励结果转化为设计师可执行建议。
+
+- depends_on_cn：withSharing正结果
+
+- sets_up_cn：与能指和完成逻辑建议并列形成完整实践指导。
+
+- evidence_pointer：Section 5.2 P1
+
+### 53. 5.2 P2
+
+- order：53
+
+- section：Discussion
+
+- locator：5.2 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：实践建议：能指效果有限，设计师要么将精力放在别处，要么确保用户与能指价值对齐并通过测试验证。
+
+- rhetorical_function_cn：将能指零结果转化为审慎实践建议。
+
+- depends_on_cn：proEnv零结果
+
+- sets_up_cn：提示能指设计的风险。
+
+- evidence_pointer：Section 5.2 P2
+
+### 54. 5.2 P3
+
+- order：54
+
+- section：Discussion
+
+- locator：5.2 P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：实践建议：完成逻辑按绩效个性化，低绩效用固定目标、高绩效用相对目标，或采用分级徽章。
+
+- rhetorical_function_cn：将交互结果转化为可操作的个性化设计建议。
+
+- depends_on_cn：H4交互结果
+
+- sets_up_cn：让文章以具体设计原则收束。
+
+- evidence_pointer：Section 5.2 P3
+
+### 55. 5.3 P1-P2
+
+- order：55
+
+- section：Discussion
+
+- locator：5.3 P1-P2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：限制：分享链接非功能性是污染风险与生态效度之间的权衡，可能导致保守估计；相对目标没有排行榜等生态特征；测量只有骑行天数。
+
+- rhetorical_function_cn：坦诚说明设计和测量的边界，保护结论不过度外推。
+
+- depends_on_cn：实验设计决策
+
+- sets_up_cn：为未来研究方向提供具体起点。
+
+- evidence_pointer：Section 5.3
+
+### 56. 5.3 P3-P4
+
+- order：56
+
+- section：Discussion
+
+- locator：5.3 P3-P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可现场检验潜在动机、探索更多奖励边界和设计选择；结语敦促研究者考虑徽章设计的具体细节。
+
+- rhetorical_function_cn：将本研究定位为设计导向研究的开端。
+
+- depends_on_cn：所有结果和限制
+
+- sets_up_cn：结束论文并扩大读者想象空间。
+
+- evidence_pointer：Section 5.3 P3-P4
+
+## 写作技术
+
+- gap_construction_cn：先从徽章普及和游戏化61%使用率建立相关性，再指出多数研究只关心'徽章有无'而非'徽章如何设计'；随后用‘除Hamari和Kyewski外’明确列出仅有的两项设计研究，形成锐利缺口；还从方法论角度批评现有研究缺少完全随机化，使缺口同时具有主题和方法两层。
+
+- signposting_cn：摘要直接预告三个组件；引言末尾预告'文献综述和假设在下面小节'；3.1-3.3各节以组件名称开头；每节结尾以'H1/H2/H3/H4'正式收束；4.3用'For the reward conditions...'等固定句式标示操纵；结果部分逐条对照假设。
+
+- transition_logic_cn：文献2.3从教育到在线社区再到交易平台，逐步暴露混合证据；2.4由混合证据转入'徽章不同'的解释；假设部分从统一的期望-价值理论过渡到三个组件；讨论从结果逐条回填解释，再过渡到贡献和实践。
+
+- claim_evidence_rhythm_cn：每段假设都有理论机制、先前证据、具体设计和可检验假设；结果部分每条发现都先报告系数和p值，再解释其设计含义；讨论部分把统计结果转译成'这意味着设计师应该…'。
+
+- benchmark_narrative_cn：没有传统benchmark，而是将'缺省设计'作为对照；相对目标与固定目标不仅对照，还通过历史top25%让难度对等；分享选项通过非功能性链接排除实际分享，使对比更纯粹。
+
+- theory_return_cn：结果部分先按假设检验，讨论部分再用期望-价值理论解释分享效应、用价值对齐和显著性解释能指无效、用社会比较和内在动机解释相对目标交互；理论始终作为组织结果和派生建议的语言。
+
+- contribution_positioning_cn：在引言中预告两大贡献，在5.1中分别按——发现没有显著、发现正效应、发现交互——重构贡献；用'我们是首批聚焦设计维度的研究'和'这是大样本随机现场实验'双重定位。
+
+- novelty_protection_cn：将零结果转化为谨慎的设计边界而非失败；将分享效应说明为保守估计，暗示真实系统可能更强；将相对目标主效应不显著解释为被交互掩盖，从而保留设计意义；用稳健性检验和限制说明呼应外部效度。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立普及现象：描述目标设计元素在实践中的广泛使用，引用调查和商业例子；
+
+- research_job_cn：对目标元素做概念分解，找出可操作组件；
+
+- required_evidence_cn：该元素的使用率或商业普及证据；现有研究数量的系统检索；
+
+- transition_to_next_cn：从'使用广泛'转向'设计知识稀缺'。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：制造双重缺口：主题缺口（设计层面未被检验）和方法缺口（缺乏随机实验）；
+
+- research_job_cn：综述相关实证文献，指出混合结果和设计差异；
+
+- required_evidence_cn：只有极少数研究直接比较设计；多数研究是分层或定性；
+
+- transition_to_next_cn：从缺口引出理论需求。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入一个能覆盖多个设计维度的行为理论，并针对每个组件分别推导机制和假设；
+
+- research_job_cn：将理论命题翻译为设计差异；对可能异质的用户群体提出交互假设；
+
+- required_evidence_cn：机制层面可辩护的心理学/经济学文献；每个设计差异必须对应可操作界面元素；
+
+- transition_to_next_cn：说明要用随机现场实验检验假设。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述真实环境、改造现有沟通渠道、随机分配条件、详细说明每个操纵；
+
+- research_job_cn：与现场合作方共同部署系统，确保测量和操纵无混淆；
+
+- required_evidence_cn：随机分配、样本量、每个条件的受试者数、实际授予机制与设计差异的分离；
+
+- transition_to_next_cn：从实验装置转向统计模型。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告主效应和交互效应，系数量级、p值；对交互做图形和子组检验；用替代模型做稳健性；
+
+- research_job_cn：选用合适面板/计数模型，处理重复测量；
+
+- required_evidence_cn：回归表、交互图、稳健性检验表；
+
+- transition_to_next_cn：从统计结果转向机制解释。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论每个结果的机制意义、将零结果转化为边界条件、将显著结果转化为可复用设计知识和实践建议；
+
+- research_job_cn：诚实地列举限制和未测量心理变量；
+
+- required_evidence_cn：回归结果与理论机制的对应；限制不影响核心结论的论证；
+
+- transition_to_next_cn：以未来研究方向收束。
+
+### most_transferable_moves_cn
+
+1. 将研究对象分解为组件，并针对每个组件设计二选一操纵
+
+2. 同时制造主题缺口和方法缺口（设计层面 + 随机实验稀缺）
+
+3. 用统一理论（如期望-价值）覆盖多个组件，并为异质性用户添加交互假设
+
+4. 在真实平台改造现有沟通渠道，保证生态效度
+
+5. 对不显著结果用'过于微妙''需要价值对齐''可能对立效应抵消'等解释保护其设计知识价值
+
+6. 用交互图和子组分析把统计交互转化为可操作的用户分组建议
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要与大型大学自行车通勤项目合作，获取RFID数据和历史用户池
+
+2. 需要数百上千名真实用户参与现场随机实验和数周实施
+
+3. RFID/自动测量系统并非每个研究都能获取
+
+4. 现场项目方对邮件、仪表盘、保险报销等制度的合作是关键资源
+
+5. 非功能性分享链接是一种特殊的防污染设计，需现场协调
+
+### what_not_to_copy_superficially_cn
+
+1. 不能仅复制'分享链接''亲环境能指''相对目标'三个操纵而不说明其机制和现场适配
+
+2. 不能在没有随机分配和面板数据的情况下宣称'分享预期'是因果解释
+
+3. 不能在无交互检验的情况下将相对目标主效应不显著解读为'个性化必要'
+
+4. 不能把不显著结果包装成'能指无效'的一般结论，需说明测试范围和机制条件
+
+- single_best_description_of_the_routine_cn：把一个普及但缺乏设计知识的技术元素拆成几个可操纵组件，用可用理论为每个组件产生预期和异质性假设，在真实平台通过大规模随机现场实验分离各组件效应，再把显著和不显著结果都转译成有边界的设计原则。
+
+## 分析边界
+
+分析基于全文文本，图表和附录1-2仅有图像占位符，无法进行视觉细节验证；未获得作者提供的补充材料或完整附录编码；Figure 4'所有年份每周骑行次数'只从文字理解。基于方法和结果的文本描述，核心论证链完整，但个别句子级位置依赖Section/P编号而非页码。

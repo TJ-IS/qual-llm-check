@@ -1,0 +1,1797 @@
+# Digital nudging for technical debt management at Credit Suisse
+
+- 作者：Kazem Haki; Annamina Rieder; Lorena Buchmann; Alexander W.Schneider
+- 年份 / 期刊：2023 / European Journal of Information Systems
+- DOI：10.1080/0960085x.2022.2088413
+- 源文件：16786_2023_digital-nudging-for-technical-debt-management-at-credit-suisse.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：在大型金融组织中，自上而下的技术债管理机制为何不够充分，以及一个基于心理效应的数字助推器能否作为补充机制，作用于软件开发团队的日常技术债决策，并在一年内降低IT应用的技术债水平？
+
+- 制品与设计：本文在瑞信构建并实施了一个名为TDM nudge的数字助推器，包含八个设计要素（DE01-DE08），分别运用框架效应、社会规范、信使效应、锚定效应、可得性启发式、损失厌恶等心理学效应，通过可视化评分、颜色编码、进度环、趋势图、单项索引、区间锚点、团队平均值和消息提醒等方式，为软件开发团队提供技术债情境化信息，且不强制约束其决策自由。
+
+- 客观结果：第一阶段的评估显示，助推器在提升技术债意识、理解和行动方面获得积极反馈；使用约一年后，三个参与团队中有两个团队的应用整体技术债和各类型技术债水平下降，而第三个团队因管理层和团队本身缺乏解决技术债的意图、未使用助推器，其技术债水平上升。
+
+- 核心贡献：作者声称这是首次在真实组织中证明数字助推器可以作为技术债管理的有效补充手段；数字助推器不仅适用于简单、临时的个体决策，也可以引导团队层面的复杂集体组织决策；研究还提炼出为复杂集体决策设计助推器时需要考虑的数据透明性、自适应功能和动机/管理支持等设计要点。
+
+- 整篇论证链：文章从软件开发团队面临的时间压力和技术债的‘现在vs未来’权衡出发，指出现有技术债测量复杂、自上而下机制在权力分散的联邦制组织中常常无效或被执行者绕开。作者将问题收缩为：需要一种在单个IT应用决策层面起作用、且不被视为额外约束的补充机制。随后引入行为经济学和助推理论，从选择架构文献中选取六种心理效应，将其翻译为八个设计要素，在瑞信的实际IT环境中构建并实施了数字助推器。研究先通过专家访谈、焦点小组和前后调查评估其有用性，再在一年后通过定量跟踪TD变化并用调查和访谈解释结果。讨论部分将‘助推器有效’从局部绩效上升为对TDM文献和助推文献的贡献：非强制、可作为边界对象、适用于复杂集体决策，同时界定条件——团队和管理层的动机是关键边界。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文明确采用设计科学研究范式，按照Peffers等提出的六步流程开展：问题识别与动机、解决方案目标、设计开发、演示、两阶段评价、沟通；核心产出是一个数字助推制品，并从中提炼出面向复杂集体决策的设计知识。
+
+- 主导写作弧线判定：文章从实际问题出发，引入助推理论和心理效应，据此设计TDM助推器，在实际组织中检验其有用性和效果，最后在讨论中回到助推文献和设计研究文献，贡献机制解释和边界条件。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：按DSR六阶段组织：问题识别与动机→目标定义→设计开发→演示→评价阶段1（有用性）→评价阶段2（技术债水平变化）。阶段1解决‘制品是否有用和可理解’，阶段2解决‘制品在实际使用一年后是否影响技术债水平’，两阶段共享同一组软件团队，但证据类型逐渐从感知/反馈转向客观TD指标。
+
+### studies_or_phases
+
+#### 1. 问题识别与动机
+
+- order：1
+
+- name_cn：问题识别与动机
+
+- question_cn：瑞信现有的自上而下技术债管理机制为什么不足以控制技术债水平？
+
+- inputs_and_setting_cn：瑞信IT环境：数千个应用、每天大量TDM决策、联邦制运营模式。
+
+- designed_or_compared_object_cn：尚无制品；比较对象是现有正式流程和开发团队在时间压力下的行为。
+
+- baseline_control_or_counterfactual_cn：现有自上而下机制（专门拨款、强制评审、代码质量门禁）的效果/局限。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：基于组织内部经验的定性问题界定。
+
+- main_result_cn：自上而下机制必要但不足，会被开发团队绕过，无法触及应用层面的日常决策。
+
+- argumentative_role_cn：建立问题空间，说明为什么需要一种非绑定的、针对决策根源的补充机制。
+
+- remaining_uncertainty_cn：尚未确定这种补充机制具体应采取什么形式。
+
+- link_to_next_phase_cn：引出解决方案目标：设计一个作用于软件开发团队决策的非绑定技术债助推器。
+
+##### evidence_pointers
+
+1. Section 1 P3
+
+2. Section 2.1 P6
+
+3. Appendix A step 1
+
+#### 2. 解决方案目标定义
+
+- order：2
+
+- name_cn：解决方案目标定义
+
+- question_cn：应该用一个什么样的助推器来补充自上而下机制？
+
+- inputs_and_setting_cn：TDM文献和助推理论；Credit Suisse的TDM实践需求。
+
+- designed_or_compared_object_cn：目标制品：非绑定的数字助推器。
+
+- baseline_control_or_counterfactual_cn：与现有正式程序/约束机制对比。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：基于文献和组织需求的演绎。
+
+- main_result_cn：确立目标：提供针对单个IT应用的情境化TD信息，支持团队决策，且被团队视为非约束性帮助而非新规则。
+
+- argumentative_role_cn：将一般性问题转化为可设计、可评价的制品目标。
+
+- remaining_uncertainty_cn：尚不知具体的心理效应如何与TDM场景匹配。
+
+- link_to_next_phase_cn：进入设计开发阶段，从助推文献中选择心理效应并构建设计要素。
+
+##### evidence_pointers
+
+1. Section 2.1 P7
+
+2. Section 2.2
+
+3. Appendix A step 2
+
+#### 3. 设计开发
+
+- order：3
+
+- name_cn：设计开发
+
+- question_cn：如何将心理效应翻译成实际可用的TDM助推器设计？
+
+- inputs_and_setting_cn：瑞信已有的代码质量、基础设施生命周期、漏洞、自动化四类TD测量指标；Tableau可视化工具；内部数据平台。
+
+- designed_or_compared_object_cn：TDM nudge制品，含DE01-DE08八个设计要素。
+
+- baseline_control_or_counterfactual_cn：无正式对照；设计基于文献中的心理效应，并接受内部多轮反馈后迭代。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：设计科学研究中基于理论的设计与迭代构建。
+
+- main_result_cn：建成基于Tableau、每日自动更新、覆盖约3000个IT应用的数字助推器。
+
+- argumentative_role_cn：完成理论到设计的翻译，为后续评价提供可操作的制品。
+
+- remaining_uncertainty_cn：制品是否被用户理解、接受并产生行动仍是未知。
+
+- link_to_next_phase_cn：先演示给专家和开发团队，然后进入有用性评价。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Table 2
+
+3. Figure 1
+
+4. Appendix D
+
+#### 4. 演示
+
+- order：4
+
+- name_cn：演示
+
+- question_cn：目标用户和专家能否理解助推器设计？
+
+- inputs_and_setting_cn：瑞信的IS专家、高级架构师、IT经理以及三个敏捷软件开发团队。
+
+- designed_or_compared_object_cn：TDM nudge初始版本及其在示例IT应用A1上的数据展示。
+
+- baseline_control_or_counterfactual_cn：专家对设计的三项标准评分；开发团队在焦点小组中的理解反馈。
+
+##### objective_metrics
+
+1. 理解性
+
+2. 简洁性
+
+3. 有效性
+
+- analysis_method_cn：演示后访谈、焦点小组记录分析。
+
+- main_result_cn：演示使利益相关者看到制品，反馈用于迭代。
+
+- argumentative_role_cn：作为DSR的演示步骤，连接设计与正式评价。
+
+- remaining_uncertainty_cn：演示阶段的反馈是否转化为真实使用效果尚需正式评价。
+
+- link_to_next_phase_cn：进入评价阶段1，进行前后调查和深度访谈。
+
+##### evidence_pointers
+
+1. Section 3 P1
+
+2. Appendix A step 4
+
+3. Appendix B1
+
+4. Appendix B2
+
+#### 5. 评价阶段1：有用性
+
+- order：5
+
+- name_cn：评价阶段1：有用性
+
+- question_cn：TDM nudge是否提升了软件团队的技术债意识、理解和行动？
+
+- inputs_and_setting_cn：9场半结构化专家访谈、3场焦点小组（每场8-9人）、面向16位受访者的前后问卷。
+
+- designed_or_compared_object_cn：TDM nudge展示给目标团队前后的感知和意图差异。
+
+- baseline_control_or_counterfactual_cn：实施/演示前的问卷结果作为基线，与演示后一周的问卷进行组内比较。
+
+##### objective_metrics
+
+1. TD awareness量表
+
+2. TD understanding量表
+
+3. TDM action量表
+
+4. 访谈中关于理解性/简洁性/有效性的判断
+
+- analysis_method_cn：半结构化访谈、焦点小组、前后问卷描述性比较。
+
+- main_result_cn：助推器提高了个人和团队层面的TD意识，创造共享的TD语言，并激发团队主动管理TD的动机。
+
+- argumentative_role_cn：验证制品对用户感知和意图的短期有用性，为一年后的客观效果评价建立基础。
+
+- remaining_uncertainty_cn：感知提升是否会转化为实际TD水平下降尚不清楚。
+
+- link_to_next_phase_cn：需要等待足够长的时间，定量跟踪TD水平变化。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Appendix B
+
+3. Tables A1-A5
+
+4. Figures B2-B4
+
+#### 6. 评价阶段2：对技术债水平的影响
+
+- order：6
+
+- name_cn：评价阶段2：对技术债水平的影响
+
+- question_cn：使用TDM nudge约一年后，IT应用的技术债水平是否发生变化？为什么？
+
+- inputs_and_setting_cn：参与阶段1的三个软件开发团队对其IT应用的技术债数据进行定量跟踪；补充调查和IT管理者访谈。
+
+- designed_or_compared_object_cn：同一批IT应用在助推器实施时与一年后的TD水平差异；三个团队之间自然形成使用/非使用对比。
+
+- baseline_control_or_counterfactual_cn：实施时的TD水平作为时间基线；团队3因管理层不支持而未使用助推器，形成自然比较组。
+
+##### objective_metrics
+
+1. 整体TD指数变化（1-10）
+
+2. 代码质量债变化
+
+3. 生命周期债变化
+
+4. 漏洞债变化
+
+5. 自动化债变化
+
+6. 使用频率和用途问卷
+
+- analysis_method_cn：定量TD变化跟踪，辅以开放题问卷和半结构化访谈解释变化机制。
+
+- main_result_cn：团队1和团队2的TD水平下降，团队3的TD水平上升；差异与团队和管理层使用助推器的意图一致。
+
+- argumentative_role_cn：证明助推器在真实组织中对客观TD水平的影响，并揭示边界条件（意图、管理支持）。
+
+- remaining_uncertainty_cn：样本小、无随机化、无统计检验，无法排除其他企业级因素的替代解释。
+
+- link_to_next_phase_cn：讨论部分将结果升华为对TDM和助推文献的理论贡献及设计建议。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Table 3
+
+3. Appendix C
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 给出TD的定义与普遍挑战
+
+2. PHENOMENON: 开发团队因发布压力产生TD
+
+3. LIMITATION: 现有自上而下机制不足
+
+4. RQ_OR_OBJECTIVE: 报告瑞信数字助推器的临床设计、实施、影响和评估
+
+5. RESULT: 使用一年后助推器有效降低TD
+
+6. CONTRIBUTION: 数字助推器可引导复杂决策环境中的集体决策
+
+### introduction_moves
+
+1. CONTEXT: 金融服务业处于数字化转型前沿，银行需要可靠性和创新
+
+2. PHENOMENON: 开发团队在时间压力下走捷径导致TD
+
+3. PRACTICAL_STAKES: 过多TD会造成质量问题和IT演化成本增加
+
+4. LIMITATION: 瑞信的自上而下机制必要但不足
+
+5. RQ_OR_OBJECTIVE: 本文报告数字助推器的临床设计与评价
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO: 引入有限理性、现状偏见、助推定义
+
+2. THEORY_PROPOSITION: 助推适合决策与结果在时间上分离、反馈延迟的情境
+
+3. MECHANISM: 解释TD的‘现在vs未来’权衡及心理偏差
+
+4. REQUIREMENT: 需要非绑定机制作用于团队决策根源
+
+### artifact_design_moves
+
+1. REQUIREMENT: 需要可比较的TD测量用于单一应用
+
+2. DESIGN_FEATURE: 四类TD测量与对数1-10指数
+
+3. DESIGN_FEATURE: 八个设计要素及其心理效应映射
+
+4. METHOD_JUSTIFICATION: 采用Tableau和现有数据平台
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW: 两阶段评价设计
+
+2. METHOD_JUSTIFICATION: 半结构化访谈、焦点小组、前后问卷
+
+3. BENCHMARK_OR_CONTRAST: 前测作为基线，团队3作为自然比较
+
+4. RESULT: 有用性三构念提升
+
+5. RESULT: 一年后TD水平变化及团队差异
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST: 团队3不使用时TD上升
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 助推器作为TDM的补充机制和边界对象
+
+2. CONTRIBUTION: 团队层面复杂决策的助推属于新应用
+
+3. DESIGN_KNOWLEDGE: 数据透明、自适应、动机与支持
+
+4. BOUNDARY_CONDITION: 应用层优化不等于组合层优化
+
+5. LIMITATION_AND_FUTURE: 未来高层级组合TDM助推器
+
+6. METHOD_JUSTIFICATION: 临床研究中的自然组间比较价值
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 技术债与软件工程文献（Cunningham; Li et al.; Fernández-Sánchez et al.; Tom et al.）
+
+2. 行为经济学/助推理论（Thaler & Sunstein; Kahneman; Weinmann et al.）
+
+3. 心理效应/启发式清单（Tversky & Kahneman; Levin et al.; Cialdini; Dolan et al.）
+
+4. 设计科学研究（Peffers et al.; Sonnenberg & vom Brocke）
+
+5. 临床研究与组织现场设计（Brinkmann; Tremblay et al.）
+
+6. 边界对象与知识边界文献（Carlile; Huber et al.）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：文章不是事后用理论解释设计，而是从助推文献中明确选取六种心理效应，并将其系统映射到八个设计要素上；评价直接针对该理论驱动的设计及其效果。
+
+- 理论到设计翻译链：有限理性→人们在TD决策中偏向眼前利益→需要选择架构干预→选择相关心理效应→心理效应转化为具体要求（如可比较、可锚定、可见社会规范）→具体要求转化为八个界面设计要素→设计要素组合成数字助推器→在真实组织中评价其意识/理解/行动和TD水平变化。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：框架效应：决策问题的呈现方式影响选择；属性框架突出某些属性。
+
+- mechanism_cn：通过颜色等级和评级使TD水平显著可见，降低认知成本，并突出社会期望。
+
+- design_requirement_cn：TD信息需要以简化、标准化的方式呈现给团队。
+
+- artifact_choice_cn：DE01总体评分（A-E颜色码）、DE03进度环、DE05单项TD指数。
+
+- evaluated_contrast_cn：未单独将DE与无DE的界面对比；整体评估感知有用性与TD变化。
+
+- objective_result_cn：团队对TD意识和理解的自我报告提升；团队1和2的TD水平下降。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Figure 1
+
+3. Section 4.1
+
+4. Table 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：社会规范：个体倾向遵从特定社会群体认为正常的行为。
+
+- mechanism_cn：展示其他团队的平均TD水平，激发团队间比较和模仿成功者行为。
+
+- design_requirement_cn：需要让团队看到自己在TD分布中的相对位置。
+
+- artifact_choice_cn：DE01总体评级刺激比较；DE07显示‘CS Average’平均性能。
+
+- evaluated_contrast_cn：整体助推器评价；访谈中建筑师提到‘人们想改善自己的评级’。
+
+- objective_result_cn：团队1和2主动降低TD，显示竞争/规范机制的作用。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Section 4.1 P4
+
+3. Section 5.1 P5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：信使效应：信息可信度取决于来源感知。
+
+- mechanism_cn：展示计算细节和数据来源可提高助推器可信度，增加信息被纳入决策的可能性。
+
+- design_requirement_cn：用户需要能够核查数据来源和计算方法。
+
+- artifact_choice_cn：DE02信息按钮‘i’及计算/数据源详情。
+
+- evaluated_contrast_cn：未单独检验；在讨论中作为复杂决策助推器的第一条设计建议。
+
+- objective_result_cn：作为设计知识提出，未直接测度信任度。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Section 5.2 P3
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：锚定效应：未知值估计受起始点影响，调整不充分。
+
+- mechanism_cn：给出一个颜色区间和箭头参考点，使团队在评估各类型TD时从该锚点出发。
+
+- design_requirement_cn：每个TD类型需要一个直观的参考点。
+
+- artifact_choice_cn：DE06显示1-10数字、颜色范围、箭头框。
+
+- evaluated_contrast_cn：整体评价；未做锚定起始点对照。
+
+- objective_result_cn：作为设计机制呈现，未独立测度。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Figure 1
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：可得性启发式：事件概率估计受例证易得性影响。
+
+- mechanism_cn：提醒和警报使高优先级TD问题更易被‘想起’，保持其在团队注意力中。
+
+- design_requirement_cn：需要主动提醒团队关注达到阈值的TD项。
+
+- artifact_choice_cn：DE08消息：当指标达到阈值时弹出警报/成就消息。
+
+- evaluated_contrast_cn：整体评价；没有单独测试消息频率或内容。
+
+- objective_result_cn：作为设计机制呈现，未独立测度。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Figure 1
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：损失厌恶：损失比等量收益更受重视。
+
+- mechanism_cn：趋势和进度环使TD下降/评级下降被视为损失，激发避免损失的行动。
+
+- design_requirement_cn：需要让TD变化趋势可见且易于解读。
+
+- artifact_choice_cn：DE03进度环显示距离更高评级还差多少；DE04演化与趋势图。
+
+- evaluated_contrast_cn：整体评价；访谈中提及趋势图支持回顾会议中的讨论。
+
+- objective_result_cn：团队1和2使用趋势图监控变化并减少TD。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Section 4.1 P3
+
+3. Section 4.2 P2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 设计/迭代反馈（专家访谈、焦点小组，多轮反馈）
+
+2. 组内前后调查（实施前和实施一周后，同一批人）
+
+3. 定性访谈（半结构化，多角色）
+
+4. 客观指标追踪（一年前后TD指数变化）
+
+5. 自然比较/对比（团队3未使用助推器）
+
+6. 混合证据（定量TD变化+调查+访谈解释）
+
+- why_these_evaluations_cn：作者需要同时回答‘制品是否被用户接受’和‘制品是否实际影响TD水平’两个不同问题。前者需要短期感知数据，后者需要足够长时间的客观追踪；又因为无法实施随机对照实验，作者采用自然发生的团队差异作为比较，并用定性数据解释客观变化背后的机制。
+
+- benchmark_and_contrast_chain_cn：没有传统benchmark，而是采用多重基线：评价阶段1以演示前的问卷为基线；评价阶段2以实施时TD水平为时间基线；讨论中将团队3作为‘未使用/未意图减少TD’的自然对比。三种参照层层递进：先验证使用者主观接受度，再验证客观变化，最后解释团队间异质性。
+
+### claim_evidence_ledger
+
+#### 1. TDM nudge提升了TD意识、理解和行动。
+
+- claim_cn：TDM nudge提升了TD意识、理解和行动。
+
+- evidence_cn：前后问卷（67%响应率，16人）和专家/开发者访谈及引用。
+
+- strength_cn：中等：样本小、自我报告、无统计检验，但多来源三角验证。
+
+#### 2. TDM nudge降低了IT应用的技术债水平。
+
+- claim_cn：TDM nudge降低了IT应用的技术债水平。
+
+- evidence_cn：一年前后量化TD指数变化：团队1和2下降，团队3上升。
+
+- strength_cn：中等：客观指标支持，但只有三个团队的4个应用，无对照组和统计检验。
+
+#### 3. 效果差异取决于团队和管理层的动机。
+
+- claim_cn：效果差异取决于团队和管理层的动机。
+
+- evidence_cn：团队3在前期同样接受助推器但后续未使用；调查和访谈显示没有TD优先意图。
+
+- strength_cn：强：团队对比与定性解释一致，形成自然比较。
+
+#### 4. 心理效应通过设计要素发生作用。
+
+- claim_cn：心理效应通过设计要素发生作用。
+
+- evidence_cn：设计映射来自文献；访谈引用提及社会比较、趋势、评级动机。
+
+- strength_cn：弱至中等：未直接测量心理中介机制。
+
+- internal_validity_strategy_cn：采用组内前后比较减少个体差异；使用同一套问卷构念和同一批人；通过多轮访谈/焦点小组获得迭代反馈；用团队层面分析规避不可控企业级变量；在后续调查中称助推器为‘TDM label’，避免过多透露干预意图和机制。
+
+- external_validity_strategy_cn：在真实大型金融机构中部署，覆盖约3000个IT应用；使用真实TD测量数据和日常工具；目标群体是实际软件团队和管理者；通过临床研究框架承认组织情境。
+
+- what_is_not_actually_tested_cn：没有随机化或正式对照组，未做统计显著性检验；没有直接测量每种心理效应的中介作用；没有评估对真个IT组合（portfolio）层面的优化；没有排除时间趋势、管理关注度变化等其他解释；没有检验助推器长期可持续性或副作用。
+
+## 贡献闭环
+
+- technical_claim_cn：没有提出新的算法或测量技术；技术层面的主张是现有TD指标通过对数变换和可视化设计可转化为易用的助推界面。
+
+- artifact_claim_cn：TDM nudge这一具体制品在瑞信环境中提高TD意识/理解/行动，并在一年后与两团队的TD下降相关。
+
+- mechanism_claim_cn：助推器通过简化信息、社会规范比较、趋势可见性和非强制提醒，作用于团队有限的理性决策，推动其将TD纳入日常讨论和偿还优先级。
+
+- boundary_claim_cn：效果在团队和管理层有解决TD意图时成立；如果团队缺乏动机且管理不支持，助推器不会产生效果；该制品针对单个应用层面的决策，不保证整个IT组合的全局最优。
+
+- reusable_design_knowledge_cn：为复杂、集体、组织级决策设计助推器时，应保证数据质量和透明度、提供自适应的信息检索/钻取功能、并确保个体和管理者具备实现目标行为的动机。
+
+- theoretical_contribution_cn：扩展了助推文献：从简单、临时、个体决策扩展到复杂、长期、团队集体决策；为TDM文献提供非强制、非自上而下的补充机制，并指出助推器可充当跨知识边界的边界对象。
+
+- how_discussion_closes_intro_gap_cn：引言指出自上而下机制不足、需要作用于决策根源的补充机制；讨论将TDM nudge定位为这种补充机制，并以一年后的TD变化作为生效证据，又从这一证据提炼出为什么助推适合复杂TDM决策、以及何时不适用。
+
+- overclaim_or_unsupported_leaps_cn：将无对照的纵向相关描述为‘pioneering evidence’略强；从两个团队的下降推断助推器因果有效，可能受选择、时间和其他干扰影响；对心理效应的作用机制多为推测性解释，缺乏过程测量。
+
+## 句级写作动作图谱
+
+### 1. Section 1 P1 S1
+
+- order：1
+
+- section：1. Introduction
+
+- locator：Section 1 P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：金融服务业处于数字化转型前沿，银行必须同时保证数字服务可靠和持续创新。
+
+- rhetorical_function_cn：把研究置于重要且真实的行业背景中。
+
+- depends_on_cn：无前置依赖。
+
+- sets_up_cn：为开发团队面临的时间压力铺路。
+
+- evidence_pointer：Section 1 P1
+
+### 2. Section 1 P1 S3
+
+- order：2
+
+- section：1. Introduction
+
+- locator：Section 1 P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：在发布压力下，团队可能走捷径和变通，从而产生技术债。
+
+- rhetorical_function_cn：引入核心经验现象：TD是不可避免的组织现实。
+
+- depends_on_cn：依赖数字化转型和竞争压力背景。
+
+- sets_up_cn：引出TD的‘现在vs未来’权衡。
+
+- evidence_pointer：Section 1 P1
+
+### 3. Section 1 P2 S1
+
+- order：3
+
+- section：1. Introduction
+
+- locator：Section 1 P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：TD决策涉及确定的短期结果与不确定的长期结果之间的权衡。
+
+- rhetorical_function_cn：界定TD的核心决策特征，为后续助推理论提供契合点。
+
+- depends_on_cn：承接TD现象。
+
+- sets_up_cn：说明为何简单的自上而下规则难以覆盖逐案决策。
+
+- evidence_pointer：Section 1 P2
+
+### 4. Section 1 P2 S2
+
+- order：4
+
+- section：1. Introduction
+
+- locator：Section 1 P2 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：过度或未被意识到的TD会损害IT景观，导致质量问题和演化成本增加。
+
+- rhetorical_function_cn：强调TD管理的现实重要性。
+
+- depends_on_cn：TD权衡机制。
+
+- sets_up_cn：论证需要管理TD，但不能完全消除。
+
+- evidence_pointer：Section 1 P2
+
+### 5. Section 1 P3 S1
+
+- order：5
+
+- section：1. Introduction
+
+- locator：Section 1 P3 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：瑞信是大型全球金融服务公司，IT预算和员工规模巨大，IT应用数以千计。
+
+- rhetorical_function_cn：将问题带入具体组织情境，暗示决策量巨大。
+
+- depends_on_cn：一般TD问题。
+
+- sets_up_cn：引出瑞信现有自上而下机制。
+
+- evidence_pointer：Section 1 P3
+
+### 6. Section 1 P3 S3
+
+- order：6
+
+- section：1. Introduction
+
+- locator：Section 1 P3 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：考虑到联邦制模式和TDM决策的个案性，自上而下机制必要但不足。
+
+- rhetorical_function_cn：刻画研究缺口。
+
+- depends_on_cn：瑞信的具体组织背景。
+
+- sets_up_cn：为数字助推器作为补充机制提供空间。
+
+- evidence_pointer：Section 1 P3
+
+### 7. Section 1 P4 S1
+
+- order：7
+
+- section：1. Introduction
+
+- locator：Section 1 P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文报告一个数字助推器的临床设计和评价，该助推器作为TDM的补充机制已使用超过一年。
+
+- rhetorical_function_cn：明确文章的研究目标和证据范围。
+
+- depends_on_cn：前面的缺口建立。
+
+- sets_up_cn：给出全文结构预览。
+
+- evidence_pointer：Section 1 P4
+
+### 8. Section 2.1 P1 S1
+
+- order：8
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P1 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：开发团队必须在紧截止期和高质量期望之间取舍，常把及时发布优先于代码质量和可维护性。
+
+- rhetorical_function_cn：细化TD产生的微观条件。
+
+- depends_on_cn：引言中的时间压力现象。
+
+- sets_up_cn：为Cunningham的债务隐喻提供铺垫。
+
+- evidence_pointer：Section 2.1 P1
+
+### 9. Section 2.1 P2 S1
+
+- order：9
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：引用Cunningham的‘首发代码如同负债’比喻来定义TD。
+
+- rhetorical_function_cn：引入经典定义和风险框架。
+
+- depends_on_cn：前面对TD现象的描述。
+
+- sets_up_cn：用于说明及时偿还TD的必要性。
+
+- evidence_pointer：Section 2.1 P2
+
+### 10. Section 2.1 P3 S1
+
+- order：10
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P3 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：TD可以产生于代码层面的捷径，也可来自开发周期其他阶段的决定。
+
+- rhetorical_function_cn：扩展TD的表现类型，为瑞信四类测量做准备。
+
+- depends_on_cn：Cunningham的定义。
+
+- sets_up_cn：引出TD测量和管理复杂性。
+
+- evidence_pointer：Section 2.1 P3
+
+### 11. Section 2.1 P4 S1
+
+- order：11
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P4 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：TD本质上是用短期收益换取未来负债，大量小捷径累积后会失控。
+
+- rhetorical_function_cn：解释TD的因果机制，提示需要干预决策过程。
+
+- depends_on_cn：TD类型和定义。
+
+- sets_up_cn：说明为什么需要意识提升和沟通。
+
+- evidence_pointer：Section 2.1 P4
+
+### 12. Section 2.1 P5 S1
+
+- order：12
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P5 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：TD测量方法包括计算模型、代码指标和人工估计，但多数方法过于复杂。
+
+- rhetorical_function_cn：总结现有测量方法并承认其局限。
+
+- depends_on_cn：TD管理活动框架。
+
+- sets_up_cn：为用简化对数评分和可视化助推器提供理由。
+
+- evidence_pointer：Section 2.1 P5
+
+### 13. Section 2.1 P5 S2
+
+- order：13
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P5 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：TD对非技术利益相关者不可见，沟通TD的商业价值仍是核心挑战。
+
+- rhetorical_function_cn：点出TDM中的知识边界问题。
+
+- depends_on_cn：复杂测量方法。
+
+- sets_up_cn：为助推器作为沟通/边界对象铺路。
+
+- evidence_pointer：Section 2.1 P5
+
+### 14. Section 2.1 P6 S1
+
+- order：14
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P6 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：瑞信已经采用代码简化资金、强制评审、代码质量门禁等自上而下机制。
+
+- rhetorical_function_cn：呈现组织现有应对措施。
+
+- depends_on_cn：TD管理挑战。
+
+- sets_up_cn：说明这些机制仍不足以解决逐案决策。
+
+- evidence_pointer：Section 2.1 P6
+
+### 15. Section 2.1 P6 S3
+
+- order：15
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P6 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：自上而下机制可能与紧凑交付时间线和成本压力冲突。
+
+- rhetorical_function_cn：强化现有机制的负面效应。
+
+- depends_on_cn：瑞信的机制清单。
+
+- sets_up_cn：引出对非绑定、自由保留机制的需求。
+
+- evidence_pointer：Section 2.1 P6
+
+### 16. Section 2.1 P7 S1
+
+- order：16
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P7 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：瑞信的目标不是消灭TD，而是提高意识和共享理解，使局部决策与企业目标一致。
+
+- rhetorical_function_cn：将管理目标转换为设计需求。
+
+- depends_on_cn：TD权衡和沟通问题。
+
+- sets_up_cn：规定助推器的功能应针对意识、理解和行动。
+
+- evidence_pointer：Section 2.1 P7
+
+### 17. Section 2.1 P7 S3
+
+- order：17
+
+- section：2.1 Challenges in managing technical debt
+
+- locator：Section 2.1 P7 S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：瑞信需要在其根源处即团队日常应用决策层面起作用的补充机制，且不被视为额外约束。
+
+- rhetorical_function_cn：精确化制品边界和‘非绑定’属性。
+
+- depends_on_cn：自上而下机制被绕开的现实。
+
+- sets_up_cn：为第二节引入助推理论提供需求标准。
+
+- evidence_pointer：Section 2.1 P7
+
+### 18. Section 2.2 P1 S1
+
+- order：18
+
+- section：2.2 Nudges for managing technical debt
+
+- locator：Section 2.2 P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：认知心理学和行为经济学指出个体决策是有限理性的，依赖启发式并产生系统偏差。
+
+- rhetorical_function_cn：为助推提供行为经济学基础。
+
+- depends_on_cn：决策根源需求。
+
+- sets_up_cn：引入现状偏见和助推定义。
+
+- evidence_pointer：Section 2.2 P1
+
+### 19. Section 2.2 P2 S1
+
+- order：19
+
+- section：2.2 Nudges for managing technical debt
+
+- locator：Section 2.2 P2 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：给出Thaler和Sunstein的助推定义：不禁止选项、不显著改变经济激励。
+
+- rhetorical_function_cn：明确选择架构干预的边界，与非强制需求吻合。
+
+- depends_on_cn：有限理性理论。
+
+- sets_up_cn：说明数字助推器为何合适。
+
+- evidence_pointer：Section 2.2 P2
+
+### 20. Section 2.2 P3 S1
+
+- order：20
+
+- section：2.2 Nudges for managing technical debt
+
+- locator：Section 2.2 P3 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：助推在决策与后果时间分离、反馈延迟或稀少的情境中尤其有效，这与TD决策高度匹配。
+
+- rhetorical_function_cn：建立理论-问题匹配，为设计提供合法性。
+
+- depends_on_cn：助推定义与有限理性。
+
+- sets_up_cn：导向从助推文献中选择心理效应。
+
+- evidence_pointer：Section 2.2 P3
+
+### 21. Section 2.2 P4 S1
+
+- order：21
+
+- section：2.2 Nudges for managing technical debt
+
+- locator：Section 2.2 P4 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：文献中有许多心理效应可供助推使用，本文选择了适合TD情境的六种。
+
+- rhetorical_function_cn：预告理论到设计的转换表。
+
+- depends_on_cn：助推理论。
+
+- sets_up_cn：为Table 1和后续设计要素做铺垫。
+
+- evidence_pointer：Section 2.2 P4
+
+### 22. Section 3 P1 S1
+
+- order：22
+
+- section：3. Developing a nudge for technical debt management at Credit Suisse
+
+- locator：Section 3 P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者在瑞信采用设计科学研究范式进行临床设计和评价，并基于心理效应迭代调整助推器。
+
+- rhetorical_function_cn：说明研究方法和整体流程。
+
+- depends_on_cn：理论选择和文献。
+
+- sets_up_cn：为后面的测量和设计要素章节提供框架。
+
+- evidence_pointer：Section 3 P1, Appendix A
+
+### 23. Section 3.1 P1 S1
+
+- order：23
+
+- section：3.1 Technical debt measures at Credit Suisse
+
+- locator：Section 3.1 P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：瑞信管理的四类TD是代码质量债、基础设施生命周期债、漏洞债和自动化债，分别用相应工具测量。
+
+- rhetorical_function_cn：介绍制品的输入数据基础。
+
+- depends_on_cn：TDM文献中的测量框架。
+
+- sets_up_cn：为可比较的1-10指数转换提供对象。
+
+- evidence_pointer：Section 3.1 P1
+
+### 24. Section 3.1 P2 S1
+
+- order：24
+
+- section：3.1 Technical debt measures at Credit Suisse
+
+- locator：Section 3.1 P2 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：IT应用规模和功能差异可相差四个数量级，因此需要对数尺度1-10指数使应用间可比。
+
+- rhetorical_function_cn：解释为什么不能直接使用原始测量值。
+
+- depends_on_cn：四类TD测量变量。
+
+- sets_up_cn：为整体评级和区间设计要素奠定基础。
+
+- evidence_pointer：Section 3.1 P2
+
+### 25. Section 3.2 P1 S1
+
+- order：25
+
+- section：3.2 Design elements of the technical debt management nudge
+
+- locator：Section 3.2 P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：TDM nudge由八个设计要素组成，旨在创建团队TD意识并推动其管理TD。
+
+- rhetorical_function_cn：总括制品结构。
+
+- depends_on_cn：前面设计目标。
+
+- sets_up_cn：为Table 2逐项说明提供导语。
+
+- evidence_pointer：Section 3.2 P1
+
+### 26. Section 3.2 P2 S1
+
+- order：26
+
+- section：3.2 Design elements of the technical debt management nudge
+
+- locator：Section 3.2 P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：采用已使用的Tableau进行可视化，并利用瑞信现有数据平台集成数据。
+
+- rhetorical_function_cn：说明临床情境下最大化利用现有解决方案。
+
+- depends_on_cn：设计目标和组织约束。
+
+- sets_up_cn：解释后续变量计算的可行性。
+
+- evidence_pointer：Section 3.2 P2
+
+### 27. Section 3.2 P2 S2
+
+- order：27
+
+- section：3.2 Design elements of the technical debt management nudge
+
+- locator：Section 3.2 P2 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：需要存储每次计算结果以生成演化图，并分别计算应用内部和跨应用比较变量。
+
+- rhetorical_function_cn：揭示自动化和数据架构细节。
+
+- depends_on_cn：Tableau和现有数据平台。
+
+- sets_up_cn：为DE04、DE07等设计要素提供实现支撑。
+
+- evidence_pointer：Section 3.2 P2
+
+### 28. Section 3.2 P3 S1
+
+- order：28
+
+- section：3.2 Design elements of the technical debt management nudge
+
+- locator：Section 3.2 P3 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：助推器自动化、每日更新，覆盖瑞信近全部3000多个IT应用。
+
+- rhetorical_function_cn：强调制品的规模和时效性。
+
+- depends_on_cn：数据集成与计算逻辑。
+
+- sets_up_cn：为一年后评价TD变化提供可追踪的客观数据。
+
+- evidence_pointer：Section 3.2 P3
+
+### 29. Section 4 P1 S1
+
+- order：29
+
+- section：4. Evaluating the impact of the technical debt management nudge
+
+- locator：Section 4 P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：评价分为有用性和TD水平效果两部分，时间上跨越实施前后和一年后。
+
+- rhetorical_function_cn：预告两阶段评价设计。
+
+- depends_on_cn：制品构建完成。
+
+- sets_up_cn：为4.1和4.2分别展开。
+
+- evidence_pointer：Section 4 P1
+
+### 30. Section 4.1 P1 S1
+
+- order：30
+
+- section：4.1 Usefulness of the technical debt management nudge
+
+- locator：Section 4.1 P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：第一阶段通过访谈、焦点小组和前后一周调查，考察目标团队对助推器的有用性和接受度。
+
+- rhetorical_function_cn：说明阶段1的方法和实施时序。
+
+- depends_on_cn：整体评价设计。
+
+- sets_up_cn：使后续结果汇报有清晰结构。
+
+- evidence_pointer：Section 4.1 P1
+
+### 31. Section 4.1 P2 S1
+
+- order：31
+
+- section：4.1 Usefulness of the technical debt management nudge
+
+- locator：Section 4.1 P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示助推器在个体和团队层面都有效提升了TD意识。
+
+- rhetorical_function_cn：报告阶段1第一项核心结果。
+
+- depends_on_cn：阶段1方法。
+
+- sets_up_cn：为后续理解和行动结果做铺垫。
+
+- evidence_pointer：Section 4.1 P2, Appendix B
+
+### 32. Section 4.1 P3 S1
+
+- order：32
+
+- section：4.1 Usefulness of the technical debt management nudge
+
+- locator：Section 4.1 P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：助推器帮助团队改善对TD相关问题的理解，并在团队内部和利益相关者之间促进沟通。
+
+- rhetorical_function_cn：报告理解维度的结果。
+
+- depends_on_cn：前一结果。
+
+- sets_up_cn：支持后面‘共享语法/边界对象’讨论。
+
+- evidence_pointer：Section 4.1 P3
+
+### 33. Section 4.1 P4 S1
+
+- order：33
+
+- section：4.1 Usefulness of the technical debt management nudge
+
+- locator：Section 4.1 P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：助推器还通过社会规范和跨团队比较激励了主动TDM行为。
+
+- rhetorical_function_cn：报告行动维度结果并引入社会规范机制。
+
+- depends_on_cn：意识和理解提升。
+
+- sets_up_cn：为一年后TD降低提供行为链路。
+
+- evidence_pointer：Section 4.1 P4
+
+### 34. Section 4.1 P5 S1
+
+- order：34
+
+- section：4.1 Usefulness of the technical debt management nudge
+
+- locator：Section 4.1 P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：助推器也被应用所有者用作benchmark和管理工具。
+
+- rhetorical_function_cn：补充非目标角色的用途证据。
+
+- depends_on_cn：前面社会规范效应。
+
+- sets_up_cn：说明助推器在组织中的多用途性。
+
+- evidence_pointer：Section 4.1 P5
+
+### 35. Section 4.2 P1 S1
+
+- order：35
+
+- section：4.2 Effects on technical debt levels
+
+- locator：Section 4.2 P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：一年后作者分析参与第一阶段评估的三个团队的IT应用TD水平变化，并用调查和访谈补充解释。
+
+- rhetorical_function_cn：进入第二阶段客观效果评价。
+
+- depends_on_cn：阶段1结果和一年等待期。
+
+- sets_up_cn：为Table 3数据汇报做铺垫。
+
+- evidence_pointer：Section 4.2 P1
+
+### 36. Section 4.2 P2 S1
+
+- order：36
+
+- section：4.2 Effects on technical debt levels
+
+- locator：Section 4.2 P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：团队1和团队2的整体TD及各类型TD下降，调查和访谈佐证他们用助推器检查修复进展。
+
+- rhetorical_function_cn：报告正向效果证据。
+
+- depends_on_cn：Table 3量化数据。
+
+- sets_up_cn：为后面解释不同团队路径做铺垫。
+
+- evidence_pointer：Section 4.2 P2, Table 3
+
+### 37. Section 4.2 P3 S1
+
+- order：37
+
+- section：4.2 Effects on technical debt levels
+
+- locator：Section 4.2 P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：对这两个团队，助推器起到了在开发过程中跟踪TD重要性的提醒作用。
+
+- rhetorical_function_cn：解释TD下降的行为机制。
+
+- depends_on_cn：正向结果。
+
+- sets_up_cn：为迭代回顾会议中使用的设计知识作铺垫。
+
+- evidence_pointer：Section 4.2 P3
+
+### 38. Section 4.2 P4 S1
+
+- order：38
+
+- section：4.2 Effects on technical debt levels
+
+- locator：Section 4.2 P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：团队1和团队2采用了不同优先级和路径降低TD，团队层面的具体权衡仍由团队决定。
+
+- rhetorical_function_cn：说明助推器保留决策自由，而非规定唯一方案。
+
+- depends_on_cn：团队1/2结果。
+
+- sets_up_cn：支持‘非绑定’‘设计自由’论述。
+
+- evidence_pointer：Section 4.2 P4
+
+### 39. Section 4.2 P5 S1
+
+- order：39
+
+- section：4.2 Effects on technical debt levels
+
+- locator：Section 4.2 P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：团队3的两个应用TD水平上升，调查发现是因为该团队和管理层未把TD修复列为优先事项，也未使用助推器。
+
+- rhetorical_function_cn：报告反例并建立自然比较。
+
+- depends_on_cn：Table 3数据和后续调查。
+
+- sets_up_cn：为讨论中的动机/管理层支持边界条件提供直接证据。
+
+- evidence_pointer：Section 4.2 P5, Table 3
+
+### 40. Section 5 P1 S1
+
+- order：40
+
+- section：5. Discussion
+
+- locator：Section 5 P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结：临床设计并评价的助推器提升了意识、建立共同理解、刺激主动TDM决策，并在一年内降低TD，但效果取决于管理和团队支持。
+
+- rhetorical_function_cn：将整篇文章结果压缩为一句贡献声明。
+
+- depends_on_cn：两阶段评价结果。
+
+- sets_up_cn：为后续文献贡献小节提供总纲。
+
+- evidence_pointer：Section 5 P1
+
+### 41. Section 5.1 P1 S1
+
+- order：41
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P1 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有TD测量和管理机制常过于复杂或自上而下，并被批评限制设计自由。
+
+- rhetorical_function_cn：重新抬高研究缺口。
+
+- depends_on_cn：文献回顾。
+
+- sets_up_cn：为把助推器定位为补充机制提供对比靶点。
+
+- evidence_pointer：Section 5.1 P1
+
+### 42. Section 5.1 P1 S2
+
+- order：42
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P1 S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究提供开创性证据，表明助推器可作为TDM的有效补充、跨越知识和沟通边界，充当边界对象。
+
+- rhetorical_function_cn：声明主要贡献。
+
+- depends_on_cn：评估结果。
+
+- sets_up_cn：展开边界对象机制。
+
+- evidence_pointer：Section 5.1 P1
+
+### 43. Section 5.1 P2 S1
+
+- order：43
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：与限制设计自由的自上而下机制不同，助推器遵循自由家长主义，易于遵循且易于避免。
+
+- rhetorical_function_cn：把设计特征与理论原则连接。
+
+- depends_on_cn：Thaler和Sunstein的界定。
+
+- sets_up_cn：为‘非绑定但有效’提供理论框架。
+
+- evidence_pointer：Section 5.1 P2
+
+### 44. Section 5.1 P3 S1
+
+- order：44
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P3 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：TDM决策复杂、动态且受制于有限认知，助推器通过简化决策情境弥补现存研究偏重TD识别和测量的不足。
+
+- rhetorical_function_cn：定位对TDM文献的贡献。
+
+- depends_on_cn：TD测量复杂性的文献缺口。
+
+- sets_up_cn：引出更高层TDM活动贡献。
+
+- evidence_pointer：Section 5.1 P3
+
+### 45. Section 5.1 P4 S1
+
+- order：45
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P4 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：助推器帮助弥合团队内部和业务/技术利益相关者之间的知识—沟通边界，创造共享TD理解。
+
+- rhetorical_function_cn：确认边界对象贡献。
+
+- depends_on_cn：前后调查结果。
+
+- sets_up_cn：为复杂集体决策贡献做铺垫。
+
+- evidence_pointer：Section 5.1 P4
+
+### 46. Section 5.1 P5 S1
+
+- order：46
+
+- section：5.1 Nudges for decisions related to technical debt management
+
+- locator：Section 5.1 P5 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：展示平均TD水平会刺激团队竞争，推动团队模仿成功团队的行为。
+
+- rhetorical_function_cn：补充社会规范机制对TDM的贡献。
+
+- depends_on_cn：DE07设计证据。
+
+- sets_up_cn：为后面激励/管理支持边界作铺垫。
+
+- evidence_pointer：Section 5.1 P5
+
+### 47. Section 5.2 P1 S1
+
+- order：47
+
+- section：5.2 Nudges for complex and collective decisions in organisations
+
+- locator：Section 5.2 P1 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：过去助推主要应用于个体、非复杂、临时决策，复杂决策情境的例子极少。
+
+- rhetorical_function_cn：建立新文献缺口。
+
+- depends_on_cn：助推文献。
+
+- sets_up_cn：为团队级复杂决策贡献做铺垫。
+
+- evidence_pointer：Section 5.2 P1
+
+### 48. Section 5.2 P2 S1
+
+- order：48
+
+- section：5.2 Nudges for complex and collective decisions in organisations
+
+- locator：Section 5.2 P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：将助推应用于组织中的团队层面是新颖的；此前研究提出设想但未实施检验，因此本研究开创了成功应用先例。
+
+- rhetorical_function_cn：声明对助推理论的核心贡献。
+
+- depends_on_cn：缺口和前文结果。
+
+- sets_up_cn：引出设计必要的新的要求。
+
+- evidence_pointer：Section 5.2 P2
+
+### 49. Section 5.2 P3 S1
+
+- order：49
+
+- section：5.2 Nudges for complex and collective decisions in organisations
+
+- locator：Section 5.2 P3 S1
+
+- move_code：DESIGN_KNOWLEDGE
+
+- paraphrase_cn：从临床设计中提炼三点：保证数据质量和透明度、提供自适应信息检索、确保个体和管理者都有目标行为动机。
+
+- rhetorical_function_cn：将具体经验升华为可复用设计知识。
+
+- depends_on_cn：设计要素和评价经验。
+
+- sets_up_cn：为实践者和研究者提供指南。
+
+- evidence_pointer：Section 5.2 P3
+
+### 50. Section 5.2 P3 S2
+
+- order：50
+
+- section：5.2 Nudges for complex and collective decisions in organisations
+
+- locator：Section 5.2 P3 S2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：团队1/2与团队3的效果差异说明，管理者支持和团队动机是助推器发挥效果的关键边界。
+
+- rhetorical_function_cn：用反例保障贡献的边界合法性。
+
+- depends_on_cn：阶段2结果。
+
+- sets_up_cn：为边界条件和未来研究铺路。
+
+- evidence_pointer：Section 5.2 P3, Table 3
+
+### 51. Section 5.3 P1 S1
+
+- order：51
+
+- section：5.3 Implications for research and practice
+
+- locator：Section 5.3 P1 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：对单个应用优化TD不必然优化整个IT组合，因此可考虑从架构/组合视角补充更高层级的TDM路径。
+
+- rhetorical_function_cn：界定制品作用层面，避免过度推广。
+
+- depends_on_cn：应用层助推器结果。
+
+- sets_up_cn：引导未来研究朝组合层助推器发展。
+
+- evidence_pointer：Section 5.3 P1
+
+### 52. Section 5.3 P2 S1
+
+- order：52
+
+- section：5.3 Implications for research and practice
+
+- locator：Section 5.3 P2 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者倡导研究者利用组织内部知识开展临床研究，并利用组织内自然发生的组间差异（如团队3）进行比较。
+
+- rhetorical_function_cn：将方法选择升华为方法论贡献。
+
+- depends_on_cn：本研究经验。
+
+- sets_up_cn：说明临床研究的方法论合理性。
+
+- evidence_pointer：Section 5.3 P2
+
+### 53. Section 5.3 P3 S1
+
+- order：53
+
+- section：5.3 Implications for research and practice
+
+- locator：Section 5.3 P3 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：临床研究面临决策层与效果层相互依赖的挑战；干预必须对准实际拥有决策权的层面。
+
+- rhetorical_function_cn：承认方法局限并提炼设计启示。
+
+- depends_on_cn：本研究层面选择。
+
+- sets_up_cn：为未来研究者提供注意事项。
+
+- evidence_pointer：Section 5.3 P3
+
+### 54. Section 6 P1 S1
+
+- order：54
+
+- section：6. Conclusion
+
+- locator：Section 6 P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重申：基于心理效应设计的助推器提升了TD意识、共享理解和行动，并在一年后降低应用TD；助推器可引导复杂团队决策。
+
+- rhetorical_function_cn：收束全文，再次声明贡献。
+
+- depends_on_cn：全部阶段结果。
+
+- sets_up_cn：无后续章节。
+
+- evidence_pointer：Section 6
+
+## 写作技术
+
+- gap_construction_cn：先承认自上而下机制‘必要但不足’，然后用‘被绕过’‘仍是约束’‘不能触及日常决策’等表述制造缺口；同时指出TD测量复杂、沟通困难，使助推器填补的是‘决策根源+知识边界’双重缺口。
+
+- signposting_cn：文章在各部分开头明确预告：如‘这个手稿报告...’，‘评价分两个阶段’，‘以下小节贡献...’。附录也按DSR步骤命名。
+
+- transition_logic_cn：每阶段结束都留下一个待回答的问题：设计完成后需要验证有用性；有用性验证后需要等一年看客观TD变化；效果展示后讨论为什么有效以及何时无效。
+
+- claim_evidence_rhythm_cn：先给结论性主张，再紧接访谈引语或表格数据；主观感知结果用‘调查+访谈+引用’三重证据；客观效果用Table 3数字，然后用定性引语解释数字背后的使用行为。
+
+- benchmark_narrative_cn：没有传统benchmark，而是构建三层参照：以实施前为时间基线，以团队3为自然对比，以现有自上而下机制为替代方案参照；在讨论中把团队3作为边界条件证据。
+
+- theory_return_cn：结果回到文献中，重新定位助推理论：不只是在‘个人消费选择’中有效，也能在‘组织团队复杂决策’中有效；还从设计经验中反向提出新的设计原则。
+
+- contribution_positioning_cn：把贡献放在两个文献的交汇点：TDM文献获得非强制补充机制和边界对象，助推文献获得复杂集体决策的新应用场景。
+
+- novelty_protection_cn：通过强调‘首创/先驱/此前只提出未测试’，把单个组织案例提升为理论贡献；用‘边界条件’保护结论不被一次性案例批评；最后一节还提出未来组合层助推器以表明当前制品只是更大研究的第一环。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写引言：从行业大背景压缩到组织具体管理难题，指出现有机制不足。
+
+- research_job_cn：识别一个管理问题的决策根源，并确认现有自上而下干预的局限。
+
+- required_evidence_cn：需要组织实践中机制失效的具体表现或案例证据。
+
+- transition_to_next_cn：由‘机制不足’过渡到‘需要作用于决策根源的非绑定补充机制’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写理论/知识基础：从可用的行为或组织理论中提取可直接指导设计的原则。
+
+- research_job_cn：选择与问题特征匹配的心理学/行为机制，列成设计所需的构念表。
+
+- required_evidence_cn：理论机制与目标决策问题之间存在明确情境匹配。
+
+- transition_to_next_cn：由理论命题过渡到‘如何翻译为设计需求’。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：写设计章节：用表格把每个设计要素映射到其理论机制，并说明实现环境。
+
+- research_job_cn：基于理论机制开发可实际操作的数字界面，并利用组织现有工具/数据。
+
+- required_evidence_cn：设计要素与理论机制的可追溯映射；组织内可采集的数据变量。
+
+- transition_to_next_cn：由制品构建过渡到‘它是否被用户理解和使用’。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写第一阶段评估：用访谈、焦点小组和前后调查验证感知层面的有用性。
+
+- research_job_cn：收集目标用户对制品的理解、接受和短期行为意图变化。
+
+- required_evidence_cn：前后问卷或访谈记录显示意识/理解/行动改善。
+
+- transition_to_next_cn：由短期感知过渡到‘需要足够长时间观察客观结果’。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写第二阶段评估：报告客观绩效指标变化，并用定性数据解释变化原因。
+
+- research_job_cn：在足够长的时间窗口追踪真实的产出/绩效指标，并采集使用模式和反例。
+
+- required_evidence_cn：纵向定量数据、自然对照组/反例、解释性访谈。
+
+- transition_to_next_cn：由效果数据过渡到‘贡献与边界条件’。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：写讨论：将具体效果升华为理论贡献，用反例限定边界，提炼可复用设计原则。
+
+- research_job_cn：回到文献缺口，区分技术主张、制品主张、机制主张和边界主张。
+
+- required_evidence_cn：每个贡献主张都能回溯到前面评估步骤中的数据。
+
+- transition_to_next_cn：讨论结尾转向未来研究问题。
+
+### most_transferable_moves_cn
+
+1. 用‘现有机制必要但不足’构建缺口，而不是说‘没人研究’
+
+2. 建立‘理论机制→设计要素→客观结果’的表格式映射
+
+3. 将单一组织案例与理论贡献绑定，而非只报告案例故事
+
+4. 用自然发生的反例（团队3）来注入边界条件
+
+5. 将设计过程中的经验提炼为可复用设计原则
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要长期进入大型金融机构内部并访问真实IT应用级TD数据
+
+2. 构建自动化的多源TD数据集成和每日计算流水线
+
+3. 需要一年等待期才能评估TD水平变化
+
+4. 依赖组织内部专家和团队发放访谈、焦点小组和问卷，耗时耗力
+
+### what_not_to_copy_superficially_cn
+
+1. 没有正式对照组时，不能简单宣称‘因果效果’，必须像本文一样依靠自然比较和解释性证据
+
+2. 没有测量心理机制时，不能把每个设计要素的作用都当作已证实的机制
+
+3. 不能只复制‘A-E颜色评分’表面形式而忽略数据质量、透明度、管理支持等边界条件
+
+4. 不能把一个应用层干预的积极结果推广到整个IT组合或所有组织
+
+- single_best_description_of_the_routine_cn：以组织真实问题为起点，用行为理论映射设计要素，在真实环境中构建制品，先用前后调查验证感知、再用一年纵向数据和自然反例验证客观效果，最终回到理论文献并提炼设计原则。
+
+## 分析边界
+
+全文和附录（A/B/C/D）均已提供，但OCR中的表格和图可能不完整；缺少正式统计显著性检验；由于文章是早期在线版本，个别参考文献和附录细节可能存在排版差异；对句子位置的标识依赖段落编号推断。

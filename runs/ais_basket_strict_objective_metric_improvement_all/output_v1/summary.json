@@ -1,0 +1,53 @@
+{
+  "updated_at": "2026-08-06T07:23:03.295535+00:00",
+  "analysis_version": "ais-basket-strict-objective-metric-improvement-all-v1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 200,
+  "prompt_fingerprint": "d863ce55e69db3678bb2e808b9bd427a574df987dd1f237d7deda5aeebd76162",
+  "input_fulltexts": 13910,
+  "completed": 13910,
+  "pending": 0,
+  "strict_match_count": 1976,
+  "strict_nonmatch_count": 11934,
+  "gate_true_counts": {
+    "purposeful_solution_design": 3724,
+    "objective_metric_is_primary_target": 2361,
+    "comparative_improvement_demonstrated": 2280,
+    "objective_improvement_is_the_success_basis": 2083
+  },
+  "centrality_counts": {
+    "dominant": 496,
+    "exclusive": 1649,
+    "incidental": 1126,
+    "mixed": 342,
+    "none": 10297
+  },
+  "retained_solution_layer_counts": {
+    "algorithm_or_computational_method": 522,
+    "digital_platform_mechanism_or_policy": 152,
+    "hybrid": 127,
+    "interface_or_interaction_design": 87,
+    "prediction_model": 417,
+    "prescriptive_model_or_optimization": 408,
+    "software_system_or_artifact": 263
+  },
+  "retained_research_paradigm_counts": {
+    "computational_or_algorithm_design": 1076,
+    "design_science_research": 693,
+    "digital_platform_or_mechanism_design": 229,
+    "explanatory_design_theorizing": 14,
+    "field_experiment_of_digital_artifact": 108,
+    "human_computer_interaction_experiment": 102,
+    "other": 14,
+    "predictive_analytics": 670,
+    "prescriptive_analytics_or_optimization": 664,
+    "theory_driven_artifact_experiment": 265
+  },
+  "usage": {
+    "prompt_tokens": 315664285,
+    "completion_tokens": 35571002,
+    "total_tokens": 351235287,
+    "prompt_cache_hit_tokens": 42480768,
+    "prompt_cache_miss_tokens": 273183517
+  }
+}

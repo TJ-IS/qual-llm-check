@@ -1,0 +1,1020 @@
+{
+  "record_id": "19818",
+  "source_file": "19818_2021_long-term-multi-criteria-improvement-planning.md",
+  "title": "Long-term multi-criteria improvement planning",
+  "authors": "J.P. Hubinont; Y. De Smet",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113606",
+  "fulltext_chars": 86906,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "multi_objective_or_tradeoff",
+  "source_application_context": "general_or_cross_domain",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:11.980826+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何为多准则长期改进生成既考虑执行阻力（抗变革）又考虑标准间结构性依赖（瓶颈、负协同、正协同）的改进路径，并输出不局限于现有观测实体、允许虚构中间步骤的战略行动序列？",
+    "artifact_and_design_cn": "一个以图模型为核心的通用多准则改进规划框架：每个改进步骤只提升一个准则；根据偏好模型定义可参考实体集合 Λ_k，并选择最相似基准 β_k；用带三指标的有向图/元图表达每个步骤的瓶颈风险、相对前一步的操作性变更和排名/等级提升；通过带惩罚权重的单目标最短路径（Dijkstra）生成多个候选路径。",
+    "objective_outcomes_cn": "在ARWU 2020案例中，针对ULB在16所西欧大学背景下生成5条改进路径；不同惩罚权重组合下 p1 在54组权重中的56%区域为最优；路径 p1 被解释为依次提高HiCi、N&S、PUB等指标，并对应招聘高被引学者、推动科研资源分配、加强与产业合作等战略动作；ULB策略办公室负责人对其有用性发表认可意见。",
+    "core_contribution_cn": "作者声称的贡献是：第一，把改进步骤限定为单准则改进并最小化操作性改变以回应抗变革；第二，区分正协同、负协同与瓶颈三类结构依赖，增强场景现实性；第三，为MCDA情景下的长期逐级改进提供一般性框架，并公开可复现软件。",
+    "whole_argument_in_one_paragraph_cn": "作者从多准则改进规划涉及决策者、执行者、接受者三类利益相关者出发，指出现有DEA/MCDA步骤式基准大多关注输入输出假设或单步改进，忽略执行者/接受者的抗变革以及结构性依赖。于是提出一组工作假设：从一个基准相似者身上逐准则学习、最相似基准选取、最大机会集合以避免瓶颈、必要时允许负协同并限制其程度。这些假设被翻译为一个以观测绩效为起点、以“单准则提升”为边的有向图；由于操作性改变取决于前后两条边，又构造元图并在边上定义瓶颈惩罚、操作变化惩罚和排名提升三个指标；用线性加权聚合和Dijkstra生成多个候选路径。随后论文用MAVT模型给出具体形式化和五人小数值示例，再用ARWU 2020案例演示如何把形式化路径转译为真实战略行动，并对惩罚权重做敏感性分析。讨论部分承认这些假设是简化、序数求和有问题、观测对象处于静止状态不现实，并以未来稳健性分析收尾。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "论文构建了一个新的决策支持制品（通用框架+图算法+开源软件），其评价方式主要是数值示例、真实案例和应用者质性反馈，而非正式实验或基准数据集比较；作者以设计准则、工作假设和未来改进的形式提炼可复用的设计知识，属于典型的设计科学研究。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "开头从实际问题提炼出四条设计考量（退化、效率、现实性、执行），随后按这些要求构建通用框架和图算法，再用MAVT小例与ARWU案例评价，最后以可复用假设、局限和未来研究收束；整体遵循“要求—构建—评价—设计原则”的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段1先建立问题域和设计需求；阶段2把需求转成正式框架与图算法；阶段3用具体MAVT模型和数值示例说明框架可操作；阶段4用ARWU真实案例演示框架能生成可解释的战略行动并进行参数敏感性分析；阶段5通过讨论限制与未来工作划定边界并保护贡献。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题界定与设计需求分析",
+        "question_cn": "多准则改进规划为什么复杂？应该满足哪些设计约束？",
+        "inputs_and_setting_cn": "概念性输入：利益相关者、抗变革文献、MCDA/DEA文献；无实证数据。",
+        "designed_or_compared_object_cn": "四类设计需求：性能退化、改进效率、现实性、执行集中性。",
+        "baseline_control_or_counterfactual_cn": "以现有DEA/ELECTRE/PFA等步骤式基准方法作为概念对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "文献分析与问题结构化。",
+        "main_result_cn": "确立单准则改进、最小化操作变化、区分瓶颈/负协同/正协同作为框架的设计前提。",
+        "argumentative_role_cn": "为后面的建模提供合法性：所有算法设计都回应这四个要求。",
+        "remaining_uncertainty_cn": "如何把“抗变革”和“结构依赖”转成可计算公式尚未解决。",
+        "link_to_next_phase_cn": "四个设计需求直接引出通用框架的四个步骤和四条假设。",
+        "evidence_pointers": [
+          "Introduction paragraphs on stakeholders and resistance to change",
+          "Section 3 four-aspect bullets",
+          "Bottleneck/negative synergy definitions in Section 3"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "通用框架与图生成算法构建",
+        "question_cn": "如何在满足四方面要求的前提下产生多步改进路径？",
+        "inputs_and_setting_cn": "形式化输入：备选实体集合A、准则集合G、偏好模型M、当前实体a_DM。",
+        "designed_or_compared_object_cn": "假设1-4、Λ_k集合、β_k基准选择、ρ_k改进算子、有向图Γ、元图Γ*、三指标Z*/Φ*/I*、聚合目标κ*、Dijkstra求解。",
+        "baseline_control_or_counterfactual_cn": "以文献中“学习相似者”假设为对照，指出其不能保证聚焦改进且执行不确定。",
+        "objective_metrics": [
+          "#Λ_k future opportunity cardinality",
+          "τ rank/level difference",
+          "Z bottleneck penalty",
+          "Φ operational change penalty",
+          "I rank/level increase",
+          "κ* aggregated objective",
+          "graph and algorithm complexity"
+        ],
+        "analysis_method_cn": "图论与最短路算法：构造有向图和元图，线性加权聚合后用Dijkstra求单目标最短路径，扫描多组权重得到有效解集合。",
+        "main_result_cn": "得到一个通用生成算法：从a_DM出发反复加入单准则改进边，边权重同时考虑瓶颈风险、操作改变和排名提升。",
+        "argumentative_role_cn": "核心制品层，所有后续案例都只是该算法的实例化与演示。",
+        "remaining_uncertainty_cn": "τ的序数差代理在数学上不妥；难度函数难以从决策者直接获得。",
+        "link_to_next_phase_cn": "为展示框架不是空壳，需要在一个具体偏好模型（MAVT）上给出可计算的定义。",
+        "evidence_pointers": [
+          "Section 3 Steps 1-4",
+          "Section 4 graph and meta-graph definition",
+          "Eqs. (3)-(7)",
+          "Dijkstra complexity paragraph"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "MAVT模型适配与数值示例",
+        "question_cn": "该框架在一种具体偏好模型（MAVT）上如何工作？",
+        "inputs_and_setting_cn": "加法价值函数V(x)=Σw_j v_j(x_j)，一个5个观测实体的小数值示例，无真实数据。",
+        "designed_or_compared_object_cn": "Δ_k的具体公式、β_k的词典式选择规则、L_k集合的构造。",
+        "baseline_control_or_counterfactual_cn": "无正式baseline；用同一示例对比改进准则1与准则2的不同现实性。",
+        "objective_metrics": [
+          "Δ_k(a_DM, a_i) values",
+          "#L_k cardinality",
+          "selected β_k direction"
+        ],
+        "analysis_method_cn": "数值演示和作者提出的决策规则：若Δ_k≥0则候选进入Λ_k；β_k选最小g_k(a_i)；Assumption 3建议选#Λ最大的方向。",
+        "main_result_cn": "示例显示L_1(a_DM)的基数大于L_2(a_DM)，故先改进准则1比先改进准则2更可能避免瓶颈；后续节点也按相同规则推进。",
+        "argumentative_role_cn": "证明框架不是纯抽象，能落到加法价值模型上，并展示“避免瓶颈”规则的具体语义。",
+        "remaining_uncertainty_cn": "该示例只展示语义，不证明规则在真实场景中有效；也未测试其他偏好模型。",
+        "link_to_next_phase_cn": "同一套MAVT定义可直接用于真实大学排名案例。",
+        "evidence_pointers": [
+          "Section 5 notation and Eq. (11)",
+          "Example 1 and Fig. 1",
+          "Tables 1 and 2",
+          "Appendix A lexicographic rule"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "ARWU大学排名案例研究",
+        "question_cn": "框架能否为现实大学产生可解释的长期战略改进计划？",
+        "inputs_and_setting_cn": "ARWU2020数据，16所比利时/法国/德国/荷兰大学，6个准则（ALUMNI、AWARDS、HiCi、N&S、PUB、PCP），ULB作为待改进实体；限制Alumni/Award几乎不提升。",
+        "designed_or_compared_object_cn": "用54组惩罚权重生成5条候选路径；对每条路径计算Z(p)和Φ(p)，并进行最优性区域分析。",
+        "baseline_control_or_counterfactual_cn": "没有与DEA/ELECTRE等方法的实证对比；以54组权重变化作为参数敏感性替代baseline，并在解释中将p1与Göttingen、Heidelberg、Paris Saclay等真实大学对标。",
+        "objective_metrics": [
+          "number of generated paths (5)",
+          "Z(p) bottleneck count",
+          "Φ(p) operational change count",
+          "optimality percentage over 54 weight pairs (p1=56%)",
+          "rank increase per step"
+        ],
+        "analysis_method_cn": "在真实数据上运行框架，生成路径；用软件界面可视化权重区域；结合大学网站与公开信息把形式路径翻译成战略行动；引用ULB策略办公室负责人评价。",
+        "main_result_cn": "生成5条路径；p1最稳健，在56%权重区域最优；p1形式路径对应提升HiCi、N&S、PUB等指标，并翻译为发展优势学科、增加高被引学者、促进Nature/Science投稿、加强与产业合作和国际网络等行动。",
+        "argumentative_role_cn": "作为设计科学的演示评价：证明框架在实际规模问题中能生成可解释、可讨论、有外部使用者认可的战略方案。",
+        "remaining_uncertainty_cn": "案例不检验战略行动的真实成本与可行性；不检验抗变革是否真正降低；也不检验50权重以外的稳健性。",
+        "link_to_next_phase_cn": "案例暴露出的局限（序数求和、idling假设、模型唯一性等）直接引出讨论节。",
+        "evidence_pointers": [
+          "Section 6 dataset and weight descriptions",
+          "Table 3 and Table 4",
+          "Figs. 2-4 and optimality percentages",
+          "p1 strategic interpretation paragraphs",
+          "manager quote at end of Section 6"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "局限性与稳健性讨论",
+        "question_cn": "框架的边界和方法学隐患是什么？哪些地方需要未来研究？",
+        "inputs_and_setting_cn": "无新数据；基于框架设计者对自身方法的反思。",
+        "designed_or_compared_object_cn": "讨论Δ_k过于保守、排名差求和隐含等距假设、idling假设、MAVT模型唯一性、路径未纳入性能退化等。",
+        "baseline_control_or_counterfactual_cn": "无；属于边界条件分析。",
+        "objective_metrics": [],
+        "analysis_method_cn": "逻辑分析和未来研究方向枚举。",
+        "main_result_cn": "承认框架目前只是生成场景的起点；必须发展难度函数启发程序、必要/可能路径分析、去观测实体稳定性检验和Hausdorff距离等稳健性工具。",
+        "argumentative_role_cn": "划定边界，防止把一次性案例当作普遍结论；同时把未来工作变成学术扩展空间。",
+        "remaining_uncertainty_cn": "所有讨论中的改进方向都未实现。",
+        "link_to_next_phase_cn": "结论部分据此重新概括贡献，并指出ELECTRE/PROMETHEE适配等未来方向。",
+        "evidence_pointers": [
+          "Section 7 Discussion and limitations",
+          "Section 8 Conclusion",
+          "Future robustness suggestions in Section 7"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 多准则改进规划是复杂问题，涉及利益相关者与绩效演化",
+      "CONTRIBUTION: 提出新框架，两点贡献：单准则改进+最小化操作变化，以及区分三类结构依赖",
+      "METHOD_JUSTIFICATION: 用图中最短路径问题的有效解生成场景，边用排名提升和两种惩罚刻画",
+      "RESULT: 用ARWU案例演示框架可用于生成ULB的战略行动序列"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 多准则改进规划涉及利益相关者与复杂绩效演化",
+      "PHENOMENON: 执行者和接受者的抗变革要求系统性改变聚焦且分步进行",
+      "PRACTICAL_STAKES: 指标冲突、未来不确定性、实体比较与改进程度决策都很困难",
+      "PRIOR_KNOWLEDGE: MCDA和DEA分别从偏好和效率角度比较实体；步骤式基准可让改进更现实",
+      "LIMITATION: 大多数步骤式基准依赖DEA输入输出假设或限制为观测绩效；PFA主要处理单步改进",
+      "GAP: 缺少在MCDA非DEA环境下考虑抗变革、结构依赖与虚构中间步骤的长期改进框架",
+      "WHY_GAP_MATTERS: 实际政策与大学排名等基准并不满足DEA假设，且场景将用于构建真实战略行动",
+      "RQ_OR_OBJECTIVE: 提出理论框架，每步专注于一个准则，生成长期改进场景",
+      "DESIGN_FEATURE: 图边由瓶颈风险、操作变化、排名提升三指标刻画；生成有效解并与决策者分析",
+      "STUDY_OVERVIEW: 说明文章结构、软件和可复现配置"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO: 提出“单性能改进”概念，即每步只改一个准则",
+      "REQUIREMENT: 列出四条设计考量：退化、效率、现实性、执行",
+      "MECHANISM: 区分瓶颈与负协同；前者应避免，后者应限制",
+      "THEORY_PROPOSITION: 假设1“学习相似者”是文献常见假设但有局限",
+      "THEORY_PROPOSITION: 假设2用最相似基准进行单准则学习",
+      "THEORY_PROPOSITION: 假设3用#Λ_k大小判断瓶颈风险",
+      "THEORY_PROPOSITION: 假设4用arg max #Λ_k选择下一步方向"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE: Step1：建立偏好模型M，得到排序R或等级C",
+      "DESIGN_FEATURE: Step2：对每个准则构造候选参考集Λ_k，用悲观情景Δ_k限制退化",
+      "DESIGN_FEATURE: Step3：选最相似基准β_k，定义改进算子ρ_k",
+      "DESIGN_FEATURE: Step4：用#Λ_k做避免瓶颈的方向选择",
+      "DESIGN_FEATURE: 构造有向图Γ和元图Γ*，从而把操作变化的跨边属性形式化",
+      "DESIGN_FEATURE: 定义τ为排名/等级差代理、Z*为瓶颈惩罚、Φ*为操作变化惩罚、I*为排名提升",
+      "DESIGN_FEATURE: 聚合目标κ*=I*−α_ΦΦ*−α_ZZ*，每组权重对应一个Dijkstra最短路径问题"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 用MAVT作为具体模型，因它能给出总排序且便于使用R(x,A*)",
+      "DESIGN_FEATURE: 在MAVT下定义Δ_k公式，使候选集构造可计算",
+      "RESULT: 五人数值示例显示#L_1>#L_2，因此先改进准则1更现实",
+      "METHOD_JUSTIFICATION: ARWU20比QS/THE更量化且被广泛认可，适合proof of concept",
+      "RESULT: 生成5条路径，p1在56%权重区域最优",
+      "RESULT: 把p1翻译为HiCi、N&S、PUB等真实战略行动",
+      "RESULT: ULB策略办公室负责人对研究有用性给出支持性评价"
+    ],
+    "discussion_and_contribution_moves": [
+      "LIMITATION_AND_FUTURE: Δ_k可能太保守；需要更好的难度函数启发程序",
+      "LIMITATION_AND_FUTURE: 对序数排名差求和隐含等距假设，应研究基于序数聚合的稳健方法",
+      "LIMITATION_AND_FUTURE: idling假设不现实；应发展必要/可能路径及路径相似度度量",
+      "LIMITATION_AND_FUTURE: 性能退化未纳入路径是一个开放问题",
+      "CONTRIBUTION: 结论重申框架基于新假设，考虑操作变化和瓶颈，可适配不同MCDA模型",
+      "BOUNDARY_CONDITION: 当前只以MAVT为说明，ELECTRE/PROMETHEE适配留给未来"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "抗变革与组织变化文献（Bovey & Hede 2001; Dent & Goldberg 1999; McNair & Leibfried 1993）",
+      "MCDA偏好模型与Roy关于结构性依赖/偏好依赖的区分（Roy 1985）",
+      "DEA步骤式基准与“学习相似者”假设（Park 2012; Seiford & Zhu 2003; Ghahraman & Prior 2016; Lim et al. 2011; Petrovic et al. 2014等）",
+      "Post Factum Analysis和鲁棒性思想（Kadzinski et al. 2016）",
+      "图最短路问题与Dijkstra算法（Raman 1997）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "抗变革与结构依赖等知识确实前置地塑造了核心设计要求（单准则改进、最小化操作变化、区分瓶颈与负协同），但将这些要求落实为“排名差代理τ+两个惩罚项+线性加权Dijkstra”的关键技术选择主要来自运筹最短路和实用性序数处理，且案例只是演示而非直接检验机制，因此属于部分耦合。",
+    "translation_chain_cn": "抗变革→要求聚焦且限制操作变化→每步只提升一个准则且Φ*惩罚切换方向；结构依赖→区分瓶颈/负协同/正协同→瓶颈用#Λ_k避免，负协同用Δ_k限制，正协同留待后分析；学习相似者→用最相似基准单准则学习→β_k与Assumption 2；决策辅助的序数信息→用排名差作为难度和收益代理→τ、I*、κ*与Dijkstra。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "执行者与接受者的抗变革使得大规模系统性改变不可能一次完成；改进应聚焦并限制操作改变。",
+        "mechanism_cn": "若同时改进多个准则，会引发更多执行阻力与资源损耗；单准则步骤和更少的操作变化可减少阻力。",
+        "design_requirement_cn": "每一步只改进一个准则；路径中前后两步之间的操作变化应最小化。",
+        "artifact_choice_cn": "图中每条边表示一个准则的提升；Φ*对切换基准或准则的边施加τ惩罚。",
+        "evaluated_contrast_cn": "案例中比较不同路径的Φ(p)与Z(p)，p1等路径拥有不同的操作变化水平。",
+        "objective_result_cn": "生成5条路径，p1的Φ=4而p5的Φ=11，说明算法能在操作变化上区分路径。",
+        "evidence_pointers": [
+          "Section 3 Step4",
+          "Section 4 Eq. (5)",
+          "Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "结构性依赖包括正协同、负协同与瓶颈；瓶颈是错误顺序导致资源浪费的阻塞机制。",
+        "mechanism_cn": "拥有较多观测参考实体支持的方向落在绩效空间较密集区域，更不易遭遇未预见的瓶颈。",
+        "design_requirement_cn": "路径应避免瓶颈；负协同导致的性能退化应被限制但不必完全禁止。",
+        "artifact_choice_cn": "定义Λ_k候选集；Assumption 3/4用#Λ_k最大决定下一步；Z*对非最大#Λ的边施以τ惩罚。",
+        "evaluated_contrast_cn": "案例中Z(p)跨路径差异明显：p5的Z=0，p2的Z=5。",
+        "objective_result_cn": "算法生成同时受瓶颈风险影响的路径，且p1在权重空间中更稳健。",
+        "evidence_pointers": [
+          "Section 3 Assumptions 3-4",
+          "Section 4 Eq. (4)",
+          "Table 4",
+          "Fig. 2-4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "步骤式基准可借助“学习相似者”提高现实性，但该假设可能导致同时改进多准则且对执行方式不确定。",
+        "mechanism_cn": "在目标准则上选取与当前实体最相似的观测基准，并在最坏情景下仍保持全局不退化，可增加现实性和聚焦性。",
+        "design_requirement_cn": "每一步应选择与当前位置在准则上最接近、且悲观情景下仍有正收益的观测实体作为中间基准。",
+        "artifact_choice_cn": "β_k(x)=argmin g_k(a_i)；Assumption 2；Δ_k≥0确保最坏情景不劣于现状。",
+        "evaluated_contrast_cn": "Example 1中L_1(a_DM)基数大于L_2，选择准则1基准x比准则2基准w更现实。",
+        "objective_result_cn": "数值示例展示单准则改进和瓶颈启发法的可操作性。",
+        "evidence_pointers": [
+          "Section 3 Steps 2-3",
+          "Eq. (11)",
+          "Example 1",
+          "Tables 1-2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "排序或等级差作为改进强度代理虽然在序数数学上不当，但在决策支持实践中常被接受。",
+        "mechanism_cn": "用排名差统一刻画困难与收益，使三个指标可线性加权，从而将多目标问题转成最短路径问题。",
+        "design_requirement_cn": "需要可计算的三指标聚合目标，并可通过权重变化生成多个候选解。",
+        "artifact_choice_cn": "τ=R(x,A*)−R(y,A*)；I*=τ；κ*=I*−α_ΦΦ*−α_ZZ*。",
+        "evaluated_contrast_cn": "对54组(α_Φ,α_Z)权重进行敏感性分析，考察各路径的最优性区域。",
+        "objective_result_cn": "p1在56%权重区域最优，p3、p4、p5约11%，说明路径选择并非完全依赖任意权重。",
+        "evidence_pointers": [
+          "Section 4 Eqs. (3) and (7)",
+          "Section 6 weight pair set",
+          "Fig. 2-4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "数值示例（Example 1）：5个观测实体，展示Λ_k构造、β_k选择和瓶颈规则语义",
+      "真实案例/proof of concept：ARWU2020+ULB，生成5条路径并做参数敏感性",
+      "参数敏感性分析：54组惩罚权重，观察每条路径的最优性区域",
+      "质性战略转译：将形式化路径p1映射到具体大学行动（高被引学者、科研资源、产业合作、国际网络）",
+      "外部用户认可：ULB策略办公室负责人对研究有用性发表支持性评价"
+    ],
+    "why_these_evaluations_cn": "框架本身是生成型决策支持工具，没有现成ground truth可供“更好”判断；因此评价目标是证明可用性、可解释性和对参数选择的稳健性，而不是证明统计显著性或与竞争方法比较。",
+    "benchmark_and_contrast_chain_cn": "该文没有机器学习意义下的benchmark；其论证链条是：先以DEA/ELECTRE/PFA等既有方法为概念性对照，说明缺口；再以ARWU20作为真实应用基准，用54组权重模拟不同决策者偏好来替代baseline；最后通过多路径之间的Z/Φ差异和最优性区域，说明算法能产生有区分度的场景。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "技术主张：Dijkstra可在稀疏图中高效求解单目标最短路径。",
+        "evidence_cn": "给出了图的出边上限、元图规模与复杂度O(n·#N*·log(#Σ*))，并在案例软件中实际运行。"
+      },
+      {
+        "claim_cn": "制品主张：框架能生成每步只改一个准则且带瓶颈/操作变化惩罚的路径。",
+        "evidence_cn": "Table 4中5条路径的每一步都给出“大学-准则+排名提升”，并标注Z(p)与Φ(p)。"
+      },
+      {
+        "claim_cn": "机制主张：最大#Λ_k方向能避免瓶颈。",
+        "evidence_cn": "零售例子和Example 1提供说明性支持，但没有实证或仿真检验，只能算启发式假设。"
+      },
+      {
+        "claim_cn": "边界主张：框架可适配不同MCDA偏好模型。",
+        "evidence_cn": "论文只在MAVT上实现，ELECTRE/PROMETHEE适配仅作为未来方向声明，没有技术验证。"
+      },
+      {
+        "claim_cn": "设计知识：四项假设和四条步骤构成可复用框架。",
+        "evidence_cn": "全文形式化步骤、图算法和可复现软件/配置文件共同支持这一主张。"
+      },
+      {
+        "claim_cn": "理论贡献：把逐步基准从DEA扩展到MCDA，并引入抗变革与结构依赖。",
+        "evidence_cn": "文献对比和案例共同说明该框架填补了非DEA环境下的长期改进规划缺口；但理论机制未被实验证明。"
+      }
+    ],
+    "internal_validity_strategy_cn": "通过清晰的数学定义、四个Assumption、算法复杂度分析、数值示例和参数敏感性来确保内部一致性；同时主动承认序数差求和的数学问题，避免过度声称。",
+    "external_validity_strategy_cn": "使用真实ARWU数据、多个国家大学、开放软件和配置文件，使案例可复现；但作者明确把案例定位为proof of concept，不承诺结论可外推到其他大学或偏好模型。",
+    "what_is_not_actually_tested_cn": "未直接检验抗变革是否真的被降低；未验证#Λ_k最大的方向是否确实避免真实瓶颈；未测试除MAVT外其他偏好模型；未评估战略行动的成本和可行性；未对长期实施中的动态变化做实证研究。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出并实现了基于图最短路径的多准则长期改进路径生成技术，能够同时优化排名提升并惩罚瓶颈风险与操作变化。",
+    "artifact_claim_cn": "框架中的单准则改进步骤、Λ_k/β_k选择、Z*/Φ*/I*三指标和Dijkstra聚合是该改进路径生成器的核心设计，且这些设计导致了5条可辨别的候选路径。",
+    "mechanism_claim_cn": "通过“每个改进步骤只提升一个准则”控制操作变化；“#Λ_k最大”规则通过留在绩效空间稠密区避开瓶颈；“Δ_k≥0”限制负协同导致的不利退化。",
+    "boundary_claim_cn": "框架适用于一般偏好模型；论文主要在MAVT上说明，ELECTRE等需要额外假设；案例限于特定大学排名数据，不能直接推广。",
+    "reusable_design_knowledge_cn": "四个Assumption、四个框架步骤、图/元图构造方法、三指标聚合与多权重敏感性分析流程，可作为其他决策支持系统构建者的设计模板。",
+    "theoretical_contribution_cn": "在理论上把DEA步骤式基准的概念扩展到不依赖输入/输出的MCDA环境中，并引入抗变革、瓶颈/负协同/正协同学概念，修正了“学习相似者”假设的不足。",
+    "how_discussion_closes_intro_gap_cn": "引言批评现有方法忽略抗变革、结构依赖和虚构中间步骤；讨论和结论明确指出框架通过单准则步骤、操作变化惩罚、瓶颈/负协同区分和允许虚构步骤来回应这些缺口，同时坦诚限制。",
+    "overclaim_or_unsupported_leaps_cn": "作者在部分地方把Assumption 3/4称为“避免瓶颈”的依据，但只有零售例子和数值示例支持，缺少机制实证；案例中管理者评价只是支持性意见，不能作为有效性证明；将p1解读为具体战略行动带有相当大的主观判断。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "多准则改进规划是复杂问题，涉及利益相关者和长期绩效演化；本文提出支持战略生成的新框架。",
+      "rhetorical_function_cn": "开篇定位研究领域和问题。",
+      "depends_on_cn": "没有前置依赖。",
+      "sets_up_cn": "为随后声明贡献和案例做铺垫。",
+      "evidence_pointer": "Abstract第一句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S3-S6",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "两点贡献：用单准则步骤和最小化操作改变来回应抗变革；区分正/负协同和瓶颈以增强现实性。",
+      "rhetorical_function_cn": "在摘要层面直接给出创新点。",
+      "depends_on_cn": "依赖前面对问题的定位。",
+      "sets_up_cn": "让读者预期后面框架和案例的核心内容。",
+      "evidence_pointer": "Abstract第二句至贡献说明"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P2 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "场景由图中最短路径问题的有效解生成，边由排名提升、瓶颈风险和操作变化惩罚刻画。",
+      "rhetorical_function_cn": "用一句话概括技术方案。",
+      "depends_on_cn": "依赖前述两点贡献。",
+      "sets_up_cn": "引出案例和软件。",
+      "evidence_pointer": "Abstract方法说明"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P2 S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "通过ARWU案例展示框架如何为ULB生成战略行动序列。",
+      "rhetorical_function_cn": "提供示范性结果和实用性证据。",
+      "depends_on_cn": "依赖方法说明。",
+      "sets_up_cn": "让读者期待案例细节。",
+      "evidence_pointer": "Abstract最后一句"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "多准则改进规划是涉及利益相关者和实体绩效演化的复杂问题。",
+      "rhetorical_function_cn": "建立宏观问题域。",
+      "depends_on_cn": "没有前置依赖。",
+      "sets_up_cn": "为后续利益相关者分类做铺垫。",
+      "evidence_pointer": "Introduction第一段"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P2 S1-S4",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "利益相关者分三类，执行者和接受者的抗变革说明系统性改变不能一次铺开，应聚焦且分步。",
+      "rhetorical_function_cn": "把抽象问题具体化为人的阻力现象。",
+      "depends_on_cn": "依赖P1的问题定位。",
+      "sets_up_cn": "引出第一条设计原则：聚焦和限制操作改变。",
+      "evidence_pointer": "Introduction第二段"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P2 S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "引用McNair和Leibfried：系统性改变可能但不应在所有部分同时发生，改变应围绕新愿景。",
+      "rhetorical_function_cn": "用权威文献支撑抗变革论点。",
+      "depends_on_cn": "依赖前面抗变革现象。",
+      "sets_up_cn": "让单准则改进成为有据可依的设计要求。",
+      "evidence_pointer": "Introduction第二段末尾引用"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P3 S1-S5",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "决策者还要定义指标、处理指标冲突和未来不确定性，所以需要比较和选择改进方向的方法。",
+      "rhetorical_function_cn": "从实体比较/建模角度补充问题的另一维度。",
+      "depends_on_cn": "依赖已有问题域。",
+      "sets_up_cn": "将讨论引向MCDA和DEA文献。",
+      "evidence_pointer": "Introduction第三段"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P4 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "决策可以是一次性短期规划，也可以是重复的长期规划，后者更复杂。",
+      "rhetorical_function_cn": "强调“长期”是该文的特殊焦点。",
+      "depends_on_cn": "依赖P3关于复杂性的论证。",
+      "sets_up_cn": "为定位长期改进场景做铺垫。",
+      "evidence_pointer": "Introduction第四段"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P5 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "MCDA是多维实体比较的核心，方法家族多样并在预算、GIS、医疗等领域应用。",
+      "rhetorical_function_cn": "介绍MCDA作为领域基础。",
+      "depends_on_cn": "依赖前面的方法需求。",
+      "sets_up_cn": "与DEA对比并引出步骤式基准。",
+      "evidence_pointer": "Introduction第五段"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P6 S1-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "DEA也处理多维比较，关注效率，通过步骤式基准让无效实体逐步接近有效实体。",
+      "rhetorical_function_cn": "介绍DEA步骤式基准的传统。",
+      "depends_on_cn": "依赖MCDA/DEA领域框架。",
+      "sets_up_cn": "为批评该传统的局限做铺垫。",
+      "evidence_pointer": "Introduction第六段"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P6 S6-S7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "这些DEA方法大多要求输入输出假设，且多数要求中间步骤必须匹配观测实体。",
+      "rhetorical_function_cn": "指出DEA路线不适用于更多多准则问题。",
+      "depends_on_cn": "依赖P6对DEA的介绍。",
+      "sets_up_cn": "为转向MCDA内的工作铺垫。",
+      "evidence_pointer": "Introduction第六段末尾"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P7 S1-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Petrovic等把步骤式基准引入MCDA，用ELECTRE II、有序分区和欧氏距离最短路生成改进路径。",
+      "rhetorical_function_cn": "介绍MCDA内的步骤式基准代表。",
+      "depends_on_cn": "依赖前述DEA背景。",
+      "sets_up_cn": "为后续对比“聚焦性”缺口提供参照。",
+      "evidence_pointer": "Introduction第七段"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P8 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "PFA适合单步改进，但连续多步时现实性和可行性难以估计。",
+      "rhetorical_function_cn": "介绍PFA并指出其限制。",
+      "depends_on_cn": "依赖MCDA文献脉络。",
+      "sets_up_cn": "形成本文切入的缺口。",
+      "evidence_pointer": "Introduction第八段"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P9 S1-S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有方法大多寻找相似观测实体，对执行者/接受者和从形式表示到真实行动的转化关注不够，且限制观测绩效会抑制创新。",
+      "rhetorical_function_cn": "直接列举文献不足。",
+      "depends_on_cn": "依赖P6-P8的方法梳理。",
+      "sets_up_cn": "为本文目标铺垫。",
+      "evidence_pointer": "Introduction第九段"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P10 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "缺少在非DEA环境中支持长期多阶段改进、同时考虑抗变革和结构依赖的框架。",
+      "rhetorical_function_cn": "正式定义研究缺口。",
+      "depends_on_cn": "依赖前面对现有方法的批评。",
+      "sets_up_cn": "接出研究目标。",
+      "evidence_pointer": "Introduction第十段开头"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P10 S3-S5",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出一个理论框架，生成长期多准则改进场景，每步只聚焦一个准则，并介入预定义偏好模型。",
+      "rhetorical_function_cn": "给出本文研究目标。",
+      "depends_on_cn": "依赖前述GAP。",
+      "sets_up_cn": "为图和算法描述做预告。",
+      "evidence_pointer": "Introduction第十段后半"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P11 S1-S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "构建图，边用瓶颈风险、操作变化、排名提升三种指标刻画，并生成有效解与决策者分析。",
+      "rhetorical_function_cn": "摘要式介绍技术设计。",
+      "depends_on_cn": "依赖研究目标。",
+      "sets_up_cn": "为Section 3-4具体定义做引子。",
+      "evidence_pointer": "Introduction第十一段"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P11 S5-S6",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "目前只提供简单敏感性分析，严格鲁棒性分析留待未来。",
+      "rhetorical_function_cn": "主动限定当前评价深度。",
+      "depends_on_cn": "依赖设计特征。",
+      "sets_up_cn": "为Discussion中robustness讨论埋线。",
+      "evidence_pointer": "Introduction第十一段末尾"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P12 S1-S3",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "框架在形式表示中生成场景后可结合Howard策略表处理成本和行动；对不可测指标基准同样适用。",
+      "rhetorical_function_cn": "说明该框架不是纯抽象，有实践落地路径。",
+      "depends_on_cn": "依赖研究目标和设计特征。",
+      "sets_up_cn": "为案例中对战略行动的翻译提供铺垫。",
+      "evidence_pointer": "Introduction第十二段"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P13 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "发布开源软件MCDMBM和配置文件以便复现。",
+      "rhetorical_function_cn": "增加科学可复现性并延续贡献声明。",
+      "depends_on_cn": "依赖框架和案例。",
+      "sets_up_cn": "让读者知道可实际使用。",
+      "evidence_pointer": "Introduction第十三段"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "P14 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "说明文章结构：记号、假设、图方法、MAVT应用、案例。",
+      "rhetorical_function_cn": "提供全文路标。",
+      "depends_on_cn": "依赖前文已计划的内容。",
+      "sets_up_cn": "让读者按顺序阅读。",
+      "evidence_pointer": "Introduction末尾段"
+    },
+    {
+      "order": 23,
+      "section": "Section 3",
+      "locator": "首段 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "提出每个改进步骤只提升一个准则，称为单性能改进。",
+      "rhetorical_function_cn": "给出框架的第一条核心结构规定。",
+      "depends_on_cn": "依赖引言中对抗变革的讨论。",
+      "sets_up_cn": "为图边定义奠定基础。",
+      "evidence_pointer": "Section 3 first paragraph"
+    },
+    {
+      "order": 24,
+      "section": "Section 3",
+      "locator": "四要点列表",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "列出四条设计考量：性能退化、改进效率、现实性、执行集中性。",
+      "rhetorical_function_cn": "把引言中的问题转成可操作的设计需求。",
+      "depends_on_cn": "依赖前面的问题分析。",
+      "sets_up_cn": "为Step 1-4提供需求依据。",
+      "evidence_pointer": "Section 3 bullet list"
+    },
+    {
+      "order": 25,
+      "section": "Section 3",
+      "locator": "列表后第二段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "与文献一致：退化在路径构建中不纳入；结构依赖复杂，应通过观测对象隐式学习。",
+      "rhetorical_function_cn": "限定处理范围，避免过度建模。",
+      "depends_on_cn": "依赖四条设计考量。",
+      "sets_up_cn": "为区分瓶颈和负协同做引子。",
+      "evidence_pointer": "Section 3 after bullets"
+    },
+    {
+      "order": 26,
+      "section": "Section 3",
+      "locator": "瓶颈/负协同定义段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "瓶颈是错误顺序导致的资源浪费阻塞机制；负协同是改进某些准则导致另一些准则退化。",
+      "rhetorical_function_cn": "给出两类负向结构依赖的操作定义。",
+      "depends_on_cn": "依赖Roy的结构依赖概念。",
+      "sets_up_cn": "为Z*和Φ*惩罚设计提供概念基础。",
+      "evidence_pointer": "Section 3 two definition paragraphs"
+    },
+    {
+      "order": 27,
+      "section": "Section 3",
+      "locator": "正协同段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "正协同不进入路径构建，而是留在生成后与决策者讨论。",
+      "rhetorical_function_cn": "把三类依赖分别安置到不同处理阶段。",
+      "depends_on_cn": "依赖瓶颈/负协同的定义。",
+      "sets_up_cn": "为Section 4末尾的正协同检验做铺垫。",
+      "evidence_pointer": "Section 3 positive synergy paragraph"
+    },
+    {
+      "order": 28,
+      "section": "Section 3",
+      "locator": "Assumption 1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "若a_j与a_i相似且a_i更优，则a_j可以现实地提升到匹配a_i，而不显著退化。",
+      "rhetorical_function_cn": "把文献中的“学习相似者”正式化为假设。",
+      "depends_on_cn": "依赖前面的基准文献。",
+      "sets_up_cn": "被后续Assumption 2修正。",
+      "evidence_pointer": "Section 3 Assumption 1"
+    },
+    {
+      "order": 29,
+      "section": "Section 3",
+      "locator": "Assumption 1局限段",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "该假设不能保证聚焦、执行方式不确定，并且现实中会有负协同退化。",
+      "rhetorical_function_cn": "指出文献假设的不足，为本文改进铺垫。",
+      "depends_on_cn": "依赖Assumption 1。",
+      "sets_up_cn": "引出Step 2-3中对Λ_k和β_k的定义。",
+      "evidence_pointer": "Section 3 limitation paragraph"
+    },
+    {
+      "order": 30,
+      "section": "Section 3",
+      "locator": "Step 1段落",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "与决策者建立偏好模型M，得到排序R或等级C，用于评估路径中的相对位置。",
+      "rhetorical_function_cn": "给出框架第一步，定义基础评价信息。",
+      "depends_on_cn": "依赖偏好模型文献。",
+      "sets_up_cn": "为τ函数使用R/C做铺垫。",
+      "evidence_pointer": "Section 3 Step 1"
+    },
+    {
+      "order": 31,
+      "section": "Section 3",
+      "locator": "Step 1末注",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "使用R或C假设其他观测实体保持静止，这是简化。",
+      "rhetorical_function_cn": "提前声明框架的重要限制。",
+      "depends_on_cn": "依赖Step 1的设计。",
+      "sets_up_cn": "为Discussion中idling假设讨论埋线。",
+      "evidence_pointer": "Section 3 Step 1 note"
+    },
+    {
+      "order": 32,
+      "section": "Section 3",
+      "locator": "Step 2段落",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "对每个准则g_k构造Λ_k：候选参考实体需在悲观情景wc下仍优于当前实体，且Δ_k≥0限制退化。",
+      "rhetorical_function_cn": "把“学谁”变为可计算集合。",
+      "depends_on_cn": "依赖Assumption 1的局限。",
+      "sets_up_cn": "为β_k定义提供候选池。",
+      "evidence_pointer": "Section 3 Step 2"
+    },
+    {
+      "order": 33,
+      "section": "Section 3",
+      "locator": "Step 3段落",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "从Λ_k中选最相似基准β_k，并用ρ_k(x)表示单准则提升后的绩效。",
+      "rhetorical_function_cn": "确定每一步的具体目标绩效。",
+      "depends_on_cn": "依赖Step 2中的Λ_k。",
+      "sets_up_cn": "成为图边的构造基础。",
+      "evidence_pointer": "Section 3 Step 3"
+    },
+    {
+      "order": 34,
+      "section": "Section 3",
+      "locator": "Assumption 2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "若a_i是a_j在g_k上的最相似基准，则a_j可现实地提升到a_i在g_k上的绩效而不显著退化。",
+      "rhetorical_function_cn": "修正并聚焦Assumption 1。",
+      "depends_on_cn": "依赖Step 3的β_k。",
+      "sets_up_cn": "为路径现实性提供依据。",
+      "evidence_pointer": "Section 3 Assumption 2"
+    },
+    {
+      "order": 35,
+      "section": "Section 3",
+      "locator": "Step 4开头",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "用#Λ_k衡量未来机会数量，机会多则更不易遇到瓶颈。",
+      "rhetorical_function_cn": "把瓶颈规避转成可计算的启发式。",
+      "depends_on_cn": "依赖ℒk集合定义。",
+      "sets_up_cn": "为Assumption 3和4做准备。",
+      "evidence_pointer": "Section 3 Step 4"
+    },
+    {
+      "order": 36,
+      "section": "Section 3",
+      "locator": "Assumption 3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "若当前绩效点有更多候选参考实体支持改进g_k，则改进g_k时遇到瓶颈的机会越小。",
+      "rhetorical_function_cn": "正式化避免瓶颈的密度启发。",
+      "depends_on_cn": "依赖#Λ_k的概念。",
+      "sets_up_cn": "引出Assumption 4的arg max规则。",
+      "evidence_pointer": "Section 3 Assumption 3"
+    },
+    {
+      "order": 37,
+      "section": "Section 3",
+      "locator": "零售公司例子和空区解释",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "零售公司需要足够销量才能提高净收益；瓶颈会在绩效空间制造不可达空区。",
+      "rhetorical_function_cn": "用直觉例子说明瓶颈的空间含义。",
+      "depends_on_cn": "依赖Assumption 3的机制。",
+      "sets_up_cn": "让Assumption 4更可接受。",
+      "evidence_pointer": "Section 3 retail example"
+    },
+    {
+      "order": 38,
+      "section": "Section 3",
+      "locator": "Assumption 4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "下一步应选择使#Λ_k最大的准则，即未来机会最多的方向。",
+      "rhetorical_function_cn": "给出明确的路径构建规则。",
+      "depends_on_cn": "依赖Assumption 3和#Λ_k。",
+      "sets_up_cn": "为图边指标Z*的定义提供依据。",
+      "evidence_pointer": "Section 3 Assumption 4"
+    },
+    {
+      "order": 39,
+      "section": "Section 4",
+      "locator": "图构造步骤",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用迭代方式从a_DM出发构建有向图Γ，每次加入由ρ_k定义的单准则改进边。",
+      "rhetorical_function_cn": "将前四步转成图数据结构。",
+      "depends_on_cn": "依赖Section 3所有假设。",
+      "sets_up_cn": "为元图和边指标做基础。",
+      "evidence_pointer": "Section 4 graph construction steps"
+    },
+    {
+      "order": 40,
+      "section": "Section 4",
+      "locator": "操作变化段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "操作变化取决于前后两条边，因此需要构造元图Γ*，将原图的边作为顶点。",
+      "rhetorical_function_cn": "用数学结构解决跨边依赖问题。",
+      "depends_on_cn": "依赖原图定义。",
+      "sets_up_cn": "为Φ*的定义提供上下文。",
+      "evidence_pointer": "Section 4 meta-graph paragraph"
+    },
+    {
+      "order": 41,
+      "section": "Section 4",
+      "locator": "τ定义段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用排名/等级差作为难度代理τ；承认序数差数学上不当，但实践中可接受。",
+      "rhetorical_function_cn": "为后续三指标提供统一尺度并管理数学风险。",
+      "depends_on_cn": "依赖Step 1中的R/C。",
+      "sets_up_cn": "为Z*,Φ*,I*和κ*的定义做铺垫。",
+      "evidence_pointer": "Section 4 Eq. (3) discussion"
+    },
+    {
+      "order": 42,
+      "section": "Section 4",
+      "locator": "三指标公式段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义Z*为瓶颈惩罚、Φ*为操作变化惩罚、I*为排名提升，并用κ*=I*−α_ΦΦ*−α_ZZ*聚合。",
+      "rhetorical_function_cn": "把设计需求填入具体函数。",
+      "depends_on_cn": "依赖τ和操作变化概念。",
+      "sets_up_cn": "为Dijkstra最短路求解提供目标函数。",
+      "evidence_pointer": "Section 4 Eqs. (4)-(7)"
+    },
+    {
+      "order": 43,
+      "section": "Section 4",
+      "locator": "权重与算法段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过多组权重生成多个有效解；每组权重对应一个单目标最短路径问题，用Dijkstra求解。",
+      "rhetorical_function_cn": "说明如何从多目标问题得到实践可用的多个场景。",
+      "depends_on_cn": "依赖κ*聚合。",
+      "sets_up_cn": "为案例中的54组权重分析做准备。",
+      "evidence_pointer": "Section 4 algorithm paragraph"
+    },
+    {
+      "order": 44,
+      "section": "Section 5",
+      "locator": "MAVT适配开头",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用加法MAVT说明框架，τ用R差，并指出偏好独立与结构依赖并非同一件事。",
+      "rhetorical_function_cn": "选择一种具体偏好模型并消除潜在混淆。",
+      "depends_on_cn": "依赖Section 4通用框架。",
+      "sets_up_cn": "为Δ_k公式和Example 1铺垫。",
+      "evidence_pointer": "Section 5 opening"
+    },
+    {
+      "order": 45,
+      "section": "Section 5",
+      "locator": "Δ_k公式段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "在MAVT下定义Δ_k具体公式，确保即使其他准则退化，改进后仍不劣于现状。",
+      "rhetorical_function_cn": "把Step 2的抽象条件实例化。",
+      "depends_on_cn": "依赖MAVT的加性价值函数。",
+      "sets_up_cn": "为数值示例提供可计算工具。",
+      "evidence_pointer": "Section 5 Eq. (11)"
+    },
+    {
+      "order": 46,
+      "section": "Section 5",
+      "locator": "Example 1结果",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在5个观测实体示例中，L_1(a_DM)基数大于L_2，因此先改进准则1比先改进准则2更现实；后续节点也按相同规则选择。",
+      "rhetorical_function_cn": "用最小化例子证明框架语义可运作。",
+      "depends_on_cn": "依赖Δ_k和β_k规则。",
+      "sets_up_cn": "让读者理解后续大学案例的机制。",
+      "evidence_pointer": "Section 5 Example 1, Tables 1-2, Fig. 1"
+    },
+    {
+      "order": 47,
+      "section": "Section 6",
+      "locator": "案例引言",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择ARWU20作为案例基准，因为它比QS/THE更量化且全球知名，适合概念证明。",
+      "rhetorical_function_cn": "为案例选择提供正当理由。",
+      "depends_on_cn": "依赖MAVT适配。",
+      "sets_up_cn": "进入真实数据演示。",
+      "evidence_pointer": "Section 6 opening"
+    },
+    {
+      "order": 48,
+      "section": "Section 6",
+      "locator": "数据与约束段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选取西欧相似或更大规模大学，用ARWU权重作为缩放因子，并限制ULB在Alumni/Award上几乎不提升。",
+      "rhetorical_function_cn": "描述案例范围和模型构建方式。",
+      "depends_on_cn": "依赖MAVT定义。",
+      "sets_up_cn": "为Table 3和Table 4铺垫。",
+      "evidence_pointer": "Section 6 data and constraint paragraphs, Table 3"
+    },
+    {
+      "order": 49,
+      "section": "Section 6",
+      "locator": "生成与敏感性段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "用54组权重生成5条路径；p1在56%权重区域最优，p3-p5约11%，Table 4显示各路径Z/Φ差异。",
+      "rhetorical_function_cn": "报告核心计算结果和稳健性。",
+      "depends_on_cn": "依赖数据约束和多权重算法。",
+      "sets_up_cn": "为后续路径解释提供对象。",
+      "evidence_pointer": "Section 6 results, Table 4, Fig. 2-4"
+    },
+    {
+      "order": 50,
+      "section": "Section 6",
+      "locator": "p1战略解释段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "由p1形式路径转译为真实行动：提高HiCi可对标Göttingen/Heidelberg的高被引学者并发展优势领域，N&S与PUB可借助科研资源分配和产业合作实现。",
+      "rhetorical_function_cn": "证明框架能连通形式绩效与真实战略。",
+      "depends_on_cn": "依赖p1路径结果。",
+      "sets_up_cn": "为管理者评价提供案例支撑。",
+      "evidence_pointer": "Section 6 p1 interpretation paragraphs"
+    },
+    {
+      "order": 51,
+      "section": "Section 6",
+      "locator": "ULB管理者引语",
+      "move_code": "RESULT",
+      "paraphrase_cn": "ULB策略办公室负责人认为研究有用，指出不同制度条件下比较复杂，但能帮助识别优先改进指标。",
+      "rhetorical_function_cn": "用外部利益相关者反馈支持案例价值。",
+      "depends_on_cn": "依赖前面生成的战略行动。",
+      "sets_up_cn": "为Discussion中诚实声明边界做对比。",
+      "evidence_pointer": "Section 6 end quote"
+    },
+    {
+      "order": 52,
+      "section": "Section 7",
+      "locator": "局限性列举",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "限制包括：Δ_k可能太保守；排名差求和隐含等距假设；观测实体idling不现实；MAVT模型唯一性；路径未纳入性能退化。",
+      "rhetorical_function_cn": "主动划定方法边界。",
+      "depends_on_cn": "依赖框架设计和案例经验。",
+      "sets_up_cn": "引出未来稳健性研究清单。",
+      "evidence_pointer": "Section 7 limitations"
+    },
+    {
+      "order": 53,
+      "section": "Section 7",
+      "locator": "未来稳健性段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来应研究必要/可能路径、移除观测实体、Hausdorff路径距离等稳健性分析。",
+      "rhetorical_function_cn": "把开放性不足转化为未来贡献点。",
+      "depends_on_cn": "依赖局限性清单。",
+      "sets_up_cn": "为结论中进一步扩展提供线索。",
+      "evidence_pointer": "Section 7 robustness paragraph"
+    },
+    {
+      "order": 54,
+      "section": "Section 8",
+      "locator": "结论",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "结论重申新框架基于新假设，考虑操作变化和瓶颈，允许虚构中间步骤，并以MAVT为例，未来适配ELECTRE/PROMETHEE。",
+      "rhetorical_function_cn": "总结贡献并给未来方向。",
+      "depends_on_cn": "依赖全文框架和讨论。",
+      "sets_up_cn": "结束论证并鼓励读者使用软件/继续研究。",
+      "evidence_pointer": "Section 8 Conclusion"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先铺陈DEA步骤式基准的成熟，再指出它的输入输出假设、中间步骤必须观测、多准则MCDA贡献少；接着指出PFA只能单步；最后用“抗变革”和“结构依赖”两个实践缺口把贡献立起来。",
+    "signposting_cn": "摘要明确两点贡献；引言最后一段给出全文结构；第3节用Step 1-4组织；每个公式都有编号；案例表格和图让结果可视。",
+    "transition_logic_cn": "从问题→设计考量→假设→图→具体模型→案例；每节以“as stated”“let us now...”等连接，让更抽象的规则先于更具体操作出现。",
+    "claim_evidence_rhythm_cn": "先给Assumption/Definition，后用公式实现，再用小例/案例展示；数据表提供Z/Φ等指标，使规范主张与计算结果一一对应。",
+    "benchmark_narrative_cn": "不使用机器学习式benchmark；用“ARWU20作为真实基准”和“现有DEA/ELECTRE/PFA方法作为概念对比”；在案例中用权重敏感性代替竞争对比。",
+    "theory_return_cn": "讨论部分回到核心假设的局限，如序数求和、idling假设和模型唯一性；结论回扣引言，声称框架扩展了逐步基准文献并指出未来模型适配。",
+    "contribution_positioning_cn": "在摘要和引言里预先声明“两点贡献”，在结论中再以框架、假设、适用性收束；软件和公开配置进一步强化贡献的可用性。",
+    "novelty_protection_cn": "强调“不绑定特定偏好模型”“允许虚构中间步骤”“公开软件/可复现配置”，避免被看成一次性案例；同时把严格实验和鲁棒性列为未来工作，防止过度声称。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立问题域：多准则长期改进涉及利益相关者、抗变革和复杂绩效演化，并提炼设计需求。",
+        "research_job_cn": "梳理组织行为、MCDA、DEA步骤式基准文献，确定实际问题中的关键张力。",
+        "required_evidence_cn": "需要至少一个具体实践困境（如抗变革、大学排名、政策基准）以及相关文献支撑。",
+        "transition_to_next_cn": "设计需求直接映射到框架步骤。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "明确现有方法边界：DEA步骤式基准和MCDA单步PFA存在哪些不足。",
+        "research_job_cn": "系统比较DEA、ELECTRE步骤式基准、PFA等方法的假设和限制。",
+        "required_evidence_cn": "能指出被忽略的实践维度（抗变革、结构依赖、虚构步骤）。",
+        "transition_to_next_cn": "缺口自然引出本文目标与贡献。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "用“假设+形式化”方式搭建框架：定义单准则改进、Λ_k、β_k、#Λ_k规则和正/负协同处理。",
+        "research_job_cn": "把实践需求转化为可计算的数学定义，并逐条给出Assumption。",
+        "required_evidence_cn": "每个假设至少有一个直觉例子或文献依据；能写出对应公式。",
+        "transition_to_next_cn": "框架需转成可执行的图算法。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "构建图和元图，定义边上的三个指标，并用多组权重+Dijkstra生成候选路径。",
+        "research_job_cn": "设计数据结构、算法复杂度分析、权重扫描方案和有效解生成。",
+        "required_evidence_cn": "有伪代码/公式/复杂度说明，使计算过程可复现。",
+        "transition_to_next_cn": "抽象算法需用具体偏好模型实例化。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "选择一种具体偏好模型（如MAVT）做适配，并用小数值示例展示机制。",
+        "research_job_cn": "为每个抽象步骤提供具体公式，设计最小示例证明可运行。",
+        "required_evidence_cn": "示例中能观察到不同方向选择导致不同结果。",
+        "transition_to_next_cn": "小示例只能说明机制，需真实案例证明可用性。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用真实案例做演示：数据集、模型标定、约束、生成路径、敏感性分析、战略翻译和外部反馈。",
+        "research_job_cn": "收集真实数据，运行算法，把形式路径翻译成可讨论的真实行动，并获取利益相关者评价。",
+        "required_evidence_cn": "至少一组清晰的输出路径，以及路径在不同参数下的稳健性说明。",
+        "transition_to_next_cn": "案例暴露的局限引导入讨论。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用局限性、未来研究和结论保护贡献，说明什么能做什么不能做。",
+        "research_job_cn": "识别方法学隐患、未检验假设、未来研究方向和可扩展点。",
+        "required_evidence_cn": "列出具体限制，并对应到未来可行的技术路线。",
+        "transition_to_next_cn": "结束文章，留下开放性。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "从真实组织/利益相关者问题提取设计约束并写成四要点",
+      "用概念性区分（瓶颈 vs 负协同 vs 正协同）驱动不同处理机制",
+      "把每步设计决策写成可计算的Assumption+公式",
+      "用元图处理依赖前一步的属性（操作变化）",
+      "通过多组权重生成候选解而非只给单解",
+      "用小数值示例+一个真实案例+参数敏感性作为设计科学评价",
+      "公开软件和配置文件使结果可复现"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要真实的多元绩效数据（如ARWU）",
+      "需要决策者的偏好模型和可接受约束（如ULB限制）",
+      "需要把形式路径转化为真实行动的组织知识（访谈领导/浏览大学网站）",
+      "长期实施验证成本高，文章未做"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "没有真正验证抗变革减少时，不能宣称能降低抗变革",
+      "没有对瓶颈假设做实验时，不能把它当作已证机制",
+      "不能直接引用排名差求和而不讨论序数性",
+      "案例的5条路径是特定权重/数据下的产物，不能外推"
+    ],
+    "single_best_description_of_the_routine_cn": "从实践阻力与结构依赖的现象出发，把改善规划提炼成一组可计算假设，用图最短路生成多候选路径，再以一个数值示例和真实案例证明其可用性，同时诚实声明边界。"
+  },
+  "confidence": 0.72,
+  "limitations_cn": "文章本身是框架/案例论文，没有正式实验；本分析主要基于正文、表格和图表，无法完全核实附录和软件；对句子级位置采用章节推断，非精确页码；部分图示（Fig. 1-4）只能通过说明文字推断其内容。",
+  "usage": {
+    "prompt_tokens": 25911,
+    "completion_tokens": 26474,
+    "total_tokens": 52385,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 22583
+  }
+}

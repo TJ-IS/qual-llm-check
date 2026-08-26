@@ -1,0 +1,24 @@
+{
+  "updated_at": "2026-07-26T11:07:18.973485+00:00",
+  "analysis_version": "programming-slr-fulltext-code-v1",
+  "prompt_fingerprint": "f8f54334d3aa429c4deecb9d3df9a0b03c6eeab7dc821c3cfd94c9723e1e15aa",
+  "input_fulltexts": 31,
+  "completed": 31,
+  "pending": 0,
+  "final_include_true": 30,
+  "evidence_role_counts": {
+    "primary_empirical": 27,
+    "design_and_evaluation": 2,
+    "secondary_review": 1
+  },
+  "actor_counts": {
+    "human_only": 29,
+    "human_ai": 1
+  },
+  "artifact_counts": {
+    "source_code": 14,
+    "database_query": 6,
+    "spreadsheet_logic": 9,
+    "low_code_or_visual": 1
+  }
+}

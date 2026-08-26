@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85215683524"
+title: "Emerging Forms of Leading and Context Curation in Agile Organizing"
+authors: "Alexopoulos A.; Mylonopoulos N.; Skordia M."
+year: "2024"
+journal: "Lecture Notes in Information Systems and Organisation"
+doi: "10.1007/978-3-031-65782-5_21"
+---
+# Scopus title-abstract-keyword metadata
+Title: Emerging Forms of Leading and Context Curation in Agile Organizing
+Abstract: Agile forms of organizing are emerging to meet the imperative of organizational adaptation as the external environment is subject to broader social, economic, demographic, and cultural changes. In this chapter, we concentrate on a case study of agile transformation to explore the role of leadership in agile organizing. We find evidence of the changing role of leadership in current flat, collaborative working environments, and follow a move from leadership to leading as a way to shift the focus from the person or position to the essential characteristics of the practice of leading in such contexts. Our findings support and expand prior views regarding the plurality and the sense-giving character of leadership in agile organizations by pointing to its paradoxical nature. We contribute to this discussion by proposing context curation as an essential role of leading in agile organizing, defined as the ongoing care for sustaining over time the vitality of organizational conditions enabling the agile principle of constant adaptation. In doing so, we address the expressed call to reverse the lenses in contextual/contingency leadership theories. © The Author(s), under exclusive license to Springer Nature Switzerland AG 2024.
+Author keywords: 
+Index keywords: 
+Document type: Conference paper
+Conference: International Conference on Leading and Managing in the Digital Era, LMDE 2023
+Source title: Lecture Notes in Information Systems and Organisation
+Year: 2024
+EID: 2-s2.0-85215683524
+DOI: 10.1007/978-3-031-65782-5_21
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

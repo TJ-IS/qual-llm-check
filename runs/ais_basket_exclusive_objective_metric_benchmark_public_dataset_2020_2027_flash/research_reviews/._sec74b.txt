@@ -1,0 +1,65 @@
+
+#################### 34
+## 九、结论与未来研究
+
+保护软件资产的编码智能体正面临对抗性信息操纵攻击，这引入了巨大的安全风险，并可能导致灾难性的供应链后果。系统防御此类攻击的前提，是理解并系统化生成攻击者可能采取的攻击。为此，本文以威胁驱动设计与强化学习理论为基础设计了 AgentShield-Adversary 框架，用于系统地生成编码智能体对抗攻击。该框架使攻击者与防御者之间的博弈得以显式刻画。我们预期，经由严格评估，系统化生成的攻击将显著超越现有攻击生成方法【占位】。攻击面地图与带真值的基准 D_att 为防御研究提供了可复用的基础设施。本文讨论了其对信息系统知识库的贡献与实践启示，并提炼了三条设计原则。
+
+未来研究有若干方向。第一，攻击动作空间可扩展至更多通道，如技能投毒与动作链诱导，以及更细粒度的内容操作，并可探索以模仿学习与生成式模型自动提取真实攻击者行为的攻击动作（Ebrahimi et al., 2025）。第二，攻击的隐蔽性度量目前依赖编辑成本与公开检测基线打分，未来可引入与检测器博弈的对抗性隐蔽性优化。第三，本文的威胁模型可直接支撑后续防御研究。以 D_att 训练事前预判与事中检测算法，可形成从攻击生成到防御评估的攻防闭环。第四，攻击策略的跨模型迁移，即对未见智能体基线的攻击成功率，是值得系统研究的开放问题。本文的初步证据表明迁移是可行的【占位，迁移率】，但其边界条件有待进一步刻画。
+
+## 参考文献
+
+[1] Apruzzese, G., Colajanni, M., Ferretti, L., Aydin, A. A., & Marchetti, M. (2019). On the effectiveness of machine and deep learning for cyber security. In *Proceedings of the 10th International Conference on Cyber Conflict (CyCon)*, 371-387.
+
+[2] Rai, A. (2017). Editor's comments: Diversity of design science research. *MIS Quarterly*, 41(1), iii-xviii.
+
+[3] Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., & Narasimhan, K. (2024). SWE-bench: Can language models resolve real-world GitHub issues? In *Proceedings of the 12th International Conference on Learning Representations (ICLR)*.
+
+[4] Yuan, X., He, P., Zhu, Q., & Li, X. (2019). Adversarial examples: Attacks and defenses for deep learning. *IEEE Transactions on Neural Networks and Learning Systems*, 30(9), 2805-2824.
+
+[5] Goosen, R., Rontojannis, A., Deutscher, S., Rogg, J., Bohmayr, W., & Mkrtchian, D. (2018). *Artificial Intelligence Is a Threat to Cybersecurity. It's Also a Solution.* Boston Consulting Group.
+
+[6] Li, W., & Chai, Y. (2022). Assessing and enhancing adversarial robustness of predictive analytics: An empirically tested design framework. *Journal of Management Information Systems*, 
+
+#################### 35
+## 九、结论与未来研究
+
+编码智能体在软件开发中的采用正在重塑组织的安全边界。恶意内容在任务执行前即已进入智能体的信息环境。将防御时点从事后前移到事前，是降低编码智能体攻击暴露的关键途径。基于这一需求，本文以预测分析与约束优化理论为基础设计了 AgentShield-Anticipate 框架。攻击面预测器将任务前可观测信号转化为单元级风险，预算约束分配器将风险转化为可执行的预置防御计划。我们预期，经由严格评估，该框架将显著提升任务级风险筛查与单元级定位性能【占位】，在预算约束下显著降低攻击成功率【占位】，并将正常任务效用损失控制在可接受范围内【占位】。本文报告了该框架对信息系统知识库的贡献、三条设计原则与实践启示。
+
+未来研究有若干方向。第一，预测器的标签可进一步融合运行时信号（研究三检测器的校准反馈），形成事前预判与事中确认的自适应循环。第二，分配问题可扩展至多轮动态预算（攻击者响应后的再分配）与多目标（公平性、延迟约束）。第三，本文的单元级风险与效用权衡语言可迁移至其他智能体系统（数据分析智能体、办公自动化智能体）的安全运营。第四，预测器的跨仓库、跨模型泛化边界是开放问题。公开基准覆盖的仓库类型与智能体配置有限，未来可引入更大规模的跨平台评测【占位】。
+
+## 参考文献
+
+[1] Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., & Narasimhan, K. (2024). SWE-bench: Can language models resolve real-world GitHub issues? In *Proceedings of the 12th International Conference on Learning Representations (ICLR)*.
+
+[2] Yang, J., Chen, C., Zha, D., et al. (2024). AgentDojo: A dynamic environment to evaluate attacks and defenses for LLM agents. *arXiv preprint arXiv:2406.13352*.
+
+[3] Apruzzese, G., Colajanni, M., Ferretti, L., & Marchetti, M. (2019). On the effectiveness of machine and deep learning for cyber security. In *Proceedings of the 2018 10th International Conference on Cyber Conflict (CyCon)*, 371-387.
+
+[4] Lin, Y.-K., & Fang, X. (2021). First, do no harm: Predictive analytics to reduce in-hospital adverse events. *Journal of Management Information Systems*, 38(4), 1122-1149. https://doi.org/10.1080/07421222.2021.1990619
+
+[5] Zhang, H., Zhao, X., Fang, X., & Chen, B. (2024). Proactive resource request for disaster response: A deep learning-based optimization model. *Information Systems Research*, 35(2), 528-550. https://doi.org/10.1287/isre.2022.0125
+
+[6] Qu, X. (S.), Darku, F. B., & Guo, H. (2026). Shapley value-based feature attribution for data masking. *MIS Quarterly*, 50(1), 145-176
+
+#################### 36
+## 九、结论与未来研究
+
+编码智能体的安全风险正从输入内容转向任务执行过程。攻击者在任务执行中通过问题、仓库与工具通道逐步植入恶意内容并诱导危害行为。在危害动作生效前实时识别攻击并以受控误报联动处置，是遏制编码智能体攻击危害的关键途径。基于这一需求，本文以信息操纵理论、担保理论与技术威胁规避理论为基础设计了 AgentShield-Detect 框架。框架以意图与行为背离为检测信号，以特征提取、流式检测与动作门控构成检测链路，并以对抗重训维持检测器自身的鲁棒性。我们预期，经由严格评估，该框架将显著提升检测性能【占位】，满足交互式门控的延迟要求【占位】，并将误报与任务效用损失控制在可接受范围内【占位】。本文呈现了该框架对信息系统知识库的贡献，以及三条设计原则与实践启示。
+
+未来研究有若干方向。第一，检测器的标签可进一步利用研究二事前预判的单元级操纵风险作为先验，形成事前预判与事中确认的联动检测。第二，门控策略可在多目标（延迟、误报、效用）下自适应学习。第三，本文的三通道融合与对抗重训设计可迁移至其他智能体系统（数据分析智能体、办公自动化智能体）的安全监控。第四，检测器的跨模型、跨仓库泛化边界是开放问题。公开基准覆盖的轨迹分布有限，未来可引入更大规模的跨平台评测与在线学习机制【占位】。
+
+## 参考文献
+
+[1] Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., & Narasimhan, K. (2024). SWE-bench: Can language models resolve real-world GitHub issues? In *Proceedings of the 12th International Conference on Learning Representations (ICLR)*.
+
+[2] Yang, J., Chen, C., Zha, D., et al. (2024). AgentDojo: A dynamic environment to evaluate attacks and defenses for LLM agents. *arXiv preprint arXiv:2406.13352*.
+
+[3] Apruzzese, G., Colajanni, M., Ferretti, L., & Marchetti, M. (2019). On the effectiveness of machine and deep learning for cyber security. In *Proceedings of the 2018 10th International Conference on Cyber Conflict (CyCon)*, 371-387.
+
+[4] Li, W., & Chai, Y. (2022). Assessing and enhancing adversarial robustness of predictive analytics: An empirically tested design framework. *Journal of Management Information Systems*, 39(3), 693-721. https://doi.org/10.1080/07421222.2022.2063549
+
+[5] McCornack, S. A. (1992). Information manipulation theory. *Communication Monographs*, 59(1), 1-16.
+
+[6] Glancy, F. H., & Yadav, S. B. (2011). A computational model for financial reporting fraud detection. *Decision Support Systems*, 50(3), 595-601.
+
+[7] Humpherys, S. L., Moffitt, K. C., Burns, M. B., Burgoon, J. K., & Felix, W

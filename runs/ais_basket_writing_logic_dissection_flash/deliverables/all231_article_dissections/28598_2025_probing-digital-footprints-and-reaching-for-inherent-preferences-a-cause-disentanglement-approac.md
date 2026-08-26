@@ -1,0 +1,2035 @@
+# Probing Digital Footprints and Reaching for Inherent Preferences: A Cause-Disentanglement Approach to Personalized Recommendations
+
+- 作者：Cong Wang; Yansong Shi; Xunhua Guo; Guoqing Chen
+- 年份 / 期刊：2025 / Information Systems Research
+- DOI：10.1287/isre.2023.0181
+- 源文件：28598_2025_probing-digital-footprints-and-reaching-for-inherent-preferences-a-cause-disentanglement-approac.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.74
+
+## 文章级论证概况
+
+- 核心问题：在电商平台上，消费者的隐式反馈（浏览、加购、购买）由内在偏好以及情境性外部因素共同驱动；如何从这些数字足迹中分离出消费者的内在偏好，并据此生成可解释、去偏的个性化推荐？
+
+- 制品与设计：提出DISC模型（Disentangling consumers’ Inherent preferences, item Salience effect, and Conformity effect）。核心设计包括：基于消费者行为理论构建包含view、add-to-cart、purchase三类隐式反馈的因果图；引入潜在决策路径变量s_ui表示谨慎/冲动路径，把三元决策转化为两个二元决策的混合；用用户和物品嵌入分别表示内在偏好r、物品显著性效应b、从众效应c；利用物品浏览量和销量作为b和c的代理变量，通过共同效应性质设计因果嵌入学习损失；采用EM算法推断参数，并基于因果图进行反事实推荐，即do(b=0,c=0)得到内在偏好导向推荐。
+
+- 客观结果：在两个真实数据集Beibei和Taobao上，DISC在样本内购买行为预测和干预数据测试的内在偏好导向推荐中均显著优于多组基线；与同结构的贝叶斯网络BN相比，DISC在干预测试中表现更好；决策路径预测AUC优于PMF-θ和LMF-θ；估计出的显著性效应b与代理变量浏览量的相关性强，而内在偏好r与代理变量几乎不相关；五种替代因果图结构中DISC的AIC_M最低。
+
+- 核心贡献：作者声称：用消费者行为理论驱动因果图设计，实现了对多种隐式反馈背后原因的因果解耦；理论证明了模型可识别性，使基于观测数据的因果推断有据可依；提供了可解释的、以内在偏好为导向的推荐方法；通过反事实分析给出营销干预含义；为计算设计科学贡献了由核心理论指导IT制品设计的案例和综合评价协议。
+
+- 整篇论证链：作者首先指出电商推荐系统依赖隐式反馈，但消费者的点击、加购和购买并不等同于内在偏好，而会混入物品显著性和从众等情境因素；如果把这些因素误当作内在偏好训练模型，会损害推荐效果和可解释性。然后借助消费者行为理论和购物旅程四阶段框架，把三类隐式反馈定位到不同购物阶段，提出view主要由内在偏好和物品显著性驱动，add-to-cart和purchase主要由内在偏好和从众效应驱动，且冲动路径使三类行为形成三角结构。由此建立因果图，并设计潜在决策路径变量、代理变量和共同效应性质驱动的解耦损失，使模型能够从无标签的观测行为中识别各类因。理论部分证明DISC的可识别性，为基于观测数据的因果推断提供基础。评价部分先用样本内购买预测检验行为建模，再利用干预构造的测试数据检验内在偏好导向推荐，并通过决策路径AUC、代理变量相关性和替代因果图AIC_M检查过程有效性和因果结构合理性。最后通过反事实干预分析展示营销含义，并在结论中把贡献提升为设计科学知识与因果机器学习结合的理论进展。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：本文的核心贡献是一个计算制品DISC，理论分析用于支撑模型可识别性，主要经验证据来自两个真实数据集上的基准比较、干预数据测试和AIC比较；没有用户实验或现场部署，因此最符合计算制品+benchmark证据模式。
+
+- 主导写作弧线判定：文章从数字足迹不等于内在偏好的问题出发，用消费者行为理论建立因果机制，据此设计DISC制品，通过样本内预测、干预推荐、过程验证和替代图比较进行检验，最后在讨论与结论中回到理论贡献、设计科学贡献和边界条件。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：第一阶段先把行为理论转化为因果图与问题形式化；第二阶段把因果图落实为DISC模型、可识别性证明和EM推断；第三阶段用观测数据检验样本内购买预测；第四阶段用干预数据检验内在偏好导向推荐；第五阶段检验决策路径建模和可解释性；第六阶段比较替代因果图验证理论结构；第七阶段通过反事实干预展示营销含义；第八阶段讨论模型可扩展性。各阶段依次承接：理论结构需要被估计和实证；预测能力需要通过干预测试确认因果解耦；解耦效果需要由过程验证和替代模型比较来排除偶然性；最后把效果转化为管理含义和一般化设计知识。
+
+### studies_or_phases
+
+#### 1. 问题形式化与理论驱动因果图构建
+
+- order：1
+
+- name_cn：问题形式化与理论驱动因果图构建
+
+- question_cn：消费者的三类隐式反馈分别由哪些因素驱动？购物旅程的灵活路径如何建模？
+
+- inputs_and_setting_cn：消费者行为理论、购物旅程四阶段框架、两个说明性例子（谨慎购物Taylor与冲动购物Taylor）
+
+- designed_or_compared_object_cn：构建包含v,a,z,r,b,c,s的因果图；选择浏览、加购、购买三类行为；确定内在偏好、物品显著性、从众效应为原因
+
+- baseline_control_or_counterfactual_cn：无直接基线；后续用替代因果图作为对照
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论分析、购物旅程阶段映射、行为决策路径分析
+
+- main_result_cn：得到三角结构因果图，并定义内在偏好导向推荐为do(b=0,c=0)下的购买概率
+
+- argumentative_role_cn：把现实问题转化为可计算的问题，为模型设计提供理论合法性
+
+- remaining_uncertainty_cn：该因果结构是否真正拟合数据尚不清楚
+
+- link_to_next_phase_cn：引出DISC模型参数化、可识别性和推断方法
+
+##### evidence_pointers
+
+1. Introduction P5-P7
+
+2. Section 3 Examples 1-2
+
+3. Definition 1
+
+4. Figure 1
+
+#### 2. DISC模型、可识别性分析与推断
+
+- order：2
+
+- name_cn：DISC模型、可识别性分析与推断
+
+- question_cn：如何在无因果标签的观测行为数据中估计r,b,c，并保证因果推断可识别？
+
+- inputs_and_setting_cn：观测到的view/add-to-cart/purchase指标、产品浏览量和销量代理变量、用户与物品嵌入
+
+- designed_or_compared_object_cn：DISC模型：logit行为概率、潜在路径变量s_ui、代理变量、共同效应损失L_rb和L_rc、EM推断
+
+- baseline_control_or_counterfactual_cn：无可比较对象；通过Theorem 1给出可识别性条件
+
+##### objective_metrics
+
+1. 行为负对数似然
+
+2. 因果嵌入损失
+
+3. 可识别性条件
+
+- analysis_method_cn：因果图建模、解耦表示学习、EM算法、反事实干预规则
+
+- main_result_cn：构造了完整模型并证明在三个温和条件下可识别；证明s_ui是可识别性的必要性
+
+- argumentative_role_cn：提供技术解决方案和因果推断的理论基础
+
+- remaining_uncertainty_cn：模型在真实数据上能否表现好尚未检验
+
+- link_to_next_phase_cn：引出第一节评价中的样本内购买预测和干预推荐实验
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.2 Theorem 1
+
+3. Section 4.3
+
+4. Section 4.4
+
+#### 3. 样本内购买行为预测评价
+
+- order：3
+
+- name_cn：样本内购买行为预测评价
+
+- question_cn：DISC能否有效建模多种隐式反馈之间的相互关联，从而在观测购买数据上获得良好预测？
+
+- inputs_and_setting_cn：Beibei和Taobao真实数据集，按7:1:2拆分训练/验证/测试，保留行为时间顺序
+
+- designed_or_compared_object_cn：用DISC对未购买物品购买概率排序；比较单反馈无去偏、多反馈无去偏、去偏、因果结构搜索等方法
+
+- baseline_control_or_counterfactual_cn：Random、PMF、UserKNN、DeepFM、ExpoMF、CausE、DICE、NMTR、EHCF、IPS-Salience、IPS-Logit、IPS-1BITMC、GIN
+
+##### objective_metrics
+
+1. P@5
+
+2. MAP@5
+
+3. NDCG@5
+
+4. P@10
+
+5. MAP@10
+
+6. NDCG@10
+
+- analysis_method_cn：top-n推荐排序、与多组baseline比较
+
+- main_result_cn：DISC在两个数据集的样本内购买预测指标上全面超过所有基线
+
+- argumentative_role_cn：证明DISC能充分利用三类隐式反馈和购物路径结构，具备良好的行为建模能力
+
+- remaining_uncertainty_cn：样本内预测好并不代表去除偏误后的推荐真正对准内在偏好
+
+- link_to_next_phase_cn：需要干预测试集来评价内在偏好导向推荐
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 5.2
+
+3. Table 3
+
+4. Section 5.3.1
+
+#### 4. 内在偏好导向推荐评价
+
+- order：4
+
+- name_cn：内在偏好导向推荐评价
+
+- question_cn：在消除物品显著性和从众效应后，DISC能否比其他方法更好地恢复消费者内在偏好？
+
+- inputs_and_setting_cn：由观测数据构造的干预购买数据作为验证和测试集；7:1:2拆分；测试集平衡且低显著性/低从众效应
+
+- designed_or_compared_object_cn：DISC在do(b=0,c=0)下的反事实购买概率排序；与所有基线及同结构BN比较
+
+- baseline_control_or_counterfactual_cn：同前基线加BN，BN与DISC因果图相同但不含因果解耦
+
+##### objective_metrics
+
+1. P@5
+
+2. MAP@5
+
+3. NDCG@5
+
+4. P@10
+
+5. MAP@10
+
+6. NDCG@10
+
+- analysis_method_cn：干预数据测试、top-n推荐评价、结构性消融
+
+- main_result_cn：DISC在干预测试集上显著优于所有方法；BN优于多数基线，说明理论因果结构有效；DISC优于BN，说明解耦机制带来额外增益
+
+- argumentative_role_cn：提供因果解耦的直接证据，证明推荐是基于内在偏好而非混合信号
+
+- remaining_uncertainty_cn：干预数据是基于生成机制合成的，替代真实问卷调查的内在偏好地面真值；代理变量合理性需要额外验证
+
+- link_to_next_phase_cn：通过过程验证和替代因果图比较来加强解耦有效性和结构合理性
+
+##### evidence_pointers
+
+1. Section 5.1 intervention setting
+
+2. Section 5.2 BN rationale
+
+3. Table 4
+
+4. Section 5.3.2
+
+#### 5. 决策路径建模与可解释性验证
+
+- order：5
+
+- name_cn：决策路径建模与可解释性验证
+
+- question_cn：DISC是否真的学到购物路径选择、物品显著性和从众效应的合理语义？
+
+- inputs_and_setting_cn：测试集购买记录的决策路径作为ground truth；估计出的b_ui和r_ui；代理变量π_i；二维嵌入可视化
+
+- designed_or_compared_object_cn：比较DISC的θ预测与PMF-θ、LMF-θ；检验b_ui与π_i的相关性；可视化物品嵌入
+
+- baseline_control_or_counterfactual_cn：PMF-θ、LMF-θ；r_ui与π_i的相关性作为对照
+
+##### objective_metrics
+
+1. AUC
+
+2. CORR
+
+3. COSSIM
+
+- analysis_method_cn：二分类预测、相关性和余弦相似度、降维可视化
+
+- main_result_cn：DISC的决策路径AUC在两个数据集上最高；估计的b_ui与浏览代理变量强相关，而r_ui几乎不相关；嵌入可视化展示合理解释
+
+- argumentative_role_cn：把性能优势拆解到具体机制：路径建模有效、显著性效应被正确分离、可解释性成立
+
+- remaining_uncertainty_cn：相关性不等于真实因果；没有用户感知层面的可解释性调查
+
+- link_to_next_phase_cn：仍需检验因果图结构本身是否比替代结构更合理
+
+##### evidence_pointers
+
+1. Section 5.3.3
+
+2. Table 5
+
+3. Table 6
+
+4. Appendix F
+
+#### 6. 替代因果图结构比较
+
+- order：6
+
+- name_cn：替代因果图结构比较
+
+- question_cn：理论驱动的因果图是否比剔除某类原因、合并原因或全连接的替代结构更符合数据？
+
+- inputs_and_setting_cn：Beibei和Taobao数据；五个替代因果图：DISC-r、DISC-rc、DISC-rb、DISC-rbias、DISC-full
+
+- designed_or_compared_object_cn：比较DISC与五种替代因果图结构的拟合和推荐表现
+
+- baseline_control_or_counterfactual_cn：替代因果图作为结构消融
+
+##### objective_metrics
+
+1. AIC_M
+
+2. 内在偏好推荐指标（附录G）
+
+- analysis_method_cn：广义AIC比较，替代模型推荐性能比较
+
+- main_result_cn：DISC在两个数据集上的AIC_M最低，说明同时包含显著性效应和从众效应的理论结构最受数据支持
+
+- argumentative_role_cn：保护因果图设计不被视为任意工程选择，强化理论到设计的因果关系
+
+- remaining_uncertainty_cn：AIC_M仍是观测数据拟合层面的支持，不等于随机实验验证
+
+- link_to_next_phase_cn：确认结构后，可以进行反事实干预分析以展示管理含义
+
+##### evidence_pointers
+
+1. Section 6.1
+
+2. Figure 6
+
+3. Table 7
+
+4. Appendix G
+
+#### 7. 反事实营销干预分析
+
+- order：7
+
+- name_cn：反事实营销干预分析
+
+- question_cn：物品显著性和从众效应在不同决策路径上对购买概率的影响有多大？营销者应如何选择干预工具？
+
+- inputs_and_setting_cn：Beibei和Taobao上估计的DISC参数；反事实干预do(b=b',c=c')
+
+- designed_or_compared_object_cn：比较对b和c干预10%后冲动购买概率与谨慎购买概率的变化
+
+- baseline_control_or_counterfactual_cn：反事实干预作为无干预的对照
+
+##### objective_metrics
+
+1. 购买概率变化百分比
+
+- analysis_method_cn：因果图干预运算、分路径反事实推断
+
+- main_result_cn：显著性干预对冲动与谨慎路径的购买提升接近；从众干预对谨慎购买路径作用远大于冲动路径；据此提出大众定向适合冲动场景、社会定向适合谨慎场景
+
+- argumentative_role_cn：把模型从推荐性能扩展到可操作的营销决策，展示因果图的应用价值
+
+- remaining_uncertainty_cn：这些干预效果来自模型估计而非真实营销实验，不能替代现场检验
+
+- link_to_next_phase_cn：自然转向可扩展性与边界条件讨论
+
+##### evidence_pointers
+
+1. Section 6.2
+
+2. Table 8
+
+#### 8. 模型可扩展性与边界讨论
+
+- order：8
+
+- name_cn：模型可扩展性与边界讨论
+
+- question_cn：DISC的三角结构假设能否扩展到更复杂的消费行为结构？
+
+- inputs_and_setting_cn：概念化分析，基于三角结构、潜在路径变量和代理变量机制
+
+- designed_or_compared_object_cn：无具体设计；讨论四元决策、更多原因、更多代理变量和次级因素
+
+- baseline_control_or_counterfactual_cn：无
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：理论推演
+
+- main_result_cn：更复杂结构可分解为若干三角组件；潜在变量s仍可用于决策路径建模和负样本归属；更多原因仍可由共同效应结构解耦
+
+- argumentative_role_cn：界定贡献的适用范围并提升一般化设计知识
+
+- remaining_uncertainty_cn：可扩展性尚未通过实证检验
+
+- link_to_next_phase_cn：进入结论、贡献、局限与未来研究
+
+##### evidence_pointers
+
+1. Section 6.3
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. GAP
+
+4. RQ_OR_OBJECTIVE
+
+5. THEORY_INTRO
+
+6. DESIGN_FEATURE
+
+7. STUDY_OVERVIEW
+
+8. RESULT
+
+9. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. GAP
+
+5. METHOD_JUSTIFICATION
+
+6. THEORY_INTRO
+
+7. THEORY_PROPOSITION
+
+8. DESIGN_FEATURE
+
+9. REQUIREMENT
+
+10. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. MECHANISM
+
+3. LIMITATION
+
+4. METHOD_JUSTIFICATION
+
+5. PRIOR_KNOWLEDGE
+
+6. GAP
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. THEORY_PROPOSITION
+
+3. DESIGN_FEATURE
+
+4. METHOD_JUSTIFICATION
+
+5. MECHANISM
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW
+
+2. METHOD_JUSTIFICATION
+
+3. BENCHMARK_OR_CONTRAST
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. BENCHMARK_OR_CONTRAST
+
+2. RESULT
+
+3. MECHANISM
+
+4. BOUNDARY_CONDITION
+
+5. CONTRIBUTION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 消费者行为偏差理论：非标准偏好、非标准信念、非标准决策
+
+2. 购物旅程四阶段框架：需求识别、购前、购买、购后
+
+3. 选择性暴露理论：消费者倾向接触感兴趣商品
+
+4. 随机效用理论与logit选择模型
+
+5. 社会影响与从众效应、流行度偏差文献
+
+6. 冲动购买理论：需求识别后跳过购前直接购买
+
+7. 因果图、共同效应/对撞子、后门准则
+
+8. 解耦表示学习与共同效应性质
+
+9. 矩阵分解/隐因子模型
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：消费者行为理论直接决定了因果图中保留哪些原因、三类行为如何连接、为什么需要潜在决策路径变量；后续通过替代因果图AIC比较直接检验该理论结构，因此属于direct。
+
+- 理论到设计翻译链：消费者行为理论指出隐式反馈偏差来自非标准偏好/信念/决策 → 需求识别阶段浏览受内在偏好和显著性影响，购前/购买阶段受内在偏好和从众影响，冲动路径可能跳过购前 → 设计要求：模型必须同时包含r、b、c三类原因，并显式刻画路径选择 → 制品选择：logit概率、潜在变量s_ui、嵌入表示r/b/c、代理变量π和δ、共同效应损失 → 被检验的差异：有/无显著性、有/无从众、同结构无解耦BN、替代图DISC-r/rc/rb/rbias/full → 客观结果：DISC在干预推荐上优于BN、AIC_M最低、解耦相关性合理。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：需求识别阶段的浏览行为由内在偏好和外部显著性共同驱动
+
+- mechanism_cn：消费者选择性接触感兴趣商品，但广告/推荐等显著性线索使部分商品更易被注意
+
+- design_requirement_cn：view的原因必须区分r和b，不能把b视为r
+
+- artifact_choice_cn：P(v=1)=Λ(α1 r + β1 b)；用π（商品浏览量）作为b的代理变量
+
+- evaluated_contrast_cn：DISC vs DISC-r（无显著性）、BN同结构不解耦、IPS只考虑显著性
+
+- objective_result_cn：DISC在干预推荐上优于BN和DISC-r；b_ui与π强相关，r_ui与π接近不相关
+
+##### evidence_pointers
+
+1. Section 4.1.1.1
+
+2. Equation 1
+
+3. Table 4
+
+4. Table 6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：购前加购和购买行为受内在偏好和从众效应共同驱动
+
+- mechanism_cn：消费者搜索不充分，过度依赖他人选择，形成社会证明/从众偏差
+
+- design_requirement_cn：add-to-cart和purchase的成因必须包含c，且c不能混入r
+
+- artifact_choice_cn：P(a=1)=Λ(α2 r + β2 c)，P(z=1)在不同路径下用r和c组合；δ（商品销量）作为c的代理变量
+
+- evaluated_contrast_cn：DISC vs DISC-rb（无从众）、BN不解耦、DICE只解耦购买行为
+
+- objective_result_cn：DISC比BN和DICE更好地恢复内在偏好推荐；DISC的AIC_M低于DISC-rb
+
+##### evidence_pointers
+
+1. Equations 4-7
+
+2. Table 4
+
+3. Table 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：消费者购物路径可从谨慎到冲动，冲动购买跳过购前阶段
+
+- mechanism_cn：三元决策（加购/直接买/无行动）是谨慎与冲动两种机制的混合
+
+- design_requirement_cn：模型必须捕捉决策机制异质性，否则负样本归属和共同效应比较会出错
+
+- artifact_choice_cn：引入潜在路径变量s_ui~Bernoulli(θ_ui)；似然函数按路径混合；Q(s_uj)为负样本加权
+
+- evaluated_contrast_cn：DISC vs PMF-θ、LMF-θ在决策路径预测上的AUC；替代结构DISC-full忽略路径差异
+
+- objective_result_cn：DISC的AUC最高；AIC_M最低，说明混合路径建模有效
+
+##### evidence_pointers
+
+1. Section 4.1.1.2
+
+2. Equations 2-14
+
+3. Table 5
+
+4. Table 7
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：因果结构可由共同效应/对撞子性质从观测行为中推断
+
+- mechanism_cn：当v被观测到时，r和b因共同效应产生依赖；加购/购买中的负样本归属需要通过决策路径后验概率重新加权
+
+- design_requirement_cn：没有因果标签时需从成对比较中提取排序不等式，以软惩罚而非硬约束实现
+
+- artifact_choice_cn：L_rb用Cases 1-3构造log-sigmoid损失；L_rc用Q(s_uj)处理负样本归属
+
+- evaluated_contrast_cn：DISC vs BN同结构但无因果解耦损失
+
+- objective_result_cn：DISC在干预推荐上显著优于BN
+
+##### evidence_pointers
+
+1. Section 4.1.3
+
+2. Equation 18
+
+3. Equation 19
+
+4. Table 4
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：因果推断需要模型可识别性；否则观测数据无法唯一确定原因效应
+
+- mechanism_cn：存在多个参数组合产生相同似然时，do运算结果不唯一
+
+- design_requirement_cn：模型应满足温和的可识别条件，且路径变量s_ui可识别性必要
+
+- artifact_choice_cn：Theorem 1给出关于R,C的秩条件和系数矩阵条件；证明s_ui必要性
+
+- evaluated_contrast_cn：与缺乏可识别性证明的现有因果嵌入方法对比
+
+- objective_result_cn：证明成立；在实践中DISC表现优于不可识别保证的DICE等
+
+##### evidence_pointers
+
+1. Section 4.2 Theorem 1
+
+2. Section 2.3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 样本内购买行为预测基准
+
+2. 干预数据测试的内在偏好导向推荐基准
+
+3. 决策路径分类AUC验证
+
+4. 代理变量与估计效果相关性验证
+
+5. 替代因果图AIC_M比较
+
+6. 多样化鲁棒性分析与信息消融（附录D、E）
+
+7. 反事实干预分析
+
+- why_these_evaluations_cn：由于观测购买数据无法直接作为内在偏好的ground truth，作者需要分步证明：第一步，样本内预测说明模型能够建模多行为互连；第二步，干预数据模拟去除显著性和从众后的购买结果，直接测试因果解耦；第三步，决策路径预测和代理变量相关性检查中间机制是否合理；第四步，替代因果图比较证明理论结构不是随意设定；第五步，反事实干预分析展示模型在营销决策中的可用性。
+
+- benchmark_and_contrast_chain_cn：先设置4组基线分别分离单/多反馈、有无去偏、因果结构搜索等问题；再引入与DISC同结构但无解耦的BN，以隔离结构贡献与解耦贡献；随后用替代因果图DISC-r/rc/rb/rbias/full做结构消融；最后用简单路径预测器PMF-θ/LMF-θ检验路径变量有效性。这样形成从整体性能到单一设计机制的证据链。
+
+### claim_evidence_ledger
+
+#### 1. 理论驱动的因果结构本身有效
+
+- claim_cn：理论驱动的因果结构本身有效
+
+- evidence_cn：BN在干预推荐中优于NMTR、EHCF、GIN等基线；DISC的AIC_M低于所有替代因果图
+
+- status_cn：有数据支持
+
+#### 2. 因果解耦机制带来额外增益
+
+- claim_cn：因果解耦机制带来额外增益
+
+- evidence_cn：DISC在干预推荐中超过同结构BN
+
+- status_cn：有数据支持
+
+#### 3. 多种隐式反馈的利用优于单一反馈
+
+- claim_cn：多种隐式反馈的利用优于单一反馈
+
+- evidence_cn：DISC和EHCF等优于只使用购买行为的基线；附录E信息消融进一步支持
+
+- status_cn：有数据支持
+
+#### 4. 决策路径变量捕获了冲动/谨慎过程
+
+- claim_cn：决策路径变量捕获了冲动/谨慎过程
+
+- evidence_cn：DISC的决策路径AUC高于PMF-θ和LMF-θ
+
+- status_cn：有数据支持
+
+#### 5. 估计的物品显著性效应具有语义有效性
+
+- claim_cn：估计的物品显著性效应具有语义有效性
+
+- evidence_cn：b_ui与浏览代理变量强相关，r_ui与代理变量几乎不相关
+
+- status_cn：有数据支持但仅限相关性
+
+#### 6. 模型可识别性保证因果推断
+
+- claim_cn：模型可识别性保证因果推断
+
+- evidence_cn：Theorem 1的数学证明，未做实证直接检验
+
+- status_cn：理论论证，非经验证据
+
+#### 7. 营销干预建议有效
+
+- claim_cn：营销干预建议有效
+
+- evidence_cn：基于模型参数的反事实计算结果，无现场实验验证
+
+- status_cn：模型推断，缺乏实证检验
+
+- internal_validity_strategy_cn：使用同结构BN控制因果结构贡献；使用替代因果图作为结构消融；在干预测试集中特意使显著性/从众效应极低，使测试分布与观测训练分布不同；超参数用验证集调整；代理变量用模拟分析验证；L_rb/L_rc采用软惩罚而非硬约束以应对测量误差。
+
+- external_validity_strategy_cn：使用母婴电商Beibei和综合平台Taobao两个真实数据集；包含不同类目、不同稀疏程度；在附录中扩展到另一数据集合、不同列表长度、其他指标、不同代理变量和多种测试场景；可扩展性讨论提出三角结构可分解到更复杂结构。
+
+- what_is_not_actually_tested_cn：没有直接使用问卷调查或实验获取的内在偏好作为ground truth；干预数据是合成重采样，不是真实反事实；营销干预效果没有在平台实验中验证；可解释性没有用户研究；长期偏好漂移没有检验。
+
+## 贡献闭环
+
+- technical_claim_cn：DISC在样本内购买预测和干预数据的内在偏好导向推荐上显著优于现有基线，并能预测决策路径。
+
+- artifact_claim_cn：理论驱动的三角因果图、潜在决策路径变量、代理变量共同效应损失共同导致改进；BN和替代结构比较支持该归属。
+
+- mechanism_claim_cn：解耦r、b、c之后，以do(b=0,c=0)计算的反事实购买概率更接近消费者的内在偏好，避免把显著性点击和从众购买误当作偏好。
+
+- boundary_claim_cn：适用于view/add-to-cart/purchase三类隐式反馈形成的三角结构；在用户和物品存在足够的偏好/从众异质性且因果图结构正确时成立；可分解扩展到更复杂行为结构。
+
+- reusable_design_knowledge_cn：学习因果解耦推荐系统时，应以领域理论建立因果图，用代理变量提供原因信息，用共同效应排序损失实现无标签解耦，用潜在决策路径变量处理行为分支异质性，并以可识别性证明作为因果推断的设计门槛；评价时应同时报告样本内拟合、干预推荐、过程验证和结构消融。
+
+- theoretical_contribution_cn：把消费者行为偏差理论具体化为可检验的因果图，为推荐系统中的因果解耦提供可识别性理论证明，回应因果机器学习与IT制品设计结合的研究呼吁。
+
+- how_discussion_closes_intro_gap_cn：引言提出观察行为不等于内在偏好，讨论部分通过BN与替代因果图比较证明多原因结构必要，通过干预数据推荐证明解耦后的推荐更接近内在偏好，通过反事实分析说明可以操纵外部原因形成不同营销干预；结论把这些证据整合为设计科学贡献。
+
+- overclaim_or_unsupported_leaps_cn：从合成干预数据上的推荐性能跳跃到“内在偏好”需要更强证据；代理变量只是间接指标；营销建议基于模型估计而非真实实验；可扩展性只有理论推演；可解释性主要由相关性而非用户认知数据支持。
+
+## 句级写作动作图谱
+
+### 1. Abstract S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：电商平台多种消费者数字足迹为个性化推荐系统设计提供了数据基础。
+
+- rhetorical_function_cn：建立研究领域和现实背景，说明推荐系统的重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：为数字足迹不等于内在偏好这一核心问题铺垫。
+
+- evidence_pointer：Abstract首句
+
+### 2. Abstract S3-S4
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract S3-S4
+
+- move_code：GAP
+
+- paraphrase_cn：驱动消费者行为的因素很多，若把其他因素误认为内在偏好，模型训练和推荐结果会产生偏差。
+
+- rhetorical_function_cn：指出已有做法的问题，形成需要解决的缺口。
+
+- depends_on_cn：数字足迹背景
+
+- sets_up_cn：引出解耦因果的DISC目标。
+
+- evidence_pointer：Abstract第三、四句
+
+### 3. Abstract S5-S8
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract S5-S8
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：借助消费者行为理论区分各阶段驱动因素，提出DISC方法，用因果图和解耦表示学习推断各因素效应。
+
+- rhetorical_function_cn：宣告研究目标和制品。
+
+- depends_on_cn：前面的偏差缺口
+
+- sets_up_cn：后续可识别性和实验评价。
+
+- evidence_pointer：Abstract第五至七句
+
+### 4. Abstract S9
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract S9
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：DISC通过理论分析证明可识别性，使基于观测数据的因果推断有基础。
+
+- rhetorical_function_cn：预告理论贡献，增强因果主张可信度。
+
+- depends_on_cn：DISC模型
+
+- sets_up_cn：与其他缺少可识别性证明的方法形成对比。
+
+- evidence_pointer：Abstract第九句
+
+### 5. Abstract S10-S11
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract S10-S11
+
+- move_code：RESULT
+
+- paraphrase_cn：在两个真实数据集上的实验显示DISC显著优于最先进基线并具有良好可解释性；后续反事实分析展示了营销策略干预效果。
+
+- rhetorical_function_cn：给出主要经验结果和应用价值。
+
+- depends_on_cn：模型构建与评价设计
+
+- sets_up_cn：贡献声明。
+
+- evidence_pointer：Abstract第十、十一句
+
+### 6. Abstract S12
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract S12
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究对文献和实践的贡献是因果解开数字足迹背后的行为机制，并设计以内在偏好为基础的可解释推荐。
+
+- rhetorical_function_cn：用一句话总结贡献层级。
+
+- depends_on_cn：全文
+
+- sets_up_cn：读者预期贡献类型。
+
+- evidence_pointer：Abstract末句
+
+### 7. Introduction P1 S1-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：个性化推荐在电商平台决策支持中很关键，禁用推荐会导致点击和购买下降；平台记录了多种数字足迹。
+
+- rhetorical_function_cn：从IS领域重要性进入场景。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出隐式反馈作为主要数据。
+
+- evidence_pointer：Introduction第一段
+
+### 8. Introduction P1 S4-S5
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P1 S4-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：用户越来越不愿评分，现代推荐系统常依赖点击流等隐式反馈。
+
+- rhetorical_function_cn：说明为什么必须研究隐式反馈。
+
+- depends_on_cn：数字足迹背景
+
+- sets_up_cn：隐式反馈可能被情境因素污染的问题。
+
+- evidence_pointer：Introduction第一段后两句
+
+### 9. Introduction P2 S1-S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：传统推荐把消费行为等同于内在偏好，但点击或购买可能是内在偏好与情境因素的组合，因此观察分布与内在偏好分布不同。
+
+- rhetorical_function_cn：提出核心经验现象：行为信号混合。
+
+- depends_on_cn：隐式反馈背景
+
+- sets_up_cn：说明误把情境当偏好的后果。
+
+- evidence_pointer：Introduction第二段前两句
+
+### 10. Introduction P2 S3-S5
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S3-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：偶然点击被当作偏好会带来错误推荐，损害推荐系统可靠性和有效性，因此需要探测行为并接近内在偏好。
+
+- rhetorical_function_cn：提升问题的重要性。
+
+- depends_on_cn：行为混合现象
+
+- sets_up_cn：三个技术挑战。
+
+- evidence_pointer：Introduction第二段后三句
+
+### 11. Introduction P3
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3
+
+- move_code：GAP
+
+- paraphrase_cn：设计解耦方法有三大挑战：隐式反馈形式多样且决策机制不同、原因交织、无标签且需可识别性。
+
+- rhetorical_function_cn：说明现有方法面临的具体困难。
+
+- depends_on_cn：问题重要性
+
+- sets_up_cn：提出使用因果图来解决。
+
+- evidence_pointer：Introduction第三段
+
+### 12. Introduction P4
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因果图能编码数据生成过程的假设并反映上下文，学习参数后可实现原因解耦。
+
+- rhetorical_function_cn：引入方法族并解释其为什么适合挑战。
+
+- depends_on_cn：三大挑战
+
+- sets_up_cn：消费者行为理论如何构建因果图。
+
+- evidence_pointer：Introduction第四段
+
+### 13. Introduction P5
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：借鉴消费者行为文献，购物旅程可分为需求识别、购前、购买、购后四个阶段。
+
+- rhetorical_function_cn：引入理论框架以构建因果图。
+
+- depends_on_cn：需要有效因果图
+
+- sets_up_cn：把行为映射到不同阶段。
+
+- evidence_pointer：Introduction第五段
+
+### 14. Introduction P6 S1-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：需求识别阶段受内部欲望和广告等外部刺激影响；购前阶段受他人选择影响；购买阶段决策和时间可能被偏差影响，甚至冲动直接购买。
+
+- rhetorical_function_cn：陈述各阶段的行为驱动命题。
+
+- depends_on_cn：四阶段框架
+
+- sets_up_cn：选择view/add-to-cart/purchase作为代表行为。
+
+- evidence_pointer：Introduction第六段前半
+
+### 15. Introduction P6 S4
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P6 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：选取浏览、加购、购买三类行为，内部原因均为内在偏好，外部原因随阶段变化，显著性作用于浏览，从众影响加购与购买；冲动购买使三类行为形成三角结构。
+
+- rhetorical_function_cn：把理论命题转化为具体因果图元素。
+
+- depends_on_cn：阶段驱动命题
+
+- sets_up_cn：模型参数化和代理变量设计。
+
+- evidence_pointer：Introduction第六段末句、Figure 1
+
+### 16. Introduction P7
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P7
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在无标签数据下，从产品属性提取代理变量，用解耦表示学习推断原因，并理论证明可识别性。
+
+- rhetorical_function_cn：提出实现因果解耦的技术要求。
+
+- depends_on_cn：因果图结构
+
+- sets_up_cn：后续模型可识别性分析和因果推荐。
+
+- evidence_pointer：Introduction第七段
+
+### 17. Introduction P8
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P8
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：评价使用干预数据作为测试，DISC在样本内购买预测和内在偏好推荐上超过基线；替代因果图检验合理性；事后分析说明可解释性。
+
+- rhetorical_function_cn：预览评价策略和主要结果。
+
+- depends_on_cn：模型构建
+
+- sets_up_cn：对论文结构的期待。
+
+- evidence_pointer：Introduction第八段
+
+### 18. Introduction P9
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P9
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：介绍后续章节安排。
+
+- rhetorical_function_cn：提供全文路径。
+
+- depends_on_cn：前面论证
+
+- sets_up_cn：导航读者进入各节。
+
+- evidence_pointer：Introduction最后一段
+
+### 19. Section 2.1 P1
+
+- order：19
+
+- section：Section 2.1
+
+- locator：Section 2.1 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：消费者行为偏差分为非标准偏好、非标准信念和非标准决策。
+
+- rhetorical_function_cn：建立行为偏差的分类学知识。
+
+- depends_on_cn：引言中行为偏差来源
+
+- sets_up_cn：解释为何观察行为与内在偏好不一致。
+
+- evidence_pointer：Section 2.1第一段
+
+### 20. Section 2.1 P2
+
+- order：20
+
+- section：Section 2.1
+
+- locator：Section 2.1 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：三类偏差在购物旅程各阶段显现，造成观察数据与内在偏好的差距，因此需要解耦并处理原因。
+
+- rhetorical_function_cn：把分类学连接到研究问题。
+
+- depends_on_cn：偏差分类学
+
+- sets_up_cn：作为模型因果设定的理论依据。
+
+- evidence_pointer：Section 2.1第二段
+
+### 21. Section 2.2 P1-P3
+
+- order：21
+
+- section：Section 2.2
+
+- locator：Section 2.2 P1-P3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：因果学习分为结构发现与效应估计；结构发现需要ground truth，效应估计需要在给定结构下处理混淆。
+
+- rhetorical_function_cn：定位本文在因果学习谱系中的位置。
+
+- depends_on_cn：因果关系需求
+
+- sets_up_cn：说明为什么选择理论驱动结构加效应估计。
+
+- evidence_pointer：Section 2.2前三段
+
+### 22. Section 2.2 P4
+
+- order：22
+
+- section：Section 2.2
+
+- locator：Section 2.2 P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：数据驱动结构发现可能产生虚假关系，因此用理论驱动方法建立因果结构，焦点放在效应估计。
+
+- rhetorical_function_cn：为DISC的设计选择提供方法论证。
+
+- depends_on_cn：因果学习分类
+
+- sets_up_cn：第三节问题定义和第四节模型。
+
+- evidence_pointer：Section 2.2末段
+
+### 23. Section 2.3 P1-P2
+
+- order：23
+
+- section：Section 2.3
+
+- locator：Section 2.3 P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：推荐去偏文献主要有IPS、暴露建模和因果嵌入三条路线。
+
+- rhetorical_function_cn：概述现有去偏方法。
+
+- depends_on_cn：数据偏差问题
+
+- sets_up_cn：指出各自局限。
+
+- evidence_pointer：Section 2.3前两段
+
+### 24. Section 2.3 P3
+
+- order：24
+
+- section：Section 2.3
+
+- locator：Section 2.3 P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：IPS倾向性估计只考虑显著性，暴露模型未充分分析完整购物旅程，因此效果受限。
+
+- rhetorical_function_cn：描述前两类方法的不足。
+
+- depends_on_cn：现有方法概述
+
+- sets_up_cn：解释第三类因果嵌入为何成为本文基础。
+
+- evidence_pointer：Section 2.3第三段
+
+### 25. Section 2.3 P4
+
+- order：25
+
+- section：Section 2.3
+
+- locator：Section 2.3 P4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：多数因果嵌入工作只关注购买行为、简化驱动因素，并且缺乏可识别性分析。
+
+- rhetorical_function_cn：直接指出现有因果嵌入研究的缺口。
+
+- depends_on_cn：因果嵌入概念
+
+- sets_up_cn：提出DISC的增量贡献。
+
+- evidence_pointer：Section 2.3第四段
+
+### 26. Section 2.3 P5
+
+- order：26
+
+- section：Section 2.3
+
+- locator：Section 2.3 P5
+
+- move_code：GAP
+
+- paraphrase_cn：本文提出整合多种隐式反馈、全面解耦原因并证明可识别性的因果嵌入方法。
+
+- rhetorical_function_cn：明确本文填补的缺口。
+
+- depends_on_cn：前两条局限
+
+- sets_up_cn：引出方法设计。
+
+- evidence_pointer：Section 2.3末段
+
+### 27. Section 2.4 P1-P2
+
+- order：27
+
+- section：Section 2.4
+
+- locator：Section 2.4 P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有多种隐式反馈推荐用行为顺序或深度结构建模目标行为。
+
+- rhetorical_function_cn：概述多隐式反馈推荐流。
+
+- depends_on_cn：多反馈数据现象
+
+- sets_up_cn：批评其理论不足。
+
+- evidence_pointer：Section 2.4前两段
+
+### 28. Section 2.4 P3
+
+- order：28
+
+- section：Section 2.4
+
+- locator：Section 2.4 P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有方法忽视行为偏差，不能很好地建模购物阶段灵活转换。
+
+- rhetorical_function_cn：指出多反馈推荐研究的不足。
+
+- depends_on_cn：多反馈研究综述
+
+- sets_up_cn：三角结构因果图的必要性。
+
+- evidence_pointer：Section 2.4末段
+
+### 29. Example 1
+
+- order：29
+
+- section：Section 3
+
+- locator：Example 1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：Taylor偏好绿色但最终因高销量信息购买黑色裙子，体现从众效应。
+
+- rhetorical_function_cn：用具体例子说明谨慎购物路径中内在偏好与从众的分离。
+
+- depends_on_cn：理论驱动因素
+
+- sets_up_cn：定义因果推荐问题。
+
+- evidence_pointer：Section 3 Example 1、Figure 2
+
+### 30. Example 2
+
+- order：30
+
+- section：Section 3
+
+- locator：Example 2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：Taylor匆忙中看到广告后直接购买粉色裙子，跳过购前评估，体现显著性和冲动路径。
+
+- rhetorical_function_cn：说明冲动路径下内在偏好与显著性分离。
+
+- depends_on_cn：理论驱动因素
+
+- sets_up_cn：需要潜在路径变量s。
+
+- evidence_pointer：Section 3 Example 2、Figure 3
+
+### 31. Section 3 after examples
+
+- order：31
+
+- section：Section 3
+
+- locator：Section 3 after examples
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：正式定义因果推荐问题，并给出内在偏好导向推荐的定义为排除显著性和从众效应后的购买概率。
+
+- rhetorical_function_cn：把研究问题形式化。
+
+- depends_on_cn：两个例子
+
+- sets_up_cn：模型优化目标和评价目标。
+
+- evidence_pointer：Section 3之后、Definition 1
+
+### 32. Section 3末段
+
+- order：32
+
+- section：Section 3
+
+- locator：Section 3末段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：观测购买数据混杂多种原因，因此需要构建干预购买数据作为测试集。
+
+- rhetorical_function_cn：证明干预评价的必要性。
+
+- depends_on_cn：定义1
+
+- sets_up_cn：第五节干预测试协议。
+
+- evidence_pointer：Section 3末段
+
+### 33. Section 4.1 P1-P2
+
+- order：33
+
+- section：Section 4.1
+
+- locator：Section 4.1 P1-P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：三元决策需要被转化为谨慎和冲动两条二元决策的混合，因此引入潜在路径变量s_ui。
+
+- rhetorical_function_cn：从行为结构提出建模要求。
+
+- depends_on_cn：三角结构
+
+- sets_up_cn：具体概率模型。
+
+- evidence_pointer：Section 4.1开头
+
+### 34. Section 4.1.1.1 View
+
+- order：34
+
+- section：Section 4.1.1.1
+
+- locator：Section 4.1.1.1 View
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：浏览意图由内在偏好和物品显著性线性组合，并用logit模型表示浏览概率。
+
+- rhetorical_function_cn：把选择暴露和显著性理论形式化。
+
+- depends_on_cn：因果图
+
+- sets_up_cn：后续共同效应损失。
+
+- evidence_pointer：Equation (1)
+
+### 35. Section 4.1.1.2
+
+- order：35
+
+- section：Section 4.1.1.2
+
+- locator：Section 4.1.1.2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：s_ui取0表示走谨慎路径判断是否加购，取1表示跳过购前直接判断是否购买，其分布参数由用户和物品嵌入决定。
+
+- rhetorical_function_cn：引入模型核心设计变量。
+
+- depends_on_cn：三元决策混合要求
+
+- sets_up_cn：似然函数。
+
+- evidence_pointer：Equations (2)-(3)
+
+### 36. Section 4.1.1.3
+
+- order：36
+
+- section：Section 4.1.1.3
+
+- locator：Section 4.1.1.3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：谨慎路径下加购概率由内在偏好与从众效应共同决定；未浏览或冲动路径下加购概率为零。
+
+- rhetorical_function_cn：把购前阶段的社会影响理论放入模型。
+
+- depends_on_cn：s_ui变量
+
+- sets_up_cn：购买概率的条件结构。
+
+- evidence_pointer：Equations (4)-(5)
+
+### 37. Section 4.1.1.4
+
+- order：37
+
+- section：Section 4.1.1.4
+
+- locator：Section 4.1.1.4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：购买概率依据路径和加购状态分别由r和c的加权组合决定，权重随决策阶段不同而不同。
+
+- rhetorical_function_cn：让模型体现决策机制异质性。
+
+- depends_on_cn：路径变量和加购方程
+
+- sets_up_cn：完整似然的四种情况。
+
+- evidence_pointer：Equations (6)-(9)
+
+### 38. Section 4.1.2
+
+- order：38
+
+- section：Section 4.1.2
+
+- locator：Section 4.1.2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：将显著性效应和从众效应建模为用户-物品相关嵌入，而不是只依赖物品的静态项，以反映消费者异质性。
+
+- rhetorical_function_cn：从行为异质性提出参数化要求。
+
+- depends_on_cn：理论命题
+
+- sets_up_cn：因果嵌入学习。
+
+- evidence_pointer：Section 4.1.2、Equation (17)
+
+### 39. Section 4.1.3 P1
+
+- order：39
+
+- section：Section 4.1.3
+
+- locator：Section 4.1.3 P1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：缺少标签时使用代理变量（浏览量和销量）和共同效应性质从成对比较中提取因果信息。
+
+- rhetorical_function_cn：解释无标签学习机制。
+
+- depends_on_cn：代理变量概念
+
+- sets_up_cn：L_rb和L_rc的具体形式。
+
+- evidence_pointer：Section 4.1.3
+
+### 40. Section 4.1.3.3
+
+- order：40
+
+- section：Section 4.1.3.3
+
+- locator：Section 4.1.3.3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：根据行为是否发生和代理变量顺序定义三种互斥情形，推导r和b之间的不等式，并用负log-sigmoid损失软惩罚。
+
+- rhetorical_function_cn：将共同效应理论转化为损失函数设计。
+
+- depends_on_cn：浏览概率模型
+
+- sets_up_cn：整体多目标损失。
+
+- evidence_pointer：Equation (18)
+
+### 41. Section 4.1.3.4
+
+- order：41
+
+- section：Section 4.1.3.4
+
+- locator：Section 4.1.3.4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：由于加购和购买存在决策依赖，负样本归属不明确；用s的后验概率Q(s_uj)对成对比较加权，设计L_rc损失。
+
+- rhetorical_function_cn：解决三角结构导致的负样本归属问题。
+
+- depends_on_cn：路径变量s
+
+- sets_up_cn：完整目标函数Equation (20)。
+
+- evidence_pointer：Figure 5、Equation (19)
+
+### 42. Section 4.2
+
+- order：42
+
+- section：Section 4.2
+
+- locator：Section 4.2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：Theorem 1在三个温和条件下证明DISC可识别，说明物品级代理变量足够，且s_ui是可识别性的必要条件。
+
+- rhetorical_function_cn：为因果推断提供理论保障。
+
+- depends_on_cn：因果嵌入损失设计
+
+- sets_up_cn：与其他方法相比的独特优势。
+
+- evidence_pointer：Section 4.2 Theorem 1、Online Appendix A
+
+### 43. Section 4.3
+
+- order：43
+
+- section：Section 4.3
+
+- locator：Section 4.3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于潜在s使似然出现log-sum结构，使用EM算法估计参数。
+
+- rhetorical_function_cn：说明推断方法的必要性。
+
+- depends_on_cn：似然函数
+
+- sets_up_cn：实际可操作的参数估计。
+
+- evidence_pointer：Section 4.3
+
+### 44. Section 4.4
+
+- order：44
+
+- section：Section 4.4
+
+- locator：Section 4.4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：环境变化可视为对外部原因的干预，通过do运算生成反事实购买概率；内在偏好推荐对应b=c=0。
+
+- rhetorical_function_cn：连接因果图与推荐应用。
+
+- depends_on_cn：可识别性和估计参数
+
+- sets_up_cn：干预数据评价和营销反事实。
+
+- evidence_pointer：Section 4.4
+
+### 45. Section 5 P1
+
+- order：45
+
+- section：Section 5
+
+- locator：Section 5 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：评价从三方面展开：样本内购买预测、干预数据的内在偏好推荐、参数解释性。
+
+- rhetorical_function_cn：预告评价结构。
+
+- depends_on_cn：模型设计
+
+- sets_up_cn：数据、基线和结果小节。
+
+- evidence_pointer：Section 5第一段
+
+### 46. Section 5.1
+
+- order：46
+
+- section：Section 5.1
+
+- locator：Section 5.1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用Beibei和Taobao两个真实数据集，按7:1:2划分；干预数据通过重抽样使测试集显著性/从众效应低。
+
+- rhetorical_function_cn：说明数据来源和干预测试构造合理性。
+
+- depends_on_cn：前面评价目标
+
+- sets_up_cn：基线比较结果。
+
+- evidence_pointer：Section 5.1
+
+### 47. Section 5.2
+
+- order：47
+
+- section：Section 5.2
+
+- locator：Section 5.2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：设置四组基线，并加入与DISC同结构但无解耦的BN，以分离结构贡献；用P、MAP、NDCG评估。
+
+- rhetorical_function_cn：建立评价参照体系。
+
+- depends_on_cn：评价目标
+
+- sets_up_cn：解读结果时的消融逻辑。
+
+- evidence_pointer：Section 5.2、Table 2
+
+### 48. Section 5.3.1
+
+- order：48
+
+- section：Section 5.3.1
+
+- locator：Section 5.3.1
+
+- move_code：RESULT
+
+- paraphrase_cn：DISC在样本内购买预测上稳健超过所有基线；NMTR级联假设不成立，EHCF忽略阶段转换，GIN纯数据驱动未发现行为间依赖。
+
+- rhetorical_function_cn：给出第一层性能证据并解释原因。
+
+- depends_on_cn：样本内实验
+
+- sets_up_cn：干预推荐结果。
+
+- evidence_pointer：Table 3、Section 5.3.1
+
+### 49. Section 5.3.2
+
+- order：49
+
+- section：Section 5.3.2
+
+- locator：Section 5.3.2
+
+- move_code：RESULT
+
+- paraphrase_cn：干预数据上DISC显著领先；BN超过多数基线说明理论因果结构有效，DISC超过BN说明解耦机制有效；第三组去偏基线因只考虑部分原因或缺少可识别性而落后。
+
+- rhetorical_function_cn：给出核心因果解耦证据。
+
+- depends_on_cn：干预数据测试
+
+- sets_up_cn：鲁棒性分析和过程验证。
+
+- evidence_pointer：Table 4、Section 5.3.2
+
+### 50. Section 5.3.2 末段
+
+- order：50
+
+- section：Section 5.3.2
+
+- locator：Section 5.3.2 末段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：通过不同阶段产品、额外指标、列表长度、扩展数据集、代理变量构造、多测试场景和消融分析验证鲁棒性。
+
+- rhetorical_function_cn：提前概括附录中的稳健性检验。
+
+- depends_on_cn：核心结果
+
+- sets_up_cn：证明结论不是数据集或指标依赖的一次性结果。
+
+- evidence_pointer：Section 5.3.2末段、Appendix D/E
+
+### 51. Section 5.3.3 第一点
+
+- order：51
+
+- section：Section 5.3.3
+
+- locator：Section 5.3.3 第一点
+
+- move_code：RESULT
+
+- paraphrase_cn：DISC在决策路径预测AUC上超过PMF-θ和LMF-θ，说明路径变量和主体模型吸收了行为信息。
+
+- rhetorical_function_cn：验证中间机制的有效性。
+
+- depends_on_cn：决策路径变量
+
+- sets_up_cn：可解释性分析。
+
+- evidence_pointer：Table 5
+
+### 52. Section 5.3.3 第二点
+
+- order：52
+
+- section：Section 5.3.3
+
+- locator：Section 5.3.3 第二点
+
+- move_code：RESULT
+
+- paraphrase_cn：估计出的b_ui与浏览量代理变量强正相关，r_ui与代理变量接近不相关，说明显著性效应被正确分离。
+
+- rhetorical_function_cn：提供解耦语义有效性的定量证据。
+
+- depends_on_cn：因果嵌入损失
+
+- sets_up_cn：嵌入可视化等可解释性证据。
+
+- evidence_pointer：Table 6、Appendix F
+
+### 53. Section 6.1
+
+- order：53
+
+- section：Section 6.1
+
+- locator：Section 6.1
+
+- move_code：RESULT
+
+- paraphrase_cn：五种替代因果图中DISC的AIC_M最低，说明同时包含显著性和从众效应的理论结构最受数据支持。
+
+- rhetorical_function_cn：用结构消融保护理论因果图。
+
+- depends_on_cn：理论驱动结构
+
+- sets_up_cn：因果结构的一般化论证。
+
+- evidence_pointer：Table 7、Figure 6、Appendix G
+
+### 54. Section 6.2
+
+- order：54
+
+- section：Section 6.2
+
+- locator：Section 6.2
+
+- move_code：RESULT
+
+- paraphrase_cn：反事实干预显示显著性干预对冲动和谨慎购买概率的提升相近，而从众干预对谨慎购买路径的影响远大于冲动路径，因此大众定向更适合冲动场景、社会定向更适合谨慎场景。
+
+- rhetorical_function_cn：把推荐模型扩展为营销策略分析工具。
+
+- depends_on_cn：因果图干预
+
+- sets_up_cn：实践贡献。
+
+- evidence_pointer：Section 6.2、Table 8
+
+### 55. Section 6.3
+
+- order：55
+
+- section：Section 6.3
+
+- locator：Section 6.3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：方法可扩展到更复杂行为结构：复杂决策可分解为三角组件，路径变量和代理变量仍可用于解耦。
+
+- rhetorical_function_cn：说明贡献边界和扩展方向。
+
+- depends_on_cn：DISC机制
+
+- sets_up_cn：总结中设计知识声明。
+
+- evidence_pointer：Section 6.3
+
+### 56. Section 7 P1
+
+- order：56
+
+- section：Section 7
+
+- locator：Section 7 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结DISC模型、理论可识别性、实验性能和替代图检验。
+
+- rhetorical_function_cn：压缩全文结论。
+
+- depends_on_cn：全部章节
+
+- sets_up_cn：具体贡献清单。
+
+- evidence_pointer：Section 7第一段
+
+### 57. Section 7 P2
+
+- order：57
+
+- section：Section 7
+
+- locator：Section 7 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：宣称理论贡献是用消费者行为核心理论指导因果图设计并证明可识别性，方法贡献是首次解耦多种隐式反馈并建立综合评价协议。
+
+- rhetorical_function_cn：把结果重新定位为设计科学与理论贡献。
+
+- depends_on_cn：评价结果和替代图比较
+
+- sets_up_cn：实践贡献。
+
+- evidence_pointer：Section 7第二段
+
+### 58. Section 7 P3
+
+- order：58
+
+- section：Section 7
+
+- locator：Section 7 P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：面向平台、消费者和零售商给出实践启示：帮助平台估计各因素效应，帮助消费者识别行为偏差，帮助零售商进行个性化助推。
+
+- rhetorical_function_cn：扩展研究的实践适用性。
+
+- depends_on_cn：因果图估计
+
+- sets_up_cn：局限与未来。
+
+- evidence_pointer：Section 7第三段
+
+### 59. Section 7 P4
+
+- order：59
+
+- section：Section 7
+
+- locator：Section 7 P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：只考虑三类代表性隐式反馈；代理变量可用更细粒度信息；原因可能随时间变化，未来可研究纵向行为。
+
+- rhetorical_function_cn：界定研究的局限和未来方向。
+
+- depends_on_cn：全文边界
+
+- sets_up_cn：读者对适用条件的理解。
+
+- evidence_pointer：Section 7末段
+
+## 写作技术
+
+- gap_construction_cn：先用现实现象说明隐式反馈是混合信号，接着指出现有方法分别只处理单一行为、只考虑单一偏误来源或缺乏可识别性；最后把缺口归为“没有用理论刻画完整购物旅程并同时解耦多个原因”。
+
+- signposting_cn：在引言末段列出全文结构；在第五节开头列出三个评价视角；在每节结果前后用因果归属句解释为什么某个对比支持特定设计选择。
+
+- transition_logic_cn：每个阶段结尾遗留一个未回答问题，例如样本内预测好不等于干预推荐好，于是引出干预数据测试；性能好不等于解耦机制有效，于是引入BN对照和替代图；机制有效不等于可解释，于是进入决策路径AUC和相关性分析。
+
+- claim_evidence_rhythm_cn：每段先给出主张，再报告表或对比，最后解释“为什么优势可归因于”某个结构/机制；在结果表后立即用BN、DICE和替代图等对照说明贡献分解。
+
+- benchmark_narrative_cn：基线分组本身就是论证：单反馈无去偏、多反馈无去偏、去偏方法、结构搜索方法被安排成从低到高的能力谱；BN同结构无解耦用于隔离结构；替代图用于隔离原因集合；简单路径预测器用于验证路径变量。
+
+- theory_return_cn：在讨论和结论中把AIC_M较低和BN次优解释为核心理论因果结构的证据，把可识别性证明提升为因果机器学习的理论贡献，并用可扩展性讨论把三角结构升华为通用设计知识。
+
+- contribution_positioning_cn：将研究定位在计算设计科学和因果机器学习交叉处，声明“理论驱动IT制品设计”和“首次解耦多种隐式反馈”；实践贡献放在反事实营销分析中，避免只作为性能方法。
+
+- novelty_protection_cn：不仅报告DISC性能第一，还通过同结构BN、替代因果图和消融分析证明不是偶然工程组合；通过可识别性证明区分于缺少该保证的因果嵌入方法；用干预数据测试说明评价重点不是普通推荐精度。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用情境例子说明观测行为与目标构念（如内在偏好）之间的偏差，建立现实和学术问题。
+
+- research_job_cn：确认真实数据中行为信号由多个原因驱动，并确认现有方法对该原因的处理方式。
+
+- required_evidence_cn：领域文献或真实平台现象能支持至少两类以上原因混合；现有方法各自局限。
+
+- transition_to_next_cn：因为这些原因交织且无标签，需要理论驱动的因果图。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用成熟理论划分阶段/机制，说明每类行为由哪个原因驱动，构建因果图。
+
+- research_job_cn：从理论中确定变量集合、行为结构和潜在异质性路径。
+
+- required_evidence_cn：理论命题能一一映射到行为变量，且结构可用图表达。
+
+- transition_to_next_cn：因果图需要参数化并学习原因效应。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把每个原因转成嵌入、概率式或损失项，并说明无标签条件下如何提取原因信息。
+
+- research_job_cn：设计模型架构、代理变量、解耦损失、推断算法。
+
+- required_evidence_cn：每个设计选择都有理论或技术理由；若有隐变量，需要可识别性论证。
+
+- transition_to_next_cn：模型需要完整评价而不是单一benchmark。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：先做基础预测测试，再设计能检验目标构念的干预/反事实测试。
+
+- research_job_cn：建立测试协议、构造干预数据、选择多组基线和结构消融对照。
+
+- required_evidence_cn：能区分“整体预测好”和“目标机制有效”的证据。
+
+- transition_to_next_cn：还需要验证中间过程，避免黑箱性能。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告决策路径预测、代理变量相关性、替代结构比较等过程证据。
+
+- research_job_cn：设计中间变量验证、结构消融和可解释性分析。
+
+- required_evidence_cn：中间机制证据与核心性能结果一致。
+
+- transition_to_next_cn：结果已可上升到设计知识和实践含义。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论反事实或管理含义，说明设计知识的边界和可扩展性。
+
+- research_job_cn：用模型做额外反事实分析或说明扩展场景。
+
+- required_evidence_cn：管理含义来自模型参数或因果图，并能清楚说明未经现场验证。
+
+- transition_to_next_cn：进入结论和局限。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：把经验结果重新编码为设计科学贡献、理论贡献、实践贡献和边界条件。
+
+- research_job_cn：对照引言缺口逐项声明贡献，说明哪部分是证据支持、哪部分是理论论证。
+
+- required_evidence_cn：每类贡献至少与一个评价阶段对应。
+
+- transition_to_next_cn：文章结束。
+
+### most_transferable_moves_cn
+
+1. 用同结构无解耦模型隔离结构贡献与机制贡献
+
+2. 用替代因果图/结构消融验证理论假设
+
+3. 用干预数据或反事实测试评价目标构念而不是观测结果
+
+4. 用中间过程指标（路径预测、代理变量相关性）弥补黑箱性能
+
+5. 在评价前用理论列出每个原因的proxy和共同效应性质
+
+6. 在贡献层把可识别性/因果推断理论基础作为差异点
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. Beibei和Taobao多行为真实数据集及预处理
+
+2. 构造干预测试数据的重采样协议
+
+3. Online Appendix中的模拟分析、消融和扩展数据集实验
+
+4. 对因果图可识别性的严格数学证明
+
+5. 替代因果图的完整重新估计
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“基于理论构建因果图”而不给出可识别性证明
+
+2. 不能只用普通推荐精度论证去偏效果，必须使用干预/反事实ground truth
+
+3. 不能把代理变量相关性直接说成真实因果
+
+4. 不能把替代图AIC比较说成现场实验验证
+
+5. 不能在没有用户研究的情况下声称“可解释性”已被用户验证
+
+- single_best_description_of_the_routine_cn：用理论把观测行为解构为多个原因和潜在路径，构建可识别计算模型，再用干预数据与结构消融把性能优势锁定到具体设计机制，最后把结果上升为设计科学贡献。
+
+## 分析边界
+
+在线附录内容未随正文提供，文中引用的模拟分析、附加数据、AIC/消融细节我无法逐条核验；正文中图表数据完整，因此评价结构判断依据充分，但部分鲁棒性主张依赖作者自述。

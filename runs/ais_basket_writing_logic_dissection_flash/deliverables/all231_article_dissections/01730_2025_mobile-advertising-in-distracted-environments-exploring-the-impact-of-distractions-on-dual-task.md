@@ -1,0 +1,1993 @@
+# Mobile Advertising in Distracted Environments: Exploring the Impact of Distractions on Dual-Task Interference
+
+- 作者：Siddharth Bhattacharya; Heather Kennedy; Vinod Venkatraman; Sunil Wattal
+- 年份 / 期刊：2025 / MIS Quarterly
+- DOI：10.25300/misq/2024/17758
+- 源文件：01730_2025_mobile-advertising-in-distracted-environments-exploring-the-impact-of-distractions-on-dual-task.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.76
+
+## 文章级论证概况
+
+- 核心问题：在移动设备用户执行任务并被弹窗广告打断、同时环境中还有其他分散注意力的刺激时，广告主如何根据环境信息优化弹窗广告的设计与投放时机，从而提高广告有效性？
+
+- 制品与设计：文章构建了一个模拟动态双任务环境的实验体系：自定义JavaScript/HTML字谜游戏App作为移动端任务，NFL比赛片段作为环境刺激，9条弹窗广告作为中断；广告在比赛的play/replay/commentary三类时段出现，并按代言人/品牌与环境的匹配程度分为一致、半一致、不一致。通过改变广告的时机、一致性和任务-环境空间距离来操纵注意力扩散。
+
+- 客观结果：在三个实验中，任务投入与广告再认之间总体呈正相关（H1，边际显著）；环境参与度高的action时段广告再认显著低于replay/commentary时段（H2）；与环境一致的广告再认显著高于不一致广告（H3）；任务-环境距离削弱任务投入对广告再认的正向作用（H4）。Poisson与用户-广告层logit模型结果基本一致。
+
+- 核心贡献：作者声称将DTI从静态任务-中断二元组扩展到包含环境刺激的动态情境：发现任务投入与中断有效性在动态环境中呈促进关系，而非传统静态DTI的抑制关系；展示环境内容可用于优化中断的时间与一致性；并揭示空间距离通过注意力扩散调节该关系。理论贡献在于扩展Pashler瓶颈模型，实践贡献是提出基于ACR和跨屏同步的移动广告策略。
+
+- 整篇论证链：移动广告支出巨大，但用户常处于多分心环境中，使广告有效性取决于注意力在设备任务、弹窗中断与环境刺激之间的分配。既有DTI研究主要在隔离静态环境下观察任务-中断干扰，忽视了环境刺激；移动广告中的位置定向和跨屏研究也未把任务-中断整体置于环境中考察。作者用三个受控实验构建动态任务-中断情境：用户边玩自定义字谜游戏边观看NFL比赛，游戏被9条品牌弹窗广告周期打断。结果一致表明，在环境分心存在时，任务投入越高反而越有利于广告再认；在环境参与度较低的非核心时段投放广告，以及使广告内容与环境一致，会提高再认；任务-环境距离增大则削弱这一促进关系。文章把这些结果解释为任务与中断被作为一个自动化整体加工，并将距离作为注意力扩散的边界条件，最后把发现转译为可基于ACR技术实现的移动广告时机与内容策略。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章不是以某个IT制品的设计评价为主线，而是从DTI理论推导出四个假设，并用三个独立受控实验和两个稳健性分析累积证据；核心贡献是理论扩展与设计策略知识，因此归为多研究/多方法计划。
+
+- 主导写作弧线判定：引言以移动广告中的动态分心问题开头，文献综述和假设从DTI等理论提炼机制，研究设计把理论预测转成实验操作，结果再回到理论贡献和实践策略，符合问题—理论—设计—检验—回到理论的弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：先完成实验材料与刺激构建，再依次进行Study1A（实验室学生样本，手机+投影/电视NFL）、Study1B（线上Prolific非学生样本，分屏电脑）、Study2（实验室学生样本，随机分配三种空间距离），最后用Poisson和用户-广告层logit做稳健性检验。前两个Study检验H1-H3并处理样本与屏幕形态的推广问题，第三个Study专门检验H4的距离边界，稳健性检验保护主结论免受计数因变量和品牌熟悉度混淆。
+
+### studies_or_phases
+
+#### 1. 实验材料与刺激构建
+
+- order：1
+
+- name_cn：实验材料与刺激构建
+
+- question_cn：如何创建一个可控、可重复且具有生态代表性的动态任务-中断-环境实验情境？
+
+- inputs_and_setting_cn：真实NFL比赛片段、自定义JavaScript/HTML字谜游戏App、九条品牌弹窗广告、预测试样本。
+
+- designed_or_compared_object_cn：NFL片段按play/replay/commentary逐秒分类；广告在预定时段出现；广告按代言人/品牌分为一致、半一致、不一致三水平。
+
+- baseline_control_or_counterfactual_cn：无商业广告的真实比赛片段作为环境基础；三类时段、三类一致性水平互为对照。
+
+##### objective_metrics
+
+1. NFL片段内容分类的时段分布
+
+2. 广告呈现时长与所在时段匹配
+
+3. 一致性操纵检验得分
+
+- analysis_method_cn：人工逐秒内容分类、预测试与操纵检验。
+
+- main_result_cn：得到13:40分钟无商业广告的NFL片段，三类内容自然分布；九条广告可在选定的至少20秒时段内完整弹出并超时；三种一致性水平在操纵检验中差异显著。
+
+- argumentative_role_cn：为所有实验提供统一的刺激平台和测量基础。
+
+- remaining_uncertainty_cn：刺激本身不直接检验理论假设。
+
+- link_to_next_phase_cn：为Study1A的正式实验提供了可运行的App、广告材料和时间轴。
+
+##### evidence_pointers
+
+1. Research Design section
+
+2. Stimulus Development section
+
+3. Figure 2
+
+4. Appendix B
+
+5. Appendix C
+
+6. Table D1
+
+#### 2. Study 1A：实验室学生样本检验H1-H3
+
+- order：2
+
+- name_cn：Study 1A：实验室学生样本检验H1-H3
+
+- question_cn：在受控实验室中，任务投入、环境参与度和广告-环境一致性是否如假设影响弹窗广告再认？
+
+- inputs_and_setting_cn：美国东北部大型大学123名学生；移动电话执行字谜任务，NFL比赛在电视/投影屏幕播放；App日志与问卷匹配。
+
+- designed_or_compared_object_cn：任务投入（字谜表现复合分）、广告时机（action/replay/commentary）、广告一致性（一致/半一致/不一致）。
+
+- baseline_control_or_counterfactual_cn：action时段作为高环境参与参照，replay/commentary作为低参与参照；不一致广告作为一致性参照；加入无控制变量的OLS与含控制变量的OLS对比。
+
+##### objective_metrics
+
+1. 广告再认得分（9个品牌中正确识别数）
+
+2. 任务投入复合得分
+
+3. 品牌熟悉度、年龄、性别、族裔等控制变量
+
+- analysis_method_cn：OLS回归检验H1；单因素重复测量ANOVA与配对比较检验H2/H3。
+
+- main_result_cn：任务投入对广告再认的影响边际显著为正；action时段广告再认显著低于supplemental时段；一致广告再认显著高于半一致和不一致广告。
+
+- argumentative_role_cn：在控制严格的实验室环境中建立H1-H3的初始证据。
+
+- remaining_uncertainty_cn：样本为学生，且手机与NFL的物理距离较远；结果可能不适用于非学生样本或同屏/分屏情境。
+
+- link_to_next_phase_cn：需要用非学生样本和同一屏幕/分屏设计检验结果是否稳健。
+
+##### evidence_pointers
+
+1. Results Study 1A
+
+2. Table 1
+
+3. Table 2
+
+4. Table 3
+
+5. Appendix F Tables F1-F4
+
+#### 3. Study 1B：线上非学生样本分屏复验H1-H3
+
+- order：3
+
+- name_cn：Study 1B：线上非学生样本分屏复验H1-H3
+
+- question_cn：在非学生样本和分屏同一设备情境中，H1-H3的结果是否稳健？
+
+- inputs_and_setting_cn：Prolific平台173名非学生参与者；使用电脑访问网站，左半屏播放NFL，右半屏运行字谜任务和弹窗广告。
+
+- designed_or_compared_object_cn：与Study1A相同的任务、环境、广告时机和一致性操作，但改为分屏设计。
+
+- baseline_control_or_counterfactual_cn：action vs replay/commentary，一致/半一致/不一致；分屏设计本身可作为与Study1A不同屏幕距离的对照。
+
+##### objective_metrics
+
+1. 广告再认得分
+
+2. 任务投入复合得分
+
+3. 多屏使用倾向、NFL卷入、品牌熟悉度、年龄、性别、族裔
+
+- analysis_method_cn：OLS回归、单因素重复测量ANOVA、配对比较。
+
+- main_result_cn：H1方向一致但边际显著；H2与H3得到支持：非核心时段广告再认更高，一致广告再认显著更高。
+
+- argumentative_role_cn：显示核心效应不是学生样本或手机+电视布局的偶然产物，同时引入分屏情境。
+
+- remaining_uncertainty_cn：Study1A与1B在样本和距离上同时不同，无法区分距离作用。
+
+- link_to_next_phase_cn：需要设计一个研究在同一实验中随机操纵距离，以专门检验H4。
+
+##### evidence_pointers
+
+1. Results Study 1B
+
+2. Table 4
+
+3. Table 5
+
+4. Table 6
+
+5. Appendix F Tables F5-F8
+
+#### 4. Study 2：三条件距离实验检验H4并复验H2-H3
+
+- order：4
+
+- name_cn：Study 2：三条件距离实验检验H4并复验H2-H3
+
+- question_cn：任务-环境空间距离是否负向调节任务投入对广告再认的影响？在控制距离后，H2-H3是否仍成立？
+
+- inputs_and_setting_cn：美国东北部大型大学198名学生随机分配到三个条件：分屏（68人）、多屏个人（71人）、多屏投影（59人）。
+
+- designed_or_compared_object_cn：距离作为三水平类别变量：distance=0（分屏）、distance=1（手机+笔记本电脑）、distance=2（手机+投影屏）；同时测量任务投入、广告时机、广告一致性。
+
+- baseline_control_or_counterfactual_cn：分屏条件作为baseline；distance=1和distance=2与其比较；交互项反映距离对H1的调节。
+
+##### objective_metrics
+
+1. 任务投入×距离交互项
+
+2. 广告再认得分
+
+3. NFLDisruption主观干扰评分
+
+4. 时机与一致性在控制距离后的效应
+
+- analysis_method_cn：OLS回归加入距离主效应和交互项；重复测量ANOVA加入距离协变量；配对比较。
+
+- main_result_cn：任务投入对广告再认有显著正向总效应；距离1和距离2与任务投入的交互项显著为负，支持H4；控制距离后，时机和一致性效应仍显著，支持H2/H3。
+
+- argumentative_role_cn：H4得到直接检验，距离作为注意力扩散边界条件被确认；同时把H2/H3从样本差异中隔离出来。
+
+- remaining_uncertainty_cn：距离是类别条件而非连续距离；没有直接测量注意力扩散。
+
+- link_to_next_phase_cn：需要稳健性检验排除因变量计数性和品牌熟悉度在广告层面的混淆。
+
+##### evidence_pointers
+
+1. Results Study 2
+
+2. Table 7
+
+3. Table 8
+
+4. Table 9
+
+5. Appendix D Table D2
+
+6. Appendix F Tables F9-F12
+
+#### 5. 稳健性检验：Poisson与用户-广告层logit
+
+- order：5
+
+- name_cn：稳健性检验：Poisson与用户-广告层logit
+
+- question_cn：主结果在替代统计规格和广告层面品牌熟悉度控制下是否仍然成立？
+
+- inputs_and_setting_cn：三个研究的完整样本；广告再认被重新组织为用户-广告层数据（每个用户9条广告）。
+
+- designed_or_compared_object_cn：Poisson模型处理广告再认作为计数变量；固定效应logit模型控制广告层面品牌熟悉度并聚类个体标准误。
+
+- baseline_control_or_counterfactual_cn：主模型（OLS/ANOVA）与替代规格的系数方向和显著性对照。
+
+##### objective_metrics
+
+1. Poisson回归系数
+
+2. logit模型中timing和congruence的系数
+
+3. 广告品牌熟悉度的控制效果
+
+- analysis_method_cn：Poisson回归、用户-广告层固定效应logit、个体层面聚类标准误。
+
+- main_result_cn：Poisson结果与OLS一致；在用户-广告层logit中，replay/commentary相对action显著为正，半一致/不一致相对一致显著为负；Study2控制距离后结果不变。
+
+- argumentative_role_cn：排除因变量分布设定和广告品牌熟悉度混淆，保护理论结论不从统计偶然性上被推翻。
+
+- remaining_uncertainty_cn：这些检验不解决机制测量和外部行为结果问题。
+
+- link_to_next_phase_cn：稳健性之后进入讨论，将统计效应提升为理论贡献和实践策略。
+
+##### evidence_pointers
+
+1. Robustness Checks section
+
+2. Table 10
+
+3. Table 11
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. PHENOMENON
+
+2. PRACTICAL_STAKES
+
+3. STUDY_OVERVIEW
+
+4. LIMITATION
+
+5. RESULT
+
+6. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. WHY_GAP_MATTERS
+
+5. PRIOR_KNOWLEDGE
+
+6. GAP
+
+7. LIMITATION
+
+8. RQ_OR_OBJECTIVE
+
+9. STUDY_OVERVIEW
+
+10. RESULT
+
+11. CONTRIBUTION
+
+12. TRANSITION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. MECHANISM
+
+4. THEORY_INTRO
+
+5. THEORY_PROPOSITION
+
+6. GAP
+
+7. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. METHOD_JUSTIFICATION
+
+2. DESIGN_FEATURE
+
+3. REQUIREMENT
+
+4. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. PRACTICAL_STAKES
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Dual-Task Interference理论（Pashler 1994；Kahneman 1973；Jenkins et al. 2016；Wu et al. 2020）
+
+2. 注意与自动性文献（Logan 1979；Lang 2000）
+
+3. 跨模态注意促进效应（Shen & Sengupta 2014）
+
+4. 相关性-可达性框架（Lynch et al. 1988）
+
+5. splitt-attention effect与认知负荷理论（Ayres & Sweller 2005；Mayer & Fiorella 2014）
+
+6. 移动广告与多屏研究（Abbasi et al. 2021；Segijn & Eisend 2019；Lopez-Gonzalez et al. 2018）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：理论不仅用于解释结果，而且直接决定了研究要操纵的广告时机、内容一致性与空间距离三个设计维度；实验操作（NFL环境、字谜任务、三种一致性广告、三种距离条件）都是这些理论机制的具象化，并通过实验直接检验理论预测。虽然具体任务媒介的选择有代表性考虑，但不改变理论-设计耦合的直接性。
+
+- 理论到设计翻译链：DTI的有限容量与自动性 → 动态环境中任务与中断作为单一实体自动化加工 → 任务投入越高越可能编码中断 → 检验任务投入与广告再认的正相关；环境参与度影响注意分配 → 低环境参与时刻投放广告 → 比较action与supplemental时段；相关性-可达性和任务一致性 → 广告与情境一致促进加工 → 设置一致/半一致/不一致广告；splitt-attention与分配性注意 → 任务-环境距离增大导致注意扩散 → 用三种空间距离条件的交互检验距离调节。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：静态DTI中任务与中断争夺有限注意，呈抑制关系；自动性可降低熟练任务的注意需求
+
+- mechanism_cn：在环境分心存在时，任务与中断被作为单一实体自动化加工，任务投入越高越可能无意中编码中断
+
+- design_requirement_cn：不一定要避开高投入任务；在动态环境中高任务投入也可带来更高广告再认
+
+- artifact_choice_cn：用字谜游戏作为移动端任务，弹窗广告作为中断，并让参与者同时观看NFL
+
+- evaluated_contrast_cn：任务投入高 vs 低的参与者在广告再认上的差异
+
+- objective_result_cn：OLS估计系数在三个研究中均为正，但仅边际显著（p<0.1），系数约0.012-0.022
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Table 5
+
+3. Table 8
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：中断优化研究通过改变中断时机/显著性提升性能，而注意力是有限资源
+
+- mechanism_cn：环境参与度高时用户注意从任务-中断整体转移至环境，广告编码更差
+
+- design_requirement_cn：在环境参与度较低的时刻投放弹窗广告
+
+- artifact_choice_cn：把广告安排在NFL的play（高参与）与replay/commentary（低参与）时段
+
+- evaluated_contrast_cn：action vs replay vs commentary时段的广告再认
+
+- objective_result_cn：action时段再认显著低于supplemental时段，replay与commentary无显著差异（Study1A/1B/2）
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 6
+
+3. Table 9
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：相关性-可达性框架与任务一致性研究认为信息与情境匹配会提升信息加工和评价
+
+- mechanism_cn：广告与环境内容一致时更容易被处理和编码，从而提高再认
+
+- design_requirement_cn：使弹窗广告内容与环境（NFL比赛）在代言人和品牌上匹配
+
+- artifact_choice_cn：设置一致/半一致/不一致三种广告组合
+
+- evaluated_contrast_cn：三种一致性水平下的品牌再认
+
+- objective_result_cn：一致广告再认显著高于半一致和不一致；半一致与不一致在Study1B/2中差异不显著
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 6
+
+3. Table 9
+
+4. Appendix C
+
+5. Table D1
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：splitt-attention effect与渐进容量共享认为更大空间距离增加认知负荷
+
+- mechanism_cn：距离增大使注意力在任务与环境间转换更困难，注意力扩散增强，削弱任务投入对中断编码的促进作用
+
+- design_requirement_cn：广告主应考虑设备与分心源的空间距离来预测广告有效性
+
+- artifact_choice_cn：Study2随机分配split-screen、multiscreen-personal、multiscreen-projector三种条件
+
+- evaluated_contrast_cn：不同距离水平下任务投入与距离的交互
+
+- objective_result_cn：距离1和距离2与任务投入的交互项显著为负；H4支持
+
+##### evidence_pointers
+
+1. Table 8
+
+2. Table 10
+
+3. Table 11
+
+4. Table D2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控实验室实验（Study1A）
+
+2. 线上实验（Study1B）
+
+3. 多条件实验室实验（Study2）
+
+4. 替代模型稳健性检验（Poisson、用户-广告层logit）
+
+- why_these_evaluations_cn：需要同时检验多个假设并排除样本/设计偶然性：先实验室受控建立内部效度，再用非学生线上样本检验外部效度，随后用随机分配的三距离条件识别边界条件，最后用替代规格排除因变量计数性和品牌熟悉度混淆。
+
+- benchmark_and_contrast_chain_cn：Study1A以同一实验室内的action vs replay/commentary和一致/半一致/不一致为对照；Study1B在分屏情境中重复同一组对照；Study2以split-screen为baseline（distance=0），比较distance=1和2，并在距离条件下重新检验时机与一致性；稳健性检验用Poisson和logit部分替代OLS/ANOVA，逐步增加证据层级。
+
+### claim_evidence_ledger
+
+#### 1. 1
+
+- claim：H1：任务投入与广告再认正相关
+
+- evidence：表2/5/8的OLS系数均正，但仅在p<0.1水平显著
+
+- status：方向支持但证据较弱
+
+#### 2. 2
+
+- claim：H2：环境参与度低时广告再认更高
+
+- evidence：表3/6/9的ANOVA和配对比较显示action显著低于supplemental
+
+- status：支持
+
+#### 3. 3
+
+- claim：H3：广告-环境一致性提升广告再认
+
+- evidence：表3/6/9的配对比较，以及表D1操纵检验
+
+- status：支持
+
+#### 4. 4
+
+- claim：H4：距离削弱任务投入对广告再认的作用
+
+- evidence：表8交互项显著为负，表10 Poisson一致
+
+- status：支持
+
+#### 5. 5
+
+- claim：品牌熟悉度在广告层面控制后结果不变
+
+- evidence：表11固定效应logit在三个研究中一致
+
+- status：支持
+
+- internal_validity_strategy_cn：随机分配参与者到条件（尤其Study2）、注意力检查、App日志与调查匹配、预先设定广告时间、操纵检验、加入年龄/性别/族裔/品牌熟悉度/多屏使用倾向/NFL卷入等控制变量，并在Study2中控制距离重新检验H2/H3。
+
+- external_validity_strategy_cn：使用学生和非学生样本、线下与线上、不同屏幕距离组合；用真实NFL片段和常见字谜游戏，并告知参与者同时监控两项任务以避免只关注设备。
+
+- what_is_not_actually_tested_cn：没有直接测量注意力扩散或自动性；没有客观购买/转化结果；没有真实现场推送；距离是类别条件而非连续距离；所谓“最优”广告策略未被系统性搜索，只比较了预选水平。
+
+## 贡献闭环
+
+- technical_claim_cn：在三个实验中，任务投入对广告再认的效应虽为边际显著但方向一致；时机和一致性效应在多规格中都显著；Poisson与用户-广告logit支持主要结论。
+
+- artifact_claim_cn：不是对一个软件制品优劣的评价；核心“制品”是弹窗广告设计策略（内容、时机、距离适配）。证据能说明这些设计维度影响广告再认，但优化效果的大小有限。
+
+- mechanism_claim_cn：作者提出任务与中断在动态环境中作为单一实体自动化加工，以及距离增大导致注意力扩散。这一机制解释合理但不是直接测量注意力或自动性，因此属于理论推断。
+
+- boundary_claim_cn：环境参与度高、距离增大、广告与情境不一致时广告再认降低；该结论主要适用于弹窗广告、体育直播环境、字谜任务和品牌再认测量。
+
+- reusable_design_knowledge_cn：移动广告设计应（1）优先投放在用户高投入的任务中；（2）选择环境参与度较低的时刻；（3）使广告与周围环境内容在代言人/品牌层面一致；（4）根据任务-环境距离调整投放预期与策略。
+
+- theoretical_contribution_cn：将DTI研究从静态任务-中断扩展至动态环境，提出并检验环境刺激存在时任务-中断的促进关系，把空间距离作为注意力扩散的边界条件，并将中断时机与一致性的优化范围从设备内部扩展到跨屏/环境。
+
+- how_discussion_closes_intro_gap_cn：讨论首段重新陈述移动广告用户处于动态分心的现象和静态DTI的不足，接着用三实验证据说明动态环境的促进关系和距离调节，直接回应了引言中“如何利用环境信息优化弹窗广告”的研究问题。
+
+- overclaim_or_unsupported_leaps_cn：（1）H1仅边际显著且adj R2很低，却被称为“促进关系”，容易过度解读；（2）“任务-中断作为单一实体自动化加工”没有过程性测量支撑；（3）距离是名义性条件而非连续距离，且被直接当作“注意力扩散”的代理；（4）广告再认不等于真实点击/购买，却推广为广告效果提升；（5）分屏与多屏间的差异可能受设备尺寸、注视距离等混杂影响。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：越来越常见的是消费者在电视、商场、音乐会等分心环境中使用个人设备执行任务。
+
+- rhetorical_function_cn：建立经验现象，引出注意力分散的大背景。
+
+- depends_on_cn：不需要依赖前文，是全文起点。
+
+- sets_up_cn：为“分心既是挑战也是机会”的论点准备素材。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：这种注意力分散既带来困难，也为广告主基于用户环境信息推送定向广告创造了机会。
+
+- rhetorical_function_cn：把现象转成商业重要性。
+
+- depends_on_cn：依赖经验现象。
+
+- sets_up_cn：引出研究目标。
+
+- evidence_pointer：Abstract second sentence
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者通过系列受控实验和为该研究开发的自定义App展示如何优化分心环境中的弹窗广告。
+
+- rhetorical_function_cn：预告证据类型与研究对象。
+
+- depends_on_cn：依赖研究问题。
+
+- sets_up_cn：为结果摘要铺垫。
+
+- evidence_pointer：Abstract third sentence
+
+### 4. Abstract P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有DTI研究通常在孤立任务中检验，没有考虑环境刺激。
+
+- rhetorical_function_cn：标记文献缺口。
+
+- depends_on_cn：依赖DTI知识。
+
+- sets_up_cn：提出本文的理论贡献。
+
+- evidence_pointer：Abstract fourth sentence
+
+### 5. Abstract P1 S5-S6
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S5-S6
+
+- move_code：RESULT
+
+- paraphrase_cn：环境刺激存在时，任务投入与弹窗广告有效性存在促进关系，但这个关系受环境注意力扩散程度调节；距离增加使广告编码变差。
+
+- rhetorical_function_cn：压缩核心发现。
+
+- depends_on_cn：依赖三个实验。
+
+- sets_up_cn：强调理论贡献。
+
+- evidence_pointer：Abstract fifth-sixth sentences
+
+### 6. Abstract P1 S7
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P1 S7
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：优化广告内容与时机能显著提升有效性，为营销者提供分心环境中的移动广告策略。
+
+- rhetorical_function_cn：声明实践价值。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：完成摘要弧线。
+
+- evidence_pointer：Abstract final sentence
+
+### 7. Introduction P1
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：移动设备普及带来移动广告支出快速增长，预计2024年达3996亿美元。
+
+- rhetorical_function_cn：建立经济重要性。
+
+- depends_on_cn：无前置依赖。
+
+- sets_up_cn：说明移动广告值得研究。
+
+- evidence_pointer：Introduction P1
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：移动用户常处于电视、开车、看孩子等动态分心环境。
+
+- rhetorical_function_cn：引入环境分心作为问题。
+
+- depends_on_cn：依赖移动广告背景。
+
+- sets_up_cn：引出广告注意力难题。
+
+- evidence_pointer：Introduction P2 S1
+
+### 9. Introduction P2 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：移动广告成功依赖捕获消费者注意力，而分心环境使这一目标变得更困难。
+
+- rhetorical_function_cn：说明现实后果。
+
+- depends_on_cn：依赖现象。
+
+- sets_up_cn：说明需要理解环境信息。
+
+- evidence_pointer：Introduction P2 S3
+
+### 10. Introduction P2 S5
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S5
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：因此理解分心环境的情境信息如何影响消费者反应，对移动广告主至关重要。
+
+- rhetorical_function_cn：为研究问题提供理由。
+
+- depends_on_cn：依赖注意力难题。
+
+- sets_up_cn：引出文献缺口。
+
+- evidence_pointer：Introduction P2 S5
+
+### 11. Introduction P3 S1-S4
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：业界已采用位置定向、跨设备追踪、程序化广告等技术捕捉用户情境，例如根据在线行为预测电视节目并在特定时间推送广告。
+
+- rhetorical_function_cn：表明实践先于学术。
+
+- depends_on_cn：依赖问题背景。
+
+- sets_up_cn：突显学术缺口。
+
+- evidence_pointer：Introduction P3
+
+### 12. Introduction P3 S5
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P3 S5
+
+- move_code：GAP
+
+- paraphrase_cn：尽管业界已普遍使用这类技术，但关于如何利用环境分心中的情境信息定制广告来提升效果的研究很少。
+
+- rhetorical_function_cn：指出文献缺口。
+
+- depends_on_cn：依赖业界实践。
+
+- sets_up_cn：引出本文目标。
+
+- evidence_pointer：Introduction P3 S5
+
+### 13. Introduction P4 S2
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P4 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：弹窗广告常被视为一种移动任务中断，过去研究用DTI解释用户对这类中断的反应。
+
+- rhetorical_function_cn：引入理论透镜。
+
+- depends_on_cn：依赖DTI文献。
+
+- sets_up_cn：指出静态限制。
+
+- evidence_pointer：Introduction P4
+
+### 14. Introduction P4 S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：这些DTI研究一致发现双任务绩效受损，但几乎都在无外部刺激的静态情境中完成。
+
+- rhetorical_function_cn：标记现有理论解释的限制。
+
+- depends_on_cn：依赖DTI文献。
+
+- sets_up_cn：提出动态情境。
+
+- evidence_pointer：Introduction P4 S3
+
+### 15. Introduction P5 S1-S3
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P5 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：实验室中任务-中断在隔离中被研究，但现实中这些干扰常伴随听音乐、看电视等环境刺激；作者称后者为动态情境。
+
+- rhetorical_function_cn：提出静态-动态概念区分。
+
+- depends_on_cn：依赖静态限制。
+
+- sets_up_cn：形成研究问题。
+
+- evidence_pointer：Introduction P5
+
+### 16. Introduction P5 S4-S5
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P5 S4-S5
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：核心研究问题：当环境刺激同时竞争用户注意力时，广告主如何优化移动设备上弹窗广告的设计与投放？
+
+- rhetorical_function_cn：正式提出研究问题。
+
+- depends_on_cn：依赖现象与缺口。
+
+- sets_up_cn：引出研究设计。
+
+- evidence_pointer：Introduction P5
+
+### 17. Introduction P6 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者用自研App和三个独立线上/实验室实验模拟用户执行任务、弹窗广告周期性打断且同时参与环境任务的情境。
+
+- rhetorical_function_cn：预告经验证据。
+
+- depends_on_cn：依赖研究问题。
+
+- sets_up_cn：提前给出核心结果。
+
+- evidence_pointer：Introduction P6
+
+### 18. Introduction P6 S2-S5
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P6 S2-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：任务表现好的人更可能记得弹窗广告；根据环境内容定时广告和环境一致性会提升效果；距离调节这些效应。
+
+- rhetorical_function_cn：压缩研究结果。
+
+- depends_on_cn：依赖三个实验。
+
+- sets_up_cn：为贡献和理论解释铺垫。
+
+- evidence_pointer：Introduction P6
+
+### 19. Introduction P7 S1-S4
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P7 S1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：对DTI文献的贡献是在环境分心存在时发现任务与中断的促进关系，与静态DTI中常见的抑制关系相反。
+
+- rhetorical_function_cn：明确理论增量。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：引入“任务与中断作为单一实体”的解释。
+
+- evidence_pointer：Introduction P7
+
+### 20. Introduction P8 S1-S2
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P8 S1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：进一步贡献是环境输入可用于提高DTI性能，且空间距离通过注意力扩散调节该影响。
+
+- rhetorical_function_cn：补充第二、三贡献。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：为理论边界条件做铺垫。
+
+- evidence_pointer：Introduction P8
+
+### 21. Introduction P9 S1-S2
+
+- order：21
+
+- section：Introduction
+
+- locator：Introduction P9 S1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：对营销者而言，设计移动广告时应考虑高注意力的移动任务和环境情境，使广告与周围分心内容一致。
+
+- rhetorical_function_cn：提供实践含义。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：引出具体策略建议。
+
+- evidence_pointer：Introduction P9
+
+### 22. Introduction P10
+
+- order：22
+
+- section：Introduction
+
+- locator：Introduction P10
+
+- move_code：TRANSITION
+
+- paraphrase_cn：预告下文结构：文献综述、假设发展、研究设计、三个研究结果、稳健性检验、讨论与贡献。
+
+- rhetorical_function_cn：路标。
+
+- depends_on_cn：依赖主体内容。
+
+- sets_up_cn：引导阅读预期。
+
+- evidence_pointer：Introduction P10
+
+### 23. Literature Review DTI P1 S1
+
+- order：23
+
+- section：Literature Review
+
+- locator：Literature Review DTI P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：DTI指同时执行两个任务时成分任务出现绩效缺陷。
+
+- rhetorical_function_cn：定义核心构念。
+
+- depends_on_cn：无前置依赖。
+
+- sets_up_cn：开始文献综述。
+
+- evidence_pointer：Literature Review DTI P1
+
+### 24. Literature Review DTI P1 S5
+
+- order：24
+
+- section：Literature Review
+
+- locator：Literature Review DTI P1 S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：这些研究假设静态上下文，很少刻画动态环境如何影响DTI。
+
+- rhetorical_function_cn：确立静态-动态缺口。
+
+- depends_on_cn：依赖表E1概述。
+
+- sets_up_cn：引出本文的动态情境概念。
+
+- evidence_pointer：Literature Review DTI P1, Figure 1, Table E1
+
+### 25. Literature Review DTI P2 S2
+
+- order：25
+
+- section：Literature Review
+
+- locator：Literature Review DTI P2 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：双任务干扰来自容量共享、瓶颈和任务相似性。
+
+- rhetorical_function_cn：引入认知机制。
+
+- depends_on_cn：依赖早期DTI研究。
+
+- sets_up_cn：为有限容量和自动性铺垫。
+
+- evidence_pointer：Literature Review DTI P2
+
+### 26. Literature Review DTI P3 S1-S2
+
+- order：26
+
+- section：Literature Review
+
+- locator：Literature Review DTI P3 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：人类加工多源信息的能力有限，多任务比单任务更耗认知资源，注意形成瓶颈。
+
+- rhetorical_function_cn：为静态抑制和动态自动性机制提供基础。
+
+- depends_on_cn：依赖Kahneman/Lang。
+
+- sets_up_cn：引出自动性概念。
+
+- evidence_pointer：Literature Review DTI P3
+
+### 27. Literature Review DTI P4 S1-S2
+
+- order：27
+
+- section：Literature Review
+
+- locator：Literature Review DTI P4 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：自动性使任务不需要全部注意和加工容量，熟悉任务产生的干扰更小。
+
+- rhetorical_function_cn：为单实体加工机制提供概念基础。
+
+- depends_on_cn：依赖Pashler/Logan。
+
+- sets_up_cn：支持动态情境的促进关系。
+
+- evidence_pointer：Literature Review DTI P4
+
+### 28. Literature Review DTI P6-P7
+
+- order：28
+
+- section：Literature Review
+
+- locator：Literature Review DTI P6-P7
+
+- move_code：GAP
+
+- paraphrase_cn：近期研究通过中断时机、设计、避免习惯化来优化任务-中断，但忽略了用户同时有环境活动的常见真实场景。
+
+- rhetorical_function_cn：指出具体文献缺口。
+
+- depends_on_cn：依赖既有优化研究。
+
+- sets_up_cn：提出本文目标。
+
+- evidence_pointer：Literature Review DTI P6-P7
+
+### 29. Mobile Advertising and DTI P2 S1
+
+- order：29
+
+- section：Literature Review
+
+- locator：Mobile Advertising and DTI P2 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：移动广告也可以用DTI视角考察，其中弹窗广告中断用户与移动设备上另一任务的互动。
+
+- rhetorical_function_cn：把DTI应用到移动广告。
+
+- depends_on_cn：依赖DTI综述。
+
+- sets_up_cn：引出移动广告文献缺口。
+
+- evidence_pointer：Mobile Advertising and DTI P2
+
+### 30. Mobile Advertising and DTI P2 S4
+
+- order：30
+
+- section：Literature Review
+
+- locator：Mobile Advertising and DTI P2 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：位置型移动广告只关注地点特征如何影响广告反应，未考虑地点如何改变任务-中断整体。
+
+- rhetorical_function_cn：指出移动广告文献缺口。
+
+- depends_on_cn：依赖位置广告综述。
+
+- sets_up_cn：强调任务-中断整体。
+
+- evidence_pointer：Mobile Advertising and DTI P2
+
+### 31. Mobile Advertising and DTI P3 S3
+
+- order：31
+
+- section：Literature Review
+
+- locator：Mobile Advertising and DTI P3 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：多屏研究多比较单屏与多屏的回忆下降，较少优化多屏内的广告，且多关注电视而非移动屏幕。
+
+- rhetorical_function_cn：补充第三个文献缺口。
+
+- depends_on_cn：依赖多屏文献。
+
+- sets_up_cn：进一步限定本文位置。
+
+- evidence_pointer：Mobile Advertising and DTI P3
+
+### 32. Mobile Advertising and DTI P4 S1-S2
+
+- order：32
+
+- section：Literature Review
+
+- locator：Mobile Advertising and DTI P4 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：现有移动广告研究未考虑消费者注意如何在任务与环境之间分配，因此需要研究如何根据环境参与水平优化弹窗广告。
+
+- rhetorical_function_cn：总结缺口。
+
+- depends_on_cn：依赖前两个缺口。
+
+- sets_up_cn：进入假设发展。
+
+- evidence_pointer：Mobile Advertising and DTI P4
+
+### 33. Hypothesis Development P1 S1-S2
+
+- order：33
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P1 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：跨模态注意研究表明第一刺激的无意注意可以先促进第二刺激加工。
+
+- rhetorical_function_cn：引入与静态DTI预测不同的机制。
+
+- depends_on_cn：依赖Shen & Sengupta。
+
+- sets_up_cn：提出动态促进机制。
+
+- evidence_pointer：Hypothesis Development P1
+
+### 34. Hypothesis Development P1 S4-S5
+
+- order：34
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P1 S4-S5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：在分心存在时，任务和中断被当作单一实体自动化加工；任务投入越高，越可能无意中加工中断。
+
+- rhetorical_function_cn：解释为何动态情境下应是促进关系。
+
+- depends_on_cn：依赖Pashler自动性。
+
+- sets_up_cn：形成H1。
+
+- evidence_pointer：Hypothesis Development P1
+
+### 35. Hypothesis Development P1 S6
+
+- order：35
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P1 S6
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：任务投入与中断有效性正相关。
+
+- rhetorical_function_cn：正式提出研究假设。
+
+- depends_on_cn：依赖上述机制。
+
+- sets_up_cn：由Study1A检验。
+
+- evidence_pointer：Hypothesis Development H1
+
+### 36. Hypothesis Development P2 P2-P4
+
+- order：36
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P2 P2-P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：以往研究通过使中断更动态、视觉更显著来提升性能，本文主张应根据环境参与水平调整中断时机。
+
+- rhetorical_function_cn：把已有优化知识转向环境时机。
+
+- depends_on_cn：依赖Jenkins/Vance/Wu。
+
+- sets_up_cn：形成H2。
+
+- evidence_pointer：Hypothesis Development P2
+
+### 37. Hypothesis Development H2
+
+- order：37
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development H2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2：环境参与度低时中断有效性更高。
+
+- rhetorical_function_cn：提出第二个可检验假设。
+
+- depends_on_cn：依赖注意分配机制。
+
+- sets_up_cn：为实验中的action与supplemental对比做准备。
+
+- evidence_pointer：Hypothesis Development H2
+
+### 38. Hypothesis Development P3 S3
+
+- order：38
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P3 S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：相关性-可达性框架说明信息与情境匹配时更可能被积极评价。
+
+- rhetorical_function_cn：为一致性正向效应提供消费心理机制。
+
+- depends_on_cn：依赖Lynch et al.。
+
+- sets_up_cn：形成H3。
+
+- evidence_pointer：Hypothesis Development P3
+
+### 39. Hypothesis Development H3
+
+- order：39
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development H3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H3：中断与环境的一致性越高，中断有效性越高。
+
+- rhetorical_function_cn：提出第三假设。
+
+- depends_on_cn：依赖一致性文献。
+
+- sets_up_cn：为三类广告一致性操作做准备。
+
+- evidence_pointer：Hypothesis Development H3
+
+### 40. Hypothesis Development P4 S1-S3
+
+- order：40
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development P4 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：空间分离效应和注意力有限容量说明更大空间距离增加认知负荷，削弱任务间注意分配。
+
+- rhetorical_function_cn：为距离调节提供机制。
+
+- depends_on_cn：依赖splitt-attention effect。
+
+- sets_up_cn：形成H4。
+
+- evidence_pointer：Hypothesis Development P4
+
+### 41. Hypothesis Development H4
+
+- order：41
+
+- section：Hypothesis Development
+
+- locator：Hypothesis Development H4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H4：任务-环境距离负向调节任务投入对中断有效性的影响。
+
+- rhetorical_function_cn：提出第四假设。
+
+- depends_on_cn：依赖距离机制。
+
+- sets_up_cn：为Study2三条件实验做准备。
+
+- evidence_pointer：Hypothesis Development H4
+
+### 42. Research Design P1 S1-S2
+
+- order：42
+
+- section：Research Design
+
+- locator：Research Design P1 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：三个独立研究模拟移动手机任务被弹窗广告打断、同时用户观看NFL的动态环境。
+
+- rhetorical_function_cn：描述总体实验范式。
+
+- depends_on_cn：依赖假设。
+
+- sets_up_cn：说明具体操作。
+
+- evidence_pointer：Research Design P1
+
+### 43. Research Design P1 S3
+
+- order：43
+
+- section：Research Design
+
+- locator：Research Design P1 S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：参与者被告知报酬取决于两个任务同时的表现，因此他们不知道研究具体关注的是任务、中断还是环境。
+
+- rhetorical_function_cn：防止需求特征，提升外部效度。
+
+- depends_on_cn：依赖实验设计。
+
+- sets_up_cn：为变量测量提供可信性。
+
+- evidence_pointer：Research Design P1
+
+### 44. Research Design P2 S1
+
+- order：44
+
+- section：Research Design
+
+- locator：Research Design P2 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：同时采用实验室和线上实验以兼顾控制、样本异质性和不同屏幕布局。
+
+- rhetorical_function_cn：说明混合实验设置的合理性。
+
+- depends_on_cn：依赖三个Study安排。
+
+- sets_up_cn：解释后续结果差异。
+
+- evidence_pointer：Research Design P2
+
+### 45. Research Design P3 S1-S2
+
+- order：45
+
+- section：Research Design
+
+- locator：Research Design P3 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择NFL片段、字谜游戏和弹窗广告分别代表高广告价值环境、典型移动任务和常见中断。
+
+- rhetorical_function_cn：说明刺激的生态代表性。
+
+- depends_on_cn：依赖实验范式。
+
+- sets_up_cn：进入刺激开发细节。
+
+- evidence_pointer：Research Design P3
+
+### 46. Stimulus Development P2
+
+- order：46
+
+- section：Research Design
+
+- locator：Stimulus Development P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：自定义App记录每个字谜、答案和反应时间，并控制弹窗广告出现的时间。
+
+- rhetorical_function_cn：展示实验工具的可控性。
+
+- depends_on_cn：依赖实验范式。
+
+- sets_up_cn：说明数据来源和测量。
+
+- evidence_pointer：Stimulus Development P2
+
+### 47. Stimulus Development P3-S4
+
+- order：47
+
+- section：Research Design
+
+- locator：Stimulus Development P3-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：9条广告在play/replay/commentary三类时段的预设时间出现，并按代言人和品牌分为一致、半一致、不一致。
+
+- rhetorical_function_cn：把时机和一致性假设转成可操纵刺激。
+
+- depends_on_cn：依赖H2/H3。
+
+- sets_up_cn：为重复测量ANOVA做准备。
+
+- evidence_pointer：Stimulus Development P3-P4
+
+### 48. Measures P2
+
+- order：48
+
+- section：Measures
+
+- locator：Measures P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：在问卷末尾进行惊喜品牌再认测试，用正确识别的品牌数计算广告参与度。
+
+- rhetorical_function_cn：定义因变量。
+
+- depends_on_cn：依赖实验数据。
+
+- sets_up_cn：为所有结果提供测量基础。
+
+- evidence_pointer：Measures P2, Table A1
+
+### 49. Measures P3
+
+- order：49
+
+- section：Measures
+
+- locator：Measures P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：任务投入用字谜正确次数加一半尝试次数构成的复合分衡量。
+
+- rhetorical_function_cn：定义自变量。
+
+- depends_on_cn：依赖App日志。
+
+- sets_up_cn：为OLS回归提供解释变量。
+
+- evidence_pointer：Measures P3, Table A1
+
+### 50. Study 1A H1
+
+- order：50
+
+- section：Results
+
+- locator：Study 1A H1
+
+- move_code：RESULT
+
+- paraphrase_cn：OLS显示任务投入对广告参与的效应边际显著为正。
+
+- rhetorical_function_cn：报告H1检验结果。
+
+- depends_on_cn：依赖Study1A样本与测量。
+
+- sets_up_cn：建立动态促进关系的初始证据。
+
+- evidence_pointer：Study1A Results, Table 2
+
+### 51. Study 1A H2
+
+- order：51
+
+- section：Results
+
+- locator：Study 1A H2
+
+- move_code：RESULT
+
+- paraphrase_cn：重复测量ANOVA显示action时段的广告参与显著低于replay和commentary时段。
+
+- rhetorical_function_cn：报告H2检验结果。
+
+- depends_on_cn：依赖时机操作。
+
+- sets_up_cn：支持环境参与度的影响。
+
+- evidence_pointer：Study1A Results, Table 3
+
+### 52. Study 1A H3
+
+- order：52
+
+- section：Results
+
+- locator：Study 1A H3
+
+- move_code：RESULT
+
+- paraphrase_cn：一致广告的再认显著高于半一致和不一致广告。
+
+- rhetorical_function_cn：报告H3检验结果。
+
+- depends_on_cn：依赖一致性操作。
+
+- sets_up_cn：支持环境一致性策略。
+
+- evidence_pointer：Study1A Results, Table 3
+
+### 53. Study 1B S1
+
+- order：53
+
+- section：Results
+
+- locator：Study 1B S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：Study1B在Prolific用非学生样本和分屏设计复验Study1A。
+
+- rhetorical_function_cn：预告下一个研究的设置。
+
+- depends_on_cn：依赖Study1A。
+
+- sets_up_cn：导向样本和屏幕形态的推广检验。
+
+- evidence_pointer：Study1B opening
+
+### 54. Study 1B H1-H3
+
+- order：54
+
+- section：Results
+
+- locator：Study 1B H1-H3
+
+- move_code：RESULT
+
+- paraphrase_cn：非学生样本中，H1边际显著但方向一致，H2和H3获得支持。
+
+- rhetorical_function_cn：报告复验结果。
+
+- depends_on_cn：依赖Study1B数据。
+
+- sets_up_cn：确认结果可复现并引出距离问题。
+
+- evidence_pointer：Study1B Results, Tables 5-6
+
+### 55. Results after Study 1B
+
+- order：55
+
+- section：Results
+
+- locator：Results after Study 1B
+
+- move_code：TRANSITION
+
+- paraphrase_cn：因为Study1A和1B在距离与样本上同时不同，无法系统检验距离作用，因此设计Study2。
+
+- rhetorical_function_cn：连接两个研究阶段。
+
+- depends_on_cn：依赖1A/1B差异。
+
+- sets_up_cn：引出Study2。
+
+- evidence_pointer：Results after Study 1B
+
+### 56. Study 2 S1-S2
+
+- order：56
+
+- section：Results
+
+- locator：Study 2 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Study2随机分配参与者到分屏、多屏个人、多屏投影三种条件，距离依次增大。
+
+- rhetorical_function_cn：把H4变成可比较的组间设计。
+
+- depends_on_cn：依赖H4与前面设计。
+
+- sets_up_cn：引出交互回归。
+
+- evidence_pointer：Study2 opening
+
+### 57. Study 2 H4
+
+- order：57
+
+- section：Results
+
+- locator：Study 2 H4
+
+- move_code：RESULT
+
+- paraphrase_cn：任务投入与距离的交互项显著为负，说明距离削弱任务投入对广告参与的影响。
+
+- rhetorical_function_cn：报告H4检验结果。
+
+- depends_on_cn：依赖Study2三条件。
+
+- sets_up_cn：为注意力扩散解释提供证据。
+
+- evidence_pointer：Study2 Results, Table 8
+
+### 58. Study 2 H2/H3
+
+- order：58
+
+- section：Results
+
+- locator：Study 2 H2/H3
+
+- move_code：RESULT
+
+- paraphrase_cn：在控制距离后，广告时机和一致性效应仍显著。
+
+- rhetorical_function_cn：证明核心效应不受距离条件影响。
+
+- depends_on_cn：依赖Study2数据。
+
+- sets_up_cn：引出稳健性检验。
+
+- evidence_pointer：Study2 Results, Table 9
+
+### 59. Robustness Checks P1
+
+- order：59
+
+- section：Robustness Checks
+
+- locator：Robustness Checks P1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：使用Poisson和用户-广告层logit两种替代规格复核结果。
+
+- rhetorical_function_cn：防止因变量计数性和品牌熟悉度混淆。
+
+- depends_on_cn：依赖三个Study数据。
+
+- sets_up_cn：为讨论中的一般化提供支撑。
+
+- evidence_pointer：Robustness Checks, Tables 10-11
+
+### 60. Discussion P1
+
+- order：60
+
+- section：Discussion
+
+- locator：Discussion P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究回应动态DTI缺口，说明环境注意力扩散如何影响DTI性能。
+
+- rhetorical_function_cn：把结果重新连接到引言缺口。
+
+- depends_on_cn：依赖全部结果。
+
+- sets_up_cn：引出理论贡献。
+
+- evidence_pointer：Discussion P1
+
+### 61. Theoretical Contributions P1
+
+- order：61
+
+- section：Discussion
+
+- locator：Theoretical Contributions P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：相对静态DTI的抑制关系，本文发现动态环境中的促进关系，并扩展Pashler瓶颈模型。
+
+- rhetorical_function_cn：给出最核心理论贡献。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：为边界条件做解释。
+
+- evidence_pointer：Theoretical Contributions P1
+
+### 62. Theoretical Contributions P2
+
+- order：62
+
+- section：Discussion
+
+- locator：Theoretical Contributions P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：对移动广告文献的贡献是把广告放在整体环境中研究，不孤立看广告。
+
+- rhetorical_function_cn：第二个理论贡献。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：支撑环境情境化设计。
+
+- evidence_pointer：Theoretical Contributions P2
+
+### 63. Theoretical Contributions P3
+
+- order：63
+
+- section：Discussion
+
+- locator：Theoretical Contributions P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：对多屏文献的贡献是优化多屏内的广告而非比较单屏/多屏，并提出跨屏一致性。
+
+- rhetorical_function_cn：第三个理论贡献。
+
+- depends_on_cn：依赖结果。
+
+- sets_up_cn：引出跨屏一致性概念。
+
+- evidence_pointer：Theoretical Contributions P3
+
+### 64. Practical Implications P1-P2
+
+- order：64
+
+- section：Discussion
+
+- locator：Practical Implications P1-P2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：ACR和屏幕分辨率检测等技术使距离信息可获取，广告主可按距离与注意力分配投放广告。
+
+- rhetorical_function_cn：把理论发现转化为可行实践。
+
+- depends_on_cn：依赖理论结果。
+
+- sets_up_cn：引出具体投放策略。
+
+- evidence_pointer：Practical Implications P1-P2
+
+### 65. Limitations and Future Directions
+
+- order：65
+
+- section：Discussion
+
+- locator：Limitations and Future Directions
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限包括调查类测量、实验室人工环境、距离作为注意力扩散代理、任务/环境单一等。
+
+- rhetorical_function_cn：划定适用范围，防止过度普遍化。
+
+- depends_on_cn：依赖研究设计。
+
+- sets_up_cn：指出未来研究。
+
+- evidence_pointer：Limitations and Future Directions
+
+## 写作技术
+
+- gap_construction_cn：先承认已有DTI静态结果，再用真实移动使用场景作对照，把静态实验环境描述为“被忽略的环境刺激”，从而构造“动态任务-中断”的新缺口；同时用行业实践先于学术来强化该缺口的重要性。
+
+- signposting_cn：引言末尾用段落预告全文结构；每个Study在自己开头/结尾说明目的与剩余问题；研究设计开头用“三个独立研究”概述；结果部分按Study和假设依次汇报。
+
+- transition_logic_cn：Study1A—1B通过“同一组假设在非学生样本和分屏设置中是否稳健”过渡；1B—Study2通过“1A和1B距离与样本同时不同，无法识别距离作用”过渡；结果—讨论通过“重新回到动态DTI缺口”过渡。
+
+- claim_evidence_rhythm_cn：每个假设先给出理论机制，再进入实验结果；结果部分先报告统计检验，再用一句话解释直觉含义；讨论再把这些局部结果上升为对DTI、移动广告、多屏文献的贡献。
+
+- benchmark_narrative_cn：不使用外部benchmark，而是用内部对比：action vs supplemental作为环境参与度的高低参考；一致/半一致/不一致作为一致性梯度；split-screen作为距离0的baseline；稳健性模型与主模型的对比。
+
+- theory_return_cn：讨论将“促进关系”解释为任务与中断作为自动化单实体，将距离解释为Pashler瓶颈的边界条件，从而把实验结果重新绑定到DTI理论。
+
+- contribution_positioning_cn：用三个独立贡献分别对应三个文献域（DTI、移动广告、多屏），每个贡献都明确“之前只做什么，本文增加了什么”。
+
+- novelty_protection_cn：通过重复实验和稳健性检验证明效果不是单一样本/单一设计产物；通过机制解释与理论扩展让结果的一般性超过一次性性能差异；通过边界条件把可能削弱效果的距离纳入理论而不是回避。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立现实移动广告/分心场景与商业重要性。
+
+- research_job_cn：收集行业支出数据和典型分心场景。
+
+- required_evidence_cn：行业数据和具体场景能引出注意力分配难题。
+
+- transition_to_next_cn：场景引出研究问题。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述DTI与移动广告，指出静态情境缺环。
+
+- research_job_cn：整理DTI静态实验和移动广告文献并分类。
+
+- required_evidence_cn：代表性文献和分类表能支撑静态-动态缺口。
+
+- transition_to_next_cn：缺口引出研究问题。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：从理论机制推导假设。
+
+- research_job_cn：用自动性、容量、相关性、空间分离等机制连接任务-中断-环境。
+
+- required_evidence_cn：能得到可检验的H1-H4。
+
+- transition_to_next_cn：假设决定实验操作。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：设计并开发受控实验素材：App、任务、环境、刺激。
+
+- research_job_cn：构建自研App、选择真实环境片段、预制各水平广告并进行操纵检验。
+
+- required_evidence_cn：刺激预览、操纵检验、日志与问卷匹配。
+
+- transition_to_next_cn：可重复的刺激才能进入正式实验。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用多个实验按假设累积证据。
+
+- research_job_cn：先实验室检验H1-H3，再线上非学生样本复验，再随机三距离条件检验H4。
+
+- required_evidence_cn：主模型与配对比较结果。
+
+- transition_to_next_cn：每步留一个未解决问题（样本、屏幕距离）引向下一步。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：稳健性检验覆盖替代规格与更细粒度数据。
+
+- research_job_cn：用Poisson、用户-广告层logit控制品牌熟悉度。
+
+- required_evidence_cn：结果方向与显著性不变。
+
+- transition_to_next_cn：稳健后进入理论解释。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：返回理论与实践贡献并标边界。
+
+- research_job_cn：把结果解释为DTI扩展、移动广告/多屏贡献，并给出ACR等可操作策略。
+
+- required_evidence_cn：明确哪些机制未直接测量，哪些边界未检验。
+
+- transition_to_next_cn：贡献与limitations封闭。
+
+### most_transferable_moves_cn
+
+1. 静态→动态的二维缺口构造
+
+2. 用多个独立研究逐步替换样本/屏幕/距离设计
+
+3. 把理论机制映射到可操纵的刺激维度（时机、一致性、距离）
+
+4. 用稳健性模型增强单一实验结论
+
+5. 在讨论里把每个结果对应到文献贡献
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 自研JavaScript/HTML字谜App与App日志
+
+2. 真实NFL比赛片段的人工逐秒分类
+
+3. 实验室投影/多屏/分屏三种物理布局
+
+4. 线上与线下样本配合唯一ID匹配App与问卷
+
+5. 九条广告的代言人/品牌一致性预测试
+
+### what_not_to_copy_superficially_cn
+
+1. 不要在没有构建真实任务-中断-环境操作时宣称“动态DTI”
+
+2. 不要只靠边际显著结果描述为“促进关系”
+
+3. 不要把类别距离直接解释为连续注意力扩散
+
+4. 不要忽略操纵检验和品牌熟悉度控制
+
+- single_best_description_of_the_routine_cn：从静态DTI文献中挖出被忽略的环境刺激，用自研App把环境内容转成可操作的时机/一致性/距离三维度，再用多个渐进实验把每一个偶然结果升级为理论边界与设计知识。
+
+## 分析边界
+
+全文及附录完整；未提供精确页码，位置以节/段/表号标识；部分表格仅看数值未提供原始微观数据，无法复算；推断性陈述（如机制）依据文本，但无法访问补充材料。

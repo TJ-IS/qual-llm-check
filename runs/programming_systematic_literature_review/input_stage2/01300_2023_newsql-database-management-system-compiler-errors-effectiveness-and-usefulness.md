@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85136918303"
+title: "NewSQL Database Management System Compiler Errors: Effectiveness and Usefulness"
+authors: "Taipalus T.; Grahn H."
+year: "2023"
+journal: "International Journal of Human-Computer Interaction"
+doi: "10.1080/10447318.2022.2108648"
+---
+# Scopus title-abstract-keyword metadata
+Title: NewSQL Database Management System Compiler Errors: Effectiveness and Usefulness
+Abstract: Modern database management is often faced with a high number of concurrent end-users, and the need for database distribution to ensure fault tolerance and high throughput. To flexibly address these challenges, many modern database management systems (DBMS) provide highly automated and effortless, i.e., highly usable database distribution, deployment, and maintenance. However, the usability considerations are yet to extend from the aforementioned DBMS features to query language compilers. In this study, based on participant answers (N = 157), we compare the error message qualities of four modern DBMSs (CockroachDB, SingleStore, NuoDB, and VoltDB) using one objective and three subjective metrics. Our results show that some of the DBMSs provide the users with more useful error messages, even though many of these error messages violate even the most basic usability guidelines. These results (i) are applicable in further developing the usability aspects of query language compilers, (ii) provide a timely effort of bridging the gap between human-computer interaction and query language compilers, and (iii) offer suggestions on teaching novices, who require emphasized support in query formulation. © 2022 The Author(s). Published with license by Taylor & Francis Group, LLC.
+Author keywords: 
+Index keywords: Errors; Fault tolerance; Human computer interaction; Program compilers; Query processing; Database distribution; Database maintenance; Database management; End-users; Error messages; High-throughput; Management IS; Subjective metric; System features; Usability guidelines; Query languages
+Document type: Article
+Conference: 
+Source title: International Journal of Human-Computer Interaction
+Year: 2023
+EID: 2-s2.0-85136918303
+DOI: 10.1080/10447318.2022.2108648
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

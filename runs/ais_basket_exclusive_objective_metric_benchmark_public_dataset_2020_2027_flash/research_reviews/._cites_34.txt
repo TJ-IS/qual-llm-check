@@ -1,0 +1,98 @@
+Jimenez et al., 2024
+Yang et al., 2024
+Yuan et al., 2019
+Greshake et al., 2023
+Yang et al., 2024
+Greshake et al., 2023
+Goodfellow et al., 2018
+OWASP, 2025【占位，需核对公开出处】
+Yang et al., 2024
+Kolter & Madry, 2018
+Li & Chai, 2022
+Bertsimas et al., 2011
+Madry et al., 2018
+Kolter & Madry, 2018
+Ebrahimi et al., 2025
+2020
+2022
+2026
+2020
+2022
+2024
+2025
+Shostack, 2014
+Sutton & Barto, 2018
+Schulman et al., 2017
+Ebrahimi et al., 2025
+Gregor & Hevner, 2013
+Rai, 2017
+Yang et al., 2024
+Jimenez et al., 2024
+Apruzzese et al., 2019
+Goosen et al., 2018
+Yang et al., 2024
+Greshake et al., 2023
+Yang et al., 2024
+Ghoshal et al., 2020
+Menon et al., 2022
+2020
+2022
+2026
+2020
+2022
+Ghoshal et al., 2020
+Menon et al., 2022
+Qu et al., 2026
+Lausen et al., 2020
+Li & Chai, 2022
+Goodfellow et al., 2018
+Yuan et al., 2019
+Madry et al., 2018
+2025
+2024
+2024
+2025
+2020
+2023
+2022
+Yang et al., 2024
+Jimenez et al., 2024
+Ebrahimi et al., 2025
+Yang et al., 2024
+Li & Chai, 2022
+Ebrahimi et al., 2025
+Kwon & Lee, 2024
+Ghoshal et al., 2020
+Menon et al., 2022
+Walls et al., 1992
+Hevner et al., 2004
+Rai, 2017
+Gregor & Hevner, 2013
+2023
+Shostack, 2014
+Shostack, 2014
+Yang et al., 2024
+Ghoshal et al., 2020
+Menon et al., 2022
+Qu et al., 2026
+Sutton & Barto, 2018
+Ghoshal et al., 2020
+Menon et al., 2022
+Ebrahimi et al., 2025
+Schulman et al., 2017
+2025
+Ebrahimi et al., 2025
+Schulman et al., 2017
+Apruzzese et al., 2019
+Yuan et al., 2019
+Ebrahimi et al., 2025
+Ampel et al., 2024
+Li & Chai, 2022
+Kolter & Madry, 2018
+Ebrahimi et al., 2025
+Ghoshal et al., 2020
+Menon et al., 2022
+Li & Chai, 2022
+Ampel et al., 2024
+Yang et al., 2024
+Ebrahimi et al., 2025

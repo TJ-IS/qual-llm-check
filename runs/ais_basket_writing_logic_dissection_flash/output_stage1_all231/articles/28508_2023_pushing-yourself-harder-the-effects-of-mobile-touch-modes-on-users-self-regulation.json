@@ -1,0 +1,1666 @@
+{
+  "record_id": "28508",
+  "source_file": "28508_2023_pushing-yourself-harder-the-effects-of-mobile-touch-modes-on-users-self-regulation.md",
+  "title": "Pushing Yourself Harder: The Effects of Mobile Touch Modes on Users’ Self-Regulation",
+  "authors": "Yang (Alison) Liu; Zhenhui (Jack) Jiang; Ben C. F. Choi",
+  "year": "2023",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.1155",
+  "fulltext_chars": 117047,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "healthcare_and_care",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:49:19.262135+00:00",
+  "article_level_summary": {
+    "central_question_cn": "移动设备上由力度感应技术支持的按压（pressing）与轻点（tapping）两种触摸模式，能否通过体现认知机制内隐地增强用户在健康情境中的自我调节，并且这种效果在哪些用户条件下更强？",
+    "artifact_and_design_cn": "本文不是开发一个新系统，而是设计了三款实验性手机应用，将信息查看、目标设定和承诺确认等交互操作分别实现为按压或轻点；按压需要超过力度阈值，轻点则轻柔触发。Study 3 还加入长按（holding）条件，以排除接触时长的替代解释。",
+    "objective_outcomes_cn": "Study 1中，按压组比轻点组报告更高意志力，并更可能选择健康饮品（41/60 vs 26/60）；Study 2中，按压组在健身应用中设定更高运动目标，且在促进定向参与者中实际运动量更高；Study 3中，按压组在卫生教育后表现出更高遵守决心和更少的实际卫生违规，且趋近动机中介了该效应。",
+    "core_contribution_cn": "作者声称这是首次在移动人机交互中测试触摸模式对用户决策和健康行为的体现效应，说明力感应交互可以成为内隐健康干预；同时将体现认知理论扩展到移动交互设计，并识别健康知识和健康定向作为边界条件，为数字健康干预设计与HCI研究提供新视角。",
+    "whole_argument_in_one_paragraph_cn": "文章从显性健康干预（通知、提醒）效果常被用户忽视或抗拒这一现实矛盾出发，提出需要用内隐方式增强自我调节。作者借助体现认知理论，论证按压因与日常生活中主动追求目标时的用力经验形成身体—心智联结，会潜意识激活趋近动机，从而比轻点更能促进健康目标追求。三个现场实验分别覆盖饮食选择、健身目标与实际运动、卫生教育遵守，并通过操作化健康知识、健康定向以及加入长按对照，逐步检验主效应、调节因素和机制。最后讨论将三项实验的汇聚证据提升为对数字健康干预、HCI体现交互和体现认知边界条件的理论贡献。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "作者从体现认知理论和自我调节研究出发，推导出按压应当比轻点更能促进自我调节的假设，然后设计三款实验移动应用将这一理论差异操作化为可比较的交互模式，并通过三个现场实验检验。整个论证以理论命题先行、设计差异随后、实验证据收束。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章按“显性干预失灵的问题—体现认知理论—按压vs轻点的设计差异—三项现场实验—回到理论贡献与边界条件”展开，最终将实验结果重新连接到初始缺口，并提炼可复用的设计知识。",
+  "research_program": {
+    "study_or_phase_count": 3,
+    "overall_sequence_cn": "三个现场实验按累积论证排列：Study 1在饮食选择情境中先检验主效应和健康知识调节，提供主观意志力与客观选择的证据；Study 2换到健身情境，检验运动目标与实际运动量，并用信息框架直接操纵健康定向，以增强另一调节变量的内部效度；Study 3转向卫生教育情境，加入长按对照并测量趋近动机，直接检验机制并排除接触时长解释。前置的刺激预测试和程序试点被内嵌在Study 1中，用于确保材料效度和实验流程无干扰。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "Study 1：触摸模式与饮品选择",
+        "question_cn": "在移动点餐/选饮情境中，按压相比轻点是否增强用户抵制美味但不健康饮品的意志力并增加健康选择？健康知识是否调节该效应？",
+        "inputs_and_setting_cn": "东南亚某公立大学食堂的实地实验；120名学生；实验用智能手机上的饮品选择应用；四种饮品（两类健康但不太美味，两类美味但不健康）；预测试确认健康/美味感知差异且总体态度与熟悉度无差异。",
+        "designed_or_compared_object_cn": "在饮品应用中查看和获取详情信息时使用的触摸方式：按压 vs 轻点；参与者被随机分配。",
+        "baseline_control_or_counterfactual_cn": "轻点条件作为基准；随机化检验；操纵检验比较主观用力度；刺激预测试与程序试点用于排除材料混淆。",
+        "objective_metrics": [
+          "willpower量表（3项）",
+          "健康饮品选择（二分变量）",
+          "health knowledge量表（4项）",
+          "physical effort操纵检验",
+          "感知可用性"
+        ],
+        "analysis_method_cn": "ANCOVA分析意志力，健康知识作协变量并中心化交互项；spotlight简单效应分析；binary logistic regression分析健康选择；EFA与Cronbach's alpha检验结构效度。",
+        "main_result_cn": "按压组比轻点组报告更高意志力；按压组显著更可能选择健康饮品；健康知识与触摸模式对意志力的交互边际显著，高健康知识者简单效应显著，低健康知识者不显著；对选择无显著交互。",
+        "argumentative_role_cn": "为触摸模式影响自我调节提供第一个现场证据，同时覆盖主观意志力与客观选择两个层面，并引入健康知识作为调节变量。",
+        "remaining_uncertainty_cn": "未检验形成效应的机制；仅覆盖饮食情境；健康知识是测量变量而非操纵变量；健康知识对客观选择的调节不显著。",
+        "link_to_next_phase_cn": "需要换一个健康情境和不同的自我调节指标来复制主效应，并用更可控的方式处理调节变量，因此Study 2进入健身情境并直接操纵健康定向。",
+        "evidence_pointers": [
+          "Section 4.1 experimental design",
+          "Section 4.2.3 willpower results and Table 2",
+          "Figure 2 interaction",
+          "Figure 3 choice",
+          "Table 3 logistic choice",
+          "Section 4.3 discussion"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "Study 2：触摸模式与身体锻炼",
+        "question_cn": "在健身应用情境中，按压相比轻点是否提高用户设定的运动目标和实际运动量？健康定向（促进/预防）是否调节该效应？",
+        "inputs_and_setting_cn": "东南亚某公共健身房入口招募；140名健身者；2（按压/轻点）×2（促进定向/预防定向）组间设计；纸笔问卷、以收益/损失框架撰写的健康定向操纵文章、实验健身应用。",
+        "designed_or_compared_object_cn": "在健身应用设定运动目标过程中的触摸方式；健康定向用信息框架直接操纵。",
+        "baseline_control_or_counterfactual_cn": "轻点条件作为基准；预防定向条件作为对比；随机化检验；健康定向操纵检验。",
+        "objective_metrics": [
+          "exercise goal（3项）",
+          "exercise amount（3项自报）",
+          "health orientation操纵检验",
+          "控制变量：年龄、性别、BMI、自我控制能力、习惯性运动行为"
+        ],
+        "analysis_method_cn": "2×2 ANOVA分别分析运动目标和运动量；简单主效应分析；EFA和Cronbach's alpha；对不同测量方式的低相关进行共同方法偏差事后检查。",
+        "main_result_cn": "按压组比轻点组设定更高的运动目标；触摸模式与健康定向对运动目标交互显著，促进定向下按压效应显著，预防定向下无差异；运动量的主效应和交互均为边际显著，促进定向下按压组运动更多。",
+        "argumentative_role_cn": "在第二个健康情境复制主效应，并把调节变量从测量的健康知识转换为直接操纵的健康定向，增强对调节机制的信心；同时用目标设定和实际运动量两个指标覆盖计划与执行。",
+        "remaining_uncertainty_cn": "运动量为自报而非客观记录；确认按压增强自我调节的底层机制仍然缺失；主效应在运动量上只是边际显著。",
+        "link_to_next_phase_cn": "前两项研究均未正式检验机制，作者明确表示需要Study 3提供机制证据，因此Study 3加入趋近动机的中介测量。",
+        "evidence_pointers": [
+          "Section 5.1 design and manipulation",
+          "Table 5 means and SD",
+          "Table 6 ANOVA",
+          "Figure 4 interaction on goal",
+          "Figure 5 interaction on amount",
+          "Section 5.3 discussion"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Study 3：触摸模式与卫生教育遵守",
+        "question_cn": "在个人卫生教育应用中，按压相比轻点是否提高对卫生规范的遵守决心并减少实际卫生违规？趋近动机是否中介该效应？接触时长能否被排除？",
+        "inputs_and_setting_cn": "东南亚某公立大学；141名参与者；三种条件（轻点/按压/长按）；个人卫生教育应用包含8个主题；任务2中由两名实验管理员在自然场景中观察四项卫生违规行为（社交距离、握手、未消毒共享手机、摸脸）。",
+        "designed_or_compared_object_cn": "学习教育内容后承诺按钮的交互方式：按压 vs 轻点 vs 长按；测量趋近动机作为中介变量；任务2提供观察实际自我调节行为的机会。",
+        "baseline_control_or_counterfactual_cn": "轻点条件作为基准；长按条件作为接触时长的对照；Tukey HSD成对比较；Preacher-Hayes bootstrap中介检验。",
+        "objective_metrics": [
+          "approach motivation（3项）",
+          "adherence determination（3项）",
+          "personal hygiene lapses（0–4观察得分）"
+        ],
+        "analysis_method_cn": "ANOVA检验三组差异；Tukey HSD进行事后比较；Preacher-Hayes再抽样程序检验中介；EFA与Cronbach's alpha。",
+        "main_result_cn": "按压组比轻点组和长按组有更强的遵守决心和更少的卫生违规；轻点组与长按组之间无显著差异；趋近动机部分中介遵守决心、完全中介卫生违规。",
+        "argumentative_role_cn": "第三个情境复制触摸模式对自我调节的影响，同时首次用中介分析检验趋近动机机制，并通过长按条件排除接触时长的替代解释。",
+        "remaining_uncertainty_cn": "观察窗口较短，无法说明长期坚持；卫生违规行为是被动观察而非完全受控测量；趋近动机是自报量表，不是直接操作性证据。",
+        "link_to_next_phase_cn": "三项研究汇聚后，作者进入综合讨论，将局部结果提升为理论含义、实践含义与边界条件。",
+        "evidence_pointers": [
+          "Section 6.1 design and procedure",
+          "Figure 6 adherence determination",
+          "Table 8 Tukey HSD adherence",
+          "Figure 7 hygiene lapses",
+          "Table 9 Tukey HSD lapses",
+          "Section 6.2.4 mediation"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      {
+        "locator": "Abstract P1 S1",
+        "move_code": "CONTEXT",
+        "paraphrase_cn": "许多移动应用使用推送通知和提醒来明确教育、提醒和激励用户执行健康行为。"
+      },
+      {
+        "locator": "Abstract P1 S2",
+        "move_code": "LIMITATION",
+        "paraphrase_cn": "但用户并不总会按照这些明确数字干预行动。"
+      },
+      {
+        "locator": "Abstract P1 S3-S4",
+        "move_code": "RQ_OR_OBJECTIVE",
+        "paraphrase_cn": "本研究探讨用户自我调节能否通过适当的移动交互设计被内隐促进，并比较按压和轻点两种触摸模式。"
+      },
+      {
+        "locator": "Abstract P1 S5",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "依据体现认知理论，人们会自动从自身身体动作中推断意义。"
+      },
+      {
+        "locator": "Abstract P1 S6",
+        "move_code": "HYPOTHESIS_OR_PROPOSITION",
+        "paraphrase_cn": "按压相比轻点会增强自我调节，因为按压动作体现对目标的坚定趋近动机。"
+      },
+      {
+        "locator": "Abstract P1 S7",
+        "move_code": "STUDY_OVERVIEW",
+        "paraphrase_cn": "通过三项实验分别研究饮料选择、健身应用目标设定和卫生教育。"
+      },
+      {
+        "locator": "Abstract P1 S8",
+        "move_code": "RESULT",
+        "paraphrase_cn": "结果显示按压能改善健康饮品选择、提高运动目标与实际运动量、减少卫生违规。"
+      },
+      {
+        "locator": "Abstract P1 S9",
+        "move_code": "BOUNDARY_CONDITION",
+        "paraphrase_cn": "这些效应在健康知识较高和促进型健康定向的用户中更明显。"
+      },
+      {
+        "locator": "Abstract P1 S10",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "文章将研究定位为：移动交互可以作为助推用户增强自我调节的途径。"
+      }
+    ],
+    "introduction_moves": [
+      {
+        "locator": "Introduction P1 S1",
+        "move_code": "CONTEXT",
+        "paraphrase_cn": "人们日益重视追求健康生活方式。"
+      },
+      {
+        "locator": "Introduction P1 S2-S3",
+        "move_code": "PHENOMENON",
+        "paraphrase_cn": "好的健康意图并不总会转化为持续行为；在咖啡馆面对高热量蛋糕时可能难以抗拒。"
+      },
+      {
+        "locator": "Introduction P1 S4",
+        "move_code": "PRIOR_KNOWLEDGE",
+        "paraphrase_cn": "健康行为需要自我调节，因为要放弃短暂愉悦以换取长远健康。"
+      },
+      {
+        "locator": "Introduction P1 S5",
+        "move_code": "PRACTICAL_STAKES",
+        "paraphrase_cn": "理解如何利用技术增强自我调节具有重要的研究和实践意义。"
+      },
+      {
+        "locator": "Introduction P2 S1",
+        "move_code": "PHENOMENON",
+        "paraphrase_cn": "健康决策越来越发生在移动设备上，例如用平板或手机点餐、使用健康应用。"
+      },
+      {
+        "locator": "Introduction P2 S2",
+        "move_code": "PRIOR_KNOWLEDGE",
+        "paraphrase_cn": "大量研究致力于设计通知、提醒等显性数字健康干预。"
+      },
+      {
+        "locator": "Introduction P2 S3",
+        "move_code": "LIMITATION",
+        "paraphrase_cn": "显性干预的效果常因用户疏忽或对明显说服意图的心理抗拒而受损。"
+      },
+      {
+        "locator": "Introduction P3 S1",
+        "move_code": "RQ_OR_OBJECTIVE",
+        "paraphrase_cn": "本文的目标是寻找数字技术内隐增强自我调节的方式，并承接助推文献。"
+      },
+      {
+        "locator": "Introduction P3 S2",
+        "move_code": "DESIGN_FEATURE",
+        "paraphrase_cn": "移动交互相较鼠标键盘的关键特征之一是自然触摸手势。"
+      },
+      {
+        "locator": "Introduction P3 S3",
+        "move_code": "PRIOR_KNOWLEDGE",
+        "paraphrase_cn": "触屏相比鼠标会增强所有权感、增加购买意愿，并可能促进情绪化选择。"
+      },
+      {
+        "locator": "Introduction P4 S1",
+        "move_code": "GAP",
+        "paraphrase_cn": "尽管有触摸交互研究，不同触摸手势如何影响认知和行为仍不清楚。"
+      },
+      {
+        "locator": "Introduction P4 S2",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "体现认知理论认为身体动作携带并触发意义。"
+      },
+      {
+        "locator": "Introduction P4 S3",
+        "move_code": "THEORY_PROPOSITION",
+        "paraphrase_cn": "与设备的身体交互可以潜意识激活相应心理表征，因而可被设计为行为改变手段。"
+      },
+      {
+        "locator": "Introduction P5 S1",
+        "move_code": "DESIGN_FEATURE",
+        "paraphrase_cn": "本文利用力感应技术实现按压与轻点两种触摸模式。"
+      },
+      {
+        "locator": "Introduction P6 S1",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "日常用力与达成目标相关，如紧握拳头、投入更多体力去获得渴望之物。"
+      },
+      {
+        "locator": "Introduction P6 S2",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "这些经历在潜意识中建立用力强度与强烈趋近动机之间的身体—心智联结。"
+      },
+      {
+        "locator": "Introduction P6 S3-S4",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "研究移动设备上身体动作对决策与健康行为的体现效应，区别于以往主要关注可用性的研究。"
+      },
+      {
+        "locator": "Introduction P7 S1",
+        "move_code": "BOUNDARY_CONDITION",
+        "paraphrase_cn": "体现效应可能取决于用户已有知识、态度和信念。"
+      },
+      {
+        "locator": "Introduction P7 S2",
+        "move_code": "PRIOR_KNOWLEDGE",
+        "paraphrase_cn": "健康干预效果常受健康知识和健康相关调节定向影响。"
+      },
+      {
+        "locator": "Introduction P7 S3",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "识别健康知识与健康定向作为调节因素，可深化对触摸模式设计条件和体现意义推断的理解。"
+      },
+      {
+        "locator": "Introduction P8 S1-S2",
+        "move_code": "STUDY_OVERVIEW",
+        "paraphrase_cn": "预告三项实验分别研究饮食选择、健身应用和卫生教育，并说明Study 3加入长按对照和中介分析。"
+      }
+    ],
+    "theory_and_knowledge_moves": [
+      {
+        "locator": "Section 2.1 first paragraph",
+        "move_code": "PRIOR_KNOWLEDGE",
+        "paraphrase_cn": "数字健康干预基于健康信念模型、保护动机等理论，通过显性方式改变健康行为。"
+      },
+      {
+        "locator": "Section 2.1 second paragraph",
+        "move_code": "LIMITATION",
+        "paraphrase_cn": "显性干预并不总能导致行为改变，甚至可能引发厌烦和抗拒，并削弱内在动机。"
+      },
+      {
+        "locator": "Section 2.1 third paragraph",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "心理学和行为经济学中的内隐助推强调外围线索可激活既有认知路径，无需用户理性加工。"
+      },
+      {
+        "locator": "Section 2.1 fourth paragraph",
+        "move_code": "GAP",
+        "paraphrase_cn": "很少有实证研究考察数字技术如何用于内隐干预。"
+      },
+      {
+        "locator": "Section 2.1 fifth paragraph",
+        "move_code": "WHY_GAP_MATTERS",
+        "paraphrase_cn": "既然显性干预有局限，研究触摸模式作为内隐干预可以补上数字健康干预文献的空白。"
+      },
+      {
+        "locator": "Section 2.2 first paragraph",
+        "move_code": "CONTEXT",
+        "paraphrase_cn": "健康行为往往困难或痛苦，因此需要自我调节。"
+      },
+      {
+        "locator": "Section 2.2 second paragraph",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "界定自我调节为人们根据标准与目标有意改变自身反应的过程。"
+      },
+      {
+        "locator": "Section 2.2 third paragraph",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "长期提升自我控制能力很难，但暂时提升动机资源可以增强自我调节。"
+      },
+      {
+        "locator": "Section 2.2 fourth paragraph",
+        "move_code": "TRANSITION",
+        "paraphrase_cn": "因此本研究考察触摸模式能否通过激活趋近动机来内隐增强健康情境中的自我调节。"
+      },
+      {
+        "locator": "Section 2.3 first paragraph",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "体现认知研究展示物理温暖、手臂屈伸、洗手等身体状态影响社会判断和决策。"
+      },
+      {
+        "locator": "Section 2.3 second paragraph",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "身体互动会激活过去经验的多模态记忆，形成并自动触发身体—认知联结。"
+      },
+      {
+        "locator": "Section 2.3 third paragraph",
+        "move_code": "BOUNDARY_CONDITION",
+        "paraphrase_cn": "体现效应通常细微，并依赖于个体是否主动发起动作以及环境意义。"
+      },
+      {
+        "locator": "Section 2.3 fourth paragraph",
+        "move_code": "BOUNDARY_CONDITION",
+        "paraphrase_cn": "个体已有知识与态度会影响其对体现信息的解释，比如孤独者更受拥抱体现的喜爱信号影响。"
+      },
+      {
+        "locator": "Section 2.3 fifth paragraph",
+        "move_code": "GAP",
+        "paraphrase_cn": "HCI以往只用身体—心智关联提升可用性，力感应交互对决策与后续行为的影响仍被忽视，调节因素也缺少系统证据。"
+      }
+    ],
+    "artifact_design_moves": [
+      {
+        "locator": "Hypothesis Development 3.1 beginning",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "用力在日常中反复出现，并与主动追求目标时的急切和动力关联。"
+      },
+      {
+        "locator": "Hypothesis Development 3.1 second paragraph",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "主动执行用力动作会潜意识唤起过去为达成目标而努力的记忆，从而增强趋近动机。"
+      },
+      {
+        "locator": "Hypothesis Development 3.1 third paragraph",
+        "move_code": "HYPOTHESIS_OR_PROPOSITION",
+        "paraphrase_cn": "因此提出H1：按压相比轻点能增强健康目标追求中的自我调节。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.1",
+        "move_code": "THEORY_PROPOSITION",
+        "paraphrase_cn": "健康知识高的人对健康后果更敏感，健康目标更可及，因此更易受到健康导向助推的影响。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.1 last sentence",
+        "move_code": "HYPOTHESIS_OR_PROPOSITION",
+        "paraphrase_cn": "提出H2a：健康知识越高，按压增强自我调节的效应越强。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.2 first paragraph",
+        "move_code": "THEORY_INTRO",
+        "paraphrase_cn": "引入调节定向理论，区分促进定向与预防定向在健康行为中的不同动力来源。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.2 second paragraph",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "促进定向用户的改善渴望与按压体现的趋近动机一致，因此更会内化这种体现信息。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.2 third paragraph",
+        "move_code": "MECHANISM",
+        "paraphrase_cn": "预防定向用户关注避免负面结果，与按压体现的主动趋近信号匹配度较低，因此效应较弱。"
+      },
+      {
+        "locator": "Hypothesis Development 3.2.2 last sentence",
+        "move_code": "HYPOTHESIS_OR_PROPOSITION",
+        "paraphrase_cn": "提出H2b：促进型健康定向用户的按压效应强于预防型用户。"
+      },
+      {
+        "locator": "Hypothesis Development final summary",
+        "move_code": "STUDY_OVERVIEW",
+        "paraphrase_cn": "预告三项实验的布局：饮食、健身、卫生教育，并说明各实验对应检验的假设与机制。"
+      }
+    ],
+    "evaluation_moves": [
+      {
+        "locator": "Study 1 opening",
+        "move_code": "METHOD_JUSTIFICATION",
+        "paraphrase_cn": "饮食选择天然涉及健康与美味之间的权衡，因此适合作为自我调节的检验情境。"
+      },
+      {
+        "locator": "Study 1 pretest paragraph",
+        "move_code": "METHOD_JUSTIFICATION",
+        "paraphrase_cn": "预测试确认健康饮品与美味饮品在总体态度和熟悉度上无差异，只在健康感和美味感上有差异，因此选择确实构成权衡。"
+      },
+      {
+        "locator": "Study 1 procedure tapping/pressing paragraph",
+        "move_code": "DESIGN_FEATURE",
+        "paraphrase_cn": "在轻点条件下轻触查看预览和详情；在按压条件下则需超过行业阈值压力才能激活同样功能。"
+      },
+      {
+        "locator": "Study 1 manipulation check",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压组报告显著更高的用力体验，但感知可用性没有显著下降，说明操作操纵有效且未损害可用性。"
+      },
+      {
+        "locator": "Study 1 willpower results",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压相比轻点显著提高意志力，健康知识与意志力正相关，触摸模式与健康知识的交互边际显著。"
+      },
+      {
+        "locator": "Study 1 spotlight analysis",
+        "move_code": "RESULT",
+        "paraphrase_cn": "高健康知识组中按压显著提升意志力；低健康知识组中无显著差异。"
+      },
+      {
+        "locator": "Study 1 choice results",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压组选择健康饮品的比率显著更高，比值比约为轻点组的2.82倍。"
+      },
+      {
+        "locator": "Study 1 discussion",
+        "move_code": "RESULT",
+        "paraphrase_cn": "作者解释意志力上出现调节而选择上未出现调节，可能是因为行为指标不如主观指标敏感。"
+      },
+      {
+        "locator": "Study 2 opening",
+        "move_code": "TRANSITION",
+        "paraphrase_cn": "为提升可推广性并处理Study 1局限，Study 2换到健身应用情境，并直接操纵健康定向。"
+      },
+      {
+        "locator": "Study 2 self-report exercise amount justification",
+        "move_code": "METHOD_JUSTIFICATION",
+        "paraphrase_cn": "作者说明未采用客观追踪是因为近距离观察可能引发观察者效应，而且健身房多种运动方式难以无干扰地准确追踪。"
+      },
+      {
+        "locator": "Study 2 goal results",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压组比轻点组设定更高运动目标；触摸模式与健康定向交互显著，促进定向下简单效应显著。"
+      },
+      {
+        "locator": "Study 2 amount results",
+        "move_code": "RESULT",
+        "paraphrase_cn": "运动量上主效应和交互均边际显著；促进定向下按压组运动量更高，预防定向下无差异。"
+      },
+      {
+        "locator": "Study 2 discussion",
+        "move_code": "TRANSITION",
+        "paraphrase_cn": "前两项研究支持主效应和调节效应，但机制尚未正式检验，因此需要Study 3。"
+      },
+      {
+        "locator": "Study 3 opening",
+        "move_code": "RQ_OR_OBJECTIVE",
+        "paraphrase_cn": "Study 3的核心目标是为触摸模式增强自我调节提供机制证据，即检验趋近动机的中介作用。"
+      },
+      {
+        "locator": "Study 3 design holding condition",
+        "move_code": "DESIGN_FEATURE",
+        "paraphrase_cn": "加入长按条件，使接触时长与按压相似，从而排除接触时长这一替代解释。"
+      },
+      {
+        "locator": "Study 3 procedure task 2",
+        "move_code": "DESIGN_FEATURE",
+        "paraphrase_cn": "用等待排队、握手邀请、共享手机和观察摸脸四个不干预的行为编码卫生违规得分。"
+      },
+      {
+        "locator": "Study 3 adherence result",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压组遵守决心显著高于轻点组和长按组，轻点与长按无显著差异。"
+      },
+      {
+        "locator": "Study 3 lapses result",
+        "move_code": "RESULT",
+        "paraphrase_cn": "按压组卫生违规显著少于轻点组和长按组，轻点与长按无显著差异。"
+      },
+      {
+        "locator": "Study 3 mediation result",
+        "move_code": "RESULT",
+        "paraphrase_cn": "趋近动机部分中介触摸模式对遵守决心的影响，并完全中介对卫生违规的影响。"
+      },
+      {
+        "locator": "Study 3 discussion",
+        "move_code": "RESULT",
+        "paraphrase_cn": "长按与轻点无差异，说明真正驱动自我调节的按压特征是用力而非接触持续时间。"
+      }
+    ],
+    "discussion_and_contribution_moves": [
+      {
+        "locator": "General Discussion first paragraph",
+        "move_code": "RESULT",
+        "paraphrase_cn": "三项实验的汇总结果：按压在饮食、运动和卫生三个情境中都增强自我调节，且调节方向一致。"
+      },
+      {
+        "locator": "Theoretical implications first paragraph",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "对医疗健康IT文献的贡献在于显示力感应交互可以成为内隐健康干预，不依赖用户有意识的注意。"
+      },
+      {
+        "locator": "Theoretical implications second paragraph",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "对HCI文献的贡献在于把体现认知从可用性扩展到决策与行为影响，并指出触摸界面的操作方式本身有心理后果。"
+      },
+      {
+        "locator": "Theoretical implications third paragraph",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "对体现认知理论的贡献在于提出并验证健康知识与健康定向是体现效应的重要边界条件。"
+      },
+      {
+        "locator": "Practical implications paragraph",
+        "move_code": "CONTRIBUTION",
+        "paraphrase_cn": "建议数字健康产品设计者采用按压交互以促进自我调节，并利用行为分析和健康内容实现用户画像。"
+      },
+      {
+        "locator": "Limitations paragraph 1",
+        "move_code": "LIMITATION_AND_FUTURE",
+        "paraphrase_cn": "实验仅观察短期行为，未来应做长期纵向研究。"
+      },
+      {
+        "locator": "Limitations paragraph 2",
+        "move_code": "BOUNDARY_CONDITION",
+        "paraphrase_cn": "结论最适用于低深思、简单、日常的健康决策，不能直接推广到需要大量深思的任务。"
+      },
+      {
+        "locator": "Limitations paragraph 3",
+        "move_code": "LIMITATION_AND_FUTURE",
+        "paraphrase_cn": "按压的体现含义随环境而定，其他机制如新奇感也可能存在，未来可在不同使用情境中探索。"
+      }
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "体现认知理论（embodied cognition）",
+      "自我调节与自我控制文献",
+      "数字健康干预与内隐干预/助推文献",
+      "力动力学与身体动作隐喻（force dynamics）",
+      "调节定向理论（regulatory focus theory）",
+      "HCI中的体现交互研究"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "体现认知理论直接决定了核心设计差异：因为“主动用力—目标趋近”的身体—心智联结，按压才被选为干预方式，轻点则作为缺少该联结点的基础对照。调节变量也来自体现认知对个体解释信息的条件性命题。研究不是先造出系统再事后找理论包装，而是理论命题前置地转化为可操纵的触摸模式和可检验的调节假设。",
+    "translation_chain_cn": "体现认知理论命题“身体动作可自动激活过去经验中的心理意义”→具体到“主动用力与目标趋近动机相关联”→形成设计要求“在移动健康交互中保留一种需要额外按压力度的操作，并与轻触操作形成对比”→实现为“press（超过力度阈值）vs tap（轻触）”的设计差异→实验证据显示按压比轻点更能提升自我调节；继而用体现认知的个体差异命题“体现信息如何被解释取决于已有知识和态度”→设计健康知识与健康定向两个调节变量→结果为高健康知识与促进定向者效应更强；再用“机制才是力而非时长”的研究要求→在Study 3加入长按对照和趋近动机中介测量→结果表明机制成立。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "主动用力与目标趋近动机之间存在自动化的身体—心智联结（体现认知、力动力学）",
+        "mechanism_cn": "按压唤起过去主动追求目标的记忆，激活趋近动机，从而增强自我调节",
+        "design_requirement_cn": "健康应用需要提供一种需要额外力度且区别于轻触的操作",
+        "artifact_choice_cn": "实验应用中的信息查看、目标设定与承诺确认被设计为按压；轻点作为基础操作",
+        "evaluated_contrast_cn": "按压 vs 轻点",
+        "objective_result_cn": "健康饮品选择更多、运动目标更高、实际运动量更多、卫生遵守更好且违规更少",
+        "evidence_pointers": [
+          "Study 1 Section 4.2.3",
+          "Study 2 Section 5.2.3",
+          "Study 3 Section 6.2.3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "体现信息的意义解释取决于个体已有知识与动机取向",
+        "mechanism_cn": "高健康知识使健康目标更可及；促进定向与趋近动机方向一致，因此用户更容易接受按压所激活的目标追求信号",
+        "design_requirement_cn": "需要在验证主效应的同时测量或操纵个体差异",
+        "artifact_choice_cn": "Study 1测量健康知识；Study 2用收益/损失信息框架操纵健康定向",
+        "evaluated_contrast_cn": "高 vs 低健康知识；促进 vs 预防健康定向",
+        "objective_result_cn": "高健康知识者在意志力上效应更强；促进定向者在运动目标和运动量上效应更强；预防定向者无显著差异",
+        "evidence_pointers": [
+          "Study 1 spotlight analysis and Figure 2",
+          "Study 2 interaction effects and Figures 4–5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "如果按压效应源于用力本身，则接触时长不应解释该效应；机制应是心理上的趋近动机",
+        "mechanism_cn": "长时间接触但不施加额外压力不会激活同一身体—心智联结；只有用力按压会提升趋近动机",
+        "design_requirement_cn": "需要排除接触时长的替代解释并直接测中介",
+        "artifact_choice_cn": "Study 3加入长按（holding）条件，并加入approach motivation量表",
+        "evaluated_contrast_cn": "按压 vs 轻点 vs 长按；中介路径",
+        "objective_result_cn": "按压显著优于轻点与长按，轻点与长按无差异；趋近动机中介了触摸模式对自我调节的影响",
+        "evidence_pointers": [
+          "Study 3 Section 6.2.3",
+          "Tables 8–9",
+          "Section 6.2.4 mediation"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "三个实地实验（field experiments）",
+      "实验用移动应用中的交互方式操纵",
+      "随机分配与基线对照",
+      "预测试与试点测试",
+      "操纵检验（主观用力、健康定向）",
+      "主观量表+客观行为选择/目标设定/实际运动量/观察性违规",
+      "ANOVA/ANCOVA/二元Logistic回归",
+      "spotlight简单效应分析",
+      "Tukey HSD成对比较",
+      "Preacher-Hayes中介Bootstrap",
+      "EFA与信度检验"
+    ],
+    "why_these_evaluations_cn": "因为核心主张是“按压这一交互设计差异能影响真实健康行为”，所以仅靠问卷不够，需要覆盖主观意愿和客观行为；由于一项研究可能有情境偶然性，需要三个不同健康情境汇聚；又因为理论主张涉及机制与替代解释，需要在晚期研究中加入中介测量和长按对照。",
+    "benchmark_and_contrast_chain_cn": "轻点被一致作为基准操作，代表最普遍、无需额外力度的触摸方式；Study 1的预测试确保‘健康但不好喝vs美味但不健康’构成真实权衡；Study 2用促进/预防信息框架构造方向性对比；Study 3用长按作为接触时长对照。这样，主效应先与轻点比，调节效应再与定向比，机制效应再与时长比，形成层层对照链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "按压比轻点增强自我调节（H1）",
+        "evidence_cn": "Study 1意志力与健康选择；Study 2运动目标与运动量；Study 3遵守决心与卫生违规，三项研究均支持",
+        "strength_cn": "强：多情境、多指标、主观与客观结合"
+      },
+      {
+        "claim_cn": "健康知识调节按压效应（H2a）",
+        "evidence_cn": "Study 1只有意志力上的交互为边际显著，健康选择上交互不显著",
+        "strength_cn": "弱：仅主观指标边际支持，客观指标未支持"
+      },
+      {
+        "claim_cn": "健康定向调节按压效应（H2b）",
+        "evidence_cn": "Study 2运动目标交互显著，运动量交互边际显著，促进定向下简单效应显著",
+        "strength_cn": "中等：方向一致，但其中一个结果边际显著"
+      },
+      {
+        "claim_cn": "趋近动机是底层机制",
+        "evidence_cn": "Study 3中approach motivation部分中介遵守决心、完全中介卫生违规",
+        "strength_cn": "中等：只有一项研究，且中介变量为自报量表"
+      },
+      {
+        "claim_cn": "效应是用力而非接触时长造成的",
+        "evidence_cn": "Study 3中长按与轻点无显著差异，而按压显著优于二者",
+        "strength_cn": "较强：针对特定替代解释有直接对照"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配、操纵检验、预测试保证刺激可比较、试点测试排除流程干扰、两种展示顺序进行counterbalance、低相关性检查减少共同方法偏差、以独立管理员和固定编码方案观察实际卫生违规、通过长按条件控制接触时长、对个体差异进行随机化基线检验。",
+    "external_validity_strategy_cn": "三个研究都在真实场景而非纯实验室进行：大学食堂、公共健身房、大学卫生教育任务；结果变量包括真实选择、目标设定、自报运动量和观察到的卫生违规；参与者是实际用户而非人工合成的被试。",
+    "what_is_not_actually_tested_cn": "没有检验长期坚持或慢性健康行为改变；运动量依赖自报，没有客观设备记录；趋近动机是自报量表而非生理/行为指标；H2a的客观选择调节未被证明；没有直接检验其他触摸手势（滑动、捏合、摇晃）的体现意义；对非健康情境的推广只是推论。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在移动健康应用中，按压操作相比轻点操作能显著改善健康行为相关的自我调节表现。",
+    "artifact_claim_cn": "力感应交互中的“按压”这一具体设计特征，而非更长的接触时间，导致了自我调节增强；长按没有产生同样效果。",
+    "mechanism_claim_cn": "按压之所以有效，是因为它激活趋近动机；在Study 3中趋近动机中介了触摸模式对遵守决心和卫生违规的影响。",
+    "boundary_claim_cn": "该效应在健康知识较高、促进型健康定向的用户中更明显；并可能只对低深思、相对简单的决策任务奏效，不能直接外推到高度深思或长期坚持情境。",
+    "reusable_design_knowledge_cn": "移动应用可以有意利用触摸手势的身体意义内隐助推行为；除健康应用外，生产力、学习教育类应用也可考虑按压交互；设计者应通过用户画像和行为数据分析判断按压设计的效果。",
+    "theoretical_contribution_cn": "把体现认知理论首次具体应用到移动力感应交互对决策和健康行为的影响上，补充数字健康干预、HCI体现交互和体现认知边界条件三个文献方向。",
+    "how_discussion_closes_intro_gap_cn": "引言从显性干预失灵和触摸手势影响未知入手；讨论部分直接说力感应交互可作为内隐健康干预，并指出以往HCI只关注可用性而忽视行为影响，从而回应了“数字技术如何内隐增强自我调节”的初始缺口。",
+    "overclaim_or_unsupported_leaps_cn": "作者将结果推广到健康以外场景以及生产力/教育应用属于推测；H2a在客观选择上未得到支持却被归入总体贡献；运动量的边际显著结果被用于支持H2b；卫生违规观察虽为客观指标，但只在单一文化环境与短期窗口内完成；‘首次’宣称需要依赖文献覆盖假设。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "许多移动应用通过推送通知和提醒明确促进健康行为。",
+      "rhetorical_function_cn": "为全文建立数字健康干预的大背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为下一句指出显性干预的局限做铺垫。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "用户并不总是遵循这些显性数字干预。",
+      "rhetorical_function_cn": "说明研究动机：显性干预存在行为缺口。",
+      "depends_on_cn": "建立在显性干预普遍存在的背景上。",
+      "sets_up_cn": "引出内隐方式的研究问题。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3-S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "研究自我调节能否通过适当移动交互设计被内隐促进，并聚焦按压与轻点。",
+      "rhetorical_function_cn": "直接给出研究问题和核心设计对象。",
+      "depends_on_cn": "因显性干预局限，才转向内隐交互设计。",
+      "sets_up_cn": "为下一句引入体现认知理论做铺垫。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "依据体现认知，人会自动从身体动作推断意义。",
+      "rhetorical_function_cn": "给出研究背后的理论透镜。",
+      "depends_on_cn": "研究问题需要理论解释为何触摸模式会影响行为。",
+      "sets_up_cn": "使按压增强自我调节的假设可理解。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S6",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "按压相比轻点增强自我调节，因为按压体现对目标的坚定趋近动机。",
+      "rhetorical_function_cn": "浓缩全文核心假设。",
+      "depends_on_cn": "依赖体现认知理论命题。",
+      "sets_up_cn": "预告后续实验要检验的方向。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract P1 S7",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用三个实验分别研究饮品选择、健身应用和卫生教育。",
+      "rhetorical_function_cn": "告知读者证据结构。",
+      "depends_on_cn": "假设需要多元证据支持。",
+      "sets_up_cn": "让摘要以结果和贡献收尾。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract P1 S8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压能改善健康饮品选择、提高运动目标和运动量、减少卫生违规。",
+      "rhetorical_function_cn": "报告三实验的主要结果。",
+      "depends_on_cn": "依赖三个实验设置。",
+      "sets_up_cn": "为边界条件和贡献句提供证据基础。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "Abstract P1 S9",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "效应在健康知识高和促进型健康定向的用户中更明显。",
+      "rhetorical_function_cn": "在摘要中交代调节条件。",
+      "depends_on_cn": "基于三实验的调节分析。",
+      "sets_up_cn": "帮助读者判断适用对象。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 9,
+      "section": "Abstract",
+      "locator": "Abstract P1 S10",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声称移动交互可被用来助推用户增强自我调节。",
+      "rhetorical_function_cn": "点明总体贡献。",
+      "depends_on_cn": "结果与边界条件共同支撑。",
+      "sets_up_cn": "为正文展开贡献讨论做预告。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "人们日益重视追求健康生活方式。",
+      "rhetorical_function_cn": "从社会趋势切入问题。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "对比下句的意图—行为鸿沟。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P1 S2-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "以咖啡馆高热量蛋糕的例子说明好意图不总能变成健康行为。",
+      "rhetorical_function_cn": "用具体经验现象让问题可见。",
+      "depends_on_cn": "建立在健康关注上升的背景下。",
+      "sets_up_cn": "引出自我调节概念。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "健康行为需要自我调节，因为要牺牲短期愉悦获得长期收益。",
+      "rhetorical_function_cn": "用已有定义解释为何需要自我调节。",
+      "depends_on_cn": "经验现象说明意图不足。",
+      "sets_up_cn": "为后文的自调节文献做概念铺垫。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P1 S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "理解如何利用技术增强自我调节对研究者和实践者都有意义。",
+      "rhetorical_function_cn": "说明研究的实践重要性。",
+      "depends_on_cn": "自我调节是健康行为关键。",
+      "sets_up_cn": "转向数字健康干预。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "健康决策越来越多在移动设备上完成，例如平板点餐和健康应用。",
+      "rhetorical_function_cn": "将一般健康问题具体化到移动设备情境。",
+      "depends_on_cn": "健康行为需要技术支持。",
+      "sets_up_cn": "引入数字健康干预文献。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P2 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有数字健康干预研究主要设计通知、提醒等显性干预。",
+      "rhetorical_function_cn": "概括现有做法。",
+      "depends_on_cn": "健康决策转向移动设备。",
+      "sets_up_cn": "为指出显性干预局限做准备。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "显性干预效果常被用户疏忽和心理抗拒削弱。",
+      "rhetorical_function_cn": "指出文献主要路径的不足。",
+      "depends_on_cn": "数字健康干预的普遍存在。",
+      "sets_up_cn": "引出内隐助推思路。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此本研究旨在用数字技术内隐增强自我调节，并承接助推文献。",
+      "rhetorical_function_cn": "提出替代路径，明确研究目标。",
+      "depends_on_cn": "显性干预的失败。",
+      "sets_up_cn": "引出触摸手势作为具体内隐设计。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P3 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "移动交互的一大特点是自然触摸手势，区别于鼠标键盘。",
+      "rhetorical_function_cn": "把移动交互与内隐助推连接起来。",
+      "depends_on_cn": "内隐助推需要具体载体。",
+      "sets_up_cn": "回顾触摸交互影响消费者行为的研究。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P3 S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "触屏相比鼠标可增强所有权感和购买意愿，并促进情绪化选择。",
+      "rhetorical_function_cn": "显示触摸交互可内隐影响决策。",
+      "depends_on_cn": "触摸手势是移动交互特征。",
+      "sets_up_cn": "对比之下提出不同触摸手势的影响未知。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "虽有触摸交互研究，但不同触摸手势对认知和行为的影响仍未知。",
+      "rhetorical_function_cn": "建立具体文献缺口。",
+      "depends_on_cn": "已有触摸交互研究主要对比触屏与鼠标。",
+      "sets_up_cn": "引入体现认知理论作为填补缺口的工具。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "Introduction P4 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "体现认知认为不同身体动作可以体现并触发意义。",
+      "rhetorical_function_cn": "给出理论视角。",
+      "depends_on_cn": "需要解释触摸手势为何能影响行为。",
+      "sets_up_cn": "使后续按压假设有理论根据。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "Introduction P4 S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "与设备的身体交互可潜意识触发心理表征，可以被设计为积极行为改变。",
+      "rhetorical_function_cn": "把理论转化为可设计主张。",
+      "depends_on_cn": "体现认知理论。",
+      "sets_up_cn": "引出按压与轻点的设计。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "本文检验由力感应技术支持的按压和轻点两种触摸模式。",
+      "rhetorical_function_cn": "给出核心设计对象。",
+      "depends_on_cn": "理论命题需要具体操作。",
+      "sets_up_cn": "说明力感应技术的可行性。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "Introduction P5 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "压力感应屏、触控板、特斯拉中控等已普遍支持力度检测。",
+      "rhetorical_function_cn": "说明设计构思不是空想，而是有现实技术基础。",
+      "depends_on_cn": "需要技术可行性证据。",
+      "sets_up_cn": "为实践意义提供支撑。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 25,
+      "section": "Introduction",
+      "locator": "Introduction P6 S1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "人在日常生活中经常用力去实现目标，如握拳、投入体力追求想要的东西。",
+      "rhetorical_function_cn": "建立用力与目标趋近的经验基础。",
+      "depends_on_cn": "体现认知需要身体经验作为来源。",
+      "sets_up_cn": "推出用力—趋近动机联结。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 26,
+      "section": "Introduction",
+      "locator": "Introduction P6 S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "这些生活经验促使用力与强烈趋近动机形成身体—心智联结。",
+      "rhetorical_function_cn": "解释按压为何有心理效应。",
+      "depends_on_cn": "日常用力经验的反复出现。",
+      "sets_up_cn": "支撑按压增强自我调节的假设。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 27,
+      "section": "Introduction",
+      "locator": "Introduction P6 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究因而考察触摸模式是否影响健康决策中的自我调节。",
+      "rhetorical_function_cn": "把机制推理收束为可检验问题。",
+      "depends_on_cn": "用力—趋近动机联结。",
+      "sets_up_cn": "随后强调本研究的新颖性。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 28,
+      "section": "Introduction",
+      "locator": "Introduction P6 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "据作者所知，这是首个检验移动设备交互中身体动作对决策和健康行为体现影响的研究。",
+      "rhetorical_function_cn": "声明新颖性。",
+      "depends_on_cn": "此前力感应交互集中于可用性。",
+      "sets_up_cn": "为后文贡献讨论做早期定位。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 29,
+      "section": "Introduction",
+      "locator": "Introduction P7 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "体现效应如何解释和使用取决于个体已有知识、态度和信念。",
+      "rhetorical_function_cn": "提出效应可能非普遍，需要边界条件。",
+      "depends_on_cn": "体现认知理论的个体差异假设。",
+      "sets_up_cn": "引入健康知识与健康定向两个调节变量。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 30,
+      "section": "Introduction",
+      "locator": "Introduction P7 S2-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "健康干预效果常受健康知识和健康相关调节定向影响。",
+      "rhetorical_function_cn": "从已有文献中找调节变量。",
+      "depends_on_cn": "体现效应受个体差异影响。",
+      "sets_up_cn": "为H2a和H2b提供理论根据。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 31,
+      "section": "Introduction",
+      "locator": "Introduction P7 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "识别这些调节因素能加深对触摸模式设计条件和体现意义推断的理解。",
+      "rhetorical_function_cn": "将调节变量上升为理论贡献。",
+      "depends_on_cn": "调节变量已确定。",
+      "sets_up_cn": "预告三实验的排列。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 32,
+      "section": "Introduction",
+      "locator": "Introduction P8 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study 1聚焦饮食情境中的健康饮品选择与健康知识调节。",
+      "rhetorical_function_cn": "预告第一个实验。",
+      "depends_on_cn": "研究问题与变量已经提出。",
+      "sets_up_cn": "为Study 2和3安排证据累积路径。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 33,
+      "section": "Introduction",
+      "locator": "Introduction P8 S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study 2在健身应用情境中检验运动目标与运动量，并以健康定向为调节变量。",
+      "rhetorical_function_cn": "预告第二个实验及其新增贡献。",
+      "depends_on_cn": "Study 1的结果需复制。",
+      "sets_up_cn": "为机制研究留下缺口。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 34,
+      "section": "Introduction",
+      "locator": "Introduction P8 S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study 3在卫生教育情境中检验遵守行为，并加入长按对照和中介分析。",
+      "rhetorical_function_cn": "预告第三个实验的机制与替代解释功能。",
+      "depends_on_cn": "前两个实验未检验机制。",
+      "sets_up_cn": "说明研究路线图。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 35,
+      "section": "Section 2.1",
+      "locator": "2.1 first paragraph",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "数字健康干预基于多种健康行为理论，通过网站、短信、应用等显性工具促进健康行为。",
+      "rhetorical_function_cn": "概括显性干预研究。",
+      "depends_on_cn": "引言提出的移动健康趋势。",
+      "sets_up_cn": "随后讨论其局限。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 36,
+      "section": "Section 2.1",
+      "locator": "2.1 second paragraph",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "显性干预不总导致实际行为改变，甚至可能带来厌烦、抗拒和内在动机削弱。",
+      "rhetorical_function_cn": "压缩显性干预文献的不足。",
+      "depends_on_cn": "上一段的显性干预类型。",
+      "sets_up_cn": "引出内隐干预/助推。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 37,
+      "section": "Section 2.1",
+      "locator": "2.1 third paragraph",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "心理学和行为经济学认为外围、偶然线索可激活既有认知路径，从而内隐助推行为。",
+      "rhetorical_function_cn": "引入内隐干预的理论资源。",
+      "depends_on_cn": "显性干预局限。",
+      "sets_up_cn": "为触摸模式作为内隐线索提供根据。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 38,
+      "section": "Section 2.1",
+      "locator": "2.1 fourth paragraph",
+      "move_code": "GAP",
+      "paraphrase_cn": "很少有实证研究考察数字技术如何被用于这种内隐干预。",
+      "rhetorical_function_cn": "建立文献空白。",
+      "depends_on_cn": "内隐干预有理论但缺数字化证据。",
+      "sets_up_cn": "把本文定位为填补该缺口。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 39,
+      "section": "Section 2.1",
+      "locator": "2.1 fifth paragraph",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "既然显性干预效果有限，研究触摸模式这一内隐干预能补充数字健康干预文献。",
+      "rhetorical_function_cn": "解释缺口为什么值得研究。",
+      "depends_on_cn": "数字健康干预需要新路径。",
+      "sets_up_cn": "转入自我调节概念。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 40,
+      "section": "Section 2.2",
+      "locator": "2.2 first paragraph",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "健康行为通常困难甚至痛苦，因此人们难以持续坚持。",
+      "rhetorical_function_cn": "说明为何需要自我调节。",
+      "depends_on_cn": "前文健康行为问题。",
+      "sets_up_cn": "引入自我调节定义。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 41,
+      "section": "Section 2.2",
+      "locator": "2.2 second paragraph",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "自我调节是根据标准和目标有意识改变思想、情绪、冲动和行为的过程。",
+      "rhetorical_function_cn": "给出核心构念定义。",
+      "depends_on_cn": "健康行为需要调节。",
+      "sets_up_cn": "说明自我调节包括目标设定、计划、执行和维持等动态活动。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 42,
+      "section": "Section 2.2",
+      "locator": "2.2 third paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "长期提升自我控制能力困难，但可以通过临时增强动机资源来诱导自我调节。",
+      "rhetorical_function_cn": "建立可干预窗口。",
+      "depends_on_cn": "自我控制能力难以快速改变。",
+      "sets_up_cn": "支持利用外部刺激激活动机的研究思路。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 43,
+      "section": "Section 2.2",
+      "locator": "2.2 fourth paragraph",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "因此，研究触摸模式是否能通过激发趋近动机内隐增强自我调节。",
+      "rhetorical_function_cn": "将自我调节文献与本文设计连接。",
+      "depends_on_cn": "动机增强自我调节的机制。",
+      "sets_up_cn": "进入体现认知文献。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 44,
+      "section": "Section 2.3",
+      "locator": "2.3 first paragraph",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "体现认知研究展示物理温暖、手臂屈伸、洗手等身体状态会影响社会判断和决策。",
+      "rhetorical_function_cn": "用经典证据说明身体状态影响认知。",
+      "depends_on_cn": "需要理论资源解释触摸手势。",
+      "sets_up_cn": "解释身体—心智联结的机制。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 45,
+      "section": "Section 2.3",
+      "locator": "2.3 second paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "身体互动会激活过去经验的多模态记忆，并自动触发身体—认知联结。",
+      "rhetorical_function_cn": "说明体现效应如何产生。",
+      "depends_on_cn": "体现认知经典证据。",
+      "sets_up_cn": "为按压触发趋近动机提供机制推理。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 46,
+      "section": "Section 2.3",
+      "locator": "2.3 third paragraph",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "体现效应通常细微，并且取决于个体是否主动发起动作以及环境意义。",
+      "rhetorical_function_cn": "说明体现效应的适用条件。",
+      "depends_on_cn": "身体—心智联结的自动激活。",
+      "sets_up_cn": "为本文关注主动使用健康应用的环境做限定。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 47,
+      "section": "Section 2.3",
+      "locator": "2.3 fourth paragraph",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "个体已有知识和态度会影响其对体现信息的解释，如孤独消费者更受拥抱体现信号影响。",
+      "rhetorical_function_cn": "提供个体差异调节的理论证据。",
+      "depends_on_cn": "体现效应不是无条件的。",
+      "sets_up_cn": "支持健康知识与健康定向作为调节变量。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 48,
+      "section": "Section 2.3",
+      "locator": "2.3 fifth paragraph",
+      "move_code": "GAP",
+      "paraphrase_cn": "HCI以往主要用身体—心智关联提升可用性，力感应交互对决策和后续行为的影响仍未被探索。",
+      "rhetorical_function_cn": "建立具体研究缺口。",
+      "depends_on_cn": "HCI体现交互的现有焦点。",
+      "sets_up_cn": "引出本文假设和实验。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 49,
+      "section": "Hypothesis Development",
+      "locator": "3.1 first paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "日常生活中反复用力与主动追求目标相关，人们会用‘push yourself harder’鼓励自己。",
+      "rhetorical_function_cn": "建立用力动作与趋近动机的经验联结。",
+      "depends_on_cn": "体现认知理论、力动力学。",
+      "sets_up_cn": "推导H1。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 50,
+      "section": "Hypothesis Development",
+      "locator": "3.1 second paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "主动执行用力会潜意识唤起过去追求目标的记忆，激活趋近动机。",
+      "rhetorical_function_cn": "把经验联结变成因果机制。",
+      "depends_on_cn": "身体动作激活记忆。",
+      "sets_up_cn": "使按压影响行为可解释。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 51,
+      "section": "Hypothesis Development",
+      "locator": "3.1 third paragraph",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "提出H1：按压相比轻点增强健康目标追求中的自我调节。",
+      "rhetorical_function_cn": "把理论推理转化为可检验命题。",
+      "depends_on_cn": "前三段的机制推理。",
+      "sets_up_cn": "用于三个实验的主效应检验。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 52,
+      "section": "Hypothesis Development",
+      "locator": "3.2.1 first paragraph",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "健康知识高的人更了解健康后果，健康目标更可及，因而更易受健康行为助推影响。",
+      "rhetorical_function_cn": "给出健康知识调节方向的理由。",
+      "depends_on_cn": "体现信息依赖已有认知。",
+      "sets_up_cn": "提出H2a。",
+      "evidence_pointer": "Section 3.2.1"
+    },
+    {
+      "order": 53,
+      "section": "Hypothesis Development",
+      "locator": "3.2.1 second paragraph",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "提出H2a：按压增强自我调节的效应在高健康知识用户中更强。",
+      "rhetorical_function_cn": "把调节论证变成可检验命题。",
+      "depends_on_cn": "健康知识影响健康目标可及性。",
+      "sets_up_cn": "Study 1检验健康知识调节。",
+      "evidence_pointer": "Section 3.2.1"
+    },
+    {
+      "order": 54,
+      "section": "Hypothesis Development",
+      "locator": "3.2.2 first paragraph",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "引入调节定向理论，区分促进定向与预防定向。",
+      "rhetorical_function_cn": "为第二个调节变量提供理论框架。",
+      "depends_on_cn": "已有调节定向研究。",
+      "sets_up_cn": "推导健康定向如何调节效应。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 55,
+      "section": "Hypothesis Development",
+      "locator": "3.2.2 second paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "促进定向用户渴望改善健康，按压激活的趋近动机与其原有态度一致，因此更愿意采取健康行为。",
+      "rhetorical_function_cn": "解释促进定向为何增强效应。",
+      "depends_on_cn": "调节定向理论与身体体现信息一致。",
+      "sets_up_cn": "支撑H2b。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 56,
+      "section": "Hypothesis Development",
+      "locator": "3.2.2 third paragraph",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "预防定向用户强调避免负面结果，具有回避倾向，因此按压的主动趋近信号意义较低。",
+      "rhetorical_function_cn": "解释预防定向为何效应较弱。",
+      "depends_on_cn": "调节定向理论。",
+      "sets_up_cn": "形成H2b的对照假设。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 57,
+      "section": "Hypothesis Development",
+      "locator": "3.2.2 fourth paragraph",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "提出H2b：按压增强自我调节的效应在促进型健康定向用户中更强。",
+      "rhetorical_function_cn": "把调节论证转化为假设。",
+      "depends_on_cn": "促进/预防定向对体现信息的解读。",
+      "sets_up_cn": "Study 2的操纵与检验。",
+      "evidence_pointer": "Section 3.2.2"
+    },
+    {
+      "order": 58,
+      "section": "Hypothesis Development",
+      "locator": "3.2.2 final summary",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "预告三个实验：Study 1饮食、Study 2健身、Study 3卫生教育并检验机制。",
+      "rhetorical_function_cn": "把假设连接到证据计划。",
+      "depends_on_cn": "H1、H2a、H2b均已提出。",
+      "sets_up_cn": "导引出实验方法部分。",
+      "evidence_pointer": "Section 3.2.2 end"
+    },
+    {
+      "order": 59,
+      "section": "Study 1",
+      "locator": "Section 4 opening",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "饮食选择需要在健康与美味之间权衡，因而适合作为自我调节情境。",
+      "rhetorical_function_cn": "为实验情境选择提供理论理由。",
+      "depends_on_cn": "自我调节定义。",
+      "sets_up_cn": "定义意志力和健康选择作为因变量。",
+      "evidence_pointer": "Section 4 opening"
+    },
+    {
+      "order": 60,
+      "section": "Study 1",
+      "locator": "Section 4.1 procedure paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "参与者需用按压或轻点来预览饮品信息和查看详情，按压需高于阈值。",
+      "rhetorical_function_cn": "描述具体设计操纵。",
+      "depends_on_cn": "核心自变量是触摸模式。",
+      "sets_up_cn": "为操纵检验和结果分析提供基础。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 61,
+      "section": "Study 1",
+      "locator": "Section 4.1 pretest paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "预测试证明健康与美味饮品只在健康感和美味感上有差异，总体态度和熟悉度无差异。",
+      "rhetorical_function_cn": "确保材料确实制造健康—味觉权衡。",
+      "depends_on_cn": "需要有效刺激。",
+      "sets_up_cn": "支持饮品选择结果的有效解释。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 62,
+      "section": "Study 1",
+      "locator": "Section 4.2.2 manipulation check",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组报告更高用力，但感知可用性无显著下降。",
+      "rhetorical_function_cn": "验证交互操纵有效且不损害体验。",
+      "depends_on_cn": "按压/轻点的操作定义。",
+      "sets_up_cn": "使后续意志力和选择差异可归因于触摸模式。",
+      "evidence_pointer": "Section 4.2.2"
+    },
+    {
+      "order": 63,
+      "section": "Study 1",
+      "locator": "Section 4.2.3 willpower results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组比轻点组意志力显著更高；健康知识与触摸模式交互边际显著。",
+      "rhetorical_function_cn": "报告主效应和调节的主要统计结果。",
+      "depends_on_cn": "ANCOVA模型。",
+      "sets_up_cn": "spotlight分析进一步解释调节方向。",
+      "evidence_pointer": "Section 4.2.3 and Table 2"
+    },
+    {
+      "order": 64,
+      "section": "Study 1",
+      "locator": "Section 4.2.3 spotlight analysis",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高健康知识者中按压显著提升意志力，低健康知识者中无显著差异。",
+      "rhetorical_function_cn": "解释交互模式。",
+      "depends_on_cn": "触摸模式×健康知识交互。",
+      "sets_up_cn": "为H2a提供部分支持。",
+      "evidence_pointer": "Figure 2"
+    },
+    {
+      "order": 65,
+      "section": "Study 1",
+      "locator": "Section 4.2.3 choice results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组选择健康饮品的比率显著更高，优势比约为轻点组的2.82倍。",
+      "rhetorical_function_cn": "用客观行为强化主效应证据。",
+      "depends_on_cn": "二元logistic回归。",
+      "sets_up_cn": "说明触摸模式不只影响主观意志力，也影响真实选择。",
+      "evidence_pointer": "Figure 3 and Table 3"
+    },
+    {
+      "order": 66,
+      "section": "Study 1",
+      "locator": "Section 4.3 discussion",
+      "move_code": "RESULT",
+      "paraphrase_cn": "作者解释意志力上有交互而选择上无交互，可能是因为行为指标不如主观指标敏感。",
+      "rhetorical_function_cn": "处理不一致结果，保护H2a解释。",
+      "depends_on_cn": "意志力与选择的统计结果。",
+      "sets_up_cn": "让读者接受部分调节证据。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 67,
+      "section": "Study 2",
+      "locator": "Section 5 opening",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "为增强可推广性并补齐Study 1不足，Study 2在运动情境中复制并直接操纵调节变量。",
+      "rhetorical_function_cn": "解释为什么需要第二个实验。",
+      "depends_on_cn": "Study 1局限。",
+      "sets_up_cn": "介绍Study 2的目的与指标。",
+      "evidence_pointer": "Section 5 opening"
+    },
+    {
+      "order": 68,
+      "section": "Study 2",
+      "locator": "Section 5.1 self-report justification",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "未使用客观运动追踪是因为观察者效应和健身房运动多样性导致难以准确记录。",
+      "rhetorical_function_cn": "说明为何用自报运动量。",
+      "depends_on_cn": "需要权衡内部效度与外部自然性。",
+      "sets_up_cn": "减少读者对自报指标的质疑。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 69,
+      "section": "Study 2",
+      "locator": "Section 5.2.3 goal results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组运动目标显著更高，触摸模式与健康定向交互显著，促进定向下效应显著。",
+      "rhetorical_function_cn": "报告运动目标的统计结果。",
+      "depends_on_cn": "2×2 ANOVA。",
+      "sets_up_cn": "支撑H1和H2b在计划层面的证据。",
+      "evidence_pointer": "Table 6 and Figure 4"
+    },
+    {
+      "order": 70,
+      "section": "Study 2",
+      "locator": "Section 5.2.3 amount results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "运动量主效应和交互均边际显著，促进定向下按压组运动更多。",
+      "rhetorical_function_cn": "报告运动量结果。",
+      "depends_on_cn": "ANOVA和简单效应分析。",
+      "sets_up_cn": "说明效应在实际运动层面有较弱但一致的证据。",
+      "evidence_pointer": "Table 6 and Figure 5"
+    },
+    {
+      "order": 71,
+      "section": "Study 2",
+      "locator": "Section 5.3 discussion",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "前两项研究显示按压能增强自我调节，且受健康知识与健康定向调节，但机制仍未检验。",
+      "rhetorical_function_cn": "总结前两个实验并制造机制缺口。",
+      "depends_on_cn": "Study 1和2结果。",
+      "sets_up_cn": "引出Study 3。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 72,
+      "section": "Study 3",
+      "locator": "Section 6 opening",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "Study 3的目标是获取按压如何增强自我调节的机制证据。",
+      "rhetorical_function_cn": "明确第三个实验的核心任务。",
+      "depends_on_cn": "前两个实验缺失机制检验。",
+      "sets_up_cn": "引入趋近动机中介测量。",
+      "evidence_pointer": "Section 6 opening"
+    },
+    {
+      "order": 73,
+      "section": "Study 3",
+      "locator": "Section 6 design holding condition",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "加入长按条件，以排除接触时长对按压效应的替代解释。",
+      "rhetorical_function_cn": "为关键替代解释提供直接对照。",
+      "depends_on_cn": "按压可能伴随更长接触时间。",
+      "sets_up_cn": "使后续force不是duration的结论成立。",
+      "evidence_pointer": "Section 6 opening"
+    },
+    {
+      "order": 74,
+      "section": "Study 3",
+      "locator": "Section 6.1 procedure",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "任务1中参与者在卫生教育应用中用不同触摸方式表达对卫生实践的承诺；任务2中观察四项不消毒、握手、摸脸、社交距离违规。",
+      "rhetorical_function_cn": "具体说明如何操纵触摸模式并测量客观违规行为。",
+      "depends_on_cn": "需要客观自我调节指标。",
+      "sets_up_cn": "为ANOVA和中介分析提供数据。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 75,
+      "section": "Study 3",
+      "locator": "Section 6.2.3 adherence result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组遵守决心显著高于轻点组和长按组，轻点组与长按组无显著差异。",
+      "rhetorical_function_cn": "报告主观指标结果并排除接触时长。",
+      "depends_on_cn": "三种条件ANOVA与Tukey HSD。",
+      "sets_up_cn": "支持H1在卫生教育情境成立。",
+      "evidence_pointer": "Table 8 and Figure 6"
+    },
+    {
+      "order": 76,
+      "section": "Study 3",
+      "locator": "Section 6.2.3 lapses result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "按压组实际卫生违规显著少于轻点组和长按组，轻点与长按无显著差异。",
+      "rhetorical_function_cn": "报告客观指标结果。",
+      "depends_on_cn": "观察者编码的违规得分。",
+      "sets_up_cn": "强化按压效应不限于自我报告。",
+      "evidence_pointer": "Table 9 and Figure 7"
+    },
+    {
+      "order": 77,
+      "section": "Study 3",
+      "locator": "Section 6.2.4 mediation result",
+      "move_code": "RESULT",
+      "paraphrase_cn": "趋近动机部分中介遵守决心，并完全中介卫生违规。",
+      "rhetorical_function_cn": "直接检验理论机制。",
+      "depends_on_cn": "Preacher-Hayes中介程序。",
+      "sets_up_cn": "为理论解释提供证据。",
+      "evidence_pointer": "Section 6.2.4 and Online Appendix III"
+    },
+    {
+      "order": 78,
+      "section": "Study 3",
+      "locator": "Section 6.3 discussion",
+      "move_code": "RESULT",
+      "paraphrase_cn": "长按与轻点无差别，说明真正驱动效应的是用力而非接触时长。",
+      "rhetorical_function_cn": "整合对照结果并排除替代解释。",
+      "depends_on_cn": "Study 3三组对比。",
+      "sets_up_cn": "为综合讨论提供机制结论。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 79,
+      "section": "General Discussion",
+      "locator": "General Discussion first paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "三项实验汇聚显示按压在饮食、运动和卫生情境中都能增强自我调节。",
+      "rhetorical_function_cn": "对全部结果做总体概括。",
+      "depends_on_cn": "三个实验的数据。",
+      "sets_up_cn": "进入理论与实用贡献。",
+      "evidence_pointer": "Section 7 opening"
+    },
+    {
+      "order": 80,
+      "section": "General Discussion",
+      "locator": "Section 7.1 first paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "对医疗健康IT的贡献是显示力感应交互可作为内隐健康干预，不再依赖用户有意识的注意。",
+      "rhetorical_function_cn": "把结果提升为理论贡献。",
+      "depends_on_cn": "显性干预局限与三实验结果。",
+      "sets_up_cn": "建议将力感应设计拓展到更多场景。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 81,
+      "section": "General Discussion",
+      "locator": "Section 7.1 second paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "对HCI的贡献是将体现认知从可用性扩展到用户决策与行为影响，揭示触摸方式的心理学后果。",
+      "rhetorical_function_cn": "填补HCI只谈可用性的缺口。",
+      "depends_on_cn": "传统体现交互文献的可用性焦点。",
+      "sets_up_cn": "未来研究其他触摸手势。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 82,
+      "section": "General Discussion",
+      "locator": "Section 7.1 third paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "对体现认知理论的贡献是识别健康知识与健康定向作为体现效应发生的前提条件。",
+      "rhetorical_function_cn": "将调节变量上升为理论边界条件。",
+      "depends_on_cn": "已有体现认知关于意义依赖情境的呼吁。",
+      "sets_up_cn": "推进对体现意义条件性的理解。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 83,
+      "section": "General Discussion",
+      "locator": "Section 7.2 practical implications",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "建议数字健康产品设计者采用按压交互来促进自我调节，并通过行为分析和健康内容提升用户画像和效果。",
+      "rhetorical_function_cn": "把研究发现转化为可操作建议。",
+      "depends_on_cn": "三实验结论和调节变量。",
+      "sets_up_cn": "转向限制与未来研究。",
+      "evidence_pointer": "Section 7.2"
+    },
+    {
+      "order": 84,
+      "section": "General Discussion",
+      "locator": "Section 7.3 limitations",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "研究只观察短期自我调节，且可能不适用于需要大量深思的决策；其他环境和机制也待探索。",
+      "rhetorical_function_cn": "划定结论边界，提出未来方向。",
+      "depends_on_cn": "研究设计与证据范围。",
+      "sets_up_cn": "对全文作谨慎收束。",
+      "evidence_pointer": "Section 7.3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认显性数字健康干预的普遍性，再集中打击其“用户忽视/心理抗拒”的软肋；随后指出触摸交互虽有研究，但“不同触摸手势如何影响认知行为”未知；最后进一步缩小到“力感应交互只被用于可用性，未用于决策和健康行为”，并把调节视角缺失作为第二层缺口。这样从大到小逐层收口。",
+    "signposting_cn": "摘要给出完整路线；引言末段逐句预告三个Study；相关文献每节结尾用‘In summary’把文献拉回本文目的；假设发展末尾再次预告实验安排；Study 2结束时明确说未测机制，Study 3将解决。",
+    "transition_logic_cn": "每个Study开头都说明为何需要下一个Study：Study 1留下情境与调节操作问题→Study 2换情境、操纵调节变量；Study 2留下机制问题→Study 3测量中介并加长按对照；最后三实验汇聚进入讨论。",
+    "claim_evidence_rhythm_cn": "采用“假设—实验设计—操纵/信度—主结果—讨论”的稳定节奏；每个统计结果后面紧跟表格或图，并在同一段给出解释，避免证据与主张分离。",
+    "benchmark_narrative_cn": "轻点被定位为最自然、常见的操作基线；长按被塑造成一个“最严格”的对照，用来否定接触时长解释；健康定向使用促进/预防的框架化对照；预测试则确保饮品刺激在健康—美味间形成真实权衡。",
+    "theory_return_cn": "讨论部分没有停留在‘按压有效’这一结果，而是重新用体现认知说明为什么按压有效，并用健康知识与健康定向说明体现信息的意义依赖个体已有认知，从而把数据收编为对理论边界条件的支持。",
+    "contribution_positioning_cn": "贡献被放在三个坐标上：医疗健康IT中的内隐干预、HCI中的体现交互、体现认知理论中的调节机制。这样即使单个实验结果不大，也能在多个文献脉络中形成价值。",
+    "novelty_protection_cn": "不是只汇报一个显著主效应，而是通过三情境复制、操纵检验、长按对照、中介分析、调节变量和‘首次’定位，把‘按压更好’从一次性性能结果提升为有机制、有边界、可复用的设计知识。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实问题：先写背景，再写显性干预或现有做法失败，引出需要新机制。",
+        "research_job_cn": "找到足够可靠的文献证据，证明现有干预存在行为缺口或副作用。",
+        "required_evidence_cn": "显性干预低依从/心理抗拒/内在动机受损的已有研究。",
+        "transition_to_next_cn": "用‘因此需要内隐方式’过渡到研究目标。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入理论透镜，说明为什么某个具体交互细节能影响行为。",
+        "research_job_cn": "把理论命题落实到可操纵的身体动作/交互特征上。",
+        "required_evidence_cn": "理论经典证据和机制推理，证明动作与心理状态关联。",
+        "transition_to_next_cn": "用‘因此我们检验X与Y’进入假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "把理论翻译成设计差异：明确实验条件和可验证假设，并考虑替代解释。",
+        "research_job_cn": "设计实验应用，确定力度阈值、交互路径、操纵检验和可能的对照条件。",
+        "required_evidence_cn": "预测试或试点证明材料有效、操纵可感知、流程可用。",
+        "transition_to_next_cn": "以假设和实验概述结束，导引进入实验。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计多个情境和多个因变量，依次覆盖主观和客观指标，先复制主效应。",
+        "research_job_cn": "在真实场景中随机分配，采集选择、目标、行为或观察数据。",
+        "required_evidence_cn": "随机化、操纵检验、信度效度检验、主要统计结果。",
+        "transition_to_next_cn": "用‘第一个研究留下什么问题，第二个研究如何解决’进行阶段转换。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "在后续研究中加入机制测量和替代解释对照，把主效应升级为因果机制故事。",
+        "research_job_cn": "测量中介变量，加入能排除竞争解释的额外条件。",
+        "required_evidence_cn": "中介分析显著、替代条件不显著或与基线无差异。",
+        "transition_to_next_cn": "用‘三研究汇聚’进入综合讨论。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "返回理论缺口，声明贡献，并限定边界与未来研究。",
+        "research_job_cn": "把结果整理成对文献的增量、设计原则和可适用范围。",
+        "required_evidence_cn": "具有跨研究一致性的核心发现；对未能检验的边界保持诚实。",
+        "transition_to_next_cn": "结束全文。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "从显性干预局限转向内隐机制的缺口构建方法",
+      "用体现认知/身体—心智联结把交互手势变成有意义的设计变量",
+      "通过多个现场情境和多个因变量让单一效果看起来更稳健",
+      "晚期研究加入中介变量和替代解释对照来保护机制主张",
+      "把调节变量上升为理论边界条件"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实健身房招募并等待参与者完成运动，成本高、场地依赖强",
+      "卫生教育实验中需要训练两名管理员并设计非介入式的行为观察，耗时耗力",
+      "实验手机应用需实现按压阈值，并与苹果等平台标准保持一致",
+      "研究地处疫情背景，卫生违规的观察情境具有较强时代特殊性"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要在没有操纵检验和随机化的情况下声称某种手势有体现效应",
+      "不要仅凭一个边际显著结果宣称得到强支持，作者在H2a和运动量上其实依赖较弱证据",
+      "不要不加控制地推广到长期行为或高深思决策，本文自己也承认该边界",
+      "不要只复制“press/tap”措辞而忽略机制和替代解释实验"
+    ],
+    "single_best_description_of_the_routine_cn": "找到一个显性干预解决不好的健康行为问题，用一个身体动作理论把按压力度转化为可设计的交互差异，再通过三个现场实验依次证明主效应、边界条件和心理机制。"
+  },
+  "confidence": 0.88,
+  "limitations_cn": "可读取全文文本，但无法访问Online Appendix I/II/III中的截图和补充统计，位置证据只能使用章节、段落、图、表而非精确页码；文中少量统计符号和自由度存在排版瑕疵；所有判断基于文本本身，未假设正文没有报告的内容。",
+  "usage": {
+    "prompt_tokens": 31637,
+    "completion_tokens": 32029,
+    "total_tokens": 63666,
+    "prompt_cache_hit_tokens": 31616,
+    "prompt_cache_miss_tokens": 21
+  }
+}

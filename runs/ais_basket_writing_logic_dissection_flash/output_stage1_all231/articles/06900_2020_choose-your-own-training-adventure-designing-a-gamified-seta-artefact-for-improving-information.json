@@ -1,0 +1,1083 @@
+{
+  "record_id": "6900",
+  "source_file": "06900_2020_choose-your-own-training-adventure-designing-a-gamified-seta-artefact-for-improving-information.md",
+  "title": "Choose your own training adventure: designing a gamified SETA artefact for improving information security and privacy through interactive storytelling",
+  "authors": "Ersin Dincelli; InduShobha Chengalur-Smith",
+  "year": "2020",
+  "journal": "European Journal of Information Systems",
+  "doi": "10.1080/0960085x.2020.1797546",
+  "fulltext_chars": 105023,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "cybersecurity_fraud_and_compliance",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:40.702425+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何设计并评价一个基于交互叙事的游戏化SETA工具，使其既能减少员工在社交媒体上的在线自我披露（OSD）行为并改变其前因（态度和意图），又能提高培训的可记忆性和用户体验？",
+    "artifact_and_design_cn": "游戏化SETA工具“Choose Your Own Training Adventure”：采用“选择你自己的冒险”（CYOA）式交互叙事，围绕主角Jamie展开故事，包含5种安全威胁（钓鱼、鱼叉式钓鱼、入室盗窃、密码破解、身份盗窃），5个背景场景、13个决策点（41个选项）、8个后果场景和5个简报场景。工具通过三步实现目标：识别参与者最易受的威胁，进行后果简报，让参与者重新评估之前的决定以促进行为改变。共有文本版和视觉版两种格式，两者在内容、结构和决策点上保持一致。",
+    "objective_outcomes_cn": "通过纵向随机对照实验（1,718名美国员工，mTurk招募），比较文本版、视觉版、传统安全警告邮件和无干预控制组。结果显示：两种游戏化干预在短期都能有效减少OSD、改变意图和行为态度；长期来看，文本版在减少OSD和改变意图上持续优于邮件；视觉版在可记忆性（回忆和再整合）和用户体验（满意度、易学性）方面优于文本版和邮件；情感态度在所有干预中均未改变。",
+    "core_contribution_cn": "作者声称的贡献包括：1）通过设计科学研究（DSR）方法为游戏化SETA工具开发了设计原则、可测试命题和现实绩效评价指标；2）为SETA文献提供了威胁、保护和脆弱性制品的实证测试；3）揭示交互性和即时情境化反馈比额外视觉线索对行为改变更重要；4）回应了游戏化研究和SETA评价中对设计科学方法和纵向随机对照实验的呼吁。",
+    "whole_argument_in_one_paragraph_cn": "论证链：OSD是个人和组织面临的主要安全漏洞，现有SETA干预往往一刀切且未情境化，而隐私又与安全不同，需要情境化的培训。先前游戏化SET研究结果不一致，且缺乏对文本/视觉格式的系统比较。作者基于学习设计原则（story-based agent和reflection）、游戏元素分类法和媒体丰富度相关文献，构建了CYOA式交互叙事SETA工具，并将文本和视觉两种格式设计为内容等价。通过纵向RCT，作者将两种工具与无干预控制组和内容等价的安全邮件组比较，同时测量工具性结果（OSD、意图、态度的短期和长期变化）和体验性结果（可记忆性、用户体验）。结果表明，游戏化干预在改变意图和行为态度方面优于邮件，文本版在长期减少OSD上优于邮件；视觉版在可记忆性和用户体验上优于文本和邮件，但工具性结果上不如文本。基于这些发现，作者提出设计原则：即时、情境化的反馈是行为改变的关键，交互性比媒体格式更重要。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "论文明确采用设计科学研究（DSR）方法，从文献中提取设计要求，迭代构建SETA制品，并通过纵向随机对照实验评价其效用，最终贡献设计原则和设计知识。整个研究遵循“需求→构建→评价→设计知识”的DSR范式。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "写作弧线从现实问题（OSD风险）和理论缺口出发，从学习理论和游戏化文献中抽取设计要求（story-based agent、reflection、游戏元素），构建CYOA式SETA制品，用纵向RCT评价，最终在讨论中提炼出可复用的设计原则（即时反馈比视觉线索更重要）。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "研究由理论假设开发、制品设计构建、测量工具开发与验证、纵向随机对照实验、数据分析与假设检验五个阶段累积而成。理论阶段转化为设计需求，设计阶段生成制品，测量阶段保证评估工具有效，实验阶段收集数据，分析阶段完成假设检验并支持设计原则提炼。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "文献综述与假设开发",
+        "question_cn": "基于OSD、SETA和游戏化文献，如何推导出游戏化SETA工具有效性的可检验假设？",
+        "inputs_and_setting_cn": "已有文献综述（OSD行为机制、SETA培训理论、游戏化设计框架）",
+        "designed_or_compared_object_cn": "概念层面的CYOA式交互叙事SETA工具及其文本/视觉格式变体",
+        "baseline_control_or_counterfactual_cn": "无（理论开发阶段）",
+        "objective_metrics": [],
+        "analysis_method_cn": "文献综合和逻辑推理",
+        "main_result_cn": "提出H1-H4四个假设，分别针对工具性结果（态度、意图、OSD）和体验性结果（可记忆性、用户体验），以及文本与视觉格式的优劣比较。",
+        "argumentative_role_cn": "为后续制品构建和实验评价提供理论基础，并将理论转化为可检验主张。",
+        "remaining_uncertainty_cn": "假设尚未被实证检验，制品尚未存在。",
+        "link_to_next_phase_cn": "假设中的设计要求需要具体化，进入制品设计构建阶段。",
+        "evidence_pointers": [
+          "Section 2-3",
+          "Hypotheses H1-H4"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "SETA制品设计构建",
+        "question_cn": "如何利用学习设计原则和游戏元素构建一个可用的CYOA式SETA工具？",
+        "inputs_and_setting_cn": "信念诱发过程、文献与新闻事件回顾、研究者与职业漫画家",
+        "designed_or_compared_object_cn": "文本版和视觉版CYOA故事线，包含决策点、后果场景、简报场景",
+        "baseline_control_or_counterfactual_cn": "无（构建阶段）",
+        "objective_metrics": [],
+        "analysis_method_cn": "迭代和增量设计，多次试点测试",
+        "main_result_cn": "完成最终故事线：5个背景场景、13个决策点、8个后果场景、5个简报场景；文本版脚本遵循三幕结构；视觉版由漫画家绘制，两者内容高度一致。",
+        "argumentative_role_cn": "产生SETA制品的两个变体，作为后续实验的干预材料。",
+        "remaining_uncertainty_cn": "试点测试规模有限，尚不知在大型样本中的有效性。",
+        "link_to_next_phase_cn": "制品需要配套的测量工具来评价其效果，进入测量开发阶段。",
+        "evidence_pointers": [
+          "Section 4",
+          "Appendix B and C",
+          "Figure 1 and 2",
+          "www.seta.games/cyoa"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "测量工具开发与验证",
+        "question_cn": "如何可靠且有效地测量工具性和体验性结果？",
+        "inputs_and_setting_cn": "先前已验证的量表、专家小组、试点测试",
+        "designed_or_compared_object_cn": "态度（行为、认知、情感）、意图、OSD复合指数、实际OSD评分、可记忆性（回忆、识别、再整合）、用户体验（满意度、可用性、易学性）",
+        "baseline_control_or_counterfactual_cn": "无（测量开发阶段）",
+        "objective_metrics": [
+          "Cronbach's alpha",
+          "factor loadings",
+          "AVE",
+          "discriminant validity"
+        ],
+        "analysis_method_cn": "验证性因子分析、信度效度检验",
+        "main_result_cn": "所有构念在试点数据中展现良好的信度、收敛效度和区分效度；专家小组确认了测量内容的表面效度。",
+        "argumentative_role_cn": "确保后续实验测量的心理测量学质量，为结果可信度提供基础。",
+        "remaining_uncertainty_cn": "测量工具在正式大样本中的表现未知。",
+        "link_to_next_phase_cn": "测量工具准备就绪，可应用于纵向实验的问卷设计。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Appendix F and G",
+          "Tables F1-F3, G1, G3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "纵向随机对照实验",
+        "question_cn": "在纵向随机对照设计中，游戏化SETA工具（文本版和视觉版）与无干预和传统邮件相比，对工具性和体验性结果有何影响？",
+        "inputs_and_setting_cn": "1,718名通过mTurk招募的美国员工；三个时间点（t1基线，t2干预后立即，t3一个月后）；四种条件（控制、邮件、文本、视觉）",
+        "designed_or_compared_object_cn": "四种实验条件：无干预控制、传统安全警告邮件、文本CYOA、视觉CYOA",
+        "baseline_control_or_counterfactual_cn": "无干预控制组；内容等价的安全邮件组作为现有最佳实践基准",
+        "objective_metrics": [
+          "态度变化（行为、认知、情感）",
+          "意图变化",
+          "OSD复合指数变化",
+          "实际OSD（仅t1）",
+          "可记忆性（t3）",
+          "用户体验（t2）"
+        ],
+        "analysis_method_cn": "随机化检查（ANOVA）、短期和长期变化分数的ANOVA、post hoc比较（如Bonferroni）",
+        "main_result_cn": "两种游戏化干预在短期和长期均优于控制组；在意图和行为态度上优于邮件；文本版在长期减少OSD上优于邮件；视觉版在可记忆性和用户体验上优于文本版和邮件；情感态度无变化。",
+        "argumentative_role_cn": "为假设检验提供核心因果证据，并支持设计价值判断。",
+        "remaining_uncertainty_cn": "样本仅限美国；实际OSD只在t1测量；长期效果只追踪到一个月。",
+        "link_to_next_phase_cn": "实验数据需要正式统计分析来验证假设，进入数据分析阶段。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Tables 1-2",
+          "Appendix H"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "数据分析与假设检验",
+        "question_cn": "结果是否支持H1-H4？不同格式在不同结果维度上的差异是否统计显著？",
+        "inputs_and_setting_cn": "来自纵向实验的问卷数据、OSD评分、Facebook公开资料编码",
+        "designed_or_compared_object_cn": "四组间短期和长期变化分数；三组间体验性结果比较",
+        "baseline_control_or_counterfactual_cn": "控制组和邮件组作为比较基线",
+        "objective_metrics": [
+          "F统计量",
+          "p值",
+          "效应方向"
+        ],
+        "analysis_method_cn": "ANOVA、post hoc检验、心理测量评估（信度效度）",
+        "main_result_cn": "H1部分支持（a中行为态度支持、认知部分、情感不支持；b和c支持）；H2部分支持（回忆和再整合支持、识别不支持；满意度、可用性支持、易学性不支持）；H3c支持（文本优于视觉减少OSD）；H4部分支持（识别、再整合、易学性支持）。总体结论为交互性比格式更重要。",
+        "argumentative_role_cn": "完成假设检验，为讨论中的设计原则提供证据基础。",
+        "remaining_uncertainty_cn": "哪些机制导致态度和情感成分难以改变仍未完全解释；认知负荷未直接测量。",
+        "link_to_next_phase_cn": "进入讨论，解释结果并提炼设计知识。",
+        "evidence_pointers": [
+          "Section 6",
+          "Tables 3-6",
+          "Appendices I-J"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_INTRO",
+      "MECHANISM",
+      "LIMITATION",
+      "GAP",
+      "RQ_OR_OBJECTIVE",
+      "THEORY_PROPOSITION"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT",
+      "MECHANISM",
+      "BOUNDARY_CONDITION",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "学习设计原则：story-based agent和reflection (Sheng et al., 2007; Karjalainen & Siponen, 2011)",
+      "转变导向培训理论 (Karjalainen & Siponen, 2011)",
+      "游戏元素分类法 (Helms et al., 2015; Liu et al., 2017)",
+      "媒体丰富度理论 (Daft & Lengel, 1986)",
+      "认知负荷理论（间接引用 Jenkins et al., 2012; Mirkovski et al., 2019）",
+      "态度-意图-行为理论 (Ajzen & Fishbein, 1980; Kim & Hunter, 1993)",
+      "交互叙事和故事讲述理论 (Woodside, 2010; Kapp, 2012)",
+      "自我决定理论 (Deci & Ryan, 2000) 通过反馈和自主性",
+      "记忆研究（回忆、识别、再整合）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "理论不仅指导了制品设计，还通过假设直接规定了预期效果和格式比较。学习设计原则、游戏元素分类和媒体丰富度理论被转化为具体的制品特征（决策点、反馈、文本/视觉格式），并由随后实验直接检验。",
+    "translation_chain_cn": "转变导向培训要求连接学习者经验→情境化叙事→CYOA决策点→提供即时反馈→促进态度/行为改变。媒体丰富度理论认为视觉更生动但可能过载→设计文本和视觉两个变体→比较工具性与体验性结果。游戏元素分类选择进度、沟通（反馈）与规则→构成故事结构和交互机制。态度-意图理论指导选择工具性结果指标。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "转变导向培训通过与学习者经验连接、允许自我评估来改变态度和行为",
+        "mechanism_cn": "情境化叙事增强个人相关性和反思",
+        "design_requirement_cn": "故事线需包含参与者可识别的决策场景，并提供重新评估机会",
+        "artifact_choice_cn": "CYOA式故事线，包含13个决策点和后果简报后的重新评估环节",
+        "evaluated_contrast_cn": "游戏化干预 vs 控制组和邮件组",
+        "objective_result_cn": "意图、行为态度在短长期均有显著改善",
+        "evidence_pointers": [
+          "Section 3.1 H1",
+          "Section 6.1.1 Tables 3-4",
+          "Section 7 P3-P4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "游戏化反馈应提供关于学习进度、表现和能力的明确信息，促进承诺",
+        "mechanism_cn": "即时反馈增强自主性和能力感，支持自我评估",
+        "design_requirement_cn": "在决策点后提供后果简报，并引导回到误判点重新决策",
+        "artifact_choice_cn": "每个决策点后均有后果场景和简报场景，以及重新评估消息",
+        "evaluated_contrast_cn": "比较不同格式和邮件组的工具性结果",
+        "objective_result_cn": "两种游戏化干预均优于邮件组在改变意图和行为态度方面的效果",
+        "evidence_pointers": [
+          "Section 4.2 P5",
+          "Section 6.1.1",
+          "Section 7 P7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "游戏元素中进度、沟通（反馈和交互）和规则能增加动机并保持培训可管理",
+        "mechanism_cn": "进度提供外在+内在动机，反馈让用户看到行动影响，规则限制选择范围",
+        "design_requirement_cn": "故事线需包含明确的进度感，提供交互反馈，并界定玩家可选的行动规则",
+        "artifact_choice_cn": "三幕结构提供故事进度；41个选项衍生多个故事路径；角色和场景作为规则约束",
+        "evaluated_contrast_cn": "观察游戏化工具与邮件组在体验性结果上的差异",
+        "objective_result_cn": "游戏化干预在可用性上优于邮件，视觉在满意度上优于邮件",
+        "evidence_pointers": [
+          "Section 4.1 P4",
+          "Section 6.1.2 Table 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "视觉信息更生动、进入长时记忆且处理更快，但丰富媒体也可能导致认知过载",
+        "mechanism_cn": "视觉增强记忆和情感反应，但多通道信息会分散注意力并增加认知负荷",
+        "design_requirement_cn": "设计文本和视觉两种格式，保持内容和结构一致以隔离媒体格式效应",
+        "artifact_choice_cn": "文本脚本版本与漫画视觉版本；同一下三幕结构和决策点",
+        "evaluated_contrast_cn": "文本 vs 视觉在工具性结果和体验性结果的直接比较",
+        "objective_result_cn": "文本在长期减少OSD上优于视觉；视觉在回忆、再整合、识别、易学性上优于文本",
+        "evidence_pointers": [
+          "Section 3.2 H3-H4",
+          "Section 6.1 Tables 3-5",
+          "Section 7 P7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "态度是行为的前因，意图是行为的最强预测因子",
+        "mechanism_cn": "改变态度和意图可以中介行为改变",
+        "design_requirement_cn": "评价工具需要同时测量态度、意图和行为，而不仅仅是行为",
+        "artifact_choice_cn": "采用多维度态度测量（行为、认知、情感），意图量表和OSD复合指数 / 实际OSD验证",
+        "evaluated_contrast_cn": "比较干预组与对照组在这些构念上的变化分数",
+        "objective_result_cn": "行为态度和意图显著改变，情感态度未改变，OSD减少",
+        "evidence_pointers": [
+          "Section 2.2",
+          "Section 5.1 P2",
+          "Section 6.1.1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "纵向随机对照实验",
+      "心理测量验证（信度、收敛效度、区分效度）",
+      "实际OSD验证（复合指标与真实Facebook公开数据相关）",
+      "短期与长期效应检验（t2和t3）",
+      "随机化检查"
+    ],
+    "why_these_evaluations_cn": "为了同时建立干预的有效性和吸引力，需要比较游戏化工具与无干预和现有政策（邮件）的差异；纵向设计用于判断效果持久性，避免只测短期变化；心理测量验证确保测量工具可信；实际OSD验证为自报指标提供效标效度；随机化检查保证组间可比。",
+    "benchmark_and_contrast_chain_cn": "以无干预控制组作为基线，排除自然变化；传统安全邮件作为现有最佳实践基准，且邮件内容与游戏化工具内容等价，使得增量效应可归因于游戏化设计；文本与视觉之间的直接比较，用于区分媒体丰富度与交互性的作用。四组设计形成了一个二乘二逻辑：有无游戏化 × 文本/视觉格式。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "CYOA游戏化SETA工具能有效改变意图、行为态度并减少OSD",
+        "evidence_cn": "短期和长期ANOVA显示游戏化组优于控制组，在意图和行为态度上优于邮件组（Tables 3-4）",
+        "supported_cn": "是"
+      },
+      {
+        "claim_cn": "文本版在工具性结果上优于视觉版（尤其是长期OSD减少）",
+        "evidence_cn": "Table 6显示H3c被支持，Text is better than visual in short- and long-term OSD",
+        "supported_cn": "是"
+      },
+      {
+        "claim_cn": "视觉版在可记忆性和用户体验上优于文本版",
+        "evidence_cn": "Table 5显示视觉在识别、再整合和易学性上优于文本；满意度上无显著差异",
+        "supported_cn": "部分支持"
+      },
+      {
+        "claim_cn": "即时情境化反馈比视觉线索更能驱动行为改变",
+        "evidence_cn": "讨论中基于结果推断：两种格式都含有反馈机制，因此都优于邮件；视觉优势主要体现在体验性结果上",
+        "supported_cn": "推断性支持（没有直接操纵反馈）"
+      },
+      {
+        "claim_cn": "干预效果在一个月后部分持续",
+        "evidence_cn": "t3长期结果显示OSD、意图和行为态度仍有显著差异，但认知和情感态度消退",
+        "supported_cn": "是"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配、内容等价的对照组、隐含基线（t1测量）、测量模型验证（信度、效度）、随机化检查、在t2测用户体验以避免回忆偏差、t3测可记忆性以避免近因效应。",
+    "external_validity_strategy_cn": "采用mTurk招募多样本（1718人，包含不同年龄性别）、使用实际Facebook公开数据验证OSD代理指标、讨论文化局限性和特定人群适用性。",
+    "what_is_not_actually_tested_cn": "认知负荷机制未被直接测量；实际OSD行为在t2/t3未再收集；一个月以外的长期效果未知；不同年龄段和文化的调节效应未被正式检验；交互性与反馈的独特贡献未通过消融设计分离。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "CYOA式游戏化SETA工具（文本和视觉）在改变意图和行为态度以及减少OSD方面优于无干预，并在意图和行为态度上优于传统邮件培训。",
+    "artifact_claim_cn": "文本版在工具性结果上优于视觉版（特别是在长期减少OSD方面），视觉版在可记忆性和用户体验上优于文本版。",
+    "mechanism_claim_cn": "即时、情境化的反馈是关键机制，而不是媒体丰富度；交互性比格式更能促进行为改变。",
+    "boundary_claim_cn": "结果适用于美国员工群体；效果在一个月内部分持续但会消退；情感态度难以改变；认知态度仅在短期改变。",
+    "reusable_design_knowledge_cn": "设计原则：1）使用交互叙事（如CYOA）创建决策点并允许重新评估；2）提供即时、明确的后果反馈；3）包含第三方披露的社会子情境；4）设计应聚焦于交互性而非媒体格式；5）对于同等效果，文本版更节省资源。",
+    "theoretical_contribution_cn": "扩展了游戏化IS和SETA文献，建立了学习设计原则与游戏化实施的连接；为隐私悖论提供了实证证据，表明交互反馈可以改变意图和行为态度，但认知和情感态度更具惯性。",
+    "how_discussion_closes_intro_gap_cn": "讨论明确指出游戏化SETA通过情境化交互叙事解决了传统SETA一刀切和未情境化的问题；通过比较文本/视觉确定了游戏元素组合中的权衡；通过纵向RCT满足了设计科学和游戏化研究中方法论严格性的要求。",
+    "overclaim_or_unsupported_leaps_cn": "机制主张（反馈比视觉更重要）基于间接结果而非直接操纵；视觉体验性结果仅在部分指标上优于文本；mTurk美国员工样本向组织员工场景的推广存在一定跳跃；未分离游戏化叙事与反馈各自独立的作用；对“效率”和“优雅”等设计指标只做了部分表征。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Introduction",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "社交网络的使用模糊了个人与商业网络边界，加之员工使用个人设备办公和与同事互加好友，增加了社交工程攻击的可能性。",
+      "rhetorical_function_cn": "建立研究背景，指出SNS的普及改变了威胁环境。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出OSD作为组织安全风险的来源。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 2,
+      "section": "Introduction",
+      "locator": "P2 S1-S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "SNS因广泛使用和促进披露的特征，成为组织信息泄露的重要渠道；员工披露的信息会导致高度定制化的攻击，如鱼叉式钓鱼和高级持续威胁，造成知识产权被盗等严重后果。",
+      "rhetorical_function_cn": "说明研究的实践重要性。",
+      "depends_on_cn": "第一句",
+      "sets_up_cn": "提出OSD是核心问题。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 3,
+      "section": "Introduction",
+      "locator": "P3 S1-S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "攻击者首先通过SNS等渠道进行侦察；教育员工认识披露的负面后果可以限制敏感信息公开，提高侦察难度，降低攻击可能性。",
+      "rhetorical_function_cn": "论证教育干预的价值。",
+      "depends_on_cn": "第二句",
+      "sets_up_cn": "引出SETA作为干预方式。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "组织常用SETA项目和策略来缓解安全风险，但这些干预大多一刀切；游戏化虽能提供定制培训并激励用户，但在减少SNS上的OSD方面效果尚未证实。",
+      "rhetorical_function_cn": "指出现有SETA的局限，并引出游戏化作为可能方案，同时注水不确定性。",
+      "depends_on_cn": "第三句",
+      "sets_up_cn": "引入三个具体研究动机。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P5 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "游戏化在许多领域有效，但在IS中并非总是积极；因此需要以设计科学方法开发游戏化系统，并通过纵向和对照实验评估现实结果。",
+      "rhetorical_function_cn": "提出第一个研究动机：需要严谨的方法论。",
+      "depends_on_cn": "第四句",
+      "sets_up_cn": "本文采用DSR和纵向RCT。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P6 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "尽管游戏化能促进安全政策遵守，但信息安全不足以保护隐私；传统SETA只关注技术问题且不情境化。隐私偏好和OSD行为具有情境依赖性和个体差异，因此需要情境化、参与式的叙事方式，即CYOA式培训。",
+      "rhetorical_function_cn": "指出隐私与安全的区别，说明需要情境化设计。",
+      "depends_on_cn": "第五句",
+      "sets_up_cn": "引入CYOA作为核心设计特征。",
+      "evidence_pointer": "Introduction P6"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P7 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "少数游戏化隐私培训研究表明其能提高隐私意识，但未改善学习；游戏化SET干预成功所需要的游戏元素组合尚未明确。",
+      "rhetorical_function_cn": "提出第三个缺口：缺乏对设计格式组合的检验。",
+      "depends_on_cn": "第六句",
+      "sets_up_cn": "说明本文为何比较文本和视觉格式。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P8 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声称对设计科学知识的贡献包括开发设计原则、可测试命题和现实性能评价指标，并通过发展并测试游戏化SETA干预来贡献SETA文献。",
+      "rhetorical_function_cn": "提前声明贡献。",
+      "depends_on_cn": "前文缺口",
+      "sets_up_cn": "提供文章贡献预览。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P9 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "论文剩余部分按文献综述、假设、设计科学过程、评价测量、实验设计、结果和讨论展开。",
+      "rhetorical_function_cn": "路标。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为读者提供结构预期。",
+      "evidence_pointer": "Introduction P9"
+    },
+    {
+      "order": 10,
+      "section": "Literature review 2.1",
+      "locator": "P1 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "OSD是指个人通过互联网向他人披露个人信息，以获得经济利益或社会支持；在SNS上社会影响比感知收益更能促进披露，说明披露是互惠或习得行为。",
+      "rhetorical_function_cn": "引入OSD的构念和驱动因素。",
+      "depends_on_cn": "引言",
+      "sets_up_cn": "为后续理解OSD行为提供基础。",
+      "evidence_pointer": "Section 2.1, first paragraph"
+    },
+    {
+      "order": 11,
+      "section": "Literature review 2.1",
+      "locator": "P2-P3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "SNS的服务设计利用认知偏差，例如即时收益和模糊的未来成本，以及虚假的控制感，鼓励过度分享。隐私悖论表明用户表达隐私担忧但行为相反；安全疲劳进一步导致认知偏差，使人们低估风险。",
+      "rhetorical_function_cn": "解释OSD为何难以改变的心理机制。",
+      "depends_on_cn": "OSD定义",
+      "sets_up_cn": "论证需要干预来打断习惯性反应。",
+      "evidence_pointer": "Section 2.1, second and third paragraphs"
+    },
+    {
+      "order": 12,
+      "section": "Literature review 2.1",
+      "locator": "P4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "用户可能意识到信息被商业化，但大型在线服务的市场力量使消费者几乎没有选择。虽然隐私事件促使部分用户调整设置或短暂离开，但许多用户因缺乏可行选项而回返。",
+      "rhetorical_function_cn": "说明外部约束，削弱了单纯依靠用户主动改变的可行性。",
+      "depends_on_cn": "隐私悖论",
+      "sets_up_cn": "强调需要提高意识并训练限制OSD。",
+      "evidence_pointer": "Section 2.1, fourth paragraph"
+    },
+    {
+      "order": 13,
+      "section": "Literature review 2.2",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "元分析表明态度与行为有强关系，意图是行为最强预测因子，因为意图捕获了影响行为的动机因素。尽管OSD看似自愿，但也可能是非自愿的，因此意图不能完全预测OSD行为。",
+      "rhetorical_function_cn": "建立理论框架，说明需要同时影响态度和意图。",
+      "depends_on_cn": "OSD行为复杂性",
+      "sets_up_cn": "提出研究目标：设计工具以改变态度和意图并减少OSD。",
+      "evidence_pointer": "Section 2.2, first and second paragraphs"
+    },
+    {
+      "order": 14,
+      "section": "Literature review 2.2",
+      "locator": "P3 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "情绪、偏见和启发式会使隐私行为与隐私态度相悖；即使人们关心隐私也可能披露。由于习惯和他人共享信息，现有干预可能失败，需要打断习惯性反应和重构用户感知。",
+      "rhetorical_function_cn": "指出现有干预的局限，引出本文的研究目标。",
+      "depends_on_cn": "态度-意图关系",
+      "sets_up_cn": "引出研究目标句。",
+      "evidence_pointer": "Section 2.2, third paragraph"
+    },
+    {
+      "order": 15,
+      "section": "Literature review 2.2",
+      "locator": "P3 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此，本文的研究目标是设计并评估一个游戏化SETA工具，以减少OSD并改变对OSD的态度和意图。",
+      "rhetorical_function_cn": "明确研究目标。",
+      "depends_on_cn": "前面的局限",
+      "sets_up_cn": "转向假设开发。",
+      "evidence_pointer": "Section 2.2, end of paragraph"
+    },
+    {
+      "order": 16,
+      "section": "Literature review 2.3",
+      "locator": "P1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "Karjalainen和Siponen建议使用转变导向培训，通过联系学习者经验来改变态度和行为；游戏化通过提升用户体验和自我反思来支持这种培训。",
+      "rhetorical_function_cn": "引入SETA培训理论。",
+      "depends_on_cn": "研究目标",
+      "sets_up_cn": "为后续设计原则提供理论依据。",
+      "evidence_pointer": "Section 2.3, first paragraph"
+    },
+    {
+      "order": 17,
+      "section": "Literature review 2.3",
+      "locator": "P2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "存在多种游戏元素和技术，故事讲述是其中之一；Liu等人将游戏元素分为对象和机制，上下文和用户需求决定了合适的元素。",
+      "rhetorical_function_cn": "引入游戏化设计框架。",
+      "depends_on_cn": "游戏化介绍",
+      "sets_up_cn": "为制品设计提供元素选择基础。",
+      "evidence_pointer": "Section 2.3, second paragraph"
+    },
+    {
+      "order": 18,
+      "section": "Literature review 2.3",
+      "locator": "P3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "学习科学指出游戏如果遵循某些设计原则则具有高度激励性，例如故事型代理和反思。通过游戏或故事接触计算机安全思想能提高对威胁多样性的理解，并促成安全行为。",
+      "rhetorical_function_cn": "推导出两个核心设计原则，为设计工具提供要求。",
+      "depends_on_cn": "游戏化框架",
+      "sets_up_cn": "假设开发中的设计特征。",
+      "evidence_pointer": "Section 2.3, third paragraph"
+    },
+    {
+      "order": 19,
+      "section": "Hypothesis development 3.1",
+      "locator": "P1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "交互叙事让用户在不同的情境中体验安全威胁，并学习减少OSD的重要性。故事讲述通过将内容与个人经验关联，促进转变式学习。让学习者自行决策并改变故事进程的交互式叙事（如CYOA）能提高学习效果。",
+      "rhetorical_function_cn": "解释交互叙事如何促进学习。",
+      "depends_on_cn": "学习设计原则",
+      "sets_up_cn": "H1。",
+      "evidence_pointer": "Section 3.1, first paragraph"
+    },
+    {
+      "order": 20,
+      "section": "Hypothesis development 3.1",
+      "locator": "P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "反思原则要求用户停下来思考新知识。游戏化应提供反馈来告知学习进度、表现和能力。提供选择和明确的反馈可提高自主性和能力感，同时促进参与。CYOA式参与式叙事允许学习者利用反馈进行自我评估，最终改变态度和行为。",
+      "rhetorical_function_cn": "解释反馈为何重要，并推导出设计特征。",
+      "depends_on_cn": "反思原则",
+      "sets_up_cn": "H1和H2。",
+      "evidence_pointer": "Section 3.1, second paragraph"
+    },
+    {
+      "order": 21,
+      "section": "Hypothesis development 3.1",
+      "locator": "H1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "使用CYOA式交互叙事的游戏化SETA工具将有效（a）改变态度，（b）改变意图，（c）减少OSD。",
+      "rhetorical_function_cn": "正式提出主效用假设。",
+      "depends_on_cn": "交互叙事机制",
+      "sets_up_cn": "实验检验。",
+      "evidence_pointer": "Section 3.1, H1"
+    },
+    {
+      "order": 22,
+      "section": "Hypothesis development 3.1",
+      "locator": "P3-P4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "交互叙事通过故事编码技术知识，使其更易获取和记忆；故事增强回忆能力；用户对互动性的感知提高培训满意度，因此用户更投入。SETA程序常被认为无聊，故事可提高记忆力和参与度。",
+      "rhetorical_function_cn": "论证交互叙事对体验性结果的作用。",
+      "depends_on_cn": "故事记忆理论",
+      "sets_up_cn": "H2。",
+      "evidence_pointer": "Section 3.1, third and fourth paragraphs"
+    },
+    {
+      "order": 23,
+      "section": "Hypothesis development 3.1",
+      "locator": "H2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "使用CYOA式交互叙事的游戏化SETA工具将改善（a）可记忆性和（b）用户体验。",
+      "rhetorical_function_cn": "正式提出体验性结果假设。",
+      "depends_on_cn": "前段机制",
+      "sets_up_cn": "实验检验。",
+      "evidence_pointer": "Section 3.1, H2"
+    },
+    {
+      "order": 24,
+      "section": "Hypothesis development 3.2",
+      "locator": "P1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "交互叙事可通过图形和插图增强；视觉信息比文本更生动，能唤起更多记忆；视觉内容进入长时记忆，文本进入短时记忆；大脑处理视觉信息更快更有效。",
+      "rhetorical_function_cn": "引入视觉优势的证据。",
+      "depends_on_cn": "媒体丰富度概念",
+      "sets_up_cn": "推断视觉格式在可记忆性上更好。",
+      "evidence_pointer": "Section 3.2, first paragraph"
+    },
+    {
+      "order": 25,
+      "section": "Hypothesis development 3.2",
+      "locator": "P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "媒体丰富度指媒介传递丰富信息的能力，包括多线索、反馈即时性、个性化等。在安全培训中，漫画或视频比纯文本更有效降低网络钓鱼易感性，但其他研究发现阅读脚本比视频更助于理解，因为认知负荷较低。",
+      "rhetorical_function_cn": "展示矛盾证据，说明需要比较文本与视觉。",
+      "depends_on_cn": "视觉优势",
+      "sets_up_cn": "H3和H4的提出。",
+      "evidence_pointer": "Section 3.2, second paragraph"
+    },
+    {
+      "order": 26,
+      "section": "Hypothesis development 3.2",
+      "locator": "P3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "一些研究比较不同媒体丰富度的安全培训，发现丰富媒体因多通道信息导致认知过载而效率较低；另一些研究认为视觉线索改善可记忆性和用户体验，但会因认知过载损害绩效。",
+      "rhetorical_function_cn": "提出总体权衡：视觉胜于体验，文本胜于绩效。",
+      "depends_on_cn": "媒体丰富度矛盾",
+      "sets_up_cn": "H3和H4。",
+      "evidence_pointer": "Section 3.2, third paragraph"
+    },
+    {
+      "order": 27,
+      "section": "Hypothesis development 3.2",
+      "locator": "H3",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "CYOA式视觉故事在（a）改变态度，（b）改变意图，（c）减少OSD方面将不如文本故事。",
+      "rhetorical_function_cn": "提出视觉在工具性结果上更差的假设。",
+      "depends_on_cn": "认知负荷机制",
+      "sets_up_cn": "实验检验。",
+      "evidence_pointer": "Section 3.2, H3"
+    },
+    {
+      "order": 28,
+      "section": "Hypothesis development 3.2",
+      "locator": "H4",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "CYOA式视觉故事在（a）可记忆性和（b）用户体验方面将优于文本故事。",
+      "rhetorical_function_cn": "提出视觉在体验性结果上更好的假设。",
+      "depends_on_cn": "视觉记忆优势",
+      "sets_up_cn": "实验检验。",
+      "evidence_pointer": "Section 3.2, H4"
+    },
+    {
+      "order": 29,
+      "section": "Method",
+      "locator": "Section 4 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "本文的DSR目标是生成规定性知识，通过建立游戏化SETA工具的设计原则来减少OSD。为此，作者开发了可测试命题（假设），并构建了创新SETA工具作为概念验证，探索其作为解决方案的效用。",
+      "rhetorical_function_cn": "说明采用DSR方法的理由和期望贡献。",
+      "depends_on_cn": "文献综述和假设",
+      "sets_up_cn": "进入制品构建。",
+      "evidence_pointer": "Section 4, first paragraph"
+    },
+    {
+      "order": 30,
+      "section": "Method 4.1",
+      "locator": "P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "作者使用Hevner等人的DSR指南，应用前文提到的两个学习设计原则（story-based agent和reflection）以及IS安全培训的相关要求，并依据Helms等人的游戏元素分类和Liu等人的游戏化系统一般原则来选择游戏元素。",
+      "rhetorical_function_cn": "明确设计的理论来源和步骤。",
+      "depends_on_cn": "理论部分",
+      "sets_up_cn": "具体制品设计。",
+      "evidence_pointer": "Section 4.1, first paragraph"
+    },
+    {
+      "order": 31,
+      "section": "Method 4.1",
+      "locator": "P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "作者依据文献选择游戏元素，并考虑Liu等人关于游戏设计元素应能创造期望的用户系统交互和体验性/工具性结果的建议。培训总体目标是减少OSD，其他工具性结果是改变OSD的前因即态度和意图。",
+      "rhetorical_function_cn": "确立设计目标和元素选择逻辑。",
+      "depends_on_cn": "理论",
+      "sets_up_cn": "描述具体元素。",
+      "evidence_pointer": "Section 4.1, second paragraph"
+    },
+    {
+      "order": 32,
+      "section": "Method 4.1",
+      "locator": "P3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "除了工具性结果外，作者还考虑了两个体验性结果来评价工具：可记忆性和用户体验。可记忆性是因为大多数信息会被遗忘，用户体验是系统成功的重要指标。",
+      "rhetorical_function_cn": "定义评价标准。",
+      "depends_on_cn": "设计目标",
+      "sets_up_cn": "实验中的测量。",
+      "evidence_pointer": "Section 4.1, third paragraph"
+    },
+    {
+      "order": 33,
+      "section": "Method 4.1",
+      "locator": "P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者选择了Helms等人分类中的进度、沟通（反馈和交互）和规则元素，因为进度提供内在动机，沟通让用户看到行动影响，规则限制行动保持可管理性。",
+      "rhetorical_function_cn": "具体设计决策。",
+      "depends_on_cn": "Helms分类",
+      "sets_up_cn": "CYOA故事线。",
+      "evidence_pointer": "Section 4.1, fourth paragraph"
+    },
+    {
+      "order": 34,
+      "section": "Method 4.2",
+      "locator": "P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者开发了CYOA式交互故事线，允许参与者探索假想场景、做出关于OSD的决策，并体验行为如何影响个人和组织隐私安全。故事线实现三个目标：识别受试者最易受的威胁；简报威胁及原因；通过重新评估促进行为改变。",
+      "rhetorical_function_cn": "描述制品核心功能。",
+      "depends_on_cn": "设计原则",
+      "sets_up_cn": "故事内容生成。",
+      "evidence_pointer": "Section 4.2, first paragraph"
+    },
+    {
+      "order": 35,
+      "section": "Method 4.2",
+      "locator": "P2-P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为提高故事线的相关性和普遍性，作者采用信念诱发过程并回顾文献/新闻来确定内容，最终确定五种威胁：钓鱼、鱼叉式钓鱼、入室盗窃、密码破解、身份盗窃。",
+      "rhetorical_function_cn": "解释内容来源和方法。",
+      "depends_on_cn": "故事线目标",
+      "sets_up_cn": "场景设计。",
+      "evidence_pointer": "Section 4.2, second and third paragraphs"
+    },
+    {
+      "order": 36,
+      "section": "Method 4.2",
+      "locator": "P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "研究者发现负面安全事件的故事最有影响力；因此故事线反映上述威胁作为后果。作者考虑SNS上的社会互动，并通过包含第三方披露问题的社会子人工品来处理他人替自己披露的限制。",
+      "rhetorical_function_cn": "描述设计选择，特别是处理集体隐私问题。",
+      "depends_on_cn": "威胁选择",
+      "sets_up_cn": "故事线结构。",
+      "evidence_pointer": "Section 4.2, fourth paragraph"
+    },
+    {
+      "order": 37,
+      "section": "Method 4.2",
+      "locator": "P5-P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "故事线包含决策点让参与者改变事件进程，依据决策识别后果并提供针对性简报；简报后将参与者带回误判点重新评估。作者采用三幕结构（引入、冲突、解决）来组织，先写文本脚本，再请专业漫画家绘制视觉场景，两者多次试点测试以保持高度相似。",
+      "rhetorical_function_cn": "详细描述制品构建过程。",
+      "depends_on_cn": "故事线目标",
+      "sets_up_cn": "实验比较的两种格式。",
+      "evidence_pointer": "Section 4.2, fifth and sixth paragraphs"
+    },
+    {
+      "order": 38,
+      "section": "Evaluation",
+      "locator": "Section 5 P1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "作者将文本和视觉故事干预与无干预控制组以及一组传统安全警告邮件进行比较，邮件模拟组织因员工OSD导致安全漏洞的情境，内容包含与故事线相同的核心内容和三幕结构顺序。",
+      "rhetorical_function_cn": "建立实验基准，确保内容等价。",
+      "depends_on_cn": "制品构建",
+      "sets_up_cn": "实验设计。",
+      "evidence_pointer": "Section 5, first paragraph"
+    },
+    {
+      "order": 39,
+      "section": "Evaluation 5.1",
+      "locator": "P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "游戏化系统应导致有意义的参与，同时具有工具性和体验性结果。作者引用Avdiji等人的性能标准：效能（干预产生预期结果）、有效性（实现更高或长期目标）、效率（不消耗过多时间或资源）和优雅（易于使用和理解）。",
+      "rhetorical_function_cn": "定义评价理论框架。",
+      "depends_on_cn": "Checkland绩效标准",
+      "sets_up_cn": "测量开发。",
+      "evidence_pointer": "Section 5.1, first paragraph"
+    },
+    {
+      "order": 40,
+      "section": "Evaluation 5.1",
+      "locator": "P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为最小化反应偏差，作者使用调查题和情景（vignettes）评估态度和意图。OSD通过复合指标计算，基于不同类型信息的可用性及其Facebook隐私设置，并由自报但相对客观的题项构成。此外，作者经IRB许可在t1获取参与者Facebook URL，基于公开可见内容编码得到实际OSD分数。",
+      "rhetorical_function_cn": "说明关键测量方法的合理性。",
+      "depends_on_cn": "工具性结果定义",
+      "sets_up_cn": "实验数据收集。",
+      "evidence_pointer": "Section 5.1, second paragraph"
+    },
+    {
+      "order": 41,
+      "section": "Evaluation 5.1",
+      "locator": "P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者用三个记忆指标：回忆、识别和再整合来评估可记忆性，在一个月后测量。用户体验使用满意度、可用性和易学性三个指标，在t2干预后立即测量。",
+      "rhetorical_function_cn": "说明体验性测量的细节。",
+      "depends_on_cn": "体验性结果定义",
+      "sets_up_cn": "数据分析。",
+      "evidence_pointer": "Section 5.1, third paragraph"
+    },
+    {
+      "order": 42,
+      "section": "Evaluation 5.1",
+      "locator": "P4",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "测量题项改编自已有量表，并使用专家小组测试表面效度；作者进行了一系列试点测试迭代完善制品，最终试点数据在信度、收敛效度和区分效度上表现良好，并试点测试了整个纵向实验。",
+      "rhetorical_function_cn": "展示测量和干预的稳健性准备工作。",
+      "depends_on_cn": "测量开发",
+      "sets_up_cn": "正式实验。",
+      "evidence_pointer": "Section 5.1, fourth paragraph"
+    },
+    {
+      "order": 43,
+      "section": "Evaluation 5.2",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为检验刺激（游戏化SETA和邮件干预）与态度、意图和行为变化的因果关系，作者进行了纵向随机对照实验，t1收集基线，t2随机分配并干预，t3测量长期结果。",
+      "rhetorical_function_cn": "说明实验设计的选择。",
+      "depends_on_cn": "假设",
+      "sets_up_cn": "数据收集。",
+      "evidence_pointer": "Section 5.2, first paragraph"
+    },
+    {
+      "order": 44,
+      "section": "Evaluation 5.2",
+      "locator": "P2-P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "通过Amazon Mechanical Turk招募员工，因为可以在短时间内收集大样本，这对纵向研究特别重要，以避免外部事件干扰；经过清洗后1718名员工被纳入，平均年龄38岁，55.5%女性。",
+      "rhetorical_function_cn": "说明样本来源和可靠性措施。",
+      "depends_on_cn": "实验设计",
+      "sets_up_cn": "结果部分。",
+      "evidence_pointer": "Section 5.2, second and third paragraphs"
+    },
+    {
+      "order": 45,
+      "section": "Evaluation 5.2",
+      "locator": "P4",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "458名参与者提供了Facebook URL，实际OSD分数与复合OSD指标显著正相关（r=0.421, p<0.01），说明复合指标可作为实际OSD行为的代理。",
+      "rhetorical_function_cn": "验证自报指标的效标效度。",
+      "depends_on_cn": "测量方法",
+      "sets_up_cn": "支持后续使用复合指标。",
+      "evidence_pointer": "Section 5.2, fourth paragraph"
+    },
+    {
+      "order": 46,
+      "section": "Evaluation 5.2",
+      "locator": "P5-P6",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "t2时参与者被随机分到四组并干预，之后收集工具性结果和用户体验；为避免近因和需求效应，可记忆性和工具性结果在一个月后t3再次测量。",
+      "rhetorical_function_cn": "说明纵向时间设计。",
+      "depends_on_cn": "实验设计",
+      "sets_up_cn": "分析框架。",
+      "evidence_pointer": "Section 5.2, fifth and sixth paragraphs"
+    },
+    {
+      "order": 47,
+      "section": "Results",
+      "locator": "Section 6 P1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "因子载荷超过0.60，AVE大于0.80，交叉载荷高0.10以上，构念间相关小于AVE平方根，Cronbach's α大于0.70，显示良好的收敛效度、区分效度和信度。",
+      "rhetorical_function_cn": "报告测量模型质量。",
+      "depends_on_cn": "数据收集",
+      "sets_up_cn": "假设检验。",
+      "evidence_pointer": "Section 6, first paragraph"
+    },
+    {
+      "order": 48,
+      "section": "Results 6.1",
+      "locator": "P1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "单因素ANOVA显示四组干预前在构念上无显著差异，随机化成功。",
+      "rhetorical_function_cn": "确保各组可比。",
+      "depends_on_cn": "数据",
+      "sets_up_cn": "组间比较。",
+      "evidence_pointer": "Section 6.1, first paragraph"
+    },
+    {
+      "order": 49,
+      "section": "Results 6.1.1",
+      "locator": "P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "短期（t2-t1）ANOVA显示除情感态度外，OSD、意图、行为态度和认知态度均有显著组间差异；两游戏化干预在减少OSD上优于控制组，在改变意图方面优于控制组和邮件组。",
+      "rhetorical_function_cn": "报告短期工具性结果。",
+      "depends_on_cn": "数据",
+      "sets_up_cn": "长期结果和讨论。",
+      "evidence_pointer": "Section 6.1.1, first and second paragraphs, Table 3"
+    },
+    {
+      "order": 50,
+      "section": "Results 6.1.1",
+      "locator": "P3-P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "一个月后，OSD、意图和行为态度仍有显著差异；文本干预在减少OSD上优于邮件，两者在改变意图和行为态度上仍优于控制组和邮件组。",
+      "rhetorical_function_cn": "报告长期工具性结果，表明持久性。",
+      "depends_on_cn": "短期结果",
+      "sets_up_cn": "体验性结果和讨论。",
+      "evidence_pointer": "Section 6.1.1, third and fourth paragraphs, Table 4"
+    },
+    {
+      "order": 51,
+      "section": "Results 6.1.2",
+      "locator": "P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "体验性结果的ANOVA显示三个干预在可记忆性和用户体验各指标上均有显著差异；视觉干预在回忆和再整合上优于邮件，在识别和再整合上优于文本；在满意度、可用性和易学性上也存在组间差异。",
+      "rhetorical_function_cn": "报告体验性结果，显示视觉优势。",
+      "depends_on_cn": "数据",
+      "sets_up_cn": "总结和讨论。",
+      "evidence_pointer": "Section 6.1.2, first and second paragraphs, Table 5"
+    },
+    {
+      "order": 52,
+      "section": "Results 6.1.3",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "作者用表6总结所有假设的支持情况。",
+      "rhetorical_function_cn": "汇总所有假设检验结果。",
+      "depends_on_cn": "所有结果",
+      "sets_up_cn": "讨论。",
+      "evidence_pointer": "Section 6.1.3, Table 6"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "Section 7 P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "讨论指出OSD是“棘手问题”，适合DSR。主要发现是两种游戏化SETA干预都能减少OSD，短期邮件也有效，但一个月后只有文本继续影响用户，与先前认知负荷研究一致。",
+      "rhetorical_function_cn": "解释主要发现并与文献联系。",
+      "depends_on_cn": "结果",
+      "sets_up_cn": "进一步讨论态度、意图、体验。",
+      "evidence_pointer": "Section 7, first and second paragraphs"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "Section 7 P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "两种游戏化干预在改变意图方面相同且优于邮件，长期和短期均如此，说明参与者意图披露的信息量减少，这对组织很有意义。",
+      "rhetorical_function_cn": "突出意图结果。",
+      "depends_on_cn": "结果",
+      "sets_up_cn": "态度结果。",
+      "evidence_pointer": "Section 7, third paragraph"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "Section 7 P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "态度改变复杂：行为态度在长短均改变且优于邮件；认知态度只在短期改变；情感态度完全无法改变。作者用信念和情绪更难改变、控制他人披露更容易来解释。",
+      "rhetorical_function_cn": "解释态度结果的分化。",
+      "depends_on_cn": "结果",
+      "sets_up_cn": "强调行为态度重要性。",
+      "evidence_pointer": "Section 7, fourth paragraph"
+    },
+    {
+      "order": 56,
+      "section": "Discussion",
+      "locator": "Section 7 P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "视觉干预在回忆和再整合上优于邮件，在识别和再整合上优于文本；再整合对SETA特别相关，因为安全威胁通常带有提醒线索。",
+      "rhetorical_function_cn": "解释可记忆性结果的意义。",
+      "depends_on_cn": "体验结果",
+      "sets_up_cn": "用户体验。",
+      "evidence_pointer": "Section 7, fifth paragraph"
+    },
+    {
+      "order": 57,
+      "section": "Discussion",
+      "locator": "Section 7 P6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "用户对三个干预的易学性评价相同，但两个游戏化干预的可用性高于邮件，视觉干预满意度最高。视觉故事的总体验性结果最好。",
+      "rhetorical_function_cn": "报告用户体验差异。",
+      "depends_on_cn": "体验结果",
+      "sets_up_cn": "提出总体设计建议。",
+      "evidence_pointer": "Section 7, sixth paragraph"
+    },
+    {
+      "order": 58,
+      "section": "Discussion",
+      "locator": "Section 7 P7",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "视觉干预因丰富视觉线索更有吸引力，但也可能分散信息并抵消图文线索效果。作者认为SETA干预应强调即时和情境化反馈而非额外视觉线索；当目标是行为改变时，交互性比文本/视觉格式更重要。文本干预资源需求低，更适合资源有限的组织。",
+      "rhetorical_function_cn": "提炼一条可复用的设计原则。",
+      "depends_on_cn": "所有结果",
+      "sets_up_cn": "结论。",
+      "evidence_pointer": "Section 7, seventh paragraph"
+    },
+    {
+      "order": 59,
+      "section": "Discussion 7.1",
+      "locator": "P1-P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括美国样本、特定人群可能更适用视觉、文本和视觉各有所长可组合、AI支持的情景生成、训练频率问题。",
+      "rhetorical_function_cn": "界定边界并指出未来方向。",
+      "depends_on_cn": "主要发现",
+      "sets_up_cn": "结论。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 60,
+      "section": "Conclusion",
+      "locator": "Section 8 P1-P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结贡献：通过DSR和纵向RCT，本文提供了游戏化SETA工具的效用证据，产生设计原则和命题，并回应了方法论呼吁。实践上，情境化游戏化干预可减少时间并更有效分配资源。",
+      "rhetorical_function_cn": "强化贡献和意义。",
+      "depends_on_cn": "整篇",
+      "sets_up_cn": "无。",
+      "evidence_pointer": "Section 8, first and second paragraphs"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "通过指出传统SETA一刀切、游戏化效果不确定、隐私区别于安全、少数游戏化训练未提高学习效果等来构建缺口。然后声明采用DSR和纵向RCT来填补，同时用三个实证性的“Firstly, Secondly, Thirdly”明确拆解缺口。",
+    "signposting_cn": "引言最后一段预告结构；方法中多处说明DSR过程（如“Figure 1 presents the research activities”）；结果部分用Table 6汇总假设检验；讨论开头重述研究问题。",
+    "transition_logic_cn": "每节末尾有简短总结或预告下一节，如“这引导我们的研究目标”，”我们提出以下假设“，然后方法、结果、讨论的流畅过渡。阶段间通过“Recall that our goal was...”等提示与前面内容连接。",
+    "claim_evidence_rhythm_cn": "先提出假设，再描述测量，然后报告ANOVA结果和post hoc表格，最后在讨论中解释意义并提炼设计原则。每个主要结果都对应一个假设，并有表格支撑。",
+    "benchmark_narrative_cn": "选择无干预和传统邮件作为对照，说明邮件内容与游戏化工具等价（三幕结构、威胁后果相同），从而将差异归因于游戏化设计。在结果中始终与两个基准比较，并进一步直接比较文本vs视觉。",
+    "theory_return_cn": "讨论将结果与先前文献对照（如认知负荷、媒体丰富度），并提炼设计原则，将结果归纳为“交互性>格式”命题，使实证结果返回并修改理论预期。",
+    "contribution_positioning_cn": "在引言和结论中多次强调贡献，使用DSR术语（设计原则、测试命题、绩效指标），并将其与Gregor and Hevner、Gregor and Jones等DSR框架关联，与方法论呼吁对应。",
+    "novelty_protection_cn": "通过详细描述制品新颖性（CYOA、两个格式）、使用严格实验法和多个结果类型来防止效果归因于一次性性能；强调长期RCT、实际OSD验证和内容等价对照，以支持制品主张。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "描述一个复杂的现实问题（如OSD），说明其组织和个人的安全后果，指出现有干预的不足。",
+        "research_job_cn": "文献综述，界定“一刀切”和情景缺失等缺口，确定干预的必要性。",
+        "required_evidence_cn": "显示现有解决方案（如传统SETA、邮件）效果有限或机制缺失的证据。",
+        "transition_to_next_cn": "将缺口导向具体的理论或设计方向（如游戏化、交互叙事）。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入相关理论（学习设计原则、游戏化、媒体丰富度），明确提出假设。",
+        "research_job_cn": "将理论命题转化为设计要求和预期效果，推导可检验的假设。",
+        "required_evidence_cn": "理论支持的具体设计特征（如反馈、决策点、文本/视觉）。",
+        "transition_to_next_cn": "假设指导制品构建。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述DSR过程：如何从理论到设计要求，如何迭代设计制品（包括开发步骤、试点测试）。",
+        "research_job_cn": "实际构建制品（本文为CYOA故事线），生成文本和视觉版本。",
+        "required_evidence_cn": "可运行的制品原型、试点测试效果、内容等价说明。",
+        "transition_to_next_cn": "制品需要评价，进入评价设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "说明评价方法：测量工具、实验设计、对照组和基准、数据收集过程。",
+        "research_job_cn": "开发或验证测量，设计纵向RCT或类似因果设计，实施数据收集。",
+        "required_evidence_cn": "测量信度效度证据、随机化成功、样本代表性。",
+        "transition_to_next_cn": "数据用于假设检验。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "报告心理测量结果和假设检验结果，用表格清晰呈现。",
+        "research_job_cn": "运行ANOVA、post hoc等统计检验。",
+        "required_evidence_cn": "统计显著性和效应方向。",
+        "transition_to_next_cn": "结果需要解释并上升为设计知识。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "在讨论中解释结果，与文献联系，提炼可复用的设计原则，指出局限。",
+        "research_job_cn": "解释机制、边界条件，定位贡献。",
+        "required_evidence_cn": "与先前研究一致或不一致的解释，设计原则的概括。",
+        "transition_to_next_cn": "结束并建议未来研究。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "使用理论推导设计原则",
+      "设置内容等价的对照组以归因效果",
+      "同时测量工具性和体验性结果",
+      "用纵向设计考察长期效果",
+      "明确指出设计原则而非仅仅报告效果",
+      "用表格总结所有假设检验"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "设计并制作专业漫画视觉干预需要雇用画家",
+      "信念诱发过程和多次试点需要时间和被试",
+      "纵向RCT三个月内收集多波数据需要管理",
+      "mTurk样本虽然易得但需要严格清洗和数据验证",
+      "实际OSD测量需要IRB许可和编码方案"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "如果没有对测量工具进行验证和心理测验，就不能宣称工具有效性",
+      "如果没有内容等价的对照组，不能将效果归因于游戏化",
+      "如果只做了短期测量，不能声称长期影响",
+      "不能将“交互性比格式更重要”作为结论，除非实验设计直接操作了交互性",
+      "不能在没有实际OSD数据的情况下宣称自报指标有效"
+    ],
+    "single_best_description_of_the_routine_cn": "从一个复杂的现实问题出发，根据学习理论和游戏化设计原则构建制品，用包含内容等价对照组的纵向随机实验进行检验，并最终提炼出可复用的设计原则。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "OCR对附录、图表和公式的支持有限；本文分析基于正文和可见表格，未读取在线补充材料（如附录A-J）中的详细测量题项和设计过程图表；对句子级位置的识别基于段落编号，可能不完全精确；由于无法访问实际数据集，统计分析细节依赖文中报告。",
+  "usage": {
+    "prompt_tokens": 28480,
+    "completion_tokens": 34155,
+    "total_tokens": 62635,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 28480
+  }
+}

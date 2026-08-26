@@ -1,0 +1,1781 @@
+# Designing Hybrid Mechanisms to Overcome Congestion in Sequential Dutch Auctions
+
+- 作者：Yixin Lu; Alok Gupta; Wolfgang Ketter; Eric van Heck
+- 年份 / 期刊：2022 / MIS Quarterly
+- DOI：10.25300/misq/2022/16472
+- 源文件：01558_2022_designing-hybrid-mechanisms-to-overcome-congestion-in-sequential-dutch-auctions.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：在顺序荷兰拍卖中，由同一离散价格水平下多个出价请求无法同时满足所引发的市场拥堵，能否通过允许多个中标者的混合机制得到缓解，以及这种机制如何影响投标动态和市场结果？
+
+- 制品与设计：混合机制：利用顺序荷兰拍卖离散时钟的天然结构，将同一价格水平到达的最高出价合并，在同一轮中允许多个竞买人以相同价格成交；若需求超过供给，则在最高出价者之间随机分配。若仅有一个最高出价者，则机制与传统顺序荷兰拍卖完全一致。
+
+- 客观结果：理论模型证明混合机制存在对称贝叶斯纳什均衡，在有限离散投标空间下运营效率（完成拍卖的平均轮数）更高，且当投标增量趋近于零时分配效率与传统机制相同。准自然现场实验的DID估计显示，混合机制使完成拍卖的平均轮数显著减少约18%，收入无显著变化，价格离散度显著下降、价格更稳定，平均购买量上升约6%。
+
+- 核心贡献：作者声称首次探讨混合机制在缓解多物品顺序拍卖拥堵中的作用；将运营效率内生化为机制设计的重要绩效维度；通过分析建模与大尺度准自然现场实验结合的方式，评估真实市场中的混合机制，并为复杂市场中的信息透明与机制设计提供启示。
+
+- 整篇论证链：文章从成熟市场普遍存在的拥堵问题切入，聚焦顺序荷兰拍卖因离散时钟和先到先得规则而在需求高峰时无法同时接纳多个同价请求的现象，提出将同一价格水平的多个最高出价批量合并的混合机制。随后用博弈论模型刻画传统与混合机制下的对称贝叶斯纳什均衡，证明混合机制在均衡中不损害分配效率并显著提升运营效率，但收入排序无法从理论上判定。由于理论假设在真实市场中不成立，作者在荷兰花卉拍卖市场开展准自然现场实验，用含处理/对照、实验前/实验后的DID设计估计机制改变的收入与效率效应，并通过平行趋势、活跃竞买人子样本、高低端产品、精确匹配和安慰剂检验等稳健性分析支持因果解释。最后，通过价格离散度、序贯价格趋势和购买量等附加分析，将观察到的价格稳定性和运营效率改善归因于多赢家信息提高了感知竞争强度，从而在讨论中回到机制设计、信息透明与混合机制更广泛适用性的理论贡献。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文并非单纯的设计科学构建，也不只是现场干预实验，而是明确采用分析模型与大规模准自然现场实验相结合的多方法研究程序：先以博弈论模型建立均衡预测，再以现场实验进行因果识别和外部效度检验，并辅以多种稳健性检验和机制性附加分析。
+
+- 主导写作弧线判定：整体写作弧线从现实拥堵问题出发，引入拍卖理论和离散投标知识，提出混合机制设计，用理论模型推导可检验命题，再以现场实验检验，最后回到机制设计理论和信息透明文献，贡献于混合机制、运营效率内生化和信息揭示等理论主题。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：第一阶段建立两种机制下的博弈论均衡；第二阶段在均衡上比较分配效率与运营效率，并进行数值模拟；第三阶段设计并实施大规模准自然现场实验，说明现场、数据与实验操纵；第四阶段用DID估计机制改变对收入和轮次的主效应；第五阶段用平行趋势、子样本、匹配、安慰剂等稳健性检验保护内部有效性并揭示异质性；第六阶段通过价格离散度、序贯价格趋势和购买量分析探索机制发挥作用的渠道与边界。各阶段依次回答前一阶段留下的不确定性问题：理论假设过强则用现场数据检验，收入排序无法解析则用实证确定，主效应受到威胁则用稳健性检验排除，机制解释不确定则用附加分析提供间接证据。
+
+### studies_or_phases
+
+#### 1. 博弈论均衡建模阶段
+
+- order：1
+
+- name_cn：博弈论均衡建模阶段
+
+- question_cn：传统顺序荷兰拍卖与混合机制下，投标者的对称纯策略贝叶斯纳什均衡是否存在？均衡投标函数的结构是什么？
+
+- inputs_and_setting_cn：N>2个风险中性竞买人，单一单位需求，私人价值独立同分布于[0,1]上的连续分布F，投标空间为有限离散价格集合B={b1,...,bM}。
+
+- designed_or_compared_object_cn：比较传统顺序荷兰拍卖与混合机制下的均衡投标策略；混合机制允许同一最高价格水平出现多个赢家并在并列时随机分配。
+
+- baseline_control_or_counterfactual_cn：传统顺序荷兰拍卖机制作为基准。
+
+##### objective_metrics
+
+1. 是否存在对称贝叶斯纳什均衡
+
+2. 均衡临界点序列{k}和{tk}
+
+- analysis_method_cn：逆向归纳；用顺序统计量和随机平局规则构造期望收益，推导临界点满足的相邻投标无差异条件；证明命题1和命题2。
+
+- main_result_cn：两种机制均存在分段常数的对称纯策略贝叶斯纳什均衡；第二轮投标函数与第一轮不同，低价值者第二轮更倾向削价，高价值者第一轮更倾向削价。
+
+- argumentative_role_cn：为后续均衡绩效比较提供策略基础，证明混合机制不是一个无法分析的临时规则，而是有明确均衡行为的可研究机制。
+
+- remaining_uncertainty_cn：模型假设单一单位需求、共同分布、完全理性均衡，这些在真实市场中可能不成立；收入排序仍不确定。
+
+- link_to_next_phase_cn：在已建立的均衡结构上，下一阶段直接比较两种机制的分配效率与运营效率。
+
+##### evidence_pointers
+
+1. Theoretical Model节
+
+2. Equilibrium Analysis节
+
+3. Proposition 1
+
+4. Proposition 2
+
+5. Figure 1
+
+#### 2. 均衡绩效比较与数值模拟阶段
+
+- order：2
+
+- name_cn：均衡绩效比较与数值模拟阶段
+
+- question_cn：在均衡状态下，混合机制相对于传统机制在分配效率和运营效率上有何差异？收入排序能否解析判断？
+
+- inputs_and_setting_cn：沿用第一阶段的两物品、N>2竞买人、单单位需求模型；数值部分使用均匀分布F~Uniform[0,1]、N=3、M∈{5,10,25,...,50}。
+
+- designed_or_compared_object_cn：比较两种机制的期望分配效率（实现总剩余/最大剩余）和期望完成轮数。
+
+- baseline_control_or_counterfactual_cn：传统机制下恒为两轮完成；混合机制可能一轮或两轮完成。
+
+##### objective_metrics
+
+1. 分配效率α与α̂
+
+2. 期望完成拍卖的轮数E(λ)
+
+- analysis_method_cn：解析推导命题3和命题4；对均匀分布进行数值模拟，重复1000次并绘制箱线图。
+
+- main_result_cn：当投标空间数量M趋于无穷时，两种机制分配效率之差趋近于零；对于任何有限投标空间，混合机制的平均完成轮数低于传统机制；收入排序在解析上不明确，取决于具体价值实现。
+
+- argumentative_role_cn：交付两个核心理论预测：混合机制提升运营效率且不损害分配效率；同时明确指出收入问题必须依靠实证数据解决。
+
+- remaining_uncertainty_cn：理论无法给出确定收入排序；强假设导致外部效度有限；数值模拟只用于解释和展示，不构成经验证据。
+
+- link_to_next_phase_cn：为了克服理论假设不可行的局限，下一阶段引入荷兰花卉拍卖市场的真实现场实验数据。
+
+##### evidence_pointers
+
+1. Comparison of Performance in Equilibrium节
+
+2. Proposition 3
+
+3. Proposition 4
+
+4. Figure 2
+
+5. Figure 3
+
+#### 3. 准自然现场实验设计与数据构建阶段
+
+- order：3
+
+- name_cn：准自然现场实验设计与数据构建阶段
+
+- question_cn：在真实荷兰花卉拍卖市场中，混合机制如何在三个时钟上实施？如何构建处理组、对照组、实验前和实验期的可比样本？
+
+- inputs_and_setting_cn：Royal FloraHolland一个主要拍卖点（处理组）三个拍卖时钟自2016年1月21日至2月11日实施混合机制；对照组为邻近拍卖点全程使用传统机制；处理点2015年12月17日至2016年1月7日为实验前数据；对象为盆栽植物拍卖。
+
+- designed_or_compared_object_cn：处理组/对照组拍卖点、实验前/实验期、传统机制/混合机制；混合机制在多个并列最高出价时同时满足两位竞买人的需求。
+
+- baseline_control_or_counterfactual_cn：对照组拍卖点的传统机制同期数据，以及处理组的实验前数据。
+
+##### objective_metrics
+
+1. 拍卖级加权平均价格
+
+2. 完成拍卖的轮数
+
+3. 价格范围与价格标准差
+
+4. 平均购买量与购买量标准差
+
+- analysis_method_cn：数据整理、产品类别匹配、样本量描述、模型无关的描述性统计和分布比较。
+
+- main_result_cn：共170,094笔交易/48,648场拍卖；匹配后为160,822笔/46,216场。描述性统计显示处理组从实验前到实验期加权均价上升、价格范围与标准差下降、完成轮数下降，对照组同期变化较弱或轮数基本不变。
+
+- argumentative_role_cn：证明混合机制可以在真实大型B2B市场中运行，同时为后续DID识别提供数据基础和描述性证据。
+
+- remaining_uncertainty_cn：模型无关结果可能受供求混淆因素影响，不能直接作因果解释；需要正式计量模型。
+
+- link_to_next_phase_cn：描述性统计后文章转向识别策略，用DID控制时间、产品和供给方异质性。
+
+##### evidence_pointers
+
+1. Empirical Analysis节
+
+2. The Dutch Flower Auctions节
+
+3. Experimental Design节
+
+4. Figure 5
+
+5. Figure 6
+
+6. Table 1
+
+7. Table 2
+
+8. Table 3
+
+9. Table 4
+
+10. Figure 7
+
+#### 4. DID主效应估计阶段
+
+- order：4
+
+- name_cn：DID主效应估计阶段
+
+- question_cn：在控制时间、产品、供给方因素后，混合机制对收入（加权平均价格）和运营效率（完成轮数）的因果效应是多少？
+
+- inputs_and_setting_cn：46,216场匹配后拍卖；拍卖级数据；自变量包括Treatment×Post、Treatment、周固定效应、产品编码、盆径、最小株高、最小株数、LotSize、包装、种植者固定效应、周内星期固定效应、周固定效应。
+
+- designed_or_compared_object_cn：比较处理组在实验期与传统机制控制组及自身实验前的差异，即双重差分估计。
+
+- baseline_control_or_counterfactual_cn：控制组和实验前时期构成的DID反事实；平行趋势假设为识别前提。
+
+##### objective_metrics
+
+1. ln(WeightedAvgPrice)方程中Treatment×Post系数
+
+2. ln(NumberOfRounds)方程中Treatment×Post系数
+
+- analysis_method_cn：最小二乘DID，稳健标准误；收入与轮数均取对数以降低偏态。
+
+- main_result_cn：Treatment×Post对收入的系数不显著；对轮数的系数为-0.177，p<0.001，对应约18%的轮数下降；处理组本身价格水平显著低于控制组约6%。
+
+- argumentative_role_cn：这是论文的核心经验结果：混合机制不改变收入但显著提升市场清盘速度，直接支持理论命题4，并解决理论无法确定的收入问题。
+
+- remaining_uncertainty_cn：DID依赖平行趋势假设；可能存在竞买人构成变化、新颖效应、控制组不完美可比、伪相关等替代解释。
+
+- link_to_next_phase_cn：为排除这些威胁，下一阶段进行平行趋势检验及一系列稳健性检验。
+
+##### evidence_pointers
+
+1. Identification Strategy节
+
+2. Equations (5)-(6)
+
+3. Estimation Results节
+
+4. Main Findings节
+
+5. Table 5
+
+#### 5. 稳健性检验与异质性分析阶段
+
+- order：5
+
+- name_cn：稳健性检验与异质性分析阶段
+
+- question_cn：主效应是否在平行趋势、竞买人构成、产品价格层级、控制组可比性和伪相关等检验下依然稳健？效应是否存在产品和竞买人边界？
+
+- inputs_and_setting_cn：相对时间模型；活跃竞买人子样本（44,925场）；加入竞买人固定效应的增强模型；高/低端产品子样本（前30%与后30%产品）；CEM匹配样本（20,136场）；1000次随机安慰剂处理。
+
+- designed_or_compared_object_cn：重复DID估计并在不同子样本或匹配样本中比较Treatment×Post系数的变化；随机分配“安慰剂”处理以检验伪相关。
+
+- baseline_control_or_counterfactual_cn：平行趋势中的实验前最后一星期为基线；CEM匹配样本以匹配后的控制组为反事实；安慰剂检验以随机分配的处理为反事实。
+
+##### objective_metrics
+
+1. 实验前相对时间指标的系数是否显著
+
+2. 活跃竞买人子样本中处理效应是否稳定
+
+3. 高低端产品处理效应差异
+
+4. 匹配样本中处理效应
+
+5. 安慰剂系数的均值和标准差
+
+- analysis_method_cn：相对时间DID；加入竞买人固定效应；按平均价格排序分高/低端子样本；CEM匹配后DID；1000次随机安慰剂置换检验。
+
+- main_result_cn：实验前趋势系数不显著，平行趋势假设未违反；活跃竞买人子样本结果与主结果一致，排除构成变化和部分新颖效应；高、低端产品均有运营效率提升，但低价产品收入上升、高价产品收入略降；匹配样本结果一致；安慰剂检验中效率系数极不可能由随机生成。
+
+- argumentative_role_cn：这一阶段将核心因果主张从单一回归结果升级为经过多种识别威胁检验的稳健事实，同时揭示混合机制在不同产品价格层级上的异质性边界。
+
+- remaining_uncertainty_cn：尚不能证明机制改变通过感知竞争强度影响行为；稳健性检验也不能完全消除所有选择偏差；市场层面参与效应未测。
+
+- link_to_next_phase_cn：稳健性确认后，下一阶段转向机制性附加分析，探索价格稳定性和购买量变化的来源。
+
+##### evidence_pointers
+
+1. The Parallel Trend Assumption节
+
+2. Robustness Checks节
+
+3. Table 6
+
+4. Table 7
+
+5. Table 8
+
+6. Table 9
+
+7. Table 10
+
+#### 6. 机制性与边界附加分析阶段
+
+- order：6
+
+- name_cn：机制性与边界附加分析阶段
+
+- question_cn：混合机制如何影响价格离散度、序贯价格趋势和购买量？哪些证据支持“多赢家信息提高感知竞争强度”的解释？效应在高/低端产品间如何分化？
+
+- inputs_and_setting_cn：46,216场拍卖级价格范围与价格标准差；109,650笔交易级连续轮次价格比；拍卖级平均购买量和购买量标准差；高/低端产品子样本。
+
+- designed_or_compared_object_cn：将DID应用到价格离散度、购买量等二级结果；将Treatment×Post放入log价格比回归，以两单位、两轮拍卖为参考点。
+
+- baseline_control_or_counterfactual_cn：控制组和实验前作为反事实；两单位拍卖和实验前价格趋势作为基准。
+
+##### objective_metrics
+
+1. ln(PriceRange)与ln(S.D. of Price)中Treatment×Post
+
+2. ln(PriceCurrentRound/PricePreviousRound)中Treatment×Post
+
+3. ln(AvgPurchaseQuant)与ln(S.D. of PurchaseQuant)中Treatment×Post
+
+- analysis_method_cn：DID回归；序贯价格趋势回归引入交易秩次、前期剩余供给及与处理和时间的交互；高/低端产品子样本重新估计。
+
+- main_result_cn：价格范围降低约27%，价格标准差降低约20.5%；序贯价格趋势显著变平缓；平均购买量增加约6%，购买量标准差下降约8.5%；购买量增加主要出现在高端产品，低端产品不显著。
+
+- argumentative_role_cn：通过价格稳定性和购买量变化为机制解释提供间接证据：多赢家信息增强感知竞争强度，抑制后续轮次削价并刺激需求；高低端产品差异则界定机制适用的产品边界。
+
+- remaining_uncertainty_cn：没有直接测量个体感知竞争强度，也没有正式中介分析；价格稳定性与购买量的联系是推断性的；市场层参与决策仍未直接测试。
+
+- link_to_next_phase_cn：附加分析完成后，讨论部分将结果整合回理论贡献和更广泛的市场设计启示。
+
+##### evidence_pointers
+
+1. Additional Analyses节
+
+2. Equations (7)-(9)
+
+3. Table 11
+
+4. Table 12
+
+5. Table 13
+
+6. Table 14
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 提出成熟市场普遍存在拥堵问题
+
+2. PHENOMENON: 顺序荷兰拍卖中易腐商品需要快速清盘，传统规则先到先得导致拥堵
+
+3. DESIGN_FEATURE: 提出利用离散时钟合并最高出价的混合机制
+
+4. METHOD_JUSTIFICATION: 先建立博弈论模型比较机制
+
+5. RESULT: 模型预测混合机制提高运营效率且不损害分配效率
+
+6. STUDY_OVERVIEW: 再用准自然现场实验评价
+
+7. RESULT: 现场数据显示清盘速度显著提升、价格更稳、收入不受影响
+
+8. CONTRIBUTION: 为多物品拍卖设计和运营提供新认识
+
+### introduction_moves
+
+1. CONTEXT: 数字转型创造大量在线市场
+
+2. PRACTICAL_STAKES: 拥堵可导致市场失败
+
+3. PHENOMENON: 顺序荷兰拍卖的时钟机制造成同价请求延迟满足
+
+4. PRACTICAL_STAKES: 易腐商品使拥堵代价高昂
+
+5. DESIGN_FEATURE: 利用离散时钟合并同价最高出价
+
+6. MECHANISM: 多赢家可能引发更强的削价也可能通过竞争信号刺激出价
+
+7. RQ_OR_OBJECTIVE: 提出混合机制如何影响投标动态和结果的研究问题
+
+8. STUDY_OVERVIEW: 预告理论建模和现场实验的两阶段方法
+
+9. RESULT: 提前报告平均轮次下降约18%和价格稳定性增加
+
+10. CONTRIBUTION: 声称首次研究混合机制并内生运营效率
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 收益等价定理和Milgrom-Weber信息排序
+
+2. LIMITATION: 多数研究把拍卖速度视为外生或给定
+
+3. PRIOR_KNOWLEDGE: 多物品拍卖中需求削减和均衡复杂性
+
+4. LIMITATION: 离散投标使完全效率无法实现
+
+5. GAP: 已有离散投标研究多为决策论视角而非博弈论均衡视角
+
+6. PRIOR_KNOWLEDGE: 已有混合机制如BIN和BINTAC
+
+7. GAP: 已有混合机制研究忽视运营效率
+
+8. THEORY_INTRO: 构建N竞买人两物品离散投标模型
+
+9. THEORY_PROPOSITION: 证明传统机制对称贝叶斯纳什均衡存在
+
+10. THEORY_PROPOSITION: 证明混合机制对称贝叶斯纳什均衡存在
+
+11. RESULT: 均衡投标函数呈现轮次间差异化削价
+
+12. THEORY_PROPOSITION: 分配效率在无限细分时趋同
+
+13. RESULT: 收入排序解析上不确定
+
+14. THEORY_PROPOSITION: 有限投标空间下混合机制运营效率更高
+
+15. METHOD_JUSTIFICATION: 用数值模拟说明运营效率命题
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE: 混合机制在多个最高出价时同时满足多个竞买人
+
+2. REQUIREMENT: 利用离散时钟的预定价格层级作为批量合并依据
+
+3. BENCHMARK_OR_CONTRAST: 与传统顺序荷兰拍卖在相同价格层级上对比
+
+4. METHOD_JUSTIFICATION: 现场控制组用于排除系统性供需变化
+
+5. METHOD_JUSTIFICATION: DID适用于无法随机分配的制度性实验
+
+6. BENCHMARK_OR_CONTRAST: 使用加权平均价格和轮数作为收入和效率基准
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 理论模型强假设需现场数据补充
+
+2. METHOD_JUSTIFICATION: 实验期仅三周但交易量大
+
+3. RESULT: 描述性统计显示轮数下降但可能有偏
+
+4. RESULT: 主DID显示收入不显著、轮数下降18%
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST: 相对时间模型检验平行趋势
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST: 活跃竞买人子样本排除构成变化
+
+7. ROBUSTNESS_OR_BOUNDARY_TEST: 高低端产品揭示异质性
+
+8. ROBUSTNESS_OR_BOUNDARY_TEST: CEM匹配改善控制组可比性
+
+9. ROBUSTNESS_OR_BOUNDARY_TEST: 安慰剂检验排除伪相关
+
+10. RESULT: 附加分析显示价格更稳定、购买量更大
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 首次探索缓解多物品顺序拍卖拥堵的混合机制
+
+2. CONTRIBUTION: 将运营效率内生化为机制设计绩效
+
+3. CONTRIBUTION: 贡献于信息透明与信息策略文献
+
+4. IMPLICATION: 为时间敏感市场的从业者提供可操作启示
+
+5. BOUNDARY_CONDITION: 混合机制可扩展到其他时间敏感市场
+
+6. LIMITATION_AND_FUTURE: 未考虑下游零售竞争和参与决策
+
+7. LIMITATION_AND_FUTURE: B2C/C2C市场可能不直接适用
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 拍卖理论：收益等价定理、Milgrom-Weber信息排序、多物品统一价格与歧视价格拍卖、序贯拍卖的均衡复杂性
+
+2. 离散投标文献：离散价格空间导致完全效率不可达，需要平局规则或随机化
+
+3. 混合机制文献：eBay的BIN和BINTAC等混合机制在真实市场中的成功
+
+4. 行为经验知识：感知竞争强度与竞买人反应速度影响支付意愿
+
+5. 荷兰花卉拍卖市场领域知识：易腐商品、数字转换、拥堵和旁路交易压力
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：混合机制的核心思想来自对离散时钟结构的观察和对已有混合机制（如BIN、BINTAC）的类比，而不是由某条理论命题直接推导出来的设计规则；拍卖理论主要用于建立均衡、比较分配效率和运营效率，以及解释现场结果。因此理论影响了问题定义、变量选择和评价指标，但实际制品选择主要来自机制设计直觉和现场可行性约束。
+
+- 理论到设计翻译链：离散时钟造成同一价格只能由一个最早出价者成交，这是拥堵的结构性根源 → 将同一价格水平的多个最高出价批量合并，允许多个赢家以同一价格成交 → 若需求超过供给，用随机分配解决并列 → 该设计在保持分配效率不显著降低的同时减少完成轮次 → 多赢家信息可能提高后续轮次的感知竞争强度并抑制削价 → 现场实验用DID估计收入、轮次、价格稳定性和购买量的变化。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：离散投标使完全效率无法实现，并列时需要先到先得或随机化（Rothkopf and Harstad 1994a）
+
+- mechanism_cn：同一离散价格水平上多个最高出价无法同时成交形成延迟和拥堵；随机化可以决定分配
+
+- design_requirement_cn：混合机制应利用离散价格层级对同一价格出价进行批量处理，并在并列时随机分配
+
+- artifact_choice_cn：多个最高出价者在同一轮中全部成交，若供给不足则随机选择赢家
+
+- evaluated_contrast_cn：混合机制 vs 传统先到先得顺序荷兰拍卖
+
+- objective_result_cn：均衡中两机制分配效率在离散度无限细时趋同；有限离散空间下混合机制轮数更少
+
+##### evidence_pointers
+
+1. Proposition 3
+
+2. Proposition 4
+
+3. Figure 2
+
+4. Figure 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：拍卖速度/时间是一种有价值的资源，竞买人愿意用货币成本换时间（Katok and Kwasnica 2008）
+
+- mechanism_cn：减少完成拍卖的轮数能降低买方的监视成本和卖方的交付提前期
+
+- design_requirement_cn：机制应能在不影响收入的前提下提高市场清盘速度
+
+- artifact_choice_cn：在一轮中批量满足多个买方的需求，缩短多轮等待
+
+- evaluated_contrast_cn：处理组混合机制 vs 控制组传统机制的DID
+
+- objective_result_cn：ln(NumberOfRounds)的Treatment×Post系数为-0.177，即轮数下降约18%，收入效应不显著
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Equations (5)-(6)
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：感知竞争强度与竞买人反应速度提升会提高支付意愿，减少后续轮次削价（Häubl and Popkowski Leszczyc 2019）
+
+- mechanism_cn：看到多个竞争对手在同一轮成功购买，会增强竞买人对竞争强度的感知，从而抑制后续削价
+
+- design_requirement_cn：混合机制应实时披露多赢家的形成，使竞买人可以观察竞争对手的成交情况
+
+- artifact_choice_cn：同一轮多个赢家的成交信息自然可见
+
+- evaluated_contrast_cn：实验前后处理组价格离散度、序贯价格趋势和购买量的变化
+
+- objective_result_cn：价格范围下降27%、价格标准差下降20.5%，序贯价格下降趋势显著变缓，平均购买量增加6%
+
+##### evidence_pointers
+
+1. Table 11
+
+2. Table 12
+
+3. Table 13
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：多单位序贯拍卖中竞买人有多单位需求且真实市场存在简化启发式，使得强理论假设不成立（Goes et al. 2012; Lu et al. 2016, 2019）
+
+- mechanism_cn：真实市场的多单位需求和启发式行为可能使均衡预测失效，因此需要现场数据检验
+
+- design_requirement_cn：评价不能只依赖理论模型，需要在真实拍卖环境中运行并收集高粒度交易数据
+
+- artifact_choice_cn：在Royal FloraHolland三个时钟上实施混合机制并采集实验前/实验期、处理/控制点数据
+
+- evaluated_contrast_cn：处理点 vs 控制点、实验前 vs 实验期
+
+- objective_result_cn：现场DID结果与理论预测一致：轮数下降而收入不变；附加分析揭示价格稳定和购买量效应
+
+##### evidence_pointers
+
+1. Experimental Design节
+
+2. Table 5
+
+3. Table 11
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 博弈论均衡分析
+
+2. 解析命题证明
+
+3. 数值模拟/图示
+
+4. 大尺度准自然现场实验
+
+5. 双重差分估计
+
+6. 平行趋势检验
+
+7. 活跃竞买人子样本与竞买人固定效应
+
+8. 高/低端产品子样本
+
+9. CEM匹配
+
+10. 安慰剂置换检验
+
+11. 附加DID和价格趋势回归
+
+- why_these_evaluations_cn：由于混合机制是真实市场中的替代交易规则，单靠理论模型无法处理多单位需求、异质性分布和启发式行为；单靠简单前后比较又无法排除系统性供需变化。因此先以均衡分析给出清晰的理论预测和机制直觉，再用DID现场实验提供因果证据，最后用一系列稳健性和附加分析处理内部有效性和机制解释问题。
+
+- benchmark_and_contrast_chain_cn：理论部分以传统顺序荷兰拍卖为基准，在均衡中比较分配效率和运营效率；现场部分以控制点作为跨点对照、实验前作为时间对照，构造Treatment×Post的DID估计；稳健性部分进一步用实验前相对时间、活跃竞买人子样本、匹配样本和安慰剂处理检验对照是否成立；附加分析将价格稳定性、序贯价格趋势和购买量作为新的结果维度，说明效率改善不是以收入或价格稳定为代价，而是通过竞争强度感知实现。
+
+### claim_evidence_ledger
+
+#### 1. 混合机制能显著提高运营效率，即完成拍卖的平均轮数下降约18%
+
+- claim_cn：混合机制能显著提高运营效率，即完成拍卖的平均轮数下降约18%
+
+- evidence_cn：理论命题4提供一般性证明；现场DID主回归系数-0.177显著；平行趋势、匹配样本和安慰剂检验支持稳健性
+
+- supported_cn：支持
+
+- notes_cn：该主张同时获得理论模型和现场因果证据支持
+
+#### 2. 混合机制不损害收入
+
+- claim_cn：混合机制不损害收入
+
+- evidence_cn：DID主回归ln(WeightedAvgPrice)的Treatment×Post系数不显著；平行趋势和匹配样本中仍不显著
+
+- supported_cn：支持
+
+- notes_cn：理论无法确定收入排序，现场证据提供了经验答案
+
+#### 3. 混合机制不损害分配效率
+
+- claim_cn：混合机制不损害分配效率
+
+- evidence_cn：命题3证明当投标空间无限细时分配效率趋同；数值图显示两种机制接近
+
+- supported_cn：部分支持
+
+- notes_cn：这是纯理论结果，现场数据没有直接测量私人价值，因此未在经验上直接验证分配效率
+
+#### 4. 多赢家信息通过提高感知竞争强度抑制削价并提高价格稳定性
+
+- claim_cn：多赢家信息通过提高感知竞争强度抑制削价并提高价格稳定性
+
+- evidence_cn：价格范围、价格标准差下降，序贯价格下降趋势变缓，购买量增加；引用Häubl and Popkowski Leszczyc的一致性解释
+
+- supported_cn：部分支持
+
+- notes_cn：证据是间接和一致的，没有直接测量感知竞争强度或进行正式中介检验
+
+#### 5. 效率提升不仅来自同轮多需求满足，也来自购买量增加，尤其高端产品
+
+- claim_cn：效率提升不仅来自同轮多需求满足，也来自购买量增加，尤其高端产品
+
+- evidence_cn：平均购买量增加约6%，但高、低端产品子样本显示购买量增加仅在高价产品显著
+
+- supported_cn：支持
+
+- notes_cn：该边界条件由Table 14支持
+
+#### 6. 混合机制可推广到其他时间敏感市场
+
+- claim_cn：混合机制可推广到其他时间敏感市场
+
+- evidence_cn：仅作为讨论性推断，未在杂货折扣、清仓销售等场景实验
+
+- supported_cn：不支持
+
+- notes_cn：这是未来研究方向而非本文证据
+
+- internal_validity_strategy_cn：内部有效性主要依靠三重策略：一是DID设计，控制点和实验前时期共同构成反事实，周固定效应吸收共同时间冲击；二是平行趋势检验，用相对时间模型证明实验前两地点不存在差异趋势；三是排除替代解释，用活跃竞买人子样本和竞买人固定效应排除竞买人构成变化和新颖效应，用CEM匹配改善处理/控制可比性，用1000次安慰剂检验排除伪相关，同时控制产品、种植物、包装、星期等异质性。
+
+- external_validity_strategy_cn：外部有效性来自真实全球最大花卉拍卖市场DFA的现场实施，交易量大（超过16万笔、4.6万多场拍卖），涉及B2B真实买家，且处理机制在真实时钟上运行；同时通过高/低端产品子样本显示产品价格层级这一边界条件，并在讨论中明确机制可适用于其他时间敏感市场但需要适应调整。
+
+- what_is_not_actually_tested_cn：未被直接检验的主张包括：现场数据没有直接测度竞买人的私人价值，因此无法直接检验分配效率；感知竞争强度没有直接测量，机制解释是推断性的；市场层面竞买人进入/退出决策没有分析；下游零售竞争和B2C/C2C场景没有检验；机制对交易双方长期关系的影响未测。
+
+## 贡献闭环
+
+- technical_claim_cn：在离散投标的顺序荷兰拍卖中，将同一价格水平的最高出价批量合并、允许多个赢家，可以在不降低收入的前提下显著提高市场清盘速度并增强价格稳定性。
+
+- artifact_claim_cn：混合机制本身——尤其是多最高价同时成交并在并列时随机分配——是导致运营效率改善的设计因素；传统机制只有单一先到先得赢家，而混合机制释放了每轮中可同时成交的数量。
+
+- mechanism_claim_cn：多赢家披露的信息增加了竞买人对竞争强度的感知，抑制了后续轮次的削价，从而带来更稳定的价格路径并刺激购买量；价格稳定性同时减少买方后悔并鼓励参与。
+
+- boundary_claim_cn：收入效应整体不显著，但高、低端产品存在异质性：低价产品收入上升、高价产品收入轻微下降；购买量增加主要集中在高端产品；运营效率改善在高低端产品均显著但高端产品更强。机制的应用主要面向时间敏感、B2B、易腐商品市场，B2C/C2C市场需要进一步检验。
+
+- reusable_design_knowledge_cn：可复用的设计知识包括：利用离散价格层级的自然粒度构建平局合并规则；在多单位序贯拍卖中让多个同价最高出价者同时成交而非先到先得；当需求超过供给时使用随机分配；在机制设计评估中同时关注运营效率和价格稳定性，而不仅是收入；用混合机制实现传统序贯拍卖与统一价格拍卖之间的折中。
+
+- theoretical_contribution_cn：理论贡献主要体现在三点：一是将运营效率内生化为机制选择的核心绩效维度，补足传统最优机制设计只关注收入和分配效率的盲区；二是在离散投标空间、非连续偏好和多物品序贯拍卖环境下刻画对称贝叶斯纳什均衡，并与统一价格拍卖建立联系；三是通过多赢家信息揭示机制改变如何充当信息透明策略，影响竞买人的竞争强度感知和后续出价行为，从而连接机制设计与信息揭示文献。
+
+- how_discussion_closes_intro_gap_cn：引言指出现有机制设计研究多把速度当外生，混合机制研究缺乏现实证据。讨论部分明确回应这两个缺口：通过理论模型内生运营效率，通过大尺度现场实验提供混合机制在真实市场的评价；同时用价格稳定性结果说明机制不仅解决拥堵还改善信息透明，将贡献回归到市场设计和信息策略主题。
+
+- overclaim_or_unsupported_leaps_cn：可能的跳跃包括：将价格稳定性和购买量结果直接归因于感知竞争强度，而没有直接测量感知或做中介分析；将分配效率结论完全建立在理论命题上，现场数据并未直接验证分配效率；把对DFA的发现外推到其他时间敏感市场时主要依赖类比而非直接证据；收入不受影响的结论是基于有限实验期，未考虑长期参与和进入退出效应。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：成熟市场普遍面对的问题是，市场参与者的交易请求无法被及时容纳。
+
+- rhetorical_function_cn：在摘要开头建立通用市场问题，为读者提供抽象背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出后文拥堵概念及本文的针对性研究。
+
+- evidence_pointer：Abstract首句
+
+### 2. P1 S4
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：本文提出一种混合机制，利用离散时钟在同一轮次批量合并最高出价，允许多笔交易在同一价格成交。
+
+- rhetorical_function_cn：快速交代制品核心设计，让读者知道本文要评价的对象。
+
+- depends_on_cn：先前的拥堵问题
+
+- sets_up_cn：为后文理论模型和现场实验结果提供对象。
+
+- evidence_pointer：Abstract第四句左右
+
+### 3. P1 S5-S7
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S5-S7
+
+- move_code：RESULT
+
+- paraphrase_cn：博弈论模型预测运营效率更高且分配效率不损失；现场实验显示清盘速度显著提高且收入不变，轮数下降约18%。
+
+- rhetorical_function_cn：在摘要中给出核心结论，使读者快速把握贡献强度。
+
+- depends_on_cn：混合机制设计
+
+- sets_up_cn：为全文详细论证提供结论预览。
+
+- evidence_pointer：Abstract后半部分
+
+### 4. P1 S1-S4
+
+- order：4
+
+- section：Introduction
+
+- locator：P1 S1-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：数字转型使企业设计在线市场，诸如eBay、广告交易和在线劳动力市场；但成熟市场共同面临拥堵问题，且拥堵可导致市场失败。
+
+- rhetorical_function_cn：将研究置于数字市场总体背景中，并暗示拥堵的高后果性。
+
+- depends_on_cn：Roth引言和数字转型现象
+
+- sets_up_cn：为后文聚焦于顺序荷兰拍卖拥堵提供大背景。
+
+- evidence_pointer：Introduction第1段
+
+### 5. P2 S1-S5
+
+- order：5
+
+- section：Introduction
+
+- locator：P2 S1-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：顺序荷兰拍卖交易易腐商品，时钟从高价快速下降，多个同价出价按到达顺序处理，只给第一个出价者；若赢家未买完则重新起钟，导致需求高峰时出现延迟和拥堵。
+
+- rhetorical_function_cn：具体描述目标现象，解释拥堵产生的机制。
+
+- depends_on_cn：背景中的拥堵概念
+
+- sets_up_cn：为混合机制设计提供具体结构原因。
+
+- evidence_pointer：Introduction第2段
+
+### 6. P2 S6
+
+- order：6
+
+- section：Introduction
+
+- locator：P2 S6
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：由于商品易腐，这种拥堵对买卖双方代价高昂，不加解决会导致参与者离去。
+
+- rhetorical_function_cn：强调研究拥堵的现实重要性，抬升问题的紧迫性。
+
+- depends_on_cn：前句描述的拥堵机制
+
+- sets_up_cn：为提出的混合机制赋予实际价值。
+
+- evidence_pointer：Introduction第2段末句
+
+### 7. P3 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P3 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：鉴于时钟离散且价格水平预定，可以将同一价格水平到达的所有出价合并，在需求超过供给时随机分配，形成传统顺序荷兰拍卖与统一价格拍卖的混合。
+
+- rhetorical_function_cn：给出混合机制的关键设计逻辑，并说明其理论谱系。
+
+- depends_on_cn：离散时钟的结构性观察
+
+- sets_up_cn：为后文理论建模和现场实验提供待检验机制。
+
+- evidence_pointer：Introduction第3段
+
+### 8. P4 S1-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P4 S1-S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：混合机制一方面可能因多赢家特征导致更强削价，另一方面多竞争者已购可能被感知为竞争强度增加从而促进后续出价。
+
+- rhetorical_function_cn：提出两个反向机制，使研究问题具有张力。
+
+- depends_on_cn：混合机制设计
+
+- sets_up_cn：为现场结果的机制解释埋下伏笔。
+
+- evidence_pointer：Introduction第4段
+
+### 9. P5 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文核心研究问题是混合机制如何影响投标动态和市场结果。
+
+- rhetorical_function_cn：明示研究问题，把前文背景压缩为一个可回答的问题。
+
+- depends_on_cn：前述机制张力
+
+- sets_up_cn：宣告后文理论加实验的双重回答方式。
+
+- evidence_pointer：Introduction第5段第1句
+
+### 10. P5 S2-S4
+
+- order：10
+
+- section：Introduction
+
+- locator：P5 S2-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：先建立博弈论模型刻画两种机制的均衡，再用大规模准自然现场实验检验预测。
+
+- rhetorical_function_cn：预告整体研究结构，形成路标。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：引导读者进入理论模型和实证部分。
+
+- evidence_pointer：Introduction第5段
+
+### 11. P5 S4-S5
+
+- order：11
+
+- section：Introduction
+
+- locator：P5 S4-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：现场数据分析表明混合机制显著加速市场清盘且不降低收入，轮数下降约18%，价格更稳定。
+
+- rhetorical_function_cn：在引言中提前给出核心结果，强调证据性质。
+
+- depends_on_cn：研究问题与方法预告
+
+- sets_up_cn：为后面的贡献声明提供事实基础。
+
+- evidence_pointer：Introduction第5段末
+
+### 12. P6 S1-S4
+
+- order：12
+
+- section：Introduction
+
+- locator：P6 S1-S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章声称首次研究混合机制缓解多物品顺序拍卖拥堵，将运营效率纳入机制设计，并用多方法结合现场数据评价机制。
+
+- rhetorical_function_cn：建立贡献声明，与文献缺口对话。
+
+- depends_on_cn：核心结果
+
+- sets_up_cn：为文献综述提供论证目标。
+
+- evidence_pointer：Introduction第6段
+
+### 13. Single-Unit vs. Multi-Unit Auctions P1 S2-S3
+
+- order：13
+
+- section：Literature Review
+
+- locator：Single-Unit vs. Multi-Unit Auctions P1 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：单物品拍卖有收益等价定理，信息关联时更透明机制产生更高期望收益。
+
+- rhetorical_function_cn：总结拍卖理论经典结果，为后文指出离散和多单位复杂性做铺垫。
+
+- depends_on_cn：无
+
+- sets_up_cn：对比多单位拍卖的复杂性和离散投标的限制。
+
+- evidence_pointer：Literature Review第一节
+
+### 14. Single-Unit vs. Multi-Unit Auctions P2 S1
+
+- order：14
+
+- section：Literature Review
+
+- locator：Single-Unit vs. Multi-Unit Auctions P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多单位拍卖涉及额外经济问题，统一价格与歧视价格可以被视为多单位第二价格和第一价格的推广。
+
+- rhetorical_function_cn：建立与混合机制相关的拍卖类型学。
+
+- depends_on_cn：单物品拍卖理论
+
+- sets_up_cn：后文将混合机制定位为两者的混合。
+
+- evidence_pointer：Literature Review第二节
+
+### 15. Single-Unit vs. Multi-Unit Auctions P2 S4-S5
+
+- order：15
+
+- section：Literature Review
+
+- locator：Single-Unit vs. Multi-Unit Auctions P2 S4-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：统一价格拍卖中的诚实出价性质并不成立，因不同单位存在差异化削价；多单位序贯拍卖均衡可能涉及混合策略且难以刻画。
+
+- rhetorical_function_cn：指出标准多单位拍卖理论局限，为本文的离散博弈模型提供动机。
+
+- depends_on_cn：多单位拍卖理论
+
+- sets_up_cn：诱出对离散投标和新型混合机制的需求。
+
+- evidence_pointer：Literature Review第二节末
+
+### 16. Continuous vs. Discrete Bids P1 S1-S4
+
+- order：16
+
+- section：Literature Review
+
+- locator：Continuous vs. Discrete Bids P1 S1-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：多数理论研究假设连续投标，但真实拍卖常用离散增量；离散投标下完全效率一般无法实现。
+
+- rhetorical_function_cn：识别离散投标文献缺口，同时解释为什么混合机制中的随机分配是合理的。
+
+- depends_on_cn：已有拍卖理论
+
+- sets_up_cn：为混合机制中的并列随机分配提供理论基础。
+
+- evidence_pointer：Literature Review第三节
+
+### 17. Continuous vs. Discrete Bids P2 S3
+
+- order：17
+
+- section：Literature Review
+
+- locator：Continuous vs. Discrete Bids P2 S3
+
+- move_code：GAP
+
+- paraphrase_cn：与Bapna等人不同，本文从博弈论均衡视角推导两种机制的对称纯策略贝叶斯纳什均衡，再用现场实验检验，而非决策论视角下的投标行为。
+
+- rhetorical_function_cn：明确本文与最接近文献的方法差异。
+
+- depends_on_cn：离散投标文献
+
+- sets_up_cn：引出理论建模部分。
+
+- evidence_pointer：Literature Review第三节末
+
+### 18. Hybrid Mechanisms P2 S3
+
+- order：18
+
+- section：Literature Review
+
+- locator：Hybrid Mechanisms P2 S3
+
+- move_code：GAP
+
+- paraphrase_cn：现有混合机制研究主要关注收入，作者强调还关心运营效率，因为时间对双方都有价值。
+
+- rhetorical_function_cn：构造本文在研究缺口方面的独特性。
+
+- depends_on_cn：BIN和BINTAC的综述
+
+- sets_up_cn：为理论模型选择运营效率作为核心结果变量做铺垫。
+
+- evidence_pointer：Literature Review第四节末
+
+### 19. Model setup P1
+
+- order：19
+
+- section：Theoretical Model
+
+- locator：Model setup P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：模型假设N>2个风险中性竞买人竞拍两件相同物品，每人单一单位需求，私人价值独立同分布且从离散价格集合选择报价。
+
+- rhetorical_function_cn：建立理论模型的基本边界条件，使均衡分析可操作。
+
+- depends_on_cn：文献综述中的离散投标问题
+
+- sets_up_cn：为两种机制的均衡定义提供数学框架。
+
+- evidence_pointer：Theoretical Model第1段
+
+### 20. Equilibrium Analysis, Sequential Dutch Auction
+
+- order：20
+
+- section：Theoretical Model
+
+- locator：Equilibrium Analysis, Sequential Dutch Auction
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：命题1断言传统顺序荷兰拍卖中存在由两阶段临界点定义的分段常数对称贝叶斯纳什均衡。
+
+- rhetorical_function_cn：给出传统机制的均衡存在性，作为比较基准。
+
+- depends_on_cn：模型设定
+
+- sets_up_cn：随后通过同样方法建立混合机制的均衡。
+
+- evidence_pointer：Proposition 1
+
+### 21. Equilibrium Analysis, Hybrid Mechanism
+
+- order：21
+
+- section：Theoretical Model
+
+- locator：Equilibrium Analysis, Hybrid Mechanism
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：命题2断言混合机制同样存在对称贝叶斯纳什均衡，虽然第一轮多赢家的策略交互更复杂。
+
+- rhetorical_function_cn：证明混合机制不是规则上不连贯的临时设计，而是有可分析均衡的机制。
+
+- depends_on_cn：命题1的逆向归纳方法
+
+- sets_up_cn：为均衡绩效比较提供基础。
+
+- evidence_pointer：Proposition 2
+
+### 22. Figure 1附近的说明
+
+- order：22
+
+- section：Theoretical Model
+
+- locator：Figure 1附近的说明
+
+- move_code：RESULT
+
+- paraphrase_cn：均衡投标函数显示低价值者在第二轮比第一轮更削价，高价值者则相反，且两种机制都呈现这种差异化削价。
+
+- rhetorical_function_cn：用图示展示均衡结构的非平凡性，也为后续价格趋势提供直觉。
+
+- depends_on_cn：命题1和命题2的均衡
+
+- sets_up_cn：暗示多轮机制下不同价值区间有不同出价动力。
+
+- evidence_pointer：Figure 1
+
+### 23. Allocative Efficiency
+
+- order：23
+
+- section：Theoretical Model
+
+- locator：Allocative Efficiency
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：命题3证明当投标水平数趋于无穷时，混合机制与传统机制的期望分配效率之差趋于零。
+
+- rhetorical_function_cn：在理论层面排除混合机制以牺牲分配效率为代价的担忧。
+
+- depends_on_cn：均衡投标函数
+
+- sets_up_cn：为现场实验只需关注收入与效率铺路。
+
+- evidence_pointer：Proposition 3
+
+### 24. Allocative Efficiency末尾
+
+- order：24
+
+- section：Theoretical Model
+
+- locator：Allocative Efficiency末尾
+
+- move_code：LIMITATION
+
+- paraphrase_cn：即使在简单三投标者均匀分布下，混合机制收入可能更高也可能更低，解析上无法得到渐近收入排序。
+
+- rhetorical_function_cn：明确理论边界，防止读者期待理论能给出收入预测。
+
+- depends_on_cn：命题3和均衡临界点复杂性
+
+- sets_up_cn：将收入比较留给实证部分。
+
+- evidence_pointer：Allocative Efficiency节末
+
+### 25. Operational Efficiency
+
+- order：25
+
+- section：Theoretical Model
+
+- locator：Operational Efficiency
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：命题4证明在有限投标空间下，混合机制的平均完成轮数低于传统机制。
+
+- rhetorical_function_cn：给出核心理论预测：运营效率提升。
+
+- depends_on_cn：均衡下第一轮只有一个最高价的概率小于1
+
+- sets_up_cn：为现场DID提供可直接检验的假设。
+
+- evidence_pointer：Proposition 4
+
+### 26. Operational Efficiency, Figure 3
+
+- order：26
+
+- section：Theoretical Model
+
+- locator：Operational Efficiency, Figure 3
+
+- move_code：RESULT
+
+- paraphrase_cn：数值模拟显示，当价格水平稀疏时混合机制极大减少轮数；随着价格水平增加，平均轮数上升但仍小于两轮。
+
+- rhetorical_function_cn：通过直观模拟增强命题4的可信度。
+
+- depends_on_cn：命题4
+
+- sets_up_cn：使理论预测更具体可感。
+
+- evidence_pointer：Figure 3
+
+### 27. Empirical Analysis引言段
+
+- order：27
+
+- section：Empirical Analysis
+
+- locator：Empirical Analysis引言段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：理论模型的单一单位需求、共同分布和均衡策略假设在真实市场不可行，竞买人有多单位需求和启发式行为。
+
+- rhetorical_function_cn：解释为什么需要转向现场实验。
+
+- depends_on_cn：理论模型部分
+
+- sets_up_cn：引入DFA准自然实验。
+
+- evidence_pointer：Empirical Analysis第1段
+
+### 28. The Dutch Flower Auctions P1 S1-S2
+
+- order：28
+
+- section：Empirical Analysis
+
+- locator：The Dutch Flower Auctions P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：DFA占全球花卉贸易一半以上，年交易额约46亿欧元，使用传统顺序荷兰拍卖。
+
+- rhetorical_function_cn：介绍现场实验所在市场的重要性和代表性。
+
+- depends_on_cn：前文现场实验预告
+
+- sets_up_cn：为实验设计和外部效度提供背景。
+
+- evidence_pointer：The Dutch Flower Auctions节
+
+### 29. The Dutch Flower Auctions P2 S4
+
+- order：29
+
+- section：Empirical Analysis
+
+- locator：The Dutch Flower Auctions P2 S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：数字转换降低交易成本，使生产者更容易绕过拥堵的拍卖市场直接销售，而传统机制几乎没有进化，导致市场生存担忧。
+
+- rhetorical_function_cn：说明现场实验的现实动机，与引言拥堵问题呼应。
+
+- depends_on_cn：DFA背景
+
+- sets_up_cn：解释为何市场主办方愿意试验混合机制。
+
+- evidence_pointer：The Dutch Flower Auctions节末
+
+### 30. Experimental Design P1 S1-S2
+
+- order：30
+
+- section：Empirical Analysis
+
+- locator：Experimental Design P1 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验于2016年初在三个盆栽植物时钟上实施混合机制，处理点在单一最高出价时与传统机制相同，在多个最高出价时多个赢家同时成交。
+
+- rhetorical_function_cn：精确说明现场中混合机制的操作定义。
+
+- depends_on_cn：实验现场和数据来源
+
+- sets_up_cn：为后续DID编码提供处理变量依据。
+
+- evidence_pointer：Experimental Design节
+
+### 31. Experimental Design P2
+
+- order：31
+
+- section：Empirical Analysis
+
+- locator：Experimental Design P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：同时收集处理点实验前数据和邻近控制点同期数据，以便排除实验期间系统性供需变化的混淆。
+
+- rhetorical_function_cn：为对照设计提供理由，预告DID。
+
+- depends_on_cn：处理点实施
+
+- sets_up_cn：引出DID识别策略。
+
+- evidence_pointer：Experimental Design P2
+
+### 32. Data and Descriptive Analysis P1-P2
+
+- order：32
+
+- section：Empirical Analysis
+
+- locator：Data and Descriptive Analysis P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：总样本为170,094笔交易/48,648场拍卖，匹配后为160,822笔/46,216场；描述性统计显示处理组轮数下降、价格离散度下降。
+
+- rhetorical_function_cn：提供样本规模和数据质量，同时给出模型无关证据。
+
+- depends_on_cn：数据处理和类别匹配
+
+- sets_up_cn：为DID模型确定分析样本和初步结果。
+
+- evidence_pointer：Data and Descriptive Analysis节, Table 3-4
+
+### 33. Data and Descriptive Analysis P3
+
+- order：33
+
+- section：Empirical Analysis
+
+- locator：Data and Descriptive Analysis P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：模型无关结果没有控制供求两侧潜在混淆因素，因此可能有偏或误导。
+
+- rhetorical_function_cn：主动削弱描述性证据，为DID登场制造逻辑需要。
+
+- depends_on_cn：描述性统计
+
+- sets_up_cn：正式识别策略。
+
+- evidence_pointer：Data and Descriptive Analysis节末
+
+### 34. Identification Strategy P1
+
+- order：34
+
+- section：Empirical Analysis
+
+- locator：Identification Strategy P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于制度设置不允许随机分配处理，采用DID策略进行因果推断。
+
+- rhetorical_function_cn：解释为什么使用DID而不是随机实验。
+
+- depends_on_cn：描述性统计的局限
+
+- sets_up_cn：给出回归方程和系数含义。
+
+- evidence_pointer：Identification Strategy节
+
+### 35. Identification Strategy P2
+
+- order：35
+
+- section：Empirical Analysis
+
+- locator：Identification Strategy P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：关注两个关键指标：加权平均价格和完成轮数，分别衡量收入和运营效率，并取对数处理偏态。
+
+- rhetorical_function_cn：明确结果变量定义和变换依据。
+
+- depends_on_cn：DID策略
+
+- sets_up_cn：回归模型的具体解释。
+
+- evidence_pointer：Identification Strategy节, Equations (5)-(6)
+
+### 36. Main Findings P1
+
+- order：36
+
+- section：Empirical Analysis
+
+- locator：Main Findings P1
+
+- move_code：RESULT
+
+- paraphrase_cn：收入模型中Treatment×Post不显著；效率模型中系数为-0.177且显著，约等于18%轮数下降。
+
+- rhetorical_function_cn：给出核心经验结果，直接回答研究问题。
+
+- depends_on_cn：DID模型与数据
+
+- sets_up_cn：为稳健性检验和附加分析提供主效应。
+
+- evidence_pointer：Table 5
+
+### 37. Main Findings P2
+
+- order：37
+
+- section：Empirical Analysis
+
+- locator：Main Findings P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：效率提升对买方降低监控成本，对卖方缩短提前期并在每日日程中腾出更多拍卖空间。
+
+- rhetorical_function_cn：将统计系数翻译为市场参与者的实际利益。
+
+- depends_on_cn：主效应结果
+
+- sets_up_cn：讨论部分对运营效率重要性的论证。
+
+- evidence_pointer：Main Findings节末
+
+### 38. The Parallel Trend Assumption
+
+- order：38
+
+- section：Empirical Analysis
+
+- locator：The Parallel Trend Assumption
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：相对时间模型显示实验前各期处理组与对照组差异不显著，平行趋势假设未被违反；实验各周效率效应仍显著为负。
+
+- rhetorical_function_cn：验证DID识别核心假设，提高因果推断可信度。
+
+- depends_on_cn：DID主回归
+
+- sets_up_cn：引导后续稳健性检验列表。
+
+- evidence_pointer：The Parallel Trend Assumption节, Table 6
+
+### 39. Robustness Checks P1-P3
+
+- order：39
+
+- section：Empirical Analysis
+
+- locator：Robustness Checks P1-P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：通过活跃竞买人子样本和竞买人固定效应排除竞买人构成变化导致的新颖效应或风险厌恶差异。
+
+- rhetorical_function_cn：针对参与者构成这一具体替代解释进行排除。
+
+- depends_on_cn：平行趋势检验
+
+- sets_up_cn：后续高低端与匹配检验。
+
+- evidence_pointer：Robustness Checks节, Table 7
+
+### 40. Robustness Checks P4-P5
+
+- order：40
+
+- section：Empirical Analysis
+
+- locator：Robustness Checks P4-P5
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：高、低端产品子样本显示收入效应相反：低价产品上升、高价产品下降；运营效率效应两端均显著但高端更强。
+
+- rhetorical_function_cn：揭示产品价格层级这一边界条件，同时证明主效应不是单一产品类别的偶然结果。
+
+- depends_on_cn：主回归和活跃竞买人检验
+
+- sets_up_cn：讨论中关于产品异质性的边界主张。
+
+- evidence_pointer：Robustness Checks节, Table 8
+
+### 41. Robustness Checks P6-P8
+
+- order：41
+
+- section：Empirical Analysis
+
+- locator：Robustness Checks P6-P8
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：CEM匹配样本和安慰剂置换检验进一步支持主结果，随机安慰剂不可能生成效率上的显著效应。
+
+- rhetorical_function_cn：提高控制组可比性并排除伪相关。
+
+- depends_on_cn：前述稳健性检验
+
+- sets_up_cn：附加机制分析前的最后防线。
+
+- evidence_pointer：Robustness Checks节, Table 9, Table 10
+
+### 42. Additional Analyses P1-P2
+
+- order：42
+
+- section：Empirical Analysis
+
+- locator：Additional Analyses P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：混合机制显著降低拍卖内价格范围和价格标准差，意味着价格稳定性提高。
+
+- rhetorical_function_cn：将结果扩展到收入与轮次之外，增加机制价值。
+
+- depends_on_cn：主效应与稳健性
+
+- sets_up_cn：随后探索价格稳定性的驱动因素。
+
+- evidence_pointer：Additional Analyses节, Table 11
+
+### 43. Additional Analyses P3-P4
+
+- order：43
+
+- section：Empirical Analysis
+
+- locator：Additional Analyses P3-P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：序贯价格趋势回归显示实验后价格下降趋势显著变缓，这与观察多竞争者成功购买提高感知竞争强度的解释一致。
+
+- rhetorical_function_cn：为多赢家信息机制提供间接行为证据。
+
+- depends_on_cn：价格稳定性结果和Häubl等人文献
+
+- sets_up_cn：讨论中关于信息透明和信息策略的贡献。
+
+- evidence_pointer：Table 12
+
+### 44. Additional Analyses P5-P7
+
+- order：44
+
+- section：Empirical Analysis
+
+- locator：Additional Analyses P5-P7
+
+- move_code：RESULT
+
+- paraphrase_cn：购买量DID显示平均购买量增加约6%，购买量标准差下降超过8%；购买量增加主要在高价产品。
+
+- rhetorical_function_cn：说明机制不仅加快速度，还提高单笔交易需求集中度，并为高端产品效率改善增加另一条渠道。
+
+- depends_on_cn：价格趋势结果
+
+- sets_up_cn：讨论运营效率改善的多种来源。
+
+- evidence_pointer：Table 13, Table 14
+
+### 45. Discussion第一段
+
+- order：45
+
+- section：Discussion
+
+- locator：Discussion第一段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者用分析建模和现场实验证明混合机制在运营效率和价格稳定性上显著改善市场业绩。
+
+- rhetorical_function_cn：把经验结果重新表述为对研究问题的回答。
+
+- depends_on_cn：所有实证分析
+
+- sets_up_cn：展开具体贡献声明。
+
+- evidence_pointer：Discussion第1段
+
+### 46. Contributions P1-P3
+
+- order：46
+
+- section：Discussion
+
+- locator：Contributions P1-P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献包括首次研究混合机制缓解多物品顺序拍卖拥堵、将运营效率内生化为设计绩效、以及把机制设计连接到信息透明文献。
+
+- rhetorical_function_cn：系统化贡献主张，直接回应引言缺口。
+
+- depends_on_cn：核心结果与理论模型
+
+- sets_up_cn：为实践启示和边界限制做铺垫。
+
+- evidence_pointer：Discussion, Contributions节
+
+### 47. Implications P2-P3
+
+- order：47
+
+- section：Discussion
+
+- locator：Implications P2-P3
+
+- move_code：IMPLICATION
+
+- paraphrase_cn：混合机制可减少交付提前期、腾出每日拍卖日程，从而促进市场进入和总交易收入；还可适应到其他时间敏感市场如杂货折扣和清仓销售。
+
+- rhetorical_function_cn：把研究发现外推到实践场景，扩大文章意义。
+
+- depends_on_cn：DFA结果
+
+- sets_up_cn：随后声明应用边界。
+
+- evidence_pointer：Discussion, Implications节
+
+### 48. Limitations and Future Work P1-P3
+
+- order：48
+
+- section：Discussion
+
+- locator：Limitations and Future Work P1-P3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限包括未考虑下游零售竞争、未测市场层参与决策、以及结果可能不直接适用于B2C/C2C市场。
+
+- rhetorical_function_cn：主动界定理论、市场和参与层面的边界，保护贡献不过度泛化。
+
+- depends_on_cn：文章全部发现
+
+- sets_up_cn：为未来研究指路，同时结束论证。
+
+- evidence_pointer：Discussion, Limitations and Future Work节
+
+## 写作技术
+
+- gap_construction_cn：文章从现实拥堵现象出发，先把它抽象为离散时钟下同价请求只有先到者成交的结构性问题；然后在文献综述中逐层收窄：标准拍卖理论忽略速度、离散投标研究多为决策论而非博弈论、混合机制研究忽视运营效率，最后把本文定位为兼有博弈论均衡、运营效率内生化和现场证据的混合机制研究。
+
+- signposting_cn：开篇摘要直接给结论；引言末段预告文献、模型、现场实验和讨论；理论部分在分配效率末尾声明收入问题留给实证；实证部分先说明为何需要现场实验，再按实验设计、数据、识别、结果、稳健性、附加分析逐层推进。
+
+- transition_logic_cn：每个阶段结尾都指出本阶段无法回答的问题，并用该问题开启下一阶段：理论收入排序不确定→现场实证；模型假设过强→DFA实验；描述性统计有偏→DID；DID依赖假设→平行趋势和稳健性；主效应已确认→附加机制分析；机制分析完→讨论贡献和边界。
+
+- claim_evidence_rhythm_cn：作者先给出均衡存在性和绩效命题，再用图示辅助说明；现场部分先用模型无关证据展示初步印象，随即声明其可能有偏，再由DID给出正式估计；主结果报告后立即转入平行趋势和多重稳健性检验，最后附加分析补充机制和边界。每次提出较强主张时都伴随对应的证据指针。
+
+- benchmark_narrative_cn：基准是传统顺序荷兰拍卖：理论层面作为机制对照，实证层面作为控制组机制；在DID中又叠加实验前时期作为时间基准；稳健性中用活跃竞买人子样本和匹配样本强化控制组的可比性；附加分析中用两单位、两轮拍卖和实验前价格趋势作为行为基准，使价格稳定性和趋势变化有明确参照。
+
+- theory_return_cn：结果并不停留在“新机制更有效”的技术层面，而是回到三类理论问题：机制设计绩效维度（运营效率）、离散投标下的均衡理论、信息透明与多赢家信息对竞争强度感知的影响。价格稳定性和购买量结果被解释为信息机制而非单纯规则变化，从而在讨论中完成从现场系数到理论概念的上升。
+
+- contribution_positioning_cn：贡献定位为市场设计交叉领域：先以“首次”标记混合机制贡献，再以“扩展文献”将运营效率内生化为机制设计绩效，最后以“信息透明”连接更广泛的信息策略文献，每个贡献都落在已有文献的清晰缺口上。
+
+- novelty_protection_cn：作者防止贡献退化为一次性性能结果的手段包括：用博弈论均衡提供机制的一般性，而不是仅报告现场效果；用运营效率和价格稳定性多个结果维度证明机制价值不止于速度；用稳健性检验排除替代解释；用高/低端产品子样本显示异质性但并非机制失效；在讨论中将现场结果解释为可复用的机制设计知识，并指出可适配的其他市场。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：在引言中从成熟市场普遍问题收缩到具体拍卖机制的拥堵现象，说明为什么值得研究
+
+- research_job_cn：识别明确的现实问题、核心机制缺陷和相关市场背景
+
+- required_evidence_cn：需要能够展示拥堵来源的机制细节，如时钟离散、先到先得、易腐商品代价
+
+- transition_to_next_cn：用结构性观察自然提出混合机制
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：给出制品的初步设计逻辑，并预告两个反向的行为机制
+
+- research_job_cn：设计或选择要评价的替代机制，并列出可能的行为结果
+
+- required_evidence_cn：机制设计必须与结构缺陷对应，且存在至少两个竞争性预期
+
+- transition_to_next_cn：形成研究问题并宣布用理论加实证双重评价
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：文献综述逐层构造缺口，说明已有理论、离散投标和混合机制研究的不足
+
+- research_job_cn：定位最接近文献并明确自身差异
+
+- required_evidence_cn：能证明之前研究没有覆盖运营效率、博弈论均衡或真实市场证据
+
+- transition_to_next_cn：引入理论模型
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：建立简洁可解的博弈论模型，证明机制存在均衡并推导绩效命题
+
+- research_job_cn：用均衡分析给出可检验预测，并明确解析分析无法回答的问题
+
+- required_evidence_cn：需要均衡存在性、绩效比较命题，最好有数值图示
+
+- transition_to_next_cn：指出模型强假设在真实市场不成立，因此需要现场数据
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：描述现场和实验设计，说明为什么该现场适合研究机制问题
+
+- research_job_cn：争取或利用真实市场机制改变，收集处理组、对照组和实验前/实验后数据
+
+- required_evidence_cn：需要处理操纵清晰、对照点可比、样本量足够大
+
+- transition_to_next_cn：建立DID识别策略
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用DID估计主效应，并随后用平行趋势、子样本、匹配和安慰剂保护因果解释
+
+- research_job_cn：估计处理效应，并系统排除内部有效性威胁
+
+- required_evidence_cn：需要主效应显著或明确为负面结果，且各稳健性检验结果一致
+
+- transition_to_next_cn：转向附加机制分析
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：通过价格离散度、价格趋势和购买量等附加结果解释机制发挥作用的路径和边界
+
+- research_job_cn：探索机制的行为机制证据和异质性
+
+- required_evidence_cn：需要能区分竞争强度、削价抑制和需求刺激的结果指标
+
+- transition_to_next_cn：讨论贡献、实践启示和局限
+
+### most_transferable_moves_cn
+
+1. 用现实机制的结构细节定义问题，而不是泛泛谈技术趋势
+
+2. 先给出制品的简洁设计逻辑，再列出两个相反力量制造研究张力
+
+3. 文献综述按“标准理论→离散复杂→混合机制”逐层收窄缺口
+
+4. 在理论部分明确写出哪些结论能解析得到、哪些不能，把不能解决的留给实证
+
+5. 主动声明描述性证据可能有偏，为计量模型铺垫
+
+6. 每项稳健性检验都针对一个具体的替代解释，而不是机械堆砌
+
+7. 附加分析从结果变量倒推机制证据，再引用行为文献支持解释
+
+8. 讨论贡献时每一项都回扣到引言或文献中的一个具体缺口
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 大尺度准自然现场实验需要与市场主办方深度合作，作者通过Royal FloraHolland的iFlow项目获得三个时钟的机制改变和约46,216场拍卖数据
+
+2. 需要同时存在可比较的处理点和控制点，以及实验前数据窗口
+
+3. 博弈论均衡证明和附录数学推导较为耗时
+
+4. 真实市场的离散时钟、产品异质性、种植者固定效应等数据整理工作量大
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“我们提出混合机制”却不给出机制与结构缺陷的对应关系
+
+2. 不能在没有均衡证明的情况下声称机制有理论预测
+
+3. 不能只报告DID主回归而不做平行趋势和安慰剂检验
+
+4. 不能在没有价格趋势和购买量数据的情况下就把结果归因于感知竞争强度
+
+5. 不能把DFA现场结果直接外推到B2C/C2C而不声明边界
+
+- single_best_description_of_the_routine_cn：从市场机制的具体拥堵缺陷出发，设计一个紧贴结构规则的混合机制，用博弈论给出均衡和绩效预测，再用真实大尺度准自然现场实验进行DID因果检验，最后以机制性附加分析和理论回扣完成贡献闭环。
+
+## 分析边界
+
+全文、附录和图表基本完整，但部分公式和图像在转换中有轻微损坏，图注编号出现重复或错位；句子级位置主要依据段落和标题，未提供精确页码；对机制解释（感知竞争强度）的编码依赖作者自述和结果一致性推断，原文并未提供直接中介检验。

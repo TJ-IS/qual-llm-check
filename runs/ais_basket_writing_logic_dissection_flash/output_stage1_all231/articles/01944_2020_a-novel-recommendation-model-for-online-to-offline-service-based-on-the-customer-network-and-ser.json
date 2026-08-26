@@ -1,0 +1,946 @@
+{
+  "record_id": "1944",
+  "source_file": "01944_2020_a-novel-recommendation-model-for-online-to-offline-service-based-on-the-customer-network-and-ser.md",
+  "title": "A Novel Recommendation Model for Online-to-Offline Service Based on the Customer Network and Service Location",
+  "authors": "Yuchen Pan; Desheng Wu",
+  "year": "2020",
+  "journal": "Journal of Management Information Systems",
+  "doi": "10.1080/07421222.2020.1759927",
+  "fulltext_chars": 98008,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:19.037721+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何设计一个同时考虑客户在线行为网络和服务离线位置的O2O推荐模型，以克服评分稀疏性并提升推荐效果？",
+    "artifact_and_design_cn": "提出CNLRec，由CNRec和LRec两部分组成。CNRec基于共同使用行为构建客户网络，用共同使用服务数与PCC联合估计纽带强度，用行为活跃度和偏好多样性估计节点属性，通过直接/间接关系度和客户属性加权产生服务排名，并消除用户规模使用偏差；LRec用Haversine公式计算客户中心偏好位置与候选服务位置的距离，生成位置排名；最后用权重γ将两个排名组合为最终推荐。",
+    "objective_outcomes_cn": "在Dianping真实O2O数据和MovieLens 100K上，CNLRec/CNRec在低数据密度下显著优于CF、MF、DL、CL、NN等方法；客户网络在矩阵密度约2%以上时能连接几乎所有客户，缓解稀疏性问题；参数实验中α=0.6或0.7最优、β=0.5附近最优、γ=0.6最优；高密度下先进方法可能反超，界定了方法适用边界。",
+    "core_contribution_cn": "提出基于共同使用行为的客户网络用于O2O推荐；提出共同使用次数为主、PCC为辅的纽带强度估计；提出从行为活跃度和偏好多样性两个角度估计客户属性；将服务位置信息纳入推荐过程；使用包含位置信息的大型真实O2O数据集进行验证。",
+    "whole_argument_in_one_paragraph_cn": "作者从O2O平台信息过载和位置敏感的实际问题出发，指出现有基于评分矩阵的推荐系统在稀疏数据和评分失真下效果不佳，且未利用O2O特有的服务位置信息；因此提出以顾客共同使用行为构建顾客网络，用共同使用次数和PCC联合度量关系强度，用行为活跃度和偏好多样性度量顾客属性，并以Haversine距离将服务位置纳入排名；再在Dianping和MovieLens上通过多个密度下的离线比较实验验证网络覆盖率、推荐性能及参数敏感性，进而界定该方法在稀疏数据场景下的适用优势和在密集数据场景下的局限，最终形成针对O2O推荐的设计知识和边界条件。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "论文提出一个新的计算推荐方法，以真实O2O数据集和MovieLens基准集为主要证据，通过与多个广泛使用和最先进方法的离线性能比较来证明有效性；虽然也有网络结构分析和参数敏感性分析，但核心论证依赖benchmark指标而非理论检验或现场实验。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章先从CF在稀疏数据上的性能缺陷出发，再构造基于客户网络与服务位置的推荐制品，随后通过与多个基线在多种数据密度下的benchmark比较展示优势，最后将结果推广为关于O2O推荐的设计知识和适用边界。这不是理论到设计的实验循环，也不是现场因果干预。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "第一阶段构建并分析不同矩阵密度下客户网络的连接性，证明网络在稀疏条件下仍能覆盖多数客户；第二阶段在标准离线划分下与多种推荐方法比较，验证CNLRec/CNRec/ LRec的整体性能；第三阶段通过删除少量评分用户提高数据密度，测试高密度下的性能变化并界定边界；第四阶段对α、β、γ三个权重参数进行网格搜索，确认每个组件的最优配比和贡献；第五阶段在在线补充材料中开展tie strength估计比较、规模使用偏差消除影响和不同Top-k性能检验，强化设计决策的稳健性。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "客户网络覆盖度与连接性分析",
+        "question_cn": "在不同评分矩阵密度下，基于共同使用行为构建的客户网络能否连接大多数客户？",
+        "inputs_and_setting_cn": "使用Dianping部分评分矩阵，包括7990条评分、15393个客户和50个服务；从799到7191条随机抽取评分，生成密度约1%到9%的9个矩阵，连同原始矩阵共10个网络。",
+        "designed_or_compared_object_cn": "不同矩阵密度生成的客户网络的连接度（实际连接数/最大可能连接数）。",
+        "baseline_control_or_counterfactual_cn": "无外部对照组，以不同密度之间纵向比较。",
+        "objective_metrics": [
+          "连接度（connection degree）",
+          "矩阵密度",
+          "网络中的连接数量"
+        ],
+        "analysis_method_cn": "描述性网络统计，绘制网络图并计算连接度随密度的变化。",
+        "main_result_cn": "当矩阵密度为1%时连接度为7%；密度达到2%以上时所有客户均连接到网络；连接度先快速上升后稳定，网络覆盖度可有效应对稀疏矩阵。",
+        "argumentative_role_cn": "从结构上证明客户网络能够克服稀疏数据造成的‘无共同项目’问题，为后续推荐性能提供机制基础。",
+        "remaining_uncertainty_cn": "该实验仅基于50个服务的子集矩阵，未必能代表全量12,923个服务和502,247个客户的真实网络特征。",
+        "link_to_next_phase_cn": "既然网络在稀疏条件下仍能高覆盖，自然需要进一步检验这种网络能否带来实际推荐性能提升。",
+        "evidence_pointers": [
+          "Experiments: Customer Networks in Different Matrix Densities",
+          "Figure 2",
+          "Theorem 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "标准离线推荐性能比较",
+        "question_cn": "在常规训练/测试划分下，CNLRec、CNRec、LRec相对CF和先进深度方法的表现如何？",
+        "inputs_and_setting_cn": "Dianping O2O数据集（9.81%密度）和MovieLens 100K（6.03%密度）；随机抽取10%到90%评分作为训练集，其余为测试集；Top-k=30，α=β=0.5。",
+        "designed_or_compared_object_cn": "CNLRec、CNRec、LRec与CF、H-CF、MF、DL、CL、NN等方法进行对比。",
+        "baseline_control_or_counterfactual_cn": "CF方法作为经典基线；MF/DL/CL/NN作为state-of-the-art基线；LRec检验位置单独贡献；CNRec检验无位置时的网络贡献。",
+        "objective_metrics": [
+          "F-Score",
+          "Precision",
+          "Recall"
+        ],
+        "analysis_method_cn": "固定训练比例和超参数，比较各方法在相同测试集上的指标曲线。",
+        "main_result_cn": "CNLRec和CNRec显著优于其他方法；CNLRec优于CNRec和LRec；LRec与先进的复杂方法性能接近；所有方法性能随训练密度上升。",
+        "argumentative_role_cn": "证明客户网络和位置距离的组合能在标准推荐任务中带来显著收益，是文章最核心的证据。",
+        "remaining_uncertainty_cn": "结果仅在低密度数据下成立；高密度和参数最优值尚不清楚。",
+        "link_to_next_phase_cn": "由于实际平台密度可能更高，需要人为提高密度后观察性能是否保持。",
+        "evidence_pointers": [
+          "Experiments: Comparative Experiments, Performances in Different Training Set Densities",
+          "Figure 3a–f"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "高数据密度边界测试",
+        "question_cn": "当数据密度提高到约20%时，CNLRec/CNRec的相对优势是否仍然存在？",
+        "inputs_and_setting_cn": "从Dianping数据中删除评分少于12条的客户，密度从9.81%提高到20.74%；从MovieLens 100K删除评分少于15条的客户，密度从6.03%提高到20.15%；训练集比例仍为10%-90%。",
+        "designed_or_compared_object_cn": "同上方法集合，在高密度数据子集上比较。",
+        "baseline_control_or_counterfactual_cn": "低密度结果作为对照；不同密度阈值（10%、12%、15%、20%）下的性能变化。",
+        "objective_metrics": [
+          "F-Score",
+          "Precision",
+          "Recall"
+        ],
+        "analysis_method_cn": "在增密数据上重复比较实验，并比较性能增长率。",
+        "main_result_cn": "低密度下CNLRec/CNRec仍最好，但高密度下性能增长放缓；当O2O数据密度超过15%时NN和DL超过CNLRec，当MovieLens密度超过12%时NN超过CNRec；在高密度下CF方法快速增长并可能超越。",
+        "argumentative_role_cn": "界定所提方法的适用条件，防止作者声称‘永远更优’，增加结论的可信度。",
+        "remaining_uncertainty_cn": "尚未确定最优参数会影响高密度下的表现；真实平台密度分布未被量化。",
+        "link_to_next_phase_cn": "既然密度改变影响相对优势，需要系统搜索CNLRec内部权重参数，确认每个组件在低密度场景中是否都必要。",
+        "evidence_pointers": [
+          "Experiments: Comparative Experiments, Performances in Higher Data Densities",
+          "Figure 4a–b"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "权重参数敏感性实验",
+        "question_cn": "CNLRec中的三个权重参数α、β、γ如何影响性能？最优值是多少？",
+        "inputs_and_setting_cn": "Dianping O2O数据；Top-k从5到30步长5；数据密度取2%、4%、6%、8%；α、β、γ在0到1之间步长0.1。",
+        "designed_or_compared_object_cn": "分别变化α、β、γ，并固定其他参数的最优值。",
+        "baseline_control_or_counterfactual_cn": "α=0或1代表仅用行为活跃度或仅用偏好多样性；β=0或1代表仅用客户属性或仅用关系度；γ=0为纯LRec，γ=1为纯CNRec。",
+        "objective_metrics": [
+          "F-Score"
+        ],
+        "analysis_method_cn": "网格搜索，顺序优化：先定α，再定β，再定γ。",
+        "main_result_cn": "α=0.6或0.7最优，α=0或1表现差；β=0.5附近最优，且β>0.5比对称的1-β更好，说明关系度比客户属性更重要；γ=0.6最优，且γ=1优于γ=0，说明在线网络信息仍是核心。",
+        "argumentative_role_cn": "逐一证明客户网络、纽带强度、位置距离三个组件都有独立贡献，并确定设计的最佳组合。",
+        "remaining_uncertainty_cn": "参数搜索是顺序而不是联合搜索，可能存在交互；结果依赖具体数据集和指标。",
+        "link_to_next_phase_cn": "参数最优仍需稳健性检验，故进入补充实验验证tie strength估计和尺度偏差消除的合理性。",
+        "evidence_pointers": [
+          "Experiments: Weight Experiments",
+          "Figure 5a–f",
+          "Figure 6a–f",
+          "Figure 7a–f"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "设计决策稳健性检验（在线补充材料）",
+        "question_cn": "不同的纽带强度估计方式是否影响结论？客户规模使用偏差消除是否有益？不同Top-k下性能是否稳定？",
+        "inputs_and_setting_cn": "基于Dianping和MovieLens数据；在线补充附录C.1、C.2、C.3中分别报告不同Top-k、四种纽带强度估计、有无规模使用偏差消除的比较实验。",
+        "designed_or_compared_object_cn": "CNLRec/CNRec在不同tie strength估计下（如仅共同使用次数、仅PCC、二者不同组合）的表现；有无scale usage bias消除的表现。",
+        "baseline_control_or_counterfactual_cn": "不同tie strength估计互为对照；不消除偏差作为消除偏差的对照。",
+        "objective_metrics": [
+          "F-Score",
+          "Precision",
+          "Recall"
+        ],
+        "analysis_method_cn": "附录中的对照实验，使用与主实验相同的评估协议。",
+        "main_result_cn": "根据正文转述：共同使用次数为主、PCC为辅的纽带强度估计最优；规模使用偏差消除能提升推荐性能；不同Top-k下性能趋势保持一致。",
+        "argumentative_role_cn": "保护核心设计选择，说明不是偶然参数导致的结果，提升结论的稳健性。",
+        "remaining_uncertainty_cn": "由于附录未在全文提供，无法核验具体数值和实验细节；作者仅在正文中给出了总结性结论。",
+        "link_to_next_phase_cn": "无需再引向下一阶段，为主实验结论提供补充支持并结束研究。",
+        "evidence_pointers": [
+          "Online Supplemental Appendix C.1",
+          "Online Supplemental Appendix C.2",
+          "Online Supplemental Appendix C.3",
+          "引用处见Tie Strength Estimation和Scale Usage Bias Elimination段落"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "STUDY_OVERVIEW",
+      "DESIGN_FEATURE",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "REQUIREMENT",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "REQUIREMENT",
+      "DESIGN_FEATURE"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "METHOD_JUSTIFICATION"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "O2O商业模型与位置经济学文献（Li等关于运输成本、Dickinger和Kleijnen关于位置选择）",
+      "推荐系统文献（协同过滤、内容推荐、混合推荐、社交网络推荐）",
+      "消费者行为与评分偏差文献（失验偏差、虚假评论、规模使用异质性、客户经验）",
+      "LBSN与地理计算文献（中心位置估计、Haversine距离）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "文章确实从领域知识中提取设计原则（如购买行为比评分更可靠、经验随数量和多样性增加、位置影响O2O选择等），但这些知识大多是行为经验和工程启发，没有形成正式理论命题或因果模型；多项关键技术选择（度中心性、路径乘积、Cobb-Douglas组合、Haversine）来自算法文献或作者先前工作，属于部分耦合。",
+    "translation_chain_cn": "O2O场景中位置影响出行成本 → 需要距离感知排名；评分矩阵稀疏且评分值可能被操纵/偏差 → 将评分值降级为‘是否使用’的行为信号，并构建客户网络；客户网络中间接关系可以传播偏好 → 用路径乘积估计间接关系；客户经验与评价可靠性相关 → 用服务数量和多样性估计节点权重；客户评分尺度使用不一致 → 先标准化再使用评分；位置信息用中心位置近似用户偏好位置 → 用Haversine距离计算。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "O2O中位置影响出行成本，客户选择是位置敏感的（Li等；Dickinger和Kleijnen）",
+        "mechanism_cn": "客户会评估候选服务与常去位置的距离，距离越远出行成本越高，接受可能性越低",
+        "design_requirement_cn": "推荐系统必须纳入候选服务的位置信息",
+        "artifact_choice_cn": "LRec：以客户已使用服务的中心作为中心偏好位置，用Haversine距离计算候选服务距离并升序排名",
+        "evaluated_contrast_cn": "有位置信息CNLRec vs 无位置信息CNRec；γ=0 vs γ=1",
+        "objective_result_cn": "CNLRec优于CNRec；γ=0.6最优；LRec与复杂方法性能相近",
+        "evidence_pointers": [
+          "Introduction P1 S4–S6",
+          "O2O Service Recommendation: LRec",
+          "Weight Experiments: Impact of γ",
+          "Figure 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "协同过滤依赖评分相似度，但评分矩阵稀疏时共同项目少，PCC不可靠（Adomavicius等）",
+        "mechanism_cn": "共同使用行为反映真实购买选择，即使数字评分有偏差，行为本身仍能揭示偏好相似性",
+        "design_requirement_cn": "用行为信号而非评分值来连接客户；纽带强度以共同使用次数为主",
+        "artifact_choice_cn": "客户网络基于共现矩阵；纽带强度公式ts=cm*(1+sim)，其中cm为共同使用数，sim为正PCC",
+        "evaluated_contrast_cn": "CNLRec/CNRec vs CF方法；附录C.2中四种纽带强度估计对比",
+        "objective_result_cn": "CNLRec/CNRec显著优于CF；共同使用数+PCC增强的纽带强度最优",
+        "evidence_pointers": [
+          "Introduction P4 S2–S4",
+          "Customer Network Generation P4",
+          "Tie Strength Estimation",
+          "Online Supplemental Appendix C.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "客户经验随使用数量和多样性增加，有经验客户的评价更可靠（Ratchford；Koo等）",
+        "mechanism_cn": "有经验的客户知识更丰富，其评分对目标客户更有参考价值",
+        "design_requirement_cn": "节点属性需同时反映行为活跃度和偏好多样性",
+        "artifact_choice_cn": "行为活跃度用归一化使用服务数；偏好多样性用网络中度中心性；用Cobb-Douglas函数组合为ca",
+        "evaluated_contrast_cn": "α=0 vs α=1 vs 中间值；β=0 vs β=1 vs 中间值",
+        "objective_result_cn": "α=0.6/0.7最优，β=0.5附近最优，两个属性都显著",
+        "evidence_pointers": [
+          "Customer Attribute Estimation P1–P3",
+          "Weight Experiments: Impact of α",
+          "Weight Experiments: Impact of β"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "在线评分可能受虚假评论、社会影响、失验偏差影响，而购买行为需要真实消费（Levav & McGraw；Ho等；Luca等）",
+        "mechanism_cn": "评分值可能失真，但评分的出现意味着真实购买和使用，因此‘有无评分’是稳健的行为信号",
+        "design_requirement_cn": "模型主要依赖顾客-顾客的共同行为连接，而非评分值的精确相似度",
+        "artifact_choice_cn": "客户网络定义中只要共同使用至少一个服务就建立连接；纽带强度主要等于共同使用数，PCC仅作增强",
+        "evaluated_contrast_cn": "与仅使用PCC相似度的CF方法对比",
+        "objective_result_cn": "CNLRec/CNRec在稀疏条件下优于CF方法",
+        "evidence_pointers": [
+          "Tie Strength Estimation: Service Selections versus Numerical Ratings",
+          "Experiments: Comparative Experiments Part 1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "客户评分存在规模使用异质性，影响推荐准确性（Rossi等；Greenleaf）",
+        "mechanism_cn": "不同用户使用评分尺度的范围不同，直接用原始评分会产生系统偏差",
+        "design_requirement_cn": "在基于单个用户评分生成推荐指数前，应消除用户规模使用偏差",
+        "artifact_choice_cn": "对每个用户的评分进行z-score标准化：减去均值除以标准差",
+        "evaluated_contrast_cn": "有偏差消除 vs 无偏差消除（附录C.3）",
+        "objective_result_cn": "偏差消除能提升推荐性能",
+        "evidence_pointers": [
+          "O2O Service Recommendation: Scale Usage Bias Elimination",
+          "Online Supplemental Appendix C.3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "网络中间接连接可传递节点间关系（Lee等协作网络；Mao等社会网络推荐）",
+        "mechanism_cn": "即使两个客户没有直接共同使用服务，也可通过路径上的中间客户传递偏好相似性",
+        "design_requirement_cn": "关系度估计应包含直接和间接连接",
+        "artifact_choice_cn": "对未直接连接客户，取所有路径上纽带强度乘积的最大值作为关系度",
+        "evaluated_contrast_cn": "加入间接关系后的整体推荐性能与CF、先进方法对比",
+        "objective_result_cn": "CNRec在稀疏数据上优于现有方法",
+        "evidence_pointers": [
+          "O2O Service Recommendation: Customer Ranking of Target Customer",
+          "Experiments: Comparative Experiments Part 1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "网络覆盖度与连接性分析（部分矩阵不同密度）",
+      "离线推荐性能比较（Dianping和MovieLens，多个训练密度）",
+      "高密度边界测试（删除少量评分用户提高密度）",
+      "权重参数敏感性/网格搜索（α、β、γ）",
+      "稳健性补充实验（附录中不同tie strength、有无规模偏差消除、不同Top-k）"
+    ],
+    "why_these_evaluations_cn": "文章声称解决稀疏性问题，所以先用网络覆盖度证明可行性；为证明推荐价值，需要用标准离线指标与现有方法比较；由于网络连接度存在饱和效应，必须测试高密度下的表现，避免过度声明；为确认每个组件必要性，需要对权重参数进行敏感性分析；为保护设计选择，需要在附录中比较不同纽带强度估计和偏差消除效果。",
+    "benchmark_and_contrast_chain_cn": "先用连接度指标说明网络在稀疏矩阵下的可行基础；然后在相同离线协议下，将CNLRec/CNRec/LRec与CF、H-CF、MF、DL、CL、NN对比，发现低密度性能优势；接着提高数据密度，发现性能优势在约12%-15%后消失，给出适用阈值；最后通过参数网格搜索确定最优权重，并通过纽带强度与偏差消除对照实验把解释下沉到具体设计要素，形成从整体收益到组件增益的证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "客户网络能解决稀疏性问题",
+        "evidence_cn": "在50服务的小矩阵上，密度>2%时所有客户都连入网络，连接度随密度上升",
+        "support_cn": "部分支持（子集矩阵，不代表全量数据）"
+      },
+      {
+        "claim_cn": "CNLRec/CNRec优于广泛使用和最先进方法",
+        "evidence_cn": "图3在Dianping和MovieLens上的F-Score/Precision/Recall显著更高；图4显示低密度下优势",
+        "support_cn": "支持，但在高密度下不成立"
+      },
+      {
+        "claim_cn": "服务位置显著影响O2O服务选择",
+        "evidence_cn": "γ=0.6最优，CNLRec优于CNRec；LRec与复杂方法相当",
+        "support_cn": "支持"
+      },
+      {
+        "claim_cn": "行为活跃度和偏好多样性都是客户经验的重要维度",
+        "evidence_cn": "α=0/1时表现差，α=0.6/0.7最好",
+        "support_cn": "支持"
+      },
+      {
+        "claim_cn": "共同使用次数+PCC增强的纽带强度优于其他估计",
+        "evidence_cn": "附录C.2（正文仅转述结论）",
+        "support_cn": "无法在正文中核验，依赖附录"
+      },
+      {
+        "claim_cn": "客户规模使用偏差消除能提升性能",
+        "evidence_cn": "附录C.3（正文仅转述结论）",
+        "support_cn": "无法在正文中核验，依赖附录"
+      }
+    ],
+    "internal_validity_strategy_cn": "采用固定数据划分协议、固定Top-k=30、先α后β后γ的顺序网格搜索，减少参数搜索导致的混淆；在同一数据集上对多个方法进行比较，保持训练和测试比例一致；通过多个密度的重复实验检查结果一致性。",
+    "external_validity_strategy_cn": "使用两个不同领域的数据集（O2O餐厅和电影评分），一个是真实商业平台Dianping，一个是公开基准MovieLens；通过删除少量评分用户获得更高密度子集，测试更广泛的数据条件；通过比较不同数据密度下的表现来给出适用边界，增强外部推广性。",
+    "what_is_not_actually_tested_cn": "没有真实用户部署或点击/接受率实验，未检验推荐对用户决策的实际影响；未在数据中直接测量或校正失验偏差对评分的影响；网络覆盖度实验仅基于50个服务子集，可能高估全量网络连接；没有对客户中心位置估计因隐私限制带来的误差进行分析；没有检验位置权重γ的个体异质性。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在低到中等数据密度下，CNLRec/CNRec在F-Score/Precision/Recall上优于CF、MF、DL、CL、NN等多个广泛使用和最先进方法。",
+    "artifact_claim_cn": "具体设计要素——基于共同使用行为的客户网络、共同使用次数+PCC的纽带强度、行为活跃度+偏好多样性的节点属性、规模使用偏差消除、位置距离加权——共同带来性能改进。",
+    "mechanism_claim_cn": "共同使用行为比评分值更稳健地捕捉偏好相似性；客户网络通过直接和间接连接扩展可利用信息；服务距离反映出行成本，影响O2O服务选择。",
+    "boundary_claim_cn": "当数据密度低于约10%（O2O数据）或约12%（MovieLens）时，所提方法更优；数据密度很高时，深度学习和CF方法可能反超。",
+    "reusable_design_knowledge_cn": "在O2O推荐中，应使用购买行为而非仅评分值来构建用户关系；应显式建模服务位置距离；应消除客户评分尺度偏差；可以用度中心性近似偏好多样性；应按数据密度选择推荐算法。",
+    "theoretical_contribution_cn": "将社交网络中的共同行为网络和LBSN的位置感知思想整合到O2O推荐框架，重新解释O2O服务选择为线上线下信息整合的决策过程；但并未提出新理论模型，理论贡献主要是概念连接和设计知识。",
+    "how_discussion_closes_intro_gap_cn": "结论反复回到位置在O2O服务选择中的中心作用，并用γ=0.6和LRec与先进方法相当等证据支持；同时总结指出所提方法通过客户网络解决了稀疏性问题，直接回应引言中CF因稀疏和评分失真而失败的缺口；也承认高密度下性能反转，避免过度泛化。",
+    "overclaim_or_unsupported_leaps_cn": "将‘连接几乎所有客户’等同于‘解决稀疏性’可能过度，因为连接度高不等于推荐准确；网络覆盖度实验基于小规模子集；高密度性能反转被解释为现实密度低，但未提供平台实时密度分布；评分不可靠的论证依赖二手文献，未在本数据中直接验证；位置重要性的断言主要基于性能比较，可能受其他因素混淆。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者提出新的O2O服务推荐方法CNLRec，帮助用户从大量候选中选择理想服务。",
+      "rhetorical_function_cn": "摘要开篇宣布研究目标和方法名，让读者立即知道核心对象。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为摘要中后续的方法特征和实验结果提供总体框架。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "客户网络基于评分的共同使用行为捕捉在线行为，服务位置反映离线行为特征。",
+      "rhetorical_function_cn": "说明两个核心概念分别对应O2O的线上和线下渠道。",
+      "depends_on_cn": "S1提出的方法名。",
+      "sets_up_cn": "为后面的排名机制和实验结果提供设计逻辑。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为目标客户生成基于位置和客户网络的候选服务排名，并消除客户规模使用偏差。",
+      "rhetorical_function_cn": "概述推荐过程的关键组成。",
+      "depends_on_cn": "S2中的网络和位置概念。",
+      "sets_up_cn": "引出摘要中的实验结果。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P1 S4–S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实验显示即使矩阵稀疏，大多数客户仍连接至客户网络，解决了稀疏问题；CNLRec优于广泛使用和最先进方法；CNRec也优于现有方法；网络属性和位置属性都重要，并找到最优组合。",
+      "rhetorical_function_cn": "在摘要中给出核心证据，强化方法价值。",
+      "depends_on_cn": "前述方法与设计。",
+      "sets_up_cn": "为正文详细介绍提供摘要式预告。",
+      "evidence_pointer": "Abstract P1 S4–S6"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P1 S1–S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "新兴O2O商业模式将从线上获取的顾客导向线下门店，日益流行，并与Tmall、Amazon等传统电商不同，与实体店紧密相连。",
+      "rhetorical_function_cn": "建立研究背景，说明O2O是重要且独特的电商形态。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后文强调位置的重要性铺垫。",
+      "evidence_pointer": "Introduction P1 S1–S3"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P1 S4–S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "已有研究发现位置对线上顾客到线下门店的企业很重要，运输成本会影响服务选择，距离太远会使顾客放弃购买。",
+      "rhetorical_function_cn": "说明位置问题是O2O业务中的现实关键因素。",
+      "depends_on_cn": "O2O背景。",
+      "sets_up_cn": "引出本文对位置信息的建模。",
+      "evidence_pointer": "Introduction P1 S4–S6"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "作者数据中北京Dianping有12,000家餐厅提供优惠券，用户难以找到理想券，导致信息过载。",
+      "rhetorical_function_cn": "提供具体经验现象，说明需要推荐系统。",
+      "depends_on_cn": "O2O业务背景。",
+      "sets_up_cn": "引出推荐系统的重要性和空白。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P2 S2–S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "推荐系统已在B2B、B2C、C2C等电商中广泛使用，Amazon和Netflix有很高比例的销售或收入来自推荐。",
+      "rhetorical_function_cn": "证明推荐系统的实践价值。",
+      "depends_on_cn": "信息过载现象。",
+      "sets_up_cn": "随后介绍推荐系统的类型与局限。",
+      "evidence_pointer": "Introduction P2 S2–S4"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P3 S1–S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "推荐系统分为基于内容和基于评分两类，前者用文本挖掘但计算成本高，后者用评分矩阵和CF；混合系统结合优势并引入深度学习等先进技术，性能超过传统系统。",
+      "rhetorical_function_cn": "梳理现有技术脉络，为批评CF局限作铺垫。",
+      "depends_on_cn": "推荐系统价值。",
+      "sets_up_cn": "指出评分方法的弱点。",
+      "evidence_pointer": "Introduction P3 S1–S4"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P4 S1–S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "基于评分的方法因数据易获取仍最常用，但其依赖共同使用项目的偏好相似度估计，稀疏时共同项目少，导致推荐不准。",
+      "rhetorical_function_cn": "指出核心算法缺陷。",
+      "depends_on_cn": "P3的推荐系统分类。",
+      "sets_up_cn": "引出可以使用的其他信息源。",
+      "evidence_pointer": "Introduction P4 S1–S3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P4 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有方法只依赖评分估计客户相似性，但客户的服务选择本身也能反映购买偏好，可用于预测未来选择。",
+      "rhetorical_function_cn": "明确提出被忽视的信息源，构成研究缺口。",
+      "depends_on_cn": "CF的稀疏局限。",
+      "sets_up_cn": "为基于共同使用行为的客户网络做铺垫。",
+      "evidence_pointer": "Introduction P4 S4"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P5 S1–S7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "评论提交是自愿的，存在缺失数据和评分不反映真实评价的问题；失验偏差影响客户是否评分及评分值；作者承认无法在观测数据中控制这些效应。",
+      "rhetorical_function_cn": "进一步说明评分数据的质量缺陷，并预先声明研究的数据局限。",
+      "depends_on_cn": "评分依赖数据的前提。",
+      "sets_up_cn": "为使用行为信号而非评分值提供理论基础。",
+      "evidence_pointer": "Introduction P5 S1–S7"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P6 S1–S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "O2O服务客户在决策时会综合考虑在线评论等主观信息和离线位置等客观特征，例如考虑线下交通成本。",
+      "rhetorical_function_cn": "描述O2O决策整合线上线下信息的特点。",
+      "depends_on_cn": "O2O业务模型和位置重要性。",
+      "sets_up_cn": "推出推荐系统设计需要同时包含两类信息。",
+      "evidence_pointer": "Introduction P6 S1–S2"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P6 S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "因此O2O推荐系统设计应同时考虑候选服务的线上和线下信息。",
+      "rhetorical_function_cn": "把现象转化为设计要求。",
+      "depends_on_cn": "O2O决策整合特点。",
+      "sets_up_cn": "引出本文提出的客户网络和服务位置。",
+      "evidence_pointer": "Introduction P6 S3"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P6 S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文将客户网络和服务位置引入O2O服务推荐。",
+      "rhetorical_function_cn": "明确研究目的和方案。",
+      "depends_on_cn": "前面的缺口和要求。",
+      "sets_up_cn": "随后概述方法步骤。",
+      "evidence_pointer": "Introduction P6 S4"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P6 S5–S8",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "先构建客户网络，定义节点和边，估计节点属性和连边权重；再基于网络生成排名并考虑间接关系和规模使用偏差；然后基于位置距离生成另一个排名；最后合并排名生成推荐列表。",
+      "rhetorical_function_cn": "预告全文的方法结构和顺序。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "为正文各章节提供地图。",
+      "evidence_pointer": "Introduction P6 S5–S8"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P6 S9–S11",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献包括建立新的客户网络、新的纽带强度估计、新的客户属性估计、位置信息集成方法以及使用大型真实O2O数据。",
+      "rhetorical_function_cn": "提前列出贡献，便于读者评估新颖性。",
+      "depends_on_cn": "方法概述。",
+      "sets_up_cn": "为结论中的贡献总结提供初始列表。",
+      "evidence_pointer": "Introduction P6 S9–S11"
+    },
+    {
+      "order": 18,
+      "section": "Literature Review",
+      "locator": "O2O Business Model P1 S1–S2; P3 S1–S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "O2O模型通过券连接本地商户和消费者，线上和线下交互是其独特性；位置是O2O区别于其他电商的特征，已有研究发现运输成本和距离影响券兑换和购买决策。",
+      "rhetorical_function_cn": "总结O2O和位置相关的既有知识，建立研究的文献基础。",
+      "depends_on_cn": "引言中的背景。",
+      "sets_up_cn": "为位置组件的必要性提供文献支持。",
+      "evidence_pointer": "Literature Review, O2O Business Model P1/P3"
+    },
+    {
+      "order": 19,
+      "section": "Literature Review",
+      "locator": "Recommender Systems Summary P1 S1–S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "虽然有O2O和推荐研究，但本文受基于位置的社交网络推荐启发；不同于过去研究，客户网络基于共同使用行为而非社会关系，候选服务位置对O2O选择的影响尚未被研究。",
+      "rhetorical_function_cn": "明确文献缺口，将设计贡献定位于未解决的问题。",
+      "depends_on_cn": "文献综述全部分。",
+      "sets_up_cn": "引出方法章节。",
+      "evidence_pointer": "Literature Review, Recommender Systems Summary"
+    },
+    {
+      "order": 20,
+      "section": "Customer Network Based on Service Selections",
+      "locator": "Customer Network Generation P1 S1–S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "基于评分矩阵定义客户、服务和评分集合，计算客户间共同使用服务数，构成客户-客户矩阵。",
+      "rhetorical_function_cn": "给出网络构建的正式数学基础。",
+      "depends_on_cn": "文献缺口。",
+      "sets_up_cn": "随后定义网络中的节点和边。",
+      "evidence_pointer": "Customer Network Generation P1"
+    },
+    {
+      "order": 21,
+      "section": "Customer Network Based on Service Selections",
+      "locator": "Customer Network Generation P3 S1–S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "定理1说明客户不一定都在网络中；若其使用过的服务没有被别人使用，则不在网络内。",
+      "rhetorical_function_cn": "限定网络适用范围，承认并非所有客户都可用。",
+      "depends_on_cn": "网络定义。",
+      "sets_up_cn": "为网络覆盖度实验铺路，说明连接比例是有价值的指标。",
+      "evidence_pointer": "Customer Network Generation, Theorem 1"
+    },
+    {
+      "order": 22,
+      "section": "Customer Network Based on Service Selections",
+      "locator": "Customer Network Generation P4 S1–S2; P5 S1–S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "稀疏矩阵中PCC无法可靠估计相似度；共同使用行为即使评分相反也能显示相似偏好；网络中通过直接和间接关系可将其他客户使用的服务推荐给目标客户，从而缓解稀疏问题。",
+      "rhetorical_function_cn": "解释为什么选择行为信号以及网络如何解决稀疏性。",
+      "depends_on_cn": "网络定义和CF局限。",
+      "sets_up_cn": "为纽带强度估计和属性设计提供理论依据。",
+      "evidence_pointer": "Customer Network Generation P4–P5"
+    },
+    {
+      "order": 23,
+      "section": "Tie Strength Estimation",
+      "locator": "P1 S2–S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "纽带强度反映连接客户的关系紧密程度，是网络核心，其定义和计算很关键。",
+      "rhetorical_function_cn": "说明为什么需要专门设计纽带强度。",
+      "depends_on_cn": "客户网络的重要性。",
+      "sets_up_cn": "后文详细论证使用共同使用次数和PCC。",
+      "evidence_pointer": "Tie Strength Estimation P1"
+    },
+    {
+      "order": 24,
+      "section": "Tie Strength Estimation",
+      "locator": "Service Selections versus Numerical Ratings P1 S3–S6; P2 S1–S2; P3 S1–S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "评分值可能受虚假评论、社会影响、失验偏差等影响，但平台要求只有实际使用过的服务才能评分，因此评分出现意味着真实购买行为；购买决策因涉及花钱而更谨慎，比评分更可靠。",
+      "rhetorical_function_cn": "论证为何用购买行为信号而非评分值作为客户关系基础。",
+      "depends_on_cn": "评分质量问题的讨论。",
+      "sets_up_cn": "支持共同使用次数作为主要纽带强度。",
+      "evidence_pointer": "Tie Strength Estimation, Service Selections versus Numerical Ratings"
+    },
+    {
+      "order": 25,
+      "section": "Tie Strength Estimation",
+      "locator": "Number of Co-Used Services P1 S1–S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "矩阵稀疏且共同项目少，故借鉴协作网络和先前工作，用共同使用服务数估计纽带强度。",
+      "rhetorical_function_cn": "为设计选择提供实证和文献理由。",
+      "depends_on_cn": "行为信号论证。",
+      "sets_up_cn": "引入PCC作为补充因子。",
+      "evidence_pointer": "Tie Strength Estimation, Number of Co-Used Services P1"
+    },
+    {
+      "order": 26,
+      "section": "Tie Strength Estimation",
+      "locator": "PCC in Tie Strength Estimation P1 S1–S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "虽然PCC有局限，但仍可准确估计共同使用服务上的评分关系；先前工作显示完全不用PCC性能明显下降，因此将其作为增强因子，与共同使用次数相乘。",
+      "rhetorical_function_cn": "解释公式ts=cm*(1+sim)的构成逻辑。",
+      "depends_on_cn": "共同使用次数作为主体。",
+      "sets_up_cn": "后文用附录C.2来检验该设计。",
+      "evidence_pointer": "Tie Strength Estimation, PCC in Tie Strength Estimation; 公式(4)"
+    },
+    {
+      "order": 27,
+      "section": "Customer Attribute Estimation",
+      "locator": "P1 S1–S4",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "客户经验是服务知识的代理，随使用数量和多样性增加；有经验客户的评价更可靠可信，因此应从行为活跃度和偏好多样性两个角度估计客户属性。",
+      "rhetorical_function_cn": "从消费者知识文献中引出节点属性设计。",
+      "depends_on_cn": "客户网络的节点概念。",
+      "sets_up_cn": "定义行为活跃度和偏好多样性。",
+      "evidence_pointer": "Customer Attribute Estimation P1"
+    },
+    {
+      "order": 28,
+      "section": "Customer Attribute Estimation",
+      "locator": "P2 S1–S2; P3 S1–S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "行为活跃度用归一化使用服务数表示；偏好多样性用度中心性表示，并用Cobb-Douglas函数将两者组合为客户属性。",
+      "rhetorical_function_cn": "给出节点属性的具体计算方式。",
+      "depends_on_cn": "经验理论命题。",
+      "sets_up_cn": "后文的推荐影响指数会使用该客户属性。",
+      "evidence_pointer": "Customer Attribute Estimation P2–P3; 公式(5)-(8)"
+    },
+    {
+      "order": 29,
+      "section": "O2O Service Recommendation",
+      "locator": "Customer Ranking of Target Customer P1 S1–S3; P2 S1–S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "先计算目标客户与其他客户的直接关系度；非直接连接时取路径上纽带强度乘积的最大值；然后结合客户属性与关系度生成推荐影响指数，用于客户排序。",
+      "rhetorical_function_cn": "定义网络部分如何生成客户排名。",
+      "depends_on_cn": "纽带强度和客户属性定义。",
+      "sets_up_cn": "随后由客户排名生成候选服务排名。",
+      "evidence_pointer": "O2O Service Recommendation, CNRec Customer Ranking; 公式(9)-(11)"
+    },
+    {
+      "order": 30,
+      "section": "O2O Service Recommendation",
+      "locator": "Candidate Service Ranking P1 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "候选服务的推荐指数取目标客户排序最高的那个客户的评分，平台可按业务需求推荐排名靠前的服务。",
+      "rhetorical_function_cn": "定义网络服务的推荐指数。",
+      "depends_on_cn": "客户排序。",
+      "sets_up_cn": "引出规模使用偏差问题。",
+      "evidence_pointer": "O2O Service Recommendation, CNRec Candidate Service Ranking"
+    },
+    {
+      "order": 31,
+      "section": "O2O Service Recommendation",
+      "locator": "Scale Usage Bias Elimination P1 S1–S3; P2 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "由于推荐指数来自单个用户评分，存在用户规模使用异质性，例如部分用户只用中段或上段评分，作者用减去均值除以标准差来消除该偏差。",
+      "rhetorical_function_cn": "指出并解决新排名方法可能引入的偏差。",
+      "depends_on_cn": "候选服务排名。",
+      "sets_up_cn": "为附录C.3的偏差消除效果检验作铺垫。",
+      "evidence_pointer": "O2O Service Recommendation, Scale Usage Bias Elimination; 公式(12)"
+    },
+    {
+      "order": 32,
+      "section": "O2O Service Recommendation",
+      "locator": "LRec P1 S1–S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "因隐私无法获得客户住址，以客户已使用服务的中心作为中心偏好位置，再用Haversine公式计算候选服务与该中心的距离，按距离升序排名。",
+      "rhetorical_function_cn": "定义位置部分的推荐逻辑。",
+      "depends_on_cn": "位置敏感性假设。",
+      "sets_up_cn": "为CNLRec组合排名提供另一个成分。",
+      "evidence_pointer": "O2O Service Recommendation, LRec; 公式(13)-(14)"
+    },
+    {
+      "order": 33,
+      "section": "O2O Service Recommendation",
+      "locator": "CNLRec P1 S1–S2; P2 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "将CNRec排名和LRec排名通过权重γ加权得到综合指数并排序；由于O2O客户线上下单线下体验，会同时考虑在线评分和离线位置，所以CNLRec适合O2O场景。",
+      "rhetorical_function_cn": "给出最终组合模型及其适用的业务理由。",
+      "depends_on_cn": "CNRec和LRec。",
+      "sets_up_cn": "后文实验会检验γ的最优值。",
+      "evidence_pointer": "O2O Service Recommendation, CNLRec; 公式(15)"
+    },
+    {
+      "order": 34,
+      "section": "O2O Service Recommendation",
+      "locator": "CNLRec P3–P5",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者把CNLRec步骤分为三级：第一级是新的客户-客户矩阵和纽带强度；第二级是将协作网络、客户经验、尺度偏差、中心位置等方法首次用于推荐；第三级是已有推荐方法。",
+      "rhetorical_function_cn": "明确贡献层次，方便读者判断新颖性。",
+      "depends_on_cn": "完整方法描述。",
+      "sets_up_cn": "为结论中的贡献总结提供更细结构。",
+      "evidence_pointer": "O2O Service Recommendation, CNLRec P3–P5"
+    },
+    {
+      "order": 35,
+      "section": "Experiments",
+      "locator": "Customer Networks P1–P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在部分矩阵上构建客户网络，密度为1%时连接度为7%，随着密度增加先快速上升后稳定；密度超过2%时所有客户都连入网络。",
+      "rhetorical_function_cn": "直接报告网络覆盖实验结果，初步证明稀疏性问题的缓解。",
+      "depends_on_cn": "网络构建方法。",
+      "sets_up_cn": "为推荐性能比较提供结构基础。",
+      "evidence_pointer": "Experiments, Customer Networks; Figure 2"
+    },
+    {
+      "order": 36,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 1 P1 S1–S2; P2 S1–S2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "随机抽取10%-90%评分作为训练集，Top-k=30，α=β=0.5，比较多个方法与所提方法；结果显示所有方法性能随密度上升，且CNLRec/CNRec显著优于其他方法。",
+      "rhetorical_function_cn": "设定标准比较协议并给出核心性能结果。",
+      "depends_on_cn": "实验数据和指标设计。",
+      "sets_up_cn": "后续会分析具体方法差异原因。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 1; Figure 3"
+    },
+    {
+      "order": 37,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 1 P3 S1–S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在O2O数据上CNLRec优于CNRec和LRec；仅基于距离的LRec与高复杂度的先进方法表现相近，说明位置敏感性。",
+      "rhetorical_function_cn": "区分三个自建方法的表现，并强化位置重要性。",
+      "depends_on_cn": "整体比较结果。",
+      "sets_up_cn": "为权重实验中的γ重要性提供初步证据。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 1 P3; Figure 3a–c"
+    },
+    {
+      "order": 38,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 1 P4 S1–S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "state-of-the-art方法靠重复训练识别偏好；CF靠PCC估计相似度，稀疏时不准；H-CF因结合行为和服务属性略好。",
+      "rhetorical_function_cn": "解释为什么不同方法表现各异，特别是CF为何在稀疏数据上失败。",
+      "depends_on_cn": "性能比较结果。",
+      "sets_up_cn": "为高密度实验中CF反超提供解释基础。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 1 P4"
+    },
+    {
+      "order": 39,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 2 P1 S1–P2 S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为测试高密度，删除评分数量少的用户，将密度提高到约20%；结果显示低密度下CNLRec/CNRec增长稳定，高密度下增长放缓，先进方法和CF可能反超。",
+      "rhetorical_function_cn": "说明高密度测试的设计并报告边界结果。",
+      "depends_on_cn": "第一轮比较实验。",
+      "sets_up_cn": "随后分析连接度饱和和评分信息价值。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 2; Figure 4"
+    },
+    {
+      "order": 40,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 2 P3 S1–S3; P4 S1–S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当数据密度超过约11%时客户网络连接度达到最大值98.3%，不再提升性能；高密度时共同使用数增加，PCC能更准确估计偏好，因此CF类方法变好。",
+      "rhetorical_function_cn": "解释高密度下性能反转的机制。",
+      "depends_on_cn": "高密度结果。",
+      "sets_up_cn": "为适用边界提供机制依据。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 2 P3–P4"
+    },
+    {
+      "order": 41,
+      "section": "Experiments",
+      "locator": "Comparative Experiments Part 2 P4 S3–S4; P5 S1–S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "现实中平台密度通常低于10%且难以提高，所以所提方法在真实条件下有效；若密度很高，应选择先进方法或简单CF。",
+      "rhetorical_function_cn": "将实验结果转化为面向实践者的适用建议。",
+      "depends_on_cn": "高密度比较结果。",
+      "sets_up_cn": "结论部分的边界条件。",
+      "evidence_pointer": "Experiments, Comparative Experiments Part 2 P4–P5"
+    },
+    {
+      "order": 42,
+      "section": "Experiments",
+      "locator": "Weight Experiments P1 S1–S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "三个参数α、β、γ分别控制节点属性、关系度与属性权重、网络与位置排名权重；依次对每个参数进行网格搜索，并固定先前的参数最优值。",
+      "rhetorical_function_cn": "说明参数搜索的协议，确保结果可复现。",
+      "depends_on_cn": "模型公式中的权重参数。",
+      "sets_up_cn": "以下三个小节分别报告α、β、γ结果。",
+      "evidence_pointer": "Experiments, Weight Experiments P1"
+    },
+    {
+      "order": 43,
+      "section": "Experiments",
+      "locator": "Impact of α P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "所有曲线呈倒U型，F-Score在α=0.6或0.7最大，α=0或1时表现差，说明行为活跃度和偏好多样性都重要且多样性略重要。",
+      "rhetorical_function_cn": "支持客户属性两个维度都是必要设计。",
+      "depends_on_cn": "参数搜索。",
+      "sets_up_cn": "为β和γ分析提供已固定的参数。",
+      "evidence_pointer": "Experiments, Weight Experiments, Impact of α; Figure 5"
+    },
+    {
+      "order": 44,
+      "section": "Experiments",
+      "locator": "Impact of β P3 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "F-Score在β=0.5附近最大，曲线左侧更陡，说明关系度比客户属性更有影响力，客户连接是稀疏数据下性能的关键。",
+      "rhetorical_function_cn": "支持关系度作为核心机制。",
+      "depends_on_cn": "α的最优值。",
+      "sets_up_cn": "为γ分析提供已固定的β。",
+      "evidence_pointer": "Experiments, Weight Experiments, Impact of β; Figure 6"
+    },
+    {
+      "order": 45,
+      "section": "Experiments",
+      "locator": "Impact of γ P4 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "大多数实验中γ=0.6最优，说明客户网络和服务位置都重要；γ=1优于γ=0，说明在线网络信息仍是核心。",
+      "rhetorical_function_cn": "支持线上线下信息整合的核心论点。",
+      "depends_on_cn": "α和β的最优值。",
+      "sets_up_cn": "结论中关于位置中心作用的证据。",
+      "evidence_pointer": "Experiments, Weight Experiments, Impact of γ; Figure 7"
+    },
+    {
+      "order": 46,
+      "section": "Conclusion",
+      "locator": "P1 S1–S3; P2 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结提出CNLRec，同时考虑O2O服务的线上评分和线下位置；客户网络基于评分矩阵，纽带强度由共同使用次数和评分共同决定，节点属性由行为活跃度和偏好多样性构成；位置因券只能线下兑换而成为O2O服务选择的核心因素。",
+      "rhetorical_function_cn": "收束全文贡献，重新强调核心设计。",
+      "depends_on_cn": "前述方法、实验和边界分析。",
+      "sets_up_cn": "随后说明实验边界和未来方向。",
+      "evidence_pointer": "Conclusion P1–P2"
+    },
+    {
+      "order": 47,
+      "section": "Conclusion",
+      "locator": "P3 S1–S2; P4 S1–S2",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "CNLRec在O2O数据上优于比较方法，CNRec在一般推荐中也好；但数据密度较高时先进方法可能更优；尺度偏差消除能提升性能；未来可考虑多源异构数据和实时地理信息。",
+      "rhetorical_function_cn": "以简洁方式再次确认适用边界，并指出未来研究空间。",
+      "depends_on_cn": "高密度实验和参数实验。",
+      "sets_up_cn": "结束全文。",
+      "evidence_pointer": "Conclusion P3–P4"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "文章通过指出CF依赖评分矩阵、但评分矩阵稀疏且评分值可能失真，同时O2O特有的位置信息未被推荐系统利用，形成了双重缺口；而后将‘共同使用行为’和‘服务位置’作为填补缺口的新信息源。",
+    "signposting_cn": "引言末尾明确列出未来各节结构和五项贡献；在方法部分以‘第一、第二、第三’顺序列出构建步骤；在实验部分每次实验前说明要回答的问题，并给出参数设置预告。",
+    "transition_logic_cn": "从场景到问题、从问题到设计、从设计到评价、从评价到边界，每个阶段都以‘既然……那么需要……’的隐含逻辑衔接；例如先证明网络覆盖再检验推荐性能，再因性能受密度影响而测试高密度，再因多个组件存在而进行参数搜索。",
+    "claim_evidence_rhythm_cn": "先提出设计主张，再用公式定义，然后用实验曲线/表格证实；结果段落先给出主要数字趋势，再用机制解释，既有呈现也有解释；性能比较时先报告整体优势，再分解各组件贡献。",
+    "benchmark_narrative_cn": "benchmark不是堆砌，而是层层推进：先与CF对比说明传统方法的缺陷，再与state-of-the-art对比说明不输先进方法，再通过高密度实验建立优势条件，最后通过参数实验和附录对照试验说明每个设计要素不可或缺。",
+    "theory_return_cn": "实验结果与已有文献反复对话，如将γ=0.6解释为O2O线上线下整合，将高密度下PCC优势与经典CF文献关联，将位置敏感性与Li等人和Fang等人的实证研究联系，让结果回到现有知识体系而非孤立性能。",
+    "contribution_positioning_cn": "通过三级贡献分类，将真正新颖的部分（客户-客户矩阵、纽带强度）凸显出来，把借用技术（协作网络、度中心性、尺度偏差修正、中心位置）归为第一次用于推荐，清晰界定贡献边界，避免全部声称原创。",
+    "novelty_protection_cn": "通过多数据集、多密度、多参数和附录中的组件对照实验，说明性能优势不是偶然；通过阐明高密度下的边界，避免读者认为贡献被高估；通过贡献分层防止把工程整合误认为理论创新。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立业务场景和独特特征（如O2O的位置敏感性），说明为什么该场景需要专门的推荐方法。",
+        "research_job_cn": "识别领域关键变量（位置、行为信号），收集描述性数据（如平台商户数量）和目标文献。",
+        "required_evidence_cn": "业务背景数据、位置影响决策的已有实证或现象数据。",
+        "transition_to_next_cn": "从场景转向现有推荐方法的局限。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "梳理现有推荐方法，指出核心缺陷（稀疏性、评分失真），提出被忽视的信息源。",
+        "research_job_cn": "用文献和数据论证缺陷（如矩阵密度、虚假评分比例、失验偏差），并定义缺口。",
+        "required_evidence_cn": "矩阵密度统计、虚假评分文献证据、已有CF失败案例。",
+        "transition_to_next_cn": "由缺口引出本文的设计选择。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述核心制品的正式定义、公式和过程，包括节点、边、属性、距离。",
+        "research_job_cn": "实现算法，设计客户网络和位置排名，并给出可计算的公式。",
+        "required_evidence_cn": "网络可达性的初步结构分析（如覆盖度实验）或形式化定义。",
+        "transition_to_next_cn": "进入实验评价。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "设计离线实验协议，说明数据集、划分、指标、对比方法和参数设置。",
+        "research_job_cn": "在真实数据集和公开基准集上运行比较实验。",
+        "required_evidence_cn": "F-Score/Precision/Recall结果，显示所提方法优于比较方法。",
+        "transition_to_next_cn": "探索结果是否在所有数据条件下成立。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "进行边界检测和参数敏感性实验，说明方法的适用条件和每个组件的必要性。",
+        "research_job_cn": "提高数据密度、搜索权重参数、补充对照实验（如不同纽带强度、偏差消除）。",
+        "required_evidence_cn": "不同密度下的性能曲线、参数扫描图、附录中的稳健性结果。",
+        "transition_to_next_cn": "根据证据形成贡献和边界。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "总结贡献、边界和未来研究，将结果提升为可复用设计知识。",
+        "research_job_cn": "将实验发现与已有文献连接，提炼出可直接应用的设计原则。",
+        "required_evidence_cn": "清晰的边界条件、机制解释和未来方向。",
+        "transition_to_next_cn": "结束全文。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "先描述场景独特性，再定位现有算法失败原因",
+      "用行为信号替代评分值作为客户相似性基础",
+      "将位置距离作为独立排名信号并与行为排名加权",
+      "用网格搜索系统证明每个组件重要性",
+      "用不同数据密度实验明确适用边界"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实O2O平台的全量评分和位置数据（Dianping+Google Maps）难以获取",
+      "大型图上的路径乘积和间接关系计算可能复杂度高",
+      "高密度实验中删除用户重采样的计算资源和时间成本"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只写‘提出网络和位置’而不实现算法并展示公式",
+      "不要宣称解决稀疏性但不展示网络覆盖度实验",
+      "不要忽略高密度条件下性能反转而过度声称优于所有方法",
+      "不要只做性能比较而不进行参数敏感性和机制解释"
+    ],
+    "single_best_description_of_the_routine_cn": "设计一个结合行为网络和位置信号的推荐算法，先在结构上证明网络覆盖度，再在推荐性能上对比基准并逐步扫参数和密度边界，最后将收益归因到具体设计要素并界定适用条件。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "文章全文可读，但在线补充附录C.1-C.3的详细结果未在原文中提供，无法核验正文对附录实验的转述；网络覆盖度实验仅基于50个服务的小规模子矩阵；文本OCR中存在少量符号噪声，但整体结构和关键公式清晰。",
+  "usage": {
+    "prompt_tokens": 27970,
+    "completion_tokens": 35310,
+    "total_tokens": 63280,
+    "prompt_cache_hit_tokens": 27904,
+    "prompt_cache_miss_tokens": 66
+  }
+}

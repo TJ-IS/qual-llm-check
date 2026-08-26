@@ -1,0 +1,2513 @@
+# Augmenting Social Bot Detection with Crowd-Generated Labels：ISR 句段级微观图谱
+
+- 作者：Victor Benjamin; T. S. Raghu
+- 年份：2023
+- DOI：10.1287/isre.2022.1136
+- 源文件：28480_2023_augmenting-social-bot-detection-with-crowd-generated-labels.md
+- 置信度：0.87
+
+## 核实后的宏观骨架
+
+文章以问题-理论-设计-检验-回返理论的弧线展开。引言先建立社交机器人泛滥与用户能识别机器人这一现实张力，指出检测文献忽略人类回复且常用基准数据缺少回复，进而提出利用众包反应并需评估其可信度的问题，引入言语行为理论作为衡量工具，预告三重贡献。背景分三条文献流：社交机器人研究（检测方法、ground truth、平台偏向和Cresci数据集缺陷）、社交媒体分析（话题与情感不足以衡量确定性）、言语行为理论（Searle五分类适用、RSA不可扩展），依次引出三个研究问题。研究设计把理论操作化为话题、情感、言语行为三类人类认知特征，并与传统语义和时间相似性特征合并为特征矩阵。方法章节按数据收集（Reddit众包列表、777个ground truth账号、人机回复关系、时间80/20划分）、三类文本分类器的构建与择优（均为BERT最优）、传统特征构建、最终分类对比与消融、时间检测模拟、标签数量模拟、新机器人稳健性测试、文献benchmark的顺序呈现。讨论依次总结贡献、部署可行性、政策意义、局限（延迟检测、依赖人类识别能力、个性偏差、虚假举报）以及部署建议和未来研究。
+
+## 摘要逐句图谱
+
+### 1. 1
+
+- paraphrase_cn：社交媒体平台正面临越来越多的网络对手使用社交机器人来自动化和扩大对在线话语的操纵。
+
+- move_code：建立问题现实场景
+
+- statement_status：fact
+
+- why_here_cn：开篇用宏观威胁定下全文问题域，使后续技术方案有现实靶心。
+
+- inherits_from_previous_cn：摘要首句，无前句。
+
+- changes_argument_state_cn：把读者注意力引向社交机器人作为安全威胁，而不是一般文本分类。
+
+- sets_up_next_cn：为下一句引入人类用户的识别能力制造对照。
+
+- failure_if_removed_cn：缺少威胁背景，读者无法判断为何要检测机器人。
+
+- evidence_pointer：Abstract S1
+
+### 2. 2
+
+- paraphrase_cn：同时，一些社交媒体用户能够以不同程度的确信度识别社交机器人活动。
+
+- move_code：引入核心经验现象
+
+- statement_status：fact
+
+- why_here_cn：在机器威胁与人类能力之间建立张力，暗示人类知识可以作为数据资源。
+
+- inherits_from_previous_cn：承接机器人泛滥，但转向人类反制能力。
+
+- changes_argument_state_cn：引入'众包反应'的经验基础：用户会识别机器人。
+
+- sets_up_next_cn：为下一句声明使用人类反应增强检测提供合理性。
+
+- failure_if_removed_cn：若没有人类能识别机器人，全文众包特征失去存在依据。
+
+- evidence_pointer：Abstract S2
+
+### 3. 3
+
+- paraphrase_cn：本研究使用人类对社交机器人消息的反应来增强现有检测能力。
+
+- move_code：陈述研究采用的手段
+
+- statement_status：author_inference
+
+- why_here_cn：直接把现象转化为研究行动，明确与众不同的数据源。
+
+- inherits_from_previous_cn：以人类能识别机器人为前提。
+
+- changes_argument_state_cn：把摘要从背景推进到方案。
+
+- sets_up_next_cn：引出对用户反应可信度的担忧，为言语行为理论出场铺垫。
+
+- failure_if_removed_cn：摘要缺少'做什么'，贡献无从谈起。
+
+- evidence_pointer：Abstract S3
+
+### 4. 4
+
+- paraphrase_cn：采用言语行为理论启发一个框架，用于评估用户指出潜在机器人活动时的可信度，因为并非所有用户反应对检测任务具有同等可信度。
+
+- move_code：引入理论工具并说明必要性
+
+- statement_status：theory_claim
+
+- why_here_cn：一句完成理论引入和为何需要理论：用户反应质量参差。
+
+- inherits_from_previous_cn：既然使用人类反应，就需要处理反应质量差异。
+
+- changes_argument_state_cn：把'使用反应'升级为'评估反应可信度'。
+
+- sets_up_next_cn：为下一句说明理论如何被操作化提供需要。
+
+- failure_if_removed_cn：摘要会只报告使用众包反应，而失去本文独特的理论贡献入口。
+
+- evidence_pointer：Abstract S4
+
+### 5. 5
+
+- paraphrase_cn：该框架通过深度学习方法操作化，构建一个识别社交机器人的计算系统。
+
+- move_code：说明理论到制品的转化
+
+- statement_status：design_decision
+
+- why_here_cn：说明不是纯理论文章，已建成可运行系统。
+
+- inherits_from_previous_cn：理论框架需要有实现载体。
+
+- changes_argument_state_cn：完成从理论构念到可计算系统的跃迁。
+
+- sets_up_next_cn：为下一句报告真实数据验证提供对象。
+
+- failure_if_removed_cn：摘要无法说明研究产出是计算制品，削弱IS设计科学属性。
+
+- evidence_pointer：Abstract S5
+
+### 6. 6
+
+- paraphrase_cn：在从真实社交媒体平台收集的实时众包数据集上展示所开发框架的现实性能和实用性。
+
+- move_code：介绍评价数据与情境
+
+- statement_status：method_decision
+
+- why_here_cn：强调真实世界数据，把性能声明锚定到生态效度。
+
+- inherits_from_previous_cn：系统构建完成后需要真实评价。
+
+- changes_argument_state_cn：引入'真实数据'作为证据等级标志。
+
+- sets_up_next_cn：为下一句报告具体性能结果提供基础。
+
+- failure_if_removed_cn：没有评价情境，性能数字只是无源之水。
+
+- evidence_pointer：Abstract S6
+
+### 7. 7
+
+- paraphrase_cn：结果表明，考虑用户对疑似机器人的众包反应能显著提高机器人检测性能。
+
+- move_code：报告核心实证结果
+
+- statement_status：empirical_result
+
+- why_here_cn：这是论文第一个也是最重要的证据性贡献，回应RQ1。
+
+- inherits_from_previous_cn：建立在真实数据集评价之上。
+
+- changes_argument_state_cn：把设计主张转化为实证结论。
+
+- sets_up_next_cn：为下一句细分言语行为的增量贡献作铺垫。
+
+- failure_if_removed_cn：摘要失去最重要的实证卖点。
+
+- evidence_pointer：Abstract S7
+
+### 8. 8
+
+- paraphrase_cn：进一步使用言语行为评估众包反应还能额外提升系统性能，尽管言语行为本身不是通过群体智能观察到性能提升的必要条件。
+
+- move_code：报告次级结果并自我限定
+
+- statement_status：empirical_result
+
+- why_here_cn：在核心结果之后精化贡献边界，既肯定理论特征又避免过度声称。
+
+- inherits_from_previous_cn：核心结果表明众包反应有效，需进一步分解来源。
+
+- changes_argument_state_cn：把言语行为定位为'适度增量'而非必要条件。
+
+- sets_up_next_cn：为结论句把贡献提升到更广的算法生成内容检测。
+
+- failure_if_removed_cn：读者会误以为言语行为是系统必需组件，造成过度宣称。
+
+- evidence_pointer：Abstract S8
+
+### 9. 9
+
+- paraphrase_cn：本研究为未来探索增强模型以检测社交媒体平台上其他形式的算法生成内容奠定基础。
+
+- move_code：扩展贡献边界
+
+- statement_status：contribution_claim
+
+- why_here_cn：把具体机器人检测结果抽象为可迁移方法，提升研究重要性。
+
+- inherits_from_previous_cn：言语行为可用于评估众包反应可信度，因此可推广到其他算法生成内容。
+
+- changes_argument_state_cn：结论从'检测了机器人'升级为'为检测其他AI内容奠基'。
+
+- sets_up_next_cn：摘要收束，无需后续。
+
+- failure_if_removed_cn：摘要显得只是单一任务性能报告，缺少IS论文常见的一般化价值。
+
+- evidence_pointer：Abstract S9
+
+## 引言逐句图谱
+
+### 1. Introduction P1 S1
+
+- order：1
+
+- locator：Introduction P1 S1
+
+- paraphrase_cn：社交媒体的广泛覆盖和吸引力吸引了许多为自身利益操纵在线话语的网络对手。
+
+- move_code：开篇建立问题域
+
+- statement_status：fact
+
+- why_here_cn：用宏观语境开启全文，让读者把论文理解为安全对抗问题。
+
+- inherits_from_previous_cn：引言首句，无前句。
+
+- changes_argument_state_cn：确立'操纵话语'作为核心威胁。
+
+- sets_up_next_cn：为下一句引入机器人作为攻击自动化工具制造需要。
+
+- failure_if_removed_cn：没有初始威胁语境，整个检测问题悬空。
+
+- evidence_pointer：Introduction P1 S1
+
+### 2. Introduction P1 S2-S3
+
+- order：2
+
+- locator：Introduction P1 S2-S3
+
+- paraphrase_cn：许多对手日益用机器人自动化并扩大攻击；例如FCC公开论坛被机器人垃圾评论淹没，压过真实公民声音。
+
+- move_code：给出具体危害案例
+
+- statement_status：fact
+
+- why_here_cn：用FCC实例把抽象威胁变成可感后果，证明问题严重且真实。
+
+- inherits_from_previous_cn：承接首句'操纵话语'，具体化其形态。
+
+- changes_argument_state_cn：把问题升级为有现实后果的公共议题。
+
+- sets_up_next_cn：为下一句'机器人欺骗用户'提供实例基础。
+
+- failure_if_removed_cn：论文缺少现实锚点，动机强度下降。
+
+- evidence_pointer：Introduction P1 S2-S3
+
+### 3. Introduction P1 S4
+
+- order：3
+
+- locator：Introduction P1 S4
+
+- paraphrase_cn：社交机器人的泛滥是无防备用户被利用的入口，他们可能以为自己在与人交流。
+
+- move_code：说明受害机制
+
+- statement_status：fact
+
+- why_here_cn：解释为什么机器人泛滥是严重问题：普通用户无法分辨。
+
+- inherits_from_previous_cn：FCC案例显示真实用户被淹没，这里进一步指出个体被骗。
+
+- changes_argument_state_cn：把问题从平台层面延伸到用户认知层面。
+
+- sets_up_next_cn：与下一句'但有些用户能识别'形成对照。
+
+- failure_if_removed_cn：失去了'用户认知'维度，为后文用户识别能力埋下的伏笔失效。
+
+- evidence_pointer：Introduction P1 S4
+
+### 4. Introduction P1 S5
+
+- order：4
+
+- locator：Introduction P1 S5
+
+- paraphrase_cn：幸运的是，虽然机器人确实欺骗许多人，但越来越多用户能识别并公开指出机器人操纵。
+
+- move_code：引入论文核心经验现象
+
+- statement_status：fact
+
+- why_here_cn：在'被骗'背景上翻转：部分用户能识破，这构成可被利用的信号源。
+
+- inherits_from_previous_cn：直接从S4的'用户被骗'转折。
+
+- changes_argument_state_cn：引入众包反应的经验存在性。
+
+- sets_up_next_cn：为下一句指出现有文献未分析人机互动。
+
+- failure_if_removed_cn：全文最核心现象消失，众包反应失去现实依据。
+
+- evidence_pointer：Introduction P1 S5
+
+### 5. Introduction P1 S6
+
+- order：5
+
+- locator：Introduction P1 S6
+
+- paraphrase_cn：然而现有文献对这种人机互动的分析有限。
+
+- move_code：指出现有研究盲区
+
+- statement_status：prior_literature
+
+- why_here_cn：现象存在但未被研究，是标准缺口句，紧接着现象出现最有力。
+
+- inherits_from_previous_cn：以S5现象为前提，指出仍未进入文献。
+
+- changes_argument_state_cn：建立'现象-缺口'配对。
+
+- sets_up_next_cn：为下一句宣布本研究要填补该缺口。
+
+- failure_if_removed_cn：缺乏缺口声明，研究必要性无法建立。
+
+- evidence_pointer：Introduction P1 S6
+
+### 6. Introduction P1 S7
+
+- order：6
+
+- locator：Introduction P1 S7
+
+- paraphrase_cn：本研究旨在解决这一重大知识缺口：审视用真实用户对疑似机器人的反应构建特征集以增强传统检测系统的有效性。
+
+- move_code：宣布研究目标
+
+- statement_status：author_inference
+
+- why_here_cn：在缺口正后方给出对策，形成'缺口-目标'闭环。
+
+- inherits_from_previous_cn：直接回应S6的缺口。
+
+- changes_argument_state_cn：从问题陈述进入研究行动。
+
+- sets_up_next_cn：为下一句'反应可信度不齐'的问题埋下伏笔，也需要下一句的限定。
+
+- failure_if_removed_cn：读者不知道本文要做什么，引言失去方向。
+
+- evidence_pointer：Introduction P1 S7
+
+### 7. Introduction P1 S8
+
+- order：7
+
+- locator：Introduction P1 S8
+
+- paraphrase_cn：一个非平凡问题是用户识别机器人的能力并不相同，因此需要以言语行为理论为基础构建框架，对不同类型的人类反应进行排序以增强检测。
+
+- move_code：引入理论并说明理论必要性
+
+- statement_status：theory_claim
+
+- why_here_cn：在宣布使用反应后立刻处理反应质量差异，把理论作为解决质量问题的工具。
+
+- inherits_from_previous_cn：S7说要使用用户反应，这里指出反应质量是问题。
+
+- changes_argument_state_cn：引入'可信度'作为新的论证轴心，并完成理论引入。
+
+- sets_up_next_cn：为第二段讨论检测对抗升级提供背景需要；也预告言语行为是全文理论支柱。
+
+- failure_if_removed_cn：缺少理论入口，后文言语行为分类显得突兀。
+
+- evidence_pointer：Introduction P1 S8
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- locator：Introduction P2 S1
+
+- paraphrase_cn：社交机器人泛滥带来严重的伦理与实践挑战，值得研究。
+
+- move_code：强化问题重要性
+
+- statement_status：author_inference
+
+- why_here_cn：承接首段，把问题重要性再提升，为文献回顾和后续新特征需求提供动力。
+
+- inherits_from_previous_cn：以首段威胁语境为前提。
+
+- changes_argument_state_cn：再次确认研究的正当性。
+
+- sets_up_next_cn：引出已有检测方法的总结及其局限。
+
+- failure_if_removed_cn：问题重要性强调不足，后续'需要新特征'的说服力减弱。
+
+- evidence_pointer：Introduction P2 S1
+
+### 9. Introduction P2 S2-S3
+
+- order：9
+
+- locator：Introduction P2 S2-S3
+
+- paraphrase_cn：已有研究多聚焦检测机器人高度同步的非人类行为模式，例如异常长的会话时长。
+
+- move_code：总结现有检测方法
+
+- statement_status：prior_literature
+
+- why_here_cn：告诉读者现状：主要依靠行为同步性启发式。
+
+- inherits_from_previous_cn：在'值得研究'之后，交代学界已做什么。
+
+- changes_argument_state_cn：确立'传统特征'概念，为后文传统模型提供文献依据。
+
+- sets_up_next_cn：为下一句'机器人也在进化'制造对照。
+
+- failure_if_removed_cn：没有现状介绍，'传统模型vs增强模型'缺乏参照系。
+
+- evidence_pointer：Introduction P2 S2-S3
+
+### 10. Introduction P2 S4-S5
+
+- order：10
+
+- locator：Introduction P2 S4-S5
+
+- paraphrase_cn：但检测进展没有逃过对手回应，近年出现许多具备规避和反检测能力的对抗性机器人。
+
+- move_code：建立对抗升级动态
+
+- statement_status：prior_literature
+
+- why_here_cn：说明现有方法会被追赶上，为'需要新特征'提供必要性。
+
+- inherits_from_previous_cn：以现有检测方法为前提，指出其失效。
+
+- changes_argument_state_cn：引入'军备竞赛'框架，把检测问题定义为动态博弈。
+
+- sets_up_next_cn：为下一句业界呼吁新方法提供背景。
+
+- failure_if_removed_cn：失去动态紧迫性，新方法必要性不成立。
+
+- evidence_pointer：Introduction P2 S4-S5
+
+### 11. Introduction P2 S6-S7
+
+- order：11
+
+- locator：Introduction P2 S6-S7
+
+- paraphrase_cn：持续军备竞赛促使学界与业界呼吁更多抑制机器人影响的研究；例如Twitter曾征集测量在线对话健康、打击滥用和操纵的研究提案。
+
+- move_code：引用外部呼吁增强正当性
+
+- statement_status：prior_literature
+
+- why_here_cn：用业界行动证明问题紧迫且方向正当。
+
+- inherits_from_previous_cn：由军备竞赛直接推出。
+
+- changes_argument_state_cn：把研究动机外部化、制度化。
+
+- sets_up_next_cn：为下一段'媒体曝光使用户更警觉'提供社会背景。
+
+- failure_if_removed_cn：研究正当性依赖减弱，缺少外部证据。
+
+- evidence_pointer：Introduction P2 S6-S7
+
+### 12. Introduction P3 S1-S2
+
+- order：12
+
+- locator：Introduction P3 S1-S2
+
+- paraphrase_cn：媒体对机器人的曝光及其现实影响使人类用户更认识其影响力，因而一些用户遇到可疑内容时会留言提醒其他人。
+
+- move_code：再次确认众包反应现象并给出因果机制
+
+- statement_status：fact
+
+- why_here_cn：解释用户为什么会留言：媒体曝光和现实影响提高警觉，这是众包标签形成的机制。
+
+- inherits_from_previous_cn：承接'用户更认知机器人'，补充其社会条件。
+
+- changes_argument_state_cn：把现象从观察升级为有机制的行为。
+
+- sets_up_next_cn：为下一句'现有研究未用这种标签'作铺垫。
+
+- failure_if_removed_cn：众包标签的形成机制缺失，数据来源合理性打折。
+
+- evidence_pointer：Introduction P3 S1-S2
+
+### 13. Introduction P3 S3
+
+- order：13
+
+- locator：Introduction P3 S3
+
+- paraphrase_cn：尽管许多机器人研究分析机器人产生的内容，但没有任何研究考虑在用户消息中融入人类认知能力，即便最新文本挖掘研究也未使用这种众包标签。
+
+- move_code：声明核心文献缺口
+
+- statement_status：prior_literature
+
+- why_here_cn：在现象之后直接点明文献空白，是引言中最关键的缺口句之一。
+
+- inherits_from_previous_cn：以'用户会留言'为前提，指出现有文献视而不见。
+
+- changes_argument_state_cn：确立'众包标签未被用'为全文核心缺口。
+
+- sets_up_next_cn：为下一段讨论'使用众包标签不简单'提供论题。
+
+- failure_if_removed_cn：核心缺口消失，全文创新性无法建立。
+
+- evidence_pointer：Introduction P3 S3
+
+### 14. Introduction P4 S1-S5
+
+- order：14
+
+- locator：Introduction P4 S1-S5
+
+- paraphrase_cn：扩展检测策略以包含众包标签并非易事；例如两个用户都可能声称发现机器人，一个宣称'我确定发现了一个机器人'，另一个疑问'我想我可能发现了一个机器人？'，两者可信度不同，因而对检测任务的影响应被赋予不同权重。
+
+- move_code：具体化使用众包标签的难题
+
+- statement_status：author_inference
+
+- why_here_cn：用对比例子把'可信度不同'具象化，说明不能简单加总所有标签。
+
+- inherits_from_previous_cn：承接S13缺口，指出填补该缺口本身有技术难题。
+
+- changes_argument_state_cn：把研究问题从'要不要用'推进到'如何加权'。
+
+- sets_up_next_cn：为下一段引入言语行为理论提供逻辑必然性。
+
+- failure_if_removed_cn：理论引入失去必要性；全文变成'加入回复就好'的简单增量。
+
+- evidence_pointer：Introduction P4 S1-S5
+
+### 15. Introduction P5 S1-S2
+
+- order：15
+
+- locator：Introduction P5 S1-S2
+
+- paraphrase_cn：本研究用言语行为理论衡量和加权不同用户反应：通过判断评论试图完成的行为来评估每条评论。
+
+- move_code：正式引入理论方案
+
+- statement_status：theory_claim
+
+- why_here_cn：在S14的难题之后给出解决方案，完成'问题-方案'配对。
+
+- inherits_from_previous_cn：直接回应S14的'如何系统加权'提问。
+
+- changes_argument_state_cn：把抽象理论定位为加权机制。
+
+- sets_up_next_cn：为下一句提出待检验主张提供理论依据。
+
+- failure_if_removed_cn：理论工具缺位，后文言语行为分类器失去动机。
+
+- evidence_pointer：Introduction P5 S1-S2
+
+### 16. Introduction P5 S3
+
+- order：16
+
+- locator：Introduction P5 S3
+
+- paraphrase_cn：将用户回复纳入机器人检测的这种视角相比传统模型能产生更优性能。
+
+- move_code：提出核心待检验主张
+
+- statement_status：author_inference
+
+- why_here_cn：在方案后立即给出断言，把理论方案转化为可被实验检验的假说。
+
+- inherits_from_previous_cn：以理论加权方案为前提。
+
+- changes_argument_state_cn：建立全文核心实验结果所回应的预期。
+
+- sets_up_next_cn：为下一段贡献声明提供支点。
+
+- failure_if_removed_cn：读者不知道作者预期什么结果，实验的意义不明确。
+
+- evidence_pointer：Introduction P5 S3
+
+### 17. Introduction P6 S1
+
+- order：17
+
+- locator：Introduction P6 S1
+
+- paraphrase_cn：本工作的主要贡献是探索一种涉及评估众包反应的社交机器人检测策略。
+
+- move_code：首度声明主要贡献
+
+- statement_status：contribution_claim
+
+- why_here_cn：在核心主张之后把工作定位为'评估众包反应'的检测策略。
+
+- inherits_from_previous_nc：以S16的主张为前提，声明其贡献价值。
+
+- changes_argument_state_cn：开始从问题陈述转向贡献陈述。
+
+- sets_up_next_cn：为下一句说明现有基准数据集为何不能支持这种贡献。
+
+- failure_if_removed_cn：贡献声明缺失，读者不知本文价值。
+
+- evidence_pointer：Introduction P6 S1
+
+### 18. Introduction P6 S2-S3
+
+- order：18
+
+- locator：Introduction P6 S2-S3
+
+- paraphrase_cn：这是文献中的缺口，因为现有检测系统使用的基准数据集只包含已知机器人账号产生的消息，不包含回复或众包反应（如Cresci等2017年的数据集）。
+
+- move_code：用基准数据缺陷强化缺口
+
+- statement_status：prior_literature
+
+- why_here_cn：把'文献缺口'落到具体数据缺陷，增强缺口可信度。
+
+- inherits_from_previous_cn：承接主要贡献声明，解释为什么没人做。
+
+- changes_argument_state_cn：把Cresci数据缺陷锚定为本文创新空间。
+
+- sets_up_next_cn：为下一句引入'会话回复'作为新策略。
+
+- failure_if_removed_cn：没有数据层面的缺口证据，'首次使用回复'难以成立。
+
+- evidence_pointer：Introduction P6 S2-S3
+
+### 19. Introduction P6 S4
+
+- order：19
+
+- locator：Introduction P6 S4
+
+- paraphrase_cn：本文使用机器人与真实用户之间的会话回复进行检测，呈现一种通过考虑其他用户反应来检测机器人的新策略。
+
+- move_code：把数据缺口转化为本文方案
+
+- statement_status：design_decision
+
+- why_here_cn：直接回应S18的数据缺口，说明本工作怎样绕过它。
+
+- inherits_from_previous_cn：以Cresci数据缺少回复为前提。
+
+- changes_argument_state_cn：从缺口进入本文实际策略。
+
+- sets_up_next_cn：为下一句'更进一步评估确定性'提供基础。
+
+- failure_if_removed_cn：读者不清楚本文与旧基准数据的实际区别。
+
+- evidence_pointer：Introduction P6 S4
+
+### 20. Introduction P6 S5-S6
+
+- order：20
+
+- locator：Introduction P6 S5-S6
+
+- paraphrase_cn：本研究更进一步，不仅纳入众包反应，还展示一种评估其确定性的策略，通过言语行为理论操作化。
+
+- move_code：声明理论增强贡献
+
+- statement_status：contribution_claim
+
+- why_here_cn：把贡献从'使用回复'升级为'评估回复确定性'，形成论文第二个贡献点。
+
+- inherits_from_previous_cn：承接使用回复，加一层理论评估。
+
+- changes_argument_state_cn：引入'确定性评估'作为独立贡献。
+
+- sets_up_next_cn：为下一句'理论未用于众包标签'提供对照。
+
+- failure_if_removed_cn：理论贡献降级为工程技巧。
+
+- evidence_pointer：Introduction P6 S5-S6
+
+### 21. Introduction P6 S7-S8
+
+- order：21
+
+- locator：Introduction P6 S7-S8
+
+- paraphrase_cn：言语行为理论虽在IS研究中有用，但从未用于评估众包标签或安全信息学；过去主要用于对话文本的意义建构，这里用于加权用户标签可信度是新的应用。
+
+- move_code：声明理论新颖性
+
+- statement_status：prior_literature
+
+- why_here_cn：说明言语行为理论'新用'在何处，防止读者认为只是套用。
+
+- inherits_from_previous_cn：以使用言语行为评估确定性为前提。
+
+- changes_argument_state_cn：完成理论贡献定位。
+
+- sets_up_next_cn：为下一句'研究结果是什么'提供铺垫。
+
+- failure_if_removed_cn：理论贡献失去对比基线，新颖性无法判断。
+
+- evidence_pointer：Introduction P6 S7-S8
+
+### 22. Introduction P6 S9
+
+- order：22
+
+- locator：Introduction P6 S9
+
+- paraphrase_cn：本工作的一项结果是证据表明未来机器人检测研究应考虑将众包反应作为特征，而言语行为可能是评估众包反应确定性的机制。
+
+- move_code：把贡献转化为可复用知识
+
+- statement_status：contribution_claim
+
+- why_here_cn：在全部贡献铺垫后给出最终浓缩的知识声明，指导未来研究。
+
+- inherits_from_previous_cn：汇集S20-S21的理论应用与S17-S19的数据缺口。
+
+- changes_argument_state_cn：从'本文做了什么'过渡到'未来应做什么'。
+
+- sets_up_next_cn：为下一段把工作放入IS设计科学脉络提供主题。
+
+- failure_if_removed_cn：贡献缺乏可迁移的知识表述，减弱IS论文价值。
+
+- evidence_pointer：Introduction P6 S9
+
+### 23. Introduction P7 S1-S3
+
+- order：23
+
+- locator：Introduction P7 S1-S3
+
+- paraphrase_cn：本工作处于人类与机器认知能力结合点，采用最先进机器学习技术，回应了顶级IS期刊对更多设计科学计算工作的呼吁。
+
+- move_code：把研究升格为IS学科议题
+
+- statement_status：author_inference
+
+- why_here_cn：把技术工作放入IS设计科学传统，回应审稿人会问的'为什么是IS论文'。
+
+- inherits_from_previous_cn：以全文贡献声明为前提，为其提供学科归属。
+
+- changes_argument_state_cn：从特定任务成果提升为IS学科贡献。
+
+- sets_up_next_cn：为下一句'研究如何被利用'指明方向。
+
+- failure_if_removed_cn：此技术研究可能被视为纯CS工作，失去IS定位。
+
+- evidence_pointer：Introduction P7 S1-S3
+
+### 24. Introduction P7 S4
+
+- order：24
+
+- locator：Introduction P7 S4
+
+- paraphrase_cn：此外，本研究有助于理解真实用户如何在社交媒体互动中识别机器人，以及这些互动如何用于更快识别恶意机器人。
+
+- move_code：扩展研究意义
+
+- statement_status：author_inference
+
+- why_here_cn：点明技术工作的社会科学副产品，强化IS相关性。
+
+- inherits_from_previous_cn：承接'人类与机器认知结合'主题。
+
+- changes_argument_state_cn：把贡献延伸到用户行为知识。
+
+- sets_up_next_cn：为论文结构预告收尾。
+
+- failure_if_removed_cn：对行为层面的意义缺失，削弱行为-技术纠缠的IS特色。
+
+- evidence_pointer：Introduction P7 S4
+
+### 25. Introduction P8 S1
+
+- order：25
+
+- locator：Introduction P8 S1
+
+- paraphrase_cn：论文结构：先综述背景，再介绍增强智能研究框架，然后详述数据、实验设计与评价，最后讨论结论与贡献。
+
+- move_code：预告论文结构
+
+- statement_status：fact
+
+- why_here_cn：标准路径引导，让读者知道后续章节职能。
+
+- inherits_from_previous_cn：以全文已预告的贡献为基础。
+
+- changes_argument_state_cn：从引言转入正文。
+
+- sets_up_next_cn：引导进入Background章节。
+
+- failure_if_removed_cn：读者导航缺失，但论证本身不因此断裂。
+
+- evidence_pointer：Introduction P8 S1
+
+## 引言逐段图谱
+
+### 1. Introduction P1
+
+- locator：Introduction P1
+
+- opening_move_cn：以社交媒体的威胁语境开篇，引出FCC案例和用户受骗。
+
+- development_move_cn：在威胁语境中逐步加入'用户能识别机器人'、'文献未分析'两个逆转。
+
+- pivot_move_cn：从现象转到研究目标，并立即用'反应可信度不齐'收窄。
+
+- closing_move_cn：以言语行为理论作为回应质量差异的方案收束。
+
+- paragraph_job_cn：在最短篇幅内建立问题、现象、缺口、目标和理论入口。
+
+### 2. Introduction P2
+
+- locator：Introduction P2
+
+- opening_move_cn：重申问题严重并值得研究。
+
+- development_move_cn：总结现有检测方法以行为同步性为主，然后引入机器人反检测进化。
+
+- pivot_move_cn：从已有进展转到对抗升级和业界呼吁。
+
+- closing_move_cn：以'需要新特征'作潜台词收束。
+
+- paragraph_job_cn：为'为什么需要新特征'建立军备竞赛的动态理由。
+
+### 3. Introduction P3
+
+- locator：Introduction P3
+
+- opening_move_cn：从媒体曝光与用户警觉出发。
+
+- development_move_cn：说明用户留言提醒他人这一行为已发生。
+
+- pivot_move_cn：转折到现有研究未使用这种众包标签。
+
+- closing_move_cn：以'众包标签未被使用'这一核心缺口收束。
+
+- paragraph_job_cn：确立众包标签在文献中的空白，构成全文核心缺口。
+
+### 4. Introduction P4
+
+- locator：Introduction P4
+
+- opening_move_cn：指出扩展策略包括众包标签并非易事。
+
+- development_move_cn：用两个用户对话例子说明不同回复的可信度差异。
+
+- pivot_move_cn：从'有没有用'转向'如何判定每条回复影响'。
+
+- closing_move_cn：以'需要系统化避免ad hoc推理'收束。
+
+- paragraph_job_cn：制造理论需求：必须有一种系统化评估可信度的方法。
+
+### 5. Introduction P5
+
+- locator：Introduction P5
+
+- opening_move_cn：宣布用言语行为理论作为衡量工具。
+
+- development_move_cn：解释每条评论可通过意图分类评估。
+
+- pivot_move_cn：从理论机制转到性能预期。
+
+- closing_move_cn：以'该视角优于传统模型'的断言收束。
+
+- paragraph_job_cn：完成理论方案与核心待检验主张的对接。
+
+### 6. Introduction P6
+
+- locator：Introduction P6
+
+- opening_move_cn：宣布主要贡献是评估众包反应的检测策略。
+
+- development_move_cn：依次说明基准数据缺陷、使用会话回复的新策略、进一步评估确定性和理论新颖性。
+
+- pivot_move_cn：从'本文做了什么'转到'结果知识是什么'。
+
+- closing_move_cn：以'未来应纳入众包反应，言语行为可作为机制'收束。
+
+- paragraph_job_cn：系统化声明三重贡献：新数据策略、理论应用和可复用设计知识。
+
+### 7. Introduction P7
+
+- locator：Introduction P7
+
+- opening_move_cn：把工作定位在人类与机器认知能力结合点。
+
+- development_move_cn：关联设计科学呼吁，并延伸到对真实用户行为的研究意义。
+
+- pivot_move_cn：从工程贡献转向学科意义。
+
+- closing_move_cn：以'如何更快识别恶意机器人'为未来方向收束。
+
+- paragraph_job_cn：把技术研究升格为IS学科相关的工作，回应'为什么是IS论文'。
+
+### 8. Introduction P8
+
+- locator：Introduction P8
+
+- opening_move_cn：直接给出论文结构清单。
+
+- development_move_cn：按背景、框架、数据实验、结论顺序展开。
+
+- pivot_move_cn：无转折，属纯路标。
+
+- closing_move_cn：预告实践贡献后收束引言。
+
+- paragraph_job_cn：为读者提供全文导航。
+
+## 理论到设计逐句图谱
+
+### 1. Background intro S1
+
+- locator：Background intro S1
+
+- paraphrase_cn：为引导研究发展，回顾三条相关文献流：社交机器人、社交媒体分析、言语行为理论。
+
+- move_code：预告文献结构
+
+- statement_status：fact
+
+- why_here_cn：让读者知道每个理论模块分别服务于问题定义、系统设计和理论工具。
+
+- inherits_from_previous_cn：承接引言提出的研究目标和贡献。
+
+- changes_argument_state_cn：把文献回顾组织成三个功能模块。
+
+- sets_up_next_cn：为Section 2.1社交机器人检测缺口作导航。
+
+- failure_if_removed_cn：背景部分显得无结构，三条文献流目的不明。
+
+- evidence_pointer：Section 2 intro
+
+### 2. Background 2.1.1 S1-S2
+
+- locator：Background 2.1.1 S1-S2
+
+- paraphrase_cn：近期估计社交机器人占热门平台用户5%-8%，许多机器人恶意传播垃圾、虚假信息和恶意软件。
+
+- move_code：量化问题规模
+
+- statement_status：prior_literature
+
+- why_here_cn：用量化数据把机器人问题从感知升级为事实。
+
+- inherits_from_previous_cn：承接引言中机器人的现实影响。
+
+- changes_argument_state_cn：为检测研究提供规模依据。
+
+- sets_up_next_cn：为下一句说明机器人对平台和用户的伤害机制。
+
+- failure_if_removed_cn：问题规模无量化，文献中检测紧迫性缺乏基础。
+
+- evidence_pointer：Section 2.1.1
+
+### 3. Background 2.1.1 S3-S5
+
+- locator：Background 2.1.1 S3-S5
+
+- paraphrase_cn：机器人通过影响信息扩散和建立社交连接来扩大影响，使用户体验恶化并导致用户流失和平台损失。
+
+- move_code：解释平台级伤害机制
+
+- statement_status：prior_literature
+
+- why_here_cn：建立机器人问题对平台和用户的双重后果，为平台部署方案提供依据。
+
+- inherits_from_previous_cn：以机器人占5%-8%为前提。
+
+- changes_argument_state_cn：把问题后果从个体欺骗扩展到平台经济。
+
+- sets_up_next_cn：为后文'平台有动机部署系统'做铺垫。
+
+- failure_if_removed_cn：平台与用户双重动机缺失，部署建议缺乏说服力。
+
+- evidence_pointer：Section 2.1.1
+
+### 4. Background 2.1.3 ground truth段
+
+- locator：Background 2.1.3 ground truth段
+
+- paraphrase_cn：建立ground truth是常见难题，方法包括蜜罐、公开数据集、众包数据和专家标注，各有权衡，没有明显更优。
+
+- move_code：综述ground truth方法
+
+- statement_status：prior_literature
+
+- why_here_cn：为本文选择众包举报列表作为ground truth提供合法化比较。
+
+- inherits_from_previous_cn：承接检测范式综述。
+
+- changes_argument_state_cn：建立'ground truth选择依赖研究目标'的框架。
+
+- sets_up_next_cn：为本文选择Reddit众包列表提供理由。
+
+- failure_if_removed_cn：ground truth选择显得武断。
+
+- evidence_pointer：Section 2.1.3
+
+### 5. Background 2.1.3 平台特征段
+
+- locator：Background 2.1.3 平台特征段
+
+- paraphrase_cn：平台决定可用特征；Twitter有转发而Reddit无，Twitter有字符限制而Reddit没有，因此长文本平台研究缺失会影响模型跨平台可迁移性。
+
+- move_code：建立平台依赖缺口
+
+- statement_status：prior_literature
+
+- why_here_cn：说明现有Twitter偏置不是小事，长文本平台需要新研究。
+
+- inherits_from_previous_cn：以特征生成与模型选择紧密相连为前提。
+
+- changes_argument_state_cn：引入'平台'作为研究选择的独立维度。
+
+- sets_up_next_cn：为正文选择Reddit和长文本方法学提供理论依据。
+
+- failure_if_removed_cn：选择Reddit平台的理由缺失，后续平台数据贡献失去依据。
+
+- evidence_pointer：Section 2.1.3，Table 1前
+
+### 6. Background Table 1后Cresci数据段
+
+- locator：Background Table 1后Cresci数据段
+
+- paraphrase_cn：Cresci等的数据集只有消息级粒度而非会话或线程级，限制重建对话和回复关系，且该问题延续到后续研究，构成显著检测能力缺口。
+
+- move_code：把基准数据集缺陷上升为领域缺口
+
+- statement_status：prior_literature
+
+- why_here_cn：被广泛使用的基准缺少回复关系，直接证明众包反应研究为何缺失。
+
+- inherits_from_previous_cn：以Table 1代表作品使用同一数据为前提。
+
+- changes_argument_state_cn：把数据集缺陷转化为文献缺口证据。
+
+- sets_up_next_cn：为'利用众包反应'的必要性提供强依据。
+
+- failure_if_removed_cn：全文核心数据贡献失去文献依据。
+
+- evidence_pointer：Section 2.1.3，Table 1后
+
+### 7. Background 2.1末尾众包标签段
+
+- locator：Background 2.1末尾众包标签段
+
+- paraphrase_cn：众包标签已在其他领域使用，可以是显性或隐式；本文假设社交媒体使用会产生类似的对机器人活动的隐式信号。
+
+- move_code：为众包反应提供文献合法化
+
+- statement_status：prior_literature
+
+- why_here_cn：证明众包标签在其他领域有效，使把自然回复视为隐式标签可行。
+
+- inherits_from_previous_cn：以'众包标签未用于机器人检测'缺口为前提，找到借用的合法来源。
+
+- changes_argument_state_cn：把'回复'重新概念化为'隐式众包标签'。
+
+- sets_up_next_cn：为RQ1直接提出作准备。
+
+- failure_if_removed_cn：'人类回复=众包标签'的概念跳跃无文献支撑。
+
+- evidence_pointer：Section 2.1末尾
+
+### 8. Research Question 1处
+
+- locator：Research Question 1处
+
+- paraphrase_cn：研究问题1：分析众包反应会对机器人检测任务产生什么影响？
+
+- move_code：提出研究问题1
+
+- statement_status：theory_claim
+
+- why_here_cn：在众包标签文献合法化后直接把问题编号落地。
+
+- inherits_from_previous_cn：以'隐式标签'概念为前提。
+
+- changes_argument_state_cn：把核心探索明确为可检验问题。
+
+- sets_up_next_cn：为RQ2关于确定性的问题铺垫。
+
+- failure_if_removed_cn：核心研究问题缺失，实验设计失去靶标。
+
+- evidence_pointer：Section 2.1末尾，RQ1
+
+### 9. Section 2.2末尾
+
+- locator：Section 2.2末尾
+
+- paraphrase_cn：话题和情感分析不足以完全操作化以人类智能增强机器学习的方法，因为用户识别机器人的确定性不同，需要第二个研究问题：如何计算评估众包反应的确定性。
+
+- move_code：从现有分析工具不足引出RQ2
+
+- statement_status：author_inference
+
+- why_here_cn：说明即使拥有话题和情感工具，核心难题'确定性'仍未解决。
+
+- inherits_from_previous_cn：以话题情感分析的流行和局限为前提。
+
+- changes_argument_state_cn：把研究问题从'影响'推进到'确定性评估'。
+
+- sets_up_next_cn：为言语行为理论出场提供直接需求。
+
+- failure_if_removed_cn：言语行为理论引入显得没有必要性。
+
+- evidence_pointer：Section 2.2，RQ2前
+
+### 10. Section 2.3.1 Searle分类部分
+
+- locator：Section 2.3.1 Searle分类部分
+
+- paraphrase_cn：Searle形式化五类言语行为：断言、承诺、宣告、指令、表达，是许多计算工作的基础。
+
+- move_code：选择理论分类体系
+
+- statement_status：prior_literature
+
+- why_here_cn：给出论文将要操作化的具体理论类别，为五类特征提供标签集。
+
+- inherits_from_previous_cn：以言语行为理论综述为前提，选定Searle作为可计算版本。
+
+- changes_argument_state_cn：把抽象理论固化为五分类标签。
+
+- sets_up_next_cn：为Table 2示例和后续多分类器训练提供结构。
+
+- failure_if_removed_cn：言语行为特征的类别定义缺失，整个特征设计无根。
+
+- evidence_pointer：Section 2.3.1
+
+### 11. Section 2.3.1 RSA段落
+
+- locator：Section 2.3.1 RSA段落
+
+- paraphrase_cn：RSA理论依赖听者主观解释，难以扩展到互不相识的大规模社交媒体网络，因此不适合本研究。
+
+- move_code：排除替代理论
+
+- statement_status：prior_literature
+
+- why_here_cn：防止审稿人质疑'为何不用RSA'，先说明其不可扩展性。
+
+- inherits_from_previous_cn：以言语行为理论多种形式化为前提。
+
+- changes_argument_state_cn：收窄理论与社交媒体情境的匹配性。
+
+- sets_up_next_cn：为决定使用Searle分类提供排除理由。
+
+- failure_if_removed_cn：理论选择缺少对照，显得随意。
+
+- evidence_pointer：Section 2.3.1 RSA段
+
+### 12. Section 2.3.2 S1-S3
+
+- locator：Section 2.3.2 S1-S3
+
+- paraphrase_cn：言语行为分类尚未用于机器人检测，但现有文本分析管线可扩展为多类分类任务。
+
+- move_code：建立理论与检测任务的嫁接点
+
+- statement_status：author_inference
+
+- why_here_cn：说明理论可以无缝进入检测管线，只需把标签改为言语行为。
+
+- inherits_from_previous_cn：以Searle五分类可计算为前提。
+
+- changes_argument_state_cn：把理论桥接到系统设计。
+
+- sets_up_next_cn：为RQ3提出和言语行为特征设计提供依据。
+
+- failure_if_removed_cn：理论与系统之间缺少转换桥梁，特征生成不必要。
+
+- evidence_pointer：Section 2.3.2
+
+### 13. Section 2.3.2 S4-S5
+
+- locator：Section 2.3.2 S4-S5
+
+- paraphrase_cn：众包数据集可扩展构建ground truth，但用户不确定时不会举报，因此反应可信度不同，选择最高质量数据可提高性能；言语行为可能有助于评估并选择这些反应。
+
+- move_code：把理论直接连接到众包标签质量问题
+
+- statement_status：author_inference
+
+- why_here_cn：把众包ground truth的可扩展性与质量问题结合，为言语行为作为选取机制立论。
+
+- inherits_from_previous_cn：以众包标签研究合法化为基础。
+
+- changes_argument_state_cn：建立'言语行为→确定性→标签选择'理论链条。
+
+- sets_up_next_cn：为RQ3正式提出作最后铺垫。
+
+- failure_if_removed_cn：言语行为特征的设计动机消失。
+
+- evidence_pointer：Section 2.3.2
+
+### 14. Research Question 3处
+
+- locator：Research Question 3处
+
+- paraphrase_cn：研究问题3：言语行为能否用于计算评估众包反应识别潜在机器人的确定性？
+
+- move_code：提出研究问题3
+
+- statement_status：theory_claim
+
+- why_here_cn：把言语行为理论转化为可直接实验的问题。
+
+- inherits_from_previous_cn：以'言语行为可能是评估机制'的推理为前提。
+
+- changes_argument_state_cn：第三次研究问题完成理论到实验的闭环。
+
+- sets_up_next_cn：为研究方法章节把RQ1-3整合为系统设计。
+
+- failure_if_removed_cn：言语行为的实验合法性缺失。
+
+- evidence_pointer：Section 2.3.2，RQ3
+
+### 15. Section 3 Research Approach S1-S5
+
+- locator：Section 3 Research Approach S1-S5
+
+- paraphrase_cn：研究主要探索计算解决方案以平衡机器人作者与平台之间的力量；现有军备竞赛中众包反应未被利用，需研究如何加权反应以及言语行为是否适用；同时测量机器人真实影响以支持管理决策。
+
+- move_code：整合三个研究问题进入研究框架
+
+- statement_status：author_inference
+
+- why_here_cn：把背景章节的多个缺口浓缩为统一研究路线，并增加实践测量焦点。
+
+- inherits_from_previous_cn：以三个RQ为前提，把它们汇总。
+
+- changes_argument_state_cn：从文献回顾进入研究设计。
+
+- sets_up_next_cn：为Section 3.1框架图作准备。
+
+- failure_if_removed_cn：研究设计缺乏统一动机，后续各模块显得拼凑。
+
+- evidence_pointer：Section 3
+
+### 16. Section 3.1 Research Design S1-S6
+
+- locator：Section 3.1 Research Design S1-S6
+
+- paraphrase_cn：研究框架分步进行：收集社交媒体数据，提取人机回复线程，用计算语言学和机器学习提取信号，基于Searle言语行为理论，生成话题、情感、言语行为、语义和时间特征并独立生成后合并，最后实验评价。
+
+- move_code：把理论转化为系统模块清单
+
+- statement_status：design_decision
+
+- why_here_cn：明确说明哪些特征来自理论、哪些来自传统方法，以及合并顺序。
+
+- inherits_from_previous_cn：以三个RQ和言语行为理论选择为前提。
+
+- changes_argument_state_cn：完成从研究问题到系统设计的翻译。
+
+- sets_up_next_cn：为方法章节按模块叙述提供蓝图。
+
+- failure_if_removed_cn：理论到设计的转换断裂，后续方法章节失去组织原则。
+
+- evidence_pointer：Section 3.1
+
+## 制品设计理由逐句图谱
+
+### 1. Section 4.1.2 过滤规则
+
+- locator：Section 4.1.2 过滤规则
+
+- paraphrase_cn：数据集中有4000多个账号，但为对抗误报，只保留被举报10次以上的账号，最终得到777个高置信ground truth账号。
+
+- move_code：设计ground truth过滤规则
+
+- statement_status：design_decision
+
+- why_here_cn：众包列表开放但可能含假举报，阈值筛选是提高标签质量的关键。
+
+- inherits_from_previous_cn：以r/BotWatchman众包列表存在误报风险为前提。
+
+- changes_argument_state_cn：把众包弱标签转化为相对可信的ground truth。
+
+- sets_up_next_cn：为后续所有特征和分类实验提供可靠的机器人样本。
+
+- failure_if_removed_cn：ground truth噪声过大会污染所有实验结论。
+
+- evidence_pointer：Section 4.1.2
+
+### 2. Section 4.1.3 人机交互提取
+
+- locator：Section 4.1.3 人机交互提取
+
+- paraphrase_cn：对话被拆解为机器人消息与直接回复的关系；发现没有机器人账号回复机器人消息，因此假定所有对机器人消息的回复都来自人类。
+
+- move_code：设计众包反应的数据结构
+
+- statement_status：method_decision
+
+- why_here_cn：定义'众包反应'在数据层面的具体形态，排除机器人自回复干扰。
+
+- inherits_from_previous_cn：以收集所有机器人参与线程为前提。
+
+- changes_argument_state_cn：建立干净的人机回复关系集，为后续特征计算提供输入。
+
+- sets_up_next_cn：为人类认知特征（话题、情感、言语行为）生成提供语料。
+
+- failure_if_removed_cn：回复数据可能混入机器人回复，污染整个人类认知模块。
+
+- evidence_pointer：Section 4.1.3
+
+### 3. Section 4.1.3 80/20划分
+
+- locator：Section 4.1.3 80/20划分
+
+- paraphrase_cn：由于消息有先后顺序，为避免特征泄漏，按时间顺序做80/20划分，且丢弃训练账号在测试期收到的回复。
+
+- move_code：设计防泄漏时间划分
+
+- statement_status：method_decision
+
+- why_here_cn：机器学习实验要反映真实在线检测，不能用未来信息预测过去。
+
+- inherits_from_previous_cn：以数据有时间顺序这一属性为前提。
+
+- changes_argument_state_cn：保证后续实验内有效性。
+
+- sets_up_next_cn：为时间-检测模拟提供可信的训练测试边界。
+
+- failure_if_removed_cn：特征泄漏会让性能提升变成虚假结论。
+
+- evidence_pointer：Section 4.1.3
+
+### 4. Section 4.2.2 选BERT理由
+
+- locator：Section 4.2.2 选BERT理由
+
+- paraphrase_cn：Transformer能接受理论上无限长的输入序列，不像RNN那样有梯度消失问题，适合Reddit中很长的用户生成文本。
+
+- move_code：选择基础深度模型
+
+- statement_status：design_decision
+
+- why_here_cn：平台长文本特性决定模型选择，这是技术选择与问题特征的绑定。
+
+- inherits_from_previous_cn：以Reddit长文本平台特征为前提。
+
+- changes_argument_state_cn：确立BERT作为所有文本特征生成的核心。
+
+- sets_up_next_cn：为后续话题、情感、言语行为分类和账号嵌入统一使用BERT作铺垫。
+
+- failure_if_removed_cn：所有特征模块的骨干技术失去依据。
+
+- evidence_pointer：Section 4.2.2
+
+### 5. Section 4.2.3 话题分类需求
+
+- locator：Section 4.2.3 话题分类需求
+
+- paraphrase_cn：为实现人类认知组件，需要判断人类回复是否在指出机器人活动，因此构建二分类话题模型。
+
+- move_code：把构念转化为分类任务
+
+- statement_status：design_decision
+
+- why_here_cn：'用户是否在识别机器人'是众包标签的第一层信号，必须首先操作化。
+
+- inherits_from_previous_cn：以众包反应作为隐式标签为前提。
+
+- changes_argument_state_cn：生成最终特征矩阵中的Bot Topic比例特征。
+
+- sets_up_next_cn：为情感和言语行为分类提供同类流程范式。
+
+- failure_if_removed_cn：没有话题分类，'回复是否指认机器人'这一核心特征消失。
+
+- evidence_pointer：Section 4.2.3
+
+### 6. Section 4.2.4 情感分析机制
+
+- locator：Section 4.2.4 情感分析机制
+
+- paraphrase_cn：人类回复疑似机器人消息时可能情感两极分化，负面情感有助于揭示试图误导用户的机器人。
+
+- move_code：给出情感特征的机制合理性
+
+- statement_status：author_inference
+
+- why_here_cn：情感极性需要与机器人检测联系起来，不能只是通用情感分析。
+
+- inherits_from_previous_cn：以众包回复为分析对象为前提。
+
+- changes_argument_state_cn：把情感从通用NLP工具变为检测特征。
+
+- sets_up_next_cn：为情感比例特征进入特征矩阵提供理由。
+
+- failure_if_removed_cn：情感特征显得与本问题无关。
+
+- evidence_pointer：Section 4.2.4
+
+### 7. Section 4.2.5 言语行为设计
+
+- locator：Section 4.2.5 言语行为设计
+
+- paraphrase_cn：言语行为可揭示用户判断机器人的确定性；例如宣告'我找到了一个机器人'比提问'有人能验证这是不是机器人吗'更确定，不是所有回复都应被同等加权。
+
+- move_code：把理论直接转化为特征设计
+
+- statement_status：theory_claim
+
+- why_here_cn：这是言语行为理论进入系统设计最直接的句子，把理论构念变成分类标签的正当理由。
+
+- inherits_from_previous_cn：以RQ3和Searle五分类为前提。
+
+- changes_argument_state_cn：确立SA1-SA5特征的理论来源，并为消融分析设定预期。
+
+- sets_up_next_cn：为言语行为分类器的训练和多类标签生成作准备。
+
+- failure_if_removed_cn：言语行为特征沦为任意文本特征，理论贡献落空。
+
+- evidence_pointer：Section 4.2.5
+
+### 8. Section 4.3.1 语义信息
+
+- locator：Section 4.3.1 语义信息
+
+- paraphrase_cn：语义信息对揭示机器人消息的攻击策略或语言趋势很重要，通过把账号所有消息拼接送入BERT生成账号级嵌入。
+
+- move_code：设计传统语义特征
+
+- statement_status：design_decision
+
+- why_here_cn：复现文献中基于内容的检测思路，作为增强模型的对比基线。
+
+- inherits_from_previous_cn：以传统检测主要依赖语义和时间分析为前提。
+
+- changes_argument_state_cn：构建传统模型的第一部分特征。
+
+- sets_up_next_cn：与时间相似性共同构成传统特征集。
+
+- failure_if_removed_cn：缺少传统特征，'增强'无从对照。
+
+- evidence_pointer：Section 4.3.1
+
+### 9. Section 4.3.2 时间相似性
+
+- locator：Section 4.3.2 时间相似性
+
+- paraphrase_cn：时间相似性识别账号是否持续发布相同或相似消息，这是机器人活动的信号；方法是对同一账号消息两两计算余弦相似度并取平均。
+
+- move_code：设计传统时间特征
+
+- statement_status：design_decision
+
+- why_here_cn：把机器人高度同步重复的行为特征操作化为可计算指标。
+
+- inherits_from_previous_cn：以机器人重复发布文献结论为前提。
+
+- changes_argument_state_cn：构建传统模型的第二部分特征。
+
+- sets_up_next_cn：与语义特征共同构成传统模型。
+
+- failure_if_removed_cn：传统模型只靠语义，减弱'增强'对比的说服力。
+
+- evidence_pointer：Section 4.3.2
+
+### 10. Section 4.4.1 特征矩阵构建
+
+- locator：Section 4.4.1 特征矩阵构建
+
+- paraphrase_cn：特征矩阵合并五部分：识别机器人活动的回复比例（Bot Topic）、正负中性情感比例、五个言语行为、时间相似性、BERT语义向量Vs。
+
+- move_code：把人类认知与传统特征合并为单一制品
+
+- statement_status：design_decision
+
+- why_here_cn：这是人机认知融合的最终实现点，所有模块在此汇合。
+
+- inherits_from_previous_cn：以四类独立生成的特征模块为前提。
+
+- changes_argument_state_cn：完成'增强模型'的定义，使'传统vs增强'对比可操作。
+
+- sets_up_next_cn：为五类分类器的对比实验提供统一输入。
+
+- failure_if_removed_cn：缺乏统一特征矩阵，核心对比实验无法进行。
+
+- evidence_pointer：Section 4.4.1，Table 5
+
+### 11. Section 4.4.2 模拟触发设计
+
+- locator：Section 4.4.2 模拟触发设计
+
+- paraphrase_cn：测试集机器人账号分别在发布了10、25、50条消息时被评估，以检验系统对新机器人的响应速度。
+
+- move_code：把静态分类转为部署相关模拟
+
+- statement_status：method_decision
+
+- why_here_cn：补足'多快能检测'这一实际部署维度，静态指标无法回答该问题。
+
+- inherits_from_previous_cn：以时间顺序80/20划分为前提。
+
+- changes_argument_state_cn：把性能指标翻译为早期检测率。
+
+- sets_up_next_cn：为标签数量模拟提供对照。
+
+- failure_if_removed_cn：系统的实用性停留在分类精度，缺少时间维度证据。
+
+- evidence_pointer：Section 4.4.2
+
+### 12. Section 4.4.3 新机器人测试设计
+
+- locator：Section 4.4.3 新机器人测试设计
+
+- paraphrase_cn：为检验系统面对随时间演化且可能具备反检测能力的机器人是否仍有效，用2019年下半年创建的260个机器人测试先前训练好的模型。
+
+- move_code：设计对抗演化稳健性测试
+
+- statement_status：method_decision
+
+- why_here_cn：军备竞赛主题要求方法不只对历史数据有效，这是时间外验证。
+
+- inherits_from_previous_cn：以机器人持续进化且军备竞赛为前提。
+
+- changes_argument_state_cn：引入时间外稳健性作为独立证据层次。
+
+- sets_up_next_cn：为benchmark和讨论中的边界条件作铺垫。
+
+- failure_if_removed_cn：结论'能对抗进化机器人'失去证据。
+
+- evidence_pointer：Section 4.4.3
+
+## Study开头、过渡与收束图谱
+
+### 1. Data Collection 4.1.1 Platform Description 开头
+
+- locator：Data Collection 4.1.1 Platform Description 开头
+
+- paraphrase_cn：数据来自Reddit.com，这里能观察自然发生而非受控设置的人机互动。
+
+- move_code：Study 1开篇：平台选择理由
+
+- statement_status：method_decision
+
+- why_here_cn：在进入数据细节前先为平台选择提供生态效度理由。
+
+- inherits_from_previous_cn：以研究框架需要真实互动数据为前提。
+
+- changes_argument_state_cn：把Reddit确定为观测人类自然反应的场所。
+
+- sets_up_next_cn：为ground truth来源和后续回复提取作准备。
+
+- failure_if_removed_cn：数据来源的生态效度论证缺失。
+
+- evidence_pointer：Section 4.1.1
+
+### 2. Section 4.2.1 向量表示开头
+
+- locator：Section 4.2.1 向量表示开头
+
+- paraphrase_cn：本文提出的主要创新是把嵌入在社交媒体消息中的人类认知能力纳入传统检测，因此需要向量化消息以分析众包标签可信度。
+
+- move_code：Study 2/3/4共同开篇：重申创新并引出向量化
+
+- statement_status：design_decision
+
+- why_here_cn：在进入三个文本分类器前，先交代文本表示的技术基础。
+
+- inherits_from_previous_cn：以数据收集完成、特征提取需要向量为前提。
+
+- changes_argument_state_cn：从数据阶段过渡到特征生成阶段。
+
+- sets_up_next_cn：为Transformer选择和后续BERT特征提供依据。
+
+- failure_if_removed_cn：三个分类器的技术基础缺失。
+
+- evidence_pointer：Section 4.2.1-4.2.2
+
+### 3. Table 4后
+
+- locator：Table 4后
+
+- paraphrase_cn：三个分类任务中BERT均表现最佳，很可能因其长输入能力没有梯度消失问题。
+
+- move_code：研究阶段小结论：统一选取BERT
+
+- statement_status：empirical_result
+
+- why_here_cn：一个结论同时解释三个分类器选择，避免重复叙述。
+
+- inherits_from_previous_cn：以三个10折验证结果表为前提。
+
+- changes_argument_state_cn：确立BERT为全部文本特征骨干。
+
+- sets_up_next_cn：为传统语义嵌入和最终特征矩阵使用BERT作铺垫。
+
+- failure_if_removed_cn：后续所有BERT生成特征的技术选择失去解释。
+
+- evidence_pointer：Section 4.2.3-4.2.5，Table 4
+
+### 4. Section 4.4.1 Social Bot Detection Classifier 开头
+
+- locator：Section 4.4.1 Social Bot Detection Classifier 开头
+
+- paraphrase_cn：提取了回复消息中的人类认知能力并实现了基于语义信息的传统检测方法后，就可以评估智能增强对检测任务的效果。
+
+- move_code：核心实验开篇：汇合所有模块
+
+- statement_status：method_decision
+
+- why_here_cn：用一句总结前四个模块，宣布它们进入统一评价。
+
+- inherits_from_previous_cn：以特征模块全部完成为前提。
+
+- changes_argument_state_cn：从模块构建进入整体评价。
+
+- sets_up_next_cn：为Table 6传统vs增强核心结果提供实验框架。
+
+- failure_if_removed_cn：核心对比实验显得突然。
+
+- evidence_pointer：Section 4.4.1
+
+### 5. Table 6后 消融动机
+
+- locator：Table 6后 消融动机
+
+- paraphrase_cn：增强模型性能更好，但不清楚提升来自回复消息本身还是言语行为，因此用缩减特征集检验。
+
+- move_code：从总体结果引出消融
+
+- statement_status：empirical_result
+
+- why_here_cn：核心结果确认后，立即提出内部归因问题。
+
+- inherits_from_previous_cn：以Table 6增强模型提升为前提。
+
+- changes_argument_state_cn：把论证从'是否有提升'转向'提升来自哪'。
+
+- sets_up_next_cn：为Table 7消融结果作引子。
+
+- failure_if_removed_cn：消融实验失去动因，无法区分特征贡献。
+
+- evidence_pointer：Section 4.4.1 Table 6后
+
+### 6. Table 7后
+
+- locator：Table 7后
+
+- paraphrase_cn：消融显示言语行为提供适度提升；在每天数百万消息的平台上，小幅提升也能转化为大量原本漏检的机器人。
+
+- move_code：消融结果的意义放大
+
+- statement_status：empirical_result
+
+- why_here_cn：承认增益小但用规模效应补偿，避免贡献被低估。
+
+- inherits_from_previous_cn：以Table 7消融结果为前提。
+
+- changes_argument_state_cn：把小幅指标提升翻译为实际业务价值。
+
+- sets_up_next_cn：为下一阶段'部署中多快检测'作铺垫。
+
+- failure_if_removed_cn：言语行为的适度增益会被读者视为不值得。
+
+- evidence_pointer：Section 4.4.1 Table 7后
+
+### 7. Section 4.4.2 Time-to-Detection 开头
+
+- locator：Section 4.4.2 Time-to-Detection 开头
+
+- paraphrase_cn：为展示框架实际可部署，模拟真实检测场景：测试账号在10/25/50条消息时触发评估。
+
+- move_code：从静态分类过渡到部署模拟
+
+- statement_status：method_decision
+
+- why_here_cn：回应'系统能否早期发现机器人'这一实践问题。
+
+- inherits_from_previous_cn：以时间划分和静态分类结果为前提。
+
+- changes_argument_state_cn：开辟部署效果证据维度。
+
+- sets_up_next_cn：为标签数量模拟制造延续。
+
+- failure_if_removed_cn：部署可行性仍然停留在理想化分类指标。
+
+- evidence_pointer：Section 4.4.2
+
+### 8. Table 9后
+
+- locator：Table 9后
+
+- paraphrase_cn：标签数量模拟显示增强模型随众包标签增加检测率高，而传统模型虽然同时触发但不用标签，增益有限。
+
+- move_code：标签数量模拟收束
+
+- statement_status：empirical_result
+
+- why_here_cn：把性能提升与'标签累积'挂钩，证明众包数据本身驱动增强。
+
+- inherits_from_previous_cn：以Table 9结果为前提。
+
+- changes_argument_state_cn：建立'更多众包标签→更好检测'的机制证据。
+
+- sets_up_next_cn：为下一阶段'机器人进化后仍有效'作铺垫。
+
+- failure_if_removed_cn：标签数量效应缺失，众包收益的动态性无法展示。
+
+- evidence_pointer：Section 4.4.2 Table 9后
+
+### 9. Section 4.4.3 新机器人测试开头
+
+- locator：Section 4.4.3 新机器人测试开头
+
+- paraphrase_cn：尽管已展示性能，剩余担忧是机器人随时间更先进并发展规避能力，因此用2019年新识别的机器人测试系统。
+
+- move_code：从部署模拟过渡到对抗演化测试
+
+- statement_status：method_decision
+
+- why_here_cn：把军备竞赛主题落到具体实验设计。
+
+- inherits_from_previous_cn：以主实验的静态结果为前提。
+
+- changes_argument_state_cn：引入时间外数据检验。
+
+- sets_up_next_cn：为Table 10性能退化对比提供数据。
+
+- failure_if_removed_cn：系统面对新机器人的稳健性无法声明。
+
+- evidence_pointer：Section 4.4.3
+
+### 10. Section 4.4.4 Other Benchmarks 开头
+
+- locator：Section 4.4.4 Other Benchmarks 开头
+
+- paraphrase_cn：尝试与文献方法直接benchmark，最直接的是Garcia-Silva等在Cresci Twitter数据上的BERT结果。
+
+- move_code：从内部实验过渡到外部文献对标
+
+- statement_status：method_decision
+
+- why_here_cn：把结果放回文献脉络，回答'与已有方法相比如何'。
+
+- inherits_from_previous_cn：以内部全部实验完成为前提。
+
+- changes_argument_state_cn：把证据从自我对比扩展到文献参照。
+
+- sets_up_next_cn：为'Cresci缺少回复无法benchmark众包特征'的说明作铺垫。
+
+- failure_if_removed_cn：外部效度无证据，结果可能被视为孤岛。
+
+- evidence_pointer：Section 4.4.4
+
+### 11. Section 4.4.4 无法迁移部分
+
+- locator：Section 4.4.4 无法迁移部分
+
+- paraphrase_cn：Varol等的63类特征中约33类可在Reddit实现，许多依赖Twitter特有的转发和关注功能，因此放弃不完全对比。
+
+- move_code：限定benchmark边界并解释放弃
+
+- statement_status：empirical_result
+
+- why_here_cn：主动说明为何不能完成与其他方法的完整对比，防止被审稿人视为逃避。
+
+- inherits_from_previous_cn：以尝试使用Varol特征为前提。
+
+- changes_argument_state_cn：把跨平台不可比转化为平台差异的论证。
+
+- sets_up_next_cn：为讨论中的平台边界和未来研究作铺垫。
+
+- failure_if_removed_cn：缺少与其他方法对比会被视为明显遗漏。
+
+- evidence_pointer：Section 4.4.4
+
+## 讨论与贡献逐句图谱
+
+### 1. Discussion 5.1 S1-S3
+
+- locator：Discussion 5.1 S1-S3
+
+- paraphrase_cn：社交机器人有能力框定在线对话并伤害话语健康；为应对这一问题，本文开发了使用众包标签和对机器人内容众包反应的检测框架，通过计算方法与语言理论结合实现。
+
+- move_code：总结研究产出
+
+- statement_status：contribution_claim
+
+- why_here_cn：讨论开篇重述问题与研究产出，把读者从实验带回整体贡献。
+
+- inherits_from_previous_cn：以全部实验结果为前提。
+
+- changes_argument_state_cn：把实验章节转入贡献解释。
+
+- sets_up_next_cn：为下一句'识别回复并按言语行为分类是全新方法'提供框架。
+
+- failure_if_removed_cn：讨论缺少中心主题，后续贡献细节无所依附。
+
+- evidence_pointer：Section 5.1
+
+### 2. Discussion 5.1 S4-S6
+
+- locator：Discussion 5.1 S4-S6
+
+- paraphrase_cn：识别用户对机器人内容的回复并按言语行为分类以衡量其可信度，是此前文献未采用的新方法；本文用言语行为理论刻画不同意图并证明检测性能提升。
+
+- move_code：声明理论+方法贡献
+
+- statement_status：contribution_claim
+
+- why_here_cn：把'新方法'和'理论应用'明确写为贡献，并与结果联系。
+
+- inherits_from_previous_cn：以框架总体贡献为前提，具体化到言语行为。
+
+- changes_argument_state_cn：确立言语行为作为本文标志性贡献。
+
+- sets_up_next_cn：为下一段'系统可部署'作铺垫。
+
+- failure_if_removed_cn：言语行为的贡献声明在讨论中缺失。
+
+- evidence_pointer：Section 5.1
+
+### 3. Discussion 5.1 S7-S9
+
+- locator：Discussion 5.1 S7-S9
+
+- paraphrase_cn：框架的核心优势是能部署到真实世界；许多平台已有传统检测系统，从回复生成特征是自然扩展，也可从零构建。
+
+- move_code：声明设计/实践贡献
+
+- statement_status：contribution_claim
+
+- why_here_cn：把技术系统定位为对现有基础设施的增量扩展，增强可采纳性。
+
+- inherits_from_previous_cn：以系统模块和模拟结果为前提。
+
+- changes_argument_state_cn：从理论贡献转向可部署性论证。
+
+- sets_up_next_cn：为下一段政策与虚假信息意义提供连接。
+
+- failure_if_removed_cn：实践贡献缺失，系统价值仅限学术。
+
+- evidence_pointer：Section 5.1
+
+### 4. Discussion 5.1 S10-S12
+
+- locator：Discussion 5.1 S10-S12
+
+- paraphrase_cn：机器人问题因'假新闻'、2016年选举和Section 230等政策议题而更具社会重要性。
+
+- move_code：连接政策与社会议题
+
+- statement_status：fact
+
+- why_here_cn：把技术工作放到更广社会语境，提升IS论文的现实意义。
+
+- inherits_from_previous_cn：以系统贡献为前提，扩展其社会后果。
+
+- changes_argument_state_cn：为'研究有持续价值'提供语境。
+
+- sets_up_next_cn：为下一段讨论限制作对照。
+
+- failure_if_removed_cn：社会意义缺失，机器人检测变成纯技术效率问题。
+
+- evidence_pointer：Section 5.1
+
+### 5. Section 5.2 S1-S3
+
+- locator：Section 5.2 S1-S3
+
+- paraphrase_cn：依赖众包标签意味着延迟检测，机器人可能在发现前造成伤害，但没有任何方法能在交互前检测100%的机器人，因此本文方法仍有价值。
+
+- move_code：承认延迟限制并辩护
+
+- statement_status：author_inference
+
+- why_here_cn：主动暴露最明显的边界，并用'没有完美方法'做对比辩护。
+
+- inherits_from_previous_cn：以众包驱动的系统本质为前提。
+
+- changes_argument_state_cn：把弱点转化为合理取舍。
+
+- sets_up_next_cn：为下方'依赖人类识别能力'的第二个限制作铺垫。
+
+- failure_if_removed_cn：最明显弱点评判被忽略，审稿风险高。
+
+- evidence_pointer：Section 5.2
+
+### 6. Section 5.2 S4-S6
+
+- locator：Section 5.2 S4-S6
+
+- paraphrase_cn：另一个限制是依赖用户能识别的机器人，无法检测完全不被人类察觉的最先进机器人；但随用户能力提高，系统性能会自然随时间改善，且可能对某些机器人类型有偏差。
+
+- move_code：界定边界条件并给出动态优势
+
+- statement_status：author_inference
+
+- why_here_cn：明确适用边界，同时用'众包能力随时间提升'缓解该限制。
+
+- inherits_from_previous_cn：以众包依赖为前提。
+
+- changes_argument_state_cn：建立边界-动态优势的平衡。
+
+- sets_up_next_cn：为下一句'言语行为可能受个性影响'作铺垫。
+
+- failure_if_removed_cn：适用边界不清，贡献范围被高估。
+
+- evidence_pointer：Section 5.2
+
+### 7. Section 5.2 S7-S8
+
+- locator：Section 5.2 S7-S8
+
+- paraphrase_cn：言语行为分类可能受用户个性影响；本文没有明确处理，但多众包标签可减轻个人偏差。
+
+- move_code：承认理论特征的内部偏差
+
+- statement_status：author_inference
+
+- why_here_cn：坦诚言语行为特征的潜在噪声来源，并给出缓解思路。
+
+- inherits_from_previous_cn：以言语行为作为特征集为前提。
+
+- changes_argument_state_cn：限定理论特征的因果解读。
+
+- sets_up_next_cn：为下一句'机器人协同互动'的边界作铺垫。
+
+- failure_if_removed_cn：个性偏差问题被隐藏，贡献被高估。
+
+- evidence_pointer：Section 5.2
+
+### 8. Section 5.2 S9-S12
+
+- locator：Section 5.2 S9-S12
+
+- paraphrase_cn：先前研究表明机器人可协同互动使彼此合法化，但若人类用户发现可疑活动，框架仍能检测；另外机器人可能故意发布虚假举报，因缺乏ground truth本研究无法检验该策略。
+
+- move_code：承认对抗性未来边界
+
+- statement_status：author_inference
+
+- why_here_cn：覆盖两种对抗场景：机器人协同和虚假举报，展示对反制的预见。
+
+- inherits_from_previous_cn：以系统依赖众包信号为前提。
+
+- changes_argument_state_cn：把边界从'检测能力'扩展到'对抗策略'。
+
+- sets_up_next_cn：为Section 5.3部署建议提供问题域。
+
+- failure_if_removed_cn：对抗鲁棒性讨论不完整。
+
+- evidence_pointer：Section 5.2
+
+### 9. Section 5.3 S1-S6
+
+- locator：Section 5.3 S1-S6
+
+- paraphrase_cn：数据集中机器人多为不同用户发现而非少数用户反复报告，这在很大程度上支持众包方法的可信度；平台可用本文数据或自标数据训练初始模型以避免冷启动。
+
+- move_code：提供数据洞察与部署起点
+
+- statement_status：empirical_result
+
+- why_here_cn：用数据事实支持众包标签价值，并把系统接入现实部署流程。
+
+- inherits_from_previous_cn：以众包数据集描述统计为前提。
+
+- changes_argument_state_cn：从学术结果转向可操作建议。
+
+- sets_up_next_cn：为后续'定期重训练'建议作铺垫。
+
+- failure_if_removed_cn：众包标签的生态学可信度无证据。
+
+- evidence_pointer：Section 5.3
+
+### 10. Section 5.3 S7-S12
+
+- locator：Section 5.3 S7-S12
+
+- paraphrase_cn：平台应先训练初始模型，再部署，可实时或按调度执行分析，并需定期更新重训练；训练样本可来自系统自身发现的机器人和外部来源。
+
+- move_code：给出完整部署路径
+
+- statement_status：contribution_claim
+
+- why_here_cn：把系统升级为设计知识：不是一次性模型，而是一套持续更新流程。
+
+- inherits_from_previous_cn：以平台需避免冷启动为前提。
+
+- changes_argument_state_cn：完成'结果→可复用设计知识'的升级。
+
+- sets_up_next_cn：为Section 5.4贡献总结收束。
+
+- failure_if_removed_cn：部署知识缺失，文章退化为一次实验报告。
+
+- evidence_pointer：Section 5.3
+
+### 11. Section 5.4 S1-S4
+
+- locator：Section 5.4 S1-S4
+
+- paraphrase_cn：绝大多数机器人检测文献聚焦Twitter短文本且不参与众包反应，多因依赖缺少回复的Cresci基准；长文本平台应用未知，众包反应使用完全缺失。
+
+- move_code：回扣引言缺口
+
+- statement_status：prior_literature
+
+- why_here_cn：把讨论与引言中的核心缺口对齐，证明本文填补了它。
+
+- inherits_from_previous_cn：以文献综述结果为前提。
+
+- changes_argument_state_cn：把实证结果放回文献空位。
+
+- sets_up_next_cn：为下一句'新数据集代表新方向'作铺垫。
+
+- failure_if_removed_cn：贡献与引言缺口脱节。
+
+- evidence_pointer：Section 5.4
+
+### 12. Section 5.4 S5-S7
+
+- locator：Section 5.4 S5-S7
+
+- paraphrase_cn：Reddit数据集代表推动机器人检测新方向的新语境；未来研究应尽可能使用众包反应，本文证明了其有效性，并首次用言语行为评估不同众包反应的确定性。
+
+- move_code：总结贡献与未来方向
+
+- statement_status：contribution_claim
+
+- why_here_cn：将数据、方法、理论贡献浓缩为可直接引用的结论。
+
+- inherits_from_previous_cn：以全部分配论证为前提。
+
+- changes_argument_state_cn：完成全文贡献定格。
+
+- sets_up_next_cn：为最后一段IS学科定位收尾。
+
+- failure_if_removed_cn：最终贡献清单缺失，读者无法带走结论。
+
+- evidence_pointer：Section 5.4
+
+### 13. Section 5.4 S8-S11
+
+- locator：Section 5.4 S8-S11
+
+- paraphrase_cn：研究处于人类与机器认知能力结合点，回应了IS期刊对更多设计科学计算工作的呼吁，并开辟了如何利用真实用户识别机器人互动的新调查方向。
+
+- move_code：以IS学科定位收束全文
+
+- statement_status：contribution_claim
+
+- why_here_cn：最后一句回到引言的主题，把全篇置于IS学科语境，形成首尾呼应。
+
+- inherits_from_previous_cn：以全部贡献声明为前提。
+
+- changes_argument_state_cn：把论文定格在IS设计科学传统。
+
+- sets_up_next_cn：全文结束，无后续。
+
+- failure_if_removed_cn：论文的IS学科归属感减弱。
+
+- evidence_pointer：Section 5.4末尾
+
+## Study累积逻辑
+
+### 1. 1
+
+- study_or_phase：数据收集与人机回复提取（4.1）
+
+- evidence_job_cn：证明众包反应可以作为可计算的数据结构存在，并建立防泄漏的时间划分。
+
+- what_it_establishes_cn：Reddit上存在777个高置信机器人账号及58,070条人类回复，回复关系可提取。
+
+- what_it_cannot_establish_cn：不能证明这些回复对检测任务有用。
+
+- why_next_phase_is_needed_cn：原始回复需要被转化为分类特征才能用于检测模型。
+
+- transition_wording_function_cn：'需要向量化消息并提取信号'把数据阶段引入特征生成。
+
+### 2. 2
+
+- study_or_phase：三类人类认知特征分类器（4.2）
+
+- evidence_job_cn：证明话题、情感、言语行为可从回复中被准确识别，并择优选定BERT。
+
+- what_it_establishes_cn：三类分类均可由BERT达到高F1，言语行为分布在不同回复中有差异。
+
+- what_it_cannot_establish_cn：不能证明这些特征能提升最终机器人检测性能。
+
+- why_next_phase_is_needed_cn：特征有NLP质量还不够，需进入完整检测任务验证语境价值。
+
+- transition_wording_function_cn：四个模块完成后以'现在可以评估增强效果'进入核心实验。
+
+### 3. 3
+
+- study_or_phase：传统特征构建（4.3）
+
+- evidence_job_cn：复现文献主流检测基础，构成本文的基线特征。
+
+- what_it_establishes_cn：语义嵌入和时间相似性可由Reddit数据生成。
+
+- what_it_cannot_establish_cn：不能证明单独使用它们性能好——实际上性能很低。
+
+- why_next_phase_is_needed_cn：需要一个可对照的弱基线，突出增强模型的增量。
+
+- transition_wording_function_cn：传统特征与人类认知特征被合并进特征矩阵，进入对比实验。
+
+### 4. 4
+
+- study_or_phase：核心分类对比与消融（4.4.1）
+
+- evidence_job_cn：证明众包反应显著增强检测并拆解各特征贡献。
+
+- what_it_establishes_cn：增强模型在所有分类器上大幅优于传统模型；话题贡献最大，言语行为适度，情感几乎不变。
+
+- what_it_cannot_establish_cn：不能说明系统在真实部署中多快能检测、需要多少标签。
+
+- why_next_phase_is_needed_cn：静态分类指标需翻译为部署相关的动态指标。
+
+- transition_wording_function_cn：以'演示框架可部署'引出时间-检测模拟。
+
+### 5. 5
+
+- study_or_phase：时间-检测与标签数量模拟（4.4.2）
+
+- evidence_job_cn：把性能升级为早期检测率，并证明众包标签数量驱动增强。
+
+- what_it_establishes_cn：增强模型在50条消息时检测81% vs 传统64%；标签越多检测率越高。
+
+- what_it_cannot_establish_cn：不能说明系统对后来更先进机器人的长期有效性。
+
+- why_next_phase_is_needed_cn：军备竞赛主题要求检验时间外稳健性。
+
+- transition_wording_function_cn：以'机器人将随时间进化'引出2019新机器人测试。
+
+### 6. 6
+
+- study_or_phase：新机器人稳健性测试（4.4.3）
+
+- evidence_job_cn：证明增强模型面对后来机器人时性能退化更小。
+
+- what_it_establishes_cn：增强模型在2019新机器人上性能损失很小，传统模型损失更大。
+
+- what_it_cannot_establish_cn：不能证明该方法相比所有文献现有方法的外部可比性。
+
+- why_next_phase_is_needed_cn：需要把方法放回文献脉络进行benchmark确认。
+
+- transition_wording_function_cn：以'尝试直接benchmark'进入文献对照。
+
+### 7. 7
+
+- study_or_phase：文献benchmark（4.4.4）
+
+- evidence_job_cn：把基础模型与文献对齐，并说明众包反应特征为何无法用旧基准比较。
+
+- what_it_establishes_cn：BERT基础结果与Garcia-Silva相当，加入可移植特征后略优；Cresci数据无回复。
+
+- what_it_cannot_establish_cn：不能在统一benchmark上与其他众包反应方法比较，因为不存在同类方法。
+
+- why_next_phase_is_needed_cn：外部对齐完成后，需要进入讨论把全部证据整合为贡献和设计知识。
+
+- transition_wording_function_cn：实验章节结束，讨论以重述整体产出开篇。
+
+## 主张—证据台账
+
+### 1. 众包反应能显著提升社交机器人检测性能。
+
+- claim_cn：众包反应能显著提升社交机器人检测性能。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：Table 6：增强随机森林宏F1=0.805 vs 传统0.407，五个分类器均提升。
+
+- support_strength：direct
+
+- where_claim_is_made：Abstract S7；Section 4.4.1；Section 5.1
+
+- where_evidence_is_provided：Section 4.4.1 Table 6
+
+### 2. 言语行为可作为评估众包反应确定性的机制并带来增量性能。
+
+- claim_cn：言语行为可作为评估众包反应确定性的机制并带来增量性能。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：Table 7：去掉言语行为宏F1从0.805降至0.774。
+
+- support_strength：partial
+
+- where_claim_is_made：Abstract S8；Introduction P5；Section 5.4
+
+- where_evidence_is_provided：Section 4.4.1 Table 7；Online Appendix A3（文中提及）
+
+### 3. 系统能在机器人早期活动时检测，且标签越多检测率越高。
+
+- claim_cn：系统能在机器人早期活动时检测，且标签越多检测率越高。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：Table 8：50条消息时增强81% vs 传统64%；Table 9：10个标签时78% vs 59%。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.4.2
+
+- where_evidence_is_provided：Section 4.4.2 Tables 8-9
+
+### 4. 系统对更新、更先进机器人仍稳健。
+
+- claim_cn：系统对更新、更先进机器人仍稳健。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：Table 10：增强随机森林精度下降3.44% vs 传统8.78%；召回下降3.636% vs 11.299%。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.4.3；Section 5.1
+
+- where_evidence_is_provided：Section 4.4.3 Table 10
+
+### 5. 现有常用基准数据集缺少回复关系，无法直接支持众包反应研究。
+
+- claim_cn：现有常用基准数据集缺少回复关系，无法直接支持众包反应研究。
+
+- claim_level：theory
+
+- supporting_evidence_cn：Cresci数据为消息级无回复；Section 4.4.4显示无法benchmark众包特征；Varol特征大部分无法迁移到Reddit。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P6；Background 2.1；Section 4.4.4
+
+- where_evidence_is_provided：Section 2.1.3；Section 4.4.4
+
+### 6. BERT是三类文本分类任务的最佳模型。
+
+- claim_cn：BERT是三类文本分类任务的最佳模型。
+
+- claim_level：technical
+
+- supporting_evidence_cn：Table 4：话题F1=0.959，情感0.914，言语行为0.865，均高于BiLSTM/LSTM/RNN/SVM。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.2.3-4.2.5；Table 4后
+
+- where_evidence_is_provided：Section 4.2.3-4.2.5 Table 4
+
+### 7. 本文首次将言语行为理论用于评估众包标签并增强机器人检测。
+
+- claim_cn：本文首次将言语行为理论用于评估众包标签并增强机器人检测。
+
+- claim_level：theory
+
+- supporting_evidence_cn：文献综述未发现此类应用；Section 5.4重申；Cresci数据缺陷解释为何此前没有人做。
+
+- support_strength：asserted
+
+- where_claim_is_made：Abstract；Introduction P6；Section 5.4
+
+- where_evidence_is_provided：Background 2.1.3和2.3.2；Section 5.4
+
+### 8. 多数机器人被不同用户发现而非少数重复举报用户。
+
+- claim_cn：多数机器人被不同用户发现而非少数重复举报用户。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：Online Appendix A5元数据（正文提及，未给具体数值）。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 5.3
+
+- where_evidence_is_provided：Online Appendix A5（正文引用）
+
+## ISR定位逻辑
+
+- constitutive_is_problem_cn：问题本身由数字平台与人类行为互相构成：机器人自动生成内容改变在线话语，而真实用户在平台上自然留下的回复又成为可被机器学习的认知信号，形成'机器生成内容—人类反应—增强检测'的循环。
+
+- technology_behavior_or_market_entanglement_cn：人类用户对机器人的自然回复不是平台已有的结构化标签，而是行为痕迹；文中把这种隐式行为信号转化为显式训练特征，并观察其随标签数量、时间推移的变化，体现技术设计与用户行为之间的纠缠。
+
+- role_of_benchmark_or_objective_evidence_cn：分类性能、消融表、时间模拟和benchmark等客观结果被用来支撑'众包反应可增强检测''言语行为可评估确定性''系统可部署且抗演化'三个IS层面的主张，而不只是报告准确率本身。
+
+- theory_in_design_cn：言语行为理论没有只用于解释结果，而是直接进入设计：五类言语行为成为特征矩阵中的SA1-SA5特征，并通过消融实验检验其增量。但话题、情感和传统特征并非由理论推导，理论主要贡献于'如何衡量众包反应可信度'这一子问题。
+
+- technical_vs_is_contribution_balance_cn：技术贡献（BERT、特征工程、多实验）占方法章节大部分篇幅，但IS贡献在讨论中被凸显为：新数据语境（Reddit长文本+众包标签）、理论新应用（言语行为评估众包标签）、可复用部署知识（定期重训练、冷启动、外部数据源）。篇幅上技术约占六成，IS贡献约占四成。
+
+- beyond_transient_performance_cn：作者通过三类设计知识避免贡献只是一次性分数提升：把性能提升归因于可复制的特征类别；用时间模拟和标签数量模拟证明动态部署价值；用2019新机器人数据证明抗演化能力；并把'Cresci缺少回复'转化为新数据集的贡献方向。
+
+## 段落级仿写模板
+
+### abstract_steps
+
+1. 现实威胁句：一句话描述问题域中不可忽视的现象。
+
+2. 转折现象句：指出某种未被利用的真实行为或信号。
+
+3. 研究手段句：说明用该信号增强现有方法。
+
+4. 理论引入句：指出需要理论工具处理信号质量问题。
+
+5. 操作化句：说明理论被实现为计算系统。
+
+6. 评价情境句：标明真实数据来源。
+
+7. 核心结果句：报告主要性能结论。
+
+8. 次级结果+限定句：报告理论特征增量并主动限定其必要性。
+
+9. 扩展贡献句：把结果抽象为可迁移知识。
+
+### introduction_paragraph_steps
+
+1. 用具体案例或宏观威胁开篇。
+
+2. 建立'现象存在但文献未用'的缺口。
+
+3. 指出填补缺口的非平凡难题。
+
+4. 引入理论作为难题解法。
+
+5. 提前声明多重贡献并用数据/理论缺口支撑。
+
+6. 把论文放入IS学科脉络。
+
+7. 给出结构预告。
+
+### theory_to_design_steps
+
+1. 用量化事实和数据集缺陷建立领域缺口。
+
+2. 在每个研究问题前先说明现有工具不足，再用RQ收窄。
+
+3. 对比可选理论并解释为何选定某一分类体系。
+
+4. 把理论构念（意图/确定性）翻译为可分类标签。
+
+5. 在系统设计章节明确各模块对理论或工程来源的依赖。
+
+6. 用消融设计预埋'理论特征贡献'的检验路径。
+
+### method_and_study_sequence_steps
+
+1. 先说明平台选择与生态效度理由。
+
+2. 报告ground truth过滤和数据规模。
+
+3. 用时间划分和防泄漏声明保护内效度。
+
+4. 按特征族逐一报告数据标注、模型选择和结果。
+
+5. 合并特征矩阵，定义'传统vs增强'对比。
+
+6. 用消融分解提升来源。
+
+7. 增加时间/标签模拟和新的时间外数据测试。
+
+8. 最后做文献benchmark并说明不可比之处。
+
+### results_reporting_steps
+
+1. 每个表格前用一句话说明该实验回答什么问题。
+
+2. 结果后紧接一句解释该数字对应的论证含义。
+
+3. 承认小增益但用平台规模放大其意义。
+
+4. 用一个'不清楚/然而'转折引出下一个实验。
+
+5. 在外部benchmark中先给可比的，再解释不可比的。
+
+### discussion_and_contribution_steps
+
+1. 重述问题与总体方法。
+
+2. 拆分理论、方法、设计贡献并按证据支撑。
+
+3. 承认最明显限制并用'没有完美方法'辩护。
+
+4. 补充边界条件和未来对抗策略。
+
+5. 给出可执行的部署路径。
+
+6. 回扣引言缺口，浓缩贡献清单。
+
+7. 以IS学科定位收尾。
+
+## 可执行写作算法
+
+### 1. 1
+
+- step：1
+
+- rhetorical_job_cn：建立现实威胁并引入'用户能识别机器人'的对冲现象。
+
+- research_evidence_required_cn：需要至少一个具体危害案例（如FCC）和'用户会公开指出机器人'的经验事实。
+
+- sentence_pattern_function_cn：威胁句→案例句→用户能力句→文献缺口句→研究目标句。
+
+- transition_condition_cn：当读者同意'现象存在但未被利用'后可进入第2步。
+
+### 2. 2
+
+- step：2
+
+- rhetorical_job_cn：把使用众包标签的难题具体化，指出需系统评估可信度。
+
+- research_evidence_required_cn：需要有可展示的可信度差异例子（不同确定性表述的回复）。
+
+- sentence_pattern_function_cn：难题句→对比例子句→加权需要句→理论方案句。
+
+- transition_condition_cn：当读者接受'需要系统化加权方法'后可进入理论引入。
+
+### 3. 3
+
+- step：3
+
+- rhetorical_job_cn：引入言语行为理论并说明其作为可信度评估工具的机制。
+
+- research_evidence_required_cn：需要理论分类体系和对比其他理论可扩展性的文献依据。
+
+- sentence_pattern_function_cn：理论定义句→分类体系句→可比理论排除句→本研究应用句。
+
+- transition_condition_cn：当理论到特征标签的转换明确后可进入系统设计。
+
+### 4. 4
+
+- step：4
+
+- rhetorical_job_cn：把研究问题翻译为数据、特征、基线、对比的系统设计。
+
+- research_evidence_required_cn：需要真实平台数据、可标注的训练集、可复现的传统特征方法。
+
+- sentence_pattern_function_cn：平台理由→ground truth规则→防泄漏划分→特征模块→合并矩阵→对比配置。
+
+- transition_condition_cn：当每个模块都有明确数据来源和产出特征后可进入评价。
+
+### 5. 5
+
+- step：5
+
+- rhetorical_job_cn：用多阶段评价覆盖性能、机制、部署、稳健性、外部可比性。
+
+- research_evidence_required_cn：需要分类结果表、消融表、时间/标签模拟表、新时间窗数据和文献benchmark。
+
+- sentence_pattern_function_cn：核心对比→消融归因→部署模拟→时间外测试→benchmark及不可比说明。
+
+- transition_condition_cn：当每个IS主张都有实验证据且遗留问题明确后可进入讨论。
+
+### 6. 6
+
+- step：6
+
+- rhetorical_job_cn：把结果升级为贡献、边界和可复用设计知识。
+
+- research_evidence_required_cn：需要限制声明、部署建议、数据洞察和未来方向。
+
+- sentence_pattern_function_cn：重述产出→声明理论/设计贡献→承认限制与边界→给出部署路径→回扣缺口→IS学科定位。
+
+- transition_condition_cn：当贡献都有证据支撑且限制透明时论文完成。
+
+## 应模仿的高价值动作
+
+1. 把用户自然行为重新定义为'隐式众包标签'，并立即处理其可信度问题
+
+2. 用'传统模型+增强模型+消融'三件套让性能提升可归因到具体特征
+
+3. 在静态分类后增加时间-检测和标签数量模拟，把指标翻译成部署价值
+
+4. 把'旧基准缺回复'转写为数据贡献，并用Garcia-Silva结果证明基础模型可比
+
+5. 用2019新机器人做时间外测试，防止结论停留在单一时间窗口
+
+6. 对每个限制先承认再辩护（没有方法能100%提前检测），维持贡献可信
+
+7. 讨论中提供冷启动、定期重训练、外部数据源等可执行部署知识
+
+## 不要只复制的表面动作
+
+1. 不要只声明'用户回复能增强检测'而不构建回复关系数据和特征矩阵
+
+2. 不要只加言语行为标签而不做消融，否则无法证明其贡献
+
+3. 不要声称'可部署'却没有时间模拟/标签模拟或部署流程讨论
+
+4. 不要因为与旧benchmark不可比就绕过，而应给出基础模型可比和差距解释
+
+5. 不要把所有提升归因于理论，要像作者一样承认言语行为只是适度增量
+
+6. 不要把所有分类性能提升都说成机制证据；作者用消融和宏F1细节区分了二者
+
+## 证据薄弱或跳跃的动作
+
+1. 言语行为被描述为'评估可信度的机制'，但消融显示仅适度增量，机制证据较弱；作者在摘要中已用'非必要条件'限定，讨论中仍未完全解释机制为何成立
+
+2. '众包反应随用户能力提升而自然改善'的说法缺乏纵向证据支撑
+
+3. 系统的'可部署性'基于模拟而非真实在线部署，存在证据跨度
+
+4. 2019新机器人测试只覆盖后来一年窗口，不能证明长期抗进化能力
+
+5. '最先进机器人无法检测'的边界声明是合理推断，但没有专门实验量化
+
+6. 对虚假举报策略的讨论是预期性边界，作者明确承认没有ground truth验证
+
+## 一句话套路
+
+找到一个自然产生却未被利用的数据信号，用一种语言学理论把它转化为可信度特征，再用'传统基线+增强模型+消融+时间模拟+时间外测试+文献benchmark'的组合证据，把性能提升升级为可复用的设计知识。
+
+## 分析边界
+
+全文为数字文本导入，但Figure 1研究框架图和Figure 2模版截图无法核对细节；多个Online Appendix（A1-A6）被引用但未包含，因此对其具体内容只能依据正文描述；文中第4节编号从3.1跳到4.1，说明部分子节结构在转换中可能丢失或合并；表格中的少量OCR格式错误（如362,667字样）不影响总体论证判断。

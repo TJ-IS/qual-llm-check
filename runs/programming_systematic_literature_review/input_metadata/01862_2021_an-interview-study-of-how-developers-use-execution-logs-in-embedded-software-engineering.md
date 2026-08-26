@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85108820490"
+title: "An interview study of how developers use execution logs in embedded software engineering"
+authors: "Yang N.; Cuijpers P.; Schiffelers R.; Lukkien J.; Serebrenik A."
+year: "2021"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse-seip52600.2021.00015"
+---
+# Scopus title-abstract-keyword metadata
+Title: An interview study of how developers use execution logs in embedded software engineering
+Abstract: Execution logs capture the run-time behavior of software systems. To assist developers in their maintenance tasks, many studies have proposed tools to analyze execution information from logs. However, it is as yet unknown how industry developers analyze logs in embedded software engineering. In order to bridge the gap, we study how developers analyze logs by interviewing 25 software developers from ASML, which is a leading company in developing lithography machines. In particular, we explore the type of logs developers analyze, the purposes for which developers analyze logs, the information developers need from logs and their expectation on tool support. As the main contribution, we observed that the lack of domain knowledge, lack of familiarity with code base and software design, and presence of concurrency, raise major challenges in log analysis for such complex and multidisciplinary systems. Particularly, we observed that inspecting execution information at different levels of abstraction is useful to develop comprehension of such complex systems. However, obtaining the abstraction is difficult with current tools. Our study has several implications. The empirical evidence provided by our study implies the need to support log inspection and comparison with multiple levels of abstraction, categorize log differences, and recover links between different types of logs. © 2021 IEEE.
+Author keywords: Embedded systems; Log analysis; Maintenance
+Index keywords: Abstracting; Software design; Embedded software engineerings; Embedded-system; Execution informations; Execution logs; Interview study; Log analysis; Maintenance tasks; Runtimes; Software-systems; Time behavior; Embedded systems
+Document type: Conference paper
+Conference: 43rd IEEE/ACM International Conference on Software Engineering: Software Engineering in Practice, ICSE-SEIP 2021
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2021
+EID: 2-s2.0-85108820490
+DOI: 10.1109/icse-seip52600.2021.00015
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,122 @@
+03A_论文三逐段双ISR回读记录.md | 1898 | hyphen=886, colon=422, semi=236, em=218, lq=68, rq=68
+浙大_博_AI抵制.md | 1870 | hyphen=771, colon=402, em=192, lq=156, rq=155, arrow=100, semi=83, rsq=9, ell=2
+浙大-博士-移动文娱平台的内容推荐与展示决策研究-平衡内容生成与使用.md | 1866 | hyphen=1132, colon=246, em=125, semi=96, lq=94, rq=92, ell=40, rsq=37, arrow=4
+01A_论文一逐段双ISR回读记录.md | 1839 | hyphen=678, semi=457, colon=411, em=122, arrow=85, lq=43, rq=43
+03_三研究_Introduction_逐句对照RADAR审计.md | 1834 | hyphen=606, ell=494, colon=287, arrow=237, semi=111, em=99
+04_系列v8_三研究_五段Introduction_逐句对照RADAR审计.md | 1584 | hyphen=508, ell=410, colon=279, arrow=172, semi=111, em=104
+11_三研究_预期结果讨论贡献_对标IS权威文献逐句审计.md | 1500 | hyphen=602, colon=489, em=185, semi=86, arrow=85, rsq=51, ell=2
+02A_论文二逐段双ISR回读记录.md | 1443 | hyphen=563, colon=400, semi=304, em=70, arrow=48, lq=29, rq=29
+03A_论文三逐段双ISR回读记录.md | 1285 | hyphen=577, colon=296, semi=157, em=151, lq=52, rq=52
+陈诗沁_博士论文.md | 1220 | hyphen=922, semi=89, colon=84, lq=50, rq=50, em=16, rsq=9
+02A_论文二逐段双ISR回读记录.md | 1192 | semi=400, hyphen=340, colon=315, em=73, lq=31, rq=31, arrow=2
+30_论文三v3_逐段对照重写记录.md | 1053 | semi=334, colon=321, ell=149, hyphen=101, em=45, arrow=42, rq=31, lq=30
+01A_论文一逐段双ISR回读记录.md | 1045 | semi=304, hyphen=299, colon=289, em=62, lq=39, rq=39, arrow=13
+10_最终研究方案_威胁驱动设计_完整版与思考分析.md | 909 | colon=311, hyphen=271, semi=205, arrow=76, em=46
+01_代码仓库表征的有效使用机制.md | 703 | hyphen=390, semi=145, em=53, lq=40, rq=40, colon=29, arrow=6
+08_系列v9_外部安全层_三研究设计_预判检测免疫.md | 673 | hyphen=292, colon=155, semi=136, arrow=54, em=36
+02_观察性干预warrant闭合的补丁生成.md | 610 | hyphen=428, semi=82, lq=35, rq=35, colon=14, arrow=8, em=7, rsq=1
+28_论文一v3_逐段对照重写记录.md | 595 | colon=198, hyphen=120, semi=115, ell=76, arrow=44, em=38, lq=2, rq=2
+00E_三项否决Pilot执行协议与本地资产台账.md | 594 | hyphen=390, semi=131, colon=24, arrow=22, lq=13, rq=13, em=1
+A_coding_agent_adversarial_robustness.md | 571 | hyphen=339, colon=158, em=32, semi=31, arrow=11
+03_反馈驱动的运行时验证决策.md | 563 | hyphen=363, semi=95, colon=37, lq=24, rq=24, em=20
+37_论文v3.1_逐段严格对照重写记录.md | 548 | arrow=277, hyphen=162, ell=108, em=1
+18_论文一v2_引言逐段审计与重写记录.md | 540 | hyphen=225, colon=80, ell=74, arrow=64, semi=59, em=38
+29_论文二v3_逐段对照重写记录.md | 513 | colon=164, semi=164, ell=89, em=41, hyphen=36, arrow=19
+15_模仿文献候选分析与最终推荐.md | 478 | hyphen=168, arrow=161, colon=88, semi=40, em=18, ell=3
+00D_三篇高杠杆替代题与立项门.md | 459 | hyphen=271, semi=80, lq=32, rq=32, colon=23, arrow=18, em=3
+09_系列v9_2定稿_模型外安全层_预判检测强化_写作口径与系列逻辑.md | 454 | hyphen=189, semi=103, colon=96, arrow=38, em=28
+41_第二章文献综述段落句子级二轮核对与跨文献对照记录.md | 451 | hyphen=445, ell=6
+00B_AIS_Basket理论驱动算法参照谱系.md | 449 | hyphen=237, semi=51, arrow=50, em=37, colon=26, lq=24, rq=24
+40_引言段落句子级二轮核对与模板对照改写记录.md | 445 | hyphen=419, arrow=26
+13_论文二_AgentShield-Anticipate_编码智能体攻击面的事前预判与预算化预置防御.md | 444 | colon=174, hyphen=112, semi=94, em=59, arrow=5
+02_互补性仓库证据的预算组合.md | 443 | hyphen=313, semi=41, em=33, colon=19, lq=18, rq=18, arrow=1
+25_论文三_AgentShield-Detect_编码智能体信息操纵攻击的流式检测与动作门控_v2.md | 424 | colon=154, semi=95, hyphen=62, em=46, lq=32, rq=32, arrow=3
+12_论文一_AgentShield-Adversary_编码智能体对抗攻击的系统化生成与威胁建模.md | 405 | colon=157, hyphen=100, semi=95, em=53
+17_论文二_AgentShield-Anticipate_编码智能体攻击面的事前预判与预算化预置防御_v2.md | 399 | colon=127, semi=75, hyphen=54, em=47, lq=47, rq=47, arrow=2
+14_论文三_AgentShield-Detect_编码智能体信息操纵攻击的流式检测与动作门控.md | 394 | colon=156, semi=93, hyphen=79, em=60, arrow=6
+05_系列v8_三研究算法实现设计.md | 391 | hyphen=189, colon=87, semi=68, arrow=25, em=12, ell=10
+01_代码仓库表征的有效使用机制.md | 384 | hyphen=236, em=42, lq=30, rq=30, semi=28, colon=18
+03_反馈驱动的运行时验证决策.md | 347 | hyphen=243, semi=44, colon=22, em=20, lq=9, rq=9
+16_论文一_AgentShield-Adversary_编码智能体对抗攻击的系统化生成与威胁建模_v2.md | 322 | colon=124, semi=58, em=46, hyphen=42, lq=26, rq=26
+23_论文二v2_方法评估结论节_逐段审计与重写记录.md | 321 | hyphen=115, colon=58, em=45, semi=40, arrow=37, ell=24, rsq=2
+38_论文v3.2_句子级对照核验与修改记录.md | 304 | hyphen=251, ell=37, arrow=16
+42_第三章理论段落二轮核对与跨节重复句消除记录.md | 296 | hyphen=296
+00_thesis_program_design.md | 290 | hyphen=146, colon=58, arrow=36, semi=29, em=21
+E_detection_fraud_anomaly.md | 283 | hyphen=154, colon=62, em=32, semi=23, arrow=12
+C_trajectory_efficiency_action_prediction.md | 277 | hyphen=160, colon=56, em=32, semi=24, arrow=5
+B_context_selection_repo_awareness.md | 272 | hyphen=167, colon=54, semi=24, em=22, arrow=5
+07_IS文献gap与理论论述分析_及三研究Intro-LR写法.md | 270 | hyphen=99, colon=59, arrow=47, em=38, semi=25, ell=2
+19_论文一v2_综述与理论节_逐段审计与重写记录.md | 252 | hyphen=91, colon=71, semi=28, em=24, ell=22, arrow=16
+00C_实质贡献与小题大做否决审查.md | 243 | hyphen=142, semi=43, lq=16, rq=16, colon=13, arrow=9, em=4
+F_shapley_attribution_data_valuation.md | 235 | hyphen=122, colon=57, em=30, semi=18, arrow=8
+39_论文v3.3_各节句子级对照核验与系列内差异化管理记录.md | 228 | hyphen=228
+01_三算法详细设计_目标输入输出实现与对比.md | 221 | hyphen=105, colon=57, semi=38, em=14, arrow=7
+43_第四至九章句子级核对与模板对照改写记录.md | 220 | hyphen=220
+D_federated_knowledge_transfer.md | 220 | hyphen=128, colon=53, semi=17, em=16, arrow=6
+04_v3.1三篇现行设计交叉审计与验收.md | 206 | hyphen=132, semi=40, em=18, lq=8, rq=8
+27_论文三v2_方法评估结论节_逐段审计与重写记录.md | 199 | hyphen=58, colon=45, em=40, semi=28, arrow=25, ell=3
+06_系列v8_实验实施方案_数据与算力预算.md | 196 | hyphen=111, colon=46, semi=27, arrow=10, em=2
+00A_三篇理论驱动算法重构蓝图.md | 180 | hyphen=96, semi=38, em=25, colon=8, arrow=7, lq=3, rq=3
+02_面向仓库任务的信息源匹配调用方法.md | 179 | hyphen=155, em=24
+03A_论文三逐段ISR回读记录.md | 174 | hyphen=167, em=7
+26_论文三v2_综述与理论节_逐段审计与重写记录.md | 169 | colon=50, hyphen=47, semi=36, arrow=22, em=12, ell=2
+02A_论文二逐段ISR回读记录.md | 159 | hyphen=107, lq=22, rq=22, em=8
+24_论文三v2_引言逐段审计与重写记录.md | 156 | hyphen=47, arrow=32, semi=31, ell=20, colon=18, em=8
+03_面向CodingAgent的仓库探索前缀价值停止方法.md | 156 | hyphen=156
+01A_论文一逐段ISR回读记录.md | 129 | hyphen=129
+02_三研究_Introduction_对标RADAR.md | 124 | hyphen=40, colon=35, semi=18, em=16, arrow=15
+21_论文二v2_引言逐段审计与重写记录.md | 123 | hyphen=67, em=17, semi=12, colon=10, arrow=10, ell=7
+01_依赖完备的仓库上下文打包方法.md | 121 | hyphen=118, rsq=2, em=1
+04_三篇论文最终交叉审计与验收.md | 118 | hyphen=115, em=3
+20_论文一v2_方法评估结论节_逐段审计与重写记录.md | 111 | hyphen=61, em=12, ell=11, semi=10, colon=9, arrow=8
+00F_现行题位与设计稿授权.md | 106 | hyphen=53, semi=16, em=12, colon=9, lq=8, rq=8
+22_论文二v2_综述与理论节_逐段审计与重写记录.md | 96 | hyphen=50, colon=14, semi=10, em=9, arrow=8, ell=5
+31_论文一_AgentShield-Adversary_编码智能体对抗攻击的系统化生成与威胁建模_v3.md | 86 | colon=46, hyphen=37, em=1, lq=1, rq=1
+00_v3.1写作与算法工件协议.md | 85 | hyphen=61, semi=10, lq=5, rq=5, colon=4
+04_v6终稿科学与机械审计.md | 77 | semi=28, hyphen=26, em=12, colon=5, lq=3, rq=3
+33_论文三_AgentShield-Detect_编码智能体信息操纵攻击的流式检测与动作门控_v3.md | 57 | hyphen=29, colon=26, lq=1, rq=1
+34_论文一_AgentShield-Adversary_编码智能体对抗攻击的系统化生成与威胁建模_v3.1.md | 55 | hyphen=55
+36_论文三_AgentShield-Detect_编码智能体信息操纵攻击的流式检测与动作门控_v3.1.md | 50 | hyphen=50
+32_论文二_AgentShield-Anticipate_编码智能体攻击面的事前预判与预算化预置防御_v3.md | 50 | colon=27, hyphen=21, lq=1, rq=1
+README.md | 47 | hyphen=31, colon=13, semi=3
+35_论文二_AgentShield-Anticipate_编码智能体攻击面的事前预判与预算化预置防御_v3.1.md | 40 | hyphen=40
+00_系列研究主线与写作协议.md | 36 | semi=13, colon=9, em=7, lq=3, rq=3, hyphen=1
+00D_master_split_registry.md | 28 | hyphen=27, semi=1
+00B_实施与科学审计备忘.md | 25 | semi=16, em=5, colon=2, hyphen=2
+74_三篇跨篇重复扫描与批次六修改落盘记录.md | 19 | hyphen=19
+75_三篇第七轮逐段核对_候选问题复核与批次七修改落盘记录.md | 16 | hyphen=16
+66_三篇全文逐段严格审计_符号纪律与表述力对标原文.md | 14 | hyphen=14
+71_三篇第三至九章逐段核对与批次三修改落盘记录.md | 14 | hyphen=14
+45_35与36第二章第三章_原文对照优化轮记录.md | 13 | hyphen=13
+69_35与36全文逐段对照_新发现十二处修改落盘记录.md | 13 | hyphen=13
+46_35与36第四至九章_原文对照优化轮记录.md | 11 | hyphen=11
+61_34的21节_句子级对照与跨文献对比记录.md | 11 | hyphen=11
+00_新版写作约束与逐段回读协议.md | 11 | hyphen=11
+52_第二章逐段对照与引言讨论贡献对应性核对记录.md | 10 | hyphen=10
+44_表述能力提升轮_逐段修改与符号清理记录.md | 9 | hyphen=9
+47_目录符号全量扫描与34第四至九章复读记录.md | 9 | hyphen=9
+50_第六章第七章_模板逐段对照与句子级优化记录.md | 9 | hyphen=9
+65_34的25节_句子级对照与跨文献对比记录.md | 9 | hyphen=9
+67_35引言逐句严格审计记录.md | 9 | hyphen=9
+68_36引言逐句严格审计记录.md | 9 | hyphen=9
+48_三篇交叉一致性核对与引用术语口径记录.md | 8 | hyphen=8
+51_全文通读核对与表述强化_符号普查与定调句优化记录.md | 8 | hyphen=8
+54_34引言第一段_句子级对照与跨文献对比记录.md | 8 | hyphen=8
+56_34引言第三段_句子级对照与跨文献对比记录.md | 8 | hyphen=6, ell=2
+58_34引言第五段_句子级对照与跨文献对比记录.md | 8 | hyphen=6, ell=2
+62_34的22节_句子级对照与跨文献对比记录.md | 8 | hyphen=6, ell=2
+72_三篇引言逐段对照第四轮与批次四修改落盘记录.md | 8 | hyphen=8
+73_三篇第二章文献综述逐段核对与批次五修改落盘记录.md | 8 | hyphen=8
+49_三篇句子级对照与表述强化_跨节回声消除记录.md | 7 | hyphen=7
+70_35与36全文档长串重复扫描_批次二修改落盘记录.md | 7 | hyphen=7
+76_三篇第八轮逐段核对_伦理节与第四章研究问题复核及批次八修改落盘记录.md | 7 | hyphen=7
+53_术语一致性核对记录.md | 6 | hyphen=6
+55_34引言第二段_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+57_34引言第四段_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+59_34引言第六七段_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+60_34引言第八段_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+63_34的23节_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+64_34的24节_句子级对照与跨文献对比记录.md | 6 | hyphen=6
+00E_跨篇构念与测量词典.md | 6 | semi=3, hyphen=3
+
+共 120 个文件含符号

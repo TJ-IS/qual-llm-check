@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85125902962"
+title: "Scale development for analyzing the fit of real and virtual world integration: an example of Pokémon Go"
+authors: "Shiau W.-L.; Huang L.-C."
+year: "2023"
+journal: "Information Technology and People"
+doi: "10.1108/itp-11-2020-0793"
+---
+# Scopus title-abstract-keyword metadata
+Title: Scale development for analyzing the fit of real and virtual world integration: an example of Pokémon Go
+Abstract: Purpose: Augmented reality (AR) has become a trend, and the effects of Pokémon Go, the most popular online and mobile game, have been explored in many studies. However, few studies have developed questionnaires of fit to investigate the relationship between the fit and the integration of the game's virtual world and reality. The paper intends to integrate the models of stimulus-organism-response (S-O-R) and information systems success with cognitive fit theory to explore the fit and reactions of users in the integration of real and virtual worlds. Design/methodology/approach: Following MacKenzie's scale development, two surveys were conducted. The first survey was conducted to perform a scale development of fit. The second survey was collected from 315 Pokémon Go players to validate the fit scale and it was analyzed via structural equation modeling. Findings: The results show that scale development of fit has good reliability and validity. Furthermore, game information quality, game system quality and virtual (Pokémon) characteristics have significantly positive effects on cognitive and emotional fit. Cognitive and emotional fit have significant positive effects on user satisfaction, and user satisfaction has significant positive effects on continued intention to play. The results suggest that maintaining the quality of the game and improving the virtual interface will provide a better fit between the real and virtual worlds, enhancing user satisfaction with the fit as well as their intention for continued use. Originality/value: Although fit has been widely studied in various contexts, the application of AR has been rarely discussed. This study develops a scale of fit and takes Pokémon Go as the subject to validate the fit measurement and discuss players' cognition and feelings regarding the game. The authors measure user reactions to different stimuli and explore cognitive and emotional fit as well as the integration of virtual worlds and reality. In sum, to the best of the authors’ knowledge, this is one of the earliest studies to explore and develop a cognitive and emotional fit scale for future researchers and practitioners. © 2022, Emerald Publishing Limited.
+Author keywords: Augmented reality; Cognitive fit; Emotional fit; Information quality; System quality; Virtual characteristic
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Information Technology and People
+Year: 2023
+EID: 2-s2.0-85125902962
+DOI: 10.1108/itp-11-2020-0793
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,1132 @@
+{
+  "record_id": "27598",
+  "source_file": "27598_2025_radar-a-framework-for-developing-adversarially-robust-cyber-defense-ai-agents-with-deep-reinforc.md",
+  "title": "RADAR: A Framework for Developing Adversarially Robust Cyber Defense AI Agents with Deep Reinforcement Learning",
+  "authors": "Reza Ebrahimi; Yidong Chai; Weifeng Li; Jason Pacheco; Hsinchun Chen",
+  "year": "2025",
+  "journal": "MIS Quarterly",
+  "doi": "10.25300/misq/2024/17339",
+  "fulltext_chars": 142337,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "security_privacy_and_access_control",
+  "source_primary_objective_family": "risk_security_and_safety",
+  "source_application_context": "cybersecurity_fraud_and_compliance",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:51:34.585646+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何利用鲁棒优化与强化学习理论，构建一个能够同时有效生成对抗攻击并将网络防御AI体鲁棒化的框架，以降低对抗攻击对现代自主网络防御的威胁？",
+    "artifact_and_design_cn": "RADAR框架，包含两个迭代阶段：阶段1用r-VAC（重参数化变分Actor-Critic）在二进制黑盒威胁模型下对离散动作序列进行攻击仿真；阶段2用RL-RO（基于强化学习的鲁棒优化）将r-VAC训练出的攻击策略网络嵌入鲁棒优化的内层最大化，从而对防御AI体进行鲁棒化。在恶意软件领域实例化，定义10种功能保持的恶意软件攻击向量，并对LGBM、MalConv、NonNeg三个知名检测器进行鲁棒化。",
+    "objective_outcomes_cn": "实验1中r-VAC在LGBM、MalConv、NonNeg上的综合逃逸率分别为28.13%、22.99%、18.98%，比最强基准高出约8、5、4个百分点；实验2中RL-RO使三检测器平均逃逸率降低84%（降低4/7/11倍），FPR保持稳定；实验3重复博弈显示后轮防御体对历史攻击模型越加鲁棒，并给出基于FPR的停止点；案例研究识别了LGBM对压缩和节区重命名等动作的弱点，并提出训练增强建议。",
+    "core_contribution_cn": "作者声称的贡献包括：提出RADAR框架，是首个同时建模攻击者与防御AI体之间两人博弈的鲁棒化框架；提出r-VAC方法，显式建模对抗攻击的序列动作，既提升逃逸率又提供可操作的防御设计洞见；提出RL-RO方法，将鲁棒优化扩展到离散序列攻击场景，并在高影响网络安全领域验证和扩展了鲁棒优化理论。",
+    "whole_argument_in_one_paragraph_cn": "全文从AI网络防御广泛部署但易受对抗性攻击入手，指出现有IS安全研究大多未假设对抗环境，而行为与经济安全研究虽承认对抗性却未解决AI防御体鲁棒性缺口。作者用鲁棒优化的minimax框架确立“有效攻击仿真才能支撑防御鲁棒化”的要求，用强化学习的MDP视角刻画攻击者的序列决策，据此设计两阶段RADAR框架：第一阶段用r-VAC生成逃逸攻击，第二阶段用RL-RO将攻击策略代入防御训练。随后在恶意软件领域实例化，用VirusTotal恶意软件测试床、三个开源检测器、多类非RL与RL基准、敏感性分析、单轮与重复博弈评价以及案例研究逐级验证攻击有效性、防御有效性和边界条件，最后把结果回收为对IS安全研究、对抗攻击仿真和鲁棒优化的理论贡献。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "作者明确采用计算设计科学范式，先通过文献与恶意软件分析师确定设计假设，再构建RADAR制品并在恶意软件领域实例化，随后用系列定量基准实验和案例研究评价其效用，最后讨论可复用的设计知识和理论贡献。整体属于需求—构建—评价—设计知识的设计科学研究，而非以单一benchmark为主要证据的计算制品研究。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "论文结构从现实与学术问题出发，引入鲁棒优化和强化学习两大理论，推导出RADAR框架与具体算法，再通过攻击仿真、防御加固、重复博弈和案例研究进行检验，最后在Discussion中返回理论并声明贡献，形成完整的问题—理论—设计—检验—回到理论弧线。",
+  "research_program": {
+    "study_or_phase_count": 9,
+    "overall_sequence_cn": "研究先通过综述和领域专家建立设计需求与假设，然后分两个阶段开发RADAR的组件；随后构建时间切分的恶意软件测试床；接着依次用攻击仿真基准实验、奖励敏感性分析、防御加固前后对照、重复博弈分析和案例研究累积证据；最后通过扩展动作长度和效率分析做稳健性补充。前一阶段产生的攻击策略是后一阶段防御加固的输入，单轮博弈结果引导重复博弈和停止规则，案例研究把攻击分析转化为设计建议。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "需求分析与RADAR框架设计",
+        "question_cn": "网络防御AI体的鲁棒性存在哪些缺口，RADAR应在什么假设下设计？",
+        "inputs_and_setting_cn": "IS安全文献、AAE文献、RL方法taxonomy、三位NCFTA恶意软件分析师的反馈",
+        "designed_or_compared_object_cn": "三条现实假设、RADAR的输入/两阶段/输出结构",
+        "baseline_control_or_counterfactual_cn": "现有AI-enabled安全研究通常不假设对抗环境",
+        "objective_metrics": [],
+        "analysis_method_cn": "文献综述和定性需求提炼",
+        "main_result_cn": "形成研究问题并设计RADAR总体框架",
+        "argumentative_role_cn": "把宽泛的“防御鲁棒性”问题收缩为可构建的两阶段优化问题",
+        "remaining_uncertainty_cn": "框架组件尚未被实证验证",
+        "link_to_next_phase_cn": "提出r-VAC和RL-RO作为两个阶段的具体方法",
+        "evidence_pointers": [
+          "Research Background",
+          "Research Gaps and Questions",
+          "Proposed Design"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "阶段1方法开发：r-VAC攻击仿真",
+        "question_cn": "如何在二进制黑盒威胁模型下用离散动作序列有效仿真对抗恶意软件攻击？",
+        "inputs_and_setting_cn": "恶意软件MDP规范、VAC算法、Concrete分布/Gumbel-Softmax、OpenAI Gym与malware-env环境",
+        "designed_or_compared_object_cn": "r-VAC策略网络，通过Concrete分布对离散动作重参数化",
+        "baseline_control_or_counterfactual_cn": "未做单独对照，留待Experiment 1与多个基准比较",
+        "objective_metrics": [
+          "策略梯度方差的理论改进",
+          "后续实验中的逃逸率"
+        ],
+        "analysis_method_cn": "数学形式化与算法设计，推导重参数化采样",
+        "main_result_cn": "得到能够生成逃逸恶意软件变体的攻击生成器",
+        "argumentative_role_cn": "实现RO内层最大化的近似攻击模型",
+        "remaining_uncertainty_cn": "尚不清楚是否优于已有RL和非RL攻击仿真方法",
+        "link_to_next_phase_cn": "交给Experiment 1进行基准评价",
+        "evidence_pointers": [
+          "Phase 1: Adversarial Attack Emulation",
+          "Approximate Sampling of Actions with Concrete Distribution"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "阶段2方法开发：RL-RO防御加固",
+        "question_cn": "如何把r-VAC攻击策略嵌入鲁棒优化以提升防御AI体？",
+        "inputs_and_setting_cn": "鲁棒优化minimax目标、Danskin定理、r-VAC策略网络、防御AI体模型与恶意输入数据集",
+        "designed_or_compared_object_cn": "RL-RO外最小化算法，用策略网络替代内层精确最大化",
+        "baseline_control_or_counterfactual_cn": "未加固的原始防御AI体",
+        "objective_metrics": [
+          "逃逸率",
+          "假阳性率"
+        ],
+        "analysis_method_cn": "RO目标重写与SGD/Adam优化",
+        "main_result_cn": "得到鲁棒化后的防御AI体",
+        "argumentative_role_cn": "实现RO外层最小化，将攻击策略转化为防御训练信号",
+        "remaining_uncertainty_cn": "是否真能降低逃逸率且不损害FPR尚待实验",
+        "link_to_next_phase_cn": "引出Experiment 2和Experiment 3评价",
+        "evidence_pointers": [
+          "Phase 2: Defense Realization with RO",
+          "Appendix D"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "恶意软件测试床构建与时间切分",
+        "question_cn": "如何获得用于评价RADAR的现实且无前瞻偏差的数据？",
+        "inputs_and_setting_cn": "VirusTotal学术许可的28,038个2017-2019年恶意软件，以及13,554个来自干净Windows安装的良性可执行文件",
+        "designed_or_compared_object_cn": "六类恶意软件（adware, botnet, ransomware, rootkit, spyware, virus）的测试床",
+        "baseline_control_or_counterfactual_cn": "按时间切分：2017-2018用于训练/验证/测试攻击模型，2019用于防御评价",
+        "objective_metrics": [],
+        "analysis_method_cn": "数据集统计与时间切分",
+        "main_result_cn": "获得Phase 1和Phase 2分别使用的8,103和19,935个恶意软件样本及良性样本",
+        "argumentative_role_cn": "为所有实验提供外部有效性的现实数据基础",
+        "remaining_uncertainty_cn": "测试床只覆盖静态PE恶意软件，且依赖VirusTotal分布",
+        "link_to_next_phase_cn": "为Experiment 1和2提供输入数据",
+        "evidence_pointers": [
+          "Malware Testbed",
+          "Table 4"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "Experiment 1：攻击仿真基准评价",
+        "question_cn": "r-VAC在逃逸率上是否优于非RL与RL的state-of-the-art攻击仿真方法？",
+        "inputs_and_setting_cn": "恶意软件测试床、三个防御检测器（LGBM、MalConv、NonNeg）、多种基准攻击方法",
+        "designed_or_compared_object_cn": "r-VAC与Random、BFA、EvadeHC、GAMMA、Surrogate RNN、PG、DDQN、Rainbow、MAB-malware、ACER、A3C比较",
+        "baseline_control_or_counterfactual_cn": "非RL基线（随机、BFA、元启发、代理RNN）与RL基线（PG、Q-Learning、AC、多臂老虎机）",
+        "objective_metrics": [
+          "Evasion Rate（逃逸率）"
+        ],
+        "analysis_method_cn": "多次重复实验取平均，按恶意软件类型和综合类别比较",
+        "main_result_cn": "RL方法整体优于非RL；r-VAC在所有类别和三个检测器上均优于全部基准，综合逃逸率分别达28.13%、22.99%、18.98%",
+        "argumentative_role_cn": "证明Phase 1生成的攻击足够强，可用于支撑RO内层最大化",
+        "remaining_uncertainty_cn": "未说明奖励幅值选择是否公平；未检验最大动作数改变时结果是否稳定",
+        "link_to_next_phase_cn": "进行奖励敏感性分析和扩展动作长度稳健性检验",
+        "evidence_pointers": [
+          "Experiment 1",
+          "Table 7",
+          "Table 8",
+          "Appendix B3"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "Experiment 1.1：奖励幅值敏感性分析",
+        "question_cn": "r-VAC攻击性能是否对RL奖励幅值敏感？",
+        "inputs_and_setting_cn": "三个防御检测器，奖励值从1到1000的10个近似翻倍采样点，每点重复5次",
+        "designed_or_compared_object_cn": "不同奖励幅值下的r-VAC逃逸率",
+        "baseline_control_or_counterfactual_cn": "不同奖励幅值之间的比较",
+        "objective_metrics": [
+          "Evasion Rate"
+        ],
+        "analysis_method_cn": "敏感性曲线与重复实验",
+        "main_result_cn": "未发现该范围内低奖励或高奖励系统性更优，因此沿用常见奖励10",
+        "argumentative_role_cn": "排除奖励设置作为r-VAC优势的替代解释",
+        "remaining_uncertainty_cn": "仅覆盖离散采样点，未做理论最优性分析",
+        "link_to_next_phase_cn": "为后续RL比较提供公平的训练配置",
+        "evidence_pointers": [
+          "Experiment 1.1",
+          "Figure 6"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "Experiment 2：防御加固前后对照",
+        "question_cn": "RL-RO能否显著降低逃逸率且不增加假阳性率？",
+        "inputs_and_setting_cn": "三个预训练检测器、r-VAC攻击策略、2019年未见恶意软件与良性Windows可执行文件",
+        "designed_or_compared_object_cn": "鲁棒化前后的同一检测器",
+        "baseline_control_or_counterfactual_cn": "未进行RL-RO的原始检测器",
+        "objective_metrics": [
+          "Evasion Rate",
+          "False Positive Rate"
+        ],
+        "analysis_method_cn": "前后对照比较，按检测器和恶意软件类别报告",
+        "main_result_cn": "平均逃逸率降低84%，对应鲁棒性提升约4/7/11倍，FPR保持3.9%/5%/4.8%不变",
+        "argumentative_role_cn": "证明Phase 2能完成防御加固，并回应FPR可用的边界条件",
+        "remaining_uncertainty_cn": "单轮博弈是否足够，尚无均衡或停止规则",
+        "link_to_next_phase_cn": "引出重复博弈Experiment 3",
+        "evidence_pointers": [
+          "Experiment 2",
+          "Table 9"
+        ]
+      },
+      {
+        "order": 8,
+        "name_cn": "Experiment 3：重复博弈分析",
+        "question_cn": "在轮流升级攻击和防御的重复博弈中，后轮防御体是否对历史攻击鲁棒，何时应停止？",
+        "inputs_and_setting_cn": "前几轮生成的攻击策略与鲁棒化检测器，FPR监测",
+        "designed_or_compared_object_cn": "不同轮次的攻击模型与防御模型组合",
+        "baseline_control_or_counterfactual_cn": "当前攻击模型对历史防御模型的逃逸率",
+        "objective_metrics": [
+          "Evasion Rate",
+          "False Positive Rate"
+        ],
+        "analysis_method_cn": "多阶段迭代与FPR停止准则",
+        "main_result_cn": "平均逃逸率从第二轮后单调下降并稳定；FPR从第4轮起持续超过5%，因此建议在第3轮停止",
+        "argumentative_role_cn": "提供经验性均衡证据和实用停止规则",
+        "remaining_uncertainty_cn": "没有闭式解或理论均衡证明",
+        "link_to_next_phase_cn": "转入案例研究，把攻击模式转化为设计建议",
+        "evidence_pointers": [
+          "Experiment 3",
+          "Figure 8"
+        ]
+      },
+      {
+        "order": 9,
+        "name_cn": "案例研究：面向LGBM的弱点识别与设计建议",
+        "question_cn": "RADAR能否为真实检测器设计提供可操作的弱点洞察？",
+        "inputs_and_setting_cn": "LGBM的r-VAC逃逸攻击动作序列、各恶意软件类别的高频成功序列",
+        "designed_or_compared_object_cn": "LGBM对各类动作的脆弱性",
+        "baseline_control_or_counterfactual_cn": "不同恶意软件类别与不同动作类型之间的频率比较",
+        "objective_metrics": [
+          "成功逃逸动作序列的频率",
+          "热力图的动作覆盖"
+        ],
+        "analysis_method_cn": "频率统计与heatmap可视化",
+        "main_result_cn": "发现压缩和节区重命名是LGBM主要弱点，并提出训练集增强等设计建议",
+        "argumentative_role_cn": "把攻击仿真结果上升为防御AI体设计知识",
+        "remaining_uncertainty_cn": "设计建议未做对照实验证明其有效性",
+        "link_to_next_phase_cn": "作为Discussion与贡献部分的实践支撑",
+        "evidence_pointers": [
+          "Case Study",
+          "Table 10",
+          "Figure 9"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 现代网络防御广泛采用AI",
+      "LIMITATION: 防御AI体可被对抗性攻击操纵",
+      "RQ_OR_OBJECTIVE: 结合RO和RL提出RADAR框架",
+      "STUDY_OVERVIEW: 在恶意软件领域实例化",
+      "RESULT: 鲁棒性提升至七倍",
+      "CONTRIBUTION: 对IS研究和利益相关者的贡献"
+    ],
+    "introduction_moves": [
+      "CONTEXT: AI安全代理的广泛部署与依赖",
+      "PRACTICAL_STAKES: 企业无法离开AI的防御能力",
+      "PHENOMENON: 恶意软件和网络流量可通过序列动作逃逸",
+      "GAP: 现有知识很少涉及防御AI体的鲁棒性",
+      "THEORY_INTRO: RO提供对抗博弈框架",
+      "THEORY_PROPOSITION: RO要求有效攻击仿真",
+      "THEORY_INTRO: RL适合建模序列动作",
+      "RQ_OR_OBJECTIVE: 提出RADAR框架",
+      "STUDY_OVERVIEW: 实例化恶意软件并评价",
+      "CONTRIBUTION: 三个贡献声明"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: IS安全研究三流派分类",
+      "LIMITATION: AI-enabled制品多忽略对抗环境",
+      "GAP: 缺乏防御AI体鲁棒化研究",
+      "THEORY_PROPOSITION: RO的minimax公式",
+      "MECHANISM: 内层攻击最大化与外层防御最小化",
+      "REQUIREMENT: 有效攻击仿真是鲁棒化的前提",
+      "PHENOMENON: 功能保持的加性和编辑动作",
+      "GAP: AAE研究偏攻击少防御、BBB少、动作类型单一",
+      "THEORY_INTRO: RL的MDP框架与深度RL",
+      "REQUIREMENT: 样本效率、大状态空间、离散动作",
+      "PRIOR_KNOWLEDGE: VAC适合大状态空间",
+      "LIMITATION: 标准VAC需改进梯度估计"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT: 三条现实假设",
+      "DESIGN_FEATURE: RADAR的输入、两阶段与输出",
+      "DESIGN_FEATURE: Phase 1用r-VAC生成攻击",
+      "DESIGN_FEATURE: Phase 2用RL-RO加固防御",
+      "REQUIREMENT: 恶意软件MDP的状态、动作、奖励规范",
+      "DESIGN_FEATURE: Concrete分布重参数化离散动作",
+      "THEORY_PROPOSITION: Danskin定理与次优攻击近似",
+      "METHOD_JUSTIFICATION: 时间切分避免未来知识",
+      "BENCHMARK_OR_CONTRAST: 三个检测器的选择"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 时间切分与测试床设计",
+      "STUDY_OVERVIEW: 实验设计总表",
+      "BENCHMARK_OR_CONTRAST: 非RL与RL基准选择",
+      "RESULT: r-VAC在所有基准上占优",
+      "RESULT: 主导动作类型与逃逸序列分析",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 奖励敏感性",
+      "RESULT: RL-RO使逃逸率降低84%且FPR不变",
+      "RESULT: 重复博弈后轮鲁棒性提升与停止点",
+      "RESULT: 案例研究识别LGBM弱点与设计建议"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 设计科学范式下的IS安全设计贡献",
+      "CONTRIBUTION: r-VAC对攻击仿真规范性知识贡献",
+      "CONTRIBUTION: RL-RO扩展鲁棒优化并验证于网络安全",
+      "PRACTICAL_STAKES: 对管理者、防御提供方、分析师的启示",
+      "BOUNDARY_CONDITION: 伦理使用与防滥用措施",
+      "LIMITATION_AND_FUTURE: 自动提取攻击动作、表示学习、理论后悔分析、奖励稀疏等"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Robust Optimization（鲁棒优化）理论",
+      "Reinforcement Learning（强化学习）/MDP理论",
+      "Variational Actor-Critic（VAC）",
+      "Concrete Distribution/Gumbel-Softmax重参数化",
+      "Danskin定理",
+      "恶意软件分析领域知识（PE文件结构、功能保持动作）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "RO的minimax目标直接决定了RADAR两阶段结构，RL的MDP直接决定了攻击动作序列的形式化，VAC与Concrete分布直接塑造了r-VAC算法，Danskin定理和次优攻击松弛直接导致RL-RO目标函数。理论不是事后解释，而是设计的来源并被实验直接检验。",
+    "translation_chain_cn": "RO定义内层攻击最大化和外层防御最小化 → 内层需要有效攻击仿真 → RL将攻击者建模为序列决策MDP → VAC提供大状态空间和样本效率基础 → Concrete分布改善离散动作梯度 → r-VAC得到攻击策略网络 → Danskin定理说明RO内层需先求最优扰动 → 用r-VAC策略网络近似最优扰动 → 得到RL-RO外最小化目标 → 通过交替迭代生成鲁棒防御体。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "RO的minimax目标中，防御鲁棒性依赖有效攻击仿真的内层最大化",
+        "mechanism_cn": "若内层攻击质量差，外层防御学到的鲁棒性在面对真攻击时失效",
+        "design_requirement_cn": "必须先构建能生成有效对抗样本的攻击生成器",
+        "artifact_choice_cn": "RADAR第一阶段采用RL策略网络作为攻击生成器",
+        "evaluated_contrast_cn": "r-VAC与随机、元启发、GAN/RNN代理、其他RL的攻击逃逸率对比",
+        "objective_result_cn": "r-VAC在三个检测器上综合逃逸率最高",
+        "evidence_pointers": [
+          "Experiment 1, Table 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "RL适合建模攻击者与防御环境的序列交互",
+        "mechanism_cn": "攻击者按顺序施加动作并观察防御者二进制反馈，累积收益驱动动作选择",
+        "design_requirement_cn": "将攻击仿真形式化为有限离散动作MDP",
+        "artifact_choice_cn": "恶意软件状态用2,350维特征向量，动作空间为10种功能保持动作，奖励为{0,10}",
+        "evaluated_contrast_cn": "RL方法与非RL方法的逃逸率对比",
+        "objective_result_cn": "RL类方法整体优于非RL方法，且r-VAC进一步领先",
+        "evidence_pointers": [
+          "Experiment 1, Table 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "VAC通过变分推断在大状态空间中有高样本效率，但标准VAC在离散动作空间的梯度估计有提升空间",
+        "mechanism_cn": "离散动作无法直接回传梯度，重参数化可降低梯度方差",
+        "design_requirement_cn": "在离散动作空间下改进VAC的梯度估计",
+        "artifact_choice_cn": "r-VAC使用Concrete分布对离散攻击动作重参数化",
+        "evaluated_contrast_cn": "r-VAC与ACER、A3C、DDQN等RL方法对比",
+        "objective_result_cn": "r-VAC逃逸率最高",
+        "evidence_pointers": [
+          "Experiment 1, Table 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Danskin定理要求先找到内层最大化点再求外层梯度，但精确内层最大不可行",
+        "mechanism_cn": "用次优攻击近似内层最大可获得显著鲁棒化",
+        "design_requirement_cn": "用可获得的攻击模型替代内层精确最大",
+        "artifact_choice_cn": "RL-RO用r-VAC策略网络近似最优对抗样本",
+        "evaluated_contrast_cn": "鲁棒化前后逃逸率与FPR对比，以及重复博弈多轮逃逸率",
+        "objective_result_cn": "平均逃逸率下降84%，FPR不变",
+        "evidence_pointers": [
+          "Experiment 2, Table 9",
+          "Experiment 3, Figure 8"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "恶意软件攻击向量必须功能保持且可顺序执行",
+        "mechanism_cn": "动作类型影响检测器特征空间：元数据型检测器对编辑动作更脆弱，端到端检测器对加性动作更脆弱",
+        "design_requirement_cn": "识别一组功能保持的离散动作并允许重复和乱序组合",
+        "artifact_choice_cn": "10种基于LIEF实现的攻击动作",
+        "evaluated_contrast_cn": "不同动作序列对LGBM、MalConv、NonNeg的逃逸效果",
+        "objective_result_cn": "压缩和节区重命名对LGBM最有效；MalConv和NonNeg受加性动作影响更大",
+        "evidence_pointers": [
+          "Table 8",
+          "Case Study, Table 10, Figure 9"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "基准对比实验",
+      "敏感性分析",
+      "前后对照鲁棒化实验",
+      "重复博弈多阶段分析",
+      "案例研究",
+      "扩展动作序列长度的稳健性检验",
+      "经验效率分析"
+    ],
+    "why_these_evaluations_cn": "需要分别证明Phase 1的攻击质量、Phase 2的防御效果、两者的迭代关系、以及面向实践的设计洞察。仅攻击逃逸率不足以保证防御鲁棒性；仅单轮鲁棒化不足以保证长期博弈下的持续有效性；仅平均性能不足以保证FPR可接受。因此从攻击、防御、灵敏度、重复博弈、案例和扩展条件逐层累积证据。",
+    "benchmark_and_contrast_chain_cn": "Experiment 1先建立攻击质量标尺：非RL基线与RL基准依次作为对照，证明r-VAC的攻击不可归因于RL本身或简单启发式；Experiment 1.1通过奖励敏感性排除奖励配置的替代解释；Experiment 2用鲁棒化前后对照证明RL-RO的防御收益；Experiment 3用多轮迭代对照证明重复博弈的累积鲁棒性并给出停止点；案例研究把攻击序列频率转化为设计建议；Appendix B3通过扩展动作长度检验结论的稳健性。",
+    "claim_evidence_ledger": [
+      {
+        "claim_type_cn": "技术主张",
+        "claim_cn": "r-VAC在恶意软件攻击仿真上优于state-of-the-art方法",
+        "evidence_cn": "Table 7报告r-VAC在三个检测器和六类恶意软件上均有最高逃逸率，且重复5次取平均",
+        "assessment_cn": "有直接基准实验支持，且附录B3扩展动作长度后仍领先"
+      },
+      {
+        "claim_type_cn": "制品主张",
+        "claim_cn": "r-VAC的具体设计（Concrete重参数化）带来改进",
+        "evidence_cn": "通过r-VAC与多个离散动作RL方法的对比间接支持，但未对r-VAC与标准VAC做直接消融",
+        "assessment_cn": "证据充分但非完全消融；标准VAC未列入基准表，机制归因是间接的"
+      },
+      {
+        "claim_type_cn": "机制主张",
+        "claim_cn": "显式建模动作序列可提供更有效攻击并揭示防御漏洞",
+        "evidence_cn": "Table 8和案例研究展示主导动作和逃逸序列，并据此提供设计建议",
+        "assessment_cn": "有描述性证据支持“能揭示漏洞”，但“因序列建模而更好”的因果链条由对比和定性分析支撑，未做严格反事实"
+      },
+      {
+        "claim_type_cn": "边界主张",
+        "claim_cn": "RL-RO鲁棒化能降低逃逸率而不显著提高FPR",
+        "evidence_cn": "Experiment 2报告三个检测器FPR在鲁棒化后保持不变",
+        "assessment_cn": "有直接支持；但FPR阈值、恶意软件类型和检测器范围有限"
+      },
+      {
+        "claim_type_cn": "可复用设计知识",
+        "claim_cn": "压缩和节区重命名是LGBM型检测器的主要弱点，训练时可用压缩样本增强和节区名噪声增强",
+        "evidence_cn": "案例研究中频率统计与heatmap支持",
+        "assessment_cn": "有观察支持，但未通过干预实验验证设计建议的实际效果"
+      },
+      {
+        "claim_type_cn": "理论贡献",
+        "claim_cn": "将鲁棒优化扩展到离散动作序列攻击场景并在网络安全领域验证",
+        "evidence_cn": "RL-RO公式、Algorithm 1、Experiment 2/3的结果",
+        "assessment_cn": "有实证支撑，但缺少与经典RO或对抗训练的正式理论性质比较"
+      }
+    ],
+    "internal_validity_strategy_cn": "采用时间切分避免时间穿越；用验证集选择参数；重复实验5次取平均；引入奖励敏感性分析；用FPR监测防止鲁棒化以牺牲可用性为代价；在重复博弈中监测FPR并定义停止点。",
+    "external_validity_strategy_cn": "选择三个不同架构的知名开源检测器（LGBM、MalConv、NonNeg）；覆盖六类现实恶意软件；使用VirusTotal真实数据；与多类基准方法对比；通过案例研究把结果引到具体检测器设计；附录中扩展最大动作数以增强一般性。",
+    "what_is_not_actually_tested_cn": "没有部署到真实组织或真实对抗环境；未测试白盒攻击或置信度可用黑盒攻击；未验证设计建议（如压缩样本增强）是否真能提升LGBM鲁棒性；未提供暂停点后的长期对抗演化证据；未对RL-RO的收敛性做理论证明；奖励稀疏场景未被直接测试。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "r-VAC在恶意软件攻击仿真上取得当前方法中最高的逃逸率；RL-RO能将检测器逃逸率降低约84%，平均提升鲁棒性约7倍。",
+    "artifact_claim_cn": "RADAR框架的两个组件（r-VAC和RL-RO）分别解决攻击仿真与防御加固；案例研究证明其能产生可操作防御设计建议。",
+    "mechanism_claim_cn": "序列化建模攻击动作、并通过Concrete分布改进离散动作梯度是r-VAC更有效的机制；用RL策略网络近似RO内层最大是RL-RO有效的机制。",
+    "boundary_claim_cn": "效果适用于二进制黑盒威胁模型、静态PE恶意软件、以及FPR不超过5%的停止条件下；后轮防御体对历史攻击模型更鲁棒，但需监控FPR以防过度鲁棒化。",
+    "reusable_design_knowledge_cn": "防护设计应从对手动作序列中发现弱点；对LGBM类元数据检测器，应针对压缩和节区重命名做训练增强；对深度内容检测器，应关注加性动作。",
+    "theoretical_contribution_cn": "扩展鲁棒优化到离散动作序列攻击场景，通过RL近似内层最大；同时把RL的攻击序列模型嵌入RO框架，形成了攻击-防御博弈的计算设计理论。",
+    "how_discussion_closes_intro_gap_cn": "Discussion以computational design science范式重述问题，明确三方面贡献：RADAR框架回应IS安全研究中缺少对抗环境假设的缺口；r-VAC回应AAE研究忽视动作序列和防御强化的不足；RL-RO回应鲁棒优化在网络安全离散攻击场景中的扩展需求。",
+    "overclaim_or_unsupported_leaps_cn": "“首个鲁棒化框架”的表述依赖文献回顾范围，难以完全排除并行工作；将r-VAC的优势归因于序列建模时缺少对标准VAC的直接消融；案例研究中的设计建议未做干预验证；由动作频率推断“与人类黑客行为一致”属于解释性跳跃；平均“提升7倍”与“up to seven times”的表述略有歧义。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "AI正被广泛纳入现代网络防御，以实现自动化和可扩展性",
+      "rhetorical_function_cn": "开篇确立研究领域的现实重要性",
+      "depends_on_cn": "无需前序",
+      "sets_up_cn": "为后续指出AI防御体的脆弱性铺垫",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "尽管有价值，防御AI体可能被对抗性攻击操纵，因此鲁棒性引发担忧",
+      "rhetorical_function_cn": "引入问题核心：已有AI安全能力存在脆弱性",
+      "depends_on_cn": "前面关于AI广泛部署的事实",
+      "sets_up_cn": "为引入RO和RL解法设置必要性",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "基于计算设计科学，耦合RO与RL提出RADAR框架",
+      "rhetorical_function_cn": "快速声明研究目标与理论工具",
+      "depends_on_cn": "需要对抗鲁棒性问题",
+      "sets_up_cn": "预告研究的理论导向",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P2 S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "为展示实用性，将RADAR实例化于恶意软件攻击",
+      "rhetorical_function_cn": "说明设计科学验证的领域选择",
+      "depends_on_cn": "RADAR框架的存在",
+      "sets_up_cn": "引出后续评价对象",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P2 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在三个知名恶意软件检测器上，RADAR使对抗鲁棒性平均提升至七倍",
+      "rhetorical_function_cn": "给出最有力的一句话结果摘要",
+      "depends_on_cn": "RADAR实例化与评价",
+      "sets_up_cn": "支撑贡献声明",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "随着网络攻击规模与严重性上升，AI代理被开发用于自动化网络防御",
+      "rhetorical_function_cn": "建立研究背景",
+      "depends_on_cn": "无需前序",
+      "sets_up_cn": "为后续攻击威胁和AI弱点做铺垫",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P1 S2-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "AI检测器在移动恶意软件检测等任务达到高精度，大型安全公司已部署深度神经网络；69%的IT企业认为没有AI就难以完成防御",
+      "rhetorical_function_cn": "用具体数字说明AI防御已成为不可替代的基础设施",
+      "depends_on_cn": "AI代理自动化防御的背景",
+      "sets_up_cn": "强调AI一旦被攻破后果严重",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "AI代理可被对抗样本欺骗；恶意软件可通过修改签名段和重置校验和逃逸，网络流量可通过编码和分片逃逸",
+      "rhetorical_function_cn": "描述可观察的经验现象，使问题具体化",
+      "depends_on_cn": "AI防御广泛部署的背景",
+      "sets_up_cn": "说明防御AI体面对的对手不是静态噪声而是序列化动作",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P2 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "虽然越来越依赖防御AI体，但对如何增强其抗对抗攻击鲁棒性知之甚少",
+      "rhetorical_function_cn": "明确提出研究缺口",
+      "depends_on_cn": "对抗攻击现象的严重性",
+      "sets_up_cn": "引出本文研究目标",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "研究旨在用RO和RL强化防御鲁棒性；RO提供将对手纳入学习优化的严格框架",
+      "rhetorical_function_cn": "引入核心理论作为解决方案",
+      "depends_on_cn": "前文识别的鲁棒性缺口",
+      "sets_up_cn": "为两阶段设计提供理论锚点",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P3 S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "RO框架催生攻击者与AI代理之间的两人博弈",
+      "rhetorical_function_cn": "把RO抽象转化为对抗博弈结构",
+      "depends_on_cn": "RO的minimax思想",
+      "sets_up_cn": "为RADAR两阶段对抗游戏设置依据",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P3 S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "RO确立了鲁棒防御需要有效攻击仿真",
+      "rhetorical_function_cn": "从理论推导出设计需求",
+      "depends_on_cn": "RO的内层最大化问题",
+      "sets_up_cn": "引出RADAR第一阶段的必要性",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "对抗攻击通常涉及序列动作，RL擅长建模actor与环境的序列交互，因此适合仿真攻击步骤",
+      "rhetorical_function_cn": "引入RL作为AAE的实现理论",
+      "depends_on_cn": "攻击是序列动作的观察",
+      "sets_up_cn": "为r-VAC使用RL提供理由",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "基于计算设计科学，综合RO与RL开发RADAR框架",
+      "rhetorical_function_cn": "给出总体研究目标",
+      "depends_on_cn": "理论与需求的铺垫",
+      "sets_up_cn": "预告框架名称与内涵",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P5 S2-S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "本文将RADAR实例化于恶意软件攻击，并用state-of-the-art基准评价其攻击仿真和防御加固",
+      "rhetorical_function_cn": "说明研究路径和评价方式",
+      "depends_on_cn": "RADAR框架已经提出",
+      "sets_up_cn": "引出后续实证部分",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P5 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究有三个贡献：鲁棒化框架、RL攻击仿真方法、RL-RO方法",
+      "rhetorical_function_cn": "提前声明贡献以引导读者预期",
+      "depends_on_cn": "框架与评价结果",
+      "sets_up_cn": "为Discussion的贡献陈述铺垫",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 17,
+      "section": "Research Background - Defending IT Infrastructure",
+      "locator": "背景小节开头",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "IS安全研究可分为AI-enabled、行为安全和经济安全三支",
+      "rhetorical_function_cn": "建立领域分类框架",
+      "depends_on_cn": "无需前序",
+      "sets_up_cn": "用于指出各流派是否考虑对抗环境",
+      "evidence_pointer": "Defending IT Infrastructure"
+    },
+    {
+      "order": 18,
+      "section": "Research Background - Defending IT Infrastructure",
+      "locator": "AI-enabled安全研究评述",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "AI-enabled制品通常不考虑可生成对抗输入的对抗环境，因此其安全性可能被破坏",
+      "rhetorical_function_cn": "指出现有IS安全AI制品的重要局限",
+      "depends_on_cn": "三流派分类",
+      "sets_up_cn": "说明需要引入对抗环境假设的缺口",
+      "evidence_pointer": "Table 1与正文"
+    },
+    {
+      "order": 19,
+      "section": "Research Background - Defending IT Infrastructure",
+      "locator": "行为与经济安全研究评述",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "行为和经济安全研究已在建模中纳入对手行为，例如内部人和敌意企业",
+      "rhetorical_function_cn": "表明IS领域已承认对抗环境，但未处理AI防御鲁棒性",
+      "depends_on_cn": "三流派分类",
+      "sets_up_cn": "形成“已有流派各有所缺”的缺口结构",
+      "evidence_pointer": "Defending IT Infrastructure"
+    },
+    {
+      "order": 20,
+      "section": "Research Background - Defending IT Infrastructure",
+      "locator": "段落末尾",
+      "move_code": "GAP",
+      "paraphrase_cn": "缺少关于如何增强防御AI体对对抗输入鲁棒性的研究",
+      "rhetorical_function_cn": "凝结出直接研究缺口",
+      "depends_on_cn": "AI-enabled缺对抗假设、行为经济未处理AI制品",
+      "sets_up_cn": "导入RO作为解决方案",
+      "evidence_pointer": "Defending IT Infrastructure"
+    },
+    {
+      "order": 21,
+      "section": "Research Background - Robust Optimization Theory",
+      "locator": "RO小节开头",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "传统AI学习忽略对手，RO扩展损失函数以纳入对手，从而学到鲁棒模型",
+      "rhetorical_function_cn": "解释RO为何能解决前文缺口",
+      "depends_on_cn": "防御鲁棒性缺口",
+      "sets_up_cn": "为minimax公式提供理论表述",
+      "evidence_pointer": "Robust Optimization"
+    },
+    {
+      "order": 22,
+      "section": "Research Background - Robust Optimization Theory",
+      "locator": "RO公式解释",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "RO同时求解内层攻击最大化和外层防御最小化",
+      "rhetorical_function_cn": "阐明机制性因果关系",
+      "depends_on_cn": "RO理论",
+      "sets_up_cn": "说明攻击仿真的必要性",
+      "evidence_pointer": "Equation 1"
+    },
+    {
+      "order": 23,
+      "section": "Research Background - Robust Optimization Theory",
+      "locator": "RO小节末尾",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "公式暗示强化防御鲁棒性需要有效仿真对抗输入",
+      "rhetorical_function_cn": "从理论推导出设计需求",
+      "depends_on_cn": "RO的内层最大化",
+      "sets_up_cn": "进入AAE文献评述",
+      "evidence_pointer": "Robust Optimization"
+    },
+    {
+      "order": 24,
+      "section": "Research Background - Adversarial Attack Emulation",
+      "locator": "AAE小节开头",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "对抗攻击通过序列动作精修输入，加性和编辑动作保持功能，动作顺序可影响结果",
+      "rhetorical_function_cn": "描述AAE领域的领域现象",
+      "depends_on_cn": "鲁棒性需求",
+      "sets_up_cn": "强调序列性对建模的要求",
+      "evidence_pointer": "Adversarial Attack Emulation"
+    },
+    {
+      "order": 25,
+      "section": "Research Background - Adversarial Attack Emulation",
+      "locator": "AAE threat model描述",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "攻击者根据防御体的二进制响应顺序选择下一动作；BBB是攻击IT基础设施时更现实的模型",
+      "rhetorical_function_cn": "说明攻击仿真为什么必须序列化且可在BBB下进行",
+      "depends_on_cn": "AAE现象",
+      "sets_up_cn": "为选择RL和BBB评价提供依据",
+      "evidence_pointer": "Adversarial Attack Emulation"
+    },
+    {
+      "order": 26,
+      "section": "Research Background - Adversarial Attack Emulation",
+      "locator": "AAE文献review后的research opportunities",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有AAE研究偏攻击少防御、BBB设定少、多假设加性动作、且很少建模动作序列",
+      "rhetorical_function_cn": "列出四个具体文献缺口",
+      "depends_on_cn": "AAE表2的维度比较",
+      "sets_up_cn": "支撑本文选择RL和RO的必要性",
+      "evidence_pointer": "AAE小节与Table 2"
+    },
+    {
+      "order": 27,
+      "section": "Research Background - AAE",
+      "locator": "RL适合作AAE的过渡段",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "非RL与生成式方法难以追踪动作序列，RL天然适合建模攻击者与防御体的交互",
+      "rhetorical_function_cn": "从AAE缺口过渡到RL方法",
+      "depends_on_cn": "AAE缺口列表",
+      "sets_up_cn": "进入深度RL分类讨论",
+      "evidence_pointer": "AAE小节末尾"
+    },
+    {
+      "order": 28,
+      "section": "Research Background - Reinforcement Learning for AAE",
+      "locator": "RL基础知识段",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "RL是离散时间步上的MDP，agent根据策略选取动作并获得奖励，目标是最大化累积折扣回报",
+      "rhetorical_function_cn": "为后续MDP形式化提供基础知识",
+      "depends_on_cn": "RL用于AAE的过渡",
+      "sets_up_cn": "定义后续符号和政策梯度公式",
+      "evidence_pointer": "Reinforcement Learning for AAE"
+    },
+    {
+      "order": 29,
+      "section": "Research Background - RL for AAE",
+      "locator": "深度RL方法taxonomy paragraph",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "AAE需要样本效率高、能处理大状态空间、且支持离散动作的深度RL方法",
+      "rhetorical_function_cn": "把AAE领域特征转化为RL方法选择标准",
+      "depends_on_cn": "AAE的领域特征",
+      "sets_up_cn": "最终引向VAC",
+      "evidence_pointer": "Reinforcement Learning for AAE与Appendix A"
+    },
+    {
+      "order": 30,
+      "section": "Research Background - RL for AAE",
+      "locator": "VAC评价段",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "VAC在样本效率和大状态空间上表现出色，适合AAE",
+      "rhetorical_function_cn": "从候选RL方法中选出基础模型",
+      "depends_on_cn": "AAE的三项需求",
+      "sets_up_cn": "为r-VAC设计提供起点",
+      "evidence_pointer": "Reinforcement Learning for AAE"
+    },
+    {
+      "order": 31,
+      "section": "Research Background - Variational Actor-Critic",
+      "locator": "VAC小节末尾",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "标准VAC在大状态空间AAE中仍有改进梯度估计的空间",
+      "rhetorical_function_cn": "指出所选基础方法的不足",
+      "depends_on_cn": "VAC描述",
+      "sets_up_cn": "引出r-VAC的创新点",
+      "evidence_pointer": "Variational Actor-Critic"
+    },
+    {
+      "order": 32,
+      "section": "Research Gaps and Questions",
+      "locator": "研究缺口与问题段",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "基于综述提出三个研究问题：RO如何用于网络安全、RL如何仿真攻击、可学到什么缓解策略",
+      "rhetorical_function_cn": "将缺口转化为可回答的问题",
+      "depends_on_cn": "前三小节全部综述",
+      "sets_up_cn": "直接导入Proposed Design",
+      "evidence_pointer": "Research Gaps and Questions"
+    },
+    {
+      "order": 33,
+      "section": "Proposed Design",
+      "locator": "RADAR假设段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "RADAR建立在三条现实假设上：攻击者用序列功能保持动作、只能获得二进制响应、防御体看不到攻击者内部信息",
+      "rhetorical_function_cn": "限定框架适用范围",
+      "depends_on_cn": "AAE文献中的BBB模型与领域专家反馈",
+      "sets_up_cn": "为后续两阶段设计设定边界",
+      "evidence_pointer": "Proposed Design"
+    },
+    {
+      "order": 34,
+      "section": "Proposed Design",
+      "locator": "框架总览段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "RADAR接受攻击向量、脆弱防御体和恶意输入数据，通过两个阶段输出攻击生成策略与鲁棒防御体",
+      "rhetorical_function_cn": "给出框架的输入输出结构",
+      "depends_on_cn": "三条假设",
+      "sets_up_cn": "分别展开Phase 1和Phase 2",
+      "evidence_pointer": "Figure 2"
+    },
+    {
+      "order": 35,
+      "section": "Proposed Design - Phase 1",
+      "locator": "Phase 1概述段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "Phase 1通过r-VAC生成对抗攻击策略，输出能够逃逸防御体的攻击生成器",
+      "rhetorical_function_cn": "定义第一阶段的产物",
+      "depends_on_cn": "框架总览",
+      "sets_up_cn": "进入MDP形式化",
+      "evidence_pointer": "Phase 1"
+    },
+    {
+      "order": 36,
+      "section": "Proposed Design - Phase 1",
+      "locator": "攻击模型MDP规范段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "将恶意软件逃逸建模为MDP：状态为恶意输入表示，动作是有限离散功能保持修改，奖励在成功逃逸时为正",
+      "rhetorical_function_cn": "将RL理论翻译到恶意软件域的可计算形式",
+      "depends_on_cn": "RL基础知识与恶意软件动作向量",
+      "sets_up_cn": "为r-VAC提供训练环境",
+      "evidence_pointer": "Phase 1"
+    },
+    {
+      "order": 37,
+      "section": "Proposed Design - Phase 1",
+      "locator": "r-VAC设计段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "r-VAC通过Concrete分布近似采样重参数化离散动作，改进VAC的梯度估计",
+      "rhetorical_function_cn": "提出具体算法创新",
+      "depends_on_cn": "VAC在大状态空间适用但离散梯度不足",
+      "sets_up_cn": "介绍Concrete采样图和公式",
+      "evidence_pointer": "Phase 1与Figure 3"
+    },
+    {
+      "order": 38,
+      "section": "Proposed Design - Phase 2",
+      "locator": "RL-RO设计段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "RO内层最大需要先找最优扰动，但精确求解困难；可用次优攻击近似，Kolter和Madry指出这样做仍可显著鲁棒化",
+      "rhetorical_function_cn": "为RL-RO提供理论许可",
+      "depends_on_cn": "Danskin定理与RO公式",
+      "sets_up_cn": "用r-VAC策略网络替换最优攻击",
+      "evidence_pointer": "Phase 2"
+    },
+    {
+      "order": 39,
+      "section": "Proposed Design - Phase 2",
+      "locator": "RL-RO目标式段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "RL-RO将内层最大近似为r-VAC策略网络输出，形成外最小化目标",
+      "rhetorical_function_cn": "给出可优化目标函数",
+      "depends_on_cn": "次优攻击近似假设",
+      "sets_up_cn": "为Experiment 2提供算法对象",
+      "evidence_pointer": "Equation 5"
+    },
+    {
+      "order": 40,
+      "section": "Instantiation of RADAR for Malware Attacks",
+      "locator": "恶意软件动机段",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "恶意软件是IT基础设施损失的主因，年成本上升11%至平均260万美元",
+      "rhetorical_function_cn": "用经济损失证明实例化领域的重要性",
+      "depends_on_cn": "RADAR框架已完成",
+      "sets_up_cn": "说明为什么选择恶意软件域",
+      "evidence_pointer": "Instantiation"
+    },
+    {
+      "order": 41,
+      "section": "Instantiation - Adversarial Malware Attack Vectors",
+      "locator": "攻击向量列表段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "依据恶意软件文献和两名分析师识别出10种功能保持攻击动作，并通过LIEF实现",
+      "rhetorical_function_cn": "把抽象动作空间实例化为可编程动作",
+      "depends_on_cn": "领域知识",
+      "sets_up_cn": "作为Phase 1的动作空间",
+      "evidence_pointer": "Figure 5"
+    },
+    {
+      "order": 42,
+      "section": "Instantiation - Phase 1",
+      "locator": "恶意软件状态表示段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "状态由2,350维特征向量表示，包含头元数据、节元数据、导入导出、字符串、字节直方图和2D字节熵直方图",
+      "rhetorical_function_cn": "选型状态表示以适配黑盒威胁模型",
+      "depends_on_cn": "MDP规范",
+      "sets_up_cn": "定义RL环境输入",
+      "evidence_pointer": "Instantiation - Phase 1"
+    },
+    {
+      "order": 43,
+      "section": "Instantiation - Phase 1",
+      "locator": "RL环境与检测器段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "环境基于OpenAI Gym和malware-env，最多5个动作；选择三个知名开源检测器是因为商业工具无法被加固",
+      "rhetorical_function_cn": "说明实验环境与检测器选择理由",
+      "depends_on_cn": "领域专家与文献",
+      "sets_up_cn": "为Experiment 1构建对照",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 44,
+      "section": "Evaluation - Malware Testbed",
+      "locator": "时间切分段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用2017-2018恶意软件训练/验证攻击模型，用2019数据评价鲁棒化，以避免时间信息泄漏",
+      "rhetorical_function_cn": "保护评价内部有效性",
+      "depends_on_cn": "测试床数据",
+      "sets_up_cn": "说明Phase 1和Phase 2的数据划分",
+      "evidence_pointer": "Malware Testbed"
+    },
+    {
+      "order": 45,
+      "section": "Evaluation - Experiment Design",
+      "locator": "实验设计总表",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "实验设计包含攻击性能评价、奖励敏感性、防御性能评价、重复博弈和案例研究",
+      "rhetorical_function_cn": "让读者预先看到证据链条",
+      "depends_on_cn": "测试床与检测器选择",
+      "sets_up_cn": "分别展开各实验",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 46,
+      "section": "Evaluation - Experiment Design",
+      "locator": "基准方法选择段",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "实验1使用随机、BFA、EvadeHC、GAMMA、Surrogate RNN等非RL方法，以及PG、DDQN、Rainbow、MAB、ACER、A3C等RL方法作为对照",
+      "rhetorical_function_cn": "建立全面的基准集合",
+      "depends_on_cn": "AAE文献与RL分类",
+      "sets_up_cn": "为Table 7结果提供对照",
+      "evidence_pointer": "Table 6"
+    },
+    {
+      "order": 47,
+      "section": "Evaluation Results - Experiment 1",
+      "locator": "Table 7结果段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "RL方法整体优于非RL，r-VAC在三大检测器和所有恶意软件类别上取得最高综合逃逸率",
+      "rhetorical_function_cn": "报告主要攻击评价结果",
+      "depends_on_cn": "基准实验",
+      "sets_up_cn": "支撑r-VAC的有效性主张",
+      "evidence_pointer": "Table 7"
+    },
+    {
+      "order": 48,
+      "section": "Evaluation Results - Experiment 1",
+      "locator": "主导动作分析段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "LGBM主要被编辑动作攻击，MalConv和NonNeg则更易受加性动作影响；压缩对所有检测器都是最有效动作",
+      "rhetorical_function_cn": "将攻击性能转化为可解释的领域洞察",
+      "depends_on_cn": "r-VAC生成的逃逸序列",
+      "sets_up_cn": "为案例研究和设计建议做铺垫",
+      "evidence_pointer": "Table 8"
+    },
+    {
+      "order": 49,
+      "section": "Evaluation Results - Experiment 1.1",
+      "locator": "奖励敏感性分析段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "改变奖励幅值1到1000，未发现逃逸率系统性偏向高或低奖励，因此选择奖励10",
+      "rhetorical_function_cn": "排除奖励设置作为结果替代解释",
+      "depends_on_cn": "RL训练配置",
+      "sets_up_cn": "为所有RL基准统一训练条件",
+      "evidence_pointer": "Figure 6"
+    },
+    {
+      "order": 50,
+      "section": "Evaluation Results - Experiment 2",
+      "locator": "防御加固结果段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "RL-RO使三检测器的平均逃逸率下降84%，约等于鲁棒性提升7倍，且FPR保持稳定",
+      "rhetorical_function_cn": "报告核心防御结果",
+      "depends_on_cn": "Phase 2算法与2019评价数据",
+      "sets_up_cn": "为重复博弈实验提供单轮基准",
+      "evidence_pointer": "Table 9"
+    },
+    {
+      "order": 51,
+      "section": "Evaluation Results - Experiment 3",
+      "locator": "重复博弈结果段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "后轮防御体对先前攻击的平均逃逸率单调下降，但FPR从第4轮起持续超过5%，因此建议在第3轮停止鲁棒化",
+      "rhetorical_function_cn": "识别方法的适用边界与停止规则",
+      "depends_on_cn": "交替Phase 1和Phase 2",
+      "sets_up_cn": "为实践部署提供何时停止的依据",
+      "evidence_pointer": "Figure 8"
+    },
+    {
+      "order": 52,
+      "section": "Evaluation Results - Case Study",
+      "locator": "LGBM案例研究结果段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "压缩常在逃逸序列末尾出现，节区重命名和overlay append因可重复和多位点而高频出现，据此提出压缩样本增强和节区名噪声增强建议",
+      "rhetorical_function_cn": "把攻击分析转化为防御设计指导",
+      "depends_on_cn": "r-VAC逃逸序列频率",
+      "sets_up_cn": "支撑Discussion中的设计知识贡献",
+      "evidence_pointer": "Table 10, Figure 9"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "贡献总结段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究以计算设计科学为指导，提出RADAR，在恶意软件域实例化并优于基准，贡献了鲁棒化框架、攻击仿真方法和RO扩展",
+      "rhetorical_function_cn": "把实证结果归纳为设计科学贡献",
+      "depends_on_cn": "全部实验结果",
+      "sets_up_cn": "为后续实践启示和伦理讨论做铺垫",
+      "evidence_pointer": "Discussion"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "RO理论贡献段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "RL-RO把鲁棒优化目标扩展到离散动作序列攻击场景，并在高影响网络安全领域验证了鲁棒优化理论",
+      "rhetorical_function_cn": "明确理论层面的贡献",
+      "depends_on_cn": "RL-RO设计与Experiment 2/3结果",
+      "sets_up_cn": "说明为什么本文不只是工程改进",
+      "evidence_pointer": "Discussion"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "实践利益相关者段",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "网络安全管理者、防御提供方和分析师可分别利用RADAR监控态势、部署前加固、缓解未见攻击，并需伦理约束防止滥用",
+      "rhetorical_function_cn": "连接学术贡献与现实使用场景",
+      "depends_on_cn": "RADAR的评价结果",
+      "sets_up_cn": "为结论与未来方向收束全文",
+      "evidence_pointer": "Discussion"
+    },
+    {
+      "order": 56,
+      "section": "Conclusion, Limitations, and Future Directions",
+      "locator": "未来研究方向段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来可自动化提取攻击动作、用表示学习扩展状态、理论量化攻击质量、改进RL/RO方法并处理奖励稀疏",
+      "rhetorical_function_cn": "界定边界并指出后续研究",
+      "depends_on_cn": "当前框架假设与实验结果",
+      "sets_up_cn": "结束全文",
+      "evidence_pointer": "Conclusion"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "用三支研究流派对比制造IS领域缺口：AI-enabled制品没有对抗环境假设，行为和经济研究虽假设对抗却未处理AI鲁棒性；再用AAE文献表把“少防御、少BBB、多加性、少序列建模”逐项列出，形成可直接填入RQs的缺口集合。",
+    "signposting_cn": "摘要给出RADAR名称与七倍提升；引言末预告三个贡献；Research Background明确四个评述领域；Evaluation用Table 5预告全部实验，使读者始终知道当前证据在整条链中的位置。",
+    "transition_logic_cn": "每个理论基础都以“因此需要有效攻击仿真”“RL因此适合AAE”“据此提出r-VAC”等推导型过渡连接；每个实验都以“为排除奖励配置”“为进一步分析重复博弈”“为展示实用性”引出下一实验，形成证据递进。",
+    "claim_evidence_rhythm_cn": "每段先给出主张（如r-VAC更强），随后用Table或Figure承载具体数字，再用一两句解释机制（如大状态空间和离散动作重参数化），最后用边界条件（如FPR不变）收紧主张。",
+    "benchmark_narrative_cn": "基准不是简单列表，而是分类叙事：先区分非RL与RL，再在各分类内部选择有代表性的随机、启发式、生成式、Q-Learning、actor-critic、多臂老虎机等方法；结果报告先对比整体RL优势，再突出r-VAC在每类上的领先，并通过基准方法强化机制解释。",
+    "theory_return_cn": "Discussion把结果回收为“RO理论在网络安全离散行动领域的扩展”和“RL序列建模对AAE规范性知识的贡献”，而非停留在“我们的算法跑分更高”，使设计科学成果与理论对话连接。",
+    "contribution_positioning_cn": "贡献按框架、方法、理论三层定位：RADAR回答IS安全中的对抗环境缺口，r-VAC回答AAE中的序列和防御缺口，RL-RO回答RO扩展到序列攻击的缺口。",
+    "novelty_protection_cn": "通过把“攻击性能”与“防御鲁棒性”“设计洞察”“FPR可用性”“重复博弈停止点”绑定，避免贡献被归结为单一benchmark上的跑分；同时声明实例是proof of concept而非最佳解，降低对特定数据集的过度承诺。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实事件和权威调查建立问题重要性，并指出AI安全代理脆弱性",
+        "research_job_cn": "收集部署证据和攻击案例，把问题从一般性安全提升到AI防御鲁棒性",
+        "required_evidence_cn": "AI防御实际部署数据、至少一个对抗攻击逃逸的具体例子",
+        "transition_to_next_cn": "由“鲁棒性是否被足够关注”过渡到文献缺口"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "用表格化综述展示IS安全/AAE领域现状",
+        "research_job_cn": "系统整理IS安全研究和攻击仿真研究，确定缺口类型（缺乏防御、BBB少、序列建模少）",
+        "required_evidence_cn": "与缺口匹配的文献表和分类维度",
+        "transition_to_next_cn": "缺口自然引出研究问题和理论选择"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "引入核心理论并把理论命题转化为设计需求",
+        "research_job_cn": "从RO和RL推导出“攻击仿真支持防御鲁棒化”“序列动作可用RL建模”",
+        "required_evidence_cn": "理论公式/定理与领域需求的对应关系",
+        "transition_to_next_cn": "需求变成RADAR两阶段结构"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述框架的输入、假设、阶段、输出和算法创新",
+        "research_job_cn": "把理论需求实例化为可运行组件（r-VAC和RL-RO），并给出MDP形式化和训练目标",
+        "required_evidence_cn": "算法伪代码/公式/图，以及领域专家或文献支撑的假设",
+        "transition_to_next_cn": "制品完成后进入实例化测试床"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "选择实例化领域和数据，描述测试床时间切分与检测器选择",
+        "research_job_cn": "获取真实数据、三个不同架构检测器和领域动作向量",
+        "required_evidence_cn": "数据来源、时间切分、检测器公开可复现性",
+        "transition_to_next_cn": "数据准备完成后设计实验体系"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "分层评价：攻击性能、敏感性、防御性能、重复博弈、案例研究，最后回到贡献",
+        "research_job_cn": "对不同方法比较逃逸率/FPR，识别边界条件，把攻击模式转成设计建议",
+        "required_evidence_cn": "基准实验表、前后对照、重复博弈图、频率和heatmap",
+        "transition_to_next_cn": "实验结果汇总成贡献与限制"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用文献表把缺口显性化：通过表1的“是否假设对抗环境”列与表2的七个维度列指出没人做什么",
+      "理论需求化：将RO内层最大化和RL序列决策转写成可以实施的设计需求",
+      "双层论证：先证明攻击质量，再证明防御收益，避免只有攻击跑分或只有防御改进",
+      "增加FPR/停止点等可用性边界，防止鲁棒化贡献被一次性性能结果淹没",
+      "把攻击序列频率转化为设计建议，使benchmark结果具有行动含义"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "VirusTotal学术许可证和33.2GB恶意软件测试床",
+      "三位NCFTA恶意软件分析师和两位malware analyst的咨询投入",
+      "多个RL基准（ACER/A3C/DDQN/Rainbow/MAB）在OpenAI Coach中的实现和调参",
+      "重复博弈实验中多轮攻击和防御模型的交替训练成本",
+      "VirusTotal API对功能保持的逐一验证"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只引用RO/RL名称而不给出MDP形式化和目标函数",
+      "不要只报告逃逸率而不报告FPR或停止规则",
+      "不要直接声称“首个”贡献，除非有同级可复现的文献表支持",
+      "不要在没有对奖励敏感性等替代解释排除的情况下断言算法优势",
+      "不要把案例研究中的设计建议说成已验证效果，除非做了干预实验"
+    ],
+    "single_best_description_of_the_routine_cn": "以鲁棒优化为外框、以强化学习策略逼近内层极大化，用设计科学两阶段框架把攻击仿真和防御加固打包成可基准测试的对抗循环。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "文章全文PDF转化中公式和个别图注存在符号缺失，可能影响对Equation 4/5和Figure 3/4的精确表述；附录A/B/C/D/E以文本和表格形式保留，但未对图7/8中间步骤数据做逐项重建；因此部分机制链条依赖正文叙述，而非逐符号核验。",
+  "usage": {
+    "prompt_tokens": 39859,
+    "completion_tokens": 24376,
+    "total_tokens": 64235,
+    "prompt_cache_hit_tokens": 39808,
+    "prompt_cache_miss_tokens": 51
+  }
+}

@@ -1,0 +1,2185 @@
+# Telecom traffic pumping analytics via explainable data science
+
+- 作者：María Elisa Irarrázaval; Sebastián Maldonado; Juan Pérez; Carla Vairetti
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113559
+- 源文件：19768_2021_telecom-traffic-pumping-analytics-via-explainable-data-science.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：在缺乏已知欺诈标签的情况下，如何利用CDR构建数据驱动模型识别电信行业中的流量泵送（traffic pumping）欺诈，并产出可解释、足以支撑法律诉讼的规则？
+
+- 制品与设计：提出一个五步决策支持系统：CDR数据收集与准备、特征工程、无监督聚类生成伪标签、用CART决策树把聚类结果转成可解释规则、专家验证与标注并用于法律程序。核心设计是“无监督聚类→决策树规则→法律可解释性”。
+
+- 客观结果：以智利某大型移动运营商2016年3月一个月CDR数据为例，最终使用k-means K=3聚类，后对X0簇二次聚类为6簇，共8个簇；全量数据混淆矩阵总体准确率97.1%，holdout验证准确率97.0%；识别出X2（5%）和X8（2%）两个欺诈簇；针对7462个可疑OA-OB对发起诉讼，全部获得有利判决；估计在2.5年间为两家被咨询的MNO减少约500万美元接入费损失。
+
+- 核心贡献：作者声称是第一个专门针对流量泵送欺诈的机器学习方法；将XAI/可解释机器学习从有监督规则提取扩展到无监督聚类的规则提取；证明可解释性不仅是管理需求，而且是开展法律诉讼的监管约束；并以实际诉讼全部胜诉作为业务有效性证据。
+
+- 整篇论证链：论文从流量泵送欺诈的经济学机制（高接入费与无限分钟套餐造成小运营商人为制造话务的逆向激励）出发，说明该欺诈的识别难点是没有标签，且现有监督欺诈检测和黑箱无监督方法都无法满足“为诉讼提供可解释依据”的要求。因此作者设计了一个五步DSS：先收集CDR并构造链接级数据，再做三组特征工程（中心性、月度模式、日内模式），接着用多种聚类算法生成伪标签并选优，再通过CART决策树把簇转化为可读规则，最后请专家验证标注并据此发起法律程序。案例研究用内部聚类指标和holdout混淆矩阵证明模型稳定、可解释且不过度拟合，然后用真实法庭判决作为外部有效性证据。讨论部分回到引言缺口，强调这是第一个将XAI用于无监督电信欺诈分析并记录完整法律成功案例的研究，同时把可解释性提升为法律/监管层面的约束条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者不是提出新理论，也不是纯benchmark，而是提出一个五步DSS制品，在真实电信运营商数据上构建，通过聚类质量指标、决策树准确率、holdout验证和真实法律诉讼结果进行评价，最终总结可复用的方法步骤与设计知识，符合设计科学研究范式。
+
+- 主导写作弧线判定：论文的写作主线是：先建立流量泵送识别和可解释法律依据的“要求”，然后按这些要求构建五步DSS，接着用案例数据评价每一环节，最后提炼关于无监督XAI和欺诈分析的可复用设计知识。虽然也有方法benchmark，但其主要功能是服务DSS构建评价，而非以性能提升为核心。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：文章依次包含：问题与欺诈机制辨识、数据准备、特征工程与探索性分析、无监督聚类模型选择、决策树规则提取与验证、专家标注与真实法律实施。前几阶段构造出可学习的CDR分析单元和变量，中间阶段生成并选择聚类伪标签，随后阶段把伪标签转化为可解释规则，最后阶段用真实法律程序验证整个DSS的外部有效性。每一阶段都留下下一阶段必须解决的缺口：机制知识需要数据验证，原始CDR需要聚合特征，特征需要无监督分割，簇需要解释，规则需要专家和法律确认。
+
+### studies_or_phases
+
+#### 1. 问题机理与异常现象刻画
+
+- order：1
+
+- name_cn：问题机理与异常现象刻画
+
+- question_cn：什么样的话务模式构成流量泵送？监管和资费结构如何产生欺诈激励？
+
+- inputs_and_setting_cn：电信监管经济学知识、智利2015年无限分钟套餐推出后的移动到固网话务异常。
+
+- designed_or_compared_object_cn：接入费、终止费率、MNO-FNO话务方向等制度性变量。
+
+- baseline_control_or_counterfactual_cn：没有明确对照，主要用“正常时期”移动到固话话务下降趋势作为异常背景。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：领域分析、正式的经济激励不等式、图例说明。
+
+- main_result_cn：流量泵送只在接入费较高的小型FNO与大型MNO之间成立；案例中2015-2016年可疑FNO话务增量超过70%。
+
+- argumentative_role_cn：把现实问题收缩为可被机器学习识别的话务模式，并给出为什么需要法律层面可解释性。
+
+- remaining_uncertainty_cn：需要进一步证明：这种异常是否在单次通话和号码对层面有可识别的统计信号。
+
+- link_to_next_phase_cn：引出用MR/CDR数据构造号码对分析单元的需求。
+
+##### evidence_pointers
+
+1. Introduction P4–P5
+
+2. Section 2.1 公式与Fig.1
+
+3. Section 4.1 P1–P3
+
+#### 2. CDR数据准备与过滤
+
+- order：2
+
+- name_cn：CDR数据准备与过滤
+
+- question_cn：如何把海量CDR转化为适合异常检测的分析样本？
+
+- inputs_and_setting_cn：智利某大型MNO 2016年3月一个月的CDR记录。
+
+- designed_or_compared_object_cn：以ANUM-BNUM号码对为行，过滤掉当月没有至少一次45分钟以上长话的用户。
+
+- baseline_control_or_counterfactual_cn：未过滤原始CDR量级作为动机参照，但未做对照实验。
+
+##### objective_metrics
+
+1. CDR样例数469,440
+
+2. OA-OB号码对107,290
+
+- analysis_method_cn：数据清洗、行单元重构、长话阈值过滤。
+
+- main_result_cn：得到10万多个OA-OB号码对，降低大数据处理负担，同时保留潜在欺诈行为。
+
+- argumentative_role_cn：明确分析单元与分析人群，为特征工程和聚类提供稳定数据底座。
+
+- remaining_uncertainty_cn：45分钟阈值是否最优、是否漏掉短话欺诈尚未验证。
+
+- link_to_next_phase_cn：过滤后需要构造能够区分正常用户、呼叫中心和欺诈者的变量。
+
+##### evidence_pointers
+
+1. Section 3.1 P1–P2
+
+2. Section 4.1 P4–P5
+
+#### 3. 特征工程与探索性描述
+
+- order：3
+
+- name_cn：特征工程与探索性描述
+
+- question_cn：哪些CDR特征能从中心性、月度用量和日内规律上捕捉流量泵送模式？
+
+- inputs_and_setting_cn：107,290个OA-OB号码对及对应CDR统计数据。
+
+- designed_or_compared_object_cn：三组共41个数值特征：中心性特征、月度模式特征、日内模式特征。
+
+- baseline_control_or_counterfactual_cn：用文献中正常用户与呼叫中心的日内曲线（Fig.3）作为“非欺诈模式”参照。
+
+##### objective_metrics
+
+1. 描述性统计表Table 1
+
+2. 极端值示例：最大通话秒数505,704、最大不同被叫数83、最大不同主叫数23,574
+
+- analysis_method_cn：描述性统计、图论表征、日内轨迹可视化。
+
+- main_result_cn：欺诈号码对呈现极端中心性、稳定长时间通话和固定日内时段等可区分模式。
+
+- argumentative_role_cn：证明特征工程确实产生了可用于无监督学习的判别信息。
+
+- remaining_uncertainty_cn：特征间的冗余和最优特征子集尚未确定。
+
+- link_to_next_phase_cn：需要聚类算法自动把这些模式分成同质子组。
+
+##### evidence_pointers
+
+1. Section 3.1 P3–P6
+
+2. Table 1
+
+3. Fig.3
+
+4. Fig.4
+
+#### 4. 无监督聚类与模型选择
+
+- order：4
+
+- name_cn：无监督聚类与模型选择
+
+- question_cn：哪种聚类方法及簇数能最好地把号码对分成正常、呼叫中心、欺诈等不同同质群？
+
+- inputs_and_setting_cn：41维特征数据集；候选算法k-means、DBSCAN、OPTICS、HDBSCAN。
+
+- designed_or_compared_object_cn：比较不同聚类算法和不同K值（3/5/7/9）；对X0簇再做二次k-means K=6。
+
+- baseline_control_or_counterfactual_cn：density-based异常检测方法作为“传统欺诈异常检测”的代表性对照。
+
+##### objective_metrics
+
+1. Silhouette
+
+2. Davies-Bouldin
+
+3. Calinski-Harabasz
+
+4. k-means十次随机初始化稳定性
+
+- analysis_method_cn：聚类质量指标比较、网格搜索、稳定性检验。
+
+- main_result_cn：k-means K=3在全部指标上最优；DBSCAN/HDBSCAN明显较弱；OPTICS无法得到K=3稳定解；k-means十次运行收敛到同一解。
+
+- argumentative_role_cn：用无监督内部指标选出最佳伪标签生成器，并为“流量泵送不是传统离群点问题”提供证据。
+
+- remaining_uncertainty_cn：内部指标无法保证簇的真实业务含义；需要规则解释和专家判断。
+
+- link_to_next_phase_cn：选出的簇必须被翻译成可读规则，才能进入法律流程。
+
+##### evidence_pointers
+
+1. Section 3.2 P1–P5
+
+2. Table 2
+
+3. Table 3
+
+4. Section 4.2 P1–P3
+
+#### 5. CART决策树规则提取与统计验证
+
+- order：5
+
+- name_cn：CART决策树规则提取与统计验证
+
+- question_cn：如何把无监督聚类结果转成一组可解释、稳定且可复用的判定规则？
+
+- inputs_and_setting_cn：第一次k-means K=3的簇标签；对X0二次聚类后共8个簇标签。
+
+- designed_or_compared_object_cn：以簇成员作为标签训练CART树；用RPART剪枝参数CP防止过拟合。
+
+- baseline_control_or_counterfactual_cn：70/30 holdout验证，用于评估规则在新样本上的泛化。
+
+##### objective_metrics
+
+1. 全量数据混淆矩阵总体准确率97.1%
+
+2. holdout总体准确率97.0%
+
+3. 两个欺诈簇的分类准确率/近乎无误
+
+- analysis_method_cn：决策树归纳、规则解释、holdout验证、混淆矩阵。
+
+- main_result_cn：由两棵树得到四条规则，X2和X8被识别为欺诈簇；规则主要使用ANUMS-PER-BNUM、BNUMS-PER-ANUM、AVG-charged、Sd-CACC、AVG-start-hour、Sharing-Address等少数变量。
+
+- argumentative_role_cn：把黑箱聚类输出转化为法律和业务人员可审查的规则，同时验证规则在样本内和样本外均可复现。
+
+- remaining_uncertainty_cn：树规则仍不能保证法律意义上的因果或意图；需要领域专家和法律团队确认。
+
+- link_to_next_phase_cn：进入专家标注和真实法律程序，检验这些规则是否足以支持诉讼。
+
+##### evidence_pointers
+
+1. Section 3.3 P1–P2
+
+2. Fig.5
+
+3. Fig.6
+
+4. Table 4
+
+5. Table 5
+
+6. Section 4.3 P1–P2
+
+#### 6. 专家标注、法律实施和业务结果
+
+- order：6
+
+- name_cn：专家标注、法律实施和业务结果
+
+- question_cn：由专家和法律团队确认后的规则能否在实际诉讼中认定欺诈并减少损失？
+
+- inputs_and_setting_cn：两家被咨询MNO的30个月CDR数据、专家团队、国家监管机构SUBTEL和法庭程序。
+
+- designed_or_compared_object_cn：对X2和X8两个欺诈簇对应的OA-OB对发起法律程序；对7463例可疑案例提交，最终7462例进入诉讼。
+
+- baseline_control_or_counterfactual_cn：没有真实标签的假阴性控制；仅以法律判决作为外部验证。
+
+##### objective_metrics
+
+1. 诉讼胜诉数7462
+
+2. 胜诉率100%
+
+3. 估计避免损失约500万美元
+
+4. 接入费减少约40%
+
+- analysis_method_cn：30个月重复DSS流程、监管听证与法庭裁决、损失估算。
+
+- main_result_cn：所有被诉案件均被法庭认定为欺诈并处以罚款；运营商的欺诈损失大幅降低。
+
+- argumentative_role_cn：用外部、高风险的司法结果证明DSS的有效性和可解释规则的实际价值。
+
+- remaining_uncertainty_cn：无法确认未起诉案例中的假阴性；损失节省为粗略估计；结果依赖智利监管与法律环境。
+
+- link_to_next_phase_cn：讨论部分据此提出未来用已生成标签做监督学习、用动态聚类处理对抗性欺诈行为。
+
+##### evidence_pointers
+
+1. Section 4.3 P4–P9
+
+2. Section 5 P5–P7
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. PHENOMENON: 介绍流量泵送定义
+
+2. LIMITATION: 识别因无标签和文献稀缺而困难
+
+3. RQ_OR_OBJECTIVE: 提出DSS
+
+4. STUDY_OVERVIEW: 概括五步方法
+
+5. RESULT: 法律诉讼全部胜诉
+
+### introduction_moves
+
+1. CONTEXT: 电信欺诈演化
+
+2. PRACTICAL_STAKES: 全球损失、声誉和客户影响
+
+3. PHENOMENON: 流量泵送高重要性
+
+4. MECHANISM: 接入费逆向激励
+
+5. THEORY_INTRO: XAI作为可解释性来源
+
+6. LIMITATION: 无标签和监督学习不可用
+
+7. GAP: 首个流量泵送ML方法、首个无监督XAI电信应用、首个完整法律成功案例
+
+8. RQ_OR_OBJECTIVE: 提出五步DSS
+
+9. STUDY_OVERVIEW: 论文结构
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 监管经济学中的终止费率与垄断终端网络
+
+2. MECHANISM: 高TR、无限套餐、空话务、伪造服务
+
+3. PRIOR_KNOWLEDGE: 有监督与无监督欺诈分析分类
+
+4. PRIOR_KNOWLEDGE: 图异常检测和用户画像聚类
+
+5. THEORY_INTRO: 内在可解释方法与事后可解释方法
+
+6. PRIOR_KNOWLEDGE: Verbeke和Martens的监督规则提取
+
+7. GAP: 无监督XAI在商业分析中缺失
+
+### artifact_design_moves
+
+1. REQUIREMENT: 法律程序要求可解释原因
+
+2. DESIGN_FEATURE: CDR+IMEI+号码对分析单元
+
+3. DESIGN_FEATURE: 三组特征
+
+4. METHOD_JUSTIFICATION: k-means与密度方法并比较
+
+5. METHOD_JUSTIFICATION: 簇质量指标
+
+6. DESIGN_FEATURE: CART将簇转成规则
+
+7. REQUIREMENT: 欺诈标注需同时满足簇归属和CART正确分类
+
+8. METHOD_JUSTIFICATION: 专家团队、共识或Delphi
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST: 多种聚类算法和K值
+
+2. ROBUSTNESS_OR_BOUNDARY_TEST: k-means十次随机初始化
+
+3. BENCHMARK_OR_CONTRAST: CART规则与holdout
+
+4. RESULT: 混淆矩阵97.1%和97.0%
+
+5. RESULT: 法律诉讼全胜
+
+6. LIMITATION_AND_FUTURE: 假阴性不可测、静态模型局限
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 第一个流量泵送ML模型
+
+2. CONTRIBUTION: 将XAI扩展到无监督聚类规则提取
+
+3. CONTRIBUTION: 流量泵送不是传统离群点问题
+
+4. CONTRIBUTION: CART可解释性与高准确率
+
+5. CONTRIBUTION: 真实法律结果和损失减少
+
+6. BOUNDARY_CONDITION: 可解释性如同信用评分中的监管约束
+
+7. LIMITATION_AND_FUTURE: 动态对抗行为、未来监督学习和广义随机森林
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 流量泵送经济机制：终止费率、垄断终端网络、无限套餐逆向激励
+
+2. 电信欺诈分析：CDR、有监督/无监督分类、图异常检测、用户画像
+
+3. XAI/可解释机器学习：内在可解释、事后解释、规则提取
+
+4. 监督XAI先例：Verbeke et al. 客户流失规则提取、Martens et al. 信用评分规则提取
+
+5. 呼叫模式文献：正常用户与呼叫中心的日内峰值
+
+6. 模型选择“无免费午餐”定理与聚类质量指标
+
+7. 专家系统/法律程序要求
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：领域知识和XAI文献确实前置影响了设计：无标签现实决定用聚类生成标签，法律可解释性要求决定用决策树规则。但聚类算法的具体选择、特征集合的构造以及二次分割更多来自工程经验、数据探索和“no free lunch”的benchmark逻辑，并非从某一理论严格推导出来。
+
+- 理论到设计翻译链：流量泵送经济机制→欺诈者需要每天长时间、固定时段、大量且方向不平衡的话务→设计中心性、月度、日内特征；无标签→用无监督聚类生成伪标签；法律诉讼要求→用CART把簇转成规则，再由专家确认；业务结果要求→用真实法庭判决替代无法获得的地面真值。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：高接入费与无限套餐使小型FNO有激励制造大量从大MNO进来的虚假话务
+
+- mechanism_cn：欺诈者以低成本的无限套餐换取高额接入费；话务方向失衡、号码极多、通话时间长且系统化
+
+- design_requirement_cn：需要捕捉方向不平衡、极端中心性、长时间占用和每日固定模式
+
+- artifact_choice_cn：按OA-OB号码对构造ANUM/BNUM中心性变量、月度分钟统计、日内时段占用率
+
+- evaluated_contrast_cn：欺诈号码对与呼叫中心、普通用户在图4和聚类中的差异
+
+- objective_result_cn：描述统计显示极端值；聚类形成X2、X8两个高中心性欺诈簇
+
+##### evidence_pointers
+
+1. Section 2.1
+
+2. Table 1
+
+3. Fig.3
+
+4. Fig.4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：欺诈分析中标签通常缺失，无监督学习适合首次欺诈检测
+
+- mechanism_cn：无法用监督分类器；聚类可把行为模式分成同质组并识别异常
+
+- design_requirement_cn：必须用无监督方法生成伪标签
+
+- artifact_choice_cn：k-means、DBSCAN、OPTICS、HDBSCAN并用Silhouette/DBI/CH指标选择
+
+- evaluated_contrast_cn：不同算法和K值在质量指标上的表现
+
+- objective_result_cn：k-means K=3最好，且十次初始化稳定
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Table 2
+
+3. Section 4.2 P1–P3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：XAI可通过规则提取把黑箱输出转成可审查知识
+
+- mechanism_cn：决策树用少数阈值的规则逼近复杂决策边界，使人类能够核验
+
+- design_requirement_cn：法律和监管要求明确解释怀疑原因
+
+- artifact_choice_cn：在聚类标签上拟合CART树，把簇成员作为目标变量
+
+- evaluated_contrast_cn：CART规则在训练和holdout数据上的混淆矩阵
+
+- objective_result_cn：全量和holdout准确率分别为97.1%和97.0%
+
+##### evidence_pointers
+
+1. Section 3.3 P1
+
+2. Figure 5
+
+3. Figure 6
+
+4. Table 4
+
+5. Table 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：法律举证需要避免把被树误分类的对象纳入欺诈名单
+
+- mechanism_cn：仅靠簇成员可能包含CART误判点；双重条件降低误诉风险
+
+- design_requirement_cn：欺诈标注必须同时满足“属于可疑簇”和“被CART正确分类”
+
+- artifact_choice_cn：定义欺诈标签的二重条件，几何上相当于在簇内画内接方块
+
+- evaluated_contrast_cn：与仅用单一簇标签相比，规则更加保守和可辩护
+
+- objective_result_cn：两个欺诈簇在混淆矩阵中几乎没有误分类
+
+##### evidence_pointers
+
+1. Section 3.3 P2
+
+2. Table 4
+
+3. Table 5
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：专家知识能够把统计规则翻译为法律判断
+
+- mechanism_cn：领域专家通过规则、日内曲线和业务常识确认簇的行为含义
+
+- design_requirement_cn：需要经验丰富的监管和建模专家，必要时使用Delphi
+
+- artifact_choice_cn：建立专家团队，对簇进行标注；若不确定则二次分割或标记为非欺诈
+
+- evaluated_contrast_cn：法律程序中被起诉案例的法庭判决
+
+- objective_result_cn：7462件诉讼全部胜诉并被认定欺诈
+
+##### evidence_pointers
+
+1. Section 3.3 P3–P6
+
+2. Section 4.3 P4–P6
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 描述性数据探索：Table 1和Fig.3/Fig.4展示欺诈信号
+
+2. 内部聚类质量比较：Silhouette、Davies-Bouldin、Calinski-Harabasz
+
+3. 稳定性检验：k-means十次随机初始化收敛
+
+4. 预测一致性检验：CART holdout 70/30、混淆矩阵
+
+5. 外部结果验证：真实法律诉讼胜诉率和损失节省估算
+
+- why_these_evaluations_cn：因为没有欺诈标签，不能使用精确率、召回率等监督指标；所以先用内部聚类指标选择伪标签生成器，再用决策树把伪标签变成可复现规则，用holdout防止解释模型过拟合，最后用法律裁决作为可获得的近似地面真值来验证整个DSS的真实有效性。
+
+- benchmark_and_contrast_chain_cn：聚类阶段以density-based方法（DBSCAN/HDBSCAN/OPTICS）作为“传统异常检测”对照，证明k-means更适合；树阶段以holdout作为“样本外泛化”对照；法律阶段以真实法庭判决作为最强外部对照，层层递进地证明方法不是一次性拟合。
+
+### claim_evidence_ledger
+
+#### 1. k-means比density-based方法更适合本数据集
+
+- claim_cn：k-means比density-based方法更适合本数据集
+
+- evidence_cn：三个内部指标在K=3时均优于DBSCAN/HDBSCAN/OPTICS；OPTICS无法形成K=3
+
+- strength_cn：中强：指标一致，但没有外部标签验证
+
+#### 2. CART规则能准确复现聚类结果且不过拟合
+
+- claim_cn：CART规则能准确复现聚类结果且不过拟合
+
+- evidence_cn：全量混淆矩阵97.1%，holdout 97.0%
+
+- strength_cn：强：样本内与样本外一致
+
+#### 3. 模型识别的欺诈案例确实构成法律意义上的欺诈
+
+- claim_cn：模型识别的欺诈案例确实构成法律意义上的欺诈
+
+- evidence_cn：7462起诉讼全部胜诉并认定欺诈
+
+- strength_cn：强但选择偏倚：仅起诉了被规则标记为欺诈的案例，无法评估未起诉样本
+
+#### 4. DSS显著减少损失并抑制欺诈
+
+- claim_cn：DSS显著减少损失并抑制欺诈
+
+- evidence_cn：估计节省约500万美元、接入费降低约40%；作者承认估算不包含全部话务增量
+
+- strength_cn：中：合理估算但缺乏严格反事实
+
+#### 5. 流量泵送不是传统离群点问题
+
+- claim_cn：流量泵送不是传统离群点问题
+
+- evidence_cn：过滤非长话用户后k-means优于异常检测方法
+
+- strength_cn：中：由案例数据和算法对比支持，属于有条件的结论
+
+- internal_validity_strategy_cn：用过滤步骤排除明显非欺诈用户，用聚类质量指标和稳定性检查降低算法随机性，用双重标注条件减少CART误分类进入诉讼名单，用holdout证明规则泛化。
+
+- external_validity_strategy_cn：以真实法庭判决作为外部地面真值，并在30个月内重复流程，同时给出针对两家MNO的业务影响估算。
+
+- what_is_not_actually_tested_cn：没有测试未起诉OA-OB对中的假阴性；没有估计阈值45分钟和特征集合的敏感性；没有用独立测试期之外的运营商数据做验证；损失节省未按严格因果推断设计。
+
+## 贡献闭环
+
+- technical_claim_cn：提出的无监督聚类+决策树DSS能够在电信CDR上以97%左右准确率把号码对分到可解释的八类行为簇，并识别出两个欺诈簇。
+
+- artifact_claim_cn：五步DSS的贡献在于把无监督聚类输出通过CART转换为可解释规则，并设计“簇归属+树正确分类”的双重欺诈标注机制。
+
+- mechanism_claim_cn：流量泵送欺诈不是传统离群点，而是系统化、非平衡话语模式的簇；因此k-means优于density-based离群点检测。
+
+- boundary_claim_cn：该结论适用于：运营商已经提供无限分钟套餐、存在高接入费差异、可以在监管诉讼环境下获得专家和法律团队支持，且数据被过滤掉没有长话的正常用户。
+
+- reusable_design_knowledge_cn：在无标签欺诈检测中，可先用无监督聚类生成伪标签，再用决策树提取少数规则，并由专家进行标注；若法律/监管要求解释，可解释性应从建模开始就作为约束，而不是事后追加。
+
+- theoretical_contribution_cn：把XAI的有监督规则提取方法（Verbeke et al.与Martens et al.）扩展到无监督聚类的伪标签上，并指出流量泵送欺诈应被视为“同质欺诈簇”而非“离群点”，从而修正传统欺诈检测的离群点假设。
+
+- how_discussion_closes_intro_gap_cn：引言声称这是首个流量泵送ML方法、首个无监督XAI电信应用、并包含真实法律结果；结论依次重申这一点，并用k-means优于离群点方法、CART可解释性和诉讼全胜三个证据闭合缺口。
+
+- overclaim_or_unsupported_leaps_cn：从“所有被诉案例胜诉”跳到“DSS整体有效”存在选择偏倚，因为未起诉样本可能包含漏网欺诈；损失节省估算未包含全部增量话务，因此40%和500万美元只是粗略上界；将“k-means在此案例上优于离群点检测”推广为流量泵送的一般性质也缺少多运营商/多时期验证。
+
+## 句级写作动作图谱
+
+### 1. Abstract S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：流量泵送是小型运营商为获取更高接入费而虚增呼入话务的欺诈行为。
+
+- rhetorical_function_cn：用一句话让读者进入特定电信欺诈类型。
+
+- depends_on_cn：无；文章起点。
+
+- sets_up_cn：后续所有问题都围绕这个欺诈类型展开。
+
+- evidence_pointer：Abstract第1句
+
+### 2. Abstract S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：流量泵送识别因缺少欺诈标签和文献稀缺而困难。
+
+- rhetorical_function_cn：指出方法缺口：不能用监督学习。
+
+- depends_on_cn：承上：欺诈行为存在。
+
+- sets_up_cn：为“无监督学习+伪标签”设计提供理由。
+
+- evidence_pointer：Abstract第2句
+
+### 3. Abstract S3–S5
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract S3–S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：提出用聚类和决策树构建DSS：先聚类得到潜在欺诈群，再用聚类成员作为标签构造决策树规则。
+
+- rhetorical_function_cn：预告制品结构和关键设计选择。
+
+- depends_on_cn：基于前句的无标签限制。
+
+- sets_up_cn：为方法章节和案例结果做路径预告。
+
+- evidence_pointer：Abstract第3–5句
+
+### 4. Abstract S6–S7
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract S6–S7
+
+- move_code：RESULT
+
+- paraphrase_cn：智利电信运营商案例中，法律团队提起的所有诉讼均获法院支持。
+
+- rhetorical_function_cn：用最有力的外部结果收束摘要。
+
+- depends_on_cn：前面描述的DSS已实施。
+
+- sets_up_cn：确立“成功业务案例”作为本文贡献标志。
+
+- evidence_pointer：Abstract第6–7句
+
+### 5. Introduction P1 S1
+
+- order：5
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：电信欺诈策略从最初免费电话演变为涉及多利益相关方、网络和技术的复杂方案。
+
+- rhetorical_function_cn：把研究放入电信业长期欺诈演化的背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：说明需要新的分析工具。
+
+- evidence_pointer：Introduction第1段第1句
+
+### 6. Introduction P2 S1–S3
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P2 S1–S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：及时识别欺诈极重要：2015年全球电信欺诈损失381亿美元，占收入1.69%。
+
+- rhetorical_function_cn：量化现实损失，建立研究重要性。
+
+- depends_on_cn：欺诈演化背景。
+
+- sets_up_cn：为机器学习干预提供必要性。
+
+- evidence_pointer：Introduction第2段第1–3句
+
+### 7. Introduction P2 S4–S5
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P2 S4–S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：欺诈不仅造成金钱损失，还损害公司声誉和客户满意度。
+
+- rhetorical_function_cn：扩展现实后果，不只是财务指标。
+
+- depends_on_cn：前面损失数字。
+
+- sets_up_cn：说明服务提供商有动机投入技术预防。
+
+- evidence_pointer：Introduction第2段第4–5句
+
+### 8. Introduction P3 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：流量泵送在多个国家给大型网络运营商造成重大损失，是电信欺诈中极重要的一种。
+
+- rhetorical_function_cn：把一般欺诈问题聚焦到本研究的主题。
+
+- depends_on_cn：前文欺诈普遍性。
+
+- sets_up_cn：解释为何选择流量泵送作为研究对象。
+
+- evidence_pointer：Introduction第3段第1句
+
+### 9. Introduction P4 S1–S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P4 S1–S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：接入费由监管机构根据规模、需求和技术制定，本意是防止垄断，却给小型运营商制造了从大竞争者网络人工产生话务的逆向激励。
+
+- rhetorical_function_cn：用经济机制解释流量泵送为什么会发生。
+
+- depends_on_cn：流量泵送现象。
+
+- sets_up_cn：为后续特征设计（通话时长、话务方向、日内规律）提供领域依据。
+
+- evidence_pointer：Introduction第4段第1–2句
+
+### 10. Introduction P5 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：近期机器学习文献提出可解释机器学习/XAI趋势；本研究需要可解释性是因为要提起法律诉讼。
+
+- rhetorical_function_cn：引入XAI知识基础，并把它与法律需求连接。
+
+- depends_on_cn：流量泵送识别需要进入法律程序。
+
+- sets_up_cn：解释为什么后续要采用决策树而非只做黑箱聚类。
+
+- evidence_pointer：Introduction第5段第1句
+
+### 11. Introduction P6 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出一个五步DSS，用于通过无监督学习和决策树进行可解释欺诈检测。
+
+- rhetorical_function_cn：首次明确论文目标。
+
+- depends_on_cn：XAI、欺诈问题、法律需要。
+
+- sets_up_cn：后面各步骤将围绕此目标展开。
+
+- evidence_pointer：Introduction第6段第1句
+
+### 12. Introduction P7 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：首次部署欺诈检测系统时没有标签，标准分类器无法使用。
+
+- rhetorical_function_cn：说明为什么不能直接套用监督分类。
+
+- depends_on_cn：五步DSS中的第三步需要聚类。
+
+- sets_up_cn：为无监督聚类生成伪标签提供合理性。
+
+- evidence_pointer：Introduction第7段第1句
+
+### 13. Introduction P8 S1–S2
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P8 S1–S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：无监督方法通常是黑箱，不利于业务洞察；受Verbeke和Martens启发，第四步用决策树把聚类标签转成规则。
+
+- rhetorical_function_cn：引入先行XAI方法并说明本研究的改编。
+
+- depends_on_cn：黑箱限制和XAI知识。
+
+- sets_up_cn：后续规则提取设计直接继承这一改编。
+
+- evidence_pointer：Introduction第8段第1–2句
+
+### 14. Introduction P9 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P9 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：最后一步由专家验证可解释规则，并应用于智利大型运营商的流量泵送研究。
+
+- rhetorical_function_cn：预告最终步骤和案例。
+
+- depends_on_cn：前四步方法。
+
+- sets_up_cn：为第四节案例结果做铺垫。
+
+- evidence_pointer：Introduction第9段第1句
+
+### 15. Introduction Contributions 第1条
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction Contributions 第1条
+
+- move_code：GAP
+
+- paraphrase_cn：这是第一个专门处理流量泵送欺诈的机器学习研究。
+
+- rhetorical_function_cn：建立领域空白。
+
+- depends_on_cn：前面只提到流量泵送被文献提及但没有专攻。
+
+- sets_up_cn：作为论文核心贡献之一。
+
+- evidence_pointer：Introduction贡献列表第1条
+
+### 16. Introduction Contributions 第2条
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction Contributions 第2条
+
+- move_code：GAP
+
+- paraphrase_cn：虽已有从机器学习方法提取规则的方法，但这是第一个针对电信欺诈预测的定制规则方法。
+
+- rhetorical_function_cn：进一步收窄缺口到“电信欺诈+规则提取”。
+
+- depends_on_cn：先有规则提取方法存在但领域不同。
+
+- sets_up_cn：突出方法组合的新颖性。
+
+- evidence_pointer：Introduction贡献列表第2条
+
+### 17. Introduction Contributions 第3条
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction Contributions 第3条
+
+- move_code：GAP
+
+- paraphrase_cn：这是XAI背景下欺诈预测的早期研究之一，且是电信领域首次无监督学习XAI。
+
+- rhetorical_function_cn：声明无监督XAI空白。
+
+- depends_on_cn：文献综述中无监督XAI缺失。
+
+- sets_up_cn：为结论部分“扩展XAI到无监督”做铺垫。
+
+- evidence_pointer：Introduction贡献列表第3条
+
+### 18. Introduction Contributions 第4条
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction Contributions 第4条
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：大多数欺诈检测论文无法报告成功业务案例；本研究展示了法律流程结果和全部诉讼胜诉。
+
+- rhetorical_function_cn：引入罕见的业务结果型贡献。
+
+- depends_on_cn：前面三项方法贡献。
+
+- sets_up_cn：为第四节法律结果和节省估算提供预告。
+
+- evidence_pointer：Introduction贡献列表第4条
+
+### 19. Introduction最后一段
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction最后一段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文结构：文献综述、所提框架、实验结果、结论。
+
+- rhetorical_function_cn：给读者清晰的阅读地图。
+
+- depends_on_cn：目标与方法已经概述。
+
+- sets_up_cn：无；纯结构路标。
+
+- evidence_pointer：Introduction最后一段
+
+### 20. Section 2.1 P2–P4
+
+- order：20
+
+- section：Section 2.1
+
+- locator：Section 2.1 P2–P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：接入费是呼叫终止成本；每个运营商对自身用户构成终端垄断，监管机构根据规模、需求和技术设定不同终止费率。
+
+- rhetorical_function_cn：解释为什么不同运营商的TR不同。
+
+- depends_on_cn：引言中接入费概念。
+
+- sets_up_cn：为“高TR运营商有欺诈激励”做铺垫。
+
+- evidence_pointer：Section 2.1第2–4段
+
+### 21. Section 2.1 P5
+
+- order：21
+
+- section：Section 2.1
+
+- locator：Section 2.1 P5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：市场份额小、覆盖率低的运营商TR更高，因此有动力人工制造来自竞争对手网络的呼叫，从接入费差价获利，即流量泵送。
+
+- rhetorical_function_cn：给出欺诈的定义性和因果机制。
+
+- depends_on_cn：TR差异和垄断终端网络。
+
+- sets_up_cn：定义需要检测的行为模式。
+
+- evidence_pointer：Section 2.1第5段
+
+### 22. Section 2.1 P6–P8
+
+- order：22
+
+- section：Section 2.1
+
+- locator：Section 2.1 P6–P8
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：通过图1说明：MNO推出无限分钟套餐，FNO通过第三方公司获取大量SIM卡，由自动系统向FNO号码发起空通话，从而赚取接入费。
+
+- rhetorical_function_cn：把正式机制转成可视化案例。
+
+- depends_on_cn：经济机制。
+
+- sets_up_cn：让读者知道实际话务模式是什么样的。
+
+- evidence_pointer：Section 2.1第6–8段与Fig.1
+
+### 23. Section 2.1最后一段
+
+- order：23
+
+- section：Section 2.1
+
+- locator：Section 2.1最后一段
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出能否用机器学习自动为MNO建模识别欺诈话务，并预告提出基于CDR的可解释聚类方法。
+
+- rhetorical_function_cn：从领域机制转向方法学目标。
+
+- depends_on_cn：欺诈现象已经清楚。
+
+- sets_up_cn：衔接2.2和2.3的文献与方法选择。
+
+- evidence_pointer：Section 2.1最后一段
+
+### 24. Section 2.2 P1
+
+- order：24
+
+- section：Section 2.2
+
+- locator：Section 2.2 P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在CDR大数据中识别欺诈如同大海捞针，人工或传统统计难以处理。
+
+- rhetorical_function_cn：建立大数据分析需求。
+
+- depends_on_cn：CDR数据源概念。
+
+- sets_up_cn：论证机器学习必要性。
+
+- evidence_pointer：Section 2.2第1段
+
+### 25. Section 2.2 P3
+
+- order：25
+
+- section：Section 2.2
+
+- locator：Section 2.2 P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：欺诈检测是类别不平衡问题，且欺诈者会动态适应检测策略。
+
+- rhetorical_function_cn：说明问题的两个技术难点。
+
+- depends_on_cn：CDR数据特征。
+
+- sets_up_cn：解释为什么需要专门设计而不是简单分类。
+
+- evidence_pointer：Section 2.2第3段
+
+### 26. Section 2.2 P4
+
+- order：26
+
+- section：Section 2.2
+
+- locator：Section 2.2 P4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：标签缺失或不准时，无监督学习是常用策略，可把观测分到同质簇并识别离群点。
+
+- rhetorical_function_cn：引入无监督方法背景。
+
+- depends_on_cn：标签缺乏这一限制。
+
+- sets_up_cn：为第三步聚类方法选择提供文献依据。
+
+- evidence_pointer：Section 2.2第4段
+
+### 27. Section 2.2 P5
+
+- order：27
+
+- section：Section 2.2
+
+- locator：Section 2.2 P5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：电信欺诈无监督工作包括基于图的话音图异常检测，以及用SOM或LDA构建用户画像并聚类。
+
+- rhetorical_function_cn：介绍现有无监督技术谱系。
+
+- depends_on_cn：无监督策略。
+
+- sets_up_cn：说明图特征和用户画像均可用于本文特征设计。
+
+- evidence_pointer：Section 2.2第5段
+
+### 28. Section 2.3 P1
+
+- order：28
+
+- section：Section 2.3
+
+- locator：Section 2.3 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：可解释机器学习因透明性和信任需求而热门，黑箱模型因无法验证决策而阻碍使用，尤其在商业分析中受法规约束。
+
+- rhetorical_function_cn：引入XAI概念并说明其业务重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为规则提取方法提供动机。
+
+- evidence_pointer：Section 2.3第1段
+
+### 29. Section 2.3 P2–P3
+
+- order：29
+
+- section：Section 2.3
+
+- locator：Section 2.3 P2–P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：可解释性可通过限制模型复杂度或事后解释实现；例如决策树剪枝、用决策树近似ANN、SHAP等方法。
+
+- rhetorical_function_cn：总结XAI技术分类。
+
+- depends_on_cn：XAI重要性。
+
+- sets_up_cn：与后续CART作为内在可解释方法相呼应。
+
+- evidence_pointer：Section 2.3第2–3段
+
+### 30. Section 2.3 P4
+
+- order：30
+
+- section：Section 2.3
+
+- locator：Section 2.3 P4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Verbeke等人和Martens等人在有监督环境中分别用ANN和SVM输出作为标签，再用决策树提取客户流失和信用评分规则。
+
+- rhetorical_function_cn：识别本研究最直接的方法学先驱。
+
+- depends_on_cn：XAI技术分类。
+
+- sets_up_cn：说明本文的无监督改编如何不同于这些监督方法。
+
+- evidence_pointer：Section 2.3第4段
+
+### 31. Section 2.3 P6
+
+- order：31
+
+- section：Section 2.3
+
+- locator：Section 2.3 P6
+
+- move_code：GAP
+
+- paraphrase_cn：大多数可解释机器学习方法针对有监督学习，尚无XAI用于无监督商业分析任务。
+
+- rhetorical_function_cn：精确指出研究空白。
+
+- depends_on_cn：前面有监督XAI文献。
+
+- sets_up_cn：为第三节“聚类标签->决策树规则”提供创新定位。
+
+- evidence_pointer：Section 2.3第6段
+
+### 32. Section 3开头 P2
+
+- order：32
+
+- section：Section 3
+
+- locator：Section 3开头 P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：目标是从图特征推导规则，使运营商能起诉欺诈者；证明欺诈行为对诉讼成功至关重要。
+
+- rhetorical_function_cn：把方法目标与法律需求合并。
+
+- depends_on_cn：引言中的法律诉讼需要。
+
+- sets_up_cn：决定后续每个步骤必须产出可解释证据。
+
+- evidence_pointer：Section 3第2段
+
+### 33. Section 3 P4
+
+- order：33
+
+- section：Section 3
+
+- locator：Section 3 P4
+
+- move_code：GAP
+
+- paraphrase_cn：该研究受Verbeke和Martens启发但不同：由于没有标签，因此用聚类创建标签，提出无监督黑箱建模的规则策略。
+
+- rhetorical_function_cn：重新声明创新点。
+
+- depends_on_cn：2.3中的监督XAI先例。
+
+- sets_up_cn：形成“无监督XAI”这一贡献标签。
+
+- evidence_pointer：Section 3第4段
+
+### 34. Section 3 P5
+
+- order：34
+
+- section：Section 3
+
+- locator：Section 3 P5
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：可解释性不仅是管理需要，而且是法律约束，因为必须清楚说明怀疑理由才能起诉。
+
+- rhetorical_function_cn：把可解释性上升为硬性要求。
+
+- depends_on_cn：法律诉讼目标。
+
+- sets_up_cn：为CART和专家验证步骤提供不可妥协的理由。
+
+- evidence_pointer：Section 3第5段
+
+### 35. Section 3 Fig.2之后
+
+- order：35
+
+- section：Section 3
+
+- locator：Section 3 Fig.2之后
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：总结五步DSS：前两步数据准备与特征工程，第三步聚类，第四步决策树，第五步专家标注。
+
+- rhetorical_function_cn：给出总体方法流程图。
+
+- depends_on_cn：第三节开头目标。
+
+- sets_up_cn：作为3.1-3.3各小节的结构标。
+
+- evidence_pointer：Section 3 Fig.2后文字
+
+### 36. Section 3.1 P1
+
+- order：36
+
+- section：Section 3.1
+
+- locator：Section 3.1 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：数据准备阶段建议使用CDR，并可选IMEI、IMSI和基站信息帮助区分同一手机打出的不同号码。
+
+- rhetorical_function_cn：定义数据源范围。
+
+- depends_on_cn：CDR作为欺诈分析基础。
+
+- sets_up_cn：支撑后续中心性特征的IMEI变量。
+
+- evidence_pointer：Section 3.1第1段
+
+### 37. Section 3.1 P2
+
+- order：37
+
+- section：Section 3.1
+
+- locator：Section 3.1 P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将每行构造为不同运营商的两个号码之间的链接，并过滤当月没有长话的用户。
+
+- rhetorical_function_cn：定义分析单元和过滤标准。
+
+- depends_on_cn：CDR数据结构。
+
+- sets_up_cn：减少数据量并突出可能欺诈的高活跃号码对。
+
+- evidence_pointer：Section 3.1第2段
+
+### 38. Section 3.1 P3
+
+- order：38
+
+- section：Section 3.1
+
+- locator：Section 3.1 P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：特征工程包括三组变量：入度/出度等中心性、月度总分钟模式、日内系统行为模式。
+
+- rhetorical_function_cn：列出特征设计的三大支柱。
+
+- depends_on_cn：流量泵送行为模式。
+
+- sets_up_cn：第四节41个变量的来源。
+
+- evidence_pointer：Section 3.1第3段
+
+### 39. Section 3.1 P4–P5
+
+- order：39
+
+- section：Section 3.1
+
+- locator：Section 3.1 P4–P5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：中心性特征可区分普通用户、呼叫中心和欺诈者；月度变量中的小时数、方差小可能反映自动系统；日内变量捕捉固定时段呼叫模式。
+
+- rhetorical_function_cn：为每类特征提供行为机制解释。
+
+- depends_on_cn：流量泵送欺诈的系统化话务特征。
+
+- sets_up_cn：帮助读者理解特征为什么有用。
+
+- evidence_pointer：Section 3.1第4–5段
+
+### 40. Section 3.1 P6
+
+- order：40
+
+- section：Section 3.1
+
+- locator：Section 3.1 P6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用Fig.3展示普通用户、呼叫中心和欺诈者的日内话务曲线：欺诈者从早7点持续到晚8点，没有正常峰值。
+
+- rhetorical_function_cn：用可视化特征说明日内变量的判别力。
+
+- depends_on_cn：呼叫模式文献。
+
+- sets_up_cn：后续用日内曲线确认簇标签。
+
+- evidence_pointer：Section 3.1第6段与Fig.3
+
+### 41. Section 3.2 P1–P2
+
+- order：41
+
+- section：Section 3.2
+
+- locator：Section 3.2 P1–P2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：假设特征工程后无监督聚类能区分欺诈与非欺诈；过滤后流量泵送不是传统离群点问题，而是系统性欺诈簇。
+
+- rhetorical_function_cn：提出可检验的领域假设。
+
+- depends_on_cn：特征工程设计。
+
+- sets_up_cn：为k-means优于离群点检测的结论提供预期。
+
+- evidence_pointer：Section 3.2第1–2段
+
+### 42. Section 3.2 P3
+
+- order：42
+
+- section：Section 3.2
+
+- locator：Section 3.2 P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：建议使用k-means，因为它是行业标准，适合大小相对均匀的簇；也已在信用卡欺诈中使用。
+
+- rhetorical_function_cn：解释为何首选k-means。
+
+- depends_on_cn：过滤后的簇同质假设。
+
+- sets_up_cn：为Table 2中的k-means对比做铺垫。
+
+- evidence_pointer：Section 3.2第3段
+
+### 43. Section 3.2 P4
+
+- order：43
+
+- section：Section 3.2
+
+- locator：Section 3.2 P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：也建议DBSCAN、HDBSCAN、OPTICS等密度聚类作为替代；根据“无免费午餐”定理应比较选择最佳方法。
+
+- rhetorical_function_cn：说明为什么做多算法benchmark。
+
+- depends_on_cn：k-means的局限和问题性质。
+
+- sets_up_cn：引出聚类质量指标。
+
+- evidence_pointer：Section 3.2第4段
+
+### 44. Section 3.2最后
+
+- order：44
+
+- section：Section 3.2
+
+- locator：Section 3.2最后
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用Silhouette、Davies-Bouldin和Calinski-Harabasz三个指标选择K和聚类方法。
+
+- rhetorical_function_cn：定义模型选择标准。
+
+- depends_on_cn：多算法比较需求。
+
+- sets_up_cn：为Table 2和Table 3的数值结果提供依据。
+
+- evidence_pointer：Section 3.2最后一段
+
+### 45. Section 3.3 P1
+
+- order：45
+
+- section：Section 3.3
+
+- locator：Section 3.3 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第四步用CART决策树把聚类输出转换成一系列规则；Verbeke和Martens使用的是C4.5。
+
+- rhetorical_function_cn：选择规则提取工具。
+
+- depends_on_cn：监督XAI先例。
+
+- sets_up_cn：为Fig.5/Fig.6的树结构做方法准备。
+
+- evidence_pointer：Section 3.3第1段
+
+### 46. Section 3.3 P2
+
+- order：46
+
+- section：Section 3.3
+
+- locator：Section 3.3 P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为精确定义欺诈案例，要求样本既属于可疑簇，又必须被CART正确分类到该簇。
+
+- rhetorical_function_cn：引入降低误诉风险的双重条件。
+
+- depends_on_cn：CART可能误分类。
+
+- sets_up_cn：解释为什么欺诈名单不是简单取整个簇。
+
+- evidence_pointer：Section 3.3第2段
+
+### 47. Section 3.3 P3–P5
+
+- order：47
+
+- section：Section 3.3
+
+- locator：Section 3.3 P3–P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：第五步依赖专家；建议组建至少三名熟悉监管和数学建模的专家，通过共识或Delphi方法标注簇。
+
+- rhetorical_function_cn：说明专家参与的必要性和流程。
+
+- depends_on_cn：法律程序需要业务判断。
+
+- sets_up_cn：为第四节专家标签和诉讼过程做铺垫。
+
+- evidence_pointer：Section 3.3第3–5段
+
+### 48. Section 3.3 P6
+
+- order：48
+
+- section：Section 3.3
+
+- locator：Section 3.3 P6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：若标注不一致，可训练第二个CART进一步分裂簇、标记为非欺诈，或换聚类配置重新执行。
+
+- rhetorical_function_cn：给出流程的容错分支。
+
+- depends_on_cn：专家共识方法。
+
+- sets_up_cn：为案例中X0二次聚类提供设计上的合理性。
+
+- evidence_pointer：Section 3.3第6段
+
+### 49. Section 4.1 P1–P3
+
+- order：49
+
+- section：Section 4.1
+
+- locator：Section 4.1 P1–P3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：2015年智利三大MNO推出无限分钟套餐，这允许小型固网运营商从这些MNO泵送话务；作者与其中两家合作2.5年。
+
+- rhetorical_function_cn：交代案例背景和合作范围。
+
+- depends_on_cn：流量泵送发生条件。
+
+- sets_up_cn：解释为何有异常话务可以分析。
+
+- evidence_pointer：Section 4.1第1–3段
+
+### 50. Section 4.1 P4–P5
+
+- order：50
+
+- section：Section 4.1
+
+- locator：Section 4.1 P4–P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：数据集来自2016年3月CDR，只保留当月至少一个45分钟以上长话的号码，最终得到469,440条CDR和107,290个OA-OB对。
+
+- rhetorical_function_cn：描述案例数据集构造。
+
+- depends_on_cn：3.1中过滤建议。
+
+- sets_up_cn：为41个特征和后续聚类提供数据规模。
+
+- evidence_pointer：Section 4.1第4–5段
+
+### 51. Table 1之后
+
+- order：51
+
+- section：Section 4.1
+
+- locator：Table 1之后
+
+- move_code：RESULT
+
+- paraphrase_cn：描述统计显示极端值：单月最多话务秒数505,704秒，一个号码最多呼叫83个不同号码，一个号码最多收到23,574个不同号码呼叫。
+
+- rhetorical_function_cn：让读者看到数据中已经出现欺诈信号。
+
+- depends_on_cn：41个特征。
+
+- sets_up_cn：为后续聚类有效性提供直观证据。
+
+- evidence_pointer：Table 1后一段
+
+### 52. Fig.4后
+
+- order：52
+
+- section：Section 4.1
+
+- locator：Fig.4后
+
+- move_code：RESULT
+
+- paraphrase_cn：图4用图结构展示两类典型欺诈模式：一个ANUM反复呼叫多个BNUM，以及多个ANUM呼叫一个BNUM，且被叫不呼出。
+
+- rhetorical_function_cn：用图形化证据说明欺诈号码对的结构特征。
+
+- depends_on_cn：中心性特征。
+
+- sets_up_cn：为规则中ANUMS-PER-BNUM和BNUMS-PER-ANUM的使用提供依据。
+
+- evidence_pointer：Fig.4后文字
+
+### 53. Section 4.2 P1
+
+- order：53
+
+- section：Section 4.2
+
+- locator：Section 4.2 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：聚类结果显示k-means比其余离群点检测算法更好，说明流量泵送与传统欺诈预测性质不同；K=3最优；OPTICS无法得到三簇解。
+
+- rhetorical_function_cn：报告主要聚类结果并给出领域结论。
+
+- depends_on_cn：Table 2数据。
+
+- sets_up_cn：为“k-means胜出”和“欺诈是簇而非离群点”贡献提供证据。
+
+- evidence_pointer：Section 4.2第1段
+
+### 54. Section 4.2 P2
+
+- order：54
+
+- section：Section 4.2
+
+- locator：Section 4.2 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：三个指标均表明k-means K=3最佳；DBSCAN和HDBSCAN表现较低；OPTICS只在DBI上更好但无法满足K=3。
+
+- rhetorical_function_cn：细化Table 2的解释。
+
+- depends_on_cn：Table 2。
+
+- sets_up_cn：正式确定采用k-means K=3。
+
+- evidence_pointer：Section 4.2第2段
+
+### 55. Section 4.2 P3
+
+- order：55
+
+- section：Section 4.2
+
+- locator：Section 4.2 P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：为处理k-means随机初始化问题，用10次随机质心运行，结果全部收敛到同一聚类解。
+
+- rhetorical_function_cn：证明聚类结果稳定。
+
+- depends_on_cn：选定k-means。
+
+- sets_up_cn：增加后续规则可信度。
+
+- evidence_pointer：Section 4.2第3段
+
+### 56. Fig.5后
+
+- order：56
+
+- section：Section 4.2
+
+- locator：Fig.5后
+
+- move_code：RESULT
+
+- paraphrase_cn：第一棵决策树简单解释三簇：大入度X1为呼叫中心/非欺诈；小入度但大出度X2为欺诈，占5%。
+
+- rhetorical_function_cn：展示第一次聚类标签的可解释规则。
+
+- depends_on_cn：k-means K=3。
+
+- sets_up_cn：引出X0需要二次聚类。
+
+- evidence_pointer：Fig.5后文字
+
+### 57. Section 4.2 P5
+
+- order：57
+
+- section：Section 4.2
+
+- locator：Section 4.2 P5
+
+- move_code：TRANSITION
+
+- paraphrase_cn：X0包含30%无极端行为的号码对，难以简单评估，因此专家决定对X0做第二次聚类，进一步识别欺诈。
+
+- rhetorical_function_cn：说明为什么需要追加一个分析阶段。
+
+- depends_on_cn：第一次聚类结果中X0的模糊性。
+
+- sets_up_cn：为Table 3和Fig.6的二次聚类提供动机。
+
+- evidence_pointer：Section 4.2第5段
+
+### 58. Fig.6后规则列表
+
+- order：58
+
+- section：Section 4.2
+
+- locator：Fig.6后规则列表
+
+- move_code：RESULT
+
+- paraphrase_cn：二次决策树给出四条规则：短平均通话和低地址共享多为普通用户；高Sd-CACC不规则行为不太可疑；下午/夜间起始时间多为非欺诈；大出度BNUMS-PER-ANUM≥19的X8被专家标为欺诈。
+
+- rhetorical_function_cn：把八个簇都变成可读规则。
+
+- depends_on_cn：二次聚类和决策树。
+
+- sets_up_cn：为最终欺诈名单和诉讼提供规则证据。
+
+- evidence_pointer：Fig.6后规则列表
+
+### 59. Section 4.2最后一段
+
+- order：59
+
+- section：Section 4.2
+
+- locator：Section 4.2最后一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用R包rpart实现RPART，以广义Gini指数分裂，并用holdout调CP参数防止过拟合。
+
+- rhetorical_function_cn：给出树实现和防过拟合细节。
+
+- depends_on_cn：CART方法选择。
+
+- sets_up_cn：为后面holdout准确率结果做方法铺垫。
+
+- evidence_pointer：Section 4.2最后一段
+
+### 60. Section 4.3 P1
+
+- order：60
+
+- section：Section 4.3
+
+- locator：Section 4.3 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：两个欺诈簇为X2（5%）和X8（2%）；结合两棵树的混淆矩阵在全部数据上的总体准确率为97.1%。
+
+- rhetorical_function_cn：汇总树规则的总体分类性能。
+
+- depends_on_cn：两次决策树。
+
+- sets_up_cn：为“规则有效”提供统计证据。
+
+- evidence_pointer：Section 4.3第1段、Table 4
+
+### 61. Section 4.3 P2
+
+- order：61
+
+- section：Section 4.3
+
+- locator：Section 4.3 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：70/30 holdout测试集总体准确率97.0%，说明树没有过拟合。
+
+- rhetorical_function_cn：报告样本外验证。
+
+- depends_on_cn：全量混淆矩阵结果。
+
+- sets_up_cn：增强规则泛化性主张。
+
+- evidence_pointer：Section 4.3第2段、Table 5
+
+### 62. Section 4.3 P3
+
+- order：62
+
+- section：Section 4.3
+
+- locator：Section 4.3 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：各簇平均日内模式与预期对应：X1呼叫中心、X2欺诈、X5普通用户，印证了标签。
+
+- rhetorical_function_cn：用独立可视化交叉验证簇标签。
+
+- depends_on_cn：Fig.3和聚类结果。
+
+- sets_up_cn：让专家标注显得可信。
+
+- evidence_pointer：Section 4.3第3段
+
+### 63. Section 4.3 P4–P6
+
+- order：63
+
+- section：Section 4.3
+
+- locator：Section 4.3 P4–P6
+
+- move_code：RESULT
+
+- paraphrase_cn：公司针对X2和X8共7463个可疑案例发起法律程序，最终7462例被起诉，法院全部认定欺诈并罚款。
+
+- rhetorical_function_cn：用外部司法结果完成有效性验证。
+
+- depends_on_cn：欺诈簇和专家标注。
+
+- sets_up_cn：支撑结论部分的业务成功主张。
+
+- evidence_pointer：Section 4.3第4–6段
+
+### 64. Section 4.3 P7
+
+- order：64
+
+- section：Section 4.3
+
+- locator：Section 4.3 P7
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：和其他欺诈检测一样，无法确认假阴性，因为未起诉非欺诈簇。
+
+- rhetorical_function_cn：主动承认评估盲区。
+
+- depends_on_cn：法律流程只覆盖可疑案例。
+
+- sets_up_cn：为结论中静态模型和未来工作做铺垫。
+
+- evidence_pointer：Section 4.3第7段
+
+### 65. Section 4.3 P8–P9
+
+- order：65
+
+- section：Section 4.3
+
+- locator：Section 4.3 P8–P9
+
+- move_code：RESULT
+
+- paraphrase_cn：该流程在30个月中每月重复：MNO提供CDR，专家给出规则建议，再向国家监管机构SUBTEL和对方运营商展示。
+
+- rhetorical_function_cn：说明DSS被持续使用，不是一次性分析。
+
+- depends_on_cn：诉讼成功经验。
+
+- sets_up_cn：支持30个月损失估算和“业务成功”贡献。
+
+- evidence_pointer：Section 4.3第8–9段
+
+### 66. Section 5 P1
+
+- order：66
+
+- section：Section 5
+
+- locator：Section 5 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文提出用无监督学习和XAI解决流量泵送的数据驱动方法，是第一个专门面向该欺诈的机器学习方案。
+
+- rhetorical_function_cn：结论开始时重述核心贡献。
+
+- depends_on_cn：全文方法和案例。
+
+- sets_up_cn：与引言贡献列表呼应。
+
+- evidence_pointer：Section 5第1段
+
+### 67. Section 5 P2
+
+- order：67
+
+- section：Section 5
+
+- locator：Section 5 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本方法扩展了可解释机器学习文献：从聚类算法中推导规则，把模型转换为支持法律程序的规则集。
+
+- rhetorical_function_cn：定位理论/方法贡献。
+
+- depends_on_cn：文献综述中的XAI缺口。
+
+- sets_up_cn：强调无监督XAI创新。
+
+- evidence_pointer：Section 5第2段
+
+### 68. Section 5 P3
+
+- order：68
+
+- section：Section 5
+
+- locator：Section 5 P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：实验证明k-means优于离群点检测算法，证实流量泵送在过滤后是清晰聚类问题而非离群点问题。
+
+- rhetorical_function_cn：把统计结果上升为领域结论。
+
+- depends_on_cn：Table 2结果。
+
+- sets_up_cn：纠正传统无监督欺诈检测“de facto”依赖离群点方法的预设。
+
+- evidence_pointer：Section 5第3段
+
+### 69. Section 5 P4
+
+- order：69
+
+- section：Section 5
+
+- locator：Section 5 P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第二个结论是CART成功使簇可解释并调整簇形状，样本外准确率97.0%，且双重条件标注方案稳健。
+
+- rhetorical_function_cn：总结方法效能的第二个维度。
+
+- depends_on_cn：树和holdout结果。
+
+- sets_up_cn：支撑“可解释性不是性能代价”的潜在含义。
+
+- evidence_pointer：Section 5第4段
+
+### 70. Section 5 P5–P7
+
+- order：70
+
+- section：Section 5
+
+- locator：Section 5 P5–P7
+
+- move_code：RESULT
+
+- paraphrase_cn：本研究不止比较性能，还报告法律结果：7462件诉讼全部获法院支持，公司估计在2.5年节省约500万美元，接入费约下降40%。
+
+- rhetorical_function_cn：用量化业务结果强化贡献。
+
+- depends_on_cn：法律程序结果。
+
+- sets_up_cn：引出“解释性作为监管约束”的一般化讨论。
+
+- evidence_pointer：Section 5第5–7段
+
+### 71. Section 5 P8
+
+- order：71
+
+- section：Section 5
+
+- locator：Section 5 P8
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：可解释性的价值不仅是获得管理洞察，还可能是监管机构要求的行动前提，如同信用评分中的Basel III。
+
+- rhetorical_function_cn：把案例贡献提升为跨领域设计知识。
+
+- depends_on_cn：法律/监管场景。
+
+- sets_up_cn：为未来XAI研究提供边界条件。
+
+- evidence_pointer：Section 5第8段
+
+### 72. Section 5 P9–P10
+
+- order：72
+
+- section：Section 5
+
+- locator：Section 5 P9–P10
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限是静态视角，欺诈者会动态调整行为；未来可用动态聚类捕捉对抗行为，或利用本研究生成的标签做监督学习和广义随机森林。
+
+- rhetorical_function_cn：承认限制并给出未来路径。
+
+- depends_on_cn：30个月重复流程中观察到的欺诈者行为变化。
+
+- sets_up_cn：无；论文结束。
+
+- evidence_pointer：Section 5第9–10段
+
+## 写作技术
+
+- gap_construction_cn：采用“多重缺口叠加”：先指出流量泵送文献稀缺（领域缺口），再指出无监督XAI商业应用空白（方法缺口），最后指出大多数欺诈论文缺乏真实业务结果（证据缺口）。三重缺口让论文同时以方法、领域和应用成功立足。
+
+- signposting_cn：在引言末尾和每节开头都给出结构预告；第三节开头专门用五步清单和Fig.2展示DSS；第二节开头也用“本节结构如下”引导文献综述。
+
+- transition_logic_cn：每个阶段末尾留下一个“待解决问题”并直接引来下一阶段；例如X0难以评估引出二次聚类，黑箱限制引出决策树，规则可信度引出holdout，规则法律效力引出专家和诉讼。
+
+- claim_evidence_rhythm_cn：先给领域机制（为什么会有欺诈），再给数据证据（描述统计与图），再给模型证据（聚类指标与稳定性），再给泛化证据（holdout），最后给外部证据（法庭判决）。证据强度逐级上升。
+
+- benchmark_narrative_cn：benchmark不是文章主角，而是被嵌入DSS“选择最佳聚类”的步骤中；通过“无免费午餐”定理引出多算法比较，用三个内部指标让选择显得客观，并额外用k-means稳定性检验保护关键结论。
+
+- theory_return_cn：结果在结论中回到两个理论性命题：一是“流量泵送是聚类问题而非离群点问题”，二是“可解释性是法律/监管约束如同信用评分”。前一个修正欺诈分析预设，后一个把XAI价值从管理洞察提升到合规层面。
+
+- contribution_positioning_cn：在引言贡献列表和结论中反复用“first”定位：第一个流量泵送ML研究、第一个无监督XAI电信应用、第一个报告完整法律结果的欺诈研究；同时通过与Verbeke/Martens的继承关系防止方法显得无源。
+
+- novelty_protection_cn：通过“真实法律诉讼全胜”和“30个月重复执行”把结果从一次性性能比较中抽离；同时主动说明无法测假阴性，用“欺诈者需大量通话所以漏网风险低”作为合理性辩护，降低外部审稿人对其证据性质的质疑。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用行业损失数据和欺诈机制把现实问题讲清
+
+- research_job_cn：建立目标欺诈的领域因果模型，明确利益相关者和监管约束
+
+- required_evidence_cn：可引用的损失数据、监管规则和欺诈行为描述
+
+- transition_to_next_cn：从“为什么重要”过渡到“为什么现有ML难做”
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述现有方法并构造缺口
+
+- research_job_cn：分类整理监督/无监督/XAI方法，确认“没有标签”和“需要解释”两个约束
+
+- required_evidence_cn：已发表的综述和代表性的监督XAI先例
+
+- transition_to_next_cn：缺口导向“无监督聚类+规则提取”的设计
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：按步骤描述DSS/方法，解释每个设计选择
+
+- research_job_cn：形成可操作的五步流程：数据准备、特征工程、聚类、规则树、专家验证
+
+- required_evidence_cn：每个步骤至少有一个领域理由或文献理由
+
+- transition_to_next_cn：从方法流程过渡到案例数据
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述数据集、过滤规则和特征表
+
+- research_job_cn：收集CDR并构造号码对级数据与特征，给出描述统计
+
+- required_evidence_cn：数据规模、变量说明、描述性统计表和可视化
+
+- transition_to_next_cn：从数据描述过渡到无监督模型选择
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告多算法benchmark和选择理由
+
+- research_job_cn：运行多种聚类算法，用多个内部质量指标和稳定性检验选优
+
+- required_evidence_cn：指标表、K值比较、稳定性结果
+
+- transition_to_next_cn：从“选好簇”过渡到“解释簇”
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用决策树和holdout展示规则及其泛化
+
+- research_job_cn：把簇标签作为目标训练CART，生成可读规则并做样本外验证
+
+- required_evidence_cn：树图、规则列表、训练/测试混淆矩阵
+
+- transition_to_next_cn：从“规则可复现”过渡到“规则有现实效力”
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用外部结果（法律、监管、业务影响）闭合论证
+
+- research_job_cn：让专家/法规/法庭验证规则，记录业务损失减少
+
+- required_evidence_cn：法律判决、重复实施记录、损失估算或因果证据
+
+- transition_to_next_cn：结论中把案例结果上升为可复用设计知识和边界条件
+
+### most_transferable_moves_cn
+
+1. 把法律/监管要求前置为“可解释性硬约束”，使DSS设计有了不可推诿的基线
+
+2. 用聚类结果作为伪标签再提取决策树规则，是无标签场景下获得可解释规则的通用套路
+
+3. 在无真值情况下用三重证据链：内部指标+样本外验证+外部司法/业务结果
+
+4. 对模糊簇进行二次聚类，展示方法可递归细化
+
+5. 主动承认无法测假阴性并用业务常识降低审稿担心
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实电信运营商CDR数据通常涉及隐私和商业许可，难以复制
+
+2. 2.5年长期咨询、30个月重复实施和与监管机构互动是独特的渠道资源
+
+3. 法律诉讼全胜的结果具有强烈领域和司法管辖区依赖性
+
+4. 专家团队的能力与监管听证经历难以标准化
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“我们提出无监督聚类+决策树”就声称XAI贡献，需要有可读规则和真实业务验证
+
+2. 不能把“所有被诉案件胜诉”当作整体精确率，因为只评价了被标记样本
+
+3. 不能把k-means在此案例上的胜出概括为所有流量泵送问题的最优方法，需要更多场景
+
+4. 不能把损失估算当作严格因果证明，否则会过度声称
+
+- single_best_description_of_the_routine_cn：先用领域机制论证“为什么这种欺诈可被识别”，再用无监督聚类创造标签，用决策树把标签翻译成人类可审查的规则，最后让法庭来当评估指标。
+
+## 分析边界
+
+文章以全文文本和嵌入图像形式提供，未提供期刊页码；Table 4以图片嵌入，位置通过正文推断；附录中超参数网格搜索细节不完整；对聚类特征敏感性和假阴性率无法从文章中获得额外证据。

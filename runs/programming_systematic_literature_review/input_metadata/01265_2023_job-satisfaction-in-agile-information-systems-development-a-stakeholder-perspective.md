@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85165629250"
+title: "Job satisfaction in agile information systems development: A stakeholder perspective"
+authors: "Huck-Fries V.; Nothaft F.; Wiesche M.; Krcmar H."
+year: "2023"
+journal: "Information and Software Technology"
+doi: "10.1016/j.infsof.2023.107289"
+---
+# Scopus title-abstract-keyword metadata
+Title: Job satisfaction in agile information systems development: A stakeholder perspective
+Abstract: Context: Agile information systems development (ISD) claims to increase employees’ job satisfaction. While previous research acknowledged increased job satisfaction among team members such as software developers, less attention has been paid to stakeholders in agile ISD. Furthermore, we lack evidence about the role of review meetings between team members and stakeholders. Objective: With the aim to tackle those current shortcomings, we set out to gain a deeper understanding on how agile ISD practices affect internal stakeholders’ job satisfaction (SJS). Method: Using a mixed methods approach, we identify predictors of SJS in an exploratory case study first. Second, we develop our theoretical model that was evaluated with a survey of agile ISD stakeholders. Results: Findings of conditional process analysis show that agile practices positively affect SJS via perceived meaningfulness and interaction frequency. Our results provide evidence that collaboration between team members and stakeholders is crucial for enhancing SJS. Conclusions: We conclude that agile ISD practices have a positive effect on SJS. These findings have several implications for theory and offer a foundation for future research on stakeholders in agile ISD. Practical implications refer to the establishment of agile practices, meaningfulness at work and awareness for agile transformations. © 2023 Elsevier B.V.
+Author keywords: Agile information systems development; Internal stakeholder; Job satisfaction; Mixed-methods; Software engineering
+Index keywords: Agile manufacturing systems; Information systems; Information use; Software engineering; 'current; Agile information system; Agile information system development; Agile practices; Development practices; Information system development; Internal stakeholder; Mixed method; Software developer; Team members; Job satisfaction
+Document type: Article
+Conference: 
+Source title: Information and Software Technology
+Year: 2023
+EID: 2-s2.0-85165629250
+DOI: 10.1016/j.infsof.2023.107289
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

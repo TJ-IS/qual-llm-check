@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85122638999"
+title: "The Impact of Pair Programming on College Students' Interest, Perceptions, and Achievement in Computer Science"
+authors: "Bowman N.A.; Jarratt L.; Culver K.C.; Segre A.M."
+year: "2021"
+journal: "ACM Transactions on Computing Education"
+doi: "10.1145/3440759"
+---
+# Scopus title-abstract-keyword metadata
+Title: The Impact of Pair Programming on College Students' Interest, Perceptions, and Achievement in Computer Science
+Abstract: Active and collaborative learning has shown considerable promise for improving student outcomes and reducing group disparities. As one common form of collaborative learning, pair programming is an adapted work practice implemented widely in higher education computing programs. In the classroom setting, it typically involves two computer science students working together on the same programming assignment. The present study examined a cluster-randomized trial of 1,198 undergraduates in 96 lab sections. Overall, pair programming had no significant effect on students' course performance; subject matter interest; plans for future coursework; or their confidence, comfort, and anxiety with computer science. These findings were consistent across various student characteristics, except that students with favorable pretest scores exhibited negative effects from pair programming. © 2021 Association for Computing Machinery.
+Author keywords: collaborative learning; college students; experimental design; Pair programming
+Index keywords: Computer programming; Education computing; Engineering education; Active and collaborative learning; Collaborative learning; College students; High educations; Pair-programming; Student achievement; Student outcomes; Student perceptions; Students' interests; Work practices; Students
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Computing Education
+Year: 2021
+EID: 2-s2.0-85122638999
+DOI: 10.1145/3440759
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

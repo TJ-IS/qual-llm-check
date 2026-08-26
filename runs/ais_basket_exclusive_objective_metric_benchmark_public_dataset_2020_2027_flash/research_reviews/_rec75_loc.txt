@@ -1,0 +1,4 @@
+pos 5067
+rk modeling the adversarial game between the adversary and the cyber defense AI agent。
+分析。新的且重要的为无证据的自我评价，模板不以形容词承担新颖性论证；原句还以问题加问题的双名词收尾。改为提出并形式化的双动词结构，删除自我评价与同位语重复。问题定义由后句该问题以任务执行中实时产生的文本、行为与结构信号为输入、以受控误报下的攻击拦截为优化目标承担，流式语义由后句任务执行中实时产生承接。
+修

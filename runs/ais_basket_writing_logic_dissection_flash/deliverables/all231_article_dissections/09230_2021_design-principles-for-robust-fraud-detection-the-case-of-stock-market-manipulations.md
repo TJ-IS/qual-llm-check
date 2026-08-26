@@ -1,0 +1,2139 @@
+# Design Principles for Robust Fraud Detection:  The Case of Stock Market Manipulations
+
+- 作者：Michael Siering; Jan Muntermann; Miha Grčar
+- 年份 / 期刊：2021 / Journal of the Association for Information Systems
+- DOI：10.17705/1jais.00657
+- 源文件：09230_2021_design-principles-for-robust-fraud-detection-the-case-of-stock-market-manipulations.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：如何构建能够抵抗欺诈者反制措施的稳健欺诈检测系统，特别是针对信息型证券市场操纵中可疑荐股文本的自动识别？
+
+- 制品与设计：一个基于DSR设计原则的稳健文本分类器集合：Classifier A使用词袋模型，Classifier B使用由营销和金融经济学理论导出的语言学特征（信息量、可读性、情感），Classifier C同时使用两种特征集，Classifier D对A和B做OR集成，Classifier E_thr在A超平面负侧边界区域SA(thr)内转用B进行判断；核心设计特征是理论引导的特征工程与集成学习。
+
+- 客观结果：朴素10折交叉验证下，A、C和E0.5的准确率约98%-99%，B约83.6%，D约87.5%；攻击模拟中，B在m>=0.3后accuracy超过A，C比A/B稳健，D和E系列在所有分类器中稳健性最好，E0.5在多数场景下最优或与最优差异不超过1个百分点。
+
+- 核心贡献：提出稳健FDS的设计原则DP1-DP3和设计特征DF1a-DF3b，证明基于理论的语言学特征与集成学习能显著提升对欺诈者反制的稳健性，并以工具主义视角为数据挖掘和设计科学研究提供方法论示范。
+
+- 整篇论证链：作者从欺诈检测系统普遍面对欺诈者自适应反制这一现实问题出发，把问题聚焦到信息型市场操纵中可疑荐股文本的自动识别；通过领域专家访谈和文献建立DR1-DR3，再以营销和金融经济学理论为基础推导信息量、可读性和情感三类语言学特征，将其升华为设计原则DP1-DP3和设计特征DF1a-DF3b，并实例化为五个分类器；作者先用Wilcoxon检验确认语言学特征具有区分力，再用10折交叉验证评估基础有效性，最后设计攻击模拟检验稳健性；结果显示理论语言学特征和集成学习在反制场景下显著提高分类稳健性；讨论部分把结果带回设计要求和理论缺口，提出设计知识、边界条件和实践含义。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学研究范式，围绕需求DR1-DR3构建设计原则DP1-DP3和设计特征DF1a-DF3b，并以实例化分类器作为IT制品，随后进行朴素评价和鲁棒性模拟评价，最终以设计知识为贡献。
+
+- 主导写作弧线判定：全文主线是从领域专家和文献导出需求，将需求映射为设计原则和具体设计特征，构建多个分类器制品，再通过naive evaluation和robustness simulation评价，最后返回设计原则和设计知识，因此属于需求—构建—评价—设计原则的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：阶段一通过领域专家和文献形成问题意识并提炼DR1-DR3；阶段二把需求转为设计原则和设计特征并构建A-E五个分类器；阶段三构建可疑与非可疑荐股语料并验证理论语言学特征的判别力；阶段四用10折交叉验证进行朴素评价；阶段五通过SVM特征权重分析和攻击模拟评价稳健性；阶段六用另一来源的非可疑文档做稳健性复检，随后在讨论中综合形成设计知识。
+
+### studies_or_phases
+
+#### 1. 问题意识与需求提炼阶段
+
+- order：1
+
+- name_cn：问题意识与需求提炼阶段
+
+- question_cn：信息型市场操纵场景下，稳健FDS应该满足哪些设计需求？
+
+- inputs_and_setting_cn：多国DSR项目联盟；市场监督当局和资本市场监管软件公司的领域专家访谈；SEC历史案例和文献。
+
+- designed_or_compared_object_cn：从专家反馈和文献中提炼DR1-DR3。
+
+- baseline_control_or_counterfactual_cn：专家对初始设计可能遭遇欺诈者反制的直觉。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：问题结构化、需求分析、专家反馈迭代。
+
+- main_result_cn：得到DR1处理大规模非结构化数据、DR2自动识别可疑文档、DR3限制对欺诈者反制的脆弱性。
+
+- argumentative_role_cn：确定整个制品设计要满足的问题边界和评价标准，尤其是DR3把稳健性写入需求。
+
+- remaining_uncertainty_cn：尚未明确用哪些特征和算法实现稳健性。
+
+- link_to_next_phase_cn：DR1-DR3成为后续设计原则和设计特征必须回应的目标。
+
+##### evidence_pointers
+
+1. Section 3.3 DR1-DR3
+
+2. 专家访谈描述
+
+3. SEC 2012b案例
+
+#### 2. 设计原则与设计特征构建阶段
+
+- order：2
+
+- name_cn：设计原则与设计特征构建阶段
+
+- question_cn：如何把DR1-DR3转化为可操作的设计原则和具体设计特征？
+
+- inputs_and_setting_cn：营销理论、金融经济学理论、行为金融、机器学习中的对抗分类和集成学习文献。
+
+- designed_or_compared_object_cn：设计原则DP1-DP3，设计特征DF1a、DF1b、DF2、DF3a、DF3b，以及五个分类器A-E。
+
+- baseline_control_or_counterfactual_cn：将词袋模型作为baseline，语言学特征作为理论增强，组合特征和集成学习作为稳健性增强。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：DSR过程模型、kernel theory到设计原则到设计特征的映射。
+
+- main_result_cn：得到DP1理论引导的知识发现、DP2自动化、DP3预见反制；DF1a词袋变换、DF1b语言学特征、DF2 SVM分类、DF3a组合特征集、DF3b集成学习；Classifier E引入边界区域SA(thr)。
+
+- argumentative_role_cn：制品的完整设计说明，建立了从理论到可检验分类器的翻译链。
+
+- remaining_uncertainty_cn：这些设计特征是否实际带来性能或稳健性提升尚未检验。
+
+- link_to_next_phase_cn：需要数据来训练和评估A-E分类器。
+
+##### evidence_pointers
+
+1. Section 3.4 DP1-DP3
+
+2. Section 3.5.1-3.5.5
+
+3. Figure 2 mapping
+
+#### 3. 语料构建与语言学特征判别性验证阶段
+
+- order：3
+
+- name_cn：语料构建与语言学特征判别性验证阶段
+
+- question_cn：理论语言学特征是否确实能区分可疑与非可疑荐股文档？
+
+- inputs_and_setting_cn：hotstocked.com归档的14,556条可疑荐股经去重后得到896条；Dow Jones Newswires分析师报告经清洗得到2,088条非可疑文档；域专家和SEC标准用于标注。
+
+- designed_or_compared_object_cn：比较可疑与非可疑两类文档在信息熵、ARI、Flesch、Fog、Polarity、Positivity、Negativity上的分布。
+
+- baseline_control_or_counterfactual_cn：Wilcoxon秩和检验的原假设为两组中位数相等。
+
+##### objective_metrics
+
+1. Wilcoxon p值
+
+2. 均值与中位数
+
+- analysis_method_cn：描述性统计、Wilcoxon秩和检验。
+
+- main_result_cn：所有语言学特征在1%水平下显著区分两类文档；可疑荐股信息量更高、更易读、情感更正。
+
+- argumentative_role_cn：为DF1b和DP1提供前置证据，说明理论特征不是任意的，而是与理论预期一致。
+
+- remaining_uncertainty_cn：单变量区分力不等于分类模型中的边际贡献，也未回答稳健性。
+
+- link_to_next_phase_cn：引导进入完整分类器的朴素评价。
+
+##### evidence_pointers
+
+1. Section 4.2 Dataset Acquisition
+
+2. Table 1 Descriptive Statistics
+
+3. Wilcoxon results
+
+#### 4. 朴素评价阶段
+
+- order：4
+
+- name_cn：朴素评价阶段
+
+- question_cn：在没有攻击的情况下，五个分类器能否有效识别可疑荐股文档？
+
+- inputs_and_setting_cn：上述2,088和896条文档构成的语料；10折分层交叉验证。
+
+- designed_or_compared_object_cn：Classifier A、B、C、D、E0.5。
+
+- baseline_control_or_counterfactual_cn：Classifier A作为经典词袋文本分类baseline；B为纯语言学特征；C为特征组合；D和E为集成。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+- analysis_method_cn：10折交叉验证、micro-averaging、带偏置代价函数的SVM训练。
+
+- main_result_cn：A、C、E0.5达到高准确率约98%-99%；B约为83.6%；D居中；A/C/E0.5表现接近。
+
+- argumentative_role_cn：证明所有设计都满足DR1和DR2的基本有效性，排除制品完全不可用的风险，并建立后续攻击模拟的baseline。
+
+- remaining_uncertainty_cn：高准确率可能只是表面性能，没有检验欺诈者反制下的稳健性。
+
+- link_to_next_phase_cn：需要攻击模拟来回答DR3和H1/H2a/H2b。
+
+##### evidence_pointers
+
+1. Section 4.3 Naive Evaluation
+
+2. Table 2 SVM Classification Results
+
+#### 5. 稳健性评价阶段
+
+- order：5
+
+- name_cn：稳健性评价阶段
+
+- question_cn：当欺诈者针对词袋特征进行同义替换攻击时，哪些设计特征和分类器更稳健？
+
+- inputs_and_setting_cn：训练好的SVM权重；WordNet和SentiWordNet作为攻击者词汇资源；模拟攻击脚本；操纵程度m从0到1变化；Classifier E取多个thr值。
+
+- designed_or_compared_object_cn：Classifier A-E在不同m和thr下的表现；SVM权重中语言学特征的重要性。
+
+- baseline_control_or_counterfactual_cn：最坏情况攻击假设：欺诈者完全知道Classifier A的特征权重，但不改变语言学特征以维持广告效果。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. F1
+
+3. Precision
+
+4. Recall
+
+- analysis_method_cn：SVM权重分析、基于文档操纵算法的攻击模拟、参数敏感性分析。
+
+- main_result_cn：H1得到支持：m>=0.3后B的accuracy超过A；H2a得到支持：C比A/B稳健；H2b得到支持：D和E系列稳健性最好，E0.5多数场景最优或与最优差距不超过1%。
+
+- argumentative_role_cn：直接回应DR3，证明理论语言学特征、组合特征和集成学习确实提高稳健性，并验证Classifier E边界区域机制。
+
+- remaining_uncertainty_cn：攻击模拟是仿真，不是真实欺诈者行为；它假设欺诈者维持营销效果并完全了解A权重。
+
+- link_to_next_phase_cn：需要检验语料来源差异是否驱动结果，因此进入替代数据源复检。
+
+##### evidence_pointers
+
+1. Section 4.4 Robustness Evaluation
+
+2. Figure 4 Robustness of Classifiers
+
+3. Appendix Algorithm for Document Manipulation
+
+#### 6. 替代数据源稳健性复检阶段
+
+- order：6
+
+- name_cn：替代数据源稳健性复检阶段
+
+- question_cn：分类结果是否由可疑/非可疑文档来源的基本差异（如新闻社写作规范）驱动？
+
+- inputs_and_setting_cn：将非可疑文档来源换成Yahoo! Finance的“Investing Ideas & Strategies”推荐。
+
+- designed_or_compared_object_cn：替换非可疑文档来源后重新运行分类实验。
+
+- baseline_control_or_counterfactual_cn：与原Dow Jones Newswires来源的结果进行比较。
+
+##### objective_metrics
+
+1. 分类性能稳定性
+
+- analysis_method_cn：重复实验、外部稳健性检验。
+
+- main_result_cn：替换非可疑来源后分类结果保持稳健，排除来源写作规范差异作为主要解释。
+
+- argumentative_role_cn：保护核心贡献不被还原为“新闻社vs促销者文档风格差异”的一次性结果，增强外部有效性。
+
+- remaining_uncertainty_cn：仍未直接检验真实欺诈者面对已公开系统后的实际行为。
+
+- link_to_next_phase_cn：把验证过的设计知识在讨论和结论中表述为一般性设计原则。
+
+##### evidence_pointers
+
+1. Discussion, last paragraph before Section 6
+
+2. Yahoo! Finance robustness check
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 指出核心问题：欺诈者会采取反制措施，因此需要稳健FDS
+
+2. 宣布研究目标：提出稳健FDS的设计原则与设计特征
+
+3. 引入知识基础：工具主义视角、理论语言学特征、集成学习
+
+4. 预告两种评价：naive evaluation和robustness simulation
+
+5. 报告主要结果：理论语言学特征与集成学习提高稳健性
+
+6. 声明影响对象：监管机构、行业和个人用户
+
+### introduction_moves
+
+1. 用多领域例子说明FDS的重要性
+
+2. 建立核心现象：欺诈者不断适应规避检测
+
+3. 用文本分类关键词例子说明反制漏洞
+
+4. 指出现有研究对欺诈文本稳健性关注不足
+
+5. 引出信息型市场操纵和pump-and-dump
+
+6. 量化操纵的投资者损失和公司声誉损失
+
+7. 介绍多国研究联盟和监管咨询委员会
+
+8. 归纳现有检测方法并指出信息型欺诈未充分研究
+
+9. 给出稳健分类器的定义
+
+10. 提出IT制品目标：可疑文档识别
+
+11. 选择DSR范式并采用构造性/主动问题求解路径
+
+12. 区分工具主义与传统数据挖掘归纳逻辑
+
+13. 宣布采用营销和金融经济学作为kernel theories
+
+14. 预告实证评价和攻击模拟评价
+
+15. 列出论文结构
+
+### theory_and_knowledge_moves
+
+1. 从金融欺诈分类综述进入证券欺诈子类
+
+2. 用Allen and Gale三分法定位信息型操纵
+
+3. 总结pump-and-dump价格效应文献
+
+4. 指出非结构化文本数据与反制研究缺口
+
+5. 引入对抗式机器学习文献中对稳健性的定义
+
+6. 总结语言学特征过去仅用于性能而非稳健性
+
+7. 总结集成学习可用于稳健性但没有kernel theory引导
+
+8. 用金融经济学、行为金融和营销理论解释荐股有效性
+
+### artifact_design_moves
+
+1. 将DR1-DR3作为需求锚点
+
+2. DP1理论引导知识发现
+
+3. DP2自动化处理与分类
+
+4. DP3预见欺诈者反制
+
+5. 将设计原则映射到DF1a-DF3b
+
+6. 逐项说明词袋、信息量、可读性、情感、SVM、特征组合、集成学习的算法实现
+
+7. 用SVM超平面和边界区域SA(thr)具体解释Classifier E的稳健性机制
+
+### evaluation_moves
+
+1. 说明评价标准选择validity和robustness
+
+2. 基于DR3聚焦最终假设H1/H2a/H2b
+
+3. 说明语料来源和清洗保证可信标签
+
+4. 用Wilcoxon检验先行验证语言学特征区分力
+
+5. 用10折交叉验证建立naive性能
+
+6. 用SVM权重分析说明语言学特征的重要性
+
+7. 用攻击模拟检验反制场景下的稳健性
+
+8. 用替代数据源复检排除来源差异
+
+9. 在Discussion中响应假设并给出边界条件
+
+### discussion_and_contribution_moves
+
+1. 把结果概括为设计原则和特征可以满足设计需求
+
+2. 把语言学特征的实证差异重新连接到营销/金融理论
+
+3. 逐一对应H1、H2a、H2b与稳健性评价结果
+
+4. 承认标签构建和样本范围的局限
+
+5. 用替代数据源保护外部有效性
+
+6. 在结论中声明理论、方法和实践贡献
+
+7. 把贡献从具体股票语料扩展到其他语言和意见欺诈领域
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 营销学广告信息内容理论
+
+2. 营销学广告可读性与广告效果理论
+
+3. 营销学情感广告理论
+
+4. 行为金融学投资者情绪理论
+
+5. 金融经济学有效市场与信息处理理论
+
+6. 对抗式机器学习和垃圾邮件稳健性研究
+
+7. 集成学习理论
+
+8. 设计科学研究中的kernel theory和justificatory knowledge
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：营销和金融经济学理论直接决定了DF1b中信息量、可读性、情感三类语言学特征的选择，DP1明确要求以kernel theory指导知识发现；集成学习观念直接决定DF3b的集成结构。理论不仅用于事后解释，而是前瞻性进入设计并被攻击模拟直接检验。
+
+- 理论到设计翻译链：广告需要信息内容才能有效 -> 欺诈者为推销股票必须提供充分信息 -> 设计DF1b中的熵特征；可读性提升广告注意和投资者反应 -> 欺诈者让荐股易读 -> 设计ARI/Flesch/Fog特征；情感广告影响消费者和投资者 -> 欺诈者用积极情绪推高需求 -> 设计Polarity/Positivity/Negativity特征；欺诈者可能通过替换单词绕过词袋检测，但又要保持广告效果 -> 语言学特征难以改变 -> 设计DF3b的Classifier E在词袋超平面边界区域转用语言学分类器；集成多个异构分类器提高可靠性 -> 设计DF3b的Classifier D/E。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：广告需要向消费者提供产品相关信息，信息内容是广告说服和购买决策的前提（Resnik & Stern, 1977; Nelson, 1970）。
+
+- mechanism_cn：欺诈者要说服投资者购买目标股票，因此可疑荐股需要包含更多信息内容。
+
+- design_requirement_cn：需要可自动计算的、能衡量荐股信息量的文本特征。
+
+- artifact_choice_cn：DF1b使用Shannon熵作为信息量特征。
+
+- evaluated_contrast_cn：可疑与非可疑荐股之间的熵值差异；有无信息量特征对分类稳健性的影响。
+
+- objective_result_cn：可疑荐股熵显著更高；Classifier B/C/E在攻击下稳健性优于纯词袋A。
+
+##### evidence_pointers
+
+1. Section 3.5.2 Information content
+
+2. Table 1 Entropy row
+
+3. Figure 4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：可读性是广告有效性的前提，且财务文本可读性影响投资者交易反应（Abruzzini, 1967; You & Zhang, 2009）。
+
+- mechanism_cn：欺诈者希望广泛投资者理解荐股，因此可疑文本应更易读。
+
+- design_requirement_cn：需要可自动计算的文本可读性特征。
+
+- artifact_choice_cn：DF1b使用ARI、Flesch、Fog三个可读性指标。
+
+- evaluated_contrast_cn：可疑与非可疑荐股的可读性差异；可读性特征在分类模型中的重要性。
+
+- objective_result_cn：可疑荐股显著更易读；Flesch出现在Classifier C前20重要特征中。
+
+##### evidence_pointers
+
+1. Section 3.5.2 Readability
+
+2. Table 1 ARI/Flesch/Fog
+
+3. Table 3 Flesch rank 20
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：广告情感影响消费者注意和态度，行为金融表明投资者受文本情绪影响（Chandy et al., 2001; Bollen & Huina, 2011）。
+
+- mechanism_cn：欺诈者需要制造积极情绪以提高需求，因此可疑荐股情感更积极。
+
+- design_requirement_cn：需要可自动计算的文档情感特征。
+
+- artifact_choice_cn：DF1b使用哈佛词典计算Polarity、Positivity、Negativity。
+
+- evaluated_contrast_cn：可疑与非可疑荐股的情感差异；Polarity在分类模型中的权重。
+
+- objective_result_cn：可疑荐股Polarity和Positivity显著更高，Negativity显著更低；Polarity是Classifier C中最高权重的语言学特征。
+
+##### evidence_pointers
+
+1. Section 3.5.2 Sentiment
+
+2. Table 1 sentiment rows
+
+3. Table 3 Polarity rank 3
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：集成学习利用基学习器的分歧提高整体准确率和可靠性（Dietterich, 1997; Valentini & Masulli, 2002）。
+
+- mechanism_cn：欺诈者可以针对词袋特征替换关键词，但很难同时规避语言学特征；多个分类器联合决策更难以被单一攻击击穿。
+
+- design_requirement_cn：需要组合异构特征或集成异构分类器以降低被反制的脆弱性。
+
+- artifact_choice_cn：DF3a的Classifier C组合词袋与语言学特征；DF3b的Classifier D做OR集成、Classifier E在超平面边界区域转用B。
+
+- evaluated_contrast_cn：m增大时C、D、E与A、B的准确率和F1差异；E的不同thr敏感性。
+
+- objective_result_cn：C比A/B稳健，D和E系列最稳健，E0.5多数场景最优或接近最优。
+
+##### evidence_pointers
+
+1. Section 3.5.4-3.5.5
+
+2. Figure 4
+
+3. Section 4.4 results
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：欺诈者会调整内容规避检测，文本分类器面对的是恶意自适应对手（Biggio et al., 2011; Webb et al., 2005）。
+
+- mechanism_cn：最可能的攻击是替换高权重关键词；被推过超平面的文档会落在负侧边界区域SA(thr)。
+
+- design_requirement_cn：需要一种即使在边界区域也能正确识别被修改文档的决策机制。
+
+- artifact_choice_cn：Classifier E_thr：如果A(x)落在负侧且|A(x)|<thr，则调用基于语言学特征的Classifier B重新判断。
+
+- evaluated_contrast_cn：不同thr下E与D、C、A、B在攻击模拟中的表现。
+
+- objective_result_cn：E0.5在几乎全部m水平下表现最好或与最好者差异不超过1%；极端情况E_infty=D，E_0=A。
+
+##### evidence_pointers
+
+1. Section 3.5.5 Equations 8-12
+
+2. Figure 3
+
+3. Figure 4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 描述性统计验证：用Wilcoxon秩和检验检验语言学特征对两类文档的判别力
+
+2. 朴素评价：10折分层交叉验证评估基础分类性能
+
+3. 特征重要性分析：用SVM权重排序说明语言学特征在分类中的贡献
+
+4. 对抗攻击模拟：按Appendix算法替换高权重词为同义词，评估不同操纵程度m下的性能
+
+5. 参数敏感性分析：对Classifier E的thr取多个值比较稳健性
+
+6. 替代数据源复检：换用Yahoo! Finance非可疑来源检验结果稳健性
+
+- why_these_evaluations_cn：DR1和DR2要求系统能处理大规模文本并自动分类，所以先用交叉验证的naive evaluation证明基本validity；DR3要求系统在欺诈者反制下仍可靠，因此必须用攻击模拟评价robustness；由于语言学特征是理论驱动的，先用Wilcoxon验证单变量区分力，再用SVM权重说明其在模型中的实际作用；由于结果可能受训练来源差异影响，最后用替代数据源复检保护外部有效性。
+
+- benchmark_and_contrast_chain_cn：Classifier A作为经典词袋baseline；Classifier B检验理论语言学特征的独立价值；Classifier C通过特征组合检验DF3a；Classifier D通过OR集成检验DF3b的简单形式；Classifier E通过边界区域转用B检验DF3b的更精细形式；攻击模拟让m从0增大，比较不同设计在同一种威胁模型下的性能降级速度，从而把设计选择与稳健性差异连接起来。
+
+### claim_evidence_ledger
+
+#### 1. 理论语言学特征在无攻击时也能有效分类（H1基础）
+
+- claim_cn：理论语言学特征在无攻击时也能有效分类（H1基础）
+
+- evidence_cn：Classifier B在10折交叉验证下accuracy 83.61%，suspicious recall 86.84%；Wilcoxon显示所有语言学特征显著区分两类
+
+- status_cn：支持
+
+#### 2. 在攻击下，纯语言学分类器优于纯词袋分类器（H1）
+
+- claim_cn：在攻击下，纯语言学分类器优于纯词袋分类器（H1）
+
+- evidence_cn：攻击模拟中Classifier B在m>=0.3时accuracy超过A，m>=0.4时F1超过A
+
+- status_cn：支持
+
+#### 3. 在攻击下，组合特征集分类器优于单一特征集分类器（H2a）
+
+- claim_cn：在攻击下，组合特征集分类器优于单一特征集分类器（H2a）
+
+- evidence_cn：Classifier C在攻击模拟中比A和B更稳健
+
+- status_cn：支持
+
+#### 4. 在攻击下，集成学习分类器优于单一特征集分类器（H2b）
+
+- claim_cn：在攻击下，集成学习分类器优于单一特征集分类器（H2b）
+
+- evidence_cn：Classifier D和E系列在攻击模拟中表现出最好的稳健性，E0.5多数场景最优或与最优差异不超过1%
+
+- status_cn：支持
+
+#### 5. Classifier E的边界区域机制有效
+
+- claim_cn：Classifier E的边界区域机制有效
+
+- evidence_cn：E0.5在绝大多数m和thr场景下优于D，也优于直接用单一分类器；极端情况下退化为D或A
+
+- status_cn：支持
+
+#### 6. 结果不是训练来源差异造成的
+
+- claim_cn：结果不是训练来源差异造成的
+
+- evidence_cn：换用Yahoo! Finance非可疑文档后分类结果保持稳健
+
+- status_cn：支持
+
+- internal_validity_strategy_cn：使用k折交叉验证避免过乐观；剔除重复可疑荐股和纯表格非可疑文档避免重复信息；用带偏置代价函数处理不平衡；攻击模拟采用最坏情况假设（攻击者知道A全部权重）以构建强威胁模型；通过多个thr和多个m参数做敏感性分析。
+
+- external_validity_strategy_cn：使用SEC公开标准识别可疑文档，非可疑文档来自权威金融新闻社；通过领域专家和金融监督当局校准标签；用第二个非可疑来源复检；在讨论中明确样本只覆盖自披露付费荐股和英语文档。
+
+- what_is_not_actually_tested_cn：没有直接测试真实欺诈者在系统公开后的行为，只测试了模拟攻击；没有检验欺诈者同时修改语言学特征以牺牲部分广告效果的情形；没有覆盖所有可疑荐股类型（仅自披露付费荐股）；没有在不同语言、不同市场和不同欺诈类型上做直接验证。
+
+## 贡献闭环
+
+- technical_claim_cn：基于理论语言学特征与集成学习的文本分类器能在欺诈者同义替换攻击下保持更高的准确率和F1。
+
+- artifact_claim_cn：Classifier C的特征组合和Classifier D/E的集成结构，尤其是Classifier E利用词袋超平面边界区域SA(thr)转用语言学分类器的机制，是稳健性提升的可识别设计部分。
+
+- mechanism_claim_cn：语言学特征与广告效果绑定，欺诈者若为规避检测而大幅修改这些特征就会削弱荐股的说服力，因此以语言学特征为基础的分类器比纯词袋分类器更难被攻击。
+
+- boundary_claim_cn：本文结论适用于英语信息型市场操纵中的可疑股票推荐文档，以自披露付费荐股为主要样本，并假设欺诈者维持广告效果且主要使用同义替换攻击；在其他语言、欺诈类型和真实动态攻击下需要进一步验证。
+
+- reusable_design_knowledge_cn：提出DP1理论引导的知识发现、DP2自动化处理与分类、DP3预见欺诈者反制，以及DF1a-DF3b五个设计特征，可作为构建稳健文本欺诈检测系统的可复用要求、过程和权衡。
+
+- theoretical_contribution_cn：以工具主义视角展示如何将营销和金融经济学作为kernel theories指导制品构建并产生设计知识，说明从基础主义到工具主义的转变可以为数据挖掘问题求解带来贡献；同时扩展了DSR中设计原则和justificatory knowledge的实证示范。
+
+- how_discussion_closes_intro_gap_cn：引言指出欺诈文本稳健性少被研究，讨论部分用攻击模拟证据直接回应这一缺口，说明理论语言学特征和集成学习能够抵抗反制；通过替代数据源复检排除“仅由来源差异驱动”的替代解释，从而把贡献从具体数据集提升为可复用设计知识。
+
+- overclaim_or_unsupported_leaps_cn：作者在结论中称“显著增加稳健性”，证据主要来自仿真攻击而非真实欺诈者行为；将设计原则推广到其他领域和语言时缺少直接证据；Classifier B在无攻击时准确率相对低，作者更多依赖攻击场景来为理论特征辩护；对Classifier E的边界区域机制，作者没有直接证明被修改文档确实落在SA(thr)内，只是基于几何直觉和仿真。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者提出核心挑战：构建稳健自动欺诈检测系统，需要缓解欺诈者反制措施。
+
+- rhetorical_function_cn：开门见山点明问题域和难点。
+
+- depends_on_cn：无
+
+- sets_up_cn：为全文主任务——稳健FDS——确定问题。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究的产出是稳健FDS的设计原则和对应设计特征。
+
+- rhetorical_function_cn：宣布DSR制品层面的贡献。
+
+- depends_on_cn：核心问题已经提出。
+
+- sets_up_cn：提示评价对象是设计原则实例化后的制品。
+
+- evidence_pointer：Abstract second sentence
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者采用工具主义视角，用理论语言学特征和集成学习作为建设稳健分类器的辩护知识。
+
+- rhetorical_function_cn：表明设计与一般数据挖掘不同，有理论输入。
+
+- depends_on_cn：目标已经声明。
+
+- sets_up_cn：后文的kernel theory和设计原则由此引出。
+
+- evidence_pointer：Abstract third sentence
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者将进行识别可疑荐股的naive评价和模拟欺诈者反制的robustness评价。
+
+- rhetorical_function_cn：预告两阶段评价结构。
+
+- depends_on_cn：需要有分类器和数据。
+
+- sets_up_cn：让读者知道结论的证据基础。
+
+- evidence_pointer：Abstract fourth sentence
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示理论语言学特征和集成学习能显著提高分类器稳健性。
+
+- rhetorical_function_cn：提前给出核心经验结论。
+
+- depends_on_cn：两阶段评价结果。
+
+- sets_up_cn：为贡献声明做铺垫。
+
+- evidence_pointer：Abstract fifth sentence
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者讨论对监管当局、行业和个人用户的意义。
+
+- rhetorical_function_cn：扩大结果影响面。
+
+- depends_on_cn：结果已经报告。
+
+- sets_up_cn：后续Discussion和Conclusion的实践含义。
+
+- evidence_pointer：Abstract sixth sentence
+
+### 7. P1 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：FDS在商业和社会中越来越重要，并给出了员工沟通、财务披露、交易等例子。
+
+- rhetorical_function_cn：建立领域重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：让后续对稳健性的讨论有现实锚点。
+
+- evidence_pointer：Introduction P1 S1
+
+### 8. P1 S2
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：欺诈检测的共同问题是欺诈者不断调整行为来规避现有系统。
+
+- rhetorical_function_cn：引入研究问题背后的敌手行为。
+
+- depends_on_cn：FDS重要性已经确立。
+
+- sets_up_cn：为DR3和稳健性设计埋下伏笔。
+
+- evidence_pointer：Introduction P1 S2
+
+### 9. P1 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：例如文本分类系统依赖关键词，一旦关键词暴露，欺诈者会更换措辞；但目前对欺诈文本识别稳健性的研究很少。
+
+- rhetorical_function_cn：表明现有方法在反制下的脆弱性和研究缺口。
+
+- depends_on_cn：敌手行为现象。
+
+- sets_up_cn：引出本文要填补缺口。
+
+- evidence_pointer：Introduction P1 S3
+
+### 10. P1 S4
+
+- order：10
+
+- section：Introduction
+
+- locator：P1 S4
+
+- move_code：GAP
+
+- paraphrase_cn：作者通过多年DSR项目和跨国联盟来回应这一理论和实践缺口，聚焦信息型市场操纵。
+
+- rhetorical_function_cn：明确宣告研究定位。
+
+- depends_on_cn：缺口已经建立。
+
+- sets_up_cn：后面会给DSR过程和具体场景。
+
+- evidence_pointer：Introduction P1 S4
+
+### 11. P2 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：信息型市场操纵中，欺诈者通过虚假网站、垃圾邮件和合法网站广告传播高度正面但虚假的信息。
+
+- rhetorical_function_cn：具体化研究对象为信息型操纵。
+
+- depends_on_cn：问题聚焦在信息型欺诈。
+
+- sets_up_cn：为pump-and-dump机制和危害做说明。
+
+- evidence_pointer：Introduction P2 S1
+
+### 12. P2 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：欺诈者通常采用低价买入、散布荐股、抬高价格后卖出的pump-and-dump策略，投资者和发行公司都会遭受损失。
+
+- rhetorical_function_cn：强调现实后果，说明为什么值得研究。
+
+- depends_on_cn：信息型操纵现象已经描述。
+
+- sets_up_cn：为监管机关和行业用户的重要性提供依据。
+
+- evidence_pointer：Introduction P2 S2
+
+### 13. P2 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P2 S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：研究联盟由大学、金融机构、IT服务商和市场监督当局共同组成。
+
+- rhetorical_function_cn：表明问题来自真实领域需求。
+
+- depends_on_cn：现实后果已经说明。
+
+- sets_up_cn：后面的领域专家访谈和DR1-DR3有了可信来源。
+
+- evidence_pointer：Introduction P2 S3
+
+### 14. P3 S1
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究提出检测欺诈网站或消息的方法，财务欺诈检测也是重要领域，并且已有证券欺诈检测研究。
+
+- rhetorical_function_cn：公平承认已有进展。
+
+- depends_on_cn：领域背景已经建立。
+
+- sets_up_cn：随后用对比方式划出缺口。
+
+- evidence_pointer：Introduction P3 S1
+
+### 15. P3 S2
+
+- order：15
+
+- section：Introduction
+
+- locator：P3 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：但信息型欺诈尤其是欺诈性荐股的稳健分类仍未得到充分研究。
+
+- rhetorical_function_cn：明确指出研究空白。
+
+- depends_on_cn：已有研究被总结。
+
+- sets_up_cn：为本文robustness角度提供位置。
+
+- evidence_pointer：Introduction P3 S2
+
+### 16. P3 S3
+
+- order：16
+
+- section：Introduction
+
+- locator：P3 S3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：稳健分类器被定义为无需改变初始稳定结构就能抵抗变化。
+
+- rhetorical_function_cn：给出关键概念定义，避免歧义。
+
+- depends_on_cn：已有分类器的问题被限定。
+
+- sets_up_cn：与DR3和robustness evaluation直接对应。
+
+- evidence_pointer：Introduction P3 S3
+
+### 17. P4 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文开发一个IT制品，评估文档是否涉嫌欺诈，并基于新设计原则和新设计特征实现稳健分类。
+
+- rhetorical_function_cn：明确研究产出和判断标准。
+
+- depends_on_cn：缺口和定义已经建立。
+
+- sets_up_cn：为制品设计章节做总纲。
+
+- evidence_pointer：Introduction P4 S1
+
+### 18. P4 S2
+
+- order：18
+
+- section：Introduction
+
+- locator：P4 S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者采用问题求解的DSR范式，遵循Kuechler和Vaishnavi过程模型来制定设计原则和特征。
+
+- rhetorical_function_cn：为研究方法提供依据。
+
+- depends_on_cn：制品目标已经声明。
+
+- sets_up_cn：后续research process和design principles的元结构。
+
+- evidence_pointer：Introduction P4 S2
+
+### 19. P4 S3
+
+- order：19
+
+- section：Introduction
+
+- locator：P4 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者采用工具主义视角，认为可以自由组合不同理论和科学知识传统来解决问题，这与传统数据挖掘归纳逻辑不同。
+
+- rhetorical_function_cn：定位理论使用的哲学立场，为跨领域kernel theory铺路。
+
+- depends_on_cn：DSR范式已经选择。
+
+- sets_up_cn：后文营销和金融理论作为justificatory knowledge。
+
+- evidence_pointer：Introduction P4 S3
+
+### 20. P4 S4
+
+- order：20
+
+- section：Introduction
+
+- locator：P4 S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者将进行实证有效性评价和反制模拟，并在开头列出论文结构。
+
+- rhetorical_function_cn：预告评价设计和阅读地图。
+
+- depends_on_cn：方法与理论立场已说明。
+
+- sets_up_cn：为Evaluation和Discussion章节做准备。
+
+- evidence_pointer：Introduction P4 S4
+
+### 21. P1 S1
+
+- order：21
+
+- section：Research Background 2.1
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：数据挖掘已被应用于多种金融欺诈，Ngai等把金融欺诈分为银行、保险、证券和其他类别。
+
+- rhetorical_function_cn：建立领域知识地图。
+
+- depends_on_cn：无
+
+- sets_up_cn：将证券欺诈定位为其中一个较少研究的子类。
+
+- evidence_pointer：Section 2.1 P1
+
+### 22. P2 S1-S2
+
+- order：22
+
+- section：Research Background 2.1
+
+- locator：P2 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：很少研究检测证券和商品市场操纵；操纵可分为信息型、交易型和行动型，信息型操纵因互联网扩散而越来越受关注。
+
+- rhetorical_function_cn：缩窄到信息型操纵并指出已有文献的空白。
+
+- depends_on_cn：金融欺诈分类框架。
+
+- sets_up_cn：让读者知道选择荐股文本作为研究对象的理由。
+
+- evidence_pointer：Section 2.1 P2
+
+### 23. P3 S1-S3
+
+- order：23
+
+- section：Research Background 2.1
+
+- locator：P3 S1-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：欺诈性荐股会增加交易量，操纵期内价格上升，此后价格跌回甚至低于原水平。
+
+- rhetorical_function_cn：说明操纵的机制和市场后果。
+
+- depends_on_cn：信息型操纵被定位。
+
+- sets_up_cn：为该领域欺诈检测的重要性提供实证基础。
+
+- evidence_pointer：Section 2.1 P3
+
+### 24. P4 S1-S2
+
+- order：24
+
+- section：Research Background 2.1
+
+- locator：P4 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：证券操纵检测整体仍不充分，金融新闻或投资通讯这类非结构化文本几乎没有被分析，欺诈者反制措施也未研究。
+
+- rhetorical_function_cn：明确两个缺口：非结构化文本检测和反制对策。
+
+- depends_on_cn：已有证券操纵研究被总结。
+
+- sets_up_cn：为本文使用文本挖掘和robustness模拟定位。
+
+- evidence_pointer：Section 2.1 P4
+
+### 25. P1 S1-S2
+
+- order：25
+
+- section：Research Background 2.2.1
+
+- locator：P1 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：FDS需要好的分类性能，但面对智能恶意对手时，其挑战与传统分类问题非常不同。
+
+- rhetorical_function_cn：引入对抗式机器学习视角。
+
+- depends_on_cn：前面已经指出欺诈者会适应。
+
+- sets_up_cn：为robustness需求提供技术依据。
+
+- evidence_pointer：Section 2.2.1 P1
+
+### 26. P2 S1-S2
+
+- order：26
+
+- section：Research Background 2.2.1
+
+- locator：P2 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有研究通过特征处理适应攻击，但语言学特征几乎没有被用于提高稳健性，且特征选择多为临时启发而非理论指导。
+
+- rhetorical_function_cn：指出语言学特征用于robustness的空白以及缺乏理论依据的问题。
+
+- depends_on_cn：对抗式机器学习背景。
+
+- sets_up_cn：引出DP1和DF1b中的理论语言学特征。
+
+- evidence_pointer：Section 2.2.1 P2
+
+### 27. P3 S1-S2
+
+- order：27
+
+- section：Research Background 2.2.1
+
+- locator：P3 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：另一类研究用多分类器投票或平均来提升稳健性，但没有研究用相关kernel theory指导分类器构建。
+
+- rhetorical_function_cn：点出集成学习已有但缺少理论指导。
+
+- depends_on_cn：稳健性研究文献。
+
+- sets_up_cn：为DF3b和DP1的结合建立必要性。
+
+- evidence_pointer：Section 2.2.1 P3
+
+### 28. P1 S1-S3
+
+- order：28
+
+- section：Research Background 2.2.2
+
+- locator：P1 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：金融经济学假设信息处理是投资决策基础，行为金融认为信息呈现方式和情绪会影响决策，营销学认为荐股是一种影响信息处理和购买行为的广告。
+
+- rhetorical_function_cn：引入三组kernel theory。
+
+- depends_on_cn：前面已指出文献空白。
+
+- sets_up_cn：为信息量、可读性和情感三类特征提供理论来源。
+
+- evidence_pointer：Section 2.2.2 P1
+
+### 29. P2 S1-S3
+
+- order：29
+
+- section：Research Background 2.2.2
+
+- locator：P2 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：广告信息内容重要；消费者用广告获取产品信息，非信息性广告可能自我失败；金融产品价格由信息驱动，所以金融广告应重视信息内容。
+
+- rhetorical_function_cn：推导“信息量”作为检测特征。
+
+- depends_on_cn：营销和金融理论已引入。
+
+- sets_up_cn：DF1b中Shannon熵特征。
+
+- evidence_pointer：Section 2.2.2 P2
+
+### 30. P3 S1-S3
+
+- order：30
+
+- section：Research Background 2.2.2
+
+- locator：P3 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：可读性是广告有效性的前提，广告商让广告易读；财务公告可读性影响投资者交易行为。
+
+- rhetorical_function_cn：推导“可读性”作为检测特征。
+
+- depends_on_cn：营销理论中广告效果要素。
+
+- sets_up_cn：DF1b中ARI/Flesch/Fog特征。
+
+- evidence_pointer：Section 2.2.2 P3
+
+### 31. P4 S1-S3
+
+- order：31
+
+- section：Research Background 2.2.2
+
+- locator：P4 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：情感广告能增强注意和记忆，产品相关情绪沟通会强化态度；行为金融认为投资者受帖子和新闻情绪影响。
+
+- rhetorical_function_cn：推导“情感”作为检测特征。
+
+- depends_on_cn：营销与行为金融理论。
+
+- sets_up_cn：DF1b中情感指标。
+
+- evidence_pointer：Section 2.2.2 P4
+
+### 32. P1 S1-S2
+
+- order：32
+
+- section：Research Methodology 3.1
+
+- locator：P1 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：DSR追求满足问题要求的satisficing解而非最优解，问题分析和领域知识对解决方案非常重要。
+
+- rhetorical_function_cn：为后续需求驱动设计提供方法论辩护。
+
+- depends_on_cn：之前选择DSR范式。
+
+- sets_up_cn：将DR1-DR3和kernel theory作为解构组件。
+
+- evidence_pointer：Section 3.1 P1
+
+### 33. P2 S1-S4
+
+- order：33
+
+- section：Research Methodology 3.1
+
+- locator：P2 S1-S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：DSR中理论有双重角色：非IS领域的kernel theory可以指导搜索，DSR又通过设计原则提供处方性知识。
+
+- rhetorical_function_cn：解释为什么引入营销/金融理论并输出设计原则。
+
+- depends_on_cn：DSR范式已经确立。
+
+- sets_up_cn：DP1-DP3的定位和granularity。
+
+- evidence_pointer：Section 3.1 P2
+
+### 34. P1 S1-S5
+
+- order：34
+
+- section：Research Methodology 3.2
+
+- locator：P1 S1-S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：研究遵循Kuechler和Vaishnavi过程模型：先问题意识，再suggestion产生设计原则，再development映射设计特征，再evaluation，最后conclusion编码设计知识。
+
+- rhetorical_function_cn：为全文阶段结构提供路线图。
+
+- depends_on_cn：DSR范式已选定。
+
+- sets_up_cn：后续章节按该过程组织。
+
+- evidence_pointer：Section 3.2 and Figure 1
+
+### 35. P1 S1-S3
+
+- order：35
+
+- section：Research Methodology 3.3
+
+- locator：P1 S1-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：信息型操纵以往只属于少数中间商，如今几乎任何人可低成本在网上散布谣言，检测更难。
+
+- rhetorical_function_cn：强调问题随技术变化而加剧。
+
+- depends_on_cn：信息型操纵概念已介绍。
+
+- sets_up_cn：引出专家对处理大规模网络文档的要求。
+
+- evidence_pointer：Section 3.3 P1
+
+### 36. P2 S1-S2
+
+- order：36
+
+- section：Research Methodology 3.3
+
+- locator：P2 S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：领域专家报告必须处理不断增长的网页文档，由此得出DR1：支持大规模非结构化数据处理。
+
+- rhetorical_function_cn：把专家需求形式化为第一条设计需求。
+
+- depends_on_cn：问题严重性已经建立。
+
+- sets_up_cn：作为后续DP1/DP2的输入。
+
+- evidence_pointer：Section 3.3 DR1
+
+### 37. P3 S1-S3
+
+- order：37
+
+- section：Research Methodology 3.3
+
+- locator：P3 S1-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：人工处理大量文档不现实，需自动化分类；但完全自动化又因法院裁决要求而不可能，因此FDS应聚焦可疑文档并做初步分类。
+
+- rhetorical_function_cn：确立DR2：自动识别可疑文档，而非完全替代人类判断。
+
+- depends_on_cn：DR1已经提出。
+
+- sets_up_cn：为自动化文本分类器DF2设定边界。
+
+- evidence_pointer：Section 3.3 DR2
+
+### 38. P4 S1-S2
+
+- order：38
+
+- section：Research Methodology 3.3
+
+- locator：P4 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：专家凭其他操纵类型经验推断，操纵者会意识到FDS的存在并调整行为。
+
+- rhetorical_function_cn：将稳健性需求从“外部理论”转为“领域专家直接反馈”。
+
+- depends_on_cn：前两条需求已获得肯定。
+
+- sets_up_cn：引出DR3。
+
+- evidence_pointer：Section 3.3 P4
+
+### 39. P5 S1
+
+- order：39
+
+- section：Research Methodology 3.3
+
+- locator：P5 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：由此得出DR3：系统无需重新配置即可在操纵者调整写作风格时提供可靠分类。
+
+- rhetorical_function_cn：把反制问题正式化。
+
+- depends_on_cn：专家反馈。
+
+- sets_up_cn：决定robustness evaluation和DP3。
+
+- evidence_pointer：Section 3.3 DR3
+
+### 40. P1 S1-S2
+
+- order：40
+
+- section：Research Methodology 3.4
+
+- locator：P1 S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为满足DR1和DR2，需要知识发现过程提取模式，而最重要的环节是理解问题并选择合适的特征集。
+
+- rhetorical_function_cn：把数据处理需求转成对特征工程的要求。
+
+- depends_on_cn：DR1和DR2。
+
+- sets_up_cn：为理论引导特征选择铺路。
+
+- evidence_pointer：Section 3.4 P1
+
+### 41. P2 S1-S2
+
+- order：41
+
+- section：Research Methodology 3.4
+
+- locator：P2 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：pump-and-dump的目的是说服投资者买入股票，所以欺诈者会以最大化欺诈效果的方式组织文本，金融经济学和营销理论因此可能有助识别相关文档特征。
+
+- rhetorical_function_cn：把理论从“解释”推向“设计理由”。
+
+- depends_on_cn：信息型操纵机制。
+
+- sets_up_cn：DP1的理论引导知识发现原则。
+
+- evidence_pointer：Section 3.4 P2
+
+### 42. P3
+
+- order：42
+
+- section：Research Methodology 3.4
+
+- locator：P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第一个设计原则DP1：FDS开发过程应由解释欺诈效果的kernel theory来引导。
+
+- rhetorical_function_cn：将机制转化为设计原则。
+
+- depends_on_cn：营销/金融理论机制。
+
+- sets_up_cn：约束后续所有特征选择和分类器构建。
+
+- evidence_pointer：Section 3.4 DP1
+
+### 43. P4
+
+- order：43
+
+- section：Research Methodology 3.4
+
+- locator：P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第二个设计原则DP2：FDS应提供自动化的文档处理和分类（可疑vs非可疑）。
+
+- rhetorical_function_cn：把DR1和DR2整合为设计原则。
+
+- depends_on_cn：DR1和DR2。
+
+- sets_up_cn：DF2和SVM分类器的直接原则依据。
+
+- evidence_pointer：Section 3.4 DP2
+
+### 44. P5
+
+- order：44
+
+- section：Research Methodology 3.4
+
+- locator：P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第三个设计原则DP3：FDS应预见欺诈者反制，在文档被修改后仍提供可靠分类。
+
+- rhetorical_function_cn：把DR3转为直接设计约束。
+
+- depends_on_cn：DR3和对抗式机器学习文献。
+
+- sets_up_cn：DF3a和DF3b的稳健性设计。
+
+- evidence_pointer：Section 3.4 DP3
+
+### 45. P1 S1-S2
+
+- order：45
+
+- section：Research Methodology 3.5
+
+- locator：P1 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：根据设计原则，作者开发了五个设计特征：DF1a和DF1b文档变换、DF2自动分类、DF3a和DF3b稳健性增强。
+
+- rhetorical_function_cn：给出制品的总体设计地图。
+
+- depends_on_cn：DP1-DP3。
+
+- sets_up_cn：后续每个设计特征的详细说明。
+
+- evidence_pointer：Section 3.5 P1 and Figure 2
+
+### 46. P1 S1-S5
+
+- order：46
+
+- section：Research Methodology 3.5.1
+
+- locator：P1 S1-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF1a用词袋模型转换文档，包括去停用词、词频阈值、词干化和TF-IDF加权，并过滤股票符号、公司名和免责声明。
+
+- rhetorical_function_cn：描述经典文本分类baseline的具体实现。
+
+- depends_on_cn：DP2自动化处理。
+
+- sets_up_cn：Classifier A的输入基础。
+
+- evidence_pointer：Section 3.5.1
+
+### 47. P1-P4
+
+- order：47
+
+- section：Research Methodology 3.5.2
+
+- locator：P1-P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF1b把信息量、可读性和情感作为语言学特征，分别用熵、ARI/Flesch/Fog和词典情感指标测量。
+
+- rhetorical_function_cn：把理论转化为可计算特征。
+
+- depends_on_cn：营销/金融理论命题。
+
+- sets_up_cn：Classifier B、C、E中的语言学特征输入。
+
+- evidence_pointer：Section 3.5.2
+
+### 48. P1-P3
+
+- order：48
+
+- section：Research Methodology 3.5.3
+
+- locator：P1-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF2用SVM监督学习训练分类器；Classifier A用词袋，Classifier B用语言学特征。
+
+- rhetorical_function_cn：将文档表示接入自动分类算法。
+
+- depends_on_cn：DF1a和DF1b。
+
+- sets_up_cn：为后续组合和集成比较建立A/B两个基础分类器。
+
+- evidence_pointer：Section 3.5.3
+
+### 49. P1
+
+- order：49
+
+- section：Research Methodology 3.5.4
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF3a通过组合词袋和语言学特征形成Classifier C，理由是对抗两种特征集比对抗一种更难。
+
+- rhetorical_function_cn：引入第一种稳健性设计。
+
+- depends_on_cn：DF1a、DF1b和DP3。
+
+- sets_up_cn：用于检验H2a。
+
+- evidence_pointer：Section 3.5.4
+
+### 50. P1-P4
+
+- order：50
+
+- section：Research Methodology 3.5.5
+
+- locator：P1-P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF3b用集成学习：Classifier D对A和B做OR判断；Classifier E在A的负侧边界区域SA(thr)内转用B判断。
+
+- rhetorical_function_cn：描述更精细的稳健性设计。
+
+- depends_on_cn：A和B两个基础分类器、DP3。
+
+- sets_up_cn：为H2b和参数敏感性分析提供对象。
+
+- evidence_pointer：Section 3.5.5 Equations 8-12
+
+### 51. P5-P7
+
+- order：51
+
+- section：Research Methodology 3.5.5
+
+- locator：P5-P7
+
+- move_code：MECHANISM
+
+- paraphrase_cn：欺诈者要把可疑文档推过超平面，替换单词可能改变词袋表示，但改变语言学特征会损害广告效果，因此边界区域中的文档交给B更合适。
+
+- rhetorical_function_cn：解释Classifier E为什么成立。
+
+- depends_on_cn：SVM超平面几何和语言学特征理论。
+
+- sets_up_cn：为攻击模拟中“维持营销效果”的假设提供依据。
+
+- evidence_pointer：Section 3.5.5 and Figure 3
+
+### 52. P1 S1-S3
+
+- order：52
+
+- section：Evaluation
+
+- locator：P1 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：评价要选择validity和robustness作为标准，先用朴素分类评价有效性，再用模拟反制评价稳健性。
+
+- rhetorical_function_cn：说明为什么要两种评价。
+
+- depends_on_cn：DR1-DR3。
+
+- sets_up_cn：naive evaluation和robustness evaluation两个小节。
+
+- evidence_pointer：Section 4 opening
+
+### 53. P2-P3
+
+- order：53
+
+- section：Evaluation 4.1
+
+- locator：P2-P3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：受到攻击时，基于语言学特征的分类器优于仅基于词袋的分类器。
+
+- rhetorical_function_cn：把DR3转化为可检验命题。
+
+- depends_on_cn：语言学特征理论。
+
+- sets_up_cn：攻击模拟结果对H1的验证。
+
+- evidence_pointer：Section 4.1 H1
+
+### 54. P4-P5
+
+- order：54
+
+- section：Evaluation 4.1
+
+- locator：P4-P5
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2a：受攻击时组合特征集分类器优于单一特征分类器；H2b：受攻击时集成学习分类器优于单一特征分类器。
+
+- rhetorical_function_cn：把DF3a和DF3b各自转化为假设。
+
+- depends_on_cn：特征组合和集成学习理论。
+
+- sets_up_cn：比较C和D/E在攻击模拟中的表现。
+
+- evidence_pointer：Section 4.1 H2a/H2b
+
+### 55. P1-P3
+
+- order：55
+
+- section：Evaluation 4.2.1
+
+- locator：P1-P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：可疑文档来自SEC标准下的hotstocked.com归档荐股，非可疑文档来自Dow Jones Newswires分析师报告，以此保证标签可信性和来源差异。
+
+- rhetorical_function_cn：说明语料选择如何支撑内部和外部有效性。
+
+- depends_on_cn：需要训练和测试数据。
+
+- sets_up_cn：后续所有评价结果的数据基础。
+
+- evidence_pointer：Section 4.2.1
+
+### 56. P1 S1-S3
+
+- order：56
+
+- section：Evaluation 4.2.2
+
+- locator：P1 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：Wilcoxon检验显示可疑荐股的信息量更高、更易读、情感更正，所有语言学特征都能显著区分两类文档。
+
+- rhetorical_function_cn：先用单变量证据支持理论特征的有效性。
+
+- depends_on_cn：数据集和特征计算。
+
+- sets_up_cn：为后续分类模型中使用这些特征提供基础。
+
+- evidence_pointer：Table 1
+
+### 57. P1-P3
+
+- order：57
+
+- section：Evaluation 4.3
+
+- locator：P1-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：朴素10折交叉验证中A、C和E0.5表现很高，B和D相对较低，但所有分类器都具备基础分类能力。
+
+- rhetorical_function_cn：建立无攻击时的性能baseline。
+
+- depends_on_cn：语料、特征和SVM训练。
+
+- sets_up_cn：与后续攻击模拟中的性能下降形成对照。
+
+- evidence_pointer：Table 2
+
+### 58. P1-P2
+
+- order：58
+
+- section：Evaluation 4.4
+
+- locator：P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：Classifier C的SVM权重显示Polarity、Entropy、Flesch等语言学特征是重要特征，欺诈者要规避它们会损害荐股广告效果。
+
+- rhetorical_function_cn：从模型内部权重解释语言学特征的机制价值。
+
+- depends_on_cn：Classifier C训练结果。
+
+- sets_up_cn：为攻击模拟中“维持营销效果”假设提供证据。
+
+- evidence_pointer：Table 3
+
+### 59. P3-P5
+
+- order：59
+
+- section：Evaluation 4.4
+
+- locator：P3-P5
+
+- move_code：RESULT
+
+- paraphrase_cn：攻击模拟显示B在m>=0.3后准确率超过A，支持H1。
+
+- rhetorical_function_cn：报告第一个稳健性结论。
+
+- depends_on_cn：攻击模拟设计。
+
+- sets_up_cn：再报告C和集成的结果。
+
+- evidence_pointer：Figure 4
+
+### 60. P6-P8
+
+- order：60
+
+- section：Evaluation 4.4
+
+- locator：P6-P8
+
+- move_code：RESULT
+
+- paraphrase_cn：Classifier C比A/B稳健，D和E系列最稳健，E0.5多数场景最优或与最优差异不超过1%，支持H2a和H2b。
+
+- rhetorical_function_cn：报告核心稳健性结论并比较不同设计。
+
+- depends_on_cn：攻击模拟、多个thr值。
+
+- sets_up_cn：为讨论部分设计原则验证提供核心证据。
+
+- evidence_pointer：Figure 4, Section 4.4
+
+### 61. P1 S1
+
+- order：61
+
+- section：Discussion
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结果说明所提出的设计原则和设计特征可以满足稳健欺诈检测的设计需求。
+
+- rhetorical_function_cn：把结果上升为设计知识。
+
+- depends_on_cn：naive evaluation和robustness evaluation。
+
+- sets_up_cn：后续理论意义和局限讨论。
+
+- evidence_pointer：Discussion P1
+
+### 62. P1 S2-S3
+
+- order：62
+
+- section：Discussion
+
+- locator：P1 S2-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：营销和金融经济学理论为识别可疑荐股提供基础；可疑荐股更易读、更积极、信息量更大；H1/H2a/H2b得到确认。
+
+- rhetorical_function_cn：把实证结果重新连接到kernel theory。
+
+- depends_on_cn：全部评价结果。
+
+- sets_up_cn：为理论贡献声明做铺垫。
+
+- evidence_pointer：Discussion P1
+
+### 63. P2
+
+- order：63
+
+- section：Discussion
+
+- locator：P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认标签构建有局限：可疑和非可疑文档来自特定来源，领域专家也认为无法确知发布者真实意图，因此必须使用可披露的文档标准。
+
+- rhetorical_function_cn：控制数据标签的有效性风险。
+
+- depends_on_cn：前面所依赖的SEC标准和新闻社来源。
+
+- sets_up_cn：后续关于自披露荐股和替代数据源的讨论。
+
+- evidence_pointer：Discussion P2
+
+### 64. P3
+
+- order：64
+
+- section：Discussion
+
+- locator：P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：本文只评估了自我披露获得付费的荐股，且这种披露是法定义务；因此不能涵盖所有可疑荐股类型，但覆盖了重要子集，并剔除了免责声明以避免模型学会依赖声明。
+
+- rhetorical_function_cn：限定结论适用范围，同时说明为何仍具代表性。
+
+- depends_on_cn：SEC监管规则和语料特征。
+
+- sets_up_cn：为外部有效性边界提供明确限制。
+
+- evidence_pointer：Discussion P3
+
+### 65. P4
+
+- order：65
+
+- section：Discussion
+
+- locator：P4
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：为排除来源差异驱动结果，作者用Yahoo! Finance的非可疑推荐重跑实验，结果保持稳健。
+
+- rhetorical_function_cn：通过替代数据源复检保护核心结论。
+
+- depends_on_cn：原始语料和分类器。
+
+- sets_up_cn：结论部分可以主张一般性设计知识。
+
+- evidence_pointer：Discussion P4
+
+### 66. P1
+
+- order：66
+
+- section：Conclusion
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究提出稳健FDS的设计原则、设计特征以及结合词袋和语言学特征的多个分类器。
+
+- rhetorical_function_cn：总结研究产出。
+
+- depends_on_cn：全文设计和评价。
+
+- sets_up_cn：随后声明理论和方法贡献。
+
+- evidence_pointer：Conclusion P1
+
+### 67. P2
+
+- order：67
+
+- section：Conclusion
+
+- locator：P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论和方法贡献包括面向信息型市场操纵问题类别的稳健FDS设计原则和特征、基于攻击模拟的稳健评价，以及从基础主义转向工具主义的问题求解示范；作者声称这是首个分析并分类荐股来研究信息型欺诈的论文。
+
+- rhetorical_function_cn：把贡献定位到DSR文献和数据挖掘方法论。
+
+- depends_on_cn：全部设计、评价和讨论。
+
+- sets_up_cn：把成果放在学术贡献位置。
+
+- evidence_pointer：Conclusion P2
+
+### 68. P3
+
+- order：68
+
+- section：Conclusion
+
+- locator：P3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：实践贡献包括可嵌入FDS提高信息型操纵检测能力、可补充安全软件和浏览器工具条、以及可推广到意见欺诈等领域。
+
+- rhetorical_function_cn：扩大干预价值。
+
+- depends_on_cn：分类器有效性和稳健性结果。
+
+- sets_up_cn：给监管、行业、个人用户以行动启示。
+
+- evidence_pointer：Conclusion P3
+
+### 69. P4
+
+- order：69
+
+- section：Conclusion
+
+- locator：P4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：设计原则和特征可被用于其他语言和领域，如社交商务中的意见垃圾检测。
+
+- rhetorical_function_cn：给出可迁移边界并指出未来方向。
+
+- depends_on_cn：稳健性知识已建立。
+
+- sets_up_cn：收束全文，提示后续研究空间。
+
+- evidence_pointer：Conclusion P4
+
+## 写作技术
+
+- gap_construction_cn：采用层层收缩：FDS重要 -> 欺诈者反制 -> 文本反制稳健性少研究 -> 信息型市场操纵中的非结构化文本尤其少 -> 反制措施完全未研究；同时把“语言学特征仅用于性能而非稳健性”和“集成学习缺少kernel theory指导”两个技术缺口并置，形成自己的定位。
+
+- signposting_cn：多次预告：Introduction末尾列全文章节；Section 3.2用Figure 1给出DSR流程；Section 3.5开头列出五个设计特征；Evaluation开头说明先naive后robustness；Conclusion再回到设计原则。
+
+- transition_logic_cn：从理论到设计用“欺诈者会最大化欺诈效果，所以营销/金融理论有用”作为枢纽；从设计到评价用“DR3要求稳健性，因此假设聚焦robustness”作为过渡；从naive到robustness用“高准确率不一定代表能抵抗反制”作为递进逻辑；从robustness到discussion用“结果证明设计原则和特征可以满足需求”收束。
+
+- claim_evidence_rhythm_cn：每提出一个设计特征就先交代理论依据，再在Evaluation中用Wilcoxon、SVM权重、攻击模拟逐层给出证据；对H1先给无攻击性能，再给攻击后交叉点，再给F1结果，形成递进式证据链。
+
+- benchmark_narrative_cn：Classifier A被描写为经典文本分类baseline；Classifier B为理论特征独立价值；C为特征组合；D为简单集成；E为精细集成。攻击模拟让m从0到1变化，benchmark故事是“无攻击时差异不大，攻击后差异明显”，以此说明robustness价值。
+
+- theory_return_cn：结果不只用准确率数字收场，而是回到“可疑荐股更容易读、更积极、信息量更大”这些理论预期，再说明“欺诈者若修改语言学特征会降低广告效果”，从而把实证结果重新嫁接到营销/金融理论。
+
+- contribution_positioning_cn：作者把自己定位为“首个将荐股分类用于信息型欺诈检测”的DSR研究，同时强调工具主义而非基础主义的方法论差异，避免贡献被理解为单纯的文本分类性能竞赛。
+
+- novelty_protection_cn：用多种方式防止贡献退化为一次性性能结果：设计原则抽象到问题类层面；用DR1-DR3明确需求；用roblustness simulation展示对抗情境；用替代数据源复检排除来源差异；在Conclusion中把设计特征推广到意见垃圾和其他语言。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写引言时先建立领域重要性，再描述欺诈者反制现象，然后指出文本稳健性缺口，最后明确DSR场景。
+
+- research_job_cn：通过领域专家访谈和文献形成DR1-DR3需求。
+
+- required_evidence_cn：需要能证明该问题重要且现有系统不稳健的文献和现实案例。
+
+- transition_to_next_cn：“为了满足这些需求，需要设计原则和特征”
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写研究方法和需求部分，把专家意见转成正式设计需求。
+
+- research_job_cn：访谈领域专家、收集问题信息、提炼可操作需求。
+
+- required_evidence_cn：专家反馈能清晰对应每条需求。
+
+- transition_to_next_cn：“需求决定设计原则”
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：写设计原则部分，把每条需求映射到DP1-DP3，并引用kernel theory。
+
+- research_job_cn：选择能解释问题机制的理论，并决定哪些理论命题影响设计。
+
+- required_evidence_cn：理论命题必须有可测量的特征或可操作的设计含义。
+
+- transition_to_next_cn：“设计原则需要实例化为设计特征”
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写设计特征部分，按DF1a-DF3b分节说明具体算法选择和理由。
+
+- research_job_cn：实现分类器A-E，准备词袋、语言学特征、SVM、特征组合、集成逻辑。
+
+- required_evidence_cn：分类器可运行，特征可计算，攻击模拟可执行。
+
+- transition_to_next_cn：“制品需要评价”
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写数据集和naive evaluation，说明标签可信性和基础性能。
+
+- research_job_cn：收集并清洗可疑/非可疑文档，执行交叉验证，计算accuracy/precision/recall/F1。
+
+- required_evidence_cn：基础性能至少不能明显失败，否则需要回到设计。
+
+- transition_to_next_cn：“表面性能不足，必须检验攻击下的稳健性”
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：写robustness evaluation，用SVM权重和攻击模拟检验DR3。
+
+- research_job_cn：定义威胁模型、设计文档操纵算法、模拟不同m和thr。
+
+- required_evidence_cn：需要显示攻击导致性能下降且某些设计下降更慢。
+
+- transition_to_next_cn：“结果能否推广取决于边界”
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：写Discussion和Conclusion，把结果上升到设计原则，明确局限和可推广边界。
+
+- research_job_cn：做替换数据源复检、解释机制、声明理论和实践贡献。
+
+- required_evidence_cn：需要替代解释被排除或至少被讨论，贡献声明有证据支撑。
+
+- transition_to_next_cn：“由此形成可复用设计知识”
+
+### most_transferable_moves_cn
+
+1. 把现实问题先压缩为3条可检验的设计需求，再用需求驱动设计原则
+
+2. 使用kernel theory直接导出特征选择，并把理论命题作为特征存在理由
+
+3. 用多个分类器实例作为设计特征的物化，并以一个baseline分类器承担对照角色
+
+4. 在naive evaluation之后增加对抗模拟作为robustness证据
+
+5. 用替代数据源复检排除来源差异，保护结论外部有效性
+
+6. 用SVM权重把“特征为何重要”从黑箱变成可解释证据
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要真实的可疑荐股语料和可靠的SEC判断标准，普通研究者未必能轻易获得
+
+2. 需要金融监督当局和行业专家参与访谈并校准标签
+
+3. 需要设计并实现附录中的WordNet/SentiWordNet同义替换攻击模拟脚本
+
+4. 需要处理高度不平衡语料并调整代价函数
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写设计原则却没有实现和评价；没有证据支撑的设计原则会变成口号
+
+2. 不能把“高准确率”直接等同于“稳健”，必须在攻击模拟中检验
+
+3. 不能把所有语言学特征都推给理论，必须用Wilcoxon或类似检验说明区分力
+
+4. 不能把仿真攻击结果说成真实欺诈者行为，必须保留边界条件
+
+- single_best_description_of_the_routine_cn：先用领域专家把现实问题转成三条设计需求，再用营销/金融理论把需求翻译成具体文本特征和分类器结构，最后用朴素评价加攻击模拟证明这些设计不是普通文本分类而是稳健FDS设计知识。
+
+## 分析边界
+
+分析基于所给全文，OCR对图表编号没有完全影响正文；注意到正文中表3被误标为Table 1，但不影响判断；未提供补充材料，无法核对攻击模拟代码和更详细的参数表；Robustness evaluation部分对Classifier E的thr取值虽提及0到1产生相似结果，但未提供所有thr数值表。

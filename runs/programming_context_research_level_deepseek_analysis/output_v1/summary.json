@@ -1,0 +1,28 @@
+{
+  "updated_at": "2026-07-22T11:20:37.907159+00:00",
+  "analysis_version": "programming-context-research-level-v1",
+  "prompt_fingerprint": "983e4b724a5680d8874e0eb5860353df0d80ab31c596619aac7fa89eaea84432",
+  "input_programming_context_matches": 264,
+  "completed": 264,
+  "pending": 0,
+  "research_level_counts": {
+    "artifact_system": 10,
+    "community": 5,
+    "conceptual": 18,
+    "dyadic": 3,
+    "individual": 103,
+    "industry_market": 0,
+    "interorganizational": 2,
+    "mixed": 9,
+    "organizational": 19,
+    "platform_ecosystem": 0,
+    "project": 62,
+    "societal": 0,
+    "team": 33
+  },
+  "usage": {
+    "prompt_tokens": 5594082,
+    "completion_tokens": 208091,
+    "total_tokens": 5802173
+  }
+}

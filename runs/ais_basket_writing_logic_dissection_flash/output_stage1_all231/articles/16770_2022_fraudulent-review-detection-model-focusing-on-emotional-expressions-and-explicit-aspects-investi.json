@@ -1,0 +1,1092 @@
+{
+  "record_id": "16770",
+  "source_file": "16770_2022_fraudulent-review-detection-model-focusing-on-emotional-expressions-and-explicit-aspects-investi.md",
+  "title": "Fraudulent review detection model focusing on emotional expressions and explicit aspects: investigating the potential of feature engineering",
+  "authors": "Ajay Kumar; Ram D. Gopal; Ravi Shankar; Kim Hua Tan",
+  "year": "2022",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113728",
+  "fulltext_chars": 86976,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:30.249612+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何通过特征工程、数据预处理和类不平衡处理，利用评论中心与评论者中心特征构建高精度的虚假评论检测模型？",
+    "artifact_and_design_cn": "提出一个以M-SMOTE为核心、包含12个新特征（6个评论者中心特征和6个评论中心特征）的虚假评论检测框架；框架包括文本预处理、特征提取、离群值处理、分布转换、类不平衡处理和多数投票集成分类。",
+    "objective_outcomes_cn": "在Yelp主数据集上，最终多数投票模型达到Precision 79.4%、Recall 83.5%、F1 85.3%、AUC 87.4%；在Amazon验证集上达到AUC 93.7%；M-SMOTE在多个UCI数据集上普遍优于SMOTE。",
+    "core_contribution_cn": "作者声称提出一种新颖的概率式M-SMOTE检测方法，综合特征分布、数据预处理和类不平衡处理，能够比多个既往研究更准确地识别虚假评论者，并为数字平台和营销管理者提供可操作的检测工具。",
+    "whole_argument_in_one_paragraph_cn": "文章从真实电商评论操纵案例出发，说明虚假评论已形成产业且水军不断进化，随后指出现有检测研究虽使用多种ML算法，但特征工程、分布特征和类别不平衡问题未被综合处理。作者据此提出12个评论者中心与评论中心特征，并按四阶段框架进行离群值移除、分布转换、M-SMOTE过采样和多数投票。通过在Yelp主数据集上逐步消融，证明预处理和类不平衡处理能提升分类精度；通过比较两类特征，证明评论者中心特征更重要且两类组合更优；最后在Amazon和Yelp开放数据集上重复验证，并与六个既往研究比较，将性能改进上升为面向平台反作弊的设计知识和管理建议。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "文章核心证据是构建M-SMOTE计算制品、特征工程流程以及多分类器Benchmark，主要结论建立在Yelp、UCI、Amazon等数据集上的Precision/Recall/F1/AUC比较，而不是基于理论假设的受控实验或现场干预。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章从已有检测方法面对水军进化和类不平衡时性能不足出发，构造特征工程+M-SMOTE制品，通过无预处理与预处理、SMOTE与M-SMOTE、单类特征与组合特征等多重对照建立benchmark证据链，最后用外部数据集和既往研究比较把性能改进上升为一般化设计知识。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "文章没有设计多个独立实验，而是把同一个检测管道拆成连续步骤：先提取特征，再逐步解决离群值、尺度、偏态和类不平衡，每步产生对照表；随后用特征类型对比和文本描述性分析验证假设，最后用Amazon和Yelp开放数据集及既往研究分数做外部效度检验。每一步都回应不同假设，最终支持主贡献。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "数据获取、文本预处理与特征提取",
+        "question_cn": "如何从真实Yelp数据中生成可区分虚假评论者的特征？",
+        "inputs_and_setting_cn": "Yelp真实数据集：5044家餐厅、260277位评论者、2010-2014年、6个原始变量；文本清洗包括tokenization、stop-word removal、stemming和lemmatization。",
+        "designed_or_compared_object_cn": "提取6个评论者中心特征（rating entropy、review gap、review count、rating deviation、time of review、user tenure）和6个评论中心特征（review length、word density、POS ratio、ratio of positive/negative words、SpamHitScore、sentiment probability）。",
+        "baseline_control_or_counterfactual_cn": "无；原始6个变量作为隐含起点。",
+        "objective_metrics": [
+          "特征统计摘要（Table 1/2）",
+          "特征重要性排名（Table 3）"
+        ],
+        "analysis_method_cn": "文本预处理、规则化数值计算、单变量分布拟合。",
+        "main_result_cn": "得到12个新特征；评分高度偏态，5星评论约38%，1星约6%。",
+        "argumentative_role_cn": "建立整个检测模型的输入特征集合，为后续特征工程提供原材料。",
+        "remaining_uncertainty_cn": "这些特征是否真正有效、偏态是否会损害分类器尚无证据。",
+        "link_to_next_phase_cn": "需要先处理离群值并筛选出最有判别力的特征。",
+        "evidence_pointers": [
+          "Section 4 Data description and model development",
+          "Fig. 1",
+          "Table 1/2/3"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "离群值处理、特征排序与降维",
+        "question_cn": "哪些特征应保留，离群值如何影响特征分布？",
+        "inputs_and_setting_cn": "约19个初步特征和Yelp原始数据。",
+        "designed_or_compared_object_cn": "log转换、四分位距离群值移除、模型无关特征重要性排序、相关性heatmap。",
+        "baseline_control_or_counterfactual_cn": "未处理离群值/保留全部19个特征。",
+        "objective_metrics": [
+          "特征重要性分数",
+          "离群值移除数量（36,382离群值、10,353极端值）",
+          "相关性强度"
+        ],
+        "analysis_method_cn": "boxplot可视化、RemoveWithValue filter、特征排名、相关分析。",
+        "main_result_cn": "从19个特征筛出12个高重要特征；未发现强相关或严重多重共线性。",
+        "argumentative_role_cn": "确保分类器不被噪声、极端值和冗余特征主导，体现数据预处理的价值。",
+        "remaining_uncertainty_cn": "特征分布仍偏态，类别不平衡仍存在。",
+        "link_to_next_phase_cn": "下一步需要标准化和分布转换，使特征接近正态。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "特征标准化与分布转换",
+        "question_cn": "如何把偏态特征转换为适合机器学习模型的正态分布特征？",
+        "inputs_and_setting_cn": "筛选后的12个特征。",
+        "designed_or_compared_object_cn": "min-max标准化、Yeo-Johnson转换、Box-Cox转换、多步power transformation。",
+        "baseline_control_or_counterfactual_cn": "未标准化/原始偏态特征。",
+        "objective_metrics": [
+          "转换后特征分布图（Fig. 2/3）",
+          "正态性粗略范围（-0.5至0.5）"
+        ],
+        "analysis_method_cn": "分布可视化与幂变换。",
+        "main_result_cn": "所有特征基本接近正态分布，可用于后续建模。",
+        "argumentative_role_cn": "为H3（偏态特征直接进入ML会降低精度）提供操作基础。",
+        "remaining_uncertainty_cn": "类别不平衡问题仍未解决。",
+        "link_to_next_phase_cn": "进入类不平衡处理，开发M-SMOTE。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Fig. 2/3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "M-SMOTE算法设计与UCI验证",
+        "question_cn": "如何设计一个能在高度不平衡数据上生成不重复噪声少数类样本的过采样算法？",
+        "inputs_and_setting_cn": "Yelp数据集（91:9不平衡）、6个UCI数据集、Amazon和Yelp验证集。",
+        "designed_or_compared_object_cn": "M-SMOTE：用GaussianProcessClassifier初始分类、kmeans找中心、cosine相似度计算距离、加权生成新样本；公式Eq. 6。",
+        "baseline_control_or_counterfactual_cn": "SMOTE、无过采样（None），分别配合XGBoost和Random Forest。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1",
+          "AUC"
+        ],
+        "analysis_method_cn": "在6个UCI数据集和多个分类器上比较M-SMOTE vs SMOTE vs None。",
+        "main_result_cn": "M-SMOTE在多数数据集上P/R/F1/AUC高于SMOTE；Yelp不平衡比从91:9降至71:29。",
+        "argumentative_role_cn": "为整个框架提供核心算法创新，并支持H4关于类不平衡处理的必要性。",
+        "remaining_uncertainty_cn": "M-SMOTE对下游分类器的实际提升仍需在Yelp主实验中验证。",
+        "link_to_next_phase_cn": "使用完整预处理+M-SMOTE建立主要分类模型。",
+        "evidence_pointers": [
+          "Section 5.4",
+          "Fig. 4",
+          "Table 4"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "Yelp主实验：模型开发与假设检验",
+        "question_cn": "完整数据预处理和类不平衡处理能否提升虚假评论检测精度？",
+        "inputs_and_setting_cn": "Yelp数据集，处理后12特征，10种ML分类器：XGBoost、LSTM、LightGBM、ANN、RNN、SVM、Logistic Regression、kNN、Naïve Bayes、Random Forest。",
+        "designed_or_compared_object_cn": "三种场景：无预处理；预处理+M-SMOTE；预处理+M-SMOTE+三个最优分类器多数投票。",
+        "baseline_control_or_counterfactual_cn": "无预处理baseline；未解决类不平衡版本。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1",
+          "AUC"
+        ],
+        "analysis_method_cn": "5折交叉验证；硬投票Y=mode{M1,M2,M3}；Table 5/6/7对比。",
+        "main_result_cn": "XGBoost、LSTM、LightGBM最优；多数投票最终P 79.4%、R 83.5%、F1 85.3%、AUC 87.4%，相比baseline提升约2-6%。",
+        "argumentative_role_cn": "核心证据，直接支持H3、H4，证明预处理和类不平衡处理有效。",
+        "remaining_uncertainty_cn": "仍未分别检验评论者中心与评论中心特征的相对重要性，也未验证外部泛化。",
+        "link_to_next_phase_cn": "下一步拆分特征类型并做文本描述性分析。",
+        "evidence_pointers": [
+          "Section 5.5",
+          "Table 5/6/7"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "特征类型对比、t检验与文本描述性分析",
+        "question_cn": "评论者中心特征是否比评论中心特征更重要？两类特征组合能否进一步提升性能？",
+        "inputs_and_setting_cn": "Yelp上12特征按两类拆分；全部特征组合；POS统计、评论长度、词频。",
+        "designed_or_compared_object_cn": "用评论者中心特征、评论中心特征、全部特征分别训练top5模型；对组合提升做t检验。",
+        "baseline_control_or_counterfactual_cn": "评论中心特征单独使用作为H1/H2的对照。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1",
+          "AUC",
+          "t检验显著性"
+        ],
+        "analysis_method_cn": "Table 8/9/10对比；图5/6/7展示POS、评论长度和主题词。",
+        "main_result_cn": "H1成立：评论者中心特征在多数分类器上优于评论中心特征；H2部分成立：XGBoost和Logistic回归组合后显著提升，其他模型方向不完全一致。文本分析显示正面评论更长但错误更多，虚假评论更多动词/形容词/填充词。",
+        "argumentative_role_cn": "把性能改进解释为行为线索的相对价值，为管理者提供更具可操作性的特征优先级。",
+        "remaining_uncertainty_cn": "跨平台是否依然成立尚不清楚。",
+        "link_to_next_phase_cn": "进入外部数据集验证。",
+        "evidence_pointers": [
+          "Table 8/9/10",
+          "Fig. 5/6/7"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "外部数据集验证与既往研究比较",
+        "question_cn": "提出的特征工程+M-SMOTE管道能否在其他平台数据上复现？相对已有研究是否更好？",
+        "inputs_and_setting_cn": "两个Amazon数据集、Yelp Open Dataset、6个UCI数据集以及主实验结果。",
+        "designed_or_compared_object_cn": "在外部数据集上重复相同特征工程/预处理/M-SMOTE/多数投票，并与6个既往研究比较。",
+        "baseline_control_or_counterfactual_cn": "原始未处理数据；既往研究：Jindal & Liu、Feng et al.、Zhang et al.、Kumar et al.、Rayana & Akoglu等。",
+        "objective_metrics": [
+          "Precision",
+          "Recall",
+          "F1",
+          "AUC"
+        ],
+        "analysis_method_cn": "Table 11外部验证；文献结果对照叙述。",
+        "main_result_cn": "外部数据集上AUC均大于80%，Amazon验证集多数投票AUC达93.7%；相对既往研究AUC最高81.7%更优。",
+        "argumentative_role_cn": "支持外部效度，把Yelp主实验性能上升为可复制的通用检测设计知识。",
+        "remaining_uncertainty_cn": "仅覆盖两个平台，新特征可能在Walmart、Alibaba等平台不可得；未处理动态水军行为。",
+        "link_to_next_phase_cn": "讨论部分将其转化为局限和未来研究方向。",
+        "evidence_pointers": [
+          "Section 6",
+          "Table 11",
+          "Section 7"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 消费者阅读评论已成为惯例",
+      "PHENOMENON: 企业使用ML生成虚假评论，塑造自身正面或竞争负面形象",
+      "LIMITATION: 水军学习规避检测，现有技术失效",
+      "GAP: 需要研究虚假账户行为及ML检测的必要性",
+      "RQ_OR_OBJECTIVE: 提出特征工程、统一行为模型、数据预处理和M-SMOTE检测方法",
+      "CONTRIBUTION: 对数字平台和欺诈评论检测文献做出管理性与理论性贡献"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 产品评论在电商中可成就或摧毁业务",
+      "PRACTICAL_STAKES: 消费者高度信任在线评论，评论影响平台推荐和收入",
+      "PHENOMENON: Alibaba、Amazon、FTC等案例说明刷评产业规模",
+      "LIMITATION: 现有技术只能检测个体激励评论者，机器生成的大规模虚假评论增加",
+      "PRIOR_KNOWLEDGE: 已有监督、无监督和非ML检测研究",
+      "GAP: 特征工程、分布特征、数据预处理和类不平衡问题的综合研究不足",
+      "RQ_OR_OBJECTIVE: 开发基于特征分布的M-SMOTE检测模型，检验特征工程价值",
+      "STUDY_OVERVIEW: 在Yelp和多个benchmark数据集上实证"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 总结意见垃圾检测的监督/无监督方法及其特征",
+      "LIMITATION: 传统方法多使用预定特征，对特征工程和类不平衡探索不足",
+      "REQUIREMENT: 偏态特征直接进入ML会降低预测精度，因此需要转换和平行化处理",
+      "HYPOTHESIS_OR_PROPOSITION: H1-H4分别涉及特征类型重要性和预处理价值",
+      "CONTRIBUTION: 预告四个贡献与六个既往研究比较"
+    ],
+    "artifact_design_moves": [
+      "METHOD_JUSTIFICATION: 说明使用真实Yelp过滤标签而非Amazon MT人工生成伪虚假评论的原因",
+      "DESIGN_FEATURE: 设计6个评论者中心特征和6个评论中心特征及其行为依据",
+      "REQUIREMENT: 处理离群值、标准化、偏态、相关性和类不平衡",
+      "DESIGN_FEATURE: 设计M-SMOTE算法，包括GaussianProcessClassifier、kmeans中心、cosine相似度和加权生成公式",
+      "STUDY_OVERVIEW: 描述四阶段模型开发框架和多数投票规则"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 采用5折交叉验证和三种实验场景",
+      "RESULT: 无预处理baseline与预处理后性能对比",
+      "RESULT: 类不平衡处理后top3分类器性能提升",
+      "RESULT: 多数投票最终P/R/F1/AUC达到0.794/0.835/0.853/0.874",
+      "RESULT: 评论者中心特征优于评论中心特征，组合后部分模型显著提升",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 在Amazon、Yelp开放数据上重复相同管道",
+      "BENCHMARK_OR_CONTRAST: 与六个既往研究比较并宣称AUC全面超过"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 提出M-SMOTE检测框架，综合异构分布、预处理和平衡数据",
+      "MECHANISM: 评论者中心特征更难被操纵，因此是更稳健的检测线索",
+      "CONTRIBUTION: 可扩展到社交机器人检测和电商平台模型重设计",
+      "BOUNDARY_CONDITION: 仅测试了两个平台，新特征可能不可得",
+      "LIMITATION_AND_FUTURE: 需扩展到更多平台、更多特征和动态行为场景"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "意见垃圾行为经验文献：虚假评论者倾向极端评分、短期密集评论、评论数量多、评分偏离、早期评论、账号寿命短；主要依据Luca & Zervas、Mukherjee等、Lim等。",
+      "评论文本语言学特征：虚假评论更少细节、使用特定词或短语模式、POS分布差异；主要依据Jindal & Liu、Zhang等。",
+      "类不平衡技术：SMOTE、undersampling、oversampling、LR-SMOTE等既有过采样原理。",
+      "数据预处理工程实践：离群值、标准化、偏态分布、power transformation、特征重要性排序等数据科学通用方法。",
+      "平台治理与IS文献：在线评论操纵对平台声誉和消费者信任的影响。"
+    ],
+    "theory_design_coupling": "none",
+    "coupling_reason_cn": "文章没有引入可称为理论的分析框架；其四个假设来自ML工程经验和既往经验观察，而非理论命题。特征选择主要依赖意见垃圾检测文献中的行为/文本线索和工程启发式，因此理论未实质决定设计。",
+    "translation_chain_cn": "从既往意见垃圾研究中的行为线索和文本线索出发，转化为具体特征规则，再通过数据预处理、分布转换和M-SMOTE算法把工程步骤转化为可评测的模型差异，最终用分类性能指标验证每一步的价值。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "欺诈评论者倾向给出极端评分，真实评论者更平衡",
+        "mechanism_cn": "欺诈账号缺乏评分平衡性，熵较低",
+        "design_requirement_cn": "需要能编码评分离散程度的特征",
+        "artifact_choice_cn": "rating entropy特征",
+        "evaluated_contrast_cn": "有/无该特征对分类器影响，特征重要性排名",
+        "objective_result_cn": "rating entropy排名第7",
+        "evidence_pointers": [
+          "Section 4.1.1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "欺诈账号通常短时间注册并密集发评",
+        "mechanism_cn": "账号存活期和发评时间窗成为行为信号",
+        "design_requirement_cn": "需要账户生命周期和发评时间相关特征",
+        "artifact_choice_cn": "review gap、user tenure、time of review特征",
+        "evaluated_contrast_cn": "这些特征的特征重要性",
+        "objective_result_cn": "user tenure排名第8，time of review排名第9",
+        "evidence_pointers": [
+          "Section 4.1.1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "付费/欺诈用户通常写更多评论",
+        "mechanism_cn": "评论数量是付水军行为的直接代理",
+        "design_requirement_cn": "需要记录账户累计评论量",
+        "artifact_choice_cn": "review count特征",
+        "evaluated_contrast_cn": "特征重要性排序",
+        "objective_result_cn": "review count排名第1",
+        "evidence_pointers": [
+          "Section 4.1.1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "欺诈评论者使用特定词或短语模式，重复性高",
+        "mechanism_cn": "职业写手重复使用固定表达，可通过n-gram词典识别",
+        "design_requirement_cn": "需要文本层面的模式匹配分数",
+        "artifact_choice_cn": "SpamHitScore、review length、word density特征",
+        "evaluated_contrast_cn": "特征重要性及文本分析图",
+        "objective_result_cn": "SpamHitScore排名第4，review length排名第6",
+        "evidence_pointers": [
+          "Section 4.1.2",
+          "Table 3",
+          "Fig. 5/6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "虚假评论和真实评论在情感词、POS构成上有差异",
+        "mechanism_cn": "语法和情感极性分布可区分两类作者",
+        "design_requirement_cn": "需要文本语言特征",
+        "artifact_choice_cn": "POS ratio、ratio of positive/negative words、sentiment score",
+        "evaluated_contrast_cn": "特征重要性、POS对比图",
+        "objective_result_cn": "sentiment score排名第11，ratio of positive words排名第12",
+        "evidence_pointers": [
+          "Section 4.1.2",
+          "Fig. 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "偏态特征和类不平衡会降低ML分类精度",
+        "mechanism_cn": "分类器偏向多数类，尺度大的特征支配学习率",
+        "design_requirement_cn": "需要转换分布并平衡类别",
+        "artifact_choice_cn": "min-max、Yeo-Johnson/Box-Cox、M-SMOTE",
+        "evaluated_contrast_cn": "无预处理vs预处理，SMOTE vs M-SMOTE",
+        "objective_result_cn": "预处理和M-SMOTE后P/R/F1/AUC显著提升",
+        "evidence_pointers": [
+          "Section 5.2-5.4",
+          "Table 4/5/6"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "基准对比：无预处理baseline vs 完整预处理+M-SMOTE",
+      "消融分析：评论者中心特征 vs 评论中心特征 vs 全部特征",
+      "算法对比：SMOTE vs M-SMOTE，以及无过采样",
+      "外部验证：UCI、Amazon、Yelp开放数据集重复相同管道",
+      "历史文献基准：与六个既往研究在相同数据集上的AUC/Accuracy比较"
+    ],
+    "why_these_evaluations_cn": "作者需要分别回答四个假设：H1关于特征类型重要性，H2关于特征组合，H3关于偏态分布危害，H4关于类不平衡和预处理价值。因此每个评价都对应一个假设，并通过表格和t检验提供证据；外部验证则用于防止贡献被理解为只在单一数据集上偶然成立。",
+    "benchmark_and_contrast_chain_cn": "先用未处理原始数据建立baseline；再用预处理+M-SMOTE作为treatment；然后用多数投票提升最终性能；接着按特征类型拆解组合效果；再用UCI验证M-SMOTE普适性；最后用Amazon/Yelp外部数据集和既往研究分数构建完整benchmark链，使每一步局部性能提升逐步累积为通用设计主张。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "特征工程和数据预处理能提升ML分类精度",
+        "evidence_cn": "Table 5/Table 9显示多个分类器在无预处理和预处理后P/R/F1/AUC均上升",
+        "verified": true
+      },
+      {
+        "claim_cn": "偏态特征直接使用会降低精度",
+        "evidence_cn": "无预处理XGBoost为F1 72.1/AUC 79.6，预处理后78.1/83.8；但没有直接比较正态性变化",
+        "verified": "部分"
+      },
+      {
+        "claim_cn": "评论者中心特征比评论中心特征更重要",
+        "evidence_cn": "Table 8中多数分类器上reviewer-centric性能更高",
+        "verified": true
+      },
+      {
+        "claim_cn": "组合两类特征优于单独评论中心特征",
+        "evidence_cn": "Table 9/10显示XGBoost和Logistic回归显著提升，LSTM、LightGBM方向不完全一致",
+        "verified": "部分"
+      },
+      {
+        "claim_cn": "M-SMOTE能解决类不平衡并提高精度",
+        "evidence_cn": "Table 6显示top3分类器在M-SMOTE后提升；Table 4显示多数UCI数据集上优于SMOTE",
+        "verified": true
+      },
+      {
+        "claim_cn": "外部数据集上模型AUC均高于80%且胜过6个既往研究",
+        "evidence_cn": "Section 6报告Amazon验证AUC 93.7%，既往研究AUC最高81.7%",
+        "verified": "部分，因比较设置和历史实现不同"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用Yelp官方过滤标签而非人工合成评论；采用5折交叉验证；重复相同预处理管道到外部数据集；对H2使用t检验；同时使用多个分类器避免单一模型依赖。",
+    "external_validity_strategy_cn": "使用Yelp和Amazon两个平台、6个UCI不平衡数据集和Yelp开放数据集；比较既往研究在同一或类似数据集上的结果。",
+    "what_is_not_actually_tested_cn": "没有在Walmart、Alibaba、eBay、TripAdvisor等其他平台测试；没有直接模拟水军动态改变策略的对抗场景；M-SMOTE与SMOTE/LR-SMOTE的差异缺乏严格统计检验；与既往研究的比较不是在同一实验设置下复现的公平比较。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的M-SMOTE算法和特征工程管道在Yelp、Amazon及UCI数据集上普遍优于SMOTE和既有检测方法，尤其是AUC超过80%。",
+    "artifact_claim_cn": "数据预处理、分布转换、类不平衡处理和多数投票是导致分类性能提升的可识别组成部分，评论者中心特征比评论中心特征贡献更大。",
+    "mechanism_claim_cn": "评论者中心特征更稳健，因为操纵用户长期行为比伪造单条评论文本更难、成本更高；M-SMOTE通过去噪和保持数据密度来解决类不平衡。",
+    "boundary_claim_cn": "该方法在Yelp和Amazon评论数据上有效；其他平台可能因特征不可得而失效；如果水军动态改变行为，模型可能失去可信度。",
+    "reusable_design_knowledge_cn": "检测虚假评论时应优先使用评论者中心行为特征；建模前需要处理偏态分布、离群值和类不平衡；可使用M-SMOTE一类保证数据密度的过采样方法。",
+    "theoretical_contribution_cn": "文章没有提出新的正式理论，但扩展了IS领域中基于特征工程检测意见垃圾的经验知识，把工程实践转译为对数字平台反操纵机制的理解。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分重新指出此前没有研究充分综合特征工程、数据预处理和评论者行为分布，然后宣称所提出的M-SMOTE框架正是把三者结合为统一检测模型，并用外部验证和既往研究比较回应引言中的缺口。",
+    "overclaim_or_unsupported_leaps_cn": "宣称全面超过六个既往研究，但这些比较来自不同实验设置和实现；H2仅有部分模型显著；将M-SMOTE的普适性建立在6个UCI数据集上，却没有与其他先进过采样方法系统比较；把工程步骤表述为理论和管理贡献有时超出直接证据。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "1. Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "产品评论在电商世界里能够成就或摧毁业务。",
+      "rhetorical_function_cn": "开篇用强烈因果关系建立话题重要性。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续说明虚假评论的破坏后果铺路。",
+      "evidence_pointer": "Introduction paragraph 1"
+    },
+    {
+      "order": 2,
+      "section": "1. Introduction",
+      "locator": "P1 S2-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "消费者调查显示91%更可能选择正面评论的商家、82%因负面评论拒绝商家、76%信任在线评论如同个人推荐。",
+      "rhetorical_function_cn": "用量化证据强调在线评论的决策影响力。",
+      "depends_on_cn": "前一句关于评论重要性的断言。",
+      "sets_up_cn": "说明操纵评论可以操纵消费者行为，因此值得研究。",
+      "evidence_pointer": "Introduction paragraph 1, citing BrightLocal"
+    },
+    {
+      "order": 3,
+      "section": "1. Introduction",
+      "locator": "P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "2016年阿里巴巴起诉第三方服务商，因其联系商家进行虚假购买并发布正面评论以提高排名。",
+      "rhetorical_function_cn": "用真实案例说明虚假评论产业存在。",
+      "depends_on_cn": "前文消费者对评论的高度信任。",
+      "sets_up_cn": "引出刷评操作及其平台冲击。",
+      "evidence_pointer": "Introduction paragraph 2, Alibaba lawsuit example"
+    },
+    {
+      "order": 4,
+      "section": "1. Introduction",
+      "locator": "P2 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "所谓刷单操作中，真实顾客先付款、交正面评价，再通过电子货币返还现金。",
+      "rhetorical_function_cn": "具体化刷评机制，使其容易被理解。",
+      "depends_on_cn": "阿里巴巴诉讼案例。",
+      "sets_up_cn": "为后文讨论评论者行为特征提供现象基础。",
+      "evidence_pointer": "Introduction paragraph 2, brushing operation description"
+    },
+    {
+      "order": 5,
+      "section": "1. Introduction",
+      "locator": "P2 S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "这类操作有两方面影响：虚增平台交易量和排名，同时损害平台声誉。",
+      "rhetorical_function_cn": "说明操纵评论不只有消费者误导，还有平台治理后果。",
+      "depends_on_cn": "前面的诉讼和刷单现象。",
+      "sets_up_cn": "为平台需要检测工具提供理由。",
+      "evidence_pointer": "Introduction paragraph 2"
+    },
+    {
+      "order": 6,
+      "section": "1. Introduction",
+      "locator": "P2 S6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有技术能检测个别激励性评论者，但大规模情况下意见垃圾制造者会操纵系统生成负面评论，机器生产的虚假评论量正在大幅增加。",
+      "rhetorical_function_cn": "指出当前检测能力的局限。",
+      "depends_on_cn": "前文案例和平台影响。",
+      "sets_up_cn": "引出需要更有效的检测方法。",
+      "evidence_pointer": "Introduction paragraph 2"
+    },
+    {
+      "order": 7,
+      "section": "1. Introduction",
+      "locator": "P3 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "许多公司寻找更有效的检测策略，IS领域正成为相关研究前沿，但垃圾制造者日益精明并不断调整策略以规避检测。",
+      "rhetorical_function_cn": "将问题定位到IS研究，并强调对手进化。",
+      "depends_on_cn": "现有技术局限。",
+      "sets_up_cn": "说明研究缺口不是简单算法问题，而是对抗性问题。",
+      "evidence_pointer": "Introduction paragraph 3"
+    },
+    {
+      "order": 8,
+      "section": "1. Introduction",
+      "locator": "P4 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "虚假评论检测中最重要的元素之一是特征工程，即把原始数据转化为新特征并选择最佳变量以提升ML分类器精度。",
+      "rhetorical_function_cn": "定义并提升特征工程的核心地位。",
+      "depends_on_cn": "前文检测能力不足。",
+      "sets_up_cn": "后续所有贡献都围绕特征工程展开。",
+      "evidence_pointer": "Introduction paragraph 4"
+    },
+    {
+      "order": 9,
+      "section": "1. Introduction",
+      "locator": "P4 S2-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有研究分别用监督ML、无监督ML和非ML技术检测虚假评论。",
+      "rhetorical_function_cn": "简要概括文献版图。",
+      "depends_on_cn": "特征工程定义的引入。",
+      "sets_up_cn": "为突出现有研究不足提供面。",
+      "evidence_pointer": "Introduction paragraph 4"
+    },
+    {
+      "order": 10,
+      "section": "1. Introduction",
+      "locator": "P4 S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "然而，综合研究特征工程、特征分布特性、数据预处理挑战和类别不平衡问题的文献仍很有限。",
+      "rhetorical_function_cn": "明确提出第一个文献缺口。",
+      "depends_on_cn": "前四句文献梳理。",
+      "sets_up_cn": "为研究动机和M-SMOTE框架出现做准备。",
+      "evidence_pointer": "Introduction paragraph 4"
+    },
+    {
+      "order": 11,
+      "section": "1. Introduction",
+      "locator": "P5 S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "虚假评论会扭曲特征分布，少数研究分析了在线评论的幂律和J型分布，但并未专门将分布理解与虚假评论者检测联系起来。",
+      "rhetorical_function_cn": "把缺口进一步收窄到分布特征与检测的连接。",
+      "depends_on_cn": "第一处缺口。",
+      "sets_up_cn": "引出本文的分布转换和特征工程设计。",
+      "evidence_pointer": "Introduction paragraph 5"
+    },
+    {
+      "order": 12,
+      "section": "1. Introduction",
+      "locator": "P6 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "总体来看，没有综合考虑特征工程特定方面和类别不平衡的分类研究用于识别虚假评论和意见垃圾制造者。",
+      "rhetorical_function_cn": "重复并总括缺口。",
+      "depends_on_cn": "第五段的分布文献局限。",
+      "sets_up_cn": "紧接提出本文目标。",
+      "evidence_pointer": "Introduction paragraph 6"
+    },
+    {
+      "order": 13,
+      "section": "1. Introduction",
+      "locator": "P6 S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为填补该缺口，作者旨在设计一种基于创新特征工程的方法，开发包括多个单变量用户评论分布转换的M-SMOTE模型。",
+      "rhetorical_function_cn": "正式提出研究目标。",
+      "depends_on_cn": "前文缺口声明。",
+      "sets_up_cn": "预告核心制品M-SMOTE。",
+      "evidence_pointer": "Introduction paragraph 6"
+    },
+    {
+      "order": 14,
+      "section": "1. Introduction",
+      "locator": "P6 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "主要目标是研究评论中心和评论者中心特征能否用于检测虚假评论，次要目标是研究数据预处理和特征工程对ML分类器的影响并开发M-SMOTE解决类别不平衡。",
+      "rhetorical_function_cn": "把目标拆成主次两层。",
+      "depends_on_cn": "总体研究目标。",
+      "sets_up_cn": "与后面的H1-H4一一对应。",
+      "evidence_pointer": "Introduction paragraph 6"
+    },
+    {
+      "order": 15,
+      "section": "1. Introduction",
+      "locator": "P6 S4",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者在Yelp数据集及其他benchmark数据集上实证检验模型，并分析数据预处理挑战对分类性能的影响。",
+      "rhetorical_function_cn": "预告实验范围。",
+      "depends_on_cn": "研究目标和M-SMOTE设计。",
+      "sets_up_cn": "让读者期待后续实证章节。",
+      "evidence_pointer": "Introduction paragraph 6"
+    },
+    {
+      "order": 16,
+      "section": "2. Related literature",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "大量研究使用监督、无监督和深度学习方法，配合语言特征、用户行为特征和评论者中心特征检测虚假评论。",
+      "rhetorical_function_cn": "系统梳理已有技术空间。",
+      "depends_on_cn": "引言中的文献提及。",
+      "sets_up_cn": "为文献批评和差异化定位提供基础。",
+      "evidence_pointer": "Section 2 paragraphs 1-2"
+    },
+    {
+      "order": 17,
+      "section": "2. Related literature",
+      "locator": "P3",
+      "move_code": "GAP",
+      "paraphrase_cn": "IS文献中利用特征工程、评论中心特征、评论者中心特征和行为特征检测虚假评论仍存在多个局限，新的特征集和特征工程研究不常见。",
+      "rhetorical_function_cn": "指出文献缺口。",
+      "depends_on_cn": "前两段文献综述。",
+      "sets_up_cn": "为本文与既往研究拉开距离。",
+      "evidence_pointer": "Section 2 paragraph 3"
+    },
+    {
+      "order": 18,
+      "section": "2. Related literature",
+      "locator": "P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "本文不同于以往之处是不使用预定特征，而是加入多种评论中心、评论者中心特征及欺诈者行为特征，并让模型自行学习高维特征。",
+      "rhetorical_function_cn": "将自己定位为特征工程创新者。",
+      "depends_on_cn": "文献缺口声明。",
+      "sets_up_cn": "引出后面的特征集合和M-SMOTE设计。",
+      "evidence_pointer": "Section 2 paragraph 4"
+    },
+    {
+      "order": 19,
+      "section": "2. Related literature",
+      "locator": "P5",
+      "move_code": "GAP",
+      "paraphrase_cn": "据作者所知，没有研究调查特征工程和类别不平衡对检测虚假评论者行为的重要性。",
+      "rhetorical_function_cn": "再次以最高级缺口定位研究。",
+      "depends_on_cn": "前一段与Kumar等人的比较。",
+      "sets_up_cn": "强化研究必要性和贡献。",
+      "evidence_pointer": "Section 2 paragraph 5"
+    },
+    {
+      "order": 20,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "从偏态分布中提取、被不平衡分类直接使用的特征会降低预测精度，这由无预处理的baseline模型说明。",
+      "rhetorical_function_cn": "把工程经验作为概念前提。",
+      "depends_on_cn": "文献缺口和特征工程的重要性。",
+      "sets_up_cn": "支撑H3和H4。",
+      "evidence_pointer": "Section 3 paragraph 1"
+    },
+    {
+      "order": 21,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "P1 S2-S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "图1展示研究框架，同时包括类别不平衡和基于分布特征的转换两个场景。",
+      "rhetorical_function_cn": "用图形预告整体实验逻辑。",
+      "depends_on_cn": "偏态分布降低精度的前提。",
+      "sets_up_cn": "让读者理解两种场景的对比就是核心实验。",
+      "evidence_pointer": "Section 3 paragraph 1, Fig. 1"
+    },
+    {
+      "order": 22,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "P1 S4",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "作者预期所提出的包含特定评论和评论者中心特征的模型优于不使用标准化、转换特征和平衡数据集的传统ML模型。",
+      "rhetorical_function_cn": "提前给出主要结果期望。",
+      "depends_on_cn": "研究框架图。",
+      "sets_up_cn": "为后文结果表设置目标。",
+      "evidence_pointer": "Section 3 paragraph 1"
+    },
+    {
+      "order": 23,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "P2 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "数据预处理和特征工程是任何数据科学项目最关键的部分，数据本身决定模型的预测力。",
+      "rhetorical_function_cn": "将特征工程从工具上升为研究命题。",
+      "depends_on_cn": "假设预期。",
+      "sets_up_cn": "引出H1-H4。",
+      "evidence_pointer": "Section 3 paragraph 2"
+    },
+    {
+      "order": 24,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "Hypotheses H1-H2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设一：评论者中心特征比评论中心特征更重要；假设二：组合两类特征比单独使用评论中心特征精度更高。",
+      "rhetorical_function_cn": "正式提出特征类型相关假设。",
+      "depends_on_cn": "特征工程重要性的讨论。",
+      "sets_up_cn": "对应Table 8-10的检验。",
+      "evidence_pointer": "Section 3, Hypotheses 1-2"
+    },
+    {
+      "order": 25,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "Hypotheses H3-H4",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设三：偏态特征直接用于ML会降低预测精度；假设四：平衡且经过预处理的数据会比不平衡原始数据带来更好预测。",
+      "rhetorical_function_cn": "正式提出预处理和类别不平衡假设。",
+      "depends_on_cn": "偏态分布降低精度的经验前提。",
+      "sets_up_cn": "对应Table 5/6的消融比较。",
+      "evidence_pointer": "Section 3, Hypotheses 3-4"
+    },
+    {
+      "order": 26,
+      "section": "3. Conceptual background and research hypotheses",
+      "locator": "Contribution summary",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "主要贡献包括开发基于M-SMOTE的概率检测方法、测试四个假设、提取12个特征，并与六个既往研究比较。",
+      "rhetorical_function_cn": "在方法部分前预先声明贡献。",
+      "depends_on_cn": "四个假设。",
+      "sets_up_cn": "定义论文贡献评价基准。",
+      "evidence_pointer": "Section 3 end of paragraph"
+    },
+    {
+      "order": 27,
+      "section": "4. Data description and model development",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "构建虚假评论检测模型的一大挑战是获得明确标识为虚假的评论，许多研究使用人工标注或Amazon Mechanical Turk生成的伪虚假评论。",
+      "rhetorical_function_cn": "点明数据合法性是方法论关键。",
+      "depends_on_cn": "前文对检测模型的讨论。",
+      "sets_up_cn": "为选择真实Yelp数据集辩护。",
+      "evidence_pointer": "Section 4 paragraph 1"
+    },
+    {
+      "order": 28,
+      "section": "4. Data description and model development",
+      "locator": "P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用人工标注数据会有根本问题，因为Turker写虚假评论时的心理状态不同于真实虚假评论者，因此本文采用Rayana和Akoglu收集的Yelp真实过滤数据。",
+      "rhetorical_function_cn": "用心理状态差异说明使用真实平台数据的原因。",
+      "depends_on_cn": "数据挑战的讨论。",
+      "sets_up_cn": "增强后续结果的外部有效性。",
+      "evidence_pointer": "Section 4 paragraph 2, citing Rayana and Akoglu"
+    },
+    {
+      "order": 29,
+      "section": "4. Data description and model development",
+      "locator": "P2 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "数据包含四个州5044家餐厅、260277位评论者，原始数据只有6个变量，作者从中提取12个新特征。",
+      "rhetorical_function_cn": "具体说明数据规模和特征工程产物。",
+      "depends_on_cn": "选择真实数据的决定。",
+      "sets_up_cn": "为后续特征列表和统计表提供背景。",
+      "evidence_pointer": "Section 4 paragraph 2"
+    },
+    {
+      "order": 30,
+      "section": "4. Data description and model development",
+      "locator": "P3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "图1展示模型开发的四个阶段：文本预处理、特征提取、特征工程、检测模型开发，并描述多数投票规则。",
+      "rhetorical_function_cn": "用四阶段框架把研究过程可视化。",
+      "depends_on_cn": "特征和数据集描述。",
+      "sets_up_cn": "作为方法部分的结构地图。",
+      "evidence_pointer": "Section 4 paragraph 3, Fig. 1"
+    },
+    {
+      "order": 31,
+      "section": "4.1.1 Reviewer-centric features",
+      "locator": "P1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "真实评论者倾向于在批评与非批评评论间保持平衡，欺诈评论者则发布极端评分，因此熵率较小。",
+      "rhetorical_function_cn": "为rating entropy特征提供行为机制。",
+      "depends_on_cn": "评论者中心特征总体介绍。",
+      "sets_up_cn": "使后续特征重要性结果可解释。",
+      "evidence_pointer": "Section 4.1.1(i), citing Luca and Zervas"
+    },
+    {
+      "order": 32,
+      "section": "4.1.1 Reviewer-centric features",
+      "locator": "P5-P6",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "水军通常使用短命账号并早期发评，因此评论间隔、账号寿命和评论时间都是检测线索。",
+      "rhetorical_function_cn": "为review gap、user tenure、time of review提供行为机制。",
+      "depends_on_cn": "评论者中心特征总体介绍。",
+      "sets_up_cn": "为这些特征进入模型提供理由。",
+      "evidence_pointer": "Section 4.1.1(ii)-(vi)"
+    },
+    {
+      "order": 33,
+      "section": "4.1.2 Review-centric features",
+      "locator": "P1-P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "虚假评论者可能写较少细节的评论，真实评论者更详细，因此用评论长度和词密度作为文本特征。",
+      "rhetorical_function_cn": "为文本特征提供行为合理性。",
+      "depends_on_cn": "评论中心特征总体介绍。",
+      "sets_up_cn": "形成与评论者中心特征的对照。",
+      "evidence_pointer": "Section 4.1.2(i)-(ii), citing Jindal and Liu"
+    },
+    {
+      "order": 34,
+      "section": "4.1.2 Review-centric features",
+      "locator": "P5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "职业水军可能重复使用特定词语或短语，因此用大词集检查每条评论是否命中可疑表达，计算SpamHitScore。",
+      "rhetorical_function_cn": "为SpamHitScore特征提供设计原理。",
+      "depends_on_cn": "语言特征知识。",
+      "sets_up_cn": "使该特征成为文本检测的核心组件。",
+      "evidence_pointer": "Section 4.1.2(v), citing Jindal and Liu"
+    },
+    {
+      "order": 35,
+      "section": "5.1 Step 1: creation of new variables",
+      "locator": "P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "本节用特征及其分布特性回答两个问题：偏态特征直接使用是否降低精度，各特征对整体垃圾行为识别的具体贡献是什么。",
+      "rhetorical_function_cn": "把下一步操作与研究问题绑定。",
+      "depends_on_cn": "特征生成先验。",
+      "sets_up_cn": "引出离群值处理和特征排名。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 36,
+      "section": "5.2 Step 2: treatment of missing values, outliers and Feature ranking",
+      "locator": "P1 S1-S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "离群值会显著增加偏态，但也可能包含学习信息，因此先可视化箱线图、做log转换保留新异点，再按四分位距移除离群值和极端值。",
+      "rhetorical_function_cn": "解释离群值处理的工程取舍。",
+      "depends_on_cn": "偏态降低精度的假设。",
+      "sets_up_cn": "为后续特征降维和分布转换提供干净数据。",
+      "evidence_pointer": "Section 5.2 paragraph 1"
+    },
+    {
+      "order": 37,
+      "section": "5.2 Step 2: treatment of missing values, outliers and Feature ranking",
+      "locator": "P1 S4-S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "特征重要性排名把19个特征缩减为12个，并发现特征间没有强相关或严重共线性。",
+      "rhetorical_function_cn": "报告特征筛选结果。",
+      "depends_on_cn": "离群值处理。",
+      "sets_up_cn": "支撑特征工程对模型精度提升的解释。",
+      "evidence_pointer": "Section 5.2, Table 3"
+    },
+    {
+      "order": 38,
+      "section": "5.3 Step 3: operating features individually",
+      "locator": "P1 S1-S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "标准化能消除尺度差异，避免大范围特征主导学习率，因此使用min-max、Yeo-Johnson和Box-Cox转换，并针对刚性偏态做多步幂转换。",
+      "rhetorical_function_cn": "给出特征转换的技术理由。",
+      "depends_on_cn": "前一步离群值处理。",
+      "sets_up_cn": "为模型开发和H3检验准备正态特征。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 39,
+      "section": "5.4 Step 4: solving the class imbalance problem",
+      "locator": "P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "Yelp数据中多数类与少数类比例为91:9，作者开发M-SMOTE，把比例降为71:29。",
+      "rhetorical_function_cn": "量化类别不平衡并预告算法。",
+      "depends_on_cn": "前文预处理完成。",
+      "sets_up_cn": "引入M-SMOTE算法细节。",
+      "evidence_pointer": "Section 5.4"
+    },
+    {
+      "order": 40,
+      "section": "5.4 Step 4: solving the class imbalance problem",
+      "locator": "P2-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "M-SMOTE先用GaussianProcessClassifier找出误分类少数样本，用kmeans确定中心，用cosine相似度计算距离，并据邻居中少数类数量调整生成权重，以减少噪声。",
+      "rhetorical_function_cn": "详细说明M-SMOTE机制。",
+      "depends_on_cn": "SMOTE/LR-SMOTE的缺陷讨论。",
+      "sets_up_cn": "为Table 4的M-SMOTE对比提供算法基础。",
+      "evidence_pointer": "Section 5.4, Fig. 4, Eq. 6"
+    },
+    {
+      "order": 41,
+      "section": "5.4 Step 4: solving the class imbalance problem",
+      "locator": "P4-P5",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "为验证M-SMOTE可通用，作者在6个UCI数据集上比较M-SMOTE、SMOTE和无处理，显示M-SMOTE在多数数据集上P/R/F1/AUC更高。",
+      "rhetorical_function_cn": "用外部数据集提前验证算法普适性。",
+      "depends_on_cn": "M-SMOTE设计。",
+      "sets_up_cn": "为Yelp主实验的结果可信度背书。",
+      "evidence_pointer": "Section 5.4, Table 4"
+    },
+    {
+      "order": 42,
+      "section": "5.5 Step 5: model development",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者采用5折交叉验证，在三个实验场景中比较有无预处理和特征工程的效果。",
+      "rhetorical_function_cn": "明确评价协议。",
+      "depends_on_cn": "M-SMOTE和预处理步骤。",
+      "sets_up_cn": "为Table 5-7结果做方法铺垫。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 43,
+      "section": "5.5.1 First scenario- no pre-processing",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "未做任何预处理和特征工程的XGBoost baseline为P 73.2%、R 70.7%、F1 72.1%、AUC 79.6%，显著低于解决所有预处理问题后的同样模型。",
+      "rhetorical_function_cn": "提供性能缺口的量化证据。",
+      "depends_on_cn": "5折交叉验证。",
+      "sets_up_cn": "支撑H3/H4。",
+      "evidence_pointer": "Section 5.5.1, Table 5"
+    },
+    {
+      "order": 44,
+      "section": "5.5.2 Second Scenario",
+      "locator": "P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "使用M-SMOTE解决类别不平衡后，XGBoost等分类器的所有指标均提升，因此支持第四个假设。",
+      "rhetorical_function_cn": "报告类别不平衡处理的独立贡献。",
+      "depends_on_cn": "Baseline表。",
+      "sets_up_cn": "引出多数投票最终模型。",
+      "evidence_pointer": "Section 5.5.2, Table 6"
+    },
+    {
+      "order": 45,
+      "section": "5.5.2 Second Scenario",
+      "locator": "P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "对最优的三个模型XGBoost、LSTM和LightGBM应用多数投票，最终模型P 79.4%、R 83.5%、F1 85.3%、AUC 87.4%，相比baseline提升2-6%。",
+      "rhetorical_function_cn": "给出主实验最终性能。",
+      "depends_on_cn": "预处理和M-SMOTE结果。",
+      "sets_up_cn": "成为与既往研究比较的主证据。",
+      "evidence_pointer": "Section 5.5.2, Table 7"
+    },
+    {
+      "order": 46,
+      "section": "5.5.2 Second Scenario",
+      "locator": "P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "单独使用评论者中心特征时，多个分类器性能显著高于单独使用评论中心特征，因此H1得到支持。",
+      "rhetorical_function_cn": "报告H1检验结果。",
+      "depends_on_cn": "特征类型拆分表。",
+      "sets_up_cn": "后续用t检验进一步验证H2。",
+      "evidence_pointer": "Section 5.5.2, Table 8"
+    },
+    {
+      "order": 47,
+      "section": "5.5.2 Second Scenario",
+      "locator": "P4-P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "组合两类特征在XGBoost和Logistic回归上有显著提升，t检验显示部分模型达到0.001显著水平，因此作者声明H2得到支持。",
+      "rhetorical_function_cn": "报告组合特征的收益和统计检验。",
+      "depends_on_cn": "Table 9/10。",
+      "sets_up_cn": "为讨论中强调评论者中心特征重要性提供证据。",
+      "evidence_pointer": "Section 5.5.2, Table 9/10"
+    },
+    {
+      "order": 48,
+      "section": "5.5.2 Second Scenario",
+      "locator": "P6-P7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "文本分析显示正面5星评论更长、拼写错误更多，负面1星评论较短且常无标点；虚假评论包含更多内容、动词、形容词和填充词，而真实评论更多名词和代词。",
+      "rhetorical_function_cn": "补充描述性文本证据，使特征工程有解释性。",
+      "depends_on_cn": "POS和词频统计。",
+      "sets_up_cn": "为讨论中的管理含义提供语言学观察。",
+      "evidence_pointer": "Section 5.5.2, Figs. 5-7"
+    },
+    {
+      "order": 49,
+      "section": "6. Methodology validation and performance comparison with prior studies",
+      "locator": "P1",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "作者在Amazon两个数据集和Yelp开放数据上重复相同特征工程和预处理，结果与原始Yelp结果一致，分类器性能均高于原始未处理数据。",
+      "rhetorical_function_cn": "用外部数据验证管道可复制性。",
+      "depends_on_cn": "Yelp主实验。",
+      "sets_up_cn": "为最终对比既往研究提供证据。",
+      "evidence_pointer": "Section 6, Table 11"
+    },
+    {
+      "order": 50,
+      "section": "6. Methodology validation and performance comparison with prior studies",
+      "locator": "P2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "作者列出六个既往研究在Yelp/Amazon上的AUC或准确率，并称本文模型在四个数据集上AUC均超过80%，尤其是主Yelp数据达到87.4%，因此优于这些方法。",
+      "rhetorical_function_cn": "用历史结果作为终极benchmark。",
+      "depends_on_cn": "外部验证表。",
+      "sets_up_cn": "支撑论文的竞争力声明。",
+      "evidence_pointer": "Section 6 paragraph 2"
+    },
+    {
+      "order": 51,
+      "section": "7. Discussions, conclusion, limitations and future work",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文提出基于M-SMOTE的虚假评论检测框架，能够帮助营销管理者和消费者识别意见垃圾制造者；据作者所知，此前没有模型完整利用特征工程、预处理和评论者行为分布。",
+      "rhetorical_function_cn": "在结论开头重申核心贡献并闭合引言缺口。",
+      "depends_on_cn": "全部实验证据。",
+      "sets_up_cn": "为随后机制解释和管理含义提供总纲。",
+      "evidence_pointer": "Section 7 paragraph 1"
+    },
+    {
+      "order": 52,
+      "section": "7. Discussions, conclusion, limitations and future work",
+      "locator": "P1 S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者列出四项工作：推导特征分布、转换特征、开发M-SMOTE、把单变量分布整合进ML模型检测欺诈者。",
+      "rhetorical_function_cn": "以编号方式把贡献清单化。",
+      "depends_on_cn": "前文方法。",
+      "sets_up_cn": "使总结易于被审稿人和读者记忆。",
+      "evidence_pointer": "Section 7 paragraph 1"
+    },
+    {
+      "order": 53,
+      "section": "7. Discussions, conclusion, limitations and future work",
+      "locator": "P2 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "作者认为评论者中心特征更有效，因为操纵用户的长期行为比伪造单条评论更难、成本更高，因此是更可靠的检测线索。",
+      "rhetorical_function_cn": "为经验结果提供事后机制解释。",
+      "depends_on_cn": "H1/H2结果。",
+      "sets_up_cn": "支撑平台应鼓励社交互动以积累行为证据的建议。",
+      "evidence_pointer": "Section 7 paragraph 2"
+    },
+    {
+      "order": 54,
+      "section": "7. Discussions, conclusion, limitations and future work",
+      "locator": "P2 S4-S6",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "该方案可扩展到识别社交机器人、帮助电商平台重新设计检测模型，并建议平台鼓励顾客与评论者之间的社交互动。",
+      "rhetorical_function_cn": "把算法结果转化为平台治理建议。",
+      "depends_on_cn": "机制解释。",
+      "sets_up_cn": "提升论文对实践读者的吸引力。",
+      "evidence_pointer": "Section 7 paragraph 2"
+    },
+    {
+      "order": 55,
+      "section": "7. Discussions, conclusion, limitations and future work",
+      "locator": "P3 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "模型只测试了三个数据集和两个平台，新特征在其他平台可能不可得；水军动态改变行为时模型可能产生虚假信号，未来应扩展平台、特征和动态检测。",
+      "rhetorical_function_cn": "主动划定边界，避免过度声称。",
+      "depends_on_cn": "前文所有贡献。",
+      "sets_up_cn": "为后续研究留出空间。",
+      "evidence_pointer": "Section 7 paragraph 3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认已有算法众多，再把缺口收窄为“特征工程+分布特征+类不平衡”三个工程概念，并强调没有综合研究；同时用Kumar、Zhang等前人工作的不足来衬托自己的差异。",
+    "signposting_cn": "开头列出四个假设和四个贡献；方法部分用Step 1-Step 5明确标注；每个场景命名直接对应研究问题；表格和图表大量使用，读者可快速定位证据。",
+    "transition_logic_cn": "每个Step以“下一步需要解决...”的方式连接；主实验完成后用特征类型对比解释为什么有效，再用外部验证和既往研究比较扩大适用范围。",
+    "claim_evidence_rhythm_cn": "先给假设，再用一张表给出数字，然后用一句话宣称支持或不支持；数字与假设一一挂靠，避免抽象议论。",
+    "benchmark_narrative_cn": "benchmark既是消融也是外部验证：UCI验证M-SMOTE的普适性，Amazon/Yelp验证管道的跨平台性，与既往研究AUC比较提供终极竞争力。",
+    "theory_return_cn": "由于没有正式理论，结果返回的是经验知识：把“评论者中心特征更好”解释为行为操纵成本更高，从而把工程结果上升为关于用户行为线索价值的一般认识。",
+    "contribution_positioning_cn": "贡献定位在IS数字平台文献的欺诈检测工具不足，而非提出新理论；每个贡献都强调对营销管理者和平台的可用性。",
+    "novelty_protection_cn": "通过把普通工程步骤打包为“四个贡献”“M-SMOTE算法”“12个特征”以及外部数据集和既往研究分数，避免让贡献退化为一次性性能报告。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用行业数据和真实平台诉讼案例建立“评论可操纵且后果严重”的背景。",
+        "research_job_cn": "收集消费者调查、企业起诉、监管案例等现实证据。",
+        "required_evidence_cn": "至少一个高引用统计和1-2个标志性事件。",
+        "transition_to_next_cn": "从现实操纵现象转向检测技术不足。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "系统但简短地分类综述已有检测方法，并指出综合缺口。",
+        "research_job_cn": "对比监督/无监督/非ML方法，定位自己在特征工程和类不平衡上的差异。",
+        "required_evidence_cn": "能说明已有方法没有覆盖的2-3个可操作问题。",
+        "transition_to_next_cn": "把缺口转化为具体研究目标或假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "从经验知识或工程直觉提出假设，描述概念框架图。",
+        "research_job_cn": "定义特征来源、数据规模和预处理步骤。",
+        "required_evidence_cn": "假设必须能被后续表格直接检验。",
+        "transition_to_next_cn": "进入数据描述和方法设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "说明数据选择逻辑，尤其是为什么用真实平台数据，并列出特征生成规则。",
+        "research_job_cn": "获得带标签的真实数据，生成可复现特征。",
+        "required_evidence_cn": "数据规模、原始变量、新特征定义和描述性统计。",
+        "transition_to_next_cn": "从特征集进入预处理链。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "逐步展示离群值处理、标准化、分布转换和类不平衡处理，强调每一步的必要性。",
+        "research_job_cn": "实现可复现的预处理代码并用可视化对比前后分布。",
+        "required_evidence_cn": "移除数量、特征重要性、转换前后图、不平衡比例改变。",
+        "transition_to_next_cn": "这些预处理效果必须与后续性能提升挂钩。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用无预处理baseline和完整处理后的结果建立明确的性能缺口，然后用多数投票或集成给出最终性能。",
+        "research_job_cn": "运行多个分类器，使用交叉验证并报告P/R/F1/AUC。",
+        "required_evidence_cn": "至少一张baseline对照表和一张最终模型表。",
+        "transition_to_next_cn": "用消融和特征对比回答“为什么有效”。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "通过外部数据集和既往研究分数把性能提升一般化，并在讨论中回到引言缺口和边界条件。",
+        "research_job_cn": "在其他数据集上重复相同管道；检索同数据集上的既往结果。",
+        "required_evidence_cn": "外部验证表、既往研究AUC比较、明确的局限声明。",
+        "transition_to_next_cn": "以设计知识、管理含义和未来研究收尾。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用真实案例和统计数据建立现实严重性",
+      "把缺口具体化为可操作工程概念（特征分布+类不平衡）",
+      "先baseline后treatment的逐步消融",
+      "外部数据集验证和既往研究分数比较",
+      "用行为机制解释为何某类特征更有效"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "Yelp官方过滤标签的真实平台数据，普通研究者不易获得同样质量的标签",
+      "LSTM/RNN等深度学习模型和多个UCI/Amazon数据集的复现需要中等以上算力和数据整理",
+      "M-SMOTE算法本身的实现和调参需要算法工程投入",
+      "与多个既往研究做公平比较需要访问原始代码或统一复现，本文并未完全实现"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“我们用了特征工程和SMOTE”而缺少逐步消融和外部验证",
+      "不能宣称outperform prior studies而不做统一评估或说明比较前提",
+      "不要把H1-H4包装成理论假设却没有任何理论机制",
+      "不能在讨论中声称平台治理意义，却只在Yelp/Amazon数据集上测试"
+    ],
+    "single_best_description_of_the_routine_cn": "用真实平台数据+手工特征工程+改进的过采样算法，把“预处理与特征分布”这个工程问题包装成性能缺口，再用多数据集benchmark和与既往研究分数对比，把一次性性能提升上升为平台反作弊设计知识。"
+  },
+  "confidence": 0.83,
+  "limitations_cn": "分析仅基于提供的全文文本；文章部分表格编号出现混乱，图的内容无法直接读取，依赖标题和正文推断；未获得附录或补充材料；对既往研究比较是否公平只能根据文本描述判断。",
+  "usage": {
+    "prompt_tokens": 25876,
+    "completion_tokens": 25575,
+    "total_tokens": 51451,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 22548
+  }
+}

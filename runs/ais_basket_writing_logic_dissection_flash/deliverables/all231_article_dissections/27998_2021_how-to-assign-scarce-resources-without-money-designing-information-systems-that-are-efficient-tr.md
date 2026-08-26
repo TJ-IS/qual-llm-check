@@ -1,0 +1,1801 @@
+# How to Assign Scarce Resources Without Money: Designing Information Systems that are Efficient, Truthful, and (Pretty) Fair
+
+- 作者：Martin Bichler; Alexander Hammerl; Thayer Morrill; Stefan Waldherr
+- 年份 / 期刊：2021 / Information Systems Research
+- DOI：10.1287/isre.2020.0959
+- 源文件：27998_2021_how-to-assign-scarce-resources-without-money-designing-information-systems-that-are-efficient-tr.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：在不能使用货币且课程、学校等对象有最低配额的一对多分配中，如何设计一个既满足策略防护、帕累托效率又尽可能少嫉妒的匹配信息系统或机制？
+
+- 制品与设计：RESPCT（Range-widened Extended Seat Prioritized Clinch and Trade）机制：在TTC/ESTTC基础上加入clinching、prioritized pointing、最大化保证席位向量，并将扩展席位、优先指向和动态保证组合起来。
+
+- 客观结果：在TUM的10个真实数据集和50个配额实例中，RESPCT的正当嫉妒实例比ESTTC/ESPCT显著减少约三倍以上；相比ESDA，约10%学生可被帕累托改进，RESPCT效率远高；合成数据至2000名学生、100门课程可在90分钟内求解。
+
+- 核心贡献：提供了无需货币转移、满足策略防护与效率且低嫉妒的机制，并以形式证明、真实现场数据和可扩展性实验给出证据，促成TUM计算机系从DA切换到RESPCT。
+
+- 整篇论证链：论文从不带货币的一对多匹配问题出发，指出效率与公平无法同时完美实现；以课程分配为实例，指出TTC低公平、DA低效率且都难以满足最低配额。作者把理论观察转化为三个设计构件：clinching、prioritized pointing和最大席位保证，最终组合成RESPCT。形式定理证明其策略防护、帕累托效率与σ-互惠最好；用真实现场数据量化公平改进，用ESDA对照量化效率优势，用合成数据证明可扩展性，最后把结果回接到学校选择、医疗岗位匹配等更广应用与设计科学贡献上。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确按Gregor和Hevner的设计科学发表模板组织：先给出需求与相关文献，再构建RESPCT制品，用形式证明与基于真实现场数据的计算实验评价，最后提炼为可复用设计知识和政策采纳。它不是以实验室被试实验为主，也不是纯benchmark计算制品，而是设计科学中的'需求—构建—评价'路径。
+
+- 主导写作弧线判定：论文从效率、公平、策略防护和最低配额等设计需求出发，逐步构建RESPCT机制，并以定理和真实/synthetic数据评价，最终推出面向无货币一对多分配的设计原则：用clinching消除不必要交易、用prioritized pointing降低嫉妒、用最大保证席位扩大公平边界。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：论文先形式化课程分配模型和基准机制，并建立效率/公平的不可兼得性；随后逐个引入降低嫉妒的设计构件，形成RESPCT；接着用真实现场数据验证公平性，用ESDA对照验证效率，用合成数据验证可扩展性；最后将结果上升为设计知识与一般化主张。
+
+### studies_or_phases
+
+#### 1. 形式模型与基准机制/不可行性分析
+
+- order：1
+
+- name_cn：形式模型与基准机制/不可行性分析
+
+- question_cn：如何形式化带最低配额的一对多课程分配问题，并刻画效率、公平与策略防护之间的张力？
+
+- inputs_and_setting_cn：形式化市场元组(S,C,p,q,>_S,>_C)；TTC、ESTTC算法；两个说明性例子（Example 2和Example 3）。
+
+- designed_or_compared_object_cn：TTC、DA、ESTTC在定义层面的比较；引入mutual best和σ-mutual best作为公平性放宽。
+
+- baseline_control_or_counterfactual_cn：TTC作为高效机制的基准，DA作为无嫉妒机制的基准；Theorem 1给出最低配额下mutual best不可能成立。
+
+##### objective_metrics
+
+1. 是否存在满足mutual best的匹配
+
+2. 效率与无嫉妒是否可同时实现
+
+- analysis_method_cn：形式定义、反例、定理证明。
+
+- main_result_cn：公平与效率不可兼得；有最低配额时mutual best不可实现，需要放宽为σ-mutual best。
+
+- argumentative_role_cn：确立问题边界和评价语言，说明为什么需要新机制。
+
+- remaining_uncertainty_cn：尚未回答如何在不牺牲效率/策略防护的前提下降低嫉妒。
+
+- link_to_next_phase_cn：引出设计目标：尽量扩大可保证席位并减少TTC的嫉妒。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Example 2
+
+3. Theorem 1
+
+#### 2. 无配额设计构件：Clinching与Prioritized Pointing（PCT）
+
+- order：2
+
+- name_cn：无配额设计构件：Clinching与Prioritized Pointing（PCT）
+
+- question_cn：在无最低配额时，能否通过消除不必要交易和改变课程指向规则来降低TTC的嫉妒，同时保留效率和策略防护？
+
+- inputs_and_setting_cn：Example 4和Example 5；Morrill(2015b)的clinching思想；课程优先级和学生偏好数据示例。
+
+- designed_or_compared_object_cn：PCT机制（Algorithm 3）vs TTC；也提及与ETTC的初步比较。
+
+- baseline_control_or_counterfactual_cn：TTC作为baseline；Example 5中如果课程不指向最高优先级学生而指向另一保证学生，结果公平且高效。
+
+##### objective_metrics
+
+1. 帕累托效率
+
+2. 策略防护
+
+3. mutual best
+
+4. 实例中的正当嫉妒数量
+
+- analysis_method_cn：算法构造、定理证明（Theorem 2、Theorem 3、Corollary 1）和反例。
+
+- main_result_cn：PCT是策略防护、帕累托效率且满足mutual best；在两门课且容量足够时等价于学生提议DA，因而公平；但多于两门课仍可能有嫉妒。
+
+- argumentative_role_cn：证明clinching和prioritized pointing是两个有效构件，并为配额扩展提供基础。
+
+- remaining_uncertainty_cn：尚无解析保证PCT总比TTC公平；也没有处理最低配额。
+
+- link_to_next_phase_cn：需要把这些构件移植到带最低配额的扩展席位机制中。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.2
+
+3. Examples 4-5
+
+4. Theorems 2-3
+
+#### 3. 配额扩展与最大保证席位（ESPCT与σ最大化）
+
+- order：3
+
+- name_cn：配额扩展与最大保证席位（ESPCT与σ最大化）
+
+- question_cn：如何将clinching和prioritized pointing扩展到带最低配额的市场，并最大化可以保证的席位数量？
+
+- inputs_and_setting_cn：Fragiadakis et al.(2016)的ESTTC；可行性条件(FC)；MIP公式；顶点覆盖归约。
+
+- designed_or_compared_object_cn：ESPCT（Algorithm 4）vs ESTTC；算法5用于最大化保证席位向量σ。
+
+- baseline_control_or_counterfactual_cn：ESTTC作为配额基准机制；以p-mutual best表示其保证水平；用σ=p与σ=q/更大向量对比。
+
+##### objective_metrics
+
+1. 是否满足p-mutual best
+
+2. 可行性条件(FC)
+
+3. σ向量的大小
+
+4. 是否强NP完全
+
+- analysis_method_cn：算法构造、定理证明（Theorem 4、Corollary 2、Theorems 5-7）、MIP+greedy算法。
+
+- main_result_cn：ESPCT策略防护、帕累托效率且满足p-mutual best；用最大保证席位向量替代p可使机制更公平；验证σ相容是强NP完全问题，但可通过MIP和greedy得到maximal向量。
+
+- argumentative_role_cn：证明配额不是简单附加约束，而是需要专门设计保证席位的问题。
+
+- remaining_uncertainty_cn：尚未将最大σ直接用于clinching和prioritized pointing的完整机制。
+
+- link_to_next_phase_cn：引出RESPCT完整算法，利用σ进行范围加宽的clinch和指向。
+
+##### evidence_pointers
+
+1. Section 4.3
+
+2. Section 4.4
+
+3. Theorems 4-7
+
+4. Algorithm 5
+
+#### 4. 完整制品：RESPCT机制
+
+- order：4
+
+- name_cn：完整制品：RESPCT机制
+
+- question_cn：如何把clinching、prioritized pointing和最大化保证席位统一为一个完整的、带最低配额且高效的机制？
+
+- inputs_and_setting_cn：Algorithm 5输出的σ；PCT和ESPCT的构件；Example 7使用与Example 3相同的市场。
+
+- designed_or_compared_object_cn：RESPCT（Algorithm 6）vs ESTTC、ESPCT；在Example 7中RESPCT达到无嫉妒。
+
+- baseline_control_or_counterfactual_cn：以ESTTC和ESPCT的同一实例作为对照，展示RESPCT的嫉妒从4个实例降到0。
+
+##### objective_metrics
+
+1. 策略防护
+
+2. 帕累托效率
+
+3. σ-mutual best且Σσ≥n
+
+4. 特定容量条件下的mutual best
+
+- analysis_method_cn：算法设计与形式证明（Theorem 8、Theorem 9）。
+
+- main_result_cn：RESPCT是策略防护、帕累托效率、满足σ-mutual best且Σσ≥n；当n与最大/最小容量满足特定不等式时，还满足mutual best。
+
+- argumentative_role_cn：给出最终可部署的制品及其形式保证。
+
+- remaining_uncertainty_cn：形式性质成立，但实证公平性、效率和可扩展性尚待评价。
+
+- link_to_next_phase_cn：转向真实现场数据的实验评价。
+
+##### evidence_pointers
+
+1. Section 4.5
+
+2. Example 7
+
+3. Theorems 8-9
+
+#### 5. 基于现场数据的公平性评价
+
+- order：5
+
+- name_cn：基于现场数据的公平性评价
+
+- question_cn：在真实课程分配数据上，RESPCT是否比配额的TTC变体更公平？
+
+- inputs_and_setting_cn：TUM计算机系2014-2016年10个分配集，学生数27-733，课程数6-43；每个数据集按最低配额p=3到7生成共50个实例。
+
+- designed_or_compared_object_cn：RESPCT vs ESPCT vs ESTTC；ESTTC使用随机主列表并平均10次运行。
+
+- baseline_control_or_counterfactual_cn：ESTTC作为配额TTC基准；ESPCT作为去掉范围加宽、只保留clinch和prioritized pointing的对照。
+
+##### objective_metrics
+
+1. 每个学生的正当嫉妒实例数
+
+2. 有正当嫉妒的学生比例
+
+3. 被嫉妒的学生比例
+
+- analysis_method_cn：计算实验、图与表对比。
+
+- main_result_cn：RESPCT在所有配额水平下嫉妒最低；即使不扩大保证席位，ESPCT也已大幅优于ESTTC；配额提高时RESPCT优势缩小，但仍占优。
+
+- argumentative_role_cn：为RESPCT优于现有高效机制提供核心经验证据。
+
+- remaining_uncertainty_cn：尚未检验相对公平机制ESDA的效率损失，以及大规模运行的可行性。
+
+- link_to_next_phase_cn：用ESDA评估效率，用合成数据评估可扩展性。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 5.2
+
+3. Figures 6-8
+
+4. Table 9
+
+#### 6. 效率与可扩展性评价
+
+- order：6
+
+- name_cn：效率与可扩展性评价
+
+- question_cn：RESPCT相比公平机制ESDA是否更高效，且能否扩展到更大规模？
+
+- inputs_and_setting_cn：同一组现场数据；ESDA作为公平基准；合成数据最多2000名学生、60-100门课程，偏好结构与现场数据相似。
+
+- designed_or_compared_object_cn：RESPCT vs ESDA；RESPCT在大规模合成数据上的运行时间。
+
+- baseline_control_or_counterfactual_cn：ESDA作为公平且策略防护机制的基准；扩展席位版本的DA作为效率对照。
+
+##### objective_metrics
+
+1. 平均排名
+
+2. 排名分布
+
+3. 可帕累托改进的学生比例
+
+4. 运行时间
+
+- analysis_method_cn：表/图对比与描述性统计。
+
+- main_result_cn：ESDA平均约10%的学生可被帕累托改进；RESPCT在平均排名和等级分布上显著更高效；合成数据最大实例90分钟内可解，且公平性和效率结论与现场数据一致。
+
+- argumentative_role_cn：补全效率与规模证据，证明RESPCT不仅是公平改进，而且实际可用。
+
+- remaining_uncertainty_cn：没有随机现场试验或部署后行为结果；对其它领域的推广仍靠类推。
+
+- link_to_next_phase_cn：进入讨论与贡献边界，将结果上升为一般设计知识。
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Section 5.4
+
+3. Table 8
+
+4. Figure 9
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 匹配偏好可协调组织内稀缺资源且不需货币，是信息系统的有力设计原则。
+
+2. GAP: 策略防护、效率与无嫉妒三者不可兼得；现有机制要么高效要么无嫉妒，且无嫉妒机制效率损失显著。
+
+3. PHENOMENON: 课程分配是广泛存在且有最低配额要求的一对多匹配问题。
+
+4. OBJECTIVE: 引入RESPCT机制，满足最低配额、策略防护、效率且低嫉妒。
+
+5. METHOD_AND_OUTCOME: 设计科学路径，结合形式分析、现场数据实验，导致政策改变并被实际使用。
+
+### introduction_moves
+
+1. CONTEXT: 从Gale-Shapley婚姻问题引入匹配理论，说明无货币分配是核心场景。
+
+2. PRIOR_KNOWLEDGE: 学校分配与课程分配把对象看作被消费物，学生优先级代表权利。
+
+3. PHENOMENON: 课程分配在TUM普遍存在，教授提交优先级，学生只能选一个研讨班/实验课。
+
+4. GAP: 课程分配与其它匹配应用相似，但最低配额是关键差异且未被经典文献充分处理。
+
+5. REQUIREMENT: 效率、公平和策略防护是核心设计目标。
+
+6. GAP: 帕累托效率与公平并不总是能同时实现。
+
+7. WHY_GAP_MATTERS: IS文献已强调激励对齐，但几乎都集中于拍卖；本文补充无货币转移的匹配设计视角。
+
+8. CONTRIBUTION: 文章作为设计科学贡献，提供策略防护、高效且低嫉妒的机制，并考虑最低配额。
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: TTC策略防护且高效但非无嫉妒；DA策略防护且无嫉妒但非高效。
+
+2. PRIOR_KNOWLEDGE: Roth证明TTC策略防护，Ma给出住房市场唯一性刻画。
+
+3. PRIOR_KNOWLEDGE: Abdulkadiroglu-Sonmez将TTC适应学校选择，但多单位TTC的嫉妒程度很少被研究。
+
+4. GAP: Fragiadakis等人的ESTTC处理最低配额，但不考虑嫉妒程度。
+
+5. LIMITATION: Hakimov-Kesten的ETTC不处理最低配额；整合是非平凡的。
+
+6. THEORY_PROPOSITION: 无配额时保证最高优先级可避免trivial cycle嫉妒；有配额时需要σ-mutual best。
+
+### artifact_design_moves
+
+1. STUDY_OVERVIEW: 第4节预告RESPCT由clinching、prioritized pointing、配额扩展与最大保证席位构成。
+
+2. MECHANISM: TTC中的不必要交易会让低优先级学生制造嫉妒，clinching可消除。
+
+3. MECHANISM: 课程指向规则短视；指向其它课程平均优先级最高的保证学生可减少嫉妒。
+
+4. REQUIREMENT: 在配额存在时需要计算最大可行保证席位向量σ。
+
+5. DESIGN_FEATURE: ESPCT用扩展席位和平均优先级主列表改造PCT。
+
+6. DESIGN_FEATURE: Algorithm 5用MIP验证+greedy最大化σ。
+
+7. DESIGN_FEATURE: RESPCT每轮重算σ，让扩展课程也参与clinching和prioritized pointing。
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 使用现场数据计算研究因为真实分配数据能反映异构偏好和优先级。
+
+2. BENCHMARK_OR_CONTRAST: 以ESTTC和ESPCT作为公平性基准，以ESDA作为效率基准。
+
+3. BENCHMARK_OR_CONTRAST: 设定最低配额p=3到7生成50个实例，随机主列表平均10次。
+
+4. RESULT: RESPCT在所有公平性指标上优于ESTTC/ESPCT。
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST: 合成数据可扩展性测试确认结论在大规模实例上成立。
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: RESPCT缓解效率/公平权衡，使高效低嫉妒成为可能。
+
+2. THEORY_RETURN: 将经验改进归因于两个算法创新并用理论刻画。
+
+3. BOUNDARY_CONDITION: 当最低配额相对于容量较小时RESPCT优势最大；若无配额，其相对TTC优势更大。
+
+4. LIMITATION_AND_FUTURE: 不适合复杂预留配额、依赖序数且独立私密偏好、单位需求假设。
+
+5. CONTRIBUTION: 为学校选择、医疗劳动力市场、军事岗位匹配等提供新选择。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Gale-Shapley匹配理论与稳定性
+
+2. Shapley-Scarf的TTC与Roth的策略防护性
+
+3. Abdulkadiroglu-Sonmez的学校选择机制与效率/无嫉妒权衡
+
+4. Fragiadakis等人用扩展席位处理最低配额的机制
+
+5. Morrill的clinch变体与TTC性质刻画
+
+6. Hakimov-Kesten的ETTC及其局限
+
+7. Pápai/Pycia-Unver的层级交换规则
+
+8. 机制设计中的strategyproofness、Pareto效率与公平性
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：设计直接由匹配理论中的不可行定理和关于guaranteed seats、循环结构、扩展席位机制的理论观察推导；每个设计构件（clinching、prioritized pointing、最大保证席位）都有明确理论命题支持，并由后续定理和实验直接检验。
+
+- 理论到设计翻译链：效率与公平不可能定理 → 目标不是同时绝对满足，而是在保留效率和策略防护下最小化嫉妒 → TTC的嫉妒来源包括不必要交易和低优先级学生在非平凡环中获得席位 → 设计clinching和prioritized pointing → 最低配额使保证学生不再显然 → 用扩展席位和最大σ向量刻画 → 将σ用于clinch和pointing形成RESPCT → 用真实数据和合成数据检验公平、效率和可扩展性。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：效率与无嫉妒不可能同时满足；TTC高效但产生嫉妒，DA无嫉妒但低效。
+
+- mechanism_cn：TTC中课程指向最高优先级学生，低优先级学生可能通过非平凡环进入课程，制造正当嫉妒。
+
+- design_requirement_cn：在保留策略防护与帕累托效率的前提下，尽量降低正当嫉妒。
+
+- artifact_choice_cn：以TTC为基础，加入clinching、prioritized pointing和最大保证席位。
+
+- evaluated_contrast_cn：RESPCT vs ESTTC/ESPCT在真实数据上的公平性。
+
+- objective_result_cn：RESPCT在50个实例中显著降低正当嫉妒实例数、嫉妒学生数和被嫉妒学生数。
+
+##### evidence_pointers
+
+1. Section 2.2
+
+2. Section 4
+
+3. Section 5.2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：若学生是某课程最高优先级保证者且课程是其最爱，则不会造成嫉妒；课程指向任何保证学生都可保留mutual best。
+
+- mechanism_cn：非平凡循环中，学生最终去的不是指向他的课程，因此其在该课程的优先级无关；关键是他在所指向课程的优先级是否低。
+
+- design_requirement_cn：让课程指向最不可能在其它课程上制造嫉妒的保证学生。
+
+- artifact_choice_cn：prioritized pointing：在保证学生中按其它课程平均优先级（以剩余容量加权）选择指向对象，且不依赖学生自报偏好。
+
+- evaluated_contrast_cn：PCT vs TTC；RESPCT vs ESTTC。
+
+- objective_result_cn：在示例和现场数据中，prioritized pointing显著减少嫉妒。
+
+##### evidence_pointers
+
+1. Section 2.3
+
+2. Section 4.2
+
+3. Section 5.2
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：最低配额下mutual best不可实现；ESTTC只保证p_c个席位，且主列表分配扩展席位会降低公平性。
+
+- mechanism_cn：扩展席位按主列表而非课程优先级指向，产生更多嫉妒；提高配额反而减少扩展席位，使ESTTC显得更公平，但这是一种设计悖论。
+
+- design_requirement_cn：最大化可行保证席位向量σ，使clinch和pointing都能利用更多保证学生。
+
+- artifact_choice_cn：用可行性条件(FC)+MIP验证兼容性，用greedy算法从p出发扩大σ；RESPCT每轮动态重算σ。
+
+- evaluated_contrast_cn：RESPCT vs ESPCT/ESTTC在同一配额p下的公平性。
+
+- objective_result_cn：RESPCT在低配额时公平优势最大；多数实例σ=q可行，少数用greedy得到maximal向量。
+
+##### evidence_pointers
+
+1. Section 4.3
+
+2. Section 4.4
+
+3. Section 5.2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：TTC中部分交易是不必要的，它们不贡献效率、策略防护或mutual best，但会造成嫉妒。
+
+- mechanism_cn：允许保证学生在交易前直接clinch最偏好课程，可避免低优先级学生借交易进入。
+
+- design_requirement_cn：在每轮交易前迭代执行clinching。
+
+- artifact_choice_cn：PCT、ESPCT和RESPCT均包含clinching phase。
+
+- evaluated_contrast_cn：ESPCT vs ESTTC，两者只有clinching/pointing不同。
+
+- objective_result_cn：即使不扩大保证席位，ESPCT也已明显比ESTTC更公平。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.3
+
+3. Section 5.2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 形式证明：strategyproofness、Pareto效率、σ-mutual best、mutual best不可能性、NP完全性。
+
+2. 基于真实现场数据的计算实验：10个TUM课程分配数据集、50个配额实例。
+
+3. 基准对照：ESTTC、ESPCT、RESPCT、ESDA、TTC/ETTC初步比较。
+
+4. 合成数据可扩展性测试：最多2000名学生、60-100门课程。
+
+- why_these_evaluations_cn：设计科学制品需要同时提供形式保证与实践可行性；形式证明建立理论性质，现场数据证明在真实异构偏好下的公平性提升，ESDA对照证明效率优势，合成数据证明大规模部署可接受。
+
+- benchmark_and_contrast_chain_cn：先用TTC和DA的理论性质设定期望；再用ESTTC和ESPCT作为配额匹配的高效机制基准，逐项分离clinching、prioritized pointing和范围加宽的贡献；用ESDA作为公平机制基准，展示效率损失；最后用合成数据检验外部规模。
+
+### claim_evidence_ledger
+
+1. RESPCT满足strategyproofness和Pareto效率——证据：Theorem 8及附录证明。
+
+2. RESPCT满足σ-mutual best且Σσ≥n——证据：Theorem 8结合Theorem 5和Algorithm 5。
+
+3. RESPCT在公平性上显著优于ESTTC/ESPCT——证据：Section 5.2的Figure 6-8与Table 9。
+
+4. RESPCT比ESDA高效得多——证据：Section 5.3的Table 8和图9，约10%学生可被帕累托改进。
+
+5. RESPCT可扩展至2000学生——证据：Section 5.4合成数据运行时间。
+
+6. 机制被TUM采用并实际使用——证据：作者在引言和结论中的陈述，属于自我报告，无独立部署后数据。
+
+- internal_validity_strategy_cn：对机制性质使用严格公理化证明；实验中使用相同真实数据集和相同配额实例比较不同算法；ESTTC因依赖随机主列表而平均10次运行；明确报告各指标定义；对σ=q进行可行性检查并在必要时用算法寻找maximal向量。
+
+- external_validity_strategy_cn：使用来自大型大学课程分配的真实现场数据，偏好和优先级高度异构；通过多位课程、多学期数据集增加覆盖面；合成数据模拟现场偏好结构进行大规模测试；讨论将结论类推到学校选择、住院医师匹配、军事岗位匹配等领域。
+
+- what_is_not_actually_tested_cn：没有随机现场实验或行为实验来观察学生真实报告和事后满意度；没有直接测量学生在真实环境中的策略行为；没有在其它领域（学校选择、医院匹配等）用当地数据验证；对独立私密偏好、单位需求和序数偏好的假设没有被实证检验；政策采纳主要通过作者陈述。
+
+## 贡献闭环
+
+- technical_claim_cn：RESPCT是策略防护、帕累托效率且满足σ-mutual best的算法，且在基准实例上嫉妒显著低于ESTTC/ESPCT。
+
+- artifact_claim_cn：机制中的clinching、prioritized pointing和最大化保证席位三个构件共同带来公平性提升；ESPCT与ESTTC的对照表明前两个构件本身已有显著效果。
+
+- mechanism_claim_cn：TTC的嫉妒主要来自不必要交易和课程指向低平均优先级的保证学生；通过先clinching再按其它课程平均优先级指向，可降低非平凡环带来的正当嫉妒。
+
+- boundary_claim_cn：当最低配额相对于总容量较低时RESPCT优势最大；无配额时其相对TTC的优势更大；不适合复杂保留配额、依赖序数且独立私密偏好、单位需求环境。
+
+- reusable_design_knowledge_cn：在无货币的一对多对象分配中，设计者应在策略防护和效率约束下最大化可保证席位，并用非短视指向和预先锁定减少嫉妒；这为课程分配、学校选择、劳动力配对等提供可复用设计原则。
+
+- theoretical_contribution_cn：证明了最低配额下mutual best不可实现；提出σ-mutual best作为放宽；证明RESPCT性质；指出验证σ与配额相容是强NP完全问题，并给出MIP+greedy方法。
+
+- how_discussion_closes_intro_gap_cn：讨论回到引言提出的效率/公平权衡：作者承认若只关心公平就选DA，但由于效率几乎总重要，RESPCT提供了'高效且低嫉妒'的可行中间地带，从而回应开头的技术缺口；并强调无配额时RESPCT相对TTC优势更大，延伸至学校选择等更广场景。
+
+- overclaim_or_unsupported_leaps_cn：将TUM的单一现场结果推广到学校选择、医疗岗位匹配等其它领域，主要依赖类推而非跨领域实证；将政策采纳作为成果证据属于自我报告；对'平均更少嫉妒'的公平定义是否满足实际公平诉求没有讨论；对真实学生偏好报告的独立性/私密性没有检验。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：匹配理论始于Gale-Shapley婚姻问题，核心是把两个集合的参与者匹配起来且不使用货币。
+
+- rhetorical_function_cn：建立无货币匹配的学科背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出匹配理论作为IS设计的设计原则。
+
+- evidence_pointer：Introduction, opening sentence
+
+### 2. P1 S4-S5
+
+- order：2
+
+- section：Introduction
+
+- locator：P1 S4-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：婚姻问题中稳定匹配处于核中，因此稳定与效率之间没有张力。
+
+- rhetorical_function_cn：说明经典匹配问题的基本性质。
+
+- depends_on_cn：匹配市场的定义。
+
+- sets_up_cn：为学校/课程分配中效率与公平的冲突提供对比。
+
+- evidence_pointer：Introduction paragraph on marriage problem
+
+### 3. P2 S1-S2
+
+- order：3
+
+- section：Introduction
+
+- locator：P2 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：学校分配问题把学校视为被消费对象而非福利主体，学生的优先级被视为权利。
+
+- rhetorical_function_cn：区分对象分配与双边匹配。
+
+- depends_on_cn：Gale-Shapley婚姻问题。
+
+- sets_up_cn：引出公平/正当嫉妒的定义。
+
+- evidence_pointer：Introduction, paragraph on school assignment
+
+### 4. P2 S4
+
+- order：4
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：若学生i更想去j所在的学校且i在该学校优先级高于j，则i有正当嫉妒。
+
+- rhetorical_function_cn：给出公平性的形式直觉。
+
+- depends_on_cn：优先级作为权利的概念。
+
+- sets_up_cn：后续用正当嫉妒作为公平性度量。
+
+- evidence_pointer：Introduction, definition of justified envy
+
+### 5. P3 S1
+
+- order：5
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：本文关注课程分配，它是广泛存在的一对多无转移对象分配问题。
+
+- rhetorical_function_cn：把一般匹配理论收缩到具体应用。
+
+- depends_on_cn：对象分配与优先级权利概念。
+
+- sets_up_cn：为课程分配应用提供聚焦。
+
+- evidence_pointer：Introduction, paragraph beginning 'Our focus is on course assignment...'
+
+### 6. P3 S4-S5
+
+- order：6
+
+- section：Introduction
+
+- locator：P3 S4-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：在TUM，课程组织者为研讨班/实验课提交学生排名，学生一个学期只能选一门。
+
+- rhetorical_function_cn：提供真实应用的具体来源。
+
+- depends_on_cn：欧洲大学一对多课程分配背景。
+
+- sets_up_cn：后文使用TUM现场数据。
+
+- evidence_pointer：Introduction, TUM examples
+
+### 7. P4 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：课程分配与学校选择、军事岗位、住院医师匹配等相似，但关键区别在于课程通常有最低开班人数。
+
+- rhetorical_function_cn：说明问题普遍性并引入新的约束。
+
+- depends_on_cn：课程分配作为实例。
+
+- sets_up_cn：引出最低配额这一技术难点。
+
+- evidence_pointer：Introduction, application similarity and minimum quota
+
+### 8. P5 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：效率、公平和激励相容被视为匹配问题，也是课程分配的核心设计目标。
+
+- rhetorical_function_cn：列出设计目标。
+
+- depends_on_cn：现有匹配文献。
+
+- sets_up_cn：后续用于评价RESPCT。
+
+- evidence_pointer：Introduction, design desiderata
+
+### 9. P5 S4
+
+- order：9
+
+- section：Introduction
+
+- locator：P5 S4
+
+- move_code：GAP
+
+- paraphrase_cn：在对象有优先级的分配中，不存在总同时满足公平和帕累托效率的匹配。
+
+- rhetorical_function_cn：点明理论不可能性。
+
+- depends_on_cn：效率与公平定义。
+
+- sets_up_cn：为必须放松公平提供依据。
+
+- evidence_pointer：Introduction, central tension
+
+### 10. P6 S2-S4
+
+- order：10
+
+- section：Introduction
+
+- locator：P6 S2-S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：IS文献强调激励对齐，但几乎都集中在拍卖机制；本文补充无需货币转移的匹配设计视角。
+
+- rhetorical_function_cn：论证该缺口对IS研究重要。
+
+- depends_on_cn：IS激励设计文献。
+
+- sets_up_cn：将贡献定位于IS市场设计。
+
+- evidence_pointer：Introduction, IS literature paragraph
+
+### 11. P7 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：P7 S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文是设计科学贡献：引入策略防护且完全效率且低嫉妒的机制，并考虑最低配额。
+
+- rhetorical_function_cn：提前声明核心贡献。
+
+- depends_on_cn：前面不可行性和缺口。
+
+- sets_up_cn：后文按设计科学框架展开。
+
+- evidence_pointer：Introduction, design science contribution
+
+### 12. P8 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：P8 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文结构遵循Gregor和Hevner的设计科学发表模板。
+
+- rhetorical_function_cn：给出全文路线图。
+
+- depends_on_cn：设计科学方法论文献。
+
+- sets_up_cn：让读者预期后续章节的功能。
+
+- evidence_pointer：Introduction, roadmap
+
+### 13. P1
+
+- order：13
+
+- section：Section 2
+
+- locator：P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文献综述先解释TTC，再说明效率/公平张力和减少嫉妒的选项。
+
+- rhetorical_function_cn：预告第二章内部逻辑。
+
+- depends_on_cn：引言中的研究问题。
+
+- sets_up_cn：为后续技术细节铺垫。
+
+- evidence_pointer：Section 2 intro
+
+### 14. P1 S1
+
+- order：14
+
+- section：Section 2.1
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：设计者通常只能在策略防护且高效的TTC与策略防护且无嫉妒的DA之间选择。
+
+- rhetorical_function_cn：建立基准机制二分法。
+
+- depends_on_cn：TTC和DA文献。
+
+- sets_up_cn：引出TTC作为改进对象。
+
+- evidence_pointer：Section 2.1 opening
+
+### 15. P4 S1
+
+- order：15
+
+- section：Section 2.1
+
+- locator：P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Roth证明TTC策略防护；Ma证明在住房市场中TTC是唯一满足策略防护、帕累托效率和个体理性的机制。
+
+- rhetorical_function_cn：引用TTC的性质。
+
+- depends_on_cn：Shapley-Scarf住房市场。
+
+- sets_up_cn：说明TTC的理论地位。
+
+- evidence_pointer：Section 2.1, Roth/Ma references
+
+### 16. P5 S1
+
+- order：16
+
+- section：Section 2.1
+
+- locator：P5 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：课程/学校分配不同于住房分配：对象可容纳多人且无所有权；Abdulkadiroglu-Sonmez自然改造了TTC。
+
+- rhetorical_function_cn：说明TTC为何需要调整。
+
+- depends_on_cn：住房市场TTC。
+
+- sets_up_cn：为多单位TTC的嫉妒问题做铺垫。
+
+- evidence_pointer：Section 2.1, object allocation adaptation
+
+### 17. Example 2之后
+
+- order：17
+
+- section：Section 2.2
+
+- locator：Example 2之后
+
+- move_code：RESULT
+
+- paraphrase_cn：例2显示唯一公平匹配被学生的另一个帕累托更优匹配支配，因此公平与效率冲突。
+
+- rhetorical_function_cn：用最小例子证明理论张力。
+
+- depends_on_cn：公平与效率定义。
+
+- sets_up_cn：说明为什么需要量化嫉妒并放松公平。
+
+- evidence_pointer：Section 2.2, Example 2
+
+### 18. 末段
+
+- order：18
+
+- section：Section 2.2
+
+- locator：末段
+
+- move_code：GAP
+
+- paraphrase_cn：对多单位TTC的嫉妒程度知之甚少；DA低效率严重，TTC产生明显嫉妒。
+
+- rhetorical_function_cn：指出现有文献空白。
+
+- depends_on_cn：TTC/DA对比。
+
+- sets_up_cn：提出研究问题。
+
+- evidence_pointer：Section 2.2, final paragraph
+
+### 19. 末句
+
+- order：19
+
+- section：Section 2.2
+
+- locator：末句
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：自然的问题是：如何让效率机制尽可能少嫉妒？
+
+- rhetorical_function_cn：明确核心研究问题。
+
+- depends_on_cn：前几段的效率和公平张力。
+
+- sets_up_cn：为RESPCT提供目标。
+
+- evidence_pointer：Section 2.2, final question
+
+### 20. P1
+
+- order：20
+
+- section：Section 2.3
+
+- locator：P1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：无最低配额时，尊重最高优先级意味着前q高优先级学生应被保证课程；指向任一保证学生都能保留性质。
+
+- rhetorical_function_cn：解释减少嫉妒的基本机制。
+
+- depends_on_cn：mutual best定义。
+
+- sets_up_cn：为prioritized pointing提供理论基础。
+
+- evidence_pointer：Section 2.3, guaranteed students
+
+### 21. P3
+
+- order：21
+
+- section：Section 2.3
+
+- locator：P3
+
+- move_code：GAP
+
+- paraphrase_cn：有最低配额时，确定哪些学生被保证一门课是主要技术挑战。
+
+- rhetorical_function_cn：把简单直觉问题复杂化。
+
+- depends_on_cn：配额约束。
+
+- sets_up_cn：引入Fragiadakis等的扩展席位机制。
+
+- evidence_pointer：Section 2.3, technical challenge
+
+### 22. P4
+
+- order：22
+
+- section：Section 2.3
+
+- locator：P4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Fragiadakis等提出扩展席位DA和TTC；ESTTC策略防护且帕累托效率，但不考虑嫉妒程度。
+
+- rhetorical_function_cn：介绍基准配额机制并指出其缺陷。
+
+- depends_on_cn：配额模型。
+
+- sets_up_cn：为RESPCT的配额扩展提供起点。
+
+- evidence_pointer：Section 2.3, Fragiadakis et al.
+
+### 23. P5
+
+- order：23
+
+- section：Section 2.3
+
+- locator：P5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：目前只有Abdulkadiroglu等用真实数据比较TTC；学校分配与课程分配在偏好异质性和学生/课程比上不同。
+
+- rhetorical_function_cn：说明真实数据证据的稀缺。
+
+- depends_on_cn：文献比较。
+
+- sets_up_cn：为用TUM数据做贡献制造空间。
+
+- evidence_pointer：Section 2.3, real-world data comparison
+
+### 24. P1
+
+- order：24
+
+- section：Section 2.4
+
+- locator：P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：TUM计算机系有超过6000名学生，每学期产生数千次课程分配，并被多个其它院系采用。
+
+- rhetorical_function_cn：提供应用规模与真实性。
+
+- depends_on_cn：TUM背景。
+
+- sets_up_cn：为现场数据提供来源。
+
+- evidence_pointer：Section 2.4, TUM scale
+
+### 25. P2
+
+- order：25
+
+- section：Section 2.4
+
+- locator：P2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：此前FCFS有严重缺陷，2014年改用DA，学生和教师都认为改进很大。
+
+- rhetorical_function_cn：说明真实组织如何选择机制。
+
+- depends_on_cn：TUM机制变迁。
+
+- sets_up_cn：说明DA方案的局限性。
+
+- evidence_pointer：Section 2.4, FCFS to DA
+
+### 26. P3
+
+- order：26
+
+- section：Section 2.4
+
+- locator：P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：DA不允许最低配额且有显著效率损失，促使系里重新思考机制。
+
+- rhetorical_function_cn：指出现状不足。
+
+- depends_on_cn：FCFS到DA的历史。
+
+- sets_up_cn：引出RESPCT的动机。
+
+- evidence_pointer：Section 2.4, DA deficiencies
+
+### 27. P4
+
+- order：27
+
+- section：Section 2.4
+
+- locator：P4
+
+- move_code：GAP
+
+- paraphrase_cn：学校选择中偏好同质使DA近似高效，但课程分配偏好异质，DA效率损失很大。
+
+- rhetorical_function_cn：把效率问题从学校选择扩展到课程分配。
+
+- depends_on_cn：Abdulkadiroglu等的波士顿/新奥尔良发现。
+
+- sets_up_cn：为RESPCT相对TTC的效率优势铺垫。
+
+- evidence_pointer：Section 2.4, heterogeneous preferences
+
+### 28. P1
+
+- order：28
+
+- section：Section 2.5
+
+- locator：P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出RESPCT机制，显著减少嫉妒，且明确考虑最低配额。
+
+- rhetorical_function_cn：给出解决方案。
+
+- depends_on_cn：前面所有缺口。
+
+- sets_up_cn：后续算法描述和评价。
+
+- evidence_pointer：Section 2.5, RESPCT introduction
+
+### 29. P3-S4
+
+- order：29
+
+- section：Section 2.5
+
+- locator：P3-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：用10个27-733学生的真实分配和多种配额场景比较，RESPCT的嫉妒显著减少，效率相对DA更高。
+
+- rhetorical_function_cn：预告实证结果。
+
+- depends_on_cn：RESPCT设计。
+
+- sets_up_cn：让读者期待Section 5。
+
+- evidence_pointer：Section 2.5, preview results
+
+### 30. P1-P2
+
+- order：30
+
+- section：Section 3
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：将课程分配形式化为包含学生、课程、最低/最高配额和优先级的元组，以严格序偏好建模。
+
+- rhetorical_function_cn：为定理和算法提供形式基础。
+
+- depends_on_cn：匹配理论。
+
+- sets_up_cn：后面所有算法和性质证明。
+
+- evidence_pointer：Section 3.1 notation
+
+### 31. Algorithm 1
+
+- order：31
+
+- section：Section 3.1
+
+- locator：Algorithm 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：TTC算法中，学生指向有剩余容量的最爱课程，课程指向最高优先级学生，循环解析。
+
+- rhetorical_function_cn：给出TTC精确算法。
+
+- depends_on_cn：形式模型。
+
+- sets_up_cn：作为后续机制修改的底版。
+
+- evidence_pointer：Section 3.1, Algorithm 1
+
+### 32. Algorithm 2 前
+
+- order：32
+
+- section：Section 3.1
+
+- locator：Algorithm 2 前
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：ESTTC把每门课分成标准课和扩展课，扩展课按主列表指向学生，以保证最低配额。
+
+- rhetorical_function_cn：说明配额机制如何在扩展市场中运作。
+
+- depends_on_cn：Fragiadakis等的扩展席位方法。
+
+- sets_up_cn：为修改扩展课程指向规则做铺垫。
+
+- evidence_pointer：Section 3.1, ESTTC
+
+### 33. Definitions 1-4
+
+- order：33
+
+- section：Section 3.2
+
+- locator：Definitions 1-4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：定义策略防护、帕累托效率、无嫉妒和mutual best，并把公平指标界定为平均更少正当嫉妒。
+
+- rhetorical_function_cn：确立评价语言。
+
+- depends_on_cn：机制设计传统。
+
+- sets_up_cn：后续定理和实验指标。
+
+- evidence_pointer：Section 3.2, design desiderata
+
+### 34. Theorem 1
+
+- order：34
+
+- section：Section 3.2
+
+- locator：Theorem 1
+
+- move_code：RESULT
+
+- paraphrase_cn：当存在最低配额时，满足mutual best的匹配并不总存在。
+
+- rhetorical_function_cn：证明严格公平需要放宽。
+
+- depends_on_cn：mutual best定义。
+
+- sets_up_cn：引入σ-mutual best。
+
+- evidence_pointer：Section 3.2, Theorem 1
+
+### 35. Definition 5 后
+
+- order：35
+
+- section：Section 3.2
+
+- locator：Definition 5 后
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：引入σ-mutual best，并确定目标是最大化可保证席位向量σ。
+
+- rhetorical_function_cn：将公平要求转化为可计算目标。
+
+- depends_on_cn：Theorem 1。
+
+- sets_up_cn：后续最大化σ的算法。
+
+- evidence_pointer：Section 3.2, σ-mutual best
+
+### 36. 引言段
+
+- order：36
+
+- section：Section 4
+
+- locator：引言段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：RESPCT的改进来自clinching、prioritized pointing、扩展到配额和最大化席位保证。
+
+- rhetorical_function_cn：预告第四章设计步骤。
+
+- depends_on_cn：前述研究问题。
+
+- sets_up_cn：后面各子节的逻辑。
+
+- evidence_pointer：Section 4, chapter intro
+
+### 37. Example 4 后
+
+- order：37
+
+- section：Section 4.1
+
+- locator：Example 4 后
+
+- move_code：MECHANISM
+
+- paraphrase_cn：TTC中不必要交易让低优先级学生获得课程，造成嫉妒且不贡献效率；clinch可纠正。
+
+- rhetorical_function_cn：用实例说明clinching的必要性。
+
+- depends_on_cn：TTC流程。
+
+- sets_up_cn：PCT算法中的clinching阶段。
+
+- evidence_pointer：Section 4.1, Example 4
+
+### 38. P2
+
+- order：38
+
+- section：Section 4.2
+
+- locator：P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：TTC指向规则短视，安排低平均优先级学生进入循环会制造后续嫉妒。
+
+- rhetorical_function_cn：说明prioritized pointing的动机。
+
+- depends_on_cn：trading cycle结构。
+
+- sets_up_cn：提出基于平均优先级的指向规则。
+
+- evidence_pointer：Section 4.2, myopic pointing
+
+### 39. P4
+
+- order：39
+
+- section：Section 4.2
+
+- locator：P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：prioritized pointing要求课程在保证学生中选择其它课程平均优先级最高者，并按剩余容量加权，且不使用学生自报偏好。
+
+- rhetorical_function_cn：给出机制的具体设计。
+
+- depends_on_cn：不能使用学生谎报偏好以保持策略防护。
+
+- sets_up_cn：PCT和RESPCT的指向规则。
+
+- evidence_pointer：Section 4.2, prioritized pointing
+
+### 40. Algorithm 3/Theorem 2
+
+- order：40
+
+- section：Section 4.2
+
+- locator：Algorithm 3/Theorem 2
+
+- move_code：RESULT
+
+- paraphrase_cn：PCT加入clinching和prioritized pointing，且被证明帕累托效率、策略防护、满足mutual best。
+
+- rhetorical_function_cn：为PCT提供形式性质。
+
+- depends_on_cn：Algorithm 3。
+
+- sets_up_cn：说明无配额时已可降低嫉妒。
+
+- evidence_pointer：Section 4.2, Theorem 2
+
+### 41. Theorem 3/Corollary 1
+
+- order：41
+
+- section：Section 4.2
+
+- locator：Theorem 3/Corollary 1
+
+- move_code：RESULT
+
+- paraphrase_cn：两门课且容量足够时PCT等价于学生提议DA，因此公平；TTC不成立。
+
+- rhetorical_function_cn：提供边界条件下的解析保证。
+
+- depends_on_cn：PCT定义。
+
+- sets_up_cn：说明PCT在少数课程场景特别有效。
+
+- evidence_pointer：Section 4.2, Theorem 3
+
+### 42. Algorithm 4 前
+
+- order：42
+
+- section：Section 4.3
+
+- locator：Algorithm 4 前
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将PCT扩展到扩展席位市场得到ESPCT：标准课指向最高平均优先级的保证学生，扩展课按平均优先级主列表。
+
+- rhetorical_function_cn：把无配额机制移植到配额环境。
+
+- depends_on_cn：Fragiadakis扩展席位模型。
+
+- sets_up_cn：为RESPCT的范围加宽做基础。
+
+- evidence_pointer：Section 4.3, ESPCT
+
+### 43. P1
+
+- order：43
+
+- section：Section 4.4
+
+- locator：P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为了使课程保证超过最低配额的席位，必须满足可行性条件(FC)，否则其它课程可能缺学生。
+
+- rhetorical_function_cn：把设计约束形式化。
+
+- depends_on_cn：最小配额向量p。
+
+- sets_up_cn：后续MIP和greedy算法。
+
+- evidence_pointer：Section 4.4, feasibility condition
+
+### 44. Theorems 7 后
+
+- order：44
+
+- section：Section 4.4
+
+- locator：Theorems 7 后
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：验证σ与配额相容是强NP完全；用MIP验证兼容性，用greedy寻找maximal向量。
+
+- rhetorical_function_cn：说明为什么需要计算工具。
+
+- depends_on_cn：可行性条件。
+
+- sets_up_cn：Algorithm 5。
+
+- evidence_pointer：Section 4.4, Theorem 7 and MIP
+
+### 45. Algorithm 6 前
+
+- order：45
+
+- section：Section 4.5
+
+- locator：Algorithm 6 前
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：RESPCT每轮重新计算σ，将clinching和prioritized pointing用于扩展课程，并控制扩展课程指向的不同学生数。
+
+- rhetorical_function_cn：给出完整制品设计。
+
+- depends_on_cn：PCT、ESPCT和最大保证席位。
+
+- sets_up_cn：形式定理与实验。
+
+- evidence_pointer：Section 4.5, RESPCT algorithm
+
+### 46. Theorems 8-9
+
+- order：46
+
+- section：Section 4.5
+
+- locator：Theorems 8-9
+
+- move_code：RESULT
+
+- paraphrase_cn：RESPCT满足策略防护、帕累托效率、σ-mutual best且Σσ≥n；在容量条件下满足mutual best。
+
+- rhetorical_function_cn：提供RESPCT的形式保证。
+
+- depends_on_cn：Algorithm 6和前述定理。
+
+- sets_up_cn：为实证评价提供理论前提。
+
+- evidence_pointer：Section 4.5, Theorems 8-9
+
+### 47. 引语
+
+- order：47
+
+- section：Section 5
+
+- locator：引语
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为评价RESPCT的嫉妒程度，使用TUM课程分配应用的真实现场数据进行计算研究。
+
+- rhetorical_function_cn：说明为什么采用现场数据计算实验。
+
+- depends_on_cn：RESPCT制品。
+
+- sets_up_cn：数据与实验设计。
+
+- evidence_pointer：Section 5, opening
+
+### 48. 数据段/实验设计
+
+- order：48
+
+- section：Section 5.1
+
+- locator：数据段/实验设计
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：使用2014-2016年10个分配集，按最低配额3到7生成50个实例；比较ESTTC、ESPCT、RESPCT，并实现ESDA用于效率对照。
+
+- rhetorical_function_cn：建立实验条件与基准。
+
+- depends_on_cn：真实数据可用性。
+
+- sets_up_cn：后续公平性和效率结果。
+
+- evidence_pointer：Section 5.1, data and design
+
+### 49. 指标段
+
+- order：49
+
+- section：Section 5.1
+
+- locator：指标段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：主要指标包括正当嫉妒实例数、有嫉妒学生数、被嫉妒学生数，以及平均排名/等级分布。
+
+- rhetorical_function_cn：明确评价指标。
+
+- depends_on_cn：公平性定义。
+
+- sets_up_cn：结果的解读。
+
+- evidence_pointer：Section 5.1, metrics
+
+### 50. Figure 6 后
+
+- order：50
+
+- section：Section 5.2
+
+- locator：Figure 6 后
+
+- move_code：RESULT
+
+- paraphrase_cn：RESPCT在所有配额下嫉妒最低；仅用clinching和prioritized pointing的ESPCT也显著优于ESTTC。
+
+- rhetorical_function_cn：给出核心实证结论。
+
+- depends_on_cn：Section 5.1实验设计。
+
+- sets_up_cn：讨论配额变化趋势。
+
+- evidence_pointer：Section 5.2, Figure 6
+
+### 51. 配额趋势段
+
+- order：51
+
+- section：Section 5.2
+
+- locator：配额趋势段
+
+- move_code：RESULT
+
+- paraphrase_cn：配额提高时RESPCT效果变差，而ESTTC/ESPCT因扩展席位减少反而变好；但RESPCT仍占优。
+
+- rhetorical_function_cn：解释边界条件。
+
+- depends_on_cn：配额机制的性质。
+
+- sets_up_cn：讨论中的适用范围。
+
+- evidence_pointer：Section 5.2, quota trend
+
+### 52. Figure 9/Table 8
+
+- order：52
+
+- section：Section 5.3
+
+- locator：Figure 9/Table 8
+
+- move_code：RESULT
+
+- paraphrase_cn：ESDA导致约10%学生可被帕累托改进；RESPCT在平均排名和等级分布上远更高效。
+
+- rhetorical_function_cn：量化效率优势。
+
+- depends_on_cn：ESDA基准实现。
+
+- sets_up_cn：讨论对DA的替代价值。
+
+- evidence_pointer：Section 5.3, Table 8
+
+### 53. 全节
+
+- order：53
+
+- section：Section 5.4
+
+- locator：全节
+
+- move_code：RESULT
+
+- paraphrase_cn：合成数据到2000名学生、100门课程可在90分钟内求解，公平性和效率结论与现场数据一致。
+
+- rhetorical_function_cn：验证可扩展性。
+
+- depends_on_cn：现场数据实验。
+
+- sets_up_cn：支持实际部署可行性。
+
+- evidence_pointer：Section 5.4, scalability
+
+### 54. P1-P2
+
+- order：54
+
+- section：Section 6
+
+- locator：P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：面对效率/公平权衡，RESPCT提供完全效率且低嫉妒的机制，因此TTC在更多应用中可行。
+
+- rhetorical_function_cn：把实证结果升华为贡献。
+
+- depends_on_cn：Section 5结果。
+
+- sets_up_cn：讨论边界和未来。
+
+- evidence_pointer：Section 6, discussion opening
+
+### 55. 限制段
+
+- order：55
+
+- section：Section 6
+
+- locator：限制段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：RESPCT不适合复杂预留配额，依赖序数偏好、独立私密偏好和单位需求；多对象分配是严重限制。
+
+- rhetorical_function_cn：界定适用范围。
+
+- depends_on_cn：机制设计假设。
+
+- sets_up_cn：结论中的未来方向。
+
+- evidence_pointer：Section 6, limitations
+
+### 56. 结论段
+
+- order：56
+
+- section：Section 7
+
+- locator：结论段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：结论将RESPCT推广到学校选择、医疗劳动力市场、军事岗位匹配等场景，并指出最大限制是单位需求假设。
+
+- rhetorical_function_cn：形成一般化设计知识。
+
+- depends_on_cn：全部论证。
+
+- sets_up_cn：结束全文。
+
+- evidence_pointer：Section 7, conclusion
+
+## 写作技术
+
+- gap_construction_cn：先用经典匹配理论说明效率与公平不可兼得，再用具体课程分配指出TTC/DA各自不足，最后引入最低配额这一实际约束使现有机制更难直接使用；缺口表现为'现有机制不能同时满足效率、策略防护和低嫉妒'。
+
+- signposting_cn：论文反复使用预告句：引言说明按Gregor-Hevner模板组织；第二章预告TTC和张力的解释；第四章开头预告四个构件；每节前用'将在下一节展示/讨论'连接。
+
+- transition_logic_cn：从无配额到有配额，从单个构件到完整算法，从形式性质到实证评价，从公平性到效率再到可扩展性；每步都保留前面的知识并说明下一步需要解决的新问题。
+
+- claim_evidence_rhythm_cn：每个设计构件先给例子或机制直觉，再给出算法和定理，最后在评价阶段用整体数据验证；定理证明放在附录，正文保留结论，保持论证可读。
+
+- benchmark_narrative_cn：以TTC和DA作为理论基准，以ESTTC和ESPCT作为配额基准，以ESDA作为公平但低效基准；通过逐步对照分离每个设计构件的贡献，并把随机主列表平均化处理以保证公平对比。
+
+- theory_return_cn：实证结果不是停留在'RESPCT更好'，而是回接理论概念：嫉妒减少被归因于保证席位、非短视指向和clinching，并用σ-mutual best、Theorem 3等边界条件解释。
+
+- contribution_positioning_cn：把贡献同时放在IS激励设计与设计科学两个传统中：前者强调无货币分配的新应用，后者遵循Hevner和Gregor-Hevner的制品评价框架。
+
+- novelty_protection_cn：通过三个层面防止退化为一次性结果：给出形式定理证明通用性质；用真实现场数据与多个基准对照；展示合成数据可扩展性；并强调机制可适用于学校选择、医疗市场等更多领域。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立问题背景并把一般问题收窄为具体匹配应用（如课程分配）。
+
+- research_job_cn：明确对象分配的形式模型、设计目标和现实约束（最低配额）。
+
+- required_evidence_cn：需要说明经典机制为何不满足所有目标，例如TTC/DA的权衡。
+
+- transition_to_next_cn：以'自然问题：如何让效率机制少嫉妒'引出新机制。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：系统介绍基准机制（TTC、ESTTC），并指出现有机制的限制。
+
+- research_job_cn：用示例和已有定理说明效率/公平张力和配额带来的新困难。
+
+- required_evidence_cn：需要至少一个反例或定理证明当前机制不能满足全部需求。
+
+- transition_to_next_cn：提出新机制的总体目标并预告关键创新。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：逐个介绍算法构件，每个构件配一个动机例子和形式保证。
+
+- research_job_cn：设计clinching、prioritized pointing、扩展席位与最大保证席位等方法，并证明性质。
+
+- required_evidence_cn：需要形式定理或可验证例子说明该构件确实改善目标指标。
+
+- transition_to_next_cn：把所有构件组合成完整机制。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：给出完整算法伪代码、运行示例和核心性质定理。
+
+- research_job_cn：整合构件，定义RESPCT；证明strategyproofness、Pareto效率、σ-mutual best。
+
+- required_evidence_cn：需要完整算法和可证明的性质。
+
+- transition_to_next_cn：转向实证评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：设计基于真实数据或合成数据的计算实验，明确对比基准和指标。
+
+- research_job_cn：用真实课程分配数据生成配额实例，比较RESPCT与ESTTC/ESPCT/ESDA。
+
+- required_evidence_cn：需要量化公平性改进、效率优势和运行时间。
+
+- transition_to_next_cn：用结果讨论边界和一般化。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：在讨论中把实证结果回接到理论缺口，并明确适用范围与限制。
+
+- research_job_cn：论证RESPCT对其它领域（学校选择、医疗匹配）的潜在意义，指出未检验假设。
+
+- required_evidence_cn：需要从机制性质推广，而非仅依赖单一应用结果。
+
+- transition_to_next_cn：以贡献、边界和未来研究收尾。
+
+### most_transferable_moves_cn
+
+1. 用简单例子证明理论张力，再给出算法改进的直觉。
+
+2. 把复杂设计拆成可独立论证的构件，每个构件有定理/例子支撑。
+
+3. 用真实数据加多个配额场景生成系统实验矩阵。
+
+4. 使用多个公平性指标（嫉妒实例、嫉妒学生数、被嫉妒学生数）而不仅是单一指标。
+
+5. 讨论中明确‘若只关心公平则用DA，但效率也重要’的立场，使贡献不是宣称在所有维度都最优。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. TUM大规模课程分配的真实现场数据和多学期数据。
+
+2. 与大学部门合作实现从FCFS到DA再到RESPCT的政策变迁。
+
+3. 需要整数规划求解器（Gurobi）验证σ可行性和寻找maximal向量。
+
+4. 合成数据生成需要模仿真实偏好结构，不能只用均匀随机数据。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只声称'机制策略防护且高效'而没有形式证明。
+
+2. 不能只报告一个数据集上的公平性而不做baseline对照和多个指标。
+
+3. 不能在没有配额处理的情况下把无配额TTC结论直接推广到课程分配。
+
+4. 不能把TUM的单一现场结果过度推广到其它领域而不讨论偏好结构差异。
+
+5. 不能把政策采纳当作独立实证证据，除非有部署后数据。
+
+- single_best_description_of_the_routine_cn：从一个机制设计的不可行定理出发，把每个设计构件用理论观察和现场数据逐层验证，最终把局部性能改进提升为可复用的无货币一对一多分配设计知识。
+
+## 分析边界
+
+全文从HTML/OCR转换而来，部分公式、表格和图表标注可能不够精确，但章节结构完整；没有附录后的评审回复或补充材料；实证部分没有独立的随机现场实验，政策采纳主要基于作者陈述；对其它领域的推广属于类推而非跨领域数据验证。

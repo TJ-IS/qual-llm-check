@@ -1,0 +1,2307 @@
+# Responsible cognitive digital clones as decision-makers: a design science research study
+
+- 作者：Mariia Golovianko; Svitlana Gryshko; Vagan Terziyan; Tuure Tuunanen
+- 年份 / 期刊：2023 / European Journal of Information Systems
+- DOI：10.1080/0960085x.2022.2073278
+- 源文件：16782_2023_responsible-cognitive-digital-clones-as-decision-makers-a-design-science-research-study.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：如何设计一个数字认知克隆体（Pi-Mind agent），使其继承特定人类决策者的个人偏好、责任、决策特征和偏差，并在组织决策中实现韧性、可持续和人本决策？
+
+- 制品与设计：Pi-Mind agent是一种基于数字孪生和认知克隆的IT制品，由语义本体（PSV）、对抗性ML架构（T|C-SGAN）和自主agent组成；通过“操作模式”和“大学模式”持续学习，在决策点替代或辅助其捐助者。
+
+- 客观结果：在NURE的日常和危机场景中，决策F1从0.49提高到0.96和0.95；招聘程序每候选人决策时间从10分钟降至1分钟，每年节约约1591人时；TRUST平台上运行超过1700个流程，注册500多个Pi-Mind代理，产生2300万知识三元组，并对乌克兰高等教育国家改革产生影响。
+
+- 核心贡献：作者声称提出一个novel artifactual contribution：Pi-Mind agent作为“responsible cognitive clone”，为组织韧性提供新途径，通过DP0-DP3设计原则为负责任AI和以人为中心的AI提供技术前提，并通过“last-mile DSR”影响现实社会。
+
+- 整篇论证链：作者从“人类决策者过载vs组织韧性”这一现实挑战出发，指出现有认知克隆研究较少关注模仿人类“不完美但有责任”的决策者，而更关注完美自动模型；进而提出Pi-Mind agent作为数字孪生/认知克隆，利用符号AI、统计AI和自主AI三种知识来源，通过PSV和T|C-SGAN对抗训练实现对其捐助者的低偏差模仿。作者在乌克兰高教环境、NATO军事物流实验室和国家层面进行了多层评价：先以NATO安全任务检验复杂对抗环境下的人机一致性；再以NURE奖金分配和COVID危机配置证明概念有效性和韧性；以招聘流程证明效率和泛在性；以国家QA机构选举证明使用价值和社会影响。文章最终将评价结果返回设计原则，声称DPs贡献于responsible AI和human-centred AI，并讨论伦理边界和未来研究方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用Peffers等DSRM，制定设计原则（DP0-DP3）并构建IT制品Pi-Mind agent，随后通过proof of concept、proof of value和proof of use进行评价，最终提炼设计知识。其核心不是基于理论假设的实验检验，而是“需求/原则—构建—评价—设计知识”的DSR路径。
+
+- 主导写作弧线判定：文章从问题背景和文献中抽象出设计要求（DP0-DP3），据此构建Pi-Mind agent架构，通过多个现场案例评价，最后将经验总结为设计原则与可复用知识，符合“要求—构建—评价—设计原则”主线。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：首先识别问题并依据理论形成设计原则；其次设计并构建Pi-Mind agent和T|C-SGAN训练环境；然后依次用NATO安全环境、NURE日常与危机管理、NURE招聘以及国家级HE转型案例进行验证，从复杂场景到常规场景、从局部到社会影响，层层证明概念、价值和用途，最后回到DPs讨论设计知识。
+
+### studies_or_phases
+
+#### 1. 问题识别与设计原则制定
+
+- order：1
+
+- name_cn：问题识别与设计原则制定
+
+- question_cn：如何将“过载vs组织韧性”挑战转化为IT制品的设计要求？
+
+- inputs_and_setting_cn：文献：决策方法（HR、DSS、ADMS）、数字孪生、认知克隆、人机协同决策；无数据收集。
+
+- designed_or_compared_object_cn：设计原则DP0-DP3及对应的有效性/效率指标。
+
+- baseline_control_or_counterfactual_cn：无（这是理论推导）。
+
+##### objective_metrics
+
+1. F1-score
+
+2. 责任转移百分比
+
+3. 时间节省
+
+4. 并发进程数
+
+- analysis_method_cn：概念分析、文献综合，基于Turing test、责任/韧性/泛在概念提出原则。
+
+- main_result_cn：形成DP0（Turing）、DP1（Responsibility）、DP2（Resiliency）、DP3（Ubiquity）以及用F1和效率指标衡量实现。
+
+- argumentative_role_cn：提供整个设计与评价的逻辑锚点，后续所有设计决策和评价指标均以DPs为参照。
+
+- remaining_uncertainty_cn：这些原则是否可被具体技术实现和实际使用验证未知。
+
+- link_to_next_phase_cn：要求需要转化为具体制品结构，引出Pi-Mind agent设计。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Table 2
+
+#### 2. 制品设计：Pi-Mind agent架构与T|C-SGAN训练环境
+
+- order：2
+
+- name_cn：制品设计：Pi-Mind agent架构与T|C-SGAN训练环境
+
+- question_cn：如何用符号AI、统计AI和自主AI的组合实现认知克隆，并满足DP0-DP3？
+
+- inputs_and_setting_cn：设计概念：数字孪生、认知克隆、GAN、SGAN、C-GAN、本体的知识工程；不使用经验数据。
+
+- designed_or_compared_object_cn：Pi-Mind agent模型：语义本体库、PSV、T|C-SGAN架构及学习模式。
+
+- baseline_control_or_counterfactual_cn：与基本GAN、传统显式规则模型等对比设计特征。
+
+##### objective_metrics
+
+1. 架构特征（输出类标签、上下文处理、反馈循环）
+
+2. 没有客观数值
+
+- analysis_method_cn：体系架构设计、形式化公式和图示说明（Figure 2-4）。
+
+- main_result_cn：形成T|C-SGAN：Turing discriminator（H+C）与上下文标签和生成器G对抗，支持业务正常和紧急场景的模仿，并通过两个反馈环保障DP0/DP2。
+
+- argumentative_role_cn：证明设计原则是可实现的，并为后续实际部署提供了具体的制品结构。
+
+- remaining_uncertainty_cn：该架构在真实环境中能否达到预期性能，以及能否支持实际业务流程尚待评价。
+
+- link_to_next_phase_cn：需要将设计置于真实环境中演示，进入评价阶段。
+
+##### evidence_pointers
+
+1. Section 4.2-4.6
+
+2. Figures 2-4
+
+#### 3. NATO军事物流实验室对抗环境评估（补证）
+
+- order：3
+
+- name_cn：NATO军事物流实验室对抗环境评估（补证）
+
+- question_cn：在复杂安全任务和对抗条件下，Pi-Mind克隆能否达到与人类相似的对威胁识别决策？
+
+- inputs_and_setting_cn：NATO SPS项目中的军事物流实验室，使用interroll cassette conveyor模拟机场行李安检，真实系统、真实用户、模拟威胁；数据来自前期项目。
+
+- designed_or_compared_object_cn：Pi-Mind agents vs 人类安全检验员在识别威胁上的决策一致性。
+
+- baseline_control_or_counterfactual_cn：人类决策者成绩；对抗条件下（DP2）与普通条件下对比。
+
+##### objective_metrics
+
+1. 人工预测准确率
+
+2. 人-克隆相关性
+
+3. 对抗环境F1（Table 9: DP2 F1=0.7）
+
+- analysis_method_cn：现场实验/模拟，对比人类和克隆的决策。
+
+- main_result_cn：人类在威胁识别上表现更好，但人工预测准确率和人-克隆相关性高；在对抗环境中人工和AI都会误分类，但克隆可通过训练获得“人工认知免疫”并提供建议。
+
+- argumentative_role_cn：证明了T|C-SGAN在复杂、对抗性安全任务中的可行性，尤其是韧性（DP2），为后续更广泛场景提供信任基础。
+
+- remaining_uncertainty_cn：军事实验室环境与普通组织流程差异大；0.7的对抗F1是否足够不清楚。
+
+- link_to_next_phase_cn：转向日常业务环境（NURE）检查DP0/DP1在常规决策中的实现。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Table 9
+
+3. Golovianko et al. (2021)
+
+#### 4. NURE日常管理决策proof of concept：员工奖金分配
+
+- order：4
+
+- name_cn：NURE日常管理决策proof of concept：员工奖金分配
+
+- question_cn：在日常行政决策中，Pi-Mind克隆能否提高决策准确性和责任性？
+
+- inputs_and_setting_cn：NURE大学实际业务流程；2016年（人工决策）与2017-2018年（Pi-Mind支持）的奖励分配数据，涉及367-501名员工；平台TRUST门户。
+
+- designed_or_compared_object_cn：克隆（Rector's Pi-Mind 2017/2018）对比传统人工委员会决策。
+
+- baseline_control_or_counterfactual_cn：2016年历史数据作为对照。
+
+##### objective_metrics
+
+1. F1-score
+
+2. 混淆矩阵指标
+
+3. 网站流量增长
+
+- analysis_method_cn：基于混淆矩阵的二元分类评估。
+
+- main_result_cn：F1从0.49（2016）提高到0.94/0.96（2017/2018）；精确性、敏感性等显著提升；网站流量增长3-5倍；决策过程透明化。
+
+- argumentative_role_cn：直接支持DP0（Turing）和DP1（责任）在业务正常情况下的实现，表明克隆可以接管日常决策并减少人为错误。
+
+- remaining_uncertainty_cn：只在一个组织、一种类型的决策中检验；没有随机对照，可能存在组间差异。
+
+- link_to_next_phase_cn：需要进一步验证在危机和紧急情境中的韧性（DP2）。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Tables 4-6
+
+3. Table 3
+
+#### 5. NURE危机管理proof of concept：COVID资源重构
+
+- order：5
+
+- name_cn：NURE危机管理proof of concept：COVID资源重构
+
+- question_cn：在决策者不可用的危机期间，Pi-Mind克隆能否做出有效决策以维持组织韧性？
+
+- inputs_and_setting_cn：NURE大学COVID-19封锁期间，2020年3月12-16日，60项隔离相关命令/指示；决策者（校长）出差不可用；克隆使用先前为日常流程训练的Pi-Mind-2019。
+
+- designed_or_compared_object_cn：克隆驱动的资源分配结果 vs 后来被修改/取消的监管文件。
+
+- baseline_control_or_counterfactual_cn：事后判断哪些命令“必要/不必要”，作为标签。
+
+##### objective_metrics
+
+1. F1-score = 0.95
+
+- analysis_method_cn：分类评估，比较Pi-Mind建议与实际结果。
+
+- main_result_cn：大学在3个工作日内完全转为远程模式；20项命令获批、31项指示发布；后续1项取消、2项修改；F1=0.95。
+
+- argumentative_role_cn：证明Pi-Mind在紧急情况下能作为决策者的替身，实现韧性（DP2）和泛在性（DP3），减少因人员不可用导致的流程中断。
+
+- remaining_uncertainty_cn：单次事件、单一个案；决策者对结果的认可未直接测量。
+
+- link_to_next_phase_cn：接下来证明效率提升（proof of value）。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 7
+
+3. Table 3
+
+#### 6. NURE参与式决策proof of value：招聘流程效率
+
+- order：6
+
+- name_cn：NURE参与式决策proof of value：招聘流程效率
+
+- question_cn：使用Pi-Mind克隆进行招聘投票能否在保持决策质量的同时显著减少时间？
+
+- inputs_and_setting_cn：NURE大学学术委员会招聘流程；23名成员（院级）和48名（校级）的PSV，候选人；往年每个候选人需10分钟。
+
+- designed_or_compared_object_cn：Pi-Mind驱动的自动化投票 vs 传统会议投票。
+
+- baseline_control_or_counterfactual_cn：传统流程的时间消耗作为对照。
+
+##### objective_metrics
+
+1. 每候选人决策时间
+
+2. 每年节省人时（约1591人时）
+
+- analysis_method_cn：基于流程前后时间对比的效益计算。
+
+- main_result_cn：候选人审批时间从10分钟降至1分钟，每年节省约1,591人时；决策可解释、可复核。
+
+- argumentative_role_cn：支持DP3（Ubiquity）和效率目标，表明克隆可以并行参与多个决策点，释放人力资源。
+
+- remaining_uncertainty_cn：没有量化决策质量是否与人工投票一致；只分析了效率。
+
+- link_to_next_phase_cn：再上升到国家层面，展示组织和社会范围的proof of use。
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Table 8
+
+#### 7. 国家级proof of use：乌克兰高等教育数字化转型
+
+- order：7
+
+- name_cn：国家级proof of use：乌克兰高等教育数字化转型
+
+- question_cn：Pi-Mind技术在大规模社会转型中能否产生可观察的用途和影响，并揭示副作用？
+
+- inputs_and_setting_cn：乌克兰教育部支持下的TRUST平台，四所大学参与QA流程，全国性私人高等教育代表选举，WARN项目等。
+
+- designed_or_compared_object_cn：TRUST生态和Pi-Mind agents嵌入真实制度流程。
+
+- baseline_control_or_counterfactual_cn：官方提名与Pi-Mind agent推荐结果对比（选举事件）。
+
+##### objective_metrics
+
+1. 注册用户（>5000）
+
+2. 知识三元组（2300万）
+
+3. Pi-Mind agents数量（>500）
+
+4. 运行程序数（>1700）
+
+5. 国家改革影响、立法采纳等定性指标
+
+- analysis_method_cn：多案例定性评估、系统使用数据、媒体报道与立法记录分析。
+
+- main_result_cn：国家级QA机构选举中Pi-Mind推荐与官方最终结果不同，在透明压力下官方撤销了不合法提名；平台被持续使用7年以上并促进国家改革，证明“last-mile DSR”的社会影响。
+
+- argumentative_role_cn：完成proof of use，说明制品价值不仅在个别流程，可扩展到制度和集体决策，并识别了使用中的政治阻力等副作用。
+
+- remaining_uncertainty_cn：社会影响归因复杂，难以孤立因果；政治事件描述依赖媒体报道，未进行严格因果推断。
+
+- link_to_next_phase_cn：在讨论中将这些证据抽象为设计知识、负责任AI贡献和未来研究。
+
+##### evidence_pointers
+
+1. Section 5.4
+
+2. Table 9
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. RQ_OR_OBJECTIVE
+
+4. STUDY_OVERVIEW
+
+5. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PRIOR_KNOWLEDGE
+
+4. GAP
+
+5. WHY_GAP_MATTERS
+
+6. RQ_OR_OBJECTIVE
+
+7. METHOD_JUSTIFICATION
+
+8. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. THEORY_INTRO
+
+4. REQUIREMENT
+
+5. THEORY_PROPOSITION
+
+6. MECHANISM
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. LIMITATION
+
+5. THEORY_INTRO
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. PHENOMENON
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. RESULT
+
+3. THEORY_PROPOSITION
+
+4. BOUNDARY_CONDITION
+
+5. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 数字孪生（digital twin）概念
+
+2. 认知克隆/认知数字孪生（cognitive clone）
+
+3. Turing test
+
+4. 组织韧性文献
+
+5. 负责任的AI/人类中心AI
+
+6. 泛在计算
+
+7. 生成对抗网络（GAN）
+
+8. 启发式与偏差（Tversky & Kahneman）
+
+9. 语义本体与知识工程
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：理论/知识基础（数字孪生、认知克隆、组织韧性、泛在计算等）确实影响了设计原则DP0-DP3的提出，从而塑造了制品的核心目标；但具体技术架构（如T|C-SGAN、PSV本体、agent模式）主要来自ML/知识工程和系统开发需求，而非IS理论直接推导。因此是部分耦合。
+
+- 理论到设计翻译链：理论命题/经验知识 → 机制（数字复制、责任保持、并行参与、对抗学习提升泛化） → 设计要求（DP0-DP3） → 具体制品（Pi-Mind agent的PSV本体、T|C-SGAN训练架构、可复制agent） → 被比较的设计差异（克隆vs人类、传统vsPi-Mind、正常vs对抗） → 客观结果（F1提升、时间节省、流程数量、社会影响）。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：数字孪生是将物理对象转化为高质量数字复制的概念
+
+- mechanism_cn：通过建立复制的数字实体，可在数字空间代表物理对象，实现并行参与和持续监控
+
+- design_requirement_cn：DP0：克隆与捐助者决策偏差最小，即Turing原则
+
+- artifact_choice_cn：Pi-Mind agent作为人类决策者的cognitive clone，与捐助者共享决策偏好/价值系统
+
+- evaluated_contrast_cn：克隆决策 vs 捐助者实际决策（F1）
+
+- objective_result_cn：NURE F1从0.49升至0.96（Table 6）
+
+##### evidence_pointers
+
+1. Section 4.1 DP0
+
+2. Table 6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：认知克隆技术可复制人类认知技能（Terziyan等）
+
+- mechanism_cn：通过知识提取与机器学习构建个人决策模型，并持续观察更新
+
+- design_requirement_cn：需要混合知识提取：显式的符号知识和隐式的统计学习
+
+- artifact_choice_cn：结合语义本体（PSV）和GAN驱动的T|C-SGAN训练
+
+- evaluated_contrast_cn：显式规则 vs 机器学习边界；在toy example中展示
+
+- objective_result_cn：T|C-SGAN通过对抗生成角例使决策边界接近捐助者（Figure 4c）
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. 4.4
+
+3. 4.6
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：启发式与偏差影响人们在不确定条件下的判断（Tversky & Kahneman）
+
+- mechanism_cn：紧急/模糊情况下人类依赖隐藏启发式；若克隆无法捕捉这些，则决策会偏离
+
+- design_requirement_cn：DP2：韧性——克隆需在挑战环境下复现捐助者的应激决策
+
+- artifact_choice_cn：对抗训练（GAN）生成最大不确定性情况，让H+C团队同步决策
+
+- evaluated_contrast_cn：正常 vs 对抗条件下的克隆-捐助者一致性；NATO对抗实验结果
+
+- objective_result_cn：NATO对抗环境中人工与克隆都能被愚弄，但通过训练可发展“认知免疫”（Table 9 DP2 F1=0.7）
+
+##### evidence_pointers
+
+1. Section 4.5
+
+2. Table 9
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：组织韧性要求人在危机中仍能参与关键流程（Raetze等）
+
+- mechanism_cn：克隆作为数字替身，在人的身体不在场时替其行使决策权，维持流程连续
+
+- design_requirement_cn：DP1责任：克隆行为应与捐助者一致，因此责任仍在捐助者
+
+- artifact_choice_cn：克隆继承捐助者PSV；责任归属由“soft substitution”机制决定
+
+- evaluated_contrast_cn：COVID期间校长缺席时克隆决策 vs 事后需要调整命令
+
+- objective_result_cn：60项命令中F1=0.95（Table 7）
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 7
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：泛在计算让个人无需同时在场即可参与多流程（Sorensen）
+
+- mechanism_cn：克隆可被复制并在多个流程并行使用，从而节约人力时间
+
+- design_requirement_cn：DP3：一个捐助者可生成多个同时运行的克隆
+
+- artifact_choice_cn：Pi-Mind agent以可复制神经网络形式存在，可参与多个流程
+
+- evaluated_contrast_cn：招聘流程的传统会议 vs Pi-Mind投票时间
+
+- objective_result_cn：每候选人10分钟降至1分钟，年节省1591人时（Table 8）
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Table 8
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：DSR设计原则应作为可复用设计知识（Peffers等）
+
+- mechanism_cn：设计原则连接问题域和解决方案域，指导未来类似人工决策克隆的设计
+
+- design_requirement_cn：DPs应有明确评估指标
+
+- artifact_choice_cn：将DP0-DP3与F1、责任%、时间节省等指标绑定
+
+- evaluated_contrast_cn：Table 9汇总有效性/效率与DP对应
+
+- objective_result_cn：表9显示所有DP均获得实证值
+
+##### evidence_pointers
+
+1. Table 9
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 真实组织现场案例
+
+2. 历史对照（前后对比）
+
+3. 分类性能指标（F1等）
+
+4. 对抗环境现场实验（NATO）
+
+5. 大规模社会使用评估
+
+6. 时间/效率分析
+
+- why_these_evaluations_cn：由于制品的复杂性和部署风险，作者采用MVP和多元化试点，先证明概念（有效性），再证明价值（效率），最后证明使用（社会影响），逐步积累证据，以覆盖DP0-DP3四条设计原则。
+
+- benchmark_and_contrast_chain_cn：每个案例都引入对照：2016年人工委员会数据作为基准；NATO中人类决策者作为基准；COVID中事后判断命令必要性；招聘中传统会议时间作为基线；国家选举中官方提名作为反事实。这些对照从微观到宏观，逐步证明克隆不比人差、更快、更有韧性、能改变制度。
+
+### claim_evidence_ledger
+
+#### 1. Pi-Mind agent能够高保真模仿捐助者决策
+
+- claim_cn：Pi-Mind agent能够高保真模仿捐助者决策
+
+- evidence_cn：NURE F1=0.96；NATO人-克隆相关性高；但NATO人工表现更好，说明仍有差距
+
+- supported_cn：部分支持，日常场景强，复杂对抗场景稍弱
+
+#### 2. T|C-SGAN对抗训练是达成DP0/DP2的关键
+
+- claim_cn：T|C-SGAN对抗训练是达成DP0/DP2的关键
+
+- evidence_cn：COVID和NATO案例显示在对抗条件下可用；缺乏对T|C-SGAN的消融实验
+
+- supported_cn：弱支持，无架构消融
+
+#### 3. 克隆继承捐助者PSV使得责任可回归捐助者
+
+- claim_cn：克隆继承捐助者PSV使得责任可回归捐助者
+
+- evidence_cn：设计原理阐述和多案例应用，无直接因果检验
+
+- supported_cn：作为机制解释，未直接测量
+
+#### 4. 需要agent-enabled环境，伦理法律未充分解决
+
+- claim_cn：需要agent-enabled环境，伦理法律未充分解决
+
+- evidence_cn：局限声明和讨论
+
+- supported_cn：支持，但未深入分析
+
+#### 5. DP0-DP3可复用为设计知识
+
+- claim_cn：DP0-DP3可复用为设计知识
+
+- evidence_cn：Table 9跨案例汇总显示每个原则都有对应数值指标
+
+- supported_cn：支持，但样本和案例有限
+
+- internal_validity_strategy_cn：使用客观混淆矩阵和F1减少主观偏差；用历史数据作对照；在危机案例中采用事后标签判断；通过多个案例提供重复性。
+
+- external_validity_strategy_cn：在完全不同的领域（军事物流、日常行政、危机管理、国家教育制度）中测试制品，以展示可移植性和规模；引用此前NATO项目结果补充。
+
+- what_is_not_actually_tested_cn：T|C-SGAN vs 其他架构的消融比较；克隆在真实随机化用户实验中的满意度；伦理/法律后果；情感状态和社会互动对克隆的长期影响。
+
+## 贡献闭环
+
+- technical_claim_cn：Pi-Mind agent采用T|C-SGAN和PSV本体，在真实场景中可以模仿人类捐助者决策，达到高F1。
+
+- artifact_claim_cn：特定的设计组成部分（显式PSV+对抗训练+agent自主性）共同实现了DP0-DP3。
+
+- mechanism_claim_cn：决策责任通过克隆继承捐助者价值系统而保留给人类；对抗训练产生“认知免疫”从而提升韧性。
+
+- boundary_claim_cn：效果在需要数字agent环境的组织中成立；不适用于未集成环境的组织；社会伦理立法问题未覆盖。
+
+- reusable_design_knowledge_cn：DP0-DP3（Turing, Responsibility, Resiliency, Ubiquity）可以作为设计数字人类代表类制品的可复用原则，并配有对应指标。
+
+- theoretical_contribution_cn：将digital twin概念扩展到认知/责任层面，提出“responsible cognitive clone”并集成到human-centred AI框架；对responsible AI的“deciding responsibly”给出可计算观点。
+
+- how_discussion_closes_intro_gap_cn：引言强调Option(a)（模仿不完美人类）研究不足，讨论部分通过声称Pi-Mind agent成功实现了这种模仿并赋能组织韧性，同时将贡献连接到responsible AI和human-centred AI，说明该路线不仅有技术可行性，还有伦理和社会价值，从而闭合缺口。
+
+- overclaim_or_unsupported_leaps_cn：作者将多个案例的成功归因于制品设计，但缺乏严格消融实验或对照架构比较；将国家层面改革影响直接归因于Pi-Mind agent可能有归因过度之险，因为政治和制度因素多；对抗环境F1只有0.7，却宣称韧性增强，需谨慎。
+
+## 句级写作动作图谱
+
+### 1. Paragraph 1
+
+- order：1
+
+- section：Introduction
+
+- locator：Paragraph 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：当前产业转型愿景强调以人为中心、韧性和可持续的过程。
+
+- rhetorical_function_cn：建立宏观背景，引出以人为中心与韧性理念。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续讨论人类决策者在组织中的地位做铺垫。
+
+- evidence_pointer：Introduction P1
+
+### 2. Paragraph 1
+
+- order：2
+
+- section：Introduction
+
+- locator：Paragraph 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：尽管数字化和自动化进展巨大，人类员工在创造性、战略性和涌现性决策中仍占主导。
+
+- rhetorical_function_cn：强调人类决策的核心地位，同时暗示依赖人类的脆弱性。
+
+- depends_on_cn：宏观背景句
+
+- sets_up_cn：为“人是瓶颈”的问题做铺垫。
+
+- evidence_pointer：Introduction P1
+
+### 3. Paragraph 1
+
+- order：3
+
+- section：Introduction
+
+- locator：Paragraph 1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：以人为中心导致决策主观化、对特定员工高度依赖，引发工作过载和流程瓶颈，威胁组织韧性。
+
+- rhetorical_function_cn：描述人本决策的负面影响，构成本文要解决的现象。
+
+- depends_on_cn：人类主导决策的Context
+
+- sets_up_cn：引出“过载vs组织韧性”的挑战。
+
+- evidence_pointer：Introduction P1
+
+### 4. Paragraph 1
+
+- order：4
+
+- section：Introduction
+
+- locator：Paragraph 1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：难民危机、全球黑客攻击、战争、疫情等紧急事件提供了人为因素破坏组织决策的许多实例，作者称此为“过载vs组织韧性”挑战。
+
+- rhetorical_function_cn：给出现实世界后果，增加问题紧迫性。
+
+- depends_on_cn：前面的副作用描述
+
+- sets_up_cn：为提出数字孪生作为对策提供理由。
+
+- evidence_pointer：Introduction P1
+
+### 5. Paragraph 2
+
+- order：5
+
+- section：Introduction
+
+- locator：Paragraph 2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：增强组织韧性的一种方式是通过数字孪生将资产、流程、信息系统和装置数字化。
+
+- rhetorical_function_cn：引入已有解决方案知识。
+
+- depends_on_cn：问题定义
+
+- sets_up_cn：将讨论聚焦于人力资源的数字孪生。
+
+- evidence_pointer：Introduction P2
+
+### 6. Paragraph 2
+
+- order：6
+
+- section：Introduction
+
+- locator：Paragraph 2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：本文聚焦人力资源数字孪生，即认知克隆，作为人类行为者在网络空间的代表。
+
+- rhetorical_function_cn：明确研究对象，引入认知克隆概念。
+
+- depends_on_cn：数字孪生的知识
+
+- sets_up_cn：区分两种克隆模式(a)和(b)。
+
+- evidence_pointer：Introduction P2
+
+### 7. Paragraph 2
+
+- order：7
+
+- section：Introduction
+
+- locator：Paragraph 2
+
+- move_code：GAP
+
+- paraphrase_cn：认知克隆要么模仿捐助者的“精确但不完美”决策，要么用完美的机器模型纠正错误；选项(b)是AI社区长期目标，选项(a)研究不足。
+
+- rhetorical_function_cn：构造研究空白：模仿人类不完美决策的研究不足。
+
+- depends_on_cn：两种克隆模式的区分
+
+- sets_up_cn：本文选择选项(a)作为切入点。
+
+- evidence_pointer：Introduction P2
+
+### 8. Paragraph 2
+
+- order：8
+
+- section：Introduction
+
+- locator：Paragraph 2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：从选项(b)转向选项(a)是因为需要将人类带回高度自动化过程控制，且深度学习在认知计算上的成功提供了新机会。
+
+- rhetorical_function_cn：说明为什么选项(a)值得研究。
+
+- depends_on_cn：研究空白
+
+- sets_up_cn：为研究问题提供正当性。
+
+- evidence_pointer：Introduction P2
+
+### 9. Paragraph 3
+
+- order：9
+
+- section：Introduction
+
+- locator：Paragraph 3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出两个研究问题：如何设计认知克隆继承捐助者的偏好、责任、决策特征和偏差；以及如何将其用于韧性、可持续和人本的决策。
+
+- rhetorical_function_cn：正式陈述研究问题，界定研究目标。
+
+- depends_on_cn：上面识别的研究空白
+
+- sets_up_cn：指导后续设计和方法选择。
+
+- evidence_pointer：Introduction P3
+
+### 10. Paragraph 4
+
+- order：10
+
+- section：Introduction
+
+- locator：Paragraph 4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者采用设计科学研究方法开发、展示和评估IT制品Pi-Mind agent。
+
+- rhetorical_function_cn：说明研究方法，并引入制品名称。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为后面DSRM流程做铺垫。
+
+- evidence_pointer：Introduction P4
+
+### 11. Paragraph 5
+
+- order：11
+
+- section：Introduction
+
+- locator：Paragraph 5
+
+- move_code：OBJECTIVE
+
+- paraphrase_cn：此前研究已展示认知克隆如何数字化工业4.0决策系统；本文聚焦于开发适用于各种组织和业务流程的IT制品。
+
+- rhetorical_function_cn：明确本文在已有工作上的增量：从概念转向可应用制品。
+
+- depends_on_cn：已有认知克隆工作
+
+- sets_up_cn：强调制品的适用性目标。
+
+- evidence_pointer：Introduction P5
+
+### 12. Paragraph 6
+
+- order：12
+
+- section：Introduction
+
+- locator：Paragraph 6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告论文结构：先讲DSRM应用，再研究背景、设计原则和制品设计，然后展示和评估，最后讨论和结论。
+
+- rhetorical_function_cn：提供全文路线图。
+
+- depends_on_cn：全文框架
+
+- sets_up_cn：帮助读者跟踪论证。
+
+- evidence_pointer：Introduction P6
+
+### 13. Paragraph 1
+
+- order：13
+
+- section：Research methodology
+
+- locator：Paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：应用DSRM，包括识别问题、定义目标、设计开发制品、演示和评估。
+
+- rhetorical_function_cn：说明采用的标准DSR方法论。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为后续章节的DSR阶段提供框架。
+
+- evidence_pointer：Section 2
+
+### 14. Paragraph 1
+
+- order：14
+
+- section：Research methodology
+
+- locator：Paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用Venable等和Nunamaker等的评估思路，通过proof of concept、value和use证明有效性、效率和副作用。
+
+- rhetorical_function_cn：明确评价目标，与后续章节对应。
+
+- depends_on_cn：DSRM选择
+
+- sets_up_cn：定义本文的评价结构。
+
+- evidence_pointer：Section 2
+
+### 15. Paragraph 1
+
+- order：15
+
+- section：Related work
+
+- locator：Paragraph 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：数字现实与物理现实的关系发生巨变，向“数字优先”本体论转变，改变了组织决策逻辑和HCI模型。
+
+- rhetorical_function_cn：提供宏观IT背景，引出新决策逻辑。
+
+- depends_on_cn：引言中的数字化转型
+
+- sets_up_cn：为比较传统和新型决策方法做铺垫。
+
+- evidence_pointer：Related work P1
+
+### 16. Paragraph 2
+
+- order：16
+
+- section：Related work
+
+- locator：Paragraph 2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：传统组织决策处理过载的三种方法：完全人类决策（HR管理）、决策支持系统和完全自动化决策系统，各有优缺点。
+
+- rhetorical_function_cn：总结现有决策范式。
+
+- depends_on_cn：新世界背景
+
+- sets_up_cn：指出传统方法无法满足新逻辑。
+
+- evidence_pointer：Related work P2, Table 1
+
+### 17. Paragraph 3
+
+- order：17
+
+- section：Related work
+
+- locator：Paragraph 3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：新决策逻辑要求数据驱动洞察与行为驱动者交互，过程灵活、基础设施可配置、行动者根据环境行事。
+
+- rhetorical_function_cn：提炼新决策逻辑对IS的需求。
+
+- depends_on_cn：传统方法的局限
+
+- sets_up_cn：为Pi-Mind智能整合人机智能提出要求。
+
+- evidence_pointer：Related work P3
+
+### 18. Paragraph 4
+
+- order：18
+
+- section：Related work
+
+- locator：Paragraph 4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：人机决策模型可分为完全委托、混合和聚合三类；混合人机共生预计成为主流。
+
+- rhetorical_function_cn：综述人机决策协作的类型。
+
+- depends_on_cn：新决策逻辑
+
+- sets_up_cn：引出Pi-Mind的混合增强定位。
+
+- evidence_pointer：Related work P4
+
+### 19. Paragraph 5
+
+- order：19
+
+- section：Related work
+
+- locator：Paragraph 5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：先前研究展示了人类评估自动化建议、AI作为人类行为孪生的混合模型。
+
+- rhetorical_function_cn：补充相关实证，展示AI可模拟人类决策。
+
+- depends_on_cn：人机决策模型综述
+
+- sets_up_cn：为认知克隆的可能性提供依据。
+
+- evidence_pointer：Related work P5
+
+### 20. Paragraph 6
+
+- order：20
+
+- section：Related work
+
+- locator：Paragraph 6
+
+- move_code：LIMITATION
+
+- paraphrase_cn：数字孪生已有实现，但“数字代表”的共同愿景仍在发展中。
+
+- rhetorical_function_cn：指出数字孪生向数字代表方向发展的不足。
+
+- depends_on_cn：数字孪生已有研究
+
+- sets_up_cn：引出本文理论基石（数字孪生和认知克隆）。
+
+- evidence_pointer：Related work P6
+
+### 21. Paragraph 6
+
+- order：21
+
+- section：Related work
+
+- locator：Paragraph 6
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：创建Pi-Mind代理的理论基础是数字孪生概念和认知/数字克隆技术。
+
+- rhetorical_function_cn：揭示制品的理论根源。
+
+- depends_on_cn：数字代表愿景不成熟
+
+- sets_up_cn：为设计原则提供理论依据。
+
+- evidence_pointer：Related work P6
+
+### 22. Paragraph 7
+
+- order：22
+
+- section：Related work
+
+- locator：Paragraph 7
+
+- move_code：CONTEXT
+
+- paraphrase_cn：认知克隆正快速成为主流，NTT、微软、Truby和Brown等都在探索。
+
+- rhetorical_function_cn：展示认知克隆的行业趋势，表明研究时机成熟。
+
+- depends_on_cn：理论基石
+
+- sets_up_cn：强化本文研究的现实相关性。
+
+- evidence_pointer：Related work P7
+
+### 23. Paragraph 1
+
+- order：23
+
+- section：Design, section 4.1
+
+- locator：Paragraph 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：模拟或自动化决策时存在关于依赖专业知识、直觉、启发式、偏见还是算法，以及是否完全替代人的争论。
+
+- rhetorical_function_cn：提出决策自动化的核心争议，引出综合方案的合理性。
+
+- depends_on_cn：相关工作的不同方法
+
+- sets_up_cn：说明为何不能只选单一方向，需要集成多种方向。
+
+- evidence_pointer：Design 4.1 P1
+
+### 24. Paragraph 1
+
+- order：24
+
+- section：Design, section 4.1
+
+- locator：Paragraph 1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：若要获得个人自主、随时可用、可靠、负责任的数字替身，必须放弃只选一个研究方向的思路。
+
+- rhetorical_function_cn：从争论转向综合设计需求。
+
+- depends_on_cn：决策自动化的争论
+
+- sets_up_cn：为多种AI facet融合的Pi-Mind设计做铺垫。
+
+- evidence_pointer：Design 4.1 P1
+
+### 25. Paragraph 2
+
+- order：25
+
+- section：Design, section 4.1
+
+- locator：Paragraph 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：核心思想是部分从人类驱动转向AI驱动，Pi-Mind agent在需要时用个人认知克隆替换决策者，确保泛在参与并保持决策特征和责任。
+
+- rhetorical_function_cn：介绍制品的主要设计思想。
+
+- depends_on_cn：综合需求
+
+- sets_up_cn：引出设计原则列表。
+
+- evidence_pointer：Design 4.1 P2
+
+### 26. Paragraph 3
+
+- order：26
+
+- section：Design, section 4.1
+
+- locator：Paragraph 3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：因此形式化设计原则：制品应成为捐助者的负责（DP1）、韧性（DP2）、泛在（DP3）认知副本（DP0）。
+
+- rhetorical_function_cn：正式提出四条设计原则。
+
+- depends_on_cn：核心设计思想
+
+- sets_up_cn：作为后续设计的指引和评价标准。
+
+- evidence_pointer：Design 4.1 P3, Table 2
+
+### 27. Paragraph 4
+
+- order：27
+
+- section：Design, section 4.1
+
+- locator：Paragraph 4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：采用F1-score作为决策准确性指标，用时间节省和并发进程数作为效率指标。
+
+- rhetorical_function_cn：选择评价指标，使DPs可度量。
+
+- depends_on_cn：设计原则
+
+- sets_up_cn：为后续案例评估提供标准。
+
+- evidence_pointer：Design 4.1 P4
+
+### 28. Paragraph 1
+
+- order：28
+
+- section：Design, section 4.2
+
+- locator：Paragraph 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Pi-Mind agent是基于人类决策行为数字孪生的智能模型，实例化为一组语义资源和个性化决策标准。
+
+- rhetorical_function_cn：描述制品的核心结构。
+
+- depends_on_cn：设计原则
+
+- sets_up_cn：为知识存储和提取做铺垫。
+
+- evidence_pointer：Design 4.2 P1
+
+### 29. Paragraph 2
+
+- order：29
+
+- section：Design, section 4.2
+
+- locator：Paragraph 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：显式可解释的决策知识可以通过配置数学决策模型、固定规则和参数来转移。
+
+- rhetorical_function_cn：说明符号知识提取的机制。
+
+- depends_on_cn：制品结构
+
+- sets_up_cn：引出显式方法的局限。
+
+- evidence_pointer：Design 4.2 P2
+
+### 30. Paragraph 3
+
+- order：30
+
+- section：Design, section 4.2
+
+- locator：Paragraph 3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：当情境变得模糊、不确定或信息缺乏时，显式固定模型失效，人类依赖隐藏偏见和直觉，难以解释。
+
+- rhetorical_function_cn：指出显式方法边界。
+
+- depends_on_cn：显式知识提取
+
+- sets_up_cn：提出需要不同的自配置学习技术。
+
+- evidence_pointer：Design 4.2 P3
+
+### 31. Paragraph 4
+
+- order：31
+
+- section：Design, section 4.2
+
+- locator：Paragraph 4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：另一种方法让模型自配置，通过观察捐助者行为学习，参数由计算智能决定而非捐助者提供。
+
+- rhetorical_function_cn：引入统计/自配置学习机制。
+
+- depends_on_cn：显式方法局限
+
+- sets_up_cn：为对抗学习和GAN设计提供基础。
+
+- evidence_pointer：Design 4.2 P4
+
+### 32. Paragraph 5
+
+- order：32
+
+- section：Design, section 4.2
+
+- locator：Paragraph 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者同时使用两种基本AI方法来提取专家知识：符号自顶向下、计算智能自底向上，以及自主行为。
+
+- rhetorical_function_cn：概括三种AI facet。
+
+- depends_on_cn：显式/隐式方法
+
+- sets_up_cn：引出4.3的agent架构。
+
+- evidence_pointer：Design 4.2 P5, Figure 2
+
+### 33. Paragraph 1
+
+- order：33
+
+- section：Design, section 4.3
+
+- locator：Paragraph 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：基于agent的模型驱动克隆在决策环境中的自主和主动行为（DP3），代理有两种模式：操作模式和“大学”模式，持续发展认知能力。
+
+- rhetorical_function_cn：描述Pi-Mind的运行与学习模式。
+
+- depends_on_cn：三种AI facet
+
+- sets_up_cn：为具体学习目标列表做铺垫。
+
+- evidence_pointer：Design 4.3 P1
+
+### 34. Paragraph 2
+
+- order：34
+
+- section：Design, section 4.3
+
+- locator：Paragraph 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用公式表示Pi-Mind Agent = 数字孪生（符号+统计AI驱动的个性化可学习模型）+ 智能资源（自管理AI驱动的数字意识）。
+
+- rhetorical_function_cn：以简洁公式整合设计概念。
+
+- depends_on_cn：三种AI facet
+
+- sets_up_cn：为“意识”的实用定义做铺垫。
+
+- evidence_pointer：Design 4.3 P2
+
+### 35. Paragraph 3
+
+- order：35
+
+- section：Design, section 4.3
+
+- locator：Paragraph 3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者对“意识”给出实用定义：包括自我意识和自我管理，人类和AI代理都需保持平衡。
+
+- rhetorical_function_cn：引入AI意识概念，支撑‘负责任认知克隆’措辞。
+
+- depends_on_cn：公式中的Smart Resource
+
+- sets_up_cn：为责任分配机制提供认知理论基础。
+
+- evidence_pointer：Design 4.3 P3
+
+### 36. Paragraph 4
+
+- order：36
+
+- section：Design, section 4.3
+
+- locator：Paragraph 4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：数字孪生的责任分配在简单孪生中由用户和设计者分担；Pi-Mind驱动时设计师和捐助者相同，责任全部归于捐助者/设计者。
+
+- rhetorical_function_cn：解释为什么称“负责任认知克隆”。
+
+- depends_on_cn：意识定义和角色构成
+
+- sets_up_cn：引出“软替代”概念。
+
+- evidence_pointer：Design 4.3 P4
+
+### 37. Paragraph 5
+
+- order：37
+
+- section：Design, section 4.3
+
+- locator：Paragraph 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：这种设计实现“软替代”，不取代员工，而是增强其能力并允许同时参与多个流程（DP3）。
+
+- rhetorical_function_cn：强调制品的增强而非取代定位。
+
+- depends_on_cn：责任机制
+
+- sets_up_cn：为后续效率评价做概念准备。
+
+- evidence_pointer：Design 4.3 P5
+
+### 38. Paragraph 1
+
+- order：38
+
+- section：Design, section 4.4
+
+- locator：Paragraph 1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：训练环境必须确保DP0（最小偏差）、DP1（责任转移）和DP2（韧性）的实现。
+
+- rhetorical_function_cn：将设计原则转化为训练要求。
+
+- depends_on_cn：设计原则
+
+- sets_up_cn：引出GAN架构的四个扩展要求。
+
+- evidence_pointer：Design 4.4 P1
+
+### 39. Paragraph 1
+
+- order：39
+
+- section：Design, section 4.4
+
+- locator：Paragraph 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Pi-Mind通过GAN等对抗学习来发展认知能力，并将捐助者作为“Turing discriminator”的一部分，形成T-GAN。
+
+- rhetorical_function_cn：描述基于GAN的克隆训练架构选择。
+
+- depends_on_cn：训练要求
+
+- sets_up_cn：进一步扩展为带分类和上下文的SGAN/C-GAN。
+
+- evidence_pointer：Design 4.4 P1
+
+### 40. Paragraph 1
+
+- order：40
+
+- section：Design, section 4.4
+
+- locator：Paragraph 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用SGAN的分类能力处理完整决策选项（不只是真/假），并加入上下文C形成C-GAN；综合成T|C-SGAN架构。
+
+- rhetorical_function_cn：具体化训练架构特征。
+
+- depends_on_cn：T-GAN基本架构
+
+- sets_up_cn：介绍图3的训练框架。
+
+- evidence_pointer：Design 4.4 P1
+
+### 41. Paragraph 2
+
+- order：41
+
+- section：Design, section 4.4
+
+- locator：Paragraph 2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：Turing discriminator由人类（H）和可训练克隆（C）组成，比较两者对同一输入的判断，用不一致程度作为损失函数更新C。
+
+- rhetorical_function_cn：解释TD如何监督克隆学习。
+
+- depends_on_cn：T|C-SGAN架构
+
+- sets_up_cn：为对抗生成器G的引入做铺垫。
+
+- evidence_pointer：Design 4.4 P2
+
+### 42. Paragraph 1
+
+- order：42
+
+- section：Design, section 4.5
+
+- locator：Paragraph 1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在复杂紧急情况中，需要在对抗交互下训练，以捕获捐助者在不确定中使用的隐藏启发式和偏见。
+
+- rhetorical_function_cn：提出对抗训练的必要性。
+
+- depends_on_cn：隐藏决策模型
+
+- sets_up_cn：解释GAN如何生成挑战样本。
+
+- evidence_pointer：Design 4.5 P1
+
+### 43. Paragraph 2
+
+- order：43
+
+- section：Design, section 4.5
+
+- locator：Paragraph 2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：生成器G尝试生成混淆TD的输入，其目标是最大化H与C之间的反应差异；H+C团队揭穿假输入，两者共同进化。
+
+- rhetorical_function_cn：解释对抗训练的动力机制。
+
+- depends_on_cn：对抗训练需求
+
+- sets_up_cn：说明这种训练保证DP0和DP2。
+
+- evidence_pointer：Design 4.5 P2
+
+### 44. Paragraph 3
+
+- order：44
+
+- section：Design, section 4.5
+
+- locator：Paragraph 3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：ML不仅提供质量评估，同样支持质量保证：通过损失函数和反向传播实现自设计和自校正。
+
+- rhetorical_function_cn：引入ML的质量保证机制。
+
+- depends_on_cn：训练过程
+
+- sets_up_cn：为两个反馈环的解释做铺垫。
+
+- evidence_pointer：Design 4.5 P3
+
+### 45. Paragraph 4
+
+- order：45
+
+- section：Design, section 4.5
+
+- locator：Paragraph 4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：TD提供两条反馈回路：一条用于评估当前设计相对DP0的适应度，一条用于评估相对DP2的适应度。
+
+- rhetorical_function_cn：连接训练机制与设计原则。
+
+- depends_on_cn：质量保证机制
+
+- sets_up_cn：说明闭环如何自动保证设计质量。
+
+- evidence_pointer：Design 4.5 P4
+
+### 46. Paragraph 1
+
+- order：46
+
+- section：Design, section 4.6
+
+- locator：Paragraph 1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：通过二维决策空间示例，展示显式规则可直接从捐助者转移到克隆（图4a）。
+
+- rhetorical_function_cn：用直观例子说明显式知识转移。
+
+- depends_on_cn：先前的符号AI facet
+
+- sets_up_cn：为机器学习隐式转移做对比。
+
+- evidence_pointer：Design 4.6 P1, Figure 4a
+
+### 47. Paragraph 2
+
+- order：47
+
+- section：Design, section 4.6
+
+- locator：Paragraph 2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：对于无法外显的决策技能，需要收集捐助者的标签案例，用监督学习画出决策边界。
+
+- rhetorical_function_cn：解释隐式知识提取过程。
+
+- depends_on_cn：显式方法不能覆盖的部分
+
+- sets_up_cn：引出监督学习依赖数据的问题。
+
+- evidence_pointer：Design 4.6 P2, Figure 4b
+
+### 48. Paragraph 3
+
+- order：48
+
+- section：Design, section 4.6
+
+- locator：Paragraph 3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：监督学习依赖训练数据，可能导致真实边界与猜测边界之间的分歧区域。
+
+- rhetorical_function_cn：指出单靠监督性ML的不足。
+
+- depends_on_cn：监督学习
+
+- sets_up_cn：为GAN发现分歧区域做铺垫。
+
+- evidence_pointer：Design 4.6 P3, Figure 4c
+
+### 49. Paragraph 4
+
+- order：49
+
+- section：Design, section 4.6
+
+- locator：Paragraph 4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用GAN实时发现分歧区域并生成新的角例供捐助者标记，使决策边界更接近真实。
+
+- rhetorical_function_cn：说明对抗学习如何提升克隆精度。
+
+- depends_on_cn：监督学习的局限
+
+- sets_up_cn：为上下文相关决策的复杂性做铺垫。
+
+- evidence_pointer：Design 4.6 P4, Figure 4c
+
+### 50. Paragraph 5
+
+- order：50
+
+- section：Design, section 4.6
+
+- locator：Paragraph 5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：人类在不同上下文中有不同决策，克隆需学习上下文元规则，复杂情况下需结合对抗和上下文感知的GAN。
+
+- rhetorical_function_cn：引入上下文维度。
+
+- depends_on_cn：对抗学习
+
+- sets_up_cn：说明需要C-GAN和T|C-SGAN。
+
+- evidence_pointer：Design 4.6 P5, Figure 4d
+
+### 51. Paragraph 6
+
+- order：51
+
+- section：Design, section 4.6
+
+- locator：Paragraph 6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：所有获得的决策知识在个人决策本体下整合，支持机器处理、持续学习和智能体协调。
+
+- rhetorical_function_cn：说明语义表示在制品中的作用。
+
+- depends_on_cn：之前的显式、隐式和上下文知识
+
+- sets_up_cn：完成制品设计的完整描述。
+
+- evidence_pointer：Design 4.6 P6, Figure 4e
+
+### 52. Paragraph 1
+
+- order：52
+
+- section：Evaluation, section 5.1
+
+- locator：Paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于完全版Pi-Mind生态复杂且昂贵，作者采用多元化试点、利用既有项目生态和MVP方法分阶段启动。
+
+- rhetorical_function_cn：解释为何选择多种简化案例进行评价。
+
+- depends_on_cn：制品复杂性
+
+- sets_up_cn：为后续NATO、NURE、HE案例的引入做铺垫。
+
+- evidence_pointer：Evaluation 5.1 P1
+
+### 53. Paragraph 2
+
+- order：53
+
+- section：Evaluation, section 5.1
+
+- locator：Paragraph 2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：NATO案例在安全系统领域，用真实实验室验证复杂对抗环境中的决策一致性。
+
+- rhetorical_function_cn：介绍第一个验证场景。
+
+- depends_on_cn：多元化试点策略
+
+- sets_up_cn：报告NATO实验结果。
+
+- evidence_pointer：Evaluation 5.1 P2
+
+### 54. Paragraph 3
+
+- order：54
+
+- section：Evaluation, section 5.1
+
+- locator：Paragraph 3
+
+- move_code：RESULT
+
+- paraphrase_cn：NATO实验显示人类在威胁识别上表现更好，但人工预测与克隆高度相关；对抗条件下，克隆可培养认知免疫并提供建议。
+
+- rhetorical_function_cn：呈现NATO评估结果，支持DP2和整体可行性。
+
+- depends_on_cn：NATO场景设置
+
+- sets_up_cn：为NURE案例作对比。
+
+- evidence_pointer：Evaluation 5.1 P3
+
+### 55. Paragraph 4
+
+- order：55
+
+- section：Evaluation, section 5.1
+
+- locator：Paragraph 4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：NURE案例在真实教育业务流程中测试，使用TRUST门户和显式知识转移。
+
+- rhetorical_function_cn：引入教育领域验证场景。
+
+- depends_on_cn：NATO结果
+
+- sets_up_cn：引出NURE的三种proof子案例。
+
+- evidence_pointer：Evaluation 5.1 P4
+
+### 56. Paragraph 1
+
+- order：56
+
+- section：Evaluation, section 5.2
+
+- locator：Paragraph 1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：在NURE员工激励案例中，校长每年根据绩效分配奖金，Pi-Mind代理改变了这一流程的参数。
+
+- rhetorical_function_cn：具体描述日常行政决策案例。
+
+- depends_on_cn：NURE环境
+
+- sets_up_cn：报告前后对比数据（表4-6）。
+
+- evidence_pointer：Evaluation 5.2 P1
+
+### 57. Paragraph 2
+
+- order：57
+
+- section：Evaluation, section 5.2
+
+- locator：Paragraph 2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：有效性通过二元分类混淆矩阵和F1评估。
+
+- rhetorical_function_cn：明确评估指标。
+
+- depends_on_cn：案例定义
+
+- sets_up_cn：用于解释表6的F1跃升。
+
+- evidence_pointer：Evaluation 5.2 P2
+
+### 58. Paragraph 3
+
+- order：58
+
+- section：Evaluation, section 5.2
+
+- locator：Paragraph 3
+
+- move_code：RESULT
+
+- paraphrase_cn：使用Pi-Mind后，F1从0.49升到0.94/0.96，因信息过载、时间不足或外部干扰导致的错误被排除，责任性提高。
+
+- rhetorical_function_cn：报告员工奖金案例的核心结果。
+
+- depends_on_cn：混淆矩阵评估
+
+- sets_up_cn：为COVID危机案例建立同类证据。
+
+- evidence_pointer：Evaluation 5.2 P3, Table 6
+
+### 59. Paragraph 4
+
+- order：59
+
+- section：Evaluation, section 5.2
+
+- locator：Paragraph 4
+
+- move_code：RESULT
+
+- paraphrase_cn：COVID封锁时校长不在，大学用其先前训练的克隆在3个工作日内完成资源重构；60项命令评估F1=0.95。
+
+- rhetorical_function_cn：报告危机场景的韧性和泛在性结果。
+
+- depends_on_cn：员工奖金案例的克隆可靠性
+
+- sets_up_cn：支持DP2/DP3并引入效率证明。
+
+- evidence_pointer：Evaluation 5.2 P4, Table 7
+
+### 60. Paragraph 1
+
+- order：60
+
+- section：Evaluation, section 5.3
+
+- locator：Paragraph 1
+
+- move_code：RESULT
+
+- paraphrase_cn：招聘流程中，Pi-Mind代理将候选人审批时间从10分钟降至1分钟，每年节省1591人时。
+
+- rhetorical_function_cn：证明value（效率）并支持DP3。
+
+- depends_on_cn：之前的proof of concept
+
+- sets_up_cn：为大规模proof of use过渡。
+
+- evidence_pointer：Evaluation 5.3 P1, Table 8
+
+### 61. Paragraph 1
+
+- order：61
+
+- section：Evaluation, section 5.4
+
+- locator：Paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：proof of use在多个案例中执行，以识别使用的副作用或不良后果。
+
+- rhetorical_function_cn：说明使用评价的目标。
+
+- depends_on_cn：NURE局部案例
+
+- sets_up_cn：引入国家层面案例。
+
+- evidence_pointer：Evaluation 5.4 P1
+
+### 62. Paragraph 2
+
+- order：62
+
+- section：Evaluation, section 5.4
+
+- locator：Paragraph 2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：目的是用数字克隆提高转型过程效率，减少腐败，增强社会信任。
+
+- rhetorical_function_cn：明确国家级评价的目标。
+
+- depends_on_cn：proof of use目标
+
+- sets_up_cn：为TRUST平台部署和选举案例铺垫。
+
+- evidence_pointer：Evaluation 5.4 P2
+
+### 63. Paragraph 3
+
+- order：63
+
+- section：Evaluation, section 5.4
+
+- locator：Paragraph 3
+
+- move_code：RESULT
+
+- paraphrase_cn：TRUST平台在四所大学推行QA程序，第一阶段显示系统建设仍需参与者支持。
+
+- rhetorical_function_cn：报告使用评价第一阶段结论。
+
+- depends_on_cn：国家目标
+
+- sets_up_cn：引出第二阶段生态部署。
+
+- evidence_pointer：Evaluation 5.4 P3
+
+### 64. Paragraph 4
+
+- order：64
+
+- section：Evaluation, section 5.4
+
+- locator：Paragraph 4
+
+- move_code：RESULT
+
+- paraphrase_cn：第二阶段在国家选举中正式使用Pi-Mind代理，其推荐与官方提名不同，最终官方迫于透明事实撤销了提名。
+
+- rhetorical_function_cn：报告国家级社会影响的标志性事件。
+
+- depends_on_cn：TRUST生态部署
+
+- sets_up_cn：为汇总平台规模数据做铺垫。
+
+- evidence_pointer：Evaluation 5.4 P4
+
+### 65. Paragraph 5
+
+- order：65
+
+- section：Evaluation, section 5.4
+
+- locator：Paragraph 5
+
+- move_code：RESULT
+
+- paraphrase_cn：TRUST平台存储超过40万资源、2300万知识三元组，500多个Pi-Mind代理，运行1700多个流程。
+
+- rhetorical_function_cn：给出系统规模数字，证明实际使用程度。
+
+- depends_on_cn：全国性使用案例
+
+- sets_up_cn：为Table 9的DP汇总提供基础。
+
+- evidence_pointer：Evaluation 5.4 P5
+
+### 66. Section 6.1 Paragraph 1
+
+- order：66
+
+- section：Discussion
+
+- locator：Section 6.1 Paragraph 1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称本文对提高组织决策韧性做出新颖的人工制品贡献。
+
+- rhetorical_function_cn：声明主要贡献领域。
+
+- depends_on_cn：所有评价证据
+
+- sets_up_cn：进一步解释制品和应用。
+
+- evidence_pointer：Discussion 6.1 P1
+
+### 67. Section 6.1 Paragraph 2
+
+- order：67
+
+- section：Discussion
+
+- locator：Section 6.1 Paragraph 2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：Pi-Mind agent提供负责任、韧性和泛在的决策，并通过多个成功实施展示适用性和实用性。
+
+- rhetorical_function_cn：总结artifactual贡献的具体内容。
+
+- depends_on_cn：前期案例
+
+- sets_up_cn：为后续社会影响声明做铺垫。
+
+- evidence_pointer：Discussion 6.1 P2
+
+### 68. Section 6.1 Paragraph 3
+
+- order：68
+
+- section：Discussion
+
+- locator：Section 6.1 Paragraph 3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称“最后一英里DSR”直接影响了乌克兰社会和高校决策方式，并提供了proof of use评价范例。
+
+- rhetorical_function_cn：强调现实世界影响。
+
+- depends_on_cn：国家级选举案例
+
+- sets_up_cn：引出对responsible AI的贡献。
+
+- evidence_pointer：Discussion 6.1 P3
+
+### 69. Section 6.1 Paragraph 4
+
+- order：69
+
+- section：Discussion
+
+- locator：Section 6.1 Paragraph 4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者将责任划分为“接管责任”“负责任”“负责任地决策”三个维度，并通过设计原则在捐助者、开发者和用户之间透明分配责任。
+
+- rhetorical_function_cn：发展责任的计算视角。
+
+- depends_on_cn：DPs and case experiences
+
+- sets_up_cn：为伦理问题讨论做铺垫。
+
+- evidence_pointer：Discussion 6.1 P4
+
+### 70. Section 6.2 Paragraph 1
+
+- order：70
+
+- section：Discussion
+
+- locator：Section 6.2 Paragraph 1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：Pi-Mind agent可作为进一步研究“类人”决策的试验场，例如好奇驱动的灰色地带学习。
+
+- rhetorical_function_cn：指出未来研究方向。
+
+- depends_on_cn：已实现制品
+
+- sets_up_cn：为人类中心AI的延伸讨论做引。
+
+- evidence_pointer：Discussion 6.2 P1
+
+### 71. Section 6.2 Paragraph 2
+
+- order：71
+
+- section：Discussion
+
+- locator：Section 6.2 Paragraph 2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文对human-centric AI文献有贡献，提出从相反极端的群智能和人类集体智能走向协作AI。
+
+- rhetorical_function_cn：扩展理论贡献范围。
+
+- depends_on_cn：Pi-Mind的human-in-the-loop性质
+
+- sets_up_cn：导出更广泛的应用场景。
+
+- evidence_pointer：Discussion 6.2 P2
+
+### 72. Section 6.2 Paragraph 4
+
+- order：72
+
+- section：Discussion
+
+- locator：Section 6.2 Paragraph 4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：类似PI-Mind逻辑可被用于自动驾驶中，作为顾客的数字司机，以增强信任；但这是未来应用域。
+
+- rhetorical_function_cn：示例说明制品的外部有效性边界。
+
+- depends_on_cn：协同AI愿景
+
+- sets_up_cn：为总结作铺垫。
+
+- evidence_pointer：Discussion 6.2 P4
+
+### 73. Paragraph 1
+
+- order：73
+
+- section：Conclusions
+
+- locator：Paragraph 1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：认知克隆技术给“我思故我在”带来新意义：“我的克隆在我不能思考时思考，因此我仍存在”。
+
+- rhetorical_function_cn：以修辞方式强调制品对认知连续性的价值。
+
+- depends_on_cn：制品功能和韧性
+
+- sets_up_cn：总结技术覆盖范围。
+
+- evidence_pointer：Conclusions P1
+
+### 74. Paragraph 2
+
+- order：74
+
+- section：Conclusions
+
+- locator：Paragraph 2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：Pi-Mind技术涵盖自顶向下、自底向上和自主AI，并提供了一套决定如何制作数字主动副本的方法。
+
+- rhetorical_function_cn：总结技术组成和可操作方法。
+
+- depends_on_cn：全部设计工作
+
+- sets_up_cn：为回答研究问题做铺垫。
+
+- evidence_pointer：Conclusions P2
+
+### 75. Paragraph 3
+
+- order：75
+
+- section：Conclusions
+
+- locator：Paragraph 3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：回答研究问题：通过赋能人类决策者、减少人依赖流程脆弱性来实现组织韧性。
+
+- rhetorical_function_cn：直接回答引言中的研究问题。
+
+- depends_on_cn：DPs和评价证据
+
+- sets_up_cn：引出限制和未来工作。
+
+- evidence_pointer：Conclusions P3
+
+### 76. Paragraph 4
+
+- order：76
+
+- section：Conclusions
+
+- locator：Paragraph 4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：局限性包括需要特殊数字agent环境，且未彻底解决社会伦理和法律问题，如版权、责任、回报。
+
+- rhetorical_function_cn：明确制品的边界和未测问题。
+
+- depends_on_cn：已实现的评价
+
+- sets_up_cn：为未来研究建议做铺垫。
+
+- evidence_pointer：Conclusions P4
+
+### 77. Paragraph 5
+
+- order：77
+
+- section：Conclusions
+
+- locator：Paragraph 5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究需考虑捐助者情绪状态、社会互动对偏好的影响，以及从个体克隆推广到群体克隆。
+
+- rhetorical_function_cn：提出具体未来研究方向。
+
+- depends_on_cn：已识别局限
+
+- sets_up_cn：收束全文。
+
+- evidence_pointer：Conclusions P5
+
+## 写作技术
+
+- gap_construction_cn：作者先列出组织决策对人类的依赖及其脆弱性，然后区分AI克隆的两种方向（完美模型vs不完美复制），指出前者研究充分而后者不足，从而把缺口定位在“对人脑认知过程高保真复制”这一技术上，同时用COVID等紧急事件赋予紧迫性。
+
+- signposting_cn：引言末尾预告全文结构；每个阶段都说明下一步要做什么；4.1明确列出DP表并在后续每节都回指；评价部分用proof of concept/value/use三分法框架反复提示证据类型。
+
+- transition_logic_cn：从问题到理论再到设计，使用“theoretical foundation”并建立DPs；从设计到评价，通过“must meet conditions”和“MVP”思路引出多个案例；每个案例末尾用“This case demonstrates”等句过渡到下一个案例；评价到讨论，用“Therefore, we claim”汇总。
+
+- claim_evidence_rhythm_cn：设计阶段以原则性断言配合表格和架构图；评价阶段先设定指标，再呈现混淆矩阵和数字，最后用一句话解释该结果支持哪条DP；在NURE案例中多次使用“before/after”对比节奏；讨论阶段将多个证据汇总到Table 9以支撑DPs。
+
+- benchmark_narrative_cn：benchmark不是独立数据集，而是嵌入到真实流程中的历史/人工对照：2016年人工委员会、传统会议时间、官方提名、NATO人类检验员。这些对照让克隆效果在组织语境中显得有说服力。
+
+- theory_return_cn：讨论部分将证据回接到设计原则DP0-DP3，并进一步将DPs定义为对responsible AI的贡献，从而把实证结果转化为设计知识；结论再回到组织韧性研究问题，形成闭环。
+
+- contribution_positioning_cn：作者把贡献定位为“artifact contribution”而非纯理论检验，同时将其与学术界热点（responsible AI、human-centred AI）连接，既强调新颖人工制品又赋予理论挂钩。
+
+- novelty_protection_cn：通过四条设计原则将一次性案例泛化为可复用框架；用Table 9汇总跨案例证据，使每个原则都有数值支撑；通过“proof of use”和“last-mile DSR”声称社会影响，避免被视为实验室玩具。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：在引言部分建立现实挑战（过载vs韧性），并概括两种AI路线，指出路线缺口。
+
+- research_job_cn：识别普遍存在的组织脆弱性，调研相关文献，明确可研究的具体矛盾。
+
+- required_evidence_cn：至少要有现实事件（疫情、战争）或流程数据支持“过载”存在；文献综述显示某条技术路线研究不足。
+
+- transition_to_next_cn：用“our research questions are”引出目标和DSR方法论。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用DSRM章节说明方法论，提前展示评价框架（proof of concept/value/use）。
+
+- research_job_cn：细化证明概念、价值、使用的评估策略。
+
+- required_evidence_cn：不需要数据，但要引用权威DSR方法文献。
+
+- transition_to_next_cn：进入相关工作，为理论/知识基础做铺垫。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：在相关工作部分综述数字孪生、认知克隆、人机协同，导出理论/概念基础。
+
+- research_job_cn：整理现有决策方法和数字克隆的边界，识别概念重构的机会。
+
+- required_evidence_cn：相关文献应显示数字孪生、认知克隆的成熟度和未竟问题。
+
+- transition_to_next_cn：用“the theoretical foundation”引出设计原则。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：在4.1列出四条设计原则（DP0-DP3），给每个原则配指标。
+
+- research_job_cn：将理论/概念转化为可操作的prescriptive statements。
+
+- required_evidence_cn：每个原则需有理论依据和可量化评估方法。
+
+- transition_to_next_cn：用“The main idea”或“Thus”进入具体制品设计。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用多个子节描述制品架构：知识本体、agent模式、T|C-SGAN训练和示例。
+
+- research_job_cn：选择并整合AI技术（符号、统计、自主）形成可实现的系统设计。
+
+- required_evidence_cn：架构图、公式、示例图，并明确每种设计元素对应哪条DP。
+
+- transition_to_next_cn：用“must meet conditions”和“MVP”引出评价。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：在评价部分先解释为何采用小额试点和多场景，然后依次呈现NATO、NURE、HE案例。
+
+- research_job_cn：在真实或准真实环境中部署制品，收集可靠数据（混淆矩阵、时间、用户数）。
+
+- required_evidence_cn：每个proof要有基线对照、客观指标和清晰因果叙事。
+
+- transition_to_next_cn：用“Next, we present evaluation”或“This case demonstrates”逐个推进。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用Table 9汇总DP与各案例指标，在Discussion中将结果提升为设计知识和理论贡献。
+
+- research_job_cn：综合局部证据，回应引言中的缺口，声明可复用设计原则。
+
+- required_evidence_cn：每条DP都至少有一个案例指标支持；讨论中要连接responsible AI等领域。
+
+- transition_to_next_cn：用Conclusions中的限制和未来研究收尾。
+
+### most_transferable_moves_cn
+
+1. 用‘proof of concept/value/use’三层评价框架组织真实案例证据
+
+2. 在DPs和指标之间建立映射表，让设计原则可检验
+
+3. 先用复杂/对抗场景验证，再用常规场景证明普适性
+
+4. 每个案例末尾用明确的句子总结其支持的DP，形成证据链
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 跨年度的真实组织流程数据（NURE奖金数据：2016-2018）
+
+2. NATO/军事实验室这类高成本现场环境
+
+3. 国家级政治改革和选举事件，很难复制
+
+4. 需要长期运营的TRUST平台和大量用户生态（数千用户）
+
+### what_not_to_copy_superficially_cn
+
+1. 不能仅宣称‘我们提出了DPs’却没有对应指标和证据
+
+2. 不能把少数案例的成功泛化为普遍理论，需说明边界
+
+3. 不能在缺乏消融实验时声称具体架构组件是唯一原因
+
+4. 不能把社会影响直接归因于技术，需考虑制度/政治因素
+
+- single_best_description_of_the_routine_cn：先用文献和现实事件制造缺口，再提炼可测量的设计原则，构建一个多技术整合的制品，然后通过多个真实案例一层层证明概念、价值和使用，最后把所有数字回填到设计原则并声明理论/伦理贡献。
+
+## 分析边界
+
+文本完整，但图表细节（如Figure 4）和NATO案例原始实验细节依赖参考文献，不在此文内呈现；评价部分基于作者自述数据，缺乏独立审计；部分表格OCR可能有误。

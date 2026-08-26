@@ -1,0 +1,1069 @@
+{
+  "record_id": "25468",
+  "source_file": "25468_2022_greening-the-cloud-a-load-balancing-mechanism-to-optimize-cloud-computing-networks.md",
+  "title": "Greening the Cloud: A Load Balancing Mechanism to Optimize Cloud Computing Networks",
+  "authors": "Chetan Kumar; Sean Marston; Ravi Sen; Amar Narisetty",
+  "year": "2022",
+  "journal": "Journal of Management Information Systems",
+  "doi": "10.1080/07421222.2022.2063551",
+  "fulltext_chars": 93925,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "operational_efficiency",
+  "source_application_context": "general_or_cross_domain",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:14.896046+00:00",
+  "article_level_summary": {
+    "central_question_cn": "企业如何为私有云设计一种定价与资源分配机制，使其能够有效负载均衡云端资源，从而在保障服务质量的前提下提高云资源利用效率并降低环境足迹？",
+    "artifact_and_design_cn": "一个面向私有云/混合云环境的动态定价与作业分配机制：每个资源服务器按最优价格反映边际延迟成本，并受最大队列长度约束；同时构造了一个尽量使各服务器作业数相等的作业分配算法，用于负载均衡；当服务器接近容量时，价格信号提示可将作业外包给公共云。",
+    "objective_outcomes_cn": "解析证明等量分配使云中总等待时间最小；设计并仿真10服务器环境，发现价格在负载接近容量时非线性飙升，较小队列长度缩短等待时间但提高价格上升速度；负载均衡通过资源效率降低能源和碳足迹。",
+    "core_contribution_cn": "将动态网络定价模型扩展到大规模私有云/混合云场景，提出最优定价与负载均衡机制，给出等量分配命题，并转化为可操作的作业分配算法；仿真展示了价格、等待时间与队列约束的关系，为管理者决定何时向公共云卸载作业提供依据，从而促进绿色IT。",
+    "whole_argument_in_one_paragraph_cn": "文章从数据中心能耗与云服务普及造成的环境压力出发，把一般性的“绿色云”问题收缩为私有云/混合云中的资源分配与定价问题；在动态网络定价模型（Mendelson、Kumar等）基础上，假设每台资源服务器通过最优价格反映边际延迟成本，加入最大队列长度约束以保障QoS；随后证明当各服务器容量相同时，把作业尽量等量分配会使总等待时间最小；据此构造作业分配算法，并在10台服务器、Poisson到达、固定容量与随机队列约束的仿真中展示价格随负载非线性上升、接近容量时剧增以及队列约束对等待的影响；最后把这些仿真规律转化为管理者在混合云中决定何时将超额作业转移到公共云的决策依据，并由此推断负载均衡可以降低能源使用和碳足迹。整个论证链是从经济学模型到可执行算法再到管理启示的分析式设计研究。"
+  },
+  "paper_archetype": "analytical_mechanism_or_optimization",
+  "paper_archetype_reason_cn": "核心工作是以排队网络经济学为基础建立动态定价与资源分配模型，通过数学命题证明等量分配的最优性，并设计基于该命题的作业分配算法；主要证据来自解析证明和数值仿真，没有行为实验、真实平台部署或用户研究。",
+  "dominant_writing_arc": "formal_model_mechanism_simulation_policy",
+  "dominant_writing_arc_reason_cn": "论文的展开顺序是：先建立形式化的最优定价模型与队列约束机制，再证明负载均衡命题，接着将命题转成作业分配算法，用仿真展示价格/等待/负载行为，最后推出管理者何时外包到公共云的绿色IT政策含义。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段1构建动态定价与分配的形式模型，得到最优价格和队列约束下的价格表达式；阶段2在模型基础上证明等量分配最小化总等待时间；阶段3将命题转化为可执行的作业分配算法；阶段4用仿真检验算法在设定云环境中的价格、等待和负载行为；阶段5在讨论中将仿真证据上升为绿色IT管理与混合云外包策略。各阶段之间的累积关系是：模型提供价格机制，证明提供负载均衡规则，算法把规则变为可运行制品，仿真展示制品行为，最后讨论把行为证据转化为管理含义。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "动态定价与分配模型建模",
+        "question_cn": "在私有云中，每台资源服务器应如何根据到达率制定最优转移价格，并在最大队列长度约束下保障服务质量？",
+        "inputs_and_setting_cn": "沿用Kumar等的多服务器P2P网络定价模型；假设资源服务器完全连接，作业按Poisson过程到达，服务器容量固定，单位延迟成本v固定，并引入外生最大队列长度q。",
+        "designed_or_compared_object_cn": "每台服务器的总到达率Γ_j、最优价格p_j^*、等待时间W_j和队列长度L_j；比较无队列约束与有队列约束的优化问题。",
+        "baseline_control_or_counterfactual_cn": "无队列长度约束的净价值最大化问题作为有约束问题的参照；等待时间公式用作价格非线性行为的基准。",
+        "objective_metrics": [
+          "最优价格 p*",
+          "等待时间 W",
+          "队列长度 L"
+        ],
+        "analysis_method_cn": "净价值最大化、一阶条件求导、拉格朗日松弛，并使用M/M/1型等待时间公式。",
+        "main_result_cn": "最优执行价格等于边际延迟成本；价格随总到达率接近服务器容量而指数式上升；加入最大队列长度约束后，价格表达式中引入拉格朗日乘子，整体等待时间下降，QoS提高。",
+        "argumentative_role_cn": "建立后续所有证明和算法所依赖的价格机制：价格是拥塞信号，队列约束是QoS工具。",
+        "remaining_uncertainty_cn": "尚未证明怎样的跨服务器分配是最优的，也没有给出可实施的作业分配规则。",
+        "link_to_next_phase_cn": "该模型的价格-等待非线性关系为下一阶段证明等量分配最小化总等待时间提供了分析基础。",
+        "evidence_pointers": [
+          "Model Section, Model Review",
+          "Table 2: Notations",
+          "Equations (1)-(11)",
+          "Constrained Queue Length Problem"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "等量分配最优性证明",
+        "question_cn": "在多台资源服务器构成的云环境中，怎样分配作业才能使总等待时间最小？",
+        "inputs_and_setting_cn": "考虑两个节点j'和j''，容量相同且为μ；等量分配对应的每节点负载为M；考察j'负载为M+Δ、j''负载为M-Δ的不等量情形。",
+        "designed_or_compared_object_cn": "等量分配Γ_j^*=M vs 不等量分配Γ_j'>M且Γ_j''<M。",
+        "baseline_control_or_counterfactual_cn": "等量分配作为最优基准；通过边际等待时间差构造不等式。",
+        "objective_metrics": [
+          "边际等待时间差",
+          "总等待时间净变化"
+        ],
+        "analysis_method_cn": "解析证明：对两节点写出价格和边际等待表达式，比较等量分配与不等量分配的边际等待时间，分Δ_j'>Δ_j''、Δ_j'=Δ_j''=Δ两种情形证明表达式大于0。",
+        "main_result_cn": "两类不等量分配都会使总等待时间净增加，因此各服务器负载尽量相等时总等待时间最小。",
+        "argumentative_role_cn": "把价格机制与负载均衡直接连接，为“等量分配”提供规范性命题地位，并据此支撑下游算法。",
+        "remaining_uncertainty_cn": "证明针对容量相同、作业同质、全连接网络；未处理异构容量、非同质作业或非全连接拓扑。",
+        "link_to_next_phase_cn": "该命题直接转化为作业分配算法的设计目标。",
+        "evidence_pointers": [
+          "Cloud Load Balancing Mechanism",
+          "Proposition 1",
+          "Equations (12)-(22)"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "作业分配算法构建",
+        "question_cn": "如何将等量分配最小化等待时间的命题转化为云端可执行的作业分配规则？",
+        "inputs_and_setting_cn": "给定总作业数、资源服务器总数N、每台服务器的最大队列长度q。",
+        "designed_or_compared_object_cn": "一个基于整数函数INT、模运算MOD、循环顺序分配余数的作业分配算法。",
+        "baseline_control_or_counterfactual_cn": "算法内部以q作为约束基准，检查是否违反队列限制；没有外部对照算法。",
+        "objective_metrics": [
+          "各服务器分配数Γ_j",
+          "队列长度约束是否被满足"
+        ],
+        "analysis_method_cn": "算法设计：先按INT(total jobs/N)分配，再检查MOD余数，并按循环顺序把多余作业分给服务器直到q限制。",
+        "main_result_cn": "算法保证各服务器接收尽量相等的作业数；当总作业数不能被N整除时，额外作业按循环顺序分配，同时不违反各自队列上限。",
+        "argumentative_role_cn": "把分析命题转化成可实施、可仿真的制品，使模型不只是数学结论。",
+        "remaining_uncertainty_cn": "算法未与真实云调度器或其他负载均衡算法比较，也未在动态到达与异构容量下验证。",
+        "link_to_next_phase_cn": "该算法成为下一步仿真中生成价格、等待时间和负载分布的核心工具。",
+        "evidence_pointers": [
+          "Job Allocation Algorithm",
+          "Steps (1)-(5)"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "数值仿真评价",
+        "question_cn": "在模拟私有云环境中，提出的动态定价与作业分配算法如何影响价格、等待时间和负载分布？",
+        "inputs_and_setting_cn": "10个资源服务器；每台服务器按Poisson过程接受外生作业，均值在5到15之间随机；容量固定为20；队列长度在15到20间随机；单位延迟成本v=5；拉格朗日乘子0.5；生成1000个数据点。",
+        "designed_or_compared_object_cn": "不同总作业数下的各服务器价格、等待时间、分配量；短队列与长队列服务器的行为对比；容量固定以隔离到达率效应。",
+        "baseline_control_or_counterfactual_cn": "以等量分配对应的相同价格作为基准；用总作业数增加以及队列长度q差异作为内部对照；没有外部云基准。",
+        "objective_metrics": [
+          "价格 p_j",
+          "等待时间 W",
+          "作业分配量 Γ_j",
+          "总作业到达分布"
+        ],
+        "analysis_method_cn": "蒙特卡洛式仿真与可视化：生成到达样本，按算法分配，计算式(11)价格，绘制价格/分配/等待曲线。",
+        "main_result_cn": "总云到达近似Poisson且均值为116；等量分配下各服务器价格相同，余数造成价格阶梯；价格随总负载增加呈非线性上升，接近容量时产生剧烈跳升；短队列服务器等待时间更长且随队列增长上升更快。",
+        "argumentative_role_cn": "说明算法在设定环境下可运行并产生稳定、可解释的拥塞信号，为管理决策提供数值证据。",
+        "remaining_uncertainty_cn": "没有真实云负载、没有能耗/CO2实测、没有与现有负载均衡算法对比，也没有用户响应价格的行为数据。",
+        "link_to_next_phase_cn": "仿真中价格/等待关系被解释为管理者判断何时把超额作业转给公共云的信号，从而进入讨论部分。",
+        "evidence_pointers": [
+          "Table 3: Simulation parameters",
+          "Table 4: Resource server queue length and capacity",
+          "Table 5: Arrival rate and total jobs",
+          "Figures 3-12",
+          "Tables 6-9"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "讨论、管理与绿色IT含义",
+        "question_cn": "模型与仿真结果对企业的绿色IT实践和混合云外包决策意味着什么？",
+        "inputs_and_setting_cn": "将模型映射到Smithfield Foods等混合云企业案例；结合数据中心能耗与碳排放公开统计数据。",
+        "designed_or_compared_object_cn": "讨论中把负载均衡带来的资源效率与能源/碳足迹联系起来，提出管理者可根据最优价格/等待时间决定外包。",
+        "baseline_control_or_counterfactual_cn": "没有新增对照；使用全球数据中心能耗和碳统计作为背景参照。",
+        "objective_metrics": [
+          "资源利用效率",
+          "能源/碳足迹的定性影响"
+        ],
+        "analysis_method_cn": "解释性综合、案例类比和未来研究方向归纳。",
+        "main_result_cn": "模型可帮助企业优化私有云资源分配，并在接近容量时把作业转移到公共云以保障QoS，从而提高资源效率并减少环境足迹。",
+        "argumentative_role_cn": "把解析仿真结果上升为IS层面的绿色IT贡献，同时界定模型边界和未来研究路线。",
+        "remaining_uncertainty_cn": "绿色收益是推断而非测量；模型未考虑异构虚拟机和利润最大化目标。",
+        "link_to_next_phase_cn": "讨论末尾进入限制与未来研究，形成论文闭环。",
+        "evidence_pointers": [
+          "Discussion and Conclusions",
+          "Discussion P2-P4",
+          "Future research paragraph"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "BOUNDARY_CONDITION",
+      "THEORY_INTRO",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "MECHANISM",
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "REQUIREMENT",
+      "GAP"
+    ],
+    "artifact_design_moves": [
+      "DESIGN_FEATURE",
+      "REQUIREMENT",
+      "HYPOTHESIS_OR_PROPOSITION",
+      "METHOD_JUSTIFICATION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "动态网络定价与拥塞定价理论：Mendelson 1985",
+      "多服务器P2P网络定价与资源分配机制：Kumar & Bandyopadhyay 2012, Kumar et al. 2011",
+      "Green IT / Green Cloud Computing 中资源效率与能源消耗关系文献",
+      "云负载均衡与虚拟化/任务调度文献"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "论文的核心设计——最优动态价格公式、队列约束处理、等量分配规则和作业分配算法——都是由网络经济学模型直接推导或转化而来，而不是事后用理论贴标签；仿真只是展示该设计的行为，未引入独立理论源。",
+    "translation_chain_cn": "网络是拥塞资源，用户净价值=总价值-延迟成本 → 最优价格等于边际延迟成本 → 每台服务器根据其总到达率定价 → 在相同容量下，若各服务器价格相同则负载相等 → 用数学证明等量分配使总等待时间最小 → 把该命题转化为“每个服务器尽量接收总数/N个作业、余数循环分配”的作业分配算法 → 在仿真中观察价格、等待和队列约束行为 → 把接近容量时的价格信号转化为管理者将超额作业外包到公共云的依据。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "计算机网络是可拥塞的资源，最优价格应反映边际延迟成本。",
+        "mechanism_cn": "用户加入网络会增加其他用户的延迟；价格内化该外部性。",
+        "design_requirement_cn": "每个资源服务器应按照其总到达率和剩余容量制定执行价格。",
+        "artifact_choice_cn": "动态定价机制 p* = v Γ (∂W/∂Γ)，即边际延迟成本定价。",
+        "evaluated_contrast_cn": "仿真中总作业数逐步增加时的价格变化。",
+        "objective_result_cn": "价格随负载增加而非线性上升，接近容量时大幅跳升。",
+        "evidence_pointers": [
+          "Model Section, Equations (1)-(5)",
+          "Figures 4-10",
+          "Tables 6-9"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "多服务器P2P网络中净价值最大化时作业应近乎等量分配。",
+        "mechanism_cn": "等待时间函数是凸的，把作业从不饱和节点移到拥塞节点会增加总延迟。",
+        "design_requirement_cn": "云中各资源服务器负载应尽量相等。",
+        "artifact_choice_cn": "作业分配算法：INT(total jobs/N)基础分配 + MOD余数循环分配，并受队列长度q约束。",
+        "evaluated_contrast_cn": "等量分配与不等量分配的证明比较；仿真中不同总作业数的分配结果。",
+        "objective_result_cn": "等量分配使总等待时间最小；非等量分配导致价格阶梯和更高等待。",
+        "evidence_pointers": [
+          "Cloud Load Balancing Mechanism, Proposition 1",
+          "Job Allocation Algorithm",
+          "Figures 11-12"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "最大队列长度约束可保障QoS并限制用户延迟。",
+        "mechanism_cn": "队列约束增加等待时间惩罚，使价格在接近上限时上升，从而抑制更多作业进入。",
+        "design_requirement_cn": "每台服务器应有最大允许队列长度q。",
+        "artifact_choice_cn": "拉格朗日松弛后的有约束最优价格及外包触发依据。",
+        "evaluated_contrast_cn": "仿真中不同队列长度15、16、17、20下等待时间与价格行为。",
+        "objective_result_cn": "较小队列长度服务器的等待时间更长且上升更快，同时价格上升更陡，提供更强的QoS信号。",
+        "evidence_pointers": [
+          "Model Section, Equations (6)-(11)",
+          "Figure 12"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "提高资源利用率可减少空闲服务器和过度配置，从而降低能耗与碳足迹。",
+        "mechanism_cn": "更高效的资源分配减少所需物理服务器数量和运行时间。",
+        "design_requirement_cn": "云负载均衡应避免服务器空转或过载。",
+        "artifact_choice_cn": "将超额作业在接近容量时外包到公共云的混合云策略。",
+        "evaluated_contrast_cn": "讨论中将负载均衡机制与绿色IT文献的能源效应连接。",
+        "objective_result_cn": "未直接测量能耗，但阐述资源利用率提高会降低能源使用和碳排放。",
+        "evidence_pointers": [
+          "Discussion and Conclusions P3-P4",
+          "Related Literature P2, P5"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "analytical_proof",
+      "numerical_simulation",
+      "illustrative_example_and_extrapolation"
+    ],
+    "why_these_evaluations_cn": "因为论文提出的是一个形式化定价与分配机制，首先需要用解析证明说明“等量分配最优”这一规范性命题；随后需要把命题转成可运行的作业分配算法，因此用仿真说明算法在具体参数下能够产生稳定、可解释的价格/等待/负载行为；最后用行业案例和绿色IT文献把结果提升为管理含义。",
+    "benchmark_and_contrast_chain_cn": "论文没有外部benchmark，而是建立了一个内部规范性基准：等量分配M作为最优对照。证明部分对比等量分配与不等量分配的边际等待时间；仿真部分用总作业数逐步增加展示价格阶梯，用不同队列长度q作为QoS对照，用容量固定20来隔离到达率效应。随着总作业接近容量，价格出现跳跃，作为“拥塞成本非线性”的反事实证据。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "最优价格等于边际延迟成本",
+        "evidence": "净价值最大化目标的一阶条件，式(1)-(2)",
+        "verdict": "在模型假设下解析成立"
+      },
+      {
+        "claim": "等量分配使总等待时间最小",
+        "evidence": "Proposition 1证明中比较式(20)-(22)的边际等待差异",
+        "verdict": "在相同容量、全连接、同质作业条件下成立"
+      },
+      {
+        "claim": "作业分配算法能均衡负载且不违反队列约束",
+        "evidence": "算法步骤与仿真中的价格/分配曲线",
+        "verdict": "在模拟设定下成立，未与真实云系统对比"
+      },
+      {
+        "claim": "价格随总作业增加呈非线性上升，接近容量时剧烈跳升",
+        "evidence": "Figures 4-10, Tables 6-9",
+        "verdict": "由仿真数值支持"
+      },
+      {
+        "claim": "较小队列长度提高QoS但使等待时间上升更快",
+        "evidence": "Figure 12",
+        "verdict": "仅在仿真参数范围内支持"
+      },
+      {
+        "claim": "负载均衡可以降低能源使用和碳足迹",
+        "evidence": "绿色IT文献引用 + 资源利用效率论述",
+        "verdict": "推断性主张，没有直接测量能耗/CO2"
+      }
+    ],
+    "internal_validity_strategy_cn": "通过数学证明控制机制逻辑；通过在仿真中固定容量、随机Poisson到达、外生队列长度和固定延迟成本，隔离到达率对价格与等待的效应；所有参数范围在表3、表4中公开，便于复核。",
+    "external_validity_strategy_cn": "用AWS、Azure、Smithfield Foods等真实云/混合云例子说明适用场景；宣称结果可扩展到公共云时明确说明其限制；使用公开数据中心的能耗与碳排放统计作为宏观背景，使模型结果与绿色IT议题相关联。",
+    "what_is_not_actually_tested_cn": "没有真实云负载或现网部署；没有测量能源消耗或碳排；没有用户对动态价格的行为响应；没有与已有负载均衡算法或定价机制比较；没有检验异构服务器、非全连接网络、不同作业大小和战略用户行为。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的动态定价与作业分配机制可以在云网络中产生稳定的负载均衡信号，使价格反映拥塞程度，并在接近容量时显著加价。",
+    "artifact_claim_cn": "作业分配算法能在不违反队列上限的前提下使各资源服务器的作业数尽量相等，从而降低总等待时间。",
+    "mechanism_claim_cn": "最优价格等于边际延迟成本；由于等待时间函数凸且非线性，等量分配通过平衡边际延迟来最小化总等待时间；队列长度约束通过增加价格惩罚来保障QoS。",
+    "boundary_claim_cn": "结论适用于容量相同、作业同质、全连接网络结构的私有云；在公共云场景中，当资源全部分配后只能扩容，因此外包选项不适用；模型是动态定价方法的初版，仍有许多边界。",
+    "reusable_design_knowledge_cn": "可复用知识包括：价格应内生反映边际延迟成本；负载均衡目标可化为等量分配；最大队列长度q可作为QoS调节旋钮；当价格/等待时间接近容量阈值时，应触发到公共云的外包。",
+    "theoretical_contribution_cn": "将Mendelson的单服务器拥塞定价和Kumar等的多服务器P2P定价模型扩展到大规模型云环境，加入最大队列长度约束、混合云外包场景和负载均衡命题，因此是对动态网络定价理论在云计算场景中的推广与限定。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分回顾引言中提出的数据中心能耗和CO2压力，重述高效资源分配与绿色IT的联系，说明模型可帮助混合云企业优化私有云资源并在过载时外包，因此回应了“如何让云更绿色”的初始缺口。",
+    "overclaim_or_unsupported_leaps_cn": "可能存在跳跃：(1) 将“负载均衡降低能耗”作为结论但未实测能耗/碳排放；(2) 从同容量/同质/全连接假设的证明推广到一般云环境；(3) 认为价格信号会自动导致长期负载均衡，但未考虑用户策略行为；(4) 公共云适用性在讨论中有所声明，但模型本身只建模私有云侧。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "全球大量人口上网，IT服务需求巨大，数据中心持续增加并消耗全球2%能源。",
+      "rhetorical_function_cn": "建立宏观背景：资源消耗规模大。",
+      "depends_on_cn": "无，论文开头。",
+      "sets_up_cn": "为“绿色云”的重要性提供量化基础。",
+      "evidence_pointer": "Abstract S1-S2"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1-S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "许多组织转向云；绿色云计算成为设计和使用的重点；本研究聚焦资源分配以绿化组织的云。",
+      "rhetorical_function_cn": "把一般背景收窄到云资源分配问题。",
+      "depends_on_cn": "依赖上一条能源消耗背景。",
+      "sets_up_cn": "引出定价和分配机制。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P3 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为私有云设计定价与分配机制，采用动态定价模型最大化用户净价值，并创建基于该模型的作业分配算法实现负载均衡。",
+      "rhetorical_function_cn": "预告制品：价格机制+分配算法。",
+      "depends_on_cn": "承接资源分配目标。",
+      "sets_up_cn": "后续模型与算法是摘要的展开。",
+      "evidence_pointer": "Abstract P3"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P4 S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "证明各服务器作业数尽量相等是最优的；仿真查看云资源影响并为公共云分配提供洞见。",
+      "rhetorical_function_cn": "给出最重要结果和证据形式。",
+      "depends_on_cn": "依赖机制和算法的预告。",
+      "sets_up_cn": "为贡献声明做准备。",
+      "evidence_pointer": "Abstract P4"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P5 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "模型可帮助组织高效分配云资源，实现更绿色的云计算系统。",
+      "rhetorical_function_cn": "把结果上升到绿色IT贡献。",
+      "depends_on_cn": "依赖仿真和证明结果。",
+      "sets_up_cn": "为全文定位为绿色IT研究。",
+      "evidence_pointer": "Abstract P5"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "计算技术和互联网普及给组织带来可靠IS压力，组织采用云架构按需扩展IT服务。",
+      "rhetorical_function_cn": "建立云采用的组织背景。",
+      "depends_on_cn": "引出全文的问题领域。",
+      "sets_up_cn": "为后续云增长和能耗问题铺垫。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1-S4",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "视频点播、社交网络等互联网服务爆发式增长，Netflix、Microsoft Xbox、Khan Academy等通过大型云平台交付服务。",
+      "rhetorical_function_cn": "用具体现象说明云服务需求的普遍性。",
+      "depends_on_cn": "承接云采用背景。",
+      "sets_up_cn": "为“管理云负载”问题提供现实案例。",
+      "evidence_pointer": "Introduction P2 S1-S4"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S5-S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "新冠疫情使互联网使用增加40%到100%，视频会议和内容交付大幅增长，企业需要弹性信息系统，但管理私有云和公共云组合成为难题。",
+      "rhetorical_function_cn": "强调云负载管理的重要性和紧迫性。",
+      "depends_on_cn": "依赖云服务增长现象。",
+      "sets_up_cn": "引出研究要解决的混合云管理问题。",
+      "evidence_pointer": "Introduction P2 S5-S6"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "绿色计算包含绿色IS和绿色IT两个方向，前者关注可持续业务流程，后者关注能源与设备高效使用。",
+      "rhetorical_function_cn": "建立绿色计算概念框架。",
+      "depends_on_cn": "承接环境议题。",
+      "sets_up_cn": "为论文将负载均衡归入绿色IT做概念定位。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "Walmart、Best Buy、Kroger等采用云合作，Hyatt和CBS使用私有云，Smithfield Foods使用混合云。",
+      "rhetorical_function_cn": "用企业实例说明私有云和混合云的普遍性。",
+      "depends_on_cn": "基于云采用背景。",
+      "sets_up_cn": "为模型限定在私有云/混合云场景提供现实依据。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "云市场规模从2012年的260亿美元增长到2020年预期3714亿美元，并预计继续高增长。",
+      "rhetorical_function_cn": "量化云增长规模。",
+      "depends_on_cn": "承接前文云采用的趋势。",
+      "sets_up_cn": "为数据中心能耗上升做铺垫。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P6 S1-S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "美国数据中心2018年消耗900亿千瓦时并产生约9700万吨CO2，到2030年预计消耗全球8%电力。",
+      "rhetorical_function_cn": "用能耗和碳排数据说明问题严重性。",
+      "depends_on_cn": "依赖云市场增长。",
+      "sets_up_cn": "为绿色云研究的必要性提供量化压力。",
+      "evidence_pointer": "Introduction P6 S1-S2"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P6 S3-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "云服务通过改善服务器利用率和资源分配提高系统性能，从而降低能源使用和碳足迹；但多数云服务因虚拟化部署低和空闲服务器而能源效率不高。",
+      "rhetorical_function_cn": "说明资源分配与绿色之间的机制，同时指出现状不足。",
+      "depends_on_cn": "依赖能源数据压力。",
+      "sets_up_cn": "引出本文以资源分配为切入点的目标。",
+      "evidence_pointer": "Introduction P6 S3-S4"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P7 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究聚焦云计算的资源分配应用，目标是为私有云设计定价与分配机制，使企业有效负载均衡云资源。",
+      "rhetorical_function_cn": "明确研究问题。",
+      "depends_on_cn": "依赖前面绿色机制和资源效率论述。",
+      "sets_up_cn": "设定全文的制品目标。",
+      "evidence_pointer": "Introduction P7 S1"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P7 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "机制允许资源请求以去中心化方式高效分配到可用云资源，并可针对最大化净价值或最小化延迟成本设计。",
+      "rhetorical_function_cn": "给出机制核心特征和可变目标。",
+      "depends_on_cn": "承接研究目标。",
+      "sets_up_cn": "为后续模型目标和队列约束做概念准备。",
+      "evidence_pointer": "Introduction P7 S2"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P8 S1-S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "区分公共云、私有云和混合云，本文建模私有云可访问公共云的混合云场景，并只分析私有云侧。",
+      "rhetorical_function_cn": "界定研究对象的边界。",
+      "depends_on_cn": "依赖前文企业混合云案例。",
+      "sets_up_cn": "明确后续模型适用范围和外包假设。",
+      "evidence_pointer": "Introduction P8 S1-S2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P8 S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "结果可应用于公共云，但当公共云资源全部分配后无法外包给另一个公共云，只能扩容。",
+      "rhetorical_function_cn": "预先限定结论适用的边界。",
+      "depends_on_cn": "依赖前一条对象界定。",
+      "sets_up_cn": "为讨论部分公共云扩展声明做铺垫。",
+      "evidence_pointer": "Introduction P8 S3"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P9 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "研究情境是组织最大化私有云负载均衡以优化资源使用；模型建立在Kumar和Bandyopadhyay以及Kumar等的P2P资源分享模型上。",
+      "rhetorical_function_cn": "点明理论基础。",
+      "depends_on_cn": "承接私有云资源分配目标。",
+      "sets_up_cn": "说明本文将已有P2P模型推广到云环境。",
+      "evidence_pointer": "Introduction P9 S1-S2"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P9 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "私有云由多个能够创建虚拟化环境的资源服务器组成，每台服务器可接收多个作业。",
+      "rhetorical_function_cn": "描述模型中的云基础设施。",
+      "depends_on_cn": "依赖前一条模型定位。",
+      "sets_up_cn": "为图1和模型符号表做准备。",
+      "evidence_pointer": "Introduction P9 S3; Figure 1"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Introduction P10 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "云中服务器可互相通信；作业可被其他服务器执行；模型加入最大队列长度约束以保障QoS，并允许服务器根据利用率将作业外包给第三方。",
+      "rhetorical_function_cn": "列出机制的三个关键设计：资源共享、队列约束、外包。",
+      "depends_on_cn": "依赖基础设施描述。",
+      "sets_up_cn": "为模型方程和算法提供设计需求。",
+      "evidence_pointer": "Introduction P10"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "Introduction P11 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "云服务商普遍采用某种动态定价，文中列出成本、价值、竞争、客户和位置五类动态定价模型，并称本文模型是成本型的一种创新。",
+      "rhetorical_function_cn": "把动态定价选择与行业实践和已有分类连接。",
+      "depends_on_cn": "承接价格机制设计。",
+      "sets_up_cn": "为模型与既有定价文献的关系做铺垫。",
+      "evidence_pointer": "Introduction P11"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "Introduction P12 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "经典Mendelson模型把计算机网络看作拥塞资源并推导最优定价；Kumar等将其推广到多服务器P2P网络；本文将之扩展到私有云动态定价和分配机制。",
+      "rhetorical_function_cn": "第一次明示理论谱系和本文扩展点。",
+      "depends_on_cn": "依赖动态定价分类。",
+      "sets_up_cn": "为后续模型章节铺设分析起点。",
+      "evidence_pointer": "Introduction P12 S1-S3"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "Introduction P12 S4",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "作者称这是动态定价方法在云计算中的首次尝试，未来可研究AWS spot pricing、比较其他动态定价模型等。",
+      "rhetorical_function_cn": "限制论文范围并预告未来方向。",
+      "depends_on_cn": "承接理论扩展声明。",
+      "sets_up_cn": "为讨论部分的未来研究段落留下伏笔。",
+      "evidence_pointer": "Introduction P12 S4"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "Introduction P13 S1-S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "预告论文结构：先讲相关文献，再构建和分析模型，然后报告数值仿真，最后结论和未来方向。",
+      "rhetorical_function_cn": "给出全文章地图。",
+      "depends_on_cn": "在前言完成问题铺垫后出现。",
+      "sets_up_cn": "引导读者进入文献综述。",
+      "evidence_pointer": "Introduction P13"
+    },
+    {
+      "order": 25,
+      "section": "Related Literature",
+      "locator": "Related Literature P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "绿色IT日益重要，云通过弹性按需提供资源减少环境影响；企业通过减少资源总量和高效利用资源来降低能耗。",
+      "rhetorical_function_cn": "把绿色IT文献与云资源效率联系起来。",
+      "depends_on_cn": "从引言绿色概念发展而来。",
+      "sets_up_cn": "为论文把负载均衡作为绿色机制做文献支撑。",
+      "evidence_pointer": "Related Literature P1-P2"
+    },
+    {
+      "order": 26,
+      "section": "Related Literature",
+      "locator": "Related Literature P2 P3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "绿色云计算的目标是在保证QoS的同时降低数据中心功耗；资源规划政策可以减少处理成本、时间、能耗和环境影响。",
+      "rhetorical_function_cn": "说明架构设计如何产生绿色收益。",
+      "depends_on_cn": "依赖绿色IT定义。",
+      "sets_up_cn": "为模型目标“最优”提供解释。",
+      "evidence_pointer": "Related Literature P2"
+    },
+    {
+      "order": 27,
+      "section": "Related Literature",
+      "locator": "Related Literature P3-P4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "已有研究从处理器、任务调度、功率管理、虚拟化和网络流量等角度降低能耗，但仍有大量开放挑战。",
+      "rhetorical_function_cn": "总结既有技术路径并指出不足。",
+      "depends_on_cn": "基于绿色IT文献。",
+      "sets_up_cn": "为下一段提出缺口做准备。",
+      "evidence_pointer": "Related Literature P3-P4"
+    },
+    {
+      "order": 28,
+      "section": "Related Literature",
+      "locator": "Related Literature P5 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有任务调度和资源分配研究关注效率、性能、资源优化，但较少把云服务定价作为资源分配和降低环境影响的工具。",
+      "rhetorical_function_cn": "明确文献缺口：缺乏用定价优化资源分配的绿色云研究。",
+      "depends_on_cn": "依赖上一段开放挑战。",
+      "sets_up_cn": "为本文动态定价机制提供理由。",
+      "evidence_pointer": "Related Literature P5"
+    },
+    {
+      "order": 29,
+      "section": "Related Literature",
+      "locator": "Related Literature P6-P7",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "虚拟化在云工作负载管理中起关键作用，虚拟机的合理配置和合并可节能，但盲目合并会低效；网络数据传输和虚拟机迁移也影响能耗。",
+      "rhetorical_function_cn": "补充相邻领域的重要知识。",
+      "depends_on_cn": "延续资源效率主题。",
+      "sets_up_cn": "给负载均衡在技术栈中的位置提供背景。",
+      "evidence_pointer": "Related Literature P6-P7"
+    },
+    {
+      "order": 30,
+      "section": "Related Literature",
+      "locator": "Related Literature P8 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "负载均衡是云中的关键问题，有效负载均衡可提升可靠性、生产率、资源利用率和能耗表现，使云更绿色。",
+      "rhetorical_function_cn": "引入负载均衡文献并肯定其绿色作用。",
+      "depends_on_cn": "依赖虚拟化技术背景。",
+      "sets_up_cn": "为本文负载均衡算法提供领域合法性。",
+      "evidence_pointer": "Related Literature P8"
+    },
+    {
+      "order": 31,
+      "section": "Related Literature",
+      "locator": "Related Literature P9 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "本文建立在Mendelson和Kumar等的动态网络定价模型上，将多服务器动态定价推广到大规模云环境，并用仿真展示定价和拥塞的实践影响。",
+      "rhetorical_function_cn": "收束文献综述并明确本文理论定位。",
+      "depends_on_cn": "依赖前文缺口和经典模型。",
+      "sets_up_cn": "桥接文献与模型章节。",
+      "evidence_pointer": "Related Literature P9"
+    },
+    {
+      "order": 32,
+      "section": "Model",
+      "locator": "Model P1 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "模型刻画云稳态行为，扩展Kumar等的P2P定价模型，并研究队列长度约束云环境中的负载均衡影响。",
+      "rhetorical_function_cn": "说明建模对象和扩展点。",
+      "depends_on_cn": "依赖文献综述中的经典模型。",
+      "sets_up_cn": "引出两个子节：模型回顾和负载均衡机制。",
+      "evidence_pointer": "Model P1"
+    },
+    {
+      "order": 33,
+      "section": "Model",
+      "locator": "Model Review P1 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "资源服务器按外生到达率接收作业，用户基于转移价格决定是否使用资源；作业可被分配到其他服务器。",
+      "rhetorical_function_cn": "定义模型基本运行机制。",
+      "depends_on_cn": "基于P2P网络模型假设。",
+      "sets_up_cn": "引入符号表和后续最优定价公式。",
+      "evidence_pointer": "Model Review P1; Table 2"
+    },
+    {
+      "order": 34,
+      "section": "Model",
+      "locator": "Model Review P3 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "假设作业同质以作为初版；净价值是预期总价值与预期延迟成本之差；等量分配最优定价适用于全连接网络。",
+      "rhetorical_function_cn": "明确模型假设和适用结构。",
+      "depends_on_cn": "依赖基础排队模型。",
+      "sets_up_cn": "为最优价格推导和命题证明设定边界。",
+      "evidence_pointer": "Model Review P3"
+    },
+    {
+      "order": 35,
+      "section": "Model",
+      "locator": "Model Review, after Equation (2)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "最优价格等于微小作业流对云中所有作业造成的边际延迟成本，因此每台服务器有自己的最优执行价格。",
+      "rhetorical_function_cn": "给出最优价格的机制解释。",
+      "depends_on_cn": "依赖式(1)-(2)的推导。",
+      "sets_up_cn": "为非线性价格行为提供基础。",
+      "evidence_pointer": "After Equation (2)"
+    },
+    {
+      "order": 36,
+      "section": "Model",
+      "locator": "Model Review, Equations (3)-(4)",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "等待时间为W=1/(μ-Γ)，随到达率接近容量趋于无穷；因此价格函数也应对到达率呈非线性甚至指数式关系。",
+      "rhetorical_function_cn": "说明凸等待时间如何传导到价格。",
+      "depends_on_cn": "依赖最优价格公式。",
+      "sets_up_cn": "为仿真中价格飙升提供预期。",
+      "evidence_pointer": "Model Review, Equations (3)-(4)"
+    },
+    {
+      "order": 37,
+      "section": "Model",
+      "locator": "Model Review, after Equation (5)",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "最优价格公式中分母随到达率接近容量趋于零，因此价格趋于无穷；多来源作业的交互效应影响邻接服务器价格。",
+      "rhetorical_function_cn": "把非线性等待转化为非线性定价的正式结论。",
+      "depends_on_cn": "依赖式(5)。",
+      "sets_up_cn": "为后续队列约束和外包场景提供动机。",
+      "evidence_pointer": "After Equation (5)"
+    },
+    {
+      "order": 38,
+      "section": "Model",
+      "locator": "Model Review, queue constraint paragraph",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "对服务器施加最大队列长度约束，可限制作业延迟，形成最低QoS保证，并允许模拟“当利用水平达到某点时把作业外包给其他云”。",
+      "rhetorical_function_cn": "把QoS和外包要求形式化为模型约束。",
+      "depends_on_cn": "依赖此前非线性价格结论。",
+      "sets_up_cn": "引入拉格朗日松弛公式。",
+      "evidence_pointer": "Model Review, queue constraint paragraph"
+    },
+    {
+      "order": 39,
+      "section": "Model",
+      "locator": "Model Review, Equations (6)-(11)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在有最大队列长度q的约束下，通过拉格朗日松弛得到新的最优价格；当Γ_j W_j超过q时价格设为无穷，且Γ_j^*≤(q/(q+1))μ_j。",
+      "rhetorical_function_cn": "给出带QoS约束的价格解析解。",
+      "depends_on_cn": "依赖队列约束问题表述。",
+      "sets_up_cn": "为证明等量分配和算法实现提供价格规则。",
+      "evidence_pointer": "Model Review, Equations (6)-(11)"
+    },
+    {
+      "order": 40,
+      "section": "Model",
+      "locator": "Model Review, queue constraint result paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "对最大队列长度的外生约束提高等待时间惩罚，从而降低等待时间并让管理者通过q设定QoS水平。",
+      "rhetorical_function_cn": "解释队列约束的管理含义。",
+      "depends_on_cn": "依赖拉格朗日解。",
+      "sets_up_cn": "为仿真中队列长度对比提供预期。",
+      "evidence_pointer": "Model Review, queue constraint result paragraph"
+    },
+    {
+      "order": 41,
+      "section": "Cloud Load Balancing Mechanism",
+      "locator": "Section start before Proposition 1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "基于上述模型刻画，下一步证明多资源服务器云中总等待时间在作业等量分配时最小。",
+      "rhetorical_function_cn": "从模型公式转向规范性命题。",
+      "depends_on_cn": "依赖模型最优价格和队列约束。",
+      "sets_up_cn": "引出Proposition 1。",
+      "evidence_pointer": "Cloud Load Balancing Mechanism, intro"
+    },
+    {
+      "order": 42,
+      "section": "Cloud Load Balancing Mechanism",
+      "locator": "Proposition 1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "命题：当所有云资源服务器之间等量分配作业时，总等待时间最小。",
+      "rhetorical_function_cn": "给出全文核心规范性命题。",
+      "depends_on_cn": "依赖模型和价格机制。",
+      "sets_up_cn": "为算法和仿真提供理论基础。",
+      "evidence_pointer": "Proposition 1"
+    },
+    {
+      "order": 43,
+      "section": "Cloud Load Balancing Mechanism",
+      "locator": "Proof P1-P5",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "在两节点情形中，若一个节点负载高于M、另一个低于M，凸性等待函数导致边际等待差异为正。",
+      "rhetorical_function_cn": "用代数证明解释等量分配最优的机制。",
+      "depends_on_cn": "依赖式(12)-(20)。",
+      "sets_up_cn": "为不等式分解和Case证明做准备。",
+      "evidence_pointer": "Proof, Equations (12)-(20)"
+    },
+    {
+      "order": 44,
+      "section": "Cloud Load Balancing Mechanism",
+      "locator": "Proof Case 1 and Case 3 conclusion",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Case 1和Case 3中边际等待差异均大于0，因此不等量分配相对等量分配总等待时间净增加。",
+      "rhetorical_function_cn": "完成命题证明。",
+      "depends_on_cn": "依赖两个Case的代数分析。",
+      "sets_up_cn": "为作业分配算法提供已证明的最优规则。",
+      "evidence_pointer": "Proof, Equations (21)-(22)"
+    },
+    {
+      "order": 45,
+      "section": "Job Allocation Algorithm",
+      "locator": "Algorithm Steps (1)-(5)",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "算法先按总作业数/N给每台服务器分配整数个作业，再用MOD判断余数，若有余数则按循环顺序分配多余作业，同时确保不违反各自队列上限。",
+      "rhetorical_function_cn": "把命题实现为可直接执行的分步算法。",
+      "depends_on_cn": "依赖Proposition 1。",
+      "sets_up_cn": "为仿真提供核心计算逻辑。",
+      "evidence_pointer": "Job Allocation Algorithm, Steps (1)-(5)"
+    },
+    {
+      "order": 46,
+      "section": "Simulations",
+      "locator": "Simulations P1 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为展示机制影响，仿真10个资源服务器的简单云网络，假设Poisson到达、单位延迟成本5、容量20、队列长度15-20。",
+      "rhetorical_function_cn": "说明仿真设置和选择该规模的原因。",
+      "depends_on_cn": "依赖算法和模型公式。",
+      "sets_up_cn": "引出表3、表4和结果。",
+      "evidence_pointer": "Simulations P1; Tables 3-4"
+    },
+    {
+      "order": 47,
+      "section": "Simulations",
+      "locator": "Simulations P2 S1-S3",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "总云到达由各服务器外生到达相加构成；1000个实例的总到达近似Poisson且均值为116。",
+      "rhetorical_function_cn": "建立仿真输入分布基准。",
+      "depends_on_cn": "依赖随机到达生成设置。",
+      "sets_up_cn": "为后续价格/等待结果提供输入。",
+      "evidence_pointer": "Simulations P2; Table 5; Figure 3"
+    },
+    {
+      "order": 48,
+      "section": "Simulations",
+      "locator": "Simulations P3 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在均衡时作业被分配到各服务器使负载尽量相等；若100个作业和10台服务器，则每台10个，价格相同；若不能整除，多余作业随机分配造成价格差异。",
+      "rhetorical_function_cn": "展示算法在仿真中的直接结果。",
+      "depends_on_cn": "依赖作业分配算法。",
+      "sets_up_cn": "为后续价格阶梯和非线性图提供解释。",
+      "evidence_pointer": "Simulations P3"
+    },
+    {
+      "order": 49,
+      "section": "Simulations",
+      "locator": "Simulations P4-P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "利用最优价格表达式计算每个资源服务器的数值价格，固定容量以隔离作业到达对定价的效果。",
+      "rhetorical_function_cn": "说明如何从模型公式转到数值结果。",
+      "depends_on_cn": "依赖式(11)和表3、表4参数。",
+      "sets_up_cn": "为价格表和图形结果提供计算方法。",
+      "evidence_pointer": "Simulations P4-P5"
+    },
+    {
+      "order": 50,
+      "section": "Simulations",
+      "locator": "Simulations P6 S1-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "表6-8和图4-6显示价格随总作业数增加而均匀上升；图7和表9展示价格在服务器接近容量时显著跳升。",
+      "rhetorical_function_cn": "报告价格与负载的核心仿真结果。",
+      "depends_on_cn": "依赖算法分配和价格公式。",
+      "sets_up_cn": "为管理者使用价格信号做证据铺垫。",
+      "evidence_pointer": "Tables 6-9; Figures 4-7"
+    },
+    {
+      "order": 51,
+      "section": "Simulations",
+      "locator": "Simulations P7 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "非线性价格上升与模型预测的等待时间非线性一致：总到达率接近容量时，等待时间和价格都急剧上升。",
+      "rhetorical_function_cn": "把仿真价格曲线与模型机制重新连接。",
+      "depends_on_cn": "依赖模型等待时间公式。",
+      "sets_up_cn": "为资源服务器1的详细图8-10提供解释。",
+      "evidence_pointer": "Simulations P7"
+    },
+    {
+      "order": 52,
+      "section": "Simulations",
+      "locator": "Simulations P8 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "图8-10显示资源服务器1的价格在2-14个作业时平滑上升，在15-19个作业时从0.1跳到100甚至更大，说明提交到接近容量服务器的成本极高。",
+      "rhetorical_function_cn": "用单服务器详情展示价格跳变的非连续性。",
+      "depends_on_cn": "依赖总价格仿真结果。",
+      "sets_up_cn": "为外包决策提供临界信号。",
+      "evidence_pointer": "Figures 8-10"
+    },
+    {
+      "order": 53,
+      "section": "Simulations",
+      "locator": "Simulations P9 S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "图11显示总作业数增加时各服务器分配相应增加，长期通过价格调节使服务器负载趋于平衡。",
+      "rhetorical_function_cn": "说明算法和价格共同产生长期均衡趋势。",
+      "depends_on_cn": "依赖价格机制和算法。",
+      "sets_up_cn": "为负载均衡的长期效果提供证据。",
+      "evidence_pointer": "Figure 11"
+    },
+    {
+      "order": 54,
+      "section": "Simulations",
+      "locator": "Simulations P10-P11",
+      "move_code": "RESULT",
+      "paraphrase_cn": "图12显示等待时间随队列中作业数增加而增加，队列长度较小的服务器等待时间更长且上升更快，因此更短的队列约束提供更高QoS。",
+      "rhetorical_function_cn": "报告队列长度约束的仿真结果。",
+      "depends_on_cn": "依赖队列约束模型。",
+      "sets_up_cn": "为管理者根据价格/等待时间决定外包提供依据。",
+      "evidence_pointer": "Figure 12"
+    },
+    {
+      "order": 55,
+      "section": "Simulations",
+      "locator": "Simulations P11 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "管理者可检查企业私有云的最优价格/等待关系，判断何时应将超额作业卸载到公共云以保障QoS。",
+      "rhetorical_function_cn": "把仿真数值结果转化为管理决策规则。",
+      "depends_on_cn": "依赖价格跳变和队列结果。",
+      "sets_up_cn": "为讨论部分的混合云建议做铺垫。",
+      "evidence_pointer": "Simulations P11"
+    },
+    {
+      "order": 56,
+      "section": "Discussion and Conclusions",
+      "locator": "Discussion P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "计算技术和互联网依赖增加使组织转向云和混合云，替代传统IT系统。",
+      "rhetorical_function_cn": "回到云采用背景，开启讨论。",
+      "depends_on_cn": "依赖引言中的云增长现象。",
+      "sets_up_cn": "为结论重述负载均衡目标提供语境。",
+      "evidence_pointer": "Discussion P1"
+    },
+    {
+      "order": 57,
+      "section": "Discussion and Conclusions",
+      "locator": "Discussion P2 S1-S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "研究目标是创建高效负载均衡机制以优化云资源使用；私有云多服务器并在队列长度约束下最大化资源使用和QoS。",
+      "rhetorical_function_cn": "重述研究问题与设计特征。",
+      "depends_on_cn": "依赖研究背景。",
+      "sets_up_cn": "总结论文做了什么。",
+      "evidence_pointer": "Discussion P2"
+    },
+    {
+      "order": 58,
+      "section": "Discussion and Conclusions",
+      "locator": "Discussion P3 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "证明等量分配最优，开发负载均衡算法，仿真显示价格/等待关系可帮助决定何时将超额作业转移到公共云，惠及Smithfield Foods等混合云企业。",
+      "rhetorical_function_cn": "集中陈述贡献和管理应用。",
+      "depends_on_cn": "依赖模型、证明和仿真结果。",
+      "sets_up_cn": "为绿色IT结论做准备。",
+      "evidence_pointer": "Discussion P3"
+    },
+    {
+      "order": 59,
+      "section": "Discussion and Conclusions",
+      "locator": "Discussion P4 S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "高效资源分配能降低云整体能耗，模型有助于提高资源效率并绿化组织IT基础设施。",
+      "rhetorical_function_cn": "把研究贡献与绿色IT缺口闭合。",
+      "depends_on_cn": "依赖仿真和文献证据。",
+      "sets_up_cn": "引出未来研究。",
+      "evidence_pointer": "Discussion P4"
+    },
+    {
+      "order": 60,
+      "section": "Discussion and Conclusions",
+      "locator": "Discussion Future P1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "模型假设所有虚拟机资源占用相同，未来可扩展为不同资源占用；模型以最小化等待为目标，未来可考虑利润最大化；还可比较spot pricing、其他动态定价策略和战略用户行为。",
+      "rhetorical_function_cn": "界定限制并给出研究路线。",
+      "depends_on_cn": "依赖全文分析结论。",
+      "sets_up_cn": "结束论文并邀请后续研究。",
+      "evidence_pointer": "Discussion Future"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先通过大量能耗和云增长数据建立环境压力，再指出已有任务调度和资源分配研究主要聚焦效率/性能/资源优化，却较少把云服务定价作为优化资源分配并降低环境影响的手段；由此构造“定价机制+负载均衡+绿色IT”的缺口。",
+    "signposting_cn": "在引言末尾用“rest of this paper is presented as follows”预告章节；在模型部分用“two sub sections details...”说明建模分为模型回顾和负载均衡机制；在算法和仿真之间用“based on the findings... we created”等句子连接。",
+    "transition_logic_cn": "论文用连续递进逻辑：文献综述给出经典模型基础后进入模型；模型公式推导出最优价格和队列约束后进入命题；命题证明后直接转化为算法；算法后进入仿真；仿真结果在讨论中升华为管理含义和绿色IT贡献。",
+    "claim_evidence_rhythm_cn": "每提出一个关键规则，先给数学公式或命题，再用仿真图表展示其行为；例如先证等量分配最优，再用算法和仿真展示价格阶梯与非线性跳升。",
+    "benchmark_narrative_cn": "没有外部benchmark，而是把等量分配作为规范性最优基准；通过比较等量/不等量、低负载/高负载、不同队列长度，将仿真图表演变成内部反事实证据。",
+    "theory_return_cn": "讨论和模型部分反复把仿真中的非线性价格跳升归因到等待时间的凸性，使“价格反映边际延迟成本”的理论机制成为承载结果的解释框架；最后又回到绿色IT文献中的资源利用效率机制。",
+    "contribution_positioning_cn": "将贡献定位为经典动态网络定价模型到云环境的扩展，强调“大规模多服务器云+队列约束+混合云外包”这一增量，同时承认是first cut attempt，以保护贡献不过度承诺。",
+    "novelty_protection_cn": "通过三个手段防止贡献退化为一次性性能结果：一是用命题证明等量分配是最优的，二是把证明转化为可执行算法，三是用仿真展示价格/等待/队列行为并连接绿色IT；这样即使没有真实平台数据，也算机制层面的一般知识。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用统计数据和行业案例建立宏观环境问题（数据中心能耗、碳排、云增长）。",
+        "research_job_cn": "收集可靠公开数据，说明问题规模和企业采用云的现象。",
+        "required_evidence_cn": "至少一组有出处的规模数据和一个真实企业场景。",
+        "transition_to_next_cn": "从“能耗高”转向“资源分配效率是绿色云的关键”。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "把一般绿色云问题收缩到私有/混合云资源分配与定价问题，并明确研究对象边界。",
+        "research_job_cn": "界定公共云/私有云/混合云，选择建模一侧，给出企业案例。",
+        "required_evidence_cn": "清晰的对象定义和至少一个混合云案例。",
+        "transition_to_next_cn": "用“此类问题可通过动态定价机制解决”引入理论。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "引入经典动态网络定价模型，说明本文如何扩展。",
+        "research_job_cn": "找到可扩展的数学框架，写出目标函数和一阶条件。",
+        "required_evidence_cn": "核心最优价格公式和机制解释。",
+        "transition_to_next_cn": "从“最优价格”转到“跨服务器分配规则”。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "提出并证明一个规范性命题，把价格机制转成负载均衡规则。",
+        "research_job_cn": "构造代数证明，比较目标分配与备选分配。",
+        "required_evidence_cn": "数学不等式或等价证明。",
+        "transition_to_next_cn": "“命题已证，下一步把它实现为算法”。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "把命题转化为分步算法，并用仿真展示算法行为。",
+        "research_job_cn": "编写算法，选择仿真参数，生成价格/等待/负载输出。",
+        "required_evidence_cn": "可复现的参数表、结果图表和关键数值结论。",
+        "transition_to_next_cn": "从仿真数值上升到管理含义。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "在讨论中闭合引言缺口，声明绿色IT贡献并列出限制和未来方向。",
+        "research_job_cn": "把仿真/证明映射到组织决策和可持续性。",
+        "required_evidence_cn": "至少一个管理决策场景或政策含义。",
+        "transition_to_next_cn": "以未来研究收尾。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "把现实能源压力收缩为机制设计问题",
+      "用网络经济学模型推导可操作定价规则",
+      "用命题证明支撑算法设计",
+      "用仿真展示行为而不替代真实实证",
+      "结尾回到绿色IT宏观缺口以保护贡献"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要排队网络经济学和凸优化/拉格朗日方法的形式化建模能力",
+      "仿真代码和参数生成环境需要可复现性",
+      "行业能耗数据、云服务案例等外部材料需要系统收集"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只声称“负载均衡绿色”而没有数学证明或仿真支持",
+      "不能把仿真结果写成真实能耗/CO2证据",
+      "不能把等量分配最优推广到异构服务器、非全连接网络或战略用户场景",
+      "不能只引用Mendelson/Kumar而缺少自己的扩展点"
+    ],
+    "single_best_description_of_the_routine_cn": "先证明网络经济学中的价格规则，再把规则转化为负载均衡算法，最后用仿真展示价格与等待的拥塞信号以支撑绿色云管理决策。"
+  },
+  "confidence": 0.78,
+  "limitations_cn": "文章中的Figures 1-12以图片形式嵌入，无法从文本提取图内精确数值，只能依据正文和图题判断结果；参考文献编号和正文引用存在若干错位/笔误（如Table 2引注与正文模型来源不一致），影响个别证据的定点核对；论文没有提供仿真源代码和完整数据集，因此数值结果的可复现性只能依赖表3、表4和表格结果进行有限判断。",
+  "usage": {
+    "prompt_tokens": 29077,
+    "completion_tokens": 25210,
+    "total_tokens": 54287,
+    "prompt_cache_hit_tokens": 29056,
+    "prompt_cache_miss_tokens": 21
+  }
+}

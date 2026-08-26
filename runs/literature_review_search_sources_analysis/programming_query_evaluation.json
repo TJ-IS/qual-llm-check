@@ -1,0 +1,135 @@
+{
+  "query_version": "programming-metadata-v1",
+  "searched_fields": [
+    "Title",
+    "Abstract",
+    "Author Keywords",
+    "Index Keywords"
+  ],
+  "query_terms": [
+    "computer program*",
+    "source code",
+    "program comprehension",
+    "code comprehension",
+    "programmer*",
+    "software developer*",
+    "coding task*",
+    "programming task*",
+    "debugging",
+    "pair programming",
+    "test-driven development",
+    "end-user programming",
+    "spreadsheet programming/development/debugging/testing/error correction",
+    "query formulation",
+    "query development",
+    "SQL query",
+    "instantiation(s) of data model(s)",
+    "AI-assisted programming/coding",
+    "coding agent*",
+    "programming assistant*",
+    "code generation/review/inspection/modification",
+    "writing code"
+  ],
+  "basket_metadata_records": 17745,
+  "query_hits": 253,
+  "query_hits_with_local_fulltext": 230,
+  "query_hits_without_doi": 1,
+  "recent_hits": {
+    "2016+": 31,
+    "2021+": 17
+  },
+  "top_journals": [
+    [
+      "Decision Support Systems",
+      74
+    ],
+    [
+      "Information and Management",
+      61
+    ],
+    [
+      "MIS Quarterly: Management Information Systems",
+      26
+    ],
+    [
+      "Information Systems Research",
+      22
+    ],
+    [
+      "Journal of Management Information Systems",
+      21
+    ],
+    [
+      "European Journal of Information Systems",
+      13
+    ],
+    [
+      "Information Systems Journal",
+      10
+    ],
+    [
+      "Journal of the Association for Information Systems",
+      9
+    ],
+    [
+      "Journal of Information Technology",
+      8
+    ],
+    [
+      "Journal of Strategic Information Systems",
+      7
+    ],
+    [
+      "Information & management",
+      1
+    ],
+    [
+      "Information and Organization",
+      1
+    ]
+  ],
+  "benchmark_direct_programming_28": {
+    "benchmark_total": 28,
+    "covered": 23,
+    "recall": 0.8214285714285714,
+    "missed": [
+      {
+        "title": "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+        "year": "2010",
+        "direct_focus_type": "code_artifact_analysis"
+      },
+      {
+        "title": "A software complexity model of object-oriented systems",
+        "year": "1995",
+        "direct_focus_type": "code_artifact_analysis"
+      },
+      {
+        "title": "An exploratory study of object-oriented software component size determinants and the application of regression tree forecasting models",
+        "year": "2004",
+        "direct_focus_type": "code_artifact_analysis"
+      },
+      {
+        "title": "The Moderating Effects of Structure on Volatility and Complexity in Software Enhancement",
+        "year": "2000",
+        "direct_focus_type": "code_artifact_analysis"
+      },
+      {
+        "title": "Atrophy in Aging Systems: Evidence, Dynamics, and Antidote",
+        "year": "2024",
+        "direct_focus_type": "code_artifact_analysis"
+      }
+    ]
+  },
+  "benchmark_direct_human_programming_21": {
+    "benchmark_total": 21,
+    "covered": 20,
+    "recall": 0.9523809523809523,
+    "missed": [
+      {
+        "title": "Exploring the Impact of Soclo-Technlcal Core-Periphery Structures in Open Source Software Development",
+        "year": "2010",
+        "direct_focus_type": "code_artifact_analysis"
+      }
+    ]
+  }
+}

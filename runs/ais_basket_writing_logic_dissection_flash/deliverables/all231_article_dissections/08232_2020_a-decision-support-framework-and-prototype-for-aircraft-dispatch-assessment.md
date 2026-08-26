@@ -1,0 +1,1669 @@
+# A decision support framework and prototype for aircraft dispatch assessment
+
+- 作者：H. Koornneef; W.J.C. Verhagen; R. Curran
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2020.113338
+- 源文件：08232_2020_a-decision-support-framework-and-prototype-for-aircraft-dispatch-assessment.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.84
+
+## 文章级论证概况
+
+- 核心问题：如何在飞机过站派飞评估这一实时运维决策中，通过决策支持框架和原型工具减少技术员的文档检索与决策时间，同时保持安全并降低人为差错风险？
+
+- 制品与设计：两个设计科学制品：1）面向飞机派飞评估的决策支持框架，由准则层、数据库层、过程模型层和用户界面层组成，核心为6步派飞决策过程模型；2）基于Node.js和HTML/CSS封装为Android应用的web原型，能自动从TSM、MEL、AMM等手册中提取维修备选方案，按时间准则过滤、排序并显示预期派飞结果，同时保持技术员在回路中的最终决策权。
+
+- 客观结果：受控信息检索实验中，原型将平均检索时间从203秒降到55秒，减少73%，正确文档发现率从87.3%略升至89.2%；在TAP葡萄牙航空真实维修设施中的5次端到端演示中，观察和访谈显示派飞决策时间从平均15分钟降至约15秒，即最多减少98%，并产生更多备选方案比较、共享一致信息、提高文档可用性等定性收益。
+
+- 核心贡献：作者声称通过DSR方法提出了面向实时飞机派飞决策的框架和移动web原型，回应了运维维护决策支持缺乏、真实运营环境应用评价不足、复杂维护决策数字化不足三大挑战，并可推广到其他复杂维护环境。
+
+- 整篇论证链：文章先以欧洲航班技术原因延误和维修技术员花费大量时间查找资料的现象切入，指出派飞评估在过站时间窗内、停机坪条件下进行，存在信息获取困难和人为差错风险；随后把该现象上升到DSS研究中的三大缺口：缺乏面向运维维护的决策支持、缺乏真实运营环境中的应用评价、复杂维护决策数字化不足。为填补缺口，作者先形式化派飞决策过程并识别问题出在备选方案识别步骤，然后据此设计四层决策支持框架和6步过程模型，并开发可移动访问的原型工具；评价分两个阶段：先通过17名技术员学员的受控信息检索实验证明原型在检索时间上比PDF手册有73%的显著节省且质量不下降，再在真实维修环境中用A321防冰活门故障进行5次模拟演示，以质性观察和访谈支持端到端派飞决策时间最多减少98%；最后把贡献重新拉回三大缺口，并主张框架可迁移至离岸、核工业和医疗等类似领域。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学研究方法，以现实世界问题为出发点，先后构建决策支持框架和web原型两个制品，并通过受控实验和真实运营环境演示进行评价，最终将可复用框架和实现经验作为贡献，符合“构建—评价—设计知识”的DSR模式。
+
+- 主导写作弧线判定：论证主线是先刻画当前派飞评估中的性能缺口（检索耗时、决策时间长），再提出框架和原型作为制品，用PDF手册对比实验和运营环境演示形成benchmark证据，最后把结果一般化为面向复杂维护环境的设计知识，而不是从严格理论命题出发推导假说。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：研究按DSR逻辑展开：先进行问题形式化和框架设计，随后开发原型，再用受控实验检验关键信息检索能力，最后在真实运营环境中进行端到端演示评估；前两个阶段产出制品，后两个阶段分别提供定量局部证据和定性整体证据，后一阶段承接前一阶段留下的端到端不确定性。
+
+### studies_or_phases
+
+#### 1. 派飞评估问题形式化与决策支持框架设计
+
+- order：1
+
+- name_cn：派飞评估问题形式化与决策支持框架设计
+
+- question_cn：当前派飞评估决策过程的结构、利益相关者、要求和问题环节是什么？
+
+- inputs_and_setting_cn：航空维修领域知识、利益相关者角色描述、FAA延误定义、Baker等的8步决策方法、飞机维修文档和运行情境。
+
+- designed_or_compared_object_cn：一个四层决策支持框架，包括准则层、数据库层、过程模型层和用户界面层；过程模型有6个步骤。
+
+- baseline_control_or_counterfactual_cn：以形式化后的当前派飞评估流程为问题基线，指出问题源于第4步备选方案识别。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：定性形式化分析，基于Baker 8步决策方法逐步骤映射派飞评估问题，并给出框架分层设计。
+
+- main_result_cn：派飞评估形式化后，问题集中在识别维修备选方案耗时；框架以6步过程模型覆盖从缺陷报告到决策沟通的全流程。
+
+- argumentative_role_cn：建立研究问题与制品之间的直接联系，说明为什么需要框架和原型，并为后续设计提供需求基础。
+
+- remaining_uncertainty_cn：框架尚未在真实数据或用户环境中运行，无法判断其实现可行性和实际时间收益。
+
+- link_to_next_phase_cn：框架形式化确定了需要自动化的关键步骤，直接引出原型开发。
+
+##### evidence_pointers
+
+1. Section 3.1 Steps 1-8
+
+2. Figure 1 stakeholder diagram
+
+3. Figure 2 framework diagram
+
+#### 2. web移动原型开发与实现
+
+- order：2
+
+- name_cn：web移动原型开发与实现
+
+- question_cn：如何将框架转化为一个可用的实时派飞决策支持原型？
+
+- inputs_and_setting_cn：Node.js运行环境、HTML/CSS客户端、Android封装、TSM/AMM/SGML手册、MEL/XML手册、航空公司机队信息、飞行计划、METC维修时间数据。
+
+- designed_or_compared_object_cn：移动web原型工具，实现缺陷导入、飞机数据查询、自动备选方案识别、CSN过滤、时间准则排序和预期派飞结果展示。
+
+- baseline_control_or_counterfactual_cn：未进行对比；原型功能与框架要求逐项对照实现。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：系统实现与功能性描述；展示手册解析、替代方案生成、时间和排序算法。
+
+- main_result_cn：原型实现了6步过程模型中的前5步，能够自动生成并排序派飞备选方案；第6步决策沟通与存储尚未实现。
+
+- argumentative_role_cn：证明框架的可实施性，并为后续实验和现场演示提供被测对象。
+
+- remaining_uncertainty_cn：自动化生成和排序是否在真实使用中确实减少时间、是否会被技术员接受，尚不清楚。
+
+- link_to_next_phase_cn：原型成熟后，需要先对其核心信息检索能力做受控量化评价，再进入运营环境检验端到端效果。
+
+##### evidence_pointers
+
+1. Section 3.3 prototype description
+
+2. Table 1 MEL repair intervals
+
+3. Figure 3 dispatch overview UI
+
+#### 3. 信息检索受控实验
+
+- order：3
+
+- name_cn：信息检索受控实验
+
+- question_cn：与当前PDF手册检索相比，原型是否能在不降低检索质量的前提下减少检索时间？
+
+- inputs_and_setting_cn：17名飞机维修技术员学员，6个AMM问题案例，每人在两种模式下各检索一次，形成17×6×2共204个观测；教室环境，使用笔记本电脑或台式机。
+
+- designed_or_compared_object_cn：两种信息检索模式：PDF版AMM章节搜索 vs 简化版原型（使用BM25算法返回top-20结果）。
+
+- baseline_control_or_counterfactual_cn：PDF检索代表当前一线维修常见操作方式；简化版原型省略了真实派飞评估中的缺陷报告等上下文，因此作为保守估计。
+
+##### objective_metrics
+
+1. 找到正确文档的人数（满分102）
+
+2. 找到正确文档的平均时间（秒）
+
+3. 一次迭代即找到正确文档的比例
+
+- analysis_method_cn：被试内重复测量设计，随机化问题案例和检索模式顺序以减少学习效应；以描述性统计报告结果。
+
+- main_result_cn：原型的正确文档发现率89.2%略高于PDF的87.3%；平均检索时间从203秒降至55秒，减少约73%；67.6%的观测一次迭代即找到正确结果。
+
+- argumentative_role_cn：用受控量化证据证明原型的信息检索能力是显著的，为运营环境中更大时间节省提供局部机制解释。
+
+- remaining_uncertainty_cn：实验只覆盖检索环节，未包含备选方案生成、排序、决策和维修执行，也未纳入停机坪环境的人因压力。
+
+- link_to_next_phase_cn：检索时间的显著节省被界定为端到端决策时间减少的重要组成部分，因此需要进入真实运营环境检验整体流程。
+
+##### evidence_pointers
+
+1. Section 4.1 experimental setup
+
+2. Table 2 consolidated results
+
+#### 4. 真实运营环境端到端演示评估
+
+- order：4
+
+- name_cn：真实运营环境端到端演示评估
+
+- question_cn：在真实维修运营环境中，框架和原型能否支持完整的派飞评估并显著减少决策时间？
+
+- inputs_and_setting_cn：TAP葡萄牙航空里斯本维修设施；A321-211右翼防冰活门（WAIV）ECAM警告；电子日志创建缺陷后经地面服务器由原型读取；3名分别代表技术员、TS和MCC的技术人员参与；演示模拟重复5次。
+
+- designed_or_compared_object_cn：原型端到端派飞评估过程，包括自动手册查询、备选方案生成、时间准则排序和预期派飞结果展示。
+
+- baseline_control_or_counterfactual_cn：以观察和访谈中得到的当前人工派飞评估平均耗时约15分钟作为参照，但未系统采集准确的运行基线。
+
+##### objective_metrics
+
+1. 每次模拟生成的派飞备选方案数量（3到5个）
+
+2. 决策时间缩短程度（据观察和访谈，最多98%，平均15分钟到15秒）
+
+3. 定性收益：更多方案比较、一致信息共享、文档可用性提高
+
+- analysis_method_cn：在真实运营设施中进行模拟演示，通过系统观察和参与技术员访谈收集定性和定量指示性结果；因样本小和基线不足，未做统计检验。
+
+- main_result_cn：原型能自动生成3到5个可选派飞方案并按时间准则显示GO/GO-IF/NO GO结果；决策时间最多减少98%；定性访谈显示原型提高文档使用意愿并可能降低人为差错因子。
+
+- argumentative_role_cn：为端到端应用提供现场生态效度证据，把之前受控实验的局部时间节省扩展到完整派飞评估流程。
+
+- remaining_uncertainty_cn：样本量小、无准确基线、无统计检验；决策历史存储和机器学习排序未实现；成本准则未纳入；对人为差错和文档使用变化只有定性证据。
+
+- link_to_next_phase_cn：现场演示的正面结果为结论中的贡献声明提供支持，同时留下明确的未来研究方向。
+
+##### evidence_pointers
+
+1. Section 4.2 experimental setup
+
+2. Figure 3 expected dispatch outcome
+
+3. Section 4.2 evaluation results
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. PHENOMENON
+
+2. LIMITATION
+
+3. WHY_GAP_MATTERS
+
+4. RQ_OR_OBJECTIVE
+
+5. RESULT
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. LIMITATION
+
+5. GAP
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. GAP
+
+4. WHY_GAP_MATTERS
+
+5. THEORY_INTRO
+
+6. MECHANISM
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. LIMITATION
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW
+
+2. METHOD_JUSTIFICATION
+
+3. BENCHMARK_OR_CONTRAST
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+6. TRANSITION
+
+7. LIMITATION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Baker et al. 8-step decision process
+
+2. Sprague的DSS三层框架
+
+3. e-maintenance与数据集成文献
+
+4. FAA延误定义与行业派飞结果分类
+
+5. BM25信息检索算法
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：框架结构确实受到Baker决策过程和Sprague DSS分层思想的前瞻性影响，但关键技术选择（BM25、Node.js、SGML/XML解析、METC数据集成、红黄绿结果分类）主要来自工程维护需求和领域实践，而非源自可检验的行为或组织理论；评价也主要集中在性能差异和质性可用性，而非理论命题验证。
+
+- 理论到设计翻译链：Baker 8步决策方法帮助把模糊的派飞问题形式化为从定义问题到验证方案的流程，并揭示备选方案识别是瓶颈；Sprague的DSS三层框架为框架提供数据库、模型、用户界面分层；FAA延迟门槛和时间准则转化为可用时间与所需时间的计算公式；e-maintenance思想推动对TSM/MEL/AMM等异构手册进行自动解析和移动端整合；BM25作为检索引擎支撑原型高效返回相关文档。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：Baker等提出的8步决策过程可以形式化复杂决策并帮助识别薄弱环节。
+
+- mechanism_cn：把派飞评估拆解为问题定义、需求、目标、备选方案、准则、工具选择、方案选择、验证等逻辑步骤，从而暴露信息检索瓶颈。
+
+- design_requirement_cn：决策支持系统需要覆盖从缺陷报告到最终决策沟通的全过程。
+
+- artifact_choice_cn：框架中的6步过程模型和原型中的自动化备选方案生成模块。
+
+- evaluated_contrast_cn：原型生成端到端派飞备选方案 vs 当前人工查阅手册流程。
+
+- objective_result_cn：端到端演示中每次生成3-5个方案，决策时间最多减少98%。
+
+##### evidence_pointers
+
+1. Section 3.1 formalization
+
+2. Section 4.2 operational demonstration
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：Sprague指出DSS应具有数据库、模型和用户界面三层结构。
+
+- mechanism_cn：分层使数据、处理逻辑和用户交互解耦，便于支撑实时决策和人在回路控制。
+
+- design_requirement_cn：框架需要明确数据来源、决策模型和用户交互点。
+
+- artifact_choice_cn：四层框架：准则层、数据库层、过程模型层、用户界面层；原型中保留技术员对排序结果覆盖的权限。
+
+- evaluated_contrast_cn：未单独评价分层结构，只通过原型整体功能展示。
+
+- objective_result_cn：原型证明分层结构可实现自动化备选方案生成和人工确认。
+
+##### evidence_pointers
+
+1. Section 3.2 framework description
+
+2. Section 3.2.4 user interface layer
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：FAA定义的延误门槛和航空运营对时间的高度敏感要求派飞决策必须满足15分钟延误限制。
+
+- mechanism_cn：如果系统能实时计算可用时间与所需时间的差值，技术员就能快速判断某项维修或延期方案是否会导致延误。
+
+- design_requirement_cn：必须引入飞行计划、当前时间和维修任务时间来计算时间余量，并允许运营商自定义延误阈值。
+
+- artifact_choice_cn：可用时间公式T_a=(T_std-T_c)+T_ad、所需时间公式T_r=T_dt+T_mtt，以及按所需时间排序备选方案。
+
+- evaluated_contrast_cn：按时间排序的原型 vs 当前无实时时间评估的派飞流程。
+
+- objective_result_cn：现场演示中决策时间从15分钟降至15秒左右，并显示GO/GO-IF/NO GO交通灯结果。
+
+##### evidence_pointers
+
+1. Section 3.3 Step IV equations (1)(2)
+
+2. Section 4.2 evaluation results
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：信息检索领域BM25相关排序可有效从大型文档集中检索相关结果。
+
+- mechanism_cn：将TSM/AMM/MEL自动化处理和索引后，通过BM25查询可替代人工翻阅手册，缩短检索时间。
+
+- design_requirement_cn：需要对手册进行机器可读处理、索引和快速检索。
+
+- artifact_choice_cn：定制SGML/XML解析器、JSON元数据存储、BM25 top-20结果返回。
+
+- evaluated_contrast_cn：PDF手册人工检索 vs 简化原型检索。
+
+- objective_result_cn：平均检索时间从203秒降至55秒，减少73%；正确文档率87.3%升至89.2%。
+
+##### evidence_pointers
+
+1. Section 3.3 Step III automation
+
+2. Table 2 information retrieval results
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：e-maintenance文献强调通过信息处理、集成和分发支持分布式环境的维修决策。
+
+- mechanism_cn：整合飞机日志、机队信息、手册、飞行计划和维修时间数据，使技术员在停机坪现场即可获得一致的决策信息。
+
+- design_requirement_cn：原型需要支持移动设备访问，并集成多个动态数据源。
+
+- artifact_choice_cn：Node.js服务端、HTML/CSS客户端、Android应用、电子日志与地面服务器数据交换。
+
+- evaluated_contrast_cn：现场演示中的原型端到端流程 vs 当前手工检索和纸质文档流程。
+
+- objective_result_cn：技术员能在现场获得备选方案和预期派飞结果，并报告文档可用性和信息一致性明显改善。
+
+##### evidence_pointers
+
+1. Section 3.3 prototype technology
+
+2. Section 4.2 qualitative results
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控被试内重复测量信息检索实验
+
+2. 真实运营环境中的模拟演示与观察访谈
+
+3. PDF手册检索作为当前作业基准
+
+4. 当前人工派飞评估平均时间作为非严格基准
+
+- why_these_evaluations_cn：作者在文献综述中指出DSS研究普遍缺乏评估、理论系统与实际使用脱节，因此必须同时提供受控量化证据和真实环境案例证据；先测局部检索性能，再测端到端运营流程，才能在性能改进和实际可用性之间建立可信链条。
+
+- benchmark_and_contrast_chain_cn：受控实验以PDF版AMM章节为当前操作基准，用简化版原型形成对比，证明核心检索能力有73%时间节省且质量不下降；随后运营演示以“当前人工流程平均约15分钟”为非严格基线，展示端到端决策时间最多减少98%；受控实验被解释为端到端节省的一部分，因此两个benchmark共同构成从局部到整体的时间节省论证。
+
+### claim_evidence_ledger
+
+#### 1. 1
+
+- claim：原型显著降低文档检索时间。
+
+- evidence：Table 2：平均检索时间203秒 vs 55秒，约73%减少。
+
+- strength：较强：受控被试内设计，但只覆盖检索环节。
+
+#### 2. 2
+
+- claim：原型检索质量没有因新方式而下降。
+
+- evidence：正确文档发现率87.3% vs 89.2%；多数观测一次迭代找到。
+
+- strength：中等：差异小且未做统计检验，只能作为指向性证据。
+
+#### 3. 3
+
+- claim：原型使端到端派飞决策时间显著减少。
+
+- evidence：5次运营环境模拟，观察和访谈显示最多减少98%。
+
+- strength：弱到中等：样本小、无准确基线、无统计检验。
+
+#### 4. 4
+
+- claim：原型提高文档使用激励并可能降低人为差错风险。
+
+- evidence：对参与技术员的观察和访谈。
+
+- strength：探索性：质性证据，未直接测量差错率。
+
+#### 5. 5
+
+- claim：框架和原型能在真实维修环境中运行。
+
+- evidence：TAP葡萄牙航空设施中A321 WAIV故障演示成功生成备选方案。
+
+- strength：中等：演示在真实设施中，但仍是脚本化模拟而非长期实地使用。
+
+- internal_validity_strategy_cn：受控实验采用被试内重复测量、随机化问题案例和模式顺序、使用高级阶段学员保证与经验技术员表现可比、由系统自动记录原型检索时间；现场演示用固定案例、固定角色和多次重复模拟以增加一致性。
+
+- external_validity_strategy_cn：使用真实维修手册、真实机型A321-211和真实维修设施TAP，使评价材料具有运营代表性；论证框架可迁移到离岸、核工业、医疗等有类似复杂文档和运维决策压力的领域。
+
+- what_is_not_actually_tested_cn：决策历史存储（Step VI）和基于机器学习的排序未实现，因此未被测试；成本/位置等扩展准则没有在原型中实现；对人为差错和文档使用激励只有定性访谈证据；98%的端到端时间节省缺乏系统基线和统计推断；框架分层结构本身没有被分离检验。
+
+## 贡献闭环
+
+- technical_claim_cn：基于BM25的移动web原型能在不降低检索质量的前提下减少约73%的文档检索时间，并能自动生成和排序派飞备选方案。
+
+- artifact_claim_cn：四层决策支持框架和web原型是可运行、可评价的制品；原型可通过移动设备在停机坪现场使用，自动化流程同时保留技术员最终决策权。
+
+- mechanism_claim_cn：自动化信息检索和备选方案生成是时间节省的主要来源；即时可得的文档信息会提高技术员使用文档的激励，进而降低人为差错风险。
+
+- boundary_claim_cn：框架为飞机派飞评估定制，但可推广到离岸资产、核工业和医疗等具有类似记录缺陷、检索复杂文档、以安全/时间/成本/位置为决策准则的复杂维护环境。
+
+- reusable_design_knowledge_cn：可复用的设计知识包括：先形式化运营决策过程再识别瓶颈；以准则层引导DSS数据需求；用自动化备选方案识别结合人在回路最终确认；以可用时间和所需时间作为实时排序准则；用交通灯式预期派飞结果辅助快速决策。
+
+- theoretical_contribution_cn：文章不提出新理论，而是通过运营维护决策支持的应用案例，扩展DSS和e-maintenance研究到近实时派飞评估情境，并回应了文献中关于缺乏真实环境案例和评价的呼吁。
+
+- how_discussion_closes_intro_gap_cn：结论部分明确声称制品回应了引言提出的三大挑战：提供了运维维护过程的决策支持、在实验和真实运营环境两处进行了应用评价、实现了多源半结构化数据的web集成和自动化决策流程，并把定量和定性结果作为证据。
+
+- overclaim_or_unsupported_leaps_cn：“最多减少98%”基于5次模拟和无系统基线；“降低人为差错风险”和“更愿意使用文档”来自访谈推测而非直接测量；“框架可推广到其他领域”是类比外推；检索质量“未受影响”因样本较小且无显著性检验尚不宜作强结论。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：飞机运行中出现意外问题时，技术员需要判断飞机能否安全执行下一航班。
+
+- rhetorical_function_cn：以具体运维场景开场，让读者快速进入派飞评估问题。
+
+- depends_on_cn：无；文章起点。
+
+- sets_up_cn：为后续说明该决策的时间压力和问题做铺垫。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. P1 S2-S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：当前技术员面临缺少决策支持信息和在庞大手册中检索耗时两个问题，常导致延误和额外成本。
+
+- rhetorical_function_cn：建立现状限制，为研究动机提供直接原因。
+
+- depends_on_cn：依赖派飞评估场景的引入。
+
+- sets_up_cn：引出后面三大研究挑战。
+
+- evidence_pointer：Abstract P1 S2-S3
+
+### 3. P1 S4
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：这些问题反映了维护运维决策支持缺乏、真实环境评价不足和复杂决策过程数字化不足三大挑战。
+
+- rhetorical_function_cn：把局部管理问题提升为DSS研究议程中的缺口。
+
+- depends_on_cn：依赖前两句的问题描述。
+
+- sets_up_cn：为论文的贡献声明提供三大回应对应点。
+
+- evidence_pointer：Abstract P1 S4
+
+### 4. P2 S1
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文采用设计科学研究方法，提出决策支持框架和移动可访问的web原型两个新制品。
+
+- rhetorical_function_cn：明确研究方法和主要产出。
+
+- depends_on_cn：承接前面列出的三大挑战。
+
+- sets_up_cn：为后文的方法和评价部分做预告。
+
+- evidence_pointer：Abstract P2 S1
+
+### 5. P2 S2-S3
+
+- order：5
+
+- section：Abstract
+
+- locator：P2 S2-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：通过实验与运营环境两个代表性评价，结果显示显著时间节省，并定性表明更倾向使用文档和减少人为差错风险。
+
+- rhetorical_function_cn：在摘要中给出核心结果主张。
+
+- depends_on_cn：依赖制品和评价方式的描述。
+
+- sets_up_cn：让读者预期论文的价值主张。
+
+- evidence_pointer：Abstract P2 S2-S3
+
+### 6. P1 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：航空运输是最安全的长途方式，维护对适航至关重要，但技术原因仍导致欧洲5.8%的航班延误和约28亿欧元年成本。
+
+- rhetorical_function_cn：建立大背景并量化维护问题的现实成本。
+
+- depends_on_cn：无；引言起点。
+
+- sets_up_cn：为派飞评估重要性提供产业论据。
+
+- evidence_pointer：Introduction P1 S1-S3
+
+### 7. P2 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P2 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：派飞评估是航班到达和起飞之间在停机坪进行的意外维护问题处置过程，由航线维护技术员执行。
+
+- rhetorical_function_cn：定义核心研究现象和场景。
+
+- depends_on_cn：依赖航空运输维护背景。
+
+- sets_up_cn：为后续描述问题细节提供流程框架。
+
+- evidence_pointer：Introduction P2 S1-S2
+
+### 8. P2 S3-S5
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S3-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：技术员在停机坪缺少设备和资料，花约30%时间收集支持信息；在有限时间内必须在安全、后勤和效率间权衡，影响压力、自满等人为风险因素。
+
+- rhetorical_function_cn：说明问题的严重性和现实后果。
+
+- depends_on_cn：依赖派飞评估过程的定位。
+
+- sets_up_cn：为三大挑战的提出提供具体实例。
+
+- evidence_pointer：Introduction P2 S3-S5
+
+### 9. P3 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：这些派飞评估问题指向DSS研究中较少关注的三大挑战：运维维护决策支持、真实环境应用评价、复杂维护过程数字化自动化。
+
+- rhetorical_function_cn：从具体问题上升到领域研究缺口。
+
+- depends_on_cn：依赖前面问题描述与文献线索。
+
+- sets_up_cn：为全文贡献定位提供三大支柱。
+
+- evidence_pointer：Introduction P3 S1
+
+### 10. P4 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P4 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究的贡献是采用DSR生成框架和web原型两个制品，并在两个应用中评价；实际目标是让技术员更快访问信息、评估更多选项并作出更明智决策。
+
+- rhetorical_function_cn：说明研究目标、制品和评价范围。
+
+- depends_on_cn：依赖三大挑战的提出。
+
+- sets_up_cn：为后续章节的制品介绍和评价做预告。
+
+- evidence_pointer：Introduction P4 S1-S3
+
+### 11. P5 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文章其余部分先讨论相关工作，再介绍两个制品，随后展示评价，最后给出结论与未来研究。
+
+- rhetorical_function_cn：提供全文路线图，增强结构可预期性。
+
+- depends_on_cn：前面研究目标明确后。
+
+- sets_up_cn：组织后文阅读顺序。
+
+- evidence_pointer：Introduction P5 S1
+
+### 12. P1 S1-S2
+
+- order：12
+
+- section：Section 2.1
+
+- locator：P1 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：信息在种类、速度和体量上的增长为web DSS带来机会，但异构分布式数据源整合仍是利用这些信息的关键难题。
+
+- rhetorical_function_cn：总结DSS数据环境现状，点出技术挑战。
+
+- depends_on_cn：文献基础。
+
+- sets_up_cn：为框架中数据库层和数据集成需求提供背景。
+
+- evidence_pointer：Section 2.1 P1
+
+### 13. P2 S1-S3
+
+- order：13
+
+- section：Section 2.1
+
+- locator：P2 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：虽然DSS被认为能改善决策，但理论系统与实际使用间缺乏相关性，文献呼吁更多案例研究，且许多DSR出版物缺少评价。
+
+- rhetorical_function_cn：指出文献方法缺口并论证本研究的评价必要性。
+
+- depends_on_cn：依赖DSS领域总体认知。
+
+- sets_up_cn：为论文采用DSR和双案例评价做方法论铺垫。
+
+- evidence_pointer：Section 2.1 P2
+
+### 14. P1 S1-S2
+
+- order：14
+
+- section：Section 2.2
+
+- locator：P1 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：维护领域信息流增长、纸质文档和缓慢数字化导致系统可用性降低，e-maintenance虽有愿景但仍缺乏分布式决策模型、人机交互理解和评价指标。
+
+- rhetorical_function_cn：归纳维护领域DSS已知状况与不足。
+
+- depends_on_cn：依赖维护领域文献。
+
+- sets_up_cn：为“运维维护决策支持不足”挑战提供论据。
+
+- evidence_pointer：Section 2.2 P1
+
+### 15. P2 S1-S2
+
+- order：15
+
+- section：Section 2.2
+
+- locator：P2 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：维护DSS文献主要关注基于状态的预测维护和战略/战术维修调度，时间跨度为数天到数月，而不是运营级实时决策。
+
+- rhetorical_function_cn：说明现有维护DSS研究重planning轻operations的缺口。
+
+- depends_on_cn：依赖对维护DSS文献的梳理。
+
+- sets_up_cn：引出只有少数文献处理运营维护决策。
+
+- evidence_pointer：Section 2.2 P2
+
+### 16. P3 S1-S2
+
+- order：16
+
+- section：Section 2.2
+
+- locator：P3 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Papakostas和Dhanisetty等工作虽处理运营维护，但它们对任务类型、任务内容和时间窗做了较强假设，不完全反映一小时内甚至几乎瞬时决策的派飞场景。
+
+- rhetorical_function_cn：指出最接近的已有研究仍不满足实时派飞要求。
+
+- depends_on_cn：依赖对个别文献的准确概括。
+
+- sets_up_cn：为本文框架的实时性定位提供差异化空间。
+
+- evidence_pointer：Section 2.2 P3
+
+### 17. P4 S1
+
+- order：17
+
+- section：Section 2.2
+
+- locator：P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：综合前述讨论，确立了三大挑战：运维决策支持稀缺、真实运营环境评价不足、复杂维护决策数字化受模型和评价指标缺乏制约。
+
+- rhetorical_function_cn：把文献综述收束到可操作的研究缺口列表。
+
+- depends_on_cn：依赖Section 2.1和2.2全部论证。
+
+- sets_up_cn：直接支撑引言中的新颖性声明。
+
+- evidence_pointer：Section 2.2 P4
+
+### 18. P1 S1-S4
+
+- order：18
+
+- section：Section 3 intro
+
+- locator：P1 S1-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：要解决上述挑战，需先理解并形式化派飞评估问题，这是DSR第一步；随后提出框架和原型两个制品，二者迭代依赖，最后评价制品。
+
+- rhetorical_function_cn：交代方法与制品开发顺序。
+
+- depends_on_cn：依赖Section 2三大挑战。
+
+- sets_up_cn：为3.1形式化和3.2/3.3制品设计提供章节预告。
+
+- evidence_pointer：Section 3 P1
+
+### 19. P1 S1-S2
+
+- order：19
+
+- section：Section 3.1
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：技术员是派飞评估的核心决策者，TS、MCC、OCC和机长等角色分别在排故、计划、运行支持和安全否决方面参与。
+
+- rhetorical_function_cn：建立派飞评估的社会技术情境。
+
+- depends_on_cn：领域知识；图1利益相关者图。
+
+- sets_up_cn：为信息共享和系统协同设计需求提供依据。
+
+- evidence_pointer：Section 3.1 P1, Figure 1
+
+### 20. P2 S1
+
+- order：20
+
+- section：Section 3.1
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：在利益相关者之间共享相同信息的系统能改善协作并减少沟通错误，与组织结构无关。
+
+- rhetorical_function_cn：提出设计动机，说明为什么系统要统一信息源。
+
+- depends_on_cn：依赖利益相关者角色分析。
+
+- sets_up_cn：为数据库层和决策沟通功能做铺垫。
+
+- evidence_pointer：Section 3.1 P2
+
+### 21. P3 S1
+
+- order：21
+
+- section：Section 3.1
+
+- locator：P3 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：采用Baker等提出的8步决策方法作为形式化派飞决策过程的基础。
+
+- rhetorical_function_cn：引入知识基础，使形式化有方法论支撑。
+
+- depends_on_cn：前面已定义利益相关者。
+
+- sets_up_cn：为后续8个步骤逐一映射派飞问题提供框架。
+
+- evidence_pointer：Section 3.1 P3
+
+### 22. S1-S2
+
+- order：22
+
+- section：Section 3.1 Step 1
+
+- locator：S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：问题定义需说明初始条件和期望条件；派飞问题被定义为做出信息充分的决策目前太耗时，且需在航班过站时间的一小部分内完成而不牺牲安全。
+
+- rhetorical_function_cn：把抽象问题转化为可设计的形式化问题陈述。
+
+- depends_on_cn：依赖Baker第1步的定义。
+
+- sets_up_cn：为后续需求、目标和方案评估设定边界。
+
+- evidence_pointer：Section 3.1 Step 1
+
+### 23. S1-S2
+
+- order：23
+
+- section：Section 3.1 Step 2
+
+- locator：S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：借助FAA的15分钟延误标准，派飞解必须不损害适航、不晚于计划起飞15分钟、并评估所有可用备选方案。
+
+- rhetorical_function_cn：将现实监管标准转成系统功能需求。
+
+- depends_on_cn：依赖FAA延误定义。
+
+- sets_up_cn：为原型的延误阈值和时间公式提供需求来源。
+
+- evidence_pointer：Section 3.1 Step 2
+
+### 24. S1
+
+- order：24
+
+- section：Section 3.1 Step 3
+
+- locator：S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：根据Baker对目标的定义，派飞决策目标是确保安全并最小化决策时间。
+
+- rhetorical_function_cn：明确决策目标，作为后续评价和排序的导向。
+
+- depends_on_cn：依赖Baker目标定义。
+
+- sets_up_cn：为安全与时间两准则的权重提供依据。
+
+- evidence_pointer：Section 3.1 Step 3
+
+### 25. S1-S2
+
+- order：25
+
+- section：Section 3.1 Step 4
+
+- locator：S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：识别备选方案需要查阅MEL和TSM，由于每个文档含数千任务，当前过程非常耗时。
+
+- rhetorical_function_cn：在8步映射中定位瓶颈。
+
+- depends_on_cn：前面的备选方案定义。
+
+- sets_up_cn：为自动化备选方案识别模块提供明确改进点。
+
+- evidence_pointer：Section 3.1 Step 4
+
+### 26. S1
+
+- order：26
+
+- section：Section 3.1 Step 5
+
+- locator：S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：评价备选方案的主要标准是安全、时间和成本。
+
+- rhetorical_function_cn：确立系统的多准则评价维度。
+
+- depends_on_cn：依赖决策目标。
+
+- sets_up_cn：为框架中准则层和后续时间排序铺垫。
+
+- evidence_pointer：Section 3.1 Step 5
+
+### 27. S1-S2
+
+- order：27
+
+- section：Section 3.1 Step 6
+
+- locator：S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：运营决策工具尤其航空维修领域稀缺，据作者所知没有支持实时派飞决策的现成商业方案。
+
+- rhetorical_function_cn：证明制品具有工具空白，强化新颖性。
+
+- depends_on_cn：依赖市场与文献观察。
+
+- sets_up_cn：为自行开发框架和原型提供正当性。
+
+- evidence_pointer：Section 3.1 Step 6
+
+### 28. P1 S1
+
+- order：28
+
+- section：Section 3.1 closing
+
+- locator：P1 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：形式化揭示当前派飞问题主要源于第4步备选方案识别，因此开发两个制品来应对。
+
+- rhetorical_function_cn：收束形式化分析并为制品章节做过渡。
+
+- depends_on_cn：依赖前8步映射。
+
+- sets_up_cn：引出3.2框架和3.3原型。
+
+- evidence_pointer：Section 3.1 final paragraph
+
+### 29. P1 S1-S3
+
+- order：29
+
+- section：Section 3.2
+
+- locator：P1 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架由DSS基本三层（模型、数据库、用户界面）扩展出决策准则层，核心是6步过程模型，UI层标明用户交互点。
+
+- rhetorical_function_cn：总体介绍框架结构。
+
+- depends_on_cn：依赖Sprague DSS框架和形式化问题。
+
+- sets_up_cn：为后续每一层详细说明提供结构。
+
+- evidence_pointer：Section 3.2, Figure 2
+
+### 30. P1-P2
+
+- order：30
+
+- section：Section 3.2.1
+
+- locator：P1-P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：安全通过遵守文档程序保证，时间包括任务时间和可用的过站时间，历史成功率可用于改进，成本/位置等可作为扩展准则但当前未实现。
+
+- rhetorical_function_cn：细化准则层内容和边界。
+
+- depends_on_cn：依赖Step 5三大标准。
+
+- sets_up_cn：为数据库层需要哪些数据提供依据。
+
+- evidence_pointer：Section 3.2.1
+
+### 31. P1
+
+- order：31
+
+- section：Section 3.2.2
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：数据库层整合飞机技术日志、飞机详细信息、维修文档、准则评价数据和决策历史五类数据源。
+
+- rhetorical_function_cn：说明DSS所需的基础信息资产。
+
+- depends_on_cn：依赖框架分层和数据需求。
+
+- sets_up_cn：为原型中的JSON导入、手册解析和飞行计划集成提供蓝图。
+
+- evidence_pointer：Section 3.2.2
+
+### 32. P1-StV
+
+- order：32
+
+- section：Section 3.2.3
+
+- locator：P1-StV
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：过程模型6步覆盖缺陷报告收集、飞机数据获取、备选方案识别、过滤排序、结果概览和决策沟通，并定义GO、GO-IF(P/O/M)、NO GO等派飞结果。
+
+- rhetorical_function_cn：把框架落实为可操作的流程和输出类型。
+
+- depends_on_cn：依赖Baker 8步映射。
+
+- sets_up_cn：为原型各功能模块和结果评价提供流程对应。
+
+- evidence_pointer：Section 3.2.3 Step I-VI
+
+### 33. P2
+
+- order：33
+
+- section：Section 3.2.3 Step IV
+
+- locator：P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：当决策历史积累足够数据后，可用SVM或深度神经网络等机器学习改进备选方案排序，但本文两个应用的数据量尚不支持。
+
+- rhetorical_function_cn：展示框架扩展空间并管理预期。
+
+- depends_on_cn：依赖决策历史数据库设想。
+
+- sets_up_cn：为结论部分的未来工作做伏笔。
+
+- evidence_pointer：Section 3.2.3 Step IV
+
+### 34. P1-S3
+
+- order：34
+
+- section：Section 3.2.4
+
+- locator：P1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：UI层强调人在回路：技术员选择缺陷、从排序列表中选择备选方案、确认备选方案；技术员可覆盖排序，纳入隐性知识并保留最终权威。
+
+- rhetorical_function_cn：定义用户交互边界，说明自动化与人工权威的分工。
+
+- depends_on_cn：依赖框架整体DSS结构。
+
+- sets_up_cn：为原型的3步UI和技术员接受度提供设计基础。
+
+- evidence_pointer：Section 3.2.4
+
+### 35. P2-P3
+
+- order：35
+
+- section：Section 3.3
+
+- locator：P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：原型基于Node.js、HTML/CSS并封装为Android应用，支持桌面浏览器和平板访问，按缺陷选择、任务选择、任务确认的三步UI操作。
+
+- rhetorical_function_cn：介绍实现技术栈和用户交互入口。
+
+- depends_on_cn：依赖框架分层和UI层设计。
+
+- sets_up_cn：为后面具体步骤的自动化描述做技术铺垫。
+
+- evidence_pointer：Section 3.3 P2-P3
+
+### 36. P1-P4
+
+- order：36
+
+- section：Section 3.3 Step III
+
+- locator：P1-P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：原型通过定制解析器处理SGML/XML手册，自动从TSM、MEL和AMM中提取维修备选方案，并输出单一JSON文件。
+
+- rhetorical_function_cn：描述最关键的信息检索自动化实现。
+
+- depends_on_cn：依赖数据库层手册数据源和缺陷信息。
+
+- sets_up_cn：为受控信息检索实验和运营演示的时间节省提供机制。
+
+- evidence_pointer：Section 3.3 Step III
+
+### 37. P2-P4
+
+- order：37
+
+- section：Section 3.3 Step IV
+
+- locator：P2-P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：原型用公式T_a=(T_std-T_c)+T_ad计算可用时间，用T_r=T_dt+T_mtt计算所需时间，并导入METC实际维修时间以按所需时间排序备选方案。
+
+- rhetorical_function_cn：把时间准则转译成可计算的排序机制。
+
+- depends_on_cn：依赖飞行计划、当前时间和维修任务时间数据。
+
+- sets_up_cn：为预期派飞结果的颜色分类和现场演示提供算法基础。
+
+- evidence_pointer：Section 3.3 Step IV, Equations (1)(2)
+
+### 38. P1
+
+- order：38
+
+- section：Section 3.3 Step V
+
+- locator：P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：原型显示备选派飞动作清单，选择某方案后立即显示预期派飞结果，并支持浏览和检索手册。
+
+- rhetorical_function_cn：说明用户界面如何呈现决策所需信息。
+
+- depends_on_cn：依赖备选方案生成和排序。
+
+- sets_up_cn：为图3界面和现场演示的成功展示做铺垫。
+
+- evidence_pointer：Section 3.3 Step V, Figure 3
+
+### 39. P1
+
+- order：39
+
+- section：Section 3.3 Step VI
+
+- locator：P1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：决策向其他利益相关者的沟通以及决策变量存储目前未在原型中实现。
+
+- rhetorical_function_cn：明确制品边界，避免过度声称。
+
+- depends_on_cn：依赖框架Step VI设计。
+
+- sets_up_cn：为结论部分未来工作埋下伏笔。
+
+- evidence_pointer：Section 3.3 Step VI
+
+### 40. P1 S1
+
+- order：40
+
+- section：Section 4 intro
+
+- locator：P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为评价框架和原型，设置两个案例应用：一个关注信息检索能力，一个关注真实运营环境中的演示场景。
+
+- rhetorical_function_cn：预告评价结构。
+
+- depends_on_cn：依赖制品描述完成。
+
+- sets_up_cn：分别引出4.1和4.2两个评价小节。
+
+- evidence_pointer：Section 4 P1
+
+### 41. P1-P2
+
+- order：41
+
+- section：Section 4.1
+
+- locator：P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：第一个案例用17名AMT学员、6个AMM问题案例和两种检索模式，定量评估找到任务文档的时间和检索质量。
+
+- rhetorical_function_cn：说明受控实验的目的和设计。
+
+- depends_on_cn：依赖原型检索功能实现。
+
+- sets_up_cn：为随后报告Table 2结果做铺垫。
+
+- evidence_pointer：Section 4.1 experimental setup
+
+### 42. P2 S2-S5
+
+- order：42
+
+- section：Section 4.1
+
+- locator：P2 S2-S5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实验采用被试内重复测量，随机化问题案例和检索模式顺序，使用高级阶段学员以保证表现接近经验技术员。
+
+- rhetorical_function_cn：说明实验设计和内部有效性控制。
+
+- depends_on_cn：依赖实验组织可行性。
+
+- sets_up_cn：使后续时间节省结果更具可信度。
+
+- evidence_pointer：Section 4.1 experimental setup
+
+### 43. P2 S6-S7
+
+- order：43
+
+- section：Section 4.1
+
+- locator：P2 S6-S7
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：PDF搜索代表当前一线维护常见方式；简化版原型用BM25且省略了派飞上下文，因此对原型性能是保守估计。
+
+- rhetorical_function_cn：建立公平且保守的对照。
+
+- depends_on_cn：依赖实验模式和原型版本选择。
+
+- sets_up_cn：让73%的检索时间减少更可信。
+
+- evidence_pointer：Section 4.1 experimental setup
+
+### 44. Results paragraph
+
+- order：44
+
+- section：Section 4.1
+
+- locator：Results paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：原型正确文档率略高（89.2% vs 87.3%），多数参与者一次迭代找到结果，平均检索时间从203秒降至55秒，约减少73%。
+
+- rhetorical_function_cn：报告受控实验的核心量化结果。
+
+- depends_on_cn：依赖Table 2统计。
+
+- sets_up_cn：为端到端运营演示中的时间节省提供局部证据。
+
+- evidence_pointer：Table 2, Section 4.1 results
+
+### 45. Final sentence
+
+- order：45
+
+- section：Section 4.1
+
+- locator：Final sentence
+
+- move_code：TRANSITION
+
+- paraphrase_cn：上述时间节省尚未计入现场可访问文档所能消除的取用文档时间，因此在运营环境中整体节省可能更大。
+
+- rhetorical_function_cn：把受控实验结果向运营环境延伸。
+
+- depends_on_cn：依赖实验时间结果。
+
+- sets_up_cn：引出4.2的运营环境端到端评估。
+
+- evidence_pointer：Section 4.1 final sentence
+
+### 46. P1
+
+- order：46
+
+- section：Section 4.2
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：在TAP葡萄牙航空维修设施中，选择A321-211右翼防冰活门故障作为案例，难度适中且有MEL延期选项。
+
+- rhetorical_function_cn：说明现场案例选择标准和环境。
+
+- depends_on_cn：依赖先前的原型功能。
+
+- sets_up_cn：为运行演示结果提供场景背景。
+
+- evidence_pointer：Section 4.2 P1
+
+### 47. P2
+
+- order：47
+
+- section：Section 4.2
+
+- locator：P2
+
+- move_code：RESULT
+
+- paraphrase_cn：每次模拟自动生成3至5个派飞备选方案，并按时间准则排序；预期派飞结果分为绿、黄、红三类（GO/GO-IF/NO GO）。
+
+- rhetorical_function_cn：展示原型在真实设施中的功能和决策输出。
+
+- depends_on_cn：依赖自动备选方案识别与时间准则。
+
+- sets_up_cn：为决策时间减少的质性证据做铺垫。
+
+- evidence_pointer：Section 4.2 experimental setup, Figure 3
+
+### 48. P3
+
+- order：48
+
+- section：Section 4.2
+
+- locator：P3
+
+- move_code：RESULT
+
+- paraphrase_cn：观察和访谈显示，自动化和现场支持使派飞决策时间从平均15分钟降至约15秒，最多减少98%；同时带来更多方案比较、一致信息共享和文档可用性提升。
+
+- rhetorical_function_cn：报告现场演示的核心定性结果。
+
+- depends_on_cn：依赖5次模拟和访谈。
+
+- sets_up_cn：为结论中90%以上流程时间减少的主张提供依据。
+
+- evidence_pointer：Section 4.2 evaluation results
+
+### 49. P3 S4-S5
+
+- order：49
+
+- section：Section 4.2
+
+- locator：P3 S4-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：由于真实运营环境限制，无法采集准确基线和足够样本进行统计检验，时间节省的精确分布无法确定。
+
+- rhetorical_function_cn：主动限定证据强度，防止过度解读。
+
+- depends_on_cn：依赖现场样本和基线情况。
+
+- sets_up_cn：为结论中的“指示性”措辞做铺垫。
+
+- evidence_pointer：Section 4.2 evaluation results
+
+### 50. P1-P2
+
+- order：50
+
+- section：Section 5 Conclusions
+
+- locator：P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文提出框架和原型，通过DSR直接回应现实问题；制品回应了文献中的三大挑战，定量显示检索时间减少70%以上，端到端派飞过程时间最多可减少90%以上。
+
+- rhetorical_function_cn：把结果重新连接到引言中的研究缺口并声明贡献。
+
+- depends_on_cn：依赖前面两个评价阶段结果。
+
+- sets_up_cn：为下述边界条件和未来工作做收尾。
+
+- evidence_pointer：Section 5 P1-P2
+
+### 51. P2 S4-S6
+
+- order：51
+
+- section：Section 5 Conclusions
+
+- locator：P2 S4-S6
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：框架虽针对飞机派飞开发，但可推广到离岸、核工业和医疗等具有类似缺陷记录、复杂文档和实时决策压力的领域。
+
+- rhetorical_function_cn：把贡献从一次性案例提升为较一般的设计知识。
+
+- depends_on_cn：依赖框架的可替换性论证。
+
+- sets_up_cn：为后续跨行业应用留下研究空间。
+
+- evidence_pointer：Section 5 P2
+
+### 52. P3
+
+- order：52
+
+- section：Section 5 Conclusions
+
+- locator：P3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来工作包括实现决策历史存储、在累积足够数据后引入机器学习改进排序，以及扩展成本和多准则决策数据。
+
+- rhetorical_function_cn：明确未实现项，保护贡献边界的诚实性。
+
+- depends_on_cn：依赖原型Step VI未实现和ML未应用。
+
+- sets_up_cn：为后续研究提供具体方向。
+
+- evidence_pointer：Section 5 P3
+
+## 写作技术
+
+- gap_construction_cn：先用欧洲航班延误统计和技术员30%时间用于找资料等具体现象制造实践缺口，再在文献综述中通过DSS案例研究缺乏、维护DSS偏重战略/战术计划、e-maintenance缺少模型与评价指标三线并进，最终收敛为三大研究挑战，使制品的出现像是对准缺口的直接回答。
+
+- signposting_cn：在引言末尾给出全文路线图，在方法部分明确说明“先形式化再设计制品再评价”，在Section 4开头预告两个评价案例，在每一步过程模型中都使用Step I-VI的编号与小标题，使读者始终知道当前处于哪一论证环节。
+
+- transition_logic_cn：从实际问题过渡到文献挑战，从文献挑战过渡到形式化，再从形式化瓶颈自然引出制品；评价部分用“检索时间节省是端到端节省的一部分”把受控实验和现场演示串起来；结论部分又回到开头的三大挑战。
+
+- claim_evidence_rhythm_cn：每个关键主张后紧跟证据来源：检索时间减少给出Table 2；端到端决策时间减少给出TAP演示和访谈；对无法统计检验的地方明确标注“小样本”“无准确基线”，以“最多”“指示性”“定性”等词控制证据强度。
+
+- benchmark_narrative_cn：把PDF手册检索定义为“当前一线运营代表性方式”，把简化版原型描述为“省略派飞上下文的保守估计”，因此73%的检索时间节省很难被攻击为不公平对比；现场演示虽无系统基线，但用“当前流程平均约15分钟”作为常识性参照，并用多次模拟增强稳健性。
+
+- theory_return_cn：文章没有创建新的行为理论，而是在结论中把结果重新映射回DSS/e-maintenance文献：说明制品“填补了运营维护决策支持”“提供了真实环境案例”“实现了复杂决策数字化”，使贡献落在领域缺口上而不是一次性性能数字。
+
+- contribution_positioning_cn：贡献被表述为同时面向研究和工业：研究层面是框架和真实环境评价，工业层面是可用的移动工具；通过强调DSR的relevance和案例研究呼吁，使论文方法论立场也构成贡献的一部分。
+
+- novelty_protection_cn：作者通过三种方式防止贡献退化为一次性性能结果：把时间节省归因到可复制的机制（自动化信息检索与备选方案生成）；指出框架可由其他复杂资产替换并迁移到不同行业；明确未实现的机器学习与成本准则作为未来扩展，说明现有结果只是更大设计空间中的一部分。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用具体运维现象和量化后果建立实践背景，说明为什么该决策过程重要。
+
+- research_job_cn：识别一个受时间窗限制、信息分散、后果昂贵的运营决策场景，收集延误率、成本或时间占比等数据。
+
+- required_evidence_cn：有可引用的产业统计或权威数据支持问题的严重性。
+
+- transition_to_next_cn：指出该现象并非孤立，而是代表一类研究缺口。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述DSS和维护领域文献，构造三到四个与核心问题直接相关的缺口。
+
+- research_job_cn：检索DSS评价不足、维护决策支持时间尺度错位、数字化复杂决策过程缺乏模型等文献。
+
+- required_evidence_cn：能找到明确呼吁案例研究或指出缺乏真实环境评价的文献。
+
+- transition_to_next_cn：以“综合上述讨论得到三大挑战”收束文献综述，并预告本研究回应这些挑战。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：对目标决策过程进行正式或半正式的形式化，列出步骤、角色和要求。
+
+- research_job_cn：分析利益相关者、决策步骤、约束条件和当前瓶颈。
+
+- required_evidence_cn：能由图或步骤表展示完整决策链，并指出瓶颈步骤。
+
+- transition_to_next_cn：以“问题源于第X步”自然引出制品设计。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：设计一个与形式化过程对应的框架，并解释每层/每模块对解决瓶颈的作用。
+
+- research_job_cn：把决策准则、数据源、处理流程和用户交互组织成分层框架。
+
+- required_evidence_cn：有框架图和对各层选择的理由。
+
+- transition_to_next_cn：说明框架需要一个可实现的原型来验证。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：描述原型的技术选择、数据集成方式和用户界面，使用户能理解自动化边界。
+
+- research_job_cn：实现框架中的关键自动化模块，尽量使用真实数据源和真实文档。
+
+- required_evidence_cn：原型可运行，并能用截图或流程说明展示输入输出。
+
+- transition_to_next_cn：指出当前原型覆盖了哪些步骤、尚未覆盖哪些步骤，随后进入评价。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：先对最可量化的核心能力设计受控实验，明确baseline和指标。
+
+- research_job_cn：设计被试内或随机对照实验，测量时间、质量等客观指标。
+
+- required_evidence_cn：有足够的观测数、随机化或重复测量设计，并给出汇总表。
+
+- transition_to_next_cn：说明该实验测的是局部组件，端到端效果需要现场研究。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在真实或接近真实的环境中演示端到端流程，并报告定性观察和访谈。
+
+- research_job_cn：与企业合作选择合适案例，在真实设施中模拟完整流程并收集用户反馈。
+
+- required_evidence_cn：有真实设施、真实设备/故障或真实文档，并明确样本量和基线限制。
+
+- transition_to_next_cn：用现场结果支撑贡献声明，同时坦诚统计限制。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：结论中把结果重新接入引言缺口，声明贡献并界定边界和未来工作。
+
+- research_job_cn：梳理哪些缺口被回应、哪些未实现、哪些可以迁移到其他领域。
+
+- required_evidence_cn：每个贡献声明都能指向前面某一阶段的证据。
+
+- transition_to_next_cn：以未来扩展方向结束，保持设计空间开放。
+
+### most_transferable_moves_cn
+
+1. 用“实际成本+具体流程现象”打开文章，使技术问题有明确商业后果
+
+2. 把实践问题收束为三条文献挑战，再用同一组挑战作为贡献落点
+
+3. 用8步/6步等显式过程模型把模糊域知识变成可设计、可评价的流程
+
+4. 用“当前方式 vs 原型方式”建立公平且保守的benchmark叙事
+
+5. 先受控实验证明局部性能，再现场演示证明端到端可行性
+
+6. 主动声明样本小、基线缺失和未实现功能，把限制转化为未来研究
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实维修设施和TAP航空合作是典型的资源密集型条件，普通研究难以复制
+
+2. SGML/XML手册解析需要工业文件格式和定制parser，技术成本高
+
+3. 7名学员和多次现场演示来自项目资源，非标准样本规模
+
+4. 与Clean Sky 2项目相关的产业数据集和终端用户接入具有特殊性
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只在结论宣称“显著减少98%”却没有统计基线和样本控制
+
+2. 不能照搬“三大挑战”而不重新梳理相关文献
+
+3. 不能把框架图当作设计贡献；必须有对应实现和评价
+
+4. 不能把访谈中的“可能降低人为差错”表述为经过检验的因果结论
+
+- single_best_description_of_the_routine_cn：把高成本产业问题形式化为决策步骤缺口，设计框架并构建原型，先用量化benchmark证明关键组件提升，再用真实环境演示证明端到端可行性，最后以领域可迁移性保护贡献不落入一次性性能结果。
+
+## 分析边界
+
+输入为期刊预校样PDF文本，部分句子和参考文献因排版识别存在乱码或截断；图1、图2和图3只有占位图，无法直接核对图表内容；文中未提供真实页码，故位置标识使用章节和段落；没有附录或补充材料。

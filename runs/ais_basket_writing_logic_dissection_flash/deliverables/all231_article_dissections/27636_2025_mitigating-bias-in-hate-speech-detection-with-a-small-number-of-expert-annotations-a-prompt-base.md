@@ -1,0 +1,2449 @@
+# Mitigating Bias in Hate Speech Detection With a Small Number of Expert Annotations: A Prompt-Based Learning Approach
+
+- 作者：Dongjun Wei; Michael Chau; Zhepeng (Lionel) Li
+- 年份 / 期刊：2025 / MIS Quarterly
+- DOI：10.25300/misq/2025/18416
+- 源文件：27636_2025_mitigating-bias-in-hate-speech-detection-with-a-small-number-of-expert-annotations-a-prompt-base.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：能否仅用少量专家标注（例如256条）训练仇恨言论检测模型，同时缓解因语言使用差异（如AAE方言与标准英语）造成的系统性标注偏差？
+
+- 制品与设计：一个两阶段端到端检测框架：阶段一使用由仇恨目标检测器、候选构造器、候选排序器组成的pair generator，结合SimCSE对比学习将亚群体文本与语义相近的标准英语配对并对齐嵌入；阶段二使用加入仇恨目标信息的增强连续prompt与soft verbalizer，基于少量专家标注进行提示学习分类。
+
+- 客观结果：在WH16和VTWK21两个数据集上，F1分别达到93.0和93.9，ACC达到96.2和94.5，FPR大幅低于一般标注者和现有baseline；公平性Avg SP显著低于WARP；在LGBTQ+新数据集上取得一致优势；在HateCheck案例上ACC 93.8%。
+
+- 核心贡献：作者声称首次在仇恨言论检测中把对比学习与提示学习结合，用少量专家标注同时处理语言使用差异和小样本学习；原创贡献包括用于对比学习的pair generator，以及注入外部仇恨目标信息的增强连续prompt。
+
+- 整篇论证链：文章从社交媒体仇恨言论治理的现实问题出发，指出一般标注者因无法识别说话者群体身份和语言使用差异而给训练数据引入系统性偏差，而专家标注虽质量高却难以大量获取；因此核心问题转化为能否用256条左右专家标注训练低偏差检测模型。作者提出两阶段框架：先通过pair generator和SimCSE将AAE等语言变体语义与标准英语对齐，缓解句子级语言使用差异；再用注入仇恨目标信息的连续prompt和soft verbalizer做小样本提示学习。随后在两个公开数据集上设置六类基准，证明总体性能最优；通过分组公平性指标证明跨种族公平；通过组件消融证明每个设计部件都有可归因贡献；通过PCA可视化展示对比学习的去偏机制；通过训练规模、蒸馏模型、HateCheck案例和LGBTQ+扩展实验证明鲁棒性和可推广性。讨论部分将结果重新连接到AI公平、对比学习、提示学习与数字技术塑造仇恨犯罪等文献，并给出设计、政策与标注平台建议。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学方法（引用Hevner et al., 2004），围绕少量专家标注下的去偏检测目标构建了一个新的两阶段方法，并以大量实验对该制品进行评价、消融和推广，而非提出理论假说并做行为实验。
+
+- 主导写作弧线判定：论证主线是：一般标注导致性能与公平性缺口→现有debiasing/弱监督方法不能同时应对语言差异和小样本→提出两阶段制品→通过benchmark证明性能优势→通过消融和推广提炼设计知识。
+
+## 研究开展程序
+
+- study_or_phase_count：9
+
+- 研究阶段总序列：先用量化偏差建立问题严重性；再提出组别比例抽样获得少量专家标注；随后两个技术阶段分别完成嵌入去偏和分类器训练；接着用主基准、公平性、组件消融、可视化和稳健性实验逐层验证；最后用另一个亚群体数据集检验可推广性。
+
+### studies_or_phases
+
+#### 1. 数据集偏差量化与问题确立
+
+- order：1
+
+- name_cn：数据集偏差量化与问题确立
+
+- question_cn：在真实仇恨言论数据中，一般标注者对AAE等群体的误判是否显著更高？
+
+- inputs_and_setting_cn：WH16和VTWK21两个带专家与一般标注的公开数据集；Blodgett等训练的group estimator用于分组。
+
+- designed_or_compared_object_cn：比较一般标注与专家标注在各族群上的FPR/FNR。
+
+- baseline_control_or_counterfactual_cn：以专家标注为金标准，一般标注为偏差来源；White和Others组作为AAE组的对照。
+
+##### objective_metrics
+
+1. FPR
+
+2. FNR
+
+3. 各组占比
+
+- analysis_method_cn：描述性统计与分组比较。
+
+- main_result_cn：AAE组FPR高达22.5%（WH16）和21.3%（VTWK21），远高于White组；FNR无显著差异，说明存在系统性种族偏差。
+
+- argumentative_role_cn：确认研究问题真实存在，为后面需要专家标注和语言使用差异处理提供经验依据。
+
+- remaining_uncertainty_cn：尚不确定任何现有方法能否在少量专家标注下解决该偏差。
+
+- link_to_next_phase_cn：引出“如何用少量专家标注”的方法设计。
+
+##### evidence_pointers
+
+1. Datasets paragraph after Table 3
+
+2. Table 3
+
+#### 2. 基于组别估计器的数据抽样与专家标注
+
+- order：2
+
+- name_cn：基于组别估计器的数据抽样与专家标注
+
+- question_cn：如何从大规模无标注/弱标注数据中选出最能代表各亚群体语言使用差异的小样本？
+
+- inputs_and_setting_cn：WH16和VTWK21数据集；Blodgett等训练的主题模型作为group estimator；专家标注。
+
+- designed_or_compared_object_cn：按group score从高到低、按群体比例抽取256条（LGBTQ实验中128条）样本。
+
+- baseline_control_or_counterfactual_cn：随机抽样和基于嵌入的抽样（后者在组件消融中作为对照）。
+
+##### objective_metrics
+
+1. 下游FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+- analysis_method_cn：抽样策略比较；后续通过消融评估。
+
+- main_result_cn：组件消融显示，组别比例抽样显著优于随机抽样和嵌入抽样。
+
+- argumentative_role_cn：说明少量专家标注不是随便选取，而是需要组别敏感的代表性采样。
+
+- remaining_uncertainty_cn：没有测试更高级的不确定性优先抽样。
+
+- link_to_next_phase_cn：采样后的专家标注进入两阶段训练框架。
+
+##### evidence_pointers
+
+1. Methodology Data Sampling section
+
+2. Table 7 Data sampling rows
+
+#### 3. 阶段一：对比学习与pair generator
+
+- order：3
+
+- name_cn：阶段一：对比学习与pair generator
+
+- question_cn：如何生成改变语言使用但保留语义的句子对，并利用对比学习去除嵌入中的语言使用差异？
+
+- inputs_and_setting_cn：256条专家标注；来自Wikipedia、Hatebase、Urban Dictionary的仇恨目标词表；Stanford CoreNLP；MINE模板；SimCSE；RoBERTa-base。
+
+- designed_or_compared_object_cn：提出的pair generator（仇恨目标检测器+候选构造器+候选排序器）和SimCSE对比损失。
+
+- baseline_control_or_counterfactual_cn：无SimCSE、SupCon、无监督对比学习；去掉pair generator的任一组件。
+
+##### objective_metrics
+
+1. 下游FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+5. PCA嵌入分布
+
+- analysis_method_cn：组件替换/删除消融；PCA可视化。
+
+- main_result_cn：完整pair generator+SimCSE显著优于对照；PCA显示对比学习后AAE、Others与标准英语聚类重叠。
+
+- argumentative_role_cn：证明句子级语言使用差异可以通过生成的语义等价对在嵌入空间中被移除。
+
+- remaining_uncertainty_cn：嵌入去偏后尚需分类器，所以还需要第二阶段。
+
+- link_to_next_phase_cn：将去偏后的RoBERTa作为第二阶段提示学习的骨干。
+
+##### evidence_pointers
+
+1. Methodology Stage 1
+
+2. Figure 4
+
+3. Figure 6
+
+4. Table 7 Contrastive learning rows
+
+#### 4. 阶段二：基于增强连续prompt的提示学习
+
+- order：4
+
+- name_cn：阶段二：基于增强连续prompt的提示学习
+
+- question_cn：如何用少量专家标注训练分类器，同时把非标准、演化的仇恨目标信息注入prompt？
+
+- inputs_and_setting_cn：256条专家标注；去偏后的RoBERTa；仇恨目标检测器；连续prompt；soft verbalizer；OpenPrompt/PyTorch。
+
+- designed_or_compared_object_cn：增强连续prompt（文本槽+仇恨目标槽+可学习模板嵌入）和soft verbalizer。
+
+- baseline_control_or_counterfactual_cn：去掉目标信息的连续prompt；手动、混合、梯度、改写、生成等prompt方法；手动、知识、原型verbalizer。
+
+##### objective_metrics
+
+1. FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+- analysis_method_cn：组件替换/删除消融。
+
+- main_result_cn：增强连续prompt与soft verbalizer均带来显著提升，完整版本超过所有提示学习baseline。
+
+- argumentative_role_cn：解决小样本学习和对非标准仇恨词的识别问题。
+
+- remaining_uncertainty_cn：尚未与大规模benchmark比较，也未验证公平性。
+
+- link_to_next_phase_cn：进入整体性能的benchmark评价。
+
+##### evidence_pointers
+
+1. Methodology Stage 2
+
+2. Figure 5
+
+3. Table 7 Prompt-based learning rows
+
+#### 5. 主基准实验：总体性能比较
+
+- order：5
+
+- name_cn：主基准实验：总体性能比较
+
+- question_cn：在两数据集上，提出方法是否优于常见ML、去偏方法、微调LLM、仇恨专用LLM、提示学习、数据扩展等六类方法？
+
+- inputs_and_setting_cn：WH16和VTWK21；所有方法均使用同一批256条专家标注；20次随机划分。
+
+- designed_or_compared_object_cn：提出的两阶段框架 vs 六类基准。
+
+- baseline_control_or_counterfactual_cn：TextCNN/TextRCNN/TextRNN-Attn；Text Matching、Bias-Sensitive、Bias-Mitigated、Adversarial、Con、FairFil；RoBERTa/GPT/LLaMA；HateXPlain/HateBERT/BERTweet/Twitter-RoBERTa/HaT5-Aug；PTR/LMBFF/SupCon/WARP；ToxiGen/GPT/HuggingChat数据增强和Confident learning/Spectral clustering/Noise modeling去噪。
+
+##### objective_metrics
+
+1. FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+5. 标准差
+
+6. t检验p值
+
+- analysis_method_cn：20次随机种子重复实验、均值与标准差、t检验。
+
+- main_result_cn：提出方法在所有指标上显著优于所有基准（p<0.05）；数据扩展和去噪方法不如直接用少量专家标注。
+
+- argumentative_role_cn：证明制品的总体技术性能达到state-of-the-art。
+
+- remaining_uncertainty_cn：总体指标好不等于对AAE等群体公平，也不等于每个组件都有贡献。
+
+- link_to_next_phase_cn：进入分组公平性和组件消融。
+
+##### evidence_pointers
+
+1. Experiment Results Main Results
+
+2. Table 4
+
+3. Table 5
+
+#### 6. 公平性评价（跨种族分组）
+
+- order：6
+
+- name_cn：公平性评价（跨种族分组）
+
+- question_cn：提出方法在各族群上的性能差异是否显著低于基准？
+
+- inputs_and_setting_cn：测试集预测结果按AAE/White/Others分组；采用group estimator。
+
+- designed_or_compared_object_cn：计算各组FPR/FNR/F1/ACC和平均统计奇偶（Avg SP）。
+
+- baseline_control_or_counterfactual_cn：一般标注、Adversarial debiasing、WARP。
+
+##### objective_metrics
+
+1. 各组FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+5. Avg SP
+
+- analysis_method_cn：分组绩效与统计奇偶比较。
+
+- main_result_cn：提出方法Avg SP约为WARP的一半或更低，在WH16上ACC的Avg SP为0.35，VTWK21上为0.19；Adversarial debiasing公平性最差。
+
+- argumentative_role_cn：证明方法不仅平均性能好，而且确实是公平的去偏分类器。
+
+- remaining_uncertainty_cn：只覆盖种族群体，未涉及其他社会身份。
+
+- link_to_next_phase_cn：通过组件消融检验哪些设计造成了这种公平性。
+
+##### evidence_pointers
+
+1. Fairness Results
+
+2. Table 6
+
+#### 7. 组件消融与贡献归因
+
+- order：7
+
+- name_cn：组件消融与贡献归因
+
+- question_cn：数据抽样、对比学习、pair generator、prompt和verbalizer各自对最终性能有何贡献？
+
+- inputs_and_setting_cn：WH16和VTWK21；在完整框架上逐一移除或替换组件。
+
+- designed_or_compared_object_cn：数据抽样（随机/嵌入）、对比学习框架（无SimCSE/SupCon/无监督）、pair generator组件（无构造器/无排序器/无检测器）、prompt（无目标信息/手动/混合/梯度/改写/生成）、verbalizer（手动/知识/原型）。
+
+- baseline_control_or_counterfactual_cn：完整方法为参照，替换方法为处理。
+
+##### objective_metrics
+
+1. FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+- analysis_method_cn：消融实验。
+
+- main_result_cn：每个组件的移除或替换都导致显著性能下降，完整框架最佳且标准差最小。
+
+- argumentative_role_cn：把整体性能优势归因于具体设计组件，支撑制品主张。
+
+- remaining_uncertainty_cn：消融只说明组件必要，未直接解释为什么机制有效。
+
+- link_to_next_phase_cn：用可视化展示对比学习的机制，并补充训练规模与计算成本。
+
+##### evidence_pointers
+
+1. Evaluation of Framework Components
+
+2. Table 7
+
+#### 8. 机制可视化、训练规模与计算效率、外部案例
+
+- order：8
+
+- name_cn：机制可视化、训练规模与计算效率、外部案例
+
+- question_cn：对比学习去偏的机制是什么？方法对训练数据规模是否敏感？计算成本是否可行？在不训练的外部案例上是否优于行业工具？
+
+- inputs_and_setting_cn：VTWK21嵌入PCA；训练数据比例10%-80%；蒸馏模型；HateCheck的81条AAE非仇恨推文。
+
+- designed_or_compared_object_cn：对比学习前后嵌入分布；不同专家标注量；RoBERTa/蒸馏模型；HateCheck零训练测试。
+
+- baseline_control_or_counterfactual_cn：Adversarial debiasing和WARP用于学习曲线；Perspective API、HateXPlain、BLOOM、HuggingChat、GPT-3.5-turbo、GPT-4o用于案例比较。
+
+##### objective_metrics
+
+1. FPR
+
+2. F1
+
+3. ACC
+
+4. 训练时间
+
+5. 推理时间
+
+- analysis_method_cn：PCA可视化、学习曲线、时间测量、零样本案例比较。
+
+- main_result_cn：对比学习后族群聚类与标准英语聚类重叠；方法在不同训练规模下一致优于baseline；训练仅30分钟，蒸馏模型性能仍高于多数基准；HateCheck上ACC 93.8，远高于聊天机器人。
+
+- argumentative_role_cn：说明机制、稳健性、可负担性和实际部署价值。
+
+- remaining_uncertainty_cn：HateCheck只是小规模案例，不是完整部署测试。
+
+- link_to_next_phase_cn：还需检验能否推广到另一亚群体。
+
+##### evidence_pointers
+
+1. Visualization of Debiasing Effectiveness
+
+2. Training Sample Sizes and Computational Costs
+
+3. Evaluation of Specific Cases
+
+4. Figure 6
+
+5. Figure 7
+
+6. Table 8
+
+7. Table 9
+
+#### 9. 可推广性：LGBTQ+社区数据集
+
+- order：9
+
+- name_cn：可推广性：LGBTQ+社区数据集
+
+- question_cn：框架能否迁移到另一个存在语言使用差异的亚群体（LGBTQ+社区）？
+
+- inputs_and_setting_cn：自建的3,600条推文数据集，含124个LGBTQ+账号与187个非LGBTQ+账号；MTurk一般标注和专家标注；128条专家标注训练。
+
+- designed_or_compared_object_cn：完整两阶段框架在LGBTQ+分组上的表现。
+
+- baseline_control_or_counterfactual_cn：一般标注、Adversarial debiasing、WARP。
+
+##### objective_metrics
+
+1. FPR
+
+2. FNR
+
+3. F1
+
+4. ACC
+
+5. Avg SP
+
+- analysis_method_cn：与新数据集上的基准比较及分组公平性。
+
+- main_result_cn：提出方法在LGBTQ+和非LGBTQ+两组上均优于所有基准，Avg SP显著最低，结果与种族数据集一致。
+
+- argumentative_role_cn：支撑边界主张：方法不仅适用于AAE，也适用于其他语言使用差异群体。
+
+- remaining_uncertainty_cn：尚未覆盖其他边缘群体、其他语言、多媒体内容或跨时间演化。
+
+- link_to_next_phase_cn：这些限制转化为未来研究方向。
+
+##### evidence_pointers
+
+1. Generalizability of the Proposed Method
+
+2. Table 10
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. LIMITATION
+
+4. GAP
+
+5. DESIGN_FEATURE
+
+6. RESULT
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. PHENOMENON
+
+4. LIMITATION
+
+5. WHY_GAP_MATTERS
+
+6. RQ_OR_OBJECTIVE
+
+7. METHOD_JUSTIFICATION
+
+8. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. THEORY_PROPOSITION
+
+3. PRIOR_KNOWLEDGE
+
+4. LIMITATION
+
+5. GAP
+
+6. BENCHMARK_OR_CONTRAST
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. METHOD_JUSTIFICATION
+
+4. HYPOTHESIS_OR_PROPOSITION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. MECHANISM
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 社会认同理论与民族语言认同理论
+
+2. 标注者偏差实证研究（Waseem, Sap等）
+
+3. 对比学习与SimCSE
+
+4. 提示工程与连续prompt/soft verbalizer
+
+5. 仇恨目标与外部知识注入（Hatebase、Wikipedia、Urban Dictionary）
+
+6. 群体估计器（Blodgett等）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：社会认同/民族语言认同理论提供了“语言使用差异为何造成偏见”的概念基础，但制品的具体组件（pair generator、SimCSE、连续prompt、soft verbalizer、目标词表）主要来自NLP工程方法和经验知识；理论没有直接推出算法设计，更多是事后解释。
+
+- 理论到设计翻译链：语言使用差异导致一般标注者误判 → 需要在句子级而非词项级处理语言变体 → 设计pair generator生成标准英语语义等价句 → 用SimCSE拉近嵌入距离 → 分类器不再依赖方言线索；少量专家标注 → 避免全参数微调过拟合 → 采用prompt-based learning → 连续prompt+soft verbalizer自动学习；非标准仇恨词演化 → 注入外部仇恨目标知识 → 增强continuous prompt。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：同一词汇在不同群体中有不同可接受性（民族语言认同/语言收复）
+
+- mechanism_cn：AAE内部用语被外部误读为仇恨，一般标注者无法识别说话者身份
+
+- design_requirement_cn：去偏不能只改词，必须在句子层面消除语言使用差异
+
+- artifact_choice_cn：pair generator生成“AAE-标准英语”语义等价对，SimCSE拉近嵌入
+
+- evaluated_contrast_cn：完整pair generator+SimCSE vs 去掉组件/仅词项替换的对比学习
+
+- objective_result_cn：组件消融显著下降；PCA显示族群聚类与标准英语聚类重叠
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Figure 6
+
+3. Figure 4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：一般标注者比专家更容易把AAE文本标为仇恨
+
+- mechanism_cn：训练数据继承标注偏差，模型对亚群体高FPR
+
+- design_requirement_cn：使用专家标注，但专家标注稀缺，所以要小样本学习
+
+- artifact_choice_cn：group estimator比例抽样+256条专家标注+prompt-based learning
+
+- evaluated_contrast_cn：随机抽样/嵌入抽样 vs 组别比例抽样；微调 vs 提示学习
+
+- objective_result_cn：组别比例抽样更好；提示学习优于微调
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Table 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：小数据集全参数微调LLM会过拟合，prompt-based learning可缓解
+
+- mechanism_cn：只学习prompt/verbalizer参数而非全部LLM参数，降低过拟合
+
+- design_requirement_cn：设计自动化的prompt和verbalizer，减少人工干预
+
+- artifact_choice_cn：增强连续prompt + soft verbalizer
+
+- evaluated_contrast_cn：连续prompt vs 手动/梯度/改写/生成prompt；soft verbalizer vs 手动/知识/原型verbalizer
+
+- objective_result_cn：连续prompt和soft verbalizer均带来显著提升
+
+##### evidence_pointers
+
+1. Table 7
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：在线仇恨语言非标准且随规避审查而变化
+
+- mechanism_cn：简单字符串匹配无法识别变形仇恨词，LLM预训练无法覆盖所有新词
+
+- design_requirement_cn：需要外部知识注入仇恨目标信息
+
+- artifact_choice_cn：仇恨目标映射词典+edit distance匹配+T_target模板
+
+- evaluated_contrast_cn：增强prompt含目标信息 vs 不含目标信息
+
+- objective_result_cn：去掉目标信息后FPR/F1显著下降
+
+##### evidence_pointers
+
+1. Table 7 no target row
+
+2. Table 2
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 六类基准的总体性能比较
+
+2. 跨族群公平性（Avg SP）评价
+
+3. 组件移除/替换消融
+
+4. PCA嵌入可视化
+
+5. 训练数据规模敏感性分析
+
+6. 计算时间与蒸馏模型效率
+
+7. 外部HateCheck案例比较
+
+8. 另一个亚群体（LGBTQ+）推广实验
+
+- why_these_evaluations_cn：因为这是设计科学制品，不能只用单一benchmark；需要先证明整体性能，再证明公平性这一核心目标，然后用消融把性能归因于具体设计，用可视化说明机制，用学习曲线和计算成本展示可行性，最后用LGBTQ+数据支持可推广性。
+
+- benchmark_and_contrast_chain_cn：Benchmark按论证需求逐层展开：先用普通ML和debiasing方法表明传统方法在少量专家标注下不充分；再用微调LLM和仇恨专用LLM说明LLM基座的价值；再用提示学习baseline（PTR、LMBFF、SupCon、WARP）说明提示学习优势；最后用数据扩展方法说明“生成/去噪更多数据”不如“直接用少量专家标注”。公平性表中选出最强baseline比较，组件表中用最接近的WARP作为参考，使每一层对比都回答上一阶段遗留的问题。
+
+### claim_evidence_ledger
+
+#### 1. 技术主张：提出方法在所有总体指标上优于所有基准
+
+- claim_cn：技术主张：提出方法在所有总体指标上优于所有基准
+
+- evidence_cn：Table 4和Table 5，20次重复均值、SD、t检验p<0.05
+
+- supported_cn：支持
+
+#### 2. 制品主张：pair generator和增强连续prompt是性能提升来源
+
+- claim_cn：制品主张：pair generator和增强连续prompt是性能提升来源
+
+- evidence_cn：Table 7组件消融，移除任一组件均显著下降
+
+- supported_cn：支持
+
+#### 3. 机制主张：对比学习通过拉近AAE与标准英语嵌入来去偏
+
+- claim_cn：机制主张：对比学习通过拉近AAE与标准英语嵌入来去偏
+
+- evidence_cn：Figure 6 PCA可视化显示对比学习后聚类重叠
+
+- supported_cn：部分支持，属于描述性证据而非因果中介检验
+
+#### 4. 边界主张：方法适用于其他亚群体与情境
+
+- claim_cn：边界主张：方法适用于其他亚群体与情境
+
+- evidence_cn：Table 10 LGBTQ+数据集上一致优势
+
+- supported_cn：支持，但仅扩展到一个额外群体
+
+#### 5. 设计知识：应用专家标注、组别比例抽样、句子级配对、目标知识注入、公平性指标
+
+- claim_cn：设计知识：应用专家标注、组别比例抽样、句子级配对、目标知识注入、公平性指标
+
+- evidence_cn：全文方法、消融、公平性和讨论
+
+- supported_cn：支持
+
+#### 6. 理论贡献：为AI公平、对比学习、提示学习文献提供新方法
+
+- claim_cn：理论贡献：为AI公平、对比学习、提示学习文献提供新方法
+
+- evidence_cn：Discussion Theoretical Implications
+
+- supported_cn：部分支持，多为文献定位而非理论修正
+
+- internal_validity_strategy_cn：以专家标注为金标准并对数据集做了二次验证；所有对比方法使用同一批256条专家标注；20次随机划分并报告均值与标准差；用t检验比较差异；组件消融采用逐项替换/删除控制。
+
+- external_validity_strategy_cn：使用两个广泛使用的公开数据集，并用另一个自建LGBTQ+数据集检验；HateCheck案例在无训练条件下测试；训练数据规模从10%到80%变化；蒸馏模型测试不同骨干。
+
+- what_is_not_actually_tested_cn：没有在真实平台内容审核流程中部署；没有测量随时间演化的新仇恨词；没有测试其他语言、多媒体内容、交叉性身份；对LGBTQ+数据的标注和构造依赖自建流程，可能受研究者判断影响。
+
+## 贡献闭环
+
+- technical_claim_cn：提出方法在FPR、FNR、F1、ACC上均显著优于六类30余个基准，且标准差更小。
+
+- artifact_claim_cn：两阶段框架中的每一个设计组件（组别抽样、pair generator、SimCSE、增强连续prompt、soft verbalizer）都对性能有可归因贡献。
+
+- mechanism_claim_cn：对比学习通过生成标准英语等价句并最小化嵌入距离，降低了AAE、Others与标准英语之间的嵌入分离，从而减少语言使用差异导致的偏差；目标信息注入帮助模型理解非标准、规避审查的仇恨词。
+
+- boundary_claim_cn：方法适用于不同种族群体和LGBTQ+群体，在128至256条专家标注范围内有效，也可用蒸馏模型以更低成本获得可接受性能。
+
+- reusable_design_knowledge_cn：可复用的设计知识包括：用group estimator按群体比例选择专家标注样本；去偏应在句子级生成语义等价对而非仅替换词项；提示学习应使用连续prompt与soft verbalizer以减少人工干预；仇恨词表与编辑距离匹配可处理变体仇恨词；公平性应同时报告Average Statistical Parity。
+
+- theoretical_contribution_cn：文章声称贡献于AI公平与算法偏差文献，展示如何用少量专家标注降低训练数据偏差；贡献于对比学习文献，提出面向语言使用差异的pair generator；贡献于提示学习文献，提出带仇恨目标知识增强的连续prompt；也贡献于数字技术与仇恨犯罪文献。
+
+- how_discussion_closes_intro_gap_cn：讨论回到引言提出的“一般标注者偏差 vs 专家标注稀缺”矛盾，明确说明提出方法整合对比学习和提示学习，使LLM能用少量专家标注同时缓解语言使用差异，从而闭合了引言中的三个挑战。
+
+- overclaim_or_unsupported_leaps_cn：“首次”声明仅基于有限检索；把LGBTQ+一次性结果推广为“generalizable”可能过度；理论贡献多为文献分类和事后解读，缺少对理论命题的直接检验；PCA可视化是描述性的，不能证明因果机制；未直接测量专家标注质量的跨标注者一致性。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：仇恨言论是社交媒体上的重大问题。
+
+- rhetorical_function_cn：建立研究领域的社会重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出自动检测的必要性。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PRIOR_KNLEDGE
+
+- paraphrase_cn：学界和业界已经提出依赖人工标注数据集训练的机器学习检测方法。
+
+- rhetorical_function_cn：说明已有解决方案的存在。
+
+- depends_on_cn：背景句
+
+- sets_up_cn：为随后指出标注偏差提供对照。
+
+- evidence_pointer：Abstract second sentence
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：有证据表明一般标注者制作的仇恨言论数据集存在系统性偏差，因为他们不能有效考虑不同说话者之间的语言使用差异。
+
+- rhetorical_function_cn：点出核心现象：数据标注偏差。
+
+- depends_on_cn：已有检测方法句
+
+- sets_up_cn：为“数据集偏差→模型偏差”的因果链做铺垫。
+
+- evidence_pointer：Abstract third sentence
+
+### 4. Abstract P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：专家能产生偏差小得多的标注，但无法高效获取大量专家标注。
+
+- rhetorical_function_cn：指出可行解的瓶颈。
+
+- depends_on_cn：标注偏差现象
+
+- sets_up_cn：引出本文的核心矛盾：少量专家标注。
+
+- evidence_pointer：Abstract fourth sentence
+
+### 5. Abstract P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S5
+
+- move_code：GAP
+
+- paraphrase_cn：本文通过弱监督学习方法弥合这一缺口，用少量专家标注做仇恨言论检测。
+
+- rhetorical_function_cn：宣布研究缺口与总体进路。
+
+- depends_on_cn：专家标注稀缺句
+
+- sets_up_cn：为随后的方法介绍提供逻辑位置。
+
+- evidence_pointer：Abstract fifth sentence
+
+### 6. Abstract P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P1 S6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出一个结合对比学习与提示学习的新设计，包含群体估计器、配对生成器和知识注入。
+
+- rhetorical_function_cn：概括制品核心组件。
+
+- depends_on_cn：弱监督学习进路
+
+- sets_up_cn：为实验性能做交代。
+
+- evidence_pointer：Abstract sixth sentence
+
+### 7. Abstract P1 S7
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P1 S7
+
+- move_code：RESULT
+
+- paraphrase_cn：在真实推特数据上，针对AAE说话者等群体做了大量实验，证明方法性能优越，并在LGBTQ+数据上取得一致结果。
+
+- rhetorical_function_cn：给出经验证据，强调结果一致性。
+
+- depends_on_cn：方法组件
+
+- sets_up_cn：为贡献声明提供证据。
+
+- evidence_pointer：Abstract seventh sentence
+
+### 8. Abstract P1 S8
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract P1 S8
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究对仇恨言论检测和大语言模型有重要的学术与实践意义。
+
+- rhetorical_function_cn：宣告贡献。
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：引导读者关注理论/实践影响。
+
+- evidence_pointer：Abstract final sentence
+
+### 9. Introduction P1 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：仇恨言论是社交媒体平台的主要问题之一。
+
+- rhetorical_function_cn：设定宏大现实背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出检测方法讨论。
+
+- evidence_pointer：Introduction paragraph 1 sentence 1
+
+### 10. Introduction P1 S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P1 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：许多ML模型包括Perspective API已被用于遏制仇恨言论。
+
+- rhetorical_function_cn：说明已有技术努力。
+
+- depends_on_cn：背景句
+
+- sets_up_cn：为说明“定义/语境复杂”提供对照。
+
+- evidence_pointer：Introduction P1 S2
+
+### 11. Introduction P1 S3
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：仇恨言论的定义会因种族、地区、国家、时期和平台而不同，什么算仇恨取决于说话者社会身份、平台性质、文化价值等语境。
+
+- rhetorical_function_cn：引入语言使用差异现象。
+
+- depends_on_cn：检测方法背景
+
+- sets_up_cn：为AAE例子做铺垫。
+
+- evidence_pointer：Introduction P1 S3
+
+### 12. Introduction P1 S4
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P1 S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：AAE说话者说“n*gga”或“b*tch”通常不被视为仇恨，但外人说则会被视为仇恨；LGBTQ+社区对“queer”“gay”也有类似收复现象。
+
+- rhetorical_function_cn：用具体例子说明语言使用差异。
+
+- depends_on_cn：语境定义句
+
+- sets_up_cn：引出一般标注者无法识别的问题。
+
+- evidence_pointer：Introduction P1 S4; Figure 1
+
+### 13. Introduction P2 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：一般标注者（业余者、MTurk工人）往往不能识别说话者社会身份或方言。
+
+- rhetorical_function_cn：引入标注者能力的经验结论。
+
+- depends_on_cn：语言使用差异例子
+
+- sets_up_cn：说明偏差来源。
+
+- evidence_pointer：Introduction P2 S1
+
+### 14. Introduction P2 S2
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：研究发现AAE文本比标准英语更可能被一般标注者错误标为仇恨，这被称为训练数据中的种族偏差。
+
+- rhetorical_function_cn：陈述核心经验现象。
+
+- depends_on_cn：标注者能力句
+
+- sets_up_cn：为后续“偏差会传递到模型”作准备。
+
+- evidence_pointer：Introduction P2 S2
+
+### 15. Introduction P3 S1
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：可靠训练数据是ML模型的基础；有问题的数据集会把偏差放大到训练过程，导致亚群体文本更可能被误判为仇恨，造成不公平。
+
+- rhetorical_function_cn：说明数据偏差的实际后果。
+
+- depends_on_cn：种族偏差现象
+
+- sets_up_cn：说明解决该问题的重要性和紧迫性。
+
+- evidence_pointer：Introduction P3 S1-S3
+
+### 16. Introduction P4 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：AI公平与算法偏差在计算机科学和IS研究中受到越来越多的关注。
+
+- rhetorical_function_cn：把问题接入IS研究议程。
+
+- depends_on_cn：实际后果句
+
+- sets_up_cn：说明本研究属于IS关注的问题。
+
+- evidence_pointer：Introduction P4 S1
+
+### 17. Introduction P4 S3
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究表明专家标注比一般标注少得多，但专家标注耗时昂贵。
+
+- rhetorical_function_cn：点出已有的解决方案及其瓶颈。
+
+- depends_on_cn：AI公平背景
+
+- sets_up_cn：为弱监督方法出现铺路。
+
+- evidence_pointer：Introduction P4 S3
+
+### 18. Introduction P5 S1
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：LLM和提示学习作为弱监督学习有潜力从小样本中学习，适合解决专家标注不足问题。
+
+- rhetorical_function_cn：论证为什么采用LLM+提示学习。
+
+- depends_on_cn：专家标注昂贵句
+
+- sets_up_cn：引出核心研究问题。
+
+- evidence_pointer：Introduction P5 S1
+
+### 19. Introduction P6 S1
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：因此重要问题是：能否只用256条专家标注训练模型，同时减少语言使用差异带来的偏差？
+
+- rhetorical_function_cn：正式提出研究问题并给出具体样例规模。
+
+- depends_on_cn：LLM+提示学习可行性
+
+- sets_up_cn：引导后续三个方法挑战。
+
+- evidence_pointer：Introduction P6 S1
+
+### 20. Introduction P6 S2
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P6 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有去偏方法常聚焦移除简单种族词，但换词很难改变方言和语言使用，因为语言使用依赖句子级特征。
+
+- rhetorical_function_cn：指出第一个挑战：现有去偏不足。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为阶段一的pair generator提供动机。
+
+- evidence_pointer：Introduction P6 S2
+
+### 21. Introduction P7 S1
+
+- order：21
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：即使消除语言差异，仍存在去偏性能与准确率之间的权衡，因为业余标注有错标，而专家标注又难获取。
+
+- rhetorical_function_cn：指出第二个挑战：小样本下的准确率与去偏平衡。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为阶段二提示学习提供动机。
+
+- evidence_pointer：Introduction P7 S1
+
+### 22. Introduction P8 S1
+
+- order：22
+
+- section：Introduction
+
+- locator：Introduction P8 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：提示学习虽然适合弱监督，但严重依赖prompt和verbalizer，需要更好的设计来提升仇恨检测性能，尤其要注入外部知识以识别不断变化的仇恨目标。
+
+- rhetorical_function_cn：指出第三个挑战：prompt/verbalizer和外部知识。
+
+- depends_on_cn：研究问题
+
+- sets_up_cn：为增强连续prompt和soft verbalizer提供动机。
+
+- evidence_pointer：Introduction P8 S1
+
+### 23. Introduction P9 S1
+
+- order：23
+
+- section：Introduction
+
+- locator：Introduction P9 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：针对这些挑战，作者提出两阶段端到端检测框架：阶段一用对比学习+pair generator解决语言差异，阶段二用增强提示学习解决小样本和知识注入。
+
+- rhetorical_function_cn：概述制品架构，把三个挑战映射到两个阶段。
+
+- depends_on_cn：三个挑战
+
+- sets_up_cn：为后续方法章节提供路线图。
+
+- evidence_pointer：Introduction P9 S1
+
+### 24. Introduction P10 S1
+
+- order：24
+
+- section：Introduction
+
+- locator：Introduction P10 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文章后续结构为文献综述、方法框架、实验设置、结果、讨论与局限。
+
+- rhetorical_function_cn：给出全文路线图。
+
+- depends_on_cn：方法概述
+
+- sets_up_cn：帮助读者预期论证路径。
+
+- evidence_pointer：Introduction last paragraph
+
+### 25. Language Use Differences and Detection Bias P1 S1
+
+- order：25
+
+- section：Literature Review
+
+- locator：Language Use Differences and Detection Bias P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：社会认同理论认为自我概念部分来自群体成员身份。
+
+- rhetorical_function_cn：引入理论解释语言使用差异的来源。
+
+- depends_on_cn：引言中的语言差异现象
+
+- sets_up_cn：为民族语言认同理论作铺垫。
+
+- evidence_pointer：Literature Review, Social identity theory sentence
+
+### 26. Language Use Differences and Detection Bias P1 S2
+
+- order：26
+
+- section：Literature Review
+
+- locator：Language Use Differences and Detection Bias P1 S2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：民族语言认同理论提出，群体若把语言视为身份的一部分，就会负面看待外群体的语言使用，导致语言偏见和歧视。
+
+- rhetorical_function_cn：连接群体身份与语言评价机制。
+
+- depends_on_cn：社会认同理论
+
+- sets_up_cn：解释为何同一词在不同群体中具有不同冒犯性。
+
+- evidence_pointer：Literature Review, ethnolinguistic identity theory sentence
+
+### 27. Language Use Differences and Detection Bias P2 S1
+
+- order：27
+
+- section：Literature Review
+
+- locator：Language Use Differences and Detection Bias P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：一般标注者难以辨别说话者社会身份和语言差异，容易将亚群体非仇恨文本误标为仇恨，并把偏差传递给检测模型。
+
+- rhetorical_function_cn：把理论机制与标注者偏差现象联系起来。
+
+- depends_on_cn：民族语言认同理论
+
+- sets_up_cn：引出去偏方法综述的必要性。
+
+- evidence_pointer：Literature Review, paragraph on general annotators
+
+### 28. Debiasing Methods P1 S1
+
+- order：28
+
+- section：Literature Review
+
+- locator：Debiasing Methods P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：现有去偏方法大多聚焦从嵌入中移除敏感词如种族词或侮辱词。
+
+- rhetorical_function_cn：总结现有去偏范式。
+
+- depends_on_cn：语言差异偏差现象
+
+- sets_up_cn：为指出其局限作准备。
+
+- evidence_pointer：Literature Review, Debiasing Methods first paragraph
+
+### 29. Debiasing Methods P2 S1
+
+- order：29
+
+- section：Literature Review
+
+- locator：Debiasing Methods P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：但替换几个种族词很少改变方言或语言使用，因为这些依赖句子级语言模式，语言使用差异仍会留在嵌入中。
+
+- rhetorical_function_cn：指出现有词项级去偏的根本局限。
+
+- depends_on_cn：现有去偏方法
+
+- sets_up_cn：为pair generator句子级处理提供文献缺口。
+
+- evidence_pointer：Literature Review, Debiasing Methods limitation paragraph
+
+### 30. Weakly Supervised Learning P1 S1
+
+- order：30
+
+- section：Literature Review
+
+- locator：Weakly Supervised Learning P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：弱监督/半监督学习旨在从少量准确标注和大量未标注或含噪标注中学习，常用数据增强或伪标签。
+
+- rhetorical_function_cn：介绍第二支文献。
+
+- depends_on_cn：专家标注稀缺问题
+
+- sets_up_cn：为说明现有弱监督方法不足作铺垫。
+
+- evidence_pointer：Literature Review, Weakly Supervised Learning first paragraph
+
+### 31. Weakly Supervised Learning P2 S1
+
+- order：31
+
+- section：Literature Review
+
+- locator：Weakly Supervised Learning P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：但启发式扩展和伪标签不能保证标签正确性，可能降低准确率；在小数据集上全参数微调LLM又会严重过拟合。
+
+- rhetorical_function_cn：指出现有弱监督方法的局限。
+
+- depends_on_cn：弱监督方法介绍
+
+- sets_up_cn：为prompt-based learning提供动机。
+
+- evidence_pointer：Literature Review, Weakly Supervised Learning second paragraph
+
+### 32. Weakly Supervised Learning P3 S1
+
+- order：32
+
+- section：Literature Review
+
+- locator：Weakly Supervised Learning P3 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提示学习通过模板和verbalizer把任务转为掩码预测，减少LLM参数调整，从而改善小样本性能。
+
+- rhetorical_function_cn：介绍本文采用的核心技术机制。
+
+- depends_on_cn：微调过拟合局限
+
+- sets_up_cn：为后面连续prompt和soft verbalizer的讨论做铺垫。
+
+- evidence_pointer：Literature Review, Prompt-based learning sentence
+
+### 33. External Knowledge Injection P1 S1
+
+- order：33
+
+- section：Literature Review
+
+- locator：External Knowledge Injection P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：外部知识注入能增强LLM在特定领域的能力，因为在线仇恨目标语言非标准且不断变化，难以在预训练或训练中穷尽。
+
+- rhetorical_function_cn：引入外部知识作为设计资源。
+
+- depends_on_cn：提示学习介绍
+
+- sets_up_cn：为作者注入仇恨目标信息的增强prompt提供依据。
+
+- evidence_pointer：Literature Review, External Knowledge Injection section
+
+### 34. Key Novelty P1 S1
+
+- order：34
+
+- section：Literature Review
+
+- locator：Key Novelty P1 S1
+
+- move_code：GAP
+
+- paraphrase_cn：去偏方法考虑语言差异但不能小样本学习，弱监督方法能小样本学习但忽略语言差异，现有文献在这个交叉区域无效。
+
+- rhetorical_function_cn：用两流文献的交叉定义研究缺口。
+
+- depends_on_cn：两支文献综述
+
+- sets_up_cn：引出Table 1和原创贡献。
+
+- evidence_pointer：Literature Review, Key Novelty of Our Study first paragraph; Table 1
+
+### 35. Key Novelty P2 S1
+
+- order：35
+
+- section：Literature Review
+
+- locator：Key Novelty P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：阶段一的贡献是为每个亚群体文本生成保留语义的标准英语配对，使对比学习从去除表面种族词推进到句子级语言使用差异。
+
+- rhetorical_function_cn：声明第一个原创设计组件。
+
+- depends_on_cn：去偏方法局限
+
+- sets_up_cn：为方法论中的pair generator细节铺路。
+
+- evidence_pointer：Literature Review, Key Novelty Stage 1 paragraph
+
+### 36. Key Novelty P3 S1
+
+- order：36
+
+- section：Literature Review
+
+- locator：Key Novelty P3 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：阶段二的贡献是用增强连续prompt包装输入文本和仇恨目标信息，让prompt自动学习，并帮助LLM理解非标准语言。
+
+- rhetorical_function_cn：声明第二个原创设计组件。
+
+- depends_on_cn：提示学习与外部知识综述
+
+- sets_up_cn：为方法论中的增强prompt细节铺路。
+
+- evidence_pointer：Literature Review, Key Novelty Stage 2 paragraph
+
+### 37. Methodology P1 S1
+
+- order：37
+
+- section：Methodology
+
+- locator：Methodology P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明采用设计科学方法开发新方法，目标是确保所有群体上的公平表现。
+
+- rhetorical_function_cn：声明研究范式与评价目标。
+
+- depends_on_cn：文献缺口
+
+- sets_up_cn：把方法视为设计制品而非仅算法。
+
+- evidence_pointer：Methodology opening paragraph
+
+### 38. Data Sampling and Annotation P1 S1
+
+- order：38
+
+- section：Methodology
+
+- locator：Data Sampling and Annotation P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：先训练/使用group estimator推断文本所属亚群体及得分，这成为选择代表性样本的前提。
+
+- rhetorical_function_cn：把“需要代表各群体”转化为抽样要求。
+
+- depends_on_cn：设计科学方法
+
+- sets_up_cn：引出按组别比例抽样与专家标注。
+
+- evidence_pointer：Methodology, Data Sampling and Annotation section
+
+### 39. Data Sampling and Annotation P2 S1
+
+- order：39
+
+- section：Methodology
+
+- locator：Data Sampling and Annotation P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：从每个群体中取组得分最高的一定数量样本，按群体占比分配，并让专家标注。
+
+- rhetorical_function_cn：给出具体抽样与标注设计。
+
+- depends_on_cn：group estimator要求
+
+- sets_up_cn：为两阶段学习提供输入。
+
+- evidence_pointer：Methodology, Data Sampling and Annotation final sentence
+
+### 40. Stage 1 P1 S1
+
+- order：40
+
+- section：Methodology
+
+- locator：Stage 1 P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：检测框架用LLM表示句子，但需要先微调（去偏）LLM，使其不编码语言使用差异。
+
+- rhetorical_function_cn：把去偏需求落到具体骨干模型上。
+
+- depends_on_cn：引言挑战1
+
+- sets_up_cn：为pair generator与SimCSE做铺垫。
+
+- evidence_pointer：Methodology, Stage 1 first paragraph
+
+### 41. Stage 1 P2 S1
+
+- order：41
+
+- section：Methodology
+
+- locator：Stage 1 P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者提出pair generator，由仇恨目标检测器、候选构造器和候选排序器组成，用于生成不同语言使用但语义相似的句子对。
+
+- rhetorical_function_cn：说明解决句子级语言差异的具体设计。
+
+- depends_on_cn：现有对比学习词项替换局限
+
+- sets_up_cn：为后续各组件小节提供总体框架。
+
+- evidence_pointer：Methodology, Stage 1 second paragraph; Figure 4
+
+### 42. Hate Target Mapping Dictionary and Detector P1 S1
+
+- order：42
+
+- section：Methodology
+
+- locator：Hate Target Mapping Dictionary and Detector P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：仇恨目标检测器用依存解析识别潜在仇恨词，并通过外部词表映射到仇恨目标类别，以处理变体和规避审查写法。
+
+- rhetorical_function_cn：描述pair generator的第一个组件。
+
+- depends_on_cn：外部知识综述
+
+- sets_up_cn：为候选构造器提供仇恨目标。
+
+- evidence_pointer：Methodology, Hate Target Mapping Dictionary and Detector section
+
+### 43. Template Mapping and Candidate Constructor P1 S1
+
+- order：43
+
+- section：Methodology
+
+- locator：Template Mapping and Candidate Constructor P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：候选构造器用MINE从情感数据中挖掘模板，用仇恨目标填充宾语槽，生成标准英语候选句。
+
+- rhetorical_function_cn：描述把仇恨目标转成标准英语候选的机制。
+
+- depends_on_cn：仇恨目标检测结果
+
+- sets_up_cn：为候选排序器提供候选池。
+
+- evidence_pointer：Methodology, Template Mapping and Candidate Constructor section
+
+### 44. Candidate Ranker and Loss Function P1 S1
+
+- order：44
+
+- section：Methodology
+
+- locator：Candidate Ranker and Loss Function P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：候选排序器用基于Wikipedia的下一句预测微调LLM，对候选与输入句的内容相似度打分并选最高者作为正例。
+
+- rhetorical_function_cn：说明如何从多个候选中选出最佳语义等价对。
+
+- depends_on_cn：候选构造器
+
+- sets_up_cn：为SimCSE损失函数提供正负样本。
+
+- evidence_pointer：Methodology, Candidate Ranker and Loss Function section
+
+### 45. Candidate Ranker and Loss Function P2 S1
+
+- order：45
+
+- section：Methodology
+
+- locator：Candidate Ranker and Loss Function P2 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：对比学习的目标是最大化正例对相似度、最小化负例对相似度，从而让语义相近但语言使用不同的句子在嵌入空间中靠近。
+
+- rhetorical_function_cn：给出设计遵循的可检验机制命题。
+
+- depends_on_cn：正负样本生成
+
+- sets_up_cn：为实验结果中的PCA验证提供先验预期。
+
+- evidence_pointer：Methodology, Loss function paragraph and CL equation
+
+### 46. Stage 2 P1 S1
+
+- order：46
+
+- section：Methodology
+
+- locator：Stage 2 P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：去偏LLM后需要提示学习完成分类，prompt由模板和verbalizer组成。
+
+- rhetorical_function_cn：转向第二阶段。
+
+- depends_on_cn：阶段一去偏
+
+- sets_up_cn：为增强连续prompt和soft verbalizer提供结构。
+
+- evidence_pointer：Methodology, Stage 2 first paragraph
+
+### 47. Enhanced Continuous Prompt P1 S1
+
+- order：47
+
+- section：Methodology
+
+- locator：Enhanced Continuous Prompt P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用连续prompt把模板词嵌入作为可学习参数，减少人工设计模板的干预。
+
+- rhetorical_function_cn：介绍prompt工程方案。
+
+- depends_on_cn：提示学习需求
+
+- sets_up_cn：为加入仇恨目标信息做铺垫。
+
+- evidence_pointer：Methodology, Enhanced Continuous Prompt section
+
+### 48. Enhanced Continuous Prompt P2 S1
+
+- order：48
+
+- section：Methodology
+
+- locator：Enhanced Continuous Prompt P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：通过单独的target模板包装仇恨目标，并与文本模板组合成增强prompt，以显式注入外部仇恨目标知识。
+
+- rhetorical_function_cn：描述知识注入与增强prompt构造。
+
+- depends_on_cn：连续prompt
+
+- sets_up_cn：为soft verbalizer提供输入。
+
+- evidence_pointer：Methodology, Enhanced Continuous Prompt target template paragraph
+
+### 49. Soft Verbalizer and Loss Function P1 S1
+
+- order：49
+
+- section：Methodology
+
+- locator：Soft Verbalizer and Loss Function P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：soft verbalizer用单层FNN学习标签嵌入，将LLM输出的掩码表示映射到仇恨/非仇恨标签。
+
+- rhetorical_function_cn：描述verbalizer自动化设计。
+
+- depends_on_cn：增强prompt
+
+- sets_up_cn：为损失函数和训练目标提供参数。
+
+- evidence_pointer：Methodology, Soft Verbalizer section
+
+### 50. Datasets P1 S1
+
+- order：50
+
+- section：Experiment Settings
+
+- locator：Datasets P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择WH16和VTWK21两个最广泛使用的公开仇恨言论数据集，它们都同时具有一般标注和专家标注。
+
+- rhetorical_function_cn：证明数据集选择的合理性。
+
+- depends_on_cn：方法需要专家标注
+
+- sets_up_cn：为后续FPR/FNR基准统计提供数据基础。
+
+- evidence_pointer：Experiment Settings, Datasets first paragraph
+
+### 51. Datasets P3 S1
+
+- order：51
+
+- section：Experiment Settings
+
+- locator：Datasets P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：以专家标注为金标准，一般标注对AAE推文的FPR达22.5%和21.3%，明显高于其他群体，而FNR没有显著差异。
+
+- rhetorical_function_cn：用量化结果确认数据集存在种族偏差。
+
+- depends_on_cn：数据集统计
+
+- sets_up_cn：为方法目标“公平性”提供基线事实。
+
+- evidence_pointer：Experiment Settings, Datasets paragraph on FPR; Table 3
+
+### 52. Evaluation Metrics P1 S1
+
+- order：52
+
+- section：Experiment Settings
+
+- locator：Evaluation Metrics P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用FPR、FNR、macro-F1和ACC，而不使用AUC，因为类别不平衡会使AUC过于乐观。
+
+- rhetorical_function_cn：解释指标选择。
+
+- depends_on_cn：类别不平衡数据
+
+- sets_up_cn：为所有实验结果表格提供统一指标。
+
+- evidence_pointer：Experiment Settings, Evaluation Metrics section
+
+### 53. Evaluation Metrics P2 S1
+
+- order：53
+
+- section：Experiment Settings
+
+- locator：Evaluation Metrics P2 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：一个公平的分类器必须在各群体间绩效差异最小，因此引入统计奇偶（Avg SP）作为公平性指标。
+
+- rhetorical_function_cn：把公平性目标操作化为可计算的指标。
+
+- depends_on_cn：去偏目标
+
+- sets_up_cn：为公平性结果表提供依据。
+
+- evidence_pointer：Experiment Settings, Avg SP paragraph
+
+### 54. Benchmarks P1 S1
+
+- order：54
+
+- section：Experiment Results
+
+- locator：Benchmarks P1 S1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：设置六组基准：普通ML、去偏分类器、微调通用LLM、微调仇恨专用LLM、提示学习、数据扩展，以覆盖Table 1中的两类现有方法。
+
+- rhetorical_function_cn：系统化建立评价参照系。
+
+- depends_on_cn：文献综述的分类
+
+- sets_up_cn：为主结果表提供完整对照。
+
+- evidence_pointer：Experiment Results, Benchmarks section
+
+### 55. Implementation and Settings P2 S1
+
+- order：55
+
+- section：Experiment Results
+
+- locator：Implementation and Settings P2 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为保证公平比较，提出方法和所有基准都使用同一批256条专家标注，并重复20次随机划分。
+
+- rhetorical_function_cn：说明对比实验的操作一致性。
+
+- depends_on_cn：少量专家标注设计
+
+- sets_up_cn：为主结果的显著性检验提供依据。
+
+- evidence_pointer：Experiment Results, Implementation and Settings final paragraph
+
+### 56. Main Results P1 S1
+
+- order：56
+
+- section：Experiment Results
+
+- locator：Main Results P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：提出方法在两个数据集的所有指标上均优于所有基准，且p<0.05。
+
+- rhetorical_function_cn：给出主结果的核心结论。
+
+- depends_on_cn：六组基准实验
+
+- sets_up_cn：为随后逐类解读提供总体判断。
+
+- evidence_pointer：Experiment Results, Main Results first paragraph; Table 4
+
+### 57. Main Results P3 S1
+
+- order：57
+
+- section：Experiment Results
+
+- locator：Main Results P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：去偏方法优于普通ML但提升有限，对比学习略差于对抗训练，因为其句子对生成局限于词项替换。
+
+- rhetorical_function_cn：解释为什么现有去偏方法不充分。
+
+- depends_on_cn：主结果表
+
+- sets_up_cn：为作者句子级pair generator提供缺口证据。
+
+- evidence_pointer：Experiment Results, Main Results second observation
+
+### 58. Main Results P5 S1
+
+- order：58
+
+- section：Experiment Results
+
+- locator：Main Results P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：提示学习基准胜过普通ML和微调LLM，且实现间波动小。
+
+- rhetorical_function_cn：确认提示学习方向有价值。
+
+- depends_on_cn：主结果表
+
+- sets_up_cn：说明本文选择提示学习作为第二阶段的合理性。
+
+- evidence_pointer：Experiment Results, Main Results fifth observation
+
+### 59. Main Results P6 S1
+
+- order：59
+
+- section：Experiment Results
+
+- locator：Main Results P6 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：提出方法超过包括WARP在内的所有提示学习baseline，且标准差小、FNR低，说明性能不是靠把更多内容判为仇恨换来的。
+
+- rhetorical_function_cn：强调总体性能最优且稳定。
+
+- depends_on_cn：Table 4结果
+
+- sets_up_cn：为公平性和消融分析提供前提。
+
+- evidence_pointer：Experiment Results, Main Results final paragraph
+
+### 60. Data Expansion Results P1 S1
+
+- order：60
+
+- section：Experiment Results
+
+- locator：Data Expansion Results P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：数据增强和去噪方法即使使用更多一般标注，仍不如只用256条专家标注的提出方法。
+
+- rhetorical_function_cn：排除数据扩展替代方案。
+
+- depends_on_cn：Table 5
+
+- sets_up_cn：强化“少量专家标注直接学习”的优势。
+
+- evidence_pointer：Experiment Results, Data Expansion section; Table 5
+
+### 61. Fairness Results P1 S1
+
+- order：61
+
+- section：Experiment Results
+
+- locator：Fairness Results P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：Adversarial debiasing在公平性上表现最差，与其梯度反转收敛困难一致。
+
+- rhetorical_function_cn：说明强去偏基准在小样本下公平性不足。
+
+- depends_on_cn：Table 6
+
+- sets_up_cn：衬托提出方法的公平性优势。
+
+- evidence_pointer：Experiment Results, Fairness Results first observation
+
+### 62. Fairness Results P2 S1
+
+- order：62
+
+- section：Experiment Results
+
+- locator：Fairness Results P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：提出方法的Avg SP在不同指标上比WARP低约一半甚至更多，证明在公平性上显著更优。
+
+- rhetorical_function_cn：给出公平性核心结论。
+
+- depends_on_cn：Table 6
+
+- sets_up_cn：为后续组件消融解释公平性来源做铺垫。
+
+- evidence_pointer：Experiment Results, Fairness Results final paragraph; Table 6
+
+### 63. Evaluation of Framework Components P1 S1
+
+- order：63
+
+- section：Experiment Results
+
+- locator：Evaluation of Framework Components P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为了评价每个组件的独立贡献，作者逐一移除或替换数据抽样、对比学习、pair generator、prompt和verbalizer。
+
+- rhetorical_function_cn：说明消融实验的设计逻辑。
+
+- depends_on_cn：整体性能与公平性结果
+
+- sets_up_cn：为组件结果表安排实验矩阵。
+
+- evidence_pointer：Experiment Results, Evaluation of Framework Components opening paragraph
+
+### 64. Evaluation of Framework Components Results P1 S1
+
+- order：64
+
+- section：Experiment Results
+
+- locator：Evaluation of Framework Components Results P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：任一组件移除或替换都导致显著性能下降，完整框架最佳且标准差最小。
+
+- rhetorical_function_cn：把整体效果归因于设计组件。
+
+- depends_on_cn：Table 7
+
+- sets_up_cn：为设计科学主张提供证据。
+
+- evidence_pointer：Experiment Results, Component evaluation results; Table 7
+
+### 65. Visualization of Debiasing Effectiveness P1 S1
+
+- order：65
+
+- section：Experiment Results
+
+- locator：Visualization of Debiasing Effectiveness P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：PCA显示对比学习前各群体与标准英语聚类分离，对比学习后聚类重叠、边界消失。
+
+- rhetorical_function_cn：用可视化展示去偏机制。
+
+- depends_on_cn：对比学习损失
+
+- sets_up_cn：支撑机制层面的解释。
+
+- evidence_pointer：Experiment Results, Visualization section; Figure 6
+
+### 66. Evaluation of Training Sample Sizes P1 S1
+
+- order：66
+
+- section：Experiment Results
+
+- locator：Evaluation of Training Sample Sizes P1 S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：在不同专家标注规模（10%-80%）下，提出方法持续优于Adversarial debiasing和WARP。
+
+- rhetorical_function_cn：检验训练规模敏感性。
+
+- depends_on_cn：主结果与公平性
+
+- sets_up_cn：支持方法的稳健性主张。
+
+- evidence_pointer：Experiment Results, Training Sample Sizes section; Figure 7
+
+### 67. Evaluation of Computational Costs P1 S1
+
+- order：67
+
+- section：Experiment Results
+
+- locator：Evaluation of Computational Costs P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：提出方法在V100上训练仅30分钟，推理时间很短；蒸馏骨干模型也可保持尚可的性能。
+
+- rhetorical_function_cn：说明计算可负担性。
+
+- depends_on_cn：实验实现设置
+
+- sets_up_cn：支持实际部署可行性。
+
+- evidence_pointer：Experiment Results, Computational Costs section; Table 8
+
+### 68. Evaluation of Specific Cases P1 S1
+
+- order：68
+
+- section：Experiment Results
+
+- locator：Evaluation of Specific Cases P1 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：在不训练条件下，该方法在HateCheck的81条AAE推文上ACC 93.8，显著超过Perspective API、GPT-4o等。
+
+- rhetorical_function_cn：用外部案例证明泛化到实际误判样本。
+
+- depends_on_cn：模型训练完成
+
+- sets_up_cn：强调相对行业工具的优势。
+
+- evidence_pointer：Experiment Results, Evaluation of Specific Cases section; Table 9
+
+### 69. Generalizability P1 S1
+
+- order：69
+
+- section：Experiment Results
+
+- locator：Generalizability P1 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者将方法迁移到LGBTQ+社区数据，说明该方法也可处理另一个存在语言使用差异的群体。
+
+- rhetorical_function_cn：扩展外部效度。
+
+- depends_on_cn：种族数据实验结果
+
+- sets_up_cn：为一般化主张提供证据。
+
+- evidence_pointer：Experiment Results, Generalizability of the Proposed Method section
+
+### 70. Generalizability P2 S1
+
+- order：70
+
+- section：Experiment Results
+
+- locator：Generalizability P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：在LGBTQ+数据集上，提出方法仍显著优于所有基准，Avg SP最低，结果与种族数据集一致。
+
+- rhetorical_function_cn：给出可推广性结论。
+
+- depends_on_cn：LGBTQ+实验设计
+
+- sets_up_cn：为讨论中的边界声明提供证据。
+
+- evidence_pointer：Experiment Results, Generalizability final paragraph; Table 10
+
+### 71. Result Discussion P1 S1
+
+- order：71
+
+- section：Discussion and Conclusion
+
+- locator：Result Discussion P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出方法通过整合对比学习和提示学习，用少量专家标注实现了高性能检测，并降低语言使用差异带来的偏差。
+
+- rhetorical_function_cn：重新连接引言缺口。
+
+- depends_on_cn：全部实验结果
+
+- sets_up_cn：为理论和实践含义提供起点。
+
+- evidence_pointer：Discussion, Result Discussion first paragraph
+
+### 72. Result Discussion P4 S1
+
+- order：72
+
+- section：Discussion and Conclusion
+
+- locator：Result Discussion P4 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：对比学习通过拉近AAE等方言与标准英语的表示，使LLM能理解不同方言的相同语义，从而更稳健和包容。
+
+- rhetorical_function_cn：将实证优势上升为机制解释。
+
+- depends_on_cn：PCA可视化
+
+- sets_up_cn：支撑理论含义中的“对比学习贡献”。
+
+- evidence_pointer：Discussion, Result Discussion on contrastive learning
+
+### 73. Theoretical Implications P1 S1
+
+- order：73
+
+- section：Discussion and Conclusion
+
+- locator：Theoretical Implications P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章声称贡献于AI公平与算法偏差文献，提出一种用少量专家标注减少仇恨检测偏差的新方法。
+
+- rhetorical_function_cn：定位IS理论贡献。
+
+- depends_on_cn：结果讨论
+
+- sets_up_cn：为后续对比学习、提示学习贡献作框架。
+
+- evidence_pointer：Discussion, Theoretical Implications first paragraph
+
+### 74. Theoretical Implications P2 S1
+
+- order：74
+
+- section：Discussion and Conclusion
+
+- locator：Theoretical Implications P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章声称贡献于对比学习文献，提出pair generator来生成任意句子的语义等价对。
+
+- rhetorical_function_cn：强调设计组件对文献的增量。
+
+- depends_on_cn：pari generator消融证据
+
+- sets_up_cn：为对比学习理论应用提供具体化。
+
+- evidence_pointer：Discussion, Theoretical Implications second paragraph
+
+### 75. Theoretical Implications P3 S1
+
+- order：75
+
+- section：Discussion and Conclusion
+
+- locator：Theoretical Implications P3 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章声称贡献于仇恨检测中的提示学习文献，连续prompt和soft verbalizer减少人工干预，并通过仇恨目标注入提升对各类仇恨目标的识别。
+
+- rhetorical_function_cn：强调提示学习设计的贡献。
+
+- depends_on_cn：第二阶段消融证据
+
+- sets_up_cn：为实践建议中的“小LLM+提示学习”主张铺垫。
+
+- evidence_pointer：Discussion, Theoretical Implications third paragraph
+
+### 76. Practical Implications P1 S1
+
+- order：76
+
+- section：Discussion and Conclusion
+
+- locator：Practical Implications P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：实践启示包括：应使用专家标注；应针对语言使用差异而非仅移除种族词；平台可采用较小LLM与提示学习以节省成本。
+
+- rhetorical_function_cn：把研究结果转成可操作建议。
+
+- depends_on_cn：实验与公平性结果
+
+- sets_up_cn：为政策建议和标注平台建议提供基础。
+
+- evidence_pointer：Discussion, Practical Implications first paragraph
+
+### 77. Practical Implications P2 S1
+
+- order：77
+
+- section：Discussion and Conclusion
+
+- locator：Practical Implications P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：政策建议包括支持考虑语言差异的去偏算法、要求按亚群体审计并用统计奇偶等细粒度指标评估、要求开发过程透明。
+
+- rhetorical_function_cn：扩展研究结果的政策含义。
+
+- depends_on_cn：公平性结果
+
+- sets_up_cn：说明研究对治理和平台监管的意义。
+
+- evidence_pointer：Discussion, Practical Implications policy paragraph
+
+### 78. Limitations and Future Directions P1 S1
+
+- order：78
+
+- section：Discussion and Conclusion
+
+- locator：Limitations and Future Directions P1 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可用业余标注优先选择不确定性高的样本交专家复核，以改善抽样。
+
+- rhetorical_function_cn：承认当前抽样方法的局限并提出改进方向。
+
+- depends_on_cn：数据抽样设计
+
+- sets_up_cn：开启未来研究方向列表。
+
+- evidence_pointer：Discussion, Limitations and Future Directions first future direction
+
+### 79. Limitations and Future Directions P2 S1
+
+- order：79
+
+- section：Discussion and Conclusion
+
+- locator：Limitations and Future Directions P2 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可扩展至其他边缘群体、多媒体内容和其他语言，并自动化更新仇恨目标词表。
+
+- rhetorical_function_cn：界定适用范围并给出研究议程。
+
+- depends_on_cn：LGBTQ+推广实验
+
+- sets_up_cn：作为全文收束，强调初步外部效度与未竟事项。
+
+- evidence_pointer：Discussion, Limitations and Future Directions remaining paragraphs
+
+## 写作技术
+
+- gap_construction_cn：不是简单说“没人研究”，而是构造两个研究流的交叉缺口：去偏方法不能小样本学习，弱监督方法不能处理语言差异；用Table 1的矩阵直观展示该缺口，再给出三个具体方法挑战。
+
+- signposting_cn：引言末尾预告结构；研究方法章节用“Stage 1/Stage 2”的命名持续引导；实验部分在每个小节首句说明该节回答什么；讨论部分按“Result/Theoretical/Practical/Limitations”分轨总结。
+
+- transition_logic_cn：每个阶段以“未解决问题→需要下一阶段”衔接：数据偏差证明后转向抽样；去偏后转向分类；benchmark后转向公平性；公平性后转向归因；归因后转向机制与稳健性；随后才推广到另一群体。
+
+- claim_evidence_rhythm_cn：先给总体结论（Table 4），再解释各基准为何如此；每个解释都联系到文献中的机制（如对抗训练梯度反转、对比学习词项替换局限）；最后用组件消融把组件的证据收拢到设计贡献。
+
+- benchmark_narrative_cn：基准不是简单罗列，而是按Table 1的逻辑分层：先普通ML，再去偏方法，再弱监督中的微调、提示学习、数据扩展；每层都对应一个“为什么仍不够”的叙事，最后用WARP作为最接近的强baseline来凸显增量。
+
+- theory_return_cn：结果讨论没有止于数字，而是回到“语言使用差异—群体身份—AI偏差”这一理论视角；在理论含义中把pair generator和增强prompt分别连接到对比学习与提示学习文献，再用公平性结果回应AI公平文献。
+
+- contribution_positioning_cn：将贡献定位为“两个研究流的交叉”“首次结合对比学习与提示学习”“两个具体原创组件”，避免声称发明了LLM或对比学习，而是强调组合与组件创新。
+
+- novelty_protection_cn：通过组件消融证明每个设计都有必要；通过公平性Avg SP说明不是靠牺牲公平换准确率；通过LGBTQ+与HateCheck扩展证明不是一次性数据集结果；通过蒸馏模型和时间成本说明可以在实际场景落地。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：开头建立现实问题，用具体例子说明现象，并给出数据层面的偏差测量。
+
+- research_job_cn：选择带专家和一般标注的公开数据集，计算各亚群体FPR/FNR，量化偏差。
+
+- required_evidence_cn：至少一个数据集中存在某个亚群体FPR显著偏高的证据。
+
+- transition_to_next_cn：由“偏差存在且专家标注稀缺”引向“如何用少量专家标注”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：文献综述分成两到三支，并在最后用表格对比现有方法缺少哪些能力。
+
+- research_job_cn：梳理去偏与弱监督两类文献，明确交叉缺口。
+
+- required_evidence_cn：能确认现有方法在“语言差异”和“小样本”两维度上至少缺一。
+
+- transition_to_next_cn：以交叉缺口引出本文的设计目标和原创组件。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把设计目标分解为若干挑战，再将每个挑战对应到一个技术组件。
+
+- research_job_cn：设计方法架构，描述每个组件的输入、输出和与挑战的对应关系。
+
+- required_evidence_cn：每个组件有清晰的算法/流程描述和可运行实现。
+
+- transition_to_next_cn：进入实验设置，说明为什么选择这些数据集和指标。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：设置多层级基准、重复实验、统一训练样本，确保公平比较。
+
+- research_job_cn：用相同少量专家标注微调所有基准，多次随机划分。
+
+- required_evidence_cn：至少一个主结果表显示提出方法全面领先或关键指标领先。
+
+- transition_to_next_cn：把“总体性能”推进到“公平性”。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告分组公平性指标和Avg SP，证明性能不是以牺牲某群体为代价。
+
+- research_job_cn：用group estimator或已知标签划分亚组，计算组间差异。
+
+- required_evidence_cn：提出方法在公平性指标上不差于甚至优于强baseline。
+
+- transition_to_next_cn：用组件消融解释为什么性能与公平性同时改善。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：通过移除/替换每个组件，把整体效果归因到具体设计。
+
+- research_job_cn：对每个关键组件做控制实验。
+
+- required_evidence_cn：每个关键组件的移除都带来显著下降。
+
+- transition_to_next_cn：用可视化/机制证据补充“为什么有效”。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用可视化、学习曲线、计算成本和外部案例展示机制、规模效应和实际可用性。
+
+- research_job_cn：做PCA/机制可视化；改变训练规模；测时间；用外部未见案例测试。
+
+- required_evidence_cn：至少一种独立证据表明机制、规模稳健性或成本可接受。
+
+- transition_to_next_cn：用另一个亚群体或数据集测试一般化。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：在另一情境中复现主要结果，并在讨论中回到引言缺口，提炼理论和实践含义。
+
+- research_job_cn：扩展实验到另一个群体/领域，然后撰写理论贡献、实践建议与局限。
+
+- required_evidence_cn：至少有一组扩展数据结果与主结果方向一致。
+
+- transition_to_next_cn：以局限和未来方向收束。
+
+### most_transferable_moves_cn
+
+1. 用两流文献的交叉矩阵定义研究缺口
+
+2. 把研究问题分解为技术上可定位的多个挑战，每个挑战对应一个组件
+
+3. 统一所有基准的训练样本与重复次数，增强比较可信度
+
+4. 用“总体→公平→消融→机制→稳健→推广”的六级证据链组织实验
+
+5. 用Avg SP等公平性指标防止“只报平均性能”的批评
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要能访问专家标注的数据集（WH16、VTWK21）或自行构建专家标注流程
+
+2. 需要训练group estimator或引用已有群体识别模型
+
+3. 需要构建并维护仇恨目标词表（Wikipedia、Hatebase、Urban Dictionary）
+
+4. 大量baseline复现和20次重复实验需要较多GPU时间
+
+5. LGBTQ+数据构造涉及账号筛选、MTurk标注和专家复核，成本较高
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“两阶段框架”而没有可运行的pair generator与prompt设计
+
+2. 不能只报告总体F1，而不报告各群体公平性和Avg SP
+
+3. 不能宣称“首次”而只引用少量文献
+
+4. 不能用“知识注入”作为标签而不展示外部词表、变体匹配和消融证据
+
+5. 不能把LGBTQ+单一样本推广为普适结论，必须有边界条件
+
+- single_best_description_of_the_routine_cn：先用量化证据让一个真实的偏差问题成立，再把问题拆成技术挑战，针对每个挑战设计一个可消融验证的组件，最后用从总体到机制再到推广的递进实验把性能优势转化为可复用的设计知识。
+
+## 分析边界
+
+全文以Markdown/文本形式提供，章节清晰，但没有原始PDF页码；部分表格与图片为嵌入形式，分析依赖文字描述与表格标题；无法验证OCR是否完全保留公式和附录细节；句子级mapping基于段落与句子位置合理推定，未使用逐字OCR页码。

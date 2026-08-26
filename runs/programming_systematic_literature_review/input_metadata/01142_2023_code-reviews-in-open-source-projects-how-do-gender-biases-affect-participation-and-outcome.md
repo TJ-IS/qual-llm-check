@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85161015674"
+title: "Code reviews in open source projects : how do gender biases affect participation and outcomes?"
+authors: "Sultana S.; Turzo A.K.; Bosu A."
+year: "2023"
+journal: "Empirical Software Engineering"
+doi: "10.1007/s10664-023-10324-9"
+---
+# Scopus title-abstract-keyword metadata
+Title: Code reviews in open source projects : how do gender biases affect participation and outcomes?
+Abstract: Context: Contemporary software development organizations lack diversity, and the ratios of women in Free and Open-Source Software (FOSS) communities are even lower than the industry average. Although the results of recent studies hint at the existence of biases against women, it is unclear to what extent such biases influence the outcomes of various software development tasks. Objective: This study conceptually replicates two recent studies by Terrell et al. and Bosu and Sultana that investigated gender biases in FOSS communities. We aim to identify whether the outcomes of or participation in code reviews (or pull requests) are influenced by the gender of a developer. In particular, we focus on two outcome aspects (i.e., code acceptance, and review interval) and one participation aspect (i.e., code review participation) of code review processes. Method: With this goal, this study includes a total of 1010 FOSS projects. Ten out of those projects use Gerrit-based code reviews. The remaining 1000 are randomly selected from the GHTorrent dataset based on a stratified sampling of projects fitting certain criteria. We divided GitHub projects into four groups based on the number of distinct contributors. We developed six regression models for each of the 14 datasets (i.e., 10 Gerrit based and 4 GitHub-based) to identify if code acceptance, review intervals, and code review participation differ based on the gender and gender-neutral profile of a developer. Results: Our results find significant gender biases during code acceptance among 13 out of the 14 datasets, with seven favoring men and the remaining six favoring women. We found significant differences between men and women in terms of code review intervals, with women encountering longer delays than men in three cases and the opposite in seven. Our results indicate reviewer selection as one of the most gender-biased aspects, with 12 out of 14 datasets exhibiting bias. A total of 11 out of the 14 cases show women having significantly lower code review participation than their men colleagues. Since most of the review assignments are based on invitations, this result suggests possible affinity biases among the developers. We also noticed a significantly higher likelihood of women using gender-neutral profiles. Supporting Terrell et al.’s claim, women with gender-neutral profiles had higher odds of code acceptance than men among three Gerrit-based projects. However, contradicting their results, we found significantly lower odds of code acceptance for women with gender-neutral profiles across all four GitHub project groups. Conclusions: Though gender bias exists among many projects, the direction and amplitude of that bias vary based on project size, community, and culture. Similar bias mitigation strategies may not work across all communities, as the characteristics of biases and their underlying causes differ. As women are less likely to be invited for reviews, FOSS projects should take initiatives to ensure the equitable selection of women as reviewers. © 2023, The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature.
+Author keywords: Code review; Diversity and inclusion; Gender bias; Pull requests
+Index keywords: Codes (symbols); Open systems; Regression analysis; Software design; Code review; Diversity and inclusion; Free and open source softwares; Gender bias; Gender neutrals; Open source projects; Open source software community; Open source software projects; Pull request; Software development organizations; Open source software
+Document type: Article
+Conference: 
+Source title: Empirical Software Engineering
+Year: 2023
+EID: 2-s2.0-85161015674
+DOI: 10.1007/s10664-023-10324-9
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

@@ -1,0 +1,1135 @@
+{
+  "record_id": "12250",
+  "source_file": "12250_2024_the-effects-of-featuring-product-sampling-reviews-on-e-tailer-websites.md",
+  "title": "The Effects of Featuring Product Sampling Reviews on E-Tailer Websites",
+  "authors": "Xianghua Lu; Chee Wei Phang; Sulin Ba; Xinlin Yao",
+  "year": "2024",
+  "journal": "Journal of the Association for Information Systems",
+  "doi": "10.17705/1jais.00834",
+  "fulltext_chars": 125718,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:47.219988+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在电商网站上突出展示由免费产品试用激励的赞助评论，会对产品销量和后续有机评论生成产生什么净效应，其正面和负面影响的消费者心理机制是什么？",
+    "artifact_and_design_cn": "研究对象不是由作者构建的新系统，而是电商平台在商品评价页顶部设置的一个“赞助产品试用评论”展示位；该展示位明确标注赞助性质，与既有有机评论并列展示。Study 2构造了四种评论展示版本：有机评论、全部正面的赞助产品试用评论、现金付费评论、包含部分负面内容的赞助产品试用评论。",
+    "objective_outcomes_cn": "Study 1基于真实平台面板数据发现：突出展示赞助产品试用评论显著提升日销量，但显著降低日有机评论量；通过中介分析，有机评论量下降对销量有负向间接效应，但总效应仍显著为正。Study 2情境实验发现：与有机评论相比，赞助产品试用评论通过提升品牌质量感知提升购买意愿，同时通过提升感知不公平降低消费者贡献有机评论的意愿；与现金付费评论相比，赞助产品试用评论在品牌质量感知、购买意愿和贡献意愿上都更优。",
+    "core_contribution_cn": "在电商交易环境中用真实销售数据评估赞助产品试用评论的净销量效应，打开“质量信号—购买”和“不公平感—有机评论减少”的双重机制，并把产品试用型赞助评论与现金型赞助评论明确区分开来。",
+    "whole_argument_in_one_paragraph_cn": "作者先从在线评论对购买影响这一公认背景出发，指出企业正越来越多地利用免费产品试用激励赞助评论并带有披露地展示在商品页。随后把问题收缩为：这类产品试用评论虽然可能通过质量信号促进销售，但也可能因不公平感抑制有机评论生成，而有机评论又影响销售，因此需要看净效应。文献回顾显示已有赞助评论研究多集中在博客情境、现金激励或未同时追踪销售与有机评论，形成四个缺口。基于信号理论和公平理论，作者提出H1/H2/H3竞争性假设。Study 1利用中国电商平台2013年前后开始突出展示赞助产品试用评论的自然实验，通过DID、PSM和Bootstrap中介分析证明销量上升、有机评论量下降、净效应仍为正。Study 2用四版本情境实验证明品牌质量感知和不公平感是两条机制，同时用有机评论和付费评论作为baseline，进一步显示产品试用评论的独特性。讨论部分把净效应和双重机制回接到文献缺口，给出实践建议并承认“突出展示”与“评论内容”尚不能完全分离等边界条件。"
+  },
+  "paper_archetype": "multi_method_or_multi_study_program",
+  "paper_archetype_reason_cn": "论文包含两个异质但互补的实证研究：Study 1是真实平台自然实验加上面板DID/PSM/中介分析，Study 2是随机情境实验加PLS中介分析；两研究分别回答“净效应是否存在”和“为什么存在”，属于多方法、多Study累积完成贡献的套路。",
+  "dominant_writing_arc": "phenomenon_mechanism_intervention_field_test",
+  "dominant_writing_arc_reason_cn": "写作主线是：先描述电商平台上的赞助产品试用评论现象，再用信号理论和公平理论提出正负机制，随后用真实平台上的展示干预和后续情境实验检验因果机制与净效应，最后回到理论解释和实践边界；不涉及算法benchmark或设计原则构建。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "第一阶段刻画Study 1数据的干预物属性和控制/处理组来源；第二阶段用DID检验突出展示赞助产品试用评论对销量和有机评论量的主要效应；第三阶段用平行趋势和动态价格检验稳健性；第四阶段用中介分析检验有机评论量的路径并估计净销量效应；第五阶段用情境实验识别品牌质量感知和感知不公平两条心理机制，并以有机评论、付费评论为baseline区分产品试用评论的独特性。五个阶段从“有没有净效应”推进到“为什么有净效应”，最后在讨论中整合。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "Study 1数据情境与干预物内容刻画",
+        "question_cn": "平台上的赞助产品试用评论与有机评论在内容上如何不同？突出展示的处理组和控制组如何形成？",
+        "inputs_and_setting_cn": "中国某头部电商平台；217个参与产品采样活动的产品；2013年8月6日至2014年1月6日的销售与有机评论面板；从10万有机评论中随机抽取1000条与赞助试用评论编码比较。",
+        "designed_or_compared_object_cn": "赞助产品试用评论 vs 有机评论的内容特征；已突出展示与未突出展示赞助试用评论的产品页面。",
+        "baseline_control_or_counterfactual_cn": "有机评论作为内容比较的参照；未突出展示赞助评论的产品组作为后续DID的控制组。",
+        "objective_metrics": [
+          "长度",
+          "正面要点数量",
+          "负面要点数量",
+          "提及产品特征数量"
+        ],
+        "analysis_method_cn": "评论内容编码、描述性比较；平台产品分配说明。",
+        "main_result_cn": "赞助产品试用评论比有机评论更长、更正面、信息更丰富，但也包含少量负面描述；控制组67个产品在观察期内未展示赞助评论。",
+        "argumentative_role_cn": "确立干预物的现实性质：它并非简单广告，而是内容上信息量更大的评论；为后续销量和有机评论量效应提供可解释的处理对象。",
+        "remaining_uncertainty_cn": "内容差异本身是否足以解释销售变化尚不清楚。",
+        "link_to_next_phase_cn": "自然引出基于处理/控制组比较的DID设计。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 1",
+          "Table 2",
+          "Figure 3"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "Study 1主效应检验：PSM与DID",
+        "question_cn": "突出展示赞助产品试用评论是否提升销量并减少后续有机评论量？",
+        "inputs_and_setting_cn": "PSM后的平衡日面板，31,978条观测，211个产品；处理组147个产品，控制组66个产品；2013年8月6日至2014年1月6日。",
+        "designed_or_compared_object_cn": "处理=产品页面突出展示赞助产品试用评论；控制=未展示。",
+        "baseline_control_or_counterfactual_cn": "展示前的销售与评论水平；未展示赞助评论的对照产品。",
+        "objective_metrics": [
+          "log(dailysales)",
+          "log(dailypost)"
+        ],
+        "analysis_method_cn": "倾向得分匹配后做DID回归，固定产品效应和日期效应，LSDV聚类稳健标准误；补充两步法估计时间不变变量。",
+        "main_result_cn": "treatment×time对日销量显著为正，对日有机评论量显著为负；H1a和H2a得到支持。",
+        "argumentative_role_cn": "证明该展示策略确实同时产生一正一负两个主要效应，为后续净效应和机制分析提供基础。",
+        "remaining_uncertainty_cn": "DID依赖无预趋势和可观测选择偏差；平台分配虽称任意，但可能存在不可观测偏差。",
+        "link_to_next_phase_cn": "需要稳健性检验排除平行趋势和静态价格问题。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Table 3",
+          "Table 4",
+          "Table 5",
+          "Table 6",
+          "Figure 4"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Study 1稳健性检验：平行趋势与动态价格",
+        "question_cn": "主要效应是否受展示前已有趋势、静态价格假设的影响？",
+        "inputs_and_setting_cn": "与上一阶段相同的面板；68个有日度价格信息的产品子样本。",
+        "designed_or_compared_object_cn": "展示前三周、两周、一周的相对时间虚拟变量；动态日度价格替代静态价格。",
+        "baseline_control_or_counterfactual_cn": "展示前第四周作为相对时间模型的baseline；主模型静态价格作为参照。",
+        "objective_metrics": [
+          "treatment×lead 系数",
+          "treatment×time 系数"
+        ],
+        "analysis_method_cn": "相对时间DID模型；加入日度价格的DID模型。",
+        "main_result_cn": "展示前各周lead均不显著，支持平行趋势；加入动态价格后结果与主模型相似。",
+        "argumentative_role_cn": "保护DID因果推断，防止把已有趋势或价格变化误读为处理效应。",
+        "remaining_uncertainty_cn": "仍可能存在难以观测的产品异质性。",
+        "link_to_next_phase_cn": "主效应稳健后，需要把两个效应放到一个关系结构中检验净效应。",
+        "evidence_pointers": [
+          "Section 4.3",
+          "Table A3",
+          "Table A4"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Study 1净效应中介分析",
+        "question_cn": "在考虑有机评论量下降对销量的负向影响后，赞助产品试用评论的净销量效应是正还是负？",
+        "inputs_and_setting_cn": "匹配后面板中用于中介方程的3,174条观测；变量包括日销量、日有机评论量、日有机评论效价、累积评论量、累积评分、PSM协变量等。",
+        "designed_or_compared_object_cn": "处理=展示赞助产品试用评论；路径包括赞助评论→有机评论量→销量，赞助评论→有机评论效价→销量，以及直接路径。",
+        "baseline_control_or_counterfactual_cn": "未展示赞助评论的产品；用avgsale_before控制采样活动本身对销量的影响。",
+        "objective_metrics": [
+          "有机评论量特定间接效应",
+          "有机评论效价特定间接效应",
+          "总效应"
+        ],
+        "analysis_method_cn": "多方程中介模型加Bootstrap 5,000次置信区间。",
+        "main_result_cn": "经由有机评论量的负向间接效应显著，经由效价的间接效应不显著；总效应显著为正，支持H3a，拒绝H3b。",
+        "argumentative_role_cn": "把前两步发现的独立效应组合为“净销量仍为正”的核心主张，回应引言中最重要的实践问题。",
+        "remaining_uncertainty_cn": "场数据无法显示消费者为何减少有机评论，即心理机制仍是黑箱。",
+        "link_to_next_phase_cn": "Study 2需要打开中介心理机制。",
+        "evidence_pointers": [
+          "Section 4.4",
+          "Table 7",
+          "Table 8",
+          "Figure 5"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "Study 2情境实验与心理机制检验",
+        "question_cn": "赞助产品试用评论是否会通过品牌质量感知提升购买意愿、通过感知不公平降低贡献有机评论意愿？与有机评论和付费评论相比有何不同？",
+        "inputs_and_setting_cn": "专业市场调研公司的一般消费者在线面板；389名有电商购物经验的受访者；四版本场景问卷：有机评论、全正面赞助试用评论、现金付费评论、混合正负面的赞助试用评论。",
+        "designed_or_compared_object_cn": "页面顶端展示的评论类型；品牌为虚构品牌，产品为扫地机器人，评论内容除混合版本外保持一致。",
+        "baseline_control_or_counterfactual_cn": "有机评论作为主要baseline；现金付费评论作为区分激励性质的参照；全正面赞助试用评论作为混合版本的参照。",
+        "objective_metrics": [
+          "购买意愿",
+          "贡献新有机评论意愿",
+          "品牌质量感知",
+          "感知不公平"
+        ],
+        "analysis_method_cn": "均值比较/ANOVA，SmartPLS 3 PLS路径模型，Bootstrap 5,000次中介检验。",
+        "main_result_cn": "赞助产品试用评论比有机评论显著提升品牌质量感知并通过它提升购买意愿；比有机评论显著提升感知不公平并通过它降低贡献有机评论意愿；比现金付费评论在品牌质量、购买意愿和贡献意愿上更优。混合正负面的赞助试用评论与全正面版本在购买意愿和品牌质量上无显著差异，但显著降低不公平感并提高贡献意愿。",
+        "argumentative_role_cn": "用实验证据打开Study 1中净销量和有机评论量下降背后的心理机制，同时通过与付费评论比较说明“产品试用”激励的独特性。",
+        "remaining_uncertainty_cn": "实验测量的是行为意向而非真实购买/真实评论行为；场景为虚构产品。",
+        "link_to_next_phase_cn": "最后进入讨论，整合两研究并界定特征内容与突出展示不可分离等边界。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Section 5.2",
+          "Section 5.3",
+          "Figure 6",
+          "Figure 7",
+          "Figure 8",
+          "Figure 9",
+          "Table 9",
+          "Table 10",
+          "Table A5-A8"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "用在线评论影响购买建立背景",
+      "描述企业以免费产品试用激励评论并披露展示的做法",
+      "指出净效应不明确、可能影响有机评论生成",
+      "概括Study 1真实数据结果：销量升、有机评论量降、净效应为正",
+      "概括Study 2实验揭示的品牌质量和不公平感知机制",
+      "声明对研究者和实践者的方向意义"
+    ],
+    "introduction_moves": [
+      "在线评论重要性→企业主动利用评论→赞助评论定义",
+      "现金激励争议→非现金免费样品越来越常见",
+      "消费者对非现金激励接受度更高",
+      "产品试用可作为质量信号→展示试用评论可促销售",
+      "引入潜在负面作用：可能影响有机评论生成",
+      "用公平理论提出不公平感机制",
+      "有机评论影响销售→必须评估净效应→研究缺口",
+      "预告两项研究并概括主要发现",
+      "分条声明研究贡献和实践重要性",
+      "给出论文结构路线图"
+    ],
+    "theory_and_knowledge_moves": [
+      "回顾赞助评论披露与非披露研究并说明结果不一",
+      "指出以往研究多集中在博客和现金激励",
+      "梳理最近电商情境下赞助评论销售效应研究",
+      "逐条构造四个缺口：是否值得使用、非现金激励、对有机评论影响、机制缺乏",
+      "引入信号理论解释正面效应",
+      "引入公平理论解释负面效应",
+      "基于WOM销量文献提出竞争性净效应假设"
+    ],
+    "artifact_design_moves": [
+      "说明平台采样活动流程和产品页面展示方式",
+      "说明选择样本、申请、抽中、撰写评论的流程",
+      "明确2013年9月6日开始在评论页顶部突出展示一条赞助评论并带标识",
+      "说明控制组来自平台未展示赞助评论的产品",
+      "Study 2设计四版评论场景并保持产品、品牌、内容可控",
+      "选择扫地机器人和虚构品牌以减少偏好干扰"
+    ],
+    "evaluation_moves": [
+      "解释DID为什么适合消除时间与组间固定偏差",
+      "用PSM平衡处理组与控制组",
+      "用t检验和核密度图报告匹配效果",
+      "通过平行趋势检验排除预趋势",
+      "用动态价格子样本检验价格设定",
+      "用多方程中介和Bootstrap估计净效应",
+      "在实验中用ANOVA和PLS中介检验机制"
+    ],
+    "discussion_and_contribution_moves": [
+      "把总体发现重新表述为“销量升、有机评论量降、净效应为正”",
+      "回应Kim等人的呼吁并强调电商环境直接追踪销售的贡献",
+      "把三类贡献与引言缺口一一对应",
+      "建议实践者使用该策略但设置有机评论量下降阈值并降低不公平感",
+      "承认“突出展示”和“评论内容”效果不可完全分离",
+      "提出未来研究：多种展示方式、多个评论、内容质量、消除未观测异质性"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "信号理论（Spence, 1973）",
+      "公平理论（Huppertz et al., 1978; Oliver & Swan, 1989; Blodgett et al., 1997）",
+      "WOM与销量关系文献（Chevalier & Mayzlin, 2006; Duan et al., 2008等）",
+      "现金与非现金激励对消费评价影响的文献（Heyman & Ariely, 2004; Lu et al., 2014）"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "理论很好地决定了要检验的机制、构念和对比条件，但核心干预物“突出展示赞助产品试用评论”来自平台的商业实践而非由理论推导构建；作者并未设计新的电商系统，而是把理论用于解释和实验操纵。",
+    "translation_chain_cn": "产品试用免费样品→被理解为品牌对质量的信心→降低消费者决策不确定性→提升品牌质量感知→提高购买意愿；与此同时，部分消费者获得免费样品而其他消费者需付费写评论→分配不公平和程序不公平→感知不公平→降低贡献有机评论意愿；最后，有机评论量下降对销售有负作用，但赞助评论带来的直接销量和产品知晓效应足以抵消，因此净效应为正。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "免费产品试用可被消费者解读为品牌对产品质量有信心的信号",
+        "mechanism_cn": "消费者把“愿意提供样品供检验”推断为质量保证，降低购买不确定性",
+        "design_requirement_cn": "赞助评论需要能让人识别出它来自免费样品试用",
+        "artifact_choice_cn": "在评论页顶部突出展示明确披露的赞助产品试用评论",
+        "evaluated_contrast_cn": "赞助产品试用评论 vs 有机评论；赞助产品试用评论 vs 付费评论",
+        "objective_result_cn": "参与者在赞助产品试用评论场景下品牌质量感知更高，并通过品牌质量感知提高购买意愿",
+        "evidence_pointers": [
+          "Section 3 H1a/H1b",
+          "Section 5.2 图7",
+          "Section 5.3 表9/表10"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "公平理论中分配公平和程序公平受损会降低个体贡献意愿",
+        "mechanism_cn": "看到别人因免费样品写评论，而自己需付费并花费时间写评论，产生不公平感",
+        "design_requirement_cn": "需要让展示模式包含激励信息，使消费者能察觉部分评论者获得了样品",
+        "artifact_choice_cn": "赞助产品试用评论与有机评论并列展示并披露“样品试用”来源",
+        "evaluated_contrast_cn": "赞助产品试用评论 vs 有机评论在贡献新有机评论意愿上的差异",
+        "objective_result_cn": "赞助产品试用评论显著提高感知不公平，并通过感知不公平降低贡献新有机评论意愿",
+        "evidence_pointers": [
+          "Section 3 H2a/H2b",
+          "Section 5.3 表9/表10"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "有机评论量通过提高知晓度和知名度促进销售，评论量下降会削弱销售",
+        "mechanism_cn": "赞助评论可以减少有机评论量，从而对销售产生负向间接效应",
+        "design_requirement_cn": "必须同时追踪销量和有机评论量才能估计净效应",
+        "artifact_choice_cn": "平台从2013年9月6日起在部分产品页突出展示赞助评论，另一部分产品页不展示，形成处理与控制",
+        "evaluated_contrast_cn": "处理组与对照组在展示前后的销售和有机评论量差异",
+        "objective_result_cn": "有机评论量下降对销售的路径系数为负且显著，但总效应仍为正",
+        "evidence_pointers": [
+          "Section 4.4 表8"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "现金激励激活市场交换规范，非现金激励更像试用心得",
+        "mechanism_cn": "付费评论被理解为购买推荐，产品试用评论被理解为产品体验评估",
+        "design_requirement_cn": "在对比中设置现金付费评论条件",
+        "artifact_choice_cn": "Study 2的四种场景包括付费评论版本",
+        "evaluated_contrast_cn": "赞助产品试用评论 vs 付费评论",
+        "objective_result_cn": "赞助产品试用评论在品牌质量、购买意愿、贡献意愿上均优于付费评论，不公平感低于付费评论",
+        "evidence_pointers": [
+          "Section 5.2 图7/图8"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "真实平台自然实验：以平台是否突出展示赞助评论形成处理/控制",
+      "DID：比较处理组与控制组在展示前后销售和有机评论量变化",
+      "PSM：平衡处理组与控制组的可观测特征",
+      "稳健性：平行趋势检验、动态价格子样本",
+      "Bootstrap中介分析：估计有机评论量和效价的间接效应",
+      "在线情境实验：随机分配四版评论场景",
+      "PLS-SEM中介分析：检验品牌质量感知和感知不公平机制"
+    ],
+    "why_these_evaluations_cn": "由于处理发生时不是完全随机，需要DID和PSM消除时间、组间和可观测偏差；由于主要效应一正一负，需要中介分析估计净效应；由于场数据无法揭示心理机制，需要实验来检验信号机制和公平机制；由于产品试用评论常被与付费评论混为一谈，需要设置付费评论和有机评论作为比较基准。",
+    "benchmark_and_contrast_chain_cn": "第一阶段用有机评论作为内容特征基准；第二阶段用未展示赞助评论的产品作为反事实基准；第四阶段用有机评论量和效价作为中介路径基准；第五阶段用有机评论和付费评论作为感知和决策基准。各基准层层服务不同论证目标：内容性质、因果效应、净效应、机制独特性。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "突出展示赞助产品试用评论提升产品销量",
+        "evidence_cn": "Study 1 DID中treatment×time对log(dailysales)显著为正；配对t检验和动态价格稳健性一致",
+        "status_cn": "得到较强支持"
+      },
+      {
+        "claim_cn": "突出展示赞助产品试用评论减少后续有机评论量",
+        "evidence_cn": "Study 1 DID中treatment×time对log(dailypost)显著为负；配对t检验和平行趋势检验一致",
+        "status_cn": "得到较强支持"
+      },
+      {
+        "claim_cn": "净销量效应仍为正",
+        "evidence_cn": "Study 1中介分析显示经由有机评论量的负向间接效应显著，但总效应95%CI为[0.082, 0.362]，不含0",
+        "status_cn": "得到支持"
+      },
+      {
+        "claim_cn": "品牌质量感知是产品试用评论促进购买意愿的机制",
+        "evidence_cn": "Study 2中赞助试用评论提升品牌质量感知，品牌质量感知提升购买意愿，间接效应95%CI为[0.002, 0.061]",
+        "status_cn": "得到支持"
+      },
+      {
+        "claim_cn": "感知不公平是产品试用评论降低有机评论贡献意愿的机制",
+        "evidence_cn": "Study 2中赞助试用评论提升感知不公平，感知不公平降低贡献意愿，间接效应95%CI为[-0.260, -0.134]",
+        "status_cn": "得到支持"
+      },
+      {
+        "claim_cn": "产品试用评论优于现金付费评论",
+        "evidence_cn": "Study 2均值比较和PLS模型显示在购买意愿、贡献意愿、不公平感上均优于付费评论",
+        "status_cn": "得到支持"
+      },
+      {
+        "claim_cn": "混合正负面内容的产品试用评论不会损害购买意愿",
+        "evidence_cn": "Study 2显示混合版本与全正面版本在购买意愿和品牌质量上无显著差异，且不公平感更低、贡献意愿更高",
+        "status_cn": "探索性结果，作者承认可能有相互抵消机制"
+      }
+    ],
+    "internal_validity_strategy_cn": "Study 1使用DID去除时间趋势和组间固定差异，用PSM减少处理组选择偏差，用平行趋势检验排除预趋势，用动态价格检验排除价格设定偏误，控制产品固定效应、日期固定效应和相关协变量；Study 2使用随机分配、虚构品牌、恒定评论内容、心理测量质量检验和PLSBootstrap。",
+    "external_validity_strategy_cn": "Study 1使用真实电商平台217个产品、超过33,000条日观测，涉及16个产品类别，并与平台管理者确认控制组形成的任意性；Study 2使用专业市场调研公司的一般消费者样本而非学生样本，选择新兴产品扫地机器人以减少既有偏好。",
+    "what_is_not_actually_tested_cn": "Study 1无法完全区分“被突出展示”的注意效应与“赞助试用评论内容”本身的影响；Study 2只测行为意向而非真实购买和真实评论提交；平台产品范围限于中国单一电商平台；没有直接检验长期品牌后果、不同展示方式（独立专区vs顶部置顶）和多个赞助评论并存的效果；混合评论的相互抵消机制是推测而非直接检验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "没有新的算法或技术方法；技术性主张主要是DID/PSM/中介组合能识别真实平台中赞助评论的净效应。",
+    "artifact_claim_cn": "“突出展示赞助产品试用评论”这一平台设计特征导致销量上升和有机评论量下降；净效应仍为正。",
+    "mechanism_claim_cn": "正面机制是品牌质量感知，负面机制是感知不公平；这是净效应的理论解释。",
+    "boundary_claim_cn": "结论适用于电商网站上突出展示、明确披露、以免费产品为激励的赞助评论情境；对评论量已经很小的产品需要特别注意负面效应。",
+    "reusable_design_knowledge_cn": "电商平台可以设置明确披露的产品采样评论展示位来主动利用评论；使用时应监测有机评论量下滑，可通过随机分配样品、强调公平以及未来设置独立专区来缓解不公平感。",
+    "theoretical_contribution_cn": "把信号理论和公平理论整合进赞助评论研究，解释同一干预为何同时产生正面和负面后果；区分产品试用型赞助评论与现金型赞助评论，扩展了赞助评论类型学。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分直接回到引言提出的“净效应不明”和“机制缺失”缺口：真实销售数据解决了净效应问题，实验机制解决了黑箱问题；同时回应Kim等人呼吁并强调与博客情境研究的不同。",
+    "overclaim_or_unsupported_leaps_cn": "作者承认突出展示和评论内容不可分离，但在贡献表述中仍把“展示产品试用评论”整体视为干预物；混合评论部分用“竞争机制相互抵消”解释等价结果，属于事后解释而非预先假设；从“感知不公平降低贡献意愿”到“真实有机评论量下降”仍有一定推断跳跃，因为Study 2没有观察真实评论行为。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在线产品评论对消费者购买有重大影响，因此企业试图更主动地利用评论影响。",
+      "rhetorical_function_cn": "为全文设置最重要背景：评论重要，所以企业主动干预有价值。",
+      "depends_on_cn": "依赖已有在线评论与购买关系的普遍认知。",
+      "sets_up_cn": "引出企业用免费样品激励评论这一具体做法。",
+      "evidence_pointer": "Abstract第1句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "一种主动做法是赠送免费产品样品以激励评论，并在既有有机评论中披露展示这些评论。",
+      "rhetorical_function_cn": "描述研究对象和干预形式。",
+      "depends_on_cn": "承接企业主动利用评论的背景。",
+      "sets_up_cn": "明确研究对象是“产品采样赞助评论”而非一般付费评论。",
+      "evidence_pointer": "Abstract第2句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "尚不清楚这种评论是否真的有利于销售，因为它可能对有机评论的生成产生不可忽视的影响。",
+      "rhetorical_function_cn": "提出核心不确定性：不能只看直接效应，还要考虑对有机评论的间接效应。",
+      "depends_on_cn": "基于产品采样评论与有机评论共存的平台事实。",
+      "sets_up_cn": "引出净效应和有机评论量两个关键结果。",
+      "evidence_pointer": "Abstract第3句"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "基于中国电商平台数据发现赞助产品采样评论提升销量但也减少目标产品有机评论量，净效应仍为正。",
+      "rhetorical_function_cn": "提前给出最核心经验结果，吸引读者并预告贡献。",
+      "depends_on_cn": "依赖真实平台数据可得。",
+      "sets_up_cn": "为实践建议铺垫。",
+      "evidence_pointer": "Abstract第4句"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "情境实验揭示产品采样评论如何影响品牌质量感知和公平感知。",
+      "rhetorical_function_cn": "预告第二研究的作用是打开机制。",
+      "depends_on_cn": "Study 1只给出总效应。",
+      "sets_up_cn": "说明全文论证链从效应到机制。",
+      "evidence_pointer": "Abstract第5句"
+    },
+    {
+      "order": 6,
+      "section": "1 Introduction",
+      "locator": "Introduction P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在线评论在消费者购买决策中举足轻重，企业越来越积极地利用评论影响力。",
+      "rhetorical_function_cn": "建立文献和实践双重背景。",
+      "depends_on_cn": "引用的在线评论文献。",
+      "sets_up_cn": "引导到赞助评论这一主动利用方式。",
+      "evidence_pointer": "Introduction第1段前半"
+    },
+    {
+      "order": 7,
+      "section": "1 Introduction",
+      "locator": "Introduction P1 S3-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "赞助评论指因激励而发布的在线评论；激励可以是现金、券、折扣或免费样品，且需披露赞助状态。",
+      "rhetorical_function_cn": "给出关键构念的操作化定义。",
+      "depends_on_cn": "沿用Petrescu等的定义。",
+      "sets_up_cn": "将研究对象限定在已披露的赞助评论。",
+      "evidence_pointer": "Introduction第1段"
+    },
+    {
+      "order": 8,
+      "section": "1 Introduction",
+      "locator": "Introduction P2 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "现金激励有争议，因此用免费产品样品换取评论的做法越来越普遍，如Amazon Vine。",
+      "rhetorical_function_cn": "说明本研究的现实切入点是免费样品赞助评论。",
+      "depends_on_cn": "承接激励形式分类。",
+      "sets_up_cn": "引出非现金激励为何值得单独研究。",
+      "evidence_pointer": "Introduction第2段"
+    },
+    {
+      "order": 9,
+      "section": "1 Introduction",
+      "locator": "Introduction P3 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "研究显示消费者认为非现金激励的赞助评论比现金激励更可接受，现金容易被看作购买推荐。",
+      "rhetorical_function_cn": "利用已有证据说明免费样品激励具有独特性质。",
+      "depends_on_cn": "依赖消费者对激励归因的研究。",
+      "sets_up_cn": "为正面机制提供理论基础。",
+      "evidence_pointer": "Introduction第3段"
+    },
+    {
+      "order": 10,
+      "section": "1 Introduction",
+      "locator": "Introduction P4 S1-S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "产品采样本身可成为质量信号，展示采样评论因而能进一步传递质量并促进销售。",
+      "rhetorical_function_cn": "引入第一个正面机制。",
+      "depends_on_cn": "信号理论和采样研究。",
+      "sets_up_cn": "对应后续H1b。",
+      "evidence_pointer": "Introduction第4段前半"
+    },
+    {
+      "order": 11,
+      "section": "1 Introduction",
+      "locator": "Introduction P4 S3-S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "但展示赞助评论可能影响非激励消费者继续写有机评论；Amazon研究发现活动后验证评论减少，作者认为可能来自公平感问题。",
+      "rhetorical_function_cn": "引入负面机制和前人不充分之处。",
+      "depends_on_cn": "Petrescu等的发现。",
+      "sets_up_cn": "引出公平理论和H2。",
+      "evidence_pointer": "Introduction第4段后半"
+    },
+    {
+      "order": 12,
+      "section": "1 Introduction",
+      "locator": "Introduction P5 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "由于有机评论影响销售，赞助评论引致有机评论减少可能反噬销售，因此必须考察净销量效应。",
+      "rhetorical_function_cn": "把一般问题收缩为可研究的净效应问题。",
+      "depends_on_cn": "有机评论—销量关系文献。",
+      "sets_up_cn": "明确本文要填补的缺口。",
+      "evidence_pointer": "Introduction第5段"
+    },
+    {
+      "order": 13,
+      "section": "1 Introduction",
+      "locator": "Introduction P6 S1-S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为填补缺口，作者与某中国电商合作，使用真实销售和评论数据检验产品采样评论对后续有机评论量和整体销量的影响。",
+      "rhetorical_function_cn": "正式提出研究目标和数据来源。",
+      "depends_on_cn": "对净效应缺口的论证。",
+      "sets_up_cn": "预告Study 1。",
+      "evidence_pointer": "Introduction第6段"
+    },
+    {
+      "order": 14,
+      "section": "1 Introduction",
+      "locator": "Introduction P6 S4-S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Study 1发现突出展示采样评论增加销量但减少有机评论，考虑有机评论损失后净效应仍为正。",
+      "rhetorical_function_cn": "提前给出最核心结论。",
+      "depends_on_cn": "真实面板数据分析。",
+      "sets_up_cn": "说明净正效应这一主要贡献。",
+      "evidence_pointer": "Introduction第6段末尾"
+    },
+    {
+      "order": 15,
+      "section": "1 Introduction",
+      "locator": "Introduction P7 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study 2用389名网购者的情境实验考察品牌质量感知和不公平感如何影响购买意愿和评论贡献意愿。",
+      "rhetorical_function_cn": "预告第二研究并为机制做铺垫。",
+      "depends_on_cn": "需要解释Study 1的黑箱。",
+      "sets_up_cn": "引出机制贡献。",
+      "evidence_pointer": "Introduction第7段"
+    },
+    {
+      "order": 16,
+      "section": "1 Introduction",
+      "locator": "Introduction P8-P9",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者分三条声明贡献：电商环境直接追踪销售、揭示双重中介机制、区分采样评论与付费评论。",
+      "rhetorical_function_cn": "在引言阶段完成贡献定位。",
+      "depends_on_cn": "前面的缺口论证和结果摘要。",
+      "sets_up_cn": "让审稿人快速理解论文价值。",
+      "evidence_pointer": "Introduction第8-9段"
+    },
+    {
+      "order": 17,
+      "section": "1 Introduction",
+      "locator": "Introduction P10",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "对电商而言，使用已披露的采样评论是可行的主动策略，但要注意它会抑制有机评论贡献，需权衡利弊。",
+      "rhetorical_function_cn": "给出实践含义和警示。",
+      "depends_on_cn": "净效应为正但有机评论下降的发现。",
+      "sets_up_cn": "为讨论中的管理者建议提供位置。",
+      "evidence_pointer": "Introduction第10段"
+    },
+    {
+      "order": 18,
+      "section": "1 Introduction",
+      "locator": "Introduction P11",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "论文接下来按文献、假设、两个研究、讨论的顺序展开。",
+      "rhetorical_function_cn": "提供阅读路线图。",
+      "depends_on_cn": "全文结构已定。",
+      "sets_up_cn": "引导读者进入后续章节。",
+      "evidence_pointer": "Introduction第11段"
+    },
+    {
+      "order": 19,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "过去赞助评论合法性受质疑，很多企业选择不披露，所以研究集中于披露与否对消费者感知的影响。",
+      "rhetorical_function_cn": "概括已有文献主线。",
+      "depends_on_cn": "赞助评论的定义和披露伦理背景。",
+      "sets_up_cn": "随后指出这些研究结论混杂。",
+      "evidence_pointer": "Section 2第1段"
+    },
+    {
+      "order": 20,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "披露效应研究结果混杂：有的发现披露不影响购买意愿，有的发现披露导致消费者打折评价，有的发现明确披露或强调诚实能缓解负面影响。",
+      "rhetorical_function_cn": "说明已有研究证据不一致，为本文寻找新问题。",
+      "depends_on_cn": "前一句列出的披露研究。",
+      "sets_up_cn": "引出转向真实销售数据研究的必要性。",
+      "evidence_pointer": "Section 2第2段"
+    },
+    {
+      "order": 21,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "随着披露成为伦理规范，研究转向已披露赞助评论的效果，但多数在博客或社区情境，难以关联真实销售。",
+      "rhetorical_function_cn": "指出情境局限。",
+      "depends_on_cn": "披露伦理共识。",
+      "sets_up_cn": "引出电商情境研究。",
+      "evidence_pointer": "Section 2第3段"
+    },
+    {
+      "order": 22,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "近期研究开始在电商平台考察赞助评论，如Amazon验证评论减少和购买潜力，Kim等发现赞助评论信息更丰富但帮助性和购买意愿低于有机评论。",
+      "rhetorical_function_cn": "承认已有电商情境研究并展示其未解决的问题。",
+      "depends_on_cn": "研究者转向真实平台。",
+      "sets_up_cn": "为逐条构造四个缺口提供基础。",
+      "evidence_pointer": "Section 2第4段"
+    },
+    {
+      "order": 23,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P5 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "第一个缺口：已有研究多比较披露方式或赞助评论与有机评论，但未回答使用赞助评论本身是否值得。",
+      "rhetorical_function_cn": "提出“值不值得用”的实践性问题。",
+      "depends_on_cn": "Kim等发现赞助评论可能不如有机评论。",
+      "sets_up_cn": "Study 1以销售为结果直接回答。",
+      "evidence_pointer": "Section 2第5段第一个缺口"
+    },
+    {
+      "order": 24,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P5 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "第二个缺口：多数研究关注现金激励付费评论，很少关注免费样品激励的赞助评论。",
+      "rhetorical_function_cn": "强调激励类型可能改变消费者感知。",
+      "depends_on_cn": "现金与非现金激励的归因差异。",
+      "sets_up_cn": "明确本文聚焦产品采样评论。",
+      "evidence_pointer": "Section 2第5段第二个缺口"
+    },
+    {
+      "order": 25,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P5 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "第三个缺口：电商网站上赞助评论与有机评论并列，但很少研究赞助评论是否影响有机评论生成以及净销售效应。",
+      "rhetorical_function_cn": "提出最关键的研究空白。",
+      "depends_on_cn": "有机评论影响销售的文献。",
+      "sets_up_cn": "Study 1同时追踪销售和有机评论量。",
+      "evidence_pointer": "Section 2第5段第三个缺口"
+    },
+    {
+      "order": 26,
+      "section": "2 Conceptual Background",
+      "locator": "Section 2 P5 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "第四个缺口：对赞助产品采样评论发挥正负影响的理论机制缺乏实证。",
+      "rhetorical_function_cn": "为Study 2提供依据。",
+      "depends_on_cn": "前三个缺口解决“有无效应”。",
+      "sets_up_cn": "强调需要打开黑箱。",
+      "evidence_pointer": "Section 2第5段第四个缺口"
+    },
+    {
+      "order": 27,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "消费者对非现金激励的赞助评论更友好，现金被视为购买推荐，免费样品被视为试用心得。",
+      "rhetorical_function_cn": "引入激励归因文献作为理论基础。",
+      "depends_on_cn": "引言中的非现金激励论述。",
+      "sets_up_cn": "为H1正面机制提供依据。",
+      "evidence_pointer": "Section 3第1段"
+    },
+    {
+      "order": 28,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "品牌愿意提供免费样品本身就是质量信号，可降低决策不确定性。",
+      "rhetorical_function_cn": "引入信号理论。",
+      "depends_on_cn": "Hu等和Spence。",
+      "sets_up_cn": "H1a/H1b。",
+      "evidence_pointer": "Section 3第2段"
+    },
+    {
+      "order": 29,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 H1a/H1b",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设突出展示采样评论比不展示更能促进销售，且通过提升质量感知实现。",
+      "rhetorical_function_cn": "给出正式假设。",
+      "depends_on_cn": "信号理论。",
+      "sets_up_cn": "Study 1检验H1a，Study 2检验H1b。",
+      "evidence_pointer": "Section 3 H1a/H1b"
+    },
+    {
+      "order": 30,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P3-P4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "赞助评论与有机评论并列展示可能影响潜在有机评论作者的贡献意愿；公平理论中的分配公平和程序公平在此相关。",
+      "rhetorical_function_cn": "引入公平理论作为负面机制。",
+      "depends_on_cn": "在线评论持续性和有机评论重要性。",
+      "sets_up_cn": "H2a/H2b。",
+      "evidence_pointer": "Section 3第3-4段"
+    },
+    {
+      "order": 31,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P5",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "看到别人因免费样品写评论，自己却需付费并花时间写评论，会触发分配不公平；平台只激励部分评论者的流程也会触发程序不公平。",
+      "rhetorical_function_cn": "解释为什么有机评论贡献动机下降。",
+      "depends_on_cn": "公平理论。",
+      "sets_up_cn": "H2b中的感知不公平中介。",
+      "evidence_pointer": "Section 3第5段"
+    },
+    {
+      "order": 32,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 H2a/H2b",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设突出展示采样评论会减少后续有机评论量，且通过感知不公平实现。",
+      "rhetorical_function_cn": "正式化负面效应。",
+      "depends_on_cn": "公平理论。",
+      "sets_up_cn": "Study 1检验H2a，Study 2检验H2b。",
+      "evidence_pointer": "Section 3 H2a/H2b"
+    },
+    {
+      "order": 33,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P6",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "评论量通过提升知晓度和流行度促进销售，因此有机评论量减少会削弱销售；但采样评论也可通过增加产品可见性抵消这一损失。",
+      "rhetorical_function_cn": "建立竞争性机制。",
+      "depends_on_cn": "WOM销量文献。",
+      "sets_up_cn": "H3a/H3b竞争假设。",
+      "evidence_pointer": "Section 3第6段"
+    },
+    {
+      "order": 34,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 H3a/H3b",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "假设考虑有机评论量下降后净销售效应仍为正或变为负。",
+      "rhetorical_function_cn": "用竞争假设表达不确定的净效应。",
+      "depends_on_cn": "两组相反机制。",
+      "sets_up_cn": "Study 1中介分析。",
+      "evidence_pointer": "Section 3 H3a/H3b"
+    },
+    {
+      "order": 35,
+      "section": "3 Research Hypotheses",
+      "locator": "Section 3 P6-end",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "整体框架用两个研究检验：Study 1用真实销售数据，Study 2用情境实验揭示机制。",
+      "rhetorical_function_cn": "连接假设到实证设计。",
+      "depends_on_cn": "所有假设。",
+      "sets_up_cn": "进入Study 1。",
+      "evidence_pointer": "Section 3末尾，Figure 1"
+    },
+    {
+      "order": 36,
+      "section": "4.1 Data Description",
+      "locator": "Section 4.1 P1-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "平台自2012年10月起设置采样活动专区，品牌提供免费样品，平台主持申请和抽选，平均4%申请者获得样品，48%的获得者撰写评论。",
+      "rhetorical_function_cn": "描述处理发生机制和数据来源。",
+      "depends_on_cn": "与平台合作。",
+      "sets_up_cn": "说明这不是随机实验而是平台自然实验。",
+      "evidence_pointer": "Section 4.1第1-3段"
+    },
+    {
+      "order": 37,
+      "section": "4.1 Data Description",
+      "locator": "Section 4.1 P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "2013年9月6日起，平台在商品评论页顶部展示一条赞助产品采样评论，并明确标识它不是普通有机评论。",
+      "rhetorical_function_cn": "精确界定处理的时间与形式。",
+      "depends_on_cn": "平台政策变更。",
+      "sets_up_cn": "为DID设定time和treatment。",
+      "evidence_pointer": "Section 4.1第4段，Figure 2"
+    },
+    {
+      "order": 38,
+      "section": "4.1 Data Description",
+      "locator": "Section 4.1 P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "数据收集期为2013年8月6日至2014年1月6日，以覆盖展示前后的变化。",
+      "rhetorical_function_cn": "说明时间窗口选择。",
+      "depends_on_cn": "平台数据许可。",
+      "sets_up_cn": "形成前后比较的面板。",
+      "evidence_pointer": "Section 4.1第5段，Figure 3"
+    },
+    {
+      "order": 39,
+      "section": "4.1 Data Description",
+      "locator": "Section 4.1 P6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "对采样评论和有机评论编码后发现，采样评论更长、更正面、提到更多产品特征，但也包含一些负面描述。",
+      "rhetorical_function_cn": "用内容比较说明处理物性质。",
+      "depends_on_cn": "随机抽取和编码。",
+      "sets_up_cn": "为后面把销量增加归因于评论展示提供处理物可信度。",
+      "evidence_pointer": "Section 4.1第6段，Table 1"
+    },
+    {
+      "order": 40,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "DID可以同时消除组间固定差异和时间共同趋势，适合检验这一平台干预。",
+      "rhetorical_function_cn": "论证方法选择。",
+      "depends_on_cn": "准实验设计。",
+      "sets_up_cn": "正式DID方程。",
+      "evidence_pointer": "Section 4.2第1段"
+    },
+    {
+      "order": 41,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "平台在部分产品页展示赞助评论，另67个产品未展示，形成控制组，平台称分配是任意的。",
+      "rhetorical_function_cn": "说明控制组的自然形成。",
+      "depends_on_cn": "平台实施方式。",
+      "sets_up_cn": "定义treatment变量。",
+      "evidence_pointer": "Section 4.2第2段"
+    },
+    {
+      "order": 42,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于不能完全确定分配随机，使用PSM用活动特征、价格、前期销量、评分和品牌等变量平衡两组。",
+      "rhetorical_function_cn": "处理选择偏差。",
+      "depends_on_cn": "平台声称任意但可能有人为偏差。",
+      "sets_up_cn": "匹配后DID。",
+      "evidence_pointer": "Section 4.2第3段"
+    },
+    {
+      "order": 43,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "匹配后两组的t检验都不显著，核密度图显示倾向得分分布接近，说明平衡良好。",
+      "rhetorical_function_cn": "证明PSM有效。",
+      "depends_on_cn": "PSM估计。",
+      "sets_up_cn": "增强后续DID结果可信度。",
+      "evidence_pointer": "Section 4.2第4段，Table 3，Figure 4"
+    },
+    {
+      "order": 44,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "配对t检验显示处理组展示后销量显著上升、有机评论量显著下降，控制组无显著变化。",
+      "rhetorical_function_cn": "用简单比较预告DID结果。",
+      "depends_on_cn": "平衡面板。",
+      "sets_up_cn": "DID回归会进一步控制其他因素。",
+      "evidence_pointer": "Section 4.2第5段，Table 4"
+    },
+    {
+      "order": 45,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P6-P7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DID回归中treatment×time对日销量显著为正，对日有机评论量显著为负，H1a和H2a得到支持。",
+      "rhetorical_function_cn": "给出主效应核心证据。",
+      "depends_on_cn": "控制变量和固定效应。",
+      "sets_up_cn": "为中介分析提供基础。",
+      "evidence_pointer": "Section 4.2第6-7段，Table 5"
+    },
+    {
+      "order": 46,
+      "section": "4.2 Tests of H1a and H2a",
+      "locator": "Section 4.2 P8",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "用两阶段法估计时间不变变量，结果与主回归一致。",
+      "rhetorical_function_cn": "排除估计方法选择造成的偏差。",
+      "depends_on_cn": "主回归的显著性。",
+      "sets_up_cn": "进入稳健性检验。",
+      "evidence_pointer": "Section 4.2第8段，Table 6"
+    },
+    {
+      "order": 47,
+      "section": "4.3 Robustness Checks of H1a and H2a",
+      "locator": "Section 4.3 P1-P2",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "相对时间模型显示展示前三周、两周、一周的lead均不显著，平行趋势成立。",
+      "rhetorical_function_cn": "验证DID关键假设。",
+      "depends_on_cn": "展示前一个月数据。",
+      "sets_up_cn": "保护因果解释。",
+      "evidence_pointer": "Section 4.3第1-2段，Table A3"
+    },
+    {
+      "order": 48,
+      "section": "4.3 Robustness Checks of H1a and H2a",
+      "locator": "Section 4.3 P3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "加入动态日度价格后结果仍与主模型一致。",
+      "rhetorical_function_cn": "排除静态价格设定问题。",
+      "depends_on_cn": "68个有日价格信息的产品。",
+      "sets_up_cn": "进一步支持H1a/H2a。",
+      "evidence_pointer": "Section 4.3第3段，Table A4"
+    },
+    {
+      "order": 49,
+      "section": "4.4 Mediation Analysis to Test H3a and H3b",
+      "locator": "Section 4.4 P1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "需要用中介分析把赞助评论、有机评论和销售放在同一关系结构中，检验净效应是正还是负。",
+      "rhetorical_function_cn": "从主效应转到净效应问题。",
+      "depends_on_cn": "H1a/H2a结果。",
+      "sets_up_cn": "多方程中介模型。",
+      "evidence_pointer": "Section 4.4第1段"
+    },
+    {
+      "order": 50,
+      "section": "4.4 Mediation Analysis to Test H3a and H3b",
+      "locator": "Section 4.4 P2-P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "模型同时纳入有机评论量、有机评论效价、前期销量和PSM协变量，并用avgsale_before控制采样活动本身的影响。",
+      "rhetorical_function_cn": "说明如何避免高估净效应。",
+      "depends_on_cn": "活动可能独立影响销售。",
+      "sets_up_cn": "估计总效应和间接效应。",
+      "evidence_pointer": "Section 4.4第2-3段，Figure 5"
+    },
+    {
+      "order": 51,
+      "section": "4.4 Mediation Analysis to Test H3a and H3b",
+      "locator": "Section 4.4 P5-P6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Bootstrap结果显示经由有机评论量的负向间接效应显著，经由效价不显著，总效应显著为正，支持H3a。",
+      "rhetorical_function_cn": "给出净效应核心证据。",
+      "depends_on_cn": "多方程中介估计。",
+      "sets_up_cn": "结束Study 1的论证。",
+      "evidence_pointer": "Section 4.4第5-6段，Table 8"
+    },
+    {
+      "order": 52,
+      "section": "5.1 Data Collection",
+      "locator": "Section 5.1 P1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "Study 2目标是确认采样评论的独特地位，并检验品牌质量感知和不公平感两条机制。",
+      "rhetorical_function_cn": "预告实验目的。",
+      "depends_on_cn": "Study 1机制黑箱。",
+      "sets_up_cn": "四种实验场景。",
+      "evidence_pointer": "Section 5.1第1段"
+    },
+    {
+      "order": 53,
+      "section": "5.1 Data Collection",
+      "locator": "Section 5.1 P2-P4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用专业市场调研公司的一般消费者样本，虚构品牌和扫地机器人场景，保持评论内容一致，只在激励背景和部分评论内容上变化。",
+      "rhetorical_function_cn": "说明实验材料和样本选择如何增强控制。",
+      "depends_on_cn": "随机分配。",
+      "sets_up_cn": "让组间差异可归因于评论类型。",
+      "evidence_pointer": "Section 5.1第2-4段，Figure 6"
+    },
+    {
+      "order": 54,
+      "section": "5.1 Data Collection",
+      "locator": "Section 5.1 P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "389名受访者完成问卷，四个构念的CA、CR、AVE和区分效度均达标。",
+      "rhetorical_function_cn": "说明测量工具有效。",
+      "depends_on_cn": "问卷数据。",
+      "sets_up_cn": "后续均值比较和PLS可解释。",
+      "evidence_pointer": "Section 5.1第5段，Table A6-A8"
+    },
+    {
+      "order": 55,
+      "section": "5.2 Comparisons",
+      "locator": "Section 5.2 P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "赞助采样评论比有机评论略显著地提升品牌质量感知，比付费评论显著更高；同时比有机评论产生更高不公平感，但比付费评论低。",
+      "rhetorical_function_cn": "建立感知层面的比较结果。",
+      "depends_on_cn": "四组场景数据。",
+      "sets_up_cn": "说明采样评论独特的双重感知效应。",
+      "evidence_pointer": "Section 5.2第1段，Figure 7"
+    },
+    {
+      "order": 56,
+      "section": "5.2 Comparisons",
+      "locator": "Section 5.2 P2-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "赞助采样评论的购买意愿与有机评论相当但显著高于付费评论；贡献新有机评论意愿显著低于有机评论但显著高于付费评论。",
+      "rhetorical_function_cn": "在行为意向上确认双重效应和与付费评论的差别。",
+      "depends_on_cn": "ANOVA比较。",
+      "sets_up_cn": "为PLSM mediation提供总效应基础。",
+      "evidence_pointer": "Section 5.2第2-3段，Figure 8"
+    },
+    {
+      "order": 57,
+      "section": "5.2 Comparisons",
+      "locator": "Section 5.2 P5-P6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "包含部分负面内容的采样评论与全正面版本在购买意愿和品牌质量上无显著差异，但显著降低不公平感并提高贡献意愿。",
+      "rhetorical_function_cn": "探索评论内容异质性。",
+      "depends_on_cn": "混合版本场景。",
+      "sets_up_cn": "讨论中提出平衡评论和信任机制。",
+      "evidence_pointer": "Section 5.2第5段，Figure 9"
+    },
+    {
+      "order": 58,
+      "section": "5.3 How Product Sampling Review Affects PI and ICNR",
+      "locator": "Section 5.3 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用PLS方法同时估计测量模型和结构模型，并通过5,000次Bootstrap检验路径。",
+      "rhetorical_function_cn": "论证PLS适用于本实验的复杂关系。",
+      "depends_on_cn": "四个构念的测量。",
+      "sets_up_cn": "中介路径表。",
+      "evidence_pointer": "Section 5.3第1段"
+    },
+    {
+      "order": 59,
+      "section": "5.3 How Product Sampling Review Affects PI and ICNR",
+      "locator": "Section 5.3 P2-P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "PLS结果显示赞助采样评论相对有机评论提升品牌质量感知并促进购买意愿，同时提升感知不公平并降低贡献新评论意愿。",
+      "rhetorical_function_cn": "正式支持H1b和H2b。",
+      "depends_on_cn": "主效应和中介模型。",
+      "sets_up_cn": "把机制结果与Study 1净效应结合。",
+      "evidence_pointer": "Section 5.3第2-3段，Table 9/10"
+    },
+    {
+      "order": 60,
+      "section": "6 Discussion and Conclusion",
+      "locator": "Discussion P1-P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者总结：展示赞助产品采样评论提升销售但减少有机评论，净效应仍为正，回应了以往研究无法用真实销售数据判断净效应的问题。",
+      "rhetorical_function_cn": "讨论开头重述核心发现并回扣引言缺口。",
+      "depends_on_cn": "两个Study的结果。",
+      "sets_up_cn": "随后分研究与实践贡献。",
+      "evidence_pointer": "Section 6第1-2段"
+    },
+    {
+      "order": 61,
+      "section": "6.1 Implications for Research",
+      "locator": "Section 6.1 P2-P3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究贡献包括区分免费样品激励与其他赞助评论、用实证打开双重机制、用真实销售数据替代购买意愿或购买潜力代理。",
+      "rhetorical_function_cn": "把贡献拆成三条，对应引言缺口。",
+      "depends_on_cn": "两Study证据。",
+      "sets_up_cn": "为未来研究提供方向。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 62,
+      "section": "6.2 Implications for Practice",
+      "locator": "Section 6.2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "研究者建议电商可以继续使用明确披露的采样评论，但要监控有机评论量下降，尤其评论基数小的产品，并通过随机分配和传达公平降低不公平感。",
+      "rhetorical_function_cn": "给出可操作管理启示。",
+      "depends_on_cn": "净效应为正但有机评论受损。",
+      "sets_up_cn": "限制部分自然引出未来研究。",
+      "evidence_pointer": "Section 6.2"
+    },
+    {
+      "order": 63,
+      "section": "6.3 Limitations and Research Opportunities",
+      "locator": "Section 6.3 P1-P4",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "作者承认不能分离突出展示与评论内容效应，消费者可能不知道评论选择机制，未分析有机评论内容质量，PSM无法消除所有未观测异质性。",
+      "rhetorical_function_cn": "限定结论边界并为未来研究设置议程。",
+      "depends_on_cn": "研究设计和数据限制。",
+      "sets_up_cn": "收束全文。",
+      "evidence_pointer": "Section 6.3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "作者不是简单说“没人研究”，而是把已有研究分成披露比较、博客情境、现金激励、代理结果等维度，逐条指出它们没有回答的问题；核心缺口是“电商环境中真实销售净效应”和“有机评论生成被忽视”。",
+    "signposting_cn": "引言末尾给出全文路线图；每个研究前都有明确目的句；第3节末尾用Figure 1预告两个研究如何对应假设；Study 1每一小节用“检验H1a/H2a”“稳健性”“中介H3”提示读者当前论证位置。",
+    "transition_logic_cn": "从文献缺口直接转到“为填补缺口，我们开展了两个研究”；Study 1主效应支持后，用“然而净效应如何”过渡到中介；Study 1结束后，用“场数据无法揭示机制”过渡到实验；讨论再把两研究的证据合并为统一贡献。",
+    "claim_evidence_rhythm_cn": "几乎每个主张都紧跟表格或图：先重述假设，再报告系数、置信区间或p值；讨论中重提主张时只引用已出现的表，不再引入新证据。",
+    "benchmark_narrative_cn": "没有算法benchmark，而是把“未展示赞助评论的产品”“展示前时期”“有机评论”“付费评论”作为多重基准；在叙述中反复强调控制组和比较条件，使净效应和机制判断都有明确参照。",
+    "theory_return_cn": "讨论部分没有只停留在“有效”，而是把结果归因于信号理论的质量推断和公平理论的不公平感，并指出这两种效应都源于“免费样品”这一激励性质，从而把实证结果升级为理论解释。",
+    "contribution_positioning_cn": "把贡献放在三个维度：情境（电商真实交易）、机制（双中介）、对象（区分采样评论与付费评论）；每个贡献都直接回应引言或文献回顾中列出的一个缺口。",
+    "novelty_protection_cn": "用真实销售数据而非代理变量、同时追踪销量和有机评论量、用并列展示的生态情境、用Bootstrap中介证明净效应为正，这些设计共同防止贡献被理解为“又一个实验发现赞助评论有用”的一次性结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用在线评论与销售的关系建立重要性，展示一种正在流行的平台做法并指出其两难后果。",
+        "research_job_cn": "找到一个现实中已经被采用但净效应未经检验的数字化评论展示干预。",
+        "required_evidence_cn": "需要有平台实际采用该做法、且存在正负方向潜在机制的初步证据。",
+        "transition_to_next_cn": "从“值得用吗”过渡到“需要用数据检验净效应”。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "用文献回顾把一般现象分解为几个具体缺口：情境、激励类型、因变量、机制。",
+        "research_job_cn": "系统比较已有赞助评论研究的情境、激励和结果变量。",
+        "required_evidence_cn": "能证明每个缺口都有明确文献代表且未解决。",
+        "transition_to_next_cn": "针对每个缺口提出对应假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "引入一到两个理论，把理论命题转化为可检验假设，并设置竞争假设。",
+        "research_job_cn": "确定核心构念和路径：正面机制、负面机制、净效应。",
+        "required_evidence_cn": "理论构念必须能被场数据或实验数据操作化。",
+        "transition_to_next_cn": "说明需要双Study：一个回答总效应，一个回答机制。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "使用真实平台面板数据讲清处理形成、控制组来源、DID和PSM设计，并报告稳健性检验。",
+        "research_job_cn": "获得平台数据并检验主效应，排除平行趋势和关键控制变量。",
+        "required_evidence_cn": "处理组与控制组在展示前后可比较，平行趋势成立，主效应显著。",
+        "transition_to_next_cn": "如果存在一正一负两个效应，自然进入中介分析。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "用中介分析把一正一负的效应放进一个关系结构，估计净效应。",
+        "research_job_cn": "建立路径方程，用Bootstrap检验间接效应和总效应。",
+        "required_evidence_cn": "负向间接效应显著但总效应置信区间不含0。",
+        "transition_to_next_cn": "用“为什么”问题引入实验机制检验。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计情境实验，用有机评论和付费评论作为baseline，用PLS中介检验理论机制。",
+        "research_job_cn": "构造多版场景，随机分配被试，测量关键感知和行为意向。",
+        "required_evidence_cn": "路径系数和间接效应显著，且与主研究结论方向一致。",
+        "transition_to_next_cn": "在讨论中把实验机制与场数据净效应结合。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "讨论部分按“核心发现→理论贡献→实践启示→限制与未来”重述。",
+        "research_job_cn": "把净效应和双机制重新连接回引言缺口，明确边界条件。",
+        "required_evidence_cn": "每一条贡献都能指向具体表格或分析。",
+        "transition_to_next_cn": "以可执行的管理建议和未检验问题收束。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用竞争假设处理方向相反的机制",
+      "把控制组和baseline设计为多层：未展示、展示前、有机评论、付费评论",
+      "用Bootstrap中介把总效应分解为间接和直接路径",
+      "讨论中明确区分“突出展示效果”和“评论内容效果”的不可分离性",
+      "把实践启示建立在一个净正效应加一个警示之上"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "获得真实电商平台多年销售与有机评论面板并不常见",
+      "平台决定在部分产品页展示赞助评论、保留控制组是偶然的准实验机会",
+      "与平台管理者访谈确认控制组形成的任意性难以复制",
+      "从平台获取静态价格、日度价格子样本、活动详细记录依赖特定合作关系",
+      "专业市场调研公司的一般消费者样本具有一定成本"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“净效应为正”而没有追踪销量和有机评论量的面板数据",
+      "不能在没有控制组或平行趋势检验时宣称因果效应",
+      "不能在实验只测行为意向时宣称真实评论行为被完全解释",
+      "不能把免费样品型赞助评论的结论直接套到现金付费型赞助评论",
+      "不能忽略作者明确承认的“突出展示”与“评论内容”混淆问题"
+    ],
+    "single_best_description_of_the_routine_cn": "用真实平台数据证明干预的净效应，再用实验打开净效应背后的双重机制，最后以理论解释和实践警示把两段证据缝合成一个完整论证。"
+  },
+  "confidence": 0.84,
+  "limitations_cn": "源文件为PDF提取的文本，少量公式和表格排版有OCR痕迹；位置标识基于章节和小标题而非印刷页码；附录表格完整但部分附录引用（如Kupfer等）在正文未展开；作者未提供在线附录中的完整问卷措辞，但不影响本文结构判断。",
+  "usage": {
+    "prompt_tokens": 35872,
+    "completion_tokens": 24017,
+    "total_tokens": 59889,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 35872
+  }
+}

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-84864211699"
+title: "Automatic parameter recommendation for practical API usage"
+authors: "Zhang C.; Yang J.; Zhang Y.; Fan J.; Zhang X.; Zhao J.; Ou P."
+year: "2012"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse.2012.6227136"
+---
+# Scopus title-abstract-keyword metadata
+Title: Automatic parameter recommendation for practical API usage
+Abstract: Programmers extensively use application programming interfaces (APIs) to leverage existing libraries and frameworks. However, correctly and efficiently choosing and using APIs from unfamiliar libraries and frameworks is still a non-trivial task. Programmers often need to ruminate on API documentations (that are often incomplete) or inspect code examples (that are often absent) to learn API usage patterns. Recently, various techniques have been proposed to alleviate this problem by creating API summarizations, mining code examples, or showing common API call sequences. However, few techniques focus on recommending API parameters. In this paper, we propose an automated technique, called Precise, to address this problem. Differing from common code completion systems, Precise mines existing code bases, uses an abstract usage instance representation for each API usage example, and then builds a parameter usage database. Upon a request, Precise queries the database for abstract usage instances in similar contexts and generates parameter candidates by concretizing the instances adaptively. The experimental results show that our technique is more general and applicable than existing code completion systems, specially, 64% of the parameter recommendations are useful and 53% of the recommendations are exactly the same as the actual parameters needed. We have also performed a user study to show our technique is useful in practice. © 2012 IEEE.
+Author keywords: API; argument; code completion; parameter; recommendation
+Index keywords: Application programming interfaces (API); Libraries; Query languages; API; API calls; argument; Automated techniques; Mining codes; Non-trivial tasks; parameter; recommendation; Usage patterns; User study; Software engineering
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2012
+EID: 2-s2.0-84864211699
+DOI: 10.1109/icse.2012.6227136
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

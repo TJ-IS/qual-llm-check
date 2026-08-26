@@ -1,0 +1,238 @@
+---
+otero_id: 212
+otero_key: "NZBS2XQR"
+title: "Knowledge-based organization evaluation"
+authors: "Liang-Chuan Wu; Chorng-Shyong Ong; Yao-Wen Hsu"
+year: "2008"
+journal: "Decision Support Systems"
+doi: "10.1016/j.dss.2007.06.013"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+www.elsevier.com/locate/dss
+
+# Knowledge-based organization evaluation
+
+Liang-Chuan Wu <sup>a,1</sup>, Chorng-Shyong Ong <sup>a,⁎</sup>, Yao-Wen Hsu <sup>b,2</sup>
+
+<sup>a</sup> Department of Information Management, National Taiwan University, No. 1, Sec. 4, Roosevelt Rd., Taipei City 106, Taiwan, ROC <sup>b</sup> Department of International Business, National Taiwan University, No. 1, Sec. 4, Roosevelt Rd., Taipei City 106, Taiwan, ROC
+
+Available online 23 June 2007
+
+## Abstract
+
+Knowledge has become the main value driver for modern organizations. In particular, knowledge-based organizations (KBOs) allocate resources to intangible assets (e.g., R&D) in the rapidly changing and highly competitive business environment in order to gain competitive advantages. Therefore, how to evaluate knowledge-based organizations has become one of the most important issues in knowledge management. The purpose of this paper is to provide a framework for the evaluation of KBOs under uncertainty, using the state-of-the-art methodology of Real Options. We define the unique features of KBOs and explain their value drivers. The present study's contribution is threefold: (1) it bridges the gaps in knowledge management literature related to evaluating knowledge capital; (2) it provides a systematic application of Real Options models in the context of knowledge-based organization evaluation; and, (3) it uses a real-world case to demonstrate the implications of the main findings for management. © 2007 Elsevier B.V. All rights reserved.
+
+Keywords: Evaluation; Knowledge-based organizations; Real Options
+
+## 1. Introduction
+
+Knowledge has long been important to organizations as they strive to gain and maintain a competitive advantage [4,13]. However, the issues of knowledge management and knowledge measurement have become even more critical to knowledge-based organizations (KBOs) in the era of knowledge economics. Many competitive advantages result from intangible assets, rather than traditional tangible assets, and a significant part of the value of the commodities or services provided depends on the underlying intangible knowledge. Indeed, it is fair to say that intangible knowledge has become the main value driver for organizations.
+
+Knowledge-based organizations have grown at a phenomenal rate in recent years. Take Yahoo for example. The company's stock price soared ten times within a year and its market value is currently about ten times the book value. The meteoric rise of Google is an even more salient example of this phenomenon. In the industrial era, land, capital, and labor were the main drivers of companies striving to gain a competitive edge. However, knowledge plays a more critical role than traditional drivers in the era of knowledge economics so that it has become the most valuable asset in knowledge-based organizations.
+
+Increasingly, organizations are allocating more of their resources to intangible assets, such as R&D, in the rapidly changing and highly competitive business environment to gain competitive advantages. Therefore, how to evaluate knowledge-based organizations has become one of the most important issues in the field of knowledge management. The contribution of this paper is threefold: (1) it bridges the gaps in knowledge management literature related to evaluating knowledge capital; (2) it provides a systematic application of Real Options models in the context of knowledge-based organization evaluation; and (3) it uses a real-world case to demonstrate the implications of the main findings for management.
+
+The remainder of this paper is organized as follows. Section 2 contains an overview of current literature, including the traditional evaluation methods and the Real-Options method. In Section 3, we explore the features of knowledge-based organizations and provide a model for evaluating them. In Section 4, we illustrate our method using empirical data from the Lotus Corporation, a well-known software company, and present the results of our analysis. Then, in Section 5, we present our conclusions and discuss the implications of our study for business managers.
+
+## 2. Previous work on company evaluation
+
+Although knowledge management has been one of the most challenging research topics in the past decade, relatively few methods have been proposed for evaluating knowledge-based organizations. Valuing KBOs is a formidable task because of their massive investments in intangible assets (e.g., R&D) whose values are difficult to measure. Traditionally, the following valuation methods have been widely used.
+
+1. Net Present Value (NPV): This method uses an appropriate discount rate to discount the cash flows generated by a proposed project [5].
+
+2. Comparative Valuation Using Financial Multiples (e.g., Tobin's Q Ratio, the most commonly used multiple): Tobin's Q Ratio equals market value/asset value. A positive Q Ratio can be attributed to the intangible part of intellectual capital not captured by traditional accounting systems [10].
+
+3. Asset-Based Valuation: Companies with large tangible assets, such as a power plant or a steel plant, have some “assets in place” that can be used as a basis for evaluation.
+
+Unfortunately, all the above traditional evaluation methods fail to incorporate the value of future opportunities and risks [12,16]. Intangible knowledge capital, in contrast to tangible assets, has different values under different levels of uncertainty. In other words, the traditional methods ignore the important fact that an organization's value drivers change over time. Hence, traditional methods are inadequate when valuing knowledge-based organizations, in which most assets consist of intangibles. High-tech companies, in particular, derive their value primarily from intangible assets. It is very difficult to attach a value to some or all of these assets, such as R&D, because of their dynamic nature.
+
+Real Options theory provides a better way to deal with uncertainty, and has been an important tool in the finance field since the late 1980s. Earlier researchers had long endeavored to find a rigorous way to price options, but it was not until the early 1970s that the Nobel Prize winning works by [1,11] achieved success. Based on stochastic calculus and the concept of dynamic portfolio hedging, the authors made an important breakthrough by deriving a stochastic differential equation that must be satisfied by the boundary conditions of the call option value. The solution of the equation is the celebrated Black–Scholes formula. These seminal works opened a new avenue for derivatives pricing and resulted in the rapid development of options research.
+
+An option is defined as the right, but not the obligation, to trade (i.e., exercising an option) on a real or financial asset at a predetermined cost, called the exercise price, within a predetermined period of time. The option payoffs are asymmetrically distributed due to the limited liability of the option. In essence, they shift the possible distribution toward a more favorable pattern, which enables the option holder to reap potential upside advantages while taking only limited downside risks. Myers [12] was probably the first to recognize that option-pricing theory could be applied to real assets and non-financial investments. Subsequently, applying the Real Options method to strategic capital budgeting and valuing opportunities marked a second revolution in the option pricing theory. Following Myers, [7,3] proposed the use of option-based techniques to value the managerial flexibility implicit in investment opportunities. These works stressed the importance of the irreversibility encountered in most investment decisions, together with the ongoing uncertainty of the environment in which those decisions are made. Kulatilaka et al. [8] also discussed the strategic value of managerial flexibility and its option-like properties, while Trigeorgis [16] used the theory to deal with features and problems associated with the evaluation of investment projects.
+
+A real option is especially valuable in environments where there is a high degree of uncertainty because it takes time for new information to filter through and be used to resolve the uncertainty [2]. Since the value drivers of knowledge-based organizations are contingent on unknown future states, the Real Options concept is well-suited for valuing such drivers. The Real Options framework therefore offers a new and more realistic way to value strategic opportunities and uncertainty.
+
+Some studies have used the Real Options methodology to evaluate knowledge-based organizations. For example, Buckley et al. [17] used the Black and Scholes [1] formula to value the initial public offerings (IPO) of companies. By feeding the model inputs into the valuation equation they found that the value of a firm is far from being rationally priced at the time of an IPO. Kellogg and Charnes [6] use a binomial-tree method to illustrate the possible value path of a biotechnology company. Schwartz and Moon [15] use the Real Options method to evaluate an e-business, Amazon, and point out that the high growth rate of the revenues explains the dramatic increase in stock price.
+
+Some issues related to these works should be noted. First, using financial option-pricing formulas raises some practical problems when we model complex real assets. The Black and Scholes formula is for financial options that mature on a fixed day. Modeling the real assets of organizations is a much more complex issue and the Black–Scholes formula may not be suitable in this context. Second, tree models have difficulty in dealing with more than one risk factor, which limits their applicability. To overcome these shortcomings, we propose an evaluation model that is based on the work of Schwartz and Moon [15]. We expand their model by defining and incorporating important characteristics of KBOs into our model because the valuation of knowledge-based organization is complex issue that must consider more specialized conditions in practice.
+
+First, Schwartz and Moon consider two sources of uncertainty (i.e., revenue uncertainty and sales growth rate uncertainty) in modeling Amazon, an Internet bookstore. However, this two-source approach is not realistic for KBOs, especially in the software industry. Amazon's core business depends mainly on the above-mentioned uncertainty of sales growth rate. In order to value a non-Internet company like Lotus, it is not appropriate to only consider uncertainty about revenue and the sales growth rate. The company has enormous potential and most of its value is generated by knowledge-related expenditures, which yield market growth opportunities. For e-business, the sales growth rate supports the company value; however, in knowledge-intensive organizations, the most significant feature is that investment in knowledge capital, such as R&D, contributes most of the company's value. Moreover, uncertainty related to cost fluctuations must be taken into account. Therefore, we incorporate cost uncertainty as the third risk factor into our model.
+
+Second, Schwartz and Moon assume there is a meanreverting process in the underlying asset price pertaining to both revenue and sales growth rate when describing typical characteristics, such as seasonal effects. For an ebusiness, costs are a mixture of fixed and variable costs.
+
+However, for KBOs, especially for software companies, the cost structure is very different. Most assets in software companies are intangible, which means that a large part of the company's value is based on intangible assets. In the software industry, the highest costs relate to knowledge expenditure, e.g., R&D costs [14]. Production costs are mostly trivial. Thus, the costs exhibit “jump” behavior and should therefore be modeled as a jump process. This novel feature describes the significant decline in costs when a competitor's R&D is successful. We discuss our proposed model, which considers the unique characteristics of KBOs, in the next section.
+
+## 3. Modeling knowledge-based organizations
+
+## 3.1. The proposed model
+
+The major difference between Amazon and Lotus is the structure of their R&D costs. To value a non-Internet company like Lotus, we define KBOs as organizations whose R&D accounts for 15–20% of the firm's total costs.
+
+Consider a KBO with an instantaneous rate of revenues (or sales) at time t, denoted as $R _ { t } ,$ and assume that the dynamics of these revenues are given by the following stochastic differential equation:
+
+$$
+\frac {\mathrm{d} R _ {t}}{R _ {t}} = \mu_ {t} \mathrm{d} t + \sigma_ {t} \mathrm{d} z _ {1},\tag{1}
+$$
+
+where $\mu _ { t } ,$ the drift, is the expected rate of growth in revenues, which follows a mean-reverting process with a long-term average drift μ¯; $\sigma _ { t }$ is the volatility in the rate of revenue growth; and $z _ { 1 }$ is a random variable whose probability distribution is normal. That is, the initially very high growth rates of a KBO are assumed to converge stochastically to the more reasonable and sustainable rate of growth for the industry to which the company belongs:
+
+$$
+\mathrm{d} \mu_ {t} = \kappa (\overline {{\mu}} - \mu_ {t}) \mathrm{d} t + \eta_ {t} \mathrm{d} z _ {2}\tag{2}
+$$
+
+where $\eta _ { 0 }$ is the initial volatility of the expected rate of growth in revenues. The mean-reversion coefficient κ describes the rate at which the growth is expected to converge to its long-term average. Therefore, ln(2) /κ can be interpreted as the half-life of the deviations in that any deviation is expected to be halved over this time period.
+
+The unanticipated changes in revenues are also assumed to converge to the normal level, while the unanticipated changes in the drift are assumed to converge to zero, as shown by Eqs. (3) and (4) respectively:
+
+$$
+\mathrm{d} \sigma_ {t} = \kappa_ {1} (\overline {{\sigma}} - \sigma_ {t}) \mathrm{d} t\tag{3}
+$$
+
+$$
+\mathrm{d} \eta_ {t} = - \kappa_ {2} \eta_ {t} \mathrm{d} t.\tag{4}
+$$
+
+Table 1  
+Financial data of Lotus (1989–1994)
+
+<table><tr><td>Year</td><td>Quarter</td><td>Selling, general, and admin expenses (MM$)</td><td>Sales (MM$)</td><td>R&amp;D Expenditures (MM$)</td><td>Depreciation and amortization expense (MM$)</td><td>Interest expense (MM$)</td><td>Cost of goods sold (MM$)</td></tr><tr><td>1989</td><td>1</td><td>89.091</td><td>119.97</td><td>20.565</td><td>6.432</td><td>n/a</td><td>18.353</td></tr><tr><td>1989</td><td>2</td><td>91.875</td><td>132.199</td><td>22.181</td><td>8.974</td><td>n/a</td><td>18.931</td></tr><tr><td>1989</td><td>3</td><td>96.562</td><td>153.906</td><td>26.222</td><td>9.216</td><td>n/a</td><td>18.627</td></tr><tr><td>1989</td><td>4</td><td>99.638</td><td>149.958</td><td>25.375</td><td>9.205</td><td>n/a</td><td>15.211</td></tr><tr><td>1990</td><td>1</td><td>101.724</td><td>166.518</td><td>0</td><td>12.313</td><td>n/a</td><td>20.884</td></tr><tr><td>1990</td><td>2</td><td>109.15</td><td>177.487</td><td>0</td><td>13.168</td><td>n/a</td><td>22.368</td></tr><tr><td>1990</td><td>3</td><td>116.18</td><td>159.817</td><td>0</td><td>14.885</td><td>n/a</td><td>18.387</td></tr><tr><td>1990</td><td>4</td><td>121.697</td><td>188.42</td><td>110.35</td><td>13.233</td><td>n/a</td><td>26.776</td></tr><tr><td>1991</td><td>1</td><td>125.599</td><td>174.409</td><td>0</td><td>16.6920</td><td>0.36</td><td>20.105</td></tr><tr><td>1991</td><td>2</td><td>131.749</td><td>186.406</td><td>0</td><td>17.9110</td><td>0.88</td><td>21.226</td></tr><tr><td>1991</td><td>3</td><td>141.355</td><td>218.846</td><td>0</td><td>18.3590</td><td>0.566</td><td>26.159</td></tr><tr><td>1991</td><td>4</td><td>158.473</td><td>249.234</td><td>130.486</td><td>17.6630</td><td>0.103</td><td>36.094</td></tr><tr><td>1992</td><td>1</td><td>143.641</td><td>227.063</td><td>0</td><td>20.1840</td><td>0.66</td><td>29.861</td></tr><tr><td>1992</td><td>2</td><td>149.153</td><td>220.319</td><td>0</td><td>21.1270</td><td>0.607</td><td>27.417</td></tr><tr><td>1992</td><td>3</td><td>148.049</td><td>206.742</td><td>0</td><td>20.7940</td><td>0.304</td><td>26.595</td></tr><tr><td>1992</td><td>4</td><td>170.381</td><td>246.025</td><td>140.508</td><td>22.2140</td><td>0.976</td><td>31.911</td></tr><tr><td>1993</td><td>1</td><td>155.902</td><td>227.004</td><td>0</td><td>21.6310</td><td>0.831</td><td>28.748</td></tr><tr><td>1993</td><td>2</td><td>159.416</td><td>235.785</td><td>0</td><td>21.6440</td><td>0.238</td><td>29.39</td></tr><tr><td>1993</td><td>3</td><td>165.2</td><td>240.104</td><td>0</td><td>22.1020</td><td>0.852</td><td>24.707</td></tr><tr><td>1993</td><td>4</td><td>179.081</td><td>278.275</td><td>171.984</td><td>21.5960</td><td>0.604</td><td>32.625</td></tr><tr><td>1994</td><td>1</td><td>168.552</td><td>246.992</td><td>0</td><td>21.4130</td><td>0.762</td><td>24.995</td></tr><tr><td>1994</td><td>2</td><td>171.709</td><td>224.009</td><td>0</td><td>21.2960</td><td>0.63</td><td>17.572</td></tr><tr><td>1994</td><td>3</td><td>183.906</td><td>235.246</td><td>0</td><td>21.5960</td><td>0.717</td><td>21.134</td></tr><tr><td>1994</td><td>4</td><td>200.418</td><td>264.476</td><td>255.713</td><td>23.0870</td><td>0.186</td><td>21.232</td></tr></table>
+
+Eqs. (1)–(4) can be represented in the following form (see [15] for further details):
+
+$$
+R _ {t + \Delta t} = R _ {t} \mathrm{e} ^ {\left\{\left[ \mu_ {t} - \left(\sigma_ {t} ^ {2} / 2\right) \right] \Delta t + \sigma_ {t} \sqrt {\Delta t \varepsilon_ {1}} \right\}}\tag{5}
+$$
+
+$$
+\begin{array}{l} \mu_ {t + \Delta t} = \mathrm{e} ^ {- \kappa \Delta t} \mu_ {t} + (1 - \mathrm{e} ^ {- \kappa \Delta t}) \left(\overline {{\mu}} - \frac {\eta_ {t}}{\kappa}\right) \\ \qquad + \sqrt {\frac {1 - \mathrm{e} ^ {- 2 \kappa \Delta t}}{2 \kappa}} \eta_ {t} \sqrt {\Delta t \varepsilon_ {2}}, \end{array}\tag{6}
+$$
+
+where $\Delta t$ is the time increment, $\varepsilon _ { 1 }$ and $\varepsilon _ { 2 }$ are standard normal variations, and $\sigma _ { t } = \sigma _ { 0 } \mathrm { e } ^ { - \kappa _ { 1 } t } + \overline { { \sigma } } ( 1 - \mathrm { e } ^ { - \kappa _ { 1 } t } )$
+
+<sup>r ¼ r þ rð - Þ</sup>Assume that the R&D costs follow a stochastic jump process that fluctuates continuously. Nonetheless, it can also jump when a competitor's R&D is successful. Let λ be the mean possibility of this event. Then, during a time interval dt, the probability that the event will occur is given by λdt. Let q denote the jump process:
+
+$$
+\mathrm{d} q = \left\{ \begin{array}{l l} 0, & \text { with   probability } \quad 1 - \lambda \mathrm{d} t \\ u, & \text { with   probability } \quad \lambda \mathrm{d} t \end{array} \right..\tag{7}
+$$
+
+Thus, the value of the R&D costs follows the process:
+
+$$
+\mathrm{d} V = - V \mathrm{d} q,\tag{8}
+$$
+
+where the event is u = 1 with probability 1. Then, the value follows the formula of Dixit and Pindyck [18]:
+
+$$
+V = \frac {\pi}{\alpha + \lambda},\tag{9}
+$$
+
+where π is the total benefit and α is the discount rate.
+
+## 3.2. Empirical data
+
+We illustrate the above valuation approach with empirical data from the Lotus Development Company, one of the best-known software companies. The data was collected from the COMPUSTAT database on a quarterly basis, from 1989 to its acquisition by IBM in 1995. (Lotus' high profit potential was attributed to knowledge investment in R&D). The basic data is shown in Table 1, including sales, costs and other items. Most of the parameters, such as “sales”, “costs”, and “R&D expenditures”, can be obtained directly. However, some items such as the “long-term volatility of the rate of growth in revenues” are not directly observable and need to be estimated from the quarterly data. The determination of some parameters, however, requires subjective judgments based on a solid knowledge of the background of the company. The relevant parameters are shown in Table 1
+
+Table 2  
+The parameters
+
+<table><tr><td>Parameters</td><td>Denoted as</td><td>Description</td><td>Value</td></tr><tr><td>Initial revenue</td><td> $R$ </td><td>Observable from current income statement.</td><td>$264 million/quarter</td></tr><tr><td>Initial expected rate of growth in revenues</td><td> $\mu$ </td><td>Calculated from past income statements and projections of future growth.</td><td>0.13/quarter</td></tr><tr><td>Initial volatility of revenues</td><td> $\sigma$ </td><td>Standard deviation of percentage change in revenues.</td><td>0.22/quarter</td></tr><tr><td>Speed of adjustment for the rate of growth process</td><td> $\kappa$ </td><td>Estimated from assumptions about the half-life of the process to  $\bar{\mu}$ .</td><td>0.03/quarter</td></tr><tr><td>Speed of adjustment for the volatility of revenue process</td><td> $\kappa_1$ </td><td>Estimated from assumptions about the half-life of the process to  $\bar{\sigma}$ .</td><td>0.03/quarter</td></tr><tr><td>Speed of adjustment for the volatility of the rate of growth process</td><td> $\kappa_2$ </td><td>Estimated from assumptions about the half-life of the process to zero.</td><td>0.03/quarter</td></tr><tr><td>Long-term volatility of the rate of growth in revenues</td><td> $\bar{\sigma}$ </td><td>Volatility of percentage changes in revenues for a stable company in the same industry as the company being valued.</td><td>0.07/quarter</td></tr><tr><td>Time increment for the discrete version of the model</td><td> $\Delta t$ </td><td>Chosen according to data availability, which is usually quarterly.</td><td>1 quarter</td></tr><tr><td>Initial volatility of expected rates of growth in revenues</td><td> $\eta$ </td><td>Inferred from the market volatility of the stock price.</td><td>0.12/quarter</td></tr><tr><td>Long-term rate of growth in revenues</td><td> $\bar{\mu}$ </td><td>Rate of growth in revenues for a stable company in the same industry as the company being valued.</td><td>0.05/quarter</td></tr><tr><td>Tax</td><td> $x$ </td><td>Tax payable by the company.</td><td>20%</td></tr></table>
+
+For the initial expected rate of growth in revenues, we took the average of the growth rates over the previous six years. The standard deviation of past percentage changes in revenue, 0.22, was used as the initial volatility of revenues. For the long-term rate of growth in revenues for the industry, we use a value of 5% per quarter based on the average of Oracle from 1997 to 2004 because it is in the same industry sector and has a similar cost structure. In addition, we take a value of 7% per quarter as the long-term volatility of revenues. We assume that the half-life of the deviations is 20 quarters, so the three speed-of-adjustment, or, mean reversion coefficients are ln(2) / 20 = 0.03 and the tax rate is 20% for the company.
+
+Estimated variable costs for the next five years are obtained by the regression equation $y = 5 . 4 3 9 5 x + 1 1 4 . 6 7 _ { ; }$ where $R ^ { 2 } { = } 0 . 9 1 2 8 \mathrm { \bar { \Omega } }$ ; and the estimated R&D costs for the next five years are obtained from the regression equation $y = 7 5 . 2 4 \mathrm { \bar { e } } ^ { 0 . 1 8 2 6 x }$ , where $R ^ { 2 } { = } 0 . 9 4 0 1$ . Thus, the value can be obtained by the following equation:
+
+$$
+\begin{array}{l} \text { value } = \left[ \frac {\text { Revenue } - \text { Cost   (Variable) }}{\text { WACC }} - \frac {\text { Cost   (R\ & D) }}{(\text { WACC } + q)} \right] ^ {*} \\ \times (1 - \text { tax }), \end{array}\tag{10}
+$$
+
+where the revenues can be obtained by Eqs. (5) and (6). Because the revenues are assumed to follow a meanreverting process, the growth can be expected to continue for the next few years, and decline thereafter. The costs are composed of two parts: variable costs, which are discounted by the weighted average cost of capital (WACC); and R&D expenditure, which is a large portion of the total costs in software industries. It is assumed R&D expenditure follows a jump process and is discounted with a combination of the WACC and the probability of a jump event, as described by Dixit [3].
+
+![](/api/attachments/NZBS2XQR/fulltext/images/3a844e1e1f01940e34cf652f956e769367473d9072e1532bb36ab21bc0977c76.jpg)  
+Fig. 1. The effects of changes in the volatility of revenues (σ) on a company's value.
+
+![](/api/attachments/NZBS2XQR/fulltext/images/b3e37136483dbb5ba1bfbc56afc3dcb7f17c4466da1c53c6f23f45c1feb8a5fe.jpg)  
+Fig. 2. The effect of the volatility in the expected growth rate of revenue (η) on a company's value.
+
+## 4. Analysis results
+
+For all the valuations, we run 10,000 simulations in the benchmark valuation run, using the parameters in Table 2. The total value of Lotus was \$1578 million, which was very close to \$1992 million, the average market value of Lotus in 1995 (when it was acquired by IBM). Compared to the data shown in Appendix A, Lotus had less than \$1 billion of identifiable tangible and intangible net assets in 1995. Those assets consisted primarily of cash, accounts receivable, land, buildings, leasehold improvements and other properties. Our model is thus better able to explain the real-world value of such a knowledge-intensive company. As a further step, we conduct comparative statistical analysis to explore the degree to which each parameter affects the company's value.
+
+In Fig. 1, changes in the project value volatility (σ) affect the company value in a positive way. The company is more valuable with a higher σ. An increase in σ of 0.1% increases the company value by approximately 19%. This can be explained by the fact that high growth opportunities constitute a substantial part of the company's value.
+
+Next, we examine the effect of changes in the initial volatility of the expected growth rate of revenue (η) on the company value. Fig. 2 shows that the company value is very sensitive to η. The value increases by 22% when η increases from 0.12 to 0.24. However, the value increases abruptly (55%) as η increases from 0.12 to 0.36. Thus, the volatility of the expected growth rate of revenue (η) needs to be carefully estimated when evaluating KBOs. The effect of η is not surprising because, according to the option pricing theory, more volatility means more possibilities to act in a favorable way. Thus, a higher volatility in the expected growth rate of revenue implies that the company will have more profit potential in the future.
+
+![](/api/attachments/NZBS2XQR/fulltext/images/6bdc93a564777b07d92bb27d155b2e6f3923c2493d3c1706da3b5659d9b921e1.jpg)  
+Fig. 3. The effect of changes in the expected growth rate of revenue (μ) on a company's value.
+
+From Fig. 3, we observe that the sensitivity of the company value to changes with the initial expected growth rate of revenue (μ). Given the same marginal rate of increase, a stronger growth rate increases the possibility of being more profitable. The results show that the higher the value of $\mu ,$ the more valuable the company is. The relationship between $\mu$ and the company value follows a linear pattern approximately.
+
+## 5. Conclusion and discussion
+
+We have evaluated R&D intensive software companies using the Real Options approach, and incorporated the unique characteristics of software companies into the evaluation model. Our study contributes to the literature in three ways. First, we extend R&D evaluation literature by proposing an evaluation framework based on the Real Options approach. Our framework applies a quantitative methodology to gain a Real Options perspective and contributes an ex-ante evaluation of R&D to the literature. It offers a method that measures and provides an understanding of the value of R&D. The analysis shows that, taken together, the volatility of the R&D value (σ), the volatility of the expected growth rate of revenue (η), and the expected growth rate of R&D revenue (μ) play a fundamental role in calculating a software company's value.
+
+Second, since we focus on evaluating R&D intensive software companies, many unique characteristics need to be incorporated into our model. By adding cost uncertainty as a third uncertainty and modeling the jump feature of R&D costs, our model provides a more realistic way to represent real-world scenarios. Most previous studies considered other industries, such as biochemical companies and online bookstores; however, this empirical study is based on a software company, namely, the Lotus Corporation. Third, we employ comparative analysis to measure the impact of the parameters on the company's value. The results show that the growth opportunities provided by R&D comprise the main value driver. A small increase in the growth volatility increases a company's value substantially.
+
+We also highlight two major policy implications for R&D managers. First, in the industrial era, land, capital, and labor were the main drivers. However, in today's highly competitive knowledge-based world, investments in knowledge are crucial to organizations. R&D plays a critical role in software companies. In order to achieve the competence called for by corporate business goals, intangible knowledge R&D investments should be treated as strategic enablers and the most valuable asset of software companies in the knowledge economics era. Although R&D intensive organizations make massive investments in knowledge development that lower their earnings in the short-term, rapid growth and competitive advantages often follow in the longterm. Thus, reducing expenditure on R&D may come at the expense of sacrificing the long-term competitiveness of the company.
+
+Second, our paper provides a framework for evaluating R&D intensive software companies. Practitioners can use the framework to justify their R&D expenditures. In addition, since the model provides a more realistic value of a company than traditional evaluation methods, the framework can be used to estimate a fair market value for investors who want to know the value of R&D intensive software companies.
+
+Our goal is to develop an evaluation framework, rather than find a company's value through perfectly accurate model parameters. The limitation of the proposed model is that practitioners will need expertise in estimating the parameters because this is a critical step in the analysis. Although we describe a possible range of values for R&D intensive software companies and use sensitivity analysis to explore the degree to which the parameters affect a company's value, valuations based on estimated data inevitably result in some bias. We will address the issue of more precise data estimation methods in our future work. An analyst must also use his personal judgment and knowledge about the industry's characteristics to estimate the parameters. For simplicity, we only consider the more important value drivers and ignore less important ones, such as tax shields; however such factors can be added to our model quite easily.
+
+In our future work, we will investigate other drivers that create value for KBOs and incorporate them into our model. For example, [9] describes a metric for assessing the performance of firms in terms of how they manage knowledge. The authors investigate the components that increase a company's economic value by creating, accumulating and utilizing knowledge. These value drivers could also be incorporated into the proposed model. Another possible research direction is that we could investigate the value of R&D intensive software companies in greater depth by incorporating more accounting practices. By considering more realworld accounting principles, such as tax shields and government regulations, our model would provide even more realistic evaluations of R&D intensive software companies.
+
+Appendix A. Net assets of Lotus (1988–1995)
+
+<table><tr><td>Year</td><td>Quarter</td><td>Cash and short-term investments (MM$)</td><td>Receivables (MM$)</td><td>Inventories (MM$)</td><td>Current assets (MM$)</td><td>Property, plant, and equip (MM$)</td><td>Assets (MM$)</td><td>Assets total (MM$)</td></tr><tr><td>1988</td><td>1</td><td>164.931</td><td>63.598</td><td>12.278</td><td>8.071</td><td>59.124</td><td>36.067</td><td>344.069</td></tr><tr><td>1988</td><td>2</td><td>186.199</td><td>68.268</td><td>11.578</td><td>9.138</td><td>64.406</td><td>31.656</td><td>371.245</td></tr><tr><td>1988</td><td>3</td><td>195.781</td><td>81.418</td><td>13.702</td><td>8.668</td><td>72.183</td><td>27.617</td><td>399.369</td></tr><tr><td>1988</td><td>4</td><td>192.433</td><td>92.035</td><td>18.088</td><td>7.43</td><td>86.953</td><td>25.183</td><td>422.122</td></tr><tr><td>1989</td><td>1</td><td>173.3</td><td>94.367</td><td>18.029</td><td>21.705</td><td>99.667</td><td>30.158</td><td>437.226</td></tr><tr><td>1989</td><td>2</td><td>179.716</td><td>95.412</td><td>19.976</td><td>25.912</td><td>108.918</td><td>36.952</td><td>466.886</td></tr><tr><td>1989</td><td>3</td><td>221.603</td><td>106.438</td><td>26.388</td><td>28.582</td><td>115.503</td><td>39.636</td><td>538.15</td></tr><tr><td>1989</td><td>4</td><td>274.977</td><td>97.712</td><td>23.171</td><td>13.937</td><td>129.702</td><td>64.778</td><td>604.277</td></tr><tr><td>1990</td><td>1</td><td>287.178</td><td>103.085</td><td>19.4</td><td>24.381</td><td>133.786</td><td>68.805</td><td>636.635</td></tr><tr><td>1990</td><td>2</td><td>320.009</td><td>106.337</td><td>20.781</td><td>15.529</td><td>137.315</td><td>97.116</td><td>697.087</td></tr><tr><td>1990</td><td>3</td><td>298.632</td><td>118.461</td><td>22.443</td><td>17.43</td><td>139.968</td><td>97.916</td><td>694.85</td></tr><tr><td>1990</td><td>4</td><td>245.386</td><td>120.346</td><td>21.7</td><td>12.036</td><td>147.758</td><td>109.581</td><td>656.807</td></tr><tr><td>1991</td><td>1</td><td>202.878</td><td>128.867</td><td>18.278</td><td>14.084</td><td>144.979</td><td>131.867</td><td>640.953</td></tr><tr><td>1991</td><td>2</td><td>217.282</td><td>129.208</td><td>20.657</td><td>11.923</td><td>145.646</td><td>132.05</td><td>656.766</td></tr><tr><td>1991</td><td>3</td><td>229.429</td><td>166.051</td><td>25.82</td><td>13.829</td><td>148.352</td><td>132.353</td><td>715.834</td></tr><tr><td>1991</td><td>4</td><td>224.81</td><td>172.201</td><td>30.922</td><td>13.384</td><td>146.478</td><td>137.742</td><td>725.537</td></tr><tr><td>1992</td><td>1</td><td>250.486</td><td>166.575</td><td>21.658</td><td>15.417</td><td>141.593</td><td>137.062</td><td>732.791</td></tr><tr><td>1992</td><td>2</td><td>248.159</td><td>164.926</td><td>22.138</td><td>16.313</td><td>141.011</td><td>138.265</td><td>730.812</td></tr><tr><td>1992</td><td>3</td><td>266.112</td><td>162.732</td><td>21.376</td><td>17.708</td><td>139.805</td><td>119.61</td><td>727.343</td></tr><tr><td>1992</td><td>4</td><td>293.094</td><td>178.34</td><td>23.56</td><td>19.04</td><td>135.667</td><td>113.743</td><td>763.444</td></tr><tr><td>1993</td><td>1</td><td>319.567</td><td>169.58</td><td>19.448</td><td>22.159</td><td>130.004</td><td>109.073</td><td>769.831</td></tr><tr><td>1993</td><td>2</td><td>331.658</td><td>168.184</td><td>21.758</td><td>22.361</td><td>127.82</td><td>106.401</td><td>778.182</td></tr><tr><td>1993</td><td>3</td><td>376.998</td><td>167.887</td><td>21.445</td><td>30.795</td><td>124.259</td><td>106.357</td><td>827.741</td></tr><tr><td>1993</td><td>4</td><td>416.693</td><td>217.336</td><td>21.22</td><td>20.817</td><td>127.437</td><td>101.842</td><td>905.345</td></tr><tr><td>1994</td><td>1</td><td>476.889</td><td>189.838</td><td>17.102</td><td>27.715</td><td>124.298</td><td>98.079</td><td>933.921</td></tr><tr><td>1994</td><td>2</td><td>452.048</td><td>168.57</td><td>15.22</td><td>28.866</td><td>128.23</td><td>100.191</td><td>893.125</td></tr><tr><td>1994</td><td>3</td><td>388.965</td><td>193.539</td><td>18.551</td><td>26.065</td><td>132.607</td><td>114.661</td><td>874.388</td></tr><tr><td>1994</td><td>4</td><td>376.218</td><td>230.977</td><td>20.711</td><td>24.452</td><td>138.664</td><td>113.057</td><td>904.079</td></tr><tr><td>1995</td><td>1</td><td>401.145</td><td>196.307</td><td>19.027</td><td>30.597</td><td>147.421</td><td>108.595</td><td>903.092</td></tr></table>
+
+## References
+
+[1] F. Black, M. Scholes, Pricing of options and corporate liabilities, Journal of Political Economy 81 (1973) 637–654.
+
+[2] T. Copeland, V. Antikarov, Real Options—A Practitioner's Guide, New York, Texere LLC, 2001.
+
+[3] A. Dixit, Irreversible investment with uncertainty and scale economies, Journal of Economic Dynamics and Control 19 (1995) 327–350.
+
+[4] P.B. Evans, T.S. Wurster, Strategy and the new economics of information, Harvard Business Review 75 (1997) 70–82
+
+[5] C. Higson, J. Briginshaw, Valuing Internet business, Business Strategy Review 11 (2000) 10–20.
+
+[6] D. Kellogg, J.M. Charnes, Real-options valuation for a biotechnology company, Financial Analysts Journal 56 (2000) 76–84.
+
+[7] W.C. Kester, Todays options for tomorrows growth, Harvard Business Review 62 (1984) 153–160.
+
+[8] N. Kulatilaka, Valuing the flexibility of flexible manufacturing systems, IEEE Transactions on Engineering Management 35 (1988) 250–257.
+
+[9] K.C. Lee, S. Lee, I.W. Kang, KMPI: measuring knowledge management performance, Information and Management 42 (3) (2005) 469–482.
+
+[10] D.H. Luthy, Intellectual capital and its measurement, Proceedings of the Asian Pacific Interdisciplinary Research in Accounting Conference (APIRA). Osaka, Japan, 1998.
+
+[11] R.C. Merton, Theory of rational option pricing, Bell Journal of Economics 4 (1973) 141–183.
+
+[12] S.C. Myers, Interactions of corporate finance and investment decisions—implications for capital budgeting, Journal of Finance 29 (1974) 1–25.
+
+[13] J.F. Rayport, J.J. Sviokla, Exploiting the virtual value chain, Harvard Business Review 73 (1995) 75–85.
+
+[14] F. Scavo, The enterprise system spectator, http://fscavo.blogspot. com/2005/03/software-on-demand-attacking-cost.html, 5/15 2006.
+
+[15] E.S. Schwartz, M. Moon, Rational pricing of Internet companies, Financial Analysts Journal 56 (2000) 62–75.
+
+[16] L. Trigeorgis, The nature of option interactions and the valuation of investments with multiple real options, Journal of Financial and Quantitative Analysis 28 (1993) 1–20.
+
+[17] A. Buckley, K. Tse, H. Rijken, H. Eijgenhuijsen, Stock market valuation with real options: lessons from Netscape, European Management Journal 20 (5) (2002) 512–526.
+
+[18] A.K. Dixit, R.S. Pindyck, Investment under Uncertainty, Princeton University Press, 1994.
+
+![](/api/attachments/NZBS2XQR/fulltext/images/c82078e01dc3a71e7205f51af7693ee7ef2757dd10a39b8b7dde7a7f9bca0f30.jpg)  
+Liang-Chuan Wu is a Doctoral student in the Department of Information Management, College of Management, National Taiwan University, Taiwan. He also received his Master's degree from NTU. His research interests include ERP Management, E-business, and Knowledge Management.
+
+![](/api/attachments/NZBS2XQR/fulltext/images/64dfc75b16d6d69b646a7d90db7026c49ce9bbd137a080c29122c26b787d5b37.jpg)  
+Dr. Yao-Wen Hsu is an assistant professor in the in the Department of International Business, College of Management, National Taiwan University. He received his PhD degree from the Judge Institute of Management, University of Cambridge and MBA degree from National Taiwan University. His current research interests include Asset Pricing, Behavioral Finance, and Real Options.
+
+![](/api/attachments/NZBS2XQR/fulltext/images/347dacbeb239dffdc1a5520067800b31c04f86dead28fa50c9c59a6c56911c8d.jpg)
+
+Dr. Chorng-Shyong Ong is a professor of Information Management at National Taiwan University, Taiwan. He holds a master's degree in Management Science and Policy Studies at TSUKUBA University in Japan. He received his Ph.D. in Business Administration from NTU. His research interests include IS Service Quality, Web-Based Services, Electronic Commerce and Strategic Management of e-Business. He has published papers in Information and Management, Computers in
+
+Human Behavior, Journal of the Operational Research Society, Expert Systems with Applications, Applied Mathematics and Computation, Pattern Recognition Letters, Journal of Information Management, Journal of Quality, and other journals.

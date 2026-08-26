@@ -1,0 +1,68 @@
+{
+  "updated_at": "2026-08-07T03:17:42.005250+00:00",
+  "analysis_version": "ais-basket-objective-software-psych-theory-2020-2027-flash-v1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 100,
+  "prompt_fingerprint": "16fac5773a8b041a1aef5ad68dc30ccc416e35d6969a8ee9056acd7279005924",
+  "year_range": {
+    "from": 2020,
+    "to": 2027
+  },
+  "input_source": "E:\\github\\qual-llm-check-IS-utd\\database_fulltext_all",
+  "input_fulltexts": 2475,
+  "input_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "completed": 2475,
+  "pending": 0,
+  "completed_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "objective_metric_pass_count": 708,
+  "software_artifact_pass_count": 275,
+  "base_match_count": 231,
+  "base_nonmatch_count": 2244,
+  "base_match_year_counts": {
+    "2020": 58,
+    "2021": 47,
+    "2022": 35,
+    "2023": 36,
+    "2024": 25,
+    "2025": 23,
+    "2026": 7
+  },
+  "theory_guided_subset_match_count": 110,
+  "theory_guided_subset_year_counts": {
+    "2020": 24,
+    "2021": 17,
+    "2022": 12,
+    "2023": 24,
+    "2024": 13,
+    "2025": 15,
+    "2026": 5
+  },
+  "theory_status_counts": {
+    "fail": 121,
+    "not_applicable": 2244,
+    "pass": 110
+  },
+  "usage": {
+    "prompt_tokens": 74881271,
+    "completion_tokens": 6188598,
+    "total_tokens": 81069869,
+    "prompt_cache_hit_tokens": 9789952,
+    "prompt_cache_miss_tokens": 65091319
+  }
+}

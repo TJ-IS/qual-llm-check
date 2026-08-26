@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "analysis_version": "ais-basket-final-audit-133-flash-v1",
+  "input_csv": "../ais_basket_strict_fully_objective_2020_2027_flash/deliverables/final_strict_133_articles.csv",
+  "fulltext_dir": "../../database_fulltext_all",
+  "env_file": "../../.env",
+  "model": {
+    "name": "deepseek-v4-flash",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 30000,
+    "timeout_seconds": 600
+  },
+  "batch": {
+    "max_concurrency": 100,
+    "retries": 3,
+    "retry_base_delay_seconds": 2.0,
+    "progress_interval": 10
+  }
+}

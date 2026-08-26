@@ -1,0 +1,1040 @@
+{
+  "record_id": "13598",
+  "source_file": "13598_2023_designing-conversational-dashboards-for-effective-use-in-crisis-response.md",
+  "title": "Designing Conversational Dashboards for Effective Use in Crisis Response",
+  "authors": "Marcel Ruoff; Ulrich Gnewuch; Alexander Maedche; Benjamin Scheibehenne",
+  "year": "2023",
+  "journal": "Journal of the Association for Information Systems",
+  "doi": "10.17705/1jais.00801",
+  "fulltext_chars": 126609,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "human_task_performance",
+  "source_application_context": "public_sector_crisis_and_humanitarian",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:02.414607+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何为危机响应仪表板增加自然语言交互能力，以提升普通用户的透明交互并帮助其获取危机相关信息？",
+    "artifact_and_design_cn": "一个面向COVID-19的会话式仪表板：基于有效使用理论提出MR1/MR2和三项设计原则，支持语音/文本自然语言、自然语言与鼠标交互可选，以及会话式新手引导（onboarding）即时练习与反馈。系统由仪表板与可视化、交互管理、NLP、会话式引导等组件构成，使用D3.js、Microsoft Bot Framework、LUIS等开源/云服务实现。",
+    "objective_outcomes_cn": "NLP性能评价中语音转文字准确率90.2%，实体抽取F1=92%，意图映射F1=82%，平均响应0.9秒；实验显示CDB-NLO比TDB透明交互更高（M=0.60 vs 0.31），CDB-NLE仅在有onboarding时更高（M=0.42 vs 0.31），透明交互显著正向影响效率（β=0.58）和效果（β=0.90）。",
+    "core_contribution_cn": "提出并检验了面向危机响应的会话式仪表板的萌芽设计理论（MRs、DPs、justificatory knowledge、testable propositions），揭示了多交互方式带来的设计权衡并展示conversational onboarding如何缓解该权衡；同时提出一种基于日志数据测量transparent interaction的行为测量方法。",
+    "whole_argument_in_one_paragraph_cn": "作者从危机爆发时公众快速查找准确信息的现实需求出发，指出公共危机仪表板虽然访问量巨大，但普通用户因GUI复杂而难以透明交互；随后将文献缺口定位为面向大众的危机响应仪表板研究稀缺、会话式仪表板缺少理论驱动设计、且缺少集成学习功能。作者以TEU为内核理论，把透明交互不足归因于surface structure的适应和学习不足，导出MR1和MR2，再借助affordances和enactive learning翻译出DP1-DP3，并以COVID-19会话式仪表板为实例。经过两轮DSR迭代后，先用3119条人工标注输入做NLP性能评价，再用271人的3×2在线实验检验设计原则对透明交互及效率和效果的作用。H1、H4-H6得到支持，H2-H3未获支持；事后分析发现CDB-NLE中自然语言使用比例显著正向影响透明交互，onboarding的直接效应显著但并非通过提高自然语言使用频率实现。讨论把结果上升为以TEU为justificatory knowledge的萌芽设计理论、设计权衡知识以及透明交互行为测量方法。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "虽然文章采用DSR框架并包含构建活动，但核心论证模式是从TEU推导出MRs和DPs，将DPs实例化为不同仪表板版本，再通过受控在线实验检验设计差异对透明交互的影响。这种人-机交互设计差异的理论推导加实验检验最符合theory_derived_artifact_experiment。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章从现实问题出发，引入TEU作为kernel theory，把理论构念转译为MR-DP链，构建并实验检验制品，最后再以Gregor和Jones的设计理论框架返回理论、形成萌芽设计理论。整体写作弧线是问题—理论—设计—检验—回到理论。",
+  "research_program": {
+    "study_or_phase_count": 6,
+    "overall_sequence_cn": "第一轮DSR先通过文献与访谈界定问题、导出MRs和初始DPs，并用原型加15人think-aloud评价暴露学习支持不足；第二轮DSR据此引入enactive learning、细化DP3并构建最终制品；随后先进行NLP性能评价以确认技术基础，再进行3×2在线用户实验检验DPs；最后通过事后回归和中介分析解释被拒假设并刻画边界条件。各阶段依次完成问题的理论化、设计翻译、技术可行性证明、因果检验和机制解释。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题空间探索与需求识别（第一轮前半）",
+        "question_cn": "普通公众在危机响应仪表板中面临哪些透明交互障碍？需要哪些元需求？",
+        "inputs_and_setting_cn": "IS/HCI文献；6位实际/潜在仪表板用户访谈（3女3男，平均53.2岁，涵盖老人、学生、专业人士），要求参与者交互Johns Hopkins COVID-19 dashboard后描述困难。",
+        "designed_or_compared_object_cn": "没有完整的正式制品；形成MRs和初始DPs的雏形。",
+        "baseline_control_or_counterfactual_cn": "以传统GUI仪表板作为问题背景参照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "主题式访谈分析与文献综述，用TEU归因用户困难。",
+        "main_result_cn": "发现透明交互重要但难以实现；用户表示要大量搜索才知道如何获取信息；有人期待能直接询问仪表板；非技术用户尤其受影响。",
+        "argumentative_role_cn": "把现实问题转化为可由TEU解释的理论化问题，为MRs提供实证依据。",
+        "remaining_uncertainty_cn": "尚未验证任何设计是否真的能改善透明交互。",
+        "link_to_next_phase_cn": "基于访谈与文献导出MR1/MR2和初始DPs，进入第一轮原型构建。",
+        "evidence_pointers": [
+          "Section 3.1第一段",
+          "Section 3.2中的访谈引语"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "第一轮原型构建与初步用户评价",
+        "question_cn": "初始DPs（只提供自然语言交互，加帮助按钮和帮助消息）能否支持用户的透明交互？",
+        "inputs_and_setting_cn": "第一轮原型；15名参与者（7女8男，平均43.1岁，不同IT经验），think-aloud结合访谈。",
+        "designed_or_compared_object_cn": "有自然语言交互但没有conversational onboarding的原型，集成帮助按钮和聊天中的帮助消息。",
+        "baseline_control_or_counterfactual_cn": "评价中隐含以传统鼠标仪表板为参照；对比用户对自然语言和帮助机制的使用。",
+        "objective_metrics": [],
+        "analysis_method_cn": "think-aloud观察与访谈的定性分析。",
+        "main_result_cn": "所有参与者认可自然语言交互；不熟悉技术的用户能直接表达信息需求；多数用户希望自然语言作为鼠标之外的补充而非替代；但多数用户未发现或未使用帮助按钮/帮助消息，并对使用自然语言缺乏熟悉感和信心。",
+        "argumentative_role_cn": "暴露初始设计在学习支持上的不足，制造第二轮迭代的动机。",
+        "remaining_uncertainty_cn": "尚未检验conversational onboarding能否真正解决缺乏熟悉感和信心的问题。",
+        "link_to_next_phase_cn": "反思结果引出第二循环，借鉴enactive learning细化DP3。",
+        "evidence_pointers": [
+          "Section 3.1第一循环段落"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "最终制品构建（第二循环）",
+        "question_cn": "如何将MRs/DPs实例化为可用的危机响应会话式仪表板？",
+        "inputs_and_setting_cn": "第一轮结果、仪表板学习功能文献、enactive learning概念、COVID-19公开数据、开源框架与云服务。",
+        "designed_or_compared_object_cn": "最终artifact：仪表板与可视化组件、交互管理组件、NLP组件（NLU、dialog management、response generation）和conversational onboarding。",
+        "baseline_control_or_counterfactual_cn": "传统GUI仪表板作为设计对比，开发六种版本供后续实验。",
+        "objective_metrics": [],
+        "analysis_method_cn": "工程构建与系统架构说明，用开源组件实现DPs。",
+        "main_result_cn": "形成完整可运行的COVID-19会话式仪表板，支持filter/drill-down/roll-up三类交互、语音/文本NL、鼠标切换、onboarding。",
+        "argumentative_role_cn": "为后续NLP性能评价和用户实验提供物质制品。",
+        "remaining_uncertainty_cn": "未经严格评价，还不知道DPs是否实际提升透明交互。",
+        "link_to_next_phase_cn": "构建完成后先进行技术组件性能评价，再进行用户实验。",
+        "evidence_pointers": [
+          "Section 3.5",
+          "Figure 2-4"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "NLP组件性能评价",
+        "question_cn": "NLP组件能否在语音转写、实体抽取、意图映射和速度上支撑自然语言交互？",
+        "inputs_and_setting_cn": "用户实验收集的3119条自然语言输入；264名MTurk标注者提供ground truth；研究助理处理标注分歧（Cohen's kappa=0.52）。",
+        "designed_or_compared_object_cn": "评估NLP组件的语音转写、实体抽取和意图映射。",
+        "baseline_control_or_counterfactual_cn": "人工标签作为ground truth；意图准确率与相关系统Srinivasan & Stasko (2018)比较。",
+        "objective_metrics": [
+          "语音转写准确率",
+          "实体precision/recall/F1",
+          "意图precision/recall/F1/accuracy",
+          "响应时间"
+        ],
+        "analysis_method_cn": "分类指标micro-averaging，计算准确率、F1和平均响应时间。",
+        "main_result_cn": "语音准确率90.2%；实体总体F1 92%（state 94, date 95, metric 83）；意图总体F1 82%，accuracy 82%；平均响应0.9秒。",
+        "argumentative_role_cn": "证明NLP技术基础稳健，使后续用户评价结果不因技术不可用而被混淆。",
+        "remaining_uncertainty_cn": "仍有约10%语音错误和部分意图映射错误；未直接证明对用户透明交互的影响。",
+        "link_to_next_phase_cn": "确认技术可行后，以该artifact进行用户实验。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "在线用户实验（3×2 factorial）",
+        "question_cn": "DP1/DP2/DP3是否提升透明交互，并进而提升效率和效果？",
+        "inputs_and_setting_cn": "271名有效MTurk参与者（排除21名注意力失败），六种条件，4个信息查找任务，任务顺序随机，仪表板日志，前后测问卷，25分钟完成。",
+        "designed_or_compared_object_cn": "六种仪表板：TDB、CDB-NLO、CDB-NLE，每种带onboarding或不带onboarding。",
+        "baseline_control_or_counterfactual_cn": "TDB作为传统仪表板baseline；无onboarding版本作为DP3的反事实条件。",
+        "objective_metrics": [
+          "透明交互行为比率（最短路径/实际路径）",
+          "正确任务数（effectiveness）",
+          "平均正确任务完成时间（efficiency）",
+          "操纵检验",
+          "随机化检验"
+        ],
+        "analysis_method_cn": "双因素ANOVA、planned contrasts、多元回归、操纵/随机化检验。",
+        "main_result_cn": "H1支持；H2不支持；H3不支持；H4支持；H5/H6支持。CDB-NLO显著高于TDB，CDB-NLE仅在有onboarding时显著高于TDB。",
+        "argumentative_role_cn": "对设计命题进行因果检验，并同时产生NLP性能评价所用的3119条语言输入数据。",
+        "remaining_uncertainty_cn": "H2/H3被拒意味着DP2和DP3的效果依赖条件；CDB-NLE平均未优于TDB的原因需要解释。",
+        "link_to_next_phase_cn": "事后分析引入自然语言使用比例，解释CDB-NLE的混合结果。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Tables 4-6"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "事后分析：自然语言使用比例与onboarding机制",
+        "question_cn": "为什么CDB-NLE平均未优于TDB？onboarding是否通过提高自然语言使用频率起作用？",
+        "inputs_and_setting_cn": "CDB-NLE条件的日志数据，按参与者计算自然语言导航步骤比例；5000次bootstrap中介模型。",
+        "designed_or_compared_object_cn": "线性回归和简单中介模型（Model 4）。",
+        "baseline_control_or_counterfactual_cn": "自然语言使用比例为0的参与者作为连续参照；中介模型的间接效应与0比较。",
+        "objective_metrics": [
+          "自然语言导航步骤比例",
+          "透明交互",
+          "onboarding直接效应",
+          "indirect effect及置信区间"
+        ],
+        "analysis_method_cn": "线性回归、Hayes bootstrap mediation。",
+        "main_result_cn": "NL使用比例显著正向影响透明交互（β=0.54, p<0.001）；onboarding直接效应显著（β=0.089, p=0.002），但通过NL使用比例的间接效应不显著（CI[-0.03,0.04]）。",
+        "argumentative_role_cn": "把被拒假设转成边界条件：透明交互提升取决于用户实际使用自然语言；onboarding教会用户何时选择NL并更有效表述。",
+        "remaining_uncertainty_cn": "仍未在natural disaster等场景验证；未检验representational fidelity和informed action。",
+        "link_to_next_phase_cn": "讨论部分将这些边界条件和设计权衡纳入设计理论。",
+        "evidence_pointers": [
+          "Section 4.2 Post hoc analysis",
+          "Figure 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 危机中政府/卫生组织使用仪表板提供实时信息",
+      "PRACTICAL_STAKES: 普通用户难以交互和找到信息",
+      "GAP: 缺少会话式危机响应仪表板设计知识",
+      "RQ_OR_OBJECTIVE: 提出研究问题",
+      "THEORY_INTRO: 引入TEU作为理论驱动",
+      "DESIGN_FEATURE: 描述自然语言交互和onboarding制品",
+      "RESULT: 评价显示透明交互、效率、效果提升",
+      "CONTRIBUTION: 设计知识、民主化数据科学、设计权衡"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 危机不可预测，公众需要快速准确信息",
+      "PRACTICAL_STAKES: 政府依赖危机响应仪表板；COVID-19仪表板影响日常决策",
+      "LIMITATION: 高访问量不等于有效使用",
+      "PHENOMENON: 普通用户面对复杂dashboard难以透明交互",
+      "GAP: 对conversational dashboard设计所知甚少",
+      "RQ_OR_OBJECTIVE: 提出RQ",
+      "THEORY_INTRO: 采用DSR，引用TEU",
+      "STUDY_OVERVIEW: 预告artifact和评价",
+      "CONTRIBUTION: 预告设计知识、设计权衡、民主化数据科学贡献"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: CUI在IS/HCI中的研究现状",
+      "LIMITATION: CUI难以传递丰富可视化信息，应补充而非替代GUI",
+      "PRIOR_KNOWLEDGE: dashboard研究主要面向组织内专家",
+      "LIMITATION: 面向普通公众的仪表板和学习功能研究稀缺",
+      "PRIOR_KNOWLEDGE: HCI已有conversational dashboard技术研究",
+      "LIMITATION: 现有conversational dashboard缺理论、缺严格评价、样本小",
+      "GAP: 三个具体文献缺口",
+      "THEORY_INTRO: TEU的有效使用构念和透明交互",
+      "MECHANISM: TEU的adaptation和learning驱动透明交互",
+      "LIMITATION: TEU缺少如何设计以改善透明交互的处方"
+    ],
+    "artifact_design_moves": [
+      "METHOD_JUSTIFICATION: DSR两轮迭代适合解决真实问题",
+      "RESULT: 第一轮访谈与原型评价暴露学习支持不足",
+      "TRANSITION: 反思引出第二轮",
+      "REQUIREMENT: MR1适应surface structure以支持自然语言",
+      "REQUIREMENT: MR2主动支持用户学习surface structure",
+      "THEORY_INTRO: affordances和enactive learning作为DP依据",
+      "MECHANISM: 自然语言使affordances更容易实际化",
+      "DESIGN_FEATURE: DP1提供自然语言交互",
+      "MECHANISM: TEU强调user-system-task三元关系，限制单一方式可能适得其反",
+      "DESIGN_FEATURE: DP2提供自然语言与鼠标选择",
+      "DESIGN_FEATURE: DP3提供conversational onboarding",
+      "HYPOTHESIS_OR_PROPOSITION: 导出两个testable propositions"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 先技术性能评价后用户实验",
+      "BENCHMARK_OR_CONTRAST: NLP性能用人工ground truth和相关系统",
+      "RESULT: NLP组件性能达标",
+      "STUDY_OVERVIEW: 六种dashboard版本，TDB、CDB-NLO、CDB-NLE × onboarding",
+      "METHOD_JUSTIFICATION: 透明交互用最短导航路径比衡量",
+      "METHOD_JUSTIFICATION: 行为日志而非自我报告",
+      "RESULT: 操纵与随机化检验通过",
+      "RESULT: H1、H4-H6支持，H2、H3不支持",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 事后回归与中介分析解释CDB-NLE",
+      "RESULT: 自然语言使用比例显著影响透明交互"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 提供nascent design theory",
+      "CONTRIBUTION: 揭示设计权衡并由onboarding缓解",
+      "CONTRIBUTION: 方法论贡献——行为测量transparent interaction",
+      "PRACTICAL_STAKES: 给数据科学实践者提供架构和原则",
+      "BOUNDARY_CONDITION: 局限于COVID-19且仅透明交互维度",
+      "LIMITATION_AND_FUTURE: 其他危机、其他TEU维度、其他样本和环境",
+      "CONTRIBUTION: IS方法和理论可用于改进现实数据科学制品"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Theory of Effective Use (TEU)",
+      "Affordances理论",
+      "Enactive Learning理论",
+      "CUI与dashboard的IS/HCI文献"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "TEU不是事后解释标签：作者直接从TEU的transparent interaction、adaptation和learning构念推导出MR1/MR2，再分别通过affordances和enactive learning转译为DP1/DP2和DP3，并用实验检验这些DPs对透明交互的因果作用。",
+    "translation_chain_cn": "TEU的透明交互定义→表面结构成为接入障碍→适应表面结构（MR1）→自然语言作为更易实际化的physical affordance（DP1）→用户异质性和任务特性要求选择自由（DP2）→学习表面结构（MR2）→enactive learning要求练习、限制性流程、反馈→conversational onboarding（DP3）→从DPs推出testable propositions→实验以TDB/CDB-NLO/CDB-NLE×onboarding有无作为被操纵的DP差异→用透明交互、效率和effectiveness作为结果。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "TEU：适应surface structure可以改善透明交互；自然语言比把信息需求翻译成一系列GUI动作更直接",
+        "mechanism_cn": "自然语言降低用户实际化界面affordances的认知和操作成本",
+        "design_requirement_cn": "MR1：危机响应仪表板的surface structure应被适应为更自然的交互方式",
+        "artifact_choice_cn": "DP1：提供语音/文本自然语言交互；DP2：提供自然语言与鼠标两种可切换方式",
+        "evaluated_contrast_cn": "CDB-NLO/ CDB-NLE 对比 TDB；CDB-NLE中NL使用比例作为连续条件",
+        "objective_result_cn": "CDB-NLO透明交互显著高于TDB；CDB-NLE平均不显著，但NL使用比例β=0.54显著",
+        "evidence_pointers": [
+          "Section 3.2 MR1",
+          "Section 3.3 DP1-DP2",
+          "Section 4.2 H1-H2",
+          "Post hoc analysis"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "TEU：learning surface structure可以改善透明交互；enactive learning通过行动后果进行学习",
+        "mechanism_cn": "onboarding让用户逐步练习自然语言操作、观察可视化变化并获得即时反馈，从而克服不熟悉感",
+        "design_requirement_cn": "MR2：危机响应仪表板应主动支持用户独立学习其surface structure",
+        "artifact_choice_cn": "DP3：conversational onboarding，包含固定练习序列、示范后立即复现、即时反馈",
+        "evaluated_contrast_cn": "六种dashboard中onboarding present vs absent",
+        "objective_result_cn": "CDB-NLE中有onboarding显著更高（0.42 vs 0.31）；CDB-NLO中无显著差异",
+        "evidence_pointers": [
+          "Section 3.2 MR2",
+          "Section 3.3 DP3",
+          "Section 4.2 H3-H4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "TEU：透明交互是higher-level目标（信息获取）的必要基础，能提高efficiency和effectiveness",
+        "mechanism_cn": "用户在透明交互中减少迷航和错误操作，因此更快完成且更少失败",
+        "design_requirement_cn": "评价中应将透明交互链接到效率和effectiveness，而不仅停留在界面满意度",
+        "artifact_choice_cn": "实验记录任务正确数和正确任务平均时间",
+        "evaluated_contrast_cn": "以透明交互为自变量，效率和effectiveness为因变量的多元回归",
+        "objective_result_cn": "透明交互对efficiency β=0.58，p<0.001；对effectiveness β=0.90，p<0.001",
+        "evidence_pointers": [
+          "Section 2.4 TEU",
+          "Section 4.2.2 Hypothesis testing",
+          "Table 6"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "技术组件性能评价",
+      "3×2受试者间在线实验",
+      "操纵检验与随机化检验",
+      "事后回归与中介分析",
+      "行为日志测量透明交互"
+    ],
+    "why_these_evaluations_cn": "需要先证明NLP组件在语音转写、实体抽取、意图映射和速度上足够可用，否则用户实验中任何负面结果都可被归因于技术失效；随后用3×2实验操纵DPs的有无，以检测设计原则对透明交互的因果影响；事后分析则处理被拒假设，检查自然语言实际使用比例和onboarding的中介机制。",
+    "benchmark_and_contrast_chain_cn": "TDB作为当前危机响应仪表板的baseline；CDB-NLO剥离鼠标、只留自然语言，检验DP1；CDB-NLE保留双模式，检验DP2；onboarding present/absent操纵DP3。透明交互本身用最短导航路径与实际路径之比作为客观基准。NLP性能用人工ground truth和Srinivasan & Stasko (2018)作benchmark。事后分析用NL使用比例作为连续行为基准，将H2被拒转为边界条件。",
+    "claim_evidence_ledger": [
+      {
+        "claim_type": "技术主张",
+        "claim_cn": "NLP组件能为会话式仪表板提供可用的语音/文本理解基础",
+        "evidence_cn": "4.1性能评价：3119条人工标注输入，语音转写90.2%，实体F1 92%，意图F1 82%，平均0.9秒",
+        "status": "较强支持"
+      },
+      {
+        "claim_type": "制品主张（DP1）",
+        "claim_cn": "仅用自然语言的会话式仪表板比传统鼠标仪表板提升透明交互",
+        "evidence_cn": "H1支持：CDB-NLO M=0.60 vs TDB M=0.31，p<0.001",
+        "status": "支持"
+      },
+      {
+        "claim_type": "制品主张（DP2）",
+        "claim_cn": "同时提供自然语言和鼠标能提升透明交互",
+        "evidence_cn": "H2未支持：CDB-NLE与TDB无显著差异；事后NL使用比例β=0.54，说明效果依赖实际使用",
+        "status": "部分支持/条件支持"
+      },
+      {
+        "claim_type": "制品主张（DP3）",
+        "claim_cn": "conversational onboarding能提升透明交互",
+        "evidence_cn": "H4支持（CDB-NLE中M=0.42 vs 0.31），H3不支持（CDB-NLO无显著差异）",
+        "status": "部分支持"
+      },
+      {
+        "claim_type": "机制主张",
+        "claim_cn": "自然语言降低将信息需求翻译为界面动作的难度，且帮助用户学会何时用哪种方式",
+        "evidence_cn": "TEU推导、访谈、事后分析；不支持通过NL使用频率的间接效应",
+        "status": "间接支持"
+      },
+      {
+        "claim_type": "边界主张",
+        "claim_cn": "只有当用户实际使用自然语言时透明交互才提高；选择自由本身不能保证效果",
+        "evidence_cn": "CDB-NLE中NL使用比例与透明交互正相关；部分用户只用鼠标",
+        "status": "支持"
+      },
+      {
+        "claim_type": "设计知识",
+        "claim_cn": "MR1-MR2与DP1-DP3可作为扩展危机响应仪表板的设计原则",
+        "evidence_cn": "Table 7中的nascent design theory；实验与NLP评价提供说明性实例",
+        "status": "中等支持，需在其他危机验证"
+      },
+      {
+        "claim_type": "理论贡献",
+        "claim_cn": "从TEU到危机响应仪表板的prescriptive knowledge，并扩展effective use测量方法",
+        "evidence_cn": "MRs由TEU的adaptation/learning导出；行为测量计算导航路径与最短路径比",
+        "status": "概念贡献，实证限于透明交互维度"
+      }
+    ],
+    "internal_validity_strategy_cn": "被试间随机分配；六个条件由同一artifact变体生成；操纵检验（98%正确识别交互方式、self-efficacy前后测显著提升）；随机化检验在年龄、性别、教育、经验上无显著差异；透明交互采用行为日志而非自我报告；任务设计避免直接复制任务文本到聊天框；最短路径基准按每个dashboard类型分别计算。",
+    "external_validity_strategy_cn": "采用MTurk以获取比学生样本更多样的参与者；访谈中包含较不熟悉技术的用户；以COVID-19公共仪表板作为真实上下文；说明系统架构和开源组件以提高可复现性；讨论中明确限定COVID-19和透明交互维度，建议未来扩展到其他危机和其他TEU维度。",
+    "what_is_not_actually_tested_cn": "representational fidelity和informed action两个TEU维度未被测量；DPs在非COVID危机（如自然灾害）中未被检验；conversational onboarding对CDB-NLO无显著效果，其机制证据主要来自事后分析；对“自然语言更容易”的认知负荷机制没有直接测量。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "所实现的NLP组件能够在语音转写、实体抽取、意图映射和响应速度上达到可用水平（语音90.2%、实体F1 92%、意图F1 82%、0.9秒），足以支撑自然语言交互。",
+    "artifact_claim_cn": "基于DP1的CDB-NLO显著提升透明交互；DP3的onboarding在CDB-NLE条件下显著提升透明交互；DP2的选择自由本身不必然提升透明交互，效果依赖用户实际使用自然语言。",
+    "mechanism_claim_cn": "自然语言让用户直接表达信息需求而非翻译成GUI动作，因此降低透明交互障碍；onboarding通过逐步练习和反馈帮助用户熟悉自然语言并学会在何时选择合适交互方式。",
+    "boundary_claim_cn": "效果适用于愿意并实际使用自然语言的用户；当用户保留鼠标而完全不用自然语言时，CDB-NLE不优于TDB；onboarding能缓解这种权衡。边界目前限定在COVID-19类危机响应仪表板和透明交互维度。",
+    "reusable_design_knowledge_cn": "可复用的MR1/MR2、DP1-DP3、系统架构、意图/实体表、反馈模板、onboarding流程，以及以Gregor和Jones框架表述的nascent design theory。",
+    "theoretical_contribution_cn": "把TEU从解释性理论延伸到危机响应仪表板的处方性设计知识；揭示多交互方式的设计权衡；提出一种基于行为日志测量transparent interaction的方法，补充了以往以自我报告为主的有效使用测量。",
+    "how_discussion_closes_intro_gap_cn": "讨论用Table 7的设计理论直接回应引言中的RQ，说明如何用自然语言扩展危机响应仪表板；通过测试后的DPs、被拒假设的边界和事后分析，把一次性实验转化为可复用的设计知识和设计权衡；并回到数据科学民主化的目标，强调信息价值链后端的用户访问。",
+    "overclaim_or_unsupported_leaps_cn": "作者在讨论中将onboarding描述为设计权衡的解决方案，但H3在CDB-NLO下不显著，CDB-NLE的效果也依赖事后分析；将COVID-19仪表板推广到其他危机更多是推断而非检验；对自然语言更容易的机制未直接测量认知负荷；NLP性能的ground truth标注者一致性中等（kappa=0.52）。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "危机本质上不可预测、突然且混乱。",
+      "rhetorical_function_cn": "建立危机情境背景，为信息需求提供现实锚点。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出公众在危机中需要快速准确信息。",
+      "evidence_pointer": "Introduction第1段"
+    },
+    {
+      "order": 2,
+      "section": "Introduction",
+      "locator": "P1 S2-S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "危机发生时人们要为自己、家庭和社区做决定，政府和卫生组织越来越依赖危机响应仪表板。",
+      "rhetorical_function_cn": "说明危机响应仪表板的重要性和现实后果。",
+      "depends_on_cn": "依赖危机背景。",
+      "sets_up_cn": "为后文评价仪表板效果提供标准。",
+      "evidence_pointer": "Introduction第1段"
+    },
+    {
+      "order": 3,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "研究人员和实践者假设疫情仪表板效果很好，只要数据准确且可视化可交互。",
+      "rhetorical_function_cn": "给出与后文相反的主流假设。",
+      "depends_on_cn": "前文提及仪表板高访问量。",
+      "sets_up_cn": "制造高访问量与有效使用之间的张力。",
+      "evidence_pointer": "Introduction第2段"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "P2 S2-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "人们必须有效使用系统而非仅仅使用；有效使用的基本维度是透明交互，即不被界面和物理结构阻碍地访问信息。",
+      "rhetorical_function_cn": "引入TEU的核心构念，把访问量问题转为透明交互问题。",
+      "depends_on_cn": "引入有效使用文献。",
+      "sets_up_cn": "为后续以透明交互作为核心结果变量做准备。",
+      "evidence_pointer": "Introduction第2段"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "P3 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "对不熟悉技术或领域知识有限的用户，透明交互可能比预期更难；用户面对复杂导航经常挣扎。",
+      "rhetorical_function_cn": "描述普通用户使用危机仪表板的具体困难现象。",
+      "depends_on_cn": "透明交互构念。",
+      "sets_up_cn": "为设计变革提供现实依据。",
+      "evidence_pointer": "Introduction第3段"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "P3 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "对美国52个州级COVID-19仪表板的审查显示，很多复杂到连有经验的健康研究者都难找到关键信息。",
+      "rhetorical_function_cn": "用外部证据支持普通用户困难并非个别现象。",
+      "depends_on_cn": "现象描述。",
+      "sets_up_cn": "强化现有设计不能满足公众需求的判断。",
+      "evidence_pointer": "Introduction第3段"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "危机响应仪表板面向普通公众，必须让不同背景用户透明交互；自然语言是一种有前景的方式，但我们对如何设计conversational dashboard以及它是否真能提升透明交互知之甚少。",
+      "rhetorical_function_cn": "明确研究缺口：设计知识与效果未知。",
+      "depends_on_cn": "前文困难现象和自然语言技术背景。",
+      "sets_up_cn": "直接引出研究问题。",
+      "evidence_pointer": "Introduction第4段"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P4 RQ",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "研究问题：如何用自然语言交互能力扩展危机响应仪表板，以改善透明交互和信息获取？",
+      "rhetorical_function_cn": "给出全文要回答的问题。",
+      "depends_on_cn": "缺口陈述。",
+      "sets_up_cn": "后续DSR流程围绕该RQ展开。",
+      "evidence_pointer": "Introduction第4段末尾"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P5 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "采用DSR方法，以TEU为理论驱动，提出设计并实例化为COVID-19会话式仪表板，支持语音或文字自然语言以及conversational onboarding。",
+      "rhetorical_function_cn": "预告研究方法和理论框架。",
+      "depends_on_cn": "RQ。",
+      "sets_up_cn": "给读者预期的制品和论证路径。",
+      "evidence_pointer": "Introduction第5段"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P5 S4-S8",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "评价显示自然语言提升透明交互并最终提高效率和效果；工作有助于数据科学民主化、dashboard设计研究，并揭示多交互方式的设计权衡。",
+      "rhetorical_function_cn": "提前声明贡献，定位论文在IS和数据科学中的价值。",
+      "depends_on_cn": "设计和评价预告。",
+      "sets_up_cn": "为讨论部分的三个理论贡献埋伏笔。",
+      "evidence_pointer": "Introduction第5段"
+    },
+    {
+      "order": 11,
+      "section": "2.1 Conversational User Interfaces",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "CUI允许用自然语言交互；IS研究关注拟人化设计对不同情境的影响，HCI研究关注真实环境中的期望与设计挑战。",
+      "rhetorical_function_cn": "综述CUI研究现状，划定本工作所属领域。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后文说明conversational dashboard的缺口提供背景。",
+      "evidence_pointer": "Section 2.1开头"
+    },
+    {
+      "order": 12,
+      "section": "2.1 Conversational User Interfaces",
+      "locator": "P3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "CUI难以传达GUI提供的丰富可视化信息，因此更应作为GUI的补充而非替代。",
+      "rhetorical_function_cn": "指出纯CUI的局限，为双模式设计（DP2）铺垫。",
+      "depends_on_cn": "CUI综述。",
+      "sets_up_cn": "引出dashboard和conversational dashboard交叉领域。",
+      "evidence_pointer": "Section 2.1末段"
+    },
+    {
+      "order": 13,
+      "section": "2.2 Dashboards",
+      "locator": "P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "仪表板定义和BI仪表板用途，IS研究大多聚焦组织内决策者和领域专家。",
+      "rhetorical_function_cn": "说明dashboard研究的主要目标用户。",
+      "depends_on_cn": "前文GUI补充讨论。",
+      "sets_up_cn": "与面向普通公众的危机响应仪表板形成对比。",
+      "evidence_pointer": "Section 2.2第1段"
+    },
+    {
+      "order": 14,
+      "section": "2.2 Dashboards",
+      "locator": "P1-P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "很少IS研究关注组织外普通受众的仪表板；现有仪表板几乎都依赖GUI，且学习功能限于帮助按钮和tooltip。",
+      "rhetorical_function_cn": "识别第一个文献缺口：目标受众和学习支持不足。",
+      "depends_on_cn": "dashboard综述。",
+      "sets_up_cn": "为MR2和DP3提供文献依据。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 15,
+      "section": "2.3 Conversational Dashboards",
+      "locator": "P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "HCI研究已探索conversational dashboard的技术基础以及语音、触摸、键盘的多模态交互。",
+      "rhetorical_function_cn": "承认HCI领域的先行工作。",
+      "depends_on_cn": "CUI与dashboard综述。",
+      "sets_up_cn": "说明这些工作仍集中于技术而非理论驱动设计。",
+      "evidence_pointer": "Section 2.3开头"
+    },
+    {
+      "order": 16,
+      "section": "2.3 Conversational Dashboards",
+      "locator": "P2-P3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "但HCI研究也大多面向领域专家和技术熟练用户，样本小，且缺少严格评价和理论驱动的设计原则。",
+      "rhetorical_function_cn": "指出该子领域的方法和理论缺陷。",
+      "depends_on_cn": "HCI先行工作综述。",
+      "sets_up_cn": "导出三个观察缺口。",
+      "evidence_pointer": "Section 2.3末段"
+    },
+    {
+      "order": 17,
+      "section": "2.3 Conversational Dashboards",
+      "locator": "P4",
+      "move_code": "GAP",
+      "paraphrase_cn": "总结三点：面向大众的危机响应仪表板设计研究稀缺；conversational dashboard缺少理论驱动设计和严格评价；集成学习功能研究不足。",
+      "rhetorical_function_cn": "将文献综述压缩成可辩护的研究缺口。",
+      "depends_on_cn": "前面三个小节综述。",
+      "sets_up_cn": "直接引出本工作的定位和贡献。",
+      "evidence_pointer": "Section 2.3末段"
+    },
+    {
+      "order": 18,
+      "section": "2.4 Theory of Effective Use",
+      "locator": "P1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "TEU基于representation theory，认为系统必须被有效使用；有效使用由透明交互、表征保真和知情行动三个层次构成，本文聚焦透明交互。",
+      "rhetorical_function_cn": "引入内核理论并选择研究起点。",
+      "depends_on_cn": "文献缺口。",
+      "sets_up_cn": "为MRs推导提供理论词汇。",
+      "evidence_pointer": "Section 2.4第1段"
+    },
+    {
+      "order": 19,
+      "section": "2.4 Theory of Effective Use",
+      "locator": "P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "TEU提出adaptation和learning是有效使用的驱动因素；本文关注适应和学习surface structure。",
+      "rhetorical_function_cn": "给出透明交互如何可以被提升的机制。",
+      "depends_on_cn": "TEU构念。",
+      "sets_up_cn": "为MR1和MR2提供直接理论依据。",
+      "evidence_pointer": "Section 2.4第2段"
+    },
+    {
+      "order": 20,
+      "section": "2.4 Theory of Effective Use",
+      "locator": "P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "但危机响应仪表板用户临时使用、没有组织培训，TEU并未规定应做什么设计来改进透明交互。",
+      "rhetorical_function_cn": "说明理论有解释力但缺设计处方，证明需要DSR。",
+      "depends_on_cn": "TEU机制。",
+      "sets_up_cn": "引出本设计研究要补上的MR-DP知识。",
+      "evidence_pointer": "Section 2.4末段"
+    },
+    {
+      "order": 21,
+      "section": "3.1 Design Process",
+      "locator": "P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用DSR框架和两轮构建-评价循环，本文报告第二轮及最终结果。",
+      "rhetorical_function_cn": "说明方法选择和研究阶段的呈现方式。",
+      "depends_on_cn": "RQ。",
+      "sets_up_cn": "为理解后续MR-DP-artifact-实验顺序提供脚手架。",
+      "evidence_pointer": "Section 3.1开头"
+    },
+    {
+      "order": 22,
+      "section": "3.1 Design Process",
+      "locator": "第一循环描述",
+      "move_code": "RESULT",
+      "paraphrase_cn": "文献和6人访谈显示透明交互困难；据此用TEU导出MRs和初始DPs并构建原型。",
+      "rhetorical_function_cn": "报告第一轮前半段结果，显示MRs来自真实问题。",
+      "depends_on_cn": "2.4 TEU。",
+      "sets_up_cn": "为第一轮原型评价提供前提。",
+      "evidence_pointer": "Section 3.1第一循环段落"
+    },
+    {
+      "order": 23,
+      "section": "3.1 Design Process",
+      "locator": "第一轮原型评价段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "15人think-aloud显示所有参与者喜欢自然语言，但多数不使用帮助按钮或帮助消息，并对自然语言交互缺乏熟悉感和信心。",
+      "rhetorical_function_cn": "用初评结果暴露初始设计的学习支持失败。",
+      "depends_on_cn": "初始原型。",
+      "sets_up_cn": "为conversational onboarding的出现提供直接动机。",
+      "evidence_pointer": "Section 3.1第一循环评价段"
+    },
+    {
+      "order": 24,
+      "section": "3.1 Design Process",
+      "locator": "第二循环开头",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "这一反思成为第二循环入口，最终导致onboarding开发；第二轮引入enactive learning并构建完整artifact。",
+      "rhetorical_function_cn": "承接第一轮失败并预告第二循环设计。",
+      "depends_on_cn": "第一轮评价。",
+      "sets_up_cn": "将设计重点移到学习支持。",
+      "evidence_pointer": "Section 3.1第二循环段落"
+    },
+    {
+      "order": 25,
+      "section": "3.2 Problem Description and Meta-Requirements",
+      "locator": "MR1附近",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "MR1：危机响应仪表板的surface structure应适应为更自然的交互方式以改善透明交互。",
+      "rhetorical_function_cn": "把TEU的adaptation翻译为具体元需求。",
+      "depends_on_cn": "TEU适应构念和访谈证据。",
+      "sets_up_cn": "为DP1和DP2设定目标。",
+      "evidence_pointer": "Section 3.2 MR1"
+    },
+    {
+      "order": 26,
+      "section": "3.2 Problem Description and Meta-Requirements",
+      "locator": "MR2附近",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "MR2：危机响应仪表板应主动支持用户独立学习其surface structure。",
+      "rhetorical_function_cn": "把TEU的learning翻译为元需求。",
+      "depends_on_cn": "TEU学习构念和组织培训缺失情境。",
+      "sets_up_cn": "为DP3设定目标。",
+      "evidence_pointer": "Section 3.2 MR2"
+    },
+    {
+      "order": 27,
+      "section": "3.3 Design Principles",
+      "locator": "DP1前",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "affordances是HCI/IS中描述用户如何与系统交互的核心概念，physical affordances如按钮；自然语言能降低实际化affordances的难度。",
+      "rhetorical_function_cn": "为DP1/DP2提供机制性理论基础。",
+      "depends_on_cn": "MR1。",
+      "sets_up_cn": "使DP1/DP2不是任意技术选择。",
+      "evidence_pointer": "Section 3.3 DP1前"
+    },
+    {
+      "order": 28,
+      "section": "3.3 Design Principles",
+      "locator": "DP1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DP1：为让公众无缝导航，提供自然语言语音或文本交互，因为表述信息需求比翻译成一系列GUI动作更容易。",
+      "rhetorical_function_cn": "给出第一条设计原则，并以Gregor schema表述。",
+      "depends_on_cn": "MR1和affordances论证。",
+      "sets_up_cn": "成为实验中的CDB-NLO/CDB-NLE共同条件。",
+      "evidence_pointer": "Section 3.3 DP1"
+    },
+    {
+      "order": 29,
+      "section": "3.3 Design Principles",
+      "locator": "DP2前",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "TEU强调透明交互依赖用户、系统和任务，不同用户和任务适合不同交互方式，因此不能强制只用自然语言。",
+      "rhetorical_function_cn": "为双模式选择提供理论理由，避免简单地把CUI当唯一方案。",
+      "depends_on_cn": "TEU用户-系统-任务三元关系。",
+      "sets_up_cn": "DP2成为被实验检验的重要差异。",
+      "evidence_pointer": "Section 3.3 DP2前"
+    },
+    {
+      "order": 30,
+      "section": "3.3 Design Principles",
+      "locator": "DP2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DP2：提供自然语言与鼠标之间的选择自由，给用户灵活性和偏好空间。",
+      "rhetorical_function_cn": "将用户异质性转化为设计特征。",
+      "depends_on_cn": "TEU用户-系统-任务论证。",
+      "sets_up_cn": "实验中的CDB-NLE条件与TDB、CDB-NLO对照。",
+      "evidence_pointer": "Section 3.3 DP2"
+    },
+    {
+      "order": 31,
+      "section": "3.3 Design Principles",
+      "locator": "DP3前",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "enactive learning涉及从行动后果中学习，适合作为web-based onboarding的理论基础。",
+      "rhetorical_function_cn": "为DP3引入学习理论。",
+      "depends_on_cn": "MR2。",
+      "sets_up_cn": "DP3中的练习序列和反馈特征有理论依据。",
+      "evidence_pointer": "Section 3.3 DP3前"
+    },
+    {
+      "order": 32,
+      "section": "3.3 Design Principles",
+      "locator": "DP3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DP3：提供逐步的conversational onboarding，让用户在真实仪表板上练习自然语言、观察后果并获得反馈。",
+      "rhetorical_function_cn": "给出第三条设计原则，直接回应第一轮帮助按钮无效问题。",
+      "depends_on_cn": "MR2和enactive learning。",
+      "sets_up_cn": "成为实验中的onboarding条件。",
+      "evidence_pointer": "Section 3.3 DP3"
+    },
+    {
+      "order": 33,
+      "section": "3.4 Testable Design Propositions",
+      "locator": "Proposition 1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "Proposition 1：具有CUI的危机响应会话式仪表板能使用户达到更高透明交互。",
+      "rhetorical_function_cn": "把DP1/DP2翻译成可检验命题。",
+      "depends_on_cn": "DP1和DP2。",
+      "sets_up_cn": "形成实验中的H1、H2。",
+      "evidence_pointer": "Section 3.4"
+    },
+    {
+      "order": 34,
+      "section": "3.4 Testable Design Propositions",
+      "locator": "Proposition 2",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "Proposition 2：配备conversational onboarding的会话式仪表板能使用户达到更高透明交互。",
+      "rhetorical_function_cn": "把DP3翻译成可检验命题。",
+      "depends_on_cn": "DP3。",
+      "sets_up_cn": "形成实验中的H3、H4。",
+      "evidence_pointer": "Section 3.4"
+    },
+    {
+      "order": 35,
+      "section": "3.5 Artifact Description",
+      "locator": "3.5.1-3.5.3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "描述系统架构：dashboard可视化、交互管理、NLP组件（NLU、dialog management、response generation）和反馈模板。",
+      "rhetorical_function_cn": "展示DPs如何在software artifact中落地，提供可复现蓝图。",
+      "depends_on_cn": "DP1-DP3。",
+      "sets_up_cn": "为NLP性能评价提供被检对象。",
+      "evidence_pointer": "Section 3.5"
+    },
+    {
+      "order": 36,
+      "section": "3.5.4 Conversational Onboarding",
+      "locator": "整段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "onboarding按固定序列让用户练习过滤、钻取和汇总操作，示范后立即复现并获取即时反馈。",
+      "rhetorical_function_cn": "展示DP3的具体功能特征。",
+      "depends_on_cn": "enactive learning。",
+      "sets_up_cn": "为实验中的onboarding条件提供操作定义。",
+      "evidence_pointer": "Section 3.5.4"
+    },
+    {
+      "order": 37,
+      "section": "4 Evaluation",
+      "locator": "开头段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "进行两类评价：NLP组件性能评价，以及检验设计是否提升透明交互的在线实验。",
+      "rhetorical_function_cn": "预告评价结构。",
+      "depends_on_cn": "artifact构建。",
+      "sets_up_cn": "分别建立技术有效性和用户层面有效性。",
+      "evidence_pointer": "Section 4开头"
+    },
+    {
+      "order": 38,
+      "section": "4.1 Performance Evaluation",
+      "locator": "开头段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用用户评价中收集的3119条自然语言输入和264名MTurk标注者得到的ground truth，评估语音转写、实体抽取和意图映射。",
+      "rhetorical_function_cn": "说明NLP评价的数据来源和测量逻辑。",
+      "depends_on_cn": "用户实验数据收集。",
+      "sets_up_cn": "报告技术性能，为后续用户实验提供技术置信。",
+      "evidence_pointer": "Section 4.1开头"
+    },
+    {
+      "order": 39,
+      "section": "4.1.2 Results",
+      "locator": "整段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "语音转写准确率90.2%，实体F1 92%，意图F1 82%，平均响应0.9秒，达到可接受水平并可与相关系统比较。",
+      "rhetorical_function_cn": "给出NLP评价的主要结果。",
+      "depends_on_cn": "ground truth数据集。",
+      "sets_up_cn": "支持技术基础可行，排除技术混淆。",
+      "evidence_pointer": "Section 4.1.2"
+    },
+    {
+      "order": 40,
+      "section": "4.2 User Evaluation",
+      "locator": "开头段",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "开发六种dashboard版本，比较TDB、CDB-NLO、CDB-NLE与onboarding有无，将命题转成H1-H6。",
+      "rhetorical_function_cn": "给出实验设计总览。",
+      "depends_on_cn": "testable propositions。",
+      "sets_up_cn": "为假设检验提供地图。",
+      "evidence_pointer": "Section 4.2开头，Table 4"
+    },
+    {
+      "order": 41,
+      "section": "4.2.1 Method",
+      "locator": "实验设计和流程",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用3×2被试间设计；任务随机化、仪表板每次重置；任务被设计为不能直接复制任务文本，需重组或拆分。",
+      "rhetorical_function_cn": "说明实验控制和任务设计的公平性。",
+      "depends_on_cn": "六种artifact版本。",
+      "sets_up_cn": "为透明交互比较提供可信程序。",
+      "evidence_pointer": "Section 4.2.1"
+    },
+    {
+      "order": 42,
+      "section": "4.2.1 Variables",
+      "locator": "变量操作化段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "透明交互用实际导航步数与最短路径步数之比测量；effectiveness是正确任务数，efficiency是正确任务平均时间。",
+      "rhetorical_function_cn": "把TEU构念操作化为可计算行为指标。",
+      "depends_on_cn": "TEU的定义和日志系统。",
+      "sets_up_cn": "让H5/H6的检验成为可能。",
+      "evidence_pointer": "Section 4.2.1 Variables"
+    },
+    {
+      "order": 43,
+      "section": "4.2.2 Results",
+      "locator": "操纵和随机化检验",
+      "move_code": "RESULT",
+      "paraphrase_cn": "98%参与者正确识别交互方式；onboarding显著提高自我效能；六个条件在人口统计和经验变量上无显著差异。",
+      "rhetorical_function_cn": "确认实验操纵有效、随机化成功。",
+      "depends_on_cn": "实验程序。",
+      "sets_up_cn": "使后续假设检验更可信。",
+      "evidence_pointer": "Section 4.2.2"
+    },
+    {
+      "order": 44,
+      "section": "4.2.2 Hypothesis testing",
+      "locator": "ANOVA和planned contrasts",
+      "move_code": "RESULT",
+      "paraphrase_cn": "双因素ANOVA显示dashboard类型和onboarding都有显著主效应；planned contrasts显示H1、H4、H5、H6支持，H2、H3不支持。",
+      "rhetorical_function_cn": "汇总六个假设得失，作为设计主张的证据。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "为事后分析和讨论中的边界条件提供入口。",
+      "evidence_pointer": "Section 4.2.2，Table 5-6"
+    },
+    {
+      "order": 45,
+      "section": "4.2.2 Post hoc analysis",
+      "locator": "回归和中介分析",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "CDB-NLE中NL使用比例显著正向预测透明交互（β=0.54）；onboarding的直接效应显著，但通过NL使用频率的间接效应不显著。",
+      "rhetorical_function_cn": "解释被拒假设，检验机制和边界。",
+      "depends_on_cn": "H2被拒和CDB-NLE日志。",
+      "sets_up_cn": "支撑设计权衡与onboarding作用方式的讨论。",
+      "evidence_pointer": "Section 4.2.2 Post hoc，Figure 5"
+    },
+    {
+      "order": 46,
+      "section": "5.1 Theoretical Contributions",
+      "locator": "第一贡献",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "核心贡献是用Table 7的nascent design theory给出扩展危机响应仪表板自然语言交互的处方知识。",
+      "rhetorical_function_cn": "把设计结果升格为设计理论。",
+      "depends_on_cn": "MRs、DPs、实验证据。",
+      "sets_up_cn": "保护贡献不被视为一次性系统结果。",
+      "evidence_pointer": "Section 5.1第一段和Table 7"
+    },
+    {
+      "order": 47,
+      "section": "5.1 Theoretical Contributions",
+      "locator": "第二贡献",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第二个贡献是揭示多交互方式的设计权衡：自然语言和鼠标并存时部分用户只用鼠标，onboarding可缓解这一权衡。",
+      "rhetorical_function_cn": "从被拒假设提炼设计权衡知识。",
+      "depends_on_cn": "H2被拒和事后分析。",
+      "sets_up_cn": "为实践者提供组合交互模式的使用建议。",
+      "evidence_pointer": "Section 5.1第二段"
+    },
+    {
+      "order": 48,
+      "section": "5.1 Theoretical Contributions",
+      "locator": "第三贡献",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第三个贡献是方法论贡献：用交互日志计算最短路径比来客观测量transparent interaction。",
+      "rhetorical_function_cn": "提出可复用的测量方法，回应有效使用研究对客观测量的需要。",
+      "depends_on_cn": "变量操作化。",
+      "sets_up_cn": "为IS use文献提供方法论工具。",
+      "evidence_pointer": "Section 5.1第三段"
+    },
+    {
+      "order": 49,
+      "section": "5.2 Practical Implications",
+      "locator": "整段",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "对数据科学实践者和政府机构给出落地指南：先以自然语言补充鼠标，并配合onboarding让用户知道何时用自然语言。",
+      "rhetorical_function_cn": "把设计知识转译给实践者。",
+      "depends_on_cn": "实验结果与设计原则。",
+      "sets_up_cn": "完成从研究到行动的建议闭环。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 50,
+      "section": "5.3 Limitations and Future Research",
+      "locator": "第一限制",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "设计实例和评价聚焦于COVID-19仪表板；其他危机可能有不同数据和可视化，设计理论需在其他危机中检验。",
+      "rhetorical_function_cn": "界定贡献的适用范围并给出未来方向。",
+      "depends_on_cn": "实例选择。",
+      "sets_up_cn": "防止把COVID-19特定结果过度泛化。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 51,
+      "section": "5.3 Limitations and Future Research",
+      "locator": "第二限制",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "研究只覆盖TEU的transparent interaction维度，未覆盖representational fidelity和informed action。",
+      "rhetorical_function_cn": "明确理论边界。",
+      "depends_on_cn": "TEU框架。",
+      "sets_up_cn": "为未来effective use研究留出空间。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 52,
+      "section": "5.3 Limitations and Future Research",
+      "locator": "第三至第五限制",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "样本来自MTurk、实验环境为桌面端、透明交互测量基于日志，这些都可能限制推广性。",
+      "rhetorical_function_cn": "列出影响外部效度的因素并提议未来研究。",
+      "depends_on_cn": "实验设置。",
+      "sets_up_cn": "保持论文的学术谦逊，并为后续研究铺路。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 53,
+      "section": "6 Conclusion",
+      "locator": "整段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "IS理论与方法能改善真实世界的数据科学制品，帮助世界更好应对危机。",
+      "rhetorical_function_cn": "将贡献提升到学科和社会层面，收束全文。",
+      "depends_on_cn": "全部设计和评价。",
+      "sets_up_cn": "结束论文并强化social good特刊主题。",
+      "evidence_pointer": "Section 6"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先制造现实张力：仪表板访问量巨大与普通用户困难并存；随后将文献缺口拆成三个可操作观察——受众错位、缺理论驱动设计、缺学习功能；最后用TEU把缺口表述为surface structure适应与学习不足，从而给出填补缺口的明确路径。",
+    "signposting_cn": "开篇RQ作为航标；理论部分明确三点观察；设计部分按MRs/DPs/propositions/artifact推进；评价前预告“技术性能评价+用户实验”；讨论部分按三个理论贡献组织；结尾用Table 7汇总设计理论。",
+    "transition_logic_cn": "从CUI与dashboard的独立综述过渡到conversational dashboards交叉综述；从已有技术进展过渡到“缺理论、缺评价”；从第一轮评估中“没人用帮助按钮”自然引出第二轮onboarding；从实验被拒假设进入事后分析；从结果进入设计理论和贡献。",
+    "claim_evidence_rhythm_cn": "每个MR/DP先给理论机制再给设计选择；每个命题先由TEU逻辑推出再进入假设；每个假设之后接检验结果；被拒假设不隐藏，用Table 6汇总并做post hoc解释；贡献部分再回到证据和边界。",
+    "benchmark_narrative_cn": "TDB作为当前危机响应仪表板的baseline；CDB-NLO/ CDB-NLE与TDB的对比用于分离DP1和DP2；onboarding有无分离DP3；透明交互用最短导航路径作客观基准；NLP性能用人工ground truth和相关系统作benchmark；事后用NL使用比例作为连续行为基准。",
+    "theory_return_cn": "把实验结果翻译回TEU的adaptation/learning构念：NL是surface structure adaptation，onboarding是learning；H2失败被解释为transparent interaction依赖user-system-task三元关系；最后将结果写成以TEU为justificatory knowledge的nascent design theory。",
+    "contribution_positioning_cn": "避免只宣称“我们的系统更好”；贡献定位为设计理论、设计权衡知识和方法论贡献；用Gregor和Jones框架使贡献可复用；同时将dashboard设计放在数据科学民主化和信息价值链后端。",
+    "novelty_protection_cn": "没有把H2被拒当失败，而是将其转化为“设计权衡+onboarding缓解”知识；用post hoc行为比例证明效果依赖实际使用；用Table 7把一次性COVID-19实例提炼成mutable design theory；讨论中明确未来向其他危机迁移。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实背景：危机中快速准确信息需求、政府依赖仪表板、高访问量",
+        "research_job_cn": "收集现实证据（使用量、用户困难报告）",
+        "required_evidence_cn": "能说明危机仪表板重要性与用户存在透明交互困难的证据",
+        "transition_to_next_cn": "从“被使用”过渡到“被有效使用”，引出透明交互问题"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "把一般问题收窄为文献缺口：三类观察",
+        "research_job_cn": "系统综述IS/HCI中dashboard与CUI研究，识别目标用户、理论、学习功能三个空白",
+        "required_evidence_cn": "文献中面向领域专家、缺少理论驱动会话式仪表板、缺少集成学习功能的证据",
+        "transition_to_next_cn": "选择可用于解决缺口的kernel theory"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "导出MRs：用TEU的adaptation/learning把问题变成设计需求",
+        "research_job_cn": "将theory构念映射到情境约束（无组织培训、普通公众、临时使用）",
+        "required_evidence_cn": "TEU构念与访谈/文献证据共同支撑MR1和MR2",
+        "transition_to_next_cn": "用支撑理论细化DPs"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "把MRs翻译为DPs：用affordances/enactive learning说明为何这些特征有效",
+        "research_job_cn": "确定可操作设计选择，用Gregor schema书写DPs，并处理交互方式组合问题",
+        "required_evidence_cn": "每条DP有理论机制、与MR对应，并能导出testable propositions",
+        "transition_to_next_cn": "提出命题并构建实例"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "描述artifact架构与实现，使DPs可复现",
+        "research_job_cn": "用开源组件构建系统，记录意图/实体表、反馈模板、onboarding流程",
+        "required_evidence_cn": "组件功能齐备、可运行",
+        "transition_to_next_cn": "先做技术性能评价排除技术不可用混淆"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计实验：用可操纵的DP差异作为条件，把核心构念操作化为行为指标",
+        "research_job_cn": "用3×2 factorial比较TDB/CDB-NLO/CDB-NLE与onboarding有无；用最短导航路径计算透明交互",
+        "required_evidence_cn": "操纵检验、随机化检验、假设检验和事后分析",
+        "transition_to_next_cn": "把结果放回理论，处理被拒假设"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用设计理论模板总结，并讨论贡献、边界和未来",
+        "research_job_cn": "将结果抽象为MRs/DPs/testable propositions/justificatory knowledge/artifact mutability",
+        "required_evidence_cn": "有证据支撑的DPs和明确的边界条件",
+        "transition_to_next_cn": "结束：贡献、实践意义、未来研究"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用Gregor schema书写DPs，将机制放进because从句",
+      "把theory构念转成MRs，再转DPs，避免设计选择任意化",
+      "用factorial instantiation分离不同DPs的效果",
+      "用行为日志计算最短路径比来操作化transparent interaction",
+      "对被拒假设做post hoc回归和中介分析，把失败转为边界知识",
+      "用设计理论表（Gregor & Jones）收束整篇论证"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "两个完整DSR循环需要访谈、原型、think-aloud和在线实验",
+      "MTurk 271名被试加264名标注者成本较高",
+      "NLP组件依赖LUIS、Bot Framework等云服务",
+      "最短路径操作化需要记录每步交互的日志系统和逐任务quickest path计算",
+      "COVID-19真实数据和公共仪表板情境具有时代特殊性"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写“based on TEU we propose DP1-DP3”却没有把MR和行为的因果关系连接",
+      "不能把被拒假设写成支持，而不提供post hoc解释",
+      "不能声称onboarding普适有效而不处理H3不显著",
+      "不能在缺少行为日志时宣称测量了transparent interaction",
+      "不能在没有NLP性能评价时宣称技术可用"
+    ],
+    "single_best_description_of_the_routine_cn": "以现实受众-技术错配制造张力，用kernel theory把缺口翻译成MR-DP链，以可操纵的DP差异作为实验条件，用行为日志定义核心构念，再用被拒假设和中介分析把局部效果提升为带边界的设计理论和测量贡献。"
+  },
+  "confidence": 0.9,
+  "limitations_cn": "全文文本完整可读，但Figure 1-5为图片附件，具体界面细节和非文字内容无法从文本核验；附录A1-A3表格完整。判断主要受限于无法考察文中未展示的NLU训练样本完整列表和系统日志原始字段。",
+  "usage": {
+    "prompt_tokens": 31502,
+    "completion_tokens": 26546,
+    "total_tokens": 58048,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 28174
+  }
+}

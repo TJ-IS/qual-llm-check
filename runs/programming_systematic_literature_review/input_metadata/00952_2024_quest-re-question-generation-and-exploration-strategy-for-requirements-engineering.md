@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85203105440"
+title: "Quest-RE QUestion Generation and Exploration STrategy for Requirements Engineering"
+authors: "Hasso H.; Fischer-Starcke B.; Geppert H."
+year: "2024"
+journal: "Proceedings - 32nd IEEE International Requirements Engineering Conference Workshops, REW 2024"
+doi: "10.1109/rew61692.2024.00006"
+---
+# Scopus title-abstract-keyword metadata
+Title: Quest-RE QUestion Generation and Exploration STrategy for Requirements Engineering
+Abstract: The quest for achieving completeness in requirements engineering (RE) is a complex challenge that requires innovative approaches to uncover and address hidden or incomplete requirements. This study introduces Quest- RE, a novel methodology leveraging Large Language Models (LLMs), specifically ChatGPT-4, to enhance the RE process through dynamic question generation and exploration strategies. By generating targeted questions referring to requirements, Quest- RE aims to improve communication between stakeholders and the RE team, thereby enhancing precision and completeness of requirements specifications (RS). The approach not only helps to identify gaps and missing elements in the requirements but also facilitates a deeper understanding and critical examination of the documented needs. For a given requirement, Quest- RE uses an algorithmic approach to generate related questions and question objectives. This ensures thorough exploration of each requirement beyond its initial scope. Two illustrative examples, one of it using requirements from the Fault Tolerant System Services (FTSS) and the Scheduling Services of NASA's X-38 Crew Return Vehicle, highlight the practical applicability and effectiveness of the approach in a complex engineering project. The study proposes that the incorporation of LLMs into RE can significantly influence communication and identification of requirements, thereby improving their overall quality. This research contributes to this area by offering an LLM - based approach to improve requirements elicitation and analysis, while also improving the readability and completeness of RS.  © 2024 IEEE.
+Author keywords: ChatGPT-4; Completeness of Requirements Specifications (RS); Large Language Models (LLMs); Question Generation; Read-ability of Requirements Specifications (RS); Requirements Engineering (RE)
+Index keywords: Fault tolerance; Fault tolerant computer systems; Reengineering; Requirements engineering; Specifications; ChatGPT-4; Completeness of requirement specification; Language model; Large language model; Question generation; Read-ability of requirement specification; Requirement engineering; Requirements specifications; NASA
+Document type: Conference paper
+Conference: 32nd IEEE International Requirements Engineering Conference Workshops, REW 2024
+Source title: Proceedings - 32nd IEEE International Requirements Engineering Conference Workshops, REW 2024
+Year: 2024
+EID: 2-s2.0-85203105440
+DOI: 10.1109/rew61692.2024.00006
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

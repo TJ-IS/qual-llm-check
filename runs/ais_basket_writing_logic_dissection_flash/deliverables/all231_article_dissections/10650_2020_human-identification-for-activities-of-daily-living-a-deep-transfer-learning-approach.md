@@ -1,0 +1,1973 @@
+# Human Identification for Activities of Daily Living: A Deep Transfer Learning Approach
+
+- 作者：Hongyi Zhu; Sagar Samtani; Hsinchun Chen; Jay F. Nunamaker
+- 年份 / 期刊：2020 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2020.1759961
+- 源文件：10650_2020_human-identification-for-activities-of-daily-living-a-deep-transfer-learning-approach.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：在家庭ADL监测中，如何利用匮乏的物体运动传感器标注数据，自动提取并迁移可泛化的运动特征，从而在多住户环境中准确识别活动执行者的人体身份？
+
+- 制品与设计：论文设计了一个深度迁移学习框架DTL-HID，包含两个核心制品：一是CNN-HID模型，通过1D时间核和2D交互核在同一网络中同时提取单轴时间依赖与跨轴依赖；二是三步式DTL-HID算法，先在丰富的可穿戴运动传感器源域数据上学习身份表征，再迁移CNN前若干层固定权重，最后在少量物体传感器目标域数据上微调分类层。
+
+- 客观结果：实验1中CNN-HID在HANDY源域上宏平均F1为0.984，显著超过手工特征机器学习和仅提取单类依赖的CNN变体；实验2中DTL-HID在四个物体传感器目标域上的微平均准确率为0.707，显著高于所有非迁移基准；实验3证明同时迁移时空依赖优于仅迁移时间或跨轴依赖；实验4证明源域活动多样性影响迁移效果，全部三类活动作为源域效果最佳。
+
+- 核心贡献：作者声称的主要贡献是：(1) 提出并实证验证了一个面向物体运动传感器HID的DTL-HID框架，可在少量标注数据下识别多住户ADL执行者；(2) 提出CNN-HID，自动提取时间和跨轴局部依赖，避免人工特征工程；(3) 以初步设计理论形式贡献两条设计原则：从多轴时间序列中提取时间和轴向局部依赖可捕获更丰富信息，以及在相关且数据充足的源域上预训练再迁移可提升稀缺目标域任务性能。
+
+- 整篇论证链：论文以全球老龄化和ADL监测需求为起点，指出个性化照护要求识别多住户环境中的活动执行者；在摄像头与可穿戴设备因隐私和负担难以被老年人接受的情况下，物体运动传感器虽然更易接受，却存在无可识别执行者、标注数据稀缺、传统特征工程劳动密集等限制。通过梳理ADL监测、HID和DTL三支文献，作者指出已有DTL多用于图像和文本等同质数据，而运动传感器数据同时包含时间依赖与跨轴依赖，且物体传感器HID缺乏充足标注。为填补此缺口，论文采用设计科学研究范式构建DTL-HID框架：以HANDY可穿戴传感器数据为源域、OPPO物体传感器数据为目标域，设计能同时提取两类局部依赖的CNN-HID，并制定学习—迁移—适配的三步迁移算法。评价部分通过四个递进实验分别检验CNN-HID在源域上的有效性、迁移知识对目标域的增益、同时迁移两类依赖的必要性以及源域活动构成的影响，最后用饮水活动案例研究展示实际可用性。结果逐级证明制品设计中的每个选择都有实证支撑，并将结果回收到两条可复用的设计原则和对IS知识库的贡献。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文明确以设计科学研究范式组织全文，将DTL-HID框架和CNN-HID视为IT制品，通过四组对照实验和案例研究进行严格评价，并以设计原则的形式贡献初步设计理论，而非仅报告某个计算模型在benchmark上的性能。
+
+- 主导写作弧线判定：全文遵循“实践需求与文献缺口—提取设计要求—构建制品—系统评价—返回设计原则”的写作弧线：引言和文献综述确定物体传感器HID和稀缺数据需求，研究设计部分将需求转化为CNN-HID和DTL-HID的具体设计，实验结果验证每个设计选择，结论再提炼为两条设计原则。
+
+## 研究开展程序
+
+- study_or_phase_count：10
+
+- 研究阶段总序列：研究从问题界定开始，经过数据收集、预处理、制品设计、迁移算法设计，再进入四个递进实验和一个案例研究。四个实验不是并列替换关系，而是逐级解决未回答问题：实验1先证明CNN-HID在源域上的特征提取能力；实验2在这些已验证基准上检验迁移收益；实验3再拆解迁移对象，明确两类依赖各自和同时迁移的价值；实验4进一步改变源域活动构成，为框架的边界和实务使用提供依据；案例研究则将技术结果落到具体应用场景，形成从制品构建到设计知识的完整闭环。
+
+### studies_or_phases
+
+#### 1. 需求与问题界定
+
+- order：1
+
+- name_cn：需求与问题界定
+
+- question_cn：物体传感器ADL监测中实现HID需要解决哪些问题？
+
+- inputs_and_setting_cn：现有ADL监测、HID、DTL文献及老年照护场景
+
+- designed_or_compared_object_cn：问题空间和设计要求：多住户身份混淆、物体传感器数据稀缺、自动特征学习缺失
+
+- baseline_control_or_counterfactual_cn：无，属于概念分析
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：文献综述与缺口识别
+
+- main_result_cn：提出三个研究缺口和三则研究问题，确定DTL-HID的研究方向
+
+- argumentative_role_cn：将一般现实问题转化为可设计、可检验的研究问题，为后续制品和评价设定目标
+
+- remaining_uncertainty_cn：尚未确认所设计的技术方案是否真的能解决多住户身份识别和稀缺数据问题
+
+- link_to_next_phase_cn：由此进入研究设计，引入两个真实ADL数据集作为源域和目标域
+
+##### evidence_pointers
+
+1. Introduction P6
+
+2. Research Gaps and Questions 全节
+
+3. Table 1
+
+#### 2. 数据收集与源/目标域构建
+
+- order：2
+
+- name_cn：数据收集与源/目标域构建
+
+- question_cn：如何获取可支持跨域迁移的富标注源域数据和稀缺目标域数据？
+
+- inputs_and_setting_cn：OPPO：20个物体加速度计、4名受试者脚本化晨间活动；HANDY：腕戴式传感器、30名受试者7类手部相关ADL
+
+- designed_or_compared_object_cn：选择源域HANDY和四个目标域对象传感器（glass、cup、spoon、bread），并用同空间不限制交互的方式合成4住户环境
+
+- baseline_control_or_counterfactual_cn：目标域仅保留物体动作发生片段，模拟真实稀缺数据；源域与目标域受试者、活动和环境均不同
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：公开数据集选择与描述性统计
+
+- main_result_cn：源域45,111个样本；目标域四个物体分别269、726、129、350个样本
+
+- argumentative_role_cn：确保后续实验能够检验跨传感器、跨活动、跨受试者、跨环境的泛化性，而非同一分布内的简单识别
+
+- remaining_uncertainty_cn：目标域样本量极小，仍未解答算法能否在这些稀缺数据上训练成功
+
+- link_to_next_phase_cn：需要通过预处理解决源域52Hz与目标域30Hz采样率不匹配问题
+
+##### evidence_pointers
+
+1. Data Collection 小节
+
+2. Table 5
+
+#### 3. 数据预处理与对齐
+
+- order：3
+
+- name_cn：数据预处理与对齐
+
+- question_cn：如何使源域和目标域数据可比以支持迁移学习？
+
+- inputs_and_setting_cn：HANDY原始52Hz三轴加速度数据和OPPO原始30Hz数据
+
+- designed_or_compared_object_cn：PCHIP插值重采样、8秒滑动窗口分割、样本标准化、留出验证集与数据划分
+
+- baseline_control_or_counterfactual_cn：源域HANDY全部7类活动作为源；目标域仅含对应物体运动片段
+
+##### objective_metrics
+
+1. 样本段数
+
+2. 窗口长度240个时间点
+
+- analysis_method_cn：信号预处理
+
+- main_result_cn：所有加速度段被统一到30Hz、8秒窗口、标准化后的三轴序列
+
+- argumentative_role_cn：消除采样率差异对迁移表征的影响，使CNN能处理固定尺寸输入
+
+- remaining_uncertainty_cn：预处理本身不产生HID能力，仍需设计自动特征提取网络
+
+- link_to_next_phase_cn：预处理后的段数据作为CNN-HID和DTL-HID的输入
+
+##### evidence_pointers
+
+1. Data Pre-Processing 小节
+
+#### 4. CNN-HID制品设计
+
+- order：4
+
+- name_cn：CNN-HID制品设计
+
+- question_cn：如何设计一个能同时提取时间依赖和跨轴依赖的CNN用于HID？
+
+- inputs_and_setting_cn：预处理后的传感器段，每个段为三轴240点矩阵
+
+- designed_or_compared_object_cn：CNN-HID：第一层含1D时间核和2D交互核，后接两个1D卷积层，用步长卷积替代池化，ReLU、dropout、L2正则、softmax分类
+
+- baseline_control_or_counterfactual_cn：CNN-HID/T仅1D时间核，CNN-HID/CA仅跨轴交互核，作为消融设计
+
+##### objective_metrics
+
+1. HID准确率
+
+2. 精确率
+
+3. 召回率
+
+4. F1
+
+- analysis_method_cn：卷积神经网络与监督分类
+
+- main_result_cn：模型设计完成，能够自动生成并组合两类本地依赖
+
+- argumentative_role_cn：将特征工程需求转成可实现的网络结构，为后续实验提供待验证制品
+
+- remaining_uncertainty_cn：尚不确定这种双依赖设计是否真的优于单依赖或传统方法
+
+- link_to_next_phase_cn：实验1将CNN-HID与经典ML和消融变体比较
+
+##### evidence_pointers
+
+1. CNN-HID Model 小节
+
+2. Figure 4
+
+#### 5. DTL-HID迁移算法设计
+
+- order：5
+
+- name_cn：DTL-HID迁移算法设计
+
+- question_cn：如何把源域学到的运动动力学迁移到目标域物体传感器？
+
+- inputs_and_setting_cn：HANDY源域数据和四个OPPO_OBJ目标域数据
+
+- designed_or_compared_object_cn：三步算法：学习、迁移、适配；复用CNN-HID前n层并固定权重，重初始化并缩放分类层
+
+- baseline_control_or_counterfactual_cn：非迁移学习的CNN-HID和经典ML方法；后续实验中的DTL-HID/T和DTL-HID/CA
+
+##### objective_metrics
+
+1. HID准确率
+
+2. AUC
+
+3. F1
+
+4. 精确率
+
+5. 召回率
+
+- analysis_method_cn：深度迁移学习
+
+- main_result_cn：得到完整的DTL-HID算法，形式上以Algorithm 1给出
+
+- argumentative_role_cn：将“源域知识帮助目标域”的机制转化为可执行的模型构建流程
+
+- remaining_uncertainty_cn：未能从理论上证明迁移必然有效，需实验检验迁移收益和依赖类型影响
+
+- link_to_next_phase_cn：实验2直接比较DTL-HID与非迁移基准
+
+##### evidence_pointers
+
+1. DTL-HID Algorithm 小节
+
+2. Algorithm 1
+
+#### 6. 实验1：源域HID有效性检验
+
+- order：6
+
+- name_cn：实验1：源域HID有效性检验
+
+- question_cn：CNN-HID在可穿戴运动传感器数据上是否优于现有方法和消融设计？
+
+- inputs_and_setting_cn：HANDY数据集，30名受试者，45,111个样本
+
+- designed_or_compared_object_cn：CNN-HID对比kNN、SVM、NB、DT手工特征基准，以及CNN-HID/T、CNN-HID/CA
+
+- baseline_control_or_counterfactual_cn：经典ML基准和两种只提取单一依赖的CNN变体
+
+##### objective_metrics
+
+1. 宏平均精确率
+
+2. 宏平均召回率
+
+3. 宏平均F1
+
+4. 微平均准确率
+
+- analysis_method_cn：10折交叉验证、单尾配对t检验
+
+- main_result_cn：CNN-HID准确率0.984，显著超过所有基准；CNN-HID/CA好于CNN-HID/T，同时使用两类依赖时最好
+
+- argumentative_role_cn：先证明CNN-HID的特征提取在数据充足的源域上有效，为后续迁移效果提供可信起点
+
+- remaining_uncertainty_cn：未验证在稀缺物体传感器数据上的表现
+
+- link_to_next_phase_cn：引入目标域物体传感器，检验迁移学习是否能解决稀缺数据问题
+
+##### evidence_pointers
+
+1. Experiment 1 设计
+
+2. Table 7
+
+#### 7. 实验2：迁移学习价值检验
+
+- order：7
+
+- name_cn：实验2：迁移学习价值检验
+
+- question_cn：从可穿戴传感器迁移知识是否改善物体传感器上的HID表现？
+
+- inputs_and_setting_cn：四个OPPO目标域物体传感器数据集（GLASS、CUP、SPOON、BREAD），4名受试者
+
+- designed_or_compared_object_cn：DTL-HID与未迁移CNN-HID、CNN-HID/T、CNN-HID/CA、kNN、SVM、NB、DT比较
+
+- baseline_control_or_counterfactual_cn：所有基准都是非迁移模型；反向4折交叉验证模拟少量训练数据
+
+##### objective_metrics
+
+1. 各物体准确率
+
+2. 微平均准确率
+
+3. 宏平均精确率
+
+4. 召回率
+
+5. F1
+
+6. ROC
+
+7. AUC
+
+- analysis_method_cn：反向4折交叉验证、单尾配对t检验、ROC分析
+
+- main_result_cn：DTL-HID微平均准确率0.707，显著高于所有非迁移基准（0.407–0.570）；深度非迁移模型因过拟合表现较差
+
+- argumentative_role_cn：证明跨传感器、跨活动迁移策略能解决物体传感器标注不足问题
+
+- remaining_uncertainty_cn：尚未区分是哪种被迁移的表示（时间/跨轴）起到了作用
+
+- link_to_next_phase_cn：实验3用DTL-HID/T和DTL-HID/CA拆解被迁移的依赖类型
+
+##### evidence_pointers
+
+1. Experiment 2 设计
+
+2. Table 8
+
+3. Figure 5
+
+#### 8. 实验3：被迁移依赖类型拆解
+
+- order：8
+
+- name_cn：实验3：被迁移依赖类型拆解
+
+- question_cn：同时迁移时间依赖和跨轴依赖是否优于只迁移其中一种？
+
+- inputs_and_setting_cn：同一OPPO四个目标域数据集
+
+- designed_or_compared_object_cn：DTL-HID对比DTL-HID/T和DTL-HID/CA，三者均以HANDY为源域
+
+- baseline_control_or_counterfactual_cn：DTL-HID/T和DTL-HID/CA作为迁移消融基准
+
+##### objective_metrics
+
+1. 各物体准确率
+
+2. 微平均准确率
+
+3. 宏平均精确率
+
+4. 宏平均召回率
+
+5. 宏平均F1
+
+- analysis_method_cn：反向4折交叉验证、单尾配对t检验
+
+- main_result_cn：DTL-HID微平均准确率0.707，显著高于DTL-HID/T 0.655和DTL-HID/CA 0.667；且跨轴迁移总体优于时间迁移
+
+- argumentative_role_cn：将迁移收益归因到CNN-HID的双依赖设计，强化了制品的机制解释
+
+- remaining_uncertainty_cn：未说明源域活动构成对迁移效果的影响
+
+- link_to_next_phase_cn：实验4改变源域活动类型以检验边界条件
+
+##### evidence_pointers
+
+1. Experiment 3 设计
+
+2. Table 9
+
+3. Table 10
+
+#### 9. 实验4：源域活动敏感性分析
+
+- order：9
+
+- name_cn：实验4：源域活动敏感性分析
+
+- question_cn：源域包含哪些类型的活动是否影响DTL-HID的目标域表现？
+
+- inputs_and_setting_cn：HANDY的七类活动按运动平面分为vertical、horizontal、hybrid三类
+
+- designed_or_compared_object_cn：DTL-HID使用全部三类源活动与仅使用两类或单一类型源活动预训练的六种变体比较
+
+- baseline_control_or_counterfactual_cn：No-hybrid、No-vertical、No-horizontal、Hybrid-only、Vertical-only、Horizontal-only
+
+##### objective_metrics
+
+1. 各物体准确率
+
+2. 微平均准确率
+
+- analysis_method_cn：反向4折交叉验证、单尾配对t检验
+
+- main_result_cn：使用全部三类活动时微平均准确率0.707最好；在单类活动基准中vertical活动信息量最大
+
+- argumentative_role_cn：提供部署指导：源域数据应尽量多样，若资源有限可优先收集垂直类活动
+
+- remaining_uncertainty_cn：实验均在受控实验室数据集上完成，未涉及真实家庭部署中的误分类传播
+
+- link_to_next_phase_cn：通过饮水活动案例研究展示框架在真实应用片段上的实际效用
+
+##### evidence_pointers
+
+1. Experiment 4 设计
+
+2. Table 11
+
+#### 10. 案例研究：饮水活动中的HID
+
+- order：10
+
+- name_cn：案例研究：饮水活动中的HID
+
+- question_cn：DTL-HID在实际ADL应用片段中是否比非迁移最佳基准更有效？
+
+- inputs_and_setting_cn：OPPO_CUP中多个饮水活动片段及对应视频截图
+
+- designed_or_compared_object_cn：DTL-HID与CNN-HID和DT作为非迁移最佳深度/经典基准比较
+
+- baseline_control_or_counterfactual_cn：选择DTL-HID正确分类而CNN-HID和DT误分类的样本作为案例
+
+##### objective_metrics
+
+1. 定性分类正确性
+
+2. 模式可视化解释
+
+- analysis_method_cn：案例演示、时间序列片段解析
+
+- main_result_cn：DTL-HID能识别非迁移方法遗漏的时间不变显著模式和加速度幅度差异，正确区分受试者
+
+- argumentative_role_cn：将技术准确率转化为面向临床应用的实际价值证据，支撑框架的proof-of-value
+
+- remaining_uncertainty_cn：未在真实养老院或居家环境部署；未评估误分类对下游ADL识别的影响
+
+- link_to_next_phase_cn：结论部分将实验和案例结果归纳为设计原则，并指出未来用主动学习、多源迁移和贝叶斯深层学习改进
+
+##### evidence_pointers
+
+1. Case Study 全节
+
+2. Figure 6
+
+3. Figure 7
+
+4. Figure 8
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 传感器家用ADL监测系统兴起，用于远程监测老年人自理能力
+
+2. LIMITATION: 无干扰、隐私友好的物体运动传感器系统面临标注数据稀缺和多住户执行者混淆两大挑战
+
+3. RQ_OR_OBJECTIVE: 采用设计科学范式开发DTL-HID框架，同时应对两个挑战
+
+4. DESIGN_FEATURE: 提出新颖CNN自动提取综合时间与跨轴运动模式
+
+5. BENCHMARK_OR_CONTRAST: 与kNN、SVM及替代CNN设计等最新基准严格比较
+
+6. RESULT: 即使只有少量标注数据也能准确识别ADL执行者
+
+7. CONTRIBUTION: 通过案例研究展示应用，并将两条设计原则贡献给移动分析和设计科学研究
+
+### introduction_moves
+
+1. CONTEXT: 医疗进步和可及性提高延长寿命，全球老年人口增长
+
+2. CONTEXT: 引入ADL概念，作为评估老人身体或认知损伤的代理指标
+
+3. PRACTICAL_STAKES: 预防性照护需要频繁监测，而月度门诊无法满足
+
+4. PRACTICAL_STAKES: 个性化照护要求识别ADL执行者身份，且57%美国老年人处于多住户环境
+
+5. PRIOR_KNOWLEDGE: 摄像头和可穿戴传感器信息丰富但老年人因隐私和负担而抵触，物体运动传感器接受度更高
+
+6. PHENOMENON: 物体运动传感器无法记录谁在操作物体，例如冰箱门传感器不知道谁开门
+
+7. LIMITATION: 现有ML依赖人工特征工程且物体传感器放置多变、数据稀缺，阻碍泛化
+
+8. RQ_OR_OBJECTIVE: 提出用设计科学范式开发DTL-HID框架，并列三点新颖性
+
+9. STUDY_OVERVIEW: 预告论文结构
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 运动传感器因低成本和细粒度数据被广泛用于家居监测
+
+2. MECHANISM: 加速度计数据同时包含时间局部依赖和跨轴依赖，且牛顿第二定律意味着不同人的动作模式可区分
+
+3. LIMITATION: 经典ML依赖手工特征，难以泛化到不同传感器配置
+
+4. PRIOR_KNOWLEDGE: CNN是传感器信号分析的首选深度架构，但过去研究将各轴分别用1D卷积处理
+
+5. PRIOR_KNOWLEDGE: HID依赖静态/动态、内在/外在特质，不同类型传感器各有优劣
+
+6. LIMITATION: 内在特质测量侵入性强，外在特质往往需要专用昂贵设备
+
+7. GAP: 基于日常物体的HID主要障碍是缺乏标注数据，而迁移学习可能利用可穿戴与物体传感器的相似运动动力解决
+
+8. THEORY_INTRO: 迁移学习从源域迁移实例、参数、特征表示或关系知识到目标域
+
+9. THEORY_PROPOSITION: DTL三步骤：训练源模型、复用前n层、在目标域上适配
+
+10. GAP: 已有DTL用于图像和文本等同质数据，不适应运动传感器的时间与跨轴异构依赖
+
+### artifact_design_moves
+
+1. STUDY_OVERVIEW: 研究设计分为数据收集、预处理、DTL-HID框架和评价四部分
+
+2. DESIGN_FEATURE: 选择OPPO物体传感器为目标域、HANDY可穿戴传感器为源域
+
+3. METHOD_JUSTIFICATION: 源域和目标域受试者、活动、环境均不同，用于证明泛化性
+
+4. DESIGN_FEATURE: 预处理包括PCHIP重采样、8秒窗口分割、标准化
+
+5. LIMITATION: 过去用1D卷积只提取单轴时间模式，忽略跨轴依赖
+
+6. DESIGN_FEATURE: 提出CNN-HID，第一层并列1D时间核和2D交互核
+
+7. DESIGN_FEATURE: 用步长卷积替代池化，保证时间对齐，并配置ReLU、dropout、L2正则和softmax
+
+8. DESIGN_FEATURE: 提出三步DTL-HID算法：学习、迁移、适配，固定源域前n层权重
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 设计科学研究强调对制品的严格评价，因此设计四组实验
+
+2. BENCHMARK_OR_CONTRAST: 实验1用经典ML和消融CNN验证CNN-HID设计
+
+3. BENCHMARK_OR_CONTRAST: 实验2用非迁移深度和经典ML基准验证迁移价值
+
+4. BENCHMARK_OR_CONTRAST: 实验3用DTL-HID/T和DTL-HID/CA验证两类依赖同时迁移的价值
+
+5. BENCHMARK_OR_CONTRAST: 实验4用不同源活动组合验证源域敏感性
+
+6. METHOD_JUSTIFICATION: 使用反向4折交叉验证模拟真实数据稀缺
+
+7. METHOD_JUSTIFICATION: 用宏平均指标关注少数类，用微平均准确率处理类别不平衡
+
+8. RESULT: CNN-HID在源域上F1达0.984
+
+9. RESULT: DTL-HID在目标域微平均准确率0.707，显著高于所有非迁移基准
+
+10. RESULT: 同时迁移两类依赖优于仅转移其中一种
+
+11. RESULT: 源域活动多样性越高，迁移效果越好
+
+12. METHOD_JUSTIFICATION: 案例研究演示proof-of-concept和proof-of-value
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 设计并评价了面向物体传感器HID的DTL-HID框架
+
+2. CONTRIBUTION: 贡献两条设计原则，构成初步设计理论
+
+3. CONTRIBUTION: 为临床医生、照护者和老年人提供实用意义
+
+4. BOUNDARY_CONDITION: 框架适用于难以获得标注数据的移动传感器场景
+
+5. LIMITATION_AND_FUTURE: 提出用主动学习结合时间活动建模减少误分类影响
+
+6. LIMITATION_AND_FUTURE: 提出多源学习、贝叶斯深度学习以及EEG和IoT智能家居扩展
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. ADL监测和老年照护领域知识
+
+2. HID特质分类（静态/动态、内在/外在）
+
+3. 传感器信号CNN知识
+
+4. 深度迁移学习理论与DTL步骤
+
+5. 设计科学研究方法论
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：论文并非由某个单一行为理论前瞻性推导出全部设计；其制品选择主要来自ADL场景需求、传感器数据特性、CNN架构经验和迁移学习机制。知识基础影响了需求、特征类型和迁移流程，但网络层结构、核设置、实验划分等关键技术细节更多来自工程启发式和已有深度学习方法。
+
+- 理论到设计翻译链：ADL多住户个性化照护需求→物体传感器无法记录执行者身份→需要从动作模式推断身份；传感器数据存在时间依赖和跨轴依赖→过去1D卷积只取时间依赖→设计要求自动提取两类依赖→CNN-HID的1D+2D交互核；物体传感器标注稀缺→可穿戴与物体传感器运动动力学相似→设计要求跨域迁移→三步DTL算法；源域活动多样性影响知识可迁移性→设计要求丰富且多元的源域→选择HANDY七类三类平面活动；每条翻译链都通过实验或消融检验。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：多轴加速度数据包含时间局部依赖和跨轴依赖，且不同人的动作受力模式可通过加速度区辨
+
+- mechanism_cn：个体执行相同动作时会产生不同的加速度幅度、节奏与轴间交互模式
+
+- design_requirement_cn：HID模型应同时自动提取时间依赖和跨轴依赖，而非仅处理单轴时间序列
+
+- artifact_choice_cn：CNN-HID第一层同时使用1D时间核和2D交互核，并在后续层继续蒸馏两类特征
+
+- evaluated_contrast_cn：CNN-HID vs CNN-HID/T和CNN-HID/CA；DTL-HID vs DTL-HID/T和DTL-HID/CA
+
+- objective_result_cn：源域上CNN-HID F1 0.984高于CNN-HID/CA 0.963和CNN-HID/T 0.937；目标域上DTL-HID 0.707高于DTL-HID/CA 0.667和DTL-HID/T 0.655
+
+##### evidence_pointers
+
+1. Figure 1
+
+2. CNN-HID Model 小节
+
+3. Table 7
+
+4. Table 9
+
+5. Table 10
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：手工特征工程劳动密集、依赖领域知识且难以泛化到不同传感器配置
+
+- mechanism_cn：固定手工特征可能遗漏重要运动信号模式，导致HID准确率降低
+
+- design_requirement_cn：传感器数据分析应采用自动特征学习，避免人工设计特征
+
+- artifact_choice_cn：采用多层CNN自动学习数据表示，替代经典ML手工信号特征
+
+- evaluated_contrast_cn：CNN-HID vs kNN/SVM/NB/DT with signal features
+
+- objective_result_cn：CNN-HID准确率0.984显著高于DT 0.882、kNN 0.825、SVM 0.288、NB 0.094
+
+##### evidence_pointers
+
+1. Table 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：可穿戴和物体运动传感器都记录人类-物体交互的运动动态，存在可迁移的相似表征
+
+- mechanism_cn：源域上有充足数据训练出的网络权重编码了可泛化的运动动力学，可用于目标域稀缺数据
+
+- design_requirement_cn：应使用可穿戴传感器数据作为源域，并设计知识迁移机制
+
+- artifact_choice_cn：三步DTL-HID算法：训练源模型、复用并固定前n层、在目标域上适配分类层
+
+- evaluated_contrast_cn：DTL-HID vs 未迁移CNN-HID、CNN-HID/T、CNN-HID/CA和经典ML
+
+- objective_result_cn：目标域微平均准确率0.707，显著高于所有非迁移基准的0.407–0.570
+
+##### evidence_pointers
+
+1. Table 8
+
+2. Figure 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：DTL已成功用于图像和文本，但传感器数据是异构的多通道时间序列，需要针对数据类型定制模型
+
+- mechanism_cn：图像使用2D核处理空间同质模式，文本使用RNN处理单词顺序；传感器数据的时间与轴向依赖不能直接套用单一结构
+
+- design_requirement_cn：迁移框架必须能够转移两类依赖，而非只迁移某种单一模式
+
+- artifact_choice_cn：DTL-HID同时迁移CNN-HID中的1D时间核和2D交互核所学表示
+
+- evaluated_contrast_cn：DTL-HID vs DTL-HID/T和DTL-HID/CA
+
+- objective_result_cn：DTL-HID微平均准确率0.707显著高于只迁移时间0.655和只迁移跨轴0.667
+
+##### evidence_pointers
+
+1. Deep Transfer Learning 小节
+
+2. Table 9
+
+3. Table 10
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：源域数据构成影响迁移知识到目标域的效果
+
+- mechanism_cn：更多样的活动类型提供更丰富的运动动态，使源模型学到更一般化的个体动作表征
+
+- design_requirement_cn：源域应包含多样、与目标域相关的活动；资源有限时优先选择信息量最大的活动类型
+
+- artifact_choice_cn：源域选择HANDY七类活动，涵盖vertical、horizontal、hybrid三类运动平面；实验中用活动子集做消融
+
+- evaluated_contrast_cn：DTL-HID全部活动 vs No-hybrid、No-vertical、No-horizontal、Hybrid-only、Vertical-only、Horizontal-only
+
+- objective_result_cn：全部活动最佳0.707；在单类型中vertical最好0.578，horizontal最差0.555
+
+##### evidence_pointers
+
+1. Experiment 4 设计
+
+2. Table 11
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 受控离线实验
+
+2. 10折交叉验证
+
+3. 反向4折交叉验证模拟数据稀缺
+
+4. 消融设计（CNN-HID/T、CNN-HID/CA、DTL变体、源活动子集）
+
+5. 统计假设检验（单尾配对t检验）
+
+6. ROC/AUC性能分析
+
+7. 案例研究（定性应用演示）
+
+- why_these_evaluations_cn：设计科学研究要求证明制品的有效性和优越性，所以先通过标准基准检验CNN-HID；随后用反向交叉验证人为制造稀缺数据环境，检验迁移价值；再用消融逐项拆解制品的每个关键设计选择；最后用案例研究把技术指标转化为实际可用性证明。四组实验之间形成从“特征提取有效”到“迁移有效”到“为什么有效”再到“何时有效”的证据阶梯。
+
+- benchmark_and_contrast_chain_cn：实验1建立源域上的性能基线，同时用经典ML和单依赖CNN消融确保CNN-HID的双依赖设计真实有效；实验2沿用同一批基准但加入未迁移深度模型，把比较移植到目标域，从而把性能差异归因于迁移；实验3将迁移框架本身消融为只迁移时间或只迁移跨轴，进一步证明两个设计部件同时必要；实验4改变源域活动组合，检验迁移框架对外部条件的敏感性。每一步的对照都从上一轮结果中选出最相关的竞争对象，形成递进式证据链。
+
+### claim_evidence_ledger
+
+#### 1. CNN-HID自动特征提取优于手工特征工程
+
+- claim_cn：CNN-HID自动特征提取优于手工特征工程
+
+- evidence_cn：实验1中CNN-HID各指标显著高于kNN、SVM、NB、DT
+
+- status_cn：由实验1支持
+
+#### 2. 同时提取时间和跨轴依赖优于只提取一种
+
+- claim_cn：同时提取时间和跨轴依赖优于只提取一种
+
+- evidence_cn：实验1 CNN-HID高于CNN-HID/T和CNN-HID/CA；实验3 DTL-HID高于DTL-HID/T和DTL-HID/CA
+
+- status_cn：由实验1和实验3支持
+
+#### 3. 迁移可穿戴传感器知识能提升稀缺物体传感器数据的HID
+
+- claim_cn：迁移可穿戴传感器知识能提升稀缺物体传感器数据的HID
+
+- evidence_cn：实验2 DTL-HID微平均准确率0.707显著高于所有非迁移基准
+
+- status_cn：由实验2支持
+
+#### 4. 跨轴依赖比时间依赖更具可迁移性
+
+- claim_cn：跨轴依赖比时间依赖更具可迁移性
+
+- evidence_cn：实验3中DTL-HID/CA在多数数据集上高于DTL-HID/T，并在部分数据集显著
+
+- status_cn：部分支持，Cup和Bread上差异不显著
+
+#### 5. 更多样化的源域活动改善迁移效果
+
+- claim_cn：更多样化的源域活动改善迁移效果
+
+- evidence_cn：实验4全部活动类型0.707显著优于各子集
+
+- status_cn：由实验4支持
+
+#### 6. DTL-HID在实际现场优于非迁移最佳方法
+
+- claim_cn：DTL-HID在实际现场优于非迁移最佳方法
+
+- evidence_cn：饮水案例中DTL-HID正确分类了CNN-HID和DT都误分类的片段
+
+- status_cn：案例研究支持，但为选择性案例演示，不是系统现场评价
+
+#### 7. 框架对难以获取标注数据的移动传感器具有一般性
+
+- claim_cn：框架对难以获取标注数据的移动传感器具有一般性
+
+- evidence_cn：论文提出两条设计原则并在结论中推广
+
+- status_cn：主要基于单一源域和单一目标域数据集，属于设计知识概括而非直接实证
+
+- internal_validity_strategy_cn：通过随机划分的交叉验证控制训练/测试重叠；用反向4折中每次只训练1/4数据模拟稀缺；用消融设计隔离CNN-HID和DTL-HID各组件的作用；配合单尾配对t检验排除随机波动；选择与源域活动不完全重叠的目标域降低评估偏差。
+
+- external_validity_strategy_cn：使用两个相互独立的公开数据集，源域和目标域在受试者、活动、传感器类型、采样率和环境上均不同；同一个目标域任务使用四个不同物体传感器验证；通过将独立受试者交互同一物体的数据组合成合成4住户环境，增加多住户场景代表性。
+
+- what_is_not_actually_tested_cn：没有在真实养老院或家庭中部署；没有与真实多住户同时活动场景进行比较，所谓多住户是合成设置；没有检验误分类对下游ADL识别和照护决策的实际影响；没有直接量化源域与目标域之间的相似度；没有评估老年人对系统长期使用和隐私的真实态度；案例研究只展示有利样本，未报告失败案例的系统统计。
+
+## 贡献闭环
+
+- technical_claim_cn：DTL-HID框架在物体运动传感器HID任务上胜过非迁移经典ML和深度模型，且在少量标注数据下仍保持较高准确率；CNN-HID能通过双依赖提取取得优于单依赖设计的识别性能。
+
+- artifact_claim_cn：CNN-HID的1D时间核+2D交互核设计是性能提升的来源；三步DTL-HID算法中的源域预训练、固定前层、目标域适配流程是稀缺数据下性能提升的来源；源域活动的多样性是影响迁移效果的另一可识别设计因素。
+
+- mechanism_claim_cn：多轴运动传感器同时包含时间依赖和跨轴依赖，提取并迁移两类依赖能够更完整地表征个体运动动力学；可穿戴和物体传感器共享人类-物体交互的运动动力学，因此源域知识可以弥补目标域标注不足。
+
+- boundary_claim_cn：该框架适用于目标域标注稀缺、源域数据充足且与目标域存在相关运动动态的场景，尤其是使用加速度计并面临多住户身份混淆的无干扰ADL监测；源域活动类型越多样效果越好，若资源有限应优先采集垂直类活动。
+
+- reusable_design_knowledge_cn：两条设计原则：(1) 从多轴时间序列数据中提取时间和轴向局部依赖可捕获更丰富的信息，适用于移动分析和多通道传感器；(2) 从相关且有充足数据的源域迁移知识可改善稀缺数据上的目标任务，可作为解决数据稀缺问题的通用分析设计指南。
+
+- theoretical_contribution_cn：以初步设计理论形式扩展IS知识库：将深度迁移学习从图像、文本等同质数据扩展到运动传感器这类异构多通道时间序列，并阐明跨轴依赖对HID的独立价值，为后续移动健康分析研究提供可检验的设计命题。
+
+- how_discussion_closes_intro_gap_cn：结论部分重新回到引言提出的老年ADL监测需求、物体传感器缺少执行者信息、标注数据稀缺和人工特征工程等问题，明确说明DTL-HID通过自动双依赖提取和跨域迁移解决这些缺口，并将实验结果提升为设计原则，形成从问题到解决方案再到知识贡献的闭合回路。
+
+- overclaim_or_unsupported_leaps_cn：论文将0.707的微平均准确率描述为“准确识别”，但实际仍有较大误差；把仅在公开数据集和合成多住户环境中的结果泛化为对真实senior care场景的一般结论略显跳跃；案例研究刻意选择被非迁移方法误分类而DTL-HID正确的例子，不能代表总体错误率；设计原则涉及“EEG等传感器”是从结论中的推测而非本实验直接证据。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：基于传感器的居家ADL监测系统已经出现，用以远程监测老年人的自理能力。
+
+- rhetorical_function_cn：开篇点出研究所在的应用场景，为后续问题提供现实锚点。
+
+- depends_on_cn：无，独立进入。
+
+- sets_up_cn：引出“传感器+ADL监测”这一研究对象。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：然而无干扰、隐私友好的物体运动传感器系统面临标注数据稀缺和多住户执行者混淆的挑战。
+
+- rhetorical_function_cn：直接指出现有技术方案的两个关键痛点，形成问题缺口。
+
+- depends_on_cn：依赖上一句建立的ADL监测场景。
+
+- sets_up_cn：为DTL-HID框架的“既有挑战”提供针对性目标。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P1 S3-S4
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究采用设计科学范式开发DTL-HID框架，并提出新颖CNN自动提取时间与跨轴运动模式，以应对两个挑战。
+
+- rhetorical_function_cn：把问题转化为研究任务和具体制品。
+
+- depends_on_cn：承接前一句的两个挑战。
+
+- sets_up_cn：预告制品的两个关键设计：CNN特征提取和深度学习迁移。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P1 S5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：论文用kNN、SVM和替代CNN设计等最新基准对DTL-HID进行严格评价。
+
+- rhetorical_function_cn：表明评价不是自我报告，而是与现有方法竞争。
+
+- depends_on_cn：需要先存在所提出的制品。
+
+- sets_up_cn：为结果句提供证据来源。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P1 S6-S7
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S6-S7
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示该框架即使只有少量标注数据也能准确识别ADL执行者；案例研究和两条设计原则进一步展示应用价值。
+
+- rhetorical_function_cn：给出核心结论并预告贡献层次：实证结果+案例+设计原则。
+
+- depends_on_cn：依赖评价句。
+
+- sets_up_cn：使读者预期全文的贡献结构。
+
+- evidence_pointer：Abstract
+
+### 6. Introduction P1 S1-S4
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：医疗进步提高预期寿命，美欧老年人口数量和占比持续增长，引发老年人健康和独立生活能力的社会关注。
+
+- rhetorical_function_cn：从宏观人口老龄化切入，建立研究的社会重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为ADL监测的必要性提供背景。
+
+- evidence_pointer：Introduction P1
+
+### 7. Introduction P2 S1-S4
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：介绍ADL定义和基本/工具性两类，并说明ADL可作为身体或认知损伤及慢病进展的代理指标。
+
+- rhetorical_function_cn：界定核心领域概念，解释为何ADL值得持续监测。
+
+- depends_on_cn：依赖前一句的老年人口背景。
+
+- sets_up_cn：为“监测ADL绩效”提供医学和照护逻辑。
+
+- evidence_pointer：Introduction P2
+
+### 8. Introduction P3 S1-S4
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：养老产业开始探索传感器家用ADL监测；57%美国老人与配偶同住，因此个性化照护必须正确识别执行者身份。
+
+- rhetorical_function_cn：将ADL监测从一般需求收紧到“多住户身份识别”这一具体问题。
+
+- depends_on_cn：依赖ADL重要性的前文。
+
+- sets_up_cn：为后续HID任务提供实践必要性。
+
+- evidence_pointer：Introduction P3
+
+### 9. Introduction P4 S1-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P4 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：摄像头和可穿戴传感器信息丰富但老年人因隐私和使用负担而抵触，物体运动传感器接受度更高。
+
+- rhetorical_function_cn：比较传感器类型，说明为什么选择物体运动传感器。
+
+- depends_on_cn：依赖前面对监测系统的铺垫。
+
+- sets_up_cn：为下一步指出物体传感器的具体缺陷作对比。
+
+- evidence_pointer：Table 1; Introduction P4
+
+### 10. Introduction P5 S1-S3
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P5 S1-S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：物体运动传感器的一个缺点是缺少执行者信息，例如祖父母都可能打开冰箱，但冰箱门传感器无法记录是谁开的。
+
+- rhetorical_function_cn：用生活化例子让抽象的“身份缺失”问题可感知。
+
+- depends_on_cn：依赖前面物体传感器被选中的结论。
+
+- sets_up_cn：引出需要计算模型来推断执行者身份。
+
+- evidence_pointer：Introduction P5
+
+### 11. Introduction P5 S4-S8
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P5 S4-S8
+
+- move_code：LIMITATION
+
+- paraphrase_cn：开发所需ML模型面临两个技术挑战：手工特征工程可能遗漏重要信号模式，以及物体传感器放置差异大、数据量少，影响有效分析和泛化。
+
+- rhetorical_function_cn：在现象之后补充技术层面的限制，为设计需求提供依据。
+
+- depends_on_cn：依赖“需要计算模型”的陈述。
+
+- sets_up_cn：为引入深度迁移学习提供原因。
+
+- evidence_pointer：Introduction P5
+
+### 12. Introduction P6 S1-S3
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究采用设计科学研究范式，提出DTL-HID框架，并列出三点新颖性：稀缺数据下准确HID、自动提取时间与跨轴特征的CNN、将可穿戴传感器知识迁移到物体传感器。
+
+- rhetorical_function_cn：明确研究方法和制品创新点，回应前面所有问题。
+
+- depends_on_cn：依赖缺口和技术挑战的陈述。
+
+- sets_up_cn：为文献综述和后续设计章节提供纲要。
+
+- evidence_pointer：Introduction P6
+
+### 13. Introduction P6 S4-S6
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P6 S4-S6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：除新奇性外，研究还向IS知识库提供设计指南，并为老年照护产业提供实践含义。
+
+- rhetorical_function_cn：提前声明贡献类型，区分技术制品贡献和知识贡献。
+
+- depends_on_cn：依赖前面三点新颖性。
+
+- sets_up_cn：为结论中的设计原则埋伏笔。
+
+- evidence_pointer：Introduction P6
+
+### 14. Introduction P7
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P7
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：预告论文剩余结构：文献检索、研究缺口与问题、研究设计与实验、结果讨论、案例研究、结论与未来方向。
+
+- rhetorical_function_cn：向读者提供导航，明确论证路径。
+
+- depends_on_cn：无。
+
+- sets_up_cn：让读者预期后续各节功能。
+
+- evidence_pointer：Introduction P7
+
+### 15. Motion Sensor-Based ADL Monitoring P1
+
+- order：15
+
+- section：Literature Review
+
+- locator：Motion Sensor-Based ADL Monitoring P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：运动传感器因低成本、易附着和细粒度数据采集成为家居家居监测常用选择，能高分辨率记录人机互动。
+
+- rhetorical_function_cn：为后续CNN处理运动数据提供客观特征基础。
+
+- depends_on_cn：依赖引言中传感器选择讨论。
+
+- sets_up_cn：引出运动传感器的数据维度特征。
+
+- evidence_pointer：Motion Sensor-Based ADL Monitoring P1
+
+### 16. Motion Sensor-Based ADL Monitoring P2-P3
+
+- order：16
+
+- section：Literature Review
+
+- locator：Motion Sensor-Based ADL Monitoring P2-P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：三轴加速度数据包含时间局部依赖和跨轴依赖；根据牛顿第二定律，不同人执行同一动作时会产生可区分的加速度模式，例如有人动作更用力、有人更平缓。
+
+- rhetorical_function_cn：从传感器物理原理解释为什么HID可行。
+
+- depends_on_cn：依赖对多通道数据的描述。
+
+- sets_up_cn：为CNN-HID必须提取两类依赖提供机理依据。
+
+- evidence_pointer：Figure 1; Motion Sensor-Based ADL Monitoring P2-P3
+
+### 17. Motion Sensor-Based ADL Monitoring P4
+
+- order：17
+
+- section：Literature Review
+
+- locator：Motion Sensor-Based ADL Monitoring P4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：经典机器学习依赖通用信号特征或活动特定特征，特征工程费时且难以泛化到不同传感器配置，因此研究转向深度学习。
+
+- rhetorical_function_cn：通过批评经典方法为深度学习选择铺路。
+
+- depends_on_cn：依赖对传感器数据规模的认识。
+
+- sets_up_cn：为后续采用CNN自动特征提取作铺垫。
+
+- evidence_pointer：Motion Sensor-Based ADL Monitoring P4
+
+### 18. Motion Sensor-Based ADL Monitoring P5-P6
+
+- order：18
+
+- section：Literature Review
+
+- locator：Motion Sensor-Based ADL Monitoring P5-P6
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：CNN是传感器信号分析的首选深度架构；已有CNN研究通常在每个轴上单独做1D卷积提取时间特征。
+
+- rhetorical_function_cn：总结深度学习在ADL监测中的现状。
+
+- depends_on_cn：依赖深度学习兴起的背景。
+
+- sets_up_cn：为“仅提取单轴时间依赖”的局限提供文献证据。
+
+- evidence_pointer：Motion Sensor-Based ADL Monitoring P5-P6
+
+### 19. Human Identification (HID) P1-P2
+
+- order：19
+
+- section：Literature Review
+
+- locator：Human Identification (HID) P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：HID依赖身体特质，并可按静态/动态与内在/外在分类；不同研究使用人脸、高度、步态、按键和加速度等不同特质。
+
+- rhetorical_function_cn：建立HID特质的分类框架，为传感器选择提供概念坐标。
+
+- depends_on_cn：依赖运动传感器ADL监测综述。
+
+- sets_up_cn：为比较内在/外在特质的隐私和侵入性提供基础。
+
+- evidence_pointer：Table 3; HID P1-P2
+
+### 20. Human Identification (HID) P3
+
+- order：20
+
+- section：Literature Review
+
+- locator：Human Identification (HID) P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：内在特质测量可能侵入且难接受；外在特质更隐私友好但常需要昂贵专用设备。
+
+- rhetorical_function_cn：说明已有HID技术的采纳障碍。
+
+- depends_on_cn：依赖特质分类框架。
+
+- sets_up_cn：为物体传感器提供替代方案的理由。
+
+- evidence_pointer：HID P3
+
+### 21. Human Identification (HID) P4
+
+- order：21
+
+- section：Literature Review
+
+- locator：Human Identification (HID) P4
+
+- move_code：GAP
+
+- paraphrase_cn：基于日常物体的HID可以实现被动监测和个性化照护，但关键障碍是缺少训练算法的标注数据；迁移学习有望利用可穿戴和物体传感器的相似运动动力。
+
+- rhetorical_function_cn：第一次明确将数据稀缺与迁移学习连接起来。
+
+- depends_on_cn：依赖HID现有方法和局限。
+
+- sets_up_cn：为文献综述第三小节DTL直接铺路。
+
+- evidence_pointer：HID P4
+
+### 22. Deep Transfer Learning (DTL) P1
+
+- order：22
+
+- section：Literature Review
+
+- locator：Deep Transfer Learning (DTL) P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：迁移学习把源域中习得的知识用于相关目标域，可迁移实例、参数、特征表示和关系知识四类。
+
+- rhetorical_function_cn：引入本文的核心方法论概念。
+
+- depends_on_cn：依赖之前关于稀缺数据缺口。
+
+- sets_up_cn：为DTL三步骤提供概念工具。
+
+- evidence_pointer：DTL P1
+
+### 23. Deep Transfer Learning (DTL) P2
+
+- order：23
+
+- section：Literature Review
+
+- locator：Deep Transfer Learning (DTL) P2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：DTL通常分三步：在源域训练模型、复用前n层、在目标域上适配并固定复用层权重。
+
+- rhetorical_function_cn：将抽象迁移学习概念转化为可操作的通用过程。
+
+- depends_on_cn：依赖上句的迁移学习定义。
+
+- sets_up_cn：为Algorithm 1的具体步骤提供模板。
+
+- evidence_pointer：DTL P2; Figure 2
+
+### 24. Deep Transfer Learning (DTL) P3
+
+- order：24
+
+- section：Literature Review
+
+- locator：Deep Transfer Learning (DTL) P3
+
+- move_code：GAP
+
+- paraphrase_cn：已有DTL主要应用于NLP和图像，这些数据具有同质模式；运动传感器数据包含时间与跨轴两类异构依赖，因此需要定制的新模型。
+
+- rhetorical_function_cn：指出DTL文献中数据类型的空白，为CNN-HID的跨轴设计提供依据。
+
+- depends_on_cn：依赖之前对传感器数据依赖的讨论。
+
+- sets_up_cn：为研究缺口章节的问题陈述提供文献基础。
+
+- evidence_pointer：DTL P3
+
+### 25. Research Gaps P1-Bullet 1
+
+- order：25
+
+- section：Research Gaps and Questions
+
+- locator：Research Gaps P1-Bullet 1
+
+- move_code：GAP
+
+- paraphrase_cn：当前运动传感器ADL监测主要面向单住户和手势识别，未解决多住户环境中的HID任务。
+
+- rhetorical_function_cn：论文第一条缺口，明确研究任务空白。
+
+- depends_on_cn：依赖前文ADL监测综述。
+
+- sets_up_cn：为“多住户身份识别”这一目标提供直接缺口。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 26. Research Gaps P1-Bullet 2
+
+- order：26
+
+- section：Research Gaps and Questions
+
+- locator：Research Gaps P1-Bullet 2
+
+- move_code：GAP
+
+- paraphrase_cn：已有HID主要用摄像头或可穿戴传感器，未针对易接受的物体传感器，也缺少能自动提取时间与跨轴模式的深度模型。
+
+- rhetorical_function_cn：论文第二条缺口，说明传感器和模型两方面的空白。
+
+- depends_on_cn：依赖HID综述。
+
+- sets_up_cn：为CNN-HID设计提供文献缺口。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 27. Research Gaps P1-Bullet 3
+
+- order：27
+
+- section：Research Gaps and Questions
+
+- locator：Research Gaps P1-Bullet 3
+
+- move_code：GAP
+
+- paraphrase_cn：物体传感器系统面临数据稀缺，而现有DTL针对图像和文本等同质数据，缺少面向传感器异构依赖的迁移方法。
+
+- rhetorical_function_cn：论文第三条缺口，聚焦数据稀缺与DTL适配。
+
+- depends_on_cn：依赖DTL综述。
+
+- sets_up_cn：为DTL-HID框架提供核心依据。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 28. Research Gaps RQ列表
+
+- order：28
+
+- section：Research Gaps and Questions
+
+- locator：Research Gaps RQ列表
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出三则研究问题：如何设计DTL框架利用稀缺物体传感器数据？如何设计深度模型自动提取时间和跨轴模式？迁移得到的特征有多可迁移？
+
+- rhetorical_function_cn：将三条缺口正式转化为可操作的研究问题。
+
+- depends_on_cn：依赖三条缺口。
+
+- sets_up_cn：直接决定后续研究设计的内容。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 29. Research Design 开头段
+
+- order：29
+
+- section：Research Design
+
+- locator：Research Design 开头段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为回答研究问题，论文提出DTL-HID框架，包含数据收集、数据预处理、DTL-HID框架和评价四大部分。
+
+- rhetorical_function_cn：给出研究设计的整体地图。
+
+- depends_on_cn：依赖研究问题。
+
+- sets_up_cn：为后续各小节设置路标。
+
+- evidence_pointer：Research Design P1
+
+### 30. Data Collection OPPO段
+
+- order：30
+
+- section：Research Design / Data Collection
+
+- locator：Data Collection OPPO段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：OPPO包含20个物体加速度计和4名受试者，研究对象包括杯、面包等共享物体，通过合并不同受试者与相同物体交互的片段来合成4住户环境。
+
+- rhetorical_function_cn：说明目标域数据从何而来及如何构造多住户设置。
+
+- depends_on_cn：需要研究设计总体目标。
+
+- sets_up_cn：为Experiment 2的稀缺目标域提供测试数据。
+
+- evidence_pointer：Data Collection
+
+### 31. Data Collection HANDY段
+
+- order：31
+
+- section：Research Design / Data Collection
+
+- locator：Data Collection HANDY段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：HANDY是腕戴式传感器数据，包含7类手部活动；由于源域和目标域活动、受试者、环境都不同，选择两者可证明框架泛化性。
+
+- rhetorical_function_cn：解释为什么选择HANDY作为源域。
+
+- depends_on_cn：依赖跨域迁移的研究目标。
+
+- sets_up_cn：为后续“非相关但相关”的迁移解释作准备。
+
+- evidence_pointer：Data Collection
+
+### 32. Data Pre-Processing 全节
+
+- order：32
+
+- section：Research Design / Data Pre-Processing
+
+- locator：Data Pre-Processing 全节
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：预处理包括用PCHIP将HANDY从52Hz重采样到30Hz、用8秒滑动窗口分割、标准化和数据集划分，以解决源/目标采样率不匹配。
+
+- rhetorical_function_cn：说明为迁移学习做数据级对齐的必要技术步骤。
+
+- depends_on_cn：依赖源域和目标域采样率不同的数据事实。
+
+- sets_up_cn：为CNN-HID接受固定尺寸输入准备条件。
+
+- evidence_pointer：Data Pre-Processing 全节; Table 5
+
+### 33. CNN-HID Model 开头段
+
+- order：33
+
+- section：Research Design / CNN-HID Model
+
+- locator：CNN-HID Model 开头段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：过去研究使用1D卷积只提取单轴时间模式，遗漏轴间相关和交互信息，因此需要设计新模型。
+
+- rhetorical_function_cn：直接批评现有CNN-HID做法并引出本文设计创新。
+
+- depends_on_cn：依赖文献综述中单轴CNN的总结。
+
+- sets_up_cn：为1D+2D交互核设计提供理由。
+
+- evidence_pointer：CNN-HID Model 开头段
+
+### 34. CNN-HID Model 第一层描述段
+
+- order：34
+
+- section：Research Design / CNN-HID Model
+
+- locator：CNN-HID Model 第一层描述段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：CNN-HID第一层同时包含1D时间核和2D交互核，2D交互核作用在两个不同轴上以捕获跨轴交互，并把两个卷积结果拼接输入下一层。
+
+- rhetorical_function_cn：描述核心设计机制，说明如何实现双依赖提取。
+
+- depends_on_cn：依赖上一句的局限。
+
+- sets_up_cn：为消融实验CNN-HID/T和CNN-HID/CA提供设计差异。
+
+- evidence_pointer：CNN-HID Model 第一层描述段; Figure 4
+
+### 35. CNN-HID Model 学习过程段
+
+- order：35
+
+- section：Research Design / CNN-HID Model
+
+- locator：CNN-HID Model 学习过程段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型采用ReLU激活、步长卷积替代池化、dropout和L2正则，并用交叉熵和反向传播训练。
+
+- rhetorical_function_cn：补充网络训练技术细节，增强可复现性。
+
+- depends_on_cn：依赖CNN-HID结构定义。
+
+- sets_up_cn：为实验实现提供技术基础。
+
+- evidence_pointer：CNN-HID Model 学习过程段
+
+### 36. DTL-HID Algorithm 全节
+
+- order：36
+
+- section：Research Design / DTL-HID Algorithm
+
+- locator：DTL-HID Algorithm 全节
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DTL-HID算法分三步：在可穿戴源域上学习运动表征、复用CNN-HID前n层固定权重、在物体传感器目标域上适配分类层。
+
+- rhetorical_function_cn：把迁移学习知识转化为算法流程。
+
+- depends_on_cn_cn：依赖DTL三步骤和CNN-HID设计。
+
+- depends_on_cn：依赖DTL三步骤和CNN-HID设计。
+
+- sets_up_cn：为实验2的转移设置提供算法形式。
+
+- evidence_pointer：DTL-HID Algorithm 全节; Algorithm 1
+
+### 37. Evaluation Design 开头段
+
+- order：37
+
+- section：Evaluation Design
+
+- locator：Evaluation Design 开头段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：设计科学研究强调对制品进行严格评价，因此设计了四个实验分别检验CNN-HID设计、迁移价值、依赖类型和源域活动影响。
+
+- rhetorical_function_cn：说明评价设计原则，并预告四个实验的各自作用。
+
+- depends_on_cn：依赖设计科学方法论和已构建的制品。
+
+- sets_up_cn：为后续四个实验小节提供目的框架。
+
+- evidence_pointer：Evaluation Design 开头段; Table 6
+
+### 38. Evaluation Design 指标段
+
+- order：38
+
+- section：Evaluation Design
+
+- locator：Evaluation Design 指标段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用宏平均精确率、召回率、F1和微平均准确率评价模型，并用单尾配对t检验比较最佳模型与其他模型。
+
+- rhetorical_function_cn：说明指标选择和统计检验理由，预防仅凭数字大小得出结论。
+
+- depends_on_cn：依赖评价设计整体方案。
+
+- sets_up_cn：为结果表格中的显著性标记提供依据。
+
+- evidence_pointer：Evaluation Design 指标段
+
+### 39. Experiment 1 Results P1-P2
+
+- order：39
+
+- section：Results and Discussion
+
+- locator：Experiment 1 Results P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：CNN-HID在HANDY上所有指标都超过经典ML和深度学习基准，差异统计显著；经典ML中kNN和DT较好但SVM和NB较差。
+
+- rhetorical_function_cn：报告源域实验原始结果。
+
+- depends_on_cn：依赖实验1设计。
+
+- sets_up_cn：说明深度自动特征优于手工特征。
+
+- evidence_pointer：Table 7
+
+### 40. Experiment 1 Results P3
+
+- order：40
+
+- section：Results and Discussion
+
+- locator：Experiment 1 Results P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：深度方法优于经典ML说明自动学习表示比人工特征工程更有效；CNN-HID/CA好于CNN-HID/T，CNN-HID同时提取两类依赖又最好。
+
+- rhetorical_function_cn：解释实验结果背后的机制，并把注意力转向依赖类型。
+
+- depends_on_cn：依赖表7数据。
+
+- sets_up_cn：为实验3直接做铺垫：跨轴依赖价值更大。
+
+- evidence_pointer：Experiment 1 Results P3
+
+### 41. Experiment 2 Results P1-P3
+
+- order：41
+
+- section：Results and Discussion
+
+- locator：Experiment 2 Results P1-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：DTL-HID在四个物体传感器上的准确率均超过0.6，微平均准确率0.707，显著高于所有非迁移基准；非迁移深度模型过拟合严重。
+
+- rhetorical_function_cn：报告迁移实验核心结果并对比非迁移基准。
+
+- depends_on_cn_cn：依赖实验2的反向交叉验证设计。
+
+- depends_on_cn：依赖实验2的反向交叉验证设计。
+
+- sets_up_cn：为“迁移知识有效”提供直接证据。
+
+- evidence_pointer：Table 8; Figure 5
+
+### 42. Experiment 2 Results P4
+
+- order：42
+
+- section：Results and Discussion
+
+- locator：Experiment 2 Results P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：尽管源数据集与目标测试集不完全重叠，迁移网络结构和权重仍能提升目标域HID，说明从可穿戴传感器迁移运动动态是解决物体传感器标注不足的可行途径。
+
+- rhetorical_function_cn：把迁移收益上升为机制解释。
+
+- depends_on_cn：依赖前一句的结果。
+
+- sets_up_cn：为实验3拆解迁移内容提供过渡。
+
+- evidence_pointer：Experiment 2 Results P4
+
+### 43. Experiment 3 Results 开头
+
+- order：43
+
+- section：Results and Discussion
+
+- locator：Experiment 3 Results 开头
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验1和实验2验证了CNN-HID和迁移学习价值，实验3进一步探索不同依赖从源域的可迁移性。
+
+- rhetorical_function_cn：论文用一句话串联前两个实验与当前实验的逻辑关系。
+
+- depends_on_cn：依赖实验1和实验2结论。
+
+- sets_up_cn：明确实验3要回答的新问题。
+
+- evidence_pointer：Experiment 3 Results 开头
+
+### 44. Experiment 3 Results P1-P3
+
+- order：44
+
+- section：Results and Discussion
+
+- locator：Experiment 3 Results P1-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：同时迁移两种依赖的DTL-HID微平均准确率0.707，显著高于DTL-HID/T 0.655和DTL-HID/CA 0.667；跨轴迁移总体好于时间迁移。
+
+- rhetorical_function_cn：报告消融实验并进一步支持跨轴依赖价值。
+
+- depends_on_cn：依赖实验3的设计。
+
+- sets_up_cn：为实验4的源域构成分析让位。
+
+- evidence_pointer：Table 9; Table 10
+
+### 45. Experiment 4 Results 开头
+
+- order：45
+
+- section：Results and Discussion
+
+- locator：Experiment 4 Results 开头
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验2和3证明了深度迁移和双依赖迁移的价值，实验4进一步检验源域活动类型变化的影响。
+
+- rhetorical_function_cn：说明实验4与前两实验的递进关系。
+
+- depends_on_cn：依赖实验2和3的结果。
+
+- sets_up_cn：为源域组成指导提供框架。
+
+- evidence_pointer：Experiment 4 Results 开头
+
+### 46. Experiment 4 Results P1-P2
+
+- order：46
+
+- section：Results and Discussion
+
+- locator：Experiment 4 Results P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：使用全部三类源活动时DTL-HID效果最好（0.707）；在两类活动基准中No-horizontal最好，在单类活动中vertical最有效。
+
+- rhetorical_function_cn：报告源域敏感性分析结果并提炼实用指导。
+
+- depends_on_cn：依赖实验4的源活动消融设置。
+
+- sets_up_cn：为实践者如何选择源域数据提供边界条件。
+
+- evidence_pointer：Table 11
+
+### 47. Case Study 开头段
+
+- order：47
+
+- section：Case Study
+
+- locator：Case Study 开头段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：除技术实验外，案例研究用于演示proof-of-concept和proof-of-value，展示提出方法能捕获被最佳竞争方法遗漏的正确实例。
+
+- rhetorical_function_cn：解释为什么在严谨实验之外还需要案例研究。
+
+- depends_on_cn：依赖设计科学对“最后研究英里”的强调。
+
+- sets_up_cn：为饮水活动示例提供方法论理由。
+
+- evidence_pointer：Case Study 开头段
+
+### 48. Case Study 结果解释段
+
+- order：48
+
+- section：Case Study
+
+- locator：Case Study 结果解释段
+
+- move_code：RESULT
+
+- paraphrase_cn：DTL-HID正确识别了CNN-HID和DT误分类的饮水片段，能识别时间不变显著模式以及不同受试者在不同活动阶段的加速度幅度差异。
+
+- rhetorical_function_cn：把案例中的定性证据与前面机制解释连接起来。
+
+- depends_on_cn：依赖案例样本和三种模型的分类结果。
+
+- sets_up_cn：为结论中的设计原则提供应用语言。
+
+- evidence_pointer：Case Study 全节; Figure 7; Figure 8
+
+### 49. Conclusion P1-P2
+
+- order：49
+
+- section：Conclusion and Future Directions
+
+- locator：Conclusion P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重新陈述物体传感器ADL监测需求、稀缺数据和特征工程问题，说明本文通过设计出DTL-HID框架和CNN-HID模型解决这些问题，并以设计科学范式完成了开发与评价。
+
+- rhetorical_function_cn：把全文贡献压缩成回应开头的完整论证链。
+
+- depends_on_cn：依赖所有实验和案例结果。
+
+- sets_up_cn：为具体设计原则的陈述做准备。
+
+- evidence_pointer：Conclusion P1-P2
+
+### 50. Conclusion P3
+
+- order：50
+
+- section：Conclusion and Future Directions
+
+- locator：Conclusion P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文以初步设计理论形式贡献两条设计原则：提取时间和轴向局部依赖可捕获更多多轴传感器信息；从充足相关源域迁移知识可提升稀缺目标域性能。
+
+- rhetorical_function_cn：将具体实验结果提升为可复用的设计知识。
+
+- depends_on_cn：依赖实验1-4和案例研究的证据。
+
+- sets_up_cn：为未来IS研究者提供可检验的设计命题。
+
+- evidence_pointer：Conclusion P3
+
+### 51. Conclusion P4
+
+- order：51
+
+- section：Conclusion and Future Directions
+
+- locator：Conclusion P4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：面向医生、照护者和老年人说明实用价值：临床医生能获得更准确的监测报告，照护者能区分共享区域居民活动，老年人无需反复穿戴传感器。
+
+- rhetorical_function_cn：把设计贡献落到不同利益相关者身上。
+
+- depends_on_cn：依赖框架的应用定位。
+
+- sets_up_cn：为未来研究方向的实用动机提供基础。
+
+- evidence_pointer：Conclusion P4
+
+### 52. Conclusion P5
+
+- order：52
+
+- section：Conclusion and Future Directions
+
+- locator：Conclusion P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可结合主动学习和时间活动建模处理误分类、采用多源迁移学习、利用贝叶斯深度学习和扩展到EEG及IoT智能家居。
+
+- rhetorical_function_cn：坦承当前局限并给出后续研究路线。
+
+- depends_on_cn：依赖研究的主要结论和局限。
+
+- sets_up_cn：使研究显得可延续、可扩展。
+
+- evidence_pointer：Conclusion P5
+
+## 写作技术
+
+- gap_construction_cn：论文采用“现实紧迫—技术选择—技术缺陷—文献空白”四级缺口构建：先以老龄化制造社会紧迫感，接着倾向物体运动传感器，再指出其缺少执行者信息和标注稀缺，最后在文献综述中分别从ADL监测、HID、DTL三个领域识别空白，使每个设计选择都有对应缺口。
+
+- signposting_cn：开头预告全文结构；研究设计开头预告四部分；每个实验段开始都用一句话说明该实验要回答的新问题；结论再次汇总。这种路标让读者随时知道当前证据在当前论证链中的位置。
+
+- transition_logic_cn：Study之间的过渡都用“上一实验证明了什么，但还没有回答什么”的句式：实验1证明源域特征提取有效但未处理稀缺；实验2证明迁移有效但未区分依赖类型；实验3证明双依赖迁移有效但未改变源域；实验4把结论推向实用指导。
+
+- claim_evidence_rhythm_cn：每个结果小节先报告一张表格中的核心数字，随后立即给出解释性段落，把数字归因到设计机制，最后用显著性标记和ROC等指标保护结论。解释句都紧跟在结果句之后，避免“结果与解释脱节”。
+
+- benchmark_narrative_cn：Benchmark不是一次性罗列，而是按功能分层：经典ML代表旧范式，CNN消融代表设计内部对照，非迁移深度学习代表缺少迁移的同类制品，DTL消融代表只迁移部分依赖。每一层对照都为下一个要证明的机制服务。
+
+- theory_return_cn：论文没有把结果停留在“我们模型最好”，而是在结论部分把CNN-HID的双依赖提取和DTL-HID的源域迁移提升为两条普遍设计原则，使其成为可被未来移动分析研究使用的一般知识。
+
+- contribution_positioning_cn：使用设计科学语言（IT制品、设计原则、nascent design theory、proof-of-concept、proof-of-value）把技术工作定位为IS知识贡献，并使用“首次”“新颖”“创新”等词强调相对文献的非平凡性。
+
+- novelty_protection_cn：通过七重证据保护贡献不过度退化为一次性性能结果：源域实验、目标域迁移实验、依赖消融、源活动敏感性、统计检验、ROC和案例研究。这样即使目标域准确率只有0.707，也能从多个角度支撑设计原则。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实问题和社会后果建立研究重要性，引入应用场景。
+
+- research_job_cn：确认场景中的关键用户需求和现有技术代价。
+
+- required_evidence_cn：官方人口/产业统计数据、传感器类型对比或行业白皮书。
+
+- transition_to_next_cn：从一般场景收敛到具体技术缺陷，例如“某传感器类型好但仍缺某信息”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：做三到四支文献综述，每支对应一个待补齐的知识点。
+
+- research_job_cn：识别现有方法的方法论局限和数据限制。
+
+- required_evidence_cn：近期文献表格、算法类别、传感器类型、量化差距。
+
+- transition_to_next_cn：用“综合三条缺口后提出研究问题”连接综述与研究设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：将研究问题转化为数据集选择和制品总体架构。
+
+- research_job_cn：选择源域和目标域数据，确保二者相关但不同，从而可以检验泛化性。
+
+- required_evidence_cn：公开数据集样本量、标注量、采样率和任务标签。
+
+- transition_to_next_cn：用“数据预处理解决源/目标不一致”进入技术步骤。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述制品每个关键设计元素，并说明它对应文献中的哪个局限。
+
+- research_job_cn：实现模型/算法部件，并保留可消融的变体。
+
+- required_evidence_cn：网络结构图、数学式、算法伪代码。
+
+- transition_to_next_cn：由设计科学原则引出“需要严格评价”的评价设计。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：设计递进实验：先验证基础部件，再验证整体方法，然后消融关键机制，最后做边界条件检验。
+
+- research_job_cn：准备每个实验的基准、消融设置、交叉验证协议和统计检验。
+
+- required_evidence_cn：至少一个标准基准、一个消融对比、一个统计显著性结果。
+
+- transition_to_next_cn：技术结果后用案例研究把指标转化为应用价值。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用案例研究展示制品在具体应用中能做什么、比竞争方法好在哪。
+
+- research_job_cn：挑选有代表性的成功案例并可视化解释。
+
+- required_evidence_cn：视频/截图/信号片段以及被竞争方法误分类的脚本。
+
+- transition_to_next_cn：从案例回到设计科学范式，概括设计原则。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：结论中把技术成果提炼为可复用设计原则，并列出未来方向。
+
+- research_job_cn：明确哪些知识可推广到其他问题，哪些是边界条件。
+
+- required_evidence_cn：实验证据能够关联到的设计原则；未来方向的逻辑缺口。
+
+- transition_to_next_cn：结束全文。
+
+### most_transferable_moves_cn
+
+1. 每个实验前用一句话说明“上一实验证明了什么、这个实验补什么”
+
+2. 让每个制品设计元素都对应文献综述中的一个缺陷
+
+3. 用消融变体把整体性能优势拆解到具体设计部件
+
+4. 结果表格后紧接机制解释段落，先数字后归因
+
+5. 用案例研究把准确率指标转成实际照护场景中可理解的价值
+
+6. 结尾把技术结果升华为设计原则，避免停留于一次性性能报告
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要两个跨数据集且类别标签不共享的公开或私有数据集，并确保源域数据充足、目标域数据稀缺
+
+2. 需要对多住户环境下身份混淆场景进行数据合成或现场采集
+
+3. 需要较长的深度网络调参周期和一定规模的计算资源（论文使用3 CPU核，模型并非特别庞大，但仍需Keras/scikit-learn环境）
+
+4. 案例研究依赖视频和信号同步注释，难以仅从标签数据自动获得
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只写“采用设计科学”却不做递进实验和消融对照
+
+2. 不要把CNN-HID的“1D+2D交互核”机械套用，必须证明这个数据确实存在轴间交互
+
+3. 不要只宣称迁移学习有效，必须有源域/目标域相关但不重叠的证据
+
+4. 不要用案例成功样本代替系统统计，案例只能作为补充而非主要证据
+
+5. 不要把0.7左右的准确率包装成“准确识别”，若没有后续下游评估会变成过度声称
+
+- single_best_description_of_the_routine_cn：把实践问题压缩成三个研究缺口，以设计科学范式构建源域训练+目标域迁移的制品，再用四层递进实验把性能优势逐步拆解到每个设计选择，最后用案例研究把技术结果提升为两条可复用的IS设计原则。
+
+## 分析边界
+
+提供的全文由HTML/文本转写而来，部分图片（如图1、图2、图4、图5-8）以附件形式存在，无法读取具体视觉细节，对CNN模型的层间连接、曲线细节和视频截图的精确解读有限。所有定位以章节、段落编号和表编号为依据，未提供期刊页码。没有附录或在线补充材料，因此无法核验超参数和代码细节。

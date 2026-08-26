@@ -1,0 +1,300 @@
+====================================================================================================
+06870_2014_innovating-financial-information-infrastructures-the-transition-of-legacy-assets-to-the-securiti.md
+---
+otero_id: 6870
+otero_key: "AHCQCR7C"
+title: "Innovating Financial Information Infrastructures: The Transition of Legacy Assets to the Securitization Market"
+authors: "Antonios Kaniadakis; Panos Constantinides"
+year: "2014"
+journal: "Journal of the Association for Information Systems"
+doi: "10.17705/1jais.00362"
+query: "construct"
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+5-27-2014
+
+# Innovating Financial Information Infr astructures: The T  ransition of Legacy Assets to the Securitization Market
+
+Antonios Kaniadakis , akaniadakis@uclan.ac.uk
+
+Panos Constantinides
+
+, panos.constantinides@wbs.ac.uk
+
+Follow this and additional works at: https://aisel.aisnet.org/jais
+
+# Journal of the Asşociation for Information Systems JAIS
+
+Special Issue
+
+# Innovating Financial Information Infrastructures: The Transition of Legacy Assets to the Securitization Market
+
+Antonios Kaniadakis
+
+University of Central Lancashire
+
+akaniadakis@uclan.ac.uk
+
+Panos Constantinides
+
+University of Warwick
+
+Panos.Constantinides@wbs.ac.uk
+
+## Abstract
+
+The introduction of mortgage securitization in the UK as a new type of financial innovation to help banks raise funds took the form of transferring existing legacy mortgage assets into the emerging securitization chain. In this paper, we explore the role of financial information infrastructure (FII) innovation as a process that enabled this transition and we ask what the implications for the calculation of financial risk were. New empirical evidence from a qualitative case study research in a U.K. bank shows that instead of focusing on the re-calculation of risk of the pre-existing legacy assets, the bank’s innovative efforts were centered around validating the accuracy of the data available on those assets as an independent process. Our contribution is twofold. First, we show that FII are built with specific financial functions in mind that are formulated in the context of managerial and political decisions. Second, we show that data validation, although not a direct calculation of risk, constitutes an effort to order risk calculation practices. This is important in understanding the role of FII innovation as a mechanism by which FII become an integrating and standardising force in securitization markets.
+
+Keywords: Information Infrastructures, Mortgage Securitization, Calculation, Risk, Legacy Assets.
+
+# Innovating Financial Information Infrastructures: The Transition of Legacy Assets to the Securitization Market
+
+## 1. Introduction
+
+The practice of mortgage securitization, which constitutes the main innovation in mortg
+====================================================================================================
+26444_2002_assessing-the-validity-of-is-success-models-an-empirical-test-and-theoretical-analysis.md
+---
+otero_id: 26444
+otero_key: "D3HRSEAK"
+title: "Assessing the Validity of IS Success Models: An Empirical Test and Theoretical Analysis"
+authors: "Arun Rai; Sandra S. Lang; Robert B. Welker"
+year: "2002"
+journal: "Information Systems Research"
+doi: "10.1287/isre.13.1.50.96"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+# Information Systems Research
+
+## HSR
+
+![](/api/attachments/D3HRSEAK/fulltext/images/1cc83dc5ec57ceff8b3d786570b61d907d6b5e8fd1fba6013fc0ad7935037dd5.jpg)
+
+Publication details, including instructions for authors and subscription information: http://pubsonline.informs.org
+
+# Assessing the Validity of IS Success Models: An Empirical Test and Theoretical Analysis
+
+Arun Rai, Sandra S. Lang, Robert B. Welker,
+
+## To cite this article:
+
+Arun Rai, Sandra S. Lang, Robert B. Welker, (2002) Assessing the Validity of IS Success Models: An Empirical Test and Theoretical Analysis. Information Systems Research 13(1):50-69. http://dx.doi.org/10.1287/isre.13.1.50.96
+
+## Full terms and conditions of use: http://pubsonline.informs.org/page/terms-and-conditions
+
+This article may be used only for the purposes of research, teaching, and/or private study. Commercial use or systematic downloading (by robots or other automatic processes) is prohibited without explicit Publisher approval. For more information, contact permissions@informs.org.
+
+The Publisher does not warrant or guarantee the article’s accuracy, completeness, merchantability, fitness for a particular purpose, or non-infringement. Descriptions of, or references to, products or publications, or inclusion of an advertisement in this article, neither constitutes nor implies a guarantee, endorsement, or support of claims made of that product, publication, or service.
+
+© 2002 INFORMS
+
+Please scroll down for article—it is on subsequent pages
+
+![](/api/attachments/D3HRSEAK/fulltext/images/77b7395407a4f6e25b329505abfedc3b7f3fe381c0dcaf5a8e901306c05bf883.jpg)
+
+INFORMS is the largest professional society in the world for professionals in the fields of operations research, managemen science, and analytics.
+
+For more information on INFORMS, its publications, membership, or meetings visit http://www.informs.org
+
+# Assessing the Validity of IS Success Models: An Empirical Test and Theoretical Analysis
+
+Arun Rai • Sandra S. Lang • Robert B. Welker
+
+Electronic Commerce Institute, Robinson College of Business, Georgia State University, Atlanta, Georgia 30303 McKendree College, Division of Business, Lebanon, Illinois 62254
+
+School of Accountancy, Southern Illinois University at Carbondale, C
+====================================================================================================
+26481_2002_the-security-of-confidential-numerical-data-in-databases.md
+---
+otero_id: 26481
+otero_key: "VZY6TPGK"
+title: "The Security of Confidential Numerical Data in Databases"
+authors: "Rathindra Sarathy; Krishnamurty Muralidhar"
+year: "2002"
+journal: "Information Systems Research"
+doi: "10.1287/isre.13.4.389.74"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+This article was downloaded by: [129.105.215.146] On: 15 September 2016, At: 09:24 Publisher: Institute for Operations Research and the Management Sciences (INFORMS) INFORMS is located in Maryland, USA
+
+## HSR
+
+## Information Systems Research
+
+![](/api/attachments/VZY6TPGK/fulltext/images/8acb2a1256cddc13fc463b73f6019b4947be4735ac788367671df5e3bc391611.jpg)
+
+Publication details, including instructions for authors and subscription information: http://pubsonline.informs.org
+
+## The Security of Confidential Numerical Data in Databases
+
+Rathindra Sarathy, Krishnamurty Muralidhar,
+
+## To cite this article:
+
+Rathindra Sarathy, Krishnamurty Muralidhar, (2002) The Security of Confidential Numerical Data in Databases. Information Systems Research 13(4):389-403. http://dx.doi.org/10.1287/isre.13.4.389.74
+
+Full terms and conditions of use: http://pubsonline.informs.org/page/terms-and-conditions
+
+This article may be used only for the purposes of research, teaching, and/or private study. Commercial use or systematic downloading (by robots or other automatic processes) is prohibited without explicit Publisher approval, unless otherwise noted. For more information, contact permissions@informs.org.
+
+The Publisher does not warrant or guarantee the article’s accuracy, completeness, merchantability, fitness for a particular purpose, or non-infringement. Descriptions of, or references to, products or publications, or inclusion of an advertisement in this article, neither constitutes nor implies a guarantee, endorsement, or support of claims made of that product, publication, or service.
+
+© 2002 INFORMS
+
+Please scroll down for article—it is on subsequent pages
+
+![](/api/attachments/VZY6TPGK/fulltext/images/b9dca95f7d023f701fab07fd5c287bd01170b35de7a050be7f5290a3cbe9e39e.jpg)
+
+INFORMS is the largest professional society in the world for professionals in the fields of operations research, management science, and analytics.
+
+For more information on INFORMS, its publications, membership, or meetings visit http://www.informs.org
+
+# The Security of Confidential Numerical Data in Databases
+
+Rathindra Sarathy • Krishnamurty Muralidhar
+
+Department of Management, Oklahoma State University, Stillwater, Oklahoma 74078-4011
+
+School of Management, Gatton College of Business & E
+====================================================================================================
+05320_2012_b-research-note-b-generating-shareable-statistical-databases-for-business-value-multiple-imputat.md
+---
+otero_id: 5320
+otero_key: "XRRMBTZX"
+title: "<b>Research Note</b>—Generating Shareable Statistical Databases for Business Value: Multiple Imputation with Multimodal Perturbation"
+authors: "Nigel Melville; Michael McQuaid"
+year: "2012"
+journal: "Information Systems Research"
+doi: "10.1287/isre.1110.0361"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+# Information Systems Research
+
+## 6SR
+
+![](/api/attachments/XRRMBTZX/fulltext/images/e81d4db1b77775a550dc187a113a9e0238741f9fdf1e4d304a5406c41df2184a.jpg)
+
+Publication details, including instructions for authors and subscription information: http://pubsonline.informs.org
+
+# Research Note—Generating Shareable Statistical Databases for Business Value: Multiple Imputation with Multimodal Perturbation
+
+Nigel Melville, Michael McQuaid,
+
+To cite this article:
+
+Nigel Melville, Michael McQuaid, (2012) Research Note—Generating Shareable Statistical Databases for Business Value: Multiple Imputation with Multimodal Perturbation. Information Systems Research 23(2):559-574. http://dx.doi.org/10.1287/ isre.1110.0361
+
+Full terms and conditions of use: http://pubsonline.informs.org/page/terms-and-conditions
+
+This article may be used only for the purposes of research, teaching, and/or private study. Commercial use or systematic downloading (by robots or other automatic processes) is prohibited without explicit Publisher approval, unless otherwise noted. For more information, contact permissions@informs.org.
+
+The Publisher does not warrant or guarantee the article’s accuracy, completeness, merchantability, fitness for a particular purpose, or non-infringement. Descriptions of, or references to, products or publications, or inclusion of an advertisement in this article, neither constitutes nor implies a guarantee, endorsement, or support of claims made of that product, publication, or service.
+
+Copyright © 2012, INFORMS
+
+Please scroll down for article—it is on subsequent pages
+
+![](/api/attachments/XRRMBTZX/fulltext/images/a60f33dadb3d9c13684367d54e5ed75a53c8bf79652856066d2769174adffa59.jpg)
+
+INFORMS is the largest professional society in the world for professionals in the fields of operations research, management science, and analytics.
+
+For more information on INFORMS, its publications, membership, or meetings visit http://www.informs.org
+
+# Research Note
+
+# Generating Shareable Statistical Databases for Business Value: Multiple Imputation with Multimodal Perturbation
+
+Nigel Melville
+
+Stephen M. Ross School of Business, University of Michigan, Ann Arbor, Michigan 48109, npmelv@umich.edu
+
+Michael Mc
+====================================================================================================
+00606_2016_the-impact-of-fake-reviews-on-online-visibility-a-vulnerability-assessment-of-the-hotel-industry.md
+---
+otero_id: 606
+otero_key: "4YHJ9P68"
+title: "The Impact of Fake Reviews on Online Visibility: A Vulnerability Assessment of the Hotel Industry"
+authors: "Theodoros Lappas; Gaurav Sabnis; Georgios Valkanas"
+year: "2016"
+journal: "Information Systems Research"
+doi: "10.1287/isre.2016.0674"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+This article was downloaded by: [128.197.26.12] On: 11 November 2016, At: 06:21 Publisher: Institute for Operations Research and the Management Sciences (INFORMS) INFORMS is located in Maryland, USA
+
+# Information Systems Research
+
+## HSR
+
+![](/api/attachments/4YHJ9P68/fulltext/images/436ac8ca497559df69ec40b7dd488171509ba514c471b9b967cb4b4dd2e80f57.jpg)
+
+Publication details, including instructions for authors and subscription information: http://pubsonline.informs.org
+
+## The Impact of Fake Reviews on Online Visibility: A Vulnerability Assessment of the Hotel Industry
+
+Theodoros Lappas, Gaurav Sabnis, Georgios Valkanas
+
+To cite this article:
+
+Theodoros Lappas, Gaurav Sabnis, Georgios Valkanas (2016) The Impact of Fake Reviews on Online Visibility: A Vulnerability Assessment of the Hotel Industry. Information Systems Research
+
+Published online in Articles in Advance 09 Nov 2016
+
+http://dx.doi.org/10.1287/isre.2016.0674
+
+## Full terms and conditions of use: http://pubsonline.informs.org/page/terms-and-conditions
+
+This article may be used only for the purposes of research, teaching, and/or private study. Commercial use or systematic downloading (by robots or other automatic processes) is prohibited without explicit Publisher approval, unless otherwise noted. For more information, contact permissions@informs.org.
+
+The Publisher does not warrant or guarantee the article’s accuracy, completeness, merchantability, fitness for a particular purpose, or non-infringement. Descriptions of, or references to, products or publications, or inclusion of an advertisement in this article, neither constitutes nor implies a guarantee, endorsement, or support of claims made of that product, publication, or service.
+
+Copyright © 2016, INFORMS
+
+Please scroll down for article—it is on subsequent pages
+
+![](/api/attachments/4YHJ9P68/fulltext/images/e49f3d5bf8b18995d7d037f601fea0a9d5c7c6b110ec97a0083ed61ecadbc87d.jpg)
+
+INFORMS is the largest professional society in the world for professionals in the fields of operations research, management science, and analytics.
+
+For more information on INFORMS, its publications, membership, or meetings visit http://www.informs.org
+
+# The Impact of Fake Reviews on Online Visibility: A Vulne
+====================================================================================================
+12102_2014_filtering-trust-opinions-through-reinforcement-learning.md
+---
+otero_id: 12102
+otero_key: "8EWREW98"
+title: "Filtering trust opinions through reinforcement learning"
+authors: "Han Yu; Zhiqi Shen; Chunyan Miao; Bo An; Cyril Leung"
+year: "2014"
+journal: "Decision Support Systems"
+doi: "10.1016/j.dss.2014.06.006"
+query: ""
+source: "https://ais.kexu.win"
+images_downloaded: false
+---
+Han Yu <sup>a,</sup>⁎, Zhiqi Shen <sup>a</sup>, Chunyan Miao <sup>a</sup>, Bo An <sup>a</sup>, Cyril Leung
+
+<sup>a</sup> School of Computer Engineering, Nanyang Technological University 637659, Singapore
+
+<sup>b</sup> Department of Electrical and Computer Engineering, the University of British Columbia, Vancouver, BC V6T1Z4, Canada
+
+## a r t i c l e i n f o
+
+Article history: Received 23 September 2013 Received in revised form 4 June 2014 Accepted 10 June 2014 Available online 26 June 2014
+
+Keywords: Trust Reputation Credibility Collusion
+
+## a b s t r a c t
+
+In open online communities such as e-commerce, participants need to rely on services provided by others in order to thrive. Accurately estimating the trustworthiness of a potential interaction partner is vital to a participant's well-being. It is generally recognized in the research community that third-party testimony sharing is an effective way for participants to gain knowledge about the trustworthiness of potential interaction partners without having to incur the risk of actually interacting with them. However, the presence of biased testimonies adversely affects a participant's long term well-being. Existing trust computational models often require complicated manual tuning of key parameters to combat biased testimonies. Such an approach heavily involves subjective judgments and adapts poorly to changes in an environment. In this study, we propose the Actor–Critic Trust (ACT) model, which is an adaptive trust evidence aggregation model based on the principles of reinforcement learning. The proposed method dynamically adjusts the selection of credible witnesses as well as the key parameters associated with the direct and indirect trust evidence sources based on the observed bene<sup>fi</sup>ts received by the trusting entity. Extensive simulations have shown that the ACT approach signi<sup>fi</sup>cantly outperforms existing approaches in terms of mitigating the adverse effect of biased testimonies. Such a performance is due to the proposed accountability mechanism that enables ACT to attribute the outcome of an interaction to individual witnesses and sources of trust evidence, and adjust future evidence aggregation decisions without the need for human intervention. The advantage

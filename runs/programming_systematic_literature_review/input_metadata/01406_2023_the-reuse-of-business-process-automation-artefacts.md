@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85181050128"
+title: "The reuse of business process automation artefacts"
+authors: "François P.A.; Plattfaut R."
+year: "2023"
+journal: "Lecture Notes in Informatics (LNI), Proceedings - Series of the Gesellschaft fur Informatik (GI)"
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: The reuse of business process automation artefacts
+Abstract: Reusing business process models and process-related artefacts is deemed an essential factor in BPM initiatives by researchers and practitioners. The reuse of corresponding artefacts has been researched and practiced for almost 40 years. Yet, with the growing adoption of componentand platform-based information systems, a current review of how we view and conduct reuse in Business Process Automation becomes necessary. The advent of citizen developers further increases the need for a consolidated overview of the knowledge on reuse. As citizen developers are not trained to conduct reuse, guidance on how to harness the potential of reuse is needed. Based on a literature review, we identify four main layers on which process automation artefacts are reused and list exemplary technologies and methodologies. In addition, we systematize nine characteristics of reused automation artefacts and nine characteristics that describe a concrete instance of reuse. Finally, we provide a research agenda. © 2023 Gesellschaft fur Informatik (GI). All rights reserved.
+Author keywords: Automation Reuse; Business Process Automation; Citizen Developer; Literature Review; Process Reuse; Reuse Layers
+Index keywords: Enterprise resource management; Process control; 'current; Automation reuse; Business process automation; Business process modeling; Citizen developer; Literature reviews; Process reuse; Reuse; Reuse layer; Automation
+Document type: Conference paper
+Conference: 2023 Designing Futures: Zukunfte gestalten, INFORMATIK 2023 - 2023 Designing Futures: Shaping the Future, INFORMATIK 2023
+Source title: Lecture Notes in Informatics (LNI), Proceedings - Series of the Gesellschaft fur Informatik (GI)
+Year: 2023
+EID: 2-s2.0-85181050128
+DOI: 
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,24 @@
+{
+  "source_rows": {
+    "authoritative_outlet_search": 4981,
+    "forward_citation_of_20_seeds": 807,
+    "local_fulltext_seed_28": 28
+  },
+  "deduplicated_records": 5642,
+  "records_with_abstract": 5642,
+  "records_without_abstract": 0,
+  "records_by_channel": {
+    "authoritative_outlet_search": 4899,
+    "forward_citation_of_20_seeds": 788,
+    "local_fulltext_seed_28": 28
+  },
+  "records_by_channel_combination": {
+    "authoritative_outlet_search": 4839,
+    "forward_citation_of_20_seeds": 732,
+    "authoritative_outlet_search + forward_citation_of_20_seeds": 43,
+    "local_fulltext_seed_28": 9,
+    "authoritative_outlet_search + forward_citation_of_20_seeds + local_fulltext_seed_28": 11,
+    "authoritative_outlet_search + local_fulltext_seed_28": 6,
+    "forward_citation_of_20_seeds + local_fulltext_seed_28": 2
+  }
+}

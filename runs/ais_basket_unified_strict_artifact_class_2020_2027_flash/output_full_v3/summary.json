@@ -1,0 +1,95 @@
+{
+  "updated_at": "2026-08-07T13:31:08.940054+00:00",
+  "analysis_version": "ais-basket-unified-strict-artifact-class-full-v3",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 50,
+  "prompt_fingerprint": "3fe999fdfd248f34c4711cccbdeb03e8257448aab6ef4f86d0622060efe5c10c",
+  "year_range": {
+    "from": 2020,
+    "to": 2027
+  },
+  "input_source": "E:\\github\\qual-llm-check-IS-utd\\database_fulltext_all",
+  "input_fulltexts": 2475,
+  "input_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "completed": 2475,
+  "pending": 0,
+  "completed_year_counts": {
+    "2020": 559,
+    "2021": 552,
+    "2022": 467,
+    "2023": 300,
+    "2024": 277,
+    "2025": 236,
+    "2026": 84
+  },
+  "objective_metric_pass_count": 265,
+  "software_artifact_pass_count": 56,
+  "class_level_contribution_pass_count": 52,
+  "strict_include_count": 27,
+  "strict_exclude_count": 2448,
+  "strict_include_year_counts": {
+    "2020": 8,
+    "2021": 3,
+    "2022": 3,
+    "2023": 4,
+    "2024": 5,
+    "2025": 4
+  },
+  "strict_include_journal_counts": {
+    "Decision Support Systems": 5,
+    "European Journal of Information Systems": 4,
+    "Information Systems Journal": 1,
+    "Information Systems Research": 6,
+    "Journal of Management Information Systems": 3,
+    "Journal of the Association for Information Systems": 4,
+    "MIS Quarterly": 4
+  },
+  "metric_status_counts": {
+    "fully_objective_direct": 784,
+    "human_semantic_judgment": 83,
+    "mixed_objective_subjective": 202,
+    "no_qualifying_metric": 608,
+    "objective_fixed_factual_labels": 92,
+    "subjective_construct_with_fixed_labels": 54,
+    "subjective_or_self_report": 629,
+    "unclear": 23
+  },
+  "core_goal_status_counts": {
+    "objective_improvement_primary": 278,
+    "objective_metric_secondary": 148,
+    "theory_or_explanation_primary": 1987,
+    "unclear": 62
+  },
+  "artifact_status_counts": {
+    "algorithm_or_model_only": 537,
+    "analytical_or_simulation_method_only": 293,
+    "concept_or_future_design_only": 229,
+    "implemented_artifact_component": 22,
+    "implemented_software_artifact": 106,
+    "platform_only_context": 890,
+    "unclear": 398
+  },
+  "contribution_target_status_counts": {
+    "algorithm_or_analytical_method": 371,
+    "behavioral_or_theory_explanation": 1629,
+    "case_specific_solution": 5,
+    "domain_mechanism_or_policy": 347,
+    "software_artifact_class": 56,
+    "unclear": 67
+  },
+  "usage": {
+    "prompt_tokens": 79712471,
+    "completion_tokens": 8872541,
+    "total_tokens": 88585012,
+    "prompt_cache_hit_tokens": 59220224,
+    "prompt_cache_miss_tokens": 20492247
+  }
+}

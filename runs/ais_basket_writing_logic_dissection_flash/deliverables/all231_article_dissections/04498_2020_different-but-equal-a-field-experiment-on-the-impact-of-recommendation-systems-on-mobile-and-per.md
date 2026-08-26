@@ -1,0 +1,1993 @@
+# Different but Equal? A Field Experiment on the Impact of Recommendation Systems on Mobile and Personal Computer Channels in Retail
+
+- 作者：Dongwon Lee; Anandasivam Gopal; Sung-Hyuk Park
+- 年份 / 期刊：2020 / Information Systems Research
+- DOI：10.1287/isre.2020.0922
+- 源文件：04498_2020_different-but-equal-a-field-experiment-on-the-impact-of-recommendation-systems-on-mobile-and-per.md
+- 论文主类型：field_intervention_or_platform_experiment
+- 主导写作弧线：phenomenon_mechanism_intervention_field_test
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：推荐系统在移动端与PC端渠道中对顾客层面决策结果（推荐产品浏览、销售额、销量、点击率和转化率）以及市场层面的销售/浏览多样性是否存在系统性差异，并识别这种差异的边界条件。
+
+- 制品与设计：在韩国在线时尚零售商的网页上，以PCID奇偶随机将用户分配到处理组（看到基于近期浏览的item-to-item协同过滤推荐面板）或对照组（看到同等数量的畅销品面板），处理在移动端和PC端同时上线，比较顾客在两种渠道下的反应。
+
+- 客观结果：处理组在推荐产品浏览、销售额、销量、点击率和转化率上整体更高；在移动端，推荐系统的边际效应显著高于PC端；对销售多样性没有显著效应，但移动渠道本身与更高的销售多样性相关，推荐系统对浏览多样性有正向效应。
+
+- 核心贡献：将推荐系统效应研究扩展到移动渠道，显示移动端的高搜索成本与高参与度使推荐系统边际价值更大；同时为推荐系统对销售多样性的争议提供新的现场证据，表明其对销售多样性既未显著同质化也未显著异质化，而移动渠道可能本身带来更分散的销售结构。
+
+- 整篇论证链：作者从推荐系统在PC电商中已被广泛证明有效、但零售日益移动化的现实出发，指出既有结论能否迁移到移动端并不明确。随后综述移动与PC的结构性差异（小屏幕、高搜索成本、泛在性）以及推荐系统的三条作用机制（降低搜索成本、触发记忆提取、信号效应），说明两者之间存在理论张力，因此不预先设定正式假设，而是用现场实验估计渠道调节作用。作者与韩国分析公司及在线时尚零售商合作，将推荐面板随机分配给用户，并以对照组展示同等数量的畅销品来控制视觉显著性。由于渠道无法随机化，作者利用处理前后各三天的点击流数据，将用户分为纯移动、纯PC、多通道和渠道转换者，并主要对前两类用户做双重差分分析。结果显示推荐系统在移动端对推荐产品浏览、销售额、销量、点击率和转化的边际影响显著更高；渠道转换检验表明处理并未诱发系统性的渠道切换。事后异质性检验显示高价商品在移动端的推荐效果最强，推荐系统促进了新旧产品浏览，活跃用户获得更多销售额。在市场层面，Gini系数与置换检验显示推荐系统提高了浏览多样性但未改变销售多样性，而移动端用户本身有更高的销售多样性，且两者交互不显著。作者进一步用产品四分位回归说明推荐系统只推动最热门与最冷门产品的销量，但中间销售区间无显著效应，所以总体销售多样性不变。讨论部分将结果解释为搜索成本、屏幕约束和泛在性三者净效应的体现，强调移动端ROI高，同时承认渠道自选择、机制识别和短期实验的局限。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心证据来自与在线零售商合作实施的随机现场实验，在实际运营的移动端和PC端页面操纵推荐面板的有无，并利用点击流和交易数据观测顾客行为。渠道本身不是随机分配的，但推荐系统处理被随机化，整体属于真实平台/组织中的数字设计操纵与现场因果检验。
+
+- 主导写作弧线判定：论文先描述移动电商中已观察到的现象（移动端时间占比高但消费占比低）和PC文献结论的不确定迁移，再引入推荐系统降低搜索成本、记忆提取、信号效应以及移动端高搜索成本/泛在性等机制，接着用现场实验作为数字干预，最后用渠道分层、事后异质性检验和Gini多样性分析做现场因果检验与边界描述。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：第1阶段是在线附录中的试点现场实验，为另一客户完成，提供结果可复制性的初步证据；第2阶段是主现场实验的设计与样本构建，以PCID奇偶随机分配推荐面板，并用点击流区分纯PC、纯移动、多通道和渠道切换者；第3阶段对纯PC和纯移动样本做双重差分分析，覆盖转化漏斗的浏览、销售、点击率、转化等结果；第4阶段检验处理是否诱发渠道切换，以排除对第3阶段估计的替代解释；第5阶段从事后异质性入手，用价格四分位、总浏览、新旧产品发现、用户活跃度等分析间接探测搜索成本与参与度机制；第6阶段切换到市场层面，用Gini系数和置换检验分析销售/浏览多样性，并用产品销量四分位回归解释为何推荐系统不改变总体销售多样性。各阶段层层收紧：从随机化到因果估计，再到排除渠道切换、试探机制，最后升华到市场层结果与理论边界。
+
+### studies_or_phases
+
+#### 1. 试点现场实验（在线附录）
+
+- order：1
+
+- name_cn：试点现场实验（在线附录）
+
+- question_cn：推荐系统在另一个零售客户上的移动端与PC端效应是否与主实验一致，能否提供可复制性证据？
+
+- inputs_and_setting_cn：韩国另一在线零售客户，数据、实验时长与主实验不同，结果见在线附录。
+
+- designed_or_compared_object_cn：推荐系统处理组与对照组的比较，以及移动端与PC端的比较。
+
+- baseline_control_or_counterfactual_cn：无推荐系统的对照组；PC端用户。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：现场实验，估计推荐系统在渠道间的差异，并在附录中报告Gini系数与显著性检验。
+
+- main_result_cn：与主实验大体一致：推荐系统提升销售类指标，移动端销售多样性更高；附录中的销售多样性Gini在处理组与对照组间无显著差异，而移动端与PC端差异显著。
+
+- argumentative_role_cn：为主实验的核心发现提供另一个现场环境的复制，说明结果不是单一客户或单一实验期的偶然现象。
+
+- remaining_uncertainty_cn：附录细节未在正文展开，具体变量、处理分配和样本量无法从正文判断。
+
+- link_to_next_phase_cn：因为主实验数据更丰富、覆盖面更广，正文转入主现场实验来详细估计渠道间差异。
+
+##### evidence_pointers
+
+1. Endnote 1
+
+2. Endnote 5
+
+#### 2. 主实验设计与样本构建
+
+- order：2
+
+- name_cn：主实验设计与样本构建
+
+- question_cn：如何在真实零售商平台建立推荐系统处理与渠道比较的干净样本？
+
+- inputs_and_setting_cn：韩国在线时尚零售商（化妆品、配饰、服装），仅网页渠道，无App；移动端和PC端页面功能等价但布局因屏幕略有不同；2016年2月进行三天实验。
+
+- designed_or_compared_object_cn：推荐面板的有无与内容：处理组为基于近期浏览的item-to-item协同过滤推荐面板，对照组为同等数量的畅销品面板；通过PCID奇偶随机分配。
+
+- baseline_control_or_counterfactual_cn：对照组展示畅销品面板而非无面板，以控制视觉面板效应；PCID奇偶作为随机机制。
+
+##### objective_metrics
+
+1. RecViews
+
+2. RecSales
+
+3. RecSalesQ
+
+4. Clickthrough
+
+5. Conversion
+
+6. TotalViews
+
+- analysis_method_cn：描述性统计、组间t检验、相关分析；利用处理前后点击流将用户归为纯PC、纯移动、多通道与渠道切换者。
+
+- main_result_cn：18,196名唯一客户中处理组9,068人、对照组9,128人，随机分配近似均衡；纯移动用户11,623人，纯PC用户2,567人，多通道546人，渠道切换者3,460人；主分析聚焦纯PC与纯移动用户。
+
+- argumentative_role_cn：建立随后所有因果分析的数据基础，同时说明处理随机化与渠道非随机化之间的紧张关系。
+
+- remaining_uncertainty_cn：渠道无法随机化，移动用户与PC用户可能存在固有差异；实验期仅三天，无法观察长期效应。
+
+- link_to_next_phase_cn：在明确样本边界后，进入使用双重差分模型的转化漏斗分析。
+
+##### evidence_pointers
+
+1. Section 3, Experimental Design
+
+2. Table 1
+
+3. Table 2
+
+#### 3. 转化漏斗的双重差分分析
+
+- order：3
+
+- name_cn：转化漏斗的双重差分分析
+
+- question_cn：推荐系统对推荐产品浏览、销售额、销量、点击率和转化率的影响在移动端与PC端是否不同？
+
+- inputs_and_setting_cn：纯PC用户2,567人和纯移动用户11,623人的处理后三天与处理前三天聚合数据。
+
+- designed_or_compared_object_cn：推荐系统处理与渠道（移动/PC）的组合；处理组为随机分配到的推荐面板，对照组为畅销品面板。
+
+- baseline_control_or_counterfactual_cn：每个用户自身的处理前行为提供基线；PC渠道作为移动渠道的对照；对照组提供无推荐系统的反事实。
+
+##### objective_metrics
+
+1. RecViews
+
+2. RecSales
+
+3. RecSalesQ
+
+4. Clickthrough
+
+5. Conversion
+
+- analysis_method_cn：双重差分模型；计数变量用负二项回归，销售额用Tobit，比例用分数logit，转化用logit；用Wald检验比较渠道间系数差异。
+
+- main_result_cn：推荐系统对推荐产品浏览在PC和移动端均显著为正，移动端效应更大；对推荐产品销售额与销量在移动端显著为正，PC端不显著；点击率在两个渠道均显著且移动端更高；转化率仅移动端显著。Wald检验显示差异在浏览、销售、销量上p<0.05，在点击率和转化率上p<0.10。
+
+- argumentative_role_cn：这是论文的核心因果估计，直接回答第一个研究问题并确立“移动端更有效”的主结果。
+
+- remaining_uncertainty_cn：渠道是观测变量而非随机变量；机制（搜索成本、泛在性）只是推测，未被直接识别；结果能否由处理诱发的渠道切换解释仍需排除。
+
+- link_to_next_phase_cn：为了排除渠道切换的替代解释，立即检验处理是否导致用户更换渠道。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Equation (1)
+
+3. Tables 3 and 4
+
+#### 4. 渠道转换稳健性检验
+
+- order：4
+
+- name_cn：渠道转换稳健性检验
+
+- question_cn：推荐系统处理本身是否会导致用户改变渠道，从而使渠道比较失效？
+
+- inputs_and_setting_cn：全部18,196名唯一客户，包含处理前/后可能切换渠道的用户。
+
+- designed_or_compared_object_cn：以渠道是否发生转换为因变量，处理组/对照组为自变量。
+
+- baseline_control_or_counterfactual_cn：如果处理诱发切换，处理组应更可能发生渠道转换；结果不显著则排除这一机制。
+
+##### objective_metrics
+
+1. ChannelTransition
+
+- analysis_method_cn：logit回归，分别控制是否加入ln(TotalViews)。
+
+- main_result_cn：推荐系统处理与渠道转换之间没有显著关系，系数接近零且不显著。
+
+- argumentative_role_cn：排除“处理导致用户切换渠道”的替代解释，增强DiD估计的效度。
+
+- remaining_uncertainty_cn：只能排除处理对已观测渠道切换的影响，不能排除用户固有的渠道自选择。
+
+- link_to_next_phase_cn：确认渠道切换不是主要问题后，用一系列事后检验去间接探测机制与异质性。
+
+##### evidence_pointers
+
+1. Section 4.1, channel transition subsection
+
+2. Equation (2)
+
+3. Table 5
+
+#### 5. 事后机制与异质性检验
+
+- order：5
+
+- name_cn：事后机制与异质性检验
+
+- question_cn：推荐系统在移动端更强的效果是否与搜索成本降低和泛在性相关？哪些商品和用户最受益？
+
+- inputs_and_setting_cn：主实验中的纯PC和纯移动用户；商品按价格四分位、按处理前销量四分位；用户按处理前活跃度四分位。
+
+- designed_or_compared_object_cn：高价/低价推荐商品的浏览与销量；总浏览在价格四分位上的变化；新推荐商品vs先前浏览推荐商品；高活跃vs低活跃用户。
+
+- baseline_control_or_counterfactual_cn：PC渠道作为移动端的对照；低价商品、低活跃用户、先前浏览商品为相应的参照；对商品价格和销量的四分位切分制造内部比较。
+
+##### objective_metrics
+
+1. RecViews
+
+2. RecSalesQ
+
+3. TotalViews
+
+4. New RecViews
+
+5. Previously viewed RecViews
+
+6. New RecSalesQ
+
+7. Previously viewed RecSalesQ
+
+- analysis_method_cn：对价格和活跃度分样本重复DiD/回归；对新旧产品浏览和销售采用处理期回归，用负二项模型。
+
+- main_result_cn：高价商品在移动端获得更高的推荐浏览和销量；移动端对高低价推荐商品均有销售效应，PC端不显著；推荐系统同时提高新旧推荐产品的浏览，但仅在移动端提高新推荐产品的销量；高活跃用户在销售额和销量上的响应强于低活跃用户。
+
+- argumentative_role_cn：为搜索成本降低与移动端参与度提供间接证据，同时给出管理上可落地的异质性发现（高价商品在移动端ROI最明显）。
+
+- remaining_uncertainty_cn：这些都是事后探索性分析，样本小，不能直接测度搜索成本或泛在性；多次比较未做多重检验校正。
+
+- link_to_next_phase_cn：从事后用户/产品层面的异质性转向更高层次的市场结果，即销售/浏览多样性。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Tables 6-11
+
+#### 6. 销售与浏览多样性分析
+
+- order：6
+
+- name_cn：销售与浏览多样性分析
+
+- question_cn：推荐系统和移动渠道对市场层面的销售多样性和浏览多样性有何影响？二者是否存在交互？
+
+- inputs_and_setting_cn：主实验中所有产品的聚合浏览和销售数据，按处理和渠道划分子样本。
+
+- designed_or_compared_object_cn：处理组/对照组、移动/PC端用户的浏览和销售集中度；Lorenz曲线与Gini系数。
+
+- baseline_control_or_counterfactual_cn：对照组、PC渠道、置换检验产生的零分布。
+
+##### objective_metrics
+
+1. Sales Gini
+
+2. View Gini
+
+3. Permutation p-value
+
+- analysis_method_cn：Lorenz曲线、Gini系数、双侧置换检验（1000次）；产品按处理前销量四分位做负二项回归。
+
+- main_result_cn：推荐系统对销售多样性无显著影响，但提高浏览多样性；移动端用户的销售多样性显著高于PC端，浏览多样性在渠道间无显著差异；推荐系统与移动渠道对销售多样性无显著交互。产品四分位回归显示推荐系统显著提升最热门和最冷门产品的销量，但中间销售区间不显著，因此总体销售多样性不变。
+
+- argumentative_role_cn：回答第二个研究问题，提供与既有文献相反或补充的证据：推荐系统在销售多样性上无净效应，而移动渠道本身自带更高的销售多样性。
+
+- remaining_uncertainty_cn：样本来自单一韩国时尚零售商，产品种类有限，无法推广到大型综合电商；多样性效应可能受实验期短和特定目标人群影响。
+
+- link_to_next_phase_cn：讨论部分重新连接引言中的移动端/PC端缺口与多样性争议，并给出理论、管理和未来研究方向。
+
+##### evidence_pointers
+
+1. Section 4.3
+
+2. Figures 1 and 2
+
+3. Table 12
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 推荐系统收益在PC电商已有大量研究，但移动端日益重要。
+
+2. GAP: 推荐系统效果在移动与PC渠道是否存在差异尚未被检验。
+
+3. RQ_OR_OBJECTIVE: 研究推荐系统带来的产品浏览和销售在移动与PC渠道中的差异。
+
+4. OBJECTIVE: 进一步研究渠道对销售多样性的影响。
+
+5. STUDY_OVERVIEW: 与韩国在线零售商合作开展随机现场实验。
+
+6. RESULT: 推荐系统提升用户层结果，移动端边际影响更高。
+
+7. RESULT: 销售多样性无交互效应。
+
+8. BOUNDARY_CONDITION: 结果为推荐系统在双渠道零售中的有效性提供边界条件。
+
+### introduction_moves
+
+1. CONTEXT: 推荐系统普及且被行业看作定向营销工具。
+
+2. PRACTICAL_STAKES: 行业数据显示推荐系统贡献可观收入，零售商将其列为优先策略。
+
+3. PRIOR_KNOWLEDGE: 学术研究在PC情境下已记录推荐系统对销售和多样性的正效应。
+
+4. LIMITATION: 多数文献和行业证据基于桌面端，而零售已移动化。
+
+5. GAP: 既有PC洞察是否迁移到移动端并不显然。
+
+6. PHENOMENON: 移动端占购物时间但不占同等消费份额。
+
+7. MECHANISM: 移动设备有更小屏幕、更高搜索成本，也有泛在性和便利性。
+
+8. GAP: 需要研究渠道差异如何与推荐系统交互。
+
+9. RQ_OR_OBJECTIVE: 提出两个研究问题。
+
+10. METHOD_JUSTIFICATION: 与商业分析公司合作开展随机现场实验，克服数据匮乏。
+
+11. STUDY_OVERVIEW: 描述实验、样本和结果概览。
+
+12. LIMITATION: 渠道无法随机化，潜在选择问题。
+
+13. CONTRIBUTION: 首项贡献是扩展到移动端，第二项贡献是销售多样性的新证据。
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 移动与PC通道在可用性与泛在性上存在结构性差异。
+
+2. MECHANISM: 移动泛在性增加内容访问和参与。
+
+3. MECHANISM: 小屏幕限制导航效率、增加搜索成本。
+
+4. PRIOR_KNOWLEDGE: 推荐系统通过降低信息过载辅助决策。
+
+5. MECHANISM: 推荐系统降低搜索成本、触发记忆提取、提供间接质量信号。
+
+6. GAP: 移动端高搜索成本与泛在性形成理论张力，因此不设定正式假设。
+
+7. PRIOR_KNOWLEDGE: 推荐系统对销售多样性的影响存在长尾与同质化两种对立观点。
+
+8. GAP: 净效应模糊且缺少随机现场数据。
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE: 处理组展示基于近期浏览的item-to-item协同过滤推荐面板。
+
+2. DESIGN_FEATURE: 对照组展示同等数量的畅销品面板以控制视觉显著性。
+
+3. DESIGN_FEATURE: 随机分配依据PCID奇偶。
+
+4. METHOD_JUSTIFICATION: 在PC和移动端功能等价地部署面板。
+
+5. METHOD_JUSTIFICATION: 用处理前后点击流识别纯PC/纯移动/多通道/渠道切换者。
+
+6. METHOD_JUSTIFICATION: 选择纯PC和纯移动用户做DiD，排除多通道与切换者。
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 利用处理前数据构造DiD，以控制非随机渠道。
+
+2. BENCHMARK_OR_CONTRAST: 对比处理组与对照组、PC与移动。
+
+3. BENCHMARK_OR_CONTRAST: 用Wald检验比较渠道系数。
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST: 检验处理是否诱发渠道转换。
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST: 价格四分位、新旧产品、用户活跃度等事后异质性分析。
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST: Gini与置换检验用于多样性差异。
+
+7. RESULT: 报告双渠道主结果、事后检验结果和多样性结果。
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 将推荐系统研究扩展到移动端。
+
+2. CONTRIBUTION: 为销售多样性争议提供现场证据。
+
+3. MECHANISM: 用搜索成本、屏幕限制和泛在性三者解释移动端更强效应。
+
+4. BOUNDARY_CONDITION: 样本为韩国时尚零售、年轻都市人群，实验仅三天。
+
+5. LIMITATION_AND_FUTURE: 渠道选择无法随机化，机制无法完全识别，未来可研究全渠道和情境化推荐。
+
+6. PRACTICAL_STAKES: 部署成本约15万美元，增量收入约760万美元。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 信息处理理论（有限认知能力、满意决策）
+
+2. 移动/PC渠道差异研究（可用性、泛在性、搜索成本）
+
+3. 推荐系统三类机制：降低搜索成本、记忆提取/召回、质量信号效应
+
+4. 销售多样性文献（长尾效应 vs. 同质化/碎片化）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：推荐系统的作用机制（降低搜索成本、召回、信号）为选择“在落地页展示推荐面板”提供了理论基础，也解释了为何要控制视觉面板效应；但具体算法采用电商最常用的item-to-item协同过滤，并非由理论新推导而来，渠道也只是作为观测调节变量而非被设计操纵的因素。关于移动端效应方向存在相反的理论张力，作者明确不预设正式假设，让实验数据来裁决，因此理论只部分决定设计，主要设计选择来自算法惯例、业务约束和随机化要求。
+
+- 理论到设计翻译链：信息处理理论认为人因认知限制会降低备选集并简化决策 → 推荐系统可以通过降低搜索成本、触发记忆提取、提供信号来改善选择 → 设计要求是在落地页提供清晰且同等的推荐面板 → 处理组使用基于近期浏览的item-to-item协同过滤推荐，对照组用同等数量畅销品面板 → 被检验的差异是推荐系统有无 × 移动/PC渠道 → 结果显示推荐系统在移动端对浏览、销售、点击率、转化的边际效果更高 → 作者将这种差异解释为移动端高搜索成本被推荐系统缓解，同时泛在性提高参与度，但机制为事后推断。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：个体认知容量有限，购买决策中会简化信息处理并缩小备选集。
+
+- mechanism_cn：推荐系统提供初始筛选和比较支持，降低搜索成本与信息过载。
+
+- design_requirement_cn：需要在落地页提供自动化筛选后的少量推荐商品。
+
+- artifact_choice_cn：处理组展示基于近期浏览的item-to-item协同过滤推荐面板。
+
+- evaluated_contrast_cn：处理组vs对照组；对照组展示同等数量畅销品。
+
+- objective_result_cn：推荐系统提高推荐产品浏览量、销售额、销量、点击率和转化率。
+
+##### evidence_pointers
+
+1. Tables 3 and 4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：顾客会利用上次浏览/购买的产品作为记忆提取线索。
+
+- mechanism_cn：推荐面板同时显示最近浏览物和关联推荐，触发召回与记忆提取。
+
+- design_requirement_cn：推荐面板需要同时包含焦点商品和关联商品。
+
+- artifact_choice_cn：落地页面板显示最近浏览商品及协同过滤生成的关联推荐。
+
+- evaluated_contrast_cn：处理组有该面板，对照组只有畅销品列表、无焦点商品回忆线索。
+
+- objective_result_cn：处理组有更高推荐产品浏览和销售，且移动端更显著。
+
+##### evidence_pointers
+
+1. Section 2.2
+
+2. Tables 3 and 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：推荐列表来自相似用户行为，是分散化的质量信号。
+
+- mechanism_cn：落地页显著位置推荐商品增强商品吸引力、减少不确定性。
+
+- design_requirement_cn：推荐面板应在用户界面中占据显著且成块的位置。
+
+- artifact_choice_cn：在落地页相同位置展示推荐面板；对照组同样数量产品以分离面板效应。
+
+- evaluated_contrast_cn：推荐内容vs畅销品内容。
+
+- objective_result_cn：高价商品推荐在移动端带来更高浏览和销售，符合信号与搜索成本机制。
+
+##### evidence_pointers
+
+1. Tables 6 and 7
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：移动设备屏幕小、导航效率低，因此搜索成本更高；同时移动设备泛在、个人化，提升参与度。
+
+- mechanism_cn：推荐系统减少移动端高搜索成本，泛在性又增强随时访问与回忆。
+
+- design_requirement_cn：推荐系统不应要求大量滑屏或输入；应在移动和PC功能等价部署。
+
+- artifact_choice_cn：跨移动端和PC端使用相同推荐面板，仅布局因屏幕尺寸调整。
+
+- evaluated_contrast_cn：移动用户vs PC用户对同一处理的反应。
+
+- objective_result_cn：移动端边际效应显著更高，尤其在推荐产品销售额和转化率上；PC端效应不显著。
+
+##### evidence_pointers
+
+1. Tables 3 and 4
+
+2. Section 4.1
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 随机现场实验（推荐系统处理随机分配）
+
+2. 双重差分模型（处理前/处理后×处理/对照组）
+
+3. 渠道异质性分析（移动/PC分样本）
+
+4. 渠道转换检验
+
+5. 事后机制异质性检验（价格、新旧产品、活跃度）
+
+6. 市场层多样性分析（Lorenz曲线、Gini系数、置换检验）
+
+7. 试点实验复制
+
+- why_these_evaluations_cn：因为推荐系统处理的随机化保证了内部效度，但渠道无法随机化，所以必须用处理前数据做DiD来吸收固定差异；接着用渠道转换检验排除处理诱发切换的替代解释；由于无法直接测度机制，作者用价格、新旧产品、活跃度等可观察异质性做间接推断；市场层问题需要从用户层上升到聚合层，因此用Gini和置换检验直接检验销售/浏览多样性的分布差异。
+
+- benchmark_and_contrast_chain_cn：整个评价链条从“处理 vs 对照组”开始，加入“移动 vs PC”渠道分层；再用“处理前 vs 处理后”构成DiD；随后加入“高价 vs 低价”、“新商品 vs 旧商品”、“高活跃 vs 低活跃”作为机制探针；最后在聚合层用“处理 vs 对照”、“移动 vs PC”的Gini差异以及产品销量四分位回归解释多样性为何不变。每个对照都服务于下一个论证环节。
+
+### claim_evidence_ledger
+
+#### 1. 1
+
+- claim：推荐系统总体上提高顾客层推荐产品浏览、销售、销量、点击率和转化率。
+
+- evidence：Table 3和Table 4中各因变量的PostTreatment×Recommendation系数在移动端均显著；PC端浏览和点击率也显著为正。
+
+- status：supported
+
+#### 2. 2
+
+- claim：推荐系统对移动端的边际影响显著高于PC端。
+
+- evidence：移动端系数大于PC端，Wald检验在浏览、销售、销量上p<0.05，在点击率、转化上p<0.10。
+
+- status：supported
+
+#### 3. 3
+
+- claim：推荐系统并未因为诱发渠道转换而混淆渠道比较。
+
+- evidence：Table 5中Recommendation对ChannelTransition的系数不显著。
+
+- status：supported
+
+#### 4. 4
+
+- claim：移动端更强效应来自搜索成本降低与泛在性/参与度。
+
+- evidence：高价商品在移动端销售额外显著、新商品销量在移动端显著、高活跃用户对销售响应更强等事后检验。
+
+- status：suggestive
+
+#### 5. 5
+
+- claim：推荐系统对总体销售多样性没有显著影响。
+
+- evidence：Gini系数在治疗/对照之间接近，置换检验p=0.279；产品四分位回归显示热门和冷门产品都增加但中间区间不显著。
+
+- status：supported
+
+#### 6. 6
+
+- claim：移动端用户比PC端用户有更高的销售多样性，且推荐系统与移动渠道的交互不显著。
+
+- evidence：移动端Gini显著低于PC端，置换检验p<0.05；交互子样本检验无显著交互。
+
+- status：supported
+
+- internal_validity_strategy_cn：推荐系统处理通过PCID奇偶随机化；对照组展示同等数量商品以消除面板视觉差异；利用处理前数据做DiD控制用户固定差异；剔除多通道用户和渠道切换者以保证纯渠道识别；单独检验处理是否引发渠道切换；在事后分析中按可观察商品和用户特征细分。
+
+- external_validity_strategy_cn：在线附录报告了第二个客户的试点实验，形成一定复制性；讨论中给出部署成本和增量收入以显示经济意义；同时明确将结论边界限定于韩国时尚零售、年轻都市人群、三天实验期和有限产品目录，并呼吁在其他国家和品类中再检验。
+
+- what_is_not_actually_tested_cn：搜索成本、泛在性、记忆提取、信号效应等具体机制没有被直接操纵或测量；渠道本身没有被随机化，因此无法排除移动用户与PC用户的内在差异；实验期仅三天，无法观测长期效应与顾客生命周期价值；实验在单一韩国时尚零售商进行，无法推广到大型综合电商或其他国家。
+
+## 贡献闭环
+
+- technical_claim_cn：采用DiD和随机现场实验，显示推荐系统在移动端对顾客层购买漏斗各项指标的边际效果高于PC端。
+
+- artifact_claim_cn：item-to-item协同过滤推荐面板相对于畅销品面板确实改变用户行为；同等数量面板的控制使该差异归因于推荐内容而非面板存在本身。
+
+- mechanism_claim_cn：移动端更高的搜索成本被推荐系统降低，同时移动端的泛在性和参与度放大推荐系统的效果；高价商品、新商品和高活跃用户的异质性结果与此机制一致，但作者承认这只是间接证据。
+
+- boundary_claim_cn：推荐系统的更强移动端效应出现在时尚零售、年轻都市人群、韩国市场、三天实验期和有限产品目录背景下；在大型综合电商或更长时间窗口下可能不同。
+
+- reusable_design_knowledge_cn：在双渠道零售中，把推荐面板在移动端和PC端功能等价部署，并用同等数量畅销品作对照，能够分离内容效应与面板效应；评估推荐系统时应同时报告转化漏斗各环节和销售多样性，以避免只看销售总量的片面结论。
+
+- theoretical_contribution_cn：以现场实验证据把推荐系统文献从PC情境扩展到移动端，说明渠道是推荐系统价值的重要调节变量；同时为销售多样性争议提供新证据，表明在特定样本中推荐系统既未显著同质化也未显著异质化销售，而移动渠道本身与更高销售多样性相关。
+
+- how_discussion_closes_intro_gap_cn：讨论开头重述引言中的两个缺口：PC文献不能直接推广到移动端、销售多样性结果模糊；随后用主实验的渠道异质性结果和Gini分析分别回应，指出移动端效果更强、销售多样性无净效应但有渠道主效应；再结合经济ROI和后续研究展望，把结果放在理论与实务的交界处。
+
+- overclaim_or_unsupported_leaps_cn：作者在将移动端更强效应归因于搜索成本与泛在性时实际上只有事后异质性证据，没有直接测量；渠道非随机化意味着“渠道本身的效应”和“选择移动端的用户特征效应”无法彻底分离；销售多样性无效应可能受到产品目录小、实验期短和韩国时尚零售特殊性的限制，但在讨论中该边界被承认。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：推荐系统在在线零售中的收益已在既有研究中受到大量关注。
+
+- rhetorical_function_cn：设定论文主题并指出已有研究基础。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后续指出研究局限做铺垫。
+
+- evidence_pointer：Abstract P1
+
+### 2. Abstract P1 S2–S3
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2–S3
+
+- move_code：GAP
+
+- paraphrase_cn：多数研究基于PC渠道，而移动设备对在线购物越来越重要，推荐系统效果在两个渠道之间是否不同仍待检验。
+
+- rhetorical_function_cn：指出文献空白。
+
+- depends_on_cn：既有研究多基于PC。
+
+- sets_up_cn：引出论文的核心问题。
+
+- evidence_pointer：Abstract P1
+
+### 3. Abstract P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：论文详细研究归因于推荐系统的产品浏览和销售在移动与PC渠道中的差异。
+
+- rhetorical_function_cn：明确第一个研究问题。
+
+- depends_on_cn：前一格的缺口。
+
+- sets_up_cn：为后续渠道异质性分析设下目标。
+
+- evidence_pointer：Abstract P2
+
+### 4. Abstract P3 S1
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：论文进一步研究推荐系统的跨渠道效应如何影响销售多样性这一零售业重要结果。
+
+- rhetorical_function_cn：引入第二个研究问题。
+
+- depends_on_cn：多样性是市场层结果，需要从个体层上升到聚合层。
+
+- sets_up_cn：为后文Gini系数分析做铺垫。
+
+- evidence_pointer：Abstract P3
+
+### 5. Abstract P4 S1
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P4 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文与韩国在线零售公司合作，用随机现场实验检验推荐系统有无的处理效应。
+
+- rhetorical_function_cn：说明研究设计与数据来源。
+
+- depends_on_cn：需要因果关系证据。
+
+- sets_up_cn：为结果概述提供设计基础。
+
+- evidence_pointer：Abstract P4
+
+### 6. Abstract P5 S1–S3
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P5 S1–S3
+
+- move_code：RESULT
+
+- paraphrase_cn：推荐系统提升浏览、销售额、点击率和转化率，且移动用户的边际效应显著更高。
+
+- rhetorical_function_cn：概括最核心的实证结果。
+
+- depends_on_cn：设计部分提供了处理随机化。
+
+- sets_up_cn：为移动端搜索成本/泛在性解释提供依据。
+
+- evidence_pointer：Abstract P5
+
+### 7. Abstract P5 S4–S5
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P5 S4–S5
+
+- move_code：RESULT
+
+- paraphrase_cn：移动渠道带来更分散的销售，但推荐系统与移动使用对销售多样性没有交互效应。
+
+- rhetorical_function_cn：报告市场层结果，区分渠道主效应和处理交互。
+
+- depends_on_cn：多样性分析在正文独立完成。
+
+- sets_up_cn：引出边界条件与理论贡献。
+
+- evidence_pointer：Abstract P5
+
+### 8. Abstract P6 S1–S2
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract P6 S1–S2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：这些结果为推荐系统在PC和移动双渠道零售中的有效性提供了边界条件，并带来管理启示。
+
+- rhetorical_function_cn：将结果上升为可推广的理论边界和实务启示。
+
+- depends_on_cn：所有结果。
+
+- sets_up_cn：连接引言缺口与贡献。
+
+- evidence_pointer：Abstract P6
+
+### 9. Introduction P1 S1–S3
+
+- order：9
+
+- section：1. Introduction
+
+- locator：Introduction P1 S1–S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：推荐系统在在线零售和网络服务中普遍存在，通过个性化体验成为定向营销工具，行业报告显示其重要性和收入贡献。
+
+- rhetorical_function_cn：确立研究对象的重要性和现实意义。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为PC文献综述引入背景。
+
+- evidence_pointer：Introduction P1
+
+### 10. Introduction P2 S1–S3
+
+- order：10
+
+- section：1. Introduction
+
+- locator：Introduction P2 S1–S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：学术文献记录了推荐系统对在线零售销售和销售多样性的多种正面效果，但大多基于桌面环境。
+
+- rhetorical_function_cn：总结既有知识并指出其情境局限。
+
+- depends_on_cn：上一段建立推荐系统的重要性。
+
+- sets_up_cn：引出PC到移动的迁移问题。
+
+- evidence_pointer：Introduction P2
+
+### 11. Introduction P2 S4–S6
+
+- order：11
+
+- section：1. Introduction
+
+- locator：Introduction P2 S4–S6
+
+- move_code：LIMITATION
+
+- paraphrase_cn：移动设备和移动零售占比快速增长，但推荐系统的既有证据主要来自PC，因此这些结论能否迁移到移动端并不明显。
+
+- rhetorical_function_cn：指出现有文献的空白。
+
+- depends_on_cn：上一项关于PC情境的总结。
+
+- sets_up_cn：为研究问题定下动机。
+
+- evidence_pointer：Introduction P2
+
+### 12. Introduction P3 S1–S5
+
+- order：12
+
+- section：1. Introduction
+
+- locator：Introduction P3 S1–S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：移动设备屏幕小、搜索成本高，同时具备泛在性和便利性，这些特征与PC不同，可能改变消费者行为和对技术的反应。
+
+- rhetorical_function_cn：引入移动渠道的结构性差异。
+
+- depends_on_cn：移动端重要性。
+
+- sets_up_cn：为理论张力和研究问题提供机制素材。
+
+- evidence_pointer：Introduction P3
+
+### 13. Introduction P4 S1–S2
+
+- order：13
+
+- section：1. Introduction
+
+- locator：Introduction P4 S1–S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：第一个研究问题是推荐系统对个体决策结果（产品销售额、浏览）在移动和PC渠道中是否有不同影响。
+
+- rhetorical_function_cn：明确第一个研究问题。
+
+- depends_on_cn：渠道差异的现象。
+
+- sets_up_cn：为第4.1节分析设框架。
+
+- evidence_pointer：Introduction P4
+
+### 14. Introduction P5 S1–S5
+
+- order：14
+
+- section：1. Introduction
+
+- locator：Introduction P5 S1–S5
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：第二个研究问题是推荐系统对销售和浏览多样性的影响，以及这种影响在移动与PC渠道之间是否存在差异，文献对此有同质化和异质化的矛盾结论。
+
+- rhetorical_function_cn：明确第二个研究问题并点出文献争议。
+
+- depends_on_cn：销售多样性文献。
+
+- sets_up_cn：为第4.3节Gini分析做铺垫。
+
+- evidence_pointer：Introduction P5
+
+### 15. Introduction P6 S1–S2
+
+- order：15
+
+- section：1. Introduction
+
+- locator：Introduction P6 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于缺乏合适的实证数据，移动端推荐系统的研究很少，作者通过与韩国商业分析公司合作开展随机现场实验来克服这一障碍。
+
+- rhetorical_function_cn：说明本文数据策略的必要性和可行性。
+
+- depends_on_cn：研究问题需要因果证据。
+
+- sets_up_cn：为实验设计做铺垫。
+
+- evidence_pointer：Introduction P6
+
+### 16. Introduction P6 S3–S5
+
+- order：16
+
+- section：1. Introduction
+
+- locator：Introduction P6 S3–S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验将推荐系统随机分配给用户，并比较他们在移动和PC渠道上的浏览、购买推荐产品、点击率和转化率以及多样性。
+
+- rhetorical_function_cn：预告研究设计。
+
+- depends_on_cn：合作伙伴的可行性。
+
+- sets_up_cn：为结果摘要提供结构。
+
+- evidence_pointer：Introduction P6
+
+### 17. Introduction P7 S1–S3
+
+- order：17
+
+- section：1. Introduction
+
+- locator：Introduction P7 S1–S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：实验能随机化推荐系统访问，却不能随机化移动或PC渠道，因此存在渠道选择问题，移动用户可能与PC用户本质上不同。
+
+- rhetorical_function_cn：诚实承认设计的内在局限。
+
+- depends_on_cn：实验设计说明。
+
+- sets_up_cn：为后续稳健性检验和讨论中的局限声明做铺垫。
+
+- evidence_pointer：Introduction P7
+
+### 18. Introduction P7 S5
+
+- order：18
+
+- section：1. Introduction
+
+- locator：Introduction P7 S5
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：从管理者角度看，即使移动和PC用户本质上不同，根据这些差异来设计和部署推荐系统仍然是主要洞察。
+
+- rhetorical_function_cn：将渠道选择的统计问题转化为管理可操作性。
+
+- depends_on_cn：渠道非随机化的事实。
+
+- sets_up_cn：为讨论部分重新解释渠道自选择。
+
+- evidence_pointer：Introduction P7
+
+### 19. Introduction P8 S1–S2
+
+- order：19
+
+- section：1. Introduction
+
+- locator：Introduction P8 S1–S2
+
+- move_code：RESULT
+
+- paraphrase_cn：现场实验结果显示推荐系统提高客户层销售和销量，但效果主要通过移动用户体现，作者认为移动端高搜索成本被推荐系统更有效降低，泛在性也增强效果。
+
+- rhetorical_function_cn：提前给出核心实证结果和初步解释。
+
+- depends_on_cn：实验设计与分析。
+
+- sets_up_cn：为贡献声明铺设路径。
+
+- evidence_pointer：Introduction P8
+
+### 20. Introduction P9 S1–S3
+
+- order：20
+
+- section：1. Introduction
+
+- locator：Introduction P9 S1–S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称两项贡献：将推荐系统研究扩展到移动端并理论化移动平台特征的调节作用；为推荐系统对销售多样性的影响提供新证据。
+
+- rhetorical_function_cn：在引言结尾声明贡献。
+
+- depends_on_cn：前面所有动机和结果。
+
+- sets_up_cn：为文献综述和讨论定位。
+
+- evidence_pointer：Introduction P9
+
+### 21. Section 2.1 P1 S3–S6
+
+- order：21
+
+- section：2. Literature Review
+
+- locator：Section 2.1 P1 S3–S6
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：移动与PC渠道在可用性和泛在性上有结构性差异，这些差异影响用户行为和企业的渠道互动。
+
+- rhetorical_function_cn：搭建移动/PC差异的知识基础。
+
+- depends_on_cn：渠道差异现象。
+
+- sets_up_cn：为移动端搜索成本和参与度机制做铺垫。
+
+- evidence_pointer：Section 2.1 P1
+
+### 22. Section 2.1 P2 S1–S4
+
+- order：22
+
+- section：2. Literature Review
+
+- locator：Section 2.1 P2 S1–S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：移动设备随时随地在线的泛在性提高内容访问和用户参与，相比PC约束更少。
+
+- rhetorical_function_cn：阐述移动端正面的机制。
+
+- depends_on_cn：移动渠道结构性差异。
+
+- sets_up_cn：为后续“移动端更强效果”解释提供支撑。
+
+- evidence_pointer：Section 2.1 P2
+
+### 23. Section 2.1 P3 S1–S5
+
+- order：23
+
+- section：2. Literature Review
+
+- locator：Section 2.1 P3 S1–S5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：当任务信息密集时，小屏幕和低可用性会提高交互、导航、阅读和评估的搜索成本。
+
+- rhetorical_function_cn：阐述移动端负面的机制。
+
+- depends_on_cn：移动设备物理限制。
+
+- sets_up_cn：与泛在性形成理论张力，为不设置正式假设提供理由。
+
+- evidence_pointer：Section 2.1 P3
+
+### 24. Section 2.2 P1 S1–S4
+
+- order：24
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P1 S1–S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：推荐系统被定义为根据顾客偏好提供推荐商品的软件代理；在线零售大量商品使顾客难以高效筛选，推荐系统可缓解认知负荷。
+
+- rhetorical_function_cn：定义推荐系统并建立其价值基础。
+
+- depends_on_cn：信息处理理论。
+
+- sets_up_cn：为三条作用机制提供引言。
+
+- evidence_pointer：Section 2.2 P1
+
+### 25. Section 2.2 P2 S1–S4
+
+- order：25
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P2 S1–S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：个体因有限认知能力会满意决策；推荐系统通过初筛和促进备选比较降低信息搜索成本。
+
+- rhetorical_function_cn：用信息处理理论解释搜索成本机制。
+
+- depends_on_cn：Simon的满意决策理论。
+
+- sets_up_cn：为推荐面板的初始筛选功能提供依据。
+
+- evidence_pointer：Section 2.2 P2
+
+### 26. Section 2.2 P3 S1–S4
+
+- order：26
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P3 S1–S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：推荐系统通过展示最近浏览的焦点产品和关联商品引发记忆提取，提高购买决策的正向影响。
+
+- rhetorical_function_cn：解释记忆提取机制。
+
+- depends_on_cn：记忆与检索文献。
+
+- sets_up_cn：为设计上展示焦点商品和关联商品提供依据。
+
+- evidence_pointer：Section 2.2 P3
+
+### 27. Section 2.2 P4 S1–S3
+
+- order：27
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P4 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：推荐列表基于相似用户行为生成，作为分散化的质量信号，增强商品吸引力并促进发现。
+
+- rhetorical_function_cn：解释信号效应机制。
+
+- depends_on_cn：协同过滤与信号文献。
+
+- sets_up_cn：为推荐面板的显著位置和内容设计提供依据。
+
+- evidence_pointer：Section 2.2 P4
+
+### 28. Section 2.2 P5 S5–S9
+
+- order：28
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P5 S5–S9
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：实证文献显示推荐系统在多个零售情境中提高销售额和销量，包括图书、补品、电影和移动城市指南。
+
+- rhetorical_function_cn：总结推荐系统有效性的既有证据。
+
+- depends_on_cn：多篇实证文献。
+
+- sets_up_cn：为本文基线结果提供一致性预期。
+
+- evidence_pointer：Section 2.2 P5
+
+### 29. Section 2.2 P6–P7
+
+- order：29
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P6–P7
+
+- move_code：GAP
+
+- paraphrase_cn：移动设备的高搜索成本可能削弱推荐系统效果，但泛在性和参与度也可能增强其效果，因此存在理论张力，无法预先确定方向。
+
+- rhetorical_function_cn：构造理论张力和经验开放问题。
+
+- depends_on_cn：移动渠道差异与推荐系统机制的结合。
+
+- sets_up_cn：为不提出正式假设并让实验数据裁决做理由。
+
+- evidence_pointer：Section 2.2 P6-P7
+
+### 30. Section 2.2 P8 S2–S3
+
+- order：30
+
+- section：2. Literature Review
+
+- locator：Section 2.2 P8 S2–S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：鉴于具体机制难以识别但渠道差异可以估计，作者不提出正式假设，改用经验分析来获得指导。
+
+- rhetorical_function_cn：说明假设策略。
+
+- depends_on_cn：理论张力。
+
+- sets_up_cn：为后面研究设计中的经验导向提供合理性。
+
+- evidence_pointer：Section 2.2 P8
+
+### 31. Section 2.3 P1–P2
+
+- order：31
+
+- section：2. Literature Review
+
+- locator：Section 2.3 P1–P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：文献一方面认为推荐系统将需求转向长尾、提高销售多样性，另一方面认为它会将相似用户推向同类商品、降低总体多样性。
+
+- rhetorical_function_cn：论述销售多样性文献的两派观点。
+
+- depends_on_cn：多篇实证和模型研究。
+
+- sets_up_cn：为多样性实证检验提供冲突预期。
+
+- evidence_pointer：Section 2.3 P1-P2
+
+### 32. Section 2.3 P3 S1–S3
+
+- order：32
+
+- section：2. Literature Review
+
+- locator：Section 2.3 P3 S1–S3
+
+- move_code：GAP
+
+- paraphrase_cn：推荐系统对销售多样性的净效应仍然模糊，关键障碍是缺乏能比较有/无推荐系统的现场数据，同时浏览多样化与销售多样化的关系也未被充分区分。
+
+- rhetorical_function_cn：指出多样性研究的数据和方法缺口。
+
+- depends_on_cn：两派矛盾结论。
+
+- sets_up_cn：为Gini分析和新/旧商品浏览分析提供动机。
+
+- evidence_pointer：Section 2.3 P3
+
+### 33. Section 3 P1 S1–S4
+
+- order：33
+
+- section：3. Experimental Design
+
+- locator：Section 3 P1 S1–S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者与韩国商业分析公司及其在线零售客户合作，在该零售商的PC和移动渠道上实施随机现场实验，正文聚焦数据更丰富的第二个实验。
+
+- rhetorical_function_cn：说明实验的合作生态和数据选择。
+
+- depends_on_cn：引言中的方法动机。
+
+- sets_up_cn：为实验细节描述做铺垫。
+
+- evidence_pointer：Section 3 P1
+
+### 34. Section 3 P2 S1–S4
+
+- order：34
+
+- section：3. Experimental Design
+
+- locator：Section 3 P2 S1–S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：实验平台是销售化妆品、配饰和服装的韩国在线时尚零售商，PC和移动版本功能等价、仅布局因屏幕略有不同，实验期间无App。
+
+- rhetorical_function_cn：明确研究现场。
+
+- depends_on_cn：合作伙伴选择。
+
+- sets_up_cn：说明移动/PC比较的平台条件。
+
+- evidence_pointer：Section 3 P2
+
+### 35. Section 3 P3 S1–S5
+
+- order：35
+
+- section：3. Experimental Design
+
+- locator：Section 3 P3 S1–S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：处理组看到基于近期浏览的item-to-item协同过滤推荐面板，对照组看到相同数量畅销品面板；处理按PCID奇偶随机分配。
+
+- rhetorical_function_cn：描述处理与随机化机制。
+
+- depends_on_cn：实验合作条件。
+
+- sets_up_cn：保证后续因果推断的随机化基础。
+
+- evidence_pointer：Section 3 P3
+
+### 36. Section 3 P3 S6–S7
+
+- order：36
+
+- section：3. Experimental Design
+
+- locator：Section 3 P3 S6–S7
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：对照组展示同样数量的畅销品，是为了排除面板本身带来的视觉显著性影响。
+
+- rhetorical_function_cn：说明设计选择是为了分离内容效应。
+
+- depends_on_cn：视觉显著性文献。
+
+- sets_up_cn：使处理组/对照组差异可归因于推荐内容而非面板存在。
+
+- evidence_pointer：Section 3 P3
+
+### 37. Section 3 P4 S1–S3
+
+- order：37
+
+- section：3. Experimental Design
+
+- locator：Section 3 P4 S1–S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验于2016年2月进行三天，18,196名客户中约49.8%被分配到处理组，处理前数据用于检查事前趋势。
+
+- rhetorical_function_cn：给出实验时间和样本规模。
+
+- depends_on_cn：随机分配与零售商许可。
+
+- sets_up_cn：为样本分割和DiD模型提供基础。
+
+- evidence_pointer：Section 3 P4
+
+### 38. Section 3 P5 S1–S5
+
+- order：38
+
+- section：3. Experimental Design
+
+- locator：Section 3 P5 S1–S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用处理前后点击流将用户分为纯移动、纯PC、多通道和渠道切换者，并剔除多通道和切换者以保证渠道识别的干净。
+
+- rhetorical_function_cn：说明样本分割规则。
+
+- depends_on_cn：点击流数据和PCID。
+
+- sets_up_cn：为移动/PC分渠道分析建立样本。
+
+- evidence_pointer：Section 3 P5
+
+### 39. Section 3.1 P1 S1–S4
+
+- order：39
+
+- section：3.1 Channel Selection and Channel Switching
+
+- locator：Section 3.1 P1 S1–S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：理想设计是同时随机化渠道和推荐系统，但在现场实验中零售商不愿限制渠道，第三方也无法强制消费者使用移动或PC，因此只能按观察到的渠道使用来划分用户。
+
+- rhetorical_function_cn：承认渠道非随机化的局限及其原因。
+
+- depends_on_cn：现场合作约束。
+
+- sets_up_cn：为DiD策略做辩护。
+
+- evidence_pointer：Section 3.1 P1
+
+### 40. Section 3.1 P2 S1–S3
+
+- order：40
+
+- section：3.1 Channel Selection and Channel Switching
+
+- locator：Section 3.1 P2 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：用户可能因内在偏好自选择进入某渠道，因此不能把渠道差异干净地归因于渠道本身，但管理上只需知道渠道使用差异即可。
+
+- rhetorical_function_cn：说明渠道自选择的识别后果和管理可操作性。
+
+- depends_on_cn：渠道非随机化。
+
+- sets_up_cn：为讨论部分的局限声明埋伏笔。
+
+- evidence_pointer：Section 3.1 P2
+
+### 41. Section 3.1 P3 S1–S4
+
+- order：41
+
+- section：3.1 Channel Selection and Channel Switching
+
+- locator：Section 3.1 P3 S1–S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因为拥有处理前数据，可以采用双重差分模型来评估推荐系统处理的效果，这类似于准实验中使用前趋势的做法。
+
+- rhetorical_function_cn：辩护DiD的合理性。
+
+- depends_on_cn：处理前数据可用。
+
+- sets_up_cn：为第4.1节方程设定提供铺垫。
+
+- evidence_pointer：Section 3.1 P3
+
+### 42. Section 4.1 P1 S1–S2
+
+- order：42
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P1 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：将每个用户在处理前和处理后的数据聚合，构建DiD模型来估计推荐系统对顾客决策的差异化影响。
+
+- rhetorical_function_cn：交代估计策略。
+
+- depends_on_cn：处理前数据的获取。
+
+- sets_up_cn：为具体回归模型和结果做铺垫。
+
+- evidence_pointer：Section 4.1 P1
+
+### 43. Section 4.1 P2 S1–S5
+
+- order：43
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P2 S1–S5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：模型使用PostTreatment×Recommendation交互项作为核心系数，分别估计推荐产品浏览、销售额、销量、点击率和转化率五个因变量，并按PC/移动分样本比较。
+
+- rhetorical_function_cn：建立评价指标和渠道对照。
+
+- depends_on_cn：DiD模型。
+
+- sets_up_cn：为Table 3和Table 4的结果做布局。
+
+- evidence_pointer：Section 4.1 P2, Equation (1)
+
+### 44. Section 4.1 P3 S1–S4
+
+- order：44
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P3 S1–S4
+
+- move_code：RESULT
+
+- paraphrase_cn：推荐系统对推荐产品浏览在两个渠道都显著为正，但移动端效应量更大，泛在性和便捷访问可能是原因。
+
+- rhetorical_function_cn：报告第一个核心结果。
+
+- depends_on_cn：Table 3的前两列。
+
+- sets_up_cn：为后续销售和转化结果做对照。
+
+- evidence_pointer：Table 3, columns (1)-(2)
+
+### 45. Section 4.1 P4 S1–S3
+
+- order：45
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P4 S1–S3
+
+- move_code：RESULT
+
+- paraphrase_cn：推荐系统对推荐产品销售额和销量的影响在移动端显著为正，在PC端不显著。
+
+- rhetorical_function_cn：报告移动/PC更鲜明的对比。
+
+- depends_on_cn：Table 3后四列。
+
+- sets_up_cn：强化移动端更有效的中心发现。
+
+- evidence_pointer：Table 3, columns (3)-(6)
+
+### 46. Section 4.1 P5 S1–S4
+
+- order：46
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P5 S1–S4
+
+- move_code：RESULT
+
+- paraphrase_cn：点击率在两个渠道都显著但移动端更高；转化率仅移动端显著，Wald检验支持渠道系数差异。
+
+- rhetorical_function_cn：报告漏斗下游结果。
+
+- depends_on_cn：Table 4。
+
+- sets_up_cn：为机制讨论提供转化漏斗证据。
+
+- evidence_pointer：Table 4
+
+### 47. Section 4.1 P6 S1–S7
+
+- order：47
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P6 S1–S7
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：只有约3,460名用户在六天中切换渠道，且处理组与对照组切换概率无显著差异，说明渠道转换不是处理效应的主要替代解释。
+
+- rhetorical_function_cn：用渠道转换检验排除干扰。
+
+- depends_on_cn：Table 5。
+
+- sets_up_cn：为渠道比较的效度辩护。
+
+- evidence_pointer：Equation (2), Table 5
+
+### 48. Section 4.1 P7 S1–S4
+
+- order：48
+
+- section：4.1 The Effects of Recommendation Systems and Channel in Conversion Funnel
+
+- locator：Section 4.1 P7 S1–S4
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者总结主发现后指出，虽然无法识别具体机制，但需要进行事后检验来考虑推荐处理如何进一步影响行为并探测机制。
+
+- rhetorical_function_cn：连接主分析与事后检验。
+
+- depends_on_cn：已有结果。
+
+- sets_up_cn：引向价格、新旧产品和活跃度分析。
+
+- evidence_pointer：Section 4.1末尾
+
+### 49. Section 4.2 P1 S1–S2
+
+- order：49
+
+- section：4.2 Post Hoc Tests
+
+- locator：Section 4.2 P1 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者通过价格和新产品发现两个可观察维度来间接检验搜索成本机制，因为泛在性和易用性本身不易直接测度。
+
+- rhetorical_function_cn：说明事后检验的逻辑。
+
+- depends_on_cn：主结果。
+
+- sets_up_cn：为价格四分位和后续回归做铺垫。
+
+- evidence_pointer：Section 4.2 P1
+
+### 50. Section 4.2 P2 S1–S4
+
+- order：50
+
+- section：4.2 Post Hoc Tests
+
+- locator：Section 4.2 P2 S1–S4
+
+- move_code：RESULT
+
+- paraphrase_cn：高价商品在移动端获得更高的推荐浏览和销售，PC端销售效应不显著；低价商品也只在移动端有销售效应。
+
+- rhetorical_function_cn：报告价格异质性结果。
+
+- depends_on_cn：Tables 6-8。
+
+- sets_up_cn：支持搜索成本降低和移动端参与度的解释。
+
+- evidence_pointer：Tables 6-8
+
+### 51. Section 4.2 P3 S1–S7
+
+- order：51
+
+- section：4.2 Post Hoc Tests
+
+- locator：Section 4.2 P3 S1–S7
+
+- move_code：RESULT
+
+- paraphrase_cn：推荐系统提高新旧推荐产品浏览，但新推荐产品的销售仅在移动端显著增加，提示移动端更高的参与度和搜索成本降低。
+
+- rhetorical_function_cn：报告新旧产品发现分析。
+
+- depends_on_cn：Tables 9-10。
+
+- sets_up_cn：为泛在性和参与度机制提供间接证据。
+
+- evidence_pointer：Tables 9-10
+
+### 52. Section 4.2 P4 S1–S4
+
+- order：52
+
+- section：4.2 Post Hoc Tests
+
+- locator：Section 4.2 P4 S1–S4
+
+- move_code：RESULT
+
+- paraphrase_cn：高活跃用户从推荐系统中获得更多推荐产品销售额和销量，但推荐浏览在两个活跃度组都增加。
+
+- rhetorical_function_cn：报告用户活跃度异质性。
+
+- depends_on_cn：Table 11。
+
+- sets_up_cn：说明推荐系统对各类用户都有发现效应，但销售转化集中在活跃用户。
+
+- evidence_pointer：Table 11
+
+### 53. Section 4.3 P1 S1–S3
+
+- order：53
+
+- section：4.3 Recommendation Systems, Mobile Channel, and View and Sales Diversity
+
+- locator：Section 4.3 P1 S1–S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者遵循Lee and Hosanagar的方法，用Lorenz曲线和Gini系数衡量产品销售的集中度，并用置换检验计算统计显著性。
+
+- rhetorical_function_cn：说明多样性分析的方法。
+
+- depends_on_cn：聚合的观察数据。
+
+- sets_up_cn：为Figures 1-2和置换检验结果做铺垫。
+
+- evidence_pointer：Section 4.3 P1
+
+### 54. Section 4.3 P3 S1–S5
+
+- order：54
+
+- section：4.3 Recommendation Systems, Mobile Channel, and View and Sales Diversity
+
+- locator：Section 4.3 P3 S1–S5
+
+- move_code：RESULT
+
+- paraphrase_cn：置换检验显示推荐系统对销售多样性无显著影响，但能提高浏览多样性；移动端用户有更高的销售多样性，渠道间浏览多样性无显著差异。
+
+- rhetorical_function_cn：报告多样性的核心结果。
+
+- depends_on_cn：Gini系数和置换检验。
+
+- sets_up_cn：为解释“推荐系统增加浏览但未增加购买多样性”做铺垫。
+
+- evidence_pointer：Section 4.3 P3, Figure 2
+
+### 55. Section 4.3 P4 S1–S3
+
+- order：55
+
+- section：4.3 Recommendation Systems, Mobile Channel, and View and Sales Diversity
+
+- locator：Section 4.3 P4 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：推荐系统提高小众产品的可见性从而增加浏览多样性，但小众产品的转化率较低，因此浏览多样性未转化为销售多样性。
+
+- rhetorical_function_cn：解释浏览与销售多样性分离。
+
+- depends_on_cn：多样性结果。
+
+- sets_up_cn：为产品四分位回归和多样化管理中促销建议做铺垫。
+
+- evidence_pointer：Section 4.3 P4
+
+### 56. Section 4.3 P5 S1–S6
+
+- order：56
+
+- section：4.3 Recommendation Systems, Mobile Channel, and View and Sales Diversity
+
+- locator：Section 4.3 P5 S1–S6
+
+- move_code：RESULT
+
+- paraphrase_cn：按处理前销量四分位回归显示推荐系统对最热门和最冷门产品的销量都有正效应，但对中间两个四分位无显著效应，因此总体销售多样性未变。
+
+- rhetorical_function_cn：解释总体多样性无效应的机制。
+
+- depends_on_cn：Table 12。
+
+- sets_up_cn：为讨论中的市场层结论提供产品层证据。
+
+- evidence_pointer：Table 12
+
+### 57. Discussion P1 S1–S3
+
+- order：57
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P1 S1–S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者在讨论开头重述两个文献缺口：移动端推荐系统研究缺乏、销售多样性结果模糊，并声明本文填补了这些缺口。
+
+- rhetorical_function_cn：重新连接引言缺口。
+
+- depends_on_cn：引言和全部结果。
+
+- sets_up_cn：为随后的结果总结和理论解释定位。
+
+- evidence_pointer：Discussion P1
+
+### 58. Discussion P2 S1–S5
+
+- order：58
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P2 S1–S5
+
+- move_code：RESULT
+
+- paraphrase_cn：现场实验显示推荐系统提高销售，效果在移动端特别强，表现为更多浏览、点击和转化，验证了移动端在样本中的主导地位。
+
+- rhetorical_function_cn：概括主结果并将其放回行业趋势。
+
+- depends_on_cn：Tables 3-4。
+
+- sets_up_cn：为机制解释提供经验锚点。
+
+- evidence_pointer：Discussion P2
+
+### 59. Discussion P3 S1–S3
+
+- order：59
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P3 S1–S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：移动端更高效果被归因于搜索成本、移动生态结构限制和泛在性/参与度三个因素的净效应，三者方向不同但累计效果为正。
+
+- rhetorical_function_cn：提出整合性机制解释。
+
+- depends_on_cn：文献梳理和事后检验。
+
+- sets_up_cn：为随后承认机制识别不足做铺垫。
+
+- evidence_pointer：Discussion P3
+
+### 60. Discussion P4 S1–S3
+
+- order：60
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P4 S1–S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：推荐系统为零售商带来约760万美元增量收入，部署成本约15万美元，ROI显著。
+
+- rhetorical_function_cn：强调管理的经济价值。
+
+- depends_on_cn：实验期间新增销售估计。
+
+- sets_up_cn：为“零售商在三天后终止实验并全面推广”提供解释。
+
+- evidence_pointer：Discussion P4
+
+### 61. Discussion P5 S1–S4
+
+- order：61
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P5 S1–S4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：销售多样性无效应可能受零售商产品目录较小、目标人群为年轻都市时尚消费者、实验在韩国进行等因素限制。
+
+- rhetorical_function_cn：设定外部效度边界。
+
+- depends_on_cn：Gini结果。
+
+- sets_up_cn：为未来研究提出情境扩展方向。
+
+- evidence_pointer：Discussion P5
+
+### 62. Discussion P6 S1–S4
+
+- order：62
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P6 S1–S4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：渠道选择仍是未解决的局限，只有随机化渠道才能彻底识别，但管理者只需根据渠道使用差异采取行动即可。
+
+- rhetorical_function_cn：重申渠道选择局限并从管理角度化解。
+
+- depends_on_cn：渠道非随机化。
+
+- sets_up_cn：为未来研究和全渠道研究做铺垫。
+
+- evidence_pointer：Discussion P6
+
+### 63. Discussion P7 S1–S4
+
+- order：63
+
+- section：5. Discussion and Conclusion
+
+- locator：Discussion P7 S1–S4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可探索全渠道、移动生态中的广告促销、情境化推荐和更具体机制，本文提供随机现场实验范例。
+
+- rhetorical_function_cn：给出研究方向并强化方法论贡献。
+
+- depends_on_cn：全文局限性。
+
+- sets_up_cn：结束全文并将问题开放给IS社区。
+
+- evidence_pointer：Discussion P7
+
+## 写作技术
+
+- gap_construction_cn：作者不是直接说“没人研究推荐系统移动端”，而是先说PC端文献成熟并广受实践认可，然后用移动零售快速增长和移动端高搜索成本/小屏幕等结构性差异，指出旧结论不一定可迁移，从而构造出“PC知识→移动情境”的迁移缺口；对销售多样性则并列两派矛盾文献，指出净效应模糊且缺少随机现场数据。
+
+- signposting_cn：引言明确列出两个研究问题；每节开头预告本节内容；主结果后立即用“Delving deeper”“We conduct further post hoc tests”“We now move from individual-level outcomes to market-level outcomes”等句子串联不同分析层次。
+
+- transition_logic_cn：从渠道差异文献过渡到推荐系统机制，再把移动端高搜索成本与泛在性放到一起产生理论张力，顺势转向“不设正式假设、让数据裁决”；从个体层结果过渡到渠道转换检验、再到事后机制检验，最后过渡到市场层多样性，每一阶段都以消除替代解释或回答未解决问题为衔接。
+
+- claim_evidence_rhythm_cn：先给方法说明与表格，再在正文逐段报告系数与显著性；结果段通常以“The results show/manifest/starker contrasts”开头，随后用Wald检验做跨渠道比较；多样性的非显著结果也用置换检验p值支撑，避免凭空断言。
+
+- benchmark_narrative_cn：对照组不是“无面板”，而是“畅销品面板”，使benchmark更具可比性；渠道benchmark是PC端用户；价格/活跃度/新旧产品分析提供额外内部benchmark；Gini分析用置换检验产生零分布作统计benchmark。Benchmark叙事始终为“推荐系统内容效应 vs 面板效应”和“移动 vs PC”服务。
+
+- theory_return_cn：结果出来后，作者回到三因子框架（搜索成本、屏幕限制、泛在性）来解释移动端更强效应，并用价格和新产品异质性提供间接支持；多样性结果则回到长尾/同质化争论，指出传统文献假设的直接效应可能只在特定条件下成立，因而需要边界条件。
+
+- contribution_positioning_cn：作者把贡献定位为“将推荐系统文献扩展到移动端并为多样性争论提供新证据”，而不是声称发明新算法或新机制；在贡献段落明确实验不能识别具体机制，但能用事后检验猜测，从而降低读者对机制证明的预期。
+
+- novelty_protection_cn：通过强调随机现场实验、对照组畅销品面板、预处理趋势、渠道切换检验、事后异质性、Gini置换检验和试点复制，把结果从“一次性性能差异”提升为“渠道调节效应和边界条件”；同时在讨论中坦承渠道非随机、机制无法完全识别，使贡献更像可复制的实证设计范式，而非偶然结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现状和产业数据建立推荐系统的重要性，指出PC文献成熟。
+
+- research_job_cn：明确研究对象和现实后果，收集行业报告或统计以说明重要性。
+
+- required_evidence_cn：需要能显示推荐系统经济价值或普遍性的行业/学术引用。
+
+- transition_to_next_cn：用“但零售正在移动化”引出迁移问题。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述移动/PC差异和推荐系统机制，建立理论张力。
+
+- research_job_cn：整理渠道差异文献和推荐系统机制文献，识别冲突预期。
+
+- required_evidence_cn：需要足够的文献支持移动端搜索成本高和泛在性强两个相反方向。
+
+- transition_to_next_cn：以“存在理论张力，因此不设正式假设，让数据裁决”转入实证。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：详细描述现场实验设计、随机化单元、处理与对照组、数据划分。
+
+- research_job_cn：与合作伙伴协商随机化方案；用设备ID或cookie做随机分配；记录处理前数据。
+
+- required_evidence_cn：需要证明处理与对照组数量均衡、样本有足够的渠道分类和预处理基线。
+
+- transition_to_next_cn：说明渠道无法随机化，因此需要用DiD识别。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：报告DiD模型和多个因变量的分渠道回归结果，并做Wald检验。
+
+- research_job_cn：构建处理前/处理后的用户面板，按渠道分样本估计处理效应。
+
+- required_evidence_cn：需要处理前数据；结果需要显著交互项和渠道差异检验。
+
+- transition_to_next_cn：用渠道转换检验排除处理诱发切换的替代解释。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用价格、新旧产品、用户活跃度等事后异质性检验间接探测机制。
+
+- research_job_cn：根据理论机制选择可操作的观察维度，分样本重复估计。
+
+- required_evidence_cn：需要足够的样本量支撑分样本回归；结果应形成模式，而非孤立显著。
+
+- transition_to_next_cn：从个体层转向市场层结果。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用Gini/Lorenz和置换检验报告多样性，并用产品四分位回归解释聚合效应。
+
+- research_job_cn：聚合产品浏览和销售，比较处理/渠道子样本的集中度。
+
+- required_evidence_cn：需要有足够产品品种和购买数量；置换检验p值。
+
+- transition_to_next_cn：在讨论中把多样性结果连接回引言争议。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：讨论结果、机制、ROI、边界、局限和未来研究。
+
+- research_job_cn：评估结果是否回答两个研究问题，并考虑外部效度。
+
+- required_evidence_cn：需要成本和收入估计用于ROI；需要诚实承认渠道选择和机制识别局限。
+
+- transition_to_next_cn：结束并开放全渠道和情境化推荐研究方向。
+
+### most_transferable_moves_cn
+
+1. 用同等数量的对照组面板分离“内容效应”与“面板效应”。
+
+2. 在渠道非随机时使用处理前数据做DiD，并对渠道切换做显式检验。
+
+3. 用价格、新旧商品、活跃度等可观察异质性作为机制的间接探针。
+
+4. 用户层结果之外补充市场层Gini多样性分析，避免只关注总销售额。
+
+5. 在贡献声明中区分“已证明的结果”与“仅猜测的机制”。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要零售商同意在真实平台上随机分配客户并收集点击流/交易数据。
+
+2. 需要合作伙伴提供处理前至少同等长短的数据窗口。
+
+3. 需要处理组和对照组页面设计完全相同，仅替换推荐内容。
+
+4. 只能用三天实验期，因为企业看到ROI后终止实验，这种短期窗口很难复制。
+
+5. 需要试点实验或第二客户数据证明复制性，这要求额外的合作关系。
+
+### what_not_to_copy_superficially_cn
+
+1. 没有随机化和不设正式假设的表述不能离开现场实验的证据；如果只复制“不设假设”会让论文失去理论约束。
+
+2. 如果没有处理前数据，就不能自称DiD或控制渠道自选择。
+
+3. 不能用畅销品面板作对照，却不验证两面板产品数量相同且只差内容。
+
+4. 不能在缺少价格/新旧产品异质性证据时宣称搜索成本机制。
+
+5. 不能把移动端更强的效果直接归因于渠道本身，除非或明确承认渠道未随机化。
+
+- single_best_description_of_the_routine_cn：先用文献张力把PC结论推向移动端开放问题，再用随机现场实验加DiD建立渠道调节效应，用事后检验补机制，用Gini补市场层结论，最后把贡献包装为边界条件而非普适定理。
+
+## 分析边界
+
+分析基于正文全文，但无法阅读在线附录中的试点实验详情；图1的Lorenz曲线图像未逐像素检查，仅依据正文文字和Gini数值；部分表格中OCR可能造成小数点和脚注编号误差；位置标识以段落和表格为单位，不提供精确页码。

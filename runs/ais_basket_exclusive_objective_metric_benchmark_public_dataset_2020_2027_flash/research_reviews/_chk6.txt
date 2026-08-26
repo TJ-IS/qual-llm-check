@@ -1,0 +1,8 @@
+36 正文 ARText 计数: 1
+  ARText 句: ARText 以性能扰动曲线量化模型在扰动幅度变化下的性能衰减，以曲线下面积作为鲁棒性指标，使跨模型、跨扰动的鲁棒性比较成为可能。
+REF: [4] Li, W., & Chai, Y. (2022). Assessing and enhancing adversarial robustness of predictive analytics: An empirically tested design framework. *Journa
+REF: [11] Zhang, D., Li, W., Niu, B., & Wu, C. (2023). A deep learning approach for detecting fake reviewers: Exploiting reviewing behavior and textual inf
+REF: [15] Liang, H., & Xue, Y. (2009). Avoidance of information technology threats: A theoretical perspective. *MIS Quarterly*, 33(1), 71-90.
+REF: [24] Shan, G., Zhou, L., & Zhang, D. (2020). What reveals about depression level? The role of multimodal features at the level of interview questions.
+REF: [25] Ebrahimi, R., Chai, Y., Li, W., Pacheco, J., & Chen, H. (2025). RADAR: A framework for developing adversarially robust cyber defense AI agents wi
+REF: [29] Lin, Y.-K., & Fang, X. (2021). First, do no harm: Predictive analytics to reduce in-hospital adverse events. *Journal of Management Information S

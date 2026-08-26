@@ -1,0 +1,2119 @@
+# Design Principles for Signal Detection in Modern Job Application Systems: Identifying Fabricated Qualifications
+
+- 作者：Nathan W. Twyman; Steven J. Pentland; Lee Spitzley
+- 年份 / 期刊：2020 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2020.1790201
+- 源文件：01598_2020_design-principles-for-signal-detection-in-modern-job-application-systems-identifying-fabricated.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：在当代高申请量招聘中，申请者普遍操纵资格信号，招聘系统无法有效识别伪造资历；如何设计一类信息系统，使其在申请阶段就能更稳健地评估候选人的真实适任性？
+
+- 制品与设计：作者提出并实例化了一类名为SIGHT（Systems for Identifying Genuine Hidden Talent）的系统：基于Web的自动化异步访谈，使用普通摄像头和麦克风采集视频/音频，通过OpenSmile、IBM Watson、SPLICE和Intraface提取语音、语言和人脸特征，在个体内标准化后融合多个难以操纵的行为信号，并用机器学习模型自动分类。
+
+- 客观结果：在模拟招聘准实验中，43.8%的参与者在看到职位描述后提高了Excel自评，31.4%声称有StatView经验；SIGHT提取的面部、声音和语言信号与欺骗显著相关；四类分类器在100折Monte Carlo交叉验证下F1达到.84–.95，明显高于人类54%的谎言识别率和55%的no-information率。
+
+- 核心贡献：作者声称三方面贡献：把招聘筛选重新概念化为成本函数失衡的破损信号系统（描述性知识）；提出一套SIGHT设计原则与系统方案（规定性知识）；通过原型实验提供SIGHT能够比无辅助人工决策更有效识别伪造资格的概念验证证据。
+
+- 整篇论证链：作者先以信号理论把招聘定义为候选人与雇主之间的信号发送与评估系统，然后用大量证据说明虚假信号普遍且验证成本低，导致系统向不良雇佣倾斜；由此提出“破损信号系统”的问题框架，并把目标设为提高假信号发送成本、降低雇主评估成本。接着，作者从结构化访谈、自动化招聘、欺骗检测中的泄漏/策略理论、普通传感器可得性以及个体差异控制等知识来源推导出七项SIGHT设计属性。为验证这些属性，作者构建了一个基于webcam的异步访谈原型，并选择“诚实性”作为概念验证的检测目标。随后设计了一个准实验：参与者先在线上申请中自评技能，看到职位描述后可自行修改申请，以获得自然选择的欺骗行为；研究者把“零经验变为有经验”标记为欺骗，把申请前自评作为ground truth。实验结果表明SIGHT能够引出和捕获传统申请中不可获得的行为信号，信号分析发现面部冻结、发声质量下降、语言创造性增加等现象，而预测分类器的性能远超人类基线。讨论部分把这些结果回接到破损信号系统框架，指出SIGHT能提高假信号成本并降低评估成本，同时限定其边界为入门级高申请量场景，并指出真实招聘、跨文化和公平性仍需未来研究。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者明确采用设计科学研究路径：识别组织问题，提出理论解决方案，推导系统属性，构建原型，并用实验评价原型潜力，最终产出描述性与规定性知识。文章核心不是理论假设检验，而是以“设计原则—原型—评价—设计知识”为骨架。
+
+- 主导写作弧线判定：文章按问题描述、系统要求/属性推导、原型构建、实验评价、设计原则贡献的经典DSR叙事推进。中心研究对象是SIGHT这类系统的设计原则，实验是评价设计的手段。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：第一阶段把招聘问题概念化为破损信号系统并设定系统目标；第二阶段从多学科文献推导SIGHT的七项设计属性；第三阶段实现可运行的原型；第四阶段基于欺骗理论选择具体信号；第五阶段进行模拟招聘准实验以产生自然欺骗数据集；第六阶段用PCA和回归验证信号差异；第七阶段用分类模型检验信号能否用于自动识别；第八阶段用事后问卷和讨论处理接受性与边界问题。
+
+### studies_or_phases
+
+#### 1. 问题概念化：破损信号系统
+
+- order：1
+
+- name_cn：问题概念化：破损信号系统
+
+- question_cn：如何用信号理论解释招聘申请阶段普遍的虚假资格问题，并推导出新系统的目标？
+
+- inputs_and_setting_cn：信号理论、Spence求职市场模型、Levashina和Campion的欺骗比例、Weiss和Feldman的面试谎言数据、CareerBuilder坏雇佣调查、面试者无法识别欺骗的研究。
+
+- designed_or_compared_object_cn：传统招聘信号系统的成本函数与失效模式；提出SIGHT系统的目标。
+
+- baseline_control_or_counterfactual_cn：Spence 1973年设想的理想反馈循环系统；当前现实中的自我报告式申请系统。
+
+##### objective_metrics
+
+1. 79%求职者参与欺骗信号
+
+2. 81%求职者面试中至少说一次谎
+
+3. 74%招聘经理报告当年坏雇佣
+
+4. 面试者识别欺骗准确率约54%
+
+- analysis_method_cn：理论综合与问题诊断
+
+- main_result_cn：虚假信号在申请阶段验证成本极低，导致信号系统失效；新系统应提高发送假信号的成本并降低雇主评估信号的成本。
+
+- argumentative_role_cn：为全文提供理论问题框架和设计目标，是后续所有设计决策的出发点。
+
+- remaining_uncertainty_cn：尚不确定何种具体系统设计能够同时实现两个目标。
+
+- link_to_next_phase_cn：问题诊断结果要求必须设计一套新的信号发送与评估机制，因此进入设计属性推导阶段。
+
+##### evidence_pointers
+
+1. Introduction P4-P6
+
+2. Signal theory and job candidate selection P2-P6
+
+#### 2. 设计原则推导：七项SIGHT属性
+
+- order：2
+
+- name_cn：设计原则推导：七项SIGHT属性
+
+- question_cn：从招聘流程、访谈研究与欺骗文献看，SIGHT系统应具备哪些环境、技术、流程和信号处理属性？
+
+- inputs_and_setting_cn：eHRM文献、结构化访谈有效性文献、自动访谈研究、刑事访谈中的非接触传感研究、面部/声音/语言欺骗指标研究。
+
+- designed_or_compared_object_cn：传统人工申请审查、二元回答自动访谈、专业传感设备访谈与SIGHT自动化开放回答访谈。
+
+- baseline_control_or_counterfactual_cn：传统电话/面对面访谈、必须佩戴的传感器、仅文本申请。
+
+##### objective_metrics
+
+1. 是否可在申请阶段自动化收集
+
+2. 是否使用普通可用传感器
+
+3. 是否提供标准化问题
+
+4. 是否保留开放回答
+
+5. 是否使用难操纵信号
+
+6. 是否进行个体内标准化
+
+7. 是否融合多信号
+
+- analysis_method_cn：跨领域理论到设计要求的推理
+
+- main_result_cn：提出SIGHT系统七项属性：自动化Web访谈、普通传感器、结构化提问、开放回答、难操纵信号、个体内标准化、多信号融合。
+
+- argumentative_role_cn：从理论文献推导出可操作的设计原则，为原型构建提供蓝图。
+
+- remaining_uncertainty_cn：尚不确定这些属性能否被实际构建，并能否产生可识别的行为差异。
+
+- link_to_next_phase_cn：设计原则需要通过一个原型实例来证明其可实施性。
+
+##### evidence_pointers
+
+1. The Signaling process 全部小节
+
+2. The Signals from interviewees 全部小节
+
+3. Figure 1
+
+#### 3. 原型构建：基于Webcam的自动访谈系统
+
+- order：3
+
+- name_cn：原型构建：基于Webcam的自动访谈系统
+
+- question_cn：能否用普通webcam和现有信号处理工具实例化SIGHT设计属性？
+
+- inputs_and_setting_cn：异步视频面试平台的结构、OpenSmile、IBM Watson语音转文字、SPLICE、Intraface面部点追踪。
+
+- designed_or_compared_object_cn：普通异步视频面试平台（只保存视频供人工查看）与SIGHT原型（自动提取细粒度行为特征）。
+
+- baseline_control_or_counterfactual_cn：传统平台只存储视频；SIGHT在原基础上增加自动特征提取和分析模块。
+
+##### objective_metrics
+
+1. 能否采集视频/音频
+
+2. 能否提取语音特征
+
+3. 能否生成文本转录
+
+4. 能否提取语言线索
+
+5. 能否生成面部坐标
+
+6. 能否计算逐题汇总统计量
+
+- analysis_method_cn：系统构建与组件集成
+
+- main_result_cn：原型可向被试顺序显示15道题，每题30秒思考、60秒回答并录像，服务器端生成语音、语言、面部三类特征汇总数据。
+
+- argumentative_role_cn：证明SIGHT不只停留在理论上，而是可以在普通设备上运行。
+
+- remaining_uncertainty_cn：构建成功不等于这些特征能区分欺骗与诚实。
+
+- link_to_next_phase_cn：需要依据理论确定哪些特征最可能成为有效信号，并进入实验检验。
+
+##### evidence_pointers
+
+1. Prototypical implementation
+
+2. Figure 2
+
+3. Figure 3
+
+#### 4. 理论驱动信号选择：欺骗指标集
+
+- order：4
+
+- name_cn：理论驱动信号选择：欺骗指标集
+
+- question_cn：在原型可测量的范围内，哪些面部、声音、语言特征最适合作为识别伪造资格的信号？
+
+- inputs_and_setting_cn：泄漏理论、策略行为理论、Prior deception detection文献、webcam约束条件。
+
+- designed_or_compared_object_cn：易于操纵的宏观情绪表达与难以操纵的细微行为特征；单信号与多信号融合。
+
+- baseline_control_or_counterfactual_cn：传统人类观察采用的宏观特征；不进行理论筛选的全特征方法。
+
+##### objective_metrics
+
+1. 理论机制是否明确
+
+2. 是否可由webcam自动测量
+
+3. 是否可能对长时间开放回答保持稳健
+
+4. 是否可在个体内标准化
+
+- analysis_method_cn：理论到特征空间的映射
+
+- main_result_cn：选择面部运动/加速度、面部表情组件、音高/响度/jitter/shimmer、语言细节/复杂性/副词使用等作为候选信号；排除宏观情绪表达。
+
+- argumentative_role_cn：为后续PCA和分类提供理论驱动特征集，并说明为什么这些特征能代表SIGHT而非一次性数据挖掘。
+
+- remaining_uncertainty_cn：理论候选信号未必在低风险模拟招聘中实际变化。
+
+- link_to_next_phase_cn：需要通过模拟招聘实验观察这些信号在有真实欺骗动机的被试中是否出现。
+
+##### evidence_pointers
+
+1. Signal selection
+
+2. Theoretical basis for deception signals
+
+3. Visual/Audio/Linguistic signals 小节
+
+#### 5. 模拟招聘准实验：自然自我选择欺骗数据
+
+- order：5
+
+- name_cn：模拟招聘准实验：自然自我选择欺骗数据
+
+- question_cn：在模拟申请情境中，SIGHT能否引出真实的自我选择式资格伪造行为，并采集到可分析的数据？
+
+- inputs_and_setting_cn：美国某大学89名本科生；线上求职申请；职位描述；SIGHT访谈系统；事后问卷。
+
+- designed_or_compared_object_cn：参与者在看到职位描述前后修改自评技能的行为；SIGHT对15道面试题的记录。
+
+- baseline_control_or_counterfactual_cn：申请者在职位描述前填写的自评作为ground truth；未修改的回答作为诚实基线。
+
+##### objective_metrics
+
+1. Excel自评提高比例43.8%
+
+2. Word自评提高比例21.3%
+
+3. StatView从无到有比例31.4%
+
+4. 86%认为被选中重要
+
+5. 77%投入大量努力
+
+- analysis_method_cn：准实验设计、条件自我选择、严格条件标记
+
+- main_result_cn：实验产生了足够的自然欺骗样本：37人所有题目诚实，35人在一道题欺骗，7人在两道题欺骗，1人在三道题欺骗；被试参与认真。
+
+- argumentative_role_cn：为下游信号分析和分类提供具有生态效度的数据集。
+
+- remaining_uncertainty_cn：不知道这些自然欺骗是否产生可识别的行为信号。
+
+- link_to_next_phase_cn：需要对采集数据进行降维、回归和分类，以检验SIGHT信号的有效性。
+
+##### evidence_pointers
+
+1. Method 中 Experimental procedure
+
+2. Participants
+
+3. Condition labeling
+
+#### 6. 信号分析：PCA与多元回归
+
+- order：6
+
+- name_cn：信号分析：PCA与多元回归
+
+- question_cn：在被试个体内标准化后，欺骗回答是否在面部、声音、语言特征上与诚实回答存在显著差异？
+
+- inputs_and_setting_cn：SIGHT从88名有效被试的逐题视频/音频/转录中提取的特征集。
+
+- designed_or_compared_object_cn：欺骗回答与同一被试的基线回答在各行为通道上的差异。
+
+- baseline_control_or_counterfactual_cn：每个被试在每个问题集内的正常行为水平；同一问题内的非欺骗回答。
+
+##### objective_metrics
+
+1. p < .05的回归系数
+
+2. 以标准差为单位的行为变化量
+
+- analysis_method_cn：各通道分别做PCA降维与成分标记；以欺骗为预测变量的多元回归模型。
+
+- main_result_cn：欺骗回答出现面部运动减少、面部加速度减慢、发声质量下降、语言创造性增加、词汇复杂度下降、副词使用增加等显著信号。
+
+- argumentative_role_cn：证明SIGHT设计能够引出并捕获传统申请系统无法获得的行为信号。
+
+- remaining_uncertainty_cn：统计显著不代表可以作为预测分类器有效使用。
+
+- link_to_next_phase_cn：需要测试这些信号组合后能否在个体层面正确分类。
+
+##### evidence_pointers
+
+1. Analysis and results 首段
+
+2. Table 1
+
+3. Figure 4
+
+#### 7. 预测能力评价：四类分类器的交叉验证
+
+- order：7
+
+- name_cn：预测能力评价：四类分类器的交叉验证
+
+- question_cn：使用理论选择的SIGHT信号，机器学习模型能否有效识别欺骗回答，且优于无辅助人工判断？
+
+- inputs_and_setting_cn：Table 1中的行为成分；径向SVM、随机森林、Boosted Logistic Regression、Bagged ANN；100折MCCV。
+
+- designed_or_compared_object_cn：四类分类器在相同理论特征集上的表现；使用全部理论特征与仅显著理论特征的后续分析。
+
+- baseline_control_or_counterfactual_cn：人类谎言识别准确率54%；全部判为欺骗的no-information准确率55%。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+5. 混淆矩阵
+
+- analysis_method_cn：100折Monte Carlo交叉验证，重复训练测试；特征相关性过滤。
+
+- main_result_cn：最终F1在.84–.95；最佳为Bagged ANN，F1=.9531；显著特征子集分析F1在.73–.92。
+
+- argumentative_role_cn：将局部行为差异提升为可自动化判断的能力，支撑SIGHT比无辅助人工决策更有效的核心主张。
+
+- remaining_uncertainty_cn：模拟环境、学生样本、低利害情境可能限制外部效度；未比较真实招聘现场。
+
+- link_to_next_phase_cn：需要在讨论中把这些结果回接到设计原则，并处理接受性、偏见和边界问题。
+
+##### evidence_pointers
+
+1. Evaluation of predictive capability
+
+2. Table 2
+
+#### 8. 用户接受性与边界分析
+
+- order：8
+
+- name_cn：用户接受性与边界分析
+
+- question_cn：申请者如何体验SIGHT技术？系统的可接受性和适用边界在哪里？
+
+- inputs_and_setting_cn：事后问卷、关于传统面试与单向视频面试偏好的数据。
+
+- designed_or_compared_object_cn：对SIGHT技术的态度与传统面试偏好之间的对比。
+
+- baseline_control_or_counterfactual_cn：传统面对面面试作为偏好参照。
+
+##### objective_metrics
+
+1. 57.95%对技术持正面或非常正面
+
+2. 76.14%更偏好传统面试
+
+3. 13.64%偏好单向视频面试
+
+- analysis_method_cn：描述性统计与定性解释
+
+- main_result_cn：多数被试对技术有积极感受，但仍偏好传统面试，主要因为面对面可建立关系和观察对方反馈。
+
+- argumentative_role_cn：为系统可行性划定接受性边界，并引出未来研究的问题。
+
+- remaining_uncertainty_cn：尚未测试是否可通过界面或沟通降低偏好落差；未测试长期使用后的接受度。
+
+- link_to_next_phase_cn：进入讨论与局限部分，作者将经验结果升华为设计原则和边界条件。
+
+##### evidence_pointers
+
+1. Discussion 首段
+
+2. Post-survey data
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 先建立招聘不确定性的常识背景
+
+2. 说明信号可降低不确定性，但信号操纵普遍破坏可靠性
+
+3. 提出SIGHT系统与原型评价
+
+4. 报告初步实验结果
+
+5. 给出可扩展领域
+
+### introduction_moves
+
+1. 从IS行为分析的一般趋势切入
+
+2. 转到招聘筛选这个适合行为分析的领域
+
+3. 描述虚假信号和招聘失败现象
+
+4. 引入信号理论解释机制
+
+5. 提出破损信号系统的问题框架
+
+6. 给出研究目标与SIGHT命名
+
+7. 预告全文结构
+
+### theory_and_knowledge_moves
+
+1. 回到信号理论经典雇佣应用
+
+2. 总结Spence模型及其反馈循环
+
+3. 指出原始模型忽略虚假信号
+
+4. 引用欺骗普遍性数据
+
+5. 引用面试者无法识别欺骗的证据
+
+6. 推导系统目标
+
+### artifact_design_moves
+
+1. 从流程、传感器、标准化、自动化评估逐项提出设计要求
+
+2. 从信号源角度提出使用难操纵信号
+
+3. 引入个体内标准化与多信号融合
+
+4. 以七项属性总结SIGHT类系统
+
+5. 用原型实现各项属性
+
+6. 用具体工具链说明信号提取流程
+
+### evaluation_moves
+
+1. 说明采用准实验的原因和生态效度
+
+2. 描述申请前问卷和职位描述如何产生ground truth
+
+3. 给出严格的条件标记规则
+
+4. 报告PCA降维与回归结果
+
+5. 报告分类模型和基准比较
+
+6. 报告事后问卷接受性
+
+### discussion_and_contribution_moves
+
+1. 回接引言中的破损信号系统
+
+2. 从DSR角度区分描述性与规定性贡献
+
+3. 回应机器评估的偏见和接受性质疑
+
+4. 把实验发现提升为一般知识
+
+5. 明确边界条件
+
+6. 提出未来研究
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 信号理论（Spence, 1973）
+
+2. 结构化面试与人事选拔文献
+
+3. eHRM与异步视频面试研究
+
+4. 欺骗检测中的泄漏理论与策略行为理论
+
+5. 心理生理学与语音/面部行为研究
+
+6. 机器学习和自动欺骗检测文献
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：设计原则由信号理论、结构化面试研究和欺骗检测中的泄漏/策略理论推导，并且信号选择、标准化和融合方式直接源于这些理论；实验直接检验这些信号对自我选择欺骗的分类效果。虽有一些工程可用性约束，但不改变核心理论驱动地位。
+
+- 理论到设计翻译链：信号理论指出假信号在验证成本高时盛行 → 招聘申请阶段验证成本低导致系统破损 → 目标为提高假信号成本、降低评估成本 → 使用结构化自动化访谈以保证一致性和基线 → 使用普通摄像头降低技术门槛 → 选择难以有意识操纵的细微行为作为信号 → 在个体内标准化以控制人际差异 → 融合多信号以应对理论无完美指标 → 用机器学习将信号映射为诚实/欺骗分类 → 实验验证这一整条翻译链。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：信号理论中，虚假信号只要验证成本高就能持续存在；招聘申请阶段验证成本已变得极低。
+
+- mechanism_cn：申请者可以利用低验证成本伪造资格信号，雇主无法在申请阶段区分真假。
+
+- design_requirement_cn：新系统应提高假信号成本，并降低准确评估的成本。
+
+- artifact_choice_cn：SIGHT用自动化访谈采集更难操纵的心理学与行为信号，替代仅靠自我报告的传统申请。
+
+- evaluated_contrast_cn：传统自我报告信号 vs SIGHT行为信号；欺骗回答 vs 诚实基线。
+
+- objective_result_cn：检测到面部运动减少、发声质量下降、语言创造性增加等显著信号；分类F1达.84–.95。
+
+##### evidence_pointers
+
+1. Signal theory P2-P6
+
+2. Analysis and results
+
+3. Table 2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：结构化面试减少偏差并提高效度；刑事面试中的结构化提问能暴露隐藏知识。
+
+- mechanism_cn：标准化问题使所有申请者经历相同刺激，便于横向和纵向比较。
+
+- design_requirement_cn：访谈必须结构一致，同时保留开放回答以产生足够丰富的信号。
+
+- artifact_choice_cn：原型向所有被试展示相同15道题，统一30秒思考、60秒回答。
+
+- evaluated_contrast_cn：SIGHT开放回答 vs 常见的二元回答/人工非结构化面试。
+
+- objective_result_cn：在开放回答产生的噪声中，依然检测到显著欺骗信号。
+
+##### evidence_pointers
+
+1. One-way interviews can be standardized
+
+2. Prototypical implementation
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：专业欺骗检测传感器（测谎仪、眼动仪、热成像）有效但不可得、笨重且有侵入性。
+
+- mechanism_cn：普通摄像头和麦克风也可蕴含面部、声音、语言等行为信号。
+
+- design_requirement_cn：系统应只依赖普遍可得的Web摄像头与麦克风。
+
+- artifact_choice_cn：原型完全基于webcam，使用OpenSmile、IBM Watson、SPLICE、Intraface提取特征。
+
+- evaluated_contrast_cn：专用传感器 vs 普通webcam的非接触提取。
+
+- objective_result_cn：可从webcam数据中提取四种不同类型的行为汇总特征。
+
+##### evidence_pointers
+
+1. Data collection can use ubiquitous sensors
+
+2. Signal collection and processing
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：泄漏理论认为欺骗会泄漏难以完全控制的自然反应；策略行为理论认为欺骗者会故意表现异常以显真实；没有单一完美指标。
+
+- mechanism_cn：不同的欺骗者可能在不同通道泄漏不同信号。
+
+- design_requirement_cn：系统必须测量并融合多种面部、声音和语言指标，并使用个体内标准化。
+
+- artifact_choice_cn：Table 1中的多通道成分作为分类输入；对每位被试逐题进行标准化。
+
+- evaluated_contrast_cn：单信号 vs 多信号融合；原始信号 vs 个体内标准化信号。
+
+- objective_result_cn：融合模型F1为.84–.95，优于人类54%和no-information 55%。
+
+##### evidence_pointers
+
+1. Signal fusion and standardization
+
+2. Evaluation of predictive capability
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：自呈现文献表明人可以有意识地控制很多宏观行为；某些细微行为更难以控制。
+
+- mechanism_cn：申请者可能在宏观情绪表达上伪装，但细微面部冻结、声音扰动和语言选择不易完全控制。
+
+- design_requirement_cn：应选择计算设备可感知但人类难操纵的信号，并加入可验证的基线问题。
+
+- artifact_choice_cn：原型排除宏观情绪表达；加入StatView这种不存在的软件作为伪造诱饵；用申请前自评作为ground truth。
+
+- evaluated_contrast_cn：自评从0变为正数被视为欺骗；保持或夸大被视为非欺骗。
+
+- objective_result_cn：产生了足够自然欺骗样本，且SIGHT信号能区分条件。
+
+##### evidence_pointers
+
+1. Application systems can examine signals that are more difficult to manipulate
+
+2. Condition labeling
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 问题概念化论证
+
+2. 设计属性推导与原型构建
+
+3. 模拟招聘准实验
+
+4. PCA降维与多元回归信号分析
+
+5. 四类分类器与100折MCCV预测评价
+
+6. 人类准确率与no-information率基准比较
+
+7. 事后问卷接受性分析
+
+- why_these_evaluations_cn：这是设计科学的概念验证：需要证明问题存在、设计可构建、设计能引出并捕获信号、信号能够转化为自动判断、并且自动判断优于人工基线。每个评价环节都解决前一个环节留下的不确定性。
+
+- benchmark_and_contrast_chain_cn：传统申请信号 → 传统人工面试 → 专业传感器 → SIGHT原型；以申请前自评为ground truth；以个体内基线回答为对照；以人类54%准确率和55% no-information率为分类基线；以全理论特征、仅显著理论特征为特征稳健性对照。
+
+### claim_evidence_ledger
+
+1. 问题破损性由欺骗普遍率、坏雇佣率、人工识别低准确率支持。
+
+2. 原型可构建由实际实现和工具链描述支持。
+
+3. 信号可捕获由SIGHT实际提取的运动/声音/语言特征支持。
+
+4. 信号与欺骗相关由PCA+多元回归的显著系数支持。
+
+5. 自动分类有效由MCCV下四种分类器F1和混淆矩阵支持。
+
+6. 优于人工由与54%人类准确率和55% no-information rate的比较支持。
+
+7. 接受性边界由事后问卷中对传统面试的偏好支持。
+
+- internal_validity_strategy_cn：用申请前自评作为ground truth，避免事后归因；自我选择欺骗比指派欺骗更接近真实动机；个体内标准化控制人际差异；同一问题集内比较减少情境变异；MCCV减少抽样偶然性。
+
+- external_validity_strategy_cn：选择大学生作为入门级岗位申请者样本，并引用Compeau等关于学生作为目标总体的正当性；使用真实职位描述、在线申请和单向视频面试；讨论低利害激励对信号的潜在影响，并建议现场测试。
+
+- what_is_not_actually_tested_cn：未在真实招聘申请中测试；未直接检验每一种信号的可控性；未直接检验公平性/偏见；未检验除诚实性之外的其他素质；未将SIGHT与真人面试官或商业面试系统进行端到端对比。
+
+## 贡献闭环
+
+- technical_claim_cn：使用普通摄像头，SIGHT能提取人脸、声音和语言信号，并在四类分类器上以F1 .84–.95识别伪造资格，显著高于人类54%和no-information 55%。
+
+- artifact_claim_cn：自动化异步访谈、统一定时开放问题、webcam信号、多通道特征、within-subject标准化这组设计属性构成了可运行的SIGHT原型。
+
+- mechanism_claim_cn：欺骗会产生泄漏或策略性行为：面部冻结、面部加速度减少、发声质量下降、语言创造性增加和副词使用增加，这些机制使少量不可控信号可供机器检测。
+
+- boundary_claim_cn：结论主要在入门级岗位、高申请量、低风险模拟面试、美国大学生样本中成立；真实高利害情境和异质人群需要进一步测试。
+
+- reusable_design_knowledge_cn：高容量行为筛选系统应：自动化收集、标准化问题、使用普通传感器、选择难操纵信号、进行个体内标准化、融合多信号，并以理论驱动特征选择。
+
+- theoretical_contribution_cn：将雇佣筛选重新概念化为成本函数扭曲的破损信号系统；扩展信号理论以纳入虚假信号问题；为机器欺骗检测提供面部刚性、面部加速度减少和创造性语言使用的新证据。
+
+- how_discussion_closes_intro_gap_cn：讨论明确把实验分类结果回接到引言中的虚假信号普遍和高成本验证问题：SIGHT通过行为信号提高假信号成本并降低评估成本，从而修复破损信号系统；同时用边界和局限性保护主张不过度外推。
+
+- overclaim_or_unsupported_leaps_cn：从低利害模拟面试结果外推到真实招聘存在跳跃；把“信号与欺骗相关”辩护为“系统可降低坏雇佣风险”尚未被直接检验；“创造性语言增加”的认知负荷解释是事后解释，可能有替代机制；四类分类器都只在单一数据集上评估，没有独立验证集。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：招聘新员工传统上被认为是高不确定性的投资。
+
+- rhetorical_function_cn：为整个研究设定现实背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后文说明信号降低不确定性做铺垫。
+
+- evidence_pointer：Abstract P1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：这种不确定性可通过显示工作适任性的信号来降低。
+
+- rhetorical_function_cn：引入信号概念作为解决方案。
+
+- depends_on_cn：前一句的招聘不确定性
+
+- sets_up_cn：随后指出信号操纵会破坏这一解决方案。
+
+- evidence_pointer：Abstract P1
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：现实中信号操纵在招聘中普遍存在，削弱了招聘决策所依赖信号的可靠性。
+
+- rhetorical_function_cn：提出核心经验现象。
+
+- depends_on_cn：信号降低不确定性的前提
+
+- sets_up_cn：引出需要新系统来解决这个问题。
+
+- evidence_pointer：Abstract P1
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：为应对低效率，作者提出并评价SIGHT这一类理论上可提供更强健信号评估的系统。
+
+- rhetorical_function_cn：明确本文研究目标。
+
+- depends_on_cn：信号操纵问题的存在
+
+- sets_up_cn：预告系统名称和评价方式。
+
+- evidence_pointer：Abstract P1
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：使用模拟面试范式评价SIGHT框架的原型实现。
+
+- rhetorical_function_cn：交代研究设计。
+
+- depends_on_cn：目标提出
+
+- sets_up_cn：为结果句提供评价情境。
+
+- evidence_pointer：Abstract P1
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：RESULT
+
+- paraphrase_cn：初步证据显示SIGHT能引出并捕获超出传统申请的信息，并且比无辅助决策更有效地评估信号。
+
+- rhetorical_function_cn：报告核心结果。
+
+- depends_on_cn：模拟面试评价
+
+- sets_up_cn：作为全文核心贡献的摘要性表述。
+
+- evidence_pointer：Abstract P1
+
+### 7. P1 S7
+
+- order：7
+
+- section：Abstract
+
+- locator：P1 S7
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：SIGHT原则可能扩展到审计、安全访谈等领域。
+
+- rhetorical_function_cn：在摘要中给出外部效度预期。
+
+- depends_on_cn：核心结果
+
+- sets_up_cn：提示该工作不只是招聘系统。
+
+- evidence_pointer：Abstract P1
+
+### 8. P1 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：IS研究尝试将人类行为分析带给更多决策者、更多场所。
+
+- rhetorical_function_cn：把文章放入IS学科大趋势。
+
+- depends_on_cn：无
+
+- sets_up_cn：为招聘筛选作为行为分析应用场景做铺垫。
+
+- evidence_pointer：Introduction P1
+
+### 9. P1 S2-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S2-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：这类系统在人工无法检查或偏差非常微小需要高精度仪器时特别有价值，IS已用日常传感设备采集行为。
+
+- rhetorical_function_cn：进一步限定行为分析系统的价值条件。
+
+- depends_on_cn：IS行为分析趋势
+
+- sets_up_cn：说明SIGHT属于这个技术方向。
+
+- evidence_pointer：Introduction P1
+
+### 10. P2 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：大量求职者筛选可能受益于人类行为分析。
+
+- rhetorical_function_cn：把一般趋势收窄到具体领域。
+
+- depends_on_cn：IS行为分析价值
+
+- sets_up_cn：引入招聘中的欺骗问题。
+
+- evidence_pointer：Introduction P2
+
+### 11. P2 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：夸大甚至公开欺骗是招聘领域常态，使准确评估困难甚至不可能。
+
+- rhetorical_function_cn：陈述领域内现象。
+
+- depends_on_cn：招聘筛选场景
+
+- sets_up_cn：为“传统过程易错”提供原因。
+
+- evidence_pointer：Introduction P2
+
+### 12. P2 S5
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：传统流程依赖信号，但申请者展示夸大或虚假资格，且面试也无法发现所有问题；大量申请者时面试全部人不现实。
+
+- rhetorical_function_cn：指出现有招聘流程的核心限制。
+
+- depends_on_cn：欺骗现象
+
+- sets_up_cn：说明需要在申请阶段设计新系统。
+
+- evidence_pointer：Introduction P2
+
+### 13. P3 S1-S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P3 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：信号理论源自自然系统，例如红奶蛇模仿珊瑚蛇颜色发出虚假危险信号；只要验证成本高，虚假信号者就能成功。
+
+- rhetorical_function_cn：引入信号理论作为解释框架。
+
+- depends_on_cn：招聘中的欺骗现象
+
+- sets_up_cn：将招聘系统类比为可能被虚假信号破坏的信号系统。
+
+- evidence_pointer：Introduction P3
+
+### 14. P3 S4
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：若欺骗性信号足够普遍，系统会因其他方无法有效评估而失效。
+
+- rhetorical_function_cn：给出系统失效机制。
+
+- depends_on_cn：自然系统类比
+
+- sets_up_cn：为招聘系统“破损”判断提供理论依据。
+
+- evidence_pointer：Introduction P3
+
+### 15. P4 S1-S2
+
+- order：15
+
+- section：Introduction
+
+- locator：P4 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：某些专业领域伪造资格成本极高，但在许多领域求职申请已充斥夸大甚至伪造，申请审查阶段无法有效评估。
+
+- rhetorical_function_cn：把自然系统机制迁移到招聘领域。
+
+- depends_on_cn：信号理论机制
+
+- sets_up_cn：得出申请阶段是问题最严重环节。
+
+- evidence_pointer：Introduction P4
+
+### 16. P5 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：GAP
+
+- paraphrase_cn：作者提出应将典型候选人筛选过程概念化为破损的信号系统。
+
+- rhetorical_function_cn：提出全新问题界定。
+
+- depends_on_cn：前述欺骗普遍性和系统失效机制
+
+- sets_up_cn：作为设计目标和贡献的立足点。
+
+- evidence_pointer：Introduction P5
+
+### 17. P5 S3
+
+- order：17
+
+- section：Introduction
+
+- locator：P5 S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：新系统应尽可能少依赖传统资格信号，而应依赖可行的替代信号或检测假信号。
+
+- rhetorical_function_cn：从问题框架推导出系统要求。
+
+- depends_on_cn：破损信号系统判断
+
+- sets_up_cn：为SIGHT设计原则提供总方向。
+
+- evidence_pointer：Introduction P5
+
+### 18. P6 S1
+
+- order：18
+
+- section：Introduction
+
+- locator：P6 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究目标是提出框架、实现概念验证并通过实验评估其潜力。
+
+- rhetorical_function_cn：明确研究目标。
+
+- depends_on_cn：破损信号系统问题
+
+- sets_up_cn：给出DSR研究路径的预告。
+
+- evidence_pointer：Introduction P6
+
+### 19. P6 S2
+
+- order：19
+
+- section：Introduction
+
+- locator：P6 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：SIGHT系统测量心理生理和行为信号，这些信号更难操纵、更具诊断性。
+
+- rhetorical_function_cn：首次给出SIGHT的技术特征。
+
+- depends_on_cn：新系统应依靠替代信号的要求
+
+- sets_up_cn：为原型所使用的信号类型做铺垫。
+
+- evidence_pointer：Introduction P6
+
+### 20. P1
+
+- order：20
+
+- section：Research approach
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因为研究同时涉及问题概念化和潜在解决方案，作者选择设计科学研究，目标是识别可泛化原则。
+
+- rhetorical_function_cn：为文章结构提供方法论依据。
+
+- depends_on_cn：引言中的双重研究目标
+
+- sets_up_cn：把后续问题描述、系统描述、原型和评价都归入DSR。
+
+- evidence_pointer：Research approach P1
+
+### 21. P2
+
+- order：21
+
+- section：Research approach
+
+- locator：P2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文章先描述组织问题，再规定新系统类型，然后说明组件与关系，最后构建和评价原型。
+
+- rhetorical_function_cn：给出全文结构路线图。
+
+- depends_on_cn：DSR方法论
+
+- sets_up_cn：引导读者预期贡献形态。
+
+- evidence_pointer：Research approach P2
+
+### 22. P1
+
+- order：22
+
+- section：Signal theory and job candidate selection
+
+- locator：P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：信号理论起源于经济学，已应用于多个组织领域，本文回到其在招聘中的经典应用。
+
+- rhetorical_function_cn：限定理论适用范围。
+
+- depends_on_cn：研究问题的信号理论框架
+
+- sets_up_cn：下一段详细介绍Spence招聘信号模型。
+
+- evidence_pointer：Signal theory and job candidate selection P1
+
+### 23. P2 S1
+
+- order：23
+
+- section：Signal theory and job candidate selection
+
+- locator：P2 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：Spence模型认为应聘者通过学历等昂贵信号显示适任，理论上有成本的信号阻止低资格者发送同样信号。
+
+- rhetorical_function_cn：陈述经典信号理论的核心命题。
+
+- depends_on_cn：理论引入
+
+- sets_up_cn：为对比现实中的虚假信号提供理论基准。
+
+- evidence_pointer：Signal theory and job candidate selection P2
+
+### 24. P2 S2-S3
+
+- order：24
+
+- section：Signal theory and job candidate selection
+
+- locator：P2 S2-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：原始模型未明确考虑虚假信号；而实践中虚假信号者比诚实信号者更可能获得录用和更高薪酬。
+
+- rhetorical_function_cn：指出经典理论缺口。
+
+- depends_on_cn：Spence模型
+
+- sets_up_cn：为引入虚假信号作为研究问题提供依据。
+
+- evidence_pointer：Signal theory and job candidate selection P2
+
+### 25. P3
+
+- order：25
+
+- section：Signal theory and job candidate selection
+
+- locator：P3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：Levashina和Campion发现79%求职者使用欺骗信号；Weiss和Feldman发现81%在面试中至少说一次谎。
+
+- rhetorical_function_cn：用实证数据支撑虚假信号普遍性。
+
+- depends_on_cn：理论缺口
+
+- sets_up_cn：证明问题已达到系统失效阈值。
+
+- evidence_pointer：Signal theory and job candidate selection P3
+
+### 26. P4
+
+- order：26
+
+- section：Signal theory and job candidate selection
+
+- locator：P4
+
+- move_code：GAP
+
+- paraphrase_cn：即使知道欺骗行为的面试者也无法识别虚假信号，74%招聘经理承认当年有坏雇佣，坏雇佣比例较五年前上升。
+
+- rhetorical_function_cn：把普遍欺骗升级为决策后果。
+
+- depends_on_cn：欺骗普遍性数据
+
+- sets_up_cn：说明现有系统已经造成不利选择。
+
+- evidence_pointer：Signal theory and job candidate selection P4
+
+### 27. P5
+
+- order：27
+
+- section：Signal theory and job candidate selection
+
+- locator：P5
+
+- move_code：GAP
+
+- paraphrase_cn：假信号虽多但尚未多到组织完全放弃所有信号；问题是验证成本在申请阶段已经很低。
+
+- rhetorical_function_cn：限定问题的边界：系统正在失效但尚未完全崩塌。
+
+- depends_on_cn：坏雇佣证据
+
+- sets_up_cn：为提出“新信号系统”提供时机和空间。
+
+- evidence_pointer：Signal theory and job candidate selection P5
+
+### 28. P6
+
+- order：28
+
+- section：Signal theory and job candidate selection
+
+- locator：P6
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出新信号系统的总体目标：增加发送假信号的成本以防止假信号，并降低招聘人员准确评估信号的成本。
+
+- rhetorical_function_cn：将问题诊断转化为系统设计目标。
+
+- depends_on_cn：破损信号系统判断
+
+- sets_up_cn：随后各小节围绕这两个目标展开设计。
+
+- evidence_pointer：Signal theory and job candidate selection P6
+
+### 29. P3
+
+- order：29
+
+- section：The Signaling process / Applications can include more signals
+
+- locator：P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者提出将自动化访谈纳入申请阶段，以便早期收集额外且更可靠的信号，同时降低面对面访谈成本。
+
+- rhetorical_function_cn：从“申请信号不足”推导出系统要求。
+
+- depends_on_cn：eHRM数字化和面试昂贵问题
+
+- sets_up_cn：为后续自动化访谈原型做铺垫。
+
+- evidence_pointer：The Signaling process, Applications can include more signals, P3
+
+### 30. P1-P3
+
+- order：30
+
+- section：The Signaling process / One-way interviews can be standardized
+
+- locator：P1-P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：结构化面试提高有效性和可靠性；但自动访谈不应只用二元回答，而应保留开放题以获取社会技能和创造力信号，同时接受更多噪声。
+
+- rhetorical_function_cn：在标准化和信号丰富性之间做设计权衡。
+
+- depends_on_cn：结构化面试文献和自动访谈现状
+
+- sets_up_cn：解释SIGHT提问方式为什么是开放题加统一计时。
+
+- evidence_pointer：One-way interviews can be standardized
+
+### 31. P1-P3
+
+- order：31
+
+- section：The Signaling process / Data collection can use ubiquitous sensors
+
+- locator：P1-P3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：刑事访谈中的心率、皮电等传感器有效但不适合大众申请场景；眼动仪等非接触设备也面临可得性问题。
+
+- rhetorical_function_cn：排除高成本传感方案。
+
+- depends_on_cn：自动化访谈要求
+
+- sets_up_cn：转向普通摄像头作为主要传感器。
+
+- evidence_pointer：Data collection can use ubiquitous sensors
+
+### 32. P3
+
+- order：32
+
+- section：The Signaling process / Data collection can use ubiquitous sensors
+
+- locator：P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者提出新系统应使用基于Web的程序，执行自动访谈并收集申请材料，使用标准摄像头等普遍设备嵌入行为信号。
+
+- rhetorical_function_cn：给出核心技术与设备要求。
+
+- depends_on_cn：传感器可用性分析
+
+- sets_up_cn：原型实现中的webcam和Web平台由此而来。
+
+- evidence_pointer：Data collection can use ubiquitous sensors, last paragraph
+
+### 33. P1
+
+- order：33
+
+- section：The Signaling process / Applicant signals can be rapidly assessed
+
+- locator：P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为处理速度和准确性问题，作者提出从自动访谈数据中提取可靠信号并自动估计申请者资格，同时需注意自动化评估中的偏见。
+
+- rhetorical_function_cn：推导出自动信号提取与机器学习要求。
+
+- depends_on_cn：人工审查成本过高
+
+- sets_up_cn：后文分类模型和偏见讨论在此埋下伏笔。
+
+- evidence_pointer：Applicant signals can be rapidly assessed
+
+### 34. P1
+
+- order：34
+
+- section：The Signals from interviewees
+
+- locator：P1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：当前系统通过关键词等自动筛选，偏好展示最好信号的人，而非真正最合格的人；申请者会关键词填充。
+
+- rhetorical_function_cn：说明传统自动化申请系统在信号真实性上的根本缺陷。
+
+- depends_on_cn：eHRM现状
+
+- sets_up_cn：引出需要更难操纵的信号。
+
+- evidence_pointer：The Signals from interviewees, first paragraph
+
+### 35. P2
+
+- order：35
+
+- section：The Signals from interviewees / Application systems can examine signals that are more difficult to manipulate
+
+- locator：P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者主张使用计算设备能感知但人类难以操纵的言语和非言语信号，以此反映真实社会技能、绩效和诚信，聚焦信号检测而非印象管理。
+
+- rhetorical_function_cn：提出SIGHT系统的核心信号设计原则。
+
+- depends_on_cn：传统宏观信号易被自我呈现操纵
+
+- sets_up_cn：后文具体信号选择和原型特征都遵循这一原则。
+
+- evidence_pointer：Application systems can examine signals that are more difficult to manipulate, P2
+
+### 36. P3
+
+- order：36
+
+- section：The Signals from interviewees / Application systems can examine signals that are more difficult to manipulate
+
+- locator：P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：借鉴测谎问题设计，SIGHT可设置不存在软件包问题、可公开验证的学历问题，甚至将不常见问题与常见问题配对，以形成个体内基线。
+
+- rhetorical_function_cn：给出具体问题设计策略。
+
+- depends_on_cn：需要检测信号操纵并控制个体差异
+
+- sets_up_cn：实验中StatView问题即由此策略产生。
+
+- evidence_pointer：Application systems can examine signals that are more difficult to manipulate, P3
+
+### 37. P1
+
+- order：37
+
+- section：The Signals from interviewees / The Analysis can control for individual differences
+
+- locator：P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：系统应在每个问题集内对个体信号进行标准化，从而建立个人“正常”行为基线，实现更个体化的异常行为识别。
+
+- rhetorical_function_cn：提出个体内标准化要求。
+
+- depends_on_cn：人际间行为基线差异问题
+
+- sets_up_cn：实验中所有特征都在个体内标准化。
+
+- evidence_pointer：The Analysis can control for individual differences
+
+### 38. P2-P3
+
+- order：38
+
+- section：The Signals from interviewees / Multiple robust signals can improve reliability
+
+- locator：P2-P3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：单一行为可能由多个机制触发，因此系统应追踪多个不同信号以提高稳健性，已有研究表明多模态信号比单信号预测更准确。
+
+- rhetorical_function_cn：提出多信号融合要求。
+
+- depends_on_cn：信号噪声和替代机制问题
+
+- sets_up_cn：后文分类模型使用多类行为成分作为输入。
+
+- evidence_pointer：Multiple robust signals can improve reliability
+
+### 39. 最后一段
+
+- order：39
+
+- section：The Signals from interviewees / Summary
+
+- locator：最后一段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者总结了七项SIGHT系统属性，涵盖信号过程、环境、技术和被访者侧。
+
+- rhetorical_function_cn：把前面的设计推理凝聚成可检验的属性清单。
+
+- depends_on_cn：前几节所有设计要求
+
+- sets_up_cn：作为原型实现和实验评价的直接依据。
+
+- evidence_pointer：Summary of proposed properties, Figure 1
+
+### 40. 首段
+
+- order：40
+
+- section：Prototypical implementation
+
+- locator：首段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者基于异步视频面试平台实现了SIGHT原型：在线展示问题、30秒思考、60秒回答并录像。
+
+- rhetorical_function_cn：将设计属性实例化为具体技术细节。
+
+- depends_on_cn：七项属性
+
+- sets_up_cn：为后续信号采集流程提供平台描述。
+
+- evidence_pointer：Prototypical implementation
+
+### 41. 第2-3段
+
+- order：41
+
+- section：Prototypical implementation / Signal collection and processing
+
+- locator：第2-3段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：原型用OpenSmile提取语音特征，用IBM Watson生成文本转录，用SPLICE提取语言线索，用Intraface追踪面部点坐标，并计算每题汇总统计。
+
+- rhetorical_function_cn：展示信号提取管线的具体工具与能力。
+
+- depends_on_cn：选择webcam作为唯一传感器
+
+- sets_up_cn：为理论选择哪些特征可自动测量提供依据。
+
+- evidence_pointer：Signal collection and processing
+
+### 42. 首段
+
+- order：42
+
+- section：Prototypical implementation / Signal selection
+
+- locator：首段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：概念验证阶段无法覆盖所有素质，因此聚焦于申请者诚实性，因为诚信是普遍期望素质，且已有犯罪访谈领域的机制研究。
+
+- rhetorical_function_cn：说明为什么实验只检验诚实性。
+
+- depends_on_cn：SIGHT广义目标与原型限制
+
+- sets_up_cn：为后续欺骗信号理论做范围限定。
+
+- evidence_pointer：Signal selection
+
+### 43. 第1段
+
+- order：43
+
+- section：Prototypical implementation / Theoretical basis for deception signals
+
+- locator：第1段
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：真实欺骗研究大多依赖泄漏理论和策略行为理论：泄漏是难以完全控制的自然反应，策略行为是欺骗者为显真实而故意表现异常。
+
+- rhetorical_function_cn：为信号选择提供理论机制。
+
+- depends_on_cn：聚焦诚实性
+
+- sets_up_cn：具体面部、声音、语言特征由此推导。
+
+- evidence_pointer：Theoretical basis for deception signals
+
+### 44. 第1段
+
+- order：44
+
+- section：Prototypical implementation / Visual signals
+
+- locator：第1段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：面部冻结机制来自战斗或逃跑反应或努力表现真实的倾向，这两种机制应能持续整个回答，因此可望在较长开放回答中检测到。
+
+- rhetorical_function_cn：解释为什么预期开放回答中仍出现面部冻结。
+
+- depends_on_cn：先前脑电/面部运动研究
+
+- sets_up_cn：支持将面部运动和加速度设为信号。
+
+- evidence_pointer：Visual signals, paragraph 1
+
+### 45. 第4段
+
+- order：45
+
+- section：Prototypical implementation / Visual signals
+
+- locator：第4段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：因为情绪表达易于操纵，作者排除宏观情绪表达，但保留面部表情组件，因认知状态可反映于面部并随欺骗变化。
+
+- rhetorical_function_cn：在视觉信号中做包含/排除决策。
+
+- depends_on_cn：自呈现和认知负荷理论
+
+- sets_up_cn：解释为什么PCA中出现多个面部成分。
+
+- evidence_pointer：Visual signals, last paragraph
+
+### 46. 第1段
+
+- order：46
+
+- section：Prototypical implementation / Audio signals
+
+- locator：第1段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：谎报时喉部肌肉紧张导致音高升高；情绪张力可能影响响度；jitter和shimmer反映声带控制稳定性。
+
+- rhetorical_function_cn：给出每个声音信号的心理生理机制。
+
+- depends_on_cn：欺骗干扰自主神经的假设
+
+- sets_up_cn：后续声音特征命名和回归结果由此解释。
+
+- evidence_pointer：Audio signals
+
+### 47. 第1-2段
+
+- order：47
+
+- section：Prototypical implementation / Linguistic signals
+
+- locator：第1-2段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：欺骗更难时话中感觉细节和情境信息更少；但当问题可预期时，欺骗者反而会提供更多细节；欺骗者更依赖不可验证信息。
+
+- rhetorical_function_cn：说明语言线索既受认知负荷也受预期性调节。
+
+- depends_on_cn：泄漏与策略理论
+
+- sets_up_cn：解释“创造性表达”在实验中的增加。
+
+- evidence_pointer：Linguistic signals
+
+### 48. 整段
+
+- order：48
+
+- section：Prototypical implementation / Signal fusion and standardization
+
+- locator：整段
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：由于没有任何单一完美欺骗指标，系统必须测量并融合多种潜在欺骗指标，并在个体内标准化后送入分类模型。
+
+- rhetorical_function_cn：为统计算法和特征融合提供理论理由。
+
+- depends_on_cn：欺骗指标的异质性
+
+- sets_up_cn：为四类分类器输入多模态特征做铺垫。
+
+- evidence_pointer：Signal fusion and standardization
+
+### 49. 第3段
+
+- order：49
+
+- section：Method / Experimental procedure
+
+- locator：第3段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者不进行事先分组，而是让参与者看到职位描述后自行决定是否修改申请，以形成更接近现实的自我选择欺骗。
+
+- rhetorical_function_cn：说明准实验设计的生态效度理由。
+
+- depends_on_cn：需要自然欺骗行为
+
+- sets_up_cn：影响条件标记和结果解释。
+
+- evidence_pointer：Method, Experimental procedure, paragraph 3
+
+### 50. 第5段
+
+- order：50
+
+- section：Method / Experimental procedure
+
+- locator：第5段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：申请前完成的在线问卷被视为ground truth，使研究者能追踪申请者是否为了适配职位而伪造资历。
+
+- rhetorical_function_cn：建立欺骗标签的可验证基准。
+
+- depends_on_cn：线上申请与职位描述先后设计
+
+- sets_up_cn：为条件标签规则提供操作基础。
+
+- evidence_pointer：Method, Experimental procedure, last paragraph
+
+### 51. 第1-2段
+
+- order：51
+
+- section：Method / Condition labeling
+
+- locator：第1-2段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：只有从零自评变为正数才标记为欺骗；夸大已有正自评视为诚实，因为自我报告具有主观性且零到有更可能是伪造。
+
+- rhetorical_function_cn：最大化欺骗标签确定性并减少夸大污染。
+
+- depends_on_cn：申请前自评ground truth
+
+- sets_up_cn：决定后续统计比较的两个条件。
+
+- evidence_pointer：Method, Condition labeling
+
+### 52. 第1段
+
+- order：52
+
+- section：Analysis and results
+
+- locator：第1段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：视频、音频和语言测量分别进行主成分分析以降维和识别成分，并用多元回归检验欺骗是否引起显著变异。
+
+- rhetorical_function_cn：说明从低层特征到行为成分的处理逻辑。
+
+- depends_on_cn：原型提取的原始汇总统计
+
+- sets_up_cn：为Figure 4中的显著信号提供来源。
+
+- evidence_pointer：Analysis and results, first paragraph
+
+### 53. 第3-5段
+
+- order：53
+
+- section：Analysis and results
+
+- locator：第3-5段
+
+- move_code：RESULT
+
+- paraphrase_cn：欺骗回答伴随面部运动减少、面部加速度减慢、发声质量下降、语言创造性增加和用词变少、词复杂度降低、副词使用增加。
+
+- rhetorical_function_cn：报告核心信号差异结果。
+
+- depends_on_cn：PCA与回归模型
+
+- sets_up_cn：为预测分类提供实证信号集。
+
+- evidence_pointer：Analysis and results, paragraphs after Figure 4
+
+### 54. 第2段
+
+- order：54
+
+- section：Evaluation of predictive capability
+
+- locator：第2段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者使用四种分类算法仅为探究SIGHT理论系统的潜力，而非比较算法；采用理论驱动特征选择而非全特征选择。
+
+- rhetorical_function_cn：防止读者误读为算法竞赛。
+
+- depends_on_cn：前文理论选择特征
+
+- sets_up_cn：把分类结果归于SIGHT设计而非算法调优。
+
+- evidence_pointer：Evaluation of predictive capability, paragraph 2
+
+### 55. 第4段
+
+- order：55
+
+- section：Evaluation of predictive capability
+
+- locator：第4段
+
+- move_code：RESULT
+
+- paraphrase_cn：四类分类器的F1在.84–.95之间，高于人类54%的谎言识别率和55%的no-information率。
+
+- rhetorical_function_cn：报告与人类基线的对比结果。
+
+- depends_on_cn：100折MCCV
+
+- sets_up_cn：支撑“SIGHT比无辅助人工决策更有效”的核心主张。
+
+- evidence_pointer：Evaluation of predictive capability, Table 2后文字
+
+### 56. 第1段
+
+- order：56
+
+- section：Discussion
+
+- locator：第1段
+
+- move_code：RESULT
+
+- paraphrase_cn：事后问卷显示多数被试对技术持正面态度，但76.14%仍偏好传统面试，主要因为重视面对面互动和观察对方。
+
+- rhetorical_function_cn：报告接受性结果，补充可接受性边界。
+
+- depends_on_cn：实验事后问卷
+
+- sets_up_cn：为讨论“机器评估”的阻力提供证据。
+
+- evidence_pointer：Discussion, first paragraph
+
+### 57. 第2段
+
+- order：57
+
+- section：Discussion
+
+- locator：第2段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章的第一个贡献是描述性知识：把招聘过程概念化为因技术变化导致成本函数失衡的破损信号系统。
+
+- rhetorical_function_cn：声明描述性知识贡献。
+
+- depends_on_cn：引言中的问题框架
+
+- sets_up_cn：为后续规定性知识贡献定位。
+
+- evidence_pointer：Discussion, second paragraph
+
+### 58. 第3段
+
+- order：58
+
+- section：Discussion
+
+- locator：第3段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第二个贡献是规定性知识：描述基于多学科理论推导的系统方案，核心是自动化、结构化地收集和使用新的难操纵信号。
+
+- rhetorical_function_cn：声明规定性知识贡献。
+
+- depends_on_cn：SIGHT七项属性
+
+- sets_up_cn：解释SIGHT如何提高假信号成本并降低成本。
+
+- evidence_pointer：Discussion, third paragraph
+
+### 59. 第4段
+
+- order：59
+
+- section：Discussion
+
+- locator：第4段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者回应“机器判断人”的质疑：系统确实出错，但大幅优于人类，且自动化中的偏见更易检测和纠正；结构化问题进一步降低人际差异带来的系统性偏见。
+
+- rhetorical_function_cn：保护贡献免受普遍质疑。
+
+- depends_on_cn：分类结果和设计属性
+
+- sets_up_cn：引出未来关于偏差的实证研究。
+
+- evidence_pointer：Discussion, fourth paragraph
+
+### 60. 第5段
+
+- order：60
+
+- section：Discussion
+
+- locator：第5段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：与刑事审讯不同，招聘欺骗属于低利害情境，可能不引发高强度应激；SIGHT通过多通道监测和结构化回答来捕捉细微异常。
+
+- rhetorical_function_cn：限定理论适用的激励条件。
+
+- depends_on_cn：实验中的低利害模拟环境
+
+- sets_up_cn：为未来真实招聘测试提供动机。
+
+- evidence_pointer：Discussion, fifth paragraph
+
+### 61. 第6段
+
+- order：61
+
+- section：Discussion
+
+- locator：第6段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究为机器欺骗检测文献提供面部刚性效应的新证据，首次识别面部加速度减少作为欺骗指标，并发现伪造资格者使用更多创造性语言。
+
+- rhetorical_function_cn：把实验发现贡献给一般知识。
+
+- depends_on_cn：回归结果
+
+- sets_up_cn：说明SIGHT不仅是应用系统，也推进理论基础。
+
+- evidence_pointer：Discussion, sixth paragraph
+
+### 62. 第1段
+
+- order：62
+
+- section：Limitations and future work
+
+- locator：第1段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：模拟面试的低利害情境可能不反映真实压力，需要用真实工作申请来评价信号稳健性。
+
+- rhetorical_function_cn：承认实验情境的局限。
+
+- depends_on_cn：模拟实验设计
+
+- sets_up_cn：为现场研究提供方向。
+
+- evidence_pointer：Limitations and future work, first paragraph
+
+### 63. 第3段
+
+- order：63
+
+- section：Limitations and future work
+
+- locator：第3段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：SIGHT依赖某些行为更难控制的假设，但作者并未直接检验每个信号的可控性；未来需研究细微行为的可控性。
+
+- rhetorical_function_cn：明确机制假设未经直接检验。
+
+- depends_on_cn：信号选择理论
+
+- sets_up_cn：为后续可控性研究留出空间。
+
+- evidence_pointer：Limitations and future work, third paragraph
+
+### 64. 第4段
+
+- order：64
+
+- section：Limitations and future work
+
+- locator：第4段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：当前用观察到的行为训练分类器可减少部分偏差，但推广到绩效、文化契合等构念时必须处理训练数据中的偏见。
+
+- rhetorical_function_cn：承认自动评估的公平性局限。
+
+- depends_on_cn：机器学习训练方式
+
+- sets_up_cn：把公平性放入未来研究议程。
+
+- evidence_pointer：Limitations and future work, fourth paragraph
+
+### 65. 第1段
+
+- order：65
+
+- section：Conclusion
+
+- locator：第1段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文从招聘信号操纵问题出发，提出SIGHT信息系统并通过实验证明其降低坏雇佣风险的效能。
+
+- rhetorical_function_cn：浓缩总结全文贡献。
+
+- depends_on_cn：全文所有研究环节
+
+- sets_up_cn：为扩展应用场景提供总结性陈述。
+
+- evidence_pointer：Conclusion, first paragraph
+
+### 66. 第2段
+
+- order：66
+
+- section：Conclusion
+
+- locator：第2段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：尽管论文聚焦员工选拔，但设计原则适用于安全审查、审计、心理健康筛查、大学招生等高容量行为评估场景。
+
+- rhetorical_function_cn：在结尾再次限定并扩展适用范围。
+
+- depends_on_cn：SIGHT设计原则的一般性
+
+- sets_up_cn：把研究定位为更广泛的IS人类分析运动。
+
+- evidence_pointer：Conclusion, second paragraph
+
+## 写作技术
+
+- gap_construction_cn：作者没有说“没人研究招聘欺骗”，而是指出经典信号理论原始模型未考虑虚假信号，同时用多个经验数据证明现有系统已经出现不利选择，由此把缺口定位为“现有信号系统的成本函数被技术改变，需要一类新系统而不是简单修补”。
+
+- signposting_cn：在Abstract、Introduction、Research approach、Signaling process、Signal selection和Discussion中多次预告“贡献是什么”“下一步做什么”“为什么做这个实验”；使用SIGHT术语统一包装系统类。
+
+- transition_logic_cn：每个小节末尾都把当前分析变成下一节的设计输入：问题诊断→目标；目标→七项属性；属性→原型；原型→信号选择；信号→实验；实验→信号差异；信号差异→分类；分类→讨论与局限。
+
+- claim_evidence_rhythm_cn：先做知识性陈述，再用数据或引用支撑；每个行为信号在提出时给出机制，在结果中报告显著性，在分类中报告绩效，形成“理论命题—经验证据—应用绩效”的三段节奏。
+
+- benchmark_narrative_cn：不把SIGHT最好算法与最差算法对比，而是把SIGHT与人类识别能力54%和no-information 55%对比，突出“无辅助人工决策”作为现实基线。
+
+- theory_return_cn：讨论部分将分类结果重新解释为面部刚性、面部加速度减少和创造性语言使用等机制，并把这些问题归入泄漏/策略理论，使系统结果回馈理论知识。
+
+- contribution_positioning_cn：使用DSR语言把贡献分为描述性知识和规定性知识；描述性知识是“破损信号系统”概念，规定性知识是SIGHT设计原则，避免把论文降级为一个准确率数字。
+
+- novelty_protection_cn：通过强调“理论驱动特征选择”“四类分类器都表现良好”“显著特征子集仍保持较高F1”“原型只是概念验证”来防止结果被看作单一数据集上的算法调优；同时把系统推广为SIGHT类系统，而非特定原型。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用理论框架把现实问题重新概念化，提出比“现有技术不够好”更有解释力的缺口。
+
+- research_job_cn：收集欺骗普遍性、系统失效后果、验证成本变化等证据。
+
+- required_evidence_cn：现象数据+理论机制+现有系统失效证据。
+
+- transition_to_next_cn：从“系统已破损”过渡到“需要提出新系统目标”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：把目标转成可操作的系统要求，逐条说明为什么要求来自文献。
+
+- research_job_cn：从结构化面试、欺骗检测、普通传感器可得性等知识库中提取设计约束。
+
+- required_evidence_cn：每条要求都应有文献或逻辑依据，且彼此不矛盾。
+
+- transition_to_next_cn：从要求清单过渡到“这些要求需要实例化”。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述原型的技术组件和用户流程，展示要求如何落地。
+
+- research_job_cn：构建可运行的Web访谈与信号提取管线。
+
+- required_evidence_cn：原型确实能采集并处理数据。
+
+- transition_to_next_cn：从“能采集”过渡到“应采集哪些信号”。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用理论选择具体信号，解释每个信号的可能机制，并说明排除项。
+
+- research_job_cn：根据webcam约束和欺骗理论筛选面部、声音、语言特征。
+
+- required_evidence_cn：每个入选特征都有机制预测；每个排除项都有可操纵性或不可得性理由。
+
+- transition_to_next_cn：从“理论信号集”过渡到“用实验检验这些信号”。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：设计能产生真实目标行为的实验情境，说明ground truth和条件标记规则。
+
+- research_job_cn：执行模拟招聘准实验，让参与者自然选择是否欺骗。
+
+- required_evidence_cn：有足够的目标事件样本和参与动机测量。
+
+- transition_to_next_cn：从“数据采集完成”过渡到“分析信号是否有差异”。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：先报告统计显著的信号差异，再报告分类绩效，并将分类绩效与人类基线对比。
+
+- research_job_cn：用PCA/回归检验信号，用交叉验证分类器检验预测能力。
+
+- required_evidence_cn：显著性结果+多算法交叉验证结果+人类基线。
+
+- transition_to_next_cn：从“系统有效”过渡到“讨论贡献、边界和局限”。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在讨论中把结果回接到理论框架，声明描述性/规定性贡献，并列出边界和未来研究。
+
+- research_job_cn：用事后问卷、局限性分析和外部效度讨论来限定主张。
+
+- required_evidence_cn：能解释为什么结果发生、何时成立、何时不成立。
+
+- transition_to_next_cn：从“本研究完成”过渡到“后续研究程序”。
+
+### most_transferable_moves_cn
+
+1. 用理论把问题重新概念化为系统失效而非技术缺陷
+
+2. 从理论命题逐条推导设计要求
+
+3. 用具体工具链展示制品可构建
+
+4. 用严格ground truth标记目标行为
+
+5. 先用统计证明信号存在，再用分类证明信号可用
+
+6. 用人类基线而非仅算法内部对比来显示价值
+
+7. 在讨论中用设计知识而非单一性能结果定位贡献
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要构建或复现完整的自动访谈+信号提取系统
+
+2. 需要能够产生自然欺骗行为的实验情境和伦理审批
+
+3. 需要多学科知识：信号理论、结构访谈、欺骗检测、机器学习和语音/面部处理
+
+4. 需要后期对大量视频/音频/文本数据进行PCA和分类计算
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只引用欺骗比例而不做理论机制解释
+
+2. 不能只报告准确率而缺少ground truth的可信性论证
+
+3. 不能声称设计由理论驱动却使用全特征自动选择
+
+4. 不能把模拟情境结论直接写成真实招聘效果
+
+5. 不能把分类器表现解释为“系统已可商用”
+
+- single_best_description_of_the_routine_cn：用信号理论把现实中的作弊问题拆成一个成本函数失衡的破损系统，再从理论推导可测量且难操纵的行为信号，构建普通设备可运行的自动化访谈原型，最后用准实验和分类模型证明该系统比人工判断更有效，并把结果包装成可迁移的设计原则。
+
+## 分析边界
+
+原文件无页码，只能以章节、段落和图表位置作为定位；补充在线附录未完整收录，PCA完整结果和回归完整表格无法复核；图1-3以图像形式存在，只能依据正文描述解读。

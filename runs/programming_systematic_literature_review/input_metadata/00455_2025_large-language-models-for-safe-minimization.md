@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105010293896"
+title: "Large Language Models for Safe Minimization"
+authors: "Yadavally A.; Rong X.; Nguyen P.; Nguyen T.N."
+year: "2025"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse55347.2025.00203"
+---
+# Scopus title-abstract-keyword metadata
+Title: Large Language Models for Safe Minimization
+Abstract: Several tasks in program analysis, verification, and testing are modeled as constraint solving problems, utilizing SMT solvers as the reasoning engine. In this work, we aim to investigate the reasoning capabilities of large language models (LLMs) toward reducing the size of an infeasible string constraint system by exploiting inter-constraint interactions such that the remaining ones are still unsatisfiable. We term this safe minimization. Motivated by preliminary observations of hallucination and error propagation in LLMs, we design SafeMin, a framework leveraging an LLM and SMT solver in tandem to ensure a safe and correct minimization. We test the applicability of our approach on string benchmarks from LeetCode in the computation of minimal unsatisfiable subsets (MUSes). We observed that SafeMin helps safely minimize 94.3% of these constraints, with an average minimization ratio of 98% relative to the MUSes. In addition, we assess SafeMin's capabilities in partially enumerating non-unique MUSes, which is baked into our approach via a 'sample-and-enumerate' decoding strategy. Overall, we captured 42.1% more non-unique MUSes than without such LLM-based macro-reasoning. Finally, we demonstrate SafeMin's usefulness in detecting infeasible paths in programs.  © 2025 IEEE.
+Author keywords: Constraint Solving; Inter-Constraint Reasoning; Large Language Models; Safe Minimization
+Index keywords: Constrained optimization; Constraint handling; Constraint satisfaction problems; Problem solving; Surface mount technology; Constraint reasoning; Constraint Solving; Inter-constraint reasoning; Language model; Large language model; Minimisation; Program analysis; Program testing; Program Verification; Safe minimization; Software testing
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2025
+EID: 2-s2.0-105010293896
+DOI: 10.1109/icse55347.2025.00203
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

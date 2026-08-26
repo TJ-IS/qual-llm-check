@@ -1,0 +1,1995 @@
+# The Phishing Funnel Model: A Design Artifact to Predict User Susceptibility to Phishing Websites
+
+- 作者：Ahmed Abbasi; David Dobolyi; Anthony Vance; Fatemeh Mariam Zahedi
+- 年份 / 期刊：2021 / Information Systems Research
+- DOI：10.1287/isre.2020.0973
+- 源文件：28020_2021_the-phishing-funnel-model-a-design-artifact-to-predict-user-susceptibility-to-phishing-websites.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.72
+
+## 文章级论证概况
+
+- 核心问题：如何设计并验证一个能够预测用户在真实组织环境中对钓鱼网站易感性的设计制品，以及基于该预测的干预能否有效提升回避结果。
+
+- 制品与设计：PFM（Phishing Funnel Model）：将用户与钓鱼网站的交互建模为四阶段漏斗（visit, browse, consider legitimate, intend to transact），纳入工具、威胁、用户三类共六组因素作为预测变量，并使用支持向量序数回归与复合核（SVORCK）进行估计，其中复合核内嵌累积链接混合模型（CLMM）以捕捉用户异质性和跨阶段依赖。
+
+- 客观结果：12个月纵向现场实验（2个组织、1,278名员工、49,373次交互）中，PFM的AUC比竞争模型/方法高8%-52%；高严重度威胁访问的预测正确率为96%，比最接近的竞争者高10个百分点；后续3个月干预实验中，PFM驱动的分级警告显著降低漏斗各阶段穿越率；成本收益分析显示PFM-SVORCK每员工每年的毛收益约为1,960美元，比对比预测方法多近1,900美元。
+
+- 核心贡献：作者声称贡献是提出PFM这一改进型设计制品，将用户易感性预测作为实时防护策略；通过两个大样本纵向现场实验证明预测效能和干预价值；强调建模整个钓鱼过程漏斗比只关注单一用户行动更有优势；并凸显反钓鱼工具与威胁相关因素对易感性的重要影响。
+
+- 整篇论证链：文章从用户面对钓鱼网站时即使使用反钓鱼工具仍高度易受害的现实出发，指出已有工具预测的是网站是否钓鱼，而非用户是否会上当，因而存在用户与工具认知失调。作者将问题收缩为“能否预测用户易感性”，引入漏斗概念把一次性行为转化为四个连续决策阶段，并以TAM、PMT和HITLSF为知识基础选择工具、威胁、用户三类六组变量；用SVORCK+CLMM对五个序数端点进行预测。为回答RQ1，作者在两家企业开展12个月现场预测实验，证明PFM显著优于DRKM、AAM、HITLSF等模型和SVM、SVOR等方法，并在特征消融、威胁通道和鲁棒性上做补充分析。为回答RQ2，作者实施3个月干预实验，将预测结果映射为三种严重级别的警告，比较PFM、SVM、HITLSF、随机和标准设置，证明预测驱动的警告显著减少漏斗穿越；最后用成本收益分析和敏感性分析把行为收益转化为经济价值。讨论部分回到初始缺口，把结论上升为三条实践设计知识，并说明边界和局限。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章从设计科学范式出发，明确将PFM作为一个设计制品进行开发；其评价方式不是单纯benchmark，而是在真实组织中开展两个纵向现场实验，分别检验预测能力和下游干预价值，并辅以成本收益分析。核心贡献定位为Gregor和Hevner意义上的“improvement”型设计知识，而非纯算法benchmark或新理论。
+
+- 主导写作弧线判定：文章以用户识别能力和现有反钓鱼工具效果的绩效缺口为起点，提出PFM制品；随后通过模型/方法benchmark、特征消融、通道分析、干预实验和成本收益分析，将局部性能提升逐步一般化为可复用的设计知识。该弧线更强调制品—基准—推广，而非以理论命题检验为主线。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：研究分为四个累积阶段：第一阶段构建PFM制品，包括理论驱动变量体系和SVORCK/CLMM预测方法；第二阶段用两个实验室预试验检验变量选择、问卷题项和操作化；第三阶段开展12个月两家企业现场预测实验，证明预测效能并做特征、通道和鲁棒性分析；第四阶段开展3个月干预实验，证明预测驱动的分级警告能降低穿越率，并通过成本收益分析把行为改进转化为经济价值。四个阶段依次回答“制品是什么—测量是否可用—能否预测—预测是否有用”。
+
+### studies_or_phases
+
+#### 1. PFM制品构建：漏斗概念与SVORCK方法
+
+- order：1
+
+- name_cn：PFM制品构建：漏斗概念与SVORCK方法
+
+- question_cn：如何将用户易感性表示为可预测的设计制品？
+
+- inputs_and_setting_cn：理论文献：TAM、PMT、HITLSF、营销/Web分析漏斗；已有模型DRKM/AAM/PSM；领域经验。
+
+- designed_or_compared_object_cn：六组因素变量、四阶段漏斗因变量、SVORCK/CLMM预测方法。
+
+- baseline_control_or_counterfactual_cn：不适用；与已有模型和方法在后续阶段比较。
+
+##### objective_metrics
+
+1. 概念完备性（阶段、因素）
+
+2. 模型形式适配性
+
+- analysis_method_cn：理论整合与形式建模；核方法设计。
+
+- main_result_cn：PFM模型：工具、威胁、用户六组变量；五个序数端点的漏斗；K_PFM=K_UTT+K_Funnel。
+
+- argumentative_role_cn：提供待评价的制品。
+
+- remaining_uncertainty_cn：变量测量、算法有效性、现实环境可行性未检验。
+
+- link_to_next_phase_cn：需要实验室预试检验变量与题目，然后进入现场预测实验。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Figure 1
+
+3. Table 1
+
+4. Eqs. (1)-(6)
+
+#### 2. 实验室预试验
+
+- order：2
+
+- name_cn：实验室预试验
+
+- question_cn：PFM的预测变量、问卷题项和操作化是否有效？
+
+- inputs_and_setting_cn：大学被试和某安全软件提供商的B2C客户；实验室情境。
+
+- designed_or_compared_object_cn：PFM变量与调查题项；比较模型所需题项。
+
+- baseline_control_or_counterfactual_cn：不适用/内部效度评估。
+
+##### objective_metrics
+
+1. 量表信度（Cronbach alpha）
+
+2. 建构效度（因子载荷、区分效度）
+
+- analysis_method_cn：探索性因子分析、信度分析。
+
+- main_result_cn：结果验证了PFM的变量选择、问卷项目与操作化，可作为现场实验基础。
+
+- argumentative_role_cn：为大规模现场实验提供测量工具。
+
+- remaining_uncertainty_cn：实验室结果能否推广到真实组织环境未知。
+
+- link_to_next_phase_cn：进入12个月现场预测实验。
+
+##### evidence_pointers
+
+1. Section 5 opening paragraph
+
+2. Online Appendix A
+
+3. Online Appendix C
+
+#### 3. 12个月纵向现场预测实验（FinOrg/LegOrg）
+
+- order：3
+
+- name_cn：12个月纵向现场预测实验（FinOrg/LegOrg）
+
+- question_cn：RQ1: PFM在真实组织中随时间预测用户易感性的效果如何？
+
+- inputs_and_setting_cn：两家企业（大型金融服务FinOrg、中型法律服务LegOrg），1,278名员工，49,373次经验证的用户-钓鱼交互；端点安全工具；季度调查；会话后弹窗。
+
+- designed_or_compared_object_cn：PFM（SVORCK和CLMM）与DRKM、AAM、HITLSF三个模型比较；与BayesNet、SVM、SVOR、CLMM-Equi、LMM五种方法比较；特征类别消融；威胁通道分析；特征集与特征选择比较。
+
+- baseline_control_or_counterfactual_cn：竞争模型（DRKM/AAM/HITLSF）、基准方法（SVM/SVOR/CLMM-Equi/BayesNet/LMM）；“去掉某一特征类别”的消融。
+
+##### objective_metrics
+
+1. 多分类AUC
+
+2. ROC曲线
+
+3. 高严重度URL访问检测率
+
+4. intend-to-transact正确预测数
+
+5. 实际交易正确预测数
+
+6. 漏斗阶段穿越统计
+
+- analysis_method_cn：滚动窗口训练/测试；配对t检验；ROC/AUC；特征消融；RFE特征选择。
+
+- main_result_cn：PFM-SVORCK AUC=0.875，PFM-CLMM AUC=0.831，比比较模型高22%-35%、比基准方法高8%-25%；高严重度访问预测96%，比最接近竞争者高10个百分点；各特征类别大多显著贡献；跨渠道表现稳健。
+
+- argumentative_role_cn：证明PFM的预测效能，回答RQ1。
+
+- remaining_uncertainty_cn：预测准确性是否能转化为实际防护行为改善和经济收益未知。
+
+- link_to_next_phase_cn：需进行干预实验，将预测用于分级警告并检验回避效果。
+
+##### evidence_pointers
+
+1. Section 5
+
+2. Tables 3-8
+
+3. Figures 3-9
+
+4. Section 5.2.3 robustness
+
+#### 4. 3个月干预现场实验与成本收益分析
+
+- order：4
+
+- name_cn：3个月干预现场实验与成本收益分析
+
+- question_cn：RQ2: 基于易感性预测的干预能否改善回避结果？
+
+- inputs_and_setting_cn：同一两家企业，1,218名员工，13,824次交互；三个月；用前12个月数据训练模型。
+
+- designed_or_compared_object_cn：六个设置：PFM-SVORCK、PFM-CLMM、SVM、HITLSF、随机警告、标准默认警告；警告严重度根据预测漏斗阶段调整。
+
+- baseline_control_or_counterfactual_cn：标准设置（默认警告）和随机设置（随机警告）作为对照；SVM/HITLSF预测驱动设置作为比较。
+
+##### objective_metrics
+
+1. 各漏斗阶段穿越百分比
+
+2. 访问/浏览/认为合法/意图交易/实际交易率
+
+3. ANOVA/卡方对比
+
+4. 每员工年度收益
+
+5. 敏感性分析收益
+
+- analysis_method_cn：单因素ANOVA、Bonferroni校正对比；成本收益模型；敏感性分析（LB/HC/LBHC）；警告数量分布检验。
+
+- main_result_cn：PFM-SVORCK组在高层级漏斗阶段显著更低；实际交易率PFM-SVORCK为0.50%，标准为2.64%；PFM组比标准少3-6倍交易；成本收益PFM-SVORCK每员工1,960美元，比PFM-CLMM多500美元；敏感性分析下仍为正收益。
+
+- argumentative_role_cn：证明预测制品的下游价值，回答RQ2。
+
+- remaining_uncertainty_cn：其他行业/人群泛化、意图-行为差距、自报响应偏差、长期习惯化未充分检验。
+
+- link_to_next_phase_cn：讨论中回到设计知识、贡献与未来研究。
+
+##### evidence_pointers
+
+1. Section 6
+
+2. Tables 9-10
+
+3. Figures 10-12
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. RQ_OR_OBJECTIVE
+
+5. DESIGN_FEATURE
+
+6. METHOD_JUSTIFICATION
+
+7. RESULT
+
+8. RESULT
+
+9. RESULT
+
+10. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PRIOR_KNOWLEDGE
+
+4. LIMITATION
+
+5. MECHANISM
+
+6. GAP
+
+7. RQ_OR_OBJECTIVE
+
+8. DESIGN_FEATURE
+
+9. RQ_OR_OBJECTIVE
+
+10. STUDY_OVERVIEW
+
+11. CONTRIBUTION
+
+12. GAP
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. THEORY_INTRO
+
+3. THEORY_PROPOSITION
+
+4. THEORY_PROPOSITION
+
+5. THEORY_PROPOSITION
+
+6. REQUIREMENT
+
+7. MECHANISM
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. REQUIREMENT
+
+3. DESIGN_FEATURE
+
+4. MECHANISM
+
+5. METHOD_JUSTIFICATION
+
+6. DESIGN_FEATURE
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW
+
+2. METHOD_JUSTIFICATION
+
+3. BENCHMARK_OR_CONTRAST
+
+4. BENCHMARK_OR_CONTRAST
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+6. RESULT
+
+7. RESULT
+
+8. ROBUSTNESS_OR_BOUNDARY_TEST
+
+9. RESULT
+
+10. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. CONTRIBUTION
+
+3. BOUNDARY_CONDITION
+
+4. THEORY_RETURN
+
+5. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. TAM (Technology Acceptance Model)
+
+2. PMT (Protection Motivation Theory)
+
+3. HITLSF (Human-in-the-Loop Security Framework)
+
+4. 营销/Web分析中的漏斗概念
+
+5. 序数回归与CLMM
+
+6. 已有钓鱼易感性模型DRKM、AAM、PSM
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：TAM、PMT和HITLSF前瞻性地决定了PFM的变量类别和漏斗阶段的概念化，并被特征消融间接检验；但核心预测算法SVORCK/CLMM主要来自机器学习和统计文献，且许多部署决策（端点工具、弹窗测量、窗口式训练）来自工程与现场约束。因此理论对设计有实质影响，但不是全部技术选择的唯一来源。
+
+- 理论到设计翻译链：TAM关于有用性/易用性/错误成本的命题→用户对工具的主观感知变量→问卷题项；PMT关于威胁评估和先前经验的命题→威胁特征与威胁感知变量；HITLSF关于人口统计学、知识和经验调节警告效果的命题→人口学与先前网络经验变量；漏斗概念→将因变量从单一行为改为四阶段序数响应；CLMM的随机效应→在核函数中捕捉用户异质性。每一步都在现场实验中被转化为可比较的特征增减或模型性能差异。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：TAM：用户对工具有用性和易用性的感知决定依赖和采用。
+
+- mechanism_cn：感知有用性低或使用工具费力时，用户会忽略工具警告，从而提高易感性。
+
+- design_requirement_cn：PFM必须包含工具感知变量，包括工具有用性、所需努力和工具错误成本。
+
+- artifact_choice_cn：工具因素中的“工具感知”子类：tool usefulness、tool effort required、cost of tool error。
+
+- evaluated_contrast_cn：特征消融中移除工具感知类别 vs 完整PFM。
+
+- objective_result_cn：移除工具感知后AUC显著下降（SVORCK 0.808 vs 0.875，p<0.001；CLMM 0.770 vs 0.831，p<0.001）。
+
+##### evidence_pointers
+
+1. Sec 3.1.1
+
+2. Table 1
+
+3. Table 7
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：PMT：用户对威胁严重性和自身易感性的评估，以及先前威胁经验，影响保护行为。
+
+- mechanism_cn：高感知严重性、高威胁意识和先前经验改变用户对钓鱼威胁的风险判断，从而影响各漏斗阶段的决策。
+
+- design_requirement_cn：PFM必须纳入威胁特征（domain, type, severity, context）和威胁感知（awareness, perceived severity）。
+
+- artifact_choice_cn：威胁因素两个子类：威胁特征与威胁感知。
+
+- evaluated_contrast_cn：特征消融中分别移除威胁特征和威胁感知类别。
+
+- objective_result_cn：移除威胁特征后AUC显著下降；移除威胁感知后SVORCK显著下降（p=0.002），CLMM下降边缘不显著（p=0.051）。
+
+##### evidence_pointers
+
+1. Sec 3.1.4-3.1.6
+
+2. Table 1
+
+3. Table 7
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：HITLSF：人口统计学、知识与经验会调节警告对安全行为的效果。
+
+- mechanism_cn：年龄、性别、教育、对机构的信任、网站/领域熟悉度、过去损失影响用户对警告的注意和服从。
+
+- design_requirement_cn：PFM必须纳入人口学与先前网络经验变量。
+
+- artifact_choice_cn：用户因素两个子类：人口统计学（gender, age, education）和先前网络经验（trust in institution, familiarity with domain/site, past losses）。
+
+- evaluated_contrast_cn：特征消融中分别移除人口学和先前网络经验类别。
+
+- objective_result_cn：移除人口学后AUC显著下降；移除先前网络经验后AUC显著下降。
+
+##### evidence_pointers
+
+1. Sec 3.1.7-3.1.9
+
+2. Table 1
+
+3. Table 7
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：漏斗/转化漏斗概念：行为是一系列有损耗的连续决策，而不是单一二分结果。
+
+- mechanism_cn：用户从访问到浏览到视为合法再到交易，每一阶段都有流失；阶段间存在相关性，需要序数建模。
+
+- design_requirement_cn：因变量应建模为四阶段漏斗的五个序数端点，且阈值不应等距。
+
+- artifact_choice_cn：PFM的因变量为no visit/visit/browse/consider legitimate/intend to transact序数响应；使用flexible thresholds。
+
+- evaluated_contrast_cn：多阶段漏斗序数模型 vs 单行为/等距阈值的替代模型（SVOR, CLMM-Equi）。
+
+- objective_result_cn：PFM-SVORCK/CLMM的AUC显著高于SVOR和CLMM-Equi。
+
+##### evidence_pointers
+
+1. Sec 3
+
+2. Sec 3.2
+
+3. Table 5
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：CLMM/随机效应：同一用户的多次钓鱼交互存在个体内相关性，需要考虑用户异质性。
+
+- mechanism_cn：用户固有易感性差异导致不同用户面对相同威胁时做出不同决策。
+
+- design_requirement_cn：预测函数应包含用户随机效应以捕捉重复测量带来的依赖。
+
+- artifact_choice_cn：SVORCK的复合核中包含CLMM生成的漏斗概率向量K_Funnel。
+
+- evaluated_contrast_cn：PFM-SVORCK（含CLMM核） vs PFM-CLMM（不含复合核）以及SVM。
+
+- objective_result_cn：PFM-SVORCK的AUC高于PFM-CLMM四个百分点，且显著高于SVM。
+
+##### evidence_pointers
+
+1. Sec 3.2
+
+2. Table 5
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 实验室预试验/量表效度检验
+
+2. 12个月纵向现场预测实验
+
+3. 基准模型/方法对比
+
+4. 特征类别消融
+
+5. 威胁通道稳健性分析
+
+6. 特征集与特征选择对比
+
+7. 3个月纵向干预实验
+
+8. 随机/标准设置对照
+
+9. 成本收益分析
+
+10. 敏感性分析
+
+11. 设计稳健性检查（Hawthorne效应、警告数量分布）
+
+- why_these_evaluations_cn：设计科学制品不能只报告离线精度；需要证明PFM在真实组织中具有预测力，且预测结果能驱动有效干预，进一步把行为改善转化为经济价值。同时，需要通过随机对照、随机警告设置、特征消融和稳健性检验排除“新警告本身有效”“预测提升只来自某类变量”或“结果由不同警告数量驱动”等替代解释。
+
+- benchmark_and_contrast_chain_cn：先在同一CLMM框架下比较不同变量组合对应的模型（DRKM/AAM/HITLSF），再在同一PFM变量集上比较不同算法方法（BayesNet/SVM/SVOR/CLMM-Equi/LMM），从而把变量集与算法贡献分离；随后用特征消融证明六类特征的重要性，用特征集/RFE证明PFM变量优于综合所有竞争模型变量；再用通道分析检验跨场景稳健性；最后进入干预实验，比较预测驱动警告、随机警告和标准警告，并叠加成本收益敏感性分析。每一层benchmark都回答上一层遗留的问题。
+
+### claim_evidence_ledger
+
+#### 1. PFM预测效能高于竞争模型与基准方法。
+
+- claim_cn：PFM预测效能高于竞争模型与基准方法。
+
+- evidence_cn：Table 5 AUC：PFM-SVORCK 0.875、PFM-CLMM 0.831，显著高于HITLSF 0.642、DRKM 0.562、AAM 0.548等，也显著高于SVM 0.761、SVOR 0.753等（all p<0.001）。
+
+#### 2. PFM对高严重度威胁访问的预测有实际意义。
+
+- claim_cn：PFM对高严重度威胁访问的预测有实际意义。
+
+- evidence_cn：Figure 7显示PFM-SVORCK正确预测96%的高严重度访问，比最接近竞争者高10个百分点。
+
+#### 3. PFM六类特征均有贡献。
+
+- claim_cn：PFM六类特征均有贡献。
+
+- evidence_cn：Table 7消融显示移除任何一类特征都降低AUC，多数显著（p<0.001或p<0.01）；威胁感知在CLMM条件下不显著。
+
+#### 4. 感知/调查特征对预测不可或缺。
+
+- claim_cn：感知/调查特征对预测不可或缺。
+
+- evidence_cn：Table 8显示仅用10个观察特征AUC降到0.772，加入prior logs后升至0.821，仍显著低于完整PFM的0.875。
+
+#### 5. PFM跨威胁通道表现稳健。
+
+- claim_cn：PFM跨威胁通道表现稳健。
+
+- evidence_cn：Table 6显示PFM在搜索、工作邮件、社交媒体、个人邮件的AUC与总体差异较小，仅个人邮件显著低一点。
+
+#### 6. 基于预测的分级警告能降低用户与钓鱼交互。
+
+- claim_cn：基于预测的分级警告能降低用户与钓鱼交互。
+
+- evidence_cn：Figure 10与ANOVA/对比显示PFM设置在各漏斗阶段显著低于非PFM设置；实际交易率PFM-SVORCK 0.50% vs 标准2.64%。
+
+#### 7. PFM-SVORCK优于PFM-CLMM。
+
+- claim_cn：PFM-SVORCK优于PFM-CLMM。
+
+- evidence_cn：直接对比中SVORCK在visit、browse、consider legitimate、intend to transact均显著优于CLMM，实际交易不显著。
+
+#### 8. 成本收益显著且稳健。
+
+- claim_cn：成本收益显著且稳健。
+
+- evidence_cn：Table 9显示PFM-SVORCK每员工年毛收益$1,960，PFM-CLMM $1,454，SVM $68，HITLSF -$198，随机-$1,284；Figure 11敏感性分析在最差情形下PFM-SVORCK仍超过$1,000。
+
+#### 9. 干预效果不是因为警告数量差异。
+
+- claim_cn：干预效果不是因为警告数量差异。
+
+- evidence_cn：Figure 12显示六组警告数量无显著差异，PFM组的避免效果不是来自更多高严重度警告。
+
+#### 10. 问卷和弹窗未显著改变行为。
+
+- claim_cn：问卷和弹窗未显著改变行为。
+
+- evidence_cn：Figure 8显示季度调查前后无月度模式；pilot研究中弹窗组与对照组在访问、浏览、实际交易无显著差异（Figure 9）。
+
+- internal_validity_strategy_cn：采用滚动窗口的外样本预测避免过拟合；用配对t检验比较模型/方法差异；干预实验对参与者随机分配六种设置；加入随机警告设置以控制警告类型数量的影响；用pilot研究检验弹窗的Hawthorne效应；用特征消融、特征集和RFE排除变量偶然性；用敏感性分析检验成本参数假设。
+
+- external_validity_strategy_cn：选择两家不同行业、不同规模的组织；12个月长期数据覆盖时间变化；包含邮件、搜索、社交媒体等多渠道威胁；涵盖多种威胁领域和类型；后续3个月干预实验在同一人群重复验证；成本收益按10,000员工企业进行年度外推。
+
+- what_is_not_actually_tested_cn：未直接检验其他行业（如零售、医疗）或一般消费者群体的适用性；意图-行为差距只有部分缓解，15%-20%的意图交易未实际发生；自报的consider legitimate和intend to transact存在响应偏差；未把交易行为正式纳入漏斗端点；未在单个警告设计元素（文字、图标）层面比较；未检验长期习惯化；自动移除钓鱼内容与预测驱动警告的对比未做；比较模型的重新实现涉及改编，可能引入偏差。
+
+## 贡献闭环
+
+- technical_claim_cn：SVORCK+CLMM方法在预测用户易感性上显著优于SVM、SVOR、CLMM-Equi、BayesNet、LMM等基准方法，AUC与高严重度检测率更高。
+
+- artifact_claim_cn：PFM作为一个设计制品，其六类特征、四阶段漏斗和基于预测的分级警告共同带来预测和干预改进；特征消融证明每个成分都有实证贡献。
+
+- mechanism_claim_cn：建模整个钓鱼漏斗比只关注单一用户行为更好；CLMM随机效应和复合核能够parsimoniously捕捉用户异质性与跨阶段依赖；个性化警告通过与用户易感性匹配而减少警告疲劳，从而降低穿越率。
+
+- boundary_claim_cn：结论在组织员工、金融/法律服务行业、工作电脑情境、12/3个月周期、邮件/搜索/社交媒体渠道中成立；个人邮箱和社交媒体通道表现略低；意图交易与实际交易不完全一致。
+
+- reusable_design_knowledge_cn：预测用户易感性应把行为建模为多阶段漏斗，而不是单一二分结果；变量体系应同时纳入工具、威胁、用户三类因素；预测驱动的分级警告应依据易感性而非随机或统一警告；感知/调查数据虽然增加成本但对预测重要；模型应使用窗口式再训练以适应时间变化。
+
+- theoretical_contribution_cn：把TAM、PMT、HITLSF整合进一个可计算的预测设计制品中，扩展了这些理论在安全行为预测中的应用；将漏斗/序数/CLMM引入安全行为预测；但作者将其定位为“improvement”型贡献，而非提出全新理论。
+
+- how_discussion_closes_intro_gap_cn：讨论部分直接回应引言中的三个缺口：缺口1（无预测制品）被RQ1和RQ2的现场预测与干预结果闭合；缺口2（单行为建模）被多阶段漏斗预测的AUC提升和干预差异闭合；缺口3（工具与威胁因素被忽略）被特征消融和成本收益结果闭合。
+
+- overclaim_or_unsupported_leaps_cn：可能跳跃之处包括：把预测意图交易和实际交易的准确率直接等同于降低真实安全事件；成本收益中的每次避免访问/浏览/交易被赋予固定金额，可能放大收益；干预实验只有3个月，不能证明长期不疲劳；对“个性化”的解释未直接测量用户感知，而是通过预测与警告匹配推断；声称“强外部效度”主要基于两个组织；比较模型的重新实现和改编可能影响公平比较；随机设置劣于标准设置的结论被解读为“没有对齐易感性的警告无益”，但未直接检验警告本身的可厌性。
+
+## 句级写作动作图谱
+
+### 1. Abstract paragraph 1, sentence 1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：钓鱼是组织面临的重大安全问题。
+
+- rhetorical_function_cn：开篇将研究置于高关注度安全议题中。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续强调用户和工具问题提供背景。
+
+- evidence_pointer：Abstract S1
+
+### 2. Abstract paragraph 1, sentence 2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：针对员工的威胁可导致严重安全事件，针对公众的威胁会损害信任、满意度和品牌。
+
+- rhetorical_function_cn：说明问题不只是技术，还有组织与商业后果。
+
+- depends_on_cn：承接钓鱼普遍性
+
+- sets_up_cn：为预测用户易感性的必要性提供理由。
+
+- evidence_pointer：Abstract S2
+
+### 3. Abstract paragraph 1, sentence 3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：问题的根源是互联网用户即使使用反钓鱼工具也无法识别攻击。
+
+- rhetorical_function_cn：指出现象级失败。
+
+- depends_on_cn：前两句的严重性
+
+- sets_up_cn：引出需要不同于传统工具预测思路的方案。
+
+- evidence_pointer：Abstract S3
+
+### 4. Abstract paragraph 1, sentence 4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出PFM，一个预测用户对钓鱼网站易感性的设计制品。
+
+- rhetorical_function_cn：宣布本文目标。
+
+- depends_on_cn：前面的问题
+
+- sets_up_cn：定义制品名称与定位。
+
+- evidence_pointer：Abstract S4
+
+### 5. Abstract paragraph 1, sentence 5
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：PFM纳入用户、威胁和工具相关因素，预测访问、浏览、视为合法和交易意图四个阶段。
+
+- rhetorical_function_cn：概括制品的核心设计。
+
+- depends_on_cn：第四句
+
+- sets_up_cn：为方法选择和评价指标做铺垫。
+
+- evidence_pointer：Abstract S5
+
+### 6. Abstract paragraph 1, sentence 6
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用带自定义核的支持向量序数回归，该核内含累积链接混合模型，以表示跨漏斗阶段的用户决策。
+
+- rhetorical_function_cn：说明预测方法及其合理性。
+
+- depends_on_cn：第五句的多阶段设计
+
+- sets_up_cn：为后面的算法对比提供主张。
+
+- evidence_pointer：Abstract S6
+
+### 7. Abstract paragraph 1, sentence 7
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 7
+
+- move_code：RESULT
+
+- paraphrase_cn：在两家组织为期12个月的纵向现场实验中，涉及1,278名员工和49,373次交互。
+
+- rhetorical_function_cn：给出研究的规模和评价背景。
+
+- depends_on_cn：第六句的方法
+
+- sets_up_cn：为后面的AUC和检测率结果提供证据基础。
+
+- evidence_pointer：Abstract S7
+
+### 8. Abstract paragraph 1, sentence 8
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 8
+
+- move_code：RESULT
+
+- paraphrase_cn：PFM的AUC比竞争模型/方法高8%-52%，并能96%正确预测对高严重度威胁的访问，比最接近者高10%。
+
+- rhetorical_function_cn：展示核心定量结果。
+
+- depends_on_cn：第七句的样本与实验
+
+- sets_up_cn：支撑后续实践意义与贡献。
+
+- evidence_pointer：Abstract S8
+
+### 9. Abstract paragraph 1, sentence 9
+
+- order：9
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 9
+
+- move_code：RESULT
+
+- paraphrase_cn：后续3个月现场研究显示，使用PFM的员工显著比比较模型和基线警告更少与钓鱼威胁互动；成本收益分析显示每员工减少近1,900美元。
+
+- rhetorical_function_cn：把预测优势扩展到干预效果和经济收益。
+
+- depends_on_cn：第八句的预测结果
+
+- sets_up_cn：形成预测—干预—成本三层次证据链。
+
+- evidence_pointer：Abstract S9
+
+### 10. Abstract paragraph 1, sentence 10
+
+- order：10
+
+- section：Abstract
+
+- locator：Abstract paragraph 1, sentence 10
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结果表明强外部效度，并有三条实践含义：预测易感性作为实时保护策略有效；建模整个钓鱼过程优于单一行动；工具和威胁因素影响很大。
+
+- rhetorical_function_cn：把结果升华为一般知识贡献。
+
+- depends_on_cn：前九句的证据
+
+- sets_up_cn：给出读者应带回的核心信息。
+
+- evidence_pointer：Abstract S10
+
+### 11. Introduction P1 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：钓鱼是利用人的漏洞而非软件漏洞的一种语义攻击，是最普遍的网络犯罪形式之一，影响超过4000万用户。
+
+- rhetorical_function_cn：建立问题普遍性和严重性。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续论述用户易感性和组织损失提供背景。
+
+- evidence_pointer：Introduction P1 S1
+
+### 12. Introduction P1 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P1 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：钓鱼是IT管理者最关心的安全问题之一，因为员工被骗和客户品牌受损，且一万员工公司年均花费约370万美元。
+
+- rhetorical_function_cn：说明问题的组织/财务后果。
+
+- depends_on_cn：第一句的普遍性
+
+- sets_up_cn：为后续提出预测和干预的经济价值做铺垫。
+
+- evidence_pointer：Introduction P1 S2
+
+### 13. Introduction P2 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多项研究表明用户在区分合法与钓鱼网站或避免交易方面表现很差。
+
+- rhetorical_function_cn：汇总已有证据。
+
+- depends_on_cn：第一段的问题严重性
+
+- sets_up_cn：为“现有工具不足”提供行为层面的证据。
+
+- evidence_pointer：Introduction P2 S1
+
+### 14. Introduction P2 S2
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：用户有40%-80%的时间不能正确识别钓鱼网站，超过70%的用户愿意与钓鱼网站交易。
+
+- rhetorical_function_cn：量化用户表现差的程度。
+
+- depends_on_cn：上一句的定性结论
+
+- sets_up_cn：说明单靠用户识别能力不足，需要替代方案。
+
+- evidence_pointer：Introduction P2 S2
+
+### 15. Introduction P3 S1
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：反钓鱼工具是一个潜在解决方案，但即使用这些工具，用户仍常解释掉或忽略警告，因此钓鱼成功率仍然很高。
+
+- rhetorical_function_cn：指出现有工具的限制。
+
+- depends_on_cn：第二段的用户失败
+
+- sets_up_cn：为新方法提供切入点。
+
+- evidence_pointer：Introduction P3 S1
+
+### 16. Introduction P3 S2
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：失败的一个原因可能是用户不认为反钓鱼工具警告是针对自己的。
+
+- rhetorical_function_cn：给出一个解释性机制。
+
+- depends_on_cn：上一句的工具失败
+
+- sets_up_cn：引出个性化预测和干预。
+
+- evidence_pointer：Introduction P3 S2
+
+### 17. Introduction P4 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：本研究采取不同方法：不是预测链接或网站是否为钓鱼，而是预测用户的钓鱼易感性。
+
+- rhetorical_function_cn：明确与过去研究的分界。
+
+- depends_on_cn：前面工具失败的论述
+
+- sets_up_cn：给出本文的研究对象。
+
+- evidence_pointer：Introduction P4 S1
+
+### 18. Introduction P4 S2
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P4 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：定义易感性为用户与钓鱼攻击互动的程度，并列出三个潜在用途：个性化警告、个性化访问控制、随时间适应变化。
+
+- rhetorical_function_cn：把一个概念操作化并指出其价值。
+
+- depends_on_cn：上一句的新方向
+
+- sets_up_cn：为RQ1和RQ2的提出做铺垫。
+
+- evidence_pointer：Introduction P4 S2
+
+### 19. Introduction P5 S1
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究目标是开发预测用户易感性的设计制品，采用设计科学范式。
+
+- rhetorical_function_cn：将问题正式化为研究目标。
+
+- depends_on_cn：第四段的新方向
+
+- sets_up_cn：引入PFM制品。
+
+- evidence_pointer：Introduction P5 S1
+
+### 20. Introduction P5 S2
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P5 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：PFM强调工具、威胁、用户因素在四阶段漏斗决策中的作用，并用带自定义核的支持向量序数回归估计。
+
+- rhetorical_function_cn：概括制品核心。
+
+- depends_on_cn：研究目标
+
+- sets_up_cn：为后文设计和评价设置主线。
+
+- evidence_pointer：Introduction P5 S2
+
+### 21. Introduction P6 S1
+
+- order：21
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出两个研究问题：PFM能否在组织中随时间预测易感性；预测驱动的干预能否改善回避结果。
+
+- rhetorical_function_cn：给出全文的具体研究问题。
+
+- depends_on_cn：第五段的目标
+
+- sets_up_cn：决定两个实验的结构。
+
+- evidence_pointer：Introduction P6 S1
+
+### 22. Introduction P7 S1
+
+- order：22
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为回答这两个问题，进行了两个纵向现场实验：12个月预测实验和3个月干预实验。
+
+- rhetorical_function_cn：预告研究设计。
+
+- depends_on_cn：RQ1/RQ2
+
+- sets_up_cn：为第5、6节提供路标。
+
+- evidence_pointer：Introduction P7 S1
+
+### 23. Introduction P8 S1
+
+- order：23
+
+- section：Introduction
+
+- locator：Introduction P8 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：从设计科学角度看，PFM是新颖方案，属于基于Gregor和Hevner指南的“改进”型知识贡献。
+
+- rhetorical_function_cn：提前定位贡献类型。
+
+- depends_on_cn：文末结论
+
+- sets_up_cn：为讨论部分的贡献声明做铺垫。
+
+- evidence_pointer：Introduction P8 S1
+
+### 24. Introduction P9 S1
+
+- order：24
+
+- section：Introduction
+
+- locator：Introduction P9 S1
+
+- move_code：GAP
+
+- paraphrase_cn：指出三个研究缺口：没有预测易感性的制品；已有模型只关注单一决策；工具与威胁因素重视不足。
+
+- rhetorical_function_cn：明确本文要填补的空缺。
+
+- depends_on_cn：前面的所有背景
+
+- sets_up_cn：为讨论部分的结果回扣提供清单。
+
+- evidence_pointer：Introduction P9 S1
+
+### 25. Section 2 P1 S1
+
+- order：25
+
+- section：Related Work
+
+- locator：Section 2 P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多数反钓鱼研究聚焦于基准测试检测工具和发展检测能力，但现在注意力转向用户易感性。
+
+- rhetorical_function_cn：交代领域发展脉络。
+
+- depends_on_cn：引言中的工具限制
+
+- sets_up_cn：引出已有易感性模型。
+
+- evidence_pointer：Section 2 P1
+
+### 26. Section 2 P2 S1
+
+- order：26
+
+- section：Related Work
+
+- locator：Section 2 P2 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：HITLSF考虑工具相关因素和用户相关因素对访问、浏览和交易可能性的影响。
+
+- rhetorical_function_cn：引入一个主要知识基础。
+
+- depends_on_cn：上一句的用户易感性
+
+- sets_up_cn：为PFM变量选择提供依据。
+
+- evidence_pointer：Section 2 P2
+
+### 27. Section 2 P3 S1
+
+- order：27
+
+- section：Related Work
+
+- locator：Section 2 P3 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：AAM、PSF、DRKM、PSM等模型分别提出不同因素，但PFM集成这些元素并引入新变量、多个决策阶段和考虑异质性的简约估计。
+
+- rhetorical_function_cn：总结已有模型并指出PFM的增量。
+
+- depends_on_cn：上一段HITLSF
+
+- sets_up_cn：为第3节PFM做铺垫。
+
+- evidence_pointer：Section 2 P3
+
+### 28. Section 3 P1 S1
+
+- order：28
+
+- section：PFM Model
+
+- locator：Section 3 P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：漏斗长期用于表示完成目标所需的一系列相互关联的决策，如营销和Web分析中的转化漏斗。
+
+- rhetorical_function_cn：引入漏斗概念作为建模隐喻。
+
+- depends_on_cn：前面关于多阶段需求
+
+- sets_up_cn：推导出钓鱼漏斗。
+
+- evidence_pointer：Section 3 P1
+
+### 29. Section 3 P2 S1
+
+- order：29
+
+- section：PFM Model
+
+- locator：Section 3 P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：用户无论通过邮件、搜索还是社交媒体遇到钓鱼网站，都要面对四个越来越危险的决策：访问、浏览、视为合法、交易。
+
+- rhetorical_function_cn：将漏斗概念具体化为钓鱼过程。
+
+- depends_on_cn：漏斗概念
+
+- sets_up_cn：定义因变量结构。
+
+- evidence_pointer：Section 3 P2
+
+### 30. Section 3 P2 S2
+
+- order：30
+
+- section：PFM Model
+
+- locator：Section 3 P2 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：PFM涵盖六类影响易感性决策的因素，并以用户最终漏斗阶段作为序数因变量。
+
+- rhetorical_function_cn：给出制品总体架构。
+
+- depends_on_cn：四阶段漏斗
+
+- sets_up_cn：为下文因素详述和预测方法做指引。
+
+- evidence_pointer：Section 3 P2; Figure 1
+
+### 31. Section 3.1 intro S1
+
+- order：31
+
+- section：PFM Model
+
+- locator：Section 3.1 intro S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：由于单一理论框架无法涵盖工具、威胁、用户三类因素，本文从TAM、PMT和HITL文献中共同取材。
+
+- rhetorical_function_cn：说明多理论整合的必要性。
+
+- depends_on_cn：PFM六类因素
+
+- sets_up_cn：为各变量引用具体理论。
+
+- evidence_pointer：Section 3.1 first paragraph
+
+### 32. Section 3.1.1 TAM application
+
+- order：32
+
+- section：PFM Model
+
+- locator：Section 3.1.1 TAM application
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：TAM认为工具采用和依赖取决于有用性和易用性感知；因此PFM需要捕捉有用性、所需努力和工具错误成本。
+
+- rhetorical_function_cn：将TAM命题转成变量要求。
+
+- depends_on_cn：多理论整合声明
+
+- sets_up_cn：支持工具感知变量。
+
+- evidence_pointer：Section 3.1.1; Table 1
+
+### 33. Section 3.1.4 PMT application
+
+- order：33
+
+- section：PFM Model
+
+- locator：Section 3.1.4 PMT application
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：PMT认为威胁评估和应对评估受环境和先经验影响；因此PFM纳入威胁严重性、威胁感知、领域、情境和用户意识。
+
+- rhetorical_function_cn：将PMT转成威胁变量要求。
+
+- depends_on_cn：多理论整合声明
+
+- sets_up_cn：支持威胁特征与威胁感知变量。
+
+- evidence_pointer：Section 3.1.4; Table 1
+
+### 34. Section 3.1.7 HITL application
+
+- order：34
+
+- section：PFM Model
+
+- locator：Section 3.1.7 HITL application
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：HITLSF认为人口统计、知识和经验会调节警告对安全行为的效果；因此PFM纳入年龄、性别、教育、信任、熟悉度和过去损失。
+
+- rhetorical_function_cn：将HITLSF转成用户变量要求。
+
+- depends_on_cn：多理论整合声明
+
+- sets_up_cn：支持人口学和先前网络经验变量。
+
+- evidence_pointer：Section 3.1.7; Table 1
+
+### 35. Section 3.2 P1 S1
+
+- order：35
+
+- section：PFM Model
+
+- locator：Section 3.2 P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：四个二元漏斗阶段可各自作为分类问题，但跨阶段依赖使得单个序数响应更优。
+
+- rhetorical_function_cn：解释为何选择序数回归。
+
+- depends_on_cn：漏斗因变量
+
+- sets_up_cn：为SVORCK方法提供理由。
+
+- evidence_pointer：Section 3.2 first paragraph
+
+### 36. Section 3.2 P2-P3
+
+- order：36
+
+- section：PFM Model
+
+- locator：Section 3.2 P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出SVORCK：复合核K_PFM由线性核K_UTT（用户/工具/威胁变量）和漏斗核K_Funnel（CLMM产生的阶段概率向量）相加构成。
+
+- rhetorical_function_cn：描述算法设计。
+
+- depends_on_cn：序数回归选择
+
+- sets_up_cn：为实验中的PFM-SVORCK与PFM-CLMM对比做铺垫。
+
+- evidence_pointer：Section 3.2; Eqs. (1)-(6)
+
+### 37. Section 4 P1 S1
+
+- order：37
+
+- section：Evaluation
+
+- locator：Section 4 P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为回答研究问题，进行了两个纵向现场实验，表2总结了研究问题、实验类型、样本和因变量。
+
+- rhetorical_function_cn：提供整体研究设计的路标。
+
+- depends_on_cn：引言中的RQ1/RQ2
+
+- sets_up_cn：引出第5和第6节。
+
+- evidence_pointer：Section 4; Table 2
+
+### 38. Section 5 opening P1 S1
+
+- order：38
+
+- section：Experiment 1
+
+- locator：Section 5 opening P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用纵向设计是为了考虑用户对网络经历、威胁遭遇和工具交互的感知变化。
+
+- rhetorical_function_cn：说明为何用12个月纵向现场实验。
+
+- depends_on_cn：RQ1的时间维度
+
+- sets_up_cn：为窗口式训练/测试做铺垫。
+
+- evidence_pointer：Section 5 first paragraph
+
+### 39. Section 5.1 paragraph on potential phish operationalization
+
+- order：39
+
+- section：Experiment 1
+
+- locator：Section 5.1 paragraph on potential phish operationalization
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实时现场需要机制把出现在邮件、搜索结果、网页链接中的URL识别为潜在钓鱼，并记录漏斗阶段。
+
+- rhetorical_function_cn：说明现场数据收集的操作化约束。
+
+- depends_on_cn：纵向实验设计
+
+- sets_up_cn：为49,373次交互的数据集提供可信性。
+
+- evidence_pointer：Section 5.1
+
+### 40. Section 5.1 windowed approach
+
+- order：40
+
+- section：Experiment 1
+
+- locator：Section 5.1 windowed approach
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：使用滚动窗口：前三个月训练，后三个月测试；每个窗口前用季度调查更新感知变量。
+
+- rhetorical_function_cn：规定预测模型的无外样本评价方式。
+
+- depends_on_cn：纵向设计
+
+- sets_up_cn：使模型性能可比较且接近实际部署。
+
+- evidence_pointer：Section 5.1; Figure 3
+
+### 41. Section 5.2 P1 S1
+
+- order：41
+
+- section：Experiment 1
+
+- locator：Section 5.2 P1 S1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：第一项分析将PFM与DRKM、AAM、HITLSF三个模型比较；三个模型都用CLMM与灵活阈值训练，便于公平比较。
+
+- rhetorical_function_cn：建立对照模型。
+
+- depends_on_cn：PFM变量体系
+
+- sets_up_cn：用于检验变量集贡献。
+
+- evidence_pointer：Section 5.2 first paragraph
+
+### 42. Section 5.2 P2 S1
+
+- order：42
+
+- section：Experiment 1
+
+- locator：Section 5.2 P2 S1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：第二项分析用相同PFM变量比较BayesNet、SVM、SVOR、CLMM-Equi和LMM等行为预测基准方法。
+
+- rhetorical_function_cn：建立算法对照。
+
+- depends_on_cn：PFM变量集
+
+- sets_up_cn：用于检验算法贡献。
+
+- evidence_pointer：Section 5.2 second paragraph
+
+### 43. Section 5.2 P3 S1
+
+- order：43
+
+- section：Experiment 1
+
+- locator：Section 5.2 P3 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于漏斗端点是不平衡多分类问题，使用多分类ROC和AUC评估模型。
+
+- rhetorical_function_cn：说明指标选择的合理性。
+
+- depends_on_cn：序数不平衡因变量
+
+- sets_up_cn：为Table 5结果提供度量基础。
+
+- evidence_pointer：Section 5.2 third paragraph
+
+### 44. Section 5.2 results P1
+
+- order：44
+
+- section：Experiment 1
+
+- locator：Section 5.2 results P1
+
+- move_code：RESULT
+
+- paraphrase_cn：PFM-SVORCK和PFM-CLMM的AUC显著高于三个比较模型22%-35%，也高于其他方法8%-25%。
+
+- rhetorical_function_cn：报告核心预测结果。
+
+- depends_on_cn：前面两种对照
+
+- sets_up_cn：为高严重度分析和特征消融提供基础。
+
+- evidence_pointer：Section 5.2; Table 5; Figure 4
+
+### 45. Section 5.2 first paragraph after Table 5
+
+- order：45
+
+- section：Experiment 1
+
+- locator：Section 5.2 first paragraph after Table 5
+
+- move_code：RESULT
+
+- paraphrase_cn：在获得90%真正例时，PFM-SVORCK的假正率约33%，PFM-CLMM约40%，最佳比较模型/方法约70%。
+
+- rhetorical_function_cn：用ROC曲线具体说明提升幅度。
+
+- depends_on_cn：AUC表格结果
+
+- sets_up_cn：强调实用意义。
+
+- evidence_pointer：Section 5.2; Figure 4
+
+### 46. Section 5.2.1 performance on high severity
+
+- order：46
+
+- section：Experiment 1
+
+- locator：Section 5.2.1 performance on high severity
+
+- move_code：RESULT
+
+- paraphrase_cn：PFM-SVORCK正确预测96%高严重度威胁访问，比最接近竞争者多170次，高10个百分点。
+
+- rhetorical_function_cn：展示在最危险威胁上的实际价值。
+
+- depends_on_cn：前述AUC结果
+
+- sets_up_cn：为干预实验的必要性做铺垫。
+
+- evidence_pointer：Section 5.2.1; Figure 7
+
+### 47. Section 5.2.2 feature impact P1
+
+- order：47
+
+- section：Experiment 1
+
+- locator：Section 5.2.2 feature impact P1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：特征消融显示移除工具性能、工具感知、威胁特征、先前经验和人口学都会显著降低AUC，威胁感知在SVORCK中显著、CLMM中不显著。
+
+- rhetorical_function_cn：证明每类特征的实证贡献。
+
+- depends_on_cn：PFM六类变量
+
+- sets_up_cn：支持把工具和威胁因素纳入模型。
+
+- evidence_pointer：Section 5.2.2; Table 7
+
+### 48. Section 5.2.2 feature set comparison
+
+- order：48
+
+- section：Experiment 1
+
+- locator：Section 5.2.2 feature set comparison
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：仅使用观察特征会大幅降低AUC，加入先前日志只能部分补偿；加入所有竞争模型调查变量也无提升。
+
+- rhetorical_function_cn：证明感知/调查特征的重要性和PFM变量集的简洁性。
+
+- depends_on_cn：表7消融
+
+- sets_up_cn：为未来特征选择与问卷成本讨论提供依据。
+
+- evidence_pointer：Section 5.2.2; Table 8
+
+### 49. Section 5.2.3 robustness S1
+
+- order：49
+
+- section：Experiment 1
+
+- locator：Section 5.2.3 robustness S1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：季度调查和弹窗可能改变行为，但月度漏斗穿越没有显示调查前后模式；pilot研究也没有发现弹窗组与控制组在可观察阶段上的差异。
+
+- rhetorical_function_cn：排除Hawthorne效应对结果的威胁。
+
+- depends_on_cn：实验设计中的调查和弹窗
+
+- sets_up_cn：增强因果/描述性结论的可信度。
+
+- evidence_pointer：Section 5.2.3; Figures 8-9
+
+### 50. Section 6 opening S1
+
+- order：50
+
+- section：Experiment 2
+
+- locator：Section 6 opening S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：第二个研究问题关注预测驱动的干预能否改善回避结果，因此进行3个月纵向多变量现场实验。
+
+- rhetorical_function_cn：从预测实验过渡到干预实验。
+
+- depends_on_cn：Experiment 1结果
+
+- sets_up_cn：引出六个设置和分级警告设计。
+
+- evidence_pointer：Section 6 first paragraph
+
+### 51. Section 6.1 design paragraph
+
+- order：51
+
+- section：Experiment 2
+
+- locator：Section 6.1 design paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：参与者被随机分配到六个设置：PFM-SVORCK、PFM-CLMM、SVM、HITLSF、随机和标准，前四个根据预测易感性显示默认/中/高三种警告。
+
+- rhetorical_function_cn：描述干预实验的核心设计。
+
+- depends_on_cn：RQ2
+
+- sets_up_cn：为结果比较提供结构。
+
+- evidence_pointer：Section 6.1
+
+### 52. Section 6.1 random setting justification
+
+- order：52
+
+- section：Experiment 2
+
+- locator：Section 6.1 random setting justification
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：加入随机设置是为了控制新警告类型本身对行为的影响，因为随机组看到的警告数量比例与12个月观察到的漏斗分布一致。
+
+- rhetorical_function_cn：解释随机设置的作用。
+
+- depends_on_cn：六个设置设计
+
+- sets_up_cn：用于排除“只是警告更显眼”的替代解释。
+
+- evidence_pointer：Section 6.1
+
+### 53. Section 6.2 results first paragraph
+
+- order：53
+
+- section：Experiment 2
+
+- locator：Section 6.2 results first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：PFM设置下用户较少穿越漏斗各阶段；PFM在高层级阶段比SVM、HITLSF和标准设置好7-20个百分点，且PFM-SVORCK的实际交易率只有标准的三分之一到六分之一。
+
+- rhetorical_function_cn：报告干预实验的主要结果。
+
+- depends_on_cn：六个设置对比
+
+- sets_up_cn：为统计检验和成本收益做铺垫。
+
+- evidence_pointer：Section 6.2; Figure 10
+
+### 54. Section 6.2 ANOVA paragraph
+
+- order：54
+
+- section：Experiment 2
+
+- locator：Section 6.2 ANOVA paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：ANOVA显示六个设置在每个漏斗阶段显著不同；Bonferroni对比显示PFM平均显著优于非PFM设置，且PFM-SVORCK在多数阶段优于PFM-CLMM。
+
+- rhetorical_function_cn：用统计检验支持结果差异。
+
+- depends_on_cn：图10的描述性差异
+
+- sets_up_cn：证明干预效果不是偶然。
+
+- evidence_pointer：Section 6.2
+
+### 55. Section 6.2.1 cost-benefit first paragraph
+
+- order：55
+
+- section：Experiment 2
+
+- locator：Section 6.2.1 cost-benefit first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：基于FinOrg的估计，避免一次访问节省约70美元、浏览节省约105美元、避免一次交易节省约1000美元；不必要的严重警告每次成本约50美元。
+
+- rhetorical_function_cn：引入经济参数。
+
+- depends_on_cn：干预实验行为结果
+
+- sets_up_cn：为成本收益表提供计算基础。
+
+- evidence_pointer：Section 6.2.1
+
+### 56. Section 6.2.1 Table 9 discussion
+
+- order：56
+
+- section：Experiment 2
+
+- locator：Section 6.2.1 Table 9 discussion
+
+- move_code：RESULT
+
+- paraphrase_cn：PFM-SVORCK每员工年毛收益约1,960美元，PFM-CLMM约1,454美元，SVM约68美元，HITLSF约-198美元，随机约-1,284美元。
+
+- rhetorical_function_cn：用货币化指标比较各设置。
+
+- depends_on_cn：成本参数
+
+- sets_up_cn：为敏感性分析提供基线。
+
+- evidence_pointer：Section 6.2.1; Table 9
+
+### 57. Section 6.2.1 sensitivity analysis
+
+- order：57
+
+- section：Experiment 2
+
+- locator：Section 6.2.1 sensitivity analysis
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：即使降低收益40%并同时提高成本40%，PFM-SVORCK仍保持每员工超过1,000美元的年收益，而SVM和HITLSF产生亏损。
+
+- rhetorical_function_cn：检验成本收益结论对假设的敏感性。
+
+- depends_on_cn：表9的收益估计
+
+- sets_up_cn：增强经济主张的稳健性。
+
+- evidence_pointer：Section 6.2.1; Figure 11
+
+### 58. Section 6.2.2 warning counts robustness
+
+- order：58
+
+- section：Experiment 2
+
+- locator：Section 6.2.2 warning counts robustness
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：六个设置显示的警告总数没有显著差异，且PFM组接受的高严重度警告比例并不是最高的，因此行为改善不是警告数量造成。
+
+- rhetorical_function_cn：排除警告频率的替代解释。
+
+- depends_on_cn：干预实验行为结果
+
+- sets_up_cn：强化个性化匹配的机制解释。
+
+- evidence_pointer：Section 6.2.2; Figure 12
+
+### 59. Section 7.1 first paragraph
+
+- order：59
+
+- section：Discussion
+
+- locator：Section 7.1 first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：实验证明了PFM的效用：RQ1上AUC显著更高且高严重度预测率96%；RQ2上预测驱动的警告显著降低穿越率，实际交易率降低一半到三分之二。
+
+- rhetorical_function_cn：汇总两个研究问题的答案。
+
+- depends_on_cn：实验1和实验2结果
+
+- sets_up_cn：为贡献声明提供依据。
+
+- evidence_pointer：Section 7.1; Table 10
+
+### 60. Section 7.2 contribution paragraph
+
+- order：60
+
+- section：Discussion
+
+- locator：Section 7.2 contribution paragraph
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文贡献有三：开发PFM设计制品；用两个大规模纵向现场实验验证；对在线安全领域带来实践影响。
+
+- rhetorical_function_cn：正式声明贡献。
+
+- depends_on_cn：前文全部证据
+
+- sets_up_cn：与引言缺口对照。
+
+- evidence_pointer：Section 7.2
+
+### 61. Section 7.2 why not auto remove paragraph
+
+- order：61
+
+- section：Discussion
+
+- locator：Section 7.2 why not auto remove paragraph
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：自动移除可疑邮件并非总是可行，因为钓鱼判断高度依赖上下文，某些情况下用户可能比系统更好地判断；完全移除会导致用户转向限制较少的工具。
+
+- rhetorical_function_cn：限定预测驱动警告的适用范围。
+
+- depends_on_cn：PFM的有效性
+
+- sets_up_cn：为未来工作关于选择性阻断做铺垫。
+
+- evidence_pointer：Section 7.2
+
+### 62. Section 7.3 limitations first paragraph
+
+- order：62
+
+- section：Discussion
+
+- locator：Section 7.3 limitations first paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：当前漏斗止于意图交易，意图-行为差距可能带来不可预测表现；未来可把实际交易行为纳入模型。
+
+- rhetorical_function_cn：承认核心概念限制。
+
+- depends_on_cn：PFM因变量结构
+
+- sets_up_cn：为未来研究方向提供起点。
+
+- evidence_pointer：Section 7.3
+
+### 63. Section 7.3 generalizability paragraph
+
+- order：63
+
+- section：Discussion
+
+- locator：Section 7.3 generalizability paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：PFM只在金融和法律行业员工中测试，未来需检验其他情境和人群；调查和弹窗可能影响行为，尽管稳健性分析显示影响有限。
+
+- rhetorical_function_cn：界定外部效度边界。
+
+- depends_on_cn：两个现场实验
+
+- sets_up_cn：为后续研究设定议程。
+
+- evidence_pointer：Section 7.3
+
+## 写作技术
+
+- gap_construction_cn：先给出钓鱼的规模和经济损失，再给出用户识别失败的行为证据，再指出反钓鱼工具即使存在仍因用户忽略警告而失效，最后在“预测网站是否钓鱼”和“预测用户会不会上当”之间制造空白，并明确列出三个研究缺口。
+
+- signposting_cn：摘要末尾给出三条实践含义；引言提出RQ1/RQ2；第4节用Table2预告两个实验；每个实验的Results都有子标题，讨论部分用Table10汇总。
+
+- transition_logic_cn：从Related Work到PFM用“已有模型是描述性的，需要预测制品”过渡；从Experiment 1到Experiment 2用“预测准确性是否可转化为下游价值”的RQ2桥梁；每个分析小节结尾都指出还缺什么。
+
+- claim_evidence_rhythm_cn：每个大主张紧跟表格/图，再补统计检验。例如AUC主张后是Table5和图4；干预效果后是Figure10和ANOVA；成本收益后是Table9和Figure11；每个feature claim后是对应消融表。
+
+- benchmark_narrative_cn：将比较对象分两层：模型层（相同算法不同变量集）和方法层（相同变量集不同算法），分别用CLMM和PFM变量保证公平；再用特征消融、特征集/RFE进一步支持变量集优势；随后把benchmark从预测层推进到干预层和成本层。
+
+- theory_return_cn：虽然不以检验理论假设为主，但讨论把结果回扣到TAM/PMT/HITLSF：工具感知、威胁感知、用户经验/人口特征对预测和干预都有可测影响，由此把实证发现与理论变量体系连接。
+
+- contribution_positioning_cn：用Gregor和Hevner的‘improvement’定位制品，避免宣称理论突破；同时呼应Shmueli和Koppius的预测分析研究指南，把贡献放在预测分析学和安全分析学这一实践性议题上。
+
+- novelty_protection_cn：通过连续三层的对比证据（模型/方法、特征、干预/成本）防止贡献被解读为一次性性能结果；用随机和标准设置排除新警告本身有效的解释；用敏感性分析证明经济收益不是由脆弱假设驱动；用窗口式预测证明随时间适应。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用统计和成本数据建立问题严重性，并简引已有用户失败证据。
+
+- research_job_cn：收集行业报告、学术基准和损失估计。
+
+- required_evidence_cn：有可靠来源的问题规模和可复述的行为失败证据。
+
+- transition_to_next_cn：从‘现有检测工具仍有失败’过渡到‘需要预测用户行为’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：定义核心概念（易感性），列出三个研究缺口并给出RQ。
+
+- research_job_cn：检索已有预测制品缺口并明确概念边界。
+
+- required_evidence_cn：清晰的缺口论证和可操作的研究问题。
+
+- transition_to_next_cn：提出‘设计一个预测制品’的目标。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入理论/知识基础，说明每个理论如何转成变量要求。
+
+- research_job_cn：选择适用的理论并找到对应变量。
+
+- required_evidence_cn：每个理论命题对应至少一个可测变量。
+
+- transition_to_next_cn：这些变量组成制品输入，需进一步设计预测方法。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述制品架构和算法，给出形式化模型。
+
+- research_job_cn：实现可运行的预测模型。
+
+- required_evidence_cn：模型可计算、可复现，且与理论设计一致。
+
+- transition_to_next_cn：现在需要现场数据评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告长期现场预测实验：样本、操作化、比较对象、主要结果。
+
+- research_job_cn：获取真实组织数据，实施窗口式训练/测试和对比模型。
+
+- required_evidence_cn：AUC/检测率等指标和统计显著性。
+
+- transition_to_next_cn：但预测准不等于干预有效。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计干预实验，比较预测驱动警告与随机/标准警告。
+
+- research_job_cn：随机分配参与者并记录漏斗行为。
+
+- required_evidence_cn：行为差异和ANOVA/对比检验。
+
+- transition_to_next_cn：还需把行为变化转成经济价值。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：做成本收益分析和敏感性分析。
+
+- research_job_cn：收集成本参数并测试假设稳健性。
+
+- required_evidence_cn：每用户/员工收益和敏感性结果。
+
+- transition_to_next_cn：因此可以提出贡献和边界。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：在讨论中把结果升华为设计知识，同时列出局限。
+
+- research_job_cn：对照引言缺口逐条闭合，识别未测问题。
+
+- required_evidence_cn：贡献主张与前文证据一一对应。
+
+- transition_to_next_cn：提供未来研究方向。
+
+### most_transferable_moves_cn
+
+1. 将问题从技术检测转向用户行为预测，制造新研究问题
+
+2. 用两层benchmark分离变量集与算法的贡献
+
+3. 用RQ连接两个现场实验，形成预测→干预→成本证据链
+
+4. 用随机设置和警告数量检验排除替代解释
+
+5. 用敏感性分析保护经济收益主张
+
+6. 用‘improvement’定位贡献避免过度主张
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 12个月两家企业现场部署和49,373次交互数据
+
+2. 企业内部端点安全工具和实时威胁检测机制
+
+3. 季度调查和会话后弹窗的纵向数据收集
+
+4. 3个月干预实验中的随机分配和分级警告实现
+
+5. 成本参数的获取（HelpDesk时间、补救成本、生产率损失）
+
+6. pilot研究和人群抽样
+
+### what_not_to_copy_superficially_cn
+
+1. 只使用‘漏斗’‘个性化’等标签而无真实预测模型和多阶段数据
+
+2. 没有滚动窗口或保留样本就报告AUC
+
+3. 没有随机设置/标准设置对照就声称警告有效性
+
+4. 把AUC数字直接等同于企业安全效果
+
+5. 没有成本参数和敏感性分析就宣称经济利益
+
+6. 将基于两个组织的结论无边界地推广
+
+- single_best_description_of_the_routine_cn：用理论选择变量，用漏斗刻画多阶段行为，用定制算法预测，用第一个纵向现场实验证明预测力，再用第二个干预现场实验证明预测能改变真实行为，最后用成本收益与敏感性分析把性能优势转化为管理价值。
+
+## 分析边界
+
+文章全文可用，但部分图片、附录和方程在OCR中可能不完整；实验室预试验细节只有摘要式描述；精确页码不可得，位置证据基于章节/表/图；成本参数依赖文中自报估计，未审计。

@@ -1,0 +1,23 @@
+{
+  "valid": true,
+  "prompt_fingerprint": "912ec81050682192146b65eeee770cbb3b315f50a6c935ef690cf2e115c4269c",
+  "expected_candidates": 231,
+  "decision_rows": 231,
+  "unique_source_files": 231,
+  "unique_record_ids": 231,
+  "theory_subset_flags_true": 110,
+  "missing_sources": [],
+  "unexpected_sources": [],
+  "duplicate_sources": [],
+  "duplicate_record_ids": [],
+  "invalid_rows": [],
+  "unresolved_error_sources": [],
+  "resolved_error_rows": [],
+  "attempt_counts": {
+    "1": 223,
+    "2": 8
+  },
+  "function_total": 231,
+  "objective_total": 231,
+  "context_total": 231
+}

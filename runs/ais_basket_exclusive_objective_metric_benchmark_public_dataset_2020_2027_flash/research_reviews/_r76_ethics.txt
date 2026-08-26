@@ -1,0 +1,32 @@
+##### 34 伦理 #####
+ 199 ### 7.4 伦理考量
+ 200 
+ 201 尽管本文研究有望强化编码智能体部署的安全性，仍需采取预防措施以确保伦理使用并防止不当滥用。具体措施包括限制攻击生成器源代码的访问、仅向已知学术研究社区开放访问，或以受监控的服务形式提供功能。在这些措施到位的前提下，善意使用的收益可显著超过恶意滥用的风险。网络安全社区中的其他工具，如用于渗透测试的开源工具集，已有此类成功先例。本文的攻击工件以仿真与评估为目的，攻击实例均在受控实验环境中生成与使用，不涉及真实系统或第三方组织。
+ 202 
+
+##### 35 伦理 #####
+ 187 ### 7.5 伦理考量
+ 188 
+ 189 尽管本文方法有望强化编码智能体部署的安全性，预置防御在任务执行前对正常开发流程的选择性干预，仍需明确的治理边界。其一，筛查与处置应限于安全相关信号，任务级风险分与单元级清单不应用于开发者绩效评价。其二，防御计划应可解释、可申诉，隔离与延迟动作附有风险分依据，人工审查通道确保误判可纠正。其三，误报与任务干扰代价以公开基准上的【占位】为上限报告，避免以安全名义无约束地牺牲开发效用。这些治理边界确保预置防御的收益不以开发者的正常任务效用为代价。
+ 190 
+
+##### 36 伦理 #####
+ 199 ### 7.5 伦理考量
+ 200 
+ 201 检测与门控涉及对开发者工作流的持续监控与动作阻断，其部署需要明确的治理边界。其一，检测范围应限于安全相关信号（凭据访问、网络外传、权限提升、依赖安装等），不应采集与安全无关的开发者行为数据。其二，门控动作应可解释、可申诉。通道级告警使被阻断的开发者能够理解处置依据，人工审查通道确保误报可纠正。其三，检测器以公开基准训练与评估，其误报率与效用损失以【占位】为上限公开报告，避免以安全名义无约束地干预正常开发流程。这些措施与安全类 IS 研究的受控发布实践一致（Ebrahimi et al., 2025）。
+ 202 
+
+##### RADAR ethics #####
+### KW[ethical] n=1
+...an leverage RADAR as a tool to mitigate unseen attacks such as new adversarially generated malware variants. Although our research can potentially contribute to strengthening cyber defense in security organizations, precautionary measures are needed to ensure ethical usage and prevent unwanted misuse. These measures include restricting access to RADAR’s source code, granting access to only known academic research communities, or providing RADAR’s functionality as a secure service/API and monitoring its usage. With these measures in place, benevolent use can significantly outweigh mal...
+### KW[precaution] n=2
+...ers in security operations centers (SOCs), can leverage RADAR as a tool to mitigate unseen attacks such as new adversarially generated malware variants. Although our research can potentially contribute to strengthening cyber defense in security organizations, precautionary measures are needed to ensure ethical usage and prevent unwanted misuse. These measures include restricting access to RADAR’s source code, granting access to only known academic research communities, or providing RADAR’s functionality as a secure service/API and monitoring its usage. With these measures in place, b...
+.../symantec-unveils-industry-s-first-neural-network-to-protectcritical-infrastructure-from-cyber-warfare Burns, A., Roberts, T. L., Posey, C., & Lowry, P. B. (2019). The adaptive roles of positive and negative emotions in organizational insiders’ security-based precaution taking. Information Systems Research, 30(4), 1228-1247. https://doi.org/10.1287/isre.2019. 0860 Castro, R. L., Schmitt, C., & Rodosek, G. D. (2019). ARMED: How automatic malware modifications can evade static detection? In Proceedings of the 5th International Conference on Information Management (pp. 20-27). Chen, B.,...
+### KW[misuse] n=1
+...gate unseen attacks such as new adversarially generated malware variants. Although our research can potentially contribute to strengthening cyber defense in security organizations, precautionary measures are needed to ensure ethical usage and prevent unwanted misuse. These measures include restricting access to RADAR’s source code, granting access to only known academic research communities, or providing RADAR’s functionality as a secure service/API and monitoring its usage. With these measures in place, benevolent use can significantly outweigh malicious usage. Similar successful ex...
+### KW[abuse] n=1
+...}$ and yields adversarial input $x + \delta ^ { * }$ , which is undetected by the cyber defense AI agent, where $\delta ^ { * }$ represents the optimal modification that leads to the evasion. As the attack generator is represented by the policy, with a slight abuse of notation, we refer to its parameters by ??. Attack model problem specification: We model the adversarial modification of malicious inputs for evading detection as a Markov decision process with the following components: Each state $s \in \mathcal S$ is defined by the representation of a malicious input. The state space ...
+### KW[dual] n=3
+...hree major streams: (1) AI-enabled security research, which focuses on developing new IT artifacts based on AI as guided by computational design science (Abbasi et al., 2010; Rai, 2017), (2) behavioral security research that aims to model organizational/individual behavior, policy compliance, and security risk for defending IT infrastructure (Hui et al., 2018), and (3) economic security research focusing on modeling the impact of investment, market effects, and other economic factors on the security of IT infrastructure (Hui et al., 2018). Table 1 summarizes recent IS studies based o...
+...td>AI-enabled</td><td>Cyber threat detection</td><td>No</td></tr><tr><td>2020</td><td>Sen et al.</td><td>The impact of cyber attacks on software market</td><td>Economic</td><td>NA</td><td>No</td></tr><tr><td>2020</td><td>Yoo et al.</td><td>The impact of individual self-efficacy on information security</td><td>Behavioral</td><td>NA</td><td>No</td></tr><tr><td>2019</td><td>Benjamin et al.</td><td>Collecting data for AI-enabled security analytics</td><td>AI-enabled</td><td>Text mining</td><td>No</td></tr><tr><td>2019</td><td>Burns et al.</td><td>The impact of insiders&#x27; behavior on ...
+...d>Behavioral</td><td>NA</td><td>Yes</td></tr><tr><td>2019</td><td>Cram et al.</td><td>Examining employees&#x27; compliance with information security policies</td><td>Behavioral</td><td>NA</td><td>NA</td></tr><tr><td>2019</td><td>Liang et al.</td><td>How individuals cope with IT security threats</td><td>Behavioral</td><td>NA</td><td>No</td></tr><tr><td>2019</td><td>Yin et al.</td><td>De-anonymizing dark web financial transactions</td><td>AI-enabled</td><td>Transaction classification</td><td>No</td></tr><tr><td>2019</td><td>Yue et al.</td><td>The effect of discussions in hacker forums ...

@@ -1,0 +1,1031 @@
+{
+  "record_id": "10860",
+  "source_file": "10860_2020_optimizing-microtask-assignment-on-crowdsourcing-platforms-using-markov-chain-monte-carlo.md",
+  "title": "Optimizing microtask assignment on crowdsourcing platforms using Markov chain Monte Carlo",
+  "authors": "Alireza Moayedikia; Hadi Ghaderi; William Yeoh",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113404",
+  "fulltext_chars": 59062,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:36.419397+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在预算与质量约束下，众包平台如何按顺序将微任务分配给合适的在线工人，并能在任务过程中持续估计工人质量，从而避免任务后估计和一次性质量控制的缺陷？",
+    "artifact_and_design_cn": "提出并实现了 MCMC-TA 任务分配算法：用高斯混合模型（GMM）在每轮任务后估计工人质量，用马尔可夫链蒙特卡洛（MCMC，具体为 Metropolis–Hastings）基于工人质量序列动态筛选下一轮任务的候选工人；初始化阶段使用质量控制任务获得工人初始质量。",
+    "objective_outcomes_cn": "在 Google Fact Evaluation（GFE）数据集上与 Raykar、ROUX、Gaussian 三种算法比较，MCMC-TA 在 AUC 和 F-Score 上均优于对手；预算实验中 10% 与 50% 质量控制预算效果相近；人群实验中 AUC 波动不超过 4%，表现防垃圾工人的鲁棒性；Wilcoxon 检验显示差异显著。",
+    "core_contribution_cn": "作者声称首次将 MCMC 与 GMM 联合用于众包微任务分配，提出迭代质量估计与动态任务分配方法，以最小预算最大化工人质量学习，并抵抗垃圾工人，同时为决策支持系统领域提供了候选工人预测方法。",
+    "whole_argument_in_one_paragraph_cn": "文章从众包微任务平台的现实价值出发，指出现有重复标注任务分配方式存在未定向分配问题，进而归纳三类算法缺陷：任务后估计、一次性质量估计和任务难度处理困难。为解决这些缺陷，作者设计 MCMC-TA，用 GMM 对工人回答做迭代质量建模，用 MCMC 的接受规则基于质量序列筛选下一轮候选工人。在真实数据集 GFE 上，文章通过预算驱动实验显示算法只花 10% 预算也能达到与 50% 预算相近的性能并超过三个基线；通过人口结构实验显示算法在垃圾工人比例变化时 AUC 波动很小；最后用非参数检验确认性能差异显著。结论部分把结果重新连回开头的两类缺陷，声称 MCMC-TA 克服了任务后估计与一次性估计问题，并提出平台实践含义与未来边界。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "文章的核心产物是一个计算算法 MCMC-TA，主要证据来自在一个真实数据集 GFE 上与多个已有算法的 benchmark 比较，并用 AUC/F-Score 和统计检验支撑；没有现场部署、用户实验或行为机制检验，因此属于计算制品+基准评价型。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章先在引言和文献综述中构建现有任务分配算法的性能缺陷（任务后估计、一次性估计），再提出 MCMC-TA 制品，接着在数据集上展开预算维度和人口维度 benchmark，最后把结果上升为可复用的设计知识和普适性声明，符合“性能缺口—制品—benchmark—一般化”的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 4,
+    "overall_sequence_cn": "第一阶段是问题定义与算法构造，生成核心制品 MCMC-TA；第二阶段用预算驱动实验检验算法在质量控制预算不同时的性能，证明其性价比；第三阶段用人口结构实验检验垃圾工人比例变化时的鲁棒性；第四阶段用 Wilcoxon 检验证明第二阶段和第三阶段观察到的差异并非随机。四个阶段从算法构造逐步上升到性能、稳健性和统计显著性。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题定义与 MCMC-TA 算法构造",
+        "question_cn": "如何在顺序到达的任务场景中，既避免任务完成后再估计工人质量，又避免只用一次质量控制任务估计质量，从而在预算约束下识别高质量工人？",
+        "inputs_and_setting_cn": "概念性众包平台场景：工人集合 W、任务集合 X、预算 B、质量控制任务集合 Qt；假设工人池质量混合，平台在任务开始前有质量控制任务。",
+        "designed_or_compared_object_cn": "设计算法 MCMC-TA，包含 GMM 质量估计组件和 MCMC（Metropolis–Hastings）候选工人筛选组件。",
+        "baseline_control_or_counterfactual_cn": "此处为概念对照，对比对象是文献中的任务后估计算法和一次性质量控制算法。",
+        "objective_metrics": [],
+        "analysis_method_cn": "形式化建模、概率推导、EM 推导、Metropolis–Hastings 接受规则、算法伪代码。",
+        "main_result_cn": "得到一个算法框架：初始化阶段用质量控制任务得到初始质量，微任务阶段每完成一轮任务就用 GMM 估计质量，再用 MCMC 预测下一轮候选工人，循环直到任务完成。",
+        "argumentative_role_cn": "确立文章的核心制品和设计逻辑，将引言中的两个缺陷直接翻译为 GMM 与 MCMC 两个组件。",
+        "remaining_uncertainty_cn": "算法是否真的在真实数据上优于已有算法、是否具备防垃圾工人能力、是否节省预算均未验证。",
+        "link_to_next_phase_cn": "算法构造完成后，需要进入真实数据集的 benchmark 实验来检验性能与开销。",
+        "evidence_pointers": [
+          "Section 3.1 问题定义与解决思路",
+          "Section 3.2 GMM 质量估计公式",
+          "Section 3.3 EM 步骤",
+          "Section 3.4 MCMC 决策规则",
+          "Algorithm 1 伪代码"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "预算驱动实验",
+        "question_cn": "当用于学习工人质量的控制任务占预算的比例从 10% 改变到 50% 时，MCMC-TA 与已有算法相比性能如何变化？",
+        "inputs_and_setting_cn": "Google Fact Evaluation (GFE) 数据集，57 个工人，超过 40000 条文本标注实例；任务集大小取 550 和 750；质量控制任务占实际任务的比例从 10% 到 50%。",
+        "designed_or_compared_object_cn": "比较 MCMC-TA 与 Raykar、ROUX、Gaussian 三个算法；被操纵的变量是质量控制任务比例和任务集大小。",
+        "baseline_control_or_counterfactual_cn": "三个 rival 算法：Raykar et al., ROUX, Gaussian；同一数据集和同一评价指标。",
+        "objective_metrics": [
+          "AUC",
+          "F-Score"
+        ],
+        "analysis_method_cn": "仿真实验、图比较；观察不同质量控制比例下性能曲线；作者用图 2 展示结果并做定性解读。",
+        "main_result_cn": "MCMC-TA 在 F-Score 和 AUC 上均超过三个 rival；MCMC-TA 用 10% 与 50% 预算得到相似性能，说明能以最小预算最大化质量学习；rival 算法受质量控制任务数量影响较大，可能因噪声工人随机回答而性能波动。",
+        "argumentative_role_cn": "证明算法的核心技术主张：性能超过对手，并进一步支持预算效率主张。",
+        "remaining_uncertainty_cn": "优势是否在统计上显著未知；是否在垃圾工人较多时仍然稳健未知；成本节省只是间接由 10% 与 50% 结果相似推断，没有正式成本模型。",
+        "link_to_next_phase_cn": "预算实验只考察预算维度，需要进一步在工人质量结构变化（垃圾工人比例）的情境下检验鲁棒性。",
+        "evidence_pointers": [
+          "Section 4.1 预算驱动实验说明",
+          "Fig. 2 预算驱动实验 AUC/F-Score 对比图"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "人口结构（垃圾工人 vs 正常工人）实验",
+        "question_cn": "当工人池中垃圾工人（spammers）比例改变时，MCMC-TA 相比 rival 算法是否仍保持稳定和优越性？",
+        "inputs_and_setting_cn": "GFE 数据集；采用 Raykar 和 Yu 对 spammer/hammer 的定义；通过 BreakPoint ∈ {0.1, 0.45, 0.8} 区分低质量与高质量工人；每种条件下进行 10 次独立运行。",
+        "designed_or_compared_object_cn": "在三种 BreakPoint 下比较 MCMC-TA 与 Raykar、ROUX、Gaussian；被操纵的变量是低质量工人占比。",
+        "baseline_control_or_counterfactual_cn": "三种 rival 算法；同时以同一条件下 10 次运行的平均最佳结果作为比较值。",
+        "objective_metrics": [
+          "AUC",
+          "F-Score",
+          "AUC 变化幅度"
+        ],
+        "analysis_method_cn": "仿真实验，每轮任务分配加质量估计，取 10 次运行每个运行最佳值的平均；通过图 3 和图 4 比较。",
+        "main_result_cn": "MCMC-TA 在垃圾工人比例变化时 AUC 变化不超过 4%；Gaussian 算法 AUC 平均波动约 10%，Raykar 的 AUC 从 55% 升到约 75%；ROUX 对垃圾工人也稳健但属于离线的单次质量估计算法，综合性能仍被 MCMC-TA 超过。",
+        "argumentative_role_cn": "证明算法的稳健性和边界：不仅性能高，而且抗垃圾工人；并将稳健性归因于 GMM+MCMC 的组合以及 Metropolis–Hastings 处理高维任务的能力。",
+        "remaining_uncertainty_cn": "垃圾工人比例是通过 BreakPoint 人为切分质量指标，不是真实平台上的恶意行为；没有单独消融实验证明 GMM 与 MCMC 各自的贡献；统计显著性仍待检验。",
+        "link_to_next_phase_cn": "人为设定 BreakPoint 的结果需要统计检验来排除随机性，因此进入 Wilcoxon 检验。",
+        "evidence_pointers": [
+          "Section 4.2 人口结构实验",
+          "Fig. 3 人口结构实验 AUC/F-Score 对比图",
+          "Fig. 4 BreakPoint 对平均工人质量的影响"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Wilcoxon 符号秩显著性检验",
+        "question_cn": "MCMC-TA 与 rival 算法在 AUC 和 F-Score 上的差异是否具有统计显著性？",
+        "inputs_and_setting_cn": "来自预算/人口实验的结果序列；采用 Wilcoxon signed-rank 检验，比较两两算法。",
+        "designed_or_compared_object_cn": "比较 MCMC-TA 对 ROUX、Raykar、Gaussian 的差异；指标为 AUC 和 F-Score。",
+        "baseline_control_or_counterfactual_cn": "两两配对的 rival 算法作为对照。",
+        "objective_metrics": [
+          "h 值",
+          "p 值"
+        ],
+        "analysis_method_cn": "Wilcoxon 符号秩检验，因为它不假定正态分布、对异常值更稳健，只关心差异方向而非绝对大小。",
+        "main_result_cn": "表 2 显示 MCMC-TA 与三个 rival 算法在 AUC 和 F-Score 上的零假设被拒绝，说明算法表现不是随机的，性能差异具有统计意义。",
+        "argumentative_role_cn": "把前面的图比较升级为统计推断，保护性能主张不被解释为偶然结果。",
+        "remaining_uncertainty_cn": "只有单一数据集；没有报告全部实验的完整数值表；没有进行多重比较校正或更广泛的交叉验证。",
+        "link_to_next_phase_cn": "统计验证完成后，结论部分可以把实验发现整合为对引言缺陷的回应、贡献声明和未来边界。",
+        "evidence_pointers": [
+          "Section 4.3 Wilcoxon 检验",
+          "Table 2 Wilcoxon signed-rank test results"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 微任务作为众包形式，将任务拆分分配给工人",
+      "LIMITATION: 现有任务分配算法的缺陷是任务后质量估计和一次性质量控制",
+      "RQ_OR_OBJECTIVE: 提出 MCMC-TA 以提供迭代质量估计和动态任务分配",
+      "DESIGN_FEATURE: 用 GMM 估计工人质量，用 MCMC 筛选候选工人",
+      "BENCHMARK_OR_CONTRAST: 在 Google Fact Evaluation 数据集上与最先进算法比较 AUC 和 F-Score",
+      "RESULT: MCMC-TA 超过对手，且防垃圾工人、以最小预算最大化质量学习"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 众包和微任务的定义与兴起",
+      "PRACTICAL_STAKES: 微任务成为新兴商业模式，具有成本优势",
+      "PHENOMENON: 平台常用重复标注方法，任务被在线分配并提交",
+      "LIMITATION: 重复标注缺乏定向分配，可能增加成本并降低质量",
+      "PRIOR_KNOWLEDGE: 已有任务分配算法如 SMVM、Bayesian/POMDP 工作",
+      "LIMITATION: 任务难度在不同工人间主观差异大，难以使用",
+      "GAP: 列举任务后估计、一次性估计、任务难度三类缺陷",
+      "RQ_OR_OBJECTIVE: 提出 MCMC-TA 联合 MCMC 与 GMM",
+      "WHY_GAP_MATTERS: 决策支持系统领域关注大规模众包平台的功能设计",
+      "STUDY_OVERVIEW: 预告文献综述、算法、实验、结论四个部分"
+    ],
+    "theory_and_knowledge_moves": [
+      "CONTEXT: 众包平台因任务分配复杂而难以实现承诺",
+      "PRIOR_KNOWLEDGE: 文献把工人任务配对分为选工人和选任务两类",
+      "PRIOR_KNOWLEDGE: 早期算法依赖人类专家设计质量控制",
+      "LIMITATION: 一次性人工干预无法捕捉工人质量变化",
+      "LIMITATION: 大型平台同质/异质任务下人机干预不可行",
+      "LIMITATION: 自动算法常受限于二值答案任务",
+      "PRIOR_KNOWLEDGE: EM 算法通过 E/M 步骤估计质量与真值",
+      "LIMITATION: EM 依赖启发式，缺少严格解",
+      "PRIOR_KNOWLEDGE: ROUX 用粗糙集和和声搜索估计专家社区",
+      "LIMITATION: ROUX 假设工人池不变",
+      "GAP: 综合两类缺陷：一次性估计与任务后估计",
+      "TRANSITION: 由此引出第 3 节新算法"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT: 问题设定为顺序任务下识别高质量工人",
+      "ASSUMPTION: 工人池混合质量且平台有质量控制任务",
+      "DESIGN_FEATURE: 总体设计为 GMM 估计质量 + MCMC 筛选候选工人",
+      "DESIGN_FEATURE: 初始化阶段用质量控制任务获得初始质量",
+      "DESIGN_FEATURE: 微任务阶段循环执行任务分配、回答收集、GMM 质量估计、MCMC 下一轮筛选",
+      "METHOD_JUSTIFICATION: 用 EM 估计 GMM 中多个潜在变量",
+      "REQUIREMENT: 引入 Metropolis–Hastings 处理高维任务和工人序列",
+      "DESIGN_FEATURE: Eq. (26) 接受规则决定是否接受新参数并筛出下一批工人",
+      "DESIGN_FEATURE: Algorithm 1 的伪代码整合全部流程"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST: 采用真实数据集 GFE，与 Raykar、ROUX、Gaussian 比较",
+      "METHOD_JUSTIFICATION: 选择 AUC 与 F-Score 作为任务分配质量的指标",
+      "METHOD_JUSTIFICATION: 预算驱动实验改变质控任务比例与任务集大小",
+      "RESULT: MCMC-TA 在 10% 与 50% 预算下性能相似且总体领先",
+      "RESULT: rival 算法受质控任务数影响且可能受噪声工人干扰",
+      "METHOD_JUSTIFICATION: 人口实验用 BreakPoint 划分高低质量工人",
+      "METHOD_JUSTIFICATION: 10 次运行取平均最佳值保证一致性",
+      "RESULT: MCMC-TA 的 AUC 波动不超过 4%，rival 波动更大",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 用不同的 BreakPoint 测试防垃圾工人稳健性",
+      "METHOD_JUSTIFICATION: 用 Wilcoxon 检验避免正态和异常值假设",
+      "RESULT: 零假设被拒绝，说明差异显著"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 提出迭代质量估计与任务分配算法 MCMC-TA",
+      "CONTRIBUTION: 第一个联合使用 MCMC 与 GMM 的微任务分配研究",
+      "CONTRIBUTION: 以 10% 预算最大化工人质量学习并抵抗垃圾工人",
+      "CONTRIBUTION: 对众包与决策支持系统文献有方法贡献",
+      "PRACTICAL_STAKES: 平台可过滤垃圾工人，减少支付，提高任务质量",
+      "BOUNDARY_CONDITION: 可推广到公民新闻、宏任务、众包配送等场景",
+      "LIMITATION_AND_FUTURE: 假设工人池不变、只用 GFE 数据集、只面向在线标注类任务"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Gaussian Mixture Model (GMM) 与 Expectation-Maximization (EM) 估计潜在变量",
+      "Markov Chain Monte Carlo (MCMC) 与传统 Metropolis–Hastings 采样",
+      "众包任务分配文献中的工人质量建模方法",
+      "质量控制任务（quality-control tasks）的工作方式",
+      "垃圾工人（spammer）与正常工人（hammer）分类思想"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "文章没有提出或测试一种行为/组织理论；设计主要是由现有算法的两个工程缺陷（任务后估计、一次性估计）以及 GMM/MCMC 的统计能力直接启发。GMM 和 MCMC 是形式化技术基础，它们确实决定了制品结构，但缺乏更深层的理论命题来推导每个设计参数，也未做组分消融来严格检验每个设计选择的理论必要性。因此属于部分耦合。",
+    "translation_chain_cn": "工人质量随时间变化且一次性估计不可靠 → 需要在每轮任务后更新质量 → 用 GMM/EM 迭代估计 μ、Σ、π；任务分配需要基于质量历史做出下一轮决策 → 用 MCMC 的 Metropolis–Hastings 接受规则从所有工人中筛选下一批候选；质量控制预算有限 → 只分配少量质量控制任务初始化，并通过动态筛选使 10% 预算与 50% 预算效果接近；垃圾工人会降低平台质量 → 用 MCMC 接受规则持续淘汰低质量工人。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "工人质量在微任务过程中会变化，一次性质量控制无法捕捉这种变化。",
+        "mechanism_cn": "工人在不同任务上的表现不同，质量序列随时间波动；一次性估计只取初始点，缺乏跟踪。",
+        "design_requirement_cn": "需要迭代地估计每个工人的质量，而不是只估计一次或全部任务完成后再估计。",
+        "artifact_choice_cn": "每轮任务后用 GMM 估计工人质量，并把估计结果输入下一轮。",
+        "evaluated_contrast_cn": "与一次性质量控制算法和任务后估计算法对比。",
+        "objective_result_cn": "在预算和人口实验中，MCMC-TA 的 AUC/F-Score 总体高于直接使用高斯模型或单次估计的算法。",
+        "evidence_pointers": [
+          "Section 3.2 GMM 质量估计",
+          "Fig. 2",
+          "Fig. 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "多轮估计会产生工人质量的时间序列，分配下一轮任务需要基于序列概率而不是单点估计。",
+        "mechanism_cn": "MCMC 的 Metropolis–Hastings 使用建议分布与接受概率，根据新参数相对旧参数的似然比决定是否接受工人，从而动态筛选。",
+        "design_requirement_cn": "任务分配组件必须能够处理序列化的质量更新，并在高维任务数下保持可计算。",
+        "artifact_choice_cn": "用 MCMC 接受规则（Eq. 26）对所有工人计算接受概率，筛选下一轮候选工人。",
+        "evaluated_contrast_cn": "与只基于高斯模型估计质量、没有 MCMC 筛选的算法对比。",
+        "objective_result_cn": "MCMC-TA 在 40,000 任务的高维场景下仍保持较高 AUC/F-Score，变化很小。",
+        "evidence_pointers": [
+          "Section 3.4",
+          "Section 4.2 第二个原因",
+          "Fig. 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "质量控制任务占用预算；预算有限时希望用尽量少的质控任务获得可靠质量估计。",
+        "mechanism_cn": "初始少量质控任务提供先验质量，随后迭代更新可补偿初始估计的粗糙性。",
+        "design_requirement_cn": "算法应能在低质控预算下仍有效学习工人质量。",
+        "artifact_choice_cn": "初始化阶段只用 10 个质量控制任务估算初始 μ、Σ，π 设为 1/工人数。",
+        "evaluated_contrast_cn": "比较质量控制比例 10% 与 50% 时的性能。",
+        "objective_result_cn": "10% 与 50% 比例下性能相似，显示低预算也能学习。",
+        "evidence_pointers": [
+          "Section 3.3 初始化",
+          "Section 4.1",
+          "Fig. 2(a)(d)"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "众包平台中存在垃圾工人，他们可能伪装能力来获取任务，损害平台质量。",
+        "mechanism_cn": "垃圾工人的质量指标低，MCMC 接受规则的似然比会降低其被选中概率，从而在每轮被过滤。",
+        "design_requirement_cn": "算法需要对工人质量结构变化具有鲁棒性。",
+        "artifact_choice_cn": "通过 BreakPoint 划分低/高质量工人，模拟不同垃圾工人比例；MCMC-TA 持续筛选。",
+        "evaluated_contrast_cn": "不同 BreakPoint 值和不同垃圾工人比例下与 rival 算法对比。",
+        "objective_result_cn": "MCMC-TA 的 AUC 变化不超过 4%，rival 算法波动更大。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Fig. 3",
+          "Fig. 4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "真实数据集 benchmark：GFE 数据集",
+      "参数扫描/预算驱动实验：质量控制任务比例 10%-50%，任务集大小 550/750",
+      "鲁棒性仿真实验：人口结构中 BreakPoint 变化",
+      "统计显著性检验：Wilcoxon 符号秩检验"
+    ],
+    "why_these_evaluations_cn": "仅报告单一性能指标不足以支撑任务分配算法的价值；作者需要证明算法不仅平均性能好，而且在预算有限时仍高效（预算驱动实验），在垃圾工人存在时仍稳健（人口实验），并且差异不是随机波动（Wilcoxon 检验）。这些评价合在一起把“性能更好”升级为“更经济、更稳健、统计上可靠”。",
+    "benchmark_and_contrast_chain_cn": "先用真实数据集 GFE 和三个 rival 算法建立共同基准；再通过改变质控预算比例，检验性能随预算变化的敏感性；再通过改变工人质量分布（BreakPoint），检验对垃圾工人的抵抗性；最后用非参数检验确认前两阶段中 MCMC-TA 与 rival 的差异显著。基准从单一性能比较逐步扩展到成本和稳健性维度。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "MCMC-TA 在 AUC 和 F-Score 上优于 rival 算法。",
+        "evidence": "GFE 数据集上的 Fig. 2 和 Fig. 3 显示性能曲线领先；但正文未给出完整数值表。",
+        "status": "有图证据支持，但数值完整性不足"
+      },
+      {
+        "claim": "MCMC-TA 用 10% 预算也能实现接近 50% 预算的性能。",
+        "evidence": "预算实验中 10% 与 50% 质量控制比例下性能相似（Fig. 2）。",
+        "status": "图证据支持，但缺乏正式的预算-质量成本模型和更细粒度扫参"
+      },
+      {
+        "claim": "MCMC-TA 抗垃圾工人。",
+        "evidence": "人口实验中 AUC 变化不超过 4%，rival 算法变化更大。",
+        "status": "支持；但垃圾工人是用 BreakPoint 人为划分，不是真实广告垃圾行为"
+      },
+      {
+        "claim": "GMM 与 MCMC 的组合是性能提升的关键。",
+        "evidence": "与使用高斯/EM 或 ROUX 的单组件算法比较；但没有对 MCMC-TA 做 GMM-only 或 MCMC-only 的消融实验。",
+        "status": "间接支持，缺少直接消融证据"
+      },
+      {
+        "claim": "性能差异具有统计显著性。",
+        "evidence": "Wilcoxon 检验表显示零假设被拒绝。",
+        "status": "支持；但只在单一数据集上，p 值多数显示为 0.007 左右"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用同一数据集、同一组 rival 算法和同一评价指标；人口实验采用多次运行取平均最佳值；用 Wilcoxon 检验排除随机性。潜在问题是没有随机拆分或多数据集交叉验证，也没有分离 GMM 和 MCMC 的成因分析。",
+    "external_validity_strategy_cn": "选择真实众包数据集 GFE，并声称该设计可推广到其他在线众包平台和场景；结论部分通过业务场景列举（公民新闻、宏任务、众包配送）拓展适用性。但只有一个数据集，外部效度有限。",
+    "what_is_not_actually_tested_cn": "没有在真实众包平台上部署或运行；没有检验真实垃圾工人的恶意策略；没有检验工人中途退出的情况；没有对 GMM 和 MCMC 两个组件做消融归因；没有在多数据集上验证；没有成本模型直接测量支付金额与预算节省量。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "MCMC-TA 在 GFE 数据集上的 AUC 和 F-Score 高于 Raykar、ROUX、Gaussian 三种现有算法，且差异显著。",
+    "artifact_claim_cn": "将 GMM 与 MCMC 组合成的任务分配算法是性能提升的原因，其中 GMM 负责迭代质量估计，MCMC 负责候选工人筛选。",
+    "mechanism_claim_cn": "MCMC 的 Metropolis–Hastings 接受规则根据工人质量序列与任务回答的似然比，在每轮迭代中过滤低质量工人；GMM 用 EM 迭代更新工人质量参数，因此能动态适应质量变化。",
+    "boundary_claim_cn": "算法适用于顺序到达的在线微任务、存在质量控制任务且工人池质量混合的场景；可推广到标注/审核类任务，经改造也可用于众包配送等空间任务；不适用于工人可能中途退出或数据只有单一来源标签的情况。",
+    "reusable_design_knowledge_cn": "可复用知识包括：用 GMM 对工人每轮回答做迭代质量建模；用 MCMC/Metropolis–Hastings 基于质量序列做候选工人筛选；用少量质控任务初始化先验质量，能够以很小预算实现接近大预算的效果；用接受规则形成天然防垃圾工人机制。",
+    "theoretical_contribution_cn": "文章声称是第一个联合使用 MCMC 与 GMM 的微任务分配研究，并为决策支持系统文献提供了一个预测候选工人的算法实例；但这更多是算法设计贡献而非新的行为或组织理论，理论贡献较弱。",
+    "how_discussion_closes_intro_gap_cn": "结论部分直接回到引言列出的两类缺陷：MCMC-TA 用 GMM 在每轮任务后估计质量，解决任务后估计的滞后问题；用迭代估计代替一次性质量控制，解决一次性估计无法跟踪质量变化的问题；同时用实验结果说明这种设计带来更高的 AUC/F-Score、更低的预算和防垃圾工人鲁棒性。",
+    "overclaim_or_unsupported_leaps_cn": "一些声明缺少严格证据：例如“最大化学习”来自 10% 与 50% 两个比例的比较，未做完整成本曲线；“第一个联合使用”没有系统性查新；防垃圾工人只基于人为 BreakPoint 切分，不是真实垃圾行为；没有消融实验，组合优势被直接归因于 GMM+MCMC；理论贡献的实际理论增量较弱。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "微任务是一种众包形式，把工作拆成多个任务分给多个工人完成。",
+      "rhetorical_function_cn": "为整篇论文设定应用领域和基础概念。",
+      "depends_on_cn": "无；开篇定义。",
+      "sets_up_cn": "引出任务分配决策的复杂性。",
+      "evidence_pointer": "Abstract 第一句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2-P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "任务分配在预算和质量约束下很复杂，现有算法存在任务后质量估计和一次性质量控制两类缺点。",
+      "rhetorical_function_cn": "在摘要中直接建立问题缺口。",
+      "depends_on_cn": "依赖微任务定义，说明分配问题的重要性。",
+      "sets_up_cn": "为提出 MCMC-TA 提供理由。",
+      "evidence_pointer": "Abstract 第二、三句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者提出基于 MCMC 的任务分配方法 MCMC-TA，提供迭代质量估计和动态任务分配。",
+      "rhetorical_function_cn": "摘要中的核心主张：提出新算法。",
+      "depends_on_cn": "基于前一句指出的两类缺陷。",
+      "sets_up_cn": "引出具体技术组件。",
+      "evidence_pointer": "Abstract 中 propose 一句"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P2 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用 GMM 估计工人质量，用 MCMC 筛选候选工人。",
+      "rhetorical_function_cn": "交代核心制品的两个技术组件。",
+      "depends_on_cn": "承接迭代估计和动态分配需求。",
+      "sets_up_cn": "为方法节和实验节提供关键词。",
+      "evidence_pointer": "Abstract 中 GMM/MCMC 句"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P3 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "用 Google Fact Evaluation 数据集衡量性能，并与最先进算法比较 AUC 和 F-Score。",
+      "rhetorical_function_cn": "摘要中交代评价场景和指标。",
+      "depends_on_cn": "算法提出后需要验证。",
+      "sets_up_cn": "引出结果句。",
+      "evidence_pointer": "Abstract 中 Google Fact Evaluation 句"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P3 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "结果显示 MCMC-TA 超过对手，且防垃圾工人，以最小预算最大化质量学习。",
+      "rhetorical_function_cn": "摘要中给出总体结论。",
+      "depends_on_cn": "基于 benchmark 结果。",
+      "sets_up_cn": "形成全文标题级贡献声明。",
+      "evidence_pointer": "Abstract 最后一句"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "众包是把工作拆成微任务并外包给不确定网络中的个人。",
+      "rhetorical_function_cn": "引入研究领域，说明众包的基本运作方式。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为微任务平台的出现做铺垫。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S2-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "众包平台和工人增多使微任务成为新兴商业模式，且是一种成本有效的人力计算方式。",
+      "rhetorical_function_cn": "赋予问题现实重要性。",
+      "depends_on_cn": "众包定义。",
+      "sets_up_cn": "为批评重复标注的不足做铺垫。",
+      "evidence_pointer": "Introduction P1 S2-S3"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "典型微任务平台采用重复标注方法，任务在线分发后由工人完成提交，工人平均获得报酬。",
+      "rhetorical_function_cn": "描述当前平台的常见做法。",
+      "depends_on_cn": "基于众包定义。",
+      "sets_up_cn": "指出重复标注的弱点。",
+      "evidence_pointer": "Introduction P2 S1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P2 S2-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "重复标注的主要弱点是未定向分配：不考虑工人技能和兴趣，可能导致成本上升和低技能工人造成的结果质量下降。",
+      "rhetorical_function_cn": "识别现实平台中的一个具体缺陷。",
+      "depends_on_cn": "基于重复标注方法。",
+      "sets_up_cn": "引出任务分配算法的必要性。",
+      "evidence_pointer": "Introduction P2 S2-S3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P3 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "许多研究者开发任务分配算法，根据平台属性个性化分配；例如 Appen 平台要求任务发布者设计质量控制指标来测量工人表现。",
+      "rhetorical_function_cn": "说明已有解决方案的存在，并引入质量控制任务概念。",
+      "depends_on_cn": "前一句提出的分配问题。",
+      "sets_up_cn": "后面批评质量控制任务相关算法。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P4 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "列出 SMVM、POMDP/Bayesian 等工作，并指出任务难度是可疑概念，因为同一任务对不同工人难度不同。",
+      "rhetorical_function_cn": "概述代表性算法，同时埋下缺陷伏笔。",
+      "depends_on_cn": "任务分配算法背景。",
+      "sets_up_cn": "导出三类缺陷列表。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P5 bullet 1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "任务后质量估计要求工人先完成任务并付酬后再估计质量，成本和精度效率低。",
+      "rhetorical_function_cn": "定义第一类缺陷。",
+      "depends_on_cn": "已有算法综述。",
+      "sets_up_cn": "为 MCMC-TA 迭代估计提供靶子。",
+      "evidence_pointer": "Introduction 列表第一项"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P5 bullet 2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "一次性估计在微任务开始前用质量控制任务测量工人质量，但质量在过程中会变化，无法持续监控。",
+      "rhetorical_function_cn": "定义第二类缺陷。",
+      "depends_on_cn": "质量控制任务算法综述。",
+      "sets_up_cn": "为迭代质量估计提供理由。",
+      "evidence_pointer": "Introduction 列表第二项"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P5 bullet 3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "任务难度难以建模，且质量控制任务与实际任务难度不匹配会造成质量评估失真。",
+      "rhetorical_function_cn": "定义第三类缺陷，作为补充。",
+      "depends_on_cn": "任务难度算法综述。",
+      "sets_up_cn": "说明 MCMC-TA 不依赖任务难度建模。",
+      "evidence_pointer": "Introduction 列表第三项"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P6 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为克服上述缺点，提出 MCMC-TA，据称是第一个联合使用 MCMC 与 GMM 的任务分配方法。",
+      "rhetorical_function_cn": "给出研究问题和核心主张。",
+      "depends_on_cn": "三类缺陷列表。",
+      "sets_up_cn": "引出算法和实验。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P6 S2-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "任务顺序到达并分配给多技能工人；GMM 估计质量，MCMC 预测下一任务适合的工人。",
+      "rhetorical_function_cn": "简短描述算法工作流程。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "为第 3 节详细算法做预告。",
+      "evidence_pointer": "Introduction P6 S2-S3"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P7",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "研究范围与决策支持系统应用一致，大规模众包平台的设计和运营复杂性有研究和实践价值。",
+      "rhetorical_function_cn": "将研究定位到 IS/DSS 领域，解释为什么值得 IS 研究。",
+      "depends_on_cn": "算法提出后的意义阐述。",
+      "sets_up_cn": "让读者接受这不是纯技术性能优化。",
+      "evidence_pointer": "Introduction P7"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P8",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "预告剩余部分：文献综述、算法细节、性能评价、结论。",
+      "rhetorical_function_cn": "提供全文路标。",
+      "depends_on_cn": "全文结构。",
+      "sets_up_cn": "引导读者进入后续章节。",
+      "evidence_pointer": "Introduction P8"
+    },
+    {
+      "order": 20,
+      "section": "Literature Review",
+      "locator": "P1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "众包带来资源获取机会，但平台因任务分配复杂而难以兑现承诺。",
+      "rhetorical_function_cn": "从文献角度重申问题重要性。",
+      "depends_on_cn": "引言中的现实背景。",
+      "sets_up_cn": "为文献综述提供组织框架。",
+      "evidence_pointer": "Section 2 P1"
+    },
+    {
+      "order": 21,
+      "section": "Literature Review",
+      "locator": "P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "文献中算法主要建模个体工人质量，存在两类任务-工人配对方式：为新任务选工人，或为新工人选任务。",
+      "rhetorical_function_cn": "建立分类框架，组织已有研究。",
+      "depends_on_cn": "任务分配综述。",
+      "sets_up_cn": "后续按这个框架评论各算法。",
+      "evidence_pointer": "Section 2 P2"
+    },
+    {
+      "order": 22,
+      "section": "Literature Review",
+      "locator": "P3-P4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "早期算法依赖人类专家一次性设计质量措施，但工人质量会变化；DTA 依赖人机交互，允许垃圾工人伪装，大规模平台不可行。",
+      "rhetorical_function_cn": "消除人工干预方法。",
+      "depends_on_cn": "分类框架。",
+      "sets_up_cn": "引出自动任务分配方法。",
+      "evidence_pointer": "Section 2 P3-P4"
+    },
+    {
+      "order": 23,
+      "section": "Literature Review",
+      "locator": "P5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "自动方法如 CrowdSense 只能在二值答案任务上工作，DER3 用多臂老虎机动态估计回归任务中的质量。",
+      "rhetorical_function_cn": "介绍自动方法，同时指出答案类型限制。",
+      "depends_on_cn": "排除了人工干预方法。",
+      "sets_up_cn": "说明自动方法仍有不足。",
+      "evidence_pointer": "Section 2 P5"
+    },
+    {
+      "order": 24,
+      "section": "Literature Review",
+      "locator": "P6",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "近期工作使用 EM 算法：E 步估计质量，M 步估计真值；例如高斯过程分类器和条件随机场序列标注。",
+      "rhetorical_function_cn": "总结 EM 类方法。",
+      "depends_on_cn": "自动方法的演进。",
+      "sets_up_cn": "指出 EM 方法的严格性不足。",
+      "evidence_pointer": "Section 2 P6"
+    },
+    {
+      "order": 25,
+      "section": "Literature Review",
+      "locator": "P6 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "EM 风格计算依赖启发式，缺少解的严格性。",
+      "rhetorical_function_cn": "设置文献缺口。",
+      "depends_on_cn": "EM 类方法介绍。",
+      "sets_up_cn": "为引入 MCMC 提供正当性。",
+      "evidence_pointer": "Section 2 P6 S3"
+    },
+    {
+      "order": 26,
+      "section": "Literature Review",
+      "locator": "P7",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "ROUX 用粗糙集和和声搜索估计工人社区并排序，但假设工人池不变、所有工人可被分配到任何任务。",
+      "rhetorical_function_cn": "列出与 MCMC-TA 最接近的工作，并指出其限制。",
+      "depends_on_cn": "自动和 EM 类方法综述。",
+      "sets_up_cn": "形成与 MCMC-TA 的对比对象之一。",
+      "evidence_pointer": "Section 2 P7"
+    },
+    {
+      "order": 27,
+      "section": "Literature Review",
+      "locator": "P7 S4-S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "归纳现有算法两大限制：一次性质量估计导致质量保证不确定，任务后评估导致性能评估滞后；因此需要新算法。",
+      "rhetorical_function_cn": "在综述结尾明确缺口。",
+      "depends_on_cn": "全部文献评论。",
+      "sets_up_cn": "导入第 3 节的新算法。",
+      "evidence_pointer": "Section 2 最后段落"
+    },
+    {
+      "order": 28,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.1 P1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "定义微任务场景中的实体：任务、任务所有者、工人、平台，以及任务顺序到达和报酬结构。",
+      "rhetorical_function_cn": "为算法建立精确的形式化场景。",
+      "depends_on_cn": "文献综述中的问题定义。",
+      "sets_up_cn": "给出问题定义的输入变量。",
+      "evidence_pointer": "Section 3.1 第一段"
+    },
+    {
+      "order": 29,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.1 P2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "问题是在顺序任务分配中识别高质量工人；假设工人池混合且平台像 Appen 一样有质量控制任务。",
+      "rhetorical_function_cn": "明确问题与假设。",
+      "depends_on_cn": "形式化场景。",
+      "sets_up_cn": "为 GMM/MCMC 设计提供目标。",
+      "evidence_pointer": "Section 3.1 第二段"
+    },
+    {
+      "order": 30,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.1 P3-P5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "算法初始化时用质量控制任务测量初始质量，随后循环：分配任务、收集回答、GMM 估计质量、MCMC 筛选下一批工人。",
+      "rhetorical_function_cn": "完整描述算法流程，回应引言缺陷。",
+      "depends_on_cn": "问题定义。",
+      "sets_up_cn": "为后面的方程和伪代码提供框架。",
+      "evidence_pointer": "Section 3.1 第三至五段"
+    },
+    {
+      "order": 31,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.2 P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "用 GMM 根据收集的回答计算工人质量，质量参数为平均质量 μ、质量变化范围 Σ 和高斯大小 π。",
+      "rhetorical_function_cn": "引入 GMM 作为质量估计组件。",
+      "depends_on_cn": "迭代质量估计需求。",
+      "sets_up_cn": "为 EM 估计潜在变量做铺垫。",
+      "evidence_pointer": "Section 3.2 第一段"
+    },
+    {
+      "order": 32,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.2 P4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于一个方程中有多个潜在变量，作者选择 EM 风格估计方法来求解。",
+      "rhetorical_function_cn": "解释为什么使用 EM。",
+      "depends_on_cn": "GMM 公式中潜在变量。",
+      "sets_up_cn": "引出后续期望最大化的推导。",
+      "evidence_pointer": "Section 3.2 中 EM 说明句"
+    },
+    {
+      "order": 33,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.3 P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "EM 初始化时用 10 个质量控制任务估计工人初始质量，μ 为平均质量，Σ 为质量上下限，π 为 1 除以工人数。",
+      "rhetorical_function_cn": "把质量控制任务知识转化为具体初始化规则。",
+      "depends_on_cn": "GMM/EM 理论。",
+      "sets_up_cn": "说明算法在低预算下的先验设置。",
+      "evidence_pointer": "Section 3.3 第一段"
+    },
+    {
+      "order": 34,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.3.2 末尾",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "EM 迭代到似然收敛，最终 μ* 和 Σ* 用于筛选工人。",
+      "rhetorical_function_cn": "说明 GMM 组件如何输出可用的质量参数。",
+      "depends_on_cn": "期望最大化推导。",
+      "sets_up_cn": "为 MCMC 使用这些参数做铺垫。",
+      "evidence_pointer": "Section 3.3.2 最后一句"
+    },
+    {
+      "order": 35,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.4 P1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "工人质量会随任务序列变化，有些任务表现好，有些表现差，因此需要基于任务尝试序列判断下一轮资格。",
+      "rhetorical_function_cn": "给出为什么需要 MCMC 来集成序列信息。",
+      "depends_on_cn": "迭代质量估计思想。",
+      "sets_up_cn": "引出 GMM+MCMC 集成。",
+      "evidence_pointer": "Section 3.4 第一段"
+    },
+    {
+      "order": 36,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.4 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "集成方案是：GMM 生成并保存工人质量序列，MCMC 用序列为下一任务筛选合适工人。",
+      "rhetorical_function_cn": "明确两个组件的分工与协作。",
+      "depends_on_cn": "工人质量序列现象。",
+      "sets_up_cn": "为 Metropolis–Hastings 接受规则做铺垫。",
+      "evidence_pointer": "Section 3.4 第二段"
+    },
+    {
+      "order": 37,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.4 P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "MCMC 组件采用 Metropolis–Hastings，通过初始分布和建议分布探索参数空间，并用概率接受规则决定是否接受工人。",
+      "rhetorical_function_cn": "引入具体 MCMC 变体及其决策机制。",
+      "depends_on_cn": "GMM 提供的质量参数。",
+      "sets_up_cn": "为 Eq. (26) 的接受概率提供语境。",
+      "evidence_pointer": "Section 3.4 第三段"
+    },
+    {
+      "order": 38,
+      "section": "Proposed Algorithm",
+      "locator": "Section 3.4 Eq. (26)",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "接受规则比较新旧参数下任务序列的似然比：新参数更可能时接受，否则拒绝，从而动态筛选工人。",
+      "rhetorical_function_cn": "给出算法核心的数学决策机制。",
+      "depends_on_cn": "Metropolis-Hastings 理论。",
+      "sets_up_cn": "支撑防垃圾工人的机制论证。",
+      "evidence_pointer": "Section 3.4 Eq. (26)"
+    },
+    {
+      "order": 39,
+      "section": "Proposed Algorithm",
+      "locator": "Algorithm 1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "伪代码展示每个任务迭代中如何分配、支付、收集回答、用 GMM 估计质量、更新可靠性并用 MCMC 预测下一批工人。",
+      "rhetorical_function_cn": "以可执行算法形式整合全部设计决策。",
+      "depends_on_cn": "前面所有公式和组件。",
+      "sets_up_cn": "为实验实现提供直接基础。",
+      "evidence_pointer": "Algorithm 1"
+    },
+    {
+      "order": 40,
+      "section": "Evaluation",
+      "locator": "Section 4 P1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "用真实数据集 GFE，57 个工人对 40000 多个文本实例做判断；与 Raykar、ROUX、Gaussian 比较，指标为 F-Score 和 AUC。",
+      "rhetorical_function_cn": "建立公平公开的基准。",
+      "depends_on_cn": "算法构造完成。",
+      "sets_up_cn": "为预算和人口实验提供共同比较环境。",
+      "evidence_pointer": "Section 4 第一段"
+    },
+    {
+      "order": 41,
+      "section": "Evaluation",
+      "locator": "Section 4.1 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "预算驱动实验考察增加学习工人质量的预算是否会改变 MCMC-TA 与其他算法的性能，采用任务集 550/750，质量控制任务比例 10%-50%。",
+      "rhetorical_function_cn": "解释预算实验的设计目的与变量。",
+      "depends_on_cn": "基准设定。",
+      "sets_up_cn": "呈现预算实验的结果。",
+      "evidence_pointer": "Section 4.1 第一段"
+    },
+    {
+      "order": 42,
+      "section": "Evaluation",
+      "locator": "Section 4.1 P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "rival 算法随质量控制任务数量变化而表现波动，可能是噪声工人随机回答造成的。",
+      "rhetorical_function_cn": "先描述对手算法的弱点。",
+      "depends_on_cn": "预算实验数据。",
+      "sets_up_cn": "反衬 MCMC-TA 的稳定性。",
+      "evidence_pointer": "Section 4.1 P2"
+    },
+    {
+      "order": 43,
+      "section": "Evaluation",
+      "locator": "Section 4.1 P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "MCMC-TA 在 10% 和 50% 的质量控制预算下性能相似，说明最小预算也能最大化质量学习。",
+      "rhetorical_function_cn": "报告核心预算效率主张。",
+      "depends_on_cn": "预算实验图 2。",
+      "sets_up_cn": "为成本优势贡献提供证据。",
+      "evidence_pointer": "Section 4.1 P3"
+    },
+    {
+      "order": 44,
+      "section": "Evaluation",
+      "locator": "Section 4.1 P4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "MCMC-TA 领先的原因被归为 GMM 与 MCMC 的联合：每轮回答交给 GMM 做 EM 质量估计，MCMC 再用估计结果预测下一轮候选工人并过滤低质量工人。",
+      "rhetorical_function_cn": "解释结果背后的机制，使结果不只是一次性能提升。",
+      "depends_on_cn": "算法设计。",
+      "sets_up_cn": "支持结论中的机制主张。",
+      "evidence_pointer": "Section 4.1 P4"
+    },
+    {
+      "order": 45,
+      "section": "Evaluation",
+      "locator": "Section 4.2 P1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "借用 Raykar 和 Yu 的定义，工人分为 spammer（低质量）和 hammer（高质量）。",
+      "rhetorical_function_cn": "为人口实验引入概念术语。",
+      "depends_on_cn": "文献。",
+      "sets_up_cn": "提出 BreakPoint 划分。",
+      "evidence_pointer": "Section 4.2 P1"
+    },
+    {
+      "order": 46,
+      "section": "Evaluation",
+      "locator": "Section 4.2 P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "引入 BreakPoint ∈ {0.1,0.45,0.8}，将低于阈值的工人视为低质量，高于阈值的视为高质量，通过比例模拟垃圾工人占比。",
+      "rhetorical_function_cn": "说明如何操作化垃圾工人比例。",
+      "depends_on_cn": "spammer/hammer 定义。",
+      "sets_up_cn": "呈现图 3 结果。",
+      "evidence_pointer": "Section 4.2 P2"
+    },
+    {
+      "order": 47,
+      "section": "Evaluation",
+      "locator": "Section 4.2 P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为保持实验一致性，每个条件下进行 10 次独立运行，最终结果取每次运行最佳结果的平均值。",
+      "rhetorical_function_cn": "增强人口实验的可信度。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "为统计检验提供重复样本。",
+      "evidence_pointer": "Section 4.2 P3"
+    },
+    {
+      "order": 48,
+      "section": "Evaluation",
+      "locator": "Section 4.2 P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "MCMC-TA 在垃圾工人比例变化时性能几乎不变；Gaussian 和 Raykar 受影响较大；ROUX 稳健但只是离线单次估计，综合不如 MCMC-TA。",
+      "rhetorical_function_cn": "报告人口实验的核心发现。",
+      "depends_on_cn": "图 3 和图 4。",
+      "sets_up_cn": "解释稳健性的原因。",
+      "evidence_pointer": "Section 4.2 P4"
+    },
+    {
+      "order": 49,
+      "section": "Evaluation",
+      "locator": "Section 4.2 P5-P6",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "稳健性来自两点：一是 GMM+MCMC 组合，二是 Metropolis–Hastings 能够处理高维任务（40000 个任务）。",
+      "rhetorical_function_cn": "把结果归因到具体设计选择，形成机制主张。",
+      "depends_on_cn": "人口实验结果。",
+      "sets_up_cn": "支撑结论中的贡献声明。",
+      "evidence_pointer": "Section 4.2 P5-P6"
+    },
+    {
+      "order": 50,
+      "section": "Evaluation",
+      "locator": "Section 4.3 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用 Wilcoxon 符号秩检验判断 MCMC-TA 与对手差异是否显著；选择它是因为不需要正态假设，异常值影响小，只关心差异方向。",
+      "rhetorical_function_cn": "论证统计检验选择的合理性。",
+      "depends_on_cn": "前两阶段实验数据。",
+      "sets_up_cn": "报告表 2 的结果。",
+      "evidence_pointer": "Section 4.3 P1"
+    },
+    {
+      "order": 51,
+      "section": "Evaluation",
+      "locator": "Section 4.3 P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "表 2 显示 MCMC-TA 与三个 rival 在 AUC 和 F-Score 上的零假设均被拒绝，说明算法间存在显著差异。",
+      "rhetorical_function_cn": "用统计证据巩固性能主张。",
+      "depends_on_cn": "Wilcoxon 检验。",
+      "sets_up_cn": "让结论部分的贡献声明更有依据。",
+      "evidence_pointer": "Section 4.3 P2, Table 2"
+    },
+    {
+      "order": 52,
+      "section": "Conclusion",
+      "locator": "P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "提出 MCMC-TA，用 GMM 迭代估计质量，用 MCMC 基于 GMM 输出筛选候选工人，并在 GFE 上超过基线。",
+      "rhetorical_function_cn": "总结核心贡献。",
+      "depends_on_cn": "全部实验。",
+      "sets_up_cn": "为后续具体贡献展开做总起。",
+      "evidence_pointer": "Section 5 P1"
+    },
+    {
+      "order": 53,
+      "section": "Conclusion",
+      "locator": "P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "声称这是首个联合 MCMC 与 GMM 的微任务分配研究；预算实验支持最小预算学习，人口实验支持防垃圾工人；同时为 DSS 文献提供候选工人预测方法。",
+      "rhetorical_function_cn": "把多个实验结果浓缩成贡献声明。",
+      "depends_on_cn": "预算与人口实验。",
+      "sets_up_cn": "回扣引言中的缺口。",
+      "evidence_pointer": "Section 5 P2"
+    },
+    {
+      "order": 54,
+      "section": "Conclusion",
+      "locator": "P3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "平台所有者可以利用算法在任务分配前过滤垃圾工人，从而减少支付、提高任务质量和平台成功率；迭代估计还能确保报酬与表现一致。",
+      "rhetorical_function_cn": "给实践者提供可操作的收益描述。",
+      "depends_on_cn": "防垃圾和预算实验。",
+      "sets_up_cn": "增强论文的应用价值。",
+      "evidence_pointer": "Section 5 P3"
+    },
+    {
+      "order": 55,
+      "section": "Conclusion",
+      "locator": "P4",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "算法可推广到公民新闻、宏任务、创意生成、众包配送等场景，只要质量决定未来任务分配的环境都可改造使用。",
+      "rhetorical_function_cn": "界定并扩大适用边界。",
+      "depends_on_cn": "算法的通用结构。",
+      "sets_up_cn": "引出局限与未来研究。",
+      "evidence_pointer": "Section 5 P4"
+    },
+    {
+      "order": 56,
+      "section": "Conclusion",
+      "locator": "P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括假设所有工人在平台上可用、只在 GFE 数据集测试、只针对在线标注类任务；未来可研究工人中途退出、其他领域数据集和空间任务赋值。",
+      "rhetorical_function_cn": "诚实地划清研究边界，同时给出后续方向。",
+      "depends_on_cn": "全文假设与实验限制。",
+      "sets_up_cn": "保护贡献不被过度泛化。",
+      "evidence_pointer": "Section 5 P5"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "作者不是简单说“无人研究”，而是把已有算法按失败时间点分类：任务完成后的估计、任务开始前的一次性估计、以及任务难度建模的困难；每一类都指出明确的后果，如成本高、质量变化被忽略、难度无法对齐。这样缺口不是空洞的空白，而是具体可操作的缺陷。",
+    "signposting_cn": "摘要先总说贡献；引言末预告四节结构；文献综述末尾直接说“接下来的第 3 节引入新算法”；实验开始前说明两个实验类型；人口实验开头说明将使用 BreakPoint；结论末尾列局限。全文有大量显式路标。",
+    "transition_logic_cn": "从文献缺陷到算法：文献综述末尾归纳两大限制后立即说需要新算法；从算法到实验：算法设计结束就进入真实数据集 benchmark；从预算实验到人口实验：预算实验只解决预算维度，人口实验用垃圾工人补齐稳健性；从人口实验到 Wilcoxon：用统计检验确认差异不是偶然。",
+    "claim_evidence_rhythm_cn": "作者通常先陈述一个总体性能主张，然后说明实验设置，再给出图/表作为证据，随后用机制解释为什么算法表现好；例如预算实验先报道 10% 与 50% 相似，再解释 GMM 每轮估计和 MCMC 过滤低质量工人。",
+    "benchmark_narrative_cn": "benchmark 不只是标准数据集 + 三个对手；作者把基准嵌入两个叙事维度：预算成本维度和垃圾工人鲁棒性维度，使同一组比较承担多重论证功能。Wilcoxon 检验则把这些视觉比较转化为统计语言。",
+    "theory_return_cn": "文章的理论返回较弱。作者没有建立新理论，只是把 GMM 与 MCMC 两个统计知识库转化为算法组件，并在结论中返回这些机制术语说明为何能解决问题；理论贡献主要被表达为“首次联合使用”和“DSS 中的有效方法”。",
+    "contribution_positioning_cn": "贡献定位为三层：算法性能贡献（AUC/F-Score 高于对手）、经济性贡献（10% 预算）、鲁棒性贡献（防垃圾工人）；再把这三点纳入决策支持系统文献并给出平台实践含义。",
+    "novelty_protection_cn": "通过多个维度保护新颖性：不仅在性能上超过对手，还以预算效率和防垃圾鲁棒性展示“不只是换一个数据集上的分数”；用 Wilcoxon 检验保护统计可靠性；用“首个联合 MCMC 与 GMM”声明增加技术独特性。但没有消融实验，组件贡献其实是间接推断。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实场景定义领域价值，并指出现有平台的标准做法存在具体后果（如未定向分配导致成本和质量问题）。",
+        "research_job_cn": "确定要解决的现实问题，并找到可观察的平台/方法缺陷。",
+        "required_evidence_cn": "需要有具体的平台做法和成本/质量后果描述，可以是文献或行业案例。",
+        "transition_to_next_cn": "从平台问题过渡到算法层面的任务分配问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述已有算法并按失败模式分类，例如按估计发生在任务前/任务后，或按答案类型限制。",
+        "research_job_cn": "对文献做结构化评论，归纳两到三类可操作缺陷。",
+        "required_evidence_cn": "每个缺陷都要有具体算法实例或机制说明，不能只是泛泛而谈。",
+        "transition_to_next_cn": "以“需要新算法克服这些缺陷”作为过渡。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "给出问题的形式化定义、假设和输入输出，使算法可以在清晰边界内设计。",
+        "research_job_cn": "明确任务、工人、质量、预算等正式符号和假设。",
+        "required_evidence_cn": "假设必须与研究场景一致，例如质量控制任务是否存在、工人池是否固定。",
+        "transition_to_next_cn": "从问题定义进入算法设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "为每个识别的缺陷匹配一个算法组件，并用方程和伪代码说明组件如何工作。",
+        "research_job_cn": "设计算法，使质量估计和任务分配是两个可区分的模块。",
+        "required_evidence_cn": "每个组件的输入和输出需要清楚，并能用公式表达。",
+        "transition_to_next_cn": "算法设计完成后，用伪代码总结并准备实验。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "选择真实数据集、对比算法、评价指标，交代公平比较的基础。",
+        "research_job_cn": "实施基准算法，确定数据集和指标，确保实验条件公平。",
+        "required_evidence_cn": "数据集要有真实任务与工人行为；对比算法应是公认的代表性方法。",
+        "transition_to_next_cn": "从总体基准过渡到第一个具体实验维度。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "做预算驱动实验，操纵资源投入（如质控任务比例），观察性能变化。",
+        "research_job_cn": "设计和运行参数扫描实验，最好同时报告多个指标。",
+        "required_evidence_cn": "需要不同预算水平下的性能曲线；如果要主张成本优势，应尽量有成本或预算的量化结果。",
+        "transition_to_next_cn": "性能优势不够，还需检验对低质量工人的鲁棒性。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "做人口结构实验，通过定义低/高质量人群的阈值变化模拟鲁棒性。",
+        "research_job_cn": "构建能反映环境恶劣程度的实验条件，并采用多次重复取平均。",
+        "required_evidence_cn": "需要不同人群结构下的结果变化幅度，并与其他算法对比。",
+        "transition_to_next_cn": "多个实验后的差异需要统计检验来排除随机性。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "用合适的统计检验确认差异显著性，然后在结论中把实验结果重新连接回引言缺口，并声明贡献与局限。",
+        "research_job_cn": "选择适合数据分布的统计检验，完整报告结果；同时审查假设和泛化边界。",
+        "required_evidence_cn": "统计检验结果；明确的贡献声明；局限和未来方向。",
+        "transition_to_next_cn": "收束全文，完成从问题到答案的闭环。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "把现有方法的缺陷按时间点分类，而不是简单说‘不够好’",
+      "用‘缺陷→组件’映射直接构造算法",
+      "用同一数据集和多个对比算法建立公平基准",
+      "在基准之外增加预算和鲁棒性两个对抗性维度",
+      "用非参数检验保护性能差异的统计可靠性",
+      "结论处明确把算法设计组件与引言缺陷重新对应"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实数据集 GFE 含 57 个工人和 40000 余条标注，具有人工标注真值，非普通模拟数据可得",
+      "需要实现多个 baseline 算法（Raykar、ROUX、Gaussian）并进行公平比较",
+      "需要大量仿真运行（任务数 550/750、QC 比例 10%-50%、BreakPoint 三种、10 次重复）",
+      "Wilcoxon 检验需要足够多的配对结果",
+      "获取并预处理真实众包平台数据通常需要平台合作或公开数据集，不一定可复制"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写‘我们首次结合 X 与 Y’，必须有公平的 baseline 与真实数据；否则‘首次’缺乏可信度",
+      "不能在没有成本模型或细粒度预算扫描的情况下声称‘最小预算最大化学习’",
+      "不能把人为划分的低质量工人称为真正的防垃圾验证，除非使用真实垃圾行为或更复杂的对抗模型",
+      "不能在没有消融实验时把性能直接归因于两个组件的组合；表面写法会被审查者挑战",
+      "不能在没有理论机制时把论文包装成理论贡献；应诚实将其定位为算法设计知识"
+    ],
+    "single_best_description_of_the_routine_cn": "把现有方法的失败模式按时间点分类，用两个统计组件分别补上‘质控’与‘筛选’，再在标准数据上对预算和人群构成做两个维度的对抗性 benchmark，最后用非参数检验收尾并返回引言承诺。"
+  },
+  "confidence": 0.82,
+  "limitations_cn": "本文分析基于提供的全文文本和图表描述。由于源文件中若干图为图片形式，缺少每个图的具体数值刻度，预算/人口实验的结论主要依赖作者文字叙述；表 2 的 p 值部分显示为 0.007 但没有更精细统计信息；没有附录提供算法复杂度或完整参数设置；因此对实验细节的推断存在一定不确定性。",
+  "usage": {
+    "prompt_tokens": 18933,
+    "completion_tokens": 22940,
+    "total_tokens": 41873,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 18933
+  }
+}

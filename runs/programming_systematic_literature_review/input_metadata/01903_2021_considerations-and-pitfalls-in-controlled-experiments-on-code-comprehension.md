@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85113240105"
+title: "Considerations and Pitfalls in Controlled Experiments on Code Comprehension"
+authors: "Feitelson D.G."
+year: "2021"
+journal: "IEEE International Conference on Program Comprehension"
+doi: "10.1109/icpc52881.2021.00019"
+---
+# Scopus title-abstract-keyword metadata
+Title: Considerations and Pitfalls in Controlled Experiments on Code Comprehension
+Abstract: Understanding program code is a complicated endeavor. As such, myriad different factors can influence the outcome. Investigations of program comprehension, and in particular those using controlled experiments, have to take these factors into account. In order to promote the development and use of sound experimental methodology, we discuss potential problems with regard to the experimental subjects, the code they work on, the tasks they are asked to perform, and the metrics for their performance.  © 2021 IEEE.
+Author keywords: Code comprehension; experimental methodology
+Index keywords: Code comprehension; Controlled experiment; Experimental methodology; Experimental subjects; Performance; Potential problems; Program code; Program comprehension; Computer programming
+Document type: Conference paper
+Conference: 29th IEEE/ACM International Conference on Program Comprehension, ICPC 2021
+Source title: IEEE International Conference on Program Comprehension
+Year: 2021
+EID: 2-s2.0-85113240105
+DOI: 10.1109/icpc52881.2021.00019
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85102206576"
+title: "Issues, challenges, and a proposed theoretical core of agile software development research"
+authors: "Baham C.; Hirschheim R."
+year: "2022"
+journal: "Information Systems Journal"
+doi: "10.1111/isj.12336"
+---
+# Scopus title-abstract-keyword metadata
+Title: Issues, challenges, and a proposed theoretical core of agile software development research
+Abstract: Over the last two decades, agile software development (ASD) has garnered much attention in both research and practice. Several ASD methods and techniques have been developed and studied. In particular, researchers have provided several theoretical perspectives on ASD and contributed rich insights to the ASD practice. Still, despite calls for a more unified theoretical understanding of ASD, a theoretical core of ASD has not been identified. This paper offers a theoretical core of ASD research, clarifying what is essential and what is less essential for IS agility, hoping to spark a scholarly discussion, and provides implications of such a core for understanding method tailoring. © 2021 John Wiley & Sons Ltd
+Author keywords: agile research; agile software development; theoretical core; theory
+Index keywords: Information systems; Agile software development; Software design
+Document type: Article
+Conference: 
+Source title: Information Systems Journal
+Year: 2022
+EID: 2-s2.0-85102206576
+DOI: 10.1111/isj.12336
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

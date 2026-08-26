@@ -1,0 +1,2177 @@
+# Addressing Online Users’ Suspicion of Sponsored Search Results: Effects of Informational Cues：ISR 句段级微观图谱
+
+- 作者：Honglin Deng; Weiquan Wang; Kai H. Lim
+- 年份：2025
+- DOI：10.1287/isre.2021.0364
+- 源文件：28107_2025_addressing-online-users-suspicion-of-sponsored-search-results-effects-of-informational-cues.md
+- 置信度：0.92
+
+## 核实后的宏观骨架
+
+本文以状态怀疑理论为总透镜，将怀疑三维度（决策不确定性、感知平台恶意、对SSR的处理）情境化到电商搜索场景，主张在可绕过目标（SSR）的在线情境中，增加处理代表怀疑降低而非升高。作者提出UGC正性信息线索（商品质量评分Q-cue、卖家信誉评分C-cue）通过内化机制降低决策不确定性和/或平台恶意感知，从而增加SSR处理；但因用户是认知吝啬者，内化受SSR品牌知名度与SSR线索评分相对自然结果水平的边界条件约束。三个实验室实验依次完成主效应检验（实验一）、品牌知名度调节与决策不确定性中介检验（实验二）、不知名品牌下评分水平第二边界与双中介检验（实验三），最终在讨论中把结果回收为四个理论贡献、平台实践建议与局限。
+
+## 摘要逐句图谱
+
+### 1. Abstract P1 S1
+
+- locator：Abstract P1 S1
+
+- paraphrase_cn：偏离用户查询词的赞助搜索结果即使获得先前用户积极评价，仍常引发怀疑。
+
+- move_code：CONTEXT
+
+- statement_status：prior_literature
+
+- why_here_cn：摘要第一句建立最核心的现象悖论：信息本身正面但位置/来源引发怀疑，为整篇研究提供问题基础。
+
+- inherits_from_previous_cn：无继承；直接开场。
+
+- changes_argument_state_cn：奠定研究要解释的现象：SSR怀疑。
+
+- sets_up_next_cn：引出怀疑带来的行为后果。
+
+- failure_if_removed_cn：摘要失去研究对象和问题由来的锚点，后续方法、贡献没有立足处。
+
+- evidence_pointer：Abstract P1 S1
+
+### 2. Abstract P1 S2
+
+- locator：Abstract P1 S2
+
+- paraphrase_cn：这种怀疑通常导致用户回避SSR。
+
+- move_code：PHENOMENON_CONSEQUENCE
+
+- statement_status：author_inference
+
+- why_here_cn：说明怀疑的非中性后果，使研究具有解决问题而非仅描述心理状态的必要。
+
+- inherits_from_previous_cn：承接SSR引发怀疑的事实。
+
+- changes_argument_state_cn：把现象从态度层面推进到行为层面（回避）。
+
+- sets_up_next_cn：引出需要对策：信息线索能否减少怀疑。
+
+- failure_if_removed_cn：若没有行为后果，读者不明白为何需要干预。
+
+- evidence_pointer：Abstract P1 S2
+
+### 3. Abstract P1 S3
+
+- locator：Abstract P1 S3
+
+- paraphrase_cn：本研究聚焦UGC中的产品评论与评分等信息线索在减少用户怀疑中的作用。
+
+- move_code：RESEARCH_OBJECTIVE
+
+- statement_status：author_inference
+
+- why_here_cn：将研究问题从一般性怀疑收窄为具体对策：信息线索。
+
+- inherits_from_previous_cn：前两句指出问题，本句给出切入点。
+
+- changes_argument_state_cn：确立即将研究的干预物和核心概念（信息线索）。
+
+- sets_up_next_cn：为引出理论透镜（状态怀疑理论）铺垫。
+
+- failure_if_removed_cn：读者不知道论文在研究什么干预、什么结果。
+
+- evidence_pointer：Abstract P1 S3
+
+### 4. Abstract P1 S4
+
+- locator：Abstract P1 S4
+
+- paraphrase_cn：基于状态怀疑理论，将怀疑维度情境化到SSR场景：决策不确定性、平台恶意感知、SSR处理。
+
+- move_code：THEORY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：给出理论框架和三个核心构念，说明论文不是单纯实验报告。
+
+- inherits_from_previous_cn：信息线索效果不是天然成立的，需要理论解释用户如何处理线索。
+
+- changes_argument_state_cn：引入理论化语言，为后文三构念建模奠基。
+
+- sets_up_next_cn：需要说明如何把理论用于设计干预。
+
+- failure_if_removed_cn：摘要失去理论身份，实验变成孤立测试。
+
+- evidence_pointer：Abstract P1 S4
+
+### 5. Abstract P1 S5
+
+- locator：Abstract P1 S5
+
+- paraphrase_cn：提出基于理论的策略：在电商产品搜索过程中将信息线索整合到SSR附近。
+
+- move_code：STRATEGY_PROPOSAL
+
+- statement_status：design_decision
+
+- why_here_cn：把理论维度转化为实际可操作的设计策略。
+
+- inherits_from_previous_cn：来自三维度中降低不确定性和恶意感知的需要。
+
+- changes_argument_state_cn：宣告本研究不只是在理论上讨论，还给出平台可采用的做法。
+
+- sets_up_next_cn：需要说明线索如何改变用户认知（内化机制）。
+
+- failure_if_removed_cn：论文看起来只有理论而没有IS意义上的干预设计。
+
+- evidence_pointer：Abstract P1 S5
+
+### 6. Abstract P1 S6
+
+- locator：Abstract P1 S6
+
+- paraphrase_cn：理论化主张：信息线索的内化会降低决策不确定性和/或平台恶意感知，从而提高SSR处理。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出核心因果机制命题，把“线索为什么有效”变成可检验问题。
+
+- inherits_from_previous_cn：承接策略提议与三个维度，把线索、内化、效果连接起来。
+
+- changes_argument_state_cn：确立全文核心假设机制。
+
+- sets_up_next_cn：暗示内化不是自动发生，需要权变条件。
+
+- failure_if_removed_cn：全文没有唯一的理论主线，实验无法被组织。
+
+- evidence_pointer：Abstract P1 S6
+
+### 7. Abstract P1 S7
+
+- locator：Abstract P1 S7
+
+- paraphrase_cn：研究还考虑触发用户内化的权变因素。
+
+- move_code：BOUNDARY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：宣告文章的第二个贡献点：不是所有情况下线索都有效。
+
+- inherits_from_previous_cn：内化机制需要触发条件，否则推论不完整。
+
+- changes_argument_state_cn：从机制命题过渡到边界条件命题。
+
+- sets_up_next_cn：为实验二、三的调节变量做伏笔。
+
+- failure_if_removed_cn：贡献会变成无条件的线索有效论，与后续实验发现冲突。
+
+- evidence_pointer：Abstract P1 S7
+
+### 8. Abstract P1 S8
+
+- locator：Abstract P1 S8
+
+- paraphrase_cn：进行三个实验室实验，结果支持上述理论化关系。
+
+- move_code：METHOD_AND_RESULT_OVERVIEW
+
+- statement_status：empirical_result
+
+- why_here_cn：一句话交代方法类型与总体结论，符合ISR摘要惯例。
+
+- inherits_from_previous_cn：所检验的正是前句提出的机制与边界。
+
+- changes_argument_state_cn：给出经验证据支持理论。
+
+- sets_up_next_cn：进入贡献声明。
+
+- failure_if_removed_cn：摘要只提主张不提证据，科学可信度不足。
+
+- evidence_pointer：Abstract P1 S8
+
+### 9. Abstract P1 S9
+
+- locator：Abstract P1 S9
+
+- paraphrase_cn：本研究揭示信息线索在在线信息搜索场景中应对用户怀疑的内化机制，并为电商平台促进用户决策提供实践启示。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：总结理论贡献与实践启示，收束摘要。
+
+- inherits_from_previous_cn：从支持的实验结果升华到贡献。
+
+- changes_argument_state_cn：将研究定位为机制揭示+实践启示。
+
+- sets_up_next_cn：读者进入正文阅读理解全文如何支撑这两点。
+
+- failure_if_removed_cn：摘要没有解释这项研究为什么值得读。
+
+- evidence_pointer：Abstract P1 S9
+
+## 引言逐句图谱
+
+### 1. Introduction P1 S1
+
+- order：1
+
+- locator：Introduction P1 S1
+
+- paraphrase_cn：在线环境因缺乏监管，用户容易对搜索结果产生怀疑。
+
+- move_code：OPENING_CONTEXT
+
+- statement_status：prior_literature
+
+- why_here_cn：引言第一句在IS语境中建立广泛背景，说明在线环境的特殊性。
+
+- inherits_from_previous_cn：无。
+
+- changes_argument_state_cn：提出本文的宏观问题域（在线搜索怀疑）。
+
+- sets_up_next_cn：需要把问题从一般在线怀疑收窄到合法信息上。
+
+- failure_if_removed_cn：引言缺少进入问题的阶梯，读者不知从何而来。
+
+- evidence_pointer：Introduction P1 S1
+
+### 2. Introduction P1 S2–S3
+
+- order：2
+
+- locator：Introduction P1 S2–S3
+
+- paraphrase_cn：现有研究多关注网络误信息扩散，很少考察用户对合法信息的状态怀疑，而这是电商中的关键实践问题。
+
+- move_code：GAP_IN_LITERATURE
+
+- statement_status：prior_literature
+
+- why_here_cn：通过对比误信息研究与合法信息研究，制造文献缺口和现实重要性。
+
+- inherits_from_previous_cn：承接在线环境监管缺乏的背景。
+
+- changes_argument_state_cn：确定本文针对的是“合法信息被怀疑”这一被忽视问题。
+
+- sets_up_next_cn：引出具体实例：SSR。
+
+- failure_if_removed_cn：读者不知道研究的新颖点在哪里。
+
+- evidence_pointer：Introduction P1 S2–S3
+
+### 3. Introduction P1 S4–S5
+
+- order：3
+
+- locator：Introduction P1 S4–S5
+
+- paraphrase_cn：在电商平台上，用户一般怀疑并消极对待偏离查询词的SSR，尽管很多SSR是合法且能提供好推荐的信息。
+
+- move_code：CONCRETE_PHENOMENON
+
+- statement_status：empirical_result
+
+- why_here_cn：给出具体情境实例，让抽象缺口落地为可观察现象。
+
+- inherits_from_previous_cn：把“合法信息被怀疑”具体化为SSR。
+
+- changes_argument_state_cn：确定了研究核心对象（SSR）。
+
+- sets_up_next_cn：需要解释SSR为何重要、为何值得研究。
+
+- failure_if_removed_cn：研究变成泛泛的怀疑讨论，缺乏具体载体。
+
+- evidence_pointer：Introduction P1 S4–S5
+
+### 4. Introduction P1 S6–S10
+
+- order：4
+
+- locator：Introduction P1 S6–S10
+
+- paraphrase_cn：赞助搜索对品牌营销和平台收入至关重要，SSR回避会损害按点击付费模式；现有研究对在线搜索中合法信息引发的用户怀疑处理不足。
+
+- move_code：PRACTICAL_STAKES_AND_RESEARCH_VOID
+
+- statement_status：empirical_result
+
+- why_here_cn：说明问题不仅存在而且有高商业和平台可持续性代价，同时再次强调理论缺口。
+
+- inherits_from_previous_cn：SSR现象需要从经济和平台层面加重分量。
+
+- changes_argument_state_cn：把SSR回避从一个行为现象提升为关键现实问题。
+
+- sets_up_next_cn：为提出本文研究动机和目标做铺垫。
+
+- failure_if_removed_cn：读者可能认为这只是众多搜索行为中不紧要的一种。
+
+- evidence_pointer：Introduction P1 S6–S10
+
+### 5. Introduction P2 S1–S3
+
+- order：5
+
+- locator：Introduction P2 S1–S3
+
+- paraphrase_cn：离线情境研究发现怀疑促使个体投入额外努力处理相关信息，例如消费者会额外处理销售者信息。
+
+- move_code：PRIOR_KNOWLEDGE_OFFLINE
+
+- statement_status：prior_literature
+
+- why_here_cn：为下一句的反差提供经典理论预期。
+
+- inherits_from_previous_cn：离线文献是怀疑研究的主要来源。
+
+- changes_argument_state_cn：建立离线基准：怀疑→更多处理。
+
+- sets_up_next_cn：紧接着用在线情境的反差推翻直觉。
+
+- failure_if_removed_cn：后面“在线不同”的论点失去对照。
+
+- evidence_pointer：Introduction P2 S1–S3
+
+### 6. Introduction P2 S4–S5
+
+- order：6
+
+- locator：Introduction P2 S4–S5
+
+- paraphrase_cn：在在线搜索中，可疑用户往往忽略和回避SSR而非处理它们，这区别于此前研究。
+
+- move_code：CONTRAST_WITH_OFFLINE
+
+- statement_status：author_inference
+
+- why_here_cn：关键转折点：指出在线情境中处理方向相反。
+
+- inherits_from_previous_cn：承接离线文献后直接反转结论。
+
+- changes_argument_state_cn：为后文重新情境化怀疑概念提供必要性。
+
+- sets_up_next_cn：需要讨论理论构念为何需要重新定义。
+
+- failure_if_removed_cn：本文论述的前提（处理代表怀疑降低）没有基础。
+
+- evidence_pointer：Introduction P2 S4–S5
+
+### 7. Introduction P3 S1–S3
+
+- order：7
+
+- locator：Introduction P3 S1–S3
+
+- paraphrase_cn：既有研究揭示怀疑是多维的：除处理变化外，还有决策不确定性和感知恶意。
+
+- move_code：MULTIDIMENSIONAL_CONSTRUCT_INTRO
+
+- statement_status：prior_literature
+
+- why_here_cn：引入三个构念，告知读者理论框架的核心维度。
+
+- inherits_from_previous_cn：既然情境不同，需要完整框架来结构怀疑。
+
+- changes_argument_state_cn：把怀疑分解为多个可测量维度。
+
+- sets_up_next_cn：指出既有研究未检验维度间关系。
+
+- failure_if_removed_cn：后文三个构念的关系假设失去了来源。
+
+- evidence_pointer：Introduction P3 S1–S3
+
+### 8. Introduction P3 S4–S5
+
+- order：8
+
+- locator：Introduction P3 S4–S5
+
+- paraphrase_cn：离线研究假设这些维度同时发生，没有检验它们的关系；在SSR情境中，用户是否处理SSR处于自主控制下。
+
+- move_code：CRITIQUE_AND_SITUATION_CHARACTERISTIC
+
+- statement_status：author_inference
+
+- why_here_cn：表明不能直接借用离线理论，需要重新理论化维度间因果关系。
+
+- inherits_from_previous_cn：基于三维构念与在线可绕过特征。
+
+- changes_argument_state_cn：留下一个明确的理论空白：维度关系未知。
+
+- sets_up_next_cn：引出第一研究目标。
+
+- failure_if_removed_cn：前期的多维理论引入后没有落点，无法引导假设。
+
+- evidence_pointer：Introduction P3 S4–S5
+
+### 9. Introduction P3 last S
+
+- order：9
+
+- locator：Introduction P3 last S
+
+- paraphrase_cn：第一目标是在SSR情境中情境化用户状态怀疑并考察维度间关系。
+
+- move_code：RESEARCH_OBJECTIVE_1
+
+- statement_status：author_inference
+
+- why_here_cn：正式声明第一个研究目标，使引言从问题描述进入研究任务。
+
+- inherits_from_previous_cn：直接回应维度关系未检验的空白。
+
+- changes_argument_state_cn：确立论文的第一半理论基础。
+
+- sets_up_next_cn：引出另一个目标：开发减少怀疑的策略。
+
+- failure_if_removed_cn：论文的理论部分没有明确问题导向。
+
+- evidence_pointer：Introduction P3 last S
+
+### 10. Introduction P4 S1
+
+- order：10
+
+- locator：Introduction P4 S1
+
+- paraphrase_cn：第二目标是发展减少用户怀疑的具体方法。
+
+- move_code：RESEARCH_OBJECTIVE_2
+
+- statement_status：author_inference
+
+- why_here_cn：表明研究不仅理解怀疑，还要给出干预措施。
+
+- inherits_from_previous_cn：理解维度关系后需要控制它们。
+
+- changes_argument_state_cn：确定研究的应用性质。
+
+- sets_up_next_cn：引出信息线索作为候选对策。
+
+- failure_if_removed_cn：研究缺少干预部分，IS贡献不足。
+
+- evidence_pointer：Introduction P4 S1
+
+### 11. Introduction P4 S2–S4
+
+- order：11
+
+- locator：Introduction P4 S2–S4
+
+- paraphrase_cn：提出使用UGC中的正性信息线索（如买家质量评分、卖家评分）作为减少怀疑的候选策略，并指出平台普遍已有这些线索。
+
+- move_code：DESIGN_STRATEGY_INTRO
+
+- statement_status：design_decision
+
+- why_here_cn：将研究目标具象为可操作的平台设计元素。
+
+- inherits_from_previous_cn：第二目标需要具体载体。
+
+- changes_argument_state_cn：引入干预物（信息线索）并赋予现实基础。
+
+- sets_up_next_cn：提示线索效果未必自动成立。
+
+- failure_if_removed_cn：实验没有操纵对象，全文会变成纯概念研究。
+
+- evidence_pointer：Introduction P4 S2–S4
+
+### 12. Introduction P4 S5–S6
+
+- order：12
+
+- locator：Introduction P4 S5–S6
+
+- paraphrase_cn：怀疑中的用户可能对说服性商业信息产生防御，因此信息线索效果并不必然。
+
+- move_code：EFFECTIVENESS_UNCERTAINTY
+
+- statement_status：prior_literature
+
+- why_here_cn：防止读者误以为只要放个评分就有用，也预示后面需要条件化假设。
+
+- inherits_from_previous_cn：线索提议看起来很自然，需要点出怀疑者的防御机制。
+
+- changes_argument_state_cn：把研究问题从“线索是否有效”升为“何时、如何有效”。
+
+- sets_up_next_cn：引出内化机制与边界条件。
+
+- failure_if_removed_cn：研究将失去机制深度，沦为简单的线索效应测试。
+
+- evidence_pointer：Introduction P4 S5–S6
+
+### 13. Introduction P5 S1–S2
+
+- order：13
+
+- locator：Introduction P5 S1–S2
+
+- paraphrase_cn：说服文献中的内化过程解释了用户收到线索后如何改变对目标的评价。
+
+- move_code：MECHANISM_THEORY_INTRO
+
+- statement_status：prior_literature
+
+- why_here_cn：引入核心机制理论：内化。
+
+- inherits_from_previous_cn：线索不是自动发挥作用的，需要一个心理过程来解释。
+
+- changes_argument_state_cn：提出了全文的机制关键词。
+
+- sets_up_next_cn：接着讲内化对怀疑用户的困难。
+
+- failure_if_removed_cn：线索→效果的黑箱没有打开，无法形成假设。
+
+- evidence_pointer：Introduction P5 S1–S2
+
+### 14. Introduction P5 S3–S4
+
+- order：14
+
+- locator：Introduction P5 S3–S4
+
+- paraphrase_cn：非怀疑用户容易内化线索，但可疑用户警惕说服信息，可能不会内化关于SSR的线索。
+
+- move_code：MECHANISM_LIMITATION
+
+- statement_status：author_inference
+
+- why_here_cn：说明内化不是自动的，需要条件。
+
+- inherits_from_previous_cn：承接内化机制，但加入怀疑状态带来的障碍。
+
+- changes_argument_state_cn：设立“内化受条件限制”的理论前提。
+
+- sets_up_next_cn：需要给出哪些条件能鼓励内化。
+
+- failure_if_removed_cn：后文边界条件将没有理论动机。
+
+- evidence_pointer：Introduction P5 S3–S4
+
+### 15. Introduction P6 S1–S2
+
+- order：15
+
+- locator：Introduction P6 S1–S2
+
+- paraphrase_cn：SSR偏离查询词会提高怀疑，用户需要情境线索来鼓励内化，例如线索关于SSR可信度的信号。
+
+- move_code：BOUNDARY_MECHANISM_INTRO
+
+- statement_status：author_inference
+
+- why_here_cn：提出鼓励内化的情境因素应该是与SSR可信度相关的线索。
+
+- inherits_from_previous_cn：内化困难需要寻找触发器。
+
+- changes_argument_state_cn：锚定了第一个边界条件的方向：SSR可信度。
+
+- sets_up_next_cn：引向品牌知名度和评分比较两个具体条件。
+
+- failure_if_removed_cn：假设部分无从提出条件化预期。
+
+- evidence_pointer：Introduction P6 S1–S2
+
+### 16. Introduction P6 S3–S5
+
+- order：16
+
+- locator：Introduction P6 S3–S5
+
+- paraphrase_cn：知名品牌SSR会促使用户内化线索并降低不确定性；不知名品牌SSR需要额外证据证明可靠性后用户才会内化，因而决策不确定性和感知恶意均可通过内化被降低。
+
+- move_code：BOUNDED_PREDICTION
+
+- statement_status：theory_claim
+
+- why_here_cn：在引言层面预先给出两条不同情境下的预测，让读者对全文逻辑有全局把握。
+
+- inherits_from_previous_cn：承接SSR可信度引发内化的论点。
+
+- changes_argument_state_cn：提出全文最核心的条件化命题。
+
+- sets_up_next_cn：为实验二、三的操纵设计埋下伏笔。
+
+- failure_if_removed_cn：后文两个假设的基本逻辑失去先导。
+
+- evidence_pointer：Introduction P6 S3–S5
+
+### 17. Introduction P7 S1
+
+- order：17
+
+- locator：Introduction P7 S1
+
+- paraphrase_cn：通过一系列模拟C2C电商场景的实验室实验验证这些预测。
+
+- move_code：METHOD_PREVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：预告方法，让读者知道接下来是实验程序。
+
+- inherits_from_previous_cn：条件化预测需要实证检验。
+
+- changes_argument_state_cn：确定研究范式与证据类型。
+
+- sets_up_next_cn：为贡献声明做准备。
+
+- failure_if_removed_cn：读者不知道如何检验上述命题。
+
+- evidence_pointer：Introduction P7 S1
+
+### 18. Introduction P7 S2–S3
+
+- order：18
+
+- locator：Introduction P7 S2–S3
+
+- paraphrase_cn：本研究做出两大贡献：将怀疑理论扩展到在线信息搜索场景并理论化维度间关系；用内化视角打开信息线索影响用户怀疑的黑箱并识别边界条件。
+
+- move_code：CONTRIBUTION_PREVIEW
+
+- statement_status：contribution_claim
+
+- why_here_cn：在引言末尾系统声明贡献，提前告知读者本文的理论价值。
+
+- inherits_from_previous_cn：回收到开头的理论缺口和机制需求。
+
+- changes_argument_state_cn：将研究从问题解决者升级为理论贡献者。
+
+- sets_up_next_cn：展示论文结构作为收尾。
+
+- failure_if_removed_cn：引言没有呈现研究独特价值，读者可能认为只是又一个线索实验。
+
+- evidence_pointer：Introduction P7 S2–S3
+
+### 19. Introduction P7 last S
+
+- order：19
+
+- locator：Introduction P7 last S
+
+- paraphrase_cn：简述论文后续章节安排。
+
+- move_code：ROADMAP
+
+- statement_status：fact
+
+- why_here_cn：为读者提供导航，符合ISR写作惯例。
+
+- inherits_from_previous_cn：无需理论前提，是结构信号。
+
+- changes_argument_state_cn：结束引言，进入理论部分。
+
+- sets_up_next_cn：引导读者进入Section 2。
+
+- failure_if_removed_cn：不影响论证，但降低文章可读性和专业感。
+
+- evidence_pointer：Introduction P7 last S
+
+## 引言逐段图谱
+
+### 1. Introduction P1
+
+- locator：Introduction P1
+
+- opening_move_cn：以在线环境缺乏监管作为宽背景开场。
+
+- development_move_cn：对比误信息研究与合法信息研究，引入SSR现象并强调其商业与平台重要性。
+
+- pivot_move_cn：从一般在线怀疑聚焦到合法信息（SSR）被怀疑这一尚未充分研究的实践问题。
+
+- closing_move_cn：以“现有研究处理不足”收束，制造研究空缺。
+
+- paragraph_job_cn：建立研究问题与现实重要性，并在文献中划出缺口位置。
+
+### 2. Introduction P2
+
+- locator：Introduction P2
+
+- opening_move_cn：先陈述离线情境中怀疑导致增加处理的知识。
+
+- development_move_cn：详细说明离线中个体在怀疑时会付出额外努力验证信息。
+
+- pivot_move_cn：转折到在线搜索用户倾向于忽略和回避SSR。
+
+- closing_move_cn：用“区别于以往研究”收束，引出情境化必要。
+
+- paragraph_job_cn：通过离线-在线反差，论证本文需要重新定义怀疑维度及其方向。
+
+### 3. Introduction P3
+
+- locator：Introduction P3
+
+- opening_move_cn：引入怀疑的多维性，列出决策不确定性、感知恶意与处理变化。
+
+- development_move_cn：指出离线研究假设这些维度同时发生而未检验关系。
+
+- pivot_move_cn：强调SSR情境中用户对是否处理SSR有自主权。
+
+- closing_move_cn：导出第一目标：情境化怀疑并考察维度间关系。
+
+- paragraph_job_cn：将理论缺口落实为第一研究目标，为全文理论建模定调。
+
+### 4. Introduction P4
+
+- locator：Introduction P4
+
+- opening_move_cn：从理解维度关系转向开发干预策略。
+
+- development_move_cn：提出UGC正性信息线索为候选设计，说明平台已有此类线索。
+
+- pivot_move_cn：转折点出怀疑用户对说服性信息的防御，线索效果不必然。
+
+- closing_move_cn：以“很少研究是否与如何”制造第二缺口并导出第二目标。
+
+- paragraph_job_cn：确立研究的设计策略对象（信息线索）并说明需要条件化研究。
+
+### 5. Introduction P5
+
+- locator：Introduction P5
+
+- opening_move_cn：引入说服文献中的内化过程。
+
+- development_move_cn：说明内化机制是线索改变目标评价的过程，但怀疑用户可能不愿内化。
+
+- pivot_move_cn：从机制本身转向机制的触发条件。
+
+- closing_move_cn：提出需要情境因素鼓励内化。
+
+- paragraph_job_cn：把全文的机制解释器设为“内化”，并预告其条件性。
+
+### 6. Introduction P6
+
+- locator：Introduction P6
+
+- opening_move_cn：承前提出SSR可信度作为鼓励内化的情境因素。
+
+- development_move_cn：分别推演知名品牌与不知名品牌两种情形下线索是否容易被内化。
+
+- pivot_move_cn：在不知名品牌情形中加入“需要额外证据”的重要推论。
+
+- closing_move_cn：总结用户不确定性和平台恶意如何可被线索内化降低并增加处理。
+
+- paragraph_job_cn：给出全文条件化命题，把两个边界条件都引入讨论。
+
+### 7. Introduction P7
+
+- locator：Introduction P7
+
+- opening_move_cn：预告研究方法为系列实验室实验。
+
+- development_move_cn：依次浓缩两个理论贡献。
+
+- pivot_move_cn：从贡献声明转向章节安排。
+
+- closing_move_cn：以文章结构导览结束引言。
+
+- paragraph_job_cn：收束引言，明确研究方法、贡献与结构。
+
+## 理论到设计逐句图谱
+
+### 1. Section 2 P1
+
+- locator：Section 2 P1
+
+- paraphrase_cn：状态怀疑理论提出三个维度：决策不确定性、感知恶意、对怀疑目标增加处理。
+
+- move_code：THEORY_BASE
+
+- statement_status：prior_literature
+
+- why_here_cn：为整篇理论框架立基，告知读者本文所用的核心理论。
+
+- inherits_from_previous_cn：引入理论部分。
+
+- changes_argument_state_cn：把研究问题转接到理论构念。
+
+- sets_up_next_cn：需要逐个定义维度在SSR情境中的对象。
+
+- failure_if_removed_cn：后续假设没有理论根源。
+
+- evidence_pointer：Section 2 P1
+
+### 2. Section 2 P2–P4
+
+- locator：Section 2 P2–P4
+
+- paraphrase_cn：在SSR情境中，决策不确定性指难以评估搜索结果质量/卖家；感知恶意指平台误导意图；处理包括认知、情感、行为三方面，文中用雇主怀疑报销单的例子说明三类处理。
+
+- move_code：CONSTRUCT_CONTEXTUALIZATION
+
+- statement_status：theory_claim
+
+- why_here_cn：把抽象理论维度落到本文情境，为测量和操纵提供概念依据。
+
+- inherits_from_previous_cn：接受三维构念后需指派具体对象。
+
+- changes_argument_state_cn：确定三个构念的SSR版操作含义。
+
+- sets_up_next_cn：为论证“离线假设不适用”提供对照。
+
+- failure_if_removed_cn：构念无法对应到实验测量。
+
+- evidence_pointer：Section 2 P2–P4
+
+### 3. Section 2 P5 S1–S4
+
+- locator：Section 2 P5 S1–S4
+
+- paraphrase_cn：离线理论认为怀疑增加处理且处理消极取向，但在SSR情境中用户可绕过SSR，因此这两个假设不适用。
+
+- move_code：THEORY_CRITIQUE_AND_REVISION
+
+- statement_status：author_inference
+
+- why_here_cn：核心理论转折：否定离线假设，确立在线情境中处理代表怀疑降低。
+
+- inherits_from_previous_cn：基于SSR是补充结果的平台特征。
+
+- changes_argument_state_cn：重写“处理”维度的方向与评价。
+
+- sets_up_next_cn：为维度间因果关系（降低不确定性和恶意→增加处理）创造条件。
+
+- failure_if_removed_cn：本文最独特的理论贡献（处理方向反转）会消失。
+
+- evidence_pointer：Section 2 P5 S1–S4
+
+### 4. Section 2 P5 S5–S6
+
+- locator：Section 2 P5 S5–S6
+
+- paraphrase_cn：在本文关注的高评分SSR上，增加处理可以是有益的，因此处理不必然是消极导向。
+
+- move_code：POSITIVE_PROCESSING_CLAIM
+
+- statement_status：theory_claim
+
+- why_here_cn：消除“处理是避免怀疑的正常反应”的旧假设，使线索机制有理论空间。
+
+- inherits_from_previous_cn：承接处理方向反转的论证。
+
+- changes_argument_state_cn：为处理维度的正向评价定调。
+
+- sets_up_next_cn：转入3.1论证维度间相互影响。
+
+- failure_if_removed_cn：读者难以理解为什么增加点击是好事。
+
+- evidence_pointer：Section 2 P5 S5–S6
+
+### 5. Section 3.1 P1–P2
+
+- locator：Section 3.1 P1–P2
+
+- paraphrase_cn：怀疑三维度分别针对产品/卖家、平台、SSR三个实体；由于SSR由平台提供，维度间存在溢出关系。
+
+- move_code：TARGET_IDENTIFICATION_AND_SPILLOVER
+
+- statement_status：theory_claim
+
+- why_here_cn：为“维度间存在因果路径”提供对象基础。
+
+- inherits_from_previous_cn：沿用第二部分的构念情境化。
+
+- changes_argument_state_cn：确定各维度对象与溢出逻辑。
+
+- sets_up_next_cn：有利于推导决策不确定性→处理、平台恶意→处理的假设。
+
+- failure_if_removed_cn：3.1的两条路径缺乏前提。
+
+- evidence_pointer：Section 3.1 P1–P2
+
+### 6. Section 3.1 P3
+
+- locator：Section 3.1 P3
+
+- paraphrase_cn：用户作为认知吝啬者会过滤高不确定性搜索结果，因此降低决策不确定性才可能促使其增加处理。
+
+- move_code：MECHANISM_ROUTE_1
+
+- statement_status：theory_claim
+
+- why_here_cn：为第一条路径提供微观认知机制。
+
+- inherits_from_previous_cn：基于维度目标与认知吝啬者视角。
+
+- changes_argument_state_cn：把“降低不确定性→增加处理”确立为一条可检验路径。
+
+- sets_up_next_cn：为H1中的中介变量埋下伏笔。
+
+- failure_if_removed_cn：H1的中介假设落空。
+
+- evidence_pointer：Section 3.1 P3
+
+### 7. Section 3.1 P4
+
+- locator：Section 3.1 P4
+
+- paraphrase_cn：感知平台恶意会让用户不愿处理SSR而只关注自然结果，因此降低平台恶意能增加处理。
+
+- move_code：MECHANISM_ROUTE_2
+
+- statement_status：theory_claim
+
+- why_here_cn：为第二条路径提供机制。
+
+- inherits_from_previous_cn：承接SSR由平台提供、平台动机可被质疑的论点。
+
+- changes_argument_state_cn：建立“降低恶意→增加处理”的第二条路径。
+
+- sets_up_next_cn：为H2的双中介打基础。
+
+- failure_if_removed_cn：H2中平台恶意中介没有逻辑依据。
+
+- evidence_pointer：Section 3.1 P4
+
+### 8. Section 3.2 P1–P2
+
+- locator：Section 3.2 P1–P2
+
+- paraphrase_cn：聚焦两类正性信息线索：商品质量评分和卖家信誉评分，因为它们分别对应评价SSR时的主要目标。
+
+- move_code：DESIGN_OFF_OBJECTS
+
+- statement_status：design_decision
+
+- why_here_cn：把理论机制匹配到具体线索类型，为实验操纵提供选择理由。
+
+- inherits_from_previous_cn：基于决策不确定性来自产品/卖家评价。
+
+- changes_argument_state_cn：确定干预元素（Q-cue与C-cue）。
+
+- sets_up_next_cn：解释线索如何通过内化降低不确定性。
+
+- failure_if_removed_cn：实验设计的线索选择缺乏依据。
+
+- evidence_pointer：Section 3.2 P1–P2
+
+### 9. Section 3.2 P3
+
+- locator：Section 3.2 P3
+
+- paraphrase_cn：内化质量评分线索能帮助用户判断赞助产品质量，从而降低决策不确定性。
+
+- move_code：INTERNALIZATION_MECHANISM
+
+- statement_status：theory_claim
+
+- why_here_cn：把内化概念与第一个机制路径连接起来。
+
+- inherits_from_previous_cn：内化是线索改变评价的过程。
+
+- changes_argument_state_cn：完成线索→内化→降低不确定性的推导。
+
+- sets_up_next_cn：为H1的机制部分提供支撑。
+
+- failure_if_removed_cn：H1只是效应假设而非机制假设。
+
+- evidence_pointer：Section 3.2 P3
+
+### 10. Section 3.2 P4
+
+- locator：Section 3.2 P4
+
+- paraphrase_cn：由于用户是认知吝啬者，需要情境因素确保内化线索的认知资源不会浪费，SSR可信度是关键权变因素。
+
+- move_code：COGNITIVE_MISER_BOUNDARY
+
+- statement_status：theory_claim
+
+- why_here_cn：引出边界条件概念，使文章从“线索有效”转向“何时有效”。
+
+- inherits_from_previous_cn：内化需要认知努力，认知吝啬者不愿浪费。
+
+- changes_argument_state_cn：将SSR可信度设为内化触发因素。
+
+- sets_up_next_cn：为3.3的品牌知名度调节做铺垫。
+
+- failure_if_removed_cn：后面的条件化假设失去理论基础。
+
+- evidence_pointer：Section 3.2 P4
+
+### 11. Section 3.3 P1–P2
+
+- locator：Section 3.3 P1–P2
+
+- paraphrase_cn：使用SSR品牌知名度作为SSR可信度指示；消费者认为知名品牌的来源更可信。
+
+- move_code：FIRST_BOUNDARY_INTRODUCTION
+
+- statement_status：prior_literature
+
+- why_here_cn：把抽象的可信度因素具体化为可操纵的品牌知名度。
+
+- inherits_from_previous_cn：承接SSR可信度作为内化触发。
+
+- changes_argument_state_cn：确定第一个调节变量。
+
+- sets_up_next_cn：为H1提供边界条件描述。
+
+- failure_if_removed_cn：实验二无法设计品牌操纵。
+
+- evidence_pointer：Section 3.3 P1–P2
+
+### 12. Section 3.3 P3–P5
+
+- locator：Section 3.3 P3–P5
+
+- paraphrase_cn：当SSR为知名品牌时，线索通过降低决策不确定性增加处理；线索不太会改变用户对平台恶意的感知；当SSR为不知名品牌时，用户怀疑平台意图，信息线索无效。
+
+- move_code：CONDITIONAL_PREDICTION_H1
+
+- statement_status：theory_claim
+
+- why_here_cn：完整给出H1及边界预测，说明为何只假设一条路径。
+
+- inherits_from_previous_cn：基于来源可信度与认知吝啬者视角。
+
+- changes_argument_state_cn：把机制与边界打包为可检验命题。
+
+- sets_up_next_cn：H1正式陈述后需要实验检验。
+
+- failure_if_removed_cn：H1缺乏具体预测内容。
+
+- evidence_pointer：Section 3.3 P3–P5
+
+### 13. Section 3.3 H1
+
+- locator：Section 3.3 H1
+
+- paraphrase_cn：H1：当SSR为知名品牌时，正性信息线索通过降低决策不确定性增加用户对SSR的处理。
+
+- move_code：HYPOTHESIS_1
+
+- statement_status：theory_claim
+
+- why_here_cn：正式提出第一个假设，作为实验一和实验二的检验对象。
+
+- inherits_from_previous_cn：来自品牌知名度与内化路径的推导。
+
+- changes_argument_state_cn：设定了第一个待验证命题。
+
+- sets_up_next_cn：引出不知名品牌场景的新假设。
+
+- failure_if_removed_cn：全文没有明确检验目标。
+
+- evidence_pointer：Section 3.3 H1
+
+### 14. Section 3.4 P1–P2
+
+- locator：Section 3.4 P1–P2
+
+- paraphrase_cn：对于不知名品牌SSR，需要额外证据证明呈现SSR的合理性；当SSR与自然结果都带线索时，用户可比较SSR评分与邻近自然结果评分。
+
+- move_code：SECOND_BOUNDARY_INTRO
+
+- statement_status：theory_claim
+
+- why_here_cn：在不知名品牌无效的基础上引入第二条件：评分相对水平与自然结果比较。
+
+- inherits_from_previous_cn：承接3.3不知名品牌无效的预测。
+
+- changes_argument_state_cn：确定第二个调节变量。
+
+- sets_up_next_cn：为H2提供逻辑基础。
+
+- failure_if_removed_cn：实验三无法设立高/低评分线索操纵。
+
+- evidence_pointer：Section 3.4 P1–P2
+
+### 15. Section 3.4 P3–P4
+
+- locator：Section 3.4 P3–P4
+
+- paraphrase_cn：当SSR评分与顶部自然结果相当时，用户认为平台善意且SSR质量可信，因而同时降低平台恶意与决策不确定性，进而增加处理。
+
+- move_code：DUAL_ROUTE_MECHANISM_H2
+
+- statement_status：theory_claim
+
+- why_here_cn：为H2的双中介提供机制解释。
+
+- inherits_from_previous_cn：基于自然结果作为可信参照。
+
+- changes_argument_state_cn：把高评分线索设定为能够激活两条路径的条件。
+
+- sets_up_next_cn：H2正式化。
+
+- failure_if_removed_cn：H2只是猜测没有因果依据。
+
+- evidence_pointer：Section 3.4 P3–P4
+
+### 16. Section 3.4 H2
+
+- locator：Section 3.4 H2
+
+- paraphrase_cn：H2：对不知名品牌SSR，当SSR和自然结果都含信息线索且SSR评分与顶部自然结果相当的高评分线索时，线索通过降低决策不确定性和平台恶意感知增加处理。
+
+- move_code：HYPOTHESIS_2
+
+- statement_status：theory_claim
+
+- why_here_cn：正式提出第二假设，完成全文条件化预测体系。
+
+- inherits_from_previous_cn：来自评分比较与双路径机制。
+
+- changes_argument_state_cn：确立实验三的检验目标。
+
+- sets_up_next_cn：需要实验设计来操纵高/低评分。
+
+- failure_if_removed_cn：实验三没有明确目的。
+
+- evidence_pointer：Section 3.4 H2
+
+### 17. Section 3.4 P5–P6
+
+- locator：Section 3.4 P5–P6
+
+- paraphrase_cn：低评分线索会确认用户对平台动机的负面预期，因而不被内化；知名品牌SSR的线索效应不依赖评分水平。
+
+- move_code：COMPLEMENTARY_BOUNDARY_PREDICTION
+
+- statement_status：theory_claim
+
+- why_here_cn：界定低评分无效和知名品牌不受评分水平影响的补充预期。
+
+- inherits_from_previous_cn：基于比较处理和品牌可信度的差异。
+
+- changes_argument_state_cn：为实验三设立低评分对照和知名品牌补充组。
+
+- sets_up_next_cn：直接走向实验设计。
+
+- failure_if_removed_cn：实验三的低评分对照组和补充组设计缺乏理论支撑。
+
+- evidence_pointer：Section 3.4 P5–P6
+
+## 制品设计理由逐句图谱
+
+### 1. Section 4.1.1 P1–P4 (Tasks and Procedures)
+
+- locator：Section 4.1.1 P1–P4 (Tasks and Procedures)
+
+- paraphrase_cn：实验使用模拟淘宝的网站、品牌选择任务、偏离品牌的SSR，并阻断详情页以减少产品信息混淆。
+
+- move_code：ARTIFACT_RATIONALE
+
+- statement_status：design_decision
+
+- why_here_cn：首次实验需要确立研究范式：通过可控页面制造“SSR偏离查询词”的核心情境。
+
+- inherits_from_previous_cn：依据引言与假设对SSR情境的定义。
+
+- changes_argument_state_cn：把抽象的SSR情境落实为可操纵页面。
+
+- sets_up_next_cn：为后续实验提供可复用的范式模板。
+
+- failure_if_removed_cn：实验一无法操作核心自变量，全文证据链断裂。
+
+- evidence_pointer：Section 4.1.1 P1–P4
+
+### 2. Section 4.1.2 P1
+
+- locator：Section 4.1.2 P1
+
+- paraphrase_cn：搜索页包含十个商品，预测试证明该页与淘宝实际搜索页相似，商品吸引力无显著差异。
+
+- move_code：REALISM_VALIDATION
+
+- statement_status：method_decision
+
+- why_here_cn：消除外部效度担忧，说明模拟页面能代表真实平台体验。
+
+- inherits_from_previous_cn：实验范式需要先验真实性检验。
+
+- changes_argument_state_cn：确认刺激材料的有效性。
+
+- sets_up_next_cn：使后续结果可被归因于线索操纵。
+
+- failure_if_removed_cn：读者可质疑实验材料不真实导致结果人为。
+
+- evidence_pointer：Section 4.1.2 P1
+
+### 3. Section 4.1.2 P2–P3
+
+- locator：Section 4.1.2 P2–P3
+
+- paraphrase_cn：Q-cue被操作为4.9/5.0商品质量评分，C-cue被操作为4.9/5.0卖家信誉评分，并以矩形区域显示在SSR旁。
+
+- move_code：CUE_OPERATIONALIZATION
+
+- statement_status：design_decision
+
+- why_here_cn：把理论上的信息线索落实为具体可见的界面元素，同时保留平台常见呈现格式。
+
+- inherits_from_previous_cn：信息线索类型定义来自3.2。
+
+- changes_argument_state_cn：确定了处理组中需要操纵的核心界面部件。
+
+- sets_up_next_cn：使操纵检验和效应检验有明确对象。
+
+- failure_if_removed_cn：无法区分线索效应与页面其他干扰。
+
+- evidence_pointer：Section 4.1.2 P2–P3
+
+### 4. Section 4.1.3 P1–P3
+
+- locator：Section 4.1.3 P1–P3
+
+- paraphrase_cn：把SSR处理维度反向操作为SSR回避，用自报认知回避、眼动注视比例、情感回避和实际点击来衡量三类处理。
+
+- move_code：DEPENDENT_VARIABLE_OPERATIONALIZATION
+
+- statement_status：method_decision
+
+- why_here_cn：处理维度在理论中定义为增加，但在行为上以“回避减少”来测量，使构念可操作。
+
+- inherits_from_previous_cn：回避是增加处理的反向指标。
+
+- changes_argument_state_cn：建立了三类DVs，支撑多维处理概念。
+
+- sets_up_next_cn：为统计分析中的MANCOVA/ANCOVA/逻辑回归提供变量结构。
+
+- failure_if_removed_cn：理论中对处理的三维定义无法与数据对应。
+
+- evidence_pointer：Section 4.1.3 P1–P3
+
+### 5. Section 4.2.1 P1–P2 (Changes in Experiment 2)
+
+- locator：Section 4.2.1 P1–P2 (Changes in Experiment 2)
+
+- paraphrase_cn：实验二改为2×3设计，产品换为运动T恤，加入KCA作为不知名品牌，并测量决策不确定性与感知平台恶意。
+
+- move_code：DESIGN_EXTENSION_FOR_MODERATION
+
+- statement_status：design_decision
+
+- why_here_cn：为了检验品牌知名度调节和中介，必须扩展操纵和测量。
+
+- inherits_from_previous_cn：基于3.3的品牌边界预测。
+
+- changes_argument_state_cn：使实验设计能支持调节与中介假设。
+
+- sets_up_next_cn：在有调节的中介分析中使用这些变量。
+
+- failure_if_removed_cn：无法验证品牌知名度边界。
+
+- evidence_pointer：Section 4.2.1 P1–P2
+
+### 6. Section 4.3.1 P1–P2
+
+- locator：Section 4.3.1 P1–P2
+
+- paraphrase_cn：实验三中所有自然结果都带Q-cue并按评分降序排列；SSR评分被设为与顶部三个或底部三个自然结果相当。
+
+- move_code：RATING_COMPARISON_OPERATIONALIZATION
+
+- statement_status：design_decision
+
+- why_here_cn：为检验评分比较路径，需要让SSR与自然结果在界面内直接可比。
+
+- inherits_from_previous_cn：基于3.4中评分比较作为第二边界的理论。
+
+- changes_argument_state_cn：确立了“高/低评分线索”的操作定义。
+
+- sets_up_next_cn：为H2的双中介检验提供实验场景。
+
+- failure_if_removed_cn：实验三无法检验评分水平效应。
+
+- evidence_pointer：Section 4.3.1 P1–P2
+
+## Study开头、过渡与收束图谱
+
+### 1. Section 4 P1
+
+- locator：Section 4 P1
+
+- paraphrase_cn：说明实验一检验H1主效应与内化感知，实验二检验品牌知名度与决策不确定性中介，实验三检验不知名品牌下H2与双中介。
+
+- move_code：STUDY_SEQUENCE_OVERVIEW
+
+- statement_status：fact
+
+- why_here_cn：在方法部分开头给读者三实验的整体导航。
+
+- inherits_from_previous_cn：三个实验分别对应前面的假设。
+
+- changes_argument_state_cn：把理论假设映射到具体实验。
+
+- sets_up_next_cn：进入实验一细节。
+
+- failure_if_removed_cn：读者会迷失在重复实验中。
+
+- evidence_pointer：Section 4 P1
+
+### 2. Section 4.1.1 P1
+
+- locator：Section 4.1.1 P1
+
+- paraphrase_cn：实验一采用用户间设计，信息线索三水平：无线索/Q-cue/C-cue，每组30人，样本量经功效分析确定。
+
+- move_code：STUDY_OPENING_DESIGN_RATIONALE
+
+- statement_status：method_decision
+
+- why_here_cn：开始实现第一个实验，说明设计选择与样本量依据。
+
+- inherits_from_previous_cn：实验一对应的假设是H1。
+
+- changes_argument_state_cn：确立实验一的统计检验能力。
+
+- sets_up_next_cn：引出任务与程序。
+
+- failure_if_removed_cn：实验一的严谨性无从判断。
+
+- evidence_pointer：Section 4.1.1 P1
+
+### 3. Section 4.1.4.2 (Results)
+
+- locator：Section 4.1.4.2 (Results)
+
+- paraphrase_cn：MANCOVA显示信息线索对三类回避有显著主效应；ANCOVA表明线索降低认知和情感回避；逻辑回归表明线索降低行为回避；ANOVA显示Q-cue提高感知质量、C-cue提高感知卖家可信度。
+
+- move_code：RESULTS_REPORTING
+
+- statement_status：empirical_result
+
+- why_here_cn：这是实验一的证据核心，分层报告总体与单个DV，并验证内化机制。
+
+- inherits_from_previous_cn：利用实验一的操纵检验与测量体系。
+
+- changes_argument_state_cn：为H1提供初步支持并给内化提供间接证据。
+
+- sets_up_next_cn：在讨论中指出仅覆盖知名品牌的局限。
+
+- failure_if_removed_cn：实验一无任何经验结果。
+
+- evidence_pointer：Section 4.1.4.2
+
+### 4. Section 4.1.5 P1
+
+- locator：Section 4.1.5 P1
+
+- paraphrase_cn：实验一仅覆盖知名品牌SSR，因此实验二将检验品牌知名度作用及决策不确定性中介。
+
+- move_code：STUDY_TRANSITION
+
+- statement_status：author_inference
+
+- why_here_cn：明确的过渡句，说明前一实验未解决问题并由下一实验填补。
+
+- inherits_from_previous_cn：实验一结果表明线索确实有效。
+
+- changes_argument_state_cn：把研究焦点从主效应推进到边界与机制。
+
+- sets_up_next_cn：预览实验二设计。
+
+- failure_if_removed_cn：读者不清楚为何需要第二个实验。
+
+- evidence_pointer：Section 4.1.5 P1
+
+### 5. Section 4.2.1 P1–P2
+
+- locator：Section 4.2.1 P1–P2
+
+- paraphrase_cn：实验二采用2×3设计，招募类似参与者，改变产品、加入KCA、测量中介变量，并因实验一自报与眼动一致而省略眼动。
+
+- move_code：STUDY_OPENING_AND_DESIGN_CHANGES
+
+- statement_status：method_decision
+
+- why_here_cn：说明实验二为何扩展设计并解释与前序实验的差异。
+
+- inherits_from_previous_cn：前序实验证明眼动与自报一致，因此可省略以降低成本。
+
+- changes_argument_state_cn：实现检验调节与中介的条件。
+
+- sets_up_next_cn：为3.3和H1在不知名/知名两类品牌下的预测检验提供数据。
+
+- failure_if_removed_cn：实验二无法构成独立的证据包。
+
+- evidence_pointer：Section 4.2.1 P1–P2
+
+### 6. Section 4.2.2.2 (Results)
+
+- locator：Section 4.2.2.2 (Results)
+
+- paraphrase_cn：Q-cue和C-cue在知名品牌下显著降低三类回避，在不知名品牌下无显著效果，交互项显著。
+
+- move_code：INTERACTION_RESULTS
+
+- statement_status：empirical_result
+
+- why_here_cn：验证品牌知名度作为第一边界条件。
+
+- inherits_from_previous_cn：直接回应实验二的2×3设计。
+
+- changes_argument_state_cn：确认H1的边界条件成立。
+
+- sets_up_next_cn：转入决策不确定性中介检验。
+
+- failure_if_removed_cn：无法判断线索效应本质上是条件性的。
+
+- evidence_pointer：Section 4.2.2.2
+
+### 7. Section 4.2.2.3 (Mediation)
+
+- locator：Section 4.2.2.3 (Mediation)
+
+- paraphrase_cn：有调节的中介分析显示，决策不确定性的间接效应在知名品牌条件下显著、未知品牌条件下不显著，差异显著。
+
+- move_code：MEDIATION_RESULTS
+
+- statement_status：empirical_result
+
+- why_here_cn：验证H1的机制路径并证明其品牌条件性。
+
+- inherits_from_previous_cn：交互效应后需要解释机制来源。
+
+- changes_argument_state_cn：完成机制验证并限定路径条件。
+
+- sets_up_next_cn：把不知名品牌无效的事实带入下一实验。
+
+- failure_if_removed_cn：H1只剩效应证据而没有机制证据。
+
+- evidence_pointer：Section 4.2.2.3
+
+### 8. Section 4.2.3 P1
+
+- locator：Section 4.2.3 P1
+
+- paraphrase_cn：实验二发现不知名品牌下线索无效；因此实验三将检验SSR评分与有机结果相比的高评分线索能否帮助不知名品牌。
+
+- move_code：STUDY_TRANSITION
+
+- statement_status：author_inference
+
+- why_here_cn：用实验二的负面结果创造新问题，引出H2的检验。
+
+- inherits_from_previous_cn：实验二表明不知名品牌下线索无效。
+
+- changes_argument_state_cn：研究推进到第二边界条件。
+
+- sets_up_next_cn：为实验三的评分水平操纵做预告。
+
+- failure_if_removed_cn：实验三的出现没有逻辑必要性。
+
+- evidence_pointer：Section 4.2.3 P1
+
+### 9. Section 4.3.1 P1–P2
+
+- locator：Section 4.3.1 P1–P2
+
+- paraphrase_cn：实验三采用2×3设计，核心是未知品牌SSR，自然结果带Q-cue并按降序排列，SSR评分水平设为与顶部或底部自然结果相当。
+
+- move_code：STUDY_OPENING_AND_H2_OPERATIONALIZATION
+
+- statement_status：method_decision
+
+- why_here_cn：实现H2的界面条件：SSR与自然结果同时带线索且评分可比较。
+
+- inherits_from_previous_cn：实验二留下的不知名品牌问题。
+
+- changes_argument_state_cn：设立高/低评分条件来检验比较效应。
+
+- sets_up_next_cn：为双中介分析提供数据。
+
+- failure_if_removed_cn：无法验证H2。
+
+- evidence_pointer：Section 4.3.1 P1–P2
+
+### 10. Section 4.3.2.2 (Results)
+
+- locator：Section 4.3.2.2 (Results)
+
+- paraphrase_cn：对不知名品牌SSR，高Q-cue显著降低三类回避，低Q-cue无效；补充分析显示高评分线索在知名品牌中同样有效且不受评分水平影响。
+
+- move_code：RESULTS_REPORTING
+
+- statement_status：empirical_result
+
+- why_here_cn：验证H2的直接效应与第二边界条件。
+
+- inherits_from_previous_cn：基于实验三的评分水平设计。
+
+- changes_argument_state_cn：确立“对比评分”作为激活线索效果的条件。
+
+- sets_up_next_cn：进入双中介检验。
+
+- failure_if_removed_cn：H2无法获得证据。
+
+- evidence_pointer：Section 4.3.2.2
+
+### 11. Section 4.3.2.2 (Mediation paragraph)
+
+- locator：Section 4.3.2.2 (Mediation paragraph)
+
+- paraphrase_cn：平行中介显示高Q-cue通过决策不确定性和平台恶意感知两条路径降低SSR回避，低Q-cue无间接效应。
+
+- move_code：DUAL_MEDIATION_RESULTS
+
+- statement_status：empirical_result
+
+- why_here_cn：验证H2的双中介机制。
+
+- inherits_from_previous_cn：高评分线索有主效应后才需检验内部机制。
+
+- changes_argument_state_cn：完成全文最完整的机制检验。
+
+- sets_up_next_cn：以实验三讨论直接进入总体讨论。
+
+- failure_if_removed_cn：H2只有效果假设没有机制支持，理论贡献减弱。
+
+- evidence_pointer：Section 4.3.2.2 mediation paragraph
+
+### 12. Section 4.3.3 P1
+
+- locator：Section 4.3.3 P1
+
+- paraphrase_cn：实验三证明评分水平对不知名品牌SSR线索效果的调节作用，并确认决策不确定性与平台恶意的中介角色。
+
+- move_code：STUDY_CLOSURE
+
+- statement_status：empirical_result
+
+- why_here_cn：封口实验三，并为其在全文证据链中的角色做总结。
+
+- inherits_from_previous_cn：实验三全部结果。
+
+- changes_argument_state_cn：把三个实验的证据合成一个完整模型。
+
+- sets_up_next_cn：进入总体讨论。
+
+- failure_if_removed_cn：实验三的贡献没有显式说明。
+
+- evidence_pointer：Section 4.3.3 P1
+
+## 讨论与贡献逐句图谱
+
+### 1. General Discussion P1 (first paragraph)
+
+- locator：General Discussion P1 (first paragraph)
+
+- paraphrase_cn：SSR是在线搜索服务的重要组成部分，但偏离查询词的SSR常触发状态怀疑；本文基于怀疑理论将其情境化并研究信息线索的作用，发现效应受品牌知名度调节，且未知品牌下进一步受线索水平调节。
+
+- move_code：OVERALL_FINDINGS_SUMMARY
+
+- statement_status：empirical_result
+
+- why_here_cn：讨论开头整合三实验的核心发现，让读者带着结论进入贡献论述。
+
+- inherits_from_previous_cn：三实验的结果链。
+
+- changes_argument_state_cn：从经验结果提升到总体模型声明。
+
+- sets_up_next_cn：为四个理论贡献做铺垫。
+
+- failure_if_removed_cn：讨论缺少对结果的总体表述。
+
+- evidence_pointer：General Discussion P1
+
+### 2. Section 5.1 Theoretical Contribution 1
+
+- locator：Section 5.1 Theoretical Contribution 1
+
+- paraphrase_cn：将用户怀疑情境化并扩展怀疑理论到SSR触发的在线信息搜索场景，提出在此情境中增加处理代表怀疑降低。
+
+- move_code：THEORETICAL_CONTRIBUTION_1
+
+- statement_status：contribution_claim
+
+- why_here_cn：第一个贡献强调情境化与理论迁移，回应引言中的缺口。
+
+- inherits_from_previous_cn：基于全文理论模型和实验证据。
+
+- changes_argument_state_cn：把研究定位为首次扩展怀疑理论到该领域。
+
+- sets_up_next_cn：贡献二需要论述维度关系。
+
+- failure_if_removed_cn：理论贡献的第一根支柱缺失。
+
+- evidence_pointer：Section 5.1 Contribution 1
+
+### 3. Section 5.1 Theoretical Contribution 2
+
+- locator：Section 5.1 Theoretical Contribution 2
+
+- paraphrase_cn：揭示怀疑不同维度间的相互关系，特别是降低决策不确定性和感知恶意可引发对怀疑目标的处理。
+
+- move_code：THEORETICAL_CONTRIBUTION_2
+
+- statement_status：contribution_claim
+
+- why_here_cn：第二个贡献针对维度间因果关系的空白。
+
+- inherits_from_previous_cn：维度关系假设与中介结果。
+
+- changes_argument_state_cn：把“减少不确定性和恶意→增加处理”变成理论贡献。
+
+- sets_up_next_cn：需要解释机制层面的贡献。
+
+- failure_if_removed_cn：维度关系这一部分的重要性被削弱。
+
+- evidence_pointer：Section 5.1 Contribution 2
+
+### 4. Section 5.1 Theoretical Contribution 3
+
+- locator：Section 5.1 Theoretical Contribution 3
+
+- paraphrase_cn：打开信息线索如何影响用户状态怀疑的黑箱，识别内化为机制，并确认两条路径。
+
+- move_code：THEORETICAL_CONTRIBUTION_3
+
+- statement_status：contribution_claim
+
+- why_here_cn：第三个贡献聚焦机制解释，把线索效应从“有效”升级为“为何有效”。
+
+- inherits_from_previous_cn：基于实验一感知变化、实验二和实验三中介分析。
+
+- changes_argument_state_cn：确立了机制型贡献，避免一次性效应。
+
+- sets_up_next_cn：贡献四需要边界条件。
+
+- failure_if_removed_cn：研究的理论增量只停留在现象层面。
+
+- evidence_pointer：Section 5.1 Contribution 3
+
+### 5. Section 5.1 Theoretical Contribution 4 (incl. two situational factors)
+
+- locator：Section 5.1 Theoretical Contribution 4 (incl. two situational factors)
+
+- paraphrase_cn：揭示触发可疑用户内化的两个情境因素：SSR品牌知名度与未知品牌下SSR评分相对顶部自然结果的线索水平。
+
+- move_code：THEORETICAL_CONTRIBUTION_4
+
+- statement_status：contribution_claim
+
+- why_here_cn：第四个贡献把边界条件提炼为理论知识，说明线索并非普遍有效。
+
+- inherits_from_previous_cn：基于实验二与实验三的调节结果。
+
+- changes_argument_state_cn：把情境因素正式纳入内化理论框架。
+
+- sets_up_next_cn：为实践建议提供理论出口。
+
+- failure_if_removed_cn：全文最重要的条件化主张没有被显式贡献化。
+
+- evidence_pointer：Section 5.1 Contribution 4
+
+### 6. Section 5.2 Practical Contribution 1
+
+- locator：Section 5.2 Practical Contribution 1
+
+- paraphrase_cn：平台应收集UGC正性线索并放在SSR旁，以降低用户不确定性与平台恶意担忧从而鼓励处理。
+
+- move_code：PRACTICAL_CONTRIBUTION_1
+
+- statement_status：contribution_claim
+
+- why_here_cn：把主效应的机制发现转为平台界面规则。
+
+- inherits_from_previous_cn：基于线索通过降低不确定性与/或恶意增加处理。
+
+- changes_argument_state_cn：从理论主张进入设计建议。
+
+- sets_up_next_cn：第二实践建议处理未知品牌SSR。
+
+- failure_if_removed_cn：平台没有任何可执行操作。
+
+- evidence_pointer：Section 5.2 first paragraph
+
+### 7. Section 5.2 Practical Contribution 2
+
+- locator：Section 5.2 Practical Contribution 2
+
+- paraphrase_cn：对未知品牌SSR，平台需检查其评分是否与顶部自然结果可比，否则不应置于顶部，以免赞助无效且损害平台声誉。
+
+- move_code：PRACTICAL_CONTRIBUTION_2
+
+- statement_status：contribution_claim
+
+- why_here_cn：把第二边界条件转化为平台的准入与位置决策建议。
+
+- inherits_from_previous_cn：基于实验三高评分才有效的发现。
+
+- changes_argument_state_cn：平台可操作规则更具体。
+
+- sets_up_next_cn：第三实践建议处理低评分未知品牌。
+
+- failure_if_removed_cn：平台无法判断何时不应展示SSR。
+
+- evidence_pointer：Section 5.2 second paragraph
+
+### 8. Section 5.2 Practical Contribution 3
+
+- locator：Section 5.2 Practical Contribution 3
+
+- paraphrase_cn：对评分不高且品牌未知的SSR，平台与卖家需提供额外解释或线索组合来佐证SSR，以降低用户担忧并增强信任。
+
+- move_code：PRACTICAL_CONTRIBUTION_3
+
+- statement_status：contribution_claim
+
+- why_here_cn：为低评分未知品牌SSR提供可行的补救设计方向。
+
+- inherits_from_previous_cn：低评分线索无效的实证结果。
+
+- changes_argument_state_cn：把局限转化为未来设计空间。
+
+- sets_up_next_cn：进入局限与未来研究。
+
+- failure_if_removed_cn：低评分场景的平台操作建议缺失。
+
+- evidence_pointer：Section 5.2 third paragraph
+
+### 9. Section 5.3 Limitations 1–3
+
+- locator：Section 5.3 Limitations 1–3
+
+- paraphrase_cn：指出实验室设计牺牲现实性、忽略产品相关因素与评分真伪、只测试一种偏差触发类型（品牌偏离）三大局限。
+
+- move_code：LIMITATIONS_AND_FUTURE_DIRECTIONS
+
+- statement_status：author_inference
+
+- why_here_cn：限制贡献解释并保护外部效度，同时为未来研究铺路。
+
+- inherits_from_previous_cn：三个实验的设置边界。
+
+- changes_argument_state_cn：明确本文证据的适用范围。
+
+- sets_up_next_cn：为结论作准备。
+
+- failure_if_removed_cn：论文可能被质疑无视边界并过度推广。
+
+- evidence_pointer：Section 5.3
+
+### 10. Section 6 Conclusion P1–P2
+
+- locator：Section 6 Conclusion P1–P2
+
+- paraphrase_cn：总结信息线索内化在品牌知名和未知两种条件下的不同效果，提出达到用户、卖家与平台“三赢”的结论。
+
+- move_code：CONCLUSION
+
+- statement_status：contribution_claim
+
+- why_here_cn：全文收口：重述核心机制与边界条件，并以实践愿景结束。
+
+- inherits_from_previous_cn：所有理论、实验与讨论。
+
+- changes_argument_state_cn：把论文定位为可带来多赢的平台干预知识。
+
+- sets_up_next_cn：无。
+
+- failure_if_removed_cn：论文缺乏总结收口。
+
+- evidence_pointer：Section 6 Conclusion
+
+## Study累积逻辑
+
+### 1. 1
+
+- study_or_phase：实验一：知名品牌SSR下信息线索的效应与内化感知
+
+- evidence_job_cn：证明信息线索在知名品牌SSR场景中确实能降低三类SSR回避，并初证内化机制（线索改变用户对SSR的评价）。
+
+- what_it_establishes_cn：主效应存在：Q-cue与C-cue显著提高SSR处理（认知、情感、行为多维一致），且提高对应感知质量/可信度。
+
+- what_it_cannot_establish_cn：不能确定品牌知名度是否改变效果；不能直接证明决策不确定性在中间起中介作用；未处理不知名品牌场景。
+
+- why_next_phase_is_needed_cn：仅覆盖知名品牌不足以支持条件化假设，需要检验品牌作为边界并直接测量机制。
+
+- transition_wording_function_cn：实验一讨论用“仅聚焦于知名品牌”明确留下缺口，预告实验二将检验品牌知名度。
+
+### 2. 2
+
+- study_or_phase：实验二：品牌知名度的调节与决策不确定性中介
+
+- evidence_job_cn：证明品牌知名度是第一边界条件，并验证决策不确定性是知名品牌条件下线索效应的中介。
+
+- what_it_establishes_cn：线索只在知名品牌SSR下降低三类回避；决策不确定性中介仅在知名品牌条件显著；未知品牌下线索不改变决策不确定性与平台恶意感知。
+
+- what_it_cannot_establish_cn：不能说明未知品牌SSR在何种条件下能恢复线索效力；未让自然结果也带线索，因此无法检验评分比较机制。
+
+- why_next_phase_is_needed_cn：未知品牌线索无效的结果需要进一步探索是否有附加证据可激活线索效应。
+
+- transition_wording_function_cn：实验二讨论由“未知品牌线索无效”引出补充证据的想法，预告实验三对评分水平的检验。
+
+### 3. 3
+
+- study_or_phase：实验三：不知名品牌SSR中评分水平的第二边界与双中介
+
+- evidence_job_cn：证明在自然结果也带线索的可比场景中，对未知品牌SSR，高评分（与顶部自然结果相当）线索才能通过决策不确定性和平台恶意感知双路径增加处理。
+
+- what_it_establishes_cn：H2成立：高Q-cue显著降低三类回避，低Q-cue无效；双中介成立；知名品牌补充组显示评分水平不影响线索效应。
+
+- what_it_cannot_establish_cn：不能证明真实平台环境下的实际效果；未检验评分真实性问题、其他线索类型、其他偏差类型；眼动和详情页真实信息被省略。
+
+- why_next_phase_is_needed_cn：证据链已完整，可以进入总体讨论回收贡献，无需新增实验；剩余问题由局限与未来研究提出。
+
+- transition_wording_function_cn：实验三讨论直接总结H2与双中介，随后总体讨论以整合方式收束三实验。
+
+## 主张—证据台账
+
+### 1. 信息线索能降低知名品牌SSR的认知、情感和行为回避。
+
+- claim_cn：信息线索能降低知名品牌SSR的认知、情感和行为回避。
+
+- claim_level：technical
+
+- supporting_evidence_cn：实验一MANCOVA主效应、ANCOVA对认知与情感、逻辑回归对行为、眼动补充指标。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.1.4.2
+
+- where_evidence_is_provided：Section 4.1.4.2; Tables 1-2
+
+### 2. 信息线索通过内化改变用户对SSR的评价（Q-cue提高感知质量、C-cue提高感知可信度）。
+
+- claim_cn：信息线索通过内化改变用户对SSR的评价（Q-cue提高感知质量、C-cue提高感知可信度）。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：实验一ANOVA对感知品质与感知卖家可信度的检验；没有直接测量内化过程本身。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 4.1.4.2
+
+- where_evidence_is_provided：Section 4.1.4.2
+
+### 3. 品牌知名度调节线索效应：线索仅在知名品牌SSR下有效。
+
+- claim_cn：品牌知名度调节线索效应：线索仅在知名品牌SSR下有效。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：实验二2×3交互效应显著，分组比较显示未知品牌下无效果。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.2.2.2
+
+- where_evidence_is_provided：Section 4.2.2.2; Table 5; Figure 3
+
+### 4. 决策不确定性是知名品牌条件下线索效应的中介。
+
+- claim_cn：决策不确定性是知名品牌条件下线索效应的中介。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：实验二有调节的中介bootstrap：知名条件间接效应显著，未知条件不显著，差异显著。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.2.2.3
+
+- where_evidence_is_provided：Section 4.2.2.3; Table 6
+
+### 5. 未知品牌SSR下，仅当SSR评分与顶部自然结果相当的高评分线索才能增加处理。
+
+- claim_cn：未知品牌SSR下，仅当SSR评分与顶部自然结果相当的高评分线索才能增加处理。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：实验三高Q-cue显著降低三类回避，低Q-cue不显著。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.3.2.2
+
+- where_evidence_is_provided：Section 4.3.2.2; Table 8; Figure 4
+
+### 6. 高评分线索通过决策不确定性和平台恶意感知双路径影响未知品牌SSR的处理。
+
+- claim_cn：高评分线索通过决策不确定性和平台恶意感知双路径影响未知品牌SSR的处理。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：实验三并行中介bootstrap，两条路径间接效应显著，低Q-cue无显著间接效应。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 4.3.2.2 mediation
+
+- where_evidence_is_provided：Section 4.3.2.2; Table 9
+
+### 7. 知名品牌SSR的线索效应不依赖线索水平高低。
+
+- claim_cn：知名品牌SSR的线索效应不依赖线索水平高低。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：实验三补充组（知名品牌+高/低Q-cue）比较显示评分水平不改变处理增强。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 4.3.2.2 supplementary comparisons
+
+- where_evidence_is_provided：Section 4.3.2.2
+
+### 8. 这是首次将怀疑研究扩展到SSR领域，并打开内化机制黑箱。
+
+- claim_cn：这是首次将怀疑研究扩展到SSR领域，并打开内化机制黑箱。
+
+- claim_level：theory
+
+- supporting_evidence_cn：文献综述与讨论中的定位声明；支持依赖“现有研究集中误信息/离线情境”的文献范围判断。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 5.1
+
+- where_evidence_is_provided：Introduction P1, Appendix A
+
+### 9. 线索部署可实现用户、卖家与平台“三赢”。
+
+- claim_cn：线索部署可实现用户、卖家与平台“三赢”。
+
+- claim_level：design_knowledge
+
+- supporting_evidence_cn：由实验室实验推断，缺乏真实平台经济或市场数据直接验证。
+
+- support_strength：asserted
+
+- where_claim_is_made：Section 6 Conclusion
+
+- where_evidence_is_provided：无直接证据；由三实验结果推断
+
+## ISR定位逻辑
+
+- constitutive_is_problem_cn：问题在本质上是IS问题：技术构造的搜索结果页（SSR与有机结果并存）改变了用户对合法信息的怀疑反应，在线环境缺乏监管、算法生成结果、平台与用户的动机不对称共同构成了状态怀疑；研究不是简单借用营销或心理学情境，而是把平台搜索结果界面作为怀疑触发与解决的场所。
+
+- technology_behavior_or_market_entanglement_cn：技术设计直接嵌入行为机制：SSR的呈现位置、品牌偏离、评分可见性、与自然结果的评分比较构成用户怀疑-回避反应的核心条件；平台可以通过调整信息线索呈现来塑造用户处理行为，同时这种行为反馈影响赞助经济和平台声誉。
+
+- role_of_benchmark_or_objective_evidence_cn：三个实验室实验和三套DV（自报+眼动+实际点击）让行为证据可三角化；眼动指标把“注意力分配”客观化，点击行为把处理从自报态度落实到行为端；实验三中“与顶部自然结果相当”的评分不是单纯分数优势，而是平台动机可信度的行为参照证据。
+
+- theory_in_design_cn：理论确实前置进入设计：状态怀疑三维度决定了需要降低不确定性和恶意；认知吝啬者视角决定了需要提供可信度线索；来源可信度与比较处理决定了品牌知名度和评分相对水平两个操纵条件。但线索的具体形式（Q-cue/C-cue、4.9分、淘宝式界面）由平台实践与预测试决定，不是从理论唯一推导。
+
+- technical_vs_is_contribution_balance_cn：没有构建新系统或计算制品，技术含量集中在信息线索界面设计与其行为效应；IS贡献主要体现为状态怀疑理论的情境化、维度间关系、内化机制与边界条件，属于行为/组织/平台层面的贡献。
+
+- beyond_transient_performance_cn：超越了暂时分数优势：文章通过机制检验（决策不确定性、感知恶意）、边界条件（品牌知名度、评分水平）和可复用设计原则（何时展示、何时检查评分、何时需要佐证）把线索效应变成可迁移的IS设计知识，而不是“高评分就能提高点击”的一次性结论。
+
+## 段落级仿写模板
+
+### abstract_steps
+
+1. 第一句建立核心现象悖论：合法信息在技术情境中仍触发怀疑。
+
+2. 第二句给出行为后果，让研究有解决必要。
+
+3. 第三句点明研究对象（信息线索）。
+
+4. 第四句引入理论透镜与三个核心构念。
+
+5. 第五句把理论转化为设计策略。
+
+6. 第六句提出机制命题（内化→降低不确定性和/或恶意→增加处理）。
+
+7. 第七句提醒权变因素。
+
+8. 第八句预告三实验和总体结果。
+
+9. 第九句声明机制贡献与实践启示。
+
+### introduction_paragraph_steps
+
+1. P1：在线环境缺乏监管→文献集中误信息→合法信息被怀疑→SSR实例→商业后果→研究缺口。
+
+2. P2：离线知识（怀疑→更多处理）→在线反差（怀疑→回避）→需要重新情境化。
+
+3. P3：多维怀疑构念→离线未检验关系→SSR可绕过→第一目标。
+
+4. P4：从理解到干预→提出线索策略→防御性使效果不必然→第二目标。
+
+5. P5：介绍内化机制→内化不自动→需要情境触发器。
+
+6. P6：SSR可信度作为触发器→知名/不知名两种预测→不知名需附加证据→双路径。
+
+7. P7：方法预告→两大贡献→章节导览。
+
+### theory_to_design_steps
+
+1. 引入核心理论构念并给出维度。
+
+2. 把每个维度情境化到具体对象。
+
+3. 说明旧理论假设为何不适用，修正构念方向。
+
+4. 分析维度间关系并为每条路径提供机制。
+
+5. 把机制匹配到可选设计要素。
+
+6. 用认知吝啬者视角推导边界条件。
+
+7. 将边界条件操作化为可操纵变量。
+
+8. 分别在不同条件下形成假设。
+
+### method_and_study_sequence_steps
+
+1. 概述全部实验的目标映射。
+
+2. 实验一：目的→设计→操纵→测量→结果→局限。
+
+3. 过渡：上一实验未解决问题推动下一实验。
+
+4. 实验二：新增操纵与测量→调节+中介结果→局限。
+
+5. 过渡：未知品牌无效推动评分比较设计。
+
+6. 实验三：自然结果加入线索→高/低评分→主效应+双中介→讨论。
+
+7. 每个实验报告操纵检验并以“删除未注意SSR的参与者”增强有效性。
+
+### results_reporting_steps
+
+1. 先报告操纵检验：回忆、眼动或感知品牌知名度。
+
+2. 报告描述统计表格。
+
+3. 用MANCOVA建立整体效应。
+
+4. 用ANCOVA/逻辑回归分层报告认知、情感、行为三维DV。
+
+5. 必要时报告眼动补充测量。
+
+6. 再报告中介或调节中介检验。
+
+7. 最后写一段简短实验讨论并指出缺口。
+
+### discussion_and_contribution_steps
+
+1. 开头综合三实验总体发现。
+
+2. 逐条声明理论贡献：情境化与构念反转、维度关系、机制、边界条件。
+
+3. 每条贡献回连到文献缺口与实验结果。
+
+4. 把机制与边界转为平台可操作规则。
+
+5. 坦承实验室局限并给出未来方向。
+
+6. 结论以可带来的多赢愿景收尾。
+
+## 可执行写作算法
+
+### 1. 1
+
+- step：1
+
+- rhetorical_job_cn：找到一个技术情境中合法信息被状态怀疑并产生负面行为的问题。
+
+- research_evidence_required_cn：情境中用户行为的证据或文献（如SSR低点击率、回避现象）、平台经济后果数据、相关文献综述。
+
+- sentence_pattern_function_cn：开场句给出宽环境，随后收窄到具体现象，再以商业后果和文献缺口强化必要性。
+
+- transition_condition_cn：当读者能回答“为什么这个问题值得研究”时进入下一步。
+
+### 2. 2
+
+- step：2
+
+- rhetorical_job_cn：引入一个理论框架并逐维情境化到新情境，说明旧假设为何不适用。
+
+- research_evidence_required_cn：核心理论原文、该理论在新情境中的对象映射、旧假设与情境特征的矛盾。
+
+- sentence_pattern_function_cn：先列维度，再逐一定义，然后用情境特征否定旧假设，最后重述构念方向。
+
+- transition_condition_cn：当新情境中构念含义已清晰且可操作时进入下一步。
+
+### 3. 3
+
+- step：3
+
+- rhetorical_job_cn：从构念关系推导两条机制路径并匹配可选设计要素。
+
+- research_evidence_required_cn：每条路径的认知/组织机制基础；可选线索形式确实在现实平台存在并可被操纵。
+
+- sentence_pattern_function_cn：先分析目标对象与溢出关系，再逐条给出机制路径，然后将路径对应到具体干预元素。
+
+- transition_condition_cn：当机制路径可测量、干预元素可操纵时进入下一步。
+
+### 4. 4
+
+- step：4
+
+- rhetorical_job_cn：说明机制不是自动触发，并引入边界条件推导条件化假设。
+
+- research_evidence_required_cn：关于用户认知吝啬、来源可信度、比较判断的文献；每个边界条件的可操作化方式。
+
+- sentence_pattern_function_cn：用认知吝啬者点出内化困难，用可信度线索引出第一边界，用比较证据引出第二边界，最后给出条件化假设。
+
+- transition_condition_cn：当假设有明确“何时有效/何时无效”的预测时进入下一步。
+
+### 5. 5
+
+- step：5
+
+- rhetorical_job_cn：设计递进实验，让每个实验只解决一个遗留不确定性并能够支撑下一实验设计。
+
+- research_evidence_required_cn：已有预测试确保材料有效性；操纵检验可执行；每组样本量充足；可重复使用的实验范式与测量量表。
+
+- sentence_pattern_function_cn：总体实验安排→每实验“目的-设计-操纵-测量-结果-局限”→过渡句把上一实验未解决问题导向下一实验。
+
+- transition_condition_cn：当每个实验的结果都明确指向下一个实验中必须改变的操纵或测量时进入下一步。
+
+### 6. 6
+
+- step：6
+
+- rhetorical_job_cn：把结果回收为理论贡献、可复用设计知识、局限和未来方向。
+
+- research_evidence_required_cn：完整证据链（主效应、调节、中介）；能回应引言缺口；诚实的边界说明。
+
+- sentence_pattern_function_cn：总结发现→逐条贡献（情境化、构念关系、机制、边界）→平台规则→局限→总结性愿景。
+
+- transition_condition_cn：当每一条贡献都有对应证据且没有过度延伸时结束全文。
+
+## 应模仿的高价值动作
+
+1. 将核心构念反向操作为负面行为（回避），并用自报、眼动、实际点击三类测量进行三角验证。
+
+2. 在引言层面就给出条件化预测（知名/不知名品牌两种走向），为后文假设和实验设计定好框架。
+
+3. 用“实验1只覆盖知名品牌→实验2必须检验品牌→实验2发现未知品牌无效→实验3需要评分比较”这一链式过渡组织证据。
+
+4. 对每个实验报告操纵检验、排除未注意SSR的参与者，并说明加入排除后结果一致。
+
+5. 讨论中逐条把理论贡献、机制、边界分开声明，并把结果转化为具体平台设计规则。
+
+6. 通过“删除后哪里断裂”可看出，文中的每个实验讨论段都明确上一实验未解决问题。
+
+7. 使用有调节的中介和并行中介来定位机制的条件性，而不是只报告主效应。
+
+## 不要只复制的表面动作
+
+1. 不应仅凭“给出评分就能提高点击”这一表层效果来写结论，必须同时报告何时无效、为何有效。
+
+2. 不宜在没有中介测量时声称内化机制已获得证据；实验一中的内化证据只是间接感知测量。
+
+3. 不应在不呈现自然结果评分时声称“与顶部自然结果相当的评分”是有效条件；这是实验三才引入的界面条件。
+
+4. 不要因为一个实验中有非显著结果就断言线索无效，还需区分品牌、评分水平和界面条件。
+
+5. “三赢”式总结缺乏直接市场证据，不能作为核心证据强加于所有场景。
+
+## 证据薄弱或跳跃的动作
+
+1. “首次扩展怀疑理论到该领域”的断言依赖文献范围判断，若领域扩展到其他近期研究可能被质疑。
+
+2. 内化机制在实验一中仅通过感知质量和感知可信度间接支持，没有直接测量内化过程本身。
+
+3. 知名品牌SSR在实验三中作为补充组，其“评分水平不影响效果”的结论证据力度弱于主假设检验。
+
+4. 结论中“win-win-win”的表述超出实验室结果的直接支持范围，属于修辞性收尾。
+
+5. 在线环境中“增加处理即怀疑降低”的重新定义虽然逻辑清晰，但依赖SSR可绕过这一平台特征，换到其他情境不一定成立。
+
+## 一句话套路
+
+把一个熟悉的理论构念情境化到特定网络平台情境，用平台中真实存在的信息线索作为干预，通过三个递进实验从主效应走向机制与边界，最后把线索效应提炼为可回用的平台设计知识。
+
+## 分析边界
+
+全文为转录文本，表格与图中部分统计量存在OCR乱码（如t值、p值的上标和数字显示异常），但不影响结构判断；未包含线上附录中的补充材料；位置标注使用章节和表编号而非页码。

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "analysis_version": "ais-basket-exclusive-objective-metric-benchmark-all-flash-v1",
+  "input_dir": "../../database_fulltext_all",
+  "output_dir": "output_v1",
+  "env_file": "../../.env",
+  "year_range": {
+    "from": 1900,
+    "to": 2100
+  },
+  "prompt_files": {
+    "system": "system_prompt_cn.md",
+    "user_template": "user_prompt_template_cn.md"
+  },
+  "model": {
+    "name": "deepseek-v4-flash",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 40000,
+    "timeout_seconds": 600
+  },
+  "batch": {
+    "max_concurrency": 100,
+    "retries": 3,
+    "retry_base_delay_seconds": 2.0,
+    "progress_interval": 25,
+    "report_interval": 100
+  }
+}

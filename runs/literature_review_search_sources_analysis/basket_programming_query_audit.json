@@ -1,0 +1,1686 @@
+{
+  "basket_metadata_records": 17745,
+  "raw_query_hits": 293,
+  "deduplicated_query_hits": 293,
+  "query_definition": "S3 expanded direct activity + open-source software development + code completion",
+  "stage_counts": {
+    "no_fulltext_screen_record": 31,
+    "broad_context_not_direct": 75,
+    "fulltext_screen_false": 163,
+    "core_20": 20,
+    "direct_boundary_8": 4
+  },
+  "stage_percentages": {
+    "no_fulltext_screen_record": 0.10580204778156997,
+    "broad_context_not_direct": 0.25597269624573377,
+    "fulltext_screen_false": 0.5563139931740614,
+    "core_20": 0.06825938566552901,
+    "direct_boundary_8": 0.013651877133105802
+  },
+  "recent_counts": {
+    "2016+": 44,
+    "2021+": 23,
+    "core_20_2016+": 2,
+    "core_20_2021+": 0
+  },
+  "year_counts": {
+    "2026": 1,
+    "2025": 5,
+    "2024": 2,
+    "2023": 6,
+    "2022": 4,
+    "2021": 5,
+    "2020": 5,
+    "2019": 3,
+    "2018": 5,
+    "2017": 5,
+    "2016": 3,
+    "2015": 5,
+    "2014": 9,
+    "2013": 8,
+    "2012": 12,
+    "2011": 7,
+    "2010": 10,
+    "2009": 8,
+    "2008": 12,
+    "2007": 11,
+    "2006": 10,
+    "2005": 5,
+    "2004": 7,
+    "2003": 7,
+    "2002": 6,
+    "2001": 5,
+    "2000": 5,
+    "1999": 6,
+    "1998": 7,
+    "1997": 5,
+    "1996": 12,
+    "1995": 12,
+    "1994": 5,
+    "1993": 6,
+    "1992": 6,
+    "1991": 9,
+    "1990": 14,
+    "1989": 7,
+    "1988": 6,
+    "1987": 4,
+    "1986": 1,
+    "1985": 5,
+    "1984": 5,
+    "1983": 1,
+    "1982": 2,
+    "1981": 3,
+    "1980": 4,
+    "1979": 1,
+    "1978": 1
+  },
+  "top_journals": [
+    [
+      "Decision Support Systems",
+      75
+    ],
+    [
+      "Information and Management",
+      65
+    ],
+    [
+      "MIS Quarterly: Management Information Systems",
+      33
+    ],
+    [
+      "Information Systems Research",
+      27
+    ],
+    [
+      "Journal of Management Information Systems",
+      24
+    ],
+    [
+      "Information Systems Journal",
+      16
+    ],
+    [
+      "European Journal of Information Systems",
+      14
+    ],
+    [
+      "Journal of the Association for Information Systems",
+      13
+    ],
+    [
+      "Journal of Strategic Information Systems",
+      11
+    ],
+    [
+      "Journal of Information Technology",
+      10
+    ],
+    [
+      "Information and Organization",
+      4
+    ],
+    [
+      "Information & management",
+      1
+    ]
+  ],
+  "term_stats": [
+    {
+      "term_id": "computer_programming",
+      "display": "computer program*",
+      "candidate_hits": 113,
+      "broad_context_hits": 13,
+      "direct_28_hits": 5,
+      "core_20_hits": 4,
+      "core_20_recall": 0.2,
+      "candidate_core_yield": 0.035398230088495575,
+      "core_titles": [
+        "Developing maintainable software: The Readable approach",
+        "The relevance of application domain knowledge: Characterizing the computer program comprehension process",
+        "Why Is Programming (Sometimes) so Difficult? Programming as Scientific Discovery in Multiple Problem Spaces",
+        "The relevance of application domain knowledge: The case of computer program comprehension"
+      ]
+    },
+    {
+      "term_id": "source_code",
+      "display": "source code",
+      "candidate_hits": 11,
+      "broad_context_hits": 5,
+      "direct_28_hits": 1,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "program_comprehension",
+      "display": "program comprehension",
+      "candidate_hits": 2,
+      "broad_context_hits": 2,
+      "direct_28_hits": 2,
+      "core_20_hits": 2,
+      "core_20_recall": 0.1,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "The relevance of application domain knowledge: Characterizing the computer program comprehension process",
+        "The relevance of application domain knowledge: The case of computer program comprehension"
+      ]
+    },
+    {
+      "term_id": "code_comprehension",
+      "display": "code comprehension",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "programmer",
+      "display": "programmer*",
+      "candidate_hits": 53,
+      "broad_context_hits": 24,
+      "direct_28_hits": 6,
+      "core_20_hits": 6,
+      "core_20_recall": 0.3,
+      "candidate_core_yield": 0.11320754716981132,
+      "core_titles": [
+        "Are two heads better than one for software development? The productivity paradox of pair programming",
+        "The relevance of application domain knowledge: Characterizing the computer program comprehension process",
+        "Why Is Programming (Sometimes) so Difficult? Programming as Scientific Discovery in Multiple Problem Spaces",
+        "An experimental investigation into the process of knowledge-based systems development",
+        "The relevance of application domain knowledge: The case of computer program comprehension",
+        "On end-user computing productivity. Results of controlled experiments"
+      ]
+    },
+    {
+      "term_id": "software_developer",
+      "display": "software developer*",
+      "candidate_hits": 62,
+      "broad_context_hits": 29,
+      "direct_28_hits": 2,
+      "core_20_hits": 1,
+      "core_20_recall": 0.05,
+      "candidate_core_yield": 0.016129032258064516,
+      "core_titles": [
+        "The role of cognitive fit in the relationship between software comprehension and modification"
+      ]
+    },
+    {
+      "term_id": "coding_task",
+      "display": "coding task*",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "programming_task",
+      "display": "programming task*",
+      "candidate_hits": 2,
+      "broad_context_hits": 2,
+      "direct_28_hits": 2,
+      "core_20_hits": 2,
+      "core_20_recall": 0.1,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "Are two heads better than one for software development? The productivity paradox of pair programming",
+        "Why Is Programming (Sometimes) so Difficult? Programming as Scientific Discovery in Multiple Problem Spaces"
+      ]
+    },
+    {
+      "term_id": "debugging",
+      "display": "debugging",
+      "candidate_hits": 7,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "pair_programming",
+      "display": "pair programming",
+      "candidate_hits": 5,
+      "broad_context_hits": 4,
+      "direct_28_hits": 1,
+      "core_20_hits": 1,
+      "core_20_recall": 0.05,
+      "candidate_core_yield": 0.2,
+      "core_titles": [
+        "Are two heads better than one for software development? The productivity paradox of pair programming"
+      ]
+    },
+    {
+      "term_id": "test_driven_development",
+      "display": "test-driven development",
+      "candidate_hits": 1,
+      "broad_context_hits": 1,
+      "direct_28_hits": 1,
+      "core_20_hits": 1,
+      "core_20_recall": 0.05,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "Performance outcomes of test-driven development: An experimental investigation"
+      ]
+    },
+    {
+      "term_id": "end_user_programming",
+      "display": "end-user programming",
+      "candidate_hits": 4,
+      "broad_context_hits": 2,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "spreadsheet_programming",
+      "display": "spreadsheet programming/development/debugging/testing/error correction",
+      "candidate_hits": 3,
+      "broad_context_hits": 3,
+      "direct_28_hits": 3,
+      "core_20_hits": 3,
+      "core_20_recall": 0.15,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "The role of visualization tools in spreadsheet error correction from a cognitive fit perspective",
+        "Using a structured design approach to reduce risks in end user spreadsheet development",
+        "Applying Code Inspection to Spreadsheet Testing"
+      ]
+    },
+    {
+      "term_id": "query_formulation",
+      "display": "query formulation",
+      "candidate_hits": 4,
+      "broad_context_hits": 3,
+      "direct_28_hits": 3,
+      "core_20_hits": 3,
+      "core_20_recall": 0.15,
+      "candidate_core_yield": 0.75,
+      "core_titles": [
+        "The effects of information request language and template usage on query formulation",
+        "Is query reuse potentially harmful? Anchoring and adjustment in adapting existing database queries",
+        "The effects of state-based and event-based data representation on user performance in query formulation tasks"
+      ]
+    },
+    {
+      "term_id": "query_development",
+      "display": "query development",
+      "candidate_hits": 2,
+      "broad_context_hits": 2,
+      "direct_28_hits": 2,
+      "core_20_hits": 2,
+      "core_20_recall": 0.1,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "An empirical investigation of end-user query development: The effects of improved model expressiveness vs. complexity",
+        "The effects of information request ambiguity and construct incongruence on query development"
+      ]
+    },
+    {
+      "term_id": "sql_query",
+      "display": "SQL query",
+      "candidate_hits": 6,
+      "broad_context_hits": 3,
+      "direct_28_hits": 3,
+      "core_20_hits": 3,
+      "core_20_recall": 0.15,
+      "candidate_core_yield": 0.5,
+      "core_titles": [
+        "Is query reuse potentially harmful? Anchoring and adjustment in adapting existing database queries",
+        "The effects of information request ambiguity and construct incongruence on query development",
+        "The influence of database structure representation on database system learning and use"
+      ]
+    },
+    {
+      "term_id": "data_model_instantiation",
+      "display": "instantiation(s) of data model(s)",
+      "candidate_hits": 1,
+      "broad_context_hits": 1,
+      "direct_28_hits": 1,
+      "core_20_hits": 1,
+      "core_20_recall": 0.05,
+      "candidate_core_yield": 1.0,
+      "core_titles": [
+        "Selecting optimal instantiations of data models-Theory and validation of an ex ante approach"
+      ]
+    },
+    {
+      "term_id": "ai_assisted_programming",
+      "display": "AI-assisted programming/coding",
+      "candidate_hits": 1,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "coding_agent",
+      "display": "coding agent*",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "programming_assistant",
+      "display": "programming assistant*",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "code_generation",
+      "display": "code generation",
+      "candidate_hits": 1,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "code_review",
+      "display": "code review",
+      "candidate_hits": 2,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    },
+    {
+      "term_id": "code_inspection",
+      "display": "code inspection",
+      "candidate_hits": 3,
+      "broad_context_hits": 3,
+      "direct_28_hits": 2,
+      "core_20_hits": 2,
+      "core_20_recall": 0.1,
+      "candidate_core_yield": 0.6666666666666666,
+      "core_titles": [
+        "Applying Code Inspection to Spreadsheet Testing",
+        "Hitting the wall: Errors in developing and code inspecting a 'simple' spreadsheet model"
+      ]
+    },
+    {
+      "term_id": "code_modification",
+      "display": "code modification",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "code_completion",
+      "display": "code completion/autocompletion/suggestion",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "writing_code",
+      "display": "writing code",
+      "candidate_hits": 0,
+      "broad_context_hits": 0,
+      "direct_28_hits": 0,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": null,
+      "core_titles": []
+    },
+    {
+      "term_id": "open_source_development",
+      "display": "open-source software development",
+      "candidate_hits": 42,
+      "broad_context_hits": 23,
+      "direct_28_hits": 1,
+      "core_20_hits": 0,
+      "core_20_recall": 0.0,
+      "candidate_core_yield": 0.0,
+      "core_titles": []
+    }
+  ],
+  "professional_vocabulary_variant": {
+    "raw_hits": 258,
+    "deduplicated_hits": 258,
+    "stage_counts": {
+      "no_fulltext_screen_record": 22,
+      "fulltext_screen_false": 192,
+      "broad_context_not_direct": 24,
+      "core_20": 20
+    },
+    "stage_percentages": {
+      "no_fulltext_screen_record": 0.08527131782945736,
+      "fulltext_screen_false": 0.7441860465116279,
+      "broad_context_not_direct": 0.09302325581395349,
+      "core_20": 0.07751937984496124
+    },
+    "recent_counts": {
+      "2016+": 26,
+      "2021+": 15,
+      "core_20_2016+": 2,
+      "core_20_2021+": 0
+    },
+    "family_stats": [
+      {
+        "family_id": "comprehension_modification",
+        "display": "program/software comprehension, understanding, modification",
+        "candidate_hits": 5,
+        "stage_counts": {
+          "fulltext_screen_false": 1,
+          "core_20": 4
+        },
+        "core_20_hits": 4,
+        "core_20_recall": 0.2,
+        "candidate_core_yield": 0.8,
+        "core_titles": [
+          "The role of cognitive fit in the relationship between software comprehension and modification",
+          "Developing maintainable software: The Readable approach",
+          "The relevance of application domain knowledge: Characterizing the computer program comprehension process",
+          "The relevance of application domain knowledge: The case of computer program comprehension"
+        ]
+      },
+      {
+        "family_id": "programming_task_performance",
+        "display": "programming task/performance/productivity/environment",
+        "candidate_hits": 9,
+        "stage_counts": {
+          "core_20": 2,
+          "broad_context_not_direct": 4,
+          "fulltext_screen_false": 2,
+          "no_fulltext_screen_record": 1
+        },
+        "core_20_hits": 2,
+        "core_20_recall": 0.1,
+        "candidate_core_yield": 0.2222222222222222,
+        "core_titles": [
+          "Are two heads better than one for software development? The productivity paradox of pair programming",
+          "Why Is Programming (Sometimes) so Difficult? Programming as Scientific Discovery in Multiple Problem Spaces"
+        ]
+      },
+      {
+        "family_id": "maintenance",
+        "display": "program maintenance/maintainable software",
+        "candidate_hits": 1,
+        "stage_counts": {
+          "core_20": 1
+        },
+        "core_20_hits": 1,
+        "core_20_recall": 0.05,
+        "candidate_core_yield": 1.0,
+        "core_titles": [
+          "Developing maintainable software: The Readable approach"
+        ]
+      },
+      {
+        "family_id": "query_activity",
+        "display": "query formulation/development/reuse/complexity/query language",
+        "candidate_hits": 9,
+        "stage_counts": {
+          "no_fulltext_screen_record": 1,
+          "core_20": 6,
+          "fulltext_screen_false": 2
+        },
+        "core_20_hits": 6,
+        "core_20_recall": 0.3,
+        "candidate_core_yield": 0.6666666666666666,
+        "core_titles": [
+          "The effects of information request language and template usage on query formulation",
+          "Is query reuse potentially harmful? Anchoring and adjustment in adapting existing database queries",
+          "An empirical investigation of end-user query development: The effects of improved model expressiveness vs. complexity",
+          "The effects of state-based and event-based data representation on user performance in query formulation tasks",
+          "Selecting optimal instantiations of data models-Theory and validation of an ex ante approach",
+          "The effects of information request ambiguity and construct incongruence on query development"
+        ]
+      },
+      {
+        "family_id": "plain_sql",
+        "display": "SQL",
+        "candidate_hits": 24,
+        "stage_counts": {
+          "broad_context_not_direct": 1,
+          "core_20": 4,
+          "no_fulltext_screen_record": 2,
+          "fulltext_screen_false": 17
+        },
+        "core_20_hits": 4,
+        "core_20_recall": 0.2,
+        "candidate_core_yield": 0.16666666666666666,
+        "core_titles": [
+          "The effects of information request language and template usage on query formulation",
+          "Is query reuse potentially harmful? Anchoring and adjustment in adapting existing database queries",
+          "The effects of information request ambiguity and construct incongruence on query development",
+          "The influence of database structure representation on database system learning and use"
+        ]
+      },
+      {
+        "family_id": "spreadsheet_activity",
+        "display": "spreadsheet errors/testing/development/debugging/programming",
+        "candidate_hits": 6,
+        "stage_counts": {
+          "fulltext_screen_false": 3,
+          "core_20": 3
+        },
+        "core_20_hits": 3,
+        "core_20_recall": 0.15,
+        "candidate_core_yield": 0.5,
+        "core_titles": [
+          "The role of visualization tools in spreadsheet error correction from a cognitive fit perspective",
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "Applying Code Inspection to Spreadsheet Testing"
+        ]
+      },
+      {
+        "family_id": "end_user_development",
+        "display": "end-user programming/computing/development",
+        "candidate_hits": 152,
+        "stage_counts": {
+          "no_fulltext_screen_record": 10,
+          "fulltext_screen_false": 133,
+          "broad_context_not_direct": 6,
+          "core_20": 3
+        },
+        "core_20_hits": 3,
+        "core_20_recall": 0.15,
+        "candidate_core_yield": 0.019736842105263157,
+        "core_titles": [
+          "Using a structured design approach to reduce risks in end user spreadsheet development",
+          "Hitting the wall: Errors in developing and code inspecting a 'simple' spreadsheet model",
+          "On end-user computing productivity. Results of controlled experiments"
+        ]
+      },
+      {
+        "family_id": "pair_programming",
+        "display": "pair programming",
+        "candidate_hits": 5,
+        "stage_counts": {
+          "broad_context_not_direct": 3,
+          "core_20": 1,
+          "no_fulltext_screen_record": 1
+        },
+        "core_20_hits": 1,
+        "core_20_recall": 0.05,
+        "candidate_core_yield": 0.2,
+        "core_titles": [
+          "Are two heads better than one for software development? The productivity paradox of pair programming"
+        ]
+      },
+      {
+        "family_id": "test_driven_development",
+        "display": "test-driven development",
+        "candidate_hits": 1,
+        "stage_counts": {
+          "core_20": 1
+        },
+        "core_20_hits": 1,
+        "core_20_recall": 0.05,
+        "candidate_core_yield": 1.0,
+        "core_titles": [
+          "Performance outcomes of test-driven development: An experimental investigation"
+        ]
+      },
+      {
+        "family_id": "inspection_review",
+        "display": "code inspection/review",
+        "candidate_hits": 5,
+        "stage_counts": {
+          "fulltext_screen_false": 2,
+          "core_20": 2,
+          "broad_context_not_direct": 1
+        },
+        "core_20_hits": 2,
+        "core_20_recall": 0.1,
+        "candidate_core_yield": 0.4,
+        "core_titles": [
+          "Applying Code Inspection to Spreadsheet Testing",
+          "Hitting the wall: Errors in developing and code inspecting a 'simple' spreadsheet model"
+        ]
+      },
+      {
+        "family_id": "debugging_testing",
+        "display": "program/code debugging or software testing",
+        "candidate_hits": 51,
+        "stage_counts": {
+          "fulltext_screen_false": 35,
+          "no_fulltext_screen_record": 6,
+          "core_20": 1,
+          "broad_context_not_direct": 9
+        },
+        "core_20_hits": 1,
+        "core_20_recall": 0.05,
+        "candidate_core_yield": 0.0196078431372549,
+        "core_titles": [
+          "Performance outcomes of test-driven development: An experimental investigation"
+        ]
+      },
+      {
+        "family_id": "development_representation",
+        "display": "knowledge-based systems development/database structure representation",
+        "candidate_hits": 6,
+        "stage_counts": {
+          "fulltext_screen_false": 3,
+          "core_20": 2,
+          "no_fulltext_screen_record": 1
+        },
+        "core_20_hits": 2,
+        "core_20_recall": 0.1,
+        "candidate_core_yield": 0.3333333333333333,
+        "core_titles": [
+          "An experimental investigation into the process of knowledge-based systems development",
+          "The influence of database structure representation on database system learning and use"
+        ]
+      },
+      {
+        "family_id": "modern_programming_agents",
+        "display": "AI-assisted programming/coding, coding agents/assistants, code completion",
+        "candidate_hits": 1,
+        "stage_counts": {
+          "no_fulltext_screen_record": 1
+        },
+        "core_20_hits": 0,
+        "core_20_recall": 0.0,
+        "candidate_core_yield": 0.0,
+        "core_titles": []
+      }
+    ]
+  },
+  "core_20_records": [
+    {
+      "year": "2020",
+      "title": "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00628",
+      "direct_focus_type": "programming_method_process",
+      "matched_terms": "test_driven_development",
+      "author_keywords": "Developer Satisfaction; Experimental Design; Learning; Software Quality; Test-Driven Development",
+      "index_keywords": "Computer software selection and evaluation; Software design; Contemporary practices; Developer satisfaction; Experimental investigations; Laboratory experiments; Learning; Performance outcome; Software Quality; Software tasks; Test driven development; Software testing",
+      "abstract": "Despite the growing popularity of test-driven development (TDD), there is no empirical confirmation of the benefits that this contemporary practice confers on its users. Prior research findings on its efficacy have largely been inconclusive. We conducted a laboratory experiment to assess the impact of TDD on software quality and task satisfaction. Additionally, we investigated the productivity aspect of TDD as compared to the traditional test-last method of software development. Results indicate that software quality and task satisfaction are significantly improved when TDD is used. Despite the additional requirements of testing, TDD is not more resource intensive than the test-last method. We also examined TDD’s impact on learning post hoc and discuss the implications of our findings and directions for future research. © 2020 by the Association for Information Systems."
+    },
+    {
+      "year": "2016",
+      "title": "The Effects of Information Request Language and Template Usage on Query Formulation",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00440",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "query_formulation",
+      "author_keywords": "Cognitive load theory; Database; Query formulation; SQL",
+      "index_keywords": "Codes (symbols); Database systems; Managers; Query languages; Relational database systems; Cognitive load theory; Information request; Instructional designs; Instructional interventions; Query formulation; Relational Database; Structured query languages; Teaching and learning; Query processing",
+      "abstract": "The ability to retrieve accurate information from relational databases requires proficiency in structured query language (SQL). In spite of its declarative nature, teaching and learning SQL for complex data-retrieval tasks remains a challenge. Cognitive load theory (CLT) explains the interactions between working and long-term memories in acquiring complex knowledge and skills. We used CLT to identify two instructional interventions expected to improve query writing performance under conditions of high and low query (code) complexity. First, we presented information requests in pseudo-SQL language rather than manager English to clarify the relevant elements in the data model. Second, we provided a query template as an intermediate problem-solving step prior to coding. We conducted an experiment with 63 student participants in a 2 x 2 x 2 repeated measures design in which the request language was either pseudo SQL or manager English, the task included a query template or did not, and the task had either low or high query (code) complexity. Results show that both request language and template usage significantly affected query writing performance but in different situations. Pseudo SQL requests had a significant positive impact on query accuracy with less complex queries but had no impact with more complex queries. On the other hand, using a query template prior to writing SQL code improved task performance with more complex queries but not with less complex queries. We discuss the implications of these findings for instructional design and future research. © 2016 by the Association for Information Systems."
+    },
+    {
+      "year": "2010",
+      "title": "Is Query Reuse Potentially Harmful? Anchoring and Adjustment in Adapting Existing Database Queries",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.1080.0189",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "query_formulation; sql_query",
+      "author_keywords": "Anchoring and adjustment; Query formulation; Reuse; SQL",
+      "index_keywords": "Anchors; Query processing; Anchoring and adjustment; Attractive strategies; Domain familiarities; Extracting information; Information request; Query formulation; Reuse; Structured query languages; Query languages",
+      "abstract": "Reusing database queries by adapting them to satisfy new information requests is an attractive strategy for extracting information from databases without involving database specialists. However, the reuse of information systems artifacts has been shown to be susceptible to the phenomenon of anchoring and adjustment. Anchoring often leads to a systematic adjustment bias in which people fail to make sufficient changes to an anchor in response to the needs of a new task. In a study involving 157 novice query writers from six universities, we examined the effect of this phenomenon on the reuse of Structured Query Language (SQL) queries under varying levels of domain familiarity and for different types of anchors. Participants developed SQL queries to respond to four information requests in a familiar domain and four information requests in an unfamiliar domain. For two information requests in each domain, participants were also provided with sample queries (anchors) that answered similar information requests. We found evidence that the opportunity to reuse sample queries resulted in an adjustment bias leading to poorer quality query results and greater overconfidence in the correctness of results. The results also indicate that the strength of the adjustment bias depends on a combination of domain familiarity and type of anchor. This study demonstrates that anchoring and adjustment during query reuse can lead to queries that are less accurate than those written from scratch. We also extend the concept of anchoring and adjustment by distinguishing between surface-structure and deep-structure anchors and by considering the impact of domain familiarity on the adjustment bias. © 2010 INFORMS."
+    },
+    {
+      "year": "2009",
+      "title": "Are Two Heads Better than One for Software Development? The Productivity Paradox of Pair Programming1",
+      "journal": "MIS Quarterly",
+      "doi": "10.2307/20650280",
+      "direct_focus_type": "programming_method_process",
+      "matched_terms": "programmer; programming_task; pair_programming",
+      "author_keywords": "Agile methodology; Assembly bonus effect; Group problem solving; Nominal group; Pair programming; Software development; Team performance",
+      "index_keywords": "Management information systems; Software engineering; Agile Methodologies; Controlled laboratories; EXtreme Programming; Nominal group; Pair-programming; Productivity paradox; Software development methodologies; Team performance; Software design",
+      "abstract": "Extreme programming is currently gaining popularity as an alternate software development methodology. Pair programming, a core practice of this methodology, involves two programmers working collaboratively to develop software. This study examined the efficacy of pair programming by comparing the performance effectiveness and affective responses of collaborating pairs with those of individual programmers treated as nominal pairs. In a controlled laboratory experiment involving student subjects, proxies for entry level programmers working on entry level tasks, two factors were manipulated: programming setting (collaborativepair versus individuals) and programming task complexity (high versus low). Participants who worked in the individual condition were randomly combined into nominal pairs. The performance and affective responses of the collaborating pairs were then compared with those of the best performers and the second best performers of each nominal pair. Results indicated that programming pairs performed at the level above the second best performers and at the level of the best performers in each nominal pair. This relationship was found to be consistent across both levels of task complexity. Consequently, there was no evidence of an \"assembly bonus effect, \" where the performance of a collaborating pair exceeds the performance of its best member working alone. While this finding may appear counterintuitive due to the general perception of two heads being better than one, it is consistent with the findings in small group research. When affective responses were considered, programming pairs reported higher levels of satisfaction than those of the best and second-best performing members in nominal pairs. They also showed higher levels of confidence in their performance compared to those of the second-best members. But the confidence levels of pairs were no different from those of the best performing members in nominal pairs. Theoretical and practical implications of these findings are presented."
+    },
+    {
+      "year": "2009",
+      "title": "An Empirical Investigation of End-User Query Development: The Effects of Improved Model Expressiveness vs. Complexity",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.1080.0181",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "query_development",
+      "author_keywords": "Expressiveness; Logical data models; Ontological clarity; Ontology; Parsimony; Scalability",
+      "index_keywords": "Ontology; Scalability; Bounded rationality; Conceptual data models; Empirical investigation; Expressiveness; Logical data models; Modeling expressiveness; Ontological clarity; Parsimony; Problem solving",
+      "abstract": "Data models provide a map of the components of an information system. Prior research has indicated that more expressive conceptual data models (despite their increased size) result in better performance for problem solving tasks. An initial experiment using logical data models indicated that more expressive logical data models also enhanced end-user performance for information retrieval tasks. However, the principles of parsimony and bounded rationality imply that, past some point, increases in size lead to a level of complexity that results in impaired performance. The results of this study support these principles. For a logical data model of increased but still modest size, users composing queries for the more expressive logical data model did not perform as well as users composing queries for the corresponding less expressive but more parsimonious logical data model. These results indicate that, when constructing logical data models, data modelers should consider tradeoffs between parsimony and expressiveness. © 2009 INFORMS."
+    },
+    {
+      "year": "2008",
+      "title": "The Role of Visualization Tools in Spreadsheet Error Correction from a Cognitive Fit Perspective",
+      "journal": "Journal of the Association for Information Systems",
+      "doi": "10.17705/1jais.00162",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "spreadsheet_programming",
+      "author_keywords": "Activity framework; Cognitive fit; Spreadsheet; Visualization tools",
+      "index_keywords": "Error correction; Visualization; Cognitive fit; Cognitive fit theory; Correction performance; Experimental methodology; Spreadsheet errors; Visualization tools; Spreadsheets",
+      "abstract": "Errors in spreadsheets pose a serious problem for organizations and academics. This has resulted in ongoing efforts to devise measures for reducing errors or efficient ways of correcting them. Visualization tools are often advertised as means for improving spreadsheet error correction performance. This study investigates the role of visualization tools in spreadsheet error correction. For this purpose, this study proposes a framework for classifying activities associated with spreadsheet error correction. The framework is to highlight the activities that are important for correcting different types of spreadsheet errors, and to show how different visualization tools can aid error correction by effectively supporting these activities. By identifying \"chaining\" as one of the most important activities from the framework, this study uses cognitive fit theory to examine the effects of a visualization tool that supports chaining on spreadsheet error correction performance. Experimental methodology is used to test the outcome of cognitive fit between the error correction task and the visualization tool. The results of the experiment highlight the importance of cognitive fit between the type of task and the visualization tool for attaining better performance. This study also provides guidelines for designing and developing tools for spreadsheet error correction. Copyright © 2008, by the Association for Infomation Systems."
+    },
+    {
+      "year": "2006",
+      "title": "The Role of Cognitive Fit in the Relationship Between Software Comprehension and Modification1",
+      "journal": "MIS Quarterly",
+      "doi": "10.2307/25148716",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "software_developer",
+      "author_keywords": "Dual-task interference; Software comprehension; Software modification; Theory of cognitive fit",
+      "index_keywords": "Information technology; Knowledge acquisition; Professional aspects; Dual-task interference; Software comprehension; Software modification; Theory of cognitive fit; Software engineering",
+      "abstract": "Although there is a long tradition of empirical studies of software developers, few studies have focused on software maintenance. Prior work is predicated on the belief that higher levels of software comprehension are associated with higher levels of performance on modification tasks. This study provides a more complete understanding of the relationship between software comprehension and modification. We conceptualize software maintenance as interlinking comprehension and modification, and argue that the relationship between the two is moderated by cognitive fit. Specifically, cognitive fit exists when the software maintainer's dominant mental representation of the software and their mental representation of the modification task emphasize the same type of knowledge. We hypothesize that when cognitive fit exists, greater improvements in comprehension are associated with higher levels of performance on a modification task. When cognitive fit does not exist, however, the software maintainer's mental representations of the software and of the modification task do not emphasize the same type of knowledge, which may mean that attention is devoted to comprehension at the expense of modification, resulting in lower performance on the modification task. In these circumstances, comprehension and modification tasks may interfere with each other, an effect known as dual-task interference. We therefore hypothesize that performance on a modification task is moderated by the fit between the mental representation of the software and that of the modification task. We tested our theory by varying cognitive fit to create matched and mismatched conditions in a single experiment that used IT professionals as subjects. Our findings support our theory: cognitive fit moderates the relationship between comprehension and modification. Specifically, changes in software comprehension and modification performance are positively related when cognitive fit exists and negatively related when cognitive fit does not exist. Our findings demonstrate the need to examine more complex relationships among the numerous types of tasks involved in software development rather than examining software comprehension alone."
+    },
+    {
+      "year": "2006",
+      "title": "The Effects of State-Based and Event-Based Data Representation on User Performance in Query Formulation Tasks1,2",
+      "journal": "MIS Quarterly",
+      "doi": "10.2307/25148731",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "query_formulation",
+      "author_keywords": "Artifact-based; Data models; Database user view; E-R diagram; Event-based; Query formulation performance; Sense-making; State-based",
+      "index_keywords": "Data reduction; Data structures; Database systems; Internet; Resource allocation; Artifact-based; Database user view; E-R diagram; Event-based; Query formulation performance; Sense-making; State-based; Query languages",
+      "abstract": "Ad hoc query formulation is an important task in effectively utilizing organizational data resources. To facilitate this task, managers and casual end-users are commonly presented with database views expressly constructed for their use. Differences in the way in which things, states, and events are represented in such views can affect a user's ability to understand the database, potentially leading to different levels of performance (i.e., accuracy, confidence, and prediction of the accuracy of their queries). An experiment was conducted over the Internet involving 342 subjects from 6 universities in North America and Europe to investigate these effects. When presented with an event-based view, subjects expressing low or very low comfort levels in reading entity-relationship diagrams expressed confidence that better predicted query accuracy although there were no significant differences in actual query accuracy or level of confidence expressed."
+    },
+    {
+      "year": "2006",
+      "title": "Selecting optimal instantiations of data models—Theory and validation of an ex ante approach",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2005.10.002",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "data_model_instantiation",
+      "author_keywords": "Data representations; Models of data; Object-relational databases; Query complexity; Query languages; Relational databases",
+      "index_keywords": "Computational complexity; Information analysis; Information retrieval systems; Object oriented programming; Relational database systems; Semantics; Data representations; Models of data; Object-relational databases; Query complexity; Relational databases; Data structures",
+      "abstract": "The schema of an information system can significantly impact the ability of end users to efficiently and effectively retrieve the information they need. Obtaining quickly the appropriate data increases the likelihood that an organization will make good decisions and respond adeptly to challenges. This research presents and validates a methodology for evaluating, ex ante, the relative desirability of alternative instantiations of a model of data. In contrast to prior research, each instantiation is based on a different formal theory. This research theorizes that the instantiation that yields the lowest weighted average query complexity for a representative sample of information requests is the most desirable instantiation for end-user queries. The theory was validated by an experiment that compared end-user performance using an instantiation of a data structure based on the relational model of data with performance using the corresponding instantiation of the data structure based on the object-relational model of data. Complexity was measured using three different Halstead metrics: program length, difficulty, and effort. For a representative sample of queries, the average complexity using each instantiation was calculated. As theorized, end users querying the instantiation with the lower average complexity made fewer semantic errors, i.e., were more effective at composing queries. © 2005 Elsevier B.V. All rights reserved."
+    },
+    {
+      "year": "2006",
+      "title": "Developing maintainable software: The Readable approach",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/j.dss.2005.04.002",
+      "direct_focus_type": "programming_method_process",
+      "matched_terms": "computer_programming",
+      "author_keywords": "Maintenance; Programming; Web development",
+      "index_keywords": "Codes (symbols); Computer applications; Computer programming; Maintenance; World Wide Web; Software applications; Software technologies; Tabular representations; Web development; Computer software",
+      "abstract": "Software maintenance is expensive and difficult because software is complex and maintenance requires the understanding of code written by someone else. A prerequisite to maintainability is program understanding, specifically, understanding the control flows between software components. This is especially problematic for emerging software technologies, such as the World Wide Web, because of the lack of formal development practices and because web applications comprise a mix of static and dynamic content. Adequate representations are therefore necessary to facilitate program understanding. This research proposes an approach called Readable (Readable, Executable, Augmentable Database-Linked Environment) that generates executable, tabular representations that can be used to both understand and manipulate software applications. A controlled laboratory experiment carried out to test the efficacy of the approach demonstrates that the representations significantly enhance program understanding. The results suggest that the approach and the corresponding environment may be useful to alleviate problems associated with the software maintainability of new web applications. © 2005 Elsevier B.V. All rights reserved."
+    },
+    {
+      "year": "2001",
+      "title": "The effects of information request ambiguity and construct incongruence on query development",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/s0167-9236(01)00097-5",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "query_development; sql_query",
+      "author_keywords": "Construct congruence; Query development; Requirements ambiguity; Web front end",
+      "index_keywords": "Computer aided language translation; Information science; Interactive computer systems; Natural language processing systems; Relational database systems; Semantics; Query development; Query languages",
+      "abstract": "This paper examines the effects of information request ambiguity and construct incongruence on end user's ability to develop SQL queries with an interactive relational database query language. In this experiment, ambiguity in information requests adversely affected accuracy and efficiency. Incongruities among the information request, the query syntax, and the data representation adversely affected accuracy, efficiency, and confidence. The results for ambiguity suggest that organizations might elicit better query development if end users were sensitized to the nature of ambiguities that could arise in their business contexts. End users could translate natural language queries into pseudo-SQL that could be examined for precision before the queries were developed. The results for incongruence suggest that better query development might ensue if semantic distances could be reduced by giving users data representations and database views that maximize construct congruence for the kinds of queries in typical do mains. © 2001 Elsevier Science B.V. All rights reserved."
+    },
+    {
+      "year": "2000",
+      "title": "Using a structured design approach to reduce risks in end user spreadsheet development",
+      "journal": "Information & Management",
+      "doi": "10.1016/s0378-7206(99)00029-4",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "spreadsheet_programming",
+      "author_keywords": "Risks in end user development; Spreadsheet errors; Structured design",
+      "index_keywords": "",
+      "abstract": "Computations performed using end-user developed spreadsheets have resulted in serious errors and represent a major control risk to organizations. Literature suggests that factors contributing to spreadsheet errors include developer inexperience, poor design approaches, application types, problem complexity, time pressure, and presence or absence of review procedures. We explore the impact of using a structured design approach for spreadsheet development. We used two field experiments and found that subjects using the design approach showed a significant reduction in the number of 'linking errors,' i.e., mistakes in creating links between values that must connect one area of the spreadsheet to another or from one worksheet to another in a common workbook. Our results provide evidence that design approaches that explicitly identify potential error factors may improve end-user application reliability. We also observed that factors such as gender, application expertise, and workgroup configuration also influenced spreadsheet error rates. © 2000 Elsevier Science B.V. All rights reserved."
+    },
+    {
+      "year": "1999",
+      "title": "Applying Code Inspection to Spreadsheet Testing",
+      "journal": "Journal of Management Information Systems",
+      "doi": "10.1080/07421222.1999.11518250",
+      "direct_focus_type": "programming_method_process",
+      "matched_terms": "spreadsheet_programming; code_inspection",
+      "author_keywords": "Code inspection; Error detection; Spreadsheet errors; Spreadsheet testing",
+      "index_keywords": "",
+      "abstract": "In programming, reliability requires an extensive testing phase. Spreadsheet development, which has about the error rate as program development, also needs to be followed by an extensive testing phase if spreadsheets are to be reliable. In this study, sixty undergraduate MIS students code-inspected a spreadsheet seeded with eight errors. They first inspected the spreadsheet working alone. They then met in twenty groups of three to reinspect the spreadsheet together. Effort was made to prevent hasty inspection. Individual code inspection, consistent with past studies of both spreadsheet and program code inspection, caught only 63 percent of the errors. Group inspection raised this to 83 percent. However, the group phase never found new errors; it merely pooled the errors found during the individual phase by the three members. One group even \"lost\" an error found during the individual phase. This raises the question of whether a group code inspection phase is really necessary. Other findings were that subjects were overconfident when inspecting alone, that certain types of errors are especially difficult to detect, and that the benefits of the group phase is greatest for these difficult-to-detect types of errors."
+    },
+    {
+      "year": "1998",
+      "title": "Hitting the wall: errors in developing and code inspecting a `simple' spreadsheet model",
+      "journal": "Decision Support Systems",
+      "doi": "10.1016/s0167-9236(97)00038-9",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "code_inspection",
+      "author_keywords": "Audit; Code inspection; Decision support system; End user computing; Error; Fault; Modeling; Spreadsheet",
+      "index_keywords": "Codes (symbols); Error analysis; Spreadsheets; Cell error rate (CER); Code inspection; Decision support systems",
+      "abstract": "Field audits and experiments have found substantial error rates when students and professionals have built spreadsheet models. In this study, 102 undergraduate MIS majors and 50 MBA students developed a model from a word problem that was relatively simple and free of domain knowledge. Even so, 35% of their 152 models were incorrect. There was no significant difference in errors per model between undergraduates and MBAs. Even among the 17 MBAs with 250 h or more of experience, 24% of the models contained errors. The cell error rate (CER) - the percentage of cells with errors - was 2.0%. When 23 undergraduates attempted to audit their models through code inspection, only three with incorrect spreadsheets (15%) produced clean spreadsheets when they finished the audit. © 1998 Elsevier Science B.V. All rights reserved."
+    },
+    {
+      "year": "1998",
+      "title": "The Relevance of Application Domain Knowledge: Characterizing the Computer Program Comprehension Process",
+      "journal": "Journal of Management Information Systems",
+      "doi": "10.1080/07421222.1998.11518196",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "computer_programming; program_comprehension; programmer",
+      "author_keywords": "Application domain; Computer program comprehension; Metacognition; Program understanding; System maintenance",
+      "index_keywords": "",
+      "abstract": "Recent research using professional programmers suggests that knowledge of the application domain plays a major role in the cognitive processes they use to understand computer programs. In general, programmers use a more top-down comprehension process when working in familiar application domains, and a more bottom-up process in unfamiliar domains. The present study builds on that research by further characterizing comprehension processes. The findings show that: (1) certain programmers use different types of comprehension processes depending on their familiarity with the application domain (flexible approach), while others do not (top-down and bottom-up approaches); (2) familiarity with the application domain and the use of a particular comprehension process have marked effects on references programmers make to both application and programming domain knowledge; and (3) programmers who use a flexible comprehension process achieved the highest levels of comprehension. The present research also examines some cognitive determinants of the comprehension process. The findings highlight the need to consider application, as well as programming, domain knowledge as areas of computer programming expertise, to investigate factors influencing use of specific comprehension processes, and to develop tools to support flexible comprehension processes."
+    },
+    {
+      "year": "1997",
+      "title": "Why Is Programming (Sometimes) So Difficult? Programming as Scientific Discovery in Multiple Problem Spaces",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.8.1.25",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "computer_programming; programmer; programming_task",
+      "author_keywords": "Empirical studies of programmers; Multiple Problem Spaces; Object-Oriented Programming; Scientific Discovery",
+      "index_keywords": "Computer programming; Empirical studies of programmers; Problem space; Programming environment; Programming tasks; Representation change; Representation space; Scientific discovery; Theoretical framework; Object oriented programming",
+      "abstract": "Our theoretical framework views programming as search in three problem spaces: rule, instance, and representation. The main objectives of this study are to find out how programmers change representation while working in multiple problem spaces, and how representation change increases the difficulty of programming tasks. Our theory of programming indicates that programming is similar to the way scientists discover and test theories. That is, programmers generate hypotheses in the rule space and test these hypotheses in the instance space. Moreover, programmers change their representations in the representation space when rule development becomes too difficult or alternative representations are available. We conducted three empirical studies with different programming tasks: writing a new program, understanding an existing program, and reusing an old program. Our results indicate that considerable cognitive difficulties stem from the need to change representations in these tasks. We conclude by discussing the implications of viewing programming as a scientific discovery for the design of programming environments and training methods."
+    },
+    {
+      "year": "1996",
+      "title": "An experimental investigation into the process of knowledge-based systems development",
+      "journal": "European Journal of Information Systems",
+      "doi": "10.1057/ejis.1996.29",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "programmer",
+      "author_keywords": "",
+      "index_keywords": "",
+      "abstract": "This paper presents an experimental study into the processes that may contribute to building a better knowledge-based system. A model that defines quality to be composed of two related aspects, internal and external quality, is introduced. To test the model, 24 subjects developed a knowledge-based system for MBA course planning in an experimental setting over a 7 week period. Subjects were factored by development methodology (structured vs rapid prototyping), knowledge representation scheme used (rule-based vs hybrid) and programmer quality (naive vs experienced). The major finding is that an appropriate mix of development methodology, knowledge representation and personnel is necessary. No single development methodology or knowledge representation scheme is best, and a considerable number of interactions was observed in the experiment. Rapid prototyping combined with rule-based representation produced the best external quality in terms of functionality, but when combined with hybrid representation produced the worst. Similarly, rapid prototyping combined with hybrid representation produced the worst usability. Programmer quality had a positive effect on coding productivity, which in turn resulted in an increase in system usability. As with conventional software, increasing programmer quality can be very beneficial to both process and content. The study presented provides some evidence of the anomalies that are generated in the course of system development, and how they relate to internal quality. As might be expected, experienced programmers produced significantly fewer anomalies. A relationship was found between internal quality and usability, but not functionality. © 1996 Operational Research Society Ltd."
+    },
+    {
+      "year": "1996",
+      "title": "The Influence of Database Structure Representation on Database System Learning and Use",
+      "journal": "Journal of Management Information Systems",
+      "doi": "10.1080/07421222.1996.11518106",
+      "direct_focus_type": "programming_education_task",
+      "matched_terms": "sql_query",
+      "author_keywords": "",
+      "index_keywords": "",
+      "abstract": "Successful use of a computerized database by end users requires both an understanding of the structure of the database and knowledge of the available query language. Previous research has focused almost exclusively on query languages with little concern for how database structure is represented. This paper reports on an experiment that explores the influence of database structure representation on the ability of users to learn and use a database system. Four alternative representations of the same databases are developed and compared. These representations differ in semantics, symbols, and means of representing relationships. Interestingly, representation features that aid in communicating the contents of a database appear to hinder the learning of the SQL query language. We conclude that database representation is an important factor in database use and that the interaction between a database structure representation and a query language may dramatically affect database learning and use. Copyright © 1996, M.E. Sharpe, Inc."
+    },
+    {
+      "year": "1995",
+      "title": "Research Report—The Relevance of Application Domain Knowledge: The Case of Computer Program Comprehension",
+      "journal": "Information Systems Research",
+      "doi": "10.1287/isre.6.3.286",
+      "direct_focus_type": "human_programming_task",
+      "matched_terms": "computer_programming; program_comprehension; programmer",
+      "author_keywords": "",
+      "index_keywords": "Computer programming; Application domain knowledge; Bottom up; Comprehension process; Professional programmers; Program comprehension; Protocol analysis; Topdown; Application programs",
+      "abstract": "The field of software, has, to date, focused almost exclusively on application-independent approaches. In this research, we demonstrate the role of application domain knowledge in the processes used to comprehend computer programs. Our research sought to reconcile two apparently conflicting theories of computer program comprehension by proposing a key role for knowledge of the application domain under examination. We argue that programmers use more top-down comprehension processes when they are familiar with the application domain. When the application domain is unfamiliar, programmers use processes that are more bottom-up in nature. We conducted a protocol analysis study of 24 professional programmers comprehending programs in familiar and unfamiliar application domains. Our findings confirm our thesis. Copyright © 1995, Institute for Operations Research and the Management Sciences."
+    },
+    {
+      "year": "1991",
+      "title": "On end-user computing productivity",
+      "journal": "Information & Management",
+      "doi": "10.1016/0378-7206(91)90067-c",
+      "direct_focus_type": "programming_method_process",
+      "matched_terms": "programmer",
+      "author_keywords": "Data models; Database; End-user computing; End-users; Information systems; Productivity; Programming; Programming languages; System evaluation; System quality",
+      "index_keywords": "",
+      "abstract": "Two important classes of end-users are: command level users, and end-user programmers. For each of these classes, controlled experiments have been conducted to measure their productivity. For command level users working with databases, our results indicate that they perform better when the logical data model used is consistent with their own views of reality. For end-user programmers writing programs in high-level procedural programming language, the quality of programs is generally low and no program development method clearly stands out in terms of quality; though writing programs directly without any preplanning is expeditious. © 1991."
+    }
+  ],
+  "recent_records": [
+    {
+      "key": "doi:10.1016/j.im.2026.104306",
+      "eid": "2-s2.0-105027966248",
+      "doi": "10.1016/j.im.2026.104306",
+      "title": "The impact of generative artificial intelligence on software development performance: a study based on the theory of technology dominance",
+      "year": "2026",
+      "journal": "Information and Management",
+      "author_keywords": "AI-assisted programming; Artificial intelligence reliance; Information system development performance; Task–technology fit; Theory of technology dominance (TTD)",
+      "index_keywords": "Artificial intelligence; Computer systems programming; Information systems; Information use; Personnel; Artificial intelligence reliance; Artificial intelligence tools; Artificial intelligence-assisted programming; Development performance; Information system development; Information system development performance; System development; Task technology fit; Theory of technology dominance; Theory of technology dominances; Software design",
+      "matched_terms": "programmer; ai_assisted_programming",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.1080/0960085x.2025.2463984",
+      "eid": "2-s2.0-85218195955",
+      "doi": "10.1080/0960085X.2025.2463984",
+      "title": "The Insider’s Dilemma: Employed Open Source Developers’ Identification Imbalance and Intentions to Leave",
+      "year": "2025",
+      "journal": "European Journal of Information Systems",
+      "author_keywords": "Open source software; organizational identification; response surface method; turnover intention",
+      "index_keywords": "Linux; Open source software; Polynomial regression; Software design; Company's turnover; Corporates; Open source communities; Open source developers; Open-source software development; Open-source softwares; Organizational identifications; Response surfaces methods; Role conflicts; Turnover intentions",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.1287/isre.2023.0402",
+      "eid": "2-s2.0-105026855652",
+      "doi": "10.1287/isre.2023.0402",
+      "title": "Team-Enacted Use vs. Developer-Needed Use of Agile Practices: How Perceptual (In-)Congruence and Team Feedback-Seeking Shape Developer Well-Being",
+      "year": "2025",
+      "journal": "Information Systems Research",
+      "author_keywords": "agile practices; developer needs; experience sampling; interviews; multilevel polynomial regression; person-environment fit theory; response surface analysis; team feedback-seeking; team-enacted use; well-being",
+      "index_keywords": "Agile manufacturing systems; Feedback; Information systems; Information use; Polynomials; Regression analysis; Surface analysis; Agile practices; Developer need; Experience sampling; Feedback seeking; Interview; Multilevel polynomial regression; Multilevels; Person-environment fit theory; Polynomial regression; Response surface analysis; Team feedback-seeking; Team-enacted use; Well being; Importance sampling",
+      "matched_terms": "pair_programming",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章研究团队实施的敏捷实践与开发者个人需求的感知（不）一致性对开发者幸福感的影响，以及团队反馈寻求的调节作用。核心理论是个人-环境匹配，变量为敏捷实践使用与需求的感知程度、反馈寻求和幸福感，未涉及具体编程任务、代码制品或编程认知过程。若将“开发者”替换为一般知识工作者，“敏捷实践”替换为一般工作实践，研究框架和结论依然成立，因此不满足编程作为核心不可替代对象的条件。"
+    },
+    {
+      "key": "doi:10.25300/misq/2025/18531",
+      "eid": "2-s2.0-105026345002",
+      "doi": "10.25300/MISQ/2025/18531",
+      "title": "THE FOG OF WARNINGS: HOW NON-SECURITY-RELATED NOTIFICATIONS DIMINISH THE EFFICACY OF SECURITY WARNINGS",
+      "year": "2025",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "field experiment; fMRI; generalization; habituation; NeuroIS; Security warning",
+      "index_keywords": "Human engineering; Network security; Critical problems; Cyber security; Field experiment; FMRI; Functional magnetic resonance imaging; Generalisation; Habituation; Learn+; NeuroIS; Security warning; Cybersecurity",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究用户对安全警告的习惯化泛化问题，涉及浏览器安全警告与通知的相似性导致用户忽视警告，不涉及编程活动、程序员、源代码或直接支持编程的工具与协作过程，故不属于编程情境。"
+    },
+    {
+      "key": "doi:10.25300/misq/2024/18021",
+      "eid": "2-s2.0-105021933774",
+      "doi": "10.25300/MISQ/2024/18021",
+      "title": "HOW ARTIFACT-BASED AND AUTHORITY-BASED COORDINATION AFFECT PROPAGATION COSTS IN OPEN SOURCE SOFTWARE DEVELOPMENT",
+      "year": "2025",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "Architectures; artifact-based coordination; design structure matrices (DSM); focal-layered superposition; mirroring hypothesis; open source software; open superposition; propagation costs; simulation model; visibility",
+      "index_keywords": "Architecture; Costs; Information management; Matrix algebra; Open source software; Open systems; Project management; Software architecture; Software design; Artifact-based coordination; Design Structure Matrices; Design structure matrix; Focal-layered superposition; Mirroring hypothesis; Open superposition; Open-source software development; Open-source softwares; Propagation cost; Simulation model; Visibility",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "该文使用计算模型模拟两种协调机制（基于制品和基于权威）如何将互相依赖的贡献集成为软件架构，并衡量架构的传播成本。研究核心是协调机制对架构传播成本的影响，而非编程活动本身。软件架构被抽象为设计结构矩阵，传播成本是架构层面的计算结果，不涉及具体的编程操作、代码编写、调试或程序理解。替换测试表明，如果将“开发者”换为一般知识工作者，“贡献”换为一般任务，“软件架构”换为一般产品架构，研究问题和结论基本成立，编程不具有不可替代性。因此不属于直接研究编程。"
+    },
+    {
+      "key": "doi:10.1080/07421222.2025.2520171",
+      "eid": "2-s2.0-105013960080",
+      "doi": "10.1080/07421222.2025.2520171",
+      "title": "Digital Skill Visibility and Job Promotion of Open Source Software Developers",
+      "year": "2025",
+      "journal": "Journal of Management Information Systems",
+      "author_keywords": "contest mechanism; digital features, OSS developers; interpersonal skills; Open source software, OSS, job promotions; sponsored mechanism; technical skills",
+      "index_keywords": "Open systems; Visibility; Contest mechanism; Digital feature, open source software developer; Digital features; Interpersonal skills; Open source software, open source software, job promotion; Open-source softwares; Software developer; Sponsored mechanism; Technical skills; Open source software",
+      "matched_terms": "software_developer",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.25300/misq/2023/16789",
+      "eid": "2-s2.0-85187239722",
+      "doi": "10.25300/MISQ/2023/16789",
+      "title": "THE ENTRAINMENT OF TASK ALLOCATION AND RELEASE CYCLES IN OPEN SOURCE SOFTWARE DEVELOPMENT",
+      "year": "2024",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "entrainment; Open source software; release cycles; self-organization; task allocation",
+      "index_keywords": "Open systems; Software design; Entrainment; Event model; Open source software community; Open source software projects; Open-source software development; Open-source softwares; Release cycles; Self organizations; Self-organised; Task allocation; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "True",
+      "exclusion_or_decision_reason": "文章核心研究开源社区中任务分配与发布周期的同步，焦点是开发者与issue之间的网络交互模式，而非具体的编程操作、代码理解、修改、测试或代码制品属性。任务分配机制（贡献频率、问题流行度、惯性）衡量的是谁对哪个issue采取了行动，而不分析代码内容、质量或编程认知。替换测试：将‘开发者’替换为一般知识工作者，将‘issues/commits’替换为工作任务/产出后，研究问题、理论机制与结论依然成立。因此不属于直接研究编程本身。"
+    },
+    {
+      "key": "doi:10.17705/1jais.00843",
+      "eid": "2-s2.0-85191888704",
+      "doi": "10.17705/1jais.00843",
+      "title": "Optimal Launch Timing of Bug Bounty Programs for Software Products under Different Licensing Models",
+      "year": "2024",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Bug Bounty Program; Ethical Hacker; Launch Timing; Software Licensing Model",
+      "index_keywords": "Launching; Personal computing; Philosophical aspects; Program debugging; Software reliability; Bug bounty program; Bug-fixing; Ethical hacker; Failure cost; Launch timing; Shaped pattern; Software firms; Software licensing; Software licensing model; U-shaped; Timing circuits",
+      "matched_terms": "debugging",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "本文研究软件公司关于漏洞赏金计划（BBP）的最优启动时机和许可模型选择，采用数学建模和优化分析，并不以编程活动、程序员行为、源代码或开发工具为研究对象。"
+    },
+    {
+      "key": "doi:10.1016/j.jsis.2023.101771",
+      "eid": "2-s2.0-85159574567",
+      "doi": "10.1016/j.jsis.2023.101771",
+      "title": "The influence of project initiators’ person-to-person followership on project popularity in open source communities: The role of reach and importance",
+      "year": "2023",
+      "journal": "Journal of Strategic Information Systems",
+      "author_keywords": "Followership; Following; Open source software project; Project initiator; Social media; Social network",
+      "index_keywords": "Large dataset; Open systems; Social networking (online); Statistical tests; Development platform; Followership; Following; Open source communities; Open source software projects; Open-source software development; Project initiator; Social media; Social media platforms; Social network; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.1287/isre.2022.1172",
+      "eid": "2-s2.0-85182909181",
+      "doi": "10.1287/isre.2022.1172",
+      "title": "Software Components and Product Variety in a Platform Ecosystem: A Dynamic Network Analysis of WordPress",
+      "year": "2023",
+      "journal": "Information Systems Research",
+      "author_keywords": "API; block modeling; combinatorial design; digital innovation; hierarchical clustering; network method; platform ecosystem; plug-in; product variety",
+      "index_keywords": "Application programming interfaces (API); Application programs; Product design; Applications programming interfaces; Block modeling; Combinatorial design; Digital innovations; Hier-archical clustering; Hierarchical Clustering; Network methods; Platform ecosystems; Plug-ins; Product variety; Ecosystems",
+      "matched_terms": "source_code",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究WordPress平台生态系统中API使用与产品多样性之间的关系，关注的是插件（数字产品）的功能类别和API组合模式，而非程序员或软件开发者的编程活动、认知或行为。尽管使用了源代码数据提取API调用，但编程实践本身并非研究现象。"
+    },
+    {
+      "key": "doi:10.1080/07421222.2023.2172776",
+      "eid": "2-s2.0-85152413004",
+      "doi": "10.1080/07421222.2023.2172776",
+      "title": "Leveraging Low Code Development of Smart Personal Assistants: An Integrated Design Approach with the SPADE Method",
+      "year": "2023",
+      "journal": "Journal of Management Information Systems",
+      "author_keywords": "Anthropomorphic design; citizen development; conversational agents; conversational design; end-user programming; IS development; low code development platform; smart personal assistant",
+      "index_keywords": "Computer programming; Design; Anthropomorphic design; Citizen development; Code development; Conversational agents; Conversational design; Development platform; End-user programming; End-users; IS development; Low code development platform; Personal assistants; Smart personal assistant; Behavioral research",
+      "matched_terms": "computer_programming; end_user_programming",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.1016/j.dss.2023.114041",
+      "eid": "2-s2.0-85166975307",
+      "doi": "10.1016/j.dss.2023.114041",
+      "title": "Idea crowdsourcing platforms for new product development: A study of idea quality and the number of submitted ideas",
+      "year": "2023",
+      "journal": "Decision Support Systems",
+      "author_keywords": "Crowdsourcing; Idea crowdsourcing, creativity; Idea quality; Idea submission; Innovation",
+      "index_keywords": "Association reactions; Product development; Program debugging; Crowdsourcing platforms; Idea crowdsourcing, creativity; Idea quality; Idea submission; Innovation; Innovation communities; Integral part; New product development; Organizational innovation; Performance; Crowdsourcing",
+      "matched_terms": "debugging",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.25300/misq/2022/15358",
+      "eid": "2-s2.0-85174681098",
+      "doi": "10.25300/MISQ/2022/15358",
+      "title": "EQUALITY DOES NOT MAKE YOU HAPPY: EFFECTS OF DIFFERENTIATED LEADER-MEMBER EXCHANGE AND TEAM-MEMBER EXCHANGE ON DEVELOPER SATISFACTION IN AGILE DEVELOPMENT TEAMS",
+      "year": "2023",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "agile software development; developer satisfaction; Leader-member exchange differentiation; LMX differentiation; mixed methods; social exchange theory; team processes; team-member exchange; TMX",
+      "index_keywords": "Agile manufacturing systems; Information systems; Agile software development; Developer satisfaction; Leader-member exchange differentiation; Leader-member exchanges; Mixed method; Social exchange theory; Team member exchanges; Team process; Software design",
+      "matched_terms": "software_developer",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "该文章研究敏捷开发团队中差异化领导-成员交换（LMX differentiation）和团队成员交换（TMX）对开发者工作满意度和团队满意度的影响，核心是社会交换理论和团队过程。研究方法为调查和访谈，未设计或观察任何具体的编程任务或代码制品。敏捷实践（如结对编程、集体代码所有权）仅作为团队协作机制的例子被提及，而非编程行为的研究对象。若将“开发者”替换为一般知识工作者，将“敏捷实践”替换为一般团队协作实践，研究问题、变量和结论基本成立，因此不满足直接研究编程的不可替代性标准。"
+    },
+    {
+      "key": "doi:10.1287/isre.2023.1200",
+      "eid": "2-s2.0-85183106690",
+      "doi": "10.1287/isre.2023.1200",
+      "title": "A Complex Adaptive Systems Perspective of Software Reuse in the Digital Age: An Agenda for IS Research",
+      "year": "2023",
+      "journal": "Information Systems Research",
+      "author_keywords": "complex adaptive systems; digital technologies; generativity; packaged software reuse; software development; software reuse",
+      "index_keywords": "Adaptive systems; Ecosystems; Open source software; Open systems; Product design; Scaffolds; Software design; Complex adaptive systems; Digital products; Digital services; Digital technologies; Generativity; Information system research; Packaged software; Packaged software reuse; Software-reuse; Computer software reusability",
+      "matched_terms": "software_developer",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章是IS领域的研究评论，提出用复杂适应系统（CAS）视角研究软件重用（packaged software reuse）现象，构建研究议程。其核心研究对象是软件重用作为大规模现象涉及的主体、信号、生态系统动态、规模和可持续性，而非具体的编程操作（如代码编写、调试、测试、程序理解等）。文章没有涉及任何人类编程任务，没有分析代码制品属性或编程认知过程。替换测试：将“软件开发者”和“软件包”替换为一般知识工作者和共享工件后，CAS框架下的研究问题（如主体多样性、自适应张力、信号传播、生态系统规模与可持续性）依然成立，编程要素并非不可替代的核心。因此判定为非直接编程研究。"
+    },
+    {
+      "key": "doi:10.17705/1jais.00748",
+      "eid": "2-s2.0-85138857740",
+      "doi": "10.17705/1jais.00748",
+      "title": "Penetration or Skimming? Pricing Strategies for Software Platforms Considering Asymmetric Cross-Side Network Effects",
+      "year": "2022",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Asymmetric Cross-Side Network Effects; Penetration/Skimming Pricing; Software Platform; Subsidizing Developers",
+      "index_keywords": "Economics; Access fee; Asymmetric cross-side network effect; Network effects; Penetration pricing; Penetration/skimming pricing; Pricing strategy; Side networks; Skimming pricing; Software platforms; Subsidizing developer; Costs",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "全文研究软件平台对开发者的定价策略（渗透或撇脂），开发者仅作为平台一侧参与经济模型，未实质分析编程活动、代码任务或编程工具，不构成编程情境研究。"
+    },
+    {
+      "key": "doi:10.1016/j.im.2022.103716",
+      "eid": "2-s2.0-85139247616",
+      "doi": "10.1016/j.im.2022.103716",
+      "title": "Mobile app portfolio management and developers’ performance: An empirical study of the apple app store",
+      "year": "2022",
+      "journal": "Information and Management",
+      "author_keywords": "Mobile app industry; Portfolio diversity; Product portfolio management; Software developers; Spillover effect",
+      "index_keywords": "Financial data processing; Fruits; Investments; App stores; Developer performance; Empirical studies; Mobile app; Mobile app industry; Portfolio diversity; Portfolio managements; Product portfolio management; Software developer; Spillover effects; Application programs",
+      "matched_terms": "software_developer",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.25300/misq/2022/16618",
+      "eid": "2-s2.0-85180129735",
+      "doi": "10.25300/MISQ/2022/16618",
+      "title": "CROSS-LINGUAL CYBERSECURITY ANALYTICS IN THE INTERNATIONAL DARK WEB WITH ADVERSARIAL DEEP REPRESENTATION LEARNING1",
+      "year": "2022",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "adversarial learning; automated hacker asset detection; computational design science; cross-lingual knowledge transfer; Cybersecurity analytics; dark web",
+      "index_keywords": "Deep learning; Design; Generative adversarial networks; Knowledge management; Malware; Personal computing; Personnel training; Adversarial learning; Automated hacker asset detection; Computational design; Computational design science; Cross-lingual; Cross-lingual knowledge transfer; Cyber security; Cybersecurity analytic; Dark web; Design science; Knowledge transfer; Cybersecurity",
+      "matched_terms": "source_code",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究对象是暗网中的黑客资产（如恶意软件、工具、教程和恶意源代码）的自动检测，采用对抗深度表示学习进行跨语言文本分类。虽然涉及“源代码”，但并未实质研究程序员编写、调试或维护源代码的编程活动，而是关注网络安全分析的文本挖掘方法。编程不是被研究的现象，因此不属于编程情境。"
+    },
+    {
+      "key": "doi:10.1016/j.dss.2021.113665",
+      "eid": "2-s2.0-85115634506",
+      "doi": "10.1016/j.dss.2021.113665",
+      "title": "A constraint programming model for making recommendations in personal process management: A design science research approach",
+      "year": "2022",
+      "journal": "Decision Support Systems",
+      "author_keywords": "Business process management; Constraint programming; Design science research; Intelligent personal assistants; Personal process management",
+      "index_keywords": "Artificial intelligence; Cognitive systems; Computer programming; Constraint theory; Decision making; Decision support systems; Design; Enterprise resource management; Surveys; Cognitive loads; Constraint programming model; Context-aware mobile application; Decisions makings; Design-science researches; Personal process management; Process management; Process management systems; Research approach; System usability; Constraint programming",
+      "matched_terms": "computer_programming",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章是一篇哲学随笔，探讨“界限”概念与全球化、空间、地点的关系，完全不涉及编程活动、程序员、源代码或软件开发。"
+    },
+    {
+      "key": "doi:10.1016/j.jsis.2021.101671",
+      "eid": "2-s2.0-85107689662",
+      "doi": "10.1016/j.jsis.2021.101671",
+      "title": "Sustaining collaborative software development through strategic consortium",
+      "year": "2021",
+      "journal": "Journal of Strategic Information Systems",
+      "author_keywords": "Collaboration; Exploration and exploitation; Kuali; Open source; Open source software development; Strategic consortium",
+      "index_keywords": "Groupware; Open source software; Open systems; Sustainable development; Collaborative software development; Commercial software; Conceptual frameworks; Contextual ambidexterities; Exploration and exploitation; In-house development; Longitudinal case study; Organizational designs; Software design",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "全文研究的是战略联盟下的协作软件开发（COSS）的组织治理和探索-利用平衡，关注的是跨组织合作机制、资源分配和社区可持续性，而非具体的编程活动、程序员行为或代码制品。"
+    },
+    {
+      "key": "doi:10.1111/isj.12313",
+      "eid": "2-s2.0-85096722432",
+      "doi": "10.1111/isj.12313",
+      "title": "Project leaders as boundary spanners in open source software development: A resource dependence perspective",
+      "year": "2021",
+      "journal": "Information Systems Journal",
+      "author_keywords": "digital innovation; open source software; project leaders; resource dependence theory; social innovation; software development",
+      "index_keywords": "Large dataset; Open systems; Software design; Boundary spanners; Digital innovations; Open source software projects; Open-source software development; Open-source softwares; Project leaders; Resource dependence theory; Resource dependences; Social innovations; Social needs; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究开源软件项目领导者的特征（规模、任期、网络联系）对项目成功（下载量和用户推荐）的影响，采用资源依赖理论，数据为项目级别档案数据。编程活动、程序员或源代码不是实质性研究对象，编程仅作为背景提及。"
+    },
+    {
+      "key": "doi:10.25300/misq/2021/15297",
+      "eid": "2-s2.0-105021969441",
+      "doi": "10.25300/MISQ/2021/15297",
+      "title": "INFLUENCE IN SOCIAL MEDIA: AN INVESTIGATION OF TWEETS SPANNING THE 2011 EGYPTIAN REVOLUTION",
+      "year": "2021",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "computational social science; influence; retweets; Social media; social movement; Twitter",
+      "index_keywords": "Computation theory; Computer programming; Information use; Learning systems; Social behavior; Tweets; Computational social science; Egyptians; Extended model; Influence; Network structures; Retweet; Social influence; Social media; Social movements; Through the lens; Social networking (online)",
+      "matched_terms": "computer_programming",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "该文章研究的是社交媒体（Twitter）上用户影响力的驱动因素，以2011年埃及革命为背景，分析推文和转发行为、用户活动框架（如反独裁、自由、抗议等）和网络结构特征，不涉及任何编程活动、程序员、源代码或直接支持编程的工具或协作过程，因此不属于编程情境。"
+    },
+    {
+      "key": "doi:10.1080/0960085x.2020.1816146",
+      "eid": "2-s2.0-85090994149",
+      "doi": "10.1080/0960085X.2020.1816146",
+      "title": "Exposing patterns of adult solicitor behaviour: towards a theory of control within the cybersexual abuse of youth",
+      "year": "2021",
+      "journal": "European Journal of Information Systems",
+      "author_keywords": "child sexual abuse; grounded theory; Mike Gallivan; online sexual predation; Pär Ågerfalk; Social media; social media theory",
+      "index_keywords": "Information systems; Grounded theory; Instant messaging; Software developer; Theoretical foundations; Unintended consequences; Online systems",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究在线成人引诱青少年的行为模式，通过扎根理论分析即时消息对话记录，属于对社交网络中掠食行为的犯罪学/社会学研究。全文未涉及任何编程活动、程序员、源代码或直接支持编程的工具，编程不是被研究现象。"
+    },
+    {
+      "key": "doi:10.1177/0268396220978983",
+      "eid": "2-s2.0-85100879140",
+      "doi": "10.1177/0268396220978983",
+      "title": "Distributed Internet voting architecture: A thin client approach to Internet voting",
+      "year": "2021",
+      "journal": "Journal of Information Technology",
+      "author_keywords": "biometric identification; blockchain; e-voting; electronic voting; Internet voting; Merkle tree; secure voting; smart card; thin client",
+      "index_keywords": "Application programming interfaces (API); Application programs; Computer architecture; Computer programming; Hash functions; Network architecture; Network protocols; Network security; Privacy by design; Smart cards; Software testing; Trees (mathematics); Asymmetric encryption; Internet based system; Internet protocol security; Internet voting system; Proposed architectures; Secure electronic voting; Symmetric encryption; Thin-client approach; Electronic voting",
+      "matched_terms": "computer_programming",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究分布式互联网投票架构的概念设计与技术可行性，重点在于网络安全、加密、智能卡等系统层面的集成方案，编程仅作为实现手段被提及（如用Python开发API进行功能测试），并非研究对象本身，不属于编程情境。"
+    },
+    {
+      "key": "doi:10.1111/isj.12270",
+      "eid": "2-s2.0-85075244480",
+      "doi": "10.1111/isj.12270",
+      "title": "The Third Design Space: A postcolonial perspective on corporate engagement with open source software communities",
+      "year": "2020",
+      "journal": "Information Systems Journal",
+      "author_keywords": "metaphor; open source software; postcolonialism; software development; Third Design Space; third space",
+      "index_keywords": "Open systems; Software design; Software engineering; Common pool resources; Design environment; Design spaces; Designing softwares; metaphor; Open source software community; postcolonialism; Third spaces; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章采用后殖民隐喻研究企业与开源软件社区的协作，核心关注组织间关系、文化融合与“第三设计空间”的构建。虽然背景涉及软件开发和开源项目，但研究问题、数据收集和分析均聚焦于协作实践、价值观及资源共享，而非具体的编程活动或代码属性。替换测试：如果将“开源开发者/企业”替换为一般合作群体，将“代码/开源项目”替换为其他类型的工作任务或项目，文章关于跨文化协作、权力动态和混合空间的理论机制与结论仍然成立，编程对象并非不可替代的核心。因此判定非直接编程研究。"
+    },
+    {
+      "key": "doi:10.17705/1jais.00628",
+      "eid": "2-s2.0-85088022397",
+      "doi": "10.17705/1jais.00628",
+      "title": "Performance outcomes of test-driven development: An experimental investigation",
+      "year": "2020",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Developer Satisfaction; Experimental Design; Learning; Software Quality; Test-Driven Development",
+      "index_keywords": "Computer software selection and evaluation; Software design; Contemporary practices; Developer satisfaction; Experimental investigations; Laboratory experiments; Learning; Performance outcome; Software Quality; Software tasks; Test driven development; Software testing",
+      "matched_terms": "test_driven_development",
+      "evidence_stage": "core_20",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "True",
+      "direct_focus_type": "programming_method_process",
+      "has_human_programming_task": "True",
+      "exclusion_or_decision_reason": "替换测试无法通过：若将“程序员/开发者”替换为一般知识工作者，将“代码/软件质量”替换为一般工作产出，则TDD特有的测试驱动、代码重构循环将失去具体编程情境，软件质量评估标准（如类设计、接口、语法正确性）和实验任务（编写Java程序）均无法替换。文章的核心研究问题、实验处理（TDD vs test-last）、测量（代码评分、编程任务满意度）及结论均紧密围绕实际编程活动和方法过程，编程是不可替代的研究对象。"
+    },
+    {
+      "key": "doi:10.25300/misq/2020/13216",
+      "eid": "2-s2.0-85100329355",
+      "doi": "10.25300/MISQ/2020/13216",
+      "title": "More is not necessarily better: An absorptive capacity perspective on network effects in open source software development communities",
+      "year": "2020",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "Bridge members; Knowledge breadth; Knowledge depth; Network breadth; Network depth; Open source software development; Role diversity",
+      "index_keywords": "Open systems; Social sciences computing; Software design; Absorptive capacity; External knowledge; Longitudinal data; Managerial implications; Network connection; Open source software community; Research challenges; Sub-optimal combination; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "该研究关注SaaS交付应用的客户替换行为，研究场景是组织对云服务产品的采用和保留，核心变量为服务质量和承诺，未涉及编程活动、程序员、源代码或编程工具等实质性编程情境。"
+    },
+    {
+      "key": "doi:10.1016/j.infoandorg.2019.100274",
+      "eid": "2-s2.0-85075513647",
+      "doi": "10.1016/j.infoandorg.2019.100274",
+      "title": "Keeping the family together: Sustainability and modularity in community source development",
+      "year": "2020",
+      "journal": "Information and Organization",
+      "author_keywords": "Collaboration; Community source; Design Structure Matrix; Kuali; Modular design; Open source; Software development; Sustaining",
+      "index_keywords": "",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究社区开源软件开发的可持续性和模块化组织设计，以Kuali项目为案例，使用设计结构矩阵（DSM）分析组织间任务依赖和模块化程度，但并未实质性研究具体的编程活动、程序员行为、代码任务或编程认知。研究问题、数据和分析对象聚焦于社区治理、协作挑战和模块化架构演化，而非编程情境。"
+    },
+    {
+      "key": "doi:10.1111/isj.12282",
+      "eid": "2-s2.0-85081950258",
+      "doi": "10.1111/isj.12282",
+      "title": "How agile software development methods reduce work exhaustion: Insights on role perceptions and organizational skills",
+      "year": "2020",
+      "journal": "Information Systems Journal",
+      "author_keywords": "agile systems development; developer skills; organizational skills; role ambiguity; role conflict; work exhaustion",
+      "index_keywords": "Iterative methods; Software testing; Agile systems; developer skills; Organizational skills; Role ambiguities; Role conflicts; work exhaustion; Software design",
+      "matched_terms": "software_developer",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章研究敏捷软件开发方法的使用如何通过角色感知（角色冲突和角色模糊）和组织技能影响软件开发者工作耗竭。虽然情境是软件开发和程序员，但核心理论机制（工作需求-控制模型）、变量（角色冲突、角色模糊、工作耗竭）和关系均可替换为一般知识工作者和工作方法，而不需要涉及具体编程操作、代码或程序理解。文章未观察或分析任何具体的编程活动、代码制品或编程认知过程；数据完全来自问卷调查，测量工作方法使用频率、角色感知和耗竭。替换测试成立，故不是直接的编程研究。"
+    },
+    {
+      "key": "doi:10.17705/1jais.00566",
+      "eid": "2-s2.0-85073743813",
+      "doi": "10.17705/1jais.00566",
+      "title": "Self-organizing in blockchain infrastructures: Generativity through shifting objectives and forking",
+      "year": "2019",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Bitcoin; Blockchain; Digital infrastructure; Forking; Generativity; Self-organizing",
+      "index_keywords": "Bitcoin; Contextualize; Digital infrastructures; Digital technologies; Forking; Generativity; Organizational process; Self-organizing; Specific properties; Blockchain",
+      "matched_terms": "source_code",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章研究区块链基础设施中的自组织现象，以比特币社区的分叉事件为核心。研究问题是如何在区块链基础设施中发生自组织，而非编程行为本身。代码分叉被用作一种组织变革的机制，但文章并未直接观察、操纵或分析具体的编程操作、认知过程、代码编写、调试或测试等编程活动。主要数据来自论坛讨论和文档，分析焦点是社区目标和社会组织模式的演变，而不是代码属性或编程过程。替换测试：将“程序员/开发者”替换为一般知识工作者，将“代码/分叉”替换为一般工作流程变更或组织分歧后，研究问题、理论机制和结论基本仍然成立，因此不符合严格的编程研究标准。"
+    },
+    {
+      "key": "doi:10.1287/isre.2019.0856",
+      "eid": "2-s2.0-85079284211",
+      "doi": "10.1287/isre.2019.0856",
+      "title": "How pair programming influences team performance: The role of backup behavior, shared mental models, and task novelty",
+      "year": "2019",
+      "journal": "Information Systems Research",
+      "author_keywords": "Agile; Backup behavior; Pair programming; Scrum; Shared mental models; Software development; Task novelty; Team adaptation; Team performance",
+      "index_keywords": "Cognitive systems; Enterprise software; Software design; Software engineering; Agile; Backup behavior; Pair-programming; Scrum; Shared mental model; Task novelty; Team adaptation; Team performance; Behavioral research",
+      "matched_terms": "software_developer; pair_programming",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "替换测试：将“程序员/开发者”替换为一般知识工作者，将“结对编程”替换为一般结对协作，将“代码/软件项目”替换为一般工作任务，论文的核心研究问题、理论机制（共享心智模型、备份行为、任务新颖性）和结论仍基本成立。研究关注的是团队协作机制而非编程特有的认知、操作或代码属性，未观察或分析任何具体的编程任务过程或代码结果，全部数据来自问卷，因此不满足不可替代性。"
+    },
+    {
+      "key": "doi:10.1287/isre.2018.0829",
+      "eid": "2-s2.0-85079276173",
+      "doi": "10.1287/isre.2018.0829",
+      "title": "Does superposition influence the success of floss projects? An examination of open-source software development by organizations and individuals",
+      "year": "2019",
+      "journal": "Information Systems Research",
+      "author_keywords": "Collaboration; Econometrics; Information systems (IS) development; Motivation; Open-source software; Project success; Superposition; Task structure; Virtual teams",
+      "index_keywords": "Economics; Motivation; Open systems; Software design; Statistics; Collaboration; Econometrics; Project success; Superposition; Task structure; Virtual team; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "该研究以FLOSS项目为背景，探讨任务叠加（superposition）这种工作编排机制对项目流行度的影响，并考察组织所有权的调节作用。核心理论构建基于自我决定理论和情感事件理论，分析工作结构如何影响贡献者的动机进而影响项目成功。如果将“开源软件项目”替换为其他在线协作项目（如维基百科编辑、开源硬件设计），将“开发者”替换为一般知识工作者，将“代码任务”替换为一般工作任务，其研究问题、机制和结论基本成立。文章没有直接观察、操纵或分析具体的编程操作、认知过程或代码制品属性，编程情境是可替换的。因此不符合直接编程研究的标准。"
+    },
+    {
+      "key": "doi:10.17705/1jais.00525",
+      "eid": "2-s2.0-85061966065",
+      "doi": "10.17705/1jais.00525",
+      "title": "“Computing” Requirements for Open Source Software: A Distributed Cognitive Approach",
+      "year": "2018",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Case Study; Distributed Cognition; Heuristics; Open Source Software Development; Requirements Engineering; Ruby Programming Language",
+      "index_keywords": "Cognitive systems; Computer programming languages; Open systems; Requirements engineering; Ruby; Software design; Case-studies; Cognitive approaches; Cognitive process; Distributed cognition; Heuristic; Open-source software development; Open-source softwares; Requirement engineering; Ruby programming language; Software requirements; Open source software",
+      "matched_terms": "computer_programming; open_source_development",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "True",
+      "exclusion_or_decision_reason": "本文研究开源软件环境下的需求工程，将其视为分布式认知过程，焦点在于需求知识如何通过社会、结构和时间分布被“计算”，而非具体的编程操作或代码制品。若将程序员替换为一般知识工作者，代码/软件项目替换为一般工作任务或项目，其分布式认知框架、发现、规格说明和验证三个 RE 阶段、以及社会/结构/时间分布机制等核心结论仍然成立，因此未通过替换测试。"
+    },
+    {
+      "key": "doi:10.25300/misq/2018/14015",
+      "eid": "2-s2.0-85053341922",
+      "doi": "10.25300/MISQ/2018/14015",
+      "title": "The sustainability of polycentric information commons",
+      "year": "2018",
+      "journal": "MIS Quarterly: Management Information Systems",
+      "author_keywords": "Collective action threats; Decentralized online information systems; Governance; Polycentricity; Theory development; Tragedy of the commons",
+      "index_keywords": "Distributed computer systems; Electronic document exchange; Information dissemination; Information systems; Information use; Open source software; Open systems; Peer to peer networks; Social networking (online); Software design; Sustainable development; Collective action; Governance; Online information systems; Polycentricity; Theory development; Tragedy of the commons; Online systems",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.1016/j.dss.2017.12.013",
+      "eid": "2-s2.0-85040127184",
+      "doi": "10.1016/j.dss.2017.12.013",
+      "title": "Platform adoption by mobile application developers: A multimethodological approach",
+      "year": "2018",
+      "journal": "Decision Support Systems",
+      "author_keywords": "IT platform adoption; Mobile applications; Multi-methodology; Network externalities; Quantitative research",
+      "index_keywords": "Mobile computing; IT platforms; Mobile applications; Multi-methodology; Network externality; Quantitative research; Mobile telecommunication systems",
+      "matched_terms": "software_developer",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "该文研究移动应用开发者对IT平台的采纳决策因素，比较了开发者平台采纳与最终用户IT采纳的差异。核心研究对象是平台采纳行为及其影响因素（如相对优势、市场潜力、社会影响等），而非具体的编程活动或代码属性。若将“开发者”替换为一般知识工作者，“平台”替换为一般工作工具或技术，“应用开发”替换为一般工作任务，其研究模型和结论基本成立，故不满足不可替代性。全文未分析任何实际的编程过程、认知、代码结果或工具对编程任务的影响。"
+    },
+    {
+      "key": "doi:10.1111/isj.12133",
+      "eid": "2-s2.0-85037548960",
+      "doi": "10.1111/isj.12133",
+      "title": "Metaphors in managerial and employee sensemaking in an information systems project",
+      "year": "2018",
+      "journal": "Information Systems Journal",
+      "author_keywords": "cognitive metaphor theory; information systems development; metaphors; qualitative case study; sensemaking",
+      "index_keywords": "Cognitive systems; Human resource management; Information systems; Management information systems; Managers; Project management; Records management; cognitive metaphor theory; Information systems development; metaphors; Qualitative case studies; Sensemaking; Information management",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究信息系统开发项目中团队成员和管理者使用的隐喻及其在意义建构中的作用，属于组织行为和沟通研究，未实质性分析编程活动、程序员、源代码或直接支持编程的工具与协作过程。"
+    },
+    {
+      "key": "doi:10.1080/07421222.2018.1481670",
+      "eid": "2-s2.0-85055566514",
+      "doi": "10.1080/07421222.2018.1481670",
+      "title": "Central Role of Moral Obligations in Determining Intentions to Engage in Digital Piracy",
+      "year": "2018",
+      "journal": "Journal of Management Information Systems",
+      "author_keywords": "Digital piracy; information ethics; morals; norms; piracy mitigation; software piracy; theory of planned behavior; victimless crime",
+      "index_keywords": "Knowledge management; Digital piracy; Information ethics; morals; norms; piracy mitigation; Theory of Planned Behavior; Computer crime",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究数字盗版（音乐和软件）的意图，运用计划行为理论探讨道德义务的中介作用，关注消费者盗版行为而非编程活动、程序员或软件开发者，无实质性编程情境分析。"
+    },
+    {
+      "key": "doi:10.1016/j.dss.2017.04.001",
+      "eid": "2-s2.0-85018178249",
+      "doi": "10.1016/j.dss.2017.04.001",
+      "title": "Taxo-Semantics: Assessing similarity between multi-word expressions for extending e-catalogs",
+      "year": "2017",
+      "journal": "Decision Support Systems",
+      "author_keywords": "Concept similarity; Electronic catalog; Electronic commerce; Logic programming",
+      "index_keywords": "Artificial intelligence; Commerce; Computer programming; Decision support systems; Electronic commerce; Logic programming; Ontology; Taxonomies; Back-ground knowledge; Concept similarity; Electronic catalogs; Multi-word expressions; Relational Database; Semantic similarity; Similarity assessment; State of the art; Semantics",
+      "matched_terms": "computer_programming",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究电子商务目录中多词表达式概念之间的语义相似性评估与扩展系统，未实质性涉及编程活动、程序员/开发者行为或源代码等编程情境。实现使用了Prolog语言，但编程本身并非研究现象。"
+    },
+    {
+      "key": "doi:10.1016/j.im.2016.11.006",
+      "eid": "2-s2.0-85007622435",
+      "doi": "10.1016/j.im.2016.11.006",
+      "title": "Roles and politeness behavior in community-based free/libre open source software development",
+      "year": "2017",
+      "journal": "Information and Management",
+      "author_keywords": "Core–periphery structure; Open source software development; Politeness behavior",
+      "index_keywords": "Computer software; Open systems; Software design; Software engineering; Community-based; Core peripheries; FLOSS projects; Free/libre open source software development; Politeness behavior; Relational behaviors; Software coding; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "本文研究社区型自由/开源软件项目邮件列表中的礼貌行为（积极与消极礼貌策略），聚焦社会关系沟通而非编程活动，编程仅作为研究背景。"
+    },
+    {
+      "key": "doi:10.1287/isre.2016.0664",
+      "eid": "2-s2.0-85021162196",
+      "doi": "10.1287/isre.2016.0664",
+      "title": "Logic pluralism in mobile platform ecosystems: A study of indie app developers on the iOS App Store",
+      "year": "2017",
+      "journal": "Information Systems Research",
+      "author_keywords": "Grounded theory; Independent software developers; Institutional logics; IOS App Store; Platform ecosystems; Qualitative research",
+      "index_keywords": "Application programs; Commerce; Ecology; Ecosystems; iOS (operating system); Logic Synthesis; Societies and institutions; Software design; App stores; Grounded theory; Institutional logic; Platform ecosystems; Qualitative research; Software developer; Computer circuits",
+      "matched_terms": "software_developer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究iOS平台生态系统中独立app开发者的制度逻辑（专业逻辑与市场逻辑）管理，重点分析开发者在app创意、执行和营销阶段的实践及逻辑冲突与合成，而非程序员在编程活动中的认知、行为或代码任务。编程活动仅作为创业过程中的一个环节被提及，但未实质分析编程技术、代码编写、调试或具体开发行为，因此不属于编程情境研究。"
+    },
+    {
+      "key": "doi:10.1016/j.im.2016.09.005",
+      "eid": "2-s2.0-85008600348",
+      "doi": "10.1016/j.im.2016.09.005",
+      "title": "Exploring software developers’ work practices: Task differences, participation, engagement, and speed of task resolution",
+      "year": "2017",
+      "journal": "Information and Management",
+      "author_keywords": "Empirical studies; Mining software repositories; Participation and engagement; Software developers; Speed of task resolution; Task differences",
+      "index_keywords": "Defects; Empirical studies; Mining software repositories; Participation and engagement; Software developer; Task differences; Software design",
+      "matched_terms": "software_developer",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章研究软件开发者工作实践中的任务差异、参与度、投入程度和任务解决速度，通过挖掘软件仓库中的工作项和评论数据。核心问题是任务类型（缺陷、增强、支持任务）如何影响团队参与和沟通，进而影响解决速度。研究不涉及任何具体的编程操作、编程认知过程或代码制品分析。如果将“软件开发者/任务/评论”替换为一般知识工作者的一般性任务和沟通，研究问题、变量和结论依然成立，因而不满足不可替代性。"
+    },
+    {
+      "key": "doi:10.1057/s41265-017-0049-3",
+      "eid": "2-s2.0-85034750729",
+      "doi": "10.1057/s41265-017-0049-3",
+      "title": "\"openness\" with and without Information Technology: A framework and a brief history",
+      "year": "2017",
+      "journal": "Journal of Information Technology",
+      "author_keywords": "access; concept development; democracy; framework; information technology; open processes; open resources; open science; open source software development; openness; participation; transparency",
+      "index_keywords": "Computer software; Information technology; Network function virtualization; Open systems; Software design; Software engineering; Transparency; access; Concept development; democracy; framework; Open process; open resources; Open science; openness; participation; Open source software",
+      "matched_terms": "open_source_development",
+      "evidence_stage": "no_fulltext_screen_record",
+      "is_programming_context": "",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": ""
+    },
+    {
+      "key": "doi:10.17705/1jais.00440",
+      "eid": "2-s2.0-84994330775",
+      "doi": "10.17705/1jais.00440",
+      "title": "The effects of information request language and template usage on query formulation",
+      "year": "2016",
+      "journal": "Journal of the Association for Information Systems",
+      "author_keywords": "Cognitive load theory; Database; Query formulation; SQL",
+      "index_keywords": "Codes (symbols); Database systems; Managers; Query languages; Relational database systems; Cognitive load theory; Information request; Instructional designs; Instructional interventions; Query formulation; Relational Database; Structured query languages; Teaching and learning; Query processing",
+      "matched_terms": "query_formulation",
+      "evidence_stage": "core_20",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "True",
+      "direct_focus_type": "human_programming_task",
+      "has_human_programming_task": "True",
+      "exclusion_or_decision_reason": "替换测试：若将“编写SQL查询”替换为一般知识工作（如撰写报告），则伪SQL/经理英语的信息请求操纵、基于SQL语法的Halstead难度测量、模板内容等核心处理均无法成立，研究问题和结论失去基础。文章直接观察、操纵和解释特定的编程操作（SQL代码编写、调试、语法修正），主要因变量为查询准确率、时间、尝试次数等编程表现，因此属于直接编程研究。"
+    },
+    {
+      "key": "doi:10.1057/jit.2014.27",
+      "eid": "2-s2.0-84955467522",
+      "doi": "10.1057/jit.2014.27",
+      "title": "The effect of personality on IT personnel's job-related attitudes: Establishing a dispositional model of turnover intention across IT job types",
+      "year": "2016",
+      "journal": "Journal of Information Technology",
+      "author_keywords": "big five; IT job type; IT workforce; job-related attitude; personality; turnover intention",
+      "index_keywords": "Big five; IT job type; IT Workforce; job-related attitude; personality; Turnover intentions; Job satisfaction",
+      "matched_terms": "programmer",
+      "evidence_stage": "fulltext_screen_false",
+      "is_programming_context": "False",
+      "is_direct_programming_research": "",
+      "direct_focus_type": "",
+      "has_human_programming_task": "",
+      "exclusion_or_decision_reason": "文章研究IT人员人格特质对工作满意度和离职意愿的影响，虽然包含程序员等IT工作类型，但核心是离职倾向的 dispositional 模型，未实质分析编程活动、源代码或代码相关任务；程序员仅作为职业分类变量，非编程情境研究。"
+    },
+    {
+      "key": "doi:10.1287/isre.2016.0646",
+      "eid": "2-s2.0-85010420444",
+      "doi": "10.1287/isre.2016.0646",
+      "title": "Folding and unfolding: Balancing openness and transparency in open source communities",
+      "year": "2016",
+      "journal": "Information Systems Research",
+      "author_keywords": "Archival data; Closure; Digital folds; Ideology; Opacity; Open source communities; Openness; Qualitative research; Software development work; Transparency",
+      "index_keywords": "Computer operating systems; Opacity; Open systems; Software design; Transparency; Archival data; Closure; Digital folds; Ideology; Open source communities; Openness; Qualitative research; Open source software",
+      "matched_terms": "source_code",
+      "evidence_stage": "broad_context_not_direct",
+      "is_programming_context": "True",
+      "is_direct_programming_research": "False",
+      "direct_focus_type": "not_direct",
+      "has_human_programming_task": "False",
+      "exclusion_or_decision_reason": "文章研究开源社区中开发者如何利用多种数字技术创建私密工作空间（数字折叠），以平衡开放性与透明度。核心对象是社区治理、工作组织与协调，而非具体的编程操作、认知过程或代码制品。若将程序员替换为一般知识工作者，版本控制替换为文档管理等工具，研究问题和理论机制（在开放环境中创造私密空间以完成复杂任务）依然成立，故不符合直接编程研究的不可替代标准。"
+    }
+  ]
+}

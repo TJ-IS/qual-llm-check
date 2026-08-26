@@ -1,0 +1,1056 @@
+{
+  "record_id": "20377",
+  "source_file": "20377_2021_animation-as-a-dynamic-visualization-technique-for-improving-process-model-comprehension.md",
+  "title": "Animation as a dynamic visualization technique for improving process model comprehension",
+  "authors": "Banu Aysolmaz; Hajo A. Reijers",
+  "year": "2021",
+  "journal": "Information & Management",
+  "doi": "10.1016/j.im.2021.103478",
+  "fulltext_chars": 108637,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "human_task_performance",
+  "source_application_context": "enterprise_work_and_knowledge",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:38.274883+00:00",
+  "article_level_summary": {
+    "central_question_cn": "动画作为一种动态可视化技术，能否以及如何提高过程模型理解绩效？过程建模专业知识如何调节动画的效果？",
+    "artifact_and_design_cn": "作者基于认知负荷理论、多媒体学习认知理论和认知维度框架，设计并实现了一个自适应动画环境。该环境在BPMN过程模型上叠加颜色变换和活动状态变化，并包含二级交互性：低交互性连续动画（视频方式，可暂停、重播、跳转）和高交互性逐步动画（用户点击选择下一步要执行的活动），用户可在两者间自由切换以适应自身认知需求。",
+    "objective_outcomes_cn": "通过受试者间在线实验（194名有效参与者，93静态组 vs 101动画组），OLS回归显示动画显著提高过程模型理解测试得分（Animation β=44.559, p<.001），且专业知识与动画存在U型交互效应（Animation*Expertise² β=.492, p<.001），即低、高专业知识用户比中等专业知识用户从动画中获益更多。进一步分析表明动画未增加总测试时间，显著降低主观认知负荷，且高交互性动画点击次数与测试得分正相关。",
+    "core_contribution_cn": "作者声称首次为过程模型动画提供了认知理论依据和定量实验证据，证明动画可以支持复杂问题解决任务；动画的效果受到专业知识水平的U型调节；所提出的自适应动画解决方案可直接用于或集成到工业建模工具中，并扩展了IS文献中动画从简单注意任务到复杂分析任务的应用范围。",
+    "whole_argument_in_one_paragraph_cn": "过程模型在信息系统开发中广泛使用，但其固有复杂性使理解困难，尤其是动态行为顺序信息，静态可视化要求用户自行推断隐藏行为。作者基于认知负荷理论、多媒体学习认知理论和认知维度框架，论证动画可通过信号原则、注意引导、使能和促进功能降低认知负荷，并基于专业知识逆转效应预期不同专业知识用户受益不同。他们据此设计了带两级交互性的自适应动画环境，并以静态BPMN模型为对照进行了在线受试者间实验。主效应显著支持动画正效应，交互效应呈U型支持专业知识调节；补充分析排除了时间代价假说，显示动画降低主观认知负荷，高交互性使用与绩效正相关。讨论将U型结果与专业知识逆转效应联系，提出动画可支持多样化用户，局限主要在于模型规模、抽象标签、BPMN单一符号以及未直接测量认知过程。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "文章不是纯粹的设计科学“需求—构建—评价”循环，而是以认知理论为出发点，从前人理论演绎出动画应有效的机制，并将这些机制转化为具体设计特征（颜色变换、两级交互性），然后通过受试者间实验对动画与静态条件进行比较，并检验专业知识调节作用。理论不仅用于解释，还前瞻性决定了制品设计，因此属于理论推导制品差异并通过实验检验。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "写作结构遵循：先提出过程模型理解困难的实际问题，再引入认知理论并推导假设，进而设计自适应动画环境，用实验检验，最后回到理论讨论认知负荷与专业知识逆转的机制含义。整体是一问—理论—设计—检验—回到理论的循环。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段1建立理论模型和假设，为设计和检验提供预测；阶段2将认知原则转化为动画环境与实验材料；阶段3开展在线实验收集行为数据；阶段4用OLS回归检验主效应和调节效应；阶段5通过补充分析（时间、主观负荷、使用模式）加固机制解释并排除替代解释。五个阶段层层递进，每个阶段的不确定性由下一阶段解决或补充。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "理论模型构建与假设推导",
+        "question_cn": "哪些认知原则可用于预测动画对过程模型理解的影响？不同专业知识用户应如何受益？",
+        "inputs_and_setting_cn": "认知负荷理论、多媒体学习认知理论、认知维度框架、专业知识逆转效应、算法动画及多媒体学习文献的既有研究发现。",
+        "designed_or_compared_object_cn": "研究模型、动画设计原则映射表（Table 1、Table 2）、三个主要假设（H1, H2, H2a, H2b）。",
+        "baseline_control_or_counterfactual_cn": "以静态过程模型可视化作为隐含对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "理论综合与演绎推理。",
+        "main_result_cn": "提出动画应提高理解（H1），且动画效果受专业知识影响，低/高专业知识用户比中等用户获益更多（H2/H2a/H2b）。",
+        "argumentative_role_cn": "建立研究的理论基础，为后续动画环境设计和实验设计提供原则来源。",
+        "remaining_uncertainty_cn": "假设尚未被检验；动画环境尚不存在，无法直接验证理论到设计的可操作性。",
+        "link_to_next_phase_cn": "假设中的认知原则需要具体化为可操作的动画环境，因此进入制品构建阶段。",
+        "evidence_pointers": [
+          "Section 2.1 认知维度四个挑战",
+          "Section 2.2 动画与过程模型相关性",
+          "Section 2.3 专业知识逆转效应",
+          "Section 3.1 表1 认知原则",
+          "Section 3.2 表2 专业知识特定原则"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "动画环境与实验材料设计构建",
+        "question_cn": "如何将认知原则转化为可用的自适应动画环境？实验需要什么样的过程模型和问题？",
+        "inputs_and_setting_cn": "理论原则（Table 1、Table 2）、BPMN表示法、基于1400个真实过程模型的复杂度基准（Kunze et al.、Recker）。",
+        "designed_or_compared_object_cn": "自适应动画环境（颜色变换、活动状态、时间设计、两级交互性）、10个BPMN模型、每模型9个问题、在线实验平台。",
+        "baseline_control_or_counterfactual_cn": "静态BPMN模型作为对照条件；真实模型复杂度指标用于校准实验模型难度。",
+        "objective_metrics": [
+          "模型规模节点数25-31",
+          "弧数量29-39",
+          "平均连接度3.00-3.40",
+          "Cronbach's α=0.81（后续评价）"
+        ],
+        "analysis_method_cn": "理论驱动的工程设计、专家检查和试点运行。",
+        "main_result_cn": "形成了可在浏览器运行的动画实验环境，包含10个中等至高度复杂度的BPMN模型及对应问题组。",
+        "argumentative_role_cn": "将理论转化为可操纵的自变量和可测量的因变量，保证实验材料具有生态效度。",
+        "remaining_uncertainty_cn": "工具在真实用户中的效果未知，实验能否成功依赖参与者的招募和任务执行。",
+        "link_to_next_phase_cn": "完成工具后需招募参与者执行实验以收集数据。",
+        "evidence_pointers": [
+          "Section 4.1 动画环境设计",
+          "Section 4.1.1 颜色变换、状态变化、时间设计",
+          "Section 4.1.2 两级交互性",
+          "Section 4.3.1 10个模型和真实基准",
+          "Section 4.3.2 问题设计"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "在线实验实施与数据收集",
+        "question_cn": "动画环境在真实用户中是否优于静态可视化？不同专业知识水平用户表现如何？",
+        "inputs_and_setting_cn": "221名原始参与者（荷兰和土耳其的本科生、研究生、顾问和研究人员），经过数据筛查后194人（静态93，动画101）；在线自管理实验环境。",
+        "designed_or_compared_object_cn": "两个实验条件：静态BPMN模型 vs 自适应动画BPMN模型；专业知识作为连续变量；控制年龄、性别、国家、背景。",
+        "baseline_control_or_counterfactual_cn": "静态组作为对照；随机分配；两组人口统计学与专业知识匹配。",
+        "objective_metrics": [
+          "问题解决测试得分（0-100）",
+          "总完成时间",
+          "主观认知负荷（1-7）",
+          "动画组视频时间（秒）和点击次数"
+        ],
+        "analysis_method_cn": "受试者间实验设计，数据筛查（异常时间剔除）、可靠性评估。",
+        "main_result_cn": "得到194名有效参与者的完整数据；两组在年龄、性别、背景、专业知识等变量上无显著差异；Cronbach α=0.81。",
+        "argumentative_role_cn": "产生用于假设检验的实证数据，确保比较的公平性和测量可靠性。",
+        "remaining_uncertainty_cn": "数据是否支持假设未知；需要统计建模检验主效应和交互。",
+        "link_to_next_phase_cn": "将数据用于OLS回归以直接检验H1和H2/H2a/H2b。",
+        "evidence_pointers": [
+          "Section 4.2 参与者",
+          "Section 4.4 实验因素",
+          "Section 4.5 五部分程序",
+          "Section 5.1 数据筛查与可靠性",
+          "Table 3 人口统计"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "主假设检验（OLS回归）",
+        "question_cn": "动画是否显著提高过程模型理解？专业知识是否以U型方式调节该效果？",
+        "inputs_and_setting_cn": "194名参与者数据，测试得分（因变量），Animation哑变量，Expertise连续测度，Expertise²，Animation*Expertise，Animation*Expertise²，控制变量（性别、年龄、国家、背景）。",
+        "designed_or_compared_object_cn": "OLS回归模型（Equation 1）比较动画与静态条件，并考察专业知识线和二次线。",
+        "baseline_control_or_counterfactual_cn": "静态组作为参照；中等专业知识组作为U型比较的隐式基准。",
+        "objective_metrics": [
+          "回归系数β",
+          "p值",
+          "adjusted R²=0.272",
+          "VIF<10"
+        ],
+        "analysis_method_cn": "OLS多元回归分析。",
+        "main_result_cn": "Animation正显著（β=44.559, p<.001），支持H1；Animation*Expertise²正显著（β=.492, p<.001），支持H2/H2a/H2b，动画效果的曲线呈U型。",
+        "argumentative_role_cn": "直接检验核心假设，提供动画有效性和专业知识调节的统计证据。",
+        "remaining_uncertainty_cn": "统计显著但机制尚间接；不清楚用户如何使用动画，也不清楚时间/主观负荷是否受影响。",
+        "link_to_next_phase_cn": "使用补充分析来排除以时间换绩效的替代解释，并探索使用行为。",
+        "evidence_pointers": [
+          "Section 5.2 Equation 1",
+          "Table 6 回归结果",
+          "Section 5.2 假设检验表述",
+          "Fig. 4 U型图"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "补充分析（时间、主观负荷、动画使用）",
+        "question_cn": "动画是否以增加完成任务时间为代价？动画是否影响主观认知负荷？参与者如何使用两级交互功能，使用方式与绩效有何关系？",
+        "inputs_and_setting_cn": "总测试时间、主观认知负荷评分（1-7）、动画组视频时间、点击次数、感知有用性评分（1-7）。",
+        "designed_or_compared_object_cn": "比较动画组与静态组的时间与负荷；动画组内分析点击/视频时间与测试得分的关系；编码不同使用模式。",
+        "baseline_control_or_counterfactual_cn": "静态组作为比较基准；低交互视频时间 vs 高交互点击数。",
+        "objective_metrics": [
+          "总测试时间（分钟）",
+          "主观认知负荷（1-7）",
+          "点击次数",
+          "视频时间（秒）",
+          "感知有用性（1-7）"
+        ],
+        "analysis_method_cn": "Kruskal-Wallis检验、ANOVA（协变量）、Spearman相关、描述性模式分析。",
+        "main_result_cn": "动画与静态在总时间上无显著差异（χ²=0.0, p=.97）；动画显著降低主观认知负荷（χ²=8.42, p=.004）；点击次数与测试得分正相关显著（F=21.23, p=.000），视频时间不显著；参与者倾向先看完视频再进入高交互动画，也存在其他使用模式；感知有用性均值6.1。",
+        "argumentative_role_cn": "为动画的有效性提供过程性和感知层面的佐证，排除时间代价解释，并初步支持自适应机制。",
+        "remaining_uncertainty_cn": "使用模式与绩效的相关不能证明因果；网站数据不能精确反映认知过程；未单独分离低/高交互的两个作用。",
+        "link_to_next_phase_cn": "补充结果支持了讨论中的认知负荷解释和实际部署建议。",
+        "evidence_pointers": [
+          "Section 5.3.1 时间与主观负荷",
+          "Section 5.3.2 动画使用分析",
+          "Fig. 5 主观负荷图"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "OBJECTIVE",
+      "THEORY_INTRO",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "THEORY_INTRO",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "THEORY_PROPOSITION",
+      "REQUIREMENT",
+      "MECHANISM",
+      "HYPOTHESIS_OR_PROPOSITION",
+      "GAP"
+    ],
+    "artifact_design_moves": [
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "REQUIREMENT",
+      "MECHANISM"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "PRACTICAL_STAKES",
+      "LIMITATION_AND_FUTURE",
+      "BOUNDARY_CONDITION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "认知负荷理论（Cognitive Load Theory, Sweller et al.）",
+      "多媒体学习认知理论（Cognitive Theory of Multimedia Learning, Mayer）",
+      "认知维度框架（Cognitive Dimensions Framework, Green）",
+      "专业知识逆转效应（Expertise Reversal Effect, Kalyuga et al.）",
+      "动画与多媒体学习研究（Animation and multimedia learning literature）",
+      "过程模型理解研究（Process model comprehension literature）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "理论不仅用于解释结果，还前瞻性地决定了动画环境的每个主要设计特征：颜色变换源于信号原则，时间设计源于一致原则，两级交互性直接来自低交互性/worked example/segmentation原则和交互性原则，且这些设计特征正是实验中被比较和检验的核心对象。",
+    "translation_chain_cn": "认知负荷理论/多媒体学习认知理论/认知维度框架识别出过程模型理解中的四个认知挑战（隐藏依赖、抽象梯度、角色表达性、困难心智操作）→ 动画可通过四种机制（信号、注意引导、使能、促进）降低负荷 → 专业知识逆转效应指出不同专业知识用户需要不同支持（低交互利于新手，高交互利于专家）→ 设计要求：同时提供不需用户操作的连续动画和允许用户控制的逐步动画，并允许切换 → 制品选择：BPMN模型上叠加颜色变换和活动状态变化，Level 1连续动画视频，Level 2点击式逐步动画，用户可切换 → 被检验的差异：动画 vs 静态，以及动画组内不同专业知识水平的交互 → 客观结果：动画显著提高测试得分，U型调节，时间无差异，主观负荷下降。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "认知负荷理论：工作记忆容量有限，复杂材料产生内在认知负荷（Sweller）。",
+        "mechanism_cn": "通过在一段时间内只突出少量相关元素、降低元素交互性来减少内在负荷；提供外部支持以降低外在负荷。",
+        "design_requirement_cn": "动画应在任一时刻只引起用户注意少数元素，并提供可分段处理的控制。",
+        "artifact_choice_cn": "颜色变换增量信号：已变色元素保持颜色，新元素加入，形成轨迹；提供暂停/重播/跳转。",
+        "evaluated_contrast_cn": "动画组 vs 静态组；动画组内不同使用模式。",
+        "objective_result_cn": "动画组测试得分显著更高；总时间无显著差异；主观负荷显著更低。",
+        "evidence_pointers": [
+          "Section 4.1.1 Color transformation",
+          "Section 4.1.2 Level 1",
+          "Section 5.2 Table 6",
+          "Section 5.3.1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "多媒体学习认知理论的信号原则：视觉线索引导学习者选择和组织关键信息（Mayer）。",
+        "mechanism_cn": "动态变化的颜色充当注意引导机制，帮助用户发现相关活动，减少搜索负荷。",
+        "design_requirement_cn": "需要一个快速可识别的视觉属性来指示当前执行位置和下一步。",
+        "artifact_choice_cn": "使用颜色作为主要信号（绿色=已执行，灰色=已启用），符合快速视觉检测属性。",
+        "evaluated_contrast_cn": "动画 vs 静态的测试得分。",
+        "objective_result_cn": "动画组显著优于静态组。",
+        "evidence_pointers": [
+          "Section 4.1.1",
+          "Section 5.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "认知维度框架：隐藏依赖使元素关系难以发现，过程模型符号存在抽象梯度、角色表达性低和困难心智操作问题（Green）。",
+        "mechanism_cn": "动画的时间顺序和连续变化将符号语义显式化（促进功能），并将复杂流程分解为小步骤。",
+        "design_requirement_cn": "动画需要展示活动何时启用、何时执行，以及并行/排他关系。",
+        "artifact_choice_cn": "活动状态颜色变化（启用=灰，执行/已完成=绿）；对并行活动采用连续触发方式；对XOR展示备选实例。",
+        "evaluated_contrast_cn": "动画 vs 静态的测试得分，特别是控制流问题。",
+        "objective_result_cn": "动画组理解绩效更高，尤其行为相关问题的得分（通过整体得分体现）。",
+        "evidence_pointers": [
+          "Section 2.1四个维度",
+          "Section 3.1 Table 1",
+          "Section 4.1.1 Status change",
+          "Section 4.3.2 问题类型"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "专业知识逆转效应：对新手有效的教学方式可能对专家产生冗余负荷（Kalyuga）。",
+        "mechanism_cn": "新手需要被动示例和分段以避免外在负荷；专家需要交互探索以避免冗余和乏味，创造认知挑战。",
+        "design_requirement_cn": "不能采用单一交互水平，必须让低、高专业知识用户都能获得匹配的支持。",
+        "artifact_choice_cn": "两级交互性：Level 1连续自动动画（低交互，无需操作），Level 2逐步点击动画（高交互，用户控制下一步），并允许两者切换。",
+        "evaluated_contrast_cn": "动画效果的U型：低/高专业知识用户 vs 中等专业知识用户。",
+        "objective_result_cn": "Animation*Expertise²系数显著为正，U型曲线得到支持；低/高专业用户受益更多。",
+        "evidence_pointers": [
+          "Section 2.3",
+          "Section 3.2 Table 2",
+          "Section 4.1.2 Levels",
+          "Section 5.2 Table 6 交互项"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "低交互性、worked example and segmentation principles：新手从被动示例和分段材料中获益（Atkinson et al.; Betrancourt; Schnotz & Rasch）。",
+        "mechanism_cn": "连续播放一个完整过程实例，新手无需处理控制界面即可理解模式；暂停等控制允许分段加工。",
+        "design_requirement_cn": "提供低交互的连续动画，并配以基本分段控制。",
+        "artifact_choice_cn": "Level 1：连续自动动画（视频格式），支持暂停、重播、跳转。",
+        "evaluated_contrast_cn": "低专业知识动画用户 vs 低专业知识静态用户。",
+        "objective_result_cn": "低专业知识组在动画条件下得分显著提高（U型趋势中的低端上升）。",
+        "evidence_pointers": [
+          "Section 3.2 Table 2 Low expertise行",
+          "Section 4.1.2 Level 1",
+          "Section 5.2 交互项及Fig. 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "交互性原则：高知识用户通过自建和测试假设来获得更好学习（Betrancourt; Naps et al.）。",
+        "mechanism_cn": "专家可用工作记忆探索备选流程，并通过点击下一步来验证自己的理解。",
+        "design_requirement_cn": "为高专业知识用户提供可探索动画的交互方式，而不增加新手负荷。",
+        "artifact_choice_cn": "Level 2：逐步动画，用户选择当前已启用活动中的下一个执行活动，从而控制动画节奏和路径。",
+        "evaluated_contrast_cn": "动画组中点击次数与测试得分的相关性；高专业知识组效果大于中等。",
+        "objective_result_cn": "点击次数与测试得分显著正相关；高专业组在动画条件下得分提高。",
+        "evidence_pointers": [
+          "Section 3.2 Table 2 High expertise行",
+          "Section 4.1.2 Level 2",
+          "Section 5.3.2 点击次数与得分"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "受试者间随机实验（static vs animation）",
+      "OLS回归模型（主效应、二次曲线、交互项）",
+      "非参数Kruskal-Wallis检验（时间、主观负荷）",
+      "ANOVA（点击次数与测试得分协变量分析）",
+      "Spearman相关与描述性使用模式分析"
+    ],
+    "why_these_evaluations_cn": "核心因果关系（动画是否优于静态）需要通过随机实验确立；专业知识调节效应需要回归交互项检验，且U型预测要求加入二次项；时间与主观负荷补充指标用于排除动画以增加时间或感知负担为代价的替代解释；使用模式分析用于探索自适应环境的实际行为基础，为机制解释提供间接证据。",
+    "benchmark_and_contrast_chain_cn": "首先在实验材料层面，用真实过程模型复杂度基准（Kunze et al. 1400个模型、Recker复杂度基准）校准10个实验模型的难度，使结果可关联到真实场景；然后在实验层面，以静态组作为基准对照；在分析层面，以中等专业知识组作为U型比较的隐式基准，并通过Animation×Expertise²项检验凹凸性；最后在补充分析层面，将动画组内部的高交互使用（点击）与低交互使用（视频时间）作为对比，揭示哪种交互形式与绩效相关。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "技术主张：动画可视化显著提高过程模型理解绩效。",
+        "evidence_cn": "OLS中Animation系数β=44.559, p<.001；补充分析显示时间无差异且主观负荷降低，排除了时间/负荷代价。",
+        "supported_level_cn": "强支持"
+      },
+      {
+        "claim_cn": "制品主张：设计的两级自适应动画环境有效，且高交互性是绩效提升的关键组成部分。",
+        "evidence_cn": "动画主效应显著；点击次数与测试得分正相关（F=21.23, p=.000），视频时间不显著。",
+        "supported_level_cn": "中等支持（相关但不是因果，未单独操纵交互级别）"
+      },
+      {
+        "claim_cn": "机制主张：动画通过信号、注意引导、使能和促进功能降低认知负荷。",
+        "evidence_cn": "主观认知负荷显著降低；理论机制映射到设计；但未直接测量注意或认知过程。",
+        "supported_level_cn": "间接支持"
+      },
+      {
+        "claim_cn": "边界主张：动画效果受专业知识U型调节，低/高专业用户比中等获益更多。",
+        "evidence_cn": "Animation*Expertise² β=.492, p<.001，图4曲线显示U型。",
+        "supported_level_cn": "统计支持，但机制解释（中等用户缺乏特定支持）是推断"
+      },
+      {
+        "claim_cn": "设计知识：自适应两级交互动画可集成到工业建模工具，服务多样化用户。",
+        "evidence_cn": "工具成功运行，参与者感知有用性均值6.1；未在工业环境中部署。",
+        "supported_level_cn": "有限支持（无实际部署证据）"
+      },
+      {
+        "claim_cn": "理论贡献：动画可支持复杂分析任务，而非仅限于简单注意任务；挑战“只有新手受益”的传统观点。",
+        "evidence_cn": "U型结果与专业知识逆转效应一致；动画在复杂过程模型问题上有效。",
+        "supported_level_cn": "较强支持，但需更多复制与认知测量"
+      }
+    ],
+    "internal_validity_strategy_cn": "采用受试者间随机分配；通过剔除异常时间（过快/过慢）降低注意力不集中风险；使用10个模型和多题项组成评分，Cronbach α=0.81；控制人口统计与背景变量；使用抽象标签消除领域知识混淆；由三位专家核对模型与答案；检查VIF排除多重共线性。",
+    "external_validity_strategy_cn": "参与者跨荷兰和土耳其，覆盖本科、研究生、顾问/研究组，从而包含不同专业知识水平；专业知识采用多项自评指标组合；使用BPMN行业标准；实验模型复杂度与真实模型基准可比；作业式实验允许用户按自己节奏完成，增强生态效度。",
+    "what_is_not_actually_tested_cn": "没有直接测量认知负荷的机制（如眼动、生理指标）；没有单独分离Level 1与Level 2的独立贡献；没有测试其他过程建模符号（如EPC、UML AD）；没有在真实组织流程中部署动画工具；没有检验动画对长期学习或迁移的影响；U型解释中的“中等用户缺乏支持”是推断而非直接操作检验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "动画作为动态可视化技术在过程模型理解任务上显著优于静态可视化，且不增加任务时间、降低主观负荷。",
+    "artifact_claim_cn": "所开发的自适应动画环境（两级交互性、颜色变换）能够支持不同专业知识用户，高交互性使用与更好的理解绩效相关。",
+    "mechanism_claim_cn": "动画通过信号原则引导注意、通过颜色变换显式化行为语义、通过使能和促进功能降低认知负荷；两级交互分别针对低专业用户的被动学习需求和专家的主动探索需求。",
+    "boundary_claim_cn": "动画效果受专业知识U型调节：低、高专业知识用户获益较大，中等专业知识用户获益较小；结果适用于控制流BPMN模型、中等复杂度模型、抽象标签的问题解决任务。",
+    "reusable_design_knowledge_cn": "可复用的设计原则包括：使用颜色作为快速识别的动态信号；对并行行为采用连续触发编码并行语义；先提供低交互连续动画，再提供可切换的高交互逐步动画；为用户提供自适应的交互级别选择。这些原则可直接被建模工具开发者借鉴。",
+    "theoretical_contribution_cn": "将认知负荷理论、多媒体学习认知理论和认知维度框架引入过程模型动画研究，验证了动画在复杂问题解决任务中的适用性；在IS文献中扩展了动画研究的场景，从简单注意/检索任务扩展到复杂概念模型分析；报告了专业知识逆转效应在过程模型可视化中的U型证据，修正了以往研究认为只有新手受益的观点。",
+    "how_discussion_closes_intro_gap_cn": "引言指出动画几乎没有被用于过程模型理解，且少数研究缺乏理论依据和定量评估。讨论部分明确声称：本研究首次以认知理论为支撑，通过实验确立了动画的正效应，并发现专业知识U型调节。因此，引言中关于动态可视化研究不足的缺口被填充。",
+    "overclaim_or_unsupported_leaps_cn": "作者称动画允许用户“动态平衡认知负荷”，但认知负荷未被直接测量，该表述是基于表现与主观负荷的推断；将低交互性归因于低专业知识受益、高交互性归因于高专业知识受益，是一种事后解释，未通过独立操纵交互性来验证；高交互点击与绩效正相关有可能方向相反（表现好的用户更愿意点击）；动画环境可集成到工业工具的声明缺少部署证据。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "过程模型被广泛用于系统分析与设计，但涉众理解这些复杂工件具有挑战；本文聚焦动画这种动态可视化技术来降低用户的认知负荷。",
+      "rhetorical_function_cn": "以真实问题为背景，引出全文主题与策略。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为摘要后面的理论与贡献陈述铺垫。",
+      "evidence_pointer": "Abstract第1-2句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "作者基于认知负荷理论、多媒体学习认知理论和认知维度框架构建了一个自适应动画方案。",
+      "rhetorical_function_cn": "说明研究的理论来源。",
+      "depends_on_cn": "承接动画降低负荷的目标。",
+      "sets_up_cn": "引出实验结果。",
+      "evidence_pointer": "Abstract第3句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract S4-S5",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "实验表明动画改善理解且受专业知识U型调节；本文为概念建模领域动画支持复杂问题解决提供了有力证据，且动画方案可集成到工业工具。",
+      "rhetorical_function_cn": "压缩报告核心结果并声明贡献。",
+      "depends_on_cn": "依赖前述理论和方法。",
+      "sets_up_cn": "为引言详细展开提供摘要版本。",
+      "evidence_pointer": "Abstract第4-5句"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "概念模型是信息系统设计中表示领域的图形化工具，用于沟通领域知识；过程模型是最常用的概念模型之一，广泛用于需求分析、流程改进、项目管理和新技术相关场景。",
+      "rhetorical_function_cn": "建立研究对象的重要性和普适性。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续说明理解困难设定实际背景。",
+      "evidence_pointer": "Introduction第1段"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4-P2 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "开发人员、分析师、经理等不同角色都在使用过程模型，但理解它们并非易事，因为这些模型固有地复杂。",
+      "rhetorical_function_cn": "从应用场景切换到认知难题，为研究动机服务。",
+      "depends_on_cn": "依赖前面关于广泛使用的陈述。",
+      "sets_up_cn": "引出已有可视化研究及其局限。",
+      "evidence_pointer": "Introduction第1段末-第2段初"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P2 S2-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "许多已有研究通过影响模型次要标注或视觉外观的可视化技术帮助用户理解过程模型，但很少有研究考虑动画等动态可视化技术来提高过程模型或概念模型的可理解性。",
+      "rhetorical_function_cn": "指出静态可视化研究丰富但动态可视化研究不足的缺口。",
+      "depends_on_cn": "需要先说明理解困难。",
+      "sets_up_cn": "为引入动画研究作铺垫。",
+      "evidence_pointer": "Introduction第2段"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphase_cn": "动画是多媒体学习中用于教学动态物理机制和抽象现象（如算法）的普遍技术，能提供多种机制降低学习过程中的认知负荷。",
+      "rhetorical_function_cn": "引入动画领域知识，说明动画的潜在价值。",
+      "depends_on_cn": "独立于前文，作为外部证据引入。",
+      "sets_up_cn": "将动画价值映射到过程模型需求。",
+      "evidence_pointer": "Introduction第3段前两句"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P3 S3-S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "过程模型的行为视角（活动执行顺序）是重要但最难理解的部分，该行为本质是动态的，传统静态可视化需要用户推断隐藏行为；因此作者研究动画作为动态可视化特征来解决认知过载问题。",
+      "rhetorical_function_cn": "将一般动画价值具体化到过程模型，明确提出研究切入点。",
+      "depends_on_cn": "依赖对过程模型困难的分析和动画降低负荷的发现。",
+      "sets_up_cn": "引出理论框架和假设。",
+      "evidence_pointer": "Introduction第3段后半"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "本研究基于多媒体学习认知理论和认知负荷理论，并承认认知维度框架所表明的过程模型固有复杂性。",
+      "rhetorical_function_cn": "宣布理论根基。",
+      "depends_on_cn": "承接对动画助益的期待。",
+      "sets_up_cn": "为后续理论推导提供依据。",
+      "evidence_pointer": "Introduction第4段前句"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P4 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "即使动画可能有益，也必须确定它对不同专业知识用户的效果，因为以往研究对此缺乏共识。",
+      "rhetorical_function_cn": "提出第二个缺口，即对专业知识调节作用的不确定性。",
+      "depends_on_cn": "依赖对动画潜在益处的承认。",
+      "sets_up_cn": "引出专业知识作为调节变量的研究目标。",
+      "evidence_pointer": "Introduction第4段末句"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为检验动画是否具有正面显著效果，作者在实验条件下为不同类型过程模型用户提供了一系列问题解决任务；结果证实动画可以为不同专业知识水平用户提供认知支持。",
+      "rhetorical_function_cn": "预览实验方法并提前给出最高层结果。",
+      "depends_on_cn": "依赖理论假设。",
+      "sets_up_cn": "为后续方法部分和结果部分作预告。",
+      "evidence_pointer": "Introduction第5段"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P5 S3-S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "动画对过程模型理解的影响被过程建模专业知识以U型方式调节：低或高专业知识用户比中等专业知识用户受益更多；自适应动画允许用户动态平衡认知负荷。",
+      "rhetorical_function_cn": "提前报告核心新发现，突出理论贡献。",
+      "depends_on_cn": "依赖实验证据。",
+      "sets_up_cn": "引导读者关注U型这一核心贡献。",
+      "evidence_pointer": "Introduction第5段后半"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P6-P7",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "组织有大量过程模型，用户需要有效理解它们；与以往IS文献中动画多数用于简单注意任务（如电商）不同，本研究展示了动画可支持对复杂多面工件的分析性问题解决。",
+      "rhetorical_function_cn": "说明研究的意义和超越现有IS动画文献的增量贡献。",
+      "depends_on_cn": "依赖前面关于组织和用户需求的陈述。",
+      "sets_up_cn": "为讨论部分关于研究贡献的详细展开做铺垫。",
+      "evidence_pointer": "Introduction第6-7段"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P8",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者给出论文结构：第2节理论背景、第3节假设、第4节研究方法、第5节实验结果、第6节讨论与局限、第7节结论。",
+      "rhetorical_function_cn": "作为路标，帮助读者掌握论文组织。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "无新内容，仅导航。",
+      "evidence_pointer": "Introduction最后一段"
+    },
+    {
+      "order": 15,
+      "section": "Section 2.1",
+      "locator": "2.1 P1-P2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "认知负荷理论认为工作记忆容量有限；中心容量理论用于IS网页注意力研究；认知维度框架则识别视觉符号的认知相关维度，用于解释过程模型理解困难。",
+      "rhetorical_function_cn": "引入理论工具来系统化理解困难。",
+      "depends_on_cn": "承接引言中关于过程模型复杂性的问题。",
+      "sets_up_cn": "为列举四个具体认知挑战提供理论框架。",
+      "evidence_pointer": "Section 2.1开头"
+    },
+    {
+      "order": 16,
+      "section": "Section 2.1",
+      "locator": "2.1 隐藏依赖与抽象梯度",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "隐藏依赖使元素关系难以发现，尤其在复杂模型和连接符中；过程流符号属于“讨厌抽象”类，缺少分组机制，因此难以将相关活动分组。",
+      "rhetorical_function_cn": "利用认知维度框架具体说明过程模型的内在认知障碍。",
+      "depends_on_cn": "依赖认知维度框架的引入。",
+      "sets_up_cn": "为后续动画信号原则等提供针对标的挑战。",
+      "evidence_pointer": "Section 2.1第1-2个项目符号"
+    },
+    {
+      "order": 17,
+      "section": "Section 2.1",
+      "locator": "2.1 角色表达性与困难心智操作",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "过程建模符号的角色表达性低，用户需要逐一研究活动和连接符才能做高层面判断；困难心智操作体现在连接符组合导致流程可能数量急剧增加。",
+      "rhetorical_function_cn": "继续补充认知维度挑战。",
+      "depends_on_cn": "依赖认知维度框架。",
+      "sets_up_cn": "说明为什么要用动画来辅助注意引导和外部支持。",
+      "evidence_pointer": "Section 2.1第3-4个项目符号"
+    },
+    {
+      "order": 18,
+      "section": "Section 2.1",
+      "locator": "2.1末段",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "过去十年研究使用次要标注可视化克服部分困难，但通过动态可视化改善过程模型理解的潜力仍未充分开发。",
+      "rhetorical_function_cn": "从一个具体研究领域（过程模型可视化）收窄缺口。",
+      "depends_on_cn": "依赖上文对静态可视化局限的列举。",
+      "sets_up_cn": "引出动画作为动态可视化的候选。",
+      "evidence_pointer": "Section 2.1最后一段"
+    },
+    {
+      "order": 19,
+      "section": "Section 2.2",
+      "locator": "2.2 P1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "动画被定义为向用户展示一系列变化的多媒体帧，并可能包含用户交互以识别帧的变化。",
+      "rhetorical_function_cn": "为动画提供操作性定义。",
+      "depends_on_cn": "承接上节的动态可视化诉求。",
+      "sets_up_cn": "便于后续讨论动画在IS中的研究。",
+      "evidence_pointer": "Section 2.2第1段"
+    },
+    {
+      "order": 20,
+      "section": "Section 2.2",
+      "locator": "2.2 P2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "IS研究中动画主要用在电商网站，用于吸引注意、支持浏览搜索等保留任务；但过程模型任务属于需要深层理解和迁移的转移任务，认知要求不同。",
+      "rhetorical_function_cn": "将现有IS动画研究区别于本文场景，突出场景差异。",
+      "depends_on_cn": "依赖动画定义和IS文献回顾。",
+      "sets_up_cn": "说明为何需要借鉴教育中的动画研究。",
+      "evidence_pointer": "Section 2.2第2段"
+    },
+    {
+      "order": 21,
+      "section": "Section 2.2",
+      "locator": "2.2 P3-P4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "动画使用需满足两个前提：材料需图形化呈现，且概念随时间变化；过程模型具有这些特征，动画适合表达程序性知识。",
+      "rhetorical_function_cn": "证明动画与过程模型在结构上具有匹配性。",
+      "depends_on_cn": "依赖教育动画相关研究。",
+      "sets_up_cn": "为动画用于过程模型提供理论许可。",
+      "evidence_pointer": "Section 2.2第3-4段"
+    },
+    {
+      "order": 22,
+      "section": "Section 2.2",
+      "locator": "2.2 P5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "算法动画研究与过程模型类似，但已有研究要么只比较动画与文本，要么未遵循正式评价程序，要么未考虑动态交互特性。",
+      "rhetorical_function_cn": "指出相近领域的现有研究缺陷。",
+      "depends_on_cn": "动画与过程模型匹配性的论证。",
+      "sets_up_cn": "进一步支撑过程模型动画研究的必要性。",
+      "evidence_pointer": "Section 2.2第5段"
+    },
+    {
+      "order": 23,
+      "section": "Section 2.2",
+      "locator": "2.2 P6-P7",
+      "move_code": "GAP",
+      "paraphrase_cn": "少数过程模型动画研究仅提供定性论证，工业工具有动画但未研究对复杂分析任务的影响；动画对不同用户认知需求的影响仍不清楚。",
+      "rhetorical_function_cn": "集中归纳研究缺口。",
+      "depends_on_cn": "依赖前面对已有研究的评价。",
+      "sets_up_cn": "为下一节讨论专业知识和自适应环境做铺垫。",
+      "evidence_pointer": "Section 2.2最后两段"
+    },
+    {
+      "order": 24,
+      "section": "Section 2.3",
+      "locator": "2.3 P1-P2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "动画效果受多种因素影响，其中最重要的用户特征是专业知识；专业知识逆转效应表明，对新手有益的指导可能对专家造成冗余负荷，动态可视化也会出现该效应。",
+      "rhetorical_function_cn": "引入专业知识逆转效应，为调节效应提供理论依据。",
+      "depends_on_cn": "依赖认知负荷理论。",
+      "sets_up_cn": "提出自适应环境作为应对方案。",
+      "evidence_pointer": "Section 2.3第1-2段"
+    },
+    {
+      "order": 25,
+      "section": "Section 2.3",
+      "locator": "2.3 P3-P4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "自适应学习环境是应对专业知识逆转效应的潜在方法，但组织环境高度动态；因此本研究目标是开发一个允许动态使用概念模型的自适应环境，并确定其在不同专业知识用户中的效果差异。",
+      "rhetorical_function_cn": "从理论转向研究目标。",
+      "depends_on_cn": "依赖专业知识逆转效应和动态组织环境认识。",
+      "sets_up_cn": "为假设和设计定下方向。",
+      "evidence_pointer": "Section 2.3第3-4段"
+    },
+    {
+      "order": 26,
+      "section": "Section 3",
+      "locator": "3 P1-P2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "研究模型检验两个相关因素——静态vs动画可视化、专业知识调节——对过程模型理解的影响；用问题解决任务绩效作为理解测量。",
+      "rhetorical_function_cn": "概括研究模型和方法选择。",
+      "depends_on_cn": "全部背景论证。",
+      "sets_up_cn": "引入具体认知原则表。",
+      "evidence_pointer": "Section 3第1-2段"
+    },
+    {
+      "order": 27,
+      "section": "Section 3.1",
+      "locator": "3.1表1及正文",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "动画通过信号原则、注意引导机制、使能功能和促进功能分别应对抽象梯度、角色表达性、困难心智操作和隐藏依赖等认知挑战。",
+      "rhetorical_function_cn": "建立理论机制与具体认知挑战的映射，使动画有效性的推导结构化。",
+      "depends_on_cn": "依赖认知负荷理论和认知维度框架。",
+      "sets_up_cn": "为H1提供直接理论支撑。",
+      "evidence_pointer": "Section 3.1 Table 1及正文"
+    },
+    {
+      "order": 28,
+      "section": "Section 3.1",
+      "locator": "3.1 H1陈述",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：使用动画进行过程模型可视化的用户将比静态可视化用户具有更高的理解绩效。",
+      "rhetorical_function_cn": "将机制论证浓缩为可检验假设。",
+      "depends_on_cn": "依赖机制映射。",
+      "sets_up_cn": "为实验对比提供主效应预测。",
+      "evidence_pointer": "Section 3.1末尾"
+    },
+    {
+      "order": 29,
+      "section": "Section 3.2",
+      "locator": "3.2 P1-P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "低专业知识用户需要低交互性、示例和分段；高专业知识用户需要交互探索和认知挑战，两种需求互相冲突。",
+      "rhetorical_function_cn": "从专业知识逆转效应引出不同用户需求冲突。",
+      "depends_on_cn": "依赖2.3的专业知识逆转效应。",
+      "sets_up_cn": "为H2及U型假设提供依据。",
+      "evidence_pointer": "Section 3.2前两段"
+    },
+    {
+      "order": 30,
+      "section": "Section 3.2",
+      "locator": "3.2 H2及H2a/H2b",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：动画对理解的效果随专业知识不同；H2a/H2b：低专业用户和高专业用户的效果都大于中等专业用户，形成U型曲线。",
+      "rhetorical_function_cn": "给出调节效应的具体预测。",
+      "depends_on_cn": "依赖需求冲突论述。",
+      "sets_up_cn": "引导统计分析加入二次交互项。",
+      "evidence_pointer": "Section 3.2假设部分"
+    },
+    {
+      "order": 31,
+      "section": "Section 3.2",
+      "locator": "3.2末段",
+      "move_code": "GAP",
+      "paraphrase_cn": "以往过程模型理解研究对可视化对不同用户的效应没有共识，因此需要实验来考察不同用户能否从动画中获益。",
+      "rhetorical_function_cn": "重申研究缺口，说明实验必要性。",
+      "depends_on_cn": "依赖对先前研究分歧的概括。",
+      "sets_up_cn": "引出研究方法的介绍。",
+      "evidence_pointer": "Section 3.2末段"
+    },
+    {
+      "order": 32,
+      "section": "Section 4",
+      "locator": "4 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者进行在线实验来检验假设，并遵循软件工程实验指南进行设计、实施、分析和报告。",
+      "rhetorical_function_cn": "说明实验方法的选择依据。",
+      "depends_on_cn": "假设需要在受控条件下检验。",
+      "sets_up_cn": "为实验描述提供方法论框架。",
+      "evidence_pointer": "Section 4第1段"
+    },
+    {
+      "order": 33,
+      "section": "Section 4.1",
+      "locator": "4.1 P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者开发了一个自适应动画环境作为实验工具，强调动画环境设计对实现动画效益至关重要。",
+      "rhetorical_function_cn": "引出工具设计的重要性。",
+      "depends_on_cn": "依赖理论原则。",
+      "sets_up_cn": "进入具体设计特征描述。",
+      "evidence_pointer": "Section 4.1开头"
+    },
+    {
+      "order": 34,
+      "section": "Section 4.1.1",
+      "locator": "4.1.1 颜色/状态变化",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过颜色变换增量信号来展示一个过程实例的逐步执行，先前信号保持颜色以保留轨迹；活动状态用灰色表示启用、绿色表示已执行。",
+      "rhetorical_function_cn": "具体实现信号原则和注意力引导机制。",
+      "depends_on_cn": "依赖信号原则。",
+      "sets_up_cn": "为实验中的动画处理提供操作化基础。",
+      "evidence_pointer": "Section 4.1.1 Color transformation和Status change"
+    },
+    {
+      "order": 35,
+      "section": "Section 4.1.1",
+      "locator": "4.1.1 时间设计",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "为避免对并行活动的错误推断，作者将所有活动的时间设为相同，并通过连续触发两个并行活动来表达并行语义。",
+      "rhetorical_function_cn": "解决动画时间约束带来的认知风险。",
+      "depends_on_cn": "依赖一致性原则。",
+      "sets_up_cn": "展示动画设计如何小心处理语义表达。",
+      "evidence_pointer": "Section 4.1.1 Temporal design"
+    },
+    {
+      "order": 36,
+      "section": "Section 4.1.2",
+      "locator": "4.1.2 两级交互",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "环境包含两个交互级别：低交互性的连续动画视频，以及高交互性的逐步点击动画；用户可在两者间切换。",
+      "rhetorical_function_cn": "将专业知识差异转化为具体的交互设计。",
+      "depends_on_cn": "依赖表2中的低交互性和交互性原则。",
+      "sets_up_cn": "为后续实验中的自适应机制提供操作定义。",
+      "evidence_pointer": "Section 4.1.2 Levels"
+    },
+    {
+      "order": 37,
+      "section": "Section 4.1.2",
+      "locator": "4.1.2 设计原理说明",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "低交互性旨在降低新手认知负荷、提供工作示例并允许分段；高交互性允许专家控制动画节奏、探索备选流程并接受认知挑战。",
+      "rhetorical_function_cn": "把每个设计特征与理论机制连接起来。",
+      "depends_on_cn": "依赖认知原则和技术。",
+      "sets_up_cn": "证明设计不是随意而是理论驱动。",
+      "evidence_pointer": "Section 4.1.2 Level1和Level2项目符号"
+    },
+    {
+      "order": 38,
+      "section": "Section 4.2",
+      "locator": "4.2 P1-P2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "参与者来自荷兰和土耳其的本科、研究生课程以及咨询公司和大学研究组，具有不同专业知识水平；使用自评阅读/创建模型、符号熟悉度和经验年限来测度专业知识。",
+      "rhetorical_function_cn": "说明样本的来源和专业知识测量的合理性。",
+      "depends_on_cn": "先前的专业知识理论。",
+      "sets_up_cn": "为专业知识分组和后续分析准备。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 39,
+      "section": "Section 4.3",
+      "locator": "4.3 任务类型",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用转移任务（模型在场时解决新颖问题）测量深层理解，问题要求调查模型元素间关系而非单个元素。",
+      "rhetorical_function_cn": "选择与深层次理解一致的任务类型。",
+      "depends_on_cn": "依赖多媒体学习中的迁移任务概念。",
+      "sets_up_cn": "为模型和问题设计提供标准。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 40,
+      "section": "Section 4.3.1",
+      "locator": "4.3.1 过程模型和基准",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "使用BPMN控制流元素设计10个过程模型；模型复杂度通过1400个真实模型指标基准校准，尺寸范围对应真实模型平均水平到高复杂度；使用抽象标签排除领域知识。",
+      "rhetorical_function_cn": "确保实验材料具有现实相关性和内部纯净性。",
+      "depends_on_cn": "需要真实模型基准数据。",
+      "sets_up_cn": "为测试工具提供生态效度和排除性控制。",
+      "evidence_pointer": "Section 4.3.1 Process model和Fig. A-4至A-13"
+    },
+    {
+      "order": 41,
+      "section": "Section 4.3.2",
+      "locator": "4.3.2 问题设计",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "每个模型包含八个封闭式问题（关于执行顺序、排他性、并发、重复四个类型）和一个开放性问题；专家确定答案并评估开放式回答。",
+      "rhetorical_function_cn": "提供可靠且全面的理解测量工具。",
+      "depends_on_cn": "需要明确理解维度。",
+      "sets_up_cn": "为后续评分和信度分析提供材料。",
+      "evidence_pointer": "Section 4.3.2 Questions"
+    },
+    {
+      "order": 42,
+      "section": "Section 4.4-4.5",
+      "locator": "4.4-4.5 实验因素和程序",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用受试者间设计，可视化因素为静态与动画；专业知识为连续变量；在线环境按五个部分进行，随机呈现模型，允许自由时间完成。",
+      "rhetorical_function_cn": "说明实验设计和操控如何保证比较的公平性。",
+      "depends_on_cn": "需要经典实验设计。",
+      "sets_up_cn": "为数据收集和方法细节提供依据。",
+      "evidence_pointer": "Section 4.4-4.5"
+    },
+    {
+      "order": 43,
+      "section": "Section 5.1",
+      "locator": "5.1 数据筛查与描述",
+      "move_code": "RESULT",
+      "paraphrase_cn": "221名参与者中剔除17名未完成者和10名用时极端者，最终194人；静态和动画组在年龄、性别、背景、专业知识等变量上无显著差异。",
+      "rhetorical_function_cn": "报告样本情况和随机化效果。",
+      "depends_on_cn": "依赖实验执行数据。",
+      "sets_up_cn": "为后续统计推断提供干净样本。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 44,
+      "section": "Section 5.1",
+      "locator": "5.1 专业知识测量与信度",
+      "move_code": "RESULT",
+      "paraphrase_cn": "专业知识测量组合使用阅读/创建数量和熟悉度，排除年限；k-means聚类产生低（59）、中（108）、高（27）三组；测试得分可靠性Cronbach α=0.81。",
+      "rhetorical_function_cn": "说明专业知识分组和因变量测量的可靠性。",
+      "depends_on_cn": "依赖自我报告测量和信度分析。",
+      "sets_up_cn": "为回归假设检验提供准备。",
+      "evidence_pointer": "Section 5.1 后半部分"
+    },
+    {
+      "order": 45,
+      "section": "Section 5.2",
+      "locator": "5.2 回归模型",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用OLS回归检验主效应和交互项，模型加入Animation、Expertise、Expertise²以及两个交互项，并控制性别、年龄、国家、背景。",
+      "rhetorical_function_cn": "说明统计方法如何匹配研究假设。",
+      "depends_on_cn": "需要检验U型调节。",
+      "sets_up_cn": "为回归结果做铺垫。",
+      "evidence_pointer": "Section 5.2 前两段"
+    },
+    {
+      "order": 46,
+      "section": "Section 5.2",
+      "locator": "5.2 回归结果",
+      "move_code": "RESULT",
+      "paraphrase_cn": "Animation系数正显著，H1支持；Expertise和Expertise²显著且后者为负，说明专业知识本身与理解呈凹形关系；Animation*Expertise和Animation*Expertise²均显著，后者为正，表明动画效果呈U型，支持H2/H2a/H2b。",
+      "rhetorical_function_cn": "报告核心统计结果并解释假设检验结果。",
+      "depends_on_cn": "依赖回归模型。",
+      "sets_up_cn": "为图表展示和后续讨论提供证据。",
+      "evidence_pointer": "Section 5.2 Table 6"
+    },
+    {
+      "order": 47,
+      "section": "Section 5.2",
+      "locator": "Fig. 4之后",
+      "move_code": "RESULT",
+      "paraphrase_cn": "图4展示了低和高专业知识组在动画条件下得分斜率比中等组更陡，直观确认U型效应。",
+      "rhetorical_function_cn": "用可视化方式支持统计结论。",
+      "depends_on_cn": "依赖回归结果。",
+      "sets_up_cn": "为讨论U型机制提供直观基础。",
+      "evidence_pointer": "Section 5.2 Fig. 4"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.3.1",
+      "locator": "5.3.1 时间与主观负荷",
+      "move_code": "RESULT",
+      "paraphrase_cn": "动画与静态在总测试时间上无显著差异；动画显著降低主观认知负荷，专业知识无显著效应。",
+      "rhetorical_function_cn": "补充证据说明动画不以时间和感知负担为代价。",
+      "depends_on_cn": "需要额外分析来排除替代解释。",
+      "sets_up_cn": "强化动画有效性的解释。",
+      "evidence_pointer": "Section 5.3.1 Fig. 5"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.3.2",
+      "locator": "5.3.2 使用分析",
+      "move_code": "RESULT",
+      "paraphrase_cn": "视频时间与点击次数负相关；主流使用模式是先看完视频再进入高交互动画；点击次数与测试得分正相关，视频时间不显著；感知有用性评分高。",
+      "rhetorical_function_cn": "为自适应环境的使用机制提供初步证据。",
+      "depends_on_cn": "依赖动画组日志数据。",
+      "sets_up_cn": "为讨论自适应机制的潜力提供依据。",
+      "evidence_pointer": "Section 5.3.2"
+    },
+    {
+      "order": 50,
+      "section": "Section 6.1",
+      "locator": "6.1 P1-P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第一，引入动画作为过程模型理解的新可视化技术，认知理论在过程模型语境中具有相关性；第二，动画可改善不同专业知识用户的理解，U型调节挑战以往只有新手受益的观点，符合专业知识逆转效应。",
+      "rhetorical_function_cn": "梳理研究对理论文献的贡献。",
+      "depends_on_cn": "依赖实验结果。",
+      "sets_up_cn": "为后续实用性讨论和局限做铺垫。",
+      "evidence_pointer": "Section 6.1 前两段"
+    },
+    {
+      "order": 51,
+      "section": "Section 6.1",
+      "locator": "6.1 P3-P4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第三，动画不增加时间且降低感知难度，有用性高；第四，初步揭示用户交替使用低/高交互模式，说明自适应机制具有潜力。",
+      "rhetorical_function_cn": "补充其他贡献点，展示多维度价值。",
+      "depends_on_cn": "依赖补充分析结果。",
+      "sets_up_cn": "为未来研究方向给出线索。",
+      "evidence_pointer": "Section 6.1 第三、四段"
+    },
+    {
+      "order": 52,
+      "section": "Section 6.2",
+      "locator": "6.2 P1-P2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "工具开发者可直接使用或借鉴动画环境，适合多样化用户，避免开发多套工具；设计可视化时应考虑不同专业知识水平，动画支持容易集成到现有建模工具。",
+      "rhetorical_function_cn": "将研究结果转化为实践建议。",
+      "depends_on_cn": "依赖实验结果和工具实现。",
+      "sets_up_cn": "扩展影响范围。",
+      "evidence_pointer": "Section 6.2"
+    },
+    {
+      "order": 53,
+      "section": "Section 6.3",
+      "locator": "6.3 局限性",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "局限包括模型大小受限于时间、使用抽象标签限制真实代表性、仅测试BPMN符号、参与者以学生为主、样本规模中等。",
+      "rhetorical_function_cn": "界定结果的适用范围，保护贡献不被过度泛化。",
+      "depends_on_cn": "需要诚实评估方法边界。",
+      "sets_up_cn": "为未来研究指出改进方向。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 54,
+      "section": "Section 7",
+      "locator": "Conclusion P1-P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结：动画可支持过程模型理解，且受专业知识U型调节；自适应动画增加参与感并支持认知偏好；提出研究其他类型动画和其他概念模型的新机会。",
+      "rhetorical_function_cn": "以简洁方式重申贡献和展望。",
+      "depends_on_cn": "依赖全文证据。",
+      "sets_up_cn": "论文收尾，无新证据。",
+      "evidence_pointer": "Section 7"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "作者采用多层缺口的构造方式：先指出过程模型困难（基本问题），再说明静态可视化研究充分但动态可视化研究稀缺（领域缺口），随后指出少数动画研究缺乏理论依据和定量评估（证据缺口），最后说明IS文献中动画多用于简单注意任务而非复杂问题解决（场景缺口）。每个缺口逐步收窄，最终指向本文的研究目标。",
+    "signposting_cn": "引言末尾给出论文结构路线；背景部分明确用2.1、2.2、2.3三个子节预告讨论主题；方法部分通过小标题划分乐器、参与者、任务、因素、程序；结果部分开头说明分三步呈现。这些路标使论证高度可跟踪。",
+    "transition_logic_cn": "理论到假设的过渡使用“因此，我们提出假设”；假设到设计使用“根据以上理论，我们设计了动画环境”；主结果到补充分析使用“我们进一步探索数据”。每个过渡都用因果/递进连接词明确逻辑关系。",
+    "claim_evidence_rhythm_cn": "在每个核心主张前先给出理论论证，然后用统计证据支持，再用图表和补充分析加固。例如U型主张先有专业知识逆转效应推导，再有交互项显著，再有曲线图，最后有使用模式作为过程证据。",
+    "benchmark_narrative_cn": "作者将benchmark（真实过程模型复杂度指标）嵌入实验材料设计：不是用一个通用测试集，而是用1400个真实模型的复杂度范围来校准10个实验模型，从而在文章一开始就为实验结果的生态效度埋下伏笔。之后在统计上与静态组对比，在调节上与中等组对比。",
+    "theory_return_cn": "讨论部分把U型结果重新连接回专业知识逆转效应和认知负荷理论，指出低/高交互分别支持不同类型用户，从而将统计交互项升华为理论贡献。",
+    "contribution_positioning_cn": "作者在IS动画文献、概念建模文献和多媒体学习文献三个领域的交叉处定位：与IS电商动画对比，强调复杂任务；与算法动画对比，强调正式评价和交互性；与概念建模静态可视化对比，强调动态可视化。",
+    "novelty_protection_cn": "通过区分保留任务与转移任务，将本文与IS广告动画研究区别；通过指出少数过程模型动画研究缺乏定量证据，确立本文首创性；通过展示U型调节，防止结果被解读为简单的“动画对所有人有效”或“只对新手有效”；通过报告时间无差异和主观负荷降低，防止贡献被时间成本假说削弱。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用实际问题开头：描述对象广泛使用但理解困难，指出静态方法不足。",
+        "research_job_cn": "识别一个可研究的认知/可视化问题，并引用理论说明问题的来源。",
+        "required_evidence_cn": "足够的领域背景和至少一个理论框架能够解释问题。",
+        "transition_to_next_cn": "从问题转向理论缺口，说明动态可视化或类似新技术未被充分研究。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "提炼理论命题，将理论的关键机制与设计原则对应起来。",
+        "research_job_cn": "建立理论到设计的翻译链，通常以表格形式列出原则→挑战→应用。",
+        "required_evidence_cn": "对理论的可操作解读；对目标工件的认知挑战分析。",
+        "transition_to_next_cn": "基于翻译链生成可检验的假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述制品构建：报告工具/环境的具体特征，并解释每个特征对应哪个设计原则。",
+        "research_job_cn": "实际开发或实现设计原则，确保工具可被参与者使用。",
+        "required_evidence_cn": "工具能够运行，实验材料完成并由专家校验。",
+        "transition_to_next_cn": "引入评价方法，说明为什么采用某种实验设计。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述实验参与者、任务、因素和程序，强调随机化和控制。",
+        "research_job_cn": "实施实验，收集数据，并做数据筛查。",
+        "required_evidence_cn": "样本量足够，组间基线可比，数据可靠（如信度系数）。",
+        "transition_to_next_cn": "进入统计分析，检验假设。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "报告主分析：用回归/ANOVA检验主效应和交互效应，并给出图表。",
+        "research_job_cn": "选择能匹配假设的统计模型，检验线性/曲线关系。",
+        "required_evidence_cn": "显著的主效应和交互项；模型诊断（VIF、信度）。",
+        "transition_to_next_cn": "用补充分析排除替代解释。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "报告补充分析：时间、主观负荷、使用模式等辅助指标，让结果更坚实。",
+        "research_job_cn": "收集并分析过程性数据或感知数据，支持机制解释。",
+        "required_evidence_cn": "辅助指标与主结果不矛盾，且能澄清机制。",
+        "transition_to_next_cn": "在讨论中把证据提升为理论贡献和实践建议。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "在讨论中回到理论缺口，重新表述贡献，列出局限和边界。",
+        "research_job_cn": "将效应解释为机制表达，明确适用范围，指出未检验的部分。",
+        "required_evidence_cn": "将统计结果与初始理论命题对应；诚实的局限清单。",
+        "transition_to_next_cn": "结论处简要重申贡献和未来方向。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用理论知识表格化设计原则，使设计决策透明可辩护。",
+      "使用真实世界基准数据校准实验材料，提升生态效度。",
+      "在假设中加入二次项来检验曲线/调节效应。",
+      "在补充分析中检查时间成本和主观负荷，排除常见替代解释。",
+      "把U型或意外结果与已有理论（如专业知识逆转）连接，形成贡献。",
+      "用使用行为数据（点击/时间）作为机制的过程证据。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "开发独立的在线实验平台（HTML5/PHP/JS/bpmn-io）需要较强的技术投入。",
+      "招募大量专业参与者（顾问、专家）困难，本文专家仅27人但作者将其定位为优势。",
+      "设计10个BPMN模型并用1400个真实模型基准校准，需要前期数据集和领域知识。",
+      "每模型9个问题且由专家逐一核对答案，评分成本高。",
+      "实验执行总时长约1小时，参与者易疲劳，需要筛选机制。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "如果仅声称“动画有用”而不报告理论机制和设计原则，贡献会变为一次性结果。",
+      "如果没有测量专业知识，不能宣称U型调节。",
+      "如果只报告测试得分而不检查时间，读者会质疑绩效提升是以时间为代价。",
+      "如果只报告点击相关，不能断言高交互性导致了绩效提升。",
+      "如果没有证据支撑，不能把低/高交互分别对应低/高专业知识用户当作既定机制。"
+    ],
+    "single_best_description_of_the_routine_cn": "这是一个‘理论驱动设计-实验检验-补充加固’的套路：先用认知理论定义问题和设计原则，再落实为具体工具特征，随后用受试者间实验检验主效应和调节效应，最后用时间、负荷、使用数据等辅助证据把效应解释为理论机制并界定边界。"
+  },
+  "confidence": 0.92,
+  "limitations_cn": "全文可获取，但缺少原始分页；位置证据基于章节、段落和图表描述。图2、A-1至A-13等图片无法直接观察细节，但文本已提供充分描述。对表格2和表6的解读基于文本中的数值。无其他缺失章节。",
+  "usage": {
+    "prompt_tokens": 28224,
+    "completion_tokens": 30011,
+    "total_tokens": 58235,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 24896
+  }
+}

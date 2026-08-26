@@ -1,0 +1,1210 @@
+{
+  "record_id": "20225",
+  "source_file": "20225_2022_data-analytics-for-the-sustainable-use-of-resources-in-hospitals-predicting-the-length-of-stay-f.md",
+  "title": "Data analytics for the sustainable use of resources in hospitals: Predicting the length of stay for patients with chronic diseases",
+  "authors": "Hamed M. Zolbanin; Behrooz Davazdahemami; Dursun Delen; Amir Hassan Zadeh",
+  "year": "2022",
+  "journal": "Information & Management",
+  "doi": "10.1016/j.im.2020.103282",
+  "fulltext_chars": 106303,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "healthcare_and_care",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:05.011560+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在住院补偿制度激励医院提高床位利用率的背景下，如何通过数据分析和深度学习在患者入院时更准确地预测慢性病（COPD与肺炎）患者的住院时长（LOS），从而支持医院资源的可持续利用？",
+    "artifact_and_design_cn": "本文构建的核心制品是结合数据工程方法的深度多层感知机（MLP）预测模型：先从大规模电子病历中提取患者既往住院记录，构造 avg_patient_los 和 avg_total_los 两个历史变量，并用决策树处理首次入院缺失值；再在时间顺序划分的训练集上训练一个含5个隐藏层的MLP网络，输出连续型LOS预测。",
+    "objective_outcomes_cn": "在时间验证下，COPD数据集上R²为0.613，MAE为1.239天，±2天准确率86.05%，±3天准确率91.34%；肺炎数据集上R²为0.655，MAE为2.038天，±2天准确率74.43%，±3天准确率84.58%。敏感性分析显示pt_avg_los（患者既往平均LOS）是两个数据集中最重要的预测变量。",
+    "core_contribution_cn": "作者声称的贡献包括：理论贡献是识别患者既往入院相关变量是预测LOS的重要因素，从而修正了既往只使用当前入院变量的范式；方法论贡献包括时间评估、将LOS作为连续数值预测、提出数据工程方法补充数据集，以及显著提高COPD和肺炎住院LOS预测精度。",
+    "whole_argument_in_one_paragraph_cn": "文章由Medicare IPPS固定补偿制度出发，说明医院必须提高床位资源利用效率，而入院时准确预测LOS是实现资源可持续利用和患者获益的关键。通过系统回顾，作者指出现有LOS预测研究至少存在五类缺口：多用二元/名义变量、缺乏对长住院患者的判别力、部分研究只在训练集上报告、随机切分导致未来信息泄漏、几乎不考虑患者病史。为填补这些缺口，作者从大型EMR数据仓库中选取COPD和肺炎住院数据，设计数据工程步骤将患者既往住院信息聚合为两个新变量，并选择深度MLP缓解高维类别变量问题。评价阶段采用时间顺序的75/25划分，报告回归指标和±2/±3天容忍准确率，并与既有数值型LOS研究对比。随后通过留一变量敏感性分析证明，模型性能提升主要由数据工程构造的历史变量驱动。讨论部分将这些证据上升为对LOS预测范式的理论修正，并说明其可持续医院运营、数据基础设施和信息共享含义，同时限制结论不能随意推广到其他疾病。"
+  },
+  "paper_archetype": "computational_artifact_benchmark",
+  "paper_archetype_reason_cn": "该文的核心证据来源是构建的深度MLP制品和经过数据工程增强的数据集，在两类大型临床数据集上使用回归指标、容忍准确率和先验研究对比进行评价；没有用户实验、现场部署或正式组织干预。虽然作者提出理论贡献和方法论贡献，但主要论证方式仍是计算制品加数据基准，故归为此类。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "文章先建立LOS预测性能缺口和现有研究的方法缺陷，然后以数据工程和深度MLP作为制品，在基准数据集上用时间评价和对比表展示性能改进，最后从变量重要性结果一般化为“既往入院历史应纳入LOS预测范式”的知识主张。这符合性能缺口—制品—基准—一般化设计知识的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "共分五个累积阶段：1）从大型数据仓库构建COPD与肺炎数据集并限定入院时可知变量；2）进行历史信息数据工程，构造两个基于既往住院的聚合变量并处理缺失；3）构建并优化深度MLP架构；4）在时间顺序划分下评价模型并与既往研究对比；5）用敏感性分析将性能归因于数据工程变量，为理论贡献提供证据。每个阶段解决前一个阶段留下的开放问题，并引出下一阶段。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "数据集构建与入院时可用特征界定",
+        "question_cn": "应该使用哪些疾病人群和哪些入院时已知的变量来预测LOS？",
+        "inputs_and_setting_cn": "来自Cerner数据仓库的2.5TB临床数据，包含约3.8亿次住院和6300万患者；按肺炎或COPD主要诊断筛选，并保留2010–2015或2015年的较新住院记录。",
+        "designed_or_compared_object_cn": "COPD和肺炎两个住院数据集；只保留入院时已知变量，排除出院时填写的变量和变异过小或缺失过多的变量。",
+        "baseline_control_or_counterfactual_cn": "未设置直接对照，但通过与既往研究通常使用的小型单中心数据集形成对比。",
+        "objective_metrics": [
+          "住院次数",
+          "患者人数",
+          "平均LOS",
+          "标准差",
+          "人口统计分布",
+          "离群点删除数量与比例"
+        ],
+        "analysis_method_cn": "描述性统计和基于4个标准差以上的离群点删除。",
+        "main_result_cn": "COPD数据集含86,338次住院、73,901名患者、平均LOS 5.15天；肺炎数据集含63,185次住院、53,476名患者、平均LOS 8.31天；两个数据集中均保留了入院时已知的变量。",
+        "argumentative_role_cn": "建立数据规模和多医院代表性，并证明作者只使用入院时信息是现实的临床决策约束。",
+        "remaining_uncertainty_cn": "仅有人口统计和当前入院变量，尚不知既往住院信息是否能改善预测。",
+        "link_to_next_phase_cn": "正是由于当前数据缺少患者历史信息，下一阶段引入历史数据工程。",
+        "evidence_pointers": [
+          "Section 3 The data",
+          "Table 1 Demographics",
+          "Table 2 Variable Definitions"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "历史信息数据工程与缺失值处理",
+        "question_cn": "如何从电子病历中提取患者既往住院信息并将其转化为可用的预测变量？",
+        "inputs_and_setting_cn": "第一阶段生成的COPD和肺炎数据集，包含每位患者每次住院的入院和出院时间。",
+        "designed_or_compared_object_cn": "构造 avg_patient_los（患者既往平均LOS）和 avg_total_los（当前入院之前全体患者平均LOS）；对首次入院缺失的avg_patient_los使用决策树插补。",
+        "baseline_control_or_counterfactual_cn": "未使用历史变量的模型作为隐含对照；插补方法与固定均值/中位数插补相比。",
+        "objective_metrics": [
+          "平均LOS计算公式",
+          "缺失值类型",
+          "computational complexity big O"
+        ],
+        "analysis_method_cn": "数学公式定义、决策树插补、big O复杂度分析。",
+        "main_result_cn": "生成两个新变量；avg_patient_los在首次入院时缺失，用决策树近似；整体数据工程复杂度为O(n²)，若放弃avg_total_los可降至O(nv)。",
+        "argumentative_role_cn": "这是全文最核心的制品设计步骤，将“患者历史重要”的领域知识转化为具体可计算特征，为后续性能归因提供对象。",
+        "remaining_uncertainty_cn": "尚不清楚这些历史变量对深度模型的实际预测提升有多大。",
+        "link_to_next_phase_cn": "需要一种能处理这些新变量和大规模类别特征的模型，因此进入深度MLP构建。",
+        "evidence_pointers": [
+          "Section 4.1 Data engineering",
+          "Eq.1 and Eq.2",
+          "Section 4.1.2 Approximation of missing information",
+          "Section 4.1.3 Computational complexity"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "深度MLP网络构建与超参数搜索",
+        "question_cn": "什么样的深度网络架构和预处理方式适合预测连续型LOS并处理高基数类别变量？",
+        "inputs_and_setting_cn": "经过数据工程增强的COPD和肺炎数据集，所有类别变量经one-hot编码后形成59个数值预测变量，并做min-max归一化。",
+        "designed_or_compared_object_cn": "MLP网络架构；分别比较5、7、10个隐藏层以及64、128、256、512神经元宽度的变体。",
+        "baseline_control_or_counterfactual_cn": "7层和10层网络、64/128/512宽度网络作为架构比较对象；经典机器学习未在同条件下直接比较。",
+        "objective_metrics": [
+          "R²",
+          "MAE",
+          "MSE",
+          "RMSE"
+        ],
+        "analysis_method_cn": "系统化架构搜索与基于测试集的性能比较，然后微调学习率、epoch、batch size等超参数。",
+        "main_result_cn": "最终选定的5隐藏层MLP最优；第一层128神经元，其余隐藏层256神经元，输出层单神经元；在COPD测试集上R²为0.568（初始最佳架构），后续优化进一步提高。",
+        "argumentative_role_cn": "提供能够利用数据工程特征的预测制品，并说明选择MLP而非LSTM/CNN的技术理由。",
+        "remaining_uncertainty_cn": "模型整体性能已可用，但还无法知道性能是否主要由历史变量驱动。",
+        "link_to_next_phase_cn": "下一阶段用时间验证正式评价，并随后进行变量重要性归因。",
+        "evidence_pointers": [
+          "Section 4.2 Model building",
+          "Table 4 Performance metrics of the initial architectures",
+          "Fig. 5 Performance of architectures",
+          "Fig. 6 MLP network architecture"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "时间验证与性能基准评价",
+        "question_cn": "在避免未来信息泄漏的现实条件下，模型预测LOS的精度如何，并与既往数值型LOS研究相比如何？",
+        "inputs_and_setting_cn": "完整的数据集；按时间顺序将前75%的住院作为训练集，后25%作为测试集。",
+        "designed_or_compared_object_cn": "时间验证协议、MAE损失函数、ADAM优化器、提前停止；与既往使用随机切分和单/少中心数据的研究对比。",
+        "baseline_control_or_counterfactual_cn": "表中列出的既往研究：回归树、ANN、Poisson回归、随机森林等，均使用随机切分且样本规模较小。",
+        "objective_metrics": [
+          "R²",
+          "MAE",
+          "MSE",
+          "RMSE",
+          "MAPE",
+          "±2天容忍准确率",
+          "±3天容忍准确率"
+        ],
+        "analysis_method_cn": "时间顺序划分、回归指标计算、与既往研究结果表格式对比。",
+        "main_result_cn": "COPD：R²=0.613，MAE=1.239，±2天86.05%，±3天91.34%；肺炎：R²=0.655，MAE=2.038，±2天74.43%，±3天84.58%。作者指出既往研究多使用随机切分且中心数少，因此本研究的评价更稳健。",
+        "argumentative_role_cn": "证明制品在现实的时间顺序预测条件下达到高精度，并回应了引言中关于随机切分导致虚高精度的批评。",
+        "remaining_uncertainty_cn": "整体精度好，但尚未把性能提升归因到具体设计成分。",
+        "link_to_next_phase_cn": "需要敏感性分析来检验是否是数据工程变量驱动了模型优势。",
+        "evidence_pointers": [
+          "Section 5 Analytical evaluation",
+          "Table 5 Demographics of training and testing data",
+          "Table 6 Prediction results for LOS",
+          "Table 7 Comparison with prior research"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "敏感性分析与变量重要性归因",
+        "question_cn": "模型性能是否以及多大程度上来自数据工程构造的历史变量？",
+        "inputs_and_setting_cn": "已训练好的MLP网络和两个测试集；每个预测变量逐个从输入中删除后重新训练。",
+        "designed_or_compared_object_cn": "完整模型与删除单个预测变量后的简化模型对比；以MAE变化构造相对重要性指标。",
+        "baseline_control_or_counterfactual_cn": "完整模型作为基准；删除变量后的MAE作为反事实。",
+        "objective_metrics": [
+          "MAE变化",
+          "相对重要性指数"
+        ],
+        "analysis_method_cn": "敏感性分析（leave-one-variable-out），对MAE变化标准化后排序。",
+        "main_result_cn": "pt_avg_los在COPD中MAE增加1.032，相对重要性1.000；在肺炎中MAE增加1.948，相对重要性1.000；pt_avg_readmission和avg_los等历史变量也进入各自前列。",
+        "argumentative_role_cn": "将模型精度上升为对“患者既往住院历史最重要”这一理论主张的证据，支撑全文核心贡献。",
+        "remaining_uncertainty_cn": "没有检验变量重要性是否在不同时间窗口、不同医院类型或不同疾病中稳定；也没有正式统计检验MAE变化。",
+        "link_to_next_phase_cn": "讨论部分据此提出范式修正、数据基础设施启示和未来研究方向。",
+        "evidence_pointers": [
+          "Section 5 Analytical evaluation, variable importance paragraph",
+          "Table 8 Relative importance of predictor variables"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 建立医院可持续运营压力与Medicare补偿结构",
+      "PRACTICAL_STAKES: LOS预测可改善床位利用并惠及员工、社区和患者",
+      "RQ_OR_OBJECTIVE: 采用数据分析方法开发并检验深度神经网络预测COPD和肺炎LOS",
+      "CONTRIBUTION: 提出理论贡献（既往入院变量重要）与方法贡献（数据工程、数值LOS、时间评价）",
+      "RESULT: 报告COPD和肺炎的±2/±3天准确率并指向可持续性"
+    ],
+    "introduction_moves": [
+      "CONTEXT: IPPS固定补偿制度",
+      "PRACTICAL_STAKES: 医院最大化Medicare收入的动机促使资源高效利用",
+      "PRACTICAL_STAKES: LOS预测对患者、社区、环境的多元好处",
+      "RQ_OR_OBJECTIVE: 用数据分析和预处理而非复杂模型提升LOS预测",
+      "CONTRIBUTION: 预先列出四个贡献并说明其方法/理论属性",
+      "GAP: 指出大多数研究忽视时间顺序和患者病史"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE: 既往LOS预测分为二元/名义和连续两类",
+      "LIMITATION: 连续型LOS研究很少且未使用深度学习",
+      "GAP: 患者医疗史因数据聚合困难极少纳入",
+      "THEORY_PROPOSITION: 慢性病严重性和既往资源使用应改善预测",
+      "MECHANISM: 患者既往平均LOS捕捉其整体健康状态，总体平均LOS提供人群比较基准"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT: 只使用入院时已知变量",
+      "DESIGN_FEATURE: 构造avg_patient_los与avg_total_los",
+      "DESIGN_FEATURE: 用决策树插补首次入院缺失值",
+      "METHOD_JUSTIFICATION: 选择MLP以避免高维类别变量带来的维度灾难",
+      "DESIGN_FEATURE: one-hot编码与min-max归一化",
+      "DESIGN_FEATURE: 架构搜索后确定5隐藏层MLP"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 使用时间验证以避免随机切分的信息泄漏",
+      "BENCHMARK_OR_CONTRAST: 与既往数值型LOS研究对比",
+      "RESULT: 报告R²、MAE、MSE、RMSE、MAPE和容忍准确率",
+      "METHOD_JUSTIFICATION: 使用敏感性分析从MLP中提取变量重要性",
+      "RESULT: pt_avg_los等历史变量排在最前"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 回溯指出现有不足并获得高精度",
+      "CONTRIBUTION: 强调数据工程贡献最大",
+      "THEORY_RETURN: 用历史变量重要性修正LOS预测范式",
+      "DESIGN_KNOWLEDGE: 将医疗记录视为相互关联而非独立交易",
+      "BOUNDARY_CONDITION: 警惕推广到其他疾病",
+      "LIMITATION_AND_FUTURE: 变量数量有限、可比较研究不足、历史窗口待研究"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "关于慢性病严重性与医疗资源使用关系的临床知识",
+      "既往住院史与再入院/资源消耗关系的研究",
+      "表示学习与深度学习的机器学习知识",
+      "预测分析中时间顺序与数据泄漏的方法论知识",
+      "医疗大数据处理中的真实性与数据工程要求"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "文章没有形式化理论，但领域知识（慢性病严重性、既往住院史影响资源使用）直接指导了核心特征工程；同时，深度MLP的技术选择主要来自数据形态和维度灾难问题，而非理论推导。因此是知识前瞻性地影响部分设计但整体技术选择来自工程问题。",
+    "translation_chain_cn": "慢性病长期性和严重性导致既往资源使用差异 → 患者既往LOS是其健康状态的稳定信号 → 应构造反映个体既往LOS的变量 → 生成avg_patient_los，并因首次入院缺失采用决策树插补 → 在敏感性分析中检验该变量移除后的MAE变化 → 结果证明其为最重要预测变量 → 上升为“应纳入医疗史”的理论贡献。另一条链：高基数类别变量会使回归失效 → 需要能自动表达特征的模型 → 选择深度MLP并one-hot编码 → 通过架构搜索和最终性能证明可行性。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "病情严重程度较高的患者更容易住院更久并消耗更多资源，因此既往住院史应改善预测。",
+        "mechanism_cn": "患者过去的住院时长反映其潜在疾病负担和健康轨迹，可作为当前发作严重性的代理。",
+        "design_requirement_cn": "需要从EMR中提取患者当前入院之前的住院记录并聚合成新的预测特征。",
+        "artifact_choice_cn": "构造avg_patient_los和avg_total_los两个变量，并使用决策树插补首次入院缺失。",
+        "evaluated_contrast_cn": "保留历史特征与删除该特征后的模型性能对比；也与既往不含病史的研究对比。",
+        "objective_result_cn": "在COPD中删除pt_avg_los使MAE增加1.032，在肺炎中增加1.948；相对重要性约3倍于第二重要变量；模型中R²分别达0.613和0.655。",
+        "evidence_pointers": [
+          "Table 8",
+          "Section 5 variable importance paragraph"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "高基数类别变量会导致传统回归和高维诅咒，而深度学习可自动提取特征。",
+        "mechanism_cn": "one-hot编码后维度很高，但MLP的表示学习能学到输入特征到输出的复杂映射，不需要预先降维。",
+        "design_requirement_cn": "选择能够处理自然高维数据的深度网络，并避免维度灾难和信息损失。",
+        "artifact_choice_cn": "采用5层MLP，输入层59个神经元，隐藏层128/256个神经元，ReLU激活，线性输出。",
+        "evaluated_contrast_cn": "不同层数（5/7/10）和宽度（64/128/256/512）的架构比较。",
+        "objective_result_cn": "5层256宽度网络在COPD测试集上R²最高，最终模型在两类数据集上MAE分别为1.239和2.038。",
+        "evidence_pointers": [
+          "Table 4",
+          "Fig. 5",
+          "Fig. 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "随机划分时间序列型住院数据会使用未来信息预测过去，造成虚高精度。",
+        "mechanism_cn": "训练集中包含比测试集更晚的住院记录，测试记录的历史信息被无意泄露到训练中。",
+        "design_requirement_cn": "预测模型必须在时间顺序上只用更早的数据训练，并只用入院时已知特征。",
+        "artifact_choice_cn": "按时间顺序将前75%的住院记录用于训练，后25%用于测试；排除出院时才知道的变量。",
+        "evaluated_contrast_cn": "随机切分的既往研究与时间切分的本研究在协议上对比；同样只预测数值型LOS。",
+        "objective_result_cn": "本研究仍获得较高精度，且由于采用时间评估，作者认为结果比随机切分研究更现实和稳健。",
+        "evidence_pointers": [
+          "Section 5 first paragraph",
+          "Table 7"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "时间顺序训练/测试划分",
+      "回归指标评价（R²、MAE、MSE、RMSE、MAPE）",
+      "容忍准确率评价（±2天和±3天）",
+      "与既往数值型LOS研究的结果对比",
+      "敏感性分析（留一变量重新训练）",
+      "架构搜索中的性能比较"
+    ],
+    "why_these_evaluations_cn": "作者需要同时回应现实可用性、方法缺陷和贡献归因三个问题：时间验证证明模型在无未来泄漏时仍有效；回归和容忍准确率证明精确预测连续LOS是可行的；与既往研究对比说明在更困难设定下仍有竞争力；敏感性分析则把性能改进定位到数据工程变量，从而支持理论贡献。",
+    "benchmark_and_contrast_chain_cn": "文章没有使用标准公共benchmark，而是通过三层对照形成证据链：第一层是模型内部架构搜索，在固定参数下比较5/7/10层和不同宽度，选出最优形态；第二层是模型整体性能与既往数值型LOS研究（回归树、ANN、Poisson回归、随机森林）在R²、MAE、±2/±3天指标上的表格式对比；第三层是敏感性分析把完整模型与删除单个变量的模型对比，量化每个预测变量的贡献。由于既往研究的疾病、中心和切分不同，表中对比不是严格同类基准，但作者用“更稳健协议+更大样本”的说法增强说服力。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "采用时间评估比随机切分更现实且避免信息泄漏。",
+        "evidence_cn": "分析协议中按时间顺序划分，且模型只使用入院时已知变量；并对既往随机切分研究进行批评。",
+        "supported_cn": "得到充分方法论证支撑，但没有在同一数据上做随机切分与时间切分的定量对比。"
+      },
+      {
+        "claim_cn": "模型能高精度预测连续型LOS。",
+        "evidence_cn": "两个数据集的R²、MAE和±2/±3天准确率。",
+        "supported_cn": "直接由Table 6支持，但精度受疾病、容忍度和数据集分布影响。"
+      },
+      {
+        "claim_cn": "模型性能提升主要由数据工程变量驱动。",
+        "evidence_cn": "敏感性分析中pt_avg_los、pt_avg_readmission等历史变量的MAE变化和相对重要性居前。",
+        "supported_cn": "有定量证据支持，但未做包含/不包含全部历史变量的正式消融，也未做统计显著性检验。"
+      },
+      {
+        "claim_cn": "患者既往入院史应成为LOS预测范式的一部分。",
+        "evidence_cn": "历史变量在两类疾病中的高重要性，以及既往研究普遍缺少这类变量的综述表。",
+        "supported_cn": "有间接证据，但仅基于两个慢性病数据集，未在其他疾病或机构中验证。"
+      },
+      {
+        "claim_cn": "模型有助于医院可持续运营并能增加收入、减少环境足迹。",
+        "evidence_cn": "讨论部分从资源利用角度推断，并未测量实际床位释放、排放或收入变化。",
+        "supported_cn": "属于概念性推断，未被直接证据检验。"
+      }
+    ],
+    "internal_validity_strategy_cn": "通过时间顺序划分排除未来信息泄漏；只保留入院时已知变量提高决策模拟真实度；通过离群点删除降低极端值影响；通过在训练集内设20%验证子集和提前停止控制过拟合；通过敏感性分析在相同模型框架下归因变量贡献。",
+    "external_validity_strategy_cn": "使用两个不同慢性病（COPD、肺炎）和大规模多医院数据（182/202家医院）来提高普遍性；用与既往单中心、少中心研究的样本规模对比强调稳健性；在讨论中限制结论不能直接外推到其他疾病，并呼吁更多疾病研究。",
+    "what_is_not_actually_tested_cn": "没有在真实医院环境中部署或测量资源利用变化；没有随机切分与时间切分在同一数据上的定量对比；没有与经典机器学习方法在同一特征集下的并列比较；没有对历史信息最佳时间窗口进行实验；没有直接检验可持续性、财务或患者满意度结果；变量重要性没有统计推断或置信区间。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "针对COPD和肺炎住院患者，深度MLP在时间划分下能以较低MAE和较高容忍准确率实现连续型LOS预测，优于或至少不弱于既有数值型LOS研究。",
+    "artifact_claim_cn": "数据工程方法构造的历史聚合变量（尤其pt_avg_los）是模型性能提升的主要来源；通过敏感性分析证明，去掉该变量后MAE显著上升。",
+    "mechanism_claim_cn": "患者既往平均LOS捕捉其慢性病严重性和健康轨迹，因此比当前入院时的人口统计和诊断变量更能预测本次住院时长；总体平均LOS则提供患者与平均患者状态比较的基准。",
+    "boundary_claim_cn": "该方法适用于慢性病，尤其是COPD和肺炎；作者明确警告不能假定其他疾病也能获得类似精度，因为疾病交互、合并症、治疗和外部因素可能改变预测关系。",
+    "reusable_design_knowledge_cn": "可复用知识包括：预测LOS时应使用时间顺序评估而非随机切分；只使用入院时可获得的信息构建临床决策支持；从EMR中聚合既往住院记录是提升预测的有效数据工程策略；对高基数临床类别变量，深度MLP可避免手工降维的信息损失。",
+    "theoretical_contribution_cn": "核心理论贡献是识别患者既往入院相关变量为LOS预测中的关键因素，从而挑战并修正“只用当前入院变量预测LOS”的既有范式。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分逐条回应引言中指出的五个缺口：用连续预测回应二元化不足，用时间评估回应随机切分，用历史变量回应病史缺失，用多中心大数据回应样本局限，并用敏感性分析把性能上升为理论论断；然后回到可持续运营和数据基础设施实践含义。",
+    "overclaim_or_unsupported_leaps_cn": "作者称数据工程变量“dwarfs”其他变量，但只使用敏感性分析的MAE变化，无统计检验；从两个数据集上升为“范式修正”有点强；将预测精度直接等同于可持续性、收入增加和患者满意度改进属于推断性主张；与既往研究的性能对比因疾病和协议不同并非严格可比。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "多种力量推动医院走向更可持续的运营。",
+      "rhetorical_function_cn": "在摘要中建立宏观背景，为后续LOS预测提供意义。",
+      "depends_on_cn": "独立开篇。",
+      "sets_up_cn": "为Medicare补偿结构作为具体制度驱动做铺垫。",
+      "evidence_pointer": "Abstract first sentence"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2–S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "Medicare按操作付费而非按住院天数付费，刺激医院提高床位等资源使用效率。",
+      "rhetorical_function_cn": "指出现实制度后果，解释为什么LOS预测重要。",
+      "depends_on_cn": "承接医院可持续运营的宏观背景。",
+      "sets_up_cn": "将效率问题转化为可操作的LOS预测目标。",
+      "evidence_pointer": "Abstract second and third sentences"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文用数据方法开发和检验深度神经网络以预测COPD和肺炎患者的LOS。",
+      "rhetorical_function_cn": "在摘要中直接给出研究目标和制品。",
+      "depends_on_cn": "依赖前述效率和资源利用问题。",
+      "sets_up_cn": "为方法和结果摘要提供焦点。",
+      "evidence_pointer": "Abstract fourth sentence"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5–S6",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "理论贡献是发现既往入院变量对LOS预测重要，方法论贡献包括数据工程、数值预测和时间评估。",
+      "rhetorical_function_cn": "预先声明贡献，让读者知道文章的价值主张。",
+      "depends_on_cn": "承接研究目标。",
+      "sets_up_cn": "预告文末讨论会详细展开这些贡献。",
+      "evidence_pointer": "Abstract fifth and sixth sentences"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模型在COPD和肺炎数据上分别达到86%和74%的±2天准确率、91%和85%的±3天准确率。",
+      "rhetorical_function_cn": "用具体数字吸引读者并支撑有用性主张。",
+      "depends_on_cn": "依赖模型和评价。",
+      "sets_up_cn": "为可持续资源利用和患者获益的推断提供证据。",
+      "evidence_pointer": "Abstract final sentences"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1–S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "IPPS按预定费率支付Medicare急性住院服务，与住院天数无关。",
+      "rhetorical_function_cn": "建立制度背景，解释医院面临的经济激励。",
+      "depends_on_cn": "没有依赖，引入制度。",
+      "sets_up_cn": "为床位利用率问题提供法规根源。",
+      "evidence_pointer": "Introduction first two sentences"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P1 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "这种支付结构促使医院更高效地使用床位以最大化Medicare收入。",
+      "rhetorical_function_cn": "把制度背景转化为医院的具体动机。",
+      "depends_on_cn": "依赖IPPS补偿规则。",
+      "sets_up_cn": "引出入院时准确预测LOS的必要性。",
+      "evidence_pointer": "Introduction P1 S3"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1–S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "预测LOS不仅经济上有益，还能识别高风险患者、优化治疗方案、预防院内感染等。",
+      "rhetorical_function_cn": "扩大LOS预测的意义，从财务扩展到临床和患者。",
+      "depends_on_cn": "延续第一段资源利用问题。",
+      "sets_up_cn": "为后续社区、环境可持续影响做铺垫。",
+      "evidence_pointer": "Introduction P2 S1–S2"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P2 S3–S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "更广泛影响是通过资源管理和减少医院浪费影响社区，准确预测可让医院以相同资源服务更多患者并降低生态足迹。",
+      "rhetorical_function_cn": "把LOS预测与可持续性联系起来，赋予IS/医疗分析研究更高价值。",
+      "depends_on_cn": "依赖前述临床和患者层面的LOS预测收益。",
+      "sets_up_cn": "为文章标题中的可持续资源使用提供论证基础。",
+      "evidence_pointer": "Introduction P2 S3–S4"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此本文采用数据分析方法为慢性病患者开发早期LOS预测模型。",
+      "rhetorical_function_cn": "从广泛意义收缩到本文具体研究目标。",
+      "depends_on_cn": "依赖前两段的制度背景和可持续性收益。",
+      "sets_up_cn": "预告核心方法是数据分析和预处理。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P3 S2–S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者强调聚焦于预处理大型EMR而非构建更复杂模型或加入更多变量，可显著提升LOS预测。",
+      "rhetorical_function_cn": "把方法论主张作为研究创新点，而非强调算法新颖性。",
+      "depends_on_cn": "承接数据分析方法目标。",
+      "sets_up_cn": "为第四部分的数据工程方法做预告。",
+      "evidence_pointer": "Introduction P3 S2–S3"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究有四个贡献，前三个是方法论贡献，最后一个是理论贡献。",
+      "rhetorical_function_cn": "在引言中以清单方式给出贡献，便于读者追踪。",
+      "depends_on_cn": "依赖前述研究目标。",
+      "sets_up_cn": "为后文的评价和讨论提供贡献映射。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P4 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "大多数先前研究忽视医院住院事件的时间顺序并采用随机切分，本研究使用时间评估。",
+      "rhetorical_function_cn": "指出随机切分的方法缺陷，为贡献一提供缺口。",
+      "depends_on_cn": "基于对既有研究的总体判断。",
+      "sets_up_cn": "呼应后文时间验证设计。",
+      "evidence_pointer": "Introduction P4 S2"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P4 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "本研究通过数据工程创建新变量，把LOS作为连续变量而非短/长阈值来预测。",
+      "rhetorical_function_cn": "指出先前研究多使用二元LOS，导致贡献二。",
+      "depends_on_cn": "基于文献中对LOS操作化的局限。",
+      "sets_up_cn": "为第四部分连续预测模型做铺垫。",
+      "evidence_pointer": "Introduction P4 S3"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P4 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "本研究识别患者既往入院变量是预测慢性病LOS的重要因素，修正了只用当前入院变量的范式。",
+      "rhetorical_function_cn": "明确理论缺口并预告核心理论贡献。",
+      "depends_on_cn": "依赖对现有LOS预测中病史缺失的判断。",
+      "sets_up_cn": "为敏感性分析结果的重要性做前置说明。",
+      "evidence_pointer": "Introduction P4 S4"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "文章剩余部分依序介绍文献、数据集、数据工程、深度学习模型、分析评价及贡献。",
+      "rhetorical_function_cn": "给出文章结构路标，降低阅读成本。",
+      "depends_on_cn": "已经在引言完成问题和贡献陈述。",
+      "sets_up_cn": "为各章节安排提供预期。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 17,
+      "section": "Prior work",
+      "locator": "Prior work P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "医疗中的数据挖掘应用可以通过相同资源服务更多患者来减少环境影响。",
+      "rhetorical_function_cn": "在文献回顾开头回扣可持续性主题。",
+      "depends_on_cn": "承接引言中的可持续问题。",
+      "sets_up_cn": "为将LOS预测定位为可持续医疗实践之一提供文献语境。",
+      "evidence_pointer": "Section 2 P1 S1"
+    },
+    {
+      "order": 18,
+      "section": "Prior work",
+      "locator": "Prior work P1 S2–S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "可持续医疗还体现为客户、员工和社区导向的多种形式。",
+      "rhetorical_function_cn": "扩展可持续性的理论框，不只限于环境。",
+      "depends_on_cn": "依赖可持续医疗文献。",
+      "sets_up_cn": "使LOS预测的贡献维度更丰富。",
+      "evidence_pointer": "Prior work P1 S2–S3"
+    },
+    {
+      "order": 19,
+      "section": "Prior work",
+      "locator": "Prior work P2 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "预测性LOS研究主要分为名义/二元预测与连续预测两类。",
+      "rhetorical_function_cn": "建立LOS预测文献的基本分类框架。",
+      "depends_on_cn": "基于对大量LOS研究的总结。",
+      "sets_up_cn": "为后续指出二元化局限和连续预测稀缺做铺垫。",
+      "evidence_pointer": "Section 2 P2 S1"
+    },
+    {
+      "order": 20,
+      "section": "Prior work",
+      "locator": "Prior work P3 S1–S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "较少研究将LOS作为数值变量预测，可能因为小范围数值预测非常困难；少数回归树、神经网络、回归和随机森林研究存在。",
+      "rhetorical_function_cn": "建立连续型LOS预测稀缺的文献缺口。",
+      "depends_on_cn": "依赖前一段的二元/连续分类。",
+      "sets_up_cn": "为本文采用连续预测和深度学习的创新性提供依据。",
+      "evidence_pointer": "Prior work P3 S1–S2"
+    },
+    {
+      "order": 21,
+      "section": "Prior work",
+      "locator": "Prior work P3 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "作者没有发现任何使用深度学习预测LOS的研究。",
+      "rhetorical_function_cn": "直接指出技术空白。",
+      "depends_on_cn": "依赖对现有数值型LOS研究的技术方法回顾。",
+      "sets_up_cn": "为模型构建选择深度学习提供缺口。",
+      "evidence_pointer": "Prior work P3 S3"
+    },
+    {
+      "order": 22,
+      "section": "Prior work",
+      "locator": "Prior work P4 S1–S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "现有研究在将患者医疗史纳入LOS预测方面存在空白，因为EMR中的历史记录以交易级存储，需要大量预处理和聚合。",
+      "rhetorical_function_cn": "引入本文最重要的理论缺口：病史数据未参与LOS预测。",
+      "depends_on_cn": "依赖对EMR数据结构和聚合困难的认识。",
+      "sets_up_cn": "为数据工程方法论奠定问题基础。",
+      "evidence_pointer": "Prior work P4 S1–S2"
+    },
+    {
+      "order": 23,
+      "section": "Prior work",
+      "locator": "Prior work P4 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "因此，患者医疗史对慢性病LOS的影响及其程度仍是开放问题。",
+      "rhetorical_function_cn": "将数据技术困难转化为可回答的研究问题。",
+      "depends_on_cn": "依赖病史未纳入的综述判断。",
+      "sets_up_cn": "为后文数据工程和变量重要性结果提供研究问题锚点。",
+      "evidence_pointer": "Prior work P4 S3"
+    },
+    {
+      "order": 24,
+      "section": "Prior work",
+      "locator": "Prior work P5 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "附录A总结揭示现有文献有五类改进空间。",
+      "rhetorical_function_cn": "用系统表格式综述强化批评的结构性。",
+      "depends_on_cn": "依赖Appendix A中大量研究的编码。",
+      "sets_up_cn": "为文章的五类主张建立对应证据。",
+      "evidence_pointer": "Prior work P5 S1 and Appendix A"
+    },
+    {
+      "order": 25,
+      "section": "Prior work",
+      "locator": "Prior work P5 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "二元或名义LOS预测只能说明住院是否超过阈值，对组织效用有限。",
+      "rhetorical_function_cn": "把操作化方式不足解释为实践后果。",
+      "depends_on_cn": "依赖附录A中大量二元研究。",
+      "sets_up_cn": "为连续数值预测贡献提供理由。",
+      "evidence_pointer": "Prior work P5 S2"
+    },
+    {
+      "order": 26,
+      "section": "Prior work",
+      "locator": "Prior work P5 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "随机切分会用未来住院数据预测早期住院，削弱模型实用性。",
+      "rhetorical_function_cn": "指出时间泄漏这一关键方法缺陷。",
+      "depends_on_cn": "依赖对既有研究切分方式的分析。",
+      "sets_up_cn": "为时间评估这一方法论贡献提供缺口。",
+      "evidence_pointer": "Prior work P5 S4"
+    },
+    {
+      "order": 27,
+      "section": "Prior work",
+      "locator": "Prior work P5 S5",
+      "move_code": "GAP",
+      "paraphrase_cn": "大多数研究没有考虑患者医疗史尤其是慢性病史，其贡献未知。",
+      "rhetorical_function_cn": "再次强调病史缺失，为理论贡献做准备。",
+      "depends_on_cn": "依赖前一段对病史空白的判断。",
+      "sets_up_cn": "为数据工程和变量重要性结果设定预期。",
+      "evidence_pointer": "Prior work P5 S5"
+    },
+    {
+      "order": 28,
+      "section": "Prior work",
+      "locator": "Prior work P6 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为解决这些问题，本研究使用时间评估和数值化LOS，针对慢性病患者预测LOS。",
+      "rhetorical_function_cn": "从文献缺口过渡到本文方法选择。",
+      "depends_on_cn": "依赖五类缺口。",
+      "sets_up_cn": "开启数据工程和模型构建章节。",
+      "evidence_pointer": "Prior work P6 S1"
+    },
+    {
+      "order": 29,
+      "section": "Prior work",
+      "locator": "Prior work P7 S1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "为展示这些贡献，作者采用数据工程方法聚合先前就诊并开发新变量。",
+      "rhetorical_function_cn": "把方法论章节与文献缺口直接连接。",
+      "depends_on_cn": "依赖前一步确定的研究方向。",
+      "sets_up_cn": "引导进入第三部分数据描述。",
+      "evidence_pointer": "Prior work P7 S1"
+    },
+    {
+      "order": 30,
+      "section": "The data",
+      "locator": "Section 3 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "医疗大数据的挑战更多来自存储、聚合和真实性保障，而不仅是数据量。",
+      "rhetorical_function_cn": "为使用大型数据仓库和预处理工作提供理论依据。",
+      "depends_on_cn": "依赖医疗大数据文献。",
+      "sets_up_cn": "为后文数据工程的复杂度和必要性做铺垫。",
+      "evidence_pointer": "Section 3 P1 S1"
+    },
+    {
+      "order": 31,
+      "section": "The data",
+      "locator": "Section 3 P2 S1–S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数据集来自包含2.5TB临床数据和约3.8亿住院记录的仓库，跨2000-2015年。",
+      "rhetorical_function_cn": "用数据规模支撑大数据分析资质。",
+      "depends_on_cn": "依赖数据来源可获得性。",
+      "sets_up_cn": "为后续筛选出COPD和肺炎子集提供来源说明。",
+      "evidence_pointer": "Section 3 P2 S1–S2"
+    },
+    {
+      "order": 32,
+      "section": "The data",
+      "locator": "Section 3 P3 S1–S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "只保留较近期住院记录，因为样本统计更符合当前人口参数，也因计算能力限制需要缩减规模。",
+      "rhetorical_function_cn": "解释数据筛选的合理性，避免读者质疑代表性。",
+      "depends_on_cn": "依赖数据仓库时间范围和计算约束。",
+      "sets_up_cn": "为最终数据集的时间跨度提供依据。",
+      "evidence_pointer": "Section 3 P3 S1–S3"
+    },
+    {
+      "order": 33,
+      "section": "The data",
+      "locator": "Section 3 P4 S1–S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "最终COPD数据集含86,338次住院、73,901名患者，平均LOS 5.15天；肺炎数据含63,185次住院、53,476名患者，平均LOS 8.31天。",
+      "rhetorical_function_cn": "给出最终数据集规模和基本统计，支持研究的外部有效性。",
+      "depends_on_cn": "依赖筛选和离群点删除。",
+      "sets_up_cn": "为表1和表2的人口统计与变量定义提供上下文。",
+      "evidence_pointer": "Section 3 P4 S1–S2"
+    },
+    {
+      "order": 34,
+      "section": "The data",
+      "locator": "Section 3 P5 S1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "因为目标是入院时预测LOS，只考虑入院时已知变量，排除出院时填写的变量和变异不足或缺失过多的变量。",
+      "rhetorical_function_cn": "确定特征约束，确保预测是现实可操作的。",
+      "depends_on_cn": "依赖研究问题设定。",
+      "sets_up_cn": "保证模型不会使用未来信息，呼应时间评估。",
+      "evidence_pointer": "Section 3 P5 S1"
+    },
+    {
+      "order": 35,
+      "section": "Methodology",
+      "locator": "Section 4 P1 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "慢性病的持久性本身增加资源使用，疾病严重性也是资源消耗的额外因素。",
+      "rhetorical_function_cn": "引入关于慢性病资源消耗的领域知识，作为数据工程的认知基础。",
+      "depends_on_cn": "依赖慢性病研究文献。",
+      "sets_up_cn": "为构造历史变量的必要性提供理论依据。",
+      "evidence_pointer": "Section 4 P1 S1"
+    },
+    {
+      "order": 36,
+      "section": "Methodology",
+      "locator": "Section 4 P1 S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "因此，纳入医院使用历史信息可带来更准确的慢性病预测模型。",
+      "rhetorical_function_cn": "把领域知识转化为可检验的预测模型命题。",
+      "depends_on_cn": "依赖慢性病严重性文献。",
+      "sets_up_cn": "为数据工程两步骤提供逻辑起点。",
+      "evidence_pointer": "Section 4 P1 S2"
+    },
+    {
+      "order": 37,
+      "section": "Methodology",
+      "locator": "Section 4 P1 S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "方法论分两部分：数据工程抽取并整合患者历史信息，模型构建开发预测工具。",
+      "rhetorical_function_cn": "给出方法论章节的结构路标。",
+      "depends_on_cn": "依赖前述历史信息命题。",
+      "sets_up_cn": "组织4.1和4.2两个子节。",
+      "evidence_pointer": "Section 4 P1 S3"
+    },
+    {
+      "order": 38,
+      "section": "Methodology / 4.1 Data engineering",
+      "locator": "Section 4.1 P1 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过提取患者既往就诊信息并与当前住院聚合，建立不同就诊间的联系，而非视为独立交易。",
+      "rhetorical_function_cn": "提出数据工程的核心设计思想。",
+      "depends_on_cn": "依赖历史信息提高预测准确性的命题。",
+      "sets_up_cn": "引出两个计算变量的定义。",
+      "evidence_pointer": "Section 4.1 P1 S1–S2"
+    },
+    {
+      "order": 39,
+      "section": "Methodology / 4.1.1 Extraction of historical data",
+      "locator": "Section 4.1.1 after Eq.1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "新变量之一为患者当前住院前所有既往住院LOS的平均值。",
+      "rhetorical_function_cn": "把“患者历史”操作化为可计算的avg_patient_los。",
+      "depends_on_cn": "依赖患者既往住院记录的时间顺序。",
+      "sets_up_cn": "为首次入院缺失问题制造伏笔。",
+      "evidence_pointer": "Section 4.1.1 Eq.1"
+    },
+    {
+      "order": 40,
+      "section": "Methodology / 4.1.1 Extraction of historical data",
+      "locator": "Section 4.1.1 after Eq.2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "另一新变量为当前入院前所有患者全部住院的平均LOS。",
+      "rhetorical_function_cn": "构造人群层面的历史基准变量。",
+      "depends_on_cn": "依赖整个数据集的出院时间排序。",
+      "sets_up_cn": "为后文与个体历史变量对比提供层次。",
+      "evidence_pointer": "Section 4.1.1 Eq.2"
+    },
+    {
+      "order": 41,
+      "section": "Methodology / 4.1.1 Extraction of historical data",
+      "locator": "Section 4.1.1 after Eq.1",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "患者个体既往平均LOS提供其整体健康状况的概览。",
+      "rhetorical_function_cn": "解释为什么该变量具有预测力。",
+      "depends_on_cn": "依赖avg_patient_los定义。",
+      "sets_up_cn": "为敏感性分析中该变量重要性最高做机制铺垫。",
+      "evidence_pointer": "Section 4.1.1 Eq.1 comment"
+    },
+    {
+      "order": 42,
+      "section": "Methodology / 4.1.1 Extraction of historical data",
+      "locator": "Section 4.1.1 after Eq.2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "总体平均既往LOS允许将任何患者与患有类似疾病的平均患者健康状况比较。",
+      "rhetorical_function_cn": "解释第二个历史变量的机制角色。",
+      "depends_on_cn": "依赖avg_total_los定义。",
+      "sets_up_cn": "为后续变量重要性表提供解释框架。",
+      "evidence_pointer": "Section 4.1.1 Eq.2 comment"
+    },
+    {
+      "order": 43,
+      "section": "Methodology / 4.1.2 Approximation of missing information",
+      "locator": "Section 4.1.2 P1 S1–S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "数据可能存在类似生存数据的删失，但响应变量不是二元的，因此不能照搬生存分析方法。",
+      "rhetorical_function_cn": "为缺失值处理选择专属方法做概念区分。",
+      "depends_on_cn": "依赖对EMR数据删失现象的定义。",
+      "sets_up_cn": "引出左删失导致的两种缺失类型。",
+      "evidence_pointer": "Section 4.1.2 P1 S1–S3"
+    },
+    {
+      "order": 44,
+      "section": "Methodology / 4.1.2 Approximation of missing information",
+      "locator": "Section 4.1.2 P3 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "使用决策树设置，以缺失变量为目标、其余变量为预测因子，估算缺失值。",
+      "rhetorical_function_cn": "提出具体的缺失值插补制品选择。",
+      "depends_on_cn": "依赖两种缺失类型的分类。",
+      "sets_up_cn": "为表3的决策树参数设置提供说明。",
+      "evidence_pointer": "Section 4.1.2 P3 S1–S2 and Table 3"
+    },
+    {
+      "order": 45,
+      "section": "Methodology / 4.1.3 Computational complexity",
+      "locator": "Section 4.1.3 P4 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "数据工程总体复杂度为O(n²)，但若放弃avg_total_los可降至O(nv)。",
+      "rhetorical_function_cn": "以形式化复杂度说明数据工程计算代价和可调性。",
+      "depends_on_cn": "依赖Eq.1和Eq.2的计算方式推导。",
+      "sets_up_cn": "为后文大数据技术和实际GPU计算资源的使用做铺垫。",
+      "evidence_pointer": "Section 4.1.3 P4 S1"
+    },
+    {
+      "order": 46,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用深度神经网络即表示学习方法，强调自动发现数据特征并映射到输出。",
+      "rhetorical_function_cn": "解释选择深度学习而非传统机器学习的基本理由。",
+      "depends_on_cn": "依赖表示学习文献。",
+      "sets_up_cn": "引出MLP架构。",
+      "evidence_pointer": "Section 4.2 P1 S1"
+    },
+    {
+      "order": 47,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P3 S1–S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "因数据含多类别高基数变量，传统回归和经典ML需要大幅降维，而深度网络可避免维度灾难。",
+      "rhetorical_function_cn": "为特定数据形态选择MLP提供技术依据。",
+      "depends_on_cn": "依赖数据集中的诊断代码等多类别变量。",
+      "sets_up_cn": "为one-hot编码和深度MLP的使用做铺垫。",
+      "evidence_pointer": "Section 4.2 P3 S1–S2"
+    },
+    {
+      "order": 48,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P4 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "因MLP只接受数值输入，类别变量被one-hot编码为m-1个二元变量，最终得到59个数值预测变量并做min-max归一化。",
+      "rhetorical_function_cn": "描述模型输入的具体预处理。",
+      "depends_on_cn": "依赖数据集变量类型。",
+      "sets_up_cn": "为最终网络输入维度做铺垫。",
+      "evidence_pointer": "Section 4.2 P4 S1"
+    },
+    {
+      "order": 49,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P5 S1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "系统化架构搜索从5、7、10个隐藏层开始，每层128个神经元。",
+      "rhetorical_function_cn": "展示网络结构选择的经验搜索过程。",
+      "depends_on_cn": "依赖预设的深度网络范围。",
+      "sets_up_cn": "引出表4的层数比较结果。",
+      "evidence_pointer": "Section 4.2 P5 S1 and Table 4"
+    },
+    {
+      "order": 50,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P6 S1–S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "5层架构优于7层和10层，5层256神经元宽度优于其他宽度。",
+      "rhetorical_function_cn": "基于测试集给出架构选择的经验证据。",
+      "depends_on_cn": "依赖架构搜索实验。",
+      "sets_up_cn": "为最终架构确定提供依据。",
+      "evidence_pointer": "Section 4.2 P6 S1–S2 and Fig. 5"
+    },
+    {
+      "order": 51,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P7 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "最终MLP包括59个输入神经元、5个隐藏层和1个输出神经元，第一层128个其余256个。",
+      "rhetorical_function_cn": "给出最终制品的准确结构。",
+      "depends_on_cn": "依赖架构搜索和超参数微调。",
+      "sets_up_cn": "为后文评价结果提供模型描述。",
+      "evidence_pointer": "Section 4.2 P7 S1–S2 and Fig. 6"
+    },
+    {
+      "order": 52,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P8 S1–S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "隐藏层使用ReLU激活函数以避免梯度消失，输出层用线性激活函数以输出实数LOS。",
+      "rhetorical_function_cn": "说明激活函数选择的技术理由。",
+      "depends_on_cn": "依赖深度学习的文献知识。",
+      "sets_up_cn": "为最终网络性能描述提供组件说明。",
+      "evidence_pointer": "Section 4.2 P8 S1–S2"
+    },
+    {
+      "order": 53,
+      "section": "Methodology / 4.2 Model building",
+      "locator": "Section 4.2 P9 S1–S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用Keras和KNIME集成环境完成数据清洗、变量转换、训练和评估。",
+      "rhetorical_function_cn": "交代实现工具，增强可复制性。",
+      "depends_on_cn": "依赖MLP设计。",
+      "sets_up_cn": "为进入评价章节过渡。",
+      "evidence_pointer": "Section 4.2 P9 S1–S2"
+    },
+    {
+      "order": 54,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P1 S1–S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用时间验证，将前3/4住院用于训练，后1/4用于评估。",
+      "rhetorical_function_cn": "实现引言中承诺的避免随机切分缺陷。",
+      "depends_on_cn": "依赖对随机切分缺陷的批评。",
+      "sets_up_cn": "为后续指标报告提供协议基础。",
+      "evidence_pointer": "Section 5 P1 S1–S2"
+    },
+    {
+      "order": 55,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "用MAE作为损失函数、ADAM作为优化器训练网络，并在训练内设20%验证子集和提前停止。",
+      "rhetorical_function_cn": "描述训练配置，体现严谨性。",
+      "depends_on_cn": "依赖MLP架构。",
+      "sets_up_cn": "为性能表提供训练条件。",
+      "evidence_pointer": "Section 5 P2 S1"
+    },
+    {
+      "order": 56,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P3 S1–S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "COPD和肺炎测试集的最终指标包括R²、MAE、MSE、RMSE、MAPE以及±2/±3天容忍准确率。",
+      "rhetorical_function_cn": "给出核心数值结果。",
+      "depends_on_cn": "依赖时间划分和训练配置。",
+      "sets_up_cn": "为与既往研究对比提供数字。",
+      "evidence_pointer": "Section 5 P3 S1–S2 and Table 6"
+    },
+    {
+      "order": 57,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P3 S3–S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "模型能解释两个数据集超过60%的LOS变异；数值预测平均只差1.239天和2.038天；容忍准确率分别为86/91和74/85。",
+      "rhetorical_function_cn": "对表6结果进行定性解读，突出高精度。",
+      "depends_on_cn": "依赖Table 6。",
+      "sets_up_cn": "为后续“相比既往研究更稳健”的论证提供前提。",
+      "evidence_pointer": "Section 5 P3 S3–S4"
+    },
+    {
+      "order": 58,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P4 S1–S2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "表7显示既往数值型LOS研究都用随机切分且多为少量医院，这在实践中会使用未来数据预测过去。",
+      "rhetorical_function_cn": "用对照表说明本研究协议更强。",
+      "depends_on_cn": "依赖Table 7。",
+      "sets_up_cn": "强化研究在方法论上的贡献。",
+      "evidence_pointer": "Section 5 P4 S1–S2 and Table 7"
+    },
+    {
+      "order": 59,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P5 S1–S2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "除一项研究外，既往研究多基于一或少数医院，样本较小；本研究数据包含超过5万次住院及更长LOS范围。",
+      "rhetorical_function_cn": "通过样本规模对比增强外部有效性主张。",
+      "depends_on_cn": "依赖Table 7和Appendix B。",
+      "sets_up_cn": "为结论中“更稳健、更可泛化”提供证据。",
+      "evidence_pointer": "Section 5 P5 S1–S2"
+    },
+    {
+      "order": 60,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P6 S1–S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于MLP不提供显式变量重要性，作者采用灵敏度分析逐个移除变量并观察MAE变化。",
+      "rhetorical_function_cn": "为从黑箱模型中提取贡献证据提供方法理由。",
+      "depends_on_cn": "依赖已训练模型。",
+      "sets_up_cn": "引出Table 8的相对重要性结果。",
+      "evidence_pointer": "Section 5 P6 S1–S2"
+    },
+    {
+      "order": 61,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P7 S1–S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "pt_avg_los在两个数据集中都是最重要变量，移除后MAE分别增加超过1.0和接近2.0个单位。",
+      "rhetorical_function_cn": "将性能优势明确归因到数据工程变量。",
+      "depends_on_cn": "依赖Table 8。",
+      "sets_up_cn": "为理论贡献和范式修正提供核心证据。",
+      "evidence_pointer": "Section 5 P7 S1–S2 and Table 8"
+    },
+    {
+      "order": 62,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P7 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "pt_avg_readmission和avg_los等另两个数据工程变量也进入两个数据集的前列。",
+      "rhetorical_function_cn": "进一步证明并非单变量偶然贡献，而是历史变量整体重要。",
+      "depends_on_cn": "依赖Table 8。",
+      "sets_up_cn": "为讨论中“医疗史应纳入模型”提供多变量证据。",
+      "evidence_pointer": "Section 5 P7 S3 and Table 8"
+    },
+    {
+      "order": 63,
+      "section": "Analytical evaluation",
+      "locator": "Section 5 P8 S1–S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "医院床位数和人口普查分区也进入重要预测变量，可能反映护理质量、生活方式和社会经济状况差异。",
+      "rhetorical_function_cn": "对非历史类变量的重要性提供解释，丰富机制叙述。",
+      "depends_on_cn": "依赖Table 8。",
+      "sets_up_cn": "为实践者识别预测因子提供清单。",
+      "evidence_pointer": "Section 5 P8 S1–S2"
+    },
+    {
+      "order": 64,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P1 S1–S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "医院财务、客户、员工和社区等多方力量推动可持续运营，美国医疗行业可通过可持续实践节省大笔资金。",
+      "rhetorical_function_cn": "在讨论开头重新连接引言中的可持续性背景。",
+      "depends_on_cn": "依赖引言和文献中的可持续论述。",
+      "sets_up_cn": "为将LOS预测定位为可持续运营手段做铺垫。",
+      "evidence_pointer": "Discussion P1 S1–S3"
+    },
+    {
+      "order": 65,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P2 S1–S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文的数据分析方法不仅解决了先前研究忽视既往住院、缺少时间评估、未预测连续LOS的不足，还获得高精度。",
+      "rhetorical_function_cn": "直接对照引言中五个缺口，声明贡献。",
+      "depends_on_cn": "依赖第5节结果。",
+      "sets_up_cn": "为区分方法和理论贡献做框架。",
+      "evidence_pointer": "Discussion P2 S1–S2"
+    },
+    {
+      "order": 66,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P2 S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "数据工程方法提取患者历史并追加到EMR中，贡献最大。",
+      "rhetorical_function_cn": "把性能提升归功于数据准备而非模型复杂度。",
+      "depends_on_cn": "依赖Table 8。",
+      "sets_up_cn": "为理论维度贡献做证据支撑。",
+      "evidence_pointer": "Discussion P2 S3"
+    },
+    {
+      "order": 67,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P3 S1–S3",
+      "move_code": "THEORY_RETURN",
+      "paraphrase_cn": "理论贡献是引入LOS预测新范式：患者既往住院重要；方法贡献是展示时间评估和数据工程的重要性。",
+      "rhetorical_function_cn": "将结果上升为一般知识主张，完成理论返回。",
+      "depends_on_cn": "依赖变量重要性结果。",
+      "sets_up_cn": "为后续实践含义和未来研究提供结构。",
+      "evidence_pointer": "Discussion P3 S1–S3"
+    },
+    {
+      "order": 68,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P3 S4–S5",
+      "move_code": "DESIGN_KNOWLEDGE",
+      "paraphrase_cn": "应将医疗数据视为相互关联的记录而非独立交易；历史变量成为最重要预测因子说明现行只含当前入院变量的范式需要修正。",
+      "rhetorical_function_cn": "把数据工程经验提炼为可复用的设计知识。",
+      "depends_on_cn": "依赖敏感性分析结果。",
+      "sets_up_cn": "为推进跨机构数据共享提供论证。",
+      "evidence_pointer": "Discussion P3 S4–S5"
+    },
+    {
+      "order": 69,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P4 S2–S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "医院需要投资分析基础设施和数据共享，以利用历史记录改进预测。",
+      "rhetorical_function_cn": "把理论主张转化为对实践者和医院系统的行动建议。",
+      "depends_on_cn": "依赖理论贡献部分。",
+      "sets_up_cn": "引出对管理者和从业者的四点启示。",
+      "evidence_pointer": "Discussion P4 S2–S3"
+    },
+    {
+      "order": 70,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P5 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "作者警告不能假定其他疾病也能获得类似精度，因为疾病复杂性、合并症、治疗和外部因素会阻碍推广。",
+      "rhetorical_function_cn": "界定贡献适用范围，防止读者过度外推。",
+      "depends_on_cn": "依赖两个疾病数据集的有限证据。",
+      "sets_up_cn": "为未来研究在其他慢性病中验证留出空间。",
+      "evidence_pointer": "Discussion P5 S1"
+    },
+    {
+      "order": 71,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P5 S2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来可研究提取患者历史信息的最优时间跨度。",
+      "rhetorical_function_cn": "提出具体的未来研究方向。",
+      "depends_on_cn": "依赖数据工程历史变量的时间边界。",
+      "sets_up_cn": "为后续研究提供可操作问题。",
+      "evidence_pointer": "Discussion P5 S2"
+    },
+    {
+      "order": 72,
+      "section": "Discussion and conclusion",
+      "locator": "Discussion P6 S1–S2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "本研究的局限是数据集变量比某些先前研究少，且可比较的数值LOS预测研究不足。",
+      "rhetorical_function_cn": "承认数据变量数量和对比基线限制，保护贡献不过度承诺。",
+      "depends_on_cn": "依赖与既有研究的比较。",
+      "sets_up_cn": "在结尾调节读者预期，同时强化研究方法的稳健性。",
+      "evidence_pointer": "Discussion P6 S1–S2"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先建立制度与可持续性背景，然后用附录A的系统文献表把先前研究按LOS操作化、模型、评估协议和病史使用情况编码，再归纳为五条具体但互不相同的缺口；每条缺口都与本文的一种设计选择一一对应，使缺口看起来不可绕开。",
+    "signposting_cn": "在引言末尾给出完整路线图；在方法论开头说明分两部分；在每节末尾用“now we turn to...”之类过渡；在贡献部分用“first, second, third, fourth”标记；在讨论部分再次按照理论/方法划分贡献。",
+    "transition_logic_cn": "过渡多采用“问题已确立→下一步需要什么”的逻辑：文献缺口后接“为展示这些贡献，我们采用数据工程”；数据工程完成后接“现在转向模型构建”；模型构建后接“现在转向分析评价”；评价后接“为了归因性能，我们进行敏感性分析”。",
+    "claim_evidence_rhythm_cn": "每个主要主张后面紧随表格或结果：架构选择主张后面有Table 4/Fig. 5；整体性能主张后面有Table 6；方法优势主张后面有Table 7；历史变量贡献主张后面有Table 8。作者先定性陈述，再引用表/图作为证据，避免了黑箱陈述。",
+    "benchmark_narrative_cn": "没有设置标准benchmark，而是把“与既往数值型LOS研究对比”写成基准叙事：通过Table 7列出现有最优数值预测研究，并指出它们采用随机切分、单/少中心、样本小；然后强调本研究在更严谨协议和大样本下仍达到指标，从而把精度改进转化为方法论优势。",
+    "theory_return_cn": "在讨论部分，作者不再强调深度学习算法的新颖性，而是回到“患者既往入院历史对LOS预测重要”这一理论命题；用敏感性分析结果作为证据，提出应修正只用当前入院变量的范式，并使用“理论维度”和“方法论维度”两个标签稳定贡献类型。",
+    "contribution_positioning_cn": "贡献定位方式是以“四个贡献”开路，其中三个标记为方法论，一个标记为理论，然后在讨论中重复同样的区分。理论贡献刻意与可持续性连接：不是单纯算法改进，而是发现预测变量和范式缺陷，从而提升到IS/健康分析层面。",
+    "novelty_protection_cn": "作者通过三个手段防止贡献退化为一次性性能结果：一是强调数据工程而非模型复杂度是性能来源；二是用敏感性分析把性能归因到特定可解释变量；三是比较随机切分与时间切分的方法问题，使高精度不显得来自数据泄漏。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "以制度/现实问题切入，建立目标结局（LOS）的重要性。",
+        "research_job_cn": "识别一个受制度激励且可测量的运营指标，并收集其文献背景。",
+        "required_evidence_cn": "证明该指标影响组织绩效或可持续性，如补偿政策、资源利用、床位数据。",
+        "transition_to_next_cn": "由此指标引出预测问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "系统回顾现有预测文献，并以表格编码研究缺口。",
+        "research_job_cn": "对现有研究按结局操作化、模型、数据划分、样本、变量类型进行编码。",
+        "required_evidence_cn": "能够从编码表归纳出若干具体、可操作化的缺口，而不是笼统说研究不足。",
+        "transition_to_next_cn": "用缺口逐一对应本文设计选择。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述数据来源、规模、筛选逻辑和特征约束。",
+        "research_job_cn": "获取足够规模的真实数据集，明确目标人群和入院时已知特征。",
+        "required_evidence_cn": "数据量、多中心/代表性、变量定义表、排除规则。",
+        "transition_to_next_cn": "指出当前数据缺少某类信息，自然引出数据工程。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "把领域知识转化为具体数据工程特征，并处理缺失。",
+        "research_job_cn": "设计可计算的聚合变量，并用合适方法填补缺失。",
+        "required_evidence_cn": "变量计算公式、缺失处理机制、计算复杂度或可行性。",
+        "transition_to_next_cn": "需要模型来利用这些新特征。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "选择模型架构，给出技术理由并进行超参数搜索。",
+        "research_job_cn": "根据数据形态选择合适模型，在验证集/测试集上比较若干配置。",
+        "required_evidence_cn": "架构比较表/图，以及最终参数。",
+        "transition_to_next_cn": "用严格评价协议评估最终模型。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计与现实预测条件一致的评估协议，并报告多种指标。",
+        "research_job_cn": "避免数据泄漏，用时间划分或领域合理划分。",
+        "required_evidence_cn": "训练/测试划分统计、多种性能指标、与先前工作的对比表。",
+        "transition_to_next_cn": "指标好只是整体，还需归因。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用敏感性分析或消融实验把性能归因到具体设计成分。",
+        "research_job_cn": "删除/保留核心设计变量，测量性能变化。",
+        "required_evidence_cn": "变量重要性排序、删除变量的性能变化。",
+        "transition_to_next_cn": "用归因证据支撑理论贡献。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "回到开头缺口和理论背景，声明贡献并在最后限定边界。",
+        "research_job_cn": "说明结果何时成立、何时不成立，并提出未来方向。",
+        "required_evidence_cn": "缺口逐一回应、边界条件、未来问题。",
+        "transition_to_next_cn": "结束全文。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用附录A式的系统综述表把多维度文献缺口显性化",
+      "每一条引言贡献都在后文有对应的小节/表/图",
+      "以时间顺序评估作为方法贡献而非只是评价细节",
+      "用留一变量敏感性分析将黑箱模型性能归因到可解释特征",
+      "在讨论中把性能结果重新包装为范式修正而非单纯精度提升",
+      "在最终段落用边界条件主动限制推广，增强可信度"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "2.5TB临床数据仓库和约3.8亿住院记录",
+      "Cerner公司和OSU健康系统创新中心的数据获取支持",
+      "覆盖2000–2015、63百万患者的大规模历史数据",
+      "四块NVIDIA TITAN GPU和64GB内存的并行计算资源",
+      "需要长期积累的EMR历史记录和跨机构数据共享才能构造患者级历史变量"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只是声称“数据工程重要”，必须像本文一样用敏感性分析或消融证明变量贡献",
+      "不要只是使用“时间评估”标签，必须真正按时间顺序切分且排除入院后不可得变量",
+      "不要把与不同疾病、不同数据来源的研究做数值比较后夸大可比性",
+      "不要在没有删除历史变量的对照实验时就说历史变量是主要驱动因素",
+      "不要把预测精度直接等同于可持续性、收入或患者满意度改善，除非测量相应结果"
+    ],
+    "single_best_description_of_the_routine_cn": "先用严格综述制造一组具体缺口，再构造一个由领域知识驱动的数据工程特征与深度模型组合，用时间评估证明整体性能，再用敏感性分析把性能归因到特定设计成分，最后把该成分上升为理论范式修正。"
+  },
+  "confidence": 0.75,
+  "limitations_cn": "分析基于原文完整文本，但PDF中的图2、图3、图6以位图/链接形式存在，无法直接读取图像内容；附录A的表格在OCR中可能有轻微乱码；没有页码，只能以段落和表格位置作为证据；无法确认补充材料内容。",
+  "usage": {
+    "prompt_tokens": 31230,
+    "completion_tokens": 25026,
+    "total_tokens": 56256,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 27902
+  }
+}

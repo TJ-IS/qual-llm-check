@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105010338484"
+title: "Faster Configuration Performance Bug Testing with Neural Dual-Level Prioritization"
+authors: "Ma Y.; Chen T.; Li K."
+year: "2025"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse55347.2025.00201"
+---
+# Scopus title-abstract-keyword metadata
+Title: Faster Configuration Performance Bug Testing with Neural Dual-Level Prioritization
+Abstract: As software systems become more complex and configurable, more performance problems tend to arise from the configuration designs. This has caused some configuration options to unexpectedly degrade performance which deviates from their original expectations designed by the developers. Such discrepancies, namely configuration performance bugs (CPBugs), are devastating and can be deeply hidden in the source code. Yet, efficiently testing CPBugs is difficult, not only due to the test oracle is hard to set, but also because the configuration measurement is expensive and there are simply too many possible configurations to test. As such, existing testing tools suffer from lengthy runtime or have been ineffective in detecting CPBugs when the budget is limited, compounded by inaccurate test oracle. In this paper, we seek to achieve significantly faster CPBug testing by neurally prioritizing the testing at both the configuration option and value range levels with automated oracle estimation. Our proposed tool, dubbed NDP, is a general framework that works with different heuristic generators. The idea is to leverage two neural language models: one to estimate the CPBug types that serve as the oracle while, more vitally, the other to infer the probabilities of an option being CPBug-related, based on which the options and the value ranges to be searched can be prioritized. Experiments on several widely-used systems of different versions reveal that NDP can, in general, better predict CPBug type in 87% cases and find more CPBugs with up to 88.88 × testing efficiency speedup over the state-of-the-art tools.  © 2025 IEEE.
+Author keywords: configuration testing; Performance bug testing; SBSE; software debugging; testing prioritization
+Index keywords: Computer debugging; Software testing; Configuration options; Configuration testing; Performance bug testing; Performance bugs; Prioritization; SBSE; Software debugging; Software-systems; Test oracles; Testing prioritization; Program debugging
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2025
+EID: 2-s2.0-105010338484
+DOI: 10.1109/icse55347.2025.00201
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

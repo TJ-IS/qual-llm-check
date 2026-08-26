@@ -1,0 +1,4 @@
+interface:
+  display_name: "AIS Full-Text Screening"
+  short_description: "Auditable AIS screening and retrieval evaluation"
+  default_prompt: "Use $ais-fulltext-screening to design or audit systematic retrieval, full-text screening, corpus integrity, and set adoption, loading the requirement registry and confirming every expensive run first."

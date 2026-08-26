@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85170152987"
+title: "Applied Statistics for the Social and Health Sciences: Second Edition"
+authors: "Gordon R.A."
+year: "2023"
+journal: "Applied Statistics for the Social and Health Sciences: Second Edition"
+doi: "10.4324/9781003314530"
+---
+# Scopus title-abstract-keyword metadata
+Title: Applied Statistics for the Social and Health Sciences: Second Edition
+Abstract: Covering basic univariate and bivariate statistics and regression models for nominal, ordinal, and interval outcomes, Applied Statistics for the Social and Health Sciences provides graduate students in the social and health sciences with fundamental skills to estimate, interpret, and publish quantitative research using contemporary standards. Reflecting the growing importance of “Big Data” in the social and health sciences, this thoroughly revised and streamlined new edition covers best practice in the use of statistics in social and health sciences, draws upon new literatures and empirical examples, and highlights the importance of statistical programming, including coding, reproducibility, transparency, and open science. Key features of the book include: • interweaving the teaching of statistical concepts with examples from publicly available social and health science data and literature excerpts; • thoroughly integrating the teaching of statistical theory with the teaching of data access, processing, and analysis in Stata; • recognizing debates and critiques of the origins and uses of quantitative methods. © 2024 Rachel A. Gordon.
+Author keywords: 
+Index keywords: 
+Document type: Book
+Conference: 
+Source title: Applied Statistics for the Social and Health Sciences: Second Edition
+Year: 2023
+EID: 2-s2.0-85170152987
+DOI: 10.4324/9781003314530
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

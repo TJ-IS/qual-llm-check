@@ -1,0 +1,1675 @@
+# Smart Markets for Real-Time Allocation of Multiproduct Resources: The Case of Shared Electric Vehicles
+
+- 作者：Micha Kahlen; Karsten Schroer; Wolfgang Ketter; Alok Gupta
+- 年份 / 期刊：2024 / Information Systems Research
+- DOI：10.1287/isre.2022.0204
+- 源文件：28355_2024_smart-markets-for-real-time-allocation-of-multiproduct-resources-the-case-of-shared-electric-veh.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：如何为共享电动汽车车队设计一个决策支持系统，使其能够在租赁市场和电力平衡市场之间实时分配电池资源，从而最大化利用率和盈利能力？
+
+- 制品与设计：提出FleetPower，一个五阶段DSS：市场与运营数据收集（机器学习预测需求、价格、可用性）、资源规划（按预期利润率排序分配电量）、投标（向平衡市场提交价格和数量，剩余电量留给租赁）、资源重规划（实时处理预测误差并优先满足平衡市场以避免高额罚款）、执行。系统以kWh为统一单位，将mobility、upregulation、downregulation三种服务视为对同一电池资源的不同分配。
+
+- 客观结果：基于斯图加特、阿姆斯特丹、圣地亚哥三个城市14个月真实数据仿真，利用率从仅租赁时的3%–5%提升到7%–35%；毛利率提升1.8%（阿姆斯特丹）、3%（圣地亚哥）和4.4%（斯图加特，年增约86,000美元）；租赁损失占比仅0%–0.07%，且几乎不触发平衡市场惩罚。
+
+- 核心贡献：提出DSS制品FleetPower及其五阶段蓝图，证明通过智能市场接口和机器学习驱动的实时决策，可以将原本单一用途的SEV资源在移动出行和电力平衡之间进行多产品分配，从而提升利用率和利润；同时为其他多产品资源分配场景提供可推广的设计知识。
+
+- 整篇论证链：作者首先指出交通电动化和共享化使SEV车队成为能够同时提供移动出行和电力平衡服务的多产品资源，但现有文献要么聚焦静态多产品生产调度，要么针对单一市场的智能代理，鲜有从资源所有者视角处理多产品、多市场机制并行分配的问题。基于多产品资源、市场资源配置和智能市场三个文献流，作者开发了FleetPower DSS：用机器学习模型预测分层需求、价格和电池可用性；用预期利润的“啄食顺序”分配电池容量；向电力平衡市场提交价格-数量投标，未中标资源自动留在租赁市场；实时阶段根据实际可用性重规划，并通过高额罚金确保优先履行平衡市场承诺。利用三个城市14个月真实租赁和电力平衡价格数据进行离散事件仿真，FleetPower相较“仅租赁”策略显著提高利用率和净利润，且VPP收益超过因拒绝租赁而损失的收入；其中下行调节几乎贡献了全部额外利润，而上行调节（V2G）因市场价格和电池损耗很少盈利。文章进一步通过二维框架（产品多样性×机制多样性）界定一般适用条件，并列举零工经济、自动驾驶出租车、热电联产等应用，最终以设计蓝图和边界条件收尾，回应引言缺口的闭环。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章按照Hevner等(2004)的设计科学框架，明确提出贡献IS制品（FleetPower DSS），通过基于真实数据的离散事件仿真评价其有效性与经济价值，并在讨论中提炼出可复用的设计蓝图和一般化适用条件，符合“构建-评价-设计知识”的设计科学范式。
+
+- 主导写作弧线判定：全文从问题情景和现实需求出发（实时多产品分配复杂性），明确设计要求，然后构建DSS制品（五阶段框架），再通过仿真进行系统评价，最后在讨论中提炼设计原则和一般化蓝图，形成“要求—构建—评价—设计原则”的完整弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：研究依次完成：问题框架与文献缺口论证（确立研究问题和贡献定位）→ 领域背景与数据准备（提供现实基础和仿真输入）→ FleetPower DSS设计（构建制品）→ 仿真评价（检验性能和经济价值）→ 稳健性分析与一般化讨论（建立边界条件和可复用设计知识）。每一阶段都为下一阶段提供输入：文献缺口决定需要设计DSS；领域数据为设计提供约束；DSS设计需要仿真来验证；仿真结果需要稳健性分析来保护贡献；最后通过一般化讨论放大贡献。
+
+### studies_or_phases
+
+#### 1. 问题框架与文献缺口分析
+
+- order：1
+
+- name_cn：问题框架与文献缺口分析
+
+- question_cn：SEV车队在租赁和电力市场间进行实时分配需要何种设计知识？现有研究缺少什么？
+
+- inputs_and_setting_cn：多产品资源分配、市场资源配置、智能市场三个文献流的概念与分析结论。
+
+- designed_or_compared_object_cn：通过文献综述构建研究问题框架，对比传统多产品调度模型、市场分配机制、智能市场研究的边界。
+
+- baseline_control_or_counterfactual_cn：无，属于概念性论证。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：叙述性文献综述和概念推理、缺口识别。
+
+- main_result_cn：论证了现有研究缺乏从资源所有者角度、多产品多机制跨市场实时分配的研究，提出开发DSS的必要性。
+
+- argumentative_role_cn：确立研究问题和贡献锚点，为后续DSS设计提供合法性。
+
+- remaining_uncertainty_cn：尚未解决如何具体设计这种DSS。
+
+- link_to_next_phase_cn：缺口引出需要理解SEV和电力市场的具体领域机制及数据，以便设计可落地的系统。
+
+##### evidence_pointers
+
+1. Introduction, paragraphs 3–6
+
+2. Section 2.1 last paragraph
+
+3. Section 2.3 final paragraph
+
+#### 2. 领域背景与数据准备
+
+- order：2
+
+- name_cn：领域背景与数据准备
+
+- question_cn：SEV车队在真实租赁市场和电力平衡市场中的运作机制是什么？有哪些可用的数据支撑建模？
+
+- inputs_and_setting_cn：Car2Go在斯图加特、阿姆斯特丹、圣地亚哥的491/343/367辆SEV，14个月（2014年5月–2015年6月）每15分钟采样数据；电力平衡市场数据来自regelleistung.net、Tennet、CAISO。
+
+- designed_or_compared_object_cn：描述性分析：租赁市场的时空需求分布、充电站位置、车辆SoC、租赁交易推断；电力市场规则和价格数据。
+
+- baseline_control_or_counterfactual_cn：无。
+
+##### objective_metrics
+
+1. 租赁频率分布
+
+2. 充电站数量
+
+3. 电力平衡价格波动（标准差）
+
+- analysis_method_cn：数据收集、清洗、交易推断、描述统计、空间可视化。
+
+- main_result_cn：形成了可用于仿真驱动的真实输入数据；发现三个城市在能源结构、充电基础设施和电力价格上具有显著异质性，为跨市场比较提供了条件。
+
+- argumentative_role_cn：证明案例现实性，同时为DSS的预测模型和仿真提供真实数据和环境参数。
+
+- remaining_uncertainty_cn：数据中存在推断误差（如租赁距离、车辆维护），且未考虑电力市场最低投标量限制。
+
+- link_to_next_phase_cn：这些数据和领域机制信息直接用于设计DSS中的预测模型、成本结构和仿真环境。
+
+##### evidence_pointers
+
+1. Section 3.1–3.4
+
+2. Table 1
+
+3. Figure 1
+
+#### 3. FleetPower DSS设计
+
+- order：3
+
+- name_cn：FleetPower DSS设计
+
+- question_cn：如何构建一个自动化DSS来实时管理SEV车队在三个市场间的资源分配？
+
+- inputs_and_setting_cn：多产品资源分配知识、智能市场概念、机器学习算法（线性回归、SVM、回归树、随机森林）、市场机制（租赁固定价格、平衡市场pay-as-bid拍卖）、来自上一阶段的数据。
+
+- designed_or_compared_object_cn：FleetPower的五阶段框架：Phase 1数据收集、Phase 2资源规划、Phase 3投标、Phase 4重规划、Phase 5执行；产品集合S={mobility, up_reg, down_reg}。
+
+- baseline_control_or_counterfactual_cn：无（设计阶段）。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：系统设计、数学模型（成本方程、投标价格公式）、机器学习模型选择与参数化（基于两月滚动训练窗口）。
+
+- main_result_cn：完成DSS完整架构和算法，包括基于特征(w,h,o,g)的需求和可用性预测模型、基于机会成本加权λ的价格公式、按预期利润排序的“pecking order”分配、高惩罚阈值下的实时重规划。
+
+- argumentative_role_cn：核心制品构建，将前面分析的知识转化为可操作的决策系统。
+
+- remaining_uncertainty_cn：设计是否能在仿真和现实中产生预期收益尚待验证。
+
+- link_to_next_phase_cn：需要进入评价阶段，用真实数据仿真检验DSS的实际表现。
+
+##### evidence_pointers
+
+1. Section 4, Figure 2
+
+2. Table 2
+
+3. Equations (1)–(13)
+
+4. Figure 3
+
+5. Figure 4
+
+#### 4. 仿真评价
+
+- order：4
+
+- name_cn：仿真评价
+
+- question_cn：FleetPower较“仅租赁”策略和完美预见在利用率、利润、决策准确性方面表现如何？
+
+- inputs_and_setting_cn：来自三个城市的真实租赁交易和电力平衡价格数据；离散事件仿真环境；FleetPower的所有算法。
+
+- designed_or_compared_object_cn：比较对象包括：FleetPower决策 vs. 完美预见最优决策（混淆矩阵）；FleetPower vs. 朴素只租赁策略（利润矩阵）。
+
+- baseline_control_or_counterfactual_cn：完美预见作为理论上界；朴素仅租赁策略作为基线；高罚金作为重规划的约束。
+
+##### objective_metrics
+
+1. 决策准确性（混淆矩阵百分比）
+
+2. 利用率（车辆有效使用时间比例）
+
+3. 总利润和分市场利润
+
+4. 租金损失
+
+5. VPP收益
+
+6. 惩罚成本
+
+- analysis_method_cn：离散事件仿真、混淆矩阵、利润瀑布图、分城市对比。
+
+- main_result_cn：租赁需求预测准确率99%–100%（视地点）；VPP预测准确率17%–56%；利用率相对提升233%–700%；毛利率提升1.8%–4.4%；VPP收益超过失去的租金（斯图加特净增87,000美元）；V2G几乎从不盈利，下行调节贡献93%额外利润；罚款未触发。
+
+- argumentative_role_cn：提供主要实证证据，展示FleetPower的经济价值和技术性能，支撑文章的核心贡献。
+
+- remaining_uncertainty_cn：结果是否受参数变化或未来市场条件影响？是否存在未纳入真实世界的执行摩擦？
+
+- link_to_next_phase_cn：需要稳健性分析和讨论一般化，以建立结果的可靠性并提升贡献层次。
+
+##### evidence_pointers
+
+1. Section 5
+
+2. Table 3
+
+3. Table 4
+
+4. Figure 5
+
+5. Figure 6
+
+#### 5. 稳健性分析与一般化讨论
+
+- order：5
+
+- name_cn：稳健性分析与一般化讨论
+
+- question_cn：结果在更多可再生能源、EV竞争、基础设施变化等情景下是否稳健？框架能否推广到其他多产品分配场景？
+
+- inputs_and_setting_cn：在线附录B.1–B.4中的情景分析（正文中总结）；概念上的二维框架（产品多样性×机制多样性）；其他应用领域案例。
+
+- designed_or_compared_object_cn：改变可再生能源渗透率、EV数量、充电站可用性、非经常事件等；将DSS推广到零工经济、自动驾驶出租车、热电联产等概念场景。
+
+- baseline_control_or_counterfactual_cn：基本情景与替代情景对比（如更高可再生能源价格波动、竞争性EV车队扩张）。
+
+##### objective_metrics
+
+1. 利润变化
+
+2. 一般化适用性判断
+
+- analysis_method_cn：情景分析（在线附录）、概念推理、二维分类框架。
+
+- main_result_cn：可再生能源增加带来的价格波动会显著改善商业案例；EV竞争的影响不显著；框架尤其适用于高产品多样性和高机制多样性环境；提出了三个应用实例。
+
+- argumentative_role_cn：建立外部有效性和边界条件，提炼可复用设计知识，保护贡献不被视为一次性结果。
+
+- remaining_uncertainty_cn：真实现场部署效果未知；其他应用领域尚未实证验证。
+
+- link_to_next_phase_cn：讨论中的未来研究方向（现场实施、其他领域验证、机制设计）为后续研究铺路。
+
+##### evidence_pointers
+
+1. Section 6
+
+2. Figure 7
+
+3. Online Appendix B.2–B.4（文中总结）
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. RQ_OR_OBJECTIVE
+
+4. DESIGN_FEATURE
+
+5. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRACTICAL_STAKES
+
+4. LIMITATION
+
+5. REQUIREMENT
+
+6. THEORY_INTRO
+
+7. GAP
+
+8. WHY_GAP_MATTERS
+
+9. CONTRIBUTION
+
+10. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. MECHANISM
+
+4. GAP
+
+5. WHY_GAP_MATTERS
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. METHOD_JUSTIFICATION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. GENERALIZATION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 多产品资源分配文献（运营管理/OR）
+
+2. 市场资源配置与拍卖机制文献
+
+3. 智能市场与电子市场文献
+
+4. 共享电动汽车与虚拟电厂（VPP）领域知识
+
+5. 机器学习预测方法（回归树、随机森林、SVM）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：文章确实使用了多产品资源、市场机制、智能市场等概念来框定问题和设定系统边界，具有理论启发性；但DSS的关键设计（五阶段流程、机会成本加权λ、高额罚金重规划、基于机器学习的预测）主要来自领域需求分析和工程启发，并非从某个单一理论命题演绎而来，因此属于部分耦合。
+
+- 理论到设计翻译链：智能市场概念（数字化、实时、可自动化的市场）→ 需要自动化DSS与多个市场接口 → 设计五阶段框架，实现数据收集、投标、执行的闭环；多产品资源概念（资源只能同时生产一种产品）→ 需要统一不同产品的资源量纲并做出取舍 → 设计以kWh为单位、将mobility/up_reg/down_reg视为同一电池资源的分配问题；市场机制和价格信号 → 资源应流向预期利润最高的用途 → 设计基于预期单位利润的“pecking order”分配和动态投标价格；拍卖市场的pay-as-bid机制与机会成本 → 报价需包含真实成本+预期租金损失 → 设计含λ权重的成本公式；实时市场不确定性 → 预测误差会导致履约风险 → 设计Phase 4重规划和超高罚金约束。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：多产品资源只能同时生产一种产品，需要在不同产品间分配稀缺资源
+
+- mechanism_cn：资源稀缺性导致用途间的竞争，需比较不同用途的边际价值
+
+- design_requirement_cn：需要统一度量不同服务的资源消耗并支持实时切换
+
+- artifact_choice_cn：以kWh作为三种服务的统一单位；将SEV电池定义为可分配给mobility、up_reg、down_reg的单一资源
+
+- evaluated_contrast_cn：FleetPower使用三种服务动态分配 vs. 仅租赁一种服务
+
+- objective_result_cn：利用率从3%–5%提升到7%–35%
+
+##### evidence_pointers
+
+1. Section 4 opening
+
+2. Table 2 units
+
+3. Section 5 utilization results
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：市场机制通过价格信号实现高效资源配置，拍卖和电子市场可自动化分配
+
+- mechanism_cn：市场价格反映需求紧急性和价值，资源流向愿意支付最高的买家
+
+- design_requirement_cn：DSS需要连接多个异质市场，并根据市场吸引力动态分配
+
+- artifact_choice_cn：同时面向租赁市场（固定价格）、上行调节和下行调节市场（pay-as-bid拍卖）；Phase 2按预期利润排序分配区间
+
+- evaluated_contrast_cn：与完美预见对比决策错误率；与仅租赁基线对比增量利润
+
+- objective_result_cn：毛利率提升1.8%–4.4%；VPP收益大于租金损失
+
+##### evidence_pointers
+
+1. Section 2.2
+
+2. Section 4.2
+
+3. Table 3
+
+4. Table 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：智能市场是数字化、实时、可自动化的交易环境，允许软件代理参与
+
+- mechanism_cn：数字化和数据流允许程序实时处理和提交订单
+
+- design_requirement_cn：需要自动化从数据采集到执行的全流程以支撑高频决策
+
+- artifact_choice_cn：五阶段框架（数据收集、资源规划、投标、重规划、执行）全部由软件执行；未中标资源自动留在租赁市场
+
+- evaluated_contrast_cn：仿真环境验证自动化流程能按设计运行
+
+- objective_result_cn：系统在三个城市均有效运行，产生正利润
+
+##### evidence_pointers
+
+1. Section 2.3
+
+2. Section 4.1–4.5
+
+3. Figure 2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：EV电池可以作为虚拟电厂快速提供上行/下行调节服务，适合30秒响应
+
+- mechanism_cn：电池的快速充放电能力使其适用于秒级电力平衡市场，但充放电损耗影响收益
+
+- design_requirement_cn：需要分别计算上行和下行的成本、收益和机会成本
+
+- artifact_choice_cn：将up_reg和down_reg作为独立产品分别建模；下行调节收益采用“支付电价减去成本”的报价逻辑；上行调节报价包含电池折旧和机会成本
+
+- evaluated_contrast_cn：比较下行调节与上行调节（V2G）的利润贡献
+
+- objective_result_cn：93%额外利润来自下行调节；V2G因价格低和电池损耗很少被市场接受
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Section 4.1 Equations (2),(3),(10),(12)
+
+3. Section 5 Figure 5
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：提前一周承诺平衡市场服务存在需求预测不确定性，高违约金促使优先履约
+
+- mechanism_cn：预测误差导致资源短缺，而平衡市场有高额罚金和可靠性门槛（95%交付率）
+
+- design_requirement_cn：需要实时重规划机制和决策偏好（优先平衡市场）
+
+- artifact_choice_cn：Phase 4重规划：检测到不足时优先满足up/down承诺；设定F_up=F_down=9999、F_mobility=0；允许顾客更换至250米内车辆（正态分布）
+
+- evaluated_contrast_cn：测量实际违约率（0%–0.07%）和是否触发惩罚
+
+- objective_result_cn：所有城市至少交付95%承诺量，罚款未触发
+
+##### evidence_pointers
+
+1. Section 4.4
+
+2. Section 5 Table 3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 基于真实数据的离散事件仿真
+
+2. 与完美预见最优决策的混淆矩阵对比
+
+3. 与朴素仅租赁策略的利润矩阵对比
+
+4. 分城市利润分解和利用率分析
+
+5. 在线附录中的情景分析（可再生能源、EV竞争、充电设施扩展、非经常事件）
+
+- why_these_evaluations_cn：DSS的目标是改善实时分配决策，但无法直接在现实中部署，因此采用基于真实数据的高保真仿真；完美预见对比用于量化预测误差；仅租赁策略作为有用基线可分离纯价值验证；分城市对比用于检测外部稳健性；情景分析用于探索未来边界条件。
+
+- benchmark_and_contrast_chain_cn：首先使用完美预见作为理论最优上界，通过混淆矩阵将模型决策与完美预见对照，识别系统倾向（牺牲VPP准确率换取租赁高准确率）；然后用仅租赁策略作为商业基线，用利润矩阵显示增量收益和损失；最后通过在线附录的情景分析测试外部条件变化（可再生能源更多、EV竞争加剧等），形成从准确性→利润→稳健性的递进。
+
+### claim_evidence_ledger
+
+#### 1. 机器学习模型能高准确率预测租赁需求（99%–100%）
+
+- claim_cn：机器学习模型能高准确率预测租赁需求（99%–100%）
+
+- evidence_cn：混淆矩阵中“Rented”行的高准确率，以及Phase 1的RMSE指标（在线附录）
+
+- status_cn：充分支持
+
+#### 2. FleetPower能有效提升利润
+
+- claim_cn：FleetPower能有效提升利润
+
+- evidence_cn：三个城市的利润矩阵显示VPP收益超过租金损失，毛利率提升1.8%–4.4%
+
+- status_cn：充分支持（在仿真环境中）
+
+#### 3. 机会成本定价机制使DSS在不确定性下作出合理取舍
+
+- claim_cn：机会成本定价机制使DSS在不确定性下作出合理取舍
+
+- evidence_cn：混淆矩阵显示只有0%–0.07%租赁损失；VPP准确率较低但不影响利润，说明系统有意偏向高价值市场
+
+- status_cn：间接支持，机制本身未被直接因果验证
+
+#### 4. 框架适用于高产品多样性和高机制多样性环境
+
+- claim_cn：框架适用于高产品多样性和高机制多样性环境
+
+- evidence_cn：二维框架推理和三个应用例子，但未对每个例子进行实证
+
+- status_cn：部分支持（概念性论证）
+
+#### 5. 可再生能源增加会增强商业案例
+
+- claim_cn：可再生能源增加会增强商业案例
+
+- evidence_cn：在线附录B.3的情景分析（文中总结）
+
+- status_cn：充分支持（基于仿真实验）
+
+- internal_validity_strategy_cn：使用真实数据的离散事件仿真，参数（充电效率、电池容量、罚金）基于领域事实；设置高额罚金使重规划决策趋于清晰；对顾客换车距离做敏感性分析（100/250/500m）以确保结果稳健；在混淆矩阵中区分预测错误的方向性。
+
+- external_validity_strategy_cn：选择三个异质城市（不同能源结构、充电基础设施、价格波动）来展示跨场景有效性；在线附录中测试可再生能源比例上升、EV竞争加剧等情景；在讨论中提出产品多样性×机制多样性二维框架，用于界定框架的适用边界和推广条件。
+
+- what_is_not_actually_tested_cn：未在真实SEV车队中部署DSS；未考虑平衡市场中的最低投标量限制和聚合商作用；未模拟其他市场参与者对DSS进入的策略性反应；未检验将投标提前期缩短到一周以下时的实际效果；对非SEV应用场景（零工经济、CHP等）没有进行实证验证。
+
+## 贡献闭环
+
+- technical_claim_cn：通过机器学习预测和自动化投标，FleetPower能够以99%–100%的准确率预测租赁需求，以17%–56%的准确率预测VPP可用性，并避免违约惩罚。
+
+- artifact_claim_cn：FleetPower五阶段DSS能够将SEV车队动态分配到三个市场，在真实数据仿真中相比仅租赁策略提升利润1.8%–4.4%，利用率提升233%–700%。
+
+- mechanism_claim_cn：利润提升来源于动态比较各市场预期利润并基于机会成本定价：下行调节通过低价充电和付费充电获利，上行调节因价格和电池损耗很少被市场接受；重规划高罚金确保优先履行平衡市场承诺。
+
+- boundary_claim_cn：框架在低利用率、高产品多样性和高市场机制多样性环境中效用最大；其收益受电力平衡价格水平、充电基础设施密度、V2G经济性（电池折旧和电价）等条件的限制；在可再生能源渗透率高的未来情景中收益更大。
+
+- reusable_design_knowledge_cn：提出可复用的五阶段DSS蓝图：统一资源量纲（kWh）、需求/可用性预测、预期利润排序（pecking order）、多市场投标、实时重规划与罚金设计；同时给出机会成本权重λ的计算原则和面向异质市场的成本建模方法。
+
+- theoretical_contribution_cn：将多产品资源分配问题引入智能市场研究，提出从资源所有者（卖家）视角设计自动化DSS这一新方向；弥合了多产品资源分配文献和市场机制文献之间的缺口；为智能市场如何赋能实体资源的多用途转换提供了概念框架。
+
+- how_discussion_closes_intro_gap_cn：引言声称现有研究缺乏多产品、多机制卖家视角的实时分配工具；讨论部分通过总结FleetPower的构建和评价结果，强调该工具填补了这一空白，并进一步用二维框架说明其一般化能力，使贡献落在“设计蓝图”而非单一案例，从而闭合缺口。
+
+- overclaim_or_unsupported_leaps_cn：仿真利润提升并不能完全等同于真实世界可用性，因为忽略了市场进入者的策略反应和最低投标量限制；将机会成本加权λ视为“机制”而实为设计假设；二维适用边界主要由推理支持，缺少多案例实证；V2G不盈利结论基于当前价格和充电成本，未来条件变化可能使结论改变。
+
+## 句级写作动作图谱
+
+### 1. Abstract, sentence 1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract, sentence 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：文章以交通部门向电动化和共享化深度转型为动机。
+
+- rhetorical_function_cn：开篇建立宏观背景，为后续问题奠定可能性的舞台。
+
+- depends_on_cn：无依赖，是起点。
+
+- sets_up_cn：引出共享电动汽车这一具体研究对象。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. Abstract, sentence 2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract, sentence 2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：共享电动汽车可以同时作为租赁车辆和虚拟电厂参与电力市场，形成多产品资源。
+
+- rhetorical_function_cn：说明一个具体的经验现象：车辆闲置时可卖电。
+
+- depends_on_cn：依赖背景中的电动化和共享化趋势。
+
+- sets_up_cn：引出这种多用途可提高利用率并促进可再生能源整合。
+
+- evidence_pointer：Abstract sentences 2–3
+
+### 3. Abstract, sentence 4
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract, sentence 4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者提出开发一种利用数字化实时市场和智能决策实现动态多产品资源分配的方法。
+
+- rhetorical_function_cn：明确研究目标，将焦点从现象转移到解决方案。
+
+- depends_on_cn：现象中的复杂性需要智能决策。
+
+- sets_up_cn：为后续描述DSS工具做铺垫。
+
+- evidence_pointer：Abstract sentence 4
+
+### 4. Abstract, sentence 5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract, sentence 5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：该工具持续评估市场吸引力，并代表资源所有者战略性地提交迭代投标，直到所有资源在某时期被分配。
+
+- rhetorical_function_cn：概述DSS的核心行为特征。
+
+- depends_on_cn：智能决策和数字化市场概念。
+
+- sets_up_cn：为贡献中的“蓝图”提供内容。
+
+- evidence_pointer：Abstract sentence 5
+
+### 5. Abstract, sentence 6
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract, sentence 6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：关键贡献是提供类似多产品资源分配场景的蓝图，并通过SEV车队领域的定制分析和机器学习解决方案证明其有效性。
+
+- rhetorical_function_cn：声明贡献，概括全文定位。
+
+- depends_on_cn：前文描述的DSS和评价结果。
+
+- sets_up_cn：为正文的贡献清单和蓝图叙事提供摘要级预告。
+
+- evidence_pointer：Abstract final sentence
+
+### 6. Section 1, paragraph 1
+
+- order：6
+
+- section：Introduction
+
+- locator：Section 1, paragraph 1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：交通系统正在经历技术变革，未来平台将连接、自主、共享和电动化。
+
+- rhetorical_function_cn：建立更广泛的转型背景，为SEV研究提供宏观合法性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出共享电动汽车作为该趋势的重要组成部分。
+
+- evidence_pointer：Introduction first paragraph
+
+### 7. Section 1, paragraph 2, sentence 1–2
+
+- order：7
+
+- section：Introduction
+
+- locator：Section 1, paragraph 2, sentence 1–2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：共享电动汽车车队已成为城市常见现象，包括汽车、自行车和滑板车等。
+
+- rhetorical_function_cn：将宏观背景具体为SEV商业模型现象。
+
+- depends_on_cn：依赖前文技术趋势。
+
+- sets_up_cn：说明SEV运营中存在新机遇和挑战。
+
+- evidence_pointer：Introduction second paragraph
+
+### 8. Section 1, paragraph 2, sentence 3–4
+
+- order：8
+
+- section：Introduction
+
+- locator：Section 1, paragraph 2, sentence 3–4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：电动化意味着与电力部门融合，SEV电池可作为分布式能源参与实时能源市场。
+
+- rhetorical_function_cn：解释为何SEV能成为多产品资源，为多用途提供因果逻辑。
+
+- depends_on_cn：电动化和共享化背景。
+
+- sets_up_cn：引出车辆可以在低移动需求时在电力市场创造价值。
+
+- evidence_pointer：Introduction second paragraph
+
+### 9. Section 1, paragraph 3
+
+- order：9
+
+- section：Introduction
+
+- locator：Section 1, paragraph 3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：多用途可提升利用率和盈利，减少闲置时间，但实现多用途策略并不简单，因为存在两个决策问题。
+
+- rhetorical_function_cn：说明现实重要性并引出具体决策难题。
+
+- depends_on_cn：前文所述多用途机会。
+
+- sets_up_cn：引出两个决策问题：分配多少车辆、以什么价格分配。
+
+- evidence_pointer：Introduction third paragraph
+
+### 10. Section 1, paragraph 3, sentence 4–5
+
+- order：10
+
+- section：Introduction
+
+- locator：Section 1, paragraph 3, sentence 4–5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：两个市场都具有接近实时的交付周期，决策必须快速高频做出，需要连续评估市场间的权衡。
+
+- rhetorical_function_cn：指出决策的复杂性限制，说明人工决策不现实。
+
+- depends_on_cn：前文两个决策问题。
+
+- sets_up_cn：为DSS需求提供依据。
+
+- evidence_pointer：Introduction third paragraph
+
+### 11. Section 1, paragraph 4
+
+- order：11
+
+- section：Introduction
+
+- locator：Section 1, paragraph 4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者主张需要先进的DSS来自动化持续建模和评估任务，从而支持资源多用途。
+
+- rhetorical_function_cn：明确解决方案方向，引出FleetPower。
+
+- depends_on_cn：决策复杂性和实时性。
+
+- sets_up_cn：引出具体工具FleetPower的开发。
+
+- evidence_pointer：Introduction fourth paragraph
+
+### 12. Section 1, paragraph 5
+
+- order：12
+
+- section：Introduction
+
+- locator：Section 1, paragraph 5
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：DSS建立在三个文献基础上：多产品资源、基于市场的资源分配、智能市场。
+
+- rhetorical_function_cn：引入理论支柱，为方法提供学术定位。
+
+- depends_on_cn：前面对DSS的需求。
+
+- sets_up_cn：为文献综述和缺口论证做铺垫。
+
+- evidence_pointer：Introduction fifth paragraph
+
+### 13. Section 1, paragraph 6
+
+- order：13
+
+- section：Introduction
+
+- locator：Section 1, paragraph 6
+
+- move_code：GAP
+
+- paraphrase_cn：智能市场研究通常关注市场设计或买家的DSS，未从卖家角度研究多产品、多机制的并行分配，而本文正是填补这一空白。
+
+- rhetorical_function_cn：明确研究缺口，区分本文与以往文献。
+
+- depends_on_cn：三个文献流的综述。
+
+- sets_up_cn：为贡献声明提供靶心。
+
+- evidence_pointer：Introduction sixth paragraph
+
+### 14. Section 1, paragraph 7, list
+
+- order：14
+
+- section：Introduction
+
+- locator：Section 1, paragraph 7, list
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出三项核心贡献：提出DSS制品、在SEV领域应用并实证评估、讨论一般适用性和其他应用实例。
+
+- rhetorical_function_cn：正式声明贡献，引导读者预期。
+
+- depends_on_cn：前面的缺口和理论介绍。
+
+- sets_up_cn：为全文结构提供路线图。
+
+- evidence_pointer：Introduction bullet list
+
+### 15. Section 1, final paragraph
+
+- order：15
+
+- section：Introduction
+
+- locator：Section 1, final paragraph
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：文章按设计科学框架组织，剩余部分依次为文献、背景与数据、DSS介绍、评价、讨论与结论。
+
+- rhetorical_function_cn：给出全文结构预告，增强可读性。
+
+- depends_on_cn：贡献声明。
+
+- sets_up_cn：帮助读者导航后文。
+
+- evidence_pointer：Introduction final paragraph
+
+### 16. Section 2.1, paragraph 1
+
+- order：16
+
+- section：Background and Related Literature
+
+- locator：Section 2.1, paragraph 1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：多产品资源可生产多种产品或服务，但同一时间只能生产一种。
+
+- rhetorical_function_cn：定义关键概念。
+
+- depends_on_cn：本文问题框架。
+
+- sets_up_cn：为SEV作为多产品资源的类比奠定基础。
+
+- evidence_pointer：Section 2.1 first paragraph
+
+### 17. Section 2.1, paragraph 3
+
+- order：17
+
+- section：Background and Related Literature
+
+- locator：Section 2.1, paragraph 3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：传统多产品资源研究使用确定性或随机需求输入求解成本最小化，而本文强调动态、实时、考虑价格和利润而非仅成本。
+
+- rhetorical_function_cn：指出现有模型局限，为动态DSS设计提供理由。
+
+- depends_on_cn：多产品资源定义。
+
+- sets_up_cn：引出将市场本身作为资源分配机制的新观点。
+
+- evidence_pointer：Section 2.1 third paragraph
+
+### 18. Section 2.2, paragraph 1
+
+- order：18
+
+- section：Background and Related Literature
+
+- locator：Section 2.2, paragraph 1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：市场资源配置通过价格将资源分配给最需要的代理，分为集中和分散两种方式。
+
+- rhetorical_function_cn：总结市场资源配置的基本原理。
+
+- depends_on_cn：无。
+
+- sets_up_cn：说明拍卖机制适合本文场景。
+
+- evidence_pointer：Section 2.2 first paragraph
+
+### 19. Section 2.3, paragraph 1
+
+- order：19
+
+- section：Background and Related Literature
+
+- locator：Section 2.3, paragraph 1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：电子市场、智能市场或自动交易场是数字化的计算机化市场机制，可自动化分配资源。
+
+- rhetorical_function_cn：引入智能市场概念，为DSS与市场接口提供理论支撑。
+
+- depends_on_cn：上一节拍卖概念。
+
+- sets_up_cn：区分市场设计研究和智能代理研究两分支。
+
+- evidence_pointer：Section 2.3 first paragraph
+
+### 20. Section 2.3, paragraph 3
+
+- order：20
+
+- section：Background and Related Literature
+
+- locator：Section 2.3, paragraph 3
+
+- move_code：GAP
+
+- paraphrase_cn：据作者所知，通过多个不同机制的智能市场分配不同类型物品/服务尚未被研究。
+
+- rhetorical_function_cn：明确智能市场领域的空白。
+
+- depends_on_cn：智能市场文献综述。
+
+- sets_up_cn：强调本文填补该空白。
+
+- evidence_pointer：Section 2.3 third paragraph
+
+### 21. Section 2.3, final paragraph
+
+- order：21
+
+- section：Background and Related Literature
+
+- locator：Section 2.3, final paragraph
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：卖家视角尤其是多产品多机制场景的研究很少，但多边自动交易平台兴起使这一案例高度相关。
+
+- rhetorical_function_cn：解释缺口在实践中的迫切性。
+
+- depends_on_cn：平台经济背景。
+
+- sets_up_cn：为DSS开发提供进一步动因。
+
+- evidence_pointer：Section 2.3 final paragraph
+
+### 22. Section 3, paragraph 1
+
+- order：22
+
+- section：Real-Time Multiproduct Resource Allocation via Smart Markets
+
+- locator：Section 3, paragraph 1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：SEV作为VPP参与电力平衡市场在技术上已可行，但管理复杂性源于市场和产品的多样性。
+
+- rhetorical_function_cn：连接技术可行性与管理复杂性，引出多产品分配问题。
+
+- depends_on_cn：VPP技术概念。
+
+- sets_up_cn：详细说明租赁市场和平衡市场的机制差异。
+
+- evidence_pointer：Section 3 first paragraph
+
+### 23. Section 3.1, paragraph 3–4
+
+- order：23
+
+- section：Section 3.1
+
+- locator：Section 3.1, paragraph 3–4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：V2G和智能充电使得SEV可以提供上行和下行调节服务，但V2G影响电池寿命且充电设施需双向。
+
+- rhetorical_function_cn：介绍电力平衡服务的技术细节和成本约束。
+
+- depends_on_cn：SEV作为VPP的概念。
+
+- sets_up_cn：为后续成本模型和V2G盈利性判断铺垫。
+
+- evidence_pointer：Section 3.1 paragraphs 3–4
+
+### 24. Section 3.1, paragraph 5
+
+- order：24
+
+- section：Section 3.1
+
+- locator：Section 3.1, paragraph 5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：以往研究假定租赁模式完美可知，将租赁和平衡服务视为互斥的预定时间段，这不符合按需移动服务的实际。
+
+- rhetorical_function_cn：指出现有研究不现实，凸显实时协调的必要性。
+
+- depends_on_cn：VPP领域文献。
+
+- sets_up_cn：提出本文的实时多产品资源分配框架自然连接两个服务。
+
+- evidence_pointer：Section 3.1 paragraph 5
+
+### 25. Section 3.2, paragraph 1–2
+
+- order：25
+
+- section：Section 3.2
+
+- locator：Section 3.2, paragraph 1–2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：租赁市场是即时交易、固定价格、移动应用接口；平衡市场是提前一周投标的pay-as-bid多单位拍卖，需要30秒响应。
+
+- rhetorical_function_cn：描述两个市场的机制差异，为DSS的多市场接口提供背景。
+
+- depends_on_cn：领域知识。
+
+- sets_up_cn：解释为什么需要不同的预测和投标策略。
+
+- evidence_pointer：Section 3.2 paragraphs 1–2
+
+### 26. Section 3.3, paragraph 1
+
+- order：26
+
+- section：Section 3.3
+
+- locator：Section 3.3, paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择Car2Go数据是因为其全球布局、车型一致，且三个城市在能源结构上异质。
+
+- rhetorical_function_cn：解释样本选择的合理性，增强外部效度。
+
+- depends_on_cn：研究需要多市场对比。
+
+- sets_up_cn：为后续数据描述和仿真提供依据。
+
+- evidence_pointer：Section 3.3 first paragraph
+
+### 27. Section 3.4, paragraph 1
+
+- order：27
+
+- section：Section 3.4
+
+- locator：Section 3.4, paragraph 1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用三个城市对应能源运营商的次级运行储备/实时市场数据，尽管不同城市数据粒度不同，但足以构建供需曲线或利用清算价。
+
+- rhetorical_function_cn：说明平衡市场数据的来源与局限。
+
+- depends_on_cn：需要实证评估。
+
+- sets_up_cn：为仿真中的市场清算模型提供数据输入。
+
+- evidence_pointer：Section 3.4 first paragraph
+
+### 28. Section 4, opening paragraph
+
+- order：28
+
+- section：Section 4
+
+- locator：Section 4, opening paragraph
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：基于前述文献和领域知识，作者提出FleetPower DSS，管理SEV车队的多产品分配，覆盖三个核心代理任务。
+
+- rhetorical_function_cn：从问题转向解决方案，正式引入制品。
+
+- depends_on_cn：文献缺口和领域机制。
+
+- sets_up_cn：详细描述五阶段框架。
+
+- evidence_pointer：Section 4 opening paragraph
+
+### 29. Section 4, after list of three services
+
+- order：29
+
+- section：Section 4
+
+- locator：Section 4, after list of three services
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：FleetPower将三种服务（移动出行、上行调节、下行调节）视作SEV可提供的不同产品，并以kWh统一度量。
+
+- rhetorical_function_cn：定义产品空间和计量单位，为后续数学模型奠基。
+
+- depends_on_cn：多产品资源概念。
+
+- sets_up_cn：为表2的变量和公式提供语义。
+
+- evidence_pointer：Section 4 before Figure 2
+
+### 30. Section 4.1, paragraph 2
+
+- order：30
+
+- section：Section 4.1
+
+- locator：Section 4.1, paragraph 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用多种机器学习算法预测租赁需求和可用性，由于提前一周投标，不用时间序列模型。
+
+- rhetorical_function_cn：说明预测方法选择及其原因。
+
+- depends_on_cn：市场时间结构。
+
+- sets_up_cn：为结果中的高准确率作铺垫。
+
+- evidence_pointer：Section 4.1 paragraph 2
+
+### 31. Equations (2)–(3)附近
+
+- order：31
+
+- section：Section 4.1
+
+- locator：Equations (2)–(3)附近
+
+- move_code：MECHANISM
+
+- paraphrase_cn：上行调节报价由预期成本加利润边际构成；下行调节报价则以批发购电价为基准扣除成本和利润边际，确保充电划算。
+
+- rhetorical_function_cn：解释报价设计的机制逻辑。
+
+- depends_on_cn：成本方程和利润边际训练。
+
+- sets_up_cn：说明两种调节服务的定价差异，为结果中下行调节盈利更多埋下伏笔。
+
+- evidence_pointer：Section 4.1 Equations (2)–(3)附近
+
+### 32. Equations (10)–(13)附近
+
+- order：32
+
+- section：Section 4.1
+
+- locator：Equations (10)–(13)附近
+
+- move_code：MECHANISM
+
+- paraphrase_cn：机会成本通过λ权重加入报价：若车辆被调走会导致失去租赁客户，则报价提高；若车辆闲置，则机会成本为零。
+
+- rhetorical_function_cn：展示机会成本如何影响报价，是DSS的核心智能。
+
+- depends_on_cn：租赁需求和可用性预测。
+
+- sets_up_cn：解释系统为何能优先保护高价值租赁业务。
+
+- evidence_pointer：Section 4.1 Equations (10)–(13)
+
+### 33. Section 4.2, first paragraph
+
+- order：33
+
+- section：Section 4.2
+
+- locator：Section 4.2, first paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Phase 2根据预期单位利润对市场进行排序，并按“啄食顺序”分配存储量，只有中标后才将车辆撤出租赁。
+
+- rhetorical_function_cn：描述资源规划的核心启发式方法。
+
+- depends_on_cn：Phase 1预测的价格和成本。
+
+- sets_up_cn：为Phase 3投标做准备。
+
+- evidence_pointer：Section 4.2 first paragraph
+
+### 34. Section 4.3, first paragraph
+
+- order：34
+
+- section：Section 4.3
+
+- locator：Section 4.3, first paragraph
+
+- move_code：TRANSITION
+
+- paraphrase_cn：投标阶段将资源规划中的信息以价格-数量对提交到上行、下行和租赁市场。
+
+- rhetorical_function_cn：连接资源规划与市场执行。
+
+- depends_on_cn：Phase 2的分配结果。
+
+- sets_up_cn：引出市场清算和重规划。
+
+- evidence_pointer：Section 4.3 first paragraph
+
+### 35. Section 4.4, paragraphs 1–3
+
+- order：35
+
+- section：Section 4.4
+
+- locator：Section 4.4, paragraphs 1–3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Phase 4处理承诺与实际可用性偏差，优先满足平衡市场（高罚金），并允许顾客换到250米内其他车辆。
+
+- rhetorical_function_cn：描述重规划机制，应对预测误差。
+
+- depends_on_cn：预测不确定性和市场罚金结构。
+
+- sets_up_cn：为评价中的低违约率提供设计解释。
+
+- evidence_pointer：Section 4.4 paragraphs 1–3
+
+### 36. Section 4.4, paragraph 4
+
+- order：36
+
+- section：Section 4.4
+
+- locator：Section 4.4, paragraph 4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：设置移动市场罚金为0，上行/下行罚金为9999，以反映平衡市场违约的严重性。
+
+- rhetorical_function_cn：定义决策偏好权重，使系统行为符合现实约束。
+
+- depends_on_cn：平衡市场可靠性门槛。
+
+- sets_up_cn：解释为什么系统几乎不违约。
+
+- evidence_pointer：Section 4.4 paragraph 4
+
+### 37. Section 4.5, first paragraph
+
+- order：37
+
+- section：Section 4.5
+
+- locator：Section 4.5, first paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用离散事件仿真评估策略，因为真实部署成本高且需技术更新，而仿真适合动态离散时间系统。
+
+- rhetorical_function_cn：证明评价方法选择合理。
+
+- depends_on_cn：真实数据可用。
+
+- sets_up_cn：为结果的可信度辩护。
+
+- evidence_pointer：Section 4.5 first paragraph
+
+### 38. Section 4.5, second paragraph
+
+- order：38
+
+- section：Section 4.5
+
+- locator：Section 4.5, second paragraph
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：虽然市场参与可能影响均衡，但作者认为他人行为不会因DSS进入而改变，因为拍卖机制不激励虚报；方法也兼容其他拍卖机制。
+
+- rhetorical_function_cn：预防对仿真内生性的质疑，界定市场反应的假设条件。
+
+- depends_on_cn：拍卖理论。
+
+- sets_up_cn：保护仿真结果的外部有效性。
+
+- evidence_pointer：Section 4.5 second paragraph
+
+### 39. Section 5, opening paragraph
+
+- order：39
+
+- section：Evaluation and Results
+
+- locator：Section 5, opening paragraph
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本部分评估DSS的准确性、罚款、利用率和各市场利润。
+
+- rhetorical_function_cn：明确评价目标，构建读者预期。
+
+- depends_on_cn：DSS设计。
+
+- sets_up_cn：引出混淆矩阵和多项指标。
+
+- evidence_pointer：Section 5 opening
+
+### 40. Section 5, paragraph 1–2
+
+- order：40
+
+- section：Evaluation and Results
+
+- locator：Section 5, paragraph 1–2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因为系统不知道未来租赁，必然有误差，所以用误差矩阵对比最优承诺。
+
+- rhetorical_function_cn：解释为什么以完美预见到基准评价误差。
+
+- depends_on_cn：预测不确定性。
+
+- sets_up_cn：为混淆矩阵结果作解释。
+
+- evidence_pointer：Section 5 first two paragraphs
+
+### 41. After Table 3
+
+- order：41
+
+- section：Evaluation and Results
+
+- locator：After Table 3
+
+- move_code：RESULT
+
+- paraphrase_cn：整体准确率20%–58%，但租赁需求预测准确率高达99%–100%，VPP预测准确率较低，因系统故意偏向租赁。
+
+- rhetorical_function_cn：报告预测结果并解释不对称准确率。
+
+- depends_on_cn：表3数据。
+
+- sets_up_cn：说明这种偏好为何有利可图。
+
+- evidence_pointer：Section 5 after Table 3
+
+### 42. After Table 4
+
+- order：42
+
+- section：Evaluation and Results
+
+- locator：After Table 4
+
+- move_code：RESULT
+
+- paraphrase_cn：VPP收益远超过失去的租金，斯图加特年增净收入87,000美元，即毛利率增长4.4%。
+
+- rhetorical_function_cn：报告核心经济结果，直接支撑贡献。
+
+- depends_on_cn：利润矩阵表4。
+
+- sets_up_cn：讨论不同城市差异的原因。
+
+- evidence_pointer：Section 5 after Table 4
+
+### 43. Section 5, paragraph on V2G profitability
+
+- order：43
+
+- section：Evaluation and Results
+
+- locator：Section 5, paragraph on V2G profitability
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：当前能源价格下，93%额外利润来自下行调节；V2G因电价需达到租金的75倍才具经济性，实际观察到的最高价格不够。
+
+- rhetorical_function_cn：解释V2G为何不盈利，界定边际条件。
+
+- depends_on_cn：市场价格和电池损耗数据。
+
+- sets_up_cn：为讨论中的边界条件提供证据。
+
+- evidence_pointer：Section 5 V2G paragraph
+
+### 44. Section 5, final paragraph
+
+- order：44
+
+- section：Evaluation and Results
+
+- locator：Section 5, final paragraph
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：在线附录分析了更多可再生能源引入和竞争EV增加，发现价格波动会显著增强商业案例，且即使所有车辆都是EV也不能单独平衡市场。
+
+- rhetorical_function_cn：预告稳健性测试，强化外部有效性。
+
+- depends_on_cn：基本结果。
+
+- sets_up_cn：为讨论中的未来政策前景做铺垫。
+
+- evidence_pointer：Section 5 final paragraph
+
+### 45. Section 6, paragraph 1
+
+- order：45
+
+- section：Discussion and Future Work
+
+- locator：Section 6, paragraph 1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章提出FleetPower DSS，实现实时多产品资源分配，并解释了其核心逻辑：三种服务依赖于同一电池资源。
+
+- rhetorical_function_cn：总结研究成果，直接回应研究问题。
+
+- depends_on_cn：全文结果。
+
+- sets_up_cn：为后续利用率和利润的总结做铺垫。
+
+- evidence_pointer：Section 6 first paragraph
+
+### 46. Section 6, paragraph 3
+
+- order：46
+
+- section：Discussion and Future Work
+
+- locator：Section 6, paragraph 3
+
+- move_code：RESULT
+
+- paraphrase_cn：利用率提升233%–700%，毛利润提升1.8%–4.4%，最高年增86,000美元；不同城市差异源于市场盈利不对称和基础设施。
+
+- rhetorical_function_cn：复述关键结果，强调量级。
+
+- depends_on_cn：评价章节。
+
+- sets_up_cn：引出充电基础设施和价格对利润的影响。
+
+- evidence_pointer：Section 6 third paragraph
+
+### 47. Section 6, paragraph 4
+
+- order：47
+
+- section：Discussion and Future Work
+
+- locator：Section 6, paragraph 4
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：高层抽象下，智能市场接口和DSS使资源所有者能够动态评估在何种市场、以什么价格分配何种产品。
+
+- rhetorical_function_cn：提升贡献层次，从案例到一般化。
+
+- depends_on_cn：前面的实证结果。
+
+- sets_up_cn：随后用二维框架进一步界定适用条件。
+
+- evidence_pointer：Section 6 fourth paragraph
+
+### 48. Section 6, paragraph 5–6
+
+- order：48
+
+- section：Discussion and Future Work
+
+- locator：Section 6, paragraph 5–6
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：DSS适用于高产品多样性和高机制多样性场景，尤其当管理复杂度超人类能力时；低利用率环境收益最大。
+
+- rhetorical_function_cn：建立一般化边界，帮助读者判断迁移性。
+
+- depends_on_cn：二维框架概念。
+
+- sets_up_cn：为后续应用例子提供选择标准。
+
+- evidence_pointer：Section 6 paragraphs 5–6
+
+### 49. Section 6, application examples list
+
+- order：49
+
+- section：Discussion and Future Work
+
+- locator：Section 6, application examples list
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：举出零工经济工作者、自动驾驶出租车、热电联产作为潜在应用案例。
+
+- rhetorical_function_cn：通过具体例子论证框架的可迁移性。
+
+- depends_on_cn：二维框架。
+
+- sets_up_cn：引出未来研究需要在这些领域验证。
+
+- evidence_pointer：Section 6 list after Figure 7
+
+### 50. Section 6, final paragraph
+
+- order：50
+
+- section：Discussion and Future Work
+
+- locator：Section 6, final paragraph
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可包括真实世界实施、不同资源场景验证、智能市场机制设计（如缩短投标提前期）等。
+
+- rhetorical_function_cn：承认局限，给出可操作的研究方向。
+
+- depends_on_cn：研究边界和发现。
+
+- sets_up_cn：为后续研究者提供入口。
+
+- evidence_pointer：Section 6 final paragraph
+
+## 写作技术
+
+- gap_construction_cn：引言和文献综述采用三步骤：先分别总结多产品资源、市场资源配置、智能市场三个流派的贡献；然后指出每个流派各自的局限（如静态假设、单市场聚焦、买者视角）；最后明确综合缺口，即无人从卖家视角处理多产品、多机制并行分配，从而把本文定位在交叉点。
+
+- signposting_cn：摘要末尾和引言末尾均预告全文结构；每节首句用“In this section...”“We now...”等引导；使用图2展示五阶段总览，并用列表明确三种服务，帮助读者跟踪设计过程。
+
+- transition_logic_cn：段落间通过“not trivial”“However”“This gap”“In the following sections”等连接词递进；从问题到文献到领域背景再到设计，始终用因果关系串联（例如复杂性导致需要DSS，数据异质性导致多城市评估）。
+
+- claim_evidence_rhythm_cn：每个主要主张都紧跟数据或表格：如准确率主张紧跟表3，利润主张紧跟表4和图5/6，V2G不盈利主张给出电价比较和数值推理；结果与解释交替出现，先报告数据再解释原因。
+
+- benchmark_narrative_cn：benchmark并非一次性对比，而是分层次嵌入：完美预见作为理论基准用于评价预测误差；朴素仅租赁策略作为商业基准用于衡量增量价值；三个城市互为复现；在线附录情景分析作为未来条件基准，形成从误差到利润到边界条件的递进。
+
+- theory_return_cn：结果在讨论中返回引言缺口：强调这是“从资源所有者角度的智能市场分配”，填补了文献空白；同时将具体结果抽象为“设计蓝图”和二维框架，使理论贡献超越单一案例。
+
+- contribution_positioning_cn：引言开头即列出三项贡献，摘要中同样点明“blueprint”；讨论部分再次呼应，并用二维框架和应用例子扩大贡献范围，避免将文章局限为SEV技术实证。
+
+- novelty_protection_cn：通过多城市真实数据、多指标评价（利润、利用率、违约率）证实有效性；通过在线附录情景分析（可再生能源、EV竞争）展示稳健性；通过二维框架定义适用条件，即使具体利润数字变化，框架有效性仍可辩护；刻意区分仿真与真实部署，防止被误读为一次性结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：描述宏观趋势，将问题嵌入现实背景，说明研究的重要性。
+
+- research_job_cn：识别一个因数字化或平台化而新出现的机会/矛盾，确定目标资源领域。
+
+- required_evidence_cn：有真实世界案例或数据来源可支撑背景主张。
+
+- transition_to_next_cn：从机会或问题导出具体决策难题，说明现有方法不足。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：分派别综述相关文献，指出各自边界和空白，论证为何需要新制品。
+
+- research_job_cn：定位缺口（如买家视角 vs 卖家视角，单市场 vs 多市场，静态 vs 实时）。
+
+- required_evidence_cn：需要充分的文献引用和清晰的逻辑缺口论证。
+
+- transition_to_next_cn：引向领域背景和数据，说明如何使研究可操作化。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述目标领域的市场机制、数据源和数据特征，突出异质性和复杂性。
+
+- research_job_cn：收集或访问真实数据，清洗并推断关键变量，形成仿真/实验输入。
+
+- required_evidence_cn：数据来源可靠、时间跨度足够、覆盖多个异质性场景。
+
+- transition_to_next_cn：说明数据驱动的设计能应对机制复杂性，引出制品构建。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：给出系统/算法的总体框架和关键公式，解释每个设计选择的原因。
+
+- research_job_cn：实现预测模型、决策规则、定价公式、重规划机制，形成可运行制品。
+
+- required_evidence_cn：需要用数学/伪代码清晰表达，且模型与领域机制对齐。
+
+- transition_to_next_cn：预告评价将用真实数据测试制品。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：设计评价方案：基准、指标、数据来源，报告结果并解释异常。
+
+- research_job_cn：运行仿真或实验，生成混淆矩阵、利润表、敏感性分析。
+
+- required_evidence_cn：需要对比基准（如完美预见、朴素策略）和客观财务/性能指标。
+
+- transition_to_next_cn：从结果中抽象出边界条件和设计知识。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：讨论一般化条件，提出设计蓝图或原则，给出应用例子和未来方向。
+
+- research_job_cn：通过概念框架（如二维分类）界定适用性，指出局限。
+
+- required_evidence_cn：至少有一个成功案例和清晰的边界推理；未来研究建议呼应局限。
+
+- transition_to_next_cn：结尾自然引导后续研究者。
+
+### most_transferable_moves_cn
+
+1. 用统一计量单位（如kWh）使不同产品可比较
+
+2. 以预期利润率排序的“pecking order”作为资源分配启发式
+
+3. 用混淆矩阵分离预测误差方向，并解释系统偏好
+
+4. 用利润矩阵对比朴素策略，突出增量价值
+
+5. 用二维特性框架界定一般化条件
+
+6. 通过高额罚金和重规划机制处理预测不确定性
+
+7. 在结果部分先报数据再解释为什么，保持证据节奏
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要14个月高频车辆定位和交易数据（API访问权限）
+
+2. 需要多个城市的电力平衡市场历史价格和投标数据
+
+3. 需要开发完整的离散事件仿真环境
+
+4. 需要基于真实充电站、电池特性进行参数标定
+
+5. 在线附录中的情景分析需要额外模拟计算
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只复制五阶段框图而无实际的预测模型和成本公式
+
+2. 不能直接声称利润提升而缺乏与基准（如仅租赁）的对照
+
+3. 不能忽略市场机制细节（如pay-as-bid、提前投标期）
+
+4. 不能用单一城市数据外推所有场景
+
+5. 不能将仿真结果等同于真实部署证据
+
+- single_best_description_of_the_routine_cn：识别一个因数字技术和多市场导致的新资源分配问题，用真实数据和机器学习构建自动化DSS，在仿真中与简单基准比较，证明收益，再抽象成可复用的设计蓝图。
+
+## 分析边界
+
+在线附录（B.1-B.4）内容未提供，只能依据正文提及的结论进行概括；由于文章为PDF转文本，未见实际页码，定位信息使用章节和段落；对某些图/表的位置只能基于上下文推断。

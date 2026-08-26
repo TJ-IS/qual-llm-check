@@ -1,0 +1,1957 @@
+# A two-stage machine learning framework to predict heart transplantation survival probabilities over time with a monotonic probability constraint
+
+- 作者：Hamidreza Ahady Dolatsara; Ying-Ju Chen; Christy Evans; Ashish Gupta; Fadel M. Megahed
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2020.113363
+- 源文件：03854_2020_a-two-stage-machine-learning-framework-to-predict-heart-transplantation-survival-probabilities-o.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.78
+
+## 文章级论证概况
+
+- 核心问题：如何构建一个通用的两阶段机器学习框架，以在多期结果预测中获得个性化、数据驱动且随时间单调递减的生存概率曲线，并在心脏移植预后的真实注册数据上验证其效用？
+
+- 制品与设计：两阶段预测框架：第一阶段使用独立机器学习模型分别预测每个时间段的生存概率；第二阶段使用等渗回归（isotonic regression）对个体患者的多期生存概率序列施加单调递减约束。文中以UNOS全国心脏移植注册数据（1987–2016，103,570例）进行应用，最终提供R Markdown代码和H-TOP网页应用。
+
+- 客观结果：在11个预测时点（术后1个月及1–10年）上，阶段一的AUC在0.60–0.71之间；1年AUC与文献相当，10年AUC约0.70优于现有报告。等渗回归校准后生存概率曲线在个体层面满足单调递减，多数时点AUC和G-Mean得到保持或小幅提升。
+
+- 核心贡献：作者声称的贡献是一个通用的两阶段框架：既能保留ML模型的个性化、数据驱动预测能力，又能通过等渗回归的硬数学约束保证多期概率单调性，从而为器官分配政策、术后护理路径和临床资源利用提供更符合医学预期的风险分层工具，并公开代码和网页应用以促进采用与后续研究。
+
+- 整篇论证链：完整论证链：作者首先指出大量决策场景需要多期终点概率预测，而这些概率在时间上应具有单调性；随后归纳现有方法——群体Kaplan-Meier无法个性化，独立ML模型无法保证单调，顺序ML也不保证，仅在单个时点使用ML再以群体平均校准其他时点的方法又牺牲了个体差异。基于这一缺口，作者提出两阶段框架：第一阶段用任意ML算法独立预测各时点概率，第二阶段用等渗回归对每个个体的概率序列施加单调约束。为展示效用，作者在UNOS心移植大样本上执行了系统的数据清洗、变量选择、重采样和模型比较，以1年G-Mean选出逻辑回归搭配特定预处理为阶段一模型，再将其应用于11个时点并经过等渗校准。结果一方面报告了较文献可比或更优的判别性能，另一方面展示校准后的个体曲线满足单调递减，并量化校准前后指标差异。讨论部分把这一结果重新连接到最初缺口，声称框架是通用、灵活且可用代码复现的，最终将贡献落到移植研究/实践和数据驱动决策支持两个层面，并提出限制与未来方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心是一个计算/分析框架，主要证据来自在UNOS全国心脏移植数据集上的模型比较、hold-out评价和与既往文献报告的AUC等基准对比。没有实验操纵、现场部署或行为机制检验；贡献是算法制品及其在真实数据上的表现。
+
+- 主导写作弧线判定：写作主线是：指出现有多期预测方法存在性能/单调性缺口→提出两阶段制品（ML+isotonic regression）→在UNOS数据集上做benchmark并与文献对比→将结果一般化为可复用的设计知识和通用框架。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：研究依次经历：框架概念构建（第2节）→领域问题与流程界定（第3节）→数据清洗与预处理（第4.1.1–4.1.2）→阶段一模型选择实验（第4.1.3–4.1.6）→多期预测与等渗回归校准（第4.1.7–4.2、第5.2）→结果综合、文献基准与工具推广（第5–6节）。六个阶段从什么是框架、为什么需要它，逐步过渡到如何构造、如何验证、如何对比与应用，最终形成闭环。
+
+### studies_or_phases
+
+#### 1. 框架概念构建与设计决策
+
+- order：1
+
+- name_cn：框架概念构建与设计决策
+
+- question_cn：如何设计一个通用框架以保证多期预测概率单调且个性化？
+
+- inputs_and_setting_cn：文献中的现有方法（Kaplan-Meier、独立ML、顺序ML、单期ML+群体校准）和领域需求描述
+
+- designed_or_compared_object_cn：两阶段框架结构：独立ML模型+等渗回归约束
+
+- baseline_control_or_counterfactual_cn：基于群体的Kaplan-Meier、独立ML、顺序ML、单期ML+群体校准
+
+##### objective_metrics
+
+1. 数学上单调性保证
+
+2. 框架通用性
+
+- analysis_method_cn：方法属性比较与优化模型形式化
+
+- main_result_cn：提出两阶段框架，第一阶段输出各期概率，第二阶段通过等渗回归最小二乘解保证单调性
+
+- argumentative_role_cn：定义制品和贡献骨架，设定论文的核心创新点
+
+- remaining_uncertainty_cn：框架尚无实证验证，不知道在实际数据上是否有效
+
+- link_to_next_phase_cn：需要选择一个真实领域问题来实例化并验证框架，于是进入心脏移植应用
+
+##### evidence_pointers
+
+1. Section 2
+
+#### 2. 领域问题界定与数据集获取
+
+- order：2
+
+- name_cn：领域问题界定与数据集获取
+
+- question_cn：心脏移植决策中的哪些环节需要多期单调生存概率？
+
+- inputs_and_setting_cn：UNOS流程描述、医学文献中关于心衰和移植的统计
+
+- designed_or_compared_object_cn：确定应用场景：匹配运行阶段的移植风险分层
+
+- baseline_control_or_counterfactual_cn：无（定性背景阶段）
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：定性描述和领域知识引入
+
+- main_result_cn：明确框架可服务于UNOS器官分配协议、术后护理路径和资源利用；识别出移植流程五个阶段
+
+- argumentative_role_cn：提供动机和领域有效性，说明为什么心移植是一个重要且合适的应用
+
+- remaining_uncertainty_cn：尚未接触实际数据，不清楚数据质量和可分析性
+
+- link_to_next_phase_cn：引出UNOS数据集，进入数据清洗与预处理
+
+##### evidence_pointers
+
+1. Section 3
+
+#### 3. 数据清洗与预处理
+
+- order：3
+
+- name_cn：数据清洗与预处理
+
+- question_cn：如何将原始UNOS 494变量的大样本转化为可用于多时点建模的分析数据集？
+
+- inputs_and_setting_cn：UNOS全国心脏移植注册数据：103,570例移植事件，494个变量，大量缺失
+
+- designed_or_compared_object_cn：六步清洗流程：变量删减、删失处理、医学特征生成、缺失处理、类别重编码、训练/测试划分
+
+- baseline_control_or_counterfactual_cn：8种数据场景（2种类别插补×2种数值插补×2种编码方式）
+
+##### objective_metrics
+
+1. 保留样本量
+
+2. 保留变量数
+
+- analysis_method_cn：描述性统计和规则性清洗
+
+- main_result_cn：生成8种数据场景，样本量26,829–45,089，变量数90–269
+
+- argumentative_role_cn：保证后续模型选择和评价的方法学可靠性与可复现性
+
+- remaining_uncertainty_cn：清洗阈值（如90%缺失、删失规则）未经敏感性分析，可能影响结果
+
+- link_to_next_phase_cn：清洗后的多个数据场景成为阶段一模型选择的输入
+
+##### evidence_pointers
+
+1. Section 4.1.1–4.1.2
+
+2. Section 5.1.1
+
+#### 4. Stage I模型选择实验
+
+- order：4
+
+- name_cn：Stage I模型选择实验
+
+- question_cn：在1年预测时点上，最优的插补、编码、变量选择、重采样和ML算法组合是什么？
+
+- inputs_and_setting_cn：1年时间点训练数据（80%样本），5折交叉验证
+
+- designed_or_compared_object_cn：六因子全因子实验：2类别插补×2数值插补×2编码×3变量选择×5重采样×7ML算法；降为4200 runs
+
+- baseline_control_or_counterfactual_cn：重采样策略中的None作为baseline；SVM因不收敛无结果
+
+##### objective_metrics
+
+1. G-Mean
+
+2. AUC
+
+3. Sensitivity
+
+4. Specificity
+
+5. Accuracy
+
+- analysis_method_cn：5折交叉验证、均值与95%置信区间比较
+
+- main_result_cn：LR+中位数插补+未知类别插补+one-hot+LASSO+UP取得最高G-Mean 0.610；虽与其他方法差异不显著，但因其速度和可解释性被选中
+
+- argumentative_role_cn：确定阶段一的最终模型流水线，为后续多期预测提供稳定基础
+
+- remaining_uncertainty_cn：选择只基于1年时点，且统计不显著；SVM不可比；未考虑更复杂参数调整
+
+- link_to_next_phase_cn：选定的模型/预处理被固定下来，用于重新训练所有11个时点
+
+##### evidence_pointers
+
+1. Section 4.1.3–4.1.6
+
+2. Table 3
+
+#### 5. 多期预测与等渗回归校准
+
+- order：5
+
+- name_cn：多期预测与等渗回归校准
+
+- question_cn：选定模型在11个时点上的个体概率如何生成，等渗回归能否在不损害性能前提下保证单调递减？
+
+- inputs_and_setting_cn：全部11个时点（1个月、1–10年）的训练和测试数据；为每个时点重新训练LR模型
+
+- designed_or_compared_object_cn：生成每个患者的11个时点概率向量；对每个向量应用等渗回归施加单调递减约束
+
+- baseline_control_or_counterfactual_cn：校准前（非单调个体概率曲线）vs 校准后（单调概率曲线）
+
+##### objective_metrics
+
+1. AUC
+
+2. Accuracy
+
+3. Sensitivity
+
+4. Specificity
+
+5. G-Mean
+
+6. 单调性
+
+- analysis_method_cn：校准前后指标差值表、个体曲线可视化、observed vs forecast分箱图
+
+- main_result_cn：校准后多数时点AUC和G-Mean保持或小幅提升；个体曲线在数学上严格单调递减；校准未改变整体曲线形态
+
+- argumentative_role_cn：验证框架的核心价值：在保持预测性能的同时满足单调性约束并保持个性化
+
+- remaining_uncertainty_cn：校准导致后期灵敏度下降；前几年预测概率低估观测均值；未与其他校准方法（如指数平滑）对比
+
+- link_to_next_phase_cn：该结果为讨论部分的外部对比和价值主张提供核心证据
+
+##### evidence_pointers
+
+1. Section 4.1.7
+
+2. Section 4.2
+
+3. Section 5.2
+
+4. Table 5
+
+5. Fig. 6–7
+
+#### 6. 结果综合、文献基准与工具推广
+
+- order：6
+
+- name_cn：结果综合、文献基准与工具推广
+
+- question_cn：结果与既有文献相比如何？框架的适用边界与贡献是什么？
+
+- inputs_and_setting_cn：本文结果、已有文献报告（Yoon、Dag、Medved、Miller、Villela等）
+
+- designed_or_compared_object_cn：重要变量对比表（Table 6）、AUC文献对比、R Markdown代码、H-TOP网页应用
+
+- baseline_control_or_counterfactual_cn：已有文献报告的AUC和变量入选情况
+
+##### objective_metrics
+
+1. AUC
+
+2. 变量是否在文献中出现
+
+- analysis_method_cn：定性对比和叙述性讨论
+
+- main_result_cn：1年AUC 0.614与文献0.61–0.66相当，10年AUC 0.702优于Yoon的0.631；重要变量中有两个（供者年龄、受者移植时医疗状况）与三篇文献一致
+
+- argumentative_role_cn：建立外部效度并声明贡献：框架具有通用性、可复现性、可解释性，且可用于实践
+
+- remaining_uncertainty_cn：跨文献比较不是严格同一数据集；回顾性数据局限；未真正部署到临床决策中
+
+- link_to_next_phase_cn：给出限制与未来研究方向，完成论文闭环
+
+##### evidence_pointers
+
+1. Section 6.1–6.5
+
+2. Table 6
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. RQ_OR_OBJECTIVE
+
+2. PRACTICAL_STAKES
+
+3. DESIGN_FEATURE
+
+4. STUDY_OVERVIEW
+
+5. RESULT
+
+6. BENCHMARK_OR_CONTRAST
+
+7. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. REQUIREMENT
+
+4. PRIOR_KNOWLEDGE
+
+5. LIMITATION
+
+6. WHY_GAP_MATTERS
+
+7. RQ_OR_OBJECTIVE
+
+8. PRACTICAL_STAKES
+
+9. DESIGN_FEATURE
+
+10. MECHANISM
+
+11. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. REQUIREMENT
+
+3. PRIOR_KNOWLEDGE
+
+4. METHOD_JUSTIFICATION
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. GAP
+
+3. REQUIREMENT
+
+4. METHOD_JUSTIFICATION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. TRANSITION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. BOUNDARY_CONDITION
+
+5. CONTRIBUTION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Kaplan-Meier生存分析方法
+
+2. Machine Learning多期预测文献
+
+3. Isotonic regression/Pool Adjacent Violators算法性质
+
+4. 心脏移植临床领域知识（UNOS流程、生存递减预期）
+
+5. 预测建模在IS中的理论观点（Shmueli & Koppius）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：领域知识（生存概率随时间单调递减、个体化需求）和统计方法性质（等渗回归非参数、计算高效）确实前向决定了设计选择；但文章没有使用正式的行为/组织理论来推导设计，Shmueli和Koppius的引用主要作为背景正当化，关键技术和模型选择来自工程启发和领域需求，因此是partial。
+
+- 理论到设计翻译链：医学领域知识认为心脏移植术后生存概率随时间单调递减且因患者而异 → 现有ML模型独立预测各时点无法保证单调，群体校准又抹平个体差异 → 因此设计两阶段框架：第一阶段用任何ML算法输出个性化各时点概率，第二阶段用等渗回归对每个患者的概率向量施加 p_{t+1} ≤ p_t 的硬约束；该约束由带单调不等式的最小二乘优化模型实现，并用PAVA高效求解。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：在器官分配等应用中，需要基于供体-受体特征的个性化多期生存概率，且概率应随时间单调递减（医学预期）
+
+- mechanism_cn：生存概率在队列层面随时间下降，但个体风险由供受者特征决定；只给群体平均无法区分高风险/低风险个体
+
+- design_requirement_cn：预测结果必须是个体化的，且满足 p_{t+1} ≤ p_t
+
+- artifact_choice_cn：阶段一允许任意ML算法；阶段二使用等渗回归施加单调约束
+
+- evaluated_contrast_cn：校准前（非单调个体曲线）vs 校准后（单调个体曲线）；AUC/G-Mean前后差异
+
+- objective_result_cn：校准后所有个体曲线单调递减；AUC和G-Mean在多数时点保持或提升
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Section 5.2
+
+3. Fig. 6
+
+4. Table 5
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：Kaplan-Meier等方法基于人群，不能适应大量预测变量和个性化
+
+- mechanism_cn：群体估计将异质患者压缩为一条平均曲线
+
+- design_requirement_cn：需要基于高维术前变量进行个体级预测
+
+- artifact_choice_cn：使用机器学习模型（如逻辑回归）在11个时点分别建模
+
+- evaluated_contrast_cn：与既有ML文献报告的AUC对比
+
+- objective_result_cn：1年AUC 0.614与文献相当，10年AUC 0.702优于Yoon等0.631
+
+##### evidence_pointers
+
+1. Section 1
+
+2. Section 6.1
+
+3. Table 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：等渗回归能够在最小二乘意义下将非单调序列修正为单调序列，且可高效求解
+
+- mechanism_cn：通过求解带单调不等式约束的二次规划，找到与原始概率最接近的单调递减序列
+
+- design_requirement_cn：校准方法应非参数、无需调参、计算高效、可处理任意t>1
+
+- artifact_choice_cn：使用等渗回归（PAVA算法）而非Sigmoid等平滑方法
+
+- evaluated_contrast_cn：校准前后性能指标差异；模型是否满足单调性
+
+- objective_result_cn：表5显示多数时点AUC/G-Mean非负变化；Fig.6展示单调曲线
+
+##### evidence_pointers
+
+1. Section 2
+
+2. Section 5.2
+
+3. Table 5
+
+4. Fig. 6
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：Shmueli & Koppius认为预测建模是IS核心科学活动，需要准确、粒度适当、不依赖偶然
+
+- mechanism_cn：预测模型的价值取决于结果精度、可解释粒度和稳健性
+
+- design_requirement_cn：框架应当准确、可提供个体级粒度、避免过拟合和偶然性
+
+- artifact_choice_cn：用5折CV模型选择、hold-out验证，并以G-Mean作为不平衡分类主指标；使用LASSO降维
+
+- evaluated_contrast_cn：多种预处理/重采样/算法组合比较；训练与测试表现
+
+- objective_result_cn：选定LR+LASSO+UP方案，结果稳定且可解释
+
+##### evidence_pointers
+
+1. Section 2
+
+2. Section 4.1.6
+
+3. Table 3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. k折交叉验证（5-fold CV）用于模型选择
+
+2. 留出法hold-out测试
+
+3. 与外部文献基准对比（AUC等）
+
+4. 校准前后对比（within-subject before/after）
+
+5. 校准精度图（observed vs predicted by probability bin）
+
+6. 变量重要性一致性外部校验
+
+- why_these_evaluations_cn：因为该文是计算方法+应用案例，需要证明：1) Stage I模型在预测性能上不劣于文献；2) Stage II在不损失性能前提下提供了单调性；3) 个体概率曲线具有校准精度；4) 变量选择与医学知识一致。
+
+- benchmark_and_contrast_chain_cn：首先在1年时点上用4200组合全面搜索最佳模型；然后用hold-out set报告11时点指标；其次用同一样本将校准前后指标作差值；再次与Yoon、Dag、Medved等的已发表AUC比较；最后用重要变量在不同文献出现次数作一致性三角验证。
+
+### claim_evidence_ledger
+
+#### 1. 阶段一预测AUC介于0.60-0.71
+
+- claim_cn：阶段一预测AUC介于0.60-0.71
+
+- evidence_cn：Table 4 holdout AUC从0.571到0.703；Fig.4 ROC
+
+- status_cn：supported
+
+#### 2. 10年AUC优于当前最新结果
+
+- claim_cn：10年AUC优于当前最新结果
+
+- evidence_cn：与Yoon 0.631对比，本文0.702
+
+- status_cn：supported but limited comparison
+
+#### 3. 等渗回归保证每个患者概率单调递减
+
+- claim_cn：等渗回归保证每个患者概率单调递减
+
+- evidence_cn：Fig.6展示样本患者；数学上优化约束保证
+
+- status_cn：supported（数学保证+示例）
+
+#### 4. 校准后性能不下降或提高
+
+- claim_cn：校准后性能不下降或提高
+
+- evidence_cn：Table 5 ΔAUC、ΔG-Mean等
+
+- status_cn：大部分时点支持，但灵敏度在后期下降
+
+#### 5. 框架是通用的
+
+- claim_cn：框架是通用的
+
+- evidence_cn：概念上不依赖特定算法，但只在心移植数据上验证
+
+- status_cn：partially supported / promoted
+
+#### 6. 可解释性好
+
+- claim_cn：可解释性好
+
+- evidence_cn：选择了逻辑回归
+
+- status_cn：supported
+
+#### 7. 代码公开、可用于未来研究
+
+- claim_cn：代码公开、可用于未来研究
+
+- evidence_cn：R Markdown link
+
+- status_cn：supported
+
+- internal_validity_strategy_cn：通过随机80/20划分和5折CV保持模型选择与测试分离；在1年数据上比较4200组合以选择超参数；留出集只用于最终评价；固定数据清洗流程并详细记录，减少随意性；使用G-Mean平衡灵敏度与特异度以避免不平衡导致的误导。
+
+- external_validity_strategy_cn：使用覆盖1987–2016全国范围的UNOS注册数据（103,570例患者），与多个文献来源进行结果对比；检查变量选择与文献一致性；公开代码和web app促进复现与移植到其他领域；避免使用未来变量和终止收集变量以支持前瞻应用。
+
+- what_is_not_actually_tested_cn：没有真正的前瞻性验证——所有数据均为回顾性注册数据；没有部署到真实器官分配或临床决策流程中，无法证明决策支持有效性；没有与顺序ML或群体校准方法在同一数据上做直接对比，只能与文献数字对比；没有检验等渗回归相比其他保序/平滑方法的相对优势；没有对不确定性或置信区间做全面分析；变量重要性没有因果解释。
+
+## 贡献闭环
+
+- technical_claim_cn：两阶段ML+等渗回归能够产生性能不低于文献且严格单调的个性化生存概率曲线。
+
+- artifact_claim_cn：等渗回归作为第二阶段校准模块是实现单调性的关键，且不损害多数判别指标。
+
+- mechanism_claim_cn：独立ML模型提供个性化基础概率，等渗回归以最小二乘投影方式把非单调个体序列修正为满足 p_{t+1} ≤ p_t 的单调序列。
+
+- boundary_claim_cn：该方法适用于任何需要多期单调概率的预测场景，不限于心脏移植；在本文应用中，1–10年预测表现与文献可比，但具体AUC数值依赖UNOS数据、预处理选择和模型选择。
+
+- reusable_design_knowledge_cn：通用两阶段设计：任意分类器输出各期概率+保序回归约束；可以用PAVA高效求解；选择子采样、特征选择和G-Mean等环节处理不平衡数据。
+
+- theoretical_contribution_cn：几乎没有正式理论贡献；主要是将Shmueli和Koppius的预测建模框架思想落地为可执行的方法论，并对‘混合方法’文献提出扩展——用混合方法来约束预测而非仅提升精度。
+
+- how_discussion_closes_intro_gap_cn：引言指出现有方法要么不单调、要么不个性化；讨论部分通过两组证据闭合缺口：1）阶段一性能与文献持平或更优，表明未因寻求单调而牺牲性能；2）阶段二等渗回归从数学上保证单调且个体化，并用Fig.6和Fig.7展示。
+
+- overclaim_or_unsupported_leaps_cn：作者将1年AUC 0.581的holdout结果称为与文献可比，但摘要写0.60-0.71，范围较宽；文中用非完全同数据的文献数字比较，缺乏统计检验；称‘更接近个性化医疗’和‘可指导分配政策’缺少行为/临床结果证据；‘框架通用’只在医疗单领域验证。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出论文总体目标：建立一个可用于生成个性化、数据驱动且单调约束概率曲线的建模框架。
+
+- rhetorical_function_cn：开篇即点明核心目标，让读者期待一种通用框架。
+
+- depends_on_cn：无；概括全文。
+
+- sets_up_cn：为摘要后续的框架描述和结果做铺垫。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：说明研究动机是改善器官移植结局预测，可服务于分配协议更新、术后护理路径和资源利用。
+
+- rhetorical_function_cn：说明目标问题的现实紧迫性。
+
+- depends_on_cn：承接总体目标。
+
+- sets_up_cn：为引言中的医疗背景做预告。
+
+- evidence_pointer：Abstract second sentence
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出新颖的两阶段机器学习框架以获取随时间单调的概率。
+
+- rhetorical_function_cn：揭示制品核心设计。
+
+- depends_on_cn：目标确定后给出方法。
+
+- sets_up_cn：后续详细说明阶段。
+
+- evidence_pointer：Abstract third sentence
+
+### 4. Abstract P1 S4-S5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第一阶段分别建立每个时间段的独立ML预测模型；第二阶段用等渗回归校准概率使其单调。
+
+- rhetorical_function_cn：将框架分解为两阶段说明。
+
+- depends_on_cn：承接框架提出。
+
+- sets_up_cn：与后续Framework节呼应。
+
+- evidence_pointer：Abstract sentences 4-5
+
+### 5. Abstract P1 S6
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：说明框架在1987–2016年美国心脏移植国家登记数据上应用。
+
+- rhetorical_function_cn：交代验证环境。
+
+- depends_on_cn：框架提出后转向应用。
+
+- sets_up_cn：为结果部分提供数据对应。
+
+- evidence_pointer：Abstract sentence 6
+
+### 6. Abstract P1 S7-S9
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P1 S7-S9
+
+- move_code：RESULT
+
+- paraphrase_cn：报告第一阶段AUC范围；1年AUC与文献相当，10年AUC高于当前最好结果。
+
+- rhetorical_function_cn：给出最直接的性能证据，建立技术优势。
+
+- depends_on_cn：数据和框架。
+
+- sets_up_cn：强调优越性。
+
+- evidence_pointer：Abstract sentences 7-9
+
+### 7. Abstract P1 S10
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P1 S10
+
+- move_code：RESULT
+
+- paraphrase_cn：强调等渗回归保证单调性且保持ML模型的个性化数据驱动特性。
+
+- rhetorical_function_cn：突出核心创新点，回应单调性缺口。
+
+- depends_on_cn：校准设计。
+
+- sets_up_cn：暗示贡献。
+
+- evidence_pointer：Abstract sentence 10
+
+### 8. Abstract P1 S11
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract P1 S11
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：公开代码和Web应用H-TOP以促进未来研究和实践应用。
+
+- rhetorical_function_cn：提供可复现性承诺，增强贡献可信度。
+
+- depends_on_cn：已完成应用。
+
+- sets_up_cn：讨论部分会再次提到。
+
+- evidence_pointer：Abstract sentence 11
+
+### 9. Introduction P1 S1-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：列举多类决策场景需要评估多个时间点达到终态的概率。
+
+- rhetorical_function_cn：设置广泛的应用背景，表明问题普遍性。
+
+- depends_on_cn：无；引言开头。
+
+- sets_up_cn：引出不同应用的单调性现象。
+
+- evidence_pointer：Introduction paragraph 1
+
+### 10. Introduction P1 S4
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P1 S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：举例说明学业完成概率、客户流失、供应链服务概率和移植生存概率等在时间上单调变化。
+
+- rhetorical_function_cn：用具体现象说明单调性在真实问题中普遍存在。
+
+- depends_on_cn：多期预测背景。
+
+- sets_up_cn：指出DSS需要多期单调预测。
+
+- evidence_pointer：Introduction paragraph 1 last sentences
+
+### 11. Introduction P1 S5
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P1 S5
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：指出决策支持系统的效用依赖于准确的多期预测，且预测概率需随时间单调。
+
+- rhetorical_function_cn：将现象转化为对系统设计的要求。
+
+- depends_on_cn：现象描述。
+
+- sets_up_cn：为后续评价现有方法提供标准。
+
+- evidence_pointer：Introduction paragraph 1 final sentence
+
+### 12. Introduction P2 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：综述两种实现单调生存概率的常见方法：Kaplan-Meier群体估计和每期独立ML。
+
+- rhetorical_function_cn：梳理现有知识。
+
+- depends_on_cn：需求提出。
+
+- sets_up_cn：接着指出各有局限。
+
+- evidence_pointer：Introduction paragraph 2
+
+### 13. Introduction P2 S1-2
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P2 S1-2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Kaplan-Meier不适合大量预测变量且不能个性化，不适用于器官分配决策。
+
+- rhetorical_function_cn：削弱第一种方法的可用性。
+
+- depends_on_cn：方法介绍。
+
+- sets_up_cn：为ML路线作铺垫。
+
+- evidence_pointer：Introduction paragraph 2 (Kaplan-Meier part)
+
+### 14. Introduction P2 S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有ML应用有三类缺陷：独立模型不保证单调；顺序预测仍不保证单调；单期ML加群体校准其他期限制个性化。
+
+- rhetorical_function_cn：系统列举文献缺口。
+
+- depends_on_cn：ML方法介绍。
+
+- sets_up_cn：为本文设计提供动机。
+
+- evidence_pointer：Introduction paragraph 2 (a), (b), (c)
+
+### 15. Introduction P2 S4
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P2 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：群体校准方式使概率变化受制于群体均值，偏离平均情况的个体预测无效，这在医疗中常见并推动个性化医疗。
+
+- rhetorical_function_cn：解释为何第三个缺陷尤为严重。
+
+- depends_on_cn：前句的(c)点。
+
+- sets_up_cn：强化对个性化概率的需求。
+
+- evidence_pointer：Introduction paragraph 2 final sentences
+
+### 16. Introduction P3 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：重述总体目标：开发和全面描述一个可获得个性化、数据驱动和单调约束概率曲线的建模框架。
+
+- rhetorical_function_cn：正式宣布论文目标。
+
+- depends_on_cn：缺口论证。
+
+- sets_up_cn：引出研究方法。
+
+- evidence_pointer：Introduction paragraph 3 first sentence
+
+### 17. Introduction P3 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：强调研究动机在于基于术前数据预测移植结局，为分配协议、护理路径和资源利用提供决策支持。
+
+- rhetorical_function_cn：再次强调现实重要性。
+
+- depends_on_cn：总体目标。
+
+- sets_up_cn：为后续应用领域做铺垫。
+
+- evidence_pointer：Introduction paragraph 3 second sentence
+
+### 18. Introduction P3 S3
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出两阶段框架：第一阶段独立ML预测各时点，第二阶段等渗回归校准单调性。
+
+- rhetorical_function_cn：具体化解决方案。
+
+- depends_on_cn：已有文献局限。
+
+- sets_up_cn：为Section 2架构埋下伏笔。
+
+- evidence_pointer：Introduction paragraph 3
+
+### 19. Introduction P3 S4-S5
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P3 S4-S5
+
+- move_code：MECHANISM
+
+- paraphrase_cn：等渗回归通过约束 p_{t+1} ≤ p_t 保证递减，并基于供受者特征保持个性化。
+
+- rhetorical_function_cn：解释设计如何弥补缺陷。
+
+- depends_on_cn：两次阶段描述。
+
+- sets_up_cn：帮助读者理解后续优化模型。
+
+- evidence_pointer：Introduction paragraph 3 final sentences
+
+### 20. Introduction P4
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：预览文章结构：框架概览、问题重要性、应用、结果、含义和补充材料。
+
+- rhetorical_function_cn：提供阅读路线图。
+
+- depends_on_cn：全文结构。
+
+- sets_up_cn：引导章节认知。
+
+- evidence_pointer：Introduction last paragraph
+
+### 21. Section 2 P1 S1
+
+- order：21
+
+- section：Section 2
+
+- locator：Section 2 P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：数据革命使数据驱动预测模型流行，并引用Shmueli和Koppius关于预测建模是IS核心科学活动的观点。
+
+- rhetorical_function_cn：将预测建模嵌入IS学术语境。
+
+- depends_on_cn：引言背景。
+
+- sets_up_cn：为框架目标提供理论正当性。
+
+- evidence_pointer：Section 2 paragraph 1
+
+### 22. Section 2 P1 S2
+
+- order：22
+
+- section：Section 2
+
+- locator：Section 2 P1 S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：预测模型要准确、可提供所需粒度、不过度利用机会（避免过拟合）。
+
+- rhetorical_function_cn：从理论观点提炼设计要求。
+
+- depends_on_cn：Shmueli/Koppius。
+
+- sets_up_cn：映射到框架三个目标。
+
+- evidence_pointer：Section 2 paragraph 1
+
+### 23. Section 2 P2 S1
+
+- order：23
+
+- section：Section 2
+
+- locator：Section 2 P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出本文框架：多期单调概率预测的通用框架。
+
+- rhetorical_function_cn：聚焦框架定义。
+
+- depends_on_cn：前面目标。
+
+- sets_up_cn：详细展开框架特性。
+
+- evidence_pointer：Section 2 paragraph 2
+
+### 24. Section 2 P2 S2
+
+- order：24
+
+- section：Section 2
+
+- locator：Section 2 P2 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：框架目标：允许任意统计/ML/深度学习算法提供各期概率；强调个性化粒度；通过硬数学约束避免过拟合并保证单调。
+
+- rhetorical_function_cn：对应前面的三个要求并给出实现机制。
+
+- depends_on_cn：预测建模要求。
+
+- sets_up_cn：解释为何选择两阶段。
+
+- evidence_pointer：Section 2 paragraph 2
+
+### 25. Section 2 P3
+
+- order：25
+
+- section：Section 2
+
+- locator：Section 2 P3
+
+- move_code：GAP
+
+- paraphrase_cn：框架解决了现有框架缺乏全面性且不够通用的两个缺陷。
+
+- rhetorical_function_cn：再次定位文献缺口。
+
+- depends_on_cn：引言中的局限。
+
+- sets_up_cn：为framework作为贡献铺垫。
+
+- evidence_pointer：Section 2 paragraph 3
+
+### 26. Section 2 P4
+
+- order：26
+
+- section：Section 2
+
+- locator：Section 2 P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第一阶段用独立模型对每个时间段预测二分类概率，包括数据收集、准备、候选模型、训练、评价、调参、选择等标准步骤。
+
+- rhetorical_function_cn：定义阶段一的流程。
+
+- depends_on_cn：通用框架。
+
+- sets_up_cn：为应用中的具体步骤提供背景。
+
+- evidence_pointer：Section 2 paragraph 4
+
+### 27. Section 2 P5
+
+- order：27
+
+- section：Section 2
+
+- locator：Section 2 P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：第二阶段通过解带单调约束的优化问题使用等渗回归校准概率序列。
+
+- rhetorical_function_cn：定义阶段二。
+
+- depends_on_cn：阶段一输出。
+
+- sets_up_cn：后续会给出公式。
+
+- evidence_pointer：Section 2 paragraph 5
+
+### 28. Section 2 P5 last sentence
+
+- order：28
+
+- section：Section 2
+
+- locator：Section 2 P5 last sentence
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：说明选择等渗回归的原因：适用于t>1、非参数无需调参、PAVA算法计算高效、可适应非递减情形。
+
+- rhetorical_function_cn：为技术选择提供辩护。
+
+- depends_on_cn：候选方法讨论。
+
+- sets_up_cn：防止读者质疑为什么不用Sigmoid等。
+
+- evidence_pointer：Section 2 paragraph 5 final
+
+### 29. Section 3 P1 S1
+
+- order：29
+
+- section：Section 3
+
+- locator：Section 3 P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述心衰是严重医学状况，无法泵出足够血液和氧气支持其他器官。
+
+- rhetorical_function_cn：引入医学背景。
+
+- depends_on_cn：无；新章节。
+
+- sets_up_cn：接着给出流行率数据。
+
+- evidence_pointer：Section 3 first paragraph
+
+### 30. Section 3 P2 S1
+
+- order：30
+
+- section：Section 3
+
+- locator：Section 3 P2 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：指出心脏移植是终末期心衰最有效的治疗，中位生存期远好于未移植患者。
+
+- rhetorical_function_cn：说明器官分配问题的重要性。
+
+- depends_on_cn：心衰背景。
+
+- sets_up_cn：引出UNOS流程。
+
+- evidence_pointer：Section 3 second paragraph
+
+### 31. Section 3 P3
+
+- order：31
+
+- section：Section 3
+
+- locator：Section 3 P3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述美国心脏移植过程的五个阶段，从等待名单到移植术后长期随访。
+
+- rhetorical_function_cn：提供领域流程，为决策点定位。
+
+- depends_on_cn：医学背景。
+
+- sets_up_cn：为后续指出框架在match run阶段的应用。
+
+- evidence_pointer：Section 3 Fig. 2 上下文
+
+### 32. Section 3 P4
+
+- order：32
+
+- section：Section 3
+
+- locator：Section 3 P4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：引用UNOS政策目标，并指出通过建模UNOS数据可改进现有移植预测方法。
+
+- rhetorical_function_cn：把领域问题与研究目标连接到一起。
+
+- depends_on_cn：UNOS流程。
+
+- sets_up_cn：提出三方面含义。
+
+- evidence_pointer：Section 3 last paragraph first half
+
+### 33. Section 3 P4 last
+
+- order：33
+
+- section：Section 3
+
+- locator：Section 3 P4 last
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：说明框架对风险分层的三点含义：提高预测精度和校准、为UNOS提供匹配基准、指导术后护理路径。
+
+- rhetorical_function_cn：提前预告应用贡献。
+
+- depends_on_cn：UNOS目标。
+
+- sets_up_cn：为讨论中的贡献部分做伏笔。
+
+- evidence_pointer：Section 3 last paragraph
+
+### 34. Section 4 P1
+
+- order：34
+
+- section：Section 4
+
+- locator：Section 4 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：概述两阶段框架在心脏移植数据上的应用流程，包括阶段一目标（选择模型、观察变量重要性）和阶段二校准。
+
+- rhetorical_function_cn：提供应用层面的路线图。
+
+- depends_on_cn：Section 2框架。
+
+- sets_up_cn：引出数据处理章节。
+
+- evidence_pointer：Section 4 first paragraph
+
+### 35. Section 4.1.1 P1
+
+- order：35
+
+- section：Section 4.1.1
+
+- locator：Section 4.1.1 P1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述UNOS数据集规模（103,570例移植事件、494个变量、大量缺失）。
+
+- rhetorical_function_cn：让读者了解数据挑战。
+
+- depends_on_cn：应用引入。
+
+- sets_up_cn：证明数据清洗是必要前提。
+
+- evidence_pointer：Section 4.1.1
+
+### 36. Section 4.1.2 P1-P2
+
+- order：36
+
+- section：Section 4.1.2
+
+- locator：Section 4.1.2 P1-P2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：提出六步清洗程序以降低维度、处理删失、构造医学特征、处理缺失、重编码类别、划分训练/测试。
+
+- rhetorical_function_cn：将数据挑战转化为具体操作步骤。
+
+- depends_on_cn：数据描述。
+
+- sets_up_cn：为后续分析打基础。
+
+- evidence_pointer：Section 4.1.2
+
+### 37. Section 4.1.2 P2
+
+- order：37
+
+- section：Section 4.1.2
+
+- locator：Section 4.1.2 P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：解释删失规则沿用Dag et al.，基于G-TIME和G-STATUS判定无法观察终点时剔除。
+
+- rhetorical_function_cn：说明关键方法选择的依据。
+
+- depends_on_cn：已有文献。
+
+- sets_up_cn：影响后续样本量。
+
+- evidence_pointer：Section 4.1.2 second step
+
+### 38. Section 4.1.3
+
+- order：38
+
+- section：Section 4.1.3
+
+- locator：Section 4.1.3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：介绍变量选择的三类方法（filter、wrapper、embedded），本文比较fast feature selection、LASSO和RF。
+
+- rhetorical_function_cn：引入方法分类并说明比较设置。
+
+- depends_on_cn：数据清洗。
+
+- sets_up_cn：产生变量选择结果。
+
+- evidence_pointer：Section 4.1.3
+
+### 39. Section 4.1.4
+
+- order：39
+
+- section：Section 4.1.4
+
+- locator：Section 4.1.4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：由于每年存活率约降3-4%且删失规则移除了尚未到达时点的存活者，各时点类别不平衡（短时段存活多，长时段死亡多）。
+
+- rhetorical_function_cn：解释为什么需要重采样。
+
+- depends_on_cn：删失规则。
+
+- sets_up_cn：引出五种重采样策略。
+
+- evidence_pointer：Section 4.1.4
+
+### 40. Section 4.1.4 list
+
+- order：40
+
+- section：Section 4.1.4
+
+- locator：Section 4.1.4 list
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：使用五种重采样策略：None、随机下采样、随机上采样、SMOTE和ROSE。
+
+- rhetorical_function_cn：定义待比较的方案。
+
+- depends_on_cn：类别不平衡机制。
+
+- sets_up_cn：进入算法比较。
+
+- evidence_pointer：Section 4.1.4 (A)-(E)
+
+### 41. Section 4.1.5
+
+- order：41
+
+- section：Section 4.1.5
+
+- locator：Section 4.1.5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：将二分类算法分为统计模型、单一数据驱动分类器和集成方法，本文选择LR、LDA、ANN、CART、SVM、RF和XGB七种。
+
+- rhetorical_function_cn：建立算法候选池。
+
+- depends_on_cn：重采样设定。
+
+- sets_up_cn：用于全因子实验。
+
+- evidence_pointer：Section 4.1.5
+
+### 42. Section 4.1.6 P1-P2
+
+- order：42
+
+- section：Section 4.1.6
+
+- locator：Section 4.1.6 P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：确立六个建模因子并计算全组合为46,200 runs，后降为基于1年预测时段的4200 runs。
+
+- rhetorical_function_cn：说明实验设计规模与降维策略。
+
+- depends_on_cn：候选方法。
+
+- sets_up_cn：引出模型选择标准。
+
+- evidence_pointer：Section 4.1.6
+
+### 43. Section 4.1.6 P3
+
+- order：43
+
+- section：Section 4.1.6
+
+- locator：Section 4.1.6 P3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择1年时点作为模型选择基准，因为样本量大且为文献常用。
+
+- rhetorical_function_cn：解释降维选择的合理性。
+
+- depends_on_cn：计算成本。
+
+- sets_up_cn：后续选出的模型会被用于所有时点。
+
+- evidence_pointer：Section 4.1.6
+
+### 44. Section 4.1.6 P5
+
+- order：44
+
+- section：Section 4.1.6
+
+- locator：Section 4.1.6 P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用G-Mean而非AUC作为主要选择指标，因为它适合不平衡问题且惩罚敏感度与特异度间的较大差距。
+
+- rhetorical_function_cn：说明主指标选择的理由。
+
+- depends_on_cn：类别不平衡。
+
+- sets_up_cn：决定最终模型选择。
+
+- evidence_pointer：Section 4.1.6 last paragraph
+
+### 45. Section 4.1.7
+
+- order：45
+
+- section：Section 4.1.7
+
+- locator：Section 4.1.7
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为简洁，将选定模型（LR+特定预处理）重新训练到其余10个时点，生成各期生存概率。
+
+- rhetorical_function_cn：确定流水线：一个预处理+11个LR模型。
+
+- depends_on_cn：1年模型选择。
+
+- sets_up_cn：进入等渗回归。
+
+- evidence_pointer：Section 4.1.7
+
+### 46. Section 4.2
+
+- order：46
+
+- section：Section 4.2
+
+- locator：Section 4.2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：定义个体概率向量 p=(p0,...,p10)，说明使用等渗回归保证非增。
+
+- rhetorical_function_cn：将通用框架落到应用。
+
+- depends_on_cn：阶段一输出。
+
+- sets_up_cn：结果部分的校准评价。
+
+- evidence_pointer：Section 4.2
+
+### 47. Section 5.1.2
+
+- order：47
+
+- section：Section 5.1.2
+
+- locator：Section 5.1.2
+
+- move_code：RESULT
+
+- paraphrase_cn：报告LASSO选择变量的频率和12个在全部11个时点均被选中的重要变量。
+
+- rhetorical_function_cn：展示变量重要性结果。
+
+- depends_on_cn：阶段一模型。
+
+- sets_up_cn：用于与文献比较。
+
+- evidence_pointer：Section 5.1.2, Table 2
+
+### 48. Section 5.1.3 P1
+
+- order：48
+
+- section：Section 5.1.3
+
+- locator：Section 5.1.3 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：SVM未收敛，故不报告结果；LR在G-Mean上表现最佳，但差异不显著，因其运行快且医务人员易理解而被选择。
+
+- rhetorical_function_cn：选择阶段一最终模型并解释。
+
+- depends_on_cn：4200 runs结果。
+
+- sets_up_cn：后续所有结果基于LR。
+
+- evidence_pointer：Section 5.1.3, Table 3
+
+### 49. Section 5.1.3 P2-P4
+
+- order：49
+
+- section：Section 5.1.3
+
+- locator：Section 5.1.3 P2-P4
+
+- move_code：RESULT
+
+- paraphrase_cn：报告训练/测试AUC范围和各时点hold-out性能表，并指出前5年预测概率低估观测均值。
+
+- rhetorical_function_cn：给出阶段一性能细节并揭示校准偏差。
+
+- depends_on_cn：LR模型。
+
+- sets_up_cn：说明需要校准和后续观察。
+
+- evidence_pointer：Section 5.1.3, Fig.4, Table 4, Fig.5
+
+### 50. Section 5.2 P1
+
+- order：50
+
+- section：Section 5.2
+
+- locator：Section 5.2 P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：检查个体化概率曲线发现非单调行为，展示示例患者的曲线，随后用等渗回归校准。
+
+- rhetorical_function_cn：提供直接的激励性证据，表明问题确实存在。
+
+- depends_on_cn：阶段一结果。
+
+- sets_up_cn：引入等渗回归应用。
+
+- evidence_pointer：Section 5.2, Fig.6
+
+### 51. Section 5.2 P2-P3
+
+- order：51
+
+- section：Section 5.2
+
+- locator：Section 5.2 P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：评价校准后概率的精度，量化校准前后差异：AUC和G-Mean多数时点改善，且曲线单调。
+
+- rhetorical_function_cn：验证阶段二设计有效。
+
+- depends_on_cn：等渗回归应用。
+
+- sets_up_cn：为讨论提供核心证据。
+
+- evidence_pointer：Section 5.2, Fig.7, Table 5
+
+### 52. Section 6.1 P1
+
+- order：52
+
+- section：Section 6.1
+
+- locator：Section 6.1 P1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：在讨论预测结果前，先对比重要变量与文献的一致性。
+
+- rhetorical_function_cn：引入外部效度检验。
+
+- depends_on_cn：变量重要性结果。
+
+- sets_up_cn：展示结果是否可信。
+
+- evidence_pointer：Section 6.1
+
+### 53. Section 6.1 P2-P4
+
+- order：53
+
+- section：Section 6.1
+
+- locator：Section 6.1 P2-P4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：用表比较12个重要变量在Dag、Dag、Medved等文献中的入选情况，并观察一致性与差异。
+
+- rhetorical_function_cn：将变量结果放在文献语境中。
+
+- depends_on_cn：变量表。
+
+- sets_up_cn：解释差异原因。
+
+- evidence_pointer：Section 6.1, Table 6
+
+### 54. Section 6.1 P5
+
+- order：54
+
+- section：Section 6.1
+
+- locator：Section 6.1 P5
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：将1年和10年AUC与Yoon、Dag、Medved、Miller、Villela等结果对比，显示相当或更优；并强调对方未报告灵敏度和G-Mean。
+
+- rhetorical_function_cn：建立绩效基准，展示模型竞争力。
+
+- depends_on_cn：Table 4。
+
+- sets_up_cn：支持贡献声明。
+
+- evidence_pointer：Section 6.1
+
+### 55. Section 6.1 P5 last
+
+- order：55
+
+- section：Section 6.1
+
+- locator：Section 6.1 P5 last
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：指出已有文献很少详细描述数据清洗程序，本文公开R Markdown代码使工作更可复现。
+
+- rhetorical_function_cn：将可复现性作为贡献。
+
+- depends_on_cn：代码发布。
+
+- sets_up_cn：为材料部分铺垫。
+
+- evidence_pointer：Section 6.1 last sentence
+
+### 56. Section 6.1 P6
+
+- order：56
+
+- section：Section 6.1
+
+- locator：Section 6.1 P6
+
+- move_code：RESULT
+
+- paraphrase_cn：总结第二阶段：等渗回归未改变整体曲线形态，但保证了医用上重要的非递增性，且预测个性化。
+
+- rhetorical_function_cn：归纳框架的两阶段价值。
+
+- depends_on_cn：图5/图7对比。
+
+- sets_up_cn：转向贡献表述。
+
+- evidence_pointer：Section 6.1 final paragraph
+
+### 57. Section 6.2 P1
+
+- order：57
+
+- section：Section 6.2
+
+- locator：Section 6.2 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：列举框架优点：个性化、保证单调、基于逻辑回归可解释、易于实现、灵活，并实现UNOS基准和护理路径目标。
+
+- rhetorical_function_cn：系统化贡献声明。
+
+- depends_on_cn：全部结果。
+
+- sets_up_cn：引出web app。
+
+- evidence_pointer：Section 6.2
+
+### 58. Section 6.2 P2-P3
+
+- order：58
+
+- section：Section 6.2
+
+- locator：Section 6.2 P2-P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：介绍H-TOP app功能和设计，保证可用于前瞻病例：不包括已停止收集的变量、不用移植年份作预测器、提供完整数据准备流程。
+
+- rhetorical_function_cn：将贡献推广到实践工具。
+
+- depends_on_cn：模型。
+
+- sets_up_cn：展示可操作性。
+
+- evidence_pointer：Section 6.2
+
+### 59. Section 6.3
+
+- order：59
+
+- section：Section 6.3
+
+- locator：Section 6.3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：声明框架是通用的，适用于任何多期预测且需要单调结果的应用，并是混合方法的一种扩展。
+
+- rhetorical_function_cn：把心移植应用推广到其他领域。
+
+- depends_on_cn：框架设计。
+
+- sets_up_cn：为未来研究打开空间。
+
+- evidence_pointer：Section 6.3
+
+### 60. Section 6.4
+
+- order：60
+
+- section：Section 6.4
+
+- locator：Section 6.4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：列出局限：未优化预测性能、只测评有限ML模型、未考虑其他校准方法、回顾性数据限制、低估前四年等问题，并给出未来方向。
+
+- rhetorical_function_cn：诚实总结边界，保护贡献不夸大。
+
+- depends_on_cn：研究设计。
+
+- sets_up_cn：结束全文。
+
+- evidence_pointer：Section 6.4
+
+### 61. Section 6.5
+
+- order：61
+
+- section：Section 6.5
+
+- locator：Section 6.5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结贡献：数据驱动的个性化生存概率曲线，弥补了现有文献中不单调或牺牲个性化的缺陷，并提供代码和网页应用。
+
+- rhetorical_function_cn：收束全文，闭合缺口。
+
+- depends_on_cn：所有结果。
+
+- sets_up_cn：无（结束）。
+
+- evidence_pointer：Section 6.5
+
+## 写作技术
+
+- gap_construction_cn：先用丰富应用场景和单调性需求建立共同前提，然后把现有方法分为两类（群体KM vs ML），再对ML逐条列出三种不满足单调/个性化的情况，最后指出第三种会抹平个体差异，形成明确缺口。
+
+- signposting_cn：在摘要和引言最后一段预告全文结构；在框架章节按阶段、步骤、目标枚举；在应用章节使用(a)-(g)列表；在结果章节以Stage I/II分节。
+
+- transition_logic_cn：从一般性框架到具体移植应用用'为展示效用，应用于...'；从数据处理到模型选择用'基于以上步骤，考虑六因子'；从阶段一结果到阶段二动机用'仔细观察个体曲线发现非单调'；从结果到讨论用'先对比文献变量'。
+
+- claim_evidence_rhythm_cn：先陈述方法设计，再用表格/图表报告结果，然后立即与文献基准比较；重要主张（单调性）配有数学保证和示例图；性能比较配有具体数值和时间点。
+
+- benchmark_narrative_cn：benchmark不是单独一节，而是嵌入模型选择（4200组合）和讨论部分（与Yoon等AUC对比）；使用代表文献、时间窗、算法类型三维选择对比对象。
+
+- theory_return_cn：框架章节引用Shmueli和Koppius，但结尾没有返回该理论的系统讨论；理论仅作初始正当化。
+
+- contribution_positioning_cn：贡献分三个层面：通用框架、移植研究/实践、数据驱动决策支持社区；以‘我们的框架……’列出优点，并通过开放代码/网页应用增强可辩护性。
+
+- novelty_protection_cn：通过公开代码和详细数据清洗、与文献可复现性对比，防止贡献被贬为一次性结果；同时强调数学保证（单调性）而非仅凭数据观察，从而保护创新。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立广泛的多期预测背景，并明确指出概率应满足单调性
+
+- research_job_cn：识别出至少两个以上需要单调概率的应用领域并引用文献
+
+- required_evidence_cn：相关领域例子和决策支持含义
+
+- transition_to_next_cn：指出现有方法无法同时满足这些需求
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：剖析现有方法的局限，并将缺陷归类
+
+- research_job_cn：系统梳理Kaplan-Meier、ML等多期预测文献
+
+- required_evidence_cn：每类局限至少一个代表文献，并说明后果
+
+- transition_to_next_cn：自然引出新框架作为解决方案
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：提出高层面框架，用阶段/列表说清组件，给出必要的算法选择理由
+
+- research_job_cn：设计通用流程，选择合适的校准/约束机制并验证其数学性质
+
+- required_evidence_cn：算法性质或形式化描述（如等渗回归的优化公式）
+
+- transition_to_next_cn：转入一个真实应用来展示效用
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：介绍领域背景、流程、政策目标和为什么需要该预测框架
+
+- research_job_cn：获取真实领域数据，理解决策流程和数据特点
+
+- required_evidence_cn：领域数据和流程知识
+
+- transition_to_next_cn：进入数据准备
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：详述数据清洗步骤、删失规则、特征构造、缺失处理、编码和数据划分
+
+- research_job_cn：执行清洗并记录样本量、变量数变化
+
+- required_evidence_cn：清洗前后数据规模、缺失率处理说明
+
+- transition_to_next_cn：说明清洗后数据如何支撑模型选择
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计并执行模型选择实验，列出因子、水平、全组合数量、降维策略、评价指标和选择标准
+
+- research_job_cn：跑交叉验证或网格搜索，记录各组合表现
+
+- required_evidence_cn：最佳组合及置信区间、显著性或合理性理由
+
+- transition_to_next_cn：把选定模型推广到其他时段
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：描述每个时点重训模型，定义概率向量，应用等渗回归（或其他约束方法）
+
+- research_job_cn：训练多个模型并校准每个个体概率向量
+
+- required_evidence_cn：校准前后个体曲线示例和指标变化表
+
+- transition_to_next_cn：综合评估并对比文献
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：报告分类指标、校准精度、与既有文献benchmark对比，进行稳健性讨论
+
+- research_job_cn：计算性能指标、绘图、整理对比表
+
+- required_evidence_cn：表格、图、置信区间（如有）
+
+- transition_to_next_cn：给出贡献和边界
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：分层声明贡献，说明实践工具，指出局限和未来方向
+
+- research_job_cn：若可行，发布代码/应用，确保可复现
+
+- required_evidence_cn：可访问链接、代码仓库
+
+- transition_to_next_cn：结束
+
+### most_transferable_moves_cn
+
+1. 用具体应用域激活通用方法，使方法论论文容易落地
+
+2. 把数学约束硬编码为设计特征（isotonic regression）作为创新点
+
+3. 用因子实验+降维选择提高实验可信度
+
+4. 与文献基准对比时同时指出对方缺失指标（如敏感性）
+
+5. 通过开放代码和网页应用增强贡献可持久性
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. UNOS全国注册数据（103,570例），不是所有研究者都有权访问
+
+2. 大规模计算实验（4200 runs）需要高性能计算资源，作者还致谢了Ohio Supercomputer Center
+
+3. 医疗领域知识和UNOS变量定义需要领域专家参与
+
+4. web app部署和长期维护需要IT资源
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只声称‘等渗回归保证单调’而没有展示个体曲线和前后指标变化
+
+2. 不要宣称与文献可比却缺少相同数据/标准的严格benchmark
+
+3. 不要用‘通用框架’标签掩盖只在一个领域验证的局限
+
+4. 不要只贴GitHub链接而不提供详细的数据清洗流程，否则可复现性声明会失效
+
+- single_best_description_of_the_routine_cn：先造一般性单调概率缺口，再用一个真实高维数据集构建两阶段ML+保序回归制品，以文献基准和校准前后对比双重证据证明性能不降且满足约束，最终将贡献上升到通用框架和开放工具。
+
+## 分析边界
+
+全文可读但部分表格/图以图片形式存在，无法精确读取数值；没有看到R Markdown和app的实际内容；文章未提供显式RQ编号；对应用户提供全文，分析基于文本忠实推理。

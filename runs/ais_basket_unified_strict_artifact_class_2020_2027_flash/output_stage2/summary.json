@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-08-07T11:28:00.883843+00:00",
+  "prompt_fingerprint": "85e417ab9481497c2b75f7c98cd06693ac917db5e4f28415e23cd4d5791fd88f",
+  "stage1_candidate_count": 39,
+  "red_team_completed": 39,
+  "red_team_pending": 0,
+  "final_include_count": 27,
+  "final_exclude_count": 12,
+  "final_include_year_counts": {
+    "2020": 11,
+    "2021": 2,
+    "2022": 3,
+    "2023": 5,
+    "2024": 2,
+    "2025": 3,
+    "2026": 1
+  },
+  "final_include_journal_counts": {
+    "Decision Support Systems": 8,
+    "European Journal of Information Systems": 4,
+    "Information & Management": 1,
+    "Information Systems Research": 5,
+    "Journal of Management Information Systems": 2,
+    "Journal of the Association for Information Systems": 3,
+    "MIS Quarterly": 4
+  },
+  "usage": {
+    "prompt_tokens": 1216371,
+    "completion_tokens": 229541,
+    "total_tokens": 1445912,
+    "prompt_cache_hit_tokens": 183424,
+    "prompt_cache_miss_tokens": 1032947
+  }
+}

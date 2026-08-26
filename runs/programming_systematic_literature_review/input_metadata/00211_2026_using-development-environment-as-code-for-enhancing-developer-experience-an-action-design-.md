@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105029314217"
+title: "Using development environment as code for enhancing developer experience: An action design research study"
+authors: "Ghanbari H.; Terimaa T.; Koskinen K."
+year: "2026"
+journal: "Journal of Systems and Software"
+doi: "10.1016/j.jss.2026.112803"
+---
+# Scopus title-abstract-keyword metadata
+Title: Using development environment as code for enhancing developer experience: An action design research study
+Abstract: Setting up and configuring local development environments is often laborious, time-consuming, and error-prone, which can negatively impact developer experience (DX). Despite a growing body of literature on DX, the existing studies remain silent about the impact of setting up and configuring local development tools and environments on DX. Against this backdrop, we conducted an Action Design Research (ADR) study in a Finnish software company to examine this impact and propose a solution for enhancing the experience. In addition to explaining how DX is shaped when setting up and configuring development environments, we propose the concept of Development Environment as Code (DEaC) as a solution for mitigating some of the issues associated with the process. Based on the lessons learned from the project, we offer four theoretically informed and empirically grounded design principles (DPs) for creating other instances of the artefact with the specific goal of improving DX related to managing their development environments. The paper concludes with recommendations for organisations to consider when adopting DEaC. © 2026
+Author keywords: Action design research; Automation; Containerization; Developer experience; Development environment; Development environment as code; Software development
+Index keywords: Codes (symbols); Computer aided design; Software design; Action design research; Containerization; Design research; Developer experience; Development environment; Development environment as code; Error prones; Local development; Research studies; Automation
+Document type: Article
+Conference: 
+Source title: Journal of Systems and Software
+Year: 2026
+EID: 2-s2.0-105029314217
+DOI: 10.1016/j.jss.2026.112803
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

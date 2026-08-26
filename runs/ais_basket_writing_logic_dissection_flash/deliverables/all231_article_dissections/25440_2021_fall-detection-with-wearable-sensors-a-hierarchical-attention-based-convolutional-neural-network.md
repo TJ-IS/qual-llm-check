@@ -1,0 +1,1515 @@
+# Fall Detection with Wearable Sensors: A Hierarchical Attention-based Convolutional Neural Network Approach
+
+- 作者：Shuo Yu; Yidong Chai; Hsinchun Chen; Randall A. Brown; Scott J. Sherman; Jay F. Nunamaker
+- 年份 / 期刊：2021 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2021.1990617
+- 源文件：25440_2021_fall-detection-with-wearable-sensors-a-hierarchical-attention-based-convolutional-neural-network.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.78
+
+## 文章级论证概况
+
+- 核心问题：如何利用可穿戴传感器数据，构建一个既能在跌倒检测上取得更优性能、又能提供可解释性的深度学习信息系统制品，从而推进慢性病管理和传感器健康分析？
+
+- 制品与设计：提出HACNN模型，由CNN作为原始三轴传感器序列的自动特征提取器，叠加轴级注意力和传感器级注意力两个层级注意力层，最后经全连接和softmax输出跌倒/非跌倒判断；该结构旨在避免手工特征工程并给每个传感器轴和每个传感器位置/类型分配可解释的注意力权重。
+
+- 客观结果：在MobiFall和UMAFall两个公开数据集上，HACNN的F-measure分别达到0.9808和0.9739，显著优于7种经典机器学习模型和5种深度模型；消融显示学习率1e-3最佳、数据规模显著影响性能、高斯噪声影响较小；案例研究显示注意力权重能区分传感器类型/位置和不同轴向的重要性。
+
+- 核心贡献：作者声称的贡献是为IS知识库提供一个可解释的跌倒检测IT制品HACNN，并通过设计科学范式提出可复用的模型构建设计原则，以支持未来可穿戴传感器健康管理研究。
+
+- 整篇论证链：文章从老年人跌倒的严重健康后果和及时救助困难出发，指出现有跌倒检测模型要么依赖手工特征工程、要么深度学习缺乏可解释性；接着在IS背景中定位慢性病管理和移动传感器分析的文献缺口，采用计算设计科学范式提出HACNN，用两个公开数据集开展经典ML、深度模型、消融和案例研究等多层评价，最后把绩效结果提升为面向可解释健康分析的设计知识。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确遵循计算设计科学范式，核心是构建一个新型IT制品HACNN，随后通过基准实验、消融分析、噪声稳健性和案例研究完成评价，并在最后提炼通用设计原则；这不是单纯benchmark论文，而是以设计制品和设计知识为贡献。
+
+- 主导写作弧线判定：全文主线是：现有跌倒检测存在性能缺口（手工特征局限和黑箱不可解释）→提出HACNN制品→用经典ML、深度模型和消融建立benchmark链条→用案例研究展示注意力可解释性→从结果推广为通用设计原则和IS贡献；符合性能缺口—制品—基准—一般化知识的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：研究先建立问题与文献缺口，然后准备共享数据，接着构建HACNN制品；随后依次与经典ML模型比较、与深度模型比较、进行消融和稳健性检验，最后通过案例研究检验可解释性；各阶段累积关系为：数据为所有模型提供统一测试床，模型构建提供待评价制品，基准检验证明有效性，消融证明设计空间的稳健性，案例研究把注意力权重转化为领域可解释证据。
+
+### studies_or_phases
+
+#### 1. 数据收集与预处理阶段
+
+- order：1
+
+- name_cn：数据收集与预处理阶段
+
+- question_cn：用什么数据作为跌倒检测模型的通用测试床？
+
+- inputs_and_setting_cn：两个公开可穿戴传感器数据集MobiFall和UMAFall；MobiFall包含三传感器在受试者大腿位置的10秒200Hz数据，UMAFall包含四个加速度计分别位于脚踝、胸、腰、手腕的15秒200Hz数据；未进行滤波或去噪。
+
+- designed_or_compared_object_cn：选择两个具有不同传感器类型、位置和跌倒类别的公开数据集作为统一测试床。
+
+- baseline_control_or_counterfactual_cn：无对照，数据本身作为所有后续模型的共同输入。
+
+##### objective_metrics
+
+1. 跌倒/非跌倒实例数量
+
+2. 采样率与记录时长
+
+3. 传感器类型与佩戴位置
+
+- analysis_method_cn：描述性数据准备和后续十折交叉验证的基础。
+
+- main_result_cn：MobiFall提供288个跌倒和297个非跌倒样本；UMAFall提供208个跌倒和538个非跌倒样本。
+
+- argumentative_role_cn：为所有模型提供外部公开、可复用的实验基础，避免自采数据带来的混淆。
+
+- remaining_uncertainty_cn：两个数据集均为实验室诱发的跌倒，不能代表真实老年人自然跌倒的复杂分布。
+
+- link_to_next_phase_cn：数据集准备好后进入HACNN模型构建与设计。
+
+##### evidence_pointers
+
+1. Research Design: Data Collection and Preprocessing
+
+2. Abstract: two large publicly available datasets
+
+#### 2. HACNN制品构建阶段
+
+- order：2
+
+- name_cn：HACNN制品构建阶段
+
+- question_cn：如何把CNN表示学习和层级注意力的知识转化为可解释跌倒检测模型？
+
+- inputs_and_setting_cn：原始三轴传感器时间序列；模型结构设计基于CNN和层级注意力机制。
+
+- designed_or_compared_object_cn：HACNN模型，包含CNN特征提取器、轴级注意力、传感器级注意力和输出层。
+
+- baseline_control_or_counterfactual_cn：本阶段没有比较对象；后续所有基准模型构成对照。
+
+##### objective_metrics
+
+1. 模型结构层数
+
+2. 注意力权重输出
+
+3. 后续F-measure
+
+- analysis_method_cn：计算设计科学方法，把深度学习和注意力机制转化为具体网络结构。
+
+- main_result_cn：HACNN可自适应任意数量传感器，并输出轴级和传感器级的注意力权重。
+
+- argumentative_role_cn：提出核心IT制品，完成从知识到设计的翻译。
+
+- remaining_uncertainty_cn：尚不清楚模型是否真实优于已有方法，也不清楚注意力权重是否提供可靠解释。
+
+- link_to_next_phase_cn：需要通过基准实验评价准确率，通过案例研究评价可解释性。
+
+##### evidence_pointers
+
+1. Research Design: The Proposed HACNN Model
+
+2. Figure 1
+
+3. Appendix C Model Specifications
+
+#### 3. 经典机器学习基准阶段
+
+- order：3
+
+- name_cn：经典机器学习基准阶段
+
+- question_cn：相对于手工特征加经典机器学习算法，HACNN能否在跌倒检测上更准确？
+
+- inputs_and_setting_cn：MobiFall和UMAFall数据；经典模型分别使用手工特征集或原始数据。
+
+- designed_or_compared_object_cn：SVM、LR、NB、KNN、DT、RF、AB，每种模型分别以手工特征和原始数据为输入，与HACNN比较。
+
+- baseline_control_or_counterfactual_cn：同一份数据上的7种经典模型是HACNN的对照。
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F-measure
+
+4. t-test显著性
+
+5. proportions检验显著性
+
+- analysis_method_cn：十折交叉验证；以每一折作为样本进行两样本统计检验。
+
+- main_result_cn：HACNN在两个数据集上的F-measure显著高于所有经典ML模型；RF和AB是手工特征模型中表现最好的替代方案。
+
+- argumentative_role_cn：证明手工特征工程有局限，深度表示学习能从原始传感器数据中提取更有效的隐藏特征。
+
+- remaining_uncertainty_cn：仅证明HACNN优于经典ML，仍不能回答深度学习黑箱问题。
+
+- link_to_next_phase_cn：需要继续与深度baseline比较，并进一步检验可解释性。
+
+##### evidence_pointers
+
+1. Experimental Results: Classic Machine Learning Algorithms
+
+2. Table 2
+
+#### 4. 替代深度模型基准阶段
+
+- order：4
+
+- name_cn：替代深度模型基准阶段
+
+- question_cn：相对已有深度模型，HACNN能否取得更优性能？
+
+- inputs_and_setting_cn：同一公开数据集；MLP使用手工特征或原始数据，CNN、LSTM、CNN-LSTM、HALSTM使用原始数据。
+
+- designed_or_compared_object_cn：HACNN与MLP、CNN、LSTM、CNN-LSTM、HALSTM五种深度模型比较。
+
+- baseline_control_or_counterfactual_cn：五种代表性深度模型构成对照，其中HALSTM是同样带层级注意力但基于LSTM的结构。
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F-measure
+
+4. t-test显著性
+
+5. proportions检验显著性
+
+- analysis_method_cn：十折交叉验证和统计显著性检验。
+
+- main_result_cn：HACNN显著优于全部深度baseline；基于CNN的模型总体优于MLP和纯LSTM。
+
+- argumentative_role_cn：证明HACNN在深度模型谱系中具有竞争力，同时为后续注意力可解释性提供铺垫。
+
+- remaining_uncertainty_cn：还没有检验注意力本身是否独立贡献准确率，也没有展示注意力权重的实际语义。
+
+- link_to_next_phase_cn：需要通过消融分析检验设计选择，通过案例研究展示注意力权重含义。
+
+##### evidence_pointers
+
+1. Experimental Results: Alternative Deep Learning Models
+
+2. Table 3
+
+#### 5. 消融分析与稳健性检验阶段
+
+- order：5
+
+- name_cn：消融分析与稳健性检验阶段
+
+- question_cn：HACNN的设计选择、数据规模和噪声对性能的影响是什么？
+
+- inputs_and_setting_cn：MobiFall和UMAFall；对数据集随机取25%、50%、75%子集，并注入1%方差的Gaussian噪声。
+
+- designed_or_compared_object_cn：改变CNN层数、CNN滑动窗口宽度、学习率，以及数据规模和噪声条件。
+
+- baseline_control_or_counterfactual_cn：不同超参数选择之间相互对照；全量无噪声模型作为参照。
+
+##### objective_metrics
+
+1. Precision
+
+2. Recall
+
+3. F-measure
+
+- analysis_method_cn：消融实验，列出均值和标准差，不强调统计显著性。
+
+- main_result_cn：CNN层数和窗口宽度影响不大；学习率1e-3最佳；数据规模显著影响性能，数据集扩大后F1明显提升；Gaussian噪声对F1影响较小。
+
+- argumentative_role_cn：支撑模型设计稳健性和通用设计原则，回应读者对超参数敏感的质疑。
+
+- remaining_uncertainty_cn：未做移除注意力层的消融，因此不能直接证明注意力机制带来准确率提升。
+
+- link_to_next_phase_cn：下一步通过案例研究展示注意力权重的可解释性。
+
+##### evidence_pointers
+
+1. Experimental Results: Ablation Analysis
+
+2. Table 4
+
+#### 6. 注意力权重案例研究阶段
+
+- order：6
+
+- name_cn：注意力权重案例研究阶段
+
+- question_cn：HACNN学习到的层级注意力权重是否具有领域上有意义的可解释性？
+
+- inputs_and_setting_cn：训练后HACNN在MobiFall和UMAFall上对每个传感器轴和传感器位置/类型生成的注意力权重。
+
+- designed_or_compared_object_cn：统计多个轴级和传感器级注意力的总体分布，并按照向前、向后、侧向跌倒类型进行分解。
+
+- baseline_control_or_counterfactual_cn：无模型对照；使用传感器领域的物理和临床知识解释注意力模式。
+
+##### objective_metrics
+
+1. 平均注意力权重
+
+2. 95%置信区间
+
+- analysis_method_cn：描述性统计和图分解。
+
+- main_result_cn：MobiFall中加速度计和陀螺仪贡献几乎相等，方向传感器贡献较低；UMAFall中四个位置贡献较均衡但x和z轴贡献更大；侧向跌倒时y轴更突出。
+
+- argumentative_role_cn：把注意力权重从黑箱参数转译为可观察的领域模式，支撑解释性和未来传感器部署建议。
+
+- remaining_uncertainty_cn：缺少用户或临床专家研究来验证注意力权重是否真正提高了使用者对模型决策的理解。
+
+- link_to_next_phase_cn：案例研究结果被用于讨论贡献、实用部署和未来研究方向。
+
+##### evidence_pointers
+
+1. Case Study: Attention Weight Statistics
+
+2. Figures 2-4
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 跌倒威胁老年人独立生活，可穿戴传感器是可行方案
+
+2. LIMITATION: 现有跌倒检测依赖手工特征或缺乏可解释性
+
+3. THEORY_INTRO: 采用计算设计科学范式提出HACNN深度学习模型
+
+4. STUDY_OVERVIEW: 用两个大型公开数据集评价并进行案例研究
+
+5. CONTRIBUTION: 贡献可解释跌倒检测IT制品和通用设计原则
+
+### introduction_moves
+
+1. CONTEXT: 人口老龄化和跌倒的严重健康与经济后果
+
+2. PRACTICAL_STAKES: 及时救助减少住院和死亡，但看护者不可得，可穿戴传感器自动检测成为方案
+
+3. PRIOR_KNOWLEDGE: 现有传感器跌倒检测主要是手工特征或黑箱深度学习
+
+4. LIMITATION: 手工特征工程ad hoc、费力和不确定；深度学习缺乏可解释性
+
+5. RQ_OR_OBJECTIVE: 提出两个研究问题：提升SOTA和改善可解释性
+
+6. GAP: IS社区关注慢性病管理和移动技术，但没有面向传感器跌倒检测的IT制品
+
+7. STUDY_OVERVIEW: 提出HACNN，进行数据集评价和案例研究
+
+8. CONTRIBUTION: 明确贡献为新型可解释深度模型和未来传感器研究模板
+
+### theory_and_knowledge_moves
+
+1. CONTEXT: HIT和慢性病管理是IS重要议题，跌倒与慢性病相关
+
+2. GAP: 传感器移动分析在IS中尤其跌倒检测仍未被充分探索
+
+3. THEORY_INTRO: 计算设计科学可指导计算制品开发，并引用IS中健康预测和活动识别案例
+
+4. PRIOR_KNOWLEDGE: 传感器分为环境与可穿戴，可穿戴因部署、隐私和成本被偏好
+
+5. MECHANISM: 可穿戴数据高频且单点信息少，因此需要特征提取
+
+6. LIMITATION: 手工特征工程不足，例如阈值法会把跳跃误报为跌倒
+
+7. THEORY_INTRO: 深度学习通过表示学习自动提取特征，CNN适合网格拓扑数据
+
+8. THEORY_INTRO: 注意力机制可通过权重提高深度学习可解释性，层级注意力用于多粒度建模
+
+9. GAP: 没有研究把注意力整合进可穿戴传感器跌倒检测模型
+
+### artifact_design_moves
+
+1. STUDY_OVERVIEW: 研究设计包含数据收集、HACNN模型和评价三大组件
+
+2. METHOD_JUSTIFICATION: 选用两个常用公开数据集作为ground truth
+
+3. DESIGN_FEATURE: CNN作为滑动特征提取器，使用卷积、非线性、池化阶段
+
+4. DESIGN_FEATURE: 轴级注意力计算每个传感器内x/y/z轴的重要性
+
+5. DESIGN_FEATURE: 传感器级注意力计算不同传感器位置/类型的重要性
+
+6. DESIGN_FEATURE: 输出层使用全连接和softmax，中间插入dropout
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: 设置三组baseline：经典ML、替代深度模型、消融分析
+
+2. BENCHMARK_OR_CONTRAST: 经典ML使用手工特征或原始数据
+
+3. BENCHMARK_OR_CONTRAST: 深度模型包括MLP、CNN、LSTM、CNN-LSTM、HALSTM
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST: 消融超参数、数据集规模和噪声
+
+5. METHOD_JUSTIFICATION: 十折交叉验证，使用F-measure并做统计检验
+
+6. STUDY_OVERVIEW: 案例研究聚合注意力权重以展示可解释性
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: HACNN作为慢性病管理中的IT制品，推进可解释跌倒检测
+
+2. CONTRIBUTION: 基于实验提炼通用设计原则，包括数据和应用特征、模型构建建议
+
+3. BOUNDARY_CONDITION: 模型未显式编码疾病领域知识，因此可迁移到其他不良事件检测
+
+4. OTHER: 给出部署建议，包括运行周期、传感器位置和云计算/手机端部署
+
+5. LIMITATION_AND_FUTURE: 只使用可穿戴数据、只在两个数据集验证、未做在线学习
+
+6. CONTRIBUTION: 结论重申HACNN在准确性和可解释性上的贡献
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 计算设计科学范式 (Rai, 2017)
+
+2. IS慢性病管理研究，包括Lin et al.的BMTL、Zhu et al.的深度学习ADL识别
+
+3. CNN表示学习和网格拓扑数据结构知识 (Goodfellow et al.; LeCun et al.)
+
+4. 注意力和层级注意力机制用于可解释深度学习 (Bahdanau et al.; Xu et al.; Yang et al.)
+
+5. 可穿戴传感器跌倒检测领域知识，包括传感器类型、位置、跳变特征和阈值局限
+
+6. 公开跌倒数据集MobiFall和UMAFall的领域使用知识
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：CNN适合网格拓扑传感器数据的知识直接决定了使用CNN作为特征提取器；注意力机制用于改善可解释性的知识直接决定了加入轴级和传感器级注意力层；这些设计选择在评价中被直接检验，而非事后解释。
+
+- 理论到设计翻译链：传感器数据高频且网格拓扑→CNN自动表示学习→避免手工特征工程；深度学习黑箱→注意力机制可分配输入部分重要性→层级注意力对应轴级和传感器级两个粒度→HACNN输出可解释权重；两个公开数据集提供评价基础→基准实验验证性能→案例研究验证可解释性→提炼设计原则。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：手工特征工程是ad hoc、费力且可能遗漏隐藏特征；深度学习表示学习能自动从原始传感器数据中学习有效特征
+
+- mechanism_cn：多层非线性变换和卷积局部滤波自动提取与跌倒相关的时域局部模式，无需人工定义特征
+
+- design_requirement_cn：模型应直接处理原始三轴传感器序列，避免手工特征
+
+- artifact_choice_cn：HACNN采用CNN卷积、ReLU和池化堆叠作为特征提取器
+
+- evaluated_contrast_cn：与7种基于手工特征或原始数据的经典ML模型比较
+
+- objective_result_cn：HACNN在两个数据集上的F1显著高于所有经典ML模型
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Classic Machine Learning Algorithms结果
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：CNN适合网格拓扑数据，而可穿戴传感器时间序列近似一维网格
+
+- mechanism_cn：卷积核在时间滑动窗口上检测局部运动模式，池化保留显著特征并降低规模
+
+- design_requirement_cn：使用CNN结构作为传感器序列的表示学习主干
+
+- artifact_choice_cn：构造四组卷积/ReLU/池化阶段，输出展平特征向量
+
+- evaluated_contrast_cn：与MLP、LSTM、CNN-LSTM等深度模型比较
+
+- objective_result_cn：HACNN显著优于所有深度baseline，且CNN类模型整体优于MLP和LSTM
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Alternative Deep Learning Models结果
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：注意力机制通过给输入部分分配权重提升可解释性；层级注意力可在不同粒度上建模
+
+- mechanism_cn：轴级注意力突出每个传感器内更有判别力的轴向，传感器级注意力突出更重要的传感器位置/类型
+
+- design_requirement_cn：模型不仅要检测跌倒，还要能显示哪些轴和传感器影响决策
+
+- artifact_choice_cn：在CNN特征上增加轴级和传感器级两层注意力，加权得到最终向量
+
+- evaluated_contrast_cn：与HALSTM等其他注意力深度模型比较，并通过案例研究观察注意力权重
+
+- objective_result_cn：HACNN性能优于HALSTM；注意力权重展示传感器/轴重要性，可进行领域解释
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Case Study: Attention Weight Statistics
+
+3. Figures 2-4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：模型设计空间中并非所有超参数同等重要；数据量和噪声影响可反映鲁棒性
+
+- mechanism_cn：消融分析控制单个因素，观察性能变化
+
+- design_requirement_cn：为未来研究者提供可操作的设计建议
+
+- artifact_choice_cn：对层数、窗口宽度、学习率、数据集大小和噪声进行消融测试
+
+- evaluated_contrast_cn：同一HACNN结构在不同超参数/数据条件间的性能对比
+
+- objective_result_cn：层数和窗口宽度影响小，学习率1e-3最佳，数据量重要，噪声影响小
+
+##### evidence_pointers
+
+1. Table 4
+
+2. Ablation Analysis结果
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 基准实验：经典机器学习模型对比
+
+2. 基准实验：替代深度学习模型对比
+
+3. 消融分析：超参数、数据规模、噪声
+
+4. 案例研究：注意力权重统计与领域解释
+
+5. 统计显著性检验：t-test和proportions检验
+
+- why_these_evaluations_cn：需要回答两个问题：HACNN是否比现有方法更准确，以及它是否可解释。因此先通过与经典ML和深度模型对比建立性能证据；再用消融和噪声检验模型稳健性和设计空间；最后用案例研究把注意力权重转化为可理解的领域解释。
+
+- benchmark_and_contrast_chain_cn：从经典ML到深度模型逐层收紧对照：经典ML证明手工特征不足，深度baseline证明HACNN在先进深度学习谱系中仍有优势，HALSTM专门对照层级注意力+循环结构，消融分析则对照HACNN自身的设计选择；最后案例研究不比较性能，而是解释模型输出。
+
+### claim_evidence_ledger
+
+1. HACNN优于经典ML：证据为Table 2中两个数据集的F1和显著性检验。
+
+2. HACNN优于替代深度模型：证据为Table 3中两个数据集的F1和显著性检验。
+
+3. 超参数稳健：证据为Table 4中CNN层数和窗口宽度变化时F1变化不大。
+
+4. 数据规模影响性能：证据为Table 4中数据集从25%增大到100%时F1显著上升。
+
+5. 噪声稳健：证据为Table 4中加入1%方差Gaussian噪声后F1下降很小。
+
+6. 注意力权重可解释：证据为案例研究中不同传感器/轴权重模式与领域知识一致。
+
+7. 注意力机制本身提升准确率：未被直接证据支持，因为没有做去除注意力层的消融。
+
+- internal_validity_strategy_cn：使用两个公开标准数据集、十折交叉验证、多个代表性baseline、统计显著性检验、消融分析和噪声注入，降低单次数据划分和单模型比较带来的偏差。
+
+- external_validity_strategy_cn：使用两个传感器配置不同的公开数据集，覆盖不同传感器类型和佩戴位置，并进一步按跌倒类型分解注意力权重，尝试从情境细节推广到传感器部署建议；但未在真实老年人群或临床环境中部署。
+
+- what_is_not_actually_tested_cn：未检验真实世界部署中的端到端延迟、用户接受度和误报实际后果；未通过用户或临床专家实验验证注意力权重是否真正提高人类理解；未测试注意力层去除后的性能；未在真实老年人自然跌倒数据上训练。
+
+## 贡献闭环
+
+- technical_claim_cn：HACNN在MobiFall和UMAFall上相比经典ML和深度baseline取得显著更高的F-measure。
+
+- artifact_claim_cn：HACNN是一个可解释跌倒检测IT制品，可输出轴级和传感器级注意力权重，帮助理解模型决策。
+
+- mechanism_claim_cn：注意力权重反映传感器类型/位置和轴向在跌倒检测中的贡献；例如加速度计和陀螺仪比方向传感器更重要，侧向跌倒时y轴更重要。
+
+- boundary_claim_cn：模型不依赖疾病特定领域知识，因此可能泛化到其他不良事件检测；但作者也表示模型只在两个数据集上得到验证。
+
+- reusable_design_knowledge_cn：面向高频可穿戴传感器数据应使用深度表示学习；提升可解释性可叠加层级注意力；CNN层数和窗口宽度不敏感，学习率1e-3较好，更大数据量更优。
+
+- theoretical_contribution_cn：把可解释深度学习和层级注意力引入可穿戴传感器跌倒检测，回应IS慢性病管理和设计科学文献对计算制品和设计原则的呼吁，但未提出新的行为理论或形式理论。
+
+- how_discussion_closes_intro_gap_cn：讨论部分直接回应引言提出的两个缺口：用基准实验处理手工特征和性能缺口，用案例研究处理不可解释性，并把HACNN定位为IS慢性病管理IT制品和未来传感器研究模板。
+
+- overclaim_or_unsupported_leaps_cn：最明显的跳跃是把注意力的存在与可解释性直接等同，但没有用户研究或临床验证；其次是把没有疾病领域知识作为可泛化性的充分条件，实际只是推测；此外没有无注意力消融，不能从数据上证明注意力提高准确率。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S3
+
+- order：1
+
+- section：Introduction
+
+- locator：P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：人们因医学进步寿命延长，但人口老龄化显著；跌倒给老年人独立生活带来严重威胁，并伴有高医疗成本和致命风险。
+
+- rhetorical_function_cn：在文章开头建立问题的现实严重性和社会重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为跌倒检测必要性铺路。
+
+- evidence_pointer：Introduction P1
+
+### 2. P2 S1-S4
+
+- order：2
+
+- section：Introduction
+
+- locator：P2 S1-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：跌倒后及时救助可明显降低住院和死亡风险，但许多老年人独居无法依赖看护者；低成本、高频率的可穿戴传感器可自动检测并通知救助。
+
+- rhetorical_function_cn：说明现实后果并非单纯研究兴趣，而是可落地的健康管理方案。
+
+- depends_on_cn：依赖于前面跌倒后果的严重性。
+
+- sets_up_cn：引出可穿戴传感器信息系统这一解决路径。
+
+- evidence_pointer：Introduction P2
+
+### 3. P3 S1-S2
+
+- order：3
+
+- section：Introduction
+
+- locator：P3 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有基于传感器的跌倒检测研究主要使用手工特征工程，该方法ad hoc、劳动密集且结果常不确定。
+
+- rhetorical_function_cn：指出现有技术路线的第一个局限。
+
+- depends_on_cn：依赖于可穿戴传感器作为检测方案的背景。
+
+- sets_up_cn：为后续提出自动特征学习做对比。
+
+- evidence_pointer：Introduction P3
+
+### 4. P3 S3-S4
+
+- order：4
+
+- section：Introduction
+
+- locator：P3 S3-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有深度模型用于跌倒检测时仍是黑箱，用户无法知道模型如何以及为何做出决策，这对慢性病管理很关键。
+
+- rhetorical_function_cn：指出现有深度学习的第二个局限，并强调可解释性的重要性。
+
+- depends_on_cn：建立在前面已提出深度模型正在出现的基础上。
+
+- sets_up_cn：为注意力机制和可解释目标铺垫。
+
+- evidence_pointer：Introduction P3
+
+### 5. P3末端
+
+- order：5
+
+- section：Introduction
+
+- locator：P3末端
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出两个研究问题：如何提升可穿戴传感器跌倒检测的SOTA，以及如何提高深度模型可解释性以指导未来跌倒检测系统设置。
+
+- rhetorical_function_cn：把前面的限制转化为具体研究问题。
+
+- depends_on_cn：依赖于两个局限的识别。
+
+- sets_up_cn：为HACNN的构造设定目标。
+
+- evidence_pointer：Introduction P3
+
+### 6. P4 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：P4 S1-S2
+
+- move_code：GAP
+
+- paraphrase_cn：IS社区高度重视慢性病管理和移动技术，但据作者所知还没有为传感器跌倒检测提出IT制品。
+
+- rhetorical_function_cn：在IS学科语境中构造文献缺口。
+
+- depends_on_cn：依赖前面引用的IS研究关注。
+
+- sets_up_cn：为把HACNN定位为IS贡献提供空间。
+
+- evidence_pointer：Introduction P4
+
+### 7. P4 S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P4 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：在计算设计科学范式和IS慢性病管理研究指导下，提出HACNN深度学习框架。
+
+- rhetorical_function_cn：引入方法论框架并预告制品名称。
+
+- depends_on_cn：依赖IS文献缺口的建立。
+
+- sets_up_cn：为具体模型设计介绍做铺垫。
+
+- evidence_pointer：Introduction P4
+
+### 8. P4 S4-S5
+
+- order：8
+
+- section：Introduction
+
+- locator：P4 S4-S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：HACNN通过CNN自动提取特征并用层级注意力改善可解释性；将在两个大型公开数据集上做严格基准实验并展示案例研究。
+
+- rhetorical_function_cn：预告研究评价方案。
+
+- depends_on_cn：依赖HACNN设计的提出。
+
+- sets_up_cn：为后面的数据、评价和案例章节设置预期。
+
+- evidence_pointer：Introduction P4
+
+### 9. P5 S1-S2
+
+- order：9
+
+- section：Introduction
+
+- locator：P5 S1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：主要贡献是把层级注意力整合进CNN并用于可解释跌倒检测，同时为未来可穿戴传感器研究提供模板。
+
+- rhetorical_function_cn：提前声明贡献，使读者知道评价结果应被如何解读。
+
+- depends_on_cn：依赖HACNN和评价方案的预告。
+
+- sets_up_cn：为讨论部分贡献回扣做铺垫。
+
+- evidence_pointer：Introduction P5
+
+### 10. IS Works on HIT P1-P2
+
+- order：10
+
+- section：Research Background
+
+- locator：IS Works on HIT P1-P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：HIT是IS长期关注领域，慢性病管理日益吸引IS研究，跌倒与多种慢性病相关。
+
+- rhetorical_function_cn：把跌倒检测放入IS研究背景。
+
+- depends_on_cn：前面已说明跌倒的临床严重性。
+
+- sets_up_cn：为IS缺口铺路。
+
+- evidence_pointer：Research Background: IS Works on HIT
+
+### 11. IS Works on HIT P2
+
+- order：11
+
+- section：Research Background
+
+- locator：IS Works on HIT P2
+
+- move_code：GAP
+
+- paraphrase_cn：虽然IS已研究移动Web和移动应用等，但面向慢性病管理的传感器移动分析，尤其是跌倒检测，在IS文献中仍未被充分探索。
+
+- rhetorical_function_cn：在IS领域内部明确细分缺口。
+
+- depends_on_cn：依赖对IS文献的综述。
+
+- sets_up_cn：支撑本研究的IS相关性。
+
+- evidence_pointer：Research Background: IS Works on HIT, second paragraph
+
+### 12. IS Works on HIT P3
+
+- order：12
+
+- section：Research Background
+
+- locator：IS Works on HIT P3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：设计科学范式可指导IT制品系统开发；计算设计科学视角强调用计算模型和算法解决实际和社会重要问题，并引用IS先例。
+
+- rhetorical_function_cn：引入本研究的范式立场并说明合法来源。
+
+- depends_on_cn：依赖IS领域已有设计科学文献。
+
+- sets_up_cn：为HACNN冠以计算设计科学制品。
+
+- evidence_pointer：Research Background: IS Works on HIT, third paragraph
+
+### 13. Sensor-based Fall Detection P1-P2
+
+- order：13
+
+- section：Research Background
+
+- locator：Sensor-based Fall Detection P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：跌倒检测传感器分为环境和可穿戴两类；可穿戴因易部署、隐私干扰小和成本低而更受青睐。
+
+- rhetorical_function_cn：概括领域知识并解释为何聚焦可穿戴传感器。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后续讨论传感器数据特征和模型选择提供背景。
+
+- evidence_pointer：Research Background: Sensor-based Fall Detection
+
+### 14. Sensor-based Fall Detection P3
+
+- order：14
+
+- section：Research Background
+
+- locator：Sensor-based Fall Detection P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：可穿戴数据高频率且每个三轴加速度矢量信息量很少，因此需要特征提取从序列中提炼信息，最大加速度幅度是常用特征之一。
+
+- rhetorical_function_cn：解释为什么该领域依赖特征工程。
+
+- depends_on_cn：依赖对传感器数据的描述。
+
+- sets_up_cn：为批评手工特征工程做铺垫。
+
+- evidence_pointer：Research Background: Sensor-based Fall Detection
+
+### 15. Sensor-based Fall Detection P4
+
+- order：15
+
+- section：Research Background
+
+- locator：Sensor-based Fall Detection P4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：手工特征工程有两个问题：费时且ad hoc，并且难以区分跌倒与跳跃等剧烈非跌倒活动。
+
+- rhetorical_function_cn：明确手工特征的技术局限。
+
+- depends_on_cn：依赖特征提取必要性。
+
+- sets_up_cn：引出深度学习的必要性。
+
+- evidence_pointer：Research Background: Sensor-based Fall Detection, after Table 1
+
+### 16. Deep Learning P1-P2
+
+- order：16
+
+- section：Research Background
+
+- locator：Deep Learning P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：深度学习通过表示学习自动从原始数据中学习显著特征，无需人工特征工程。
+
+- rhetorical_function_cn：引入深度学习作为解决方案。
+
+- depends_on_cn：依赖手工特征局限。
+
+- sets_up_cn：为CNN结构介绍打基础。
+
+- evidence_pointer：Research Background: Deep Learning
+
+### 17. Deep Learning P3-P4
+
+- order：17
+
+- section：Research Background
+
+- locator：Deep Learning P3-P4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：CNN通过卷积、非线性和池化阶段适合网格拓扑数据，可穿戴传感器数据具有网格结构，适合CNN。
+
+- rhetorical_function_cn：把CNN与传感器数据建立技术联系。
+
+- depends_on_cn：依赖深度学习表示学习介绍。
+
+- sets_up_cn：为HACNN选择CNN作为基础。
+
+- evidence_pointer：Research Background: Deep Learning, CNN部分
+
+### 18. Deep Learning Attention部分
+
+- order：18
+
+- section：Research Background
+
+- locator：Deep Learning Attention部分
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：注意力机制通过给输入数据部分分配权重来提升深度学习可解释性；层级注意力是在不同数据粒度上堆叠多个注意力层。
+
+- rhetorical_function_cn：引入可解释性技术基础。
+
+- depends_on_cn：依赖前面黑箱批评。
+
+- sets_up_cn：为层级注意力的两个层级映射。
+
+- evidence_pointer：Research Background: Deep Learning, Attention Mechanism
+
+### 19. Deep Learning Attention末尾
+
+- order：19
+
+- section：Research Background
+
+- locator：Deep Learning Attention末尾
+
+- move_code：GAP
+
+- paraphrase_cn：目前注意力已被用于CNN、RNN和视觉跌倒检测，但据作者所知尚无研究把注意力整合进可穿戴传感器跌倒检测模型。
+
+- rhetorical_function_cn：在技术文献中再次确认缺口。
+
+- depends_on_cn：依赖注意力机制综述。
+
+- sets_up_cn：为HACNN的新颖性辩护。
+
+- evidence_pointer：Research Background: Deep Learning,结尾
+
+### 20. P1
+
+- order：20
+
+- section：Research Gaps and Questions
+
+- locator：P1
+
+- move_code：GAP
+
+- paraphrase_cn：作者总结两个研究缺口：手工特征工程限制明显；没有研究把层级注意力用于可解释的可穿戴传感器跌倒检测。
+
+- rhetorical_function_cn：把背景综述压缩为可操作的研究缺口。
+
+- depends_on_cn：依赖前面对文献和技术的讨论。
+
+- sets_up_cn：为研究问题做最后铺垫。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 21. P1 RQ
+
+- order：21
+
+- section：Research Gaps and Questions
+
+- locator：P1 RQ
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究问题被精化为：如何把注意力整合进深度学习以提升传感器跌倒检测SOTA；层级注意力如何提升可解释性并指导未来系统设置。
+
+- rhetorical_function_cn：正式提出研究问题。
+
+- depends_on_cn：依赖两个缺口的表述。
+
+- sets_up_cn：确定后续研究设计的评价标准。
+
+- evidence_pointer：Research Gaps and Questions
+
+### 22. Research Design开头
+
+- order：22
+
+- section：Research Design
+
+- locator：Research Design开头
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：研究设计包括数据收集与预处理、HACNN模型、以及带baseline/消融/案例研究的评价。
+
+- rhetorical_function_cn：向读者预告研究设计的三段结构。
+
+- depends_on_cn：依赖前面RQ。
+
+- sets_up_cn：组织后续章节。
+
+- evidence_pointer：Research Design
+
+### 23. Data Collection and Preprocessing
+
+- order：23
+
+- section：Research Design
+
+- locator：Data Collection and Preprocessing
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选用两个普遍使用的大型公开数据集MobiFall和UMAFall，不做额外预处理，以保证结果可比。
+
+- rhetorical_function_cn：说明数据来源选择的合理性。
+
+- depends_on_cn：依赖对跌倒检测领域公开数据的了解。
+
+- sets_up_cn：为所有模型提供共享测试床。
+
+- evidence_pointer：Data Collection and Preprocessing
+
+### 24. The Proposed HACNN Model开头
+
+- order：24
+
+- section：Research Design
+
+- locator：The Proposed HACNN Model开头
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：HACNN由CNN、层级注意力机制和输出组件组成，可适应任意数量传感器。
+
+- rhetorical_function_cn：概括制品结构。
+
+- depends_on_cn：依赖研究问题和CNN/注意力知识。
+
+- sets_up_cn：为后续各组件细节描述提供框架。
+
+- evidence_pointer：The Proposed HACNN Model
+
+### 25. CNN组件
+
+- order：25
+
+- section：Research Design
+
+- locator：CNN组件
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：CNN作为滑动特征提取器，由多组卷积、非线性和池化阶段组成，可将原始三轴数据转换为特征。
+
+- rhetorical_function_cn：说明CNN在HACNN中的具体作用。
+
+- depends_on_cn：依赖CNN适合网格数据的理论。
+
+- sets_up_cn：为层级注意力提供特征输入。
+
+- evidence_pointer：The Proposed HACNN Model: CNN
+
+### 26. Hierarchical Attention Mechanism
+
+- order：26
+
+- section：Research Design
+
+- locator：Hierarchical Attention Mechanism
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：层级注意力首先计算每个传感器内各轴的轴级注意力权重，再计算不同传感器位置或类型的传感器级注意力权重，加权汇总得到最终特征向量。
+
+- rhetorical_function_cn：将层级注意力概念翻译为具体网络结构。
+
+- depends_on_cn：依赖注意力机制和层级注意力知识。
+
+- sets_up_cn：为输出层和可解释性案例提供依据。
+
+- evidence_pointer：The Proposed HACNN Model: Hierarchical Attention Mechanism
+
+### 27. Output组件
+
+- order：27
+
+- section：Research Design
+
+- locator：Output组件
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：注意力加权后的向量进入两个全连接层和softmax层，中间使用dropout防止过拟合，输出跌倒或非跌倒。
+
+- rhetorical_function_cn：说明模型最后如何从特征产生分类结果。
+
+- depends_on_cn：依赖前面CNN和注意力输出。
+
+- sets_up_cn：为评价指标提供模型输出。
+
+- evidence_pointer：The Proposed HACNN Model: Output
+
+### 28. Evaluation开头
+
+- order：28
+
+- section：Evaluation
+
+- locator：Evaluation开头
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为了全面比较，设置三组baseline：经典机器学习算法、替代深度学习模型、消融分析。
+
+- rhetorical_function_cn：说明评价设计的三层逻辑。
+
+- depends_on_cn：依赖HACNN模型构建。
+
+- sets_up_cn：组织后续结果表格。
+
+- evidence_pointer：Evaluation
+
+### 29. Classic Machine Learning Algorithms
+
+- order：29
+
+- section：Evaluation
+
+- locator：Classic Machine Learning Algorithms
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：经典ML模型包括SVM、LR、NB、KNN、DT、RF、AB，使用手工特征或原始数据作为输入。
+
+- rhetorical_function_cn：建立第一层性能对照。
+
+- depends_on_cn：依赖前一节对传统方法的批评。
+
+- sets_up_cn：为Table 2结果提供设计依据。
+
+- evidence_pointer：Evaluation: Classic Machine Learning Algorithms
+
+### 30. Alternative Deep Learning Models
+
+- order：30
+
+- section：Evaluation
+
+- locator：Alternative Deep Learning Models
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：深度baseline包括MLP、CNN、LSTM、CNN-LSTM和HALSTM，其中除MLP外只使用原始数据。
+
+- rhetorical_function_cn：建立第二层性能对照，尤其包含带层级注意力的HALSTM。
+
+- depends_on_cn：依赖深度学习和注意力综述。
+
+- sets_up_cn：为Table 3结果提供设计依据。
+
+- evidence_pointer：Evaluation: Alternative Deep Learning Models
+
+### 31. Ablation Analysis
+
+- order：31
+
+- section：Evaluation
+
+- locator：Ablation Analysis
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：消融分析改变CNN层数、窗口宽度、学习率、数据集规模并向数据注入Gaussian噪声，以检验设计选择和稳健性。
+
+- rhetorical_function_cn：扩展评价从单一性能比较到设计空间检验。
+
+- depends_on_cn：依赖HACNN结构可分解为不同设计选项。
+
+- sets_up_cn：为Table 4和设计原则提供依据。
+
+- evidence_pointer：Evaluation: Ablation Analysis
+
+### 32. Metrics段落
+
+- order：32
+
+- section：Evaluation
+
+- locator：Metrics段落
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用十折交叉验证并做两样本统计检验，核心指标选F-measure因为它综合精确率和召回率，适合评价跌倒检测平衡性。
+
+- rhetorical_function_cn：说明评价方法和指标选择理由。
+
+- depends_on_cn：依赖基准测试设计。
+
+- sets_up_cn：为结果表格中的星号和加号标注提供解释。
+
+- evidence_pointer：Evaluation: Metrics
+
+### 33. Classic Machine Learning Algorithms
+
+- order：33
+
+- section：Experimental Results
+
+- locator：Classic Machine Learning Algorithms
+
+- move_code：RESULT
+
+- paraphrase_cn：HACNN在两个数据集上的F-measure显著优于所有经典ML模型；RF和AB是手工特征模型中较好的可选方案。
+
+- rhetorical_function_cn：报告第一层结果并给出解释。
+
+- depends_on_cn：依赖Table 2数据。
+
+- sets_up_cn：证明深度学习相对手工特征的优越性。
+
+- evidence_pointer：Experimental Results: Classic Machine Learning Algorithms
+
+### 34. Alternative Deep Learning Models
+
+- order：34
+
+- section：Experimental Results
+
+- locator：Alternative Deep Learning Models
+
+- move_code：RESULT
+
+- paraphrase_cn：HACNN在F-measure上显著优于五种深度模型；CNN类模型表现优于MLP和纯LSTM。
+
+- rhetorical_function_cn：报告第二层结果并解释CNN结构的重要性。
+
+- depends_on_cn：依赖Table 3数据。
+
+- sets_up_cn：为消融分析做铺垫。
+
+- evidence_pointer：Experimental Results: Alternative Deep Learning Models
+
+### 35. Ablation Analysis
+
+- order：35
+
+- section：Experimental Results
+
+- locator：Ablation Analysis
+
+- move_code：RESULT
+
+- paraphrase_cn：CNN层数和窗口宽度对性能影响不大，学习率1e-3最好，数据集规模影响显著，加噪后性能只有轻微下降。
+
+- rhetorical_function_cn：报告消融和稳健性结果。
+
+- depends_on_cn：依赖Table 4数据。
+
+- sets_up_cn：为设计原则中的模型构建建议提供实证依据。
+
+- evidence_pointer：Experimental Results: Ablation Analysis
+
+### 36. Attention Weight Statistics
+
+- order：36
+
+- section：Case Study
+
+- locator：Attention Weight Statistics
+
+- move_code：RESULT
+
+- paraphrase_cn：注意力权重显示加速度计和陀螺仪几乎同等重要、方向传感器不重要；UMAFall中多个佩戴位置贡献均衡但x/z轴更重要；侧向跌倒时y轴更突出。
+
+- rhetorical_function_cn：把注意力权重转化为可解释的领域发现。
+
+- depends_on_cn：依赖训练好的HACNN和案例统计。
+
+- sets_up_cn：为未来传感器设置和可解释性贡献提供证据。
+
+- evidence_pointer：Case Study: Attention Weight Statistics
+
+### 37. IT Artifact for Health Management
+
+- order：37
+
+- section：Contributions to the IS Knowledge Base
+
+- locator：IT Artifact for Health Management
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：HACNN作为IT制品推进可解释跌倒检测研究，也不同于现有CNN结构并优于它们。
+
+- rhetorical_function_cn：把结果上升为IS知识贡献。
+
+- depends_on_cn：依赖前面的实验和案例研究。
+
+- sets_up_cn：为设计原则部分提供制品层面的定位。
+
+- evidence_pointer：Contributions: IT Artifact for Health Management
+
+### 38. Generalizable Design Principles
+
+- order：38
+
+- section：Contributions to the IS Knowledge Base
+
+- locator：Generalizable Design Principles
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：基于实验、比较和消融，提出从数据/应用特征和模型构建两个角度展开的通用设计原则。
+
+- rhetorical_function_cn：把具体实验结果抽象为可复用设计知识。
+
+- depends_on_cn：依赖全部评价结果。
+
+- sets_up_cn：为后续实践和未来研究提供抓手。
+
+- evidence_pointer：Contributions: Generalizable Design Principles
+
+### 39. Generalizable Design Principles, Data Characteristics
+
+- order：39
+
+- section：Contributions to the IS Knowledge Base
+
+- locator：Generalizable Design Principles, Data Characteristics
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：由于HACNN没有显式编码疾病特定领域知识，理论上可迁移到卒中、癫痫等其他不良事件检测，但这一泛化尚未直接验证。
+
+- rhetorical_function_cn：界定模型适用边界并暗示迁移潜力。
+
+- depends_on_cn：依赖模型基于通用表示学习而非领域特征。
+
+- sets_up_cn：为未来研究方向铺垫。
+
+- evidence_pointer：Contributions: Generalizable Design Principles
+
+### 40. Deployment建议
+
+- order：40
+
+- section：Practical and Managerial Implications
+
+- locator：Deployment建议
+
+- move_code：OTHER
+
+- paraphrase_cn：建议每10或15秒运行一次模型，传感器位置可选脚踝、胸、腰、手腕或大腿，计算开销可通过云或手机神经引擎解决。
+
+- rhetorical_function_cn：把模型结果转化为可操作的管理和部署建议。
+
+- depends_on_cn：依赖模型训练样本长度和推理时间。
+
+- sets_up_cn：为实际应用场景提供具体指导。
+
+- evidence_pointer：Practical and Managerial Implications
+
+### 41. 整个Limitations段落
+
+- order：41
+
+- section：Limitations and Future Research
+
+- locator：整个Limitations段落
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认只有可穿戴数据、只在两个数据集上验证、模型静态训练不做参数更新，并提出未来整合心理/影像数据和在线学习。
+
+- rhetorical_function_cn：保护贡献不被过度泛化。
+
+- depends_on_cn：依赖对评价范围的清醒认识。
+
+- sets_up_cn：为结论中的谨慎表述提供基础。
+
+- evidence_pointer：Limitations and Future Research
+
+### 42. 整个Conclusions段落
+
+- order：42
+
+- section：Conclusions
+
+- locator：整个Conclusions段落
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重申HACNN在基准实验中优于竞争模型，案例研究展示注意力可解释性，并再次声明对IS知识库和设计科学原则的贡献。
+
+- rhetorical_function_cn：闭合文章闭环，回扣引言提出的两个问题和两个贡献。
+
+- depends_on_cn：依赖全部研究设计和结果。
+
+- sets_up_cn：无，结束全文。
+
+- evidence_pointer：Conclusions
+
+## 写作技术
+
+- gap_construction_cn：作者采用双重缺口构造：现实技术缺口（手工特征工程与大性能问题）加IS文献缺口（没有跌倒检测IT制品），并把二者绑在一起，使技术改进同时成为学科贡献。
+
+- signposting_cn：引言末尾明确预告文献综述、研究设计、评价和讨论的路线；研究设计和评价部分也用显式列表说明三组件和三组baseline。
+
+- transition_logic_cn：每一阶段都以尚未解决的问题结束并预示下一阶段：手工特征局限→深度表示学习；黑箱→注意力机制；性能评价→消融；消融→案例可解释性；案例→贡献和设计原则。
+
+- claim_evidence_rhythm_cn：每个性能主张都对应一个结果表格和统计显著性；在结果段后立即给出简短解释，但更一般的设计知识推迟到贡献部分。
+
+- benchmark_narrative_cn：benchmark不是简单罗列，而是形成递进叙事：先用经典ML证明旧路线的不足，再用深度模型证明新路线内部仍有差异，再用消融和噪声证明HACNN设计稳健。
+
+- theory_return_cn：讨论部分把HACNN的性能和注意力权重放回IS慢性病管理、计算设计科学和可解释深度学习文献中，重新连接引言缺口并提炼设计原则。
+
+- contribution_positioning_cn：贡献被同时定位为具体IT制品和通用设计知识，避免论文被视为一次性的算法刷榜；性能只作为支撑，真正的贡献是可解释性和模板作用。
+
+- novelty_protection_cn：作者通过在引言和背景中反复强调“没有可穿戴传感器注意力模型”、在评价中加入HALSTM对照、用案例研究展示可解释性、以及用通用设计原则提升抽象层级，防止贡献被解读为单纯的F1提升。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实问题统计数据开头，说明后果严重性和现有解决方案的不足。
+
+- research_job_cn：找到具有社会或实践重要性的IS问题，并收集可引用的发生率、成本和救治数据。
+
+- required_evidence_cn：至少一组来自权威来源的现实数据或临床事实。
+
+- transition_to_next_cn：从现实问题转到可穿戴传感器或其他IS方案作为可行路径。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述IS文献和相关领域文献，建立学科内部缺口。
+
+- research_job_cn：识别目标问题在IS文献中是否被研究，以及现有技术路线存在哪些局限。
+
+- required_evidence_cn：能够证明该问题上IS文献缺位或不足的引用矩阵。
+
+- transition_to_next_cn：把两个局限转化为具体研究问题。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入理论或技术知识基础，说明它们如何指向制品设计。
+
+- research_job_cn：选择与问题匹配的计算方法学知识，例如表示学习或注意力机制。
+
+- required_evidence_cn：领域知识中关于数据结构和机制的解释。
+
+- transition_to_next_cn：从知识命题转向设计要求。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：正式提出研究问题并概述研究设计。
+
+- research_job_cn：确保研究问题覆盖性能提升和另一维度（例如可解释性、鲁棒性或公平性）。
+
+- required_evidence_cn：研究问题与已识别的缺口一一对应。
+
+- transition_to_next_cn：进入数据、模型和评价方法部分。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：描述数据集、制品结构和评价协议。
+
+- research_job_cn：选择公开可复现的数据集，构建制品，设置多组baseline。
+
+- required_evidence_cn：数据集来源清楚，制品结构可复现，baseline具有代表性。
+
+- transition_to_next_cn：用结果表格逐一回答研究问题。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告分层benchmark结果、消融和案例研究。
+
+- research_job_cn：先与经典方法比较，再与同族先进方法比较，再检验自身设计空间。
+
+- required_evidence_cn：每组benchmark都有客观指标和统计检验；消融覆盖关键设计选择。
+
+- transition_to_next_cn：从结果中提炼设计知识。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：把结果上升为制品贡献、设计原则、实践含义并承认局限。
+
+- research_job_cn：用案例或补充分析展示论文特色的非性能维度；明确边界。
+
+- required_evidence_cn：贡献主张必须能回扣引言缺口，且不超出实际证据。
+
+- transition_to_next_cn：以结论段落重述问题、制品、证据和贡献。
+
+### most_transferable_moves_cn
+
+1. 双重缺口构造：技术局限加IS文献缺位
+
+2. 三层benchmark递进：经典ML→深度模型→消融/稳健性
+
+3. 用案例研究把模型内部机制转化为领域可解释证据
+
+4. 设置带注意力但基于不同主干的HALSTM作为对照
+
+5. 从实验细节提炼通用设计原则并区分数据特征和模型构建
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 两个大型公开跌倒数据集需要下载和预处理，但仍属公开资源
+
+2. 深度模型训练需要一定的GPU算力，尤其做多组消融和交叉验证
+
+3. 医学领域合作者提供跌倒和慢性病背景知识，不是所有团队都能具备
+
+4. 案例研究中的注意力解释依赖对传感器物理含义的领域知识
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只在引言说“手工特征不好”而不提供与经典ML的实证对比
+
+2. 不能只声称“注意力提升可解释性”而没有注意力权重统计或用户/领域验证
+
+3. 不能只报告F1而不做消融和统计检验，否则设计原则缺乏支撑
+
+4. 不能把没有疾病特定领域知识直接等同于可迁移性，必须说明边界和未来验证
+
+- single_best_description_of_the_routine_cn：用一个现实高影响健康问题引出两个技术或文献缺口，提出一个计算设计科学制品，用公开数据从经典基准、深度基准和消融三个层次证明性能，再用案例研究把模型的内部注意力变成可解释领域知识，最后把结果写成可复用设计原则。
+
+## 分析边界
+
+全文OCR基本完整，但公式部分有乱码，图片标签和附录E/F/G未能完整获取；没有精确页码，只能以章节和段落位置作为证据；分析基于文章结构和文本逻辑，未对实验原始数据和代码进行验证。

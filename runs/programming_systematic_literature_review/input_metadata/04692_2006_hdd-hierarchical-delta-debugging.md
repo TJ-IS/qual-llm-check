@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-34247107486"
+title: "HDD: Hierarchical Delta Debugging"
+authors: "Misherghi G.; Su Z."
+year: "2006"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: HDD: Hierarchical Delta Debugging
+Abstract: Inputs causing a program to fail are usually large and often contain information irrelevant to the failure. It thus helps debugging to simplify program inputs. The Delta Debugging algorithm is a general technique applicable to minimizing all failure-inducing inputs for more effective debugging. In this paper, we present HDD, a simple but effective algorithm that significantly speeds up Delta Debugging and increases its output quality on tree structured inputs such as XML. Instead of treating the inputs as one flat atomic list, we apply Delta Debugging to the very structure of the data. In particular, we apply the original Delta Debugging algorithm to each level of a program's input, working from the coarsest to the finest levels. We are thus able to prune the large irrelevant portions of the input early. All the generated input configurations are syntactically valid, reducing the number of inconclusive configurations that need to be tested and accordingly the amount of time spent simplifying. We have implemented HDD and evaluated it on a number of real failure-inducing inputs from the GCC and Mozilla bugzilla databases. Our Hierarchical Delta Debugging algorithm produces simpler outputs and takes orders of magnitude fewer test cases than the original Delta Debugging algorithm. It is able to scale to inputs of considerable size that the original Delta Debugging algorithm cannot process in practice. We argue that HDD is an effective tool for automatic debugging of programs expecting structured inputs. Copyright 2006 ACM.
+Author keywords: Automated debugging; Delta debugging
+Index keywords: Algorithms; Failure analysis; Hierarchical systems; Information technology; Optimization; XML; Automated debugging; Hierarchical Delta Debugging (HDD); Mozilla bugzilla databases; Structured inputs; Program debugging
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2006
+EID: 2-s2.0-34247107486
+DOI: 
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

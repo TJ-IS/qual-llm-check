@@ -1,0 +1,3169 @@
+# Enhancing User Privacy Through Ephemeral Sharing Design: Experimental Evidence from Online Dating：ISR 句段级微观图谱
+
+- 作者：Yumei He; Xingchen Xu; Ni Huang; Yili Hong; De Liu
+- 年份：2025
+- DOI：10.1287/isre.2021.0379
+- 源文件：28109_2025_enhancing-user-privacy-through-ephemeral-sharing-design-experimental-evidence-from-online-dating.md
+- 置信度：0.88
+
+## 核实后的宏观骨架
+
+文章总结构为：引言提出线上约会冷启动问题与隐私担忧，引出短暂分享设计并宣布研究问题；文献综述分别定位在线约会设计研究、隐私管理（特别是PETs）和短暂分享研究，在2.3.2节构建社会隐私担忧四维框架并把理论翻译为设计属性与预期；第3节描述Summer平台上的用户层面随机现场实验，含平台背景、UI操纵、预测试与实验实施；第4节说明数据来源、变量构建、随机化检验与模型设定；第5节按主效应（照片披露、匹配数、接收者消息）、行为中介与备择排除、在线心理机制实验、异质性检验四层报告结果；第6节依次总结主发现、三种文献贡献、管理启示、局限与未来研究并作简短结论。全文的证据链从真实平台因果效应到披露行为中介，再到心理构念机制，最后到边界条件，形成由外向内、由行为到心理的IS论证。
+
+## 摘要逐句图谱
+
+### 1. Abstract S1
+
+- order：1
+
+- locator：Abstract S1
+
+- paraphrase_cn：线上约会的用户在匹配初期参与有限，面临冷启动问题，部分原因是隐私担忧。
+
+- move_code：PHENOMENON_AND_PRACTICAL_STAKES
+
+- statement_status：fact
+
+- why_here_cn：摘要第一句必须让读者在最短时间内知道本文解决什么现实问题；把冷启动归因于隐私担忧是为后面设计干预提供靶点。
+
+- inherits_from_previous_cn：无前置；直接设定问题领域。
+
+- changes_argument_state_cn：建立问题的存在与原因归属。
+
+- sets_up_next_cn：为第二句提出设计解决方案制造需要。
+
+- failure_if_removed_cn：摘要失去问题锚点，读者不知道后面实验为何发生。
+
+- evidence_pointer：Abstract first sentence
+
+### 2. Abstract S2
+
+- order：2
+
+- locator：Abstract S2
+
+- paraphrase_cn：本研究提出短暂分享作为隐私增强设计，在用户隐私担忧与自愿披露需求之间取得平衡。
+
+- move_code：PROPOSE_DESIGN
+
+- statement_status：design_decision
+
+- why_here_cn：问题之后必须立刻给出方案，否则摘要变成纯现象描述。
+
+- inherits_from_previous_cn：承接冷启动和隐私担忧。
+
+- changes_argument_state_cn：把文章从问题提出转向解决方案主张。
+
+- sets_up_next_cn：需要定义何为短暂分享，引出第三句。
+
+- failure_if_removed_cn：读者不知道文章的设计贡献是什么。
+
+- evidence_pointer：Abstract second sentence
+
+### 3. Abstract S3
+
+- order：3
+
+- locator：Abstract S3
+
+- paraphrase_cn：定义短暂分享：信息（如个人照片）在接收者收到后不久变得不可见且不可追溯。
+
+- move_code：DEFINE_ARTIFACT
+
+- statement_status：design_decision
+
+- why_here_cn：核心概念必须定义后才能谈实验和结果。
+
+- inherits_from_previous_cn：直接展开第二句中的短暂分享概念。
+
+- changes_argument_state_cn：把设计概念转化为可操作的两个属性：不可见与不可追溯。
+
+- sets_up_next_cn：让读者能理解实验操纵的具体内容。
+
+- failure_if_removed_cn：治疗组到底做了什么变得含糊。
+
+- evidence_pointer：Abstract third sentence
+
+### 4. Abstract S4
+
+- order：4
+
+- locator：Abstract S4
+
+- paraphrase_cn：与在线约会平台合作，对超过7万名用户开展大规模随机现场实验，考察短暂分享如何影响个人照片披露、匹配结果和接收者参与。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：定义概念后需要交代证据来源和规模，以建立可信度。
+
+- inherits_from_previous_cn：被定义的短暂分享设计是实验中操纵的对象。
+
+- changes_argument_state_cn：从设计主张进入实证检验。
+
+- sets_up_next_cn：需要说明对照组设置，引出第五句。
+
+- failure_if_removed_cn：读者不知道文章用什么证据支持主张。
+
+- evidence_pointer：Abstract fourth sentence
+
+### 5. Abstract S5
+
+- order：5
+
+- locator：Abstract S5
+
+- paraphrase_cn：实验设治疗组（可在匹配请求中上传短暂照片）和对照组（可上传持久照片）。
+
+- move_code：DESIGN_CONTRAST
+
+- statement_status：method_decision
+
+- why_here_cn：必须说明反事实是什么，否则后面结果不能归因于短暂性。
+
+- inherits_from_previous_cn：执行第四句宣布的现场实验。
+
+- changes_argument_state_cn：把短暂性与其他照片上传差异的混淆设计性地排除。
+
+- sets_up_next_cn：对照确立后自然引出结果。
+
+- failure_if_removed_cn：读者无法判断效应是新增功能还是短暂性所致。
+
+- evidence_pointer：Abstract fifth sentence
+
+### 6. Abstract S6
+
+- order：6
+
+- locator：Abstract S6
+
+- paraphrase_cn：治疗组比对照组发送更多个人照片和含人脸照片。
+
+- move_code：RESULT_1_DISCLOSURE
+
+- statement_status：empirical_result
+
+- why_here_cn：结果必须分层报告，最先报告最上游的披露效应。
+
+- inherits_from_previous_cn：直接来自第五句定义的组间比较。
+
+- changes_argument_state_cn：证明设计影响披露行为。
+
+- sets_up_next_cn：披露之后需要报告下游结果，引出第七句。
+
+- failure_if_removed_cn：机制链条的第一环缺失。
+
+- evidence_pointer：Abstract sixth sentence
+
+### 7. Abstract S7
+
+- order：7
+
+- locator：Abstract S7
+
+- paraphrase_cn：治疗还导致更多匹配和更高接收者参与水平。
+
+- move_code：RESULT_2_DOWNSTREAM
+
+- statement_status：empirical_result
+
+- why_here_cn_cn：下游结果证明设计缓解冷启动问题，而不仅是披露行为本身。
+
+- why_here_cn：下游结果证明设计缓解冷启动问题，而不仅是披露行为本身。
+
+- inherits_from_previous_cn：承接披露增加的结果，自然追问是否带来匹配收益。
+
+- changes_argument_state_cn：把效应扩展到匹配和互动。
+
+- sets_up_next_cn：为效应持续性或边界留下伏笔，引出异质性句。
+
+- failure_if_removed_cn：冷启动问题是否被缓解没有证据。
+
+- evidence_pointer：Abstract seventh sentence
+
+### 8. Abstract S8
+
+- order：8
+
+- locator：Abstract S8
+
+- paraphrase_cn：进一步分析显示治疗效应在隐私敏感发送者中更显著。
+
+- move_code：RESULT_3_HETEROGENEITY
+
+- statement_status：empirical_result
+
+- why_here_cn：说明效应并非平均分布，增强机制解释并界定边界。
+
+- inherits_from_previous_cn：主效应建立后自然询问谁获益更多。
+
+- changes_argument_state_cn：把结果与隐私机制挂钩。
+
+- sets_up_next_cn：异质性之前还需要行为中介，引出第九句。
+
+- failure_if_removed_cn：缺少机制相关的边界证据。
+
+- evidence_pointer：Abstract eighth sentence
+
+### 9. Abstract S9
+
+- order：9
+
+- locator：Abstract S9
+
+- paraphrase_cn：匹配与互动效应可由个人照片披露的增加解释。
+
+- move_code：RESULT_4_MEDIATION
+
+- statement_status：empirical_result
+
+- why_here_cn：在结果摘要中必须说明效应的行为传导路径。
+
+- inherits_from_previous_cn：前提是照片披露和下游结果都受治疗影响。
+
+- changes_argument_state_cn：把上游行为与下游结果连接成因果链。
+
+- sets_up_next_cn：行为中介只回答“经由什么”，还缺“为什么”，引出在线实验。
+
+- failure_if_removed_cn：披露与匹配之间的关系只是并列效应而非机制。
+
+- evidence_pointer：Abstract ninth sentence
+
+### 10. Abstract S10
+
+- order：10
+
+- locator：Abstract S10
+
+- paraphrase_cn：通过在线实验显示短暂分享通过降低数据收集、传播和身份滥用担忧提高披露意向。
+
+- move_code：RESULT_5_MECHANISM
+
+- statement_status：empirical_result
+
+- why_here_cn：心理构念层面的证据让机制解释从行为层深入到隐私担忧层。
+
+- inherits_from_previous_cn：承接第九句但把机制具体到三类担忧。
+
+- changes_argument_state_cn：完成从设计到担忧再到意向的因果解释。
+
+- sets_up_next_cn：机制明确后摘要以贡献收束。
+
+- failure_if_removed_cn：为什么披露增加缺乏心理证据。
+
+- evidence_pointer：Abstract tenth sentence
+
+### 11. Abstract S11
+
+- order：11
+
+- locator：Abstract S11
+
+- paraphrase_cn：研究对在线匹配平台的隐私增强设计文献与实践作出贡献。
+
+- move_code：CONTRIBUTION
+
+- statement_status：contribution_claim
+
+- why_here_cn：摘要必须结束在贡献声明上，回扣隐私增强设计这一文献定位。
+
+- inherits_from_previous_cn：所有结果已经展示，贡献声明才有依据。
+
+- changes_argument_state_cn：把实证发现升格为文献贡献。
+
+- sets_up_next_cn：不需要下一句；摘要到此完成。
+
+- failure_if_removed_cn：摘要缺少对ISR读者的价值主张。
+
+- evidence_pointer：Abstract eleventh sentence
+
+## 引言逐句图谱
+
+### 1. Introduction P1 S1
+
+- order：1
+
+- locator：Introduction P1 S1
+
+- paraphrase_cn：在线约会平台如Bumble、Tinder和Coffee Meets Bagel已成为人们寻找约会对象的重要渠道，其基本功能是帮助用户匹配并促进初步沟通。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：文章开篇必须把读者带入一个熟悉且重要的数字市场，为全篇设定研究域。
+
+- inherits_from_previous_cn：无前置；作为总背景。
+
+- changes_argument_state_cn：建立研究对象为在线约会平台及其匹配功能。
+
+- sets_up_next_cn：为说明平台重要性和问题严重性提供基础。
+
+- failure_if_removed_cn：引言失去领域锚点，后文冷启动问题显得悬空。
+
+- evidence_pointer：Introduction P1 S1
+
+### 2. Introduction P1 S2
+
+- order：2
+
+- locator：Introduction P1 S2
+
+- paraphrase_cn：随着在线约会趋势达到历史新高，人们在进一步线下发展关系前先进行虚拟初次约会。
+
+- move_code：CONTEXT_DEVELOPMENT
+
+- statement_status：fact
+
+- why_here_cn：第二句把抽象平台功能放回当下社会趋势，强化现象的现实性。
+
+- inherits_from_previous_cn：承接在线约会平台的功能定位。
+
+- changes_argument_state_cn：提高研究对象的市场重要性。
+
+- sets_up_next_cn：为下一句引用规模数据做铺垫。
+
+- failure_if_removed_cn：平台重要性缺乏时间维度。
+
+- evidence_pointer：Introduction P1 S2
+
+### 3. Introduction P1 S3
+
+- order：3
+
+- locator：Introduction P1 S3
+
+- paraphrase_cn：据报道近40%年轻人通过网络认识伴侣，2024年全球在线约会用户估计超4.418亿。
+
+- move_code：QUANTIFY_STAKES
+
+- statement_status：fact
+
+- why_here_cn：用具体数字把背景转化为规模，增加研究紧迫感。
+
+- inherits_from_previous_cn：虚拟初见趋势需要数据佐证。
+
+- changes_argument_state_cn：把市场重要性变成可量化的社会事实。
+
+- sets_up_next_cn：规模越大，后文冷启动问题代价越大。
+
+- failure_if_removed_cn：问题的社会重要性缺乏证据。
+
+- evidence_pointer：Introduction P1 S3
+
+### 4. Introduction P2 S1
+
+- order：4
+
+- locator：Introduction P2 S1
+
+- paraphrase_cn：在线约会平台的关键挑战是冷启动问题：发送方在匹配初期可能隐瞒个人信息，使双方难以连接和沟通。
+
+- move_code：INTRODUCE_CORE_PHENOMENON
+
+- statement_status：fact
+
+- why_here_cn：第一段建立背景后，第二段必须直接切入全文要解决的核心现象。
+
+- inherits_from_previous_cn：依托平台匹配功能的基本过程。
+
+- changes_argument_state_cn：从一般背景收窄到冷启动问题。
+
+- sets_up_next_cn：需要具体例子说明隐瞒行为，引出下一句。
+
+- failure_if_removed_cn：全文研究对象消失。
+
+- evidence_pointer：Introduction P2 S1
+
+### 5. Introduction P2 S2
+
+- order：5
+
+- locator：Introduction P2 S2
+
+- paraphrase_cn：许多用户在资料中省略自己的照片以及其他个人信息如身高、职业或性取向。
+
+- move_code：CONCRETIZE_PHENOMENON
+
+- statement_status：fact
+
+- why_here_cn：冷启动定义需要具体行为支撑，照片省略尤其为后文设计埋伏笔。
+
+- inherits_from_previous_cn：举例说明冷启动的表现。
+
+- changes_argument_state_cn：把抽象问题落到可观察的用户行为。
+
+- sets_up_next_cn：照片成为全文首要披露对象。
+
+- failure_if_removed_cn：冷启动问题缺乏可操作的表现形式。
+
+- evidence_pointer：Introduction P2 S2
+
+### 6. Introduction P2 S3
+
+- order：6
+
+- locator：Introduction P2 S3
+
+- paraphrase_cn：因此匹配请求可能被视为不真实或不可信，削弱获得匹配的可能性。
+
+- move_code：CONSEQUENCE_1
+
+- statement_status：fact
+
+- why_here_cn：隐瞒行为需要后果，否则不构成问题。
+
+- inherits_from_previous_cn：承接用户省略信息的行为。
+
+- changes_argument_state_cn：从行为过渡到下游匹配失败。
+
+- sets_up_next_cn：为后文接收者感知和信任机制做铺垫。
+
+- failure_if_removed_cn：隐瞒行为的危害性不成立。
+
+- evidence_pointer：Introduction P2 S3
+
+### 7. Introduction P2 S4
+
+- order：7
+
+- locator：Introduction P2 S4
+
+- paraphrase_cn：缺乏个人信息披露也使匹配后双方难以保持参与。
+
+- move_code：CONSEQUENCE_2
+
+- statement_status：fact
+
+- why_here_cn：冷启动的后果需要从匹配延伸到匹配后互动，为接收者消息结果变量埋伏笔。
+
+- inherits_from_previous_cn：延续上一句但覆盖更下游的阶段。
+
+- changes_argument_state_cn：把问题从单点匹配失败扩展为全程参与不足。
+
+- sets_up_next_cn：为引言后段提到匹配后参与和讨论中的冷启动缓解作准备。
+
+- failure_if_removed_cn：后文以接收者消息作为结果变量就缺乏引言支持。
+
+- evidence_pointer：Introduction P2 S4
+
+### 8. Introduction P3 S1
+
+- order：8
+
+- locator：Introduction P3 S1
+
+- paraphrase_cn：信息披露不足部分源于用户隐私担忧，即担心数据被公司、政府或他人使用。
+
+- move_code：INTRODUCE_MECHANISM
+
+- statement_status：fact
+
+- why_here_cn：现象之后必须立即给出原因，否则没有干预靶点。
+
+- inherits_from_previous_cn：承接冷启动的披露缺失。
+
+- changes_argument_state_cn：把冷启动机制归因于隐私担忧。
+
+- sets_up_next_cn：需要展开说明隐私担忧在约会上如何表现。
+
+- failure_if_removed_cn：隐私与冷启动的联系断裂。
+
+- evidence_pointer：Introduction P3 S1
+
+### 9. Introduction P3 S2
+
+- order：9
+
+- locator：Introduction P3 S2
+
+- paraphrase_cn：隐私担忧在在线约会中很普遍，用户担心个人信息和身份被传播、窃取或滥用，如用于诈骗和网络钓愚。
+
+- move_code：EVIDENCE_FOR_MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：引用已有证据说明隐私担忧不是理论虚构。
+
+- inherits_from_previous_cn：具体化上一句的担忧对象。
+
+- changes_argument_state_cn：让隐私担忧成为有据可查的机制。
+
+- sets_up_next_cn：为四维社会隐私担忧概念提供经验基础。
+
+- failure_if_removed_cn：隐私担忧作为机制缺乏依据。
+
+- evidence_pointer：Introduction P3 S2
+
+### 10. Introduction P3 S3
+
+- order：10
+
+- locator：Introduction P3 S3
+
+- paraphrase_cn：泄露的个人信息还可能危及用户人身安全。
+
+- move_code：ESCALATE_STAKES
+
+- statement_status：fact
+
+- why_here_cn：把隐私担忧从匹配效率提升到安全层面，增加问题严重性。
+
+- inherits_from_previous_cn：延续隐私滥用后果。
+
+- changes_argument_state_cn：使隐私问题从效率议题升为安全议题。
+
+- sets_up_next_cn：为后文设计必须兼顾隐私与披露提供更强理由。
+
+- failure_if_removed_cn：隐私担忧的紧迫性被削弱。
+
+- evidence_pointer：Introduction P3 S3
+
+### 11. Introduction P3 S4
+
+- order：11
+
+- locator：Introduction P3 S4
+
+- paraphrase_cn：因此用户在匹配早期扣住个人信息；但隐私担忧导致的披露缺失阻碍初期信任建立，聊天话题有限，可能阻碍匹配后参与。
+
+- move_code：CLOSE_MECHANISM_LOOP
+
+- statement_status：author_inference
+
+- why_here_cn：把隐私担忧与冷启动后果连成完整因果链，使干预方向明确。
+
+- inherits_from_previous_cn：综合第8-10句的担忧与后果。
+
+- changes_argument_state_cn：完成隐私担忧→披露缺失→参与受阻的因果回路。
+
+- sets_up_next_cn：因果链本身提示需要同时解决隐私与披露。
+
+- failure_if_removed_cn：全文的机制框架缺失。
+
+- evidence_pointer：Introduction P3 S4
+
+### 12. Introduction P3 S5
+
+- order：12
+
+- locator：Introduction P3 S5
+
+- paraphrase_cn：但GDPR等法规不允许平台强制用户披露个人信息。
+
+- move_code：CONSTRAINT
+
+- statement_status：fact
+
+- why_here_cn：说明强制披露不可行，把缺口从技术效率转为设计需要。
+
+- inherits_from_previous_cn：针对披露缺失的直接解决办法施加限制。
+
+- changes_argument_state_cn：封闭强制手段，为自愿披露设计打开空间。
+
+- sets_up_next_cn：直接引出设计需求句。
+
+- failure_if_removed_cn：为什么平台不能直接要求披露无法解释。
+
+- evidence_pointer：Introduction P3 S5
+
+### 13. Introduction P3 S6
+
+- order：13
+
+- locator：Introduction P3 S6
+
+- paraphrase_cn：因此迫切需要既鼓励自愿披露又不严重损害隐私保护的新平台设计。
+
+- move_code：DESIGN_REQUIREMENT
+
+- statement_status：author_inference
+
+- why_here_cn：由约束推出设计要求，这是全文的缺口句。
+
+- inherits_from_previous_cn：继承法规约束与隐私因果链。
+
+- changes_argument_state_cn：把问题转化为具体设计要求，即兼顾披露与隐私。
+
+- sets_up_next_cn：为第四段短暂分享设计的提出做直接逻辑入口。
+
+- failure_if_removed_cn：短暂分享设计的必要性落空。
+
+- evidence_pointer：Introduction P3 S6
+
+### 14. Introduction P4 S1
+
+- order：14
+
+- locator：Introduction P4 S1
+
+- paraphrase_cn：本研究提出并检验隐私增强的自我披露机制——短暂分享——以缓解线上约会冷启动。
+
+- move_code：PROPOSE_DESIGN
+
+- statement_status：design_decision
+
+- why_here_cn：设计要求提出后必须给出本研究的答案。
+
+- inherits_from_previous_cn：直接回应设计需求。
+
+- changes_argument_state_cn：从缺口转向具体设计方案。
+
+- sets_up_next_cn：需要定义和对比短暂分享的属性。
+
+- failure_if_removed_cn：研究主张的介绍缺失。
+
+- evidence_pointer：Introduction P4 S1
+
+### 15. Introduction P4 S2
+
+- order：15
+
+- locator：Introduction P4 S2
+
+- paraphrase_cn：短暂分享指发送内容在接收后不久对接收者不可见且不可追溯。
+
+- move_code：DEFINE_ARTIFACT
+
+- statement_status：design_decision
+
+- why_here_cn：设计名称必须配上可操作定义。
+
+- inherits_from_previous_cn：展开上一句机制名称。
+
+- changes_argument_state_cn：确定两个核心属性：不可见、不可追溯。
+
+- sets_up_next_cn：为与其它PETs比较作准备。
+
+- failure_if_removed_cn：短暂分享的含义不清楚。
+
+- evidence_pointer：Introduction P4 S2
+
+### 16. Introduction P4 S3
+
+- order：16
+
+- locator：Introduction P4 S3
+
+- paraphrase_cn：与模糊、部分显示或让用户控制可见性等其它PETs相比，短暂分享允许不受限分享但严格限制接收者存储、传播和滥用。
+
+- move_code：DIFFERENTIATE_FROM_PETS
+
+- statement_status：author_inference
+
+- why_here_cn：通过与已有设计类别比较，说明本文设计的独特定位。
+
+- inherits_from_previous_cn：基于短暂分享定义中的限制接收者能力。
+
+- changes_argument_state_cn：把短暂分享放进PETs谱系并划出边界。
+
+- sets_up_next_cn：为贡献声明中的“鼓励披露而非阻碍披露”作铺垫。
+
+- failure_if_removed_cn：设计的独特性不成立。
+
+- evidence_pointer：Introduction P4 S3
+
+### 17. Introduction P4 S4
+
+- order：17
+
+- locator：Introduction P4 S4
+
+- paraphrase_cn：尽管短暂分享已在Snapchat等社交媒体使用，其在在线约会的应用是新的，可影响不止分享意愿还包括匹配和对话参与等实际结果。
+
+- move_code：IDENTIFY_GAP
+
+- statement_status：prior_literature
+
+- why_here_cn：指出已有短暂分享文献未覆盖的场景和结果。
+
+- inherits_from_previous_cn：从短暂分享的社交媒体应用延伸到新场景。
+
+- changes_argument_state_cn：形成学术缺口：新情境、新结果。
+
+- sets_up_next_cn：需要解释为何情境差异重要，引出下句。
+
+- failure_if_removed_cn：短暂分享研究的新颖性缺失。
+
+- evidence_pointer：Introduction P4 S4
+
+### 18. Introduction P4 S5
+
+- order：18
+
+- locator：Introduction P4 S5
+
+- paraphrase_cn：由于隐私担忧随情境而不同，隐私干预的效果也依赖情境，因此需要实证检验短暂分享在约会中如何缓解隐私担忧并鼓励披露。
+
+- move_code：JUSTIFY_EMPIRICAL_NEED
+
+- statement_status：author_inference
+
+- why_here_cn：解释为什么不能直接借用社交媒体结论，必须做实证。
+
+- inherits_from_previous_cn：承接短暂分享的新情境介绍。
+
+- changes_argument_state_cn：把文献缺口转化为研究必要性。
+
+- sets_up_next_cn：自然引出两个研究问题。
+
+- failure_if_removed_cn：为什么需要现场实验缺乏理由。
+
+- evidence_pointer：Introduction P4 S5
+
+### 19. Introduction P5 S1
+
+- order：19
+
+- locator：Introduction P5 S1
+
+- paraphrase_cn：研究问题一：短暂分享设计如何影响个人信息披露行为、匹配结果和匹配后参与；研究问题二：其影响个人信息披露的潜在机制是什么。
+
+- move_code：STATE_RESEARCH_QUESTIONS
+
+- statement_status：author_inference
+
+- why_here_cn：缺口论证完成后必须正式宣布研究问题，组织全文结构。
+
+- inherits_from_previous_cn：直接来自前句的实证必要性。
+
+- changes_argument_state_cn：把全文工作凝练为两个可回答问题。
+
+- sets_up_next_cn：为后文研究边界和理论张力提供对象。
+
+- failure_if_removed_cn：研究目的不明确。
+
+- evidence_pointer：Introduction P5 S1
+
+### 20. Introduction P6 S1
+
+- order：20
+
+- locator：Introduction P6 S1
+
+- paraphrase_cn：本文聚焦陌生人寻求恋爱关系的匹配场景，因为那里冷启动问题突出，这不同于已有短暂分享研究关注已连接用户。
+
+- move_code：SET_BOUNDARY_AND_NOVELTY
+
+- statement_status：author_inference
+
+- why_here_cn：明确研究边界并突出与短暂分享文献的差异。
+
+- inherits_from_previous_cn：承接研究问题中的匹配场景。
+
+- changes_argument_state_cn：把研究对象从一般短暂分享缩小到陌生人匹配。
+
+- sets_up_next_cn：边界设定后需要说明理论上为何不确定。
+
+- failure_if_removed_cn：后文理论张力缺乏场景基础。
+
+- evidence_pointer：Introduction P6 S1
+
+### 21. Introduction P6 S2
+
+- order：21
+
+- locator：Introduction P6 S2
+
+- paraphrase_cn：理论上短暂分享如何影响约会匹配结果并不清楚：一方面鼓励自我披露可减少信息不对等、建立信任；另一方面可能导致不利的失控内容，给接收者留下负面印象。
+
+- move_code：THEORETICAL_TENSION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出两种相反理论预期，说明需要实证裁决。
+
+- inherits_from_previous_cn：延续上一句的边界并解释不确定性来源。
+
+- changes_argument_state_cn：建立理论张力，增加实证价值。
+
+- sets_up_next_cn：为后文机制探索和去抑制排除作铺垫。
+
+- failure_if_removed_cn：研究问题缺乏理论意义。
+
+- evidence_pointer：Introduction P6 S2
+
+### 22. Introduction P6 S3
+
+- order：22
+
+- locator：Introduction P6 S3
+
+- paraphrase_cn：由于短暂分享被整合为增强隐私，探索其如何影响匹配行为并处理不同隐私担忧在理论上是有意义的。
+
+- move_code：MOTIVATE_MECHANISM_QUESTION
+
+- statement_status：author_inference
+
+- why_here_cn：把研究问题二的机制探索赋予理论价值。
+
+- inherits_from_previous_cn：延续短暂分享的隐私整合属性。
+
+- changes_argument_state_cn：使机制问题与理论意义直接相连。
+
+- sets_up_next_cn：为实验设计预告提供入口。
+
+- failure_if_removed_cn：机制探索显得仅为凑分析。
+
+- evidence_pointer：Introduction P6 S3
+
+### 23. Introduction P7 S1
+
+- order：23
+
+- locator：Introduction P7 S1
+
+- paraphrase_cn：为回答这些问题，作者与领先约会平台Summer合作，开展用户层面两组间随机现场实验。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：研究问题宣布后必须预告核心实证设计。
+
+- inherits_from_previous_cn：直接回应两个研究问题的实证需要。
+
+- changes_argument_state_cn：从问题转向答案来源。
+
+- sets_up_next_cn：需要说明组别和操纵位置。
+
+- failure_if_removed_cn：读者不知道实证设计。
+
+- evidence_pointer：Introduction P7 S1
+
+### 24. Introduction P7 S2
+
+- order：24
+
+- locator：Introduction P7 S2
+
+- paraphrase_cn：治疗组发送者能上传短暂照片，对照组上传持久照片；操纵发生在匹配请求阶段，两组都可决定是否附照片。
+
+- move_code：DESIGN_CONTRAST
+
+- statement_status：method_decision
+
+- why_here_cn：必须说明反事实和操纵位置，否则结果无法归因。
+
+- inherits_from_previous_cn：核心是上一句实验设计的细节。
+
+- changes_argument_state_cn：确定照片的短暂性为实验变量。
+
+- sets_up_next_cn：为观察变量和结果预告作基础。
+
+- failure_if_removed_cn：设计的因果识别基础缺失。
+
+- evidence_pointer：Introduction P7 S2
+
+### 25. Introduction P7 S3
+
+- order：25
+
+- locator：Introduction P7 S3
+
+- paraphrase_cn：然后观察用户启动行为、匹配结果和对话参与。
+
+- move_code：OUTCOME_PREVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：告知读者将观察哪些结果层面。
+
+- inherits_from_previous_cn：承接实验设计的结果测量。
+
+- changes_argument_state_cn：确定结果变量的三层结构。
+
+- sets_up_next_cn：为第八段结果预告做准备。
+
+- failure_if_removed_cn：结果报告的预期缺失。
+
+- evidence_pointer：Introduction P7 S3
+
+### 26. Introduction P8 S1
+
+- order：26
+
+- locator：Introduction P8 S1
+
+- paraphrase_cn：结果一：治疗组发送更多个人照片和含人脸照片。
+
+- move_code：RESULT_1
+
+- statement_status：empirical_result
+
+- why_here_cn：引言必须给出主要结果摘要以建立文章价值。
+
+- inherits_from_previous_cn：取决于第七段的实验对比。
+
+- changes_argument_state_cn：证明设计提高照片披露。
+
+- sets_up_next_cn：引出下游结果。
+
+- failure_if_removed_cn：核心发现缺失。
+
+- evidence_pointer：Introduction P8 S1
+
+### 27. Introduction P8 S2
+
+- order：27
+
+- locator：Introduction P8 S2
+
+- paraphrase_cn：这些用户获得更多匹配和更高接收者参与（以接收消息数衡量）。
+
+- move_code：RESULT_2
+
+- statement_status：empirical_result
+
+- why_here_cn：在引言中把披露效应扩展到匹配和互动。
+
+- inherits_from_previous_cn：沿用第七段定义的结果层次。
+
+- changes_argument_state_cn：证明冷启动问题被缓解。
+
+- sets_up_next_cn：为机制预告创造条件。
+
+- failure_if_removed_cn：下游价值无法体现。
+
+- evidence_pointer：Introduction P8 S2
+
+### 28. Introduction P9 S1
+
+- order：28
+
+- locator：Introduction P9 S1
+
+- paraphrase_cn：顺序中介显示匹配和互动效应由个人照片披露增加完全解释。
+
+- move_code：RESULT_3_MECHANISM
+
+- statement_status：empirical_result
+
+- why_here_cn：必须预告行为机制，否则总效应显得空洞。
+
+- inherits_from_previous_cn：前提是照片披露与下游结果都显著。
+
+- changes_argument_state_cn：把效应传导路径纳入引言。
+
+- sets_up_next_cn：为在线心理机制的预告作承接。
+
+- failure_if_removed_cn：披露与匹配的因果顺序不明确。
+
+- evidence_pointer：Introduction P9 S1
+
+### 29. Introduction P9 S2
+
+- order：29
+
+- locator：Introduction P9 S2
+
+- paraphrase_cn：在线实验显示短暂分享有效降低数据收集、传播和身份滥用担忧。
+
+- move_code：RESULT_4_MECHANISM
+
+- statement_status：empirical_result
+
+- why_here_cn：行为中介之后需要心理构念证据来回答为什么披露增加。
+
+- inherits_from_previous_cn：承接披露增加的机制搜索。
+
+- changes_argument_state_cn：把解释推到具体隐私担忧维度。
+
+- sets_up_next_cn：需要排除去抑制等替代解释。
+
+- failure_if_removed_cn：隐私机制缺乏心理证据。
+
+- evidence_pointer：Introduction P9 S2
+
+### 30. Introduction P9 S3
+
+- order：30
+
+- locator：Introduction P9 S3
+
+- paraphrase_cn：还排除了良性或毒性去抑制等替代解释。
+
+- move_code：RESULT_5_EXCLUSION
+
+- statement_status：empirical_result
+
+- why_here_cn：排除替代解释是结果可信度的关键。
+
+- inherits_from_previous_cn：去抑制来自短暂分享文献的理论对手。
+
+- changes_argument_state_cn：排除内容变化机制，锁定隐私机制。
+
+- sets_up_next_cn：为异质性预告作铺垫。
+
+- failure_if_removed_cn：机制归因可能被去抑制解释替代。
+
+- evidence_pointer：Introduction P9 S3
+
+### 31. Introduction P9 S4
+
+- order：31
+
+- locator：Introduction P9 S4
+
+- paraphrase_cn：异质性测试显示短暂分享对隐私敏感发送者更有效——即未在资料中放人脸的用户。
+
+- move_code：RESULT_6_HETEROGENEITY
+
+- statement_status：empirical_result
+
+- why_here_cn：在引言中预告边界条件，强化机制与个性化含义。
+
+- inherits_from_previous_cn：承接隐私机制后自然问谁受影响更大。
+
+- changes_argument_state_cn：界定效应边界并为讨论个性化建议铺垫。
+
+- sets_up_next_cn：为最后贡献句提供素材。
+
+- failure_if_removed_cn：边界条件缺失。
+
+- evidence_pointer：Introduction P9 S4
+
+### 32. Introduction P9 S5
+
+- order：32
+
+- locator：Introduction P9 S5
+
+- paraphrase_cn：还进行一系列额外分析排除治疗新奇性和照片内容变化等解释。
+
+- move_code：RESULT_7_ROBUSTNESS
+
+- statement_status：empirical_result
+
+- why_here_cn：稳健性预告让引言的结果摘要更完整。
+
+- inherits_from_previous_cn：延续替代解释排除的框架。
+
+- changes_argument_state_cn：进一步加固因果归因。
+
+- sets_up_next_cn：所有结果都完成后进入贡献声明。
+
+- failure_if_removed_cn：新奇特性和内容变化威胁没有被预先回应。
+
+- evidence_pointer：Introduction P9 S5
+
+### 33. Introduction P10 S1
+
+- order：33
+
+- locator：Introduction P10 S1
+
+- paraphrase_cn：本研究贡献于在线匹配平台隐私管理文献，提出并检验鼓励披露而非阻碍披露的短暂分享设计。
+
+- move_code：CONTRIBUTION_1
+
+- statement_status：contribution_claim
+
+- why_here_cn：结果摘要后必须把发现升格为文献贡献。
+
+- inherits_from_previous_cn：依托所有结果和设计特点。
+
+- changes_argument_state_cn：定位第一项理论贡献。
+
+- sets_up_next_cn：需要与其它PETs对比，引出贡献二。
+
+- failure_if_removed_cn：理论定位缺失。
+
+- evidence_pointer：Introduction P10 S1
+
+### 34. Introduction P10 S2
+
+- order：34
+
+- locator：Introduction P10 S2
+
+- paraphrase_cn：该设计不同于其它PETs（如隐私控制），因为短暂分享旨在鼓励分享而非阻碍。
+
+- move_code：CONTRIBUTION_1_DEVELOP
+
+- statement_status：contribution_claim
+
+- why_here_cn：第一项贡献需要对照已有PETs才能显出新意。
+
+- inherits_from_previous_cn：延续上一句的隐私管理文献定位。
+
+- changes_argument_state_cn：明确本文设计在PETs谱系中的位置。
+
+- sets_up_next_cn：为第二贡献（短暂分享文献扩展）作对比。
+
+- failure_if_removed_cn：鼓励披露这一独特性缺乏支撑。
+
+- evidence_pointer：Introduction P10 S2
+
+### 35. Introduction P10 S3
+
+- order：35
+
+- locator：Introduction P10 S3
+
+- paraphrase_cn：发现显示短暂分享通过平衡隐私与自愿披露改善信息分享。
+
+- move_code：CONTRIBUTION_1_RESULT_ANCHOR
+
+- statement_status：contribution_claim
+
+- why_here_cn：贡献必须用实际结果锚定。
+
+- inherits_from_previous_cn：承接结果摘要中的披露与匹配改善。
+
+- changes_argument_state_cn：把设计主张与实证发现绑定。
+
+- sets_up_next_cn：为管理含义提供依据。
+
+- failure_if_removed_cn：贡献变成无证据口号。
+
+- evidence_pointer：Introduction P10 S3
+
+### 36. Introduction P10 S4
+
+- order：36
+
+- locator：Introduction P10 S4
+
+- paraphrase_cn：第二，本文扩展短暂分享文献至匹配结果，包括成功匹配数和接收者参与水平。
+
+- move_code：CONTRIBUTION_2
+
+- statement_status：contribution_claim
+
+- why_here_cn：第二项贡献必须与第一项分开维度，这里转向短暂分享文献。
+
+- inherits_from_previous_cn：前句刚定位PETs贡献，这里转到另一文献线。
+
+- changes_argument_state_cn：把文献贡献从隐私管理扩展到短暂分享。
+
+- sets_up_next_cn：需要列出与已有短暂分享研究的差别。
+
+- failure_if_removed_cn：短暂分享文献贡献缺失。
+
+- evidence_pointer：Introduction P10 S4
+
+### 37. Introduction P10 S5
+
+- order：37
+
+- locator：Introduction P10 S5
+
+- paraphrase_cn：已有短暂分享研究主要关注已连接用户之间的分享，本文从两个陌生人之间的分享开始。
+
+- move_code：CONTRIBUTION_2_DEVELOP_A
+
+- statement_status：contribution_claim
+
+- why_here_cn：具体对比研究方向证明差异。
+
+- inherits_from_previous_cn：展开上一句的扩展主张。
+
+- changes_argument_state_cn：界定本文在陌生人场景的独特性。
+
+- sets_up_next_cn：还需对比结果领域差异。
+
+- failure_if_removed_cn：陌生人对已连接的差异不明确。
+
+- evidence_pointer：Introduction P10 S5
+
+### 38. Introduction P10 S6
+
+- order：38
+
+- locator：Introduction P10 S6
+
+- paraphrase_cn：已有研究更多关注短暂设计对内容分享行为的影响，本文延伸到匹配数和接收者参与等下游效应。
+
+- move_code：CONTRIBUTION_2_DEVELOP_B
+
+- statement_status：contribution_claim
+
+- why_here_cn：第二点对比强调本文结果变量更下游。
+
+- inherits_from_previous_cn：继承上一句的文献对比模式。
+
+- changes_argument_state_cn：完成短暂分享贡献的双重界定。
+
+- sets_up_next_cn：为第三个贡献（个人信息价值）作承接。
+
+- failure_if_removed_cn：下游结果这一贡献点缺失。
+
+- evidence_pointer：Introduction P10 S6
+
+### 39. Introduction P11 S1
+
+- order：39
+
+- locator：Introduction P11 S1
+
+- paraphrase_cn：本文还提供可操作的管理启示，显示短暂分享可缓解冷启动并改善匹配后对话参与。
+
+- move_code：MANAGERIAL_IMPLICATION
+
+- statement_status：contribution_claim
+
+- why_here_cn：ISR文章需要有实践价值声明。
+
+- inherits_from_previous_cn：基于结果和设计贡献。
+
+- changes_argument_state_cn：把理论贡献延伸到平台管理。
+
+- sets_up_next_cn：为个性化设计建议作准备。
+
+- failure_if_removed_cn：实践价值缺失。
+
+- evidence_pointer：Introduction P11 S1
+
+### 40. Introduction P11 S2
+
+- order：40
+
+- locator：Introduction P11 S2
+
+- paraphrase_cn：因此平台管理者可鼓励用户通过短暂分享披露，或按隐私敏感性个性化分享设计。
+
+- move_code：MANAGERIAL_IMPLICATION_DEVELOP
+
+- statement_status：contribution_claim
+
+- why_here_cn：把启示转化为可操作的管理选项。
+
+- inherits_from_previous_cn：延续上一句的管理含义。
+
+- changes_argument_state_cn：加入基于异质性结果的个性化建议。
+
+- sets_up_next_cn：用平台实际采用作为证据收束。
+
+- failure_if_removed_cn：管理启示不够具体。
+
+- evidence_pointer：Introduction P11 S2
+
+### 41. Introduction P11 S3
+
+- order：41
+
+- locator：Introduction P11 S3
+
+- paraphrase_cn：实验后合作平台将短暂分享功能推广到所有用户。
+
+- move_code：EXTERNAL_ADOPTION_EVIDENCE
+
+- statement_status：fact
+
+- why_here_cn：平台采纳是设计价值的强外部验证。
+
+- inherits_from_previous_cn：承接管理启示的可行性。
+
+- changes_argument_state_cn：给贡献提供现实证据。
+
+- sets_up_next_cn：引言到此完成，进入文献综述。
+
+- failure_if_removed_cn：管理启示缺乏外部支持。
+
+- evidence_pointer：Introduction P11 S3
+
+## 引言逐段图谱
+
+### 1. Introduction P1
+
+- locator：Introduction P1
+
+- opening_move_cn：以在线约会平台总体背景开场，定义平台基本功能。
+
+- development_move_cn：用趋势和统计数据积累平台重要性。
+
+- pivot_move_cn：无转折；持续提升背景重要性直到段落结束。
+
+- closing_move_cn：以规模数据收束，让问题代价变得可感。
+
+- paragraph_job_cn：建立研究领域和现实重要性，为冷启动问题设置舞台。
+
+### 2. Introduction P2
+
+- locator：Introduction P2
+
+- opening_move_cn：直接引入冷启动问题作为核心现象。
+
+- development_move_cn：用用户省略照片等行为具体化现象。
+
+- pivot_move_cn：从隐瞒行为转向其后果（匹配失败、参与难）。
+
+- closing_move_cn：以匹配后参与困难结尾，把问题延伸到本文的下游结果变量。
+
+- paragraph_job_cn：定义并具体化冷启动问题及其两个层次后果。
+
+### 3. Introduction P3
+
+- locator：Introduction P3
+
+- opening_move_cn：从冷启动现象转向其成因——隐私担忧。
+
+- development_move_cn：用文献和现实例子证实隐私担忧普遍，并以安全风险升级问题。
+
+- pivot_move_cn：在第4句把隐私担忧重新接回披露缺失的因果链。
+
+- closing_move_cn：以GDPR约束和设计需求收束，制造对设计方案的需要。
+
+- paragraph_job_cn：建立隐私担忧机制并形成设计缺口，这是全文问题论证的高潮。
+
+### 4. Introduction P4
+
+- locator：Introduction P4
+
+- opening_move_cn：直接给出本研究的设计答案：短暂分享。
+
+- development_move_cn：定义短暂分享，并与其它PETs比较以突出独特性。
+
+- pivot_move_cn：在社交媒体与新场景之间转折，指出文献缺口。
+
+- closing_move_cn：以情境依赖的隐私干预论证实证必要性。
+
+- paragraph_job_cn：提出设计概念、界定与现有PETs的差异，并生成研究必要性和问题。
+
+### 5. Introduction P5
+
+- locator：Introduction P5
+
+- opening_move_cn：以两个研究问题直接收束前四段的缺口。
+
+- development_move_cn：无独立发展；任务仅为宣告问题。
+
+- pivot_move_cn：无。
+
+- closing_move_cn：研究问题宣告结束，引出边界段。
+
+- paragraph_job_cn：把全文目标转化为正式研究问题。
+
+### 6. Introduction P6
+
+- locator：Introduction P6
+
+- opening_move_cn：设定研究边界：陌生人恋爱匹配场景。
+
+- development_move_cn：用正反两种理论预期展开不确定性。
+
+- pivot_move_cn：从匹配结果的不确定性转向机制探索的理论意义。
+
+- closing_move_cn：以机制探索的理论价值结束，为实验预告接轨。
+
+- paragraph_job_cn：划定场景边界并建立理论张力。
+
+### 7. Introduction P7
+
+- locator：Introduction P7
+
+- opening_move_cn：宣布与Summer平台的随机现场实验。
+
+- development_move_cn：说明组别、操纵位置和观察结果。
+
+- pivot_move_cn：无。
+
+- closing_move_cn：以观察变量清单结束。
+
+- paragraph_job_cn：预告核心实证研究的设计与结果变量。
+
+### 8. Introduction P8
+
+- locator：Introduction P8
+
+- opening_move_cn：直接报告主要结果。
+
+- development_move_cn：按披露、匹配、参与的顺序分句报告。
+
+- pivot_move_cn：无。
+
+- closing_move_cn：以接收者参与结果结束。
+
+- paragraph_job_cn：以三层结果证明设计有效。
+
+### 9. Introduction P9
+
+- locator：Introduction P9
+
+- opening_move_cn：从结果转向机制探索。
+
+- development_move_cn：依次报告行为中介、在线实验、排除分析和异质性。
+
+- pivot_move_cn：在核心机制与替代机制之间转折。
+
+- closing_move_cn：以额外稳健性分析结束。
+
+- paragraph_job_cn：向读者证明结果具有机制支撑且排除替代解释。
+
+### 10. Introduction P10
+
+- locator：Introduction P10
+
+- opening_move_cn：开始贡献声明。
+
+- development_move_cn：第一贡献围绕PETs转向鼓励披露；第二贡献扩展短暂分享文献。
+
+- pivot_move_cn：从文献贡献转向与已有研究的对比。
+
+- closing_move_cn：以下游结果差异结束，准备第三类贡献。
+
+- paragraph_job_cn：定位本文在隐私管理和短暂分享文献中的两重理论贡献。
+
+### 11. Introduction P11
+
+- locator：Introduction P11
+
+- opening_move_cn：转向管理启示。
+
+- development_move_cn：给出平台层面的具体做法并加入个性化建议。
+
+- pivot_move_cn：从建议转向平台实际采纳证据。
+
+- closing_move_cn：以平台推广功能收束，形成外部验证。
+
+- paragraph_job_cn：提供管理价值并以外部队落证据增强可信度。
+
+## 理论到设计逐句图谱
+
+### 1. Theory section 2.1 opening
+
+- order：1
+
+- locator：Theory section 2.1 opening
+
+- paraphrase_cn：本文属于研究在线约会设计问题的第三支文献，已有研究探讨订阅、选择结构、流行度、需求披露、反馈和验证等设计。
+
+- move_code：POSITION_IN_LITERATURE
+
+- statement_status：prior_literature
+
+- why_here_cn：文献综述首段必须把本文放回在线约会设计研究谱系。
+
+- inherits_from_previous_cn：承接引言中的约会平台背景。
+
+- changes_argument_state_cn：确立研究在领域内的位置。
+
+- sets_up_next_cn：为隐私管理文献的进入提供领域坐标。
+
+- failure_if_removed_cn：文章在在线约会文献中的定位缺失。
+
+- evidence_pointer：Section 2.1
+
+### 2. Theory section 2.1 closing
+
+- order：2
+
+- locator：Theory section 2.1 closing
+
+- paraphrase_cn：本文通过检验新颖的短暂分享设计来促进披露并保护隐私，补充了这一支文献。
+
+- move_code：LOCATE_GAP_WITHIN_SUBSTREAM
+
+- statement_status：author_inference
+
+- why_here_cn：首段末尾点出本文设计与已有约会设计的区别。
+
+- inherits_from_previous_cn：总结前面对设计文献的列举。
+
+- changes_argument_state_cn：把短暂分享设计放入约会议设计研究。
+
+- sets_up_next_cn：为下一节隐私管理文献奠定入口。
+
+- failure_if_removed_cn：本文贡献在该子领域的落点不清楚。
+
+- evidence_pointer：Section 2.1 last sentence
+
+### 3. Theory section 2.2 first paragraph
+
+- order：3
+
+- locator：Theory section 2.2 first paragraph
+
+- paraphrase_cn：隐私管理文献分为三类：隐私经济学、隐私控制设计、隐私增强技术与设计（PETs）。
+
+- move_code：CLASSIFY_LITERATURE
+
+- statement_status：prior_literature
+
+- why_here_cn：把本文定位到PETs必须先搭建隐私管理文献的三分框架。
+
+- inherits_from_previous_cn：从在线约会设计文献过渡到隐私管理。
+
+- changes_argument_state_cn：建立后续三小节的分类结构。
+
+- sets_up_next_cn：为讨论PETs局限提供框架。
+
+- failure_if_removed_cn：隐私文献的结构化梳理缺失。
+
+- evidence_pointer：Section 2.2 first paragraph
+
+### 4. Theory section 2.2 PETs paragraph
+
+- order：4
+
+- locator：Theory section 2.2 PETs paragraph
+
+- paraphrase_cn：大多数PETs旨在隐藏用户身份、通信内容和行为痕迹，但减少个人信息的可用性会损害匹配市场效率。
+
+- move_code：IDENTIFY_PETS_LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：指出既有PETs的副作用，为鼓励披露的新型PETs创造缺口。
+
+- inherits_from_previous_cn：承接PETs的定义。
+
+- changes_argument_state_cn：把PETs从保护工具转为可能损害市场的设计。
+
+- sets_up_next_cn：引出本文短暂分享作为另一类PETs。
+
+- failure_if_removed_cn：本文设计的必要性在PETs谱系中不成立。
+
+- evidence_pointer：Section 2.2 PETs paragraph
+
+### 5. Theory section 2.3.1 first paragraph
+
+- order：5
+
+- locator：Theory section 2.3.1 first paragraph
+
+- paraphrase_cn：短暂分享可能促进毒性去抑制和良性去抑制，并有研究显示其影响信息分享行为。
+
+- move_code：SYNTHESIZE_EPHEMERAL_LITERATURE
+
+- statement_status：prior_literature
+
+- why_here_cn：必须总结社交媒体短暂分享文献，以建立后文去抑制替代解释的理论来源。
+
+- inherits_from_previous_cn：从PETs转到短暂分享的具体文献。
+
+- changes_argument_state_cn：建立短暂分享在社交媒体中的已知机制。
+
+- sets_up_next_cn：为与约会情境对比和去抑制排除提供理论基础。
+
+- failure_if_removed_cn：去抑制替代解释缺乏文献基础。
+
+- evidence_pointer：Section 2.3.1 first paragraph
+
+### 6. Theory section 2.3.1 second paragraph
+
+- order：6
+
+- locator：Theory section 2.3.1 second paragraph
+
+- paraphrase_cn：社交媒体短暂分享用于维持已连接用户的关系，主要缓解自我呈现担忧；而约会平台用于陌生人匹配，披露和信任建立更为关键。
+
+- move_code：CONTRAST_CONTEXTS
+
+- statement_status：prior_literature
+
+- why_here_cn：情境差异是本文新颖性的核心，必须明确列出。
+
+- inherits_from_previous_cn：承接上一段对社交媒体短暂分享的总结。
+
+- changes_argument_state_cn：建立社交媒体与约会情境的对照。
+
+- sets_up_next_cn：为Table 1全面比较和2.3.2理论化做铺垫。
+
+- failure_if_removed_cn：本文在新情境中的贡献依据缺失。
+
+- evidence_pointer：Section 2.3.1 second paragraph
+
+### 7. Theory section 2.3.2 first paragraph
+
+- order：7
+
+- locator：Theory section 2.3.2 first paragraph
+
+- paraphrase_cn：构建于相关文献之上，提出短暂分享可作为隐私增强设计解决在线约会冷启动，并概念化社会隐私担忧。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：这是全文理论核心：把短暂分享与新概念框架连接。
+
+- inherits_from_previous_cn：依托前文PETs限制和社交媒体对比。
+
+- changes_argument_state_cn：正式提出社会隐私担忧作为核心构念。
+
+- sets_up_next_cn：需要展开四维结构。
+
+- failure_if_removed_cn：全文理论框架缺失。
+
+- evidence_pointer：Section 2.3.2 first paragraph
+
+### 8. Theory section 2.3.2 second paragraph
+
+- order：8
+
+- locator：Theory section 2.3.2 second paragraph
+
+- paraphrase_cn：根据文献和用户访谈，社会隐私担忧包含数据收集、数据传播、身份披露和身份滥用四个维度。
+
+- move_code：DEFINE_CONSTRUCT_DIMENSIONS
+
+- statement_status：author_inference
+
+- why_here_cn：机制检验需要可测量的构念维度。
+
+- inherits_from_previous_cn：展开上一句社会隐私担忧定义。
+
+- changes_argument_state_cn：确定在线实验要测量的四个维度。
+
+- sets_up_next_cn：为后续设计属性如何影响各维度作铺垫。
+
+- failure_if_removed_cn：在线实验的构念测量失去依据。
+
+- evidence_pointer：Section 2.3.2 second paragraph
+
+### 9. Theory section 2.3.2 third paragraph
+
+- order：9
+
+- locator：Theory section 2.3.2 third paragraph
+
+- paraphrase_cn：由于缺少语言和非语言线索，用户在初期必须建立信任；社会隐私担忧导致用户扣住照片，对方因此认为不可信，匹配失败源于冷启动而非不合适。
+
+- move_code：LINK_CONSTRUCT_TO_COLD_START
+
+- statement_status：theory_claim
+
+- why_here_cn：说明社会隐私担忧如何直接导致冷启动问题，让机制面对现实后果。
+
+- inherits_from_previous_cn：承接四维担忧并返回初始互动场景。
+
+- changes_argument_state_cn：把理论构念与核心现象因果连接。
+
+- sets_up_next_cn：为短暂分享的设计机理提供作用对象。
+
+- failure_if_removed_cn：社会隐私担忧与冷启动之间缺乏因果叙事。
+
+- evidence_pointer：Section 2.3.2 third paragraph
+
+### 10. Theory section 2.3.2 fourth paragraph
+
+- order：10
+
+- locator：Theory section 2.3.2 fourth paragraph
+
+- paraphrase_cn：短暂照片的自动消失和禁止下载/截图技术阻止接收者永久占有，降低传播和滥用可能，从而降低发送者社会隐私担忧，使其更可能附含有人脸的照片。
+
+- move_code：THEORY_TO_DESIGN_TRANSLATION
+
+- statement_status：theory_claim
+
+- why_here_cn：这是从理论机制到设计属性的关键翻译句，证明短暂性如何操作化降低担忧。
+
+- inherits_from_previous_cn：直接运用四维担忧中传播和滥用维度。
+
+- changes_argument_state_cn：把设计属性（消失、禁下载截图）与理论机制对接。
+
+- sets_up_next_cn：为现场实验中的NumPhoto和NumFace预期提供机制根据。
+
+- failure_if_removed_cn：设计为何能降低担忧没有理论解释。
+
+- evidence_pointer：Section 2.3.2 fourth paragraph
+
+### 11. Theory section 2.3.2 fifth paragraph
+
+- order：11
+
+- locator：Theory section 2.3.2 fifth paragraph
+
+- paraphrase_cn：披露个人照片向接收者发送可信和真诚的信号，降低不确定性，并减少接收者先披露的压力，因此接收者更可能接受请求并继续互动。
+
+- move_code：THEORY_FOR_DOWNSTREAM_OUTCOMES
+
+- statement_status：theory_claim
+
+- why_here_cn：披露如何转化为匹配和参与需要理论解释，否则下游结果悬空。
+
+- inherits_from_previous_cn：承接披露增加的可能结果。
+
+- changes_argument_state_cn：建立披露→匹配→参与的下游机制。
+
+- sets_up_next_cn：为顺序中介模型中的路径提供理论预期。
+
+- failure_if_removed_cn：为什么匹配数和接收者消息会受披露影响无法解释。
+
+- evidence_pointer：Section 2.3.2 fifth paragraph
+
+### 12. Theory section 2.3.2 closing paragraph
+
+- order：12
+
+- locator：Theory section 2.3.2 closing paragraph
+
+- paraphrase_cn：总结预期：通过降低社会隐私担忧，匹配请求阶段的短暂分享会改变个人信息披露，进而影响匹配结果和对话参与，缓解冷启动。
+
+- move_code：THEORY_SUMMARY_AND_EXPECTATION
+
+- statement_status：theory_claim
+
+- why_here_cn：整节理论化结束时应给出可检验的整体预期。
+
+- inherits_from_previous_cn：综合全部理论链。
+
+- changes_argument_state_cn：把理论预言完整化为对实验结果的预期。
+
+- sets_up_next_cn：为第3节实验章节做过渡。
+
+- failure_if_removed_cn：实证章节缺乏被检验的理论命题。
+
+- evidence_pointer：End of Section 2.3.2
+
+## 制品设计理由逐句图谱
+
+### 1. Section 3.1 P1
+
+- order：1
+
+- locator：Section 3.1 P1
+
+- paraphrase_cn：Summer平台使用基于问答的匹配机制：用户列出筛选问题，发送者回答并可能附照片，接收者批准后双方匹配并可聊天。
+
+- move_code：DESCRIBE_PLATFORM_FLOW
+
+- statement_status：fact
+
+- why_here_cn：必须说明操纵发生在匹配请求阶段，因为照片附在请求中。
+
+- inherits_from_previous_cn：从理论期望过渡到具体平台流程。
+
+- changes_argument_state_cn：确定实验操纵的实际位置。
+
+- sets_up_next_cn：为UI操纵描述提供上下文。
+
+- failure_if_removed_cn：读者无法理解照片上传在流程中的角色。
+
+- evidence_pointer：Section 3.1 and Figure 1
+
+### 2. Section 3.2 P1
+
+- order：2
+
+- locator：Section 3.2 P1
+
+- paraphrase_cn：设计采用用户层面组间设计，用户在更新到3.8.2时被随机分配并保持分组；实验为期18天，期间无其它实验，社区被调节防止讨论治疗。
+
+- move_code：DESIGN_RANDOMIZATION_RATIONALE
+
+- statement_status：method_decision
+
+- why_here_cn：因果识别需要说明随机化、固定分组和无污染机制。
+
+- inherits_from_previous_cn：在平台流程基础上确定实验分配机制。
+
+- changes_argument_state_cn：确立治疗的因果可用性前提。
+
+- sets_up_next_cn：为随机化检验和主分析提供基础。
+
+- failure_if_removed_cn：因果推断的识别假设无法评估。
+
+- evidence_pointer：Section 3.2 P1
+
+### 3. Section 3.2 P2
+
+- order：3
+
+- locator：Section 3.2 P2
+
+- paraphrase_cn：平台进行了广泛访谈和预测试，确认用户理解短暂照片概念和对应刺激。
+
+- move_code：MANIPULATION_COMPREHENSION_EVIDENCE
+
+- statement_status：method_decision
+
+- why_here_cn：治疗刺激若未被理解，实验无效；预先验证是操纵有效性的前提。
+
+- inherits_from_previous_cn：承接治疗组的UI设计。
+
+- changes_argument_state_cn：提前回应操纵理解的威胁。
+
+- sets_up_next_cn：为随后三处UI刺激细节提供可信度。
+
+- failure_if_removed_cn：操纵有效性没有证据支持。
+
+- evidence_pointer：Section 3.2 P2
+
+### 4. Section 3.2 P2 UI details
+
+- order：4
+
+- locator：Section 3.2 P2 UI details
+
+- paraphrase_cn：治疗组请求页按钮文案为“上传个人照片（短暂）”，对照组为“上传个人照片”；弹窗有三处差异：文案、燃烧图标和功能解释句。
+
+- move_code：DETAIL_MANIPULATION_STIMULI
+
+- statement_status：design_decision
+
+- why_here_cn：读者需要知道治疗由哪些UI元素构成，才能判断操纵是否符合理论概念。
+
+- inherits_from_previous_cn：展开上一句提到的治疗刺激。
+
+- changes_argument_state_cn：把短暂分享概念落到实物UI。
+
+- sets_up_next_cn：为读者理解图2、图3和结果可复现性作准备。
+
+- failure_if_removed_cn：治疗操作不可验证，设计贡献模糊。
+
+- evidence_pointer：Section 3.2 P2, Figures 2 and 3
+
+### 5. Section 3.2 P3
+
+- order：5
+
+- locator：Section 3.2 P3
+
+- paraphrase_cn：用户始终可以在资料或照片墙放照片；约30%用户有含人脸头像、25%照片墙含人脸；实验独立于用户资料照片，仅围绕请求时的短暂或持久照片。
+
+- move_code：DELIMIT_ARTIFACT_SCOPE
+
+- statement_status：fact
+
+- why_here_cn：必须说明实验新增的请求照片与资料照片相互独立，避免干预范围混淆。
+
+- inherits_from_previous_cn：承接治疗UI但把范围限定在请求阶段。
+
+- changes_argument_state_cn：界定制品边界，防止读者认为设计改变全部照片披露。
+
+- sets_up_next_cn：为PhotoWallFace作为隐私敏感性代理和异质性分析作铺垫。
+
+- failure_if_removed_cn：后续用PhotoWallFace测量敏感性与治疗范围产生矛盾。
+
+- evidence_pointer：Section 3.2 P3
+
+### 6. Section 3.2 P4
+
+- order：6
+
+- locator：Section 3.2 P4
+
+- paraphrase_cn：持久和短暂照片选项同时引入生产系统。
+
+- move_code：SIMULTANEITY_RATIONALE
+
+- statement_status：fact
+
+- why_here_cn：同时引入避免“新增照片功能”的新奇混淆来自功能新旧。
+
+- inherits_from_previous_cn：承接选项引入时机。
+
+- changes_argument_state_cn：让组间差异仅来自短暂性。
+
+- sets_up_next_cn：为排除新奇效应提供设计层面的理由。
+
+- failure_if_removed_cn：短暂性与新增功能混淆无法排除。
+
+- evidence_pointer：Section 3.2 P4
+
+## Study开头、过渡与收束图谱
+
+### 1. Section 5.1 opening
+
+- locator：Section 5.1 opening
+
+- move_code：OPEN_MAIN_ANALYSIS
+
+- paraphrase_cn：首先探索短暂分享对披露行为的影响，以照片数和含人脸照片数为指标。
+
+- why_here_cn：主分析必须从最上游行为变量开始，形成结果分层。
+
+- inherits_from_previous_cn：承接第4节模型设定。
+
+- changes_argument_state_cn：开始用回归估计总效应。
+
+- sets_up_next_cn：为匹配结果分析提供上游结果。
+
+- evidence_pointer：Section 5.1.1 opening
+
+### 2. Section 5.1.2 opening
+
+- locator：Section 5.1.2 opening
+
+- move_code：TRANSITION_TO_MATCH_OUTCOME
+
+- paraphrase_cn：接下来转向短暂分享对匹配结果的影响。
+
+- why_here_cn：从披露转到匹配结果需要显式过渡。
+
+- inherits_from_previous_cn：披露效应已建立。
+
+- changes_argument_state_cn：把分析结果推向下游。
+
+- sets_up_next_cn：为接收者参与分析做承接。
+
+- evidence_pointer：Section 5.1.2 opening
+
+### 3. Section 5.1.3 opening
+
+- locator：Section 5.1.3 opening
+
+- move_code：TRANSITION_TO_ENGAGEMENT
+
+- paraphrase_cn：为考察是否会缓解冷启动，以接收者发来的消息总数衡量接收者参与。
+
+- why_here_cn：必须将结果变量明确连接到冷启动概念。
+
+- inherits_from_previous_cn：匹配结果之后进入更下游的互动。
+
+- changes_argument_state_cn：使第三个结果变量承载冷启动缓解含义。
+
+- sets_up_next_cn：为机制分析提供完整结局变量。
+
+- evidence_pointer：Section 5.1.3 opening
+
+### 4. Section 5.2 opening
+
+- locator：Section 5.2 opening
+
+- move_code：OPEN_MECHANISM_SECTION
+
+- paraphrase_cn：估计完总效应后，接下来理解机制；先测行为机制，再用在线实验调查为何披露增加。
+
+- why_here_cn：总效应建立后必须转向机制，否则论证停在相关性。
+
+- inherits_from_previous_cn：总效应估计已完成。
+
+- changes_argument_state_cn：从效应估计转向机制分解。
+
+- sets_up_next_cn：为顺序中介和在线实验预告路线图。
+
+- evidence_pointer：Section 5.2 opening
+
+### 5. Section 5.2.1 opening
+
+- locator：Section 5.2.1 opening
+
+- move_code：OPEN_MEDIATION
+
+- paraphrase_cn：一个可能机制是增加照片上传，接收者因此觉得更可信，更可能接受并聊天。
+
+- why_here_cn：必须给出中介假设的内容，再做统计检验。
+
+- inherits_from_previous_cn：承接理论与总效应。
+
+- changes_argument_state_cn：把披露作为候选机制正式提出。
+
+- sets_up_next_cn：为PROCESS顺序中介模型作准备。
+
+- evidence_pointer：Section 5.2.1 opening
+
+### 6. Section 5.2.2 opening
+
+- locator：Section 5.2.2 opening
+
+- move_code：OPEN_ALTERNATIVES
+
+- paraphrase_cn：除了请求量和对象选择，还可能有新奇特性和照片内容差异，分六小节排除。
+
+- why_here_cn：机制论证必须回应替代解释，否则归因不稳固。
+
+- inherits_from_previous_cn：中介分析后自然进入竞争机制排除。
+
+- changes_argument_state_cn：列出需要排除的替代机制集合。
+
+- sets_up_next_cn：为六个排除分析章节提供结构。
+
+- evidence_pointer：Section 5.2.2 opening
+
+### 7. Section 5.3 opening
+
+- locator：Section 5.3 opening
+
+- move_code：OPEN_ONLINE_MECHANISM_EXPERIMENT
+
+- paraphrase_cn：行为分析已表明披露是机制；为了解为何披露增加，假设是社会隐私担忧降低，通过在线实验测量多种替代机制。
+
+- why_here_cn：从行为机制转到心理机制必须显式说明实验目的。
+
+- inherits_from_previous_cn：依赖5.2.1的披露中介结论。
+
+- changes_argument_state_cn：引入构念层面的证据需求。
+
+- sets_up_next_cn：为在线实验的构念清单和PLS-SEM作准备。
+
+- evidence_pointer：Section 5.3 opening
+
+### 8. Section 5.3.1 opening
+
+- locator：Section 5.3.1 opening
+
+- move_code：DESCRIBE_ONLINE_PARTICIPANTS
+
+- paraphrase_cn：在线实验在中国开展以匹配现场平台背景，105名参与者来自Sojump。
+
+- why_here_cn：样本背景必须与现场实验可比。
+
+- inherits_from_previous_cn：承接在线实验的目的。
+
+- changes_argument_state_cn：确立外部一致性。
+
+- sets_up_next_cn：为刺激流程和构念测量提供主角。
+
+- evidence_pointer：Section 5.3.1
+
+### 9. Section 5.3.4
+
+- locator：Section 5.3.4
+
+- move_code：CLOSE_ONLINE_MECHANISM
+
+- paraphrase_cn：结果确认短暂分享降低数据收集、传播和身份滥用担忧并完全中介披露意向，而机构隐私和自我呈现不受影响。
+
+- why_here_cn：心理机制实验必须以关键路径结果收束。
+
+- inherits_from_previous_cn：依赖PLS-SEM路径估计。
+
+- changes_argument_state_cn：把机制归结到特定三维担忧。
+
+- sets_up_next_cn：为异质性分析中隐私敏感性预期提供支撑。
+
+- evidence_pointer：Section 5.3.4, Table 16, Figure 5
+
+### 10. Section 5.4 opening
+
+- locator：Section 5.4 opening
+
+- move_code：OPEN_HETEROGENEITY
+
+- paraphrase_cn：接下来考察短暂分享是否对某些用户影响更大，猜测隐私敏感用户受影响更多，并以PhotoWallFace作为代理。
+
+- why_here_cn：边界条件分析需要先阐明理论预期和代理选择。
+
+- inherits_from_previous_cn：机制是隐私担忧，所以敏感性应是调节变量。
+
+- changes_argument_state_cn：从平均效应转向异质性效应。
+
+- sets_up_next_cn：为交互项回归作准备。
+
+- evidence_pointer：Section 5.4 opening
+
+### 11. Section 5.4 closing
+
+- locator：Section 5.4 closing
+
+- move_code：CLOSE_HETEROGENEITY
+
+- paraphrase_cn：交互项显著为负且用ProfileFace替换后结果相似，因此短暂分享对隐私敏感用户更有效，支持其隐私增强作用。
+
+- why_here_cn：异质性分析必须结合稳健性进行总结。
+
+- inherits_from_previous_cn：依赖Table 17和附录F。
+
+- changes_argument_state_cn：把边界条件确定下来并回扣隐私机制。
+
+- sets_up_next_cn：为讨论部分提供机制与边界结合的素材。
+
+- evidence_pointer：Section 5.4 closing
+
+### 12. Section 6.1 opening
+
+- locator：Section 6.1 opening
+
+- move_code：OPEN_DISCUSSION
+
+- paraphrase_cn：在在线约会中，隐私担忧阻止自愿披露；为缓解冷启动，研究提出并检验短暂照片设计。
+
+- why_here_cn：讨论必须回扣引言问题。
+
+- inherits_from_previous_cn：回顾全文目标与设计。
+
+- changes_argument_state_cn：把实证章节重新放回问题框架。
+
+- sets_up_next_cn：为逐层概括结果作准备。
+
+- evidence_pointer：Section 6.1 opening
+
+### 13. Section 6.1 closing
+
+- locator：Section 6.1 closing
+
+- move_code：CLOSE_MAIN_FINDINGS
+
+- paraphrase_cn：最后发现治疗效应在隐私敏感发送者中更显著。
+
+- why_here_cn：主发现总结以异质性结束，与引言预告一致。
+
+- inherits_from_previous_cn：整合全部实证结果。
+
+- changes_argument_state_cn：完成对结果的完整概括。
+
+- sets_up_next_cn：为贡献分类奠定事实基础。
+
+- evidence_pointer：Section 6.1 closing
+
+## 讨论与贡献逐句图谱
+
+### 1. Discussion 6.1 S1
+
+- order：1
+
+- locator：Discussion 6.1 S1
+
+- paraphrase_cn：在约会平台中，隐私担忧使用户不愿披露有价值的信息，为缓解冷启动问题本文提出并测试了短暂照片分享设计。
+
+- move_code：RESTATE_PROBLEM_AND_DESIGN
+
+- statement_status：author_inference
+
+- why_here_cn：讨论开篇必须重述问题与方案，把全文拉回起点。
+
+- inherits_from_previous_cn：承接实证分析但回到问题层。
+
+- changes_argument_state_cn：确立讨论的对象和范围。
+
+- sets_up_next_cn：为随后的主发现总结提供框架。
+
+- failure_if_removed_cn：讨论缺乏问题锚点。
+
+- evidence_pointer：Section 6.1 first sentence
+
+### 2. Discussion 6.1 S2
+
+- order：2
+
+- locator：Discussion 6.1 S2
+
+- paraphrase_cn：大规模现场实验分析表明短暂照片设计相比持久照片改善匹配结果和匹配后对话参与。
+
+- move_code：RESTATE_MAIN_EFFECT
+
+- statement_status：empirical_result
+
+- why_here_cn：讨论必须以核心总效应开头。
+
+- inherits_from_previous_cn：承接第5节主分析。
+
+- changes_argument_state_cn：重新确立设计有效性。
+
+- sets_up_next_cn：为机制总结铺垫。
+
+- failure_if_removed_cn：主发现被遗忘。
+
+- evidence_pointer：Section 6.1 S2
+
+### 3. Discussion 6.1 S3
+
+- order：3
+
+- locator：Discussion 6.1 S3
+
+- paraphrase_cn：中介分析确认效应源于匹配请求阶段发送者个人照片披露的增加。
+
+- move_code：RESTATE_MEDIATION
+
+- statement_status：empirical_result
+
+- why_here_cn：机制是贡献的核心，必须重述。
+
+- inherits_from_previous_cn：承接中介结果。
+
+- changes_argument_state_cn：把效应归因于披露行为。
+
+- sets_up_next_cn：为排除替代解释的总结作准备。
+
+- failure_if_removed_cn：机制贡献缺失。
+
+- evidence_pointer：Section 6.1 S3
+
+### 4. Discussion 6.1 S4
+
+- order：4
+
+- locator：Discussion 6.1 S4
+
+- paraphrase_cn：还排除了治疗新奇、请求增加和照片内容变化等替代解释。
+
+- move_code：RESTATE_EXCLUSIONS
+
+- statement_status：empirical_result
+
+- why_here_cn：讨论需要重述排除结果以巩固归因。
+
+- inherits_from_previous_cn：延续机制论证。
+
+- changes_argument_state_cn：消除明显竞争解释。
+
+- sets_up_next_cn：为心理机制介绍做铺垫。
+
+- failure_if_removed_cn：替代解释威胁未被回应。
+
+- evidence_pointer：Section 6.1 S4
+
+### 5. Discussion 6.1 S5
+
+- order：5
+
+- locator：Discussion 6.1 S5
+
+- paraphrase_cn：在线实验测量构念，结果表明短暂设计通过降低数据收集、传播和身份滥用担忧提高披露意向，而非身份披露、机构隐私或自我呈现。
+
+- move_code：RESTATE_PSYCHOLOGICAL_MECHANISM
+
+- statement_status：empirical_result
+
+- why_here_cn：心理机制是机制部分的最深层证据，必须重述。
+
+- inherits_from_previous_cn：承接在线实验。
+
+- changes_argument_state_cn：把机制限定到特定担忧维度。
+
+- sets_up_next_cn：为异质性和贡献总结作准备。
+
+- failure_if_removed_cn：心理机制贡献缺失。
+
+- evidence_pointer：Section 6.1 S5
+
+### 6. Discussion 6.1 S6
+
+- order：6
+
+- locator：Discussion 6.1 S6
+
+- paraphrase_cn：最终发现短暂分享在隐私敏感发送者中效应更显著。
+
+- move_code：RESTATE_HETEROGENEITY
+
+- statement_status：empirical_result
+
+- why_here_cn：以边界条件结束主发现总结。
+
+- inherits_from_previous_cn：承接异质性分析。
+
+- changes_argument_state_cn：把机制与边界结合。
+
+- sets_up_next_cn：转入对文献贡献的论述。
+
+- failure_if_removed_cn：异质性贡献缺失。
+
+- evidence_pointer：Section 6.1 S6
+
+### 7. Discussion 6.2 first contribution P1
+
+- order：7
+
+- locator：Discussion 6.2 first contribution P1
+
+- paraphrase_cn：第一项贡献是把隐私管理特别是PETs文献扩展到在线匹配平台。
+
+- move_code：CONTRIBUTION_1_TOPIC
+
+- statement_status：contribution_claim
+
+- why_here_cn：贡献段必须按文献线逐一展开。
+
+- inherits_from_previous_cn：承接全部结果。
+
+- changes_argument_state_cn：宣告对隐私管理文献的贡献。
+
+- sets_up_next_cn：需要展开对比PETs传统做法。
+
+- failure_if_removed_cn：第一贡献缺失。
+
+- evidence_pointer：Section 6.2 first contribution P1
+
+### 8. Discussion 6.2 first contribution P2
+
+- order：8
+
+- locator：Discussion 6.2 first contribution P2
+
+- paraphrase_cn：本文是首批在匹配平台检验一种降低担忧但不阻碍有价值披露的隐私增强机制的研究，区别于以隐私控制阻断信息流的方式。
+
+- move_code：CONTRIBUTION_1_CONTRAST
+
+- statement_status：contribution_claim
+
+- why_here_cn：贡献必须通过与已有PETs对比来证明新颖。
+
+- inherits_from_previous_cn：延续第一贡献定位。
+
+- changes_argument_state_cn：把短暂分享与阻断式PETs对立。
+
+- sets_up_next_cn：为强调约会情境中披露的重要性作铺垫。
+
+- failure_if_removed_cn：贡献的独特性不成立。
+
+- evidence_pointer：Section 6.2 first contribution P2
+
+### 9. Discussion 6.2 first contribution P3
+
+- order：9
+
+- locator：Discussion 6.2 first contribution P3
+
+- paraphrase_cn：这种鼓励披露的方式对约会等披露至关重要的情境特别重要，如解决冷启动和维持健康参与。
+
+- move_code：CONTRIBUTION_1_WHY_MATTERS
+
+- statement_status：contribution_claim
+
+- why_here_cn：说明贡献为何在特定情境中有价值。
+
+- inherits_from_previous_cn：延续第一贡献逻辑。
+
+- changes_argument_state_cn：把设计与冷启动问题的解决相连。
+
+- sets_up_next_cn：为证据类型说明作铺垫。
+
+- failure_if_removed_cn：贡献的情境价值缺失。
+
+- evidence_pointer：Section 6.2 first contribution P3
+
+### 10. Discussion 6.2 first contribution P4
+
+- order：10
+
+- locator：Discussion 6.2 first contribution P4
+
+- paraphrase_cn：还使用客观披露数据与主观社会隐私担忧测量相结合证明设计的隐私增强效果。
+
+- move_code：CONTRIBUTION_1_EVIDENCE_TYPE
+
+- statement_status：contribution_claim
+
+- why_here_cn：强调证据组合增强结论可信度。
+
+- inherits_from_previous_cn：承接第一贡献的实证基础。
+
+- changes_argument_state_cn：把贡献锚定到双层证据。
+
+- sets_up_next_cn：为第二贡献过渡。
+
+- failure_if_removed_cn：贡献证据显得单一。
+
+- evidence_pointer：Section 6.2 first contribution P4
+
+### 11. Discussion 6.2 second contribution P1
+
+- order：11
+
+- locator：Discussion 6.2 second contribution P1
+
+- paraphrase_cn：第二项贡献推进短暂分享文献：已有研究视其为维持已连接用户关系的手段，本文显示在约会中它促进陌生人匹配。
+
+- move_code：CONTRIBUTION_2_TOPIC
+
+- statement_status：contribution_claim
+
+- why_here_cn：第二贡献必须在短暂分享文献线中定位。
+
+- inherits_from_previous_cn：从第一贡献转向另一文献线。
+
+- changes_argument_state_cn：把短暂分享作用从关系维持扩展到关系创建。
+
+- sets_up_next_cn：为下游结果差异作铺垫。
+
+- failure_if_removed_cn：短暂分享文献贡献的第一点缺失。
+
+- evidence_pointer：Section 6.2 second contribution P1
+
+### 12. Discussion 6.2 second contribution P2
+
+- order：12
+
+- locator：Discussion 6.2 second contribution P2
+
+- paraphrase_cn：第二，虽然已有研究揭示短暂分享影响社交媒体的信息分享行为，本文将其扩展到匹配数、匹配后对话参与等下游结果。
+
+- move_code：CONTRIBUTION_2_DEVELOP
+
+- statement_status：contribution_claim
+
+- why_here_cn：从行为结果扩展到平台级结果。
+
+- inherits_from_previous_cn：延续上一句。
+
+- changes_argument_state_cn：强调下游结果的新颖性。
+
+- sets_up_next_cn：为自我呈现担忧的机制差异作铺垫。
+
+- failure_if_removed_cn：下游结果贡献缺失。
+
+- evidence_pointer：Section 6.2 second contribution P2
+
+### 13. Discussion 6.2 second contribution P3
+
+- order：13
+
+- locator：Discussion 6.2 second contribution P3
+
+- paraphrase_cn：第三，虽然已有文献认为短暂分享主要缓解自我呈现担忧，本文证明在约会情境中它增强隐私并增加信息披露。
+
+- move_code：CONTRIBUTION_2_MECHANISM_SHIFT
+
+- statement_status：contribution_claim
+
+- why_here_cn：本文的机制主张必须与社交媒体文献的机制主张形成对比。
+
+- inherits_from_previous_cn：承接第二贡献。
+
+- changes_argument_state_cn：把机制从自我呈现转向隐私增强。
+
+- sets_up_next_cn：为第三项信息价值贡献作准备。
+
+- failure_if_removed_cn：机制层面的贡献区别缺失。
+
+- evidence_pointer：Section 6.2 second contribution P3
+
+### 14. Discussion 6.2 third contribution P1
+
+- order：14
+
+- locator：Discussion 6.2 third contribution P1
+
+- paraphrase_cn：最后本文涉及个人信息价值文献：已有研究强调企业通过推荐等算法工具提取个人数据价值。
+
+- move_code：CONTRIBUTION_3_TOPIC
+
+- statement_status：contribution_claim
+
+- why_here_cn：第三贡献要进入信息价值文献，必须先概括该文献的主流观点。
+
+- inherits_from_previous_cn：从短暂分享文献过渡。
+
+- changes_argument_state_cn：建立个人信息价值文献的参照点。
+
+- sets_up_next_cn：为转向用户间披露作铺垫。
+
+- failure_if_removed_cn：第三贡献缺乏文献背景。
+
+- evidence_pointer：Section 6.2 third contribution P1
+
+### 15. Discussion 6.2 third contribution P2
+
+- order：15
+
+- locator：Discussion 6.2 third contribution P2
+
+- paraphrase_cn：与把个人数据送入推荐系统不同，本文展示用户自愿分享在点对点互动中的作用，因此个人信息价值由用户自己实现。
+
+- move_code：CONTRIBUTION_3_DEVELOP
+
+- statement_status：contribution_claim
+
+- why_here_cn：必须明确对比算法提取与点对点披露的不同价值实现路径。
+
+- inherits_from_previous_cn：延续上一句的文献基础。
+
+- changes_argument_state_cn：提出个人信息价值的用户端实现路径。
+
+- sets_up_next_cn：为管理启示过渡。
+
+- failure_if_removed_cn：第三贡献失去对比点。
+
+- evidence_pointer：Section 6.2 third contribution P2
+
+### 16. Discussion 6.3 P1
+
+- order：16
+
+- locator：Discussion 6.3 P1
+
+- paraphrase_cn：在线约会平台或其它隐私敏感场景可以实施短暂分享设计来鼓励披露并保护隐私；实验后平台已把功能整合到生产系统并成为流行功能。
+
+- move_code：MANAGERIAL_IMPLICATION_1
+
+- statement_status：contribution_claim
+
+- why_here_cn：管理启示必须以可行动建议和外部采纳证据支撑。
+
+- inherits_from_previous_cn：承接全部贡献。
+
+- changes_argument_state_cn：把贡献转化为平台行动。
+
+- sets_up_next_cn：为扩展到其它场景和媒介作铺垫。
+
+- failure_if_removed_cn：实践相关性缺失。
+
+- evidence_pointer：Section 6.3 P1
+
+### 17. Discussion 6.3 P2
+
+- order：17
+
+- locator：Discussion 6.3 P2
+
+- paraphrase_cn：类似设计可应用于在线健康、在线治疗、在线金融等依赖披露的平台，以及文本、音频、视频等形式。
+
+- move_code：MANAGERIAL_IMPLICATION_2
+
+- statement_status：contribution_claim
+
+- why_here_cn：把设计价值从约会推广到其它领域和媒介。
+
+- inherits_from_previous_cn：延续第一项管理启示。
+
+- changes_argument_state_cn：把短暂分享提升为可复用设计原则。
+
+- sets_up_next_cn：为身份披露的局限作铺垫。
+
+- failure_if_removed_cn：设计知识的一般性不足。
+
+- evidence_pointer：Section 6.3 P2
+
+### 18. Discussion 6.3 P3
+
+- order：18
+
+- locator：Discussion 6.3 P3
+
+- paraphrase_cn：短暂分享不能解决身份披露担忧，平台可设计其它策略补充。
+
+- move_code：MANAGERIAL_IMPLICATION_3
+
+- statement_status：contribution_claim
+
+- why_here_cn：坦诚设计边界并给出补充方向，避免过度主张。
+
+- inherits_from_previous_cn：在线实验发现身份披露担忧不显著。
+
+- changes_argument_state_cn：界定设计局限并指向组合策略。
+
+- sets_up_next_cn：为局限与未来研究过渡。
+
+- failure_if_removed_cn：管理建议过度泛化。
+
+- evidence_pointer：Section 6.3 P3
+
+### 19. Discussion 6.4 P1
+
+- order：19
+
+- locator：Discussion 6.4 P1
+
+- paraphrase_cn：局限一：未提供短暂分享如何影响接收者行为的信息。
+
+- move_code：LIMITATION_1
+
+- statement_status：author_inference
+
+- why_here_cn：局限必须有真实的内容，接收者行为确实是本文未测的。
+
+- inherits_from_previous_cn：承接前文接收者参与结果但指出未深入。
+
+- changes_argument_state_cn：划定未来研究的边界。
+
+- sets_up_next_cn：为第二局限作铺垫。
+
+- failure_if_removed_cn：接收者层面的空洞未被承认。
+
+- evidence_pointer：Section 6.4 P1
+
+### 20. Discussion 6.4 P2
+
+- order：20
+
+- locator：Discussion 6.4 P2
+
+- paraphrase_cn：局限二：用消息数衡量对话参与，未来可研究消息文本内容和线下互动。
+
+- move_code：LIMITATION_2
+
+- statement_status：author_inference
+
+- why_here_cn：结果变量测量的简化需要坦白。
+
+- inherits_from_previous_cn：承接接收者消息的测量。
+
+- changes_argument_state_cn：为未来内容分析打开空间。
+
+- sets_up_next_cn：为第三局限作铺垫。
+
+- failure_if_removed_cn：结果变量的测量局限被掩盖。
+
+- evidence_pointer：Section 6.4 P2
+
+### 21. Discussion 6.4 P3
+
+- order：21
+
+- locator：Discussion 6.4 P3
+
+- paraphrase_cn：局限三：异质性按隐私敏感性考察，未来可探索更多协变量以支持个性化设计。
+
+- move_code：LIMITATION_3
+
+- statement_status：author_inference
+
+- why_here_cn：异质性分析只用一个代理，坦白其有限性。
+
+- inherits_from_previous_cn：承接异质性结果。
+
+- changes_argument_state_cn：为个性化设计建议指明未来数据需求。
+
+- sets_up_next_cn：为外部推广局限作铺垫。
+
+- failure_if_removed_cn：异质性代理的局限被忽视。
+
+- evidence_pointer：Section 6.4 P3
+
+### 22. Discussion 6.4 P4
+
+- order：22
+
+- locator：Discussion 6.4 P4
+
+- paraphrase_cn：局限四：需要将短暂分享结论推广到约会之外的情境。
+
+- move_code：LIMITATION_4
+
+- statement_status：author_inference
+
+- why_here_cn：外部效度是最后必须承认的边界。
+
+- inherits_from_previous_cn：承接前三个局限。
+
+- changes_argument_state_cn：承认跨情境推广的未检验。
+
+- sets_up_next_cn：为结论段提供过渡。
+
+- failure_if_removed_cn：外部效度局限未被承认。
+
+- evidence_pointer：Section 6.4 P4
+
+### 23. Discussion 6.5 P1
+
+- order：23
+
+- locator：Discussion 6.5 P1
+
+- paraphrase_cn：结论：本文解决隐私敏感场景中的冷启动问题，短暂分享鼓励照片披露，带来更多匹配和参与。
+
+- move_code：CONCLUSION_RESTATE
+
+- statement_status：author_inference
+
+- why_here_cn：结论必须概括核心问题、方案和结果。
+
+- inherits_from_previous_cn：综合全部章节。
+
+- changes_argument_state_cn：把全文压缩为一段结论。
+
+- sets_up_next_cn：为未来愿景作铺垫。
+
+- failure_if_removed_cn：全文缺少收束。
+
+- evidence_pointer：Section 6.5 P1
+
+### 24. Discussion 6.5 P2
+
+- order：24
+
+- locator：Discussion 6.5 P2
+
+- paraphrase_cn：隐私和数据保护越来越重要，本文基于隐私文献在约会情境做出初步尝试，呼吁更多隐私增强设计。
+
+- move_code：CONCLUSION_CALL
+
+- statement_status：author_inference
+
+- why_here_cn：以研究议程呼吁结束，把本文放入更大学术运动。
+
+- inherits_from_previous_cn：承接结论核心。
+
+- changes_argument_state_cn：从单一研究提升为研究呼吁。
+
+- sets_up_next_cn：不需要下一句；文章结束。
+
+- failure_if_removed_cn：文章缺少研究议程层面的收尾。
+
+- evidence_pointer：Section 6.5 P2
+
+## Study累积逻辑
+
+### 1. 1
+
+- study_or_phase：概念化与设计阶段（访谈、预测试、UI设计）
+
+- evidence_job_cn：证明短暂分享概念可被约会平台用户理解，并把社会隐私担忧翻译为可操作的UI属性。
+
+- what_it_establishes_cn：治疗刺激的构造有效性和理论到设计的翻译链。
+
+- what_it_cannot_establish_cn：不能证明该设计会改变真实行为。
+
+- why_next_phase_is_needed_cn：设计理解不等于行为改变，必须在真实平台检验因果效应。
+
+- transition_wording_function_cn：第3节开头把设计阶段自然过渡到随机现场实验，说明平台和实验程序。
+
+### 2. 2
+
+- study_or_phase：现场随机实验部署与随机化检验
+
+- evidence_job_cn：建立因果识别基础：随机分配、协变量平衡、无污染。
+
+- what_it_establishes_cn：两组在观察协变量上可比，效应可归因于治疗。
+
+- what_it_cannot_establish_cn：不能指出效应大小和机制。
+
+- why_next_phase_is_needed_cn：随机化检验之后必须估计总效应，否则没有因果结果可用。
+
+- transition_wording_function_cn：第4.3节模型设定后直接进入第5.1主分析。
+
+### 3. 3
+
+- study_or_phase：主效应估计（照片披露、匹配、接收者消息）
+
+- evidence_job_cn：证明短暂分享对三层结果的总因果效应。
+
+- what_it_establishes_cn：治疗组多发照片、含人脸照片、更多匹配和更多接收者消息。
+
+- what_it_cannot_establish_cn：不能表明这些结果之间是因果链，也不能回答为何披露增加。
+
+- why_next_phase_is_needed_cn：总效应可能由披露、请求量、对象选择、新奇、内容变化或去抑制解释，需要中介和排除。
+
+- transition_wording_function_cn：第5.2节开头明确从总效应转向机制。
+
+### 4. 4
+
+- study_or_phase：行为中介与备择解释排除
+
+- evidence_job_cn：证明披露增加是匹配和参与效应的中介，并排除请求量、对象选择、新奇、去抑制和面部吸引力。
+
+- what_it_establishes_cn：披露行为在因果链中的核心位置。
+
+- what_it_cannot_establish_cn：不能回答哪些心理担忧被降低；在线实验测量的披露意向而非真实行为。
+
+- why_next_phase_is_needed_cn：行为机制只是中间层，需要构念层证据确认隐私机制。
+
+- transition_wording_function_cn：第5.3节用‘为何披露增加’开启在线实验。
+
+### 5. 5
+
+- study_or_phase：在线心理机制实验
+
+- evidence_job_cn：直接测量社会隐私担忧各维度、机构隐私和自我呈现意向，验证心理机制并排除替代心理机制。
+
+- what_it_establishes_cn：短暂分享降低数据收集、传播和身份滥用担忧，并完全中介披露意向。
+
+- what_it_cannot_establish_cn：只测量意向而非真实匹配行为；无法识别哪些用户更受益。
+
+- why_next_phase_is_needed_cn：机制确认后需要边界条件分析来确定设计最适合谁。
+
+- transition_wording_function_cn：第5.4节以‘是否对某些用户影响更大’引导异质性检验。
+
+### 6. 6
+
+- study_or_phase：异质性与稳健性检验
+
+- evidence_job_cn：用交互项界定隐私敏感用户的更大效应，并替换代理变量检验稳健性。
+
+- what_it_establishes_cn：短暂分享在隐私敏感发送者中的边际效应更大。
+
+- what_it_cannot_establish_cn：不能直接测量实时主观担忧；不能推广到接收者、线下结果或其它情境。
+
+- why_next_phase_is_needed_cn：边界与局限必须进入讨论，转化为贡献和未来研究方向。
+
+- transition_wording_function_cn：第6节讨论把所有结果回接到贡献、边界和局限。
+
+## 主张—证据台账
+
+### 1. 短暂分享增加个人照片和含人脸照片的披露。
+
+- claim_cn：短暂分享增加个人照片和含人脸照片的披露。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：现场实验OLS估计Ephemeral对NumPhoto的系数0.111（相对增加52.1%），对NumFace为0.113（相对增加61.6%），p<0.01。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P8 S1
+
+- where_evidence_is_provided：Section 5.1.1, Table 5
+
+### 2. 短暂分享增加匹配数。
+
+- claim_cn：短暂分享增加匹配数。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：Ephemeral对NumMatch显著为正，系数0.086/0.079，对应3.3%相对增加。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P8 S2
+
+- where_evidence_is_provided：Section 5.1.2, Table 6
+
+### 3. 短暂分享增加接收者消息量（接收者参与）。
+
+- claim_cn：短暂分享增加接收者消息量（接收者参与）。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：Ephemeral对Ln(SumMsgFromReceiver)显著为正，系数0.045/0.042，对应4.6%增加。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P8 S2
+
+- where_evidence_is_provided：Section 5.1.3, Table 7
+
+### 4. 匹配与互动效应由照片披露增加驱动。
+
+- claim_cn：匹配与互动效应由照片披露增加驱动。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：顺序中介Ephemeral→NumPhoto→NumMatch→Ln(SumMsgFromReceiver)的95%CI为[0.011,0.021]，包含0；直接路径不显著。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P9 S1
+
+- where_evidence_is_provided：Section 5.2.1, Figure 4
+
+### 5. 短暂分享通过降低数据收集、传播和身份滥用担忧提高披露意向。
+
+- claim_cn：短暂分享通过降低数据收集、传播和身份滥用担忧提高披露意向。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：在线实验PLS-SEM显示三维担忧显著并完全中介披露意向；身份披露、机构隐私和自我呈现不显著。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P9 S2
+
+- where_evidence_is_provided：Section 5.3.4, Table 16, Figure 5
+
+### 6. 治疗效应在隐私敏感发送者中更显著。
+
+- claim_cn：治疗效应在隐私敏感发送者中更显著。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：Ephemeral×PhotoWallFace在四个结果上均显著为负；使用ProfileFace替代后结果一致。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P9 S4
+
+- where_evidence_is_provided：Section 5.4, Table 17, Online Appendix F
+
+### 7. 请求量、对象选择、新奇效应、良性/毒性去抑制和面部吸引力不构成替代解释。
+
+- claim_cn：请求量、对象选择、新奇效应、良性/毒性去抑制和面部吸引力不构成替代解释。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：NumRequestPageView和NumRequest不显著；追求接收者特征无显著差异；Ephemeral×T2不显著；良性去抑制与毒性去抑制指标无差异；面部吸引力无差异。
+
+- support_strength：direct
+
+- where_claim_is_made：Introduction P9 S3
+
+- where_evidence_is_provided：Section 5.2.2, Tables 8-15, Online Appendix D
+
+### 8. 短暂分享在PETs谱系中是鼓励披露而非阻碍披露的新机制。
+
+- claim_cn：短暂分享在PETs谱系中是鼓励披露而非阻碍披露的新机制。
+
+- claim_level：theory
+
+- supporting_evidence_cn：与模糊、部分显示和控制可见性等PETs比较；现场与在线实验结果均显示披露增加。
+
+- support_strength：partial
+
+- where_claim_is_made：Introduction P10 S1-S2
+
+- where_evidence_is_provided：Section 2.2, Section 6.2 first contribution
+
+### 9. 短暂分享扩展了从社交媒体到陌生人匹配的文献边界。
+
+- claim_cn：短暂分享扩展了从社交媒体到陌生人匹配的文献边界。
+
+- claim_level：theory
+
+- supporting_evidence_cn：本文情境与结果变量（匹配数、接收者参与）不同于已有已连接用户研究。
+
+- support_strength：partial
+
+- where_claim_is_made：Introduction P10 S4-S6
+
+- where_evidence_is_provided：Section 2.3.1, Table 1, Section 6.2 second contribution
+
+### 10. 短暂分享实现了个人信息价值在用户间点对点披露中的实现。
+
+- claim_cn：短暂分享实现了个人信息价值在用户间点对点披露中的实现。
+
+- claim_level：design_knowledge
+
+- supporting_evidence_cn：披露增加导致匹配和参与增加，说明用户自愿分享创造价值；但没有直接测量价值感知。
+
+- support_strength：partial
+
+- where_claim_is_made：Discussion 6.2 third contribution
+
+- where_evidence_is_provided：Section 5.1-5.2 results
+
+## ISR定位逻辑
+
+- constitutive_is_problem_cn：本文把冷启动问题构造为人与数字平台设计的交互产物：平台的持久照片设计使隐私担忧抑制披露，进而使匹配市场因信息不足而失败。问题不是纯算法优化，而是信息系统的设计属性如何调节用户披露决策和市场结果。
+
+- technology_behavior_or_market_entanglement_cn：短暂分享的自动消失和禁下载/截图属性直接骑在用户心理担忧上：技术设计改变发送者对信息传播可控性的感知，进而改变真实匹配请求中的照片披露，再改变接收者的接受和互动行为。技术不是工具而是行为与市场的构成部分。
+
+- role_of_benchmark_or_objective_evidence_cn：持久照片作为自然反事实，让效应可归因于短暂性而非新增照片功能；匹配数和接收者消息等客观平台数据证明设计不仅改变主观意向，还改变真实市场结果。
+
+- theory_in_design_cn：理论在前瞻性进入设计：社会隐私担忧四维模型直接决定治疗UI的文案、燃烧图标和解释句；设计属性（自动消失、禁止下载）是从担忧维度推导而来；在线实验再测量这些构念，使理论、设计和证据形成闭环。
+
+- technical_vs_is_contribution_balance_cn：技术内容（UI操纵、人脸检测、内容分类、面部吸引力模型）只作为工具和操纵细节，篇幅有限；主要篇幅用于理论机制、因果识别、行为中介、心理机制和异质性，即IS层面的行为与市场问题。
+
+- beyond_transient_performance_cn：通过时间交互排除新奇效应、同时引入持久与短暂选项控制功能新增、顺序中介锁定披露机制、在线实验排除机构隐私和自我呈现、异质性显示隐私敏感用户获益更多，作者把设计从一时的分数优势升格为可复用的隐私增强设计知识。
+
+## 段落级仿写模板
+
+### abstract_steps
+
+1. 一句：给出领域现象和问题，并归因到某一行为机制。
+
+2. 一句：宣布研究提出什么设计解决方案并点出核心张力。
+
+3. 一句：严格定义设计概念的可操作属性。
+
+4. 一句：介绍主要证据来源（平台、样本量、实验类型）。
+
+5. 一句：说明治疗与对照条件的差异，突出反事实。
+
+6. 三句左右：按上游披露、下游匹配/互动、异质性、行为中介、心理机制的顺序分层报告结果。
+
+7. 一句：以对某文献线或实践的贡献收束。
+
+### introduction_paragraph_steps
+
+1. 第一段：用熟悉平台和规模数据建立领域重要性。
+
+2. 第二段：定义核心问题，用具体行为举例，给出两层后果。
+
+3. 第三段：把问题归因到机制，用文献和现实证据加固，引入制度约束，形成设计要求。
+
+4. 第四段：给出本文设计方案，定义概念，与已有设计比较，指出文献缺口。
+
+5. 第五段：用两个研究问题收束前半。
+
+6. 第六段：设定研究边界并给出正反理论张力。
+
+7. 第七至九段：预告实验设计、主结果、机制、排除和异质性；每个新层次用Why引导。
+
+8. 第十至十一段：按文献线逐条声明贡献，再用管理启示和外部采纳证据结尾。
+
+### theory_to_design_steps
+
+1. 用文献综述三分类定位本文。
+
+2. 总结已有机制并与目标情境对比，指出差异。
+
+3. 提出核心构念并给出维度。
+
+4. 把构念与原始问题连接，说明机制的后果。
+
+5. 把构念维度翻译为设计属性，解释为什么属性会降低担忧。
+
+6. 再把披露后果翻译为下游结果的理论预期。
+
+7. 最后用一段总结性预期为实证章节做路标。
+
+### method_and_study_sequence_steps
+
+1. 描述平台核心流程以确定操纵位置。
+
+2. 说明随机分配、分组固定和无污染措施。
+
+3. 给出治疗刺激细节并附理解性预测试。
+
+4. 界定制品边界，防止与平台既有功能混淆。
+
+5. 报告数据来源、变量构建和随机化检验。
+
+6. 然后按总效应、行为中介、排除分析、心理实验、异质性的顺序展开。
+
+### results_reporting_steps
+
+1. 每个主结果先回归后换算相对百分比，证明经济显著性。
+
+2. 总效应后立即给出机制路线图。
+
+3. 用顺序中介定位行为传导路径。
+
+4. 逐一排除请求量、对象选择、新奇、去抑制、面部吸引力等替代解释。
+
+5. 用在线实验补充构念层证据并排除其它心理机制。
+
+6. 用交互项展示边界并做代理稳健性。
+
+### discussion_and_contribution_steps
+
+1. 回扣问题与设计。
+
+2. 按主效应、中介、排除、心理机制、异质性顺序重述发现。
+
+3. 逐条文献线声明贡献，每条都与已有研究对比。
+
+4. 给出可操作管理启示并加入外部采纳证据。
+
+5. 以真实局限收尾，每个局限给出未来方向。
+
+6. 最后用一段结论加研究呼吁结束。
+
+## 可执行写作算法
+
+### 1. 1
+
+- step：1
+
+- rhetorical_job_cn：把研究问题置于有规模数据的现实场景中，并逐步收窄到具体机制缺口。
+
+- research_evidence_required_cn：目标平台的用户行为数据或公开行业报告；文献支持机制定义；制度约束证据（如GDPR）。
+
+- sentence_pattern_function_cn：背景句→规模句→问题定义句→机制归因句→制度约束句→设计需求句。
+
+- transition_condition_cn：当读者已经接受‘需要同时保护隐私和鼓励披露’时，可引入本文设计。
+
+### 2. 2
+
+- step：2
+
+- rhetorical_job_cn：定义核心设计概念并说明其在已有设计谱系中的独特位置和文献缺口。
+
+- research_evidence_required_cn：核心设计概念的可操作定义；与其它设计类别的比较；文献中未覆盖的情境或结果。
+
+- sentence_pattern_function_cn：设计主张句→定义句→与其它PETs对比句→情境迁移缺口句→实证必要性句→研究问题句。
+
+- transition_condition_cn：当两个研究问题被明确宣布后，可设定研究边界。
+
+### 3. 3
+
+- step：3
+
+- rhetorical_job_cn：建立理论到设计的翻译链，把构念维度映射到设计属性，并给出下游结果的机制预期。
+
+- research_evidence_required_cn：文献支持的构念维度；用户访谈或预测试支持情境适用性；可从机制推导结果变量。
+
+- sentence_pattern_function_cn：文献分类句→情境差异句→构念提出句→维度展开句→机制后果句→设计属性翻译句→下游预期句→总结预期句。
+
+- transition_condition_cn：当理论预期能直接生成待检验结果变量时，可进入实验章节。
+
+### 4. 4
+
+- step：4
+
+- rhetorical_job_cn：在真实或受控环境中确立因果识别基础并让操纵细节可复现。
+
+- research_evidence_required_cn：平台流程、随机分配规则、操纵UI截图、预测试证据、数据源清单和随机化检验。
+
+- sentence_pattern_function_cn：平台流程句→设计综述句→操纵细节句→边界界定句→数据来源句→随机化检验句→模型设定句。
+
+- transition_condition_cn：当识别策略和变量定义清晰后，可进入主效应报告。
+
+### 5. 5
+
+- step：5
+
+- rhetorical_job_cn：按上游到下游分层报告总效应，并给出经济显著性换算。
+
+- research_evidence_required_cn：显著回归系数；对照组均值；可解释的相对百分比。
+
+- sentence_pattern_function_cn：每个结果小节的开启句→系数与显著性句→相对百分比换算句→小结句。
+
+- transition_condition_cn：当所有结果变量都有显著效应后，可进入机制探索。
+
+### 6. 6
+
+- step：6
+
+- rhetorical_job_cn：用中介分析把上游行为与下游结果相连，并逐项排除替代机制。
+
+- research_evidence_required_cn：顺序中介的bootstrap置信区间；针对每个替代机制的日志、图像或交互项检验。
+
+- sentence_pattern_function_cn：机制路线图句→中介假设句→中介结果句→每个替代机制的小节开启与排除句。
+
+- transition_condition_cn：当行为机制确立且替代解释被排除后，可用在线实验补充心理机制。
+
+### 7. 7
+
+- step：7
+
+- rhetorical_job_cn：用构念测量确认心理机制并排除其它心理机制，然后界定受益边界。
+
+- research_evidence_required_cn：与现场一致的刺激视频；多构念量表；PLS-SEM路径；稳健的异质性交互。
+
+- sentence_pattern_function_cn：机制问题句→实验设计句→参与者句→刺激句→构念验证句→结果句→异质性交互句→稳健性句。
+
+- transition_condition_cn：当机制和边界都明确后，可进入讨论。
+
+### 8. 8
+
+- step：8
+
+- rhetorical_job_cn：把实证结果升格为文献贡献，提供管理启示，并以真实局限和未来方向收尾。
+
+- research_evidence_required_cn：清晰的结果总结；与至少三条文献线可比较的定位；平台采纳等外部证据；真实的测量和情境局限。
+
+- sentence_pattern_function_cn：问题回扣句→结果重述句→贡献分条句→管理启示句→局限句→未来研究句→结论呼吁句。
+
+- transition_condition_cn：当每条贡献都有证据锚点、每个局限都有对应未来方向时，文章完成。
+
+## 应模仿的高价值动作
+
+1. 以冷启动问题为入口，把隐私担忧与市场失败直接相连开场。
+
+2. 用‘设计要求’句在P3收束问题段，形成逻辑上必须引入设计方案的缺口。
+
+3. 严格定义短暂分享的操作属性，并立即与其它PETs的机制对比。
+
+4. 在引言中预告两个研究问题和按层次报告结果，让整篇文章路径清晰。
+
+5. 用顺序中介把上游披露与下游匹配、参与连接，并报告所有四条路径以显示直接路径不显著。
+
+6. 把对照组同时用作反事实、t检验基准和机制排除基准。
+
+7. 在排除了请求量、对象选择、新奇、去抑制和面部吸引力后，用在线实验锁定隐私担忧。
+
+8. 在讨论中把贡献分别放到隐私管理、短暂分享、个人信息价值三条文献线中，每条都做已有研究对比。
+
+9. 用平台实验后的功能推广作为管理启示的外部证据。
+
+10. 在结论中把单一研究放入更大的隐私增强设计研究呼吁。
+
+## 不要只复制的表面动作
+
+1. 不要在没有随机对照的情况下复制‘52.1%增加’等效应量说法，必须基于模型和对照。
+
+2. 不要在没有持久照片对照组时把效应归因于短暂性。
+
+3. 不要在没有中介检验时断言披露是机制。
+
+4. 不要在没有检验新奇交互时宣称设计效应长期成立。
+
+5. 不要在没有在线实验测量替代构念时排除机构隐私和自我呈现。
+
+6. 不要在没有异质性交互时声称对隐私敏感者更有效。
+
+7. 不要简单复制‘平台已将功能推广给所有用户’的外部采纳句，必须有真实证据。
+
+## 证据薄弱或跳跃的动作
+
+1. 现场实验没有直接测量发送者的主观隐私担忧，作者用在线实验的披露意向作为桥接，存在推断跳跃。
+
+2. 在线实验样本量较小（105人），且只测量披露意向而非真实匹配行为，机制结论强度有限。
+
+3. 顺序中介基于观察行为数据，对‘完全中介’的表述可能过于绝对。
+
+4. 治疗UI同时包含文案、图标和解释句三个元素，无法单独归因于哪一个属性。
+
+5. 用PhotoWallFace作为隐私敏感性代理是间接测量，未测量实时主观担忧。
+
+6. 技术阻止下载和截图但不阻止用另一设备拍摄，机制叙述中作者承认这一例外但未检验。
+
+7. 接收者层面的感知、消息文本内容、线下互动和长期效应未检验，讨论中承认但未作为限制详细展开。
+
+8. 在线实验在中国招募参与者，与现场平台用户背景的一致性只是宣称。
+
+## 一句话套路
+
+从平台冷启动现象和隐私担忧机制出发，用理论把‘降低社会隐私担忧’翻译成短暂分享设计属性，再通过7万用户随机现场实验确立主效应、用行为中介与替代排除锁定披露机制、用在线实验确认隐私心理机制、用异质性界定边界，最终把设计升格为鼓励披露型PETs的可复用知识。
+
+## 分析边界
+
+全文为Markdown转录，图1-3界面截图以附件链接存在无法直接读取；部分希腊字母和符号在转录中被替换为�；Table 16与Figure 5的PLS-SEM细节依赖正文摘要；Online Appendices A-F不在提供文本内，因此访谈细节、诊断统计和面部吸引力模型细节未直接核实；正文中个别脚注编号缺失（如脚注3、6、7、10的正文对应处），可能影响精确位置定位。

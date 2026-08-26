@@ -1,0 +1,43 @@
+{
+  "valid": true,
+  "prompt_fingerprint": "16fac5773a8b041a1aef5ad68dc30ccc416e35d6969a8ee9056acd7279005924",
+  "scope_fulltexts": 2475,
+  "decision_rows": 2475,
+  "unique_source_files": 2475,
+  "unique_record_ids": 2475,
+  "missing_sources": [],
+  "unexpected_sources": [],
+  "duplicate_sources": [],
+  "duplicate_record_ids": [],
+  "invalid_rows": [],
+  "unresolved_error_sources": [],
+  "resolved_transient_error_rows": [
+    1,
+    2
+  ],
+  "base_match_count": 231,
+  "theory_guided_subset_match_count": 110,
+  "attempt_counts": {
+    "1": 2340,
+    "2": 120,
+    "3": 15
+  },
+  "base_match_year_counts": {
+    "2020": 58,
+    "2021": 47,
+    "2022": 35,
+    "2023": 36,
+    "2024": 25,
+    "2025": 23,
+    "2026": 7
+  },
+  "theory_match_year_counts": {
+    "2020": 24,
+    "2021": 17,
+    "2022": 12,
+    "2023": 24,
+    "2024": 13,
+    "2025": 15,
+    "2026": 5
+  }
+}

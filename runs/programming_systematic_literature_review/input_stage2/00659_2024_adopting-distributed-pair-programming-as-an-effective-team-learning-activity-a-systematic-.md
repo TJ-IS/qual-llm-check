@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85148055115"
+title: "Adopting distributed pair programming as an effective team learning activity: a systematic review"
+authors: "Xu F.; Correia A.-P."
+year: "2024"
+journal: "Journal of Computing in Higher Education"
+doi: "10.1007/s12528-023-09356-3"
+---
+# Scopus title-abstract-keyword metadata
+Title: Adopting distributed pair programming as an effective team learning activity: a systematic review
+Abstract: As online learning has become an inevitable trend in the post-peak era of the COVID-19 pandemic, distributed pair programming (DPP) is gaining momentum in both education and industry. DDP serves as a collaborative programming approach and also benefits the development of computational thinking, a fundamental skill in today’s world. This study conducted a systematic review of studies on DPP published after 2010 to understand the themes and factors that impact the team effectiveness of DPP and thus inform future research and practices on how to better leverage this approach for teaching and learning. The results showed that individual characteristics attracted major investigations in the selected 23 studies, including prior programming experience, actual skill, perceived skill, gender, personality, time management, confidence, and self-esteem, with pair compatibility identified as a critical team design factor that significantly affects programmers’ satisfaction. Although the feel-good factor in the team process was investigated, no significant impact was found. Under the team environment theme, we compared different opinions on the orientation (e.g., scripted roles) and the use of technology (e.g., integrated development environment tools). Future research should investigate how task structure influences team effectiveness of DPP and relates to computational thinking education. Additionally, because most studies were conducted in higher education contexts, more research in primary and secondary educational contexts is also needed. © The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature 2023.
+Author keywords: Collaborative learning; Computational thinking; Distributed pair programming; STEM education; Systematic review; Team learning
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Journal of Computing in Higher Education
+Year: 2024
+EID: 2-s2.0-85148055115
+DOI: 10.1007/s12528-023-09356-3
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

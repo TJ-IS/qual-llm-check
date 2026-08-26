@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85133536572"
+title: "FlakiMe: Laboratory-Controlled Test Flakiness Impact Assessment"
+authors: "Cordy M.; Rwemalika R.; Franci A.; Papadakis M.; Harman M."
+year: "2022"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1145/3510003.3510194"
+---
+# Scopus title-abstract-keyword metadata
+Title: FlakiMe: Laboratory-Controlled Test Flakiness Impact Assessment
+Abstract: Much research on software testing makes an implicit assumption that test failures are deterministic such that they always witness the presence of the same defects. However, this assumption is not always true because some test failures are due to so-called flaky tests, i.e., tests with non-deterministic outcomes. To help testing researchers better investigate flakiness, we introduce a test flakiness assessment and experimentation platform, called FlakiMe. FlakiMe supports the seeding of a (controllable) degree of flakiness into the behaviour of a given test suite. Thereby, FlakiMe equips researchers with ways to investigate the impact of test flakiness on their techniques under laboratory-controlled conditions. To demonstrate the application of FlakiMe, we use it to assess the impact of flakiness on mutation testing and program repair (the PRAPR and ARJA methods). These results indicate that a 10% flakiness is sufficient to affect the mutation score, but the effect size is modest (2% - 5%), while it reduces the number of patches produced for repair by 20% up to 100% of repair problems; a devastating impact on this application of testing. Our experiments with FlakiMe demonstrate that flakiness affects different testing applications in very different ways, thereby motivating the need for a laboratory-controllable flakiness impact assessment platform and approach such as FlakiMe. © 2022 ACM.
+Author keywords: 
+Index keywords: Application programs; Controlled conditions; Controlled tests; Deterministics; Effect size; Experimentation platforms; Impact assessments; Mutation score; Mutation testing; Software testings; Test failure; Software testing
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2022
+EID: 2-s2.0-85133536572
+DOI: 10.1145/3510003.3510194
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

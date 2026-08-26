@@ -1,0 +1,957 @@
+{
+  "summary": {
+    "sample_design": "fixed deterministic stratified audit; not a simple random sample",
+    "seed": 20260806,
+    "screened_available_when_sampled": 8365,
+    "sample_size": 30,
+    "model_inclusions_sampled": 18,
+    "model_exclusions_sampled": 12,
+    "confirmed_inclusions": 18,
+    "confirmed_exclusions": 10,
+    "false_positives": 0,
+    "false_negatives": 2,
+    "raw_agreement_count": 28,
+    "raw_agreement_rate": 0.9333,
+    "observed_precision_within_stratified_inclusion_sample": 1.0,
+    "warning": "Because inclusion layers and boundary cases were intentionally oversampled, these rates must not be projected directly to all screened articles.",
+    "error_taxonomy": {
+      "false_negative_overstrict_centrality": 1,
+      "false_negative_overstrict_solution_boundary": 1
+    },
+    "by_group": {
+      "excluded_objective_without_design": {
+        "confirmed_exclusion": 4
+      },
+      "near_miss_three_gates": {
+        "confirmed_exclusion": 6,
+        "false_negative": 2
+      },
+      "retained_layer:algorithm_or_computational_method": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:digital_platform_mechanism_or_policy": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:hybrid": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:interface_or_interaction_design": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:prediction_model": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:prescriptive_model_or_optimization": {
+        "confirmed_inclusion": 2
+      },
+      "retained_layer:software_system_or_artifact": {
+        "confirmed_inclusion": 2
+      },
+      "retained_theory_driven": {
+        "confirmed_inclusion": 4
+      }
+    }
+  },
+  "records": [
+    {
+      "audit_id": 1,
+      "audit_group": "retained_layer:algorithm_or_computational_method",
+      "record_id": "8364",
+      "source_file": "08364_2016_integrating-rich-and-heterogeneous-information-to-design-a-ranking-system-for-multiple-products.md",
+      "title": "Integrating rich and heterogeneous information to design a ranking system for multiple products",
+      "year": "2016",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "algorithm_or_computational_method",
+      "manual_solution_layer": "algorithm_or_computational_method",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。全文提出多源 eWOM 排名算法及原型，以相对多种基线和消融版本的 Spearman 排名相关改进作为核心成功证据。"
+    },
+    {
+      "audit_id": 2,
+      "audit_group": "retained_layer:algorithm_or_computational_method",
+      "record_id": "6616",
+      "source_file": "06616_2006_content-based-object-organization-for-efficient-image-retrieval-in-image-databases.md",
+      "title": "Content-based object organization for efficient image retrieval in image databases",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "algorithm_or_computational_method",
+      "manual_solution_layer": "algorithm_or_computational_method",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。blob-centric 图像检索组织与索引方案是明确制品，查询响应时间和 I/O 成本相对 naive 方案的改进构成全文评价核心。"
+    },
+    {
+      "audit_id": 3,
+      "audit_group": "retained_layer:digital_platform_mechanism_or_policy",
+      "record_id": "8542",
+      "source_file": "08542_2018_a-matter-of-equality-linear-pricing-in-combinatorial-exchanges.md",
+      "title": "A Matter of Equality: Linear Pricing in Combinatorial Exchanges",
+      "year": "2018",
+      "journal": "Information Systems Research",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "digital_platform_mechanism_or_policy",
+      "manual_solution_layer": "digital_platform_mechanism_or_policy",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。组合交易所定价机制及投标语言属于可实施的平台机制设计，贸易利得、效率损失和计算性能均有明确最优参照。"
+    },
+    {
+      "audit_id": 4,
+      "audit_group": "retained_layer:digital_platform_mechanism_or_policy",
+      "record_id": "7344",
+      "source_file": "07344_2019_mobile-time-based-targeting-matching-product-value-appeal-to-time-of-day.md",
+      "title": "Mobile Time-Based Targeting: Matching Product-Value Appeal to Time of Day",
+      "year": "2019",
+      "journal": "Journal of Management Information Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "digital_platform_mechanism_or_policy",
+      "manual_solution_layer": "digital_platform_mechanism_or_policy",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。按时段匹配产品价值诉求是可实施的移动定向规则，随机实地实验以实际购买率相对行业默认策略的提升为主要结果。"
+    },
+    {
+      "audit_id": 5,
+      "audit_group": "retained_layer:hybrid",
+      "record_id": "764",
+      "source_file": "00764_2017_cost-effective-quality-assurance-in-crowd-labeling.md",
+      "title": "Cost-Effective Quality Assurance in Crowd Labeling",
+      "year": "2017",
+      "journal": "Information Systems Research",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "hybrid",
+      "manual_solution_layer": "hybrid",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。众包标注质量保障算法围绕误分类成本与标签成本设计，并通过模拟、真实数据和现场实验与多种基准比较。"
+    },
+    {
+      "audit_id": 6,
+      "audit_group": "retained_layer:hybrid",
+      "record_id": "15986",
+      "source_file": "15986_2014_a-decision-support-system-for-planning-and-coordination-of-hybrid-renewable-energy-systems.md",
+      "title": "A decision support system for planning and coordination of hybrid renewable energy systems",
+      "year": "2014",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "hybrid",
+      "manual_solution_layer": "hybrid",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。混合可再生能源规划 DSS 和随机优化/启发式方法以期望总成本和最优差距作为排他性评价标准。"
+    },
+    {
+      "audit_id": 7,
+      "audit_group": "retained_layer:interface_or_interaction_design",
+      "record_id": "12792",
+      "source_file": "12792_2007_an-empirical-study-of-web-site-navigation-structures-impacts-on-web-site-usability.md",
+      "title": "An empirical study of web site navigation structures' impacts on web site usability",
+      "year": "2007",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "interface_or_interaction_design",
+      "manual_solution_layer": "interface_or_interaction_design",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。作者构建不同导航结构的网站版本，核心问题就是哪种界面结构提高客观任务完成表现；感知测量不是成功判据。"
+    },
+    {
+      "audit_id": 8,
+      "audit_group": "retained_layer:interface_or_interaction_design",
+      "record_id": "9894",
+      "source_file": "09894_2008_b-research-note-b-awareness-displays-and-social-motivation-for-coordinating-communication.md",
+      "title": "<b>Research Note</b>—Awareness Displays and Social Motivation for Coordinating Communication",
+      "year": "2008",
+      "journal": "Information Systems Research",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "interface_or_interaction_design",
+      "manual_solution_layer": "interface_or_interaction_design",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。awareness display 的信息粒度是被设计的界面属性，两轮实验用中断时机、任务正确率/时间和目标绩效进行客观比较。"
+    },
+    {
+      "audit_id": 9,
+      "audit_group": "retained_layer:prediction_model",
+      "record_id": "16308",
+      "source_file": "16308_2012_an-analytic-approach-to-better-understanding-and-management-of-coronary-surgeries.md",
+      "title": "An analytic approach to better understanding and management of coronary surgeries",
+      "year": "2012",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "prediction_model",
+      "manual_solution_layer": "prediction_model",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。CABG 结局预测模型体系以测试集准确率、敏感度和特异度比较算法，客观预测表现是全文核心。"
+    },
+    {
+      "audit_id": 10,
+      "audit_group": "retained_layer:prediction_model",
+      "record_id": "950",
+      "source_file": "00950_2010_predicting-the-length-of-hospital-stay-of-burn-patients-comparisons-of-prediction-accuracy-among.md",
+      "title": "Predicting the length of hospital stay of burn patients: Comparisons of prediction accuracy among different clinical stages",
+      "year": "2010",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "prediction_model",
+      "manual_solution_layer": "prediction_model",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。作者构建不同临床阶段的 LOS 预测模型并以线性回归为基准，MAE/MRE 的跨模型、跨阶段比较贯穿全文。"
+    },
+    {
+      "audit_id": 11,
+      "audit_group": "retained_layer:prescriptive_model_or_optimization",
+      "record_id": "13306",
+      "source_file": "13306_2009_optimal-policy-for-software-patents-model-and-comparative-implications.md",
+      "title": "Optimal Policy for Software Patents: Model and Comparative Implications",
+      "year": "2009",
+      "journal": "Journal of Management Information Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "prescriptive_model_or_optimization",
+      "manual_solution_layer": "prescriptive_model_or_optimization",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入（边界较宽）。论文给出可求解的软件专利政策决策规则，并以社会福利相对自由市场和替代政策的解析/数值比较为唯一成功标准；符合提示词对 formal prescriptive policy 的明确允许。"
+    },
+    {
+      "audit_id": 12,
+      "audit_group": "retained_layer:prescriptive_model_or_optimization",
+      "record_id": "7286",
+      "source_file": "07286_2009_hedging-risks-with-interruptible-load-programs-for-a-load-serving-entity.md",
+      "title": "Hedging risks with interruptible load programs for a load serving entity",
+      "year": "2009",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "prescriptive_model_or_optimization",
+      "manual_solution_layer": "prescriptive_model_or_optimization",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。可中断负荷采购随机规划以 CVaR 与期望利润为目标，并明确比较无该方案的基准情形。"
+    },
+    {
+      "audit_id": 13,
+      "audit_group": "retained_layer:software_system_or_artifact",
+      "record_id": "10622",
+      "source_file": "10622_2006_developing-maintainable-software-the-readable-approach.md",
+      "title": "Developing maintainable software: The Readable approach",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。Readable 是实际构建的程序表示与执行环境，正确答案评分的程序理解测试相对 Java 对照构成主要评价。"
+    },
+    {
+      "audit_id": 14,
+      "audit_group": "retained_layer:software_system_or_artifact",
+      "record_id": "11228",
+      "source_file": "11228_2017_a-social-route-recommender-mechanism-for-store-shopping-support.md",
+      "title": "A social route recommender mechanism for store shopping support",
+      "year": "2017",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。社交购物路线推荐制品以推荐路线和真实访问路线的客观重叠率为核心，满意度仅为补充。"
+    },
+    {
+      "audit_id": 15,
+      "audit_group": "retained_theory_driven",
+      "record_id": "13598",
+      "source_file": "13598_2023_designing-conversational-dashboards-for-effective-use-in-crisis-response.md",
+      "title": "Designing Conversational Dashboards for Effective Use in Crisis Response",
+      "year": "2023",
+      "journal": "Journal of the Association for Information Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。会话式仪表盘和 onboarding 是理论导出的界面制品；transparent interaction 用最短路径比率、效率用时间、有效性用正确任务数进行行为化测量并与六种制品条件比较。"
+    },
+    {
+      "audit_id": 16,
+      "audit_group": "retained_theory_driven",
+      "record_id": "6360",
+      "source_file": "06360_2008_representing-part-whole-relations-in-conceptual-modeling-an-empirical-evaluation.md",
+      "title": "Representing Part-Whole Relations in Conceptual Modeling: An Empirical Evaluation",
+      "year": "2008",
+      "journal": "MIS Quarterly",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "interface_or_interaction_design",
+      "manual_solution_layer": "interface_or_interaction_design",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。概念建模中的 part-whole 表示是被设计的信息表示方式，答案正确率是主导结果，时间和感知易用性为辅助。"
+    },
+    {
+      "audit_id": 17,
+      "audit_group": "retained_theory_driven",
+      "record_id": "1090",
+      "source_file": "01090_2021_designing-promotional-incentives-to-embrace-social-sharing-evidence-from-field-and-online-experi.md",
+      "title": "Designing Promotional Incentives to Embrace Social Sharing: Evidence from Field and Online Experiments",
+      "year": "2021",
+      "journal": "MIS Quarterly",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "digital_platform_mechanism_or_policy",
+      "manual_solution_layer": "digital_platform_mechanism_or_policy",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。可分享性与稀缺性组合成数字促销机制，field/online experiments 以购买、成功推荐、净收入和 CLV 相对对照的改善为主。"
+    },
+    {
+      "audit_id": 18,
+      "audit_group": "retained_theory_driven",
+      "record_id": "4378",
+      "source_file": "04378_2006_web-based-intervention-support-system-for-health-promotion.md",
+      "title": "Web-based intervention support system for health promotion",
+      "year": "2006",
+      "journal": "Decision Support Systems",
+      "model_strict_match": true,
+      "manual_strict_match": true,
+      "manual_outcome": "confirmed_inclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认纳入。WISS 是实际 Web 干预支持制品，随机对照以药物停用率和阶段迁移等客观健康行为结果判断成效。"
+    },
+    {
+      "audit_id": 19,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "10408",
+      "source_file": "10408_2011_online-government-advisory-service-innovation-through-intelligent-support-systems.md",
+      "title": "Online government advisory service innovation through Intelligent Support Systems",
+      "year": "2011",
+      "journal": "Information & Management",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "mixed",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。虽有三种咨询工具和客观 decision quality，但文章以 empowerment 理论及 DMS、DMT、SoC、PPR、GSPI 等感知构念形成并列核心，客观改进不占支配地位。"
+    },
+    {
+      "audit_id": 20,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "4164",
+      "source_file": "04164_2020_optimizing-two-sided-promotion-for-transportation-network-companies-a-structural-model-with-cond.md",
+      "title": "Optimizing Two-Sided Promotion for Transportation Network Companies: A Structural Model with Conditional Bayesian Learning",
+      "year": "2020",
+      "journal": "Information Systems Research",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "mixed",
+      "model_solution_layer": "digital_platform_mechanism_or_policy",
+      "manual_solution_layer": "digital_platform_mechanism_or_policy",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。结构模型的主要贡献是估计 TNC 功能价值、司机学习和促销效应；优化促销政策只在主分析之后作为应用，不能反向代表全文的主要成功标准。"
+    },
+    {
+      "audit_id": 21,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "11476",
+      "source_file": "11476_2017_applying-behavioral-economics-in-predictive-analytics-for-b2b-churn-findings-from-service-qualit.md",
+      "title": "Applying behavioral economics in predictive analytics for B2B churn: Findings from service quality data",
+      "year": "2017",
+      "journal": "Decision Support Systems",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "prediction_model",
+      "manual_solution_layer": "prediction_model",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。理论特征被用于 churn prediction 且报告测试集 AUC，但没有把所提特征/模型与不含这些特征的明确基线作性能增量比较；绝对 AUC 与重复抽样不满足 Gate 3。"
+    },
+    {
+      "audit_id": 22,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "5836",
+      "source_file": "05836_2023_sensing-the-future-a-design-framework-for-context-aware-predictive-systems.md",
+      "title": "Sensing the Future: A Design Framework for Context-Aware Predictive Systems",
+      "year": "2023",
+      "journal": "Journal of the Association for Information Systems",
+      "model_strict_match": false,
+      "manual_strict_match": true,
+      "manual_outcome": "false_negative",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "hybrid",
+      "error_type": "false_negative_overstrict_centrality",
+      "manual_reason_cn": "改判纳入。CAPS 不只是抽象框架：作者按该框架连续构建 context-aware predictive artifacts，以 Croston 为显式基线，用 forecasting-error cost 证明 phase-out 版本改善 4%、sensor activity 版本改善 20%。全文把框架归为 DSR improvement contribution，客观改进是评价其能否产生更好制品的主导证据；专家/情境反思用于迭代和边界说明，不是并列的主观成功指标。"
+    },
+    {
+      "audit_id": 23,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "3102",
+      "source_file": "03102_2020_a-generic-framework-for-sentiment-analysis-leveraging-opinion-bearing-data-to-inform-decision-ma.md",
+      "title": "A generic framework for sentiment analysis: Leveraging opinion-bearing data to inform decision making",
+      "year": "2020",
+      "journal": "Decision Support Systems",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "mixed",
+      "model_solution_layer": "software_system_or_artifact",
+      "manual_solution_layer": "software_system_or_artifact",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。ECCO 同时追求可迁移的模型选择、完整分析流程和 actionable insight；准确率基准只验证其中的 sentiment-modeling 模块，后半部分洞察能力主要以案例展示，故客观改进不是整个框架的支配性成功标准。"
+    },
+    {
+      "audit_id": 24,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "8946",
+      "source_file": "08946_1988_exploring-modes-of-facilitative-support-for-gdss-technology.md",
+      "title": "Exploring Modes of Facilitative Support for GDSS Technology",
+      "year": "1988",
+      "journal": "MIS Quarterly",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。研究操纵的是既有 GDSS 外部的人工 facilitation 角色，而非作者设计或实质修改的数字制品；客观共识结果不能弥补 Gate 1。"
+    },
+    {
+      "audit_id": 25,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "1082",
+      "source_file": "01082_2015_integrating-social-networking-support-for-dyadic-knowledge-exchange-a-study-in-a-virtual-communi.md",
+      "title": "Integrating social networking support for dyadic knowledge exchange: A study in a virtual community of practice",
+      "year": "2015",
+      "journal": "Information & Management",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。平台功能是研究场景中已经发生的自然整合，作者利用准实验解释其效果，没有提出或实施该制品改造。"
+    },
+    {
+      "audit_id": 26,
+      "audit_group": "near_miss_three_gates",
+      "record_id": "9906",
+      "source_file": "09906_2011_using-last-minute-sales-for-vertical-differentiation-on-the-internet.md",
+      "title": "Using “last-minute” sales for vertical differentiation on the Internet",
+      "year": "2011",
+      "journal": "Decision Support Systems",
+      "model_strict_match": false,
+      "manual_strict_match": true,
+      "manual_outcome": "false_negative",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": true,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "prescriptive_model_or_optimization",
+      "manual_solution_layer": "prescriptive_model_or_optimization",
+      "error_type": "false_negative_overstrict_solution_boundary",
+      "manual_reason_cn": "改判纳入。文章给出可实施的在线随机 last-minute sales 定价/供给决策规则，解析求解不同参数下的最优策略，并把利润同确定性销售及其他策略类别直接比较。提示词明确允许 prescriptive model、decision rule 和 digital policy，因此不应仅因它不是软件界面而判 Gate 1 失败。"
+    },
+    {
+      "audit_id": 27,
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "13262",
+      "source_file": "13262_2020_performance-outcomes-of-test-driven-development-an-experimental-investigation.md",
+      "title": "Performance Outcomes of Test-Driven Development: An Experimental Investigation",
+      "year": "2020",
+      "journal": "Journal of the Association for Information Systems",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "mixed",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。文章比较已有 TDD 与 test-last 开发实践，不设计软件制品；且软件质量与任务满意度是并列结果。"
+    },
+    {
+      "audit_id": 28,
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "256",
+      "source_file": "00256_2008_using-self-regulatory-learning-to-enhance-e-learning-based-information-technology-training.md",
+      "title": "Using Self-Regulatory Learning to Enhance E-Learning-Based Information Technology Training",
+      "year": "2008",
+      "journal": "Information Systems Research",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": true
+      },
+      "model_centrality": "dominant",
+      "manual_centrality": "dominant",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。干预是系统外的纸质 self-regulatory learning scripts，而非 e-learning 系统功能或数字制品改造。"
+    },
+    {
+      "audit_id": 29,
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "15010",
+      "source_file": "15010_2013_b-research-note-b-an-investigation-of-the-appropriation-of-technology-mediated-training-methods.md",
+      "title": "<b>Research Note</b>—An Investigation of the Appropriation of Technology-Mediated Training Methods Incorporating Enactive and Collaborative Learning",
+      "year": "2013",
+      "journal": "Information Systems Research",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": true,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "mixed",
+      "manual_centrality": "mixed",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。WBT 是现成商业产品，作者比较的是培训/协作教学安排；知识测试与自我效能、满意度并列，既不满足 Gate 1 也不满足 Gate 4。"
+    },
+    {
+      "audit_id": 30,
+      "audit_group": "excluded_objective_without_design",
+      "record_id": "4338",
+      "source_file": "04338_2016_computer-related-task-performance-a-new-perspective.md",
+      "title": "Computer-Related Task Performance: A new perspective",
+      "year": "2016",
+      "journal": "Information & Management",
+      "model_strict_match": false,
+      "manual_strict_match": false,
+      "manual_outcome": "confirmed_exclusion",
+      "model_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "manual_gates": {
+        "purposeful_solution_design": false,
+        "objective_metric_is_primary_target": true,
+        "comparative_improvement_demonstrated": false,
+        "objective_improvement_is_the_success_basis": false
+      },
+      "model_centrality": "exclusive",
+      "manual_centrality": "exclusive",
+      "model_solution_layer": "none",
+      "manual_solution_layer": "none",
+      "error_type": "none",
+      "manual_reason_cn": "确认排除。self-prophecy 提问是行为实验操纵，不是 IS 制品；处理相对控制也未证明任务正确率改善。"
+    }
+  ]
+}

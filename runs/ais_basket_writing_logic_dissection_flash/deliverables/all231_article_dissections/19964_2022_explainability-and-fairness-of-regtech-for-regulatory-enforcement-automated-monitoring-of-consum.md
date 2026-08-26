@@ -1,0 +1,2193 @@
+# Explainability and fairness of RegTech for regulatory enforcement: Automated monitoring of consumer complaints
+
+- 作者：Michael Siering
+- 年份 / 期刊：2022 / Decision Support Systems
+- DOI：10.1016/j.dss.2022.113782
+- 源文件：19964_2022_explainability-and-fairness-of-regtech-for-regulatory-enforcement-automated-monitoring-of-consum.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：如何设计一个既能解释、又有足够预测性能、且不歧视特定消费者群体的RegTech系统，用于从金融消费者投诉中自动识别可能获得金钱赔偿的投诉？
+
+- 制品与设计：一套基于设计科学研究的三需求、三原则、多特征的文本分类制品：以信息诊断性理论特征构造可解释的A分类器，以词袋模型构造B分类器，以集成学习构造C分类器，并针对老年美国人训练专用公平分类器。
+
+- 客观结果：平衡样本上A、B、C最高准确率分别为84.03%、85.12%、85.92%；综合模型显著优于理论模型；老年美国人组性能下降；专用分类器提升“无赔偿”类precision；不平衡holdout上top10%案例覆盖超过65%的实际赔偿投诉。
+
+- 核心贡献：提出并验证了可解释、可执行且公平的RegTech设计原则与特征，填补了RegTech中解释性与公平性以及投诉结果预测的研究缺口。
+
+- 整篇论证链：现实监管资源有限→需要自动识别可能成功的投诉→但现有RegTech研究忽视解释性和公平性→以信息诊断性理论推导解释特征→用外部评论数据验证理论特征→构建A/B/C分类器比较性能→发现老年美国人组性能不公→训练专用分类器缓解→用真实不平衡holdout和lift证明实用价值→提炼为可移植设计原则。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学研究范式，从设计需求DR1-DR3出发，提出设计原则DP1-DP3与设计特征DF1a-DF3，随后用多数据集评估制品，并将结果提炼为可复用设计知识。
+
+- 主导写作弧线判定：全文主线是需求→原则→特征→评价→设计知识：先建立可解释性、性能和公平性三个需求，再对应提出三个设计原则和多个设计特征，最后通过分类器评价与外部验证检验原则，并在讨论中回到设计原则。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：从设计推导到理论特征外部验证，再到平衡样本模型评价、公平性分析、真实分布实用检验；后一阶段验证前一阶段留下的缺口和不确定性。
+
+### studies_or_phases
+
+#### 1. 设计需求、原则与特征的推导
+
+- order：1
+
+- name_cn：设计需求、原则与特征的推导
+
+- question_cn：面向可解释、高性能、公平的RegTech投诉结果预测，应该有哪些设计需求、设计原则和设计特征？
+
+- inputs_and_setting_cn：RegTech与CFPB监管背景，可解释AI、公平ML、消费者投诉与信息诊断性理论文献。
+
+- designed_or_compared_object_cn：DR1可解释性、DR2分类性能、DR3公平分类；DP1信息诊断性、DP2综合机器学习、DP3歧视性属性考量；DF1a/DF1b/DF2a/DF2b/DF3。
+
+- baseline_control_or_counterfactual_cn：无实证对照；以理论推导和文献为基准。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：设计科学研究；从文献和领域情境导出需求、原则与特征。
+
+- main_result_cn：得到三项设计需求、三项设计原则和六项设计特征，并建立H1-H3评价假设的基础。
+
+- argumentative_role_cn：建立完整制品蓝图，为后续评价提供可检验的设计主张。
+
+- remaining_uncertainty_cn：这些原则和特征尚未经过数据验证，不知道理论特征是否有预测力、综合模型是否能提升性能、作者属性是否真的造成不公平。
+
+- link_to_next_phase_cn：为了验证理论特征的有效性，下一阶段使用外部金融产品评论数据检验信息诊断性特征。
+
+##### evidence_pointers
+
+1. Section 3.1-3.4
+
+2. Fig. 1
+
+3. Table 1
+
+#### 2. 外部数据验证理论特征（CreditKarma金融评论）
+
+- order：2
+
+- name_cn：外部数据验证理论特征（CreditKarma金融评论）
+
+- question_cn：信息诊断性理论所提出的语言学特征能否解释金融产品在线评论的帮助性？
+
+- inputs_and_setting_cn：1500条CreditKarma金融产品评论，至少获得5个帮助性投票。
+
+- designed_or_compared_object_cn：词数、词数平方、正面词比例、负面词比例、过去时比例、主动词比例、不确定词比例、感知词比例、知识词比例；控制星数、投票数。
+
+- baseline_control_or_counterfactual_cn：回归系数的显著性检验；无人工操纵对照。
+
+##### objective_metrics
+
+1. Tobit回归系数显著性
+
+2. Pseudo R²=0.2357
+
+- analysis_method_cn：Tobit回归解释评论帮助性比例。
+
+- main_result_cn：词数有正影响但过长的二次项为负；正面情绪负影响，负面情绪不显著；过去时、主动、不确定词、感知词正影响，知识词负影响；星数正影响。
+
+- argumentative_role_cn：证明信息诊断性理论特征在金融领域仍然成立，从而为这些特征用于解释投诉成功提供外部根据。
+
+- remaining_uncertainty_cn：评论帮助性与投诉成功之间的类比尚未直接验证。
+
+- link_to_next_phase_cn：根据显著特征构造分类器A，并在投诉数据上检验其预测价值。
+
+##### evidence_pointers
+
+1. Section 4.3第一步骤
+
+2. Table 3
+
+#### 3. 评估基于理论的分类器A（平衡样本，H1）
+
+- order：3
+
+- name_cn：评估基于理论的分类器A（平衡样本，H1）
+
+- question_cn：基于信息诊断性理论特征的分类器，能否有效预测消费者投诉是否导致金钱赔偿？
+
+- inputs_and_setting_cn：从CFPB投诉库随机抽取6000条平衡样本，3000条有赔偿、3000条无赔偿。
+
+- designed_or_compared_object_cn：分类器A使用理论语言学特征与投诉特征；算法包括朴素贝叶斯、神经网络、随机森林、决策树、SVM。
+
+- baseline_control_or_counterfactual_cn：把所有案例预测为同一类的朴素基线（50%准确率）；McNemar检验。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+5. McNemar p值
+
+- analysis_method_cn：分层10折交叉验证；McNemar检验比较与基线差异。
+
+- main_result_cn：所有算法准确率超过80%，朴素贝叶斯最佳84.03%；H1得到支持。
+
+- argumentative_role_cn：证明可解释的理论特征本身有实际预测价值，回应第一项设计原则。
+
+- remaining_uncertainty_cn：词袋和集成等综合模型是否进一步优于理论模型尚不清楚。
+
+- link_to_next_phase_cn：引出H2，用分类器B和C检验综合机器学习模型的价值。
+
+##### evidence_pointers
+
+1. Section 4.3第二步骤
+
+2. Table 4
+
+3. Table 6
+
+#### 4. 评估综合机器学习模型B/C（H2）
+
+- order：4
+
+- name_cn：评估综合机器学习模型B/C（H2）
+
+- question_cn：词袋模型和集成学习能否超越仅基于理论特征的分类器A？
+
+- inputs_and_setting_cn：同一6000条CFPB平衡投诉样本。
+
+- designed_or_compared_object_cn：分类器B基于tf-idf词袋；分类器C基于bagging集成，综合A和B的预测类别与概率。
+
+- baseline_control_or_counterfactual_cn：以分类器A为参照；McNemar检验B和C相对A的差异。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+5. McNemar p值
+
+- analysis_method_cn：分层10折交叉验证；统计检验比较分类器差异。
+
+- main_result_cn：分类器B最佳SVM准确率85.12%；分类器C最佳神经网络85.92%；B相对A p=0.02，C相对A p<0.01；H2得到支持。
+
+- argumentative_role_cn：证明第二项设计原则：综合模型可在保持解释特征基础上提升性能。
+
+- remaining_uncertainty_cn：尚未检查不同作者群体是否被同样好地分类，公平性问题悬而未决。
+
+- link_to_next_phase_cn：转入作者特征对分类性能的影响，检验H3。
+
+##### evidence_pointers
+
+1. Section 4.4
+
+2. Table 5
+
+3. Table 6
+
+#### 5. 公平性分析与年长消费者专用分类器（H3）
+
+- order：5
+
+- name_cn：公平性分析与年长消费者专用分类器（H3）
+
+- question_cn：投诉作者是否为“老年美国人”会影响分类性能吗？如影响，能否用专用分类器缓解不公平？
+
+- inputs_and_setting_cn：CFPB平衡样本，按CFPB标签区分“老年美国人”与“普通用户”。
+
+- designed_or_compared_object_cn：对比A/B/C在普通用户与老年美国人上的表现；再训练A_OLD、B_OLD、C_OLD，即只用老年美国人平衡子样本训练。
+
+- baseline_control_or_counterfactual_cn：以普通用户性能为参照；以原普通分类器为参照；用Wilcoxon秩和检验比较写作风格。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+5. 组间差异
+
+- analysis_method_cn：分组描述统计、Wilcoxon秩和检验、10折交叉验证。
+
+- main_result_cn：老年美国人的写作风格显著不同，分类器对其表现更差；C的准确率差距接近6个百分点；专用分类器把“无赔偿”类precision最高提升约5%，但总准确率略降；H3得到支持。
+
+- argumentative_role_cn：直接回应DR3公平性，提出并验证缓解歧视的实际设计措施。
+
+- remaining_uncertainty_cn：只检验了老年美国人这一粗略分组，未测其他受保护属性；专用分类器在总体准确率上较普通分类器低，真实监管工作负载中的净收益未检验。
+
+- link_to_next_phase_cn：由于以上评价都在平衡样本上，还需用真实不平衡分布检验实用价值。
+
+##### evidence_pointers
+
+1. Section 4.5
+
+2. Table 7
+
+3. Table 8
+
+4. Table 9
+
+#### 6. 实际分布holdout与lift图评价
+
+- order：6
+
+- name_cn：实际分布holdout与lift图评价
+
+- question_cn：在只有约4%投诉会获得赔偿的真实分布下，最佳分类器是否仍有实际监管价值？
+
+- inputs_and_setting_cn：随机抽取75000条CFPB投诉作为holdout，约3000条有赔偿、72000条无赔偿。
+
+- designed_or_compared_object_cn：最佳普通分类器与老年美国人公平分类器在实际分布holdout上的表现。
+
+- baseline_control_or_counterfactual_cn：与平衡样本性能对比；用随机选择为隐式参照。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. Precision
+
+3. Recall
+
+4. F1
+
+5. Lift曲线覆盖率
+
+- analysis_method_cn：不平衡holdout评价；按预测置信度排序生成lift chart。
+
+- main_result_cn：普通分类器准确率80.51%，公平分类器73.80%；无赔偿类precision极高，有赔偿类precision较低；lift显示只选1%案例可覆盖约13%实际赔偿投诉，选10%案例可覆盖超过65%；公平分类器表现接近但略差。
+
+- argumentative_role_cn：证明在有限监管资源下，分类器可用于优先排序人工调查，为实践价值提供关键证据。
+
+- remaining_uncertainty_cn：未测试真实监管人员使用系统后的决策质量；未涵盖未公开全文的投诉；公平分类器的正类覆盖率在holdout上较低。
+
+- link_to_next_phase_cn：讨论部分据此总结设计原则、理论贡献、实践含义与局限未来。
+
+##### evidence_pointers
+
+1. Section 4.6
+
+2. Table 10
+
+3. Fig. 3
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. RQ_OR_OBJECTIVE
+
+4. THEORY_INTRO
+
+5. BENCHMARK_OR_CONTRAST
+
+### introduction_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. PHENOMENON
+
+4. PRACTICAL_STAKES
+
+5. GAP
+
+6. RQ_OR_OBJECTIVE
+
+7. STUDY_OVERVIEW
+
+8. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. GAP
+
+3. THEORY_INTRO
+
+4. THEORY_PROPOSITION
+
+5. MECHANISM
+
+6. LIMITATION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. THEORY_PROPOSITION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. STUDY_OVERVIEW
+
+3. HYPOTHESIS_OR_PROPOSITION
+
+4. BENCHMARK_OR_CONTRAST
+
+5. RESULT
+
+6. TRANSITION
+
+7. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. MECHANISM
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+5. CONTRIBUTION
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Information Diagnosticity Theory（Mudambi & Schuff 2010）
+
+2. Search vs Experience Goods Dichotomy
+
+3. Text mining / bag-of-words model与集成学习
+
+4. Explainable AI与Fair Machine Learning文献
+
+5. Consumer Complaint / CFPB领域知识
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：信息诊断性理论直接决定了分类器A的语言学特征，但词袋、集成和作者特征分别来自文本挖掘知识、机器学习体系以及公平性文献，并非由单一理论贯穿。因此理论对全部设计只有部分决定性作用。
+
+- 理论到设计翻译链：信息诊断性理论提出文本深度、情感、时间焦点、写作风格影响帮助性→金融产品具有搜索品与体验品双重属性→理论特征用于解释投诉是否‘有说服力’→外部CreditKarma评论验证显著特征→显著特征进入分类器A→词袋与集成来自文本挖掘与机器学习经验，构成分类器B/C→公平性文献强调非代表性训练数据与写作风格偏差→作者特征被纳入并训练专用公平分类器→最终以平衡样本、子组和真实分布评价设计原则。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：信息诊断性理论认为文本深度、情感倾向、时间焦点、写作风格决定文本帮助性。
+
+- mechanism_cn：越有诊断性的投诉越能说服公司赔偿；若投诉文本清晰、合理且具有诊断性，公司更可能支付赔偿。
+
+- design_requirement_cn：DR1可解释性：分类结果必须能够解释。
+
+- artifact_choice_cn：DF1a：在分类器A中加入词数、情感词、过去时、主动/不确定/感知/知识词等理论特征。
+
+- evaluated_contrast_cn：用CreditKarma评论检验特征是否显著影响帮助性；再用分类器A预测投诉赔偿结果并与全同基线比较。
+
+- objective_result_cn：Tobit回归多数语言特征显著；分类器A朴素贝叶斯准确率84.03%，显著优于50%基线。
+
+##### evidence_pointers
+
+1. Table 3
+
+2. Table 4
+
+3. Table 6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：金融产品兼具搜索品和体验品特征，用户体验与感知对评价很重要。
+
+- mechanism_cn：过于正面或负面的极端文本更具争议性；谨慎、中性、基于过往经验的文本对读者更有帮助。
+
+- design_requirement_cn：DR1可解释性与DR2分类性能。
+
+- artifact_choice_cn：分类器A选取中性情感、过去时间焦点、谨慎风格等特征。
+
+- evaluated_contrast_cn：Tobit回归中的系数方向与投诉成功文本的描述性比较。
+
+- objective_result_cn：正面情绪负影响帮助性，负面情绪不显著；过去时与谨慎风格正影响；成功投诉同样更长、更少正面、更多过去时与感知词。
+
+##### evidence_pointers
+
+1. Section 3.4
+
+2. Table 3
+
+3. Section 4.3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：词袋模型能捕获完整词汇信息，集成学习能结合不同分类器优势以提升性能。
+
+- mechanism_cn：仅语言特征可能遗漏文本中的具体词汇线索；组合输出可弥补单一模型的局部缺陷。
+
+- design_requirement_cn：DR2分类性能。
+
+- artifact_choice_cn：DF2a：构造tf-idf词袋分类器B；DF2b：构造由A和B输出组成的bagging集成分类器C。
+
+- evaluated_contrast_cn：B和C相对A的准确率与McNemar检验。
+
+- objective_result_cn：B最佳SVM准确率85.12%，C最佳神经网络85.92%；B vs A p=0.02，C vs A p<0.01。
+
+##### evidence_pointers
+
+1. Section 3.4
+
+2. Table 5
+
+3. Table 6
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：非代表性训练数据和用户写作风格差异可能导致文本分类器不公平。
+
+- mechanism_cn：老年美国人较少使用在线平台、写作风格不同，被分类器误判的风险更高，监管者可能忽视其合理投诉。
+
+- design_requirement_cn：DR3公平分类。
+
+- artifact_choice_cn：DF3：考虑消息贡献者，识别老年美国人子组，并训练老年美国人专用分类器。
+
+- evaluated_contrast_cn：普通用户与老年美国人性能对比；普通分类器与专用分类器在老年美国人子组上的性能对比。
+
+- objective_result_cn：老年美国人组准确率显著更低；专用分类器将“无赔偿”类precision提升最多约5%，但总体准确率略降。
+
+##### evidence_pointers
+
+1. Section 3.4 DF3
+
+2. Table 7
+
+3. Table 8
+
+4. Table 9
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：监管资源有限，真实投诉中正例极少（约4%），需要按优先级选择案例。
+
+- mechanism_cn：监管者不需要对所有案例分类，只需把有限人工检查集中在最可能成功的投诉上。
+
+- design_requirement_cn：DR2分类性能与DR3公平性在实际工作场景中结合。
+
+- artifact_choice_cn：使用平衡样本训练、真实分布holdout评价，并绘制lift chart展示排序能力。
+
+- evaluated_contrast_cn：普通分类器与公平分类器在不平衡holdout上的性能；随机选择的隐式基线。
+
+- objective_result_cn：top1%覆盖率约13%，top10%覆盖率超过65%；公平分类器表现接近但略差。
+
+##### evidence_pointers
+
+1. Section 4.6
+
+2. Table 10
+
+3. Fig. 3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 外部数据有效性验证：CreditKarma评论帮助性Tobit回归
+
+2. 平衡样本10折交叉验证：A/B/C性能与H1/H2
+
+3. 统计检验：McNemar检验比较分类器差异
+
+4. 公平性子组分析：老年美国人对比普通用户，Wilcoxon秩和检验
+
+5. 专用公平分类器评价：老年美国人子样本训练
+
+6. 真实分布holdout评价：75,000条投诉
+
+7. Lift chart实践价值检验：按置信度排序的累计覆盖率
+
+- why_these_evaluations_cn：因为设计主张分三层：理论特征需要证明其有效性及可解释性，所以先用外部评论做验证；综合模型需要证明其相对理论模型的增益，所以用平衡样本与McNemar检验；公平性需要证明确实存在组间差异并能缓解，所以用子组分析与专用分类器；实践价值需要在真实类别不平衡下证明，所以用holdout和lift。各评价分别对应DR1、DR2、DR3与真实落地。
+
+- benchmark_and_contrast_chain_cn：先用‘全部预测无赔偿’和‘全部预测有赔偿’作为朴素基线评价分类器A；再把分类器A作为可解释基线，评价B和C；然后在公平分析中用普通用户性能作为参照基线，比较普通分类器与专用分类器；最后用平衡样本结果作为参照，评价不平衡holdout与lift。基线逐步升级，构成从‘有没有用’到‘为什么更好’再到‘现实中有没有用’的证据链。
+
+### claim_evidence_ledger
+
+#### 1. 基于信息诊断性理论的特征对投诉结果有预测价值（H1）。
+
+- claim_cn：基于信息诊断性理论的特征对投诉结果有预测价值（H1）。
+
+- evidence_cn：分类器A在平衡样本上朴素贝叶斯准确率84.03%，显著优于50%全同分类基线，McNemar p<0.01。
+
+- verdict_cn：支持
+
+#### 2. 综合机器学习模型优于纯理论特征模型（H2）。
+
+- claim_cn：综合机器学习模型优于纯理论特征模型（H2）。
+
+- evidence_cn：分类器B最佳85.12%，分类器C最佳85.92%；B相对A p=0.02，C相对A p<0.01。
+
+- verdict_cn：支持
+
+#### 3. 作者特征影响分类表现，造成潜在不公平（H3）。
+
+- claim_cn：作者特征影响分类表现，造成潜在不公平（H3）。
+
+- evidence_cn：老年美国人与普通用户的写作风格显著不同；所有分类器在老年美国人上准确率更低，C差距约6个百分点。
+
+- verdict_cn：支持
+
+#### 4. 训练老年美国人专用分类器可以提升公平性。
+
+- claim_cn：训练老年美国人专用分类器可以提升公平性。
+
+- evidence_cn：专用分类器将“无赔偿”类precision提升最多约5%，但总体准确率略低于普通分类器。
+
+- verdict_cn：条件支持：公平性提升与总体性能存在权衡
+
+#### 5. 在实际不平衡分布下，分类器具有监管实践价值。
+
+- claim_cn：在实际不平衡分布下，分类器具有监管实践价值。
+
+- evidence_cn：holdout中普通分类器准确率80.51%；lift显示选择1%案例覆盖约13%实际赔偿投诉，选择10%覆盖超过65%。
+
+- verdict_cn：支持，但正类precision较低，只能用排序/优先调查方式使用
+
+- internal_validity_strategy_cn：随机抽取样本；平衡训练样本降低类别不平衡影响；分层10折交叉验证；使用准确率、精确率、召回率、F1多指标；McNemar检验排除随机差异；外部CreditKarma数据验证理论特征，降低特征选择过拟合风险；用holdout自然分布避免平衡样本乐观偏差。
+
+- external_validity_strategy_cn：使用多个独立数据集（评论帮助性、平衡投诉、真实分布投诉）；把理论特征嵌入信息诊断性理论与搜索/体验商品理论，增强可推广性；设计原则以规范性知识表述，声称可迁移到其他用户生成内容与监管决策；通过限制说明明确适用范围。
+
+- what_is_not_actually_tested_cn：未做用户实验验证解释是否真的被监管者理解；未测量法律伦理意义上的种族、性别等受保护属性；未实际部署到监管流程中；未测试除‘是否赔偿’之外的公司反应；未比较post-hoc解释方法；未验证专用分类器在真实监管工作负载中的成本收益。
+
+## 贡献闭环
+
+- technical_claim_cn：文本分类模型能够以较高准确率和排序能力预测CFPB投诉是否导致金钱赔偿，最佳平衡准确率85.92%，holdout top10%覆盖超过65%正例。
+
+- artifact_claim_cn：可识别的设计部件带来改进：理论特征使分类可解释且性能超过随机基线；词袋与集成进一步显著提升性能；作者专用分类器提升老年美国人子组公平性指标。
+
+- mechanism_claim_cn：信息诊断性理论特征之所以能预测投诉成功，是因为具有诊断性的文本更易说服公司支付赔偿；老年美国人分类表现差，是因为其写作风格与平台使用经验不同，需专用分类器或人工核查缓解。
+
+- boundary_claim_cn：适用于CFPB数据库中公开全文的金融消费者投诉；结果以‘是否获得金钱赔偿’为二分类；作者区分仅覆盖老年美国人与普通用户；性能在真实不平衡分布下体现为优先排序价值而非高正类precision。
+
+- reusable_design_knowledge_cn：三项可复用设计原则：以信息诊断性理论作为可解释特征的内核理论；采用综合机器学习模型兼顾可解释性与性能；考虑作者等潜在歧视属性并设计专用缓解机制。同时提供外评数据验证理论特征的流程和lift图评估实务价值的方法。
+
+- theoretical_contribution_cn：将信息诊断性理论扩展至金融产品领域，验证搜索/体验商品二分法在金融评论中的适用性；把可解释性与公平性带入RegTech研究；以exaptation方式把已有解决方案迁移到投诉结果预测新问题，并以improvement方式改进可解释分类这一已知问题。
+
+- how_discussion_closes_intro_gap_cn：引言声称RegTech忽视解释性与公平性、前人未预测投诉结果；讨论逐条回到这三个缺口：理论特征提供解释，综合模型提升性能，作者机制提供公平缓解；最后把结果提炼为设计原则并说明对研究者、监管者、企业和消费者的含义。
+
+- overclaim_or_unsupported_leaps_cn：将‘理论特征与帮助性显著相关’推论为‘投诉结果可解释’缺少监管者理解检验；将precision提升称为‘公平性提高’只覆盖老年美国人一个粗略群体；把平衡样本性能与holdout准确率并列时可能弱化正类precision低的问题；‘非歧视’的表达比实际验证范围更强。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：RegTech用于监测综合数据源的重要性不断增强。
+
+- rhetorical_function_cn：开篇建立主题背景，使读者进入RegTech领域。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为后面提出被忽视的要求作铺垫。
+
+- evidence_pointer：Abstract P1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：以往研究忽视了RegTech输出必须可解释且不歧视。
+
+- rhetorical_function_cn：指出研究缺口。
+
+- depends_on_cn：依赖RegTech重要性。
+
+- sets_up_cn：引出本文的核心缺口。
+
+- evidence_pointer：Abstract P1
+
+### 3. P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究提出用于自动评估金融消费者投诉的RegTech方法的设计原则和特征。
+
+- rhetorical_function_cn：宣告研究目标和制品类型。
+
+- depends_on_cn：依赖前述缺口。
+
+- sets_up_cn：明确论文要交付什么。
+
+- evidence_pointer：Abstract P2
+
+### 4. P2 S2-S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S2-S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：三个设计原则：信息诊断性理论保证可解释分类，词袋与集成保证准确率，作者特征避免歧视。
+
+- rhetorical_function_cn：预告理论来源和设计支柱。
+
+- depends_on_cn：承接研究目标。
+
+- sets_up_cn：为正文DP1-DP3提供摘要级索引。
+
+- evidence_pointer：Abstract P2
+
+### 5. P2 S5-S6
+
+- order：5
+
+- section：Abstract
+
+- locator：P2 S5-S6
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：在金融服务业评估该方法，证明其能识别导致金钱赔偿的投诉。
+
+- rhetorical_function_cn：给出结果域和评价标准。
+
+- depends_on_cn：依赖设计原则。
+
+- sets_up_cn：为摘要中的贡献声明提供结果锚点。
+
+- evidence_pointer：Abstract P2
+
+### 6. P1 S1
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：RegTech在监控、报告和合规中越来越重要。
+
+- rhetorical_function_cn：再次建立RegTech领域背景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引言后续讨论其被忽视的要求。
+
+- evidence_pointer：Introduction P1
+
+### 7. P1 S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：RegTech应用必须提供解释并避免歧视，但这两点研究不足。
+
+- rhetorical_function_cn：构造核心研究缺口。
+
+- depends_on_cn：依赖RegTech重要性。
+
+- sets_up_cn：为整篇文章的贡献方向定调。
+
+- evidence_pointer：Introduction P1
+
+### 8. P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：CFPB监督金融机构，消费者投诉是监管行动的重要触发因素。
+
+- rhetorical_function_cn：引入具体经验场景。
+
+- depends_on_cn：由RegTech背景收窄到金融投诉。
+
+- sets_up_cn：说明研究对象和数据来源。
+
+- evidence_pointer：Introduction P2
+
+### 9. P2 S2
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：监管资源有限，能够识别可能成功的投诉很有价值。
+
+- rhetorical_function_cn：说明问题的现实后果和重要性。
+
+- depends_on_cn：依赖CFPB投诉处理流程。
+
+- sets_up_cn：为预测任务提供实践动机。
+
+- evidence_pointer：Introduction P2
+
+### 10. P2 S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S3
+
+- move_code：GAP
+
+- paraphrase_cn：以往消费者投诉研究忽视了预测投诉结果。
+
+- rhetorical_function_cn：明确第二层研究缺口。
+
+- depends_on_cn：依赖前面对投诉场景的描述。
+
+- sets_up_cn：为本文研究问题提供直接空间。
+
+- evidence_pointer：Introduction P2
+
+### 11. P3 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文通过设计科学研究提出并评价设计原则与特征以填补这些缺口。
+
+- rhetorical_function_cn：宣布研究方法和总体目标。
+
+- depends_on_cn：依赖解释性/公平性缺口和投诉预测缺口。
+
+- sets_up_cn：预告后续方法、评价和贡献。
+
+- evidence_pointer：Introduction P3
+
+### 12. P4 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：评价使用多数据集：1500条产品评论验证特征、6000条平衡投诉训练、75000条自然分布投诉检验实际价值。
+
+- rhetorical_function_cn：预告评价设计。
+
+- depends_on_cn：依赖研究目标。
+
+- sets_up_cn：让读者知道证据结构。
+
+- evidence_pointer：Introduction P4
+
+### 13. P5 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究贡献是聚焦RegTech应用的解释性与公平性，提出新的设计原则和专用分类器。
+
+- rhetorical_function_cn：在开头声明贡献。
+
+- depends_on_cn：依赖缺口陈述。
+
+- sets_up_cn：为讨论中的贡献回扣埋下伏笔。
+
+- evidence_pointer：Introduction P5
+
+### 14. P2 S1
+
+- order：14
+
+- section：Section 2.1
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：既有RegTech研究涵盖欺诈检测、可疑交易识别和法律文本摘要。
+
+- rhetorical_function_cn：总结已有知识，展示RegTech技术谱系。
+
+- depends_on_cn：前文RegTech定义。
+
+- sets_up_cn：用于对比说明忽略消费者生成信息的缺口。
+
+- evidence_pointer：Section 2.1 P2
+
+### 15. P3 S1
+
+- order：15
+
+- section：Section 2.1
+
+- locator：P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有研究聚焦公司信息、交易数据或法律文件，忽视RegTech中的解释性/公平性以及消费者发布的信息。
+
+- rhetorical_function_cn：构造第一层文献缺口。
+
+- depends_on_cn：依赖前面对已有研究类型的总结。
+
+- sets_up_cn：为消费者投诉数据引入铺路。
+
+- evidence_pointer：Section 2.1 P3
+
+### 16. P1 S1
+
+- order：16
+
+- section：Section 2.2
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：可解释AI日益重要，指用户能理解模型如何及为何作出决策。
+
+- rhetorical_function_cn：引入概念定义。
+
+- depends_on_cn：前文RegTech应用需求。
+
+- sets_up_cn：为可解释性设计原则提供理论基础。
+
+- evidence_pointer：Section 2.2 P1
+
+### 17. P3 S1
+
+- order：17
+
+- section：Section 2.2
+
+- locator：P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：基于理论的特征工程研究不足；理解特征为何影响决策对监管接受很重要。
+
+- rhetorical_function_cn：指出可解释性文献中的具体缺口。
+
+- depends_on_cn：依赖可解释性综述。
+
+- sets_up_cn：引向信息诊断性理论的设计选择。
+
+- evidence_pointer：Section 2.2 P3
+
+### 18. P4 S1
+
+- order：18
+
+- section：Section 2.2
+
+- locator：P4 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：公平性要求模型不因种族、性别、年龄等歧视特定群体；非代表性训练数据会导致歧视。
+
+- rhetorical_function_cn：引入公平性概念与机制。
+
+- depends_on_cn：前文可解释AI讨论。
+
+- sets_up_cn：为DR3和作者特征设计提供依据。
+
+- evidence_pointer：Section 2.2 P4
+
+### 19. P4 S2
+
+- order：19
+
+- section：Section 2.2
+
+- locator：P4 S2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：文本挖掘中特定用户群体可能因写作风格不同导致有偏模型，因此需要为受保护群体设置专用模型。
+
+- rhetorical_function_cn：把公平性一般原则转成本文的具体设计命题。
+
+- depends_on_cn：依赖公平性文献。
+
+- sets_up_cn：为DF3铺路。
+
+- evidence_pointer：Section 2.2 P4
+
+### 20. P4 S1
+
+- order：20
+
+- section：Section 2.3
+
+- locator：P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：既有研究关注公司如何处理投诉，但忽视监管机构处理投诉和预测投诉结果。
+
+- rhetorical_function_cn：在消费者投诉文献中指出缺口。
+
+- depends_on_cn：依赖前面对消费者投诉文献的综述。
+
+- sets_up_cn：为预测投诉结果的研究目标提供依据。
+
+- evidence_pointer：Section 2.3 P4
+
+### 21. P3 S1
+
+- order：21
+
+- section：Section 2.4
+
+- locator：P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：以往研究未用RegTech方法预测CFPB投诉是否获得赔偿。
+
+- rhetorical_function_cn：将缺口收窄到CFPB具体场景。
+
+- depends_on_cn：依赖CFPB数据库介绍。
+
+- sets_up_cn：为设计科学制品提供精确任务。
+
+- evidence_pointer：Section 2.4 P3
+
+### 22. P1 S1-S2
+
+- order：22
+
+- section：Section 3.1
+
+- locator：P1 S1-S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用设计科学研究范式，提出可移植的设计原则，并按问题意识、原则、特征、评价、讨论五步展开。
+
+- rhetorical_function_cn：交代研究方法和文章结构。
+
+- depends_on_cn：依赖引言中的目标。
+
+- sets_up_cn：为后文DR/DP/DF编号提供框架。
+
+- evidence_pointer：Section 3.1 P1
+
+### 23. P1 S1
+
+- order：23
+
+- section：Section 3.2
+
+- locator：P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：监管机构必须解释为何选择特定案件，因此RegTech必须提供可解释分类结果。
+
+- rhetorical_function_cn：正式提出DR1。
+
+- depends_on_cn：依赖引言中可解释性缺口。
+
+- sets_up_cn：引导DP1理论特征设计。
+
+- evidence_pointer：Section 3.2 DR1
+
+### 24. P2 S1
+
+- order：24
+
+- section：Section 3.2
+
+- locator：P2 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：监管AI应用必须足够精确以获得信任和采用。
+
+- rhetorical_function_cn：正式提出DR2。
+
+- depends_on_cn：依赖监管决策的重要性。
+
+- sets_up_cn：引导DP2综合模型设计。
+
+- evidence_pointer：Section 3.2 DR2
+
+### 25. P3 S1
+
+- order：25
+
+- section：Section 3.2
+
+- locator：P3 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：RegTech不能偏向或惩罚特定群体，必须提供公平分类。
+
+- rhetorical_function_cn：正式提出DR3。
+
+- depends_on_cn：依赖公平性文献。
+
+- sets_up_cn：引导DP3作者考量。
+
+- evidence_pointer：Section 3.2 DR3
+
+### 26. P2 S1-S2
+
+- order：26
+
+- section：Section 3.3
+
+- locator：P2 S1-S2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：如果文本对读者有帮助，投诉也更可能成功；因此信息诊断性理论可指导分类器配置以回应DR1。
+
+- rhetorical_function_cn：将理论命题与设计需求连接。
+
+- depends_on_cn：依赖信息诊断性理论。
+
+- sets_up_cn：形成DP1。
+
+- evidence_pointer：Section 3.3 DP1
+
+### 27. P3 S1
+
+- order：27
+
+- section：Section 3.3
+
+- locator：P3 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：可解释模型通常性能较低，可解释性与准确率存在权衡，因此需要结合两者优势。
+
+- rhetorical_function_cn：解释为何还需要综合模型。
+
+- depends_on_cn：依赖驱动DR2的现实需求。
+
+- sets_up_cn：形成DP2。
+
+- evidence_pointer：Section 3.3 DP2
+
+### 28. P4 S1
+
+- order：28
+
+- section：Section 3.3
+
+- locator：P4 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为避免文本写作风格导致歧视，RegTech应仔细考虑用户信息，形成DP3。
+
+- rhetorical_function_cn：将公平性需求转化为设计原则。
+
+- depends_on_cn：依赖DR3。
+
+- sets_up_cn：为DF3作者特征设计提供原则。
+
+- evidence_pointer：Section 3.3 DP3
+
+### 29. P1 S1
+
+- order：29
+
+- section：Section 3.4
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为满足可解释性，把信息诊断性理论直接启发的特征纳入模型。
+
+- rhetorical_function_cn：把DP1落实为具体特征。
+
+- depends_on_cn：依赖DP1。
+
+- sets_up_cn：引出DF1a与分类器A。
+
+- evidence_pointer：Section 3.4 P1
+
+### 30. P2 S1-S2
+
+- order：30
+
+- section：Section 3.4
+
+- locator：P2 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：金融产品兼具搜索品与体验品属性，因此用户的感知和过往经验对评价很重要。
+
+- rhetorical_function_cn：解释为什么选择特定理论特征。
+
+- depends_on_cn：依赖搜索/体验商品文献。
+
+- sets_up_cn：为情感、时间、谨慎风格等特征提供机制。
+
+- evidence_pointer：Section 3.4 P2
+
+### 31. P3-P4 S1
+
+- order：31
+
+- section：Section 3.4
+
+- locator：P3-P4 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：具体特征包括文本深度、情感极性、时间焦点、主动/谨慎/确定/感知风格。
+
+- rhetorical_function_cn：列出设计特征操作化。
+
+- depends_on_cn：依赖信息诊断性理论与商品属性。
+
+- sets_up_cn：对应Table 1和后续回归。
+
+- evidence_pointer：Section 3.4 P3-P4; Table 1
+
+### 32. P5 S1
+
+- order：32
+
+- section：Section 3.4
+
+- locator：P5 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF1a：应用理论特征构造分类器A。
+
+- rhetorical_function_cn：明确第一项设计特征及其制品。
+
+- depends_on_cn：依赖前述特征列表。
+
+- sets_up_cn：为H1评价提供对象。
+
+- evidence_pointer：Section 3.4 DF1a
+
+### 33. P6 S1
+
+- order：33
+
+- section：Section 3.4
+
+- locator：P6 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF1b：用外部金融评论数据验证这些特征，因为投诉本身缺乏帮助性标记。
+
+- rhetorical_function_cn：提出外部有效性验证策略。
+
+- depends_on_cn：依赖DF1a。
+
+- sets_up_cn：为CreditKarma数据集使用提供理由。
+
+- evidence_pointer：Section 3.4 DF1b
+
+### 34. P7 S1
+
+- order：34
+
+- section：Section 3.4
+
+- locator：P7 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF2a：使用完整词汇的词袋模型构造分类器B。
+
+- rhetorical_function_cn：把综合模型原则落实为词袋设计。
+
+- depends_on_cn：依赖DP2。
+
+- sets_up_cn：为H2中分类器B提供对象。
+
+- evidence_pointer：Section 3.4 DF2a
+
+### 35. P8 S1
+
+- order：35
+
+- section：Section 3.4
+
+- locator：P8 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF2b：用集成学习组合分类器A和B的输出，构造分类器C。
+
+- rhetorical_function_cn：把集成学习嵌入设计特征。
+
+- depends_on_cn：依赖DF1a和DF2a。
+
+- sets_up_cn：为H2中分类器C提供对象。
+
+- evidence_pointer：Section 3.4 DF2b
+
+### 36. P9 S1-P10
+
+- order：36
+
+- section：Section 3.4
+
+- locator：P9 S1-P10
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DF3：考虑消息贡献者，针对可能分布不同的用户群设置专用分类器。
+
+- rhetorical_function_cn：把公平性原则落实为作者特征和专用模型。
+
+- depends_on_cn：依赖DP3。
+
+- sets_up_cn：为H3和老年美国人分析提供对象。
+
+- evidence_pointer：Section 3.4 DF3
+
+### 37. P1 S1
+
+- order：37
+
+- section：Section 4.1
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：评价遵循结构化数据挖掘过程：数据选择、预处理、挖掘和评价。
+
+- rhetorical_function_cn：交代评价流程的方法论。
+
+- depends_on_cn：依赖设计科学方法。
+
+- sets_up_cn：让评价步骤有章可循。
+
+- evidence_pointer：Section 4.1 P1
+
+### 38. P2 S1
+
+- order：38
+
+- section：Section 4.1
+
+- locator：P2 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：三个数据集分别用于外部特征验证、平衡样本训练评价和真实分布holdout评价。
+
+- rhetorical_function_cn：预告评价的阶段划分。
+
+- depends_on_cn：依赖方法流程。
+
+- sets_up_cn：为后续各小节提供地图。
+
+- evidence_pointer：Section 4.1 P2; Fig. 2
+
+### 39. P1 S1
+
+- order：39
+
+- section：Section 4.2
+
+- locator：P1 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：评价假设分别对应三项设计原则：理论特征预测力、综合模型优势、作者特征影响公平。
+
+- rhetorical_function_cn：把设计原则转成可检验假设。
+
+- depends_on_cn：依赖DP1-DP3。
+
+- sets_up_cn：定义评价的成功标准。
+
+- evidence_pointer：Section 4.2 P1
+
+### 40. P2 S1-S2
+
+- order：40
+
+- section：Section 4.2
+
+- locator：P2 S1-S2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：基于信息诊断性理论特征的分类器有预测价值。
+
+- rhetorical_function_cn：正式提出第一个假设。
+
+- depends_on_cn：依赖DP1。
+
+- sets_up_cn：为分类器A评价提供判据。
+
+- evidence_pointer：Section 4.2 H1
+
+### 41. P3 S1-S2
+
+- order：41
+
+- section：Section 4.2
+
+- locator：P3 S1-S2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2：综合模型优于仅基于理论特征的模型。
+
+- rhetorical_function_cn：正式提出第二个假设。
+
+- depends_on_cn：依赖DP2和文本挖掘文献。
+
+- sets_up_cn：为分类器B/C评价提供判据。
+
+- evidence_pointer：Section 4.2 H2
+
+### 42. P4 S1
+
+- order：42
+
+- section：Section 4.2
+
+- locator：P4 S1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H3：作者特征影响分类性能，可能造成歧视。
+
+- rhetorical_function_cn：正式提出第三个假设。
+
+- depends_on_cn：依赖DP3。
+
+- sets_up_cn：为公平性分析提供判据。
+
+- evidence_pointer：Section 4.2 H3
+
+### 43. P1 S1
+
+- order：43
+
+- section：Section 4.3
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：先用CreditKarma评论验证理论特征，再构造只含显著特征的分类器A。
+
+- rhetorical_function_cn：说明外部验证与分类器构造的先后关系。
+
+- depends_on_cn：依赖DF1b。
+
+- sets_up_cn：为后续结果呈现铺路。
+
+- evidence_pointer：Section 4.3 P1
+
+### 44. P3 S1-S2
+
+- order：44
+
+- section：Section 4.3
+
+- locator：P3 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：Tobit回归显示深度正影响、过长负影响、正面情绪负影响，负面情绪不显著；过去时、主动、不确定、感知正影响，知识词负影响。
+
+- rhetorical_function_cn：报告外部验证结果。
+
+- depends_on_cn：依赖CreditKarma数据。
+
+- sets_up_cn：为理论特征的可解释性提供统计支持。
+
+- evidence_pointer：Table 3
+
+### 45. P4 S1
+
+- order：45
+
+- section：Section 4.3
+
+- locator：P4 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：成功投诉更长、更少正面、更多过去时、更少强调知识、更多表达感知，与评论帮助性发现一致。
+
+- rhetorical_function_cn：把外部数据结果与投诉结果联系起来。
+
+- depends_on_cn：依赖Tobit回归结果。
+
+- sets_up_cn：为分类器A的特征选择提供合理性。
+
+- evidence_pointer：Section 4.3 P4
+
+### 46. P5 S1
+
+- order：46
+
+- section：Section 4.3
+
+- locator：P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：分类器A在所有机器学习算法上准确率超过80%，朴素贝叶斯最佳84.03%。
+
+- rhetorical_function_cn：报告H1直接关心的预测性能。
+
+- depends_on_cn：依赖分类器A构造。
+
+- sets_up_cn：为H1确认提供数字。
+
+- evidence_pointer：Table 4
+
+### 47. P6 S1
+
+- order：47
+
+- section：Section 4.3
+
+- locator：P6 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：H1得到支持，84.03%显著高于50%全同分类基线，McNemar检验确认。
+
+- rhetorical_function_cn：宣布第一个假设结论。
+
+- depends_on_cn：依赖表4和表6。
+
+- sets_up_cn：引导下一阶段综合模型比较。
+
+- evidence_pointer：Section 4.3 P6; Table 6
+
+### 48. P1 S1
+
+- order：48
+
+- section：Section 4.4
+
+- locator：P1 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：下一步评价分类器B和C，即综合机器学习模型。
+
+- rhetorical_function_cn：从理论模型转向综合模型。
+
+- depends_on_cn：依赖H1结果。
+
+- sets_up_cn：引出H2证据。
+
+- evidence_pointer：Section 4.4 P1
+
+### 49. P1-P2 S1
+
+- order：49
+
+- section：Section 4.4
+
+- locator：P1-P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：分类器B最佳SVM准确率85.12%；分类器C最佳神经网络准确率85.92%。
+
+- rhetorical_function_cn：报告综合模型性能。
+
+- depends_on_cn：依赖分类器B/C构造。
+
+- sets_up_cn：为H2比较提供数值。
+
+- evidence_pointer：Table 5
+
+### 50. P3 S1-S2
+
+- order：50
+
+- section：Section 4.4
+
+- locator：P3 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：H2得到支持：B和C相对A均有显著提升，C的显著性更高。
+
+- rhetorical_function_cn：宣布第二个假设结论。
+
+- depends_on_cn：依赖McNemar检验。
+
+- sets_up_cn：为公平性分析留下尚未回答的问题。
+
+- evidence_pointer：Section 4.4 P3; Table 6
+
+### 51. P1 S1
+
+- order：51
+
+- section：Section 4.5
+
+- locator：P1 S1
+
+- move_code：TRANSITION
+
+- paraphrase_cn：为考察结果是否受消息贡献者影响，按老年美国人与普通用户分组分析。
+
+- rhetorical_function_cn：从性能转向公平性。
+
+- depends_on_cn：依赖H2后仍存在的公平未知。
+
+- sets_up_cn：引出H3。
+
+- evidence_pointer：Section 4.5 P1
+
+### 52. P1-P2 S1
+
+- order：52
+
+- section：Section 4.5
+
+- locator：P1-P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：老年美国人与普通用户在语言特征上显著不同：更长、更少正面、更多过去时等。
+
+- rhetorical_function_cn：报告写作风格差异证据。
+
+- depends_on_cn：依赖分组标签。
+
+- sets_up_cn：为分类性能差异提供机制。
+
+- evidence_pointer：Table 7
+
+### 53. P2 S1
+
+- order：53
+
+- section：Section 4.5
+
+- locator：P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：所有分类器对普通用户表现更好，分类器C对普通用户与老年美国人的准确率差距接近6个百分点。
+
+- rhetorical_function_cn：报告组间性能差距。
+
+- depends_on_cn：依赖分组评价。
+
+- sets_up_cn：确认潜在不公平。
+
+- evidence_pointer：Table 8
+
+### 54. P3 S1
+
+- order：54
+
+- section：Section 4.5
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：H3得到支持；专用老年美国人分类器把“无赔偿”类precision提升最多约5%，但总体准确率略降。
+
+- rhetorical_function_cn：同时报告不公平确认和缓解措施的结果。
+
+- depends_on_cn：依赖表8和表9。
+
+- sets_up_cn：为实践评价和公平性讨论提供依据。
+
+- evidence_pointer：Table 9; Section 4.5 P3
+
+### 55. P1 S1
+
+- order：55
+
+- section：Section 4.6
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：平衡样本保证训练，但需要按真实类别分布评价，因为只有约4%投诉获得赔偿。
+
+- rhetorical_function_cn：说明为何增加不平衡holdout评价。
+
+- depends_on_cn：依赖平衡样本评价。
+
+- sets_up_cn：引出Table 10和Fig. 3。
+
+- evidence_pointer：Section 4.6 P1
+
+### 56. P2 S1-S2
+
+- order：56
+
+- section：Section 4.6
+
+- locator：P2 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：普通分类器holdout准确率80.51%；无赔偿类precision极高，有赔偿类precision较低。
+
+- rhetorical_function_cn：报告真实分布性能并提示局限。
+
+- depends_on_cn：依赖Table 10。
+
+- sets_up_cn：为lift图解释实践价值做铺垫。
+
+- evidence_pointer：Table 10
+
+### 57. P3 S1-P4
+
+- order：57
+
+- section：Section 4.6
+
+- locator：P3 S1-P4
+
+- move_code：RESULT
+
+- paraphrase_cn：Lift显示选择1%案例覆盖约13%赔偿投诉，选择10%覆盖超过65%；公平分类器表现接近但略差。
+
+- rhetorical_function_cn：用排序能力证明实践价值。
+
+- depends_on_cn：依赖lift chart。
+
+- sets_up_cn：为实践含义和资源分配建议提供核心证据。
+
+- evidence_pointer：Fig. 3
+
+### 58. P1 S1
+
+- order：58
+
+- section：Section 5.1
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：评价支持三项设计原则：理论特征、综合模型、歧视属性考虑。
+
+- rhetorical_function_cn：回到开头设计原则并总结证据。
+
+- depends_on_cn：依赖全部评价结果。
+
+- sets_up_cn：开始讨论贡献。
+
+- evidence_pointer：Section 5.1 P1
+
+### 59. P2 S1-S2
+
+- order：59
+
+- section：Section 5.1
+
+- locator：P2 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：理论特征与评论帮助性和投诉成功相关，因此可以解释模型为何作出推荐。
+
+- rhetorical_function_cn：把统计联系上升为解释机制。
+
+- depends_on_cn：依赖Table 3和分类器A结果。
+
+- sets_up_cn：为可解释性贡献辩护。
+
+- evidence_pointer：Section 5.1 P2
+
+### 60. P3 S1
+
+- order：60
+
+- section：Section 5.1
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：综合模型可提升性能，集成模型同时兼顾可解释性与准确率。
+
+- rhetorical_function_cn：总结DP2的贡献。
+
+- depends_on_cn：依赖B/C结果。
+
+- sets_up_cn：为实践可用性讨论提供根据。
+
+- evidence_pointer：Section 5.1 P3
+
+### 61. P4 S1
+
+- order：61
+
+- section：Section 5.1
+
+- locator：P4 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：老年美国人较少使用在线平台，投诉文本可能不同，需要专用分类器确保公平。
+
+- rhetorical_function_cn：界定公平性机制的适用条件。
+
+- depends_on_cn：依赖H3结果。
+
+- sets_up_cn：为公平性实践含义做准备。
+
+- evidence_pointer：Section 5.1 P4
+
+### 62. P5 S1
+
+- order：62
+
+- section：Section 5.1
+
+- locator：P5 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：不平衡holdout和lift显示在资源有限时分类器有很强的实践价值。
+
+- rhetorical_function_cn：总结实践评价的意义。
+
+- depends_on_cn：依赖Table 10和Fig. 3。
+
+- sets_up_cn：引出实践影响。
+
+- evidence_pointer：Section 5.1 P5
+
+### 63. P1 S1
+
+- order：63
+
+- section：Section 5.2
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出的设计原则构成“已知解决方案转移到新问题”的exaptation知识贡献。
+
+- rhetorical_function_cn：用DSR类型学定位理论贡献。
+
+- depends_on_cn：依赖DSR文献。
+
+- sets_up_cn：强化贡献的规范性。
+
+- evidence_pointer：Section 5.2 P1
+
+### 64. P3 S1-S2
+
+- order：64
+
+- section：Section 5.2
+
+- locator：P3 S1-S2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究扩展了信息诊断性理论在金融领域和搜索/体验商品的适用性，也扩展了投诉处理文献。
+
+- rhetorical_function_cn：声明理论贡献。
+
+- depends_on_cn：依赖外部验证和特征结果。
+
+- sets_up_cn：为学术意义总结提供支撑。
+
+- evidence_pointer：Section 5.2 P3
+
+### 65. P1 S1
+
+- order：65
+
+- section：Section 5.3
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：监管机构可用该RegTech方法识别应进一步调查的投诉，更高效分配资源。
+
+- rhetorical_function_cn：面向实践者说明应用价值。
+
+- depends_on_cn：依赖全部评价结果。
+
+- sets_up_cn：为结论和全文收束铺路。
+
+- evidence_pointer：Section 5.3 P1
+
+### 66. P2 S1
+
+- order：66
+
+- section：Section 5.3
+
+- locator：P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：金融服务企业可以监测反馈，优先处理可能导致赔偿的投诉。
+
+- rhetorical_function_cn：扩展实践含义到企业端。
+
+- depends_on_cn：依赖分类器能力。
+
+- sets_up_cn：为消费者端含义做铺垫。
+
+- evidence_pointer：Section 5.3 P2
+
+### 67. P3 S1
+
+- order：67
+
+- section：Section 5.3
+
+- locator：P3 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：消费者可以了解投诉是否可能成功并据语言学特征改进文本。
+
+- rhetorical_function_cn：扩展到消费者利益。
+
+- depends_on_cn：依赖理论特征可解释性。
+
+- sets_up_cn：体现多方利益相关者价值。
+
+- evidence_pointer：Section 5.3 P3
+
+### 68. P1 S1
+
+- order：68
+
+- section：Section 5.4
+
+- locator：P1 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：只分析CFPB公开全文的投诉，结果可能不适用于未公开全文的投诉。
+
+- rhetorical_function_cn：限定外部有效性。
+
+- depends_on_cn：依赖数据来源描述。
+
+- sets_up_cn：为未来数据扩展留出空间。
+
+- evidence_pointer：Section 5.4 P1
+
+### 69. P2 S1
+
+- order：69
+
+- section：Section 5.4
+
+- locator：P2 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：模型只预测是否获得金钱赔偿，无法区分其他公司反应类型。
+
+- rhetorical_function_cn：限定结果变量范围。
+
+- depends_on_cn：依赖CFPB结果定义。
+
+- sets_up_cn：为未来研究其他反应类别提供理由。
+
+- evidence_pointer：Section 5.4 P2
+
+### 70. P3 S1
+
+- order：70
+
+- section：Section 5.4
+
+- locator：P3 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者分组仅区分老年美国人与普通用户，较为宽泛。
+
+- rhetorical_function_cn：限定公平性结论的粒度。
+
+- depends_on_cn：依赖CFPB作者标签。
+
+- sets_up_cn：为更细粒度公平研究提供方向。
+
+- evidence_pointer：Section 5.4 P3
+
+### 71. P1 S1
+
+- order：71
+
+- section：Section 5.5
+
+- locator：P1 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可在其他领域、其他企业反应类型、更丰富特征和更细作者信息上扩展。
+
+- rhetorical_function_cn：汇总未来研究路径。
+
+- depends_on_cn：依赖全部局限。
+
+- sets_up_cn：为结尾提供开放性。
+
+- evidence_pointer：Section 5.5
+
+### 72. P1 S1
+
+- order：72
+
+- section：Section 6
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究显示三项设计原则有价值，并扩展了RegTech中可解释性和公平性的研究。
+
+- rhetorical_function_cn：收束全文并重申贡献。
+
+- depends_on_cn：依赖全文证据。
+
+- sets_up_cn：无后续，文章结束。
+
+- evidence_pointer：Section 6 P1
+
+## 写作技术
+
+- gap_construction_cn：采用双层缺口：第一层是RegTech领域普遍忽视可解释性与公平性；第二层是消费者投诉文献没有预测投诉结果。将实践资源限制作为‘为什么必须做’的催化剂，使缺口既有理论意义又有现实后果。
+
+- signposting_cn：使用大量清晰路标：DR/DP/DF编号、H1-H3假设、Evaluation Process图、每节开头的“下一阶段”说明、Table/Fig引用。读者能随时知道当前证据服务于哪个设计主张。
+
+- transition_logic_cn：每一阶段末尾留下未被回答的问题：理论特征有效但词袋是否更好？综合模型更好但公平性如何？公平性有差异但真实分布是否仍有价值？下一阶段用新数据集或新分组回答上一阶段留下的不确定性。
+
+- claim_evidence_rhythm_cn：先提出明确假设，然后用表格报告数字，再用McNemar等统计检验确认差异，最后在讨论中把数字重新解释为设计原则或实践价值。主张和证据紧密交替，避免空泛声称。
+
+- benchmark_narrative_cn：benchmark从简单到复杂逐步升级：50%全同基线→分类器A→分类器B/C→普通用户性能→普通分类器→不平衡holdout。每个新基准都在回答更高层问题：有无预测力、是否更优、是否公平、现实是否有用。
+
+- theory_return_cn：讨论部分没有停留在性能数字，而是把显著特征映射回信息诊断性理论、把公平性机制映射回老年用户的平台使用经验、把设计原则映射为exaptation/improvement两种知识贡献类型。
+
+- contribution_positioning_cn：贡献被定位为设计原则而非一次性性能结果：强调原则可移植、方法可迁移、理论可扩展；同时列出监管者、企业、消费者三类利益相关者，增强贡献的宽度。
+
+- novelty_protection_cn：通过四个手段防止贡献退化为一次性结果：用外部数据验证理论特征、用多种算法和统计检验、用真实分布和lift图证明排序价值、用设计原则和DSR知识贡献类型提升抽象层次。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：在引言中同时建立领域重要性和具体现实问题，指出现有研究忽视的必备要求。
+
+- research_job_cn：找到待设计系统的关键非功能要求（可解释、性能、公平）和具体任务场景。
+
+- required_evidence_cn：领域统计、监管流程或案例表明问题真实存在且资源有限。
+
+- transition_to_next_cn：从现实问题转向‘我们可以用什么设计原则来解决’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：把需求形式化为DR编号，再从理论/知识来源推出DP和DF编号。
+
+- research_job_cn：从理论或既有知识中推导出可操作的设计特征，并定义特征操作化。
+
+- required_evidence_cn：至少一个理论/知识基础能具体说明为什么某些设计特征会带来预期行为。
+
+- transition_to_next_cn：用‘为验证这些设计选择，我们提出以下评价假设’进入评价。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：用外部独立数据验证理论特征或关键机制，建立‘理论特征有经验基础’。
+
+- research_job_cn：寻找有代理标签的数据（如评论帮助性）对理论特征做回归/显著性检验。
+
+- required_evidence_cn：多数理论特征显著且方向符合理论预测。
+
+- transition_to_next_cn：把显著特征用于构造最终模型，并报告模型性能。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：构建基于理论特征的简单模型，并与朴素基线比较。
+
+- research_job_cn：在平衡训练集上用多种算法交叉验证，使用统计检验确认优于基线。
+
+- required_evidence_cn：模型显著优于全同分类基线，并报告多指标。
+
+- transition_to_next_cn：‘既然可解释模型有预测力，下一步能否用综合模型提高性能’。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：构建更有表现力的综合模型，并与理论模型比较。
+
+- research_job_cn：加入词袋、集成或深度学习等综合方法，用McNemar或类似检验确认提升。
+
+- required_evidence_cn：综合模型在多个指标上显著优于理论模型。
+
+- transition_to_next_cn：‘性能提升之后，必须检查不同用户组是否被公平对待’。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：引入受保护属性或作者属性，报告子组性能差异并提出专用缓解模型。
+
+- research_job_cn：做子组分析，检验写作风格差异，训练专用分类器并比较公平性指标。
+
+- required_evidence_cn：组间差异显著；专用模型能改善公平性指标，同时报告准确率权衡。
+
+- transition_to_next_cn：‘平衡样本之外，还要在真实类别分布下证明实用价值’。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用不平衡holdout、lift或其他决策曲线证明系统在自然分布下的价值。
+
+- research_job_cn：用真实分布样本评价排序能力，画出lift或累积增益曲线。
+
+- required_evidence_cn：虽然总体指标可能下降，但lift显示优先选择能覆盖大部分正例。
+
+- transition_to_next_cn：进入讨论，把全部结果归纳为设计原则、理论贡献和实践建议。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：在讨论中逐条回应引言缺口、声明贡献、限定边界、列局限和未来。
+
+- research_job_cn：识别哪些设计主张被证据支持、哪些只是边界性结论，并用DSR知识贡献类型定位贡献。
+
+- required_evidence_cn：每个贡献声明都能指向前面的表格或检验。
+
+- transition_to_next_cn：以结论段重申核心贡献并收束全文。
+
+### most_transferable_moves_cn
+
+1. 用编号需求-原则-特征结构组织设计科学论文，方便读者追踪论证链。
+
+2. 用外部代理数据验证理论特征，再移植到目标场景。
+
+3. 用多阶段基准逐步升级：朴素基线→理论模型→综合模型→公平子组→真实分布。
+
+4. 用统计检验（McNemar、Wilcoxon）而非仅比较均值。
+
+5. 用lift图把类别不平衡下的性能下降重新解释为排序价值。
+
+6. 在公平分析中报告专用模型带来的公平性改善与准确率代价。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 依赖CFPB投诉库中‘是否获得赔偿’和‘老年美国人’标签，这种带真实结果标签的监管投诉数据并非所有领域都有。
+
+2. 需要较大的外部评论数据集（1500条）和支持帮助性投票的平台。
+
+3. 需要75,000条holdout投诉以进行自然分布评价，数据获取与预处理成本较高。
+
+4. 拥有‘老年美国人’这类细粒度作者属性来自CFPB专门标记，其他数据集未必提供。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只列DR/DP/DF编号而没有对应的可检验假设和实证评价。
+
+2. 不能声称‘理论可解释’却未用外部数据或用户研究验证特征与解释的关系。
+
+3. 不能只用平衡准确率证明实用性，必须考虑真实类别分布下的precision/recall与lift。
+
+4. 不能只报告‘公平分类器提升精度’而不报告准确率下降的权衡。
+
+5. 不能把针对老年美国人的公平性缓解推广为全面无歧视。
+
+- single_best_description_of_the_routine_cn：用设计科学研究流程将监管需求拆成可检验的可解释性、性能、公平性三原则，并用外部评论文本验证理论特征、用平衡样本对比模型、用子组和真实分布提升实践价值。
+
+## 分析边界
+
+基于全文OCR和正文表格，无精确页码；图1/2/3内容从正文描述推断；表格数字依赖OCR，可能有少量误差；无附录或在线补充材料；部分位置定位使用自然段落而非页码。

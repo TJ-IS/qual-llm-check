@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85111020824"
+title: "A Study of Agile Iterative Development Methodology on Web Application Quality"
+authors: "Das R.A.K.; Khan A.B."
+year: "2021"
+journal: "Communications in Computer and Information Science"
+doi: "10.1007/978-981-16-2723-1_3"
+---
+# Scopus title-abstract-keyword metadata
+Title: A Study of Agile Iterative Development Methodology on Web Application Quality
+Abstract: With the increase in use of web based applications in different fields, the competition for providing secure efficient and quality software increases with a demand for decreased cost of the product. To improve the product development process in environment of the ever dynamic customer requirement and to meet the quality parameters of the software products many in the industry, have adopted agile software development. Although the nuances of agile methods like iterative development existed decades back the term Agile software development was coined in 2001 in a small group industry meet. In this paper we have tried to scan the literature for any correlation between the agile development methods and software quality. We have conducted a survey to understand how one of the major factors of agile development i.e. iterative development influences the quality of the software. © 2021, Springer Nature Singapore Pte Ltd.
+Author keywords: Agile development; Iterative methods; Software quality; Web application; Web application quality
+Index keywords: Application programs; Computer software selection and evaluation; Iterative methods; Software quality; Agile development methods; Agile software development; Customer requirements; Iterative development; Product development process; Quality parameters; Web application quality; Web-based applications; Software design
+Document type: Conference paper
+Conference: 53rd Annual Convention of the Computer Society of India, CSI 2020
+Source title: Communications in Computer and Information Science
+Year: 2021
+EID: 2-s2.0-85111020824
+DOI: 10.1007/978-981-16-2723-1_3
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

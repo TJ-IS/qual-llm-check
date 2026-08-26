@@ -1,0 +1,1400 @@
+{
+  "record_id": "28089",
+  "source_file": "28089_2025_predicting-instructor-performance-in-online-education-an-interpretable-hierarchical-transformer.md",
+  "title": "Predicting Instructor Performance in Online Education: An Interpretable Hierarchical Transformer with Contextual Attention",
+  "authors": "Wen Wang; Mi Zhou; Beibei Li; Honglei Zhuang",
+  "year": "2025",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2021.0310",
+  "fulltext_chars": 83070,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "education_training_and_learning",
+  "stage": "isr_micro",
+  "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+  "prompt_fingerprint": "8c6c7f01ed07488b679bb551a4b5a1b2a1d4c366f500bf896d100d299a33f8e2",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T07:01:31.630326+00:00",
+  "verified_macro_scaffold_cn": "本文以在线教育市场规模和疫情冲击建立现实紧迫性，提出教师缺乏在线教学经验、平台依赖评分但新课程缺少质量信号两大痛点；继而将痛点转化为两类技术挑战（课程层级结构与讲座顺序依赖、深度模型黑箱不可解释），据此设计一个局部BERT+全局Transformer+上下文注意力的可解释层级模型。证据链依次为：Coursera 1085门免费课程的描述统计与标签定义；与14种传统机器学习基线和LectureBERT的性能比较；去除上下文注意力和层级结构的消融归因；讲座级注意力可视化、句子级两级反事实、词级五种言语线索的三层可解释分析；AMT随机实验展示平台课程排名用途；结论将结果回接到平台、教师、学生三方利益相关者并声明观察数据不能做因果推断。全文主导论证是计算制品在预测性能上的优势，辅以可解释洞察和外部用户偏好实验，将技术贡献逐步升级为面向在线教育平台与教师的IS管理贡献。",
+  "abstract_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Abstract P1 S1",
+      "paraphrase_cn": "在线教育是一个正在快速技术变革的重要消费产业。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "开篇为全文设定产业级现实背景，说明研究领域重要。",
+      "inherits_from_previous_cn": "无。",
+      "changes_argument_state_cn": "建立“在线教育重要且变化快”的前提。",
+      "sets_up_next_cn": "引出需要开发预测教师表现的模型。",
+      "failure_if_removed_cn": "缺少背景，读者不清楚为什么需要该预测工具。",
+      "evidence_pointer": "Abstract first sentence"
+    },
+    {
+      "order": 2,
+      "locator": "Abstract P1 S2",
+      "paraphrase_cn": "本文开发深度学习模型，从内容视角预测在线教育平台上的教师表现。",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "直接给出研究目标和总体方法方向。",
+      "inherits_from_previous_cn": "承接在线教育重要的背景。",
+      "changes_argument_state_cn": "将一般背景收窄到具体研究任务。",
+      "sets_up_next_cn": "预告模型和预测对象。",
+      "failure_if_removed_cn": "读者不知道论文要做什么。",
+      "evidence_pointer": "Abstract second sentence"
+    },
+    {
+      "order": 3,
+      "locator": "Abstract P1 S3",
+      "paraphrase_cn": "设计带上下文注意力的可解释层级Transformer，用文本数据预测教师评分和课程评分。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "将研究目标具体化为制品名称，提供技术标签。",
+      "inherits_from_previous_cn": "承接深度学习预测教师表现的目标。",
+      "changes_argument_state_cn": "明确模型的架构关键词和两个输出任务。",
+      "sets_up_next_cn": "解释模型为何能解决层级和解释问题。",
+      "failure_if_removed_cn": "读者无法预先了解核心制品。",
+      "evidence_pointer": "Abstract third sentence"
+    },
+    {
+      "order": 4,
+      "locator": "Abstract P1 S4",
+      "paraphrase_cn": "模型捕获在线课程固有的层级结构和课程内讲座的次序依赖。",
+      "move_code": "MECHANISM",
+      "statement_status": "theory_claim",
+      "why_here_cn": "说明制品的第一个关键机制，对应课程结构挑战。",
+      "inherits_from_previous_cn": "承接“层级Transformer”设计。",
+      "changes_argument_state_cn": "将架构标签转化为机制承诺。",
+      "sets_up_next_cn": "为“不只预测还能解释”提供结构基础。",
+      "failure_if_removed_cn": "层级结构这一核心创新点没有显式承诺。",
+      "evidence_pointer": "Abstract fourth sentence"
+    },
+    {
+      "order": 5,
+      "locator": "Abstract P1 S5",
+      "paraphrase_cn": "模型超越单纯预测，支持可解释性分析，揭示预测背后的潜在原因。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "将可解释性作为模型的重要增值功能。",
+      "inherits_from_previous_cn": "依赖前面层级和注意力设计。",
+      "changes_argument_state_cn": "把论文价值从预测性能扩展到解释洞察。",
+      "sets_up_next_cn": "预告后续实验既比较性能也做解释分析。",
+      "failure_if_removed_cn": "可解释性贡献缺少摘要层面的声明。",
+      "evidence_pointer": "Abstract fifth sentence"
+    },
+    {
+      "order": 6,
+      "locator": "Abstract P1 S6",
+      "paraphrase_cn": "大量实验表明模型胜过经典机器学习和先进深度学习模型。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "在摘要中给出性能优势的总体结论。",
+      "inherits_from_previous_cn": "依赖模型设计和实验设置。",
+      "changes_argument_state_cn": "将制品从设计承诺转为有证据的技术优势。",
+      "sets_up_next_cn": "为后续可解释和应用实验铺垫可信度。",
+      "failure_if_removed_cn": "读者不知道性能结果是否成立。",
+      "evidence_pointer": "Abstract sixth sentence"
+    },
+    {
+      "order": 7,
+      "locator": "Abstract P1 S7",
+      "paraphrase_cn": "进一步进行深层的可解释性分析，从讲座、句子和词级探索什么因素预测在线课程成功。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "预告三级解释性证据及其管理价值。",
+      "inherits_from_previous_cn": "承接上面“可解释性分析”的承诺。",
+      "changes_argument_state_cn": "定义了解释性分析的具体粒度。",
+      "sets_up_next_cn": "对应正文第5节的三个子节。",
+      "failure_if_removed_cn": "解释性贡献粒度不清晰。",
+      "evidence_pointer": "Abstract seventh sentence"
+    },
+    {
+      "order": 8,
+      "locator": "Abstract P1 S8",
+      "paraphrase_cn": "还通过随机实验展示模型的价值与适用性。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "预告平台端外部有效性证据。",
+      "inherits_from_previous_cn": "前面建立的模型能力。",
+      "changes_argument_state_cn": "把证据从离线性能扩展到用户偏好。",
+      "sets_up_next_cn": "对应第六部分的AMT实验。",
+      "failure_if_removed_cn": "平台应用贡献缺少摘要承诺。",
+      "evidence_pointer": "Abstract eighth sentence"
+    },
+    {
+      "order": 9,
+      "locator": "Abstract P1 S9",
+      "paraphrase_cn": "研究发现和方法为在线教师和平台改进课程创建与交付提供管理启示。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "收束全篇，点明利益相关者与管理价值。",
+      "inherits_from_previous_cn": "依赖性能、解释和随机实验结果。",
+      "changes_argument_state_cn": "把技术贡献升级为IS管理贡献。",
+      "sets_up_next_cn": "为引言和结论的贡献列表定调。",
+      "failure_if_removed_cn": "论文缺少最终价值定位。",
+      "evidence_pointer": "Abstract ninth sentence"
+    }
+  ],
+  "introduction_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Introduction P1 S1-S2",
+      "paraphrase_cn": "教育是全球经济重要产业，美国教育服务市场2020年达1.6万亿美元。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "用市场规模把教育产业的重要性客观化。",
+      "inherits_from_previous_cn": "无。",
+      "changes_argument_state_cn": "为在线教育的重要叙事提供宏观起点。",
+      "sets_up_next_cn": "让随后在线教育增长数据具有经济意义。",
+      "failure_if_removed_cn": "缺乏产业规模的客观锚点。",
+      "evidence_pointer": "Introduction P1 S1-S2; IBISWorld 2020"
+    },
+    {
+      "order": 2,
+      "locator": "Introduction P1 S3-S4",
+      "paraphrase_cn": "教育对个人生活至关重要；在线教育市场快速增长，预计2025年达3190亿美元。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "从全球和个人两个层面凸显在线教育增长。",
+      "inherits_from_previous_cn": "承接教育产业重要性的起点。",
+      "changes_argument_state_cn": "把焦点从广义教育转移到在线教育市场。",
+      "sets_up_next_cn": "引出主导平台和大量学习者。",
+      "failure_if_removed_cn": "在线教育的增长理由不足。",
+      "evidence_pointer": "Introduction P1 S3-S4; Research and Markets 2020"
+    },
+    {
+      "order": 3,
+      "locator": "Introduction P1 S5-S6",
+      "paraphrase_cn": "市场由Coursera、Udemy等大平台主导，为全球学生提供远程学习机会，Coursera有约7000万学习者。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "把在线教育市场与具体平台、用户规模联系起来。",
+      "inherits_from_previous_cn": "承接在线教育市场规模。",
+      "changes_argument_state_cn": "确立平台和教师是研究涉及的核心利益相关者。",
+      "sets_up_next_cn": "为后文平台推荐和教师角色铺垫。",
+      "failure_if_removed_cn": "平台与教师的问题缺乏载体。",
+      "evidence_pointer": "Introduction P1 S5-S6; Coursera 2020"
+    },
+    {
+      "order": 4,
+      "locator": "Introduction P1 S7-S8",
+      "paraphrase_cn": "疫情导致教育系统中断，影响超16亿学习者，许多学校转向在线教学，教师被迫适应在线授课。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "用疫情冲击强化现实紧迫性。",
+      "inherits_from_previous_cn": "承接在线教育快速扩张背景。",
+      "changes_argument_state_cn": "把“在线教育重要”升级为“在线教师面临即时困难”。",
+      "sets_up_next_cn": "引出P2教师缺乏经验的问题。",
+      "failure_if_removed_cn": "在线教学紧迫感减弱。",
+      "evidence_pointer": "Introduction P1 S7-S8; United Nations 2020"
+    },
+    {
+      "order": 5,
+      "locator": "Introduction P2 S1-S3",
+      "paraphrase_cn": "许多教师缺乏在线教学经验，线上与线下教学差异使其规划课程困难；调查显示美国150万教师中70%在疫情前从未教过在线课程。",
+      "move_code": "PHENOMENON",
+      "statement_status": "fact",
+      "why_here_cn": "提出教师端的具体痛点。",
+      "inherits_from_previous_cn": "疫情迫使教师转向在线。",
+      "changes_argument_state_cn": "从宏观背景进入微观教学困境。",
+      "sets_up_next_cn": "引出自动化备课辅助工具需求。",
+      "failure_if_removed_cn": "为教师提供工具的需求失去成因。",
+      "evidence_pointer": "Introduction P2 S1-S3; American Marketing Association 2020"
+    },
+    {
+      "order": 6,
+      "locator": "Introduction P2 S4",
+      "paraphrase_cn": "因此，自动辅助教师在线备课的工具对教育行业和社会至关重要。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "从教师痛点推出工具需求。",
+      "inherits_from_previous_cn": "承接教师缺少在线经验。",
+      "changes_argument_state_cn": "将经验困境转化为可被系统解决的需求缺口。",
+      "sets_up_next_cn": "随后把类似需求扩展到平台。",
+      "failure_if_removed_cn": "论文没有明确的第一类利益相关者价值。",
+      "evidence_pointer": "Introduction P2 S4"
+    },
+    {
+      "order": 7,
+      "locator": "Introduction P2 S5-S6",
+      "paraphrase_cn": "平台在推荐和排序中依赖评分作为质量信号；但对新课程准确衡量质量很困难，可能导致次优推荐。",
+      "move_code": "PHENOMENON",
+      "statement_status": "fact",
+      "why_here_cn": "提出平台端的商业痛点。",
+      "inherits_from_previous_cn": "平台主导在线教育市场。",
+      "changes_argument_state_cn": "补充第二类利益相关者（平台）的缺口。",
+      "sets_up_next_cn": "引出基于内容的质量预测需求。",
+      "failure_if_removed_cn": "平台利用本模型的动机不足。",
+      "evidence_pointer": "Introduction P2 S5-S6"
+    },
+    {
+      "order": 8,
+      "locator": "Introduction P2 S7-S8",
+      "paraphrase_cn": "因此，自动基于课程内容预测产品质量的工具对平台商业成功非常重要。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "把平台次优推荐问题转化为内容质量预测需求。",
+      "inherits_from_previous_cn": "承接平台难以测度新课程质量。",
+      "changes_argument_state_cn": "将两个痛点统一为同一个工具目标。",
+      "sets_up_next_cn": "P3给出具体研究目标。",
+      "failure_if_removed_cn": "论文目标缺乏实践来源。",
+      "evidence_pointer": "Introduction P2 S7-S8"
+    },
+    {
+      "order": 9,
+      "locator": "Introduction P3 S1-S2",
+      "paraphrase_cn": "本研究开发这样一个工具，从内容视角预测课程评分；输入是讲座字幕等非结构化内容，输出是反映教学表现或课程质量的评分。",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "把两个缺口收敛为可建模的输入输出定义。",
+      "inherits_from_previous_cn": "承接自动内容质量预测需求。",
+      "changes_argument_state_cn": "明确预测任务的输入和输出。",
+      "sets_up_next_cn": "用学生评教文献为输出标签提供合法性。",
+      "failure_if_removed_cn": "研究对象不清晰。",
+      "evidence_pointer": "Introduction P3 S1-S2"
+    },
+    {
+      "order": 10,
+      "locator": "Introduction P3 S3-S6",
+      "paraphrase_cn": "学生评分是衡量教学表现最常用指标：线下大学用它评估教师并决策终身教职，线上平台也展示教师和课程评分作为质量指示。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为把学生评分作为预测标签提供学术和平台双重合法性。",
+      "inherits_from_previous_cn": "承接输出评分定义。",
+      "changes_argument_state_cn": "使标签选择有据可依。",
+      "sets_up_next_cn": "提出实现该工具面临的技术挑战。",
+      "failure_if_removed_cn": "为何预测学生评分而非其他指标缺少理由。",
+      "evidence_pointer": "Introduction P3 S3-S6; Wilson 1932; Costin et al. 1971; Coursera 2020"
+    },
+    {
+      "order": 11,
+      "locator": "Introduction P4 S1-S2",
+      "paraphrase_cn": "第一个挑战是课程具有层级结构：每门课由一系列有强顺序依赖的讲座组成，如何利用这种层级结构预测教师表现是难题。",
+      "move_code": "LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "指出领域数据天然结构对预测方法的制约。",
+      "inherits_from_previous_cn": "承接“基于课程内容预测评分”。",
+      "changes_argument_state_cn": "为层级Transformer设计提供问题来源。",
+      "sets_up_next_cn": "引出P5的全局-局部层级架构。",
+      "failure_if_removed_cn": "层级结构这个核心设计动机消失。",
+      "evidence_pointer": "Introduction P4 S1-S2"
+    },
+    {
+      "order": 12,
+      "locator": "Introduction P4 S3-S4",
+      "paraphrase_cn": "第二个挑战是深度学习模型常被视为黑箱，缺乏可解释性限制了信任；在线教育场景中可解释性对给教师和平台提供实用建议至关重要。",
+      "move_code": "LIMITATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "提出可解释性需求，为上下文注意力和解释性分析做铺垫。",
+      "inherits_from_previous_cn": "工具需要服务教师和平台决策。",
+      "changes_argument_state_cn": "将黑箱问题列为与性能并列的设计约束。",
+      "sets_up_next_cn": "引出P5的上下文注意力机制。",
+      "failure_if_removed_cn": "上下文注意力和三层解释分析失去必要性。",
+      "evidence_pointer": "Introduction P4 S3-S4"
+    },
+    {
+      "order": 13,
+      "locator": "Introduction P5 S1-S2",
+      "paraphrase_cn": "研究目标是开发带上下文注意力的可解释层级Transformer；采用全局-局部层级架构捕捉课程层级结构和讲座顺序依赖。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "将第一个挑战映射为具体架构选择。",
+      "inherits_from_previous_cn": "承接P4的层级结构挑战。",
+      "changes_argument_state_cn": "从问题转向制品设计。",
+      "sets_up_next_cn": "继续说明第二个组件。",
+      "failure_if_removed_cn": "层级结构挑战没有设计回应。",
+      "evidence_pointer": "Introduction P5 S1-S2"
+    },
+    {
+      "order": 14,
+      "locator": "Introduction P5 S3-S4",
+      "paraphrase_cn": "定制上下文注意力增强可解释性，帮助理解不同教育情境下预测评分如何变化，并为教师和平台提供洞察。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "将第二个挑战映射为注意力机制。",
+      "inherits_from_previous_cn": "承接可解释性需求。",
+      "changes_argument_state_cn": "把可解释性从目标变成具体设计。",
+      "sets_up_next_cn": "预告讲座级注意力分析。",
+      "failure_if_removed_cn": "上下文注意力组件无动机。",
+      "evidence_pointer": "Introduction P5 S3-S4"
+    },
+    {
+      "order": 15,
+      "locator": "Introduction P6 S1",
+      "paraphrase_cn": "用Coursera独有数据集验证模型，显示比14种非深度学习方法有显著性能提升，并通过消融将性能提升归因于层级结构、上下文注意力等各组件。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "预告主要性能证据和归因策略。",
+      "inherits_from_previous_cn": "依赖模型设计。",
+      "changes_argument_state_cn": "引入Coursera数据和消融实验。",
+      "sets_up_next_cn": "正文第4节将展开这些结果。",
+      "failure_if_removed_cn": "性能与组件归因证据在引言中没有大纲。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 16,
+      "locator": "Introduction P6 S2",
+      "paraphrase_cn": "还进行系列可解释性分析，在讲座、句子和词级揭示什么因素可预测课程成功。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "预告解释性证据的粒度。",
+      "inherits_from_previous_cn": "承接可解释性设计。",
+      "changes_argument_state_cn": "把解释分析定位为论文证据的一部分。",
+      "sets_up_next_cn": "随后P7分别说明三个层级。",
+      "failure_if_removed_cn": "第5节层级分析缺少引言论语。",
+      "evidence_pointer": "Introduction P6 S2"
+    },
+    {
+      "order": 17,
+      "locator": "Introduction P7 S1-S2",
+      "paraphrase_cn": "讲座级用学到的上下文注意力展示不同教育情境（学科、难度、时长、归属）下每讲材料对预测的贡献；结果显示不同情境下讲座预测影响差异显著。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "概述第一个解释层次的核心发现。",
+      "inherits_from_previous_cn": "依赖上下文注意力设计。",
+      "changes_argument_state_cn": "把注意力权重描述为有管理意义的结果。",
+      "sets_up_next_cn": "引出后续句子级分析。",
+      "failure_if_removed_cn": "讲座级分析发现未在引言体现。",
+      "evidence_pointer": "Introduction P7 S1-S2"
+    },
+    {
+      "order": 18,
+      "locator": "Introduction P7 S3-S4",
+      "paraphrase_cn": "句子级采用两级反事实预测识别可能拉低预测评分的坏句子，进一步研究为何这些句子负面影响课程评分；结果显示坏句子与课程主题明显不相关。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "概述第二个解释层次的方法与关键发现。",
+      "inherits_from_previous_cn": "承接第5节的方法路线图。",
+      "changes_argument_state_cn": "将反事实预测纳入证据链。",
+      "sets_up_next_cn": "为词级分析做铺垫。",
+      "failure_if_removed_cn": "句子级解释贡献缺失。",
+      "evidence_pointer": "Introduction P7 S3-S4"
+    },
+    {
+      "order": 19,
+      "locator": "Introduction P7 S5-S6",
+      "paraphrase_cn": "词级提取五种言语线索并研究其对评分的预测影响，用反事实修改线索考察预测变化。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "概述第三个解释层次的方法。",
+      "inherits_from_previous_cn": "承接前两个层级的可解释性叙事。",
+      "changes_argument_state_cn": "把词级线索纳入管理建议。",
+      "sets_up_next_cn": "为教师词汇选择提供指引。",
+      "failure_if_removed_cn": "词级分析没有前导。",
+      "evidence_pointer": "Introduction P7 S5-S6"
+    },
+    {
+      "order": 20,
+      "locator": "Introduction P8 S1-S2",
+      "paraphrase_cn": "除帮助教师外，方法还能帮助平台；通过随机实验展示模型对平台的适用性和价值。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "从教师端转向平台端应用证据。",
+      "inherits_from_previous_cn": "前面建立的预测和解释能力。",
+      "changes_argument_state_cn": "引入外部用户实验作为新证据类型。",
+      "sets_up_next_cn": "具体说明实验中两个列表的对比。",
+      "failure_if_removed_cn": "平台端价值缺少引言承诺。",
+      "evidence_pointer": "Introduction P8 S1-S2"
+    },
+    {
+      "order": 21,
+      "locator": "Introduction P8 S3-S5",
+      "paraphrase_cn": "实验显示71%参与者偏好模型生成列表，且模型列表平均评分显著高于随机列表。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "在引言中给出随机实验的核心结果，强化外部有效性。",
+      "inherits_from_previous_cn": "依赖随机实验设计。",
+      "changes_argument_state_cn": "把离线预测优势转化为用户偏好证据。",
+      "sets_up_next_cn": "解释平台如何据此改进排序。",
+      "failure_if_removed_cn": "平台应用的价值缺少量化证据。",
+      "evidence_pointer": "Introduction P8 S3-S5"
+    },
+    {
+      "order": 22,
+      "locator": "Introduction P8 S6",
+      "paraphrase_cn": "平台可利用模型改进课程排名，例如在推荐或搜索页优先推荐预测评分更高的课程。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "author_inference",
+      "why_here_cn": "把实验结果翻译为平台业务动作。",
+      "inherits_from_previous_cn": "承接用户偏好实验结果。",
+      "changes_argument_state_cn": "从结果升级为管理应用建议。",
+      "sets_up_next_cn": "为第6节详细平台使用场景做铺垫。",
+      "failure_if_removed_cn": "平台使用建议缺少操作化描述。",
+      "evidence_pointer": "Introduction P8 S6"
+    },
+    {
+      "order": 23,
+      "locator": "Introduction P9 S1-S3",
+      "paraphrase_cn": "贡献有三：最早将层级Transformer应用于在线教育并改进预测；上下文注意力带来可解释预测洞察；通过随机实验证明模型可作为利益相关者的决策支持系统。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "以三列表形式浓缩全文贡献，方便审稿与读者把握。",
+      "inherits_from_previous_cn": "依赖引言所有前面的问题、设计和结果预告。",
+      "changes_argument_state_cn": "把全文价值显式声明为三点。",
+      "sets_up_next_cn": "结论部分将回扣此三贡献。",
+      "failure_if_removed_cn": "论文贡献不明确，读者难以快速评估。",
+      "evidence_pointer": "Introduction P9 S1-S3"
+    },
+    {
+      "order": 24,
+      "locator": "Introduction P9 S4",
+      "paraphrase_cn": "模型和发现为教师和平台提供改进课程创建与交付的新工具。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "用利益相关者价值收束引言。",
+      "inherits_from_previous_cn": "承接前三条贡献。",
+      "changes_argument_state_cn": "把技术贡献连接到实际应用者。",
+      "sets_up_next_cn": "为文献综述和模型部分提供阅读框架。",
+      "failure_if_removed_cn": "引言缺少最后的价值落点。",
+      "evidence_pointer": "Introduction P9 S4"
+    }
+  ],
+  "introduction_paragraph_map": [
+    {
+      "locator": "Introduction P1",
+      "opening_move_cn": "用美国教育市场规模$1.6万亿开启宏观重要性。",
+      "development_move_cn": "依次叠加在线教育市场$3190亿、大平台、7000万学习者、疫情冲击16亿学习者。",
+      "pivot_move_cn": "从“教育重要”收窄到“在线教育中的教师被迫转向在线”。",
+      "closing_move_cn": "以学校和教师被迫适应在线授课制造下一段的实践痛点。",
+      "paragraph_job_cn": "建立教育特别是在线教育的现实重要性，为全文铺设宏观背景。"
+    },
+    {
+      "locator": "Introduction P2",
+      "opening_move_cn": "宣布存在若干管理相关的在线教育问题。",
+      "development_move_cn": "分别发展教师缺乏在线经验（70%从未教过）和平台依赖评分却难以测度新课程质量。",
+      "pivot_move_cn": "从教师困境转向平台商业问题，但两者都被同一个自动化预测工具覆盖。",
+      "closing_move_cn": "两次强调“自动工具至关重要”，制造研究目标。",
+      "paragraph_job_cn": "建立两类利益相关者（教师、平台）的现实缺口，为工具目标提供实践理由。"
+    },
+    {
+      "locator": "Introduction P3",
+      "opening_move_cn": "宣布本研究要开发这样的工具并给出输入输出定义。",
+      "development_move_cn": "用学生评教文献（线下评估、线上展示）为预测目标提供合法性。",
+      "pivot_move_cn": "从“工具开发”转向“为什么预测学生评分”。",
+      "closing_move_cn": "强调预测学生评分对平台和网络教学的成功都很重要。",
+      "paragraph_job_cn": "明确研究目标、输入输出和标签选择依据。"
+    },
+    {
+      "locator": "Introduction P4",
+      "opening_move_cn": "指出虽然工具紧迫，但存在多个非平凡挑战。",
+      "development_move_cn": "展开第一个挑战（课程层级结构与讲座顺序依赖）和第二个挑战（深度模型黑箱）。",
+      "pivot_move_cn": "从“技术上如何建模”转向“可解释性在在线教育中的必要性”。",
+      "closing_move_cn": "以“可解释性必不可少”为下一段的上下文注意力设计制造需要。",
+      "paragraph_job_cn": "将实践缺口转化为两个领域特有的技术设计约束。"
+    },
+    {
+      "locator": "Introduction P5",
+      "opening_move_cn": "宣布研究要解决这些挑战。",
+      "development_move_cn": "先描述全局-局部层级架构，再描述定制上下文注意力。",
+      "pivot_move_cn": "从架构整体转向可解释性组件。",
+      "closing_move_cn": "以“提供不同教育情境下的洞察”引出后续解释分析。",
+      "paragraph_job_cn": "把两个挑战映射为模型的两个核心设计组件。"
+    },
+    {
+      "locator": "Introduction P6",
+      "opening_move_cn": "用Coursera数据演示模型的可行性和价值。",
+      "development_move_cn": "给出性能优势、消融归因和解释分析的总体结果。",
+      "pivot_move_cn": "从离线性能转向解释性分析。",
+      "closing_move_cn": "以“哪些因素在不同粒度预测课程成功”预告第5节。",
+      "paragraph_job_cn": "预告实证策略：基准+消融+多级解释分析。"
+    },
+    {
+      "locator": "Introduction P7",
+      "opening_move_cn": "按讲座、句子、词三个层级逐一预演解释分析。",
+      "development_move_cn": "每级都介绍方法（注意力、两级反事实、言语线索）和一条关键发现。",
+      "pivot_move_cn": "从“做了什么”转向“这些洞察可用于指导未来课程设计与准备”。",
+      "closing_move_cn": "以“初始指南”为教师与平台的行动做铺垫。",
+      "paragraph_job_cn": "让读者提前掌握三级解释证据及其管理用途。"
+    },
+    {
+      "locator": "Introduction P8",
+      "opening_move_cn": "用“除了帮助教师，还可以帮助平台”作为转向。",
+      "development_move_cn": "描述随机实验设计与核心结果（71%偏好、更高平均分）。",
+      "pivot_move_cn": "从实验结果推导出平台排序应用。",
+      "closing_move_cn": "举推荐/搜索页排序例子，制造第6节详细展示的需要。",
+      "paragraph_job_cn": "引入平台端外部有效性证据，把模型应用从教师扩展到平台。"
+    },
+    {
+      "locator": "Introduction P9",
+      "opening_move_cn": "用“总之”开启贡献总结。",
+      "development_move_cn": "并列三条贡献：首次技术应用、可解释组件、决策支持随机实验。",
+      "pivot_move_cn": "从具体贡献转向总体利益相关者价值。",
+      "closing_move_cn": "以“新工具促进课程创建与交付”闭合引言。",
+      "paragraph_job_cn": "显式声明论文贡献，为审稿和读者提供速览。"
+    }
+  ],
+  "theory_to_design_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Section 2.1 P1 S1-S8",
+      "paraphrase_cn": "在线教育虽经济重要但在商业研究中关注较少，已有研究涵盖留存、MOOC商业模式、社会互动、计算机辅助学习和视频消费等。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "综述该领域已有IS研究以定位本文。",
+      "inherits_from_previous_cn": "承接引言在线教育重要性。",
+      "changes_argument_state_cn": "勾勒相关文献版图并留下“缺少自动化教师表现预测”的空位。",
+      "sets_up_next_cn": "为本节末“补充这些研究”的缺口声明提供材料。",
+      "failure_if_removed_cn": "文献定位缺失，贡献难以与已有工作区分。",
+      "evidence_pointer": "Section 2.1 P1"
+    },
+    {
+      "order": 2,
+      "locator": "Section 2.1 P1 S9",
+      "paraphrase_cn": "本文通过设计自动化系统准确预测教师表现并为教师和平台提供启示，补充上述研究。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "在综述末声明本文的独特定位。",
+      "inherits_from_previous_cn": "前文罗列的已有研究。",
+      "changes_argument_state_cn": "明确文献中的缺口由本文制品填补。",
+      "sets_up_next_cn": "引导到教育挖掘文献。",
+      "failure_if_removed_cn": "第2.1节没有收敛到本文贡献。",
+      "evidence_pointer": "Section 2.1 P1 last sentence"
+    },
+    {
+      "order": 3,
+      "locator": "Section 2.2 P1 S1-S5",
+      "paraphrase_cn": "回顾教育挖掘文献，包括学生行为分析、课程概念挖掘、课程推荐、退课预测等。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "说明本文属于教育挖掘脉络。",
+      "inherits_from_previous_cn": "延续在线教育商业研究综述。",
+      "changes_argument_state_cn": "把领域从商业研究推进到教育挖掘方法。",
+      "sets_up_next_cn": "为“基于课程内容预测教师表现”的新问题做铺垫。",
+      "failure_if_removed_cn": "本文与教育挖掘方法的关联不清晰。",
+      "evidence_pointer": "Section 2.2 P1"
+    },
+    {
+      "order": 4,
+      "locator": "Section 2.2 P1 S6",
+      "paraphrase_cn": "本文关注一个有管理相关性的新问题：基于课程材料内容预测教师表现，并开发可解释层级Transformer预测教师评分与课程评分。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "在教育挖掘综述后声明本文的新问题和新方法。",
+      "inherits_from_previous_cn": "依赖前述教育挖掘文献。",
+      "changes_argument_state_cn": "把本文从“一般教育挖掘”收敛到“教师表现内容预测”。",
+      "sets_up_next_cn": "引出传统教育理论文献。",
+      "failure_if_removed_cn": "教育挖掘综述缺少与本文的接口。",
+      "evidence_pointer": "Section 2.2 P1 final sentence"
+    },
+    {
+      "order": 5,
+      "locator": "Section 2.3 P1 S1-S2",
+      "paraphrase_cn": "传统教育理论关注教师绩效评估和教学技能，但多依赖自我报告调查或小规模定性方法。",
+      "move_code": "LIMITATION",
+      "statement_status": "prior_literature",
+      "why_here_cn": "指出传统教育研究的规模与方法局限。",
+      "inherits_from_previous_cn": "承接教师表现预测的主题。",
+      "changes_argument_state_cn": "为“可扩展、自动化内容预测”制造对照空间。",
+      "sets_up_next_cn": "引出本文相对于传统教育研究的方法优势。",
+      "failure_if_removed_cn": "传统研究的局限没有被点明，本文扩展价值不清楚。",
+      "evidence_pointer": "Section 2.3 P1"
+    },
+    {
+      "order": 6,
+      "locator": "Section 2.3 P1 S3",
+      "paraphrase_cn": "本文从内容视角扩展该文献，以可扩展、自动化的方式预测教师表现，并给出可解释洞察。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "把方法改进声明为对传统教育研究的扩展。",
+      "inherits_from_previous_cn": "承接传统研究的局限性。",
+      "changes_argument_state_cn": "提出自动化可扩展作为本文相对传统研究的贡献。",
+      "sets_up_next_cn": "转向NLP/Transformer技术文献。",
+      "failure_if_removed_cn": "本文与传统教育研究的差异不明确。",
+      "evidence_pointer": "Section 2.3 P1 S3"
+    },
+    {
+      "order": 7,
+      "locator": "Section 2.4 P1 S1-S2",
+      "paraphrase_cn": "NLP在IS研究中广泛应用，Transformer在玩笑检测、仇恨言论、假新闻、药品副作用等真实问题中取得显著成功。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为使用Transformer提供领域技术背景。",
+      "inherits_from_previous_cn": "承接可自动化内容预测的需求。",
+      "changes_argument_state_cn": "将本文方法放进先进的NLP技术谱系。",
+      "sets_up_next_cn": "为“首次定制并应用于课程语料”的创新声明做准备。",
+      "failure_if_removed_cn": "Transformer方法选择显得孤立。",
+      "evidence_pointer": "Section 2.4 P1"
+    },
+    {
+      "order": 8,
+      "locator": "Section 2.4 P1 S3",
+      "paraphrase_cn": "据作者所知，本文首次开发带上下文注意力的可解释层级Transformer，并首次将该类模型应用于课程语料获得显著性能。",
+      "move_code": "GAP",
+      "statement_status": "author_inference",
+      "why_here_cn": "用“首次”声明界定本文技术创新点。",
+      "inherits_from_previous_cn": "承接Transformer真实应用文献。",
+      "changes_argument_state_cn": "从技术背景推进到技术贡献。",
+      "sets_up_next_cn": "为模型部分提供创新预期。",
+      "failure_if_removed_cn": "技术创新声明缺失。",
+      "evidence_pointer": "Section 2.4 P1 S3"
+    },
+    {
+      "order": 9,
+      "locator": "Section 3 P1 S1-S4",
+      "paraphrase_cn": "收集Coursera 1085门免费课程，平台服务超7000万学习者；平均每门课约40讲、每讲约1159个token。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "fact",
+      "why_here_cn": "为后续模型训练和验证提供数据基础。",
+      "inherits_from_previous_cn": "引言中把Coursera作为主要平台。",
+      "changes_argument_state_cn": "从方法设计进入实证数据。",
+      "sets_up_next_cn": "引出课程评分与教师评分标签定义。",
+      "failure_if_removed_cn": "实证验证没有数据对象。",
+      "evidence_pointer": "Section 3 P1; Table 1"
+    },
+    {
+      "order": 10,
+      "locator": "Section 3 P2 S1-S4",
+      "paraphrase_cn": "Coursera像多数在线平台一样依赖用户评分；平台展示课程评分（整体体验）和教师评分（课后调查衡量教学）。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "fact",
+      "why_here_cn": "说明两个预测标签的来历和含义。",
+      "inherits_from_previous_cn": "引言提到学生评分作为质量信号。",
+      "changes_argument_state_cn": "把评分标签与平台实践对应起来。",
+      "sets_up_next_cn": "解释只有聚合平均评分、无个体评分。",
+      "failure_if_removed_cn": "两个预测任务缺少平台定义。",
+      "evidence_pointer": "Section 3 P2"
+    },
+    {
+      "order": 11,
+      "locator": "Section 3 P2 S5-S6",
+      "paraphrase_cn": "每个教师在不同课程有不同评分；观察到的只是聚合平均评分而不是个体学生评分。",
+      "move_code": "METHOD_DECISION",
+      "statement_status": "fact",
+      "why_here_cn": "明确数据可观察性边界。",
+      "inherits_from_previous_cn": "承接两个评分的含义。",
+      "changes_argument_state_cn": "界定模型的预测单元是课程级平均分。",
+      "sets_up_next_cn": "为结论中“无法分析个体评分者”的限制做铺垫。",
+      "failure_if_removed_cn": "评分标签的操作定义不完整。",
+      "evidence_pointer": "Section 3 P2 S5-S6"
+    },
+    {
+      "order": 12,
+      "locator": "Section 3 P3",
+      "paraphrase_cn": "两个评分均介于1到5，大部分偏向右端高分段，但少数为极低分。",
+      "move_code": "EMPIRICAL_RESULT",
+      "statement_status": "fact",
+      "why_here_cn": "描述标签分布以说明预测难度和数据偏斜。",
+      "inherits_from_previous_cn": "依赖评分数据收集。",
+      "changes_argument_state_cn": "让读者了解有偏分布，解释为什么绝对提升幅度不大。",
+      "sets_up_next_cn": "为模型设计需要处理偏斜目标做铺垫。",
+      "failure_if_removed_cn": "评分分布背景缺失，后续MSE数值难以解读。",
+      "evidence_pointer": "Figure 1; Section 3 P3"
+    },
+    {
+      "order": 13,
+      "locator": "Section 4.1 intro P1",
+      "paraphrase_cn": "模型考虑在线课程固有层级结构、讲座顺序依赖，并用上下文注意力建模不同教育情境，提供与管理相关的可解释性。",
+      "move_code": "REQUIREMENT",
+      "statement_status": "design_decision",
+      "why_here_cn": "把研究目标转化为模型设计需求。",
+      "inherits_from_previous_cn": "承接引言中两个挑战。",
+      "changes_argument_state_cn": "建立需求-设计映射的起点。",
+      "sets_up_next_cn": "随后三个小节分别实现需求。",
+      "failure_if_removed_cn": "组件设计没有总纲。",
+      "evidence_pointer": "Section 4.1 intro P1"
+    },
+    {
+      "order": 14,
+      "locator": "Section 4.1.1 P1",
+      "paraphrase_cn": "局部Transformer在每讲字幕两端加入[CLS]和[SEP]，用预训练BERT做前向传播，再对token嵌入取平均池化得到讲座表示。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "method_decision",
+      "why_here_cn": "通过局部编码提取每个讲座的语义特征。",
+      "inherits_from_previous_cn": "层级需求中的“局部”部分。",
+      "changes_argument_state_cn": "给出讲座级嵌入的具体构造。",
+      "sets_up_next_cn": "为全局Transformer提供输入序列。",
+      "failure_if_removed_cn": "局部讲座语义无法进入模型。",
+      "evidence_pointer": "Section 4.1.1 P1; Figure 2"
+    },
+    {
+      "order": 15,
+      "locator": "Section 4.1.2 P1",
+      "paraphrase_cn": "在局部Transformer之上加入全局Transformer层，对整门课的讲座表示序列做自注意力信息交换，以捕获课程层级和讲座顺序依赖。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "将领域层级结构直接编码进模型的全局层。",
+      "inherits_from_previous_cn": "依赖局部讲座嵌入。",
+      "changes_argument_state_cn": "使模型能感知课程内讲座之间的关系。",
+      "sets_up_next_cn": "全局输出作为上下文注意力的输入。",
+      "failure_if_removed_cn": "层级结构这一核心设计无法实现。",
+      "evidence_pointer": "Section 4.1.2 P1; Equations (1)-(2)"
+    },
+    {
+      "order": 16,
+      "locator": "Section 4.1.3 P1-P2",
+      "paraphrase_cn": "教育情境（学科、难度、时长、归属）在线下线上都影响课程差异；不同情境下学生对教学内容重点可能不同，因此需要建模这种异质性。",
+      "move_code": "MECHANISM",
+      "statement_status": "theory_claim",
+      "why_here_cn": "为上下文注意力提供教育学与情境异质性依据。",
+      "inherits_from_previous_cn": "承接模型对课程结构的刻画。",
+      "changes_argument_state_cn": "把情境异质性上升为设计必须处理的对象。",
+      "sets_up_next_cn": "提出用情境嵌入对讲座加权。",
+      "failure_if_removed_cn": "上下文注意力缺少行为层面的理由。",
+      "evidence_pointer": "Section 4.1.3 P1-P2"
+    },
+    {
+      "order": 17,
+      "locator": "Section 4.1.3 P3",
+      "paraphrase_cn": "设置学科、难度、时长、归属四种嵌入来构造上下文注意力，用注意力权重表示每个讲座在各情境下对最终预测的贡献。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把情境异质性机制转化为可计算的注意力结构。",
+      "inherits_from_previous_cn": "承接“需要对讲座加权”的机制。",
+      "changes_argument_state_cn": "给出可解释权重的来源。",
+      "sets_up_next_cn": "通过公式(3)-(8)完成预测层。",
+      "failure_if_removed_cn": "可解释性和讲座级分析失去对象。",
+      "evidence_pointer": "Section 4.1.3 P3; Equations (3)-(8)"
+    },
+    {
+      "order": 18,
+      "locator": "Section 4.2 P2 item (3)",
+      "paraphrase_cn": "LectureBERT作为深度基线，无法访问课程结构或情境信息，训练时假设同一课程内讲座独立共享同一评分，测试时平均讲座预测得到课程评分。",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "statement_status": "method_decision",
+      "why_here_cn": "构造一个“没有层级结构和情境”的对照，用于隔离结构贡献。",
+      "inherits_from_previous_cn": "依赖预测任务和模型设定。",
+      "changes_argument_state_cn": "建立消融链中的最小深度基线。",
+      "sets_up_next_cn": "表2和消融图中与LectureBERT的比较。",
+      "failure_if_removed_cn": "无法分离层级结构带来的增益。",
+      "evidence_pointer": "Section 4.2 item (3)"
+    },
+    {
+      "order": 19,
+      "locator": "Section 4.3.2 P1",
+      "paraphrase_cn": "除整体比较外，通过逐步去除模型组件来量化各组件预测力并解释模型优越性。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "method_decision",
+      "why_here_cn": "说明消融的目的：把整体性能优势归因到具体组件。",
+      "inherits_from_previous_cn": "承接整体性能比较结果。",
+      "changes_argument_state_cn": "从“模型更好”过渡到“为什么更好”。",
+      "sets_up_next_cn": "为去除注意力和层级两步比较做铺垫。",
+      "failure_if_removed_cn": "性能提升来源无法归因。",
+      "evidence_pointer": "Section 4.3.2 P1"
+    }
+  ],
+  "artifact_rationale_sentence_map": [
+    {
+      "locator": "Section 4.1 intro P1",
+      "paraphrase_cn": "模型要对课程层级结构、讲座顺序依赖和多种教育情境建模，并提供管理相关的可解释性。",
+      "move_code": "REQUIREMENT",
+      "statement_status": "design_decision",
+      "why_here_cn": "把研究目标直接转写为制品的设计约束。",
+      "inherits_from_previous_cn": "承接引言两个挑战。",
+      "changes_argument_state_cn": "使后续每个组件都有明确的设计来源。",
+      "sets_up_next_cn": "引出局部Transformer和全局Transformer。",
+      "failure_if_removed_cn": "组件设计失去总需求。",
+      "evidence_pointer": "Section 4.1 intro P1"
+    },
+    {
+      "locator": "Section 4.1.2 P1",
+      "paraphrase_cn": "为了捕捉课程层级和讲座顺序依赖，需要在局部讲座表示之上用全局Transformer交换课程内讲座信息。",
+      "move_code": "DESIGN_DECISION",
+      "statement_status": "design_decision",
+      "why_here_cn": "解释为什么加入全局Transformer层：因为单靠局部BERT无法感知讲座间关系。",
+      "inherits_from_previous_cn": "依赖局部BERT输出的讲座嵌入。",
+      "changes_argument_state_cn": "将“层级结构”落实到具体组件。",
+      "sets_up_next_cn": "为上下文注意力提供课程级表示。",
+      "failure_if_removed_cn": "层级结构这个核心创新没有实现。",
+      "evidence_pointer": "Section 4.1.2 P1"
+    },
+    {
+      "locator": "Section 4.1.3 P1-P2",
+      "paraphrase_cn": "教育情境能捕捉课程间固有差异；学生的评价可能因情境不同而变化，因为他们对课程材料的关注点不同。",
+      "move_code": "MECHANISM",
+      "statement_status": "theory_claim",
+      "why_here_cn": "为上下文注意力提供非技术层面的必要性。",
+      "inherits_from_previous_cn": "承接模型对结构的刻画。",
+      "changes_argument_state_cn": "说明情境异质性是评分预测中不可忽略的行为因素。",
+      "sets_up_next_cn": "引出用情境嵌入加权讲座。",
+      "failure_if_removed_cn": "上下文注意力被简化为纯工程技巧。",
+      "evidence_pointer": "Section 4.1.3 P1-P2"
+    },
+    {
+      "locator": "Section 4.1.3 P3",
+      "paraphrase_cn": "用四种情境嵌入为课程内各个讲座生成注意力权重，权重可作为每个讲座在具体情境下对预测贡献的指示器。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "让可解释性不依赖事后工具，而是内生于预测模型。",
+      "inherits_from_previous_cn": "承接情境异质性机制。",
+      "changes_argument_state_cn": "把“解释能力”编码进模型权重。",
+      "sets_up_next_cn": "讲座级可解释分析直接使用这些权重。",
+      "failure_if_removed_cn": "模型的解释性承诺无法兑现。",
+      "evidence_pointer": "Section 4.1.3 P3"
+    },
+    {
+      "locator": "Section 4.2 item (3)",
+      "paraphrase_cn": "LectureBERT作为对照刻意不访问课程结构和情境信息，因此它可以用来衡量层级结构的贡献。",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "statement_status": "method_decision",
+      "why_here_cn": "设计这个基线是为了在消融中分离“层级结构”这一组件。",
+      "inherits_from_previous_cn": "依赖预测任务定义。",
+      "changes_argument_state_cn": "为消融提供最小深度比较点。",
+      "sets_up_next_cn": "支撑第4.3.2节的比较(i)/(ii)/(iii)。",
+      "failure_if_removed_cn": "层级结构贡献无法被量化。",
+      "evidence_pointer": "Section 4.2 item (3)"
+    },
+    {
+      "locator": "Section 4.3.2 P1",
+      "paraphrase_cn": "消融通过去除上下文注意力（保留层级）和去除层级（保留下限LectureBERT）两步，量化每个组件贡献并解释模型优越性。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "method_decision",
+      "why_here_cn": "设计消融链是为了回答“整体优势来自哪里”。",
+      "inherits_from_previous_cn": "承接整体性能结果。",
+      "changes_argument_state_cn": "让组件贡献成为可检验的推论。",
+      "sets_up_next_cn": "为随后两个结果段铺垫。",
+      "failure_if_removed_cn": "设计选择的必要性没有被证据支持。",
+      "evidence_pointer": "Section 4.3.2 P1"
+    }
+  ],
+  "study_opening_transition_and_closure_map": [
+    {
+      "locator": "Section 3 Data opening P1",
+      "function_cn": "开启数据阶段",
+      "paraphrase_cn": "从Coursera收集1085门免费课程，描述数据规模和来源。",
+      "transition_effect_cn": "从方法设计转为实证数据基础，为后续模型训练和评估提供原料。"
+    },
+    {
+      "locator": "Section 4.1 Model Description opening P1",
+      "function_cn": "开启模型设计阶段",
+      "paraphrase_cn": "概述模型必须处理层级结构、讲座顺序和情境异质性。",
+      "transition_effect_cn": "把数据挑战转化为组件设计路线图。"
+    },
+    {
+      "locator": "Section 4.2 Experiment Setup opening P1",
+      "function_cn": "开启实验设计阶段",
+      "paraphrase_cn": "说明两个预测任务、五折交叉验证、验证集调参与测试报告方式。",
+      "transition_effect_cn": "使性能比较具有明确协议，为表2结果做方法准备。"
+    },
+    {
+      "locator": "Section 4.3.1 Model Comparison opening P1",
+      "function_cn": "开启性能结果阶段",
+      "paraphrase_cn": "报告表2各模型在两个任务上的MSE/MAE，说明模型最优且配对学生t检验显著。",
+      "transition_effect_cn": "建立整体性能优势，同时留下“优势来自哪里”的问题。"
+    },
+    {
+      "locator": "Section 4.3.2 Ablation Study opening P1",
+      "function_cn": "开启消融归因阶段",
+      "paraphrase_cn": "通过去除组件量化每个组件贡献并解释模型优越性。",
+      "transition_effect_cn": "把整体性能转化为两个设计组件的逐项证据。"
+    },
+    {
+      "locator": "Section 5 Decision Support Showcase opening P1",
+      "function_cn": "开启解释性分析阶段",
+      "paraphrase_cn": "强调模型超过预测，提供可解释性以揭示预测背后的机制并给教师行动建议。",
+      "transition_effect_cn": "从性能证据转向管理洞察证。"
+    },
+    {
+      "locator": "Section 5.1 Lecture-Level opening P1",
+      "function_cn": "开启讲座级分析",
+      "paraphrase_cn": "使用模型学到的上下文注意力权重，将每门课讲座分成五个等长块以比较不同情境下的讲座重要性。",
+      "transition_effect_cn": "把注意力权重转化为跨情境可比较的可视化证据。"
+    },
+    {
+      "locator": "Section 5.2 Sentence-Level opening P1",
+      "function_cn": "开启句子级分析",
+      "paraphrase_cn": "用两级反事实预测：先逐讲掩蔽识别坏讲座，再在坏讲座内逐句掩蔽识别坏句子。",
+      "transition_effect_cn": "将解释粒度从讲座推进到句子，并建立“删除后预测上升”的因果对照逻辑。"
+    },
+    {
+      "locator": "Section 5.3 Word-Level opening P1",
+      "function_cn": "开启词级分析",
+      "paraphrase_cn": "提取命名实体、WH词、情绪词多样性、强/弱情态词五种词级线索，进行相关与反事实预测分析。",
+      "transition_effect_cn": "把句子级发现进一步细化到可操作的词汇选择。"
+    },
+    {
+      "locator": "Section 6 Platform Showcase opening P1",
+      "function_cn": "开启平台应用阶段",
+      "paraphrase_cn": "说明平台可直接用模型做搜索、推荐和质量控制，辅助冷启动和专家初筛。",
+      "transition_effect_cn": "从教师端解释分析转向平台端决策支持。"
+    },
+    {
+      "locator": "Section 6 AMT experiment P2",
+      "function_cn": "开启随机实验",
+      "paraphrase_cn": "在AMT上设计两个课程列表（算法生成与随机生成）并招募100名工人比较偏好。",
+      "transition_effect_cn": "把平台应用从逻辑推演变成可随机对照的外部证据。"
+    },
+    {
+      "locator": "Section 7 Conclusions opening P1",
+      "function_cn": "开启结论总结",
+      "paraphrase_cn": "总结开发了可解释层级Transformer预测在线教师表现，提供即时可操作的工具。",
+      "transition_effect_cn": "收束全文证据，把技术结果回接为对在线教育的贡献。"
+    }
+  ],
+  "discussion_and_contribution_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Section 5.3 final paragraph P1",
+      "paraphrase_cn": "作者提醒研究聚焦预测模型，不宣称因果；但预测结果和可解释分析在课程内容如何影响产品表现的认知尚缺乏时仍有重要管理启示。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "author_inference",
+      "why_here_cn": "在相关与反事实分析之后立即声明不做过度的因果解释。",
+      "inherits_from_previous_cn": "承接前面的相关分析和反事实预测。",
+      "changes_argument_state_cn": "把解释性证据限定在预测框架内。",
+      "sets_up_next_cn": "为结论部分的观察数据限制做铺垫。",
+      "failure_if_removed_cn": "读者可能把相关/反事实误读为因果。",
+      "evidence_pointer": "Section 5.3 final paragraph"
+    },
+    {
+      "order": 2,
+      "locator": "Section 6 P1 S1-S6",
+      "paraphrase_cn": "平台可直接用模型于搜索、推荐和质量控制，缓解冷启动，补充人工专家并支撑大规模自动质量评估。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "author_inference",
+      "why_here_cn": "在结论前集中阐述平台端决策支持价值。",
+      "inherits_from_previous_cn": "依赖模型预测能力。",
+      "changes_argument_state_cn": "把离线性能转化为平台运营价值。",
+      "sets_up_next_cn": "引出AMT随机实验来证明这种转化。",
+      "failure_if_removed_cn": "平台端应用贡献缺少理论化描述。",
+      "evidence_pointer": "Section 6 P1 S1-S6"
+    },
+    {
+      "order": 3,
+      "locator": "Section 6 P2 S1-S4",
+      "paraphrase_cn": "为展示适用性，在AMT做随机实验：生成模型预测的前10门课程列表和10门随机课程列表，向100名工人展示近似Coursera界面的两个列表。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "method_decision",
+      "why_here_cn": "用随机对照实验为平台应用价值提供外部证据。",
+      "inherits_from_previous_cn": "承接平台使用场景。",
+      "changes_argument_state_cn": "从论证转向可检验的用户偏好实验。",
+      "sets_up_next_cn": "报告71%偏好和平均评分差异。",
+      "failure_if_removed_cn": "平台应用缺少实证依据。",
+      "evidence_pointer": "Section 6 P2 S1-S4"
+    },
+    {
+      "order": 4,
+      "locator": "Section 6 P3 S1-S3",
+      "paraphrase_cn": "实验显示71%参与者偏好算法生成列表，算法列表平均评分4.20显著高于随机列表3.72。",
+      "move_code": "EMPIRICAL_RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出应用实验的核心量化结果。",
+      "inherits_from_previous_cn": "依赖AMT实验设计。",
+      "changes_argument_state_cn": "把预测能力转变成用户偏好证据。",
+      "sets_up_next_cn": "为结论中的平台贡献提供实证基础。",
+      "failure_if_removed_cn": "平台贡献没有外部有效性支撑。",
+      "evidence_pointer": "Section 6 P3 S1-S3"
+    },
+    {
+      "order": 5,
+      "locator": "Section 7 P1 S1",
+      "paraphrase_cn": "本文开发了带上下文注意力的可解释层级Transformer，用非结构化课程内容预测在线教育中教师表现。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "结论首句重述核心制品和任务。",
+      "inherits_from_previous_cn": "全文模型设计。",
+      "changes_argument_state_cn": "把全文证据凝结为成果声明。",
+      "sets_up_next_cn": "随后说明对利益相关者的即时意义。",
+      "failure_if_removed_cn": "结论缺少核心成果重述。",
+      "evidence_pointer": "Section 7 P1 S1"
+    },
+    {
+      "order": 6,
+      "locator": "Section 7 P1 S2",
+      "paraphrase_cn": "研究为利益相关者提供即时可操作的影响：准确预测在线教学表现，这对商业成功和在线教学的社会成功都重要。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把制品成果升级为对产业与社会的贡献。",
+      "inherits_from_previous_cn": "承接核心模型成果。",
+      "changes_argument_state_cn": "从技术成果扩展到应用价值。",
+      "sets_up_next_cn": "引出三类利益相关者的具体受益。",
+      "failure_if_removed_cn": "成果的社会意义未点明。",
+      "evidence_pointer": "Section 7 P1 S2"
+    },
+    {
+      "order": 7,
+      "locator": "Section 7 P2 S1",
+      "paraphrase_cn": "本研究对在线教育平台、教师和学生都有实质意义。",
+      "move_code": "TRANSITION",
+      "statement_status": "author_inference",
+      "why_here_cn": "用一句话总括三类利益相关者。",
+      "inherits_from_previous_cn": "承接成果价值。",
+      "changes_argument_state_cn": "把结论从单一贡献扩展到多方收益。",
+      "sets_up_next_cn": "分别展开平台、教师和学生。",
+      "failure_if_removed_cn": "多利益相关者结构不明确。",
+      "evidence_pointer": "Section 7 P2 S1"
+    },
+    {
+      "order": 8,
+      "locator": "Section 7 P2 S2-S4",
+      "paraphrase_cn": "平台可直接用于搜索引擎、推荐和质量管控；教师可获自动预测和可解释建议；学生受益于质量提升和教学改进。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "将模型能力分解为三类使用者的具体收益。",
+      "inherits_from_previous_cn": "承接三方意义总句。",
+      "changes_argument_state_cn": "把抽象价值转成可行动的职责描述。",
+      "sets_up_next_cn": "为限制条件作对照。",
+      "failure_if_removed_cn": "贡献的对象不清晰。",
+      "evidence_pointer": "Section 7 P2 S2-S4"
+    },
+    {
+      "order": 9,
+      "locator": "Section 7 P3 S1",
+      "paraphrase_cn": "尽管模型和发现代表重要进展，仍存在几个研究限制。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "在贡献声明后立即引入边界，避免过度承诺。",
+      "inherits_from_previous_cn": "承接前两段贡献。",
+      "changes_argument_state_cn": "从价值声明转向条件限定。",
+      "sets_up_next_cn": "列举三条具体限制。",
+      "failure_if_removed_cn": "读者容易对模型适用范围产生误解。",
+      "evidence_pointer": "Section 7 P3 S1"
+    },
+    {
+      "order": 10,
+      "locator": "Section 7 P3 S2",
+      "paraphrase_cn": "第一个限制：学生评分是常用指标，但完成率等其他指标也可能重要，未来若有数据可进一步研究。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "指出标签单一性的数据边界。",
+      "inherits_from_previous_cn": "承接限制总述。",
+      "changes_argument_state_cn": "界定预测目标的范围。",
+      "sets_up_next_cn": "引向下一个数据不可得限制。",
+      "failure_if_removed_cn": "评分作为唯一结果变量的局限未被承认。",
+      "evidence_pointer": "Section 7 P3 S2"
+    },
+    {
+      "order": 11,
+      "locator": "Section 7 P3 S3",
+      "paraphrase_cn": "第二个限制：隐私使平台不公开学生作业或测验成绩，无法研究课程内容对学习结果的影响；未来应考察内容如何影响学习产出。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "承认因隐私无法纳入学习结果指标。",
+      "inherits_from_previous_cn": "承接标签与结果局限。",
+      "changes_argument_state_cn": "把限制指向未来学习结果研究。",
+      "sets_up_next_cn": "引出因果限制和实验未来方向。",
+      "failure_if_removed_cn": "未披露学习结果数据的缺失。",
+      "evidence_pointer": "Section 7 P3 S3"
+    },
+    {
+      "order": 12,
+      "locator": "Section 7 P3 S4",
+      "paraphrase_cn": "第三个限制：数据是观察性的，不能宣称因果；未来应通过实验分析课程内容和结构对学生评教的因果影响。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "在最后一处明确因果边界并规划实验研究。",
+      "inherits_from_previous_cn": "承接整个观察性研究框架。",
+      "changes_argument_state_cn": "把论文定位为预测而非因果推断。",
+      "sets_up_next_cn": "结束全文论证。",
+      "failure_if_removed_cn": "因果性边界缺失，结论可能被过度使用。",
+      "evidence_pointer": "Section 7 P3 S4"
+    }
+  ],
+  "study_accumulation_logic": [
+    {
+      "study_or_phase": "数据收集与标签定义",
+      "evidence_job_cn": "为模型提供经验基础，证明课程确实存在层级结构且评分标签可用。",
+      "what_it_establishes_cn": "1085门Coursera课程，平均40讲/课、约1159 token/讲；教师与课程评分偏向右端存在低分。",
+      "what_it_cannot_establish_cn": "无法证明模型有效，也无法获得个体评分。",
+      "why_next_phase_is_needed_cn": "需要把领域结构转化为可训练的模型架构。",
+      "transition_wording_function_cn": "从“数据可用”转入模型设计需求。"
+    },
+    {
+      "study_or_phase": "模型架构设计",
+      "evidence_job_cn": "把领域结构知识翻译为三个具体组件。",
+      "what_it_establishes_cn": "局部BERT+全局Transformer+上下文注意力四情境嵌入的完整预测模型。",
+      "what_it_cannot_establish_cn": "组件是否必要、性能是否超越现有方法未知。",
+      "why_next_phase_is_needed_cn": "需要基准实验验证性能。",
+      "transition_wording_function_cn": "从设计进入实验设置与比较。"
+    },
+    {
+      "study_or_phase": "基准预测性能比较",
+      "evidence_job_cn": "证明模型总体优于经典ML与深度Transformer变体。",
+      "what_it_establishes_cn": "两个任务上MSE/MAE均最低且配对学生t检验显著；相对14个非深度学习基线MSE约降25.90%-29.40%，相对LectureBERT MSE约降19.19%-19.41%。",
+      "what_it_cannot_establish_cn": "无法判断性能优势来自哪个组件。",
+      "why_next_phase_is_needed_cn": "需要用消融归因组件贡献。",
+      "transition_wording_function_cn": "从“模型最好”转向“为什么好”。"
+    },
+    {
+      "study_or_phase": "消融实验",
+      "evidence_job_cn": "把整体性能归因到层级结构与上下文注意力。",
+      "what_it_establishes_cn": "去除上下文注意力后MSE显著变差约3.85%-4.85%；进一步去除层级结构后约15.30%-15.95% MSE损失。",
+      "what_it_cannot_establish_cn": "注意力权重是否具有管理上有意义的解释效力。",
+      "why_next_phase_is_needed_cn": "需要通过讲座级可视化使用这些权重。",
+      "transition_wording_function_cn": "从组件贡献转向可解释分析。"
+    },
+    {
+      "study_or_phase": "讲座级可解释分析",
+      "evidence_job_cn": "证明上下文注意力权重反映有教育意义的讲座重要性模式。",
+      "what_it_establishes_cn": "注意力模式随学科、难度、时长、归属变化：人文凸曲线、STEM递增、商业平坦、高难度课程后半段重要、短课程末尾重要、行业课程递增。",
+      "what_it_cannot_establish_cn": "不能因果验证这些模式，也不能给出句子/词级建议。",
+      "why_next_phase_is_needed_cn": "需要更细粒度的句子级证据。",
+      "transition_wording_function_cn": "从讲座粒度推进到句子级分析。"
+    },
+    {
+      "study_or_phase": "句子级反事实分析",
+      "evidence_job_cn": "识别可能降低预测评分的句子并解释其语言学特征。",
+      "what_it_establishes_cn": "坏句子与课程主话题和邻近句相关性显著更低，更少名词动词、更多形容词副词，更冒犯/仇恨。",
+      "what_it_cannot_establish_cn": "反事实基于模型预测而非真实学生评分；相关而非因果。",
+      "why_next_phase_is_needed_cn": "需要用词级线索给教师更明确的词汇选择指导。",
+      "transition_wording_function_cn": "从句子特征转向词级言语线索。"
+    },
+    {
+      "study_or_phase": "词级词汇线索分析",
+      "evidence_job_cn": "把词级特征转化为可操作的词汇选择启示。",
+      "what_it_establishes_cn": "WH词比例与情绪词多样性与评分正相关，强情态词负相关；删除强情态词后预测评分平均提高0.028%。",
+      "what_it_cannot_establish_cn": "效应量极小，未做真实课堂实验，不能因果主张。",
+      "why_next_phase_is_needed_cn": "需要向平台端应用外部验证。",
+      "transition_wording_function_cn": "从教师端建议转向平台端随机实验。"
+    },
+    {
+      "study_or_phase": "AMT平台应用随机实验",
+      "evidence_job_cn": "证明模型预测能力可转化为平台课程排名的用户偏好。",
+      "what_it_establishes_cn": "71%参与者偏好算法生成列表；算法列表平均评分4.20显著高于随机列表3.72。",
+      "what_it_cannot_establish_cn": "AMT工人不等同真实平台用户；没有测量点击、完成率或长期结果。",
+      "why_next_phase_is_needed_cn": "实验结束后需要结论总结贡献与边界。",
+      "transition_wording_function_cn": "从应用实验转向总体结论。"
+    }
+  ],
+  "claim_evidence_ledger": [
+    {
+      "claim_cn": "模型显著优于经典机器学习和先进深度学习方法。",
+      "claim_level": "technical",
+      "supporting_evidence_cn": "Table 2中MSE/MAE最低，配对t检验p<0.001，相对14种非DL基线MSE降幅约25.90%-29.40%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 4.3.1 P1",
+      "where_evidence_is_provided": "Section 4.3.1 P1-P2; Table 2"
+    },
+    {
+      "claim_cn": "层级结构是性能提升的主要来源。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "消融中去除层级结构后模型变为LectureBERT，MSE损失约15.30%-15.95%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 4.3.2 P3-P4",
+      "where_evidence_is_provided": "Section 4.3.2 P3-P4; Figure 3"
+    },
+    {
+      "claim_cn": "上下文注意力也带来显著增益。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "去除上下文注意力后MSE显著变差约3.85%-4.85%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 4.3.2 P2",
+      "where_evidence_is_provided": "Section 4.3.2 P2; Figure 3"
+    },
+    {
+      "claim_cn": "讲座对不同教育情境的预测重要性不同。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "Figure 4-7中的注意力权重模式在学科、难度、时长、归属间呈现规律性差异。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.1 paragraph after Figure 4",
+      "where_evidence_is_provided": "Section 5.1; Figures 4-7"
+    },
+    {
+      "claim_cn": "坏句子与课程主话题和相邻句子的相关度更低。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "两级反事实选出前1000坏句与好句，四种主话题度量的余弦相似度均显示好句显著高于坏句。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.2.1 final sentence",
+      "where_evidence_is_provided": "Section 5.2.1; Figure 8"
+    },
+    {
+      "claim_cn": "坏句子使用更多形容词和副词、更少名词和动词，且更冒犯或仇恨。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "NLTK词性标注和Twitter-roBERTa检测，p<0.001，见Figure 9。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.2.2 P1; Section 5.2.3 P1",
+      "where_evidence_is_provided": "Section 5.2.2; Section 5.2.3; Figure 9"
+    },
+    {
+      "claim_cn": "WH词比例和情绪词多样性与评分正相关，强情态词与评分负相关。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "Pearson相关分析见Table 3，显著性从p<0.05到p<0.001。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 5.3.5 sub-paragraphs",
+      "where_evidence_is_provided": "Section 5.3.5; Table 3"
+    },
+    {
+      "claim_cn": "删除强情态词可显著改善预测评分。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "反事实删除强情态词后预测评分平均提高0.028%（p<0.001）。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 5.3.6 P1",
+      "where_evidence_is_provided": "Section 5.3.6 P1"
+    },
+    {
+      "claim_cn": "模型生成的课程列表比随机列表更受偏好且评分更高。",
+      "claim_level": "design_knowledge",
+      "supporting_evidence_cn": "AMT随机实验中71%偏好算法列表，算法平均4.20显著高于随机3.72。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Introduction P8 S3-S5; Section 6 P3",
+      "where_evidence_is_provided": "Section 6 P3"
+    },
+    {
+      "claim_cn": "研究扩展了教育挖掘和传统教育研究，从问卷/小样本走向内容自动化、可扩展预测。",
+      "claim_level": "theory",
+      "supporting_evidence_cn": "文献综述中定位与Transformer、教育挖掘、传统教育方法的关系，以及模型的自动化和可解释性设计。",
+      "support_strength": "asserted",
+      "where_claim_is_made": "Section 2.1 P1 S9; Section 2.2 P1 S6; Section 2.3 P1 S3",
+      "where_evidence_is_provided": "Section 2.1-2.4; Section 4-6"
+    }
+  ],
+  "isr_positioning_logic": {
+    "constitutive_is_problem_cn": "本文把在线教育平台的课程质量信号缺失和新教师备课经验不足构造成一个IS问题：需要自动从非结构化课程内容预测教师表现，并给平台与教师提供决策支持。",
+    "technology_behavior_or_market_entanglement_cn": "技术（层级Transformer与上下文注意力）与教学行为相互构成：模型把课程层级、讲座顺序和教育情境编码进去，又用注意力权重和反事实把预测结果翻译成讲座、句子和词级教学行为洞察。",
+    "role_of_benchmark_or_objective_evidence_cn": "benchmark和消融用于证明该深度制品在预测性能上的技术优势；讲座级注意力、反事实和相关分析被用作客观证据来支持“模型能提供教学改进洞察”的IS主张；AMT随机实验再用用户偏好证明此项技术优势可转化为平台课程排名的实际价值。",
+    "theory_in_design_cn": "领域知识部分进入了设计：课程层级/顺序依赖直接转化为全局-局部架构，情境异质性直接转化为上下文注意力；但教育/心理学理论主要是事后解释注意力模式和句子特征的（首因/近因效应、相关性、问题启发、情绪多样性等），并没有形成先验假设或在模型设计前检验。",
+    "technical_vs_is_contribution_balance_cn": "技术贡献占据较大篇幅（架构、公式、性能表和消融），IS贡献主要通过解释性分析（讲座/句子/词级管理启示）和平台端随机实验来实现；篇幅从技术验证向管理应用延伸，但分析性证据仍以模型观测为主。",
+    "beyond_transient_performance_cn": "文章试图把一时的预测性能升级为持久IS贡献：一是用消融证明性能来自领域结构性设计而非偶然；二是用三级解释分析把注意力权重转化为可教学建议；三是用随机实验把离线指标转化为平台排序价值。但由于数据是观察性的、反事实依赖模型自身预测，且强情态词效应量极小，升级过程存在一定跳跃。"
+  },
+  "paragraph_level_mimicry_template": {
+    "abstract_steps": [
+      "第1句：给出产业/领域重要性的宏观事实。",
+      "第2句：说明研究目标和总体方法方向。",
+      "第3句：点出核心制品的名字和预测任务。",
+      "第4-5句：简述制品的关键机制和附加价值（不只是预测，还可解释）。",
+      "第6句：给出性能优于经典与先进模型的总体结果。",
+      "第7句：预告可解释分析的三个粒度。",
+      "第8句：预告随机应用实验。",
+      "第9句：给出对利益相关者的管理含义。"
+    ],
+    "introduction_paragraph_steps": [
+      "P1：用市场规模、用户规模、疫情期间数字建立产业重要性和紧迫性。",
+      "P2：提出教师和平台两方面痛点，用调查或平台实践数据支撑。",
+      "P3：把痛点收敛为预测工具的输入/输出，并用已有评教文献给标签合法性。",
+      "P4：把工具目标转化为两个领域特有技术挑战。",
+      "P5：把两个挑战映射为两个核心设计组件。",
+      "P6：预告数据、基准、消融与解释分析四类证据。",
+      "P7：按讲座/句子/词级逐层描述解释性发现。",
+      "P8：引入应用性随机实验并给出一两个关键数字。",
+      "P9：用简明三点贡献列表收束。"
+    ],
+    "theory_to_design_steps": [
+      "第一步：综述相关商业/IS文献，点明缺自动化教师表现预测。",
+      "第二步：综述教育挖掘与传统教育理论，指出方法局限（小样本/问卷）。",
+      "第三步：综述NLP/Transformer真实应用，声明技术新颖性。",
+      "第四步：说明数据来源、标签定义和标签分布。",
+      "第五步：从领域结构知识转写为三条设计需求并映射到组件。"
+    ],
+    "method_and_study_sequence_steps": [
+      "先把领域挑战写成设计需求，依次介绍每个组件的机制。",
+      "再说明评估协议：任务、交叉验证、验证/测试集、统计检验。",
+      "接着构建多层基线：传统词向量+ML、深度无结构基线、完整模型。",
+      "之后用性能表证明整体优势，再用消融拆解组件贡献。",
+      "随后在讲座/句子/词三级做解释性分析，把模型内部量转成管理洞察。",
+      "最后用一个随机用户实验展示平台端价值。"
+    ],
+    "results_reporting_steps": [
+      "先报告两个预测任务的最终指标和总体最优。",
+      "再报告相对基线的百分比改进和显著性。",
+      "接着报告消融：去掉组件后的指标变化和显著性。",
+      "最后将消融结果归结为领域结构知识（层级、顺序、情境异质性）。"
+    ],
+    "discussion_and_contribution_steps": [
+      "先重述核心制品和任务。",
+      "然后给出对多类利益相关者的价值。",
+      "接着用边界声明限制结论（非因果、数据可观察性）。",
+      "最后用未来研究问题收束：替代指标、学习结果、因果实验。"
+    ]
+  },
+  "writing_algorithm": [
+    {
+      "step": 1,
+      "rhetorical_job_cn": "用客观数据建立产业/领域重要性并突出紧迫性。",
+      "research_evidence_required_cn": "需要市场规模、平台用户数、疫情或调查数据等可引用事实。",
+      "sentence_pattern_function_cn": "先给市场规模，再加增长预测与用户影响，结束在“教师被迫转向在线”。",
+      "transition_condition_cn": "当读者承认在线教育重要且教师/平台有困难时，进入痛点。"
+    },
+    {
+      "step": 2,
+      "rhetorical_job_cn": "提出教师端和平台端两个管理痛点并合成统一工具需求。",
+      "research_evidence_required_cn": "需要教师经验缺乏、平台依赖评分和测度困难的具体证据。",
+      "sentence_pattern_function_cn": "分别陈述教师问题和平台问题，然后各接一个“因此自动工具重要”。",
+      "transition_condition_cn": "当两个利益相关者都被缺工具困扰时，进入目标定义。"
+    },
+    {
+      "step": 3,
+      "rhetorical_job_cn": "给出预测工具的输入/输出，并用既有文献给标签选择合法性。",
+      "research_evidence_required_cn": "需要领域文献证明所选标签（如评分）是被广泛采用的质量指标。",
+      "sentence_pattern_function_cn": "先“本研究旨在开发这样的工具”，再定义输入输出，最后引文献证明标签。",
+      "transition_condition_cn": "当目标与标签都有了文献基础后，进入技术挑战。"
+    },
+    {
+      "step": 4,
+      "rhetorical_job_cn": "把目标转化为两个领域特有技术挑战。",
+      "research_evidence_required_cn": "需要说明数据确有层级/序列结构，以及黑箱在领域中特别受限。",
+      "sentence_pattern_function_cn": "用“First…Second…”逐一列出挑战，每个挑战后解释为何棘手。",
+      "transition_condition_cn": "当读者同意这两类挑战后，进入设计回应。"
+    },
+    {
+      "step": 5,
+      "rhetorical_job_cn": "把每个挑战转写为对应的设计组件。",
+      "research_evidence_required_cn": "需要架构层面的设计选择，能对应到结构/情境/可解释性需求。",
+      "sentence_pattern_function_cn": "先给出组件名字，再说它捕获什么领域结构，最后说它如何提升可解释性或性能。",
+      "transition_condition_cn": "当两个挑战都有唯一对应组件后，进入证据预告。"
+    },
+    {
+      "step": 6,
+      "rhetorical_job_cn": "预告数据、性能、消融和解释分析四类证据。",
+      "research_evidence_required_cn": "需要有数据集、实验协议、基线和至少初步分析结果。",
+      "sentence_pattern_function_cn": "先给数据来源和总体性能，再给消融归因方式，后给三层解释分析摘要。",
+      "transition_condition_cn": "当读者知道将看到哪几类证据时，进入文献综述和方法。"
+    },
+    {
+      "step": 7,
+      "rhetorical_job_cn": "报告整体性能后立即用消融把优势归因到具体组件。",
+      "research_evidence_required_cn": "需要性能表、配对t检验和逐组件去除的差异。",
+      "sentence_pattern_function_cn": "先“我们的模型最好”，再给相对基线百分比和p值，后用消融逐级去组件。",
+      "transition_condition_cn": "当整体优势与组件贡献都有显著证据后，进入解释性分析。"
+    },
+    {
+      "step": 8,
+      "rhetorical_job_cn": "把模型内部量（注意力/反事实）翻译成不同粒度的管理洞察。",
+      "research_evidence_required_cn": "需要可解释性机制能输出讲座/句子/词级信号，并有外部特征或文献解释。",
+      "sentence_pattern_function_cn": "先给方法（注意力可视化、两级反事实、言语线索），再给结果差异，最后给教育学解释。",
+      "transition_condition_cn": "当三个粒度都有可操作的发现后，进入平台应用实验。"
+    },
+    {
+      "step": 9,
+      "rhetorical_job_cn": "用随机实验证明技术优势可转化为平台端用户偏好。",
+      "research_evidence_required_cn": "需要对照列表、随机分配、用户偏好与评分数据。",
+      "sentence_pattern_function_cn": "先描述使用场景，再描述两个列表与参与者，最后报告偏好比例和平均分差异。",
+      "transition_condition_cn": "当用户偏好证据显著后，进入结论。"
+    },
+    {
+      "step": 10,
+      "rhetorical_job_cn": "总结贡献、多方受益者和限制，并为未来研究留路。",
+      "research_evidence_required_cn": "需要全文性能、解释、应用实验证据，并诚实说明观察性和因果边界。",
+      "sentence_pattern_function_cn": "先重述成果，再给利益相关者价值，后列限制和未来研究。",
+      "transition_condition_cn": "当限制与贡献清单完整时，全文闭合。"
+    }
+  ],
+  "high_value_moves_to_mimic_cn": [
+    "把领域结构特性直接翻译为模型组件需求，并用消融验证每个组件贡献。",
+    "先报告整体性能优势，再通过“去注意力-去层级”两步消融把优势归因到具体设计。",
+    "用LectureBERT作为无结构/无情境的深度基线，使层级与情境贡献可被分离。",
+    "在解释性分析中使用两级反事实预测，建立“删除后预测上升”的内部对照。",
+    "把注意力权重、句子特征、词级线索分别对应到讲座、句子、词三级管理启示。",
+    "在每个关键结果旁立即声明统计检验与效应量，避免“看起来更好”的模糊表述。",
+    "在结论前主动声明“不做因果主张”，降低观察性数据被过度解读的风险。",
+    "用随机用户实验把离线预测指标转成平台排名中的用户偏好证据。"
+  ],
+  "superficial_moves_not_to_copy_cn": [
+    "没有真实标签或可靠数据时，不能只凭架构名称宣称预测教师表现。",
+    "没有消融实验时，不能把整体性能归因到单个组件。",
+    "没有反事实或外部特征解释时，不能把注意力权重直接解读为“哪讲重要”。",
+    "把0.028%的预测变化表述为显著管理改进前，应承认效应量极小且未经真实实验。",
+    "AMT人工列表不等同真实推荐系统，若没有测量点击或完成率，不能宣称平台级效果。",
+    "在没有因果识别设计时，不能把相关/反事实结论说成因果关系。"
+  ],
+  "unsupported_or_fragile_moves_cn": [
+    "“首次应用/首次开发”类声明难以完全验证，属于较脆弱的新颖性主张。",
+    "讲座级注意力模式被直接联系到首因/近因效应和行业教师经验，但这些都是事后解释，缺乏对应机理检验。",
+    "坏句子和强情态词的反事实都依赖模型自身预测，而非真实学生评分变化。",
+    "删除强情态词只带来0.028%的预测评分变化，却被放入结论语境中作为教师改进依据，证据等级较弱。",
+    "AMT参与者、人工课程页面和一次性偏好问题，使其对真实平台推荐效果的推广有限。",
+    "研究宣称对平台、教师、学生三方贡献，但学生端受益没有被直接测量，属于推断性收益。"
+  ],
+  "single_sentence_description_of_isr_routine_cn": "用领域特有的层级、顺序和情境结构定制一个可解释深度学习制品，先用性能表和消融证明预测优越性及其组件来源，再把注意力权重与反事实结果翻译成讲座/句子/词级教学洞察，最后用随机用户实验把离线性能转成平台课程排名的决策支持价值。",
+  "confidence": 0.8,
+  "limitations_cn": "分析基于可见正文与图和表的位置描述；Online Appendix未包含在提供文本中，超参数细节、AMT网页设计细节、图3具体刻度无法核对；图2-9以图片形式存在，无法从文字中提取全部数值；句子级位置使用可见段落近似，不保证精确页码；部分“首次”声明和“显著”结果依赖原文自述，未能在文中逐一生根。",
+  "usage": {
+    "prompt_tokens": 40587,
+    "completion_tokens": 25614,
+    "total_tokens": 66201,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 40587
+  }
+}

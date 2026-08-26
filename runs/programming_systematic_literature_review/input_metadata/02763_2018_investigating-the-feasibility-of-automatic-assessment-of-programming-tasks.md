@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85062091458"
+title: "Investigating the feasibility of automatic assessment of programming tasks"
+authors: "Liebenberg J.; Pieterse V."
+year: "2018"
+journal: "Journal of Information Technology Education: Innovations in Practice"
+doi: "10.28945/4150"
+---
+# Scopus title-abstract-keyword metadata
+Title: Investigating the feasibility of automatic assessment of programming tasks
+Abstract: Aim/Purpose The aims of this study were to investigate the feasibility of automatic assessment of programming tasks and to compare manual assessment with automatic as-sessment in terms of the effect of the different assessment methods on the marks of the students. Background Manual assessment of programs written by students can be tedious. The assis-tance of automatic assessment methods might possibly assist in reducing the assessment burden, but there may be drawbacks diminishing the benefits of ap-plying automatic assessment. The paper reports on the experience of a lecturer trying to introduce automated grading. Students' solutions to a practical Java pro-gramming test were assessed both manually and automatically and the lecturer tied the experience to the unified theory of acceptance and use of technology (UTAUT). Methodology The participants were 226 first-year students registered for a Java programming course. Of the tests the participants submitted, 214 were assessed both manually and automatically. Various statistical methods were used to compare the manual assessment of student's solutions with the automatic assessment of the same solutions. A detailed investigation of reasons for differences was also carried out. A further data collection method was the lecturer's reflection on the feasibility of automatic assessment of programming tasks based on the UTAUT. Contribution This study enhances the knowledge regarding benefits and drawbacks of auto-matic assessment of students' programming tasks. The research contributes to the UTAUT by applying it in a context where it has hardly been used. Further-more, the study is a confirmation of previous work stating that automatic assess-ment may be less reliable for students with lower marks, but more trustworthy for the high achieving students. Findings An automatic assessment tool verifying functional correctness might be feasible for assessment of programs written during practical lab sessions but could be less useful for practical tests and exams where functional, conceptual and structural correctness should be evaluated. In addition, the researchers found that automatic assessment seemed to be more suitable for assessing high achieving students. Recommendations for Practitioners This paper makes it clear that lecturers should know what assessment goals they want to achieve. The appropriate method of assessment should be chosen wisely. In addition, practitioners should be aware of the drawbacks of automatic assess-ment before choosing it. Recommendation for Researchers This work serves as an example of how researchers can apply the UTAUT theory when conducting qualitative research in different contexts. Impact on Society The study would be of interest to lecturers considering automated assessment. The two assessments used in the study are typical of the way grading takes place in practice and may help lecturers understand what could happen if they switch from manual to automatic assessment. Future Research Investigate the feasibility of automatic assessment of students' programming tasks in a practical lab environment while accounting for structural, functional and conceptual assessment goals. © 2018.
+Author keywords: Assessment goals; Assessment of programs; Automatic assessment; UTAUT
+Index keywords: Acceptance tests; Functional programming; Grading; Students; Assessment goals; Automated assessment; Automatic assessment; Data collection method; Functional correctness; Qualitative research; The unified theory of acceptance and use of technology(UTAUT); UTAUT; Java programming language
+Document type: Article
+Conference: 
+Source title: Journal of Information Technology Education: Innovations in Practice
+Year: 2018
+EID: 2-s2.0-85062091458
+DOI: 10.28945/4150
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

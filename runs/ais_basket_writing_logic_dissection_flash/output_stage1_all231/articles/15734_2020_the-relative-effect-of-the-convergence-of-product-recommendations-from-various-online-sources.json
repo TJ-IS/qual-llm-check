@@ -1,0 +1,1265 @@
+{
+  "record_id": "15734",
+  "source_file": "15734_2020_the-relative-effect-of-the-convergence-of-product-recommendations-from-various-online-sources.md",
+  "title": "The Relative Effect of the Convergence of Product Recommendations from Various Online Sources",
+  "authors": "Jingjun (David) Xu; Izak Benbasat; Ronald T. Cenfetelli",
+  "year": "2020",
+  "journal": "Journal of Management Information Systems",
+  "doi": "10.1080/07421222.2020.1790192",
+  "fulltext_chars": 114560,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:06.336426+00:00",
+  "article_level_summary": {
+    "central_question_cn": "当多个在线推荐源（推荐代理RA、消费者、专家）同时呈现在网站上且其推荐存在趋同时，不同来源组合的趋同推荐是否会以及为何会导致不同的推荐接受度？",
+    "artifact_and_design_cn": "实验性购物网站：每个网站展示30款平板，含价格、存储、处理器、内存、屏幕、重量、电池等属性；通过显示推荐来源的标签（RA/专家/消费者）以及操纵推荐清单中的共同产品，形成无趋同、RAs∩experts、RAs∩consumers、experts∩consumers、三源趋同等处理条件。RA组在用户输入偏好和权重后显示五个推荐；专家/消费者组基于CNET榜单显示五个推荐，部分条件下在清单中插入共同产品P/Q以制造趋同。",
+    "objective_outcomes_cn": "实验1确认专家最能降低描述不确定性和性能不确定性、RA最能降低适配不确定性，且三维不确定性降低与推荐接受度相关；实验2和实验3显示RAs∩experts的推荐接受率显著高于experts∩consumers和RAs∩consumers，三源趋同与RAs∩experts没有显著差异。",
+    "core_contribution_cn": "作者声称扩展产品不确定性模型，将DeU、PerU、FitU整合进同一研究并论证同时降低三维度的互补效应；将多来源推荐趋同纳入ProU研究，提出RA、专家、消费者作为联合不确定性缓解者；并引入推荐接受度作为更直接的结果变量，为在线商家提供来源组合设计知识。",
+    "whole_argument_in_one_paragraph_cn": "文章从电商网站日益提供多来源推荐但前人研究只考虑单一来源这一现实与文献缺口出发，提出核心问题：不同来源组合的趋同推荐是否对推荐接受度产生不同影响。作者以ProU模型为理论基础，论证RA最适合降低FitU，专家最适合降低DeU和PerU，且专家优于消费者；因此RAs∩experts能同时有效降低三维ProU，应优于experts∩consumers和RAs∩consumers，并与三源趋同等效。实验1先用单源设计验证来源-不确定性映射和不确定性-接受度关联；实验2在多源网站中操纵五组趋同条件，支持H1、H2，并不拒绝H3；实验3以更大样本复制结果并直接测量感知的不确定性降低，进一步确认机制。讨论与贡献部分把差异结果上升为ProU三维度互补性和来源信号一致性理论，同时用搜索产品、第三方专家等边界条件保护结论。"
+  },
+  "paper_archetype": "multi_method_or_multi_study_program",
+  "paper_archetype_reason_cn": "论文并非单一实验或纯设计科学制品，而是由三个在线实验组成的递进式研究项目：实验1建立理论前提，实验2检验核心假设，实验3复制并测量机制。虽然三个实验都是行为实验，但整体贡献依赖多Study的累积论证，因此更符合multi_study_program。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章从现实问题出发，引入ProU理论推导假设，据此设计并操纵多推荐源网站，用三个实验检验，最后回到理论贡献和实践含义，完整呈现问题—理论—设计—检验—返回理论的弧线。",
+  "research_program": {
+    "study_or_phase_count": 3,
+    "overall_sequence_cn": "阶段顺序为：实验1（单源前提验证）→ 实验2（多源趋同主检验）→ 实验3（复制与机制测量）。实验1为后续假设提供来源-不确定性映射经验基础；实验2直接检验H1-H3；实验3重复实验2并加入ProU感知测量，以解决实验2未直接测机制和样本量偏小的问题。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "实验1：单一推荐源对三类产品不确定性的降低效应及与推荐接受度的关联",
+        "question_cn": "单独呈现RA、专家、消费者三种推荐源时，它们分别能降低DeU、PerU、FitU中的哪些维度？降低程度是否符合理论预期？不确定性降低是否与推荐接受度相关？",
+        "inputs_and_setting_cn": "通过Amazon Mechanical Turk招募北美被试，160人完成、剔除26人后134人；随机分配到三种单源购物网站之一；每个网站展示30款平板，含7个关键属性；RA组要求输入偏好和权重，专家/消费者组显示CNET榜单的前五产品。",
+        "designed_or_compared_object_cn": "三个单源网站：RA网站、专家网站、消费者网站；对照三种来源标签和推荐清单在降低ProU维度上的效果。",
+        "baseline_control_or_counterfactual_cn": "三种来源互为对照；用7点量表的中点4.00作为‘无降低’参照；相关性分析中无额外反事实。",
+        "objective_metrics": [
+          "DeU降低感知评分",
+          "PerU降低感知评分",
+          "FitU降低感知评分",
+          "推荐接受度（所选产品在该来源推荐中的排名位置）"
+        ],
+        "analysis_method_cn": "MANOVA、单样本t检验、计划对比检验、相关分析。",
+        "main_result_cn": "DeU和PerU可由三种来源降低；专家降DeU和PerU显著优于消费者；RA降FitU显著强于专家和消费者；DeU、PerU、FitU降低与推荐接受度均显著相关。",
+        "argumentative_role_cn": "为H1和H2中‘RA降FitU、专家降DeU/PerU且优于消费者’的映射提供经验基础，也为H3中消费者边际贡献小提供支撑。",
+        "remaining_uncertainty_cn": "只考察单一来源，无法回答多来源趋同的相对效应。",
+        "link_to_next_phase_cn": "在确认来源-维度映射后，实验2整合三个来源进入同一网站，并操纵来源间推荐产品的重叠以检验趋同组合的效应。",
+        "evidence_pointers": [
+          "Experiment 1 opening",
+          "Table 2 demographics",
+          "Table 3 means and planned contrasts",
+          "Data analysis section"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "实验2：多源推荐趋同的相对效应检验",
+        "question_cn": "在同一网站同时呈现三类来源并操纵推荐趋同时，RAs∩experts是否比experts∩consumers和RAs∩consumers带来更高接受度？三源趋同是否与RAs∩experts相当？",
+        "inputs_and_setting_cn": "通过北美市场研究公司招募224名被试；随机分配到5个网站条件；其中137人访问了全部三个来源，作为主假设检验样本；网站中三个来源的位置做了counterbalance。",
+        "designed_or_compared_object_cn": "五组推荐趋同条件：无趋同、RAs∩experts、RAs∩consumers、experts∩consumers、三源趋同。通过替换RA输出中的产品或在专家/消费者清单中复制共同产品P/Q来操纵。",
+        "baseline_control_or_counterfactual_cn": "无趋同组作为基线；两个二源组合互为参照；三源组与RAs∩experts比较；操纵检验包括感知趋同、感知契合、感知信用度。",
+        "objective_metrics": [
+          "推荐接受率（二值：实际选择是否为被操纵的趋同产品）",
+          "感知来源趋同",
+          "感知产品契合",
+          "感知来源可信度",
+          "访问来源数量"
+        ],
+        "analysis_method_cn": "二元logistic回归，控制互联网使用年限、CNET知识、认知需求、产品知识、趋同产品平均排名位置。",
+        "main_result_cn": "RAs∩experts接受率为60%，显著高于experts∩consumers的32%和RAs∩consumers的37%；三源趋同为67%，与RAs∩experts无显著差异；操纵检验显示趋同感知更高、专家可信度高于消费者。",
+        "argumentative_role_cn": "直接检验H1、H2、H3，证明来源组合的相对排序与理论预测一致。",
+        "remaining_uncertainty_cn": "未直接测量参与者感知的ProU降低；每个单元格样本约27人，统计功效和外推性有限。",
+        "link_to_next_phase_cn": "实验3用更大样本重复相同设计，并加入DeU/PerU/FitU感知测量，以直接验证机制。",
+        "evidence_pointers": [
+          "Second experiment opening",
+          "Figure 1-3",
+          "Table 5 RA manipulation",
+          "Table 6 acceptance rates",
+          "Hypotheses tests"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "实验3：大样本复制与ProU机制测量",
+        "question_cn": "在更大样本和直接测量三类ProU降低感知的条件下，H1/H2/H3是否仍然成立？感知结果是否复现实验1的来源-维度映射？",
+        "inputs_and_setting_cn": "通过MTurk招募590人，剔除53人后537人；370人访问全部三源；设计、操纵和网站同实验2；参与者获$3加$2潜在奖；样本比实验2更年轻且产品知识更高。",
+        "designed_or_compared_object_cn": "同五组趋同网站；额外测量DeU/PerU/FitU降低感知以及感知趋同。",
+        "baseline_control_or_counterfactual_cn": "以无趋同组为基线；二源组合和三源组合互比；补充分析比较访问两个来源后发现/未发现趋同的被试是否继续访问第三来源。",
+        "objective_metrics": [
+          "推荐接受率",
+          "DeU/PerU/FitU降低感知",
+          "感知来源趋同",
+          "参与者访问来源数量",
+          "产品知识水平"
+        ],
+        "analysis_method_cn": "二元logistic回归、配对/独立t检验、卡方检验、ANOVA对比。",
+        "main_result_cn": "RAs∩experts接受率59%，显著高于experts∩consumers的31%和RAs∩consumers的39%；三源趋同63%，与RAs∩experts无显著差异；感知测量复现实验1：RA降FitU最强，专家降PerU/DeU最强；未发现趋同的被试更可能访问第三来源。",
+        "argumentative_role_cn": "复制并强化实验2结果，同时用直接感知测量支持ProU降低作为机制，提升结论稳健性。",
+        "remaining_uncertainty_cn": "所有实验均为搜索产品平板；未做正式中介分析；H3用‘不能拒绝零假设’推断同等效应。",
+        "link_to_next_phase_cn": "结果进入Discussion与Contributions，转化为理论贡献、实践含义和边界条件。",
+        "evidence_pointers": [
+          "Third experiment opening",
+          "Table 2 demographics",
+          "Table 7 acceptance rates",
+          "Third experiment main results",
+          "Supplementary analysis of source access"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "先指出现有研究局限于单一推荐源（LIMITATION）",
+      "指出多来源趋同的相对影响未知（GAP）",
+      "说明以并扩展ProU模型为理论（THEORY_INTRO）",
+      "报告实验发现：RAs∩experts优于其他二源组合（RESULT）",
+      "解释机制：RA降FitU、专家降DeU/PerU，二者互补（MECHANISM）",
+      "给出实践建议：商家应整合互补来源（CONTRIBUTION）"
+    ],
+    "introduction_moves": [
+      "建立电商产品选择多、网站提供多来源推荐的背景（CONTEXT）",
+      "定义RA、消费者、专家三类推荐源（PRIOR_KNOWLEDGE）",
+      "指出前人只研究单一来源的局限（LIMITATION）",
+      "列举BestBuy、Amazon等真实网站的多源实践，说明现实紧迫性（PRACTICAL_STAKES）",
+      "提出研究问题：不同组合的趋同推荐是否差异影响接受度（RQ_OR_OBJECTIVE）",
+      "引入ProU模型和三个不确定性维度（THEORY_INTRO）",
+      "提出总体命题：能同时降低三维度的来源组合更优（THEORY_PROPOSITION）",
+      "给出关键机制：RA降FitU、专家降DeU/PerU、消费者在专家在场时边际效应小（MECHANISM）",
+      "限定搜索产品范围（BOUNDARY_CONDITION）",
+      "分三点声明贡献：整合三维度、响应Dimoka等的呼吁、引入推荐接受度（CONTRIBUTION）"
+    ],
+    "theory_and_knowledge_moves": [
+      "从ProU模型及其结果变量出发，说明信息不对称导致不确定性（PRIOR_KNOWLEDGE）",
+      "分别解释DeU、PerU、FitU的定义和区别（PRIOR_KNOWLEDGE）",
+      "说明ProU模型已被用于评论、产品描述、可视化等（PRIOR_KNOWLEDGE）",
+      "指出前人在维度数量、组合效应、来源类型三方面的不足（LIMITATION）",
+      "把RA、专家、消费者分别映射到FitU和DeU/PerU（THEORY_PROPOSITION）",
+      "为聚焦数值评分而非写作评论提供四点方法论证（METHOD_JUSTIFICATION）",
+      "基于Senecal和Nantel来源分类选择三类来源（PRIOR_KNOWLEDGE）"
+    ],
+    "artifact_design_moves": [
+      "设定同样的30款平板、7个属性以控制内容（DESIGN_FEATURE）",
+      "三种单源网站分别显示RA/专家/消费者推荐（DESIGN_FEATURE）",
+      "用Table 1中的来源标签句操纵来源类型（DESIGN_FEATURE）",
+      "实验2把三源整合到同一网站并counterbalance位置（DESIGN_FEATURE）",
+      "用Table 5的RA输出操纵和P/Q复制形成五组趋同条件（DESIGN_FEATURE）",
+      "用点击链接和计算机日志确认被试是否访问来源（METHOD_JUSTIFICATION）"
+    ],
+    "evaluation_moves": [
+      "实验1用MANOVA、单样本t检验、计划对比验证来源-维度映射（RESULT）",
+      "实验1用相关分析建立不确定性降低与推荐接受度的关系（RESULT）",
+      "实验2用二元logistic回归和操纵检验检验H1-H3（RESULT）",
+      "实验3用大样本复制并加入感知测量（ROBUSTNESS_OR_BOUNDARY_TEST）",
+      "补充分析显示未发现趋同的被试更可能继续访问第三来源（RESULT）",
+      "附录C和D提供稳健性分析和内容分析（ROBUSTNESS_OR_BOUNDARY_TEST）"
+    ],
+    "discussion_and_contribution_moves": [
+      "把RAs∩experts优势重新解释为ProU三维度互补（CONTRIBUTION）",
+      "主张一维或二维降低不能替代另一维度，否定替代效应（CONTRIBUTION）",
+      "挑战‘更多来源一定更好’的常识（CONTRIBUTION）",
+      "将多来源趋同定位为信息信号一致性问题（CONTRIBUTION）",
+      "为RA文献加入‘用户还需要DeU/PerU降低’的视角（CONTRIBUTION）",
+      "给出实践建议：多源整合、RA+专家优先、警惕自封专家（CONTRIBUTION）",
+      "用搜索产品、第三方专家、数值评分等边界条件保护结论（BOUNDARY_CONDITION）",
+      "列出经验产品、其他RA类型、写作评论、第三方网站等未来方向（LIMITATION_AND_FUTURE）"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "产品不确定性模型（Product Uncertainty Model）",
+      "信息信号理论（Signaling Theory）",
+      "推荐来源分类与RA文献",
+      "消费者与专家推荐可信度文献"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "ProU三维度理论不仅用于事后解释，还前瞻性地决定设计：RA被设计为收集偏好以降FitU，专家被设计为第三方榜单以降DeU/PerU，消费者被设计为聚合评分；网站中操纵的五组趋同组合也直接来自理论推导，且实验1先验证映射、实验2/3检验理论排序。",
+    "translation_chain_cn": "ProU三维度（DeU/PerU/FitU）→ 来源能力：RA通过偏好elicitation和认知负荷降低降FitU，专家通过领域知识和产品测试降DeU/PerU且优于消费者 → 设计要求：网站同时呈现三类来源，并制造不同来源共同推荐同一产品 → 制品选择：RA显示基于用户权重的前五产品，专家/消费者显示CNET前五或经P/Q重叠的清单 → 被比较的设计差异：RAs∩experts vs experts∩consumers vs RAs∩consumers vs 三源趋同 → 客观结果：RAs∩experts接受率最高，三源不额外提高。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "RA通过eliciting用户偏好和帮助处理大量备选方案，能降低FitU",
+        "mechanism_cn": "RA基于用户输入的个人偏好返回匹配产品，从而减少产品属性与偏好不匹配的担忧",
+        "design_requirement_cn": "网站需要一个在用户表达偏好后生成个性化排名的功能",
+        "artifact_choice_cn": "RA组显示‘根据您上一页输入的整体偏好，推荐前五产品’，并按偏好排序",
+        "evaluated_contrast_cn": "实验1单源中RA vs 专家 vs 消费者的FitU降低分数；实验2/3中含RA组合 vs 不含RA组合",
+        "objective_result_cn": "实验1 RA降FitU均值5.37，显著高于专家4.53和消费者4.34；实验3复现",
+        "evidence_pointers": [
+          "Table 3",
+          "Third experiment manipulation check"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "专家拥有权威领域知识，能发现隐藏属性和评估长期性能，因此降低DeU和PerU",
+        "mechanism_cn": "专家比消费者更能识别描述失真和测试性能，从而减少对产品真实属性和长期表现的怀疑",
+        "design_requirement_cn": "专家来源应由公认第三方机构背书，并以专家榜单形式呈现",
+        "artifact_choice_cn": "专家条件显示‘CNET专家高度推荐’的前五产品",
+        "evaluated_contrast_cn": "专家 vs 消费者在DeU/PerU降低上的对比；experts∩consumers vs RAs∩experts",
+        "objective_result_cn": "实验1专家降DeU均值5.08高于消费者4.52；降PerU均值5.43高于消费者4.73；实验3复现",
+        "evidence_pointers": [
+          "Table 3",
+          "Third experiment perceived uncertainty results"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "消费者基于真实使用经验能降低DeU和PerU，但其信号强度和可信度低于专家",
+        "mechanism_cn": "消费者推荐反映实际使用体验，但匿名性导致虚假信号成本低、评分存在偏差和噪声",
+        "design_requirement_cn": "消费者来源应作为聚合评分呈现，以与专家评分形式可比",
+        "artifact_choice_cn": "消费者条件显示‘CNET消费者高度评价’的前五产品",
+        "evaluated_contrast_cn": "消费者 vs 专家的可信度和DeU/PerU降低程度；RAs∩consumers vs RAs∩experts",
+        "objective_result_cn": "实验2中专家可信度5.91显著高于消费者5.64；RAs∩experts接受率高于RAs∩consumers",
+        "evidence_pointers": [
+          "Experiment 2 manipulation checks",
+          "Table 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "当多个信号一致时，可以减少信息不对称并增强决策确定性",
+        "mechanism_cn": "多个来源共同推荐同一产品形成趋同信号，缩小选择集并使顾客确信选择正确",
+        "design_requirement_cn": "网站需要操纵哪些产品被多个来源共同推荐，以形成不同水平的趋同",
+        "artifact_choice_cn": "通过交换清单产品或复制P/Q，构造无趋同、两两趋同和三源趋同",
+        "evaluated_contrast_cn": "五组趋同条件下的推荐接受率",
+        "objective_result_cn": "RAs∩experts显著优于其他二源组合，三源趋同与RAs∩experts无显著差异",
+        "evidence_pointers": [
+          "Table 5",
+          "Table 6",
+          "Table 7"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "单一来源行为实验（1×3 between-subjects）",
+      "多源趋同操纵行为实验（1×5 between-subjects）",
+      "大样本复制实验并加入机制测量",
+      "操纵检验（感知趋同、感知契合、感知来源可信度）",
+      "补充稳健性分析与内容分析（附录C/D）"
+    ],
+    "why_these_evaluations_cn": "先用单一来源实验验证理论映射，避免在多源解释中套用未经检验的来源能力假设；再通过操纵共同推荐产品形成趋同组合，直接检验相对效应；最后用大样本复制并加入感知测量，使机制可观察且结论不依赖单一小样本。",
+    "benchmark_and_contrast_chain_cn": "实验1以三类来源互相benchmark，确定RA最强FitU、专家最强DeU/PerU；实验2以无趋同组为锚，并用三个二源组合互比，形成RAs∩experts > RAs∩consumers ≈ experts∩consumers的排序；实验3重复该排序，并增加无趋同/有趋同访问行为的对比，使benchmark从接受率扩展到信息搜索行为。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "专家最擅长降低DeU和PerU",
+        "evidence_cn": "实验1计划对比显示专家降DeU和PerU显著优于消费者；实验3感知测量显示专家降DeU/PerU强于RA和消费者",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "RA最擅长降低FitU",
+        "evidence_cn": "实验1单样本和计划对比显示RA显著优于专家和消费者；实验3复现",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "RAs∩experts比experts∩consumers带来更高推荐接受度",
+        "evidence_cn": "实验2差异28%，p<0.05；实验3差异28%，p<0.001",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "RAs∩experts比RAs∩consumers带来更高接受度",
+        "evidence_cn": "实验2差异23%，p<0.05；实验3差异20%，p<0.05",
+        "status_cn": "支持"
+      },
+      {
+        "claim_cn": "三源趋同与RAs∩experts的接受度相同",
+        "evidence_cn": "实验2差异6%，p>0.05；实验3差异4%，p>0.05；只有不能拒绝零假设，没有等价性检验",
+        "status_cn": "弱支持/未充分证明等价"
+      },
+      {
+        "claim_cn": "ProU降低是接受度差异的机制",
+        "evidence_cn": "实验3直接测量感知DeU/PerU/FitU降低并复现来源映射，但没有进行正式中介分析",
+        "status_cn": "部分支持"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分组、注意力检查题、剔除不合格被试、计算机日志确认被试实际点击来源、来源位置counterbalance、控制推荐内容数量一致、使用控制变量进入logistic回归、操纵检验验证趋同感知与来源可信度。",
+    "external_validity_strategy_cn": "使用成年在线消费者样本（MTurk和panel），以真实CNET榜单作为专家/消费者推荐依据，产品为现实搜索产品平板；通过实验3大样本复制提高统计功效；在实践贡献中明确限定搜索产品和第三方专家情境。",
+    "what_is_not_actually_tested_cn": "没有正式中介分析证明ProU降低是接受率差异的中介机制；H3仅靠不拒绝零假设推断同等效应；未在真实平台观察自然购物行为；未包含写作评论、经验产品、自封专家、协同过滤RA等变体；未检验推荐数量多少的影响。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "RAs∩experts的组合比experts∩consumers和RAs∩consumers带来更高推荐接受率；三源趋同不显著高于RAs∩experts。",
+    "artifact_claim_cn": "能够同时有效降低三类ProU的来源组合（RA+专家）是驱动高接受度的核心设计特征；在RA和专家都已存在时，加入消费者来源不额外提升接受度。",
+    "mechanism_claim_cn": "RA擅长降低FitU，专家擅长降低DeU和PerU，二者互补覆盖三维度；消费者虽能降DeU/PerU但可信度和专业度不如专家，因此边际贡献小。",
+    "boundary_claim_cn": "结论主要适用于可用客观属性评估的搜索产品、第三方专家来源、数值评分形式的推荐；对经验产品、内部自封专家、写作评论或协同过滤RA可能不同。",
+    "reusable_design_knowledge_cn": "电商网站应同时提供功能互补的推荐来源；若资源有限，优先选择RA和专家；不要依赖来源数量或任意趋同，而应确保趋同产品由能够降低尚未覆盖不确定性维度的来源背书。",
+    "theoretical_contribution_cn": "将DeU、PerU、FitU整合进ProU模型，论证三个维度需要同时且独立降低、不可相互替代；引入推荐接受度作为更直接的ProU结果；将多来源趋同重新概念化为信号一致性，展示不同信号组合的相对效应；扩展RA文献，指出用户除FitU外还关注DeU/PerU。",
+    "how_discussion_closes_intro_gap_cn": "结论部分重新回到引言提出的‘多来源趋同相对效应未知’，用ProU模型把RAs∩experts的优势解释为三维度互补，并明确指出单一来源研究无法解决该问题；同时用H3结果挑战‘更多来源一定更好’，使贡献不是简单回答‘哪种组合好’，而是回答‘为什么这种组合好’。",
+    "overclaim_or_unsupported_leaps_cn": "H3用两个实验的p>0.05推断三源与二源‘同等’缺乏等价性检验支撑；机制部分主要依赖实验3的感知测量而非正式中介分析；从实验室接受率跳到‘商家应提供RA+专家’的建议可能高估行为外推性；对经验产品等边界条件的否定性说明较多，但未在数据中验证。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "以往关于在线产品推荐源的研究大多局限于网站上单一来源的评价。",
+      "rhetorical_function_cn": "开场限定现有文献范围，为缺口做铺垫。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出多来源趋同效果未知的问题。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "因此，不同来源的趋同推荐对消费者接受建议的相对影响在很大程度上仍属未知。",
+      "rhetorical_function_cn": "明确研究缺口。",
+      "depends_on_cn": "前一句的单一来源局限。",
+      "sets_up_cn": "为研究问题提供空间。",
+      "evidence_pointer": "Abstract P1"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P2 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "作者利用并扩展产品不确定性模型来理论化不同来源趋同推荐如何差异化影响接受度。",
+      "rhetorical_function_cn": "引入理论框架。",
+      "depends_on_cn": "已识别的缺口。",
+      "sets_up_cn": "预告理论贡献和后续假设。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P2 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实验表明，RA与专家趋同比专家与消费者趋同、RA与消费者趋同带来更高的共同推荐产品接受度。",
+      "rhetorical_function_cn": "在摘要中给出核心实证发现。",
+      "depends_on_cn": "理论和实验设计。",
+      "sets_up_cn": "引出机制解释。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P2 S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "原因是RA最能降低适配不确定性，专家最能降低描述和性能不确定性，二者互补覆盖全部三维度。",
+      "rhetorical_function_cn": "解释结果背后的理论机制。",
+      "depends_on_cn": "ProU模型和结果。",
+      "sets_up_cn": "为实践建议提供依据。",
+      "evidence_pointer": "Abstract P2"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P3 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "建议在线商家在其网站整合多种来源，尤其是发挥互补降低产品不确定性作用的RA和专家。",
+      "rhetorical_function_cn": "给出实践含义。",
+      "depends_on_cn": "机制和结果。",
+      "sets_up_cn": "摘要收尾并呼应实践重要性。",
+      "evidence_pointer": "Abstract P3"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "电子商务持续扩展，在线可选产品数量庞大。",
+      "rhetorical_function_cn": "建立现实背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "说明网站提供推荐的必要性。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "P1 S2-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "网站越来越多地提供来自普通消费者、产品专家和在线推荐代理的推荐，以降低产品不确定性。",
+      "rhetorical_function_cn": "定义三类推荐源并说明其作用。",
+      "depends_on_cn": "背景。",
+      "sets_up_cn": "为后续来源分类和理论映射提供概念。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "P1 S4-S5",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "先前研究虽然扩展了对各推荐源效果的认识，但被试只接触单一来源，对多来源趋同效果保持沉默。",
+      "rhetorical_function_cn": "直接指出文献缺口。",
+      "depends_on_cn": "对推荐源文献的总结。",
+      "sets_up_cn": "引出整合多来源的收益和研究问题。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "P1 S6-S9",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "在同一网站整合多来源能让顾客获得不同观点、节省跨站搜索、获得第二意见，并借趋同缩小选择集、增强决策自信。",
+      "rhetorical_function_cn": "说明研究问题的现实重要性。",
+      "depends_on_cn": "单一来源局限。",
+      "sets_up_cn": "为‘多来源趋同值得研究’提供实践理由。",
+      "evidence_pointer": "Introduction P1 after limitation"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "P2 S1-S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "然而，不同多来源组合的相对效果仍未知，需要从理论上理解。",
+      "rhetorical_function_cn": "把实践趋势收缩为可研究的理论问题。",
+      "depends_on_cn": "多源收益的论述。",
+      "sets_up_cn": "为研究问题出场做铺垫。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "P2 S3-S5",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "BestBuy、Bedbathandbeyond、Tirerack、Amazon等网站已经同时提供RA、专家或消费者推荐的来源组合。",
+      "rhetorical_function_cn": "用真实平台说明多源场景已是常态而非虚构。",
+      "depends_on_cn": "现实趋势。",
+      "sets_up_cn": "使研究问题具有生态效度。",
+      "evidence_pointer": "Introduction P2 examples"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "P2 S6-S7",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者因此提问：不同来源组合提供的趋同推荐是否对推荐接受度产生差异影响？",
+      "rhetorical_function_cn": "正式提出核心研究问题。",
+      "depends_on_cn": "缺口和现实例子。",
+      "sets_up_cn": "决定后续理论选择和假设。",
+      "evidence_pointer": "Introduction P2 end"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "P3 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "作者选择产品不确定性模型作为研究多来源相对效果的理论基础。",
+      "rhetorical_function_cn": "引入核心理论。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "定义ProU的三维度。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "P3 S2-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "DeU源于线上卖方无法完整描述产品；PerU源于对长期性能的担忧；FitU源于产品是否匹配个人需要的担忧。",
+      "rhetorical_function_cn": "给出三维度定义。",
+      "depends_on_cn": "理论引入。",
+      "sets_up_cn": "为来源-维度映射提供概念工具。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "P4 S1-S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "作者提出，能有效降低三个不同ProU维度的来源趋同，会比降低更少维度或降低程度更弱的趋同带来更高接受度。",
+      "rhetorical_function_cn": "将理论转为总体命题。",
+      "depends_on_cn": "ProU三维度定义。",
+      "sets_up_cn": "随后具体预测RAs∩experts最优。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "P4 S3-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "RA最能降FitU，专家最能降DeU和PerU，消费者也能降后两者但在专家存在时不是额外叠加。",
+      "rhetorical_function_cn": "解释为什么RAs∩experts互补。",
+      "depends_on_cn": "三维度定义。",
+      "sets_up_cn": "为H1-H3提供机制。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "P4 S5",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "作者把研究聚焦于搜索产品，因为可用属性信息和内容过滤RA适合评估，且客观属性更容易形成多来源趋同的共同现实。",
+      "rhetorical_function_cn": "限定研究范围。",
+      "depends_on_cn": "RA和产品属性讨论。",
+      "sets_up_cn": "为实验产品选择和边界条件做铺垫。",
+      "evidence_pointer": "Introduction P4 end"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "P5 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第一项贡献是把三维ProU整合到同一研究，并推进同时降低多维度不确定性的理论。",
+      "rhetorical_function_cn": "声明理论贡献。",
+      "depends_on_cn": "ProU模型和缺口。",
+      "sets_up_cn": "为后文贡献段落提供框架。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "P5 S2-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第二项贡献是响应Dimoka等的呼吁，把RA、专家和消费者作为多来源联合不确定性缓解者，拓展ProU模型到单网站多来源情境。",
+      "rhetorical_function_cn": "声明与已有研究的差异。",
+      "depends_on_cn": "已有ProU研究缺口。",
+      "sets_up_cn": "为推荐源文献贡献做铺垫。",
+      "evidence_pointer": "Introduction P5"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "P5 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第三项次要贡献是考察不确定性降低对推荐接受度的影响，这是ProU文献未研究过的更直接结果。",
+      "rhetorical_function_cn": "声明结果变量层面的增量贡献。",
+      "depends_on_cn": "ProU结果变量文献。",
+      "sets_up_cn": "为后续推荐接受度理由做铺垫。",
+      "evidence_pointer": "Introduction P5 end"
+    },
+    {
+      "order": 22,
+      "section": "Literature review",
+      "locator": "P1 S1-S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "推荐源帮助减少信息过载，但减少过载不代表后续选择变容易；产品不确定性在最终产品选择中仍起作用。",
+      "rhetorical_function_cn": "把文献从信息过载转向ProU。",
+      "depends_on_cn": "引言中的ProU取向。",
+      "sets_up_cn": "为ProU模型综述铺路。",
+      "evidence_pointer": "Literature review P1"
+    },
+    {
+      "order": 23,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P1 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "ProU模型描述在线市场中产品不确定性的性质、维度、前因和后果，预测降低ProU可提高价格溢价、满意度和重购意愿、减少退货。",
+      "rhetorical_function_cn": "综述核心理论内容。",
+      "depends_on_cn": "引入ProU模型。",
+      "sets_up_cn": "为各维度定义和来源映射提供依据。",
+      "evidence_pointer": "Product uncertainty model section P1"
+    },
+    {
+      "order": 24,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P2 S1-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "DeU源于在线卖家无法通过精简界面完整描述产品，顾客缺乏触摸和试用等直接体验。",
+      "rhetorical_function_cn": "细化DeU定义。",
+      "depends_on_cn": "ProU模型。",
+      "sets_up_cn": "说明专家/消费者评分可作为描述信号的依据。",
+      "evidence_pointer": "Product uncertainty model section P2"
+    },
+    {
+      "order": 25,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P3 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "PerU指买家难以预测产品未来表现，即使产品描述完整准确，顾客仍会担心长期性能。",
+      "rhetorical_function_cn": "细化PerU定义并与DeU区分。",
+      "depends_on_cn": "ProU模型。",
+      "sets_up_cn": "支持专家和消费者在PerU降低中的角色。",
+      "evidence_pointer": "Product uncertainty model section P3"
+    },
+    {
+      "order": 26,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P4 S1-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "FitU反映顾客评估产品属性与自身偏好匹配的困难；即使描述和性能可信，顾客仍可能因不适合个人偏好而离开。",
+      "rhetorical_function_cn": "细化FitU定义。",
+      "depends_on_cn": "ProU模型。",
+      "sets_up_cn": "为RA降FitU的理论做铺垫。",
+      "evidence_pointer": "Product uncertainty model section P4"
+    },
+    {
+      "order": 27,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P4 S5-S6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "同时减少三维度能带来无忧选择体验，但文献没有理论化如何同时做到这一点。",
+      "rhetorical_function_cn": "指出理论空白。",
+      "depends_on_cn": "三维度定义。",
+      "sets_up_cn": "为本文的多来源互补理论建立目标。",
+      "evidence_pointer": "Product uncertainty model section P4 end"
+    },
+    {
+      "order": 28,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P5 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "ProU模型已被用于研究产品评论、产品描述、可视化、新旧商品选择和新产品采用等情境。",
+      "rhetorical_function_cn": "说明ProU理论的应用广度。",
+      "depends_on_cn": "ProU模型。",
+      "sets_up_cn": "为本文与已有应用的区别做铺垫。",
+      "evidence_pointer": "Product uncertainty model section P5"
+    },
+    {
+      "order": 29,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P6 S1-S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "本文与以往ProU研究有三点不同：以往只研究一或二维度、只研究单个效应、没有考察不同来源降低不同维度。",
+      "rhetorical_function_cn": "明确与现有ProU研究的差异。",
+      "depends_on_cn": "对ProU应用的综述。",
+      "sets_up_cn": "为理论贡献声明提供依据。",
+      "evidence_pointer": "Product uncertainty model section P6"
+    },
+    {
+      "order": 30,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P7 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "作者提出专家和消费者推荐是降低DeU和PerU的信息信号，RA推荐则是降低FitU的信号。",
+      "rhetorical_function_cn": "建立来源-维度映射。",
+      "depends_on_cn": "ProU三维度和信号理论。",
+      "sets_up_cn": "支撑后续假设的机制推导。",
+      "evidence_pointer": "Product uncertainty model section P7"
+    },
+    {
+      "order": 31,
+      "section": "Product uncertainty model and signaling theory",
+      "locator": "P8 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者只使用数值评分而非文字评论，因为评分便于操纵趋同、是评论集合的可见信号、避开评分与评论不一致的问题、且与RA输出形式可比。",
+      "rhetorical_function_cn": "为实验材料形式选择提供理由。",
+      "depends_on_cn": "研究问题和来源类型。",
+      "sets_up_cn": "解释后续设计与测量为何使用数值榜单。",
+      "evidence_pointer": "Product uncertainty model section P8"
+    },
+    {
+      "order": 32,
+      "section": "Recommendation source, convergence, and acceptance",
+      "locator": "P1 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Senecal和Nantel把推荐源分为个人/非个人、个性化/非个性化四类；本文选择消费者、RA、专家分别代表三类在线来源。",
+      "rhetorical_function_cn": "引用已有分类确定来源选择。",
+      "depends_on_cn": "推荐源文献。",
+      "sets_up_cn": "为后续来源可比性提供设计依据。",
+      "evidence_pointer": "Recommendation source section P1"
+    },
+    {
+      "order": 33,
+      "section": "Recommendation source, convergence, and acceptance",
+      "locator": "P2 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "本文跟随Senecal和Nantel，在内容大体恒定的情况下操纵来源；来源作为外在信号可替代内在内容作为质量线索。",
+      "rhetorical_function_cn": "说明为何可把来源标签作为主要操纵。",
+      "depends_on_cn": "信号理论和先例。",
+      "sets_up_cn": "为实验设计‘同一内容不同来源’提供依据。",
+      "evidence_pointer": "Recommendation source section P2"
+    },
+    {
+      "order": 34,
+      "section": "Recommendation source, convergence, and acceptance",
+      "locator": "P3 S1-S3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "若来源间没有趋同，多源建议可能复杂化决策并降低接受度；要实现趋同，产品必须被不止一个来源推荐。",
+      "rhetorical_function_cn": "把‘趋同’从概念转为设计条件。",
+      "depends_on_cn": "多源整合的利弊。",
+      "sets_up_cn": "为实验操纵提供方向。",
+      "evidence_pointer": "Recommendation source section P3"
+    },
+    {
+      "order": 35,
+      "section": "Recommendation source, convergence, and acceptance",
+      "locator": "P4 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "推荐接受度是来源组合覆盖的不同不确定性维度数量及其降低程度的函数；单一来源不能有效覆盖三维度。",
+      "rhetorical_function_cn": "将ProU模型转化为接受度预测。",
+      "depends_on_cn": "ProU三维度。",
+      "sets_up_cn": "为H1-H3差异排序奠定基础。",
+      "evidence_pointer": "Recommendation source section P4"
+    },
+    {
+      "order": 36,
+      "section": "Recommendation source, convergence, and acceptance",
+      "locator": "P5 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择推荐接受度作为结果变量，因为它是RA文献的关键结果、不同于对单一来源接受的研究、是比销售更直接的行为变量、且对商家有实践意义。",
+      "rhetorical_function_cn": "为因变量选择提供理由。",
+      "depends_on_cn": "多来源研究和ProU结果变量。",
+      "sets_up_cn": "为实验测量和贡献定位做铺垫。",
+      "evidence_pointer": "Recommendation source section P5"
+    },
+    {
+      "order": 37,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P1 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "RA通过eliciting偏好和帮助处理大量备选方案来降FitU，但其基于卖家数据库的筛选限制了对真实使用和长期性能的感知，因此不擅长DeU/PerU。",
+      "rhetorical_function_cn": "推导RA的维度优势与局限。",
+      "depends_on_cn": "ProU模型和RA文献。",
+      "sets_up_cn": "说明RA∩experts互补性的依据。",
+      "evidence_pointer": "H1 section P1"
+    },
+    {
+      "order": 38,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P2 S1-S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "消费者因实际使用过产品，其推荐能反映描述是否真实以及基本性能表现，因此降低DeU和PerU。",
+      "rhetorical_function_cn": "建立消费者降DeU/PerU机制。",
+      "depends_on_cn": "消费者体验文献。",
+      "sets_up_cn": "为专家比较做铺垫。",
+      "evidence_pointer": "H1 section P2"
+    },
+    {
+      "order": 39,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P3 S1-S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "专家因经验和深入理解能发现被卖家忽略的隐藏属性和测试长期性能，因此也降低DeU和PerU。",
+      "rhetorical_function_cn": "建立专家降DeU/PerU机制。",
+      "depends_on_cn": "专家推荐文献。",
+      "sets_up_cn": "为专家优于消费者提供基础。",
+      "evidence_pointer": "H1 section P3"
+    },
+    {
+      "order": 40,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P4 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "因此RAs∩experts可降低三维度，而experts∩consumers只能降低二维度；ProU模型和信号理论都支持覆盖更多维度的机制更好。",
+      "rhetorical_function_cn": "从机制预测差异。",
+      "depends_on_cn": "前面对三类来源的分析。",
+      "sets_up_cn": "引出H1。",
+      "evidence_pointer": "H1 section P4"
+    },
+    {
+      "order": 41,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P5 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "在专家在场时，消费者降低DeU/PerU的边际作用很小，因为平均消费者知识较浅、经验噪声和偏差较多，专家作为权威会更受信任并主导信号。",
+      "rhetorical_function_cn": "解释消费者来源为何不是叠加效应。",
+      "depends_on_cn": "来源可信度文献。",
+      "sets_up_cn": "为H1和后续H3的边际效应观点提供基础。",
+      "evidence_pointer": "H1 section P5"
+    },
+    {
+      "order": 42,
+      "section": "Hypothesis development: H1 section",
+      "locator": "P6 S1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：RA与专家趋同带来的推荐接受度高于专家与消费者趋同。",
+      "rhetorical_function_cn": "正式陈述第一假设。",
+      "depends_on_cn": "来源-维度映射和ProU互补。",
+      "sets_up_cn": "指导实验2/3的对比。",
+      "evidence_pointer": "H1 section end"
+    },
+    {
+      "order": 43,
+      "section": "Hypothesis development: H2 section",
+      "locator": "P1 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "RAs∩experts和RAs∩consumers都覆盖三维度，但专家降低DeU/PerU的程度大于消费者，因此前者接受度更高。",
+      "rhetorical_function_cn": "将H2建立在降低程度差异上。",
+      "depends_on_cn": "ProU模型和来源可信度。",
+      "sets_up_cn": "随后用信号成本和可信度论证。",
+      "evidence_pointer": "H2 section P1"
+    },
+    {
+      "order": 44,
+      "section": "Hypothesis development: H2 section",
+      "locator": "P2 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "信号理论认为可信信号需要发送者有沉没成本且虚假信号成本高；专家推荐低质产品会损害声誉，而匿名消费者的虚假信号成本低，因此专家信号更可信。",
+      "rhetorical_function_cn": "用信号理论解释专家优于消费者。",
+      "depends_on_cn": "信号理论和来源特性。",
+      "sets_up_cn": "支撑H2。",
+      "evidence_pointer": "H2 section P2"
+    },
+    {
+      "order": 45,
+      "section": "Hypothesis development: H2 section",
+      "locator": "P3 S1-S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Nielsen等研究发现第三方专家内容比消费者评论更能提升购买考虑；消费者评论存在获取偏差、少报偏差和虚假评论问题。",
+      "rhetorical_function_cn": "用外部证据强化专家可信度优势。",
+      "depends_on_cn": "信号理论论证。",
+      "sets_up_cn": "为H2和H3中消费者的低边际作用提供经验支持。",
+      "evidence_pointer": "H2 section P3"
+    },
+    {
+      "order": 46,
+      "section": "Hypothesis development: H2 section",
+      "locator": "P5 S1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：RA与专家趋同的接受度高于RA与消费者趋同。",
+      "rhetorical_function_cn": "正式陈述第二假设。",
+      "depends_on_cn": "专家/消费者信号可信度差异。",
+      "sets_up_cn": "指导实验2/3的对比。",
+      "evidence_pointer": "H2 section end"
+    },
+    {
+      "order": 47,
+      "section": "Hypothesis development: H3 section",
+      "locator": "P1 S1-S3",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "因为RAs∩experts已覆盖三维度且专家主导DeU/PerU，再加入消费者来源不会显著增加接受度。",
+      "rhetorical_function_cn": "推导三源与二源等效。",
+      "depends_on_cn": "H2的论据和来源主导效应。",
+      "sets_up_cn": "为H3的零假设方向预测做铺垫。",
+      "evidence_pointer": "H3 section P1"
+    },
+    {
+      "order": 48,
+      "section": "Hypothesis development: H3 section",
+      "locator": "P2 S1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：RA与专家趋同与三源趋同导致相同水平的推荐接受度。",
+      "rhetorical_function_cn": "正式陈述第三假设。",
+      "depends_on_cn": "维度覆盖数量不变的论证。",
+      "sets_up_cn": "挑战更多来源一定更好的直觉。",
+      "evidence_pointer": "H3 section end"
+    },
+    {
+      "order": 49,
+      "section": "First experiment",
+      "locator": "P1 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "在假设检验前，实验1用1×3单源设计确认：专家最降DeU/PerU、RA最降FitU、三维度降低与接受度负相关。",
+      "rhetorical_function_cn": "预告实验1目标。",
+      "depends_on_cn": "理论推导。",
+      "sets_up_cn": "为实验2/3提供前提。",
+      "evidence_pointer": "First experiment opening"
+    },
+    {
+      "order": 50,
+      "section": "First experiment",
+      "locator": "Data analysis P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "通过MTurk招募北美被试，要求任务接受率高于90%，并用注意力题和开放式回答筛选不合格问卷。",
+      "rhetorical_function_cn": "说明样本来源和质量控制。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "为后续实验招募方式提供模板。",
+      "evidence_pointer": "First experiment data analysis"
+    },
+    {
+      "order": 51,
+      "section": "First experiment",
+      "locator": "Shopping task P1-P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "每个网站展示30款平板和7个属性，并用$2.5加潜在$1.5奖励被试认真作答。",
+      "rhetorical_function_cn": "描述购物任务和激励。",
+      "depends_on_cn": "实验目标。",
+      "sets_up_cn": "为后续两个实验的相似任务做基础。",
+      "evidence_pointer": "Shopping task section"
+    },
+    {
+      "order": 52,
+      "section": "First experiment",
+      "locator": "Experimental procedures P1-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "RA组按用户偏好推荐产品，专家/消费者组用CNET榜单，并用Table 1的标签句操纵来源感知。",
+      "rhetorical_function_cn": "说明来源操纵的具体实现。",
+      "depends_on_cn": "来源-维度映射理论。",
+      "sets_up_cn": "复现于实验2/3。",
+      "evidence_pointer": "Experimental procedures and Table 1"
+    },
+    {
+      "order": 53,
+      "section": "First experiment",
+      "locator": "Construct measurements P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "DeU/PerU用Dimoka等量表、FitU用Hong和Pavlou量表，推荐接受度以所选项的排名位置测量。",
+      "rhetorical_function_cn": "说明构念测量来源。",
+      "depends_on_cn": "ProU文献。",
+      "sets_up_cn": "为实验3加入感知测量做依据。",
+      "evidence_pointer": "Construct measurements section"
+    },
+    {
+      "order": 54,
+      "section": "First experiment",
+      "locator": "Data analysis P2-P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "结果支持三个来源都能降DeU/PerU；专家降DeU/PerU强于消费者；RA降FitU强于专家和消费者；不确定性降低与推荐接受度显著相关。",
+      "rhetorical_function_cn": "报告实验1核心结果。",
+      "depends_on_cn": "数据分析和假设推导。",
+      "sets_up_cn": "确认理论映射有效，为多源实验铺路。",
+      "evidence_pointer": "Data analysis and Table 3"
+    },
+    {
+      "order": 55,
+      "section": "Second experiment",
+      "locator": "P1 S1-S2",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "实验1建立了源-维度映射，但只有单一来源，无法检验趋同效应；实验2通过多源趋同操纵来解决。",
+      "rhetorical_function_cn": "连接实验1和实验2。",
+      "depends_on_cn": "实验1结果。",
+      "sets_up_cn": "引入实验2的五组设计。",
+      "evidence_pointer": "Second experiment opening"
+    },
+    {
+      "order": 56,
+      "section": "Second experiment",
+      "locator": "P2-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "实验2为控制外部干扰，把三个来源整合进同一网站，并counterbalance来源位置。",
+      "rhetorical_function_cn": "说明多源整合设计。",
+      "depends_on_cn": "引言中的真实网站例子。",
+      "sets_up_cn": "为Table 5清单操纵提供环境。",
+      "evidence_pointer": "Second experiment design; Figure 1"
+    },
+    {
+      "order": 57,
+      "section": "Second experiment",
+      "locator": "Manipulation of source recommendations P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "通过交换专家和消费者清单中的产品并复制P/Q，以及调整RA输出，构造五组不同趋同水平。",
+      "rhetorical_function_cn": "说明趋同操纵的具体操作。",
+      "depends_on_cn": "理论要求的比较组合。",
+      "sets_up_cn": "为假设检验提供处理条件。",
+      "evidence_pointer": "Manipulation section; Table 5"
+    },
+    {
+      "order": 58,
+      "section": "Second experiment",
+      "locator": "Manipulation checks P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "操纵检验表明：被试感知到趋同时更高趋同、RA推荐的产品感知契合更高、专家可信度高于消费者。",
+      "rhetorical_function_cn": "验证处理有效。",
+      "depends_on_cn": "操纵设计。",
+      "sets_up_cn": "增强后续假设检验可信度。",
+      "evidence_pointer": "Experiment 2 manipulation checks"
+    },
+    {
+      "order": 59,
+      "section": "Second experiment",
+      "locator": "Hypotheses tests P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "因变量是二值接受与否，故用二元logistic回归并加入多个控制变量。",
+      "rhetorical_function_cn": "说明统计方法选择。",
+      "depends_on_cn": "因变量性质和实验数据。",
+      "sets_up_cn": "为报告接受率差异做方法基础。",
+      "evidence_pointer": "Experiment 2 hypotheses tests"
+    },
+    {
+      "order": 60,
+      "section": "Second experiment",
+      "locator": "Hypotheses tests P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "RAs∩experts接受率显著高于experts∩consumers和RAs∩consumers，三源与RAs∩experts无显著差异，支持H1、H2，不拒绝H3。",
+      "rhetorical_function_cn": "报告三个假设的检验结果。",
+      "depends_on_cn": "logistic回归和分组数据。",
+      "sets_up_cn": "为实验3复制和理论解释做准备。",
+      "evidence_pointer": "Table 6 and Hypotheses tests"
+    },
+    {
+      "order": 61,
+      "section": "Second experiment",
+      "locator": "Hypotheses tests end",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "附录C和D提供稳健性分析和参与者开放式内容分析。",
+      "rhetorical_function_cn": "预告补充证据。",
+      "depends_on_cn": "实验2结果。",
+      "sets_up_cn": "提高结果可信度。",
+      "evidence_pointer": "Second experiment end"
+    },
+    {
+      "order": 62,
+      "section": "Third experiment",
+      "locator": "P1 S1-S2",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "实验2未直接测量感知ProU且样本较小，实验3在更大样本中测量三个维度并复制结果。",
+      "rhetorical_function_cn": "说明实验3的必要性。",
+      "depends_on_cn": "实验2的未解决问题。",
+      "sets_up_cn": "为实验3设计做铺垫。",
+      "evidence_pointer": "Third experiment opening"
+    },
+    {
+      "order": 63,
+      "section": "Third experiment",
+      "locator": "P2-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "设计、操纵和程序与实验2相同，但改用MTurk、$3加$2激励，并沿用实验1的ProU测量。",
+      "rhetorical_function_cn": "说明复制设计的配置。",
+      "depends_on_cn": "实验2设计。",
+      "sets_up_cn": "为复制和机制测量做基础。",
+      "evidence_pointer": "Third experiment design"
+    },
+    {
+      "order": 64,
+      "section": "Third experiment",
+      "locator": "Manipulation and perceived uncertainty P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "操纵检验和感知结果复现实验1：RA降FitU最强，专家降PerU/DeU最强；趋同组感知趋同更高。",
+      "rhetorical_function_cn": "用直接感知测量支持机制。",
+      "depends_on_cn": "实验3的数据。",
+      "sets_up_cn": "为H1-H3复制结果提供机制解释。",
+      "evidence_pointer": "Third experiment perception results"
+    },
+    {
+      "order": 65,
+      "section": "Third experiment",
+      "locator": "Hypotheses tests P1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "H1和H2再次支持，H3不拒绝；接受率差异与实验2大体一致。",
+      "rhetorical_function_cn": "报告复制结果。",
+      "depends_on_cn": "实验3数据。",
+      "sets_up_cn": "为贡献和边界讨论提供依据。",
+      "evidence_pointer": "Table 7 and Third experiment hypotheses tests"
+    },
+    {
+      "order": 66,
+      "section": "Third experiment",
+      "locator": "Supplementary analysis P1-P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "访问两个来源且未发现趋同的被试更倾向于访问第三个来源；访问三源者产品知识更高，尤其是相对于未访问RA的被试。",
+      "rhetorical_function_cn": "补充理解多源访问行为。",
+      "depends_on_cn": "实验2/3的访问记录。",
+      "sets_up_cn": "为实践贡献中‘多源整合’和边界条件提供额外证据。",
+      "evidence_pointer": "Third experiment supplementary analysis"
+    },
+    {
+      "order": 67,
+      "section": "Contributions: Theoretical contributions",
+      "locator": "P1 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者扩展ProU模型，将DeU/PerU/FitU整合为一个三维概念，并指出同时降低三维度比只降低一维或二维更好。",
+      "rhetorical_function_cn": "重述理论贡献与ProU整合。",
+      "depends_on_cn": "三个实验的结果。",
+      "sets_up_cn": "为“不存在替代效应、需要互补”的主张提供框架。",
+      "evidence_pointer": "Theoretical contributions P1"
+    },
+    {
+      "order": 68,
+      "section": "Contributions: Theoretical contributions",
+      "locator": "P2 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者在ProU模型中引入推荐接受度，因为它比价格溢价和购买金额更直接反映不确定性降低的效果。",
+      "rhetorical_function_cn": "声明因变量层面的理论增量。",
+      "depends_on_cn": "结果变量讨论。",
+      "sets_up_cn": "支持实践相关性和未来研究。",
+      "evidence_pointer": "Theoretical contributions P2"
+    },
+    {
+      "order": 69,
+      "section": "Contributions: Theoretical contributions",
+      "locator": "P3 S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "向推荐源文献贡献：挑战‘更多来源一定更好’的常识，并显示专家可替代消费者来源，来源重要性取决于能最优降低的ProU维度数量。",
+      "rhetorical_function_cn": "把结果提升为来源数量与维度覆盖的一般命题。",
+      "depends_on_cn": "H3不拒绝的结果。",
+      "sets_up_cn": "为信号一致性贡献做铺垫。",
+      "evidence_pointer": "Theoretical contributions P3"
+    },
+    {
+      "order": 70,
+      "section": "Contributions: Theoretical contributions",
+      "locator": "P4 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "对信息信号文献贡献：不同来源在降低特定ProU上被感知不同，不能假设来源效果相似；信号一致性的组合效应此前未被充分研究。",
+      "rhetorical_function_cn": "把多来源趋同重新定位为信号组合问题。",
+      "depends_on_cn": "Experiments 1-3结果。",
+      "sets_up_cn": "为未来研究信号组合提供方向。",
+      "evidence_pointer": "Theoretical contributions P4"
+    },
+    {
+      "order": 71,
+      "section": "Contributions: Theoretical contributions",
+      "locator": "P5 S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "对RA文献贡献：表明除FitU外用户还需要DeU/PerU降低，因此RA与专家组合比RA与其他来源更好；本研究还使用成年被试。",
+      "rhetorical_function_cn": "连接RA文献并指出其实践价值。",
+      "depends_on_cn": "实验结果和样本特征。",
+      "sets_up_cn": "为实践贡献中的来源组合建议做铺垫。",
+      "evidence_pointer": "Theoretical contributions P5"
+    },
+    {
+      "order": 72,
+      "section": "Practical contributions",
+      "locator": "P1 S1-S3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "实践上，多数被试会访问两到三个来源，因此只提供一个来源可能失去潜在顾客；商家应提供多个来源。",
+      "rhetorical_function_cn": "把多源访问行为转化为商家建议。",
+      "depends_on_cn": "实验2/3的访问来源数据。",
+      "sets_up_cn": "为RA+专家优先的推荐做铺垫。",
+      "evidence_pointer": "Practical contributions P1"
+    },
+    {
+      "order": 73,
+      "section": "Practical contributions",
+      "locator": "P2-P3",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "商家应把RA和专家作为优先的两来源组合，因为二者互补覆盖三维度；这尤其适用于搜索产品。",
+      "rhetorical_function_cn": "给出具体可操作设计知识。",
+      "depends_on_cn": "H1/H2结果和来源-维度映射。",
+      "sets_up_cn": "为边界条件和顾客警示做铺垫。",
+      "evidence_pointer": "Practical contributions P3"
+    },
+    {
+      "order": 74,
+      "section": "Practical contributions",
+      "locator": "P4-P5",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "较低适配但多源支持的产品与无趋同但更适配产品相比，接受率相当；因此趋同不应脱离产品适配性。",
+      "rhetorical_function_cn": "限制‘趋同总是好’的解释。",
+      "depends_on_cn": "Group 1和Group 4的比较。",
+      "sets_up_cn": "强调真正的设计知识是来源互补与适配并重。",
+      "evidence_pointer": "Practical contributions P4"
+    },
+    {
+      "order": 75,
+      "section": "Practical contributions",
+      "locator": "P6-P7",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "专家来源为第三方（如CNET）时更可信；自封专家或店内专家可能被感知有偏，因此商家应从公认渠道获取专家推荐。",
+      "rhetorical_function_cn": "界定专家来源的可信边界。",
+      "depends_on_cn": "来源可信度文献和实验结果。",
+      "sets_up_cn": "为未来研究第三方网站设置铺路。",
+      "evidence_pointer": "Practical contributions P6-P7"
+    },
+    {
+      "order": 76,
+      "section": "Limitations and future research",
+      "locator": "P1 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "只使用平板这一搜索产品，经验产品中消费者的作用可能更强，RA对FitU的作用可能下降。",
+      "rhetorical_function_cn": "承认产品类型边界。",
+      "depends_on_cn": "结果与搜索产品限定。",
+      "sets_up_cn": "为经验产品未来研究做铺垫。",
+      "evidence_pointer": "Limitations P1"
+    },
+    {
+      "order": 77,
+      "section": "Limitations and future research",
+      "locator": "P2 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "只考虑三类来源，且RA为内容过滤型；协同过滤RA和社交来源可能改变趋同结果。",
+      "rhetorical_function_cn": "限定来源类型。",
+      "depends_on_cn": "实验设计中的RA类型。",
+      "sets_up_cn": "为其他推荐源研究做铺垫。",
+      "evidence_pointer": "Limitations P2"
+    },
+    {
+      "order": 78,
+      "section": "Limitations and future research",
+      "locator": "P3 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "专家和消费者仅以数值评分形式运作，未包含文字评论；未来可用更精细的推荐源设计。",
+      "rhetorical_function_cn": "限定操纵粗糙度。",
+      "depends_on_cn": "实验设计中的评分选择。",
+      "sets_up_cn": "为高级推荐源操作化研究做铺垫。",
+      "evidence_pointer": "Limitations P3"
+    },
+    {
+      "order": 79,
+      "section": "Limitations and future research",
+      "locator": "P4-P5",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "把三源整合在同一网站可能比跨第三方网站更高信任；未来还需研究来源最佳数量和趋同推荐数量。",
+      "rhetorical_function_cn": "限定实验情境并指出未来问题。",
+      "depends_on_cn": "实验环境设计和结果。",
+      "sets_up_cn": "为后续研究留下明确议程。",
+      "evidence_pointer": "Limitations P4-P5"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先指出现有研究只让被试接触单一来源，再用BestBuy、Amazon等真实平台例证多源已成为常态，从而把‘不同组合的相对效应未知’构造为既现实又理论化的缺口。",
+    "signposting_cn": "每个实验开头直接说明上一实验留下什么、本实验解决什么；贡献部分按理论贡献、推荐源文献、信号文献、RA文献分层；实验内部用‘首先、其次’等路标。",
+    "transition_logic_cn": "实验1从单源映射过渡到实验2的多源趋同；实验2以未测机制和样本量小引出实验3；每个阶段之间都有明确的承上启下句。",
+    "claim_evidence_rhythm_cn": "先理论推导H1-H3，然后用实验1的统计结果确认前提，实验2给出接受率差异和p值，实验3以更大样本和感知测量复现，最后在贡献中把结果抽象为理论命题。",
+    "benchmark_narrative_cn": "无趋同组和两两组合构成比较阶梯，使读者看到的不是‘有无趋同’二分，而是不同来源组合的排序；实验3进一步用未发现趋同后继续访问第三来源的行为作为辅助benchmark。",
+    "theory_return_cn": "讨论和贡献部分把接受率差异重新表达为ProU三维度的互补性，指出一维或二维降低不能替代另一维，把实证结果提升为对ProU模型的扩展。",
+    "contribution_positioning_cn": "每个贡献都先写文献的既有不足，再写本文做法；通过‘首次整合三维度’‘首次把ProU用于推荐源’‘填补信号一致性空白’等表述定位新增知识。",
+    "novelty_protection_cn": "不是停留在‘某种组合更好’，而是用三维度覆盖数量解释排序，并用H3不拒绝来否定‘来源越多越好’的直觉；同时用搜索产品、第三方专家、数值评分等边界条件防止结论被泛化成一次性性能结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "描述现实趋势并指出现有研究只处理单一要素，构建研究缺口。",
+        "research_job_cn": "系统综述相关文献并收集真实平台例证。",
+        "required_evidence_cn": "文献中对单一来源的研究、网站实际多源实践的证据。",
+        "transition_to_next_cn": "从实践缺口自然引出‘相对效应未知’的研究问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "引入能够解释现象的核心理论，并拆解为若干可操作维度。",
+        "research_job_cn": "选择ProU模型，界定DeU/PerU/FitU并说明其可区分性。",
+        "required_evidence_cn": "理论文献中的定义、先前应用和结果变量。",
+        "transition_to_next_cn": "理论维度需要落地到具体来源能力，于是进入来源-维度映射。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "把理论维度映射到具体设计对象（来源）并说明机制。",
+        "research_job_cn": "论证RA、专家、消费者各自降低哪些维度及程度差异。",
+        "required_evidence_cn": "先验研究、信号理论和来源可信度文献。",
+        "transition_to_next_cn": "映射完成后即可对组合效果排序并形成假设。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "提出可检验假设，包括方向性假设和等价性假设。",
+        "research_job_cn": "基于维度覆盖数量和降低程度推导H1-H3。",
+        "required_evidence_cn": "理论逻辑和已有机制证据。",
+        "transition_to_next_cn": "假设需要经验验证，于是先设计前提实验。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设计并报告前提实验，验证关键理论映射。",
+        "research_job_cn": "实验1用单源设计比较来源在三个维度上的降低效果。",
+        "required_evidence_cn": "统计显著的维度-来源映射和与因变量的相关性。",
+        "transition_to_next_cn": "前提成立后，主实验可以操纵多源组合。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "设计多源操纵实验，直接检验假设。",
+        "research_job_cn": "整合多源到同一网站，用清单重叠构造趋同组合，用logistic回归比较接受率。",
+        "required_evidence_cn": "组间接受率差异、操纵检验和控制变量结果。",
+        "transition_to_next_cn": "主实验可能未测机制且样本有限，需要复制与机制实验。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "用更大样本复制结果并加入机制测量。",
+        "research_job_cn": "实验3重复设计并增加ProU感知测量、访问行为补充分析。",
+        "required_evidence_cn": "假设结果复现、感知机制测量与原有映射一致。",
+        "transition_to_next_cn": "证据充分后进入贡献和边界讨论。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "把结果抽象为理论贡献和实践知识，并划定边界。",
+        "research_job_cn": "总结ProU互补性、推荐接受度结果变量、多源信号一致性和RA+专家设计原则。",
+        "required_evidence_cn": "前面所有实验的一致结果。",
+        "transition_to_next_cn": "结束前用限制与未来研究缓冲过度泛化。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "先用前提实验验证理论映射，再直接操纵关键设计差异",
+      "将理论维度转化为来源组合的排序，而不是只比较有无某个功能",
+      "用‘不拒绝H3’挑战常识时，明确说明这是弱证据并辅以维度数量论证",
+      "每个实验开头交代前一实验未解决什么",
+      "在贡献中把接受率差异重新解释为理论机制，并用边界条件保护结论"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要开发多个定制购物网站并嵌入RA交互",
+      "需要获取真实第三方专家榜单（CNET）并操纵清单重叠",
+      "三轮实验涉及MTurk和panel样本、激励支付、注意力题",
+      "附录中的稳健性分析和内容分析需要额外编码工作",
+      "来源位置的counterbalance和计算机日志可能要求前端埋点"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只重复‘RAs∩experts更好’而没有实验1的维度映射证据",
+      "不能把H3的‘不拒绝零假设’写成‘证明等价’",
+      "不能把结论推广到经验产品或非第三方专家情境",
+      "不能只宣称ProU机制而不测量感知或做中介分析"
+    ],
+    "single_best_description_of_the_routine_cn": "用产品不确定性三维度把推荐来源组合排序成理论可预测的阶梯，再通过三个递进实验验证前提、假设和边界。"
+  },
+  "confidence": 0.7,
+  "limitations_cn": "分析基于论文正文和可见表图；附录A/B/C/D的具体题项、稳健性分析细节和内容分析编码未在全文呈现，因此部分证据依赖作者宣称；无页码，定位以章节、段落和表图为准。",
+  "usage": {
+    "prompt_tokens": 28782,
+    "completion_tokens": 26835,
+    "total_tokens": 55617,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 28782
+  }
+}

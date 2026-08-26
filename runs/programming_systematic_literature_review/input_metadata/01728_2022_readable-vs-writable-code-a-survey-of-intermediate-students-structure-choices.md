@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85126108054"
+title: "Readable vs.Writable code: A Survey of Intermediate Students' Structure Choices"
+authors: "Wiese E.; Rafferty A.N.; Pyper J."
+year: "2022"
+journal: "SIGCSE 2022 - Proceedings of the 53rd ACM Technical Symposium on Computer Science Education"
+doi: "10.1145/3478431.3499413"
+---
+# Scopus title-abstract-keyword metadata
+Title: Readable vs.Writable code: A Survey of Intermediate Students' Structure Choices
+Abstract: Since intermediate CS students can use a variety of control struc-tures, why do their choices often not match experts' Students may not realize what choices expert prefer, find non-expert choices easier to read, or simply forget to write with expert structure. To disentangle these explanations, we surveyed 328 2nd and 3rd se-mester undergraduates, with tasks including writing short func-tions, selecting which structure was most readable or best styled, and comprehension questions. Questions focused on seven control structure topics that were important to instructors (e.g., factoring out repeated code between an if-block and its else). Students frequently wrote with non-expert structure, and, for five topics, at least 1/3 of students (48%-71%) thought a non-expert struc-ture was more readable than the expert one. However, students often made one choice when writing code, but preferred a different choice when reading it. Additionally, for more complex topics, stu-dents often failed to notice (or understand) differences in execution caused by changes in structure. Together, these results suggest that instruction and practice for choosing control structures should be context-specific, and that assessment focused only on code writing may miss underlying misunderstandings.  © 2022 ACM.
+Author keywords: control structures; discourse rules; novice programmers
+Index keywords: Education computing; Surveys; Code-writing; Control structure; Discourse rule; Novice programmer; Struc- ture; Writing codes; Students
+Document type: Conference paper
+Conference: 53rd Annual ACM Technical Symposium on Computer Science Education, SIGCSE 2022
+Source title: SIGCSE 2022 - Proceedings of the 53rd ACM Technical Symposium on Computer Science Education
+Year: 2022
+EID: 2-s2.0-85126108054
+DOI: 10.1145/3478431.3499413
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

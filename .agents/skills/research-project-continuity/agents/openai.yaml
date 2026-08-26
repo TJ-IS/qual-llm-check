@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Project Continuity"
+  short_description: "Artifact-led continuity across long research tasks"
+  default_prompt: "Use $research-project-continuity to resume from verified artifacts, maintain requirement traceability and checkpoints, and return material rule conflicts to the user for confirmation."

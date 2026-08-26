@@ -1,0 +1,37 @@
+# manifest_name=SC-Guard-40M canonical trainable checkpoint storage ledger
+# format_version=scguard40m-flat-offset-v1
+# scope=trainable canonical parameter storage only; target copies, optimizer state and buffers are excluded
+# storage_contract=record_type=storage is an actual one-dimensional float32 flat-packed checkpoint tensor, not an ordinary layer tensor
+# view_contract=record_type=view is a zero-count logical view over exactly one storage tensor; offsets are zero-based half-open intervals [offset_start,offset_end)
+# total_rule=sum(count_in_trainable_total where record_type=storage)=40108032; every view row has count_in_trainable_total=0
+# normalization=UTF-8 decode; normalize CRLF/CR to LF; delete the complete normalized_sha256 comment line; retain all other bytes and the final LF; SHA256
+record_type	checkpoint_key	storage_shape	storage_numel	owner	role	alias_group	logical_view	offset_start	offset_end	view_shape	view_numel	count_in_trainable_total
+storage	representation.input_contract.flat	[5842944]	5842944	representation	input_contract_canonical_storage	ag_rep_input	NA	NA	NA	NA	0	5842944
+view	representation.input_contract.flat	[5842944]	5842944	representation	input_contract_view	ag_rep_input	type_and_numeric_input_payload	0	2921472	[2921472]	2921472	0
+view	representation.input_contract.flat	[5842944]	5842944	representation	input_contract_view	ag_rep_input	contract_delta_payload	2921472	5842944	[2921472]	2921472	0
+storage	representation.relation_gat.flat	[15997952]	15997952	representation	relation_gat_canonical_storage	ag_rep_rgat	NA	NA	NA	NA	0	15997952
+view	representation.relation_gat.flat	[15997952]	15997952	representation	relation_gat_view	ag_rep_rgat	relation_gat_layer_0_payload	0	3999488	[3999488]	3999488	0
+view	representation.relation_gat.flat	[15997952]	15997952	representation	relation_gat_view	ag_rep_rgat	relation_gat_layer_1_payload	3999488	7998976	[3999488]	3999488	0
+view	representation.relation_gat.flat	[15997952]	15997952	representation	relation_gat_view	ag_rep_rgat	relation_gat_layer_2_payload	7998976	11998464	[3999488]	3999488	0
+view	representation.relation_gat.flat	[15997952]	15997952	representation	relation_gat_view	ag_rep_rgat	relation_gat_layer_3_payload	11998464	15997952	[3999488]	3999488	0
+storage	representation.time_memory.flat	[6291456]	6291456	representation	time_memory_canonical_storage	ag_rep_time_memory	NA	NA	NA	NA	0	6291456
+view	representation.time_memory.flat	[6291456]	6291456	representation	time_memory_view	ag_rep_time_memory	continuous_time_payload	0	2097152	[2097152]	2097152	0
+view	representation.time_memory.flat	[6291456]	6291456	representation	time_memory_view	ag_rep_time_memory	gated_memory_payload	2097152	6291456	[4194304]	4194304	0
+storage	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_canonical_storage	ag_wm_decoder_heads	NA	NA	NA	NA	0	5962752
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	decoder_payload	0	2962752	[2962752]	2962752	0
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	bootstrap_head_0_payload	2962752	3562752	[600000]	600000	0
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	bootstrap_head_1_payload	3562752	4162752	[600000]	600000	0
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	bootstrap_head_2_payload	4162752	4762752	[600000]	600000	0
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	bootstrap_head_3_payload	4762752	5362752	[600000]	600000	0
+view	world_model.decoder_heads.flat	[5962752]	5962752	world-model	decoder_heads_view	ag_wm_decoder_heads	bootstrap_head_4_payload	5362752	5962752	[600000]	600000	0
+storage	control.q1.flat	[1514496]	1514496	Q1	q1_canonical_storage	ag_control_q1	NA	NA	NA	NA	0	1514496
+view	control.q1.flat	[1514496]	1514496	Q1	q1_view	ag_control_q1	q1_parameter_payload	0	1514496	[1514496]	1514496	0
+storage	control.q2.flat	[1514496]	1514496	Q2	q2_canonical_storage	ag_control_q2	NA	NA	NA	NA	0	1514496
+view	control.q2.flat	[1514496]	1514496	Q2	q2_view	ag_control_q2	q2_parameter_payload	0	1514496	[1514496]	1514496	0
+storage	control.v.flat	[1000704]	1000704	V	v_canonical_storage	ag_control_v	NA	NA	NA	NA	0	1000704
+view	control.v.flat	[1000704]	1000704	V	v_view	ag_control_v	v_parameter_payload	0	1000704	[1000704]	1000704	0
+storage	control.action_feature.flat	[721408]	721408	action-feature	action_feature_canonical_storage	ag_control_action_feature	NA	NA	NA	NA	0	721408
+view	control.action_feature.flat	[721408]	721408	action-feature	action_feature_view	ag_control_action_feature	action_feature_parameter_payload	0	721408	[721408]	721408	0
+storage	control.actor_scorer.flat	[1261824]	1261824	actor	actor_scorer_canonical_storage	ag_control_actor	NA	NA	NA	NA	0	1261824
+view	control.actor_scorer.flat	[1261824]	1261824	actor	actor_scorer_view	ag_control_actor	candidate_scorer_parameter_payload	0	1261824	[1261824]	1261824	0
+# normalized_sha256=AB899E8251076E1B777AB2862F143C23D07EC4B4B74AF3D306E7B6794BBF230E

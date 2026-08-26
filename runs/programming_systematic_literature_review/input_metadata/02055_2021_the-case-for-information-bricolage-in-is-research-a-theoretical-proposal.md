@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105029287074"
+title: "The Case for Information Bricolage in IS Research: A Theoretical Proposal"
+authors: "Matthews M.J."
+year: "2021"
+journal: "Pacific Asia Conference on Information Systems"
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: The Case for Information Bricolage in IS Research: A Theoretical Proposal
+Abstract: The day-to-day creation mechanisms of the information systems (IS) professional rarely resemble a linear process in which he or she sits at a computer and simply codes, builds, or configures for hours upon end, ignorant of outside resources. In contrast, natural observation testifies that IS professionals routinely seek out, store, and recombine a myriad of information inputs in the creation of new solutions. With this fundamental observation in mind, a bricolage perspective is anticipated to be fruitful in forwarding practitioner-based research involving the IS professional. In this manuscript, I draw upon the theoretical perspectives of mindfulness, information filtering, and domain knowledge, and I conceptually introduce the construct of “information bricolage” and posit that the IS professional is an information bricoleur. © 2021, Association for Information Systems. All rights reserved.
+Author keywords: Bricolage; domain knowledge; information foraging; mindfulness
+Index keywords: 
+Document type: Conference paper
+Conference: 25th Pacific Asia Conference on Information Systems, PACIS 2021
+Source title: Pacific Asia Conference on Information Systems
+Year: 2021
+EID: 2-s2.0-105029287074
+DOI: 
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

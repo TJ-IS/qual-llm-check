@@ -1,0 +1,1003 @@
+# 审计 v3（最终修正）：388 金标准 × 三层检索
+
+- 匹配通道：归一化标题 → CSV（主）；DOI（辅）。decisions.doi 来自全文库 md 头部，存在错配（如 28238 头部 DOI 是 Racial Bias 一文的），标题匹配可消除。
+- M1 候选：2494 个唯一 DOI（2495 条记录）；F2：4896 篇；F3：10093 篇
+
+| 检索层 | 金标准召回 | 召回率 | 命中数 | 精度 |
+|---|---|---|---|---|
+| M1 元数据 | 365/388 | 94.1% | 2494 | 14.6% |
+| F2 head-8000 | 381/388 | 98.2% | 4896 | 7.8% |
+| F3 全文 | 387/388 | 99.7% | 10093 | 3.8% |
+
+## A. M1 漏检（修正后 23 篇）
+
+- 01704_2024_doxing-on-social-networking-sites-an-extension-of-the-social-cognitive-theory-of-moral-thought-a.md | Doxing on Social Networking Sites: An Extension of the Social Cognitive Theory of Moral Thought and Action | 2024 | Journal of the Association for Information Systems | CSVdoi=10.17705/1jais.00898
+  - F2=True F3=True | 摘要: Doxing on social networking sites (SNS doxing) has attracted scholarly and public attention due to the devastating consequences that this behavior can have on individuals and socie
+  - 关键词: Doxing; Morality; Polynomial Regression Analysis; Retributive Proportionality; Social Approval; Social Cognitive Theory of Moral Thought and Action; Social Networking Sites | Decis
+- 04526_2011_multi-tag-and-multi-owner-rfid-ownership-transfer-in-supply-chains.md | Multi-tag and multi-owner RFID ownership transfer in supply chains | 2011 | Decision Support Systems | CSVdoi=10.1016/j.dss.2011.08.002
+  - F2=True F3=True | 摘要: In any supply chain, there is a high likelihood for individual objects to change ownership at least once in their lifetime. As RFID tags enter the supply chain, these RFID-tagged o
+  - 关键词: Ownership transfer; RFID; Supply chain | Radio frequency identification (RFID); Radio navigation; Supply chain management; Supply chains; Individual objects; Ownership transfer; RF
+- 05690_2005_model-checking-for-design-and-assurance-of-e-business-processes.md | Model checking for design and assurance of e-Business processes | 2005 | Decision Support Systems | CSVdoi=10.1016/j.dss.2003.12.001
+  - F2=True F3=True | 摘要: Use of the Internet for electronic business has the potential to revolutionize the way many businesses are conducted. Yet, several businesses have fallen victim to problems in info
+  - 关键词: e-Business; Goods atomicity; Model checking; Money atomicity; Process and communication protocols; Valid receipt | Communication systems; Computer simulation; Internet; Mathematica
+- 06092_2008_online-reputation-systems-design-and-strategic-practices.md | Online reputation systems: Design and strategic practices | 2008 | Decision Support Systems | CSVdoi=10.1016/j.dss.2007.10.001
+  - F2=True F3=True | 摘要: This paper provides a comprehensive framework for evaluating the effects of feedback systems, and the potential problems with feedback systems, on seller incentives to provide high
+  - 关键词: B2B; B2C; e-Commerce; Incentive Structure; Trust | Electronic commerce; Failure analysis; Feedback control; Industrial management; Problem solving; Quality control; Feedback system
+- 06126_2016_internet-aggression-in-online-communities-a-contemporary-deterrence-perspective.md | Internet aggression in online communities: a contemporary deterrence perspective | 2016 | Information Systems Journal | CSVdoi=10.1111/isj.12077
+  - F2=True F3=True | 摘要: Internet users' activities are critical to the development and success of Web 2.0 systems, such as online communities. Within the community's participation, knowledge sharing, and 
+  - 关键词: aggression; deterrence; morals; virtual community | Internet; Social networking (online); Virtual reality; Websites; World Wide Web; Aggression; Deterrence; Internet users; Knowled
+- 09872_2021_information-technology-and-government-corruption-in-developing-countries-evidence-from-ghana-cus.md | INFORMATION TECHNOLOGY AND GOVERNMENT CORRUPTION IN DEVELOPING COUNTRIES: EVIDENCE FROM GHANA CUSTOMS | 2021 | MIS Quarterly: Management Information Systems | CSVdoi=10.25300/misq/2021/14838
+  - F2=False F3=True | 摘要: The literature on information technology (IT) and government corruption in developing countries indicates contradictory evidence about the realization of anti-corruption effects. S
+  - 关键词: anti-corruption; developing countries; Government corruption; IS user responses; IT co-optation; IT implementation; neopatrimonialism; social embeddedness; street-level bureaucracy
+- 10238_2011_does-ethical-ideology-affect-software-piracy-attitude-and-behaviour-an-empirical-investigation-o.md | Does ethical ideology affect software piracy attitude and behaviour An empirical investigation of computer users in China | 2011 | European Journal of Information Systems | CSVdoi=10.1057/ejis.2011.31
+  - F2=False F3=True | 摘要: This study empirically examines Chinese computer users ethical ideology and its relationship to their software piracy attitude and behaviour. The investigation reveals several impo
+  - 关键词: China; computer users' ethics; ethical ideology; software piracy | Cluster analysis; Computer software; Philosophical aspects; China; Computer users; Empirical investigation; ethic
+- 10634_2009_griefing-in-virtual-worlds-causes-casualties-and-coping-strategies.md | Griefing in virtual worlds: Causes, casualties and coping strategies | 2009 | Information Systems Journal | CSVdoi=10.1111/j.1365-2575.2009.00330.x
+  - F2=True F3=True | 摘要: A virtual world is a computer-simulated three-dimensional environment. They are increasingly being used for social and commercial interaction, in addition to their original use for
+  - 关键词: Antisocial behaviour; Interpretative phenomenological analysis; Virtual worlds | 
+- 12724_2019_an-economic-analysis-of-platform-protection-in-the-presence-of-content-substitutability.md | An Economic Analysis of Platform Protection in the Presence of Content Substitutability | 2019 | Journal of Management Information Systems | CSVdoi=10.1080/07421222.2019.1628952
+  - F2=False F3=True | 摘要: Online platforms, such as App Store and Kindle, are facing a common dilemma: while the implementation of technology-based protection impedes piracy and hence boosts demand from leg
+  - 关键词: advertising agency; content agency; content protection; online piracy; online platforms; platform protection; pricing; two-sided platforms | Computer crime; Costs; Crime; Marketing
+- 13670_2016_intellectual-property-norms-in-online-communities-how-user-organized-intellectual-property-regul.md | Intellectual property norms in online communities: How user-organized intellectual property regulation supports innovation | 2016 | Information Systems Research | CSVdoi=10.1287/isre.2016.0649
+  - F2=False F3=True | 摘要: In many online communities, users reveal innovative and potentially valuable intellectual property (IP) under conditions that entail the risk of theft and imitation. When there is 
+  - 关键词: Crowdsourcing; Innovation; Intellectual property systems; Online communities; Social norms | Crowdsourcing; Innovation; Intellectual property; Social networking (online); Cumulativ
+- 14334_2009_pricing-schemes-for-digital-content-with-drm-mechanisms.md | Pricing schemes for digital content with DRM mechanisms | 2009 | Decision Support Systems | CSVdoi=10.1016/j.dss.2009.05.015
+  - F2=True F3=True | 摘要: In this paper, utilizing game-theoretic model, we examine the impact of collaborative structure, content quality, and network environment on the development of pricing scheme and D
+  - 关键词: Content quality; Digital content; Digital Right Management; Network diffusion; Pricing scheme; System collaboration | Costs; Collaborative structures; Content providers; Content qu
+- 15370_2019_an-integrative-theory-addressing-cyberharassment-in-the-light-of-technology-based-opportunism.md | An Integrative Theory Addressing Cyberharassment in the Light of Technology-Based Opportunism | 2019 | Journal of Management Information Systems | CSVdoi=10.1080/07421222.2019.1661090
+  - F2=True F3=True | 摘要: Scholars are increasingly calling for a deeper understanding of cyberharassment (CH) with the goal of devising policies, procedures, and technologies to mitigate it. Accordingly, w
+  - 关键词: cyberharassment; deviance; online harassment; self-control theory; social learning theory; social-psychological-technological (S-P-T) phenomenon; technology-based opportunism | Eng
+- 15516_2022_technological-entitlement-its-my-technology-and-ill-ab-use-it-how-i-want-to.md | TECHNOLOGICAL ENTITLEMENT: IT’S MY TECHNOLOGY AND I’LL (AB)USE IT HOW I WANT TO | 2022 | MIS Quarterly: Management Information Systems | CSVdoi=10.25300/misq/2022/15499
+  - F2=True F3=True | 摘要: Entitlement has been identified as a potentially valuable employee characteristic in the prediction of computer abuse but has not been studied systematically in the IS domain. We i
+  - 关键词: behavioral; computer abuse; construct development; Individual behaviors; multi-method; psychological; technological entitlement; technology restriction | Behavioral research; Behav
+- 20849_2000_edi-controls-design-support-system-using-relational-database-system.md | EDI controls design support system using relational database system | 2000 | Decision Support Systems | CSVdoi=10.1016/s0167-9236(00)00071-3
+  - F2=False F3=True | 摘要: The purpose of this paper is to introduce EDIRDB (EDI controls design support system using a relational database system), a prototype audit support system based on a relational dat
+  - 关键词:  | Computer systems programming; Electronic data interchange; Relational database systems; Response time (computer systems); Audit support systems; Decision support systems
+- 21281_2004_sdmi-based-rights-management-systems.md | SDMI-based rights management systems | 2004 | Decision Support Systems | CSVdoi=10.1016/s0167-9236(03)00075-7
+  - F2=True F3=True | 摘要: Building digital rights management (DRM) systems for electronic commerce is still a complex task because such systems are usually required to manage a large set of different media 
+  - 关键词: Copyright protection; Digital watermarking; Electronic commerce; Intellectual property protection; Rights management | CD-ROM; Computer crime; Computer music; Computer software; Co
+- 22211_2003_the-is-risk-analysis-based-on-a-business-model.md | The IS risk analysis based on a business model | 2003 | Information and Management | CSVdoi=10.1016/s0378-7206(03)00044-2
+  - F2=True F3=True | 摘要: The disruption of operations due to IS failure becomes more important as IS has become an increasingly essential component of the organization's operations and can affect its strat
+  - 关键词: Analytic Hierarchy Process (AHP); Asset valuation; Asset-function assignment; Business model; Paired comparison; Risk analysis | Costs; Decision making; Risk assessment; Value engi
+- 22611_2000_flaming-among-first-time-group-support-system-users.md | Flaming among first-time group support system users | 2000 | Information and Management | CSVdoi=10.1016/s0378-7206(99)00036-1
+  - F2=False F3=False | 摘要: Numerous benefits, including increases in efficiency, effectiveness, and participant satisfaction, have been noted in the literature when electronic meetings are used in place of t
+  - 关键词: Brainstorming; Disinhibition; Electronic meetings; Flaming; Group support systems | 
+- 23404_1990_information-systems-forensics.md | Information systems forensics | 1990 | Journal of Information Technology | CSVdoi=10.1057/jit.1990.31
+  - F2=True F3=True | 摘要: This paper discusses some current issues and methods related to the investigation and successful prosecution of crimes committed with or against computerized information systems. T
+  - 关键词:  | 
+- 25278_2003_identification-of-comment-authorship-in-anonymous-group-support-systems.md | Identification of comment authorship in anonymous group support systems | 2003 | Journal of Management Information Systems | CSVdoi=10.1080/07421222.2003.11045755
+  - F2=False F3=True | 摘要: This study examines whether technically "anonymous" comments entered by participants during group support system (GSS) brainstorming sessions are, in fact, unidentifiable. Hypothes
+  - 关键词: Anonymity; Computer-mediated communication; Group support systems; Social networks | Communication systems; Computers; Decision support systems; Social networks; Management informa
+- 25539_2021_exposing-patterns-of-adult-solicitor-behaviour-towards-a-theory-of-control-within-the-cybersexua.md | Exposing patterns of adult solicitor behaviour: towards a theory of control within the cybersexual abuse of youth | 2021 | European Journal of Information Systems | CSVdoi=10.1080/0960085x.2020.1816146
+  - F2=True F3=True | 摘要: The online solicitation of youth has been established as an unintended consequence of the connectedness afforded individuals through computer-mediated conversation. Information sys
+  - 关键词: child sexual abuse; grounded theory; Mike Gallivan; online sexual predation; Pär Ågerfalk; Social media; social media theory | Information systems; Grounded theory; Instant messagi
+- 26923_2018_identity-management-and-tradable-reputation1.md | Identity management and tradable reputation | 2018 | MIS Quarterly: Management Information Systems | CSVdoi=10.25300/misq/2018/13634
+  - F2=True F3=True | 摘要: Online reputation trading is a new phenomenon facilitated by the prosperity of e-commerce and social networks. Whether reputations will be reliable when people can purchase rather 
+  - 关键词: Audit; Electronic market; Identity management; Online community; Reputation | Online systems; Separation; Audit; Electronic market; Identity management; On-line communities; Reputa
+- 27203_1983_the-data-dictionary-an-evaluation-from-the-edp-audit-perspective.md | The data dictionary: An evaluation from the EDP audit perspective | 1983 | MIS Quarterly: Management Information Systems | CSVdoi=10.2307/249074
+  - F2=True F3=True | 摘要: The data dictionary system Is a documentation source that is useful for management reviews of existing and proposed systems, EDP audits, and system development functions. Early dat
+  - 关键词: Data dictionary; Data management; Database administration; Database management systems; EDP auditing | 
+- 27242_1981_online-computer-auditing-through-continuous-and-intermittent-simulation.md | Online computer auditing through continuous and intermittent simulation | 1981 | MIS Quarterly: Management Information Systems | CSVdoi=10.2307/249156
+  - F2=True F3=True | 摘要: A new computer auditing technique, called Continuous and Intermittent Simulation (CIS), is introduced. It has been specifically designed as a compliance auditing technique for time
+  - 关键词: Computer auditing; Internal auditing; Internal controls; Online auditing; Parallel simulation | 
+
+## B. M1 噪声（命中但金标准排除，2130 条）分类复核
+
+- 不在全文库 13,909（无法判定，需全文后才可复核）：606 条
+- 在全文库且被金标准排除：1524 条
+
+### B1. 标题含强攻击词但被金标准排除（59 条）——最可能漏判，逐条列理由
+
+- A scalable decision tree system and its application in pattern recognition and intrusion detection | 2005 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究核心是可扩展决策树算法（SURPASS）的规模性与分类精度，入侵检测仅作为大型数据集应用场景，未围绕攻击行为或检测防御机制展开。
+- A system for intergroup prejudice detection: The case of microblogging under terrorist attacks | 2018 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是社会心理学中的群体间偏见检测，针对的是社会群体的负面言论，而非针对信息系统、系统用户或数据的恶意攻击或防御。
+- A text-mining based cyber-risk assessment and mitigation framework for critical analysis of online hacker forums | 2022 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文为葡萄牙语哲学文章，讨论'界限/confim'概念，未涉及任何信息系统攻击或防御内容。
+- DarkNetExplorer (DNE): Exploring dark multi-layer networks beyond the resolution limit | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究核心是犯罪/恐怖网络的社区检测，目标是辅助执法机构的现实世界打击行动，而非信息系统的攻击或防御。
+- Decision support for improvisation in response to extreme events: Learning from the response to the 2001 World Trade Center attack | 2007 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文研究极端事件应急响应中的即兴决策支持，以基础设施恢复为对象，无信息系统攻击或漏洞对抗核心。
+- Exploitation vs. exploration: Choosing a supplier in an environment of incomplete information | 2004 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究核心是电子市场中买方在质量未知的供应商间进行探索与利用的决策优化，不涉及恶意行为者或攻防安全。
+- Exploiting poly-lingual documents for improving text categorization effectiveness | 2014 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是多语言文本分类的准确率提升，通过特征增强技术改进分类模型，未涉及任何恶意行为者、攻击或防御。
+- Financial fraud detection using vocal, linguistic and financial cues | 2015 | Decision Support Systems | status=no_security_relevance
+  - reason: 研究聚焦于金融欺诈检测，即利用财务、语音和语言特征识别会计违规重述，其核心是财务报告舞弊，而非面向信息系统或网络安全的攻击/防御。
+- Improving fake news detection with domain-adversarial and graph-attention neural network | 2021 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文是哲学论文，讨论边界、场所和全球化概念，未涉及任何信息系统攻击、防御或漏洞。
+- Model alignment of anthrax attack simulations | 2006 | Decision Support Systems | status=no_security_relevance
+  - reason: 文章核心是炭疽生物恐怖袭击后的疾病传播模拟模型对齐，属于生物恐怖主义公共健康应急响应，而非面向信息系统攻击或漏洞的攻防安全研究。
+- Online shopping intention in the context of data breach in online retail stores: An examination of older and younger adults | 2016 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章研究数据泄露后消费者在线购物意愿的年龄差异，核心是消费者感知、信任、风险与意图，黑客攻击仅作为背景情境，未涉及攻击或漏洞的检测、防御、缓解、评估与建模。
+- Predicting stock market returns from malicious attacks: A comparative analysis of vector autoregression and time-delayed neural networks | 2011 | Decision Support Systems | status=security_peripheral_context
+  - reason: 文章核心是研究恶意攻击强度对信息安全企业股票收益的影响并构建股票预测模型，属于金融/投资决策研究，而非攻击实施、威胁检测或防御。
+- Responding to identity theft: A victimization perspective | 2019 | Decision Support Systems | status=security_peripheral_context
+  - reason: 研究聚焦于身份盗窃受害者的情绪与行为应对，身份盗窃仅作为背景事件，未以攻击者或其对抗行为为核心，也未围绕攻击技术或威胁检测防御展开。
+- The application of data mining techniques in financial fraud detection: A classification framework and an academic review of literature | 2011 | Decision Support Systems | status=no_security_relevance
+  - reason: 全文为金融欺诈检测（信用卡、保险、公司欺诈等）数据挖掘技术的文献综述，核心是金融欺诈而非信息系统攻防，无恶意或对抗行为者针对信息系统。
+- Balancing exploration and exploitation of IT resources: The influence of Digital Business Intensity on perceived organizational performance | 2017 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究IT能力通过数字业务强度（DBI）对组织绩效的影响，属于IS/战略管理研究，未涉及任何恶意行为者、攻击、漏洞或安全防御。
+- Exploitation and exploration of IT in times of pandemic: from dealing with emergency to institutionalising crisis practices | 2020 | European Journal of Information Systems | status=no_security_relevance
+  - reason: 文章研究疫情期间高校在线教学转型中的IT探索与利用过程，不涉及任何恶意行为者、攻击或安全防御。
+- Exploiting and defending open digital platforms with boundary resources: Android's five platform forks | 2018 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章将平台分叉视为敌对商业策略，而非信息系统攻击；损害对象是商业利益与竞争优势，而非安全属性。
+- Juggling Information Technology (IT) Exploration and Exploitation: A Proportional Balance View of IT Ambidexterity | 2022 | Information Systems Research | status=no_security_relevance
+  - reason: 全文研究IT探索与利用的比例平衡对组织敏捷性的影响，属于一般组织战略与IT能力研究，完全不涉及恶意行为者、攻击或漏洞防御。
+- Motion Sensor–Based Fall Prevention for Senior Care: A Hidden Markov Model with Generative Adversarial Network Approach | 2024 | Information Systems Research | status=no_security_relevance
+  - reason: 研究核心是老年人跌倒预防的医疗健康预测分析，不存在恶意或对抗行为者，也没有信息系统攻击或漏洞相关的内容。
+- Platform Loophole Exploitation, Recovery Measures, and User Engagement: A Quasi-Natural Experiment in Online Gaming | 2024 | Information Systems Research | status=security_peripheral_context
+  - reason: 文章研究游戏平台漏洞利用后惩罚措施对用户参与度的影响，核心是平台治理和用户行为，而非信息系统的攻击、漏洞利用或防御机制。
+- Shedding Light on the Dark: The Impact of Legal Enforcement on Darknet Transactions | 2024 | Information Systems Research | status=security_peripheral_context
+  - reason: 全文研究的是执法逮捕对暗网毒品交易量的威慑效应，以犯罪经济学和威慑理论为核心，而非针对信息系统攻击或漏洞的攻防安全研究。
+- Achieving novelty and efficiency in business model design: Striking a balance between IT exploration and exploitation | 2022 | Information and Management | status=no_security_relevance
+  - reason: 全文研究IT探索与利用对商业模式设计及企业绩效的影响，未涉及任何恶意或对抗行为者，也不涉及系统安全攻防。
+- An empirical investigation of anti-spyware software adoption: A multitheoretical perspective | 2008 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是用户采纳反间谍软件的行为决定因素，而非攻击、威胁检测或防御技术本身，间谍软件威胁仅作为应用背景。
+- Are we ready for cyberterrorist attacks?—Examining the role of individual resilience | 2018 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究个体对网络恐怖袭击的心理韧性和经济韧性行为，攻击仅作为情境背景，核心是心理学和家庭财务行为，而非攻击或防御。
+- Cyberbullying impacts on victims’ satisfaction with information and communication technologies: The role of Perceived Cyberbullying Severity | 2018 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究网络欺凌受害者感知严重性对ICT满意度的影响，核心是用户体验与心理反应，未涉及攻击实施、检测、防御或安全属性损害。
+- Estimating the market impact of security breach announcements on firm values | 2009 | Information and Management | status=security_peripheral_context
+  - reason: 研究核心是估计安全漏洞公告对公司市场价值的影响，属于金融事件研究，而非攻击或防御技术本身。
+- Exploitative and exploratory learning in transactive memory systems and project performance | 2013 | Information and Management | status=no_security_relevance
+  - reason: 文章研究跨记忆系统、利用性与探索性学习对新产品开发项目绩效的影响，属于组织学习与创新管理研究，全文未涉及任何恶意行为者、信息系统攻击、漏洞或攻防安全问题。
+- Exploiting organizational knowledge in developing IS project cost and schedule estimates: An empirical study | 2007 | Information and Management | status=no_security_relevance
+  - reason: 研究核心是信息系统项目成本与工期估算中的组织知识利用，不涉及任何恶意行为者、攻击或安全防御。
+- How information technology influences opportunity exploration and exploitation firm's capabilities | 2018 | Information and Management | status=no_security_relevance
+  - reason: 论文研究IT基础设施对企业机会探索和开发能力及绩效的影响，不涉及恶意行为者、攻击或安全防御。
+- Information security breaches and IT security investments: Impacts on competitors | 2019 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究信息安全漏洞和IT安全投资公告对竞争对手股价的市场影响，属于安全事件的经济后果分析，并非以攻击实施或威胁检测/防御/评估为核心。
+- Information technology and interorganizational learning: An investigation of knowledge exploration and exploitation processes | 2015 | Information and Management | status=no_security_relevance
+  - reason: 文章研究组织间学习中IT支持的学习机制与知识探索/利用策略，完全不涉及恶意行为者、攻击或安全防御。
+- Learning for healthy outcomes: Exploration and exploitation with electronic medical records | 2015 | Information and Management | status=no_security_relevance
+  - reason: 全文研究EMR采用中的组织学习（探索与利用）对用户收益的影响，不涉及恶意行为者、攻击或安全防御。
+- Mapping Sentiments to Themes of Customer reactions on Social Media during a Security Hack: A Justice Theory Perspective | 2020 | Information and Management | status=security_peripheral_context
+  - reason: 文章以安全黑客事件为背景，研究顾客在社交媒体上的反应、公平感知和情感，核心是品牌管理与客户关系，而非攻击或防御本身。
+- Smart tourism technologies in travel planning: The role of exploration and exploitation | 2017 | Information and Management | status=no_security_relevance
+  - reason: 文章研究智能旅游技术在旅行规划中的使用与满意度，安全/隐私仅作为用户担忧变量，无任何攻击者、恶意行为或攻防内容。
+- Trust calibration of automated security IT artifacts: A multi-domain study of phishing-website detection tools | 2021 | Information and Management | status=security_peripheral_context
+  - reason: 文章研究用户对钓鱼网站检测工具的信任校准，恶意行为者（钓鱼攻击者）仅是背景，研究核心是用户信任与检测工具使用行为，而非攻击、漏洞或防御技术本身。
+- Navigating the extended reach: Target experiences of cyberbullying at work | 2013 | Information and Organization | status=security_peripheral_context
+  - reason: 研究聚焦于职场网络欺凌的目标体验，虽然涉及恶意行为和信息滥用，但核心是组织行为学与心理学视角，而非信息系统安全的攻击、检测或防御。
+- The interface between technology and customer cyberbullying: Evidence from India | 2014 | Information and Organization | status=no_security_relevance
+  - reason: 研究核心是呼叫中心员工遭受客户言语欺凌的主观经历，属于职场虐待与组织行为研究，不涉及对信息系统、用户数据或系统安全属性的攻击或防御。
+- Unto the breach: What the COVID-19 pandemic exposes about digitalization | 2021 | Information and Organization | status=no_security_relevance
+  - reason: 文章以新冠疫情作为天然破坏性实验，讨论数字化进程中的不平等、模拟残留、算法脆弱性和全景监控，属于组织与社会层面的评论分析，不涉及恶意行为者或信息系统攻防。
+- Marketing translation services internationally: Exploiting IT to achieve a smart network | 2004 | Journal of Information Technology | status=no_security_relevance
+  - reason: 文章是翻译服务公司的商业与IT案例研究，聚焦智能业务网络、营销策略和系统集成，未涉及任何恶意行为者、攻击或安全防御。
+- Exploitation and exploration networks in open source software development: An artifact-level analysis | 2015 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 全文研究OSS项目中补丁开发与功能请求活动的社会网络结构对项目成功的影响，未涉及恶意行为者、攻击或安全防御。
+- Influence of Firm’s Recovery Endeavors upon Privacy Breach on Online Customer Behavior | 2016 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 本文核心是企业隐私泄露后的服务恢复措施对顾客口碑与转换行为的影响，黑客攻击仅作为事件背景，不涉及攻击实施、检测、防御或威胁建模。
+- Information exploitation and interorganizational systems ownership | 2004 | Journal of Management Information Systems | status=no_security_relevance
+  - reason: 文章研究跨组织系统所有权和信息利用的经济激励，核心是商业机会主义而非恶意攻击或防御。
+- The Role of Corporate Reputation and Crisis Response Strategies in Data Breach Management | 2018 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 数据泄露仅作为危机背景，研究核心是企业声誉和危机响应策略对股价的影响，而非攻击行为本身或其检测、防御、缓解。
+- Understanding nonmalicious security violations in the workplace: A composite behavior model | 2011 | Journal of Management Information Systems | status=security_peripheral_context
+  - reason: 研究聚焦非恶意安全违规（NMSV）的行为动机，明确排除恶意意图，属于组织安全政策与用户行为研究，而非攻防安全。
+- Enterprise reputation threats on social media: A case of data breach framing | 2019 | Journal of Strategic Information Systems | status=security_peripheral_context
+  - reason: 文章研究数据泄露危机后社交媒体公众舆论与声誉威胁的框架和情绪传播，核心是危机沟通与声誉管理，不属于攻击或漏洞检测/防御。
+- Cyberbullying victimization through social networking sites and adjustment difficulties: The role of parental mediation | 2018 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 研究核心是网络欺凌受害者的抑郁焦虑及父母中介策略，属于心理学/行为研究，未涉及信息系统攻击或防御。
+- Impact of social media on the firm’s knowledge exploration and knowledge exploitation: The role of business analytics talent | 2021 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究企业社交媒体能力对知识探索与知识开发的影响及商业分析人才的调节作用，涉及组织知识管理和IT价值，未涉及任何恶意行为者、攻击或安全防御。
+- Knowing What to Acquire in the Digital Technology Industry: Balancing Exploitation and Exploration for Superior Performance | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究数字科技企业并购、知识探索与利用的平衡及企业绩效，属于组织战略与管理研究，不涉及恶意或对抗行为者，也未围绕攻击、漏洞或安全防御。
+- Product Differentiation in IT Industries: The Interplay between M&As and In-House Innovation and Exploitative Innovation Orientation | 2023 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 文章研究并购与产品差异化的关系，属于商业创新战略，不涉及任何恶意行为者或信息系统安全攻击/防御。
+- The Impact of Feature Exploitation and Exploration on Mobile Application Evolution and Success | 2024 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 研究聚焦移动应用更新中利用与探索活动的平衡对市场成功的影响，全篇无恶意行为者、无攻击或漏洞相关研究核心。
+- Understanding ambidexterity: Managing contradictory tensions between exploration and exploitation in the evolution of digital infrastructure | 2019 | Journal of the Association for Information Systems | status=no_security_relevance
+  - reason: 全文研究的是企业数字基础设施演化中的组织双元能力（探索与利用的平衡），不涉及任何恶意行为者或攻防安全问题。
+- A deep learning approach for recognizing activity of daily living (adl) for senior care: Exploiting interaction dependency and temporal patterns | 2021 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是面向老年人照护的日常活动识别（ADL）深度学习框架，不涉及任何恶意或对抗行为者、攻击或漏洞，安全仅作为未来设计原则的次要提及。
+- DOES RANSOMWARE MAKE INVESTORS “WANNACRY”? ON INVESTORS’ DIVERGENT REACTIONS TO RANSOMWARE HITS AND NEAR MISSES | 2025 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章研究投资者对勒索软件事件披露的股票市场反应，属于行为金融/事件研究，勒索软件攻击仅作为背景事件，核心是投资者决策偏差，而非攻击实施或安全防御。
+- EXPLOITING EXPERT KNOWLEDGE FOR ASSIGNING FIRMS TO INDUSTRIES: A NOVEL DEEP LEARNING METHOD | 2023 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文研究的是将企业分配到行业分类体系（NAICS/GICS）的深度学习分类方法，属于一般预测与分类优化，不涉及任何恶意或对抗行为者，也不涉及信息系统的攻防安全。
+- HOW MERGERS AND ACQUISITIONS INCREASE DATA BREACHES: A COMPLEXITY PERSPECTIVE | 2025 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章核心是并购活动导致的组织复杂性如何增加数据泄露次数，属于企业战略与安全结果间的关系研究；恶意行为者仅在背景机制中被提及，并非研究问题核心，且未围绕攻击、防御、检测或漏洞建模展开。
+- IMPACT OF CUSTOMER COMPENSATION STRATEGIES ON OUTCOMES AND THE MEDIATING ROLE OF JUSTICE PERCEPTIONS: A LONGITUDINAL STUDY OF TARGET’S DATA BREACH | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章研究核心是数据泄露后顾客对补偿策略的公平感知及行为意向，属于组织响应/服务恢复/消费者行为研究，不涉及攻击者、攻击实施或检测防御。
+- Metafraud: A meta-learning framework for detecting financial fraud | 2012 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 文章核心是财务报表欺诈检测，属于金融欺诈与会计审计领域，不涉及针对信息系统、用户或数据的恶意对抗行为或安全属性的攻防。
+- THE OPM DATA BREACH: AN INVESTIGATION OF SHARED EMOTIONAL REACTIONS ON TWITTER | 2022 | MIS Quarterly: Management Information Systems | status=security_peripheral_context
+  - reason: 文章以2015年OPM数据泄露为背景，研究公众在Twitter上的情绪反应、情绪共享和情绪驱动因素，核心是危机沟通与情感分析，而非攻击实施或安全防御。
+- WEARABLE SENSOR-BASED CHRONIC CONDITION SEVERITY ASSESSMENT: AN ADVERSARIAL ATTENTION-BASED DEEP MULTISOURCE MULTITASK LEARNING APPROACH | 2022 | MIS Quarterly: Management Information Systems | status=no_security_relevance
+  - reason: 全文聚焦于可穿戴传感器和深度学习模型的帕金森病严重程度评估，不涉及任何恶意行为者、信息系统攻击或安全防御内容。
+
+### B2. 金标准判 peripheral 且 M1 命中（396 条）——边界案例备查
+
+- A case-based reasoning method for locating evidence during digital forensic device triage | 2014 | Decision Support Systems
+  - reason: 研究核心是数字取证设备分类（triage）中基于案例推理的证据定位方法，旨在提高调查效率，而非针对信息系统攻击、漏洞或威胁的检测与防御；恶意行为者仅作为犯罪调查背景出现。
+- A fuzzy decision support system for IT Service Continuity threat assessment | 2006 | Decision Support Systems
+  - reason: 文章核心是模糊决策支持系统FURIA用于IT服务连续性威胁评估中的群体偏好对齐与共识达成，虽涉及威胁清单但研究对象是决策过程而非攻击或防御。
+- A multi-agent system to support evidence based medicine and clinical decision making via data sharing and data privacy | 2016 | Decision Support Systems
+  - reason: 研究核心是医疗数据集成与隐私保护去标识化（k-anonymity），未以恶意或对抗行为者、攻击或防御检测为核心，隐私安全仅作为法规合规与背景动机。
+- A new role mining framework to elicit business roles and to mitigate enterprise risk | 2011 | Decision Support Systems
+  - reason: 本文研究RBAC角色挖掘与分解，以降低角色管理风险，未涉及恶意行为者或攻击/漏洞检测、防御、评估，属于一般访问控制方案与安全治理范畴。
+- A permissioned blockchain-based implementation of LMSR prediction markets | 2020 | Decision Support Systems
+  - reason: 文章核心是利用许可区块链实现LMSR预测市场，安全性（防篡改、隐私、可用性）仅作为设计动机和宣称的解决方案，并未以攻击或防御为研究核心。
+- A pervasive P3P-based negotiation mechanism for privacy-aware pervasive e-commerce | 2010 | Decision Support Systems
+  - reason: 文章核心是P3P/P4P隐私偏好协商机制，保护用户隐私以提升服务利用率，全文未涉及恶意行为者或攻击/防御建模，属于隐私保护方案而非攻防安全研究。
+- A practical application of our MDD approach for modeling secure XML data warehouses | 2012 | Decision Support Systems
+  - reason: 文章聚焦于安全XML数据仓库的模型驱动开发，核心是访问控制与机密性建模，但未涉及恶意行为者、攻击或漏洞研究。
+- A relative patterns discovery for enhancing outlier detection in categorical data | 2014 | Decision Support Systems
+  - reason: 全文核心是通用分类数据离群点检测算法，仅在摘要提及'调查网络犯罪'作为应用背景，没有恶意行为者、攻击模型或安全防御的实质研究内容。
+- A scalable decision tree system and its application in pattern recognition and intrusion detection | 2005 | Decision Support Systems
+  - reason: 研究核心是可扩展决策树算法（SURPASS）的规模性与分类精度，入侵检测仅作为大型数据集应用场景，未围绕攻击行为或检测防御机制展开。
+- A survey of trust and reputation systems for online service provision | 2007 | Decision Support Systems
+  - reason: 文章是信任与声誉系统的综述，核心是声誉计算与在线市场决策支持，而非攻击或防御；提到的操纵问题只是声誉系统设计中的若干问题之一。
+- A survey on trust and reputation models for Web services: Single, composite, and communities | 2015 | Decision Support Systems
+  - reason: 本文是对Web服务信任与声誉模型的综述，核心在于分类和比较信任/声誉计算技术，恶意Web服务仅是文中指出的未来研究方向之一，并非研究核心。
+- A trust-based consumer decision-making model in electronic commerce: The role of trust, perceived risk, and their antecedents | 2008 | Decision Support Systems
+  - reason: 研究核心是消费者信任与感知风险对电子商务购买决策的影响，攻击与恶意行为者仅作为背景提及，不构成攻防安全研究。
+- A value sensitive design investigation of privacy enhancing tools in web browsers | 2012 | Decision Support Systems
+  - reason: 文章核心是设计隐私增强工具以提升用户对个人信息的控制感，未以恶意行为者或攻击/防御机制为研究对象。
+- Access control and audit model for the multidimensional modeling of data warehouses | 2006 | Decision Support Systems
+  - reason: 文章提出数据仓库多维建模中的访问控制与审计模型，属于安全方案设计，但未以恶意对抗行为者或其攻击/防御为研究核心，属于一般访问控制方案排除类型。
+- Access control in collaborative commerce | 2007 | Decision Support Systems
+  - reason: 文章核心是协作商务中的访问控制政策冲突与设计原则，未围绕恶意或对抗行为者展开，也无攻击建模或攻防评估。
+- Agents with shared mental models for enhancing team decision makings | 2006 | Decision Support Systems
+  - reason: 文章核心是共享心智模型驱动的agent团队协作与主动信息共享，军事对抗仅作为应用背景，不属于信息系统安全意义的攻击与防御研究。
+- Algorithm for the detection of outliers based on the theory of rough sets | 2015 | Decision Support Systems
+  - reason: 文章核心是通用离群点检测算法，基于粗糙集理论用于数据挖掘，没有恶意行为者或攻击/防御焦点；安全应用仅作为背景提及。
+- Allocation of resources to cyber-security: The effect of misalignment of interest between managers and investors | 2015 | Decision Support Systems
+  - reason: 文章核心是代理理论下经理与投资者对网络安全资源分配的激励错位，网络安全仅作为成本背景，恶意行为者不是研究核心对象。
+- An experimental comparison of real and artificial deception using a deception generation model | 2012 | Decision Support Systems
+  - reason: 文章聚焦财务援助申请中的欺骗数据生成与比较，属于金融欺诈检测领域，不涉及信息系统攻击或漏洞。
+- An exploration of risk information search via a search engine: Queries and clicks in healthcare and information security | 2012 | Decision Support Systems
+  - reason: 文章研究用户通过搜索引擎搜索风险信息（包括信息安全主题）时的查询与点击行为，核心是信息搜索行为建模，而非恶意行为者的攻击或防御。
+- An integrated framework for analyzing multilingual content in Web 2.0 social media | 2014 | Decision Support Systems
+  - reason: 文章核心是开发并评估一个多语言社交媒体内容集成搜索门户（Dark Web Forum Portal），以辅助搜索和分析极端组织论坛内容，而非针对信息系统攻击或漏洞的检测、防御或建模。
+- An investigation of email processing from a risky decision making perspective | 2011 | Decision Support Systems
+  - reason: 文章以风险决策理论解释用户对商业邮件的态度和阅读意愿，网络犯罪仅是背景，研究核心不是攻击、漏洞或防御。
+- Bringing transparency and trustworthiness to loot boxes with blockchain and smart contracts | 2021 | Decision Support Systems
+  - reason: 研究核心是设计基于区块链的透明可信开箱机制，针对的是游戏开发者不透明、不可信的商业行为，而非恶意攻击或信息系统的攻防对抗；文中安全相关讨论（如智能合约攻击、51%攻击）仅作为方案评估的一部分，不是研究核心。
+- Building trust in online auction markets through an economic incentive mechanism | 2003 | Decision Support Systems
+  - reason: 文章核心是在线拍卖市场中的经济欺诈与信任问题，通过经济激励机制和数字证书实现声誉管理，属于一般信誉与信任改进，而非信息系统攻击、漏洞或安全防御研究。
+- COPS: A model and infrastructure for secure and fair electronic markets | 2000 | Decision Support Systems
+  - reason: 文章提出安全公平电子市场的基础设施COPS，核心是安全机制与协议的设计与集成，没有以恶意或对抗行为者为研究核心，无攻击建模与攻防评估。
+- Capturing the essence of word-of-mouth for social commerce: Assessing the quality of online e-commerce reviews by a semi-supervised approach | 2013 | Decision Support Systems
+  - reason: 文章核心是电商评论质量分级与预测，不属于攻防安全；提及垃圾评论仅作为低质量评论的一类，并非以恶意攻击者为研究核心。
+- Caveat mercator in electronic commerce: An update | 2008 | Decision Support Systems
+  - reason: 研究核心为电子商务中的接口代理利用自动化获得商业优势，商家采取的检测与界面反制措施虽涉及CAPTCHA和行为检测，但损害对象主要为商家经济利益，不涉及信息系统安全属性。
+- Cloud computing - The business perspective | 2011 | Decision Support Systems
+  - reason: 全文为云计算商业视角综述，关注成本、商业模式、市场、监管等，安全仅是其中提及的企业担忧之一，未以恶意攻击或攻防技术为核心。
+- Collaborative response to disruption propagation (CRDP) in cyber-physical systems and complex networks | 2019 | Decision Support Systems
+  - reason: 文章研究的是复杂网络与信息物理系统中一般的扰动传播及协同响应调度，恶意攻击/安全攻防只是列举的应用背景之一，并非研究核心。
+- Comparing fingerprint-based biometrics authentication versus traditional authentication methods for e-payment | 2018 | Decision Support Systems
+  - reason: 文章是用户对认证方法（指纹生物识别 vs 信用卡/PIN）感知、信任和继续使用意愿的实验研究，核心是安全感知与采纳，而非攻击或防御本身。
+- Constraint by example | 1996 | Decision Support Systems
+  - reason: 文章核心是数据库约束的例示表示与高效管理，安全仅作为一个应用场景简单提及，不存在恶意或对抗行为者及其攻防研究。
+- Constructing a reliable Web graph with information on browsing behavior | 2012 | Decision Support Systems
+  - reason: 文章核心是利用浏览行为构建可靠Web图以改进页面质量估计，虽有垃圾页面识别作为评估任务，但恶意行为者并非研究核心，攻击/防御不是研究焦点。
+- Continuance of protective security behavior: A longitudinal study | 2016 | Decision Support Systems
+  - reason: 文章研究用户持续保护性安全行为的动机因素（威胁感知、效能、外部环境），属于行为信息安全管理，核心不是攻击、漏洞或恶意行为者。
+- Cost and benefit analysis of authentication systems | 2011 | Decision Support Systems
+  - reason: 文章从经济学视角分析认证系统的成本收益决策，黑客仅作为系统失败概率的一部分，未以攻击行为或防御机制为研究核心。
+- Cyber hygiene: The concept, its measure, and its initial tests | 2020 | Decision Support Systems
+  - reason: 研究核心是概念化和测量用户的网络卫生（Cyber Hygiene）意识，恶意行为者仅作为背景被提及，未聚焦于攻击或漏洞的检测、防御、缓解等攻防安全问题本身。
+- Determinants of end-user acceptance of biometrics: Integrating the "big 3" of technology acceptance with privacy context | 2013 | Decision Support Systems
+  - reason: 论文研究用户对生物识别技术的接受度，核心是技术接受模型与隐私感知，而非攻击或防御。
+- Determinants of escrow service adoption in consumer-to-consumer online auction market: An experimental study | 2006 | Decision Support Systems
+  - reason: 文章研究在线拍卖中买家采用在线托管服务（OES）的行为决定因素，以欺诈率为市场风险背景，核心是风险感知和采纳决策，而非攻击或漏洞的检测、防御或建模。
+- Development and validation of instruments of information security deviant behavior | 2014 | Decision Support Systems
+  - reason: 文章开发并验证员工信息安全越轨行为（ISDB）的测量工具，聚焦行为量表而非攻击、漏洞或对抗防御；研究核心是组织行为测量，不属于攻防安全。
+- Economics of first-contact email advertising | 2006 | Decision Support Systems
+  - reason: 研究核心是合法电子邮件广告中介（admediation）的经济学建模，垃圾邮件仅作为背景问题提及，不涉及恶意行为者或攻防技术。
+- Effect of data privacy and security investment on the value of big data firms | 2021 | Decision Support Systems
+  - reason: 文章研究数据隐私与安全投资对企业股票收益和风险的经济影响，属于IT投资价值研究，未以攻击、防御或漏洞为核心。
+- Effectiveness of privacy assurance mechanisms in users' privacy protection on social networking sites from the perspective of protection motivation theory | 2020 | Decision Support Systems
+  - reason: 研究核心是SNS用户隐私保护行为（保护动机理论），而非恶意行为者或攻击/漏洞的检测与防御。
+- Effects of assurance mechanisms and consumer concerns on online purchase decisions: An empirical study | 2016 | Decision Support Systems
+  - reason: 文章研究在线购买决策中保证机制对消费者隐私、安全和产品服务担忧的影响，核心是消费者行为与电子商务营销，而非针对恶意行为者的攻防安全研究。
+- Efficient identity matching using static pruning q-gram indexing approach | 2015 | Decision Support Systems
+  - reason: 文章核心是通用的身份匹配/记录链接算法优化（q-gram索引剪枝），身份欺诈、犯罪身份欺骗等仅是应用背景，未以恶意行为者或其攻防为核心。
+- Employees’ information security policy compliance: A norm activation perspective | 2016 | Decision Support Systems
+  - reason: 文章研究员工对信息安全政策（ISP）的合规行为及其规范前因，属于组织安全政策合规研究，不涉及恶意/对抗行为者或攻击/漏洞攻防核心。
+- Encouraging information security behaviors in organizations: Role of penalties, pressures and perceived effectiveness | 2009 | Decision Support Systems
+  - reason: 文章研究组织员工信息安全政策遵从意愿的影响因素（惩罚、压力、感知有效性），属于组织安全行为与政策合规研究，不涉及恶意行为者或攻击/防御核心。
+- Establishing online trust through a community responsibility system | 2001 | Decision Support Systems
+  - reason: 文章核心是设计社区责任系统以促进在线交易信任，博弈论模型中虽涉及欺骗行为，但这是经济交易中的投机行为而非针对信息系统的恶意攻击；研究焦点是信任建立机制，非攻击检测或防御。
+- Exploring the influence of flow and psychological ownership on security education, training and awareness effectiveness and security compliance | 2018 | Decision Support Systems
+  - reason: 研究聚焦SETA培训中的心流与心理所有权对员工安全合规意图的影响，属于组织安全培训与合规行为研究，不涉及恶意行为者或攻防对抗。
+- External validity of sentiment mining reports: Can current methods identify demographic biases, event biases, and manipulation of reviews? | 2014 | Decision Support Systems
+  - reason: 文章聚焦情感挖掘报告的外部效度，核心是样本代表性和决策支持有效性，评论操纵仅作为其中一个偏差来源被评估，且结论未发现操纵证据，故整体不属于攻防安全核心研究。
+- Firms' information security investment decisions: Stock market evidence of investors' behavior | 2011 | Decision Support Systems
+  - reason: 文章研究信息安全投资公告对股票市场异常收益的影响，属于投资价值评估与投资者行为研究，未以恶意行为者、攻击或防御机制为研究核心。
+- Getting the most out of third party trust seals: An empirical analysis | 2015 | Decision Support Systems
+  - reason: 文章研究第三方信任印章对电商购买完成率的影响，属于消费者信任与电子商务营销研究，不涉及恶意行为者或攻防安全。
+- Governing the fiduciary relationship in information security services | 2016 | Decision Support Systems
+  - reason: 文章核心是信息安全服务治理中的委托代理关系、目标一致性与信息不对称，属于组织治理研究，不涉及攻击、漏洞或恶意行为者。
+- Governmental enforcement against piracy on media platforms | 2025 | Decision Support Systems
+  - reason: 文章研究政府反盗版执法与媒体平台定价/广告策略，盗版被视为市场威胁而非信息系统攻击，损害是媒体行业经济损失而非信息安全属性。
+- IT security auditing: A performance evaluation decision model | 2014 | Decision Support Systems
+  - reason: 文章研究IT安全审计的成本效益决策模型，关注审计时机与管理激励，未以恶意攻击者或攻防对抗为核心。
+- Impact of consumer empowerment on online trust: An examination across genders | 2012 | Decision Support Systems
+  - reason: 文章聚焦于消费者赋权、隐私担忧与信任之间的性别差异，属于消费者行为研究，没有涉及任何恶意行为者或攻击/防御机制。
+- Investigating interactions of trust and interest similarity | 2007 | Decision Support Systems
+  - reason: 文章核心是研究人际信任与兴趣相似性的相关性，应用于推荐系统，不涉及恶意行为者或攻击/防御。
+- Listen to me - Evaluating the influence of micro-blogs | 2014 | Decision Support Systems
+  - reason: 文章核心是社交网络中意见领袖识别与说服力/信息传播分析，虽有预处理中识别spammers的环节，但属于数据清洗，并非围绕攻击、威胁或安全防御的研究。
+- Managing computing resources in intranets: An electronic commerce perspective | 1998 | Decision Support Systems
+  - reason: 文章核心是intranet资源管理的经济定价框架，安全（如Kerberos、数据完整性）仅作为组件提及，不涉及对恶意行为者的攻击或防御研究。
+- Managing user relationships in hierarchies for information system security | 2007 | Decision Support Systems
+  - reason: 文章聚焦于设计基于数论的密钥对方案来管理用户层级关系，属于一般性访问控制/信息保护机制，未涉及攻击者、恶意行为或具体的攻防评估。
+- Manipulative Imputation in Distributed Decision Support Settings: The Implications of Information Asymmetry and Aggregation Complexity | 2016 | Decision Support Systems
+  - reason: 该研究考察分布式决策支持中成员通过提交不真实信息操纵群体决策的行为，属于组织行为学中的欺骗研究，不涉及信息系统安全属性或攻击防御。
+- Measuring perceived security in B2C electronic commerce website usage: A respecification and validation | 2014 | Decision Support Systems
+  - reason: 文章核心是开发和验证B2C电子商务网站用户‘感知安全’的多维测量量表，关注用户主观信念而非实际的恶意攻击或防御机制。
+- Online shopping intention in the context of data breach in online retail stores: An examination of older and younger adults | 2016 | Decision Support Systems
+  - reason: 文章研究数据泄露后消费者在线购物意愿的年龄差异，核心是消费者感知、信任、风险与意图，黑客攻击仅作为背景情境，未涉及攻击或漏洞的检测、防御、缓解、评估与建模。
+- Opportunities and risks of software-as-a-service: Findings from a survey of IT executives | 2011 | Decision Support Systems
+  - reason: 文章研究IT高管对SaaS采用的机会与风险感知，安全风险仅是其中一个被感知的风险维度，并非以攻击或防御为核心。
+- POCKET: A tool for protecting children's privacy online | 2013 | Decision Support Systems
+  - reason: 文章核心是设计一个符合COPPA的儿童在线隐私保护工具POCKET，关注父母控制与合规，而非恶意行为者或攻击漏洞研究；安全威胁分析仅是设计过程中的辅助环节。
+- Perceived risks, counter-beliefs, and intentions to use anti-/counter-terrorism websites: An exploratory study of government-citizens online interactions in a turbulent environment | 2007 | Decision Support Systems
+  - reason: 研究核心是公民对反恐电子政务网站的使用意愿、信任与风险感知，恐怖主义和黑客攻击等仅作为感知风险的情境变量，未围绕攻击实施、威胁检测或防御展开。
+- Performance analysis of filtering software using Signal Detection Theory | 2006 | Decision Support Systems
+  - reason: 文章核心是使用信号检测理论分析过滤软件的性能（命中率与误报率），对抗性规避仅作为背景提及，不构成攻防安全核心。
+- Predicting stock market returns from malicious attacks: A comparative analysis of vector autoregression and time-delayed neural networks | 2011 | Decision Support Systems
+  - reason: 文章核心是研究恶意攻击强度对信息安全企业股票收益的影响并构建股票预测模型，属于金融/投资决策研究，而非攻击实施、威胁检测或防御。
+- Pricing and disseminating customer data with privacy awareness | 2014 | Decision Support Systems
+  - reason: 研究核心是数据所有者的客户数据定价与分发机制，虽然涉及隐私泄露风险，但未以恶意攻击者或攻防检测/防御为研究问题。
+- Resistance and power in a security certification scheme: The case of c:cure | 2016 | Decision Support Systems
+  - reason: 文章研究信息安全认证方案c:cure的制定与失败过程，核心是组织间的权力与抵抗，而非攻击或防御技术。
+- Responding to identity theft: A victimization perspective | 2019 | Decision Support Systems
+  - reason: 研究聚焦于身份盗窃受害者的情绪与行为应对，身份盗窃仅作为背景事件，未以攻击者或其对抗行为为核心，也未围绕攻击技术或威胁检测防御展开。
+- Rethinking the role of security in client satisfaction with Software-as-a-Service (SaaS) providers | 2015 | Decision Support Systems
+  - reason: 研究核心是SaaS客户满意度模型中安全感知与感知价值的关系，属于用户感知与满意度研究，不涉及攻击、漏洞或防御。
+- Revealed preference in online reviews: Purchase verification in the tablet market | 2020 | Decision Support Systems
+  - reason: 文章研究已验证购买（VP）评论比例对平板电脑销量和价格的影响，仅将非真实/虚假评论作为背景提及，核心是电商营销中的信任信号，而非攻击或防御。
+- Revisiting the incentive to tolerate illegal distribution of software products | 2012 | Decision Support Systems
+  - reason: 文章核心是软件盗版的经济分析与最优补丁策略，安全漏洞、蠕虫、DoS等仅在模型中作为影响利润的网络外部性因素提及，并非研究攻击或防御本身。
+- Revisiting the role of web assurance seals in business-to-consumer electronic commerce | 2008 | Decision Support Systems
+  - reason: 研究核心是消费者对网站安全/隐私特征及保证印章的认知与教育干预效果，不涉及攻击行为或攻防技术。
+- Secure attribute sharing of linked microdata | 2016 | Decision Support Systems
+  - reason: 文章关注组织间共享链接微数据时通过掩蔽保护敏感属性值，属于统计披露控制与隐私保护数据共享，假设共享双方相互信任，不存在恶意或对抗行为者，亦非围绕攻击或漏洞的攻防研究。
+- Secure business process model specification through a UML 2.0 activity diagram profile | 2011 | Decision Support Systems
+  - reason: 文章核心是提出UML 2.0活动图扩展（BPSec）以在业务流程模型中规范安全需求（访问控制、完整性、隐私等），属于安全需求建模，不围绕具体恶意行为者或攻击/防御检测评估。
+- Secure federation of semantic information services | 2013 | Decision Support Systems
+  - reason: 文章核心是安全联邦架构设计（访问控制、认证、传输安全），没有以恶意行为者或攻防对抗作为研究核心，且属于无攻击建模的访问控制方案。
+- Security and performance in service-oriented applications: Trading off competing objectives | 2010 | Decision Support Systems
+  - reason: 文章将安全作为服务组合的QoS属性之一，关注安全指标聚合与性能权衡，未以恶意行为者或攻击为核心。
+- Security versus convenience? An experimental study of user misperceptions of wireless internet service quality | 2012 | Decision Support Systems
+  - reason: 无恶意行为者；研究核心是消费者对安全/便利性权衡的感知与选择推断，而非攻击或漏洞的检测、防御或建模。
+- Social structural behavior of deception in computer-mediated communication | 2014 | Decision Support Systems
+  - reason: 研究的是在线游戏（Mafia）中欺骗行为的社会网络特征，虽涉及对抗性欺骗，但损害对象是游戏中的信任与胜负，不构成信息系统安全属性（机密性、完整性、可用性、真实性）的攻击或漏洞。
+- Studying users' computer security behavior: A health belief perspective | 2009 | Decision Support Systems
+  - reason: 文章研究用户邮件安全行为的前因，使用健康信念模型，核心是安全意识与行为决定因素，不围绕攻击或漏洞本身。
+- Telecom traffic pumping analytics via explainable data science | 2021 | Decision Support Systems
+  - reason: 文章核心是电信流量泵欺诈的检测，欺诈者通过人为制造呼叫获取非法接入费，损害的是运营商经济利益，而非信息系统安全属性，且不涉及攻击或漏洞环节。
+- The effects of Web assurance seals on consumers' initial trust in an online vendor: A functional perspective | 2010 | Decision Support Systems
+  - reason: 研究核心是消费者对在线商家的初始信任，Web保证印章作为信任信号；虽涉及隐私/安全/交易完整性保证，但无恶意行为者、无攻击或防御焦点，仅以安全为背景。
+- The information content of financial statement fraud risk: An ensemble learning approach | 2024 | Decision Support Systems
+  - reason: 文章研究财务报表舞弊风险预测及其与运营效率的关系，属于金融会计欺诈检测，不涉及针对信息系统或用户的攻击、防御或漏洞。
+- The personalization privacy paradox: An exploratory study of decision making process for location-aware marketing | 2011 | Decision Support Systems
+  - reason: 文章是消费者对位置感知营销的隐私决策行为研究，关注个性化与隐私担忧的权衡，没有恶意/对抗行为者，也没有攻击或防御建模。
+- Toward user patterns for online security: Observation time and online user identification | 2010 | Decision Support Systems
+  - reason: 研究核心是用户在线行为识别准确率随聚合时长的变化，安全（如欺诈、身份盗窃）仅为应用背景，未研究攻击者或具体攻防机制。
+- Towards risk-aware artificial intelligence and machine learning systems: An overview | 2022 | Decision Support Systems
+  - reason: 文章是AI/ML系统风险综述，将对抗攻击列为众多风险之一，但研究核心是风险管理与安全保证，并非攻击或防御本身。
+- Transaction security investments in online marketplaces: An analytical examination of financial liabilities | 2016 | Decision Support Systems
+  - reason: 研究聚焦于不同法律责任制度（举证责任分配）对企业安全投资、利润和社会福利的经济分析，虽有欺诈和安全漏洞背景，但恶意行为者仅是损失函数中的参数，非研究核心，也不涉及具体攻击或防御检测机制。
+- Transparent Safe | 2008 | Decision Support Systems
+  - reason: 文章核心是设计资金-物品交换机制以防止在线拍卖欺诈，属于经济激励机制与协议设计，未以信息系统攻击或漏洞为研究核心。
+- Transportation security decision support system for emergency response: A training prototype | 2008 | Decision Support Systems
+  - reason: 研究核心是交通应急响应的决策支持与训练，而非针对信息系统攻击或漏洞的攻防安全。
+- Trust in inter-organizational exchanges: A case study in business to business electronic commerce | 2005 | Decision Support Systems
+  - reason: 文章研究B2B电子商务中技术信任向关系信任的演化，属于组织间信任研究，安全服务仅作为信任的前因之一，没有以恶意行为者或攻击防御为核心。
+- Trust violation and repair: The information privacy perspective | 2015 | Decision Support Systems
+  - reason: 文章以隐私泄露为背景，核心研究信任违背与修复的心理过程及公司回应策略，不涉及攻击实施或系统防御。
+- Two-level trust-based decision model for information assurance in a virtual organization | 2008 | Decision Support Systems
+  - reason: 文章核心是基于信任的两级决策模型，用于选择外部对象；安全仅作为对象质量的一个属性（是否含恶意代码、漏洞等），未以攻击者或威胁检测/防御为研究问题，属于信任与决策支持的外围安全背景。
+- Understanding user misrepresentation behavior on social apps: The perspective of privacy calculus theory | 2023 | Decision Support Systems
+  - reason: 文章是隐私计算视角下的用户虚假陈述行为研究，属于隐私态度/行为研究，无恶意攻击者，未围绕攻击或防御。
+- User acceptance of knowledge-based system recommendations: Explanations, arguments, and fit | 2015 | Decision Support Systems
+  - reason: 本文核心是KBS解释与用户认知风格的匹配如何影响推荐接受度，欺骗检测仅作为背景任务，未涉及针对信息系统的恶意攻击或攻防研究。
+- Using 3D virtual environments to facilitate students in constructivist learning | 2013 | Decision Support Systems
+  - reason: 研究核心是3D虚拟环境对建构主义学习效果的评估，信息安全隐患仅作为教学任务内容，不涉及攻击者行为或攻防研究。
+- Using data envelopment analysis and decision trees for efficiency analysis and recommendation of B2C controls | 2010 | Decision Support Systems
+  - reason: 文章核心是B2C控制（系统连续性、访问控制、通信控制）的效率分析与推荐，使用DEA和决策树，不涉及具体恶意行为者或攻击/漏洞的检测、防御与建模，属于组织控制评估范畴。
+- Visual e-mail authentication and identification services: An investigation of the effects on e-mail use | 2009 | Decision Support Systems
+  - reason: 文章核心是用户对电子邮件认证服务感知有用性及对电子邮件使用态度的影响，钓鱼/垃圾邮件仅作为背景动机，未围绕攻击或防御机制本身展开研究。
+- A field experiment on ISP training designs for enhancing employee information security compliance | 2025 | European Journal of Information Systems
+  - reason: 研究核心是员工信息安全政策合规培训设计，评估威慑与威胁论点对培训效果的影响，属于组织安全治理与合规范畴，而非以攻击或漏洞为核心的研究。
+- A nomological network of customers’ privacy perceptions: linking artifact design to shopping efficiency | 2019 | European Journal of Information Systems
+  - reason: 文章研究移动应用可用性对客户隐私关注和购物效率的影响，属于主观隐私感知研究，未以攻击或漏洞为核心。
+- Abductive innovations in information security policy development: an ethnographic study | 2019 | European Journal of Information Systems
+  - reason: 全文研究核心是信息安全政策开发的组织过程（top-down与bottom-up的辩证创新），属于安全政策治理类研究，不涉及具体的恶意行为者、攻击、漏洞利用或检测防御技术。
+- An analysis of the traditional IS security approaches: Implications for research and practice | 2005 | European Journal of Information Systems
+  - reason: 文章是对传统信息安全方法（检查表、标准、成熟度标准、风险管理、形式化方法）的元分析，比较其研究目标、组织角色、研究方法和ISD适用性，不研究攻击或漏洞本身，属于安全管理方法论综述。
+- Balancing information privacy and operational utility in healthcare: proposing a privacy impact assessment (PIA) framework | 2023 | European Journal of Information Systems
+  - reason: 研究核心是医疗保健组织中平衡隐私保护与运营效用的决策框架，属于组织治理而非具体攻击或漏洞的攻防研究。
+- Becoming a blockchain user: understanding consumers’ benefits realisation to use blockchain-based applications | 2023 | European Journal of Information Systems
+  - reason: 研究核心是消费者对区块链银行应用好处的感知及采用意愿，属于技术采纳行为研究，网络攻击和数据泄露仅作为背景，未围绕攻击、漏洞或防御机制展开。
+- Conceptualising improvisation in information systems security | 2012 | European Journal of Information Systems
+  - reason: 全文核心是概念化信息系统安全工作中的即兴（理性-适应）行为，属于安全管理与治理研究；恶意行为者仅是背景，未以攻击、漏洞检测或防御为研究核心。
+- Continuous improvement of information security management: an organisational learning perspective | 2023 | European Journal of Information Systems
+  - reason: 文章核心是组织吸收能力对信息安全管理持续改进的影响，属于组织学习与安全管理治理研究，不围绕具体恶意行为者或攻击/防御技术。
+- Does stress reduce violation intention? Insights from eustress and distress processes on employee reaction to information security policies | 2023 | European Journal of Information Systems
+  - reason: 文章研究员工对信息安全政策要求的压力感知如何影响其违规意图，属于安全政策合规的行为研究，不涉及恶意攻击者或攻防技术。
+- Does the end justify the means?Information systems and control society in the age of pandemics | 2020 | European Journal of Information Systems
+  - reason: 文章聚焦新冠疫情中的数字监控与控制社会理论，批判性讨论权力、隐私与自由，但未以恶意或对抗行为者为核心，不属于攻防安全研究。
+- Enhancing users’ security engagement through cultivating commitment: the role of psychological needs fulfilment | 2023 | European Journal of Information Systems
+  - reason: 文章研究用户安全参与的心理前因（心理需求满足、承诺），不涉及恶意/对抗行为者或攻击/漏洞的检测、防御、缓解，属于组织安全行为管理，非攻防安全核心。
+- Factors influencing the intention to comply with data protection regulations in hospitals: Based on gender differences in behaviour and deterrence | 2016 | European Journal of Information Systems
+  - reason: 文章核心是医院员工遵守数据保护法规的意图及其性别差异（基于TPB和GDT），属于组织安全政策合规研究，不涉及攻击或漏洞的检测、防御或建模。
+- Frame misalignment: Interpreting the implementation of information systems security certification in an organization | 2009 | European Journal of Information Systems
+  - reason: 文章研究组织内不同利益相关者对IS安全认证实施过程的解释与框架不一致，核心是组织社会认知与合规行为，而非攻击、威胁或防御。
+- If someone is watching, I'll do what I'm asked: Mandatoriness, control, and information security | 2009 | European Journal of Information Systems
+  - reason: 研究核心是组织控制（规范、评估、奖励）如何影响员工对信息安全政策强制性的感知及合规行为，属于信息安全政策遵守与治理研究，不涉及攻击或漏洞的攻防安全。
+- Improving multiple-password recall: An empirical study | 2009 | European Journal of Information Systems
+  - reason: 文章核心是密码记忆与回忆的可用性研究，属于认证安全背景，但未围绕恶意行为者、攻击或威胁检测/防御展开。
+- Information systems security policy implementation in practice: From best practices to situated practices | 2017 | European Journal of Information Systems
+  - reason: 文章研究IS安全政策在组织中的实施与转化过程，属于组织安全管理实践研究，未以攻击或漏洞为核心，也没有恶意行为者作为研究问题对象。
+- Information technology diffusion: Building positive barriers | 1998 | European Journal of Information Systems
+  - reason: 文章核心是IT创新扩散的阻碍策略（positive barriers），虽以安全与隐私为动机之一，但无恶意或对抗行为者作为研究对象，也不涉及攻击、防御或检测的研究焦点。
+- Information technology diffusion: Building positive barriers | 1998 | European Journal of Information Systems
+  - reason: 文章核心是IT创新扩散的阻碍策略（positive barriers），虽以安全与隐私为动机之一，但无恶意或对抗行为者作为研究对象，也不涉及攻击、防御或检测的研究焦点。
+- Innovation diffusion in global contexts: Determinants of post-adoption digital transformation of European companies | 2006 | European Journal of Information Systems
+  - reason: 文章研究企业数字化改造的扩散决定因素，安全关注仅作为创新特征之一作为使用阻碍，全文无恶意行为者或攻防研究核心。
+- Model-driven multidimensional modeling of secure data warehouses | 2007 | European Journal of Information Systems
+  - reason: 文章提出数据仓库概念建模中的访问控制与审计（ACA）模型，属于一般访问控制方案设计，未以攻击或威胁建模为核心，也未涉及攻击与防御评估。
+- Personality traits and concern for privacy: An empirical study in the context of location-based services | 2008 | European Journal of Information Systems
+  - reason: 文章研究个性特质对位置服务隐私担忧的影响，属于用户隐私态度的实证研究，不涉及攻击者、攻击行为或防御技术。
+- Preventing the digital scars of COVID-19 | 2021 | European Journal of Information Systems
+  - reason: 文章聚焦COVID期间IT使用的伦理与社会不公（数字鸿沟、歧视、监控担忧），未以恶意行为者或攻击/防御为研究核心，安全仅是边缘提及。
+- Protection motivation and deterrence: A framework for security policy compliance in organisations | 2009 | European Journal of Information Systems
+  - reason: 文章研究员工对信息安全政策合规意向的影响因素，核心是行为合规与组织治理，而非攻击、漏洞或特定威胁的攻防研究。
+- Responsible cognitive digital clones as decision-makers:a design science research study | 2023 | European Journal of Information Systems
+  - reason: 文章核心是设计用于复制人类决策者的认知克隆（Pi-Mind agent），对抗训练和安全性仅是提升克隆鲁棒性的背景或应用场景，而非以攻击或防御为研究核心。
+- Secure activity resource coordination: Empirical evidence of enhanced security awareness in designing secure business processes | 2008 | European Journal of Information Systems
+  - reason: 文章核心是在业务流程分析与建模中，通过SARC构件表达访问控制、角色权限等安全需求，实证评估其提升设计人员的‘安全意识’，但未以恶意行为者、攻击实施或漏洞检测/防御为研究核心。
+- Structures of responsibility and security of information systems | 1996 | European Journal of Information Systems
+  - reason: 文章核心是组织责任结构与社会规范对信息安全的支撑，未围绕恶意行为者或攻击/防御展开，属于组织安全治理范畴。
+- The effects of cyber regulations and security policies on organizational outcomes: a knowledge management perspective | 2023 | European Journal of Information Systems
+  - reason: 文章核心是知识管理流程与组织效能/绩效的关系，安全政策和网络法规仅作为调节变量，未涉及攻击或漏洞研究。
+- The good, the bad, and the ugly: impact of analytics and artificial intelligence-enabled personal information collection on privacy and participation in ridesharing | 2022 | European Journal of Information Systems
+  - reason: 文章研究BDA/AI个人信息收集对网约车用户隐私感知和参与行为的影响，属于隐私态度/行为研究，未以恶意攻击者或攻防对抗为核心。
+- The influence of the informal social learning environment on information privacy policy compliance efficacy and intention | 2011 | European Journal of Information Systems
+  - reason: 文章研究非正式社会学习环境对员工信息隐私政策合规自我效能和行为意向的影响，属于员工合规行为研究，不涉及恶意行为者或攻击/漏洞防御。
+- Understanding dark side of artificial intelligence (AI) integrated business analytics: assessing firm’s operational inefficiency and competitiveness | 2022 | European Journal of Information Systems
+  - reason: 全文研究AI业务分析不透明性导致的企业运营低效与竞争劣势，未涉及恶意或对抗行为者对信息系统、用户或数据的攻击、检测或防御，安全风险仅为感知风险的背景成分。
+- Understanding decentralization of decision-making power in proof-of-stake blockchains: an agent-based simulation approach | 2024 | European Journal of Information Systems
+  - reason: 研究核心是PoS区块链决策权去中心化的参数影响，51%攻击等安全威胁仅作为背景动机，未建模恶意行为者或聚焦攻击/防御。
+- Web assurance seal services, trust and consumers' concerns: An investigation of e-commerce transaction intentions across two nations | 2016 | European Journal of Information Systems
+  - reason: 文章是跨文化消费者行为研究，考察Web保证印章与信任对电商交易意愿的影响，安全/隐私担忧仅为消费者感知变量，不是以恶意行为者或攻防为核心。
+- When crowds play god: a Promethean perspective on crowdfunding | 2022 | European Journal of Information Systems
+  - reason: 全文以普罗米修斯神话和辩证法分析众筹项目所有者的公共叙事，虽提及欺诈、隐私等安全相关词汇，但仅为叙事背景或批评，并非围绕恶意行为者或攻击/防御展开。
+- Why security and privacy research lies at the centre of the information systems (IS) artefact: Proposing a bold research agenda | 2017 | European Journal of Information Systems
+  - reason: 本文是倡导安全与隐私研究议程的社论，核心在于重新定义IS人为制品、改进理论与方法，并展望在线平台、IoT、大数据等方向；恶意攻击与漏洞仅作为安全研究的一般背景，未构成研究问题核心。
+- Avocados crossing borders: The problem of runaway objects and the solution of a shipping information pipeline for improving international trade | 2018 | Information Systems Journal
+  - reason: 文章核心是国际贸易物流信息基础设施改进，安全风险仅作为背景和业务挑战之一，并非研究攻击或防御的对象。
+- Blissfully ignorant: The effects of general privacy concerns, general institutional trust, and affect in the privacy calculus | 2015 | Information Systems Journal
+  - reason: 研究关注隐私决策中的情感、信任与隐私担忧对信息披露意愿的影响，未涉及恶意行为者或攻击/防御机制。
+- Cognitive-affective drivers of employees' daily compliance with information security policies: A multilevel, longitudinal study | 2019 | Information Systems Journal
+  - reason: 本文研究员工日常信息安全政策合规行为的认知与情感驱动因素，属于安全政策合规的行为研究，而非针对攻击或漏洞的攻防安全研究。
+- Counter-networks in standardization: A perspective of developing countries | 2007 | Information Systems Journal
+  - reason: 文章研究中国WAPI标准化的社会-制度过程，核心是标准制定/实施中的利益博弈与国家战略，而非攻击或漏洞的检测/防御/缓解；WAPI安全仅是背景与应用场景。
+- Ethics and information technology use: a factor analysis of attitudes to computer use | 1995 | Information Systems Journal
+  - reason: 研究的是计算机使用伦理态度的因子分析，虽涉及病毒、浏览文件等场景，但核心是伦理感知而非攻击或防御。
+- Exploring the effects of organizational justice, personal ethics and sanction on internet use policy compliance | 2014 | Information Systems Journal
+  - reason: 文章研究员工互联网使用政策（IUP）遵从意愿的影响因素（组织公正、个人伦理、制裁），属于安全政策合规行为研究，不涉及恶意攻击或漏洞攻防。
+- Extending the two-stage information systems continuance model: Incorporating UTAUT predictors and the role of context | 2011 | Information Systems Journal
+  - reason: 文章核心是扩展IS持续使用模型，研究电子政务技术的用户采纳与持续使用意图，安全威胁仅作为引入信任变量的背景，并非攻防安全研究。
+- Flamingos on a slackline: Companies' challenges of balancing the competing demands of handling customer information and privacy | 2019 | Information Systems Journal
+  - reason: 文章研究企业如何平衡客户信息利用与隐私保护，属于组织层面的隐私治理与合规挑战，不涉及恶意行为者或攻击/防御技术，不属于攻防安全。
+- Heeding the Messenger: The Influence of Sender Characteristics on Security Message Compliance Intentions | 2026 | Information Systems Journal
+  - reason: 文章研究安全消息发送者特征对用户合规意图的影响，属于安全行为与说服研究，核心不是攻击者行为或漏洞的检测、防御与建模。
+- Information security policies in the UK healthcare sector: A critical evaluation | 2012 | Information Systems Journal
+  - reason: 文章以批判理论分析NHS信息安全政策文本中的意识形态与霸权，研究核心是政策制定与权力关系，而非攻击、漏洞或防御机制。
+- Information security policy noncompliance: An integrative social influence model | 2020 | Information Systems Journal
+  - reason: 文章研究员工对信息安全政策的不合规行为及其社会影响模型，属于安全政策合规与组织行为研究，不围绕恶意攻击者或攻击/漏洞攻防核心。
+- Input control and its signalling effects for complementors' intention to join digital platforms | 2023 | Information Systems Journal
+  - reason: 研究核心是数字平台输入控制对潜在互补者加入意愿的信号效应，属于平台治理与用户行为研究；恶意行为者（如欺诈者）仅作为背景提及，未围绕攻击或防御。
+- Personal information privacy and emerging technologies | 2013 | Information Systems Journal
+  - reason: 文章核心是个人信息隐私的概念模型与管理，第四方非法黑客作为背景提及，不围绕攻击或防御展开。
+- Proposing the control-reactance compliance model (CRCM) to explain opposing motivations to comply with organisational information security policies | 2015 | Information Systems Journal
+  - reason: 文章研究员工对信息安全政策的遵从与不遵从动机（控制-对抗模型），核心是组织行为与心理反应，不涉及恶意攻击者、攻击行为或威胁的检测/防御，属于组织安全治理范畴。
+- Security services as coping mechanisms: An investigation into user intention to adopt an email authentication service | 2014 | Information Systems Journal
+  - reason: 研究核心是用户采用电子邮件认证服务的意图，恶意邮件威胁仅作为背景动机，未聚焦于攻击或防御机制本身。
+- That's interesting: An examination of interest theory and self-determination in organisational cybersecurity training | 2022 | Information Systems Journal
+  - reason: 该文研究组织网络安全培训中兴趣与自我决定动机对学习效果的影响，属于SETA培训动机与教育研究，不以攻击、漏洞或防御为核心对象。
+- The effect of role conflict on self-disclosure in social network sites: An integrated perspective of boundary regulation and dual process model | 2019 | Information Systems Journal
+  - reason: 研究聚焦于社会网络站点中角色冲突对用户自我披露行为的影响，核心是隐私感知与决策，不涉及恶意或对抗行为者、攻击或防御。
+- The emergence of digital ecosystem governance: An investigation of responses to disrupted resource control in the Swedish public transport sector | 2023 | Information Systems Journal
+  - reason: 文章研究开放数据平台的生态系统治理与权力谈判，外部开发者抓取数据仅作为触发背景，并非恶意攻击或安全防御研究。
+- The impact of leadership on employees' intended information security behaviour: An examination of the full-range leadership theory | 2019 | Information Systems Journal
+  - reason: 研究核心是领导风格对员工信息安全行为意图的影响，属于组织安全治理与合规行为研究，不涉及恶意或对抗行为者的攻击、防御或漏洞。
+- The role of mobile-computing self-efficacy in consumer information disclosure | 2015 | Information Systems Journal
+  - reason: 研究核心是移动计算自我效能感对消费者信任和隐私风险感知的影响，属于用户行为与心理认知研究，未以恶意行为者或攻击/防御机制为核心。
+- Value-focused assessment of information system security in organizations | 2006 | Information Systems Journal
+  - reason: 文章从组织管理与价值观视角研究IS安全，识别安全目标和手段，不涉及任何恶意行为者或攻击/防御技术，属于组织安全治理范畴。
+- Violations of health information privacy: The role of attributions and anticipated regret in shaping whistle-blowing intentions | 2018 | Information Systems Journal
+  - reason: 文章研究健康信息隐私违规情境下的举报意愿受归因（故意性、稳定性）和预期后悔的影响，属于组织行为/心理学研究，不以恶意攻击者或系统攻击防御为核心。
+- When enough is enough: Investigating the antecedents and consequences of information security fatigue | 2021 | Information Systems Journal
+  - reason: 该文研究员工信息安全疲劳的前因与后果，核心是安全政策合规行为，没有将恶意或对抗行为者作为研究问题中心，也未围绕攻击或漏洞展开。
+- Algorithms to the Rescue: Market Mechanisms for Consensual Trading of Unbiased Individual Data | 2025 | Information Systems Research
+  - reason: 文章聚焦数据市场的激励兼容补偿机制与无偏采样算法，研究核心是经济学机制设计而非攻击或防御；隐私、再识别风险仅作为数据主体定价与补偿的背景因素。
+- An empirical examination of the concern for information privacy instrument | 2002 | Information Systems Research
+  - reason: 本文是对消费者信息隐私关注量表的心理测量学验证，研究核心是量表因子结构，没有恶意行为者或攻击/防御情境，属于隐私态度感知研究。
+- An empirical investigation of the antecedents and consequences of privacy uncertainty in the context of mobile apps | 2020 | Information Systems Research
+  - reason: 文章核心是消费者对移动应用隐私不确定性的感知及其对使用意愿的影响，属于隐私态度/感知研究，未以攻击者或攻防对抗为研究核心。
+- Assessing the impact of granular privacy controls on content sharing and disclosure on facebook | 2016 | Information Systems Research
+  - reason: 本文研究Facebook隐私控制政策变化对用户内容分享与披露行为的影响，属于隐私态度/行为研究，无恶意行为者、无攻击或防御核心。
+- Cloud Services vs. On-Premises Software: Competition under Security Risk and Product Customization | 2020 | Information Systems Research
+  - reason: 本文核心是云服务与本地软件在安全风险和定制能力下的竞争定价与投资策略，安全攻击仅作为外生风险参数进入博弈模型，并非研究攻击或防御本身。
+- Contracting information security in the presence of double moral hazard | 2013 | Information Systems Research
+  - reason: 全文以信息安全外包中的双边道德风险为研究对象，关注合同激励设计，虽以安全漏洞为背景，但没有以恶意行为者及其攻击/防御为核心。
+- Developing and validating trust measures for e-commerce: An integrative typology | 2002 | Information Systems Research
+  - reason: 文章核心是电子商务信任的心理测量与结构验证，黑客风险仅作为背景提及，不构成攻防安全研究。
+- Dynamics of Shared Security in the Cloud | 2025 | Information Systems Research
+  - reason: 文章是云安全共享责任与CSP竞争策略的动态经济博弈模型，恶意行为者仅作为攻击概率背景，研究核心是公共品供给与平台竞争，而非攻击实施或防御检测评估。
+- Embarrassing exposures in online social networks: An integrated perspective of privacy invasion and relationship bonding | 2015 | Information Systems Research
+  - reason: 研究聚焦于社交网络中朋友间玩笑式尴尬信息曝光引发的隐私侵犯感知和关系纽带变化，属于一般隐私行为研究，不涉及恶意攻击者或攻防对抗。
+- Examining the continuance of secure behavior: A longitudinal field study of mobile device authentication | 2016 | Information Systems Research
+  - reason: 文章研究用户安全行为（移动设备认证）的持续性，未涉及恶意行为者或攻击/漏洞，核心是界面可用性对安全行为的影响，属于安全外围背景而非攻防安全。
+- Exploiting and defending open digital platforms with boundary resources: Android's five platform forks | 2018 | Information Systems Research
+  - reason: 文章将平台分叉视为敌对商业策略，而非信息系统攻击；损害对象是商业利益与竞争优势，而非安全属性。
+- Exploring Contrasting Effects of Trust in Organizational Security Practices and Protective Structures on Employees’ Security-Related Precaution Taking | 2024 | Information Systems Research
+  - reason: 研究核心是员工对组织信息安全实践的信任如何通过承诺、自满和正念影响预防行为，属于组织安全行为管理，而非围绕攻击者、漏洞或具体攻防技术研究。
+- Hiding sensitive information when sharing distributed transactional data | 2020 | Information Systems Research
+  - reason: 文章研究零售交易数据共享前的敏感项集隐藏（数据净化）算法，目的是防止商业伙伴挖掘出促销等商业敏感模式，不涉及恶意或对抗行为者，非信息系统攻防安全。
+- Information goods pricing and copyright enforcement: Welfare analysis | 2003 | Information Systems Research
+  - reason: 文章是信息商品定价与版权执法（罚款、税收、补贴）的福利经济学分析，盗版被抽象为用户选择，核心是政府最优政策与出版商定价/检测决策，而非信息系统的攻击、漏洞或安全防御机制；损害对象是版权所有者经济利益，而非安全属性。
+- Institutional influences on information systems security innovations | 2012 | Information Systems Research
+  - reason: 研究核心是将信息安全管理视为行政创新，考察制度压力与组织因素对采纳和吸收的影响，并非针对攻击/漏洞的检测、防御或评估。
+- Join Up or Stay Away? Coalition Formation for Critical IT Infrastructure | 2024 | Information Systems Research
+  - reason: 文章研究关键IT基础设施投资的联盟形成与激励设计，属于组织经济学/公共政策建模，全文无恶意行为者或攻击/防御内容，安全仅作为关键基础设施定义背景。
+- Mandatory standards and organizational information security | 2016 | Information Systems Research
+  - reason: 文章研究强制性安全标准对企业安全投资的影响，属于安全政策/标准评估，攻击者仅作为风险背景而非研究核心对象。
+- Morality and Computers: Attitudes and Differences in Moral Judgments | 1999 | Information Systems Research
+  - reason: 研究核心是用户对计算机相关行为的道德判断（伦理态度），病毒、加密等仅作为道德判断情境，不涉及攻击实施或防御技术。
+- More harm than good? How messages that interrupt can make us vulnerable | 2016 | Information Systems Research
+  - reason: 文章以安全消息为上下文，但核心是双任务干扰对用户忽视安全警告的影响，恶意行为者或攻击/漏洞并非研究问题本身。
+- Platform Loophole Exploitation, Recovery Measures, and User Engagement: A Quasi-Natural Experiment in Online Gaming | 2024 | Information Systems Research
+  - reason: 文章研究游戏平台漏洞利用后惩罚措施对用户参与度的影响，核心是平台治理和用户行为，而非信息系统的攻击、漏洞利用或防御机制。
+- Promoting Security Behaviors in Remote Work Environments: Personal Values Shaping Information Security Policy Compliance | 2025 | Information Systems Research
+  - reason: 研究核心是员工信息安全政策遵从行为及个人价值观影响，属于组织安全政策合规与安全行为研究，没有针对恶意攻击者的攻击/防御/检测焦点。
+- Real options models for proactive uncertainty-reducing mitigations and applications in cybersecurity investment decision making | 2018 | Information Systems Research
+  - reason: 文章研究核心是网络安全投资中的实物期权决策模型，关注缓解措施的经济价值评估而非攻击或漏洞本身。
+- Shedding Light on the Dark: The Impact of Legal Enforcement on Darknet Transactions | 2024 | Information Systems Research
+  - reason: 全文研究的是执法逮捕对暗网毒品交易量的威慑效应，以犯罪经济学和威慑理论为核心，而非针对信息系统攻击或漏洞的攻防安全研究。
+- Socially nudged: A quasi-experimental study of friends' social influence in online product ratings | 2018 | Information Systems Research
+  - reason: 文章研究在线评分中朋友的社会影响，属于正常用户行为，不涉及恶意或对抗行为者，也没有攻击、漏洞或安全防御内容。
+- Special section introduction: Ubiquitous IT and digital vulnerabilities | 2016 | Information Systems Research
+  - reason: 文章是特刊导言，以宽泛的数字脆弱性为主题，涉及安全但并非以攻击/漏洞攻防为研究核心，且包含大量非攻防议题。
+- The Illusion of Authenticity in Online Reviews: Truth Bias and the Role of Valence | 2026 | Information Systems Research
+  - reason: 文章研究消费者对虚假评论的感知偏见（truth bias），而非虚假评论的检测、防御或攻击建模，恶意行为者只是背景，研究核心属于一般评论感知/内容质量领域。
+- The Open Prison of the Big Data Revolution: False Consciousness, Faustian Bargains, and Digital Entrapment | 2024 | Information Systems Research
+  - reason: 文章以批判社会理论分析数字巨头的操纵与剥削，涉及隐私损害等安全相关概念，但核心是社会批判与理论阐释，并非围绕攻击实施或威胁的检测、防御、缓解、评估与建模。
+- The adaptive roles of positive and negative emotions in organizational insiders’ security-based precaution taking | 2019 | Information Systems Research
+  - reason: 文章研究组织内部人员的安全预防行为受情绪影响，核心是行为心理学机制，攻击者或恶意行为仅作为背景威胁，未成为研究问题本身。
+- The economic incentives for sharing security information | 2005 | Information Systems Research
+  - reason: 文章核心是安全信息共享与安全技术投资的经济激励博弈，恶意攻击者仅作为背景威胁，并非研究问题的核心对象。
+- The influence of professional subculture on information security policy violations: A field study in a healthcare context | 2020 | Information Systems Research
+  - reason: 文章研究专业亚文化对信息安全政策违规行为的影响，属于员工行为合规研究，未涉及恶意或对抗行为者，也未围绕攻击实施或威胁检测/防御。
+- The role of extra-role behaviors and social controls in information security policy effectiveness | 2015 | Information Systems Research
+  - reason: 文章研究员工信息安全政策合规与额外角色行为及正式/社会控制的影响，核心是组织行为与安全管理，未涉及恶意行为者或攻击/防御的检测、防御、缓解与建模。
+- To Partner or Not to Partner? The Partnership Between Platforms and Data Brokers in Two-Sided Markets | 2025 | Information Systems Research
+  - reason: 文章研究平台与数据经纪商合作的经济机制和竞争策略，消费者隐私担忧是商业决策的外部因素，不涉及恶意行为者对信息系统的攻击或攻防研究。
+- Too Tired and in Too Good of a Mood to Worry About Privacy: Explaining the Privacy Paradox Through the Lens of Effort Level in Information Processing | 2023 | Information Systems Research
+  - reason: 文章研究隐私悖论的心理机制（认知耗竭与积极情绪对隐私关注与披露行为关联的调节），核心是用户决策过程，不涉及恶意或对抗行为者，也无攻击或防御环节。
+- Toward a theory of information systems security behaviors of organizational employees: A dialectical process perspective | 2019 | Information Systems Research
+  - reason: 文章研究组织员工信息安全行为（如锁定电脑、USB扫描）的动态变化过程，聚焦员工合规与不合规的辩证机制，不涉及恶意攻击者或攻击/漏洞的检测、防御与建模，属于安全政策合规行为研究。
+- Uncovering the Neural Processes of Privacy: A Neurally Informed Behavioral Intervention to Protect Information Privacy | 2024 | Information Systems Research
+  - reason: 研究聚焦隐私决策的神经机制和行为干预（改变信息呈现时间），并非针对恶意行为者或攻击/漏洞的攻防安全研究，属于隐私偏好/行为研究。
+- Understanding consumers' attitudes toward controversial information technologies: A contextualization approach | 2017 | Information Systems Research
+  - reason: 文章核心是消费者对争议性信息技术（生物识别认证）的接受态度与感知收益/担忧，属于技术采纳和隐私/安全态度研究，而非攻击或防御研究。
+- User awareness of security countermeasures and its impact on information systems misuse: A deterrence approach | 2009 | Information Systems Research
+  - reason: 文章研究安全对策（政策、SETA、监控）对内部人员IS滥用的威慑影响，关注的是员工不当行为及其威慑，而非对系统攻击、漏洞利用或恶意行为者的攻防对抗研究。
+- Win by Hook or Crook? Self-Injecting Favorable Online Reviews to Fight Adjacent Rivals | 2025 | Information Systems Research
+  - reason: 文章研究酒店自我注入好评这一在线评论操纵行为，但核心是竞争与敌对关系对不道德商业行为的影响，属于商业伦理/营销研究，不涉及信息系统安全的攻击、防御或检测。
+- A comparative study of important risk factors involved in offshore and domestic outsourcing of software development projects: A two-panel Delphi study | 2009 | Information and Management
+  - reason: 文章核心是软件外包项目管理风险因素的识别与比较，安全威胁仅作为离岸外包风险之一简要提及，非研究核心。
+- A framework for information security evaluation | 1994 | Information and Management
+  - reason: 文章提出信息安全管理模型（ISM^2）和基于CRAMM的评估工具，属于组织层面的安全治理与风险评估，未以具体恶意行为者或其攻击/防御为核心。
+- A new perspective on neutralization and deterrence: Predicting shadow IT usage | 2017 | Information and Management
+  - reason: 研究核心是员工为何违反信息安全管理政策（使用影子IT），属于安全政策合规行为研究，不涉及恶意攻击者或攻击/漏洞的技术检测与防御。
+- A study of social networking site use from a three-pronged security and privacy threat assessment perspective | 2021 | Information and Management
+  - reason: 文章核心是SNS用户对网络攻击和隐私泄露的风险感知及其对使用行为的影响，恶意行为者是威胁背景而非研究问题本身，未聚焦攻击实施或防御检测，且属于隐私担忧感知类研究，故排除。
+- A transactional-cycle approach to evidence management for dispute resolution | 2005 | Information and Management
+  - reason: 文章提出基于交易周期的证据管理方法以支持非否认服务与争议解决，但未以恶意攻击者或攻击/漏洞的检测防御为研究核心，仅处于安全外围语境。
+- An alternative to emulation for micro-mainframe data exchange | 1991 | Information and Management
+  - reason: 文章核心是企业微-主机数据交换方案设计，安全性仅作为管理需求标准之一，未涉及恶意行为者或攻防对抗。
+- An asynchronous distributed algorithm for real-time payments-processing in a partially-connected network of banks | 1994 | Information and Management
+  - reason: 本文提出银行间支付处理的无监督分布式算法，核心是提升实时性和容错性，未涉及恶意行为者或攻击/防御研究。
+- An empirical investigation of anti-spyware software adoption: A multitheoretical perspective | 2008 | Information and Management
+  - reason: 研究核心是用户采纳反间谍软件的行为决定因素，而非攻击、威胁检测或防御技术本身，间谍软件威胁仅作为应用背景。
+- An exploratory study to identify the critical factors affecting the decision to establish Internet-based interorganizational information systems | 2004 | Information and Management
+  - reason: 文章核心是识别组织采用基于互联网的跨组织信息系统（IBIS）的关键因素，数据安全与黑客只是被调查的技术顾虑之一，并非研究攻击或防御本身。
+- An imposed etic approach with Schwartz polar dimensions to explore cross-cultural use of social network services | 2020 | Information and Management
+  - reason: 研究核心是跨文化视角下SNS使用意图，隐私、信任、声誉操纵仅作为文化差异的讨论背景，无恶意行为者或攻击防御内容。
+- Applying network analysis to investigate interpersonal influence of information security behaviours in the workplace | 2017 | Information and Management
+  - reason: 本文研究组织中员工信息安全行为的人际影响与社会网络结构，属于行为安全与安全管理范畴，全文未涉及恶意行为者或攻击/漏洞及攻防评估，故非攻防安全研究。
+- Are we ready for cyberterrorist attacks?—Examining the role of individual resilience | 2018 | Information and Management
+  - reason: 文章研究个体对网络恐怖袭击的心理韧性和经济韧性行为，攻击仅作为情境背景，核心是心理学和家庭财务行为，而非攻击或防御。
+- Commercializing public information: A critical issue for governmental IS professionals | 1995 | Information and Management
+  - reason: 文章讨论政府公共数据商业化中的开放获取、收费、隐私与法律责任等政策问题，未以攻击或对抗行为为核心。
+- Communicative practices in an online financial forum during abnormal stock market behavior | 2011 | Information and Management
+  - reason: 文章核心是金融论坛中的沟通实践和操纵行为，属于金融欺诈/市场操纵范畴，而非信息系统安全属性的攻击或防御。
+- Compliance to the fair information practices: How are the Fortune 500 handling online privacy disclosures? | 2006 | Information and Management
+  - reason: 文章研究Fortune 500企业隐私政策对公平信息实践（FIP）的合规程度，属于隐私法规遵从与治理研究，不涉及恶意行为者或攻击/防御技术。
+- Confidentiality of information | 1981 | Information and Management
+  - reason: 文章核心是组织数据共享环境下的信息机密性控制与审计，讨论访问控制和安全表的管理问题，未以恶意行为者或攻击/漏洞为研究核心。
+- Cultivating proactive information security behavior and individual creativity: The role of human relations culture and IT use governance | 2022 | Information and Management
+  - reason: 文章研究员工主动信息安全行为及其与组织文化、IT使用治理和个体创造力的关系，属于组织安全行为与治理研究，未以恶意行为者或攻击/漏洞为研究核心。
+- Cyberbullying impacts on victims’ satisfaction with information and communication technologies: The role of Perceived Cyberbullying Severity | 2018 | Information and Management
+  - reason: 文章研究网络欺凌受害者感知严重性对ICT满意度的影响，核心是用户体验与心理反应，未涉及攻击实施、检测、防御或安全属性损害。
+- Data processing aspects of the integrated circuit and magnetic stripe cards | 1992 | Information and Management
+  - reason: 文章主要介绍磁条卡和IC卡的数据处理技术、格式、成本及商业比较，安全功能仅作为卡片特性被提及，未以攻击或漏洞为研究核心。
+- Designing a Framework for Digital KYC Processes Built on Blockchain-Based Self-Sovereign Identity | 2022 | Information and Management
+  - reason: 文章核心是设计基于区块链SSI的数字KYC流程，重点在流程效率、合规、去中心化、信任和用户体验；安全/隐私是背景和设计目标，恶意行为者或攻击防御并非研究核心。
+- Determinants of early conformance with information security policies | 2017 | Information and Management
+  - reason: 全文研究的是用户对信息安全管理政策（密码更换）的早期遵从行为，属于安全政策合规范畴，未围绕攻击或漏洞展开，也未涉及恶意或对抗行为者。
+- Digital signature: Use and modification to achieve success in next generational e-business processes | 2004 | Information and Management
+  - reason: 文章聚焦数字签名在商务流程中的应用和流程改进，仅涉及认证技术的使用与修改，未围绕恶意行为者或攻防对抗。
+- Do context and personality matter? Trust and privacy concerns in disclosing private information online | 2016 | Information and Management
+  - reason: 文章研究信任、隐私关注与人格对在线披露私人信息意愿的影响，属于用户主观感知与行为研究，无恶意或对抗行为者，也未涉及攻击或防御机制。
+- Effects of sanctions, moral beliefs, and neutralization on information security policy violations across cultures | 2020 | Information and Management
+  - reason: 文章研究员工违反信息安全政策的行为意图及其前因（制裁、道德信念、羞耻、中和化），属于安全政策合规行为研究，不围绕恶意攻击者或攻击/漏洞攻防。
+- Efficiency analysis of controls in EDI applications | 2005 | Information and Management
+  - reason: 研究核心是EDI控制措施的效率分析（DEA），安全控制仅为背景，恶意行为者非研究核心对象。
+- Estimating the market impact of security breach announcements on firm values | 2009 | Information and Management
+  - reason: 研究核心是估计安全漏洞公告对公司市场价值的影响，属于金融事件研究，而非攻击或防御技术本身。
+- Examining the case of French hesitancy toward IDaaS solutions: Technical and social contextual factors of the organizational IDaaS privacy calculus | 2023 | Information and Management
+  - reason: 文章研究法国企业采纳IDaaS（身份即服务）的组织隐私计算，关注技术与社会背景下的收益-风险权衡，而非攻击、漏洞或防御机制本身。
+- Exposing others’ information on online social networks (OSNs): Perceived shared risk, its determinants, and its influence on OSN privacy control use | 2017 | Information and Management
+  - reason: 研究核心是OSN用户对他人信息暴露的感知共享风险及其影响因素和隐私控制使用，属于隐私担忧主观感知行为研究，不涉及恶意对抗行为者或攻击/防御技术。
+- G2G information sharing among government agencies | 2014 | Information and Management
+  - reason: 文章研究政府机构间信息共享的影响因素，属于电子政务/公共管理研究，安全仅作为共享过程中的一个考量因素，不存在恶意行为者或攻防对抗核心。
+- Health information privacy concerns, antecedents, and information disclosure intention in online health communities | 2018 | Information and Management
+  - reason: 研究核心是用户对健康信息隐私的担忧及披露意愿，无恶意行为者或攻击/防御内容，属于隐私态度排除类型。
+- Herd behavior in information security decision-making | 2021 | Information and Management
+  - reason: 研究核心是用户安全决策中的羊群行为，不涉及恶意攻击者或攻击/防御技术，属于行为安全的外围语境。
+- How to regulate individuals’ privacy boundaries on social network sites: A cross-cultural comparison | 2018 | Information and Management
+  - reason: 文章核心是社交网站用户隐私边界管理和自我披露决策的跨文化研究，涉及隐私风险感知但无恶意/对抗行为者，亦无攻击或防御焦点。
+- Incident-centered information security: Managing a strategic balance between prevention and response | 2014 | Information and Management
+  - reason: 文章核心是信息安全战略中预防与响应范式的管理平衡，属于组织安全治理范畴，而非针对恶意行为者的攻击/防御研究。
+- Information as a corporate asset | 1981 | Information and Management
+  - reason: 全文围绕信息作为公司资产的管理、标准化与组织问题，仅在第7节泛泛提及密码控制和加密等基础安全措施，无任何恶意行为者或攻击防御研究核心。
+- Information security breaches and IT security investments: Impacts on competitors | 2019 | Information and Management
+  - reason: 文章研究信息安全漏洞和IT安全投资公告对竞争对手股价的市场影响，属于安全事件的经济后果分析，并非以攻击实施或威胁检测/防御/评估为核心。
+- Information security concerns in IT outsourcing: Identifying (in) congruence between clients and vendors | 2017 | Information and Management
+  - reason: 文章研究IT外包中客户与供应商信息安全关注点的（不）一致性，核心是组织安全管理与治理，未围绕恶意行为者或攻击/漏洞攻防。
+- Informing cybersecurity strategic commitment through top management perceptions: The role of institutional pressures | 2021 | Information and Management
+  - reason: 研究核心是高层管理者对网络保险作为风险转移策略的承诺，属于组织安全治理与战略决策，未以攻击、漏洞或防御技术为核心。
+- Institutional pressures in security management: Direct and indirect influences on organizational investment in information security control resources | 2015 | Information and Management
+  - reason: 研究核心是制度压力对组织信息安全控制资源投资的影响，属于组织安全治理范畴，不围绕攻击或漏洞，无恶意行为者作为核心对象。
+- Internal control framework for a compliant ERP system | 2014 | Information and Management
+  - reason: 文章核心是开发ERP系统内部控制框架以支持审计合规，不围绕攻击或漏洞，安全仅作为背景提及。
+- Internet-based e-banking and consumer attitudes: An empirical study | 2002 | Information and Management
+  - reason: 研究核心是消费者对网上银行的态度、感知有用性和使用意愿，安全仅是消费者感知的一个属性，并非研究攻击或防御问题。
+- Key dimensions of business-to-consumer web sites | 2002 | Information and Management
+  - reason: 文章研究消费者对B2C网站关键维度的感知及对购买意愿的影响，安全与隐私仅为消费者感知维度之一，无恶意行为者或攻击/防御研究内容。
+- Learning to cope with information security risks regarding mobile device loss or theft: An empirical examination | 2015 | Information and Management
+  - reason: 文章核心是移动设备丢失/被盗情境下用户应对意向的行为模型，并非以攻击者行为、攻击实现或漏洞检测/防御为研究核心。
+- Mapping Sentiments to Themes of Customer reactions on Social Media during a Security Hack: A Justice Theory Perspective | 2020 | Information and Management
+  - reason: 文章以安全黑客事件为背景，研究顾客在社交媒体上的反应、公平感知和情感，核心是品牌管理与客户关系，而非攻击或防御本身。
+- Motivation crowding in online product reviewing: A qualitative study of amazon reviewers | 2019 | Information and Management
+  - reason: 文章核心是评论者的动机交互（动机拥挤），而非对恶意操纵的检测或防御；虽然涉及虚假评论背景，但未聚焦攻击者行为。
+- Multilevel security for information retrieval systems | 1993 | Information and Management
+  - reason: 文章核心是多级安全访问控制方案设计，虽以恶意用户滥用为背景，但未对攻击进行建模或攻防评估，属于一般安全方案，非攻防安全研究。
+- Multilevel security for information retrieval systems - II | 1995 | Information and Management
+  - reason: 文章以多级安全信息检索系统架构设计为核心，虽提及恶意用户滥用可能，但未将攻击者或对抗行为作为研究核心，也无攻击建模或防御评估。
+- Out of fear or desire? Toward a better understanding of employees' motivation to follow IS security policies | 2011 | Information and Management
+  - reason: 文章研究员工遵守信息安全政策（ISSP）行为的内在和外在动机，属于安全政策合规行为研究，不涉及恶意行为者或攻防对抗。
+- Predicting consumer intentions to use on-line shopping: The case for an augmented technology acceptance model | 2004 | Information and Management
+  - reason: 本文是消费者在线购物技术接受模型研究，security/privacy 仅作为影响态度与意愿的感知信念，未涉及恶意攻击者或攻防检测。
+- Predicting employee information security policy compliance on a daily basis: The interplay of security-related stress, emotions, and neutralization | 2019 | Information and Management
+  - reason: 研究核心是员工因信息安全政策压力导致的合规行为变化，属于组织安全政策合规行为研究，未围绕攻击、漏洞或对抗性威胁。
+- Privacy and the Internet of Things−An experiment in discrete choice | 2021 | Information and Management
+  - reason: 文章核心是消费者对物联网设备的隐私偏好与货币估值（WTA/WTP），虽涉及隐私泄露风险和安全背景，但无恶意行为者、无攻击或漏洞研究，不属于攻防安全。
+- Sanction severity and employees’ information security policy compliance: Investigating mediating, moderating, and control variables | 2018 | Information and Management
+  - reason: 文章核心是员工信息安全政策合规意图的影响因素（制裁、自我效能等），属于组织安全行为与政策合规研究，不涉及具体攻击、漏洞或对抗行为。
+- Scores vs. stars: A regression discontinuity study of online consumer reviews | 2019 | Information and Management
+  - reason: 文章以消费者评论的数值与星级呈现对销售的影响为核心，评论操纵仅作为背景讨论，并非研究核心，未涉及攻击或防御。
+- Security and integrity controls for microcomputers: A summary analysis | 1987 | Information and Management
+  - reason: 文章主要从管理审计角度讨论微计算机环境中的内部控制、组织责任与政策，威胁描述泛化为盗窃、未授权访问等，未以恶意/对抗行为者为研究核心，不属于攻防安全。
+- Security-related behavior of PC users in organizations | 1991 | Information and Management
+  - reason: 文章研究PC用户的安全相关行为（备份、文档、存储、访问控制）的决定因素，属于组织安全治理与行为合规研究，未涉及恶意行为者、攻击或漏洞攻防。
+- Self-control, organizational context, and rational choice in Internet abuses at work | 2018 | Information and Management
+  - reason: 文章研究员工互联网滥用（IUP违规）的合规行为，是对安全政策遵从的组织行为研究，而非攻击或漏洞为核心，安全仅作为风险背景。
+- Sharing and access right delegation for confidential documents: A practical solution | 2006 | Information and Management
+  - reason: 文章提出加密文档共享与访问权委托方案，以保密性为目标，但未以恶意攻击或漏洞为研究核心，缺乏攻击建模与攻防评估。
+- Social security administration's progress in modernizing its computer operations | 1985 | Information and Management
+  - reason: 文章是政府审计报告，核心是系统现代化进程、软件工程和管理问题，安全（防欺诈）仅作为背景之一，不构成攻防安全研究。
+- Software piracy and software security measures in business schools | 1992 | Information and Management
+  - reason: 文章研究商学院软件盗版程度与软件安全措施，核心是版权合规与组织治理，非针对信息系统的攻击或漏洞攻防。
+- Supply chain information integration and its impact on the operational performance of manufacturing firms in Malaysia | 2020 | Information and Management
+  - reason: 研究核心是供应链信息整合对运营绩效的影响，信息泄露仅作为调节变量，安全只是背景而非攻击防御对象。
+- Task support of electronic patient care report (ePCR) systems in emergency medical services: An elaboration likelihood model lens | 2020 | Information and Management
+  - reason: 研究核心是ePCR系统的任务支持，安全保护仅作为外围线索变量，不涉及攻击或漏洞研究。
+- The bittersweet escape to information technology: An investigation of the stress paradox of social network sites | 2020 | Information and Management
+  - reason: 研究核心是SNS使用中的技术压力悖论，隐私威胁仅作为感知压力源之一，无恶意行为者或攻防焦点。
+- The effects of multilevel sanctions on information security violations: A mediating model | 2012 | Information and Management
+  - reason: 文章研究员工非恶意信息安全政策违规行为及多层制裁的威慑效果，属于组织安全治理与合规研究，不涉及恶意攻击或防御。
+- The ethical and social implications of personalization technologies for e-learning | 2014 | Information and Management
+  - reason: 文章讨论e-learning个性化技术的伦理与社会影响（隐私、控制、能力下降、教育商品化），属于一般隐私伦理与教育技术评论，未以攻击、漏洞或对抗行为者为研究核心。
+- The social implications of information processing | 1978 | Information and Management
+  - reason: 文章讨论信息处理的社会影响、隐私担忧及数据保护政策，未以恶意行为者或攻击/防御为核心，属于安全外围的社会政策研究。
+- Theorizing the concept and role of assurance in information systems security | 2013 | Information and Management
+  - reason: 文章研究的是组织在法规合规情境下的“保证”概念、流程成熟度与组织合法性，属于安全治理与合规范畴，未涉及攻击、漏洞或对抗行为。
+- Threats and countermeasures for information system security: A cross-industry study | 2007 | Information and Management
+  - reason: 文章核心是跨行业调查管理者对IS威胁的感知与企业安全对策采用之间的差距，聚焦组织安全采用与行业差异，未围绕具体攻击或漏洞的攻防研究，属于安全治理/采用研究。
+- Treating data privacy in distributed systems | 1981 | Information and Management
+  - reason: 全文围绕分布式数据库的访问控制与安全管理架构（安全模式、映射规则、授权与撤销机制），未涉及具体恶意行为者或攻击/漏洞对抗，属于一般性访问控制方案。
+- Trust calibration of automated security IT artifacts: A multi-domain study of phishing-website detection tools | 2021 | Information and Management
+  - reason: 文章研究用户对钓鱼网站检测工具的信任校准，恶意行为者（钓鱼攻击者）仅是背景，研究核心是用户信任与检测工具使用行为，而非攻击、漏洞或防御技术本身。
+- Trust in consumer-to-consumer electronic commerce | 2008 | Information and Management
+  - reason: 研究核心是C2C电子商务信任的影响因素（网站质量、第三方认可等），未围绕恶意行为者、攻击或防御，属于一般信任与信誉研究；安全/欺诈仅是背景提及。
+- Understanding users’ AI manipulation intention: An empirical investigation of the antecedents in the context of AI recommendation algorithms | 2025 | Information and Management
+  - reason: 研究核心是普通用户为获得更好推荐而故意操纵AI推荐算法的意图，属于AI人机交互与用户适应行为，不涉及恶意攻击者或信息系统安全属性的攻防。
+- Why there aren't more information security research studies | 2004 | Information and Management
+  - reason: 文章聚焦企业安全风险管理计划（SRM program）的概念模型与邮件调查方法论，研究核心是组织层面的管理流程与高管支持，而非恶意行为者或攻击/防御技术。
+- “Standardizing information security – a structurational analysis” | 2022 | Information and Management
+  - reason: 研究核心是信息安全标准制定过程中的组织合法性问题，不涉及恶意行为者或攻击/防御技术，属于组织安全治理范畴。
+- A field study of corporate employee monitoring: Attitudes, absenteeism, and the moderating influences of procedural justice perceptions | 2009 | Information and Organization
+  - reason: 文章研究员工对组织监控的态度、旷工及程序公正的调节作用，属于组织行为与员工隐私态度研究，未以恶意/对抗行为者或攻击防御为研究核心。
+- Analysis of modern IS security development approaches: Towards the next generation of social and adaptable ISS methods | 2005 | Information and Organization
+  - reason: 文章是对现代ISS开发方法的元综述，核心是方法分类、假设分析和未来方向，虽涉及威胁/攻击/防御概念，但恶意行为者并非研究问题核心，也未聚焦于具体攻击实施或威胁的检测、防御、缓解、评估与建模。
+- Navigating the extended reach: Target experiences of cyberbullying at work | 2013 | Information and Organization
+  - reason: 研究聚焦于职场网络欺凌的目标体验，虽然涉及恶意行为和信息滥用，但核心是组织行为学与心理学视角，而非信息系统安全的攻击、检测或防御。
+- On sociomaterial imbrications: What plagiarism detection systems reveal and why it matters | 2011 | Information and Organization
+  - reason: 论文研究学术抄袭检测系统在UK与希腊教育情境中的社会物质交织与误构，核心是教育实践与公平性，而非恶意行为者对信息系统的攻击或防御。
+- Restoring balance: How history tilts the scales against privacy. An Actor-Network Theory investigation | 2009 | Information and Organization
+  - reason: 本文运用Actor-Network理论历史调查个人数据（MVR数据）的持续销售与隐私平衡实践，旨在揭示组织决策的本地性和数据网络的复杂性，未涉及恶意行为者或攻击/防御研究，属于隐私与组织治理范畴。
+- A computer scientist's reactions to NPfIT | 2007 | Journal of Information Technology
+  - reason: 文章核心是对NHS NPfIT项目的评论，关注集中化、采购演化、社会技术问题，安全与恶意行为者仅为风险背景，并非攻防安全研究核心。
+- A taxonomy of financial market manipulations: Establishing trust and market integrity in the financialized economy through automated fraud detection | 2017 | Journal of Information Technology
+  - reason: 本文核心是金融市场操纵分类与欺诈检测，属于金融市场监管与欺诈范畴，没有针对信息系统或安全属性的攻击-防御环节。
+- Barcodes, RFIDS, lemonade and conversation | 2010 | Journal of Information Technology
+  - reason: 全文核心是创业教学案例，讨论是否利用加密条形码/RFID开展文档认证业务，聚焦商业评估与市场机会；虽然涉及伪造与防伪，但对抗行为并非研究核心。
+- Big other: Surveillance capitalism and the prospects of an information civilization | 2015 | Journal of Information Technology
+  - reason: 研究核心是对监控资本主义的社会政治批判，虽涉及隐私侵犯案例，但并非围绕信息系统的攻击、漏洞或防御展开。
+- Building data management capabilities to address data protection regulations: Learnings from EU-GDPR | 2023 | Journal of Information Technology
+  - reason: 文章研究EU-GDPR合规所需的数据管理能力，核心是法规遵从与组织能力建设，不涉及恶意攻击者或攻防对抗。
+- From traditional EDI to Internet-based EDI: Managerial considerations | 1999 | Journal of Information Technology
+  - reason: 文章核心是传统EDI向互联网迁移的管理考虑，安全只是影响采用的障碍之一，并非研究核心。
+- History and is - Broadening our view and understanding: Actor-network theory as a methodology | 2013 | Journal of Information Technology
+  - reason: 文章核心是历史研究方法论（Actor-Network Theory）的演示，隐私争议仅是案例背景，没有恶意或对抗行为者作为研究对象，也没有围绕攻击/漏洞的检测防御。
+- Influential IT management trends: An international study | 2015 | Journal of Information Technology
+  - reason: 文章研究IT管理趋势，安全/隐私仅是管理关注点和投资技术之一，未涉及攻击、漏洞或对抗行为。
+- Legal aspects of knowledge-based technology | 1988 | Journal of Information Technology
+  - reason: 文章讨论知识型技术的法律所有权与责任问题，未涉及恶意行为者或攻防安全。
+- Local sociotechnical system development in the NHS National Programme for Information Technology | 2007 | Journal of Information Technology
+  - reason: 文章核心是NHS信息技术项目中的本地社会技术系统设计、组织变革和用户采纳行为，仅偶发提及保密担忧或智能卡访问限制，但这些是组织流程背景，并非以攻击、漏洞或防御为研究核心。
+- Management and the hybridization of expertise: EFTPOS in retrospect | 1997 | Journal of Information Technology
+  - reason: 文章核心是英国银行EFTPOS网络设计中的专业知识管理与组织位置问题，属于IT管理/创新研究，仅顺带提及PIN安全和加密算法选择，无恶意行为者，亦不以攻击或防御为研究核心。
+- Management and the hybridization of expertise: EFTPOS in retrospect | 1997 | Journal of Information Technology
+  - reason: 文章核心是英国银行EFTPOS网络设计中的专业知识管理与组织位置问题，属于IT管理/创新研究，仅顺带提及PIN安全和加密算法选择，无恶意行为者，亦不以攻击或防御为研究核心。
+- Social Machines: How recent technological advances have aided financialisation | 2017 | Journal of Information Technology
+  - reason: 文章核心是金融化与信息技术的社会机器分析，而非信息系统攻防；黑客篡改美联社Twitter账户等安全事件仅作为市场波动例证出现，不是研究核心。
+- The social construction of a secure, anonymous electronic payment system: Frame alignment and mobilization around Ecash | 1998 | Journal of Information Technology
+  - reason: 文章研究Ecash电子支付系统的社会建构与公众话语，核心是社会运动框架和话语分析，不涉及恶意行为者或攻击/防御技术。
+- The ultimate bluff: A case study of partygaming.com | 2007 | Journal of Information Technology
+  - reason: 文章是PartyGaming在线赌博公司的商业案例，核心是创业、增长、IPO和伦理，安全威胁（如DoS、bots）仅作为商业挑战的背景提及，不是研究核心。
+- Those who control the code control the rules: How different perspectives of privacy are being written into the code of blockchain systems | 2021 | Journal of Information Technology
+  - reason: 文章是区块链隐私态度的组织/治理研究，讨论不同社会群体对隐私的认知和监管冲突，未以攻击者或攻防技术为核心。
+- Understanding information disclosure behaviour in Australian facebook users | 2010 | Journal of Information Technology
+  - reason: 研究核心是用户信息披露行为与隐私感知，身份盗窃等威胁仅为背景动机，未涉及攻击或防御的技术研究。
+- Xcert software, inc. | 1999 | Journal of Information Technology
+  - reason: 文章是Xcert公司创业管理教学案例，聚焦融资、竞争、营销等商业问题，未以恶意行为者或攻击防御为研究核心。
+- A Video-Based Screening System for Automated Risk Assessment Using Nuanced Facial Features | 2017 | Journal of Management Information Systems
+  - reason: 研究核心是使用面部僵硬度进行欺骗/风险检测，应用于模拟盗窃犯罪筛查，不涉及信息系统攻击或漏洞。
+- A framework to limit systems developers' legal liabilities | 1996 | Journal of Management Information Systems
+  - reason: 文章聚焦系统开发者的法律侵权责任（过失与严格产品责任）及减少法律责任的框架，属于法律合规与组织治理，不涉及恶意行为者或攻击/防御。
+- A rigidity detection system for automated credibility assessment | 2014 | Journal of Management Information Systems
+  - reason: 研究核心是自动测谎/可信度评估，通过身体刚性检测识别模拟犯罪和携带爆炸物的人，属于传统执法与安全筛查，不涉及针对信息系统的攻击、漏洞或防御。
+- Are users threatened by credibility assessment systems? | 2013 | Journal of Management Information Systems
+  - reason: 研究核心是用户面对专家系统时的自我威胁与技术接受度，不涉及对信息系统的攻击或防御。
+- Biased Credibility and Sharing of Fake News on Social Media: Considering Peer Context and Self-Objectivity State | 2021 | Journal of Management Information Systems
+  - reason: 文章研究社交媒体用户对假新闻的可信度与分享偏见，属于行为心理研究，未涉及攻击者、系统漏洞或攻防评估。
+- Chain of Values: Examining the Economic Impacts of Blockchain on the Value-Added Tax System | 2021 | Journal of Management Information Systems
+  - reason: 文章核心是区块链在增值税系统应用的经济博弈与福利分析，VAT少报仅作为背景，并非网络安全意义上的攻击或防御研究。
+- Choice of transaction channels: The effects of product characteristics on market evolution | 2005 | Journal of Management Information Systems
+  - reason: 文章使用进化博弈论分析电子市场与传统市场的交易渠道选择，核心是市场惯例演化而非攻击或漏洞；在线欺诈/信任风险仅是背景，ET_c 策略对应一般机会主义欺诈而非系统攻击。
+- Consumer search and retailer strategies in the presence of online music sharing | 2006 | Journal of Management Information Systems
+  - reason: 文章研究在线音乐分享（盗版）环境下的消费者搜索与零售商定价、许可策略，核心是商业利润与市场策略，盗版被作为市场环境因素而非信息系统攻击或安全威胁。
+- Enabling customer-centricity using wikis and the wiki Way | 2006 | Journal of Management Information Systems
+  - reason: 文章研究组织如何利用wiki促进客户参与和知识共创，虽涉及网站涂改等恶意行为，但仅作为案例背景，不构成攻防安全研究核心。
+- Health of electronic communities: An evolutionary game approach | 2004 | Journal of Management Information Systems
+  - reason: 文章以演化博弈模型研究电子社区中诚实成员与欺诈者的信任动态和社区健康，核心是经济激励与声誉惩罚，而非信息系统安全属性的攻击或防御。
+- Impact of Bot Involvement in an Incentivized Blockchain-Based Online Social Media Platform | 2023 | Journal of Management Information Systems
+  - reason: 文章研究Steemit平台上机器人参与对人类用户参与度和经济激励变化的影响，核心是社交平台用户行为与激励机制，而非攻击或安全防御。
+- Influence of Firm’s Recovery Endeavors upon Privacy Breach on Online Customer Behavior | 2016 | Journal of Management Information Systems
+  - reason: 本文核心是企业隐私泄露后的服务恢复措施对顾客口碑与转换行为的影响，黑客攻击仅作为事件背景，不涉及攻击实施、检测、防御或威胁建模。
+- Investments in information security: A real options perspective with Bayesian postaudit | 2009 | Journal of Management Information Systems
+  - reason: 研究核心是信息安全投资的实物期权估值与贝叶斯后审计，属于安全经济学与投资决策，而非攻击、漏洞的检测、防御或评估。
+- Managing interdependent information security risks: Cyberinsurance, managed security services, and risk pooling arrangements | 2013 | Journal of Management Information Systems
+  - reason: 文章研究信息安全风险的风险管理经济学（网络保险、风险池、安全外包），黑客仅作为背景动机，核心不是攻击行为或攻防技术。
+- Organizations' information security policy compliance: Stick or carrot approach? | 2012 | Journal of Management Information Systems
+  - reason: 文章研究员工对信息安全政策的合规意愿，聚焦于惩罚与奖励等管理控制机制，未将恶意或对抗行为者作为研究对象，属于安全政策合规的组织治理范畴。
+- Password security: An empirical study | 1998 | Journal of Management Information Systems
+  - reason: 文章以用户生成的密码特征实证调查为核心，恶意攻击者仅作为背景动机，未以攻击或对抗行为为研究中心，属于安全治理与用户行为研究，而非攻防安全核心研究。
+- Protecting Against Threats to Information Security: An Attitudinal Ambivalence Perspective | 2021 | Journal of Management Information Systems
+  - reason: 文章核心是保护动机理论与态度矛盾对用户采用双因素认证行为的影响，属于信息安全行为研究，并非以攻击实施或威胁检测/防御为研究核心，恶意行为者仅作为背景威胁出现。
+- Risk analysis for information technology | 1991 | Journal of Management Information Systems
+  - reason: 文章核心是IT风险管理与风险评估方法论，恶意行为者（如黑客、病毒）仅作为威胁列表背景，研究焦点是管理流程而非攻击或防御技术。
+- Safe contexts for interorganizational collaborations among homeland security professionals | 2010 | Journal of Management Information Systems
+  - reason: 文章研究国土安全专业人员跨组织临时协作中的'安全情境'因素与协作成功感知的关系，核心是信息共享中的机会主义风险、信任与认知加工，而非针对信息系统的攻击或防御。
+- Self-perception-based versus transference-based trust determinants in computer-mediated transactions: A cross-cultural comparison study | 2008 | Journal of Management Information Systems
+  - reason: 文章研究跨文化电子商务消费者信任的决定因素，涉及感知安全保护、隐私关注和系统可靠性等信任前因，但未将任何恶意或对抗行为者作为研究对象，也未研究攻击的检测、防御或缓解。
+- Service quality in software-as-a-service: Developing the SaaS-Qual measure and examining its role in usage continuance | 2011 | Journal of Management Information Systems
+  - reason: 全文围绕SaaS服务质量量表开发与持续使用意愿，安全虽作为一个服务维度出现，但仅作为客户感知期望的要素，不涉及攻击、威胁或防御研究。
+- Special Section: The Economics of Sharing and Information Security | 2020 | Journal of Management Information Systems
+  - reason: 本文是期刊专题社论，主要讨论共享经济中的参与激励、产品设计与安全投资的经济学，虽提及信息安全和攻击威胁，但仅为背景和议题引入，不聚焦于具体的攻击/漏洞研究。
+- Special section: Information and competitive strategy in a networked economy | 2012 | Journal of Management Information Systems
+  - reason: 本文是特刊导言，聚焦信息与竞争战略，安全仅作为其中一篇论文的主题被简要提及，未以攻防安全为核心。
+- The Role of Corporate Reputation and Crisis Response Strategies in Data Breach Management | 2018 | Journal of Management Information Systems
+  - reason: 数据泄露仅作为危机背景，研究核心是企业声誉和危机响应策略对股价的影响，而非攻击行为本身或其检测、防御、缓解。
+- The global network organization of the future: Information management opportunities and challenges | 1993 | Journal of Management Information Systems
+  - reason: 文章讨论全球网络组织的信息管理挑战，安全仅作为隐私、监控等一般性管理议题提及，无恶意行为者或攻防研究核心。
+- The impact of organizational commitment on insiders motivation to protect organizational information assets | 2015 | Journal of Management Information Systems
+  - reason: 研究核心是组织内部人员保护信息资产的动机与行为（基于保护动机理论），属于行为安全/合规范畴，未以攻击或漏洞作为研究核心。
+- The “Darth” Side of Technology Use: An Inductively Derived Typology of Cyberdeviance | 2018 | Journal of Management Information Systems
+  - reason: 文章核心是归纳推导工作场所网络越轨行为的类型学，属于组织行为与IS使用研究；虽然包含计算机滥用、黑客入侵等安全威胁行为，但研究问题不是攻击实施或防御检测，安全威胁仅作为行为背景而非研究对象。
+- Understanding Employee Responses to Stressful Information Security Requirements: A Coping Perspective | 2014 | Journal of Management Information Systems
+  - reason: 研究聚焦员工对信息安全要求的压力反应及其非恶意政策违反行为，不涉及恶意或对抗行为者，属于安全政策合规与组织行为研究。
+- Understanding nonmalicious security violations in the workplace: A composite behavior model | 2011 | Journal of Management Information Systems
+  - reason: 研究聚焦非恶意安全违规（NMSV）的行为动机，明确排除恶意意图，属于组织安全政策与用户行为研究，而非攻防安全。
+- User Motivations in Protecting Information Security: Protection Motivation Theory Versus Self-Determination Theory | 2017 | Journal of Management Information Systems
+  - reason: 文章研究用户安全行为动机（PMT与SDT比较），以安装密码管理器为情境，未涉及恶意行为者、攻击或防御机制。
+- A standards war waged by a developing country: Understanding international standard setting from the actor-network perspective | 2006 | Journal of Strategic Information Systems
+  - reason: 文章以WAPI与Wi-Fi的标准竞争为案例，核心是国际标准制定过程中的联盟与竞争，虽涉及无线安全协议，但研究焦点是标准制定和贸易政策，而非攻击或防御。
+- Danger is in the eye of the beholders: Social representations of Information Systems security in healthcare | 2007 | Journal of Strategic Information Systems
+  - reason: 本文从社会表征视角研究不同职业社区对IS安全的认知与意识差异，属于安全文化与培训类组织研究，未以恶意行为者、攻击或防御机制为核心。
+- Dealing with digital traces: Understanding protective behaviors on mobile devices | 2019 | Journal of Strategic Information Systems
+  - reason: 研究核心是移动设备用户的信息保护行为（隐私设置使用），基于计划行为理论，聚焦用户心理与行为前因，而非攻击、漏洞或威胁检测/防御。
+- Decision-making and biases in cybersecurity capability development: Evidence from a simulation game experiment | 2019 | Journal of Strategic Information Systems
+  - reason: 研究聚焦于管理者在网络安全能力投资中的决策偏差与学习效果，网络安全情境仅是模拟背景，恶意行为者并非研究核心，属于组织决策与培训研究。
+- Enterprise reputation threats on social media: A case of data breach framing | 2019 | Journal of Strategic Information Systems
+  - reason: 文章研究数据泄露危机后社交媒体公众舆论与声誉威胁的框架和情绪传播，核心是危机沟通与声誉管理，不属于攻击或漏洞检测/防御。
+- Handle with care: How online social network providers' privacy policies impact users' information sharing behavior | 2015 | Journal of Strategic Information Systems
+  - reason: 文章研究隐私政策宽松度对用户信息分享行为的影响，核心是用户对隐私风险的感知和披露意愿，不涉及恶意攻击者或攻击/防御，属于隐私态度类研究。
+- IT supports business strategy growth at the development bank of Singapore | 1994 | Journal of Strategic Information Systems
+  - reason: 全文为银行IT战略与业务应用案例研究，未涉及任何恶意行为者、攻击或攻防安全研究。
+- Internet privacy concerns and beliefs about government surveillance - An empirical investigation | 2008 | Journal of Strategic Information Systems
+  - reason: 文章为互联网隐私担忧与政府监控态度的实证研究，核心是用户主观感知而非攻击/防御，属于排除的隐私态度类型。
+- Modelling corporate wireless security and privacy | 2005 | Journal of Strategic Information Systems
+  - reason: 论文核心是企业无线安全与隐私政策的战略建模，而非针对攻击或漏洞的攻防研究。
+- Problems, knowledge, solutions: Solving complex problems | 1998 | Journal of Strategic Information Systems
+  - reason: 文章以毒品和网络犯罪为例讨论一般复杂问题解决方法论，网络犯罪仅作为例证，未以攻击或防御为核心。
+- The impact of initial consumer trust on intentions to transact with a web site: A trust building model | 2002 | Journal of Strategic Information Systems
+  - reason: 研究核心是消费者对电子商务网站初始信任的建立模型，不涉及恶意或对抗行为者，安全仅作为背景感知。
+- The role of external and internal influences on information systems security - a neo-institutional perspective | 2007 | Journal of Strategic Information Systems
+  - reason: 研究核心是组织制度与信息安全实践，不涉及恶意攻击者或其攻防行为。
+- Towards analysing the rationale of information security non-compliance: Devising a Value-Based Compliance analysis method | 2017 | Journal of Strategic Information Systems
+  - reason: 全文围绕员工信息安全政策合规与不合规的行为分析，开发基于价值的合规分析方法，核心是理解员工行为背后的目标和价值冲突，而非攻击或漏洞的检测、防御与评估。
+- Trustworthiness in electronic commerce: The role of privacy, security, and site attributes | 2002 | Journal of Strategic Information Systems
+  - reason: 文章研究消费者对电商网站隐私、安全及站点属性的信任感知，安全仅作为消费者信任的上下文因素，不涉及恶意行为者、攻击或漏洞的检测与防御。
+- Value conflicts for information security management | 2011 | Journal of Strategic Information Systems
+  - reason: 文章核心是信息安全管理中价值观冲突与合规行为，属于组织治理研究，未涉及恶意行为者或攻防技术。
+- A behavioral analysis of passphrase design and effectiveness | 2009 | Journal of the Association for Information Systems
+  - reason: 文章核心是用户对passphrase的记忆、打字错误及感知的行为学实验，密码攻击仅作为强度评估背景，恶意行为者不是研究问题本身的核心对象。
+- A hybrid attribute selection approach for text classification | 2010 | Journal of the Association for Information Systems
+  - reason: 文章核心是文本分类中的混合属性选择方法，应用场景为检测员工非工作用途的网络浏览（Internet abuse），不存在恶意或对抗行为者攻击信息系统的成分，损害对象是生产力与网络资源而非系统安全属性。
+- An event study analysis of the economic impact of it operational risk and its subcategories | 2011 | Journal of the Association for Information Systems
+  - reason: 文章研究IT运营风险事件对市场价值的财富效应，核心是经济影响与风险管理，而非攻击或漏洞的检测、防御或评估；安全事件仅作为风险类别背景。
+- Can secure behaviors be contagious? A two-stage investigation of the influence of herd behavior on security decisions | 2020 | Journal of the Association for Information Systems
+  - reason: 全文研究用户在社会影响（羊群效应）和不确定性下是否采用安全技术（密码管理器），没有恶意或对抗行为者作为研究对象，不涉及攻击实施、威胁检测或防御建模，安全威胁仅为行为研究的背景。
+- Communicating personal health information in virtual health communities: An integration of privacy calculus model and affective commitment | 2017 | Journal of the Association for Information Systems
+  - reason: 研究核心是用户在虚拟健康社区中披露个人健康信息的意愿及其隐私计算与情感承诺影响因素，未涉及恶意行为者或攻击/防御，属于隐私态度与行为研究。
+- Consumer co-creation of digital culture products: Business threat or new opportunity? | 2015 | Journal of the Association for Information Systems
+  - reason: 文章研究消费者共同创造与分享（盗版）对数字文化产品市场绩效的影响，核心是商业/市场设计，不涉及信息系统攻击或安全防御。
+- Contextual Integrity and Personal Health Information Sharing in Online Social Networks | 2024 | Journal of the Association for Information Systems
+  - reason: 研究核心是健康信息在社交网络中的披露意愿与隐私规范（基于情境完整性理论），虽提及数据泄露等风险但仅作背景，不涉及攻击或防御的技术性问题。
+- Don’t even think about it! the effects of antineutralization, informational, and normative communication on information security compliance | 2018 | Journal of the Association for Information Systems
+  - reason: 研究聚焦员工对信息安全政策的非恶意违规与SETA沟通干预，属于组织合规行为研究，不涉及恶意或对抗行为者，亦非攻击/防御/检测核心。
+- Generally speaking, context matters: Making the case for a change from universal to particular ISP research | 2019 | Journal of the Association for Information Systems
+  - reason: 研究核心是员工对信息安全管理政策（ISP）的合规意愿及其行为前因，探讨不同威胁特定安全行为之间的模型差异，而非攻击、恶意行为者或漏洞攻防本身。
+- How Do Paternalistic Leaders Motivate Employees’ Information Security Compliance? Building a Climate and Applying Sanctions | 2023 | Journal of the Association for Information Systems
+  - reason: 研究核心是领导风格如何通过员工对制裁和安全氛围的感知促进信息安全政策遵从，属于组织行为与安全合规管理，不涉及攻击者或对抗行为，也无攻击检测、防御或漏洞研究。
+- How paternalistic leadership influences it security policy compliance: The mediating role of the social bond | 2019 | Journal of the Association for Information Systems
+  - reason: 研究核心是家长式领导与员工信息安全政策遵从的关系，属于组织安全合规行为研究，不涉及恶意行为者或攻击/漏洞攻防。
+- Improving the design of information security messages by leveraging the effects of temporal distance and argument nature | 2021 | Journal of the Association for Information Systems
+  - reason: 文章研究信息安全恐惧呼吁消息的措辞设计（时间距离与论证类型）对用户保护动机的影响，属于行为安全与说服研究；恶意行为者仅是威胁背景，未以攻击、漏洞检测或防御为研究核心。
+- Integrating cognition with an affective lens to better understand information security policy compliance | 2019 | Journal of the Association for Information Systems
+  - reason: 文章研究员工因情感和认知因素导致的信息安全政策不遵从（如共享密码），属于非恶意安全违规行为，不涉及恶意/对抗行为者，也不以攻击或漏洞检测防御为核心。
+- Inverse Transparency and the Quest for Empowerment through the Design of Digital Workplace Technologies | 2024 | Journal of the Association for Information Systems
+  - reason: 文章核心是数字工作场所技术中的逆透明度设计，以平衡员工赋权与监控，属于组织管理与隐私设计，不存在恶意或对抗行为者，也未围绕攻击或漏洞的检测、防御、缓解等攻防安全研究。
+- It takes a village: Understanding the collective security efficacy of employee groups | 2019 | Journal of the Association for Information Systems
+  - reason: 研究核心是员工群体的集体安全效能及组织社会/生态属性，恶意软件攻击和物理安全漏洞仅作为背景案例，未聚焦攻防技术或漏洞分析。
+- Love at first sight: The interplay between privacy dispositions and privacy calculus in online social connectivity management | 2018 | Journal of the Association for Information Systems
+  - reason: 文章研究在线社交好友请求中的隐私权衡和行为反应，核心是隐私担忧、隐私计算与社交连接管理，不涉及恶意或对抗行为者，也没有攻击或防御研究内容。
+- Managing information security outsourcing in a dynamic cooperation environment | 2021 | Journal of the Association for Information Systems
+  - reason: 文章核心是信息安全外包中的合同设计与道德风险问题，而非攻击或防御机制本身。黑客攻击仅作为概率参数出现在模型中，研究焦点是激励合同的经济学建模，不属于攻防安全范畴。
+- Mitigating the security intention-behavior gap: The moderating role of required effort on the intention-behavior relationship | 2021 | Journal of the Association for Information Systems
+  - reason: 研究核心是用户遵循安全政策的意图-行为差距，考察所需努力对意向与行为的调节作用，没有恶意或对抗行为者，不涉及攻击或漏洞的检测、防御等攻防核心。
+- Morality, ethics, and reflection: A categorization of normative IS research | 2012 | Journal of the Association for Information Systems
+  - reason: 文章核心是规范性研究的分类与伦理理论，仅将隐私和知识产权作为应用领域，不涉及恶意行为者或攻防对抗。
+- Neural correlates of protection motivation for secure IT behaviors: An fMRI examination | 2016 | Journal of the Association for Information Systems
+  - reason: 研究核心是恐惧诉求对安全行为意图的神经和心理影响，恶意威胁仅作为实验刺激背景，而非针对攻击或漏洞的攻防研究。
+- Online comment moderation policies for deliberative discussion–seed comments and identifiability | 2018 | Journal of the Association for Information Systems
+  - reason: 文章研究提升在线评论审慎讨论质量（种子评论与可识别性），恶意评论仅作为背景动机，不涉及攻击、漏洞或威胁检测防御等攻防安全核心。
+- Optimal Launch Timing of Bug Bounty Programs for Software Products under Different Licensing Models | 2024 | Journal of the Association for Information Systems
+  - reason: 文章以软件企业利润最大化为核心，研究漏洞赏金计划（BBP）的最佳启动时机，虽涉及漏洞检测但属于安全投资经济学，恶意攻击者仅作为背景，未成为研究核心。
+- Positively Fearful: Activating the Individual’s HERO Within to Explain Volitional Security Technology Adoption | 2023 | Journal of the Association for Information Systems
+  - reason: 文章研究积极心理资本（PsyCap）对个人用户自愿采用安全技术的影响，核心是用户心理与行为，而非攻击或漏洞本身；网络威胁仅作为背景和恐惧诉求的触发因素。
+- Privacy in the sharing economy | 2019 | Journal of the Association for Information Systems
+  - reason: 文章核心是共享经济中提供商的隐私顾虑与经济效益权衡，属于用户隐私态度与行为研究，未涉及恶意行为者、攻击或防御机制。
+- Risk analysis in extended enterprise environments: Identification of critical risk factors in B2B E-Commerce relationships | 2008 | Journal of the Association for Information Systems
+  - reason: 研究核心是B2B电子商务的企业风险管理与审计风险因素识别，虽包括安全相关因素，但无恶意或对抗行为者作为核心对象。
+- Robbing peter to pay paul: Surrendering privacy for security’s sake in an identity ecosystem | 2017 | Journal of the Association for Information Systems
+  - reason: 文章研究个体在身份生态系统中为获取安全而放弃隐私的决策影响因素，核心是用户行为与信任感知，而非攻击或防御技术本身。
+- Self-organizing in blockchain infrastructures: Generativity through shifting objectives and forking | 2019 | Journal of the Association for Information Systems
+  - reason: 文章研究区块链基础设施中的自组织与分叉现象，恶意攻击仅作为组织目标变化的背景例子出现，不是研究核心。
+- Shared benefits and information privacy: What determines smart meter technology adoption? | 2017 | Journal of the Association for Information Systems
+  - reason: 研究核心是智能电表技术采纳影响因素（共享收益、隐私担忧等），黑客或数据滥用仅作为背景提及，不构成攻击或防御研究核心。
+- Social Network Integration and Online Review Helpfulness: An Empirical Investigation | 2024 | Journal of the Association for Information Systems
+  - reason: 研究核心是社交网络集成对在线评论有用性的影响，属于一般内容质量与有用性分析，不涉及攻击或防御安全。
+- The Design of a System for Online Psychosocial Care: Balancing Privacy and Accountability in Sensitive Online Healthcare Environments | 2022 | Journal of the Association for Information Systems
+  - reason: 文章核心是设计在线心理社会护理系统以平衡隐私与问责，属于隐私治理与合规设计，未将恶意或对抗行为者作为研究核心，也未围绕攻击或漏洞的检测与防御。
+- The mediating role of psychological empowerment in information security compliance intentions | 2020 | Journal of the Association for Information Systems
+  - reason: 全文围绕员工信息安全政策遵从意愿的心理授权中介机制，属于组织行为与安全治理范畴，未涉及恶意行为者或攻击/防御核心。
+- The order machine - the ontology of information security | 2012 | Journal of the Association for Information Systems
+  - reason: 全文是对信息安全的哲学/本体论概念分析，以Deleuze和Guattari的机器、领土等概念描述信息安全的本质和效应，未以攻击、漏洞或攻防对抗为研究核心。
+- Toward a New Meta-Theory for Designing Information Systems (IS) Security Training Approaches | 2011 | Journal of the Association for Information Systems
+  - reason: 文章核心是IS安全培训的教学理论设计，属于安全治理与合规培训范畴，不涉及攻击、漏洞或恶意行为者的检测与防御。
+- "How did they get my name?": An exploratory investigation of consumer attitudes toward secondary information use | 1993 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究消费者对个人信息二次使用（直接营销）的态度和隐私关注，不涉及恶意行为者或攻防安全。
+- AN EMPIRICAL EXAMINATION OF THE ECONOMICS OF MOBILE APPLICATION SECURITY | 2021 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是消费者对移动应用安全功能的支付意愿、第三方认证的影响及风险感知，不涉及恶意行为者或攻击/漏洞的检测、防御、评估或建模。
+- Avoiding an oppressive future of machine learning: A design theory for emancipatory assistants | 2021 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是批判理论与设计科学视角下避免ML系统压迫性未来的设计理论，关注人类解放与自主性，而非信息系统攻击/漏洞的攻防研究。
+- COMPETING WITH THE SHARING ECONOMY: INCUMBENTS’ REACTION ON REVIEW MANIPULATION | 2022 | MIS Quarterly: Management Information Systems
+  - reason: 研究以企业竞争策略（分享经济冲击下酒店是否调整评论操纵）为核心，属于商业欺诈/声誉操纵范畴，不涉及信息系统安全意义上的攻击或漏洞防御。
+- Circuits of power in creating De Jure standards: Shaping an international information systems security standard | 2006 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究信息安全标准BS7799/ISO17799的制定与制度化过程，核心是权力、政治与制度因素，而非攻击或漏洞的检测、防御或分析。
+- Circuits of power: A study of mandated compliance to an information systems security de jure standard in a government organization | 2010 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是政府机构对信息安全标准强制合规过程中的权力、抵抗与组织文化，属于安全治理与合规研究，未以攻击或漏洞的检测、防御、评估为核心。
+- Control over virtual worlds by game companies: Issues and recommendations | 2011 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是游戏公司通过EULA/TOS等合同工具控制虚拟世界的法律与治理问题，虽提及bots、gold farming等恶意现象，但仅作为背景，不是研究核心。
+- DESIGNING DIGITAL PLATFORMS FOR SOCIAL JUSTICE: EMPOWERING END USERS THROUGH THE DATASWYFT PLATFORM | 2024 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是数字平台设计以实现社会正义和用户数据控制，未以恶意攻击者或攻防对抗为研究问题，安全仅作为平台能力背景。
+- DOES RANSOMWARE MAKE INVESTORS “WANNACRY”? ON INVESTORS’ DIVERGENT REACTIONS TO RANSOMWARE HITS AND NEAR MISSES | 2025 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究投资者对勒索软件事件披露的股票市场反应，属于行为金融/事件研究，勒索软件攻击仅作为背景事件，核心是投资者决策偏差，而非攻击实施或安全防御。
+- Drawing a line in the sand: Commitment problem in ending software support | 2017 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是软件厂商结束旧版支持时的承诺问题与定价/利润，网络安全风险仅作为驱动背景，未以恶意行为者或攻击/防御为研究核心。
+- Ethics and information systems: The corporate domain | 1999 | MIS Quarterly: Management Information Systems
+  - reason: 文章聚焦企业领域IS伦理决策，应用商业伦理理论分析数据使用与隐私问题，不涉及恶意行为者、攻击或防御。
+- HOW MERGERS AND ACQUISITIONS INCREASE DATA BREACHES: A COMPLEXITY PERSPECTIVE | 2025 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是并购活动导致的组织复杂性如何增加数据泄露次数，属于企业战略与安全结果间的关系研究；恶意行为者仅在背景机制中被提及，并非研究问题核心，且未围绕攻击、防御、检测或漏洞建模展开。
+- IREPAIR OR I REPAIR? A DIALECTICAL PROCESS ANALYSIS OF CONTROL ENACTMENT IN THE IPHONE REPAIR AFTERMARKET | 2024 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究苹果与独立维修商在iPhone维修后市场的控制权争夺，聚焦组织控制理论与市场竞争，安全技术（加密、认证）仅作为控制手段，无恶意攻击者或安全损害核心。
+- Implementing security and integrity in micro-mainframe networks | 1989 | MIS Quarterly: Management Information Systems
+  - reason: 文章围绕微-主机网络的安全与完整性控制措施，基于专家调查讨论管理控制、访问控制、备份和数据库控制，未以具体恶意行为者或攻击行为为研究核心，属于安全治理范畴。
+- Information privacy: Measuring individuals' concerns about organizational practices | 1996 | MIS Quarterly: Management Information Systems
+  - reason: 全文是关于测量个体对组织信息隐私实践担忧的心理测量工具开发与验证，未涉及任何攻击者、恶意行为或攻防对抗，属于隐私态度/担忧类研究。
+- Information security policy compliance: An empirical study of rationality-based beliefs and information security awareness | 2010 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是员工对信息安全政策的合规行为，关注态度、信念与意识的影响，不涉及攻击、漏洞或对抗性威胁的检测与防御。
+- Internet users' information privacy-protective responses: A Taxonomy and a nomological model | 2008 | MIS Quarterly: Management Information Systems
+  - reason: 本文研究互联网用户面对信息隐私威胁时的保护性行为反应（分类与影响因素），属于隐私态度与行为研究，不涉及恶意行为者或攻击/防御机制。
+- Is cybersecurity A team sport? A multilevel examination of workgroup information security effectiveness | 2020 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是工作群体信息安全有效性，考察个体自我效能感通过集体效能和知识协调对安全评估绩效的影响，属于组织行为/安全管理，未以恶意行为者或攻击/漏洞检测防御为研究对象。
+- Market value of voluntary disclosures concerning information security | 2010 | MIS Quarterly: Management Information Systems
+  - reason: 文章以公司自愿披露信息安全相关信息的市场价值为研究核心，属于会计/金融实证研究，信息安全只是披露主题背景，不涉及攻击或防御的攻防安全研究。
+- Modeling IT ethics: A study in situational ethics | 1998 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是构建和验证信息系统员工伦理行为意图模型，而非攻击与防御；计算机滥用和安全损失仅作为背景动机。
+- PASSING THE TORCH: HOW PARENTAL PRIVACY CONCERNS AFFECT ADOLESCENT SELF-DISCLOSURE ON SOCIAL NETWORKING SITES | 2023 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究家长隐私关注通过内部化和顺从影响青少年在社交网站的自我表露，属于隐私态度与家庭社会化研究，没有恶意行为者作为核心，也不涉及攻击或防御机制。
+- PEER PRIVACY CONCERN: CONCEPTUALIZATION AND MEASUREMENT | 2022 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是开发和验证用户对在线同伴行为导致的隐私担忧（Peer Privacy Concern）的概念与量表，属于主观隐私感知研究，不涉及攻击者的对抗行为建模或防御机制设计。
+- PRIVACY CONCERNS AND DATA SHARING IN THE INTERNET OF THINGS: MIXED METHODS EVIDENCE FROM CONNECTED CARS | 2021 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是隐私顾虑与数据共享决策，黑客攻击等仅作为用户的感知风险背景，并非攻击/防御研究。
+- Quality competition and market segmentation in the security software market | 2014 | MIS Quarterly: Management Information Systems
+  - reason: 文章核心是安全软件市场的质量竞争、版本化与免费软件影响的经济学建模，黑客/攻击仅作为消费者效用函数中的背景设定，未聚焦于攻击实施或威胁检测/防御。
+- SOCIAL MEDIA MODERATION AND CONTENT GENERATION: EVIDENCE FROM USER BANS | 2026 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是用户封禁策略对内容生成行为的影响，属于平台治理研究，未涉及攻击或威胁的检测与防御。
+- THE DARK SIDE OF VOLUNTARY DATA SHARING | 2025 | MIS Quarterly: Management Information Systems
+  - reason: 本文是自愿数据共享与价格歧视的博弈论经济学研究，核心是企业利用消费者共享的购买历史进行差别定价，损害表现为价格与消费者剩余，而非针对信息系统或用户的恶意攻击或安全攻防。
+- THE OPM DATA BREACH: AN INVESTIGATION OF SHARED EMOTIONAL REACTIONS ON TWITTER | 2022 | MIS Quarterly: Management Information Systems
+  - reason: 文章以2015年OPM数据泄露为背景，研究公众在Twitter上的情绪反应、情绪共享和情绪驱动因素，核心是危机沟通与情感分析，而非攻击实施或安全防御。
+- THE PATH OF THE RIGHTEOUS: USING TRACE DATA TO UNDERSTAND FRAUD DECISIONS IN REAL TIME | 2022 | MIS Quarterly: Management Information Systems
+  - reason: 研究核心是通过鼠标轨迹检测在线保险索赔等场景中的欺诈决策，虽然没有网络攻击成分，但属于对信息系统数据真实性的操纵与滥用；然而欺诈性质为传统金融欺诈，未被纳入攻防安全核心。
+- TIME WILL TELL: THE CASE FOR AN IDIOGRAPHIC APPROACH TO BEHAVIORAL CYBERSECURITY RESEARCH | 2024 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究行为网络安全中的员工信息安全政策遵从及其中立化机制，属于安全政策合规和行为研究，不围绕恶意行为者、攻击或漏洞，也未以攻防检测/防御为核心。
+- The effect of codes of ethics and personal denial of responsibility on computer abuse judgments and intentions | 1996 | MIS Quarterly: Management Information Systems
+  - reason: 文章研究道德规范与责任否认特质对IS员工计算机滥用判断/意图的影响，属于组织伦理与威慑行为研究，计算机滥用仅为情景材料，研究核心并非攻击或漏洞防御。
+- UNITED WE STAND, DIVIDED WE FALL: AN AUTOGENIC PERSPECTIVE ON EMPOWERING CYBERSECURITY IN ORGANIZATIONS | 2024 | MIS Quarterly: Management Information Systems
+  - reason: 文章以网络安全为背景，但研究核心是网络安全小组的心理赋权及其组织生成过程，属于组织行为与安全治理研究，而非攻击或漏洞的检测、防御、评估或建模。

@@ -1,0 +1,27 @@
+{
+  "updated_at": "2026-08-05T09:14:19.107055+00:00",
+  "analysis_version": "ais-basket-coding-agent-series-mimic-screening-v1",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "f07919174d1448f302745e97159fdbe1f3ff41c24d3eea550290801512c8e751",
+  "input_candidates": 66,
+  "completed": 66,
+  "pending": 0,
+  "mimic_candidate_count": 60,
+  "priority_counts": {
+    "high": 36,
+    "medium": 24,
+    "reject": 6
+  },
+  "condition_true_counts": {
+    "material_runnable_software_change": 63,
+    "design_linked_objective_outcome": 61,
+    "bounded_reproducible_method": 65
+  },
+  "usage": {
+    "prompt_tokens": 1949467,
+    "completion_tokens": 475361,
+    "total_tokens": 2424828,
+    "prompt_cache_hit_tokens": 23040,
+    "prompt_cache_miss_tokens": 1926427
+  }
+}

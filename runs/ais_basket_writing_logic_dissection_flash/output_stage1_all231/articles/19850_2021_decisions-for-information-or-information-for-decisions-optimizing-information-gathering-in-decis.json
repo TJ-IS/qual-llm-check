@@ -1,0 +1,1039 @@
+{
+  "record_id": "19850",
+  "source_file": "19850_2021_decisions-for-information-or-information-for-decisions-optimizing-information-gathering-in-decis.md",
+  "title": "Decisions for information or information for decisions? Optimizing information gathering in decision-intensive processes",
+  "authors": "S. Voorberg; R. Eshuis; W. van Jaarsveld; G.J. van Houtum",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2021.113632",
+  "fulltext_chars": 84277,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "planning_optimization_and_allocation",
+  "source_primary_objective_family": "economic_and_welfare",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:51.369641+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在决策密集型业务流程（DIPs）中，如何优化信息收集与最终决策之间的权衡，使决策者既能以最低的信息和过程成本运行流程，又能获得高预期利润的高质量最终决策？",
+    "artifact_and_design_cn": "一个两阶段的决策支持方法：设计时阶段把用户定义的CMMN DIP模型（信息收集任务和决策任务）转换为带约束的马尔可夫决策过程（MDP），引入信息结构函数将数据属性、最终决策与奖励统一，并通过逆向归纳求解最优信息收集策略；部署阶段通过一个过程控制plan fragment把用户CMMN模型与求解后的MDP推荐工具集成到CMMN引擎中，在每个状态给决策者提供允许动作、最优动作建议和预期利润，且允许决策者忽略建议并在后续状态继续获得推荐。",
+    "objective_outcomes_cn": "在基于真实Koffer报价过程的案例中，该方法被证明可行；数值比较显示，MDP方法将预期利润从决策树的8226.0提高到15867.6（接近翻倍），最终状态数从1254降至136，平均检索成本从100.06略升至143.5；在9个随机实例中MDP平均优于决策树，但存在个别实例（如第8个）决策树略优于MDP；状态空间约8,100,000，优化耗时49分钟（Intel i5-8365U）。",
+    "core_contribution_cn": "作者声称三项主要贡献：1）定义了一个优化给定DIP的完整方法；2）该方法在优化时同时考虑数据属性和过程结构；3）引入一个灵活的推荐工具，引导人类决策者在信息收集与最终决策间做出更优权衡，同时允许推荐被忽略，并继续在后续状态提供建议。",
+    "whole_argument_in_one_paragraph_cn": "作者从知识工作者在DIP中需要平衡信息收集成本与最终决策质量这一现实问题出发，指出现有DMN等标准只声明决策规则、不进行持续优化，而知识密集型流程与决策感知流程也未把信息模型和过程模型结合进同一优化问题。接着他们提出将CMMN模型映射为MDP，通过四类任务分类、信息结构（奖励函数）和带约束状态转移，把流程执行中的信息收集动作与最终决策收益统一为期望利润最大化问题，并在部署阶段用plan fragment把离线计算的MDP最优策略嵌入CMMN引擎，形成每个状态下的推荐工具。然后他们用真实Koffer报价流程案例展示了从建模到部署的完整可行性，并数值比较了MDP与由行业决策者构建的决策树，结果MDP将预期利润翻倍。最后作者在讨论和结论中承认模型假设、概率依赖和状态空间可扩展性限制，提出多里程碑分段和深度强化学习等未来方向，同时强调人类决策者的最终判断权，从而把贡献保护为‘优化支持’而非‘自动化替代’。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章提出了一个完整的设计科学制品：从DIP建模约束出发，建立CMMN到MDP的转换方法、信息结构和部署推荐机制，然后通过真实案例进行可行性验证，并与现有决策树基准进行数值比较。证据以案例研究为主而非大规模benchmark或形式分析，完全符合“需求/原则—构建—评价—设计知识”的设计科学研究范式。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "写作主线是：指出现有DMN和DIP相关方法不能同时优化信息与过程模型（性能缺口）—构建CMMN+MDP优化制品（artifact）—用Koffer案例和决策树基准进行比较（benchmark）—从案例结果推广到更多DIP领域并讨论边界条件（generalize）。这个弧线比‘问题—理论—设计—检验—回到理论’更贴切，因为文章最终贡献是制品/方法，不是理论修正。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "阶段1建立问题空间和‘可优化DIP’的边界条件；阶段2完成设计时方法构建（CMMN→MDP转换与求解）；阶段3完成部署机制设计（plan fragment与推荐工具）；阶段4在真实Koffer案例上应用整个方法，论证可行性；阶段5用数值比较检验方法与现有决策树基准的有效性。五个阶段逐步积累：先有可建模的问题和假设，再有离线优化模型，随后有在线决策支持架构，最后在具体案例上验证可行性和效果。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题定义与可优化DIP边界建立",
+        "question_cn": "哪些DIPs可以纳入统一优化框架？其核心权衡和必要的结构假设是什么？",
+        "inputs_and_setting_cn": "文献中DIP/KIP/决策感知流程的概念；高技机器诊断和Koffer报价流程两个说明性例子；CMMN和MDP初步知识。",
+        "designed_or_compared_object_cn": "提出‘可优化DIP’类别，定义稳定信息假设、计划约束（必要任务、前置关系、阶段）和简化假设（单一里程碑、瞬时任务）。",
+        "baseline_control_or_counterfactual_cn": "对比现有DMN规则、知识密集型流程和决策感知流程的不足。",
+        "objective_metrics": [],
+        "analysis_method_cn": "概念分析与文献综合。",
+        "main_result_cn": "给出了可优化DIP的约束条件：稳定信息、任务单调、计划约束需纳入优化，且不支持多个里程碑和耗时任务。",
+        "argumentative_role_cn": "划定方法适用边界，为后续MDP转换提供可处理的假设基础。",
+        "remaining_uncertainty_cn": "这些假设是否在真实场景中成立，以及如何克服单一里程碑和瞬时任务的限制。",
+        "link_to_next_phase_cn": "将定义好的可优化DIP作为设计时方法的输入，促使作者构建从CMMN到MDP的具体转换。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Section 4.2",
+          "Definition 5.1-5.4相关段落"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "设计时方法构建：CMMN到MDP的转换与求解",
+        "question_cn": "如何把一个CMMN表达的DIP自动或半自动地转换为可计算的MDP，并得到最优信息收集策略？",
+        "inputs_and_setting_cn": "用户定义的CMMN案例计划模型、每个任务/阶段的成本、前置和必要约束、数据属性概率分布、信息结构函数。",
+        "designed_or_compared_object_cn": "设计了一个五步流程：创建CMMN模型、检索MDP结构（任务分类）、定义信息结构、过滤MDP模型、求解MDP。",
+        "baseline_control_or_counterfactual_cn": "与DMN决策表比较，说明MDP能处理连续优化和过程约束。",
+        "objective_metrics": [],
+        "analysis_method_cn": "数学建模（MDP状态、动作、奖励、转移概率）和动态规划/逆向归纳。",
+        "main_result_cn": "给出了任务分类（决策、程序、信息获取、额外）、信息结构定义Y(D,f)、状态表示（信息状态+计划状态）、动作集（信息收集或最终决策）、奖励函数（成本负值或期望收益）、转移概率公式，并证明可用逆向归纳求解。",
+        "argumentative_role_cn": "提供了整个方法的核心计算引擎，是后续部署和案例验证的基础。",
+        "remaining_uncertainty_cn": "转换后的MDP是否能在真实规模案例中求解；信息结构是否可从现实中估计。",
+        "link_to_next_phase_cn": "设计时产出的最优策略和CMMN模型需要在部署阶段与执行引擎集成。",
+        "evidence_pointers": [
+          "Section 5.1-5.5",
+          "Definition 5.5",
+          "图1上部流程"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "部署机制设计：过程控制plan fragment与推荐工具",
+        "question_cn": "如何在CMMN引擎中嵌入MDP建议，使决策者在每个状态获得推荐且仍保持控制权？",
+        "inputs_and_setting_cn": "设计时阶段得到的MDP最优策略（查询表）、用户CMMN模型、CMMN引擎。",
+        "designed_or_compared_object_cn": "设计了一个过程控制plan fragment（包括Request MDP recommender和Information or Decision任务）、集成方案、推荐内容结构。",
+        "baseline_control_or_counterfactual_cn": "与DMN的固定决策表对比，强调可针对任何新状态计算最优动作且允许忽略建议。",
+        "objective_metrics": [],
+        "analysis_method_cn": "架构设计与样例推导。",
+        "main_result_cn": "定义了部署架构：CMMN引擎执行集成模型，任务完成后把新状态发送给MDP推荐工具，推荐工具返回动作集和预期利润，决策者在Information or Decision任务中选择行动，且忽略建议后引擎继续请求新状态建议。",
+        "argumentative_role_cn": "把离线优化转化为在线人工决策支持，证明方法不仅是一个计算模型，而是可运行的决策支持工具。",
+        "remaining_uncertainty_cn": "该架构在实际真实项目中是否有用、用户是否接受并遵循推荐。",
+        "link_to_next_phase_cn": "需要用应用案例展示该部署机制在具体流程中的表现。",
+        "evidence_pointers": [
+          "Section 6.1-6.3",
+          "图5和6"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Koffer案例研究：完整方法应用与可行性验证",
+        "question_cn": "在真实DIP（Koffer报价流程）上应用该设计时和部署方法，是否可行？",
+        "inputs_and_setting_cn": "基于真实但匿名的Koffer公司报价流程；CMMN模型（图2）；9个数据属性及其概率分布（简化至每属性4个值或更少）；从公司决策者处验证模型和决策树。",
+        "designed_or_compared_object_cn": "建立了Koffer DIP的CMMN模型，分配任务类别和成本/前置/必要约束，定义了信息结构利润公式，构建并求解MDP，实现了部署推荐界面。",
+        "baseline_control_or_counterfactual_cn": "无内部对照，通过展示运行状态和推荐界面证明可执行性。",
+        "objective_metrics": [
+          "状态空间大小",
+          "计算时间",
+          "推荐界面呈现"
+        ],
+        "analysis_method_cn": "案例研究（proof of concept）和界面演示。",
+        "main_result_cn": "成功应用设计时步骤（表3和4定义了任务和属性），得到MDP最优策略；部署界面展示当前状态、已执行/启用任务以及各可能动作的预期利润，证明方法能在现实中运行。",
+        "argumentative_role_cn": "证明方法的可实施性，弥补了前三个阶段缺少真实场景支撑的不足。",
+        "remaining_uncertainty_cn": "虽然可行，但尚未证明比现有方法更有效，且案例数据已简化。",
+        "link_to_next_phase_cn": "需要数值比较将其与当前决策树方法进行量化对比。",
+        "evidence_pointers": [
+          "Section 7.1-7.3",
+          "表3、表4",
+          "图6"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "数值比较评价：MDP策略 vs 决策树基准",
+        "question_cn": "与公司使用的决策树相比，MDP驱动的信息收集策略是否带来更高的预期利润和不同的信息收集行为？",
+        "inputs_and_setting_cn": "Koffer案例中的MDP最优策略；由公司销售经理参与构建的决策树（附录图8）；9个随机选出的实例。",
+        "designed_or_compared_object_cn": "比较对象是MDP优化策略与人类决策者构建的决策树在相同实例上的表现。",
+        "baseline_control_or_counterfactual_cn": "决策树作为现有方法的baseline。",
+        "objective_metrics": [
+          "预期利润",
+          "最终状态数",
+          "平均检索成本",
+          "预期收入",
+          "任务执行分布"
+        ],
+        "analysis_method_cn": "数值汇总、分布图（图7）、逐实例对比（表6）和状态空间复杂度估计。",
+        "main_result_cn": "MDP预期利润为15867.6，决策树为8226.0；MDP最终状态136 vs 决策树1254；平均检索成本143.5 vs 100.06；分布显示决策树丢弃过多实例；9个实例中5个二者均不投标，实例8决策树微优，整体MDP明显更优；状态空间约8,100,000，优化需49分钟。",
+        "argumentative_role_cn": "提供了主要有效性证据：方法不仅能运行，而且能显著改进现实DIP中的最终结果，同时暴露了个例中人类判断仍有价值。",
+        "remaining_uncertainty_cn": "仅有一个案例，且数据分布被简化；没有与其他优化方法比较；可扩展性不足；未做统计显著性检验。",
+        "link_to_next_phase_cn": "结果引出讨论部分对边界、人类作用、可扩展性和未来工作的反思。",
+        "evidence_pointers": [
+          "Section 7.4",
+          "表5和表6",
+          "图7",
+          "图8（附录决策树）"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "RESULT"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "MECHANISM",
+      "PRACTICAL_STAKES",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "METHOD_JUSTIFICATION",
+      "DESIGN_FEATURE",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "REQUIREMENT",
+      "BOUNDARY_CONDITION"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION",
+      "MECHANISM",
+      "LIMITATION",
+      "BOUNDARY_CONDITION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST"
+    ],
+    "discussion_and_contribution_moves": [
+      "LIMITATION",
+      "BOUNDARY_CONDITION",
+      "CONTRIBUTION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "Markov Decision Processes（MDP）与动态规划",
+      "CMMN（Case Management Model and Notation）标准",
+      "DMN/BPMN等流程与决策建模知识",
+      "信息结构/信息价值分析（基于历史数据和回归的经济决策）"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "MDP是设计核心：信息收集与最终决策被直接建模为MDP的状态-动作-奖励结构，最优策略由MDP理论决定；CMMN的灵活性被用来定义任务可手动激活的语义，而这些语义又被转化为MDP的动作集和约束。理论（MDP优化）前瞻性地决定了制品设计，并通过案例评价直接检验。",
+    "translation_chain_cn": "MDP优化顺序决策的期望奖励 → 将DIP定义为每步可收集信息或作出最终决策的序列决策问题 → 将CMMN状态映射为MDP状态（信息状态+计划状态） → 将任务/阶段映射为MDP动作并添加前置/必要约束 → 用信息结构Y将数据属性和最终决策转换为奖励 → 用属性概率分布定义信息转移概率 → 逆向归纳求最优策略 → 部署时将最优策略转化为每个状态的推荐动作和预期利润 → 通过案例比较MDP策略与决策树验证改进。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "MDP能够在不确定性和序列决策下优化期望总奖励（Puterman, 1994）。",
+        "mechanism_cn": "每一步决策都影响未来状态和最终收益；最优策略通过比较当前动作成本和未来期望收益得到。",
+        "design_requirement_cn": "需要把DIP中的信息收集任务、过程约束和最终决策收益转化为MDP的状态、动作、转移和奖励。",
+        "artifact_choice_cn": "状态由信息状态s（属性值或⊥）和计划状态σ（任务/阶段是否完成）组成；动作是程序性任务或最终决策；奖励为负成本或期望收益；转移概率由属性概率分布和计划约束确定。",
+        "evaluated_contrast_cn": "MDP最优策略 vs 人工构建的决策树固定策略。",
+        "objective_result_cn": "MDP预期利润15867.6 vs 决策树8226.0；最终状态136 vs 1254。",
+        "evidence_pointers": [
+          "Section 5.4-5.5",
+          "Table 5",
+          "Section 7.4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "CMMN允许手动激活或跳过任务，适合表达DIP的灵活性（Marin et al., 2015）。",
+        "mechanism_cn": "决策者可以在每个使能状态下自由选择执行哪个任务或终止决策，灵活性带来开放的动作空间。",
+        "design_requirement_cn": "支持用户决定何时执行手动激活任务，并在任何结果状态都能给出建议。",
+        "artifact_choice_cn": "沿用CMMN任务/阶段分类，引入‘Information or Decision’任务和‘Request MDP recommender’任务组成的plan fragment，MDP推荐器返回允许动作、最优动作和期望利润。",
+        "evaluated_contrast_cn": "展示推荐界面中多个使能任务及其利润，且允许用户选择非最优动作。",
+        "objective_result_cn": "部署界面能显示当前状态和所有可能动作的预期利润；用户忽略推荐后工具仍在后续新状态给出建议。",
+        "evidence_pointers": [
+          "Section 6.1-6.3",
+          "Fig. 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "信息结构（通过数据分析和领域知识估计）能将属性值和决策方案映射到结果奖励，从而量化信息价值。",
+        "mechanism_cn": "已知属性值的条件下，最终决策的期望收益可计算；额外信息通过改变条件期望来影响决策收益。",
+        "design_requirement_cn": "需要统一的奖励函数比较信息收集成本和最终决策收益，避免预设硬性预算约束。",
+        "artifact_choice_cn": "定义Y(D,f)，用成本因子c_a和E[Y(s,f)]构建奖励R(s,a)，并用条件期望处理未知属性。",
+        "evaluated_contrast_cn": "Koffer案例中根据业务逻辑构造的利润公式Y(s,f)被用于MDP和决策树对比。",
+        "objective_result_cn": "MDP利用该信息结构优化信息收集，提高预期利润。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Section 7.2.2",
+          "公式Y(s,f)"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "在稳定信息假设下，任务单调且属性值获取后不变，状态空间可表达。",
+        "mechanism_cn": "稳定属性使已知值在后续状态中不变，避免重复执行任务，从而降低状态空间复杂度。",
+        "design_requirement_cn": "只考虑不会重复写入的属性，并将对应任务标记为在状态中至多执行一次。",
+        "artifact_choice_cn": "MDP状态中每个属性取已知值或⊥；任务用二进制布尔状态表示完成与否；不考虑if sentries和重复激活。",
+        "evaluated_contrast_cn": "Koffer案例的所有属性均满足稳定假设。",
+        "objective_result_cn": "状态空间约为5^5*3^4*2^5=8,100,000，理论上可枚举求解。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Section 5.1",
+          "Section 7.4"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "案例研究/proof of concept（Koffer报价流程）",
+      "与现有决策树基准的数值比较",
+      "实例级分析（9个随机实例）",
+      "分布分析（最终决策分配、任务执行比例）",
+      "状态空间和计算资源分析（稳健性/边界评估）"
+    ],
+    "why_these_evaluations_cn": "由于方法是设计科学制品，首先需要用完整案例证明其可实施性；其次，为了表明该方法在实践中具有价值，必须与当前被使用的决策树方法进行比较；实例级和分布分析用于揭示复杂性和人类判断价值；状态空间分析则用于识别可扩展性边界。",
+    "benchmark_and_contrast_chain_cn": "以公司当前使用、由销售经理构建的决策树作为baseline。先在整体上比较MDP与决策树的预期利润、最终状态数、平均检索成本和预期收入；随后用9个随机实例展示逐例差异，发现实例8中决策树略优；最后用分布图说明两者在最终决策和信息获取行为上的结构性差异。链式证据从总体效果过渡到个体例外，再解释例外源于人类隐性知识价值。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "技术主张：提出的CMMN→MDP转换和求解方法能生成可用的最优信息收集策略。",
+        "evidence_cn": "在Koffer案例中构建了MDP并求解，得到每个状态的最优动作和预期利润（Section 7.2-7.3）。",
+        "strength_cn": "强：有完整实现和运行截图支持。"
+      },
+      {
+        "claim_cn": "制品主张：推荐工具能在部署环境运行并向决策者提供多信息建议。",
+        "evidence_cn": "部署界面展示当前状态、使能任务和各动作预期利润，并支持忽略建议后继续推荐（Section 7.3, Fig. 6）。",
+        "strength_cn": "强：界面演示直观，但未做用户接受度实验。"
+      },
+      {
+        "claim_cn": "机制主张：MDP通过权衡信息成本和最终收益改进DIP结果。",
+        "evidence_cn": "数值比较中MDP预期利润翻倍，最终状态数显著减少，且任务执行分布不同（Table 5, Fig. 7）。",
+        "strength_cn": "中：单案例、无统计检验，且决策树可能并非最优baseline。"
+      },
+      {
+        "claim_cn": "边界主张：方法适用于稳定信息、单一里程碑、状态空间可数的优化DIP。",
+        "evidence_cn": "文中定义了可优化DIP条件，并在讨论中分析了一个里程碑假设可放宽、状态空间指数增长和49分钟求解时间（Section 4, 7.4, 9）。",
+        "strength_cn": "中：边界通过假设和复杂度计算支持，但缺乏大规模数据验证。"
+      },
+      {
+        "claim_cn": "设计知识：将信息价值与过程约束统一到MDP奖励函数的方法可复用于其他DIP。",
+        "evidence_cn": "信息结构和任务分类具有一般性，且文章指出可与其他声明式语言（DeciClare、DCR、Declare）结合（Section 8）。",
+        "strength_cn": "弱至中：工具、步骤和公式可复用，但仅在一个案例实例上演示。"
+      },
+      {
+        "claim_cn": "理论贡献：扩展MDP应用场景至DIP信息收集优化，并连接CMMN。",
+        "evidence_cn": "之前工作[20]讲了GSM模型；本文具体化了CMMN支持，并证明在案例中优于决策树（Section 8）。",
+        "strength_cn": "中：是对既有MDP方法的场景化扩展，不是全新理论。"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用真实案例但匿名公司，模型和数据由实际决策者验证；明确比较的是同一信息结构和同一属性概率下的MDP与决策树；9个随机实例用于展示典型情况和边界例子；通过状态空间和计算时间分析暴露方法局限。",
+    "external_validity_strategy_cn": "在讨论和相关工作中阐述方法可用于其他DIP和声明式语言；提供一个公开的第二案例（故障诊断与维修调度）在线演示；强调方法不绑定特定CMMN引擎，可适配其他建模语言。",
+    "what_is_not_actually_tested_cn": "没有测试真实用户与推荐工具交互的有效性；没有在多个组织或多个DIP中重复实验；没有与其他优化方法（如强化学习、启发式算法）比较；没有统计显著性检验；信息结构Y的估计误差未纳入分析；状态空间可扩展性只做了估算，未测试更大规模。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "提出的CMMN到MDP转换与求解方法能够在给定DIP模型和数据分布下计算出最优信息收集策略，且相比人工决策树显著提高预期利润。",
+    "artifact_claim_cn": "推荐工具（CMMN plan fragment + MDP recommender）能够在部署环境中为决策者提供每状态的最优动作与预期利润，并支持忽略建议后继续推荐。",
+    "mechanism_claim_cn": "通过将信息收集成本与最终决策期望收益统一到MDP奖励函数中，方法能够识别何时继续收集信息vs何时做出最终决策，从而在不牺牲决策质量的前提下降低不必要的信息成本。",
+    "boundary_claim_cn": "方法适用于满足稳定信息、单一里程碑、任务瞬时完成、过程约束可表达为CMMN前驱/必需关系的DIP；状态空间随属性数和任务数指数增长，实际部署受限于可计算规模。",
+    "reusable_design_knowledge_cn": "可复用的设计要素包括：任务的四类划分（决策、程序、信息获取、额外）；信息结构Y的建模方法；将CMMN约束编码为MDP约束的方法；部署plan fragment模式；以及允许忽略推荐的灵活人机协同机制。",
+    "theoretical_contribution_cn": "将MDP优化框架从传统运维决策扩展到CMMN建模的决策密集型业务流程，证明了信息模型与过程模型可以结合进同一优化问题，并补充了DMN等声明式决策标准缺少的动态优化维度。",
+    "how_discussion_closes_intro_gap_cn": "讨论部分回到DMN和过程模型无法统一优化的问题，指出本文通过MDP和CMMN提供了答案；同时承认人类决策者的隐性知识不可替代，因此把贡献定位为‘在人类主导下提供每一个状态的最优推荐’，这回应了引言中‘需要支持数据驱动的人类决策而非替代’的表述；最后通过可扩展性讨论与未来方向保护贡献不被视为一次性结果。",
+    "overclaim_or_unsupported_leaps_cn": "可能过度主张：1）仅凭单案例的‘翻倍利润’就推广到其他DIP领域；2）未与其他优化算法比较就称‘最优’；3）决策树由人工构建，可能不是强baseline；4）对信息结构估计误差和概率不准确缺乏敏感性分析；5）声称方法可与其他语言结合但未给出实例。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "决策密集型业务流程由决策者收集不同信息来达到最终高质量决策的目标。",
+      "rhetorical_function_cn": "开篇定义研究对象，让读者进入DIP语境。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为后续讨论信息收集成本与决策质量权衡做铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "P1 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "收集所有信息导致高成本与高努力，因此需要决策支持来确定收集哪些信息。",
+      "rhetorical_function_cn": "指出现实无法承受无所不收集，凸显需求。",
+      "depends_on_cn": "依赖第1句定义的DIP目标。",
+      "sets_up_cn": "引出本文方法的必要性。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "P1 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文介绍一种支持决策者在额外信息有效获取与成本效率持续权衡的方法。",
+      "rhetorical_function_cn": "明确文章目标。",
+      "depends_on_cn": "基于前面信息收集权衡问题。",
+      "sets_up_cn": "预告方法与贡献。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "P1 S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "方法使用CMMN建模并与MDP优化连接，计算出最优信息收集方案。",
+      "rhetorical_function_cn": "给出核心技术和制品特征。",
+      "depends_on_cn": "目标确定后，选择技术路线。",
+      "sets_up_cn": "为正文两阶段架构提供预告。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "P1 S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "方法灵活，允许决策者忽略建议，并在后续状态继续推荐。",
+      "rhetorical_function_cn": "强调人机协同的设计理念。",
+      "depends_on_cn": "部署机制设计。",
+      "sets_up_cn": "回应人类决策者作用的关键卖点。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "P1 S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在真实报价过程上展示了方法的可行性和有效性。",
+      "rhetorical_function_cn": "给出初步结果声明，吸引读者。",
+      "depends_on_cn": "案例研究部分。",
+      "sets_up_cn": "引出后续数值比较。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "1. Introduction / 1.1 Motivation",
+      "locator": "P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "如今许多业务流程依赖知识工人从不同来源收集数据并做决策，例如保险理赔、医药研发和设备故障诊断。",
+      "rhetorical_function_cn": "建立问题背景，让读者看到广泛现实场景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "引入DIP概念。",
+      "evidence_pointer": "Section 1.1 first paragraph"
+    },
+    {
+      "order": 8,
+      "section": "1. Introduction / 1.1 Motivation",
+      "locator": "P1 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "这类流程需要高度灵活性，因为新信息可能带来新决策。",
+      "rhetorical_function_cn": "指出DIP的结构特征。",
+      "depends_on_cn": "前面的流程例子。",
+      "sets_up_cn": "为CMMN采用提供理由。",
+      "evidence_pointer": "Section 1.1"
+    },
+    {
+      "order": 9,
+      "section": "1. Introduction / 1.1 Motivation",
+      "locator": "P2 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "DIP的目标是高效且有效地做出最终决策；有效性指选择正确选项，效率指资本用于信息收集最优化，两者依赖信息产生权衡。",
+      "rhetorical_function_cn": "提出核心概念和权衡机制。",
+      "depends_on_cn": "DIP定义。",
+      "sets_up_cn": "说明为什么要优化信息收集。",
+      "evidence_pointer": "Section 1.1 second paragraph"
+    },
+    {
+      "order": 10,
+      "section": "1. Introduction / 1.1 Motivation",
+      "locator": "P2 S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "信息是连接有效性和效率的纽带；收集信息提升有效性但降低效率。",
+      "rhetorical_function_cn": "解释信息在权衡中的中心地位。",
+      "depends_on_cn": "有效性与效率的定义。",
+      "sets_up_cn": "将DIP目标转化为信息收集优化。",
+      "evidence_pointer": "Section 1.1"
+    },
+    {
+      "order": 11,
+      "section": "1. Introduction / 1.1 Motivation",
+      "locator": "P3 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "机器停机时间对企业代价高昂，因此工程师必须在收集额外信息的成本与收益之间平衡。",
+      "rhetorical_function_cn": "用具体实例说明权衡的现实代价。",
+      "depends_on_cn": "前文抽象权衡。",
+      "sets_up_cn": "拉近读者与问题距离。",
+      "evidence_pointer": "Section 1.1 high-tech machine example"
+    },
+    {
+      "order": 12,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P4 S1",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "信息过载使决策者难以理清情况，造成问题。",
+      "rhetorical_function_cn": "强调现代数据环境中决策支持的需求。",
+      "depends_on_cn": "数据可用的背景。",
+      "sets_up_cn": "引出GAP。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 13,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P4 S2-S3",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "人类决策者的隐性知识在许多场合不可或缺，因此需要改进数据驱动人类决策的支持。",
+      "rhetorical_function_cn": "说明为什么不能直接自动化，需要支持性方法。",
+      "depends_on_cn": "信息过载问题。",
+      "sets_up_cn": "为‘推荐+人控’设计埋下伏笔。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 14,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P5 S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有知识密集型流程和决策感知流程没有突出知识工作者决策问题；一些工作认识到数据作用，但仅靠数据不足以优化DIP动作。",
+      "rhetorical_function_cn": "为缺口提供文献证据。",
+      "depends_on_cn": "文献回顾。",
+      "sets_up_cn": "引出‘信息+过程’结合的必要性。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 15,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P5 S4",
+      "move_code": "GAP",
+      "paraphrase_cn": "没有论文给出清晰方法将信息和过程模型结合成一个优化问题。",
+      "rhetorical_function_cn": "明确研究空白。",
+      "depends_on_cn": "上一句的文献限制。",
+      "sets_up_cn": "定义本文要解决的问题。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 16,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P5 S5-S6",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "DMN是流程中决策建模的主要语言，但决策规则只基于信息模式声明，不持续优化决策期望收益，也不检查影响决策规则的过程约束。",
+      "rhetorical_function_cn": "对主流标准提出具体不足。",
+      "depends_on_cn": "DMN作为相关标准。",
+      "sets_up_cn": "解释为什么不能用DMN直接解决GAP。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 17,
+      "section": "1. Introduction / 1.2 Problem statement and related work",
+      "locator": "P5 S7",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "因此需要一种方法，让人类决策者控制DIP，同时接收同时优化过程模型和信息模型的建议。",
+      "rhetorical_function_cn": "从GAP推出研究目标。",
+      "depends_on_cn": "前面的limitations和gap。",
+      "sets_up_cn": "预告方法特征。",
+      "evidence_pointer": "Section 1.2"
+    },
+    {
+      "order": 18,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P6 S1-S2",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文定义一种方法，引导决策者以最有效且高效的方式在DIP中决策，优化信息获取成本与最终决策收益。",
+      "rhetorical_function_cn": "正式陈述方法目标。",
+      "depends_on_cn": "前文的问题。",
+      "sets_up_cn": "引出两阶段结构。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 19,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P6 S3-S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "方法分为设计时阶段和部署阶段；设计时将用户定义的CMMN模型转换为带约束的MDP，并借助信息结构计算每个决策的奖励，用MDP求出每状态的最优动作。",
+      "rhetorical_function_cn": "概览设计时架构。",
+      "depends_on_cn": "目标确定。",
+      "sets_up_cn": "为Section 5和6铺垫。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 20,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P6 S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "MDP适合，因为其离散事件结构与DIP相似。",
+      "rhetorical_function_cn": "解释为什么选MDP。",
+      "depends_on_cn": "DIP的序列决策性质。",
+      "sets_up_cn": "强化技术选择合理性。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 21,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P6 S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "引入信息结构函数，为每个最终决策在当前信息下计算奖励。",
+      "rhetorical_function_cn": "介绍新构念。",
+      "depends_on_cn": "MDP奖励函数需要。",
+      "sets_up_cn": "为Section 5.3定义做准备。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 22,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P6 S6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "部署阶段将CMMN用户模型与过程控制plan fragment合并，由CMMN引擎执行，并链接MDP信息收集解，在每状态向决策者提供推荐。",
+      "rhetorical_function_cn": "概述部署架构。",
+      "depends_on_cn": "设计时输出。",
+      "sets_up_cn": "为Section 6内容作预告。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 23,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P7 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "CMMN是OMG标准，特别适合表达DIP，因为它允许手动激活或跳过任务，比BPMN更灵活。",
+      "rhetorical_function_cn": "解释为什么选CMMN作为宿主语言。",
+      "depends_on_cn": "DIP灵活性需求。",
+      "sets_up_cn": "为建模语法细节铺垫。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 24,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P7 S4-S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "该方法支持决策者忽略建议；当忽略后，MDP仍在后续状态针对任何新情况提供最优解。",
+      "rhetorical_function_cn": "强调与其他支持工具的关键差异。",
+      "depends_on_cn": "MDP全状态策略。",
+      "sets_up_cn": "为部署中灵活性设计提供理由。",
+      "evidence_pointer": "Section 1.3"
+    },
+    {
+      "order": 25,
+      "section": "1. Introduction / 1.3 Aim and contributions",
+      "locator": "P8 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文有三个主要贡献：定义优化DIP的方法、同时考虑数据与过程结构、提出灵活推荐工具。",
+      "rhetorical_function_cn": "声明贡献点。",
+      "depends_on_cn": "前文目标和技术。",
+      "sets_up_cn": "让读者预期后文价值。",
+      "evidence_pointer": "Section 1.3 last paragraph"
+    },
+    {
+      "order": 26,
+      "section": "2. Preliminaries / 2.1",
+      "locator": "P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "CMMN是OMG标准，用声明式方式表示半结构化案例流程。",
+      "rhetorical_function_cn": "提供建模语言背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为后续CMMN语法使用打基础。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 27,
+      "section": "2. Preliminaries / 2.1",
+      "locator": "P2 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "CMMN中手动激活的任务或阶段在使能后可执行或跳过，这很适合DIP。",
+      "rhetorical_function_cn": "确认CMMN与DIP的匹配性。",
+      "depends_on_cn": "CMMN基础。",
+      "sets_up_cn": "说明为什么CMMN适合本文。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 28,
+      "section": "2. Preliminaries / 2.1",
+      "locator": "P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "但CMMN不提供何时执行或跳过这些动作的指导，所以引入MDP来考虑决策对案例文件和案例计划的未来影响。",
+      "rhetorical_function_cn": "从CMMN限制引出MDP。",
+      "depends_on_cn": "CMMN描述。",
+      "sets_up_cn": "为2.2 MDP介绍做过渡。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 29,
+      "section": "2. Preliminaries / 2.2",
+      "locator": "P1 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "MDP是优化顺序决策问题的数学技术，最大化未来一系列动作的期望奖励。",
+      "rhetorical_function_cn": "提供优化理论背景。",
+      "depends_on_cn": "DIP顺序决策需要。",
+      "sets_up_cn": "为状态/动作/转移定义作基础。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 30,
+      "section": "3. Motivating example",
+      "locator": "P3 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "Koffer需要支持决策者了解收集更多信息的价值与当前合同条款选项的价值。",
+      "rhetorical_function_cn": "说明现实企业面临的问题。",
+      "depends_on_cn": "Koffer业务描述。",
+      "sets_up_cn": "引出本文方法在案例中的适用性。",
+      "evidence_pointer": "Section 3 Koffer company"
+    },
+    {
+      "order": 31,
+      "section": "3. Motivating example",
+      "locator": "P5 S2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "更多信息提高报价有效性和利润确定性，但浪费时间并可能失去其他RFQ机会。",
+      "rhetorical_function_cn": "在具体场景中复述信息-效率权衡。",
+      "depends_on_cn": "Koffer流程。",
+      "sets_up_cn": "为MDP优化目标提供直观理由。",
+      "evidence_pointer": "Section 3 last paragraph"
+    },
+    {
+      "order": 32,
+      "section": "4. Optimizable DIPs / 4.1",
+      "locator": "P1 S2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "假设获取的属性信息准确且稳定，即获取后不再变化。",
+      "rhetorical_function_cn": "设定可优化DIP的关键假设。",
+      "depends_on_cn": "DIP定义。",
+      "sets_up_cn": "使属性可以被建模为一旦获取即固定的状态变量。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 33,
+      "section": "4. Optimizable DIPs / 4.1",
+      "locator": "P1 S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "稳定属性可用于减少最终奖励的不确定性，因为已知属性值能改变期望收益。",
+      "rhetorical_function_cn": "解释为什么稳定属性对优化重要。",
+      "depends_on_cn": "稳定信息假设。",
+      "sets_up_cn": "为概率分布使用作铺垫。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 34,
+      "section": "4. Optimizable DIPs / 4.2",
+      "locator": "P1 S2",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "过程约束（前置任务、必需任务、阶段）可能阻止最直接的信息收集路径，因此优化需同时考虑过程视角。",
+      "rhetorical_function_cn": "引入计划约束来避免只考虑信息视角。",
+      "depends_on_cn": "稳定信息假设。",
+      "sets_up_cn": "为MDP中动作约束和状态转移提供根据。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 35,
+      "section": "4. Optimizable DIPs / 4.2",
+      "locator": "P2 S1",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "简化假设：算法不支持里程碑（除最终里程碑），且任务瞬时完成，非瞬时任务会导致状态空间爆炸。",
+      "rhetorical_function_cn": "界定方法的适用边界。",
+      "depends_on_cn": "可治理MDP模型需要。",
+      "sets_up_cn": "为讨论部分扩展方向做铺垫。",
+      "evidence_pointer": "Section 4.2 last paragraph"
+    },
+    {
+      "order": 36,
+      "section": "5. Design time / 5.2",
+      "locator": "Definition 5.1-5.4附近",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "定义四类任务：决策任务、程序任务、信息获取任务和额外任务，并区分阶段。",
+      "rhetorical_function_cn": "提供从CMMN抽取MDP结构的分类基础。",
+      "depends_on_cn": "CMMN模型和稳定信息假设。",
+      "sets_up_cn": "用于构建MDP的状态/动作/转移。",
+      "evidence_pointer": "Section 5.2.1"
+    },
+    {
+      "order": 37,
+      "section": "5. Design time / 5.3",
+      "locator": "P2 S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为直接比较效率与有效性，定义成本因子和奖励函数，避免预设硬性预算。",
+      "rhetorical_function_cn": "提出统一权衡的度量方式。",
+      "depends_on_cn": "有效性/效率直接比较的需求。",
+      "sets_up_cn": "引出信息结构的定义。",
+      "evidence_pointer": "Section 5.3"
+    },
+    {
+      "order": 38,
+      "section": "5. Design time / 5.3",
+      "locator": "Definition 5.5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "形式定义信息结构Y：将数据属性值和最终决策方案映射到奖励。",
+      "rhetorical_function_cn": "给出核心构建的形式化定义。",
+      "depends_on_cn": "成本/收益统一需求。",
+      "sets_up_cn": "为MDP奖励函数R(s,a)提供依据。",
+      "evidence_pointer": "Section 5.3 Definition 5.5"
+    },
+    {
+      "order": 39,
+      "section": "5. Design time / 5.4",
+      "locator": "P2-P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "MDP状态包含信息状态s和计划状态σ；动作分为程序性任务/阶段与最终决策；奖励为负成本或期望收益；转移分为状态转移和信息转移。",
+      "rhetorical_function_cn": "规定从CMMN模型过滤MDP的具体方法。",
+      "depends_on_cn": "任务分类和信息结构。",
+      "sets_up_cn": "使MDP可求解。",
+      "evidence_pointer": "Section 5.4 formulas"
+    },
+    {
+      "order": 40,
+      "section": "5. Design time / 5.5",
+      "locator": "P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "有限期MDP可用逆向归纳（动态规划）求解。",
+      "rhetorical_function_cn": "解释求解方法。",
+      "depends_on_cn": "MDP模型建立。",
+      "sets_up_cn": "引出状态空间限制讨论。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 41,
+      "section": "5. Design time / 5.5",
+      "locator": "P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "状态空间指数增长，只能解决到示例规模的规模，可扩展性是重要未来工作。",
+      "rhetorical_function_cn": "提前承认方法主要限制。",
+      "depends_on_cn": "状态空间分析。",
+      "sets_up_cn": "为评估部分的状态空间估计和讨论部分做伏笔。",
+      "evidence_pointer": "Section 5.5"
+    },
+    {
+      "order": 42,
+      "section": "6. Deployment",
+      "locator": "P1 S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "部署时用process control plan fragment与用户CMMN模型集成，CMMN引擎控制流程，MDP推荐器在每任务后返回新动作集和推荐。",
+      "rhetorical_function_cn": "将离线优化结果嵌入执行环境。",
+      "depends_on_cn": "设计时MDP输出。",
+      "sets_up_cn": "支撑部署案例。",
+      "evidence_pointer": "Section 6 introduction"
+    },
+    {
+      "order": 43,
+      "section": "6. Deployment / 6.2",
+      "locator": "P1-P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "推荐器提供三部分信息：允许动作列表、最优动作建议、各动作预期利润。",
+      "rhetorical_function_cn": "规定决策者看到的内容。",
+      "depends_on_cn": "MDP最优策略。",
+      "sets_up_cn": "为界面展示提供依据。",
+      "evidence_pointer": "Section 6.2"
+    },
+    {
+      "order": 44,
+      "section": "6. Deployment / 6.3",
+      "locator": "P1 S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "决策者可以忽略建议，但MDP仍会为新状态生成建议，直到最终决策。",
+      "rhetorical_function_cn": "强调人机协同和鲁棒性。",
+      "depends_on_cn": "MDP全状态最优策略。",
+      "sets_up_cn": "回应隐性知识不可建模的挑战。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 45,
+      "section": "7. Evaluation / 7.1",
+      "locator": "P1 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "Koffer案例基于真实但不公开的公司，模型有效性与实际决策者讨论过，数据设置从该公司获取，决策树与决策者合作开发。",
+      "rhetorical_function_cn": "提升案例真实性。",
+      "depends_on_cn": "方法需要现实证据。",
+      "sets_up_cn": "为数值比较提供可信基线。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 46,
+      "section": "7. Evaluation / 7.2",
+      "locator": "P2 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "从CMMN模型自动检索任务类别并定义信息结构，成功构建MDP模型，用Python实现求解。",
+      "rhetorical_function_cn": "演示设计时步骤在案例中可用。",
+      "depends_on_cn": "设计时方法。",
+      "sets_up_cn": "为随后推荐界面提供基础。",
+      "evidence_pointer": "Section 7.2"
+    },
+    {
+      "order": 47,
+      "section": "7. Evaluation / 7.3",
+      "locator": "P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "部署界面展示当前状态、已执行和使能任务，并给出最优动作和预期利润。",
+      "rhetorical_function_cn": "证明部署机制真实运行。",
+      "depends_on_cn": "plan fragment和MDP推荐。",
+      "sets_up_cn": "确认可行性。",
+      "evidence_pointer": "Section 7.3, Fig. 6"
+    },
+    {
+      "order": 48,
+      "section": "7. Evaluation / 7.4",
+      "locator": "P1 S1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "将方法结果与基于当前决策流程、由销售经理创建的决策树进行比较。",
+      "rhetorical_function_cn": "设立评价基线。",
+      "depends_on_cn": "案例模型和公司信息。",
+      "sets_up_cn": "为后续数值对比建立参照。",
+      "evidence_pointer": "Section 7.4 first paragraph, Appendix A"
+    },
+    {
+      "order": 49,
+      "section": "7. Evaluation / 7.4",
+      "locator": "P2 S1",
+      "move_code": "RESULT",
+      "paraphrase_cn": "MDP相比决策树将预期利润提高一倍。",
+      "rhetorical_function_cn": "报告核心有效性结果。",
+      "depends_on_cn": "数值比较。",
+      "sets_up_cn": "支撑主要贡献。",
+      "evidence_pointer": "Table 5"
+    },
+    {
+      "order": 50,
+      "section": "7. Evaluation / 7.4",
+      "locator": "P3 S3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "第8个实例中决策树比MDP做出更好或更少信息量的决策，说明需要决策者最终判断。",
+      "rhetorical_function_cn": "引入边界案例，防止方法被神化。",
+      "depends_on_cn": "9实例分析。",
+      "sets_up_cn": "为讨论中人类作用提供素材。",
+      "evidence_pointer": "Section 7.4 instance 8"
+    },
+    {
+      "order": 51,
+      "section": "7. Evaluation / 7.4",
+      "locator": "P4 S3",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "状态空间约8.1百万，优化耗时49分钟，说明计算复杂度是实际限制。",
+      "rhetorical_function_cn": "检验方法规模边界。",
+      "depends_on_cn": "状态空间计算。",
+      "sets_up_cn": "为未来工作部分的可扩展性讨论做铺垫。",
+      "evidence_pointer": "Section 7.4 last paragraph"
+    },
+    {
+      "order": 52,
+      "section": "8. Related work",
+      "locator": "P1 S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "相关文献承认决策常集成到业务流程中并控制流程，但没有提供关于收集哪些信息才能高效有效地执行DIP的指导。",
+      "rhetorical_function_cn": "在相关工作中重申并扩展引言中的GAP。",
+      "depends_on_cn": "文献回顾。",
+      "sets_up_cn": "为总结本文贡献做铺垫。",
+      "evidence_pointer": "Section 8"
+    },
+    {
+      "order": 53,
+      "section": "8. Related work",
+      "locator": "P6 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总之，本文主要贡献是一个基于优化的灵活方法，用于指导决策者高效且有效地执行DIP。",
+      "rhetorical_function_cn": "概括贡献并回应引言GAP。",
+      "depends_on_cn": "与各相关方法对比。",
+      "sets_up_cn": "为结论部分定调。",
+      "evidence_pointer": "Section 8 last paragraph"
+    },
+    {
+      "order": 54,
+      "section": "9. Discussion",
+      "locator": "P1 S3-S4",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "单一里程碑假设可放宽：通过多个里程碑和阶段，将大DIP切分成子决策层级，能大幅降低状态空间。",
+      "rhetorical_function_cn": "讨论假设扩展路径。",
+      "depends_on_cn": "可扩展性限制。",
+      "sets_up_cn": "为未来工作指示方向。",
+      "evidence_pointer": "Section 9"
+    },
+    {
+      "order": 55,
+      "section": "9. Discussion",
+      "locator": "P2 S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "MDP是顾问，决策者可通过隐性知识识别历史模式并偏离平均建议。",
+      "rhetorical_function_cn": "强化人类决策者不可替代的角色。",
+      "depends_on_cn": "实例8结果。",
+      "sets_up_cn": "保护方法不被批评为完全自动化。",
+      "evidence_pointer": "Section 9"
+    },
+    {
+      "order": 56,
+      "section": "10. Conclusion",
+      "locator": "P2 S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "案例显示方法可行，且相对于决策树能双倍提高预期利润。",
+      "rhetorical_function_cn": "在结尾重述核心结果。",
+      "depends_on_cn": "全部方法。",
+      "sets_up_cn": "为未来工作提供起点。",
+      "evidence_pointer": "Section 10 conclusion"
+    },
+    {
+      "order": 57,
+      "section": "10. Conclusion",
+      "locator": "P3 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "主要未来工作是提高可扩展性，计划使用深度强化学习或将问题按里程碑分段。",
+      "rhetorical_function_cn": "指出后续研究方向。",
+      "depends_on_cn": "状态空间指数增长问题。",
+      "sets_up_cn": "结束全文，为后续研究留出口。",
+      "evidence_pointer": "Section 10 last paragraph"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认DIP领域已有相关研究，然后指出其‘只处理数据’或‘只处理过程’而不能将二者耦合优化；再以DMN为例说明主流标准是声明式规则而非动态优化，从而把GAP定义为‘缺少一个同时考虑信息与过程模型的统一优化方法’。",
+    "signposting_cn": "引言1.4直接预告各章节内容；Section 4引言说‘先讲约束再讲CMMN建模’；Section 5开头说明设计时五步；Section 6开头说明如何使用求解后的MDP；每章内部也有‘在X小节我们…’等路标。",
+    "transition_logic_cn": "从问题到方法：用‘因此需要’连接GAP与目标；从设计时到部署：用‘设计时产出的是求解后的MDP…现在定义如何使用’过渡；从案例可行性到数值比较：用‘证明可行性后，我们比较效果’过渡。",
+    "claim_evidence_rhythm_cn": "每个方法步骤先解释目的，随后给出数学定义或表格，最后在案例部分用具体数字验证；数值比较先声明‘预期利润翻倍’，随后给出表格和分布图，再用9实例说明例外，形成节奏‘主张—总体证据—个体边界’。",
+    "benchmark_narrative_cn": "决策树由实际负责该流程的销售经理构建，被表现为‘当前实践’；MDP方法被视为‘优化支持’，两者使用相同信息结构和数据。通过对比预期利润、最终状态数、平均检索成本和实例分析，将benchmark嵌入到‘可行性+优越性’的论证链中。",
+    "theory_return_cn": "文章没有显著地‘返回理论’去修正MDP或CMMN理论本身，而是在相关工作部分将结果映射到设计原则（例如DeciClare可替换DMN部分），在结论中强调‘方法是基于优化’的灵活方式，从而把结果提升为对DIP支持方法的一般化主张。",
+    "contribution_positioning_cn": "把贡献定位在‘第一个清晰结合信息与过程模型的方法’层面，而不是‘更大的数据集上更好’；同时强调‘允许忽略建议’与‘人类决策者最终负责’作为非功能特色，以区别于纯自动化优化。",
+    "novelty_protection_cn": "通过三个贡献声明、与DMN/KIP/决策感知流程的严格区分、真实案例的端到端展示、以及‘可与DeciClare等声明式语言结合’的扩展性论述，把成果从一次性案例性能提升转化为可复用的设计知识，避免退化为‘这次跑得比别人快’的一次性结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用一个常见且高价值的业务场景（如保险理赔、设备诊断）引出决策密集流程中信息收集成本与最终决策质量的权衡。",
+        "research_job_cn": "提炼DIP的一般特征：灵活性、信息收集动作、最终决策。",
+        "required_evidence_cn": "需要展示现实世界存在该类流程且权衡确实重要。",
+        "transition_to_next_cn": "从‘现实存在权衡’过渡到‘现有方法还不能解决好该权衡’。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "回顾DIP、知识密集型流程、决策感知流程和DMN相关文献，明确指出它们各自缺少什么。",
+        "research_job_cn": "系统对比现有方法与本文目标，提炼GAP。",
+        "required_evidence_cn": "需要引用足够文献证明GAP，并指出为什么这种GAP有理论和实践后果。",
+        "transition_to_next_cn": "‘因此我们需要一种方法…’引出本文目标。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "概述整体方法的两阶段架构，并提前解释技术选型（MDP、CMMN）和核心创新（信息结构、灵活推荐）。",
+        "research_job_cn": "定义问题边界（稳定信息、单一里程碑等），确保方法可计算。",
+        "required_evidence_cn": "需要清晰的假设和定义，否则后续MDP建模不成立。",
+        "transition_to_next_cn": "‘接下来我们详细展开设计时步骤’过渡到方法细节。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "详细描述设计时转换：任务分类、信息结构、状态/动作/转移、求解算法。",
+        "research_job_cn": "形式化建模并实现求解。",
+        "required_evidence_cn": "需要数学定义和至少一个小例子展示可行性。",
+        "transition_to_next_cn": "‘求解后的MDP如何用于实时支持’过渡到部署。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "描述部署架构：如何把离线的MDP策略嵌入CMMN引擎，如何呈现推荐，如何允许用户忽略。",
+        "research_job_cn": "设计可运行的推荐工具和计划片段。",
+        "required_evidence_cn": "需要具体实施架构或原型。",
+        "transition_to_next_cn": "‘为了证明方法可用，我们用一个真实案例检验’过渡到评估。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用真实案例展示端到端运行，并与现有baseline数值比较。",
+        "research_job_cn": "收集案例数据、构建baseline、运行数值分析。",
+        "required_evidence_cn": "需要至少一个完整案例和量化对比指标（利润、状态数、成本）。",
+        "transition_to_next_cn": "‘案例结果虽然好，但也有边界条件’过渡到讨论。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "讨论假设限制、人类角色、可扩展性，并给出未来方向。",
+        "research_job_cn": "做敏感性/复杂度分析，识别方法适用边界。",
+        "required_evidence_cn": "需要坦诚承认哪些方面未测试，并提出具体改进路径。",
+        "transition_to_next_cn": "以结论和未来工作收尾。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "两阶段结构：离线建模/优化+在线推荐支撑",
+      "用统一奖励函数将信息价值与过程成本转化为同一优化目标",
+      "使用标准建模语言（CMMN/BPMN）与运维优化模型（MDP）耦合",
+      "用真实案例证明可行性，再用与当前实践baseline的数值比较证明有效性",
+      "加入‘允许用户忽略建议’的设计，保护论文成果不落入完全自动化批评"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实企业数据（Koffer的概率分布和模型验证）",
+      "由行业决策者合作构建基准决策树",
+      "CMMN引擎和MDP求解器的具体实现与集成",
+      "计算MDP大状态空间所需的算力（示例中49分钟，更扩展场景需要更长时间）",
+      "若没有真实场景和行业专家参与，无法轻易复制案例研究"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要仅在结论中声称‘翻倍利润’而没有展示同等严格的数值比较",
+      "不要忽略状态空间指数增长和计算时间限制，否则方法会被质疑规模不可行",
+      "不要把‘最优’说成全局最优，当没有与其他优化方法比较时",
+      "不要忽略人类决策者作用，导致论文设计失去灵活性卖点",
+      "不要只复制CMMN+MDP的外壳而缺少信息结构定义和概率数据"
+    ],
+    "single_best_description_of_the_routine_cn": "将可建模的流程问题通过形式化转换为标准优化模型，再部署为带有人类监督的推荐服务，并用真实案例和现有基准证明其价值。"
+  },
+  "confidence": 0.88,
+  "limitations_cn": "文章从全文文本分析，但图像（图1、2、3、4、5、6、7、8）在提供的文本中只能看到alt/链接，无法直接读取图内细节，因此对图形内容的理解依赖于文字描述和表格。附录决策树具体结构未以文本呈现，仅能通过‘决策树’和相关描述分析。图表位置使用章节和文字引用标注，无法提供精确页码。",
+  "usage": {
+    "prompt_tokens": 23977,
+    "completion_tokens": 24893,
+    "total_tokens": 48870,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 20649
+  }
+}

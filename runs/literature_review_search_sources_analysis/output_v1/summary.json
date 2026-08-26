@@ -1,0 +1,746 @@
+{
+  "updated_at": "2026-07-26T04:37:57.364694+00:00",
+  "analysis_version": "review-search-sources-v1",
+  "prompt_fingerprint": "51fe21c87254aa0e0855843ea989090711f4f9f2cba0c1ed6330c8003827142b",
+  "input_fulltext_files": 93,
+  "completed": 93,
+  "pending": 0,
+  "formal_reviews": 83,
+  "strategy_counts": {
+    "bounded_authoritative_set": 14,
+    "broad_database": 29,
+    "citation_only": 0,
+    "hybrid": 29,
+    "unspecified": 11
+  },
+  "workflow_counts": {
+    "backward_search": 36,
+    "forward_search": 16,
+    "hand_search": 20
+  },
+  "search_source_document_counts": [
+    {
+      "normalized_name": "Citation chaining",
+      "source_type": "citation_chaining",
+      "documents": 35
+    },
+    {
+      "normalized_name": "ScienceDirect",
+      "source_type": "publisher_platform",
+      "documents": 28
+    },
+    {
+      "normalized_name": "Web of Science",
+      "source_type": "bibliographic_database",
+      "documents": 23
+    },
+    {
+      "normalized_name": "ABI/INFORM",
+      "source_type": "bibliographic_database",
+      "documents": 20
+    },
+    {
+      "normalized_name": "Google Scholar",
+      "source_type": "search_engine",
+      "documents": 18
+    },
+    {
+      "normalized_name": "AIS eLibrary",
+      "source_type": "digital_library",
+      "documents": 18
+    },
+    {
+      "normalized_name": "Scopus",
+      "source_type": "bibliographic_database",
+      "documents": 16
+    },
+    {
+      "normalized_name": "EBSCO",
+      "source_type": "bibliographic_database",
+      "documents": 13
+    },
+    {
+      "normalized_name": "ACM Digital Library",
+      "source_type": "digital_library",
+      "documents": 13
+    },
+    {
+      "normalized_name": "Business Source Premier",
+      "source_type": "bibliographic_database",
+      "documents": 12
+    },
+    {
+      "normalized_name": "IEEE Xplore",
+      "source_type": "digital_library",
+      "documents": 11
+    },
+    {
+      "normalized_name": "ProQuest Dissertations & Theses",
+      "source_type": "bibliographic_database",
+      "documents": 10
+    },
+    {
+      "normalized_name": "JSTOR",
+      "source_type": "digital_library",
+      "documents": 9
+    },
+    {
+      "normalized_name": "ProQuest",
+      "source_type": "bibliographic_database",
+      "documents": 8
+    },
+    {
+      "normalized_name": "Business Source Complete",
+      "source_type": "bibliographic_database",
+      "documents": 6
+    },
+    {
+      "normalized_name": "Emerald Insight",
+      "source_type": "publisher_platform",
+      "documents": 6
+    },
+    {
+      "normalized_name": "PsycINFO",
+      "source_type": "bibliographic_database",
+      "documents": 4
+    },
+    {
+      "normalized_name": "Wiley Online Library",
+      "source_type": "publisher_platform",
+      "documents": 4
+    },
+    {
+      "normalized_name": "Information Systems Research",
+      "source_type": "journal",
+      "documents": 4
+    },
+    {
+      "normalized_name": "WorldCat Dissertations & Theses",
+      "source_type": "bibliographic_database",
+      "documents": 4
+    },
+    {
+      "normalized_name": "SpringerLink",
+      "source_type": "publisher_platform",
+      "documents": 4
+    },
+    {
+      "normalized_name": "AIS Senior Scholars' Basket of Eight",
+      "source_type": "journal_set",
+      "documents": 3
+    },
+    {
+      "normalized_name": "Dissertation Abstracts",
+      "source_type": "bibliographic_database",
+      "documents": 3
+    },
+    {
+      "normalized_name": "MIS Quarterly",
+      "source_type": "journal",
+      "documents": 3
+    },
+    {
+      "normalized_name": "Academic Search Complete",
+      "source_type": "bibliographic_database",
+      "documents": 3
+    },
+    {
+      "normalized_name": "Social Sciences Citation Index",
+      "source_type": "bibliographic_database",
+      "documents": 2
+    },
+    {
+      "normalized_name": "Sociological Abstracts",
+      "source_type": "bibliographic_database",
+      "documents": 2
+    },
+    {
+      "normalized_name": "Social Science Citation Index",
+      "source_type": "bibliographic_database",
+      "documents": 2
+    },
+    {
+      "normalized_name": "Springer",
+      "source_type": "publisher_platform",
+      "documents": 2
+    },
+    {
+      "normalized_name": "Academic Search Premier",
+      "source_type": "bibliographic_database",
+      "documents": 2
+    },
+    {
+      "normalized_name": "GSS-L listserv",
+      "source_type": "other",
+      "documents": 2
+    },
+    {
+      "normalized_name": "Five top-ranked IS journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "author-provided working papers",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Information Systems Research, MIS Quarterly, Management Science, Journal of Management Information Systems, Decision Science",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "manual search of key journals and conference proceedings",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Custom journal set of 16 IS journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "IS Journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Management Science",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Decision Science",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "International Conference on Information Systems",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Americas Conference on Information Systems",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Manual search",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "AISWorld mailing list",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "HICSS and SIGMIS-CPR proceedings",
+      "source_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "listservs",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Taylor & Francis Online",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Sage Journals",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "author contact",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Selected IS and marketing journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "digital libraries for conference proceedings",
+      "source_type": "digital_library",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Academic OneFile",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "EBSCO BusinessHost",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "other non-systematic methods",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Academic Search",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Email authors",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Academy of Management",
+      "source_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "AMCIS",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "CSCW",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "ICIS",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "VoNet",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "virtualteamresearch.org",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Personal contacts",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Calls for papers",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Article collections",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "manual search of leading IT and business journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "author emails",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "ARTMIS",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "NTIS",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Social SciSearch",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Gartner",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Management Innovation eXchange",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "McKinsey Quarterly",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "ResearchGate",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Manual search of mainstream IS journals",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "International Conference on Information Systems",
+      "source_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Google",
+      "source_type": "search_engine",
+      "documents": 1
+    },
+    {
+      "normalized_name": "SSRN",
+      "source_type": "digital_library",
+      "documents": 1
+    },
+    {
+      "normalized_name": "mailing lists",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "websites of outlets",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Academy of Management Publications",
+      "source_type": "digital_library",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Palgrave Macmillan",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "SAGE Journals",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Scholar's Portal",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Senior Scholars' Basket of IS journals (basket of six)",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "manual addition of five papers",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "prior ITO reviews",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Journal of Management Information Systems",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Journals' websites",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "ICIS, ECIS, AMCIS",
+      "source_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Additional IS and Management Journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "AIS Senior Scholars' Basket of Journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Emerald Fulltext",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "WorldSciNet",
+      "source_type": "publisher_platform",
+      "documents": 1
+    },
+    {
+      "normalized_name": "XP",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "XP Agile Universe",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Agile Development Conference",
+      "source_type": "conference",
+      "documents": 1
+    },
+    {
+      "normalized_name": "expert recommendation",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Library Catalogues",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "thirteen major publications",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Nine selected journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Manual search of International Journal of Electronic Commerce and Journal of Organizational Computing and Electronic Commerce",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Selected IS Journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Specialised databases and web sources",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "MIS Survey Research Section sampler page",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "MIS Quarterly, Management Science, Communications of the ACM, Information Systems Research",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "12 databases",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "leading MIS, psychology, and communication journals",
+      "source_type": "journal",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Scholars Portal",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Social Sciences Index",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Dissertation Index",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "expert_recommendation",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "ERIC",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Expert recommendation",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "unspecified databases",
+      "source_type": "bibliographic_database",
+      "documents": 1
+    },
+    {
+      "normalized_name": "manual searches of journals and conferences",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "previous literature reviews",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Selected IS and entrepreneurship journals",
+      "source_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "normalized_name": "SSRN and ResearchGate",
+      "source_type": "other",
+      "documents": 1
+    },
+    {
+      "normalized_name": "Manual reference check",
+      "source_type": "other",
+      "documents": 1
+    }
+  ],
+  "search_source_role_mentions": {
+    "primary_search": 271,
+    "supplementary_search": 100,
+    "bounded_scope": 10,
+    "validation": 1
+  },
+  "authoritative_set_document_counts": [
+    {
+      "name": "AIS Senior Scholars' Basket",
+      "set_type": "journal_set",
+      "documents": 11
+    },
+    {
+      "name": "Major AIS conference proceedings",
+      "set_type": "conference_set",
+      "documents": 2
+    },
+    {
+      "name": "AIS Senior Scholars' Basket + DSS",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Five top-ranked IS journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Selected 16 leading IS journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Information Systems Journal",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "leading IS journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "ARC ERA 2010 Ranked Journal List",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "ARC ERA 2010 Ranked Conference List",
+      "set_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "name": "leading IT and business journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Four core CS/HCI journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "ACM CHI Conference",
+      "set_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "name": "Three top IS journals (2010-2015)",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Selected IS and Management Journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Selected Journals for Gold Standard",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "FT50 journal list",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "ACM Web Conference (WWW)",
+      "set_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "name": "ACM Conference on Human Factors in Computing Systems (CHI)",
+      "set_type": "conference_set",
+      "documents": 1
+    },
+    {
+      "name": "thirteen major publications",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Nine selected journals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Selected periodicals",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Four major journals (MISQ, MS, CACM, ISR)",
+      "set_type": "journal_set",
+      "documents": 1
+    },
+    {
+      "name": "Major IS journals and major entrepreneurship journals",
+      "set_type": "journal_set",
+      "documents": 1
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3017708,
+    "completion_tokens": 228727,
+    "total_tokens": 3246435
+  }
+}

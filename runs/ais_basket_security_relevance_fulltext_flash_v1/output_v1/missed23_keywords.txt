@@ -1,0 +1,94 @@
+# 23 篇 M1 漏检的元数据安全词探测（哪些词可补入词表）
+
+
+## 01704_2024_doxing-on-social-networking-sites-an-extension-of-the-social-cognitive-theory-of-moral-thought-a.md
+- Doxing on Social Networking Sites: An Extension of the Social Cognitive Theory of Moral Thought and Action | 2024 | Journal of the Association for Information Systems
+- 命中候选词: doxing
+
+## 04526_2011_multi-tag-and-multi-owner-rfid-ownership-transfer-in-supply-chains.md
+- Multi-tag and multi-owner RFID ownership transfer in supply chains | 2011 | Decision Support Systems
+- 命中候选词: （无）
+
+## 05690_2005_model-checking-for-design-and-assurance-of-e-business-processes.md
+- Model checking for design and assurance of e-Business processes | 2005 | Decision Support Systems
+- 命中候选词: （无）
+
+## 06092_2008_online-reputation-systems-design-and-strategic-practices.md
+- Online reputation systems: Design and strategic practices | 2008 | Decision Support Systems
+- 命中候选词: shill, control
+
+## 06126_2016_internet-aggression-in-online-communities-a-contemporary-deterrence-perspective.md
+- Internet aggression in online communities: a contemporary deterrence perspective | 2016 | Information Systems Journal
+- 命中候选词: aggression
+
+## 09872_2021_information-technology-and-government-corruption-in-developing-countries-evidence-from-ghana-cus.md
+- INFORMATION TECHNOLOGY AND GOVERNMENT CORRUPTION IN DEVELOPING COUNTRIES: EVIDENCE FROM GHANA CUSTOMS | 2021 | MIS Quarterly: Management Information Systems
+- 命中候选词: crime, corruption
+
+## 10238_2011_does-ethical-ideology-affect-software-piracy-attitude-and-behaviour-an-empirical-investigation-o.md
+- Does ethical ideology affect software piracy attitude and behaviour An empirical investigation of computer users in China | 2011 | European Journal of Information Systems
+- 命中候选词: piracy, crime
+
+## 10634_2009_griefing-in-virtual-worlds-causes-casualties-and-coping-strategies.md
+- Griefing in virtual worlds: Causes, casualties and coping strategies | 2009 | Information Systems Journal
+- 命中候选词: griefing
+
+## 12724_2019_an-economic-analysis-of-platform-protection-in-the-presence-of-content-substitutability.md
+- An Economic Analysis of Platform Protection in the Presence of Content Substitutability | 2019 | Journal of Management Information Systems
+- 命中候选词: piracy, copyright, crime
+
+## 13670_2016_intellectual-property-norms-in-online-communities-how-user-organized-intellectual-property-regul.md
+- Intellectual property norms in online communities: How user-organized intellectual property regulation supports innovation | 2016 | Information Systems Research
+- 命中候选词: anonym, theft
+
+## 14334_2009_pricing-schemes-for-digital-content-with-drm-mechanisms.md
+- Pricing schemes for digital content with DRM mechanisms | 2009 | Decision Support Systems
+- 命中候选词: troll, drm, control
+
+## 15370_2019_an-integrative-theory-addressing-cyberharassment-in-the-light-of-technology-based-opportunism.md
+- An Integrative Theory Addressing Cyberharassment in the Light of Technology-Based Opportunism | 2019 | Journal of Management Information Systems
+- 命中候选词: anonym, cyber, cyberharass, harass, copyright, control, monitoring
+
+## 15516_2022_technological-entitlement-its-my-technology-and-ill-ab-use-it-how-i-want-to.md
+- TECHNOLOGICAL ENTITLEMENT: IT’S MY TECHNOLOGY AND I’LL (AB)USE IT HOW I WANT TO | 2022 | MIS Quarterly: Management Information Systems
+- 命中候选词: manipulat, abuse, computer abuse
+
+## 20849_2000_edi-controls-design-support-system-using-relational-database-system.md
+- EDI controls design support system using relational database system | 2000 | Decision Support Systems
+- 命中候选词: audit, control
+
+## 21281_2004_sdmi-based-rights-management-systems.md
+- SDMI-based rights management systems | 2004 | Decision Support Systems
+- 命中候选词: copyright, drm, crime, watermark
+
+## 22211_2003_the-is-risk-analysis-based-on-a-business-model.md
+- The IS risk analysis based on a business model | 2003 | Information and Management
+- 命中候选词: （无）
+
+## 22611_2000_flaming-among-first-time-group-support-system-users.md
+- Flaming among first-time group support system users | 2000 | Information and Management
+- 命中候选词: flaming
+
+## 23404_1990_information-systems-forensics.md
+- Information systems forensics | 1990 | Journal of Information Technology
+- 命中候选词: forensic, forensics, crime
+
+## 25278_2003_identification-of-comment-authorship-in-anonymous-group-support-systems.md
+- Identification of comment authorship in anonymous group support systems | 2003 | Journal of Management Information Systems
+- 命中候选词: bot, anonym
+
+## 25539_2021_exposing-patterns-of-adult-solicitor-behaviour-towards-a-theory-of-control-within-the-cybersexua.md
+- Exposing patterns of adult solicitor behaviour: towards a theory of control within the cybersexual abuse of youth | 2021 | European Journal of Information Systems
+- 命中候选词: cyber, trolling, troll, abuse, predator, predation, solicitation, control
+
+## 26923_2018_identity-management-and-tradable-reputation1.md
+- Identity management and tradable reputation | 2018 | MIS Quarterly: Management Information Systems
+- 命中候选词: audit
+
+## 27203_1983_the-data-dictionary-an-evaluation-from-the-edp-audit-perspective.md
+- The data dictionary: An evaluation from the EDP audit perspective | 1983 | MIS Quarterly: Management Information Systems
+- 命中候选词: audit
+
+## 27242_1981_online-computer-auditing-through-continuous-and-intermittent-simulation.md
+- Online computer auditing through continuous and intermittent simulation | 1981 | MIS Quarterly: Management Information Systems
+- 命中候选词: audit, control

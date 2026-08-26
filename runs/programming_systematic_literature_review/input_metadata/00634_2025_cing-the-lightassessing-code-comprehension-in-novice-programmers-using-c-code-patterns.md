@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85185664457"
+title: "“C”ing the light–assessing code comprehension in novice programmers using C code patterns"
+authors: "Glasauer C.; Yeh M.K.; DeLong L.A.; Yan Y.; Zhuang Y."
+year: "2025"
+journal: "Computer Science Education"
+doi: "10.1080/08993408.2024.2317079"
+---
+# Scopus title-abstract-keyword metadata
+Title: “C”ing the light–assessing code comprehension in novice programmers using C code patterns
+Abstract: Background and Context: Feedback on one’s progress is essential to new programming language learners, particularly in out-of-classroom settings. Though many study materials offer assessment mechanisms, most do not examine the accuracy of the feedback they deliver, nor give evidence on its validity. Objective: We investigate the potential use of a preexisting set of C code snippets as the basis for a high-quality C programming ability assessment tool. Method: We utilize the Rasch Model and the Linear Logistic Test Model to evaluate the validity and accuracy of the code snippets and to determine which C operations contribute most to their overall difficulty. Findings: Our results show that these code snippets yield accurate assessments of programming ability and reveal the degree of difficulty associated with specific programming operations. Implications: Our results suggest that the code snippets could serve as the basis for sophisticated, valid, and fair code comprehension skill assessment tools. © 2024 The Author(s). Published by Informa UK Limited, trading as Taylor & Francis Group.
+Author keywords: assessment tool; C language; measurement quality; Programming skills
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Computer Science Education
+Year: 2025
+EID: 2-s2.0-85185664457
+DOI: 10.1080/08993408.2024.2317079
+Retrieval channels: authoritative_outlet_search; forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,472 @@
+{
+  "raw_rows": 1209,
+  "unique_records": 1209,
+  "duplicate_record_keys": 0,
+  "duplicate_keys_sample": [],
+  "target_authors": 36,
+  "target_authors_with_eligible_followup": 33,
+  "target_authors_without_eligible_followup": 3,
+  "author_record_edges": 1271,
+  "records_with_multiple_eligible_target_authors": 59,
+  "records_with_no_target_author_id": 0,
+  "missing_abstract": 104,
+  "missing_references": 102,
+  "prior_scopus_citing_union_records": 807,
+  "author_followup_records_in_prior_citing_union": 48,
+  "prior_citation_match_methods": {
+    "eid": 47,
+    "doi_fallback": 1
+  },
+  "references_field_high_confidence_seed_matches": 45,
+  "references_field_seed_counts_supplementary_only": {
+    "1": 1,
+    "2": 1,
+    "3": 9,
+    "4": 2,
+    "5": 7,
+    "6": 5,
+    "9": 3,
+    "10": 16,
+    "11": 4,
+    "12": 1,
+    "13": 5,
+    "14": 4,
+    "15": 4,
+    "16": 2,
+    "18": 1,
+    "19": 1,
+    "20": 1
+  },
+  "year_min": 1992,
+  "year_max": 2026,
+  "year_counts": {
+    "2026": 19,
+    "2025": 52,
+    "2024": 32,
+    "2023": 60,
+    "2022": 53,
+    "2021": 53,
+    "2020": 66,
+    "2019": 64,
+    "2018": 49,
+    "2017": 52,
+    "2016": 57,
+    "2015": 50,
+    "2014": 64,
+    "2013": 67,
+    "2012": 66,
+    "2011": 72,
+    "2010": 58,
+    "2009": 51,
+    "2008": 41,
+    "2007": 38,
+    "2006": 21,
+    "2005": 13,
+    "2004": 17,
+    "2003": 15,
+    "2002": 14,
+    "2001": 11,
+    "2000": 17,
+    "1999": 10,
+    "1998": 10,
+    "1997": 4,
+    "1996": 8,
+    "1995": 1,
+    "1994": 1,
+    "1993": 2,
+    "1992": 1
+  },
+  "top_sources": [
+    [
+      "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+      58
+    ],
+    [
+      "Proceedings of the Annual Hawaii International Conference on System Sciences",
+      45
+    ],
+    [
+      "Information and Management",
+      41
+    ],
+    [
+      "Journal of Information Systems",
+      31
+    ],
+    [
+      "Journal of the Association for Information Systems",
+      29
+    ],
+    [
+      "Decision Support Systems",
+      28
+    ],
+    [
+      "Communications of the Association for Information Systems",
+      25
+    ],
+    [
+      "World Scientific-Now Publishers Series in Business",
+      24
+    ],
+    [
+      "Data and Knowledge Engineering",
+      21
+    ],
+    [
+      "CEUR Workshop Proceedings",
+      18
+    ],
+    [
+      "MIS Quarterly: Management Information Systems",
+      18
+    ],
+    [
+      "Issues in Accounting Education",
+      17
+    ],
+    [
+      "Journal of Management Information Systems",
+      17
+    ],
+    [
+      "Journal of Database Management",
+      16
+    ],
+    [
+      "Journal of Global Information Technology Management",
+      15
+    ],
+    [
+      "Lecture Notes in Business Information Processing",
+      13
+    ],
+    [
+      "Behaviour and Information Technology",
+      12
+    ],
+    [
+      "Information Systems Research",
+      12
+    ],
+    [
+      "European Journal of Information Systems",
+      12
+    ],
+    [
+      "Communications of the ACM",
+      12
+    ],
+    [
+      "IEEE Transactions on Engineering Management",
+      11
+    ],
+    [
+      "International Journal of Human-Computer Interaction",
+      11
+    ],
+    [
+      "Current Issues in Auditing",
+      11
+    ],
+    [
+      "Conference on Human Factors in Computing Systems - Proceedings",
+      11
+    ],
+    [
+      "Information Systems Frontiers",
+      10
+    ],
+    [
+      "International Journal of Accounting Information Systems",
+      10
+    ],
+    [
+      "Data Base for Advances in Information Systems",
+      10
+    ],
+    [
+      "International Journal of Information Management",
+      10
+    ],
+    [
+      "Computers in Human Behavior",
+      9
+    ],
+    [
+      "Information Systems Journal",
+      9
+    ]
+  ],
+  "document_types": [
+    [
+      "Article",
+      613
+    ],
+    [
+      "Conference paper",
+      407
+    ],
+    [
+      "Book chapter",
+      66
+    ],
+    [
+      "Editorial",
+      66
+    ],
+    [
+      "Review",
+      29
+    ],
+    [
+      "Note",
+      18
+    ],
+    [
+      "Erratum",
+      5
+    ],
+    [
+      "Letter",
+      2
+    ],
+    [
+      "Book",
+      2
+    ],
+    [
+      "Short survey",
+      1
+    ]
+  ],
+  "top_authors_by_followup_records": [
+    {
+      "author_id": "7004085979",
+      "author_name": "Palvia, Prashant",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 1991,
+      "seed_ids": "20",
+      "eligible_followup_records": 197,
+      "earliest_followup_year": 1992,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "7003462863",
+      "author_name": "Storey, Veda C.",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2006,
+      "seed_ids": "7",
+      "eligible_followup_records": 162,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "33067745400",
+      "author_name": "Kim, Jinwoo",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 1997,
+      "seed_ids": "16",
+      "eligible_followup_records": 98,
+      "earliest_followup_year": 1998,
+      "latest_followup_year": 2024
+    },
+    {
+      "author_id": "55220552900",
+      "author_name": "Parsons, Jeffrey",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2010,
+      "seed_ids": "3",
+      "eligible_followup_records": 97,
+      "earliest_followup_year": 2011,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "6603892218",
+      "author_name": "Purao, Sandeep",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2006,
+      "seed_ids": "7",
+      "eligible_followup_records": 97,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "7410131022",
+      "author_name": "Kim, Hee Woong",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2008,
+      "seed_ids": "6",
+      "eligible_followup_records": 90,
+      "earliest_followup_year": 2009,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "7103191337",
+      "author_name": "Chua, Cecil Eng Huang",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 2006,
+      "seed_ids": "7",
+      "eligible_followup_records": 68,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "23979685600",
+      "author_name": "Janvrin, Diane",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 2000,
+      "seed_ids": "12",
+      "eligible_followup_records": 61,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "7102105763",
+      "author_name": "Sprague Jr., Ralph H.",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 1998,
+      "seed_ids": "14",
+      "eligible_followup_records": 39,
+      "earliest_followup_year": 1999,
+      "latest_followup_year": 2017
+    },
+    {
+      "author_id": "55663541300",
+      "author_name": "Chan, Hock Chuan",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2008,
+      "seed_ids": "6",
+      "eligible_followup_records": 38,
+      "earliest_followup_year": 2009,
+      "latest_followup_year": 2022
+    },
+    {
+      "author_id": "6506131540",
+      "author_name": "Debreceny, R.",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2006,
+      "seed_ids": "8",
+      "eligible_followup_records": 34,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2021
+    },
+    {
+      "author_id": "57198726776",
+      "author_name": "Jones, Donald R.",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 2001,
+      "seed_ids": "11",
+      "eligible_followup_records": 29,
+      "earliest_followup_year": 2002,
+      "latest_followup_year": 2023
+    },
+    {
+      "author_id": "7103070629",
+      "author_name": "O’Keefe, R.M.",
+      "author_tier": "other_coauthor",
+      "seed_count": 1,
+      "latest_seed_year": 1996,
+      "seed_ids": "17",
+      "eligible_followup_records": 28,
+      "earliest_followup_year": 1997,
+      "latest_followup_year": 2016
+    },
+    {
+      "author_id": "7004397830",
+      "author_name": "Rohde, Fiona H.",
+      "author_tier": "recurring_coauthor",
+      "seed_count": 2,
+      "latest_seed_year": 2009,
+      "seed_ids": "4;8",
+      "eligible_followup_records": 27,
+      "earliest_followup_year": 2010,
+      "latest_followup_year": 2023
+    },
+    {
+      "author_id": "7004273004",
+      "author_name": "Panko, Raymond R.",
+      "author_tier": "first_author",
+      "seed_count": 2,
+      "latest_seed_year": 1999,
+      "seed_ids": "13;14",
+      "eligible_followup_records": 25,
+      "earliest_followup_year": 2000,
+      "latest_followup_year": 2019
+    },
+    {
+      "author_id": "14017577500",
+      "author_name": "Balijepally, VenuGopal",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 2009,
+      "seed_ids": "5",
+      "eligible_followup_records": 22,
+      "earliest_followup_year": 2010,
+      "latest_followup_year": 2025
+    },
+    {
+      "author_id": "52363500600",
+      "author_name": "Goswami, Supama",
+      "author_tier": "first_author",
+      "seed_count": 1,
+      "latest_seed_year": 2008,
+      "seed_ids": "6",
+      "eligible_followup_records": 22,
+      "earliest_followup_year": 2009,
+      "latest_followup_year": 2016
+    },
+    {
+      "author_id": "7005489136",
+      "author_name": "March, Salvatore T.",
+      "author_tier": "recurring_coauthor",
+      "seed_count": 2,
+      "latest_seed_year": 2006,
+      "seed_ids": "9;18",
+      "eligible_followup_records": 22,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2019
+    },
+    {
+      "author_id": "55897149500",
+      "author_name": "Nerur, Sridhar P.",
+      "author_tier": "recurring_coauthor",
+      "seed_count": 2,
+      "latest_seed_year": 2020,
+      "seed_ids": "1;5",
+      "eligible_followup_records": 22,
+      "earliest_followup_year": 2021,
+      "latest_followup_year": 2026
+    },
+    {
+      "author_id": "7004429096",
+      "author_name": "Vessey, Iris",
+      "author_tier": "recurring_coauthor",
+      "seed_count": 3,
+      "latest_seed_year": 2006,
+      "seed_ids": "10;15;19",
+      "eligible_followup_records": 16,
+      "earliest_followup_year": 2007,
+      "latest_followup_year": 2016
+    }
+  ],
+  "outputs": {
+    "processed_records": "E:\\github\\qual-llm-check-IS-utd\\runs\\seed_author_followup_scopus\\analysis_v1\\records_with_seed_author_mapping.csv",
+    "author_record_edges": "E:\\github\\qual-llm-check-IS-utd\\runs\\seed_author_followup_scopus\\analysis_v1\\author_record_edges.csv",
+    "author_summary": "E:\\github\\qual-llm-check-IS-utd\\runs\\seed_author_followup_scopus\\analysis_v1\\author_summary.csv",
+    "author_followup_in_prior_citing_union": "E:\\github\\qual-llm-check-IS-utd\\runs\\seed_author_followup_scopus\\analysis_v1\\author_followup_in_prior_citing_20_union.csv",
+    "llm_inputs": "E:\\github\\qual-llm-check-IS-utd\\runs\\seed_author_followup_scopus\\analysis_v1\\llm_inputs.jsonl"
+  }
+}

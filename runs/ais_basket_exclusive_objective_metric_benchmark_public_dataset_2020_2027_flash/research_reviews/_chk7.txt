@@ -1,0 +1,10 @@
+[6] Glancy, F. H., & Yadav, S. B. (2011). A computational model for financial reporting fraud detection. *Decision Support Systems*, 50(3), 595-601.
+[7] Humpherys, S. L., Moffitt, K. C., Burns, M. B., Burgoon, J. K., & Felix, W. F. (2011). Identification of fraudulent financial statements using linguistic cr
+[8] Siering, M., Koch, J.-A., & Deokar, A. V. (2016). Detecting fraudulent behavior on crowdfunding platforms: The role of linguistic and content-based cues in 
+[10] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street”? Detection of financial intermediary misconduct. *Journal 
+[12] Kumar, A., Gopal, R. D., Shankar, R., & Tan, K. H. (2022). Fraudulent review detection model focusing on emotional expressions and explicit aspects: Invest
+[13] Gopal, R. D., Hojati, A., & Patterson, R. A. (2022). Analysis of third-party request structures to detect fraudulent websites. *Decision Support Systems*, 
+[14] Benjamin, V., & Raghu, T. S. (2023). Augmenting social bot detection with crowd-generated labels. *Information Systems Research*, 34(2), 487-507. https://d
+[21] Gupta, M., Gupta, S., & Tayi, G. K. (2025). GASP: A graph augmentation-based approach for sign prediction of ties in social networks. *Journal of the Assoc
+[22] Vamosi, S., Reutterer, T., & Platzer, M. (2022). A deep recurrent neural network approach to learn sequence similarities for user-identification. *Decision
+[23] Zhu, H., Samtani, S., Brown, R. A., & Chen, H. (2021). A deep learning approach for recognizing activity of daily living (ADL) for senior care: Exploiting 

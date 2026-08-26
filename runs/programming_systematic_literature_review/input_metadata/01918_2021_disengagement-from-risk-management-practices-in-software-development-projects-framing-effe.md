@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85174596895"
+title: "Disengagement from Risk Management Practices in Software Development Projects: Framing Effects"
+authors: "Mosa A.; Singh H.; Hassandoust F."
+year: "2021"
+journal: "ACIS 2021 - Australasian Conference on Information Systems, Proceedings"
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: Disengagement from Risk Management Practices in Software Development Projects: Framing Effects
+Abstract: Many software projects fail: they take more time than they were intended to, go over their budgets, and do not achieve the intended functionalities. Software project failures occur, in part, because software project managers (SPMs) often fail to manage project risks. Researchers have developed many risk management prescriptions to guide SPMs, including risk checklists, frameworks, practices, and risk response strategies. However, research has shown that SPMs do not use these prescriptions widely. This study addresses the research question: why do many SPMs not fully engage in formal risk management? The question will be answered using a case study approach. The findings will extend our understanding of software project risk management by demonstrating why SPMs sometimes act so differently from formal prescriptions. Copyright © 2021 authors.
+Author keywords: Framing Effects; Prospect Theory; Risk Management; Software Development Projects
+Index keywords: Budget control; Software design; Framing effects; Project failures; Project managers; Project risk; Projects fail; Prospect theory; Risk management practices; Risks management; Software development projects; Software project; Risk management
+Document type: Conference paper
+Conference: 32nd Australasian Conference on Information Systems: Information Systems for a Sustainable Future, Connectedness, and Social Good, ACIS 2021
+Source title: ACIS 2021 - Australasian Conference on Information Systems, Proceedings
+Year: 2021
+EID: 2-s2.0-85174596895
+DOI: 
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

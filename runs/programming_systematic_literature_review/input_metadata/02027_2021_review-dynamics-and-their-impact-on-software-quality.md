@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85121720564"
+title: "Review Dynamics and Their Impact on Software Quality"
+authors: "Thongtanunam P.; Hassan A.E."
+year: "2021"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2020.2964660"
+---
+# Scopus title-abstract-keyword metadata
+Title: Review Dynamics and Their Impact on Software Quality
+Abstract: Code review is a crucial activity for ensuring the quality of software products. Unlike the traditional code review process of the past where reviewers independently examine software artifacts, contemporary code review processes allow teams to collaboratively examine and discuss proposed patches. While the visibility of reviewing activities including review discussions in a contemporary code review tends to increase developer collaboration and openness, little is known whether such visible information influences the evaluation decision of a reviewer or not (i.e., knowing others' feedback about the patch before providing ones own feedback). Therefore, in this work, we set out to investigate the review dynamics, i.e., a practice of providing a vote to accept a proposed patch, in a code review process. To do so, we first characterize the review dynamics by examining the relationship between the evaluation decision of a reviewer and the visible information about a patch under review (e.g., comments and votes that are provided by prior co-reviewers). We then investigate the association between the characterized review dynamics and the defect-proneness of a patch. Through a case study of 83,750 patches of the OpenStack and Qt projects, we observe that the amount of feedback (either votes and comments of prior reviewers) and the co-working frequency of a reviewer with the patch author are highly associated with the likelihood that the reviewer will provide a positive vote to accept a proposed patch. Furthermore, we find that the proportion of reviewers who provided a vote consistent with prior reviewers is significantly associated with the defect-proneness of a patch. However, the associations of these review dynamics are not as strong as the confounding factors (i.e., patch characteristics and overall reviewing activities). Our observations shed light on the implicit influence of the visible information about a patch under review on the evaluation decision of a reviewer. Our findings suggest that the code reviewing policies that are mindful of these practices may help teams improve code review effectiveness. Nonetheless, such review dynamics should not be too concerning in terms of software quality. © 1976-2012 IEEE.
+Author keywords: biases; Code review; collaboration; human aspects; peer review; software quality
+Index keywords: Codes (symbols); Defects; Dynamics; Bias; Code review; Collaboration; Defect proneness; Human aspects; Peer review; Quality of softwares; Review process; Software products; Software Quality; Computer software selection and evaluation
+Document type: Review
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2021
+EID: 2-s2.0-85121720564
+DOI: 10.1109/tse.2020.2964660
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

@@ -1,0 +1,1173 @@
+{
+  "record_id": "14098",
+  "source_file": "14098_2020_social-influence-tactics-in-e-commerce-onboarding-the-role-of-social-proof-and-reciprocity-in-af.md",
+  "title": "Social influence tactics in e-commerce onboarding: The role of social proof and reciprocity in affecting user registrations",
+  "authors": "Konstantin Roethke; Johannes Klumpe; Martin Adam; Alexander Benlian",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113268",
+  "fulltext_chars": 76854,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "commerce_marketing_and_customer_service",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:27:41.504718+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在电商用户引导中，互惠和社会认同两种社会影响策略单独及联合如何影响用户注册？两种互惠变体（货币型与效用型）与社会认同的交互模式是否不同？",
+    "artifact_and_design_cn": "在用户引导流程中嵌入的设计线索：货币型互惠（欢迎层免费5%折扣券）、效用型互惠（免费手表选购指南PDF）、社会认同（Watch24显示100万已注册账号；Chrono24显示近30天2万用户已注册）及其组合。这些线索在虚构平台Watch24和真实平台Chrono24的注册弹层中实现。",
+    "objective_outcomes_cn": "Study 1（N=249在线实验）显示货币互惠和社会证明各自显著提高注册率（36% vs 16%；39% vs 17%），但交互项显著为负；条件效应分析表明社会证明存在时货币互惠的效应消失。Study 2（N=475,495田野实验）显示效用互惠和社会证明各自显著提高确认注册率，交互项显著为正；条件效应分析表明效用互惠的效应只在社会证明存在时显著。",
+    "core_contribution_cn": "揭示两种社会影响策略在用户引导中的独立与交互效应；区分货币型与效用型互惠并发现它们与社会认同截然相反的交互模式（抵消 vs 放大）；回应Goes对虚拟环境社会影响研究的呼吁，提供可操作的设计建议。",
+    "whole_argument_in_one_paragraph_cn": "文章以电商用户注册率低、老客转化率高于新客这一现实问题为起点，指出用户引导是电商平台的关键环节。作者选取实践与文献中均重要但尚未被联合考察的两种社会影响策略——互惠与社会证明——作为研究对象。理论部分基于社会影响理论，区分货币型互惠与效用型互惠，并引入心理抗拒与怀疑机制推演假设：两者单独存在都提升注册；联合时社会证明会抵消货币型互惠、放大效用型互惠。为检验假设，作者先用虚构平台Watch24做2×2在线实验（N=249），证明货币互惠与社会证明主效应显著且交互为负；随后与真实钟表平台Chrono24合作开展大样本田野实验（N=475,495），将互惠替换为效用型，证明社会证明与效用互惠交互为正。两个实验的差异被整合为‘互惠类型与社会证明的交互方向相反’这一核心发现，最后转化为对电商引导设计的可操作建议并回应了学界对虚拟环境社会影响研究的呼吁。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "文章并非以构建系统或benchmark为核心，而是从社会影响理论推导假设，操纵用户引导中的设计线索（互惠和社会证明），通过在线实验和田野实验检验因果效应。虽然有两个Study，但整体写作弧线仍是理论→设计→检验→理论回归，因此不是单纯的多方法组合。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "问题（电商注册流失）→理论（社会影响理论、互惠、社会证明、心理抗拒）→设计（折扣券/指南/用户数）→检验（在线+田野）→讨论返回理论并给出设计原则。",
+  "research_program": {
+    "study_or_phase_count": 4,
+    "overall_sequence_cn": "第一阶段通过文献推演形成研究模型和H1-H5；第二阶段用50人预检验证操纵有效性；第三阶段以虚构平台在线实验检验货币互惠与社会证明的主效应和交互（H1/H3/H4）；第四阶段以真实平台田野实验检验效用互惠与社会证明的主效应和交互（H2/H3/H5），并通过两个实验的设计差异实现确证、扩展与补偿。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "理论建构与假设推演",
+        "question_cn": "如何依据社会影响理论推导互惠与社会证明对用户注册的主效应和交互效应？",
+        "inputs_and_setting_cn": "社会影响理论、互惠规范、社会认同、心理抗拒等文献，以及电商平台常见的折扣券、免费指南、注册人数显示等实务现象。",
+        "designed_or_compared_object_cn": "提出研究模型，包含货币型互惠、效用型互惠、社会证明三个自变量与用户注册结果变量，以及H1-H5。",
+        "baseline_control_or_counterfactual_cn": "不适用；这里是理论推演而非实证对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "演绎推理与文献综合。",
+        "main_result_cn": "形成五个假设：H1/H2分别预测货币型/效用型互惠提高注册；H3预测社会证明提高注册；H4预测社会证明减弱甚至抵消货币互惠；H5预测社会证明增强效用互惠。",
+        "argumentative_role_cn": "将现实问题转化为可检验的因果命题，确定后续两项实验需要覆盖的假设。",
+        "remaining_uncertainty_cn": "假设尚未经过数据检验，且理论机制（负债感、抗拒、信任）没有操作化测量。",
+        "link_to_next_phase_cn": "为下一阶段选择操纵方式提供了依据：货币互惠用折扣券，社会证明用注册人数，效用互惠用功能指南。",
+        "evidence_pointers": [
+          "Section 3",
+          "Fig. 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "预检验证操纵有效性",
+        "question_cn": "货币型互惠和社会证明的刺激材料是否能够产生预期的感知差异？",
+        "inputs_and_setting_cn": "50名被试（M_age=24；60%男性），虚构电商平台Watch24场景与角色Alex，vignette调查。",
+        "designed_or_compared_object_cn": "操纵货币互惠（有无5%折扣券）与社会证明（有无1百万账号提示）的欢迎/注册页面。",
+        "baseline_control_or_counterfactual_cn": "两种操纵各自的缺席条件作为对照。",
+        "objective_metrics": [
+          "感知互惠",
+          "感知流行度"
+        ],
+        "analysis_method_cn": "单因素方差分析（ANOVA）比较操纵存在与缺席条件。",
+        "main_result_cn": "货币互惠条件感知互惠更高（M=5.60 vs 4.84, p<.05）；社会证明条件感知流行度更高（M=5.84 vs 4.71, p<.01）。",
+        "argumentative_role_cn": "保证实验刺激确实激活目标社会影响感知，从而支持后续因果推断的内部效度。",
+        "remaining_uncertainty_cn": "预检验只验证感知，没有验证注册行为；样本量小且为便利样本。",
+        "link_to_next_phase_cn": "确认刺激可进入正式在线实验。",
+        "evidence_pointers": [
+          "Section 5.2"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Study 1 在线实验：货币互惠与社会证明",
+        "question_cn": "货币型互惠与社会证明对用户注册的单独效应及交互效应如何？",
+        "inputs_and_setting_cn": "从MTurk招募并筛除后N=249名参与者；虚构电商平台Watch24；2（货币互惠：有无）×2（社会证明：有无）被试间设计；log-file记录注册决策。",
+        "designed_or_compared_object_cn": "欢迎层的折扣券（货币互惠）与注册层的注册人数提示（社会证明）的组合。",
+        "baseline_control_or_counterfactual_cn": "两种操纵均缺席的基线条件；另外通过条件效应分析比较社会证明存在/不存在时货币互惠的效应。",
+        "objective_metrics": [
+          "用户注册（二元变量，日志文件）"
+        ],
+        "analysis_method_cn": "两阶段层级二元逻辑回归；Hayes Model 1 bootstrapping条件效应分析。",
+        "main_result_cn": "货币互惠（b=1.07,p<.01）和社会证明（b=1.16,p<.001）主效应显著；交互项显著为负（b=-2.06,p<.05）；社会证明缺失时货币互惠效应显著，社会证明存在时效应消失（条件效应置信区间含0），支持H4。",
+        "argumentative_role_cn": "在受控环境下建立主效应与负向交互因果证据，覆盖H1、H3、H4。",
+        "remaining_uncertainty_cn": "样本为在线便利样本，场景为虚构平台，仅覆盖货币互惠，缺乏生态效度；未检验效用互惠。",
+        "link_to_next_phase_cn": "引导作者转向真实平台田野实验，以检验效用互惠是否表现出不同交互方向并验证社会证明主效应的稳健性。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 1",
+          "Fig. 7",
+          "Table 2"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Study 2 随机田野实验：效用互惠与社会证明",
+        "question_cn": "效用型互惠与社会证明对真实电商平台用户确认注册的单独效应及交互效应如何？",
+        "inputs_and_setting_cn": "与Chrono24（奢侈品手表在线市场）合作；2018年8-10月clickstream；筛除曝光<1s或>60s用户后N=475,495；2（效用互惠：有无免费手表指南）×2（社会证明：有无近30天2万人注册）被试间设计。",
+        "designed_or_compared_object_cn": "注册弹层中的免费PDF手表选购指南（效用互惠）与注册人数提示（社会证明）；因变量为邮件确认注册。",
+        "baseline_control_or_counterfactual_cn": "两种操纵均缺席的控制条件；条件效应分析比较社会证明存在/缺失时效用互惠的效应。",
+        "objective_metrics": [
+          "确认用户注册（二元变量，邮件确认）"
+        ],
+        "analysis_method_cn": "两阶段层级二元逻辑回归；Hayes Model 1 bootstrapping条件效应分析。",
+        "main_result_cn": "效用互惠（b=0.09,p<.01）与社会证明（b=0.08,p<.05）主效应显著；交互项显著为正（b=0.13,p<.05）；社会证明存在时效用互惠效应显著，社会证明缺失时效应不显著，支持H5。",
+        "argumentative_role_cn": "提供高外部效度证据，将互惠变体扩展为效用型，同时再次验证社会证明主效应（H2/H3/H5），与Study1形成对照。",
+        "remaining_uncertainty_cn": "无法收集问卷测量心理机制；只有电商注册这一结果变量；未检验货币互惠在真实平台上的交互；样本主要为欧洲用户。",
+        "link_to_next_phase_cn": "两项实验结果共同支撑讨论中对互惠类型差异的理论解释，并为设计建议提供依据。",
+        "evidence_pointers": [
+          "Section 6.1",
+          "Table 3",
+          "Fig. 9",
+          "Table 4"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "RQ_OR_OBJECTIVE",
+      "METHOD_JUSTIFICATION",
+      "STUDY_OVERVIEW",
+      "CONTRIBUTION",
+      "RESULT"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "MECHANISM",
+      "PHENOMENON",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "DESIGN_FEATURE",
+      "REQUIREMENT",
+      "RQ_OR_OBJECTIVE"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "discussion_and_contribution_moves": [
+      "RESULT",
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "社会影响理论",
+      "互惠规范/社会交换理论",
+      "社会认同与从众（bandwagon）理论",
+      "心理抗拒与说服知识模型",
+      "电商引导设计实践知识"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "作者从社会影响理论及互惠/社会证明文献中推出可供操纵的设计线索（折扣券、指南、用户数）和交互预测，并以两个实验直接检验这些线索在场/缺席的效应。操纵的具体数值（5%、1百万、2万）虽来自实务，但理论决定了线索的类别与方向，因此属于直接耦合。",
+    "translation_chain_cn": "互惠规范/社会认同/心理抗拒等理论命题 → 用户注册情境中的心理机制（负债感、从众、抗拒、怀疑） → 设计要求（请求前提供无条件的货币或功能利益；显示群体行为证据） → 具体制品选择（5%折扣券、免费手表指南、已注册用户数） → 被比较的设计差异（线索存在 vs 缺席） → 客观结果（注册率、交互系数、条件效应）。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "互惠规范：收到未邀恩惠后产生回报义务",
+        "mechanism_cn": "负债感促使个体遵从后续请求",
+        "design_requirement_cn": "在注册请求前提供无条件货币利益",
+        "artifact_choice_cn": "欢迎层显示5%折扣券作为欢迎礼物",
+        "evaluated_contrast_cn": "有折扣券 vs 无折扣券",
+        "objective_result_cn": "Study1: 有券注册率36% vs 无券16%，b=1.07,p<.01",
+        "evidence_pointers": [
+          "Section 2.2",
+          "Section 5.1",
+          "Table 1"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "效用型互惠：提供功能内容代表对关系的初始投入",
+        "mechanism_cn": "用户感知商家投资，产生回报倾向",
+        "design_requirement_cn": "在请求前提供有价值的功能内容以改善决策",
+        "artifact_choice_cn": "免费手表选购指南PDF",
+        "evaluated_contrast_cn": "有指南 vs 无指南",
+        "objective_result_cn": "Study2: b=0.09,p<.01，存在组注册率更高",
+        "evidence_pointers": [
+          "Section 2.2",
+          "Section 6.1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "社会认同：不确定时参照他人行为",
+        "mechanism_cn": "从众/bandwagon降低不确定并建立信任",
+        "design_requirement_cn": "显示已注册用户数等群体行为证据",
+        "artifact_choice_cn": "Watch24显示100万账号；Chrono24显示近30天2万人注册",
+        "evaluated_contrast_cn": "有提示 vs 无提示",
+        "objective_result_cn": "Study1 b=1.16,p<.001；Study2 b=0.08,p<.05",
+        "evidence_pointers": [
+          "Section 2.3",
+          "Section 5.1",
+          "Section 6.1",
+          "Table 1",
+          "Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "心理抗拒与说服知识：过多说服企图引发抗拒",
+        "mechanism_cn": "折扣券被视为信息补偿，与社会证明叠加增加审视与抗拒",
+        "design_requirement_cn": "设计者应意识到同时使用折扣型互惠与注册人数提示可能互相抵消",
+        "artifact_choice_cn": "同时呈现折扣券与社会证明",
+        "evaluated_contrast_cn": "仅折扣券 vs 折扣券+社会证明（通过条件效应）",
+        "objective_result_cn": "交互b=-2.06,p<.05；社会证明存在时折扣效应不显著",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Table 1",
+          "Table 2",
+          "Fig. 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "效用互惠低怀疑，社会认同作为社会证据",
+        "mechanism_cn": "社会证明向用户显示其他人已受益，放大效用互惠的回报动机",
+        "design_requirement_cn": "指南与注册人数同现可产生协同",
+        "artifact_choice_cn": "同时呈现指南与近30天2万注册",
+        "evaluated_contrast_cn": "仅指南 vs 指南+社会证明",
+        "objective_result_cn": "交互b=0.13,p<.05；社会证明存在时指南效应显著",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Table 3",
+          "Table 4",
+          "Fig. 9"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "预检验证（manipulation checks）",
+      "在线实验（2×2 between-subjects vignette）",
+      "随机田野实验（2×2 between-subjects）",
+      "两阶段层级二元逻辑回归",
+      "Hayes PROCESS Model 1 调节作用/条件效应分析",
+      "CMB测试"
+    ],
+    "why_these_evaluations_cn": "研究需要同时确立内部效度与外部效度：在线实验可随机分配、控制刺激、记录行为，适合检验因果主效应与交互；田野实验在真实平台以真实注册为结果，可扩展至效用互惠并验证社会证明效应。此外，由于两个研究分别使用不同互惠变体，联合起来可以比较社会证明的调节方向。",
+    "benchmark_and_contrast_chain_cn": "没有算法benchmark，而是以‘操纵缺席’作为对照组。Study1用缺席条件确立货币互惠与社会证明的基线，再以条件效应分析比较社会证明在场/缺席时货币互惠的效应；Study2复制同一逻辑但将互惠变体换成效用型。跨研究比较是关键：同一社会证明操作在Study1中使货币互惠效应消失，在Study2中使效用互惠效应出现，从而形成‘互惠类型决定交互方向’的证据链。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "互惠单独提高注册",
+        "evidence_cn": "Study1货币互惠主效应、Study2效用互惠主效应回归系数显著",
+        "status_cn": "充分支持"
+      },
+      {
+        "claim_cn": "社会证明单独提高注册",
+        "evidence_cn": "Study1与Study2社会证明主效应均显著，跨研究复现",
+        "status_cn": "充分支持"
+      },
+      {
+        "claim_cn": "社会证明抵消货币互惠",
+        "evidence_cn": "Study1交互项显著为负，条件效应置信区间含0",
+        "status_cn": "支持交互模式，但机制未直接测量"
+      },
+      {
+        "claim_cn": "社会证明增强效用互惠",
+        "evidence_cn": "Study2交互项显著为正，条件效应仅在存在时显著",
+        "status_cn": "支持交互模式，但机制未直接测量"
+      },
+      {
+        "claim_cn": "心理抗拒/怀疑是机制",
+        "evidence_cn": "文中引用文献并从实验模式推断，但未测量中介变量",
+        "status_cn": "未直接检验"
+      }
+    ],
+    "internal_validity_strategy_cn": "随机分配、完整因子设计、预检验证操纵、vignette/persona控制体验、日志文件记录因变量以避免自我报告偏差、控制变量、随机分配组间均衡检验、Harman单因子CMB检验。",
+    "external_validity_strategy_cn": "Study2使用真实平台Chrono24、475,495名真实用户、真实注册行为且用户不知情；Study1使用从真实电商抓取的产品目录提升刺激真实性；两项研究在样本、方法和情境上的差异构成多方法三角验证。",
+    "what_is_not_actually_tested_cn": "心理机制（负债感、心理抗拒、信任、不确定性降低）未被直接测量；未检验不同强度/阈值下的线性或非线性关系；未检验其他社会影响策略（稀缺性、一致性）的交互；未在真实平台检验货币互惠；文化差异未被系统检验。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "社会证明、货币互惠、效用互惠各自提升注册率；两种互惠与社会证明的交互方向相反。",
+    "artifact_claim_cn": "具体设计线索（折扣券、指南、用户数）的呈现导致注册率变化；交互取决于互惠类型。",
+    "mechanism_claim_cn": "作者解释为互惠规范、社会认同的从众/不确定性降低，以及联合使用时心理抗拒与怀疑。但机制未被直接测量。",
+    "boundary_claim_cn": "结论适用于用户引导注册阶段；货币互惠的抵消效应在与社会证明同现时成立；效用互惠的放大效应在与社会证明同现时成立；样本主要为欧美用户；平台为电商。",
+    "reusable_design_knowledge_cn": "同时使用多种社会影响策略前需先检验交互；货币型折扣与用户数社会证明组合应谨慎；效用型功能内容与社会证明组合有协同。",
+    "theoretical_contribution_cn": "扩展社会影响理论，区分互惠类型，显示社会证明对两种互惠的调节方向不同；回应Goes对虚拟环境社会影响研究的呼吁。",
+    "how_discussion_closes_intro_gap_cn": "引言指出缺乏对策略间交互的研究；讨论直接展示互惠与社会证明的相互依赖关系，并以‘互惠类型决定交互方向’回应这一缺口。",
+    "overclaim_or_unsupported_leaps_cn": "作者把条件效应不显著解释为‘nullifies/cancels out’，但未测量抗拒/怀疑中介；效用互惠主效应和交互效应绝对值很小（注册率约0.8%），实务意义依赖大规模流量；Study1与Study2在互惠类型之外还存在平台、样本、因变量和情境差异，跨研究对比需假定这些差异不混淆交互方向。另外，Section3中假设分工描述在原文中似乎有笔误（提到Study2检验H2,H4,H5），实际Study2只检验H2,H3,H5。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "在线竞争促使电商优化网站引导旅程。",
+      "rhetorical_function_cn": "开篇建立现实背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为引出社会影响策略与注册问题作铺垫。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "社会影响设计机制被视为改善引导体验的可行途径。",
+      "rhetorical_function_cn": "将背景引向研究主题。",
+      "depends_on_cn": "在线竞争背景。",
+      "sets_up_cn": "引出互惠与社会认同两种具体策略。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "互惠与社会认同在实务中被广泛用于提高注册。",
+      "rhetorical_function_cn": "说明研究对象的实践重要性。",
+      "depends_on_cn": "社会影响设计的优势。",
+      "sets_up_cn": "暗示研究缺口。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "研究只试探性考察了这些组合策略对引导行为的影响。",
+      "rhetorical_function_cn": "指出已有研究的不足。",
+      "depends_on_cn": "策略实践上的广泛使用。",
+      "sets_up_cn": "引出联合效应是否协同或反噬的问题。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "组合可能带来协同也可能因过多社会影响而反噬。",
+      "rhetorical_function_cn": "解释为什么需要研究联合效应。",
+      "depends_on_cn": "研究缺口。",
+      "sets_up_cn": "为研究问题提供动机。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "填补缺口：研究互惠与社会认同对注册的单独和联合效应。",
+      "rhetorical_function_cn": "明确研究目标。",
+      "depends_on_cn": "前文的缺口与后果。",
+      "sets_up_cn": "预告研究方法与研究结果。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract P2 S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用在线实验和田野实验比较两种互惠变体与社会认同的组合。",
+      "rhetorical_function_cn": "概述证据生成方式。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "让读者预期两Study结构。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "Abstract P2 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "单独使用均有效；联合时社会认同抵消货币互惠、放大效用互惠。",
+      "rhetorical_function_cn": "压缩呈现核心发现。",
+      "depends_on_cn": "两个实验。",
+      "sets_up_cn": "为贡献声明作依据。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 9,
+      "section": "Abstract",
+      "locator": "Abstract P2 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献在于深入理解互惠与社会认同的交互关系。",
+      "rhetorical_function_cn": "将发现提升为知识贡献。",
+      "depends_on_cn": "核心结果。",
+      "sets_up_cn": "提示全文价值。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Intro P1 S1-S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "用户引导已成为电商关键挑战；首次访问后回访率低，老客户购买概率远高于新客。",
+      "rhetorical_function_cn": "用现实数据说明问题重要。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为注册结果变量提供实践动机。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Intro P1 S4-S5",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "用户引导被定义为引导访客成为注册用户的方法，注册用户更易识别跟踪。",
+      "rhetorical_function_cn": "界定核心概念。",
+      "depends_on_cn": "现实问题。",
+      "sets_up_cn": "将注册作为引导效果指标。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Intro P1 S6-S7",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有研究识别了用户引导成功驱动因素，并大量基于社会影响解释电商成功。",
+      "rhetorical_function_cn": "总结研究现状。",
+      "depends_on_cn": "核心概念界定。",
+      "sets_up_cn": "引出社会影响策略但指出其局限。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Intro P1 S8-S9",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "社会影响策略间互动研究极少，策略如何转化为引导设计元素也被忽视。",
+      "rhetorical_function_cn": "指出双重缺口。",
+      "depends_on_cn": "研究现状。",
+      "sets_up_cn": "为研究问题提供文献空间。",
+      "evidence_pointer": "Introduction P1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Intro P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本研究考察互惠与社会认同对用户注册的单独与联合效应。",
+      "rhetorical_function_cn": "直接回应缺口。",
+      "depends_on_cn": "前文缺口。",
+      "sets_up_cn": "选择具体策略并加以论证。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Intro P2 S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "选择互惠与社会认同因为它们在IS和消费行为文献及实务中最为重要。",
+      "rhetorical_function_cn": "为构念选择辩护。",
+      "depends_on_cn": "研究目标。",
+      "sets_up_cn": "随后介绍两个构念的定义。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Intro P2 S3-S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "互惠规范指对他人行动进行相似回报的义务，实践中以免费试用等形式体现。",
+      "rhetorical_function_cn": "引入第一个理论构念。",
+      "depends_on_cn": "策略选择。",
+      "sets_up_cn": "为H1/H2提供概念基础。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Intro P2 S5-S6",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "社会认同指不确定时参照他人行为寻找正确行为，电商通过推荐和销量排名利用它。",
+      "rhetorical_function_cn": "引入第二个理论构念。",
+      "depends_on_cn": "策略选择。",
+      "sets_up_cn": "为H3提供概念基础。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Intro P2 S7-S10",
+      "move_code": "GAP",
+      "paraphrase_cn": "两者对用户引导的有效性不清楚，联合效应未研究；社会认同可能增强或减弱互惠，且是否因互惠类型而异仍待考察。",
+      "rhetorical_function_cn": "将一般性缺口具体化为可检验问题。",
+      "depends_on_cn": "两个构念的定义。",
+      "sets_up_cn": "引出正式研究问题。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Intro P2 S11",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出两个研究问题：单独效应与交互效应。",
+      "rhetorical_function_cn": "明确研究问题。",
+      "depends_on_cn": "具体的文献缺口。",
+      "sets_up_cn": "预告后续研究设计。",
+      "evidence_pointer": "Introduction P2"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Intro P3 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "采用在线实验与随机田野实验的多方法设计，以确证社会证明并获得更完整的互惠图景。",
+      "rhetorical_function_cn": "概述证据策略。",
+      "depends_on_cn": "研究问题。",
+      "sets_up_cn": "让读者预期两个Study的分工。",
+      "evidence_pointer": "Introduction P3"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "Intro P4 S1-S5",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "预告三点贡献：揭示交互效应、区分互惠类型并发现相反模式、回应Goes并提供设计建议。",
+      "rhetorical_function_cn": "提前锁定论文贡献。",
+      "depends_on_cn": "预期发现。",
+      "sets_up_cn": "为讨论部分提供结构。",
+      "evidence_pointer": "Introduction P4"
+    },
+    {
+      "order": 22,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.1 P1 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "用户引导帮助新访客熟悉服务并成为注册用户；访客常可不注册就使用服务，因而未完成激活。",
+      "rhetorical_function_cn": "界定用户引导与注册的关系。",
+      "depends_on_cn": "引言中的背景。",
+      "sets_up_cn": "说明为何注册是引导成功的关键结果。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 23,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.1 P2 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "以往研究聚焦游戏化，组合社会影响策略被忽视。",
+      "rhetorical_function_cn": "再次强调研究缺口。",
+      "depends_on_cn": "用户引导定义。",
+      "sets_up_cn": "引出社会影响策略在引导中的潜力。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 24,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.1 P2 S2-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "引导期的不确定性使人们更易受社会信号影响。",
+      "rhetorical_function_cn": "提供社会影响策略有效性的机制理由。",
+      "depends_on_cn": "用户引导情境。",
+      "sets_up_cn": "为选择互惠和社会证明提供情境依据。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 25,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.1 P2 S4-S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "电商实践大量使用社会影响策略，但策略组合如何生效仍待研究。",
+      "rhetorical_function_cn": "在综述后重申缺口。",
+      "depends_on_cn": "实践观察与文献。",
+      "sets_up_cn": "研究目的。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 26,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.2 P1 S1-S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "互惠规范要求以类似行动回报正面或负面行动，并内化为道德信念。",
+      "rhetorical_function_cn": "引入互惠理论。",
+      "depends_on_cn": "前文社会影响概述。",
+      "sets_up_cn": "区分货币型与效用型互惠。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 27,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.2 P1 S5-S8",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "调查研究中预付财务礼物比事后承诺更能提高完成率；电商普遍发放代金券。",
+      "rhetorical_function_cn": "用已有证据和实务说明货币互惠。",
+      "depends_on_cn": "互惠理论。",
+      "sets_up_cn": "货币互惠线索的操作化。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 28,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.2 P2 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "货币型互惠在请求前提供货币利益，效用型互惠提供功能内容改善决策。",
+      "rhetorical_function_cn": "将互惠理论转成设计类别。",
+      "depends_on_cn": "文献中的两种互惠。",
+      "sets_up_cn": "H1和H2的设计基础。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 29,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.2 P2 S4-S6",
+      "move_code": "GAP",
+      "paraphrase_cn": "两种互惠如何用于用户引导仍不清楚，互惠可能适得其反。",
+      "rhetorical_function_cn": "指出互惠类型研究的空白。",
+      "depends_on_cn": "两类互惠的定义。",
+      "sets_up_cn": "引出研究目标。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 30,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.3 P1 S1-S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "社会认同显示产品需求与流行度；不确定时人们以他人行为为决策信息。",
+      "rhetorical_function_cn": "引入社会认同理论。",
+      "depends_on_cn": "前文社会影响概述。",
+      "sets_up_cn": "H3和交互假设的基础。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 31,
+      "section": "2. Theoretical background",
+      "locator": "Section 2.3 P1 S5-S7",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "社会认同未在用户引导中研究，也未被放入策略组合研究。",
+      "rhetorical_function_cn": "限定社会认同文献的空白。",
+      "depends_on_cn": "社会认同的定义。",
+      "sets_up_cn": "为研究问题提供缺口。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 32,
+      "section": "3. Hypothesis development",
+      "locator": "Section 3 P1 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "以社会影响理论为基础提出研究模型，包括主效应和交互效应。",
+      "rhetorical_function_cn": "标志从背景转向假设。",
+      "depends_on_cn": "理论背景。",
+      "sets_up_cn": "逐条推导H1-H5。",
+      "evidence_pointer": "Section 3"
+    },
+    {
+      "order": 33,
+      "section": "3.1",
+      "locator": "Section 3.1 P1 S1-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "收到礼物后产生回报义务，货币互惠通过折扣券实现并提高遵从。",
+      "rhetorical_function_cn": "解释货币互惠为何影响注册。",
+      "depends_on_cn": "互惠规范理论。",
+      "sets_up_cn": "H1。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 34,
+      "section": "3.1",
+      "locator": "Section 3.1 P1 S4",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：货币互惠存在时新用户更可能注册。",
+      "rhetorical_function_cn": "正式陈述假设。",
+      "depends_on_cn": "机制推理。",
+      "sets_up_cn": "供Study1检验。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 35,
+      "section": "3.1",
+      "locator": "Section 3.1 P2 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "效用互惠通过功能内容表示电商对关系的初始投资，促使用户披露信息。",
+      "rhetorical_function_cn": "解释效用互惠为何影响注册。",
+      "depends_on_cn": "社会交换逻辑。",
+      "sets_up_cn": "H2。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 36,
+      "section": "3.1",
+      "locator": "Section 3.1 P2 S5",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：效用互惠存在时新用户更可能注册。",
+      "rhetorical_function_cn": "正式陈述假设。",
+      "depends_on_cn": "机制推理。",
+      "sets_up_cn": "供Study2检验。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 37,
+      "section": "3.2",
+      "locator": "Section 3.2 P1 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "社会认同通过从众/bandwagon效应降低用户不确定并建立信任。",
+      "rhetorical_function_cn": "解释社会证明为何影响注册。",
+      "depends_on_cn": "社会认同理论。",
+      "sets_up_cn": "H3。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 38,
+      "section": "3.2",
+      "locator": "Section 3.2 P1 S5",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：社会证明存在时新用户更可能注册。",
+      "rhetorical_function_cn": "正式陈述假设。",
+      "depends_on_cn": "机制推理。",
+      "sets_up_cn": "供两个Study共同检验。",
+      "evidence_pointer": "Section 3.2"
+    },
+    {
+      "order": 39,
+      "section": "3.3",
+      "locator": "Section 3.3 P1 S1-S3",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "货币互惠与效用互惠和社会证明的交互方向不同。",
+      "rhetorical_function_cn": "提出核心理论预期。",
+      "depends_on_cn": "前三个假设。",
+      "sets_up_cn": "推导H4和H5。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 40,
+      "section": "3.3",
+      "locator": "Section 3.3 P2 S1-S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "联合使用时用户更容易察觉操纵并产生心理抗拒；折扣券被视为信息披露补偿，增加审视。",
+      "rhetorical_function_cn": "为负向交互提供机制。",
+      "depends_on_cn": "心理抗拒文献。",
+      "sets_up_cn": "H4。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 41,
+      "section": "3.3",
+      "locator": "Section 3.3 P2 S5",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H4：社会证明减弱或抵消货币互惠对注册的效应。",
+      "rhetorical_function_cn": "正式陈述负向交互假设。",
+      "depends_on_cn": "抗拒机制。",
+      "sets_up_cn": "供Study1检验。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 42,
+      "section": "3.3",
+      "locator": "Section 3.3 P3 S1-S5",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "效用互惠更微妙、不引发怀疑，社会证明强化其价值，像乘数一样放大回报动机。",
+      "rhetorical_function_cn": "为正向交互提供机制。",
+      "depends_on_cn": "效用互惠低怀疑属性。",
+      "sets_up_cn": "H5。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 43,
+      "section": "3.3",
+      "locator": "Section 3.3 P3 S6",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H5：社会证明增强效用互惠对注册的效应。",
+      "rhetorical_function_cn": "正式陈述正向交互假设。",
+      "depends_on_cn": "机制推理。",
+      "sets_up_cn": "供Study2检验。",
+      "evidence_pointer": "Section 3.3"
+    },
+    {
+      "order": 44,
+      "section": "4. Research studies",
+      "locator": "Section 4 P1 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "采用两项独立定量研究检验模型。",
+      "rhetorical_function_cn": "概述研究结构。",
+      "depends_on_cn": "研究模型。",
+      "sets_up_cn": "分别介绍两个Study。",
+      "evidence_pointer": "Section 4"
+    },
+    {
+      "order": 45,
+      "section": "4. Research studies",
+      "locator": "Section 4 P2 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "遵循多方法指南，实现确证、扩展和补偿三目标；在线实验保证内部效度，田野实验保证外部与生态效度。",
+      "rhetorical_function_cn": "为两Study设计提供方法论辩护。",
+      "depends_on_cn": "两个Study。",
+      "sets_up_cn": "解释为何需要田野实验。",
+      "evidence_pointer": "Section 4"
+    },
+    {
+      "order": 46,
+      "section": "5.1 Study 1 design",
+      "locator": "Section 5.1 P1 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "自建虚构平台Watch24并抓取真实产品提升刺激真实性。",
+      "rhetorical_function_cn": "说明实验环境构造。",
+      "depends_on_cn": "研究设计概要。",
+      "sets_up_cn": "具体操纵描述。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 47,
+      "section": "5.1 Study 1 design",
+      "locator": "Section 5.1 P2 S1-S3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "欢迎层呈现5%折扣券作为货币互惠，注册层显示100万账号作为社会证明。",
+      "rhetorical_function_cn": "将理论构念转为具体界面元素。",
+      "depends_on_cn": "假设与理论。",
+      "sets_up_cn": "用于检验H1/H3/H4。",
+      "evidence_pointer": "Section 5.1, Fig. 2-5"
+    },
+    {
+      "order": 48,
+      "section": "5.1 Study 1 design",
+      "locator": "Section 5.1 P3 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "使用角色Alex的vignette方法控制体验并避免社会期望偏差。",
+      "rhetorical_function_cn": "说明实验程序选择。",
+      "depends_on_cn": "实验设计。",
+      "sets_up_cn": "为操纵检查和测量作铺垫。",
+      "evidence_pointer": "Section 5.1"
+    },
+    {
+      "order": 49,
+      "section": "5.2 Study 1 validation",
+      "locator": "Section 5.2 P1 S1-S2",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "通过50人预检验证操纵并做CMB检验。",
+      "rhetorical_function_cn": "保证刺激有效性和测量质量。",
+      "depends_on_cn": "实验刺激。",
+      "sets_up_cn": "提高内部效度主张。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 50,
+      "section": "5.2 Study 1 validation",
+      "locator": "Section 5.2 P1 S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "操纵检查均显著，CMB不构成主要问题。",
+      "rhetorical_function_cn": "提供验证证据。",
+      "depends_on_cn": "预检验证。",
+      "sets_up_cn": "支持后续因果推断。",
+      "evidence_pointer": "Section 5.2"
+    },
+    {
+      "order": 51,
+      "section": "5.4 Study 1 results",
+      "locator": "Section 5.4 P1 S1-S5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用两阶段层级二元逻辑回归和Hayes条件效应分析。",
+      "rhetorical_function_cn": "说明统计方法。",
+      "depends_on_cn": "研究设计和变量。",
+      "sets_up_cn": "报告主效应与交互。",
+      "evidence_pointer": "Section 5.4"
+    },
+    {
+      "order": 52,
+      "section": "5.4 Study 1 results",
+      "locator": "Section 5.4 P1 S6-S9",
+      "move_code": "RESULT",
+      "paraphrase_cn": "货币互惠和社会证明主效应显著，交互项显著为负。",
+      "rhetorical_function_cn": "报告核心统计结果。",
+      "depends_on_cn": "回归模型。",
+      "sets_up_cn": "检验H4。",
+      "evidence_pointer": "Table 1"
+    },
+    {
+      "order": 53,
+      "section": "5.4 Study 1 results",
+      "locator": "Section 5.4 P2 S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "社会证明存在时货币互惠的注册效应不显著，支持H4。",
+      "rhetorical_function_cn": "用条件效应解释交互。",
+      "depends_on_cn": "交互项。",
+      "sets_up_cn": "为跨研究对比提供Study1一侧。",
+      "evidence_pointer": "Fig. 7, Table 2"
+    },
+    {
+      "order": 54,
+      "section": "6.1 Study 2 design",
+      "locator": "Section 6.1 P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "与真实平台Chrono24合作开展田野实验。",
+      "rhetorical_function_cn": "引入高外部效度情境。",
+      "depends_on_cn": "Study1结果。",
+      "sets_up_cn": "描述真实平台和样本。",
+      "evidence_pointer": "Section 6.1"
+    },
+    {
+      "order": 55,
+      "section": "6.1 Study 2 design",
+      "locator": "Section 6.1 P2 S1-S5",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "注册弹层显示免费手表指南以操纵效用互惠，显示近30天2万注册以操纵社会证明。",
+      "rhetorical_function_cn": "实现效用互惠与社会证明的操纵。",
+      "depends_on_cn": "H2/H3/H5。",
+      "sets_up_cn": "提供Study2检验条件。",
+      "evidence_pointer": "Section 6.1, Fig. 8"
+    },
+    {
+      "order": 56,
+      "section": "6.2 Study 2 measures",
+      "locator": "Section 6.2 P1 S1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "以邮件确认注册作为因变量，避免仅提交邮箱的虚注册。",
+      "rhetorical_function_cn": "定义结果变量并说明质量。",
+      "depends_on_cn": "平台注册流程。",
+      "sets_up_cn": "为数据收集提供标准。",
+      "evidence_pointer": "Section 6.2"
+    },
+    {
+      "order": 57,
+      "section": "6.3 Study 2 data",
+      "locator": "Section 6.3 P1 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "筛除曝光过短/过长用户，最终样本475,495；随机分配缓解内生性。",
+      "rhetorical_function_cn": "说明样本清洗和内外部效度控制。",
+      "depends_on_cn": "平台clickstream。",
+      "sets_up_cn": "使因果解释可信。",
+      "evidence_pointer": "Section 6.3"
+    },
+    {
+      "order": 58,
+      "section": "6.4 Study 2 results",
+      "locator": "Section 6.4 P1 S1-S6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "效用互惠和社会证明主效应显著，交互项显著为正。",
+      "rhetorical_function_cn": "报告Study2核心结果。",
+      "depends_on_cn": "回归模型。",
+      "sets_up_cn": "检验H5。",
+      "evidence_pointer": "Table 3"
+    },
+    {
+      "order": 59,
+      "section": "6.4 Study 2 results",
+      "locator": "Section 6.4 P2 S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "社会证明存在时效用互惠注册效应显著，缺席时不显著，支持H5。",
+      "rhetorical_function_cn": "用条件效应解释正向交互。",
+      "depends_on_cn": "交互项。",
+      "sets_up_cn": "与Study1形成对比。",
+      "evidence_pointer": "Fig. 9, Table 4"
+    },
+    {
+      "order": 60,
+      "section": "7. Discussion",
+      "locator": "Section 7 P1 S1-S2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "总结：单独使用均有效，但联合时出现相反交互模式。",
+      "rhetorical_function_cn": "将两个Study结果整合。",
+      "depends_on_cn": "两个Study结果。",
+      "sets_up_cn": "进入贡献论述。",
+      "evidence_pointer": "Section 7"
+    },
+    {
+      "order": 61,
+      "section": "7.1 Contributions to research",
+      "locator": "Section 7.1 P1 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第一贡献：互惠与社会证明相互依赖，应在引导优化中同时考虑。",
+      "rhetorical_function_cn": "回应引言中策略组合缺口。",
+      "depends_on_cn": "交互发现。",
+      "sets_up_cn": "为后续理论贡献铺垫。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 62,
+      "section": "7.1 Contributions to research",
+      "locator": "Section 7.1 P2 S1-S5",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第二贡献：区分互惠类型并揭示社会证明的调节方向相反。",
+      "rhetorical_function_cn": "细化互惠理论。",
+      "depends_on_cn": "两Study对比。",
+      "sets_up_cn": "强调类型学价值。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 63,
+      "section": "7.1 Contributions to research",
+      "locator": "Section 7.1 P3 S1-S2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "第三贡献：回应Goes呼吁，用随机田野实验推进虚拟环境社会影响研究。",
+      "rhetorical_function_cn": "将方法选择提升为领域贡献。",
+      "depends_on_cn": "田野实验。",
+      "sets_up_cn": "引出实践建议。",
+      "evidence_pointer": "Section 7.1"
+    },
+    {
+      "order": 64,
+      "section": "7.2 Practical contributions",
+      "locator": "Section 7.2 P1 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "设计建议：单独使用互惠或社会证明可提升注册；效用互惠与社会证明可组合。",
+      "rhetorical_function_cn": "将证据变成可操作建议。",
+      "depends_on_cn": "两个Study结果。",
+      "sets_up_cn": "提醒货币互惠的边界。",
+      "evidence_pointer": "Section 7.2"
+    },
+    {
+      "order": 65,
+      "section": "7.2 Practical contributions",
+      "locator": "Section 7.2 P2 S1-S3",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "货币互惠存在怀疑成本，与社会证明组合可能适得其反。",
+      "rhetorical_function_cn": "界定设计建议的边界。",
+      "depends_on_cn": "Study1交互。",
+      "sets_up_cn": "引导A/B测试和权衡。",
+      "evidence_pointer": "Section 7.2"
+    },
+    {
+      "order": 66,
+      "section": "8. Limitations and future research",
+      "locator": "Section 8 P1 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "二分操纵无法回答阈值或非线性关系。",
+      "rhetorical_function_cn": "承认设计局限并开放未来研究。",
+      "depends_on_cn": "两项实验操纵方式。",
+      "sets_up_cn": "提出阈值研究问题。",
+      "evidence_pointer": "Section 8"
+    },
+    {
+      "order": 67,
+      "section": "8. Limitations and future research",
+      "locator": "Section 8 P2 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "田野实验未测中介机制，未来应验证心理过程和个体差异。",
+      "rhetorical_function_cn": "承认机制证据缺口。",
+      "depends_on_cn": "两个实验结果。",
+      "sets_up_cn": "建议中介与调节研究。",
+      "evidence_pointer": "Section 8"
+    },
+    {
+      "order": 68,
+      "section": "8. Limitations and future research",
+      "locator": "Section 8 P3 S1",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "只考察两个策略，其他社会影响策略值得研究。",
+      "rhetorical_function_cn": "界定理论覆盖范围。",
+      "depends_on_cn": "研究主题选择。",
+      "sets_up_cn": "提出扩展方向。",
+      "evidence_pointer": "Section 8"
+    },
+    {
+      "order": 69,
+      "section": "8. Limitations and future research",
+      "locator": "Section 8 P4 S1-S2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "样本地域不同，文化差异可能影响结论。",
+      "rhetorical_function_cn": "提醒外部效度边界。",
+      "depends_on_cn": "两个样本。",
+      "sets_up_cn": "建议跨文化研究。",
+      "evidence_pointer": "Section 8"
+    },
+    {
+      "order": 70,
+      "section": "8. Limitations and future research",
+      "locator": "Section 8 P5 S1-S2",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "仅关注注册结果，其他结果如NPS、转化率、购物车放弃率值得研究。",
+      "rhetorical_function_cn": "限定结果变量的范围。",
+      "depends_on_cn": "研究范围。",
+      "sets_up_cn": "建议未来扩展结果变量。",
+      "evidence_pointer": "Section 8"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认单独策略已有大量研究，再用‘策略间互动极少’和‘设计转化被忽视’双重缺口制造空间；使用‘little is known’‘neglected’‘to date’式表达，并明确组合可能协同或反噬的利害。",
+    "signposting_cn": "摘要即给出研究问题和核心发现；引言明确列出RQ1/RQ2；Section 3预告H1-H5；Section 4说明两个Study的分工；每个Study结尾用‘in support of H4/H5’标记假设检验结果。",
+    "transition_logic_cn": "从引言到理论背景通过‘We now turn to’等句式；从理论到假设用‘Based on...we hypothesize’；从Study1到Study2用‘robustness and generalizability’以及‘instead of monetary-based reciprocity, we employed utility-based reciprocity’解释扩展逻辑。",
+    "claim_evidence_rhythm_cn": "每个假设均先给机制推理再给正式假设，结果部分先报告主效应再报告交互项，再用条件效应表和图示解释交互实质；最后用‘in support of H4/H5’将统计结果连接到假设。",
+    "benchmark_narrative_cn": "没有传统benchmark，而是以‘线索缺席’作为对照组；田野实验被描述为对在线实验结果的稳健性检验和多方法确证，社会证明主效应跨Study复现成为关键证据。",
+    "theory_return_cn": "讨论部分将统计交互重新表述为‘互惠与社会证明相互依赖’和‘互惠类型调节交互方向’，从而把实证模式提升为对理论关系的细化。",
+    "contribution_positioning_cn": "三点贡献分别指向：策略组合缺口、互惠类型区分、方法/领域呼吁；每点都对应引言中明确的缺口，并在讨论中重复强调。",
+    "novelty_protection_cn": "通过展示两种互惠变体与社会证明的相反交互模式，使论文不只是报告‘两个策略都有用’，而是形成可迁移的设计知识；同时用条件效应分析证明不是简单主效应，防止贡献退化为一次性性能结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "用现实数据说明用户引导/注册的重要性，再指出文献缺口：策略单独研究多、联合研究少、设计落地少。",
+        "research_job_cn": "选择一个可观察的在线行为结果（如注册）和两个实务常用但联合未被研究的理论构念。",
+        "required_evidence_cn": "行业或平台数据说明结果变量重要；文献证据表明构念单独有效但联合不明。",
+        "transition_to_next_cn": "通过‘虽有大量单独研究，但联合效应未知’自然引出研究问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "将两个构念转化为具体的可操纵设计线索，并逐条推导主效应与交互假设。",
+        "research_job_cn": "基于理论（如互惠、社会认同、心理抗拒）说明每条线索的预期机制，并明确假设的适用边界。",
+        "required_evidence_cn": "对理论机制和实务线索之间关系的清晰推理；最好有预检验证操纵。",
+        "transition_to_next_cn": "假设完成后，说明需要两项互补研究检验不同假设。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "描述研究设计、刺激材料、操纵检查、样本和测量，突出内部效度控制。",
+        "research_job_cn": "实施受控实验，记录客观行为因变量（而非仅自报）。",
+        "required_evidence_cn": "随机分配、操纵检查显著、组间无显著差异、行为结果变量。",
+        "transition_to_next_cn": "受控实验的结果留给外部效度问题，引出田野实验。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "用新的变体或情境在真实平台重复或扩展核心假设，并说明与前一研究的互补关系。",
+        "research_job_cn": "在真实平台上随机分配真实用户，用真实行为结果测量，并报告条件效应分析。",
+        "required_evidence_cn": "大规模随机分配、无自选择、真实行为因变量、交互/条件效应表。",
+        "transition_to_next_cn": "当两个研究产生相反交互模式时，进入理论解释和设计含义。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "将实证结果重新连接到理论，说明哪些理论关系被修改或细化（如互惠类型作为边界条件）。",
+        "research_job_cn": "比较两个研究的结果，识别跨研究一致的证据（社会证明主效应）和差异（交互方向），并指出未测机制。",
+        "required_evidence_cn": "跨研究一致的证据与差异模式；诚实标注未直接测量的机制。",
+        "transition_to_next_cn": "从理论贡献过渡到实践建议，给出组合使用时的取舍。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "提炼可操作的设计建议，说明何时应组合、何时应避免组合。",
+        "research_job_cn": "将结果转化为平台A/B测试和具体设计规则，同时列出局限。",
+        "required_evidence_cn": "基于条件效应/交互的边界性设计建议。",
+        "transition_to_next_cn": "以局限和未来研究收尾，避免过度一般化。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用‘单独效应已知、组合效应未知’制造缺口",
+      "研究问题前置且明确",
+      "假设推导时同时给出机制和设计实现",
+      "在线实验与田野实验按‘确证-扩展-补偿’逻辑编排",
+      "用条件效应表/图展示交互的实质而非只报告交互项",
+      "贡献按‘发现-理论细化-设计启示’三层组织"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "Chrono24随机田野实验依赖平台合作、数月点击流数据、475,495用户，普通研究者难复制。",
+      "大规模真实注册数据的采集需要接入真实平台，且有隐私和伦理限制。",
+      "操纵具体数值（5%折扣、100万/2万用户）需要平台背景校准。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不要只把‘互惠’和‘社会证明’两个术语放到摘要里而不做假设推演。",
+      "不要声称研究了交互效应却只报告主效应，不报告交互项和条件效应。",
+      "不要在没有中介测量的情况下宣称心理抗拒是机制。",
+      "不要把在线实验和田野实验之间的所有差异都当作互惠类型差异，需讨论替代解释。"
+    ],
+    "single_best_description_of_the_routine_cn": "以社会影响理论为轴，先在虚拟平台用简洁的折扣券/注册数线索建立因果主效应与交互方向，再在真实平台用另一个互惠变体进行扩展与确证，最后回到理论解释互惠类型为何导致相反交互并形成设计建议。"
+  },
+  "confidence": 0.8,
+  "limitations_cn": "OCR中部分表格和图片标签存在乱码；原文在Study 2主效应百分比的文字顺序和Section 3假设分工描述中可能存在笔误（实际Study2检验H2/H3/H5），本分析以回归系数、表格和图示为准。",
+  "usage": {
+    "prompt_tokens": 22476,
+    "completion_tokens": 35378,
+    "total_tokens": 57854,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 19148
+  }
+}

@@ -10,6 +10,7 @@ import math
 import os
 import random
 import re
+import shutil
 import sys
 import threading
 import time
@@ -252,6 +253,121 @@ def output_filename(item: dict[str, Any]) -> str:
     return f"{int(item['id']):05d}_{year}_{slugify(title)}.md"
 
 
+def markdown_otero_id(path: Path) -> int | None:
+    """Read an Otero ID from the small YAML frontmatter at the top of a Markdown file."""
+    try:
+        with path.open("r", encoding="utf-8", errors="replace") as handle:
+            for line_number, line in enumerate(handle, start=1):
+                match = re.fullmatch(r"otero_id:\s*(\d+)\s*", line)
+                if match:
+                    return int(match.group(1))
+                if line_number >= 32:
+                    break
+    except OSError:
+        return None
+    return None
+
+
+def index_markdown(directory: Path) -> dict[int, Path]:
+    """Index previously downloaded Otero Markdown files by article ID."""
+    index: dict[int, Path] = {}
+    if not directory.is_dir():
+        return index
+    for path in sorted(directory.glob("*.md")):
+        item_id = markdown_otero_id(path)
+        if item_id is not None:
+            index.setdefault(item_id, path)
+    return index
+
+
+def reusable_download_record(
+    item: dict[str, Any], destination: Path, source: Path, reuse_mode: str
+) -> dict[str, Any]:
+    fields = item.get("fields") or {}
+    doi = str(fields.get("DOI") or "").strip()
+    return {
+        "id": int(item["id"]),
+        "key": item.get("key"),
+        "title": fields.get("title"),
+        "doi": doi or None,
+        "status": "downloaded",
+        "file": destination.name,
+        "bytes": destination.stat().st_size,
+        "fulltext_state": "reused",
+        "reuse_mode": reuse_mode,
+        "reused_from": str(source),
+    }
+
+
+def seed_reused_fulltexts(
+    items: list[dict[str, Any]],
+    output: Path,
+    reuse_directories: list[Path],
+    results: dict[int, dict[str, Any]],
+) -> dict[str, int]:
+    """Recognize files already in output and hard-link/copy files from older libraries."""
+    output_index = index_markdown(output)
+    source_indexes = [(directory, index_markdown(directory)) for directory in reuse_directories]
+    stats = {
+        "existing_output": 0,
+        "hardlinked": 0,
+        "copied": 0,
+        "conflicts": 0,
+        "seeded_records": 0,
+    }
+
+    for item in items:
+        item_id = int(item["id"])
+        previous = results.get(item_id)
+        if previous and previous.get("status") == "downloaded":
+            file_value = previous.get("file")
+            if file_value and (output / str(file_value)).is_file():
+                continue
+
+        source = output_index.get(item_id)
+        source_directory: Path | None = output if source is not None else None
+        if source is None:
+            for directory, source_index in source_indexes:
+                source = source_index.get(item_id)
+                if source is not None:
+                    source_directory = directory
+                    break
+        if source is None or source_directory is None:
+            continue
+
+        if source_directory == output:
+            destination = source
+            reuse_mode = "existing_output"
+        else:
+            destination = output / output_filename(item)
+            if destination.exists():
+                if markdown_otero_id(destination) != item_id:
+                    stats["conflicts"] += 1
+                    log(
+                        f"Reuse conflict for Otero ID {item_id}: destination already belongs to "
+                        f"another record: {destination}"
+                    )
+                    continue
+                reuse_mode = "existing_output"
+            else:
+                try:
+                    os.link(source, destination)
+                    reuse_mode = "hardlink"
+                except OSError:
+                    shutil.copy2(source, destination)
+                    reuse_mode = "copy"
+
+        results[item_id] = reusable_download_record(item, destination, source, reuse_mode)
+        output_index[item_id] = destination
+        stats_key = {"existing_output": "existing_output", "hardlink": "hardlinked", "copy": "copied"}[
+            reuse_mode
+        ]
+        stats[stats_key] += 1
+        stats["seeded_records"] += 1
+
+    return stats
+
+
 def yaml_scalar(value: Any) -> str:
     return json.dumps("" if value is None else str(value), ensure_ascii=False)
 
@@ -348,7 +464,13 @@ def summarize(query: str, total: int, metadata_count: int, results: dict[int, di
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--query", required=True, help="Otero article search query")
+    scope = parser.add_mutually_exclusive_group(required=True)
+    scope.add_argument("--query", help="Otero article search query")
+    scope.add_argument(
+        "--all",
+        action="store_true",
+        help="Download the complete Otero article corpus without a query filter",
+    )
     parser.add_argument("--output", required=True, type=Path, help="Output directory")
     parser.add_argument("--workers", type=int, default=8, help="Concurrent requests (default: 8)")
     parser.add_argument(
@@ -366,6 +488,17 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Reuse output/metadata.jsonl after verifying the saved query",
     )
+    parser.add_argument(
+        "--reuse-from",
+        action="append",
+        default=[],
+        type=Path,
+        metavar="DIRECTORY",
+        help=(
+            "Reuse Markdown from an existing Otero library by article ID; may be repeated. "
+            "Hard links are used when possible, with copying as a fallback."
+        ),
+    )
     parser.add_argument("--checkpoint-every", type=int, default=25)
     args = parser.parse_args()
     if args.workers < 1 or args.workers > 32:
@@ -374,6 +507,8 @@ def parse_args() -> argparse.Namespace:
         parser.error("--metadata-workers must be between 1 and 8")
     if args.limit is not None and args.limit < 1:
         parser.error("--limit must be positive")
+    if args.all:
+        args.query = ""
     return args
 
 
@@ -404,6 +539,23 @@ def main() -> int:
     selected = items[: args.limit] if args.limit is not None else items
     selected_ids = {int(item["id"]) for item in selected}
     results = {item_id: record for item_id, record in load_results(results_path).items() if item_id in selected_ids}
+
+    reuse_directories = [path.resolve() for path in args.reuse_from]
+    missing_reuse_directories = [path for path in reuse_directories if not path.is_dir()]
+    if missing_reuse_directories:
+        missing = ", ".join(str(path) for path in missing_reuse_directories)
+        raise RuntimeError(f"--reuse-from directory does not exist: {missing}")
+    reuse_stats = seed_reused_fulltexts(selected, output, reuse_directories, results)
+    if reuse_stats["seeded_records"]:
+        ordered = [results[item_id] for item_id in sorted(results)]
+        write_jsonl_atomic(results_path, ordered)
+        write_json_atomic(summary_path, summarize(args.query, total, len(items), results))
+    log(
+        "Reuse scan: "
+        f"recognized_in_output={reuse_stats['existing_output']} "
+        f"hardlinked={reuse_stats['hardlinked']} copied={reuse_stats['copied']} "
+        f"conflicts={reuse_stats['conflicts']}"
+    )
 
     pending: list[dict[str, Any]] = []
     for item in selected:

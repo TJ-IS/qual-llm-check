@@ -1,0 +1,1865 @@
+# A novel decision support system for optimizing aircraft maintenance check schedule and task allocation
+
+- 作者：Qichen Deng; Bruno F. Santos; Wim J.C. Verhagen
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113545
+- 源文件：19756_2021_a-novel-decision-support-system-for-optimizing-aircraft-maintenance-check-schedule-and-task-allo.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：如何构建一个集成的决策支持系统，把机队层面的维修检查排程、维修任务分配和班组排班放在同一框架中优化，以替代航空公司依赖经验的人工维修规划方式，并支持未来维修策略评价？
+
+- 制品与设计：本文开发了一个面向航空公司维修规划优化的DSS（AMPO），采用数据库、模型、GUI三层结构；模型层包含AMPO-1（基于动态规划的维修检查排程）、AMPO-2（基于WFD装箱启发式的任务分配）和AMPO-3（基于任务执行顺序和工作力约束的班组排班）三个优化模块，采用自顶向下的串行流程。
+
+- 客观结果：在合作航空公司的51架A320系列飞机演示中，DSS生成的A/C检查计划比航空公司原计划少3次A检、1次C检，平均FH更高；AMPO-1约10分钟生成3年排程；AMPO-2对超过60,000个任务分配与商业求解器相比最优间隙仅0.028%；AMPO-3生成的两周排班在前2-3天与航空公司几乎一致，第二周差异显著；三个未来维护策略情景均被判定为造成损失。
+
+- 核心贡献：作者声称贡献有三：首次在学术文献中提供同时优化维修检查排程、任务分配和班组排班的集成DSS；证明DSS可以相对航空公司现行做法提高飞机利用率、降低维修成本并把规划时间从数天降至20-30分钟；展示DSS可作为实施前评估不同维护策略的政策分析工具。
+
+- 整篇论证链：作者从现代飞机维修频繁、航空公司采用自顶向下人工规划的现实出发，给出维修成本高达总成本9%-10%的实际利害，再指出学术和商业工具都缺少能自动生成优化排程的DSS，尤其缺少把长期维修检查排程与短期任务分配整合的框架。为填补这一缺口，作者依托AIRMES项目，按领域流程把问题拆成三个有依赖关系的子问题，分别用既有DP方法、WFD装箱启发式和排班启发式构建AMPO-1/2/3模块，并以合作航空公司的真实数据做两类测试：第一类用航空公司现行计划为基线验证优化效果，同时用商业求解器和航空公司专家确认质量；第二类把DSS用于未来维护策略情景比较，说明工具不仅产出一次性计划，还能支持政策选择。最终在结论中把贡献定位为桥接长期AMCS与短期班组排班的学界空白，并指出GUI、集成、备件约束和状态维修等未来方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文核心是提出一个DSS制品，说明其需求输入、系统架构、三个优化算法模块，并通过真实航空公司的演示案例评价该制品的可行性与效用；没有进行随机实验、形式化理论验证或多研究累积，属于典型的需求—构建—评价设计科学论文。
+
+- 主导写作弧线判定：文章先建立人工维修规划效率低、现有工具不能自动优化这一性能缺口，再介绍集成的DSS制品，然后用航空公司现行计划作为benchmark验证性能，最后把DSS推广为未来维修策略评估的一般化工具；没有以理论命题为前导，也没有明确提炼设计原则，因此选择该写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：论文先完成领域需求与输入数据建模，随后依次设计AMPO-1排程、AMPO-2任务分配、AMPO-3排班三个优化阶段；再把它们合并在演示试验中与航空公司现实计划对标，最后用第二个测试用例把DSS扩展到维护策略的情景评估。前一阶段的输出是后一阶段的输入，形成AMCS→任务分配→排班→整体验证→政策分析的累积链。
+
+### studies_or_phases
+
+#### 1. 需求与输入建模：数据库层设计
+
+- order：1
+
+- name_cn：需求与输入建模：数据库层设计
+
+- question_cn：为了支持机队级维修规划优化，DSS需要哪些输入数据、领域约束和功能需求？
+
+- inputs_and_setting_cn：航空公司提供的MPD、机队状态、运营约束（商业约束、维护约束、维护槽位）、任务工作量与可用技能工种/班次数据。
+
+- designed_or_compared_object_cn：DSS数据库层的数据分类与输入结构，包括机队状态表、维护机会表和任务工作量格式。
+
+- baseline_control_or_counterfactual_cn：无对照；以MPD安全规范和航空公司实际约束为硬性边界。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：领域需求分析和数据结构设计，以表格说明输入格式。
+
+- main_result_cn：确定了四类输入和三类约束，使后续模型可以在不违反MPD限制的前提下进行优化。
+
+- argumentative_role_cn：为后续AMPO-1/2/3提供数据与约束基础，说明DSS能够处理航空公司真实输入。
+
+- remaining_uncertainty_cn：还没有算法，不知道输入能否产生可行或更优计划。
+
+- link_to_next_phase_cn：输入收集完成后进入模型层，先用AMPO-1产生最优检查排程。
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Table 2
+
+3. Table 3
+
+4. Section 3.1.1-3.1.4
+
+#### 2. AMPO-1：维修检查排程优化模块
+
+- order：2
+
+- name_cn：AMPO-1：维修检查排程优化模块
+
+- question_cn：在给定机队状态、检查间隔、维护槽位和运营约束下，如何为未来2-6年生成最优的A/C/D检查排程？
+
+- inputs_and_setting_cn：MPD检查间隔、机队DY/FH/FC与日均利用率、维护机会/槽位容量、阶段进离场、商用与维护约束。
+
+- designed_or_compared_object_cn：AMPO-1模块及其动态规划算法；优化目标为最小化整个机队未利用FH。
+
+- baseline_control_or_counterfactual_cn：航空公司现行维修排程作为benchmark。
+
+##### objective_metrics
+
+1. 未利用飞行小时FH
+
+2. 检查总次数
+
+3. 额外维护槽位数量
+
+4. 计算时间
+
+- analysis_method_cn：基于Deng et al. [5]的动态规划方法，前向归纳，结合维护优先级、离散化与状态聚合，并检查未来容量是否足够。
+
+- main_result_cn：对2019-2021的A/C检查，AMPO-1比航空公司计划少1次C检和3次A检，平均FH更高，约10分钟完成；航空公司专家认可。
+
+- argumentative_role_cn：证明集成DSS的第一个核心子问题可以自动生成优于人工经验的排程，为任务分配提供时间边界。
+
+- remaining_uncertainty_cn：排程本身不能说明具体任务能否在人员与技能约束下被安排到各次检查中。
+
+- link_to_next_phase_cn：把AMPO-1输出的最优检查排程作为AMPO-2任务分配的输入。
+
+##### evidence_pointers
+
+1. Section 3.2 Step IV
+
+2. Section 4.1 P3
+
+3. Fig. 6
+
+4. Fig. 7
+
+5. Appendix A
+
+#### 3. AMPO-2：维护任务分配模块
+
+- order：3
+
+- name_cn：AMPO-2：维护任务分配模块
+
+- question_cn：给定最优检查排程和日常可用技能劳动小时，如何把每个飞机的数千个维护任务分配到重叠的检查时段，使执行成本最小且不违反任务截止期？
+
+- inputs_and_setting_cn：AMPO-1检查排程、MPD中任务及其间隔、任务技能需求与工时、每天可用技能劳动小时、非例行劳动系数。
+
+- designed_or_compared_object_cn：AMPO-2的WFD装箱启发式；把重叠检查划分为时间仓（bin），把任务或任务包当作物品。
+
+- baseline_control_or_counterfactual_cn：商业优化求解器结果作为参照；航空公司随后一年的任务分配方案作为可行性对照。
+
+##### objective_metrics
+
+1. 与商业求解器的最优间隙
+
+2. 分配任务数量
+
+3. 计算时间
+
+4. 可行性判断
+
+- analysis_method_cn：基于WFD的启发式：按剩余容量降序选择时间仓，按最紧急任务优先规则分配，并把必须顺序执行的任务打包。
+
+- main_result_cn：2019-2021整个机队超过60,000个任务在10分钟内完成分配；与商业求解器相比最优间隙仅0.028%；航空公司维修规划人员认为结果可行。
+
+- argumentative_role_cn：证明排程层面优化能进一步转化为可执行的任务计划，同时受技能劳动小时约束。
+
+- remaining_uncertainty_cn：任务计划仍需落到每天的具体班组和人员工作中。
+
+- link_to_next_phase_cn：把任务分配结果交给AMPO-3，按班次生成可执行的排班与工卡。
+
+##### evidence_pointers
+
+1. Section 3.2 Step V
+
+2. Section 4.1 P5
+
+3. Fig. 8
+
+4. Appendix B
+
+#### 4. AMPO-3：班组排班模块
+
+- order：4
+
+- name_cn：AMPO-3：班组排班模块
+
+- question_cn：在给定任务分配、技能劳动力和任务执行顺序后，如何为最初几周生成早/午/夜班排班并创建工卡？
+
+- inputs_and_setting_cn：AMPO-2任务分配结果、每日可用技能人员、每班最大人员数、任务顺序（开面板→检查→维修→关面板）。
+
+- designed_or_compared_object_cn：AMPO-3的排班算法与输出工卡格式。
+
+- baseline_control_or_counterfactual_cn：航空公司现行前两周排班经验。
+
+##### objective_metrics
+
+1. 各班次任务分配
+
+2. 技能类型劳动小时
+
+3. 与航空公司排班的差异
+
+- analysis_method_cn：按任务顺序逐类分配任务，优先早班，早班容量不足时顺延至午班和夜班。
+
+- main_result_cn：航空公司评估认为前2-3天排班几乎一致，第二周差异明显；输出按技能类型拆分的劳动小时工卡。
+
+- argumentative_role_cn：证明DSS能把前几个阶段的计划变成可直接用于日常维护的排班，打通长期排程与短期执行。
+
+- remaining_uncertainty_cn：长期劳动力不确定，因此AMPO-3只做前1-2周排班；第二周差异的合理性未再由现场执行结果检验。
+
+- link_to_next_phase_cn：三个优化模块合在一起形成完整DSS后，进入整体演示验证。
+
+##### evidence_pointers
+
+1. Section 3.2 Step VII
+
+2. Fig. 3
+
+3. Section 4.1 P6
+
+4. Fig. 9
+
+#### 5. 测试用例1：真实航空公司数据下的综合演示与对标
+
+- order：5
+
+- name_cn：测试用例1：真实航空公司数据下的综合演示与对标
+
+- question_cn：集成DSS能否在合作航空公司的真实数据上生成比现行计划更优、且被领域专家认可的综合维修计划？
+
+- inputs_and_setting_cn：2019年3月提取的51架A320系列机队数据，包括MPD、机队状态、运营约束、工作量与劳动力数据；D-check合并到C-check的航空公司规则。
+
+- designed_or_compared_object_cn：完整DSS输出（AMPO-1排程+AMPO-2任务分配+AMPO-3排班），与航空公司维护计划对比。
+
+- baseline_control_or_counterfactual_cn：Airline Schedule作为基准；AMPO-2另与商业优化求解器结果比较。
+
+##### objective_metrics
+
+1. 平均FH/FC
+
+2. A/C检查总次数
+
+3. 额外槽位数
+
+4. 计算时间
+
+5. 最优间隙
+
+6. 潜在节省金额与飞机可用天数
+
+- analysis_method_cn：演示试验、KPI对比、成本-收益换算、商业求解器对标、航空公司专家验证。
+
+- main_result_cn：DSS计划比航空公司计划少1次C检和3次A检，平均FH更高，潜在节省$0.1M-$0.4M并增加10-31天可用时间；AMPO-2最优间隙0.028%；专家确认可行；项目合作方评定TRL6。
+
+- argumentative_role_cn：提供该设计科学制品的整体有效性证据，证明不是只对合成数据有效，而是可用于真实机队和真实约束。
+
+- remaining_uncertainty_cn：只验证了单个时间段的单一航空公司场景；没有证明DSS能否回答未来策略选择问题。
+
+- link_to_next_phase_cn：把DSS从‘优化给定计划’扩展到‘评估可选维护策略’，即测试用例2。
+
+##### evidence_pointers
+
+1. Section 4 P2
+
+2. Section 4.1 P3-P6
+
+3. Fig. 6
+
+4. Fig. 7
+
+5. Fig. 8
+
+6. Fig. 9
+
+7. Table 5前航空公司参数列表
+
+#### 6. 测试用例2：用DSS评估未来维护策略情景
+
+- order：6
+
+- name_cn：测试用例2：用DSS评估未来维护策略情景
+
+- question_cn：DSS能否在实施前帮助航空公司评估不同维护策略（改变C检槽位、增加机队规模、增加A检槽位）的后果？
+
+- inputs_and_setting_cn：基线为航空公司计划与DSS计划；情景1提高每日C检槽位但缩短C检窗口；情景2机队从51增至66；情景3机队增至66且周五增加A检槽位。
+
+- designed_or_compared_object_cn：三个未来维护策略情景与基线情景的KPI和每飞机收益/成本。
+
+- baseline_control_or_counterfactual_cn：Airline Schedule作为基线；DSS Schedule也作为已实现优化参照。
+
+##### objective_metrics
+
+1. 平均FH/FC
+
+2. 检查总次数
+
+3. 额外槽位数
+
+4. Gain（可用天数收入）
+
+5. Saving（检查次数节省）
+
+6. Cost（额外槽位成本）
+
+7. 每飞机总收益
+
+- analysis_method_cn：情景仿真与成本收益核算；基于航空公司提供的日收入、检查时长、检查成本和额外槽位成本估计。
+
+- main_result_cn：情景1因C检槽位不足导致每飞机损失$75.4K；情景2因A检容量不足损失$339.8K；情景3虽减少额外槽位但增加更多检查，总损失增至$437.3K，说明单一增加周五A检槽位不足以应对机队增长。
+
+- argumentative_role_cn：把DSS从一次性优化工具提升为维护策略事前评估平台，强化其对管理决策的理论与实际价值。
+
+- remaining_uncertainty_cn：情景结果依赖航空公司提供的成本参数与线性收益假设，没有实施后的真实财务验证；也未做敏感性分析。
+
+- link_to_next_phase_cn：场景评价结论直接支撑结论部分关于DSS具有策略分析价值的贡献声明。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Table 5
+
+3. Equation 3-4
+
+4. Section 4.2 Scenario 1-3段落
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 现代飞机大量部件需反复检查/更换
+
+2. PHENOMENON: 人工经验规划导致次优方案
+
+3. CONTRIBUTION: 提出首个同时优化排程与任务分配的DSS
+
+4. STUDY_OVERVIEW: 通过三个测试用例说明实际相关性与政策分析用途
+
+### introduction_moves
+
+1. CONTEXT: 飞机维修定义与使用参数/检查间隔
+
+2. PHENOMENON: 航空公司采用自顶向下的人工两阶段规划
+
+3. PRACTICAL_STAKES: 大型航空公司排程耗时数天至数周且维修成本占9%-10%
+
+4. PRIOR_KNOWLEDGE: 商业工具只做任务管理追踪
+
+5. LIMITATION: 商业工具不能自动生成优化计划
+
+6. GAP: 缺少检查排程优化DSS，更缺少集成排程与任务执行的DSS
+
+7. RQ_OR_OBJECTIVE: 开发集成AMCS、任务分配与排班的DSS
+
+8. CONTRIBUTION: 三重贡献：集成框架、效率/成本改善、策略评估
+
+9. STUDY_OVERVIEW: 用欧洲航空公司案例验证
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 长期AMCS文献稀少，AMOS为早期计算机辅助人工方法
+
+2. PRIOR_KNOWLEDGE: [5]的DP方法可优化长期AMCS且15分钟生成4年排程
+
+3. LIMITATION: AMR研究把维护当约束，未计划检查任务
+
+4. LIMITATION: MPP假设任务已知，不制定任务计划
+
+5. LIMITATION: MTS多为航线维护，只处理少量周转任务
+
+6. MECHANISM: 日任务计划桥接AMCS与排班，提前知道任务才能规划班组、工具和备件
+
+7. GAP: 长期与短期AMPs未在同一框架中被考虑，文献中也没有相应DSS
+
+### artifact_design_moves
+
+1. REQUIREMENT: MPD规定所有检查/任务必须在限制前完成
+
+2. REQUIREMENT: 商业约束、维护容量、技能劳动力、班次构成输入边界
+
+3. DESIGN_FEATURE: DSS为Python独立可执行程序，数据库/模型/GUI三层
+
+4. METHOD_JUSTIFICATION: 必须自顶向下，因为不知道检查排程就无法分配任务，不知道任务分配就无法排班
+
+5. DESIGN_FEATURE: AMPO-1采用DP方法最小化未利用FH
+
+6. DESIGN_FEATURE: AMPO-2用WFD装箱启发式并按最紧急任务优先
+
+7. DESIGN_FEATURE: AMPO-3按开面板→检查→维修→关面板顺序分配至班次
+
+8. DESIGN_FEATURE: GUI支持用户修改约束并重新优化
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW: 两个测试用例，一个验证与对标，一个策略分析
+
+2. BENCHMARK_OR_CONTRAST: 与航空公司现行计划比较，与商业求解器比较
+
+3. RESULT: AMPO-1少1次C检少3次A检且FH更高，10分钟完成
+
+4. RESULT: AMPO-2分配60,000任务，最优间隙0.028%
+
+5. RESULT: AMPO-3前2-3天排班与航空公司几乎一致
+
+6. RESULT: 三种情景均产生损失，据此提出策略建议
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: DSS集成三个子问题并支持快速更新计划
+
+2. CONTRIBUTION: DSS桥接长期AMCS与短期排班
+
+3. BOUNDARY_CONDITION: DSS可调整到列车/公交等相似维护规划
+
+4. LIMITATION_AND_FUTURE: GUI、API/SDK、备件约束、CBM是未来方向
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 航空维修领域知识：A/B/C/D字母检查、使用参数FH/FC/DY、MPD限制
+
+2. 长期AMCS优化方法：Deng et al. [5]的动态规划方法
+
+3. 任务分配方法：Witteman et al. [30]的WFD装箱启发式
+
+4. 行业实践：KLM等维护人员规划的DSS经验
+
+5. 航空公司现场约束：技能类型、班次、任务顺序、维护槽位
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：本文虽无传统行为或组织理论，但设计选择直接来自领域知识与先前算法：DP方法直接决定AMPO-1，WFD装箱直接决定AMPO-2，航空公司任务顺序直接决定AMPO-3；这些知识基础在评价中被直接检验，因此属于知识基础前瞻性决定设计并被评价直接检验的情况。
+
+- 理论到设计翻译链：MPD中的检查间隔与安全限制→把检查安排在限制之前并计算剩余利用→AMPO-1目标函数与约束；长期AMCS与短期任务分配之间的依赖关系→自顶向下的三模块结构→AMPO-1输出排程作为AMPO-2的bin边界；任务截止期与技能劳动小时→把任务作为物品、时间仓作为bin、按最紧急优先分配→AMPO-2；任务执行顺序和班次容量→先开面板、再检查/维修、后关面板并依次填入班次→AMPO-3；航空公司需要事前评估策略→把策略建模为场景并与基线比较→测试用例2的KPI与成本收益表。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：MPD规定检查/任务必须在DY/FH/FC达到上限前完成，否则飞机不能飞
+
+- mechanism_cn：安全硬约束使排程必须先于最后期限，并需计算每个部件剩余利用天数
+
+- design_requirement_cn：排程模型必须保留检查间隔约束并能在容量不足时生成额外槽位
+
+- artifact_choice_cn：AMPO-1模型中的约束(A.19)-(A.20)和额外槽位成本，动态规划中先检查未来容量是否足够
+
+- evaluated_contrast_cn：与航空公司计划对比时，检验是否在相同约束下达成更少检查/更高FH
+
+- objective_result_cn：DSS计划少1次C检和3次A检，平均FH更高
+
+##### evidence_pointers
+
+1. Section 3.1.1
+
+2. Appendix A
+
+3. Section 4.1 P3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：长期AMCS可用DP方法优化，[5]的DP方法可生成4年排程且处理多维行动向量
+
+- mechanism_cn：前向归纳检查每个可能动作后未来槽位是否充足，仅保留需最少额外槽位的状态
+
+- design_requirement_cn：DSS需要能在2-6年规划期生成可维修的检查排程
+
+- artifact_choice_cn：AMPO-1采用DP方法，以最小化未利用FH为目标，默认3年规划期
+
+- evaluated_contrast_cn：与航空公司3年人工排程比较检查次数与FH
+
+- objective_result_cn：1次C检和3次A检减少，FH改善，10分钟完成
+
+##### evidence_pointers
+
+1. Section 2.1 P2
+
+2. Section 3.2 Step IV
+
+3. Section 4.1 P3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：任务分配可建模为装箱问题；WFD启发式把资源看作bin、任务看作物品，适合带截止期与资源约束的任务分配
+
+- mechanism_cn：把重叠维护检查切成时间仓，按剩余资源降序选择仓，把最紧急任务优先放入最后可行仓
+
+- design_requirement_cn：任务必须不晚于截止期执行，且每日各技能劳动小时不能超限
+
+- artifact_choice_cn：AMPO-2采用WFD启发式，并允许把顺序任务打包成一个大物品
+
+- evaluated_contrast_cn：与商业求解器比较最优间隙；与航空公司下一年的任务分配方案对比可行性
+
+- objective_result_cn：60,000+任务10分钟内分配，最优间隙0.028%，航空公司专家认为可实施
+
+##### evidence_pointers
+
+1. Section 3.2 Step V
+
+2. Appendix B
+
+3. Section 4.1 P5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：维护任务执行必须遵循开面板→检查→维修→关面板的顺序，且劳动力存在班次与技能约束
+
+- mechanism_cn：只有先分配开面板任务，后续检查/维修/关面板才有意义；班次容量不足时顺延到下一班
+
+- design_requirement_cn：排班必须尊重任务序列、每班可用人数和技能类型
+
+- artifact_choice_cn：AMPO-3按任务顺序逐类分配至早/午/夜班，并生成按技能类型拆分的工卡
+
+- evaluated_contrast_cn：与航空公司前两周人工排班比较
+
+- objective_result_cn：前2-3天几乎一致，第二周差异明显
+
+##### evidence_pointers
+
+1. Section 3.2 Step VII
+
+2. Fig. 3
+
+3. Section 4.1 P6
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：航空公司需要在实际投资前知道未来维护策略的影响；成本收益由检查次数、飞机可用天数和额外槽位成本共同决定
+
+- mechanism_cn：改变槽位/机队规模会改变检查次数和飞机可用天数，进而改变收入与成本
+
+- design_requirement_cn：DSS应能对不同策略生成相同KPI并输出可比较的每飞机收益/成本
+
+- artifact_choice_cn：测试用例2把三个策略建模为情景，使用统一的Gain/Saving/Cost计算框架
+
+- evaluated_contrast_cn：三种策略与Airline Schedule基线比较
+
+- objective_result_cn：三种策略均产生负收益，建议保留当前策略并重新考虑单一增槽方案
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Table 5
+
+3. Equation 3-4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 真实航空公司演示试验
+
+2. 与航空公司现行计划基准比较
+
+3. 与商业优化求解器最优间隙比较
+
+4. 航空公司领域专家验证
+
+5. 未来策略情景分析与成本收益核算
+
+6. 技术成熟度评估（TRL 6）
+
+- why_these_evaluations_cn：由于DSS是设计科学制品，作者需要先证明它在真实约束下能产生比现状更好的计划，因此用航空公司现行计划做基准；由于AMPO-2是启发式，需要用商业求解器量化最优间隙；由于排程/排班最终要被执行，需要领域专家验证可行性；由于DSS声称可用于政策分析，还需要通过多个未来情景证明其不是一次性计划工具。
+
+- benchmark_and_contrast_chain_cn：第一层benchmark是Airline Schedule：AMPO-1在相同约束下用更少次数获得更高FH；第二层benchmark是商业求解器：AMPO-2在解质量上接近最优；第三层benchmark是航空公司的人工排班：AMPO-3前2-3天接近现实；第四层以Airline Schedule为基线做三种未来情景对比，把局部性能差异转化为每飞机收益/损失。层级从可行性到质量再到决策价值逐步上升。
+
+### claim_evidence_ledger
+
+#### 1. DSS生成比航空公司更优的A/C检查排程
+
+- claim_cn：DSS生成比航空公司更优的A/C检查排程
+
+- evidence_cn：AMPO-1输出少1次C检和3次A检，平均FH更高；航空公司专家认可
+
+- status_cn：有直接证据
+
+#### 2. DSS能在20-30分钟内完成三年综合规划
+
+- claim_cn：DSS能在20-30分钟内完成三年综合规划
+
+- evidence_cn：AMPO-1约10分钟、AMPO-2约10分钟、AMPO-3未明确单独计时但总演示给出半个小时内完成
+
+- status_cn：部分证据，AMPO-3计时未单列
+
+#### 3. AMPO-2接近最优
+
+- claim_cn：AMPO-2接近最优
+
+- evidence_cn：与商业求解器最优间隙0.028%
+
+- status_cn：有直接证据
+
+#### 4. 排班结果实用
+
+- claim_cn：排班结果实用
+
+- evidence_cn：航空公司评估前2-3天几乎一致，第二周差异明显
+
+- status_cn：有专家判断，但没有现场执行效果的定量验证
+
+#### 5. DSS可评估未来维护策略
+
+- claim_cn：DSS可评估未来维护策略
+
+- evidence_cn：三种情景均给出KPI和每飞机收益/损失，并提出策略建议
+
+- status_cn：有情景分析证据，但依赖航空公司的成本参数和线性假设
+
+#### 6. DSS实现TRL6
+
+- claim_cn：DSS实现TRL6
+
+- evidence_cn：Clean Sky合作伙伴在演示后测试分类
+
+- status_cn：有外部评定，但文章未给出详细TRL评估过程
+
+- internal_validity_strategy_cn：作者使用同一输入数据和相同运营约束下比较DSS计划与航空公司计划，从而把差异归因于优化算法而非数据差异；对AMPO-2用商业求解器对照，控制了解空间与目标函数一致性；对AMPO-3让航空公司专家用自己的经验判断排班合理性。
+
+- external_validity_strategy_cn：使用合作航空公司的51架真实机队、真实MPD和真实维护约束；引入第二测试用例中的策略变化（机队规模、槽位）来观察不同条件下的KPI变化；在结论中说明DSS框架可迁移到列车/公交维护等相似问题。
+
+- what_is_not_actually_tested_cn：本文没有报告DSS计划在真实机库执行后的实际结果，没有验证第二周排班差异是否会降低执行效率；没有对航空公司成本参数做敏感性分析；没有多次运行或跨不同航空公司验证通用性；情景策略也没有被航空公司实际采纳并跟踪结果。
+
+## 贡献闭环
+
+- technical_claim_cn：提出的DP排程算法和WFD任务分配启发式能在真实规模上高效求解：AMPO-1约10分钟、AMPO-2约10分钟、最优间隙0.028%。
+
+- artifact_claim_cn：DSS作为独立可执行程序，集成了检查排程、任务分配和排班，能在同一框架中生成综合维修计划。
+
+- mechanism_claim_cn：机制层面的主张是：通过先优化检查排程，再在重叠检查构成的时间仓中按最紧急任务优先分配任务，然后按任务顺序排班，可以把长期机队计划可靠地转化为日班次执行计划；在政策分析中，算法会通过增加更频繁的A检来推迟C检，或通过增加C检频率来合并A检，这解释了不同情景的成本差异。
+
+- boundary_claim_cn：DSS适用于以MPD为维修依据、采用字母检查制度、有明确技能劳动力和班次约束的航空公司维修规划；AMPO-3因长期劳动力不确定只排前1-2周；面向飞机设计但可调整到列车/公交等类似维护调度。
+
+- reusable_design_knowledge_cn：可以复用的设计知识包括：把维护规划按自顶向下依赖顺序分解为排程→任务分配→排班；用MPD间隔作为硬约束并计算剩余利用；用重叠检查切片形成bin；用紧急度优先与WFD分配任务；用任务执行顺序驱动排班；用情景化KPI与收益/成本框架支持策略评估。
+
+- theoretical_contribution_cn：理论贡献不是提出新理论，而是把长期AMCS（Deng et al. [5]）与短期MTS（Witteman et al. [30]）两个研究流首次结合到一个优化框架中，并加入排班模块，从而填补了文献中缺少端到端维修规划优化DSS的空白。
+
+- how_discussion_closes_intro_gap_cn：引言指出两个缺口：缺少优化检查排程的DSS和缺少集成检查与任务执行的DSS。结论通过重述DSS集成AMCS、任务分配和排班，以及演示结果（更少检查、更高FH、更快更新计划）直接回应这些缺口；还把DSS定位为策略评估工具，回应引言中‘实践者只能靠经验’的现实问题。
+
+- overclaim_or_unsupported_leaps_cn：作者把检查次数减少与FH提高直接换算为潜在节省金额，但节省未在实际财务结算中验证；把C检/A检成本、日收入和额外槽位成本当作固定参数，没有敏感性分析；AMPO-3的实用性主要依赖航空公司口头评估，缺少执行后KPI；‘20-30分钟完成规划’把AMPO-3时间作为可忽略部分，但文章未单独报告AMPO-3运行时间；TRL6评定被作为外部结论引用，但评定依据未展开。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：现代飞机有数千个部件需要反复检查或更换。
+
+- rhetorical_function_cn：建立航空维修管理的研究背景。
+
+- depends_on_cn：无需依赖前文，直接进入领域。
+
+- sets_up_cn：为说明排程与任务分配的必要性提供前提。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：实践中维修规划者依靠经验解决排程和任务分配两个复杂问题，导致方案次优。
+
+- rhetorical_function_cn：给出当前实践的效率问题。
+
+- depends_on_cn：基于前一句维修任务数量大的背景。
+
+- sets_up_cn：为DSS优化目标提供问题动机。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文提出首个同时优化维修检查排程与任务分配的DSS。
+
+- rhetorical_function_cn：宣告制品的新颖性与核心目标。
+
+- depends_on_cn：承接次优问题，说明有新的解决工具。
+
+- sets_up_cn：引出后续三个测试用例。
+
+- evidence_pointer：Abstract
+
+### 4. Introduction P1 S1
+
+- order：4
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：飞机维修是一系列确保飞机持续适航的检查、维修和改装活动。
+
+- rhetorical_function_cn：定义核心研究对象。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引入适航与检查间隔概念。
+
+- evidence_pointer：Section 1 P1
+
+### 5. Introduction P1 S4-S6
+
+- order：5
+
+- section：Introduction
+
+- locator：Introduction P1 S4-S6
+
+- move_code：CONTEXT
+
+- paraphrase_cn：维修活动在飞行小时、飞行循环或日历天数达到上限后进行，这些使用参数的最大值称为检查间隔。
+
+- rhetorical_function_cn：给出排程问题的硬约束基础。
+
+- depends_on_cn：前文关于维修的定义。
+
+- sets_up_cn：为MPD间隔限制和AMPO-1约束铺垫。
+
+- evidence_pointer：Section 1 P1
+
+### 6. Introduction P2+Step1/Step2
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P2+Step1/Step2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：多数航空公司采用自顶向下方式，先把任务按间隔归并为字母检查并排定检查计划，再把大量去相位的任务人工分配到各检查中。
+
+- rhetorical_function_cn：描述当前维修规划的标准行业流程。
+
+- depends_on_cn：前文检查间隔定义。
+
+- sets_up_cn：为后文把问题拆成AMCS和MTS两个子问题提供流程依据。
+
+- evidence_pointer：Section 1 P2 Step1-Step2
+
+### 7. Introduction P4 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P4 S1-S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：航空业快速增长但维修规划技术进步滞后；大型航空公司的规划人员因缺乏高效工具要花数天到数周排程。
+
+- rhetorical_function_cn：把问题从小规模不便放大到行业紧迫性。
+
+- depends_on_cn：前文人工两阶段规划。
+
+- sets_up_cn：为引入DSS的实践价值做铺垫。
+
+- evidence_pointer：Section 1 P4
+
+### 8. Introduction P4 S3
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：维修成本占航空公司总成本9%-10%，约每架飞机每年250万美元，因此高效规划可带来重大节省。
+
+- rhetorical_function_cn：用具体成本数字说明缺口为什么值得解决。
+
+- depends_on_cn：前文规划耗时长。
+
+- sets_up_cn：为贡献主张中的成本节省提供量级。
+
+- evidence_pointer：Section 1 P4
+
+### 9. Introduction P5 S1-S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P5 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有商业系统如Solumina MRO、WinAir等主要管理追踪维护任务状态，为人工规划提供计算机辅助。
+
+- rhetorical_function_cn：总结现有商业制品的能力。
+
+- depends_on_cn：前文AMP问题的复杂度。
+
+- sets_up_cn：为指出商业工具不能自动优化提供对照。
+
+- evidence_pointer：Section 1 P5
+
+### 10. Introduction P5 S3
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P5 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：据作者所知，这些商业工具都没有自动生成优化维护计划的功能。
+
+- rhetorical_function_cn：指出现有制品的直接缺陷。
+
+- depends_on_cn：前一句工具功能列表。
+
+- sets_up_cn：为文献缺口中的商业层面提供依据。
+
+- evidence_pointer：Section 1 P5
+
+### 11. Introduction P6 S2
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P6 S2
+
+- move_code：GAP
+
+- paraphrase_cn：现有学术和工业水平存在两个限制：缺少优化检查排程的DSS，也缺少把检查排程与任务执行集成优化的DSS；文献中没有在单一优化框架中整合两者的工作。
+
+- rhetorical_function_cn：明确本文要填补的核心空白。
+
+- depends_on_cn：综合前文商业工具局限与AMP问题。
+
+- sets_up_cn：为AIRMES项目与三重贡献直接定位。
+
+- evidence_pointer：Section 1 P6
+
+### 12. Introduction P7 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P7 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：2015年AIRMES项目由Clean Sky发起，目标是在航空公司环境内优化端到端维修活动。
+
+- rhetorical_function_cn：说明DSS的产业与资助背景。
+
+- depends_on_cn：前文缺口。
+
+- sets_up_cn：为后文作者开发DSS提供合法性。
+
+- evidence_pointer：Section 1 P7
+
+### 13. Introduction P8 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P8 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：DSS把检查排程、任务分配和班组排班整合在同一框架中，而实践中这些过程分别用不同工具处理，文献中也分开研究。
+
+- rhetorical_function_cn：宣告第一项贡献。
+
+- depends_on_cn：基于文献缺口。
+
+- sets_up_cn：为系统架构三模块做预告。
+
+- evidence_pointer：Section 1 P8
+
+### 14. Introduction P9 S2
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P9 S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文将用一家欧洲主要航空公司的案例研究说明DSS对维修规划优化和未来情景分析的作用。
+
+- rhetorical_function_cn：预告评价部分。
+
+- depends_on_cn：前文贡献声明。
+
+- sets_up_cn：为第四部分演示与评价做路标。
+
+- evidence_pointer：Section 1 P9
+
+### 15. Section 2 P1 S3
+
+- order：15
+
+- section：Related work
+
+- locator：Section 2 P1 S3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：高效AMP的收益来自两方面：提高飞机可用性从而增加收入，以及减少检查次数从而降低长期运营成本。
+
+- rhetorical_function_cn：给出维修规划优化的因果机制。
+
+- depends_on_cn：欧洲航空公司净利率低、维修成本高的背景。
+
+- sets_up_cn：为测试用例中的Gain/Saving核算提供理论根据。
+
+- evidence_pointer：Section 2 P1
+
+### 16. Section 2.1 P1 S2-S3
+
+- order：16
+
+- section：Related work
+
+- locator：Section 2.1 P1 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：1977年Air Canada开发了长期AMCS的早期DSS AMOS，属于计算机辅助人工规划，将5年C检排程从3周缩短到几小时。
+
+- rhetorical_function_cn：说明长期AMCS领域历史悠久但未走优化路线。
+
+- depends_on_cn：长期规划定义。
+
+- sets_up_cn：为[5]的DP方法作为本文基础做铺垫。
+
+- evidence_pointer：Section 2.1 P1
+
+### 17. Section 2.1 P2 S1-S3
+
+- order：17
+
+- section：Related work
+
+- locator：Section 2.1 P2 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：[5]在AIRMES项目中提出基于DP的长期AMCS方法，采用[3]的问题假设，可生成4年优化排程并用于后续任务和班次规划。
+
+- rhetorical_function_cn：介绍本文AMPO-1的直接技术前身。
+
+- depends_on_cn：前文AMOS缺口。
+
+- sets_up_cn：为系统架构复用DP方法提供依据。
+
+- evidence_pointer：Section 2.1 P2
+
+### 18. Section 2.2 P1
+
+- order：18
+
+- section：Related work
+
+- locator：Section 2.2 P1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：长期AMCS文献很少，而短期AMP研究很多，因为短期优化能在数天或数周内看到直接效益。
+
+- rhetorical_function_cn：说明文献分布不平衡。
+
+- depends_on_cn：前两节长期规划篇幅少的事实。
+
+- sets_up_cn：为随后分述AMR/MPP/MTS并指出各自局限做铺垫。
+
+- evidence_pointer：Section 2.2 P1
+
+### 19. Section 2.2.1 S1-S2
+
+- order：19
+
+- section：Related work
+
+- locator：Section 2.2.1 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：AMR研究设计航线满足维护要求，但通常把维护当运营约束，不规划维修检查或任务本身。
+
+- rhetorical_function_cn：指出短期AMP中一类文献的边界。
+
+- depends_on_cn：AMR定义。
+
+- sets_up_cn：为论证需要任务规划的DSS提供对照。
+
+- evidence_pointer：Section 2.2.1
+
+### 20. Section 2.2.2 S3-S4
+
+- order：20
+
+- section：Related work
+
+- locator：Section 2.2.2 S3-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：MPP研究优化维护劳动力供应和成本，但通常假设维护任务已给定，不规划任务本身。
+
+- rhetorical_function_cn：指出MPP文献未覆盖任务规划。
+
+- depends_on_cn：前文MPP定义。
+
+- sets_up_cn：为任务分配模块填补空白做铺垫。
+
+- evidence_pointer：Section 2.2.2
+
+### 21. Section 2.2.3 P1 S3-S4
+
+- order：21
+
+- section：Related work
+
+- locator：Section 2.2.3 P1 S3-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：航线维修MTS只优化飞机周转期间的少量任务，具有运营性质。
+
+- rhetorical_function_cn：说明MTS大多局限在短时窗。
+
+- depends_on_cn：MTS定义。
+
+- sets_up_cn：为把MTS扩展到机库长期检查任务做铺垫。
+
+- evidence_pointer：Section 2.2.3 P1
+
+### 22. Section 2.2.3 P2 S2
+
+- order：22
+
+- section：Related work
+
+- locator：Section 2.2.3 P2 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：每日维护任务计划连接了长期AMCS与排班：提前知道每日任务才能规划班次、工具和备件。
+
+- rhetorical_function_cn：明确AMCS、MTS和排班之间的逻辑依赖。
+
+- depends_on_cn：前文对日机库维护的讨论。
+
+- sets_up_cn：为本文自顶向下三模块架构提供依据。
+
+- evidence_pointer：Section 2.2.3 P2
+
+### 23. Section 2.2.3 P2 S4
+
+- order：23
+
+- section：Related work
+
+- locator：Section 2.2.3 P2 S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：[30]提出装箱方法在给定长期检查排程下确定每天维护任务，形成3-5年的每日任务计划。
+
+- rhetorical_function_cn：介绍AMPO-2的直接技术前身。
+
+- depends_on_cn：前句‘需要知道每日任务’的逻辑。
+
+- sets_up_cn：为系统架构中引用WFD方法做铺垫。
+
+- evidence_pointer：Section 2.2.3 P2
+
+### 24. Section 2.3 S1
+
+- order：24
+
+- section：Related work
+
+- locator：Section 2.3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：据作者所知，多数AMP研究集中于AMR或MPP，假设任务给定；长期与短期AMP从未在单一框架中考虑，文献中也没有这样的DSS。
+
+- rhetorical_function_cn：综合文献形成明确空白。
+
+- depends_on_cn：前两节对AMR/MPP/MTS的逐项限制。
+
+- sets_up_cn：为本文集成化DSS定位。
+
+- evidence_pointer：Section 2.3 S1
+
+### 25. Section 2.3 S2
+
+- order：25
+
+- section：Related work
+
+- locator：Section 2.3 S2
+
+- move_code：GAP
+
+- paraphrase_cn：两个挑战是：学术文献没有能在机队级生成集成检查与任务执行计划的DSS；商业DSS即使存在也都不优化检查排程。
+
+- rhetorical_function_cn：把文献空白拆成学术与商业两个层面。
+
+- depends_on_cn：前一句的总体判断。
+
+- sets_up_cn：为论文贡献声明提供精确靶点。
+
+- evidence_pointer：Section 2.3 S2
+
+### 26. Section 2.3 S3
+
+- order：26
+
+- section：Related work
+
+- locator：Section 2.3 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：维修规划人员需投入大量时间排检并协调任务；现有DSS辅助下仍可能得到低效计划，长期导致更多检查和更高成本。
+
+- rhetorical_function_cn：把文献缺口与现实后果连接。
+
+- depends_on_cn：前两个挑战。
+
+- sets_up_cn：为DSS提高规划效率提供现实理由。
+
+- evidence_pointer：Section 2.3 S3
+
+### 27. Section 2.3 S4
+
+- order：27
+
+- section：Related work
+
+- locator：Section 2.3 S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文DSS通过整合[5]的AMCS、[30]的MTS和排班方法，桥接长期与短期AMP。
+
+- rhetorical_function_cn：给出研究目标与解决路径。
+
+- depends_on_cn：文献两个挑战。
+
+- sets_up_cn：预告第三部分系统架构。
+
+- evidence_pointer：Section 2.3 S4
+
+### 28. Section 3 P1 S1-S3
+
+- order：28
+
+- section：System architecture
+
+- locator：Section 3 P1 S1-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DSS是基于Python的独立软件原型，已转为可执行文件，无需安装或许可证即可在PC上运行，由数据库、模型和GUI三层组成。
+
+- rhetorical_function_cn：描述制品总体形态。
+
+- depends_on_cn：前文研究目标。
+
+- sets_up_cn：为逐步说明数据层、模型层、GUI做结构预告。
+
+- evidence_pointer：Section 3 P1
+
+### 29. Section 3.1.1 S2-S3
+
+- order：29
+
+- section：System architecture
+
+- locator：Section 3.1.1 S2-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：MPD规定所有字母检查和任务必须在使用参数达到上限前执行，违反会因安全问题阻止飞机飞行。
+
+- rhetorical_function_cn：把安全规则定义为不可违反的输入要求。
+
+- depends_on_cn：引言中的检查间隔概念。
+
+- sets_up_cn：为AMPO-1和AMPO-2中的间隔约束提供依据。
+
+- evidence_pointer：Section 3.1.1
+
+### 30. Section 3.1.3
+
+- order：30
+
+- section：System architecture
+
+- locator：Section 3.1.3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：运营中心定义商业约束，维护部门定义容量约束，包括每天维护槽位数、不允许同日重检、预定义检查等。
+
+- rhetorical_function_cn：把现实约束转成模型输入。
+
+- depends_on_cn：前文数据库输入分类。
+
+- sets_up_cn：为Step III识别维护机会做铺垫。
+
+- evidence_pointer：Section 3.1.3
+
+### 31. Section 3.2 P1 S2-S3
+
+- order：31
+
+- section：System architecture
+
+- locator：Section 3.2 P1 S2-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型层包含AMPO-1排程、AMPO-2任务分配和AMPO-3排班三个模型，遵循自顶向下方式依次执行。
+
+- rhetorical_function_cn：描述模型层主干结构。
+
+- depends_on_cn：文献中MTS与AMCS依赖关系。
+
+- sets_up_cn：为七个处理步骤做组织框架。
+
+- evidence_pointer：Section 3.2 P1
+
+### 32. Section 3.2 P2
+
+- order：32
+
+- section：System architecture
+
+- locator：Section 3.2 P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用自顶向下是因为不知道检查排程就无法规划任务，不知道任务执行就无法规划班次。
+
+- rhetorical_function_cn：解释模块顺序的必然性。
+
+- depends_on_cn：前文三模型描述。
+
+- sets_up_cn：为Step IV-VII的流水线作逻辑准备。
+
+- evidence_pointer：Section 3.2 P2
+
+### 33. Section 3.2 Step IV
+
+- order：33
+
+- section：System architecture
+
+- locator：Section 3.2 Step IV
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：AMPO-1当前以最小化整个机队的未利用FH为唯一目标，采用[5]的DP方法，通过前向归纳、维护优先级、离散化和状态聚合来降低状态空间。
+
+- rhetorical_function_cn：说明排程优化模块的算法与目标。
+
+- depends_on_cn：MPD间隔与维护机会输入。
+
+- sets_up_cn：为演示中KPI的FH指标提供定义。
+
+- evidence_pointer：Section 3.2 Step IV
+
+### 34. Section 3.2 Step V
+
+- order：34
+
+- section：System architecture
+
+- locator：Section 3.2 Step V
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：AMPO-2把重叠加检查划分成时间仓，把维护任务当物品，按剩余容量从高到低选择仓，并按最紧急任务优先分配。
+
+- rhetorical_function_cn：说明任务分配模块的具体算法机制。
+
+- depends_on_cn：AMPO-1排程输出。
+
+- sets_up_cn：为Fig.2和后续最优间隙评价提供依据。
+
+- evidence_pointer：Section 3.2 Step V
+
+### 35. Section 3.2 Step V 任务顺序段
+
+- order：35
+
+- section：System architecture
+
+- locator：Section 3.2 Step V 任务顺序段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：对必须按顺序执行的任务（如开面板、检查、更换、关面板），算法把多个任务打包成一个物品，保证整包执行。
+
+- rhetorical_function_cn：补充任务分配对操作顺序的处理。
+
+- depends_on_cn：航空公司任务顺序要求。
+
+- sets_up_cn：为AMPO-3排班中同样顺序要求做铺垫。
+
+- evidence_pointer：Section 3.2 Step V, Table 4
+
+### 36. Section 3.2 Step VII
+
+- order：36
+
+- section：System architecture
+
+- locator：Section 3.2 Step VII
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：由于长期劳动力存在不确定性，AMPO-3只排最初1-2周的班组与工卡。
+
+- rhetorical_function_cn：说明排班模块边界。
+
+- depends_on_cn：任务分配输出。
+
+- sets_up_cn：为排班结果与人工经验对比的范围限定。
+
+- evidence_pointer：Section 3.2 Step VII
+
+### 37. Section 3.3 P2-S3
+
+- order：37
+
+- section：System architecture
+
+- locator：Section 3.3 P2-S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：GUI提供五个屏幕，显示每日排程、机库视图、KPI、任务分配、班组工作量，并允许用户修改规划期、维护槽位等约束后重新优化。
+
+- rhetorical_function_cn：说明人机交互功能。
+
+- depends_on_cn：AIRMES项目对GUI的需求。
+
+- sets_up_cn：为演示中可视化排程图与KPI屏幕打基础。
+
+- evidence_pointer：Section 3.3, Fig.4, Fig.5
+
+### 38. Section 4 P1-P2
+
+- order：38
+
+- section：Demonstration and evaluation
+
+- locator：Section 4 P1-P2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：演示试验在AIRMES项目框架下用51架飞机于2019年3月进行，由欧洲主要航空公司和制造商参与；设计两个测试用例，一个验证DSS并与航空公司现有计划对比，一个用于未来维护策略分析。
+
+- rhetorical_function_cn：给出评价场景总览。
+
+- depends_on_cn：前文DSS架构。
+
+- sets_up_cn：为后续4.1和4.2两小节设定任务。
+
+- evidence_pointer：Section 4 P1-P2
+
+### 39. Section 4.1 P3
+
+- order：39
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.1 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：AMPO-1的C检平均FH为6946.5，A检平均FH为705.1，高于航空公司计划的6783.8和701.1；同时少1次C检、少3次A检，10分钟内完成，航空公司专家认可该排程更好。
+
+- rhetorical_function_cn：报告第一个核心基准结果。
+
+- depends_on_cn：AMPO-1算法和演示数据。
+
+- sets_up_cn：为随后成本节省换算提供数字基础。
+
+- evidence_pointer：Section 4.1 P3, Fig.6-7
+
+### 40. Section 4.1 P4
+
+- order：40
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.1 P4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：少1次C检和3次A检换算为潜在节省$0.1M-$0.4M，并增加约10-31天可商业运营的飞机可用时间。
+
+- rhetorical_function_cn：把KPI差异转换成财务和管理含义。
+
+- depends_on_cn：前一句检查次数差异。
+
+- sets_up_cn：证明DSS对航空公司有实际价值。
+
+- evidence_pointer：Section 4.1 P4
+
+### 41. Section 4.1 P5
+
+- order：41
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.1 P5
+
+- move_code：RESULT
+
+- paraphrase_cn：AMPO-2在10分钟内为整个机队和所有字母检查分配超过60,000个任务，与商业求解器相比最优间隙只有0.028%，航空公司专家认为结果可实施。
+
+- rhetorical_function_cn：报告任务分配模块的质量证据。
+
+- depends_on_cn：AMPO-1排程作为输入。
+
+- sets_up_cn：证明启发式不是以牺牲解质量换取速度。
+
+- evidence_pointer：Section 4.1 P5, Fig.8
+
+### 42. Section 4.1 P6
+
+- order：42
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.1 P6
+
+- move_code：RESULT
+
+- paraphrase_cn：AMPO-3生成两周排班，航空公司评估表示前2-3天几乎与自己排班一致，但第二周差异变得显著。
+
+- rhetorical_function_cn：报告排班模块的验证结果。
+
+- depends_on_cn：AMPO-2任务分配输出。
+
+- sets_up_cn：说明排班模块与人工做法的一致性和差异性。
+
+- evidence_pointer：Section 4.1 P6, Fig.9
+
+### 43. Section 4.2 P1
+
+- order：43
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：第二个测试用例用DSS在实施前评估三种维护策略，所有情景与基线Airline Schedule比较。
+
+- rhetorical_function_cn：开启策略分析评价。
+
+- depends_on_cn：第一个测试用例验证了基本有效性。
+
+- sets_up_cn：为Table 5中的KPI对比做预告。
+
+- evidence_pointer：Section 4.2 P1
+
+### 44. Section 4.2 Table 5前收益公式段
+
+- order：44
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Table 5前收益公式段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：DSS计划相对基线每架飞机C检收益30.9K美元、A检收益6.4K美元，总计37.3K美元，这是用Gain、Saving和Cost三类金额计算的。
+
+- rhetorical_function_cn：建立统一的经济比较框架。
+
+- depends_on_cn：航空公司提供的日收入、检查成本、槽位成本参数。
+
+- sets_up_cn：为各情景损失分析提供基准。
+
+- evidence_pointer：Section 4.2 Table 5前与Equation 3-4
+
+### 45. Section 4.2 Scenario 1段
+
+- order：45
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Scenario 1段
+
+- move_code：RESULT
+
+- paraphrase_cn：情景1增加C检每日槽位但缩短C检可执行窗口，结果不足以应对当前机队C检需求，每架飞机总损失75.4K美元。
+
+- rhetorical_function_cn：给出第一个策略情景的否定性结果。
+
+- depends_on_cn：Table 5与收益公式。
+
+- sets_up_cn：为作者建议保留当前策略提供证据。
+
+- evidence_pointer：Section 4.2 Scenario 1
+
+### 46. Section 4.2 Scenario 1 机制解释段
+
+- order：46
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Scenario 1 机制解释段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：AMPO-1算法会通过更频繁地安排A检来推迟C检，因为增加A检可使C检在FH限制下延后一天执行，这解释了为何A检次数增加和损失扩大。
+
+- rhetorical_function_cn：解释情景结果背后的优化行为。
+
+- depends_on_cn：情景1的KPI。
+
+- sets_up_cn：为情景3中C检频率增加的行为解释作类比。
+
+- evidence_pointer：Section 4.2 Scenario 1 示例段
+
+### 47. Section 4.2 Scenario 2段
+
+- order：47
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Scenario 2段
+
+- move_code：RESULT
+
+- paraphrase_cn：情景2中机队从51增至66后，当前A检容量不足，产生大量额外A检槽位，每架飞机损失339.8K美元。
+
+- rhetorical_function_cn：给出机队增长情景下的负面结果。
+
+- depends_on_cn：Table 5中情景2列。
+
+- sets_up_cn：为情景3增加周五A检槽位的讨论提供起点。
+
+- evidence_pointer：Section 4.2 Scenario 2
+
+### 48. Section 4.2 Scenario 3段
+
+- order：48
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Scenario 3段
+
+- move_code：RESULT
+
+- paraphrase_cn：情景3增加周五A检槽位后，额外A检容量需求从75降到9，但检查次数增加导致商业运营损失扩大，总损失增至437.3K美元。
+
+- rhetorical_function_cn：说明表面缓解容量不足的方案反而带来更大损失。
+
+- depends_on_cn：情景2结果与Table 5。
+
+- sets_up_cn：为‘仅增加一个周五A检槽位并不足够’的建议提供支持。
+
+- evidence_pointer：Section 4.2 Scenario 3
+
+### 49. Section 4.2 Scenario 3 机制解释段
+
+- order：49
+
+- section：Demonstration and evaluation
+
+- locator：Section 4.2 Scenario 3 机制解释段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：为避免额外槽位成本，优化算法更频繁安排C检，以便把A检合并进C检，从而增加检查次数并减少飞机收入。
+
+- rhetorical_function_cn：解释为何情景3的C检/ A检次数都会上升。
+
+- depends_on_cn：Table 5中情景3检查次数。
+
+- sets_up_cn：为结论中‘考虑增加更多A检槽位’的建议作准备。
+
+- evidence_pointer：Section 4.2 Scenario 3
+
+### 50. Section 5 P1 S1
+
+- order：50
+
+- section：Conclusion
+
+- locator：Section 5 P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文提出一个集成化DSS，把检查排程、任务分配和排班自动化，并支持快速高效的人机协同决策。
+
+- rhetorical_function_cn：在结论处重新声明制品贡献。
+
+- depends_on_cn：前文系统架构与演示结果。
+
+- sets_up_cn：为后续桥接长期与短期的论述做总起。
+
+- evidence_pointer：Section 5 P1
+
+### 51. Section 5 P2 S1
+
+- order：51
+
+- section：Conclusion
+
+- locator：Section 5 P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：DSS桥接了长期AMCS与短期排班之间的空白，把三个过程整合在同一平台，并用欧洲航空公司的演示证明能在半小时内生成三年综合计划。
+
+- rhetorical_function_cn：直接回应引言中的两个缺口。
+
+- depends_on_cn：测试用例1结果。
+
+- sets_up_cn：为‘规划人员可快速更新计划’的实用性作铺垫。
+
+- evidence_pointer：Section 5 P2
+
+### 52. Section 5 P3
+
+- order：52
+
+- section：Conclusion
+
+- locator：Section 5 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：演示结果相比航空公司计划少3次A检和1次C检，A/C检平均FH分别提高2.4%和0.6%，并被Clean Sky伙伴评定为TRL6。
+
+- rhetorical_function_cn：用定量结果和外部评定强化贡献。
+
+- depends_on_cn：4.1节结果。
+
+- sets_up_cn：为下一段限制与未来方向提供‘已达标但仍有差距’的转折。
+
+- evidence_pointer：Section 5 P3
+
+### 53. Section 5 限制段
+
+- order：53
+
+- section：Conclusion
+
+- locator：Section 5 限制段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者列出未来改进方向：GUI优化、与航空公司信息系统集成（API/SDK）、在任务分配中加入航材备件约束，以及纳入基于状态维修。
+
+- rhetorical_function_cn：说明制品当前边界和后续演进空间。
+
+- depends_on_cn：前文TRL6和AIRMES项目重点。
+
+- sets_up_cn：为结论最后一段的领域外可迁移性做铺垫。
+
+- evidence_pointer：Section 5 限制段
+
+### 54. Section 5 最后一段
+
+- order：54
+
+- section：Conclusion
+
+- locator：Section 5 最后一段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：虽然DSS针对飞机维修，但框架可调整到列车、公交维护甚至更一般的调度问题。
+
+- rhetorical_function_cn：扩大制品的适用范围。
+
+- depends_on_cn：前文[5]算法为通用决策评估思想。
+
+- sets_up_cn：为读者理解本文贡献不止于一次性飞机案例。
+
+- evidence_pointer：Section 5 最后一段
+
+## 写作技术
+
+- gap_construction_cn：作者先用现实人工规划的低效和成本数据建立问题，再按长期/短期两条文献线分别指出AMR和MPP‘不规划任务’、MTS只处理短时窗等局限，最后把学术与商业工具合在一起指出两类缺口：没有自动优化排程的DSS，更没有集成排程与任务分配的DSS。缺口类型主要是‘现有制品不能实现’和‘文献中没有集成框架’。
+
+- signposting_cn：摘要末尾直接给出三重贡献；引言末段用‘本文结构如下’逐节预告；第3节开头说明先数据库、再模型、再GUI；第4节开头说明两个测试用例的任务；第5节结论前再总结三大功能。
+
+- transition_logic_cn：从引言到相关工作用‘AMP挑战来自缺乏优化方法’过渡；从相关工作到系统架构用‘为应对这些挑战我们开发了DSS’过渡；从AMPO-1到AMPO-2用‘一旦AMPO-1制定最优排程，DSS就分配任务’过渡；从测试用例1到测试用例2用‘第一用例验证优化，第二用例分析未来策略’过渡。
+
+- claim_evidence_rhythm_cn：每个设计模块描述后立即给出相应的运行时和性能证据：AMPO-1后给FH与检查次数，AMPO-2后给最优间隙，AMPO-3后给航空公司排班对比；经济换算紧随KPI结果出现，形成‘结果→量化价值→专家确认’的节奏。
+
+- benchmark_narrative_cn：把Airline Schedule作为贯穿全文的基准：第一测试用例用它证明DSS更优；第二测试用例以它为基线计算三个情景的Gain/Saving/Cost；同时用商业求解器作为AMPO-2解质量的外部基准。Benchmark不是放在独立实验一节，而是嵌入演示叙事中。
+
+- theory_return_cn：文章没有回到某个宏大理论，而是回到文献研究中识别出的‘长期AMCS与短期AMP分裂’这一结构性问题，用DSS把[5]和[30]两个方法链条接通，并在结论中把这种接通本身作为理论贡献。
+
+- contribution_positioning_cn：贡献定位刻意强调‘first DSS’和‘bridging two research streams’，而不是单纯说算法更好；三重贡献分别对应制品集成、实践收益和政策分析，形成‘系统、结果、用途’三个层次。
+
+- novelty_protection_cn：作者用三条策略保护贡献：一是强调集成性（三段流程从未在同一框架出现）；二是用真实数据和多层benchmark证明性能；三是把DSS扩展到策略评估，说明它不是一次性调度软件，从而避免被视为只是另一个启发式工具。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：描述领域流程和现状：先说明任务类型、硬约束、当前人工规划流程，再点出人工经验导致次优。
+
+- research_job_cn：识别一个由复杂约束和人工决策组成的运营问题，并确认该问题有明确的业务后果。
+
+- required_evidence_cn：需要领域术语、流程步骤、规模数据（如任务数量、检查间隔、成本占比）来说明问题不是琐碎任务。
+
+- transition_to_next_cn：由‘当前流程低效’过渡到‘已有工具和文献仍不能自动处理’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用具体百分比、美元金额和耗时说明问题的重要性。
+
+- research_job_cn：收集行业报告或案例数据，证明改进空间巨大。
+
+- required_evidence_cn：至少一个权威来源的成本占比或绝对金额；一个人工规划耗时的估计。
+
+- transition_to_next_cn：从‘值得解决’进入‘文献缺什么’。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：按问题分解线（长期/短期；学术/商业）综述已有文献和商业系统，并逐个指出它们没有覆盖的子问题。
+
+- research_job_cn：系统检索长期排程、任务分配、人员规划、路由文献，并按维度分类。
+
+- required_evidence_cn：每个类别至少若干代表性文献；能清楚说明每类文献的前提假设和盲区。
+
+- transition_to_next_cn：把各类局限汇总为两个明确的缺口。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：明确声明存在‘无人做集成’或‘现有工具不能优化’缺口，并说明缺少该工具的实际后果。
+
+- research_job_cn：确认没有已有工作恰好解决同一问题，尤其是没有把多个依赖性子问题放在同一框架。
+
+- required_evidence_cn：文献检索结论和商业工具功能说明。
+
+- transition_to_next_cn：从缺口自然引出自己的制品和总体目标。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：给出系统架构，说明输入数据、模块划分和模块间依赖；解释为什么采用当前分解顺序。
+
+- research_job_cn：把运营问题按数据/模型/界面分层，并把优化流程按输入输出依赖串起来。
+
+- required_evidence_cn：真实系统可执行或原型实现的描述；至少一个明确依赖关系证明模块顺序不是随意的。
+
+- transition_to_next_cn：架构介绍完成后，逐模块说明算法。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：为每个模块描述求解方法、目标函数、约束和关键设计选择，并说明为什么选当前算法。
+
+- research_job_cn：对每个子问题选择或设计可计算的方法，并在真实规模数据上测试运行时间和可行性。
+
+- required_evidence_cn：运行时间、解规模、约束满足情况；如使用启发式，需要提供与最优/求解器比较的证据。
+
+- transition_to_next_cn：算法描述完成后，进入现场演示或案例验证。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：用真实或接近真实的数据把系统输出与行业现有做法或最优解对比，并用领域专家确认可行性。
+
+- research_job_cn：获取行业数据、Baseline计划、专家反馈；可加求解器对标。
+
+- required_evidence_cn：KPI差异、专家认可、最优间隙等。
+
+- transition_to_next_cn：从‘能优化当前计划’扩展到‘能回答未来策略问题’。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：把系统用于多个未来情景，输出不同策略的KPI和经济学比较；结论中回到引言缺口并列出边界与未来方向。
+
+- research_job_cn：设计有意义的情景变量（容量、机队规模、槽位），用同一KPI框架统一比较。
+
+- required_evidence_cn：各情景KPI和收益/成本核算；能提出管理建议。
+
+- transition_to_next_cn：结论把结果上升为‘集成框架和策略评估能力’的贡献。
+
+### most_transferable_moves_cn
+
+1. 把运营问题拆成有依赖关系的子问题并明确模块间输入输出，是大型系统论文可复制的结构
+
+2. 用同一kpi框架同时做当前计划对标和未来情景分析，能提高DSS论文的知识贡献
+
+3. 在每个模块描述后紧跟运行时间、最优间隙或专家确认，形成‘设计—证据’节奏
+
+4. 用行业成本参数把计划层面的检查次数差异翻译成财务收益，增加实践说服力
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要真实航空公司的MPD、机队状态、维护机会、劳动力数据，且规模达到51架飞机和数万任务量
+
+2. 需要航空公司现有的长周期维护计划作为基准，并让维护规划人员评估结果可行性
+
+3. 需要AIRMES/Clean Sky这类项目平台，提供产业合作关系和TRL评定
+
+4. 需要商业优化求解器作为AMPO-2最优间隙对照
+
+5. 需要航空公司给出日收入、检查成本、额外槽位成本等经济参数，才能做Gain/Saving/Cost换算
+
+### what_not_to_copy_superficially_cn
+
+1. 不要在只有合成数据或小规模算例时宣称‘first DSS’或‘真实航空公司验证’
+
+2. 不要在没有商业求解器或最优点对照时把启发式解直接描述成‘最优’
+
+3. 不要在没有成本参数来源时把检查次数差异直接换算成节省金额
+
+4. 不要把专家口头认可等同于实施后绩效证据
+
+5. 不要只复制‘集成三个问题’的措辞，却没有证明模块间依赖和端到端输出
+
+- single_best_description_of_the_routine_cn：用领域流程把复杂运营问题拆成三个有依赖的子问题，分别用已知优化算法构建模块，再以真实伙伴数据做性能对标，最后把同一工具扩展到未来策略情景评估，从而把局部结果上升为系统层面的设计贡献。
+
+## 分析边界
+
+提供的全文为文本抽取版，Fig.1-9的部分截图未显示内容，只能依据正文和图题进行推断；没有实际页码，位置以章节和自然段标识；Appendix A和B给出的公式后参数表存在排版截断，但未影响对研究设计和评价逻辑的判断；TRL6评定证据仅以结论一句话提及，无法核实评估过程。

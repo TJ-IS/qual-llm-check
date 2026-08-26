@@ -1,0 +1,1122 @@
+{
+  "record_id": "28510",
+  "source_file": "28510_2023_personalized-ranking-at-a-mobile-app-distribution-platform.md",
+  "title": "Personalized Ranking at a Mobile App Distribution Platform",
+  "authors": "Shengjun Mao; Sanjeev Dewan; Yi-Jen (Ian) Ho",
+  "year": "2023",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.1156",
+  "fulltext_chars": 95833,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "economic_and_welfare",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:35:32.583455+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在移动应用分发平台中，平台应如何利用用户点击流数据中的显示偏好，设计个性化应用排序，以同时提升消费者效用与平台收入？",
+    "artifact_and_design_cn": "文章构建了一个个性化应用排序框架：先估计用户点击与安装的两阶段结构效用模型，再结合应用实际CPA边际收益，设计个性化排序方案，核心制品是混合边际与效用边际排序（HMUM，即顶部高效用应用按边际收益排序，其余应用按效用×边际收益排序）。",
+    "objective_outcomes_cn": "与基于平均效用的非个性化排名基准相比，个性化效用排序提升预期收入4.92%，个性化效用×边际排序提升15.56%，个性化HMUM提升16.73%。非个性化的效用×边际和混合排序仅提升约2.5%。",
+    "core_contribution_cn": "作者声称本文首次在移动应用分发情境中结合个体效用与CPA边际收益研究个性化排名，利用用户-印象层面的细粒度点击流数据和真实CPA边际，提出并证明个性化混合排序能显著提高平台收入，同时为平台提供可落地的排序与文本内容管理建议。",
+    "whole_argument_in_one_paragraph_cn": "文章从第三方应用分发平台普遍使用简单排序指标、忽略用户价值驱动因素这一现实问题出发，指出排序收入取决于印象展示顺序，而既有排序研究主要使用平均效用，缺少个性化和边际收益信息。作者获取包含CPA边际的用户-印象级点击流数据，用层级贝叶斯两阶段二元Probit模型估计个体点击与安装效用，并通过模型拟合比较和稳健性检验确认模型可用。随后，作者利用结构参数做反事实政策实验，比较非个性化与个性化的效用、效用×边际和混合排序，证明个性化HMUM收入最高。最后，作者将结果转回关于排序设计、个性化价值与平台变现的理论讨论，并提出分夜批处理的实施建议。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章的核心是构建一个基于结构效用模型与CPA边际的个性化排序框架和HMUM算法，并通过对多种排序方案的反事实政策实验进行评价，最后提炼出可复用的设计知识和管理含义，符合“需求/原则—构建—评价—设计知识”的设计科学研究弧线。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "论文先指出现实平台排序性能与收益缺口，再构建个性化混合排序制品，以平均效用排序为基准进行benchmark，随后将政策实验结果一般化为平台排序设计与变现知识，符合“性能缺口—制品—基准—一般化设计知识”的写作主线。",
+  "research_program": {
+    "study_or_phase_count": 6,
+    "overall_sequence_cn": "研究从理论建模出发，确定排序方案可能的最优形态；随后进入实证阶段，通过特殊数据构建文本与数值特征；再用层级贝叶斯结构估计恢复个体效用；接着用模型拟合比较与稳健性检验确保证据可信；最后用反事实政策实验直接比较排序方案，并将结果转化为管理实施建议。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "分析性排序模型（线上附录，正文概述）",
+        "question_cn": "在存在搜索成本、应用质量差异和用户口味异质性时，平台应如何设计个性化与非个性化排序？",
+        "inputs_and_setting_cn": "一个关于offer wall应用消费的简约分析模型，包含探索成本、应用质量和消费者质量偏好异质性；没有直接使用实证数据。",
+        "designed_or_compared_object_cn": "比较个性化排序与非个性化排序，并导出混合排序的逻辑。",
+        "baseline_control_or_counterfactual_cn": "非个性化排序。",
+        "objective_metrics": [
+          "平台收入"
+        ],
+        "analysis_method_cn": "分析模型求解与命题推导。",
+        "main_result_cn": "关键结果是混合排序方案可能最有效：顶部放用户最喜欢且最可能点击的应用并按边际收益排序，其余按效用×边际收益排序。",
+        "argumentative_role_cn": "为后续HMUM排序设计提供理论方向，说明混合个性化排序不是临时启发式。",
+        "remaining_uncertainty_cn": "简约模型假设较强，未经过实证检验；真实世界需要结构估计和政策实验验证。",
+        "link_to_next_phase_cn": "分析模型给出排序设计方向，促使作者进入真实平台数据与结构效用模型的实证阶段。",
+        "evidence_pointers": [
+          "Section 2.3",
+          "线上附录描述",
+          "Endnote 8"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "数据收集与数值/文本特征构造",
+        "question_cn": "该平台有哪些用户-印象层面的数据，以及如何量化应用的数值与文本特征？",
+        "inputs_and_setting_cn": "美国某移动运营商的第三方应用分发offer wall；2015年7月前三周服务器日志，共317,040条用户-印象记录；应用标题、描述、评论、评分、下载量、CPA边际。",
+        "designed_or_compared_object_cn": "构造屏幕排名、质量、流行度、竞争应用数量等数值变量，以及信息量、模糊度、情感极性等文本变量。",
+        "baseline_control_or_counterfactual_cn": "无；描述性与相关性分析。",
+        "objective_metrics": [
+          "CTR=1.5%",
+          "点击后安装率=9.0%",
+          "屏幕排名范围1-59",
+          "文本测度均值与相关性"
+        ],
+        "analysis_method_cn": "描述统计、相关矩阵、NLP文本分析、情感分类器与词典模糊度计算。",
+        "main_result_cn": "用户平均浏览26个印象，游戏占70%；文本变量具有信息含量，标题比描述和评论更具体；点击与安装相关约0.297，排名与竞争应用数显著相关。",
+        "argumentative_role_cn": "确立数据集的独特性：用户-印象级、含CPA边际、含数值与文本特征，为结构模型提供输入。",
+        "remaining_uncertainty_cn": "仅描述数据，无法解释因果或排序收入效应。",
+        "link_to_next_phase_cn": "数据特征明确后，下一阶段用正式结构模型估计点击与安装效用。",
+        "evidence_pointers": [
+          "Section 3",
+          "Table 2",
+          "Table 3"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "层级贝叶斯两阶段二元Probit结构模型估计",
+        "question_cn": "如何从用户-印象点击流中估计个体层面的点击与安装效用，并识别关键驱动因素？",
+        "inputs_and_setting_cn": "用户-印象点击与安装结果、屏幕排名、评分、评论量、流行度、游戏类别、竞争应用数、标题/描述/评论文本特征。",
+        "designed_or_compared_object_cn": "构建两阶段条件选择模型：先点击后安装；二元Probit；含个体层全异质性；误差相关参数ρ。",
+        "baseline_control_or_counterfactual_cn": "无直接benchmark；在估计内部比较各协变量系数及其经济边际效应。",
+        "objective_metrics": [
+          "系数显著性与符号",
+          "边际效应（如排位每上移一位CTR+4.26%）",
+          "异质性方差",
+          "ρ=0.233"
+        ],
+        "analysis_method_cn": "层级贝叶斯MCMC，Metropolis–Hastings抽样，Gelman–Rubin收敛诊断，PSRF<1.08。",
+        "main_result_cn": "排名、评分、标题信息量和模糊度、标题情感、描述情感显著影响点击或安装；消费者对文本变量的反应异质性大于数值变量。",
+        "argumentative_role_cn": "这是整篇论文的核心引擎：恢复个体效用参数，使后续个性化排序与反事实收入计算成为可能。",
+        "remaining_uncertainty_cn": "参数估计本身不等于对排序政策的因果验证，且模型拟合仍需检验。",
+        "link_to_next_phase_cn": "通过模型拟合比较确认文本变量和异质性带来的预测改进。",
+        "evidence_pointers": [
+          "Section 4",
+          "Table 4",
+          "Table 5"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "模型拟合与内外样本验证",
+        "question_cn": "同时纳入文本变量和个体异质性是否显著改善模型预测？",
+        "inputs_and_setting_cn": "模型预测值；样本内预测；样本外预测用前两周校准、第三周测试。",
+        "designed_or_compared_object_cn": "模型规格比较：全模型 vs 不含文本变量 vs 不含异质性，共6种（样本内外各3种）。",
+        "baseline_control_or_counterfactual_cn": "无文本变量的模型、无异质性的模型作为受限对照。",
+        "objective_metrics": [
+          "RMSE",
+          "MSE",
+          "MAD"
+        ],
+        "analysis_method_cn": "样本内与样本外预测误差比较。",
+        "main_result_cn": "全模型最优：加入文本变量使RMSE改善约13.33%，考虑完全异质性使RMSE改善约35.59%；样本外结果一致。",
+        "argumentative_role_cn": "通过预测表现证明文本特征与个体异质性不是可有可无，而是排序设计的重要基础。",
+        "remaining_uncertainty_cn": "预测拟合优度不等于经济排序收入的提升。",
+        "link_to_next_phase_cn": "可信的个体效用估计为稳健性检验和反事实政策实验提供了支撑。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 6"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "稳健性检验：游戏/非游戏子样本与LDA替代文本测度",
+        "question_cn": "核心结果是否由超级流行应用或文本测度方式驱动？",
+        "inputs_and_setting_cn": "游戏子样本222,237条、非游戏子样本94,803条；LDA主题熵替代描述信息量。",
+        "designed_or_compared_object_cn": "分别估计游戏和非游戏子样本；用主题分散度DescDisp替代DescFreq和DescLen。",
+        "baseline_control_or_counterfactual_cn": "主模型的全样本结果作为对照。",
+        "objective_metrics": [
+          "系数符号与显著性",
+          "DescDisp是否显著"
+        ],
+        "analysis_method_cn": "子样本估计；LDA主题熵计算与再估计。",
+        "main_result_cn": "游戏与非游戏子样本结论定性一致；DescDisp不显著，说明消费者在安装阶段仍不重视描述细节。",
+        "argumentative_role_cn": "保护主要估计结果不被解释为极端应用或特殊文本测量造成的偶然结果。",
+        "remaining_uncertainty_cn": "仍没有排序层面的结果，无法判断个性化排序收入增益。",
+        "link_to_next_phase_cn": "稳健估计结果为政策实验中的收入比较提供更可靠的效用参数。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Table 7",
+          "Table 8"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "反事实政策实验：排序方案比较",
+        "question_cn": "个性化排序、加入边际收益的排序以及混合排序分别能给平台带来多少收入提升？",
+        "inputs_and_setting_cn": "结构估计得到的个体效用参数；应用真实CPA边际；每个用户取前25个印象计算预期收入。",
+        "designed_or_compared_object_cn": "比较6种排序：非个性化平均效用、效用×边际、非个性化HMUM；个性化效用、效用×边际、个性化HMUM。",
+        "baseline_control_or_counterfactual_cn": "非个性化平均效用排序作为基准，所有方案以相对基准的百分比收入差异表示。",
+        "objective_metrics": [
+          "预期平台收入",
+          "相对基准的百分比提升"
+        ],
+        "analysis_method_cn": "反事实收入公式：对每个用户每个印象计算ProbClick×ProbInstall×Margin，再按排序汇总。",
+        "main_result_cn": "非个性化效用×边际提升2.46%、非个性化HMUM提升2.38%；个性化效用提升4.92%、个性化效用×边际提升15.56%、个性化HMUM提升16.73%。",
+        "argumentative_role_cn": "这是全文的直接核心证据，证明个性化以及混合排序的价值，支撑HMUM设计主张。",
+        "remaining_uncertainty_cn": "政策实验是结构性反事实，不是随机现场实验，未考虑用户动态反应、开发者策略调整或平台实施误差。",
+        "link_to_next_phase_cn": "结果直接转化为结论中的贡献、管理含义和分夜批处理实现建议。",
+        "evidence_pointers": [
+          "Section 6",
+          "Table 9",
+          "Equation (16)-(17)"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 数字平台普遍收集用户数据并推广个性化。",
+      "PHENOMENON: 移动应用分发平台的个性化排序尚未被充分研究。",
+      "RQ_OR_OBJECTIVE: 用点击流显示偏好构建个性化应用排序框架。",
+      "REQUIREMENT: 联合考虑消费者效用与CPA边际收益。",
+      "STUDY_OVERVIEW: 结构估计点击与安装行为，并进行政策实验。",
+      "RESULT: 个性化HMUM优于其他个性化排序。",
+      "CONTRIBUTION: 平台可借助常规点击流提高应用分发变现效率。"
+    ],
+    "introduction_moves": [
+      "CONTEXT: 移动应用市场规模和第三方分发平台的重要性。",
+      "PRACTICAL_STAKES: 平台收入依赖展示哪些印象、以什么顺序展示。",
+      "LIMITATION: 第三方平台常用CTR、转化率、边际等简单排序指标，忽视用户效用驱动因素。",
+      "PRIOR_KNOWLEDGE: 平均效用排序能提高平台收入。",
+      "RQ_OR_OBJECTIVE: 提出三个研究问题：效用驱动因素、效用与边际如何平衡、个性化排序方案比较。",
+      "DATA: 获取含CPA边际的用户-印象级点击流数据。",
+      "RESULT: 核心参数估计和边际效应。",
+      "DESIGN_FEATURE: 提出HMUM两段式个性化排序。",
+      "CONTRIBUTION: 强调混合排序与个性化结合的价值。"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO: 引入随机效用理论、两阶段点击/安装决策和层级贝叶斯个体异质性。",
+      "THEORY_PROPOSITION: 分析模型说明混合个性化排序可能最优。",
+      "PRIOR_KNOWLEDGE: 既有排序文献使用平均效用。",
+      "LIMITATION: 单指标排序可能牺牲边际收益。",
+      "PRIOR_KNOWLEDGE: Choi和Mela的混合排序思想。",
+      "WHY_GAP_MATTERS: 消费者偏好与边际收益不一定一致，个性化可能损害平台，需要设计兼顾双方的方案。"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT: 排序目标应包含个体效用与CPA边际。",
+      "DESIGN_FEATURE: 顶部放用户最可能点击的高效用应用，按边际收益排序；其余按效用×边际收益排序。",
+      "METHOD_JUSTIFICATION: 结构模型能在个体层面恢复偏好，并支持反事实排序。",
+      "METHOD_JUSTIFICATION: 两阶段条件选择比同时方程更符合真实决策。",
+      "DESIGN_FEATURE: 文本特征作为效用函数的输入，提升模型拟合与排序精度。"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 使用反事实政策实验评估排序方案。",
+      "BENCHMARK_OR_CONTRAST: 非个性化平均效用排序作为基准。",
+      "RESULT: 非个性化加入边际只带来较小改善。",
+      "RESULT: 个性化排序显著提高收入。",
+      "RESULT: 个性化HMUM最高。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 游戏/非游戏子样本稳健。",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: LDA主题分散度替代文本测度稳健。"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 首次在移动应用分发情境研究个性化变现。",
+      "CONTRIBUTION: 用户-印象级数据和真实CPA边际是独特优势。",
+      "CONTRIBUTION: 提出并检验HMUM混合个性化排序。",
+      "DESIGN_KNOWLEDGE: 文本标题/描述影响点击与安装，可用于冷启动和定向。",
+      "LIMITATION_AND_FUTURE: 缺少人口统计、随机现场实验和动态估计。",
+      "CONTRIBUTION: 分夜批处理实现个性化排序，降低实时计算负担。"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "随机效用理论",
+      "两阶段决策条件选择模型",
+      "显示偏好与点击流个性化",
+      "排名设计文献中的平均效用排序",
+      "在线市场混合排序（Choi and Mela 2019）",
+      "分析性搜索成本与质量异质性排序模型",
+      "CPA商业模型与平台边际收益",
+      "文本分析中的信息量、模糊度与情感极性"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "HMUM排序的设计直接来自分析模型与效用/边际权衡逻辑；个体效用参数由随机效用结构与层级贝叶斯模型直接支撑；政策实验直接比较由该逻辑导出的排序方案。文本特征、估计方法等属于实现与测量选择，但核心排序设计由理论与商业机制前瞻决定。",
+    "translation_chain_cn": "随机效用理论→两阶段点击/安装效用→层级贝叶斯个体异质性→恢复每个用户的点击与安装概率；CPA商业模型→每次安装的边际收益→平台收入公式ProbClick×ProbInstall×Margin；分析排序模型→用户对顶部高效用应用几乎都会点击→顶部按边际收益排序、其余按效用×边际收益排序→形成HMUM；显示偏好与点击流→用历史点击和安装推断个体偏好→个性化排序；文本分析知识→信息量、模糊度、情感作为效用协变量→增强个体效用识别。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "消费者面对印象列表时先点击再决定是否安装，点击与安装效用不同但相关。",
+        "mechanism_cn": "两阶段条件选择：只有点击后才会看到落地页细节并安装；两类决策的未观测因素相关。",
+        "design_requirement_cn": "排序设计必须基于能区分点击和安装效用的结构模型，而不是只看单独CTR或转化率。",
+        "artifact_choice_cn": "两阶段二元Probit模型，含误差相关参数ρ。",
+        "evaluated_contrast_cn": "模型拟合比较：全模型 vs 无文本 vs 无异质性。",
+        "objective_result_cn": "全模型误差最优，文本与异质性均显著改善预测。",
+        "evidence_pointers": [
+          "Section 4.1-4.2",
+          "Table 6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "屏幕排名、质量、流行度、标题和描述的信息量与情感影响消费选择。",
+        "mechanism_cn": "排名影响注意力；标题在点击阶段提供快速信号；描述和评分在安装阶段提供更多信息。",
+        "design_requirement_cn": "效用识别需要包含数值与文本协变量。",
+        "artifact_choice_cn": "点击效用方程使用排名、标题特征、评分、游戏、竞争应用；安装效用方程使用描述特征、评论量、流行度、评分等。",
+        "evaluated_contrast_cn": "主模型系数与边际效应。",
+        "objective_result_cn": "排名、标题信息量和模糊度、描述情感等显著。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "个体偏好存在完全异质性，个性化排序应针对个体而非平均用户。",
+        "mechanism_cn": "不同用户对排名、文本和情感信号反应不同，平均效用会抹平差异。",
+        "design_requirement_cn": "需要个体层级的效用参数，而不是只估计平均效应。",
+        "artifact_choice_cn": "层级贝叶斯框架，β_i和γ_i服从个体异质性分布。",
+        "evaluated_contrast_cn": "异质性方差估计；全异质性模型 vs 无异质性模型。",
+        "objective_result_cn": "文本变量异质性方差显著；完全异质性模型RMSE改善35.59%。",
+        "evidence_pointers": [
+          "Section 4.1",
+          "Section 5.1",
+          "Tables 5-6"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "在搜索成本与口味异质性下，混合排序可能优于单指标排序。",
+        "mechanism_cn": "顶部高效用应用无论顺序如何都容易被点击，因此边际收益决定增量收入；其余位置需要同时兼顾效用与边际。",
+        "design_requirement_cn": "排序方案应为两段式：顶部按边际收益、底部按效用×边际收益。",
+        "artifact_choice_cn": "HMUM个性化排序：前5%高效用应用按Margin排序，其余按Utility×Margin排序。",
+        "evaluated_contrast_cn": "HMUM vs 平均效用、效用×边际、个性化/非个性化。",
+        "objective_result_cn": "个性化HMUM收入提升16.73%，高于其他个性化方案。",
+        "evidence_pointers": [
+          "Section 2.3",
+          "Section 6",
+          "Table 9"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "显示偏好蕴含在点击流中，可用于个性化服务。",
+        "mechanism_cn": "用户过去的点击和安装选择揭示其偏好，平台可借此推测未来应用偏好。",
+        "design_requirement_cn": "记录和利用用户-印象层面的点击流数据。",
+        "artifact_choice_cn": "使用317,040条用户-印象点击流日志估计个体效用。",
+        "evaluated_contrast_cn": "个性化排序 vs 非个性化排序。",
+        "objective_result_cn": "个性化排序在三种方案中均优于非个性化，最高提升16.73%。",
+        "evidence_pointers": [
+          "Section 1",
+          "Section 3",
+          "Table 9"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "结构计量模型估计与系数解释",
+      "边际效应量化",
+      "个体异质性方差分析",
+      "样本内/样本外预测拟合比较",
+      "子样本稳健性检验",
+      "替代文本测度稳健性检验",
+      "反事实政策实验比较排序方案"
+    ],
+    "why_these_evaluations_cn": "由于无法在真实平台上随意重排所有用户的印象并观察收入，作者先用结构模型恢复个体效用，再通过反事实政策实验比较多种排序方案。模型拟合与稳健性检验用于确保结构参数可信，政策实验则直接把参数转化为平台收入差异。",
+    "benchmark_and_contrast_chain_cn": "以非个性化平均效用排序为基准；首先加入边际收益形成非个性化效用×边际，并测试非个性化混合排序；随后将同一组方案个性化，逐步比较个性化效用、个性化效用×边际、个性化HMUM。这样既分离了“加入边际”的增量，也分离了“个性化”的增量，还分离了“混合设计”的增量。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "屏幕排名显著影响点击，每上移一位CTR增加4.26%。",
+        "evidence": "Table 4中Rank系数显著为负，边际效应计算4.26%。",
+        "assessment": "strong_structural"
+      },
+      {
+        "claim": "消费者偏好更有信息量的标题，模糊标题抑制点击。",
+        "evidence": "TitleFreq、TitleLen、TitleAmb系数显著且方向一致。",
+        "assessment": "strong_structural"
+      },
+      {
+        "claim": "描述情感显著影响安装，但描述信息量不影响安装。",
+        "evidence": "DescSent显著为正，DescFreq/DescLen不显著。",
+        "assessment": "strong_structural"
+      },
+      {
+        "claim": "消费者对文本变量的反应比数值变量更异质。",
+        "evidence": "Table 5中标题与描述的方差显著且较大。",
+        "assessment": "moderate_structural"
+      },
+      {
+        "claim": "文本变量和完全个体异质性显著改善模型拟合。",
+        "evidence": "Table 6中样本内外RMSE/MSE/MAD均改善。",
+        "assessment": "strong_prediction"
+      },
+      {
+        "claim": "结果不是由游戏应用或超级流行应用驱动。",
+        "evidence": "Table 7游戏/非游戏子样本定性一致。",
+        "assessment": "moderate_robustness"
+      },
+      {
+        "claim": "结果不受文本测度方式影响。",
+        "evidence": "Table 8用LDA主题分散度替代后结论不变。",
+        "assessment": "moderate_robustness"
+      },
+      {
+        "claim": "个性化排序比非个性化排序显著提高平台收入。",
+        "evidence": "Table 9中每种个性化方案相对基准均高于非个性化对应方案。",
+        "assessment": "strong_counterfactual"
+      },
+      {
+        "claim": "个性化HMUM是最优排序方案。",
+        "evidence": "Table 9中HMUM个性化提升16.73%，高于效用×边际的15.56%。",
+        "assessment": "moderate_counterfactual，差异依赖模型假设与5%阈值"
+      },
+      {
+        "claim": "个性化同时提高平台收入和消费者福利。",
+        "evidence": "政策实验只直接测度平台收入；消费者效用提升由个性化设计和效用排序逻辑推断。",
+        "assessment": "partially_inferred"
+      },
+      {
+        "claim": "平台可用分夜批处理实际部署个性化排序。",
+        "evidence": "结论中的实现建议，无现场实施数据。",
+        "assessment": "proposal_not_tested"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用两阶段条件选择模型反映点击与安装的真实顺序依赖；允许点击与安装误差相关以减少共同未观测因素偏误；利用完全个体异质性减少聚合偏误；使用MCMC收敛诊断；通过样本外预测和多种稳健性检验减小拟合和测量方式的影响。",
+    "external_validity_strategy_cn": "强调第三方平台占应用安装量约32%，是重要且具有代表性的环境；将结论推广到其他同时存在效用与边际收益的内容分发场景，如电影、音乐和产品搜索；同时承认数据来自单一平台、缺少人口统计和随机现场实验。",
+    "what_is_not_actually_tested_cn": "HMUM排序没有在真实平台现场部署；政策实验是统计反事实而非随机对照实验；未直接测量消费者剩余或长期用户行为；未考虑开发者对排序策略的策略性反应；未估计动态学习效应；分夜批处理实施建议没有现场证据；顶部5%阈值的选择只做了小范围敏感性讨论，未从理论推导。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "两阶段层级贝叶斯二元Probit模型能有效利用用户-印象级点击流与文本特征，恢复个体层级的点击和安装效用。",
+    "artifact_claim_cn": "混合边际与效用边际（HMUM）的个性化排序，在所有被比较的排序方案中产生的预期平台收入最高。",
+    "mechanism_claim_cn": "用户对顶部高效用应用几乎肯定会点击，因此这些位置的增量收入由CPA边际决定；其余位置通过效用×边际排序来兼顾用户下载概率与边际收益。",
+    "boundary_claim_cn": "结论适用于存在CPA模式、用户异质性强、点击流数据丰富的应用分发平台，并可推广到电影、音乐和产品搜索等效用与边际收益共同发挥作用的数字内容分发场景。",
+    "reusable_design_knowledge_cn": "平台应先从点击流中恢复个体效用，再结合真实边际收益设计排序；排序不应使用单一指标，混合排序比单指标更有效；文本特征（标题、描述）可用于冷门新应用的排序与用户定向。",
+    "theoretical_contribution_cn": "将排序设计文献从平均效用扩展到移动应用分发情境中的个体个性化，并首次在排序设计中纳入真实CPA边际；同时回应了个性化可能损害平台利润的担忧，说明合理设计的混合个性化排序可以同时服务平台收入与消费者效用。",
+    "how_discussion_closes_intro_gap_cn": "结论直接回到引言提出的三个研究问题：指出数值与文本变量如何影响点击和安装效用；说明如何用HMUM平衡效用与边际；用政策实验证明个性化HMUM优于其他方案。文章还通过“首次使用CPA边际”“首次在用户-印象层面研究应用变现”等表述把贡献锚定在文献表Table 1的空缺上。",
+    "overclaim_or_unsupported_leaps_cn": "作者称个性化同时提高消费者剩余，但政策实验只计算平台收入，消费者效用提升更多是推断；HMUM的最优性基于结构模型反事实，而非现场实验；顶部5%阈值虽做了敏感性验证，但理论依据有限；非个性化HMUM并不比效用×边际高，说明混合的增量只在个性化下出现，叙述中应避免简单宣称混合排序总优于其他方案。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数字平台因数据收集方便而普遍实施个性化内容和服务。",
+      "rhetorical_function_cn": "把研究置于数字平台个性化的大背景下。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出个性化应用于特定情境的必要性。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "移动应用分发平台中的个性化排序尚未被研究。",
+      "rhetorical_function_cn": "指出具体空白情境。",
+      "depends_on_cn": "个性化的普遍背景。",
+      "sets_up_cn": "为本文研究目标提供具体落点。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "开发综合框架，利用点击流显示偏好实现应用印象的个性化排序。",
+      "rhetorical_function_cn": "概述研究任务。",
+      "depends_on_cn": "移动应用分发情境的空白。",
+      "sets_up_cn": "后续结构与政策实验。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "为提升平台收入，框架需同时考虑消费者效用与每次安装的CPA边际收益。",
+      "rhetorical_function_cn": "提出设计目标。",
+      "depends_on_cn": "平台商业模式知识。",
+      "sets_up_cn": "解释为何同时估计效用和边际。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "指定点击和安装的结构模型，并联合估计数值与文本协变量。",
+      "rhetorical_function_cn": "预告核心估计方法。",
+      "depends_on_cn": "效用与边际的双重目标。",
+      "sets_up_cn": "随后政策实验所需的参数基础。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract P1 S6",
+      "move_code": "DATA",
+      "paraphrase_cn": "新数据集是用户-印象粒度，且包含支付给平台的CPA边际。",
+      "rhetorical_function_cn": "突出数据独特性。",
+      "depends_on_cn": "要求同时研究效用与边际。",
+      "sets_up_cn": "为后续政策实验提供真实边际数据。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract P1 S7",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "通过一系列政策实验量化个性化价值。",
+      "rhetorical_function_cn": "预告评价方式。",
+      "depends_on_cn": "结构模型与边际数据。",
+      "sets_up_cn": "引出核心收入比较结果。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 8,
+      "section": "Abstract",
+      "locator": "Abstract P1 S8",
+      "move_code": "RESULT",
+      "paraphrase_cn": "个性化混合边际与效用边际排序优于其他个性化方法。",
+      "rhetorical_function_cn": "给出核心结论。",
+      "depends_on_cn": "政策实验。",
+      "sets_up_cn": "摘要层面的贡献陈述。",
+      "evidence_pointer": "Abstract"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Section 1 P1 S1-S3",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "移动应用市场和第三方分发平台规模巨大，下载与收入都在增长。",
+      "rhetorical_function_cn": "建立问题的重要性和市场规模。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "说明平台排序问题有现实经济后果。",
+      "evidence_pointer": "Section 1 opening"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Section 1 P1 S4-S6",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "第三方平台按CPA收费，收入取决于向用户展示哪些应用印象及顺序。",
+      "rhetorical_function_cn": "把市场背景转换为平台收入机制。",
+      "depends_on_cn": "平台商业模式。",
+      "sets_up_cn": "指出排序设计对收入至关重要。",
+      "evidence_pointer": "Section 1 P1"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Section 1 P1 S7-S8",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "第三方平台在排序上相当简单，常用CTR、转化率和CPA边际，忽略用户价值驱动因素。",
+      "rhetorical_function_cn": "指出现实实践缺陷。",
+      "depends_on_cn": "平台收入依赖排序。",
+      "sets_up_cn": "引出改进排序的机会。",
+      "evidence_pointer": "Section 1 P1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Section 1 P1 S9",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "过去研究显示在排序中考虑平均消费者效用能提高平台收入。",
+      "rhetorical_function_cn": "引入既有文献基准。",
+      "depends_on_cn": "排序研究文献。",
+      "sets_up_cn": "本文进一步从平均效用转向个性化效用。",
+      "evidence_pointer": "Section 1 P1"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Section 1 P1 S10",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者要展示个性化排序能进一步提高平台利润和消费者效用。",
+      "rhetorical_function_cn": "提出本文相对于既有文献的目标。",
+      "depends_on_cn": "平均效用排序已有收益。",
+      "sets_up_cn": "后续个性化政策实验。",
+      "evidence_pointer": "Section 1 P1"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Section 1 P2 S1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "个性化是根据过去行为和显示偏好匹配内容、产品和服务的能力。",
+      "rhetorical_function_cn": "引入个性化定义和概念背景。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "把研究归入个性化文献。",
+      "evidence_pointer": "Section 1 P2"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Section 1 P2 S2-S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "个性化降低搜索成本，提高相关性和满意度，并把用户异质性转化为增量收入。",
+      "rhetorical_function_cn": "解释个性化为何有价值。",
+      "depends_on_cn": "个性化定义。",
+      "sets_up_cn": "说明个性化在应用分发中的潜力。",
+      "evidence_pointer": "Section 1 P2"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Section 1 P2 S4-S5",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "区分用户主动发起的定制化与平台为用户完成的个性化。",
+      "rhetorical_function_cn": "消除概念混淆，明确本文属于平台个性化。",
+      "depends_on_cn": "个性化定义。",
+      "sets_up_cn": "说明本文排序是平台主动的个性化设计。",
+      "evidence_pointer": "Section 1 P2"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Table 1附近段落",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "既有排序设计大多基于平均效用，只有个别研究考虑搜索查询的个性化，本文在移动应用分发中个性化效用与边际。",
+      "rhetorical_function_cn": "用文献表定位本文空缺。",
+      "depends_on_cn": "排序文献综述。",
+      "sets_up_cn": "为贡献声明提供文献桌。",
+      "evidence_pointer": "Section 1 Table 1"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Section 1 P3 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "用Adomavicius框架描述本文个性化类型：推荐产品、消费者中心、个体粒度、非侵入式。",
+      "rhetorical_function_cn": "给本文个性化方法提供分类学位置。",
+      "depends_on_cn": "个性化框架文献。",
+      "sets_up_cn": "说明个性化排序的学术语境。",
+      "evidence_pointer": "Section 1 P3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Section 1 P4 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "点击流中的显示偏好可以用于恢复消费者偏好，并个性化应用排序。",
+      "rhetorical_function_cn": "提出文章的核心前提。",
+      "depends_on_cn": "显示偏好与个性化概念。",
+      "sets_up_cn": "后续结构模型的理论基础。",
+      "evidence_pointer": "Section 1 P4"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Section 1 P5 S1",
+      "move_code": "GAP",
+      "paraphrase_cn": "作者提出三个未解决研究问题：效用驱动因素、效用与边际的平衡、不同排序方案的比较。",
+      "rhetorical_function_cn": "用问题形式清晰定义研究缺口。",
+      "depends_on_cn": "既有排序与个性化文献。",
+      "sets_up_cn": "组织论文的实证与政策实验。",
+      "evidence_pointer": "Section 1 P5"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "Section 1 P6-S1",
+      "move_code": "DATA",
+      "paraphrase_cn": "获得来自营销代理的独特点击下载数据，该代理管理美国某移动网络的首页offer wall。",
+      "rhetorical_function_cn": "说明数据来源的独特性。",
+      "depends_on_cn": "三个研究问题需要细粒度数据。",
+      "sets_up_cn": "后续结构模型估计的输入。",
+      "evidence_pointer": "Section 1 P6"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "Section 1 P7 S1-S3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "参数估计显示排名上升显著提高CTR，评分提升提高点击和安装，标题信息量、模糊度和情感也有显著影响。",
+      "rhetorical_function_cn": "提前给出关键实证发现。",
+      "depends_on_cn": "结构模型估计。",
+      "sets_up_cn": "为排序政策实验提供直觉。",
+      "evidence_pointer": "Section 1 P7"
+    },
+    {
+      "order": 23,
+      "section": "Introduction",
+      "locator": "Section 1 P8 S1-S2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者利用结构参数做一系列政策实验，比较平均效用排序与个体个性化排序。",
+      "rhetorical_function_cn": "预告政策实验设计。",
+      "depends_on_cn": "结构参数估计。",
+      "sets_up_cn": "引出个性化价值的结果。",
+      "evidence_pointer": "Section 1 P8"
+    },
+    {
+      "order": 24,
+      "section": "Introduction",
+      "locator": "Section 1 P8 S3-S6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "提出HMUM混合排序：顶部用最喜爱的应用按边际排序，其余按效用×边际排序。",
+      "rhetorical_function_cn": "展示核心设计制品。",
+      "depends_on_cn": "分析模型和政策实验逻辑。",
+      "sets_up_cn": "作为全文最重要的排序方案。",
+      "evidence_pointer": "Section 1 P8"
+    },
+    {
+      "order": 25,
+      "section": "Introduction",
+      "locator": "Section 1 P8 S7",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "用户无论精确排序如何都可能点击高效用应用，因此CPA边际成为增量收入的关键。",
+      "rhetorical_function_cn": "解释HMUM为何有效。",
+      "depends_on_cn": "高效用应用点击行为。",
+      "sets_up_cn": "后续政策实验的收入解释。",
+      "evidence_pointer": "Section 1 P8"
+    },
+    {
+      "order": 26,
+      "section": "Introduction",
+      "locator": "Section 1 P9 S1",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "说明论文结构：文献、数据、模型、结果、政策实验和结论。",
+      "rhetorical_function_cn": "为读者导航。",
+      "depends_on_cn": "全文结构已定。",
+      "sets_up_cn": "读者预期后续章节内容。",
+      "evidence_pointer": "Section 1 last paragraph"
+    },
+    {
+      "order": 27,
+      "section": "Section 2.1",
+      "locator": "Section 2.1 P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "既有排序文献发现屏幕排名显著影响点击，一些研究开始设计排序系统。",
+      "rhetorical_function_cn": "建立排序研究文献基础。",
+      "depends_on_cn": "表1的文献。",
+      "sets_up_cn": "指出本文将排序设计推进到个性化。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 28,
+      "section": "Section 2.1",
+      "locator": "Section 2.1 P3 S1-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "多数排序研究使用平均效用或分段价格敏感，且无法获得真实佣金率。",
+      "rhetorical_function_cn": "指出现有排序设计缺乏个体层面和边际收益信息。",
+      "depends_on_cn": "排序文献综述。",
+      "sets_up_cn": "说明本文使用个体效用和真实CPA边际的新颖性。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 29,
+      "section": "Section 2.1",
+      "locator": "Section 2.1 P4 S1-S2",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "单一绩效指标对所有产品排序可能牺牲平台收益，混合排序有机会获得更高总收入。",
+      "rhetorical_function_cn": "为混合排序设计提供动机。",
+      "depends_on_cn": "平均效用排序的不足。",
+      "sets_up_cn": "引入HMUM的合理性。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 30,
+      "section": "Section 2.1",
+      "locator": "Section 2.1 P5 S1-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Choi和Mela提出在线市场混合排序，但本文比其更关注效用与边际的权衡，并引入个性化。",
+      "rhetorical_function_cn": "与最近的混合排序文献对话。",
+      "depends_on_cn": "混合排序概念。",
+      "sets_up_cn": "定义本文HMUM的具体差异。",
+      "evidence_pointer": "Section 2.1"
+    },
+    {
+      "order": 31,
+      "section": "Section 2.2",
+      "locator": "Section 2.2 P1-P2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "个性化在优惠券、邮件、推荐系统和搜索中能提升消费者效用和点击率。",
+      "rhetorical_function_cn": "展示个性化有正向收益的证据。",
+      "depends_on_cn": "个性化文献。",
+      "sets_up_cn": "对比下文个性化可能损害平台的结果。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 32,
+      "section": "Section 2.2",
+      "locator": "Section 2.2 P3 S1-S3",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "个性化可能增加消费者剩余而损害平台利润，因为偏好与边际不一致；需要精心设计个性化。",
+      "rhetorical_function_cn": "解释为什么需要新的个性化排序研究。",
+      "depends_on_cn": "个性化负面证据。",
+      "sets_up_cn": "强调本文目标是同时提高消费者与平台价值。",
+      "evidence_pointer": "Section 2.2"
+    },
+    {
+      "order": 33,
+      "section": "Section 2.3",
+      "locator": "Section 2.3 P1 S1-S3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "概念框架显示：结构效用模型、个体异质性、真实边际和政策实验共同构成研究路径。",
+      "rhetorical_function_cn": "把文献和实证设计整合成框架。",
+      "depends_on_cn": "前两节文献。",
+      "sets_up_cn": "为数据、估计和实验章节提供地图。",
+      "evidence_pointer": "Section 2.3 Figure 1"
+    },
+    {
+      "order": 34,
+      "section": "Section 2.3",
+      "locator": "Section 2.3 P2 S1-S2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "简单分析模型显示混合排序方案可能最有效。",
+      "rhetorical_function_cn": "给出HMUM的理论命题来源。",
+      "depends_on_cn": "分析模型（线上附录）。",
+      "sets_up_cn": "政策实验中测试HMUM。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 35,
+      "section": "Section 2.3",
+      "locator": "Section 2.3 P2 S3-S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "混合排序逻辑：顶部放用户最喜爱应用并按边际排序，其余按效用×边际排序。",
+      "rhetorical_function_cn": "把分析模型转成可执行排序规则。",
+      "depends_on_cn": "分析模型命题。",
+      "sets_up_cn": "后续HMUM的具体操作。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 36,
+      "section": "Section 2.3",
+      "locator": "Section 2.3 P3 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "个体层级结构模型可以精确刻画每个消费者的偏好，并明确平衡效用与边际收益。",
+      "rhetorical_function_cn": "解释为何采用结构模型而非简化统计。",
+      "depends_on_cn": "个体异质性需求。",
+      "sets_up_cn": "后续层级贝叶斯估计。",
+      "evidence_pointer": "Section 2.3"
+    },
+    {
+      "order": 37,
+      "section": "Section 3",
+      "locator": "Section 3 P1-P2",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "平台通过CPA模式：用户点击印象后跳转至应用商店，平台按安装获得预先约定的边际收益。",
+      "rhetorical_function_cn": "解释商业模式如何产生收入。",
+      "depends_on_cn": "第三方平台业务知识。",
+      "sets_up_cn": "为收入计算提供公式。",
+      "evidence_pointer": "Section 3 Figure 2"
+    },
+    {
+      "order": 38,
+      "section": "Section 3",
+      "locator": "Section 3 P3 S1-S2",
+      "move_code": "DATA",
+      "paraphrase_cn": "服务器日志记录用户印象、点击和安装，可恢复屏幕排名和会话内全部印象。",
+      "rhetorical_function_cn": "说明数据是用户-印象级且能识别排名。",
+      "depends_on_cn": "平台日志系统。",
+      "sets_up_cn": "结构模型和排序实验都需要排名信息。",
+      "evidence_pointer": "Section 3 P3"
+    },
+    {
+      "order": 39,
+      "section": "Section 3",
+      "locator": "Section 3 P4-P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "文本变量包含信息量、模糊度与情感，分别用词频、长度、词典释义数和情感分类器构造。",
+      "rhetorical_function_cn": "说明文本特征的操作化方法。",
+      "depends_on_cn": "文本分析文献。",
+      "sets_up_cn": "表格中的TitleFreq、DescSent等变量。",
+      "evidence_pointer": "Section 3 P4-P5"
+    },
+    {
+      "order": 40,
+      "section": "Section 4",
+      "locator": "Section 4 P1 S1-S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "建立两阶段二元Probit随机效用模型，用户先决定是否点击，再决定是否安装。",
+      "rhetorical_function_cn": "引入正式计量模型。",
+      "depends_on_cn": "概念框架和显示偏好理论。",
+      "sets_up_cn": "导出似然函数和估计策略。",
+      "evidence_pointer": "Section 4 opening"
+    },
+    {
+      "order": 41,
+      "section": "Section 4.1",
+      "locator": "Section 4.1 Equations (3)(6)",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "点击效用由排名、标题特征、评分、游戏和竞争应用决定；安装效用由描述与评论特征、评分、评论量、流行度和游戏决定。",
+      "rhetorical_function_cn": "形式化效用函数。",
+      "depends_on_cn": "随机效用理论。",
+      "sets_up_cn": "后续估计结果。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 42,
+      "section": "Section 4.1",
+      "locator": "Section 4.1 Equations (4)(7)",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "用层级先验允许每个用户有完全异质性的参数。",
+      "rhetorical_function_cn": "把个性化目标嵌入估计模型。",
+      "depends_on_cn": "个体异质性概念。",
+      "sets_up_cn": "为个性化排序提供参数。",
+      "evidence_pointer": "Section 4.1"
+    },
+    {
+      "order": 43,
+      "section": "Section 4.2",
+      "locator": "Section 4.2 Equations (9)-(13)",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "点击和安装误差服从二元正态分布，通过相关参数ρ处理共同未观测因素，形成三类概率的联合似然。",
+      "rhetorical_function_cn": "保证两阶段决策的统计一致性。",
+      "depends_on_cn": "两阶段选择结构。",
+      "sets_up_cn": "估计结果中的ρ值。",
+      "evidence_pointer": "Section 4.2"
+    },
+    {
+      "order": 44,
+      "section": "Section 4.3",
+      "locator": "Section 4.3 S1-S4",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "采用MCMC和Metropolis–Hastings抽样，并用PSRF收敛诊断。",
+      "rhetorical_function_cn": "确保贝叶斯估计可靠。",
+      "depends_on_cn": "层级模型后验无法闭式表达。",
+      "sets_up_cn": "支持后续结果表。",
+      "evidence_pointer": "Section 4.3"
+    },
+    {
+      "order": 45,
+      "section": "Section 5.1",
+      "locator": "Section 5.1 Table 4附近",
+      "move_code": "RESULT",
+      "paraphrase_cn": "点击阶段排名、评分、标题信息量、模糊度、情感和竞争应用数量显著；安装阶段描述情感显著，描述信息量不显著。",
+      "rhetorical_function_cn": "报告核心参数估计结果。",
+      "depends_on_cn": "结构模型估计。",
+      "sets_up_cn": "经济边际效应解释。",
+      "evidence_pointer": "Section 5.1 Table 4"
+    },
+    {
+      "order": 46,
+      "section": "Section 5.1",
+      "locator": "Section 5.1 边际效应段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "排名每上移一位CTR增加4.26%，评分每增加一星点击和安装分别增加2.91%和1.37%，标题长度增加1%使CTR增加2.12%。",
+      "rhetorical_function_cn": "把Probit系数转化为经济意义。",
+      "depends_on_cn": "Table 4系数。",
+      "sets_up_cn": "让读者理解排序和评分的商业价值。",
+      "evidence_pointer": "Section 5.1 marginal effects discussion"
+    },
+    {
+      "order": 47,
+      "section": "Section 5.1",
+      "locator": "Section 5.1 异质性段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "消费者对数值变量如评分的反应相对一致，对文本变量的反应更异质。",
+      "rhetorical_function_cn": "说明个体差异结构。",
+      "depends_on_cn": "Table 5方差估计。",
+      "sets_up_cn": "论证个性化排序的必要性。",
+      "evidence_pointer": "Section 5.1 Table 5"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.1",
+      "locator": "Section 5.1 模型拟合段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "样本内外模型拟合比较显示全模型最优，文本变量和异质性都显著改善预测。",
+      "rhetorical_function_cn": "给结构模型预测效力提供证据。",
+      "depends_on_cn": "Table 6比较。",
+      "sets_up_cn": "支撑后续反事实政策实验。",
+      "evidence_pointer": "Section 5.1 Table 6"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 整个小节",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "游戏与非游戏子样本结果定性一致；LDA主题分散度替代描述信息量后结果不变。",
+      "rhetorical_function_cn": "排除结果依赖特定样本和测度的担忧。",
+      "depends_on_cn": "主模型结果。",
+      "sets_up_cn": "让政策实验建立在稳健估计上。",
+      "evidence_pointer": "Section 5.2 Tables 7-8"
+    },
+    {
+      "order": 50,
+      "section": "Section 6",
+      "locator": "Section 6 开头与公式(16)",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "在反事实实验中，用个体效用参数计算点击和安装概率，再按概率×边际收益聚合得到平台收入。",
+      "rhetorical_function_cn": "说明排序方案如何被量化比较。",
+      "depends_on_cn": "结构模型参数和CPA边际。",
+      "sets_up_cn": "Table 9的收入比较。",
+      "evidence_pointer": "Section 6 Equation (16)"
+    },
+    {
+      "order": 51,
+      "section": "Section 6",
+      "locator": "Section 6 Table 9 结果段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "非个性化加入边际收益只提升约2.5%，个性化效用×边际提升15.56%，个性化HMUM提升16.73%。",
+      "rhetorical_function_cn": "给出全文核心量化结果。",
+      "depends_on_cn": "反事实收入公式。",
+      "sets_up_cn": "解释个性化价值和混合设计贡献。",
+      "evidence_pointer": "Section 6 Table 9"
+    },
+    {
+      "order": 52,
+      "section": "Section 6",
+      "locator": "Section 6 解释段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "个性化效用×边际之所以提升大，是因为它同时个性化权衡了用户效用与边际；HMUM进一步在顶部优先推送用户最可能下载的应用并按边际排序。",
+      "rhetorical_function_cn": "解释结果背后的行为机制。",
+      "depends_on_cn": "Table 9差异性结果。",
+      "sets_up_cn": "结论中的理论贡献。",
+      "evidence_pointer": "Section 6 last paragraphs"
+    },
+    {
+      "order": 53,
+      "section": "Section 7",
+      "locator": "Section 7 P1-P2",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "总结实证分析的两阶段：先估计两阶段点击与转化模型，再用个体参数做反事实排序比较。",
+      "rhetorical_function_cn": "帮助读者回顾全文研究链。",
+      "depends_on_cn": "全文各节。",
+      "sets_up_cn": "进入贡献与管理含义。",
+      "evidence_pointer": "Section 7 P1-P2"
+    },
+    {
+      "order": 54,
+      "section": "Section 7",
+      "locator": "Section 7 P4 S1-S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "贡献包括首次在应用变现情境研究个性化、使用用户-印象级数据和真实CPA边际、提出并验证HMUM。",
+      "rhetorical_function_cn": "正式声明文献贡献。",
+      "depends_on_cn": "Table 1定位和实证结果。",
+      "sets_up_cn": "保护贡献不被看作单一性能结果。",
+      "evidence_pointer": "Section 7 P4"
+    },
+    {
+      "order": 55,
+      "section": "Section 7",
+      "locator": "Section 7 P5-S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "平台可利用点击流和CPA边际部署明显更有利可图的排序方案，并可通过分夜批处理降低实时计算负担。",
+      "rhetorical_function_cn": "把学术结果转化为可执行建议。",
+      "depends_on_cn": "政策实验的收入增益。",
+      "sets_up_cn": "说明研究的实践价值。",
+      "evidence_pointer": "Section 7 P5"
+    },
+    {
+      "order": 56,
+      "section": "Section 7",
+      "locator": "Section 7 P6-S1",
+      "move_code": "DESIGN_KNOWLEDGE",
+      "paraphrase_cn": "文本标题和描述的重要性意味着平台可借此推广缺乏评分的新应用，并根据偏好异质性做用户定向。",
+      "rhetorical_function_cn": "提炼可复用的设计原则。",
+      "depends_on_cn": "文本变量估计结果。",
+      "sets_up_cn": "扩大研究对开发者和平台的意义。",
+      "evidence_pointer": "Section 7 P6"
+    },
+    {
+      "order": 57,
+      "section": "Section 7",
+      "locator": "Section 7 P7 S1-S3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "数据限制包括缺少人口统计、没有随机现场实验和未估计动态效应。",
+      "rhetorical_function_cn": "界定研究边界并指向未来研究。",
+      "depends_on_cn": "全文设计限制。",
+      "sets_up_cn": "让贡献显得诚实且边界清楚。",
+      "evidence_pointer": "Section 7 P7"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先指出第三方平台排序的“天真”实践，再指出既有排序文献使用平均效用而非个体效用、缺少CPA边际、单指标排序可能牺牲收入，最后引入个性化可能损害平台的矛盾，把缺口定义为“如何在移动应用分发中同时实现个性化、混合排序和平台变现”。",
+    "signposting_cn": "引言用三个编号研究问题直接导航全文；摘要预告政策实验和HMUM；第2.3节用概念框架图串起效用、异质性、边际和政策实验；每个实证小节都有明确的任务句。",
+    "transition_logic_cn": "从数据到模型时说明“需要用结构模型处理用户-印象选择”；从估计到稳健性时说明“需要确认结果不是由特殊样本或测度驱动”；从稳健性到政策实验时说明“可靠的个体参数使反事实收入比较成为可能”；从政策实验到结论时说明“结果转化为贡献和管理实施”。",
+    "claim_evidence_rhythm_cn": "每张结果表前先说明估计对象和模型设定，表后先讲显著性方向，再讲经济边际效应，再讲异质性和模型拟合，最后用稳健性节和收入实验把“估计结果”上升为“设计知识”。",
+    "benchmark_narrative_cn": "把非个性化平均效用排序设为基准，然后用“先加边际、再加混合、再个性化”的递进方式让读者看到每个设计变化的独立贡献；Table 9同时列非个人化和个性化，形成画面对比。",
+    "theory_return_cn": "政策实验后的解释段用分析模型中的搜索成本、高效用应用点击行为、效用与边际权衡等理论机制重述Table 9的数字，使结果不是单纯算法比较而是理论机制的经验证据。",
+    "contribution_positioning_cn": "用Table 1把本文和历史上相关排名研究并置，突出“Context=移动应用分发、Ranking design=√、Basis=Personalized utility and margin”的唯一性；结论再以“首次使用CPA边际”“首次用户-印象粒度”等表述强化。",
+    "novelty_protection_cn": "作者强调混合排序不是简单挑一个算法，而是把效用排序与边际排序组合；同时用政策实验证明混合的增量在个性化时更大；再用稳健性检验、实施建议和跨情境推广说明贡献不会退化为一次性性能结果。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "定义现实问题和市场规模，指出平台实践缺陷。",
+        "research_job_cn": "找到具有商业重要性的数字平台场景，并确认真实运营者使用简单指标。",
+        "required_evidence_cn": "市场报告、平台收入模型、对现有排序策略的描述。",
+        "transition_to_next_cn": "从现实缺陷转向既有文献的不足。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "用文献表定位研究缺口，明确与平均效用排序、混合排序和个性化文献的关系。",
+        "research_job_cn": "系统梳理排序设计和个性化文献，识别未使用的数据变量（如CPA边际）和未达到的粒度（个体级）。",
+        "required_evidence_cn": "可比文献表、每个方法的排序基础和局限。",
+        "transition_to_next_cn": "缺口引出正式研究问题。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "提出研究问题，并构建从效用理论到排序设计的分析框架。",
+        "research_job_cn": "用简约分析模型推导可能的排序结构，为实证设计提供理论方向。",
+        "required_evidence_cn": "分析模型中的搜索成本、异质性参数和收入比较命题。",
+        "transition_to_next_cn": "理论命题需要真实数据和结构估计来检验。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述独特数据来源和变量构造，强调用户-印象级、真实边际和文本特征。",
+        "research_job_cn": "获取平台日志或合作数据，构造排名、数值和文本协变量。",
+        "required_evidence_cn": "数据来源说明、描述统计表、变量定义、文本分析管道。",
+        "transition_to_next_cn": "数据可用后进入正式计量模型。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设定与决策过程一致的结构模型，说明个体异质性如何嵌入。",
+        "research_job_cn": "建立两阶段条件选择或类似结构模型，用层级贝叶斯/其他方法估计个体参数。",
+        "required_evidence_cn": "模型方程、似然函数、MCMC诊断和参数结果。",
+        "transition_to_next_cn": "估计结果需要预测拟合和稳健性来支撑。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用样本内外预测、子样本稳健性和替代测量验证模型可信度。",
+        "research_job_cn": "执行模型比较、子样本分析和替代变量分析。",
+        "required_evidence_cn": "拟合指标表、稳健性结果表、所有结果的定性一致性说明。",
+        "transition_to_next_cn": "可信模型参数后进入反事实政策实验。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "设计反事实政策实验，比较真实业务中的备选排序规则。",
+        "research_job_cn": "用结构参数计算每个方案下的预期收入，并以最简单可行的基准方案作为锚。",
+        "required_evidence_cn": "收入公式、排序方案定义、收入比较表。",
+        "transition_to_next_cn": "政策实验结果进入总结与设计知识提炼。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "在结论中回应研究问题，把结果升华为贡献、边界和实施建议。",
+        "research_job_cn": "阐明设计知识、理论贡献、管理含义和未测试的前提。",
+        "required_evidence_cn": "贡献声明、局限性说明、未来研究方向和实操部署建议。",
+        "transition_to_next_cn": "无，文章结束。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用文献表直接显示本文在排序设计矩阵中的独特位置。",
+      "用三个编号研究问题组织全文。",
+      "用反事实政策实验比较设计变体，分离“加入边际”“个性化”“混合”的增量。",
+      "用预测拟合和稳健性检验为结构模型背书。",
+      "把最终贡献锚定在可复用设计知识而非单一结果。"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实第三方平台或运营商的合作数据。",
+      "用户-印象级点击流日志，能够恢复屏幕排名。",
+      "每个应用真实CPA边际，这通常属于商业机密，很难旁路获得。",
+      "大量NLP工具、词典和情感分类器用于构造文本变量。",
+      "层级贝叶斯两阶段Probit的MCMC实现和较长的计算时间。"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "没有真实CPA边际或个体效用估计，不能凭空宣称个性化混合排序带来百分之十几的收入提升。",
+      "不能只提出混合排序概念而不做结构模型和反事实收入比较。",
+      "不能把“个性化可提高收入”当作普遍结论，而不讨论个性化可能损害平台的反面文献。",
+      "不能只报告系数显著性而不做经济边际效应和预测拟合，因为排序主张需要经济意义证据。",
+      "不能在结论中宣称消费者剩余同时提高，除非直接测量或明确说明这是推断。"
+    ],
+    "single_best_description_of_the_routine_cn": "用自己的点击流数据估计个体效用，再把效用与真实边际收益结合，通过反事实排序比较证明个性化混合排序的价值。"
+  },
+  "confidence": 0.76,
+  "limitations_cn": "正文由OCR提取，个别公式、表格排版和特殊符号可能有误；在线附录和简单分析模型的完整命题不可见；原文无标准页码，定位基于章节与段落；对HMUM顶部5%阈值的敏感性只能依赖正文脚注18的转述，无法核对附录Table A2。",
+  "usage": {
+    "prompt_tokens": 29987,
+    "completion_tokens": 26711,
+    "total_tokens": 56698,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 26659
+  }
+}

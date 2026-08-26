@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "analysis_version": "ais-basket-objective-outcome-screening-77-v1",
+  "input_dir": "../../database_fulltext_all",
+  "prior_decisions_jsonl": "../ais_basket_lightweight_software_design_screening/output_v1/decisions.jsonl",
+  "output_dir": "output_v1",
+  "env_file": "../../.env",
+  "prompt_files": {
+    "system": "system_prompt.md",
+    "user_template": "user_prompt_template.md"
+  },
+  "model": {
+    "name": "deepseek-v4-flash",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 12000,
+    "timeout_seconds": 300
+  },
+  "batch": {
+    "max_concurrency": 50,
+    "retries": 2,
+    "retry_base_delay_seconds": 2.0
+  }
+}

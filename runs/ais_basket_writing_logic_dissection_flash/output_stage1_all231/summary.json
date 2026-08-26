@@ -1,0 +1,71 @@
+{
+  "updated_at": "2026-08-07T06:51:35.031885+00:00",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "input_candidates": 231,
+  "completed": 231,
+  "pending": 0,
+  "journal_counts": {
+    "Decision Support Systems": 75,
+    "European Journal of Information Systems": 8,
+    "Information & Management": 14,
+    "Information Systems Journal": 2,
+    "Information Systems Research": 57,
+    "Journal of Management Information Systems": 19,
+    "Journal of the Association for Information Systems": 14,
+    "MIS Quarterly": 42
+  },
+  "year_counts": {
+    "2020": 58,
+    "2021": 47,
+    "2022": 35,
+    "2023": 36,
+    "2024": 25,
+    "2025": 23,
+    "2026": 7
+  },
+  "theory_subset_count": 110,
+  "usage": {
+    "prompt_tokens": 6877980,
+    "completion_tokens": 6201900,
+    "total_tokens": 13079880,
+    "prompt_cache_hit_tokens": 1993344,
+    "prompt_cache_miss_tokens": 4884636
+  },
+  "paper_archetype_counts": {
+    "action_research_or_longitudinal_change": 2,
+    "analytical_mechanism_or_optimization": 3,
+    "build_evaluate_design_science": 109,
+    "computational_artifact_benchmark": 28,
+    "field_intervention_or_platform_experiment": 38,
+    "multi_method_or_multi_study_program": 22,
+    "theory_derived_artifact_experiment": 29
+  },
+  "dominant_writing_arc_counts": {
+    "formal_model_mechanism_simulation_policy": 3,
+    "iterative_diagnose_build_evaluate": 1,
+    "performance_gap_artifact_benchmark_generalize": 60,
+    "phenomenon_mechanism_intervention_field_test": 28,
+    "problem_theory_design_test_return": 85,
+    "requirements_build_evaluate_design_principles": 54
+  },
+  "theory_design_coupling_counts": {
+    "direct": 104,
+    "none": 7,
+    "partial": 120
+  },
+  "study_or_phase_count_distribution": {
+    "10": 2,
+    "11": 1,
+    "12": 1,
+    "3": 9,
+    "4": 23,
+    "5": 50,
+    "6": 60,
+    "7": 39,
+    "8": 29,
+    "9": 17
+  }
+}

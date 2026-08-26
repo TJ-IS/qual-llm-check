@@ -1,0 +1,1861 @@
+# An interactive decision support system for real-time ambulance relocation with priority guidelines
+
+- 作者：Mahdi Hajiali; Ebrahim Teimoury; Meysam Rabiee; Dursun Delen
+- 年份 / 期刊：2022 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113712
+- 源文件：19916_2022_an-interactive-decision-support-system-for-real-time-ambulance-relocation-with-priority-guidelin.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：如何构建一个基于模型驱动的在线（实时）决策支持系统，使急救车在动态环境下的重新部署能够同时考虑需求覆盖最大化和搬迁成本最小化，并为用户提供可操作的搬迁优先级指南？
+
+- 制品与设计：一个包含整数线性规划模型（双目标：最大化需求覆盖、最小化搬迁旅行时间）、数据库（常量/动态/结果三种数据）、用户界面和实时风险评估子系统（RRARR）的交互式DSS。模型中首次在覆盖约束中同时纳入当前覆盖数、搬迁增加覆盖数和搬迁减少覆盖数；RRARR基于特征权重和归一化方差将区域划分为四类风险等级，并生成五级搬迁优先级指南（HTP/HP/MP/LP/LTP）。
+
+- 客观结果：在德黑兰东部地区7天真实数据模拟中，与现有静态政策相比：总体覆盖率从73%提高到89%，平均响应时间从12.6分钟降至8.2分钟（改善35%），每辆救护车平均每班搬迁增加13.8分钟工作量，但由于响应时间缩短，每班平均总工作量减少9%，全部救护车总工作时间从8174分钟降至7442分钟。
+
+- 核心贡献：（1）提出在线（实时）救护车搬迁决策支持系统，由数学模型驱动并包含交互式用户界面；（2）覆盖约束同时回答三个覆盖数量问题（当前覆盖数、搬迁增加覆盖数、搬迁减少覆盖数），而不是像以往模型只回答其中一个；（3）开发实时风险评估DSS（RRARR），将覆盖数等动态输出与历史及其他特征结合，形成四类风险区并给出搬迁执行的优先级指南。
+
+- 整篇论证链：论文从EMS系统面临的响应时间标准和静态策略缺乏操作灵活性出发，指出动态实时搬迁是提高覆盖率、缩短未来呼叫响应时间的关键手段，但现有在线模型在覆盖约束中只关注搬迁后覆盖数量的增加，未计算搬迁前后覆盖数的变化差，也缺乏帮助用户在多个搬迁建议中进行选择的风险评估工具。作者据此把缺口定位为“模型能力+决策支持能力”的双重不足。随后作者提出一个在线DSS：用混合整数规划模型同时最大化四类动态需求（最紧急单辆、最紧急双辆、紧急、非紧急）的覆盖并最小化搬迁旅行时间，覆盖约束包含当前覆盖数O/E/Q、搬迁增益项和搬迁损失项；通过动态更新需求权重、覆盖数、搬迁工作量β等参数来反映系统状态。DSS还包括数据库、用户界面和RRARR风险评估模块，RRARR用BWM确定特征权重、计算归一化风险、划分低/中/高/极高风险区并给出五级搬迁优先级。案例研究用德黑兰东部30辆救护车、30个站点、48个需求区、14000个真实呼叫数据，将静态政策与所提实时重置政策在7天14个班次中比较，得到覆盖率提高、响应时间降低但每车搬迁工作量增加的结果；作者用“搬迁增加的工作量小于响应时间缩短减少的工作量”来证明净收益，并把临床文献中响应时间与存活率的关系作为最终价值论证。讨论部分回到引言中的响应时间标准和资源最优配置，并提出未来扩展方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文明确提出了一个模型驱动的DSS制品（数学规划模型、数据库、用户界面、RRARR风险模块），并按需求/问题定义→系统架构→数学模型→过程模型→风险评估→真实案例评价的路线展开。虽然包含数学模型和仿真，但核心证据是案例/仿真对比，而非理论推导后做受控实验或纯算法benchmark。贡献落脚在制品和可复用设计知识（覆盖约束三问题、搬迁优先级指南）。
+
+- 主导写作弧线判定：论文从系统需求（覆盖率不足、动态搬迁、工作量限制）出发，描述了构建步骤（数学建模、数据库设计、用户界面设计、过程模型、RRARR），然后通过真实数据案例评价来检验，最后以设计原则形式（覆盖约束三问题、风险优先级指南）提炼贡献。虽然最终评价不是严格的现场部署，也不是正式实验，但整体弧线符合需求—构建—评价—设计原则。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：阶段1：问题与需求定义（东部德黑兰系统现状、事件类型、四类需求定义、搬迁触发准则）；阶段2：数学规划模型设计与覆盖约束三问题形式化；阶段3：DSS架构与过程模型（数据库三类型、用户界面流程、参数更新公式）；阶段4：实时风险评估RRARR（特征选择、BWM权重、归一化风险、四风险等级、五级搬迁优先级）；阶段5：真实数据计算实验与SP对比（7天14个班次、五绩效指标，并补充一个数值例子说明总活动时间差异）。各阶段累积关系：问题定义和系统事件界定决定模型所需参数和约束；模型提供搬迁位置解；过程模型把求解逻辑嵌入可操作DSS；RRARR为模型推荐提供“要不要执行、执行哪些”的指导；最后的仿真把前三阶段的输出整合为与静态政策的端到端绩效对比。
+
+### studies_or_phases
+
+#### 1. 问题定义与系统需求分析
+
+- order：1
+
+- name_cn：问题定义与系统需求分析
+
+- question_cn：在东部德黑兰EMS系统中，哪些事件改变系统状态？需要哪些类别的需求？何时触发救护车搬迁？
+
+- inputs_and_setting_cn：德黑兰东部地区（170平方公里，约300万人口，30辆救护车，30个基站，平均每小时19个呼叫）。文献依据（如Bélanger et al. 2016的搬迁准则）。
+
+- designed_or_compared_object_cn：定义了三个系统事件（呼叫到达并派车、救护车完成任务、空闲救护车搬迁）、四类需求（最紧急Case 1、最紧急Case 2、紧急、非紧急）、两个搬迁准则（覆盖缺口准则或时间准则）。
+
+- baseline_control_or_counterfactual_cn：静态政策（SP）作为后续对比的基准；文献中已有动态搬迁准则作为需求设定参考。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：领域现场描述和文献基准的事件定义，无定量分析。
+
+- main_result_cn：确定了模型必须覆盖的四种需求类型和两个搬迁触发条件，奠定了后续数学模型中变量X1、X2、Z、W与搬迁触发逻辑的基础。
+
+- argumentative_role_cn：界定问题边界和系统需求，使后续数学模型有明确的对象。
+
+- remaining_uncertainty_cn：需求分类和搬迁准则虽是结合文献与现场设定，但尚未证明其形式有效性；需要后续模型和实验来检验这些准则是否带来绩效改善。
+
+- link_to_next_phase_cn：四类需求和三个事件直接转化为数学模型的决策变量和动态参数（d^1..d^4、V、O/E/Q等）；两个搬迁准则成为仿真实验中触发模型运行的条件。
+
+##### evidence_pointers
+
+1. Section 3 Problem overview
+
+2. 四类需求定义段落
+
+3. 三个系统事件列表
+
+4. 两个搬迁准则段落
+
+#### 2. 整数线性规划模型设计
+
+- order：2
+
+- name_cn：整数线性规划模型设计
+
+- question_cn：如何用数学模型同时最大化需求覆盖和最小化搬迁旅行时间，并把“当前覆盖、搬迁增加覆盖、搬迁减少覆盖”三个数量同时纳入覆盖约束？
+
+- inputs_and_setting_cn：30个基站、48个需求区、r1=7分钟、r2=15分钟、r3=25分钟三个时间范围；历史需求数据；动态参数（d、V、O/E/Q、β、U）。
+
+- designed_or_compared_object_cn：双目标ILP模型：目标函数(1)最大化四类需求覆盖加权和，目标函数(2)最小化搬迁时间成本；约束(3)-(5)分别对r1、r2、r3覆盖纳入当前覆盖数O/E/Q、搬迁增益、搬迁损失；约束(7)基站容量，(8)搬迁工作量限制（U_t=γt/T），(9)防止往返搬迁，(11)关键情形下降级覆盖等。
+
+- baseline_control_or_counterfactual_cn：现有文献模型仅回答“搬迁增加多少覆盖”（question b），而本模型同时回答三个覆盖数量问题。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：整数线性规划建模，非线性约束(9)线性化为(16)-(19)；后续用加权和法（fuzzy AHP权重）归一化双目标。
+
+- main_result_cn：建立了可实时求解的ILP模型，覆盖约束中同时包含O/E/Q、进入搬迁增益和移出搬迁损失三个部分；约束(8)用动态U_t限制每个救护车累计搬迁时间。
+
+- argumentative_role_cn：从需求出发生成可计算的设计制品；覆盖约束三问题是贡献主张1的核心。
+
+- remaining_uncertainty_cn：模型虽然公式化，但尚未验证：（1）求解时间是否满足实时性（最大运行时间40秒是后续实验约束）；（2）与已有静态或动态策略相比是否真正改善绩效。
+
+- link_to_next_phase_cn：模型需要嵌入DSS系统结构，因此下一阶段要设计数据库、过程模型和用户界面来支持模型运行和参数更新。
+
+##### evidence_pointers
+
+1. Section 4.1 Mathematical model
+
+2. 目标函数(1)(2)
+
+3. 约束(3)-(5)与覆盖三问题段落
+
+4. 约束(8)、Eq.(15)
+
+5. Table 3 Notation
+
+#### 3. DSS过程模型与系统架构实现
+
+- order：3
+
+- name_cn：DSS过程模型与系统架构实现
+
+- question_cn：如何把数学规划模型嵌入一个可操作、交互式的DSS，使用户能输入数据、运行模型、选择搬迁建议并更新系统参数？
+
+- inputs_and_setting_cn：Excel原型、C++/.NET实现、GAMS 25.1.2与CPLEX求解器；用户输入的工作时间和救护车位置；常量数据、动态数据、结果数据三类数据库。
+
+- designed_or_compared_object_cn：DSS架构（Fig.1）、过程模型（Fig.2，涉及U_t计算、L^t_kf与V_jt更新、O/E/Q计算、模型执行、结果选择和β更新）、用户界面（Fig.3）。
+
+- baseline_control_or_counterfactual_cn：无显式对照；过程模型是后续仿真中每次搬迁触发时运行逻辑的精确模板。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：系统工程实现：数据分类、流程建模、界面设计，公式(20)-(24)定义参数更新规则。
+
+- main_result_cn：形成了完整的DSS构件：三类数据库、用户界面操作流程（工作时间→参数U_t→地点输入→L^t_kf与V_jt→O/E/Q→求解→选择→β更新），以及β在班次内部更新和在下一班次归零的机制。
+
+- argumentative_role_cn：证明所提出的不只是抽象模型而是可交互使用的DSS，直接支撑“interactive DSS”标题和贡献1。
+
+- remaining_uncertainty_cn：虽然实现了系统，但还没有证据表明该交互界面和过程模型在实际EMS运行中能用、好用；也没有验证用户选择“部分搬迁建议”导致的次优性。
+
+- link_to_next_phase_cn：模型产生多个搬迁建议后，用户需要知道“选择哪些建议”，因此下一阶段引入实时风险评估RRARR来提供优先级指南。
+
+##### evidence_pointers
+
+1. Section 4.2 DSS process model
+
+2. Fig.1, Fig.2, Fig.3
+
+3. Eqs.(20)-(24)
+
+4. 数据库三类型描述
+
+#### 4. 实时风险评估子模块（RRARR）开发与搬迁优先级指南
+
+- order：4
+
+- name_cn：实时风险评估子模块（RRARR）开发与搬迁优先级指南
+
+- question_cn：当模型输出多个搬迁建议时，用户如何判断哪些搬迁应优先执行？如何根据需求侧风险和当前覆盖情况对搬迁建议排序？
+
+- inputs_and_setting_cn：13个历史/位置/社会经济特征（如月份、一周中的几天、人口数据、交通流量、污染水平等）和3个DSS输出特征（r1/r2/r3范围内空闲救护车覆盖数）；BWM方法权重；48个需求子区域。
+
+- designed_or_compared_object_cn：九步RRARR流程：选择特征→BWM权重→区域划分→特征分类（三类：无历史、有历史方差、DSS实时输出）→正态化方差或极值归一化→总风险乘积公式→四类风险等级（低/中/高/极高）→生成表6的五级搬迁优先级（HTP/HP/MP/LP/LTP）。
+
+- baseline_control_or_counterfactual_cn：无直接对照；风险等级构建中通过Max/Min/α划分提供了内部对照。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：多准则决策（BWM）与归一化风险计算；特征分为正常/逆向标准并用不同公式归一化；最终风险是加权归一化风险的乘积。
+
+- main_result_cn：得到区域风险分类和搬迁优先级矩阵（表6）：从低风险区搬到高风险区为最高优先级，从高风险区搬到低风险区为最低优先级。
+
+- argumentative_role_cn：这一模块是贡献3的核心，是把模型输出转化为用户可执行指引的关键步骤，也回应了“动态和交互支持”的定位。
+
+- remaining_uncertainty_cn：（1）RRARR的特征选择和权重设定需要用户主观参与，尚无稳健性检验；（2）并未用数据验证执行高优先级搬迁比执行低优先级搬迁带来更好的覆盖/响应结果；（3）BWM权重的确定没有敏感性分析。
+
+- link_to_next_phase_cn：RRARR是为用户提供的决策辅助；但文章还需要证明整个系统（模型+DSS+RRARR）相对静态政策确实改善绩效，因此进入仿真实验阶段。
+
+##### evidence_pointers
+
+1. Section 4.3 Real-time risk assessment for relocation decisions
+
+2. Table 4, Table 5, Table 6
+
+3. Step 1-Step 9 与Eqs.(25)-(32)
+
+4. 第5节仿真的表8-11
+
+#### 5. 真实数据计算实验与静态政策对比
+
+- order：5
+
+- name_cn：真实数据计算实验与静态政策对比
+
+- question_cn：与现有静态政策相比，所提实时搬迁DSS在一周真实运营中是否改善了覆盖率、响应时间、救护车可用性和总工作量？
+
+- inputs_and_setting_cn：德黑兰东部14000个真实呼叫（约一个月数据），7天14个班次仿真；30辆急救车、30个基站；硬件：Core i5-4200M、6GB RAM、Windows 10；最大运行时间40秒。
+
+- designed_or_compared_object_cn：实时重置政策RRP（本文DSS）与静态政策SP；静态政策中救护车完成任务后回到原基站。
+
+- baseline_control_or_counterfactual_cn：静态政策SP作为基线：无搬迁、完成任务后归位。固定数据包括呼叫到达时间、类型和需求区域；场景时间、转移到医院时间、返回时间用真实数据。
+
+##### objective_metrics
+
+1. ANAA: 平均可用救护车数
+
+2. ACR: 平均覆盖率
+
+3. ART: 平均响应时间
+
+4. AWA: 每辆救护车每班次平均工作量
+
+5. TWAA: 所有救护车每班次总工作时间
+
+- analysis_method_cn：离散事件仿真（基于真实呼叫数据重放），将模型运行嵌入规则（覆盖缺口或60分钟准则），从14个班次中提取五指标的平均值，并对结果进行统计显著性检验（表中声明“statistically significant”）。
+
+- main_result_cn：RRP的ANAA对d1类从0.84提高至1.32（改善57%），ACR从61%升至88%（d1类）或总体73%→89%；ART总体从12.6降至8.2分钟（改善35%）；每班每车搬迁平均13.8分钟但总AWA从272分钟降至248分钟（改善9%），TWAA从8174分钟降至7442分钟。
+
+- argumentative_role_cn：作为端到端证据，把模型、DSS、RRARR全部组件整合后与现状政策对比，是“系统整体有效”的核心证据。
+
+- remaining_uncertainty_cn：（1）仿真并非实际部署，用户从RRARR中选择搬迁建议的行为未被建模；（2）14个班次的对比未提供方差/置信区间细节；（3）敏感度分析不足（如30辆车、40秒限制、γ值等未变）；（4）没有将RRP与另一种动态搬迁政策对照。
+
+- link_to_next_phase_cn：实验之后，用数值例子（Table 12-13）具体说明两种政策下同一辆救护车的总活动时间差异，以机械性机制解释为什么搬迁能减少总工作量，然后进入结论。
+
+##### evidence_pointers
+
+1. Section 5 Computational experiments
+
+2. Table 7-13
+
+3. Eq.(33) 归一化单目标
+
+4. 数值例子（Table 12/13）
+
+## 各部分修辞架构
+
+### abstract_moves
+
+#### 1. 1
+
+- move：CONTEXT
+
+- detail：指出需求模式变化和意外事件是急救运营延误的两大来源；移动空闲救护车是提高未来需求覆盖的常用方法。
+
+#### 2. 2
+
+- move：RQ_OR_OBJECTIVE
+
+- detail：开发一种模型驱动的DSS，同时最大化需求覆盖并最小化旅行时间，通过优化重置急救车辆。
+
+#### 3. 3
+
+- move：DESIGN_FEATURE
+
+- detail：模型把需求分为四类并持续更新；动态计算不同区域基于当前位置的覆盖数；开发RRARR风险评估DSS供用户参考。
+
+#### 4. 4
+
+- move：RESULT
+
+- detail：真实案例验证并与现有运营政策对比；平均每辆车因搬迁增加的负荷被响应时间和覆盖率的显著提升抵消；总工作耗时每班减少约9%。
+
+### introduction_moves
+
+#### 1. 1
+
+- move：CONTEXT
+
+- detail：EMS系统是最重要的社区健康服务系统，要求实时快速决策；响应时间有明确标准（城市10分钟、农村30分钟）。
+
+#### 2. 2
+
+- move：PRIOR_KNOWLEDGE
+
+- detail：决策分战略、战术、运营三层；静态策略缺乏操作灵活性；运营层需要动态修改基站位置；移动空闲救护车是改善未来覆盖的方式。
+
+#### 3. 3
+
+- move：PHENOMENON
+
+- detail：系统状态由需求模式变化、意外事件、可用救护车数变化驱动；实时状态变化时系统必须覆盖需求点并最小化未来响应时间。
+
+#### 4. 4
+
+- move：LIMITATION
+
+- detail：离线方法用合规表，在线方法考虑更多维度，但搬迁会带来员工不满和额外成本；在线方法应最小化搬迁成本和增加的工作量。
+
+#### 5. 5
+
+- move：RQ_OR_OBJECTIVE
+
+- detail：本文提出基于数学模型的在线DSS，按时间和系统状态更新，决定空闲救护车新位置，同时最大化覆盖、考虑工作量限制和搬迁成本。
+
+#### 6. 6
+
+- move：DESIGN_FEATURE
+
+- detail：双目标模型；四种需求类型；基于需求权重更新覆盖目标；用户可输入数据并快速得到新位置。
+
+### theory_and_knowledge_moves
+
+#### 1. 1
+
+- move：THEORY_INTRO
+
+- detail：文献综述将动态搬迁问题分为在线和离线两类，并指出在线方法需考虑多个实时变化维度。
+
+#### 2. 2
+
+- move：LIMITATION
+
+- detail：指出以往所有模型在覆盖约束中只回答“搬迁增加多少覆盖”（question b），没有回答当前覆盖数和搬迁减少覆盖数（question a和c），因为未打算在后续分析中使用这些数字。
+
+#### 3. 3
+
+- move：DESIGN_FEATURE
+
+- detail：本文把“不同时间范围内的覆盖数量”作为DSS的输入，用于量化需求区的风险（即RRARR），从而把覆盖数从模型输出升级为风险分析的输入。
+
+### artifact_design_moves
+
+#### 1. 1
+
+- move：REQUIREMENT
+
+- detail：系统设计需定义三类数据（常量、动态、结果），并依据过程模型设计用户界面。
+
+#### 2. 2
+
+- move：DESIGN_FEATURE
+
+- detail：用户界面流程：工作时间→计算U_t→输入可用救护车位置→调用L^t_kf→计算V_jt→计算O/E/Q→求解→显示结果→选择搬迁→更新β。
+
+#### 3. 3
+
+- move：STUDY_OVERVIEW
+
+- detail：RRARR的九步流程，包括特征选择、BWM权重、区域划分、特征分类、归一化风险、风险等级划分、搬迁优先级矩阵。
+
+### evaluation_moves
+
+#### 1. 1
+
+- move：METHOD_JUSTIFICATION
+
+- detail：使用真实数据模拟一周而不是现场部署，因为可重复性和对两种政策的可控对比；固定呼叫到达时间、类型和请求区域以保持可比性。
+
+#### 2. 2
+
+- move：BENCHMARK_OR_CONTRAST
+
+- detail：以静态政策为基线，定义ANAA、ACR、ART、AWA、TWAA五项绩效指标，在每个班次后提取。
+
+#### 3. 3
+
+- move：RESULT
+
+- detail：表8-11报告四项改善（AR、ACR、ART、工作量），并添加数值例子解释为什么搬迁能减少总活动时间。
+
+### discussion_and_contribution_moves
+
+#### 1. 1
+
+- move：CONTRIBUTION
+
+- detail：结论重新强调：模型驱动的DSS、覆盖约束三问题、RRARR风险模块、真实案例中覆盖率与响应时间改善、总工作量9%减少。
+
+#### 2. 2
+
+- move：LIMITATION_AND_FUTURE
+
+- detail：指出未来可考虑不同类型急救车辆（如摩托车）、集成调度与搬迁决策、搬迁时间准则的敏感度分析、以及鲁棒优化应对需求不确定性。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 动态搬迁文献中的在线/离线两类方法（Gendreau等；Bélanger等）；覆盖模型文献（MCLP、双标准模型）；需求分类思想（Moeini等按需救护车数量分类）；工作量限制约束（Enayati等）
+
+2. 实时风险分析中没有明确外部理论，主要依赖多准则决策BWM和多特征归一化的工程实践
+
+3. 临床文献（Leknes 2017；Bürger等2018）用于把响应时间改善转化为健康结果意义
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：数学模型的六个覆盖约束和双目标设计明显受动态覆盖模型文献（特别是Gendreau的在线模型、Moeini的需求分类、Enayati的工作量限制）驱动，但其中把覆盖数同时用于风险评估（RRARR）的设计并非来自某个正式理论，而是本文针对用户选择难题提出的启发式工程方法；BWM和风险归一化属于多准则决策工程工具，不是心理学或组织行为理论。RRARR的风险等级划分与优先级矩阵是领域知识+决策分析启发式，而非严格理论推导。因此知识基础在前瞻性决定了模型结构，但最终决策支持部分的制品选择主要来自工程判断。
+
+- 理论到设计翻译链：现有在线搬迁模型覆盖约束只计算搬迁增加覆盖 → 不足：无法精确反映搬迁前后覆盖净变化 → 设计要求：覆盖约束必须同时纳入当前覆盖O/E/Q、进入车辆增益、离开车辆损失 → 制品选择：约束(3)(4)(5)分别对应三个时间范围，每个约束中包含三项和差 → 同时，由于作者想把覆盖数用于风险分析，这些O/E/Q参数被扩展到DSS数据库和RRARR特征中 → 现有EMS用户面对多个搬迁建议难以选择 → 设计需求：生成优先级指南 → 制品选择：RRARR用BWM权重、方差归一化、四风险等级和表6优先级矩阵 → 整个DSS在一个真实案例中与静态政策对比，验证五指标。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：动态在线模型应实时响应系统状态变化，而不是依赖离线合规表。
+
+- mechanism_cn：实时更新需求权重、覆盖数和搬迁工作量可以更精确反映系统状态，支持更优决策。
+
+- design_requirement_cn：模型需以时间为周期并在系统状态变化时重新求解。
+
+- artifact_choice_cn：DSS过程模型在每个事件后更新动态参数并调用数学规划模型。
+
+- evaluated_contrast_cn：与静态政策对比中的实时重置政策（RRP）
+
+- objective_result_cn：ACR 89% vs 73%，ART 8.2 vs 12.6 min。
+
+##### evidence_pointers
+
+1. Section 3事件列表
+
+2. Section 4.2过程模型
+
+3. Table 8-9
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：覆盖约束应考虑需求点当前覆盖数量以及搬迁带来的覆盖增加和减少，而不是只考虑增加。
+
+- mechanism_cn：若忽略搬迁前后覆盖数变化，可能高估搬迁效果或生成破坏性搬迁；同时考虑三项可给出更准确的净覆盖水平。
+
+- design_requirement_cn：每个覆盖约束中必须包含O/E/Q、进入增益项、离开损失项。
+
+- artifact_choice_cn：约束(3)-(5)中写为O_it + Σenter - Σleave ≥ 覆盖变量。
+
+- evaluated_contrast_cn：与仅回答question b的文献模型对比（概念性对比）
+
+- objective_result_cn：未单独分离检验；作为DSS整体中的设计特征，与SP对比得到总体改善。
+
+##### evidence_pointers
+
+1. Section 2.3的三问题段落
+
+2. 约束(3)-(5)
+
+3. Table 8-11
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：高紧急度需求应以更短时间范围覆盖，且双车救援需求需特殊处理。
+
+- mechanism_cn：不同需求类型对覆盖时间半径和车辆数量要求不同，分开建模可避免以较低标准满足高紧急需求。
+
+- design_requirement_cn：定义四类需求（X1、X2、Z、W）与对应时间半径r1/r2/r3；约束(6)要求双车覆盖变量不超过单车覆盖变量。
+
+- artifact_choice_cn：目标函数(1)中四项加权和；约束(11)关键情形下允许降级覆盖。
+
+- evaluated_contrast_cn：四种呼叫类型各自的ANAA/ACR/ART对比（表8-9）
+
+- objective_result_cn：d1类覆盖率从61%升至88%，d4类从88%升至100%。
+
+##### evidence_pointers
+
+1. Section 3四类需求定义
+
+2. 目标函数(1)
+
+3. Table 8-9
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：搬迁有成本且会增加员工工作量，因此需要限制每个救护车的累计搬迁时间。
+
+- mechanism_cn：搬迁太少会使覆盖不足，搬迁太多会给员工带来负担并抵消响应收益；设置U_t=γt/T随时间增加的限额可平衡。
+
+- design_requirement_cn：每个救护车搬迁工作时间不超过动态上限U_t。
+
+- artifact_choice_cn：约束(8)和Eq.(15)；β_k^t变量记录累计搬迁时间。
+
+- evaluated_contrast_cn：RRP中每车平均搬迁13.8分钟对比总工作量下降9%。
+
+- objective_result_cn：AWA 从272降至248分钟，TWAA 8174→7442分钟。
+
+##### evidence_pointers
+
+1. 约束(8)、Eq.(15)
+
+2. Table 10-11
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：用户面对多个搬迁建议时需要知道执行的优先级；风险高的区域应优先获得覆盖。
+
+- mechanism_cn：若从低风险区移走车辆去覆盖高风险区，则改善整体应对能力；反之则恶化高风险区。
+
+- design_requirement_cn：生成基于区域风险等级的搬迁优先级矩阵。
+
+- artifact_choice_cn：RRARR九步流程、四风险等级、表6五级优先级（HTP/HP/MP/LP/LTP）。
+
+- evaluated_contrast_cn：概念性示例，无量化对比（说明优先级方向）。
+
+- objective_result_cn：文章未提供RRARR优先级与未使用RRARR时的实验对比。
+
+##### evidence_pointers
+
+1. Section 4.3 Steps 1-9
+
+2. Table 6
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 真实案例仿真对比（静态政策 vs 实时重置政策）
+
+2. 基于真实呼叫数据的伪实验式重放模拟
+
+3. 数值例子（活动时间分解说明）
+
+4. 统计显著性声明（表中注明显著，但未给具体检验统计量）
+
+- why_these_evaluations_cn：文章面向DSS在真实EMS中的可行性，因此选择在东部德黑兰的真实历史呼叫数据上模拟一周14个班次。使用固定输入（呼叫到达时间、类型、位置）使两种政策只在“是否实时搬迁”上不同，从而把绩效差异归因于所提出的DSS政策。数值例子用于桥接宏观指标与具体机制，让读者直观理解为什么搬迁虽然增加了少量搬迁时间却减少更多响应时间。
+
+- benchmark_and_contrast_chain_cn：以静态政策SP为唯一基线：在静态政策中救护车完成任务后回原站。仿真在完全相同的呼叫流上运行两种政策，然后在ANAA、ACR、ART、AWA、TWAA五个维度逐步对比。先从资源可用性和覆盖率（表8）入手，再对比响应时间（表9），接着把每辆车活动组成分解（表10、11），最后用数值例子（表12、13）展示同一辆救护车在两个政策中的具体活动时间差异。这种链式对比使“搬迁节省总时间”的结论不只是宏观统计，也有微观机制支撑。
+
+### claim_evidence_ledger
+
+#### 1. 实时重置政策比静态政策增加可用救护车数量和覆盖率。
+
+- claim_cn：实时重置政策比静态政策增加可用救护车数量和覆盖率。
+
+- evidence_cn：表8：各类型ANAA提升19%-57%，ACR提升14%-49%（d1类从61%到88%）。
+
+- strength_cn：强证据
+
+#### 2. 实时重置政策降低平均响应时间。
+
+- claim_cn：实时重置政策降低平均响应时间。
+
+- evidence_cn：表9：总体ART从12.6降为8.2分钟（-35%）。
+
+- strength_cn：强证据
+
+#### 3. 响应时间改善会带来临床获益（生存率和出院率）。
+
+- claim_cn：响应时间改善会带来临床获益（生存率和出院率）。
+
+- evidence_cn：引用了Leknes等和Bürger等文献，而非本文直接测量的临床结果。
+
+- strength_cn：弱证据（借外部文献推断）
+
+#### 4. 搬迁虽然增加每车工作量（13.8分钟）但总工作量减少9%。
+
+- claim_cn：搬迁虽然增加每车工作量（13.8分钟）但总工作量减少9%。
+
+- evidence_cn：表11：AWA从272降至248分钟，TWAA从8174降至7442分钟。数值例子（表12-13）：同一辆车128分钟→99分钟。
+
+- strength_cn：中-强证据
+
+#### 5. 覆盖约束三问题（当前覆盖/增加/减少）带来优势。
+
+- claim_cn：覆盖约束三问题（当前覆盖/增加/减少）带来优势。
+
+- evidence_cn：主要靠模型公式和设计论证，没有提供与忽略增减效应的模型变体的消融对比。
+
+- strength_cn：弱证据（无消融实验）
+
+#### 6. RRARR优先级指南能改善用户决策。
+
+- claim_cn：RRARR优先级指南能改善用户决策。
+
+- evidence_cn：没有实验或仿真证据；只有流程描述和表6指南。
+
+- strength_cn：无直接证据
+
+- internal_validity_strategy_cn：（1）在完全相同的呼叫流上对比两种政策，排除呼叫差异；（2）固定场景时间、去医院时间、返回时间等，只让是否搬迁成为主要差异；（3）两种政策都模拟14个班次并报告平均指标；（4）声称统计显著性，但未提供具体检验方法或置信区间。
+
+- external_validity_strategy_cn：（1）使用真实运营数据（14000个呼叫）；（2）案例区域是真实EMS系统（东部德黑兰）；但文章没有讨论对具有不同车队规模、不同需求结构或不同道路环境地区的泛化性；未来研究提及敏感度分析和更稳健的需求不确定性处理。
+
+- what_is_not_actually_tested_cn：（1）RRARR对用户选择搬迁建议的实际帮助未被实验或仿真检验；（2）覆盖约束三问题相对两问题的独立贡献未被消融检验；（3）模型在不同γ值、不同搬迁触发阈值或不同权重λ1、λ2下的敏感度未做；（4）现场部署和真实工作人员使用体验未测试；（5）平均结果之外的变化性（分布、最坏情形）未报告；（6）交互式DSS的用户接受度和认知负荷未评估。
+
+## 贡献闭环
+
+- technical_claim_cn：提出的双目标ILP模型能在40秒内求解，并同时处理需求优先级、覆盖净变化和工作量限制。
+
+- artifact_claim_cn：模型驱动的DSS（含数据库、过程模型、用户界面和RRARR）在真实案例中比静态政策改善覆盖率、响应时间和总工作耗时。
+
+- mechanism_claim_cn：实时搬迁虽然增加每车13.8分钟搬迁时间，但通过减少后续呼叫响应时间（如数值例子中第二次呼叫19分钟→6分钟）降低总活动时间，因此净效益为正。
+
+- boundary_claim_cn：系统在30辆急救车、30个基站、48个需求区、r1=7/r2=15/r3=25分钟的东部德黑兰环境下验证；结果对类似规模城市地区可能适用，但未给出系统化边界条件。
+
+- reusable_design_knowledge_cn：（1）覆盖约束应同时纳入当前覆盖数、搬迁增加覆盖数和搬迁减少覆盖数；（2）动态U_t=γt/T可把搬迁工作量均匀分配到班次内；（3）用BWM+归一化风险把DSS输出转成可操作的搬迁优先级指南。
+
+- theoretical_contribution_cn：文章并未提出或扩展某一正式理论；其贡献是丰富动态搬迁模型的约束表达（覆盖三问题）和把DSS输出与风险决策结合。理论上可以说是在动态覆盖建模中增加了“覆盖净变化”这个概念化约束，并通过RRARR把模型输出与多准则风险评估整合。
+
+- how_discussion_closes_intro_gap_cn：引言提出的缺口是：静态策略缺乏灵活性、在线方法需考虑多个实时维度且以往覆盖约束未计算覆盖净变化、以及缺乏搬迁决策的风险参考。结论部分逐项回应：提出的DSS实现了实时更新与交互；覆盖约束三问题被明确表达；RRARR为用户提供风险指南；真实案例说明这些设计带来覆盖率、响应时间与总工作量的共同改善。
+
+- overclaim_or_unsupported_leaps_cn：（1）声称覆盖率提高“44%”（88/61-1）等百分比改善可能因基线低而显得夸大；（2）从响应时间缩小直接跳到“提高生存和出院率”是外部文献推断，而不是本研究临床结果；（3）RRARR的作用没有被实证检验，但结论中将其作为DSS有效组成部分之一；（4）覆盖约束三问题虽被提出，但没有单独验证其增量价值；（5）仿真中的“用户”行为被简化成选择全部建议，而RRARR恰恰是为了让用户选择部分建议，两者存在逻辑脱节。
+
+## 句级写作动作图谱
+
+### 1. P1 S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：需求模式变化和意外事件是急救运营延迟的两大来源；移动空闲救护车是提高未来需求覆盖的有效方式。
+
+- rhetorical_function_cn：确立研究领域和核心问题，使读者理解为什么急救车重部署是值得研究的主题。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为“本研究提出DSS解决该问题”提供问题背景。
+
+- evidence_pointer：Abstract 第1-2句
+
+### 2. P1 S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究开发一个模型驱动的DSS，同时最大化需求覆盖并最小化旅行时间。
+
+- rhetorical_function_cn：直奔本文目标，告诉读者他们要构建什么。
+
+- depends_on_cn：依赖上一句指出的问题背景。
+
+- sets_up_cn：为摘要中后续设计特征和结果做准备。
+
+- evidence_pointer：Abstract 第3句
+
+### 3. P1 S4-S6
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S4-S6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型把需求分为四类并随时间更新；动态计算覆盖数；开发RRARR用于风险参考。
+
+- rhetorical_function_cn：用于定位创新点（四类需求、动态覆盖、RRARR）。
+
+- depends_on_cn：承接“本研究开发DSS”。
+
+- sets_up_cn：让读者预期案例研究将验证这些设计。
+
+- evidence_pointer：Abstract 第4-6句
+
+### 4. P1 S7-S9
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S7-S9
+
+- move_code：RESULT
+
+- paraphrase_cn：案例验证表明搬迁增加的工作负荷被响应时间和覆盖率提升抵消，总工作耗时每班减少约9%。
+
+- rhetorical_function_cn：预先把最有力的量化结果告知读者，支撑摘要的吸引力。
+
+- depends_on_cn：依赖前面的设计特征描述。
+
+- sets_up_cn：让读者继续阅读想看细节。
+
+- evidence_pointer：Abstract 第7-9句
+
+### 5. P1 S1-S3
+
+- order：5
+
+- section：Introduction
+
+- locator：P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：EMS组织是社区健康服务的关键系统，必须快速做出有效决策；确定呼救类型和派车是性命攸关的决策。
+
+- rhetorical_function_cn：建立领域的重要性和时间敏感性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为“响应时间必须达标”和“系统压力大”做铺垫。
+
+- evidence_pointer：Introduction 第1段
+
+### 6. P1 S4-S5
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S4-S5
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：EMS受合同和管理目标约束需满足绩效标准；某些标准要求城市响应时间在10分钟内、农村30分钟。
+
+- rhetorical_function_cn：给出明确的绩效基线，使后续覆盖率、响应时间的改善具有现实意义。
+
+- depends_on_cn：上一句EMS的重要性。
+
+- sets_up_cn：后续所有绩效指标（ART、ACR）的价值判断基于此标准。
+
+- evidence_pointer：Introduction 第1段末
+
+### 7. P2 S1-S5
+
+- order：7
+
+- section：Introduction
+
+- locator：P2 S1-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：决策分战略、战术和运营三层；静态策略在战术层设置固定站点和待命点，但静态模型缺乏运营灵活性；运营层系统状态连续变化，需要动态调整。
+
+- rhetorical_function_cn：指出静态策略的结构性缺陷，引出动态策略必要性。
+
+- depends_on_cn：EMS重要性。
+
+- sets_up_cn：为“实时搬迁”作为解决方案做铺垫；后续文献综述也依据离线/在线分类组织。
+
+- evidence_pointer：Introduction 第2段
+
+### 8. P2 S6-S7
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S6-S7
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：移动空闲救护车在基站间是改善未来呼叫覆盖的有效方式。
+
+- rhetorical_function_cn：将动态策略具体化为“空闲救护车搬迁”这一可建模动作。
+
+- depends_on_cn：静态策略缺乏灵活性的判断。
+
+- sets_up_cn：文献综述围绕搬迁模型组织。
+
+- evidence_pointer：Introduction 第2段末
+
+### 9. P3 S1-S5
+
+- order：9
+
+- section：Introduction
+
+- locator：P3 S1-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：动态搬迁问题有离线和在线两种方法；离线方法状态少、用合规表；在线方法实时考虑更多维度（可用救护车数、呼叫率、搬迁成本、工作量），但其关键是在最短时间内做出合适决策；搬迁可能不受员工欢迎并增加成本。
+
+- rhetorical_function_cn：把问题空间划分为离线/在线；“在线方法需兼顾多维度”成为本文模型设计的知识基础。
+
+- depends_on_cn：前一段动态策略。
+
+- sets_up_cn：明确提出在线方法需最小化搬迁成本和增加工作量的要求，对应后文的双目标和约束(8)。
+
+- evidence_pointer：Introduction 第3段
+
+### 10. P4 S1-S6
+
+- order：10
+
+- section：Introduction
+
+- locator：P4 S1-S6
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文提出基于数学模型的在线DSS：按时间和系统状态更新，确定空闲救护车新位置，同时最大化需求覆盖并考虑工作量限制和搬迁成本。
+
+- rhetorical_function_cn：定位本研究的核心主张和系统目标。
+
+- depends_on_cn：前面问题背景和在线方法。
+
+- sets_up_cn：后文的问题概览和数学模型都围绕这一目标展开。
+
+- evidence_pointer：Introduction 第4段
+
+### 11. P4 S7-S8
+
+- order：11
+
+- section：Introduction
+
+- locator：P4 S7-S8
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型为双目标：最大化需求覆盖与最小化旅行时间；覆盖最大化考虑三个时间范围和四种需求类型；需求权重每期更新。
+
+- rhetorical_function_cn：把系统目标细化为可建模的双目标和需求分类。
+
+- depends_on_cn：前面的在线方法需求。
+
+- sets_up_cn：为Section 4.1的数学公式做预告。
+
+- evidence_pointer：Introduction 第4段
+
+### 12. P4 S9
+
+- order：12
+
+- section：Introduction
+
+- locator：P4 S9
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文剩余部分结构：文献综述、问题概览、DSS架构、案例对比、结论。
+
+- rhetorical_function_cn：给出论文路线图。
+
+- depends_on_cn：整个引言。
+
+- sets_up_cn：无新内容，帮助读者导航。
+
+- evidence_pointer：Introduction 第4段末
+
+### 13. P1 S1-S4
+
+- order：13
+
+- section：Literature review
+
+- locator：P1 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：过去二十年动态搬迁模型受到大量关注；运营决策充满不确定性；为管理不确定性，许多模型采用动态方法；一些研究把工作日分成多个时段并为每时段制定位置计划。
+
+- rhetorical_function_cn：为文献综述建立总体图景：动态方法已成为主流。
+
+- depends_on_cn：引言的问题背景。
+
+- sets_up_cn：为后文分类综述（在线/离线）铺设框架。
+
+- evidence_pointer：Section 2 第1段
+
+### 14. P1 S5-S8
+
+- order：14
+
+- section：Literature review
+
+- locator：P1 S5-S8
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：动态优化问题有离线和在线两种解法；离线是后验的、需要合规表；在线便于实时确定最优搬迁策略。
+
+- rhetorical_function_cn：确立本文采用的在线方法在问题分类中的位置。
+
+- depends_on_cn：Section 2开头。
+
+- sets_up_cn：文献综述分为在线和离线两个子节。
+
+- evidence_pointer：Section 2 第1段末
+
+### 15. P2 S1-S3
+
+- order：15
+
+- section：Literature review
+
+- locator：P2 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有文献两大流：一个侧重需求覆盖，一个侧重搬迁成本，各用不同目标函数和约束；但有局限。
+
+- rhetorical_function_cn：点出现有研究多从单一侧面出发，为本文同时考虑双侧留下空间。
+
+- depends_on_cn：文献综述开篇。
+
+- sets_up_cn：后文Table 1分类和贡献列表中，本文同时覆盖需求侧和EMS侧。
+
+- evidence_pointer：Section 2 第2段
+
+### 16. P2 S4
+
+- order：16
+
+- section：Literature review
+
+- locator：P2 S4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：表1列出已综述研究，按其方法（实时或离线）和问题维度分类描述。
+
+- rhetorical_function_cn：用分类表为全文建立对比矩阵，后续每篇文献都在此框架下定位。
+
+- depends_on_cn：文献综述内容。
+
+- sets_up_cn：最后表格中本文一行与全部文献对比。
+
+- evidence_pointer：Section 2 表1前
+
+### 17. 第1段
+
+- order：17
+
+- section：Literature review 2.1
+
+- locator：第1段
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：Gendreau等(a)提出第一个在线重部署模型，使用两个时间范围；绝对覆盖约束在更长范围内覆盖所有需求点，相对覆盖约束在更短范围内覆盖α比例需求。
+
+- rhetorical_function_cn：介绍在线方法奠基模型，给出后续在线模型的通用结构。
+
+- depends_on_cn：综述框架。
+
+- sets_up_cn：后文多数在线模型（Moeini等、Mason等）都与此模型比较。
+
+- evidence_pointer：Section 2.1 Gendreau段落
+
+### 18. Moeini et al.段末尾
+
+- order：18
+
+- section：Literature review 2.1
+
+- locator：Moeini et al.段末尾
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Moeini等人的模型把需求分为单车和双车两类，且需求是静态的。
+
+- rhetorical_function_cn：指出需求分类复杂度不足和静态需求假设的局限。
+
+- depends_on_cn：在线方法综述。
+
+- sets_up_cn：紧随其后作者陈述自己的模型把需求分为四类且需求动态变化，形成对比。
+
+- evidence_pointer：Section 2.1 Moeini段落
+
+### 19. Gendreau(b)段
+
+- order：19
+
+- section：Literature review 2.2
+
+- locator：Gendreau(b)段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Gendreau等(b)认为在线模型在每次派车后运行可能耗时，提出MECRP作为第一个离线模型，基于MCLP，状态改变用可用救护车数。
+
+- rhetorical_function_cn：介绍离线方法的代表模型，为“互补视角”提供对比基准。
+
+- depends_on_cn：综述框架。
+
+- sets_up_cn：离线方法后续（Nair、Maleki、Sudtachat等）都在此基础上派生出运动模型。
+
+- evidence_pointer：Section 2.2 Gendreau段落
+
+### 20. P1 第一点
+
+- order：20
+
+- section：Literature review 2.3
+
+- locator：P1 第一点
+
+- move_code：GAP
+
+- paraphrase_cn：由于搬迁是运营决策且可能在一个班次内多次发生，本文提出在线DSS基于数学模型给出建议。
+
+- rhetorical_function_cn：明确本文的第一个创新点：把搬迁建模嵌入在线决策支持系统。
+
+- depends_on_cn：文献综述中在线方法的特点。
+
+- sets_up_cn：全文把DSS作为核心对象，与“interactive DSS”标题呼应。
+
+- evidence_pointer：Section 2.3 第一点
+
+### 21. P1 第二点 a-c
+
+- order：21
+
+- section：Literature review 2.3
+
+- locator：P1 第二点 a-c
+
+- move_code：GAP
+
+- paraphrase_cn：覆盖约束需要回答三个问题：当前覆盖数、搬迁增加覆盖数、搬迁减少覆盖数；以往所有模型只回答第二个，因为未计划将这些数字用于后续分析。
+
+- rhetorical_function_cn：这是文章最核心的缺口声明：即便现有模型在技术上可计算三个数量，也没有在覆盖约束中同时使用它们。
+
+- depends_on_cn：文献综述中覆盖模型的讨论。
+
+- sets_up_cn：后文约束(3)-(5)将直接把这三个量都写进模型，从而把缺口转化为设计特征。
+
+- evidence_pointer：Section 2.3 第二点
+
+### 22. P1 第二点末
+
+- order：22
+
+- section：Literature review 2.3
+
+- locator：P1 第二点末
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：本文把这些覆盖数作为DSS计算风险的主要输入，用于量化需求区风险。
+
+- rhetorical_function_cn：解释为什么三个覆盖数不只是模型内部量，而具有决策支持功能。
+
+- depends_on_cn：上一句三问题缺口。
+
+- sets_up_cn：为RRARR使用覆盖数作为特征做铺垫。
+
+- evidence_pointer：Section 2.3 第二点末
+
+### 23. P1 第三点
+
+- order：23
+
+- section：Literature review 2.3
+
+- locator：P1 第三点
+
+- move_code：GAP
+
+- paraphrase_cn：开发用于实时风险分析的DSS（RRARR），预测需求类型的重要特征、计算各区域风险、从很高到很低分类，并给出搬迁优先级排序。
+
+- rhetorical_function_cn：提出第三个创新点：不只给搬迁建议，还给出执行优先级。
+
+- depends_on_cn：三个覆盖数量问题。
+
+- sets_up_cn：Section 4.3的九步流程和表6优先级矩阵。
+
+- evidence_pointer：Section 2.3 第三点
+
+### 24. P1 S1-S4
+
+- order：24
+
+- section：Section 3 Problem overview
+
+- locator：P1 S1-S4
+
+- move_code：CONTEXT
+
+- paraphrase_cn：东部德黑兰是高需求地区，覆盖170平方公里、约300万人口；30辆救护车和30个基站应对每小时平均19个呼叫；该地区最主要的救援问题是无法在需求规定的时间范围内覆盖所有需求。
+
+- rhetorical_function_cn：引入具体案例背景并明确指出其绩效缺口。
+
+- depends_on_cn：引言中的EMS标准。
+
+- sets_up_cn：后文模型和实验都基于该地区的真实数据。
+
+- evidence_pointer：Section 3 第1段
+
+### 25. P1 S5-S6
+
+- order：25
+
+- section：Section 3 Problem overview
+
+- locator：P1 S5-S6
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：该区域使用静态策略；为解决问题，本文提供在线搬迁DSS。
+
+- rhetorical_function_cn：把问题从“覆盖不足”连接到“静态策略”与“在线DSS”的解决方案。
+
+- depends_on_cn：前一句绩效缺口。
+
+- sets_up_cn：为实验中的SP对照做铺垫。
+
+- evidence_pointer：Section 3 第1段
+
+### 26. P2 S1
+
+- order：26
+
+- section：Section 3 Problem overview
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：三类事件改变系统状态：呼叫到达并派车、救护车完成使命、空闲救护车搬迁。
+
+- rhetorical_function_cn：明确模拟和模型中“状态变化”的具体含义。
+
+- depends_on_cn：引言中的系统状态动态变化。
+
+- sets_up_cn：为Section 5仿真的事件推进机制定义基础。
+
+- evidence_pointer：Section 3 第2段
+
+### 27. P3 S1-S4
+
+- order：27
+
+- section：Section 3 Problem overview
+
+- locator：P3 S1-S4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：需求分为四类：最紧急Case1（r1内一辆车）、最紧急Case2（r1内两辆车）、紧急（r2内一辆）、非紧急（r3内一辆）。
+
+- rhetorical_function_cn：将需求分类具体化为模型必须支持的四种覆盖约束。
+
+- depends_on_cn：没有formal理论；基于需求紧急度和所需车辆数。
+
+- sets_up_cn：对应约束(3)-(5)中的X1、X2、Z、W变量。
+
+- evidence_pointer：Section 3 P3
+
+### 28. P4 S2-S6
+
+- order：28
+
+- section：Section 3 Problem overview
+
+- locator：P4 S2-S6
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：呼叫到达时确定类型并分派最近车辆；完成任务后如果系统需要搬迁则先回最近基站再搬迁；搬迁后更新动态参数。
+
+- rhetorical_function_cn：给出系统更新规则，定义“何时重新求解模型”。
+
+- depends_on_cn：三类事件的定义。
+
+- sets_up_cn：与DSS过程模型（Section 4.2）的流程相呼应。
+
+- evidence_pointer：Section 3 P4
+
+### 29. P5 S1-S3
+
+- order：29
+
+- section：Section 3 Problem overview
+
+- locator：P5 S1-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：两个搬迁触发准则：r1中有至少4个需求点且r2中至少2个需求点无覆盖，或距离上次搬迁已超过60分钟。
+
+- rhetorical_function_cn：在模型运行外部设定何时触发搬迁的关键规则；借鉴Bélanger等。
+
+- depends_on_cn：文献中的动态策略经验。
+
+- sets_up_cn：Section 5仿真中RPP系统决策流程的核心条件。
+
+- evidence_pointer：Section 3 P5
+
+### 30. P6 S1-S6
+
+- order：30
+
+- section：Section 3 Problem overview
+
+- locator：P6 S1-S6
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：给出建模假设：均匀子区域；覆盖以最快路径为准；每需求点可产生四类呼叫，双车需求只在r1内；需求权重基于预测和班内增量更新；12小时班次；单一车型。
+
+- rhetorical_function_cn：界定模型边界，说明哪些现实因素被简化。
+
+- depends_on_cn：P1-P5的问题定义。
+
+- sets_up_cn：约束和目标函数中参数（如d、H、S、R、U_t）的使用前提。
+
+- evidence_pointer：Section 3 假设列表
+
+### 31. P1 S1-S2
+
+- order：31
+
+- section：Section 4 Proposed DSS architecture
+
+- locator：P1 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：本节描述DSS架构及其组件：数学模型、用户界面和数据库。
+
+- rhetorical_function_cn：预告本节结构。
+
+- depends_on_cn：问题定义。
+
+- sets_up_cn：为后文Section 4.1、4.2、4.3做提示。
+
+- evidence_pointer：Section 4 开头
+
+### 32. P1 S1-S4
+
+- order：32
+
+- section：Section 4.1 Mathematical model
+
+- locator：P1 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型为整数线性规划，双目标：最大化覆盖、最小化搬迁时间；另防止违反工作量。
+
+- rhetorical_function_cn：说明模型类型和两个目标及一个约束目标。
+
+- depends_on_cn：Section 3的四类需求和事件。
+
+- sets_up_cn：随后直接给出目标函数和约束。
+
+- evidence_pointer：Section 4.1 第1段
+
+### 33. P1 S1-S4
+
+- order：33
+
+- section：Section 4.1.1
+
+- locator：P1 S1-S4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：三个时间范围设为7、15、25分钟；覆盖最大化应与需求优先权匹配；目标(1)最大化不同优先级需求点的加权覆盖；目标(2)最小化搬迁行驶时间。
+
+- rhetorical_function_cn：将需求优先级和成本目标转化为具体的目标函数。
+
+- depends_on_cn：四类需求和时间范围r1<r2<r3。
+
+- sets_up_cn：支撑目标函数公式(1)(2)。
+
+- evidence_pointer：Section 4.1.1 第1段
+
+### 34. 约束(3)-(5)后的解释段
+
+- order：34
+
+- section：Section 4.1.1
+
+- locator：约束(3)-(5)后的解释段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：约束(3)(4)(5)根据第2.3节六步构造：分别考虑r1、r2、r3中的当前覆盖数、搬迁增加的覆盖数和搬迁减少的覆盖数，并同时纳入同一个公式。
+
+- rhetorical_function_cn：直接把贡献1（覆盖三问题）转化为数学公式中的结构选择。
+
+- depends_on_cn：Section 2.3的缺口声明。
+
+- sets_up_cn：后文用约束(6)-(14)补充力学约束。
+
+- evidence_pointer：Section 4.1.1 约束解释段
+
+### 35. 约束(8)与Eq.(15)附近
+
+- order：35
+
+- section：Section 4.1.1
+
+- locator：约束(8)与Eq.(15)附近
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：约束(8)用β代表每辆车累计搬迁时间，限制其不超过动态上限U_t=γt/T。
+
+- rhetorical_function_cn：把“工作量限制”这一EMS侧要求转化为随时间变化的搬迁预算。
+
+- depends_on_cn：引言中提到搬迁可能增加工作量；需求侧的工作量限制来自Enayati等文献。
+
+- sets_up_cn：支持实验结果中“每车平均搬迁13.8分钟”的对比解读。
+
+- evidence_pointer：约束(8)、Eq.(15)
+
+### 36. 约束(9)后的线性化解
+
+- order：36
+
+- section：Section 4.1.1
+
+- locator：约束(9)后的线性化解
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：约束(9)避免往返搬迁；因非线性，用三个不等式线性化。
+
+- rhetorical_function_cn：说明模型保持可计算性的技术处理。
+
+- depends_on_cn：非线性约束引入求解困难。
+
+- sets_up_cn：为后续用GAMS/CPLEX求解提供线性化依据。
+
+- evidence_pointer：约束(9)与(16)-(19)
+
+### 37. P1 S1-S4
+
+- order：37
+
+- section：Section 4.2 DSS process model
+
+- locator：P1 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为使数学规划模型在DSS中实现，需要设计过程模型，它是数据库和用户界面设计的依据；系统开发分三步：模型设计、数据库设计、界面设计。
+
+- rhetorical_function_cn：把抽象数学模型引到可操作DSS的实现路径。
+
+- depends_on_cn：Section 4.1数学模型。
+
+- sets_up_cn：为数据库三类数据和流程公式(20)-(24)设伏笔。
+
+- evidence_pointer：Section 4.2 第1段
+
+### 38. P2 S1-S6
+
+- order：38
+
+- section：Section 4.2 DSS process model
+
+- locator：P2 S1-S6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用户界面流程：输入工作时间→计算U_t→输入救护车位置→调用L^t_kf→计算V_jt→计算O/E/Q→运行模型→显示结果→用户选择搬迁→更新β或跨班次归零。
+
+- rhetorical_function_cn：把数学模型嵌入一个用户可控的实时工作流。
+
+- depends_on_cn：过程模型。
+
+- sets_up_cn：为Fig.2和Fig.3的展示提供逻辑；也为仿真中如何运行系统提供指导。
+
+- evidence_pointer：Section 4.2 第2-4段
+
+### 39. P1 S1-S2
+
+- order：39
+
+- section：Section 4.3 RRARR
+
+- locator：P1 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：每次运行模型后用户可选择执行全部、部分或零个搬迁建议；为此设计RRARR作为清晰和宽泛的指引。
+
+- rhetorical_function_cn：为RRARR模块的存在提供使用情境（用户面临选择难题）。
+
+- depends_on_cn：DSS界面中用户可选择性应用结果的设计。
+
+- sets_up_cn：后文九步RRARR和表6优先级矩阵正是为了指导这种选择。
+
+- evidence_pointer：Section 4.3 第1段
+
+### 40. Step 1-Step 9
+
+- order：40
+
+- section：Section 4.3 RRARR
+
+- locator：Step 1-Step 9
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：RRARR包含：特征选择、BWM权重、区域划分、特征分类（有无历史方差/DSS输出）、方差归一化或正反向准则归一化、总风险乘积公式、四等级划分、搬迁优先级矩阵。
+
+- rhetorical_function_cn：提供完整、可复制的步骤，表明RRARR不是随意的评分，而是结构化流程。
+
+- depends_on_cn：之前对缺口的声明（RRARR是贡献3）。
+
+- sets_up_cn：表6优先级矩阵的生成依据。
+
+- evidence_pointer：Section 4.3 Steps 1-9
+
+### 41. 表6前一段
+
+- order：41
+
+- section：Section 4.3 RRARR
+
+- locator：表6前一段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：最后把搬迁建议按风险等级分为最高、高、中、低、最低五类并推荐执行优先序。
+
+- rhetorical_function_cn：输出可操作指南，使用户能按优先级执行搬迁。
+
+- depends_on_cn：四等级风险划分。
+
+- sets_up_cn：表6的五级矩阵是RRARR的直接制品。
+
+- evidence_pointer：Table 6 前
+
+### 42. P1 S1-S4
+
+- order：42
+
+- section：Section 5 Computational experiments
+
+- locator：P1 S1-S4
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：案例为东部德黑兰；将48个需求区用Fig.4划分；数据含一个月14000次呼叫；硬件配置与最大求解时间40秒。
+
+- rhetorical_function_cn：定义实验环境、数据规模和求解约束，表明实验条件接近实时运营。
+
+- depends_on_cn：Section 3案例背景。
+
+- sets_up_cn：为表7统计和仿真参数提供背景。
+
+- evidence_pointer：Section 5 P1
+
+### 43. P2 S1-S2
+
+- order：43
+
+- section：Section 5 Computational experiments
+
+- locator：P2 S1-S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：用真实数据模拟一周，量化DSS政策（RRP）与静态政策SP的潜在收益；用五个绩效指标比较：ANAA、ACR、ART、AWA、TWAA。
+
+- rhetorical_function_cn：宣布仿真的总体目标和评价指标体系。
+
+- depends_on_cn：Section 3事件和搬迁准则。
+
+- sets_up_cn：为表8-11的逐步对比排序。
+
+- evidence_pointer：Section 5 P2
+
+### 44. P1 S1-S6
+
+- order：44
+
+- section：Section 5.1
+
+- locator：P1 S1-S6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实现过程按第3节四步：呼叫按实际时间和区域进入；分派规则为最近可用救护车，如超时则用下一时间范围最近车辆；依赖之前搬迁的呼叫与没有搬迁的呼叫分开；场景时间、送往医院时间用真实数据；两种政策在这些时间上一致。
+
+- rhetorical_function_cn：说明仿真的因果控制：所有非搬迁差异被固定，只有政策是否搬迁造成指标差异。
+
+- depends_on_cn：Section 3中的事件和分派逻辑。
+
+- sets_up_cn：据此保证后续表8-11的比较结果可归因于政策差异。
+
+- evidence_pointer：Section 5.1 第1段
+
+### 45. P2 S1-S4
+
+- order：45
+
+- section：Section 5.1
+
+- locator：P2 S1-S4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：每次搬迁触发时在用户界面输入信息并确定新位置；搬迁移动时间计为β；用户可选择部分结果应用，β只更新选中的车辆；两个目标权重用模糊AHP计算为0.64和0.36。
+
+- rhetorical_function_cn：说明模型求解、搬迁成本计入和双目标融合的具体实现。
+
+- depends_on_cn：Section 4.2界面流程。
+
+- sets_up_cn：为表8-11绩效报告中的工作量计算做铺垫。
+
+- evidence_pointer：Section 5.1 P2
+
+### 46. 表8前一段
+
+- order：46
+
+- section：Section 5.1
+
+- locator：表8前一段
+
+- move_code：RESULT
+
+- paraphrase_cn：用参数O/E/Q计算每次呼叫时的ANAA；随后报告各类型呼叫的ANAA和ACR并与SP比较。
+
+- rhetorical_function_cn：引出第一组结果（资源可用性和覆盖）。
+
+- depends_on_cn：五指标定义。
+
+- sets_up_cn：表8内容预告。
+
+- evidence_pointer：Section 5.1 表8前
+
+### 47. 表8后一段
+
+- order：47
+
+- section：Section 5.1
+
+- locator：表8后一段
+
+- move_code：RESULT
+
+- paraphrase_cn：实时重置政策提高资源有效性；总覆盖率达89%，静态政策为73%；11%的呼叫由下一时间范围最近车辆覆盖。
+
+- rhetorical_function_cn：用绝对和相对指标总结表8核心结果，突出改进幅度。
+
+- depends_on_cn：表8数据。
+
+- sets_up_cn：为表9响应时间对比建立预期。
+
+- evidence_pointer：表8后段落
+
+### 48. 表9后段
+
+- order：48
+
+- section：Section 5.1
+
+- locator：表9后段
+
+- move_code：RESULT
+
+- paraphrase_cn：总体响应时间从12.6分钟降至8.2分钟（平均下降4.4分钟）；引临床文献说明响应时间与生存和出院率正相关。
+
+- rhetorical_function_cn：彰显响应时间改善的临床价值。
+
+- depends_on_cn：表9的ART数据。
+
+- sets_up_cn：在后文解释为什么搬迁能节省总工作量。
+
+- evidence_pointer：表9后段
+
+### 49. 表10前段
+
+- order：49
+
+- section：Section 5.1
+
+- locator：表10前段
+
+- move_code：RESULT
+
+- paraphrase_cn：搬迁政策每班平均给每车增加13.8分钟搬迁工作量，但通过缩短响应时间，每车平均活动减少24分钟。
+
+- rhetorical_function_cn：直接回应“搬迁增加工作量”的担忧，指出净效应是减少工作量。
+
+- depends_on_cn：表9的ART改善。
+
+- sets_up_cn：为表10和11的活动组成对比做准备。
+
+- evidence_pointer：表10前段
+
+### 50. 表11前后
+
+- order：50
+
+- section：Section 5.1
+
+- locator：表11前后
+
+- move_code：RESULT
+
+- paraphrase_cn：总体平均活动时间从272分钟降至248分钟（9%），总工作耗时从8174降至7442分钟。
+
+- rhetorical_function_cn：给出总工作量改善的最终数字。
+
+- depends_on_cn：表10活动组成对比。
+
+- sets_up_cn：为数值例子做总结性铺垫。
+
+- evidence_pointer：表11附近
+
+### 51. 数值例子前段
+
+- order：51
+
+- section：Section 5.1
+
+- locator：数值例子前段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：提供一个数值例子：同一辆车在静态和重置政策下响应两次呼叫的活动时间对比。
+
+- rhetorical_function_cn：用微观例子解释宏观结果背后的机制（搬迁减少未来呼叫响应时间）。
+
+- depends_on_cn：表8-11的统计结果。
+
+- sets_up_cn：为表12-13的细节展示服务。
+
+- evidence_pointer：数值例子前段
+
+### 52. 数值例子后段
+
+- order：52
+
+- section：Section 5.1
+
+- locator：数值例子后段
+
+- move_code：RESULT
+
+- paraphrase_cn：在静态政策下同一辆车两次呼叫总活动128分钟；在重置政策下为99分钟，减少29分钟。
+
+- rhetorical_function_cn：用具体数字支撑“搬迁节省总时间”的机制解释。
+
+- depends_on_cn：表12-13中的活动分解。
+
+- sets_up_cn：为结论部分的“总体工作量降低9%”提供直观说明。
+
+- evidence_pointer：数值例子表12-13后
+
+### 53. P1 S1-S3
+
+- order：53
+
+- section：Section 6 Summary and conclusion
+
+- locator：P1 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：设计开发了数学模型驱动的实时救护车重部署DSS；模型双目标：需求覆盖最大化和搬迁成本最小化。
+
+- rhetorical_function_cn：开篇重述核心贡献，与摘要呼应。
+
+- depends_on_cn：全文。
+
+- sets_up_cn：为后续覆盖约束三问题和RRARR的贡献总结做引导。
+
+- evidence_pointer：Section 6 第1段
+
+### 54. P2 S1-S3
+
+- order：54
+
+- section：Section 6 Summary and conclusion
+
+- locator：P2 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：覆盖约束基于当前覆盖数、增加覆盖数和减少覆盖数构建；因系统状态变化，覆盖数实时计算和调用；在东部德黑兰实施并与静态策略比较。
+
+- rhetorical_function_cn：把贡献1和实验结果合并为系统成果。
+
+- depends_on_cn：Section 4.1与Section 5。
+
+- sets_up_cn：为下一段量化结果做简要回顾。
+
+- evidence_pointer：Section 6 第2段
+
+### 55. P3 S1-S5
+
+- order：55
+
+- section：Section 6 Summary and conclusion
+
+- locator：P3 S1-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：系统改善覆盖率与响应时间；虽然每车每班增加13.8分钟搬迁，但通过降低响应时间减少总工作量，总体比静态政策减少9%平均总工作时间。
+
+- rhetorical_function_cn：把实验结果浓缩成结论，使核心数字留在读者脑海中。
+
+- depends_on_cn：Section 5表8-11。
+
+- sets_up_cn：作为未来研究必要性的铺垫。
+
+- evidence_pointer：Section 6 第3段
+
+### 56. P4 S1-S5
+
+- order：56
+
+- section：Section 6 Summary and conclusion
+
+- locator：P4 S1-S5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来可考虑不同类型车辆（如摩托救护车）的动态位置；可集成调度决策；可做搬迁时间标准的敏感度分析；可用鲁棒优化处理需求不确定性。
+
+- rhetorical_function_cn：界定本研究的边界并提出延伸方向，防止读者将结果视为万能。
+
+- depends_on_cn：当前模型单一车型、固定准则等假设。
+
+- sets_up_cn：为后续研究提供起点。
+
+- evidence_pointer：Section 6 第4段
+
+## 写作技术
+
+- gap_construction_cn：文章在引言和文献综述中采用“现有模型能做但没做”的缺口构造方式：强调所有覆盖模型只回答“搬迁增加多少覆盖”，而不回答当前覆盖数和搬迁减少覆盖数；同时指出“缺乏搬迁执行的风险参考”。接下来又用表格对比（Table 1最后一行）凸显本文在实时维度上的全面覆盖。
+
+- signposting_cn：每节开头都有明确预告：第1节末尾说明剩余结构；第2节末用贡献列表和表1；第3节末尾说“下一节提供DSS架构说明”；第4节开头列表三个组件；第5节开头确定五指标和仿真框架。
+
+- transition_logic_cn：问题定义→数学模型→DSS架构→RRARR→仿真，每一步由前一阶段的“未验证”或“需要下一步”驱动。例如：模型需要被嵌入可交互系统→过程模型；模型输出多建议需要优先级→RRARR。
+
+- claim_evidence_rhythm_cn：每种主张先给结论句，再用表或数值证据支撑；例如“RRP降低响应时间”后紧跟表9；数值例子先给机制描述再给两张表。节奏是先断言、后证据、再解释。
+
+- benchmark_narrative_cn：静态政策SP被作为唯一的“现状”基线；通过五个指标逐步放大对比：先覆盖率，再响应时间，再工作量；这种由浅入深的对比使读者接受搬迁虽然有成本但净效益为正。
+
+- theory_return_cn：文章没有正式理论引导设计，但在结论中把实验结果“返回”到引言列举的现实绩效标准（覆盖率、响应时间），并借助外部临床文献解释响应时间改善的意义，从而形成闭环。
+
+- contribution_positioning_cn：贡献定位在三个层：制品（模型驱动的DSS）、模型结构（覆盖约束三问题）、决策辅助（RRARR优先级指南）。与引言缺口逐项对应，使读者感到缺口被完整填充。
+
+- novelty_protection_cn：（1）用表1最后一行把本文与19篇文献做多维对比，强调本文同时具有在线、实时、需求四类动态、成本、工作量、交互DSS等全部特征；（2）在文献综述中点明以往“即便技术上可能也未使用覆盖三数量”；（3）用RRARR把模型输出与风险评估结合，使贡献不止是“模型更好”。这防止文章被归结为一个普通MILP改进。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写引言：从EMS重要性→三层次决策→静态策略局限性→引出在线搬迁DSS，并预告文章结构。
+
+- research_job_cn：识别具体EMS系统在真实运营中的绩效缺口（如覆盖率不足）；明确要解决的是“静态策略无法动态调整”的问题；建立问题与标准的联系（响应时间标准）。
+
+- required_evidence_cn：需要领域现状数据（本案例中的东部德黑兰每小时19个呼叫、覆盖率不足）和文献基准。
+
+- transition_to_next_cn：用“本研究提出…”把读者引向摘要级别的目标和结构预告。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写文献综述：以在线/离线分类组织；每篇文献先介绍再点出局限；用表格对比各文献维度；在2.3节集中列出本文三项贡献。
+
+- research_job_cn：确定所解决问题的研究定位（在线、实时、多维度）；识别模型建构中“缺失的约束表达”；识别流程缺口（缺少搬迁优先级排序）。
+
+- required_evidence_cn：需要至少十余篇直接相关的动态搬迁文献；需要每个文献在“实时方面”和“需求侧/EMS侧”维度上的分类信息。
+
+- transition_to_next_cn：用贡献列表收束综述，顺势在Section 3给出问题概览。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述问题概览：案例背景、事件类型、需求分类、搬迁触发准则、建模假设。
+
+- research_job_cn：把文献中的一般问题具体化为本案例的系统规格：谁会改变系统状态？需要哪些需求类别？何时触发搬迁？假设哪些简化？
+
+- required_evidence_cn：需要对案例系统有可靠描述（病例数据、站点数量、人口密度、呼叫到达率等）。
+
+- transition_to_next_cn：以“下一节描述DSS架构和数学模型”结束。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写数学建模：先说明目标函数，再逐条解释每个约束；尤其要给出覆盖约束三问题的公式化证明。
+
+- research_job_cn：建立可求解的ILP/MILP模型；设计约束(3)-(5)同时纳入当前覆盖数、进入增益、离开损失；引入工作量动态限制U_t。
+
+- required_evidence_cn：需要数学推导；需要证明约束线性化和可计算性。
+
+- transition_to_next_cn：模型给出搬迁位置但需要DSS流程把它变成可交互系统，因此下一阶段是过程模型。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：写DSS架构和过程模型：描述三类数据、用户界面流程、参数更新公式、RRARR风险模块。
+
+- research_job_cn：实现DSS原型（本文用Excel/C++/GAMS），定义参数更新和用户选择流程；设计RRARR特征和优先级矩阵。
+
+- required_evidence_cn：需要至少一个可运行的DSS原型；需要特征表、权重确定方法（BWM）和风险计算流程。
+
+- transition_to_next_cn：以“案例实验将比较SP与RRP”预告评价阶段。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计计算实验：说明真实数据、仿真设置、绩效指标、与基线对比的方式，报告结果并解释机制。
+
+- research_job_cn：用真实历史呼叫数据重放仿真；在同一数据流上运行SP和RRP；按ANAA、ACR、ART、AWA、TWAA五指标报告；补充一个数值例子说明机制。
+
+- required_evidence_cn：需要足够的真实运营数据（本文一个月14000个呼叫）；需要明确的仿真环境和求解时间限制。
+
+- transition_to_next_cn：实验结果结束后，用“结论”将结果与引言中的绩效缺口重新连接。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：写结论与未来：重述贡献 → 概述关键结果 → 列出边界和未来方向。
+
+- research_job_cn：把实验结果浓缩为对覆盖率和总工作量改善的总结；识别未来研究方向（多车型、调度集成、敏感度、鲁棒优化）。
+
+- required_evidence_cn：需要明确贡献与实验结果的对应关系，并对未验证部分保持边界。
+
+- transition_to_next_cn：无需下一步。
+
+### most_transferable_moves_cn
+
+1. 用文献分类表格定位本文与已有研究的多维差异（Table 1手法）
+
+2. 把缺口写成“现有模型能做但没有做”的强约束缺口（覆盖三问题）
+
+3. 将绩效指标分解为多个维度，逐步报告并保持与初始绩效标准对应
+
+4. 在每个新模块出现前说明为什么用户需要它（例如“用户面临多个建议”引出RRARR）
+
+5. 用数值例子把宏观统计结论转化为可理解的微观机制（表12-13）
+
+6. 在结论中逐项返回引言中的问题，使贡献有封闭感
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实EMS运营数据（一个月14000次呼叫）和具体区域分布（48个需求区、30个基站）
+
+2. 可运行的DSS原型（C++/.NET/GAMS/CPLEX）和交互式用户界面
+
+3. BWM特征权重和RRARR特征表需要专家访谈或知识来源，本文用Interview标注
+
+4. 长达7天14个班次的仿真运行需要足够的计算资源和时间
+
+5. 与真实EMS组织合作获得政策规则（如搬迁触发准则）和用户界面反馈
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只引用“覆盖约束三问题”而没有在数学模型中真正确保三项同时在同一个约束中并给出可对比实验或逻辑证明
+
+2. 不要声称RRARR能指导用户，却没有对用户使用RRARR后的决策绩效做任何实验、仿真或案例验证
+
+3. 不要只报告平均改善而不做统计显著性和方差说明；本文的“statistically significant”声明缺乏细节，模仿时应更严谨
+
+4. 不要用外部文献直接把响应时间换算成“生存率改善”而不说明转换条件
+
+5. 不要用“搬迁虽增加13.8分钟但总工作量减9%”这类结果而未提供活动组成分解或数值例子支撑
+
+- single_best_description_of_the_routine_cn：通过文献分类定位缺口，把缺口翻译成模型中的新增约束和DSS中的全新模块，再用真实数据重放仿真与静态政策对比，最后用数值例子解释宏观统计背后的机制。
+
+## 分析边界
+
+基于论文全文分析；OCR显示的公式和表格有部分排版错乱（如约束中的上下标、表1和表5的排版），但核心模型结构和结果数值仍可辨识。论文未提供附录和补充材料，因此对优化求解细节、统计检验公式和用户界面具体交互细节的分析有限。

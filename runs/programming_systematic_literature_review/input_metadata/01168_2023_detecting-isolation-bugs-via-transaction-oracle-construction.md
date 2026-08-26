@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85171789739"
+title: "Detecting Isolation Bugs via Transaction Oracle Construction"
+authors: "Dou W.; Cui Z.; Dai Q.; Song J.; Wang D.; Gao Y.; Wang W.; Wei J.; Chen L.; Wang H.; Zhong H.; Huang T."
+year: "2023"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse48619.2023.00101"
+---
+# Scopus title-abstract-keyword metadata
+Title: Detecting Isolation Bugs via Transaction Oracle Construction
+Abstract: Transactions are used to maintain the data integrity of databases, and have become an indispensable feature in modern Database Management Systems (DBMSs). Despite extensive efforts in testing DBMSs and verifying transaction processing mechanisms, isolation bugs still exist in widely-used DBMSs when these DBMSs violate their claimed transaction isolation levels. Isolation bugs can cause severe consequences, e.g., incorrect query results and database states. In this paper, we propose a novel transaction testing approach, Transaction oracle construction (Troc), to automatically detect isolation bugs in DBMSs. The core idea of Troc is to decouple a transaction into independent statements, and execute them on their own database views, which are constructed under the guidance of the claimed transaction isolation level. Any divergence between the actual transaction execution and the independent statement execution indicates an isolation bug. We implement and evaluate Troc on three widely-used DBMSs, i.e., MySQL, MariaDB, and TiDB. We have detected 5 previously-unknown isolation bugs in the latest versions of these DBMSs. © 2023 IEEE.
+Author keywords: Database system; isolation; oracle; transaction
+Index keywords: Information management; Program debugging; Query processing; Data integrity; Database views; Isolation; Isolation level; Oracle; Query results; Transaction; Transaction execution; Transaction isolation; Transaction processing; Database systems
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2023
+EID: 2-s2.0-85171789739
+DOI: 10.1109/icse48619.2023.00101
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

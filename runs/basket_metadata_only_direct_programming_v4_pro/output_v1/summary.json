@@ -1,0 +1,28 @@
+{
+  "completed_at": "2026-08-04T03:05:06.179034+00:00",
+  "model": "deepseek-v4-pro",
+  "input_records": 31,
+  "completed": 31,
+  "failed": 0,
+  "screening_label_counts": {
+    "uncertain": 1,
+    "software_development_context_only": 17,
+    "direct_human_programming": 3,
+    "not_programming": 6,
+    "direct_programming_artifact_or_method": 3,
+    "direct_human_ai_programming": 1
+  },
+  "irreplaceable_direct_counts": {
+    "None": 1,
+    "False": 23,
+    "True": 7
+  },
+  "usage": {
+    "prompt_tokens": 34538,
+    "completion_tokens": 30824,
+    "total_tokens": 65362,
+    "prompt_cache_hit_tokens": 15744,
+    "prompt_cache_miss_tokens": 18794
+  },
+  "errors": []
+}

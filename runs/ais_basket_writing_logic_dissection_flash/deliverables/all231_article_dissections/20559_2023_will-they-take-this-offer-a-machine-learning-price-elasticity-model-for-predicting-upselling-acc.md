@@ -1,0 +1,2083 @@
+# Will they take this offer? A machine learning price elasticity model for predicting upselling acceptance of premium airline seating
+
+- 作者：Saravanan Thirumuruganathan; Noora Al Emadi; Soon-gyo Jung; Joni Salminen; Dianne Ramirez Robillos; Bernard J. Jansen
+- 年份 / 期刊：2023 / Information & Management
+- DOI：10.1016/j.im.2023.103759
+- 源文件：20559_2023_will-they-take-this-offer-a-machine-learning-price-elasticity-model-for-predicting-upselling-acc.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.85
+
+## 文章级论证概况
+
+- 核心问题：如何基于一家大型航空公司的真实大规模数据，预测哪些经济舱乘客会接受付费升舱报价，并为可能接受的顾客确定可接受的价格区间，从而在减少无关营销邮件的同时最大化升舱收入和客户细分价值？
+
+- 制品与设计：PREM（PRice Elasticity Model）：一个五阶段流水线式机器学习系统，包含100+特征工程、基于去噪自编码器的256维特征嵌入、基于Elkan成本敏感学习的升级接受分类器、基于二元自编码器把客户划分到256个数据驱动细分的个性化升级报价模型，以及用整数线性规划（ILP）求解客户—报价分派以最大化期望收入的收入最大化组件。
+
+- 客观结果：历史数据消融显示PREM达到F1=83.9、收入捕获率100%，优于各组件对应的替代方案；基于64.3M合成行程和14.1M报价场景的仿真显示，相比公司当前规则式流程，PREM可减少约112万（7.94%）非相关客户邮件、增加约72,200（37.2%）个被接受的升级报价，并预计增收约7220万美元（37.2%）。
+
+- 核心贡献：作者声称：PREM提供了在真实大规模航空公司数据上比现有规则式方法更有效的升级销售目标定位和定价能力；识别出三类可泛化的升舱行为细分（Never Upgrades、Upgrade Lovers、Upgrade Lover Lookalikes）；并提出面向噪声/稀疏/不平衡数据的鲁棒ML建模与业务感知ML架构的设计知识。
+
+- 整篇论证链：作者从升舱销售对航空公司增收重要但顾客价格敏感这一业务现实出发，指出公司现行规则式升级报价流程缺乏客户上下文，而既有研究又缺少大规模、真实、可用于升级报价定价的数据集。作者与大型航空公司合作获得64.3M订座、14.1M报价和194K次接受的数据，将问题形式化为RO1（识别接受/拒绝者）和RO2（估计价格弹性），并针对数据稀疏、极端不平衡和噪声设计PREM五阶段流水线。通过逐组件的消融实验，作者证明去噪自编码器嵌入、成本敏感分类、二元自编码器细分和ILP收入最大化各自优于同层替代方案；整体消融又证明多阶段架构优于单阶段/缺组件变体。随后作者用去噪自编码器的生成能力合成64.3M行程，模拟PREM部署，得到邮件减少、接受增加和收入提升的业务级结果。最后讨论把结果上升为三类客户细分和两条可复用设计原则（鲁棒ML、业务感知ML），并以单一公司数据、蚕食效应、二分类简化和未做现场实验作为边界条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章遵循典型的‘现实需求/问题—系统构建—组件及整体评价—设计知识提炼’结构：先由专家访谈和业务挑战导出需求，再构建PREM五阶段制品，通过多组消融和仿真进行评价，最后提出可复用的ML设计原则和客户细分；而非纯算法benchmark，也不是理论推导实验或行动研究。
+
+- 主导写作弧线判定：文章主线是‘现有规则式方法性能/上下文不足→构建PREM制品→用组件级和整体基准证明性能→一般化为可迁移设计知识与客户细分’；技术选择和评价围绕性能/业务差距展开，最终落点是可复用的设计原则。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：先界定问题与数据条件，再按五阶段逐个构建和验证PREM的每个组件，然后做整体多阶段消融，最后用生成式仿真把技术指标转化为业务金额，并在讨论中提炼客户细分与设计原则。
+
+### studies_or_phases
+
+#### 1. 问题界定与数据获取描述
+
+- order：1
+
+- name_cn：问题界定与数据获取描述
+
+- question_cn：航空公司升级销售现状与数据条件是什么，为什么现有规则式方法不足？
+
+- inputs_and_setting_cn：与一家大型国际航空公司合作；2017–2019年64.3M行程订座、14.1M邮件报价、194K次接受；领域专家半结构化访谈。
+
+- designed_or_compared_object_cn：公司当前规则式升级报价流程与数据驱动模型目标对比。
+
+- baseline_control_or_counterfactual_cn：公司现状：约22%触达率、1.43%转化率；194K次接受。
+
+##### objective_metrics
+
+1. reach rate=22%
+
+2. conversion rate=1.43%
+
+3. accepted offers=194K
+
+- analysis_method_cn：描述性统计与专家访谈归纳；识别稀疏性、不平衡、噪声三类数据问题。
+
+- main_result_cn：确认升级报价接受是极罕事件（占报价1.43%，占全部订座约0.3%）；现有规则式流程缺少客户上下文。
+
+- argumentative_role_cn：建立研究必要性与现实后果；引出数据挑战。
+
+- remaining_uncertainty_cn：尚未证明ML方法能在真实大数据上改善报价效果。
+
+- link_to_next_phase_cn：由此要求构建专门ML系统处理稀疏、不平衡、噪声数据。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.2
+
+3. Table 1
+
+4. Fig.2
+
+5. Fig.3
+
+#### 2. 特征工程与有限预处理
+
+- order：2
+
+- name_cn：特征工程与有限预处理
+
+- question_cn：如何将订座、客户、行程和报价信息转换为可供模型使用的丰富特征？
+
+- inputs_and_setting_cn：原始23个变量，包括客舱、订座等级、年龄、性别、国籍、起降机场/城市/国家、报价价格、接受情况等。
+
+- designed_or_compared_object_cn：100+个衍生特征，分为订座、竞争、离散化、航班日期、历史、细分、统计价格、旅行目的等类别。
+
+- baseline_control_or_counterfactual_cn：原始变量和直接one-hot编码（后期作为嵌入对照）。
+
+##### objective_metrics
+
+1. 特征维度
+
+2. 特征类别覆盖度
+
+- analysis_method_cn：领域驱动特征构建；使用美国人口普查年龄分组；Skyscanner API统计价格；公司旅行目的启发式。
+
+- main_result_cn：得到覆盖客户/行程/报价三构念的丰富特征，同时产生混合数据类型的表示难题。
+
+- argumentative_role_cn：为嵌入和分类提供输入；体现customer-booking-destination构念。
+
+- remaining_uncertainty_cn：高维、稀疏、混合类型数据导致传统编码方式失效。
+
+- link_to_next_phase_cn：转向第二组件：去噪自编码器嵌入。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Fig.4
+
+3. Section 4.3 第一组件
+
+#### 3. 去噪自编码器嵌入与鲁棒性评价
+
+- order：3
+
+- name_cn：去噪自编码器嵌入与鲁棒性评价
+
+- question_cn：哪种特征表示能在高基数、噪声和稀疏数据上获得最佳下游性能？
+
+- inputs_and_setting_cn：全部订座记录（无监督）；100+特征；15%交换噪声注入。
+
+- designed_or_compared_object_cn：去噪自编码器（DAE）生成256维嵌入。
+
+- baseline_control_or_counterfactual_cn：传统自编码器、one-hot、label encoding、PCA。
+
+##### objective_metrics
+
+1. F1 score
+
+2. Revenue capture
+
+- analysis_method_cn：Table 2消融比较不同嵌入表示的F1与收入捕获率。
+
+- main_result_cn：DAE F1=83.9、收入捕获率100%；优于传统AE（77.2/93%）、one-hot（44.3/62%）、label encoding（47.8/56%）和PCA（53.8/66%）。
+
+- argumentative_role_cn：证明嵌入组件解决噪声/稀疏问题，且优于常见降维基线。
+
+- remaining_uncertainty_cn：仍须解决类别极端不平衡与业务成本不对称。
+
+- link_to_next_phase_cn：进入成本敏感分类器。
+
+##### evidence_pointers
+
+1. Table 2
+
+2. Section 6.1.1
+
+3. Section 5.2
+
+#### 4. 成本敏感分类器与不平衡处理方法评价
+
+- order：4
+
+- name_cn：成本敏感分类器与不平衡处理方法评价
+
+- question_cn：如何在只有1.43%正例、且漏掉升级客户代价更高的情况下预测升级接受？
+
+- inputs_and_setting_cn：嵌入后的特征；有标签报价记录；误分类成本启发式。
+
+- designed_or_compared_object_cn：三层深度学习+Elkan成本敏感阈值，FN罚1000美元，默认阈值0.5。
+
+- baseline_control_or_counterfactual_cn：逻辑回归/SVM/随机森林+嵌入；随机森林+原始数据；SMOTE、过采样、GAN。
+
+##### objective_metrics
+
+1. F1 score
+
+2. Revenue capture
+
+- analysis_method_cn：Table 4比较分类器和不平衡处理方法。
+
+- main_result_cn：DL/嵌入83.9/100最佳；嵌入使传统分类器只受轻微损失；原数据下降大；GAN类方法最高56.4/62。
+
+- argumentative_role_cn：识别并过滤Never Upgrades，输出候选客户超集。
+
+- remaining_uncertainty_cn：候选客户仍需知道接受各价格区间的概率。
+
+- link_to_next_phase_cn：进入个性化升级报价模型。
+
+##### evidence_pointers
+
+1. Table 4
+
+2. Section 6.1.3
+
+3. Section 5.3
+
+#### 5. 个性化升级报价模型：二元自编码器细分与价格桶
+
+- order：5
+
+- name_cn：个性化升级报价模型：二元自编码器细分与价格桶
+
+- question_cn：如何在单个客户数据极稀疏的情况下估计客户对不同价位升级报价的接受概率？
+
+- inputs_and_setting_cn：分类器输出的候选客户；归一化的五个互斥升级报价桶；历史成功升级溢价的等深直方图。
+
+- designed_or_compared_object_cn：二元自编码器将客户分成256个数据驱动细分；使用3个不同初始化计算平均接受概率。
+
+- baseline_control_or_counterfactual_cn：K-Means聚类（K=7）、决策树细分。
+
+##### objective_metrics
+
+1. F1 score
+
+2. Revenue capture
+
+- analysis_method_cn：Table 5比较三种细分方法预测各升级报价桶反应率。
+
+- main_result_cn：二元自编码器83.9/100最佳；K-Means 64.9/79；决策树53.6/73。
+
+- argumentative_role_cn：生成客户在各报价桶的接受概率，为收入最大化提供输入。
+
+- remaining_uncertainty_cn：需要业务约束下选择发送对象和报价。
+
+- link_to_next_phase_cn：进入ILP收入最大化组件。
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Section 6.1.4
+
+3. Section 5.4
+
+#### 6. ILP收入最大化组件评价
+
+- order：6
+
+- name_cn：ILP收入最大化组件评价
+
+- question_cn：在座位数和每个客户只能收到一个报价等约束下，如何选择报价对象和价格桶以最大化期望收入？
+
+- inputs_and_setting_cn：N个候选客户、K个升级报价桶、各客户对各桶接受概率、可用商务舱座位数M。
+
+- designed_or_compared_object_cn：整数线性规划（ILP）求解线性分派问题，目标最大化累计期望收入，使用GLPK。
+
+- baseline_control_or_counterfactual_cn：贪婪算法：先取每个客户期望收入最高的报价，再选全局最高。
+
+##### objective_metrics
+
+1. F1 score
+
+2. Revenue capture
+
+- analysis_method_cn：Table 6比较ILP与贪婪。
+
+- main_result_cn：ILP 83.9/100；贪婪49.2/56。
+
+- argumentative_role_cn：把ML概率转化为满足业务约束的决策。
+
+- remaining_uncertainty_cn：仅组件层面表现，需验证完整多阶段流水线。
+
+- link_to_next_phase_cn：整体消融检验多阶段必要性。
+
+##### evidence_pointers
+
+1. Table 6
+
+2. Section 6.1.5
+
+3. Section 5.5
+
+#### 7. 整体多阶段架构消融
+
+- order：7
+
+- name_cn：整体多阶段架构消融
+
+- question_cn：是否必须用多阶段流水线？各组件是否都必不可少？
+
+- inputs_and_setting_cn：完整PREM及删减变体。
+
+- designed_or_compared_object_cn：PREM全部组件 vs 单阶段端到端多目标约束模型 vs 去掉分类 vs 去掉收入最大化。
+
+- baseline_control_or_counterfactual_cn：单阶段模型；两种缺组件变体。
+
+##### objective_metrics
+
+1. F1 score
+
+2. Revenue capture
+
+- analysis_method_cn：Table 7整体消融比较PREM变体。
+
+- main_result_cn：全部组件83.9/100；单阶段42.1/65；去掉收入最大化80.3/74；去掉分类62.3/82。
+
+- argumentative_role_cn：证明分阶段架构优于单阶段；各组件均有正向贡献。
+
+- remaining_uncertainty_cn：历史数据评价不能直接说明部署后的真实业务效果。
+
+- link_to_next_phase_cn：用仿真把模型指标转为业务金额。
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Section 6.1.6
+
+#### 8. PREM业务影响仿真
+
+- order：8
+
+- name_cn：PREM业务影响仿真
+
+- question_cn：如果使用PREM替代当前启发式，会减少多少无关邮件、增加多少被接受的升级报价和收入？
+
+- inputs_and_setting_cn：由去噪自编码器生成的64.3M合成行程；按Table 1分布；约14.1M报价场景；细分接受概率。
+
+- designed_or_compared_object_cn：用PREM对合成人群评分、选择目标与报价；与当前22%触达/1.4%转化对比。
+
+- baseline_control_or_counterfactual_cn：公司当前启发式流程：14.1M报价、194K接受。
+
+##### objective_metrics
+
+1. fewer non-relevant emails=1.12M (7.94%)
+
+2. increase accepted offers=72.2K (37.2%)
+
+3. increase revenue=$72.2M (37.2%)
+
+- analysis_method_cn：仿真；基于DAE生成模型和细分行为假设估计。
+
+- main_result_cn：少发1.12M非相关邮件、多72.2K个接受、预计增收$72.2M。
+
+- argumentative_role_cn：把技术改进翻译成管理层关心的业务KPI；支撑贡献主张。
+
+- remaining_uncertainty_cn：仿真依赖合成数据和行为同质性假设；未现场验证；未考虑蚕食效应。
+
+- link_to_next_phase_cn：进入讨论部分，提炼客户细分和设计原则，并声明边界。
+
+##### evidence_pointers
+
+1. Section 7.1 仿真段
+
+2. Section 7.2.1
+
+3. Section 8
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 先给出制品PREM与两个目标：识别可能接受/拒绝升级的客户、预测其可接受价格区间
+
+2. 给出仿真规模：64.3M订座、14.1M邮件、三年
+
+3. 用具体数字陈述结果：减少1.12M无关邮件、增加72.2K接受、增收$72.2M
+
+4. 给出三类客户细分并声称对航空及旅游相关行业有启示
+
+### introduction_moves
+
+1. 从upselling对增收的重要性入手，引出经济舱到高级舱升级的困难
+
+2. 引入价格弹性概念，作为报价定价的理论基础
+
+3. 说明现实条件：客户信息稀疏、高基数数据
+
+4. 引出PREM并给出两个目标（识别客户、确定最优定价）
+
+5. 指出现有公司流程基于规则而非数据，缺乏客户上下文
+
+6. 介绍数据集规模，说明模型三项任务
+
+7. 指出报价接受取决于客户、订座、目的地的复杂交互
+
+8. 说明构念来自领域专家访谈，形成customer/booking/destination三构念理论范式
+
+9. 列举三大数据挑战：稀疏、不平衡、噪声
+
+10. 强调人类因素和公司现实影响，模型需考虑多元因素
+
+11. 声明所用航空公司数据具有代表性，结果可推广到多个行业
+
+### theory_and_knowledge_moves
+
+1. 价格弹性需求定义与应用
+
+2. 机票购买时机研究的回归+阈值方法
+
+3. 动态定价按需求、价格敏感、季节、目的地调整的研究
+
+4. 顾客细分和价格歧视研究
+
+5. 专家提出的customer-booking-destination构念
+
+6. 自编码器和去噪自编码器的无监督表示学习
+
+7. Elkan成本敏感学习
+
+8. 线性分派问题/整数规划以及期望收入的决策理论
+
+9. GAN/SMOTE等不平衡学习方法作为对照知识
+
+### artifact_design_moves
+
+1. 说明直接端到端分类效果差，因此采用分阶段流水线
+
+2. 第一组件：100+特征工程，覆盖订座、客户、行程、报价等维度
+
+3. 第二组件：去噪自编码器将约2000维one-hot压缩为256维，并注入15%交换噪声
+
+4. 第三组件：Elkan成本敏感分类器，FN罚$1000，默认0.5阈值，过滤不会升级者
+
+5. 第四组件：二元自编码器细分客户为256段，用5个归一化价格桶估计接受概率并三模型平均
+
+6. 第五组件：ILP求解客户—报价分派，最大化期望收入并满足唯一报价与座位容量约束
+
+7. 设计原则：模块化、可人工干预、避免公司专属细节
+
+### evaluation_moves
+
+1. 定义F1与Revenue Capture两个指标，说明为何Revenue Capture适合历史数据评价
+
+2. 用消融逐个评价嵌入、嵌入维度、分类器、细分、收入最大化
+
+3. 在每个组件处设置最相关基线：PCA/one-hot、SMOTE/GAN、K-Means/决策树、贪婪
+
+4. 用整体消融比较全组件与单阶段/缺组件变体
+
+5. 用生成式仿真把模型输出换算成邮件数、接受数、收入
+
+### discussion_and_contribution_moves
+
+1. 回到RO1/RO2说明PREM实现个性化报价与信息定位
+
+2. 重述历史数据仿真结果：减少无关邮件、增加接受、提升收入
+
+3. 提出三个客户细分：Never Upgrades、Upgrade Lovers、Upgrade Lover Lookalikes，并给出业务建议
+
+4. 把方法总结为鲁棒ML模型原则：学习通用嵌入、对噪声鲁棒、用有限标签改善重要客户嵌入
+
+5. 把业务感知ML原则：以ILP优化承接ML输出，并在工作流中输出中间结果供人修改
+
+6. 说明可推广到酒店、邮轮、活动票务等分级定价行业
+
+7. 限制与未来：单一公司/产品、蚕食效应、二分类简化、邮件文案属性未细究、需现场研究
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 价格弹性需求
+
+2. 专家构念：客户、订座、目的地
+
+3. 成本敏感学习
+
+4. 去噪自编码器与鲁棒表示学习
+
+5. 二元自编码器、客户细分与推荐冷启动
+
+6. 线性分派问题与整数规划
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：价格弹性和专家三构念主要塑造了研究目标、特征维度和价格桶结构；但嵌入、成本敏感阈值、二元自编码器细分和ILP等技术选择主要由工程挑战（噪声/稀疏/不平衡/业务约束）和已有ML/优化方法驱动，而非由理论前瞻唯一决定。因此理论到设计的耦合是部分的。
+
+- 理论到设计翻译链：价格弹性→需要估计客户对不同价格区间的接受概率→RO2与个性化升级报价组件中的五个归一化价格桶；专家三构念→客户、订座、目的地是接受行为的主要决定因素→100+特征工程覆盖这三类维度；数据极端不平衡与不对称误分类成本→需要成本敏感分类→Elkan成本敏感阈值；现实数据噪声+稀疏→需要鲁棒表示和数据驱动细分→去噪自编码器嵌入和二元自编码器细分；业务目标是收入且存在容量/唯一报价约束→ML输出需交给优化层→ILP收入最大化。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：需求价格弹性：不同客户对不同价格水平的接受概率不同
+
+- mechanism_cn：若能把客户按价格敏感度分组，则可针对每个客户选择使其接受且能最大化收入的报价区间
+
+- design_requirement_cn：模型输出不能只有二元接受/拒绝，而应是多个价格桶上的接受概率
+
+- artifact_choice_cn：个性化升级报价组件：五个归一化互斥升级报价桶；二元自编码器细分估计每桶接受概率
+
+- evaluated_contrast_cn：二元自编码器 vs K-Means vs 决策树
+
+- objective_result_cn：二元自编码器F1=83.9、收入捕获率100%，优于K-Means 64.9/79和决策树53.6/73
+
+##### evidence_pointers
+
+1. Table 5
+
+2. Section 5.4
+
+3. Section 6.1.4
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：专家构念：报价接受是客户、订座、目的地三者交互的结果
+
+- mechanism_cn：相同客户面对不同订座/目的地可能有不同接受行为，模型必须捕捉这些交互因素
+
+- design_requirement_cn：特征工程需覆盖客户属性、订座属性和行程目的地属性，而不只使用人口统计
+
+- artifact_choice_cn：100+特征，包括订座、竞争者、离散化、航班日期、历史、细分、统计价格、旅行目的等
+
+- evaluated_contrast_cn：原始23变量/one-hot vs 加工后嵌入
+
+- objective_result_cn：DAE嵌入83.9/100 vs one-hot 44.3/62
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Table 2
+
+3. Section 6.1.1
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：升级报价接受是极罕事件；漏掉一个可能升级客户的代价远高于发给一个不会升级客户的邮件
+
+- mechanism_cn：标准准确率/无成本分类会把绝大多数人预测为不升级，从而漏掉高价值客户；不对称成本可让分类器保守地保留潜在升级者
+
+- design_requirement_cn：分类器必须使用成本敏感目标，而非普通0-1损失
+
+- artifact_choice_cn：Elkan成本敏感分类：FN罚$1000，TN奖$1，FP罚$50，阈值0.5
+
+- evaluated_contrast_cn：DL/嵌入 vs SMOTE/过采样/GAN等不平衡方法
+
+- objective_result_cn：DL/嵌入83.9/100；GAN最高56.4/62
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Table 4
+
+3. Section 6.1.3
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：真实企业数据噪声大、客户级历史稀疏，清洗成本高且难以完全修复
+
+- mechanism_cn：如果表示学习对噪声鲁棒，则下游分类/细分不必依赖完美清洗数据
+
+- design_requirement_cn：模型应能从带噪输入学习稳健表示，并避免高维one-hot加剧稀疏
+
+- artifact_choice_cn：去噪自编码器：训练时注入15%交换噪声，将约2000维压到256维嵌入
+
+- evaluated_contrast_cn：DAE vs 传统AE/PCA/one-hot/label encoding
+
+- objective_result_cn：DAE F1=83.9/100，PCA 53.8/66，one-hot 44.3/62
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 2
+
+3. Section 6.1.1
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：航空公司追求收入最大化，而非单纯的ML准确率；报价存在座位容量和单客户单报价约束
+
+- mechanism_cn：ML输出的是概率，真正决策需在业务约束下选择一组客户和报价，使累计期望收入最大
+
+- design_requirement_cn：需在ML流水线末端加入优化层，处理容量和互斥约束
+
+- artifact_choice_cn：ILP收入最大化：线性分派问题，用GLPK求解
+
+- evaluated_contrast_cn：ILP vs 贪婪基线
+
+- objective_result_cn：ILP F1=83.9/100；贪婪49.2/56
+
+##### evidence_pointers
+
+1. Section 5.5
+
+2. Table 6
+
+3. Section 6.1.5
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：多任务单阶段ML模型在面临多目标、稀疏和高基数时表现不佳
+
+- mechanism_cn：将噪声、稀疏、不平衡、定价、优化拆成独立阶段，每个阶段只解决单一任务，可减少互相干扰
+
+- design_requirement_cn：用分阶段流水线替代端到端单阶段模型
+
+- artifact_choice_cn：PREM五阶段架构；各阶段输出可人工修改
+
+- evaluated_contrast_cn：完整PREM vs 单阶段 vs 去掉分类 vs 去掉收入最大化
+
+- objective_result_cn：完整PREM 83.9/100；单阶段42.1/65；去掉收入最大化80.3/74；去掉分类62.3/82
+
+##### evidence_pointers
+
+1. Table 7
+
+2. Section 6.1.6
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 组件消融分析
+
+2. 基线对比
+
+3. 历史数据离线评价
+
+4. 生成式仿真
+
+5. 事后客户细分归纳
+
+- why_these_evaluations_cn：因为无法在真实业务中随机控制报价，作者以历史大数据为约束条件，先证明每个技术选择带来改进，再用仿真得出业务量级，避免仅停留在算法指标。
+
+- benchmark_and_contrast_chain_cn：基准链由各组件最直接替代方案组成：嵌入组件对比one-hot/label/PCA/传统AE；分类组件对比其他分类器与SMOTE/过采样/GAN；细分组件对比K-Means/决策树；优化组件对比贪婪；最后将完整流水线对比单阶段和缺组件变体，逐层证明每层所选设计都不可被简单替代。
+
+### claim_evidence_ledger
+
+#### 1. 去噪自编码器嵌入对噪声/高基数数据更鲁棒
+
+- claim_cn：去噪自编码器嵌入对噪声/高基数数据更鲁棒
+
+- evidence_cn：Table 2：DAE F1=83.9、收入捕获率100%，优于传统AE、one-hot、label、PCA
+
+- strength_cn：较强，但只在单一数据集上验证
+
+#### 2. 成本敏感分类优于常见不平衡处理方法
+
+- claim_cn：成本敏感分类优于常见不平衡处理方法
+
+- evidence_cn：Table 4：DL/嵌入83.9/100；SMOTE、过采样、GAN均更低
+
+- strength_cn：较强，有多个同类基线
+
+#### 3. 二元自编码器细分优于传统聚类/决策树细分
+
+- claim_cn：二元自编码器细分优于传统聚类/决策树细分
+
+- evidence_cn：Table 5：二元AE 83.9/100，K-Means 64.9/79，决策树53.6/73
+
+- strength_cn：较强，但K=7选择依赖Elbow，存在主观性
+
+#### 4. ILP收入最大化优于贪婪
+
+- claim_cn：ILP收入最大化优于贪婪
+
+- evidence_cn：Table 6：ILP 83.9/100；贪婪49.2/56
+
+- strength_cn：较强，但仅有单一贪婪基线
+
+#### 5. 多阶段架构优于单阶段，且各组件都有贡献
+
+- claim_cn：多阶段架构优于单阶段，且各组件都有贡献
+
+- evidence_cn：Table 7：全组件83.9/100；单阶段42.1/65；缺收入最大化80.3/74；缺分类62.3/82
+
+- strength_cn：较强，整体消融支持
+
+#### 6. PREM部署将减少无关邮件、增加升级接受和收入
+
+- claim_cn：PREM部署将减少无关邮件、增加升级接受和收入
+
+- evidence_cn：Section 7.1仿真：1.12M较少邮件、72.2K较多接受、$72.2M增收
+
+- strength_cn：中等，依赖合成数据与细分同质性假设，未现场验证
+
+- internal_validity_strategy_cn：系统化消融：每次只改变一个组件并固定其余组件；使用统一F1和Revenue Capture；不在测试集注入噪声避免泄漏；对嵌入维度、阈值、分段数等关键超参数进行敏感性分析。
+
+- external_validity_strategy_cn：使用三年大数据且航空公司覆盖面广；声明特征均为行业通用或API可得；用模块化设计方便迁移；在限制部分明确“单一公司/产品”与未来跨域验证需要。
+
+- what_is_not_actually_tested_cn：真实部署后的接受率和收入未测试；仿真假设合成客户按细分平均概率行动；未做现场因果识别；未检验实际邮件文案效果、重复报价蚕食效应及跨公司迁移。
+
+## 贡献闭环
+
+- technical_claim_cn：PREM在历史数据上的F1为83.9、收入捕获率100%，显著优于多种替代编码、分类、细分和优化基线。
+
+- artifact_claim_cn：多阶段架构中每个组件都有增量贡献；去噪嵌入和ILP是性能关键。
+
+- mechanism_claim_cn：去噪自编码器通过噪声注入使表示对错误不敏感；成本敏感分类通过不对称罚分避免漏掉高价值客户；二元自编码器用数据驱动细分缓解单客户数据稀疏；ILP在业务约束下将概率转化为最大化期望收入的选择。
+
+- boundary_claim_cn：结论适用于拥有客户多维度数据和升级/分级报价需求的航空公司及酒店、邮轮等旅游行业；尚未证明跨公司直接迁移。
+
+- reusable_design_knowledge_cn：面对噪声/稀疏/不平衡数据：学习通用嵌入而非过度清洗；ML输出交给优化模型以满足业务约束；分阶段+人工可干预的模块化架构比单阶段模型更易维护和定制。
+
+- theoretical_contribution_cn：将价格弹性从宏观需求概念操作化为按价格桶的客户接受概率，并通过ML在个体/细分层面估计；给出三个可泛化的升级行为细分（Never Upgrades、Upgrade Lovers、Lookalikes），补充了升级销售和客户细分文献。
+
+- how_discussion_closes_intro_gap_cn：讨论部分明确返回RO1/RO2，用消融和仿真结果回应“现有研究无个性化升级报价定价”的缺口，并把技术结果提升为客户细分和可复用ML设计原则。
+
+- overclaim_or_unsupported_leaps_cn：仿真中的$72.2M收入增长并非真实实现，依赖“合成客户按所属细分平均概率行动”的强假设；收入捕获率100%只说明不低于当前启发式在历史数据上的收入，不直接等于增量收入；“首次应用于航空数据”的表述在文献范围内成立但外延有限。
+
+## 句级写作动作图谱
+
+### 1. S1
+
+- order：1
+
+- section：Abstract
+
+- locator：S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者说明使用大型航空公司数据开发PREM，目标是识别可能购买升舱报价的客户并预测其可接受价格范围。
+
+- rhetorical_function_cn：在摘要首句给出制品和核心任务。
+
+- depends_on_cn：无，开门见山。
+
+- sets_up_cn：为后续结果数字提供对象。
+
+- evidence_pointer：Abstract S1
+
+### 2. S2
+
+- order：2
+
+- section：Abstract
+
+- locator：S2
+
+- move_code：RESULT
+
+- paraphrase_cn：作者给出三年64.3M订座和14.1M邮件报价下的仿真结果：较少112万非相关邮件、多接受72,200次、增收约7220万美元。
+
+- rhetorical_function_cn：用最大量级的结果数字吸引读者并建立实证分量。
+
+- depends_on_cn：依赖PREM制品的存在。
+
+- sets_up_cn：为摘要中‘自动定价与定向营销潜力’的贡献句提供证据。
+
+- evidence_pointer：Abstract S2
+
+### 3. S3
+
+- order：3
+
+- section：Abstract
+
+- locator：S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称结果展示了自动化定价信息和定向营销信息对升舱接受的潜力。
+
+- rhetorical_function_cn：把具体结果上升为领域含义。
+
+- depends_on_cn：依赖S2数字。
+
+- sets_up_cn：为后文三类客户细分和行业启示做铺垫。
+
+- evidence_pointer：Abstract S3
+
+### 4. S4
+
+- order：4
+
+- section：Abstract
+
+- locator：S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者给出三个客户细分：Never Upgrades、Upgrade Lovers、Upgrade Lover Lookalikes，并称对航空及旅游行业有启示。
+
+- rhetorical_function_cn：摘要中以行为细分展示知识贡献。
+
+- depends_on_cn：依赖PREM结果和讨论部分。
+
+- sets_up_cn：让读者预期文章不只有模型，还有营销与IS管理启示。
+
+- evidence_pointer：Abstract S4
+
+### 5. P1 S1–S2
+
+- order：5
+
+- section：Introduction
+
+- locator：P1 S1–S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：作者指出upselling是增收关键，但在航空业中让已购票客户升级到高级舱困难，因为许多客户价格敏感。
+
+- rhetorical_function_cn：建立业务背景和核心矛盾。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出价格弹性概念。
+
+- evidence_pointer：Introduction P1 S1–S2
+
+### 6. P1 S3–S4
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S3–S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者引入需求价格弹性概念，说明升舱定价内在需要决定推荐什么价格点以同时最大化接受率和动态营销收入。
+
+- rhetorical_function_cn：把商业问题概念化为价格弹性问题。
+
+- depends_on_cn：依赖升舱困难这一背景。
+
+- sets_up_cn：对应RO2和价格桶设计。
+
+- evidence_pointer：Introduction P1 S3–S4
+
+### 7. P1 S5
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出实际中必须在稀疏客户信息和高基数数据下完成这一任务，正是本研究面对的约束。
+
+- rhetorical_function_cn：提前预告数据挑战。
+
+- depends_on_cn：价格弹性的实践难度。
+
+- sets_up_cn：为后文噪声/稀疏/不平衡三挑战铺垫。
+
+- evidence_pointer：Introduction P1 S5
+
+### 8. P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者说明与大型航空公司合作开发PREM，目标是识别最可能接受升级报价的客户并确定这些报价的最优定价。
+
+- rhetorical_function_cn：首次正式引出制品和双目标。
+
+- depends_on_cn：靠背景中升舱价值与价格敏感矛盾支撑。
+
+- sets_up_cn：贯穿全文的RO1/RO2。
+
+- evidence_pointer：Introduction P2 S1
+
+### 9. P2 S4
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出公司当前升级报价方法基于规则（历史报价次数、发送间隔、会员级别等），不是数据驱动，启发式缺乏客户上下文。
+
+- rhetorical_function_cn：设置实践缺口：现有基线不够好。
+
+- depends_on_cn：需要先说明PREM目标。
+
+- sets_up_cn：为后续“优于规则式流程”的贡献主张提供对照。
+
+- evidence_pointer：Introduction P2 S4
+
+### 10. P3 S1
+
+- order：10
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者给出数据规模：64.3M航班记录、14.1M发送邮件报价、约194K已购买升级，三年跨2017–2019，并预告PREM三项任务。
+
+- rhetorical_function_cn：用数据规模说明研究的实证基础和三项任务。
+
+- depends_on_cn：依赖公司合作和数据可用性。
+
+- sets_up_cn：为Table 1和后续挑战提供数量背景。
+
+- evidence_pointer：Introduction P3 S1
+
+### 11. P4 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：作者强调升级报价的接受或拒绝取决于报价、客户、订座和目的地的复杂交互。
+
+- rhetorical_function_cn：指出问题不是简单分类，而是多因素交互。
+
+- depends_on_cn：数据规模。
+
+- sets_up_cn：引出Fig.1的三构念模型。
+
+- evidence_pointer：Introduction P4 S1
+
+### 12. P5 S1–S2
+
+- order：12
+
+- section：Introduction
+
+- locator：P5 S1–S2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者说明PREM的前提基于与公司收入、客户体验和电商专家的半结构化访谈得出的customer、booking、destination三构念。
+
+- rhetorical_function_cn：为特征工程提供理论和实践范式。
+
+- depends_on_cn：需要问题复杂交互的判断。
+
+- sets_up_cn：特征工程按三构念组织。
+
+- evidence_pointer：Introduction P5 S1–S2
+
+### 13. P6 S1–S2
+
+- order：13
+
+- section：Introduction
+
+- locator：P6 S1–S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者列举三个技术/实践挑战：数据稀疏、类别不平衡（仅1.43%接受）和高噪声（编码不一致、人口统计缺失）。
+
+- rhetorical_function_cn：说明为什么不能直接套用现有ML。
+
+- depends_on_cn：数据规模和三构念。
+
+- sets_up_cn：为五阶段架构设计提供问题清单。
+
+- evidence_pointer：Introduction P6 S1–S2
+
+### 14. P6 S3
+
+- order：14
+
+- section：Introduction
+
+- locator：P6 S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者指出人类因素和公司现实也会影响收入生成，因此PREM必须考虑多元因素。
+
+- rhetorical_function_cn：把社会/组织约束转换为设计需求。
+
+- depends_on_cn：三类数据挑战。
+
+- sets_up_cn：支撑模块化、可人工干预设计。
+
+- evidence_pointer：Introduction P6 S3
+
+### 15. P7 S1–S2
+
+- order：15
+
+- section：Introduction
+
+- locator：P7 S1–S2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：作者称这些挑战广泛存在于各种大规模客户数据集，因此研究影响超出航空业；本公司数据结构对多数国际航空公司具代表性。
+
+- rhetorical_function_cn：把个案问题提升为普遍问题。
+
+- depends_on_cn：三类挑战。
+
+- sets_up_cn：为外部有效性和行业启示声明铺垫。
+
+- evidence_pointer：Introduction P7 S1–S2
+
+### 16. 第2段末尾
+
+- order：16
+
+- section：Literature review
+
+- locator：第2段末尾
+
+- move_code：GAP
+
+- paraphrase_cn：作者称未发现有现有工作为公司的目标客户确定个性化升级报价定价。
+
+- rhetorical_function_cn：明确文献缺口是‘没有个性化升舱定价研究’。
+
+- depends_on_cn：前文对定价和动态定价的综述。
+
+- sets_up_cn：支撑RO2和PREM创新声明。
+
+- evidence_pointer：Section 2 第2段末尾
+
+### 17. 第4段
+
+- order：17
+
+- section：Literature review
+
+- locator：第4段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出现有相关研究大多使用少量数据或非代表性样本；美国交通部只提供10%国内航班票价的子集，网页抓取数据覆盖期短。
+
+- rhetorical_function_cn：用数据规模和代表性否定以往研究的适用性。
+
+- depends_on_cn：对相关文献的枚举。
+
+- sets_up_cn：反衬本研究三年百万级订座数据的优势。
+
+- evidence_pointer：Section 2 第4段
+
+### 18. 第4段末
+
+- order：18
+
+- section：Literature review
+
+- locator：第4段末
+
+- move_code：GAP
+
+- paraphrase_cn：作者称升级销售（包括报价定价）在旅行行业中的分析有限，缺少用于开发定价ML模型的benchmark数据是关键问题。
+
+- rhetorical_function_cn：指出数据/基准缺口。
+
+- depends_on_cn：前一句数据样本限制。
+
+- sets_up_cn：引出本研究提供大规模真实数据。
+
+- evidence_pointer：Section 2 第4段末
+
+### 19. 第5段
+
+- order：19
+
+- section：Literature review
+
+- locator：第5段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者强调与全球最大航空公司之一合作，使用数百万订座量级三年数据，因而与仅用有限数据集的研究形成对比。
+
+- rhetorical_function_cn：辩护研究数据来源和规模。
+
+- depends_on_cn：前文数据缺口。
+
+- sets_up_cn：支撑“真实世界挑战迫使新架构”的下一句。
+
+- evidence_pointer：Section 2 第5段
+
+### 20. S1
+
+- order：20
+
+- section：Research goals
+
+- locator：S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者正式提出RO1（识别可能接受/拒绝报价的客户）和RO2（识别可能接受客户的报价价格弹性）。
+
+- rhetorical_function_cn：把引言中的目标固化为研究问题。
+
+- depends_on_cn：引言中的PREM双目标。
+
+- sets_up_cn：为结果部分回扣RO1/RO2提供锚点。
+
+- evidence_pointer：Section 3 S1
+
+### 21. S3–S5
+
+- order：21
+
+- section：Research goals
+
+- locator：S3–S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：作者直觉上把客户分为三组：节俭者会拒绝任何合理报价；捡便宜者几乎总会接受；中间摇摆者可能被有吸引力的报价说服；历史数据显示82%常拒绝、不到1%常接受。
+
+- rhetorical_function_cn：用行为分层解释为什么需要区分目标和价格。
+
+- depends_on_cn：RO1/RO2。
+
+- sets_up_cn：对应后续Never Upgrades/Upgrade Lovers/Lookalikes细分。
+
+- evidence_pointer：Section 3 S3–S5
+
+### 22. S6–S7
+
+- order：22
+
+- section：Research goals
+
+- locator：S6–S7
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者解释RO1a与RO1b不是镜像：RO1b是拒绝最低价报价，RO1a是接受最高价报价，两类客户对公司价值不同；公司还有避免蚕食的业务规则。
+
+- rhetorical_function_cn：细化RO1的内部结构，说明二元任务的不对称。
+
+- depends_on_cn：三客户类别。
+
+- sets_up_cn：为成本敏感分类和避免重复报价的ILP约束铺路。
+
+- evidence_pointer：Section 3 S6–S7
+
+### 23. 4.1 第2段
+
+- order：23
+
+- section：Methodology
+
+- locator：4.1 第2段
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：作者介绍公司规则式升舱邮件流程：客户订经济舱，公司判断资格后发邮件，客户接受或忽略。
+
+- rhetorical_function_cn：描述需要被替代的现有流程。
+
+- depends_on_cn：需要先说明研究对象公司。
+
+- sets_up_cn：作为PREM的实践基线。
+
+- evidence_pointer：Section 4.1 第2段
+
+### 24. 4.2 第3段
+
+- order：24
+
+- section：Methodology
+
+- locator：4.2 第3段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者列出原始23个变量类别：订座信息、客户人口统计、行程信息、升级细节。
+
+- rhetorical_function_cn：说明输入数据与模型可复用性的基础。
+
+- depends_on_cn：数据集规模介绍。
+
+- sets_up_cn：引出特征工程。
+
+- evidence_pointer：Section 4.2 第3段
+
+### 25. 4.2 第4段
+
+- order：25
+
+- section：Methodology
+
+- locator：4.2 第4段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者强调三个挑战：1.43%接受率造成极端不平衡；90%以上客户每年少于3次旅行造成稀疏；不一致代码和缺失值造成噪声。
+
+- rhetorical_function_cn：把数据问题具体化，作为架构设计依据。
+
+- depends_on_cn：数据描述。
+
+- sets_up_cn：引导到去噪嵌入、成本敏感分类、细分。
+
+- evidence_pointer：Section 4.2 第4段
+
+### 26. 4.3 第1段
+
+- order：26
+
+- section：Methodology
+
+- locator：4.3 第1段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者说明若简单使用监督/半监督ML直接分类，初步实验效果差，因为单阶段模型需同时处理稀疏、碎片化、噪声和严重不平衡。
+
+- rhetorical_function_cn：否定最直观方案，为多阶段设计埋伏笔。
+
+- depends_on_cn：三类数据挑战。
+
+- sets_up_cn：引出PREM五阶段架构。
+
+- evidence_pointer：Section 4.3 第1段
+
+### 27. 4.3 第2段
+
+- order：27
+
+- section：Methodology
+
+- locator：4.3 第2段
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者指出公司更关心收入和客户保留，而不是准确率；例如极低价报价可使算法表现好但损害收入。
+
+- rhetorical_function_cn：把业务目标转换为非标准ML指标需求。
+
+- depends_on_cn：上一句架构需求。
+
+- sets_up_cn：引入Revenue Capture作为评价指标。
+
+- evidence_pointer：Section 4.3 第2段
+
+### 28. 4.3 第3段
+
+- order：28
+
+- section：Methodology
+
+- locator：4.3 第3段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告五组件：特征工程、去噪自编码器嵌入、成本敏感分类器、个性化升级报价模型、收入最大化器。
+
+- rhetorical_function_cn：给出文章的方法论路线图。
+
+- depends_on_cn：前期否定单阶段。
+
+- sets_up_cn：后文五个组件小节按此展开。
+
+- evidence_pointer：Section 4.3 第3段
+
+### 29. 4.3 第4段
+
+- order：29
+
+- section：Methodology
+
+- locator：4.3 第4段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者强调PREM可扩展且允许人工干预：公司可在分类器输出中增删客户、使用替代细分或在ILP中加业务约束；这些在单阶段模型中不可能。
+
+- rhetorical_function_cn：用可操作性支撑多阶段架构合理性。
+
+- depends_on_cn：五组件预告。
+
+- sets_up_cn：为业务感知ML设计原则提供证据。
+
+- evidence_pointer：Section 4.3 第4段
+
+### 30. 5.1 列表后
+
+- order：30
+
+- section：PREM components
+
+- locator：5.1 列表后
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者列举多类衍生特征：订座、竞争、离散化、航班日期、历史、细分、统计价格、旅行目的等。
+
+- rhetorical_function_cn：展示特征工程如何覆盖三构念。
+
+- depends_on_cn：原始变量。
+
+- sets_up_cn：说明混合数据类型需要嵌入。
+
+- evidence_pointer：Section 5.1 列表后
+
+### 31. 5.2 第1段
+
+- order：31
+
+- section：PREM components
+
+- locator：5.2 第1段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出one-hot把每行程变成约2000维向量，加剧稀疏；label encoding会虚构类别顺序，也不合适。
+
+- rhetorical_function_cn：否定两个常见编码。
+
+- depends_on_cn：特征混合类型。
+
+- sets_up_cn：引出嵌入方案。
+
+- evidence_pointer：Section 5.2 第1段
+
+### 32. 5.2 第3段
+
+- order：32
+
+- section：PREM components
+
+- locator：5.2 第3段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者简介自编码器：由编码器和解码器组成，把输入压缩为潜在表示并可重建输入。
+
+- rhetorical_function_cn：给非专业读者提供技术背景。
+
+- depends_on_cn：嵌入需求。
+
+- sets_up_cn：引出去噪变体。
+
+- evidence_pointer：Section 5.2 第3段
+
+### 33. 5.2 第4段
+
+- order：33
+
+- section：PREM components
+
+- locator：5.2 第4段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者使用去噪自编码器，输入被污染向量x'，重建未污染x；交换噪声以15%概率随机替换类别属性值；测试集不注入噪声。
+
+- rhetorical_function_cn：详细说明鲁棒嵌入的具体设计。
+
+- depends_on_cn：自编码器背景。
+
+- sets_up_cn：为Table 2中的DAE优势提供机制解释。
+
+- evidence_pointer：Section 5.2 第4段
+
+### 34. 5.2 第6段
+
+- order：34
+
+- section：PREM components
+
+- locator：5.2 第6段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者承认训练时加噪声看似反直觉，但结果证明能构建对各类错误鲁棒的分类器，符合鲁棒学习范式。
+
+- rhetorical_function_cn：提前回应读者可能的质疑。
+
+- depends_on_cn：去噪设计。
+
+- sets_up_cn：为后续实验结果做辩护。
+
+- evidence_pointer：Section 5.2 第6段
+
+### 35. 5.3 第1段
+
+- order：35
+
+- section：PREM components
+
+- locator：5.3 第1段
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者指出误分类成本不对称：把可能升级者预测为不升级的代价远高于发邮件给低概率者，因此需成本敏感分类。
+
+- rhetorical_function_cn：建立第三组件的需求。
+
+- depends_on_cn：极端不平衡数据。
+
+- sets_up_cn：引入Elkan成本敏感方法。
+
+- evidence_pointer：Section 5.3 第1段
+
+### 36. 5.3 第2段
+
+- order：36
+
+- section：PREM components
+
+- locator：5.3 第2段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：作者说PREM的关键是识别并过滤不会升级的客户，因为不升级者数量远多于高概率接受者（约0.3%），ML识别这类客户比识别高概率接受者更容易。
+
+- rhetorical_function_cn：解释为什么把任务设计成先排除而非只选正例。
+
+- depends_on_cn：不平衡数据统计。
+
+- sets_up_cn：为阈值0.5和保守分类提供理论。
+
+- evidence_pointer：Section 5.3 第2段
+
+### 37. 5.3 第3段
+
+- order：37
+
+- section：PREM components
+
+- locator：5.3 第3段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者给出误分类成本：TP奖$1000、FN罚$1000、TN奖$1、FP罚$50；$1000来自历史成功升级溢价中位数$1089取整。
+
+- rhetorical_function_cn：解释成本函数的经验基础。
+
+- depends_on_cn：历史升级数据。
+
+- sets_up_cn：让成本敏感分类可复现。
+
+- evidence_pointer：Section 5.3 第3段
+
+### 38. 5.4 第1段
+
+- order：38
+
+- section：PREM components
+
+- locator：5.4 第1段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者指出估计转化概率有两个挑战：一个客户可能对多个价格桶有非零接受概率；单客户历史信息不足。
+
+- rhetorical_function_cn：说明不能简单做多分类。
+
+- depends_on_cn：分类器输出。
+
+- sets_up_cn：引出数据驱动细分。
+
+- evidence_pointer：Section 5.4 第1段
+
+### 39. 5.4 第3段
+
+- order：39
+
+- section：PREM components
+
+- locator：5.4 第3段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者用二元自编码器把每个行程映射为256个数据驱动细分之一，并用三个不同初始化计算平均接受概率。
+
+- rhetorical_function_cn：详述第四组件设计。
+
+- depends_on_cn：细分必要性论证。
+
+- sets_up_cn：为Table 5中的binary AE对比提供方法。
+
+- evidence_pointer：Section 5.4 第3段
+
+### 40. 5.4 第5段
+
+- order：40
+
+- section：PREM components
+
+- locator：5.4 第5段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者说明把升级报价桶按经济舱票价归一化，并用接受价格的等深直方图分成五个桶，使同一模型可用于不同票价航班。
+
+- rhetorical_function_cn：处理价格跨航班不可比问题。
+
+- depends_on_cn：个性化报价需求。
+
+- sets_up_cn：为收入最大化中的期望收入计算准备。
+
+- evidence_pointer：Section 5.4 第5段
+
+### 41. 5.5 第2段
+
+- order：41
+
+- section：PREM components
+
+- locator：5.5 第2段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者把报价发送问题形式化为经典分派问题：N个客户、K个报价桶、C×M个座位槽、每客户只能发一个报价，用ILP最大化累计期望收入。
+
+- rhetorical_function_cn：说明最后一个组件的数学结构。
+
+- depends_on_cn：个性化报价概率。
+
+- sets_up_cn：为Table 6中ILP vs 贪婪提供设计依据。
+
+- evidence_pointer：Section 5.5 第2段
+
+### 42. 第1段
+
+- order：42
+
+- section：Results
+
+- locator：第1段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者定义F1和Revenue Capture，并说明Revenue Capture衡量PREM相对当前启发式获得的收入比例，适合历史数据评价。
+
+- rhetorical_function_cn：建立统一评价标准。
+
+- depends_on_cn：业务目标非准确率。
+
+- sets_up_cn：所有消融表都用这两个指标。
+
+- evidence_pointer：Section 6 第1段
+
+### 43. 6.1.1 第2段
+
+- order：43
+
+- section：Results
+
+- locator：6.1.1 第2段
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 2显示去噪自编码器最佳，比传统自编码器高约7%F1；one-hot和label encoding大幅下降，PCA也不如DAE。
+
+- rhetorical_function_cn：报告第一个消融结果。
+
+- depends_on_cn：嵌入实验。
+
+- sets_up_cn：证明DAE是嵌入组件的最优选择。
+
+- evidence_pointer：Table 2后一段
+
+### 44. 6.1.2
+
+- order：44
+
+- section：Results
+
+- locator：6.1.2
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 3显示256维嵌入是甜点：更小维度损失准确率和收入，更大维度可能过拟合。
+
+- rhetorical_function_cn：给出超参数选择的实证依据。
+
+- depends_on_cn：DAE实验。
+
+- sets_up_cn：固定后续所有组件使用256维。
+
+- evidence_pointer：Table 3前一段
+
+### 45. 6.1.3 第1段
+
+- order：45
+
+- section：Results
+
+- locator：6.1.3 第1段
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 4显示DL+嵌入最佳；嵌入使传统分类器仍接近最佳，而使用原始数据的RF和DL都大幅下降。
+
+- rhetorical_function_cn：证明性能提升主要来自嵌入而非特定分类器。
+
+- depends_on_cn：分类器实验。
+
+- sets_up_cn：支持‘嵌入质量高’这一制品主张。
+
+- evidence_pointer：Table 4前一段
+
+### 46. 6.1.3 第2段
+
+- order：46
+
+- section：Results
+
+- locator：6.1.3 第2段
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 4还显示SMOTE、过采样和GAN等不平衡方法都不如基于嵌入的成本敏感方法。
+
+- rhetorical_function_cn：否定常见不平衡处理基线。
+
+- depends_on_cn：不平衡数据挑战。
+
+- sets_up_cn：强化成本敏感分类组件必要性。
+
+- evidence_pointer：Table 4后一段
+
+### 47. 6.1.4 第2段
+
+- order：47
+
+- section：Results
+
+- locator：6.1.4 第2段
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 5显示二元自编码器细分优于K-Means和决策树。
+
+- rhetorical_function_cn：报告第四组件对比结果。
+
+- depends_on_cn：细分实验。
+
+- sets_up_cn：说明数据驱动细分优于典型聚类/树方法。
+
+- evidence_pointer：Table 5前一段
+
+### 48. 6.1.5
+
+- order：48
+
+- section：Results
+
+- locator：6.1.5
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 6显示ILP收入最大化显著优于贪婪基线。
+
+- rhetorical_function_cn：报告优化组件对比。
+
+- depends_on_cn：ILP实验。
+
+- sets_up_cn：支持ILP是业务决策层的正确选择。
+
+- evidence_pointer：Table 6前一段
+
+### 49. 6.1.6 第2段
+
+- order：49
+
+- section：Results
+
+- locator：6.1.6 第2段
+
+- move_code：RESULT
+
+- paraphrase_cn：Table 7显示完整PREM最好；单阶段最差；去掉收入最大化或分类都导致F1或收入捕获率下降。
+
+- rhetorical_function_cn：用整体消融回答‘为什么需要多阶段’。
+
+- depends_on_cn：前面所有组件实验。
+
+- sets_up_cn：为讨论中的模块化设计原则提供核心证据。
+
+- evidence_pointer：Table 7前一段
+
+### 50. 7.1 第1段
+
+- order：50
+
+- section：Discussion
+
+- locator：7.1 第1段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结PREM的多阶段优点：无监督去噪嵌入、估计多个互斥升级报价的接受概率、二元自编码器细分、ILP收入最大化。
+
+- rhetorical_function_cn：从结果回到制品优势。
+
+- depends_on_cn：全部消融结果。
+
+- sets_up_cn：随后回扣RO1/RO2。
+
+- evidence_pointer：Section 7.1 第1段
+
+### 51. 7.1 第2段
+
+- order：51
+
+- section：Discussion
+
+- locator：7.1 第2段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者称PREM的关键设计原则是不依赖公司专属细节，特征基于每家航空公司都有的数据或公开API。
+
+- rhetorical_function_cn：保护泛化性主张。
+
+- depends_on_cn：特征工程设计。
+
+- sets_up_cn：支撑跨行业迁移声明。
+
+- evidence_pointer：Section 7.1 第2段
+
+### 52. 7.1 第3段
+
+- order：52
+
+- section：Discussion
+
+- locator：7.1 第3段
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者回到RO1和RO2，说明个性化选择升级价格和营销信息比规则式方法更细粒度。
+
+- rhetorical_function_cn：把讨论重新锚定到研究目标。
+
+- depends_on_cn：RO定义。
+
+- sets_up_cn：引出业务效果仿真。
+
+- evidence_pointer：Section 7.1 第3段
+
+### 53. 7.1 仿真段
+
+- order：53
+
+- section：Discussion
+
+- locator：7.1 仿真段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者说明由于结果基于历史数据，用去噪自编码器作为生成模型合成64.3M行程，并按客户细分行为模拟接受/拒绝。
+
+- rhetorical_function_cn：为业务级仿真提供方法论。
+
+- depends_on_cn：DAE的生成能力。
+
+- sets_up_cn：得出仿真数字。
+
+- evidence_pointer：Section 7.1 仿真段
+
+### 54. 7.1 仿真段末
+
+- order：54
+
+- section：Discussion
+
+- locator：7.1 仿真段末
+
+- move_code：RESULT
+
+- paraphrase_cn：仿真得到：少发1.12M非相关邮件、增加72.2K接受、增加$72.2M收入。
+
+- rhetorical_function_cn：给出业务层面结果。
+
+- depends_on_cn：合成行程与细分行为假设。
+
+- sets_up_cn：支撑摘要中的数字和贡献。
+
+- evidence_pointer：Section 7.1 仿真段末
+
+### 55. 7.2.1 第1段
+
+- order：55
+
+- section：Discussion
+
+- locator：7.2.1 第1段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者提出三个升级行为细分：Never Upgrades约占收到报价客户的84%，Upgrade Lovers约占1.3%，Upgrade Lover Lookalikes是匹配Upgrade Lover画像但无历史记录的新客户。
+
+- rhetorical_function_cn：从模型结果中提炼可操作的客户细分知识。
+
+- depends_on_cn：分类与细分组件。
+
+- sets_up_cn：为营销决策和未来研究方向提供框架。
+
+- evidence_pointer：Section 7.2.1 第1段
+
+### 56. 7.2.2
+
+- order：56
+
+- section：Discussion
+
+- locator：7.2.2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结鲁棒ML模型的三条原则：学习通用嵌入、主动对噪声鲁棒、用有限监督数据改善重要客户嵌入。
+
+- rhetorical_function_cn：把去噪嵌入从技术选择提升为设计知识。
+
+- depends_on_cn：DAE消融。
+
+- sets_up_cn：启示其他处理现实噪声数据的信息系统。
+
+- evidence_pointer：Section 7.2.2
+
+### 57. 7.2.3
+
+- order：57
+
+- section：Discussion
+
+- locator：7.2.3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者指出PREM最后组件不是ML模型而是ILP优化，体现ML+优化混合架构；同时强调输出中间结果供人工修改的模块化优于单块系统。
+
+- rhetorical_function_cn：提炼业务感知ML设计原则。
+
+- depends_on_cn：ILP与整体消融。
+
+- sets_up_cn：为管理信息系统领域提供可复用方法论。
+
+- evidence_pointer：Section 7.2.3
+
+### 58. 第1段
+
+- order：58
+
+- section：Limitations
+
+- locator：第1段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者承认数据来自一家公司、一个升级产品，发现未必直接迁移；但数据集国际化、多年跨度和系统不依赖公司专属变量表明可能迁移。
+
+- rhetorical_function_cn：限定外部有效性并给出辩护。
+
+- depends_on_cn：设计通用性声明。
+
+- sets_up_cn：引出未来跨域研究。
+
+- evidence_pointer：Section 8 第1段
+
+### 59. 第2段
+
+- order：59
+
+- section：Limitations
+
+- locator：第2段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者讨论蚕食效应：客户可能学会等待报价而不直接购买商务舱；初步分析显示因接受率低可能不是问题，但需进一步研究。
+
+- rhetorical_function_cn：诚实承认动态定价行为的未解风险。
+
+- depends_on_cn：业务直觉和既有促销文献。
+
+- sets_up_cn：为未来因果/现场研究留出空间。
+
+- evidence_pointer：Section 8 第2段
+
+### 60. 第3段
+
+- order：60
+
+- section：Limitations
+
+- locator：第3段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者指出二元接受/不接受是简化；未来可用多分类、因果模型估计价格个体处理效应，并研究邮件文案和现场实验。
+
+- rhetorical_function_cn：列出方法边界和未来方向。
+
+- depends_on_cn：PREM设计选择。
+
+- sets_up_cn：结束全文研究的开放性问题。
+
+- evidence_pointer：Section 8 第3段
+
+### 61. 第1句
+
+- order：61
+
+- section：Conclusion
+
+- locator：第1句
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者总结升舱接受是订座、客户和目的地之间的相互作用。
+
+- rhetorical_function_cn：把经验结果带回最初构念。
+
+- depends_on_cn：引言专家构念。
+
+- sets_up_cn：最后一句的贡献总结。
+
+- evidence_pointer：Section 9 第1句
+
+### 62. 第2–3句
+
+- order：62
+
+- section：Conclusion
+
+- locator：第2–3句
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结开发了模块化ML架构，在三年真实数据上相对规则式方法取得显著性能提升，并把客户划分为三个升舱倾向细分。
+
+- rhetorical_function_cn：收束全文主要贡献。
+
+- depends_on_cn：PREM消融与仿真。
+
+- sets_up_cn：结束文章。
+
+- evidence_pointer：Section 9 第2–3句
+
+## 写作技术
+
+- gap_construction_cn：先肯定已有价格/定价研究多聚焦购票时机和动态定价，再指出没有发现针对个性化升级报价定价的现有工作；并把数据规模小、不具代表性、缺少benchmark作为研究缺口；同时用公司规则式流程的缺陷作为实践缺口。
+
+- signposting_cn：引言末尾明确三项任务和三个RO；方法部分以‘五个组件’预告；每个组件小节按Fig.4顺序展开；结果部分以‘消融分析’总领并逐表编号；讨论开头‘Returning to our research objectives’回扣。
+
+- transition_logic_cn：每类技术挑战对应一个组件：噪声/稀疏→嵌入；不平衡→成本敏感分类；缺客户级数据→二元自编码器细分；业务约束→ILP；每章末句均预告下一组件。
+
+- claim_evidence_rhythm_cn：先摆出设计选择，再在对应表格用baseline对比证明；每个结果段先给‘最优’，再解释机制（如非线性、紧凑性、不对称成本），再说明对业务的意义。
+
+- benchmark_narrative_cn：benchmark不是一次性总比较，而是嵌入、分类、细分、优化逐层嵌入；每个组件都回答‘为什么不用更简单方法’，最终整体消融回应‘为什么需要多阶段’。
+
+- theory_return_cn：价格弹性理论在RQ与价格桶设计中出现；专家构念在特征工程和讨论中的‘接受=客户×订座×目的地’框架回扣；各技术选择在讨论中被抽象成鲁棒ML和业务感知ML两类设计知识。
+
+- contribution_positioning_cn：贡献不限于‘我们的模型更好’，而是声明：提供真实大数据实证、识别三类客户、提出可复用的分阶段ML架构和业务感知设计原则；文章把结果定位为‘对信息和管理的创新贡献’。
+
+- novelty_protection_cn：反复强调‘首次将某技术用于航空数据’、‘模块化可迁移’、‘不依赖公司专属细节’、‘优于单阶段端到端’，并通过消融和仿真把一次性性能结果提升为可迁移设计知识与业务后果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：开头用业务价值（upselling增收）和数据现实（稀疏、不平衡、噪声）搭建问题；说明现状是规则式流程。
+
+- research_job_cn：获取真实企业大数据，访谈领域专家，统计触达率/转化率，明确数据挑战。
+
+- required_evidence_cn：真实数据集规模、现有流程描述、可量化的业务现状（如转化率1.43%）。
+
+- transition_to_next_cn：从‘现有方法不足’自然引出‘需要新ML制品’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：写出RO1/RO2，并解释为什么不能用准确率作为唯一目标；预告多阶段架构。
+
+- research_job_cn：完成初步实验证明单阶段分类效果差；划分子目标并选择业务指标。
+
+- required_evidence_cn：初步实验比较或逻辑论证单阶段模型低效；RO可操作化。
+
+- transition_to_next_cn：RO和挑战共同决定组件划分。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：按组件分别写方法和设计理由，每个组件对应一个数据挑战或业务约束。
+
+- research_job_cn：实现特征工程、去噪嵌入、成本敏感分类、细分、ILP。
+
+- required_evidence_cn：每个组件能运行并输出下一阶段所需输入。
+
+- transition_to_next_cn：组件就绪后转入组件级验证。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用统一指标和表格对每个组件做消融/基线对比，并解释为什么赢。
+
+- research_job_cn：为每个组件选最相关基线，运行对比实验。
+
+- required_evidence_cn：表格中的F1和Revenue Capture显示组件级增益。
+
+- transition_to_next_cn：组件级验证之后需要验证整体流水线。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：加入整体消融：完整PREM vs 单阶段 vs 去组件变体，支持多阶段主张。
+
+- research_job_cn：运行整体变体实验。
+
+- required_evidence_cn：整体消融表；确认所有组件都有贡献。
+
+- transition_to_next_cn：证明技术有效后，需要转成业务结果。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用仿真/回放把模型输出转换为邮件减少、接受增加、收入增加。
+
+- research_job_cn：用生成模型合成大规模数据或对历史数据回放，比较PREM与基线。
+
+- required_evidence_cn：业务KPI变化和仿真假设说明。
+
+- transition_to_next_cn：业务结果引出可复用知识。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在讨论中提炼客户细分和设计原则，明确适用范围与未来研究。
+
+- research_job_cn：结合模型行为和领域解释形成细分；诚实标注限制。
+
+- required_evidence_cn：细分占比和模型行为证据；限制清单。
+
+- transition_to_next_cn：结尾以贡献总结并致敬开头缺口。
+
+### most_transferable_moves_cn
+
+1. 把真实企业问题拆成可计算组件，并让每个组件对应一个明确的数据/业务挑战
+
+2. 为每个组件设置‘最自然替代方案’作为baseline，而不是只做总模型对比
+
+3. 用统一业务指标（如Revenue Capture）贯穿所有消融，避免技术指标与业务脱节
+
+4. 用整体消融回应‘为什么需要复杂架构’
+
+5. 用仿真或回放把模型性能翻译成业务金额
+
+6. 最后把技术选择抽象成可迁移的设计原则
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 获取一家大型航空公司三年64.3M订座和14.1M报价的专有数据
+
+2. 与公司内部收入/客户体验/电商专家进行半结构化访谈
+
+3. 需要使用历史邮件营销系统和真实报价邮件作为研究场域
+
+4. 生成64.3M合成行程并做大规模仿真的计算资源
+
+5. 跨企业获取类似数据几乎不可能，外部效度依赖单一合作方
+
+### what_not_to_copy_superficially_cn
+
+1. 不能在没有真实部署或可靠仿真时声称收入增长
+
+2. 不能只堆叠自编码器/ILP而不做组件消融
+
+3. 不能把‘三类客户细分’当作普适结论，而不说明样本与模型限制
+
+4. 不能把合成数据仿真等同于因果证据或现场证据
+
+5. 不能复制‘首次应用’表述而没有文献检索支撑
+
+- single_best_description_of_the_routine_cn：用一个真实大规模企业数据集，把业务痛点拆成可计算组件，再用逐组件消融和整体消融证明每个设计决策有效，最后用生成式仿真把模型指标转成业务金额。
+
+## 分析边界
+
+全文内容完整可读，但OCR表格存在个别字符异常（如2019年Offers sent百分比括号缺失），数值基本可辨；文章没有附录或代码，无法独立验证模型实现与仿真细节；locator因无页码而使用章节/段落位置。

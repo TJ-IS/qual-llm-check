@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85108869751"
+title: "Exploring the Use of Auto-Grading Systems to Improve the Efficacy of Feedback through Small, Scaffolded Programming Assignments"
+authors: "Siegel A.A.; Bragg T.; Brodsky A.; Poitras E."
+year: "2021"
+journal: "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE"
+doi: "10.1145/3456565.3460042"
+---
+# Scopus title-abstract-keyword metadata
+Title: Exploring the Use of Auto-Grading Systems to Improve the Efficacy of Feedback through Small, Scaffolded Programming Assignments
+Abstract: In this panel, we will explore the use of auto-graded programming assignments to support timely and effective feedback to learners via small, scaffolded programming tasks. Program comprehension involves processing at different levels [5,10]. As students proceed through a program, associative processes take place and are described as information as the current statements activate information from the previous statements and from memory of prior knowledge. The most frequently inferred relations by the students are those that provide a coherent understanding of the state changes and outputs of a program [3] as well as the purpose of a piece of code [9]. The resulting, interconnected representation of the program goes beyond the syntax of tokens and statements. The outcome of successful comprehension is a representation that captures the meaning of each statement as students infer the operations of a statement, in terms of the underlying data and control flow, given its function in the context of solving a problem [4]. Although models of program comprehension generally agree regarding the processes by which a student arrives at a mental representation of a program, it is less clear how student-initiated processes play a role in program comprehension, and how they combine with such passive processes to result in comprehension. Feedback is an important factor in determining the extent to which student-initiated processes and learning, critical to successful program comprehension, will occur. While a variety of definitions of the term feedback have been suggested, we will use the definition first suggested by Shute [6], who saw it as any information that is intended to modify student thinking or behaviour for the purpose of improving program comprehension. We claim that frequent and timely feedback can lead to student-initiated processes that reinstate coherence in understanding when (i) passive processes fail to lead to adequate comprehension due to lack of the requisite knowledge and skills and (ii) feedback is tailored to the different needs of specific students. To examine this notion further, this interdisciplinary panel includes both researchers and practitioners from the fields of computer and learning sciences. Each have had experience in teaching introductory programming courses in which they have leveraged different technologies to provide such feedback. We structure the panel to describe and critically appraise the theoretical underpinnings for standards of coherence that constitute adequate comprehension, how feedback can be properly designed to externalize these standards, and the challenges inherent in the delivery of automated feedback at scale within introductory programming classrooms. Drawing on recent findings in the empirical literature [1,2] as well as our own experiences in implementing these tools in the classroom, we explore examples of instructional design that leverage technologies to facilitate the delivery of feedback.  © 2021 Owner/Author.
+Author keywords: CS1; feedback; higher education; programming
+Index keywords: Computer programming; Education computing; Engineering education; Engineering research; Feedback; Grading; Coherent understanding; Empirical literature; Instructional designs; Introductory programming; Introductory programming course; Mental representations; Program comprehension; Programming assignments; Students
+Document type: Conference paper
+Conference: 
+Source title: Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE
+Year: 2021
+EID: 2-s2.0-85108869751
+DOI: 10.1145/3456565.3460042
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

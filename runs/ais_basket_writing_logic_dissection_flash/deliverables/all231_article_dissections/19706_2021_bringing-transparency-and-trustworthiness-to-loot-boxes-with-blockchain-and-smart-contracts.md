@@ -1,0 +1,2093 @@
+# Bringing transparency and trustworthiness to loot boxes with blockchain and smart contracts
+
+- 作者：Arthur Carvalho
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113508
+- 源文件：19706_2021_bringing-transparency-and-trustworthiness-to-loot-boxes-with-blockchain-and-smart-contracts.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：如何设计一个透明且可信的 loot box 机制，使玩家在购买前能知道奖池和概率，并能够验证游戏确实按公布的概率抽取物品？
+
+- 制品与设计：核心制品是将 loot box 编码为运行在公共区块链上的智能合约：合约公开 items 与 probabilities，drawItem(screenName) 使用基于 hash 的伪随机数（区块时间戳+玩家昵称）和轮盘赌选择法抽取物品；配套 DApp 模拟购买和开箱，玩家可通过 Etherscan 在购买前核对代码、购买后核对交易与结果。
+
+- 客观结果：在 Ethereum 测试网 Ropsten 上部署并演示；卡方检验显示单玩家、多玩家与合并场景下观测频率均与公布概率无显著差异；Securify/MythX 静态/动态/符号分析表明修复访问控制后的合约无主要安全漏洞；部署成本约 1.34 美元、每次抽取约 0.26 美元/40 秒；还提出建立专门公共链与治理委员会以控制费用波动。
+
+- 核心贡献：作者声称提出并验证了一个基于区块链智能合约的透明、可信 loot box 机制，不需要开放游戏源代码，而是把随机抽取从游戏代码中剥离到公共区块链上，从而提供购买前的概率透明和购买后可审计的信任保证，并为行业自我监管和部署提供设计知识与治理建议。
+
+- 整篇论证链：作者从游戏业 loot box 营收数据、心理/赌博担忧、监管动向和决策理论（期望效用与模糊厌恶）出发，指出当前机制存在两层问题：奖池和概率在购买前不一定公开，且即使公开也无法保证游戏实际按公布概率抽取。随后用 Pedersen 等提出的区块链采纳决策模型，论证公共区块链是适合的底层技术，因为场景需要共享数据库、多方参与、利益冲突、避免可信第三方、不同访问权限、交易规则稳定、不可变日志和开放访问。作者将 loot box 定义为智能合约，设计 drawItem 函数和基于 hash 的确定性伪随机数生成器，并用轮盘赌选择实现按概率抽样；开发了 Ethereum DApp 作为概念验证。评价部分分别检验准确性（三个卡方拟合优度检验均不能拒绝观测频率等于理论频率）、安全性（Securify/MythX 扫描并修复访问控制问题）和成本（部署约1.34美元、每次抽取约0.26美元），最后给出专用公共链、治理委员会与未来研究方向的部署建议，把设计结果提升为面向行业的可复用知识。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用 Peffers 等 DSRF，以问题定义和目标为起点，构建智能合约算法和 DApp 制品，随后进行演示和多维评价（准确性、安全性、成本），并给出部署/治理设计知识，因此是典型的设计科学研究。
+
+- 主导写作弧线判定：写作主线按 DSRF 展开：从问题与需求出发，把目标转化为设计要求，通过 Pedersen 模型选择区块链与公共链类型，然后构建和演示制品，最后用准确性、安全性和成本三维评价支持设计知识，并讨论治理与部署原则；不是理论检验循环，也不是 benchmark 主导。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：七个阶段依次累积：问题识别与动机（提出透明/信任缺口并证明价值）→方案目标与区块链采纳决策（用决策模型把缺口转成公共区块链要求）→设计与开发（实现 loot box 智能合约算法）→演示（在 Ethereum 上部署 DApp 展示可行性）→准确性评价（统计检验证明抽取符合概率）→安全性评价（工具分析合约与网络风险）→成本评价与部署/治理建议（证明经济可行性并拓展到行业应用）。后一阶段总以前一阶段未解决的问题为起点。
+
+### studies_or_phases
+
+#### 1. 问题识别与动机（DSRF第1步）
+
+- order：1
+
+- name_cn：问题识别与动机（DSRF第1步）
+
+- question_cn：现行 loot box 机制究竟存在什么透明与信任问题，以及为什么值得解决？
+
+- inputs_and_setting_cn：游戏产业报告（Activision Blizzard 年报、Juniper Research 市场预测）、监管文件（中国、荷兰、比利时、美国 FTC/立法）、行业自律文件（K-GAMES、平台商店政策）、赌博与青少年研究文献。
+
+- designed_or_compared_object_cn：没有构建制品；比较了当前隐藏概率的做法、公开概率但不可验证的做法、以及两种信任验证替代方案（源码检查、统计众包验证）。
+
+- baseline_control_or_counterfactual_cn：把源码检查与事后统计集合作为对照方案，论证其不可行；把“只要求披露概率”的监管思路作为不足够的基线。
+
+##### objective_metrics
+
+1. 是否满足透明度
+
+2. 是否提供可验证的信任保证
+
+3. 监管与诉讼风险是否缓解
+
+- analysis_method_cn：文献综合、监管证据归纳、决策理论概念化（loot box 作为 lottery）、替代方案可行性论证。
+
+- main_result_cn：识别出两个核心问题：购买前可能不知道奖池/概率；即使知道也无法确保游戏实际使用公布概率。现有替代方法成本高或仍依赖可信第三方，因此需要技术方案。
+
+- argumentative_role_cn：定义研究问题并证明价值，为后续“目标—设计—评价”提供理由。
+
+- remaining_uncertainty_cn：尚未确定用何种技术实现，以及新机制能否在真实平台落地。
+
+- link_to_next_phase_cn：结论自然导向 DSRF 第二步：明确解决方案的目标并选择底层技术。
+
+##### evidence_pointers
+
+1. Section 2 P1-P3
+
+2. Section 2.1
+
+3. Section 2.2
+
+#### 2. 方案目标与区块链采纳决策（DSRF第2步）
+
+- order：2
+
+- name_cn：方案目标与区块链采纳决策（DSRF第2步）
+
+- question_cn：一个透明且可信的 loot box 机制应满足什么目标？公共区块链是否是合适技术？
+
+- inputs_and_setting_cn：区块链与智能合约的定义；Pedersen 等（2019）的十步区块链采纳决策模型。
+
+- designed_or_compared_object_cn：比较公共链与许可链；比较去中心化公共链与可信第三方监控机制。
+
+- baseline_control_or_counterfactual_cn：以第三方监管机构（K-GAMES、荷兰赌博管理局等）作为对照，论证其仍需要玩家信任；以许可链作为公共链的替代。
+
+##### objective_metrics
+
+1. 七个决策问题的回答
+
+2. 选择的链类型（public vs permissioned）
+
+- analysis_method_cn：将应用场景逐题映射到 Pedersen 决策模型，并据此推断区块链是否适用及哪类链适用。
+
+- main_result_cn：所有关键问题均指向公共区块链：需要共享数据库、多方参与、参与者利益冲突、希望避免可信第三方、访问规则因角色而异、交易规则稳定、需要不可变日志、需要开放访问。
+
+- argumentative_role_cn：把一般问题转成具体技术目标，为智能合约设计和平台选择提供依据。
+
+- remaining_uncertainty_cn：仍未决定智能合约内部如何实现随机抽取、如何解决分布式环境下的一致性问题。
+
+- link_to_next_phase_cn：目标明确后进入 DSRF 第三步：设计和开发具体算法/合约。
+
+##### evidence_pointers
+
+1. Section 3 P1
+
+2. Section 3.1
+
+3. Section 3.2 and Fig.1
+
+#### 3. 设计与开发：loot box 智能合约算法（DSRF第3步）
+
+- order：3
+
+- name_cn：设计与开发：loot box 智能合约算法（DSRF第3步）
+
+- question_cn：如何把 loot box 编码为智能合约，并解决区块链环境中的随机数、效率与可验证性问题？
+
+- inputs_and_setting_cn：以太坊/Solidity 的约束（不支持定点数）、hash 函数、轮盘赌选择法、区块时间戳机制。
+
+- designed_or_compared_object_cn：Algorithm 1（智能合约伪代码）及其 RNG 函数；对比简单本地时间戳 RNG、非确定性 RNG 和集中式源码随机抽取。
+
+- baseline_control_or_counterfactual_cn：以“各节点可能产生不同随机结果”的朴素随机方案为反事实；以每个区块只能购买一次为边界约束。
+
+##### objective_metrics
+
+1. 算法时间复杂度O(n)
+
+2. RNG输出是否确定
+
+3. 每区块购买次数限制
+
+4. 代码是否公开可查
+
+- analysis_method_cn：伪代码设计、复杂度分析、hash 函数确定性论证、运行示例。
+
+- main_result_cn：设计了把 items/probabilities 公开存储、以 drawItem(screenName) 为核心函数的智能合约；RNG=H(timestamp|screenName)%100；用轮盘赌选择得到物品；同一玩家每区块只能购一个 loot box。
+
+- argumentative_role_cn：核心制品构建，建立透明性与可验证性的技术基础。
+
+- remaining_uncertainty_cn：该伪代码是否能在真实链上运行、是否准确、安全且成本合理尚未验证。
+
+- link_to_next_phase_cn：需要在实际区块链和 DApp 中展示，以进入 DSRF 第四步演示。
+
+##### evidence_pointers
+
+1. Section 4 P1-P3
+
+2. Algorithm 1
+
+3. Section 4 P6-P8
+
+4. Appendix Solidity code
+
+#### 4. 演示：Ethereum DApp 概念验证（DSRF第4步）
+
+- order：4
+
+- name_cn：演示：Ethereum DApp 概念验证（DSRF第4步）
+
+- question_cn：提出的智能合约能否在一个模拟购买/开箱过程中被实际使用？
+
+- inputs_and_setting_cn：Ethereum Ropsten 测试网；Solidity 0.4.25 合约；HTML/JavaScript/web3 构建的 DApp；Infura API；Etherscan 浏览器。
+
+- designed_or_compared_object_cn：部署的智能合约和 DApp 用户流程（查看物品/概率→核对链上代码→购买→等待→查看结果→核对交易）。
+
+- baseline_control_or_counterfactual_cn：没有对照组；以完整流程的可操作性作为概念验证标准。
+
+##### objective_metrics
+
+1. 玩家能否在购买前查看/核对代码
+
+2. 购买后能否通过交易ID核对链上调用与结果
+
+3. 界面是否阻止重复购买
+
+- analysis_method_cn：分步演示和界面截图说明。
+
+- main_result_cn：DApp 展示物品和概率，玩家可跳转 Etherscan 核对合约代码；购买后 DApp 显示结果和交易链接，玩家可核对交易与输出。
+
+- argumentative_role_cn：展示制品的可操作性，把抽象算法变成可感知的证据。
+
+- remaining_uncertainty_cn：尚未检验统计准确性、安全性、成本；也没有优化用户体验。
+
+- link_to_next_phase_cn：演示确认可行后，进入 DSRF 第五步评价，按准确性、安全性、成本检查底层假设。
+
+##### evidence_pointers
+
+1. Section 5
+
+2. Section 5.2
+
+3. Fig.2-5
+
+4. Appendix
+
+#### 5. 评价：准确性（DSRF第5步）
+
+- order：5
+
+- name_cn：评价：准确性（DSRF第5步）
+
+- question_cn：智能合约实际抽取的物品频率是否与公布概率一致？
+
+- inputs_and_setting_cn：同一 loot box（Common 0.7, Silver 0.2, Dragon 0.1）调用 drawItem；1000 次单玩家“PlayerX”调用；1000 次随机屏幕名调用；“Player?”中的 ? 来自 U(0,999)。
+
+- designed_or_compared_object_cn：观测频率 vs 期望频率；三个场景：单玩家、多玩家、合并场景。
+
+- baseline_control_or_counterfactual_cn：理论期望频率（700/200/100 及其两倍）作为 ground truth。
+
+##### objective_metrics
+
+1. 样本量（约1000）
+
+2. 卡方统计量
+
+3. 自由度
+
+4. p值
+
+5. 效应量与统计功效
+
+- analysis_method_cn：power analysis 确定样本量；卡方拟合优度检验。
+
+- main_result_cn：单玩家 chi²=1.4314, p=0.4888；多玩家 chi²=0.18286, p=0.9126；合并 chi²=0.61286, p=0.7361，均不能拒绝原假设。
+
+- argumentative_role_cn：支持 RNG 和 drawItem 正确按公布概率工作，为“可信”主张提供统计证据。
+
+- remaining_uncertainty_cn：统计等价不证明安全性或用户信任，也未比较人类玩家感知。
+
+- link_to_next_phase_cn：准确性满足后继续检查安全性和成本。
+
+##### evidence_pointers
+
+1. Section 6.1
+
+2. Table 1
+
+#### 6. 评价：安全性（DSRF第5步）
+
+- order：6
+
+- name_cn：评价：安全性（DSRF第5步）
+
+- question_cn：智能合约代码和底层区块链网络是否足够安全？
+
+- inputs_and_setting_cn：附录中的 Solidity 合约；Securify 和 MythX 工具；区块链攻击文献（DAO 攻击、51%攻击）；Ethereum 公共链特性。
+
+- designed_or_compared_object_cn：对合约进行静态、动态和符号分析；修复访问控制漏洞后重新检查；将成熟公共链与不成熟网络对比。
+
+- baseline_control_or_counterfactual_cn：工具发出的警告和已知攻击模式（DAO 攻击）作为安全风险基线；51%攻击作为网络级威胁反事实。
+
+##### objective_metrics
+
+1. 安全工具报告
+
+2. 是否限制只有游戏开发者能调用 drawItem
+
+3. 51%攻击所需算力可行性
+
+4. 界面被欺骗攻击的可能性
+
+- analysis_method_cn：自动化安全工具分析+概念性威胁建模。
+
+- main_result_cn：修复后合约无主要技术/安全问题；访问控制漏洞被 Securify 发现并修复；成熟公共链上的 51% 攻击不现实；但仍强调用户界面可能显示误导信息。
+
+- argumentative_role_cn：证明制品的代码和网络层面安全性，并解释为什么部署在成熟公共链。
+
+- remaining_uncertainty_cn：没有对玩家端界面做正式安全评估；没有形式化证明；也没有真实攻击测试。
+
+- link_to_next_phase_cn：安全可接受后，评价运行成本和部署管理问题。
+
+##### evidence_pointers
+
+1. Section 6.2
+
+2. Appendix code line 7/16/18
+
+#### 7. 评价：成本与部署/治理建议（DSRF第5步+实践含义）
+
+- order：7
+
+- name_cn：评价：成本与部署/治理建议（DSRF第5步+实践含义）
+
+- question_cn：运行该解决方案的成本是否可接受？行业应如何部署与治理？
+
+- inputs_and_setting_cn：Ethereum gas 数据；实时 Ether 汇率（约504.50美元）；部署合约所需 663,405 gas；调用 drawItem 平均 52,040 gas；交易确认时间。
+
+- designed_or_compared_object_cn：比较部署成本与单次交易成本；比较慢速/快速 gas price 设置；提出专用公共链+治理委员会方案。
+
+- baseline_control_or_counterfactual_cn：以当前 Ethereum 公共链的费用结构为基线；以 Bitcoin 2017 年手续费暴涨作为费用波动反事实。
+
+##### objective_metrics
+
+1. gas units
+
+2. USD 成本
+
+3. 确认时间
+
+4. 成本波动风险
+
+- analysis_method_cn：gas 成本核算、汇率换算、情景分析和治理设计论证。
+
+- main_result_cn：部署约 1.34 美元，单次抽取约 0.26 美元/40 秒；公共链费用可能波动，建议建立专门处理 loot box 的公共链，由行业/监管/消费者代表委员会设定费用参数，并可用稳定币代替 Ether。
+
+- argumentative_role_cn：证明经济可行性并给出可操作的部署/治理知识，把设计结果推广到真实行业。
+
+- remaining_uncertainty_cn：专用公共链和治理委员会并未实际实现；玩家/厂商采用与收益影响未测。
+
+- link_to_next_phase_cn：结论总结贡献并列出治理、赌博问题、财务影响等未来研究方向。
+
+##### evidence_pointers
+
+1. Section 6.3
+
+2. Section 7 P3-P5
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. LIMITATION
+
+4. THEORY_INTRO
+
+5. STUDY_OVERVIEW
+
+6. RESULT
+
+7. STUDY_OVERVIEW
+
+### introduction_moves
+
+1. PHENOMENON
+
+2. PRACTICAL_STAKES
+
+3. LIMITATION
+
+4. WHY_GAP_MATTERS
+
+5. RQ_OR_OBJECTIVE
+
+6. DESIGN_FEATURE
+
+7. MECHANISM
+
+8. WHY_GAP_MATTERS
+
+9. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. THEORY_PROPOSITION
+
+3. MECHANISM
+
+4. REQUIREMENT
+
+5. THEORY_INTRO
+
+6. PRIOR_KNOWLEDGE
+
+7. THEORY_PROPOSITION
+
+8. REQUIREMENT
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. METHOD_JUSTIFICATION
+
+5. DESIGN_FEATURE
+
+6. BENCHMARK_OR_CONTRAST
+
+7. RESULT
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. HYPOTHESIS_OR_PROPOSITION
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. RESULT
+
+6. LIMITATION_AND_FUTURE
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. LIMITATION_AND_FUTURE
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 决策理论（期望效用理论、模糊态度/ambiguity attitude）
+
+2. Pedersen et al. (2019) 区块链采纳决策模型
+
+3. 区块链与智能合约的性质（append-only、不可变、可编程、共识执行）
+
+4. 密码学 hash 函数与伪随机数生成
+
+5. 进化计算中的 fitness proportionate selection / roulette wheel selection
+
+6. 以太坊 gas 成本模型
+
+7. 软件安全分析工具（Securify, MythX）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：决策理论和 Pedersen 区块链采纳模型主要决定了“为什么需要透明可信方案”和“为什么选择公共区块链”，但智能合约的具体结构、RNG 公式、轮盘赌选择、访问控制、gas 与治理设计更多来自区块链工程约束和领域知识，而不是从理论直接推导；理论对设计是动机和平台选择层面的驱动，而非逐项决定每个设计变量。
+
+- 理论到设计翻译链：决策理论把 loot box 定义为 lottery，说明透明度影响期望效用计算和模糊厌恶；因此提出设计要求：购买前公开物品和概率。Pedersen 决策模型逐题判断后，把公开、不可变、无需第三方的要求落实为公共区块链和智能合约。随后，区块链共识的确定性要求把随机数设计约束为基于区块时间戳和玩家昵称的 hash 伪随机数；可验证性要求把抽取函数以公开合约形式部署；最后，评估把准确性、安全性和成本作为设计知识与治理建议的证据。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：期望效用理论认为玩家只有在 U(L)>U(1) 时才购买 loot box；模糊厌恶表明在无法知道概率时，玩家倾向于不选择该 lottery。
+
+- mechanism_cn：公开奖池与概率会改变玩家的事前决策；未知概率降低玩家对价值的估计和购买意愿。
+
+- design_requirement_cn：loot box 应在购买前公开可赢物品及对应概率。
+
+- artifact_choice_cn：智能合约公开存储 items 与 probabilities；DApp 在购买前显示，并允许玩家通过 Etherscan 核对链上代码。
+
+- evaluated_contrast_cn：所提方案（事前可查看概率）与当前隐藏概率的 loot box 之间的差异；实际观测分布与公布概率是否一致。
+
+- objective_result_cn：玩家在 DApp 中购买前可看到物品/概率并核对链上代码；卡方检验显示观测频率与理论概率无显著差异。
+
+##### evidence_pointers
+
+1. Section 2.2
+
+2. Section 4 P2
+
+3. Section 6.1 Table 1
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：Pedersen 等区块链采纳模型判断：应用需要共享数据库、多方参与、利益冲突、避免可信第三方、不同访问权限、规则不变、不可变日志、开放访问时，应使用公共区块链。
+
+- mechanism_cn：当参与者不能信任单一游戏厂商或第三方监督者时，分布式共识和不可变存储取代单一中心信任。
+
+- design_requirement_cn：选用公共区块链而非许可链；随机抽奖计算与日志应由不受玩家/厂商控制的节点共同执行和存储。
+
+- artifact_choice_cn：在 Ethereum 公共链上部署 loot box 智能合约；任何用户可读合约代码和交易记录；DApp 通过 Infura/Etherscan 交互。
+
+- evaluated_contrast_cn：公共链 vs 许可链；去中心化节点 vs 可信第三方监控。
+
+- objective_result_cn：决策路径选择公共链；合约部署到 Ropsten 测试网；玩家可经 Etherscan 公开验证。
+
+##### evidence_pointers
+
+1. Section 3.2 and Fig.1
+
+2. Section 5.2
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：智能合约是节点共同执行的不可变计算程序；输入输出也会被存储，任何人可审计。
+
+- mechanism_cn：如果随机抽取代码在链上运行，游戏无法在展示概率后单方面改变概率或伪造结果；所有调用都有时间戳和交易记录。
+
+- design_requirement_cn：随机数必须对所有节点确定且不可预测；合约应高效率运行并限制调用权限。
+
+- artifact_choice_cn：drawItem(screenName) 使用 RNG=H(block.timestamp|screenName)%100；轮盘赌选择按概率区间返回物品；仅游戏开发者地址可调用；同一玩家每区块最多一个 loot box。
+
+- evaluated_contrast_cn：确定性 hash RNG vs 节点可能得到不同结果的朴素 RNG；开放调用 vs 仅限游戏开发者调用。
+
+- objective_result_cn：算法复杂度 O(n)；代码经 Securify/MythX 扫描并修复访问控制问题；Accuracy 检验通过。
+
+##### evidence_pointers
+
+1. Section 4 P3-P8
+
+2. Section 6.2
+
+3. Appendix Solidity code
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 概念/监管证据归档
+
+2. 理论模型推演（决策理论、区块链采纳模型）
+
+3. 算法复杂度证明
+
+4. Proof-of-Concept 演示
+
+5. 统计拟合优度检验
+
+6. 智能合约安全工具分析
+
+7. 经济成本核算
+
+8. 治理/部署设计论证
+
+- why_these_evaluations_cn：由于制品是设计科学产物，评价必须覆盖“可信”背后的隐含假设：代码准确、不能被操纵、成本可接受。作者用演示证明可行性，用卡方检验检验 RNG 准确性，用安全工具检验代码安全，用 gas/汇率核算检验经济可持续性，从而把抽象的透明/信任主张落地为可验证证据。
+
+- benchmark_and_contrast_chain_cn：文章没有传统数据集 benchmark，而是把理论期望概率分布作为 ground truth；在问题定义中把源码检查、事后统计验证、可信第三方视为替代方案并逐一排除；在平台选择中用许可链对照公共链；在安全性中用 DAO 攻击和工具警告作为风险基线；在成本中用当前 Ethereum 价格和 Bitcoin 费用暴涨作为参照。
+
+### claim_evidence_ledger
+
+1. 技术准确性主张：RNG/drawItem 按概率工作 → 证据：三个 chi-square 检验均不能拒绝 H0。
+
+2. 制品可行性主张：方案可在 Ethereum 上运行 → 证据：Ropsten 部署和 DApp 交互演示。
+
+3. 安全主张：合约无主要漏洞 → 证据：Securify/MythX 扫描并修复访问控制问题。
+
+4. 信任机制主张：去中心化执行和不可变存储提升信任 → 证据：概念论证 + 公共链/Etherscan 可验证流程，但没有用户信任问卷。
+
+5. 成本主张：部署约 1.34 美元、每次约 0.26 美元 → 证据：gas 消耗与当时汇率计算。
+
+6. 部署/治理主张：专用公共链和治理委员会可降低费用波动 → 证据：情景论证，未实施。
+
+- internal_validity_strategy_cn：通过 power analysis 确定样本量来保证卡方检验功效；采用单玩家、多玩家、合并三种场景；固定使用同一合约和同一 loot box；使用真实部署到 Ropsten 的测试链和公开工具；安全评价使用多种分析工具。
+
+- external_validity_strategy_cn：选择通用公共链 Ethereum 而非私有环境，便于声称结果可迁移；讨论成熟链 vs 新链、公共链 vs 许可链、gas 费用随网络波动的边界；把结果表述为 proof of concept 并留给游戏开发者改善 UI。
+
+- what_is_not_actually_tested_cn：没有测量真实玩家的信任或购买意愿；没有进行用户实验或现场部署；没有形式化证明合约安全性；没有测试 GUI 被欺骗攻击；没有验证专用公共链治理方案；没有评估赌博/成瘾影响。
+
+## 贡献闭环
+
+- technical_claim_cn：智能合约中采用 hash-based RNG + 轮盘赌选择，在 Ethereum 上能按公布概率准确抽取，且运行在多项式时间，安全性经工具检查，成本在每次约 0.26 美元水平。
+
+- artifact_claim_cn：设计的 loot box 智能合约和 DApp 能实现购买前校验奖池/概率、购买后校验调用与结果，即无需开放游戏源码也能提供透明、可审计机制。
+
+- mechanism_claim_cn：把随机抽取从游戏源码剥离到公共区块链上，并由不受玩家/厂商控制的节点共同执行和存储，使信任从信任单一公司转向信任去中心化共识与不可变记录。
+
+- boundary_claim_cn：适用于成熟公共链（如 Ethereum）；玩家每个区块只能购买一个 loot box；UI/explorer 必须忠实反映链上数据；成本随网络拥堵波动；方案不能直接解决赌博问题。
+
+- reusable_design_knowledge_cn：loot box 应作为公开可审计的智能合约；随机数必须用共同接受的确定性输入（如区块时间戳+玩家ID）；同一玩家每区块一次购买可避免重复结果；合约应限制只有游戏开发者可触发抽奖；部署应选成熟公共链；若行业采用可建立专门公共链并由多方委员会管理费用与参数。
+
+- theoretical_contribution_cn：理论贡献并不强；文章主要是把决策理论（期望效用、模糊厌恶）和区块链采纳模型应用到新场景，论证透明机制具有决策支持性质，但没有修改或扩展理论；区块链采纳模型被适配用于选择公共链。
+
+- how_discussion_closes_intro_gap_cn：结论重述引言中的透明/信任双问题，指出方案通过“购买前可核对概率、购买后可核对调用”闭合缺口；随后把治理、赌博、财务影响等开放式问题作为未来研究，使贡献不至被看作一次性原型。
+
+- overclaim_or_unsupported_leaps_cn：从统计上“不能拒绝分布一致”跳到“strong evidence that ... work correctly”尚可但措辞略强；把“可验证性”说成“trustworthiness”并未直接测量玩家信任；安全评价只覆盖合约代码，不覆盖 GUI 欺骗和实际运行环境；治理方案未实施却作为可行建议提出；没有与传统集中式方案做成本/性能对照。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：视频游戏行业对 loot box 的依赖日益增加，已引起消费者团体和监管机构关注。
+
+- rhetorical_function_cn：提供宏观背景并指出问题已进入公众视野。
+
+- depends_on_cn：无需前置。
+
+- sets_up_cn：为后文指出缺乏透明与信任问题铺路。
+
+- evidence_pointer：Abstract P1
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：出售随机虚拟物品的做法因缺乏透明度而受批评，购买前玩家不一定知道可赢物品及概率。
+
+- rhetorical_function_cn：直接指出问题之一：事前信息缺失。
+
+- depends_on_cn：依赖“loot box 被普遍使用”的背景。
+
+- sets_up_cn：为透明性目标提供依据。
+
+- evidence_pointer：Abstract P1
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：即使少数情况公布了物品和概率，也无法保证游戏实际抽取时使用该信息，因此产生信任问题。
+
+- rhetorical_function_cn：提出第二层问题：可验证性/信任缺失。
+
+- depends_on_cn：承接上一句的“即使透明也可能不真实”。
+
+- sets_up_cn：为可信性目标和区块链方案铺垫。
+
+- evidence_pointer：Abstract P1
+
+### 4. Abstract P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者将使用决策理论解释透明与信任问题，并用 Pedersen 等人的决策模型论证区块链用途。
+
+- rhetorical_function_cn：预告理论基础和方法来源。
+
+- depends_on_cn：需要读者已经接受问题是真实的。
+
+- sets_up_cn：为后文理论到设计翻译提供路标。
+
+- evidence_pointer：Abstract P1
+
+### 5. Abstract P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：按照设计科学研究框架，解释如何把 loot box 编码为区块链上的智能合约，以及为何能解决前面的问题。
+
+- rhetorical_function_cn：说明论文的方法框架和核心方案。
+
+- depends_on_cn：依赖前面的理论动机。
+
+- sets_up_cn：为 DSRF 章节结构做预告。
+
+- evidence_pointer：Abstract P1
+
+### 6. Abstract P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P1 S6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：通过开发一个模拟购买和打开 loot box 的去中心化应用来展示方案，并从计算复杂度、准确性、安全性、成本等方面分析。
+
+- rhetorical_function_cn：预告演示与评价部分。
+
+- depends_on_cn：依赖智能合约方案这一核心。
+
+- sets_up_cn：为 DApp 和评价维度做摘要级预告。
+
+- evidence_pointer：Abstract P1
+
+### 7. Introduction P1 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：介绍 loot box 定义：游戏内奖励，包含随机虚拟物品，可帮助游戏进程或个性化角色；玩家用虚拟货币或真实货币购买。
+
+- rhetorical_function_cn：建立研究的经验对象。
+
+- depends_on_cn：无需前置。
+
+- sets_up_cn：为后文解释其商业模式和争议做铺垫。
+
+- evidence_pointer：Introduction P1
+
+### 8. Introduction P1 S3
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：loot box 已成为游戏开发商的重要收入来源，例如 Activision Blizzard 2017 年约 56% 收入来自游戏内净预订。
+
+- rhetorical_function_cn：用经济数据说明问题具有重大商业影响。
+
+- depends_on_cn：建立在 loot box 定义之上。
+
+- sets_up_cn：为后文“监管可能带来收入风险”提供背景。
+
+- evidence_pointer：Introduction P1 S3
+
+### 9. Introduction P2 S1-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：由于物品随机生成，发现稀有物品往往昂贵且对玩家不透明；行业因此被批评缺乏透明性和可信性，并且被指与赌博类似，对未成年人尤其危险。
+
+- rhetorical_function_cn：将商业问题转化为透明/信任/赌博问题。
+
+- depends_on_cn：依赖收入重要性。
+
+- sets_up_cn：为问题识别和监管部分提供引子。
+
+- evidence_pointer：Introduction P2
+
+### 10. Introduction P2 S4
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：loot box 作为主要营收策略已引起监管机构关注。
+
+- rhetorical_function_cn：说明问题超出道德层面，已有制度后果。
+
+- depends_on_cn：承接赌博/青少年担忧。
+
+- sets_up_cn：为监管与法律背景做预告。
+
+- evidence_pointer：Introduction P2 S4
+
+### 11. Introduction P3
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：尽管担心和监管迫近，loot box 使用仍在增长，预计推动在线游戏市场到 2022 年达 1600 亿美元；因此商业模式调整可能不可避免。
+
+- rhetorical_function_cn：说明问题解决的价值与紧迫性。
+
+- depends_on_cn：依赖前面的收入和监管背景。
+
+- sets_up_cn：为研究目标提供现实理由。
+
+- evidence_pointer：Introduction P3
+
+### 12. Introduction P4 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究目标是重新设计 loot box 机制，使其透明且可信。
+
+- rhetorical_function_cn：明确研究目标。
+
+- depends_on_cn：依赖背景中的问题严重性。
+
+- sets_up_cn：引出核心方案摘要。
+
+- evidence_pointer：Introduction P4
+
+### 13. Introduction P4 S2-S4
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P4 S2-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：核心解决方案是把 loot box 表示为智能合约：合约存储物品和概率，drawItem 函数输入玩家 ID 输出随机物品；公共区块链存储代码和每次调用的输入输出，任何人均可查看并验证随机化机制。
+
+- rhetorical_function_cn：在引言中压缩介绍核心制品。
+
+- depends_on_cn：依赖研究目标和区块链技术背景。
+
+- sets_up_cn：为全文技术设计做摘要。
+
+- evidence_pointer：Introduction P4
+
+### 14. Introduction P5 S1-S2
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P5 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：透明性来自购买前可以查看奖池和概率；可信性来自交易数据在不受玩家和开发商控制的节点间共享，且密码学原语使数据不可篡改。
+
+- rhetorical_function_cn：解释为什么该设计能解决透明/信任问题。
+
+- depends_on_cn：依赖前一设计特征。
+
+- sets_up_cn：为信任机制论证奠定基础。
+
+- evidence_pointer：Introduction P5
+
+### 15. Introduction P5 S3-S4
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P5 S3-S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：该方案使游戏公司更透明、合规和道德；如果做不到，玩家或监管机构有足够证据起诉公司，因为智能合约在某些地区已被视为有效法律合同。
+
+- rhetorical_function_cn：从法律后果角度强化方案价值。
+
+- depends_on_cn：依赖信任机制解释。
+
+- sets_up_cn：为 Section 2.1 法律背景做引子。
+
+- evidence_pointer：Introduction P5
+
+### 16. Introduction P6-P7
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P6-P7
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：理论方面使用决策理论，方法上遵循 Peffers 等 DSRF；随后逐段预告 Section 2 到 Section 7 分别对应 DSRF 的五个步骤。
+
+- rhetorical_function_cn：给出方法框架和全文路线图。
+
+- depends_on_cn：需要已经陈述研究目标。
+
+- sets_up_cn：让读者预期后续章节顺序。
+
+- evidence_pointer：Introduction P6-P7
+
+### 17. Section 2 P1
+
+- order：17
+
+- section：Section 2
+
+- locator：Section 2 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：引用 DSRF 第一步：定义研究问题并证明方案价值；本文识别的问题就是透明性和可信性缺失。
+
+- rhetorical_function_cn：用方法论框架定位本节任务。
+
+- depends_on_cn：依赖引言的方法论预告。
+
+- sets_up_cn：进入具体问题说明。
+
+- evidence_pointer：Section 2 P1
+
+### 18. Section 2 P1-S3
+
+- order：18
+
+- section：Section 2
+
+- locator：Section 2 P1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：loot box 不透明，因为在购买前可能没有告诉玩家可赢物品及概率；即使公布了，也没有保证游戏内部实际采用该概率，例如显示 0.1 但内部设为 0。
+
+- rhetorical_function_cn：给出两个具体问题并举例说明。
+
+- depends_on_cn：依赖 DSRF 第一步的框架。
+
+- sets_up_cn：为后文替代方案比较和方案设计铺垫。
+
+- evidence_pointer：Section 2 P1-S3
+
+### 19. Section 2 P2
+
+- order：19
+
+- section：Section 2
+
+- locator：Section 2 P2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：有人可能通过检查源码或统计分析多个开箱结果来验证；但源码通常封闭，统计协调困难且依赖诚实报告，成本高，不如本文建议的技术型验证高效。
+
+- rhetorical_function_cn：排除现有替代方案，建立本文方案的必要性。
+
+- depends_on_cn：依赖透明/信任问题的定义。
+
+- sets_up_cn：为“把随机化从游戏源码中剥离”这一设计埋下伏笔。
+
+- evidence_pointer：Section 2 P2
+
+### 20. Section 2 P3 S1
+
+- order：20
+
+- section：Section 2
+
+- locator：Section 2 P3 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：本文方案把随机化机制从视频游戏源码中分离出来，由第三方计算设备执行，操纵在计算上不可行。
+
+- rhetorical_function_cn：首次给出解决方案的核心设计原则。
+
+- depends_on_cn：依赖对替代方案不可行的论证。
+
+- sets_up_cn：为后续智能合约设计提供方向。
+
+- evidence_pointer：Section 2 P3 S1
+
+### 21. Section 2 P3 S2
+
+- order：21
+
+- section：Section 2
+
+- locator：Section 2 P3 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出总研究问题：如何开发一个透明且可信的 loot box 机制？
+
+- rhetorical_function_cn：正式提出研究问题。
+
+- depends_on_cn：依赖问题与方案方向的简述。
+
+- sets_up_cn：为后续“目标—设计—评价”提供总纲。
+
+- evidence_pointer：Section 2 P3 S2
+
+### 22. Section 2 P3 S3
+
+- order：22
+
+- section：Section 2
+
+- locator：Section 2 P3 S3
+
+- move_code：TRANSITION
+
+- paraphrase_cn：从法律视角和决策理论视角进一步论证新机制的必要性。
+
+- rhetorical_function_cn：连接问题说明与两个子节。
+
+- depends_on_cn：依赖总研究问题。
+
+- sets_up_cn：引出 2.1 监管与 2.2 决策理论。
+
+- evidence_pointer：Section 2 P3 S3
+
+### 23. Section 2.1 P1
+
+- order：23
+
+- section：Section 2.1
+
+- locator：Section 2.1 P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：loot box 是数字容器，利用玩家对稀有和声望物品的渴望，使用视觉效果、音效和人为稀缺来吸引购买。
+
+- rhetorical_function_cn：描述具体经验现象，解释为何吸引玩家。
+
+- depends_on_cn：延续引言中的 loot box 定义。
+
+- sets_up_cn：为“心理操纵和赌博担忧”提供铺垫。
+
+- evidence_pointer：Section 2.1 P1
+
+### 24. Section 2.1 P2
+
+- order：24
+
+- section：Section 2.1
+
+- locator：Section 2.1 P2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：loot box 常被批评为“付费赢”机制；传统上游戏被视为技巧游戏而非机会游戏，从而避开赌博监管，但近来越来越多研究认为它具有赌博特征。
+
+- rhetorical_function_cn：指出法律定位正在改变。
+
+- depends_on_cn：依赖现象描述。
+
+- sets_up_cn：引出各国监管行动。
+
+- evidence_pointer：Section 2.1 P2
+
+### 25. Section 2.1 P2-P3
+
+- order：25
+
+- section：Section 2.1
+
+- locator：Section 2.1 P2-P3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：中国要求公布抽奖概率，荷兰和比利时认定某些 loot box 非法或违反赌博法，美国多州和联邦提出法案限制未成年人接触 loot box。
+
+- rhetorical_function_cn：用多国监管案例证明问题已经制度化。
+
+- depends_on_cn：依赖“被视为赌博”的判断。
+
+- sets_up_cn：为“监管压力使方案有价值”提供证据。
+
+- evidence_pointer：Section 2.1 P2-P3
+
+### 26. Section 2.1 P4-P5 maybe after FTC
+
+- order：26
+
+- section：Section 2.1
+
+- locator：Section 2.1 P4-P5 maybe after FTC
+
+- move_code：CONTEXT
+
+- paraphrase_cn：美国 FTC 2020 年举办 loot box 工作坊，讨论动态概率和披露准确性，工作人员建议披露必须准确且不误导，否则可能违反法律。
+
+- rhetorical_function_cn：说明监管者不仅要求披露，还要求披露真实有效。
+
+- depends_on_cn：依赖监管案例序列。
+
+- sets_up_cn：为“可证明实际使用公布概率”的方案定位。
+
+- evidence_pointer：Section 2.1 FTC workshop
+
+### 27. Section 2.1 FTC P后半
+
+- order：27
+
+- section：Section 2.1
+
+- locator：Section 2.1 FTC P后半
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在此背景下，本文方案提供了一种明确证明游戏是否按披露概率抽取物品的途径。
+
+- rhetorical_function_cn：把监管需要转成方案功能要求。
+
+- depends_on_cn：依赖 FTC 对“准确、非误导披露”的要求。
+
+- sets_up_cn：把方案与合规需求直接挂钩。
+
+- evidence_pointer：Section 2.1 FTC workshop
+
+### 28. Section 2.1 P5-P6
+
+- order：28
+
+- section：Section 2.1
+
+- locator：Section 2.1 P5-P6
+
+- move_code：CONTEXT
+
+- paraphrase_cn：行业自律也在推进，如韩国 K-GAMES 监督并点名违规者，Google Play 和 Apple 以及三大主机平台要求披露 loot box 概率。
+
+- rhetorical_function_cn：说明除了法律，市场也在施加压力。
+
+- depends_on_cn：依赖监管背景。
+
+- sets_up_cn：为行业采纳作为目标受众铺垫。
+
+- evidence_pointer：Section 2.1 P5-P6
+
+### 29. Section 2.1 P7
+
+- order：29
+
+- section：Section 2.1
+
+- locator：Section 2.1 P7
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：禁令可能伤害行业和玩家；仅仅要求显示物品和概率并不够，因为没有保证游戏真的按显示概率抽取；本文方案对行业自律很有价值。
+
+- rhetorical_function_cn：解释为什么现有披露式监管仍留下缺口。
+
+- depends_on_cn：依赖前面的监管与自律背景。
+
+- sets_up_cn：为方案价值定性。
+
+- evidence_pointer：Section 2.1 P7
+
+### 30. Section 2.2 P1
+
+- order：30
+
+- section：Section 2.2
+
+- locator：Section 2.2 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：用决策理论分析 loot box：物品集合 O 和概率集合 P 构成 lottery L。
+
+- rhetorical_function_cn：引入理论建模框架。
+
+- depends_on_cn：承接“用决策理论进一步论证”。
+
+- sets_up_cn：为期望效用与模糊态度讨论提供符号基础。
+
+- evidence_pointer：Section 2.2 P1
+
+### 31. Section 2.2 P2
+
+- order：31
+
+- section：Section 2.2
+
+- locator：Section 2.2 P2
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：期望效用理论认为玩家评估 U(L)=Σ p_i U(o_i)；风险态度决定效用函数形状；理性玩家只有在 U(L)>U(1) 时才购买 1 美元的 loot box。
+
+- rhetorical_function_cn：说明为何知道物品和概率是理性决策的前提。
+
+- depends_on_cn：依赖 lottery 定义。
+
+- sets_up_cn：为“透明度帮助决策”提供理论依据。
+
+- evidence_pointer：Section 2.2 P2
+
+### 32. Section 2.2 P3
+
+- order：32
+
+- section：Section 2.2
+
+- locator：Section 2.2 P3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：当概率未知时，期望效用分析不适用；但模糊态度概念表明人们通常模糊厌恶，更偏好已知概率分布而不是未知概率的彩票。
+
+- rhetorical_function_cn：补充未知概率情境下的理论解释。
+
+- depends_on_cn：依赖期望效用框架。
+
+- sets_up_cn：为透明机制优于黑箱机制提供理论理由。
+
+- evidence_pointer：Section 2.2 P3
+
+### 33. Section 2.2 P4
+
+- order：33
+
+- section：Section 2.2
+
+- locator：Section 2.2 P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：理论分析说明需要解决透明和信任问题的方案；透明机制帮助玩家更好决策，透明且可信的 loot box 机制因此具有决策支持作用。
+
+- rhetorical_function_cn：把理论命题转化为设计要求。
+
+- depends_on_cn：依赖模糊态度与期望效用讨论。
+
+- sets_up_cn：为下一节“目标定义和区块链选择”提供逻辑衔接。
+
+- evidence_pointer：Section 2.2 P4
+
+### 34. Section 3 P1
+
+- order：34
+
+- section：Section 3
+
+- locator：Section 3 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：DSRF 第二步要求从问题定义和可行知识推导方案目标；本文目标是设计不仅显示物品和概率，而且提供游戏确实按这些列表抽奖的正式保证的机制。
+
+- rhetorical_function_cn：明确设计目标。
+
+- depends_on_cn：依赖 Section 2 问题识别。
+
+- sets_up_cn：为区块链平台选择提供目标。
+
+- evidence_pointer：Section 3 P1
+
+### 35. Section 3.1 P1
+
+- order：35
+
+- section：Section 3.1
+
+- locator：Section 3.1 P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：区块链可定义为分布式、去中心化的 append-only 数据库；节点负责存储，用户产生交易数据。
+
+- rhetorical_function_cn：为读者建立技术基础。
+
+- depends_on_cn：进入区块链解决方案前需要定义术语。
+
+- sets_up_cn：为智能合约定义做铺垫。
+
+- evidence_pointer：Section 3.1 P1
+
+### 36. Section 3.1 P2
+
+- order：36
+
+- section：Section 3.1
+
+- locator：Section 3.1 P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：智能合约是节点存储并执行的算法，代码以及任何输入输出都不可变；其思想源于法律合同的自动执行，现代视角是正确执行的共识机制。
+
+- rhetorical_function_cn：解释为何智能合约适合实现可验证逻辑。
+
+- depends_on_cn：依赖区块链定义。
+
+- sets_up_cn：为将 loot box 编码为智能合约提供概念基础。
+
+- evidence_pointer：Section 3.1 P2
+
+### 37. Section 3.1 P3
+
+- order：37
+
+- section：Section 3.1
+
+- locator：Section 3.1 P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：本方案把每个 loot box 编码为智能合约；玩家购买和打开时，节点共同执行算法以确定获得的物品；信任通过节点网络共享数据和算法实现。
+
+- rhetorical_function_cn：将智能合约技术落到具体设计选择。
+
+- depends_on_cn：依赖智能合约定义。
+
+- sets_up_cn：为 Algorithm 1 设计铺路。
+
+- evidence_pointer：Section 3.1 P3
+
+### 38. Section 3.2 P1
+
+- order：38
+
+- section：Section 3.2
+
+- locator：Section 3.2 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：本文借用 Pedersen 等人的区块链采纳决策模型，该模型提供十步决策路径，判别应用是否需要区块链以及需要哪种区块链。
+
+- rhetorical_function_cn：引入现成的决策工具来为技术选择提供证据。
+
+- depends_on_cn：依赖前面对区块链和智能合约的背景。
+
+- sets_up_cn：为逐题判断 loot box 场景做准备。
+
+- evidence_pointer：Section 3.2 P1
+
+### 39. Section 3.2 P2-P8
+
+- order：39
+
+- section：Section 3.2
+
+- locator：Section 3.2 P2-P8
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：逐一回答决策模型问题：需要共享数据库、多方参与、利益冲突且不能信任、希望避免可信第三方、访问规则不同、交易规则不变、需要不可变日志、需要开放访问，因此应使用公共区块链。
+
+- rhetorical_function_cn：通过逐题推理得出技术选择。
+
+- depends_on_cn：依赖 Pedersen 模型和前面的问题描述。
+
+- sets_up_cn：为“公共区块链节点双重目标”提供依据。
+
+- evidence_pointer：Section 3.2 P2-P8, Fig.1
+
+### 40. Section 3.2 last paragraph
+
+- order：40
+
+- section：Section 3.2
+
+- locator：Section 3.2 last paragraph
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：因此，区块链节点目标有两层：独立执行随机抽奖所需计算，并独立存储这些计算的输入和输出。
+
+- rhetorical_function_cn：把选型结论转化为系统功能要求。
+
+- depends_on_cn：依赖对公共区块链的选择。
+
+- sets_up_cn：为 Algorithm 1 与 DApp 设计提供需求。
+
+- evidence_pointer：Section 3.2 last paragraph
+
+### 41. Section 4 P1
+
+- order：41
+
+- section：Section 4
+
+- locator：Section 4 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：主制品是一个把 loot box 编码为智能合约的算法；游戏调用合约完成随机抽奖，从而把随机计算从游戏代码中解耦，且不需要整个游戏开源。
+
+- rhetorical_function_cn：正式提出核心制品。
+
+- depends_on_cn：依赖 Section 3 的目标和平台选择。
+
+- sets_up_cn：为 Algorithm 1 描述铺路。
+
+- evidence_pointer：Section 4 P1
+
+### 42. Section 4 P2
+
+- order：42
+
+- section：Section 4
+
+- locator：Section 4 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：购买流程中，游戏先显示物品、概率和智能合约地址；玩家可核对链上代码；游戏调用 drawItem 后所有节点执行同一算法并返回同一输出；玩家可依据交易 ID 验证结果。
+
+- rhetorical_function_cn：把设计变成玩家可感知的机制。
+
+- depends_on_cn：依赖智能合约制品。
+
+- sets_up_cn：为 DApp 演示提供流程描述。
+
+- evidence_pointer：Section 4 P2
+
+### 43. Section 4 P3
+
+- order：43
+
+- section：Section 4
+
+- locator：Section 4 P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Algorithm 1 公开定义 items 和 probabilities；drawItem(screenName) 使用基于屏幕名和时间戳的 RNG 生成随机数，再用轮盘赌选择法按概率区间返回物品。
+
+- rhetorical_function_cn：给出核心算法的具体设计。
+
+- depends_on_cn：依赖智能合约方案。
+
+- sets_up_cn：为后文复杂度和随机数讨论提供对象。
+
+- evidence_pointer：Algorithm 1
+
+### 44. Section 4 P4
+
+- order：44
+
+- section：Section 4
+
+- locator：Section 4 P4
+
+- move_code：RESULT
+
+- paraphrase_cn：用 Common/Silver/Dragon Sword 的例子说明当 r=92 时，算法最终返回 Dragon Sword。
+
+- rhetorical_function_cn：通过小型运行示例使算法更容易理解。
+
+- depends_on_cn：依赖 Algorithm 1 的区间机制。
+
+- sets_up_cn：后文评价中使用同一 loot box。
+
+- evidence_pointer：Section 4 P4
+
+### 45. Section 4 P5
+
+- order：45
+
+- section：Section 4
+
+- locator：Section 4 P5
+
+- move_code：RESULT
+
+- paraphrase_cn：drawItem 的时间复杂度为 O(n)，效率对节点多和 gas 收费都很重要。
+
+- rhetorical_function_cn：报告算法效率特征。
+
+- depends_on_cn：依赖 Algorithm 1。
+
+- sets_up_cn：为成本评价做铺垫。
+
+- evidence_pointer：Section 4 P5
+
+### 46. Section 4 P6-P8
+
+- order：46
+
+- section：Section 4
+
+- locator：Section 4 P6-P8
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：区块链随机化很难；若 RNG 不当，各节点可能抽出不同物品。因此使用 hash 函数构造确定性伪随机数，输入为玩家昵称和区块时间戳，并限制每区块只能购买一个 loot box。
+
+- rhetorical_function_cn：解释关键设计决策背后的理由。
+
+- depends_on_cn：依赖算法设计和区块链执行模型。
+
+- sets_up_cn：为 Solidity 实现细节和边界条件做准备。
+
+- evidence_pointer：Section 4 P6-P8
+
+### 47. Section 5 P1
+
+- order：47
+
+- section：Section 5
+
+- locator：Section 5 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：第四步是演示制品；本文开发一个 DApp，模拟按 Fig.2 购买 loot box 的过程，并基于 Ethereum。
+
+- rhetorical_function_cn：预告演示阶段。
+
+- depends_on_cn：依赖 Algorithm 1 和购买流程。
+
+- sets_up_cn：进入 Ethereum 与 DApp 细节。
+
+- evidence_pointer：Section 5 P1
+
+### 48. Section 5.1 P1-P2
+
+- order：48
+
+- section：Section 5.1
+
+- locator：Section 5.1 P1-P2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Ethereum 是运行智能合约的公共区块链，使用 Solidity；交易需要 gas，计算越复杂 gas 越高，发送者可指定 gas 价格影响确认速度。
+
+- rhetorical_function_cn：为成本计算提供背景知识。
+
+- depends_on_cn：进入 DApp 前需要解释 Ethereum 机制。
+
+- sets_up_cn：为 gas 成本评价埋下伏笔。
+
+- evidence_pointer：Section 5.1
+
+### 49. Section 5.2 P1-P5
+
+- order：49
+
+- section：Section 5.2
+
+- locator：Section 5.2 P1-P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：DApp 是概念验证：智能合约用 Solidity 实现并部署到 Ropsten；items/probabilities 公开，blockLastPurchase 防止同区块重复购买，Draws 事件存储结果，RNG 使用 keccak256，drawItem 只允许游戏开发者地址调用。
+
+- rhetorical_function_cn：把伪代码落到可运行实现。
+
+- depends_on_cn：依赖 Algorithm 1 与 Ethereum 背景。
+
+- sets_up_cn：为演示流程和后续安全评价提供对象。
+
+- evidence_pointer：Section 5.2 and Appendix
+
+### 50. Section 5.2 P6
+
+- order：50
+
+- section：Section 5.2
+
+- locator：Section 5.2 P6
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者强调没有优化用户界面，HCI 设计超出范围，但这对玩家接受新概念非常重要，希望游戏开发者能改进。
+
+- rhetorical_function_cn：主动划清证明范围。
+
+- depends_on_cn：依赖 DApp 演示。
+
+- sets_up_cn：避免读者把 UI 当作贡献，也为未来研究铺垫。
+
+- evidence_pointer：Section 5.2 P6
+
+### 51. Section 5.2 P7-P8
+
+- order：51
+
+- section：Section 5.2
+
+- locator：Section 5.2 P7-P8
+
+- move_code：RESULT
+
+- paraphrase_cn：演示展示了玩家购买前查看物品/概率、点击 Check the Blockchain 跳转 Etherscan 核对代码、购买后看到加载界面、最终看到物品和交易链接。
+
+- rhetorical_function_cn：用具体操作结果证明方案可行。
+
+- depends_on_cn：依赖已部署的 DApp。
+
+- sets_up_cn：为“事前透明+事后验证”的总结做证据基础。
+
+- evidence_pointer：Section 5.2 P7-P8, Fig.4-5
+
+### 52. Section 5.2 P9-P10
+
+- order：52
+
+- section：Section 5.2
+
+- locator：Section 5.2 P9-P10
+
+- move_code：RESULT
+
+- paraphrase_cn：该方案通过购买前显示物品/概率和购买后提供这些列表确实被使用的链上证明，实现透明可信；但仍需评价准确性、安全性和成本。
+
+- rhetorical_function_cn：总结演示并预告评价。
+
+- depends_on_cn：依赖 DApp 演示结果。
+
+- sets_up_cn：进入 Section 6 多维评价。
+
+- evidence_pointer：Section 5.2 P9-P10
+
+### 53. Section 6 P1
+
+- order：53
+
+- section：Section 6
+
+- locator：Section 6 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：DSRF 第五步要求评价制品是否解决问题；本文的可信性主张隐含假设合约计算准确、区块链不可被操纵、成本和时间可接受，因此需要用良好定义的概念验证来逐一检验。
+
+- rhetorical_function_cn：明确评价的必要性和隐含假设。
+
+- depends_on_cn：依赖 DSRF 框架和前面提出的信任主张。
+
+- sets_up_cn：为准确性、安全性、成本三小节做逻辑框架。
+
+- evidence_pointer：Section 6 P1
+
+### 54. Section 6.1 P1-P2
+
+- order：54
+
+- section：Section 6.1
+
+- locator：Section 6.1 P1-P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者用统计推断检验观测分布是否等于公布的理论分布；先做 power analysis 确定样本量，在显著性 0.05、功效 0.8、小效应量 0.1 的条件下得到约 963，并向上取整为 1000。
+
+- rhetorical_function_cn：说明统计检验的合理性。
+
+- depends_on_cn：依赖准确性问题定义。
+
+- sets_up_cn：为三个卡方检验提供方法依据。
+
+- evidence_pointer：Section 6.1 P1-P2
+
+### 55. Section 6.1 P2-P3
+
+- order：55
+
+- section：Section 6.1
+
+- locator：Section 6.1 P2-P3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：单玩家场景的原假设是单玩家观测频率与期望频率无显著差异。
+
+- rhetorical_function_cn：提出第一个可检验假设。
+
+- depends_on_cn：依赖样本量与数据表。
+
+- sets_up_cn：报告对应卡方结果。
+
+- evidence_pointer：Section 6.1 P2-P3
+
+### 56. Section 6.1 P3
+
+- order：56
+
+- section：Section 6.1
+
+- locator：Section 6.1 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：单玩家卡方检验 chi²=1.4314, df=2, p=0.4888，不能拒绝原假设。
+
+- rhetorical_function_cn：给出第一个统计证据。
+
+- depends_on_cn：依赖单玩家假设。
+
+- sets_up_cn：支持准确性主张。
+
+- evidence_pointer：Section 6.1 P3, Table 1
+
+### 57. Section 6.1 P4
+
+- order：57
+
+- section：Section 6.1
+
+- locator：Section 6.1 P4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：多玩家场景用随机屏幕名 “Player?” 调用 1000 次，原假设是多玩家观测频率与期望频率无显著差异。
+
+- rhetorical_function_cn：提出第二个可检验假设。
+
+- depends_on_cn：依赖单玩家检验的方法。
+
+- sets_up_cn：报告多玩家卡方结果。
+
+- evidence_pointer：Section 6.1 P4
+
+### 58. Section 6.1 P4
+
+- order：58
+
+- section：Section 6.1
+
+- locator：Section 6.1 P4
+
+- move_code：RESULT
+
+- paraphrase_cn：多玩家卡方检验 chi²=0.18286, df=2, p=0.9126，不能拒绝原假设。
+
+- rhetorical_function_cn：给出第二个统计证据。
+
+- depends_on_cn：依赖多玩家假设。
+
+- sets_up_cn：支持不同购买模式下准确性仍成立。
+
+- evidence_pointer：Section 6.1 P4, Table 1
+
+### 59. Section 6.1 P5
+
+- order：59
+
+- section：Section 6.1
+
+- locator：Section 6.1 P5
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：合并两个 1000 次数据集模拟少数玩家多次购买而大多数玩家少买的场景，原假设是合并观测频率与期望频率无显著差异。
+
+- rhetorical_function_cn：提出第三个更接近现实的假设。
+
+- depends_on_cn：依赖前两个数据集。
+
+- sets_up_cn：报告合并卡方结果。
+
+- evidence_pointer：Section 6.1 P5
+
+### 60. Section 6.1 P5
+
+- order：60
+
+- section：Section 6.1
+
+- locator：Section 6.1 P5
+
+- move_code：RESULT
+
+- paraphrase_cn：合并卡方检验 chi²=0.61286, df=2, p=0.7361，不能拒绝原假设。
+
+- rhetorical_function_cn：给出第三个统计证据。
+
+- depends_on_cn：依赖合并假设。
+
+- sets_up_cn：为准确性总结提供数据。
+
+- evidence_pointer：Section 6.1 P5
+
+### 61. Section 6.1 P6
+
+- order：61
+
+- section：Section 6.1
+
+- locator：Section 6.1 P6
+
+- move_code：RESULT
+
+- paraphrase_cn：作者认为结果强有力地表明 RNG 和 drawItem 正确工作，抽取时确实使用了玩家可访问的概率。
+
+- rhetorical_function_cn：对三个统计结果进行总结性解释。
+
+- depends_on_cn：依赖三个卡方检验。
+
+- sets_up_cn：完成准确性评价，转向安全性。
+
+- evidence_pointer：Section 6.1 P6
+
+### 62. Section 6.2 P1-P3
+
+- order：62
+
+- section：Section 6.2
+
+- locator：Section 6.2 P1-P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：因为区块链上合约不可删除或更新，作者在部署前用 Securify 和 MythX 做静态、动态和符号分析；初始版本中任何用户都可改变 blockLastPurchase，后来通过限制只有游戏开发者地址能调用 drawItem 修复该问题，工具显示无重大技术/安全问题。
+
+- rhetorical_function_cn：用安全工具检验合约稳健性。
+
+- depends_on_cn：依赖已实现的 Solidity 合约。
+
+- sets_up_cn：为网络级安全讨论提供铺垫。
+
+- evidence_pointer：Section 6.2 P1-P3, Appendix
+
+### 63. Section 6.2 P4-P6
+
+- order：63
+
+- section：Section 6.2
+
+- locator：Section 6.2 P4-P6
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者讨论 51% 攻击在成熟公共链上不现实，但新链可能易受攻击；同时 GUI 可能显示误导信息，因此公共链上的诚实节点可帮助玩家核对界面是否反映链上代码。
+
+- rhetorical_function_cn：界定安全主张的适用边界。
+
+- depends_on_cn：依赖网络级攻击与接口讨论。
+
+- sets_up_cn：说明方案在成熟公共链上更安全，并留下 HCI 边界。
+
+- evidence_pointer：Section 6.2 P4-P6
+
+### 64. Section 6.3 P1-P5
+
+- order：64
+
+- section：Section 6.3
+
+- locator：Section 6.3 P1-P5
+
+- move_code：RESULT
+
+- paraphrase_cn：部署合约需 663,405 gas，按示例 gas 价格约 1.34 美元；调用 drawItem 平均 52,040 gas，按 10^-8 ethers/gas 和当时汇率约 0.26 美元/次，处理约 40 秒；公共链费用会随网络拥堵波动。
+
+- rhetorical_function_cn：提供成本实证数据。
+
+- depends_on_cn：依赖 Ethereum gas 机制和实际部署。
+
+- sets_up_cn：为成本风险和治理建议提供依据。
+
+- evidence_pointer：Section 6.3 P1-P5
+
+### 65. Section 6.3 P6-P7
+
+- order：65
+
+- section：Section 6.3
+
+- locator：Section 6.3 P6-P7
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：为避免费用波动，作者建议创建专门处理 loot box 的公共区块链，由产业、协会、监管和消费者保护代表组成委员会设定费用与 gas 参数，并用稳定币代替 Ether。
+
+- rhetorical_function_cn：把成本问题转成部署/治理设计。
+
+- depends_on_cn：依赖成本波动分析。
+
+- sets_up_cn：为结论中的治理未来方向做铺垫。
+
+- evidence_pointer：Section 6.3 P6-P7
+
+### 66. Section 7 P1-P2
+
+- order：66
+
+- section：Section 7
+
+- locator：Section 7 P1-P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重述：传统 loot box 不透明且不可信；本文用问题中心的设计科学研究开发了基于公共区块链智能合约的方案，不需要开放整个游戏源码；DApp 证明了应用方式，评价覆盖准确性、安全性、成本，并给出部署建议。
+
+- rhetorical_function_cn：总结贡献并闭合引言缺口。
+
+- depends_on_cn：依赖全文证据。
+
+- sets_up_cn：随后转入边界和未来研究。
+
+- evidence_pointer：Section 7 P1-P2
+
+### 67. Section 7 P3
+
+- order：67
+
+- section：Section 7
+
+- locator：Section 7 P3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：治理问题（决策机制、冲突解决、成本结构、软件更新）构成有价值的未来研究方向。
+
+- rhetorical_function_cn：承认治理设计尚未实现。
+
+- depends_on_cn：依赖 Section 6.3 治理建议。
+
+- sets_up_cn：将讨论延伸到行业治理研究。
+
+- evidence_pointer：Section 7 P3
+
+### 68. Section 7 P4
+
+- order：68
+
+- section：Section 7
+
+- locator：Section 7 P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：本方案没有解决赌博成瘾担忧；未来可研究利用区块链强制冷却期或黑名单等方式控制购买频率。
+
+- rhetorical_function_cn：划清方案边界并提出未来技术方向。
+
+- depends_on_cn：依赖对核心问题的解决与残留问题。
+
+- sets_up_cn：防止贡献被误解为能解决所有 loot box 问题。
+
+- evidence_pointer：Section 7 P4
+
+### 69. Section 7 P5
+
+- order：69
+
+- section：Section 7
+
+- locator：Section 7 P5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：透明和可信机制对收入的影响不确定，需要行为实验研究玩家购买决策和厂商收入变化。
+
+- rhetorical_function_cn：指出经济后果未被实证检验。
+
+- depends_on_cn：依赖方案已被提出的前提。
+
+- sets_up_cn：为行为实验研究留出未来路径。
+
+- evidence_pointer：Section 7 P5
+
+## 写作技术
+
+- gap_construction_cn：先用量化收入与监管行动制造现实压力，再指出“公开概率”并不等于“可验证”，接着否定源码检查和事后统计这两种替代方案，留下必须用技术方案填补的缺口；同时用决策理论把这一缺口表达为玩家决策支持不足。
+
+- signposting_cn：引言末尾明确按 DSRF 五个步骤介绍各节；每节开头重复“第X步”并引用 Peffers 定义；在运行示例和图表中反复给出步骤编号。
+
+- transition_logic_cn：每一节都把前一节的结论作为后一节输入：问题→目标→设计→演示→评价；在评价内部先准确性，再安全性，再成本，各小节末尾用“下面进一步评价”衔接。
+
+- claim_evidence_rhythm_cn：先给出每节主张（如“透明是因为...”），然后用伪代码、截屏、统计表、gas 计算等局部证据支撑；在评价部分明确列出隐含假设，再逐一检验。
+
+- benchmark_narrative_cn：没有传统 benchmark，而是把理论概率分布作为 ground truth；把源码检查、统计众包、可信第三方作为替代方案逐一排除；把许可链作为公共链的对比；把 DAO 攻击和费用暴涨作为风险反事实。
+
+- theory_return_cn：结论不宣称理论修正，而是回到决策理论的语言：透明机制帮助玩家更好决策；同时用区块链采纳模型重新支持“公共链”选择，把理论作为设计决策的驱动器和解释器。
+
+- contribution_positioning_cn：把贡献定位为设计科学制品与评价结果，而非新理论；通过“不需要整个游戏开源”“给行业自我监管提供可验证保证”来强调实践相关性和差异化。
+
+- novelty_protection_cn：通过同时提供概念机制、可运行 DApp、多维评价和部署治理建议，防止被还原为一次性技术演示；在讨论中承认未处理的问题（赌博、UI、收入）并转化为未来研究方向，强化贡献边界。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：从现实现象和监管/市场证据构建问题；说明为什么该问题有理论和实践价值。
+
+- research_job_cn：搜集监管报告、行业数据、相关文献，精确定义缺口并排除已有替代方案。
+
+- required_evidence_cn：显示问题严重且现有披露/替代验证不足。
+
+- transition_to_next_cn：“因此本文目标是...”
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用理论或决策模型把一般问题转成方案目标。
+
+- research_job_cn：选择可用的理论/模型并逐项判断，确定底层技术方向。
+
+- required_evidence_cn：理论命题或决策路径结果与设计目标一致。
+
+- transition_to_next_cn：“因此需要某技术/平台...”
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：给出制品伪代码/架构和关键机制，解释关键设计决策。
+
+- research_job_cn：实现或设计制品，处理技术约束（确定性、效率、权限）。
+
+- required_evidence_cn：运行示例或复杂度/可行性分析。
+
+- transition_to_next_cn：“下面用原型展示...”
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：开发 proof of concept，用截图/流程演示。
+
+- research_job_cn：部署到真实/测试环境并记录交互。
+
+- required_evidence_cn：完整流程可运行且可验证。
+
+- transition_to_next_cn：“演示可行后，还需评价...”
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：列出隐含假设并设计评价维度。
+
+- research_job_cn：对每个维度提供统计/工具/成本证据。
+
+- required_evidence_cn：每个维度的量化结果或安全分析。
+
+- transition_to_next_cn：“最后讨论边界和部署...”
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：总结贡献、边界、未来研究。
+
+- research_job_cn：明确未测问题并保护贡献不过度泛化。
+
+- required_evidence_cn：无新证据需求，但需说明未测事项以防过度主张。
+
+- transition_to_next_cn：结束全文。
+
+### most_transferable_moves_cn
+
+1. 把研究问题嵌入 DSRF 并显式路标化
+
+2. 从多源证据（行业营收、监管、赌博文献）叠加证明问题价值
+
+3. 在提出自己方案前先否定替代验证方案
+
+4. 用现成决策模型逐题回答问题，把抽象“信任”翻译为技术选择
+
+5. 使用贯穿全文的小型运行示例（Common/Silver/Dragon Sword）
+
+6. 评价时先列隐含假设，再按准确性/安全/成本逐个检验
+
+7. 用 boundary conditions 和未来研究保护贡献
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. Ethereum 合约部署与 gas 费用依赖实时汇率/网络状态，无法单独复现数值
+
+2. Securify、MythX、Etherscan、Infura 等工具与外部服务
+
+3. 监管文件、赌博调查和多国立法资料收集
+
+4. 要在真实游戏中部署需获得游戏公司/开发者数据与渠道
+
+5. 用户行为/收入影响研究需要行为实验或现场部署
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只写“采用 DSRF”而无对应步骤
+
+2. 不要把卡方不拒绝称为用户信任证明
+
+3. 不要在未部署/未做安全扫描时宣称合约安全
+
+4. 不要把专用公共链治理方案说成已实现
+
+5. 不要只展示 DApp 截图而不评价准确性/成本/安全
+
+6. 不要把决策理论只放在引言而完全脱离设计
+
+- single_best_description_of_the_routine_cn：以设计科学框架为骨架，用决策理论和区块链采纳模型把“不透明、不可信”的问题翻译成“公开智能合约+公共链可审计”的要求，再通过演示和准确性/安全性/成本三维证据，把一次性原型提升为可迁移的设计与治理知识。
+
+## 分析边界
+
+输入文本来自导入/OCR，公式与表格存在格式噪声；全文无页码，位置证据以章节/段落/图表为主；未获取同行评审意见或补充材料。

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85203650765"
+title: "Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction"
+authors: "Kang S.; Yoon J.; Askarbekkyzy N.; Yoo S."
+year: "2024"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2024.3450837"
+---
+# Scopus title-abstract-keyword metadata
+Title: Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction
+Abstract: Bug reproduction is a critical developer activity that is also challenging to automate, as bug reports are often in natural language and thus can be difficult to transform to test cases consistently. As a result, existing techniques mostly focused on crash bugs, which are easier to automatically detect and verify. In this work, we overcome this limitation by using large language models (LLMs), which have been demonstrated to be adept at natural language processing and code generation. By prompting LLMs to generate bug-reproducing tests, and via a post-processing pipeline to automatically identify promising generated tests, our proposed technique Libro could successfully reproduce about one-third of all bugs in the widely used Defects4J benchmark. Furthermore, our extensive evaluation on 15 LLMs, including 11 open-source LLMs, suggests that open-source LLMs also demonstrate substantial potential, with the StarCoder LLM achieving 70% of the reproduction performance of the closed-source OpenAI LLM code-davinci-002 on the large Defects4J benchmark, and 90% of performance on a held-out bug dataset likely not part of any LLM's training data. In addition, our experiments on LLMs of different sizes show that bug reproduction using Libro improves as LLM size increases, providing information as to which LLMs can be used with the Libro pipeline. © 1976-2012 IEEE.
+Author keywords: natural language processing; software engineering; Test generation
+Index keywords: Benchmarking; Open source software; Pipeline processing systems; Program debugging; Bug reports; Developer activities; Language model; Language processing; Natural language processing; Natural languages; Open-source; Performance; Test case; Test generations; Software testing
+Document type: Article
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2024
+EID: 2-s2.0-85203650765
+DOI: 10.1109/tse.2024.3450837
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

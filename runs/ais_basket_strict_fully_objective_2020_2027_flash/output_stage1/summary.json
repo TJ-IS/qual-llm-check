@@ -1,0 +1,54 @@
+{
+  "updated_at": "2026-08-07T08:52:59.384199+00:00",
+  "analysis_version": "ais-basket-strict-fully-objective-2020-2027-flash-v2",
+  "stage": "stage1",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 100,
+  "prompt_fingerprint": "7c3bea2d276a1fc9359979396cafe149d0a53a5aabd226a9b7a23bf72d07c2c5",
+  "eligible_inputs": 2475,
+  "completed": 2475,
+  "pending": 0,
+  "match_count": 232,
+  "nonmatch_count": 2243,
+  "objective_status_counts": {
+    "benchmark_objective_with_fixed_labels": 124,
+    "fully_objective": 545,
+    "human_judged_output": 74,
+    "mixed_objective_subjective": 262,
+    "no_qualifying_metric": 870,
+    "subjective_or_self_report": 583,
+    "unclear": 17
+  },
+  "core_role_counts": {
+    "dominant": 61,
+    "exclusive": 416,
+    "mixed": 183,
+    "none": 1771,
+    "secondary": 44
+  },
+  "match_year_counts": {
+    "2020": 60,
+    "2021": 51,
+    "2022": 35,
+    "2023": 30,
+    "2024": 29,
+    "2025": 23,
+    "2026": 4
+  },
+  "match_journal_counts": {
+    "Decision Support Systems": 87,
+    "European Journal of Information Systems": 5,
+    "Information & Management": 15,
+    "Information Systems Research": 58,
+    "Journal of Management Information Systems": 17,
+    "Journal of the Association for Information Systems": 13,
+    "MIS Quarterly": 37
+  },
+  "usage": {
+    "prompt_tokens": 74594171,
+    "completion_tokens": 6071271,
+    "total_tokens": 80665442,
+    "prompt_cache_hit_tokens": 13884544,
+    "prompt_cache_miss_tokens": 60709627
+  }
+}

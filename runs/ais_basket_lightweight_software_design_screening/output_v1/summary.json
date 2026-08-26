@@ -1,0 +1,23 @@
+{
+  "updated_at": "2026-08-05T08:19:28.297300+00:00",
+  "analysis_version": "ais-basket-individual-software-design-example-screening-v3",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "4471f4f23c6e9377554400ffcda8b4fc77ba5c24542acda4a53890c20e500836",
+  "input_fulltexts": 1832,
+  "completed": 1832,
+  "pending": 0,
+  "target_match_count": 77,
+  "target_nonmatch_count": 1755,
+  "eligibility_true_counts": {
+    "individual_level": 519,
+    "runnable_individual_software_artifact": 131,
+    "feasible_for_small_research_team": 233
+  },
+  "usage": {
+    "prompt_tokens": 54862493,
+    "completion_tokens": 3846770,
+    "total_tokens": 58709263,
+    "prompt_cache_hit_tokens": 4021888,
+    "prompt_cache_miss_tokens": 50840605
+  }
+}

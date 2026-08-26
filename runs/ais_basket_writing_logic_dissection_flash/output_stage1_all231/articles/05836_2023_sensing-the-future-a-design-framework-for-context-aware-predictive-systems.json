@@ -1,0 +1,995 @@
+{
+  "record_id": "5836",
+  "source_file": "05836_2023_sensing-the-future-a-design-framework-for-context-aware-predictive-systems.md",
+  "title": "Sensing the Future: A Design Framework for Context-Aware Predictive Systems",
+  "authors": "Michel Avital; Samir Chatterjee; Szymon Furtak",
+  "year": "2023",
+  "journal": "Journal of the Association for Information Systems",
+  "doi": "10.17705/1jais.00821",
+  "fulltext_chars": 84227,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "operational_efficiency",
+  "source_application_context": "logistics_transport_supply_chain_and_manufacturing",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 2,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:29:12.773656+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在一个工业规模的环境中，如何设计基于传感器数据的上下文感知预测系统（CAPS）？",
+    "artifact_and_design_cn": "CAPS框架，一个把设计科学研究方法论与Shmueli和Koppius预测性经验建模过程合并而成的四阶段设计过程框架，包含目标定义、IT制品构建（模型选择、模型构建、模型实现）、模型评价（预测错误成本、情境性系统偏差、有效性与准确率）和模型部署，并配以环境与知识库两条外部输入。",
+    "objective_outcomes_cn": "在MAN Diesel & Turbo案例中，三次可完全实现的迭代显示：Croston基线被phase-out组件改进4%，基于发动机活动传感器的方案比基线改进20%、比phase-out方案改进17%；对两个无法完全部署的高级设计，基于5年回收期的盈亏平衡分析显示连续多传感器监控需要8%的预测误差成本改善才可行，远程监控界面需要30%的改善。",
+    "core_contribution_cn": "作者声称的主要贡献是提出并实例化了一个可复用的CAPS设计框架，以及四条指导未来设计者的命题（基础设施复用、数据质量、传感器选择、情境特征）和一个用于预判传感器预测系统财务可行性的二维矩阵，使该工作属于Gregor和Hevner知识贡献矩阵中的“改进”类。",
+    "whole_argument_in_one_paragraph_cn": "文章首先指出传感器生成的情境数据大量增加，但缺少帮助设计者利用这些数据开发预测系统的框架；然后通过综述设计科学和预测性建模文献，把Hevner的DSR三循环与Shmueli和Koppius的八步预测建模过程合并成CAPS框架；接着在MAN Diesel & Turbo的备件需求预测问题中实例化框架，以Croston方法为基线，先后构建并评价了phase-out组件和活动传感器两个改进入工制品，同时用盈亏平衡函数评估了连续多传感器监控和远程监控界面两个较高级但未能完全部署的设计；最后从案例反思中提炼四条命题与可行性矩阵，把局部的经验差异提升为可转移的设计知识。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "作者明确采用设计科学研究方法，目标是构建CAPS框架这一过程性设计制品，并通过在一个真实公司的应用来评价其适用性和有用性，最终产出框架、命题和可行性矩阵等设计知识；不是理论推导后的受控实验，也不是以公开benchmark为核心证据的计算制品论文。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "论证主线是从设计需要与知识基础出发，把DSR和预测性建模要求合并为CAPS框架，接着在MAN案例中进行构建和评价，最后提炼为四条设计命题和可行性矩阵，符合“要求—构建—评价—设计原则”的写作弧线。",
+  "research_program": {
+    "study_or_phase_count": 6,
+    "overall_sequence_cn": "文章先进行文献综合与知识基础梳理，接着构建CAPS框架，然后进入MAN案例进行情境嵌入与数据调研，再分别开展当前可实现设计的迭代评价和未来高级设计的可行性评价，最后从整体反思中提炼命题与理论贡献；各阶段依次缩小并深化问题，从“没有框架”到“框架可用”再到“框架产生可迁移设计知识”。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "文献综合与知识基础阶段",
+        "question_cn": "已有文献为设计传感器预测系统提供了哪些过程性知识与缺口？",
+        "inputs_and_setting_cn": "上下文感知计算、工业IoT、需求预测与备件预测文献；Shmueli和Koppius预测建模方法；Hevner的DSR方法；SAP实践文档。",
+        "designed_or_compared_object_cn": "比较DSR过程、预测建模过程与传统时间序列预测方法，识别其重叠和缺口。",
+        "baseline_control_or_counterfactual_cn": "无对照；此处以文献中的方法类别作为概念比较对象。",
+        "objective_metrics": [],
+        "analysis_method_cn": "叙述性文献综述与概念映射。",
+        "main_result_cn": "识别出设计传感器预测系统缺少框架，DSR覆盖组织与评价问题，Shmueli和Koppius覆盖数据建模但缺乏组织情境；传统预测基准尚无定论，Croston是实践中的事实标准。",
+        "argumentative_role_cn": "为框架构建设定设计需求，并提供后续评价所需的基线选择依据。",
+        "remaining_uncertainty_cn": "尚不清楚如何把DSR与预测建模整合成一个可操作框架，也不清楚该框架在真实组织中的表现。",
+        "link_to_next_phase_cn": "引出构建CAPS框架的必要性。",
+        "evidence_pointers": [
+          "Introduction P4-P6",
+          "Section 2, Table 1 and benchmark discussion",
+          "Figure 1"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "CAPS框架构建阶段",
+        "question_cn": "如何把DSR三循环和Shmueli-Koppius预测过程合并成一个面向传感器预测系统的设计框架？",
+        "inputs_and_setting_cn": "Hevner等人的DSR方法论和Shmueli与Koppius的八步预测建模过程。",
+        "designed_or_compared_object_cn": "构建CAPS框架，包括步骤、子步骤以及环境与知识库的输入。",
+        "baseline_control_or_counterfactual_cn": "以单独使用DSR或Shmueli-Koppius模型作为概念对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "结构映射与框架综合。",
+        "main_result_cn": "形成四阶段CAPS框架：目标定义、IT制品构建（2a/2b/2c）、模型评价（3a/3b/3c）、模型部署。",
+        "argumentative_role_cn": "提出并具体化本文的核心设计制品。",
+        "remaining_uncertainty_cn": "框架是否真能指导实际设计尚未得到经验验证。",
+        "link_to_next_phase_cn": "进入案例应用与评价。",
+        "evidence_pointers": [
+          "Section 4, Figures 3-5"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "MAN案例情境嵌入与定性反馈阶段",
+        "question_cn": "在真实工业组织中，CAPS框架适用的环境约束与组织性挑战是什么？",
+        "inputs_and_setting_cn": "MAN Diesel & Turbo，全球大型船用柴油机与涡轮机械领导者；研究者长期嵌入企业内部。",
+        "designed_or_compared_object_cn": "无直接设计对象；主要收集组织结构、备件需求预测流程、历史销售数据、传感器可用性等情境资料。",
+        "baseline_control_or_counterfactual_cn": "以案例公司的现状作为理解起点。",
+        "objective_metrics": [],
+        "analysis_method_cn": "民族志式嵌入、定性访谈、现场观察、档案数据分析。",
+        "main_result_cn": "理解到MEN的售后导向商业模式造成备件需求高不确定性；许可制造模式削弱了客户信息流；传感器数据可用但存在噪声和信号弱等挑战。",
+        "argumentative_role_cn": "提供框架评价所需的情境深度，并支撑后续定性偏差识别。",
+        "remaining_uncertainty_cn": "尚未证明CAPS框架能产生更好的预测制品。",
+        "link_to_next_phase_cn": "启动第一轮可完全实现的制品迭代。",
+        "evidence_pointers": [
+          "Section 3 Research Approach P3",
+          "Section 5.1 Settings and Context"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "第一轮评价：三个可实现制品迭代",
+        "question_cn": "使用CAPS框架，基于传感器数据设计的预测制品能否在预测误差成本上优于传统Croston基线？",
+        "inputs_and_setting_cn": "MAN销售数据、保险登记数据、发动机活动传感器数据（运行小时和负荷）；需求规划团队和销售工程师的定性反馈。",
+        "designed_or_compared_object_cn": "制品1.1 Croston基线；制品1.2 Croston with phase-out component；制品1.3 Activity sensor。",
+        "baseline_control_or_counterfactual_cn": "以标准Croston方法作为事实标准基线；各制品相互比较。",
+        "objective_metrics": [
+          "预测误差成本（COST_FE）",
+          "相对改进百分比"
+        ],
+        "analysis_method_cn": "定量预测误差成本函数计算；训练集/测试集划分；定性偏差分析；专家反馈。",
+        "main_result_cn": "phase-out组件比基线改进4%；活动传感器比基线改进20%、比phase-out组件改进17%。",
+        "argumentative_role_cn": "直接证明CAPS框架能帮助构建比传统方法更好的传感器预测系统。",
+        "remaining_uncertainty_cn": "尚未解决更复杂传感器设计是否可行，以及这些改进是否足以覆盖投资成本。",
+        "link_to_next_phase_cn": "进入第二轮对高级设计的可行性评价。",
+        "evidence_pointers": [
+          "Section 5.2",
+          "Section 5.2.1",
+          "Figures 6-7",
+          "Appendix A1"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "第二轮评价：高级设计可行性分析",
+        "question_cn": "那些不能在项目周期内完全部署的高级传感器设计，其投资是否有可能通过预测误差成本降低来回收？",
+        "inputs_and_setting_cn": "MAN的连续多传感器监控系统（约500个传感器）和远程发动机监控界面项目；历史运营数据；成本估计（投资250万欧元，误差成本610万欧元等）。",
+        "designed_or_compared_object_cn": "制品2.1连续多传感器监控；制品2.2远程监控界面。",
+        "baseline_control_or_counterfactual_cn": "以不投资新系统、维持当前误差成本作为反事实；用5年回收期阈值判断。",
+        "objective_metrics": [
+          "盈亏平衡所需的预测误差成本改善百分比",
+          "投资回收期"
+        ],
+        "analysis_method_cn": "盈亏平衡目标函数、成本估算、情境可行性分析。",
+        "main_result_cn": "连续多传感器监控需8%改进才可在5年内回收；远程监控界面需30%改进；前者更可行。",
+        "argumentative_role_cn": "显示CAPS框架能够在不完全部署的情况下指导投资决策和设计可行性判断，扩展了框架的适用边界。",
+        "remaining_uncertainty_cn": "这些设计尚未实际实现，因此其预测性能只是估计，不是实证结果。",
+        "link_to_next_phase_cn": "为整体反思和命题提炼提供素材。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Section 5.3.1"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "命题提炼与理论定位阶段",
+        "question_cn": "从MAN案例经验中可以提炼哪些一般化设计知识，以及CAPS框架在DSR知识贡献中的位置是什么？",
+        "inputs_and_setting_cn": "前五个制品的设计过程、评价数据和定性反馈。",
+        "designed_or_compared_object_cn": "提出四条命题和财务可行性矩阵；把CAPS定位为Gregor和Hevner“改进”类知识。",
+        "baseline_control_or_counterfactual_cn": "以现有时序预测黑箱方法作为传统实践对照。",
+        "objective_metrics": [],
+        "analysis_method_cn": "反思性归纳、概念矩阵构建、与DSR知识贡献框架对照。",
+        "main_result_cn": "得到关于基础设施复用、数据质量、传感器选择和情境特征的四条设计命题，以及基于投资成本和测量直接性的二维可行性矩阵。",
+        "argumentative_role_cn": "把案例结果从一次性性能差异提升为可复用的设计知识。",
+        "remaining_uncertainty_cn": "这些命题和矩阵的外部有效性依赖未来在其他案例中的复制验证。",
+        "link_to_next_phase_cn": "在结论中说明局限和未来研究。",
+        "evidence_pointers": [
+          "Section 6 Discussion",
+          "Table 2",
+          "Figure 8"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT：传感器数据流增加，但缺少框架",
+      "GAP：没有清晰的框架指导设计者利用传感器数据开发预测系统",
+      "STUDY_OVERVIEW：采用DSR开发并评价CAPS框架",
+      "RESULT：在MAN案例中应用框架",
+      "CONTRIBUTION：框架可一般化到一类需求预测问题，且能帮助实践者"
+    ],
+    "introduction_moves": [
+      "从 ubiquitous computing 引入 context-aware computing 的背景",
+      "定义context并说明传感器最适合捕捉context",
+      "描述工业和生活场景中传感器数据的扩展现象",
+      "指出尽管有很多成功用例，但从数据模式到预测应用仍不普遍",
+      "把预测分析与传统分析区别开，强调传感器数据的特性",
+      "以需求预测为例，说明传感器预测系统的潜在价值",
+      "直接声明没有框架/指南，并提出RQ",
+      "预告CAPS框架、DSR基础、案例评价和命题产出",
+      "把文章定位到领域特定信息系统设计科学贡献"
+    ],
+    "theory_and_knowledge_moves": [
+      "在Background部分综述context在IS中的使用",
+      "用工业IoT例子说明传感器数据用于维护和备件预测的机理",
+      "用Table 1呈现备件预测方法分类",
+      "指出传统预测方法主要依赖时序历史数据，对黑箱内部机制的理解有限",
+      "指出benchmark结果不一致，选Croston为实践基线",
+      "引入Shmueli和Koppius的八步预测模型",
+      "指出该模型只有数据模型，缺少组织、知识库和人员等维度",
+      "形成结合DSR与Shmueli-Koppius的需求"
+    ],
+    "artifact_design_moves": [
+      "在Research Approach中说明使用DSR方法及其文献依据",
+      "说明作者先在文献基础上建立初步CAPS框架，再进入案例",
+      "描述DSR和Shmueli-Koppius模型有重叠和互补关系",
+      "描述CAPS框架四步骤及各子步骤",
+      "解释每个步骤如何从环境和知识库获取输入",
+      "说明针对传感器数据和数字踪迹，模型实现需要特别处理测量-预测匹配和过拟合"
+    ],
+    "evaluation_moves": [
+      "说明评价策略：不是让专家评论，而是实际在公司中构建系统",
+      "介绍MAN Diesel & Turbo的组织情境，说明备件需求预测的重要性和困难",
+      "描述第一轮评价的三次迭代、基线选择和定量目标函数",
+      "报告phase-out和activity sensor的改进结果",
+      "讨论传感器方案的质量-复杂度权衡",
+      "描述第二轮评价因无法完全部署而引入盈亏平衡目标函数",
+      "报告两类高级设计所需的最小改进比例",
+      "通过矩阵评价各制品的可行性象限"
+    ],
+    "discussion_and_contribution_moves": [
+      "从案例应用转向知识命题提炼",
+      "从各制品经验分别归纳出四条命题",
+      "提出投资成本和测量直接性两个维度构成的可行性矩阵",
+      "把CAPS归类为Gregor和Hevner的“改进”类贡献",
+      "说明框架使设计过程更完整、更易管理",
+      "在结论中承认单案例的外部效度威胁，但用proof of concept辩护",
+      "展望跨行业复制与传感器新技术扩展"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "设计科学研究方法论（Hevner et al., 2004）三循环模型",
+      "预测性经验建模过程（Shmueli & Koppius, 2011）",
+      "备件需求预测方法文献（Bacchetti & Saccani, 2012; Callegaro, 2010）",
+      "上下文感知计算与传感器/IoT文献",
+      "运营管理中的备件预测与installed base文献"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "DSR和Shmueli-Koppius确实前瞻性地决定了CAPS框架的阶段与子步骤，但具体传感器制品选择（如活动传感器、phase-out组件、连续监控系统）主要来自案例情境、工程启发式和组织反馈，不由某一理论命题直接推出；理论更多提供过程骨架而非具体设计参数。",
+    "translation_chain_cn": "DSR三循环强调环境、知识库和评价，Shmueli-Koppius强调数据建模的目标、数据准备、变量选择、模型选择和验证；作者把两者映射成CAPS的四步和子步骤；在MAN案例中，该过程又被用于把传统Croston基线逐步修改为包含phase-out组件和活动传感器的预测系统，并把无法完全部署的设计转化为盈亏平衡可行性分析。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "DSR要求设计过程必须覆盖相关性循环、严谨性循环和设计循环，即环境与知识库都需接入设计过程。",
+        "mechanism_cn": "设计者需要同时考虑业务需求、已有科学知识和迭代评价。",
+        "design_requirement_cn": "CAPS框架必须显式包含环境输入、知识库输入和评价循环。",
+        "artifact_choice_cn": "CAPS框架中的目标定义、评价和部署步骤分别对应环境与知识库接口。",
+        "evaluated_contrast_cn": "与仅关注数据模型的Shmueli-Koppius做法相对照。",
+        "objective_result_cn": "框架结构能够指导完整流程，案例应用成功构建多个制品。",
+        "evidence_pointers": [
+          "Section 4, Figures 3-5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "Shmueli-Koppius的预测建模过程强调目标定义、数据准备、变量选择、模型选择和评估等步骤。",
+        "mechanism_cn": "把预测建模活动拆分为可管理的子任务。",
+        "design_requirement_cn": "CAPS的IT制品构建步骤需要包含模型选择、模型构建和模型实现三个子步骤。",
+        "artifact_choice_cn": "Step 2a/2b/2c；Step 3a/3b/3c。",
+        "evaluated_contrast_cn": "与原始Shmueli-Koppius模型相比，步骤被重新排序以适配传感器数据。",
+        "objective_result_cn": "减少步骤顺序灵活性不够的问题。",
+        "evidence_pointers": [
+          "Section 4, paragraphs on Step 2 and Step 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "备件需求预测文献中，Croston系列是对间歇性需求的事实标准，但benchmark结果不统一。",
+        "mechanism_cn": "间歇性需求需要同时估计需求间隔和需求量。",
+        "design_requirement_cn": "新方案应选择Croston作为基线，并通过情境修正改进。",
+        "artifact_choice_cn": "Artifact 1.1基线；Artifact 1.2添加phase-out组件；Artifact 1.3使用发动机活动时间替代日历时间。",
+        "evaluated_contrast_cn": "三个制品基于同一目标函数比较。",
+        "objective_result_cn": "phase-out改进4%；活动传感器改进20%。",
+        "evidence_pointers": [
+          "Section 5.2.1",
+          "Figure 7"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "组织情境和传感器数据特征会影响预测模型的有效性；需要识别系统性偏差。",
+        "mechanism_cn": "金融危机制造的产品组合变化和航行模式变化会污染学习样本。",
+        "design_requirement_cn": "评价阶段必须包含定性偏差识别，以便在下一次迭代中修正。",
+        "artifact_choice_cn": "用保险注册数据移除phase-out引擎；用发动机运行小时和负荷定义活动变量。",
+        "evaluated_contrast_cn": "阶段1的phase-out组件和活动传感器对比基线。",
+        "objective_result_cn": "修正后误差成本下降。",
+        "evidence_pointers": [
+          "Section 5.2.1",
+          "Appendix: Developing Three Artifacts"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "传感器预测系统的投资应通过预测误差成本的降低来证明其合理性。",
+        "mechanism_cn": "只有当预测误差成本下降超过系统投资成本时，传感器设计才在经济上可行。",
+        "design_requirement_cn": "对无法完整部署的设计，需要定义盈亏平衡目标函数。",
+        "artifact_choice_cn": "用5年回收期；比较监控系统与远程界面。",
+        "evaluated_contrast_cn": "两种高级设计所需的最小误差成本改善百分比。",
+        "objective_result_cn": "连续监控8%，远程界面30%。",
+        "evidence_pointers": [
+          "Section 5.3",
+          "Section 5.3.1"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "案例应用与实例化评价",
+      "定量预测误差成本函数评价",
+      "对比基线的多制品比较",
+      "定性偏差分析与专家反馈",
+      "盈亏平衡可行性分析",
+      "概念矩阵归类"
+    ],
+    "why_these_evaluations_cn": "因为CAPS是一个过程框架，其价值必须通过实际使用来证明；只用专家评论不够有力，所以作者选择在真实公司中构建多个制品，并同时进行定量绩效评价和定性情境评价；对于无法完整部署的高级设计，则用盈亏平衡分析来代替实际性能评价。",
+    "benchmark_and_contrast_chain_cn": "先以Croston方法作为事实标准基线，再通过phase-out组件改进4%，接着通过活动传感器改进20%；随后转向高级设计，不再与基线直接比较，而是以投资回收期和最小误差成本改善作为可行性基准；最后用可行性矩阵把所有制品放入高/中/低可行性格子中，形成统一对照。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "CAPS框架可以指导构建比传统基线更好的传感器预测系统。",
+        "evidence_cn": "三个可实现制品的定量误差成本改进：4%、20%、17%。",
+        "evidence_pointers": [
+          "Figure 7"
+        ]
+      },
+      {
+        "claim_cn": "传感器方案虽然更精确，但需要额外基础设施并可能引入新数据质量问题。",
+        "evidence_cn": "活动传感器依赖估算数据和传感器安装；作者用案例讨论其复杂度与质量风险。",
+        "evidence_pointers": [
+          "Section 5.2.1 summary"
+        ]
+      },
+      {
+        "claim_cn": "CAPS框架可以用于评价尚未完全部署的设计的财务可行性。",
+        "evidence_cn": "使用盈亏平衡函数得出8%和30%两个门槛值。",
+        "evidence_pointers": [
+          "Section 5.3.1"
+        ]
+      },
+      {
+        "claim_cn": "四条设计命题是可归纳的一般性设计知识。",
+        "evidence_cn": "每条命题后都有案例中的具体对应经验，但外部推广缺乏第二案例。",
+        "evidence_pointers": [
+          "Section 6, Table 2"
+        ]
+      }
+    ],
+    "internal_validity_strategy_cn": "使用同一目标函数和同一数据环境比较各制品；把训练集和测试集分开；通过定性反馈识别系统偏差并修正；通过统计上的误差成本公式把主观危害量化。",
+    "external_validity_strategy_cn": "选择有行业代表性的MAN作为单案例；强调框架可推广到一类需求预测问题；在讨论中用Gregor-Hevner归类来定位知识类型，并在未来研究部分呼吁跨行业复制。",
+    "what_is_not_actually_tested_cn": "框架的跨企业可用性未被直接检验；两个高级设计的预测性能只是估计而非实现结果；活动传感器的数据质量与可靠性没有独立验证；四条命题缺少第二案例的实证支持。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "在MAN的数据环境下，基于活动传感器的预测比Croston基线减少20%预测误差成本，比phase-out组件减少17%。",
+    "artifact_claim_cn": "CAPS框架作为设计过程制品能够指导多个传感器预测系统的构建和评价；使用该框架可以缩短设计时间并降低成本。",
+    "mechanism_claim_cn": "预测误差成本下降主要来自用情境性活动数据替代日历时间、剔除phase-out产品以及识别系统性偏差；传感器数据通过更贴近实际磨损机理来提升预测质量。",
+    "boundary_claim_cn": "传感器预测系统在具有高预测误差成本和高不确定性的环境中更可能财务可行；具体可依据投资成本和测量直接性矩阵预判。",
+    "reusable_design_knowledge_cn": "四条命题：基础设施复用、数据质量机制、传感器选择平衡、情境特征条件性使用；以及一个二乘二财务可行性矩阵。",
+    "theoretical_contribution_cn": "把DSR三循环与Shmueli-Koppius预测建模过程结合起来，生成领域特定的设计框架，并将该贡献定位为Gregor和Hevner知识矩阵中的“改进”类，扩展了设计科学中关于预测系统设计的理论工具箱。",
+    "how_discussion_closes_intro_gap_cn": "引言提出没有框架可指导传感器预测系统设计；讨论部分通过展示CAPS框架在实际案例中产出了多个成功的预测制品，并提炼出可复制的命题和矩阵，明确回答了这一缺口，并把缺口从“没有框架”转为“有框架但需跨案例验证”。",
+    "overclaim_or_unsupported_leaps_cn": "作者声称框架可缩短设计时间和降低成本，但直接证据主要来自单个案例中的定性判断；从三个具体制品到四条一般命题存在归纳跳跃；高级设计的盈亏平衡结果基于很多假设，容易被当成可行性保证。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "嵌入到智能物体、机器和建筑中的传感器不断产生关于运行环境的情境数据流。",
+      "rhetorical_function_cn": "在开头建立传感器数据普遍存在的背景。",
+      "depends_on_cn": "无独立背景。",
+      "sets_up_cn": "为后续指出缺乏设计框架作铺垫。",
+      "evidence_pointer": "Abstract, first sentence"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract S2",
+      "move_code": "GAP",
+      "paraphrase_cn": "尽管行业广泛采用传感器，但没有清晰框架指导设计者利用这些数据开发预测系统。",
+      "rhetorical_function_cn": "直接宣布研究缺口。",
+      "depends_on_cn": "依赖传感器数据普遍存在的背景。",
+      "sets_up_cn": "引出本文要开发框架。",
+      "evidence_pointer": "Abstract, second sentence"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者应用设计科学研究方法开发和评价一个通用框架。",
+      "rhetorical_function_cn": "预告研究方法和制品类型。",
+      "depends_on_cn": "针对已识别的缺口。",
+      "sets_up_cn": "引出CAPS框架名称。",
+      "evidence_pointer": "Abstract, third sentence"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract S4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "该框架通过在MAN Diesel & Turbo案例中的应用进行了评价。",
+      "rhetorical_function_cn": "说明框架得到了实例验证。",
+      "depends_on_cn": "需要框架已构建。",
+      "sets_up_cn": "为后续一般化主张提供经验基础。",
+      "evidence_pointer": "Abstract, fourth sentence"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract S5",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "框架可推广到一类依赖传感器情境数据的需求预测问题，并帮助实践者做出更明智的设计决策。",
+      "rhetorical_function_cn": "在摘要中声明一般化贡献。",
+      "depends_on_cn": "需要案例评价支持。",
+      "sets_up_cn": "为讨论部分的一般化论述埋伏笔。",
+      "evidence_pointer": "Abstract, final sentence"
+    },
+    {
+      "order": 6,
+      "section": "1 Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "上下文感知计算随着普适计算概念而出现。",
+      "rhetorical_function_cn": "从学科历史引入context-aware computing。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为定义context作铺垫。",
+      "evidence_pointer": "Section 1, first paragraph"
+    },
+    {
+      "order": 7,
+      "section": "1 Introduction",
+      "locator": "Introduction P1 S2-S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "context被定义为一个实体情境或环境的任何信息；传感器最适合通过情境和环境信息提供及时、适地的内容。",
+      "rhetorical_function_cn": "给出关键概念的定义并说明传感器与context的关系。",
+      "depends_on_cn": "需要前一句引入context-aware computing。",
+      "sets_up_cn": "为文章聚焦传感器数据提供概念基础。",
+      "evidence_pointer": "Section 1, first paragraph"
+    },
+    {
+      "order": 8,
+      "section": "1 Introduction",
+      "locator": "Introduction P2 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "智能手机、汽车、家庭和衣物等日常物体嵌入传感器，生成情境数据并可被用于上下文感知计算。",
+      "rhetorical_function_cn": "描述传感器普及的具体现象。",
+      "depends_on_cn": "需要前文关于传感器的定义。",
+      "sets_up_cn": "为后文指出预测模式识别尚未普及作对比。",
+      "evidence_pointer": "Section 1, second paragraph"
+    },
+    {
+      "order": 9,
+      "section": "1 Introduction",
+      "locator": "Introduction P2 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "虽然有很多传感器数据成功用例，但在日常应用中从这些数据中识别模式以进行预测仍不普遍。",
+      "rhetorical_function_cn": "指出现象与预测应用之间的落差。",
+      "depends_on_cn": "需要描述传感器普及现象。",
+      "sets_up_cn": "为提出框架缺口做铺垫。",
+      "evidence_pointer": "Section 1, second paragraph"
+    },
+    {
+      "order": 10,
+      "section": "1 Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "预测分析在组织决策中是成熟实践，但利用传感器数据的预测分析相对较新；预测分析使用历史数据预测未来情境。",
+      "rhetorical_function_cn": "说明预测分析与传感器结合的新颖性。",
+      "depends_on_cn": "需要前文预测不普遍的观察。",
+      "sets_up_cn": "为区分传感器数据预测与传统预测方法作准备。",
+      "evidence_pointer": "Section 1, third paragraph"
+    },
+    {
+      "order": 11,
+      "section": "1 Introduction",
+      "locator": "Introduction P4 S1-S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "需求预测是供应链管理的关键过程，预测机器或设备行为是实例之一；随着智能设备增加，传感器数据流持续增长。",
+      "rhetorical_function_cn": "把问题具体到工业需求预测。",
+      "depends_on_cn": "需要预测分析已建立的背景。",
+      "sets_up_cn": "为指出工业传感器数据的设计挑战作铺垫。",
+      "evidence_pointer": "Section 1, fourth paragraph"
+    },
+    {
+      "order": 12,
+      "section": "1 Introduction",
+      "locator": "Introduction P4 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "在工业环境中使用传感器数据给系统设计者带来挑战，而且没有框架或指南帮助设计这些系统。",
+      "rhetorical_function_cn": "直接声明核心设计缺口。",
+      "depends_on_cn": "需要前文说明工业传感器应用的普遍性。",
+      "sets_up_cn": "引出研究问题。",
+      "evidence_pointer": "Section 1, fourth paragraph"
+    },
+    {
+      "order": 13,
+      "section": "1 Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "作者提出研究问题：如何在工业规模环境中设计基于传感器的上下文感知预测系统。",
+      "rhetorical_function_cn": "给出全文研究问题。",
+      "depends_on_cn": "需要已建立的框架缺口。",
+      "sets_up_cn": "为后文CAPS框架作导向。",
+      "evidence_pointer": "Section 1, fifth paragraph"
+    },
+    {
+      "order": 14,
+      "section": "1 Introduction",
+      "locator": "Introduction P6 S1-S2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者定义CAPS为基于情境数据进行预测的信息系统，并说明框架建立于DSR和数据驱动预测建模之上。",
+      "rhetorical_function_cn": "把研究问题转化为设计制品定义。",
+      "depends_on_cn": "需要RQ。",
+      "sets_up_cn": "为后续框架评价作内容铺垫。",
+      "evidence_pointer": "Section 1, sixth paragraph"
+    },
+    {
+      "order": 15,
+      "section": "1 Introduction",
+      "locator": "Introduction P6 S3",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "框架通过MAN案例进行评价，并通过案例反馈推导出命题。",
+      "rhetorical_function_cn": "预告研究步骤。",
+      "depends_on_cn": "需要CAPS定义。",
+      "sets_up_cn": "让读者期待案例证据。",
+      "evidence_pointer": "Section 1, sixth paragraph"
+    },
+    {
+      "order": 16,
+      "section": "1 Introduction",
+      "locator": "Introduction P7 S1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "CAPS框架有助于缩短设计时间和降低成本，并提高系统质量，MAN案例说明了其用处。",
+      "rhetorical_function_cn": "声明贡献并引向案例。",
+      "depends_on_cn": "需要框架构建和评价预告。",
+      "sets_up_cn": "为后面的背景与相关工作提供目标。",
+      "evidence_pointer": "Section 1, final paragraph"
+    },
+    {
+      "order": 17,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P1 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "IS研究中广泛使用context概念，其定义可追溯至Dey。",
+      "rhetorical_function_cn": "建立概念来源。",
+      "depends_on_cn": "需要引言中引入context。",
+      "sets_up_cn": "为后续讨论传感器数据属于context信息作铺垫。",
+      "evidence_pointer": "Section 2, first paragraph"
+    },
+    {
+      "order": 18,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P2 S1-S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "制造业工厂利用IoT传感器跟踪温度、振动和磨损等使用与寿命指标。",
+      "rhetorical_function_cn": "给出工业传感器数据处理的具体现象。",
+      "depends_on_cn": "需要context概念。",
+      "sets_up_cn": "为说明传感器数据可用于预测维护作准备。",
+      "evidence_pointer": "Section 2, second paragraph"
+    },
+    {
+      "order": 19,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P2 S3",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "这些数据输入分析模型后可以预测机器何时需要维护或更换，管理者可提前订购部件以避免停机。",
+      "rhetorical_function_cn": "说明传感器数据影响预测的组织机制。",
+      "depends_on_cn": "需要前句传感器数据指标。",
+      "sets_up_cn": "为需求预测中的价值论证作铺垫。",
+      "evidence_pointer": "Section 2, second paragraph"
+    },
+    {
+      "order": 20,
+      "section": "2 Background and Prior Work",
+      "locator": "Background after Table 1, paragraph 3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "传统OR方法主要用复杂算法基于历史序列预测下一项，相当于只分析黑箱输出；基于黑箱内部活动的知情预测有限且问题特定。",
+      "rhetorical_function_cn": "指出传统预测方法的局限。",
+      "depends_on_cn": "需要Table 1方法列表。",
+      "sets_up_cn": "为提出用传感器打开黑箱作铺垫。",
+      "evidence_pointer": "Section 2, paragraph following Table 1"
+    },
+    {
+      "order": 21,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P? discussing benchmarks",
+      "move_code": "GAP",
+      "paraphrase_cn": "间歇性需求预测的benchmark研究结果不一致，方法相对表现依赖参数和情境。",
+      "rhetorical_function_cn": "暴露预测方法选择缺乏一致结论。",
+      "depends_on_cn": "需要之前的OR文献综述。",
+      "sets_up_cn": "为选择Croston作为实际基线提供理由。",
+      "evidence_pointer": "Section 2, paragraph citing Petropoulos, Kourentzes, Teunter & Duncan"
+    },
+    {
+      "order": 22,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P? after gap",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "鉴于科学结论不确定，作者选择Croston方法作为事实标准基线，因为SAP R/3建议用它处理间歇性需求。",
+      "rhetorical_function_cn": "确立本文对比的经验基线。",
+      "depends_on_cn": "需要前文方法分类与benchmark不确定性。",
+      "sets_up_cn": "为后续评价活动传感器等制品提供对照。",
+      "evidence_pointer": "Section 2, paragraph citing SAP"
+    },
+    {
+      "order": 23,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P? on Shmueli & Koppius",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "Shmueli和Koppius提供了八步预测经验模型构建过程，从目标定义到研究传播。",
+      "rhetorical_function_cn": "引入本文第二个知识基础。",
+      "depends_on_cn": "需要前文预测方法综述。",
+      "sets_up_cn": "为指出该过程缺少组织维度作铺垫。",
+      "evidence_pointer": "Section 2, paragraph on Figure 1"
+    },
+    {
+      "order": 24,
+      "section": "2 Background and Prior Work",
+      "locator": "Background P? on limitations of Shmueli & Koppius",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "该过程虽是构建预测模型的重要进步，但只关注数据模型，忽略知识库、组织和用户等因素。",
+      "rhetorical_function_cn": "指出预测建模过程在IS系统层面的盲点。",
+      "depends_on_cn": "需要八步模型已介绍。",
+      "sets_up_cn": "为合并DSR与Shmueli-Koppius提供理由。",
+      "evidence_pointer": "Section 2, paragraph beginning 'Although Shmueli...'"
+    },
+    {
+      "order": 25,
+      "section": "2 Background and Prior Work",
+      "locator": "Background last two paragraphs",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "传感器预测系统需要同时考虑定量和定性评价，以应对数据复杂性和组织情境；因此需要综合DSR和Shmueli-Koppius构建更通用的过程框架。",
+      "rhetorical_function_cn": "把两个知识基础转化为设计框架需求。",
+      "depends_on_cn": "需要前文对两个模型的局限分析。",
+      "sets_up_cn": "为第4节CAPS框架铺路。",
+      "evidence_pointer": "Section 2, final paragraphs"
+    },
+    {
+      "order": 26,
+      "section": "3 Research Approach",
+      "locator": "Research Approach P1 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "上下文感知预测系统与其他IT制品一样处理信息、支持任务，并通过传感器感知环境变化并把输入转换为未来预测。",
+      "rhetorical_function_cn": "界定研究对象的共同特征。",
+      "depends_on_cn": "需要引言中的CAPS定义。",
+      "sets_up_cn": "为说明缺少指南并采用DSR作背景。",
+      "evidence_pointer": "Section 3, first paragraph"
+    },
+    {
+      "order": 27,
+      "section": "3 Research Approach",
+      "locator": "Research Approach P1 S3",
+      "move_code": "GAP",
+      "paraphrase_cn": "没有为设计者和研究者提供关于传感器预测模型的指南，因此作者采用DSR方法填补这一缺口。",
+      "rhetorical_function_cn": "重新强调方法论层面的缺口。",
+      "depends_on_cn": "需要前面对CAPS共同特征的界定。",
+      "sets_up_cn": "引出后续研究过程说明。",
+      "evidence_pointer": "Section 3, first paragraph"
+    },
+    {
+      "order": 28,
+      "section": "3 Research Approach",
+      "locator": "Research Approach P2 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者先调研设计与预测分析文献，然后合并DSR和Shmueli-Koppius为CAPS，再在MAN案例中应用框架，依据反馈改进，最终推导命题。",
+      "rhetorical_function_cn": "说明全文研究步骤并论证方法选择。",
+      "depends_on_cn": "需要说明采用DSR的原因。",
+      "sets_up_cn": "为读者理解后续章节顺序提供地图。",
+      "evidence_pointer": "Section 3, second paragraph"
+    },
+    {
+      "order": 29,
+      "section": "3 Research Approach",
+      "locator": "Research Approach P3 S1-S3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者团队中有人长期嵌入MAN，这有助于数据收集和情境理解，并在项目过程中修正CAPS框架。",
+      "rhetorical_function_cn": "解释案例研究的深度嵌入方法。",
+      "depends_on_cn": "需要前文说明采用案例评价。",
+      "sets_up_cn": "为后文定性偏差分析和命题提炼提供方法依据。",
+      "evidence_pointer": "Section 3, third paragraph"
+    },
+    {
+      "order": 30,
+      "section": "4 Design Solution",
+      "locator": "Design Solution P1 S2",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "DSR提供问题驱动的设计流程，Shmueli-Koppius提供数据驱动的预测模型流程。",
+      "rhetorical_function_cn": "重申两个知识基础的互补性。",
+      "depends_on_cn": "需要背景部分的分析。",
+      "sets_up_cn": "为描述CAPS框架如何整合二者作准备。",
+      "evidence_pointer": "Section 4, first paragraph"
+    },
+    {
+      "order": 31,
+      "section": "4 Design Solution",
+      "locator": "Section 4, paragraph on Figure 4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "对两个模型的比较显示：S&K目标定义、开发/构建、评价和部署与DSR各步骤重叠且互补，因此可被整合。",
+      "rhetorical_function_cn": "解释CAPS框架的结构来源。",
+      "depends_on_cn": "需要两个模型已介绍。",
+      "sets_up_cn": "为四步CAPS框架提供图示过渡。",
+      "evidence_pointer": "Section 4, Figure 4 discussion"
+    },
+    {
+      "order": 32,
+      "section": "4 Design Solution",
+      "locator": "Section 4, Step 1 description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第一步目标定义要求设计者明确设计对象、预测目标以及衡量好设计的基准，并吸收环境要求与知识库参考。",
+      "rhetorical_function_cn": "描述CAPS框架第一个设计步骤。",
+      "depends_on_cn": "需要框架整体图已呈现。",
+      "sets_up_cn": "为后续步骤的输入来源作说明。",
+      "evidence_pointer": "Section 4, Step 1 paragraph"
+    },
+    {
+      "order": 33,
+      "section": "4 Design Solution",
+      "locator": "Section 4, Step 2 description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第二步IT制品构建包含模型选择、模型构建和模型实现三个子步骤；传感器数据需要特别关注测量与预测值匹配、缺失值和过拟合。",
+      "rhetorical_function_cn": "详细说明框架的核心构建活动。",
+      "depends_on_cn": "需要DSR与S&K重叠映射。",
+      "sets_up_cn": "为案例中具体制品的构建提供概念框架。",
+      "evidence_pointer": "Section 4, Step 2 paragraph"
+    },
+    {
+      "order": 34,
+      "section": "4 Design Solution",
+      "locator": "Section 4, Step 3 description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第三步模型评价包含预测误差成本评估、情境性系统偏差识别和有效性评价，目的是比较迭代并修正系统偏差。",
+      "rhetorical_function_cn": "定义评价机制并说明其目标。",
+      "depends_on_cn": "需要框架中的构建步骤。",
+      "sets_up_cn": "为案例中定量与定性评价的结合作依据。",
+      "evidence_pointer": "Section 4, Step 3 paragraph"
+    },
+    {
+      "order": 35,
+      "section": "4 Design Solution",
+      "locator": "Section 4, Step 4 description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第四步模型部署把预测系统与生产系统整合，连接传感器数据流与组织运作过程。",
+      "rhetorical_function_cn": "完成四步框架的收尾。",
+      "depends_on_cn": "需要目标定义、构建、评价已完成。",
+      "sets_up_cn": "为案例评价中的部署/未部署区别作铺垫。",
+      "evidence_pointer": "Section 4, Step 4 paragraph"
+    },
+    {
+      "order": 36,
+      "section": "5 Evaluation",
+      "locator": "Section 5 opening",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "作者认为评价框架的一种方式是专家评论，但更稳健的方式是实际用框架在一家公司中构建预测系统，并选择了后者。",
+      "rhetorical_function_cn": "为案例评价策略辩护。",
+      "depends_on_cn": "需要CAPS框架已呈现。",
+      "sets_up_cn": "为下文的MAN案例和五个制品作导引。",
+      "evidence_pointer": "Section 5, first paragraph"
+    },
+    {
+      "order": 37,
+      "section": "5.1 Settings and Context",
+      "locator": "Section 5.1 P1-P2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "MAN是全球大型船用柴油机市场领导者，占据很高市场份额；售后服务和零配件业务带来收入。",
+      "rhetorical_function_cn": "说明案例公司的重要性和产业代表性。",
+      "depends_on_cn": "需要前文选择案例评价。",
+      "sets_up_cn": "为说明备件预测困难提供组织背景。",
+      "evidence_pointer": "Section 5.1, first paragraphs"
+    },
+    {
+      "order": 38,
+      "section": "5.1 Settings and Context",
+      "locator": "Section 5.1 P2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "售后型商业模式带来高产品异质性、高需求不确定性，许可经营模式还限制了与最终客户的信息流。",
+      "rhetorical_function_cn": "描述组织情境导致预测困难的机制。",
+      "depends_on_cn": "需要MAN业务模式介绍。",
+      "sets_up_cn": "为CAPS框架强调组织情境提供实例。",
+      "evidence_pointer": "Section 5.1, second paragraph"
+    },
+    {
+      "order": 39,
+      "section": "5.2 CAPS Use Case 1",
+      "locator": "Section 5.2 P1",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "评价采用Clustering训练/测试集划分，并用目标函数评估；基线是标准Croston方法。",
+      "rhetorical_function_cn": "定义第一轮评价的对照和指标。",
+      "depends_on_cn": "需要CAPS框架Step3的定量评价要求。",
+      "sets_up_cn": "为报告改进百分比建立标准。",
+      "evidence_pointer": "Section 5.2, first paragraph"
+    },
+    {
+      "order": 40,
+      "section": "5.2.1",
+      "locator": "Section 5.2.1, phase-out paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "称为Croston with phase-out component的新制品用先前定义的目标函数评价，比基线改进4%。",
+      "rhetorical_function_cn": "报告第一个改进结果。",
+      "depends_on_cn": "需要基线Croston和phase-out设计。",
+      "sets_up_cn": "为后续活动传感器更大的改进作对照。",
+      "evidence_pointer": "Section 5.2.1, paragraph after phase-out description"
+    },
+    {
+      "order": 41,
+      "section": "5.2.1",
+      "locator": "Section 5.2.1, activity sensor description",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者定义新变量“发动机活动”，以最大负荷运行小时数计量，利用传感器读取的负荷和运行小时数。",
+      "rhetorical_function_cn": "说明活动传感器的具体设计选择。",
+      "depends_on_cn": "需要phase-out结果和传感器数据可用性。",
+      "sets_up_cn": "为报告活动传感器的改进作铺垫。",
+      "evidence_pointer": "Section 5.2.1, activity sensor paragraph"
+    },
+    {
+      "order": 42,
+      "section": "5.2.1",
+      "locator": "Section 5.2.1, result after activity sensor",
+      "move_code": "RESULT",
+      "paraphrase_cn": "活动传感器比phase-out方案再改进17%，比基线改进20%。",
+      "rhetorical_function_cn": "报告第二轮迭代的显著定量收益。",
+      "depends_on_cn": "需要活动传感器设计已描述。",
+      "sets_up_cn": "为讨论传感器方案的价值与代价作依据。",
+      "evidence_pointer": "Section 5.2.1, Figure 7"
+    },
+    {
+      "order": 43,
+      "section": "5.2.1",
+      "locator": "Section 5.2.1, summary paragraph",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "传感器方案提高预测质量，但需要额外基础设施，质量提高与环境紧密耦合；在高不确定性和高预测错误成本环境中才财务可行。",
+      "rhetorical_function_cn": "指出传感器设计收益的边界条件。",
+      "depends_on_cn": "需要活动传感器与基线的比较结果。",
+      "sets_up_cn": "为后续财务可行性矩阵作铺垫。",
+      "evidence_pointer": "Section 5.2.1, final paragraph"
+    },
+    {
+      "order": 44,
+      "section": "5.3",
+      "locator": "Section 5.3 opening",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "第二个用例评价更高级设计时无法完整部署，因此需要开发一种即使没有完整实现也能执行的量化评价函数。",
+      "rhetorical_function_cn": "解释为什么需要盈亏平衡函数。",
+      "depends_on_cn": "需要前文说明设计无法完全部署。",
+      "sets_up_cn": "为随后目标函数和两类高级设计分析作铺垫。",
+      "evidence_pointer": "Section 5.3, first paragraph"
+    },
+    {
+      "order": 45,
+      "section": "5.3",
+      "locator": "Section 5.3, after objective function",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "作者把5年内预测误差成本降低超过投资成本作为系统可行的判据，并把五年定为阈值。",
+      "rhetorical_function_cn": "将可行性判断转化为可计算的设计要求。",
+      "depends_on_cn": "需要前文“还没有完整部署”的约束。",
+      "sets_up_cn": "为两类高级设计的盈亏平衡计算提供公式。",
+      "evidence_pointer": "Section 5.3, equation"
+    },
+    {
+      "order": 46,
+      "section": "5.3.1",
+      "locator": "Section 5.3.1, feasibility results",
+      "move_code": "RESULT",
+      "paraphrase_cn": "连续多传感器监控系统需要8%的误差成本改进才能在5年回收，远程监控界面需要30%改进。",
+      "rhetorical_function_cn": "报告高级设计的可行性评估结果。",
+      "depends_on_cn": "需要盈亏平衡函数和成本估计。",
+      "sets_up_cn": "为后续判断哪个设计更可行提供依据。",
+      "evidence_pointer": "Section 5.3.1, final paragraphs"
+    },
+    {
+      "order": 47,
+      "section": "6 Discussion",
+      "locator": "Section 6 opening paragraphs",
+      "move_code": "TRANSITION",
+      "paraphrase_cn": "在MAN应用CAPS框架的经验提供了反思机会，可提炼对设计类似系统有帮助的知识命题。",
+      "rhetorical_function_cn": "从案例结果转向一般化设计知识。",
+      "depends_on_cn": "需要前文案例评价结果。",
+      "sets_up_cn": "为四条命题的提出作导引。",
+      "evidence_pointer": "Section 6, first paragraph"
+    },
+    {
+      "order": 48,
+      "section": "6 Discussion",
+      "locator": "Section 6, propositions 1-4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者提出四条设计命题：基础设施复用、数据质量、传感器选择和情境特征。",
+      "rhetorical_function_cn": "把案例经验编码为可迁移的设计原则。",
+      "depends_on_cn": "需要前文各制品经验的描述。",
+      "sets_up_cn": "为可行性矩阵和DSR贡献定位提供支撑。",
+      "evidence_pointer": "Section 6, Table 2"
+    },
+    {
+      "order": 49,
+      "section": "6 Discussion",
+      "locator": "Section 6, feasibility matrix",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者提出基于投资成本和测量直接性两个维度的二乘二矩阵，用于预判传感器预测系统的财务可行性。",
+      "rhetorical_function_cn": "把命题四转成可操作的预判工具。",
+      "depends_on_cn": "需要命题三和命题四的讨论。",
+      "sets_up_cn": "为用矩阵归类各制品提供一个可视化框架。",
+      "evidence_pointer": "Section 6, Figure 8"
+    },
+    {
+      "order": 50,
+      "section": "6 Discussion",
+      "locator": "Section 6, Gregor & Hevner paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "在Gregor和Hevner的知识贡献矩阵中，CAPS框架属于“改进”类，因为它是针对已知问题的新解决方案。",
+      "rhetorical_function_cn": "框定论文在DSR文献中的理论贡献级别。",
+      "depends_on_cn": "需要框架评价已完成。",
+      "sets_up_cn": "为结论中的局限辩护。",
+      "evidence_pointer": "Section 6, after matrix paragraph"
+    },
+    {
+      "order": 51,
+      "section": "7 Conclusion",
+      "locator": "Conclusion P3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "单案例威胁外部效度，但作者将其定位为概念验证和示例，未来可在航空、风电、海上钻井等行业复制验证。",
+      "rhetorical_function_cn": "坦诚局限并指出未来方向。",
+      "depends_on_cn": "需要全文贡献声明。",
+      "sets_up_cn": "结束全文并开放后续研究。",
+      "evidence_pointer": "Section 7, third paragraph"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先在引言中用“传感器数据多但预测应用少”的现实落差制造问题；再在背景部分用文献证据说明相关预测模型已有，但缺少面向完整IS系统的设计框架；最后把Shmueli-Koppius模型局限与DSR相结合，形成明确的框架缺口。",
+    "signposting_cn": "在引言末尾直接列出RQ和“开发框架—案例评价—命题提炼”三阶段；第3节research approach又用图表再次预告；第5节开头明确说明选择了更稳健的评价路径；每一use case开头都说明目标与遗留问题。",
+    "transition_logic_cn": "从文献到框架构建使用“虽然有S&K，但缺少组织维度”的转折；从框架到案例用“更稳健的评价是实际构建”的理由过渡；从第一轮评价到第二轮用“无法完全部署但需要评价”的问题引导；从案例到命题用“经验提供反思机会”的一般化句式。",
+    "claim_evidence_rhythm_cn": "每个改进都先描述设计选择，再报告量化改进百分比，随后补充定性反馈；提出命题时，每个命题都紧接着一个案例中的具体依据；可行性矩阵中各制品被归入不同象限，使主张与证据形成视觉化闭环。",
+    "benchmark_narrative_cn": "以文献综述和SAP实践双重理由把Croston建构为“事实标准基线”，然后用同一目标函数逐步叠加改进，使20%的结果显得有累积性；对高级设计则改用投资回收期作为新基准，避免因无法实现而失去评价标准。",
+    "theory_return_cn": "框架本身脱胎于DSR与Shmueli-Koppius；讨论部分又把命题、矩阵和“改进”分类放回设计科学知识框架，使案例结果在理论上被归档，而不是只停留在MAN具体情境。",
+    "contribution_positioning_cn": "作者在摘要、引言、讨论和结论四个位置重复“框架+命题+矩阵”的贡献组合；并通过Gregor-Hevner分类把贡献限定为“改进”类，既避免夸大又保留一般性。",
+    "novelty_protection_cn": "作者把单一案例中的性能差异归因于可复用的设计过程和命题，而不是一次性架构；通过可行性矩阵和四命题把具体的传感器选择题材转化为跨情境的决策维度，防止贡献退化为“我们的模型在这个数据集上更好”。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立“情境数据普遍但缺少设计框架”的缺口，提出RQ。",
+        "research_job_cn": "识别一个尚未被充分框架化的IS设计问题。",
+        "required_evidence_cn": "能显示问题普遍性和现实后果的文献与产业证据。",
+        "transition_to_next_cn": "用“没有框架/指南”引出研究问题。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述相关预测方法与过程性方法论，并指出现有过程缺乏组织/系统维度。",
+        "research_job_cn": "选择两个互补的知识基础做映射。",
+        "required_evidence_cn": "至少一个具体领域的方法分类和benchmark不确定性证据。",
+        "transition_to_next_cn": "用“因此需要合并DSR与预测建模”转向框架构建。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "展示两个知识基础的重叠与互补，形成框架图与步骤解释。",
+        "research_job_cn": "构建设计过程框架，明确每个步骤的环境输入和知识库输入。",
+        "required_evidence_cn": "概念映射图和步骤描述。",
+        "transition_to_next_cn": "用“框架需要评价”转入案例。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述案例企业背景和预测问题，说明为何该情境适合评价框架。",
+        "research_job_cn": "选择有产业代表性、预测困难且传感器数据可及的企业，并嵌入获取情境知识。",
+        "required_evidence_cn": "案例背景、组织结构、数据来源和量化目标函数。",
+        "transition_to_next_cn": "用评价策略的说明引导到具体制品迭代。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "报告多轮迭代设计、每个制品的改进百分比和定性反馈。",
+        "research_job_cn": "在案例中实际应用框架，构建多个制品并与基线比较。",
+        "required_evidence_cn": "统一的量化指标、基线对照、定性偏差识别。",
+        "transition_to_next_cn": "用“尚未完全部署”转向可行性评价。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "对无法部署的设计使用盈亏平衡等替代评价函数。",
+        "research_job_cn": "开发不依赖完整实现的量化判据，并做成本估算。",
+        "required_evidence_cn": "成本数据、投资额、回收期假设。",
+        "transition_to_next_cn": "用“从案例经验可反思一般命题”进入讨论。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "把各制品经验归纳为命题，用矩阵或表格统一呈现，并用理论框架定位贡献。",
+        "research_job_cn": "做跨个案的理论归纳和知识贡献分类。",
+        "required_evidence_cn": "每个命题至少对应案例中的明确设计事件。",
+        "transition_to_next_cn": "用“局限与未来研究”收尾。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用“事实标准基线”为自己的比较建立正当性，而不是默认最先进模型",
+      "把无法完全部署的设计转化为可行性问题，避免评价缺失",
+      "用同一目标函数贯穿多迭代，使改进百分比可累积",
+      "把具体设计决策转译为二乘二矩阵或命题，提升一般化程度",
+      "先建立框架的知识来源映射，再进入案例，确保理论贡献可追溯"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "研究者长期嵌入企业获取深度情境和传感器数据，这种准入和嵌入不易复制",
+      "需要真实企业的大量运营数据、历史销售数据、传感器安装成本估计和行业领域知识",
+      "针对具体备件预测问题的误差成本函数，需要企业内部报价转化率、边际贡献、库存成本等参数"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只复制“四步框架”而不展示知识来源映射和评价细节",
+      "不能只写“单案例已验证”而不说明投入的定性反馈和偏差识别",
+      "不能把可行性矩阵当作直接预测工具，因为它依赖大量情境性成本估计",
+      "不能把命题当成普适原则，必须说明边界条件（如高预测误差成本）"
+    ],
+    "single_best_description_of_the_routine_cn": "通过合并两个互补方法论生产一个新设计框架，然后在单一高准入案例中做多迭代制品构建与定量评价，最后把情境经验提升为命题和决策矩阵。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "原文为PDF转换文本，图1-8的视觉细节和精确页码缺失；Table 1和参考文献中个别文字可能存在OCR误差；两轮use case中高级制品的可行性分析基于作者自报成本估计，无法独立验证。不过文章段落结构完整，足以支撑上述分析。",
+  "usage": {
+    "prompt_tokens": 20946,
+    "completion_tokens": 19904,
+    "total_tokens": 40850,
+    "prompt_cache_hit_tokens": 20864,
+    "prompt_cache_miss_tokens": 82
+  }
+}

@@ -1,0 +1,1927 @@
+# A method for resolving organisation‐enterprise system misfits: An action research study in a pluralistic organisation
+
+- 作者：David Morquin; Roxana Ologeanu‐Taddei; Guy Paré; Gerit Wagner
+- 年份 / 期刊：2023 / Information Systems Journal
+- DOI：10.1111/isj.12433
+- 源文件：25867_2023_a-method-for-resolving-organisationenterprise-system-misfits-an-action-research-study-in-a-plura.md
+- 论文主类型：action_research_or_longitudinal_change
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.74
+
+## 文章级论证概况
+
+- 核心问题：在多元目标、权力分散的多元主义组织中，当不同专家用户对组织流程与企业系统之间的不匹配（Org-ES misfit）持有分歧性感知时，应当如何以这些感知为起点，完成共享诊断并选择与实施解决方案？
+
+- 制品与设计：本文提出并检验了一套用于诊断和化解Org-ES misfit的实用方法，包含触发条件、步骤、参与者角色、产出、指导原则与边界条件。其核心设计是以affordance和affordance actualization为诊断语言，以用户参与和change agentry为组织机制，通过过程图、分组会议和共识决策实现从个别感知到集体共享理解的转化。
+
+- 客观结果：在法国大学医院的新生儿听力筛查EHR支持流程中，数据完整率从68%升至90%以上；应做而未做ORL会诊的比例从46%降至22%；出院前已预约的比例从42%升至77%；阳性筛查后完成ORL随访的比例从54%升至78%。
+
+- 核心贡献：作者声称贡献了一种首个完整说明的Org-ES misfit诊断与化解方法，属于artefactual contribution；该方法通过affordance视角重新概念化misfit，以选择性共识式参与和适应性change agentry作为指导原则，并通过行动研究证明其可行性和有效性。
+
+- 整篇论证链：文章先以企业系统失败和Org-ES misfit的普遍性建立现实重要性，指出现有研究多关注实施阶段、多由专家进行结构性诊断，忽视后期阶段中用户感知分歧的起点；然后在多元主义组织背景下把缺口聚焦为缺少以用户感知为起点的干预性诊断与化解方法。作者引入社会建构主义、affordance actualization、用户参与和change agentry理论，将misfit重新定义为ES affordance的actualization、partial actualization和non-actualization的不当组合，并据此设计出有触发条件、步骤、角色和原则的方法。随后通过canonical action research在大学医院真实流程中实施该方法，以流程图、会议观察、邮件、访谈和前后过程指标形成证据，展示诊断、规划、执行、评估与反思的完整循环。最终在讨论中把现场经验提炼为三个经修正的指导原则、边界条件和可复制的方法规范，从而回应引言中提出的方法论缺口。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心经验证据来自研究者作为change agent在真实医院开展的13个月canonical action research干预，目标是诊断并解决一个实际业务流程中的Org-ES misfit；方法设计与理论贡献围绕该干预过程展开，而不是以benchmark实验、设计科学实验室评价或大规模多Study程序为主。
+
+- 主导写作弧线判定：论证弧线是：先建立现实问题与文献缺口，再引入理论并推导方法设计，然后通过行动研究现场检验，最后在Discussion中返回理论，将结果转化为修正后的指导原则、边界条件和贡献。
+
+## 研究开展程序
+
+- study_or_phase_count：5
+
+- 研究阶段总序列：全文不是并列的Study 1/2结构，而是方法设计与行动研究嵌入的单一纵向干预链条：第一阶段在文献与理论基础上设计方法；第二阶段进入现场并完成misfit诊断；第三阶段进行解决方案构思与实施；第四阶段进行效果评价；第五阶段进行反思并形式化最终方法。每一阶段承接上一阶段的不确定性，并为下一阶段提供输入。
+
+### studies_or_phases
+
+#### 1. 理论指导下的方法设计阶段
+
+- order：1
+
+- name_cn：理论指导下的方法设计阶段
+
+- question_cn：应当如何基于affordance、用户参与和change agentry理论构建一套可操作的Org-ES misfit诊断与化解方法？
+
+- inputs_and_setting_cn：已有ES生命周期、misfit类型、misfit诊断与化解策略文献；Searle社会建构主义；Gibson及Strong等人affordance理论；Markus和Mao关于参与的理论；Markus和Benjamin关于change agentry的理论。
+
+- designed_or_compared_object_cn：设计对象是一套方法，包括触发条件、诊断步骤、解决方案构思、实施、评价、产出、角色与三条初始指导原则。
+
+- baseline_control_or_counterfactual_cn：与现有misfit研究形成对照：专家驱动和结构性诊断vs用户感知驱动的集体诊断；实施阶段研究vsonward and upward阶段干预研究。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：概念综合与理论推导；从理论命题转向方法要求。
+
+- main_result_cn：形成三原则：以affordance视角达成共享理解；采用参与式诊断和共同决策；由change agent高效组织和推动参与。
+
+- argumentative_role_cn：建立方法的存在理由和设计蓝图，为后续行动研究提供待检验的初始版本。
+
+- remaining_uncertainty_cn：该方法在实际多元主义组织中是否可行、是否有效尚未得到检验。
+
+- link_to_next_phase_cn：需要通过canonical action research现场应用来测试并细化方法。
+
+##### evidence_pointers
+
+1. Section 3 Theoretical Foundations
+
+2. Section 4 Design of the Misfit Diagnosis and Resolution Method
+
+#### 2. CAR触发与misfit诊断阶段
+
+- order：2
+
+- name_cn：CAR触发与misfit诊断阶段
+
+- question_cn：以新生儿听力筛查流程为对象，能否通过过程图方法和affordance语言，让不同专业用户从各自感知出发形成对misfit的共享理解？
+
+- inputs_and_setting_cn：法国Alpha大学医院；EHR支持的新生儿听力筛查流程；发起者ORL医生/流程所有者；超过120名涉及12个职业的参与者；4个产科部门与新生儿复苏等；EHR和生物医学设备数据检索系统；观察笔记、邮件、会议纪要、过程图。
+
+- designed_or_compared_object_cn：诊断过程的设计对象：as-is过程图、三类affordance（录入筛查结果、预约ORL、向区域网络传输数据）、misfit诊断会议。
+
+- baseline_control_or_counterfactual_cn：2014年基线数据：数据完整率68%、46%的听力异常为偶然发现、56.9%转诊儿童未完成ORL会诊；这些数字被用作问题严重性的基准。
+
+##### objective_metrics
+
+1. 2014年数据完整性68%
+
+2. 2014年漏诊/未随访比例等
+
+- analysis_method_cn：逐组访谈、过程建模、misfit诊断会议；研究者使用abductive coding将数据归入affordance actualization、partial actualization、non-actualization及依赖关系。
+
+- main_result_cn：形成并验证as-is过程图；识别出partial actualization、non-actualization和依赖情境，例如重复问卷、不同数据格式、周末无人预约、外部系统竞争等；参与者在会议中表示地图清楚显示了数据丢失的位置和原因。
+
+- argumentative_role_cn：证明方法第一步在实践中可执行，并能把分散的用户感知聚合成共享诊断。
+
+- remaining_uncertainty_cn：诊断结果是否足以转化为可接受且可实施的解决方案尚不清楚。
+
+- link_to_next_phase_cn：诊断得到的affordance组合直接为解决方案构思提供输入。
+
+##### evidence_pointers
+
+1. Section 6.1 Diagnosis step
+
+2. Table 4 Summary of diagnosis step
+
+3. Figure 1 As-is process map
+
+4. Appendix B Table B1 Quotes from diagnosis
+
+#### 3. 方案构思与实施阶段
+
+- order：3
+
+- name_cn：方案构思与实施阶段
+
+- question_cn：在共识基础上，能否通过affordance重组选择并实施技术性和组织性调整，形成各方认可的解决方案？
+
+- inputs_and_setting_cn：misfit诊断结果；关键利益相关者、IT分析师、EHR厂商、流程所有者；solution conception meeting和决策会议；目标过程图和数据回路设计。
+
+- designed_or_compared_object_cn：设计对象是to-be过程图和resolution measures组合，包括修正部分actualized affordance、消除affordance竞争、修正non-actualized affordance、纳入affordance依赖关系。
+
+- baseline_control_or_counterfactual_cn：对照是as-is地图与当前实践；决策是在多个可选技术/组织调整中达成共识。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：由change agent主持的小组会议和全体会议；用过程图和报价促成共识；最终由流程所有者和利益相关者共同批准措施。
+
+- main_result_cn：形成并批准Table 5所示解决方案，包括统一结构化数据采集表、修正查询、设置ORL专用预约时段、允许助产士在非工作时段使用预约模块、建立安全自动传输等。
+
+- argumentative_role_cn：证明方法能够从共享诊断走向共享解决方案，并覆盖技术调整与流程调整的组合。
+
+- remaining_uncertainty_cn：已批准的措施是否真正解决misfit并带来可观察的绩效改善尚未验证。
+
+- link_to_next_phase_cn：实施后的结果需要进入评价阶段。
+
+##### evidence_pointers
+
+1. Section 6.2 Action planning and action-taking steps
+
+2. Table 5 ES misfit resolution measures
+
+#### 4. 效果评价阶段
+
+- order：4
+
+- name_cn：效果评价阶段
+
+- question_cn：实施后的6个月和2年，misfit是否被化解？过程绩效是否显著改善？
+
+- inputs_and_setting_cn：实施后EHR数据；与区域网络协调员和流程所有者的两次访谈；与关键行动者的最终小组访谈；六个月和两年的随访。
+
+- designed_or_compared_object_cn：比较干预前后的过程指标，以及利益相关者对新安排的满意度。
+
+- baseline_control_or_counterfactual_cn：2014年基线数据与2016/2018年实施后数据形成前后对照。
+
+##### objective_metrics
+
+1. 数据完整率从68%升至90%以上
+
+2. 应做而未做ORL会诊比例从46%降至22%
+
+3. 出院前已预约比例从42%升至77%
+
+4. 阳性筛查后完成ORL随访比例从54%升至78%
+
+- analysis_method_cn：EHR数据提取、访谈、利益相关者确认；以结果指标验证misfit是否化解。
+
+- main_result_cn：网络协调员确认无需再从生物医学设备取数；数据录入方式标准化；助产士可在秘书下班后直接预约；流程所有者认为问题已解决；发起者表示不知还能用什么其他方式完成。
+
+- argumentative_role_cn：提供方法有效性和可行性的主要实证证据。
+
+- remaining_uncertainty_cn：单案例前后对照无法排除外部趋势、法规压力或时间效应的替代解释。
+
+- link_to_next_phase_cn：评价结果促使研究团队进入反思阶段，提炼成功条件和边界。
+
+##### evidence_pointers
+
+1. Section 6.3 Evaluation step
+
+#### 5. 反思与方法形式化阶段
+
+- order：5
+
+- name_cn：反思与方法形式化阶段
+
+- question_cn：从行动研究的反思中，方法的原则、触发条件、步骤和边界条件应如何修正，以使其可被复制和推广？
+
+- inputs_and_setting_cn：全部田野数据、编码结果、change agent的事后反思、与理论概念的对照；文献对participatory design和shared understanding的讨论。
+
+- designed_or_compared_object_cn：将初始方法原则与现场经验对照，形成修正后的三原则和正式方法表述，包括trigger、steps、outcomes和boundary conditions。
+
+- baseline_control_or_counterfactual_cn：以修正后的原则对比初始原则，以本文方法对比先前misfit研究的方法假设。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：analytical reflexivity；将编码主题与理论对话；用Figure 2和Table 6形式化方法；用Table 7总结贡献。
+
+- main_result_cn：修正原则为：affordance视角建立共享理解、选择性共识式参与、适应性change agentry；明确边界为onward and upward阶段、多元主义组织、业务流程级misfit。
+
+- argumentative_role_cn：把单案例经验提升为可复用方法和设计知识，完成贡献主张。
+
+- remaining_uncertainty_cn：方法在其他ES类型、其他行业、更复杂流程或需要多misfit优先级排序时的适用性仍待检验。
+
+- link_to_next_phase_cn：为未来复制和应用提供方法规范。
+
+##### evidence_pointers
+
+1. Section 6.4 Reflection step
+
+2. Section 7 Discussion
+
+3. Figure 2 Method for Org-ES misfit diagnosis and resolution
+
+4. Table 6 Misfit resolution method at a glance
+
+5. Table 7 Study contributions in a nutshell
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. GAP
+
+4. WHY_GAP_MATTERS
+
+5. RQ_OR_OBJECTIVE
+
+6. THEORY_INTRO
+
+7. METHOD_JUSTIFICATION
+
+8. RESULT
+
+9. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. PRIOR_KNOWLEDGE
+
+4. LIMITATION
+
+5. WHY_GAP_MATTERS
+
+6. GAP
+
+7. RQ_OR_OBJECTIVE
+
+8. THEORY_INTRO
+
+9. DESIGN_FEATURE
+
+10. CONTRIBUTION
+
+11. METHOD_JUSTIFICATION
+
+12. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. THEORY_PROPOSITION
+
+3. PRIOR_KNOWLEDGE
+
+4. MECHANISM
+
+5. REQUIREMENT
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. METHOD_JUSTIFICATION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. REQUIREMENT
+
+3. DESIGN_FEATURE
+
+4. BOUNDARY_CONDITION
+
+5. CONTRIBUTION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 社会建构主义（Searle, 1995）
+
+2. affordance与affordance actualization（Gibson, 1977; Strong et al., 2014）
+
+3. 用户参与理论（Markus & Mao, 2004; Wagner & Newell, 2007）
+
+4. change agentry理论（Markus & Benjamin, 1996; Diriker et al., 2022）
+
+5. 参与式系统设计与共享理解文献（Glinz & Fricker, 2015）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：方法不是先有实践再事后贴理论标签；作者明确从社会建构主义、affordance actualization、参与和change agentry推导出方法的初始三原则、步骤和角色，并在行动研究中直接用来指导数据收集与分析。后续的原则修正是对同一理论基础的细化而非换框架。
+
+- 理论到设计翻译链：社会建构主义认为misfit是集体建构的客观现实，且通过感知可及 → 方法起点必须是个体用户感知，目标是通过对话达成集体客观化理解 → 使用affordance视角把misfit定义为actualization、partial actualization和non-actualization的组合 → 这要求在过程中建立共享理解并做affordance重组 → 由于多元主义组织缺乏层级权威，需要用户参与和change agent来选择和推动措施 → 形成三原则、步骤、角色和产出。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：misfit不是不依赖人的技术结构事实，而是社会建构的现实；个体感知可能片面，但可通过集体对话形成客观化的共享理解。
+
+- mechanism_cn：用户对流程和系统的感知是信息入口；不同专业角色拥有局部权威知识；需要对话使局部知识汇合。
+
+- design_requirement_cn：方法必须从用户和利益相关者的感知出发，不能假设初始就存在完美一致的理解。
+
+- artifact_choice_cn：每个流程先通过个体访谈和过程图建模，再通过全体misfit诊断会议验证并达成共享的as-is理解。
+
+- evaluated_contrast_cn：不同于专家单独诊断和仅按系统结构分类；对照是参与者能否共同认可问题图景。
+
+- objective_result_cn：参与者表示过程图清楚显示了数据在哪里丢失，三类affordance的局部/未实现状态均被识别。
+
+##### evidence_pointers
+
+1. Section 6.1
+
+2. Table 4
+
+3. Appendix B
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：affordance actualization是用户通过技术采取行动实现具体结果；misfit表现为这些实际化的失败、部分实现或未实现。
+
+- mechanism_cn：用affordance术语可以同时连接流程目标、用户行动和系统功能，从而在细粒度上定位问题。
+
+- design_requirement_cn：诊断输出应记录为多个ES affordance的actualization、partial actualization和non-actualization组合。
+
+- artifact_choice_cn：新生儿筛查流程被分解为三个affordance；表4按affordance列出结果、潜在能力、人技互动和缺陷类型。
+
+- evaluated_contrast_cn：对照是传统misfit分类（data/functionality/role等）；本文用affordance状态解释同一现象。
+
+- objective_result_cn：发现了依赖情境和竞争情境，如外部生物医学系统导致的partial actualization、内部竞争问卷、缺乏知识导致的non-actualization。
+
+##### evidence_pointers
+
+1. Table 4
+
+2. Appendix B Table B1
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：用户参与的效果取决于参与者选择、目的、方式和促进条件；参与不是越多越好，而要高效。
+
+- mechanism_cn：选择性参与能带来buy-in、更好的需求理解和互动收益，同时避免占用关键用户过多时间。
+
+- design_requirement_cn：参与应是有选择的、共识导向的，并由change agent在关键时间点集结必要角色。
+
+- artifact_choice_cn：使用小规模分组会议、有限的全体会议、过程图和决策会议；关键用户只在需要时进入。
+
+- evaluated_contrast_cn：对照是咨询式参与让所有用户广泛介入；本文验证选择性共识式参与更适应多元主义组织。
+
+- objective_result_cn：关键用户提出可行的替代措施，如周末自行预约、自动安全传输、统一查询格式；方案获一致批准。
+
+##### evidence_pointers
+
+1. Section 6.2
+
+2. Table 5
+
+3. Section 7.3
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：change agent负责设计参与机会、组织交流并推动变化；可采取advocate、facilitator、orchestrator等角色。
+
+- mechanism_cn：多元主义组织缺乏单一权威，需要具有合法性和双重知识的人来协调讨论、控制节奏并促成共识。
+
+- design_requirement_cn：方法必须指定一名change agent，并允许其在advocate、facilitator和orchestrator之间自适应切换。
+
+- artifact_choice_cn：first author作为change agent，拥有医生身份、医院内合法性和EHR知识；他主持个体访谈、绘制过程图、组织会议并推动实施。
+
+- evaluated_contrast_cn：对照是缺乏显式change agent的misfit研究；本文把change agent作为方法的内置角色。
+
+- objective_result_cn：整个过程13个月完成，会议保持在必要最短时间，关键措施被批准并落实。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 6.4
+
+3. Table 6
+
+4. Section 7.3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 单案例canonical action research现场干预
+
+2. 过程导向的定性数据收集与abductive coding
+
+3. 流程关键指标的前后对比（2014 baseline vs 2016/2018）
+
+4. 6个月和2年后的利益相关者访谈与成员确认
+
+5. 对初始指导原则的反思性修正与边界条件说明
+
+- why_these_evaluations_cn：因为研究对象是一个需要在实际组织情境中解决的具体misfit，实验室或benchmark不适合；作者需要证明方法的feasibility和effectiveness，因此采用CAR，既记录干预过程，也用过程指标和利益相关者判断评估结果；反思阶段则把个案经验升华为可复用方法。
+
+- benchmark_and_contrast_chain_cn：文章没有传统benchmark。它先把2014年区域网络报告中的低数据完整率和低随访率作为misfit严重性的基线；实施后再用同一套来源的EHR数据和访谈数据对比，形成前后对照；同时在文献层面把“专家/结构诊断”作为方法对照，在总结表7中把先前知识和方法贡献并置。
+
+### claim_evidence_ledger
+
+#### 1. 方法能够诊断misfit并形成共享理解。
+
+- claim_cn：方法能够诊断misfit并形成共享理解。
+
+- evidence_cn：过程图、诊断会议记录、附录B中的多种affordance失败类型、参与者在会议中的确认性表述。
+
+- support_level_cn：较强：过程证据充分，但依赖研究者作为change agent的判断。
+
+#### 2. 方法能够通过共识选择并实施解决方案。
+
+- claim_cn：方法能够通过共识选择并实施解决方案。
+
+- evidence_cn：解决方案构思会议、决策会议、Table 5批准措施、IT和临床人员提出的替代方案。
+
+- support_level_cn：较强：有会议纪要和引用；但没有独立观察员对每次会议。
+
+#### 3. 方法有效改善了流程绩效并化解misfit。
+
+- claim_cn：方法有效改善了流程绩效并化解misfit。
+
+- evidence_cn：2014 vs 2016/2018指标，包括数据完整率、预约率、随访率；流程所有者和区域协调员访谈。
+
+- support_level_cn：中等：前后对照强烈的改善，但单案例无控制组，无法排除外部法规和社会压力影响。
+
+#### 4. affordance视角优于传统结构分类使参与者理解misfit。
+
+- claim_cn：affordance视角优于传统结构分类使参与者理解misfit。
+
+- evidence_cn：参与者在诊断会议中的反应，以及研究者基于affordance编码的证据。
+
+- support_level_cn：中等：有定性支持，但没有与其他诊断框架的受控比较。
+
+#### 5. 选择性共识式参与和适应性change agentry导致资源高效。
+
+- claim_cn：选择性共识式参与和适应性change agentry导致资源高效。
+
+- evidence_cn：change agent事后反思、会议数量少、关键用户在关键节点介入。
+
+- support_level_cn：中等：有过程证据，但缺少反事实或精确资源计量。
+
+- internal_validity_strategy_cn：使用多源数据三角验证（观察、邮件、会议纪要、过程图、访谈）；第一和第二作者独立编码并讨论分歧；第二名作者作为非参与观察者；两名外部研究者扮演devil's advocate；过程图由利益相关者验证；效果评价在实施后6个月和2年进行以减少立即偏差。
+
+- external_validity_strategy_cn：通过正式说明方法步骤、产出和原则来支持复制；明确边界条件（onward and upward阶段、多元主义组织、流程级misfit）；指出可推广到ERP/CRM等其他ES；与其他研究的结果关联。
+
+- what_is_not_actually_tested_cn：没有真正检验方法在非医疗、非多元主义或层级化组织中的表现；没有解决多misfit同时存在时的优先排序；没有对affordance诊断与传统分类诊断做受控比较；没有测量change agent特质差异对效果的影响；也没有排除法规要求或时间自然改善对结果的替代解释。
+
+## 贡献闭环
+
+- technical_claim_cn：文章提出了一套可操作的misfit诊断与化解方法，并在实际案例中表现出可行性和有效性；其“技术”是程序性方法而非软件系统。
+
+- artifact_claim_cn：方法作为artefact是可识别贡献；具体可识别部分包括触发条件、四类步骤、三类产出、change agent角色以及三条修正后的指导原则。
+
+- mechanism_claim_cn：affordance视角让不同类型参与者能把流程目标、系统功能和实际使用状态联系起来；选择性参与和共识机制在多元主义组织中降低了阻力；change agent的多角色切换提高了参与效率并推动共识。
+
+- boundary_claim_cn：方法适用于ES生命周期的onward and upward阶段、多元主义组织、业务流程级misfit；不适用于strategic misfit。
+
+- reusable_design_knowledge_cn：可复用设计知识包括：以affordance actualization组合作为共享诊断语言、以as-is和to-be过程图作为参与工具、以选择性共识式参与作为用户参与策略、以change agent的advocate/facilitator/orchestrator角色适应作为过程管理原则。
+
+- theoretical_contribution_cn：把misfit从系统结构和制度结构视角转向affordance实际化视角，为misfit诊断研究补充了社会建构主义的范式；将用户参与和change agentry从实施阶段带入onward and upward阶段的misfit化解中，并细化角色切换。
+
+- how_discussion_closes_intro_gap_cn：Discussion先用Figure 2和Table 6给出完整方法，逐一回应前文指出的“没有正式方法”；再在7.3中把三条初始原则修订为基于证据的原则，回应了“用户感知被当作不合法”的批评；Table 7直接与Table 1的缺口对齐，说明本文在misfit概念、参与、change agency三方面都超越了先前知识。
+
+- overclaim_or_unsupported_leaps_cn：主要跳跃是：从单案例成功直接声称“effectively diagnoses and resolves misfits”并预期可推广到ERP/CRM；把流程指标改善完全归因于方法，而未充分讨论法规压力和组织关注可能带来的时间效应；change agent由第一作者兼任，增加了角色混淆和“going native”的风险。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：开篇指出现成企业系统被广泛采用，但文献反复记载失败。
+
+- rhetorical_function_cn：建立研究对象的重要性和矛盾。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为引入misfit作为失败原因做铺垫。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：指出misfit可在实施后阶段出现且必须反应式解决，但已有研究集中于实施阶段并假设misfit信息接近完美。
+
+- rhetorical_function_cn：在摘要中直接暴露文献缺口。
+
+- depends_on_cn：前一句关于失败的现象。
+
+- sets_up_cn：引出本文要解决的问题。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P2 S1
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1
+
+- move_code：GAP
+
+- paraphrase_cn：明确指出没有研究处理以分歧的用户感知为起点的共享诊断与化解。
+
+- rhetorical_function_cn：声明缺口更精确。
+
+- depends_on_cn：文献局限性的陈述。
+
+- sets_up_cn：说明多元主义组织中的问题更显著。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P2 S2
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P2 S2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：指出这种情况在多元主义组织中尤为突出。
+
+- rhetorical_function_cn：提高缺口的重要性。
+
+- depends_on_cn：用户感知分歧的前提。
+
+- sets_up_cn：为研究目标提供情境。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P2 S3
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P2 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出使用可操作的misfit概念化来诊断和化解组织与ES之间的misfit。
+
+- rhetorical_function_cn：给出本文目标。
+
+- depends_on_cn：已建立的缺口。
+
+- sets_up_cn：预告后文的理论和方法。
+
+- evidence_pointer：Abstract
+
+### 6. Abstract P2 S4
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P2 S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：说明方法建立在affordances、affordance actualization、用户参与和change agentry之上。
+
+- rhetorical_function_cn：给出理论支柱。
+
+- depends_on_cn：目标提出。
+
+- sets_up_cn：为方法设计提供依据。
+
+- evidence_pointer：Abstract
+
+### 7. Abstract P3 S1
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P3 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：说明为证明可行性，研究者在大学医院进行行动研究。
+
+- rhetorical_function_cn：给证据形式定位。
+
+- depends_on_cn：理论和方法预告。
+
+- sets_up_cn：引出结果陈述。
+
+- evidence_pointer：Abstract
+
+### 8. Abstract P3 S2
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract P3 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：声称方法有效诊断并化解misfit，且通过高效管理参与优化了所需资源。
+
+- rhetorical_function_cn：给出核心经验结论。
+
+- depends_on_cn：行动研究证据。
+
+- sets_up_cn：为贡献讨论做铺垫。
+
+- evidence_pointer：Abstract
+
+### 9. Introduction P1 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：ES部署带来成功故事、持续挑战和失败。
+
+- rhetorical_function_cn：建立现象全景。
+
+- depends_on_cn：无。
+
+- sets_up_cn：引出企业系统重要性。
+
+- evidence_pointer：Section 1, first paragraph
+
+### 10. Introduction P1 S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P1 S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：现成ES具有快速交付、最佳实践和集成价值链等优点。
+
+- rhetorical_function_cn：避免读者认为ES毫无价值。
+
+- depends_on_cn：前一句。
+
+- sets_up_cn：与失败形成张力。
+
+- evidence_pointer：Section 1, first paragraph
+
+### 11. Introduction P1 S3
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：尽管有大量成功因素研究，文献仍记录小型和大型组织中的ES未充分利用和失败。
+
+- rhetorical_function_cn：把问题从优点转向失败。
+
+- depends_on_cn：上下文和成功因素文献。
+
+- sets_up_cn：引出misfit概念。
+
+- evidence_pointer：Section 1, first paragraph
+
+### 12. Introduction P2 S1
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：组织流程与ES之间的misfit常被视为失败原因之一。
+
+- rhetorical_function_cn：将失败归因于misfit。
+
+- depends_on_cn：前一节的失败现象。
+
+- sets_up_cn：进入文献综述核心概念。
+
+- evidence_pointer：Section 1, second paragraph
+
+### 13. Introduction P2 S2
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究区分功能、数据、可用性、角色、控制和组织文化等misfit类型。
+
+- rhetorical_function_cn：承认已有进展。
+
+- depends_on_cn：misfit概念。
+
+- sets_up_cn：随后指出缺少方法。
+
+- evidence_pointer：Section 1, second paragraph
+
+### 14. Introduction P2 S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：misfit持续存在时，用户可能采用workaround、shadow IT或feral IS。
+
+- rhetorical_function_cn：描述非正式应对现象。
+
+- depends_on_cn：misfit持续。
+
+- sets_up_cn：引出正式化解举措。
+
+- evidence_pointer：Section 1, second paragraph
+
+### 15. Introduction P2 S4
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P2 S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：正式化解时可采用系统适配、流程修改等策略组合。
+
+- rhetorical_function_cn：总结现有化解措施。
+
+- depends_on_cn：misfit和非正式应对现象。
+
+- sets_up_cn：指出多策略但缺少流程方法。
+
+- evidence_pointer：Section 1, second paragraph
+
+### 16. Introduction P3 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有研究没有为多个用户感知不同的实践情境提供正式的诊断与化解方法。
+
+- rhetorical_function_cn：直接声明方法缺口。
+
+- depends_on_cn：前面对研究簇的总结。
+
+- sets_up_cn：解释现有研究为何不足。
+
+- evidence_pointer：Section 1, third paragraph
+
+### 17. Introduction P3 S2
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有研究以观察为主，多由个体专家评估，用户被视为需要教育或感知不被认可。
+
+- rhetorical_function_cn：指出先前方法对用户知识的低估。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为以用户感知为起点做辩护。
+
+- evidence_pointer：Section 1, third paragraph
+
+### 18. Introduction P3 S3
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：在用户是权威信息来源的组织中，忽视用户感知会使诊断失去关键知识；专家之间也难以对misfit分类达成一致。
+
+- rhetorical_function_cn：解释为什么缺口有实际后果。
+
+- depends_on_cn：对先前研究的批评。
+
+- sets_up_cn：提出需要新方法。
+
+- evidence_pointer：Section 1, third paragraph
+
+### 19. Introduction P3 S4
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P3 S4
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：多元主义组织中多个目标与行动者并存，misfit更复杂，更难达成诊断一致。
+
+- rhetorical_function_cn：限定问题范围并提高重要性。
+
+- depends_on_cn：引入pluralistic organisations概念。
+
+- sets_up_cn：把方法与特定组织情境连接。
+
+- evidence_pointer：Section 1, third paragraph
+
+### 20. Introduction P4 S1
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：GAP
+
+- paraphrase_cn：以用户流程理解为起点的干预性方法仍然缺失。
+
+- rhetorical_function_cn：以最清楚的方式复述缺口。
+
+- depends_on_cn：前几句的论证。
+
+- sets_up_cn：引出本文目标。
+
+- evidence_pointer：Section 1, third paragraph end
+
+### 21. Introduction P4 S2
+
+- order：21
+
+- section：Introduction
+
+- locator：Introduction P4 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本研究提出以不同专家用户对misfit的理解为起点进行集体诊断的方法。
+
+- rhetorical_function_cn：声明研究目标。
+
+- depends_on_cn：缺口。
+
+- sets_up_cn：后面各节的具体内容。
+
+- evidence_pointer：Section 1, fourth paragraph
+
+### 22. Introduction P4 S3
+
+- order：22
+
+- section：Introduction
+
+- locator：Introduction P4 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：方法的概念和理论建立在社会建构主义、affordances、参与式方法和change agent上。
+
+- rhetorical_function_cn：预告理论框架。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：为理论部分提供路标。
+
+- evidence_pointer：Section 1, fourth paragraph
+
+### 23. Introduction P4 S4
+
+- order：23
+
+- section：Introduction
+
+- locator：Introduction P4 S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：方法从执行或受流程影响的专家用户和其他利益相关者的感知开始，不假设初始一致性。
+
+- rhetorical_function_cn：把哲学立场转化为初步设计选择。
+
+- depends_on_cn：社会建构主义和用户知识观。
+
+- sets_up_cn：为方法设计部分铺路。
+
+- evidence_pointer：Section 1, fourth paragraph end
+
+### 24. Introduction P5 S1
+
+- order：24
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称提出首个以用户感知为起点的基于理论的misfit诊断方法，并称其为artefactual contribution。
+
+- rhetorical_function_cn：尽早定位贡献。
+
+- depends_on_cn：研究目标。
+
+- sets_up_cn：让读者理解后续方法规范的重要性。
+
+- evidence_pointer：Section 1, fifth paragraph
+
+### 25. Introduction P5 S2
+
+- order：25
+
+- section：Introduction
+
+- locator：Introduction P5 S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：方法来自基于理论的canonical action research，并与evidence-based IS视角一致。
+
+- rhetorical_function_cn：为行动研究提供合法性。
+
+- depends_on_cn：贡献定位。
+
+- sets_up_cn：方法论部分。
+
+- evidence_pointer：Section 1, fifth paragraph
+
+### 26. Introduction P6 S1
+
+- order：26
+
+- section：Introduction
+
+- locator：Introduction P6 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告后续将依次呈现文献综述、理论背景与方法、方法论、主要发现和成功条件，最后是贡献与局限。
+
+- rhetorical_function_cn：提供全文路标。
+
+- depends_on_cn：前面所有段落。
+
+- sets_up_cn：读者对结构的预期。
+
+- evidence_pointer：Section 1, last paragraph
+
+### 27. Section 2.1 first paragraph
+
+- order：27
+
+- section：Literature Review
+
+- locator：Section 2.1 first paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：ES生命周期分为chartering、project、shakedown和onward and upward四阶段；前后期关注点不同。
+
+- rhetorical_function_cn：为定位本研究的阶段提供框架。
+
+- depends_on_cn：引言问题。
+
+- sets_up_cn：随后指出后期阶段缺乏干预研究。
+
+- evidence_pointer：Section 2.1
+
+### 28. Section 2.1 final paragraph
+
+- order：28
+
+- section：Literature Review
+
+- locator：Section 2.1 final paragraph
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有非正式应对研究较多，但onward and upward阶段正式misfit化解干预研究很少，没有行动研究和设计导向工作。
+
+- rhetorical_function_cn：确定方法论空白。
+
+- depends_on_cn：四阶段框架。
+
+- sets_up_cn：论证本研究采用行动研究的必要性。
+
+- evidence_pointer：Section 2.1 end
+
+### 29. Section 2.2 first paragraph
+
+- order：29
+
+- section：Literature Review
+
+- locator：Section 2.2 first paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有化解研究覆盖系统修改和流程适配等措施，但建议不是来自完整的解决流程。
+
+- rhetorical_function_cn：承认化解措施知识丰富。
+
+- depends_on_cn：无。
+
+- sets_up_cn：指出没有系统化过程。
+
+- evidence_pointer：Section 2.2
+
+### 30. Section 2.2 second paragraph
+
+- order：30
+
+- section：Literature Review
+
+- locator：Section 2.2 second paragraph
+
+- move_code：LIMITATION
+
+- paraphrase_cn：结构性诊断视角假设信息提供者有结构与技术知识，可能排除掌握流程知识的关键利益相关者。
+
+- rhetorical_function_cn：批评主导诊断视角。
+
+- depends_on_cn：前段关于专家评估的观点。
+
+- sets_up_cn：为以用户感知为中心的方法辩护。
+
+- evidence_pointer：Section 2.2
+
+### 31. Section 2.3 first paragraph
+
+- order：31
+
+- section：Literature Review
+
+- locator：Section 2.3 first paragraph
+
+- move_code：GAP
+
+- paraphrase_cn：尚无正式方法说明实践者如何诊断misfit并识别、选择和证明化解措施。
+
+- rhetorical_function_cn：以更正式的方式复述缺口。
+
+- depends_on_cn：前两节文献评论。
+
+- sets_up_cn：引入多元主义组织中的方法需求。
+
+- evidence_pointer：Section 2.3 first paragraph
+
+### 32. Section 2.3 second paragraph
+
+- order：32
+
+- section：Literature Review
+
+- locator：Section 2.3 second paragraph
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：多元主义组织中领导共享、系统与做法松散耦合，需要从用户获取misfit知识并支持共识形成。
+
+- rhetorical_function_cn：把缺口具体化为情境需求。
+
+- depends_on_cn：多元主义组织概念。
+
+- sets_up_cn：提出方法应具有的属性。
+
+- evidence_pointer：Section 2.3 second paragraph
+
+### 33. Table 1之前的说明
+
+- order：33
+
+- section：Literature Review
+
+- locator：Table 1之前的说明
+
+- move_code：LIMITATION
+
+- paraphrase_cn：表格总结现有研究簇与本文工作重点的差异。
+
+- rhetorical_function_cn：用表格压缩大量文献对比，强化缺口。
+
+- depends_on_cn：前文文字评论。
+
+- sets_up_cn：为理论和方法设计提供参照。
+
+- evidence_pointer：Table 1
+
+### 34. Section 3 first paragraph
+
+- order：34
+
+- section：Theoretical Foundations
+
+- locator：Section 3 first paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：理论在行动研究每一步发挥作用，本文选择affordances、用户参与和change agentry。
+
+- rhetorical_function_cn：预告理论选择。
+
+- depends_on_cn：文献缺口。
+
+- sets_up_cn：理论章节结构。
+
+- evidence_pointer：Section 3 first paragraph
+
+### 35. Section 3 second paragraph
+
+- order：35
+
+- section：Theoretical Foundations
+
+- locator：Section 3 second paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：misfit是社会建构的现实，通过感知可触及；个体感知可能不一致，但可形成集体客观化理解。
+
+- rhetorical_function_cn：把社会建构主义转化为诊断起点。
+
+- depends_on_cn：Searle哲学。
+
+- sets_up_cn：论证不能假设初始完美共识。
+
+- evidence_pointer：Section 3 second paragraph
+
+### 36. Section 3 third paragraph
+
+- order：36
+
+- section：Theoretical Foundations
+
+- locator：Section 3 third paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：affordance视角被认为对干预方法特别可操作。
+
+- rhetorical_function_cn：引入主要理论透镜。
+
+- depends_on_cn：前一段。
+
+- sets_up_cn：affordance actualization定义。
+
+- evidence_pointer：Section 3 third paragraph
+
+### 37. Section 3 fourth paragraph
+
+- order：37
+
+- section：Theoretical Foundations
+
+- locator：Section 3 fourth paragraph
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：misfit可概念化为ES与流程相关的affordances的实际化、部分实际化与未实际化的不当组合。
+
+- rhetorical_function_cn：给出可操作概念化。
+
+- depends_on_cn：affordance actualization文献。
+
+- sets_up_cn：诊断语言和记录方式。
+
+- evidence_pointer：Section 3 fourth paragraph
+
+### 38. Section 3 fifth paragraph
+
+- order：38
+
+- section：Theoretical Foundations
+
+- locator：Section 3 fifth paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：用户参与研究多集中在初始阶段，但其解释机制在后期同样重要。
+
+- rhetorical_function_cn：引入参与理论。
+
+- depends_on_cn：需要参与来进行misfit诊断。
+
+- sets_up_cn：用户参与进入方法原则。
+
+- evidence_pointer：Section 3 fifth paragraph
+
+### 39. Section 3 sixth paragraph
+
+- order：39
+
+- section：Theoretical Foundations
+
+- locator：Section 3 sixth paragraph
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：后期阶段用户因熟悉系统使用而更能提出相关调整。
+
+- rhetorical_function_cn：支持把参与引入onward and upward阶段。
+
+- depends_on_cn：用户参与理论。
+
+- sets_up_cn：change agent调节参与。
+
+- evidence_pointer：Section 3 sixth paragraph
+
+### 40. Section 3 seventh paragraph
+
+- order：40
+
+- section：Theoretical Foundations
+
+- locator：Section 3 seventh paragraph
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：change agent负责设计执行参与机会，可承担facilitator、advocate或orchestrator角色。
+
+- rhetorical_function_cn：引入第三理论支柱。
+
+- depends_on_cn：参与理论。
+
+- sets_up_cn：方法中change agent的角色设计。
+
+- evidence_pointer：Section 3 seventh paragraph
+
+### 41. Section 4 first paragraph
+
+- order：41
+
+- section：Design of the Method
+
+- locator：Section 4 first paragraph
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：基于文献形成三条初始指导原则：用affordance共享理解、参与式诊断与选择、change agentry。
+
+- rhetorical_function_cn：把理论转化为设计要求。
+
+- depends_on_cn：理论部分。
+
+- sets_up_cn：方法步骤的详细描述。
+
+- evidence_pointer：Section 4 first paragraph
+
+### 42. Section 4 second paragraph
+
+- order：42
+
+- section：Design of the Method
+
+- locator：Section 4 second paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：方法启动后由change agent将问题呈现给利益相关者，通过对话反复探查misfit来源并以affordance状态组合记录诊断。
+
+- rhetorical_function_cn：说明诊断步骤如何运作。
+
+- depends_on_cn：三原则。
+
+- sets_up_cn：为行动研究中的诊断活动提供蓝图。
+
+- evidence_pointer：Section 4 second paragraph
+
+### 43. Section 4 third paragraph
+
+- order：43
+
+- section：Design of the Method
+
+- locator：Section 4 third paragraph
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：解决方案被设计为affordance重组，可能调整ES、流程、角色或任务；采用mindful approach，不是确定性策略。
+
+- rhetorical_function_cn：说明解决方案步骤。
+
+- depends_on_cn：affordance诊断。
+
+- sets_up_cn：后续措施选择标准。
+
+- evidence_pointer：Section 4 third paragraph
+
+### 44. Section 5 first paragraph
+
+- order：44
+
+- section：Research Methodology
+
+- locator：Section 5 first paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为评估方法和细化原则，采用canonical action research。
+
+- rhetorical_function_cn：解释为什么选择行动研究。
+
+- depends_on_cn：方法设计。
+
+- sets_up_cn：CAR五原则的实施。
+
+- evidence_pointer：Section 5 first paragraph
+
+### 45. Section 5.1 first paragraph
+
+- order：45
+
+- section：Research Methodology
+
+- locator：Section 5.1 first paragraph
+
+- move_code：CONTEXT
+
+- paraphrase_cn：介绍研究现场Alpha大学医院、EHR模块以及第一作者作为change agent的身份。
+
+- rhetorical_function_cn：建立案例背景和角色安排。
+
+- depends_on_cn：CAR总体设计。
+
+- sets_up_cn：解释为什么change agent具有合法性。
+
+- evidence_pointer：Section 5.1
+
+### 46. Section 5.2 table前说明
+
+- order：46
+
+- section：Research Methodology
+
+- locator：Section 5.2 table前说明
+
+- move_code：TRANSITION
+
+- paraphrase_cn：说明方法步骤解决实际问题，CAR步骤服务研究兴趣，表2给出两者对应关系。
+
+- rhetorical_function_cn：把实践方法与研究方法对齐。
+
+- depends_on_cn：CAR框架和方法设计。
+
+- sets_up_cn：后续实证结果按CAR阶段组织。
+
+- evidence_pointer：Section 5.2 and Table 2
+
+### 47. Section 5.3 data analysis paragraph
+
+- order：47
+
+- section：Research Methodology
+
+- locator：Section 5.3 data analysis paragraph
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：研究使用abductive coding先deductive按affordance种类编码，再发现新的细化类别。
+
+- rhetorical_function_cn：说明分析方法的严格性。
+
+- depends_on_cn：理论基础。
+
+- sets_up_cn：附录B中的编码结果。
+
+- evidence_pointer：Section 5.3 and Appendix B
+
+### 48. Section 6.1 start
+
+- order：48
+
+- section：Findings
+
+- locator：Section 6.1 start
+
+- move_code：RESULT
+
+- paraphrase_cn：诊断步骤通过过程图表示三个筛查追踪affordance，参与者在迭代中建立了更细致的理解。
+
+- rhetorical_function_cn：报告诊断阶段的主要过程结果。
+
+- depends_on_cn：方法诊断步骤。
+
+- sets_up_cn：随后呈现发现的misfit类型。
+
+- evidence_pointer：Section 6.1 and Table 4
+
+### 49. Section 6.1 stakeholder feedback
+
+- order：49
+
+- section：Findings
+
+- locator：Section 6.1 stakeholder feedback
+
+- move_code：RESULT
+
+- paraphrase_cn：儿科主任和ORL医生表示过程图明确了数据丢失的位置和原因。
+
+- rhetorical_function_cn：用参与者表述支持共享理解形成。
+
+- depends_on_cn：地图和会议。
+
+- sets_up_cn：说明方法有效性的一个证据。
+
+- evidence_pointer：Section 6.1
+
+### 50. Section 6.2 first paragraph
+
+- order：50
+
+- section：Findings
+
+- locator：Section 6.2 first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：方案构思会议使各小组理解流程依赖、比较各自感知的affordance，并理解其他小组不认识的affordance。
+
+- rhetorical_function_cn：报告解决方案构思阶段成果。
+
+- depends_on_cn：诊断阶段。
+
+- sets_up_cn：展示具体共识措施。
+
+- evidence_pointer：Section 6.2
+
+### 51. Section 6.2 quotes
+
+- order：51
+
+- section：Findings
+
+- locator：Section 6.2 quotes
+
+- move_code：RESULT
+
+- paraphrase_cn：IT分析师、助产士等人提出简化查询、周末自己预约、安全自动传输等建议，形成集体方案。
+
+- rhetorical_function_cn：以对话证据展示参与式共识。
+
+- depends_on_cn：solution conception meeting。
+
+- sets_up_cn：Table 5中的措施来源。
+
+- evidence_pointer：Section 6.2
+
+### 52. Section 6.3 evaluation metrics
+
+- order：52
+
+- section：Findings
+
+- locator：Section 6.3 evaluation metrics
+
+- move_code：RESULT
+
+- paraphrase_cn：两年后数据完整率超过90%，漏咨询比例从46%降至22%，出院前预约率从42%升至77%，随访率从54%升至78%。
+
+- rhetorical_function_cn：提供方法有效性的量化证据。
+
+- depends_on_cn：实施完成。
+
+- sets_up_cn：讨论部分中关于成功的判断。
+
+- evidence_pointer：Section 6.3
+
+### 53. Section 6.3 final quote
+
+- order：53
+
+- section：Findings
+
+- locator：Section 6.3 final quote
+
+- move_code：RESULT
+
+- paraphrase_cn：发起干预的ORL医生表示无法想象用其他方式完成这一化解。
+
+- rhetorical_function_cn：用发起者评价强化方法贡献。
+
+- depends_on_cn：评价数据。
+
+- sets_up_cn：反思成功条件。
+
+- evidence_pointer：Section 6.3
+
+### 54. Section 6.4 reflection paragraph
+
+- order：54
+
+- section：Findings
+
+- locator：Section 6.4 reflection paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：反思识别出有效方法的条件：发起者要有权威、需要高效果参与、change agent兼具合法性和专业知识，且可能需要多轮迭代。
+
+- rhetorical_function_cn：把现场经验提炼为条件。
+
+- depends_on_cn：评价结果。
+
+- sets_up_cn：Discussion中的正式边界和原则。
+
+- evidence_pointer：Section 6.4
+
+### 55. Section 7 first paragraph
+
+- order：55
+
+- section：Discussion
+
+- locator：Section 7 first paragraph
+
+- move_code：RESULT
+
+- paraphrase_cn：干预揭示用户未认识的affordance和用户发现的系统缺陷，所有利益相关者看到实际化、部分实际化和竞争依赖情境。
+
+- rhetorical_function_cn：总结方法带来的认识变化。
+
+- depends_on_cn：全部现场结果。
+
+- sets_up_cn：随后逐节说明方法规范。
+
+- evidence_pointer：Section 7 first paragraph
+
+### 56. Section 7.1 trigger paragraph
+
+- order：56
+
+- section：Discussion
+
+- locator：Section 7.1 trigger paragraph
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：方法由流程所有者发出信号触发；misfit的criticality最好基于确凿证据建立。
+
+- rhetorical_function_cn：明确方法适用范围的第一步。
+
+- depends_on_cn：现场成功条件。
+
+- sets_up_cn：后续步骤定义。
+
+- evidence_pointer：Section 7.1
+
+### 57. Section 7.2 steps and outcomes
+
+- order：57
+
+- section：Discussion
+
+- locator：Section 7.2 steps and outcomes
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：方法包含misfit diagnosis、solution conception、implementation和evaluation，以as-is和to-be过程图为工具。
+
+- rhetorical_function_cn：给出正式方法步骤和产出。
+
+- depends_on_cn：反思结果。
+
+- sets_up_cn：Figure 2和Table 6汇总。
+
+- evidence_pointer：Section 7.2, Figure 2, Table 6
+
+### 58. Section 7.3 first principle
+
+- order：58
+
+- section：Discussion
+
+- locator：Section 7.3 first principle
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：affordance视角确实促进共享理解，但也要平衡外化理解的成本与收益。
+
+- rhetorical_function_cn：既肯定原则又加限制。
+
+- depends_on_cn：Glinz和Fricker的共享理解文献。
+
+- sets_up_cn：后续对参与和change agentry原则的修正。
+
+- evidence_pointer：Section 7.3
+
+### 59. Section 7.3 second principle
+
+- order：59
+
+- section：Discussion
+
+- locator：Section 7.3 second principle
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：研究支持选择性共识式参与，而非广泛咨询式参与。
+
+- rhetorical_function_cn：修正第二条原则。
+
+- depends_on_cn：参与效果证据。
+
+- sets_up_cn：说明为什么共识式在多元主义组织中有效。
+
+- evidence_pointer：Section 7.3
+
+### 60. Section 7.3 third principle
+
+- order：60
+
+- section：Discussion
+
+- locator：Section 7.3 third principle
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：研究支持change agent在advocate、facilitator和orchestrator之间自适应切换。
+
+- rhetorical_function_cn：修正第三条原则。
+
+- depends_on_cn：change agent角色证据。
+
+- sets_up_cn：为实践建议提供依据。
+
+- evidence_pointer：Section 7.3
+
+### 61. Section 7.4 boundary conditions
+
+- order：61
+
+- section：Discussion
+
+- locator：Section 7.4 boundary conditions
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：方法适用于ES生命周期后期、多元主义组织和业务流程级misfit。
+
+- rhetorical_function_cn：限制一般化主张。
+
+- depends_on_cn：案例特征。
+
+- sets_up_cn：贡献声明不会过度扩张。
+
+- evidence_pointer：Section 7.4
+
+### 62. Section 7.5 contributions
+
+- order：62
+
+- section：Discussion
+
+- locator：Section 7.5 contributions
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：主要贡献是第一个完整说明的Org-ES misfit诊断与化解方法，具备触发、步骤、原则和边界。
+
+- rhetorical_function_cn：正式声明贡献。
+
+- depends_on_cn：前面所有章节。
+
+- sets_up_cn：研究与实践启示。
+
+- evidence_pointer：Section 7.5
+
+### 63. Section 7.6 limitations
+
+- order：63
+
+- section：Discussion
+
+- locator：Section 7.6 limitations
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：研究受限于单一组织、EHR类型、流程复杂度和未解决多misfit优先级问题。
+
+- rhetorical_function_cn：承认边界，铺垫未来研究。
+
+- depends_on_cn：贡献声明。
+
+- sets_up_cn：结论部分。
+
+- evidence_pointer：Section 7.6
+
+### 64. Section 7.7 concluding remarks
+
+- order：64
+
+- section：Discussion
+
+- locator：Section 7.7 concluding remarks
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论重申方法促进利益相关者对话和共享诊断化解，并希望未来研究丰富这一方法。
+
+- rhetorical_function_cn：收束全文。
+
+- depends_on_cn：全文。
+
+- sets_up_cn：无，结束。
+
+- evidence_pointer：Section 7.7
+
+## 写作技术
+
+- gap_construction_cn：作者采用逐层收缩的方式制造缺口：从ES成功与失败并存，到misfit导致失败，再到misfit诊断缺少正式方法，最后聚焦于多元主义组织中以用户感知为起点的共享诊断。每个层次都引用现有研究，并在Table 1中把先前研究簇与本文工作并置。
+
+- signposting_cn：从摘要、引言末尾到每节开头均有明确路标；Table 2把CAR阶段和方法步骤对应，Figure 2展示方法流程，Table 6给出方法一览，Table 7总结贡献，让读者始终知道自己在论证链中的位置。
+
+- transition_logic_cn：研究阶段之间用CAR五阶段作为自然过渡；每个Finding子节对应CAR一步；Discussion再按触发、步骤、原则和边界分别重述方法，与前面形成闭环。
+
+- claim_evidence_rhythm_cn：每个重要主张后紧跟数据来源或参与者表述：诊断主张跟过程图和会议引文；解决方案主张跟措施表和参会者建议；有效性主张跟量化指标和访谈；反思主张跟change agent观察。
+
+- benchmark_narrative_cn：本文没有传统benchmark，而是把2014年官方网络报告中的低绩效数字嵌入问题叙事，使misfit的严重性毋庸置疑；评价阶段用同一个指标体系的改善作为方法有效的证据，形成前后对照叙事。
+
+- theory_return_cn：Discussion不是简单复述数据，而是把每条初始原则当作待检验命题，用现场证据修正为“通过affordance建立共享理解、选择性共识式参与、适应性change agentry”，从而让理论在结果中重新出现。
+
+- contribution_positioning_cn：作者将贡献定位为artefactual，并强调“first fully specified method”；通过Table 7与先前知识对比，避免把贡献说成单纯案例经验。
+
+- novelty_protection_cn：通过正式方法表述、明确边界条件和未来研究问题，把案例结果包装为可复制的设计知识；通过强调affordance lens和参与策略而非单纯成功指标，防止贡献被视为一次性性能结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：先用广泛现实问题开场，再逐步收窄到具体现象和文献缺口；在引言末尾预告全文结构。
+
+- research_job_cn：系统梳理ES生命周期、misfit分类、诊断和化解策略文献，确定一个前人未解决的干预性缺口。
+
+- required_evidence_cn：需要证明misfit持续导致失败，且已有文献缺少正式诊断化解方法，尤其缺少以用户感知为起点的后期阶段干预研究。
+
+- transition_to_next_cn：用“本研究填补这一缺口”引出理论和方法。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用理论章节交代哲学立场和核心概念，并把理论命题转化为方法要求。
+
+- research_job_cn：选择与问题契合的理论，如affordance actualization、参与理论和change agentry，给出misfit的操作化定义。
+
+- required_evidence_cn：需要展示理论概念能连接到诊断语言和参与机制，而不是仅作为标签。
+
+- transition_to_next_cn：从理论命题过渡到方法设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：明确写出方法包含触发条件、步骤、角色、产出和指导原则。
+
+- research_job_cn：设计可操作的方法流程，说明每一步由谁做、做什么、产出什么。
+
+- required_evidence_cn：需要方法足够具体，使后续行动研究有可遵循的干预蓝图。
+
+- transition_to_next_cn：用“为评估方法，我们进行行动研究”引出方法论。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用canonical action research框架描述现场、角色、数据收集和分析过程。
+
+- research_job_cn：在真实组织中实施方法，系统收集过程数据和前后指标。
+
+- required_evidence_cn：需要展示研究者与组织的关系、数据来源、分析编码过程和干预周期。
+
+- transition_to_next_cn：用CAR阶段组织实证结果。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：按诊断、规划、实施、评价和反思逐步报告结果，并引用参与者和指标作为证据。
+
+- research_job_cn：将收集的数据转化为misfit诊断、方案共识、实施结果和条件清单。
+
+- required_evidence_cn：需要证明每个阶段有实际产出，并有可核查的数据支持效果判断。
+
+- transition_to_next_cn：用反思结果进入讨论。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：在讨论中把现场经验升华为修正后的原则、边界条件和贡献。
+
+- research_job_cn：将初始方法原则与证据对照，提炼可复用设计知识，说明局限。
+
+- required_evidence_cn：需要能区分哪些工具/角色/流程导致了成功，以及哪些条件限制了适用性。
+
+- transition_to_next_cn：用未来研究建议结束。
+
+### most_transferable_moves_cn
+
+1. 把理论概念转化为用户可共用的诊断语言，例如用affordance actualization状态描述misfit。
+
+2. 用as-is/to-be过程图作为跨专业共享理解的可见工具。
+
+3. 把干预方法嵌入canonical action research，使实践流程和研究流程相互对应。
+
+4. 用基线指标和随访指标建立前后对照，使单案例研究仍有客观证据。
+
+5. 在Discussion中逐条修正初始原则，而非只报告成功。
+
+6. 用边界条件保护贡献的一般性。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要一个深度嵌入组织的change agent，既熟悉业务又懂ES，还拥有组织合法性；本文中由第一作者作为医院医生和部门负责人承担。
+
+2. 需要长时间现场访问和大量数据：13个月干预、2800封邮件、超100小时观察、多次会议。
+
+3. 需要利益相关者愿意投入多轮会议和决策，这在高负荷医院环境中并不普遍。
+
+4. 需要获得内部绩效数据、区域网络报告以及EHR查询数据，普通研究者难以快速复制。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只在文中使用affordance、participation、change agentry等术语，而未提供相应的过程工具和参与机制。
+
+2. 不能把单案例的前后改善直接写成方法有效，需要展示证据链和替代解释。
+
+3. 不能只列出方法步骤而不说明每个步骤的产出、角色和验证方式。
+
+4. 不能忽略边界条件，否则贡献会被视为过度一般化。
+
+- single_best_description_of_the_routine_cn：把理论概念转成一套有步骤、有角色、有产出的方法，用一个研究者亲自入场的行动研究证明可行，再通过反思把现场经验提炼为边界和原则。
+
+## 分析边界
+
+全文以OCR/文本格式提供，个别表格、图A1和图像中的细节可能不完整；分析基于文章正文、表格和附录，未能核实最终排版页码；行动研究为单案例，因此对贡献一般化程度的判断主要依据作者声明和内部证据一致性。

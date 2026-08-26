@@ -1,0 +1,3041 @@
+# Mitigating Exposure Bias for Recommendations in Physical Spaces: An Unbiased Pairwise Ranking Approach Using Spatial Movement：ISR 句段级微观图谱
+
+- 作者：Jiangning He; Weikun Wu; Fan Zhang; Zhepeng (Lionel) Li
+- 年份：2026
+- DOI：10.1287/isre.2023.0100
+- 源文件：28582_2026_mitigating-exposure-bias-for-recommendations-in-physical-spaces-an-unbiased-pairwise-ranking-app.md
+- 置信度：0.73
+
+## 核实后的宏观骨架
+
+全文按设计科学研究弧线组织：问题概念化（P3M与曝光偏差）→ 文献缺口（无偏pairwise学习、物理空间动态移动建模）→ 方法构建（无偏学习目标、运动感知模型、交替学习算法）→ 实证评价（主实验benchmark、消融、收入模拟、公平性分析）→ 结论（三点研究贡献、管理启示、假设与未来方向）。文章把‘物理空间中行人移动×空间布局造成的不均匀曝光’作为核心机制，把所有算法选择都锚定在该机制上，最终把技术精度提升上升为多利益相关者价值与可复用设计知识。
+
+## 摘要逐句图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- locator：Abstract P1 S1
+
+- paraphrase_cn：数字平台个性化推荐的成功激发了把这一进展扩展到物理空间的兴趣。
+
+- move_code：CONTEXT
+
+- statement_status：fact
+
+- why_here_cn：用平台成功为全文建立应用背景和动机。
+
+- inherits_from_previous_cn：无，全文起点。
+
+- changes_argument_state_cn：把读者放置在‘离线推荐值得做’的问题空间中。
+
+- sets_up_next_cn：为引入实体空间推荐问题P3M做铺垫。
+
+- failure_if_removed_cn：缺少背景锚点，后续问题显得突兀。
+
+- evidence_pointer：Abstract P1
+
+### 2. Abstract P2 S1
+
+- order：2
+
+- locator：Abstract P2 S1
+
+- paraphrase_cn：据此提出一般化问题P3M：物理空间中行人移动的POI推荐。
+
+- move_code：RQ_OR_OBJECTIVE
+
+- statement_status：theory_claim
+
+- why_here_cn：在摘要首句给出研究对象的正式名称。
+
+- inherits_from_previous_cn：承接离线推荐扩展动机。
+
+- changes_argument_state_cn：把‘物理空间推荐’缩成一个可命名的研究问题。
+
+- sets_up_next_cn：需要解释为什么该问题难。
+
+- failure_if_removed_cn：读者不知道全文针对什么任务。
+
+- evidence_pointer：Abstract P2 S1
+
+### 3. Abstract P2 S2–S3
+
+- order：3
+
+- locator：Abstract P2 S2–S3
+
+- paraphrase_cn：P3M的关键障碍是曝光偏差：曝光概率不均匀时，把所有未观测交互当负反馈会污染学习。
+
+- move_code：MECHANISM
+
+- statement_status：theory_claim
+
+- why_here_cn：点出问题内部的核心阻碍机制。
+
+- inherits_from_previous_cn：P3M问题需要识别难点。
+
+- changes_argument_state_cn：把任务难点定位为曝光偏差而非纯精度问题。
+
+- sets_up_next_cn：需要说明该偏差在物理空间中如何不同于数字平台。
+
+- failure_if_removed_cn：方法动机缺失。
+
+- evidence_pointer：Abstract P2 S2–S3
+
+### 4. Abstract P3 S1
+
+- order：4
+
+- locator：Abstract P3 S1
+
+- paraphrase_cn：与既有数字平台去偏文献不同，本文聚焦物理空间中行人移动与空间布局动态交互这一独特偏差来源。
+
+- move_code：GAP
+
+- statement_status：author_inference
+
+- why_here_cn：在摘要中用一句话完成与既有去偏文献的区隔。
+
+- inherits_from_previous_cn：曝光偏差概念是前提。
+
+- changes_argument_state_cn：把研究定位成物理空间特有的去偏问题。
+
+- sets_up_next_cn：为方法必须含空间移动建模提供理由。
+
+- failure_if_removed_cn：贡献的独特性消失。
+
+- evidence_pointer：Abstract P3 S1
+
+### 5. Abstract P3 S2–S3
+
+- order：5
+
+- locator：Abstract P3 S2–S3
+
+- paraphrase_cn：为此提出UMPR，包含无偏pairwise学习、运动感知模型和交替学习算法三要素。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：预告方法总体架构，方便读者追读正文。
+
+- inherits_from_previous_cn：针对上述独特偏差来源。
+
+- changes_argument_state_cn：从问题诊断转向方案承诺。
+
+- sets_up_next_cn：为结果句提供方法对象。
+
+- failure_if_removed_cn：方法名称没有内容。
+
+- evidence_pointer：Abstract P3 S2–S3
+
+### 6. Abstract P4 S1
+
+- order：6
+
+- locator：Abstract P4 S1
+
+- paraphrase_cn：真实商场数据证明UMPR能向步行消费者提供优于SOTA基准的商店推荐。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出核心实证结论。
+
+- inherits_from_previous_cn：UMPR设计是实验对象。
+
+- changes_argument_state_cn：从方案陈述升级为有证据的成就声明。
+
+- sets_up_next_cn：引出价值延伸问题。
+
+- failure_if_removed_cn：摘要缺少结果证据。
+
+- evidence_pointer：Abstract P4 S1
+
+### 7. Abstract P4 S2
+
+- order：7
+
+- locator：Abstract P4 S2
+
+- paraphrase_cn：进一步研究发现性能提升可转化为货币价值并保持对顾客和租户的人文公平。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：把技术结果扩展到经济和社会维度。
+
+- inherits_from_previous_cn：以主性能优势为前提。
+
+- changes_argument_state_cn：使贡献从单一精度扩展为多利益相关者价值。
+
+- sets_up_next_cn：为摘要收尾‘总体意义’提供依据。
+
+- failure_if_removed_cn：IS层面的价值主张被削弱。
+
+- evidence_pointer：Abstract P4 S2
+
+### 8. Abstract P5 S1
+
+- order：8
+
+- locator：Abstract P5 S1
+
+- paraphrase_cn：总体而言，研究强调用充分的空间移动建模解决曝光偏差，为实体景观中的有效推荐铺路。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：用一句话总结全文方法论立场。
+
+- inherits_from_previous_cn：综合前面所有结果。
+
+- changes_argument_state_cn：从具体结果提升为学科性教训。
+
+- sets_up_next_cn：为引言展开提供主旨句。
+
+- failure_if_removed_cn：摘要缺少升华结尾。
+
+- evidence_pointer：Abstract P5 S1
+
+## 引言逐句图谱
+
+### 1. Introduction P1 S1
+
+- order：1
+
+- locator：Introduction P1 S1
+
+- paraphrase_cn：个性化推荐已在线平台创造销售和转化等显著经济价值。
+
+- move_code：CONTEXT
+
+- statement_status：prior_literature
+
+- why_here_cn：以平台成功作为全文出发点。
+
+- inherits_from_previous_cn：无。
+
+- changes_argument_state_cn：建立‘推荐有效’的总前提。
+
+- sets_up_next_cn：引出线下移植的动机。
+
+- failure_if_removed_cn：离线推荐动机没有来源。
+
+- evidence_pointer：Introduction P1 S1
+
+### 2. Introduction P1 S2–S3
+
+- order：2
+
+- locator：Introduction P1 S2–S3
+
+- paraphrase_cn：实体零售商正在寻求把个性化服务从线上转到线下，如Cheetah Mobile商场机器人和Amazon Dash Cart智能购物车。
+
+- move_code：PRACTICAL_STAKES
+
+- statement_status：fact
+
+- why_here_cn：用两个代表性企业案例说明线下推荐已真实发生。
+
+- inherits_from_previous_cn：承接平台成功的背景。
+
+- changes_argument_state_cn：从‘可能有用’推进到‘正在部署’。
+
+- sets_up_next_cn：为P3M的一般化问题提供实例。
+
+- failure_if_removed_cn：应用场景和商业紧迫性减弱。
+
+- evidence_pointer：Introduction P1 S2–S3
+
+### 3. Introduction P1 S4
+
+- order：3
+
+- locator：Introduction P1 S4
+
+- paraphrase_cn：因此，在物理空间中推荐是提升体验、定向营销和增加收入的可行方向。
+
+- move_code：AUTHOR_INFERENCE
+
+- statement_status：author_inference
+
+- why_here_cn：对案例做结论性收束。
+
+- inherits_from_previous_cn：案例证据支持。
+
+- changes_argument_state_cn：把陈述变成研究机会声明。
+
+- sets_up_next_cn：为P3M定义做总起。
+
+- failure_if_removed_cn：缺少从案例到问题的桥梁。
+
+- evidence_pointer：Introduction P1 S4
+
+### 4. Introduction P2 S1–S2
+
+- order：4
+
+- locator：Introduction P2 S1–S2
+
+- paraphrase_cn：物理空间推荐可概括为P3M问题，包含多样化POI、特定空间布局和行人移动三个特征。
+
+- move_code：PHENOMENON
+
+- statement_status：theory_claim
+
+- why_here_cn：在引言中正式化研究对象。
+
+- inherits_from_previous_cn：承接物理空间推荐机会。
+
+- changes_argument_state_cn：把模糊场景变成三要素定义。
+
+- sets_up_next_cn：为后续空间网络、曝光和移动建模提供概念锚。
+
+- failure_if_removed_cn：问题定义不成立。
+
+- evidence_pointer：Introduction P2 S1–S2
+
+### 5. Introduction P2 S3–S5
+
+- order：5
+
+- locator：Introduction P2 S3–S5
+
+- paraphrase_cn：空间布局影响顾客移动和POI被访问/曝光的可能性；访问序列反映偏好和决策路径；推荐目标是预测下一个POI。
+
+- move_code：MECHANISM
+
+- statement_status：theory_claim
+
+- why_here_cn：解释为什么三要素直接决定推荐任务。
+
+- inherits_from_previous_cn：基于P3M三特征。
+
+- changes_argument_state_cn：把布局和移动提升为影响曝光的机制变量。
+
+- sets_up_next_cn：为曝光偏差的独特性做铺垫。
+
+- failure_if_removed_cn：布局和移动在方法中的关键作用缺少铺垫。
+
+- evidence_pointer：Introduction P2 S3–S5
+
+### 6. Introduction P2 S6–S7
+
+- order：6
+
+- locator：Introduction P2 S6–S7
+
+- paraphrase_cn：P3M覆盖商场、超市、博览馆等场景，在中等以上规模、POI众多且顾客异质的物理空间中特别有价值。
+
+- move_code：BOUNDARY
+
+- statement_status：author_inference
+
+- why_here_cn：划定问题适用范围。
+
+- inherits_from_previous_cn：基于P3M定义。
+
+- changes_argument_state_cn：表明研究不只针对单一商场。
+
+- sets_up_next_cn：为结论中的跨场景推广提供伏笔。
+
+- failure_if_removed_cn：适用边界不清晰。
+
+- evidence_pointer：Introduction P2 S6–S7
+
+### 7. Introduction P3 S1–S2
+
+- order：7
+
+- locator：Introduction P3 S1–S2
+
+- paraphrase_cn：曝光偏差是P3M的关键阻碍：未观测交互不一定是负反馈，不均匀曝光会把有偏标签引入学习。
+
+- move_code：MECHANISM
+
+- statement_status：theory_claim
+
+- why_here_cn：在问题定义后立即诊断核心阻碍。
+
+- inherits_from_previous_cn：P3M访问序列是隐式反馈。
+
+- changes_argument_state_cn：把任务难点从预测改为去偏学习。
+
+- sets_up_next_cn：需要讨论物理空间中偏差的特殊来源。
+
+- failure_if_removed_cn：方法动机失去支点。
+
+- evidence_pointer：Introduction P3 S1–S2
+
+### 8. Introduction P3 S3–S4
+
+- order：8
+
+- locator：Introduction P3 S3–S4
+
+- paraphrase_cn：P3M中曝光不均由流行度、空间布局和移动路径共同影响；沿路径且可见性高的店更易曝光。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：具体化物理空间曝光的来源。
+
+- inherits_from_previous_cn：曝光偏差概念。
+
+- changes_argument_state_cn：将研究焦点收窄到行人移动与空间布局的动态交互。
+
+- sets_up_next_cn：支持‘需要动态建模移动’的结论。
+
+- failure_if_removed_cn：物理空间机制笼统。
+
+- evidence_pointer：Introduction P3 S3–S4
+
+### 9. Introduction P3 S5
+
+- order：9
+
+- locator：Introduction P3 S5
+
+- paraphrase_cn：因此，动态交互是物理空间曝光偏差的主要来源，但这一方面在既有研究中未被充分探索。
+
+- move_code：GAP
+
+- statement_status：author_inference
+
+- why_here_cn：把机制诊断变成研究空白声明。
+
+- inherits_from_previous_cn：前两句的机制阐述。
+
+- changes_argument_state_cn：确立本文的贡献位置。
+
+- sets_up_next_cn：为方法必须包含移动建模提供理由。
+
+- failure_if_removed_cn：贡献独特性消失。
+
+- evidence_pointer：Introduction P3 S5
+
+### 10. Introduction P4 S1–S2
+
+- order：10
+
+- locator：Introduction P4 S1–S2
+
+- paraphrase_cn：用商场视觉范围例子说明曝光随位置和视觉扇区变化：D、E、O可见，F、G不可见。
+
+- move_code：PHENOMENON
+
+- statement_status：author_inference
+
+- why_here_cn：用具体场景让抽象机制可感知。
+
+- inherits_from_previous_cn：承接动态交互机制。
+
+- changes_argument_state_cn：把机制落实到移动状态变量（位置、方向、视觉范围）。
+
+- sets_up_next_cn：支撑‘曝光取决于移动状态’的操作化。
+
+- failure_if_removed_cn：方法对视觉范围的依赖缺少动机。
+
+- evidence_pointer：Introduction P4 S1–S2, Figure 1
+
+### 11. Introduction P4 S3–S5
+
+- order：11
+
+- locator：Introduction P4 S3–S5
+
+- paraphrase_cn：顾客从D移动到F时，E和O这类曝光但未访问的店很可能是负样本，而H这种未曝光的店可能正也可能负。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：演示负样本标签的两类错误来源。
+
+- inherits_from_previous_cn：基于视觉范围例子。
+
+- changes_argument_state_cn：把‘曝光偏差’翻译成具体标签错误。
+
+- sets_up_next_cn：为去偏组件的概率解释做铺垫。
+
+- failure_if_removed_cn：为什么需要概率化去偏不清楚。
+
+- evidence_pointer：Introduction P4 S3–S5
+
+### 12. Introduction P4 S6
+
+- order：12
+
+- locator：Introduction P4 S6
+
+- paraphrase_cn：若把所有未访问店都当负样本，会严重偏差、放大马太效应、削弱探索体验。
+
+- move_code：CONSEQUENCE
+
+- statement_status：author_inference
+
+- why_here_cn：交代不纠正偏差的后果。
+
+- inherits_from_previous_cn：标签错误机制。
+
+- changes_argument_state_cn：把去偏从技术选择提升为管理与伦理需求。
+
+- sets_up_next_cn：引出‘必须动态建模移动并纳入无偏推荐’的主张。
+
+- failure_if_removed_cn：去偏的紧迫性缺乏。
+
+- evidence_pointer：Introduction P4 S6
+
+### 13. Introduction P4 S7
+
+- order：13
+
+- locator：Introduction P4 S7
+
+- paraphrase_cn：因此必须动态建模物理空间中的行人移动并纳入无偏推荐。
+
+- move_code：REQUIREMENT
+
+- statement_status：design_decision
+
+- why_here_cn：从问题机制转换到设计要求。
+
+- inherits_from_previous_cn：偏差后果。
+
+- changes_argument_state_cn：确定UMPR方法的方向。
+
+- sets_up_next_cn：为方法部分的两大组件（移动建模与无偏学习）立标。
+
+- failure_if_removed_cn：方法组件没有需求支撑。
+
+- evidence_pointer：Introduction P4 S7
+
+### 14. Introduction P5 S1
+
+- order：14
+
+- locator：Introduction P5 S1
+
+- paraphrase_cn：方法层面本文与无偏推荐和空间感知推荐两个研究流紧密相关，文献综述显示两个空白。
+
+- move_code：SIGNPOSTING
+
+- statement_status：author_inference
+
+- why_here_cn：告知读者将用两类文献定位贡献。
+
+- inherits_from_previous_cn：承接‘需要无偏移动建模’。
+
+- changes_argument_state_cn：切换到文献定位。
+
+- sets_up_next_cn：依次介绍两个缺口。
+
+- failure_if_removed_cn：文献综述结构不明确。
+
+- evidence_pointer：Introduction P5 S1
+
+### 15. Introduction P5 S2–S4
+
+- order：15
+
+- locator：Introduction P5 S2–S4
+
+- paraphrase_cn：现有去偏分为启发式和模型式；启发式因去偏与学习脱节易次优，模型式主要服务pointwise，缺少pairwise去偏框架。
+
+- move_code：LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：构成第一个方法缺口。
+
+- inherits_from_previous_cn：曝光偏差需要算法去偏。
+
+- changes_argument_state_cn：点明‘模型去偏×pairwise’的空白。
+
+- sets_up_next_cn：为无偏pairwise学习贡献做铺垫。
+
+- failure_if_removed_cn：贡献一没有靶子。
+
+- evidence_pointer：Introduction P5 S2–S4
+
+### 16. Introduction P5 S5–S7
+
+- order：16
+
+- locator：Introduction P5 S5–S7
+
+- paraphrase_cn：既有研究主要处理数字平台页面级曝光，物理空间的路径级视觉接触及位置/方向/视觉范围的动态移动未被充分研究。
+
+- move_code：LIMITATION
+
+- statement_status：author_inference
+
+- why_here_cn：构成第二个空间建模缺口。
+
+- inherits_from_previous_cn：物理空间曝光机制。
+
+- changes_argument_state_cn：点明‘物理空间移动×布局’空白。
+
+- sets_up_next_cn：为运动感知模型贡献做铺垫。
+
+- failure_if_removed_cn：贡献二没有靶子。
+
+- evidence_pointer：Introduction P5 S5–S7
+
+### 17. Introduction P6 S1–S3
+
+- order：17
+
+- locator：Introduction P6 S1–S3
+
+- paraphrase_cn：为填补上述空白，本文率先处理行人移动引发的曝光偏差，正式提出P3M和UMPR，以楼层平面图和访问序列为输入输出推荐。
+
+- move_code：RQ_OR_OBJECTIVE
+
+- statement_status：contribution_claim
+
+- why_here_cn：从缺口跳转到本文目标。
+
+- inherits_from_previous_cn：两个文献空白。
+
+- changes_argument_state_cn：明确本文的正面主张。
+
+- sets_up_next_cn：为方法框架总览做引子。
+
+- failure_if_removed_cn：研究目标不清晰。
+
+- evidence_pointer：Introduction P6 S1–S3, Figure 2
+
+### 18. Introduction P6 S4–S8
+
+- order：18
+
+- locator：Introduction P6 S4–S8
+
+- paraphrase_cn：核心创新是融合行人移动建模与无偏pairwise学习；包含去偏组件、交替学习算法，并有理论保证、真实数据优势、经济与公平结果。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：在引言末路标式预告方法贡献和实证贡献。
+
+- inherits_from_previous_cn：本文目标。
+
+- changes_argument_state_cn：把方法细节浓缩为可追踪的论证承诺。
+
+- sets_up_next_cn：为Related Work和Method部分提供阅读地图。
+
+- failure_if_removed_cn：读者缺少全文路线图。
+
+- evidence_pointer：Introduction P6 S4–S8
+
+## 引言逐段图谱
+
+### 1. Introduction P1
+
+- locator：Introduction P1
+
+- opening_move_cn：从在线推荐的成功经济价值开启。
+
+- development_move_cn：用Cheetah Mobile和Amazon Dash Cart两个现实案例累积‘线下推荐在发生且能增收’。
+
+- pivot_move_cn：以‘Thus’从案例收束到‘物理空间推荐是可行方向’。
+
+- closing_move_cn：制造下一段需要：需要把这个方向形式化为可研究问题。
+
+- paragraph_job_cn：建立应用背景与商业紧迫性，为P3M问题提供真实场景。
+
+### 2. Introduction P2
+
+- locator：Introduction P2
+
+- opening_move_cn：直接定义P3M并给出三特征。
+
+- development_move_cn：逐条解释POI、空间布局、行人移动如何影响推荐和访问序列。
+
+- pivot_move_cn：从定义转向目标函数：推荐下一个POI。
+
+- closing_move_cn：以适用场景和规模价值收尾，暗示问题有多场景意义。
+
+- paragraph_job_cn：正式化研究对象，使后续算法有明确输入输出。
+
+### 3. Introduction P3
+
+- locator：Introduction P3
+
+- opening_move_cn：直接点出关键阻碍——曝光偏差。
+
+- development_move_cn：解释隐式反馈中未观测不等于负，再说明P3M中不均匀曝光受流行度、布局和路径影响。
+
+- pivot_move_cn：从一般曝光偏差收窄到‘行人移动×空间布局动态交互’这一独特来源。
+
+- closing_move_cn：声明该来源在现有研究中未充分探索，制造文献缺口。
+
+- paragraph_job_cn：把全文目标锁定为物理空间特有的曝光偏差机制。
+
+### 4. Introduction P4
+
+- locator：Introduction P4
+
+- opening_move_cn：用商场楼层平面和视觉扇区示例落实现象。
+
+- development_move_cn：逐步推演D/E/O可见、F/G不可见、假设访问F后E/O很可能是负而H不确定。
+
+- pivot_move_cn：从标签识别转向‘把所有未访问当负样本’的系统性后果。
+
+- closing_move_cn：以‘Therefore’提出设计要求：动态建模行人移动并纳入无偏推荐。
+
+- paragraph_job_cn：让读者在现象层面理解方法为什么必须同时做移动建模与去偏。
+
+### 5. Introduction P5
+
+- locator：Introduction P5
+
+- opening_move_cn：说明本文与两个研究流的关系，预告两个缺口。
+
+- development_move_cn：先给出启发式与模型式去偏的对比及局限性。
+
+- pivot_move_cn：转到第二个空白的数字平台与物理空间对比。
+
+- closing_move_cn：以‘remains underexplored’结束，完成双重文献定位。
+
+- paragraph_job_cn：为两个核心贡献（无偏pairwise、空间移动建模）设置靶子。
+
+### 6. Introduction P6
+
+- locator：Introduction P6
+
+- opening_move_cn：以‘To address the aforementioned research gaps’直接对接上一段。
+
+- development_move_cn：介绍P3M和UMPR，说明输入输出及核心创新。
+
+- pivot_move_cn：从总体方法转向去偏组件、交替算法和理论/实证主张。
+
+- closing_move_cn：预告经济价值和公平性结果，为第5和第6部分铺路。
+
+- paragraph_job_cn：全文路线图：问题、方法、理论、实证、价值。
+
+## 理论到设计逐句图谱
+
+### 1. Section 2 opening P1
+
+- order：1
+
+- locator：Section 2 opening P1
+
+- paraphrase_cn：先综述曝光偏差概念化并对比物理与数字平台，再综述无偏推荐和空间感知推荐两个方法流。
+
+- move_code：SIGNPOSTING
+
+- statement_status：method_decision
+
+- why_here_cn：为整段Related Work提供结构。
+
+- inherits_from_previous_cn：引言中的两个缺口。
+
+- changes_argument_state_cn：把文献综述组织为后续缺口的证据链。
+
+- sets_up_next_cn：为2.1、2.2、2.3三节分别开门。
+
+- failure_if_removed_cn：文献综述显得随意。
+
+- evidence_pointer：Section 2 opening P1
+
+### 2. Section 2.1 P1–P2
+
+- order：2
+
+- locator：Section 2.1 P1–P2
+
+- paraphrase_cn：曝光偏差是非均匀曝光导致的系统失真，需要理解曝光阶段和曝光机制；借鉴营销文献把曝光分为事前曝光和现场曝光。
+
+- move_code：THEORY_INTRO
+
+- statement_status：prior_literature
+
+- why_here_cn：为选择曝光因子提供理论名目。
+
+- inherits_from_previous_cn：曝光偏差定义。
+
+- changes_argument_state_cn：把曝光拆成可操作的两个阶段。
+
+- sets_up_next_cn：支撑后文Popularity（事前）与Access/Visibility（现场）因子。
+
+- failure_if_removed_cn：曝光因子的来源缺少理论基础。
+
+- evidence_pointer：Section 2.1 P1–P2
+
+### 3. Section 2.1 P3–P4
+
+- order：3
+
+- locator：Section 2.1 P3–P4
+
+- paraphrase_cn：数字平台现场曝光是页面级印象，由页面位置、排名等算法设计决定；相关去偏工作修正特定算法机制。
+
+- move_code：MECHANISM
+
+- statement_status：prior_literature
+
+- why_here_cn：建立‘数字平台=页面印象=算法决定’的基准。
+
+- inherits_from_previous_cn：现场曝光概念。
+
+- changes_argument_state_cn：明确既有去偏文献的适用范围。
+
+- sets_up_next_cn：为物理空间路径级视觉接触做对照。
+
+- failure_if_removed_cn：物理空间的独特性缺少对照。
+
+- evidence_pointer：Section 2.1 P3–P4
+
+### 4. Section 2.1 P5–P6
+
+- order：4
+
+- locator：Section 2.1 P5–P6
+
+- paraphrase_cn：物理空间顾客以步行为主，移动路径和视觉范围决定哪些POI被现场曝光；曝光模式是路径级视觉接触。
+
+- move_code：MECHANISM
+
+- statement_status：author_inference
+
+- why_here_cn：给出全文的中心机制假设。
+
+- inherits_from_previous_cn：数字平台对照。
+
+- changes_argument_state_cn：把曝光机制从算法展示切换为行人移动。
+
+- sets_up_next_cn：支撑Table 1对比和后续空间网络/视觉角设计。
+
+- failure_if_removed_cn：整个UMPR的空间建模失去动机。
+
+- evidence_pointer：Section 2.1 P5–P6, Table 1
+
+### 5. Section 2.1 P7
+
+- order：5
+
+- locator：Section 2.1 P7
+
+- paraphrase_cn：因此本文的方法贡献包括引入行人移动系统、构建空间网络、重构移动路径，并提出接入性和可见性等曝光因子。
+
+- move_code：REQUIREMENT
+
+- statement_status：design_decision
+
+- why_here_cn：把曝光机制转成具体设计需求。
+
+- inherits_from_previous_cn：路径级视觉接触。
+
+- changes_argument_state_cn：预告4.2.1和4.2.3的设计。
+
+- sets_up_next_cn：为方法部分的空间网络和因子做伏笔。
+
+- failure_if_removed_cn：空间系统设计显得突兀。
+
+- evidence_pointer：Section 2.1 P7
+
+### 6. Section 2.2 intro P1
+
+- order：6
+
+- locator：Section 2.2 intro P1
+
+- paraphrase_cn：推荐偏差研究有两类：证明偏差存在与设计算法纠正偏差；本文属于后者。
+
+- move_code：CLASSIFY
+
+- statement_status：prior_literature
+
+- why_here_cn：把本文定位到算法纠正分支。
+
+- inherits_from_previous_cn：曝光偏差概念。
+
+- changes_argument_state_cn：明确后续去偏综述的范围。
+
+- sets_up_next_cn：进入启发式/模型式分类。
+
+- failure_if_removed_cn：去偏文献位置不清楚。
+
+- evidence_pointer：Section 2.2 intro P1
+
+### 7. Section 2.2.1 P1–P2
+
+- order：7
+
+- locator：Section 2.2.1 P1–P2
+
+- paraphrase_cn：启发式去偏包括加权和采样：加权估计未观测为负的置信度，采样按负概率抽取负项；但有共同缺陷——去偏与学习脱节。
+
+- move_code：LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：批评第一类去偏方法。
+
+- inherits_from_previous_cn：去偏方法分类。
+
+- changes_argument_state_cn：排除启发式路径。
+
+- sets_up_next_cn：为模型式去偏和本文贡献做铺垫。
+
+- failure_if_removed_cn：模型式去偏的必要性不足。
+
+- evidence_pointer：Section 2.2.1 P1–P2
+
+### 8. Section 2.2.2 P1
+
+- order：8
+
+- locator：Section 2.2.2 P1
+
+- paraphrase_cn：模型式去偏将可学习组件纳入统一目标，用文本或社交等辅助信息估计曝光；但主要面向pointwise学习。
+
+- move_code：LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：正面描述模型式去偏并指出其pointwise局限。
+
+- inherits_from_previous_cn：启发式不足。
+
+- changes_argument_state_cn：把缺口定位到‘模型去偏×pairwise’。
+
+- sets_up_next_cn：支撑无偏pairwise学习。
+
+- failure_if_removed_cn：贡献一的核心缺口缺失。
+
+- evidence_pointer：Section 2.2.2 P1
+
+### 9. Section 2.2.3 P1
+
+- order：9
+
+- locator：Section 2.2.3 P1
+
+- paraphrase_cn：根据文献分类表，模型去偏与pairwise学习之间是空白；本文提出无偏pairwise学习，并强调概率解释、理论保证和交替算法三点。
+
+- move_code：GAP_FILL
+
+- statement_status：contribution_claim
+
+- why_here_cn：用表2空白格直接宣告贡献位置。
+
+- inherits_from_previous_cn：两个综述小节。
+
+- changes_argument_state_cn：把文献空白转化为本文设计目标。
+
+- sets_up_next_cn：为Proposition 2和Algorithm 3预告。
+
+- failure_if_removed_cn：方法创新被读成无依据拼装。
+
+- evidence_pointer：Section 2.2.3 P1, Table 2
+
+### 10. Section 2.3.1 P1–P2
+
+- order：10
+
+- locator：Section 2.3.1 P1–P2
+
+- paraphrase_cn：物理推荐研究利用商场轨迹和购物车数据，但多采用邻域协同过滤，缺乏学习目标，难保证效果。
+
+- move_code：LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：指出物理推荐现有方法的模型局限。
+
+- inherits_from_previous_cn：空间感知推荐综述。
+
+- changes_argument_state_cn：说明物理推荐不等于有效建模移动。
+
+- sets_up_next_cn：为把移动因子放入可学习目标做铺垫。
+
+- failure_if_removed_cn：物理推荐的方法空白不明确。
+
+- evidence_pointer：Section 2.3.1 P1–P2
+
+### 11. Section 2.3.2 P1–P3
+
+- order：11
+
+- locator：Section 2.3.2 P1–P3
+
+- paraphrase_cn：POI推荐分隐式建模和显式地理距离两条路线；深度序列模型不显式建模空间，地理距离模型主要只用距离。
+
+- move_code：LIMITATION
+
+- statement_status：prior_literature
+
+- why_here_cn：界定POI文献的空间建模缺口。
+
+- inherits_from_previous_cn：POI推荐综述。
+
+- changes_argument_state_cn：指出‘单一距离’不足以刻画动态空间交互。
+
+- sets_up_next_cn：为多维移动因子提供靶子。
+
+- failure_if_removed_cn：五类移动因子的必要性不足。
+
+- evidence_pointer：Section 2.3.2 P1–P3
+
+### 12. Section 2.3.3 P1
+
+- order：12
+
+- locator：Section 2.3.3 P1
+
+- paraphrase_cn：因此本文从位置、方向和视觉范围多维度建模动态交互，并以曝光偏差为视角把行人移动整合进无偏推荐。
+
+- move_code：GAP_FILL
+
+- statement_status：contribution_claim
+
+- why_here_cn：第二条贡献定位的收束。
+
+- inherits_from_previous_cn：两个空间建模缺口。
+
+- changes_argument_state_cn：把方法设计锚到物理空间需求。
+
+- sets_up_next_cn：为4.2节空间系统做预告。
+
+- failure_if_removed_cn：空间建模贡献缺靶子。
+
+- evidence_pointer：Section 2.3.3 P1
+
+### 13. Section 3.1 P1–P3
+
+- order：13
+
+- locator：Section 3.1 P1–P3
+
+- paraphrase_cn：形式化定义访问序列和楼层平面图，为P3M提供输入对象。
+
+- move_code：DEFINITION
+
+- statement_status：theory_claim
+
+- why_here_cn：把自然语言问题翻译成数学对象。
+
+- inherits_from_previous_cn：P3M三特征。
+
+- changes_argument_state_cn：为训练集和模型公式建立符号系统。
+
+- sets_up_next_cn：为Definition 3问题定义和pairwise目标做准备。
+
+- failure_if_removed_cn：后续公式失去记号。
+
+- evidence_pointer：Section 3.1 Definitions 1–2
+
+### 14. Section 3.1 P4 Definition 3
+
+- order：14
+
+- locator：Section 3.1 P4 Definition 3
+
+- paraphrase_cn：正式定义P3M：基于访问序列和楼层平面图为每位顾客推荐下一个最相关POI。
+
+- move_code：DEFINITION
+
+- statement_status：theory_claim
+
+- why_here_cn：给出问题本身的形式定义，确保方法有明确目标。
+
+- inherits_from_previous_cn：两个输入定义。
+
+- changes_argument_state_cn：把全文问题转化为可优化目标。
+
+- sets_up_next_cn：为选择pairwise学习提供语境。
+
+- failure_if_removed_cn：‘P3M问题’没有正式内容。
+
+- evidence_pointer：Section 3.1 Definition 3
+
+### 15. Section 3.2 P1–P2
+
+- order：15
+
+- locator：Section 3.2 P1–P2
+
+- paraphrase_cn：P3M属于隐式反馈；pointwise适合分类，pairwise为排序而设，因此选择pairwise作为方法框架。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：prior_literature
+
+- why_here_cn：解释为什么从BPR出发。
+
+- inherits_from_previous_cn：P3M是隐式反馈。
+
+- changes_argument_state_cn：确定方法家族。
+
+- sets_up_next_cn：进入经典pairwise目标及其局限。
+
+- failure_if_removed_cn：BPR框架缺乏依据。
+
+- evidence_pointer：Section 3.2 P1–P2
+
+### 16. Section 3.2 P3–P4
+
+- order：16
+
+- locator：Section 3.2 P3–P4
+
+- paraphrase_cn：在负性假设下用未访问位置当负样本构造训练集D0和pairwise目标。
+
+- move_code：MECHANISM
+
+- statement_status：theory_claim
+
+- why_here_cn：建立经典的、待改进的目标函数。
+
+- inherits_from_previous_cn：pairwise选择。
+
+- changes_argument_state_cn：把问题落到式(2)的优化。
+
+- sets_up_next_cn：指出负性假设的两个缺陷。
+
+- failure_if_removed_cn：UMPR式(5)的改进对象缺失。
+
+- evidence_pointer：Section 3.2 Equations (1)–(2)
+
+### 17. Section 3.2 P5 limitation 1
+
+- order：17
+
+- locator：Section 3.2 P5 limitation 1
+
+- paraphrase_cn：经典pairwise的第一局限：未访问POI是负样本与潜在正样本的混合，一律当负会带来学习偏差。
+
+- move_code：LIMITATION
+
+- statement_status：theory_claim
+
+- why_here_cn：为去偏组件提供直接理由。
+
+- inherits_from_previous_cn：负性假设目标。
+
+- changes_argument_state_cn：定义需要纠正的偏差类型。
+
+- sets_up_next_cn：为4.1.2的P(i≻j|D)导出做铺垫。
+
+- failure_if_removed_cn：去偏组件无的放矢。
+
+- evidence_pointer：Section 3.2 P5
+
+### 18. Section 3.2 P5 limitation 2
+
+- order：18
+
+- locator：Section 3.2 P5 limitation 2
+
+- paraphrase_cn：经典pairwise的第二局限：相关分数只做偏好匹配，未考虑步行到店的物理成本。
+
+- move_code：LIMITATION
+
+- statement_status：theory_claim
+
+- why_here_cn：为移动成本项提供直接理由。
+
+- inherits_from_previous_cn：BPR-MF相关分数定义。
+
+- changes_argument_state_cn：定义需要扩展的相关分数。
+
+- sets_up_next_cn：为4.2.2式(11)的r=b-c做铺垫。
+
+- failure_if_removed_cn：移动成本项显得多余。
+
+- evidence_pointer：Section 3.2 P5
+
+## 制品设计理由逐句图谱
+
+### 1. Section 4 opening P1
+
+- order：1
+
+- locator：Section 4 opening P1
+
+- paraphrase_cn：UMPR分三步：无偏学习目标、运动感知模型、交替学习算法。
+
+- move_code：SIGNPOSTING
+
+- statement_status：design_decision
+
+- why_here_cn：给方法章节三部分路线图。
+
+- inherits_from_previous_cn：Preliminaries提出的两个局限。
+
+- changes_argument_state_cn：开始构建制品。
+
+- sets_up_next_cn：为4.1、4.2、4.3节分别开门。
+
+- failure_if_removed_cn：方法结构不清。
+
+- evidence_pointer：Section 4 opening P1
+
+### 2. Section 4.1.1 P1–P3
+
+- order：2
+
+- locator：Section 4.1.1 P1–P3
+
+- paraphrase_cn：第一个策略是把访问序列切成阶段；切分有三好处：匹配下一POI任务、模拟移动与偏好动态、实现简单。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：针对跨阶段偏好变化导致的过度断言误差。
+
+- inherits_from_previous_cn：Preliminaries中访问序列定义。
+
+- changes_argument_state_cn：训练单元从整序列变为相邻访问之间的阶段。
+
+- sets_up_next_cn：为式(4)训练集D和Proposition 1做准备。
+
+- failure_if_removed_cn：stage切分策略无理由。
+
+- evidence_pointer：Section 4.1.1 P1–P3
+
+### 3. Section 4.1.1 P4–P5
+
+- order：3
+
+- locator：Section 4.1.1 P4–P5
+
+- paraphrase_cn：第二个策略是加入去偏组件P(i≻_{u,k}j|D)，重写pairwise目标并解释大小值对应的含义。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：针对负性假设导致的biased error。
+
+- inherits_from_previous_cn：式(4)的阶段训练集。
+
+- changes_argument_state_cn：学习目标从式(2)变为带权重的式(5)。
+
+- sets_up_next_cn：需要给该组件概率形式。
+
+- failure_if_removed_cn：无偏学习目标不存在。
+
+- evidence_pointer：Section 4.1.1 P4–P5, Equation (5)
+
+### 4. Section 4.1.2 P1
+
+- order：4
+
+- locator：Section 4.1.2 P1
+
+- paraphrase_cn：借鉴无偏推荐文献，把访问行为生成分解为曝光O和相关性评估R，Y=O×R。
+
+- move_code：DATA_GENERATION
+
+- statement_status：theory_claim
+
+- why_here_cn：为去偏组件提供数据生成基础。
+
+- inherits_from_previous_cn：需要去偏定义。
+
+- changes_argument_state_cn：把未观测行为分解成未曝光或无关两类原因。
+
+- sets_up_next_cn：推导P(R=0|Y=0)的概率。
+
+- failure_if_removed_cn：P(i≻j|D)没有生成式依据。
+
+- evidence_pointer：Section 4.1.2 Equation (6)
+
+### 5. Section 4.1.2 P2–P3
+
+- order：5
+
+- locator：Section 4.1.2 P2–P3
+
+- paraphrase_cn：推导出P(i≻_{u,k}j|D)等价于未访问POI为负的概率，并给出式(8)；极端情形下曝光概率为1时确定负，为0时依赖相关性。
+
+- move_code：DATA_GENERATION
+
+- statement_status：theory_claim
+
+- why_here_cn：把去偏组件变成可解释概率。
+
+- inherits_from_previous_cn：生成过程式(6)。
+
+- changes_argument_state_cn：说明即使曝光估计不完整，相关性项仍能保持方法有效。
+
+- sets_up_next_cn：为Proposition 2和模型评分铺路。
+
+- failure_if_removed_cn：去偏组件像黑盒。
+
+- evidence_pointer：Section 4.1.2 Equations (7)–(8)
+
+### 6. Section 4.1.3 Definitions 4–5
+
+- order：6
+
+- locator：Section 4.1.3 Definitions 4–5
+
+- paraphrase_cn：定义两类训练错误：跨阶段不同目的导致的过度断言误差，以及潜在正但被当负的偏差误差。
+
+- move_code：DEFINITION
+
+- statement_status：theory_claim
+
+- why_here_cn：让两个策略的改进对象可衡量。
+
+- inherits_from_previous_cn：阶段切分和去偏组件。
+
+- changes_argument_state_cn：建立误差语言。
+
+- sets_up_next_cn：为两个Proposition提供定义基础。
+
+- failure_if_removed_cn：Proposition没有操作对象。
+
+- evidence_pointer：Section 4.1.3 Definitions 4–5
+
+### 7. Section 4.1.3 Proposition 1 + interpretation
+
+- order：7
+
+- locator：Section 4.1.3 Proposition 1 + interpretation
+
+- paraphrase_cn：给出阶段切分至少消除多少比例过度断言误差的下界，并用图说明对偏好变化频繁和序列更长的顾客更有效。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：为阶段切分提供理论保证。
+
+- inherits_from_previous_cn：定义4的过度断言误差。
+
+- changes_argument_state_cn：证明stage策略不只是工程直觉。
+
+- sets_up_next_cn：与后续去偏策略的理论保证并列。
+
+- failure_if_removed_cn：阶段切分的有效性缺少保障。
+
+- evidence_pointer：Section 4.1.3 Proposition 1, Figure 3(a)
+
+### 8. Section 4.1.3 Proposition 2 + interpretation
+
+- order：8
+
+- locator：Section 4.1.3 Proposition 2 + interpretation
+
+- paraphrase_cn：给出可消除偏差误差的比例，并说明b_uk小或n大时更有效，且对活跃顾客和大空间更重要；即使POI数少于数字平台，去偏仍关键。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：为去偏组件提供理论保证并驳斥‘物理空间选项少所以去偏不重要’。
+
+- inherits_from_previous_cn：定义5和式(8)。
+
+- changes_argument_state_cn：证明去偏策略在物理空间同样关键。
+
+- sets_up_next_cn：为UMPR-U消融和公平性分析提供理论预期。
+
+- failure_if_removed_cn：去偏组件的理论支撑缺失。
+
+- evidence_pointer：Section 4.1.3 Proposition 2, Figure 3(b)
+
+### 9. Section 4.2.1 P1–P4
+
+- order：9
+
+- locator：Section 4.2.1 P1–P4
+
+- paraphrase_cn：基于楼层平面图构建空间网络（点和边），再在相邻访问之间构造移动路径。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把楼层平面图转成算法可用的图结构。
+
+- inherits_from_previous_cn：Definition 2 floor plan。
+
+- changes_argument_state_cn：为路径、曝光和移动因子提取提供载体。
+
+- sets_up_next_cn：引入移动路径假设。
+
+- failure_if_removed_cn：所有空间因子无法计算。
+
+- evidence_pointer：Section 4.2.1 P1–P4
+
+### 10. Section 4.2.1 Assumption 1
+
+- order：10
+
+- locator：Section 4.2.1 Assumption 1
+
+- paraphrase_cn：假设行人两次访问之间走最短路径以最小化移动成本。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：用可计算假设替代未观测真实轨迹。
+
+- inherits_from_previous_cn：空间网络和路径概念。
+
+- changes_argument_state_cn：让移动路径可模拟。
+
+- sets_up_next_cn：为后续距离、方向、视觉因子计算提供前提。
+
+- failure_if_removed_cn：路径不可计算。
+
+- evidence_pointer：Section 4.2.1 Assumption 1
+
+### 11. Section 4.2.1 Assumption 2
+
+- order：11
+
+- locator：Section 4.2.1 Assumption 2
+
+- paraphrase_cn：假设行人沿网络边移动，方向与边一致，两侧视觉范围各ϑ/2。
+
+- move_code：THEORY_PROPOSITION
+
+- statement_status：theory_claim
+
+- why_here_cn：把视觉范围变成可计算参数。
+
+- inherits_from_previous_cn：移动路径。
+
+- changes_argument_state_cn：支持Visibility和Invisibility因子。
+
+- sets_up_next_cn：为4.2.3的视觉角公式做铺垫。
+
+- failure_if_removed_cn：视觉类因子无定义。
+
+- evidence_pointer：Section 4.2.1 Assumption 2
+
+### 12. Section 4.2.2 P1–P2
+
+- order：12
+
+- locator：Section 4.2.2 P1–P2
+
+- paraphrase_cn：用sigmoid把曝光和相关性概率与可学习分数连接，曝光分数是曝光因子的线性加权。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：让理论概率可微、可学习。
+
+- inherits_from_previous_cn：式(8)需要P(O=1)和P(R=1)。
+
+- changes_argument_state_cn：建立可优化模型框架。
+
+- sets_up_next_cn：为具体因子定义提供模型槽位。
+
+- failure_if_removed_cn：理论目标无法落地。
+
+- evidence_pointer：Section 4.2.2 Equations (9)–(10)
+
+### 13. Section 4.2.2 P3–P5
+
+- order：13
+
+- locator：Section 4.2.2 P3–P5
+
+- paraphrase_cn：相关分数是偏好匹配收益减去移动成本；收益含全局偏好与局部兴趣，成本是移动因子的线性函数。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：回应3.2的第二局限，把移动成本纳入相关分数。
+
+- inherits_from_previous_cn：理论需求P(R=1)的分数。
+
+- changes_argument_state_cn：确立r=b−c的设计原则。
+
+- sets_up_next_cn：为4.2.3和4.2.4的因子操作化提供框架。
+
+- failure_if_removed_cn：UMPR与BPR-MF结构上无异。
+
+- evidence_pointer：Section 4.2.2 Equations (11)–(13)
+
+### 14. Section 4.2.3 AC factor
+
+- order：14
+
+- locator：Section 4.2.3 AC factor
+
+- paraphrase_cn：Access指标用二元变量表示目标POI是否位于移动路径上。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把‘可达性’操作化为路径包含。
+
+- inherits_from_previous_cn：曝光两阶段理论中的现场曝光。
+
+- changes_argument_state_cn：使现场曝光有一维可计算指标。
+
+- sets_up_next_cn：与Visibility和Popularity一起构成曝光因子向量。
+
+- failure_if_removed_cn：曝光因子缺核心项。
+
+- evidence_pointer：Section 4.2.3 AC
+
+### 15. Section 4.2.3 VS factor
+
+- order：15
+
+- locator：Section 4.2.3 VS factor
+
+- paraphrase_cn：Visibility用路径上最大视觉角与视觉范围之比衡量POI可见性。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把‘可见性’操作化为视觉角。
+
+- inherits_from_previous_cn：Agent移动假设和视觉范围。
+
+- changes_argument_state_cn：使物理空间曝光独有的视觉维度可计算。
+
+- sets_up_next_cn：支撑‘动态交互’的实证价值。
+
+- failure_if_removed_cn：物理曝光与数字曝光的区别消失。
+
+- evidence_pointer：Section 4.2.3 VS
+
+### 16. Section 4.2.3 PO factor
+
+- order：16
+
+- locator：Section 4.2.3 PO factor
+
+- paraphrase_cn：Popularity用平均访问次数作为事前曝光的代理。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：纳入事前曝光通道。
+
+- inherits_from_previous_cn：事前曝光文献。
+
+- changes_argument_state_cn：曝光因子同时覆盖事前和现场两个阶段。
+
+- sets_up_next_cn：为公平性分析中的高/低流行度分组提供依据。
+
+- failure_if_removed_cn：事前曝光被忽略。
+
+- evidence_pointer：Section 4.2.3 PO
+
+### 17. Section 4.2.4 DS/LD factors
+
+- order：17
+
+- locator：Section 4.2.4 DS/LD factors
+
+- paraphrase_cn：Distance用路径欧氏距离，Level Difference用楼层差，刻画位置维度的移动成本。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把位置成本操作化为距离与楼层差。
+
+- inherits_from_previous_cn：行人移动成本文献。
+
+- changes_argument_state_cn：移动成本有一个可计算基础项。
+
+- sets_up_next_cn：为方向、视觉维度因子补充成本。
+
+- failure_if_removed_cn：成本仅剩单一距离，会退化为传统POI方法。
+
+- evidence_pointer：Section 4.2.4 DS/LD
+
+### 18. Section 4.2.4 DD factor
+
+- order：18
+
+- locator：Section 4.2.4 DD factor
+
+- paraphrase_cn：Directional Difference用当前方向与目标方向的夹角衡量转向成本。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把行人偏好直行的行为规律纳入成本。
+
+- inherits_from_previous_cn：行人移动文献中的方向维持倾向。
+
+- changes_argument_state_cn：移动成本扩展到方向维度。
+
+- sets_up_next_cn：为视觉维度成本提供对照。
+
+- failure_if_removed_cn：方向变化成本被忽略。
+
+- evidence_pointer：Section 4.2.4 DD
+
+### 19. Section 4.2.4 IV and DT factors
+
+- order：19
+
+- locator：Section 4.2.4 IV and DT factors
+
+- paraphrase_cn：Invisibility平均路径上的不可见比例；Distraction用可见POI的引力（流行度/距离平方）量化中途被吸引的风险。
+
+- move_code：DESIGN_FEATURE
+
+- statement_status：design_decision
+
+- why_here_cn：把视觉不确定性和分心纳入移动成本。
+
+- inherits_from_previous_cn：视觉范围与引力模型。
+
+- changes_argument_state_cn：移动成本覆盖位置、方向、视觉三维度。
+
+- sets_up_next_cn：支撑‘视觉维度更主导’的结论。
+
+- failure_if_removed_cn：移动成本建模不完整。
+
+- evidence_pointer：Section 4.2.4 IV/DT
+
+### 20. Section 4.3 P1–P2
+
+- order：20
+
+- locator：Section 4.3 P1–P2
+
+- paraphrase_cn：把无偏学习目标写成带去偏组件权重的最大化问题，用SGA可求解。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：明确训练目标。
+
+- inherits_from_previous_cn：式(5)、式(11)–(13)。
+
+- changes_argument_state_cn：把模型设计变成可计算优化。
+
+- sets_up_next_cn：引出Algorithm 1。
+
+- failure_if_removed_cn：学习流程缺失。
+
+- evidence_pointer：Section 4.3 Equation (18)
+
+### 21. Section 4.3 P3–P6
+
+- order：21
+
+- locator：Section 4.3 P3–P6
+
+- paraphrase_cn：Algorithm 1学习相关参数，但去偏组件又依赖相关参数；为此用数据生成过程构造pointwise辅助目标学习曝光参数，形成Algorithm 2。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：解决去偏权重与相关参数耦合。
+
+- inherits_from_previous_cn：式(8)、式(9)和生成过程。
+
+- changes_argument_state_cn：两个算法互为依据。
+
+- sets_up_next_cn：为交替算法3提供理由。
+
+- failure_if_removed_cn：参数无法联合学习。
+
+- evidence_pointer：Section 4.3 Algorithms 1–2
+
+### 22. Section 4.3 P7–P9
+
+- order：22
+
+- locator：Section 4.3 P7–P9
+
+- paraphrase_cn：Algorithm 3交替运行相关参数学习器和去偏权重校正器，初始化去偏权重为1，直到收敛；最终用相关分数生成top N推荐。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：整合两个算法形成完整制品。
+
+- inherits_from_previous_cn：两个子算法互赖。
+
+- changes_argument_state_cn：UMPR成为端到端可训练推荐系统。
+
+- sets_up_next_cn：进入真实数据评价。
+
+- failure_if_removed_cn：方法不完整。
+
+- evidence_pointer：Section 4.3 Algorithm 3
+
+## Study开头、过渡与收束图谱
+
+### 1. Section 5 opening P1
+
+- order：1
+
+- locator：Section 5 opening P1
+
+- paraphrase_cn：实证部分先介绍数据和评估流程，再对比SOTA、消融组件、考察经济与公平价值。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：为五类评价提供路线图。
+
+- inherits_from_previous_cn：方法构建完成。
+
+- changes_argument_state_cn：从‘是否可实现’转向‘是否有效且有价值’。
+
+- sets_up_next_cn：为5.1–5.5各节开门。
+
+- failure_if_removed_cn：实证结构不清。
+
+- evidence_pointer：Section 5 opening P1
+
+### 2. Section 5.1 P1
+
+- order：2
+
+- locator：Section 5.1 P1
+
+- paraphrase_cn：用北京大型商场作为P3M的典型场景，介绍数据规模、视频追踪系统和五步过滤后的序列数量。
+
+- move_code：DATA_SETUP
+
+- statement_status：fact
+
+- why_here_cn：说明为什么选商场以及数据有外部效度。
+
+- inherits_from_previous_cn：P3M适用场景。
+
+- changes_argument_state_cn：给出可复现数据基础。
+
+- sets_up_next_cn：为评估协议做准备。
+
+- failure_if_removed_cn：结果没有数据锚点。
+
+- evidence_pointer：Section 5.1 P1
+
+### 3. Section 5.1 P2
+
+- order：3
+
+- locator：Section 5.1 P2
+
+- paraphrase_cn：用leave-one-out划分训练与测试，在训练集上再切验证集做网格搜索，用Recall和DCG评估。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：说明评估协议如何避免泄漏和保证公平。
+
+- inherits_from_previous_cn：数据准备。
+
+- changes_argument_state_cn：建立可比较的评估条件。
+
+- sets_up_next_cn：为benchmark结果提供可信性。
+
+- failure_if_removed_cn：结果可信度下降。
+
+- evidence_pointer：Section 5.1 P2
+
+### 4. Section 5.2 P1
+
+- order：4
+
+- locator：Section 5.2 P1
+
+- paraphrase_cn：把基准按邻域、矩阵分解、深度序列和非个性化四类选择，并设计Cat-MPR和Dist-MPR作为受控启发式去偏变体。
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- statement_status：method_decision
+
+- why_here_cn：既要广覆盖方法家族，又要隔离去偏机制差异。
+
+- inherits_from_previous_cn：文献综述中的方法分类。
+
+- changes_argument_state_cn：让‘UMPR更好’可归因。
+
+- sets_up_next_cn：为Table 4解读提供结构。
+
+- failure_if_removed_cn：无法判断优势来源。
+
+- evidence_pointer：Section 5.2 P1, Table 3
+
+### 5. Section 5.2 P2–P3
+
+- order：5
+
+- locator：Section 5.2 P2–P3
+
+- paraphrase_cn：报告N=1/3/5下的结果，UMPR在所有指标上最佳且显著优于各基准。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出主实验结论。
+
+- inherits_from_previous_cn：基准设定。
+
+- changes_argument_state_cn：确立整体技术优势。
+
+- sets_up_next_cn：需要解释优势来源。
+
+- failure_if_removed_cn：全文核心证据失效。
+
+- evidence_pointer：Section 5.2 P2–P3, Table 4
+
+### 6. Section 5.2 P4–P5
+
+- order：6
+
+- locator：Section 5.2 P4–P5
+
+- paraphrase_cn：解释相对深度序列模型的优势来自显式移动建模；相对Dist/Cat-MPR的优势来自模型去偏而非相关模型差异。
+
+- move_code：INTERPRETATION
+
+- statement_status：author_inference
+
+- why_here_cn：把表4数值翻译成机制主张。
+
+- inherits_from_previous_cn：Table 4相对提升。
+
+- changes_argument_state_cn：让整体优势可拆解。
+
+- sets_up_next_cn：为消融研究做预告。
+
+- failure_if_removed_cn：结果只是数字，无解释。
+
+- evidence_pointer：Section 5.2 P4–P5
+
+### 7. Section 5.3 P1
+
+- order：7
+
+- locator：Section 5.3 P1
+
+- paraphrase_cn：通过移除移动组件或去偏组件构建UMPR-M和UMPR-U两个控制方法。
+
+- move_code：STUDY_OVERVIEW
+
+- statement_status：method_decision
+
+- why_here_cn：用受控变体把性能归因到组件。
+
+- inherits_from_previous_cn：主结果和机制解释。
+
+- changes_argument_state_cn：进入组件级因果检验。
+
+- sets_up_next_cn：为Table 5结果提供设计。
+
+- failure_if_removed_cn：组件贡献声明无证据。
+
+- evidence_pointer：Section 5.3 P1
+
+### 8. Section 5.3 P2–P3
+
+- order：8
+
+- locator：Section 5.3 P2–P3
+
+- paraphrase_cn：结果显示两个组件都显著且互补：移动组件在短列表更优，去偏组件在长列表更优。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：拆分并定位每个设计组件的价值。
+
+- inherits_from_previous_cn：控制方法定义。
+
+- changes_argument_state_cn：把整体优势细化为组件因果。
+
+- sets_up_next_cn：引向经济和社会价值检验。
+
+- failure_if_removed_cn：无法证明非一次性调参。
+
+- evidence_pointer：Section 5.3 P2–P3, Table 5
+
+### 9. Section 5.4 P1
+
+- order：9
+
+- locator：Section 5.4 P1
+
+- paraphrase_cn：既然性能已证明，进一步看是否转化为经济和人文价值；行人接受推荐需要实际移动，途中可能被其他推荐店吸引。
+
+- move_code：TRANSITION
+
+- statement_status：author_inference
+
+- why_here_cn：从精度评价跨到经济价值评价。
+
+- inherits_from_previous_cn：主性能和消融结果。
+
+- changes_argument_state_cn：提出增量收入这一新指标。
+
+- sets_up_next_cn：引出四步收入模拟。
+
+- failure_if_removed_cn：收入部分缺少动机。
+
+- evidence_pointer：Section 5.4 P1
+
+### 10. Section 5.4 P2–P3
+
+- order：10
+
+- locator：Section 5.4 P2–P3
+
+- paraphrase_cn：收入估计分四步：生成推荐列表、识别沿途曝光店、模拟访问概率、估计增量收入；采用γ衰减和每访约1.26美元均值。
+
+- move_code：METHOD_JUSTIFICATION
+
+- statement_status：method_decision
+
+- why_here_cn：让收入估计透明、可复现。
+
+- inherits_from_previous_cn：增量收入概念。
+
+- changes_argument_state_cn：建立收入模拟协议。
+
+- sets_up_next_cn：为Figure 6结果提供参数细节。
+
+- failure_if_removed_cn：收入数字不可信。
+
+- evidence_pointer：Section 5.4 P2–P3
+
+### 11. Section 5.4 P4–P5
+
+- order：11
+
+- locator：Section 5.4 P4–P5
+
+- paraphrase_cn：模拟显示UMPR在各类γ下收入均最高，例如γ=0.75时每条推荐增量0.405美元，可折算年增量1.03亿美元，占当年总收入32.2%。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：把技术性能转化为货币证据。
+
+- inherits_from_previous_cn：模拟流程。
+
+- changes_argument_state_cn：提升实践相关性。
+
+- sets_up_next_cn：进一步引出公平性检验。
+
+- failure_if_removed_cn：经济贡献声明无支撑。
+
+- evidence_pointer：Section 5.4 P4–P5, Figure 6
+
+### 12. Section 5.5 P1–P2
+
+- order：12
+
+- locator：Section 5.5 P1–P2
+
+- paraphrase_cn：既然去偏组件带来性能提升，进一步检验去偏是否促进高低曝光组之间的推荐公平；按Access、Visibility、Popularity分组。
+
+- move_code：TRANSITION
+
+- statement_status：method_decision
+
+- why_here_cn：从经济价值跨到分配公平。
+
+- inherits_from_previous_cn：消融UMPR-U结果。
+
+- changes_argument_state_cn：引入REO和PI两个公平指标。
+
+- sets_up_next_cn：为Figure 7展示分组结果。
+
+- failure_if_removed_cn：社会价值主张缺证据。
+
+- evidence_pointer：Section 5.5 P1–P2, Table 6
+
+### 13. Section 5.5 P4–P5
+
+- order：13
+
+- locator：Section 5.5 P4–P5
+
+- paraphrase_cn：UMPR的REO低于UMPR-U，降低13.5%–66.7%，且低曝光组的性能提升更大；这带来探索体验、引导客流、缓解马太效应等三方面利益相关者价值。
+
+- move_code：RESULT
+
+- statement_status：empirical_result
+
+- why_here_cn：给出公平性证据并连接到管理含义。
+
+- inherits_from_previous_cn：REO/PI指标。
+
+- changes_argument_state_cn：把技术去偏提升为多利益相关者公平。
+
+- sets_up_next_cn：为结论部分的贡献与管理启示收尾。
+
+- failure_if_removed_cn：公平性贡献消失。
+
+- evidence_pointer：Section 5.5 P4–P5, Figure 7
+
+## 讨论与贡献逐句图谱
+
+### 1. Section 6 opening P1 S1–S2
+
+- order：1
+
+- locator：Section 6 opening P1 S1–S2
+
+- paraphrase_cn：线上推荐成功与线下定位技术普及促使实体零售商探索线下推荐；本文提出P3M并指出行人移动与空间布局动态交互导致曝光偏差。
+
+- move_code：CONTEXT
+
+- statement_status：author_inference
+
+- why_here_cn：重新把研究放进大背景并回扣问题。
+
+- inherits_from_previous_cn：引言开篇。
+
+- changes_argument_state_cn：从结果回到问题闭环。
+
+- sets_up_next_cn：总结方法、理论与实证贡献。
+
+- failure_if_removed_cn：结论缺少上下文闭合。
+
+- evidence_pointer：Section 6 opening P1 S1–S2
+
+### 2. Section 6 opening P1 S3–S4
+
+- order：2
+
+- locator：Section 6 opening P1 S3–S4
+
+- paraphrase_cn：提出UMPR整合移动建模与无偏pairwise学习；理论上用Proposition 1/2保证去偏框架减少训练误差，实证上用商场数据验证SOTA优势和组件贡献，并考察经济和公平。
+
+- move_code：SUMMARY
+
+- statement_status：contribution_claim
+
+- why_here_cn：一句话概括全文贡献链。
+
+- inherits_from_previous_cn：方法与实证。
+
+- changes_argument_state_cn：把论文压缩为可评估的贡献声明。
+
+- sets_up_next_cn：为三点贡献做总起。
+
+- failure_if_removed_cn：贡献没有总纲领。
+
+- evidence_pointer：Section 6 opening P1 S3–S4
+
+### 3. Section 6 contribution 1
+
+- order：3
+
+- locator：Section 6 contribution 1
+
+- paraphrase_cn：第一点贡献：区别于数字平台推荐文献，正式提出P3M问题并率先识别和纠正由行人移动引发的物理空间曝光偏差，推进AI设计科学研究。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：回引言缺口一和缺口二的物理空间部分。
+
+- inherits_from_previous_cn：P3M定义和动态交互机制。
+
+- changes_argument_state_cn：把问题贡献定位于设计科学。
+
+- sets_up_next_cn：为第二个方法贡献做铺垫。
+
+- failure_if_removed_cn：问题贡献声明缺失。
+
+- evidence_pointer：Section 6 contribution 1
+
+### 4. Section 6 contribution 2
+
+- order：4
+
+- locator：Section 6 contribution 2
+
+- paraphrase_cn：第二点贡献：提出无偏pairwise学习框架，用可学习去偏组件扩展经典pairwise，并设计交替SGA算法；理论证明和实证评价共同支撑有效性。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：回引言缺口一：‘模型去偏×pairwise’空白。
+
+- inherits_from_previous_cn：Proposition 1/2和Table 4/5。
+
+- changes_argument_state_cn：方法贡献被正式命名。
+
+- sets_up_next_cn：为第三个建模贡献做铺垫。
+
+- failure_if_removed_cn：去偏框架贡献无声明。
+
+- evidence_pointer：Section 6 contribution 2
+
+### 5. Section 6 contribution 3
+
+- order：5
+
+- locator：Section 6 contribution 3
+
+- paraphrase_cn：第三点贡献：用空间网络和移动因子刻画行人移动；实证还显示方向与视觉比位置更主导移动成本，为行人移动建模提供设计洞见。
+
+- move_code：CONTRIBUTION_CLAIM
+
+- statement_status：contribution_claim
+
+- why_here_cn：回引言缺口二和2.3.3的空间建模缺口。
+
+- inherits_from_previous_cn：4.2节和Online Appendix J.结果。
+
+- changes_argument_state_cn：把技术建模升格为IS设计知识。
+
+- sets_up_next_cn：为管理启示提供知识基础。
+
+- failure_if_removed_cn：空间建模贡献消失。
+
+- evidence_pointer：Section 6 contribution 3
+
+### 6. Section 6 managerial 1
+
+- order：6
+
+- locator：Section 6 managerial 1
+
+- paraphrase_cn：方法可在多种物理环境部署，商场案例中带来1.03亿美元年增量（占2019年收入32.2%），并可推广到超市、商业街、世博会等。
+
+- move_code：IMPLICATION
+
+- statement_status：author_inference
+
+- why_here_cn：把收入模拟转为部署建议。
+
+- inherits_from_previous_cn：Figure 6收入结果。
+
+- changes_argument_state_cn：说明技术的经济可扩展性。
+
+- sets_up_next_cn：为公平与部署层面的第二条启示做对比。
+
+- failure_if_removed_cn：管理价值缺少实例。
+
+- evidence_pointer：Section 6 managerial 1
+
+### 7. Section 6 managerial 2
+
+- order：7
+
+- locator：Section 6 managerial 2
+
+- paraphrase_cn：去偏带来的优势无法由有偏推荐获得：推荐相关但低曝光店能丰富探索体验、给弱势店铺曝光、促进客流平衡。
+
+- move_code：IMPLICATION
+
+- statement_status：author_inference
+
+- why_here_cn：把公平性分析转为管理主张。
+
+- inherits_from_previous_cn：Figure 7结果。
+
+- changes_argument_state_cn：把技术结果定性为公平机制。
+
+- sets_up_next_cn：引出部署可行性与隐私。
+
+- failure_if_removed_cn：公平价值停留在离线分析。
+
+- evidence_pointer：Section 6 managerial 2
+
+### 8. Section 6 managerial 3
+
+- order：8
+
+- locator：Section 6 managerial 3
+
+- paraphrase_cn：定位技术普及使数据采集成熟，方法可便捷部署，通过手机、数字屏、AI机器人交付，需注意授权和opt-in/opt-out隐私原则。
+
+- move_code：IMPLICATION
+
+- statement_status：author_inference
+
+- why_here_cn：证明方法可落地而非仅离线仿真。
+
+- inherits_from_previous_cn：物理空间定位技术成熟度。
+
+- changes_argument_state_cn：回应系统实现与隐私担忧。
+
+- sets_up_next_cn：转向局限与未来方向。
+
+- failure_if_removed_cn：实践使用的障碍被忽略。
+
+- evidence_pointer：Section 6 managerial 3
+
+### 9. Section 6 limitations 1
+
+- order：9
+
+- locator：Section 6 limitations 1
+
+- paraphrase_cn：局限一：沿用隐式反馈中‘访问代表正偏好’假设；未来可放松并利用停留时间估算访问为正的概率。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：公开对正反馈假设的依赖。
+
+- inherits_from_previous_cn：式(7)中的假设。
+
+- changes_argument_state_cn：框定理论适用范围。
+
+- sets_up_next_cn：为后续局限铺开。
+
+- failure_if_removed_cn：理论边界不诚实。
+
+- evidence_pointer：Section 6 limitations 1
+
+### 10. Section 6 limitations 2–3
+
+- order：10
+
+- locator：Section 6 limitations 2–3
+
+- paraphrase_cn：局限二：采用最短路径假设，未来可用真实轨迹研究个体移动异质性；局限三：当前为2D，未来可扩展3D建模。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：交代空间建模的主要简化。
+
+- inherits_from_previous_cn：Assumption 1/2。
+
+- changes_argument_state_cn：明确移动建模的边界。
+
+- sets_up_next_cn：为购物模式和环境扩展留口。
+
+- failure_if_removed_cn：空间假设风险被隐藏。
+
+- evidence_pointer：Section 6 limitations 2–3
+
+### 11. Section 6 limitations 4–5
+
+- order：11
+
+- locator：Section 6 limitations 4–5
+
+- paraphrase_cn：局限四：未来可结合购物模式文献研究探索型、目的型、惯例型购物对曝光的影响；局限五：可评估超市、步行街和元宇宙等更多环境。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：把方法推广到行为异质性和其他空间。
+
+- inherits_from_previous_cn：当前只用一个商场数据。
+
+- changes_argument_state_cn：指出外部效度的下一步。
+
+- sets_up_next_cn：通向最终局限。
+
+- failure_if_removed_cn：跨场景外推缺乏路径。
+
+- evidence_pointer：Section 6 limitations 4–5
+
+### 12. Section 6 limitations 6
+
+- order：12
+
+- locator：Section 6 limitations 6
+
+- paraphrase_cn：局限六：缺现场实验，未来可观察真实顾客反应；并需区分行人移动与推荐系统显示共同造成的多种曝光偏差。
+
+- move_code：LIMITATION_AND_FUTURE
+
+- statement_status：author_inference
+
+- why_here_cn：承认离线评价做不到因果行为观察。
+
+- inherits_from_previous_cn：全部离线证据。
+
+- changes_argument_state_cn：留下最重要的未来入口。
+
+- sets_up_next_cn：结束全文。
+
+- failure_if_removed_cn：离线外推风险未被说明。
+
+- evidence_pointer：Section 6 limitations 6
+
+## Study累积逻辑
+
+### 1. 1
+
+- study_or_phase：问题形式化与曝光偏差概念化
+
+- evidence_job_cn：证明P3M是一个真实、可形式化且有独特机制的物理空间推荐问题。
+
+- what_it_establishes_cn：建立P3M定义，并把行人移动×空间布局动态交互确立为物理曝光偏差的主因。
+
+- what_it_cannot_establish_cn：不能证明任何算法能够纠正该偏差。
+
+- why_next_phase_is_needed_cn：需要把机制转成可学习的去偏优化目标。
+
+- transition_wording_function_cn：引言末尾“To address…we propose UMPR”和4.1开头把问题诊断交给学习目标。
+
+### 2. 2
+
+- study_or_phase：无偏pairwise学习框架与理论保证
+
+- evidence_job_cn：从数据生成过程导出无偏学习目标，并用Proposition给出误差减少保证。
+
+- what_it_establishes_cn：阶段切分和去偏组件在理论上分别降低过度断言误差与偏差误差。
+
+- what_it_cannot_establish_cn：不能给出曝光和相关性分数的可计算操作化。
+
+- why_next_phase_is_needed_cn：需要把概率P(O)、P(R)翻译成空间移动模型。
+
+- transition_wording_function_cn：4.2开头“We next develop the movement-aware recommendation model”把理论目标引向制品。
+
+### 3. 3
+
+- study_or_phase：行人移动系统与运动感知模型
+
+- evidence_job_cn：把抽象的概率去偏目标实现为可计算的空间网络、曝光因子和移动因子。
+
+- what_it_establishes_cn：曝光概率与相关分数均可操作化，且相关分数包含偏好匹配与移动成本权衡。
+
+- what_it_cannot_establish_cn：不能证明参数能有效联合估计。
+
+- why_next_phase_is_needed_cn：相关参数与去偏权重互相依赖，需要联合学习算法。
+
+- transition_wording_function_cn：4.3开头“we introduce how to find the optimal configuration”把模型转向训练。
+
+### 4. 4
+
+- study_or_phase：交替学习算法
+
+- evidence_job_cn：证明制品可训练、可收敛，并支持生成top N推荐。
+
+- what_it_establishes_cn：UMPR是可端到端训练的完整推荐算法。
+
+- what_it_cannot_establish_cn：不能说明在真实数据上的推荐质量。
+
+- why_next_phase_is_needed_cn：需要真实数据评价来判断方法是否有效。
+
+- transition_wording_function_cn：Section 5“In this section, we introduce the data set and evaluation procedure”把算法导向实证。
+
+### 5. 5
+
+- study_or_phase：主实验benchmark评价
+
+- evidence_job_cn：在真实商场数据上与多家族、SOTA及受控变体比较，证明整体优越性。
+
+- what_it_establishes_cn：UMPR在Recall@1/3/5和DCG@3/5上均显著优于全部基准。
+
+- what_it_cannot_establish_cn：不能说明优势具体来自哪个设计组件。
+
+- why_next_phase_is_needed_cn：需要用消融把整体优势归因到组件。
+
+- transition_wording_function_cn：5.3“To understand the superior performance…we conducted ablation studies”承接结果解释。
+
+### 6. 6
+
+- study_or_phase：消融研究
+
+- evidence_job_cn：通过UMPR-M和UMPR-U分离移动与去偏组件的因果贡献。
+
+- what_it_establishes_cn：两个组件各自显著且互补，移动组件利于短列表、去偏组件利于长列表。
+
+- what_it_cannot_establish_cn：不能证明性能提升有货币或社会价值。
+
+- why_next_phase_is_needed_cn：需要把精度价值转化为经济与公平价值。
+
+- transition_wording_function_cn：5.4“Having demonstrated the superior performance…we further investigate whether…translate into…”完成升级。
+
+### 7. 7
+
+- study_or_phase：增量收入模拟
+
+- evidence_job_cn：用四步模拟把推荐精度转化为可货币化的增量收入。
+
+- what_it_establishes_cn：UMPR在多种访问衰减率下都产生最高增量收入，并可折算为可观年收入。
+
+- what_it_cannot_establish_cn：不能证明收入在不同门店群体间公平分配。
+
+- why_next_phase_is_needed_cn：需要用公平性分析考察分配效应。
+
+- transition_wording_function_cn：5.5“Having demonstrated that the debiasing component leads to notable performance improvement…we further explore whether…promotes fairness…”承接。
+
+### 8. 8
+
+- study_or_phase：公平性分析
+
+- evidence_job_cn：用REO和PI证明去偏改善高低曝光组之间的推荐公平。
+
+- what_it_establishes_cn：UMPR比UMPR-U的REO下降13.5%–66.7%，低曝光组性能提升更大。
+
+- what_it_cannot_establish_cn：不能证实真实顾客探索行为或门店长期收益。
+
+- why_next_phase_is_needed_cn：评价链需要在结论中回收为贡献、边界和未来方向。
+
+- transition_wording_function_cn：结论部分把经济与公平结果统一收编为三点研究贡献和管理启示。
+
+## 主张—证据台账
+
+### 1. P3M是重要而未被充分研究的问题，行人移动×空间布局动态交互是其曝光偏差的主因。
+
+- claim_cn：P3M是重要而未被充分研究的问题，行人移动×空间布局动态交互是其曝光偏差的主因。
+
+- claim_level：theory
+
+- supporting_evidence_cn：在线推荐案例、商场视觉范围例子、Table 1物理与数字平台对比、Proposition 1/2的机制推导。
+
+- support_strength：partial
+
+- where_claim_is_made：Introduction P2–P6；Conclusion contribution 1
+
+- where_evidence_is_provided：Introduction P1–P4；Section 2.1；Section 4.1.3
+
+### 2. 无偏pairwise学习框架能降低训练误差。
+
+- claim_cn：无偏pairwise学习框架能降低训练误差。
+
+- claim_level：theory
+
+- supporting_evidence_cn：Proposition 1给出过度断言误差减少比例，Proposition 2给出偏差误差减少比例，并配Figure 3图示。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 4.1.3；Conclusion contribution 2
+
+- where_evidence_is_provided：Section 4.1.3 Proposition 1–2；Online Appendices B–C
+
+### 3. UMPR在P3M推荐准确性上优于SOTA和经典方法。
+
+- claim_cn：UMPR在P3M推荐准确性上优于SOTA和经典方法。
+
+- claim_level：technical
+
+- supporting_evidence_cn：Table 4所有指标UMPR最高，括号内相对提升和配对t检验p<0.001。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 5.2 P3；Abstract
+
+- where_evidence_is_provided：Section 5.2 Table 4
+
+### 4. 移动组件对短列表推荐贡献显著。
+
+- claim_cn：移动组件对短列表推荐贡献显著。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：UMPR相对UMPR-M在Recall@1提升16.3%，其余指标提升5.5%–9.7%。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 5.3 P2–P3
+
+- where_evidence_is_provided：Section 5.3 Table 5
+
+### 5. 去偏组件对长列表和非均匀曝光公平贡献显著。
+
+- claim_cn：去偏组件对长列表和非均匀曝光公平贡献显著。
+
+- claim_level：mechanism
+
+- supporting_evidence_cn：UMPR相对UMPR-U在Recall@5提升8.9%–11.8%，DCG@5提升10.6%；REO下降13.5%–66.7%，低曝光组PI更大。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 5.3 P2–P3；Section 5.5 P4
+
+- where_evidence_is_provided：Section 5.3 Table 5；Section 5.5 Figure 7
+
+### 6. 模型化去偏优于启发式去偏。
+
+- claim_cn：模型化去偏优于启发式去偏。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：在相关模型相同的情况下，UMPR相对Dist-MPR和Cat-MPR在Recall@3分别提升14.1%和15.0%。
+
+- support_strength：direct
+
+- where_claim_is_made：Section 5.2 P5
+
+- where_evidence_is_provided：Section 5.2 Table 4
+
+### 7. 更高的推荐精度可转化为显著增量收入。
+
+- claim_cn：更高的推荐精度可转化为显著增量收入。
+
+- claim_level：artifact
+
+- supporting_evidence_cn：100次收入模拟中UMPR在各类γ下均最高；γ=0.75时每条推荐增量0.405美元，可折算年增量1.03亿美元。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 5.4 P4–P5；Conclusion managerial 1
+
+- where_evidence_is_provided：Section 5.4 Figure 6；Online Appendix I模拟细节
+
+### 8. 去偏实现多利益相关者公平并缓解马太效应。
+
+- claim_cn：去偏实现多利益相关者公平并缓解马太效应。
+
+- claim_level：boundary
+
+- supporting_evidence_cn：REO@5降低13.5%–66.7%，低曝光组性能提升更明显；据此推断探索体验、弱势店流量和客流平衡。
+
+- support_strength：partial
+
+- where_claim_is_made：Section 5.5 P4–P5；Conclusion managerial 2
+
+- where_evidence_is_provided：Section 5.5 Figure 7
+
+### 9. 位置、方向、视觉等移动因子可作为可复用设计知识，其中方向与视觉更主导。
+
+- claim_cn：位置、方向、视觉等移动因子可作为可复用设计知识，其中方向与视觉更主导。
+
+- claim_level：design_knowledge
+
+- supporting_evidence_cn：实证主结果、消融、移动因子分析（Online Appendix J）以及UMPR在物理空间中的稳定优势。
+
+- support_strength：partial
+
+- where_claim_is_made：Conclusion contribution 3
+
+- where_evidence_is_provided：Section 4.2.4；Section 5；Online Appendix J
+
+## ISR定位逻辑
+
+- constitutive_is_problem_cn：文章没有把物理空间推荐写成单纯的算法调参问题，而是写成P3M：以楼层平面图、访问序列、行人移动为构成性输入，以曝光偏差为技术—行为—市场共同塑造的核心难题。曝光不是页面展示而是路径上的视觉接触，因此问题的定义本身包含了空间、移动和顾客行为的相互作用。
+
+- technology_behavior_or_market_entanglement_cn：技术设计不是可替换工具：空间网络、视觉角和移动成本是曝光机制的载体；算法一旦改变推荐，又会改变顾客移动方向和视觉范围，进而改变未来曝光、客流分布、马太效应和探索体验，形成技术与行为、商场市场的循环。
+
+- role_of_benchmark_or_objective_evidence_cn：Benchmark、消融、收入模拟和REO公平指标共同用于支持IS层面的主张：显式建模物理移动并配合数据生成理论驱动的去偏，才能同时改善精度、收入公平和弱势店铺曝光；客观证据的作用是把‘机制正确’变成‘系统有效且负责任’。
+
+- theory_in_design_cn：理论以三种方式进入设计：一是数据生成过程Y=O×R直接导出无偏目标；二是营销曝光两阶段文献和行人移动文献决定曝光/移动因子选择；三是Proposition 1/2把设计策略转化为误差减少保证。理论并非只解释结果，而是嵌入目标函数和因子结构；但τ_u、b_uk等参数依赖不可观测假设，理论属于设计原理而非预测行为模型。
+
+- technical_vs_is_contribution_balance_cn：技术贡献约占一半篇幅（学习目标、空间网络、五类移动因子、三个算法和理论命题），IS贡献通过头尾补齐：定义P3M/曝光偏差机制、把实验扩展为收入与公平的多利益相关者价值、把方法成果表述为可复用设计知识；评价部分约三分之一篇幅，结论部分落实IS意义。
+
+- beyond_transient_performance_cn：文章明显试图超越一次性分数优势：用理论命题解释为什么能去偏，用受控变体（UMPR-U/M、Cat-MPR、Dist-MPR）把性能差异归因到组件，用收入与公平分析把精度转化为货币和社会价值，再用三点贡献将结果升格为设计知识；但缺少现场实验与跨场景复制，使‘设计知识’外推仍有脆弱性。
+
+## 段落级仿写模板
+
+### abstract_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：用在线推荐成功建立背景和扩展动机。
+
+- evidence_required_cn：平台推荐有效或线下部署的真实案例。
+
+- sentence_function_cn：背景句，把读者引入离线推荐主题。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：命名研究问题并指出核心阻碍机制。
+
+- evidence_required_cn：可形式化的问题定义和明确机制。
+
+- sentence_function_cn：问题句+机制句，限定研究边界。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：用一句话区别于既有文献并声明方法三要素。
+
+- evidence_required_cn：与既有文献不同的场景或机制。
+
+- sentence_function_cn：缺口句+方案句，给出方法名和组件。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：报告核心实证结果。
+
+- evidence_required_cn：真实数据上的benchmark优势。
+
+- sentence_function_cn：结果句，提供证据锚。
+
+#### 5. 5
+
+- step：5
+
+- job_cn：报告价值延伸结果并给出总体意义。
+
+- evidence_required_cn：经济、公平或社会价值的分析。
+
+- sentence_function_cn：价值句+升华句。
+
+### introduction_paragraph_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：用案例或数据建立应用场景。
+
+- evidence_required_cn：行业实例、企业部署或收入数字。
+
+- sentence_function_cn：从现实案例走向一般问题。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：正式定义问题及其关键特征。
+
+- evidence_required_cn：可操作的定义和输入输出。
+
+- sentence_function_cn：定义句群，把场景转成研究对象。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：诊断核心机制并展示其后果。
+
+- evidence_required_cn：机制描述、情景例子或文献支持。
+
+- sentence_function_cn：机制句+后果句，制造必须解决的紧迫性。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：用文献分类和空白定位贡献。
+
+- evidence_required_cn：两到三个文献流派及各自局限。
+
+- sentence_function_cn：缺口句，把方法需求映射到文献空白。
+
+#### 5. 5
+
+- step：5
+
+- job_cn：预告方法、理论、实证和价值贡献。
+
+- evidence_required_cn：方法架构、理论保证和已计划评价。
+
+- sentence_function_cn：路线图句，给全文导航。
+
+### theory_to_design_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：建立理论或领域概念基础。
+
+- evidence_required_cn：既有文献中的阶段、因子或生成过程。
+
+- sentence_function_cn：概念导出设计因子的合法性。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：指出经典方法的局限并说明为何需要新设计。
+
+- evidence_required_cn：对现有方法族的代表性批评。
+
+- sentence_function_cn：局限句，设置设计靶子。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：把理论机制翻译成可学习目标或模型结构。
+
+- evidence_required_cn：明确的推导链或机制到公式的对应。
+
+- sentence_function_cn：翻译句，让理论进入设计。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：用命题或假设给出有效性保证。
+
+- evidence_required_cn：可推导的误差、下界或比较。
+
+- sentence_function_cn：命题句+图示句，保护设计合理性。
+
+#### 5. 5
+
+- step：5
+
+- job_cn：把每个设计构件操作化并说明其必要合理性。
+
+- evidence_required_cn：每个指标有定义、公式和文献依据。
+
+- sentence_function_cn：操作化句，让设计可复现。
+
+### method_and_study_sequence_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：给出方法和评价总路线。
+
+- evidence_required_cn：方法组件清单和评价目标。
+
+- sentence_function_cn：路标句，协调方法→实验。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：介绍数据和评估协议。
+
+- evidence_required_cn：真实数据来源、过滤、划分和指标。
+
+- sentence_function_cn：数据句，建立可复现性。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：安排基准和受控变体。
+
+- evidence_required_cn：方法家族覆盖和能隔离机制的对照。
+
+- sentence_function_cn：对照句，为归因铺路。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：按主结果→消融→价值→公平顺序推进。
+
+- evidence_required_cn：每个阶段都有明确指标、假设和过渡句。
+
+- sentence_function_cn：递进句，让评价链层层回答上一个未解问题。
+
+### results_reporting_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：先给总体结论再给表或图。
+
+- evidence_required_cn：汇总指标和显著性。
+
+- sentence_function_cn：总体结果句。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：分组解释相对提升的含义。
+
+- evidence_required_cn：每类基准的相对百分比。
+
+- sentence_function_cn：对比解读句，让数字有机制含义。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：用受控变体把优势归因到组件。
+
+- evidence_required_cn：消融设计和对应指标。
+
+- sentence_function_cn：归因句，把性能拆成设计属性。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：用价值模拟和社会指标扩展结论。
+
+- evidence_required_cn：经济模拟、公平指标和清晰假设。
+
+- sentence_function_cn：价值句，把精度升格为多利益相关者价值。
+
+### discussion_and_contribution_steps
+
+#### 1. 1
+
+- step：1
+
+- job_cn：重新开放问题语境并总结全文结果。
+
+- evidence_required_cn：引言问题与方法/实证的一条主线。
+
+- sentence_function_cn：闭环句。
+
+#### 2. 2
+
+- step：2
+
+- job_cn：按问题贡献、方法贡献、建模贡献逐条回收缺口。
+
+- evidence_required_cn：每条贡献对应引言中的具体gap和证据。
+
+- sentence_function_cn：贡献句+证据回顾句。
+
+#### 3. 3
+
+- step：3
+
+- job_cn：给出管理启示并把评价结果转为部署建议。
+
+- evidence_required_cn：收入、公平、部署可行性证据。
+
+- sentence_function_cn：启示句，面向实践读者。
+
+#### 4. 4
+
+- step：4
+
+- job_cn：按假设依赖列出局限和未来方向。
+
+- evidence_required_cn：每一条局限对应某个未验证假设。
+
+- sentence_function_cn：边界句+未来句，保护贡献不被过度泛化。
+
+## 可执行写作算法
+
+### 1. 1
+
+- step：1
+
+- rhetorical_job_cn：建立应用背景和商业急迫性。
+
+- research_evidence_required_cn：至少两个能说明‘线下推荐已在发生且能增收’的行业案例或数据。
+
+- sentence_pattern_function_cn：先给平台成功，再用案例证明场景真实，最后以‘因此’收束为研究机会。
+
+- transition_condition_cn：当读者认可物理推荐值得做时，进入问题定义。
+
+### 2. 2
+
+- step：2
+
+- rhetorical_job_cn：把场景形式化为可研究问题。
+
+- research_evidence_required_cn：明确输入（序列、楼层平面图）和输出（下一POI）。
+
+- sentence_pattern_function_cn：先命名问题，再列特征，再给目标函数。
+
+- transition_condition_cn：当问题输入输出清楚后，进入机制诊断。
+
+### 3. 3
+
+- step：3
+
+- rhetorical_job_cn：诊断核心阻碍机制并用例子使其可感知。
+
+- research_evidence_required_cn：一个可解释的机制和至少一个可视化或情景化例子。
+
+- sentence_pattern_function_cn：机制句→具体场景演算→后果句→设计要求句。
+
+- transition_condition_cn：当机制和后果明确时，进入文献缺口。
+
+### 4. 4
+
+- step：4
+
+- rhetorical_job_cn：用文献分类表制造空白格。
+
+- research_evidence_required_cn：对两个研究流的系统综述和代表性方法。
+
+- sentence_pattern_function_cn：先分类，再逐类批评，最后用表格指出空白格或‘our method’。
+
+- transition_condition_cn：当空白格可被读者看到时，进入方法贡献声明。
+
+### 5. 5
+
+- step：5
+
+- rhetorical_job_cn：把理论机制翻译成学习目标。
+
+- research_evidence_required_cn：数据生成过程或领域机制，可推导的公式链。
+
+- sentence_pattern_function_cn：先给生成过程，再定义概率对象，最后把概率嵌入目标函数。
+
+- transition_condition_cn：当目标函数有概率基础后，进入有效性保证。
+
+### 6. 6
+
+- step：6
+
+- rhetorical_job_cn：用命题和图示给出理论保证。
+
+- research_evidence_required_cn：可量化的误差减少比例或下界，并可作图。
+
+- sentence_pattern_function_cn：定义误差→陈述命题→证明指向附录→解释图示和边界条件。
+
+- transition_condition_cn：当理论保证成立后，进入可计算模型。
+
+### 7. 7
+
+- step：7
+
+- rhetorical_job_cn：把概率目标操作化为空间与移动模型。
+
+- research_evidence_required_cn：真实空间数据可支持的空间网络、路径假设、视觉角和因子。
+
+- sentence_pattern_function_cn：先建系统，再给模型框架，再逐因子定义公式。
+
+- transition_condition_cn：当每个因子可计算时，进入学习算法。
+
+### 8. 8
+
+- step：8
+
+- rhetorical_job_cn：解决参数耦合的学习问题。
+
+- research_evidence_required_cn：目标函数、子算法和收敛或交替策略。
+
+- sentence_pattern_function_cn：先列主目标，再说明两个子问题互赖，最后给出交替算法。
+
+- transition_condition_cn：当算法可训练时，进入实证评价。
+
+### 9. 9
+
+- step：9
+
+- rhetorical_job_cn：选择能证明场景真实且可复现的数据与评估协议。
+
+- research_evidence_required_cn：真实数据、LOO划分、网格搜索和标准指标。
+
+- sentence_pattern_function_cn：数据规模→数据来源→评估协议→指标说明。
+
+- transition_condition_cn：当评审者能复现协议时，进入基准比较。
+
+### 10. 10
+
+- step：10
+
+- rhetorical_job_cn：用多家族基准加受控变体建立归因基础。
+
+- research_evidence_required_cn：方法家族覆盖和能隔离去偏机制的变体。
+
+- sentence_pattern_function_cn：以分类选择基准，以受控变体制造可解释对比。
+
+- transition_condition_cn：当结果显著且归因清晰时，进入消融。
+
+### 11. 11
+
+- step：11
+
+- rhetorical_job_cn：把性能优势转化为经济和社会价值。
+
+- research_evidence_required_cn：可接受的模拟假设、收入数据和公平指标。
+
+- sentence_pattern_function_cn：用‘Having demonstrated…we further…’转换评价层级，先给具体金额，再给公平性分组。
+
+- transition_condition_cn：当价值分析完成时，进入结论。
+
+### 12. 12
+
+- step：12
+
+- rhetorical_job_cn：把局部结果升格为贡献并列出边界。
+
+- research_evidence_required_cn：每条贡献对应引言缺口，每条局限对应未验证假设。
+
+- sentence_pattern_function_cn：三点贡献逐一回收缺口，再接管理启示，最后按假设列出未来方向。
+
+- transition_condition_cn：当贡献与边界对齐时，文章结束。
+
+## 应模仿的高价值动作
+
+1. 用‘机制→情景例子→后果→设计要求’的链条把抽象曝光偏差变成具体方法需求。
+
+2. 在引言和Related Work同时制造两个可区分的主要缺口：模型去偏×pairwise学习、物理移动×空间布局。
+
+3. 用文献分类表（Table 2）把本文方法直接放进空白格，而不只是文字声称。
+
+4. 从数据生成过程Y=O×R导出目标函数，使去偏权重获得概率解释。
+
+5. 用Proposition 1/2和Figure 3保护方法不只是benchmark结果，并给出边界条件。
+
+6. 设计Cat-MPR和Dist-MPR两个受控变体，让‘模型去偏优于启发式去偏’在同一张表内可读。
+
+7. 用消融UMPR-M/U把整体优势拆到具体组件，并说明不同推荐长度下组件的不同适用性。
+
+8. 用‘Having demonstrated…we further…’句式把评价链从精度推到收入再到公平，形成价值升级。
+
+9. 结论部分把三点贡献分别回扣引言的两个缺口和一个空间建模缺口，使整篇论证闭环。
+
+10. 把局限性逐一对应到具体假设（正偏好、最短路径、2D、单一场景），为未来研究留下可操作入口。
+
+## 不要只复制的表面动作
+
+1. 不能只罗列11个基准并宣称全最优，而不做消融或机制归因。
+
+2. 不能在没有文献分类表或空白格的情况下只用‘first/among the first’定位贡献。
+
+3. 不能把模拟收入当现场实验证据；若要强调金额，必须交代假设和不确定性。
+
+4. 不能把公平性结论只建立在离线REO上，却宣称真实探索体验已经改善。
+
+5. 不能把Popularity作为曝光代理却不讨论遗漏事前曝光渠道。
+
+6. 不能只写‘未来可扩展到元宇宙/3D’等通用未来句，而不对接本方法的具体假设。
+
+7. 不能在缺少真实轨迹的情况下把最短路径假设叙述为事实。
+
+## 证据薄弱或跳跃的动作
+
+1. 把γ=0.75时模拟出的1.03亿美元年增量作为‘可产生’的营销式陈述，但无现场部署证据。
+
+2. 用REO和PI离线指标推断顾客探索体验和弱势店长期收益，跨度较大。
+
+3. Proposition依赖τ_u和b_uk等不可观测参数，正文未直接估计这些参数。
+
+4. 曝光用Access/Visibility/Popularity代理，未直接测量实际视觉曝光。
+
+5. 所有观测访问均被假设为正反馈，未检验真实负反馈或误差。
+
+6. 只在一个北京商场验证，却将设计知识推广到超市、步行街、世博会和元宇宙。
+
+7. 推荐显示本身会引入新的曝光偏差，正文仅在结尾以未来问题提及，未纳入当前设计。
+
+## 一句话套路
+
+把实体空间中的一个行为—空间偏差机制（行人移动×布局造成的非均匀曝光）形式化为去偏学习目标，用空间网络和移动因子构造可计算制品，再通过benchmark、消融、收入模拟和公平性分析把算法成果包装为可复用的IS设计知识。
+
+## 分析边界
+
+正文全文可读，但Online Appendices A–O仅在文中以引用形式出现，Proposition证明、算法详细更新公式、稳健性检验、收入模拟细节、购物模式分析与系统实现细节无法从正文直接核实；段落边界基于自然段近似，可能和出版社排版页码不一致；Table 4/Figure 6/Figure 7等数值依据正文文字与表格文本，个别图表无法逐点复核。

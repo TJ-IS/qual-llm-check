@@ -1,0 +1,1078 @@
+{
+  "record_id": "4736",
+  "source_file": "04736_2020_bayesian-neural-networks-for-flight-trajectory-prediction-and-safety-assessment.md",
+  "title": "Bayesian neural networks for flight trajectory prediction and safety assessment",
+  "authors": "Xiaoge Zhang; Sankaran Mahadevan",
+  "year": "2020",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113246",
+  "fulltext_chars": 105682,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "logistics_transport_supply_chain_and_manufacturing",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:53.967750+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何利用美国联邦航空管理局SWIM/FIXM大规模实时飞行消息，发展兼具准确性与不确定性量化的航迹预测方法，并用于航路飞行安全评估。",
+    "artifact_and_design_cn": "提出四步式航迹预测与安全评估方法：用Apache Spark解析大规模FIXM消息；训练两类贝叶斯深度神经网络——前馈DNN预测实际航迹与计划航迹的偏差，LSTM预测未来多个时间点的完整航迹状态；用当前时刻DNN与LSTM预测均值之差作为修正项，将DNN的高精度修正到LSTM的未来多个时刻预测上；最后用概率化水平与垂直间隔距离指标评估两机安全。",
+    "objective_outcomes_cn": "Spark将24小时SFDPS消息解析时间从约一周降至约10小时；概率化DNN较确定性DNN在纬度和经度偏差预测上RMSE分别降低2.11%和2.98%，并优于线性模型、SVM和决策树回归；集成模型在纬度和经度预测上的RMSE较原始LSTM降低49%和58%；对多个航班跨验证的平均空间误差约为2.4747英里；两机间隔距离预测MAE为3.78英里，约为实际值的2.7%。",
+    "core_contribution_cn": "作者声称的贡献有四方面：用分布式计算平台处理FIXM大数据；用两类贝叶斯神经网络从不同角度预测并量化不确定性；通过差异修正融合两类模型，同时获得DNN的精度和LSTM的长时预测能力；提出概率化间隔距离安全指标。",
+    "whole_argument_in_one_paragraph_cn": "文章从航空需求增长、间隔缩小和航路安全风险上升出发，指出现有航迹预测依赖物理模型时需要难以获得的实时飞机状态，而数据驱动深度学习虽能利用海量历史航迹却较少处理预测不确定性。作者引入贝叶斯神经网络与Monte Carlo dropout作为可计算的不确定性量化工具，并针对真实SWIM/FIXM大数据构建完整pipeline。首先证明Spark解析可行，再分别构建单步高精度的DNN偏差预测模型和多步低精度的LSTM状态预测模型；随后用DNN在共同变量上的均值差修正LSTM未来五步预测，并以间隔距离安全指标把轨迹预测转化为安全评估。计算实验逐级验证数据解析、概率化DNN、LSTM多步能力、集成模型改进、多航班泛化以及安全间隔预测，最终回到飞行安全决策与未来研究边界。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章不是以理论假设或受控实验为主线，而是面向真实航空大数据构建端到端预测与安全评估制品：提出需求、设计pipeline、构建模型集成、用多项计算实验评价，并总结可复用设计知识。",
+  "dominant_writing_arc": "performance_gap_artifact_benchmark_generalize",
+  "dominant_writing_arc_reason_cn": "全文遵循“现实性能与安全缺口→制品构建→组件与整体基准比较→多航班泛化与设计知识”的弧线，而非理论驱动或严格现场因果检验。",
+  "research_program": {
+    "study_or_phase_count": 7,
+    "overall_sequence_cn": "共七个阶段：①SFDPS大数据解析；②轨迹数据预处理；③DNN偏差预测模型；④LSTM状态预测模型；⑤两类模型集成；⑥两机间隔安全评估；⑦留一交叉验证和多航班泛化。前三阶段解决数据与单步高精度预测，第四阶段提供长时预测但精度较低，第五阶段将二者融合，第六阶段把预测用于实际安全指标，第七阶段验证模型稳定性与泛化性。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "SFDPS大数据解析",
+        "question_cn": "如何从每日约100GB、格式复杂的FIXM消息中高效提取航迹信息。",
+        "inputs_and_setting_cn": "FAA SWIM SFDPS流式FIXM消息，正文报告实验期间共约4.2TB数据；使用Windows 10桌面、Intel Core i7-4790、16GB内存。",
+        "designed_or_compared_object_cn": "Apache Spark解析流程：spark-xml解析、过滤‘TH’跟踪消息、按航班日期和航班ID分组、按位置时间排序、每个航班输出CSV。",
+        "baseline_control_or_counterfactual_cn": "非严格对照；叙述中对比原处理方式从近一周缩短到约10小时。",
+        "objective_metrics": [
+          "数据处理时间",
+          "单日消息处理量",
+          "提取航迹的数据完整性"
+        ],
+        "analysis_method_cn": "分布式内存计算、XML解析、SQL式分组排序、轨迹可视化与定量完整性检查。",
+        "main_result_cn": "24小时SFDPS消息处理时间从约一周降低到约10小时；成功提取航班航迹并可视化验证。",
+        "argumentative_role_cn": "证明后续深度学习模型的输入能从真实大数据中规模化获得，解决“数据可得与计算可行”的问题。",
+        "remaining_uncertainty_cn": "原始消息存在重复、缺失、时间间隔不规则，需要进一步预处理。",
+        "link_to_next_phase_cn": "引向轨迹预处理：去重、等时间间隔化、插值补齐缺失记录。",
+        "evidence_pointers": [
+          "Section 4.1 末段：24小时消息处理时间对比",
+          "Table 1",
+          "Fig. 5"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "轨迹数据预处理",
+        "question_cn": "如何把雷达报告中的重复记录、不规则时间间隔和缺失记录整理成等时间间隔的轨迹序列。",
+        "inputs_and_setting_cn": "Spark解析后得到的每个航班的轨迹CSV，包含位置时间、目标位置时间、实际/目标经纬度、高度、速度等。",
+        "designed_or_compared_object_cn": "设计规则：删除重复记录；以12秒为基准，在后续四行搜索距离期望时间戳最近的记录；对24秒以上缺失作线性插值。",
+        "baseline_control_or_counterfactual_cn": "无实验对照；以12秒标准时间间隔为参照。",
+        "objective_metrics": [
+          "相邻记录时间间隔是否接近12秒",
+          "缺失记录是否补齐"
+        ],
+        "analysis_method_cn": "规则化记录筛选、线性插值。",
+        "main_result_cn": "获得具有近似等时间间隔的航迹序列，为DNN和LSTM输入提供规范化数据。",
+        "argumentative_role_cn": "保证模型训练输入的时序一致性，避免重复记录和缺失值污染预测。",
+        "remaining_uncertainty_cn": "插值会引入近似误差；搜索窗口大小是启发式设定，未做敏感性分析。",
+        "link_to_next_phase_cn": "为DNN偏差预测和LSTM状态预测分别提供处理好的当前状态与历史轨迹。",
+        "evidence_pointers": [
+          "Section 4.2.1 全部段落",
+          "Fig. 6",
+          "Table 1 中绿、蓝、红阴影示例"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "DNN航迹偏差预测模型",
+        "question_cn": "如何用前馈深度神经网络做高精度的单步航迹偏差预测，并在预测中量化不确定性。",
+        "inputs_and_setting_cn": "以AAL598航班48天历史轨迹为主要数据；输入为当前时刻轨迹偏差、X/Y速度、当前高度和地速，输出为下一时刻纬度和经度偏差。",
+        "designed_or_compared_object_cn": "三层前馈DNN（32-64-32，ReLU），训练两个同结构模型分别预测纬度和经度偏差；在每层前使用dropout近似贝叶斯后验。",
+        "baseline_control_or_counterfactual_cn": "确定性DNN、线性模型、SVM、决策树回归；概率化DNN与确定性DNN对比。",
+        "objective_metrics": [
+          "RMSE",
+          "MAE",
+          "预测位置空间距离",
+          "采样时间"
+        ],
+        "analysis_method_cn": "网格搜索超参数、MC dropout预测分布、留一轨迹交叉验证。",
+        "main_result_cn": "概率化DNN在纬度/经度偏差预测上RMSE较确定性DNN降低2.11%/2.98%，并优于三种简单基线；1000次MC采样平均耗时0.11秒。",
+        "argumentative_role_cn": "提供高精度但仅单步的预测成分，证明不确定性量化不损害精度反而略有提升。",
+        "remaining_uncertainty_cn": "只能预测下一时刻，无法提供未来更长时间窗口。",
+        "link_to_next_phase_cn": "需要LSTM提供长时预测，从而引出模型集成。",
+        "evidence_pointers": [
+          "Section 4.2.2",
+          "Section 5.2 DNN讨论",
+          "Section 5.3 Table 3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "LSTM航迹状态预测模型",
+        "question_cn": "如何用LSTM从历史轨迹模式中预测未来多个时刻的完整航迹状态。",
+        "inputs_and_setting_cn": "同一AAL598航班历史轨迹；输入为过去20个时刻的纬度、经度、高度、X/Y速度等状态，输出为未来5个时刻的状态；通过迭代输入预测再推至未来10个时刻。",
+        "designed_or_compared_object_cn": "两层堆叠LSTM，每层20个LSTM块、每块50维；因变量损失尺度不同，拆成两个模型：模型A预测纬度和经度，模型B预测高度和X/Y速度；对输入、输出和循环层应用MC dropout。",
+        "baseline_control_or_counterfactual_cn": "无明确基线；主要与后续集成模型比较。",
+        "objective_metrics": [
+          "RMSE",
+          "MAE",
+          "预测时域长度"
+        ],
+        "analysis_method_cn": "LSTM序列预测、MC dropout不确定性采样、迭代多步预测。",
+        "main_result_cn": "LSTM能预测未来10个时间点（约2分钟），为管制员提供足够反应时间；但与真实值存在可见偏差。",
+        "argumentative_role_cn": "提供长时预测能力但精度不足，界定集成模型需要解决的问题。",
+        "remaining_uncertainty_cn": "随预测步长增加误差累积，精度不如DNN。",
+        "link_to_next_phase_cn": "引出用高精度DNN修正LSTM预测的集成设计。",
+        "evidence_pointers": [
+          "Section 4.2.3",
+          "Section 5.2 LSTM讨论",
+          "Fig. 13"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "模型集成",
+        "question_cn": "如何融合DNN的高精度和LSTM的长时预测能力。",
+        "inputs_and_setting_cn": "同一航班AAL598的DNN偏差预测与LSTM状态预测；共同输出变量为纬度和经度。",
+        "designed_or_compared_object_cn": "用当前时刻DNN均值预测减去LSTM均值预测得到差异项Δ，将Δ加到LSTM在t+1至t+5时刻的经纬度预测上。",
+        "baseline_control_or_counterfactual_cn": "集成模型与原始LSTM模型对比；讨论中排除只做单步修正的方案。",
+        "objective_metrics": [
+          "RMSE",
+          "MAE",
+          "空间距离误差"
+        ],
+        "analysis_method_cn": "均值差异修正、预测分布传播，后用交叉验证比较。",
+        "main_result_cn": "集成模型在纬度和经度预测上RMSE较LSTM分别降低49%和58%；预测误差随步长增加但整体改善显著。",
+        "argumentative_role_cn": "证明“DNN修正LSTM”设计能同时保留长时预测窗口与较高精度。",
+        "remaining_uncertainty_cn": "尚未证明该修正策略在多个航班上稳定，也未有专门消融实验检验一步修正与多步修正。",
+        "link_to_next_phase_cn": "把集成模型从单航班扩展到两机间隔预测与安全评估。",
+        "evidence_pointers": [
+          "Section 4.3 公式(4)-(6)",
+          "Section 5.2 集成模型讨论",
+          "Section 5.3 Table 4"
+        ]
+      },
+      {
+        "order": 6,
+        "name_cn": "两机间隔安全评估",
+        "question_cn": "如何把概率化航迹预测转化为两机水平与垂直间隔是否受威胁的定量判断。",
+        "inputs_and_setting_cn": "集成模型对AAL598与UAL1767两个航班的预测轨迹；实际间隔距离作为参照。",
+        "designed_or_compared_object_cn": "提出概率化安全指标：计算两机在后续五个时刻的水平与垂直间隔小于阈值的概率，并设置阈值λ与指示函数。",
+        "baseline_control_or_counterfactual_cn": "模型预测的间隔距离与真实间隔距离比较；安全阈值采用航路最小水平间隔5海里和垂直间隔300米。",
+        "objective_metrics": [
+          "间隔距离MAE",
+          "预测误差与实际值占比",
+          "是否触发安全违规概率"
+        ],
+        "analysis_method_cn": "概率分布采样、间隔距离统计、阈值判断。",
+        "main_result_cn": "模型较好捕获两机间隔变化；空间距离MAE为3.78英里，约为实际值的2.7%；示例中两机未违反间隔约束。",
+        "argumentative_role_cn": "把前面的轨迹预测能力连接到最终的安全决策支持目标，说明制品有实际用途。",
+        "remaining_uncertainty_cn": "仅分析一对航班；未包含真实冲突/不安全事件；气象和管制干预未显式建模。",
+        "link_to_next_phase_cn": "下一步通过多航班交叉验证增强集成模型的泛化证据。",
+        "evidence_pointers": [
+          "Section 4.4 公式(7)",
+          "Section 5.2 安全间隔讨论",
+          "Fig. 15",
+          "Table 2"
+        ]
+      },
+      {
+        "order": 7,
+        "name_cn": "留一交叉验证与多航班泛化",
+        "question_cn": "单个航班的展示是否可靠？集成模型在多个航班上是否稳健？",
+        "inputs_and_setting_cn": "AAL598的48天轨迹逐次留一；另外对AAL1020、AAL1023、AAL1029、AAL1340、CPZ6068、ASA770、DAL1140等7个航班进行类似验证。",
+        "designed_or_compared_object_cn": "对每个航班训练“航班ID专用”模型；每次保留一条完整轨迹为测试集，其余47条训练；重复48次。",
+        "baseline_control_or_counterfactual_cn": "同一航班不同轨迹之间的交叉验证；多个不同航班ID之间的误差稳定性。",
+        "objective_metrics": [
+          "RMSE",
+          "MAE",
+          "预测位置与真实位置的空间距离"
+        ],
+        "analysis_method_cn": "留一交叉验证、模型误差平均。",
+        "main_result_cn": "概率化DNN较确定性DNN略有提升；集成模型较LSTM在经纬度上大幅改进；7个航班平均空间误差2.4747英里，但不同航班间偏差有差异。",
+        "argumentative_role_cn": "把核心结果从单个例子提升为可泛化的模型性能证据，支撑贡献主张。",
+        "remaining_uncertainty_cn": "平均误差掩盖航班间差异；未使用最新外部SOTA模型对比；未检验气象、非美国空域和特殊事件。",
+        "link_to_next_phase_cn": "结论部分回到方法贡献和未来方向，并以“天气显式建模、可视化、全球空域、模型可解释性”作为边界。",
+        "evidence_pointers": [
+          "Section 5.1 数据说明",
+          "Algorithm 1",
+          "Section 5.3",
+          "Table 3",
+          "Table 4",
+          "Table 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT: 安全是民航首要关切",
+      "RQ_OR_OBJECTIVE: 用贝叶斯深度学习提高航路飞行安全",
+      "STUDY_OVERVIEW: 四步方法：Spark解析、两类深度模型、多保真融合、安全评估",
+      "RESULT: 计算结果表明混合模型性能良好"
+    ],
+    "introduction_moves": [
+      "CONTEXT: IATA预测航空需求翻倍",
+      "PRACTICAL_STAKES: 缩小间隔增加空域容量但威胁安全",
+      "PRACTICAL_STAKES: FAA安全事件数据增加",
+      "CONTEXT: NextGen和SWIM提供新数据环境",
+      "PRIOR_KNOWLEDGE: 轨迹预测已有大量研究并分物理模型与数据驱动",
+      "LIMITATION: 物理模型需要难以获取的实时状态",
+      "PRIOR_KNOWLEDGE: 深度学习可用于轨迹预测",
+      "LIMITATION: 数据驱动模型常忽略预测不确定性",
+      "THEORY_INTRO: 贝叶斯概率论提供不确定性推理框架",
+      "LIMITATION: 深度学习中贝叶斯推断计算不可行",
+      "PRIOR_KNOWLEDGE: MC dropout近似贝叶斯推断可行",
+      "RQ_OR_OBJECTIVE: 训练两类贝叶斯网络并融合",
+      "CONTRIBUTION: 四项贡献列表",
+      "STUDY_OVERVIEW: 全文结构预告"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO: 贝叶斯后验分布与预测分布",
+      "LIMITATION: 精确后验因非线性与非共轭不可计算",
+      "THEORY_INTRO: Variational inference以及MC dropout的KL散度解释",
+      "MECHANISM: dropout随机置零并采样得到预测分布"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT: 用Spark应对100GB/日FIXM数据",
+      "DESIGN_FEATURE: spark-xml解析、过滤TH源、按航班分组排序",
+      "DESIGN_FEATURE: DNN预测偏差且只做单步",
+      "DESIGN_FEATURE: LSTM预测未来多时刻完整状态",
+      "DESIGN_FEATURE: 将LSTM拆成两个模型避免损失尺度支配",
+      "DESIGN_FEATURE: 用DNN与LSTM均值差修正未来五个时刻",
+      "DESIGN_FEATURE: 概率化间隔距离安全指标"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION: 用网格搜索调超参数",
+      "RESULT: DNN偏差预测与真实值接近",
+      "BENCHMARK_OR_CONTRAST: 概率DNN与确定性DNN及线性/SVM/决策树比较",
+      "BENCHMARK_OR_CONTRAST: 集成模型与原始LSTM比较",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 留一轨迹交叉验证",
+      "ROBUSTNESS_OR_BOUNDARY_TEST: 多航班集成模型验证",
+      "RESULT: 安全间隔预测误差约2.7%"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION: 总结四步方法",
+      "CONTRIBUTION: 重申Spark可扩展、贝叶斯不确定性、双模型融合、概率安全指标",
+      "BOUNDARY_CONDITION: 模型针对美国空域航班ID训练",
+      "LIMITATION_AND_FUTURE: 未显式纳入天气",
+      "LIMITATION_AND_FUTURE: 缺少可视化系统",
+      "LIMITATION_AND_FUTURE: 需检验欧洲等不同空域",
+      "LIMITATION_AND_FUTURE: 模型可解释性与航班间偏差差异"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "贝叶斯概率理论与变分推断",
+      "Monte Carlo dropout对贝叶斯神经网络的近似",
+      "前馈神经网络与LSTM的能力差异：单步精度 vs 时序长时建模",
+      "民航航路最小水平和垂直间隔标准",
+      "多变量回归中损失尺度不平衡的工程经验"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "贝叶斯推断知识与MC dropout技术确实直接决定了不确定性量化方式，但核心的“DNN偏差预测+LSTM状态预测+差异修正”架构主要来自深度学习方法特性和工程启发，而非某个形式理论前瞻推导。",
+    "translation_chain_cn": "贝叶斯后验不可计算→用MC dropout近似后验→在DNN与LSTM中于输入、隐藏或循环层做dropout，并在测试时多次采样得到预测分布；DNN能高精度预测单步偏差但无法外推多步，LSTM能利用时序记忆预测未来多点但精度较低→用两者在共同变量上的当前均值差作为修正项，把DNN的精度传递给LSTM未来五步；民航使用水平5海里和垂直300米间隔标准→把两机预测轨迹的间隔距离转化为违规概率，形成安全指标。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "MC dropout最小化变分分布与贝叶斯后验的KL散度，可近似贝叶斯推断。",
+        "mechanism_cn": "训练后仍按Bernoulli分布随机丢弃单元并多次前向传播，得到预测分布。",
+        "design_requirement_cn": "深度模型必须输出不确定性而不是单点预测。",
+        "artifact_choice_cn": "DNN和LSTM都在预测阶段使用MC dropout，概率化DNN采样1000次，LSTM在输入/输出/循环层应用dropout。",
+        "evaluated_contrast_cn": "概率化DNN与确定性DNN对比。",
+        "objective_result_cn": "概率化DNN的RMSE在纬度/经度上分别降低2.11%/2.98%。",
+        "evidence_pointers": [
+          "Section 3.3",
+          "Section 5.3 Table 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "前馈网络适合固定输入输出映射但无时序记忆；LSTM适合时序依赖但误差会累积。",
+        "mechanism_cn": "DNN基于当前状态和偏差只能预测下一时刻；LSTM通过细胞状态保存20步记忆预测未来5步。",
+        "design_requirement_cn": "需要同时有单步高精度与长时预测能力。",
+        "artifact_choice_cn": "DNN预测偏差且只做一步；LSTM预测完整状态并迭代至未来10步。",
+        "evaluated_contrast_cn": "集成模型与原始LSTM模型预测比较。",
+        "objective_result_cn": "集成模型在经纬度RMSE上较LSTM降低49%/58%。",
+        "evidence_pointers": [
+          "Section 4.2.2",
+          "Section 4.2.3",
+          "Section 4.3",
+          "Section 5.3 Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "多输出回归时不同响应变量损失尺度差异会导致大损失变量主导训练。",
+        "mechanism_cn": "共享网络参数沿最大损失方向优化，小损失但高精度的经纬度会被忽视。",
+        "design_requirement_cn": "把损失尺度相近的响应变量分组建立独立模型。",
+        "artifact_choice_cn": "LSTM模型A只预测纬度和经度，模型B预测高度与X/Y速度。",
+        "evaluated_contrast_cn": "未作专门消融实验，但以模型A和模型B的结果分开展示。",
+        "objective_result_cn": "模型A和模型B各自达到可用的预测精度。",
+        "evidence_pointers": [
+          "Section 4.2.3 模型分组段落",
+          "Table 4"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "航路安全评估使用最小水平间隔5海里和垂直间隔300米。",
+        "mechanism_cn": "将两机预测轨迹的间隔距离与阈值比较，并通过概率化轨迹得到违规概率。",
+        "design_requirement_cn": "安全指标必须处理预测的不确定性。",
+        "artifact_choice_cn": "定义概率化安全指标I[...]，综合水平与垂直违规。",
+        "evaluated_contrast_cn": "模型预测的AAL598与UAL1767间隔距离与真实间隔比较。",
+        "objective_result_cn": "空间距离MAE为3.78英里，约为真实值的2.7%，示例中未触发违规。",
+        "evidence_pointers": [
+          "Section 4.4 公式(7)",
+          "Fig. 15",
+          "Table 2"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "数据规模可行性评估：Spark处理时间对比",
+      "组件有效性评估：DNN与LSTM各自预测展示",
+      "不确定性价值评估：概率化DNN vs 确定性DNN",
+      "基线比较：DNN vs 线性模型/SVM/决策树回归",
+      "集成效果评估：集成模型 vs 原始LSTM",
+      "稳健性评估：48次留一轨迹交叉验证",
+      "泛化评估：7个不同航班的航迹预测",
+      "端任务评估：两机间隔距离预测与真实值比较"
+    ],
+    "why_these_evaluations_cn": "这些评价按论证需求逐级展开：先证明大数据解析可行；再证明概率化DNN单步高精度且比简单基线好；再证明LSTM能提供长时窗口；然后证明集成模型改善LSTM；最后用交叉验证和多航班证明不是单例巧合，并用安全间隔预测证明端任务价值。",
+    "benchmark_and_contrast_chain_cn": "基准链为：确定性DNN和三种机器学习基线建立DNN的精度水平→LSTM展示长时但精度有限→集成模型与原始LSTM的对照隔离出“DNN修正”的净增益→多航班表5和留一交叉验证将证据从单航班推至多个航班→真实间隔距离误差2.7%把轨迹预测连接到安全评估。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "Spark能高效处理FIXM大数据。",
+        "evidence_cn": "处理24小时消息从一周缩短至约10小时，并成功解析4.2TB数据。",
+        "verdict_cn": "支持，但缺少与Spark以外的工具严格基准。"
+      },
+      {
+        "claim_cn": "概率化DNN优于确定性DNN和简单基线。",
+        "evidence_cn": "Table 3的RMSE/MAE与线性、SVM、决策树对比。",
+        "verdict_cn": "支持，改进幅度较小但方向一致。"
+      },
+      {
+        "claim_cn": "集成模型同时获得DNN精度与LSTM长时能力。",
+        "evidence_cn": "Table 4中集成模型较LSTM在经纬度RMSE降低49%/58%。",
+        "verdict_cn": "支持，但只在共同变量上证明，未比较DNN直接多步外推。"
+      },
+      {
+        "claim_cn": "集成模型在多航班上稳健。",
+        "evidence_cn": "Table 5中7个航班平均空间误差2.4747英里。",
+        "verdict_cn": "支持，但航班间方差明显，且样本较小。"
+      },
+      {
+        "claim_cn": "概率安全指标可用于评估航路安全。",
+        "evidence_cn": "AAL598与UAL1767的预测间隔与真实间隔对比，MAE为3.78英里且无违规。",
+        "verdict_cn": "部分支持，仅一个航班对，且没有真实冲突样本。"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用留一轨迹交叉验证防止同一航班轨迹过拟合；用确定性模型、线性模型、SVM、决策树和原始LSTM作为对照；用概率化均值计算误差，避免不确定性引入主观偏差。",
+    "external_validity_strategy_cn": "使用真实FAA SWIM/FIXM数据、多种航班ID和多天历史轨迹；安全阈值采用实际民航标准；通过多航班表5展示跨航班稳定。",
+    "what_is_not_actually_tested_cn": "未与当前最新轨迹预测SOTA比较；没有真实冲突或安全性损失事件样本；没有对“一步修正 vs 多步修正”做消融；没有检验天气、非美国空域、不同机型、管制干预等边界条件；概率化安全指标阈值λ如何设定未讨论。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "所提出的贝叶斯深度学习和多模型融合方法在真实FAA大数据上实现了较高的航迹预测精度与不确定性量化效率。",
+    "artifact_claim_cn": "DNN与LSTM的差异修正集成是性能提升的关键设计：把DNN的单步偏差信息用于校正LSTM未来五个时刻的经纬度预测。",
+    "mechanism_claim_cn": "DNN精度高但视野短，LSTM视野长但精度低；在共同输出变量上取当前时刻均值差作为修正项，可以把DNN的优势沿时间轴传递给LSTM。",
+    "boundary_claim_cn": "方法针对美国空域内固定航班ID的商用航班、约为12秒更新频率的航路轨迹；数据来自2018年12月至2019年2月的SWIM/SFDPS流；训练需要同一航班ID的多天历史轨迹。",
+    "reusable_design_knowledge_cn": "当两种预测模型在共同响应变量上精度与预测时域互补时，可用当前时刻均值差异修正低精度模型的长时预测；多输出回归应按损失尺度分组；对大数据FIXM可使用Spark完成可拓展解析。",
+    "theoretical_contribution_cn": "文章本身不提出新理论，但把贝叶斯深度学习和多保真融合思想移植到航迹预测与安全评估场景，并在真实数据上给出验证证据。",
+    "how_discussion_closes_intro_gap_cn": "结论把引言中的安全需求重新映射到四个贡献：Spark可扩展解析解决大数据获取，贝叶斯不确定性解决模型预测风险，双模型融合解决精度与时长矛盾，概率安全指标解决安全决策支持；未来方向则回补天气、可视化、全球空域和可解释性。",
+    "overclaim_or_unsupported_leaps_cn": "从单个示例航班和多航班平均结果直接宣称“promising”尚可，但“superior performance”缺少与SOTA轨迹预测模型的系统比较；集成设计没有专门的消融证据；概率安全指标仅在一个未发生风险的真实航班对上演示，未证明其对真实冲突的预警能力。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "安全是民航最重要的关切，空管系统需要始终维持可接受安全水平。",
+      "rhetorical_function_cn": "开篇框定问题领域，为整篇论文建立价值基础。",
+      "depends_on_cn": "无，直接进入文章主题。",
+      "sets_up_cn": "引出安全评估作为目标，并为后面轨迹预测服务安全做铺垫。",
+      "evidence_pointer": "Abstract 第1句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P2 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文目标是用贝叶斯方式量化不确定性的深度学习模型提高航路飞行安全。",
+      "rhetorical_function_cn": "直接声明研究目标与核心方法路径。",
+      "depends_on_cn": "依赖背景中的安全重要性。",
+      "sets_up_cn": "为摘要中的四步方法概述提供目的。",
+      "evidence_pointer": "Abstract 第2句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P3 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "方法由四步组成：Spark解析FIXM、训练两类深度模型、多保真融合、安全指标评估。",
+      "rhetorical_function_cn": "压缩预告全文方法论结构，方便读者快速获得制品全貌。",
+      "depends_on_cn": "研究目标明确后给出实现路线。",
+      "sets_up_cn": "为正文各章节提供对应地图。",
+      "evidence_pointer": "Abstract P3"
+    },
+    {
+      "order": 4,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "IATA预测未来二十年全球航空旅行需求将比2016年的38亿人次翻倍。",
+      "rhetorical_function_cn": "用宏观需求增长建立研究背景。",
+      "depends_on_cn": "无。",
+      "sets_up_cn": "为“需要缩小间隔或增加空域容量”提供前提。",
+      "evidence_pointer": "Introduction P1 S1"
+    },
+    {
+      "order": 5,
+      "section": "Introduction",
+      "locator": "Introduction P1 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "满足需求的一种直接方式是缩小飞机间最小水平和垂直间隔，但这会增加空域拥挤。",
+      "rhetorical_function_cn": "把宏观需求转化为具体空管操作变化和风险。",
+      "depends_on_cn": "依赖需求翻倍的预测。",
+      "sets_up_cn": "引出安全是否能维持的核心问题。",
+      "evidence_pointer": "Introduction P1 S2"
+    },
+    {
+      "order": 6,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "在实施间隔缩减前，必须开发能随时间评估航路安全且计入多种不确定性的预测模型。",
+      "rhetorical_function_cn": "把安全关切转化为模型需求。",
+      "depends_on_cn": "间隔缩小可能威胁安全。",
+      "sets_up_cn": "为全文提出不确定性量化需求埋下伏笔。",
+      "evidence_pointer": "Introduction P1 S4"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "NextGen正从雷达运行转向卫星导航监视，SWIM向相关方广播实时飞行、监视、天气等信息。",
+      "rhetorical_function_cn": "说明新数据环境使数据驱动方法成为可能。",
+      "depends_on_cn": "背景中安全模型需求。",
+      "sets_up_cn": "为使用SWIM/SFDPS真实数据做铺垫。",
+      "evidence_pointer": "Introduction P2 S1-S2"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P2 S4-S5",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "FAA报告显示2015财年有7249个经确认的间隔损失案例，风险事件较上年增加5%；若不采取措施，间隔损失将随交通增长翻倍。",
+      "rhetorical_function_cn": "用官方安全事件数据制造紧迫性。",
+      "depends_on_cn": "需求增长与间隔缩小风险。",
+      "sets_up_cn": "说明需要航迹预测来避免事故。",
+      "evidence_pointer": "Introduction P2 S4-S5"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1-S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "航迹是系统向航空公司和空管分发信息、协调扇区、监视计划遵守和解决冲突的核心信息，预测算法是决策支持工具的关键。",
+      "rhetorical_function_cn": "定义航迹预测在空管决策支持中的核心地位。",
+      "depends_on_cn": "前文安全与效率需求。",
+      "sets_up_cn": "为综述轨迹预测文献提供概念框。",
+      "evidence_pointer": "Introduction P3 S1-S2"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P3 S3",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "过去十年已有大量轨迹预测模型和算法研究，并列举了噪声最小化、到点时间预测和误差分析等例子。",
+      "rhetorical_function_cn": "表明问题已有研究积累。",
+      "depends_on_cn": "航迹预测重要性的论断。",
+      "sets_up_cn": "为后面划分物理模型和数据驱动模型作铺垫。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "当前轨迹预测方法主要分为物理模型和数据驱动模型两类。",
+      "rhetorical_function_cn": "建立文献分类框架。",
+      "depends_on_cn": "轨迹预测研究综述。",
+      "sets_up_cn": "用于指出物理模型的不足和数据驱动的机会。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P4 S2-S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "物理模型把飞机视为质点并用微分方程积分预测未来位置，但需要飞机性能程序和实时状态，而这些信息常因商业敏感不可得。",
+      "rhetorical_function_cn": "指出物理模型在实际部署中的关键障碍。",
+      "depends_on_cn": "两类方法的分类。",
+      "sets_up_cn": "为数据驱动模型出场提供理由。",
+      "evidence_pointer": "Introduction P4 S2-S3"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P4 S4-S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "研究者因此转向从历史航迹中利用机器学习和深度学习方法学习模式，深度学习的自动特征提取和端到端建模很有吸引力。",
+      "rhetorical_function_cn": "引出数据驱动路径并强调深度学习优势。",
+      "depends_on_cn": "物理模型局限性。",
+      "sets_up_cn": "为后文DNN/LSTM选择作基础。",
+      "evidence_pointer": "Introduction P4 S4-S5"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "当训练数据有限或含噪声时，模型预测不确定性是机器学习中的重要考量。",
+      "rhetorical_function_cn": "引入现有数据驱动研究的重要遗漏。",
+      "depends_on_cn": "深度学习用于轨迹预测的综述。",
+      "sets_up_cn": "引出贝叶斯方法和MC dropout。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P5 S2",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "航空领域尤其需要计及轨迹预测的不确定性，因为它与安全相关量如间隔距离的风险评估和决策紧密相连。",
+      "rhetorical_function_cn": "把不确定性量化提升到领域关键需求。",
+      "depends_on_cn": "机器学习不确定性的普遍重要性。",
+      "sets_up_cn": "确定本文采用贝叶斯视角的理由。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P5 S3-S4",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "贝叶斯概率论为预测不确定性提供了数学基础，但深度学习中参数众多，精确贝叶斯推断通常不可行。",
+      "rhetorical_function_cn": "介绍理论工具并立即指出其计算障碍。",
+      "depends_on_cn": "不确定性需求。",
+      "sets_up_cn": "为Gal和Ghahramani的MC dropout近似作铺垫。",
+      "evidence_pointer": "Introduction P5 S3-S4"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P5 S5",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "Gal和Ghahramani证明dropout可解释为贝叶斯神经网络的变分近似，在减少计算负担的同时保持预测精度，已被Uber行程预测、疾病检测等应用采用。",
+      "rhetorical_function_cn": "引入可行的不确定性量化工具并说明其已被接受。",
+      "depends_on_cn": "贝叶斯推断的计算困难。",
+      "sets_up_cn": "本文后续所有模型均用MC dropout做不确定性量化。",
+      "evidence_pointer": "Introduction P5 S5"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P6 S1-S3",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文训练两个贝叶斯神经网络，先用Spark解析庞大数据，再构建DNN做单步偏差预测和LSTM做长时状态预测，随后融合并用间隔距离衡量安全。",
+      "rhetorical_function_cn": "集中概述本文方法，把前文缺口映射为具体设计。",
+      "depends_on_cn": "数据环境、深度学习和不确定性量化工具。",
+      "sets_up_cn": "为贡献列表和章节结构提供总览。",
+      "evidence_pointer": "Introduction P6 S1-S3"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P6 S4",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者列出四项贡献：Spark解析FIXM；两类贝叶斯网络预测并量化不确定性；集成模型同时获得精度与长时能力；概率化安全指标。",
+      "rhetorical_function_cn": "以清单形式提前声明贡献，引导读者注意全文价值点。",
+      "depends_on_cn": "前面研究目标的展开。",
+      "sets_up_cn": "后续各节逐步为四项贡献提供证据。",
+      "evidence_pointer": "Introduction P6 贡献列表"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Introduction P7 S1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "预告后续章节：数据源、贝叶斯神经网络概念、模型开发、计算实验、结论。",
+      "rhetorical_function_cn": "提供全文阅读路线图。",
+      "depends_on_cn": "方法论概述。",
+      "sets_up_cn": "帮助读者定位细节。",
+      "evidence_pointer": "Introduction 末段"
+    },
+    {
+      "order": 21,
+      "section": "Section 2",
+      "locator": "Section 2 P1-P2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "SFDPS通过FIXM格式发布实时航路数据；每次跟踪消息包含起降地、时间戳、航路状态、航班标识和补充数据，活跃航班约12秒更新一次，每日超过2万航班、约100GB消息。",
+      "rhetorical_function_cn": "用具体数据规模和更新频率说明数据工程挑战。",
+      "depends_on_cn": "引言中SWIM数据环境。",
+      "sets_up_cn": "为Spark处理需求提供实证基础。",
+      "evidence_pointer": "Section 2 P1-P2"
+    },
+    {
+      "order": 22,
+      "section": "Section 4.1",
+      "locator": "Section 4.1 P3",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "面对每天100GB以上FIXM消息，需要高效方法解析航迹数据。",
+      "rhetorical_function_cn": "把数据规模问题转化为明确工程要求。",
+      "depends_on_cn": "Section 2的数据规模描述。",
+      "sets_up_cn": "选择Apache Spark作为分布式解析方案。",
+      "evidence_pointer": "Section 4.1 P3"
+    },
+    {
+      "order": 23,
+      "section": "Section 4.1",
+      "locator": "Section 4.1 P5-P6",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用spark-xml解析FIXM，过滤跟踪源为TH的消息，按航班日期和ID分组并按位置时间排序，最后每个航班输出一个CSV文件。",
+      "rhetorical_function_cn": "具体说明数据管线的实现步骤。",
+      "depends_on_cn": "分布式框架要求和FIXM结构。",
+      "sets_up_cn": "为后续模型提供可直接使用的输入。",
+      "evidence_pointer": "Section 4.1 P5-P6"
+    },
+    {
+      "order": 24,
+      "section": "Section 4.1",
+      "locator": "Section 4.1 P7",
+      "move_code": "RESULT",
+      "paraphrase_cn": "使用Spark后，解析24小时SFDPS消息从约一周缩短到约10小时。",
+      "rhetorical_function_cn": "用时间对比证明数据管线可行性。",
+      "depends_on_cn": "Spark设计实现。",
+      "sets_up_cn": "为整篇论文“大数据可计算”提供证据。",
+      "evidence_pointer": "Section 4.1 P7"
+    },
+    {
+      "order": 25,
+      "section": "Section 4.2.1",
+      "locator": "Section 4.2.1 P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "建模前必须使报告的位置序列具有相等时间间隔。",
+      "rhetorical_function_cn": "把原始数据问题转成建模前提。",
+      "depends_on_cn": "Spark解析后的原始记录存在重复与不规则。",
+      "sets_up_cn": "引出去重、搜索窗口和插值规则。",
+      "evidence_pointer": "Section 4.2.1 P1"
+    },
+    {
+      "order": 26,
+      "section": "Section 4.2.1",
+      "locator": "Section 4.2.1 P2-P3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "同一位置可能被多个雷达重复报告，且相邻记录间隔有时小于或大于12秒。",
+      "rhetorical_function_cn": "描述真实数据的质量问题，证明需要专门处理。",
+      "depends_on_cn": "Table 1的实测记录。",
+      "sets_up_cn": "为去重和重采样规则提供依据。",
+      "evidence_pointer": "Section 4.2.1 P2-P3"
+    },
+    {
+      "order": 27,
+      "section": "Section 4.2.1",
+      "locator": "Section 4.2.1 P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "设计搜索窗口为当前记录后四行，选择与期望时间戳最接近的记录作为下一记录，并删除其间记录，再迭代处理。",
+      "rhetorical_function_cn": "给出具体去重/重采样算法。",
+      "depends_on_cn": "12秒基准与真实记录现象。",
+      "sets_up_cn": "使得训练序列等间隔，为DNN/LSTM输入奠定基础。",
+      "evidence_pointer": "Section 4.2.1 P3"
+    },
+    {
+      "order": 28,
+      "section": "Section 4.2.1",
+      "locator": "Section 4.2.1 P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "对缺失记录判断数量后用线性插值补齐。",
+      "rhetorical_function_cn": "说明缺失数据的处理方式，保证序列完整。",
+      "depends_on_cn": "时间间隔大于12秒的观测。",
+      "sets_up_cn": "最终得到等时间间隔航迹序列。",
+      "evidence_pointer": "Section 4.2.1 P4"
+    },
+    {
+      "order": 29,
+      "section": "Section 4.2.2",
+      "locator": "Section 4.2.2 P1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DNN利用当前飞行状态和偏差预测下一时刻的偏差；由于只能观测到当前时刻，所以只能做单步预测。",
+      "rhetorical_function_cn": "解释DNN视角及其预测时域限制。",
+      "depends_on_cn": "预处理后的轨迹数据。",
+      "sets_up_cn": "为后续需要LSTM长时预测埋下伏笔。",
+      "evidence_pointer": "Section 4.2.2 P1"
+    },
+    {
+      "order": 30,
+      "section": "Section 4.2.2",
+      "locator": "Section 4.2.2 P2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "对AAL598等航班，实际轨迹偏差主要发生在纬度和经度，高度几乎不偏离目标高度。",
+      "rhetorical_function_cn": "用数据观察缩小DNN建模范围。",
+      "depends_on_cn": "AAL598航迹偏差分布图。",
+      "sets_up_cn": "只训练纬度和经度两个DNN模型。",
+      "evidence_pointer": "Section 4.2.2 P2"
+    },
+    {
+      "order": 31,
+      "section": "Section 4.2.2",
+      "locator": "Section 4.2.2 P3",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "DNN输入为当前偏差、X/Y速度、当前高度和地速，输出为下一时刻偏差；用10% dropout的MC采样近似后验分布。",
+      "rhetorical_function_cn": "明确DNN结构与不确定性量化方式。",
+      "depends_on_cn": "偏差主要发生在经纬度的观察。",
+      "sets_up_cn": "为计算实验中的概率化DNN提供实现细节。",
+      "evidence_pointer": "Section 4.2.2 P3"
+    },
+    {
+      "order": 32,
+      "section": "Section 4.2.3",
+      "locator": "Section 4.2.3 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "LSTM输入过去20个时刻的六维状态，输出未来5个时刻的状态，并把预测再作为输入迭代外推。",
+      "rhetorical_function_cn": "定义LSTM模型的输入输出和迭代预测机制。",
+      "depends_on_cn": "深度学习中的LSTM时序建模知识。",
+      "sets_up_cn": "为长时预测和集成修正提供基础。",
+      "evidence_pointer": "Section 4.2.3 P2"
+    },
+    {
+      "order": 33,
+      "section": "Section 4.2.3",
+      "locator": "Section 4.2.3 P3",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "若在一个模型中同时预测所有变量，损失最大的变量会主导训练，从而牺牲经纬度的高精度需求，因此拆成两个LSTM模型。",
+      "rhetorical_function_cn": "为模型拆分提供合理性论证。",
+      "depends_on_cn": "机器学习的损失尺度不平衡经验。",
+      "sets_up_cn": "得到模型A预测经纬度、模型B预测高度和速度的设计。",
+      "evidence_pointer": "Section 4.2.3 P3"
+    },
+    {
+      "order": 34,
+      "section": "Section 4.2.3",
+      "locator": "Section 4.2.3 P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "在LSTM的输入、输出和循环层应用概率0.1的MC dropout，得到未来航迹的近似贝叶斯后验分布。",
+      "rhetorical_function_cn": "延续贝叶斯不确定性量化需求到LSTM中。",
+      "depends_on_cn": "MC dropout理论。",
+      "sets_up_cn": "使集成模型和安全指标能利用预测分布。",
+      "evidence_pointer": "Section 4.2.3 P4"
+    },
+    {
+      "order": 35,
+      "section": "Section 4.3",
+      "locator": "Section 4.3 P1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "DNN单步预测精度高但视野短，LSTM长时预测精度较低；需要集成以同时获得两种优点。",
+      "rhetorical_function_cn": "重新概括两个模型的互补缺口，为集成设计提供动机。",
+      "depends_on_cn": "第二节DNN与LSTM的预测特性。",
+      "sets_up_cn": "引出差异修正的集成公式。",
+      "evidence_pointer": "Section 4.3 P1"
+    },
+    {
+      "order": 36,
+      "section": "Section 4.3",
+      "locator": "Section 4.3 P2-P4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用DNN均值预测减去LSTM当前时刻均值预测得到差异项，并把这个差异加到LSTM未来五个时刻的经纬度预测上。",
+      "rhetorical_function_cn": "给出集成的具体数学形式。",
+      "depends_on_cn": "两个模型在共同输出上的可比较性。",
+      "sets_up_cn": "后续计算实验将直接比较集成与原始LSTM。",
+      "evidence_pointer": "Section 4.3 公式(4)-(6)"
+    },
+    {
+      "order": 37,
+      "section": "Section 4.3",
+      "locator": "Section 4.3 P5",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "若只让DNN修正一个时刻，由于修正量相对LSTM预测很小且LSTM输入端已含历史信息，效果会随步长减弱，因此对t+1到t+5全部修正。",
+      "rhetorical_function_cn": "排除看似自然的“单步修正”替代方案，强化全时域修正的必要性。",
+      "depends_on_cn": "修正量级和LSTM递归结构的直觉。",
+      "sets_up_cn": "为集成方法选择提供解释性支持。",
+      "evidence_pointer": "Section 4.3 末段"
+    },
+    {
+      "order": 38,
+      "section": "Section 4.4",
+      "locator": "Section 4.4 P1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "航路阶段广泛使用最小间隔距离作为安全指标，水平最小间隔5海里，垂直最小间隔300米。",
+      "rhetorical_function_cn": "引入领域安全标准作为评估基础。",
+      "depends_on_cn": "航路安全管理的公共知识。",
+      "sets_up_cn": "为概率化安全指标中的阈值提供依据。",
+      "evidence_pointer": "Section 4.4 P1"
+    },
+    {
+      "order": 39,
+      "section": "Section 4.4",
+      "locator": "Section 4.4 P2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义指示函数，当水平与垂直间隔违规概率均超过阈值λ时指示值为1，表示安全受影响。",
+      "rhetorical_function_cn": "把预测分布转化为可操作的安全预警信号。",
+      "depends_on_cn": "概率化航迹预测和间隔标准。",
+      "sets_up_cn": "使模型输出直接对接管制员告警决策。",
+      "evidence_pointer": "Section 4.4 公式(7)"
+    },
+    {
+      "order": 40,
+      "section": "Section 4.5",
+      "locator": "Section 4.5 列表",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "用四条总结再次列出Spark解析、两类模型、差异集成、概率安全指标。",
+      "rhetorical_function_cn": "在方法主体结束时回扣四步框架，帮助读者固化结构。",
+      "depends_on_cn": "第4节全部小节。",
+      "sets_up_cn": "为第5节计算实验提供对照清单。",
+      "evidence_pointer": "Section 4.5"
+    },
+    {
+      "order": 41,
+      "section": "Section 5.1",
+      "locator": "Section 5.1 P1",
+      "move_code": "DATA",
+      "paraphrase_cn": "实验流式处理了2018年12月19日至2019年2月8日约4.2TB SFDPS消息，提取48天航迹，识别出3789个每日出现的航班，并以AAL598为例说明。",
+      "rhetorical_function_cn": "说明实验数据规模、样本选择和航班专用建模策略。",
+      "depends_on_cn": "Spark数据管线。",
+      "sets_up_cn": "为后续单航班和多航班验证提供数据基础。",
+      "evidence_pointer": "Section 5.1 P1"
+    },
+    {
+      "order": 42,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "用MinMaxScaler归一化数据，并用网格搜索确定学习率、迭代数和dropout率，最优DNN参数为dropout 0.1、迭代8000、Adam学习率0.001。",
+      "rhetorical_function_cn": "说明模型训练和超参数选择的严谨性。",
+      "depends_on_cn": "DNN模型结构。",
+      "sets_up_cn": "为后续DNN结果提供可信度。",
+      "evidence_pointer": "Section 5.2 P1"
+    },
+    {
+      "order": 43,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P2",
+      "move_code": "RESULT",
+      "paraphrase_cn": "DNN预测的轨迹偏差随时间变化与真实值基本一致。",
+      "rhetorical_function_cn": "用图展示DNN单步偏差预测的有效性。",
+      "depends_on_cn": "训练好的DNN模型。",
+      "sets_up_cn": "为概率化DNN与确定性DNN对比作铺垫。",
+      "evidence_pointer": "Section 5.2 P2"
+    },
+    {
+      "order": 44,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "确定性模型给出点预测，概率模型给出1000个MC样本形成簇，其离散程度反映预测不确定性；生成样本平均耗时0.11秒，远小于12秒更新率。",
+      "rhetorical_function_cn": "同时展示不确定性量化的可视化价值与实时性。",
+      "depends_on_cn": "MC dropout实现。",
+      "sets_up_cn": "为“不确定性可支持风险决策”的结论提供证据。",
+      "evidence_pointer": "Section 5.2 P3"
+    },
+    {
+      "order": 45,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "LSTM能预测未来10个时间点约2分钟，比管制员对冲突告警和最低安全高度告警的中位响应时间88秒和38秒更长。",
+      "rhetorical_function_cn": "把LSTM长时预测能力与管制员实际反应时间对接，说明操作价值。",
+      "depends_on_cn": "LSTM模型训练结果。",
+      "sets_up_cn": "为集成模型“既准又长”的必要性提供实操依据。",
+      "evidence_pointer": "Section 5.2 P4"
+    },
+    {
+      "order": 46,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "集成模型比单独LSTM更准确地预测航迹，但随着前瞻步数增加误差逐步增大，第10步约1.75英里。",
+      "rhetorical_function_cn": "用图展示集成模型的增益及其随步长的边界。",
+      "depends_on_cn": "DNN与LSTM的融合公式。",
+      "sets_up_cn": "引出多航班交叉验证以确认稳健性。",
+      "evidence_pointer": "Section 5.2 P5"
+    },
+    {
+      "order": 47,
+      "section": "Section 5.2",
+      "locator": "Section 5.2 P6",
+      "move_code": "RESULT",
+      "paraphrase_cn": "对AAL598与UAL1767，预测的水平垂直间隔距离与真实值吻合，MAE为3.78英里，约占真实值2.7%，且未违反间隔约束。",
+      "rhetorical_function_cn": "给出安全指标端到端应用的演示结果。",
+      "depends_on_cn": "集成模型和概率安全指标。",
+      "sets_up_cn": "为结论中安全评估贡献提供直接证据。",
+      "evidence_pointer": "Section 5.2 P6"
+    },
+    {
+      "order": 48,
+      "section": "Section 5.3",
+      "locator": "Section 5.3 P1",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "为了验证单次展示不是偶然，采用留一交叉验证：每次保留一条完整轨迹测试，其余47条训练，重复48次。",
+      "rhetorical_function_cn": "引入更严格的稳健性评价方法。",
+      "depends_on_cn": "单航班示例结果的局限性。",
+      "sets_up_cn": "为Tables 3-5的汇总结果作铺垫。",
+      "evidence_pointer": "Section 5.3 P1"
+    },
+    {
+      "order": 49,
+      "section": "Section 5.3",
+      "locator": "Section 5.3 Table 3",
+      "move_code": "RESULT",
+      "paraphrase_cn": "概率化DNN较确定性DNN在纬度和经度偏差RMSE上分别降低2.11%和2.98%，且优于线性模型、SVM和决策树回归。",
+      "rhetorical_function_cn": "用表格量化概率化与基线比较结果。",
+      "depends_on_cn": "留一交叉验证程序。",
+      "sets_up_cn": "支持“不确定性量化不损害精度”的技术贡献。",
+      "evidence_pointer": "Section 5.3 Table 3"
+    },
+    {
+      "order": 50,
+      "section": "Section 5.3",
+      "locator": "Section 5.3 Table 4",
+      "move_code": "RESULT",
+      "paraphrase_cn": "集成模型在AAL598经纬度预测上RMSE较LSTM分别降低49%和58%。",
+      "rhetorical_function_cn": "用关键百分比证明集成设计的效果。",
+      "depends_on_cn": "DNN与LSTM的融合公式。",
+      "sets_up_cn": "为多航班泛化结果提供单航班核心证据。",
+      "evidence_pointer": "Section 5.3 Table 4"
+    },
+    {
+      "order": 51,
+      "section": "Section 5.3",
+      "locator": "Section 5.3 Table 5",
+      "move_code": "RESULT",
+      "paraphrase_cn": "对7个不同航班ID的预测显示，集成模型平均空间预测误差为2.4747英里，但不同航班的误差存在差异。",
+      "rhetorical_function_cn": "把单航班证据推广到多航班。",
+      "depends_on_cn": "每航班专用模型训练与交叉验证。",
+      "sets_up_cn": "支撑结论中的泛化声明，同时暴露航班间偏差差异。",
+      "evidence_pointer": "Section 5.3 Table 5"
+    },
+    {
+      "order": 52,
+      "section": "Conclusion",
+      "locator": "Conclusion P1",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "总结四步方法：Spark解析、DNN偏差预测、LSTM状态预测、差异融合、概率间隔安全评估。",
+      "rhetorical_function_cn": "在结论中重述制品全貌，回扣摘要与引言。",
+      "depends_on_cn": "第4节方法。",
+      "sets_up_cn": "为贡献列表作准备。",
+      "evidence_pointer": "Conclusion P1"
+    },
+    {
+      "order": 53,
+      "section": "Conclusion",
+      "locator": "Conclusion P2",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者重申贡献：Spark可扩展到更复杂航空数据；贝叶斯不确定性支持风险决策；双模型融合改善精度并保留长时能力。",
+      "rhetorical_function_cn": "把结果提升为可复用的方法贡献。",
+      "depends_on_cn": "第5节计算证据。",
+      "sets_up_cn": "为未来研究边界铺垫。",
+      "evidence_pointer": "Conclusion P2"
+    },
+    {
+      "order": 54,
+      "section": "Conclusion",
+      "locator": "Conclusion P3",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来需显式纳入天气概率预报、开发不同层级安全可视化、检验欧洲等空域适用性，并提高对航班ID偏差差异的可解释性。",
+      "rhetorical_function_cn": "界定适用边界，防止贡献被看作放之四海皆准。",
+      "depends_on_cn": "当前模型只覆盖美国空域和特定时段。",
+      "sets_up_cn": "为后续研究提供路线图。",
+      "evidence_pointer": "Conclusion P3"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先以航空需求翻倍、间隔缩减和FAA间隔损失事件制造现实紧迫性；再指出物理模型依赖不可得数据，数据驱动模型忽略不确定性；最后用贝叶斯推断不可计算来制造技术缺口，并通过MC dropout把缺口转化为可行设计。",
+    "signposting_cn": "摘要在第3句直接预告四步法；引言贡献列表1-4给读者以清单；正文末段给出全文路线图；4.5节再次用四条总结；算法1和多个表格也起到路标作用。",
+    "transition_logic_cn": "Section 3的模型知识为Section 4的模型选型做准备；4.2.2的DNN因只有单步预测而自然过渡到4.2.3的LSTM；4.2.3精度不足又过渡到4.3集成；4.3预测结果被4.4安全指标承接；第5节先单航班展示，再用“是否偶然”过渡到交叉验证和多航班。",
+    "claim_evidence_rhythm_cn": "每个设计选择后紧跟公式或图/表；先以图展示现象，后用表格量化；先给出关键百分比（49%、58%、2.11%等），再用多航班平均误差证明稳定性；主张与证据交替出现，节奏紧凑。",
+    "benchmark_narrative_cn": "基准不是一次性给出，而是分层嵌入：DNN对比确定性模型与三种ML基线；LSTM与集成模型对比；多航班表5作为泛化基准；安全间隔预测对比真实值作为端任务基准。",
+    "theory_return_cn": "贝叶斯理论在引言作为不确定性工具引入，在3.3给出数学基础，在5.2通过概率样本簇返回为可视化证据，在结论重新表述为“支持概率化风险决策”的理论贡献。",
+    "contribution_positioning_cn": "四项贡献在引言提前列明，结论再次逐条复述，每一条都对应正文某一节：贡献1对应4.1，贡献2对应4.2和3.3，贡献3对应4.3，贡献4对应4.4与5.2。",
+    "novelty_protection_cn": "通过强调真实大数据、不确定性量化、双模型互补和端到端安全评估来防止贡献被简化为“又一个深度学习预测器”；用多航班留一验证与平均误差来避免只展示最好单例。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实问题：用行业预测和官方安全事件证明问题重要。",
+        "research_job_cn": "收集航空需求、间隔缩减、安全事件等背景资料。",
+        "required_evidence_cn": "权威来源的增长率、安全事件数量和间隔标准。",
+        "transition_to_next_cn": "从安全风险过渡到需要航迹预测工具。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述现有方法并制造缺口：物理模型不可得，数据驱动模型缺不确定性。",
+        "research_job_cn": "分类梳理轨迹预测文献，指出各自局限。",
+        "required_evidence_cn": "足够文献说明两类方法已存在且存在可识别缺口。",
+        "transition_to_next_cn": "从文献缺口引到贝叶斯深度学习方法。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "引入方法论工具：贝叶斯神经网络与MC dropout。",
+        "research_job_cn": "说明精确贝叶斯推断不可行，并引用可计算近似。",
+        "required_evidence_cn": "Gal和Ghahramani等理论结果和已有应用。",
+        "transition_to_next_cn": "说明本文可以用该工具构建航迹预测模型。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "描述数据管线与预处理，证明真实大规模数据可处理。",
+        "research_job_cn": "开发Spark解析流程并做可视化、定量完整性验证。",
+        "required_evidence_cn": "处理时间、数据量、示例表和图。",
+        "transition_to_next_cn": "从干净数据过渡到模型训练。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "构建两个互补模型，并解释为何需要多个视角。",
+        "research_job_cn": "分别训练DNN和LSTM，设置超参、dropout、模型拆分。",
+        "required_evidence_cn": "两个模型各自的预测图和性能指标。",
+        "transition_to_next_cn": "从两个模型各自的不足过渡到集成。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "定义集成方案并给出数学公式，确保方法可复现。",
+        "research_job_cn": "用差异修正融合模型，讨论替代方案。",
+        "required_evidence_cn": "集成模型与基础模型对比表。",
+        "transition_to_next_cn": "从集成预测过渡到安全评估端任务。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "设计端任务指标，把预测结果变成决策支持信号。",
+        "research_job_cn": "用真实安全标准定义概率化间隔指标并演示。",
+        "required_evidence_cn": "安全指标公式、间隔预测与真实值对比。",
+        "transition_to_next_cn": "从演示结果过渡到交叉验证和泛化。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "用交叉验证和多案例支撑泛化，并在结论中回扣缺口。",
+        "research_job_cn": "留一交叉验证、多航班测试、列出未来边界。",
+        "required_evidence_cn": "多个表格、平均误差和未来方向。",
+        "transition_to_next_cn": "结论把结果上升为设计知识与理论贡献。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用官方指标和真实安全事件制造现实紧迫性",
+      "把模型限制表述为可操作的互补缺口（精度 vs 时域）",
+      "用差异修正公式把两个模型结合，并解释为什么所有未来步都需修正",
+      "先展示单案例，再用交叉验证和多案例建立泛化",
+      "每个贡献点都对应具体章节和表格"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "需要访问FAA SWIM/SFDPS数据的授权与持续流式订阅",
+      "4.2TB真实空管消息数据获取与存储",
+      "解析FIXM格式涉及领域知识和spark-xml等专门工具",
+      "大量GPU算力用于逐航班训练LSTM和交叉验证",
+      "两机安全评估依赖精确的ADS-B轨迹和管制数据"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只把“贝叶斯神经网络”作为标签而不实现MC dropout并给出预测分布",
+      "不能只声称“多保真融合”而没有明确的修正公式和对照实验",
+      "不能在缺少真实间隔数据时宣称安全指标有效",
+      "不能把单航班漂亮图作为全部证据，必须有交叉验证或多案例",
+      "不能忽略预处理中重复、缺失、时间间隔不规则的真实数据处理"
+    ],
+    "single_best_description_of_the_routine_cn": "用真实大数据构造端到端预测与安全评估制品，并以“组件层次+关键对照+交叉验证+多案例泛化”逐级组织证据。"
+  },
+  "confidence": 0.9,
+  "limitations_cn": "文章完整，但表格个别单元格存在OCR/排版乱码（如Algorithm 1标题），图内公式细节无法从文本完整还原；判断主要依据正文、图表标题和表格指标，未被这些乱码影响。",
+  "usage": {
+    "prompt_tokens": 30935,
+    "completion_tokens": 24780,
+    "total_tokens": 55715,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 30935
+  }
+}

@@ -1,0 +1,2307 @@
+# Enhancing AI-Assisted Purchase Decisions: The Role of the Sense of Autonomy
+
+- 作者：Jinghui (Jove) Hou; Shuai Yang; Guiyang Xiong; Paul A. Pavlou
+- 年份 / 期刊：2026 / MIS Quarterly
+- DOI：10.25300/misq/2025/17607
+- 源文件：27605_2026_enhancing-ai-assisted-purchase-decisions-the-role-of-the-sense-of-autonomy.md
+- 论文主类型：theory_derived_artifact_experiment
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.84
+
+## 文章级论证概况
+
+- 核心问题：在AI辅助购买决策中，消费者能否通过增强“自主感”（sense of autonomy）来补偿AI对个体独特性因素的忽视（uniqueness neglect），从而提升决策质量？如果可以，何种可落地的系统设计能有效增强这种自主感？
+
+- 制品与设计：文章包含两类核心设计操纵：(1) AI描述框架——高自主条件把store AI表述为“你的个人工具，整个过程由你完成”，低自主条件表述为“店铺销售导购，整个过程由导购替你完成”，AI算法与功能在所有条件下保持不变；(2) 个人智能手机设计——让消费者通过微信小程序在个人智能手机上使用同一台store AI，对比零售商手机和机器屏幕两种交互方式。
+
+- 客观结果：实验室实验中，高自主（vs低自主）描述显著提高购买意愿、决策满意度与决策信心；独特性忽视担忧是显著中介，而抗拒不是；当消费者为“平均他人”购买（低独特考虑需求）时效应消失。实地实验中，AI处理产品销量显著增加（0.30, p=0.02），退货率边际下降（-0.04, p=0.11）；个人手机条件相比描述条件在销量和退货率上均更优（交互效应显著）。
+
+- 核心贡献：作者声称三大贡献：(1) 识别自主感作为克服AI独特性忽视的新机制，区别于已有的抗拒理论机制；(2) 首次提出并验证个人智能手机可增强自主感，推动人本AI设计和智能手机IS研究；(3) 为零售商提供即时管理洞见，尤其警示不要将AI塑造成“专家型导购”，并给出降低退货率的可实施方案。
+
+- 整篇论证链：完整论证链是：AI推荐系统擅长从大数据推断对“平均消费者”最优的规则，却很难捕捉每个消费者深藏的动机、独特处境等个体因素，作者将这称为AI的独特性忽视；这造成悖论——消费者一边依赖AI专家，一边感到自己的意志被压制，决策质量可能受损。作者随后用自我决定理论指出，自主感（决策由自我决定的主观体验）可以促使消费者在AI建议中整合自己的独特个人因素，从而弥补AI忽视。为检验这一机制，作者先用六个实验室/实地研究逐步证明：高自主描述提高决策质量（1A），排除信息加工替代解释（1B），用中介证明独特性忽视担忧是机制而抗拒不是（2A），用“为自己vs为平均他人购买”的调节证明独特考虑不可或缺（2B），随后转向解决方案：用个人智能手机使用AI增强自主感（3A），并在真实服装店中以产品销售和退货率验证该设计的实际效果（3B）。讨论部分把证据提升为理论贡献、边界条件和管理启示，完成了从问题到理论再到设计检验最后回到理论的闭合弧线。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章不是一个通用设计科学或计算benchmark，而是从自我决定理论、独特性忽视、自聚焦和占用理论等知识基础前瞻性地推导出两种可观察的设计差异（高/低自主描述、个人手机交互），并通过六个实验和实地实验直接检验这些理论推导出的结果，因此最贴近“理论推导制品差异并通过实验检验”。
+
+- 主导写作弧线判定：文章遵循“问题→理论→设计→检验→回到理论”的弧线：先提出AI辅助决策中的自主性悖论，接着引入独特性忽视和自主感机制，再派生描述操纵和个人手机App两个设计，用五个实验室实验和一个实地实验检验，最后在总体讨论和理论贡献中把结果重新返回并扩展自我决定、抗拒、独特性忽视和智能手机文献。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：研究程序分三大部分：首先建立主效应并排除替代解释（Pilot、1A、1B及其附属补充现场实验）；其次用中介和调节策略进一步锁定机制（2A、2B）；最后从机制转向可实施设计并在真实世界验证（3A、3B）。补充稳健性分析和内容分析作为第8阶段，补强外部效度并排除额外替代解释。上一阶段的结果是下一阶段问题的前提，例如只有主效应显著后才有必要排除替代解释，只有机制成立后才能设计智能手机方案，只有实验室方案成立后才值得做现场检验。
+
+### studies_or_phases
+
+#### 1. Pilot研究（操纵验证）
+
+- order：1
+
+- name_cn：Pilot研究（操纵验证）
+
+- question_cn：高低自主AI描述能否按预期操纵消费者使用AI时的自主感？
+
+- inputs_and_setting_cn：60名成年人样本；虚拟购物任务；高低自主描述文本；自主感量表。
+
+- designed_or_compared_object_cn：高自主描述（“个人工具”）vs低自主描述（“店铺销售导购”）。
+
+- baseline_control_or_counterfactual_cn：低自主描述作为基线，并测量感知新奇、可理解性、易用性和信任作为潜在混淆检验。
+
+##### objective_metrics
+
+1. 自主感量表（6项，α=0.88）
+
+2. 感知新颖性、可理解性、易用性、信任
+
+- analysis_method_cn：单因素ANOVA/F检验及描述统计
+
+- main_result_cn：高自主描述显著提高自主感（M=5.99 vs 4.39，F(1,58)=50.85，p<0.001，partial η²=0.47）；潜在混淆变量无显著差异。
+
+- argumentative_role_cn：为后续所有使用该描述操纵的实验提供操纵有效性的预检验基础。
+
+- remaining_uncertainty_cn：只验证了操纵本身，未验证主效应假设。
+
+- link_to_next_phase_cn：确认操纵可用的基础后，Study 1A正式检验主效应。
+
+##### evidence_pointers
+
+1. Study 1A Method Pilot study段
+
+2. Appendix B中的操纵检查部分
+
+#### 2. Study 1A：主效应实验
+
+- order：2
+
+- name_cn：Study 1A：主效应实验
+
+- question_cn：使用AI时增强高自主感是否改善购买决策质量（购买意愿、决策满意度）？
+
+- inputs_and_setting_cn：124名上海大学生；模拟真实服装店；store AI实体机器；三种条件（高自主、低自主、控制/无描述）。
+
+- designed_or_compared_object_cn：高自主描述 vs 低自主描述 vs 无描述对照。
+
+- baseline_control_or_counterfactual_cn：低自主与无描述条件；控制年龄、性别、花费、购买频率、时尚知识、所选产品价格等。
+
+##### objective_metrics
+
+1. 购买意愿（单题）
+
+2. 决策满意度（3项，α=0.91）
+
+3. 自主感检查（6项，α=0.85）
+
+4. 注意力、操纵、随机化检查
+
+- analysis_method_cn：ANCOVA、计划对比
+
+- main_result_cn：高自主组在决策满意度（M=5.59 vs 4.59）和购买意愿（M=5.26 vs 3.95）上显著高于低自主组；低自主与控制无显著差异。
+
+- argumentative_role_cn：建立核心主效应：高自主感改善AI辅助决策质量。
+
+- remaining_uncertainty_cn：未说明机制；未排除如信息加工等其他解释；只有感知指标。
+
+- link_to_next_phase_cn：为使效应不是由信息加工等替代解释驱动，Study 1B加入认知负荷操纵。
+
+##### evidence_pointers
+
+1. Study 1A Results段
+
+2. Table 2主效应结果
+
+3. Study 1A Method Manipulation段
+
+#### 3. Study 1B：排除替代解释及过程证据
+
+- order：3
+
+- name_cn：Study 1B：排除替代解释及过程证据
+
+- question_cn：更深入的信息加工是否可解释主效应？加入决策信心指标后效应是否稳健？访谈能否提供初始过程证据？
+
+- inputs_and_setting_cn：159名上海大学生；2×2因子设计（高/低自主描述 × 认知负荷/控制）；点阵记忆任务操纵认知负荷；之后的模拟购物任务。
+
+- designed_or_compared_object_cn：AI描述（高vs低）与认知负荷（负荷vs控制）的组合；另外固定任务时间5分钟。
+
+- baseline_control_or_counterfactual_cn：低自主+控制负荷作为基线；分析AI描述主效应与交互效应。
+
+##### objective_metrics
+
+1. 决策信心（5项，α=0.82）
+
+2. 决策满意度（α=0.87）
+
+3. 购买意愿
+
+4. 点阵重构正确率及感知认知努力
+
+- analysis_method_cn：2×2 ANCOVA；访谈数据定性分析
+
+- main_result_cn：AI描述主效应显著（决策信心F(1,149)=12.42, p<0.001；满意度、意愿同样显著），但AI描述×认知负荷交互不显著，说明认知负荷不削弱主效应，排除信息加工替代解释；访谈显示高自主参与者更关注自身需求，低自主参与者更多提及AI机器功能。
+
+- argumentative_role_cn：加强主效应的内部有效性，同时用定性数据初步提示“自主感→整合个人因素”的机制方向。
+
+- remaining_uncertainty_cn：访谈只是探索性证据，尚未用定量中介直接测量独特性忽视或抗拒。
+
+- link_to_next_phase_cn：在确认主效应稳健后，进入机制检验（2A/2B）。
+
+##### evidence_pointers
+
+1. Study 1B Results段
+
+2. Table 3
+
+3. Post hoc interview段
+
+#### 4. Study 2A：机制中介检验
+
+- order：4
+
+- name_cn：Study 2A：机制中介检验
+
+- question_cn：高自主感改善AI建议决策，是通过缓解消费者对AI独特性忽视的担忧，还是通过降低对AI的抗拒？
+
+- inputs_and_setting_cn：83名上海大学生；单因素两条件（高vs低自主描述）；使用与1A相同的store AI购物任务。
+
+- designed_or_compared_object_nc：
+
+- baseline_control_or_counterfactual_cn：低自主描述作为基线。
+
+##### objective_metrics
+
+1. 购买意愿
+
+2. 决策满意度（α=0.89）
+
+3. 决策信心（α=0.84）
+
+4. 独特性忽视担忧（3项，α=0.80）
+
+5. 抗拒（愤怒+负面认知，α=0.88）
+
+- analysis_method_cn：自助法中介分析（Hayes Model 4，5000次重采样）
+
+- main_result_cn：独特性忽视担忧对三个决策结果变量的中介效应均显著（间接效应CI不含0），而抗拒的中介效应均不显著（CI含0）。
+
+- argumentative_role_cn：用实证区分两个竞争机制，支持以独特性忽视为核心的机制路径。
+
+- remaining_uncertainty_cn：中介分析基于同时测量，因果顺序有限；未检验边界条件。
+
+- link_to_next_phase_cn：Study 2B用调节法进一步验证机制边界，如果机制成立，在低独特考虑条件下主效应应减弱。
+
+##### evidence_pointers
+
+1. Study 2A Results段
+
+2. Table 4
+
+#### 5. Study 2B：机制调节检验
+
+- order：5
+
+- name_cn：Study 2B：机制调节检验
+
+- question_cn：当购买决策几乎不需要独特考虑时，自主感的正向效应是否消失？
+
+- inputs_and_setting_cn：164名上海大学生；2×2因子设计（高/低自主描述 × 产品接收者：自我/平均他人）。
+
+- designed_or_compared_object_cn：接收者操纵：为自我购买（高独特考虑）vs 为与体型相似的“平均人”购买（低独特考虑）。
+
+- baseline_control_or_counterfactual_cn：平均他人条件作为低独特考虑基线；比较自我与平均他人条件下的处理效应差异。
+
+##### objective_metrics
+
+1. 决策满意度（α=0.88）
+
+2. 决策信心（α=0.84）
+
+3. 购买意愿
+
+4. 操纵检查（接收者识别的正确率）
+
+- analysis_method_cn：2×2 ANCOVA，简单效应分析和斜率检验
+
+- main_result_cn：高自主描述对自购条件下的满意度、信心和购买意愿有显著正向作用，但在为“平均他人”购买时效应不显著；交互效应显著（满意度F(1,154)=6.91, p=0.009等）。
+
+- argumentative_role_cn：用模式化证据进一步支持独特性忽视机制，并排除“自主感本身就是目标”的替代解释。
+
+- remaining_uncertainty_cn：仍未给出能改善实际购买的落地设计。
+
+- link_to_next_phase_cn：在机制明确后，转向“能否通过系统设计增强自主感”这一实践问题，引出3A/3B。
+
+##### evidence_pointers
+
+1. Study 2B Results段
+
+2. Figure 2交互图
+
+#### 6. Study 3A：个人智能手机设计方案实验室检验
+
+- order：6
+
+- name_cn：Study 3A：个人智能手机设计方案实验室检验
+
+- question_cn：让消费者用个人智能手机操作store AI，能否增强自主感并改善决策，且自主感起中介作用？
+
+- inputs_and_setting_cn：184名研究生；模拟服装店；同一台store AI；三种条件：个人手机App、零售商手机App、控制（直接用机器）。
+
+- designed_or_compared_object_cn：交互设备（个人手机 vs 零售商手机 vs 机器屏幕）；AI算法与App功能完全一致。
+
+- baseline_control_or_counterfactual_cn：零售商手机和控制（机器）作为两种基线；并通过AI感知检查确保设备不是通过改变技术感知来起作用。
+
+##### objective_metrics
+
+1. 自主感（α=0.86）
+
+2. 购买意愿
+
+3. 决策满意度（α=0.89）
+
+4. AI感知检查和控制变量
+
+- analysis_method_cn：ANCOVA + 中介分析（Hayes Model 4）
+
+- main_result_cn：个人手机组自主感显著高于零售商手机和控制组；自主感显著中介个人手机对购买意愿和决策满意度的正向效应。
+
+- argumentative_role_cn：将机制转化为可落地的系统设计，同时验证理论到设计的完整链路。
+
+- remaining_uncertainty_cn：实验室环境不能完全代表真实零售场，尤其是真实购买和退货行为。
+
+- link_to_next_phase_cn：用真实服装店的现场实验（3B）验证方案的外部效度和业务影响。
+
+##### evidence_pointers
+
+1. Study 3A Results段
+
+2. Table 5
+
+#### 7. Study 3B：真实零售店现场实验
+
+- order：7
+
+- name_cn：Study 3B：真实零售店现场实验
+
+- question_cn：在真实零售环境中，高自主描述和个人智能手机设计是否提高产品销量并降低退货率？
+
+- inputs_and_setting_cn：上海真实服装店6周（2019年11-12月）；221个独特产品（100个AI处理产品，121个基线产品）；描述条件周期与个人手机条件周期交替。
+
+- designed_or_compared_object_cn：产品类型（AI处理 vs 基线）和实验处理（个人手机条件 vs 描述条件）。
+
+- baseline_control_or_counterfactual_cn：前两周无AI期作为预处理基线；未被纳入AI的121个产品作为产品级基线；随机化检查确保价格、折扣、预销售与预退货率在处理/基线间平衡。
+
+##### objective_metrics
+
+1. 周产品销量
+
+2. 产品退货率
+
+3. 价格、折扣、品类、节假日、时间趋势、预处理销量和退货率等协变量
+
+- analysis_method_cn：ANCOVA回归模型，含产品类型×处理条件交互。
+
+- main_result_cn：AI处理产品销量显著增加（0.30, p=0.02），退货率边际下降（-0.04, p=0.11）；个人手机条件相比描述条件在产品销量（交互0.32, p=0.06）和退货率（交互-0.07, p=0.04）上均更优。
+
+- argumentative_role_cn：以最接近真实业务的结果指标（销量、退货率）验证两个理论驱动设计的外部效度和管理价值。
+
+- remaining_uncertainty_cn：现场实验无法测量消费者自主感或独特性忽视的主观过程；单店/单一季节限制一般化；产品级回归解释力较低（调整R²=0.05和0.02）。
+
+- link_to_next_phase_cn：现场证据为总体讨论和理论贡献提供最终锚点。
+
+##### evidence_pointers
+
+1. Study 3B Results段
+
+2. Table 6随机化检查
+
+3. Table 7回归结果
+
+#### 8. 补充稳健性分析与语境验证
+
+- order：8
+
+- name_cn：补充稳健性分析与语境验证
+
+- question_cn：主效应能否在真实零售情境中复制？其他替代解释（如隐私担忧、感知AI支持）能否排除？媒体叙事是否普遍把store AI塑造成专家型导购？
+
+- inputs_and_setting_cn：真实时尚店的补充现场实验（transparency materials报告）；内容分析对象为2018-2021年英文（Nexis Uni）和中文（CND）新闻报道（N=296）；测量隐私担忧和感知AI支持的问卷数据。
+
+- designed_or_compared_object_cn：高自主描述 vs 低自主描述 vs 控制（现场）；新闻报道中的store AI描述框架。
+
+- baseline_control_or_counterfactual_cn：低自主和控制条件；新闻内容中并非“智能导购”描述作为对比。
+
+##### objective_metrics
+
+1. 实际购买概率
+
+2. 隐私担忧
+
+3. 感知AI支持
+
+4. 新闻报道中“智能/专业导购”描述比例
+
+- analysis_method_cn：随机化现场比较；内容分析；补充问卷测量与回归检验
+
+- main_result_cn：高自主条件在真实店中显著提高实际购买概率；隐私担忧和感知AI支持不能解释主效应；87%的新闻报道将store AI描述为“智能零售助手”或“专业建议提供者”，68%强调简化购物流程。
+
+- argumentative_role_cn：巩固外部效度，排除额外替代解释，并为“低自主描述实际上体现了主流现状”提供内容证据。
+
+- remaining_uncertainty_cn：transparency materials在正文外，无法独立审查；内容分析只覆盖文本，未覆盖消费者实际认知。
+
+- link_to_next_phase_cn：补充分析支持了总体讨论中“主效应稳健、现状为专家叙事”的论断。
+
+##### evidence_pointers
+
+1. Studies 1A & 1B Discussion中的补充现场实验引用
+
+2. Appendix A内容分析
+
+3. transparency materials（正文引用）
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. GAP
+
+4. RQ_OR_OBJECTIVE
+
+5. STUDY_OVERVIEW
+
+6. RESULT
+
+7. MECHANISM
+
+8. DESIGN_FEATURE
+
+9. CONTRIBUTION
+
+10. BOUNDARY_CONDITION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. PHENOMENON
+
+4. RQ_OR_OBJECTIVE
+
+5. THEORY_INTRO
+
+6. LIMITATION
+
+7. THEORY_PROPOSITION
+
+8. DESIGN_FEATURE
+
+9. STUDY_OVERVIEW
+
+10. RESULT
+
+11. GAP
+
+12. WHY_GAP_MATTERS
+
+13. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. LIMITATION
+
+3. THEORY_INTRO
+
+4. THEORY_PROPOSITION
+
+5. MECHANISM
+
+6. GAP
+
+7. REQUIREMENT
+
+### artifact_design_moves
+
+1. DESIGN_FEATURE
+
+2. REQUIREMENT
+
+3. METHOD_JUSTIFICATION
+
+4. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. CONTRIBUTION
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 自我决定理论（Deci & Ryan 2000）：自主感=决策由自我决定的主观体验
+
+2. 独特性忽视（Longoni et al. 2019）及消费者对AI忽视独特性的担忧
+
+3. 自聚焦理论（Gibbons 1990; Song & Sela 2023）：个人智能手机激活私人自我聚焦
+
+4. 所有权与占用理论（Jussila et al. 2015; Brasel & Gips 2014; DeSanctis & Poole 1994; Zamani et al. 2022）：个人设备带来控制感和占用优势
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：理论不仅用于解释现象，还前瞻性地直接决定了两种核心设计操纵——高低自主感的描述措辞和基于个人智能手机的交互界面；并且每个操纵都随之在实验中被直接检验（操纵检查、机制中介和实地业绩指标），因此是直接耦合而非事后贴标签。
+
+- 理论到设计翻译链：自我决定理论（自主感=自我决定）→ 机制（自主感促使消费者整合个人独特偏好，弥补AI的独特性忽视）→ 设计要求（系统不应让用户感到被外部专家替代；应让用户感到是决策的主人）→ 具体设计（高自主描述“你的个人工具” vs 低自主描述“销售导购替你完成”）→ 被检验差异（高vs低描述操纵）→ 客观结果（购买意愿、满意度、信心更高；独特性忽视担忧中介；为平均他人时效应消失）。另一条链：自聚焦与占用理论（个人智能手机激活私人自我聚焦、增强控制感）→ 设计要求（将AI嵌入个人设备）→ 具体设计（基于微信小程序的个人手机App）→ 被检验差异（个人手机 vs 零售商手机 vs 机器）→ 客观结果（自主感显著更高且中介；真实店中销量增加、退货率降低）。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：自我决定理论：自主感指个体体验决策由自我决定，是基本心理需求（Deci & Ryan 2000）
+
+- mechanism_cn：当消费者体验自主时，更可能关注并整合自己的真实偏好、价值观和独特情境，而非被动接受AI推荐
+
+- design_requirement_cn：AI不应塑造为替用户决策的外部权威，而应让用户感到自己能够控制如何使用AI进行决策
+
+- artifact_choice_cn：高自主描述文本（“这台AI是你的个人工具，整个过程由你完成”）；低自主描述作为现状基线（“销售导购将替你完成”）
+
+- evaluated_contrast_cn：高自主 vs 低自主 vs 控制；高自主 vs 低自主再乘以认知负荷
+
+- objective_result_cn：高自主组购买意愿、决策满意度、决策信心显著更高；认知负荷不削弱主效应
+
+##### evidence_pointers
+
+1. Study 1A Results
+
+2. Study 1B Results
+
+3. Table 2和Table 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：独特性忽视：AI只能对其训练数据中常见的规则学习，难以捕捉个体独特、内在的决策因素（基于Longoni et al. 2019扩展）
+
+- mechanism_cn：当消费者担忧AI忽略自身独特性时，他们会要么盲目跟随AI、要么作出不匹配自身偏好的决策；高自主感降低这种担忧，因为消费者感到可以把个人因素带进决策
+
+- design_requirement_cn：设计应使消费者有机会在AI建议之上补充和表达自己的独特需求，而非仅仅要求消费者服从AI
+
+- artifact_choice_cn：对于描述操纵，无需额外功能；对于机制检验，则测量独特性忽视担忧并操纵购买对象（自我vs平均他人）
+
+- evaluated_contrast_cn：高vs低自主下的独特性忽视担忧中介；自我购买vs为平均人购买的低独特考虑调节
+
+- objective_result_cn：独特性忽视担忧显著中介决策质量，抗拒不显著；当决策为平均他人、几乎不需独特考量时，高自主效应消失
+
+##### evidence_pointers
+
+1. Study 2A Results
+
+2. Study 2B Results
+
+3. Table 4
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：自聚焦理论：个人智能手机使用会激活私人自我聚焦，使人更多接触自身的想法、感觉和目标（Gibbons 1990; Song & Sela 2023）
+
+- mechanism_cn：私人自我聚焦引导用户向内反思，使自己的优先级和偏好更加突出，因此决策更可能由内在因素决定，这被体验为自主感
+
+- design_requirement_cn：让AI交互发生在能够唤起私人自我聚焦的个人设备或类似私人环境中，而不是在公共、展示式的机器屏幕上
+
+- artifact_choice_cn：基于微信小程序的个人手机App版store AI；对比零售商手机App和机器触屏
+
+- evaluated_contrast_cn：个人手机 vs 零售商手机 vs 控制（机器）
+
+- objective_result_cn：个人手机组自主感显著更高，且自主感作为中介解释了购买意愿和决策满意度的提升
+
+##### evidence_pointers
+
+1. Study 3A Results
+
+2. Table 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：所有权和占用理论：人们对自己拥有的或可自由占用的技术会感觉到更强的控制感和权威，并更主动地按自身需求塑造使用方式（Jussila et al. 2015; Brasel & Gips 2014; DeSanctis & Poole 1994）
+
+- mechanism_cn：个人设备意味着消费者控制AI工具的使用方式，而不是被商店/外部力量控制，因此增强了自主感和对决策的占有感
+
+- design_requirement_cn：提供个人设备作为AI交互界面，并让用户以低摩擦方式（如扫码即用、无需登录）实现对技术的掌控
+
+- artifact_choice_cn：智能手机端store AI应用（扫码即用，无需安装和登录）
+
+- evaluated_contrast_cn：个人手机条件 vs 高自主描述条件（在实地实验中直接比较）
+
+- objective_result_cn：实地中个人手机条件相比描述条件在销量提升和退货率降低上更优
+
+##### evidence_pointers
+
+1. Study 3B Results
+
+2. Table 7
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 实验室对照实验（高vs低vs控制描述）
+
+2. 认知负荷竞争假设检验（2×2因子设计）
+
+3. 中介分析（独特性忽视担忧、抗拒、自主感）
+
+4. 调节分析（接收者自我vs平均他人）
+
+5. 实地现场实验（真实商店、产品级销量和退货率）
+
+6. 补充现场研究（验证购买概率）
+
+7. 定性访谈（过程探索）
+
+8. 内容分析（媒体叙事）
+
+9. 稳健性检查（操纵检查、混淆变量、协变量、替代解释排除）
+
+- why_these_evaluations_cn：文章需要同时回答三个问题：是否有效应、为什么有效应、能否落地。因此先以受控实验室实验建立因果主效应；然后用认知负荷实验排除最明显的信息加工替代解释；再用中介分析直接检验理论机制并排除抗拒这一竞争机制；再用自我vs平均他人的调节提供额外因果逻辑；然后在机制清晰后需要验证“可设计性”，于是先做实验室中的手机App测试，最后用真实商店的产品销量和退货率验证外部效度和管理价值。每一步都是为了回应前一步留下的不确定性并推进论证。
+
+- benchmark_and_contrast_chain_cn：低自主描述被构造为“现状”基线（并用媒体内容分析证明这是业界主流做法）；无描述控制组用于确认低自主本身已接近日常认知；认知负荷条件用于把“信息加工”排除掉；低独特考虑（平均他人）条件用于排除“自主感就是目的”的替代解释；零售商手机和机器屏幕作为设备基线；实地实验中，未进入AI的121个产品作为产品级基线，而高自主描述条件作为另一个治疗条件，用于显示个人手机设计超越纯信息干预。这些对比层层递进，最终把归属从“任何处理”收窄到“自主感机制”。
+
+### claim_evidence_ledger
+
+1. 主效应主张：高自主感提高AI建议决策质量（购买意愿、满意度、信心）——由Study 1A和1B的显著主效应支持，并得到补充现场购买概率结果支持；信用强。
+
+2. 排除信息加工解释——由Study 1B认知负荷交互不显著支持；信用强。
+
+3. 机制主张：独特性忽视担忧是中介——由Study 2A中介分析和Study 2B调节支持；信用较强，但中介测量为同时报告，因果顺序依赖于理论。
+
+4. 排除抗拒机制——由Study 2A中抗拒中介不显著，以及Study 2B低独特考虑时效应消失支持；信用较强。
+
+5. 制品主张：个人智能手机App提升自主感——由Study 3A的自主感中介和Study 3B的现场交互效应支持；信用强。
+
+6. 边界主张：只有当决策需要独特考虑时效应才显著——由Study 2B支持；但该操纵是对平均他人的假设场景，实际消费场景中的边界外推有限。
+
+7. 外部效度主张：真实世界销售提高、退货降低——由Study 3B支持；但单店季节性、产品级回归解释力较低，效应与机制的直接链未在现场测量。
+
+- internal_validity_strategy_cn：随机分配、前测筛选、男女配比、操纵检查和注意力检查；由同性受训实验员作为店员，确保交互一致性；预先检验感知新奇、可理解性、易用性与信任以排除技术感知混淆；在关键研究中加入认知负荷操纵和固定任务时间；测量并控制多种人口统计和产品价格变量；使用验证性因子分析和AVE检查构念效度；排除隐私、感知AI支持等额外替代解释。
+
+- external_validity_strategy_cn：使用真实store AI系统而非假想场景；补充真实时尚店现场实验验证购买概率；在真实零售店进行6周现场实验，使用真实产品、真实购买和退货数据；加入媒体内容分析说明低自主描述贴近行业现状；在多个样本（本科/研究生/真实消费者）和多种结果指标（意图、满意度、信心、购买概率、销量、退货率）之间三角验证。
+
+- what_is_not_actually_tested_cn：没有直接操纵AI的“独特性忽视”程度本身，因此“自主感补偿了AI的技术性忽视”是间接推论；没有测量“私人自我聚焦”作为中介，因此智能手机机制仍属理论推断；没有在实地中测量消费者主观自主感或独特性忽视担忧，所以行为结果与机制之间的连接在field中是黑箱；退货率只是决策质量的间接代理；单期、单店、单产品类别的数据无法排除季节性或店别特质；补充研究中的隐私、AI支持排除等细节不在正文，无法独立评估。
+
+## 贡献闭环
+
+- technical_claim_cn：增强使用AI时的自主感能够提升AI辅助购买决策的意愿、满意度和信心，并增加实际销量、降低退货率。
+
+- artifact_claim_cn：将AI嵌入个人智能手机是一种可落地的设计，它通过增强自主感进而改善决策；在真实零售中，它优于仅改变描述文本的信息性干预。
+
+- mechanism_claim_cn：自主感通过补偿AI的独特性忽视发挥作用——即激励消费者把个人独有偏好带入AI决策过程，从而降低对AI忽视独特性的担忧；而非通过降低对AI的抗拒。
+
+- boundary_claim_cn：当决策几乎不需要独特考虑时（例如为平均他人购买），自主感的正面效应减弱；在服装/时尚等高度个人化、涉及品味和身份的决策情境中最适用，而在不依赖用户独特因素的决策中可能不必要甚至无益。
+
+- reusable_design_knowledge_cn：可复用的设计原则包括：避免将AI塑造成替代用户决策的“专家式权威”；强调用户是最终决策者并享有自由控制权；把AI交互放在个人、私密的设备环境（如个人手机）中；尽量以低摩擦方式让用户获得控制感（扫码即用、无需登录）；在商店AI部署前应测试其对自主感知的影响。
+
+- theoretical_contribution_cn：主要理论贡献是：(1) 提出“自主感补偿独特性忽视”这一新机制，与抗拒理论形成对比；(2) 扩展Longoni等的独特性忽视概念，将其从消费者感知发展为AI技术性局限，并给出补偿路径；(3) 首次将个人智能手机与自主感建立理论和实证联系，推进人本AI和智能手机IS研究；(4) 响应关于“尊重自主”的政策号召，补充了AI与自主感的因果证据。
+
+- how_discussion_closes_intro_gap_cn：引言指出“存在重要呼吁但缺乏因果实证”，讨论部分通过六项实验证据、对竞争机制的排除、现场行为数据、内容分析和理论重构，明确告诉读者这一缺口已被填补：自主感不仅是原则性要求，而且可以被测量、被操纵、被设计地增强，并在真实业务指标上产生可观测影响。
+
+- overclaim_or_unsupported_leaps_cn：潜在的跳跃包括：从“自我vs平均他人”实验外推到现实购买边界；从购买意图/满意度和产品退货率推断“决策质量”本身，缺少真实消费者事后评价或第三方质量评估；智能手机机制中的“私人自我聚焦”没有被直接测量，因此“手机→自我聚焦→自主感”链的中段仍是理论承诺；将实测效应推断到“护肤、礼物、度假套餐”等广泛领域属于预测而非实证；在讨论中把“低自主和控制无差异”解释为“低自主就是现状”虽得到媒体内容分析支持，但消费者个体认知未直接测量。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1-S3
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI系统借助大规模消费者数据成为“购物专家”，提供高度个性化且精心策划的产品推荐。
+
+- rhetorical_function_cn：建立AI推荐系统流行的现实背景，为读者设定技术奇点的基本画面。
+
+- depends_on_cn：依赖大众对AI推荐系统的常识。
+
+- sets_up_cn：为随后指出AI的局限性做铺垫。
+
+- evidence_pointer：Abstract第1段
+
+### 2. Abstract P1 S4-S6
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S4-S6
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：AI虽擅长推断对平均消费者最优的普遍规则，却难以考虑塑造每个人决策的独特因素（如动机、复杂处境），作者称之为AI的独特性忽视。
+
+- rhetorical_function_cn：在摘要中直接点出核心问题现象，并给出全文最关键的新概念。
+
+- depends_on_cn：依赖上一句对AI能力的描述。
+
+- sets_up_cn：为自主感作为解决方案提供需要弥补的缺口。
+
+- evidence_pointer：Abstract第1段后半
+
+### 3. Abstract P2 S1-S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P2 S1-S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者识别出高度自主感是补偿AI独特性忽视、改善AI建议决策质量的关键手段。
+
+- rhetorical_function_cn：在摘要中亮出全文核心主张和最终结论。
+
+- depends_on_cn：依赖独特性忽视概念的成立。
+
+- sets_up_cn：让读者期待机制解释和实证证据。
+
+- evidence_pointer：Abstract第2段
+
+### 4. Abstract P3 S1-S5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P3 S1-S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者报告通过五个实验室实验和一个实地实验在服装购买情境中检验这一主张。
+
+- rhetorical_function_cn：给读者提供证据类型和规模的预告，增加可信度。
+
+- depends_on_cn：依赖前句结论。
+
+- sets_up_cn：为正文研究程序提供路线图。
+
+- evidence_pointer：Abstract第3段
+
+### 5. Abstract P4 S1-S4
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P4 S1-S4
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者说明自主感促使消费者把个人偏好与需求整合到AI辅助决策中，从而降低独特性被忽视的担忧。
+
+- rhetorical_function_cn：摘要中解释机制，将“自主感为什么有用”讲清楚。
+
+- depends_on_cn：依赖自我决定理论和独特性忽视概念。
+
+- sets_up_cn：为实验中的中介和调节检验提供理论依据。
+
+- evidence_pointer：Abstract第4段
+
+### 6. Abstract P5 S1-S2
+
+- order：6
+
+- section：Abstract
+
+- locator：Abstract P5 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者提出利用个人智能手机的AI使用方式作为可行设计策略。
+
+- rhetorical_function_cn：在摘要中突出实践创新点，把理论落在具体设计上。
+
+- depends_on_cn：依赖自主感机制的成立。
+
+- sets_up_cn：预告Studies 3A/3B的设计实验。
+
+- evidence_pointer：Abstract第5段
+
+### 7. Abstract P6 S1-S2
+
+- order：7
+
+- section：Abstract
+
+- locator：Abstract P6 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：实地购买和退货数据确认了AI设计在真实世界中的有效性。
+
+- rhetorical_function_cn：给出摘要中最“硬”的证据锚点，强化外部效度。
+
+- depends_on_cn：依赖现场实验。
+
+- sets_up_cn：为理论和管理含义背书。
+
+- evidence_pointer：Abstract第6段
+
+### 8. Abstract P7 S1
+
+- order：8
+
+- section：Abstract
+
+- locator：Abstract P7 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者认为发现适用于很多AI辅助决策情境，尤其是个体独特因素重要的场景。
+
+- rhetorical_function_cn：把研究从服装情境提升到普遍意义，为贡献声明收尾。
+
+- depends_on_cn：依赖全部证据。
+
+- sets_up_cn：让摘要以广义影响结束。
+
+- evidence_pointer：Abstract第7段
+
+### 9. Intro P1 S1-S2
+
+- order：9
+
+- section：Introduction
+
+- locator：Intro P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：文章强调用AI决策与用传统IS决策不同：传统IS中用户保持主导权，AI则能执行认知功能并自主设定规则。
+
+- rhetorical_function_cn：为读者建立“AI决策特殊之处”的历史对比，为自主性悖论奠基。
+
+- depends_on_cn：依赖Berente等、Rai等文献。
+
+- sets_up_cn：引出“agent remains with user”这一经典观念的转变。
+
+- evidence_pointer：Introduction P1 S1-S5
+
+### 10. Intro P1 S6-S10
+
+- order：10
+
+- section：Introduction
+
+- locator：Intro P1 S6-S10
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：消费者一方面可能把决策交给AI以获得更优选择，另一方面又感到AI限制了自己的意志和优先事项，从而削弱自主感，造成“委托AI却影响决策质量”的悖论。
+
+- rhetorical_function_cn：用具体现象描述引出研究问题。
+
+- depends_on_cn：依赖前句对AI自主性的描写。
+
+- sets_up_cn：为两个研究问题铺垫。
+
+- evidence_pointer：Introduction P1 S6-S10
+
+### 11. Intro P1 S11-S12
+
+- order：11
+
+- section：Introduction
+
+- locator：Intro P1 S11-S12
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文提出两个研究问题：自主感在AI建议决策中的作用，以及如何通过设计方案增强自主感。
+
+- rhetorical_function_cn：正式确立全文研究目标，使后续每部分都可对应。
+
+- depends_on_cn：依赖悖论的建立。
+
+- sets_up_cn：为整个研究程序和实验设计提供导航。
+
+- evidence_pointer：Introduction P1末
+
+### 12. Intro P2 S1-S3
+
+- order：12
+
+- section：Introduction
+
+- locator：Intro P2 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：作者说明AI擅长推广普遍规则但难以捕捉个体独有决策因素，并将此称为独特性忽视。
+
+- rhetorical_function_cn：引入全文最核心的新概念，并把它从现象上升为理论问题。
+
+- depends_on_cn：依赖对AI的常识和文献。
+
+- sets_up_cn：为自主感机制提供“需要被补偿的东西”。
+
+- evidence_pointer：Introduction P2 S1-S3
+
+### 13. Intro P2 S4-S6
+
+- order：13
+
+- section：Introduction
+
+- locator：Intro P2 S4-S6
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者提出自主感会使消费者整合独特个人因素，从而弥补AI的独特性忽视，改善决策质量。
+
+- rhetorical_function_cn：提出全文的中心命题。
+
+- depends_on_cn：依赖独特性忽视概念和自我决定理论。
+
+- sets_up_cn：为所有实验假设提供理论材料。
+
+- evidence_pointer：Introduction P2 S4-S6
+
+### 14. Intro P3 S1-S3
+
+- order：14
+
+- section：Introduction
+
+- locator：Intro P3 S1-S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有概念性工作多强调AI威胁自主感、引发消费者抗拒，认为需要减少阻力。
+
+- rhetorical_function_cn：总结既有自主感文献的立场，并暗示其局限。
+
+- depends_on_cn：依赖André等、Puntoni等。
+
+- sets_up_cn：为作者的新机制提供对比。
+
+- evidence_pointer：Introduction P3 S1-S3
+
+### 15. Intro P3 S4-S5
+
+- order：15
+
+- section：Introduction
+
+- locator：Intro P3 S4-S5
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者主张自主感是不局限于减少抵抗的机制，而是一种“按照自身利益与优先级利用AI”的自我决定方式。
+
+- rhetorical_function_cn：将作者的机制与既有抗拒理论明确区分。
+
+- depends_on_cn：依赖前面的limitation。
+
+- sets_up_cn：为文献贡献和机制检验铺垫。
+
+- evidence_pointer：Introduction P3 S4-S5
+
+### 16. Intro P4 S1-S4
+
+- order：16
+
+- section：Introduction
+
+- locator：Intro P4 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者提出使用个人手机使用AI可增强自主感，因为私人环境激活自我反思，使消费者更关注自己的思想和感受。
+
+- rhetorical_function_cn：在引言中预览设计解决，让读者知道理论可以转化为实际系统。
+
+- depends_on_cn：依赖前文自主感机制。
+
+- sets_up_cn：为Studies 3A/3B做概念铺垫。
+
+- evidence_pointer：Introduction P4 S1-S4
+
+### 17. Intro P5 S1-S3
+
+- order：17
+
+- section：Introduction
+
+- locator：Intro P5 S1-S3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告将通过实验室和实地实验验证上述主张，并列出主要发现：自主感提升决策质量等。
+
+- rhetorical_function_cn：给读者一组研究路线图和早期结果摘要。
+
+- depends_on_cn：依赖全部理论构想。
+
+- sets_up_cn：引导读者进入具体研究。
+
+- evidence_pointer：Introduction P5 S1-S3
+
+### 18. Intro P6 S1-S3
+
+- order：18
+
+- section：Introduction
+
+- locator：Intro P6 S1-S3
+
+- move_code：GAP
+
+- paraphrase_cn：政策和组织指南都把“尊重自主”列为AI设计原则，但缺少关于自主感对AI决策因果影响的系统理论和实证。
+
+- rhetorical_function_cn：明确点出理论缺口，强调研究紧迫性。
+
+- depends_on_cn：依赖联合国/OECD指南和已有讨论。
+
+- sets_up_cn：为三大贡献声明提供“被填补的空白”。
+
+- evidence_pointer：Introduction P6 S1-S3
+
+### 19. Intro P7 S1-S3
+
+- order：19
+
+- section：Introduction
+
+- locator：Intro P7 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者列出三个贡献：新机制解释自主感如何改善AI决策、个人智能手机的设计发现、可操作的管理建议。
+
+- rhetorical_function_cn：将前文缺口转化为贡献清单，让读者预知文章价值。
+
+- depends_on_cn：依赖GAP和全部前期论证。
+
+- sets_up_cn：为正文证据链提供目标。
+
+- evidence_pointer：Introduction P7 S1-S3
+
+### 20. Task delegation段 P1 S1-S4
+
+- order：20
+
+- section：Relevant Literature and Gaps
+
+- locator：Task delegation段 P1 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：作者总结任务委托文献：AI擅长某些任务、人类擅长其他，最优委托可提升整体表现。
+
+- rhetorical_function_cn：建立第一个理论参照系，并说明“如何分配工作在人机协作中是核心”。
+
+- depends_on_cn：依赖Baird & Maruping、Fügener等。
+
+- sets_up_cn：与作者的“AI无法捕捉caprice”前提形成对比。
+
+- evidence_pointer：Task delegation段前半
+
+### 21. Task delegation段 P1 S5-S7
+
+- order：21
+
+- section：Relevant Literature and Gaps
+
+- locator：Task delegation段 P1 S5-S7
+
+- move_code：LIMITATION
+
+- paraphrase_cn：即使最先进的AI算法也可能在捕捉人的“任性”上不足，因此最优利用必须考虑消费者独特性。
+
+- rhetorical_function_cn：指出任务委托框架的盲区，为脱离该框架提供理由。
+
+- depends_on_cn：依赖前面综述。
+
+- sets_up_cn：确立自主感视角的必要性。
+
+- evidence_pointer：Task delegation段后半
+
+### 22. AI-advised decisions段 P1 S1-S4
+
+- order：22
+
+- section：Relevant Literature and Gaps
+
+- locator：AI-advised decisions段 P1 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：综述AI建议文献：算法厌恶、算法欣赏、主观任务和hedonic估计等边界效应。
+
+- rhetorical_function_cn：总结已有AI建议的证据，为对比个人决策领域做准备。
+
+- depends_on_cn：依赖Dietvorst、Logg、Castelo、Longoni & Cian等。
+
+- sets_up_cn：与新研究领域（个人决策）形成对比。
+
+- evidence_pointer：AI-advised decisions段前半
+
+### 23. AI-advised decisions段 P1 S5-S7
+
+- order：23
+
+- section：Relevant Literature and Gaps
+
+- locator：AI-advised decisions段 P1 S5-S7
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有研究主要聚焦专业任务（预测、库存），而本文关注涉及用户自身需要的个人决策。
+
+- rhetorical_function_cn：划定本文与已有研究的领域边界。
+
+- depends_on_cn：依赖前面综述。
+
+- sets_up_cn：强调“整合用户偏好”在本领域的重要性。
+
+- evidence_pointer：AI-advised decisions段后半
+
+### 24. Consumer receptivity段 P1 S1-S4
+
+- order：24
+
+- section：Relevant Literature and Gaps
+
+- locator：Consumer receptivity段 P1 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：综述消费者对AI接受度研究：AI信息来源、人类vs AI决策、医疗AI偏好等。
+
+- rhetorical_function_cn：为消费者心理学层面的机制做铺垫。
+
+- depends_on_cn：依赖Longoni等、Yalcin等、Schrift等。
+
+- sets_up_cn：引入“AI能否理解独特需求”这一关键线索。
+
+- evidence_pointer：Consumer receptivity段前半
+
+### 25. Consumer receptivity段 P1 S5-S7
+
+- order：25
+
+- section：Relevant Literature and Gaps
+
+- locator：Consumer receptivity段 P1 S5-S7
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Schrift等发现消费者知道AI可预测自己时会采取非偏好选项以恢复自由意志，但精确影响机制和实证检验尚未被完成。
+
+- rhetorical_function_cn：在消费者心理层面识别出“自主感机制不明”的缺口。
+
+- depends_on_cn：依赖Schrift等的实验。
+
+- sets_up_cn：为2A/2B区分两种机制做铺垫。
+
+- evidence_pointer：Consumer receptivity段后半
+
+### 26. Addressing this gap段 P1 S1-S3
+
+- order：26
+
+- section：Relevant Literature and Gaps
+
+- locator：Addressing this gap段 P1 S1-S3
+
+- move_code：GAP
+
+- paraphrase_cn：作者指出两种机制（降低抗拒 vs 弥补独特性忽视）会产生不同预测和干预，必须在理论和实践上区分。
+
+- rhetorical_function_cn：把文献缺口转化为具体研究任务。
+
+- depends_on_cn：依赖前两段文献综述。
+
+- sets_up_cn：为2A/2B的机制检验提供需要。
+
+- evidence_pointer：Addressing the gap段
+
+### 27. The AI system段 P1 S1-S7
+
+- order：27
+
+- section：Empirical Setting and Overview
+
+- locator：The AI system段 P1 S1-S7
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：详细描述store AI：55英寸镜面屏、人体扫描、个性化推荐、尺码估计、配色建议、季节流行推荐。
+
+- rhetorical_function_cn：建立实验系统的技术可信度，并说明其与“时尚专家”形象一致。
+
+- depends_on_cn：依赖真实系统的能力。
+
+- sets_up_cn：为后续所有实验提供统一环境，并说明低自主描述为何接近主流。
+
+- evidence_pointer：Empirical Setting第一段
+
+### 28. Overview of studies段 P1 S1-S4
+
+- order：28
+
+- section：Empirical Setting and Overview
+
+- locator：Overview of studies段 P1 S1-S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告研究三部分：主效应（1A、1B）、机制（2A、2B）、解决方案（3A、3B）。
+
+- rhetorical_function_cn：提供全文研究地图，方便读者跟踪。
+
+- depends_on_cn：依赖前文理论。
+
+- sets_up_cn：为之后每节开始的地方性过渡提供锚点。
+
+- evidence_pointer：Overview段
+
+### 29. Studies 1A & 1B intro P1 S1-S4
+
+- order：29
+
+- section：Studies 1A & 1B
+
+- locator：Studies 1A & 1B intro P1 S1-S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：消费者在购买时经常为了追求更优选择而向外部专家让渡控制权，但AI推荐可能作为外部强制力量约束人的行为，反而损害决策。
+
+- rhetorical_function_cn：把AI悖论重新放到具体购买决策情境中。
+
+- depends_on_cn：依赖引言和文献。
+
+- sets_up_cn：为主效应预测提供直接动机。
+
+- evidence_pointer：Studies 1A & 1B intro第一段
+
+### 30. Studies 1A & 1B intro P1 S5-S8
+
+- order：30
+
+- section：Studies 1A & 1B
+
+- locator：Studies 1A & 1B intro P1 S5-S8
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者认为悖论根源在于AI的独特性忽视，而增强自主感能促使用户整合个人因素弥补这一忽视，从而改善决策。
+
+- rhetorical_function_cn：将现象与理论命题对接，为实验假设提供基础。
+
+- depends_on_cn：依赖Introduction的中心命题。
+
+- sets_up_cn：引出1A和1B的具体可检验预测。
+
+- evidence_pointer：Studies 1A & 1B intro第一段后半
+
+### 31. Method第一段
+
+- order：31
+
+- section：Study 1A Method
+
+- locator：Method第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者报告样品规模（124名本科生）、单因素三条件设计、随机分配和性别平衡。
+
+- rhetorical_function_cn：展示实验设计的基本参数，支持可复制性。
+
+- depends_on_cn：依赖操纵的设计。
+
+- sets_up_cn：为后面的操纵说明提供框架。
+
+- evidence_pointer：Study 1A Method第一段
+
+### 32. Manipulation段 S1-S5
+
+- order：32
+
+- section：Study 1A Method
+
+- locator：Manipulation段 S1-S5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：操纵采用两种书面AI描述：低自主描述把AI说成“商店销售导购，你只需遵循指示”，高自主描述把AI说成“你的个人工具，整个过程由你完成”。
+
+- rhetorical_function_cn：把理论机制转化为可操控的文本刺激，构成整个研究程序的实验处理。
+
+- depends_on_cn：依赖自主感的操作性定义。
+
+- sets_up_cn：为后续1B、2A、2B以及现场描述条件提供处理模板。
+
+- evidence_pointer：Manipulation段
+
+### 33. Method操纵解释段 P4 S1-S3
+
+- order：33
+
+- section：Study 1A Method
+
+- locator：Method操纵解释段 P4 S1-S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：作者解释为什么这样的措辞会降低或提高自主感：外部权威压制自我决定，而个人工具强调自我决定的决策过程。
+
+- rhetorical_function_cn：给操纵提供理论依据，使操纵不“只是措辞”。
+
+- depends_on_cn：依赖Chirkov等和自主感定义。
+
+- sets_up_cn：为操纵有效性检查和pilot研究提供逻辑。
+
+- evidence_pointer：Method第四段
+
+### 34. Method第五段 S1-S2
+
+- order：34
+
+- section：Study 1A Method
+
+- locator：Method第五段 S1-S2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：作者强调所有条件下AI系统本身（算法、功能、展示和操作）保持不变，只有自主感的描述操纵不同。
+
+- rhetorical_function_cn：通过保持系统恒定来隔离单一自变量，增强因果归因。
+
+- depends_on_cn：依赖实验控制。
+
+- sets_up_cn：为之后的“差异只能来自自主感”提供支持。
+
+- evidence_pointer：Method第五段
+
+### 35. Pilot study段 S1-S3
+
+- order：35
+
+- section：Study 1A Method
+
+- locator：Pilot study段 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者用独立成人样本预测试操纵是否按预期影响自主感。
+
+- rhetorical_function_cn：在正式实验前验证操纵的有效性，避免后验解释。
+
+- depends_on_cn：依赖自主感量表。
+
+- sets_up_cn：为正式实验的操纵检查提供基线。
+
+- evidence_pointer：Pilot study段
+
+### 36. Pilot结果句
+
+- order：36
+
+- section：Study 1A Method
+
+- locator：Pilot结果句
+
+- move_code：RESULT
+
+- paraphrase_cn：预检验确认高自主条件比低自主条件导致显著更高的自主感。
+
+- rhetorical_function_cn：在方法部分提前报告操纵成功，为后续结果解释铺路。
+
+- depends_on_cn：依赖pilot样本。
+
+- sets_up_cn：支撑“高自主描述=高自主感”的操作化。
+
+- evidence_pointer：Pilot结果句
+
+### 37. Potential confounders段 S1-S3
+
+- order：37
+
+- section：Study 1A Method
+
+- locator：Potential confounders段 S1-S3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：作者测量感知新颖性、可理解性、易用性和信任，确认操纵没有改变技术感知。
+
+- rhetorical_function_cn：排除“改变对AI技术本身的感知”这类混淆变量。
+
+- depends_on_cn：依赖pilot和正式样本的测量。
+
+- sets_up_cn：增强实验结论的内部有效性。
+
+- evidence_pointer：Potential confounders段
+
+### 38. Results第一段
+
+- order：38
+
+- section：Study 1A Results
+
+- locator：Results第一段
+
+- move_code：RESULT
+
+- paraphrase_cn：注意力、操纵和随机化检查通过；高自主组报告的自主感显著高于低自主组和控制组。
+
+- rhetorical_function_cn：确认操纵在正式样本中起作用。
+
+- depends_on_cn：依赖pilot和实验干预。
+
+- sets_up_cn：为主效应结果提供可信性。
+
+- evidence_pointer：Study 1A Results第一段
+
+### 39. Results第二段 S1-S3
+
+- order：39
+
+- section：Study 1A Results
+
+- locator：Results第二段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：显着的ANCOVA显示高自主条件下的决策满意度和购买意愿显著高于低自主条件。
+
+- rhetorical_function_cn：提出核心主效应证据。
+
+- depends_on_cn：依赖操纵成功。
+
+- sets_up_cn：回答研究问题1的“是否有效应”部分。
+
+- evidence_pointer：Study 1A Results第二段 + Table 2
+
+### 40. Results第二段末句
+
+- order：40
+
+- section：Study 1A Results
+
+- locator：Results第二段末句
+
+- move_code：RESULT
+
+- paraphrase_cn：低自主与控制条件无显著差异，说明低自主描述接近无干预状态下的默认认知。
+
+- rhetorical_function_cn：为“低自主=现状”这一假设提供初步证据，也为后续媒体内容分析做伏笔。
+
+- depends_on_cn：依赖ANCOVA结果和附录内容分析。
+
+- sets_up_cn：为管理建议中“避免专家叙事”做铺垫。
+
+- evidence_pointer：Study 1A Results第二段末
+
+### 41. Study 1B intro P1 S1-S3
+
+- order：41
+
+- section：Study 1B
+
+- locator：Study 1B intro P1 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者提出信息加工是可能的替代解释，并说明如果主效应来自信息加工，则认知负荷应削弱效应；如果来自自主感则不应。
+
+- rhetorical_function_cn：以竞争假设的方式建立排除性实验设计。
+
+- depends_on_cn：依赖1A的主效应。
+
+- sets_up_cn：为1B的认知负荷操纵提供逻辑。
+
+- evidence_pointer：Study 1B intro第一段
+
+### 42. Method第一段
+
+- order：42
+
+- section：Study 1B Method
+
+- locator：Method第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者用点阵记忆任务操纵认知负荷，采用2×2全因子设计。
+
+- rhetorical_function_cn：提供可复现的认知负荷操纵方法。
+
+- depends_on_cn：依赖De Neys等文献。
+
+- sets_up_cn：为交互效应检验铺路。
+
+- evidence_pointer：Study 1B Method第一段
+
+### 43. Results第一段
+
+- order：43
+
+- section：Study 1B Results
+
+- locator：Results第一段
+
+- move_code：RESULT
+
+- paraphrase_cn：记忆任务正确率高且感知认知努力显著更高，说明认知负荷操纵有效。
+
+- rhetorical_function_cn：确认实验操纵成功后再解释结果。
+
+- depends_on_cn：依赖点阵记忆任务。
+
+- sets_up_cn：使“交互不显著≈信息加工非替代解释”成为可信结论。
+
+- evidence_pointer：Study 1B Results第一段
+
+### 44. Results第二段 S1-S4
+
+- order：44
+
+- section：Study 1B Results
+
+- locator：Results第二段 S1-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：AI描述主效应显著，但AI描述×认知负荷交互不显著；决策信心、满意度和购买意愿都显示同样模式。
+
+- rhetorical_function_cn：给出排除信息加工替代解释的核心证据。
+
+- depends_on_cn：依赖2×2设计和ANCOVA。
+
+- sets_up_cn：支持自主感作为机制解释，为访谈过程证据提供支持。
+
+- evidence_pointer：Study 1B Results第二段 + Table 3
+
+### 45. Post hoc interview段 S1-S3
+
+- order：45
+
+- section：Study 1B Results
+
+- locator：Post hoc interview段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：访谈显示高自主参与者更多思考自身需要和处境，低自主参与者更多讨论AI机器及其功能。
+
+- rhetorical_function_cn：用定性证据初步提示“自主感→整合个人因素”的机制方向。
+
+- depends_on_cn：依赖访谈编码。
+
+- sets_up_cn：为2A的独特性忽视担忧中介埋下伏笔。
+
+- evidence_pointer：Post hoc interview段
+
+### 46. Discussion第二段 S1-S2
+
+- order：46
+
+- section：Studies 1A & 1B Discussion
+
+- locator：Discussion第二段 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：作者补充报告真实时尚店中的现场实验复制了主效应：高自主条件显著提高实际购买概率。
+
+- rhetorical_function_cn：用现场购买行为为实验室发现增加外部效度。
+
+- depends_on_cn：依赖补充现场研究。
+
+- sets_up_cn：为3B的现场实验做预热。
+
+- evidence_pointer：Discussion第二段
+
+### 47. Discussion末句
+
+- order：47
+
+- section：Studies 1A & 1B Discussion
+
+- locator：Discussion末句
+
+- move_code：TRANSITION
+
+- paraphrase_cn：接下来作者要解释自主感影响决策质量的内在机制。
+
+- rhetorical_function_cn：为下一阶段（2A/2B）提供显式路标。
+
+- depends_on_cn：依赖前面结果。
+
+- sets_up_cn：引导读者进入机制检验。
+
+- evidence_pointer：Discussion末句
+
+### 48. Intro P1 S1-S6
+
+- order：48
+
+- section：Studies 2A & 2B
+
+- locator：Intro P1 S1-S6
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者指出存在两种竞争机制：高自主感降低独特性忽视担忧（本文理论），或高自主感降低对AI的抗拒（抗拒理论）。
+
+- rhetorical_function_cn：为2A/2B设定对比框架。
+
+- depends_on_cn：依赖文献综述。
+
+- sets_up_cn：为中介和调节实验设计提供直接动机。
+
+- evidence_pointer：Studies 2A & 2B intro第一段
+
+### 49. Method第二段 S1-S3
+
+- order：49
+
+- section：Study 2A Method
+
+- locator：Method第二段 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者测量独特性忽视担忧和抗拒（愤怒与负面认知）作为两个并列中介。
+
+- rhetorical_function_cn：把两个竞争机制同时操作化，为检验提供变量。
+
+- depends_on_cn：依赖Longoni、Dillard & Shen。
+
+- sets_up_cn：为中介分析提供可估计路径。
+
+- evidence_pointer：Study 2A Method第二段
+
+### 50. Results第二段 S1-S3
+
+- order：50
+
+- section：Study 2A Results
+
+- locator：Results第二段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：独特性忽视担忧在三个决策结果上的中介效应均显著（间接效应CI不含0）。
+
+- rhetorical_function_cn：为主要机制提供统计证据。
+
+- depends_on_cn：依赖中介分析。
+
+- sets_up_cn：支持自主感→低成本独特性忽视担忧→更好决策的路径。
+
+- evidence_pointer：Study 2A Results第二段
+
+### 51. Results第三段 S1-S2
+
+- order：51
+
+- section：Study 2A Results
+
+- locator：Results第三段 S1-S2
+
+- move_code：RESULT
+
+- paraphrase_cn：抗拒的中介效应不显著（CI含0），说明数据不支持抗拒机制。
+
+- rhetorical_function_cn：排除主流“AI引发抗拒”的解释。
+
+- depends_on_cn：依赖同一中介分析。
+
+- sets_up_cn：为讨论中挑战抗拒理论铺路。
+
+- evidence_pointer：Study 2A Results第三段
+
+### 52. Intro P1 S1-S3
+
+- order：52
+
+- section：Study 2B
+
+- locator：Intro P1 S1-S3
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：作者提出如果机制是弥补独特性忽视，那么当决策需要很少独特考虑时（例如为平均他人购买），高自主的效应应消失。
+
+- rhetorical_function_cn：为调节实验提出可证伪假设。
+
+- depends_on_cn：依赖2A机制。
+
+- sets_up_cn：为2B的接收者操纵提供逻辑。
+
+- evidence_pointer：Study 2B intro第一段
+
+### 53. Results第一段 S1-S3
+
+- order：53
+
+- section：Study 2B Results
+
+- locator：Results第一段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：显著交互：高自主描述在为自己购买时显著有效，在为平均他人购买时无效。
+
+- rhetorical_function_cn：用模式化证据强化独特性忽视机制。
+
+- depends_on_cn：依赖2×2设计和简单效应。
+
+- sets_up_cn：排除“自主感本身是目的”的替代解释。
+
+- evidence_pointer：Study 2B Results第一段 + Figure 2
+
+### 54. Discussion P1 S1-S3
+
+- order：54
+
+- section：Studies 2A & 2B Discussion
+
+- locator：Discussion P1 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：中介和调节证据一致支持独特性忽视机制，并挑战“AI普遍引发消费者抗拒”的说法。
+
+- rhetorical_function_cn：总结机制部分并推进理论定位。
+
+- depends_on_cn：依赖2A/2B结果。
+
+- sets_up_cn：为接下来实际解决方案做铺垫。
+
+- evidence_pointer：Discussion第一段
+
+### 55. Discussion末句
+
+- order：55
+
+- section：Studies 2A & 2B Discussion
+
+- locator：Discussion末句
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者预告接下来提出并测试一个实用方案。
+
+- rhetorical_function_cn：显式过渡到第三部分。
+
+- depends_on_cn：依赖机制结论。
+
+- sets_up_cn：引出3A/3B。
+
+- evidence_pointer：Discussion末句
+
+### 56. Intro P1 S1-S4
+
+- order：56
+
+- section：Studies 3A & 3B
+
+- locator：Intro P1 S1-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者构建了基于智能手机的store AI App，让消费者用个人手机控制AI交互，并引用IS人本AI呼吁作为设计动机。
+
+- rhetorical_function_cn：把机制研究的结论转化为具体系统设计。
+
+- depends_on_cn：依赖2A/2B机制和Jain等呼吁。
+
+- sets_up_cn：为3A/3B的实验提供制品。
+
+- evidence_pointer：Studies 3A & 3B intro第一段
+
+### 57. Intro P2 S1-S5
+
+- order：57
+
+- section：Studies 3A & 3B
+
+- locator：Intro P2 S1-S5
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者引用自聚焦理论提出私人自我聚焦会增强自主感，因为个人手机让用户更关注自己的目标、价值和感受。
+
+- rhetorical_function_cn：为手机设计提供第二层理论机制。
+
+- depends_on_cn：依赖Gibbons、Song & Sela。
+
+- sets_up_cn：为3A的自主感中介假设提供理论依据。
+
+- evidence_pointer：Intro第二段
+
+### 58. Intro P3 S1-S5
+
+- order：58
+
+- section：Studies 3A & 3B
+
+- locator：Intro P3 S1-S5
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者引用所有权和占用文献，说明使用个人设备会让人感知到对使用的控制，从而增强自主感。
+
+- rhetorical_function_cn：为手机设计提供第二个互补理论来源。
+
+- depends_on_cn：依赖Brasel & Gips、DeSanctis & Poole等。
+
+- sets_up_cn：强化“个人手机增加自主感”的设计预测。
+
+- evidence_pointer：Intro第三段
+
+### 59. Method第一段 S1-S3
+
+- order：59
+
+- section：Study 3A Method
+
+- locator：Method第一段 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者描述三条件单因素实验：个人手机、零售商手机、控制（机器），流程与1A类似但无描述操纵。
+
+- rhetorical_function_cn：把“设备差异”抽离出来作为唯一自变量。
+
+- depends_on_cn：依赖已开发的App。
+
+- sets_up_cn：为比较设备对自主感的影响提供设计。
+
+- evidence_pointer：Study 3A Method第一段
+
+### 60. Results第二段 S1-S3
+
+- order：60
+
+- section：Study 3A Results
+
+- locator：Results第二段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：个人手机组自主感显著最高，且自主感显著中介个人手机条件对购买意愿和决策满意度的正向效应。
+
+- rhetorical_function_cn：把设计差异与理论机制在统计上连接起来。
+
+- depends_on_cn：依赖中介分析。
+
+- sets_up_cn：支持“设计→自主感→决策质量”的完整路径。
+
+- evidence_pointer：Study 3A Results第二段
+
+### 61. Method第一段 S1-S3
+
+- order：61
+
+- section：Study 3B Method
+
+- locator：Method第一段 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者在真实店中做6周实验，前两周无AI作为预处理基线，后几周交替实施描述条件和个人手机条件。
+
+- rhetorical_function_cn：把两种处理直接比较，并设立无AI预处理期作为对照。
+
+- depends_on_cn：依赖商店合作和App部署。
+
+- sets_up_cn：为产品级回归分析提供时间结构。
+
+- evidence_pointer：Study 3B Method第一段
+
+### 62. Method第二段 S1-S3
+
+- order：62
+
+- section：Study 3B Method
+
+- locator：Method第二段 S1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者以221个独特产品为分析单元，其中100个是AI处理产品，121个是基线产品，随机化检查表明两组在产品属性上平衡。
+
+- rhetorical_function_cn：建立产品级随机对照结构。
+
+- depends_on_cn：依赖产品数据和随机分配。
+
+- sets_up_cn：为销量与退货率比较提供因果基础。
+
+- evidence_pointer：Study 3B Method第二段 + Table 6
+
+### 63. Results第一段 S1-S3
+
+- order：63
+
+- section：Study 3B Results
+
+- locator：Results第一段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：AI处理产品销量显著上升、退货率下降；个人手机条件在销量和退货率上均优于描述条件。
+
+- rhetorical_function_cn：提供真实世界中的行为证据，验证设计的实际有效性。
+
+- depends_on_cn：依赖ANCOVA回归。
+
+- sets_up_cn：为“手机设计优于纯信息设计”提供证据。
+
+- evidence_pointer：Study 3B Results第一段 + Table 7
+
+### 64. Discussion P1 S1-S5
+
+- order：64
+
+- section：Studies 3A & 3B Discussion
+
+- locator：Discussion P1 S1-S5
+
+- move_code：RESULT
+
+- paraphrase_cn：作者总结手机设计显著增强自主感且被现场验证，相比信息/描述处理更不依赖用户注意力和理解。
+
+- rhetorical_function_cn：解释为什么手机设计比描述处理更可落地。
+
+- depends_on_cn：依赖3A/3B结果。
+
+- sets_up_cn：为管理建议“避免专家叙事、用手机设计”提供论据。
+
+- evidence_pointer：Discussion段
+
+### 65. 第一段 S1-S3
+
+- order：65
+
+- section：General Discussion
+
+- locator：第一段 S1-S3
+
+- move_code：RESULT
+
+- paraphrase_cn：作者总结所有实验室和现场实验一致支持“提高自主感可补偿AI独特性忽视并改善决策质量”。
+
+- rhetorical_function_cn：对全文证据做总体概括，开始从局部结果上升到一般结论。
+
+- depends_on_cn：依赖全部研究。
+
+- sets_up_cn：为理论贡献和管理意义开头。
+
+- evidence_pointer：General Discussion第一段
+
+### 66. 贡献1段 S1-S3
+
+- order：66
+
+- section：Theoretical Contributions
+
+- locator：贡献1段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称第一个贡献是识别自主感这一关键机制，解释其如何补偿AI独特性忽视。
+
+- rhetorical_function_cn：把实证结果转化为理论贡献。
+
+- depends_on_cn：依赖机制证据。
+
+- sets_up_cn：回扣引言缺口。
+
+- evidence_pointer：Theoretical Contributions第一段
+
+### 67. 贡献2段 S1-S3
+
+- order：67
+
+- section：Theoretical Contributions
+
+- locator：贡献2段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者宣称第二个贡献是实证区分了自主感机制与抗拒机制，挑战“AI是自主性威胁并引发抗拒”的流行话语。
+
+- rhetorical_function_cn：把排除抗拒的实验结果理论化。
+
+- depends_on_cn：依赖2A/2B结果。
+
+- sets_up_cn：确立本文在自主感文献中的位置。
+
+- evidence_pointer：Theoretical Contributions第二段
+
+### 68. 贡献3段 S1-S3
+
+- order：68
+
+- section：Theoretical Contributions
+
+- locator：贡献3段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者把独特性忽视从Longoni等的消费者感知扩展为AI技术性限制，并展示通过自主感补偿它的路径。
+
+- rhetorical_function_cn：把新概念与既有独特性忽视研究连接。
+
+- depends_on_cn：依赖Longoni等和2A证据。
+
+- sets_up_cn：扩展AI抵抗文献。
+
+- evidence_pointer：Theoretical Contributions第三段
+
+### 69. 贡献4段 S1-S3
+
+- order：69
+
+- section：Theoretical Contributions
+
+- locator：贡献4段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者宣称这是首个将个人智能手机使用与自主感联系起来的理论与实证研究。
+
+- rhetorical_function_cn：把手机设计研究上升为理论贡献。
+
+- depends_on_cn：依赖3A/3B和自聚焦/占用理论。
+
+- sets_up_cn：推进智能手机IS研究。
+
+- evidence_pointer：Theoretical Contributions第四段
+
+### 70. 第一段 S1-S3
+
+- order：70
+
+- section：Managerial Implications
+
+- locator：第一段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者警告零售商不要将商店AI塑造成“专家顾问”或“时尚专家”，因为这会降低自主感、损害购买体验。
+
+- rhetorical_function_cn：把低自主vs控制无差异及媒体内容分析转化为具体实践警示。
+
+- depends_on_cn：依赖1A结果和Appendix A内容分析。
+
+- sets_up_cn：为AI部署前的检验和设计提供建议。
+
+- evidence_pointer：Managerial Implications第一段
+
+### 71. 第二段 S1-S3
+
+- order：71
+
+- section：Managerial Implications
+
+- locator：第二段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者提供可操作策略：强调用户是决策权威、提醒自由输入、展示最终控制权，并特别推荐个人手机App。
+
+- rhetorical_function_cn：把实验操纵转化为设计指南。
+
+- depends_on_cn：依赖3A/3B。
+
+- sets_up_cn：为其他AI设计者提供框架。
+
+- evidence_pointer：Managerial Implications第二段
+
+### 72. 第三段 S1-S3
+
+- order：72
+
+- section：Managerial Implications
+
+- locator：第三段 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者强调现场实验首次在真实零售数据中考察store AI对退货率的影响，并认为支持自主感可能是成本有效的退货率改善战略。
+
+- rhetorical_function_cn：把现场结果定位为对产品退货管理文献的补充。
+
+- depends_on_cn：依赖3B。
+
+- sets_up_cn：扩展IS研究中退货率作为因变量的稀缺经验。
+
+- evidence_pointer：Managerial Implications第三段
+
+### 73. 第一段 S1-S3
+
+- order：73
+
+- section：Limitations and Future Research
+
+- locator：第一段 S1-S3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认AI推荐无法在所有条件下恒定，且情境仅限服装，结论推广需要谨慎。
+
+- rhetorical_function_cn：通过主动承认实验噪声和情境限制，保护贡献不被视为无边界。
+
+- depends_on_cn：依赖真实系统使用。
+
+- sets_up_cn：为未来跨情境研究留出空间。
+
+- evidence_pointer：Limitations第一段
+
+### 74. 第二段 S1-S3
+
+- order：74
+
+- section：Limitations and Future Research
+
+- locator：第二段 S1-S3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者提出未来可研究其他界面（手势、眼动、脑机接口）、习惯化使用和熟悉度等边界条件。
+
+- rhetorical_function_cn：向读者展示丰富的研究后续。
+
+- depends_on_cn：依赖自聚焦和占用理论。
+
+- sets_up_cn：以未来问题收尾，而不是以封闭结论结束。
+
+- evidence_pointer：Limitations第二段
+
+### 75. 第一至三段
+
+- order：75
+
+- section：Concluding Remarks
+
+- locator：第一至三段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结：自主感可以补偿AI对个体独特性的潜在忽视，并希望研究能促进AI使人类决策受益的进一步讨论。
+
+- rhetorical_function_cn：用简短有力的结语重述核心贡献并提出现实期望。
+
+- depends_on_cn：依赖全文证据。
+
+- sets_up_cn：结束文章。
+
+- evidence_pointer：Concluding Remarks
+
+## 写作技术
+
+- gap_construction_cn：文章开头用“传统IS用户主导 vs AI自主决策”建立张力，然后构造“委托AI→自主感受损→决策质量可能下降”的悖论；随后在文献综述里依次指出三个缺口：任务委托文献无法处理“人的caprice”，AI建议文献聚焦专业任务而非个人决策，消费者心理研究虽指出自主感威胁但缺乏因果机制和实证；最后用政策指南“尊重自主”作为外部背书，把缺口从技术问题上升为理论与伦理问题。
+
+- signposting_cn：摘要直接说明“five laboratory experiments and one field experiment”；引言提出两个研究问题；实证概览用Table 1列出每一研究的客观、问题、设计和关键发现；每个研究前有明确Goal句（如“Study 1A tested our prediction…”），每个研究讨论末尾用“Next, we…”过渡。
+
+- transition_logic_cn：文章用“先效应后机制再解决方案再现场”的累积逻辑连接各阶段：主效应稳定后过渡到“Next, we explicate the underlying impact mechanism”；机制区分后过渡到“Next, we propose a practical solution”；实验室方案成功后才“tested whether… would apply to a real-life setting”。每节讨论末尾都指向下一节的目标。
+
+- claim_evidence_rhythm_cn：每提出一个具体主张，作者都紧接着用实验设计和方法部分给出可操作性操作化，再用结果部分给出统计证据，最后在讨论中把意义扩大。典型顺序为“理论预测→方法操纵→操纵检查→主效应→替代解释→中介调节→解决方案→现场数据→总结贡献”。
+
+- benchmark_narrative_cn：低自主描述被刻画为‘行业普遍叙事’，并辅以媒体内容分析（87%新闻把store AI描述成智能导购）来说明它并非任意对照组；控制组无差异被解释为现实中消费者已经默认AI是专家；认知负荷条件被用来排除“信息加工”；平均他人条件被用来排除“结果是因为决策复杂性”；零售商手机和机器作为设备基线；在实地中未纳入AI的产品作为产品级基线。全文通过多个层次对照把干预差异逐步收窄到自主感。
+
+- theory_return_cn：每个实验只用单一情境结果，但在General Discussion和Theoretical Contributions中，作者把“服装购买”扩展到“个性化和复杂决策”，把“手机App”上升为“个人设备的占用和自我聚焦”，把“独特性忽视担忧”与Longoni等概念连接，最终把实证结果转成理论命题。
+
+- contribution_positioning_cn：作者把贡献定位为：(1) 新机制而非新变量——从抗拒心理到整合个人因素；(2) 概念区分——技术性独特性忽视与消费者感知的独特性忽视；(3) 设计创新——“交互设备作为设计杠杆”而非“算法改进”；(4) 首个现场验证——真实零售数据中的销售与退货率。
+
+- novelty_protection_cn：通过三角测量（量表、访谈、真实行为）、多个样本（学生、成人、真实店）、多个结果（意图、满意度、信心、购买、退货）、排除多种替代解释（信息加工、隐私、AI支持、抗拒）以及在现场同时比较手机设计与描述设计，文章把“自主感”从一次性性能差异升华为可复用设计知识和理论机制，避免看起来只在一个小实验中有效。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用“AI专家 vs 用户自主”的张力做引言开头，并提出两个研究问题
+
+- research_job_cn：识别现实中的悖论或技术现象，必要时用初步数据（如媒体内容分析）佐证现象普遍
+
+- required_evidence_cn：至少一个清晰现象或悖论，加上相关文献和政策引用
+
+- transition_to_next_cn：用“在此研究中我们提出两个问题”把现象转向研究计划
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：提出中心理论概念（这里是独特性忽视与自主感补偿机制），并与既有理论对比
+
+- research_job_cn：从成熟理论（自我决定、独特性忽视、抗拒理论）推导出新机制
+
+- required_evidence_cn：概念关系能被操作化并能产生差异化预测
+
+- transition_to_next_cn：用“我们预测…”引出实验研究
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：选择合适情境和真实系统，详细描述实验环境
+
+- research_job_cn：接入或开发可用的真实AI系统（实物或仿真），确保系统提供足够生态效度
+
+- required_evidence_cn：系统功能描述与可复现实验流程
+
+- transition_to_next_cn：用Table 1预览研究序列
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：用操纵检查、主效应和排除混淆变量的方式完成第一个主效应实验
+
+- research_job_cn：设计操纵（高/低自主描述）、测量（购买意愿、满意度）并控制潜在混淆
+
+- required_evidence_cn：操纵检查通过且主效应显著
+
+- transition_to_next_cn：“为了检验替代解释，我们进行Study 1B”
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用竞争假设实验排除最明显的替代解释
+
+- research_job_cn：设计认知负荷或类似操纵，若主效应不受影响则增强机制解释
+
+- required_evidence_cn：交互效应不显著，或替代解释被排除的证据
+
+- transition_to_next_cn：“接下来检验机制”
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用中介与调节并行检验机制，并排除竞争机制
+
+- research_job_cn：同时测量竞争中介（独特性忽视担忧 vs 抗拒），并用边界条件（平均他人）做调节
+
+- required_evidence_cn：目标中介显著且竞争中介不显著，边界条件调节效应符合理论
+
+- transition_to_next_cn：“既然机制成立，我们提出并测试一个实用方案”
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：把机制转化为可落地设计，并先在实验室中验证心理机制与行为效应
+
+- research_job_cn：基于自聚焦/占用等理论构建个人手机App，做三条件实验（个人手机、零售商手机、控制）
+
+- required_evidence_cn：设计组的心理中介和结果变量均显著优于对照组
+
+- transition_to_next_cn：“在实际商店中检验该方案”
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：用真实店现场数据（销量、退货率等业务指标）验证外部效度和实用价值
+
+- research_job_cn：在真实商店交错实施处理、随机选定AI处理产品，进行产品级回归
+
+- required_evidence_cn：处理组在关键业务指标上有显著效果
+
+- transition_to_next_cn：进入总体讨论和贡献综述
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：在讨论中将结果返回理论，逐一列出理论贡献、边界条件和管理启示
+
+- research_job_cn：明确每个贡献与哪个实验证据对应，承认无法检验的边界
+
+- required_evidence_cn：贡献清单与实验证据形成闭环
+
+- transition_to_next_cn：不再需要过渡
+
+### most_transferable_moves_cn
+
+1. 用“现象悖论”开头，把技术现象转成理论问题
+
+2. 把两个理论机制做成竞争性中介+调节实验
+
+3. 用与现状一致的“低自主描述”作为自然基线，并用媒体内容分析证明其普遍性
+
+4. 在理论检验和实际设计之间架桥：先把机制操纵成文本，再把机制落实成系统
+
+5. 从心理变量跨到行为/业务指标（销量、退货率）作为外部效度证据
+
+6. 在声称贡献前主动排除数个替代解释
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实store AI系统（55英寸镜面屏、视觉处理器、机器学习算法）的制作与维护
+
+2. 微信小程序App的开发与部署
+
+3. 真实时尚零售店6周现场实验，需要店方合作和产品数据
+
+4. 多轮实验室实验（模拟商店、受训店员、参与者招募）
+
+5. 内容分析（Nexis Uni和CND数据库）与透明材料中的补充研究
+
+6. 跨机构、多位作者协作和多个基金资助
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只做“高/低自主描述”文字游戏而不做操纵检查和混淆变量检验
+
+2. 不能没测量独特性忽视担忧或抗拒就直接声称机制
+
+3. 不能在没有媒体内容分析时就把“低自主=现状”当成既定事实
+
+4. 不能把智能手机App当作万能设计，而需要自聚焦/占用理论支撑并对比其他设备
+
+5. 不能只用问卷意图指标就宣称决策质量，尤其在没有真实购买/退货数据时
+
+6. 不能在讨论中把服装情境外推到护肤、财务、约会等情境而无实验支持
+
+- single_best_description_cn：用“现实悖论→理论机制→竞争机制排除→理论驱动设计→实验室验证→现场行为验证→返回理论”的闭环，把心理学机制转化为可操作的AI设计与业务结果。
+
+## 分析边界
+
+本分析基于全文OCR/排版重构，缺少真实页码；transparency materials中的补充实证细节未包含在可读文本内，因此关于补充研究、额外替代解释和部分稳健性检查的描述主要依赖正文声明；文中图表为嵌入图片，部分表注和附录照片细节只能根据上下文推断；句子级定位以段落和关键词近似，不适用于精确引用。

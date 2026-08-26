@@ -1,0 +1,1697 @@
+# A prescriptive analytics framework for efficient E-commerce order delivery
+
+- 作者：Shanthan Kandula; Srikumar Krishnamoorthy; Debjit Roy
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113584
+- 源文件：19796_2021_a-prescriptive-analytics-framework-for-efficient-e-commerce-order-delivery.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.82
+
+## 文章级论证概况
+
+- 核心问题：如何利用广泛可得、非敏感性的订单与位置数据，为电子商务末端配送生成更可能成功的配送时刻安排，从而减少失败配送并降低配送成本？
+
+- 制品与设计：一个两阶段预测性/规范性决策支持框架：第一阶段用机器学习模型预测每个订单在配送班次内各时间点的成功概率，形成订单成功画像（OSP）；第二阶段从画像中推断合适配送时间窗，并据此构造带时间窗的车辆路径问题，用多项式时间的插入式启发式与迭代局部搜索生成配送计划。
+
+- 客观结果：在印度电商平台两个异构配送中心的数据上，XGBoost加权损失模型取得较高精度；模拟实验表明数据驱动策略相比当前最短路径基线，配送成本分别节省7.2%和10.2%，配送尝试次数和所需车辆数下降。
+
+- 核心贡献：作者声称：展示订单配送数据与聚合位置数据可构建预测模型；首次提出订单成功画像并给出生成流程；提供一个结合预测模型与VRPTW优化的实用决策支持框架。
+
+- 整篇论证链：作者从电商末端配送失败率高、成本高这一现实出发，指出现行最短距离排程未考虑客户是否在家的时间信息，而预定时隙方案又不适用于普通商品。既有数据驱动研究依赖客户GPS、智能家居用电等敏感且难得的数据，且排程算法多指数级复杂。于是作者构建一个两阶段框架：先用订单特征、位置设施特征和配送尝试时间训练分类器生成每个订单的全天成功概率曲线，再根据曲线推断适合配送的时间窗，并扩展插入式VRPTW启发式生成计划。为验证，作者在两个相距2000公里、经济地理差异明显的仓库上做预测评价和100次模拟，以当前行业最短路径策略为基线，结果显示数据驱动策略减少失败、车辆与总成本，但距离并非总下降。讨论部分将结果上升为管理启示，说明数据来源、城市级建模与成本节省边界条件。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文没有从正式理论推导实验假设，而是围绕现实问题提出一个由预测模型与优化模型组成的决策支持制品，并在两个真实数据集上用模拟与基线对比进行评价，最后形成可复用的管理知识。这与设计科学研究的需求—构建—评价—设计知识弧线一致。
+
+- 主导写作弧线判定：论文首先建立失败配送造成的性能缺口；其次说明现有制品（预测模型和排程算法）在数据可获得性与时间复杂度上的不足；然后构建两阶段制品；再以当前行业最短路径策略为benchmark进行模拟对比；最后在讨论中把成本节省转化为可一般化的管理启示和边界条件。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：研究按流水线展开：阶段1训练并挑选配送成功预测模型；阶段2利用模型生成每个订单的订单成功画像，并从画像推断配送时间窗；阶段3设计带多时间窗和区域约束的VRPTW排程启发式；阶段4在Hub-A和Hub-B上同时验证预测性能与排程模拟效果。前一阶段的核心产出成为后一阶段的输入，缺一不可。
+
+### studies_or_phases
+
+#### 1. 配送成功预测模型训练与选择
+
+- order：1
+
+- name_cn：配送成功预测模型训练与选择
+
+- question_cn：仅使用订单数据和区域设施数据，能否有效预测一次配送尝试是否成功？
+
+- inputs_and_setting_cn：印度电商平台两个配送中心的历史订单数据、Here Technologies提取的12类设施数量；Hub-A 81,967训练/4,015测试，Hub-B 84,714训练/2,136测试。
+
+- designed_or_compared_object_cn：比较5种机器学习模型（RF、XGBoost、LogitBoost、ANN、CART）和9种不均衡处理方法（SMOTE变体、过采样、欠采样、加权损失等）。
+
+- baseline_control_or_counterfactual_cn：决策树作为模型基线；SMOTE/过采样/欠采样等作为不均衡方法基线；文献中的Praet & Martens模型作为外部性能参照。
+
+##### objective_metrics
+
+1. AUC
+
+2. G-mean
+
+3. 召回率
+
+4. 精确率
+
+5. F1
+
+6. 准确率
+
+7. 计算时间与模型大小
+
+- analysis_method_cn：网格搜索调参、hold-out验证、Friedman检验和Nemenyi事后检验；最终按AUC和计算资源选择XGBoost加权损失。
+
+- main_result_cn：所有模型AUC较合理；RF与XGBoost最高且差异不显著；XGBoost预测速度快、内存占用小，故被选入框架；加权损失方法易用且一致。
+
+- argumentative_role_cn：证明论文提出的非敏感预测变量具有预测力，并提供后续订单成功画像所需的概率模型。
+
+- remaining_uncertainty_cn：预测性能是否可转化为排程收益尚未检验；不同不均衡方法在后续应用中的敏感性未知。
+
+- link_to_next_phase_cn：选出的XGBoost模型被用于在一天中逐时间点预测成功概率，从而生成订单成功画像。
+
+##### evidence_pointers
+
+1. Table 4/5 AUC scores
+
+2. Table 6 G-mean scores
+
+3. Table 7/8 confusion matrices
+
+4. Section 5.1
+
+#### 2. 订单成功画像与时间窗推断
+
+- order：2
+
+- name_cn：订单成功画像与时间窗推断
+
+- question_cn：如何把单个时间点的成功概率转换成可供排程使用的配送时间窗？
+
+- inputs_and_setting_cn：训练好的预测模型；每个订单除配送尝试时间外的固定特征；配送班次9小时，时间点按分钟扫描。
+
+- designed_or_compared_object_cn：订单成功画像（OSP）：将配送成功概率映射到一天中的时间；从画像中识别概率高于阈值的区间，并据此为每个订单生成一个或多个配送时间窗。
+
+- baseline_control_or_counterfactual_cn：以0.5概率为阈值判断时间窗；无客户选择时间窗机制作为对比背景。
+
+##### objective_metrics
+
+1. 成功概率阈值
+
+2. 时间窗长度
+
+3. 失败判定（时间窗小于30分钟）
+
+- analysis_method_cn：固定非时间特征，变动attempt time逐点预测；图示化OSP并说明序列含义。
+
+- main_result_cn：示例订单的OSP显示三个订单适合的配送时间依次为AID_353、AID_270、AID_172；每个订单获得唯一时间依赖画像。
+
+- argumentative_role_cn：把分类器输出转译为排程优化可消费的时间窗约束，是连接预测与优化两阶段的关键桥梁。
+
+- remaining_uncertainty_cn：阈值0.5是否最优、时间窗推断的误差如何影响排程尚未在此阶段验证。
+
+- link_to_next_phase_cn：生成的时间窗被作为VRPTW中每个客户的可选服务时隙，进入排程优化阶段。
+
+##### evidence_pointers
+
+1. Section 3.1.4
+
+2. Fig. 2
+
+3. Section 3.2 first paragraph
+
+#### 3. 配送排程启发式设计
+
+- order：3
+
+- name_cn：配送排程启发式设计
+
+- question_cn：如何在多项式时间内为数百至数千订单生成满足多时间窗约束的高质量配送计划？
+
+- inputs_and_setting_cn：每个订单的一组时间窗、优先级度量、订单地理位置、仓库位置、车辆容量、预设区域方向。
+
+- designed_or_compared_object_cn：扩展Campbell & Savelsbergh插入启发式，加入多时隙选择、优先级排序和区域方向约束；随后用2-opt*迭代局部搜索改进。
+
+- baseline_control_or_counterfactual_cn：传统VRPTW精确/MILP方法在文献中作为指数复杂度对照；无时间窗的最短路径策略作为后续模拟基线。
+
+##### objective_metrics
+
+1. 排程生成时间
+
+2. 行驶距离
+
+3. 车辆数
+
+4. 时间可行性
+
+- analysis_method_cn：算法描述与计算复杂度论证；在模拟中报告Hub-A 18分钟、Hub-B 10分钟。
+
+- main_result_cn：算法能在分钟级生成数千订单的排程；证明其可扩展性与适用性。
+
+- argumentative_role_cn：解决既有方法指数时间复杂度导致不能用于电商规模的缺口。
+
+- remaining_uncertainty_cn：启发式解与最优解的差距、区域方向参数和优先级权重的敏感性没有单独分解检验。
+
+- link_to_next_phase_cn：该排程器进入模拟实验，与当前最短路线基线在相同测试日数据上比较。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Algorithm 1
+
+3. Section 4.4 simulation parameters
+
+#### 4. 模拟对比实验：数据驱动策略 vs 基线策略
+
+- order：4
+
+- name_cn：模拟对比实验：数据驱动策略 vs 基线策略
+
+- question_cn：在实际订单数据上，采用OSP时间窗的数据驱动排程是否比当前行业最短距离排程更少失败、更低成本？
+
+- inputs_and_setting_cn：两个配送中心测试周数据（Hub-A 4,015单，Hub-B 2,136单）；基线策略随机复制实测失败率；数据驱动策略依据预测时间窗判定成功；100次随机模拟。
+
+- designed_or_compared_object_cn：两种策略：基线无时间窗最短路径；数据驱动使用推断且按精确率收缩的时间窗。
+
+- baseline_control_or_counterfactual_cn：基线策略代表当前行业实践，所有订单可在整个班次配送；当订单在推断时间窗外则视为失败并于次日重投。
+
+##### objective_metrics
+
+1. 配送尝试次数
+
+2. 行驶距离
+
+3. 所需车辆数
+
+4. 总成本
+
+5. 成本节省百分比
+
+- analysis_method_cn：多次随机模拟取平均；用Haversine距离与速度、车辆容量、运营成本参数计算；比较两策略成本。
+
+- main_result_cn：数据驱动策略在Hub-A和Hub-B分别节省7.2%和10.2%成本，减少尝试次数和车辆数；Hub-A距离反而增加，但总成本因车辆/人工节省而下降。
+
+- argumentative_role_cn：这是整篇论文的核心证据，把‘预测+优化’框架与业务成本直接挂钩，并证明在两个异构场景有效。
+
+- remaining_uncertainty_cn：模拟假设在推断时间窗内配送即成功；未考虑真实客户行为、交通实时变化、路由执行偏差和员工负荷不均。
+
+- link_to_next_phase_cn：结果进入讨论部分，被转化为对管理者的启示和未来研究方向。
+
+##### evidence_pointers
+
+1. Section 4.4
+
+2. Fig. 4
+
+3. Table 9
+
+4. Section 5.2
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. 先指出末端配送是电商履约中最难的部分，失败配送带来额外成本，建立实践重要性。
+
+2. 说明当前行业排程仅优化最短距离，忽视客户可行时段，导致错过配送。
+
+3. 提前给出两阶段框架的全局预览：预测成功概率，再用优化生成排程。
+
+4. 用两个真实数据集和最高10.2%成本节省作为最终客观结果。
+
+### introduction_moves
+
+1. 从电商零售占比和末端配送环境成本建立宏观背景（Introduction P1）。
+
+2. 指出失败配送的直接成本与顾客满意后果（P1）。
+
+3. 归纳现有减失败方案（取货点、预定时隙）及其不便/不适用（P2）。
+
+4. 提出应学习合适配送时间窗而非强制客户选择（P2结束-P3）。
+
+5. 指出既有数据驱动工作依赖敏感数据且排程指数复杂（P4）。
+
+6. 提出本文预测变量和多项式排程主张（P4-P5）。
+
+7. 正式列出两个研究目标与两阶段框架（P6）。
+
+8. 用合作企业、两仓库、对比基线和贡献列表收束（P6-P7）。
+
+### theory_and_knowledge_moves
+
+1. 文献综述先用传统履约方案说明现状与缺陷（Section 2.1）。
+
+2. 引入数据驱动履约研究，逐一指出数据敏感和复杂度局限（Section 2.2）。
+
+3. 引入决策支持系统与信息融合文献，说明特征级融合的合理性（Section 2.3）。
+
+4. 用业务知识：同一区域配送员更高效，转化为区域方向约束（Section 3.2）。
+
+### artifact_design_moves
+
+1. 先给出总框架图，再分两阶段详述（Section 3开头、Fig.1）。
+
+2. Step I定义分类目标、预测变量、设施特征压缩、不均衡处理与指标（3.1）。
+
+3. 提出OSP概念并说明如何生成（3.1.4）。
+
+4. Step II把时间窗引入VRPTW，加入优先级和区域方向，给出算法（3.2）。
+
+### evaluation_moves
+
+1. 选择两个地理经济差异大的配送中心以展示泛化（4.1-4.2）。
+
+2. 明确训练/测试切分、调参和统计检验（4.3）。
+
+3. 构造基线策略与数据驱动策略，并说明模拟参数（4.4）。
+
+4. 预测评估与排程模拟结果分别报告，先证明模型质量再证明商业效果（5.1-5.2）。
+
+### discussion_and_contribution_moves
+
+1. 重述预测模型和成本节省结果，再次回应引言的数据可获性缺口（Section 6第一段）。
+
+2. 提出管理启示：数据来源、城市级模型、车辆与交通/区域边界（6第三段）。
+
+3. 给出预测建模与排程两方面的未来工作，并把敏感性改进与成本下降关联（6第四五段）。
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 末端配送履约文献：reception boxes、CDPs、AHD时间窗管理
+
+2. 数据驱动配送研究：Pan et al. [12], Florio et al. [13], Praet & Martens [14], Mangiaracina et al. [15]
+
+3. 信息融合/特征级融合文献
+
+4. VRPTW与插入启发式文献
+
+5. 机器学习集成学习、不均衡学习与评价指标文献
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：论文没有从一个形式化理论出发推导全部设计变量，但领域经验知识与文献缺口实质影响了问题界定、特征选择和框架结构：如“成功取决于订单和位置特征”的假设直接影响预测变量；“同区配送员更高效”的管理观察形成区域方向约束；VRPTW和插入启发式的选择来自现有OR知识。其余如具体算法、阈值、参数主要来自工程启发与数据驱动。
+
+- 理论到设计翻译链：领域知识提出‘配送成功取决于订单和位置特征’→ 需要时间维度上的成功概率 → 生成OSP → 从OSP推断多时间窗 → 将时间窗作为VRPTW约束 → 为满足规模与区域效率加入优先级和方向约束 → 用插入启发式和局部搜索生成排程 → 在模拟实验中对比最短路径基线并核算成本。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：失败配送的主因是客户不在场；成功与否同时受订单特征和服务区域位置特征影响。
+
+- mechanism_cn：办公室/商业区域在下午更可能有人接收；高时效订单客户更可能安排接收；区域设施类型反映客户在场模式。
+
+- design_requirement_cn：预测模型需纳入订单特征、位置特征和配送尝试时刻，而不是只用客户个人敏感数据。
+
+- artifact_choice_cn：从订单数据取9个变量，从位置平台取12类设施在不同半径的计数并压缩为12个特征；以attempt time作为时变输入。
+
+- evaluated_contrast_cn：五个机器学习模型×多种不均衡方法，以AUC/G-mean等比较预测性能。
+
+- objective_result_cn：XGBoost加权损失在两个Hub分别达到73.65和78.77 AUC，失败检测率为9.66/12.61%与12.31/15.5%。
+
+##### evidence_pointers
+
+1. Table 2/3
+
+2. Table 4/5/6
+
+3. Table 7/8
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：客户可用性随时间变化，合适配送时刻不能由客户预先选择，而应从数据推断。
+
+- mechanism_cn：固定订单和位置特征、变动时间，模型输出成功概率曲线，概率高的时段更可能找到客户。
+
+- design_requirement_cn：需要生成一张时间-成功概率映射，并用阈值提取时间窗。
+
+- artifact_choice_cn：定义订单成功画像OSP；对全天各分钟预测，取概率≥0.5的连续区间为配送时隙。
+
+- evaluated_contrast_cn：以OSP示例和超阈值的时序展示订单顺序如何被确定。
+
+- objective_result_cn：OSP能给出不同订单的合适配送时区；例如AID_353在9:50前、AID_270在14:00前、AID_172在17:50前。
+
+##### evidence_pointers
+
+1. Section 3.1.4
+
+2. Fig. 2
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：VRPTW可用时间窗建模客户配送约束；但电商日单量大，指数级方法不可行。
+
+- mechanism_cn：客户时间窗越窄/越少，插入顺序越重要；先排约束紧的订单可提高可行性。
+
+- design_requirement_cn：排程算法需支持每客户多时隙，并在多项式时间内生成计划。
+
+- artifact_choice_cn：定义优先级 p=1 - 可用分钟数/班次总时长；扩展Campbell & Savelsbergh插入启发式，再用2-opt*局部搜索。
+
+- evaluated_contrast_cn：对比自身算法的时间表现与文献中指数复杂度：18分钟/4015单、10分钟/2136单。
+
+- objective_result_cn：算法分钟级完成排程，验证可扩展性。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Algorithm 1
+
+3. Table 1 comparison row
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：配送员长期负责同一区域效率更高，该经验知识可减少搜索空间。
+
+- mechanism_cn：方向角度限制每辆车服务区域，降低路径复杂度并利用司机熟悉度。
+
+- design_requirement_cn：排程应把订单按绕仓库方向分组。
+
+- artifact_choice_cn：为每条路径设置方向θ与跨度φ，订单只能插入角度匹配的路径；初始方向为{0,60,120,180,240,300}，跨度45°。
+
+- evaluated_contrast_cn：模拟中固定该约束参数，未单独做有/无方向约束的消融。
+
+- objective_result_cn：整体模拟显示减少车辆和成本，但方向约束的单独贡献未被识别。
+
+##### evidence_pointers
+
+1. Section 3.2 second trait
+
+2. Section 4.4 parameters
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：当前行业实践是忽略时间窗的最短距离路由，失败后次日重投产生额外成本。
+
+- mechanism_cn：如果按预测高成功时段配送，则单次成功率高，避免重投、减少车辆和操作成本。
+
+- design_requirement_cn：需要在同一测试数据上模拟两种策略并比较成本。
+
+- artifact_choice_cn：建立基线策略（无时间窗，随机x%失败）与数据驱动策略（时间窗+按精确率收缩窗口），运行100次。
+
+- evaluated_contrast_cn：Hub-A和Hub-B分别比较基线 vs 数据驱动的尝试次数、距离、车辆、总成本。
+
+- objective_result_cn：Hub-A节省7.2%，Hub-B节省10.2%；距离可能上升但车辆/人工节省主导。
+
+##### evidence_pointers
+
+1. Fig. 4
+
+2. Table 9
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 离线分类评估：用保留一周数据测试预测模型，报告AUC、G-mean、混淆矩阵、召回/精确率等。
+
+2. 统计显著性检验：Friedman与Nemenyi检验确认分类器间差异。
+
+3. 模拟策略对比：在相同测试日数据上模拟基线策略与数据驱动策略。
+
+4. 跨场景泛化：选择两个相距2000公里、地理经济差异大的配送中心重复上述流程。
+
+5. 计算资源对比：报告XGBoost vs Random Forest的预测速度和内存占用。
+
+- why_these_evaluations_cn：论文的贡献横跨预测与排程，单一评估无法支撑“改进配送成功率并降低成本”的最终主张。预测评估证明特征和模型可用；排程模拟证明预测到决策的价值转化；双Hub重复证明非一次性结果；计算对比回应可扩展性缺口。
+
+- benchmark_and_contrast_chain_cn：从模型层面用Decision Tree作基线，比较RF/XGBoost等；在不均衡处理上用传统采样法作基线；再在排程层面用当前行业最短路径策略作业务基线；同时在文献中引用Praet & Martens的精确率/召回率作为外部参照。最终benchmark链从算法性能逐步上升到业务成本。
+
+### claim_evidence_ledger
+
+#### 1. 仅用订单和位置数据就可预测配送成功，且精度高于现有文献。
+
+- claim_cn：仅用订单和位置数据就可预测配送成功，且精度高于现有文献。
+
+- evidence_cn：两个Hub的AUC和混淆矩阵；对比[14]的recall/precision/F1。
+
+- tested_cn：在离线保留数据上直接检验
+
+- gap_cn：未在真实在线环境中检验；特征压缩RAE的增益没有单独消融。
+
+#### 2. 订单成功画像OSP能识别合适配送时隙并指导排程。
+
+- claim_cn：订单成功画像OSP能识别合适配送时隙并指导排程。
+
+- evidence_cn：Fig.2示例；模拟中时间窗约束被用于排程。
+
+- tested_cn：作为中间制品间接检验
+
+- gap_cn：阈值0.5的选择、OSP平滑/噪声对排程的单独影响未被检验。
+
+#### 3. 数据驱动排程比当前最短距离策略节省7.2%和10.2%成本。
+
+- claim_cn：数据驱动排程比当前最短距离策略节省7.2%和10.2%成本。
+
+- evidence_cn：Table 9的100次模拟平均值。
+
+- tested_cn：在模拟环境中直接检验
+
+- gap_cn：模拟假设在推断时间窗内必成功；未进行真实试点或因果检验。
+
+#### 4. 框架可扩展，能在分钟级生成数千订单排程。
+
+- claim_cn：框架可扩展，能在分钟级生成数千订单排程。
+
+- evidence_cn：Hub-A 18分钟、Hub-B 10分钟。
+
+- tested_cn：在本文数据规模上直接检验
+
+- gap_cn：未测试更大规模或动态滚动排程，也未与最优算法比较解质量差距。
+
+#### 5. 所用数据比GPS/智能家居等更易获得且少涉及隐私。
+
+- claim_cn：所用数据比GPS/智能家居等更易获得且少涉及隐私。
+
+- evidence_cn：引用第三方数据可得性与用户隐私态度研究；使用订单数据+聚合设施数据。
+
+- tested_cn：作为背景条件论证，不属本文实验
+
+- gap_cn：没有实际量化历史订单和设施数据的获取成本与法律合规负担。
+
+#### 6. 成本节省来自减少尝试次数和车辆，且受交通与服务区域影响。
+
+- claim_cn：成本节省来自减少尝试次数和车辆，且受交通与服务区域影响。
+
+- evidence_cn：Table 9显示尝试和车辆下降；讨论中对交通/区域的速度与容量推理。
+
+- tested_cn：通过模拟结果支持
+
+- gap_cn：没有做交通或服务区域参数敏感性扫描，也未直接在实验中变化速度。
+
+- internal_validity_strategy_cn：使用相同测试周数据同时运行两种策略；基线失败率取实测值；数据驱动窗口按模型精度收缩以减少乐观偏差；多次随机模拟取平均以稳定结果；预测性能差异用Friedman/Nemenyi统计检验。
+
+- external_validity_strategy_cn：选择两个地理、经济、设施分布、订单结构差异很大的配送中心；Hub-B用小城镇整镇训练再在中心测试，检验模型迁移；讨论中明确高失败率区域收益更大。
+
+- what_is_not_actually_tested_cn：真实现场部署和配送员执行效果未被测试；模拟中的成功等价于‘在预测时间窗内配送’，未考虑客户实际不在场、门卫代收、交通拥堵和订单取消；OSP阈值、优先权公式、方向跨度等设计参数未做敏感性或消融分析；城市级训练的泛化优势只有Hub-B一例支持。
+
+## 贡献闭环
+
+- technical_claim_cn：用订单数据和聚合设施数据训练的XGBoost加权损失模型，在两个真实Hub上取得优于文献的预测性能，且比RF更快、内存更小。
+
+- artifact_claim_cn：两阶段框架（预测→OSP→时间窗→VRPTW启发式排程）在模拟中比当前行业最短距离排程更少失败、更少车辆和更低总成本。
+
+- mechanism_claim_cn：成本节省的主要机制是减少失败尝试和车辆数；即便数据驱动策略在Hub-A距离略增，车辆与人工成本主导使总成本下降。
+
+- boundary_claim_cn：框架适用于普通商品配送且未提供客户自选时隙的场景；对失败率更高、交通更慢、服务区更大的区域，收益可能变化；作者用低速度假设说明真实节省可能更高。
+
+- reusable_design_knowledge_cn：可用历史订单数据和区域设施计数替代敏感客户数据；可先生成成功概率画像再推断时间窗；可用优先级、多时隙插入和区域方向约束扩展VRPTW启发式；小城镇可整镇训练后部署到单个Hub。
+
+- theoretical_contribution_cn：论文没有扩展正式理论，但对数据驱动配送履约文献作出增量贡献：首次定义订单成功画像，并以‘预测+优化’形式把机器学习与VRPTW结合，回应了[14]对使用非敏感数据的呼吁。
+
+- how_discussion_closes_intro_gap_cn：引言指出现有方法依赖敏感数据和指数时间排程；讨论第一段直接重申本文使用可获得的订单与位置数据、XGBoost低计算资源、多项式时间排程，并以两个Hub的7.2%/10.2%节省作为证据闭环。之后的管理启示把结果扩展到‘在哪类区域应用收益最大’。
+
+- overclaim_or_unsupported_leaps_cn：“首次提出订单成功画像”属于较强原创声明，但文中未系统检索所有可能先例；模拟中把预测成功直接等同于实际成功，可能高估收益；Hub-A距离增加却被总成本下降解释，但没有对车辆成本权重做敏感性检验；城市级模型仅一个Hub-B案例，泛化主张有限。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：及时完成末端配送是电商履约最具挑战性的环节。
+
+- rhetorical_function_cn：开篇建立问题领域和重要性。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后文失败配送和成本问题铺垫。
+
+- evidence_pointer：Abstract第一句
+
+### 2. P1 S2-S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：有效管理末端配送可节省大量成本并提高客户满意度。
+
+- rhetorical_function_cn：把主题从物流运营提升到商业价值。
+
+- depends_on_cn：前句的末端配送重要性
+
+- sets_up_cn：引出优化配送成功的必要性。
+
+- evidence_pointer：Abstract前两句
+
+### 3. P2 S1-S2
+
+- order：3
+
+- section：Abstract
+
+- locator：P2 S1-S2
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：当前因缺少客户在户信息，排程只优化最短距离，导致未在客户偏好时段配送并产生失败配送。
+
+- rhetorical_function_cn：指出现状缺陷，形成问题缺口。
+
+- depends_on_cn：末端配送成本重要性
+
+- sets_up_cn：为提出预测合适时段作对比。
+
+- evidence_pointer：Abstract第二句
+
+### 4. P3 S1-S2
+
+- order：4
+
+- section：Abstract
+
+- locator：P3 S1-S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：提出一个决策支持框架，通过预测合适配送时间周期来生成排程，以提升成功率和降低成本。
+
+- rhetorical_function_cn：给出论文核心目标。
+
+- depends_on_cn：问题缺口
+
+- sets_up_cn：预告框架内容。
+
+- evidence_pointer：Abstract第三句
+
+### 5. P3 S3-S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P3 S3-S5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：框架分两步：先预测每个订单在整个配送班次的成功概率，再用优化生成排程；在两个真实数据集上评估。
+
+- rhetorical_function_cn：概述方法与评价范围。
+
+- depends_on_cn：核心目标
+
+- sets_up_cn：引出结果。
+
+- evidence_pointer：Abstract中间部分
+
+### 6. P3 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P3 S6
+
+- move_code：RESULT
+
+- paraphrase_cn：结果显示相比当前行业实践可节省最高10.2%配送成本。
+
+- rhetorical_function_cn：给出最有力量化成果以吸引读者。
+
+- depends_on_cn：两阶段框架
+
+- sets_up_cn：正文将具体展开该结果。
+
+- evidence_pointer：Abstract最后一句
+
+### 7. P1 S1-S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1-S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：电商零售占比在增长，但实物商品需要物理配送，而末端配送是最污染、最低效的环节。
+
+- rhetorical_function_cn：建立宏观背景，说明研究对象的普遍性。
+
+- depends_on_cn：无
+
+- sets_up_cn：为失败配送问题提供更大的商业环境。
+
+- evidence_pointer：Introduction第一段
+
+### 8. P1 S4-S6
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S4-S6
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：失败配送重投会产生包装、燃油和排放额外成本；成功配送提高满意度并降低退货。
+
+- rhetorical_function_cn：明确问题的经济后果，使研究具有实践必要性。
+
+- depends_on_cn：末端配送低效背景
+
+- sets_up_cn：引出提高成功率的必要性。
+
+- evidence_pointer：Introduction第一段后半
+
+### 9. P2 S1-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：GAP
+
+- paraphrase_cn：失败主因是客户不在场；现有方案如取货点和预定时隙分别带来不便或不适于普通商品。
+
+- rhetorical_function_cn：展示已有解决手段的缺陷，形成缺口。
+
+- depends_on_cn：失败配送成本问题
+
+- sets_up_cn：导向“学习合适时间窗”的新思路。
+
+- evidence_pointer：Introduction第二段
+
+### 10. P2 S4-S5
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S4-S5
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：普通配送没有预先时隙，ETA经常偏移；知道合适的配送时段有助于减少失败并提升满意度。
+
+- rhetorical_function_cn：说明为什么这个缺口值得解决。
+
+- depends_on_cn：现有方案局限
+
+- sets_up_cn：为预测方法做铺垫。
+
+- evidence_pointer：Introduction第二段结尾
+
+### 11. P3 S1-S3
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S1-S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：预测模型可帮助平台学习合适时间窗，识别可能失败的订单，并采取主动补救措施。
+
+- rhetorical_function_cn：提出核心方法主张。
+
+- depends_on_cn：合适配送时段的价值
+
+- sets_up_cn：引出预测+调度框架。
+
+- evidence_pointer：Introduction第三段
+
+### 12. P4 S1-S5
+
+- order：12
+
+- section：Introduction
+
+- locator：P4 S1-S5
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有数据驱动研究使用半小时用电、GPS轨迹、智能家居等敏感且不易获得的数据，存在隐私法律问题。
+
+- rhetorical_function_cn：批评既有文献的数据基础，制造替代方案空间。
+
+- depends_on_cn：预测模型价值
+
+- sets_up_cn：引出本文使用非敏感数据。
+
+- evidence_pointer：Introduction第四段前半
+
+### 13. P4 S6-S8
+
+- order：13
+
+- section：Introduction
+
+- locator：P4 S6-S8
+
+- move_code：GAP
+
+- paraphrase_cn：这些研究承认数据法律问题且并未广泛可得，需要研究其他类型数据。
+
+- rhetorical_function_cn：明确指出具体研究空白，并援引权威呼声。
+
+- depends_on_cn：前句所述敏感数据局限
+
+- sets_up_cn：把本文定位为对该呼吁的回答。
+
+- evidence_pointer：Introduction第四段后半
+
+### 14. P4 S9-S10
+
+- order：14
+
+- section：Introduction
+
+- locator：P4 S9-S10
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有排程集成方法指数级时间，难以应对每日数百订单；本文用多项式时间构造启发式。
+
+- rhetorical_function_cn：指出第二个缺口：可扩展性。
+
+- depends_on_cn：数据可获得性缺口已建立
+
+- sets_up_cn：形成论文的双重贡献：数据与算法。
+
+- evidence_pointer：Introduction第四段末
+
+### 15. P5 S1-S3
+
+- order：15
+
+- section：Introduction
+
+- locator：P5 S1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：配送成功取决于订单特征与区域位置特征，例如商业区下午更易成功、快速配送客户更愿安排接收。
+
+- rhetorical_function_cn：给出可预测性的领域知识依据。
+
+- depends_on_cn：前文提出的替代数据方向
+
+- sets_up_cn：支持预测变量选择。
+
+- evidence_pointer：Introduction第五段
+
+### 16. P6 S1-S4
+
+- order：16
+
+- section：Introduction
+
+- locator：P6 S1-S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：目标一是证明订单和位置特征可预测成功；目标二是设计用预测模型生成排程的决策支持框架。
+
+- rhetorical_function_cn：明确两个研究目标，把描述性预测与规范性排程串联。
+
+- depends_on_cn：之前的全部缺口
+
+- sets_up_cn：为两阶段框架做预告。
+
+- evidence_pointer：Introduction第六段
+
+### 17. P6 S5-S7
+
+- order：17
+
+- section：Introduction
+
+- locator：P6 S5-S7
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：提出两步骤框架：先机器学习生成订单成功画像，再推断时间窗并用VRPTW生成排程；与大型电商合作并对比当前实践。
+
+- rhetorical_function_cn：概括论文的结构。
+
+- depends_on_cn：两个研究目标
+
+- sets_up_cn：引导读者进入后续方法。
+
+- evidence_pointer：Introduction第六段后半
+
+### 18. P7 S1-S3
+
+- order：18
+
+- section：Introduction
+
+- locator：P7 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文贡献：使用多种非敏感数据源、首次提出订单成功画像、提供实用决策支持框架。
+
+- rhetorical_function_cn：在开头就固定贡献清单。
+
+- depends_on_cn：研究目标与两阶段框架
+
+- sets_up_cn：作为后面各部分验收标准。
+
+- evidence_pointer：Introduction贡献列表
+
+### 19. P1 S1-S3
+
+- order：19
+
+- section：Literature Review
+
+- locator：P1 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：传统方案包括reception boxes、可控进入系统、CDP和AHD，虽能减少失败但采用率低或增加客户不便。
+
+- rhetorical_function_cn：梳理已知方案并指出其局限。
+
+- depends_on_cn：引言中的现有方案讨论
+
+- sets_up_cn：突显本文保留家庭配送便利的优势。
+
+- evidence_pointer：Section 2.1
+
+### 20. P2 S4-S5
+
+- order：20
+
+- section：Literature Review
+
+- locator：P2 S4-S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：AHD时隙管理虽减少失败，但时隙选择可能造成配送分布不均，增加路线复杂度和成本。
+
+- rhetorical_function_cn：说明直接采用客户自选时隙方案也有缺陷。
+
+- depends_on_cn：传统方案综述
+
+- sets_up_cn：为本文自动推断时隙而非客户选择时隙作对比。
+
+- evidence_pointer：Section 2.1最后一段
+
+### 21. P3 S1-S4
+
+- order：21
+
+- section：Literature Review
+
+- locator：P3 S1-S4
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有四项数据驱动研究分别采用用电数据、GPS位置和智能家居数据预测客户可用性并用VRP生成排程。
+
+- rhetorical_function_cn：系统梳理直接相关文献。
+
+- depends_on_cn：引言中点名的数据驱动研究
+
+- sets_up_cn：为随后批评其数据和复杂度问题提供对象。
+
+- evidence_pointer：Section 2.2第一段
+
+### 22. P4 S1-S4
+
+- order：22
+
+- section：Literature Review
+
+- locator：P4 S1-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：三项预测研究均使用敏感客户信息，这些数据不可广泛获得且存在隐私顾虑。
+
+- rhetorical_function_cn：集中压扁既有研究的共同软肋。
+
+- depends_on_cn：文献梳理
+
+- sets_up_cn：为本文数据选择提供理由。
+
+- evidence_pointer：Section 2.2第二段
+
+### 23. P4 S5-S7
+
+- order：23
+
+- section：Literature Review
+
+- locator：P4 S5-S7
+
+- move_code：LIMITATION
+
+- paraphrase_cn：作者援引用户GPS分享意愿低、智能家居被视为可怕、智能电表普及率仅14%等证据支持数据不可得论点。
+
+- rhetorical_function_cn：用外部统计强化数据缺陷的严重性。
+
+- depends_on_cn：前句的敏感数据批评
+
+- sets_up_cn：让“非敏感数据”成为本文创新点。
+
+- evidence_pointer：Section 2.2第二段中数据引用
+
+### 24. P4 S8-S10
+
+- order：24
+
+- section：Literature Review
+
+- locator：P4 S8-S10
+
+- move_code：GAP
+
+- paraphrase_cn：其中一项研究承认GPS数据不普遍并呼吁使用其他非敏感数据；本文使用订单配送数据和位置聚合并高精度预测，正是对该呼吁的回应。
+
+- rhetorical_function_cn：把自身研究置于文献明确空白处。
+
+- depends_on_cn：前两句的数据缺陷
+
+- sets_up_cn：确立本文预测层面的贡献。
+
+- evidence_pointer：Section 2.2第二段末尾
+
+### 25. P5 S1-S4
+
+- order：25
+
+- section：Literature Review
+
+- locator：P5 S1-S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：既有排程算法要么指数时间要么MILP，无法扩展到日均数百订单的电商Hub；本文采用多项式时间构造启发式。
+
+- rhetorical_function_cn：提出第二个文献空白：计算可扩展性。
+
+- depends_on_cn：前三项研究的排程描述
+
+- sets_up_cn：奠定排程贡献。
+
+- evidence_pointer：Section 2.2第三段，Table 1
+
+### 26. 开头P1
+
+- order：26
+
+- section：Framework
+
+- locator：开头P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：框架要服务于每天几百到几千订单的Hub，排程生成的高效性至关重要。
+
+- rhetorical_function_cn：设定设计目标约束。
+
+- depends_on_cn：引言中的可扩展性缺口
+
+- sets_up_cn：解释为什么要选择低计算资源的模型和算法。
+
+- evidence_pointer：Section 3起始段
+
+### 27. Step I开头
+
+- order：27
+
+- section：Framework
+
+- locator：Step I开头
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：预测任务被定义为二分类：配送成功=1，失败=0；预测变量包括订单特征、配送尝试时间和位置特征。
+
+- rhetorical_function_cn：界定预测问题形式。
+
+- depends_on_cn：领域知识中成功由订单和位置决定
+
+- sets_up_cn：后续特征工程和模型构建的具体化。
+
+- evidence_pointer：Section 3.1首段
+
+### 28. 3.1前段
+
+- order：28
+
+- section：Framework
+
+- locator：3.1前段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用12类设施的半径计数表示位置特征，因108维过高，用鲁棒自编码器压缩为12个变量。
+
+- rhetorical_function_cn：描述位置特征生成与降维方法。
+
+- depends_on_cn：位置特征预测力假设
+
+- sets_up_cn：为模型输入确定具体变量集。
+
+- evidence_pointer：Table 3与3.1前的段落
+
+### 29. 3.1.1
+
+- order：29
+
+- section：Framework
+
+- locator：3.1.1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：因没有算法能保证最优，选择RF、XGBoost、LogitBoost、ANN和Decision Trees五种常用方法。
+
+- rhetorical_function_cn：说明算法集合选择的逻辑。
+
+- depends_on_cn：机器学习通用经验
+
+- sets_up_cn：随后报告比较结果。
+
+- evidence_pointer：Section 3.1.1
+
+### 30. 3.1.2
+
+- order：30
+
+- section：Framework
+
+- locator：3.1.2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：目标变量偏向成功，类别不平衡会偏置算法，因此采用多种采样和成本敏感方法以探索预测器最大潜力。
+
+- rhetorical_function_cn：解释为何采用不均衡学习库。
+
+- depends_on_cn：目标变量分布
+
+- sets_up_cn：为最终选择加权损失提供依据。
+
+- evidence_pointer：Section 3.1.2
+
+### 31. 3.1.3
+
+- order：31
+
+- section：Framework
+
+- locator：3.1.3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：因类别不平衡，使用G-mean和AUC作为主要指标，同时报告召回、精确率、F1和混淆矩阵。
+
+- rhetorical_function_cn：为模型比较设定标准。
+
+- depends_on_cn：不均衡问题
+
+- sets_up_cn：结果表的解释框架。
+
+- evidence_pointer：Section 3.1.3
+
+### 32. 3.1.4 P1-P2
+
+- order：32
+
+- section：Framework
+
+- locator：3.1.4 P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：定义订单成功画像OSP：将配送成功概率映射到一天各时间点；固定其他特征、变动attempt time即可生成每订单曲线。
+
+- rhetorical_function_cn：引入核心中间制品。
+
+- depends_on_cn：预测模型可按时间点输出概率
+
+- sets_up_cn：为时间窗推断提供操作化定义。
+
+- evidence_pointer：Section 3.1.4
+
+### 33. 3.1.4 P3
+
+- order：33
+
+- section：Framework
+
+- locator：3.1.4 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：示例OSP显示不同订单在不同时间越过阈值，因此配送顺序应按AID_353、AID_270、AID_172排列。
+
+- rhetorical_function_cn：用图形结果证明OSP能指导排序。
+
+- depends_on_cn：OSP定义
+
+- sets_up_cn：导向排程优化阶段。
+
+- evidence_pointer：Fig. 2
+
+### 34. 3.2 P1
+
+- order：34
+
+- section：Framework
+
+- locator：3.2 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：在VRPTW中，把从OSP推导的时间窗视为客户允许配送的服务时隙。
+
+- rhetorical_function_cn：把预测输出翻译成优化问题输入。
+
+- depends_on_cn：OSP
+
+- sets_up_cn：说明VRPTW的适用性。
+
+- evidence_pointer：Section 3.2首段
+
+### 35. 3.2 P2-P3
+
+- order：35
+
+- section：Framework
+
+- locator：3.2 P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：订单可能有多个、长度不等的时隙；定义优先级为1减去可用分钟数与班次总时长之比，较窄时隙订单优先插入。
+
+- rhetorical_function_cn：为解决多时隙结构提出新的调度启发。
+
+- depends_on_cn：OSP可产生多时隙
+
+- sets_up_cn：算法1中的排序步骤。
+
+- evidence_pointer：Section 3.2第二段
+
+### 36. 3.2 P4
+
+- order：36
+
+- section：Framework
+
+- locator：3.2 P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：物流经理反馈同区域配送员更高效，因此按仓库周围方向对订单聚类并放入同一路径。
+
+- rhetorical_function_cn：说明区域方向约束的来源是管理实践而非纯理论。
+
+- depends_on_cn：企业访谈
+
+- sets_up_cn：在算法中增加same_region判断。
+
+- evidence_pointer：Section 3.2第四段
+
+### 37. 3.2.1
+
+- order：37
+
+- section：Framework
+
+- locator：3.2.1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：VRPTW是NP-hard，因此采用插入启发式生成初始解，再用2-opt*局部搜索改进。
+
+- rhetorical_function_cn：解释算法选择的经济性。
+
+- depends_on_cn：VRPTW复杂度文献
+
+- sets_up_cn：给出Algorithm 1。
+
+- evidence_pointer：Section 3.2.1
+
+### 38. 4.1 P1-P2
+
+- order：38
+
+- section：Experiments
+
+- locator：4.1 P1-P2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：案例配送中心在9小时班次内配送，当前排程在早晨和下午各生成一次并优化距离；失败订单最多重试三次。
+
+- rhetorical_function_cn：描述业务流程，作为仿真设定基础。
+
+- depends_on_cn：框架的设计目标
+
+- sets_up_cn：为基线策略的模拟规则提供背景。
+
+- evidence_pointer：Section 4.1
+
+### 39. 4.2 P1-P3
+
+- order：39
+
+- section：Experiments
+
+- locator：4.2 P1-P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：选择两个相隔2000公里、经济和地理差异大的Hub以检验泛化性。
+
+- rhetorical_function_cn：说明样本选择的多样性策略。
+
+- depends_on_cn：外部有效性要求
+
+- sets_up_cn：后文分别报告两Hub结果。
+
+- evidence_pointer：Section 4.2
+
+### 40. 4.3 P1-S3
+
+- order：40
+
+- section：Experiments
+
+- locator：4.3 P1-S3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：各模型用网格搜索调参、hold-out验证，并用Friedman和Nemenyi检验性能差异。
+
+- rhetorical_function_cn：说明模型选择不是只看点估计。
+
+- depends_on_cn：模型比较目标
+
+- sets_up_cn：结果部分对统计显著性的讨论。
+
+- evidence_pointer：Section 4.3
+
+### 41. 4.4 P1-P4
+
+- order：41
+
+- section：Experiments
+
+- locator：4.4 P1-P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：构造基线策略与数据驱动策略；数据驱动策略按模型精度收缩时间窗以减少假阳性乐观。
+
+- rhetorical_function_cn：解释模拟设计的公平性处理。
+
+- depends_on_cn：预测模型精度
+
+- sets_up_cn：为模拟结果的真实性辩护。
+
+- evidence_pointer：Section 4.4
+
+### 42. 5.1 P1-P2
+
+- order：42
+
+- section：Results
+
+- locator：5.1 P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：AUC得分合理且模型间相似；但统计检验显示性能有显著差异，RF与XGBoost最高且无显著差异。
+
+- rhetorical_function_cn：给出预测比较的总体结论。
+
+- depends_on_cn：模拟前的模型训练
+
+- sets_up_cn：解释为何锁定RF和XGBoost两个候选。
+
+- evidence_pointer：Table 4/5；Section 5.1
+
+### 43. 5.1 P3
+
+- order：43
+
+- section：Results
+
+- locator：5.1 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：RF与XGBoost在G-mean上无显著差异；因XGBoost预测更快、模型更小，选择XGBoost进入框架。
+
+- rhetorical_function_cn：将统计与工程资源权衡结合。
+
+- depends_on_cn：G-mean表和计算资源数据
+
+- sets_up_cn：为后续OSP与排程使用指定模型。
+
+- evidence_pointer：Table 6；Section 5.1第三段
+
+### 44. 5.1 P4
+
+- order：44
+
+- section：Results
+
+- locator：5.1 P4
+
+- move_code：RESULT
+
+- paraphrase_cn：不均衡方法间差异显著；选择加权损失因训练简单且一致，避免过采样膨胀、欠采样丢信息。
+
+- rhetorical_function_cn：解释不均衡方法的选择理由。
+
+- depends_on_cn：不均衡方法比较
+
+- sets_up_cn：确定最终模型配置。
+
+- evidence_pointer：Section 5.1第四段
+
+### 45. 5.1 P5
+
+- order：45
+
+- section：Results
+
+- locator：5.1 P5
+
+- move_code：RESULT
+
+- paraphrase_cn：混淆矩阵显示Hub-A检出9.66%中的12.61%失败，Hub-B检出12.31%中的15.5%，精确率约94-95%，整体优于[14]。
+
+- rhetorical_function_cn：给出最终预测性能并与文献对比。
+
+- depends_on_cn：XGBoost加权损失模型
+
+- sets_up_cn：证明预测层面的贡献。
+
+- evidence_pointer：Table 7/8；Section 5.1末段
+
+### 46. 5.2 P1-P2
+
+- order：46
+
+- section：Results
+
+- locator：5.2 P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：模拟显示数据驱动策略相比基线减少配送尝试次数和所需车辆，成本降低。
+
+- rhetorical_function_cn：给出排程模拟总体结论。
+
+- depends_on_cn：预测模型与排程算法
+
+- sets_up_cn：随后展示具体图表。
+
+- evidence_pointer：Section 5.2第一段
+
+### 47. 5.2 P3-P4
+
+- order：47
+
+- section：Results
+
+- locator：5.2 P3-P4
+
+- move_code：RESULT
+
+- paraphrase_cn：图4显示基线策略后续每日尝试更多，因为失败重投累积；Hub-A数据驱动策略距离反而更高，但总成本仍因车辆与人工节省而更低。
+
+- rhetorical_function_cn：解释距离和成本相悖的关键结果。
+
+- depends_on_cn：Table 9与Fig.4
+
+- sets_up_cn：为讨论中的机制主张提供依据。
+
+- evidence_pointer：Fig. 4；Table 9
+
+### 48. Table 9后
+
+- order：48
+
+- section：Results
+
+- locator：Table 9后
+
+- move_code：RESULT
+
+- paraphrase_cn：Hub-A节省7.2%，Hub-B节省10.2%，且数据驱动策略每单平均配送更便宜。
+
+- rhetorical_function_cn：给出最直接的贡献指标。
+
+- depends_on_cn：100次模拟
+
+- sets_up_cn：讨论中反复引用。
+
+- evidence_pointer：Table 9
+
+### 49. 第一段
+
+- order：49
+
+- section：Discussion
+
+- locator：第一段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：论文提出预测+规范性框架，用XGBoost成本敏感模型和低计算资源实现高精度，并减少失败配送。
+
+- rhetorical_function_cn：首段重述贡献，闭合引言缺口。
+
+- depends_on_cn：全部结果
+
+- sets_up_cn：为管理启示提供总结性主张。
+
+- evidence_pointer：Section 6第一段
+
+### 50. 第三段
+
+- order：50
+
+- section：Discussion
+
+- locator：第三段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：成本节省主要来自减少尝试和车辆；但节省程度取决于每车可服务客户数，而交通和服务区面积会限制该数量。
+
+- rhetorical_function_cn：防止读者把结果过度泛化。
+
+- depends_on_cn：模拟的成本结构
+
+- sets_up_cn：说明在低交通条件下实际节省可能更高。
+
+- evidence_pointer：Section 6第三段
+
+### 51. 第四段
+
+- order：51
+
+- section：Discussion
+
+- locator：第四段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：预测方面未来可设计新特征、用更多数据提升性能；更长时隙能放松VRPTW约束从而降低车辆和距离。
+
+- rhetorical_function_cn：提出预测侧改进路径。
+
+- depends_on_cn：预测模型的敏感性局限
+
+- sets_up_cn：与排程侧未来工作并列。
+
+- evidence_pointer：Section 6第四段
+
+### 52. 第五段
+
+- order：52
+
+- section：Discussion
+
+- locator：第五段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：排程方面可探索其他构造启发式、更快生成方法和订单负载均衡。
+
+- rhetorical_function_cn：承认现有启发式存在工作量不均衡等不足。
+
+- depends_on_cn：排程算法设计
+
+- sets_up_cn：为未来研究划出边界。
+
+- evidence_pointer：Section 6第五段
+
+## 写作技术
+
+- gap_construction_cn：先在实践层面建立失败配送的高成本，再在方案层面否定取货点和客户自选时隙，然后在文献层面用敏感数据和指数复杂度双重缺口收口，使本文的“非敏感数据+多项式排程”成为自然且必要的位置。
+
+- signposting_cn：引言最后给出贡献列表和全文路线图；框架部分明确用Step I/Step II组织；实验结果先预测后模拟；讨论用“我们的研究在几个方面为管理者提供信息”等句式预告多个管理启示。
+
+- transition_logic_cn：从预测模型选型到OSP时，以“模型估计概率，而OSP把概率映射到时间”作逻辑过渡；从OSP到VRPTW时，以“概率高于阈值的时间区间被当作时隙”连接；从结果到讨论时，用“预测模型可识别失败→排程实验实现节省→管理启示说明边界”逐层上升。
+
+- claim_evidence_rhythm_cn：先给AUC表证明总体可行，再用统计检验缩小候选，再用混淆矩阵给出细粒度性能，最后用模拟表和次数图给出业务证明；每个主张都紧跟对应表格或图。
+
+- benchmark_narrative_cn：benchmark不是单纯技术对比，而是把“当前行业最短路径”定义为基线，把“数据驱动政策”定义为改进，使10.2%节省成为一个有实践锚点的数字；同时引入文献中[14]的性能指标作为外部参照。
+
+- theory_return_cn：尽管没有正式理论，论文在讨论中把模拟结果返回到“失败率高的地区收益更大”、“交通和区域面积调节节省”等边界命题，并把这些命题表述为可转换的管理知识。
+
+- contribution_positioning_cn：贡献被放在两个层面：预测层（非敏感数据+高精度）和排程层（多项式时间+实际业务仿真），避免把论文局限为一个纯预测算法或一个纯VRP变体。
+
+- novelty_protection_cn：用“首次提出OSP”强化概念新颖性；用两个不同Hub重复验证防止一次性结果；用与文献指数时间对比强调可扩展性；用管理启示把节省从单案例提升为一般操作原则。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写出现实问题并量化后果，说明末端配送失败的高成本和满意度影响。
+
+- research_job_cn：收集失败配送的行业数据和成本来源。
+
+- required_evidence_cn：有明确的经济或运营数据表明问题严重性。
+
+- transition_to_next_cn：转向现有方案为什么不够。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：系统梳理传统与数据驱动方案，重点指出数据可获得性和计算复杂度两类缺口。
+
+- research_job_cn：定位可直接对比的近期文献，提取其数据源和算法复杂度。
+
+- required_evidence_cn：能证明每个方案的单一弱点，并有引用或外部数据支持。
+
+- transition_to_next_cn：提出本文用什么替代数据、用什么算法绕过复杂度。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：设计框架总览图，并按阶段把预测任务和优化任务分开描述。
+
+- research_job_cn：将领域知识转成预测标签、特征和优化约束。
+
+- required_evidence_cn：至少能定义输入、输出和中间制品。
+
+- transition_to_next_cn：说明每个阶段为何需要下一个阶段。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：说明预测模型的算法集合、不均衡处理、评价指标和中间制品（如OSP）。
+
+- research_job_cn：完成模型训练、调参、统计检验和计算资源记录。
+
+- required_evidence_cn：有AUC/G-mean/混淆矩阵等可对比数值，并能解释模型选择。
+
+- transition_to_next_cn：把预测输出作为优化输入。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：描述排程问题形式、算法伪代码、参数和实现细节。
+
+- research_job_cn：构造启发式，记录运行时间并与文献复杂度对比。
+
+- required_evidence_cn：算法能在可接受时间生成实例排程，并说明复杂度。
+
+- transition_to_next_cn：进入业务场景评价。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：设计基线策略和模拟参数，报告关键对比表与图。
+
+- research_job_cn：在相同数据上运行基线和数据驱动策略的模拟，统计成本、距离、车辆。
+
+- required_evidence_cn：两种策略在同一数据/设置下可比，结果有差异且机制可解释。
+
+- transition_to_next_cn：讨论结果为何成立、边界在哪里。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：把局部结果提升为管理启示，同时限定交通、服务区等边界条件。
+
+- research_job_cn：从成本结构解释收益来源，识别参数敏感性和未测试假设。
+
+- required_evidence_cn：能说明在何种条件下节省会增加或减少。
+
+- transition_to_next_cn：提出未来工作并结束全文。
+
+### most_transferable_moves_cn
+
+1. 从两个层面构造缺口：数据可得性与算法复杂度，形成互补贡献。
+
+2. 把预测模型输出定义为一个中间可视化制品（OSP），使下一步优化更易理解。
+
+3. 用“当前行业实践”作为业务基线，而不是只做纯算法benchmark。
+
+4. 用两个异构场景重复同一流程以支撑泛化。
+
+5. 在讨论中把模拟结果拆成可解释机制（减少尝试、减少车辆）和边界条件（交通、区域）。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要与真实电商平台的长期合作以获得11-13周订单配送数据。
+
+2. 需要Here Technologies等位置平台API提取多半径设施计数。
+
+3. 需要物流经理访谈得到区域方向等业务约束。
+
+4. 模拟需要对业务参数（速度、容量、成本）做合理设定。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只抄“两个stage+VRPTW”结构而没有可运行的预测模型和排程算法。
+
+2. 不能把模拟中“预测时间窗内即成功”的假设当作现实因果而忽略偏差。
+
+3. 不能把7.2%/10.2%数字直接外推到其他地区，因为交通、成本结构和失败率会影响结果。
+
+4. 不能只用“首次提出OSP”作为创新，而缺少对OSP实际增值效果的消融或敏感性证据。
+
+- single_best_description_of_the_routine_cn：先造一个业务成本缺口，再把数据可获得性和算法复杂度作为双重缺口，构建‘预测→中间画像→排程约束→模拟对比’的两阶段制品，最后用管理启示和边界条件把局部节省升级为可迁移的设计知识。
+
+## 分析边界
+
+全文提取完整，无OCR缺页；但部分图表为图片附件，只能依据文字与表格描述推断细节。论文没有正式理论，因此理论到设计的翻译使用了领域知识与工程启发；模拟假设未被现实试点验证，边界判断以后续讨论为依据。

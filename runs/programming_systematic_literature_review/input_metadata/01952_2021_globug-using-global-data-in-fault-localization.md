@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85103941334"
+title: "GloBug: Using global data in Fault Localization"
+authors: "Miryeganeh N.; Hashtroudi S.; Hemmati H."
+year: "2021"
+journal: "Journal of Systems and Software"
+doi: "10.1016/j.jss.2021.110961"
+---
+# Scopus title-abstract-keyword metadata
+Title: GloBug: Using global data in Fault Localization
+Abstract: Fault Localization (FL) is an important first step in software debugging and is mostly manual in the current practice. Many methods have been proposed over years to automate the FL process, including information retrieval (IR)-based techniques. These methods localize the fault based on the similarity of the reported bug report and the source code. Newer variations of IR-based FL (IRFL) techniques also look into the history of bug reports and leverage them during the localization. However, all existing IRFL techniques limit themselves to the current project's data (local data). In this study, we introduce Globug, which is an IRFL framework consisting of methods that use models pre-trained on the global data (extracted from open-source benchmark projects). In Globug, we investigate two heuristics: (a) the effect of global data on a state-of-the-art IR-FL technique, namely BugLocator, and (b) the application of a Word Embedding technique (Doc2Vec) together with global data. Our large scale experiment on 51 software projects shows that using global data improves BugLocator on average 6.6% and 4.8% in terms of MRR (Mean Reciprocal Rank) and MAP (Mean Average Precision), with over 14% in a majority (64% and 54% in terms of MRR and MAP, respectively) of the cases. This amount of improvement is significant compared to the improvement rates that five other state-of-the-art IRFL tools provide over BugLocator. In addition, training the models globally is a one-time offline task with no overhead on BugLocator's run-time fault localization. Our study, however, shows that a Word Embedding-based global solution did not further improve the results. © 2021 Elsevier Inc.
+Author keywords: Automated Fault Localization; Doc2Vec; Global training; Information Retrieval; TF.IDF; Word Embedding
+Index keywords: Embeddings; Open source software; Current practices; Current projects; Embedding technique; Fault localization; Large scale experiments; Mean reciprocal ranks; Software debugging; State of the art; Program debugging
+Document type: Article
+Conference: 
+Source title: Journal of Systems and Software
+Year: 2021
+EID: 2-s2.0-85103941334
+DOI: 10.1016/j.jss.2021.110961
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

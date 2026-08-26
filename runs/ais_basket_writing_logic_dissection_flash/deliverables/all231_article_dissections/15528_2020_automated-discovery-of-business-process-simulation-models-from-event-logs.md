@@ -1,0 +1,1881 @@
+# Automated discovery of business process simulation models from event logs
+
+- 作者：Manuel Camargo; Marlon Dumas; Oscar González-Rojas
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2020.113284
+- 源文件：15528_2020_automated-discovery-of-business-process-simulation-models-from-event-logs.md
+- 论文主类型：computational_artifact_benchmark
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：如何从带有开始/结束时间戳的事件日志中自动化地发现高精度的业务流程仿真模型，而不需要人工反复调参？
+
+- 制品与设计：提出了Simod方法/工具：一个由预处理、处理、评估与优化三个阶段组成的自动化流水线。预处理阶段用Split Miner发现控制流，评估对齐质量并对非拟迹执行移除、替换或对齐修复；处理阶段通过日志重放、概率分布拟合、组织挖掘等提取到达间隔、分支概率、活动处理时间、资源池等仿真参数并组装为BIMP/Scylla可执行的BPS模型；评估与优化阶段定义了考虑并行活动与时间差异的业务过程轨迹距离（BPTD）和日志相似度（ELS），并用Tree-structured Parzen Estimator（TPE）搜索超参数配置以最大化仿真日志与真实日志的相似度。
+
+- 客观结果：在P2P（合成）、ACR（真实BPMS）、MP（真实ERP）三个事件日志上，经过超参数优化后的配置相比默认baseline都取得了更高的ELS相似度：P2P从0.8175提高到0.8622，MP从0.2741提高到0.3118，ACR从0.8699提高到0.8800；单尾Mann-Whitney U检验显示三个日志上的提升均统计显著。
+
+- 核心贡献：作者声称的贡献是：第一，提出了一个完全自动化的BPS模型发现方法，能自动提取并组装BPS模型的多个视角；第二，提出了BPS模型精度度量（BPTD/ELS），并用超参数优化自动搜索最准确的BPS模型；第三，以开源工具Simod实现该方法和在多个领域日志上的实证验证。
+
+- 整篇论证链：作者从BPS在业务流程改进中的价值出发，指出现有手工构建仿真模型耗时且不准确，而现有的基于日志的自动化发现方法没有考虑精度测量与自动调优；据此提出一个将发现过程分解为可配置步骤的方法，并用BPTD/ELS度量仿真相对于日志的精度，再用TPE自动搜索最优配置；在三个不同特征的事件日志上，通过baseline对比和统计检验证明优化后的模型精度显著提高；最后在结论中把该方法定位为对现有数据驱动BPS自动化程度和精度优化能力的一次推进。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章的核心是一个计算制品（自动化BPS模型发现流水线Simod），主要证据来自离线、基于数据集和benchmark的仿真对比（baseline vs optimizer，三个日志），没有真实用户实验、现场部署或行为理论机制检验；因此属于计算制品benchmark类型。
+
+- 主导写作弧线判定：文章先指出现有自动化方法存在“不测量精度、不自动调优”的性能缺口，然后提出并实现制品，通过标准化的benchmark（默认baseline对照、多个数据集、统计检验）展示性能提升，最后在结论中将经验推广为“需要自动化超参数优化”的可复用设计知识。
+
+## 研究开展程序
+
+- study_or_phase_count：4
+
+- 研究阶段总序列：方法构建被组织为四个累积阶段：预处理阶段解决控制流发现与日志拟合问题；处理阶段解决仿真参数提取与模型组装问题；评估与优化阶段解决精度度量和配置搜索问题；实验评估阶段在多个日志上验证整体效能。前三个阶段构成方法本身，第四个阶段以实验证据回填方法提出的精度优化主张。
+
+### studies_or_phases
+
+#### 1. 预处理阶段：控制流发现与日志修复
+
+- order：1
+
+- name_cn：预处理阶段：控制流发现与日志修复
+
+- question_cn：如何从事件日志中发现与日志足够拟合的BPMN控制流模型，并为后续参数提取准备可重放的对齐日志？
+
+- inputs_and_setting_cn：事件日志（XES/CSV，含case id、activity、resource、start/end timestamp），运行示例为P2P合成日志；使用Split Miner发现BPMN模型。
+
+- designed_or_compared_object_cn：Split Miner的并行度阈值ε、频率阈值η；三种日志修复策略（Removal、Replacement、Alignment）的设计。
+
+- baseline_control_or_counterfactual_cn：不进行修复的原始日志与修复后日志的fitness对比；三种修复方法之间的相对选择。
+
+##### objective_metrics
+
+1. 轨迹对齐fitness（按Adriansyah等人的cost-based fitness）
+
+2. 保留的日志规模
+
+3. 修复后轨迹与原轨迹的相似度（DL距离）
+
+- analysis_method_cn：对齐评估、移动类型（SM/MM/ML）判定、基于DL距离的最相似轨迹替换、基于自动机对齐的日志修复。
+
+- main_result_cn：Split Miner在实例中生成BPMN模型；存在非拟合轨迹时可通过三种方法之一提高fitness；每个方法在保留数据量与修正方式上有不同的权衡。
+
+- argumentative_role_cn：确保后续重放和参数提取有一个结构准确、可完全对齐的过程模型作为基础。
+
+- remaining_uncertainty_cn：不知道哪种修复方法在精度上最好，需要留给后面的超参数优化。
+
+- link_to_next_phase_cn：修复后的日志和BPMN模型输入到处理阶段，用于提取仿真参数。
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Fig. 1
+
+3. Fig. 3
+
+#### 2. 处理阶段：仿真参数提取与BPS模型组装
+
+- order：2
+
+- name_cn：处理阶段：仿真参数提取与BPS模型组装
+
+- question_cn：如何从修复后的日志和BPMN模型中提取BPS模型所需的全部仿真参数，并将其组装成可执行的仿真模型？
+
+- inputs_and_setting_cn：修复后的日志、BPMN模型；运行示例仍是P2P合成日志。
+
+- designed_or_compared_object_cn：重放算法、到达间隔PDF拟合、分支概率计算（随机/等概率/发现）、活动处理时间PDF拟合、资源池发现（基于相似度阈值的组织挖掘）、仿真模型组装。
+
+- baseline_control_or_counterfactual_cn：对于分支概率，对比随机与等概率与从日志发现的三种策略；对于PDF，对比不同分布函数的拟合误差。
+
+##### objective_metrics
+
+1. 标准误差最小的概率分布
+
+2. 资源池聚类的结构
+
+3. 重放得到的处理时间、使能时间、等待时间、遍历频率
+
+- analysis_method_cn：BPMN标记语义重放、最大似然/最小标准误差分布拟合、资源-活动执行画像聚类。
+
+- main_result_cn：成功提取了到达间隔分布（示例为均值15455秒的指数分布）、各活动处理时间PDF、XOR分支概率和资源池，并组装成BIMP可读的BPS模型。
+
+- argumentative_role_cn：证明自动化流水线的核心功能：从日志走到可执行仿真模型。
+
+- remaining_uncertainty_cn：各个步骤中的参数选择（如ε、η、修复方法、分支概率方法、相似度阈值）会如何影响最终仿真精度尚未量化。
+
+- link_to_next_phase_cn：把仿真模型、原始日志和模拟日志交给评估与优化阶段进行精度度量与配置搜索。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Algorithm 1
+
+3. Table 3
+
+4. Fig. 4
+
+#### 3. 评估与优化阶段：BPTD/ELS精度度量与TPE超参数优化
+
+- order：3
+
+- name_cn：评估与优化阶段：BPTD/ELS精度度量与TPE超参数优化
+
+- question_cn：如何定义BPS模型精度，并自动搜索使精度最大化的发现配置？
+
+- inputs_and_setting_cn：仿真生成的模拟日志与原始事件日志（ground truth）；搜索空间由各步骤参数构成（Table 5）。
+
+- designed_or_compared_object_cn：提出了带并发关系豁免和时间差异惩罚的BPTD轨迹距离；通过匈牙利算法配对轨迹得到ELS日志相似度；引入TPE作为超参数优化器。
+
+- baseline_control_or_counterfactual_cn：将TPE搜索的配置与人工默认配置（baseline）对比；在成本函数中对比是否考虑并发与时间的情形。
+
+##### objective_metrics
+
+1. BPTD（越小越好）
+
+2. ELS（相似度，越大越好）
+
+3. 优化器迭代次数或配置评估次数
+
+- analysis_method_cn：扩展Damareau-Levenshtein距离、匈牙利算法解决最小配对、TPE序列化优化。
+
+- main_result_cn：BPTD能区分并行活动和时间差异；ELS将轨迹级距离聚合成日志级相似度；TPE在给定搜索空间内找到使ELS最大化的配置。
+
+- argumentative_role_cn：这是文章相对现有工作的核心增量：把“精度”变成可计算目标，并让机器自动优化。
+
+- remaining_uncertainty_cn：该优化方法在多样化的真实日志上是否始终有效、是否对日志特征敏感，需要实验评估。
+
+- link_to_next_phase_cn：将优化配置用于实验评估，回答精度提高的幅度与显著性。
+
+##### evidence_pointers
+
+1. Section 3.3
+
+2. Table 4
+
+3. Table 5
+
+4. Table 7
+
+#### 4. 实验评估：三个事件日志上的精度对比与统计检验
+
+- order：4
+
+- name_cn：实验评估：三个事件日志上的精度对比与统计检验
+
+- question_cn：RQ1：提出的方法发现的BPS模型精度如何？RQ2：超参数优化步骤在多大程度上提高了模型精度？
+
+- inputs_and_setting_cn：三个事件日志：P2P合成日志、ACR真实BPMS日志、MP真实ERP日志；每个日志使用baseline默认参数和TPE优化参数各发现一个BPS模型；每个模型仿真10次。
+
+- designed_or_compared_object_cn：baseline配置与优化配置；不同日志各自的最优配置模式。
+
+- baseline_control_or_counterfactual_cn：baseline采用默认参数（固定ε=0.1、η=0.4、Removal、Equiprobable、相似度阈值0.5、exponential PDF）；优化器在给定range内搜索100个配置。
+
+##### objective_metrics
+
+1. ELS相似度
+
+2. Mann-Whitney U检验p值
+
+- analysis_method_cn：每个配置仿真10次取ELS；比较最优配置与baseline的10次ELS；单尾Mann-Whitney U检验显著性；散点图分析参数与精度的关联。
+
+- main_result_cn：优化后的最优配置在三个日志上都显著优于baseline；但不同日志的最优参数组合不同，例如P2P偏好Removal和高相似度阈值，MP偏好Repair和等概率分支，ACR也偏好等概率分支。
+
+- argumentative_role_cn：用实证支持“自动化精度优化有效”的主张，并说明没有一种固定配置能通用于所有日志，必须依赖自动搜索。
+
+- remaining_uncertainty_cn：只有三个日志，且MP的ELS绝对值很低（约0.31），说明模型整体精度在该日志中仍有限；结论的泛化性受到数据集数量限制。
+
+- link_to_next_phase_cn：引出Threats to validity和future work，明确边界条件并指出需要更多日志研究配置与日志特征的关系。
+
+##### evidence_pointers
+
+1. Section 4
+
+2. Table 6
+
+3. Table 7
+
+4. Table 8
+
+5. Fig. 5
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT：BPS是多场景估算流程性能的技术，用于比较改进选项
+
+2. PRACTICAL_STAKES：构建准确仿真模型是常见障碍，人工构建耗时且易错
+
+3. PRIOR_KNOWLEDGE：现代信息系统存储日志，先前工作已证明日志可用于发现仿真模型
+
+4. LIMITATION：现有日志驱动发现方法不寻求优化模型准确性，而是留待用户手动调参
+
+5. DESIGN_FEATURE：本文提出精度优化的发现方法，分解为带配置参数的一系列步骤，用超参数优化最大化仿真行为与日志行为相似度
+
+6. RESULT：方法已实现为工具并用不同领域日志评估
+
+### introduction_moves
+
+1. CONTEXT：BPS通过生成执行轨迹来计算周期时间等性能指标
+
+2. PRACTICAL_STAKES：BPS用于改进决策，如比较增加资源或并行化活动的效果
+
+3. PRACTICAL_STAKES：传统人工建模耗时，且专家过程模型常遗漏异常路径，精度受限
+
+4. PRIOR_KNOWLEDGE：先前研究用过程挖掘从日志发现BPS模型，先提取模型再增强仿真参数
+
+5. LIMITATION：现有方法不测量和自动调优仿真模型精度，留待用户手动调参
+
+6. GAP：缺少从日志自动发现精度优化BPS模型的方法
+
+7. DESIGN_FEATURE：本文方法将问题分解为可配置步骤，用超参数优化提高日志与仿真行为相似度
+
+8. DESIGN_FEATURE：实现为Simod工具，生成BIMP/Scylla可执行模型
+
+9. RESULT：在三个不同领域日志上评估精度提升
+
+10. TRANSITION：从工具演示论文扩展出更完整的算法描述、精度度量和系统评估
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO：介绍BPMN、循环时间、等待时间、处理时间等基本概念
+
+2. THEORY_INTRO：给出BPS模型的标准组成元素（到达间隔、活动处理时间、分支概率、资源池、时间表、任务-资源映射）
+
+3. PRIOR_KNOWLEDGE：将数据驱动BPS分为概念指导方法和自动化方法两类
+
+4. PRIOR_KNOWLEDGE：Martin等人的工作提供建模任务综述，本文借鉴其洞见设计自动化方法
+
+5. LIMITATION：Wynn等人的方法假设给定过程模型且完美拟合，不能处理偏差且不端到端自动
+
+6. LIMITATION：Rozinat等早期方法不自动拟合概率分布、不自动组装模型、不优化精度
+
+7. LIMITATION：Khodyrev等不发现资源池、用户需手工整合、无精度优化
+
+8. LIMITATION：Gawin等混合使用多种技术但依赖人工访谈、人工连接参数、无精度优化
+
+9. BENCHMARK_OR_CONTRAST：Table 1对比各方法的特征矩阵，显示现有方法在概率分布拟合、模型组装、精度评估、精度优化方面缺位
+
+10. CONTRIBUTION：本文两个进展：全自动发现并组装BPS模型 + 精度度量和优化
+
+### artifact_design_moves
+
+1. REQUIREMENT：输入日志需含case id、activity、resource、开始/结束时间戳
+
+2. STUDY_OVERVIEW：Fig. 1展示方法整体步骤
+
+3. METHOD_JUSTIFICATION：选用Split Miner因其在精度、拟合度和简单度上表现好
+
+4. DESIGN_FEATURE：Split Miner的ε和η控制并行度和频率阈值
+
+5. METHOD_JUSTIFICATION：使用cost-based fitness和对齐符号SM/MM/ML评估拟合
+
+6. DESIGN_FEATURE：Removal直接删除非拟合轨迹，Replacement用最相似已拟合轨迹替换，Alignment基于自动机对齐插入/删除事件
+
+7. DESIGN_FEATURE：重放算法计算处理时间、使能时间、等待时间和条件分支遍历频率
+
+8. DESIGN_FEATURE：到达间隔PDF基于逐日到达时间序列拟合
+
+9. DESIGN_FEATURE：分支概率通过归一化重放遍历频率得到，也可用随机或等概率
+
+10. DESIGN_FEATURE：活动处理时间PDF逐个活动拟合最小标准误差分布
+
+11. DESIGN_FEATURE：资源池通过资源活动画像聚类发现，并后处理为每个活动唯一资源池
+
+12. DESIGN_FEATURE：模型组装将参数嵌入目标仿真工具（BIMP/Scylla）的格式
+
+13. DESIGN_FEATURE：仿真生成模拟日志供精度评估
+
+14. REQUIREMENT：精度度量需同时考虑活动顺序和事件时间
+
+15. LIMITATION：MAE只看周期时间太粗粒度；经典DL距离忽略并行活动意外转置和时间差异
+
+16. DESIGN_FEATURE：BPTD用alpha并发关系豁免并行活动转置，并根据处理时间和等待时间差异施加惩罚
+
+17. DESIGN_FEATURE：ELS通过匈牙利算法最小化轨迹配对后的BPTD总和，得到日志级相似度
+
+18. METHOD_JUSTIFICATION：TPE作为超参数优化器，根据历史结果迭代选择参数配置
+
+### evaluation_moves
+
+1. RQ_OR_OBJECTIVE：提出RQ1与RQ2，分别关于模型精度和优化步骤的改进程度
+
+2. BENCHMARK_OR_CONTRAST：选择三个不同领域/特征的事件日志（合成P2P、真实BPMS的ACR、真实ERP的MP）
+
+3. BENCHMARK_OR_CONTRAST：设置baseline参数并定义TPE搜索范围
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST：每个配置仿真10次以控制随机性
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST：使用单尾Mann-Whitney U检验比较优化与baseline的ELS分布
+
+6. RESULT：P2P和MP的优化提升p<0.001，ACR的p<0.05，均显著
+
+7. RESULT：不同日志最优配置不同，说明需要自动优化
+
+8. BOUNDARY_CONDITION：结果仅限于三个日志，不能一般化到所有日志
+
+9. BOUNDARY_CONDITION：未考虑多任务、批量、优先级、疲劳、暂停等现象
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION：总结方法——输入日志、自动发现模型、对齐修复、重放与组织挖掘、精度测量、超参优化
+
+2. CONTRIBUTION：实验表明超参数优化显著优于默认参数，且最优配置因日志而异，进一步说明需要自动优化
+
+3. LIMITATION_AND_FUTURE：数据集数量有限，需更大规模评估以发现日志特征与最优配置的关系
+
+4. LIMITATION_AND_FUTURE：当前仿真假设过于简单（FIFO、无多任务、无优先级、无中断/批量），未来需扩展仿真引擎并研究对精度的影响
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. Business Process Simulation (BPS)模型组成知识
+
+2. 业务过程建模与标记法（BPMN）
+
+3. 过程挖掘技术：Split Miner、conformance checking、log replay、organizational mining
+
+4. 字符串编辑距离与带时间字符串编辑距离
+
+5. 超参数优化（Tree-structured Parzen Estimator）
+
+6. 匈牙利算法求解配对问题
+
+- 理论—设计耦合：none
+
+- 耦合判定理由：论文没有从行为、组织或经济理论推导设计；它根据BPS工程需求（需要哪些仿真参数）、过程挖掘领域的方法知识，以及启发式（如alpha并发关系、最小标准误差分布拟合）来设计流水线。理论/知识主要作为背景和技术来源，而不是前瞻性决定设计的理论命题。
+
+- 理论到设计翻译链：BPS领域知识定义仿真模型应包含哪些要素 → 转化为每个要素都要有一个自动提取步骤的设计需求 → 选择具体过程挖掘算法（Split Miner、组织挖掘、分布拟合） → 针对“精度”定义可计算的BPTD/ELS → 将配置参数空间化并使用TPE自动搜索 → 用基准实验验证。整个过程是“需求→技术选型→量化→优化→实证”，而非“理论命题→假设→操纵变量→检验”。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：BPS模型需要过程结构、到达间隔分布、活动处理时间分布、分支概率、资源池、时间表和资源映射等要素
+
+- mechanism_cn：这些要素共同决定仿真产生的轨迹顺序与时间，因此需要从日志中逐项提取
+
+- design_requirement_cn：自动化方法必须覆盖这些要素的提取步骤并组装为完整仿真模型
+
+- artifact_choice_cn：流水线中设置控制流发现、重放、分布拟合、资源池发现、模型组装等模块
+
+- evaluated_contrast_cn：默认参数配置与TPE优化后的配置在三个日志上的ELS对比
+
+- objective_result_cn：优化后的ELS均显著高于baseline
+
+##### evidence_pointers
+
+1. Section 2.1
+
+2. Section 3.2
+
+3. Table 8
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：过程发现算法需要在精确性、拟合度和简单度之间平衡
+
+- mechanism_cn：不同ε和η参数会导致不同复杂度的过程模型，过高/过低的过滤会破坏仿真行为复现
+
+- design_requirement_cn：控制流发现应参数化并纳入优化目标
+
+- artifact_choice_cn：Split Miner及其ε、η参数
+
+- evaluated_contrast_cn：不同ε、η取值在实验中产生的ELS差异
+
+- objective_result_cn：参数对精度有影响，最优值随日志而异
+
+##### evidence_pointers
+
+1. Section 3.1.1
+
+2. Fig. 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：事件日志与现实过程模型之间常有不拟合，需要log/model repair
+
+- mechanism_cn：保留尽可能多的有效观测同时消除无法被模型回放的轨迹，会影响后续参数估计
+
+- design_requirement_cn：在参数提取前加入对齐评估与日志修复环节，并提供多种修复策略
+
+- artifact_choice_cn：Removal、Replacement、Alignment三种修复方法
+
+- evaluated_contrast_cn：三种修复方式在优化搜索中作为离散候选
+
+- objective_result_cn：P2P偏好Removal、MP偏好Repair，说明修复策略需自动选择
+
+##### evidence_pointers
+
+1. Section 3.1.3
+
+2. Fig. 5
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：比较两组轨迹的差异需要考虑活动顺序和时间信息，且并行活动的顺序颠倒不应被惩罚
+
+- mechanism_cn：经典DL距离把并行活动转置视为差异，且忽略事件时间；这会导致仿真日志与真实日志之间的相似度被错误计算
+
+- design_requirement_cn：需要一个专门的过程轨迹距离，能识别并行活动并感知处理时间和等待时间
+
+- artifact_choice_cn：BPTD：基于alpha并发关系豁免转置惩罚，加入时间差异惩罚
+
+- evaluated_contrast_cn：BPTD与经典DL距离的对比示例；以及最终作为ELS的基础
+
+- objective_result_cn：并发感知和时间加权能让距离度量更符合仿真精度评估需求
+
+##### evidence_pointers
+
+1. Section 3.3.1
+
+2. Table 4
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：多个超参数同时影响输出质量时，手工调参耗时且结果差
+
+- mechanism_cn：参数之间存在交互效应，固定默认值或单维调参无法找到全局最优
+
+- design_requirement_cn：使用序列化超参数优化器自动搜索
+
+- artifact_choice_cn：Tree-structured Parzen Estimator (TPE)
+
+- evaluated_contrast_cn：baseline默认参数 vs 优化器搜索100个配置得到的最佳参数
+
+- objective_result_cn：优化器找到的配置显著优于baseline
+
+##### evidence_pointers
+
+1. Section 3.3.2
+
+2. Table 7
+
+3. Table 8
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 离线仿真生成日志并与ground truth比较
+
+2. baseline对照实验
+
+3. 跨多个不同域数据集的案例式评估
+
+4. 统计显著性检验（单尾Mann-Whitney U）
+
+5. 可视化参数与精度关联的探索性分析
+
+- why_these_evaluations_cn：文章要回答两个问题：方法是否有效（RQ1），优化步骤是否带来显著提升（RQ2）。因此需要一个客观的精度度量（ELS）、一个简单对照（baseline默认配置）、多个日志来显示普适性，以及统计检验来排除随机性。可视化用于理解哪些配置维度驱动精度，从而支撑“不同日志需要不同配置”的论证。
+
+- benchmark_and_contrast_chain_cn：先设定一个源自典型默认值的baseline；然后定义TPE搜索空间；每个日志用baseline和优化配置分别构建BPS模型；每个模型仿真10次得到ELS分布；用Mann-Whitney U检验比较baseline和最优配置；再通过散点图观察参数取值与ELS的关系。实验结果分层呈现：先整体比较（Table 8），再分日志探索参数模式（Fig. 5）。
+
+### claim_evidence_ledger
+
+#### 1. 提出的自动化方法能从日志发现完整的BPS模型
+
+- claim_cn：提出的自动化方法能从日志发现完整的BPS模型
+
+- evidence_cn：在三个日志上成功构建BPS模型并模拟出事件日志
+
+- evidence_pointer：Section 4.3, Fig. 5
+
+#### 2. 超参数优化显著提高了BPS模型精度
+
+- claim_cn：超参数优化显著提高了BPS模型精度
+
+- evidence_cn：三个日志上优化配置的ELS均值都高于baseline；单尾Mann-Whitney U检验p值均小于0.05（P2P和MP为9.13E-05，ACR为0.0188）
+
+- evidence_pointer：Table 8
+
+#### 3. 不同日志的最优配置不同，因此固定配置不可取
+
+- claim_cn：不同日志的最优配置不同，因此固定配置不可取
+
+- evidence_cn：P2P偏好Removal和高相似度阈值，MP偏好Repair，ACR和MP偏好等概率分支
+
+- evidence_pointer：Fig. 5a-5f
+
+#### 4. BPTD比简单MAE或经典DL距离更能反映轨迹差异
+
+- claim_cn：BPTD比简单MAE或经典DL距离更能反映轨迹差异
+
+- evidence_cn：通过一个带并发和时间差异的示例计算，展示BPTD成本值能区分两种情形
+
+- evidence_pointer：Section 3.3.1, Table 4
+
+- internal_validity_strategy_cn：所有对比都使用同一日志、同一仿真次数、同一ELS指标；通过多次仿真（10次）捕捉随机波动；用非参数统计检验避免正态分布假设；比较的是同一方法在两种配置下的输出，排除了实现差异。
+
+- external_validity_strategy_cn：选择三个不同领域、不同控制流复杂度的日志：一个合成日志（理想结构）、一个真实BPMS服务流程、一个真实ERP制造流程；说明这些日志在规模、活动数、平均路径长度、来源系统方面有差异，以增强结果的可代表性。
+
+- what_is_not_actually_tested_cn：没有测试无开始/结束时间戳的真实日志；没有测试多任务、批量处理、优先级、疲劳/暂停等现实调度现象；没有与人工专家手工构建的仿真模型进行精度对比；没有在真实组织环境中进行部署评估用户接受度；也没有对BPTD度量的有效性做人类感知验证。
+
+## 贡献闭环
+
+- technical_claim_cn：提出了一个自动化方法（Simod），能够从事件日志端到端发现BPS模型，并用超参数优化提高仿真精度。
+
+- artifact_claim_cn：实现为开源Python Jupyter Notebook工具，生成BIMP/Scylla可执行模型。
+
+- mechanism_claim_cn：精度改善归因于自动搜索配置空间：不同日志需要不同的控制流参数、日志修复策略、分支概率设置和资源池相似度阈值，手工固定默认值难以达到最优。
+
+- boundary_claim_cn：方法适用于事件含开始和结束时间戳、资源属性完整、控制流可被过程发现算法较好恢复、且不包含复杂调度现象（多任务、批量、优先级）的日志。
+
+- reusable_design_knowledge_cn：BPS模型发现应分解为多个可配置子任务；每个子任务的参数应纳入统一优化目标；精度度量需要感知并行活动和时间差异；自动超参数优化比手工调参更可靠。
+
+- theoretical_contribution_cn：没有提出新的行为或组织机制理论；其贡献属于方法工程和设计知识层面：将过程挖掘、仿真建模与超参数优化结合起来，并定义了新的轨迹距离度量。
+
+- how_discussion_closes_intro_gap_cn：结论明确回到引言所指出的“现有方法不测量/不优化精度”的缺口，声明本文方法填补了这一缺口，并用实验（优化显著优于baseline）作为支撑。
+
+- overclaim_or_unsupported_leaps_cn：尽管MP日志的ELS只有约0.31，文章仍概括性地宣称方法能产生“准确”的BPS模型，这可能是过度主张；此外“显著改进”基于三个日志的显著性检验，样本量小，难以外推到所有事件日志；另外，声称“最优配置因日志而异”只基于三个日志的观察，缺乏系统分析日志特征与最优配置的关系。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：业务流程仿真是一种灵活的技术，可用来在多种情景下估计流程的性能。
+
+- rhetorical_function_cn：开篇引出BPS及其用途，建立研究主题。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后文指出仿真模型准确性是应用前提做铺垫。
+
+- evidence_pointer：Abstract
+
+### 2. P1 S2-S3
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：分析师可借此比较改进流程的不同替代方案；但构建准确的仿真模型往往费力且易错，这是常见障碍。
+
+- rhetorical_function_cn：将仿真应用的价值与构建模型的困难并置，制造问题感。
+
+- depends_on_cn：前一句BPS用途
+
+- sets_up_cn：引出是否需要自动化方法的问题。
+
+- evidence_pointer：Abstract
+
+### 3. P2 S1-S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P2 S1-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：现代信息系统会记录详细执行日志；已有工作表明可从日志中发现仿真模型。
+
+- rhetorical_function_cn：指出日志数据是可用的知识来源，且已有自动化尝试。
+
+- depends_on_cn：前面提出的构建困难
+
+- sets_up_cn：但随即指出这些方法存在缺陷。
+
+- evidence_pointer：Abstract
+
+### 4. P2 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：然而，现有基于日志的仿真模型发现方法并不追求优化生成模型的准确性，而是让用户手动调参。
+
+- rhetorical_function_cn：确定具体缺口：缺少精度优化。
+
+- depends_on_cn：已有日志发现方法的存在
+
+- sets_up_cn：为本文方法引入提供理由。
+
+- evidence_pointer：Abstract
+
+### 5. P3 S1-S2
+
+- order：5
+
+- section：Abstract
+
+- locator：P3 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：本文提出一种精度优化的自动发现方法，将问题分解为带配置参数的步骤，并用超参数优化最大化仿真行为与日志行为的相似度。
+
+- rhetorical_function_cn：给出本文的方案概要和核心机制。
+
+- depends_on_cn：前面识别的缺口
+
+- sets_up_cn：预告方法细节与评估。
+
+- evidence_pointer：Abstract
+
+### 6. P3 S3
+
+- order：6
+
+- section：Abstract
+
+- locator：P3 S3
+
+- move_code：RESULT
+
+- paraphrase_cn：方法已实现为工具，并使用来自不同领域的日志进行了评估。
+
+- rhetorical_function_cn：表明方案有实现和实证支持。
+
+- depends_on_cn：方法描述
+
+- sets_up_cn：为正文中的实验部分做预告。
+
+- evidence_pointer：Abstract
+
+### 7. P1 S1-S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：BPS从带参数的流程模型生成可能执行轨迹，并据此计算周期时间、资源利用率等绩效指标。
+
+- rhetorical_function_cn：详细介绍BPS的核心概念，为读者建立背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：强调BPS需要参数注释，引出建模环节。
+
+- evidence_pointer：Introduction P1
+
+### 8. P2 S1-S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P2 S1-S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：BPS常用于流程改进决策，例如比较增加资源数量或并行化活动等备选方案。
+
+- rhetorical_function_cn：说明BPS的实际商业价值，抬高研究意义。
+
+- depends_on_cn：BPS概念
+
+- sets_up_cn：引出对仿真模型准确性的要求。
+
+- evidence_pointer：Introduction P2
+
+### 9. P3 S1-S4
+
+- order：9
+
+- section：Introduction
+
+- locator：P3 S1-S4
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：BPS的关键前提是仿真模型准确反映实际动态；传统人工数据收集耗时，且专家生成的流程模型往往因追求可理解性而不覆盖所有异常路径。
+
+- rhetorical_function_cn：建立第一个现实障碍：人工建模昂贵且不完整。
+
+- depends_on_cn：前段实际价值
+
+- sets_up_cn：为日志驱动的方法提供动机。
+
+- evidence_pointer：Introduction P3
+
+### 10. P4 S1-S2
+
+- order：10
+
+- section：Introduction
+
+- locator：P4 S1-S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：已有研究倡导用过程挖掘从执行日志中发现BPS模型：先自动发现过程模型，再从日志增强仿真参数。
+
+- rhetorical_function_cn：介绍现有替代路径。
+
+- depends_on_cn：人工建模困难
+
+- sets_up_cn：紧接着批评该路径缺少精度优化。
+
+- evidence_pointer：Introduction P4
+
+### 11. P5 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：然而，这些现有方法不测量也不自动调优生成模型的精度，而是留给用户手工调参。
+
+- rhetorical_function_cn：明确指出技术缺口。
+
+- depends_on_cn：前段已有工作
+
+- sets_up_cn：形成本文研究问题。
+
+- evidence_pointer：Introduction P5
+
+### 12. P6 S1-S3
+
+- order：12
+
+- section：Introduction
+
+- locator：P6 S1-S3
+
+- move_code：GAP
+
+- paraphrase_cn：本文针对该缺口，提出一种从日志自动发现精度优化BPS模型的方法；方法将问题分解为一系列可配置步骤，并用超参数优化提高仿真行为与日志行为的相似度。
+
+- rhetorical_function_cn：宣布研究目标和核心思路。
+
+- depends_on_cn：上一句缺口
+
+- sets_up_cn：为后续方法与实验建立预期。
+
+- evidence_pointer：Introduction P6
+
+### 13. P7 S1-S2
+
+- order：13
+
+- section：Introduction
+
+- locator：P7 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：方法已实现为Simod工具，能从XES格式日志生成可被BIMP和Scylla执行的仿真模型，并在三个不同领域日志上评估了精度提升幅度。
+
+- rhetorical_function_cn：给出解决方案的落地形式与结果预览。
+
+- depends_on_cn：方法概述
+
+- sets_up_cn：暗示实证部分内容。
+
+- evidence_pointer：Introduction P7
+
+### 14. P8 S1-S2
+
+- order：14
+
+- section：Introduction
+
+- locator：P8 S1-S2
+
+- move_code：TRANSITION
+
+- paraphrase_cn：本文是此前工具演示论文的显著扩展，新增了算法细节、精度度量定义和实验评估。
+
+- rhetorical_function_cn：定位本文相对先前报告的增量。
+
+- depends_on_cn：前文方法概要
+
+- sets_up_cn：为读者预告正文内容深度。
+
+- evidence_pointer：Introduction P8
+
+### 15. Section 2.1 P1-S3
+
+- order：15
+
+- section：Section 2
+
+- locator：Section 2.1 P1-S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：定义了BPMN活动、网关、条件分支、循环时间、处理时间、等待时间等基本概念。
+
+- rhetorical_function_cn：为形式化描述方法提供术语基础。
+
+- depends_on_cn：无
+
+- sets_up_cn：后文重放算法和BPTD度量都依赖于这些时间定义。
+
+- evidence_pointer：Section 2.1
+
+### 16. Section 2.1 BPS model bullets
+
+- order：16
+
+- section：Section 2
+
+- locator：Section 2.1 BPS model bullets
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：定义BPS模型由到达间隔分布、活动处理时间分布、分支概率、资源池及其大小、时间表、活动到资源池映射等要素构成。
+
+- rhetorical_function_cn：给出仿真模型的组成清单，直接决定后续要自动提取哪些参数。
+
+- depends_on_cn：前一段概念定义
+
+- sets_up_cn：为方法中的每步提取提供需求依据。
+
+- evidence_pointer：Section 2.1
+
+### 17. Section 2.2 intro
+
+- order：17
+
+- section：Section 2
+
+- locator：Section 2.2 intro
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：将数据驱动BPS方法分为概念指导和自动发现两类。
+
+- rhetorical_function_cn：建立文献分类框架，便于逐类指出不足。
+
+- depends_on_cn：BPS背景知识
+
+- sets_up_cn：分别评述两类相关工作。
+
+- evidence_pointer：Section 2.2
+
+### 18. Section 2.2.1 Martin et al.
+
+- order：18
+
+- section：Section 2
+
+- locator：Section 2.2.1 Martin et al.
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Martin等人识别了仿真模型的实体、活动、资源和网关等组件，并综述了用过程挖掘支持这些建模任务的文献。
+
+- rhetorical_function_cn：引用概念指导文献，说明本文设计步骤的知识来源。
+
+- depends_on_cn：文献分类
+
+- sets_up_cn：声明本文以这些洞见为基础设计自动化方法。
+
+- evidence_pointer：Section 2.2.1
+
+### 19. Section 2.2.1 Wynn et al.
+
+- order：19
+
+- section：Section 2
+
+- locator：Section 2.2.1 Wynn et al.
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Wynn等人的方法假定过程模型已给定且完全拟合日志，不提供端到端自动化发现，也不处理偏差。
+
+- rhetorical_function_cn：指出该工作与本文的差异和局限。
+
+- depends_on_cn：概念指导类文献
+
+- sets_up_cn：为本文强调自动化与偏差处理提供对照。
+
+- evidence_pointer：Section 2.2.1
+
+### 20. Section 2.2.2 Rozinat et al.
+
+- order：20
+
+- section：Section 2
+
+- locator：Section 2.2.2 Rozinat et al.
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Rozinat等人的方法不自动拟合活动处理时间和到达间隔的概率分布，不自动组装模型要素，也不优化精度。
+
+- rhetorical_function_cn：逐个列出自动化发现类工作的关键短板。
+
+- depends_on_cn：自动化发现类文献
+
+- sets_up_cn：Table 1将整合这些比较。
+
+- evidence_pointer：Section 2.2.2
+
+### 21. Section 2.2.2 Khodyrev et al.
+
+- order：21
+
+- section：Section 2
+
+- locator：Section 2.2.2 Khodyrev et al.
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Khodyrev等人不发现资源池，整合由用户完成，也没有精度测量与优化机制。
+
+- rhetorical_function_cn：继续补充自动化发现方法的另一类缺陷。
+
+- depends_on_cn：自动化发现类文献
+
+- sets_up_cn：凸显本文“资源池自动发现”与“精度优化”的增量。
+
+- evidence_pointer：Section 2.2.2
+
+### 22. Section 2.2.2 Gawin et al.
+
+- order：22
+
+- section：Section 2
+
+- locator：Section 2.2.2 Gawin et al.
+
+- move_code：LIMITATION
+
+- paraphrase_cn：Gawin等人虽然结合多种过程挖掘技术，但资源时间表等仍依赖访谈，模型组装手工完成，且没有精度优化。
+
+- rhetorical_function_cn：指出即使较近期工作也没实现全自动和优化。
+
+- depends_on_cn：自动化发现类文献
+
+- sets_up_cn：强化“全自动+优化”的空白。
+
+- evidence_pointer：Section 2.2.2
+
+### 23. Table 1后段落
+
+- order：23
+
+- section：Section 2
+
+- locator：Table 1后段落
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：Table 1总结了各方法在控制流、资源池、分支概率、分布拟合、模型组装、精度评估和精度优化上的支持程度，显示现有方法普遍缺少后三项。
+
+- rhetorical_function_cn：用一张对比矩阵系统化展示文献缺口。
+
+- depends_on_cn：各文献评述
+
+- sets_up_cn：直接引出本文两点贡献。
+
+- evidence_pointer：Table 1
+
+### 24. Section 2.2 最后一段
+
+- order：24
+
+- section：Section 2
+
+- locator：Section 2.2 最后一段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文在两方面推进现有技术：全自动发现并组装BPS模型，以及测量并优化BPS模型精度。
+
+- rhetorical_function_cn：在相关工作末尾明确本文贡献定位。
+
+- depends_on_cn：Table 1对比
+
+- sets_up_cn：为第3节方法陈述提供路线图。
+
+- evidence_pointer：Section 2.2 末尾
+
+### 25. Section 3 开头
+
+- order：25
+
+- section：Section 3
+
+- locator：Section 3 开头
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：方法输入的每条事件必须包含case id、活动标签、执行资源、开始时间戳和结束时间戳；这些属性分别用于发现资源池/时刻表/资源映射以及计算处理时间分布。
+
+- rhetorical_function_cn：说明方法对数据的要求，划定适用条件。
+
+- depends_on_cn：BPS模型要素
+
+- sets_up_cn：为实验日志选择提供依据。
+
+- evidence_pointer：Section 3
+
+### 26. Fig. 1前
+
+- order：26
+
+- section：Section 3
+
+- locator：Fig. 1前
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：Fig. 1展示了从日志到BPS模型的各步骤，后续用P2P日志示例解释。
+
+- rhetorical_function_cn：给出方法全貌，方便读者跟踪后续小节。
+
+- depends_on_cn：输入要求
+
+- sets_up_cn：形成后续各子节的讲解顺序。
+
+- evidence_pointer：Section 3，Fig. 1
+
+### 27. Section 3.1.1 第一段
+
+- order：27
+
+- section：Section 3.1
+
+- locator：Section 3.1.1 第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择Split Miner是因为它在精度、拟合度和简单度上都有良好表现，但也可以替换为其他发现算法。
+
+- rhetorical_function_cn：说明控制流发现算法的选择理由，并保持扩展性。
+
+- depends_on_cn：Stakeholder决定使用过程发现算法
+
+- sets_up_cn：随后介绍算法的两个超参数ε和η。
+
+- evidence_pointer：Section 3.1.1
+
+### 28. Section 3.1.1 第二段
+
+- order：28
+
+- section：Section 3.1
+
+- locator：Section 3.1.1 第二段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：Split Miner的ε控制并行关系数量，η控制保留哪些最频繁路径，两者共同影响模型复杂度。
+
+- rhetorical_function_cn：定义可调参数，为超参数优化提供搜索维度。
+
+- depends_on_cn：选择Split Miner
+
+- sets_up_cn：这两个参数进入Table 5搜索空间。
+
+- evidence_pointer：Section 3.1.1
+
+### 29. Section 3.1.2
+
+- order：29
+
+- section：Section 3.1
+
+- locator：Section 3.1.2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用基于cost的fitness度量评估每条轨迹与模型的匹配程度，对齐符号SM/MM/ML表示同步移动、模型移动和日志移动。
+
+- rhetorical_function_cn：为日志修复提供定量依据。
+
+- depends_on_cn：控制流发现
+
+- sets_up_cn：引出需要修复策略处理不拟合轨迹。
+
+- evidence_pointer：Section 3.1.2
+
+### 30. Section 3.1.3 第一段
+
+- order：30
+
+- section：Section 3.1
+
+- locator：Section 3.1.3 第一段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出三种日志修复方法：Removal删除非拟合轨迹，Replacement用最相似的拟合轨迹替换，Alignment基于自动机对齐插入/删除事件。
+
+- rhetorical_function_cn：给出处理日志偏差的具体设计空间。
+
+- depends_on_cn：对齐评估
+
+- sets_up_cn：三种方法将成为优化器的离散超参数。
+
+- evidence_pointer：Section 3.1.3
+
+### 31. Section 3.1.3 第二段
+
+- order：31
+
+- section：Section 3.1
+
+- locator：Section 3.1.3 第二段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：Removal可能过度减少日志规模，Replacement通过复制最相似轨迹保持规模，Alignment保留更多原始观测但需要插入零耗时事件。
+
+- rhetorical_function_cn：解释每种修复策略的权衡机制，使超参数选择有意义。
+
+- depends_on_cn：三种修复方法定义
+
+- sets_up_cn：预测不同日志可能需要不同修复策略。
+
+- evidence_pointer：Section 3.1.3
+
+### 32. Section 3.2.1 开头
+
+- order：32
+
+- section：Section 3.2
+
+- locator：Section 3.2.1 开头
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设计一个重放算法，输入过程模型和修复后的轨迹，计算每个活动的处理时间、使能时间、遍历频率和等待时间。
+
+- rhetorical_function_cn：定义从日志到仿真参数的核心计算步骤。
+
+- depends_on_cn：修复后的日志与BPMN模型
+
+- sets_up_cn：这些输出供后续分布拟合和分支概率使用。
+
+- evidence_pointer：Section 3.2.1, Algorithm 1
+
+### 33. Section 3.2.2
+
+- order：33
+
+- section：Section 3.2
+
+- locator：Section 3.2.2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：按每日到达时间差拟合到达间隔PDF，选择标准误差最小的分布函数。
+
+- rhetorical_function_cn：说明到达间隔参数如何从日志自动估计。
+
+- depends_on_cn：重放后日志
+
+- sets_up_cn：该参数与baseline中固定指数分布形成对比。
+
+- evidence_pointer：Section 3.2.2
+
+### 34. Section 3.2.3
+
+- order：34
+
+- section：Section 3.2
+
+- locator：Section 3.2.3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：分支概率可以通过等概率、随机或归一化重放遍历频率得到。
+
+- rhetorical_function_cn：提供分支概率的多种估计方案，纳入超参数选择。
+
+- depends_on_cn：重放算法输出遍历频率
+
+- sets_up_cn：该选择会出现在实验的工艺参数中。
+
+- evidence_pointer：Section 3.2.3
+
+### 35. Section 3.2.4
+
+- order：35
+
+- section：Section 3.2
+
+- locator：Section 3.2.4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：对每个活动，根据重放得到的处理时间序列拟合多种分布，选择标准误差最小的一个。
+
+- rhetorical_function_cn：实现活动处理时间的自动化建模。
+
+- depends_on_cn：重放结果
+
+- sets_up_cn：该方法结果与baseline中用固定指数分布形成对比。
+
+- evidence_pointer：Section 3.2.4, Table 3
+
+### 36. Section 3.2.5
+
+- order：36
+
+- section：Section 3.2
+
+- locator：Section 3.2.5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：资源池通过将资源按活动执行画像聚类获得，并后处理确保每个活动只属于最频繁执行的资源池。
+
+- rhetorical_function_cn：说明资源视角的自动发现方式。
+
+- depends_on_cn：日志中的资源属性
+
+- sets_up_cn：资源池相似度阈值成为搜索空间之一。
+
+- evidence_pointer：Section 3.2.5
+
+### 37. Section 3.2.6-3.2.7
+
+- order：37
+
+- section：Section 3.2
+
+- locator：Section 3.2.6-3.2.7
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将收集到的参数嵌入目标仿真工具格式（如BIMP的XML）形成BPS模型，然后执行仿真生成模拟日志。
+
+- rhetorical_function_cn：完成从参数到可执行模型的转换。
+
+- depends_on_cn：前序所有参数提取
+
+- sets_up_cn：为精度评估提供仿真日志。
+
+- evidence_pointer：Section 3.2.6-3.2.7
+
+### 38. Section 3.3.1 第一段
+
+- order：38
+
+- section：Section 3.3
+
+- locator：Section 3.3.1 第一段
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：为了调优BPS模型，需要先定义精度度量：通过模拟得到日志，再衡量模拟日志与ground truth之间的相似度。
+
+- rhetorical_function_cn：引出精度度量的必要性。
+
+- depends_on_cn：可执行BPS模型
+
+- sets_up_cn：随后设计BPTD度量。
+
+- evidence_pointer：Section 3.3.1
+
+### 39. Section 3.3.1 MAE段
+
+- order：39
+
+- section：Section 3.3
+
+- locator：Section 3.3.1 MAE段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：简单用周期时间MAE是粗粒度的，两条轨迹周期时间相同但事件顺序可能差异很大。
+
+- rhetorical_function_cn：排除过于简单的对比方案。
+
+- depends_on_cn：精度度量需求
+
+- sets_up_cn：转向基于编辑距离的度量。
+
+- evidence_pointer：Section 3.3.1
+
+### 40. Section 3.3.1 DL局限段
+
+- order：40
+
+- section：Section 3.3
+
+- locator：Section 3.3.1 DL局限段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：经典DL距离虽能捕捉活动顺序差异，但会惩罚并行活动的偶然转置，且完全忽略活动等待和处理时间。
+
+- rhetorical_function_cn：指出现成距离的双重不足，为BPTD铺垫。
+
+- depends_on_cn：DL距离的定义
+
+- sets_up_cn：提出两条修改需求：并发豁免和时间感知。
+
+- evidence_pointer：Section 3.3.1
+
+### 41. Section 3.3.1 需求列表后
+
+- order：41
+
+- section：Section 3.3
+
+- locator：Section 3.3.1 需求列表后
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：BPTD在DL距离基础上，用alpha并发关系识别并行活动并允许其互换不惩罚，同时按处理时间与等待时间差异给出惩罚。
+
+- rhetorical_function_cn：给出新距离度量的核心设计。
+
+- depends_on_cn：DL距离局限
+
+- sets_up_cn：随后用示例说明BPTD计算。
+
+- evidence_pointer：Section 3.3.1, Table 4
+
+### 42. Section 3.3.1 ELS段
+
+- order：42
+
+- section：Section 3.3
+
+- locator：Section 3.3.1 ELS段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ELS将两个日志的轨迹配对问题建模为任务分配问题，用匈牙利算法求最小BPTD总和作为日志相似度。
+
+- rhetorical_function_cn：把轨迹级距离扩展到日志级。
+
+- depends_on_cn：BPTD定义
+
+- sets_up_cn：为优化目标提供标量值。
+
+- evidence_pointer：Section 3.3.1
+
+### 43. Section 3.3.2 第一段
+
+- order：43
+
+- section：Section 3.3
+
+- locator：Section 3.3.2 第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：专家手工调参耗时且往往得到次优结果，因此用TPE这类超参数优化器自动搜索配置。
+
+- rhetorical_function_cn：论证引入优化器的必要性。
+
+- depends_on_cn：多步骤参数存在交互
+
+- sets_up_cn：定义搜索空间和优化目标。
+
+- evidence_pointer：Section 3.3.2
+
+### 44. Table 5附近
+
+- order：44
+
+- section：Section 3.3
+
+- locator：Table 5附近
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：搜索空间包括ε、η、日志修复方式、分支概率方式、资源池相似度阈值等，每一维都有分布和范围。
+
+- rhetorical_function_cn：把方法中的可调旋钮显式化。
+
+- depends_on_cn：TPE优化器引入
+
+- sets_up_cn：为实验中的baseline和搜索范围提供定义。
+
+- evidence_pointer：Table 5
+
+### 45. Section 4 开头
+
+- order：45
+
+- section：Section 4
+
+- locator：Section 4 开头
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：实验旨在回答RQ1：所生成BPS模型的精度如何？RQ2：超参数优化在多大程度上提升精度？
+
+- rhetorical_function_cn：给出实验的明确研究问题，驱动后续设计。
+
+- depends_on_cn：方法构建
+
+- sets_up_cn：引出数据集和实验设置。
+
+- evidence_pointer：Section 4
+
+### 46. Section 4.1 第一段
+
+- order：46
+
+- section：Section 4
+
+- locator：Section 4.1 第一段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：公开真实日志普遍缺乏同时具备开始和结束时间戳的事件，因此选择了一个合成日志和两个满足要求的真实日志。
+
+- rhetorical_function_cn：解释数据集选择限制，避免批评代表性不足。
+
+- depends_on_cn：RQ
+
+- sets_up_cn：给出三个日志的基本特征并分析其差异。
+
+- evidence_pointer：Section 4.1
+
+### 47. Section 4.1 最后一段
+
+- order：47
+
+- section：Section 4
+
+- locator：Section 4.1 最后一段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：三个日志刻意覆盖理想条件、BPMS服务流程和ERP制造流程，在控制流复杂度、日志规模和活动数上都有差异。
+
+- rhetorical_function_cn：说明案例选择是为了增强外部效度。
+
+- depends_on_cn：数据集介绍
+
+- sets_up_cn：让后续不同结果归因于日志特征差异。
+
+- evidence_pointer：Section 4.1
+
+### 48. Section 4.2
+
+- order：48
+
+- section：Section 4
+
+- locator：Section 4.2
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：实验将默认参数作为baseline，并为每个日志用TPE探索100个配置；每个配置仿真10次以控制随机性。
+
+- rhetorical_function_cn：定义比较对象与随机性控制方式。
+
+- depends_on_cn：Tables 5和7
+
+- sets_up_cn：为统计检验和结果展示奠定设计。
+
+- evidence_pointer：Section 4.2
+
+### 49. Section 4.2 最后一段
+
+- order：49
+
+- section：Section 4
+
+- locator：Section 4.2 最后一段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：为排除仿真随机性影响，使用单尾曼-惠特尼U检验比较优化配置与baseline的10次仿真ELS。
+
+- rhetorical_function_cn：说明显著性检验的程序。
+
+- depends_on_cn：多次仿真设计
+
+- sets_up_cn：支撑结果的统计可解释性。
+
+- evidence_pointer：Section 4.2
+
+### 50. Section 4.3 第一段
+
+- order：50
+
+- section：Section 4
+
+- locator：Section 4.3 第一段
+
+- move_code：RESULT
+
+- paraphrase_cn：图5显示优化配置在三个日志上都优于baseline，同时参数与精度的关联模式因日志而异。
+
+- rhetorical_function_cn：给出实验总体结论。
+
+- depends_on_cn：实验运行
+
+- sets_up_cn：随后分别解释每个日志的具体模式。
+
+- evidence_pointer：Section 4.3, Fig. 5
+
+### 51. Section 4.3 P2P段
+
+- order：51
+
+- section：Section 4
+
+- locator：Section 4.3 P2P段
+
+- move_code：RESULT
+
+- paraphrase_cn：在P2P日志中，Removal修复和高资源池相似度阈值与高精度强相关，优化明显优于baseline。
+
+- rhetorical_function_cn：逐个揭示日志内参数-精度关联。
+
+- depends_on_cn：总体结果
+
+- sets_up_cn：与MP、ACR结果对比显示不同日志需要不同配置。
+
+- evidence_pointer：Fig. 5a, 5b
+
+### 52. Section 4.3 MP段
+
+- order：52
+
+- section：Section 4
+
+- locator：Section 4.3 MP段
+
+- move_code：RESULT
+
+- paraphrase_cn：在MP日志中，Repair修复和等概率分支与更高精度相关，相似度阈值影响不大，修复方式选择比阈值更重要。
+
+- rhetorical_function_cn：展示与P2P不同的配置偏好。
+
+- depends_on_cn：总体结果
+
+- sets_up_cn：强化配置必须因日志而异的论点。
+
+- evidence_pointer：Fig. 5c, 5d
+
+### 53. Section 4.3 ACR段
+
+- order：53
+
+- section：Section 4
+
+- locator：Section 4.3 ACR段
+
+- move_code：RESULT
+
+- paraphrase_cn：在ACR日志中，Removal与Repair都有优势，而等概率分支反而带来更高精度；优化提升幅度虽小但统计显著。
+
+- rhetorical_function_cn：展示第三种模式，并坦承某些反直观发现。
+
+- depends_on_cn：总体结果
+
+- sets_up_cn：为后续威胁与结论提供素材。
+
+- evidence_pointer：Fig. 5e, 5f
+
+### 54. Table 8后
+
+- order：54
+
+- section：Section 4
+
+- locator：Table 8后
+
+- move_code：RESULT
+
+- paraphrase_cn：曼-惠特尼U检验表明三个日志上优化配置与baseline的差异均统计显著。
+
+- rhetorical_function_cn：给出统计证据，防止结果被归因于随机。
+
+- depends_on_cn：实验运行和检验
+
+- sets_up_cn：支撑结论中“显著提升”的措辞。
+
+- evidence_pointer：Table 8
+
+### 55. Threats to validity P1
+
+- order：55
+
+- section：Section 5
+
+- locator：Threats to validity P1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：实验只覆盖一个合成和两个真实日志，结果可能不适用于其他日志，尤其是过程发现算法无法获得准确模型的日志。
+
+- rhetorical_function_cn：主动声明外部效度限制，约束贡献范围。
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：为未来扩大数据集提供方向。
+
+- evidence_pointer：Section 5
+
+### 56. Threats to validity P2
+
+- order：56
+
+- section：Section 5
+
+- locator：Threats to validity P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：每个参数目前只选用一种特定算法，未来可增加多种提取选项。
+
+- rhetorical_function_cn：指出方法空间的扩展点。
+
+- depends_on_cn：方法设计
+
+- sets_up_cn：暗示更多配置维度可纳入优化。
+
+- evidence_pointer：Section 5
+
+### 57. Threats to validity P3
+
+- order：57
+
+- section：Section 5
+
+- locator：Threats to validity P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：由于仿真模型的顺序性假设，多任务、批处理、低优先级延迟等现象不在当前方法覆盖范围内。
+
+- rhetorical_function_cn：划分适用边界，避免读者误用。
+
+- depends_on_cn：仿真引擎能力
+
+- sets_up_cn：为未来仿真技术发展留出空间。
+
+- evidence_pointer：Section 5
+
+### 58. Conclusion P1
+
+- order：58
+
+- section：Section 6
+
+- locator：Conclusion P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文提出了一种从事件日志自动发现BPS模型的方法和精度度量，并利用超参数优化搜索最优配置。
+
+- rhetorical_function_cn：在结尾浓缩全文贡献，回应引言缺口。
+
+- depends_on_cn：全文方法
+
+- sets_up_cn：引导接下来的实证总结和未来工作。
+
+- evidence_pointer：Section 6
+
+### 59. Conclusion P2
+
+- order：59
+
+- section：Section 6
+
+- locator：Conclusion P2
+
+- move_code：RESULT
+
+- paraphrase_cn：实验表明优化配置显著优于默认参数，且最佳配置随日志变化，因此自动化超参数优化在该场景中是必要的。
+
+- rhetorical_function_cn：将实证发现上升为方法设计的一般原则。
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：支持对外部效度局限的承认。
+
+- evidence_pointer：Section 6
+
+### 60. Conclusion P3-P4
+
+- order：60
+
+- section：Section 6
+
+- locator：Conclusion P3-P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来需要用更大规模日志评估，并研究日志特征与最优配置的关系；同时需扩展仿真引擎以支持多任务、优先级、批处理和中断等复杂现象。
+
+- rhetorical_function_cn：给出下一步研究，平衡当前贡献与局限。
+
+- depends_on_cn：全文局限
+
+- sets_up_cn：为后续工作提供方向。
+
+- evidence_pointer：Section 6
+
+## 写作技术
+
+- gap_construction_cn：先用“BPS价值—手工建模耗时易漏—需要日志驱动”三层铺垫，然后集中攻击现有日志驱动方法的共同弱点：不做概率分布自动拟合、不自动组装、不评估精度、不优化精度。用表格对比使缺口可视化，再用“本文两点进展”直接填充。
+
+- signposting_cn：引言最后给出全文结构；每节开头有小段导语；方法部分用图1展示流水线；每个小节标题如“Pre-processing stage”“Processing stage”“Assessment and optimization”清晰标记阶段。实验部分明确列出RQ1/RQ2。
+
+- transition_logic_cn：阶段之间以“修复后日志→参数提取→精度评估→实验”的流水线因果关系连接；在相关工作末尾用“因此本文主张…”过渡到方法，在方法末尾用“下面讨论如何评估与优化”过渡到评估；在实验末尾用“威胁”承接结论。
+
+- claim_evidence_rhythm_cn：通常先给出设计决定，再提供简短理由，最后用示例或实验数据支撑。例如BPTD先定义再从示例表展示数字；优化器先解释为何需要，再用搜索空间表和实验结果证明。结论中的每个贡献都对应前面的方法小节或实验表格。
+
+- benchmark_narrative_cn：不采用多个外部算法对比，而是将“默认人工配置”作为baseline，将“同一方法+自动优化”作为处理，形成干净的自对比。用统计检验排除随机性，用三日志差异显示没有固定最优，从而把benchmark结果转化为对自动优化必要性的论证。
+
+- theory_return_cn：由于本文没有理论推导，结论的“返回”不是回到理论，而是回到“自动化超参数优化是必要”的设计知识，以及“精度度量需感知并发与时间”的方法原则。
+
+- contribution_positioning_cn：在相关工作结尾明确“两点进展”，在摘要和引言重复“精度优化”作为核心区别，在结论再次复述，并通过Table 1的对照强化“他人没做、我们做了”的定位。
+
+- novelty_protection_cn：用“方法分解为可配置步骤+自动搜索”使贡献不是单次调参结果；定义新的BPTD/ELS作为可复用度量；强调不同日志最优配置不同，从而防止读者认为结果只是偶然；开源工具也增加可信度。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：介绍应用领域价值与痛点，引出常见人工/传统方法的成本与缺陷。
+
+- research_job_cn：明确要解决的问题域（如BPS模型建模瓶颈），识别关键障碍。
+
+- required_evidence_cn：应用领域重要性的权威引用，传统方法的已知局限。
+
+- transition_to_next_cn：指出可以用数据/日志缓解该问题。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述现有数据驱动方法，按能力维度分类并指出普遍缺少的关键能力。
+
+- research_job_cn：做文献矩阵（如Table 1）标出各方法的支持程度。
+
+- required_evidence_cn：代表性文献及每项能力的证据。
+
+- transition_to_next_cn：“本文填补这些空白”并列出两点贡献。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：把整体问题分解为多个子步骤，每个子步骤对应一个或几个参数。
+
+- research_job_cn：设计可执行流水线，选用现有算法并对关键决定参数化。
+
+- required_evidence_cn：每个子步骤有明确输入输出，最好有示例或算法伪代码。
+
+- transition_to_next_cn：“完成参数后如何判断模型质量？”引出评估与优化。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：定义任务特有的效果度量，并说明朴素的度量为何不够好。
+
+- research_job_cn：在领域需求基础上构造或改进度量，用示例说明其区分力。
+
+- required_evidence_cn：度量公式、例子计算表，能展示对两种情形的不同结果。
+
+- transition_to_next_cn：“有了度量，如何自动找到好配置？”引出优化器。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：引入超参数优化搜索空间，解释为什么自动搜索优于手工调参。
+
+- research_job_cn：选择优化算法，定义搜索空间和优化目标。
+
+- required_evidence_cn：搜索空间表、优化器类型、baseline设置。
+
+- transition_to_next_cn：“以上方法需要实验验证”进入评估。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告实验设置、数据集理由、基准对照和统计检验。
+
+- research_job_cn：在多数据集上运行baseline与优化配置，记录指标并做显著性检验。
+
+- required_evidence_cn：数据集统计表、对照表、结果图/表、p值。
+
+- transition_to_next_cn：讨论结果并总结局限。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：总结方法、实证结论、边界条件、威胁与未来工作。
+
+- research_job_cn：系统反思结果的可泛化性，列出尚未覆盖的场景。
+
+- required_evidence_cn：与引言缺口对应的结论；对适用范围的明确声明。
+
+- transition_to_next_cn：收束全文。
+
+### most_transferable_moves_cn
+
+1. 用能力矩阵（Table 1）浓缩文献缺口
+
+2. 将任务是分解为带参数的流水线，并以阶段名作为章节结构
+
+3. 先批评简单度量（MAE/DL），再提出领域定制度量并用示例演示
+
+4. 使用自动化超参数优化作为提升模型质量的手段，并用baseline对照证明必要性
+
+5. 用多个日志展示“没有通用最优配置”，反推自动搜索价值
+
+6. 在结论中把实证发现提升为设计原则
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 需要带有开始和结束时间戳以及资源属性的事件日志，这类真实日志稀缺
+
+2. 需要可执行多个概率分布和资源调度的仿真器（BIMP/Scylla）
+
+3. TPE优化需要大量配置评估（每个日志100次×10次仿真），算力成本较高
+
+4. 构建新的领域距离度量（BPTD）需要仔细形式化与示例验证
+
+### what_not_to_copy_superficially_cn
+
+1. 不要只说“我们提出了自动化方法”却没有给出可复现的步骤和参数搜索空间
+
+2. 不要使用“准确”“精度高”等词而没有定义明确度量（如ELS）
+
+3. 不要声称优化有效却缺乏统计检验和重复运行
+
+4. 不要忽略数据集缺乏普适性；必须主动声明边界和局限
+
+- single_best_description_of_the_routine_cn：先以领域痛点打开缺口，接着用文献矩阵证明差距，然后把自己的方法描述为带多个可调旋钮的流水线，再为这些旋钮引入自动搜索和定制度量，最后用多日志baseline对比加统计检验把结果提升为可复用的设计原则。
+
+## 分析边界
+
+文章中的数学公式和部分图表在OCR中呈现为图片或LaTeX符号，但整体结构和关键信息可读；表格值（如Table 8）已尽量准确重建；未发现需要修正的结构性矛盾。对ELS方向性的解释基于全文语境（数值越大越好），可能存在量化口径上的细微偏差。

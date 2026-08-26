@@ -1,0 +1,32 @@
+{
+  "updated_at": "2026-08-07T07:15:00.642073+00:00",
+  "stage": "isr_micro",
+  "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "8c6c7f01ed07488b679bb551a4b5a1b2a1d4c366f500bf896d100d299a33f8e2",
+  "input_candidates": 57,
+  "completed": 57,
+  "pending": 0,
+  "journal_counts": {
+    "Information Systems Research": 57
+  },
+  "year_counts": {
+    "2020": 4,
+    "2021": 5,
+    "2022": 7,
+    "2023": 15,
+    "2024": 11,
+    "2025": 12,
+    "2026": 3
+  },
+  "theory_subset_count": 34,
+  "usage": {
+    "prompt_tokens": 2800226,
+    "completion_tokens": 1835221,
+    "total_tokens": 4635447,
+    "prompt_cache_hit_tokens": 513920,
+    "prompt_cache_miss_tokens": 2286306
+  },
+  "sentence_units": 5751,
+  "paragraph_units": 480
+}

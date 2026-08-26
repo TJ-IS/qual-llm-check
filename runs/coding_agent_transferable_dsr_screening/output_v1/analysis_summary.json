@@ -1,0 +1,50 @@
+{
+  "records": 1832,
+  "overall": {
+    "exclude": 1347,
+    "strong_candidate": 155,
+    "promising_candidate": 132,
+    "inspiration_only": 178,
+    "unclear": 20
+  },
+  "retained": 287,
+  "high_precision_core": 20,
+  "consistency_issues": 0,
+  "historical_errors": 2,
+  "resolved_historical_errors": 2,
+  "attempt_counts": {
+    "1": 1778,
+    "2": 51,
+    "3": 3
+  },
+  "best_source_specificity": {
+    "contextualized": 173,
+    "domain_constitutive": 113,
+    "generic": 1
+  },
+  "best_coding_agent_specificity": {
+    "strong": 257,
+    "moderate": 30
+  },
+  "best_transfer_strength": {
+    "strong": 169,
+    "moderate": 118
+  },
+  "best_transfer_type": {
+    "mechanism_transfer_new_outcome": 145,
+    "same_construct_contextualized": 96,
+    "construct_extension": 46
+  },
+  "overlapping_theme_counts": {
+    "data_quality_detection_measurement": 182,
+    "health_care": 36,
+    "security_privacy_trust_accountability": 46,
+    "human_ai_explanation_oversight": 47,
+    "sustainability_environment": 15,
+    "attention_cognition_learning_usability": 80,
+    "coordination_governance_incentives_markets": 46,
+    "software_development": 13,
+    "fairness_inclusion_rights": 12,
+    "safety_risk_resilience_recovery": 49
+  }
+}

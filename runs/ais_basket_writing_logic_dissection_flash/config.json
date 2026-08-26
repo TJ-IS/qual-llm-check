@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "analysis_version": "ais-basket-writing-logic-dissection-flash-v1",
+  "input_dir": "../../database_fulltext_all",
+  "source_decisions": "../ais_basket_base231_content_classification_flash/output_v1/decisions.jsonl",
+  "env_file": "../../.env",
+  "model": {
+    "name": "deepseek-v4-flash",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "timeout_seconds": 420
+  },
+  "batch": {
+    "max_concurrency": 100,
+    "retries": 2,
+    "retry_base_delay_seconds": 2.0,
+    "progress_interval": 10,
+    "report_interval": 25
+  },
+  "stages": {
+    "all231": {
+      "analysis_version": "ais-basket-writing-logic-all231-v1",
+      "system_prompt": "stage1_system_prompt_cn.md",
+      "user_template": "stage1_user_template_cn.md",
+      "output_dir": "output_stage1_all231",
+      "max_tokens": 65536,
+      "journal_filter": ""
+    },
+    "isr_micro": {
+      "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+      "system_prompt": "stage2_isr_micro_system_prompt_cn.md",
+      "user_template": "stage2_isr_micro_user_template_cn.md",
+      "output_dir": "output_stage2_isr57",
+      "max_tokens": 300000,
+      "journal_filter": "Information Systems Research",
+      "stage1_decisions": "output_stage1_all231/decisions.jsonl"
+    }
+  }
+}

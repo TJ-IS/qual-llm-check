@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "status": "RESERVE_ONLY_NO_SEMANTIC_RUN",
+  "authorization": "full_source_acquisition_and_hash_verification_only",
+  "source_completeness": "released_arb_chunks_insufficient_full_git_blobs_required",
+  "gold_blind": true,
+  "salt": "arb-semantic-ast-v0",
+  "selection_key": "SHA256(salt\\0release\\0repo\\0base_commit\\0sample_id)",
+  "python_repo_allowlist": [
+    "fastapi/fastapi",
+    "huggingface/diffusers",
+    "huggingface/transformers",
+    "pytest-dev/pytest",
+    "pallets/click"
+  ],
+  "quotas": {
+    "code2test": {
+      "fastapi/fastapi": 2,
+      "huggingface/diffusers": 2,
+      "huggingface/transformers": 2,
+      "pytest-dev/pytest": 2
+    },
+    "trace2code": {
+      "pallets/click": 8
+    }
+  },
+  "exclusions": {
+    "stage0_manifest": "thesis_papers_v3.1/pilot_manifests/arb60_selection_v0.json",
+    "stage0_manifest_sha256": "885cf615e7e5bd6d713c2aefe1b5792da5915ac3f17d545acab6673b0f0f009c",
+    "sample_ids": 60,
+    "snapshots": 54
+  },
+  "arb_code_commit": "07014c986f3deadb1548c62b32c0ffbe6a81465d",
+  "release_archive_sha256": {
+    "v2_code2test": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b",
+    "v2_trace2code": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+  },
+  "source_samples_sha256": {
+    "v2_code2test": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+    "v2_trace2code": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266"
+  },
+  "sample_count": 16,
+  "snapshot_count": 16,
+  "samples": [
+    {
+      "reserve_index": 1,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "dd57d697481176a1c52bd8d0",
+      "repo": "fastapi/fastapi",
+      "base_commit": "cbd64b09a32681d3b0ea097608bc62eb0d1587e0",
+      "query_paths": [
+        "fastapi/_compat/v2.py"
+      ],
+      "selection_hash": "27a5cba932e7539357cab2060530f9e280f9ac20aef67cfe9da323976eb9f98b",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 22,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 2,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "7f2b7ed09afc0e1e57683529",
+      "repo": "fastapi/fastapi",
+      "base_commit": "bc06e4296d588f39f38c7ac2fc96d3913c565962",
+      "query_paths": [
+        "fastapi/responses.py"
+      ],
+      "selection_hash": "6c2bfcffc4572851bdfdab9b646c9abeee736bff1e9a0e8e1e515edc048da1dd",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 20,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 3,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "c60a8891f2e4fc1229f51fa7",
+      "repo": "huggingface/diffusers",
+      "base_commit": "bbbcdd87bd9d960fa372663a50b9edbdcb1391c6",
+      "query_paths": [
+        "src/diffusers/modular_pipelines/modular_pipeline.py"
+      ],
+      "selection_hash": "26b94ef2b8ccf956507807036e138d26dd0f1588e3e37af089c12e4f63eb91b1",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 42,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 4,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "81051ce9f995fdb7e2deba4b",
+      "repo": "huggingface/diffusers",
+      "base_commit": "357b6818903f0990a5e4815f31d1655555a035a7",
+      "query_paths": [
+        "src/diffusers/pipelines/hunyuan_video/pipeline_hunyuan_video_image2video.py"
+      ],
+      "selection_hash": "59633fa3b4be39ebc9ebd86bcaef0e99dac1480bee4d95b7ae5c048d00278663",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 40,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 5,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "896a5d9f9bfa6cb68a4775ee",
+      "repo": "huggingface/transformers",
+      "base_commit": "79f90bc68a652285f85ab7779bb2f07bed255e4f",
+      "query_paths": [
+        "src/transformers/integrations/tensor_parallel.py"
+      ],
+      "selection_hash": "14652058d147baf2f4e331ebe5034ee2668310362cf86325278c56bf81b1c723",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 50,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 6,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "a82117a5d29dd98d94ceb931",
+      "repo": "huggingface/transformers",
+      "base_commit": "a553395766001116a719c82870171f8d6b458c98",
+      "query_paths": [
+        "src/transformers/models/pe_audio_video/modeling_pe_audio_video.py"
+      ],
+      "selection_hash": "37f79e1789ab9d193bf3e70ff7c98c1f48b3ac488b893229fd5c64428569685f",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 54,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 7,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "5a834c2130d04105906a9240",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "7bc02cca0dd92ec505b4556c054b4e06e9cb8d4d",
+      "query_paths": [
+        "testing/test_subtests.py"
+      ],
+      "selection_hash": "248275c896b94e7375870f7d5a5040260036ac7949824b041dfbf747e3e04bb9",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 61,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 8,
+      "release_id": "v2_code2test",
+      "task_type": "code2test",
+      "sample_id": "e6b3d0834b130dd9a2b7015d",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "4d386750cb390bf72119ff6bb11b06da64fb6941",
+      "query_paths": [
+        "src/_pytest/fixtures.py"
+      ],
+      "selection_hash": "fbc5473a0616d7d8b825631ca23c15f3771d02a5902a1d104289ff30a0f25bec",
+      "source": "pilot_assets/arb-data/benchmark/v2_code2test/samples.jsonl",
+      "source_line": 62,
+      "source_sha256": "712b2699d3f963c2f940688ae5248304263c4ecda1b3831b2801c95712a50b85",
+      "archive_sha256": "387cdfb25835b176ba27707d43dc31cae6b31514231923af237ad04deef19c0b"
+    },
+    {
+      "reserve_index": 9,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "461a1aafd27445f29ef24020",
+      "repo": "pallets/click",
+      "base_commit": "b625b9f39082f366dd85ad13024e43c8f5e78b87",
+      "query_paths": [
+        "tests/test_utils.py"
+      ],
+      "selection_hash": "077c6c1d0c87fed36b6aa835be3d261aca372c8a1a9341a8daf6256cffdb9e68",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 74,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 10,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "6d3773a91bd26a4977aa45af",
+      "repo": "pallets/click",
+      "base_commit": "08ecfd0e7c238a2444886d239de6d0e9d83530ec",
+      "query_paths": [
+        "tests/test_options.py"
+      ],
+      "selection_hash": "18fce7cfa9edbeb9f89f828b943552b7cbbf29cbca714116b55d99f963498a62",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 78,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 11,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "8882930f15d1cd0966e4ff81",
+      "repo": "pallets/click",
+      "base_commit": "a1235aacb1be55dc66ddcfefbf64dec44b6ab54d",
+      "query_paths": [
+        "tests/test_options.py"
+      ],
+      "selection_hash": "1af9c1288857de9e5b832b8843aed7a4f8ab0b7e61a2c4f9d6443d0db67e8453",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 79,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 12,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "ed5f5fce7ddb0be735cf98c7",
+      "repo": "pallets/click",
+      "base_commit": "7d7183604158f064390539d83d4a19a978c6b08a",
+      "query_paths": [
+        "tests/test_commands.py"
+      ],
+      "selection_hash": "2dfb2dbada16be6af5a649481acde21fecea18e3966263d5582b6dfc3dcc8214",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 93,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 13,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "e50d9d504a467c632442042e",
+      "repo": "pallets/click",
+      "base_commit": "1a4d8c1bb1e8f8e214ede7223bd2c05dc2ce006a",
+      "query_paths": [
+        "tests/test_termui.py"
+      ],
+      "selection_hash": "2f7ad3dc9363df420844130aa6a1b5b8db8372496de99f340fe72d3d40dbd4a9",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 91,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 14,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "4dfab03e69e4615b806dbab1",
+      "repo": "pallets/click",
+      "base_commit": "a8c05427602d12842c53ce48b03b5d6b5c0c6693",
+      "query_paths": [
+        "tests/test_context.py"
+      ],
+      "selection_hash": "37f85bc140e211fac11573ef8a86425354d45492362cf76fef1a8ae3da09a582",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 76,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 15,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "dfa7089d7bf0b3dad96e2bb8",
+      "repo": "pallets/click",
+      "base_commit": "bf9da4838986af3bc09a1b16974d154c61dcbe3f",
+      "query_paths": [
+        "tests/test_chain.py"
+      ],
+      "selection_hash": "384a45b3c8709decdea52b609996688038439c94c654dd9a92fd2458854f4229",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 90,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    },
+    {
+      "reserve_index": 16,
+      "release_id": "v2_trace2code",
+      "task_type": "trace2code",
+      "sample_id": "2bf38b97ba88b8246c44e306",
+      "repo": "pallets/click",
+      "base_commit": "422cb2064eed146dbe03ba3aed5be35daeb70414",
+      "query_paths": [
+        "tests/test_options.py"
+      ],
+      "selection_hash": "410e7d1e2b805ee22242c541811180c7e7d67ed5234122323d434a1f920ccb3e",
+      "source": "pilot_assets/arb-data/benchmark/v2_trace2code/samples.jsonl",
+      "source_line": 71,
+      "source_sha256": "9d0ff50155fa4f65c1bbb632abc4f1f11393c50fa7b0a9249e06128b368b6266",
+      "archive_sha256": "19b252e8cfff42107fedc74005dbb6972f2970af33651ce0c1571546819e41c4"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85101988043"
+title: "Interruptions in Agile Software Development Teams"
+authors: "Wiesche M."
+year: "2021"
+journal: "Project Management Journal"
+doi: "10.1177/8756972821991365"
+---
+# Scopus title-abstract-keyword metadata
+Title: Interruptions in Agile Software Development Teams
+Abstract: Agile approaches help software development project teams to better meet user needs and ensure flexibility in uncertain environments. But using agile approaches invites changes to the project and increases interactions between team members, which both cause interruptions in the workplace. While interruptions can help in task completion and increase process flexibility, they can also hinder employee productivity. We conducted an exploratory study of four agile software development teams. Our analysis identified (1) programming-related work impediments, (2) interaction-related interruptions, and (3) interruptions imposed by the external environment, which were managed by improved information retrieval and reduced team dependencies. © 2021 Project Management Institute, Inc.
+Author keywords: agile information systems development; agile software development; interruptions; IT project management; teams
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Project Management Journal
+Year: 2021
+EID: 2-s2.0-85101988043
+DOI: 10.1177/8756972821991365
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

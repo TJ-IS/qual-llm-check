@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85091749747"
+title: "Collaborating AI and human experts in the maintenance domain"
+authors: "Illankoon P.; Tretten P."
+year: "2021"
+journal: "AI and Society"
+doi: "10.1007/s00146-020-01076-x"
+---
+# Scopus title-abstract-keyword metadata
+Title: Collaborating AI and human experts in the maintenance domain
+Abstract: Maintenance decision errors can result in very costly problems. The 4th industrial revolution has given new opportunities for the development of and use of intelligent decision support systems. With these technological advancements, key concerns focus on gaining a better understanding of the linkage between the technicians’ knowledge and the intelligent decision support systems. The research reported in this study has two primary objectives. (1) To propose a theoretical model that links technicians’ knowledge and intelligent decision support systems, and (2) to present a use case how to apply the theoretical model. The foundation of the new model builds upon two main streams of study in the decision support literature: “distribution” of knowledge among different agents, and “collaboration” of knowledge for reaching a shared goal. This study resulted in the identification of two main gaps: firstly, there must be a greater focus upon the technicians’ knowledge; secondly, technicians need assistance to maintain their focus on the big picture. We used the cognitive fit theory, and the theory of distributed situation awareness to propose the new theoretical model called “distributed collaborative awareness model.” The model considers both explicit and implicit knowledge and accommodates the dynamic challenges involved in operational level maintenance. As an application of this model, we identify and recommend some technological developments required in augmented reality based maintenance decision support. © 2020, The Author(s).
+Author keywords: Augmented reality; Collaboration; Decision support; Industry 4.0; Maintenance; Situation awareness
+Index keywords: Artificial intelligence; Augmented reality; Maintenance; Cognitive fit theory; Collaborative awareness model; Industrial revolutions; Intelligent decision support systems; Maintenance decisions; Technological advancement; Technological development; Theoretical modeling; Decision support systems
+Document type: Article
+Conference: 
+Source title: AI and Society
+Year: 2021
+EID: 2-s2.0-85091749747
+DOI: 10.1007/s00146-020-01076-x
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

@@ -1,0 +1,1517 @@
+{
+  "record_id": "28478",
+  "source_file": "28478_2022_algorithmic-assortative-matching-on-a-digital-social-medium.md",
+  "title": "Algorithmic Assortative Matching on a Digital Social Medium",
+  "authors": "Kristian López Vargas; Julian Runge; Ruizhi Zhang",
+  "year": "2022",
+  "journal": "Information Systems Research",
+  "doi": "10.1287/isre.2022.1135",
+  "fulltext_chars": 105830,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "recommendation_search_and_matching",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "digital_platform_social_media_and_crowdfunding",
+  "stage": "isr_micro",
+  "analysis_version": "ais-basket-writing-logic-isr-micro-v1",
+  "prompt_fingerprint": "8c6c7f01ed07488b679bb551a4b5a1b2a1d4c366f500bf896d100d299a33f8e2",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T07:01:47.643427+00:00",
+  "verified_macro_scaffold_cn": "全文采用“现实问题—理论定位—制品构建—离线预评—田野实验—主效应—机制—贡献”的递进结构。摘要先给freemium数字环境与早期社交体验的重要性，再预告机器学习类聚匹配系统、田野实验、净正向结果、低端匹配受损和社交机制。引言从前两段的经济背景与用户异质性导入匹配决策，第三段给出研究问题与正类聚系统，第四、五段预告主结果与机制，第六段声明三大贡献与伦理边界，第七段给路线图。文献综述分为类聚匹配理论（Becker、Kremer、实验室公共品、Hitsch、Ahmadpoor-Jones）、freemium社交与同伴效应、CLV预测三支。环境部分说明游戏制度、随机团队列表和近似随机选择。匹配系统分团队分类、用户分类和实现，并用离线PSM预评。实验设计采用三天开关六周时间式设计，并列出5个结果变量和H1–H10假设。结果部分先报告用户层主回归（表2），再报告团队层主回归（表3），随后用CES生产函数估计超模性（表4）和社交评分/中介分析（表5）。结论把结果升级为类聚匹配理论、freemium货币化和社交媒体极化的贡献，并划出设计意义与公平性边界。",
+  "abstract_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Abstract P1 S1",
+      "paraphrase_cn": "人类越来越依赖手机app等结构化数字环境进行互动和生活。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "开篇把研究对象放入数字社会的大背景，说明论文不是纯算法或纯营销问题。",
+      "inherits_from_previous_cn": "无。",
+      "changes_argument_state_cn": "建立一个宏观场景：人类生活的数字化。",
+      "sets_up_next_cn": "为freemium定价和社交体验的重要性提供背景。",
+      "failure_if_removed_cn": "没有数字化生活的前提，freemium和社交app的背景会悬空。",
+      "evidence_pointer": "Abstract P1 S1"
+    },
+    {
+      "order": 2,
+      "locator": "Abstract P1 S2",
+      "paraphrase_cn": "多数数字环境采用freemium定价以促进采纳和网络效应。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "将研究对象收窄到freemium定价的数字产品，为后文付费与社交行为设背景。",
+      "inherits_from_previous_cn": "承接数字环境普遍化。",
+      "changes_argument_state_cn": "提出freemium是主要商业模式。",
+      "sets_up_next_cn": "为引入“早期社交体验影响长期行为”提供经济制度背景。",
+      "failure_if_removed_cn": "freemium这个关键制度假设缺失，后文对零进入门槛和付费转化的强调无根。",
+      "evidence_pointer": "Abstract P1 S2"
+    },
+    {
+      "order": 3,
+      "locator": "Abstract P1 S3",
+      "paraphrase_cn": "在这些环境中，用户早期社交互动与体验往往显著影响其长期行为。",
+      "move_code": "PRACTICAL_STAKES",
+      "statement_status": "prior_literature",
+      "why_here_cn": "建立“早期匹配”这一管理决策的理论重要性。",
+      "inherits_from_previous_cn": "freemium环境普遍存在且依赖网络效应。",
+      "changes_argument_state_cn": "把论文问题聚焦到刚进入数字社区的用户匹配。",
+      "sets_up_next_cn": "为算法匹配系统的研究对象做铺垫。",
+      "failure_if_removed_cn": "失去“早期体验重要”的论点，后续为何引入新用户匹配干预缺少动因。",
+      "evidence_pointer": "Abstract P1 S3"
+    },
+    {
+      "order": 4,
+      "locator": "Abstract P2 S1",
+      "paraphrase_cn": "在此背景下，研究一个把新用户以类聚方式匹配到既有社区的算法系统的影响。",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "摘要中心位置直接声明研究问题。",
+      "inherits_from_previous_cn": "早期社交体验重要。",
+      "changes_argument_state_cn": "从一般背景转向本文的具体干预对象。",
+      "sets_up_next_cn": "需要描述该系统的设计。",
+      "failure_if_removed_cn": "摘要失去问题句。",
+      "evidence_pointer": "Abstract P2 S1"
+    },
+    {
+      "order": 5,
+      "locator": "Abstract P2 S2",
+      "paraphrase_cn": "设计一个机器学习匹配系统，识别高预期价值用户，并给他们加入高活跃、高消费团队的选择。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "让读者知道干预的具体形态：不是强制分配而是推荐选择。",
+      "inherits_from_previous_cn": "研究算法类聚匹配问题。",
+      "changes_argument_state_cn": "从问题转向制品。",
+      "sets_up_next_cn": "为实验部署和效果评估做铺垫。",
+      "failure_if_removed_cn": "读者无法知道被检验的算法是什么。",
+      "evidence_pointer": "Abstract P2 S2"
+    },
+    {
+      "order": 6,
+      "locator": "Abstract P2 S3",
+      "paraphrase_cn": "在数字社交游戏中实验部署该系统，发现其显著提高用户参与、消费和社交化。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "empirical_result",
+      "why_here_cn": "用一句话交代方法与核心结果。",
+      "inherits_from_previous_cn": "系统设计完成。",
+      "changes_argument_state_cn": "从设计预告进入实证结论。",
+      "sets_up_next_cn": "需要限定结果边界和机制。",
+      "failure_if_removed_cn": "摘要没有核心发现。",
+      "evidence_pointer": "Abstract P2 S3"
+    },
+    {
+      "order": 7,
+      "locator": "Abstract P3 S1",
+      "paraphrase_cn": "该发现对于更活跃的社区和总体成立，但匹配到低活跃新用户的低活跃团队受到负面冲击，环境总体更隔离。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "防止把平均净效应误读为所有群体都受益。",
+      "inherits_from_previous_cn": "总体正向结果。",
+      "changes_argument_state_cn": "引入异质性和负外部性。",
+      "sets_up_next_cn": "为摘要最后一句的机制和结论段的极化讨论铺垫。",
+      "failure_if_removed_cn": "摘要会显得过于正面，且无法支撑后续极化贡献。",
+      "evidence_pointer": "Abstract P3 S1"
+    },
+    {
+      "order": 8,
+      "locator": "Abstract P3 S2",
+      "paraphrase_cn": "作者认为群体中的社交体验与社交行为可能是匹配系统影响结果的机制。",
+      "move_code": "MECHANISM",
+      "statement_status": "author_inference",
+      "why_here_cn": "提前给出机制主张，引导读者期待正文中的中介证据。",
+      "inherits_from_previous_cn": "正向与负向结果并存。",
+      "changes_argument_state_cn": "从“是否有效”转向“为什么有效”。",
+      "sets_up_next_cn": "为正文中的生产函数与中介分析设置预期。",
+      "failure_if_removed_cn": "机制贡献在摘要中缺失。",
+      "evidence_pointer": "Abstract P3 S2"
+    }
+  ],
+  "introduction_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Introduction P1 S1-S3",
+      "paraphrase_cn": "人类越来越多地在数字环境中生活，移动设备占清醒时间20%，2020年app下载与支出规模巨大。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "用宏观统计数据建立数字经济的重要性。",
+      "inherits_from_previous_cn": "摘要背景的展开。",
+      "changes_argument_state_cn": "设定研究所在的产业场景。",
+      "sets_up_next_cn": "为freemium定价模式的引入提供规模语境。",
+      "failure_if_removed_cn": "引言缺少外在重要性。",
+      "evidence_pointer": "Introduction P1 S1-S3"
+    },
+    {
+      "order": 2,
+      "locator": "Introduction P1 S4-S5",
+      "paraphrase_cn": "freemium定价是重要驱动：app免费下载，靠内购和广告盈利。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "引入全文的制度背景。",
+      "inherits_from_previous_cn": "app经济规模。",
+      "changes_argument_state_cn": "确定研究对象是freemium数字产品。",
+      "sets_up_next_cn": "为社交功能与收入的关系做铺垫。",
+      "failure_if_removed_cn": "freemium制度不出现，论文无法解释零门槛和付费转化。",
+      "evidence_pointer": "Introduction P1 S4-S5"
+    },
+    {
+      "order": 3,
+      "locator": "Introduction P1 S6-S7",
+      "paraphrase_cn": "这些app提供大量社交功能；社交和游戏app占据收入和时间的大部分。",
+      "move_code": "CONTEXT",
+      "statement_status": "fact",
+      "why_here_cn": "把数字产品收窄到社交属性强的app。",
+      "inherits_from_previous_cn": "freemium商业模式。",
+      "changes_argument_state_cn": "指出社交功能是重要经济变量。",
+      "sets_up_next_cn": "为文献中的社交体验与收入关系提供依据。",
+      "failure_if_removed_cn": "后文社交机制的重要性缺少产业事实支撑。",
+      "evidence_pointer": "Introduction P1 S6-S7"
+    },
+    {
+      "order": 4,
+      "locator": "Introduction P1 S8",
+      "paraphrase_cn": "已有文献确认在在线freemium环境中社交体验对参与和收入至关重要。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "说明本研究的现实问题已有学术基础。",
+      "inherits_from_previous_cn": "社交app的规模和收益。",
+      "changes_argument_state_cn": "把事实问题转成文献可对话的问题。",
+      "sets_up_next_cn": "为第二段讨论匹配如何影响社交体验做铺垫。",
+      "failure_if_removed_cn": "社交—收入关系缺少文献锚点。",
+      "evidence_pointer": "Introduction P1 S8"
+    },
+    {
+      "order": 5,
+      "locator": "Introduction P2 S1-S3",
+      "paraphrase_cn": "freemium没有进入门槛，大量用户涌入，用户依据第一印象决定去留，只有少数留下，短期留存极低。",
+      "move_code": "PHENOMENON",
+      "statement_status": "fact",
+      "why_here_cn": "描述企业必须面对的关键经验现象。",
+      "inherits_from_previous_cn": "freemium定价和无障碍采纳。",
+      "changes_argument_state_cn": "引入用户异质性和流失问题。",
+      "sets_up_next_cn": "引出“如何匹配新用户”是重要管理决策。",
+      "failure_if_removed_cn": "匹配决策的紧迫性消失。",
+      "evidence_pointer": "Introduction P2 S1-S3"
+    },
+    {
+      "order": 6,
+      "locator": "Introduction P2 S4-S5",
+      "paraphrase_cn": "面对大量异质用户，企业如何把用户匹配进既有社区以最大化参与、留存、社区健康和消费，是核心决策，且取决于用户与社区的互补或替代关系。",
+      "move_code": "PRACTICAL_STAKES",
+      "statement_status": "author_inference",
+      "why_here_cn": "把现象转化为管理决策变量。",
+      "inherits_from_previous_cn": "低留存和高异质性。",
+      "changes_argument_state_cn": "从描述转向决策与机制。",
+      "sets_up_next_cn": "为正向/负向类聚方向问题做铺垫。",
+      "failure_if_removed_cn": "研究问题失去操作意义。",
+      "evidence_pointer": "Introduction P2 S4-S5"
+    },
+    {
+      "order": 7,
+      "locator": "Introduction P2 S6-S7",
+      "paraphrase_cn": "机制决定应采用正向还是负向类聚；事前把高价值用户放进高或低活跃社区都可能有效，因为两者都可能产生同伴效应。",
+      "move_code": "MECHANISM",
+      "statement_status": "author_inference",
+      "why_here_cn": "明确指出事前不确定性，为实证比较制造理论张力。",
+      "inherits_from_previous_cn": "互补性/替代性决定匹配方向。",
+      "changes_argument_state_cn": "论文从“需要决策”推进到“方向未知”。",
+      "sets_up_next_cn": "为第三段研究目的和设计选择做铺垫。",
+      "failure_if_removed_cn": "论文只剩“提高匹配质量”而无方向对比，新颖性降低。",
+      "evidence_pointer": "Introduction P2 S6-S7"
+    },
+    {
+      "order": 8,
+      "locator": "Introduction P3 S1",
+      "paraphrase_cn": "本文核心是研究两种匹配方法的相对优劣，并理解用户为企业共同创造价值的机制。",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "statement_status": "author_inference",
+      "why_here_cn": "在引言中明确研究问题。",
+      "inherits_from_previous_cn": "事前两种方向皆可。",
+      "changes_argument_state_cn": "把不确定性问题转为研究目标。",
+      "sets_up_next_cn": "需要说明本研究选择了哪种方向。",
+      "failure_if_removed_cn": "全文失去中心问题。",
+      "evidence_pointer": "Introduction P3 S1"
+    },
+    {
+      "order": 9,
+      "locator": "Introduction P3 S2",
+      "paraphrase_cn": "基于对研究环境的初步分析，发现环境具有潜在显著互补性。",
+      "move_code": "DESIGN_RATIONALE",
+      "statement_status": "empirical_result",
+      "why_here_cn": "为选择正向类聚匹配提供经验前提。",
+      "inherits_from_previous_cn": "研究问题需要方向判断。",
+      "changes_argument_state_cn": "把事前未知收窄为“环境偏互补”。",
+      "sets_up_next_cn": "为正向类聚系统设计做依据。",
+      "failure_if_removed_cn": "算法方向选择缺乏依据。",
+      "evidence_pointer": "Introduction P3 S2"
+    },
+    {
+      "order": 10,
+      "locator": "Introduction P3 S3",
+      "paraphrase_cn": "因此设计了分析驱动的系统，促进新用户与既有社区的正向类聚匹配。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "表明本文不是纯研究仿真，而是构建可部署系统。",
+      "inherits_from_previous_cn": "初步互补性证据。",
+      "changes_argument_state_cn": "从“比较方向”进入“构建制品”。",
+      "sets_up_next_cn": "为田野实验部署做铺垫。",
+      "failure_if_removed_cn": "制品与实验主线断裂。",
+      "evidence_pointer": "Introduction P3 S3"
+    },
+    {
+      "order": 11,
+      "locator": "Introduction P3 S4",
+      "paraphrase_cn": "将该系统放入社交游戏app的大规模田野实验，估计因果效应并刻画机制。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "method_decision",
+      "why_here_cn": "预告实证策略与双重目标：效应和机制。",
+      "inherits_from_previous_cn": "系统已构建。",
+      "changes_argument_state_cn": "从设计转向因果识别计划。",
+      "sets_up_next_cn": "为第四段结果预告做铺垫。",
+      "failure_if_removed_cn": "不知道论文如何检验系统。",
+      "evidence_pointer": "Introduction P3 S4"
+    },
+    {
+      "order": 12,
+      "locator": "Introduction P4 S1",
+      "paraphrase_cn": "田野实验表明正向类聚匹配系统对参与和其他产出有净正向影响。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "在引言主体给出核心发现。",
+      "inherits_from_previous_cn": "实验部署。",
+      "changes_argument_state_cn": "结果回应研究问题。",
+      "sets_up_next_cn": "为具体用户/团队效应做展开。",
+      "failure_if_removed_cn": "引言缺少主要发现。",
+      "evidence_pointer": "Introduction P4 S1"
+    },
+    {
+      "order": 13,
+      "locator": "Introduction P4 S2",
+      "paraphrase_cn": "加入活跃社区的新用户表现出更高的游玩意愿、更长留存和更多支出。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出用户层面的正面机制。",
+      "inherits_from_previous_cn": "净正向结果。",
+      "changes_argument_state_cn": "把总体结果拆成用户侧效果。",
+      "sets_up_next_cn": "为团队侧结果做对照。",
+      "failure_if_removed_cn": "用户层面证据缺失。",
+      "evidence_pointer": "Introduction P4 S2"
+    },
+    {
+      "order": 14,
+      "locator": "Introduction P4 S3",
+      "paraphrase_cn": "匹配到高质量新用户的团队获得正向效应，而接受低质量新用户的低质量团队受到负面效应。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "展示异质性和负外部性。",
+      "inherits_from_previous_cn": "用户层面效应。",
+      "changes_argument_state_cn": "结果不再只有正面。",
+      "sets_up_next_cn": "为净效应和极化讨论做铺垫。",
+      "failure_if_removed_cn": "无法解释为何平均净效应仍为正。",
+      "evidence_pointer": "Introduction P4 S3"
+    },
+    {
+      "order": 15,
+      "locator": "Introduction P4 S4",
+      "paraphrase_cn": "在总体团队层面，把一个新玩家从随机匹配移到类聚匹配的净效应为正。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出文章最重要的政策相关结论。",
+      "inherits_from_previous_cn": "正负效应并存。",
+      "changes_argument_state_cn": "从平均净效应回答研究问题。",
+      "sets_up_next_cn": "为进一步的机制解释制造需要。",
+      "failure_if_removed_cn": "论文没有可直接用于管理决策的净效应表述。",
+      "evidence_pointer": "Introduction P4 S4"
+    },
+    {
+      "order": 16,
+      "locator": "Introduction P5 S1",
+      "paraphrase_cn": "系统产生净正效应是因为生产技术具有超模性，且超模性主要由团队层面递增规模报酬驱动。",
+      "move_code": "MECHANISM",
+      "statement_status": "empirical_result",
+      "why_here_cn": "将“有效”升级为“为何有效”。",
+      "inherits_from_previous_cn": "净正效应。",
+      "changes_argument_state_cn": "引入生产技术机制。",
+      "sets_up_next_cn": "为正文CES生产函数估计做预告。",
+      "failure_if_removed_cn": "机制贡献从引言消失。",
+      "evidence_pointer": "Introduction P5 S1"
+    },
+    {
+      "order": 17,
+      "locator": "Introduction P5 S2",
+      "paraphrase_cn": "递增规模报酬在freemium环境中特别有价值，因为零进入门槛带来更大用户群和团队。",
+      "move_code": "MECHANISM",
+      "statement_status": "author_inference",
+      "why_here_cn": "把抽象生产参数连接到freemium制度优势。",
+      "inherits_from_previous_cn": "团队层面的规模报酬。",
+      "changes_argument_state_cn": "机制获得制度意义。",
+      "sets_up_next_cn": "为freemium货币化贡献做铺垫。",
+      "failure_if_removed_cn": "freemium独特性的解释缺失。",
+      "evidence_pointer": "Introduction P5 S2"
+    },
+    {
+      "order": 18,
+      "locator": "Introduction P5 S3-S4",
+      "paraphrase_cn": "社交行为（消息）在简约式中效应最强，其超模性也更强；仅按社交分匹配时各参与指标均正向。",
+      "move_code": "MECHANISM",
+      "statement_status": "empirical_result",
+      "why_here_cn": "把机制从技术超模性进一步收窄到社交。",
+      "inherits_from_previous_cn": "超模性存在。",
+      "changes_argument_state_cn": "指出社交是最突出的产出。",
+      "sets_up_next_cn": "为第6.2.2节社交评分和中介分析做铺垫。",
+      "failure_if_removed_cn": "社交机制从引言缺失。",
+      "evidence_pointer": "Introduction P5 S3-S4"
+    },
+    {
+      "order": 19,
+      "locator": "Introduction P5 S5-S6",
+      "paraphrase_cn": "中介分析显示消息确实是中介，作者认为社交化作为中间结果在传递系统对其他结果的影响。",
+      "move_code": "MECHANISM",
+      "statement_status": "empirical_result",
+      "why_here_cn": "用因果中介证据强化“社交是渠道”的主张。",
+      "inherits_from_previous_cn": "社交评分结果。",
+      "changes_argument_state_cn": "从相关转向中介机制。",
+      "sets_up_next_cn": "为结论中的机制贡献提供支撑。",
+      "failure_if_removed_cn": "社交机制缺少统计支撑。",
+      "evidence_pointer": "Introduction P5 S5-S6"
+    },
+    {
+      "order": 20,
+      "locator": "Introduction P6 S1",
+      "paraphrase_cn": "第一项贡献是刻画freemium货币化中的生产和同伴效应，并用田野实验识别因果效应。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把结果嵌回freemium文献。",
+      "inherits_from_previous_cn": "全部实证结果。",
+      "changes_argument_state_cn": "开始声明贡献。",
+      "sets_up_next_cn": "为第二、三贡献做并列。",
+      "failure_if_removed_cn": "freemium方向贡献缺失。",
+      "evidence_pointer": "Introduction P6 S1"
+    },
+    {
+      "order": 21,
+      "locator": "Introduction P6 S2",
+      "paraphrase_cn": "第二项贡献是扩展类聚匹配文献至用户—群体匹配，并在真实数字环境提供首个外生类聚变异。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "建立与Hitsch等用户—用户匹配的差异。",
+      "inherits_from_previous_cn": "第一贡献。",
+      "changes_argument_state_cn": "把领域从freemium扩展到匹配理论。",
+      "sets_up_next_cn": "为第三项社交媒体极化贡献铺垫。",
+      "failure_if_removed_cn": "匹配理论贡献缺失。",
+      "evidence_pointer": "Introduction P6 S2"
+    },
+    {
+      "order": 22,
+      "locator": "Introduction P6 S3",
+      "paraphrase_cn": "第三项贡献是说明算法隐性促成类聚可加剧社交媒体极化。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把结果连接到更广泛社会问题。",
+      "inherits_from_previous_cn": "低端匹配受损结果。",
+      "changes_argument_state_cn": "研究边界从单app扩展到社交媒体。",
+      "sets_up_next_cn": "为伦理讨论做铺垫。",
+      "failure_if_removed_cn": "论文的社会与伦理意义减弱。",
+      "evidence_pointer": "Introduction P6 S3"
+    },
+    {
+      "order": 23,
+      "locator": "Introduction P6 S4-S5",
+      "paraphrase_cn": "对数字市场设计有相关性：算法类聚能提高整体参与和利润，但对边缘用户有害。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把技术主张与管理意义、负面外部性放在一起。",
+      "inherits_from_previous_cn": "三项贡献。",
+      "changes_argument_state_cn": "将贡献限定为有条件。",
+      "sets_up_next_cn": "为结论中的公平性讨论做伏笔。",
+      "failure_if_removed_cn": "读者可能把文献贡献误读为无条件正面。",
+      "evidence_pointer": "Introduction P6 S4-S5"
+    },
+    {
+      "order": 24,
+      "locator": "Introduction P6 S6",
+      "paraphrase_cn": "作者认为上述结果引发对私人利润中心式管理及算法透明度的伦理担忧。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "在引言结尾给出规范性视角。",
+      "inherits_from_previous_cn": "边缘用户受损。",
+      "changes_argument_state_cn": "把技术贡献转成社会警示。",
+      "sets_up_next_cn": "为结论扩展的伦理讨论做铺垫。",
+      "failure_if_removed_cn": "伦理动机消失。",
+      "evidence_pointer": "Introduction P6 S6"
+    },
+    {
+      "order": 25,
+      "locator": "Introduction P7 S1",
+      "paraphrase_cn": "介绍后文结构：文献、环境、系统、实验设计、结果与机制、结论。",
+      "move_code": "STUDY_OVERVIEW",
+      "statement_status": "author_inference",
+      "why_here_cn": "给读者路线图。",
+      "inherits_from_previous_cn": "全文框架。",
+      "changes_argument_state_cn": "结束引言并转向正文组织。",
+      "sets_up_next_cn": "引出第2节文献综述。",
+      "failure_if_removed_cn": "读者对后续章节的顺序缺乏预期。",
+      "evidence_pointer": "Introduction P7 S1"
+    }
+  ],
+  "introduction_paragraph_map": [
+    {
+      "paragraph": "Introduction P1",
+      "opening_move_cn": "用移动设备时间、下载和支出数据打开宏观数字经济图景。",
+      "development_move_cn": "依次收窄到freemium定价，再收窄到社交/游戏类app的重要性。",
+      "pivot_move_cn": "在段尾引用文献，把产业事实转成“社交体验影响参与和收入”的学术判断。",
+      "closing_move_cn": "制造第二段对“如何影响新用户去留”的需求。",
+      "paragraph_job_cn": "建立freemium社交app是重要研究对象。"
+    },
+    {
+      "paragraph": "Introduction P2",
+      "opening_move_cn": "用freemium零门槛、低留存和高异质性描述平台困境。",
+      "development_move_cn": "从用户去留推进到企业的核心匹配决策。",
+      "pivot_move_cn": "把决策依据转向互补性/替代性的机制，说明正负类聚事前皆可能。",
+      "closing_move_cn": "制造“需要实证比较两种方向”的张力。",
+      "paragraph_job_cn": "把问题定位为匹配方向与管理决策问题。"
+    },
+    {
+      "paragraph": "Introduction P3",
+      "opening_move_cn": "直接声明研究目的：比较两条路线并理解价值共创机制。",
+      "development_move_cn": "用初步分析把环境判断为偏互补。",
+      "pivot_move_cn": "由此转向分析驱动的正向类聚系统。",
+      "closing_move_cn": "以大型田野实验预告因果识别和机制刻画。",
+      "paragraph_job_cn": "给出研究问题、系统方向与实证策略。"
+    },
+    {
+      "paragraph": "Introduction P4",
+      "opening_move_cn": "第一句给出净正向主结论。",
+      "development_move_cn": "逐层展开用户正面、团队正负效应。",
+      "pivot_move_cn": "在段末点出“低质量团队受损”，使结果复杂化。",
+      "closing_move_cn": "以团队净效应为正收束，为机制解释制造需要。",
+      "paragraph_job_cn": "预告田野实验主结果与异质性。"
+    },
+    {
+      "paragraph": "Introduction P5",
+      "opening_move_cn": "从净正效应跳到生产技术解释。",
+      "development_move_cn": "先讲超模性和递增规模报酬，再讲freemium制度强化规模报酬，最后收窄到社交行为。",
+      "pivot_move_cn": "把“技术超模”转为“社交是中个渠道”。",
+      "closing_move_cn": "以社交作为中介收尾，引出机制证据。",
+      "paragraph_job_cn": "预告技术机制和社交机制。"
+    },
+    {
+      "paragraph": "Introduction P6",
+      "opening_move_cn": "直接说“贡献是两方面的”，但实际并列出三类文献贡献。",
+      "development_move_cn": "依次给出freemium货币化、类聚匹配理论、社交媒体生产消费三支贡献。",
+      "pivot_move_cn": "从学术贡献转到实质层面的数字市场设计相关性。",
+      "closing_move_cn": "用“边缘用户受损”和伦理担忧收束。",
+      "paragraph_job_cn": "为论文做贡献声明并预告公平性边界。"
+    },
+    {
+      "paragraph": "Introduction P7",
+      "opening_move_cn": "一句章节路线图。",
+      "development_move_cn": "列举各节主题和术语说明。",
+      "pivot_move_cn": "无实质转折。",
+      "closing_move_cn": "说明正文术语互换。",
+      "paragraph_job_cn": "导航全文。"
+    }
+  ],
+  "theory_to_design_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Section 2 P1 S1-S5",
+      "paraphrase_cn": "Becker提出类聚匹配在效用可转移且技术互补时有效率；Kremer等扩展至多工人和劳动力市场。",
+      "move_code": "THEORY_PROPOSITION",
+      "statement_status": "theory_claim",
+      "why_here_cn": "为正向类聚匹配提供经济学理论起点。",
+      "inherits_from_previous_cn": "引言中“互补性决定匹配方向”。",
+      "changes_argument_state_cn": "确立“互补技术下正向类聚有效率”的理论前提。",
+      "sets_up_next_cn": "为实验室和数字平台的类聚经验证据做铺垫。",
+      "failure_if_removed_cn": "类聚匹配作为理论问题不成立。",
+      "evidence_pointer": "Section 2 P1"
+    },
+    {
+      "order": 2,
+      "locator": "Section 2 P2 S1-S4",
+      "paraphrase_cn": "公共品实验显示类聚匹配提高平均贡献，机制是条件合作者较少受搭便车者打击。",
+      "move_code": "MECHANISM",
+      "statement_status": "prior_literature",
+      "why_here_cn": "给出类聚影响行为的微观人际机制。",
+      "inherits_from_previous_cn": "Becker/Kremer理论。",
+      "changes_argument_state_cn": "从“有效率”推进到“为什么更愿意贡献”。",
+      "sets_up_next_cn": "为本文保留用户自由选择的系统设计提供理由。",
+      "failure_if_removed_cn": "缺少用户心理机制解释。",
+      "evidence_pointer": "Section 2 P2"
+    },
+    {
+      "order": 3,
+      "locator": "Section 2 P3 S1-S5",
+      "paraphrase_cn": "数字平台上的类聚研究稀缺；例外是Hitsch等的在线约会用户—用户匹配，以及Ahmadpoor-Jones的团队生产技术分解框架。",
+      "move_code": "GAP",
+      "statement_status": "prior_literature",
+      "why_here_cn": "指出用户—群体匹配与数字平台外生变异是空白。",
+      "inherits_from_previous_cn": "前两段的类聚理论与实验。",
+      "changes_argument_state_cn": "把理论文献定位到数字环境缺口。",
+      "sets_up_next_cn": "为第四段本文的定位和CES估计方法做铺垫。",
+      "failure_if_removed_cn": "无法解释本文相对Hitsch和Ahmadpoor-Jones的贡献。",
+      "evidence_pointer": "Section 2 P3"
+    },
+    {
+      "order": 4,
+      "locator": "Section 2 P4 S1-S3",
+      "paraphrase_cn": "本文通过隐性操纵推荐团队列表研究用户—群体匹配，保留用户自由选择，固定搜索摩擦，并用Ahmadpoor-Jones方法刻画技术。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "author_inference",
+      "why_here_cn": "在文献综述中直接说明实验设计的理论定位。",
+      "inherits_from_previous_cn": "Hitsch与Carrell的方法局限。",
+      "changes_argument_state_cn": "从文献缺口转向本文方案。",
+      "sets_up_next_cn": "为第四节的推荐列表设计做铺垫。",
+      "failure_if_removed_cn": "用户—群体匹配的新颖性缺失。",
+      "evidence_pointer": "Section 2 P4"
+    },
+    {
+      "order": 5,
+      "locator": "Section 2 P5-P7",
+      "paraphrase_cn": "freemium社交文献证明社交参与提升付费、付费也提升社交参与，但多结果同时作用如何形成整体企业相关产出仍不清楚。",
+      "move_code": "GAP",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为本文“总体净效应”视角提供第二个缺口。",
+      "inherits_from_previous_cn": "freemium数字环境分支的引入。",
+      "changes_argument_state_cn": "把单个同伴效应升级为多结果净效应问题。",
+      "sets_up_next_cn": "为实验同时测量收入、消息、任务、留存等结果做铺垫。",
+      "failure_if_removed_cn": "多结果净效应贡献无处安放。",
+      "evidence_pointer": "Section 2 P5-P7"
+    },
+    {
+      "order": 6,
+      "locator": "Section 2 P8",
+      "paraphrase_cn": "CLV预测从购买历史转向RF/XGBoost等机器学习方法，适合freemium中的非购买行为预测。",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "statement_status": "prior_literature",
+      "why_here_cn": "为用户分类器提供技术文献依据。",
+      "inherits_from_previous_cn": "freemium用户异质性。",
+      "changes_argument_state_cn": "为第4.2节的XGBoost+SMOTE选择做铺垫。",
+      "sets_up_next_cn": "进入环境与制品设计。",
+      "failure_if_removed_cn": "机器学习分类器似乎是突降。",
+      "evidence_pointer": "Section 2 P8"
+    },
+    {
+      "order": 7,
+      "locator": "Section 3 末段",
+      "paraphrase_cn": "尽管环境具有技能和付费意愿的互补性，平台不主动促进正向类聚，团队信息分散且搜索成本高，大多数用户依赖随机推荐页，因此新用户选择近似随机。",
+      "move_code": "DESIGN_REQUIREMENT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "证明当前基线是随机匹配，且存在改进空间。",
+      "inherits_from_previous_cn": "环境具有战略互补性。",
+      "changes_argument_state_cn": "把理论需要转成现实设计缺口。",
+      "sets_up_next_cn": "引出匹配系统。",
+      "failure_if_removed_cn": "算法干预没有反事实基线和合理性。",
+      "evidence_pointer": "Section 3 末段"
+    },
+    {
+      "order": 8,
+      "locator": "Section 4 P1-P3",
+      "paraphrase_cn": "初步分析显示环境具有潜在互补性，随机列表导致高搜索成本和低匹配价值，因此设计正向类聚系统；机制分解为用户和团队两个分类问题。",
+      "move_code": "DESIGN_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把理论、环境诊断与制品结构连成一条线。",
+      "inherits_from_previous_cn": "环境随机匹配与互补性。",
+      "changes_argument_state_cn": "设计需求转化为具体分类任务。",
+      "sets_up_next_cn": "为4.1和4.2两个分类模型做铺垫。",
+      "failure_if_removed_cn": "匹配系统无设计依据。",
+      "evidence_pointer": "Section 4 P1-P3"
+    },
+    {
+      "order": 9,
+      "locator": "Section 5.2 H1-H4",
+      "paraphrase_cn": "假设1-2是团队质量正向影响新玩家及团队产出；假设3-4是低质量新玩家进入低活跃团队产生负向影响。",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "statement_status": "theory_claim",
+      "why_here_cn": "把类聚理论和互补性预期转成可检验的个体与团队方向命题。",
+      "inherits_from_previous_cn": "互补性强、高—高匹配有效。",
+      "changes_argument_state_cn": "从设计预期变成统计假设。",
+      "sets_up_next_cn": "为表2和表3的检验做铺垫。",
+      "failure_if_removed_cn": "主回归缺少正式命题对象。",
+      "evidence_pointer": "Section 5.2 H1-H4"
+    },
+    {
+      "order": 10,
+      "locator": "Section 5.2 H5-H6",
+      "paraphrase_cn": "假设5-6是系统对用户和现有团队的整体净效应为正。",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "statement_status": "theory_claim",
+      "why_here_cn": "区分方向效应与总体净效应，避免“局部正”被误当“整体正”。",
+      "inherits_from_previous_cn": "H1-H4的方向性。",
+      "changes_argument_state_cn": "把论文中心问题变成可检验命题。",
+      "sets_up_next_cn": "为组合t检验和净效应行做铺垫。",
+      "failure_if_removed_cn": "核心政策问题没有假设化。",
+      "evidence_pointer": "Section 5.2 H5-H6"
+    },
+    {
+      "order": 11,
+      "locator": "Section 5.2 H7",
+      "paraphrase_cn": "假设7是团队产出生产函数同时具有战略/技术互补性与规模报酬。",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "statement_status": "theory_claim",
+      "why_here_cn": "把净效应的机制归结为生产技术。",
+      "inherits_from_previous_cn": "超模性解释净效应。",
+      "changes_argument_state_cn": "为CES生产函数估计设定目标。",
+      "sets_up_next_cn": "引出表4。",
+      "failure_if_removed_cn": "生产技术机制没有直接命题。",
+      "evidence_pointer": "Section 5.2 H7"
+    },
+    {
+      "order": 12,
+      "locator": "Section 5.2 H8-H10",
+      "paraphrase_cn": "假设8-10依次为高社交团队效应与高活跃团队相当、社交行为效应最强、社交行为中介其他结果。",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "statement_status": "theory_claim",
+      "why_here_cn": "把社交机制拆成可检验的三步。",
+      "inherits_from_previous_cn": "消息在简约式中最强。",
+      "changes_argument_state_cn": "机制从技术转向社交。",
+      "sets_up_next_cn": "引出6.2.2的社交评分与中介分析。",
+      "failure_if_removed_cn": "社交机制没有正式命题。",
+      "evidence_pointer": "Section 5.2 H8-H10"
+    }
+  ],
+  "artifact_rationale_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Section 4 P2",
+      "paraphrase_cn": "系统只改变推荐列表，用户仍自由选择，以保持自我选择和内生群体形成的感知，避免影响团队生产。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "design_decision",
+      "why_here_cn": "解释为什么算法不是直接强制分配。",
+      "inherits_from_previous_cn": "随机列表导致搜索成本高。",
+      "changes_argument_state_cn": "限定干预边界为推荐而非分配。",
+      "sets_up_next_cn": "为6.1.2团队效应识别提供时间分离理由。",
+      "failure_if_removed_cn": "干预的因果解释会被内生移动污染。",
+      "evidence_pointer": "Section 4 P2"
+    },
+    {
+      "order": 2,
+      "locator": "Section 4 P3",
+      "paraphrase_cn": "匹配机制分解为用户分类和团队分类两问题。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把端到端系统拆成可验证组件。",
+      "inherits_from_previous_cn": "正向类聚目标。",
+      "changes_argument_state_cn": "系统可分解为两个可测构念。",
+      "sets_up_next_cn": "为4.1团队分类和4.2用户分类做结构。",
+      "failure_if_removed_cn": "系统黑箱难以验证。",
+      "evidence_pointer": "Section 4 P3"
+    },
+    {
+      "order": 3,
+      "locator": "Section 4.1 P1-P2",
+      "paraphrase_cn": "团队活动分由产品经理经验构造，用五个维度（活跃人数、团队任务、礼物、消息、收入）的14天移动平均几何平均而成。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "说明“高活跃团队”不是主观臆造，而是可操作评分。",
+      "inherits_from_previous_cn": "团队分类问题。",
+      "changes_argument_state_cn": "高活跃具有可计算定义。",
+      "sets_up_next_cn": "为第4.1.3的验证测试做铺垫。",
+      "failure_if_removed_cn": "团队侧分类无操作化。",
+      "evidence_pointer": "Section 4.1 P1-P2"
+    },
+    {
+      "order": 4,
+      "locator": "Section 4.1 P3",
+      "paraphrase_cn": "验证发现top 30%团队捕获至少80%下月收入，因此以30%分位为高活跃阈值。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "为阈值选择提供预测有效性证据。",
+      "inherits_from_previous_cn": "活动评分。",
+      "changes_argument_state_cn": "团队分类有经济依据。",
+      "sets_up_next_cn": "为4.3中高活跃团队空位数作为供给侧约束做铺垫。",
+      "failure_if_removed_cn": "阈值是任意的。",
+      "evidence_pointer": "Section 4.1 P3"
+    },
+    {
+      "order": 5,
+      "locator": "Section 4.1 P4",
+      "paraphrase_cn": "这种方法确保高活跃团队既捕获大部分收入，又满足最低参与和社交行为水平。",
+      "move_code": "DESIGN_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "说明评分不仅抓收入，还抓社交体验。",
+      "inherits_from_previous_cn": "top30%团队。",
+      "changes_argument_state_cn": "团队评分兼顾企业与用户目标。",
+      "sets_up_next_cn": "为后文社交机制检验提供合理性。",
+      "failure_if_removed_cn": "纯收入指标无法支撑社交机制。",
+      "evidence_pointer": "Section 4.1 P4"
+    },
+    {
+      "order": 6,
+      "locator": "Section 4.2 P1-P2",
+      "paraphrase_cn": "用户侧使用监督学习预测CLV，因资格期很早、购买历史近乎为零且类别不平衡，故采用可接受非购买数据的ML并结合SMOTE。",
+      "move_code": "DESIGN_RATIONALE",
+      "statement_status": "design_decision",
+      "why_here_cn": "解释为什么不用传统购买历史模型。",
+      "inherits_from_previous_cn": "用户分类问题。",
+      "changes_argument_state_cn": "为XGBoost和SMOTE的选择提供技术依据。",
+      "sets_up_next_cn": "为4.2的模型比较结果做铺垫。",
+      "failure_if_removed_cn": "模型选择的合理性缺位。",
+      "evidence_pointer": "Section 4.2 P1-P2"
+    },
+    {
+      "order": 7,
+      "locator": "Section 4.2 P3-P4",
+      "paraphrase_cn": "用30天未来付费作为CLV，输入为人口特征与到资格前的行为痕迹；通过五折CV、SMOTE、特征选择和时间独立holdout评估。",
+      "move_code": "METHOD_DECISION",
+      "statement_status": "method_decision",
+      "why_here_cn": "说明预测任务和验证策略。",
+      "inherits_from_previous_cn": "ML+SMOTE的选择。",
+      "changes_argument_state_cn": "分类器有严格评估协议。",
+      "sets_up_next_cn": "为XGBoost的hit rate结果做铺垫。",
+      "failure_if_removed_cn": "分类器性能不可核实。",
+      "evidence_pointer": "Section 4.2 P3-P4"
+    },
+    {
+      "order": 8,
+      "locator": "Section 4.2 P4-S4",
+      "paraphrase_cn": "XGBoost在top 50%预测排名中捕获约80%实际付费者，比随机猜测好60%。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给用户分类器最低性能基准。",
+      "inherits_from_previous_cn": "模型评估。",
+      "changes_argument_state_cn": "用户侧“高价值”识别有实证支持。",
+      "sets_up_next_cn": "为生产部署和实验提供前提。",
+      "failure_if_removed_cn": "用户分类器失去可信度。",
+      "evidence_pointer": "Section 4.2 P4"
+    },
+    {
+      "order": 9,
+      "locator": "Section 4.3 P1-P6",
+      "paraphrase_cn": "生产系统每天按前一日高活跃团队空位供需设定payer阈值，并夜间重训练模型，确保市场出清和适应波动。",
+      "move_code": "DESIGN_FEATURE",
+      "statement_status": "design_decision",
+      "why_here_cn": "把离线模型变成可持续生产系统。",
+      "inherits_from_previous_cn": "两个分类器就绪。",
+      "changes_argument_state_cn": "系统具有动态均衡机制。",
+      "sets_up_next_cn": "为时间式实验的on/off部署提供实现细节。",
+      "failure_if_removed_cn": "系统的实践可行性不足。",
+      "evidence_pointer": "Section 4.3 P1-P6"
+    },
+    {
+      "order": 10,
+      "locator": "Section 4.3 末段",
+      "paraphrase_cn": "上线前用历史数据做倾向得分匹配回归预评，发现likely payer加入高活跃团队显著增加消息与任务参与，预期总体正向。",
+      "move_code": "METHOD_JUSTIFICATION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "为从离线到生产的授权部署提供前置证据。",
+      "inherits_from_previous_cn": "系统实现。",
+      "changes_argument_state_cn": "离线证据支持系统预期效果。",
+      "sets_up_next_cn": "为第5节田野实验授权做铺垫。",
+      "failure_if_removed_cn": "缺少进入实验的伦理/合作方依据。",
+      "evidence_pointer": "Section 4.3 末段"
+    }
+  ],
+  "study_opening_transition_and_closure_map": [
+    {
+      "study_or_phase": "Phase 1: 环境刻画与随机匹配基线",
+      "opening_move_cn": "Section 3开头介绍移动解谜RPG、团队协作和top-100榜单，明确环境代表性。",
+      "closure_or_transition_cn": "末段总结平台不主动类聚、信息分散、新用户选择近似随机，为匹配系统创造前提。",
+      "function_cn": "建立随机匹配反事实基线并说明干预空间。"
+    },
+    {
+      "study_or_phase": "Phase 2: 团队活动分类",
+      "opening_move_cn": "Section 4.1以“利用产品经理制度经验”开启构造活动分。",
+      "closure_or_transition_cn": "以top30%团队捕获80%收入收束，转入用户侧分类。",
+      "function_cn": "给出团队侧高活跃的可操作定义和验证。"
+    },
+    {
+      "study_or_phase": "Phase 3: 用户CLV分类",
+      "opening_move_cn": "Section 4.2以“用户侧用监督学习预测CLV”开启。",
+      "closure_or_transition_cn": "以XGBoost比随机好60%收束，转入生产实现。",
+      "function_cn": "给出用户侧高价值的可验证预测器。"
+    },
+    {
+      "study_or_phase": "Phase 4: 离线政策评估",
+      "opening_move_cn": "Section 4.3末段的开头说“上线前执行离线评估”。",
+      "closure_or_transition_cn": "以“总体预期正向”收束，授权部署实验。",
+      "function_cn": "用低成本历史数据预验证系统效果。"
+    },
+    {
+      "study_or_phase": "Phase 5: 田野实验部署与操纵检验",
+      "opening_move_cn": "Section 5开头基于离线正向结果获得合作方部署授权，采用三天开关六周时间式设计。",
+      "closure_or_transition_cn": "Section 6.1.2用图1/图2说明on期约100% likely payer进入高活跃团队、off期接近随机，形成分离路径。",
+      "function_cn": "证明处理实施成功并提供外生变异。"
+    },
+    {
+      "study_or_phase": "Phase 6: 用户层面主回归",
+      "opening_move_cn": "Section 6.1.1说明新用户on/off期间未知且到达独立，可视为用户级随机。",
+      "closure_or_transition_cn": "以较长时窗结果收束，指出短期社交效应有长期产出后果，转入团队层面。",
+      "function_cn": "在用户层面检验H1、H3、H5、H9。"
+    },
+    {
+      "study_or_phase": "Phase 7: 团队层面主回归",
+      "opening_move_cn": "Section 6.1.2用图1/图2的分离路径开启团队层面分析。",
+      "closure_or_transition_cn": "以新用户转移的净效应t检验约+5%收束，转入机制。",
+      "function_cn": "在团队层面检验H2、H4、H6。"
+    },
+    {
+      "study_or_phase": "Phase 8: 生产技术估计",
+      "opening_move_cn": "Section 6.2.1指出正净效应可能来自规模报酬或技术互补，需要CES生产函数区分。",
+      "closure_or_transition_cn": "以“重组本身是主要来源，技术超模放大收益”收束，转入社交机制。",
+      "function_cn": "检验H7，刻画超模性和规模报酬。"
+    },
+    {
+      "study_or_phase": "Phase 9: 团队社交性机制",
+      "opening_move_cn": "Section 6.2.2以“社交行为可能是中间结果”开启。",
+      "closure_or_transition_cn": "以SEM中介分析显示消息间接效应显著收束，为结论的社交机制主张提供证据。",
+      "function_cn": "检验H8-H10，解释社交为何是核心渠道。"
+    }
+  ],
+  "discussion_and_contribution_sentence_map": [
+    {
+      "order": 1,
+      "locator": "Section 7 P1 S1",
+      "paraphrase_cn": "本研究提供了数字freemium环境中算法类聚匹配的田野实验证据。",
+      "move_code": "RESULT",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "结论第一句回顾全文核心定位。",
+      "inherits_from_previous_cn": "第6节全部结果。",
+      "changes_argument_state_cn": "开始从结果转向总结与贡献。",
+      "sets_up_next_cn": "为系统和方法摘要做铺垫。",
+      "failure_if_removed_cn": "结论缺少总括句。",
+      "evidence_pointer": "Section 7 P1 S1"
+    },
+    {
+      "order": 2,
+      "locator": "Section 7 P1 S2-S4",
+      "paraphrase_cn": "我们开发ML系统分类用户和团队，并按高—高、低—低二元方式类聚匹配，在流行手游中做时间式田野实验。",
+      "move_code": "RESULT",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "简洁回放系统与被检验干预。",
+      "inherits_from_previous_cn": "总括句。",
+      "changes_argument_state_cn": "重申制品的可部署性。",
+      "sets_up_next_cn": "为性能数字和主结果做铺垫。",
+      "failure_if_removed_cn": "读者无法回看系统形态。",
+      "evidence_pointer": "Section 7 P1 S2-S4"
+    },
+    {
+      "order": 3,
+      "locator": "Section 7 P1 S5",
+      "paraphrase_cn": "用户预测模型比随机好60%，团队分类识别出贡献80%未来收入的top30%团队。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "回放分类器性能以证明预测环节可信。",
+      "inherits_from_previous_cn": "系统描述。",
+      "changes_argument_state_cn": "把分类器结果重新列入贡献摘要。",
+      "sets_up_next_cn": "为随后主结果数字做铺垫。",
+      "failure_if_removed_cn": "预测性能贡献在结论中消失。",
+      "evidence_pointer": "Section 7 P1 S5"
+    },
+    {
+      "order": 4,
+      "locator": "Section 7 P2 S1-S3",
+      "paraphrase_cn": "田野实验显示类聚匹配提高团队产出、参与和收入；每新增一个用户团队收入与消息约增5%，任务开始和成功增4.2%与4.7%。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出团队层面核心政策数字。",
+      "inherits_from_previous_cn": "结论总括。",
+      "changes_argument_state_cn": "把机制细节放回可操作结果。",
+      "sets_up_next_cn": "为用户层面结果做对照。",
+      "failure_if_removed_cn": "结论失去主要团队效应数字。",
+      "evidence_pointer": "Section 7 P2 S1-S3"
+    },
+    {
+      "order": 5,
+      "locator": "Section 7 P2 S4-S6",
+      "paraphrase_cn": "用户层面平均玩家所有结果均正向：消息13.2%、任务开始10.1%、任务成功9.2%、收入2.7%、留存0.9%，社交受冲击最大。",
+      "move_code": "RESULT",
+      "statement_status": "empirical_result",
+      "why_here_cn": "给出用户层面关键数字。",
+      "inherits_from_previous_cn": "团队层面结果。",
+      "changes_argument_state_cn": "从团队回到用户并突出社交。",
+      "sets_up_next_cn": "为“结果主要由社交化驱动”做铺垫。",
+      "failure_if_removed_cn": "用户层面贡献缺失。",
+      "evidence_pointer": "Section 7 P2 S4-S6"
+    },
+    {
+      "order": 6,
+      "locator": "Section 7 P3 S1",
+      "paraphrase_cn": "进一步分析表明结果主要由团队成员间社交化增强驱动，且异质性提示更细分类可能更好。",
+      "move_code": "MECHANISM",
+      "statement_status": "empirical_result",
+      "why_here_cn": "把结果归因机制并暗示设计改进。",
+      "inherits_from_previous_cn": "用户层主结果中的消息最强。",
+      "changes_argument_state_cn": "从“什么有效”转到“为什么有效”。",
+      "sets_up_next_cn": "为外推和设计知识做铺垫。",
+      "failure_if_removed_cn": "机制解释从结论缺失。",
+      "evidence_pointer": "Section 7 P3 S1"
+    },
+    {
+      "order": 7,
+      "locator": "Section 7 P3 S2-S3",
+      "paraphrase_cn": "由于环境与app和数字社交媒体有共性，结果可推广到用户通过在线社区协作共创价值的freemium数字产品。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "author_inference",
+      "why_here_cn": "明确外部效度边界。",
+      "inherits_from_previous_cn": "机制与异质性。",
+      "changes_argument_state_cn": "从单一游戏推广到同类产品。",
+      "sets_up_next_cn": "为随后学术贡献和管理含义做铺垫。",
+      "failure_if_removed_cn": "外推没有边界说明。",
+      "evidence_pointer": "Section 7 P3 S2-S3"
+    },
+    {
+      "order": 8,
+      "locator": "Section 7 P4 S1-S2",
+      "paraphrase_cn": "据我们所知，这是数字环境中首个类聚匹配田野实验，扩展了Hitsch等的在线约会用户—用户匹配研究。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "设立对标文献并声明新颖性。",
+      "inherits_from_previous_cn": "前文文献缺口。",
+      "changes_argument_state_cn": "把贡献锚定到匹配理论。",
+      "sets_up_next_cn": "为freemium贡献做并列。",
+      "failure_if_removed_cn": "匹配理论贡献不成立。",
+      "evidence_pointer": "Section 7 P4 S1-S2"
+    },
+    {
+      "order": 9,
+      "locator": "Section 7 P4 S3-S5",
+      "paraphrase_cn": "本研究的差异在于设计算法系统、田野实验、研究用户—团队而非用户—用户匹配。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "用三点差异保护新颖性。",
+      "inherits_from_previous_cn": "第一个贡献句。",
+      "changes_argument_state_cn": "细化学术定位。",
+      "sets_up_next_cn": "为freemium货币化贡献做铺垫。",
+      "failure_if_removed_cn": "与Hitsch的区别不清。",
+      "evidence_pointer": "Section 7 P4 S3-S5"
+    },
+    {
+      "order": 10,
+      "locator": "Section 7 P4 S6-S7",
+      "paraphrase_cn": "研究还通过刻画生产技术和团队生产超模性，贡献于freemium平台货币化文献。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "把CES估计结果转化为理论贡献。",
+      "inherits_from_previous_cn": "生产函数估计。",
+      "changes_argument_state_cn": "从技术估计升级为理论命题。",
+      "sets_up_next_cn": "为管理含义做铺垫。",
+      "failure_if_removed_cn": "freemium理论贡献缺失。",
+      "evidence_pointer": "Section 7 P4 S6-S7"
+    },
+    {
+      "order": 11,
+      "locator": "Section 7 P4 S8-S9",
+      "paraphrase_cn": "管理启示是：企业可用模型识别高价值用户并为其提供个性化社交体验以促进收入。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "给出可操作的管理知识。",
+      "inherits_from_previous_cn": "用户分类器与实验结果。",
+      "changes_argument_state_cn": "从理论回到设计实践。",
+      "sets_up_next_cn": "为负面边界讨论做对照。",
+      "failure_if_removed_cn": "设计贡献缺位。",
+      "evidence_pointer": "Section 7 P4 S8-S9"
+    },
+    {
+      "order": 12,
+      "locator": "Section 7 P5 S1-S4",
+      "paraphrase_cn": "尽管盈利，算法类聚使高低质量团队分离，高质量团队维持并扩张，低质量团队进一步受损。",
+      "move_code": "BOUNDARY_CONDITION",
+      "statement_status": "empirical_result",
+      "why_here_cn": "揭示平均净效应的分配性代价。",
+      "inherits_from_previous_cn": "团队层负效应。",
+      "changes_argument_state_cn": "从正面贡献转向社会风险。",
+      "sets_up_next_cn": "为社交媒体极化贡献做铺垫。",
+      "failure_if_removed_cn": "公平性讨论失去经验基础。",
+      "evidence_pointer": "Section 7 P5 S1-S4"
+    },
+    {
+      "order": 13,
+      "locator": "Section 7 P5 S5-S7",
+      "paraphrase_cn": "这种分离可能导致社区极化，类似算法可能存在于推荐和“你可能认识的人”等机制中。",
+      "move_code": "CONTRIBUTION",
+      "statement_status": "author_inference",
+      "why_here_cn": "把单app结果外推到社交媒体极化。",
+      "inherits_from_previous_cn": "低质团队受损。",
+      "changes_argument_state_cn": "扩展论文的社会意义。",
+      "sets_up_next_cn": "为未来研究和公平性做铺垫。",
+      "failure_if_removed_cn": "极化贡献从结论消失。",
+      "evidence_pointer": "Section 7 P5 S5-S7"
+    },
+    {
+      "order": 14,
+      "locator": "Section 7 P5 S8",
+      "paraphrase_cn": "未来可研究最优类聚程度、其他匹配方式与长期社区凝聚力，并与利润最大化政策对比。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "指出本文未解决的设计优化问题。",
+      "inherits_from_previous_cn": "极化与公平风险。",
+      "changes_argument_state_cn": "从既有证据转向未来研究。",
+      "sets_up_next_cn": "为总结段做准备。",
+      "failure_if_removed_cn": "缺少主动的边界声明。",
+      "evidence_pointer": "Section 7 P5 S8"
+    },
+    {
+      "order": 15,
+      "locator": "Section 7 P6 S1",
+      "paraphrase_cn": "总结：类聚匹配可改善企业结果并留存高价值用户，但对更弱小和边缘用户产生负面效果，导致更高不平等和极化。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "用一句话给出平衡结论。",
+      "inherits_from_previous_cn": "全部贡献与边界。",
+      "changes_argument_state_cn": "完成从技术到福利的升华。",
+      "sets_up_next_cn": "为公平性研究呼吁做铺垫。",
+      "failure_if_removed_cn": "结论失去规范性收尾。",
+      "evidence_pointer": "Section 7 P6 S1"
+    },
+    {
+      "order": 16,
+      "locator": "Section 7 P6 S2-S3",
+      "paraphrase_cn": "这类不平等可能损害更广泛福利，例如在线约会平台的高度类聚算法可能使部分用户找不到伴侣。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "author_inference",
+      "why_here_cn": "用跨领域类比强化伦理关切。",
+      "inherits_from_previous_cn": "负面效应。",
+      "changes_argument_state_cn": "将游戏结果延伸到其他数字市场。",
+      "sets_up_next_cn": "为设计者和政策制定者建议做铺垫。",
+      "failure_if_removed_cn": "伦理警示缺少具体例子。",
+      "evidence_pointer": "Section 7 P6 S2-S3"
+    },
+    {
+      "order": 17,
+      "locator": "Section 7 P6 S4-S5",
+      "paraphrase_cn": "设计师和政策制定者应关注正向类聚系统的私人净收益与弱势用户的潜在成本之间的权衡，并应将ML匹配系统的权衡作为公平性研究优先项。",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "statement_status": "contribution_claim",
+      "why_here_cn": "给出明确的政策建议和未来研究议程。",
+      "inherits_from_previous_cn": "福利权衡。",
+      "changes_argument_state_cn": "把论文连接到公平性ML研究。",
+      "sets_up_next_cn": "全文结束。",
+      "failure_if_removed_cn": "伦理贡献没有行动指向。",
+      "evidence_pointer": "Section 7 P6 S4-S5"
+    }
+  ],
+  "study_accumulation_logic": [
+    {
+      "study_or_phase": "环境刻画与随机匹配基线",
+      "evidence_job_cn": "证明当前基线是随机匹配，且平台有互补性却不主动类聚。",
+      "what_it_establishes_cn": "存在可被算法替代的随机匹配管理决策。",
+      "what_it_cannot_establish_cn": "不能证明类聚匹配有任何因果后果。",
+      "why_next_phase_is_needed_cn": "需要先构建可操作的高/低用户与团队分类。",
+      "transition_wording_function_cn": "把环境诊断转成系统设计需求。"
+    },
+    {
+      "study_or_phase": "团队活动分类",
+      "evidence_job_cn": "为团队侧“高活跃”提供经济上有意义且可验证的定义。",
+      "what_it_establishes_cn": "top30%团队贡献至少80%未来收入，活动分与收入和社交相关。",
+      "what_it_cannot_establish_cn": "不能证明把新用户送入这些团队会产生因果收益。",
+      "why_next_phase_is_needed_cn": "需要用户侧分类器识别谁值得被推荐。",
+      "transition_wording_function_cn": "从团队分类过渡到用户分类。"
+    },
+    {
+      "study_or_phase": "用户CLV预测",
+      "evidence_job_cn": "证明在购买历史缺失时仍能预测高价值用户。",
+      "what_it_establishes_cn": "XGBoost+SMOTE在时间独立holdout上捕获约80%付费者，显著优于随机。",
+      "what_it_cannot_establish_cn": "预测准确不等于匹配干预有效。",
+      "why_next_phase_is_needed_cn": "需要离线政策评估判断政策层面是否值得部署。",
+      "transition_wording_function_cn": "从模型性能过渡到政策评估。"
+    },
+    {
+      "study_or_phase": "离线政策评估",
+      "evidence_job_cn": "用低成本历史数据预验证类聚匹配的预期方向。",
+      "what_it_establishes_cn": "likely payer加入高活跃团队显著增加消息与任务参与，总体预期正向。",
+      "what_it_cannot_establish_cn": "倾向得分无法完全消除自选择性。",
+      "why_next_phase_is_needed_cn": "需要田野实验提供外生变异。",
+      "transition_wording_function_cn": "以离线证据作为生产部署授权依据。"
+    },
+    {
+      "study_or_phase": "田野实验部署与操纵检验",
+      "evidence_job_cn": "证明处理被真正实施并产生分离路径。",
+      "what_it_establishes_cn": "on期近100% likely payer进入高活跃团队，off期接近随机。",
+      "what_it_cannot_establish_cn": "尚不能给出效应大小。",
+      "why_next_phase_is_needed_cn": "操纵成功后才可以做用户和团队层面的因果回归。",
+      "transition_wording_function_cn": "从实施检验过渡到主回归。"
+    },
+    {
+      "study_or_phase": "用户层面主回归",
+      "evidence_job_cn": "在用户层面检验H1、H3、H5、H9。",
+      "what_it_establishes_cn": "平均用户净效应为正，消息最强；unlikely payer在消息和任务开始受损。",
+      "what_it_cannot_establish_cn": "14天窗口不是长期效应，且不能确认对现有团队的净影响。",
+      "why_next_phase_is_needed_cn": "需要团队聚合以确认整体净效应。",
+      "transition_wording_function_cn": "从个体结果过渡到群体结果。"
+    },
+    {
+      "study_or_phase": "团队层面主回归",
+      "evidence_job_cn": "在团队层面检验H2、H4、H6并构造政策相关净效应。",
+      "what_it_establishes_cn": "每新增一个用户净效应约+5%，低质匹配有负效应。",
+      "what_it_cannot_establish_cn": "不能分解效应的来源（行为变化、技术变化、重组）。",
+      "why_next_phase_is_needed_cn": "需要生产函数刻画技术以解释净效应来源。",
+      "transition_wording_function_cn": "从净效应过渡到机制。"
+    },
+    {
+      "study_or_phase": "生产技术估计",
+      "evidence_job_cn": "检验H7并解释为什么重组产生正向净效应。",
+      "what_it_establishes_cn": "团队生产具有超模性，且主要由递增规模报酬驱动；消息的超模性最强。",
+      "what_it_cannot_establish_cn": "不能单独证明社交是中间机制。",
+      "why_next_phase_is_needed_cn": "需要社交评分和中介分析验证社交渠道。",
+      "transition_wording_function_cn": "从生产技术过渡到社交机制。"
+    },
+    {
+      "study_or_phase": "团队社交性机制",
+      "evidence_job_cn": "检验H8-H10，把结果升级为社交中介机制。",
+      "what_it_establishes_cn": "高社交团队效应接近高活跃团队；消息中介间接效应显著。",
+      "what_it_cannot_establish_cn": "中介分析依赖强识别假设，不能替代实验操纵消息。",
+      "why_next_phase_is_needed_cn": "机制确立后把结果放回理论贡献与公平性讨论。",
+      "transition_wording_function_cn": "从机制证据过渡到结论贡献。"
+    }
+  ],
+  "claim_evidence_ledger": [
+    {
+      "claim_cn": "用户分类器在top 50%预测排名中捕获约80%实际付费者，比随机好60%。",
+      "claim_level": "technical",
+      "supporting_evidence_cn": "时间独立holdout上的hit rate、XGBoost相对线性回归/RF/GBM的比较（在线附录Figure 3）。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 4.2",
+      "where_evidence_is_provided": "Section 4.2及在线附录Section A"
+    },
+    {
+      "claim_cn": "类聚匹配对平均用户有净正向效应。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "表2面板A的净效应t检验：收入2.7%、消息13.2%、留存0.9%、任务10%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.1.1",
+      "where_evidence_is_provided": "Table 2 panel A"
+    },
+    {
+      "claim_cn": "likely payer加入高活跃团队在社交和参与上有显著正向效果。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "表2面板B HighAct系数，消息+29%、任务开始+23%、任务成功+18%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.1.1",
+      "where_evidence_is_provided": "Table 2 panel B"
+    },
+    {
+      "claim_cn": "unlikely payer被类聚匹配在消息和任务开始上受损。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "表2面板A SystemON×UnlikelyPayer交互在消息和任务开始显著为负。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.1.1",
+      "where_evidence_is_provided": "Table 2 panel A"
+    },
+    {
+      "claim_cn": "团队层面每新增一个用户从随机转类聚的净效应约+5%。",
+      "claim_level": "artifact",
+      "supporting_evidence_cn": "表3底部组合t检验：收入和消息约5.35%和5.18%，任务开始和成功4.22%和4.68%。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.1.2",
+      "where_evidence_is_provided": "Table 3及在线附录Section D"
+    },
+    {
+      "claim_cn": "低活跃团队接收低价值用户受到负面冲击。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "表3中NumUnlikelyPayers×LowActTeam的t检验，收入和消息显著为负。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.1.2",
+      "where_evidence_is_provided": "Table 3"
+    },
+    {
+      "claim_cn": "团队生产技术具有超模性，且主要由团队层面递增规模报酬驱动。",
+      "claim_level": "theory",
+      "supporting_evidence_cn": "表4 CES参数估计，σ>ρ对所有产出在1%显著，σ在1.04-1.75。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.2.1",
+      "where_evidence_is_provided": "Table 4"
+    },
+    {
+      "claim_cn": "消息生产具有最强超模性。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "表4中消息ρ≈0.42，σ/ρ比远大于其他产出；在线附录分团队类型结果也一致。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.2.1",
+      "where_evidence_is_provided": "Table 4及在线附录Section E"
+    },
+    {
+      "claim_cn": "仅按团队社交评分匹配可复现主要正向效果。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "表5 HighSoc回归，消息+29%、任务等显著正向，与HighAct相似。",
+      "support_strength": "direct",
+      "where_claim_is_made": "Section 6.2.2",
+      "where_evidence_is_provided": "Table 5"
+    },
+    {
+      "claim_cn": "消息中介了系统对其他产出的影响。",
+      "claim_level": "mechanism",
+      "supporting_evidence_cn": "SEM中介分析间接效应显著，收入与任务成功的直接效应接近零。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 6.2.2",
+      "where_evidence_is_provided": "Section H在线附录"
+    },
+    {
+      "claim_cn": "社交与技术评分是强替代关系。",
+      "claim_level": "boundary",
+      "supporting_evidence_cn": "交互回归显示团队技术分已高时，进一步提高社交性甚至降低likely payer支出（在线附录Table 15）。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 6.2.2",
+      "where_evidence_is_provided": "Section G在线附录"
+    },
+    {
+      "claim_cn": "算法促成的类聚可能加剧社交媒体极化。",
+      "claim_level": "design_knowledge",
+      "supporting_evidence_cn": "低质匹配负效应、团队分离路径，以及对推荐算法机制的类比；没有直接测量现实社交媒体极化。",
+      "support_strength": "asserted",
+      "where_claim_is_made": "Intro P6与Section 7",
+      "where_evidence_is_provided": "Section 6.1.2和Section 7"
+    },
+    {
+      "claim_cn": "更细的用户/团队四分类可能优于二元分类。",
+      "claim_level": "design_knowledge",
+      "supporting_evidence_cn": "四分类分析显示最高四分位团队可能对部分玩家负向，且最低四分位CLV用户对团队质量敏感性较低。",
+      "support_strength": "partial",
+      "where_claim_is_made": "Section 7 P3",
+      "where_evidence_is_provided": "Section B在线附录"
+    }
+  ],
+  "isr_positioning_logic": {
+    "constitutive_is_problem_cn": "论文把“如何算法式匹配新用户到既有社区”当作IS核心问题：数字平台用机器学习对用户和社群分组，并以推荐列表的形式塑造用户看到的选择，这一数字设计反过来决定用户参与、消费、留存与社区隔离，因此是数字技术与人行为/市场结果互相构成的问题。",
+    "technology_behavior_or_market_entanglement_cn": "技术制品不是可随意替换的工具：XGBoost、SMOTE和团队活动评分把早期行为痕迹变成对用户价值的制度性定义；每日阈值均衡高活跃团队空位与用户供给，使算法参与塑造团队结构和同伴互动，进而驱动可观察的社交与消费行为。",
+    "role_of_benchmark_or_objective_evidence_cn": "benchmark被用于逐层支持IS主张：随机猜测证明预测器可用，top30%团队捕获80%收入证明团队分类经济相关，离线PSM提供部署前的预期效果，off期随机匹配作为田野反事实，显著性t检验和组合t检验支持净效应。客观证据最终支持的不是单一分数优势，而是“这种匹配方式改变数字社区价值共创过程”这一IS主张。",
+    "theory_in_design_cn": "理论进入设计的方式是部分的但关键：Becker/Kremer的互补性理论决定采用正向类聚方向；条件合作者机制解释为何保留用户自由选择；Ahmadpoor-Jones的CES框架进入评价阶段刻画超模性；而XGBoost、SMOTE、活动阈值等ML实现来自技术和产品知识，不由理论直接导出。理论主要指导干预的方向与机制解释，而非算法细节。",
+    "technical_vs_is_contribution_balance_cn": "篇幅分配明显偏向IS行为与结果：技术实现（分类器、系统）只占第4节，且重点放在验证和制度理由；第5、6节大量篇幅用于因果识别、团队层面净效应、生产函数和中介机制；分类器性能只作为前置条件，不作为主要贡献。",
+    "beyond_transient_performance_cn": "文章超越“某算法在benchmark上更高分”的叙述：用生产函数证明超模性解释净效应、用社交中介解释机制、用负面效应和公平讨论引出设计知识与伦理边界，把一次field实验的结果升华为可复用的freemium设计与匹配理论命题；不过极化主张仍是从单平台外推。"
+  },
+  "paragraph_level_mimicry_template": {
+    "abstract_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "用一至两句建立数字环境与freemium制度背景。",
+        "research_evidence_required_cn": "目标平台属于freemium数字社交产品。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "声明研究的是哪种算法干预及其设计方向。",
+        "research_evidence_required_cn": "已构建可部署的匹配/推荐系统。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "用一句话给出研究方法与核心结果。",
+        "research_evidence_required_cn": "已完成田野实验或等价因果证据。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "补充异质性/边界条件和机制主张。",
+        "research_evidence_required_cn": "有负向端效应和机制证据。"
+      }
+    ],
+    "introduction_paragraph_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "用规模数据建立产业背景。",
+        "research_evidence_required_cn": "平台所属行业的规模数据。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "描述平台困境（低留存、异质性、随机匹配）。",
+        "research_evidence_required_cn": "环境数据或管理实践证据。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "把决策问题转成理论方向未知。",
+        "research_evidence_required_cn": "至少两种合理解释或机制。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "给出研究问题、方向判断和系统设计。",
+        "research_evidence_required_cn": "初步分析表明某方向更可行。"
+      },
+      {
+        "step": 5,
+        "rhetorical_job_cn": "报告核心结果与异质性。",
+        "research_evidence_required_cn": "已有主回归和负端效应证据。"
+      },
+      {
+        "step": 6,
+        "rhetorical_job_cn": "预告机制证据。",
+        "research_evidence_required_cn": "生产技术或中介分析结果。"
+      },
+      {
+        "step": 7,
+        "rhetorical_job_cn": "声明贡献、边界和伦理。",
+        "research_evidence_required_cn": "清晰的理论定位和负面外部性。"
+      }
+    ],
+    "theory_to_design_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "用经典理论给出“什么条件下某类匹配有效”。",
+        "research_evidence_required_cn": "至少一个可直接援引的理论定理。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "用实验室或田野文献补出微观机制。",
+        "research_evidence_required_cn": "已有机制证据或实验。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "指出数字平台和用户—群体的缺口。",
+        "research_evidence_required_cn": "文献检索确认缺口。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "把理论翻译成设计约束。",
+        "research_evidence_required_cn": "环境诊断显示当前匹配低效。"
+      }
+    ],
+    "method_and_study_sequence_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "解释为什么用时间式而非简单随机。",
+        "research_evidence_required_cn": "环境事件/周季节性结构和到达独立性。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "定义所有结果变量并解释对数变换。",
+        "research_evidence_required_cn": "平台中可观测的行为度量。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "逐条陈述假设并区分方向效应与净效应。",
+        "research_evidence_required_cn": "理论预期与概念机制。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "用操纵检验证明处理实施成功。",
+        "research_evidence_required_cn": "实验期间的分离路径数据。"
+      }
+    ],
+    "results_reporting_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "先报告用户层的方向效应和净效应。",
+        "research_evidence_required_cn": "用户层回归和净效应t检验。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "再报告团队层聚合结果和组合t检验。",
+        "research_evidence_required_cn": "团队层回归和政策相关净效应。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "用生产函数或机制模型解释“为什么”。",
+        "research_evidence_required_cn": "机制参数估计。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "用稳健性和长时窗结果标定边界。",
+        "research_evidence_required_cn": "替代窗口和细分样本。"
+      }
+    ],
+    "discussion_and_contribution_steps": [
+      {
+        "step": 1,
+        "rhetorical_job_cn": "回放系统和关键数字。",
+        "research_evidence_required_cn": "主结果与分类器性能。"
+      },
+      {
+        "step": 2,
+        "rhetorical_job_cn": "把结果归因到机制。",
+        "research_evidence_required_cn": "机制分析。"
+      },
+      {
+        "step": 3,
+        "rhetorical_job_cn": "声明学术贡献并明确与相邻文献差异。",
+        "research_evidence_required_cn": "文献对标。"
+      },
+      {
+        "step": 4,
+        "rhetorical_job_cn": "给出管理含义和边界条件。",
+        "research_evidence_required_cn": "可操作设计洞见与负端证据。"
+      },
+      {
+        "step": 5,
+        "rhetorical_job_cn": "用伦理与公平性讨论收尾并给出未来方向。",
+        "research_evidence_required_cn": "明确的福利权衡。"
+      }
+    ]
+  },
+  "writing_algorithm": [
+    {
+      "step": 1,
+      "rhetorical_job_cn": "建立研究平台的重要性与制度背景。",
+      "research_evidence_required_cn": "平台产业规模、freemium属性、社交功能数据。",
+      "sentence_pattern_function_cn": "先给宏观数字，再收窄到目标平台类型，再引用文献说明社交—收入关系。",
+      "transition_condition_cn": "当读者能同意“此类平台的匹配值得研究”时进入下一步。"
+    },
+    {
+      "step": 2,
+      "rhetorical_job_cn": "刻画平台困境和当前匹配基线。",
+      "research_evidence_required_cn": "留存率、用户异质性、团队加入制度、随机推荐的事实。",
+      "sentence_pattern_function_cn": "用现象句和数据句叠加，说明随机匹配是默认状态且存在高搜索成本。",
+      "transition_condition_cn": "当“随机匹配”作为反事实基线被建立时进入下一步。"
+    },
+    {
+      "step": 3,
+      "rhetorical_job_cn": "引入理论并给出方向判断。",
+      "research_evidence_required_cn": "Becker/Kremer的互补性理论、公共品实验、数字平台文献缺口。",
+      "sentence_pattern_function_cn": "先阐述理论条件，再指出数字平台缺口，再说明本研究选择正类聚方向。",
+      "transition_condition_cn": "当读者接受“互补性条件下正类聚值得检验”时进入下一步。"
+    },
+    {
+      "step": 4,
+      "rhetorical_job_cn": "把理论转成制品设计并给出组件验证。",
+      "research_evidence_required_cn": "团队活动评分、用户CLV模型、阈值算法、离线政策评估。",
+      "sentence_pattern_function_cn": "每个组件先给出操作化定义，再给出一个快速验证，最后说明它在系统中的角色。",
+      "transition_condition_cn": "当每个分类器都有独立性能证据时进入下一步。"
+    },
+    {
+      "step": 5,
+      "rhetorical_job_cn": "设计并部署田野实验。",
+      "research_evidence_required_cn": "合作方授权、时间式开关设计、结果变量、操纵检验。",
+      "sentence_pattern_function_cn": "先解释为什么时间式设计近似随机，再定义结果与假设，再报告操纵检验。",
+      "transition_condition_cn": "当处理实施和分离路径被证明后进入下一步。"
+    },
+    {
+      "step": 6,
+      "rhetorical_job_cn": "分层报告主效应和净效应。",
+      "research_evidence_required_cn": "用户层和团队层的回归、t检验、组合t检验。",
+      "sentence_pattern_function_cn": "先报告平均净效应，再分别报告likely和unlikely payer，再用团队净效应收束。",
+      "transition_condition_cn": "当正负效应并存但净效应为正时进入下一步。"
+    },
+    {
+      "step": 7,
+      "rhetorical_job_cn": "解释机制。",
+      "research_evidence_required_cn": "CES生产函数、高社交评分、交互回归、SEM中介分析。",
+      "sentence_pattern_function_cn": "先用生产参数证明超模性，再用社交评分和中介分析证明社交渠道。",
+      "transition_condition_cn": "当机制证据能解释主效应时进入下一步。"
+    },
+    {
+      "step": 8,
+      "rhetorical_job_cn": "总结贡献、边界和伦理含义。",
+      "research_evidence_required_cn": "理论定位、管理含义、负面外部性。",
+      "sentence_pattern_function_cn": "先回放数字，再声明差异，再给管理启示，最后用公平性讨论收尾。",
+      "transition_condition_cn": "全文结束时不再有未回应的引言缺口。"
+    }
+  ],
+  "high_value_moves_to_mimic_cn": [
+    "先用环境诊断证明当前是随机匹配且信息成本高，再提出算法替代，使干预有清晰反事实。",
+    "对每个制品组件给出独立验证：团队评分用未来收入集中度，用户分类用时间独立holdout hit rate。",
+    "用离线PSM作为田野实验前的低成本门槛，再用田野实验提供外生变异。",
+    "在实验设计部分预先辩护时间式开关为何近似用户级随机，并把时间分离用于团队效应识别。",
+    "把主效应拆成用户层和团队层，并用组合t检验把局部估计加总为政策相关净效应。",
+    "用CES生产函数的σ>ρ条件把“有效”升级为“由超模性解释”，再用消息的超模性最强引出社交机制。",
+    "在贡献段落主动报告负面边界和伦理担忧，避免结果被读成“算法总是好”。"
+  ],
+  "superficial_moves_not_to_copy_cn": [
+    "不要只写“我们部署了ML匹配系统”而不给分类器离线验证和操纵检验。",
+    "不要只报告总体正效应而忽略unlikely payer和低活跃团队的负效应。",
+    "不要把相关性的中介分解直接写成因果中介叙述，而不说明识别假设。",
+    "不要把单平台结果无条件外推到所有社交媒体，必须给出边界条件。",
+    "不要用大段技术实现细节替代IS理论贡献；技术细节应压缩到能支撑结论的程度。"
+  ],
+  "unsupported_or_fragile_moves_cn": [
+    "中介分析没有在实验上操纵消息，因此“社交是渠道”依赖较强的SEM识别假设。",
+    "极化主张是从单游戏环境外推，未直接测量现实社交媒体中的极化进程。",
+    "CES生产函数把游戏规则与互动行为混在一起，附录也提示收入分布偏态可能使估计不稳。",
+    "低活跃团队在收入与消息上并非稳定递增规模报酬，但正文主要用总体超模性解释净效应。",
+    "离线PSM依赖倾向得分，无法完全消除自选择性。"
+  ],
+  "single_sentence_description_of_isr_routine_cn": "用真实数字平台做因果干预，先以分类器与离线评估证明“能识别、可能有效”，再用田野实验证明“因果有效”，最后用生产函数与中介分析证明“为何有效”，并把结果是同时呈现正向净效应与低端用户受损的IS设计知识。",
+  "confidence": 0.82,
+  "limitations_cn": "全文正文完整，但多个关键附录（Section A-H、Tables 7-16）只被引用，未在给定文本中提供完整细节，因此对离线PSM、生产函数异质性、交互和中介分析的核验依赖文章自身叙述；无法提供精确页码，位置证据基于章节与表编号；部分图（Figure 1/2）无法从文本恢复视觉细节。",
+  "usage": {
+    "prompt_tokens": 48477,
+    "completion_tokens": 28112,
+    "total_tokens": 76589,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 48477
+  }
+}

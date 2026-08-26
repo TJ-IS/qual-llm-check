@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-84865244647"
+title: "Whole test suite generation"
+authors: "Fraser G.; Arcuri A."
+year: "2013"
+journal: "IEEE Transactions on Software Engineering"
+doi: "10.1109/tse.2012.14"
+---
+# Scopus title-abstract-keyword metadata
+Title: Whole test suite generation
+Abstract: Not all bugs lead to program crashes, and not always is there a formal specification to check the correctness of a software test's outcome. A common scenario in software testing is therefore that test data are generated, and a tester manually adds test oracles. As this is a difficult task, it is important to produce small yet representative test sets, and this representativeness is typically measured using code coverage. There is, however, a fundamental problem with the common approach of targeting one coverage goal at a time: Coverage goals are not independent, not equally difficult, and sometimes infeasible-the result of test generation is therefore dependent on the order of coverage goals and how many of them are feasible. To overcome this problem, we propose a novel paradigm in which whole test suites are evolved with the aim of covering all coverage goals at the same time while keeping the total size as small as possible. This approach has several advantages, as for example, its effectiveness is not affected by the number of infeasible targets in the code. We have implemented this novel approach in the EvoSuite tool, and compared it to the common approach of addressing one goal at a time. Evaluated on open source libraries and an industrial case study for a total of 1,741 classes, we show that EvoSuite achieved up to 188 times the branch coverage of a traditional approach targeting single branches, with up to 62 percent smaller test suites. © 1976-2012 IEEE.
+Author keywords: branch coverage; collateral coverage; genetic algorithm; infeasible goal; length; Search-based software engineering
+Index keywords: Genetic algorithms; Industrial applications; Program debugging; Software engineering; Testing; Branch coverage; collateral coverage; infeasible goal; length; Search-based software engineering; Software testing
+Document type: Article
+Conference: 
+Source title: IEEE Transactions on Software Engineering
+Year: 2013
+EID: 2-s2.0-84865244647
+DOI: 10.1109/tse.2012.14
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

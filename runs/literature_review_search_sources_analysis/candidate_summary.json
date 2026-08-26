@@ -1,0 +1,9 @@
+{
+  "selection_version": "review-candidate-v1",
+  "candidates": 93,
+  "corpus_markdown_files": 93,
+  "selection_logic": {
+    "title_regex": "(systematic|structured|integrative|scoping|critical|comprehensive) (?:literature )?review|literature review|meta[- ]analys(?:is|es)|bibliometric|research synthesis|synthesi[sz]ing research|review and (?:research )?agenda|review of (?:the )?(?:literature|research)",
+    "abstract_regex": "\\b(systematic literature review|structured literature review|scoping review|integrative literature review|meta[- ]analys(?:is|es)|bibliometric (?:review|analysis)|reviewed? (?:a |the )?(?:sample of )?\\d+ (?:articles|papers|studies)|review of \\d+ (?:articles|papers|studies)|literature search|search(?:ed|ing) (?:the following )?(?:electronic )?databases)\\b"
+  }
+}

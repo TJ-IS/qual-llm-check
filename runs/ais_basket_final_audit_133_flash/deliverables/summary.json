@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-08-07T09:49:38.819467+00:00",
+  "input_count": 133,
+  "audit_a_include_count": 54,
+  "audit_b_include_count": 51,
+  "independent_disagreement_count": 19,
+  "final_include_count": 52,
+  "final_exclude_count": 81,
+  "resolution_counts": {
+    "independent_agreement_exclude": 71,
+    "independent_agreement_include": 43,
+    "adjudicated_exclude": 10,
+    "adjudicated_include": 9
+  },
+  "metric_status_counts": {
+    "fully_objective_direct": 76,
+    "objective_fixed_factual_labels": 39,
+    "no_qualifying_metric": 1,
+    "subjective_construct_with_fixed_labels": 6,
+    "human_semantic_judgment": 5,
+    "mixed_objective_subjective": 4,
+    "subjective_or_self_report": 2
+  },
+  "core_goal_status_counts": {
+    "theory_or_explanation_primary": 14,
+    "objective_improvement_primary": 107,
+    "unclear": 2,
+    "objective_metric_secondary": 10
+  },
+  "artifact_status_counts": {
+    "algorithm_or_model_only": 63,
+    "implemented_artifact_component": 22,
+    "implemented_software_artifact": 44,
+    "platform_only_context": 4
+  },
+  "included_year_counts": {
+    "2020": 17,
+    "2025": 5,
+    "2022": 7,
+    "2023": 8,
+    "2024": 5,
+    "2021": 10
+  },
+  "included_journal_counts": {
+    "Information Systems Research": 15,
+    "Decision Support Systems": 19,
+    "Journal of the Association for Information Systems": 4,
+    "Journal of Management Information Systems": 5,
+    "MIS Quarterly": 8,
+    "European Journal of Information Systems": 1
+  }
+}

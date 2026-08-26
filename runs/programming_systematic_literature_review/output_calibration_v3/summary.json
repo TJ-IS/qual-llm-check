@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-07-26T09:34:33.484640+00:00",
+  "analysis_version": "programming-slr-title-abstract-screen-v1",
+  "prompt_fingerprint": "361465a13ed3903015ff98fc21bf8346cf0ce55da3fc80f286b27b310be83ec9",
+  "input_records": 5642,
+  "completed": 4,
+  "pending": 5638,
+  "screening_label_counts": {
+    "exclude": 2,
+    "include_candidate": 2
+  },
+  "candidate_centrality_counts": {
+    "programming_core": 2
+  },
+  "candidate_actor_counts": {
+    "human_only": 2
+  },
+  "candidate_study_type_counts": {
+    "empirical_human": 2
+  },
+  "usage": {
+    "prompt_tokens": 7475,
+    "completion_tokens": 4087,
+    "total_tokens": 11562
+  }
+}

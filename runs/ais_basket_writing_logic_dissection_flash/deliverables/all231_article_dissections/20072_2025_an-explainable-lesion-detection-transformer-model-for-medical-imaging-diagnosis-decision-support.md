@@ -1,0 +1,1995 @@
+# An explainable lesion detection transformer model for medical imaging diagnosis decision support: Design science research
+
+- 作者：Xinwei Wang; Yi Feng; Sutong Wang; Dujuan Wang; T.C.E. Cheng
+- 年份 / 期刊：2025 / Decision Support Systems
+- DOI：10.1016/j.dss.2025.114492
+- 源文件：20072_2025_an-explainable-lesion-detection-transformer-model-for-medical-imaging-diagnosis-decision-support.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：performance_gap_artifact_benchmark_generalize
+- 置信度：0.88
+
+## 文章级论证概况
+
+- 核心问题：如何基于设计科学研究方法构建一种兼具高准确性、鲁棒性和可解释性的医学影像病变检测人工智能制品，以支撑临床诊断决策并缓解深度神经网络的黑盒问题和医学数据不平衡问题？
+
+- 制品与设计：提出EL-DETR（Explainable Lesion DEtection TRansformer）：在DETR架构基础上融合DCNN骨干与Transformer编码器/解码器；核心设计有三项：（1）可解释分离注意力机制，将内容查询和位置查询分别计算注意力权重，并在推理时可视化跨注意力映射；（2）混合匹配查询策略，结合一对一和一对多查询匹配，增强正样本学习；（3）自适应高效复合损失函数，加权组合一对一损失、一对多损失和中间层辅助损失。
+
+- 客观结果：在四个真实医学影像数据集（结直肠镜视频、MICCAI、KUMC、脑肿瘤MRI/CT）上，EL-DETR在MAP@0.50:0.95、MAP@0.50和MAP@0.75上均优于Faster RCNN、YOLO v3、YOLOS、DETR、DAB-DETR、Deformable-DETR、DN-DETR和DINO等基线模型；消融实验表明可解释分离注意力和混合匹配分别带来性能提升；注意力可视化显示不同解码器层分别关注病灶内部和边界形状，优于DETR的注意力聚焦程度。
+
+- 核心贡献：作者声称：提出了首个基于DSR设计的医学影像病变检测AI制品，扩展了医学影像决策支持系统的设计理论；通过可解释分离注意力机制及其可视化，缓解深度学习黑盒问题，提供临床可解释的推理依据；通过混合匹配查询与复合损失，解决医学数据不平衡下的正样本训练效率问题。
+
+- 整篇论证链：论文以医学影像辅助决策的重要性和深度学习在其中的潜力为起点，指出三大现实挑战：影像内在复杂性、神经网络黑盒、数据类别不平衡。作者通过文献综述认为现有研究多基于结构化数据，且针对医学影像的深度学习可解释性仍不足；现有对象检测模型未充分利用空间和上下文信息，DETR-like模型又因一对一匹配导致大部分预测框缺乏有效监督。基于这些缺口，作者遵循Peffers的DSR规范过程，设计并构建EL-DETR制品，以DCNN+Transformer结构提取空间和全局特征，以可解释分离注意力机制提供推理可视化，以混合匹配查询和复合损失改善正样本学习。随后在四个真实数据集上完成预处理、超参数搜索、对比实验、消融实验和可解释性实验，证明了制品在精度、鲁棒性和可解释性上的优势。最后在讨论部分将实验结果逐级提升为理论贡献（扩展DSR应用、可解释深度学习设计、不平衡医学数据训练）与管理贡献（减轻放射科医生负担、增强AI信任），并给出一个四层医学影像决策支持系统架构。文章以数据集规模不足和需要更透明模型作为未来工作收尾，保护了贡献的边界。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文明确以设计科学研究为方法论框架，遵循Peffers等人提出的六个设计步骤，构建一个具体的IT制品（EL-DETR），并通过实验评价和一个系统架构方案来产生设计知识和贡献。文章核心不是检验行为理论假设，而是围绕制品构建、离线评价和设计原则提炼展开，因此属于build_evaluate_design_science。
+
+- 主导写作弧线判定：文章从医学影像病变检测的性能缺口（准确率不足、黑盒不透明、数据不平衡导致训练效率低）出发，开发EL-DETR制品，使用四个真实数据集上的基准对比作为主要证据，再通过消融和可解释性分析将结果分解为组件贡献，最终在讨论和系统方案部分将局部性能优势一般化为可复用的设计知识和决策支持系统设计原则。这符合“性能缺口—制品—基准评价—一般化”的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：8
+
+- 研究阶段总序列：研究过程从问题识别开始，到制品设计构建，再到数据准备、基础训练分析、基准对比、消融分析、可解释性分析，最后到系统实现方案。前两个阶段建立问题和制品，后六个阶段构成层层递进的评价体系：先确认训练有效，再证明总体性能，再分解性能来源，再直接验证可解释性，最后将模型嵌入系统。各阶段之间存在明确的累积关系：没有制品设计则无法评价；没有数据准备则无法训练；基本实验为性能评价提供收敛性背景；对比实验确立总体优势；消融实验定位优势来源；可解释实验回应临床信任需求；系统方案将评价结果转化为设计知识。
+
+### studies_or_phases
+
+#### 1. 问题识别与需求分析（引言+文献综述）
+
+- order：1
+
+- name_cn：问题识别与需求分析（引言+文献综述）
+
+- question_cn：医学影像辅助决策存在哪些关键问题？为什么需要一个新的AI制品？
+
+- inputs_and_setting_cn：现有文献、医学影像决策支持系统研究、可解释AI研究，以及DSS领域中的AI应用示例。
+
+- designed_or_compared_object_cn：概念层面的问题框架：准确性、可解释性、数据不平衡。
+
+- baseline_control_or_counterfactual_cn：现有DCNN检测模型、DETR-like模型、传统重采样方法。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：文献综合和逻辑论证
+
+- main_result_cn：识别出三大挑战：医学影像内在复杂性、深度网络黑盒、数据不平衡；指出现有对象检测模型未充分利用空间/上下文信息，DETR-like模型正样本学习不足。
+
+- argumentative_role_cn：为后续制品设计提供正当性、设计目标和评价维度。
+
+- remaining_uncertainty_cn：这些挑战在真实数据上的严重程度尚未量化。
+
+- link_to_next_phase_cn：直接引出EL-DETR的三个设计创新来应对这些挑战。
+
+##### evidence_pointers
+
+1. Section 1第3-5段
+
+2. Section 2.1-2.3
+
+#### 2. 制品设计与构建（Section 3）
+
+- order：2
+
+- name_cn：制品设计与构建（Section 3）
+
+- question_cn：如何将识别出的需求转化为一个具体、可运作的病变检测模型？
+
+- inputs_and_setting_cn：DETR及其变体（Conditional DETR, DAB-DETR, DN-DETR, DINO）、ResNet、Transformer、损失函数设计知识。
+
+- designed_or_compared_object_cn：EL-DETR的三个核心设计：可解释分离注意力、混合匹配查询、高效复合损失。
+
+- baseline_control_or_counterfactual_cn：以原始DETR为概念基准，通过消融变体（Pure-DETR, Hybrid-DETR, Explain-DETR）形成未来评价的对照组。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：架构设计、数学公式化
+
+- main_result_cn：完成EL-DETR的完整模型定义：整体框架（ResNet50骨干+6层Transformer编码器/解码器）、可解释分离注意力机制（Eq.3）、位置查询生成（Eq.4-5）、混合匹配损失（Eq.6-8）、复合损失（Eq.9-11）。
+
+- argumentative_role_cn：将问题需求转化为制品特征，为后续评价提供被检验的对象。
+
+- remaining_uncertainty_cn：设计是否有效尚未通过数据验证。
+
+- link_to_next_phase_cn：需要真实医学影像数据来训练和评估模型。
+
+##### evidence_pointers
+
+1. Section 3.1
+
+2. Section 3.2
+
+3. Section 3.3
+
+4. Fig. 1
+
+5. Fig. 2
+
+6. Eq. (1)-(11)
+
+#### 3. 数据准备与实验设置（Section 4）
+
+- order：3
+
+- name_cn：数据准备与实验设置（Section 4）
+
+- question_cn：如何构建公平、真实、可复现的评价环境来验证EL-DETR？
+
+- inputs_and_setting_cn：四个真实医学影像来源：Colonoscopy（152个视频）、MICCAI（38个视频）、KUMC（80个视频）、Brain Tumor（1116张MRI/CT图像）。
+
+- designed_or_compared_object_cn：数据预处理流程（帧提取、随机间隔采样、COCO格式转换、数据增强）和训练配置（超参数搜索空间与最优值）。
+
+- baseline_control_or_counterfactual_cn：训练/验证/测试按6:2:2划分，测试集作为held-out验证，不参与调参；统一硬件和实现环境。
+
+##### objective_metrics
+
+1. 训练损失值（用于超参数选择）
+
+- analysis_method_cn：数据预处理和网格搜索超参数优化
+
+- main_result_cn：得到共14,120张图像；确定最优超参数（epoch=50, lr=0.0001, AdamW, alpha_one2many在0.5/1之间等）。
+
+- argumentative_role_cn：保证后续评估在真实医学数据和公平条件下进行，提高结论的内部和外部有效性。
+
+- remaining_uncertainty_cn：数据集规模有限，某些数据集样本量较小，可能影响统计稳健性。
+
+- link_to_next_phase_cn：使用该设置训练模型并依次进行基础、对比、消融和可解释分析。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.2
+
+3. Section 4.3
+
+4. Table 1
+
+#### 4. 基本实验：训练动态分析（Section 5.1）
+
+- order：4
+
+- name_cn：基本实验：训练动态分析（Section 5.1）
+
+- question_cn：EL-DETR在训练过程中是否有效收敛？各损失成分如何贡献训练效率？
+
+- inputs_and_setting_cn：EL-DETR在四个数据集上的训练损失记录。
+
+- designed_or_compared_object_cn：分类损失（CE）、定位损失（L1、GIOU）和复合损失（one2one、one2many、aux）随epoch的变化。
+
+- baseline_control_or_counterfactual_cn：无（描述性分析）。
+
+##### objective_metrics
+
+1. Cross-entropy loss
+
+2. L1 loss
+
+3. GIOU loss
+
+4. One2one loss
+
+5. One2many loss
+
+6. Auxiliary loss
+
+- analysis_method_cn：损失曲线可视化与描述性解释
+
+- main_result_cn：所有损失在前5个epoch快速下降，约40个epoch后趋于稳定；初始分类损失显著大于GIOU，之后趋近；辅助损失值最大、one2one损失最小；one2many和辅助损失下降更陡峭，表明它们加速收敛。
+
+- argumentative_role_cn：初步验证模型训练的有效性，并直观支持复合损失和辅助损失的设计动机。
+
+- remaining_uncertainty_cn：仅凭损失曲线不能确定各组件对最终指标的因果贡献。
+
+- link_to_next_phase_cn：通过消融实验定量分离各改进的贡献。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Fig. 3-6
+
+3. Supplementary Fig. S1
+
+#### 5. 对比实验（Section 5.2）
+
+- order：5
+
+- name_cn：对比实验（Section 5.2）
+
+- question_cn：EL-DETR在病变检测任务上的精度和鲁棒性是否优于现有先进模型？
+
+- inputs_and_setting_cn：四个数据集，8个公开基线模型：Faster RCNN, YOLO v3, YOLOS, DETR, DAB-DETR, Deformable-DETR, DN-DETR, DINO。
+
+- designed_or_compared_object_cn：EL-DETR与8个基线模型在相同条件下的性能比较。
+
+- baseline_control_or_counterfactual_cn：所有对比模型加载作者提供的预训练权重和默认最优超参数；检测数量上限统一为100。
+
+##### objective_metrics
+
+1. MAP@0.50:0.95
+
+2. MAP@0.50
+
+3. MAP@0.75
+
+4. MAR@0.50:0.95
+
+- analysis_method_cn：在四个数据集上严格复现并比较指标，报告各模型最优值。
+
+- main_result_cn：EL-DETR在四个数据集上的MAP@0.50:0.95、MAP@0.50、MAP@0.75均取得最优；在MAR方面，EL-DETR在Colonoscopy、MICCAI、KUMC上分别低于DINO或Deformable-DETR，在Brain Tumor上明显优于多数基线。
+
+- argumentative_role_cn：从整体性能层面证明EL-DETR的竞争力，建立其作为可信决策支持工具的基础。
+
+- remaining_uncertainty_cn：总体性能优势的解释不明确；需要消融实验确定哪个设计贡献更大。
+
+- link_to_next_phase_cn：通过消融实验将总体优势分解到具体设计特征。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 2
+
+#### 6. 消融实验（Section 5.3）
+
+- order：6
+
+- name_cn：消融实验（Section 5.3）
+
+- question_cn：EL-DETR的可解释分离注意力机制和混合匹配策略分别产生了多大贡献？两者组合是否互补？
+
+- inputs_and_setting_cn：构建四种变体：Pure-DETR（基线）、Hybrid-DETR（仅混合匹配+复合损失）、Explain-DETR（仅可解释注意力）、EL-DETR（两者组合）。
+
+- designed_or_compared_object_cn：在四个数据集上比较不同变体的指标。
+
+- baseline_control_or_counterfactual_cn：Pure-DETR作为无改进基线；Hybrid-DETR和Explain-DETR分别代表单一改进；EL-DETR代表完整模型。
+
+##### objective_metrics
+
+1. MAP@0.50:0.95
+
+2. MAP@0.50
+
+3. MAP@0.75
+
+4. MAR@0.50:0.95
+
+- analysis_method_cn：消融比较，观察增量变化和MAR变化。
+
+- main_result_cn：Hybrid-DETR和Explain-DETR均显著优于Pure-DETR；Explain-DETR的MAP提升幅度大于Hybrid-DETR；Hybrid-DETR在MAR上提升显著，但加入注意力后MAR略有回落；EL-DETR在多数MAP指标上为最优。
+
+- argumentative_role_cn：验证各设计组件的独立有效性及其相互作用，明确可解释注意力是主要精度来源，混合匹配主要提升正样本召回。
+
+- remaining_uncertainty_cn：注意力机制为何比混合匹配带来更大MAP增益的深层原因未从机制层面解释。
+
+- link_to_next_phase_cn：通过注意力可视化实验直接观察可解释注意力机制的行为。
+
+##### evidence_pointers
+
+1. Section 5.3
+
+2. Table 3
+
+#### 7. 可解释性实验（Section 5.4）
+
+- order：7
+
+- name_cn：可解释性实验（Section 5.4）
+
+- question_cn：EL-DETR的注意力可视化是否表明模型确实聚焦病灶？与DETR相比，其可解释性优势体现在哪里？
+
+- inputs_and_setting_cn：从四个数据集中选取代表性病例，提取解码器跨注意力权重并映射到原始图像；与DETR的注意力图对比；同时使用Grad-CAM作为补充可解释性验证。
+
+- designed_or_compared_object_cn：EL-DETR各解码器层的注意力权重图；EL-DETR与DETR的注意力权重差异；EL-DETR的Grad-CAM与注意力图差异。
+
+- baseline_control_or_counterfactual_cn：DETR作为注意力可视化的对照；Grad-CAM作为传统CNN解释方法的参照。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：定性视觉分析、案例对比
+
+- main_result_cn：EL-DETR各层注意力权重均对应病灶位置；第一层关注病灶内部像素，后续层关注形状和边界；与DETR相比，EL-DETR受噪声影响更小，注意力更集中，能更好区分病变组织与周围区域；Grad-CAM覆盖范围更广，而注意力图更精确。
+
+- argumentative_role_cn：直接回应黑盒问题，证明模型具有可解释性和临床可信性，为理论贡献提供依据。
+
+- remaining_uncertainty_cn：可视化分析缺乏量化指标（如注意力与专家标注的一致性度量），且未进行临床医生信赖度评估。
+
+- link_to_next_phase_cn：这些可视化证据为讨论中的理论和管理贡献提供支撑。
+
+##### evidence_pointers
+
+1. Section 5.4
+
+2. Fig. 7-9
+
+3. Supplementary Figs. S2-S13
+
+#### 8. 系统实现与应用方案（Section 6.3）
+
+- order：8
+
+- name_cn：系统实现与应用方案（Section 6.3）
+
+- question_cn：EL-DETR如何被整合为一个实用的医学影像决策支持系统？
+
+- inputs_and_setting_cn：基于已训练好的EL-DETR模型，提出一个四层系统架构：数据层、模型层、应用层、用户层。
+
+- designed_or_compared_object_cn：系统架构图和闭环流程（包括数据采集、模型调用、解释报告生成、医生反馈和重训练）。
+
+- baseline_control_or_counterfactual_cn：无（概念设计）。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：系统架构设计
+
+- main_result_cn：给出一个将EL-DETR嵌入临床工作流的实施蓝图，使模型输出和可解释报告能够呈现给医生，并支持基于反馈的数据更新和模型重训练。
+
+- argumentative_role_cn：将离线模型性能升华为可落地的决策支持系统设计知识，回应引言中的现实应用承诺。
+
+- remaining_uncertainty_cn：系统未在真实临床环境中部署，也没有用户接受度或临床效用数据。
+
+- link_to_next_phase_cn：在结论中总结贡献并指出未来需要更大规模验证和更透明模型。
+
+##### evidence_pointers
+
+1. Section 6.3
+
+2. Fig. 10
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. LIMITATION
+
+4. GAP
+
+5. RQ_OR_OBJECTIVE
+
+6. DESIGN_FEATURE
+
+7. RESULT
+
+8. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. PRIOR_KNOWLEDGE
+
+5. LIMITATION
+
+6. GAP
+
+7. WHY_GAP_MATTERS
+
+8. RQ_OR_OBJECTIVE
+
+9. DESIGN_FEATURE
+
+10. CONTRIBUTION
+
+11. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. CONTEXT
+
+2. PRIOR_KNOWLEDGE
+
+3. LIMITATION
+
+4. GAP
+
+5. THEORY_INTRO
+
+6. THEORY_PROPOSITION
+
+7. MECHANISM
+
+8. WHY_GAP_MATTERS
+
+### artifact_design_moves
+
+1. METHOD_JUSTIFICATION
+
+2. THEORY_INTRO
+
+3. PRIOR_KNOWLEDGE
+
+4. REQUIREMENT
+
+5. DESIGN_FEATURE
+
+6. MECHANISM
+
+7. STUDY_OVERVIEW
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. BENCHMARK_OR_CONTRAST
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. BOUNDARY_CONDITION
+
+3. PRACTICAL_STAKES
+
+4. DESIGN_FEATURE
+
+5. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 设计科学研究方法论（Hevner et al.; Peffers et al.）
+
+2. DETR及Transformer对象检测模型（Carion et al.; DAB-DETR; Deformable-DETR; DN-DETR; DINO）
+
+3. 深度卷积神经网络ResNet（He et al.）
+
+4. 医学影像领域知识（影像复杂性、临床诊断标准、病灶形态特征）
+
+5. 数据不平衡学习方法（过采样/欠采样及其缺陷；DETR-like正查询扩展）
+
+6. 可解释机器学习/XAI（注意力机制、Grad-CAM、可解释性在医学决策中的价值）
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：DSR方法论提供了研究过程的框架，但没有具体决定算法设计；具体的设计选择（分离注意力、混合匹配、复合损失）主要来自计算机视觉领域已有的DETR变体（如Conditional DETR、DN-DETR、Hybrid Matching DETR）和医学影像的实际要求。医学领域知识和临床可解释性需求决定了注意力可视化和位置查询的强调，但模型选择、损失构成和训练策略更多是工程启发的技术迁移，因此属于部分耦合。
+
+- 理论到设计翻译链：领域需求（医学影像决策需要准确、可解释、能应对不平衡） → 技术机制（DETR-like模型的注意力机制可以提供定位和可视化；一对一匹配导致正样本监督不足；辅助损失加速收敛） → 设计要求（解码器应同时学习内容与位置查询并可视化注意力；需要增加正样本匹配；需要组合多种损失） → 具体设计（可解释分离注意力机制、混合匹配查询、高效复合损失） → 被比较的设计差异（EL-DETR vs Pure-DETR、Hybrid-DETR、Explain-DETR） → 客观结果（MAP/MAR提升、注意力聚焦病灶）。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：DETR-like模型通过交叉注意力机制进行目标检测，但位置查询定义不清晰，影响模型对空间信息的利用（来自DAB-DETR、Conditional DETR）。
+
+- mechanism_cn：分离内容查询和位置查询可以使注意力权重分别反映“是什么”和“在哪里”，增强对病灶位置和边界的关注。
+
+- design_requirement_cn：解码器应显式建模内容查询和位置查询，并提供注意力可视化。
+
+- artifact_choice_cn：可解释分离注意力机制：将注意力权重设为内容查询与内容键的点积加上位置查询与位置键的点积；位置查询由前层解码器嵌入和参考点生成。
+
+- evaluated_contrast_cn：Explain-DETR与Pure-DETR的对比（是否加入分离注意力）。
+
+- objective_result_cn：Explain-DETR在四个数据集上的MAP@0.50:0.95提升5.55%、5.03%、2.89%、38.15%；注意力图显示更聚焦病灶边界和形状。
+
+##### evidence_pointers
+
+1. Section 3.2
+
+2. Table 3
+
+3. Fig. 9
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：在DETR-like模型中，一对一匹配导致超过90%的预测框没有有效定位监督（Jia et al.）。
+
+- mechanism_cn：增加一对多查询并重复真值，可以增加正样本监督信号，提高模型对病变区域的学习效率和召回率。
+
+- design_requirement_cn：在训练时需要增强正样本匹配，同时避免类别不平衡和假阳性增加。
+
+- artifact_choice_cn：混合匹配查询策略：在原有查询基础上增加一对多查询，重复真值μ次，并通过自注意力掩码隔离两类查询。
+
+- evaluated_contrast_cn：Hybrid-DETR与Pure-DETR的对比（是否加入混合匹配和对应损失）。
+
+- objective_result_cn：Hybrid-DETR在四个数据集上的MAP@0.50:0.95提升1.35%、2.45%、1.79%、5.00%；MAR在三个内镜数据集上显著提升（如Colonoscopy从0.674到0.834）。
+
+##### evidence_pointers
+
+1. Section 3.3
+
+2. Table 3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：辅助损失和复合损失可以加速Transformer模型的训练收敛（Carion et al.）。
+
+- mechanism_cn：从中间解码器层计算辅助损失可提供更短的梯度路径；组合不同匹配损失可使模型在不同匹配粒度上学习。
+
+- design_requirement_cn：损失函数应同时包含一对一、一对多和辅助损失，并自适应加权。
+
+- artifact_choice_cn：高效复合损失函数τ_EC，用自适应权重α组合one2one、one2many和aux损失。
+
+- evaluated_contrast_cn：EL-DETR/Hybrid-DETR使用复合损失 vs Pure-DETR/Explain-DETR使用传统损失。
+
+- objective_result_cn：训练损失曲线显示one2many和aux损失在初始阶段快速下降，加速收敛；EL-DETR在相同或更少epoch下达到更优性能。
+
+##### evidence_pointers
+
+1. Section 3.3
+
+2. Section 5.1
+
+3. Fig. 3-6
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：医学影像中病灶的形状和边界是临床诊断的重要依据（Jacobson et al.）。
+
+- mechanism_cn：位置查询增强和深层注意力对不同层级的空间特征进行编码，使模型在后期解码层关注病灶边界和形状。
+
+- design_requirement_cn：模型的可解释输出应能体现病灶边界和形状，而不只是在内部高亮。
+
+- artifact_choice_cn：通过分离内容/位置查询并在深层解码器中增强位置查询，使注意力图呈现从内部到边界的层次变化。
+
+- evaluated_contrast_cn：EL-DETR vs DETR的注意力图比较。
+
+- objective_result_cn：EL-DETR各层注意力均对应病灶，深层关注边界和形状；DETR注意力较松散且易受噪声影响。
+
+##### evidence_pointers
+
+1. Section 5.4
+
+2. Fig. 7-9
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：深度学习模型的黑盒性阻碍临床采用，XAI需要为决策提供依据。
+
+- mechanism_cn：在预测前可视化跨注意力权重，可以展示模型做决策时关注的图像区域，增强透明性和可解释性。
+
+- design_requirement_cn：解释信息应从模型中天然提取，而不是事后附加。
+
+- artifact_choice_cn：将解码器跨注意力权重映射到输入图像，形成注意力热力图。
+
+- evaluated_contrast_cn：EL-DETR vs Grad-CAM的可视化比较。
+
+- objective_result_cn：注意力图比Grad-CAM更精确地聚焦病灶区域，提高了整个预测过程的透明度。
+
+##### evidence_pointers
+
+1. Section 5.4
+
+2. Supplementary Fig. S4
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 训练损失动态分析
+
+2. 多数据集基准对比实验
+
+3. 组件消融实验
+
+4. 注意力可视化与可解释性案例分析
+
+5. 与Grad-CAM的补充可解释性比较
+
+6. 系统架构实施蓝图
+
+- why_these_evaluations_cn：为了全面验证一个DSR制品，需要回答多个问题：模型是否有效训练（损失动态）、是否优于现有技术（基准对比）、哪些设计组件导致了优势（消融）、是否真正可解释（注意力可视化）、以及能否被整合到实际系统中（系统架构）。单一评价无法覆盖这些不同层次的论证需求，因此作者按从全局到局部、从黑盒到白盒的顺序安排多种评价。
+
+- benchmark_and_contrast_chain_cn：首先用8个基线模型在4个数据集上建立整体性能基准；然后用消融变体（Pure-DETR、Hybrid-DETR、Explain-DETR）将整体性能分解为两个主要改进的贡献；接着用DETR作为对照进行注意力可视化，展示可解释性优势；最后用Grad-CAM补充验证整个推理过程的透明度。基准从宏观到微观逐步细化，每个对照都服务于下一个论证层次。
+
+### claim_evidence_ledger
+
+#### 1. EL-DETR在医学影像病变检测任务上比现有模型具有更高的精度和更强鲁棒性。
+
+- claim_type：技术主张
+
+- claim_cn：EL-DETR在医学影像病变检测任务上比现有模型具有更高的精度和更强鲁棒性。
+
+- supporting_evidence_cn：在四个数据集上的MAP@0.50:0.95、MAP@0.50、MAP@0.75均取得最高值，MAR接近最高值。
+
+- gap_or_caveat_cn：MAR并非全部数据集最优；没有显著性检验；实验仅离线进行。
+
+#### 2. 可解释分离注意力和混合匹配查询是两个有效且互补的设计组件。
+
+- claim_type：制品主张
+
+- claim_cn：可解释分离注意力和混合匹配查询是两个有效且互补的设计组件。
+
+- supporting_evidence_cn：消融实验中Explain-DETR和Hybrid-DETR均优于Pure-DETR，EL-DETR结合两者后MAP进一步上升。
+
+- gap_or_caveat_cn：未进行因子交互的统计检验；注意力机制为何贡献更大未从机制层面解释。
+
+#### 3. EL-DETR通过分离位置查询增强对病灶边界和形状的注意，从而改进可解释性。
+
+- claim_type：机制主张
+
+- claim_cn：EL-DETR通过分离位置查询增强对病灶边界和形状的注意，从而改进可解释性。
+
+- supporting_evidence_cn：注意力可视化显示深层解码器关注病灶边界和形状，且比DETR更少受噪声影响。
+
+- gap_or_caveat_cn：注意力图与模型决策之间的因果链未严格证明，存在将相关性误认为解释的潜在风险。
+
+#### 4. EL-DETR适用于多源医学影像（内镜、MRI、CT）中的病变检测。
+
+- claim_type：边界主张
+
+- claim_cn：EL-DETR适用于多源医学影像（内镜、MRI、CT）中的病变检测。
+
+- supporting_evidence_cn：在结直肠镜、MICCAI、KUMC和脑肿瘤数据集上均表现良好。
+
+- gap_or_caveat_cn：数据集均为二维图像，缺乏三维影像；未覆盖所有病变类型。
+
+#### 5. 在医学影像检测模型设计中，分离内容/位置查询并可视化注意力、使用混合匹配和复合损失是可行的设计原则。
+
+- claim_type：可复用设计知识
+
+- claim_cn：在医学影像检测模型设计中，分离内容/位置查询并可视化注意力、使用混合匹配和复合损失是可行的设计原则。
+
+- supporting_evidence_cn：消融和对比实验证明了这些设计对精度和可解释性的贡献。
+
+- gap_or_caveat_cn：这些原则在其他医学任务或非医学图像上的泛化尚未验证。
+
+#### 6. 本文扩展了DSR在AI医学影像决策支持领域的设计理论。
+
+- claim_type：理论贡献
+
+- claim_cn：本文扩展了DSR在AI医学影像决策支持领域的设计理论。
+
+- supporting_evidence_cn：作者将DSR规范应用到医学影像检测模型中，并给出系统架构。
+
+- gap_or_caveat_cn：“首个”声明缺少系统对比同类DSR制品；理论抽象程度有限，更多是应用示范而非理论发展。
+
+- internal_validity_strategy_cn：严格划分训练/验证/测试集（6:2:2），测试集仅用于最终评估；超参数在验证集上根据损失值选取；所有对比实验和消融实验在相同硬件、相同实现环境、预训练权重和默认最优超参数下进行。
+
+- external_validity_strategy_cn：使用四个来自不同医院和挑战赛的真实数据集，涵盖内镜（白光/NBI）、MRI和CT多种模态，包含不同类别和尺寸的病灶；通过跨数据集验证提高结论的泛化性。
+
+- what_is_not_actually_tested_cn：没有进行真实临床部署或前瞻性验证；没有输入临床医生对可视化解释的可用性评估；没有量化注意力图与病理位置的一致性；没有统计显著性检验；没有对系统架构进行用户测试或性能验证。
+
+## 贡献闭环
+
+- technical_claim_cn：EL-DETR在四个医学影像数据集上的MAP指标优于多个现有对象检测模型，具有更准确的病变定位和分类能力。
+
+- artifact_claim_cn：可解释分离注意力机制、混合匹配查询策略和高效复合损失函数是EL-DETR性能提升的原因，消融实验支持每个组件的独立贡献。
+
+- mechanism_claim_cn：可解释分离注意力通过分离内容与位置查询增强模型对病灶边界和形状的关注；混合匹配通过增加正样本监督改善模型对病变区域的学习；复合损失通过辅助损失和加权机制加速收敛并提高训练稳定性。
+
+- boundary_claim_cn：该模型在结直肠镜、MICCAI、KUMC和脑肿瘤MRI/CT四个数据集上有优势，但MAR在某些数据集上并非最优，且未验证其他医学影像任务或临床部署环境。
+
+- reusable_design_knowledge_cn：在设计医学影像检测DSS时：(1) 将内容查询与位置查询分离并可视化注意力，可提升可解释性；(2) 使用一对一加一对多的混合匹配和复合损失，可缓解不平衡数据下的正样本学习问题；(3) DETR-like架构可减少手工锚框设计并支持端到端检测。
+
+- theoretical_contribution_cn：作者声称扩展了DSR在AI医学影像决策支持系统中的应用，提出了基于可解释注意力和混合匹配的医学影像检测设计理论，并为不平衡数据处理提供了新的训练策略。
+
+- how_discussion_closes_intro_gap_cn：讨论部分首先重述引言提出的三大挑战（准确率、黑盒、不平衡），然后以三个理论贡献逐一对应：用四个数据集上的性能证明准确性、用可解释分离注意力回应黑盒、用混合匹配和复合损失回应数据不平衡；此外通过系统架构进一步表明EL-DETR能够嵌入真实临床决策流程。
+
+- overclaim_or_unsupported_leaps_cn：“首个基于DSR设计的AI制品”可能过度声明，因为文献综述未系统证明此前没有DSR医学影像AI制品；将注意力图当作可解释性证据并未验证医生是否真正理解或信任；从离线实验跳到“可靠工具”需要更多临床验证；没有统计检验支持指标差异的显著性。
+
+## 句级写作动作图谱
+
+### 1. Abstract S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：利用机器学习进行医学影像辅助决策能显著减少漏检和不必要开支。
+
+- rhetorical_function_cn：开篇给出医学影像辅助决策的重要性和机器学习带来的价值，为后续问题做铺垫。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出需要高准确性和透明性的要求。
+
+- evidence_pointer：摘要首句
+
+### 2. Abstract S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract S2
+
+- move_code：GAP
+
+- paraphrase_cn：但医疗领域对准确性和透明性的严格限制，给神经网络深度学习应用带来挑战。
+
+- rhetorical_function_cn：指出医学领域的特殊要求与当前深度学习能力之间的矛盾，建立问题空间。
+
+- depends_on_cn：上一句的正面价值
+
+- sets_up_cn：为引入EL-DETR作为解决方案做铺垫。
+
+- evidence_pointer：摘要第二句
+
+### 3. Abstract S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：为解决这些问题，作者提出一个新的AI制品EL-DETR，用于医学影像病变检测决策支持。
+
+- rhetorical_function_cn：直接陈述研究目标与制品名称。
+
+- depends_on_cn：前面的挑战表述
+
+- sets_up_cn：接下来概括制品的核心特征。
+
+- evidence_pointer：摘要第三句
+
+### 4. Abstract S4-S6
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract S4-S6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：该模型包含可解释分离注意力机制、混合匹配查询策略和自适应复合损失函数。
+
+- rhetorical_function_cn：用紧凑的列表式描述制品的技术核心。
+
+- depends_on_cn：研究目标
+
+- sets_up_cn：为正文详细设计部分提供提纲。
+
+- evidence_pointer：摘要第四至六句
+
+### 5. Abstract S7
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract S7
+
+- move_code：RESULT
+
+- paraphrase_cn：在四个真实数据集上验证了EL-DETR的准确性、鲁棒性和可解释性。
+
+- rhetorical_function_cn：给出评价结果声明，吸引读者继续阅读。
+
+- depends_on_cn：制品设计
+
+- sets_up_cn：暗示后续实验部分的具体内容。
+
+- evidence_pointer：摘要第七句
+
+### 6. Introduction P1 S1-S2
+
+- order：6
+
+- section：1. Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：决策支持系统在医疗保健中不断发展，医学影像是非侵入性诊断的重要工具。
+
+- rhetorical_function_cn：建立宏观背景：DSS+医疗影像结合。
+
+- depends_on_cn：无
+
+- sets_up_cn：为讨论医学影像诊断中的问题做铺垫。
+
+- evidence_pointer：引言第一段
+
+### 7. Introduction P1 S3
+
+- order：7
+
+- section：1. Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：但诊断准确度高度依赖放射科医生，且长时间阅片导致疲劳，增加误诊风险。
+
+- rhetorical_function_cn：强调现实风险和后果，提升问题的紧迫性。
+
+- depends_on_cn：上文的工具重要性
+
+- sets_up_cn：为提出AI自动化辅助提供现实依据。
+
+- evidence_pointer：引言第一段末
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- section：1. Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：数据可用性和计算能力的提升推动了信息技术在疾病治疗管理中的应用，减轻了医生负担并降低成本。
+
+- rhetorical_function_cn：指出已有研究趋势和正面效果。
+
+- depends_on_cn：前文背景
+
+- sets_up_cn：引出深度学习医学图像分析的进步。
+
+- evidence_pointer：引言第二段
+
+### 9. Introduction P2 S2-S3
+
+- order：9
+
+- section：1. Introduction
+
+- locator：Introduction P2 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：基于神经网络的方法在医学图像分析中展现出前景，特别是目标检测方法能同时定位和分类病灶。
+
+- rhetorical_function_cn：介绍现有技术能力，为后文技术基础做铺垫。
+
+- depends_on_cn：信息技术发展趋势
+
+- sets_up_cn：为指出DETR-like模型的不足提供背景。
+
+- evidence_pointer：引言第二段后句
+
+### 10. Introduction P3 S1
+
+- order：10
+
+- section：1. Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：然而，医学影像决策面临多项重大挑战，限制了精确度和临床应用。
+
+- rhetorical_function_cn：转折句，从正面技术转向问题清单。
+
+- depends_on_cn：前述深度学习潜力
+
+- sets_up_cn：引出具体挑战列表。
+
+- evidence_pointer：引言第三段首句
+
+### 11. Introduction P3 'First'
+
+- order：11
+
+- section：1. Introduction
+
+- locator：Introduction P3 'First'
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：患者内部结构复杂、组织重叠、设备差异和病灶异质性都干扰病变识别。
+
+- rhetorical_function_cn：描述第一个挑战的具体经验现象。
+
+- depends_on_cn：总体挑战句
+
+- sets_up_cn：为模型设计中的空间特征提取和全局理解提供动因。
+
+- evidence_pointer：引言第三段First
+
+### 12. Introduction P3 'Second'
+
+- order：12
+
+- section：1. Introduction
+
+- locator：Introduction P3 'Second'
+
+- move_code：LIMITATION
+
+- paraphrase_cn：深度神经网络的黑盒特性使其推理过程难以解释，导致临床医生难以信任；现有检测模型也未充分利用空间和上下文信息。
+
+- rhetorical_function_cn：指出黑盒问题以及现有模型的空间信息利用不足。
+
+- depends_on_cn：总挑战句
+
+- sets_up_cn：为可解释分离注意力机制的设计提供直接理由。
+
+- evidence_pointer：引言第三段Second
+
+### 13. Introduction P3 'Finally'
+
+- order：13
+
+- section：1. Introduction
+
+- locator：Introduction P3 'Finally'
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：医学影像中正常图像占多数，病灶像素占比小，数据不平衡导致训练困难、漏检和假阳性。
+
+- rhetorical_function_cn：描述第三个挑战：数据不平衡。
+
+- depends_on_cn：总挑战句
+
+- sets_up_cn：为混合匹配和复合损失提供动机。
+
+- evidence_pointer：引言第三段Finally
+
+### 14. Introduction P3 末句
+
+- order：14
+
+- section：1. Introduction
+
+- locator：Introduction P3 末句
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：传统过采样/欠采样有缺陷，而在DETR-like方法中增加正查询数量能有效提升训练效率。
+
+- rhetorical_function_cn：引入一种解决方案线索，为后文混合匹配做理论铺垫。
+
+- depends_on_cn：数据不平衡问题
+
+- sets_up_cn：暗示混合匹配查询设计。
+
+- evidence_pointer：引言第三段末
+
+### 15. Introduction P4 S1
+
+- order：15
+
+- section：1. Introduction
+
+- locator：Introduction P4 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：为解决以上挑战，开发基于AI的IT制品EL-DETR，并以DSR为指导。
+
+- rhetorical_function_cn：明确研究目标和方法论框架。
+
+- depends_on_cn：三个挑战
+
+- sets_up_cn：介绍制品的三大创新。
+
+- evidence_pointer：引言第四段首句
+
+### 16. Introduction P4 S2-S4
+
+- order：16
+
+- section：1. Introduction
+
+- locator：Introduction P4 S2-S4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：EL-DETR通过DCNN+Transformer增强空间和全局特征，通过可解释分离注意力可视化推理，通过混合匹配和复合损失解决数据不平衡。
+
+- rhetorical_function_cn：高度概括制品三个主要设计特征。
+
+- depends_on_cn：研究目标
+
+- sets_up_cn：详细设计将在第3节展开。
+
+- evidence_pointer：引言第四段
+
+### 17. Introduction P4 S5
+
+- order：17
+
+- section：1. Introduction
+
+- locator：Introduction P4 S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称这是首个基于DSR设计的医学影像疾病风险决策支持AI制品。
+
+- rhetorical_function_cn：提出高阶贡献声明，抢占新颖性。
+
+- depends_on_cn：前述创新
+
+- sets_up_cn：支撑后文的理论贡献论述。
+
+- evidence_pointer：引言第四段末
+
+### 18. Introduction P5 列表
+
+- order：18
+
+- section：1. Introduction
+
+- locator：Introduction P5 列表
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：列出三个贡献：扩展医学影像决策支持设计理论、提出可解释分离注意力机制、提出混合匹配和复合损失应对不平衡数据。
+
+- rhetorical_function_cn：结构化展示论文贡献。
+
+- depends_on_cn：制品设计和结果预告
+
+- sets_up_cn：与讨论部分的理论贡献相呼应。
+
+- evidence_pointer：引言第五段
+
+### 19. Introduction P6
+
+- order：19
+
+- section：1. Introduction
+
+- locator：Introduction P6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：说明论文组织：文献综述、制品设计、实验、结果验证、讨论与系统演示、结论。
+
+- rhetorical_function_cn：提供阅读地图。
+
+- depends_on_cn：无
+
+- sets_up_cn：为读者建立预期结构。
+
+- evidence_pointer：引言末段
+
+### 20. Section 2.1 start
+
+- order：20
+
+- section：2. Literature review
+
+- locator：Section 2.1 start
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：AI在医疗决策支持中的研究可分为三类：分诊、疾病诊断、住院时长和再入院预测。
+
+- rhetorical_function_cn：将已有研究分类，展示文献全景。
+
+- depends_on_cn：引言背景
+
+- sets_up_cn：为指出结构化数据研究居多提供结构。
+
+- evidence_pointer：Section 2.1首段
+
+### 21. Section 2.1 end
+
+- order：21
+
+- section：2. Literature review
+
+- locator：Section 2.1 end
+
+- move_code：LIMITATION
+
+- paraphrase_cn：然而多数现有研究依赖结构化临床数据或电子病历，而医学图像在诊断中常起关键作用。
+
+- rhetorical_function_cn：指出现有文献忽略医学图像这一决策证据来源。
+
+- depends_on_cn：三流分类介绍
+
+- sets_up_cn：确定本研究聚焦医学图像决策支持。
+
+- evidence_pointer：Section 2.1末段
+
+### 22. Section 2.2 start
+
+- order：22
+
+- section：2. Literature review
+
+- locator：Section 2.2 start
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：医学影像DSS研究分为模型结构创新和数据特征创新两类，作者指出将Transformer与DCNN结合可提取更深特征。
+
+- rhetorical_function_cn：给出医学影像DSS的现有贡献类别，并埋下技术融合动机。
+
+- depends_on_cn：上一小节缺口
+
+- sets_up_cn：为EL-DETR的DCNN+Transformer架构做位置铺垫。
+
+- evidence_pointer：Section 2.2首段
+
+### 23. Section 2.2 end
+
+- order：23
+
+- section：2. Literature review
+
+- locator：Section 2.2 end
+
+- move_code：GAP
+
+- paraphrase_cn：现有研究在准确率上已有进展，但神经网络黑盒性质仍是AI医疗决策应用的主要障碍。
+
+- rhetorical_function_cn：点出可解释性缺口。
+
+- depends_on_cn：医学影像DSS研究综述
+
+- sets_up_cn：引出下一小节XAI综述。
+
+- evidence_pointer：Section 2.2末段
+
+### 24. Section 2.3 start
+
+- order：24
+
+- section：2. Literature review
+
+- locator：Section 2.3 start
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：XAI在医学决策中已广泛应用，包括特征重要性和决策树方法、注意力深度网络、可解释度量学习等。
+
+- rhetorical_function_cn：总结XAI在医学领域的已有应用。
+
+- depends_on_cn：前一小节缺口
+
+- sets_up_cn：强调XAI虽然存在，但复杂深度学习模型在医学影像中仍缺乏可解释性。
+
+- evidence_pointer：Section 2.3前段
+
+### 25. Section 2.3 end
+
+- order：25
+
+- section：2. Literature review
+
+- locator：Section 2.3 end
+
+- move_code：GAP
+
+- paraphrase_cn：但复杂深度学习模型的可解释性在医学影像中仍是挑战，本文关注医学影像深度模型的可解释创新。
+
+- rhetorical_function_cn：明确本文切入的具体研究缺口。
+
+- depends_on_cn：XAI相关综述
+
+- sets_up_cn：为第3节的可解释设计确立目标。
+
+- evidence_pointer：Section 2.3末段
+
+### 26. Section 3 intro
+
+- order：26
+
+- section：3. Artifact description
+
+- locator：Section 3 intro
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：设计科学旨在创造IT制品解决实际问题，作者遵循Peffers等人的六个步骤设计EL-DETR。
+
+- rhetorical_function_cn：为随后的制品描述提供方法论框架。
+
+- depends_on_cn：文献综述中的缺口
+
+- sets_up_cn：说明后文内容属于DSR的“设计和开发”环节。
+
+- evidence_pointer：Section 3引言
+
+### 27. Section 3.1 P1
+
+- order：27
+
+- section：3. Artifact description
+
+- locator：Section 3.1 P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：EL-DETR遵循DETR架构，端到端对象检测，不依赖锚框和NMS，减少了模型参数和计算成本。
+
+- rhetorical_function_cn：说明制品继承的技术基础及其优点。
+
+- depends_on_cn：前文技术缺口
+
+- sets_up_cn：为在此基础上增加可解释性做铺垫。
+
+- evidence_pointer：Section 3.1第1段
+
+### 28. Section 3.1 P1 末句
+
+- order：28
+
+- section：3. Artifact description
+
+- locator：Section 3.1 P1 末句
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：EL-DETR扩展了DETR-like模型的临床应用和可解释性，解决黑盒问题。
+
+- rhetorical_function_cn：将技术继承与论文目标连接。
+
+- depends_on_cn：DETR架构介绍
+
+- sets_up_cn：引出后续关键改进。
+
+- evidence_pointer：Section 3.1第1段末
+
+### 29. Section 3.1 P2-P3
+
+- order：29
+
+- section：3. Artifact description
+
+- locator：Section 3.1 P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：介绍整体框架：ResNet50骨干、6层Transformer编码器/解码器、多任务预测头，并给出检测框和类别预测公式。
+
+- rhetorical_function_cn：具体化制品的基础架构。
+
+- depends_on_cn：DETR架构选择
+
+- sets_up_cn：为描述三大改进提供上下文。
+
+- evidence_pointer：Section 3.1第2-3段
+
+### 30. Section 3.1 P4
+
+- order：30
+
+- section：3. Artifact description
+
+- locator：Section 3.1 P4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：为了提升效率和可解释性，引入四个关键改进：分离注意力、一对多查询、复合损失、注意力可视化。
+
+- rhetorical_function_cn：预告接下来的小节内容。
+
+- depends_on_cn：总体框架
+
+- sets_up_cn：为3.2-3.3的详细设计做索引。
+
+- evidence_pointer：Section 3.1末段
+
+### 31. Section 3.2 P1
+
+- order：31
+
+- section：3. Artifact description
+
+- locator：Section 3.2 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：受Conditional DETR启发，使用点积分别计算内容注意力和位置注意力，再组合为最终注意力权重。
+
+- rhetorical_function_cn：引入外部技术知识作为设计依据。
+
+- depends_on_cn：前述关键改进预告
+
+- sets_up_cn：为可解释分离注意力的公式化提供理论来源。
+
+- evidence_pointer：Section 3.2第1段
+
+### 32. Section 3.2 P2
+
+- order：32
+
+- section：3. Artifact description
+
+- locator：Section 3.2 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：位置查询由前层解码器嵌入和参考点生成，参考点来自对象查询的归一化二维坐标，这样位置查询可与编码器输出的位置键交互。
+
+- rhetorical_function_cn：解释位置查询的来源和作用机制。
+
+- depends_on_cn：分离注意力思想
+
+- sets_up_cn：为可视化位置注意力提供设计支撑。
+
+- evidence_pointer：Section 3.2第2段
+
+### 33. Section 3.2 末句
+
+- order：33
+
+- section：3. Artifact description
+
+- locator：Section 3.2 末句
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：从跨注意力机制中提取权重并映射回输入图像，以实现可解释分析。
+
+- rhetorical_function_cn：将可解释性目标转化为具体视觉输出。
+
+- depends_on_cn：位置查询机制
+
+- sets_up_cn：为第5.4节可视化实验做铺垫。
+
+- evidence_pointer：Section 3.2末段
+
+### 34. Section 3.3 P1
+
+- order：34
+
+- section：3. Artifact description
+
+- locator：Section 3.3 P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：医学图像中病灶稀少，DETR-like模型使用一对一双边匹配导致超过90%的预测框没有有效定位监督。
+
+- rhetorical_function_cn：描述数据不平衡下DETR-like模型的具体问题。
+
+- depends_on_cn：引言中的不平衡挑战
+
+- sets_up_cn：为混合匹配策略提供直接原因。
+
+- evidence_pointer：Section 3.3第1段
+
+### 35. Section 3.3 P2
+
+- order：35
+
+- section：3. Artifact description
+
+- locator：Section 3.3 P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：引入一对多查询并重复真值比例，增加正样本监督，同时不会造成类别不平衡和额外假阳性。
+
+- rhetorical_function_cn：介绍混合匹配查询的核心设计及其安全保证。
+
+- depends_on_cn：上一段的问题
+
+- sets_up_cn：为损失函数定义做铺垫。
+
+- evidence_pointer：Section 3.3第2段
+
+### 36. Section 3.3 P3-P5
+
+- order：36
+
+- section：3. Artifact description
+
+- locator：Section 3.3 P3-P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：定义一对一损失、一对多损失和混合损失公式，并构造自注意力掩码隔离两类查询。
+
+- rhetorical_function_cn：将设计转化为可计算的数学表达。
+
+- depends_on_cn：混合匹配概念
+
+- sets_up_cn：为复合损失函数提供基础。
+
+- evidence_pointer：Section 3.3公式6-8
+
+### 37. Section 3.3 P6
+
+- order：37
+
+- section：3. Artifact description
+
+- locator：Section 3.3 P6
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：复合损失由CE、L1和GIOU损失组成，分别处理类别、框坐标和框重叠。
+
+- rhetorical_function_cn：给出基础任务损失组成。
+
+- depends_on_cn：混合匹配损失
+
+- sets_up_cn：为最终高效复合损失做铺垫。
+
+- evidence_pointer：Section 3.3公式9
+
+### 38. Section 3.3 P7-P8
+
+- order：38
+
+- section：3. Artifact description
+
+- locator：Section 3.3 P7-P8
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：引入前五层解码器输出的辅助损失，并与一对一、一对多损失加权组合成高效复合损失。
+
+- rhetorical_function_cn：完成复合损失的设计，集成辅助训练信号。
+
+- depends_on_cn：前面各损失
+
+- sets_up_cn：为实验中的超参数α等提供定义。
+
+- evidence_pointer：Section 3.3公式10-11
+
+### 39. Section 4.1 首句
+
+- order：39
+
+- section：4. Experiment
+
+- locator：Section 4.1 首句
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为了在现实场景中评估EL-DETR，收集了来自内镜、MRI和CT的四个医学影像数据集。
+
+- rhetorical_function_cn：说明数据集选择的现实性和多样性，为外部有效性辩护。
+
+- depends_on_cn：制品已定义
+
+- sets_up_cn：逐一介绍四个数据集。
+
+- evidence_pointer：Section 4.1首段
+
+### 40. Section 4.2
+
+- order：40
+
+- section：4. Experiment
+
+- locator：Section 4.2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：预处理包括按随机间隔从视频提取帧、转换为COCO格式、划分训练/验证/测试集（6:2:2），并仅在训练集上做数据增强，测试集不做任何处理。
+
+- rhetorical_function_cn：说明数据预处理和划分策略，防止数据泄漏。
+
+- depends_on_cn：数据集来源
+
+- sets_up_cn：为后续实验建立可信的数据基础。
+
+- evidence_pointer：Section 4.2
+
+### 41. Section 4.3
+
+- order：41
+
+- section：4. Experiment
+
+- locator：Section 4.3
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：基于验证集上的损失函数值进行超参数搜索，确保准确性与计算效率平衡，并在统一硬件上实施所有实验。
+
+- rhetorical_function_cn：阐述超参数选择和实验环境控制的合理性。
+
+- depends_on_cn：数据划分
+
+- sets_up_cn：为对比实验和消融实验提供公平基础。
+
+- evidence_pointer：Section 4.3, Table 1
+
+### 42. Section 5.1
+
+- order：42
+
+- section：5. Model evaluation
+
+- locator：Section 5.1
+
+- move_code：RESULT
+
+- paraphrase_cn：四个数据集上的训练损失均快速下降并趋于稳定，分类损失初始较大随后与定位损失趋近；辅助损失和一对多损失下降更陡，表明它们加速了收敛。
+
+- rhetorical_function_cn：报告基础实验结果，验证模型训练动态。
+
+- depends_on_cn：实验设置
+
+- sets_up_cn：为消融实验中的复合损失作用提供直观证据。
+
+- evidence_pointer：Section 5.1, Fig. 3-6
+
+### 43. Section 5.2 P1
+
+- order：43
+
+- section：5. Model evaluation
+
+- locator：Section 5.2 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：选取不同架构的8个基线模型进行对比，并使用MAP和MAR系列指标，统一检测数量上限。
+
+- rhetorical_function_cn：建立合理的评价参照系，说明baseline选择和指标定义。
+
+- depends_on_cn：实验设置
+
+- sets_up_cn：为比较结果提供标准化基准。
+
+- evidence_pointer：Section 5.2第1段
+
+### 44. Section 5.2 P2
+
+- order：44
+
+- section：5. Model evaluation
+
+- locator：Section 5.2 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：EL-DETR在四个数据集上MAP@0.50:0.95、MAP@0.50和MAP@0.75均为最优，MAR在部分数据集上略低于DINO或Deformable-DETR。
+
+- rhetorical_function_cn：报告对比实验核心结果，既展示优势也诚实报告短板。
+
+- depends_on_cn：基准体系
+
+- sets_up_cn：为后续消融实验解释性能来源做铺垫。
+
+- evidence_pointer：Section 5.2, Table 2
+
+### 45. Section 5.3 P1
+
+- order：45
+
+- section：5. Model evaluation
+
+- locator：Section 5.3 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：构造Pure-DETR、Hybrid-DETR和Explain-DETR作为消融变体，以分离单个改进的贡献。
+
+- rhetorical_function_cn：介绍消融对照设置。
+
+- depends_on_cn：总体性能优势
+
+- sets_up_cn：为组件归因奠定设计基础。
+
+- evidence_pointer：Section 5.3第1段
+
+### 46. Section 5.3 P2
+
+- order：46
+
+- section：5. Model evaluation
+
+- locator：Section 5.3 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：两种改进都带来MAP提升，且可解释注意力的贡献大于混合匹配；混合匹配在MAR上有显著改善，但在与注意力组合后MAR有所回落。
+
+- rhetorical_function_cn：报告消融结果，指明各组件效应。
+
+- depends_on_cn：消融设计
+
+- sets_up_cn：为可解释实验中的注意力机制行为提供量化背景。
+
+- evidence_pointer：Section 5.3, Table 3
+
+### 47. Section 5.4 P1
+
+- order：47
+
+- section：5. Model evaluation
+
+- locator：Section 5.4 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过将解码器跨注意力权重映射到输入图像，分析模型推理时对不同像素的关注程度。
+
+- rhetorical_function_cn：说明可解释性实验的具体方法。
+
+- depends_on_cn：分离注意力设计
+
+- sets_up_cn：为后面可视化结果做方法论铺垫。
+
+- evidence_pointer：Section 5.4第1段
+
+### 48. Section 5.4 P2
+
+- order：48
+
+- section：5. Model evaluation
+
+- locator：Section 5.4 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：EL-DETR各层注意力均正确对应病灶位置，且不同层分别关注内部和边界形状，这符合临床诊断标准。
+
+- rhetorical_function_cn：报告注意力图的核心发现，连接临床领域知识。
+
+- depends_on_cn：可视化方法
+
+- sets_up_cn：为与DETR对比和临床意义讨论提供证据。
+
+- evidence_pointer：Section 5.4第2段, Fig. 7
+
+### 49. Section 5.4 P3
+
+- order：49
+
+- section：5. Model evaluation
+
+- locator：Section 5.4 P3
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：与DETR相比，EL-DETR的注意力受噪声影响更小，更聚焦病灶并强调边界，说明其更强的区分能力和可靠性。
+
+- rhetorical_function_cn：通过与基线的视觉对比，展示模型在可解释性上的边界优势。
+
+- depends_on_cn：EL-DETR注意力图
+
+- sets_up_cn：支持理论讨论中关于可解释性的贡献声明。
+
+- evidence_pointer：Section 5.4第3段, Fig. 8-9
+
+### 50. Section 5.4 P4
+
+- order：50
+
+- section：5. Model evaluation
+
+- locator：Section 5.4 P4
+
+- move_code：RESULT
+
+- paraphrase_cn：补充实验使用Grad-CAM和附加案例，进一步显示注意力图和特征图能更精确地聚焦病灶，且不同病灶类型和大小均保持一致的可解释性。
+
+- rhetorical_function_cn：通过多种可解释性工具和更多案例，增加结论的稳健性和泛化性。
+
+- depends_on_cn：主要注意力可视化
+
+- sets_up_cn：为讨论部分“透明性”和“泛化性”提供参考。
+
+- evidence_pointer：Section 5.4末段, Supplementary Figs. S2-S13
+
+### 51. Section 6.1 P1
+
+- order：51
+
+- section：6. Communication and implication
+
+- locator：Section 6.1 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之一是扩展DSR和AI在医学影像决策支持系统中的应用，特别是针对病变检测。
+
+- rhetorical_function_cn：将结果提升到理论层面，回应引言中的“首个DSR医学影像AI制品”声明。
+
+- depends_on_cn：实验结果
+
+- sets_up_cn：为后续两个理论贡献做铺垫。
+
+- evidence_pointer：Section 6.1第1段
+
+### 52. Section 6.1 P2
+
+- order：52
+
+- section：6. Communication and implication
+
+- locator：Section 6.1 P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之二是通过可视化跨注意力映射增强深度学习在医学决策支持中的可解释性，区别于事后解释方法。
+
+- rhetorical_function_cn：将可解释性可视化结果抽象为理论贡献。
+
+- depends_on_cn：可解释实验结果
+
+- sets_up_cn：强化论文在XAI领域的定位。
+
+- evidence_pointer：Section 6.1第2段
+
+### 53. Section 6.1 P3
+
+- order：53
+
+- section：6. Communication and implication
+
+- locator：Section 6.1 P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献之三是针对医学数据不平衡问题，提出混合匹配查询和高效复合损失，增强正样本学习。
+
+- rhetorical_function_cn：将混合匹配和损失设计提升为对数据不平衡问题的知识贡献。
+
+- depends_on_cn：混合匹配设计和消融结果
+
+- sets_up_cn：为管理启示中的工作流改善提供理论基础。
+
+- evidence_pointer：Section 6.1第3段
+
+### 54. Section 6.2 P1
+
+- order：54
+
+- section：6. Communication and implication
+
+- locator：Section 6.2 P1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：管理启示指出放射科医生负担重，EL-DETR通过可解释和鲁棒的框架改善诊断工作流并提升对AI的信任。
+
+- rhetorical_function_cn：将模型与临床实践中的实际痛点连接。
+
+- depends_on_cn：理论与技术贡献
+
+- sets_up_cn：为系统实施蓝图做铺垫。
+
+- evidence_pointer：Section 6.2第1段
+
+### 55. Section 6.3
+
+- order：55
+
+- section：6. Communication and implication
+
+- locator：Section 6.3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：提出一个四层医学影像决策支持系统架构，将EL-DETR嵌入数据、模型、应用和用户层，并支持反馈驱动的重训练。
+
+- rhetorical_function_cn：将算法模型扩展为系统级设计知识。
+
+- depends_on_cn：已验证的模型
+
+- sets_up_cn：为未来临床实施提供蓝图，同时也为论文贡献增加可操作性。
+
+- evidence_pointer：Section 6.3, Fig. 10
+
+### 56. Section 7 P1
+
+- order：56
+
+- section：7. Conclusion and future work
+
+- locator：Section 7 P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结EL-DETR的设计、贡献和实验验证结果。
+
+- rhetorical_function_cn：收束全文，重复核心贡献。
+
+- depends_on_cn：全文
+
+- sets_up_cn：随后引出未来工作。
+
+- evidence_pointer：Section 7第1段
+
+### 57. Section 7 P2
+
+- order：57
+
+- section：7. Conclusion and future work
+
+- locator：Section 7 P2
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：指出数据集规模限制，未来希望在更大规模标注数据上训练，并探索更透明的深度学习模型。
+
+- rhetorical_function_cn：坦诚说明限制，保护贡献不被过度解读，并为后续研究留出空间。
+
+- depends_on_cn：现有结果
+
+- sets_up_cn：没有后续内容。
+
+- evidence_pointer：Section 7末段
+
+## 写作技术
+
+- gap_construction_cn：作者首先承认AI在医学影像中的潜力，然后通过三大现实挑战（影像复杂性、黑盒、不平衡）逐步锁定具体缺口，并结合文献综述指出'现有研究多依赖结构化数据'、'现有对象检测模型未利用空间/上下文信息'、'DETR-like模型正样本监督不足'等精确缺口，从而使问题从一般性不足收缩到可设计解决的具体设计空白。
+
+- signposting_cn：引言末段直接预告论文结构；在第3节开头声明遵循DSR步骤；第3.1末段预告四项关键改进；在各实验小节开头明确该节要回答的问题。这些路标帮助读者理解每个部分在论证中的位置。
+
+- transition_logic_cn：段落间通过因果链衔接：从问题的三个子项分别对应对策的三个创新；从基础实验（训练动态）到对比实验（总体性能）再到消融实验（组件贡献）最后到可解释实验（机制可视化），每个实验回答上一实验留下的未决问题。
+
+- claim_evidence_rhythm_cn：论文在实验部分先报告结果，再以解释性语言连接设计动机；例如先展示损失曲线，随后解释一对多和辅助损失加速收敛；先报告MAP最优，再通过消融实验归因到具体组件；先展示注意力图，再将其与临床标准关联。主张-证据-解释交替出现，形成紧密的论证节奏。
+
+- benchmark_narrative_cn：对比实验使用8个逐步演进的DETR-like模型作为基准，在叙述中先列出各基线的特点（如DAB-DETR动态锚框、Deformable-DETR多尺度特征、DN-DETR去噪训练、DINO对比学习），然后统一指出'所有对比模型加载作者预训练权重和默认最优超参数'，以此强调比较的公平性，再将EL-DETR指标最优的结果嵌入该叙事。
+
+- theory_return_cn：讨论部分不是简单复述结果，而是将三个实验结果分别抽象为理论贡献：数据集性能→扩展DSR应用；注意力可视化→增强可解释性；混合匹配与损失→解决数据不平衡。每个理论贡献都引用了引言中提出的缺口，完成回环。
+
+- contribution_positioning_cn：贡献声明在引言出现一次（简短列表），在正文实验后通过理论和管理启示段落以更详细的叙事再次出现。这种前后呼应将制品工作嵌入到更广泛的DSS研究议程中。
+
+- novelty_protection_cn：为防止贡献退化为一次性性能结果，作者采用多种策略：强调'首个基于DSR的医学影像AI制品'的方法论新颖性；以消融实验证明各设计组件可分离可迁移；以注意力图与临床标准（边界、形状）关联，表明可解释性不只是可视化装饰；最后给出系统架构，表明制品能嵌入实际决策流程，超越单次实验。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立应用领域的重要性和现实痛点，列出任务中的具体挑战。
+
+- research_job_cn：通过文献和领域知识识别关键的、可设计解决的研究缺口。
+
+- required_evidence_cn：需要至少2-3个清晰的现实挑战，且每个挑战都能映射到后续制品的设计特性。
+
+- transition_to_next_cn：用'为解决上述挑战，我们开发...'引出制品。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：给出制品的高层概述和三项核心创新。
+
+- research_job_cn：确定制品的总体架构（如基于某个成熟模型），并设计能回应挑战的具体改进。
+
+- required_evidence_cn：每个创新点都应能追溯到一个挑战或文献缺口。
+
+- transition_to_next_cn：声明'遵循DSR方法论'并进入详细设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：描述制品的基础架构和关键机制，使用公式和架构图。
+
+- research_job_cn：将概念设计转化为可实现的数学模型和网络结构。
+
+- required_evidence_cn：需要可运行的公式、结构和明确的组件定义，使后续能够实现与复现。
+
+- transition_to_next_cn：预告'接下来通过实验验证...'。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：说明数据来源、预处理、划分和训练配置。
+
+- research_job_cn：构建真实或高逼真数据集，设置公平的实验对照组和超参数选择方案。
+
+- required_evidence_cn：需要数据集规模、真实来源、明确划分和超参数搜索空间。
+
+- transition_to_next_cn：进入模型评估，依次回答不同层次的问题。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：先展示训练动态或基本实验结果，确认模型可行。
+
+- research_job_cn：记录损失曲线或基本性能指标，观察收敛行为。
+
+- required_evidence_cn：损失曲线或基础准确率证据，支持'模型有效训练'。
+
+- transition_to_next_cn：由'训练有效'引出'与现有方法相比如何'。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告与多个基线的对比实验。
+
+- research_job_cn：在公共基准或自建真实数据集上运行baseline，确保相同条件。
+
+- required_evidence_cn：需要至少2个合适基线、统一指标和足够显示优势的结果。
+
+- transition_to_next_cn：指出'虽然总体性能好，但需要确认哪些组件起作用'。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：进行消融实验，分离各设计组件的贡献。
+
+- research_job_cn：构建仅包含部分设计的变体，比较完整模型与变体的差异。
+
+- required_evidence_cn：需要每个变体在相同数据上的指标，且差异方向一致。
+
+- transition_to_next_cn：如果涉及可解释性，则进入可视化分析。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：可解释性实验：展示模型内部注意力或重要特征的可视化。
+
+- research_job_cn：提取注意力图、Grad-CAM或类似解释，并与基线模型进行定性比较。
+
+- required_evidence_cn：需要能说明模型关注目标区域的可视化证据，并可关联领域知识。
+
+- transition_to_next_cn：转向讨论，将证据抽象为理论和实践贡献。
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：讨论理论贡献、管理启示和系统应用。
+
+- research_job_cn：把实验结果重新连接到引言中的缺口，并推导出可复用知识。
+
+- required_evidence_cn：每个贡献声明都需要有前面的数据或对比作为支撑。
+
+- transition_to_next_cn：最后总结结论和未来方向。
+
+### most_transferable_moves_cn
+
+1. 在引言中用三大挑战架设问题，为后文每个创新提供理由
+
+2. 在制品描述中采用'基础架构+关键改进'的写法，先引用DETR，再定制三个模块
+
+3. 实验分层：训练动态→整体对比→消融→可解释性，每一层回答不同证据缺口
+
+4. 使用消融变体（Pure/Hybrid/Explain）使得技术贡献可归因
+
+5. 在讨论部分将每个实验结果对应回引言的一个挑战
+
+6. 提供系统架构蓝图，使模型升华为DSS设计知识
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 四个真实医学影像数据集（尤其是医院内镜视频和专家标注）获取成本高
+
+2. 需要NVIDIA 3090等高端GPU进行训练和8个baseline的对比实验
+
+3. 注意力可视化需要人工选择案例和定性判断，难以大规模复制
+
+4. 真实临床部署和医生评估需要伦理审批和长期合作，本文未完成
+
+### what_not_to_copy_superficially_cn
+
+1. 如果只声明'设计科学研究'但没有执行需求-构建-评价的完整循环，则方法论标签无效
+
+2. 如果只展示注意力图而不提供与基线的对比或消融数据，就不能宣称可解释性优势
+
+3. 如果缺少多个真实数据集，'鲁棒性'和'泛化性'声明将失去支撑
+
+4. 如果声称'首个'但没有系统检查同类DSR应用，该声明容易受攻击
+
+5. 如果指标体系只有单一数据集或单一指标，对比实验不足以支持强结论
+
+- single_best_description_of_the_routine_cn：先以现实挑战定题，再用文献缺口精确化问题，然后以现有模型为基础构建带三大改进的DSR制品，接着用多数据集、多基线和多层次的实验（整体、消融、可视化）将性能优势分解并加固，最后通过理论与管理讨论以及系统架构把结果升华为可复用设计知识。
+
+## 分析边界
+
+本文为单篇论文全文本分析，无OCR问题；但附录材料（Supplementary figures）未随正文提供，因此对可解释性实验证据的引用依赖正文描述。文章没有提供训练/测试性能的不确定性范围或显著性检验，只能按作者报告结果进行论述。研究阶段划分基于内容和论证功能，可能与其他分析者存在细微差异。

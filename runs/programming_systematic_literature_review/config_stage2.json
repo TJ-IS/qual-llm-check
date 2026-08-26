@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "analysis_version": "programming-slr-title-abstract-confirm-v1",
+  "input_dir": "input_stage2",
+  "output_dir": "output_stage2_v1",
+  "env_file": "../../.env",
+  "prompt_files": {
+    "system": "system_prompt_stage2.md",
+    "user_template": "user_prompt_template.md",
+    "chunk_system": "chunk_system_prompt.md"
+  },
+  "model": {
+    "name": "deepseek-v4-pro",
+    "api_key_env": "NEW_API_KEY",
+    "base_url_env": "NEW_API_BASE_URL",
+    "base_url": "https://api.deepseek.com",
+    "temperature": 0,
+    "max_tokens": 1600,
+    "chunk_max_tokens": 900,
+    "timeout": 180
+  },
+  "batch": {
+    "max_concurrency": 12,
+    "retries": 3,
+    "retry_base_delay": 2.0,
+    "direct_max_chars": null,
+    "chunk_chars": 180000,
+    "chunk_overlap_chars": 3000
+  }
+}

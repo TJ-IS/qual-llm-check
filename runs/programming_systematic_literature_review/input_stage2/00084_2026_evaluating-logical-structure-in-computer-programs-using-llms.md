@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105040214099"
+title: "Evaluating Logical Structure in Computer Programs Using LLMs"
+authors: "Tamang S.; Adnan M.A.M.; Sajib M.I.; Rus V."
+year: "2026"
+journal: "Proceedings of the International Florida Artificial Intelligence Research Society Conference, FLAIRS"
+doi: "10.32473/flairs.39.1.141793"
+---
+# Scopus title-abstract-keyword metadata
+Title: Evaluating Logical Structure in Computer Programs Using LLMs
+Abstract: Code comprehension theories postulate that programmers need to identify the logical steps of a computer program. This work examines the ability of large language models (LLMs) to identify and explain logical steps and their corresponding blocks of code in well-structured programming tasks. To evaluate the LLMs’ performance, we compare the LLM-identified logical steps with those identified by human experts. We assess the match between human and LLM annotations on this task using automated similarity analysis under multiple alignment strategies. Results show that the highest similarity between LLM-generated and human expert descriptions of the logical steps reaches up to 64.4%. © 2026, Florida Online Journals, University of Florida. All rights reserved.
+Author keywords: 
+Index keywords: Logic programming; Code comprehension; Human expert; Language model; Logical structure; Modeling performance; Multiple alignment; Programming tasks; Similarity analysis; Structured programming
+Document type: Conference paper
+Conference: 39th International Florida Artificial Intelligence Research Society Conference, FLAIRS-39 2026
+Source title: Proceedings of the International Florida Artificial Intelligence Research Society Conference, FLAIRS
+Year: 2026
+EID: 2-s2.0-105040214099
+DOI: 10.32473/flairs.39.1.141793
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

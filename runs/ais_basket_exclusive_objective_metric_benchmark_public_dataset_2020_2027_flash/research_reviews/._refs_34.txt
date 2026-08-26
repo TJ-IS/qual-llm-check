@@ -1,0 +1,28 @@
+[1] Apruzzese, G., Colajanni, M., Ferretti, L., Aydin, A. A., & Marchetti, M. (2019). On the effectiveness of machine and deep learning for cyber security. In *Proceedings of the 10th International Conference on Cyber Conflict (CyCon)*, 371-387.
+[2] Rai, A. (2017). Editor's comments: Diversity of design science research. *MIS Quarterly*, 41(1), iii-xviii.
+[3] Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., & Narasimhan, K. (2024). SWE-bench: Can language models resolve real-world GitHub issues? In *Proceedings of the 12th International Conference on Learning Representations (ICLR)*.
+[4] Yuan, X., He, P., Zhu, Q., & Li, X. (2019). Adversarial examples: Attacks and defenses for deep learning. *IEEE Transactions on Neural Networks and Learning Systems*, 30(9), 2805-2824.
+[5] Goosen, R., Rontojannis, A., Deutscher, S., Rogg, J., Bohmayr, W., & Mkrtchian, D. (2018). *Artificial Intelligence Is a Threat to Cybersecurity. It's Also a Solution.* Boston Consulting Group.
+[6] Li, W., & Chai, Y. (2022). Assessing and enhancing adversarial robustness of predictive analytics: An empirically tested design framework. *Journal of Management Information Systems*, 39(3), 693-721. https://doi.org/10.1080/07421222.2022.2063549
+[7] Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.). MIT Press.
+[8] Kolter, J. Z., & Madry, A. (2018). Adversarial robustness—Theory and practice. Tutorial at *NeurIPS 2018*.
+[9] Shostack, A. (2014). *Threat Modeling: Designing for Security*. John Wiley & Sons.
+[10] Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research for maximum impact. *MIS Quarterly*, 37(2), 337-355.
+[11] Yang, J., Chen, C., Zha, D., et al. (2024). AgentDojo: A dynamic environment to evaluate attacks and defenses for LLM agents. *arXiv preprint arXiv:2406.13352*.
+[12] Ebrahimi, R., Chai, Y., Li, W., Pacheco, J., & Chen, H. (2025). RADAR: A framework for developing adversarially robust cyber defense AI agents with deep reinforcement learning. *MIS Quarterly*, 49(4), 1385-1416. https://doi.org/10.25300/misq/2024/17339
+[13] Ghoshal, A., Hao, J., Menon, S., & Sarkar, S. (2020). Hiding sensitive information when sharing distributed transactional data. *Information Systems Research*, 31(2), 473-490. https://doi.org/10.1287/isre.2019.0898
+[14] Menon, S., Ghoshal, A., & Sarkar, S. (2022). Modifying transactional databases to hide sensitive association rules. *Information Systems Research*, 33(1), 152-178. https://doi.org/10.1287/isre.2021.1033
+[15] Qu, X. (S.), Darku, F. B., & Guo, H. (2026). Shapley value-based feature attribution for data masking. *MIS Quarterly*, 50(1), 145-176. https://doi.org/10.25300/misq/2025/18502
+[16] Lausen, J., Clapham, B., Siering, M., & Gomber, P. (2020). Who is the next “Wolf of Wall Street”? Detection of financial intermediary misconduct. *Journal of the Association for Information Systems*, 21(5), 1153-1190. https://doi.org/10.17705/1jais.00633
+[17] Madry, A., Makelov, A., Schmidt, L., Tsipras, D., & Vladu, A. (2018). Towards deep learning models resistant to adversarial attacks. In *Proceedings of the 6th International Conference on Learning Representations (ICLR)*.
+[18] Kwon, Y., & Lee, Z. (2024). A hybrid decision support system for adaptive trading strategies: Combining a rule-based expert system with a deep reinforcement learning strategy. *Decision Support Systems*, 177, 114100. https://doi.org/10.1016/j.dss.2023.114100
+[19] Ampel, B. M., Samtani, S., Zhu, H., & Chen, H. (2024). Creating proactive cyber threat intelligence with hacker exploit labels: A deep transfer learning approach. *MIS Quarterly*, 48(1), 137-166. https://doi.org/10.25300/misq/2023/17316
+[20] Benjamin, V., & Raghu, T. S. (2023). Augmenting social bot detection with crowd-generated labels. *Information Systems Research*, 34(2), 487-507. https://doi.org/10.1287/isre.2022.1136
+[21] Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. *MIS Quarterly*, 28(1), 75-105.
+[22] Walls, J. G., Widmeyer, G. R., & El Sawy, O. A. (1992). Building an information system design theory for vigilant EIS. *Information Systems Research*, 3(1), 36-59.
+[23] Goodfellow, I., McDaniel, P., & Papernot, N. (2018). Making machine learning robust against adversarial inputs. *Communications of the ACM*, 61(7), 56-66.
+[24] Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). Proximal policy optimization algorithms. *arXiv preprint arXiv:1707.06347*.
+[25] Bertsimas, D., Brown, D. B., & Caramanis, C. (2011). Theory and applications of robust optimization. *SIAM Review*, 53(3), 464-501.
+[26] Yang, Y., Qin, Y., Fan, Y., & Zhang, Z. (2023). Unlocking the power of voice for financial risk prediction: A theory-driven deep learning design approach. *MIS Quarterly*, 47(1), 63-96. https://doi.org/10.25300/misq/2022/17062
+[27] Greshake, K., Abdelnabi, S., Mishra, S., Endres, C., Holz, T., & Fritz, M. (2023). Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection. In *Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security (AISec '23)*, 79-90.
+[28] OWASP. (2025). *OWASP Top 10 for LLM Applications 2025*. Open Worldwide Application Security Project. 【占位，需核对公开出处】 *注。正文中引用的公开基准与事件（SWE-bench 性能数据、SWExploit、IssueTrojanBench、MalSkillBench、真实漏洞事件等）均来自公开发布的数据集、报告与漏洞数据库，实施与投稿时按原文标注具体出处。*

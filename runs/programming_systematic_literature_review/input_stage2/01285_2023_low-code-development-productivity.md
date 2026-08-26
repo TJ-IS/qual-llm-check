@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85183078281"
+title: "Low-code Development Productivity"
+authors: "Varajão J.; Trigo A.; Almeida M."
+year: "2023"
+journal: "Queue"
+doi: "10.1145/3631183"
+---
+# Scopus title-abstract-keyword metadata
+Title: Low-code Development Productivity
+Abstract: This article aims to provide new insights on the subject by presenting the results of laboratory experiments carried out with code-based, low-code, and extreme low-code technologies to study differences in productivity. Low-code technologies have clearly shown higher levels of productivity, providing strong arguments for low-code to dominate the software development mainstream in the short/medium term. The article reports the procedure and protocols, results, limitations, and opportunities for future research.  © 2023 Owner/Author.
+Author keywords: 
+Index keywords: Code development; Development productivity; Laboratory experiments; Medium term; Software design
+Document type: Article
+Conference: 
+Source title: Queue
+Year: 2023
+EID: 2-s2.0-85183078281
+DOI: 10.1145/3631183
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

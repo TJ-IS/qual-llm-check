@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-08-04T06:42:05.309066+00:00",
+  "model": "deepseek-v4-flash",
+  "input_records": 1209,
+  "completed": 1199,
+  "remaining": 10,
+  "failed_this_run": 10,
+  "trajectory_label_counts": {
+    "information_systems_or_technology_adjacent": 920,
+    "software_development_process_or_team": 82,
+    "unrelated_or_unclear": 135,
+    "direct_human_programming": 39,
+    "programming_artifact_or_method": 22,
+    "direct_human_ai_programming": 1
+  },
+  "continuity_counts": {
+    "topic_shift": 937,
+    "adjacent": 168,
+    "direct": 40,
+    "unclear": 54
+  },
+  "modern_ai_assisted_programming_counts": {
+    "False": 1150,
+    "None": 48,
+    "True": 1
+  },
+  "usage": {
+    "prompt_tokens": 2211920,
+    "completion_tokens": 1140915,
+    "total_tokens": 3352835,
+    "prompt_cache_hit_tokens": 1699584,
+    "prompt_cache_miss_tokens": 512336
+  },
+  "errors_this_run": [
+    {
+      "record_key": "eid:2-s2.0-85055426049",
+      "title": "Extracting Conflict Models from Interaction Traces in Virtual Collaborative Work",
+      "error": "eid:2-s2.0-85055426049: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-105041331888",
+      "title": "How Gen AI Is Reshaping Software Design Work: A Qualitative Study Through an Activity Theory Lens",
+      "error": "eid:2-s2.0-105041331888: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-56649112759",
+      "title": "RESRES: The story behind the paper \"Research in software engineering: An analysis of the literature\"",
+      "error": "eid:2-s2.0-56649112759: Expecting property name enclosed in double quotes: line 14 column 5 (char 615)"
+    },
+    {
+      "record_key": "eid:2-s2.0-84870373059",
+      "title": "Systems developers define their own information needs",
+      "error": "eid:2-s2.0-84870373059: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-84868325946",
+      "title": "Conceptual modeling for systems integration",
+      "error": "eid:2-s2.0-84868325946: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-84944456486",
+      "title": "Data modeling: An ontological perspective of pointers",
+      "error": "eid:2-s2.0-84944456486: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-0032333659",
+      "title": "Software reuse and competition: Consumer preferences in a software component market",
+      "error": "eid:2-s2.0-0032333659: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-0043230854",
+      "title": "A market-driven approach to teaching software components engineering",
+      "error": "eid:2-s2.0-0043230854: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-51749120774",
+      "title": "Representing and accessing design knowledge for service integration",
+      "error": "eid:2-s2.0-51749120774: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "record_key": "eid:2-s2.0-0042646391",
+      "title": "The impact of data models and task complexity on end-user performance: An experimental investigation",
+      "error": "eid:2-s2.0-0042646391: Expecting value: line 1 column 1 (char 0)"
+    }
+  ]
+}

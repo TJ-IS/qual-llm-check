@@ -1,0 +1,2317 @@
+# Using Design-Science Based Gamification to Improve Organizational Security Training and Compliance
+
+- 作者：Mario Silic; Paul Benjamin Lowry
+- 年份 / 期刊：2020 / Journal of Management Information Systems
+- DOI：10.1080/07421222.2019.1705512
+- 源文件：05112_2020_using-design-science-based-gamification-to-improve-organizational-security-training-and-complian.md
+- 论文主类型：theory_derived_artifact_experiment
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：如何运用设计科学研究（DSR）方法，以享乐动机系统采纳模型（HMSAM）为核心理论，通过游戏化安全培训同时改善组织面临的员工防钓鱼失败和内部安全培训接受度低这两个复合问题，并带来实际安全行为的改变？
+
+- 制品与设计：一个基于DSR原则和HMSAM扩展模型的定制化网络游戏化安全培训系统，包含头像选择、游戏管理员（gamemaster）、积分、怪物奖杯、青铜/银/金等级、排行榜、双周测验与分阶段安全学习内容，并以钓鱼识别为重点。
+
+- 客观结果：六个月的现场实验（游戏化组最终有效384人，邮件组68人，无培训对照组38人）显示，游戏化组被钓鱼率27.3%，显著低于对照组44.7%和邮件组39.7%，而邮件组与对照组无显著差异；所有假设H1–H6均获支持；扩展模型使行为意向的R²从0.318翻倍至0.638。
+
+- 核心贡献：作者声称的贡献包括：（1）将HMSAM再情境化为评估员工安全构念、内在动机与应对学习合规的核心理论；（2）首次在游戏化安全情境中开展长期现场研究并确认行为意向与实际防钓鱼行为的关系；（3）首次经验演示‘适当挑战’（appropriate challenge）与沉浸之间的倒U关系；（4）在实践、研究与理论三个层面建立proof-of-value，并以proof-of-use研究议程收尾。
+
+- 整篇论证链：论文从‘员工是信息安全最弱环节’的现实问题出发，指出现有威慑、威胁与恐惧诉求类手段可能适得其反，而SETA类培训效果不佳且缺乏动机；进一步指出游戏化安全培训文献虽具潜力但存在七项方法/理论缺口（横截面数据、学生样本、缺乏对照组、未测实际行为、缺乏理论、没有真实系统、没有有意义参与）。作者随后引入DSR方法与HMSAM作为核心理论，通过四条映射表建立proof-of-concept，把‘动机满足’和‘应对支持’翻译为两条设计原则及具体构件。在预研究精化工具后，进行六个月的现场对照实验：游戏化组、邮件组和无培训组接受相同内容与频率的训练，唯一差异是交互形态。统计结果显示游戏化显著提升学习、效能、沉浸与行为意向，并通过第三方钓鱼邮件证明实际行为改善；邮件组行为与无培训无异。事后曲线分析发现挑战-沉浸为倒U关系，且仅存在于游戏化情境。讨论部分把证据组织为实践、研究、理论三层proof-of-value，指出扩展模型大幅提升解释力，最后将通用性、长期可持续性等未决问题归入proof-of-use研究议程。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：HMSAM作为核心理论既指导了设计原则和具体构件选择，又被操作化为可检验假设；设计的差异（游戏化交互 vs 邮件交互 vs 无培训）被放到真实组织中用六个月的现场实验加以检验。这与‘理论推导制品差异并通过实验检验’的主类一致，而非单纯的需求—构建—评价型DSR或纯计算基准研究。
+
+- 主导写作弧线判定：文章以现实问题（员工合规失败、SETA培训低效）为起点，引入HMSAM与心流理论，推导设计原则并构建游戏化系统，用现场实验检验理论预测，最后在讨论中回到理论：通过R²分解、模型比较和倒U边界检验来扩展/限定HMSAM。整体是‘问题—理论—设计—检验—回到理论’的写作弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：六个阶段依次承担不同论证任务：第1阶段建立现实问题与文献缺口；第2阶段用DSR把理论转成设计并建立proof-of-concept；第3阶段以预研究验证测量工具与程序；第4阶段以六个月的现场对照实验提供核心的行为证据；第5阶段用结构方程模型和操纵检验把行为差异上升为机制证据；第6阶段通过事后曲线分析确立‘适当挑战’的边界条件。各阶段环环相扣，每一阶段留下的不确定性由下一阶段接续。
+
+### studies_or_phases
+
+#### 1. 问题界定与文献缺口识别
+
+- order：1
+
+- name_cn：问题界定与文献缺口识别
+
+- question_cn：现有安全合规与培训手段为何失败？游戏化安全培训研究缺什么？
+
+- inputs_and_setting_cn：SETA、威慑、恐惧诉求、问责等行为安全文献；Ferguson的西点实验与Baxter等人的游戏化实验作为经验现象；Bui等与Liu等的游戏化综述。
+
+- designed_or_compared_object_cn：无（概念阶段）；主要是对既有方法与文献的综合比较。
+
+- baseline_control_or_counterfactual_cn：无对照；以‘现有方法无效/矛盾结果’作为背景。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：叙述性文献综合与缺口清单构建。
+
+- main_result_cn：识别出现有威慑/恐惧手段可能引发反效果，SETA培训普遍低效；列出游戏化安全培训研究面临的七项挑战（横截面数据、学生样本、缺对照组、未测实际行为、无理论、无真实系统、无有意义参与）。
+
+- argumentative_role_cn：建立实践相关性与研究缺口，证明需要一种结合理论、设计、方法与长期评价的新方案，为DSR游戏化路径铺路。
+
+- remaining_uncertainty_cn：一个由动机理论与DSR系统支撑、具备真实系统和长期评价的游戏化安全培训，是否真的能在实际组织中改变员工的安全行为？
+
+- link_to_next_phase_cn：‘我们因此提出游戏化安全培训是应用DSR的自然机会’，引出DSR方法章节。
+
+##### evidence_pointers
+
+1. Introduction P1–P6
+
+2. Gamification Literature Review，七项挑战段落
+
+3. Ferguson [36]与Baxter [8]结果引述
+
+#### 2. DSR设计、核心理论情境化与proof-of-concept
+
+- order：2
+
+- name_cn：DSR设计、核心理论情境化与proof-of-concept
+
+- question_cn：如何依据HMSAM、心流理论和游戏化设计原则构建一个能达到proof-of-concept的游戏化安全培训系统？
+
+- inputs_and_setting_cn：一家大型法国国际公司的真实培训需求与反馈；Liu等（2017）游戏化设计框架；Nunamaker等与Peffers等的DSR方法论；游戏化/安全文献与Flow/动机映射表（Supplemental Appendix A, Tables A.1–A.5）。
+
+- designed_or_compared_object_cn：网页版游戏化培训系统（头像、游戏管理员、积分、怪物奖杯、等级、排行榜、双周测验、分阶段钓鱼教育内容）；以原有邮件培训系统为设计对照。
+
+- baseline_control_or_counterfactual_cn：概念层面的设计对照：设计元素↔心流（沉浸）条件↔内在动机↔HMSAM构念的映射检查。
+
+##### objective_metrics
+
+1. 设计原则至构件映射覆盖度
+
+2. 概念上验证是否能满足内在动机与提供‘适当挑战’
+
+- analysis_method_cn：四条映射步骤：文献回顾；游戏化元素实施表（Table A.3）；元素关系映射到HMSAM构念（Table A.4）；具体动机映射到设计元素（Table A.5）。
+
+- main_result_cn：形成两条设计原则：设计原则#1强调动机满足，设计原则#2强调有意义、有趣的学习过程；概念上确认设计能满足内在动机并提供适当挑战，达到proof-of-concept。
+
+- argumentative_role_cn：把抽象的HMSAM与心流理论翻译成可构建的构件和可检验的构念，是‘理论到设计’的关键桥梁。
+
+- remaining_uncertainty_cn：映射是概念性的，不能证明其在现实中有效；需要经验数据检验。
+
+- link_to_next_phase_cn：系统被认为达到proof-of-concept后，准备以预研究和现场实验建立proof-of-value。
+
+##### evidence_pointers
+
+1. Overview of Our DSR Approach
+
+2. Establish the Gamified Design as an Artifact
+
+3. Focus on Design Problem Relevance
+
+4. Apply a DSR Kernel Theory Contextualized to Gamification
+
+5. Propose Guiding Design Principles
+
+6. Establish Proof-of-Concept
+
+7. Figure 1；Tables A.1–A.5（附录A）
+
+#### 3. 学生预研究（pilot）
+
+- order：3
+
+- name_cn：学生预研究（pilot）
+
+- question_cn：测量工具与现场实验程序是否可靠、可用？
+
+- inputs_and_setting_cn：45名大学本科生；三周的跨度（论文正文为三个月跨度并按月收集数据）；游戏化系统原型。
+
+- designed_or_compared_object_cn：原型系统的使用规则、测验机制与测量量表。
+
+- baseline_control_or_counterfactual_cn：无对照；以试点反馈作为程序修正依据。
+
+##### objective_metrics
+
+1. 量表信度与效度
+
+2. 程序可行性（点击率、作弊行为等）
+
+- analysis_method_cn：效度信度检验与程序性观察。
+
+- main_result_cn：程序得到两项重要修正：限制每轮测验次数以阻止自动点击工具（AutoClicker）刷分；引入游戏管理员角色作为激励因素。
+
+- argumentative_role_cn：确保正式现场实验的测量工具和程序具备内部有效性，是proof-of-value的前置步骤。
+
+- remaining_uncertainty_cn：学生样本不能证明组织场景中的行为改变，需要真实员工与长期数据。
+
+- link_to_next_phase_cn：预研究完成之后直接转入正式现场实验设计。
+
+##### evidence_pointers
+
+1. Pilot Study for Proof-of-Value
+
+2. Note 9
+
+#### 4. 六个月的现场对照实验（proof-of-value核心）
+
+- order：4
+
+- name_cn：六个月的现场对照实验（proof-of-value核心）
+
+- question_cn：与相同内容的邮件培训和无培训相比，游戏化培训能否显著改善员工的安全学习、效能、沉浸、行为意向与实际防钓鱼行为？
+
+- inputs_and_setting_cn：法国大型国际公司的英国、美国、澳大利亚英语办公室；800名未受训员工被邀请，488名自愿者随机分为游戏化组（420）与邮件组（68），另从HR数据库随机抽出38人未告知其对照组身份；36人被剔除后最终游戏化组有效384人；第三与第六个月两次调查；第三方钓鱼邮件作为客观行为测量。
+
+- designed_or_compared_object_cn：游戏化系统 vs 相同内容的邮件培训 vs 无培训；两组训练内容、频率、提醒与测验完全相同，唯一差异是交互形态。
+
+- baseline_control_or_counterfactual_cn：无培训对照组作为绝对效果锚点；邮件组作为‘等内容的非游戏化’基准；同一参与者的三个月vs六个月数据作为时间对照。
+
+##### objective_metrics
+
+1. 感知学习、安全响应效能、安全自我效能、沉浸、挑战、行为意向（七点Likert量表）
+
+2. 实际钓鱼点击行为（二元：0/1）
+
+3. 六个月后被钓鱼比例
+
+- analysis_method_cn：随机分配与等效性检验；第三方钓鱼操作；第三/六个月纵向调查；事后对‘早/晚响应者’的MANOVA检验非响应偏差；Fisher/Z检验比较组间行为。
+
+- main_result_cn：游戏化组被钓鱼率为27.3%，显著低于对照组44.7%（Z=2.2561）和邮件组39.7%（Z=2.0664）；邮件组与对照组差异不显著（Z=0.5041）；六个月结果优于三个月。
+
+- argumentative_role_cn：以真实组织、真实员工、客观行为数据建立最核心的proof-of-value；‘同内容、同频率’设计把差异归因于游戏化交互。
+
+- remaining_uncertainty_cn：行为差异尚未在结构模型中与理论机制挂钩；挑战-沉浸的形态及邮件组无效的原因尚待分析。
+
+- link_to_next_phase_cn：现场数据转入测量模型、结构模型与操纵检验阶段。
+
+##### evidence_pointers
+
+1. Main Study Design for Proof-of-Value in Actual Use
+
+2. Gamified System and Procedures
+
+3. Tables 1–2
+
+#### 5. 测量模型、结构模型检验与操纵检验
+
+- order：5
+
+- name_cn：测量模型、结构模型检验与操纵检验
+
+- question_cn：扩展后的HMSAM模型是否获得数据支持？加入控制与反解释后，理论机制是否仍然成立？
+
+- inputs_and_setting_cn：384名游戏化组与68名邮件组在六个月时的问卷数据；年龄、性别、经验、教育、OCM、OSC、TMSC作为控制/反解释变量；测试挑战平方项。
+
+- designed_or_compared_object_cn：三阶段模型：Model part 1（仅HMSAM复制）、Model part 2（加入应对与挑战的扩展）、Model part 3（加入控制与理论反解释的全模型）；另对邮件组独立建模。
+
+- baseline_control_or_counterfactual_cn：基线HMSAM模型作为理论基准；邮件组模型作为非游戏化对照；三个月与六个月模型互为时间对照。
+
+##### objective_metrics
+
+1. CFA载荷、AVE、Cronbach's α、区分效度
+
+2. CB-SEM路径系数与显著性
+
+3. R²、Cohen's f²、伪F检验
+
+4. 模型拟合RMSEA/SRMR/CFI/TLI
+
+5. VIF、AIC/BIC
+
+6. MANOVA与Box M检验
+
+- analysis_method_cn：确认性因子分析；Mplus 7协方差结构方程模型（CB-SEM）；二分类结果变量的逻辑回归；平方项构造用于非线性假设；量表与行为数据的嵌套模型比较。
+
+- main_result_cn：所有HMSAM复制路径除愉悦→行为意向与控制→沉浸外均支持；H1–H6全部支持；扩展使BI的R²从0.318增至0.638（f²=0.884），加入控制与反解释后仅增至0.645（f²=0.019）；邮件组模型差得多且随时间恶化；H4的倒U关系在加入平方项后支持，模型拟合仍在可接受范围。
+
+- argumentative_role_cn：把现场的行为差异上升为可解释的理论机制证据，并排除人口学与组织变量作为主要解释。
+
+- remaining_uncertainty_cn：倒U关系的稳健性与适用边界、邮件组‘无效’的理论解释仍需事后分析验证。
+
+- link_to_next_phase_cn：直接触发对挑战-沉浸曲线、邮件组线性负向关系以及时间维度的进一步边界检验。
+
+##### evidence_pointers
+
+1. Measurement Model
+
+2. Structural Model Results
+
+3. Manipulation Checks of Instrumental Goals
+
+4. Figure 4
+
+5. Tables D.1–D.9（附录D）
+
+#### 6. 事后曲线分析与边界条件检验
+
+- order：6
+
+- name_cn：事后曲线分析与边界条件检验
+
+- question_cn：挑战与沉浸的关系是否为倒U？该关系在非游戏化的邮件情境中是否同样成立？时间维度如何改变效应？
+
+- inputs_and_setting_cn：游戏化组与邮件组的六个月数据；同一数据集的三个月vs六个月结果；作者在审稿反馈后进行的补充分析。
+
+- designed_or_compared_object_cn：线性回归模型 vs 二次（曲线）回归模型；游戏化情境 vs 邮件情境的同结构对比。
+
+- baseline_control_or_counterfactual_cn：线性模型作为统计基准；邮件组的结果作为非游戏化反事实。
+
+##### objective_metrics
+
+1. R²变化
+
+2. F变化与显著性
+
+3. 拟合曲线的方向与形态
+
+- analysis_method_cn：层次回归（先线性后加入平方项）；游戏化组与邮件组的模型比较；三个月与六个月对比。
+
+- main_result_cn：游戏化组中倒U模型显著优于线性模型（R²由0.111升至0.192）；邮件组中线性模型与曲线模型无显著差异，且关系为负向（挑战成为挫折源）；邮件组效应随时间保持或下降。
+
+- argumentative_role_cn：为‘适当挑战’提供唯一的经验边界证据，把HMSAM/心流理论的长期假设转成可检验的经验贡献，并解释邮件组为何无效。
+
+- remaining_uncertainty_cn：单一组织、六个月上限、无法验证超出该时间范围的可持续性；各游戏化元素的独立因果贡献未检验。
+
+- link_to_next_phase_cn：讨论部分据此组织proof-of-value，并把通用性与长期性问题归类为proof-of-use研究议程。
+
+##### evidence_pointers
+
+1. Establishing Proof-of-Value in Theory
+
+2. Figures 5–6
+
+3. Notes 17–18
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. STUDY_OVERVIEW
+
+2. DESIGN_FEATURE
+
+3. CONTRIBUTION
+
+4. RESULT
+
+5. CONTRIBUTION
+
+6. STUDY_OVERVIEW
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PRIOR_KNOWLEDGE
+
+4. LIMITATION
+
+5. PHENOMENON
+
+6. GAP
+
+7. RQ_OR_OBJECTIVE
+
+8. THEORY_PROPOSITION
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. THEORY_PROPOSITION
+
+3. PRIOR_KNOWLEDGE
+
+4. MECHANISM
+
+5. BOUNDARY_CONDITION
+
+6. HYPOTHESIS_OR_PROPOSITION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. METHOD_JUSTIFICATION
+
+4. BENCHMARK_OR_CONTRAST
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW
+
+2. METHOD_JUSTIFICATION
+
+3. BENCHMARK_OR_CONTRAST
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+### discussion_and_contribution_moves
+
+1. STUDY_OVERVIEW
+
+2. CONTRIBUTION
+
+3. BOUNDARY_CONDITION
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. HMSAM（Lowry et al., 2013）
+
+2. 心流理论/Flow（Csikszentmihalyi）
+
+3. 认知吸收CA（Agarwal & Karahanna, 2000）
+
+4. TAM/TRA/TPB
+
+5. Liu et al.（2017）有意义参与游戏化设计框架
+
+6. 应对与效能文献（Protection Motivation Theory；响应效能/自我效能）
+
+7. Lowry et al.（2015）MISC动机分类
+
+8. DSR方法（Nunamaker et al.; Peffers et al.; Hevner et al.; Gregor & Hevner）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：HMSAM作为核心理论前瞻性决定了设计原则（动机满足、应对支持）与具体构件（积分、等级、排行榜、头像、游戏管理员、分阶段挑战），而这些设计又被操作化为假设并用现场实验直接检验；理论不是事后包装标签，而是设计前因与评价模型。
+
+- 理论到设计翻译链：员工在传统SETA中缺乏动机与效能（问题）→ HMSAM主张内在动机满足→沉浸→行为意向→行为（理论命题）→ DSR要求把理论情境化为安全/学习/应对情境（情境化命题）→ 设计原则#1（动机满足）与#2（有意义有趣学习）（设计要求）→ 具体构件：头像、积分、怪物、等级、排行榜、游戏管理员、双周测验与分阶段钓鱼内容（制品选择）→ 对照设计：同内容同频率的邮件组与无培训组（被比较的设计差异）→ 现场统计：所有假设支持、游戏化组防钓鱼行为显著改善、挑战-沉浸呈倒U（客观结果）。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：HMSAM：内在动机的满足会增强沉浸，沉浸增强行为意向，行为意向导致行为改变
+
+- mechanism_cn：享乐型系统使用中，动机满足→深度卷入（沉浸/CA）→态度/意向形成
+
+- design_requirement_cn：系统必须激活并满足员工的内在动机
+
+- artifact_choice_cn：头像、积分、怪物奖杯、等级晋升、排行榜、游戏管理员
+
+- evaluated_contrast_cn：游戏化组 vs 相同内容邮件组 vs 无培训对照组
+
+- objective_result_cn：游戏化组行为意向与实际防钓鱼行为显著更优；H5、H6支持
+
+##### evidence_pointers
+
+1. Structural Model Results; Figure 4
+
+2. Tables 1–2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：心流理论：清晰目标、无歧义反馈、挑战与技能平衡三者共同产生心流/沉浸
+
+- mechanism_cn：目标指引行为、反馈校正行为、挑战与技能匹配维持兴趣
+
+- design_requirement_cn：提供工具性目标、即时的游戏化反馈、渐进式难度
+
+- artifact_choice_cn：明确的测验目标；排行榜、积分、游戏管理员提醒作为反馈；等级（青铜/银/金）与阶段关卡
+
+- evaluated_contrast_cn：游戏化组的挑战→沉浸路径；线性vs二次模型比较
+
+- objective_result_cn：挑战→沉浸呈倒U；在游戏化组中二次模型显著更优（R² .111→.192）
+
+##### evidence_pointers
+
+1. Core Kernel Theory Assumptions
+
+2. Figure 5; Note 17
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：应对与效能文献：响应效能（相信保护行动有效）与自我效能（相信自己能执行）促进安全合规意向与行为
+
+- mechanism_cn：效能信念提高执行保护行为的信心与坚持
+
+- design_requirement_cn：培训必须提供可掌握的应对知识与成功体验
+
+- artifact_choice_cn：关于恶意软件、垃圾邮件与钓鱼识别的教育内容；可重复测验提供掌握感
+
+- evaluated_contrast_cn：H2a-b、H3a-b路径检验；邮件组对照
+
+- objective_result_cn：感知学习→两类效能→行为意向的路径均显著；邮件组模型差
+
+##### evidence_pointers
+
+1. Infusing Learning and Security Coping into Our Context
+
+2. Figure 4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：学习—行为参与文献：学习提升注意与保护行为准备
+
+- mechanism_cn：知识加深使员工更可能正确评估威胁并采取保护行动
+
+- design_requirement_cn：系统需要有意义的学习过程而非仅为娱乐
+
+- artifact_choice_cn：双周测验、分阶段教育内容、真实钓鱼案例
+
+- evaluated_contrast_cn：H1路径检验；游戏化组vs邮件组
+
+- objective_result_cn：感知学习→行为意向显著；游戏化组行为改善而邮件组无改善
+
+##### evidence_pointers
+
+1. Infusing Learning and Security Coping into Our Context
+
+2. Figure 4
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：TRA/TPB：意向是行为的近端预测因子
+
+- mechanism_cn：态度/意向形成后转化为实际行动
+
+- design_requirement_cn：必须测量实际行为而非止步于意向
+
+- artifact_choice_cn：第三方钓鱼邮件作为客观行为测量
+
+- evaluated_contrast_cn：H6路径检验；三个组的实际被钓鱼比例
+
+- objective_result_cn：BI→实际钓鱼响应路径显著；游戏化组被钓鱼率最低
+
+##### evidence_pointers
+
+1. Fulfilling Motivations for Behavioral Change
+
+2. Tables 1–2
+
+#### 6. 6
+
+- theory_or_knowledge_claim_cn：内在动机比外在动机更持久并更能驱动行为改变
+
+- mechanism_cn：外在奖惩只能带来暂时顺从，内在享受与胜任产生持续参与
+
+- design_requirement_cn：设计以内在动机为主，允许少量外溢
+
+- artifact_choice_cn：不设现金奖励；以有趣、探索性游戏元素为主
+
+- evaluated_contrast_cn：游戏化（内在动机） vs 邮件培训（外显说教式）
+
+- objective_result_cn：游戏化组行为与学习显著改善；邮件组与无培训无差异
+
+##### evidence_pointers
+
+1. Propose Guiding Design Principles
+
+2. Establishing Proof-of-Value in Actual Practice
+
+#### 7. 7
+
+- theory_or_knowledge_claim_cn：适度挑战文献：最优挑战最大化动机，过高/过低均降低兴趣（倒U）
+
+- mechanism_cn：挑战与技能匹配产生卷入；过度挑战引发挫败，挑战不足引发无聊
+
+- design_requirement_cn：难度应随员工学习与效能提升而渐进升级，但存在上限
+
+- artifact_choice_cn：等级制与分阶段新内容；题目难度随进度变化
+
+- evaluated_contrast_cn：线性 vs 平方项SEM；游戏化组 vs 邮件组同结构检验
+
+- objective_result_cn：游戏化组倒U显著；邮件组为线性负向且曲线不显著
+
+##### evidence_pointers
+
+1. Balancing Skills and Challenges
+
+2. Figures 5–6; Notes 17–18
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. proof-of-concept：基于文献映射表（Tables A.1–A.5）的概念验证
+
+2. 学生预研究（N=45，三个月）检验工具与程序
+
+3. 六个月现场对照实验（游戏化组384、邮件组68、无培训对照组38）
+
+4. CB-SEM测量模型与结构模型检验（CFA、AVE、路径、R²/效应量、AIC/BIC）
+
+5. 操纵检验：客观钓鱼行为组间比较、MANOVA与Box M
+
+6. 事后曲线分析：线性 vs 二次模型比较（游戏化组与邮件组）
+
+7. 时间维度检验：三个月vs六个月模型比较
+
+- why_these_evaluations_cn：DSR要求区分proof-of-concept、proof-of-value与proof-of-use；已有游戏化安全研究普遍缺对照组、缺真实系统、缺长期数据、缺实际行为，因此作者必须构建一个内容等价邮件组与无培训对照组，并以第三方钓鱼邮件作为客观行为指标；理论扩展是否值得又需要R²变化和嵌套模型比较来支持。
+
+- benchmark_and_contrast_chain_cn：第一重对照是‘同内容、同频率’的邮件组与游戏化组，将差异干净地归因于游戏化交互；第二重对照是无培训控制组，锚定绝对效果；第三重对照是基线HMSAM模型vs扩展模型，证明理论增加值（R² 0.318→0.638）；第四重对照是线性vs二次模型，证明‘适当挑战’的倒U形态；第五重对照是三个月vs六个月，证明时间维度的累积效应。
+
+### claim_evidence_ledger
+
+#### 1. 1
+
+- claim：技术主张：游戏化安全培训系统使员工实际防钓鱼行为显著改善
+
+- evidence：游戏化组被钓鱼率27.3% vs 对照组44.7%（Z=2.2561）；vs 邮件组39.7%（Z=2.0664）
+
+- status：支持，但仅限该组织与该样本
+
+#### 2. 2
+
+- claim：制品主张：改进来自游戏化交互本身而非共享内容
+
+- evidence：邮件组接受相同内容、频率、提醒与测验，但在行为上与无培训组无显著差异（Z=0.5041 n/s）
+
+- status：支持该情境下的主张；邮件组样本较小（68）
+
+#### 3. 3
+
+- claim：机制主张：学习→两类效能→意向以及沉浸→意向→实际行为的机制链成立
+
+- evidence：H1–H6全部支持；CB-SEM路径显著，三个月结果方向一致但较弱
+
+- status：支持
+
+#### 4. 4
+
+- claim：理论贡献主张：扩展HMSAM显著提升行为意向解释力
+
+- evidence：BI的R²从0.318到0.638，f²=0.884，伪F=328.84（p<0.001）；AIC/BIC比较支持扩展模型；加控制仅增至0.645（f²=0.019）
+
+- status：支持
+
+#### 5. 5
+
+- claim：边界主张：挑战—沉浸为倒U且仅适用于游戏化情境
+
+- evidence：游戏化组二次模型R² .111→.192显著优于线性；邮件组二次模型不显著，线性关系为负
+
+- status：支持，但基于事后分析，需谨慎
+
+#### 6. 6
+
+- claim：边界主张：邮件培训‘基本无效’
+
+- evidence：邮件组与无培训组在客观钓鱼行为上无差异；邮件组模型随时间稳定或恶化
+
+- status：部分支持；‘largely futile’的表述略强于单一情境证据
+
+#### 7. 7
+
+- claim：长期/生态主张：有意义参与需要长期投入
+
+- evidence：六个月结果强于三个月；短期横截面研究（如Ferguson、Baxter）未显示学习/行为增益
+
+- status：间接支持；未直接操纵时间长度
+
+- internal_validity_strategy_cn：随机分配自愿参与者并确认人口学等价；对照组不被邀请从而避免知晓受控；游戏化组与邮件组内容、频率、提醒和测验完全一致；用第三方钓鱼邮件实现客观、隐蔽的行为测量；匿名随机编号连接平台行为与调查数据；非响应偏差用早/晚响应者MANOVA检验；共同方法偏差采取程序与统计双重措施；控制年龄、性别、经验、教育及OCM/OSC/TMSC反解释；不平衡设计用Box M检验MANOVA假设。
+
+- external_validity_strategy_cn：使用真实大型跨国企业的实际员工，在正常工作流程中持续六个月；多个英语国家办公室参与；真实第三方钓鱼测试提供生态效度；明确的现场情境使结果可映射到同类西方英语办公环境。
+
+- what_is_not_actually_tested_cn：未直接检验单个游戏化元素（如单独头像、单独排行榜）的因果贡献；未检验威慑/恐惧诉求等传统手段与游戏化的直接对比；未检验六个月的持续使用之后的长期维持与新鲜感消退；未检验组织间（尤其影子IT文化、国家文化差异）的可推广性；未检验外在动机与内在动机组合的效果。
+
+## 贡献闭环
+
+- technical_claim_cn：一个由DSR原则系统构建的游戏化安全培训系统，能在真实组织中带来可测量的实际防钓鱼行为改善，其效果规模（行为意向R²翻倍）在组织安全文献中罕见。
+
+- artifact_claim_cn：设计元素组合（头像、积分、怪物奖杯、等级、排行榜、游戏管理员、双周测验与分阶段内容）共同产生动机满足与应对支持；由于邮件组接受了相同内容，差异被归因于游戏化设计。
+
+- mechanism_claim_cn：学习与两类安全效能（响应效能、自我效能）经由行为意向作用于实际行为；沉浸是动机满足通向行为意向的核心状态；挑战通过沉浸产生倒U型影响。
+
+- boundary_claim_cn：挑战只在‘适当’范围内促进沉浸，超过顶点后边际收益为负；在缺乏游戏化特征的邮件训练中，挑战是负向因素；邮件培训的效果不随时间累积，反而保持不变或变差。
+
+- reusable_design_knowledge_cn：两条设计原则（动机满足、有意义有趣学习）；把游戏化元素映射到心流条件、内在动机与HMSAM构念的系统化方法（Tables A.3–A.5）；从proof-of-concept经proof-of-value到proof-of-use的九步DSR路径；‘同内容同频率’的对照组设计模板。
+
+- theoretical_contribution_cn：将HMSAM再情境化为游戏化安全培训与合规模型，新增学习、安全响应效能、安全自我效能、挑战与实际安全行为构念；首次在游戏化安全情境中以长期现场研究确认意向—行为联系；首次经验演示心流理论长期假设的‘适当挑战’倒U曲线。
+
+- how_discussion_closes_intro_gap_cn：引言提出的复合问题是（1）防钓鱼失败、（2）安全培训接受度低；讨论通过三组证据闭合缺口：游戏化组显著降低被钓鱼率；员工学习、效能与行为意向正面改善；邮件组作为现状对照组‘无异于无培训’，直接解释为何原有培训不被接受且无效。理论部分再用R²翻倍与倒U边界把经验结果返回HMSAM/心流理论，回应‘现有解释不足’的缺口。
+
+- overclaim_or_unsupported_leaps_cn：（1）‘邮件培训极大无效’的表述强于证据：邮件组仅68人且为一个组织，Z检验不显著只能说明在该样本中未检测到差异；（2）‘首次经验证据’类断言取决于对‘适当挑战’的操作化与文献范围界定；（3）将BI→实际行为的先验路径建立在相关性的自评BI与行为测量之上，不能完全排除第三变量；（4）因果机制讨论中的神经生理机制（多巴胺、睾酮、杏仁核）部分来自引用的博弈研究，并非本文直接测量。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：我们开展了一个设计科学研究项目，目标是改善组织同时存在的两类复合问题：员工防钓鱼失败和内部安全培训接受度低。
+
+- rhetorical_function_cn：开篇同时确立实践问题与DSR研究定位，为全文提供问题—解决方案框架。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续制品、理论贡献与结果陈述提供总纲。
+
+- evidence_pointer：Abstract 第1句
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：我们创建了一个游戏化安全培训系统，聚焦两个因素：增强内在动机以及改善安全学习与效能。
+
+- rhetorical_function_cn：预告制品的关键设计维度（动机+应对）。
+
+- depends_on_cn：上一句的复合问题
+
+- sets_up_cn：其后讨论中的设计原则#1与#2。
+
+- evidence_pointer：Abstract 第2句
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：关键理论贡献是提出一个再情境化的HMSAM核心理论，可用于评估员工安全构念、内在动机以及学习与合规应对。
+
+- rhetorical_function_cn：把理论贡献前置，作为文章的学术卖点。
+
+- depends_on_cn：上一句的制品设计
+
+- sets_up_cn：后文HMSAM扩展假设与模型图。
+
+- evidence_pointer：Abstract 第3句
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：RESULT
+
+- paraphrase_cn：一个420名参与者的六个月现场研究表明，满足用户的动机与应对需要能带来统计显著的正向行为改变。
+
+- rhetorical_function_cn：用数字与时长证明证据强度，回应实践问题。
+
+- depends_on_cn：理论贡献句
+
+- sets_up_cn：摘要中的经验主张被正文Tables 1–2支撑。
+
+- evidence_pointer：Abstract 第4句
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：我们还提供了'适当挑战'在此情境下概念重要性的新颖经验演示。
+
+- rhetorical_function_cn：提前预告事后曲线分析这一独特贡献。
+
+- depends_on_cn：结果句
+
+- sets_up_cn：讨论中的倒U曲线证据。
+
+- evidence_pointer：Abstract 第5句
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：我们以proof-of-concept和proof-of-value原则验证工作，并以致通向proof-in-use的研究议程作结。
+
+- rhetorical_function_cn：用DSR评价语言标明研究的完整轨迹。
+
+- depends_on_cn：上述贡献
+
+- sets_up_cn：DSR方法章节的结构。
+
+- evidence_pointer：Abstract 第6句
+
+### 7. P1 S1–S3
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S1–S3
+
+- move_code：CONTEXT
+
+- paraphrase_cn：IT安全合规涉及激励员工安全地使用组织系统与信息，并以缓解事件、阻止滥用、鼓励保护行为为目标。
+
+- rhetorical_function_cn：界定话题域，让不同读者共享背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：随后指出这些目标都未达成。
+
+- evidence_pointer：Introduction P1 前三句
+
+### 8. P1 S4–S5
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S4–S5
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：一系列研究已尝试从威慑、消除中和、提高风险意识、问责、积极心理学到恐惧诉求等各类技术来激励安全行为。
+
+- rhetorical_function_cn：表明该领域已有多样化方案，为后续指出缺口做铺垫。
+
+- depends_on_cn：话题界定句
+
+- sets_up_cn：随后指出这些努力仍未解决员工问题。
+
+- evidence_pointer：Introduction P1 中段
+
+### 9. P1 S6–S7
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S6–S7
+
+- move_code：LIMITATION
+
+- paraphrase_cn：尽管有这些努力，员工仍是组织IT安全中最薄弱的环节，因为员工行为容易破坏安全，且员工往往不承担合规责任。
+
+- rhetorical_function_cn：制造实践缺口，说明已有技术并未奏效。
+
+- depends_on_cn：PRIOR_KNOWLEDGE句
+
+- sets_up_cn：质疑现有方法效能的下一段。
+
+- evidence_pointer：Introduction P1 结尾
+
+### 10. P2 S1–S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S1–S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：研究者已质疑现有安全方法是否有效；威慑技术为犯罪行为设计，可能不适合安全政策不遵从，而威胁与强化风险可能引发消极抵抗等意外后果。
+
+- rhetorical_function_cn：对现有方法给出机制层面批评，为转向正向方法张本。
+
+- depends_on_cn：员工为最弱环节句
+
+- sets_up_cn：引出SETA的正向替代方案。
+
+- evidence_pointer：Introduction P2
+
+### 11. P3 S1–S4
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S1–S4
+
+- move_code：GAP
+
+- paraphrase_cn：SETA项目本应以更积极的方式提供知识与动机，但多数现有合规培训相对无效，且尽管SETA被视为治理基础，几乎没有研究检验如何使SETA更有效。
+
+- rhetorical_function_cn：明确研究缺口：SETA低效且缺乏改进研究。
+
+- depends_on_cn：威慑/威胁批评
+
+- sets_up_cn：用员工培训失败的一般现象佐证该缺口。
+
+- evidence_pointer：Introduction P3
+
+### 12. P4 S1–S2
+
+- order：12
+
+- section：Introduction
+
+- locator：P4 S1–S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：员工培训以失败闻名：即使内容正确，员工因缺乏动机与效能也无法将其应用于工作，尤其在安全领域多数员工不是专家。
+
+- rhetorical_function_cn：从培训心理学角度解释为何SETA失败。
+
+- depends_on_cn：GAP句
+
+- sets_up_cn：Ferguson的失败案例作为极端证据。
+
+- evidence_pointer：Introduction P4
+
+### 13. P5 S1
+
+- order：13
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：Ferguson在四小时训练实验后基本宣告SETA无用，因为参与者普遍缺乏动机且90%未能识别钓鱼攻击。
+
+- rhetorical_function_cn：提供一个鲜明的经验失败案例，强化问题紧迫感。
+
+- depends_on_cn：一般性失败机制
+
+- sets_up_cn：作者立场转向'我们不放弃SETA而是改进它'。
+
+- evidence_pointer：Introduction P5 首句
+
+### 14. P5 S2–S4
+
+- order：14
+
+- section：Introduction
+
+- locator：P5 S2–S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：我们不打算同样放弃SETA，而是提出从'培训不有趣不激励'的现实出发，用基于游戏化原则的培训改善内在动机、学习、应对技能与安全合规。
+
+- rhetorical_function_cn：确立作者的核心主张与研究立场。
+
+- depends_on_cn：Ferguson失败案例
+
+- sets_up_cn：下文对Baxter矛盾结果的讨论。
+
+- evidence_pointer：Introduction P5 中后段
+
+### 15. P6 S1–S2
+
+- order：15
+
+- section：Introduction
+
+- locator：P6 S1–S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：但Baxter等人的横截面研究表明其游戏化系统有趣、令人愉快且被偏好，却没有统计上显著的知识提升证据，使我们的主张面临矛盾。
+
+- rhetorical_function_cn：引入最接近的竞争证据并指出其局限（零学习增益），为更系统设计留下空间。
+
+- depends_on_cn：作者主张句
+
+- sets_up_cn：需要一种理论+DSR+长期评价的新方法。
+
+- evidence_pointer：Introduction P6 前两句
+
+### 16. P6 S3–S4
+
+- order：16
+
+- section：Introduction
+
+- locator：P6 S3–S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：以最终改善组织安全培训为目标，本研究用动机理论与DSR强化该文献基础，并预告六个月的现场研究显示统计显著改变。
+
+- rhetorical_function_cn：在引言的最后一句重新锁定目标并给出结果预告。
+
+- depends_on_cn：Baxter矛盾
+
+- sets_up_cn：游戏化文献综述与DSR章节。
+
+- evidence_pointer：Introduction P6 后两句
+
+### 17. P1 S1–S2 and P3 Quotation
+
+- order：17
+
+- section：Gamification Literature Review
+
+- locator：P1 S1–S2 and P3 Quotation
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：游戏化把游戏理论与心流理论应用于非游戏情境；综述共识强调游戏化系统必须同时具备用户参与目标与工具性目标，并以游戏设计元素实现。
+
+- rhetorical_function_cn：界定游戏化概念并给出综述性共识，作为后续定义与设计原则的基础。
+
+- depends_on_cn：引言中的游戏化主张
+
+- sets_up_cn：作者提出自己的操作性定义。
+
+- evidence_pointer：Gamification Literature Review 开头段
+
+### 18. P4 S1–S2
+
+- order：18
+
+- section：Gamification Literature Review
+
+- locator：P4 S1–S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：先前研究提出游戏设计可使用目标、奖励与叙事来引发挑战与好奇，而游戏元素的构思对用户—游戏参与非常关键。
+
+- rhetorical_function_cn：总结游戏设计元素的知识，作为设计映射的原料。
+
+- depends_on_cn：定义句
+
+- sets_up_cn：Bui等人的综述揭示的缺口。
+
+- evidence_pointer：Gamification Literature Review P4
+
+### 19. P5 S1–S3
+
+- order：19
+
+- section：Gamification Literature Review
+
+- locator：P5 S1–S3
+
+- move_code：GAP
+
+- paraphrase_cn：Bui等人的综述得出两个结论：多数研究未解释游戏化系统的技术元素，且存在组织相关研究的重大缺口。
+
+- rhetorical_function_cn：用第三方综述确认游戏化领域的普遍缺口。
+
+- depends_on_cn：PRIOR_KNOWLEDGE
+
+- sets_up_cn：作者从该综述推出三条核心假设。
+
+- evidence_pointer：Gamification Literature Review P5
+
+### 20. P6 S1–S3
+
+- order：20
+
+- section：Gamification Literature Review
+
+- locator：P6 S1–S3
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：该综述支持本研究三个核心假设：应使用严谨DSR创建游戏化系统、须在真实组织中进行长期有意义参与、必须将核心理论仔细情境化到工具性目标。
+
+- rhetorical_function_cn：把缺口转化为设计/方法要求。
+
+- depends_on_cn：GAP句
+
+- sets_up_cn：DSR章节的具体做法。
+
+- evidence_pointer：Gamification Literature Review P6
+
+### 21. P7
+
+- order：21
+
+- section：Gamification Literature Review
+
+- locator：P7
+
+- move_code：GAP
+
+- paraphrase_cn：现有游戏化安全培训研究面临七项挑战：多为一次性横截面、多用于学生、缺对照组、未测实际行为、缺理论、缺真实系统、缺有意义参与。
+
+- rhetorical_function_cn：用编号清单把缺口具体化，成为后文方法设计的清单式回应。
+
+- depends_on_cn：三条要求句
+
+- sets_up_cn：DSR章节——每项挑战都被后续设计逐一回应。
+
+- evidence_pointer：Gamification Literature Review 末段
+
+### 22. P2
+
+- order：22
+
+- section：DSR Applied To Gamified Security Training
+
+- locator：P2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：我们认为游戏化安全培训是应用DSR弥合设计、理论、方法与实践机会的自然场所。
+
+- rhetorical_function_cn：一句话收束整个文献缺口，转为方法与研究定位。
+
+- depends_on_cn：七项挑战
+
+- sets_up_cn：DSR方法总览。
+
+- evidence_pointer：DSR Applied To Gamified Security Training 末段
+
+### 23. P2 S1–S2
+
+- order：23
+
+- section：Overview of Our DSR Approach
+
+- locator：P2 S1–S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：DSR的常见期望是方案能以proof-of-concept和proof-of-value描述与评估；前者指设计在有限情境中可行有前景，后者指构件在现实中真正起作用。
+
+- rhetorical_function_cn：把DSR评价语言引入文章，为后续章节命名提供框架。
+
+- depends_on_cn：DSR定位句
+
+- sets_up_cn：proof-of-concept与proof-of-value两节。
+
+- evidence_pointer：Overview of Our DSR Approach P2
+
+### 24. P4 S1
+
+- order：24
+
+- section：Overview of Our DSR Approach
+
+- locator：P4 S1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：我们系统建立proof-of-concept与proof-of-value，并通过一个实际使用的系统走向持续的proof-of-use。
+
+- rhetorical_function_cn：预告DSR全程结构，明确研究轨迹。
+
+- depends_on_cn：proof-of-concept/value定义
+
+- sets_up_cn：七步DSR流程及其后讨论中的九步总结。
+
+- evidence_pointer：Overview of Our DSR Approach P4
+
+### 25. P1
+
+- order：25
+
+- section：Focus on Design Problem Relevance
+
+- locator：P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：研究始于一家法国公司邀请作者帮助构建鼓励员工更好遵守安全合规的在线培训系统；公司长期面临员工对安全问题（如钓鱼攻击）的疏忽，且现有邮件培训内部评价不高。
+
+- rhetorical_function_cn：给出落地场景，把学术问题锚定在真实组织需求上。
+
+- depends_on_cn：前述七项挑战
+
+- sets_up_cn：设计目标与构件选择以该组织约束为前提。
+
+- evidence_pointer：Focus on Design Problem Relevance P1
+
+### 26. P2
+
+- order：26
+
+- section：Focus on Design Problem Relevance
+
+- locator：P2
+
+- move_code：GAP
+
+- paraphrase_cn：文献显示通过制裁鼓励安全合规可能反效果，且没有先前研究确立游戏化能正面影响员工安全学习与效能感知的经验证据。
+
+- rhetorical_function_cn：在真实项目背景下再次确认经验缺口。
+
+- depends_on_cn：PHENOMENON句
+
+- sets_up_cn：构建以动机与应对为核心的DSR目标。
+
+- evidence_pointer：Focus on Design Problem Relevance P2
+
+### 27. P1
+
+- order：27
+
+- section：Create Objectives for Design Evaluation
+
+- locator：P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：目标是基于本土IS动机理论作为核心理论构建游戏化培训系统，并以长期现场实验生态有效地检验它。
+
+- rhetorical_function_cn：正式提出设计评价目标：理论驱动+生态有效检验。
+
+- depends_on_cn：GAP句
+
+- sets_up_cn：选择HMSAM作为核心理论。
+
+- evidence_pointer：Create Objectives for Design Evaluation P1
+
+### 28. P1–P2
+
+- order：28
+
+- section：Apply a DSR Kernel Theory Contextualized to Gamification
+
+- locator：P1–P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：分析后认为HMSAM尤其适合作为扩展到安全情境与应对支持的核心理论与评价模型，其两条组成线索是动机满足与应对支持。
+
+- rhetorical_function_cn：引入HMSAM并说明选择理由，把理论定位为设计与评价双重来源。
+
+- depends_on_cn：设计目标句
+
+- sets_up_cn：随后对HMSAM的情境化扩展。
+
+- evidence_pointer：Apply a DSR Kernel Theory Contextualized to Gamification P1–P2
+
+### 29. P3
+
+- order：29
+
+- section：Apply a DSR Kernel Theory Contextualized to Gamification
+
+- locator：P3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：最重要的情境化是向HMSAM加入学习、安全响应效能与安全自我效能等情境特定构念。
+
+- rhetorical_function_cn：展示理论扩展的方向，为假设1–3奠定基础。
+
+- depends_on_cn：HMSAM选择
+
+- sets_up_cn：后文的操作化模型图（Figure 2）。
+
+- evidence_pointer：Apply a DSR Kernel Theory Contextualized to Gamification P3
+
+### 30. Design principle #1
+
+- order：30
+
+- section：Propose Guiding Design Principles
+
+- locator：Design principle #1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：设计原则一：游戏化培训系统应纳入能提升员工动机与满足感的不同设计元素。
+
+- rhetorical_function_cn：把动机理论转成第一条可执行设计要求。
+
+- depends_on_cn：HMSAM动机满足线索
+
+- sets_up_cn：具体构件（头像、积分、等级、排行榜等）。
+
+- evidence_pointer：Propose Guiding Design Principles 段落
+
+### 31. Design principle #2
+
+- order：31
+
+- section：Propose Guiding Design Principles
+
+- locator：Design principle #2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：设计原则二：游戏化培训系统应通过有意义、有趣、好玩的学习过程提供新知识。
+
+- rhetorical_function_cn：把应对支持与学习文献转成第二条设计要求。
+
+- depends_on_cn：应对/学习知识
+
+- sets_up_cn：测验与分阶段内容等设计选择。
+
+- evidence_pointer：Propose Guiding Design Principles 段落
+
+### 32. P3–P5
+
+- order：32
+
+- section：Propose Guiding Design Principles
+
+- locator：P3–P5
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：处理三个概念设计问题时，作者选择主要依靠内在动机设计系统（虽然允许少量外溢），选择简短交互式课程而非长视频，并采用既有量表以支撑设计评价。
+
+- rhetorical_function_cn：说明关键设计决策及其原因，展示过程中如何规避设计混淆。
+
+- depends_on_cn：两条设计原则
+
+- sets_up_cn：proof-of-concept的映射表与现场系统的界面特征。
+
+- evidence_pointer：Propose Guiding Design Principles P3–P5
+
+### 33. Steps 1–4
+
+- order：33
+
+- section：Establish Proof-of-Concept
+
+- locator：Steps 1–4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：建立proof-of-concept分为四步：系统回顾游戏化安全文献、创建设计元素实施映射表、把元素关系映射到HMSAM构念、把具体动机映射到各设计元素。
+
+- rhetorical_function_cn：用清单式方法宣告概念验证的程序，并把理论到设计的翻译显性化。
+
+- depends_on_cn：设计原则
+
+- sets_up_cn：附录中的Tables A.1–A.5。
+
+- evidence_pointer：Establish Proof-of-Concept 段落
+
+### 34. Step 3
+
+- order：34
+
+- section：Establish Proof-of-Concept
+
+- locator：Step 3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：通过把游戏化元素关系映射到HMSAM构念，概念上检查设计能否满足内在动机并提供'适当挑战'。
+
+- rhetorical_function_cn：把'适当挑战'从理论概念变为在设计阶段就需检查的目标。
+
+- depends_on_cn：映射表
+
+- sets_up_cn：H4的倒U假设与事后曲线分析。
+
+- evidence_pointer：Establish Proof-of-Concept Step 3
+
+### 35. P1
+
+- order：35
+
+- section：Kernel Theory Foundation for Proof-of-Concept and Proof-of-Value
+
+- locator：P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：核心理论HMSAM承担双重角色：指导设计并帮助建立proof-of-concept，同时被操作化检验以建立proof-of-value。
+
+- rhetorical_function_cn：明确理论与评估之间的关系，让后文假设顺理成章。
+
+- depends_on_cn：整个DSR部分
+
+- sets_up_cn：模型图与随后假设。
+
+- evidence_pointer：Kernel Theory Foundation 开头段
+
+### 36. P2–P4
+
+- order：36
+
+- section：Kernel Theory Foundation for Proof-of-Concept and Proof-of-Value
+
+- locator：P2–P4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：HMSAM是聚焦系统使用内在动机的本土IS理论；它基于心流理论重新构想认知吸收，把CA的多个成分拆分为独立前因，并继承TAM把PEOU与愉悦作为低阶前因。
+
+- rhetorical_function_cn：压缩解释HMSAM的来龙去脉，为扩展模型提供理论合法性。
+
+- depends_on_cn：HMSAM选择句
+
+- sets_up_cn：扩展模型（Figure 2）与假设推导。
+
+- evidence_pointer：Kernel Theory Foundation P2–P4
+
+### 37. P1
+
+- order：37
+
+- section：Core Kernel Theory Assumptions for Achieving Immersion
+
+- locator：P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：核心假设是心流/沉浸源于三个条件：清晰目标、无歧义反馈、挑战与技能平衡。
+
+- rhetorical_function_cn：将心流理论原则内化为操作化模型的基石。
+
+- depends_on_cn：HMSAM理论介绍
+
+- sets_up_cn：学习、应对与挑战三节分别对应这三个条件。
+
+- evidence_pointer：Core Kernel Theory Assumptions for Achieving Immersion
+
+### 38. P1–P2
+
+- order：38
+
+- section：Infusing Learning and Security Coping into Our Context
+
+- locator：P1–P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：积极应对技能可以促进行为改变，SETA是提供应对技能的关键途径；员工学得越多越有准备实施保护性安全行为。
+
+- rhetorical_function_cn：把学习/应对文献转成机制陈述，直接引出H1。
+
+- depends_on_cn：三条件
+
+- sets_up_cn：H1与效能定义。
+
+- evidence_pointer：Infusing Learning and Security Coping into Our Context
+
+### 39. Hypothesis 1
+
+- order：39
+
+- section：Infusing Learning and Security Coping into Our Context
+
+- locator：Hypothesis 1
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：假设1：游戏化安全培训情境中感知学习增加与行为意向增加相关。
+
+- rhetorical_function_cn：把机制陈述转化为可检验假设。
+
+- depends_on_cn：学习机制句
+
+- sets_up_cn：H2a-b将学习与两类效能连接。
+
+- evidence_pointer：Hypothesis 1 处
+
+### 40. P3–P4 and Hypotheses 2a-b
+
+- order：40
+
+- section：Infusing Learning and Security Coping into Our Context
+
+- locator：P3–P4 and Hypotheses 2a-b
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：响应效能指相信保护行动有效，自我效能指相信自己有能力防止威胁；假设2a-b把感知学习分别与响应效能和自我效能连接。
+
+- rhetorical_function_cn：给出两类效能的操作性定义并提出学习→效能假设。
+
+- depends_on_cn：学习机制
+
+- sets_up_cn：H3a-b耦合效能与意向。
+
+- evidence_pointer：Hypotheses 2a-b 处
+
+### 41. P2–P3 and Hypotheses 3a-b
+
+- order：41
+
+- section：Coping and Behavioral Change
+
+- locator：P2–P3 and Hypotheses 3a-b
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：游戏化系统通过目标设定（如徽章、等级）增强自我效能；两类效能提升应增强安全行为意向，即H3a-b。
+
+- rhetorical_function_cn：把效能文献与游戏化机制结合，提出效能→意向假设。
+
+- depends_on_cn：效能定义
+
+- sets_up_cn：挑战-沉浸的倒U假设作为第三条件的展开。
+
+- evidence_pointer：Coping and Behavioral Change
+
+### 42. P1
+
+- order：42
+
+- section：Balancing Skills and Challenges
+
+- locator：P1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：当刺激过难或过易时兴趣和好奇会下降，因此我们把挑战加入HMSAM，但关键限制假设是挑战必须'适当'。
+
+- rhetorical_function_cn：引入新构念挑战并预告其边界条件。
+
+- depends_on_cn：三条件中的挑战/技能平衡
+
+- sets_up_cn：倒U假设与事后曲线分析。
+
+- evidence_pointer：Balancing Skills and Challenges P1
+
+### 43. P3
+
+- order：43
+
+- section：Balancing Skills and Challenges
+
+- locator：P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Ma等人用电生理证据确认感知挑战与内在动机之间存在倒U关系。
+
+- rhetorical_function_cn：引用神经科学证据支撑曲线的理论可行性。
+
+- depends_on_cn：适当挑战假设
+
+- sets_up_cn：H4的倒U表述。
+
+- evidence_pointer：Balancing Skills and Challenges P3
+
+### 44. Hypothesis 4
+
+- order：44
+
+- section：Balancing Skills and Challenges
+
+- locator：Hypothesis 4
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：假设4：感知挑战与感知沉浸之间存在正向且曲线（倒U）关系。
+
+- rhetorical_function_cn：把边界条件变成非线性假设，并预告殊于传统线性的检验。
+
+- depends_on_cn：倒U证据
+
+- sets_up_cn：后续平方项SEM分析。
+
+- evidence_pointer：Hypothesis 4 处
+
+### 45. P2–P3
+
+- order：45
+
+- section：Fulfilling Motivations for Behavioral Change
+
+- locator：P2–P3
+
+- move_code：MECHANISM
+
+- paraphrase_cn：沉浸是完全投入而忽略外部要求的状态，动机满足加沉浸为学习与行为改变创造理想条件。
+
+- rhetorical_function_cn：解释沉浸为何是动机到行为意向的核心中介。
+
+- depends_on_cn：CA/HMSAM理论
+
+- sets_up_cn：H5的沉浸→意向假设。
+
+- evidence_pointer：Fulfilling Motivations for Behavioral Change
+
+### 46. P4
+
+- order：46
+
+- section：Fulfilling Motivations for Behavioral Change
+
+- locator：P4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：其因果机制不仅是认知的，还有生理基础：游戏引发多巴胺释放、睾酮提升与杏仁核训练，可带来显著行为变化。
+
+- rhetorical_function_cn：用神经生理机制强化'游戏化能改变行为'的力度。
+
+- depends_on_cn：沉浸机制
+
+- sets_up_cn：H5和H6的强因果表述。
+
+- evidence_pointer：Fulfilling Motivations for Behavioral Change P4
+
+### 47. Hypotheses 5 and 6
+
+- order：47
+
+- section：Fulfilling Motivations for Behavioral Change
+
+- locator：Hypotheses 5 and 6
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：假设5：沉浸增加与合规行为意向增加相关；假设6：行为意向增加与符合所学安全政策的实际防钓鱼响应增加相关。
+
+- rhetorical_function_cn：提出意向→实际行为的闭环假设。
+
+- depends_on_cn：TRA/TPB与客观行为需求
+
+- sets_up_cn：第三方钓鱼测量与H6检验。
+
+- evidence_pointer：Fulfilling Motivations for Behavioral Change，H5/H6处
+
+### 48. P1
+
+- order：48
+
+- section：Modeling Counter-explanations Through Control Variables
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：通过建模年龄、性别、经验、教育以及OCM、OSC、TMSC等组织安全构念来检验反解释，提高结论可信度。
+
+- rhetorical_function_cn：预先处理替代解释，回应行为安全研究的典型担忧。
+
+- depends_on_cn：H6
+
+- sets_up_cn：结构模型的三阶段比较（Model part 3）。
+
+- evidence_pointer：Modeling Counter-explanations Through Control Variables
+
+### 49. Pilot Study
+
+- order：49
+
+- section：Procedures for Design Evaluation for Proof-of-Value
+
+- locator：Pilot Study
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：系统达到合理proof-of-concept后，先用45名学生的三个月预研究准备proof-of-value，以精化程序并检验工具。
+
+- rhetorical_function_cn：在正式实验前插入可行性验证阶段。
+
+- depends_on_cn：Proof-of-concept
+
+- sets_up_cn：优化后的正式现场实验。
+
+- evidence_pointer：Pilot Study for Proof-of-Value
+
+### 50. P1–P2
+
+- order：50
+
+- section：Main Study Design for Proof-of-Value in Actual Use
+
+- locator：P1–P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：正式研究是被设计为两个处理组和一个对照组的不平衡现场对照实验；488名自愿者被随机分为游戏化组（420）与邮件组（68），对照组（38）未被邀请从而不知情。
+
+- rhetorical_function_cn：交代实验设计的核心参数，强调随机化与对照。
+
+- depends_on_cn：预研究
+
+- sets_up_cn：‘同内容同频率’的操纵净设计。
+
+- evidence_pointer：Main Study Design for Proof-of-Value in Actual Use P1–P2
+
+### 51. P3
+
+- order：51
+
+- section：Main Study Design for Proof-of-Value in Actual Use
+
+- locator：P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：游戏化组与邮件组接受相同训练内容、相同频率的提醒与测验，从而得以干净地操纵游戏化交互vs非游戏化邮件交互。
+
+- rhetorical_function_cn：建立对照合理性，是整篇行为证据最关键的写作动作。
+
+- depends_on_cn：随机分配
+
+- sets_up_cn：所有把差异归因于设计元素的论证。
+
+- evidence_pointer：Main Study Design P3
+
+### 52. P1–P2
+
+- order：52
+
+- section：Gamified System and Procedures
+
+- locator：P1–P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：定制网络游戏化系统包含注册登录、选择头像、游戏管理员讲解规则、积分、怪物奖杯、青铜/银/金等级、排行榜主菜单与双周测验。
+
+- rhetorical_function_cn：把设计原则实例化为可复现的系统特征。
+
+- depends_on_cn：设计原则#1/#2
+
+- sets_up_cn：读者可据此理解后续测量与结果。
+
+- evidence_pointer：Gamified System and Procedures 前两段
+
+### 53. P4
+
+- order：53
+
+- section：Gamified System and Procedures
+
+- locator：P4
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：选择钓鱼作为培训重点，因为它对管理层更紧迫，且对钓鱼攻击的响应是客观可审计的安全行为。
+
+- rhetorical_function_cn：把设计焦点与客观行为测量连接起来。
+
+- depends_on_cn：系统特征
+
+- sets_up_cn：第三方钓鱼邮件作为因变量。
+
+- evidence_pointer：Gamified System and Procedures P4
+
+### 54. P5
+
+- order：54
+
+- section：Gamified System and Procedures
+
+- locator：P5
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为测量安全行为，由第三方公司在员工不知情时向邮箱发送钓鱼邮件，以二元变量编码点击行为，并用唯一随机编号建立匿名链接。
+
+- rhetorical_function_cn：说明客观行为测量如何保密、真实且可链接。
+
+- depends_on_cn：钓鱼作为焦点
+
+- sets_up_cn：Tables 1–2的行为结果与操纵检验。
+
+- evidence_pointer：Gamified System and Procedures P5
+
+### 55. P1
+
+- order：55
+
+- section：Measures for Design Evaluation
+
+- locator：P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：测量题项大多借用或改编自既有研究，新创挑战量表，实际钓鱼行为是二元的0/1变量。
+
+- rhetorical_function_cn：讲清量表来源与新建构念的操作化，保证可复现性。
+
+- depends_on_cn：假设模型
+
+- sets_up_cn：测量模型章节的效度验证。
+
+- evidence_pointer：Measures for Design Evaluation
+
+### 56. Measurement Model
+
+- order：56
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Measurement Model
+
+- move_code：RESULT
+
+- paraphrase_cn：CFA删除载荷低于阈值的条目后，所有载荷合格，AVE、信度、聚合与区分效度均建立。
+
+- rhetorical_function_cn：证明测量工具有效，是结构模型的前提。
+
+- depends_on_cn：量表选择
+
+- sets_up_cn：结构模型路径的可靠性。
+
+- evidence_pointer：Measurement Model 段落
+
+### 57. Structural Model Results
+
+- order：57
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Structural Model Results
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：使用Mplus 7协方差结构方程模型检验理论，并对二分类的实际钓鱼行为进行逻辑回归分析。
+
+- rhetorical_function_cn：说明统计工具选择及其对混合因变量处理方式。
+
+- depends_on_cn：测量模型
+
+- sets_up_cn：图4的结构模型结果。
+
+- evidence_pointer：Structural Model Results 首段
+
+### 58. Structural Model Results P2
+
+- order：58
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Structural Model Results P2
+
+- move_code：RESULT
+
+- paraphrase_cn：除愉悦到行为意向、控制到沉浸两条路径外，所有HMSAM复制路径均支持；所有假设均获支持；三个月的结果类似但较弱。
+
+- rhetorical_function_cn：用单句汇总全部假设结果，突出多数支持。
+
+- depends_on_cn：SEM模型
+
+- sets_up_cn：专门讨论H4的非线性处理。
+
+- evidence_pointer：Structural Model Results 中段
+
+### 59. Structural Model Results P3
+
+- order：59
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Structural Model Results P3
+
+- move_code：RESULT
+
+- paraphrase_cn：仅对邮件组数据建模时结果差得多，且三个月到六个月之间邮件组结果恶化或持平。
+
+- rhetorical_function_cn：提示邮件培训的无效并非偶然，为讨论中的‘邮件培训无效’提供铺垫。
+
+- depends_on_cn：全模型
+
+- sets_up_cn：事后时间维度的分析。
+
+- evidence_pointer：Structural Model Results 邮件组句
+
+### 60. Structural Model Results H4段
+
+- order：60
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Structural Model Results H4段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：H4作为非线性假设，通过把平方项加入SEM模型检验；VIF升高但模型拟合仍在可接受范围。
+
+- rhetorical_function_cn：说明非线性检验方法的合理性并主动报告模型恶化但仍可接受。
+
+- depends_on_cn：H4
+
+- sets_up_cn：事后线性vs曲线模型正式比较。
+
+- evidence_pointer：Structural Model Results H4段
+
+### 61. Manipulation Checks P1
+
+- order：61
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Manipulation Checks P1
+
+- move_code：RESULT
+
+- paraphrase_cn：操纵检验显示游戏化组被钓鱼比例显著低于对照组；出人意料的是，邮件组表现与完全未受训组无异。
+
+- rhetorical_function_cn：把统计模型结果落到最直观的行为比较，构成论文最具冲击力的证据。
+
+- depends_on_cn：表格1/2
+
+- sets_up_cn：讨论部分‘邮件培训基本无效’的强论断。
+
+- evidence_pointer：Manipulation Checks of Instrumental Goals
+
+### 62. Manipulation Checks P3
+
+- order：62
+
+- section：Analysis for Final Proof-of-Value
+
+- locator：Manipulation Checks P3
+
+- move_code：RESULT
+
+- paraphrase_cn：MANOVA与Box M检验确认不均衡设计下两组差异；Z检验（2.2561, p<0.05）确认实际行为显著不同且方向符合预期。
+
+- rhetorical_function_cn：用检验统计量支撑组间比较，回应不平衡设计的稳健性问题。
+
+- depends_on_cn：表格1/2
+
+- sets_up_cn：讨论中的proof-of-value声明。
+
+- evidence_pointer：Manipulation Checks P3
+
+### 63. Recap of Our General DSR Study Goals
+
+- order：63
+
+- section：Discussion
+
+- locator：Recap of Our General DSR Study Goals
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：讨论开篇回顾项目缘起：法企邀请、文献不完整、游戏化缺乏桥接、缺DSR，故将游戏化安全培训作为DSR应用机会。
+
+- rhetorical_function_cn：把讨论重新锚定在引言设立的问题与机会上，形成闭环。
+
+- depends_on_cn：引言与DSR章节
+
+- sets_up_cn：随后分实践/研究/理论三层总结proof-of-value。
+
+- evidence_pointer：Discussion: Recap of Our General DSR Study Goals
+
+### 64. Establishing Proof-of-Value in Actual Practice P1
+
+- order：64
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Actual Practice P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：实践中的proof-of-value体现在强生态效度、有意义参与、第三方客观钓鱼测评以及组织领导的正面反馈。
+
+- rhetorical_function_cn：把经验证据上升为实践贡献。
+
+- depends_on_cn：操纵检验结果
+
+- sets_up_cn：随后对邮件培训无效的讨论。
+
+- evidence_pointer：Establishing Proof-of-Value in Actual Practice
+
+### 65. Establishing Proof-of-Value in Actual Practice P3
+
+- order：65
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Actual Practice P3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究提供了经验证据表明，设计来帮助员工避免钓鱼的邮件培训与通知可能基本无效；邮件组与纯对照组在实际行为上无统计差异。
+
+- rhetorical_function_cn：给出论文最有实践冲击力的结论，把‘同内容对照’转化为对旧方法的否定。
+
+- depends_on_cn：邮件组vs对照组z检验
+
+- sets_up_cn：讨论中对邮件培训机制（无动机无应对）的解释。
+
+- evidence_pointer：Establishing Proof-of-Value in Actual Practice 与邮件组相关段
+
+### 66. Establishing Proof-of-Value in Research P1
+
+- order：66
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Research P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本研究是首个在游戏化安全情境中开展长期研究，并同时具备长期数据、真实员工、对照组、主客观测量、核心理论、真实系统与有意义参与。
+
+- rhetorical_function_cn：以‘首个’与清单式差距直接回应综述中列出的七项挑战。
+
+- depends_on_cn：七项挑战
+
+- sets_up_cn：随后首次意向-行为关系声明。
+
+- evidence_pointer：Establishing Proof-of-Value in Research
+
+### 67. Establishing Proof-of-Value in Research P2
+
+- order：67
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Research P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：本文还首次在游戏化安全情境中确认了行为意向与实际防钓鱼响应行为之间的正向关系。
+
+- rhetorical_function_cn：声明理论性创新：把TRA意向-行为链路扩展到该情境。
+
+- depends_on_cn：H6路径
+
+- sets_up_cn：理论层证明中的R²贡献。
+
+- evidence_pointer：Establishing Proof-of-Value in Research P2
+
+### 68. Establishing Proof-of-Value in Theory P1
+
+- order：68
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Theory P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：第一个理论贡献是把HMSAM扩展到游戏化安全培训与合规情境，加入学习、两类效能、挑战与实际安全行为构念。
+
+- rhetorical_function_cn：明确理论扩展的内容，与摘要中的再情境化呼应。
+
+- depends_on_cn：模型扩展
+
+- sets_up_cn：R²/效应量作为该贡献的量化证据。
+
+- evidence_pointer：Establishing Proof-of-Value in Theory 首段
+
+### 69. Establishing Proof-of-Value in Theory P2
+
+- order：69
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Theory P2
+
+- move_code：RESULT
+
+- paraphrase_cn：基线HMSAM复制模型中行为意向R²为0.318，扩展模型翻倍到0.638（f²=0.884，伪F=328.84），加入人口学与组织反解释仅增至0.645（f²=0.019），AIC/BIC比较同样支持扩展模型。
+
+- rhetorical_function_cn：用量化模型比较把理论贡献从定性声明提升为可审计的证据。
+
+- depends_on_cn：三阶段模型
+
+- sets_up_cn：‘扩展极为有价值、控制变量微不足道’的结论。
+
+- evidence_pointer：Establishing Proof-of-Value in Theory R²段
+
+### 70. Establishing Proof-of-Value in Theory P3
+
+- order：70
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Theory P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：挑战确实导向沉浸，但关键理论边界是：若挑战不适当，结果可能被破坏；线性vs曲线模型比较支持倒U。
+
+- rhetorical_function_cn：把‘适当挑战’从假设转化为有边界的理论规律。
+
+- depends_on_cn：事后二次模型
+
+- sets_up_cn：邮件组挑战-沉浸线性负向的发现。
+
+- evidence_pointer：Establishing Proof-of-Value in Theory 挑战段
+
+### 71. Establishing Proof-of-Value in Theory P4
+
+- order：71
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Theory P4
+
+- move_code：RESULT
+
+- paraphrase_cn：在非游戏化邮件情境中同样的分析显示线性与曲线模型无显著差异，且该线性关系为负；邮件环境中的挑战只是挫折来源。
+
+- rhetorical_function_cn：用反事实情境凸显游戏化对挑战转化的必要条件。
+
+- depends_on_cn：邮件组二次模型
+
+- sets_up_cn：进一步说明为何邮件培训无效。
+
+- evidence_pointer：Establishing Proof-of-Value in Theory 邮件组挑战段
+
+### 72. Establishing Proof-of-Value in Theory P5
+
+- order：72
+
+- section：Discussion
+
+- locator：Establishing Proof-of-Value in Theory P5
+
+- move_code：RESULT
+
+- paraphrase_cn：时间维度不利于邮件处理：从三个月到六个月，邮件组的统计效力稳定或下降，说明其效应随使用衰减。
+
+- rhetorical_function_cn：用纵向对比支持长期研究的必要性，并解释短横截面研究为何错过效果。
+
+- depends_on_cn：三个月vs六个月结果
+
+- sets_up_cn：讨论时间、游戏与学习的平衡。
+
+- evidence_pointer：Establishing Proof-of-Value in Theory 时间维度段
+
+### 73. Research Agenda to Establish Proof-of-Use P1
+
+- order：73
+
+- section：Discussion
+
+- locator：Research Agenda to Establish Proof-of-Use P1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：proof-of-use是最主要的局限与未来机会：单组织结果限制可推广性，每个组织有独特安全与合规氛围；原型在迁移到其他组织时可能需要更多修改。
+
+- rhetorical_function_cn：在贡献之后主动限制适用范围，把外部有效性留给未来研究。
+
+- depends_on_cn：proof-of-value总结
+
+- sets_up_cn：关于外在动机、组织文化、单一元素研究与媒体丰富度等未来方向。
+
+- evidence_pointer：Research Agenda to Establish Proof-of-Use
+
+### 74. P1
+
+- order：74
+
+- section：Conclusion
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结论：通过DSR、情境化核心理论和长期实地研究，精心选择的游戏化IT构件能改善既有组织安全培训系统，并提升实际防钓鱼行为。
+
+- rhetorical_function_cn：以一句话重述完整论证链，把证据压缩为最终贡献声明。
+
+- depends_on_cn：全文证据
+
+- sets_up_cn：结束语提出DSR+理论+长期研究的组合作为方法启示。
+
+- evidence_pointer：Conclusion P1
+
+### 75. P2
+
+- order：75
+
+- section：Conclusion
+
+- locator：P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：我们以自然的第三方钓鱼实验证明了实际防钓鱼行为改善，并首次经验演示了‘适当挑战’的重要性。
+
+- rhetorical_function_cn：重复摘要中的两大卖点，确保结尾强收。
+
+- depends_on_cn：曲线分析与钓鱼结果
+
+- sets_up_cn：无（文章结束）。
+
+- evidence_pointer：Conclusion P2
+
+## 写作技术
+
+- gap_construction_cn：采用‘复合问题’框架：把实践问题（防钓鱼失败+培训不受欢迎）与学术缺口（七项方法/理论缺失）叠加，再用一个竞争文献的矛盾结果（Baxter：有趣但无知识增益）和一个失败案例（Ferguson：90%被钓鱼）制造悬念，让读者接受‘需要一种理论驱动+DSR+长期检验的新方案’的结论。
+
+- signposting_cn：全文使用显性标签：DSR七步/九步、proof-of-concept / proof-of-value / proof-of-use、模型三阶段（Model parts 1–3）、七项挑战清单、两条设计原则；摘要与每节开头反复预告后续内容，使复杂研究流程高度可导航。
+
+- transition_logic_cn：每段末尾都埋设下一段的逻辑钩子：文献综述末段列出七项挑战→DSR章节逐项回应；DSR的proof-of-concept→‘下一步进入proof-of-value’；核心理论节末‘下面详细说明如何操作化HMSAM’→假设推导；分析一节末尾H4/邮件组异常→讨论中的事后曲线分析。
+
+- claim_evidence_rhythm_cn：先给设计原则再给构件证据，先给假设再给SEM路径结果，先给R²/效应量再给模型比较；结果报告严格按‘测量模型→结构模型→操纵检验’次序，每个主张都有对应统计量；事后分析主动汇报模型拟合恶化但仍可接受，体现稳健性。
+
+- benchmark_narrative_cn：benchmark被嵌入三层论证：邮件组是最直接的‘同内容异形态’基准，让游戏化差异可归因；无培训控制组提供绝对效果基准；基线HMSAM模型提供理论基准，扩展后R²翻倍成为理论贡献的核心证据；线性vs二次模型成为‘适当挑战’的统计基准。
+
+- theory_return_cn：结果并不停留在‘系统有效’，而是回到HMSAM：扩展模型R²从0.318到0.638，控制变量几乎无贡献；挑战-沉浸倒U被解释为心流理论三条件之一的经验确认；邮件组线性负向被解释为‘缺乏游戏化特征时挑战变成挫折’，从而限定理论边界。
+
+- contribution_positioning_cn：贡献被明确放置在三个信封式的标题下（实践、研究、理论），每个标题下用‘首个’、‘第一次’、‘R²翻倍’‘前所未见效应量’等短语强化原创性；最后把未解决的问题统一纳入proof-of-use，显示成熟的研究议程。
+
+- novelty_protection_cn：通过多种手段防止贡献退化为一次性性能比较：强调‘同内容同频率’的干净对照以排除内容差异；用第三方客观钓鱼行为而非仅自报量表；用长期六个月数据对比短期横截面；用R²分解与效应量证明理论增量远超控制变量；用事后曲线分析把‘适当挑战’从假设转化为新的理论边界，使实证结果升华为可复用的设计知识。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：把现实问题写成‘复合问题’，引用一个具体失败案例和一个最接近的矛盾研究，形成实践与学术双层缺口。
+
+- research_job_cn：检索目标领域文献，确认已有最好尝试及其失效原因。
+
+- required_evidence_cn：显示问题持续存在且至少一个已有近邻方案（如Baxter）结果不理想。
+
+- transition_to_next_cn：由此提出‘需要一种理论+方法+设计结合的新方案’。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用编号清单列出具体文献缺口，每一条都能被后续设计回应。
+
+- research_job_cn：综述相邻领域（如游戏化）并归类方法/理论/测量缺口。
+
+- required_evidence_cn：至少一条缺口指向本研究可制造的设计差异。
+
+- transition_to_next_cn：‘因此应用DSR是自然机会’。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入DSR评价语言（proof-of-concept/proof-of-value/proof-of-use）作为全文结构支架。
+
+- research_job_cn：选择适合的本土IS理论（如HMSAM）作为核心理论与评价模型。
+
+- required_evidence_cn：理论构念能被翻译为设计要素并覆盖目标结果。
+
+- transition_to_next_cn：从理论推导设计原则。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写出两条清晰的设计原则，并把情境化构念写入理论扩展。
+
+- research_job_cn：扩展理论（如加入学习、效能、挑战、实际行为），建立设计元素→动机→构念的映射表。
+
+- required_evidence_cn：概念映射能在纸面上显示设计满足动机并提供适当挑战。
+
+- transition_to_next_cn：‘系统被视为达到proof-of-concept，准备检验proof-of-value’。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用一段说明预研究如何精化工具与程序。
+
+- research_job_cn：用方便样本（如学生）进行短周期试运行。
+
+- required_evidence_cn：量表信度、程序修正点（如防作弊、引入关键角色）。
+
+- transition_to_next_cn：进入正式现场实验。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：以‘同内容、同频率、不同交互形态’的对照组设计描述实验，强调操纵净度。
+
+- research_job_cn：获得组织准入、随机分配、保密且客观的行为测量（如第三方钓鱼）。
+
+- required_evidence_cn：人口学等价、控制组不知情、客观行为变量。
+
+- transition_to_next_cn：进入统计分析。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：按测量模型→结构模型→操纵检验的次序报告结果，所有假设逐一给出路径与拟合统计。
+
+- research_job_cn：运行CB-SEM/多元模型，放入控制变量与反解释；对非线性假设加入平方项。
+
+- required_evidence_cn：路径显著、R²与效应量、控制变量的微小贡献。
+
+- transition_to_next_cn：对异常子群（如邮件组）与边界假设展开事后分析。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：以‘检验长期假设/回应审稿人问题’的方式引入事后曲线的模型比较。
+
+- research_job_cn：在线性vs二次模型、不同处理组、不同时间点之间比较。
+
+- required_evidence_cn：R²/F变化的模型比较统计。
+
+- transition_to_next_cn：把曲线发现写成理论边界与独特贡献。
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：在讨论中用‘实践/研究/理论’三层封装贡献，并以proof-of-use研究议程限制自身并给出未来路径。
+
+- research_job_cn：用R²分解、AIC/BIC与首证声明连接证据与理论贡献；诚实列出外部效度限制。
+
+- required_evidence_cn：贡献声明能够回溯到引言缺口并引用具体统计量。
+
+- transition_to_next_cn：结束。
+
+### most_transferable_moves_cn
+
+1. 复合问题开场：实践痛点+最接近研究的失败结果，形成双重缺口
+
+2. 编号缺口清单，并让后续每个设计决策都回应其中一项
+
+3. 把理论写成设计和评价的双重来源（kernel theory + evaluation model）
+
+4. ‘同内容同频率’基准组设计，干净隔离设计形态差异
+
+5. 客观且隐蔽的行为测量（第三方钓鱼邮件）作为因变量
+
+6. R²分解论证：基线模型→扩展模型→控制模型，凸显理论增量
+
+7. 事后二次模型比较，把理论边界转成新贡献
+
+8. 三明治式贡献定位：实践/研究/理论三层+proof-of-use议程
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 六个月的组织准入与持续数据采集（420名员工）
+
+2. 大型跨国公司的多国英语办公室协作
+
+3. 第三方钓鱼测试提供商
+
+4. 定制化网络游戏化系统（.NET）的开发与迭代
+
+5. HR数据库抽取不知情对照组并进行匿名链接
+
+6. 高成本审计式行为测量与长期跟踪
+
+### what_not_to_copy_superficially_cn
+
+1. 不能在没有同内容邮件组和无培训对照组时宣称‘邮件培训无效’
+
+2. 不能在缺乏客观行为测量时宣称‘实际合规改善’
+
+3. 不能在没有二次模型比较时宣称‘首次证明适当挑战倒U’
+
+4. 不能在没有R²/效应量/AIC-BIC比较时宣称‘理论扩展有增量’
+
+5. 不能以少量参与者或单期问卷复制‘长期有效’的措辞
+
+- single_best_description_of_the_routine_cn：先把HMSAM的动机满足命题翻译成游戏化设计原则，再用同内容同频率的邮件组和无培训对照组在六个月内做现场实验，用第三方钓鱼邮件作为客观行为证据，最后回到理论说明扩展模型把行为意向的解释方差翻倍并给出挑战的倒U边界。
+
+## 分析边界
+
+论文正文完整可读，但补充附录（Supplemental Appendices A–D）内容未被收录，Tables A.1–A.5、D.1–D.9及部分统计细节只能通过正文引用间接推断；摘要中的‘420 participants’指分配至游戏化组的人数，最终有效样本为游戏化组384人加邮件组68人加无培训组38人共490人，正文未统一说明该口径；原文存在OCR连字（fi/fl）与部分格式噪声；无法获得精确页码，句子级定位基于章节、段落顺序与表格标题构建。

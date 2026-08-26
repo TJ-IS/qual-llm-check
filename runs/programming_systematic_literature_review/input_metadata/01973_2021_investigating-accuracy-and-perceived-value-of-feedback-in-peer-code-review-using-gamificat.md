@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85109044488"
+title: "Investigating Accuracy and Perceived Value of Feedback in Peer Code Review Using Gamification"
+authors: "Indriasari T.D.; Luxton-Reilly A.; Denny P."
+year: "2021"
+journal: "Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE"
+doi: "10.1145/3430665.3456338"
+---
+# Scopus title-abstract-keyword metadata
+Title: Investigating Accuracy and Perceived Value of Feedback in Peer Code Review Using Gamification
+Abstract: The practice of peer code review has been shown to deliver a variety of benefits to programming students. These include learning from producing and receiving feedback, and from being exposed to a range of problem-solving approaches and solutions. However, the success of a peer code review activity depends on the quality and accuracy of the reviews that students produce, and prior work has shown that these can sometimes be poor. One approach for addressing this problem is to incorporate motivational incentives directly into the design of the code review platform. In this research, we explore the use of gamification in an online peer code review tool, where game-like elements are used to reward students for generating accurate and helpful reviews. We report the results of a randomized controlled study (n=171) that measures both review accuracy and the perceived value of the feedback produced. Although quantitative ratings of the review quality did not differ significantly between control and experimental conditions, we observed interesting trends relating to the perceived value of the feedback. Students in both groups had similar views regarding the usefulness of the feedback they received on their own work, however students in the experimental condition tended to express more positive sentiments towards the quality of the feedback they produced for their peers and observed from other reviewers.  © 2021 ACM.
+Author keywords: code review; computing education; CS1; gamification; higher education; peer code review; peer review; programming course
+Index keywords: Education computing; Engineering education; Engineering research; Feedback; Gamification; Quality control; Code review; Experimental conditions; Exposed to; Game-like elements; Peer code review; Perceived value; Review quality; Students
+Document type: Conference paper
+Conference: 
+Source title: Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE
+Year: 2021
+EID: 2-s2.0-85109044488
+DOI: 10.1145/3430665.3456338
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

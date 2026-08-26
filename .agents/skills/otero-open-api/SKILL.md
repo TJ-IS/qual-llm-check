@@ -17,11 +17,25 @@ Use the public, read-only Otero API at `https://ais.kexu.win/api/open/v1`. Prefe
 
 ## Download all matching full text
 
-Run the standard-library downloader from the repository root:
+Run the standard-library downloader from the repository root with Python 3.10 or newer. The examples use `python3` for macOS/Linux; on Windows replace it with `python` or the workspace-bundled interpreter. Forward-slash repository paths work on both platforms.
 
-```powershell
-python .agents\skills\otero-open-api\scripts\download_fulltext.py --query construct --output database_fulltext_construct
+```console
+python3 .agents/skills/otero-open-api/scripts/download_fulltext.py --query construct --output database_fulltext_construct
 ```
+
+For a canonical full-corpus library without a search filter, use:
+
+```console
+python3 .agents/skills/otero-open-api/scripts/download_fulltext.py --all --output database_fulltext_all
+```
+
+When an older query-specific library already contains part of the corpus, reuse it by Otero article ID:
+
+```console
+python3 .agents/skills/otero-open-api/scripts/download_fulltext.py --all --output database_fulltext_all --reuse-metadata --reuse-from database_fulltext_construct
+```
+
+`--reuse-from` recognizes files already present in the destination, creates same-volume hard links for matching source files when possible, and copies only when hard linking is unavailable. It then downloads only missing article IDs.
 
 The script:
 
@@ -33,7 +47,7 @@ The script:
 - resumes safely by skipping already downloaded files;
 - leaves Markdown image references intact but does not download image files.
 
-Use `--limit N` only for tests. Use `--workers N` conservatively; the default is 8. Re-run with `--reuse-metadata` to resume or retry non-successful records without repeating the paginated search.
+Use `--limit N` only for tests. Use `--workers N` conservatively; the default is 8. Re-run with `--reuse-metadata` to resume or retry non-successful records without repeating the paginated search. `--reuse-from DIRECTORY` may be repeated to merge several existing libraries.
 
 ## Validate a bulk result
 

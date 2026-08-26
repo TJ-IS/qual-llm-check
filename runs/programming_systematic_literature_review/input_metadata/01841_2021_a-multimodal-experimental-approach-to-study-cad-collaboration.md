@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85088678934"
+title: "A multimodal experimental approach to study CAD collaboration"
+authors: "Phadnis V.S.; Wallace D.R.; Olechowski A."
+year: "2021"
+journal: "Computer-Aided Design and Applications"
+doi: "10.14733/cadaps.2021.328-342"
+---
+# Scopus title-abstract-keyword metadata
+Title: A multimodal experimental approach to study CAD collaboration
+Abstract: Computer-Aided Design (CAD) collaboration has been studied since the early days of CAD research, but standardized metrics and experimental procedures for synchronous, cloud-based CAD research are lacking in the literature. In this work, we lay out an empirical approach to investigate collaboration in CAD. Our work is unique in its relevance to the nuances of synchronous CAD collaboration. We first define metrics of interest: speed, quality, communication, satisfaction, and UI (user interaction). We then introduce an experimental toolkit that leverages automated and manual data capture methods. Lastly, we deploy our toolkit in a pilot study setting to reveal preliminary insights and validate the workings of our method. Although preliminary, our findings suggest that pairs were slower than single CAD users because of coordination overheads involving communication and model-tree-scanning. © 2021 CAD Solutions, LLC.
+Author keywords: CAD collaboration; Cursor tracking; Emotion tracking; Multimodal experiments; Protocol analysis
+Index keywords: CAD collaboration; Cloud-based; Empirical approach; Experimental approaches; Experimental procedure; Multi-modal; Pilot studies; User interaction; Computer aided design
+Document type: Article
+Conference: 
+Source title: Computer-Aided Design and Applications
+Year: 2021
+EID: 2-s2.0-85088678934
+DOI: 10.14733/cadaps.2021.328-342
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

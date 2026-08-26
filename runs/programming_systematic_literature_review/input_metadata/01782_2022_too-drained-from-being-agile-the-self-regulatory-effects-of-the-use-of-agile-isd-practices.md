@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85141189024"
+title: "Too Drained from Being Agile? The Self-Regulatory Effects of the Use of Agile ISD Practices and their Consequences on Turnover Intention"
+authors: "Mueller L.; Benlian A."
+year: "2022"
+journal: "Journal of the Association for Information Systems"
+doi: "10.17705/1jais.00766"
+---
+# Scopus title-abstract-keyword metadata
+Title: Too Drained from Being Agile? The Self-Regulatory Effects of the Use of Agile ISD Practices and their Consequences on Turnover Intention
+Abstract: While much is known about the beneficial effects of agile information systems development (ISD), scholars have largely neglected to address its potential downsides. Specifically, research on this topic has thus far overlooked the ambivalent implications of the specific demands placed on developers working in agile ISD teams, including potentially depleting effects. Drawing on ego depletion theory and the associated literature, we provide a more balanced view and introduce self-regulatory resource depletion triggered by using agile ISD practices—encompassing software development (SD) and project management (PM) practices—as a theoretical perspective on why agile developers experience different levels of work-related fatigue that lead to stronger or weaker turnover intentions. Furthermore, we propose that due to the specific way in which agile ISD methods organize ISD project work, developers’ perceived workload influences the intensity by which agile ISD practices affect self-regulatory resources and developers’ feelings of fatigue. We examined our research model using a multimethod approach including quantitative and qualitative data. We found that the use of agile SD practices enhances developers’ self-regulatory resources and reduces fatigue and turnover intention. Our results also show that perceived workload strengthens the energizing effects of the use of agile SD practices and reveals a depleting effect of the use of agile PM practices, with countervailing implications for turnover intention. This study contributes to agile ISD literature by drawing a more nuanced and balanced picture with both resource-enhancing and resource-draining effects of the use of agile ISD practices. Finally, we give managerial advice regarding factors to consider when designing and managing agile ISD projects. © 2022, Association for Information Systems. All rights reserved.
+Author keywords: Agile Information Systems Development; Agile Project Management; Agile Software Development; Ego Depletion; Fatigue; Perceived Workload; Self-Regulation; Turnover Intention
+Index keywords: Agile manufacturing systems; Fatigue of materials; Information management; Information systems; Information use; Project management; Agile information system; Agile information system development; Agile project management; Agile software development; Development practices; Ego depletion; Information system development; Perceived workload; Self regulation; Turnover intentions; Software design
+Document type: Article
+Conference: 
+Source title: Journal of the Association for Information Systems
+Year: 2022
+EID: 2-s2.0-85141189024
+DOI: 10.17705/1jais.00766
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

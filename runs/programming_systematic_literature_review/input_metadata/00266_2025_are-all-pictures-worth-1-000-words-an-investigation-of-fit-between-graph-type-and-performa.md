@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-86000649489"
+title: "Are All Pictures Worth 1,000 Words? An Investigation of Fit Between Graph Type and Performance on Accounting Data Analytics Tasks"
+authors: "Granitto S.P.; Murthy U.S."
+year: "2025"
+journal: "Journal of Information Systems"
+doi: "10.2308/isys-2023-042"
+---
+# Scopus title-abstract-keyword metadata
+Title: Are All Pictures Worth 1,000 Words? An Investigation of Fit Between Graph Type and Performance on Accounting Data Analytics Tasks
+Abstract: Despite the increasing prevalence of the use of data analytics and visualizations in accounting settings, little is known about the relative effectiveness of different visualization formats for tasks such as those involving comparisons over time and those involving evaluations of whole-part compositions. In this study, we examine if there is a difference in decision efficiency and effectiveness between bar and line graphs for a comparison task and between pie and stacked column graphs for a compositional task. We also examine if the component complexity of graphs affects performance. We find that line graphs result in significantly greater decision sensitivity (ability to identify true positives) than bar graphs on comparison tasks regardless of the degree of component complexity. We also find that bar graphs result in significantly greater decision specificity (ability to identify true negatives) and overall accuracy. © 2025, American Accounting Association. All rights reserved.
+Author keywords: cognitive fit; cognitive load; data visualizations; gestalt principles geta
+Index keywords: 
+Document type: Article
+Conference: 
+Source title: Journal of Information Systems
+Year: 2025
+EID: 2-s2.0-86000649489
+DOI: 10.2308/isys-2023-042
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

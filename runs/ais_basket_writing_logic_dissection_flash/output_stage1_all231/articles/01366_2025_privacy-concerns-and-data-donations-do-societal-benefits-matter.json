@@ -1,0 +1,1077 @@
+{
+  "record_id": "1366",
+  "source_file": "01366_2025_privacy-concerns-and-data-donations-do-societal-benefits-matter.md",
+  "title": "Privacy Concerns and Data Donations: Do Societal Benefits Matter?",
+  "authors": "Tawfiq Alashoor; Mark Keil; Zhenhui (Jack) Jiang; Kambiz Saffarizadeh",
+  "year": "2025",
+  "journal": "MIS Quarterly",
+  "doi": "10.25300/misq/2024/16853",
+  "fulltext_chars": 164547,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": true,
+  "source_primary_artifact_function": "human_facing_information_and_interaction",
+  "source_primary_objective_family": "behavioral_response",
+  "source_application_context": "healthcare_and_care",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:26:51.842993+00:00",
+  "article_level_summary": {
+    "central_question_cn": "在数据捐赠这一以社会利益为特征的新隐私情境中，隐私关注与数据捐赠决策之间的负向关联是否会受到隐私计算因素（隐私控制、内隐/外显社会利益）的调节？",
+    "artifact_and_design_cn": "两个实验性移动应用：Experiment 1 使用医疗研究一般情境的 DataDonors app mockup；Experiment 2 使用 COVID-19 情境的 Fight COVID-19 app simulation。核心设计操纵包括是否提供隐私控制（粒度隐私设置）、内隐社会利益（通过患者图片和视角采择文字诱发共情关注）、外显社会利益（明确告知社会收益 vs 个人收益）。",
+    "objective_outcomes_cn": "Experiment 1 中 139 名 MTurk 参与者：隐私关注与捐赠数量负向关联；提供隐私控制或诱发共情均显著弱化该负向关联；两者均缺失时负向关联最强；共情单独存在时几乎消除负向关联。Experiment 2 中 283 名 MTurk 参与者：同样得到隐私关注负向主效应；隐私控制与外显社会利益均弱化负向关联；尤其在没有隐私控制时，外显社会收益相比外显个人收益更大程度抵消负向关联，并消除了对医疗数据捐赠的负向效应。",
+    "core_contribution_cn": "将社会利益明确整合进隐私计算：证明数据捐赠情境下社会利益（内隐/外显）与隐私控制可调节隐私关注与数据捐赠行为的关系；回应了数据捐赠实证研究号召；使用模拟环境中的实际捐赠选择而非仅意图测量，扩展隐私关注的边界条件。",
+    "whole_argument_in_one_paragraph_cn": "作者先以疫情和数据捐赠倡议描述社会利益型隐私决策的重要性；指出医疗数据捐赠中隐私风险落在个人而收益主要归社会，因此必须重新检验隐私计算；通过对 32 篇隐私计算实证研究的系统梳理，指出既有研究几乎只考虑个人收益，社会利益维度未被纳入调节分析；据此提出研究问题：社会利益如何与个人风险收益共同调节隐私关注与数据捐赠决策；以隐私计算理论为主，结合共情-利他假说与风险保护机制提出 H1-H4；设计两个随机实验，分别以内隐共情和外显利益信息操作社会利益，同时操纵隐私控制；两个实验均发现 H1 主效应成立，且 H2、H3、H4 得到支持；讨论用情绪对隐私决策的影响解释三者共同在场的意外结果，然后上升到对隐私理论、数据捐赠实践、社会与伦理的含义，并在局限中界定边界。"
+  },
+  "paper_archetype": "theory_derived_artifact_experiment",
+  "paper_archetype_reason_cn": "理论不是事后解释而是前置推导：作者以隐私计算、共情-利他假设和风险保护机制推出哪些设计特征（隐私控制、内隐/外显社会利益提示）会调节隐私关注与捐赠行为，再通过两个随机实验检验这些理论化设计差异；虽然论文不是设计科学式的原则评价，但核心逻辑是理论推导界面/设计条件并用实验验证。",
+  "dominant_writing_arc": "problem_theory_design_test_return",
+  "dominant_writing_arc_reason_cn": "文章从现实问题（数据捐赠的隐私困境）出发，引入隐私计算理论，推导出设计要求与假设，设计并运行两个受控实验，最后回到理论贡献、边界条件和伦理讨论，属于典型的问题—理论—设计—检验—返回理论的弧线。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "研究从文献系统梳理定位缺口，到理论建模与假设推演，再到两个随机实验作为核心实证阶段，最后通过事后拆分和跨实验复制完成稳健性论证；两个实验不是孤立重复，而是以内隐/外显社会利益操作互补同一理论构念，并分别嵌入一般医疗研究和 COVID-19 具体情境。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "隐私计算实证文献系统梳理（Table 1）",
+        "question_cn": "已有隐私计算实证研究是否纳入社会利益维度？社会利益是否被用来调节隐私关注与披露结果的关系？",
+        "inputs_and_setting_cn": "AIS Senior Scholars' Basket of Eight 期刊截至 2024 年以 'privacy calculus' 为关键词检索出的出版物；初筛 113 篇，经排除后保留 32 篇实证研究。",
+        "designed_or_compared_object_cn": "对 32 篇研究按隐私关注、感知风险、感知收益、社会因素、情境和披露结果进行维度编码。",
+        "baseline_control_or_counterfactual_cn": "以是否包含社会因素作为空白维度；多数研究只含个人收益与风险。",
+        "objective_metrics": [
+          "研究数量",
+          "包含社会因素的研究数量（仅 4 篇有社会因素标记）",
+          "是否存在调节效应检验"
+        ],
+        "analysis_method_cn": "系统性检索、人工编码与内容比较。",
+        "main_result_cn": "32 篇隐私计算实证研究中绝大多数未纳入社会利益；只有极少数研究涉及社会因素，且没有专门检验社会利益对隐私关注-披露关联的调节作用。",
+        "argumentative_role_cn": "用可验证的文献编码制造理论缺口：不是‘没人研究过社会利益’，而是‘隐私计算主流框架把收益窄化为个人收益’。",
+        "remaining_uncertainty_cn": "即便少数研究包含社会因素，也缺乏对内隐/外显社会利益调节作用的直接检验。",
+        "link_to_next_phase_cn": "该缺口直接导向研究问题和理论建模阶段。",
+        "evidence_pointers": [
+          "Theoretical Background, Privacy Calculus 部分",
+          "Table 1 及表注对检索和筛选规则的说明"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "理论建模与假设推演",
+        "question_cn": "如何将隐私计算扩展到社会利益情境？隐私控制和社会利益应被理论化为调节变量还是直接前因？",
+        "inputs_and_setting_cn": "隐私计算理论、共情-利他假设、利他经济视角/温暖发光概念、风险保护与控制文献。",
+        "designed_or_compared_object_cn": "构建研究模型：隐私关注作为自变量，数据捐赠决策为因变量，隐私控制与社会利益（内隐/外显）为调节变量，并提出 H1-H4。",
+        "baseline_control_or_counterfactual_cn": "以无控制、无社会利益条件作为最强负向关联的对照；Experiment 2 以个人收益提示作为隐私计算文献的标准基线。",
+        "objective_metrics": [
+          "假设是否具有可操作的调节关系",
+          "每个假设对应的实证条件组合"
+        ],
+        "analysis_method_cn": "理论推演与假设推导。",
+        "main_result_cn": "形成四个核心假设：H1 主效应；H2 隐私控制弱化负向关联；H3a/H3b 内隐或外显社会利益弱化负向关联；H4 存在隐私控制和/或社会利益时负向关联更弱，两者均缺失时更强。",
+        "argumentative_role_cn": "把文献缺口转化为可检验的理论命题，并确定实验中必须操纵和比较的设计差异。",
+        "remaining_uncertainty_cn": "理论命题尚未经过实证检验；需要设计人工制品和实验条件来实现调节变量。",
+        "link_to_next_phase_cn": "假设明确提出后进入 Method 部分设计两个移动应用和实验。",
+        "evidence_pointers": [
+          "Research Model and Hypotheses 部分",
+          "Figure 1 研究模型",
+          "H1-H4 条目标题"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "Experiment 1：内隐社会利益（共情关注）+ 隐私控制",
+        "question_cn": "在一般医疗研究数据捐赠情境中，隐私控制和内隐社会利益（共情关注）是否弱化隐私关注与数据捐赠数量之间的负向关联？",
+        "inputs_and_setting_cn": "139 名 MTurk 参与者；DataDonors app mockup；23 个可捐赠数据项目；2×2 被试间设计（隐私控制提供与否 × 共情诱发与否）。",
+        "designed_or_compared_object_cn": "比较有/无隐私设置、有/无共情图片与视角采择文字，以及它们的四类组合。",
+        "baseline_control_or_counterfactual_cn": "无隐私控制且无共情诱发作为最强负向条件；无共情组和无可识别社会利益提示作为 H3a 的对照组。",
+        "objective_metrics": [
+          "数据捐赠数量（23 项中选择捐赠的总和）",
+          "隐私关注量表（Dinev & Hart 2006）",
+          "隐私控制和共情关注的操纵检查分数",
+          "控制变量：信任、利他人格、媒体暴露等"
+        ],
+        "analysis_method_cn": "OLS 多元回归、边际效应/简单斜率检验、事后按敏感度与数据类别拆分的回归。",
+        "main_result_cn": "隐私关注与捐赠数量显著负相关（支持 H1）；隐私控制显著弱化该负向关联（支持 H2）；共情诱发显著弱化该负向关联（支持 H3a）；两者均缺失时负向关联最强，任一条件存在时均弱化（支持 H4）；共情单独存在时几乎抵消负向关联。",
+        "argumentative_role_cn": "提供内隐社会利益操作的核心证据，并首次验证隐私控制作为风险侧调节变量。",
+        "remaining_uncertainty_cn": "内隐共情与文字/图片的混同效应未区分；结果是否能在更具体、更现实的数据捐赠情境（如 COVID-19）中复制尚不清楚。",
+        "link_to_next_phase_cn": "Experiment 2 用外显利益信息和 COVID-19 情境复制隐私控制机制，检验外显社会利益的边界。",
+        "evidence_pointers": [
+          "Experiment 1 Sample and Procedure",
+          "Experiment 1 Manipulations and Measurements",
+          "Table 3",
+          "Table 4",
+          "Figure 3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "Experiment 2：外显社会利益 + 隐私控制",
+        "question_cn": "在 COVID-19 数据捐赠情境中，外显社会利益提示和隐私控制是否弱化隐私关注与数据捐赠数量之间的负向关联？相对外显个人收益，外显社会收益是否有更强调节作用？",
+        "inputs_and_setting_cn": "283 名 MTurk 参与者；Fight COVID-19 app simulation；27 个可捐赠数据项目；2×2 被试间设计（隐私控制提供与否 × 外显利益信息社会收益/个人收益）。",
+        "designed_or_compared_object_cn": "比较有/无隐私控制、外显社会收益 vs 外显个人收益提示，以及四类组合。",
+        "baseline_control_or_counterfactual_cn": "个人收益提示作为隐私计算文献的标准基线；无控制且个人收益作为 H4 的强负向条件之一；无控制且社会收益作为与个人收益的对比处理。",
+        "objective_metrics": [
+          "数据捐赠数量（27 项中选择捐赠的总和）",
+          "隐私关注量表",
+          "隐私控制和外显社会利益的操纵检查分数",
+          "温暖发光、COVID-19 关注度、信任等控制变量"
+        ],
+        "analysis_method_cn": "OLS 多元回归、边际效应/简单斜率检验、事后按敏感度与数据类别拆分。",
+        "main_result_cn": "隐私关注与捐赠数量负相关（支持 H1）；隐私控制弱化该负向关联（支持 H2）；外显社会收益弱化该负向关联（支持 H3b）；条件组合支持 H4；在没有隐私控制时，外显社会收益比外显个人收益更能抵消隐私关注的负向作用，并消除对医疗数据捐赠的负向效应。",
+        "argumentative_role_cn": "将社会利益从内隐操作扩展到外显信息，提供跨情境复制，并增强生态效度；同时建立社会收益相对个人收益的基准对比。",
+        "remaining_uncertainty_cn": "实验仍是单次模拟捐赠而非长期真实平台行为；参与者知道自己处于研究情境。",
+        "link_to_next_phase_cn": "两个实验完成后进入 Discussion，将结果回填到引言中的理论缺口，并讨论边界与伦理。",
+        "evidence_pointers": [
+          "Experiment 2 Sample and Procedure",
+          "Experiment 2 Manipulations and Measurements",
+          "Table 5",
+          "Table 6",
+          "Figure 5"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "跨实验稳健性、事后分析与边界讨论",
+        "question_cn": "主结果是否对不同敏感度、不同类型的数据（人口统计、医疗、行为）以及不同实验情境稳健？调节效应的边界在哪里？",
+        "inputs_and_setting_cn": "Experiment 1 和 Experiment 2 的完整数据集；透明材料中额外收集的敏感度评级样本（Experiment 2 的 n=150）。",
+        "designed_or_compared_object_cn": "将因变量拆分为低敏感/高敏感、人口统计/医疗/行为数据子集，重复同一回归模型。",
+        "baseline_control_or_counterfactual_cn": "全项目模型作为基准；各子集回归与主模型比较系数显著性和方向。",
+        "objective_metrics": [
+          "各子集模型的隐私关注主效应系数",
+          "隐私控制×隐私关注交互系数",
+          "社会利益×隐私关注交互系数",
+          "三阶交互系数显著性"
+        ],
+        "analysis_method_cn": "事后 OLS 回归、边际效应对比、跨实验模式比较。",
+        "main_result_cn": "整体模式支持 H2、H3、H4；但对高敏感、医疗或行为类数据，调节效应有时不显著或较弱；Experiment 2 中无控制时外显社会收益使医疗数据捐赠的负向效应变为不显著，说明情境和数据类型的边界很重要。",
+        "argumentative_role_cn": "通过展示哪些条件下效应更强或更弱，把结果从‘总体显著性’提升为‘边界条件知识’，防止过度一般化。",
+        "remaining_uncertainty_cn": "长期数据捐赠、自然情境、多维隐私关注、共情诱发来源的区分仍未解决。",
+        "link_to_next_phase_cn": "这些未解问题被明确移入 Limitations and Directions for Future Research。",
+        "evidence_pointers": [
+          "Experiment 1 Results 中的 Models 3-7",
+          "Experiment 2 Results 中的 Models 3-7",
+          "Table 4",
+          "Table 6"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "THEORY_INTRO",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "CONTRIBUTION",
+      "BOUNDARY_CONDITION"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PHENOMENON",
+      "PRACTICAL_STAKES",
+      "PRIOR_KNOWLEDGE",
+      "GAP",
+      "WHY_GAP_MATTERS",
+      "THEORY_INTRO",
+      "RQ_OR_OBJECTIVE",
+      "STUDY_OVERVIEW",
+      "RESULT",
+      "CONTRIBUTION"
+    ],
+    "theory_and_knowledge_moves": [
+      "PRIOR_KNOWLEDGE",
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "LIMITATION",
+      "GAP",
+      "MECHANISM",
+      "BOUNDARY_CONDITION"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "STUDY_OVERVIEW"
+    ],
+    "evaluation_moves": [
+      "BENCHMARK_OR_CONTRAST",
+      "METHOD_JUSTIFICATION",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "TRANSITION"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "MECHANISM",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE",
+      "CONTRIBUTION"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "隐私计算（privacy calculus）",
+      "共情-利他假设（empathy-altruism hypothesis）",
+      "利他经济视角/不纯利他与温暖发光（impure altruism / warm glow）",
+      "隐私风险保护机制与隐私控制文献"
+    ],
+    "theory_design_coupling": "direct",
+    "coupling_reason_cn": "理论不是事后标签：隐私计算直接导出两个调节构念，风险侧用隐私控制、收益侧用社会利益；社会利益又由共情关注和透明信息两种方式操作；所有被比较的设计差异都来自理论命题，并被实验直接检验。",
+    "translation_chain_cn": "隐私计算假定隐私决策是风险-收益权衡；既有研究只放入个人收益；数据捐赠情境中收益主要归社会，因此需要新增‘社会利益’作为收益侧调节变量；风险侧可通过可感知的隐私控制提供保护；于是设计两个核心设计特征：隐私设置开关和社会利益提示（内隐的共情图片/文字或外显的收益信息）；在 2×2 实验中比较有/无控制、有/无社会利益、社会收益 vs 个人收益；最终用隐私关注对捐赠数量的简单斜率变化检验调节作用。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "隐私计算认为隐私决策是感知风险与感知收益的权衡；风险保护机制可以降低感知风险。",
+        "mechanism_cn": "提供隐私控制后，个体理性评估自己对数据的支配能力，隐私关注不再是决策的主要依据。",
+        "design_requirement_cn": "应在数据捐赠应用中提供可感知、可操作的隐私控制。",
+        "artifact_choice_cn": "在 DataDonors 和 Fight COVID-19 应用中提供或移除粒度隐私设置。",
+        "evaluated_contrast_cn": "隐私控制提供组 vs 未提供组；以及隐私控制×隐私关注交互。",
+        "objective_result_cn": "两个实验中隐私控制×隐私关注交互均显著为正，说明控制削弱了隐私关注的负向斜率；边际效应支持 H2。",
+        "evidence_pointers": [
+          "Experiment 1 Table 3 Model 2",
+          "Experiment 2 Table 5 Model 2",
+          "Table 4 和 Table 6 的 H2 条件行"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "共情关注会引发利他动机，使个体关注他人/集体福利，减少对自身隐私的费力加工。",
+        "mechanism_cn": "共情诱发使注意力从自身隐私转向患者和社会需求，从而弱化隐私关注与捐赠决策的关联。",
+        "design_requirement_cn": "在数据捐赠应用中通过可实现的界面元素内隐地唤起社会利益。",
+        "artifact_choice_cn": "DataDonors 首页使用癌症和阿尔茨海默病患者图片及视角采择文字，对照组使用海洋图片且无文字。",
+        "evaluated_contrast_cn": "共情诱发组 vs 未诱发组；以及共情×隐私关注交互。",
+        "objective_result_cn": "共情×隐私关注交互显著为正，共情诱发时隐私关注负向斜率明显变小，支持 H3a。",
+        "evidence_pointers": [
+          "Experiment 1 Manipulations and Measurements",
+          "Table 3 Model 2",
+          "Table 4 H3a 条件行",
+          "Figure 3"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "隐私计算文献通常以个人收益作为收益侧基线；数据捐赠情境的收益主要是社会性的。",
+        "mechanism_cn": "透明地告知社会收益使亲社会价值变得突出，个体更可能把捐赠视为造福社会，而非单纯暴露隐私。",
+        "design_requirement_cn": "在外显收益条件下应用内明确告知收益导向（社会 vs 个人）。",
+        "artifact_choice_cn": "Fight COVID-19 应用内提供外显信息：收益面向‘社会大众’或‘我自己’。",
+        "evaluated_contrast_cn": "外显社会收益组 vs 外显个人收益组；以个人收益条件作为基线。",
+        "objective_result_cn": "社会收益×隐私关注交互显著为正；无隐私控制时社会收益比个人收益更大幅度削弱负向斜率，并消除医疗数据捐赠的负向效应，支持 H3b。",
+        "evidence_pointers": [
+          "Experiment 2 Manipulations and Measurements",
+          "Table 5 Model 2",
+          "Table 6 H3b 条件行",
+          "Figure 5"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "当隐私计算既没有明显收益也没有风险保护时，隐私关注会成为决策的主要依据；当收益或保护存在时，隐私关注的主导地位下降。",
+        "mechanism_cn": "社会利益让捐赠的利他效用可见，隐私控制降低失控风险；两者任一存在都会削弱隐私关注对行为的预测力，两者都缺失时负向效应最强。",
+        "design_requirement_cn": "实验必须同时操纵隐私控制和社会利益，构成四类条件组合，以比较‘两者都缺失’与‘至少一个存在’。",
+        "artifact_choice_cn": "两个实验均采用 2×2 设计，实现无控制/有控制 × 无社会利益/有社会利益（或社会收益/个人收益）的组合。",
+        "evaluated_contrast_cn": "隐私控制与社会利益同时缺失 vs 分别存在 vs 同时存在。",
+        "objective_result_cn": "两个实验中，两个条件都缺失时隐私关注负向斜率最大；任一条件存在时斜率减小；特定组合中社会收益单独存在甚至使负向效应不显著，支持 H4。",
+        "evidence_pointers": [
+          "Experiment 1 Table 4 H4 条件行",
+          "Experiment 2 Table 6 H4 条件行"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "操纵检查（manipulation checks）",
+      "OLS 多元回归主模型",
+      "边际效应/简单斜率检验",
+      "事后按数据敏感度和类型拆分",
+      "跨实验复制与互补操作",
+      "随机分配与控制变量"
+    ],
+    "why_these_evaluations_cn": "研究目标是证明理论化的边界条件，而非仅仅报告主效应；因此必须操纵隐私控制和社会利益，并通过交互作用检验隐私关注斜率的改变。两个实验分别用内隐和外显方式操作同一构念，既增强构念效度，也提供跨情境复制；事后拆分用于判断效应是否在不同数据类型上稳定。",
+    "benchmark_and_contrast_chain_cn": "第一步用 H1 复现既有文献的负向主效应作为内部基准；第二步用‘无控制、无社会利益’条件获得最强负向斜率作为条件基准；第三步用隐私控制或社会利益单个条件与基准对比；第四步在 Experiment 2 中把个人收益提示作为隐私计算文献的典型收益基准，将外显社会收益设为处理；最后通过三阶交互比较两个调节因素同时存在时是否继续弱化。",
+    "claim_evidence_ledger": [
+      {
+        "claim": "H1：隐私关注与数据捐赠数量负相关。",
+        "evidence": "Experiment 1 全项模型 β=-3.286, SE=0.989, p<0.01；Experiment 2 全项模型 β=-2.215, SE=0.465, p<0.01；边际效应表所有条件行均显著或大多显著。",
+        "status": "supported"
+      },
+      {
+        "claim": "H2：提供隐私控制会弱化负向关联。",
+        "evidence": "Experiment 1 隐私控制×隐私关注 β=2.223, p<0.05；Experiment 2 隐私控制×隐私关注 β=1.736, p<0.01；边际效应中提供控制时斜率始终小于未提供时。",
+        "status": "supported"
+      },
+      {
+        "claim": "H3a：内隐社会利益（共情关注）弱化负向关联。",
+        "evidence": "Experiment 1 共情×隐私关注 β=2.625, p<0.01；未诱发共情时斜率 -2.208，诱发时 -1.166。",
+        "status": "supported"
+      },
+      {
+        "claim": "H3b：外显社会利益弱化负向关联。",
+        "evidence": "Experiment 2 社会收益×隐私关注 β=1.223, p<0.05；边际效应中社会收益个人收益两条件斜率均显著，但无控制时社会收益条件斜率更小。",
+        "status": "supported"
+      },
+      {
+        "claim": "H4：无控制且无社会利益时负向关联最强；任一条件存在时负向关联更弱。",
+        "evidence": "Experiment 1: 两条件均缺斜率 -3.286；共情诱发时斜率 -0.661（不显著）。Experiment 2: 无控制且个人收益时斜率 -2.214；无控制且社会收益时斜率 -0.991。",
+        "status": "supported"
+      }
+    ],
+    "internal_validity_strategy_cn": "使用随机分配控制个体差异；每个实验都做操纵检查并报告无交叉效应；加入信任、利他人格、经验等大量控制变量；用参与者以为需要提供真实数据的方式提高决策真实性；Experiment 2 额外排除‘总体收益被无意改变’的替代解释。",
+    "external_validity_strategy_cn": "两个不同语境（一般医疗研究与 COVID-19）、两种社会利益操作（内隐共情/外显信息）、模拟真实 app 界面、MTurk 异质样本，并通过跨实验复制让结论不依赖单一操纵。",
+    "what_is_not_actually_tested_cn": "未在真实数据捐赠平台做长期纵向行为；隐私关注仅为单维量表；共情诱发中图片与视角采择文字的相对贡献未分离；实验参与者知道自己在研究中，因此不是完全自然行为。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "实验表明隐私关注对数据捐赠数量有稳定的负向作用；隐私控制和/或社会利益提示能够显著弱化这一作用。",
+    "artifact_claim_cn": "可识别的设计部分——提供粒度隐私设置、共情图片与文字、外显社会收益信息——导致了上述调节；两个实验对设计差异的操纵检查支持这一点。",
+    "mechanism_claim_cn": "风险侧通过隐私控制提升个体对数据管理的控制感，使隐私关注不再主导决策；收益侧通过共情关注或外显社会信息把注意力引向他人和集体福祉，从而弱化隐私关注的心理显著性。",
+    "boundary_claim_cn": "弱化效应主要出现在亲社会数据捐赠情境中；当隐私控制与社会利益同时存在时，共情情境下弱化反而减弱；对高敏感或医疗/行为类数据，调节效应较弱或在特定条件下才成立。",
+    "reusable_design_knowledge_cn": "数据捐赠应用应提供可理解和可操作的隐私设置来降低风险感；可通过共情提示或透明说明社会收益降低隐私关注的决策权重；但设计者应避免用暗模式操纵捐赠者。",
+    "theoretical_contribution_cn": "将隐私计算从‘个人收益 vs 个人风险’扩展为‘个人/社会收益 vs 个人风险’的净收益框架；把隐私控制和社会利益定位为调节变量而非简单前因；识别数据捐赠作为需要重构收益面的情境。",
+    "how_discussion_closes_intro_gap_cn": "引言宣称隐私计算文献忽略了社会利益；讨论部分明确回到这一缺口，指出第一个研究目标是检验社会利益情境下的隐私关注，第二个目标是以隐私控制和社会利益为调节变量，并通过两个实验的证据回填该缺口。",
+    "overclaim_or_unsupported_leaps_cn": "作者称实验测量‘实际数据捐赠行为’，但真实发生在模拟环境中的一次性选择，不是真实平台长期行为；对共情诱发中‘注意力转移’机制没有过程测量；从结果跳到伦理和暗模式讨论主要依赖文献而非本研究直接证据。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "摘要第1句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "数据捐赠可推动医学研究并帮助控制大流行。",
+      "rhetorical_function_cn": "立即建立主题的重要现实价值。",
+      "depends_on_cn": "无前置依赖。",
+      "sets_up_cn": "为后文引入隐私决策和理论框架提供现实背景。",
+      "evidence_pointer": "Abstract 第1句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "摘要第2句",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "是否捐赠数据本质上是一个隐私决策。",
+      "rhetorical_function_cn": "把社会行为收缩到个体隐私决策视角。",
+      "depends_on_cn": "依赖数据捐赠的现实背景。",
+      "sets_up_cn": "为引入隐私计算的隐私风险-收益框架做准备。",
+      "evidence_pointer": "Abstract 第2句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "摘要第3句",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "作者基于隐私计算模型，研究隐私关注对数据捐赠决策的影响，强调社会利益在隐私决策中的作用。",
+      "rhetorical_function_cn": "说明理论透镜和研究切入点。",
+      "depends_on_cn": "承接前两句的情境化。",
+      "sets_up_cn": "预告核心理论贡献是‘社会利益进入隐私计算’。",
+      "evidence_pointer": "Abstract 第3句"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "摘要第4-5句",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "通过两个随机实验，分别在一般医疗研究和 COVID-19 研究的数据捐赠情境中检验。",
+      "rhetorical_function_cn": "给出证据来源和实验结构。",
+      "depends_on_cn": "依赖理论框架和情境设定。",
+      "sets_up_cn": "让读者预期两个实验作为主要证据。",
+      "evidence_pointer": "Abstract 第4-5句"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "摘要第6-8句",
+      "move_code": "RESULT",
+      "paraphrase_cn": "高隐私关注者捐赠更少；这一效应在多种条件下成立，但当感知到内隐或外显社会利益时，尤其是在没有隐私控制的情况下，隐私关注与捐赠决策的关联变得不显著。",
+      "rhetorical_function_cn": "压缩呈现主效应和调节效应。",
+      "depends_on_cn": "依赖两个实验的证据。",
+      "sets_up_cn": "为贡献声明提供经验基础。",
+      "evidence_pointer": "Abstract 第6-8句"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "摘要末句",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声明讨论理论、实践、社会和伦理含义。",
+      "rhetorical_function_cn": "预告论文的贡献层级。",
+      "depends_on_cn": "依赖已有结果。",
+      "sets_up_cn": "为正文 Discussion 提供路线图。",
+      "evidence_pointer": "Abstract 末句"
+    },
+    {
+      "order": 7,
+      "section": "Introduction",
+      "locator": "引言第1段第1句",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "引用 Angst 的问题：愿意为拯救多少条生命而放弃多少隐私？并指出该问题在信息操控时代更加重要。",
+      "rhetorical_function_cn": "用道德量化问题激发读者对隐私与社会利益冲突的关注。",
+      "depends_on_cn": "无前置依赖。",
+      "sets_up_cn": "引出数据捐赠概念及其隐私张力。",
+      "evidence_pointer": "Introduction 第1段"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "引言第1段中后部",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "医学界受器官捐献启发，推广个人数据捐赠，鼓励人们分享医疗、人口统计和行为数据。",
+      "rhetorical_function_cn": "把抽象问题落到具体现象。",
+      "depends_on_cn": "承接‘愿意放弃多少隐私’的问题。",
+      "sets_up_cn": "说明数据捐赠是真实且正在增长的实践。",
+      "evidence_pointer": "Introduction 第1段"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "引言第2段",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "列举 Open Humans、Count Me In 和德国 COVID-19 数据捐赠项目作为实例。",
+      "rhetorical_function_cn": "用实例证明数据捐赠不是概念炒作，而是已有项目。",
+      "depends_on_cn": "依赖上一段对数据捐赠的势头描述。",
+      "sets_up_cn": "为后文说明项目可能因隐私顾虑停运提供对照。",
+      "evidence_pointer": "Introduction 第2段"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "引言第3段前半",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "尽管数据捐赠有重大社会收益，但也带来难以估计的隐私风险，许多人因此不愿捐赠，部分项目已停运。",
+      "rhetorical_function_cn": "建立现实后果：隐私是数据捐赠项目的可行性瓶颈。",
+      "depends_on_cn": "依赖前面的具体项目实例。",
+      "sets_up_cn": "为‘隐私关注是抑制因素’提供现实证据。",
+      "evidence_pointer": "Introduction 第3段"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "引言第3段后半",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "已有证据表明高隐私关注者捐赠更少，这与隐私文献中隐私关注与披露负相关的结论一致。",
+      "rhetorical_function_cn": "承认既有主效应共识。",
+      "depends_on_cn": "依赖隐私文献和健康数据捐赠文献。",
+      "sets_up_cn": "后文转向‘但这个效应受哪些边界条件调节’。",
+      "evidence_pointer": "Introduction 第3段后半"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "引言第4段",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "数据捐赠与典型隐私决策不同：收益主要归社会，风险落到个人，因此必须进一步检验现有隐私理论。",
+      "rhetorical_function_cn": "说明数据捐赠情境为何需要重新测试隐私理论。",
+      "depends_on_cn": "依赖前面关于收益-风险不对称的观察。",
+      "sets_up_cn": "为引入隐私计算作为理论透镜服务。",
+      "evidence_pointer": "Introduction 第4段"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "引言第5段",
+      "move_code": "GAP",
+      "paraphrase_cn": "文献已表明隐私关注与披露的关联受多种因素调节，但社会因素在这一关联中的角色仍未被充分探索。",
+      "rhetorical_function_cn": "明确指出缺口：社会利益缺失。",
+      "depends_on_cn": "依赖上一段对数据捐赠特质的分析。",
+      "sets_up_cn": "为研究问题与理论引入提供逻辑依据。",
+      "evidence_pointer": "Introduction 第5段"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "引言第5段末句",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "为了情境化隐私关注与披露的关联，作者转向隐私计算模型。",
+      "rhetorical_function_cn": "把理论透镜正式引入。",
+      "depends_on_cn": "缺口陈述表明需要更适合情境的理论。",
+      "sets_up_cn": "后文的研究模型和假设都从这里展开。",
+      "evidence_pointer": "Introduction 第5段末句"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "引言第6段",
+      "move_code": "GAP",
+      "paraphrase_cn": "隐私计算研究主要关注风险和收益对披露的直接效应，但数据捐赠情境中的动态更复杂，社会收益并非总能增加捐赠意愿，行为控制感可以增强意愿。",
+      "rhetorical_function_cn": "说明既有研究不足，缺少对调节效应的检验。",
+      "depends_on_cn": "依赖之前引入的隐私计算。",
+      "sets_up_cn": "直接引出研究问题。",
+      "evidence_pointer": "Introduction 第6段"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "引言第7段",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "提出研究问题：社会利益如何与个人风险和收益一起调节隐私关注对数据捐赠决策的影响？",
+      "rhetorical_function_cn": "正式给出研究问题。",
+      "depends_on_cn": "依赖前一段缺口。",
+      "sets_up_cn": "为方法和实验设计提供靶心。",
+      "evidence_pointer": "Introduction 第7段"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "引言第8段前半",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "作者设计两个数据捐赠应用并开展两个实验，分别是一般医疗研究和 COVID-19 研究情境。",
+      "rhetorical_function_cn": "预告研究设计和证据结构。",
+      "depends_on_cn": "依赖研究问题。",
+      "sets_up_cn": "让读者知道核心证据来自两个实验。",
+      "evidence_pointer": "Introduction 第8段"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "引言第8段中后部",
+      "move_code": "RESULT",
+      "paraphrase_cn": "预告主要发现：高隐私关注者捐赠更少，但该关联会因社会利益和隐私控制而减弱；没有社会利益且没有隐私控制时关联最强。",
+      "rhetorical_function_cn": "在引言中预先凝练结果，降低阅读不确定性。",
+      "depends_on_cn": "依赖两个实验证据的概括。",
+      "sets_up_cn": "为贡献声明做铺垫。",
+      "evidence_pointer": "Introduction 第8段中后部"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "引言第9段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声明三个贡献：把社会利益纳入隐私计算、回应数据捐赠实证号召、用实际捐赠行为而非意图测量。",
+      "rhetorical_function_cn": "在引言末端明确贡献清单。",
+      "depends_on_cn": "依赖结果预告。",
+      "sets_up_cn": "为 Discussion 部分的贡献回收提供清单。",
+      "evidence_pointer": "Introduction 第9段"
+    },
+    {
+      "order": 20,
+      "section": "Theoretical Background",
+      "locator": "理论背景第1段",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "信息隐私是多面概念，其意义随情境和时间变化，常与信息收集、处理、传播和入侵等活动相关，也与伦理和正义有关。",
+      "rhetorical_function_cn": "界定隐私构念的复杂性。",
+      "depends_on_cn": "无，理论章节开始。",
+      "sets_up_cn": "为采用可测量的隐私关注代理变量辩护。",
+      "evidence_pointer": "Theoretical Background 第1段"
+    },
+    {
+      "order": 21,
+      "section": "Theoretical Background, Privacy Concerns",
+      "locator": "隐私关注小节末段",
+      "move_code": "GAP",
+      "paraphrase_cn": "已有文献一致支持个人收益/风险对披露决策的直接作用，但社会利益如何调节隐私关注与披露决策的关系仍需要研究。",
+      "rhetorical_function_cn": "把理论缺口进一步收窄到调节作用。",
+      "depends_on_cn": "依赖前面总结的隐私关注研究。",
+      "sets_up_cn": "为以隐私计算为透镜研究调节效应铺路。",
+      "evidence_pointer": "Theoretical Background, Privacy Concerns 末段"
+    },
+    {
+      "order": 22,
+      "section": "Theoretical Background, Privacy Calculus",
+      "locator": "隐私计算小节第1段",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "隐私计算是成熟模型，认为隐私决策受披露或保护信息的感知风险和收益影响。",
+      "rhetorical_function_cn": "正式介绍理论模型。",
+      "depends_on_cn": "依赖前文缺口。",
+      "sets_up_cn": "后文用该模型推导假设。",
+      "evidence_pointer": "Theoretical Background, Privacy Calculus 第1段"
+    },
+    {
+      "order": 23,
+      "section": "Theoretical Background, Privacy Calculus",
+      "locator": "隐私计算小节第2段",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "以往隐私计算实证中的感知收益几乎都被默认为纯个人收益，但现实中人们有时为了社会整体利益而分享信息。",
+      "rhetorical_function_cn": "指出理论应用中的窄化。",
+      "depends_on_cn": "依赖隐私计算模型介绍。",
+      "sets_up_cn": "为引入社会利益维度提供理论基础。",
+      "evidence_pointer": "Theoretical Background, Privacy Calculus 第2段"
+    },
+    {
+      "order": 24,
+      "section": "Theoretical Background, Privacy Calculus",
+      "locator": "Table 1 后的段落",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "二十多年来，多数隐私决策研究发生在个人从分享信息中获得收益的情境；Table 1 显示只有极少数研究纳入社会因素。",
+      "rhetorical_function_cn": "用文献编码证据支撑‘社会利益被忽略’。",
+      "depends_on_cn": "依赖 Table 1 的系统梳理。",
+      "sets_up_cn": "更坚定地把数据捐赠作为需要扩展隐私计算的情境。",
+      "evidence_pointer": "Theoretical Background, Table 1 后的段落"
+    },
+    {
+      "order": 25,
+      "section": "Theoretical Background, Privacy Calculus",
+      "locator": "Table 1 后段落末句",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "作者把隐私计算应用到数据捐赠，因为该情境的净收益包含个人和社会收益的更广范围。",
+      "rhetorical_function_cn": "把理论应用范围扩展到数据捐赠。",
+      "depends_on_cn": "依赖 Table 1 显示缺口。",
+      "sets_up_cn": "为研究模型和假设提供直接理论依据。",
+      "evidence_pointer": "Theoretical Background, Table 1 后段落末句"
+    },
+    {
+      "order": 26,
+      "section": "Research Model and Hypotheses",
+      "locator": "研究模型与小节第1段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "隐私控制代表风险侧，因为控制感与感知隐私风险和风险保护机制紧密对应。",
+      "rhetorical_function_cn": "把理论构念映射到可操作的设计变量。",
+      "depends_on_cn": "依赖隐私计算的风险-收益框架。",
+      "sets_up_cn": "为 H2 提供理论依据。",
+      "evidence_pointer": "Research Model and Hypotheses 第1段"
+    },
+    {
+      "order": 27,
+      "section": "Research Model and Hypotheses",
+      "locator": "研究模型与假设第2段",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "收益侧引入社会利益，包括内隐（共情关注）和外显（直接告知）两种形式。",
+      "rhetorical_function_cn": "把社会利益构念进一步操作化为两种可操纵方式。",
+      "depends_on_cn": "依赖隐私计算中收益侧扩展。",
+      "sets_up_cn": "为 H3a/H3b 的双重操作做铺垫。",
+      "evidence_pointer": "Research Model and Hypotheses 第2段"
+    },
+    {
+      "order": 28,
+      "section": "Privacy Concerns and Data Donation Decisions",
+      "locator": "H1 前段落",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "健康数据高度敏感，个体会担忧数据如何被使用和分享，因此隐私关注是数据捐赠的抑制因素。",
+      "rhetorical_function_cn": "为 H1 提供领域机制解释。",
+      "depends_on_cn": "依赖健康信息隐私文献。",
+      "sets_up_cn": "导出 H1。",
+      "evidence_pointer": "Privacy Concerns and Data Donation Decisions 段落"
+    },
+    {
+      "order": 29,
+      "section": "Privacy Concerns and Data Donation Decisions",
+      "locator": "H1 条目",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H1：隐私关注与数据捐赠决策负相关。",
+      "rhetorical_function_cn": "正式给出主效应假设。",
+      "depends_on_cn": "依赖 H1 前的机制推理。",
+      "sets_up_cn": "作为后续调节假设的基准。",
+      "evidence_pointer": "Research Model and Hypotheses, H1"
+    },
+    {
+      "order": 30,
+      "section": "Privacy Controls",
+      "locator": "隐私控制小节末段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "隐私控制是具体可操作的保护机制；当个体理性评估自己拥有较高控制力时，隐私关注在决策中的核心地位会被削弱。",
+      "rhetorical_function_cn": "为 H2 提供机制。",
+      "depends_on_cn": "依赖风险保护与控制文献。",
+      "sets_up_cn": "导出 H2。",
+      "evidence_pointer": "Privacy Controls 小节末段"
+    },
+    {
+      "order": 31,
+      "section": "Privacy Controls",
+      "locator": "H2 条目",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H2：隐私关注与数据捐赠决策的负向关联在提供隐私控制时更弱。",
+      "rhetorical_function_cn": "正式给出风险侧调节假设。",
+      "depends_on_cn": "依赖前一段机制。",
+      "sets_up_cn": "为 Experiment 1/2 的隐私控制操纵提供检验目标。",
+      "evidence_pointer": "Research Model and Hypotheses, H2"
+    },
+    {
+      "order": 32,
+      "section": "Implicit and Explicit Societal Benefits",
+      "locator": "社会利益小节第2段",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "共情关注是利他动机的主要决定因素，共情-利他假设认为关注他人福祉会激发以增进他人福利为终极目标的动机。",
+      "rhetorical_function_cn": "引入共情-利他理论作为内隐社会利益的基础。",
+      "depends_on_cn": "依赖社会利益构念的引入。",
+      "sets_up_cn": "为 H3a 推导机制。",
+      "evidence_pointer": "Implicit and Explicit Societal Benefits 第2段"
+    },
+    {
+      "order": 33,
+      "section": "Implicit and Explicit Societal Benefits",
+      "locator": "社会利益小节第3段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当个体产生共情关注，更可能关注他人需求和集体福祉，减少对自身隐私问题的费力加工，因此隐私关注对捐赠决策的影响减弱。",
+      "rhetorical_function_cn": "解释内隐社会利益如何调节隐私关注。",
+      "depends_on_cn": "依赖共情-利他假设。",
+      "sets_up_cn": "导出 H3a。",
+      "evidence_pointer": "Implicit and Explicit Societal Benefits 第3段"
+    },
+    {
+      "order": 34,
+      "section": "Implicit and Explicit Societal Benefits",
+      "locator": "H3 条目",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H3：隐私关注与数据捐赠决策的负向关联在捐赠者（a）内隐地或（b）外显地感知社会利益时更弱。",
+      "rhetorical_function_cn": "正式给出社会利益调节假设，区分内隐外显。",
+      "depends_on_cn": "依赖共情-利他机制和外显收益推理。",
+      "sets_up_cn": "两个实验分别检验 H3a 和 H3b。",
+      "evidence_pointer": "Research Model and Hypotheses, H3"
+    },
+    {
+      "order": 35,
+      "section": "Privacy Concerns, Privacy Controls, and Societal Benefits",
+      "locator": "三变量关系小节第1段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当社会利益未被感知且没有隐私控制时，预期中的收益低、失去控制的风险高，隐私关注成为决策的主要基础，因此负向关联最强。",
+      "rhetorical_function_cn": "推导最强负向条件的机制。",
+      "depends_on_cn": "依赖隐私计算的风险-收益平衡。",
+      "sets_up_cn": "导出 H4。",
+      "evidence_pointer": "Privacy Concerns, Privacy Controls, and Societal Benefits 第1段"
+    },
+    {
+      "order": 36,
+      "section": "Privacy Concerns, Privacy Controls, and Societal Benefits",
+      "locator": "H4 条目",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "H4：隐私关注与数据捐赠决策的负向关联在存在隐私控制和/或社会利益时更弱，在两者都缺失时更强。",
+      "rhetorical_function_cn": "给出整合的调节假设。",
+      "depends_on_cn": "依赖前面所有机制推导。",
+      "sets_up_cn": "为 2×2 四组条件的比较提供理论预期。",
+      "evidence_pointer": "Research Model and Hypotheses, H4"
+    },
+    {
+      "order": 37,
+      "section": "Method",
+      "locator": "Method 第1段",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "作者设计 DataDonors 和 Fight COVID-19 两个应用，操纵隐私控制、共情关注或外显利益信息。",
+      "rhetorical_function_cn": "说明理论构念如何转化为具体制品的界面条件。",
+      "depends_on_cn": "依赖 H2-H4 的设计需求。",
+      "sets_up_cn": "为实验细节提供总览。",
+      "evidence_pointer": "Method 第1段"
+    },
+    {
+      "order": 38,
+      "section": "Method",
+      "locator": "Method 第2段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "两个实验互补：Experiment 1 用共情关注操作内隐社会利益，Experiment 2 用模拟 app 中的明确信息操作外显社会利益，增强生态效度。",
+      "rhetorical_function_cn": "解释为什么需要两个实验。",
+      "depends_on_cn": "依赖 H3a/H3b 区分。",
+      "sets_up_cn": "让读者预期两个实验的设计差异。",
+      "evidence_pointer": "Method 第2段"
+    },
+    {
+      "order": 39,
+      "section": "Method",
+      "locator": "Method 第3段",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "Experiment 2 以个人收益作为基线条件，因为这是隐私计算文献的常规收益参照。",
+      "rhetorical_function_cn": "设定对比基准。",
+      "depends_on_cn": "依赖 Table 1 对既有研究的梳理。",
+      "sets_up_cn": "使社会收益的调节作用成为相对个人收益的比较。",
+      "evidence_pointer": "Method 第3段"
+    },
+    {
+      "order": 40,
+      "section": "Experiment 1",
+      "locator": "Experiment 1 Sample and Procedure 第1段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "参与者被引导相信他们必须在选择后提供真实数据，以此作为实际捐赠行为的现实代理，而不仅仅是意图测量。",
+      "rhetorical_function_cn": "为‘实际行为’主张辩护。",
+      "depends_on_cn": "依赖实验程序的真实性设计。",
+      "sets_up_cn": "为贡献声明中‘超越意图测量’提供支撑。",
+      "evidence_pointer": "Experiment 1 Sample and Procedure 第1段"
+    },
+    {
+      "order": 41,
+      "section": "Experiment 1",
+      "locator": "Experiment 1 Manipulations and Measurements",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "隐私控制通过是否提供粒度隐私设置来操作；共情关注通过患者图片和视角采择文字来诱发。",
+      "rhetorical_function_cn": "描述操作化细节。",
+      "depends_on_cn": "依赖 Method 总览。",
+      "sets_up_cn": "为操纵检查结果做铺垫。",
+      "evidence_pointer": "Experiment 1 Manipulations and Measurements"
+    },
+    {
+      "order": 42,
+      "section": "Experiment 1",
+      "locator": "Experiment 1 Manipulations and Measurements 末段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "操纵检查成功：隐私控制和共情关注在治疗组与对照组之间均有显著差异，且无交叉效应。",
+      "rhetorical_function_cn": "证明实验操纵有效。",
+      "depends_on_cn": "依赖操纵过程。",
+      "sets_up_cn": "为后续回归结果的有效性提供内部效度基础。",
+      "evidence_pointer": "Experiment 1 Manipulations and Measurements 末段"
+    },
+    {
+      "order": 43,
+      "section": "Experiment 1",
+      "locator": "Experiment 1 Results 第1-2段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "主回归中四个关键项显著，边际效应显示隐私关注与捐赠负相关，提供隐私控制或诱发共情时负向斜率减弱，支持 H1、H2、H3a、H4。",
+      "rhetorical_function_cn": "报告核心统计结果。",
+      "depends_on_cn": "依赖操纵检查和回归模型设定。",
+      "sets_up_cn": "为事后拆分分析提供总体结论。",
+      "evidence_pointer": "Experiment 1 Results, Table 3, Table 4"
+    },
+    {
+      "order": 44,
+      "section": "Experiment 1",
+      "locator": "Experiment 1 Results 第2段末",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "事后按敏感度和数据类别拆分后，调节效应模式总体一致，某些项只在 10% 水平显著；共情诱发能消除总体负向关联。",
+      "rhetorical_function_cn": "检验结果是否随数据类型变化。",
+      "depends_on_cn": "依赖全项回归结果。",
+      "sets_up_cn": "为后文边界条件讨论提供证据。",
+      "evidence_pointer": "Experiment 1 Results, Models 3-7, Table 4"
+    },
+    {
+      "order": 45,
+      "section": "Experiment 2",
+      "locator": "Experiment 2 Sample and Procedure 第1段",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "Fight COVID-19 是嵌入在线调查的可浏览模拟应用，让参与者在交互中完成捐赠决策，比 Experiment 1 的静态 mockup 更具生态效度。",
+      "rhetorical_function_cn": "说明 Experiment 2 为何比 Experiment 1 更接近真实平台。",
+      "depends_on_cn": "依赖 Experiment 1 的经验。",
+      "sets_up_cn": "为实验结果的推广性辩护。",
+      "evidence_pointer": "Experiment 2 Sample and Procedure 第1段"
+    },
+    {
+      "order": 46,
+      "section": "Experiment 2",
+      "locator": "Experiment 2 Manipulations and Measurements 前半",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "外显利益被操作为‘社会收益’或‘个人收益’，个人收益作为隐私计算文献的标准基线。",
+      "rhetorical_function_cn": "把社会收益的效应放在既有文献基准上。",
+      "depends_on_cn": "依赖 Table 1 和 Method 总览。",
+      "sets_up_cn": "为 H3b 和 H4 的对比条件奠定框架。",
+      "evidence_pointer": "Experiment 2 Manipulations and Measurements 前半"
+    },
+    {
+      "order": 47,
+      "section": "Experiment 2",
+      "locator": "Experiment 2 Manipulations and Measurements 中后部",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "作者额外检验了社会收益和个人收益组的整体收益感知没有显著差异，排除了操纵总体收益而非收益导向的替代解释。",
+      "rhetorical_function_cn": "直接排除潜在混淆。",
+      "depends_on_cn": "依赖外显利益操纵检查。",
+      "sets_up_cn": "增加结果解释的内部效度。",
+      "evidence_pointer": "Experiment 2 Manipulations and Measurements 中后部"
+    },
+    {
+      "order": 48,
+      "section": "Experiment 2",
+      "locator": "Experiment 2 Results 第1段",
+      "move_code": "RESULT",
+      "paraphrase_cn": "主回归中四个关键项显著，边际效应显示 H1、H2、H3b、H4 均得到支持。",
+      "rhetorical_function_cn": "报告 Experiment 2 核心结果。",
+      "depends_on_cn": "依赖操纵检查和回归模型。",
+      "sets_up_cn": "为跨实验比较提供基础。",
+      "evidence_pointer": "Experiment 2 Results, Table 5, Table 6"
+    },
+    {
+      "order": 49,
+      "section": "Experiment 2",
+      "locator": "Experiment 2 Results 第2段",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "没有隐私控制时，外显社会收益比外显个人收益更大幅度削弱隐私关注负向斜率，并让医疗数据捐赠的负向效应变为不显著。",
+      "rhetorical_function_cn": "指出社会收益在无保护条件下的特殊边界作用。",
+      "depends_on_cn": "依赖 Table 6 的 H4 条件行。",
+      "sets_up_cn": "为讨论中‘社会利益尤其重要’提供证据。",
+      "evidence_pointer": "Experiment 2 Results 第2段, Table 6"
+    },
+    {
+      "order": 50,
+      "section": "Discussion",
+      "locator": "讨论开头第1段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究证明隐私关注在数据捐赠决策中起关键作用，且该负向关联取决于感知控制和社会利益。",
+      "rhetorical_function_cn": "重新连接引言提出的隐私-社会利益张力。",
+      "depends_on_cn": "依赖两个实验结果。",
+      "sets_up_cn": "开始系统讨论理论与应用含义。",
+      "evidence_pointer": "Discussion 第1段"
+    },
+    {
+      "order": 51,
+      "section": "Discussion",
+      "locator": "Theoretical and Practical Implications 第1段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "研究提供了隐私关注在亲社会情境中负向效应的额外证据，并强调数据捐赠组织需要处理隐私顾虑。",
+      "rhetorical_function_cn": "把主效应结果回填到隐私文献。",
+      "depends_on_cn": "依赖 H1 结果。",
+      "sets_up_cn": "为实践建议提供依据。",
+      "evidence_pointer": "Discussion, Theoretical and Practical Implications 第1段"
+    },
+    {
+      "order": 52,
+      "section": "Discussion",
+      "locator": "Theoretical and Practical Implications 第2段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "提供隐私控制会弱化隐私关注与捐赠的关联，因此数据捐赠组织应提供可访问的粒度隐私设置。",
+      "rhetorical_function_cn": "把 H2 结果转成可复用设计建议。",
+      "depends_on_cn": "依赖 H2 结果。",
+      "sets_up_cn": "为后续社会利益讨论做对照。",
+      "evidence_pointer": "Discussion, Theoretical and Practical Implications 第2段"
+    },
+    {
+      "order": 53,
+      "section": "Discussion",
+      "locator": "Theoretical and Practical Implications 第3段",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "共情和隐私控制同时出现时弱化效应并非最大；共情的强烈情绪反应可能压倒理性控制评估，这解释了意外交互。",
+      "rhetorical_function_cn": "用情绪路径解释非预期的三阶交互模式。",
+      "depends_on_cn": "依赖两个实验的三阶交互结果。",
+      "sets_up_cn": "支持隐私决策情境依赖的理论观点。",
+      "evidence_pointer": "Discussion, Theoretical and Practical Implications 第3段"
+    },
+    {
+      "order": 54,
+      "section": "Discussion",
+      "locator": "Theoretical and Practical Implications 第4段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "研究显示隐私增强工具不一定导致更多披露，支持隐私决策的情境依赖和边界条件。",
+      "rhetorical_function_cn": "将结果提升为边界条件知识。",
+      "depends_on_cn": "依赖 H4 和三阶交互。",
+      "sets_up_cn": "为理论贡献声明做铺垫。",
+      "evidence_pointer": "Discussion, Theoretical and Practical Implications 第4段"
+    },
+    {
+      "order": 55,
+      "section": "Discussion",
+      "locator": "Theoretical and Practical Implications 第5段",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者声称研究把社会利益操作化到数据捐赠情境，扩展了隐私计算中‘净收益’的范围。",
+      "rhetorical_function_cn": "回收引言中关于社会利益缺口的贡献声明。",
+      "depends_on_cn": "依赖两个实验社会利益操纵。",
+      "sets_up_cn": "为后续社会和伦理讨论奠定基础。",
+      "evidence_pointer": "Discussion, Theoretical and Practical Implications 第5段"
+    },
+    {
+      "order": 56,
+      "section": "Discussion",
+      "locator": "Social and Ethical Implications 第2段",
+      "move_code": "BOUNDARY_CONDITION",
+      "paraphrase_cn": "虽然亲社会框架可能缓解主观隐私风险感知，但客观隐私风险仍存在，因此设计不应操纵用户忽略隐私。",
+      "rhetorical_function_cn": "划定研究结果在伦理上的边界。",
+      "depends_on_cn": "依赖社会利益对隐私关注弱化的结果。",
+      "sets_up_cn": "为暗模式和透明度讨论提供依据。",
+      "evidence_pointer": "Discussion, Social and Ethical Implications 第2段"
+    },
+    {
+      "order": 57,
+      "section": "Discussion",
+      "locator": "Limitations and Directions for Future Research 第1段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "研究受隐私计算理性假设限制，未考虑非理性因素，未来可研究选择架构和数据捐赠应用界面设计。",
+      "rhetorical_function_cn": "承认理论前提的局限。",
+      "depends_on_cn": "依赖整个研究设计。",
+      "sets_up_cn": "为未来研究列出方向。",
+      "evidence_pointer": "Discussion, Limitations, 第1段"
+    },
+    {
+      "order": 58,
+      "section": "Discussion",
+      "locator": "Limitations and Directions for Future Research 第2-5段",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "连续声明单维隐私关注、单次捐赠决策、共情诱发中图片与视角采择未分离、参与者知道在研究中等局限。",
+      "rhetorical_function_cn": "系统列出方法和外部效度边界。",
+      "depends_on_cn": "依赖先前的实验设计。",
+      "sets_up_cn": "降低读者对效应过度推广的预期。",
+      "evidence_pointer": "Discussion, Limitations, 第2-5段"
+    },
+    {
+      "order": 59,
+      "section": "Discussion",
+      "locator": "Conclusion",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "结论强调隐私关注减少数据捐赠，但社会利益存在时该关联减弱；理解个人隐私与社会利益的交互可指导兼顾隐私和公益的信息系统设计。",
+      "rhetorical_function_cn": "以简洁结论重申贡献和实际意义。",
+      "depends_on_cn": "依赖全部研究结果和讨论。",
+      "sets_up_cn": "论文收束。",
+      "evidence_pointer": "Conclusion 段落"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先承认负面主效应已有共识，再用 Table 1 的系统编码证明隐私计算收益侧被窄化为个人收益，从而把缺口定位为‘调节变量缺失’而不是‘无人研究’。",
+    "signposting_cn": "摘要和引言末端明确预告两个实验、两个情境、两种社会利益操作；每个实验开始说明其回答的问题和与另一实验的互补性；结果部分反复以 H1、H2、H3a/H3b、H4 标号呈现。",
+    "transition_logic_cn": "从引言到理论由‘因为数据捐赠涉及社会利益，所以需要重新测试隐私理论’过渡；从理论到设计由‘把隐私控制作为风险面、把社会利益作为收益面’过渡；Experiment 2 通过‘与 Experiment 1 相同的统计方法和隐私控制复制’保持连贯。",
+    "claim_evidence_rhythm_cn": "每个假设先给机制解释，再给统计证据（β、SE、p），然后用简单斜率表的条件组合把交互转化为‘负向关联在条件 A 弱于条件 B’的可读表达式。",
+    "benchmark_narrative_cn": "以无控制/无社会利益作为最强负向基准，以个人收益作为隐私计算文献的典型基准；这样社会收益的调节不是绝对主张，而是相对基准的对比主张。",
+    "theory_return_cn": "讨论中把‘两者同时在场时弱化反而较小’的意外结果回到情绪影响隐私决策的文献，解释为共情的情绪反应压过理性控制评估，从而不把矛盾留在数据层。",
+    "contribution_positioning_cn": "通过‘第一/第二/第三’的贡献清单把结果与既有文献联系起来；在讨论中再以理论边界和情境依赖复述贡献。",
+    "novelty_protection_cn": "强调两个实验跨情境复制和多种社会利益操作，并将结果包装为‘隐私关注的说服力取决于隐私计算中有什么’，避免被读作一次性实验；同时用敏感度/类别拆分显示边界，防止过度一般化。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立现实问题：用具体项目和伦理问题说明情境的社会价值与隐私风险冲突。",
+        "research_job_cn": "确认该情境有真实平台、倡议或危机背景，并找到现实中的成败案例。",
+        "required_evidence_cn": "至少一个可引证的现象或倡议，以及表明隐私阻碍参与的观察或报道。",
+        "transition_to_next_cn": "从‘现实重要’转向‘理论未完全解释’。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "制造可验证的文献缺口：用编码表或系统检索证明既有理论/实证忽略了关键构念。",
+        "research_job_cn": "对目标文献做小规模系统分析，用维度编码展示空白。",
+        "required_evidence_cn": "能够说明‘已有主效应共识，但调节变量未检验’的表格或编码结果。",
+        "transition_to_next_cn": "从‘空白’转向‘因此需要引入某理论’。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "选择理论并把理论命题翻译为可操作构念和设计需求。",
+        "research_job_cn": "明确理论中哪些变量对应风险/收益/保护机制，并定义构念的操作化。",
+        "required_evidence_cn": "每个构念都能映射到可比较的实验条件。",
+        "transition_to_next_cn": "从‘理论构念’转向‘具体界面/材料设计’。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "提出主效应和调节假设，说明每个假设的机制和预期条件。",
+        "research_job_cn": "确保假设能够通过操纵检查、交互项和简单斜率检验被直接评价。",
+        "required_evidence_cn": "至少主效应假设有文献支持，调节假设有理论逻辑。",
+        "transition_to_next_cn": "从‘假设’转向‘实验设计’。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设计实验材料和流程，明确被试、操纵、对照组和测量。",
+        "research_job_cn": "构建 mockup/模拟应用或界面条件，随机分配，加入操纵检查和替代解释排除项。",
+        "required_evidence_cn": "操纵检查显著，且没有交叉效应；关键变量测量信度足够。",
+        "transition_to_next_cn": "从‘实验执行’转向‘统计分析’。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用主回归、边际效应和事后拆分呈现结果，强调条件组合之间的斜率差异。",
+        "research_job_cn": "做调节效应和三阶交互检验，并按数据属性做稳健性分析。",
+        "required_evidence_cn": "关键交互项方向一致、显著，简单斜率表能解释条件差异。",
+        "transition_to_next_cn": "从‘局部结果’转向‘理论返回’。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "在讨论中把结果回填到引言缺口，声明理论贡献、边界条件和实践/伦理含义。",
+        "research_job_cn": "识别非预期结果的理论解释，列出未检验的边界和未来研究。",
+        "required_evidence_cn": "至少有一种机制解释覆盖非预期发现；边界条件有事后分析依据。",
+        "transition_to_next_cn": "从‘结果’收束为‘贡献和展望’。"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用文献盘点表把‘忽略社会利益’变成可验证的空白",
+      "以‘建立基准—改变基准’的方式设置实验条件",
+      "用简单斜率把三阶交互转化为可读的条件组合",
+      "在讨论中用理论解释意外交互结果",
+      "用两个互补实验操作同一构念，增强构念效度和复制性"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "两套移动应用（mockup 与 simulation）的构建和界面截图",
+      "MTurk 两次样本收集共 422 人，包含大量控制变量",
+      "COVID-19 情境的时效性，难以完全复制",
+      "操纵检查工具和完整附录测量材料"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写‘社会利益重要’而没有可操作的内隐/外显操纵",
+      "不能把模拟选择直接说成真实长期捐赠行为",
+      "不能只报主效应而不做条件边界",
+      "不能把‘缺少社会利益’作为结论，除非有文献编码或系统对比"
+    ],
+    "single_best_description_of_the_routine_cn": "把已有主效应作为靶子，用情境化理论把被忽视的收益面/风险面变成可操纵设计条件，再用两个复制实验的简单斜率证明边界条件，最后回到理论讨论边界和伦理。"
+  },
+  "confidence": 0.96,
+  "limitations_cn": "全文可读，但由于 OCR 丢失了部分方程渲染和图片细节；Table 1 和附录表格完整；无法看到图2、图4、图5的原始视觉内容，只能依据正文描述；段落位置为基于结构估计，不是原始页码。",
+  "usage": {
+    "prompt_tokens": 51802,
+    "completion_tokens": 25279,
+    "total_tokens": 77081,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 48474
+  }
+}

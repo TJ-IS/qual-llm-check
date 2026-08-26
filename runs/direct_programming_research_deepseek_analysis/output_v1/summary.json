@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-07-22T11:58:23.246334+00:00",
+  "analysis_version": "direct-programming-research-v1",
+  "prompt_fingerprint": "2ab63081f4d36ede3a4b4c572e8873c72393fbfa8ad19f2a9b5bba55825946e8",
+  "input_programming_context_matches": 264,
+  "completed": 264,
+  "pending": 0,
+  "direct_programming_true": 28,
+  "direct_programming_false": 236,
+  "human_programming_task_true": 63,
+  "direct_and_human_programming_task_true": 21,
+  "direct_focus_type_counts": {
+    "code_artifact_analysis": 7,
+    "direct_conceptual_programming": 0,
+    "human_programming_task": 14,
+    "not_direct": 236,
+    "programming_education_task": 1,
+    "programming_method_process": 5,
+    "programming_tool_language": 1
+  },
+  "usage": {
+    "prompt_tokens": 5769378,
+    "completion_tokens": 263774,
+    "total_tokens": 6033152
+  }
+}

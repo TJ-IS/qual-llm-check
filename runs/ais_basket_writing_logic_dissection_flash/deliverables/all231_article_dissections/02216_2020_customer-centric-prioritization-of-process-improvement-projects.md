@@ -1,0 +1,2185 @@
+# Customer-centric prioritization of process improvement projects
+
+- 作者：Thomas Kreuzer; Maximilian Röglinger; Lea Rupprecht
+- 年份 / 期刊：2020 / Decision Support Systems
+- DOI：10.1016/j.dss.2020.113286
+- 源文件：02216_2020_customer-centric-prioritization-of-process-improvement-projects.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：企业如何以客户为中心对流程改进项目进行优先级排序？
+
+- 制品与设计：一个经济决策模型，在项目组合选择阶段帮助流程分析师为给定流程选择并排程流程改进项目组合；该模型基于风险调整净现值（NPV），整合客户满意度（通过Kano模型思想：基本/绩效/兴奋特征类型、特征类型随时间切换、履行度衰减），并考虑预算等约束、项目交互、CC项目与效率项目两类。
+
+- 客观结果：在德国保险公司案例中，模型得到最优组合（全部六个项目在四个期间排程），NPV为31.8 MEUR，而仅强制项目和最差组合为负值；稳健性分析表明，初始履行值小幅下降低于-0.2会导致最优组合从收益驱动转向成本驱动策略。
+
+- 核心贡献：通过exaptation将价值导向BPM、PPS和Kano模型结合，为以客户为中心的流程改进项目优先级排序提供新的决策模型，扩展了流程优先级与CPM的处方知识；首次将CC纳入流程决策，并首次将特征类型切换与PPS结合。
+
+- 整篇论证链：文章从客户中心性成为企业成功因素出发，指出现有流程改进决策主要关注效率而忽视客户，缺少以客户为中心的流程改进项目优先级排序方法。作者采用设计科学研究范式，从价值导向BPM、项目组合选择和客户满意度测量（特别是Kano模型）等justificatory knowledge中提炼设计目标，构建了以NPV为目标函数、以基本/绩效/兴奋特征类型和切换点来建模客户满意度的决策模型。评价采用DSR四位一体框架：通过专家访谈验证设计目标和模型（EVAL2），通过软件原型证明可实例化（EVAL3），通过德国保险公司的真实流程应用和最优/最差/强制组合对比证明适用性与有用性（EVAL4），并通过稳健性分析探索边界条件。最终，文章通过exaptation声称扩展了CPM处方知识，并提出模型的适用边界、应用建议和未来研究方向。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章明确采用设计科学研究范式，提出一个经济决策模型作为artifact，从问题设置推导设计目标，发展设计，并用专家访谈、原型、真实案例和稳健性分析评价，最终贡献处方知识和设计蓝图。
+
+- 主导写作弧线判定：论文从现实问题出发，引入BPM、PPS和Kano模型等理论知识，设计决策模型，经过多阶段评估后回到理论贡献（exaptation）和边界条件，虽也有要求—构建—评价元素，但主线更鲜明是“问题—理论—设计—检验—回到理论”。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：文章按DSR参考过程组织：先明确问题和DOs（EVAL1），再进行设计搜索和建模（与评估交织），然后用专家访谈验证设计（EVAL2），再用原型验证实例（EVAL3），再用真实案例验证应用（EVAL4），最后做稳健性分析并综合结论。各阶段累积支撑“模型可用、有用、边界清晰”的结论。
+
+### studies_or_phases
+
+#### 1. 问题设置与设计目标定义
+
+- order：1
+
+- name_cn：问题设置与设计目标定义
+
+- question_cn：公司在客户中心化流程改进中面临什么决策问题？需要哪些设计目标？
+
+- inputs_and_setting_cn：文献、实践背景（数字时代客户可比较产品、公司资源稀缺）
+
+- designed_or_compared_object_cn：两个设计目标（DO.1流程决策与PPS；DO.2流程性能与客户满意度）
+
+- baseline_control_or_counterfactual_cn：现有流程优先级方法主要关注效率
+
+##### objective_metrics
+
+1. DO理论基础充足性（文献支持）
+
+- analysis_method_cn：文献分析、问题形式化、DSR问题识别
+
+- main_result_cn：提出两个有效设计目标，问题被定位为交互密集型核心流程的项目组合选择问题
+
+- argumentative_role_cn：界定制品需要满足的需求，为模型设计设立评价标准
+
+- remaining_uncertainty_cn：DOs是否被行业专家认可
+
+- link_to_next_phase_cn：DOs定义解空间，直接引导设计搜索和建模
+
+##### evidence_pointers
+
+1. Section 1
+
+2. Section 4.1
+
+3. Section 4.2
+
+#### 2. 设计搜索与决策模型开发
+
+- order：2
+
+- name_cn：设计搜索与决策模型开发
+
+- question_cn：如何将设计目标转化为具体的数学决策模型？
+
+- inputs_and_setting_cn：价值导向BPM、PPS、Kano模型等justificatory knowledge，以及早期原型和专家反馈
+
+- designed_or_compared_object_cn：目标函数、客户满意度变换函数、项目效应公式、项目类型
+
+- baseline_control_or_counterfactual_cn：已有模型主要使用效率指标；Buhl等及Aflerbach等的不同满意度函数
+
+##### objective_metrics
+
+1. 模型结构完整性
+
+2. 数学可操作性
+
+- analysis_method_cn：规范性分析建模、多准则决策分析
+
+- main_result_cn：以风险调整NPV为目标，引入特征类型、切换点、衰减等机制，形成完整决策模型
+
+- argumentative_role_cn：生成核心制品，并解释设计选择
+
+- remaining_uncertainty_cn：模型的可理解性和现实保真度尚未验证
+
+- link_to_next_phase_cn：模型规格需要专家评审，进入EVAL2
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Section 4.3-4.5
+
+3. Table 1
+
+4. Eq.(1)-(8)
+
+#### 3. 专家访谈验证（EVAL2）
+
+- order：3
+
+- name_cn：专家访谈验证（EVAL2）
+
+- question_cn：决策模型和设计目标是否在行业专家看来具有可理解性和现实保真度？
+
+- inputs_and_setting_cn：6位具有BPM/CPM/PPS经验的行业专家，来自不同行业和规模公司，半结构化访谈
+
+- designed_or_compared_object_cn：专家对NPV、Kano建模、项目交互等设计选择的判断
+
+- baseline_control_or_counterfactual_cn：无量化基准，基于专家经验
+
+##### objective_metrics
+
+1. 专家认同度
+
+2. 批评点
+
+- analysis_method_cn：定性访谈分析
+
+- main_result_cn：专家认可NPV和Kano思想，但指出模型初始只有整体切换点，要求特征级切换；同时担心数据收集负担，促成聚合参数选项
+
+- argumentative_role_cn：修正并验证设计，显示模型在行业情境中的合理性
+
+- remaining_uncertainty_cn：在真实数据下模型是否可操作
+
+- link_to_next_phase_cn：反馈被纳入模型，进入原型实施
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Table 2
+
+#### 4. 软件原型实施（EVAL3）
+
+- order：4
+
+- name_cn：软件原型实施（EVAL3）
+
+- question_cn：决策模型是否可实例化为软件原型，并能处理行业规模实例？
+
+- inputs_and_setting_cn：决策模型、虚构测试数据
+
+- designed_or_compared_object_cn：软件原型实现
+
+- baseline_control_or_counterfactual_cn：与模型规格对照
+
+##### objective_metrics
+
+1. 能否正确计算最优组合
+
+2. 能否支持稳健性分析
+
+- analysis_method_cn：原型开发与测试
+
+- main_result_cn：原型成功实现，支持最优组合计算和稳健性分析，并用于设计搜索中的数学规格实验
+
+- argumentative_role_cn：提供概念证明，为真实应用铺路
+
+- remaining_uncertainty_cn：在真实公司数据下是否有用
+
+- link_to_next_phase_cn：原型可用于保险公司自然主义评估
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Section 5.3
+
+#### 5. 真实世界应用（EVAL4）
+
+- order：5
+
+- name_cn：真实世界应用（EVAL4）
+
+- question_cn：决策模型在自然主义环境中的适用性和有用性如何？
+
+- inputs_and_setting_cn：德国保险公司INSURANCE的保险咨询流程（5个子流程、7个特征、6个项目候选）、内部成本/收入数据、专家估计
+
+- designed_or_compared_object_cn：最优项目组合 vs 仅强制项目组合 vs 最差项目组合
+
+- baseline_control_or_counterfactual_cn：仅强制组合（P6）和最差组合作为对照
+
+##### objective_metrics
+
+1. NPV（按风险调整折现）
+
+2. 顾客满意度随时间的变化
+
+- analysis_method_cn：案例研究、组合扫描与NPV最大化
+
+- main_result_cn：最优组合为所有六项目按顺序排程，NPV=31.8 MEUR，满意度平稳略升；专家认为结果可理解
+
+- argumentative_role_cn：证明模型在真实决策中的可用性和结果有用性
+
+- remaining_uncertainty_cn：结果对参数估计误差的敏感性未知
+
+- link_to_next_phase_cn：进行稳健性分析以探索边界
+
+##### evidence_pointers
+
+1. Section 5.2.1-5.2.3
+
+2. Tables 3-7
+
+3. Table 8
+
+4. Fig. 4
+
+#### 6. 稳健性与边界分析
+
+- order：6
+
+- name_cn：稳健性与边界分析
+
+- question_cn：初始履行度估计误差如何影响最优组合和模型适用边界？
+
+- inputs_and_setting_cn：初始履行值矩阵（Table 4）按±0.5范围、步长0.01修改
+
+- designed_or_compared_object_cn：修改后的初始履行值 vs 原始值
+
+- baseline_control_or_counterfactual_cn：原始值作为基线
+
+##### objective_metrics
+
+1. 最优项目组合的结构
+
+2. NPV变化
+
+- analysis_method_cn：参数扫描、灵敏度分析
+
+- main_result_cn：初始值小幅升降（小于-0.2）不改变最优组合；大幅下降导致组合从收益驱动切换到成本驱动（portfolio B），NPV从约27 MEUR降至-0.3 MEUR；说明模型适用于客户满意度为价值驱动力的流程
+
+- argumentative_role_cn：刻画模型边界条件并支持“仅适用客户满意度驱动型流程”的边界主张
+
+- remaining_uncertainty_cn：其他参数（如成本、收入）的稳健性未检验
+
+- link_to_next_phase_cn：综合评估和推荐应用
+
+##### evidence_pointers
+
+1. Section 5.2.4
+
+2. Fig. 5
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. GAP
+
+4. LIMITATION
+
+5. RQ_OR_OBJECTIVE
+
+6. METHOD_JUSTIFICATION
+
+7. RESULT
+
+8. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. MECHANISM
+
+4. LIMITATION
+
+5. GAP
+
+6. RQ_OR_OBJECTIVE
+
+7. METHOD_JUSTIFICATION
+
+8. DESIGN_FEATURE
+
+9. THEORY_INTRO
+
+10. CONTRIBUTION
+
+11. STUDY_OVERVIEW
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE
+
+2. THEORY_INTRO
+
+3. THEORY_PROPOSITION
+
+4. MECHANISM
+
+5. LIMITATION
+
+6. REQUIREMENT
+
+7. METHOD_JUSTIFICATION
+
+### artifact_design_moves
+
+1. CONTEXT
+
+2. PHENOMENON
+
+3. DESIGN_FEATURE
+
+4. REQUIREMENT
+
+5. MECHANISM
+
+6. LIMITATION
+
+7. BOUNDARY_CONDITION
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION
+
+2. RESULT
+
+3. ROBUSTNESS_OR_BOUNDARY_TEST
+
+4. MECHANISM
+
+5. BOUNDARY_CONDITION
+
+6. CONTRIBUTION
+
+### discussion_and_contribution_moves
+
+1. CONTEXT
+
+2. RESULT
+
+3. CONTRIBUTION
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 价值导向BPM（value-based BPM）
+
+2. 风险调整NPV法
+
+3. 项目组合选择（PPS）
+
+4. Kano模型
+
+5. 客户满意度测量（确认/不确认范式）
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：作者明确以这些领域作为justificatory knowledge，直接将其概念（如Kano特征类型、NPV目标函数、PPS最优组合选择阶段）映射到模型结构，且这些选择在评估中被专家验证和实际应用确认。
+
+- 理论到设计翻译链：价值导向BPM命题（所有活动应最大化长期企业价值）→ 决策准则应为风险调整NPV → 目标函数选择NPV；PPS流程（最优组合选择阶段需考虑项目交互和约束）→ 模型应处理组合选择和调度约束 → 引入可行组合集合、前任/后继、资源约束；Kano模型命题（不同特征类型对满意度影响不同且类型随时间切换）→ 满意度应由特征类别和履行程度决定，并允许特征切换 → 变换函数、特征类型变量、切换点、衰减；客户满意度-收入线性关系 → 收入应随满意度变化 → 线性收入函数；效率/体验权衡和项目类型区分 → CC项目与效率项目各有主要效应 → 项目效应参数化。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：所有公司活动应以最大化长期企业价值为目标，通过风险调整NPV衡量。
+
+- mechanism_cn：将分散的项目决策与股东价值关联，折现未来现金流。
+
+- design_requirement_cn：项目组合应基于风险调整NPV评估。
+
+- artifact_choice_cn：目标函数采用风险调整NPV作为最大化对象。
+
+- evaluated_contrast_cn：最优组合 vs 仅强制组合 vs 最差组合。
+
+- objective_result_cn：最优组合NPV为31.8 MEUR，其他为负。
+
+##### evidence_pointers
+
+1. Section 4.3 Eq.(1)
+
+2. Table 8
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：PPS五阶段流程中，最优组合选择阶段需处理项目交互和约束。
+
+- mechanism_cn：项目间前驱/后继和资源限制影响调度可行性。
+
+- design_requirement_cn：模型应包含项目交互和领域特定约束。
+
+- artifact_choice_cn：模型限定在最优组合选择阶段，考虑前任/后继、每期可实施项目数等约束。
+
+- evaluated_contrast_cn：带约束组合搜索和不带约束的假设对比（通过案例中P3依赖P2实现）。
+
+- objective_result_cn：最优组合正确把P2放在P3之前。
+
+##### evidence_pointers
+
+1. Section 2.3
+
+2. Section 4.5
+
+3. Table 6
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：Kano模型指出特征对满意度的影响是非线性的，取决于特征是基本、绩效还是兴奋，且特征类型随时间切换。
+
+- mechanism_cn：基本特征不足履行导致强烈不满，且不能被其他特征弥补；绩效特征线性影响；兴奋特征提升满意但不履行时不导致不满。
+
+- design_requirement_cn：满意度建模需区分特征类型，并考虑切换点和期望衰减。
+
+- artifact_choice_cn：特征类型变量y、变换函数U、切换点和衰减d被引入模型。
+
+- evaluated_contrast_cn：案例中Process Flexibility和Transparency由绩效转为基本，驱动组合排序。
+
+- objective_result_cn：特征切换影响最优组合；稳健性分析显示基本特征不足会引发成本驱动策略。
+
+##### evidence_pointers
+
+1. Section 4.4
+
+2. Table 1
+
+3. Table 5
+
+4. Section 5.2.4
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：客户满意度正向影响收入，存在线性关系。
+
+- mechanism_cn：满意度提升带来客户留存和收入增长。
+
+- design_requirement_cn：收入应作为满意度的函数纳入NPV。
+
+- artifact_choice_cn：收入函数采用通过初始和最大满意度-收入点的线性方程。
+
+- evaluated_contrast_cn：不同满意度水平下的收入差异。
+
+- objective_result_cn：模型将满意度变化转化为NPV差异，支撑收益驱动组合。
+
+##### evidence_pointers
+
+1. Section 4.4 Eq.(5)
+
+2. Section 5.2.3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 文献推导与DOs验证（EVAL1）
+
+2. 专家访谈（EVAL2）
+
+3. 软件原型测试（EVAL3）
+
+4. 真实世界案例（EVAL4）
+
+5. 稳健性分析
+
+- why_these_evaluations_cn：由于设计科学研究中制品需要证明可理解性、可实例化、现实适用性和边界条件，选择多阶段评价框架覆盖从规格到真实应用；同时因为输入依赖专家估计，需要稳健性分析来缓解不确定性。
+
+- benchmark_and_contrast_chain_cn：案例评价采用对比组合：最优组合、仅强制组合、最差组合，以展示NPV差异；稳健性分析以原始参数为基线，对比扰动参数下的组合变化，形成从“模型较好”到“模型在何时失效”的证据链。
+
+### claim_evidence_ledger
+
+#### 1. 模型设计目标合理且以文献和专家验证为基础。
+
+- claim_cn：模型设计目标合理且以文献和专家验证为基础。
+
+- evidence_cn：文献推导DOs，6位专家访谈确认。
+
+- supported：是
+
+#### 2. 模型可实例化为软件原型。
+
+- claim_cn：模型可实例化为软件原型。
+
+- evidence_cn：EVAL3原型实施与测试。
+
+- supported：是
+
+#### 3. 模型在真实行业环境中可用且结果有用。
+
+- claim_cn：模型在真实行业环境中可用且结果有用。
+
+- evidence_cn：在INSURANCE应用，最优组合NPV正值，专家认为结果可理解。
+
+- supported：是
+
+#### 4. 模型对估计误差具有一定稳健性。
+
+- claim_cn：模型对估计误差具有一定稳健性。
+
+- evidence_cn：稳健性分析显示小幅低估不改变组合，大幅低估引发策略切换。
+
+- supported：是
+
+#### 5. 模型是第一个将CC与PPS、特征切换结合的决策模型。
+
+- claim_cn：模型是第一个将CC与PPS、特征切换结合的决策模型。
+
+- evidence_cn：作者宣称，但无系统文献对比，证据不足。
+
+- supported：否
+
+- internal_validity_strategy_cn：通过多项输入采用专家估计并用关键信息人协调；通过稳健性分析检查初始履行度变化；通过原型进行数学规格测试。
+
+- external_validity_strategy_cn：选择一家大型保险公司真实流程作为案例，并让专家覆盖多行业；提供了应用建议以帮助迁移。
+
+- what_is_not_actually_tested_cn：未检验随机输入（stochastic）、多流程并行、产品体验对满意度的影响、模型应用效率；单个案例难以支持普适性。
+
+## 贡献闭环
+
+- technical_claim_cn：提出一种将客户满意度（Kano型）与效率成本统一到NPV、支持项目组合选择和排程的决策模型。
+
+- artifact_claim_cn：模型中包含特征类型切换、衰减、CC项目与效率项目区分、约束和交互等可识别设计要素，并通过案例展示其对结果的影响。
+
+- mechanism_claim_cn：基本特征不足履行会导致强烈不满意且不可弥补，因此当初始履行度足够低时，最优策略转向成本削减而非收入提升。
+
+- boundary_claim_cn：模型适用于客户满意度是价值关键驱动力的交互密集型核心流程；否则详细建模满意度不划算。
+
+- reusable_design_knowledge_cn：Kano模型从产品设计迁移到流程改进的映射方式；特征类型切换与PPS相结合的建模模板；应用时需要关键信息人、工作坊、二手数据优先、重复应用等操作建议。
+
+- theoretical_contribution_cn：通过exaptation结合三种知识库，扩展了CPM和流程优先级排序的处方知识，首次将客户中心性纳入流程决策，并展示Kano模型可支持流程设计。
+
+- how_discussion_closes_intro_gap_cn：结论重申引言中缺少客户中心化优先级排序方法，声称模型填补该空白，并通过理论（exaptation）、边界条件、局限与未来方向将主张闭合。
+
+- overclaim_or_unsupported_leaps_cn：作者使用“first”宣称，但未进行系统性文献对比；一个案例难以证明普适性；专家访谈样本较小且部分来自同一公司；稳健性分析仅针对初始履行度单一参数集。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：数字时代客户能方便比较产品并决定如何与公司互动。
+
+- rhetorical_function_cn：为论文设定商业环境背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：引出客户中心化的重要性。
+
+- evidence_pointer：Abstract P1
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：客户中心化成为企业成功因素，公司需要通过客户中心化流程提升满意度。
+
+- rhetorical_function_cn：强调实际利益。
+
+- depends_on_cn：依赖背景
+
+- sets_up_cn：说明为什么问题重要。
+
+- evidence_pointer：Abstract P1
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：GAP
+
+- paraphrase_cn：公司面临大量行动选项、快速变化的需求和稀缺资源，亟需客户中心化的流程改进项目优先级指导。
+
+- rhetorical_function_cn：建立缺口。
+
+- depends_on_cn：依赖前面实际问题
+
+- sets_up_cn：为研究问题铺路。
+
+- evidence_pointer：Abstract P1
+
+### 4. P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：P1 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有方法主要关注流程效率，缺少对客户中心化的考虑。
+
+- rhetorical_function_cn：指出现有不足。
+
+- depends_on_cn：依赖已有方法综述
+
+- sets_up_cn：证明缺口的性质。
+
+- evidence_pointer：Abstract P1
+
+### 5. P1 S5
+
+- order：5
+
+- section：Abstract
+
+- locator：P1 S5
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：因此我们提出一个考虑流程改进对客户中心化影响的决策模型。
+
+- rhetorical_function_cn：宣布制品。
+
+- depends_on_cn：依赖缺口
+
+- sets_up_cn：预告模型。
+
+- evidence_pointer：Abstract P1
+
+### 6. P1 S6
+
+- order：6
+
+- section：Abstract
+
+- locator：P1 S6
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用设计科学范式，使用多准则决策分析和规范分析建模。
+
+- rhetorical_function_cn：说明研究方式。
+
+- depends_on_cn：无
+
+- sets_up_cn：为方法部分做摘要。
+
+- evidence_pointer：Abstract P1
+
+### 7. P1 S7
+
+- order：7
+
+- section：Abstract
+
+- locator：P1 S7
+
+- move_code：RESULT
+
+- paraphrase_cn：通过专家讨论、软件原型和保险公司应用进行评价。
+
+- rhetorical_function_cn：概括评价结果。
+
+- depends_on_cn：依赖模型
+
+- sets_up_cn：说明证据类型。
+
+- evidence_pointer：Abstract P1
+
+### 8. P1 S8
+
+- order：8
+
+- section：Abstract
+
+- locator：P1 S8
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究扩展了流程优先级和客户流程管理的处方知识。
+
+- rhetorical_function_cn：声明贡献。
+
+- depends_on_cn：依赖评价
+
+- sets_up_cn：总结论文价值。
+
+- evidence_pointer：Abstract P1
+
+### 9. P1 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：数字经济使客户能方便比较产品并选择互动方式。
+
+- rhetorical_function_cn：同摘要但更详细展开背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：为引入客户中心化做背景。
+
+- evidence_pointer：Introduction P1
+
+### 10. P1 S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：企业将客户放在中心，即客户中心化（CC），已成为许多公司的成功要素，甚至出现相关奖项。
+
+- rhetorical_function_cn：展示现象普遍性。
+
+- depends_on_cn：依赖背景
+
+- sets_up_cn：强调CC的商业重要性。
+
+- evidence_pointer：Introduction P1
+
+### 11. P2 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：客户-公司互动嵌入业务流程，是客户满意度的驱动因素，进而影响客户留存和企业成功。
+
+- rhetorical_function_cn：解释因果链。
+
+- depends_on_cn：依赖CC背景
+
+- sets_up_cn：将CC连接到BPM。
+
+- evidence_pointer：Introduction P2
+
+### 12. P2 S3
+
+- order：12
+
+- section：Introduction
+
+- locator：P2 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：大多数BPM方法和工具聚焦流程效率而忽略客户中心化。
+
+- rhetorical_function_cn：指出现有知识缺陷。
+
+- depends_on_cn：依赖BPM介绍
+
+- sets_up_cn：为问题缺口定位。
+
+- evidence_pointer：Introduction P2
+
+### 13. P2 S5
+
+- order：13
+
+- section：Introduction
+
+- locator：P2 S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：有学者引用Potts的话指出，重点不是客户如何参与公司流程而是公司如何参与客户流程。
+
+- rhetorical_function_cn：引用权威观点强化视角转换。
+
+- depends_on_cn：依赖缺口
+
+- sets_up_cn：为本研究提供概念方向。
+
+- evidence_pointer：Introduction P2
+
+### 14. P2 S6
+
+- order：14
+
+- section：Introduction
+
+- locator：P2 S6
+
+- move_code：GAP
+
+- paraphrase_cn：客户流程管理（CPM）知识尚处萌芽，尤其缺少客户中心化流程改进项目优先级排序方法。
+
+- rhetorical_function_cn：建立具体研究缺口。
+
+- depends_on_cn：依赖BPM/CPM现状
+
+- sets_up_cn：引出研究问题。
+
+- evidence_pointer：Introduction P2
+
+### 15. P2 S7
+
+- order：15
+
+- section：Introduction
+
+- locator：P2 S7
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：研究问题：公司如何优先排序流程改进项目以促进CC？
+
+- rhetorical_function_cn：明确问题。
+
+- depends_on_cn：依赖缺口
+
+- sets_up_cn：指导全文。
+
+- evidence_pointer：Introduction P2
+
+### 16. P3 S1
+
+- order：16
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用DSR范式，以多准则决策分析和规范分析建模作为研究方法。
+
+- rhetorical_function_cn：说明方法选择。
+
+- depends_on_cn：无
+
+- sets_up_cn：为研究设计提供合法性。
+
+- evidence_pointer：Introduction P3
+
+### 17. P3 S3
+
+- order：17
+
+- section：Introduction
+
+- locator：P3 S3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：制品是一个经济决策模型，考虑流程改进项目对CC的影响。
+
+- rhetorical_function_cn：宣布制品本质。
+
+- depends_on_cn：依赖研究问题
+
+- sets_up_cn：为设计规格做预告。
+
+- evidence_pointer：Introduction P3
+
+### 18. P3 S4
+
+- order：18
+
+- section：Introduction
+
+- locator：P3 S4
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：模型借鉴价值导向流程决策、PPS和客户满意度测量特别是Kano模型。
+
+- rhetorical_function_cn：列出支撑知识。
+
+- depends_on_cn：无
+
+- sets_up_cn：为理论背景章做导读。
+
+- evidence_pointer：Introduction P3
+
+### 19. P3 S5
+
+- order：19
+
+- section：Introduction
+
+- locator：P3 S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：模型通过exaptation扩展流程优先级和CPM的处方知识。
+
+- rhetorical_function_cn：声明潜在贡献。
+
+- depends_on_cn：依赖模型
+
+- sets_up_cn：确立论文价值。
+
+- evidence_pointer：Introduction P3
+
+### 20. P1 S1
+
+- order：20
+
+- section：Section 2.1
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：BPM是管理和改进工作以确保持续结果和抓住改进机会的学科。
+
+- rhetorical_function_cn：定义领域。
+
+- depends_on_cn：无
+
+- sets_up_cn：为将问题置于BPM语境。
+
+- evidence_pointer：Section 2.1
+
+### 21. P2 S1
+
+- order：21
+
+- section：Section 2.1
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：现有流程改进与优先级方法通常先识别改进想法，再指定和优先排序候选项目。
+
+- rhetorical_function_cn：总结已有方法结构。
+
+- depends_on_cn：依赖BPM定义
+
+- sets_up_cn：为指出局限埋下伏笔。
+
+- evidence_pointer：Section 2.1
+
+### 22. P3 S2
+
+- order：22
+
+- section：Section 2.1
+
+- locator：P3 S2
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：流程性能是多维构造，如Devil's Quadrangle包含时间、成本、质量和灵活性。
+
+- rhetorical_function_cn：介绍性能维度。
+
+- depends_on_cn：无
+
+- sets_up_cn：为效率/体验权衡提供框架。
+
+- evidence_pointer：Section 2.1
+
+### 23. P3 S4
+
+- order：23
+
+- section：Section 2.1
+
+- locator：P3 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：这些维度主要聚焦效率，质量虽涵盖客户视角但往往以间接方式测量。
+
+- rhetorical_function_cn：指出效率偏重。
+
+- depends_on_cn：依赖性能框架
+
+- sets_up_cn：突出客户维度缺失。
+
+- evidence_pointer：Section 2.1
+
+### 24. P4 S1
+
+- order：24
+
+- section：Section 2.1
+
+- locator：P4 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：价值导向BPM将价值导向（货币估值、风险意识、长期导向）转移到流程决策。
+
+- rhetorical_function_cn：引入知识基础。
+
+- depends_on_cn：无
+
+- sets_up_cn：为NPV目标函数做理论准备。
+
+- evidence_pointer：Section 2.1
+
+### 25. P4 S3
+
+- order：25
+
+- section：Section 2.1
+
+- locator：P4 S3
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：公司需要量化资产和决策的价值贡献，包括业务流程、改进项目和优先级排序。
+
+- rhetorical_function_cn：陈述价值导向命题。
+
+- depends_on_cn：依赖价值导向理念
+
+- sets_up_cn：将NPV引入决策模型。
+
+- evidence_pointer：Section 2.1
+
+### 26. P1 S1
+
+- order：26
+
+- section：Section 2.2
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：客户满意度不仅是流程性能质量维度的一部分，更是CC的关键。
+
+- rhetorical_function_cn：建立满意度与CC联系。
+
+- depends_on_cn：无
+
+- sets_up_cn：为满意度建模提供定位。
+
+- evidence_pointer：Section 2.2
+
+### 27. P2 S1
+
+- order：27
+
+- section：Section 2.2
+
+- locator：P2 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：许多满意度测量方法基于确认/不确认范式，即比较期望和感知绩效。
+
+- rhetorical_function_cn：介绍客户满意度理论。
+
+- depends_on_cn：无
+
+- sets_up_cn：为Kano模型引入做铺垫。
+
+- evidence_pointer：Section 2.2
+
+### 28. P3 S3
+
+- order：28
+
+- section：Section 2.2
+
+- locator：P3 S3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：Kano模型是直接分类特征和测量满意度的知名方法。
+
+- rhetorical_function_cn：引入Kano。
+
+- depends_on_cn：依赖满意度测量综述
+
+- sets_up_cn：说明选择Kano的原因。
+
+- evidence_pointer：Section 2.2
+
+### 29. P4 S1
+
+- order：29
+
+- section：Section 2.2
+
+- locator：P4 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：在设计搜索过程中，决定采用Kano模型思想，因其契合问题背景和设计目标。
+
+- rhetorical_function_cn：记录设计决策。
+
+- depends_on_cn：依赖Kano介绍
+
+- sets_up_cn：为4.4节的建模定向。
+
+- evidence_pointer：Section 2.2
+
+### 30. P5 S1
+
+- order：30
+
+- section：Section 2.2
+
+- locator：P5 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：Kano模型认为特征履行程度与满意度关系非线性且取决于特征类型。
+
+- rhetorical_function_cn：陈述关键理论命题。
+
+- depends_on_cn：无
+
+- sets_up_cn：为特征类型建模提供依据。
+
+- evidence_pointer：Section 2.2
+
+### 31. P5 S4
+
+- order：31
+
+- section：Section 2.2
+
+- locator：P5 S4
+
+- move_code：MECHANISM
+
+- paraphrase_cn：客户期望随时间变化，特征类型会从兴奋转向绩效再转向基本。
+
+- rhetorical_function_cn：解释特征生命周期机制。
+
+- depends_on_cn：依赖Kano命题
+
+- sets_up_cn：支持切换点建模。
+
+- evidence_pointer：Section 2.2
+
+### 32. P1 S1
+
+- order：32
+
+- section：Section 2.3
+
+- locator：P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：由于项目候选通常多于资源，PPS帮助公司选择符合目标且不违反约束的项目组合。
+
+- rhetorical_function_cn：引入PPS。
+
+- depends_on_cn：无
+
+- sets_up_cn：为组合优化建模定位。
+
+- evidence_pointer：Section 2.3
+
+### 33. P2 S1
+
+- order：33
+
+- section：Section 2.3
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：Archer和Ghasemzadeh提出了五阶段PPS流程，涵盖预筛选、个体分析、筛选、最优组合选择和组合调整。
+
+- rhetorical_function_cn：描述标准流程。
+
+- depends_on_cn：无
+
+- sets_up_cn：将模型定位在最优组合选择阶段。
+
+- evidence_pointer：Section 2.3
+
+### 34. P3 S1
+
+- order：34
+
+- section：Section 2.3
+
+- locator：P3 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：因PPS流程被视为先进，我们用其定位决策模型在最优组合选择阶段并定义所需输入。
+
+- rhetorical_function_cn：将知识转为需求。
+
+- depends_on_cn：依赖PPS流程
+
+- sets_up_cn：为设计规格提供结构化输入。
+
+- evidence_pointer：Section 2.3
+
+### 35. P1 S1
+
+- order：35
+
+- section：Section 3
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用DSR范式，遵循六阶段参考过程。
+
+- rhetorical_function_cn：说明方法论。
+
+- depends_on_cn：无
+
+- sets_up_cn：确立文章骨架。
+
+- evidence_pointer：Section 3
+
+### 36. P4 S1
+
+- order：36
+
+- section：Section 3
+
+- locator：P4 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：设计阶段是一个搜索过程，使用规范分析建模和多准则决策分析。
+
+- rhetorical_function_cn：进一步解释方法。
+
+- depends_on_cn：依赖DSR范式
+
+- sets_up_cn：为设计章节铺垫。
+
+- evidence_pointer：Section 3
+
+### 37. P5 S1
+
+- order：37
+
+- section：Section 3
+
+- locator：P5 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：设计搜索采用价值导向流程决策、PPS和客户满意度作为justificatory knowledge。
+
+- rhetorical_function_cn：强调知识来源。
+
+- depends_on_cn：依赖理论背景
+
+- sets_up_cn：说明设计不是凭空而来。
+
+- evidence_pointer：Section 3
+
+### 38. P6 S1
+
+- order：38
+
+- section：Section 3
+
+- locator：P6 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：搜索过程与评估紧密交织，例如用原型实验数学规格并获得专家反馈。
+
+- rhetorical_function_cn：说明迭代性质。
+
+- depends_on_cn：依赖方法描述
+
+- sets_up_cn：为评估章节合理化。
+
+- evidence_pointer：Section 3
+
+### 39. P7 S1
+
+- order：39
+
+- section：Section 3
+
+- locator：P7 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用Sonnenberg和vom Brocke的评估框架，包含EVAL1-4四个活动。
+
+- rhetorical_function_cn：介绍评估框架。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续评价小节设定结构。
+
+- evidence_pointer：Section 3
+
+### 40. P1 S1
+
+- order：40
+
+- section：Section 4.1
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：许多公司面临数字化环境中的波动、不确定、复杂和模糊，客户期望快速变化。
+
+- rhetorical_function_cn：描述问题情境。
+
+- depends_on_cn：依赖引言
+
+- sets_up_cn：解释为什么需要新模型。
+
+- evidence_pointer：Section 4.1
+
+### 41. P1 S5
+
+- order：41
+
+- section：Section 4.1
+
+- locator：P1 S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：存在两个权衡：效率与客户满意度，以及长期增长与短期需求满足。
+
+- rhetorical_function_cn：刻画决策困境。
+
+- depends_on_cn：依赖问题情境
+
+- sets_up_cn：定义模型要解决的核心矛盾。
+
+- evidence_pointer：Section 4.1
+
+### 42. P2 S1
+
+- order：42
+
+- section：Section 4.1
+
+- locator：P2 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型旨在帮助流程分析师确定对整体企业价值贡献最高的流程改进项目组合，并专门考虑CC。
+
+- rhetorical_function_cn：宣布模型功能。
+
+- depends_on_cn：依赖问题情境
+
+- sets_up_cn：为DOs和设计规格定调。
+
+- evidence_pointer：Section 4.1
+
+### 43. P1 S1
+
+- order：43
+
+- section：Section 4.2
+
+- locator：P1 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：从问题情境推导两个设计目标DO.1和DO.2。
+
+- rhetorical_function_cn：说明将问题转为需求。
+
+- depends_on_cn：依赖问题情境
+
+- sets_up_cn：为后续模型结构提供标尺。
+
+- evidence_pointer：Section 4.2
+
+### 44. DO.1
+
+- order：44
+
+- section：Section 4.2
+
+- locator：DO.1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：DO.1要求项目应在组合环境中评估，考虑周期性绩效、项目交互和约束，并用长期企业价值衡量。
+
+- rhetorical_function_cn：陈述第一个需求。
+
+- depends_on_cn：依赖PPS和价值导向BPM
+
+- sets_up_cn：驱动目标函数和约束建模。
+
+- evidence_pointer：Section 4.2
+
+### 45. DO.2
+
+- order：45
+
+- section：Section 4.2
+
+- locator：DO.2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：DO.2要求流程绩效是多维的，包括效率和客户维度，并考虑特征类型和时间变化。
+
+- rhetorical_function_cn：陈述第二个需求。
+
+- depends_on_cn：依赖流程绩效和Kano理论
+
+- sets_up_cn：驱动满意度建模。
+
+- evidence_pointer：Section 4.2
+
+### 46. Eq.(1)
+
+- order：46
+
+- section：Section 4.3
+
+- locator：Eq.(1)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型通过风险调整NPV比较所有可行项目组合，选择价值最大的组合。
+
+- rhetorical_function_cn：设计目标函数。
+
+- depends_on_cn：依赖DO.1
+
+- sets_up_cn：为后续满意度和项目效应嵌入框架。
+
+- evidence_pointer：Section 4.3
+
+### 47. P1 S1
+
+- order：47
+
+- section：Section 4.4
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：基于Kano思想，模型引入特征类型、履行程度、权重、切换点和衰减来刻画满意度。
+
+- rhetorical_function_cn：将Kano思想转成模型元素。
+
+- depends_on_cn：依赖DO.2
+
+- sets_up_cn：为满意度变换函数提供输入。
+
+- evidence_pointer：Section 4.4
+
+### 48. P5 S1
+
+- order：48
+
+- section：Section 4.4
+
+- locator：P5 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：Kano模型给出特征类型与履行程度关系的一般思想，但缺乏公认数学操作化。
+
+- rhetorical_function_cn：指出Kano建模的选择空间。
+
+- depends_on_cn：依赖Kano理论
+
+- sets_up_cn：为表1中的函数特征清单做铺垫。
+
+- evidence_pointer：Section 4.4
+
+### 49. Table 1
+
+- order：49
+
+- section：Section 4.4
+
+- locator：Table 1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：模型列出变换函数必须具备和可选的特性，以便公司自定义函数。
+
+- rhetorical_function_cn：将机制转成函数设计约束。
+
+- depends_on_cn：依赖Kano理论
+
+- sets_up_cn：为保险案例选择函数提供参考。
+
+- evidence_pointer：Table 1
+
+### 50. Eq.(5)
+
+- order：50
+
+- section：Section 4.4
+
+- locator：Eq.(5)
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：收入以线性关系依赖满意度变化，根据初始和最大收入计算。
+
+- rhetorical_function_cn：将满意度-收入关系形式化。
+
+- depends_on_cn：依赖文献中的线性关系
+
+- sets_up_cn：使满意度可纳入NPV。
+
+- evidence_pointer：Eq.(5)
+
+### 51. P1 S1
+
+- order：51
+
+- section：Section 4.5
+
+- locator：P1 S1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：模型区分CC项目和效率项目，项目效应可作用于特定特征/子流程，并影响成本和履行度。
+
+- rhetorical_function_cn：描述项目类型和效应结构。
+
+- depends_on_cn：依赖DO.1和DO.2
+
+- sets_up_cn：为案例项目分类和参数输入提供框架。
+
+- evidence_pointer：Section 4.5
+
+### 52. P1 S1
+
+- order：52
+
+- section：Section 5.1
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为验证设计规格的现实保真度和可理解性，进行半结构化专家访谈。
+
+- rhetorical_function_cn：启动EVAL2。
+
+- depends_on_cn：依赖评估框架
+
+- sets_up_cn：为模型修正提供证据。
+
+- evidence_pointer：Section 5.1
+
+### 53. DO.1 P1
+
+- order：53
+
+- section：Section 5.1
+
+- locator：DO.1 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：专家认可基于NPV比较组合，但指出未涵盖所有PPS细节，可用workaround处理。
+
+- rhetorical_function_cn：报告专家反馈。
+
+- depends_on_cn：依赖访谈
+
+- sets_up_cn：表明模型与行业实践兼容但需简化。
+
+- evidence_pointer：Section 5.1
+
+### 54. DO.2 P1
+
+- order：54
+
+- section：Section 5.1
+
+- locator：DO.2 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：专家支持Kano模型思路，要求特征级切换点，并指出数据收集负担，促使模型支持聚合参数。
+
+- rhetorical_function_cn：报告第二个反馈。
+
+- depends_on_cn：依赖访谈
+
+- sets_up_cn：驱动模型修改。
+
+- evidence_pointer：Section 5.1
+
+### 55. P1 S1
+
+- order：55
+
+- section：Section 5.2.1
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为验证自然主义环境中的适用性和有用性，在德国保险公司应用原型。
+
+- rhetorical_function_cn：开始EVAL4。
+
+- depends_on_cn：依赖原型和评估框架
+
+- sets_up_cn：展示一个真实决策案例。
+
+- evidence_pointer：Section 5.2.1
+
+### 56. P1 S3
+
+- order：56
+
+- section：Section 5.2.1
+
+- locator：P1 S3
+
+- move_code：RESULT
+
+- paraphrase_cn：INSURANCE是大型保险公司，CC是流程设计关键，案例为真实的保险咨询流程决策。
+
+- rhetorical_function_cn：描述案例设置。
+
+- depends_on_cn：依赖公司选择
+
+- sets_up_cn：为案例结果提供背景。
+
+- evidence_pointer：Section 5.2.1
+
+### 57. P2 S1
+
+- order：57
+
+- section：Section 5.2.1
+
+- locator：P2 S1
+
+- move_code：OTHER
+
+- paraphrase_cn：流程包含五个子流程和七个客户相关特征，包括一个基本、五个绩效和一个兴奋特征。
+
+- rhetorical_function_cn：描述案例输入数据。
+
+- depends_on_cn：依赖公司数据
+
+- sets_up_cn：为特征建模提供实例。
+
+- evidence_pointer：Section 5.2.1
+
+### 58. P1 S1
+
+- order：58
+
+- section：Section 5.2.2
+
+- locator：P1 S1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：与关键信息人一起将六个候选项目分类为CC或效率项目。
+
+- rhetorical_function_cn：定义项目输入。
+
+- depends_on_cn：依赖项目列表
+
+- sets_up_cn：展示项目组合决策细节。
+
+- evidence_pointer：Section 5.2.2
+
+### 59. P1 S2
+
+- order：59
+
+- section：Section 5.2.3
+
+- locator：P1 S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：按保险公司政策，项目只能在前四个期间实施，每期限两个项目。
+
+- rhetorical_function_cn：说明约束设置。
+
+- depends_on_cn：依赖公司政策
+
+- sets_up_cn：影响组合搜索空间。
+
+- evidence_pointer：Section 5.2.3
+
+### 60. P2 S1
+
+- order：60
+
+- section：Section 5.2.3
+
+- locator：P2 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：最优组合实现了全部项目，NPV为31.8 MEUR，而仅强制和最差组合均为负。
+
+- rhetorical_function_cn：报告核心结果。
+
+- depends_on_cn：依赖组合优化
+
+- sets_up_cn：表明模型能选出高价值组合。
+
+- evidence_pointer：Table 8
+
+### 61. P3 S1
+
+- order：61
+
+- section：Section 5.2.3
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：专家认为结果可理解，且最优组合符合保险公司自身考虑。
+
+- rhetorical_function_cn：报告用户反馈。
+
+- depends_on_cn：依赖结果
+
+- sets_up_cn：支持有用性主张。
+
+- evidence_pointer：Section 5.2.3
+
+### 62. P1 S2
+
+- order：62
+
+- section：Section 5.2.4
+
+- locator：P1 S2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：对初始履行值进行步长0.01、范围±0.5的稳健性分析。
+
+- rhetorical_function_cn：设计稳健性检验。
+
+- depends_on_cn：依赖初始值估计不确定性
+
+- sets_up_cn：揭示模型稳定性。
+
+- evidence_pointer：Section 5.2.4
+
+### 63. P3 S1
+
+- order：63
+
+- section：Section 5.2.4
+
+- locator：P3 S1
+
+- move_code：RESULT
+
+- paraphrase_cn：初始履行值小幅降低不改变最优组合，但降低超过-0.2时组合切换为成本驱动，NPV大幅下降。
+
+- rhetorical_function_cn：报告稳健性结果。
+
+- depends_on_cn：依赖稳健性分析
+
+- sets_up_cn：揭示基本特征作用机制。
+
+- evidence_pointer：Fig. 5
+
+### 64. P4 S2
+
+- order：64
+
+- section：Section 5.2.4
+
+- locator：P4 S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：当基本特征明显不足时，不满意无法由绩效或兴奋特征弥补，因此只有成本削减能改善NPV。
+
+- rhetorical_function_cn：解释切换机制。
+
+- depends_on_cn：依赖Kano理论
+
+- sets_up_cn：为边界条件提供理论解释。
+
+- evidence_pointer：Section 5.2.4
+
+### 65. P5 S1
+
+- order：65
+
+- section：Section 5.2.4
+
+- locator：P5 S1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：模型特别适合客户满意度为价值驱动力的流程，否则无需如此详细建模满意度。
+
+- rhetorical_function_cn：总结边界。
+
+- depends_on_cn：依赖稳健性发现
+
+- sets_up_cn：限定模型适用范围。
+
+- evidence_pointer：Section 5.2.4
+
+### 66. S1
+
+- order：66
+
+- section：Section 5.3
+
+- locator：S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：通过专家访谈、原型和真实应用的综合评价，模型被认为可理解、现实保真、可应用且结果有用。
+
+- rhetorical_function_cn：综合评价结论。
+
+- depends_on_cn：依赖前面评价
+
+- sets_up_cn：支撑主要贡献声明。
+
+- evidence_pointer：Section 5.3
+
+### 67. S1
+
+- order：67
+
+- section：Section 5.4
+
+- locator：S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：基于案例经验提出应用建议：使用原型、与关键信息人合作、多工作坊、优先二手数据、重复应用。
+
+- rhetorical_function_cn：提供可操作知识。
+
+- depends_on_cn：依赖案例应用经验
+
+- sets_up_cn：增强模型的可迁移性。
+
+- evidence_pointer：Section 5.4
+
+### 68. P1 S1
+
+- order：68
+
+- section：Conclusion
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：客户中心化已成为企业成功因素。
+
+- rhetorical_function_cn：重述背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：与引言呼应。
+
+- evidence_pointer：Conclusion P1
+
+### 69. P1 S2
+
+- order：69
+
+- section：Conclusion
+
+- locator：P1 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：提出了一个经济决策模型，帮助流程分析师选择和排程项目组合。
+
+- rhetorical_function_cn：总结制品。
+
+- depends_on_cn：依赖全文
+
+- sets_up_cn：将讨论带回贡献。
+
+- evidence_pointer：Conclusion P1
+
+### 70. P2 S1
+
+- order：70
+
+- section：Conclusion
+
+- locator：P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：模型通过exaptation扩展处方知识，首次将CC纳入流程决策，首次将特征类型切换与PPS结合。
+
+- rhetorical_function_cn：声明理论贡献。
+
+- depends_on_cn：依赖设计搜索和评价
+
+- sets_up_cn：确立创新点。
+
+- evidence_pointer：Conclusion P2
+
+### 71. P2 S4
+
+- order：71
+
+- section：Conclusion
+
+- locator：P2 S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：模型和评估表明Kano模型思想不仅能支持产品设计，也能支持流程设计，且模型不绑定于Kano。
+
+- rhetorical_function_cn：扩展贡献范围。
+
+- depends_on_cn：依赖设计搜索
+
+- sets_up_cn：为未来扩展留空间。
+
+- evidence_pointer：Conclusion P2
+
+### 72. P3 S1
+
+- order：72
+
+- section：Conclusion
+
+- locator：P3 S1
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：模型依赖简化假设，如确定参数和风险调整利率，未来可探索随机建模。
+
+- rhetorical_function_cn：承认局限。
+
+- depends_on_cn：依赖模型设计
+
+- sets_up_cn：为未来研究铺路。
+
+- evidence_pointer：Conclusion P3
+
+### 73. P3 S3
+
+- order：73
+
+- section：Conclusion
+
+- locator：P3 S3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：模型只关注客户-公司互动带来的满意度，不包含产品特征部分，未来可扩展。
+
+- rhetorical_function_cn：指出范围局限。
+
+- depends_on_cn：依赖模型焦点
+
+- sets_up_cn：为扩展提供方向。
+
+- evidence_pointer：Conclusion P3
+
+### 74. P3 S4
+
+- order：74
+
+- section：Conclusion
+
+- locator：P3 S4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：模型限于单一核心流程，未来应扩展到多过程。
+
+- rhetorical_function_cn：进一步边界。
+
+- depends_on_cn：依赖模型设定
+
+- sets_up_cn：为未来研究提供方向。
+
+- evidence_pointer：Conclusion P3
+
+### 75. P3 S5
+
+- order：75
+
+- section：Conclusion
+
+- locator：P3 S5
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：评价仅一个案例，应用效率未重点评估，未来需要更多案例和先进原型。
+
+- rhetorical_function_cn：指出评价局限。
+
+- depends_on_cn：依赖评价历史
+
+- sets_up_cn：为研究计划提供建议。
+
+- evidence_pointer：Conclusion P3
+
+## 写作技术
+
+- gap_construction_cn：通过指出现有BPM方法主要关注效率而忽视CC，并引用CPM研究尚处萌芽，构建具体缺口：缺少客户中心化的流程改进项目优先级排序方法。
+
+- signposting_cn：引言和每节开头明确预告：例如“Following the DSR reference process...”，设计中先给DOs再给规格，评估中按EVAL框架组织。
+
+- transition_logic_cn：段落/Study之间通过“To address this problem setting...”“Before implementing...”等连接，从问题到DOs到模型到评价再到边界。
+
+- claim_evidence_rhythm_cn：主张（如模型可用）后紧跟证据（案例NPV和专家反馈）；理论命题后紧跟数学公式和表格；评价后进入边界条件。
+
+- benchmark_narrative_cn：在案例中设置最差和仅强制组合作为对比，使NPV差异可视化；稳健性分析用参数扫描建立“何时改变最优解”的叙事。
+
+- theory_return_cn：在结论中通过exaptation概念将模型放回理论脉络，说明扩展了哪些知识，从而不是一次性性能结果。
+
+- contribution_positioning_cn：将贡献定位为处方知识和理论扩展而非仅技术改进，并强调“first”和Kano模型的可迁移性。
+
+- novelty_protection_cn：通过强调与PPS的首次结合、提供公开原型、给出边界条件和应用建议，防止贡献被当作一次性案例。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：建立背景、强调实践重要性、指出现有方法只关注效率、明确研究问题。
+
+- research_job_cn：确定问题设置和领域文献，识别真实决策困境。
+
+- required_evidence_cn：实践现象和文献证据显示缺少客户中心化优先级排序。
+
+- transition_to_next_cn：引出理论/知识基础作为解决依据。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：综述BPM、价值导向、PPS、Kano模型，挑出与问题相关的知识。
+
+- research_job_cn：进行文献搜索和选择justificatory knowledge。
+
+- required_evidence_cn：理论命题和机制能解释为什么需要这些知识。
+
+- transition_to_next_cn：说明如何用这些知识指导设计。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：提出DOs，将知识转成需求。
+
+- research_job_cn：定义DOs并论证其文献支持。
+
+- required_evidence_cn：每条DOs有扎实文献基础并最好经专家确认。
+
+- transition_to_next_cn：进入设计规格。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：清晰描述模型结构、数学公式、参数和设计选择。
+
+- research_job_cn：进行规范性建模、多准则决策分析、原型实验。
+
+- required_evidence_cn：模型能被实例化并处理简单测试。
+
+- transition_to_next_cn：进入评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：按DSR评价框架分阶段报告，展示专家验证、原型测试、现场案例、稳健性。
+
+- research_job_cn：实施评价，收集适用性、有用性、稳健性证据。
+
+- required_evidence_cn：能证明模型在真实情境中可用并产生合理结果。
+
+- transition_to_next_cn：提炼边界和推荐。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：总结贡献、理论含义、局限与未来研究。
+
+- research_job_cn：反思贡献、边界条件，定位创新点。
+
+- required_evidence_cn：明确何时适用、何时不适用以及未来扩展方向。
+
+- transition_to_next_cn：结束论文。
+
+### most_transferable_moves_cn
+
+1. 先将大问题转化为两个DO再设计。
+
+2. 明确把模型限定在PPS最优组合选择阶段。
+
+3. 用案例中的基准组合（最优/最差/强制）展示模型价值。
+
+4. 用稳健性分析探索边界条件。
+
+5. 用关键信息人和二手数据降低数据收集负担。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实行业案例需要长期现场和关键信息人配合。
+
+2. 专家访谈需要招募覆盖多个行业的资深人员。
+
+3. 软件原型开发需要额外技术投入。
+
+4. 输入数据（如履行度、项目效应）依赖多个专家的主观估计。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“我们提出一个决策模型”而无真实应用和稳健性分析。
+
+2. 不能没有理论支撑地列出DOs，否则设计显得任意。
+
+3. 不能缺少对估计误差的稳健性分析却声称适用性。
+
+4. 不能忽略边界条件，将模型推广到所有流程。
+
+- single_best_description_of_the_routine_cn：先以实践问题定位设计目标，以文献知识作为设计基础，用多阶段DSR评价（专家+原型+案例+稳健性）把模型从“提出”推进到“可用且边界清晰”。
+
+## 分析边界
+
+文章中的图片（Fig.1-5）未提供详细OCR，但文本足够支撑结构判断；附录和补充材料未包含。

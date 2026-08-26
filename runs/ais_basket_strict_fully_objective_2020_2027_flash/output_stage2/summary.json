@@ -1,0 +1,52 @@
+{
+  "updated_at": "2026-08-07T08:58:53.085853+00:00",
+  "analysis_version": "ais-basket-strict-fully-objective-2020-2027-flash-v2",
+  "stage": "stage2",
+  "model": "deepseek-v4-flash",
+  "max_concurrency": 100,
+  "prompt_fingerprint": "8c10a96511cfc2351087a2bc051cb46aa52cd16833f529032c600521cc22eca9",
+  "eligible_inputs": 232,
+  "completed": 232,
+  "pending": 0,
+  "match_count": 198,
+  "nonmatch_count": 34,
+  "objective_status_counts": {
+    "benchmark_objective_with_fixed_labels": 84,
+    "fully_objective": 118,
+    "mixed_objective_subjective": 22,
+    "subjective_or_self_report": 2,
+    "unclear": 6
+  },
+  "core_role_counts": {
+    "dominant": 38,
+    "exclusive": 168,
+    "mixed": 20,
+    "none": 5,
+    "secondary": 1
+  },
+  "match_year_counts": {
+    "2020": 49,
+    "2021": 44,
+    "2022": 30,
+    "2023": 25,
+    "2024": 24,
+    "2025": 22,
+    "2026": 4
+  },
+  "match_journal_counts": {
+    "Decision Support Systems": 74,
+    "European Journal of Information Systems": 2,
+    "Information & Management": 12,
+    "Information Systems Research": 52,
+    "Journal of Management Information Systems": 13,
+    "Journal of the Association for Information Systems": 11,
+    "MIS Quarterly": 34
+  },
+  "usage": {
+    "prompt_tokens": 6859102,
+    "completion_tokens": 1297188,
+    "total_tokens": 8156290,
+    "prompt_cache_hit_tokens": 447360,
+    "prompt_cache_miss_tokens": 6411742
+  }
+}

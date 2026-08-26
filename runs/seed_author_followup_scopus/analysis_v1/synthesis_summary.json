@@ -1,0 +1,45 @@
+{
+  "records": 1209,
+  "citation_matching_primary_rule": "Exact EID intersection with the previously retrieved 807-record Scopus REFEID union; DOI fallback only where EID was unavailable.",
+  "confirmed_cites_at_least_one_of_20_seeds": 48,
+  "citation_match_methods": {
+    "eid": 47,
+    "doi_fallback": 1
+  },
+  "important_citation_limit": "The union query confirms at least one seed citation but does not identify which seed unless a seed-by-citing-paper edge retrieval is performed.",
+  "trajectory_label_counts": {
+    "information_systems_or_technology_adjacent": 922,
+    "software_development_process_or_team": 85,
+    "unrelated_or_unclear": 135,
+    "direct_human_programming": 41,
+    "programming_artifact_or_method": 25,
+    "direct_human_ai_programming": 1
+  },
+  "strict_human_programming_records": 42,
+  "strict_human_programming_confirmed_seed_citers": 18,
+  "broader_software_lineage_records": 152,
+  "direct_human_ai_programming_records": 1,
+  "modern_ai_assisted_programming_true": 1,
+  "screening_sources": {
+    "deepseek-v4-flash": 1198,
+    "manual_override": 11
+  },
+  "malformed_deepseek_lines": [],
+  "malformed_manual_override_lines": [],
+  "unknown_decision_keys": [],
+  "normalized_title_duplicate_clusters": 25,
+  "records_in_normalized_title_duplicate_clusters": 70,
+  "confirmed_seed_citers_by_trajectory_label": {
+    "direct_human_programming": 18,
+    "information_systems_or_technology_adjacent": 27,
+    "unrelated_or_unclear": 1,
+    "software_development_process_or_team": 2
+  },
+  "deepseek_usage_from_last_summary": {
+    "prompt_tokens": 2211920,
+    "completion_tokens": 1140915,
+    "total_tokens": 3352835,
+    "prompt_cache_hit_tokens": 1699584,
+    "prompt_cache_miss_tokens": 512336
+  }
+}

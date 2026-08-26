@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105010321022"
+title: "Hints Help Finding and Fixing Bugs Differently in Python and Text-Based Program Representations"
+authors: "Rawal R.; Padurean V.-A.; Apel S.; Singla A.; Toneva M."
+year: "2025"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1109/icse55347.2025.00192"
+---
+# Scopus title-abstract-keyword metadata
+Title: Hints Help Finding and Fixing Bugs Differently in Python and Text-Based Program Representations
+Abstract: With the recent advances in AI programming assistants such as GitHub Copilot, programming is not limited to classical programming languages anymore-programming tasks can also be expressed and solved by end-users in natural text. Despite the availability of this new programming modality, users still face difficulties with algorithmic understanding and program debugging. One promising approach to support end-users is to provide hints to help them find and fix bugs while forming and improving their programming capabilities. While it is plausible that hints can help, it is unclear which type of hint is helpful and how this depends on program representations (classic source code or a textual representation) and the user's capability of understanding the algorithmic task. To understand the role of hints in this space, we conduct a large-scale crowd-sourced study involving 753 participants investigating the effect of three types of hints (test cases, conceptual, and detailed), across two program representations (Python and text-based), and two groups of users (with clear understanding or confusion about the algorithmic task). We find that the program representation (Python vs. text) has a significant influence on the users' accuracy at finding and fixing bugs. Surprisingly, users are more accurate at finding and fixing bugs when they see the program in natural text. Hints are generally helpful in improving accuracy, but different hints help differently depending on the program representation and the user's understanding of the algorithmic task. These findings have implications for designing next-generation programming tools that provide personalized support to users, for example, by adapting the programming modality and providing hints with respect to the user's skill level and understanding.  © 2025 IEEE.
+Author keywords: crowd-sourced study; debugging; hints; program comprehension; programming modalities
+Index keywords: High level languages; Python; Software testing; Algorithmics; Classical programming; Crowd-sourced study; Debugging; End-users; Hint; Program comprehension; Program representations; Programming modality; Programming tasks; Program debugging
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2025
+EID: 2-s2.0-105010321022
+DOI: 10.1109/icse55347.2025.00192
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

@@ -1,0 +1,23 @@
+{
+  "updated_at": "2026-08-05T08:45:54.198356+00:00",
+  "analysis_version": "ais-basket-objective-outcome-screening-77-v1",
+  "model": "deepseek-v4-flash",
+  "prompt_fingerprint": "84e365286dccd93b24b9c9f8e5e17ce8d3349c58c1e2d23478df84252d8f6825",
+  "input_candidates": 77,
+  "completed": 77,
+  "pending": 0,
+  "objective_outcome_match_count": 66,
+  "objective_outcome_nonmatch_count": 11,
+  "route_true_counts": {
+    "objective_design_target": 52,
+    "objectively_measured_outcome": 63,
+    "both_routes": 49
+  },
+  "usage": {
+    "prompt_tokens": 2190428,
+    "completion_tokens": 171606,
+    "total_tokens": 2362034,
+    "prompt_cache_hit_tokens": 31104,
+    "prompt_cache_miss_tokens": 2159324
+  }
+}

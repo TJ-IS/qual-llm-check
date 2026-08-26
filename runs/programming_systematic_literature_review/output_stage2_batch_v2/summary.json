@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-07-26T11:02:20.364889+00:00",
+  "analysis_version": "programming-slr-title-abstract-batch-confirm-v2-lean",
+  "prompt_fingerprint": "49a04364038fa0cc2624ed27923636de984edba887f8a410ccf7274aabf3ec43",
+  "input_records": 3036,
+  "completed": 3036,
+  "pending": 0,
+  "screening_label_counts": {
+    "exclude": 765,
+    "include_candidate": 2136,
+    "uncertain": 135
+  },
+  "candidate_centrality_counts": {
+    "programming_core": 2181,
+    "unclear": 83,
+    "programming_as_context": 7
+  },
+  "candidate_actor_counts": {
+    "agent_only": 497,
+    "unclear": 135,
+    "human_ai": 217,
+    "human_only": 1420,
+    "not_applicable": 2
+  },
+  "candidate_study_type_counts": {
+    "unclear": 2251,
+    "empirical_human": 11,
+    "empirical_artifact_or_agent": 4,
+    "tool_design_and_evaluation": 5
+  },
+  "usage": {
+    "prompt_tokens": 1718724,
+    "completion_tokens": 1075476,
+    "total_tokens": 2795556
+  }
+}

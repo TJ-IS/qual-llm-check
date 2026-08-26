@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85196830747"
+title: "Breaking the Flow: A Study of Interruptions During Software Engineering Activities"
+authors: "Ma Y.; Huang Y.; Leach K."
+year: "2024"
+journal: "Proceedings - International Conference on Software Engineering"
+doi: "10.1145/3597503.3639079"
+---
+# Scopus title-abstract-keyword metadata
+Title: Breaking the Flow: A Study of Interruptions During Software Engineering Activities
+Abstract: In software engineering, interruptions during tasks can have significant implications for productivity and well-being. While previous studies have investigated the effect of interruptions on productivity, to the best of our knowledge, no prior work has yet distinguished the effect of different types of interruptions on software engineering activities. This study explores the impact of interruptions on software engineering tasks, analyzing in-person and on-screen interruptions with different levels of urgency and dominance. Participants completed code writing, code comprehension, and code review tasks while experiencing interruptions. We collect physiological data using the Empatica EmbracePlus wristband and self-perceived evaluations through surveys. Results show that on-screen interruptions with high dominance of requester significantly increase time spent on code comprehension. In-person and on-screen interruptions combined significantly affect the time spent on code review, with varied effects based on specific interruption combinations. Both interruption type and task significantly influence stress measures, with code comprehension and review tasks associated with lower stress measures compared to code writing. Interestingly, in-person interruptions present a positive impact on physiological measures, indicating reduced stress measures. However, participants' self-perceived stress scores do not align with physiological data, with higher stress reported during in-person interruptions despite lower physiological stress measures. These findings shed light on and emphasize the potential importance of considering the complex relationship between interruptions, objective measures, and subjective experiences in software development. We discuss insights that we hope can inform interruption management and implications on stress among software engineers. (ChatGPT was used to revise and shorten paragraphs in this manuscript.)  © 2024 ACM.
+Author keywords: Affective States; Interruptions; Productivity
+Index keywords: Physiology; Affective state; Breakings; Code comprehension; Code review; Code-writing; Engineering activities; Interruption; Physiological data; Time-spent; Well being; Software design
+Document type: Conference paper
+Conference: 
+Source title: Proceedings - International Conference on Software Engineering
+Year: 2024
+EID: 2-s2.0-85196830747
+DOI: 10.1145/3597503.3639079
+Retrieval channels: authoritative_outlet_search
+Local full-text files: 

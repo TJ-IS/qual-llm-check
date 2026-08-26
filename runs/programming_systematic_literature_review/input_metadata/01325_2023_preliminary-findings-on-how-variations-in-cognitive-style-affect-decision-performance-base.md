@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85192511535"
+title: "Preliminary Findings on How Variations in Cognitive Style Affect Decision Performance Based on Data Visualisations Full research paper"
+authors: "Dona R.S.P.W.A.A.; Boell S.; Chin W."
+year: "2023"
+journal: "International Conference on Information Systems, ICIS 2023: \"Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies\""
+doi: ""
+---
+# Scopus title-abstract-keyword metadata
+Title: Preliminary Findings on How Variations in Cognitive Style Affect Decision Performance Based on Data Visualisations Full research paper
+Abstract: Organisations are battling with optimal ways to make data-driven decisions using Business Intelligence (BI). Information Systems (IS) has developed an enduring interest to uncover success and failure factors of BI. One under researched area in the BI process is the presentation stage where BI output, in the form of visualisations, is presented to individuals to assist with decision-making. While IS researchers have contributed to this area by observing how task characteristics influence the presentation stage, only a few empirical studies observe the influence of user characteristics. We report the influence of user characteristics, based on the analytic-intuitive cognitive style, on visualisation format preference and decision performance. Our results indicate that decision performance (i.e., decision confidence and perceived decision speed) is affected by cognitive style matching visualisation format. While visualisation format preference was initially unaffected by cognitive style, removing poor items from the Cognitive Style Index (CSI) led to significant results. Copyright © 2023 Perera, Boell & Chin.
+Author keywords: Business Intelligence; Cognitive Style; Decision Confidence; Perceived Decision Speed; Visualisations
+Index keywords: Decision making; Information analysis; Business-intelligence; Cognitive styles; Data driven decision; Decision confidence; Decision performance; Decision speed; Perceived decision speed; Performance based; Research papers; User characteristics; Visualization
+Document type: Conference paper
+Conference: 44th International Conference on Information Systems: Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies, ICIS 2023
+Source title: International Conference on Information Systems, ICIS 2023: "Rising like a Phoenix: Emerging from the Pandemic and Reshaping Human Endeavors with Digital Technologies"
+Year: 2023
+EID: 2-s2.0-85192511535
+DOI: 
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

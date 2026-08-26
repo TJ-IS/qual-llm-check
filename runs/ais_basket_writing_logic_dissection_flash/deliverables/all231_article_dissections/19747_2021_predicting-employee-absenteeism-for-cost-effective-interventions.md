@@ -1,0 +1,1919 @@
+# Predicting employee absenteeism for cost effective interventions
+
+- 作者：Natalie Lawrance; George Petrides; Marie-Anne Guerry
+- 年份 / 期刊：2021 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113539
+- 源文件：19747_2021_predicting-employee-absenteeism-for-cost-effective-interventions.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.86
+
+## 文章级论证概况
+
+- 核心问题：如何构建一个能够利用HR和薪酬数据、以月度预测间隔识别病假风险员工、并通过成本敏感学习使福利干预比不加区分地面对全体员工更划算的决策支持系统。
+
+- 制品与设计：制品是面向比利时HR与健康服务商的缺勤预测决策支持框架，核心设计包括：将员工病假预测构造成具有非对称误分类成本的二分类问题；基于工资、缺勤时数、干预费用/时长和干预效果参数推导误分类成本矩阵；提出CIS和ROI两个成本导向评价指标，并以不干预/全员干预为基准；在成本未知时用balanced accuracy作为替代路线。
+
+- 客观结果：在14个月预测期和9种干预情景下，总能找到CIS>0且ROI>0的成本敏感模型；按CIS排序的最优模型在大多数期间采用DMECC和回归预测t_s；最便宜干预Case 2的边际改善最小；按BACC选择的成本不敏感模型在已知成本下几乎不产生正CIS，始终劣于成本敏感模型。
+
+- 核心贡献：作者声称主要贡献是提出了可泛化的员工病假误分类成本矩阵、业务友好的成本评价指标以及算法无关的评价框架，并在真实HR/薪酬数据上展示成本敏感学习优于成本不敏感替代方案；同时指出干预个体效果参数缺失是未来关键方向。
+
+- 整篇论证链：作者从缺勤造成巨大经济成本和干预成本有限出发，将决策支持问题收缩为用现有HR/薪酬数据识别少数高风险员工并定向干预。文献综述显示已有缺勤预测多关注解释而非预测、多使用健康类问卷、预测周期长且忽视非对称误分类成本。文章用成本敏感学习的正式框架把干预经济学翻译成误分类成本矩阵，结合比利时白领法定病假规则给出矩阵具体形式；在真实月度前瞻性数据上用树集成、采样、校准和DMECC/阈值化等组合进行大规模离线实验，用CIS/ROI相对不干预和全员干预两个基准判断成本收益。结果显示成本敏感模型在全部情景中有正收益，且记录级成本优于类别级成本；当干预效果参数缺失时，BACC模型在成本已知下不划算，因此应优先估计tilde_t_s。讨论把结果带回成本敏感理论中的合理条件，并划定依赖干预能提升健康、效果不跨期、个体响应同质等边界。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者构建了成本矩阵、成本评价指标和算法无关模型选择框架这一决策支持制品，并在真实企业数据上进行离线评估；贡献不是单一算法或benchmark，而是设计知识、评价方法和可部署框架，符合设计科学研究范式。
+
+- 主导写作弧线判定：文章从缺勤干预成本问题出发，以成本敏感学习理论为知识基础，推导成本矩阵设计，通过大规模实验检验，最终回到Elkan合理条件和干预效果参数缺失的理论/实践边界；整体呈现问题—理论—设计—检验—返回理论/边界的弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：先构造领域成本矩阵，再建立月度前瞻性数据管道，随后设计算法网格与成本/无成本评价框架，再分别执行成本敏感实验和成本未知BACC实验，最后通过对比得出结论并提出未来研究。前一阶段为后一阶段提供成本定义、数据平台、评价指标或决策阈值；后一阶段利用前一阶段的产物检验替代路线或边界。
+
+### studies_or_phases
+
+#### 1. 成本矩阵概念化与比利时适配
+
+- order：1
+
+- name_cn：成本矩阵概念化与比利时适配
+
+- question_cn：如何把缺勤和干预的经济后果转译为可计算、可解释的误分类成本？
+
+- inputs_and_setting_cn：一般工资模型、比利时白领法定病假薪酬规则、干预价格C与参与时长t_i、干预效果参数tilde_t_s。
+
+- designed_or_compared_object_cn：缺勤/干预四类决策（TP/FN/FP/TN）对应的小时工资成本矩阵；比利时r=1条件下的简化矩阵Eq.(1)。
+
+- baseline_control_or_counterfactual_cn：不干预和全员干预两个朴素策略作为后续基准；Elkan合理条件作为设计约束。
+
+##### objective_metrics
+
+1. C_FP
+
+2. C_FN
+
+3. C_TP
+
+4. C_TN
+
+5. 合理条件( C'_FN >= 0 )
+
+- analysis_method_cn：基于工资与缺勤时数的数学推导，结合比利时立法参数化简。
+
+- main_result_cn：得到可泛化的成本矩阵；在比利时白领场景r=1；当干预参与时间超过预期缺勤减少时C'_FN为负，违反Elkan合理条件。
+
+- argumentative_role_cn：这是全文的核心制品，将业务决策问题转化为可优化的成本目标。
+
+- remaining_uncertainty_cn：干预效果参数tilde_t_s先验未知，文献中没有可参考数值。
+
+- link_to_next_phase_cn：由于成本矩阵参数不完整，作者同时准备成本敏感和成本不敏感两条实验路线。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Table 2
+
+3. Section 3.1
+
+4. Eq. (1)
+
+5. Remark 1-3
+
+#### 2. 月度前瞻性数据与目标变量构造
+
+- order：2
+
+- name_cn：月度前瞻性数据与目标变量构造
+
+- question_cn：是否能用无健康预测变量的HR/薪酬数据构造月度缺勤预测任务？
+
+- inputs_and_setting_cn：约280家比利时中小大型企业的HR/薪酬记录，2018/01至2019/03，66个特征，按员工划分训练/验证/测试。
+
+- designed_or_compared_object_cn：以T_hrs=0将月度认证病假小时数转为二元目标；14个连续预测期；人口统计、工作环境、历史缺勤模式三类特征。
+
+- baseline_control_or_counterfactual_cn：无实验对照；以类别不平衡分布描述问题难度。
+
+##### objective_metrics
+
+1. positive rate
+
+2. per-period class imbalance
+
+- analysis_method_cn：数据清洗、缺失值中位数填补、类别变量二值化、描述统计。
+
+- main_result_cn：得到14个月度预测期，正例率在7.52%到16.50%之间变化；数据支持月度预测。
+
+- argumentative_role_cn：为后续大规模评估提供真实数据平台，同时回应文献中预测周期过长的问题。
+
+- remaining_uncertainty_cn：数据中没有健康原因，目标变量无法区分可预防与不可预防缺勤。
+
+- link_to_next_phase_cn：在数据就绪后进入算法组合与评价框架设计。
+
+##### evidence_pointers
+
+1. Section 4.1
+
+2. Section 4.1.1
+
+3. Table 3
+
+#### 3. 算法组合与成本/无成本评价框架
+
+- order：3
+
+- name_cn：算法组合与成本/无成本评价框架
+
+- question_cn：如何设计可复用的实验流程来比较大量模型并判断干预活动是否划算？
+
+- inputs_and_setting_cn：成本矩阵、13对训练/测试期、12种树集成算法、4种预处理选项、3种校准选项、后处理阈值策略。
+
+- designed_or_compared_object_cn：120个基础模型、240个成本不敏感模型/期、333个成本敏感模型/期/情景；自定义CIS和ROI指标及TC_none/TC_all基准。
+
+- baseline_control_or_counterfactual_cn：不干预TC_none和全员干预TC_all作为基准；CIS=0和ROI=0作为有效性和成本收益门槛。
+
+##### objective_metrics
+
+1. CIS
+
+2. ROI
+
+3. TC
+
+4. FNR
+
+5. FPR
+
+6. AUC
+
+7. BACC
+
+- analysis_method_cn：60/20/20员工级随机划分、50次重复、网格式算法组合、阈值优化、多情景成本参数。
+
+- main_result_cn：建立完整的算法无关评价管道，可在云端用开源库实现。
+
+- argumentative_role_cn：为两类实验提供证据生成机制，并让模型比较具有业务含义。
+
+- remaining_uncertainty_cn：训练时使用假定的tilde_t_s；评价框架本身不保证真实部署效果。
+
+- link_to_next_phase_cn：框架就绪后执行成本敏感缺勤预测实验。
+
+##### evidence_pointers
+
+1. Section 4.2
+
+2. Section 4.4.1
+
+3. Section 4.4.2
+
+4. Section 4.4.3
+
+#### 4. 成本敏感缺勤预测实验
+
+- order：4
+
+- name_cn：成本敏感缺勤预测实验
+
+- question_cn：使用自定义成本矩阵和成本敏感学习能否产生相对朴素基准更省钱的干预名单？记录级成本是否优于类别级成本？哪个干预案例最有效？
+
+- inputs_and_setting_cn：14个测试期、3个干预案例（Fit Check-Up、睡眠追踪设备、心理治疗）、3种tilde_t_s假设（完全、50%、随机个体比例）、333模型/期/情景。
+
+- designed_or_compared_object_cn：DMECC记录级阈值 vs 类别级固定阈值；t_s的均值估算 vs 随机森林回归预测；三种干预案例的成本矩阵。
+
+- baseline_control_or_counterfactual_cn：TC_none和TC_all基准；CIS>0和ROI>0筛选；类别级成本模型作为记录级成本的参照。
+
+##### objective_metrics
+
+1. CIS
+
+2. ROI
+
+3. TC
+
+4. FNR
+
+5. FPR
+
+- analysis_method_cn：按CIS排序，选出ROI>0的最优模型；跨期汇总并比较记录级/类别级成本；检查预训练采样失败模式。
+
+- main_result_cn：每个预测期和干预情景都存在CIS>0且ROI>0的模型；Case 1和Case 3改善最大，Case 2边际改善最小；DMECC-postreg模型更常进入最优；记录级成本能避免对无收益个体干预；类别级成本在C_FP>C_FN时导致采样方向反转并失败。
+
+- argumentative_role_cn：核心证据：自定义成本矩阵和成本敏感阈值在实践中有效。
+
+- remaining_uncertainty_cn：结果建立在任意假定的干预效果和成本之上；没有真实实验或部署验证。
+
+- link_to_next_phase_cn：由于tilde_t_s未知，作者必须回答成本未知时能否用BACC作为替代路线。
+
+##### evidence_pointers
+
+1. Section 5.1
+
+2. Section 5.1.1
+
+3. Fig. 1
+
+4. Section 5.1.1.1
+
+5. Section 5.1.2
+
+6. Table 5
+
+#### 5. 成本未知时用BACC选择模型
+
+- order：5
+
+- name_cn：成本未知时用BACC选择模型
+
+- question_cn：在干预效果参数缺失导致成本未知的情况下，用balanced accuracy选择的模型能否作为成本敏感模型的有效替代？
+
+- inputs_and_setting_cn：同一数据集的14个测试期；每期按BACC选出的最优成本不敏感模型。
+
+- designed_or_compared_object_cn：使用BACC和AUC等错误率指标选择模型；再把这些模型放到九种成本情景下计算CIS。
+
+- baseline_control_or_counterfactual_cn：成本敏感模型的最优CIS作为参照；CIS=0作为是否比朴素基准更好的门槛。
+
+##### objective_metrics
+
+1. BACC
+
+2. AUC
+
+3. FNR
+
+4. FPR
+
+5. CIS
+
+- analysis_method_cn：模型排序后回算成本指标；与已有文献AUC比较。
+
+- main_result_cn：BACC约0.62-0.65；按BACC选出的模型在已知成本场景下极少有正CIS，且始终劣于成本敏感模型；缺乏健康预测变量时相对文献性能有限。
+
+- argumentative_role_cn：界定方法的边界条件：成本未知时BACC不是划算的替代路线。
+
+- remaining_uncertainty_cn：BACC表现随月份类别分布波动；无法证明在所有未知成本设定下都不适用。
+
+- link_to_next_phase_cn：引向结论：应优先估计tilde_t_s并收集更丰富的健康相关信息。
+
+##### evidence_pointers
+
+1. Section 5.2
+
+2. Table 6
+
+3. Section 5.2.1
+
+4. Fig. 2
+
+#### 6. 综合、边界与未来研究
+
+- order：6
+
+- name_cn：综合、边界与未来研究
+
+- question_cn：实践者应如何使用该框架？框架的适用范围和下一步研究是什么？
+
+- inputs_and_setting_cn：前序全部实验证据、成本矩阵假设、比利时数据场景。
+
+- designed_or_compared_object_cn：没有新实验；综合成实践建议、边界条件和未来方向。
+
+- baseline_control_or_counterfactual_cn：无。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：综合推断和文献连接。
+
+- main_result_cn：成本已知时应用成本指标和DMECC；BACC不是划算替代；未来应估计个体干预效果（如因果推断），并收集缺勤原因等健康信息以判断可预防性。
+
+- argumentative_role_cn：闭合贡献：把结果提升为实践指南并保护结论不被视作一次性性能结果。
+
+- remaining_uncertainty_cn：干预效果跨期、个体异质性、真实部署效果仍未验证。
+
+- link_to_next_phase_cn：结束全文并提供未来研究议程。
+
+##### evidence_pointers
+
+1. Section 6
+
+2. Section 6.1
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT
+
+2. RQ_OR_OBJECTIVE
+
+3. DESIGN_FEATURE
+
+4. STUDY_OVERVIEW
+
+5. CONTRIBUTION
+
+### introduction_moves
+
+1. CONTEXT
+
+2. PRACTICAL_STAKES
+
+3. PHENOMENON
+
+4. PRIOR_KNOWLEDGE
+
+5. REQUIREMENT
+
+6. LIMITATION
+
+7. GAP
+
+8. WHY_GAP_MATTERS
+
+9. RQ_OR_OBJECTIVE
+
+10. CONTRIBUTION
+
+11. STUDY_OVERVIEW
+
+12. METHOD_JUSTIFICATION
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. MECHANISM
+
+3. REQUIREMENT
+
+4. BOUNDARY_CONDITION
+
+5. LIMITATION
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. MECHANISM
+
+4. METHOD_JUSTIFICATION
+
+5. BENCHMARK_OR_CONTRAST
+
+6. BOUNDARY_CONDITION
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST
+
+2. METHOD_JUSTIFICATION
+
+3. RESULT
+
+4. ROBUSTNESS_OR_BOUNDARY_TEST
+
+5. TRANSITION
+
+### discussion_and_contribution_moves
+
+1. RESULT
+
+2. BOUNDARY_CONDITION
+
+3. CONTRIBUTION
+
+4. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. cost-sensitive learning / Elkan's cost matrix and DMECC
+
+2. class imbalance literature and imbalance correction sampling
+
+3. probability calibration literature for decision trees
+
+4. employee absenteeism and wellness intervention effectiveness literature
+
+5. Belgian statutory sick pay and white-collar wage legislation
+
+6. balanced accuracy / BACC unbiasedness under class skew
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：成本敏感学习的形式框架直接决定了成本矩阵、决策阈值和评价指标的设计；领域法规和干预经济学为矩阵参数赋值；随后通过实验直接检验了这一知识驱动的设计是否带来成本收益，因此属于直接耦合。
+
+- 理论到设计翻译链：缺勤成本高+干预成本有限 → 需要定向识别风险员工 → 分类器在类别不平衡下默认阈值失效 → 采用成本敏感学习 → 将缺勤工资损失、法定病假支付、干预价格C、参与时长t_i和干预效果tilde_t_s翻译成误分类成本矩阵 → 用DMECC做记录级阈值，用重采样/加权方法做训练级处理 → 用CIS/ROI相对不干预/全员干预基准评价 → 若成本未知则用BACC选择模型并回算成本 → 结果显示成本已知路线更优，返回理论强调Elkan合理条和tilde_t_s缺失的制约。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：分类器在类别不平衡时默认0.5阈值会导致少数类性能差；0-1损失不适于非对称成本。
+
+- mechanism_cn：误差最小化应转变为成本最小化；可通过决策阈值或训练采样调整分类边界。
+
+- design_requirement_cn：缺勤预测应作为成本敏感二分类问题，显式指定FN和FP成本。
+
+- artifact_choice_cn：误分类成本矩阵Table 2/Eq.(1)、DMECC阈值、CS-pre/CS-sample等采样方法。
+
+- evaluated_contrast_cn：成本敏感模型 vs 成本不敏感模型；T=0.5 vs T_cs^i vs T_best；记录级 vs 类别级成本。
+
+- objective_result_cn：每个预测期和干预情景下存在CIS>0且ROI>0的成本敏感模型；成本不敏感模型按BACC选择时几乎不产生正CIS。
+
+##### evidence_pointers
+
+1. Section 2.1
+
+2. Section 3
+
+3. Section 5.1
+
+4. Section 5.2.1
+
+5. Fig. 2
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：决策树/集成模型输出的类别概率校准不良，影响后处理阈值方法。
+
+- mechanism_cn：若分类分数不是可靠后验概率，DMECC基于成本的阈值会失真。
+
+- design_requirement_cn：对树模型输出进行概率校准。
+
+- artifact_choice_cn：isotonic regression和Platt scaling作为可选校准步骤。
+
+- evaluated_contrast_cn：有/无校准的模型组合在CIS/ROI排名中的表现。
+
+- objective_result_cn：校准作为网格的一部分，最优模型分布在有无校准的多种组合中；文章未单独给出校准的因果效应。
+
+##### evidence_pointers
+
+1. Section 4.2.1.2
+
+2. Table 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：类别不平衡下BACC（TPR和TNR均值）在类偏斜下无偏，适合成本未知时的模型选择。
+
+- mechanism_cn：BACC均衡考虑两类错误，避免偏向多数类；但它不反映成本不对称。
+
+- design_requirement_cn：成本未知时用BACC选择模型；成本已知时必须回算CIS/ROI。
+
+- artifact_choice_cn：BACC模型选择流程和thresholding得到的T_best阈值。
+
+- evaluated_contrast_cn：BACC选出的模型在九种成本情景下的CIS vs 成本敏感模型CIS。
+
+- objective_result_cn：BACC模型罕见正CIS且始终低于成本敏感模型，说明BACC不是有效替代。
+
+##### evidence_pointers
+
+1. Section 2.2
+
+2. Section 5.2
+
+3. Section 5.2.1
+
+4. Fig. 2
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：已有缺勤预测多以年度为周期、依赖健康调查数据、忽视成本不对称且实验不透明。
+
+- mechanism_cn：年度预测对企业运营决策不实用；单算法/单数据集难以支持稳健模型选择。
+
+- design_requirement_cn：使用月度预测间隔、现成HR/薪酬数据、多算法网格并公开实验设置。
+
+- artifact_choice_cn：14个连续月度预测期、60/20/20员工划分、50次重复、12种算法组合。
+
+- evaluated_contrast_cn：算法组合之间、月度区间之间、与文献AUC比较。
+
+- objective_result_cn：能够在月度水平获得正CIS/ROI模型；但成本未知时仅用薪酬数据不如含健康变量的文献性能高。
+
+##### evidence_pointers
+
+1. Section 1.1
+
+2. Section 4.4.1
+
+3. Section 5.2
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：干预必须有效减少缺勤且成本低于收益；只有对真正会缺勤的人干预才划算。
+
+- mechanism_cn：干预有单价C和参与时长t_i；误分类FN/FP分别造成缺勤损失和无效干预成本；Elkan合理条件要求正确分类成本低于误分类成本。
+
+- design_requirement_cn：把干预成本、效果和参与时间纳入成本矩阵；拒绝C'_FN<0的个体；以不干预/全员干预作为基准。
+
+- artifact_choice_cn：Table 2小时工资成本矩阵、CIS/ROI指标、Remark 1/3的限制条件。
+
+- evaluated_contrast_cn：三种干预案例（Case 1/2/3）和三种tilde_t_s假设；Case 2低成本干预 vs Case 1/3。
+
+- objective_result_cn：Case 1/3节省最大，Case 2边际改善最小；当tilde_t_s低时C'_FN<0个体比例高，DMECC能避开。
+
+##### evidence_pointers
+
+1. Section 3
+
+2. Section 4.4.2
+
+3. Section 5.1.2
+
+4. Table 5
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. offline prospective prediction
+
+2. repeated random employee-level splitting
+
+3. multi-algorithm / multi-threshold grid search
+
+4. multi-scenario sensitivity analysis
+
+5. naive benchmark comparison (none vs all intervention)
+
+6. alternative metric evaluation (BACC then cost back-check)
+
+- why_these_evaluations_cn：目标是部署前的决策支持，无法直接做随机干预实验；因此用历史月度数据构造前瞻性预测，以不干预和全员干预两个朴素策略为基准，检验成本矩阵能否带来可解释的成本节省；同时通过多情景敏感性处理未知的干预效果参数。
+
+- benchmark_and_contrast_chain_cn：先定义TC_none/TC_all两个朴素基准并形成CIS的零点；再在成本已知下用CIS/ROI排序成本敏感模型；用记录级/类别级成本对比检验DMECC的附加值；最后把BACC选出的模型回算CIS并与成本敏感模型比较，形成三层证据链。
+
+### claim_evidence_ledger
+
+#### 1. 每个预测期和干预情景都能找到正CIS且正ROI的成本敏感模型。
+
+- claim_cn：每个预测期和干预情景都能找到正CIS且正ROI的成本敏感模型。
+
+- evidence_cn：Section 5.1.1和图1展示跨期成本表现；Table 5列出各期最优模型。
+
+- supported_cn：支持，但仅在假定tilde_t_s和干预案例设定的条件下。
+
+#### 2. 记录级成本优于类别级成本，且DMECC能避免对无收益个体干预。
+
+- claim_cn：记录级成本优于类别级成本，且DMECC能避免对无收益个体干预。
+
+- evidence_cn：Section 5.1.1.1讨论DMECC与合理条件，并指出类别级成本模型较少进入最优排名。
+
+- supported_cn：部分支持，机制清晰但没有显著性检验。
+
+#### 3. 类别级平均成本的采样在成本倒挂时会失效。
+
+- claim_cn：类别级平均成本的采样在成本倒挂时会失效。
+
+- evidence_cn：Section 5.1.1.1报告了训练阶段失败和未进入排名的模型。
+
+- supported_cn：支持，针对具体成本不平衡条件成立。
+
+#### 4. BACC模型选择不是已知成本场景下的有效替代。
+
+- claim_cn：BACC模型选择不是已知成本场景下的有效替代。
+
+- evidence_cn：Section 5.2.1和图2显示BACC模型极少正CIS且总低于成本敏感模型。
+
+- supported_cn：支持，但依赖假定的成本矩阵和干预效果参数。
+
+#### 5. DMECC配合随机森林回归预测t_s经常优于均值估计。
+
+- claim_cn：DMECC配合随机森林回归预测t_s经常优于均值估计。
+
+- evidence_cn：Fig.1和Table 5中大量最优模型使用T_cs^i-postreg。
+
+- supported_cn：部分支持，基于排序分布而非显著性检验。
+
+#### 6. 框架是算法无关且可部署到云端的。
+
+- claim_cn：框架是算法无关且可部署到云端的。
+
+- evidence_cn：Section 4.2.1和Section 4.3使用开源实现；结论重申算法无关。
+
+- supported_cn：论证性支持，但没有跨平台或现场部署证据。
+
+- internal_validity_strategy_cn：使用前瞻性设计（t期特征预测t+1期），按员工而非记录随机划分，训练/验证/测试分离，50次重复平均；在同一测试集上比较不同算法/阈值以控制数据差异；筛选正CIS/正ROI避免只看准确率。
+
+- external_validity_strategy_cn：使用来自约280家企业、多行业、多公司规模的真实HR/薪酬数据；14个连续月份覆盖季节变化；探讨三个干预案例和三种干预效果情景；与已有文献结果比较；强调框架算法/领域无关。
+
+- what_is_not_actually_tested_cn：没有真实部署或随机对照干预；干预效果tilde_t_s是虚构或任意设定；没有健康原因数据，无法判断缺勤是否可预防；没有验证干预不会造成负面效应；跨期间效果和动态效应未检验。
+
+## 贡献闭环
+
+- technical_claim_cn：用成本敏感学习对缺勤预测做决策支持，在真实HR/薪酬数据上达到正CIS/ROI；与现有缺勤预测相比更重视成本评价。
+
+- artifact_claim_cn：成本矩阵、CIS/ROI指标和算法无关评价框架是可复用决策支持制品；记录级成本优于类别级成本。
+
+- mechanism_claim_cn：通过把缺勤损失和干预成本转成误分类成本，并用DMECC调整记录级阈值，可避免对无收益个体干预，因此比均匀干预/不干预更省成本。
+
+- boundary_claim_cn：在成本未知且仅有HR/薪酬数据时，BACC模型的成本表现不佳；必须知道干预效果才适合用成本矩阵；结果依赖比利时白领薪酬法规和干预效果假设。
+
+- reusable_design_knowledge_cn：设计知识包括：成本矩阵参数化方式（W,t_M,t_s,r,C,t_i,tilde_t_s）；评价应同时看CIS和ROI；使用两个朴素基准；用DMECC做记录级决策；在成本未知时回算成本表现；部署应使用开源实现。
+
+- theoretical_contribution_cn：将Elkan成本敏感理论具体化为员工缺勤干预领域，给出可迁移的成本矩阵；用数据演示记录级阈值和合理条件对实际决策的影响；指出干预个体效果参数缺失作为理论-实践接口。
+
+- how_discussion_closes_intro_gap_cn：引言指出已有缺勤预测忽略成本不对称、预测周期长、实验不透明；结论展示成本敏感框架能解决前两点，并通过BACC对比说明如果不知道成本则必须优先估计tilde_t_s，呼应引言中缺少干预效果信息的限制。
+
+- overclaim_or_unsupported_leaps_cn：作者并未实际检验干预有效性，却多次表述干预只应以提升健康为前提，可能超出数据证据；CIS/ROI的正值完全依赖随机设定的tilde_t_s，不能说真实干预必然有正回报；灵活/可迁移主要以论证而非多域复现支撑；说BACC不是有效替代是在任意成本情景下得出的，不能作为一般结论。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1-S2
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：描述为比利时HR与健康服务商设计的决策支持系统，目标是提升职场健康并识别病假风险员工以进行预防干预。
+
+- rhetorical_function_cn：摘要开头交代应用场景和系统目的。
+
+- depends_on_cn：无，独立开场。
+
+- sets_up_cn：为后续算法和成本矩阵介绍提供目标。
+
+- evidence_pointer：Abstract
+
+### 2. Abstract P2 S1-S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P2 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：说明使用现有机器学习方法，按月间隔预测，只用不含健康预测变量的HR和薪酬数据。
+
+- rhetorical_function_cn：强调制品的实用性和数据约束。
+
+- depends_on_cn：前面目标说明。
+
+- sets_up_cn：为实验框架和评价方法铺垫。
+
+- evidence_pointer：Abstract
+
+### 3. Abstract P3 S1-S2
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P3 S1-S2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将员工缺勤建模为损失不对称的二分类问题，并构造缺勤误分类成本矩阵。
+
+- rhetorical_function_cn：点出核心方法论贡献。
+
+- depends_on_cn：成本敏感学习的预备知识。
+
+- sets_up_cn：为摘要中的成本指标和对比作铺垫。
+
+- evidence_pointer：Abstract
+
+### 4. Abstract P4-P5
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P4-P5
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：说明用成本指标评价模型，同时展示成本未知时如何处理。
+
+- rhetorical_function_cn：预告文章两条评价路线。
+
+- depends_on_cn：成本矩阵和实验框架。
+
+- sets_up_cn：为读者建立阅读地图。
+
+- evidence_pointer：Abstract
+
+### 5. Abstract P6-P7
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P6-P7
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：声称评价流程灵活、不限于特定模型或领域，并在缺勤预测领域首次采用更广方法和成本评价。
+
+- rhetorical_function_cn：抽象层面宣告贡献。
+
+- depends_on_cn：前面对方法/评价的描述。
+
+- sets_up_cn：读者预期文章的价值是框架而非单一算法。
+
+- evidence_pointer：Abstract
+
+### 6. Introduction P1 S1-S2
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1-S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：指出员工病假缺勤普遍且代价高昂，OECD国家成本占GDP约1.2%-2%。
+
+- rhetorical_function_cn：用宏观数字建立问题重要性。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为雇主寻找解决方案提供动机。
+
+- evidence_pointer：Introduction P1
+
+### 7. Introduction P1 S3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：因此雇主寻求解决该问题的方案是自然的。
+
+- rhetorical_function_cn：把宏观成本转化为组织行动需求。
+
+- depends_on_cn：缺勤成本数据。
+
+- sets_up_cn：引出企业委托和决策支持系统需求。
+
+- evidence_pointer：Introduction P1
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：研究动机来自比利时HR与健康管理公司委托，要求用数据科学解决员工缺勤。
+
+- rhetorical_function_cn：介绍具体经验场景和真实需求。
+
+- depends_on_cn：缺勤问题的普遍性。
+
+- sets_up_cn：为后文的数据来源和领域设定铺垫。
+
+- evidence_pointer：Introduction P2
+
+### 9. Introduction P2 S2-S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：OECD工人心理疾病比例高，预防措施可避免长期失能；健康管理项目有充分证据降低缺勤。
+
+- rhetorical_function_cn：建立干预有效性的知识基础。
+
+- depends_on_cn：相关文献和统计数据。
+
+- sets_up_cn：说明定向干预合理，但成本问题随之而来。
+
+- evidence_pointer：Introduction P2
+
+### 10. Introduction P3 S1-S2
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P3 S1-S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：健康项目成本和参与时间可能很高，一刀切地面向所有员工不划算，因此需要能识别少数病假高风险人群的决策支持系统。
+
+- rhetorical_function_cn：将背景问题收窄为定向识别需求。
+
+- depends_on_cn：干预有效性证据和成本负担。
+
+- sets_up_cn：为后续预测模型和成本矩阵设置目标。
+
+- evidence_pointer：Introduction P3
+
+### 11. Related work P1
+
+- order：11
+
+- section：Introduction 1.1
+
+- locator：Related work P1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：HR分析大多用于招聘和留任，而非员工福祉维护。
+
+- rhetorical_function_cn：指出领域空白。
+
+- depends_on_cn：HR分析文献。
+
+- sets_up_cn：为缺勤预测研究缺口提供背景。
+
+- evidence_pointer：Section 1.1
+
+### 12. Related work P2
+
+- order：12
+
+- section：Introduction 1.1
+
+- locator：Related work P2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：已有缺勤预测主要关注风险因素的解释和关联，而非预测精度；多数来自职业健康医学，偏好统计模型和调查数据。
+
+- rhetorical_function_cn：从预测范式和数据来源两个维度指出不足。
+
+- depends_on_cn：文献综述。
+
+- sets_up_cn：为采用算法模型和HR数据提供契机。
+
+- evidence_pointer：Section 1.1
+
+### 13. Related work P3
+
+- order：13
+
+- section：Introduction 1.1
+
+- locator：Related work P3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：另有一支文献用算法模型预测缺勤，如神经网络回归和多类分类树集成。
+
+- rhetorical_function_cn：肯定已有算法尝试。
+
+- depends_on_cn：相关文献。
+
+- sets_up_cn：接着指出这些研究的方法论不足。
+
+- evidence_pointer：Section 1.1
+
+### 14. Related work P4
+
+- order：14
+
+- section：Introduction 1.1
+
+- locator：Related work P4
+
+- move_code：GAP
+
+- paraphrase_cn：这些研究的主要不足是实验设置和模型选择不透明，多数只在一个数据集上用一个算法且很少讨论依据；本文则考虑广泛算法和评价措施。
+
+- rhetorical_function_cn：制造方法论缺口。
+
+- depends_on_cn：对已有算法文献的总结。
+
+- sets_up_cn：引出本文的实验设计贡献。
+
+- evidence_pointer：Section 1.1
+
+### 15. Related work P5
+
+- order：15
+
+- section：Introduction 1.1
+
+- locator：Related work P5
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：此前研究多为年度调查波次，一年预测期对企业降低直接/间接成本意义不大；管理需要月度或季度这种可操作间隔。
+
+- rhetorical_function_cn：说明预测周期缺口的实际后果。
+
+- depends_on_cn：运营管理需求判断。
+
+- sets_up_cn：为月度预测设计提供理由。
+
+- evidence_pointer：Section 1.1
+
+### 16. Related work P5 final sentence
+
+- order：16
+
+- section：Introduction 1.1
+
+- locator：Related work P5 final sentence
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：本文数据不含健康或态度信息但覆盖多个行业，并可考虑一个月预测期。
+
+- rhetorical_function_cn：对比文献中的一年预测期，突出本文数据优势。
+
+- depends_on_cn：企业提供的数据概况。
+
+- sets_up_cn：为实验数据描述预热。
+
+- evidence_pointer：Section 1.1
+
+### 17. Related work P6
+
+- order：17
+
+- section：Introduction 1.1
+
+- locator：Related work P6
+
+- move_code：GAP
+
+- paraphrase_cn：缺勤是稀有事件，多数论文展示类别不平衡但不处理；唯一考虑不平衡的论文用启发式成本比例，可能次优；本文尝试用真实成本同时解决不平衡和成本不对称。
+
+- rhetorical_function_cn：构造成本敏感学习缺口。
+
+- depends_on_cn：类别不平衡文献。
+
+- sets_up_cn：引出本文的核心贡献。
+
+- evidence_pointer：Section 1.1
+
+### 18. Our contribution P1
+
+- order：18
+
+- section：Introduction 1.2
+
+- locator：Our contribution P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：本文研究预测分析作为决策支持系统，以识别应接受健康干预的病假风险员工。
+
+- rhetorical_function_cn：正式声明研究目标。
+
+- depends_on_cn：前面缺口分析。
+
+- sets_up_cn：为贡献清单定调。
+
+- evidence_pointer：Section 1.2
+
+### 19. Our contribution P2
+
+- order：19
+
+- section：Introduction 1.2
+
+- locator：Our contribution P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：主要贡献是成本敏感的缺勤预测和可泛化的误分类成本矩阵，但矩阵核心的干预效果参数目前缺乏，成为未来研究重点；同时开发业务友好的成本指标。
+
+- rhetorical_function_cn：声明首要贡献并主动暴露限制。
+
+- depends_on_cn：成本敏感理论。
+
+- sets_up_cn：为后面成本矩阵和未来研究做铺垫。
+
+- evidence_pointer：Section 1.2
+
+### 20. Our contribution P3
+
+- order：20
+
+- section：Introduction 1.2
+
+- locator：Our contribution P3
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：由于数据缺少干预效果参数，本文也考虑成本不敏感路线，用平衡准确率评价。
+
+- rhetorical_function_cn：预告双轨评价框架。
+
+- depends_on_cn：成本矩阵参数缺失。
+
+- sets_up_cn：为Section 5.2做路标。
+
+- evidence_pointer：Section 1.2
+
+### 21. Our contribution P4
+
+- order：21
+
+- section：Introduction 1.2
+
+- locator：Our contribution P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：用匿名HR/薪酬数据、不同成本矩阵情景、一个月预测期和严谨防过拟合实验设计展示最佳实践。
+
+- rhetorical_function_cn：从方法上证明贡献可操作。
+
+- depends_on_cn：贡献声明。
+
+- sets_up_cn：为实验框架提供概述。
+
+- evidence_pointer：Section 1.2
+
+### 22. Section 2 P2
+
+- order：22
+
+- section：Preliminaries
+
+- locator：Section 2 P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：大多数二元分类器先生成置信分再设阈值；默认0.5阈值在不平衡数据下常表现差。
+
+- rhetorical_function_cn：引入后续成本敏感方法所需的基本机制。
+
+- depends_on_cn：无。
+
+- sets_up_cn：为阈值调整和采样方法建立基础。
+
+- evidence_pointer：Section 2
+
+### 23. Section 2.1 P1
+
+- order：23
+
+- section：Preliminaries
+
+- locator：Section 2.1 P1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：多数领域两类误分类成本不同，可用误分类成本矩阵将误差最小化转化为成本最小化。
+
+- rhetorical_function_cn：引入成本敏感学习的核心概念。
+
+- depends_on_cn：分类器与混淆矩阵。
+
+- sets_up_cn：为成本矩阵的构造和阈值公式做理论准备。
+
+- evidence_pointer：Section 2.1
+
+### 24. Section 2.1 P2
+
+- order：24
+
+- section：Preliminaries
+
+- locator：Section 2.1 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：Elkan证明当成本已知时可用DMECC建立包含成本的决策阈值。
+
+- rhetorical_function_cn：给出成本敏感决策的具体机制。
+
+- depends_on_cn：成本矩阵概念。
+
+- sets_up_cn：为实验中的T_cs^i阈值和记录级决策提供工具。
+
+- evidence_pointer：Section 2.1
+
+### 25. Section 2.1 P3
+
+- order：25
+
+- section：Preliminaries
+
+- locator：Section 2.1 P3
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：另一种让分类器成本敏感的方法是阈值搜索，在成本未知时可用合适的错误指标优化阈值。
+
+- rhetorical_function_cn：补充成本未知时的后处理方法。
+
+- depends_on_cn：阈值机制。
+
+- sets_up_cn：为BACC和T_best路线做准备。
+
+- evidence_pointer：Section 2.1
+
+### 26. Section 2.2 P1-P2
+
+- order：26
+
+- section：Preliminaries
+
+- locator：Section 2.2 P1-P2
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：成本敏感学习需要合适的评价指标；类别不平衡下TPR和TNR无偏，其算术平均即BACC，适合成本未知时使用。
+
+- rhetorical_function_cn：建立评价指标的理论依据。
+
+- depends_on_cn：类别不平衡和成本矩阵。
+
+- sets_up_cn：为CIS/ROI和BACC双轨评价提供理由。
+
+- evidence_pointer：Section 2.2
+
+### 27. Section 3 P1
+
+- order：27
+
+- section：Section 3
+
+- locator：Section 3 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：作者提出员工病假与健康干预直接成本矩阵的概念化，并称这是论文主要贡献之一。
+
+- rhetorical_function_cn：把核心制品正式引入。
+
+- depends_on_cn：预备知识中的成本矩阵定义。
+
+- sets_up_cn：为矩阵推导和后续实验提供对象。
+
+- evidence_pointer：Section 3
+
+### 28. Section 3 P2
+
+- order：28
+
+- section：Section 3
+
+- locator：Section 3 P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：通过工资、缺勤小时数和法定病假支付比例计算员工实际小时工资，缺勤会降低产出率。
+
+- rhetorical_function_cn：解释缺勤如何转化为雇主的单位成本。
+
+- depends_on_cn：工资模型。
+
+- sets_up_cn：为干预成本矩阵中的FN成本奠定推导基础。
+
+- evidence_pointer：Section 3
+
+### 29. Section 3 P3 after Table 2
+
+- order：29
+
+- section：Section 3
+
+- locator：Section 3 P3 after Table 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：把TP/FN/FP/TN分别解释为缺勤者被干预、缺勤者未干预、非缺勤者被干预、非缺勤者未干预。
+
+- rhetorical_function_cn：将统计混淆矩阵映射到业务决策单元格。
+
+- depends_on_cn：成本表。
+
+- sets_up_cn：为后续成本比较和业务解释提供语言。
+
+- evidence_pointer：Section 3, Table 2
+
+### 30. Section 3 Remark 1
+
+- order：30
+
+- section：Section 3
+
+- locator：Section 3 Remark 1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：干预要划算必须满足参与时长小于预期减少的缺勤小时数。
+
+- rhetorical_function_cn：给出成本有效性的必要约束。
+
+- depends_on_cn：成本模型。
+
+- sets_up_cn：为后面合理条件讨论和案例选择作依据。
+
+- evidence_pointer：Section 3, Remark 1
+
+### 31. Section 3 Remark 2
+
+- order：31
+
+- section：Section 3
+
+- locator：Section 3 Remark 2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：矩阵参数tilde_t_s先验未知，文献中无可参考值。
+
+- rhetorical_function_cn：主动限制成本矩阵的可实现性。
+
+- depends_on_cn：成本矩阵推导。
+
+- sets_up_cn：为成本不敏感替代路线和未来研究铺路。
+
+- evidence_pointer：Section 3, Remark 2
+
+### 32. Section 3.1 P1-P2
+
+- order：32
+
+- section：Section 3.1
+
+- locator：Section 3.1 P1-P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：根据比利时法规简化矩阵；样本只有白领员工，因此r=1且t_s为雇主承担的月度病假小时。
+
+- rhetorical_function_cn：把一般成本矩阵落地到具体国家法律。
+
+- depends_on_cn：比利时病假薪酬规则。
+
+- sets_up_cn：为Eq.(1)的简化形式设置前提。
+
+- evidence_pointer：Section 3.1
+
+### 33. Section 3.1 Eq. (1) para
+
+- order：33
+
+- section：Section 3.1
+
+- locator：Section 3.1 Eq. (1) para
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：将四个单元格成本减去正确分类成本后得到零化矩阵，FN和FP成本可具体表达。
+
+- rhetorical_function_cn：将业务成本转成可训练/可评价的成本值。
+
+- depends_on_cn：成本表与Elkan变换。
+
+- sets_up_cn：为实验中的DMECC阈值和采样成本提供数值输入。
+
+- evidence_pointer：Section 3.1, Eq. (1)
+
+### 34. Section 3.1 Remark 3
+
+- order：34
+
+- section：Section 3.1
+
+- locator：Section 3.1 Remark 3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：当干预时长超过预期缺勤减少时，C'_FN为负，违反Elkan合理条件，因为此时不干预反而更划算。
+
+- rhetorical_function_cn：划定成本矩阵适用的条件边界。
+
+- depends_on_cn：Elkan合理条件。
+
+- sets_up_cn：解释为什么记录级阈值能避开这些个体。
+
+- evidence_pointer：Section 3.1, Remark 3
+
+### 35. Section 4 intro
+
+- order：35
+
+- section：Section 4
+
+- locator：Section 4 intro
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：实验分两部分：先进行成本敏感预测并评价，再在成本未知时用BACC评价成本不敏感模型。
+
+- rhetorical_function_cn：预告实验结构。
+
+- depends_on_cn：成本矩阵和BACC讨论。
+
+- sets_up_cn：为读者理解后续两小节提供地图。
+
+- evidence_pointer：Section 4
+
+### 36. Section 4.1 P1
+
+- order：36
+
+- section：Section 4.1
+
+- locator：Section 4.1 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：数据来自约280家多行业中小大型比利时企业，2018年1月至2019年3月，采用前瞻性研究设计进行月度预测。
+
+- rhetorical_function_cn：交代数据规模、范围和预测时序逻辑。
+
+- depends_on_cn：企业数据合作关系。
+
+- sets_up_cn：为后续数据准备和结果可推广性提供基础。
+
+- evidence_pointer：Section 4.1
+
+### 37. Section 4.1.1 P1
+
+- order：37
+
+- section：Section 4.1.1
+
+- locator：Section 4.1.1 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：目标变量根据月度认证病假小时数是否超过阈值生成，本文经数据提供方建议设为0小时，正例率在7.52%-16.50%间波动。
+
+- rhetorical_function_cn：定义预测目标并展示类别不平衡。
+
+- depends_on_cn：数据中病假小时数。
+
+- sets_up_cn：为采样和成本敏感方法提供问题背景。
+
+- evidence_pointer：Section 4.1.1, Table 3
+
+### 38. Section 4.1.2 P1
+
+- order：38
+
+- section：Section 4.1.2
+
+- locator：Section 4.1.2 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：预测变量包括人口统计、工作环境、疲劳因素、假期模式和丰富的历史缺勤模式，但没有健康相关预测变量。
+
+- rhetorical_function_cn：说明特征工程如何弥补无健康数据限制。
+
+- depends_on_cn：HR/薪酬数据。
+
+- sets_up_cn：为结论中关于健康数据必要性的讨论埋下伏笔。
+
+- evidence_pointer：Section 4.1.2
+
+### 39. Section 4.2.1 P1
+
+- order：39
+
+- section：Section 4.2.1
+
+- locator：Section 4.2.1 P1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：由于系统需部署到云端，所有算法选择现有开源实现；采用决策树集成因其能处理混合数据、缺失值、异常值且可解释。
+
+- rhetorical_function_cn：将部署约束转化为算法选择要求。
+
+- depends_on_cn：业务对可部署性的需求。
+
+- sets_up_cn：为算法组合列表和软件栈提供理由。
+
+- evidence_pointer：Section 4.2.1
+
+### 40. Section 4.2.1.1 P1-P2
+
+- order：40
+
+- section：Section 4.2.1.1
+
+- locator：Section 4.2.1.1 P1-P2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：通过平均训练误分类成本计算成本比，用于过采样少数类或欠采样多数类，从而实现成本敏感的类别不平衡校正。
+
+- rhetorical_function_cn：解释采样方法如何与成本矩阵结合。
+
+- depends_on_cn：成本矩阵和类别不平衡理论。
+
+- sets_up_cn：为后面成本采样失效的分析提供机制基础。
+
+- evidence_pointer：Section 4.2.1.1
+
+### 41. Section 4.2.1.2
+
+- order：41
+
+- section：Section 4.2.1.2
+
+- locator：Section 4.2.1.2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：决策树概率估计不可靠，因此对分类器可选应用isotonic或Platt校准以支持后处理阈值方法。
+
+- rhetorical_function_cn：为校准步骤提供方法论理由。
+
+- depends_on_cn：概率校准文献。
+
+- sets_up_cn：为后处理的DMECC/T_best提供高质量概率分数。
+
+- evidence_pointer：Section 4.2.1.2
+
+### 42. Section 4.2.1.3 P2-P3
+
+- order：42
+
+- section：Section 4.2.1.3
+
+- locator：Section 4.2.1.3 P2-P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：成本敏感模型使用DMECC阈值；因为t_s预测时未知，分别用个人过去12个月平均缺勤时长和随机森林回归预测值代替。
+
+- rhetorical_function_cn：说明如何在实际预测中处理不可观测的t_s。
+
+- depends_on_cn：DMECC机制。
+
+- sets_up_cn：为结果中T_cs^i-mean vs T_cs^i-postreg比较做铺垫。
+
+- evidence_pointer：Section 4.2.1.3
+
+### 43. Section 4.4.1 P1
+
+- order：43
+
+- section：Section 4.4.1
+
+- locator：Section 4.4.1 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：按员工将数据分为60%训练、20%阈值搜索、20%测试，重复50次取平均。
+
+- rhetorical_function_cn：建立防过拟合的评价协议。
+
+- depends_on_cn：数据管道。
+
+- sets_up_cn：为所有算法比较提供共同测试基准。
+
+- evidence_pointer：Section 4.4.1
+
+### 44. Section 4.4.2 P1-P3
+
+- order：44
+
+- section：Section 4.4.2
+
+- locator：Section 4.4.2 P1-P3
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：由于缺乏干预效果数据，设定三种tilde_t_s假设，并考虑三种干预案例构成九种成本情景。
+
+- rhetorical_function_cn：构建多情景敏感性分析。
+
+- depends_on_cn：成本矩阵参数缺失。
+
+- sets_up_cn：为结果中的情景比较和Table 5提供输入。
+
+- evidence_pointer：Section 4.4.2
+
+### 45. Section 4.4.3 P1
+
+- order：45
+
+- section：Section 4.4.3
+
+- locator：Section 4.4.3 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：定义CIS和ROI，以不干预和全员干预两个朴素策略为基准判断任何干预活动是否值得。
+
+- rhetorical_function_cn：给出业务含义明确的评价指标。
+
+- depends_on_cn：成本矩阵和TC定义。
+
+- sets_up_cn：为结果部分所有CIS/ROI报告提供定义。
+
+- evidence_pointer：Section 4.4.3
+
+### 46. Section 5 intro
+
+- order：46
+
+- section：Section 5
+
+- locator：Section 5 intro
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：论文核心兴趣是成本敏感学习在缺勤预测中的应用，附带讨论记录级vs类别级成本、t_s估计方式、干预选择以及BACC替代问题。
+
+- rhetorical_function_cn：明确结果部分要回答的问题集合。
+
+- depends_on_cn：实验框架。
+
+- sets_up_cn：组织结果小节。
+
+- evidence_pointer：Section 5
+
+### 47. Section 5.1.1 P1
+
+- order：47
+
+- section：Section 5.1.1
+
+- locator：Section 5.1.1 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：在每个预测期和干预组合中都能找到CIS>0且ROI>0的成本敏感模型。
+
+- rhetorical_function_cn：报告最核心的正面结果。
+
+- depends_on_cn：成本矩阵和实验评估。
+
+- sets_up_cn：为后续记录级/类别级细节提供总览。
+
+- evidence_pointer：Section 5.1.1
+
+### 48. Section 5.1.1 Fig. 1 description
+
+- order：48
+
+- section：Section 5.1.1
+
+- locator：Section 5.1.1 Fig. 1 description
+
+- move_code：RESULT
+
+- paraphrase_cn：按CIS排名，最大成本改进出现在Case 1和Case 3，Case 2只有边际改进；DMECC使用回归预测t_s时更常获得高成本改进。
+
+- rhetorical_function_cn：用图形呈现跨期、跨情景的成本表现规律。
+
+- depends_on_cn：各模型CIS排序。
+
+- sets_up_cn：引出干预案例选择和t_s估计方式讨论。
+
+- evidence_pointer：Section 5.1.1, Fig. 1
+
+### 49. Section 5.1.1.1 P1
+
+- order：49
+
+- section：Section 5.1.1.1
+
+- locator：Section 5.1.1.1 P1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：DMECC能直接考虑合理条件，避免对干预不划算的个体进行干预；使用常数阈值的模型不能做这种区分，因此较少进入最优排名。
+
+- rhetorical_function_cn：解释记录级成本为何优于类别级成本。
+
+- depends_on_cn：Elkan合理条件和DMECC。
+
+- sets_up_cn：为结论中DMECC价值提供机制证据。
+
+- evidence_pointer：Section 5.1.1.1
+
+### 50. Section 5.1.1.1 P2
+
+- order：50
+
+- section：Section 5.1.1.1
+
+- locator：Section 5.1.1.1 P2
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：当部分员工C_FP>C_FN导致平均成本倒挂时，采样器会过采样多数类而非少数类，从而使部分模型在预训练阶段失败。
+
+- rhetorical_function_cn：揭示类别级成本方法在具体条件下失效的边界。
+
+- depends_on_cn：采样机制和成本分布。
+
+- sets_up_cn：强化记录级成本优于类别级成本的论点。
+
+- evidence_pointer：Section 5.1.1.1
+
+### 51. Section 5.1.2 P1
+
+- order：51
+
+- section：Section 5.1.2
+
+- locator：Section 5.1.2 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：为确定最划算干预，筛选CIS最高且ROI为正的模型；发现最高CIS不一定伴随正ROI。
+
+- rhetorical_function_cn：报告干预案例选择规则和发现。
+
+- depends_on_cn：CIS/ROI定义和成本场景。
+
+- sets_up_cn：为实践者提供模型筛选建议。
+
+- evidence_pointer：Section 5.1.2, Table 5
+
+### 52. Section 5.2 P1
+
+- order：52
+
+- section：Section 5.2
+
+- locator：Section 5.2 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：成本未知时假设误分类成本相等，用BACC选择模型；结果显示性能随月份类别分布变化。
+
+- rhetorical_function_cn：启动成本不敏感替代路线的报告。
+
+- depends_on_cn：BACC理论。
+
+- sets_up_cn：为BACC模型回算成本做准备。
+
+- evidence_pointer：Section 5.2
+
+### 53. Section 5.2 P2
+
+- order：53
+
+- section：Section 5.2
+
+- locator：Section 5.2 P2
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：与文献比较后作者认为，当成本未知且只有薪酬数据时，可能需要客观健康相关预测变量才能达到更好性能。
+
+- rhetorical_function_cn：用外部文献界定本文替代路线的边界。
+
+- depends_on_cn：文献中的AUC指标和健康预测变量。
+
+- sets_up_cn：为未来需要健康数据的建议提供证据。
+
+- evidence_pointer：Section 5.2
+
+### 54. Section 5.2.1 P1-P2
+
+- order：54
+
+- section：Section 5.2.1
+
+- locator：Section 5.2.1 P1-P2
+
+- move_code：RESULT
+
+- paraphrase_cn：按BACC排名的最优成本不敏感模型在九种成本情景下很少正CIS，且总是劣于成本敏感模型；因此BACC不是成本已知时可取的替代。
+
+- rhetorical_function_cn：报告替代路线的失效结果。
+
+- depends_on_cn：CIS回算和图2。
+
+- sets_up_cn：引向结论中应优先估计tilde_t_s的建议。
+
+- evidence_pointer：Section 5.2.1, Fig. 2
+
+### 55. Conclusion P1
+
+- order：55
+
+- section：Conclusion
+
+- locator：Conclusion P1
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：因数据只有薪酬信息，模型可能基于与健康无关的相关性；作者强调概念模型假设干预旨在提升健康，因此错误定向不应造成负面结果。
+
+- rhetorical_function_cn：划定解释和伦理边界。
+
+- depends_on_cn：数据局限。
+
+- sets_up_cn：为实践使用提供前提条件。
+
+- evidence_pointer：Section 6
+
+### 56. Conclusion bullet list
+
+- order：56
+
+- section：Conclusion
+
+- locator：Conclusion bullet list
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：总结实践要点：成本已知时用成本指标和DMECC；BACC不是划算替代；应量化干预效果；检查训练数据成本分布可做初步成本收益分析。
+
+- rhetorical_function_cn：把结果压缩成可操作建议。
+
+- depends_on_cn：全部实验结果。
+
+- sets_up_cn：为未来研究提供直接入口。
+
+- evidence_pointer：Section 6
+
+### 57. Section 6.1 P1-P3
+
+- order：57
+
+- section：Limitations
+
+- locator：Section 6.1 P1-P3
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：指出季节性变化已用跨年特征处理；假设干预效果不跨期；实验依赖先验的个体响应，未来可用因果推断估计个体处理效应。
+
+- rhetorical_function_cn：主动披露假设并给出改进方向。
+
+- depends_on_cn：成本矩阵参数缺失。
+
+- sets_up_cn：将成本敏感学习与因果推断连接起来。
+
+- evidence_pointer：Section 6.1
+
+### 58. Section 6.1 P4
+
+- order：58
+
+- section：Limitations
+
+- locator：Section 6.1 P4
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：假设不同缺勤时长的员工对干预响应相同不合理；需要收集缺勤原因等客观健康信息，或采用多类别、成本敏感回归方向。
+
+- rhetorical_function_cn：指出同质响应假设和健康数据缺失的深层限制。
+
+- depends_on_cn：数据中无健康原因。
+
+- sets_up_cn：为未来研究设定具体议程。
+
+- evidence_pointer：Section 6.1
+
+## 写作技术
+
+- gap_construction_cn：先指出缺勤成本巨大和干预有效但昂贵，形成需要定向识别的实践要求；再通过文献综述指出三类缺口：缺勤预测重解释轻预测、预测周期长、缺成本敏感，唯一考虑类不平衡的文献用了次优启发式，由此建立本研究的不可替代性。
+
+- signposting_cn：摘要、引言和实验框架都用显式路标：先说明两阶段实验（cost-sensitive then cost-insensitive），在每个小节开端重述要回答的问题，使用Readers familiar等提示引导跳过预备知识。
+
+- transition_logic_cn：从一般分类/成本敏感理论转向领域成本矩阵；从矩阵参数未知触发成本不敏感替代路线；从成本敏感实验结果引出如果成本未知怎么办；最后从对比结果走向未来研究。
+
+- claim_evidence_rhythm_cn：每个主要主张先给定义/公式/指标，再报告跨期和跨情景的汇总结果，然后用表格或图展示个案；关键判断如记录级优于类别级有对应机制解释和失败案例。
+
+- benchmark_narrative_cn：把不干预和全员干预作为两个朴素基准，使任意模型相对CIS有明确业务含义；在成本未知时再把BACC选出的模型放到同一成本基准上回算，保持可比性。
+
+- theory_return_cn：结果不是停留在哪个算法好，而是回到Elkan合理条件：C'_FN可以为负，DMECC能处理；因此未来应估计个体干预效果，把因果推断接入成本矩阵。
+
+- contribution_positioning_cn：把主要贡献定位为领域内首创的成本矩阵和评价框架，而非算法性能；用算法无关、可部署到云、可迁移到其他HR问题来扩大适用范围。
+
+- novelty_protection_cn：通过将结果与两个朴素基准和文献AUC比较，说明即使算法本身是现成的，使用成本矩阵+成本指标仍带来新增价值；同时承认参数缺失，避免把一次性数据结果包装成普适结论。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用经济数据说明缺勤问题和干预成本，将问题定为定向干预对象的识别。
+
+- research_job_cn：找到真实场景（HR服务商）、明确决策间隔和数据约束。
+
+- required_evidence_cn：缺勤成本、干预有效性、数据可得性的证据。
+
+- transition_to_next_cn：说明大规模普适干预不划算，引出需要预测少数风险员工。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：分三类综述：健康统计模型、算法预测、类不平衡/成本敏感；指出研究缺口。
+
+- research_job_cn：系统搜索缺勤预测文献并归纳预测周期、数据集、评价指标、类不平衡处理。
+
+- required_evidence_cn：具体文献和评价，指出本研究的差异（月度/无健康预测变量/成本敏感）。
+
+- transition_to_next_cn：缺口指向成本敏感学习，进入预备知识。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：先介绍成本敏感分类和BACC等预备概念；再推导成本矩阵。
+
+- research_job_cn：以正式成本敏感框架和实际法规/薪酬参数推导每个混淆矩阵单元的成本；识别未知参数。
+
+- required_evidence_cn：数学推导、系统参数定义、Belgium白领法规对应。
+
+- transition_to_next_cn：矩阵需要未知tilde_t_s，于是设计两套实验路线。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：描述数据、目标变量、特征、算法组合、训练/测试划分和评价指标。
+
+- research_job_cn：构建月度前瞻性数据管道和可重复的模型网格；定义CIS/ROI和基准。
+
+- required_evidence_cn：数据规模、类别不平衡、代码/库版本、划分策略。
+
+- transition_to_next_cn：有了框架就能执行成本敏感与成本不敏感两组实验。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：分小节报告成本敏感实验、记录级/类别级对比、干预案例选择、成本未知结果。
+
+- research_job_cn：训练/评估大量模型组合，按CIS/ROI筛选，做多情景敏感性，对比BACC。
+
+- required_evidence_cn：表/图展示跨期结果；必须有正收益模型存在；记录与类别成本差异案例。
+
+- transition_to_next_cn：两个路线对比后，结论要解决成本未知怎么办。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：总结实践建议，明确限制和未来研究。
+
+- research_job_cn：把结果限定在任意参数假设下；提出估计干预效果（因果推断）和收集健康原因数据。
+
+- required_evidence_cn：能够说明哪些主张已被证据支持，哪些依赖假设。
+
+- transition_to_next_cn：结束闭环。
+
+### most_transferable_moves_cn
+
+1. 把误分类成本显式建模成业务变量（工资、缺勤、干预费用/时长/效果），而不是用默认成本比例。
+
+2. 用两个朴素基准（什么都不做、对所有人做）定义成本节省指标，使模型提升有业务意义。
+
+3. 在成本未知时，用无偏错误指标（BACC）先选模型，再在同一成本基准上回算，检验替代路线是否成立。
+
+4. 用多算法+多采样+校准+多阈值的网格并公开实验设置，避免单算法单数据集缺陷。
+
+5. 对记录级与类别级成本的差异做专项分析，展示DMECC的机制价值。
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. 真实多企业HR/薪酬数据约50万员工月记录，非公开，难以复制。
+
+2. 需要与HR服务商合作获得领域约束和法规细节，如比利时白领病假薪酬规则。
+
+3. 大规模网格实验（每期/情景333模型，14期）需要一定计算资源，但非极端。
+
+4. 干预效果参数tilde_t_s没有真实值，本文用比例/随机假设，缺乏实证基础；未来需要因果推断或RCT。
+
+### what_not_to_copy_superficially_cn
+
+1. 不能在没有真实成本参数时声称CIS/ROI为正意味着实际省钱；这些指标只是基于假设的估算。
+
+2. 不能把成本敏感优于BACC一般化为所有缺勤预测场景；它在给定成本和数据下成立。
+
+3. 不能照搬T_hrs=0阈值而不根据部署任务调整。
+
+4. 不能宣称干预安全（不造成负面结果）——本文没有干预数据。
+
+5. 不能仅用小规模数据而模仿其大规模网格的外部有效性话语。
+
+- single_best_description_of_the_routine_cn：先用业务/法规知识把干预决策的四种后果翻译成误分类成本，再以不干预/全员干预为基准构造成本节省指标，最后用网格化多算法实验证明成本敏感选择比无成本替代路线更划算，并把无法估计的关键参数留给未来因果推断。
+
+## 分析边界
+
+全文完整度较高，但Table 5和Table 6部分为图片/解析文本，个别数值可能来源不清；Fig.1和Fig.2未显示，只能依赖正文描述；未提供附录或代码。分析基于文本推断，部分位置以段落名而非精确页码标识。

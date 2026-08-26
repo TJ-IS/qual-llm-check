@@ -1,0 +1,1969 @@
+# Cross-Lingual Cybersecurity Analytics in the International Dark Web with Adversarial Deep Representation Learning
+
+- 作者：Mohammadreza Ebrahimi; Yidong Chai; Sagar Samtani; Hsinchun Chen
+- 年份 / 期刊：2022 / MIS Quarterly
+- DOI：10.25300/misq/2022/16618
+- 源文件：02006_2022_cross-lingual-cybersecurity-analytics-in-the-international-dark-web-with-adversarial-deep-repres.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.9
+
+## 文章级论证概况
+
+- 核心问题：如何在不依赖机器翻译和昂贵人工标注的条件下，利用英语暗网内容中已有的黑客资产标注知识，自动检测俄语、法语、意大利语等非英语暗网平台中的黑客资产？
+
+- 制品与设计：文章构建了一个跨语言黑客资产检测框架CLHAD，核心是ADREL方法：先用两个BiLSTM分别提取英语和非英语的文本表示，再用一个双生成器单判别器的GAN对抗结构学习语言不变的表示，最后用BiLSTM二元分类器对表示做黑客资产检测。整个过程不依赖外部平行语料、多语词向量或机器翻译。
+
+- 客观结果：在俄语、法语、意大利语暗网论坛和暗网市场上的基准实验中，CLHAD在准确率、F1和AUC上普遍显著优于词表基线、单语模型、基于机器翻译的模型和已有的CLKT模型；SHAP解释样例展示了可理解的判别词，资产画像则显示不同语言平台在黑客工具、服务、教程和金融欺诈类资产上的分布差异。
+
+- 核心贡献：作者声称的贡献包括：提出首个不依赖外部语言资源、通过对抗深度表示学习实现跨语言黑客资产检测的CLHAD/ADREL框架；提出两条可复用的设计原则（多语言同时参与表示学习、通过域不变表示迁移专家标注知识）；给出俄、法、意暗网黑客资产画像，并在操作层和战略层提出安全管理者可用的管理启示。
+
+- 整篇论证链：文章先以全球网络犯罪和暗网规模引出黑客资产情报的重要性，再指出人工检测不可扩展、机器学习需要人工标注、非英语平台标注尤其稀缺、机器翻译又因黑客行话而不可靠，由此提出跨语言知识迁移的必要性。随后通过IS网络安全文献、暗网黑客资产检测文献和CLKT文献的三层回顾，把缺口定位为“现有方法要么是单语/机器翻译，要么依赖昂贵外部语言资源”。作者以深度表示学习和GAN为方法论基础，提出语言不变表示是对迁移有用的设计条件，据此构建ADREL：BiLSTM产生语言特异表示，双生成器单判别器的对抗博弈迫使表示在语言间不可区分，再用分类器完成检测。评价部分先用人工标注建立金标准，再用损失曲线确定GAN训练迭代数，然后与词表、单语、MT、CLKT四类基准在俄、法、意平台上进行系统比较，证明ADREL的优越性。随后以SHAP解释样例回应可理解性需要，以黑客资产画像展示实际管理价值，并用附录B训练规模实验界定迁移所需数据量。最后，讨论把这些结果重述为两条设计原则和操略层面的管理建议，完成从现实问题到IT制品再到设计知识的闭环。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：作者明确采用计算设计科学范式，先识别应用层缺口，基于方法论基础（BiLSTM和GAN）构建CLHAD/ADREL制品，再用金标准、基准比较、损失稳定、解释样例和资产画像进行评价，并在结尾提炼为可复用设计原则。虽然包含大量计算和基准实验，但框架和贡献方式是设计科学性质的，而非仅仅在一个给定benchmark上报告性能。
+
+- 主导写作弧线判定：文章从现实和文献问题出发，引入深度表示学习与GAN知识作为设计依据，构建ADREL制品，通过基准评价和相关分析检验，最后在讨论中返回IS知识库、两条设计原则和管理启示，形成问题—知识基础—设计—检验—回到知识的完整弧线。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：七个阶段依次支撑：大规模多语数据采集与金标准构建为所有后续工作提供数据基础；CLHAD/ADREL方法构建把知识基础转成制品；损失曲线阶段确定训练步数；基准评价阶段验证制品相对各方法族的有效性；SHAP解释阶段满足可解释性并使非母语分析者能使用输出；资产画像阶段把检测结果转成安全管理者可用的业务知识；附录B训练规模分析阶段界定方法在何种标注规模下可用，增强外部效度。各阶段不是并列的独立实验，而是从数据→设计→调参→主验证→可解释性→管理价值→边界条件逐级累积。
+
+### studies_or_phases
+
+#### 1. 数据采集与金标准构建
+
+- order：1
+
+- name_cn：数据采集与金标准构建
+
+- question_cn：如何获得覆盖英语、俄语、法语、意大利语的暗网黑客资产语料，并建立可训练和验证的标注测试集？
+
+- inputs_and_setting_cn：4个大型黑客论坛（1英、1俄、2法）和10个暗网市场（7英、1俄、1法、1意），共862,715条2016–2019年数据；7名标注员（5名母语者、2名网络安全专家）。
+
+- designed_or_compared_object_cn：爬虫与预处理流程、标签判定协议；用全部语料学习文本表示，用子集构成金标准。
+
+- baseline_control_or_counterfactual_cn：不适用；此处无方法对照。
+
+##### objective_metrics
+
+1. 标注员间一致率（最终超过99%的实例被一致标注）
+
+2. 金标准规模（5,976篇文档，其中英3,271、俄2,271、法713、意435）
+
+- analysis_method_cn：Tor路由BFS爬虫抓取帖子与商品描述；分词、小写、UTF-8统一编码；母语者与安全专家两两标注，对分歧开会讨论。
+
+- main_result_cn：生成覆盖14个暗网平台、4种语言的金标准集；无法达成一致的非信息性翻译被剔除。
+
+- argumentative_role_cn：构建后续所有训练、调参、基准比较和画像分析的基础数据资产，解决非英语暗网数据不足这一研究前提问题。
+
+- remaining_uncertainty_cn：标注集只是全网大语料的子集；仅覆盖俄、法、意三种目标语言和2016–2019年时间段。
+
+- link_to_next_phase_cn：金标准集成为ADREL训练、损失曲线观察和基准评价的输入。
+
+##### evidence_pointers
+
+1. Proposed Research Design -> Data Collection and Data Pre-Processing
+
+2. Performance Evaluation -> Gold-Standard Dataset Construction
+
+3. Figure 1
+
+#### 2. CLHAD/ADREL方法构建
+
+- order：2
+
+- name_cn：CLHAD/ADREL方法构建
+
+- question_cn：如何把“语言不变表示有利于跨语言知识迁移”这一知识转变成可运行的深度表示学习制品？
+
+- inputs_and_setting_cn：第一阶段得到的英语和非英语暗网文本表示；来自GAN和BiLSTM的方法论基础。
+
+- designed_or_compared_object_cn：设计ADREL的双生成器单判别器对抗结构，以及后续的BiLSTM二元分类器。
+
+- baseline_control_or_counterfactual_cn：以标准GAN架构为对比点，说明ADREL把单生成器改为双生成器并替换目标函数和均衡准则。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：构造minimax博弈方程，设计两阶段训练（BiLSTM语言特异表示，GAN语言不变表示）和5步迭代算法。
+
+- main_result_cn：得到CLHAD的两阶段框架：ADREL提取语言不变表示，BiLSTM分类器输出黑客资产概率。
+
+- argumentative_role_cn：这是论文的核心制品创新，把抽象的方法论知识落实为具体网络结构和博弈目标。
+
+- remaining_uncertainty_cn：设计本身尚未被证明有效，需要后续训练和基准评价来验证。
+
+- link_to_next_phase_cn：生成的ADREL需要确定训练迭代数，于是进入损失稳定性分析。
+
+##### evidence_pointers
+
+1. Proposed Research Design -> Cross-Lingual Hacker Asset Detection (CLHAD)
+
+2. CLHAD Stage 1: ADREL
+
+3. Figure 2, Figure 3, Equation 2
+
+#### 3. GAN均衡识别（训练迭代数确定）
+
+- order：3
+
+- name_cn：GAN均衡识别（训练迭代数确定）
+
+- question_cn：ADREL在俄、法、意三种语言上各需要多少训练迭代才能达到近似均衡，避免欠训练或过训练？
+
+- inputs_and_setting_cn：ADREL在三种语言上的判别器损失和生成器损失曲线。
+
+- designed_or_compared_object_cn：训练迭代数。
+
+- baseline_control_or_counterfactual_cn：无对照；通过损失是否稳定来判断。
+
+##### objective_metrics
+
+1. 生成器损失
+
+2. 判别器损失
+
+3. 损失稳定点
+
+- analysis_method_cn：逐迭代绘制损失曲线，观察损失从先增后减到基本稳定的转折点。
+
+- main_result_cn：俄、法、意分别约在500、600、400次迭代后损失趋于稳定，该数值被用于后续基准实验。
+
+- argumentative_role_cn：解决GAN训练中“没有明确迭代数”的实际风险，为基准评价提供可复现的训练预算，也说明方法在每种语言上可稳定收敛。
+
+- remaining_uncertainty_cn：损失稳定只是经验性操作准则，并非理论证明的GAN均衡。
+
+- link_to_next_phase_cn：确定迭代数后，才能把CLHAD与各基准公平比较。
+
+##### evidence_pointers
+
+1. Performance Evaluation -> Equilibrium Identification
+
+2. Figure 4
+
+#### 4. 多类基准的跨语言性能评价
+
+- order：4
+
+- name_cn：多类基准的跨语言性能评价
+
+- question_cn：CLHAD在俄、法、意暗网数据和论坛/市场两类平台上是否显著优于词表、单语、机器翻译和已有CLKT方法？
+
+- inputs_and_setting_cn：金标准集；俄/法/意论坛和暗网市场文本；英语作为高资源源语言；Google Translate用于MT类基准。
+
+- designed_or_compared_object_cn：CLHAD与四类方法族：词表基线、单语模型（NB/SVM/RF/BiLSTM/BiGRU/CNN）、MT-Based方法（加Google翻译）、CLKT备选（FML-CNN、MTL-BiLSTM、MTL-BiGRU）。
+
+- baseline_control_or_counterfactual_cn：词表搜索作为无学习基线；单语模型作为无跨语言迁移对照；MT-Based作为“先翻译再检测”对照；CLKT备选作为已有跨语言学习对照。
+
+##### objective_metrics
+
+1. Accuracy
+
+2. F1-score
+
+3. AUC
+
+4. 五折交叉验证
+
+5. 配对t检验显著性
+
+- analysis_method_cn：统一训练/评测流程，五折交叉验证，配对t检验判断差异显著性；所有方法按表2的训练数据类别组织。
+
+- main_result_cn：CLHAD在俄语和法语论坛以及论坛/市场的大部分指标上超越所有基准，且显著；意大利结果在附录A中同样最优；例如俄语论坛AUC从第二名70.18%提升到82.33%，法语论坛从71.47%提升到85.80%。
+
+- argumentative_role_cn：这是全文核心实证证据：证明ADREL的语言不变表示确实带来了跨语言检测优势，也排除了偶然性和单语言基线自欺的可能。
+
+- remaining_uncertainty_cn：基准比较只能说明在这些语言/平台上更好，不能说明“为什么”有效，也不能说明可解释性与管理用途。
+
+- link_to_next_phase_cn：性能优势需要进一步解释“模型为何这样判断”，以及结果对管理有什么含义，于是进入SHAP解释和画像。
+
+##### evidence_pointers
+
+1. Performance Evaluation -> Benchmark Evaluation
+
+2. Table 2, Table 3
+
+3. Appendix A Table A1
+
+#### 5. SHAP结果解释（代表性样例）
+
+- order：5
+
+- name_cn：SHAP结果解释（代表性样例）
+
+- question_cn：CLHAD判断某个非英语文本为黑客资产时，哪些词起了关键作用？能否让非母语分析师通过词级解释理解输出？
+
+- inputs_and_setting_cn：三个代表性被检测黑客资产样本：俄语间谍软件、法语数据库注入工具、意大利语MAC地址伪造工具。
+
+- designed_or_compared_object_cn：模型无关解释机制SHAP应用于CLHAD输出。
+
+- baseline_control_or_counterfactual_cn：无对照；通过人工可理解的翻译词列表进行展示。
+
+##### objective_metrics
+
+（空）
+
+- analysis_method_cn：用SHAP/博弈论Shapley值计算每个词对决策的贡献；按系数列出前五贡献词并附翻译和颜色深浅。
+
+- main_result_cn：俄语的“wallet/spy/victim/data”，法语的“logs/inject/windows”，意大利语的“spoof/address/MAC”等词汇解释了检测决策，说明简单词表翻译可被非母语分析者使用。
+
+- argumentative_role_cn：从“性能最高”进一步转向“可解释、可信任、可落地”，为后续分析者使用模型输出铺路。
+
+- remaining_uncertainty_cn：只是三个样例展示，未做解释有效性的人机实验，也没有量化SHAP解释对分析师决策的改进。
+
+- link_to_next_phase_cn：解释机制保证输出可理解，下一步就可以把检测结果汇总为语言级黑客资产画像，用于管理判断。
+
+##### evidence_pointers
+
+1. Explanation and Detected Hacker Assets Profiling -> Results Explanation
+
+2. Table 4
+
+#### 6. 被检测黑客资产画像与语言差异分析
+
+- order：6
+
+- name_cn：被检测黑客资产画像与语言差异分析
+
+- question_cn：通过CLHAD在金标准集中检测到的黑客资产，按语言平台分布呈现什么结构差异？这些差异有何安全管理含义？
+
+- inputs_and_setting_cn：CLHAD在金标准数据中的检测结果；按词表把资产分为黑客工具、黑客服务、黑客教程、金融欺诈工具四类。
+
+- designed_or_compared_object_cn：英语、俄语、法语、意大利语四类平台之间的资产类别分布。
+
+- baseline_control_or_counterfactual_cn：以语言平台为比较维度，没有外部基准。
+
+##### objective_metrics
+
+1. 各类别被检测资产占比
+
+- analysis_method_cn：用词表搜索汇总四个资产类别在每种语言中的占比，绘制堆叠式占比图，并做定性解读。
+
+- main_result_cn：四类平台都较多涉及金融欺诈；英语和俄语偏黑客工具；俄语在黑客服务上显著集中，而教程占比低；法语和意大利语偏黑客教程。
+
+- argumentative_role_cn：把模型检测结果从技术指标转成管理情报，支撑“应关注俄语平台以识别高级黑客资产”和“金融欺诈资产需跨语言监控”的管理启示。
+
+- remaining_uncertainty_cn：该分布来自词表分类而非更高层的主题建模，也未验证“服务多=技能高”的因果链。
+
+- link_to_next_phase_cn：画像结果直接进入讨论部分，作为运行层和战略层管理启示的经验证据。
+
+##### evidence_pointers
+
+1. Explanation and Detected Hacker Assets Profiling -> Detected Hacker Assets Profiling
+
+2. Figure 5
+
+#### 7. 目标语言训练规模敏感性分析（附录B）
+
+- order：7
+
+- name_cn：目标语言训练规模敏感性分析（附录B）
+
+- question_cn：为达到可接受的跨语言检测性能（AUC大于80%），不同目标语言至少需要多少训练文档？语言亲缘关系是否影响所需训练量？
+
+- inputs_and_setting_cn：俄、法、意三种目标语言的训练集，从原规模的20%逐步增加到100%。
+
+- designed_or_compared_object_cn：不同训练规模下的CLHAD性能曲线。
+
+- baseline_control_or_counterfactual_cn：同一方法在不同训练比例下的自对照；以及俄语（跨语系）与法语/意大利语（近语系）之间的对比。
+
+##### objective_metrics
+
+1. AUC
+
+2. F1-score
+
+3. Accuracy
+
+4. 达到AUC>80%所需最小训练文档数
+
+- analysis_method_cn：经验性截断分析：逐步缩小训练数据并重训CLHAD，记录性能变化；比较俄语与法意的最小需求。
+
+- main_result_cn：达到AUC>80%所需文档数：俄语约1,817篇，法语约570篇，意大利语约261篇；与英语同属印欧语系近亲的法语、意大利语所需训练量远低于斯拉夫语系的俄语。
+
+- argumentative_role_cn：提供方法的外部效度边界：证明方法在低资源条件下可用，并指明新语言如果与英语同族，则只需数百篇标注文档。
+
+- remaining_uncertainty_cn：只基于三种语言的曲线，未直接测试其他语言；训练量阈值随平台、主题、数据分布可能变化。
+
+- link_to_next_phase_cn：该边界条件在讨论中与其他证据一起支持“CLHAD可泛化、可在资源受限条件下采用”的总体结论。
+
+##### evidence_pointers
+
+1. Appendix B
+
+2. Figure B1
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 暗网平台承载大量黑客资产，网络安全分析组织用ML自动检测
+
+2. PHENOMENON: 非英语暗网内容缺乏人类标注数据
+
+3. LIMITATION: 机器翻译不适配黑客领域语言
+
+4. RQ_OR_OBJECTIVE: 采用计算设计科学开发CLHAD/ADREL
+
+5. CONTRIBUTION: 在俄法意平台评价、检测画像与管理启示
+
+### introduction_moves
+
+1. CONTEXT/PRACTICAL_STAKES: 网络犯罪成本与暗网规模
+
+2. PHENOMENON: 黑客论坛与暗网市场中的黑客资产类型
+
+3. LIMITATION: 人工检测和关键词搜索不可扩展
+
+4. PRIOR_KNOWLEDGE: ML检测方案需要人工标注数据
+
+5. GAP/WHY_GAP_MATTERS: 非英语平台标注成本和MT误译问题
+
+6. RQ_OR_OBJECTIVE: 提出CLHAD和ADREL
+
+7. CONTRIBUTION: 多语言检测框架与黑客资产画像
+
+### theory_and_knowledge_moves
+
+1. 理论回顾：IS网络安全研究三大范式
+
+2. PRIOR_KNOWLEDGE: 现有黑客资产检测多为单语或MT
+
+3. THEORY_INTRO: CLKT依赖外部资源
+
+4. LIMITATION: 平行语料、多语词向量、领域MT都昂贵或不可得
+
+5. GAP: 需不依赖外部资源的跨语言表示学习
+
+6. THEORY_INTRO: BiLSTM提取语言特定表示
+
+7. THEORY_PROPOSITION: 迁移表示必须是语言不变的
+
+8. THEORY_INTRO: GAN的对抗博弈与minimax目标
+
+### artifact_design_moves
+
+1. STUDY_OVERVIEW: 四个研究组件
+
+2. METHOD_JUSTIFICATION: Tor爬虫与金标准建立
+
+3. DESIGN_FEATURE: CLHAD两阶段：ADREL + 二元分类器
+
+4. MECHANISM: 语言特异表示需向另一语言表示靠拢
+
+5. DESIGN_FEATURE: 双生成器单判别器的Y型结构
+
+6. DESIGN_FEATURE: 不依赖外部资源、无先验分布假设
+
+7. DESIGN_FEATURE: BiLSTM分类器输出置信度
+
+### evaluation_moves
+
+1. STUDY_OVERVIEW: 两类评价：均衡识别和基准比较
+
+2. METHOD_JUSTIFICATION: 7人金标准标注流程
+
+3. RESULT: 损失稳定点约500/600/400
+
+4. BENCHMARK_OR_CONTRAST: 四类方法族对照
+
+5. BENCHMARK_OR_CONTRAST: Accuracy/F1/AUC与五折CV、配对t检验
+
+6. RESULT: CLHAD显著优于所有基准
+
+7. MECHANISM: 从MT对比和CLKT对比中推断设计因素
+
+8. ROBUSTNESS_OR_BOUNDARY_TEST: 跨语言一致性和训练规模
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION: 两条设计原则
+
+2. CONTRIBUTION: 对网络安全分析和社会媒体分析的扩展
+
+3. CONTRIBUTION: 操作层管理启示
+
+4. CONTRIBUTION: 战略层管理启示
+
+5. BOUNDARY_CONDITION: 俄法意数据与语言族边界
+
+6. LIMITATION_AND_FUTURE: 未来可整合社交网络分析
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 深度表示学习：BiLSTM可提取文本语义和时序依赖表示
+
+2. Ganin等人的域对抗思想：可迁移表示必须是语言不变的
+
+3. GAN对抗学习：生成器与判别器的minimax博弈
+
+4. CLKT文献：传统方法依赖平行语料、多语词向量或MT
+
+5. 文本分类文献：BiLSTM作为有效文本分类器
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：ADREL的核心设计（双生成器、单判别器、语言不变表示的对抗目标）直接从GAN和语言不变表示的知识命题导出，并接受基准评价、损失稳定和训练规模分析的直接检验。它不是事后用理论解释设计，而是知识基础先行决定了制品结构。需要说明的是，这里的“理论”是计算方法论知识，而非行为或组织理论。
+
+- 理论到设计翻译链：深度表示学习能自动提取语义特征 → BiLSTM可提取语言特定的时序文本表示 → 但语言特定表示不可迁移 → 可迁移表示必须是语言不变的 → GAN的对抗博弈能让生成器与判别器互相竞争 → 将双生成器分别用于英语/非英语表示，并让判别器无法区分生成表示的语言 → 就能得到语言不变表示 → 该表示可在英语标注知识上训练分类器并用于非英语检测 → 基准实验证明该设计优于单语、MT和既有CLKT方法。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：BiLSTM利用词序正反两个方向捕获时序文本模式，适合提取语言特定文本表示
+
+- mechanism_cn：从两种语言文本中分别构造分布化的低维语义表示，保留分类需要的内容特征
+
+- design_requirement_cn：CLHAD需要在源语言和目标语言上分别得到初始表示
+
+- artifact_choice_cn：ADREL第一阶段用两个独立BiLSTM分别编码英语和非英语内容
+
+- evaluated_contrast_cn：单语深度模型BiLSTM/BiGRU/CNN vs CLHAD
+
+- objective_result_cn：CLHAD显著优于深度学习单语模型
+
+##### evidence_pointers
+
+1. Proposed Research Design, ADREL Phase 1
+
+2. Table 3
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：可迁移的表示需要是语言不变的，即源语言和目标语言共享的特征
+
+- mechanism_cn：让两个语言生成器互相模仿对方的表示，判别器试图识别表示的语言，在博弈中迫使表示失去语言身份
+
+- design_requirement_cn：需要一种无外部资源的机制来生成语言不变表示
+
+- artifact_choice_cn：ADREL设计双生成器G_en/G_NE与单判别器D的Y型GAN结构，并用式(2)的minimax目标和新的均衡准则
+
+- evaluated_contrast_cn：FML-CNN和MTL-BiLSTM等CLKT备选方法 vs CLHAD
+
+- objective_result_cn：CLHAD在俄、法论坛和DNM上的AUC/F1/Accuracy显著更高
+
+##### evidence_pointers
+
+1. CLHAD Stage 1, Figure 2/3, Equation 2
+
+2. Table 3
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：传统CLKT依赖多语词向量、平行语料或机器翻译，而这些外部资源在暗网领域昂贵或不可得
+
+- mechanism_cn：消除外部资源能减少翻译噪声和对齐成本，并直接把文本表示迁移到目标语言
+
+- design_requirement_cn：语言不变表示的学习不能依赖外部双语资源
+
+- artifact_choice_cn：ADREL直接从未标注/少标注的双语暗网文本表示学习，不引入任何外部翻译或词向量
+
+- evaluated_contrast_cn：MT-Based方法（NB/SVM/RF/BiGRU/BiLSTM/CNN + Google Translate） vs CLHAD
+
+- objective_result_cn：MT-Based方法并未一致超过单语模型，CLHAD在多数指标上显著领先
+
+##### evidence_pointers
+
+1. ADREL novelty 2
+
+2. Table 3
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：GAN在没有真实分布先验的情况下也能通过对抗博弈逼近均衡，适配文本这类高维、分布未知的数据
+
+- mechanism_cn：生成器不依赖预定义噪声先验，而是接受BiLSTM的文本表示输入蒸馏出语言不变特征
+
+- design_requirement_cn：文本表示生成不应假设数据的先验分布
+
+- artifact_choice_cn：ADREL的生成器作用在BiLSTM表示R_en和R_NE上，而非随机噪声z上
+
+- evaluated_contrast_cn：标准GAN公式与ADREL公式在图3中对比
+
+- objective_result_cn：ADREL在三种语言上损失可稳定并实现跨语言检测改进
+
+##### evidence_pointers
+
+1. CLHAD Stage 1, Figure 3
+
+2. Table 3
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 金标准人工标注与一致性校验
+
+2. 生成器/判别器损失曲线与稳定点识别
+
+3. 四类方法族的benchmark比较：词表、单语、MT-Based、CLKT备选
+
+4. 五折交叉验证与配对t检验的统计显著性检验
+
+5. SHAP词级解释样例展示
+
+6. 被检测资产的语言层面画像与描述性比较
+
+7. 训练规模敏感性分析
+
+- why_these_evaluations_cn：设计科学制品需要逐层证明：金标准保证后续评估标签可靠；损失稳定保证GAN训练可复现；多方法族benchmark证明CLHAD相对于现状的增量价值；统计检验证明差异不是抽样噪声；SHAP解释保证模型输出可被分析者理解；资产画像显示制品不只是学术分数，还能回答现实管理问题；训练规模分析说明低资源场景下的可用边界。
+
+- benchmark_and_contrast_chain_cn：作者从最基础的词表搜索开始，逐步加入非跨语言学习的单语ML/深度模型，再加入使用Google Translate的MT-Based方法，最后加入不以对抗学习为策略的CLKT备选。这个链条从低到高覆盖了暗网黑客资产检测文献中的主要技术演进，并且在统一数据、统一指标、统一交叉验证和显著性检验下比较。因此，CLHAD的胜出不是只胜过随机基线，而是胜过“仅用目标语言”“先翻译”“已有跨语言迁移”三类主流做法。
+
+### claim_evidence_ledger
+
+#### 1. 金标准标签可靠
+
+- claim_cn：金标准标签可靠
+
+- evidence_cn：7名标注员，母语者与安全专家配对标注，分歧会议讨论；超过99%实例一致，无法一致者剔除
+
+- status_cn：有直接证据支持
+
+#### 2. ADREL训练可稳定并确定迭代数
+
+- claim_cn：ADREL训练可稳定并确定迭代数
+
+- evidence_cn：俄法意三图的生成器和判别器损失在约500/600/400次迭代后稳定
+
+- status_cn：有直接证据支持，但属于操作性而非理论证明
+
+#### 3. CLHAD显著优于四类基准
+
+- claim_cn：CLHAD显著优于四类基准
+
+- evidence_cn：表3和附录A展示Accuracy/F1/AUC，标记显著性，配五折CV和配对t检验
+
+- status_cn：有直接证据支持；但结果是特定数据集和实验配置下的表现
+
+#### 4. MT并不一定优于单语模型，误译会伤害检测
+
+- claim_cn：MT并不一定优于单语模型，误译会伤害检测
+
+- evidence_cn：MT-Based方法在某些场景反而低于单语模型，且低于CLHAD
+
+- status_cn_cn：有间接证据支持，来自benchmark模式的比较
+
+- status_cn：有间接证据支持，来自benchmark模式的比较
+
+#### 5. 对抗训练产生的语言不变表示是性能提升机制
+
+- claim_cn：对抗训练产生的语言不变表示是性能提升机制
+
+- evidence_cn：CLHAD优于FML-CNN和MTL-BiLSTM，作者据此推断表示不变性起作用
+
+- status_cn_cn：推断性主张；未直接测量表示的不变程度
+
+- status_cn：推断性主张；未直接测量表示的不变程度
+
+#### 6. CLHAD输出可解释并可用于非母语分析者
+
+- claim_cn：CLHAD输出可解释并可用于非母语分析者
+
+- evidence_cn：SHAP样例展示俄法意各一条资产，贡献词可从简单词表翻译理解
+
+- status_cn_cn：演示性证据，未做人机任务测试
+
+- status_cn：演示性证据，未做人机任务测试
+
+#### 7. 俄语平台偏高级黑客资产，金融欺诈资产分散于多语言
+
+- claim_cn：俄语平台偏高级黑客资产，金融欺诈资产分散于多语言
+
+- evidence_cn：资产画像中俄语强调黑客服务且教程少，四语言都较多金融欺诈
+
+- status_cn_cn：描述性证据；未直接测量“技能水平”或“组织化程度”
+
+- status_cn：描述性证据；未直接测量“技能水平”或“组织化程度”
+
+#### 8. CLHAD在新语言上可用且所需训练量受语言族影响
+
+- claim_cn：CLHAD在新语言上可用且所需训练量受语言族影响
+
+- evidence_cn：附录B：俄需1,817、法需570、意需261篇文档达到AUC>80%
+
+- status_cn_cn：有经验支持，但只覆盖三种目标语言
+
+- status_cn：有经验支持，但只覆盖三种目标语言
+
+- internal_validity_strategy_cn：统一使用金标准集，所有方法在同一数据切分下五折交叉验证；用配对t检验控制同一折导致的配对差异；固定指标为Accuracy/F1/AUC并说明类别不平衡下需要AUC；损失曲线观察训练稳定性为后续实验提供固定参数。
+
+- external_validity_strategy_cn：同时覆盖俄、法、意三种语言和论坛、暗网市场两类平台；每个语言由多种平台来源构成；将意大利结果放在附录A表明一致性；附录B通过训练规模分析说明不同语言族的样本需求；公开代码和数据仓库增强可复现与可扩展到新语言的潜力。
+
+- what_is_not_actually_tested_cn：未测试真实安全分析者使用CLHAD和SHAP解释后的决策表现；未比较近年出现的大规模预训练多语模型（如mBERT/XLM-R）；未直接验证“表示是语言不变的”这一内部机制；未直接测量黑客技能水平或组织化程度；未检验除俄法意外的其他语言；未检验设计原则在关键黑客识别、社区发现等其他任务上的适用性。
+
+## 贡献闭环
+
+- technical_claim_cn：ADREL作为一种新的GAN式跨语言表示学习方法，在俄法意暗网黑客资产检测上显著优于词表、单语、MT-Based和已有CLKT方法。
+
+- artifact_claim_cn：CLHAD是首个不依靠机器翻译，通过对抗深度表示学习把英语标注知识迁移到非英语暗网平台的可解释检测框架，包含ADREL两阶段表示学习+BiLSTM分类器+SHAP解释机制。
+
+- mechanism_claim_cn：性能提升来自ADREL中双生成器与单判别器的对抗过程，它迫使英语和非英语表示向对方靠拢，从而形成语言不变表示；相比MT的翻译噪声和单语模型的语言特化表示，该机制能更好地保留检测黑客资产所需的语义。
+
+- boundary_claim_cn：方法在俄、法、意三种语言上有效；在目标语言与英语同属一个语族时训练数据需求更低（法语570篇、意大利语261篇即可达AUC>80%），跨语族时需要更多（俄语约1,817篇）。资产画像还显示俄罗斯平台更集中黑客服务，而金融欺诈资产在多语言平台都高发。
+
+- reusable_design_knowledge_cn：作者提炼了两条设计原则：(1) 同时利用多个语言构造综合文本表示，以支持下游文本分析；(2) 通过域不变/语言不变表示把专家标注知识迁移到新域。两者都可迁移到网络安全分析和社会媒体分析中的其他文本任务。
+
+- theoretical_contribution_cn：在IS计算设计科学文献中扩展了跨语言网络安全分析的方法工具箱；对CLKT文献的贡献是证明可以绕过外部语言资源，用对抗表示学习实现对领域特定低资源文本的迁移；对不同语言平台资产分布给出描述性发现。它不是对行为或经济理论的修正，而是设计知识和应用型实证贡献。
+
+- how_discussion_closes_intro_gap_cn：讨论部分重述引言中的“语言障碍—标注稀缺—MT误译—外部资源依赖”问题链，并把CLHAD/ADREL定位为这一缺口的解决方案；随后把结果提升为设计原则，说明该方案不只是解决暗网黑客资产检测，也为IS和社会媒体分析提供了可复用的知识。
+
+- overclaim_or_unsupported_leaps_cn：“第一个不依赖外部资源提取语言不变表示”的表述仅依赖文献检索和作者声称，未做系统专利/文献全景分析；资产画像中用“黑客服务多、教程少”推断俄罗斯黑客技能更高级，且把黑客服务解释为可能是内部人员非法访问，这一因果推断缺乏证据；两条设计原则的跨任务适用性是示范性陈述，未在关键黑客识别、内容审核等任务上实证；SHAP样例只展示三条输出，不能说“非母语分析师可以可靠使用”。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：暗网平台分布在多地域和多种语言，承载大量黑客资产；安全分析组织用机器学习自动检测。
+
+- rhetorical_function_cn：用一句话交代现象、平台和检测手段，为整篇研究设定应用背景。
+
+- depends_on_cn：无需前置，开篇立意。
+
+- sets_up_cn：引出下文“缺少标注”的核心限制。
+
+- evidence_pointer：Abstract第一句
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：非英语暗网内容缺少人工标注数据，这是重要障碍。
+
+- rhetorical_function_cn：点明问题：机器学习需要标签，而标签在非英语环境中稀缺。
+
+- depends_on_cn：依赖前一句的“监督学习检测”背景。
+
+- sets_up_cn：为跨语言知识转移提出必要性。
+
+- evidence_pointer：Abstract第三句
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者采用计算设计科学范式，开发CLHAD来检测非英语暗网黑客资产。
+
+- rhetorical_function_cn：给出研究目标和框架名。
+
+- depends_on_cn：承接标注稀缺问题。
+
+- sets_up_cn：后续“ADREL”作为核心创新。
+
+- evidence_pointer：Abstract第四至五句
+
+### 4. Abstract P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：文章在俄法意平台评价了CLHAD，并做黑客资产画像，给出管理启示。
+
+- rhetorical_function_cn：预告评价范围、应用结果和管理价值。
+
+- depends_on_cn：建立在制品提出之上。
+
+- sets_up_cn：暗示“技术性能+管理含义”双贡献。
+
+- evidence_pointer：Abstract最后数句
+
+### 5. Introduction P1 S1
+
+- order：5
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：网络犯罪到2021年预计每年耗费全球6万亿美元，暗网贡献很大。
+
+- rhetorical_function_cn：用经济损失营造紧迫感。
+
+- depends_on_cn：无需前置。
+
+- sets_up_cn：把暗网分析定位为高影响问题。
+
+- evidence_pointer：Introduction第一段
+
+### 6. Introduction P1 S2-S4
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S2-S4
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：暗网由黑客论坛和暗网市场组成，里面有恶意软件、黑客工具、教程和恶意源码等资产，能反映攻击者的工具、技术和程序。
+
+- rhetorical_function_cn：定义研究对象和黑客资产范畴。
+
+- depends_on_cn：承接网络犯罪背景。
+
+- sets_up_cn：说明为什么检测黑客资产有价值。
+
+- evidence_pointer：Introduction第一段后部
+
+### 7. Introduction P2 S1
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：暗网商品数量从2013年数千增至2018年数十万，人工筛查不可行。
+
+- rhetorical_function_cn：用量级激增说明人工方法失败。
+
+- depends_on_cn：依赖前面对暗网重要性的论述。
+
+- sets_up_cn：为自动化方法出场铺路。
+
+- evidence_pointer：Introduction第二段首句
+
+### 8. Introduction P2 S2
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：关键词搜索容易产生漏报和误报。
+
+- rhetorical_function_cn：排除简单检索方案。
+
+- depends_on_cn：延续人工检测不可行。
+
+- sets_up_cn：让ML方案成为候选。
+
+- evidence_pointer：Introduction第二段中句
+
+### 9. Introduction P2 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：安全报告建议用机器学习监测暗网。
+
+- rhetorical_function_cn：用行业权威支撑ML路线。
+
+- depends_on_cn：前面排除了人工和关键词搜索。
+
+- sets_up_cn：引入ML的标注依赖作为新限制。
+
+- evidence_pointer：Introduction第二段后半
+
+### 10. Introduction P2 S4
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：ML需要人工标签，成本昂贵，非英语平台因语言障碍更严重。
+
+- rhetorical_function_cn：引入全文关键障碍：标注稀缺。
+
+- depends_on_cn：ML被确立为基本路线。
+
+- sets_up_cn：为低资源/跨语言方案做铺垫。
+
+- evidence_pointer：Introduction第二段末
+
+### 11. Introduction P3 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：GAP
+
+- paraphrase_cn：现有研究常用机器翻译把非英语转到英语，但MT基于通用语料训练，不适配黑客行话，容易误译。
+
+- rhetorical_function_cn：否定简单的MT方案，制造方法论缺口。
+
+- depends_on_cn：依赖标注稀缺问题。
+
+- sets_up_cn：引出CLKT和自制表示学习。
+
+- evidence_pointer：Introduction第三段前部
+
+### 12. Introduction P3 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P3 S2
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：俄、法、意是暗网常见语言，不同国家平台资产不同，需要多语言分析。
+
+- rhetorical_function_cn：把单语言缺陷升级为整体态势感知缺口。
+
+- depends_on_cn：MT不可靠的说明。
+
+- sets_up_cn：选定评价语言。
+
+- evidence_pointer：Introduction第三段中句
+
+### 13. Introduction P3 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者采用计算设计科学开发CLHAD，在不使用MT的情况下检测非英语黑客资产。
+
+- rhetorical_function_cn：正式给出研究框。
+
+- depends_on_cn：基于语言缺口和方法论缺口。
+
+- sets_up_cn：介绍ADREL核心方法。
+
+- evidence_pointer：Introduction第三段目标句
+
+### 14. Introduction P3 S4
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P3 S4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：ADREL基于GAN自动从英语语境中提取并迁移语言不变表示，不需要外部资源和大量人工标注。
+
+- rhetorical_function_cn：预告创新点。
+
+- depends_on_cn：目标句之后。
+
+- sets_up_cn：让读者知道技术核心是GAN表示学习。
+
+- evidence_pointer：Introduction第三段后半
+
+### 15. Introduction P3 S5
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P3 S5
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者断言本文贡献是新的多语检测框架、多语暗网资产画像以及针对俄语和金融欺诈资产的管理启示。
+
+- rhetorical_function_cn：给出贡献清单。
+
+- depends_on_cn：前面对CLHAD/ADREL的描述。
+
+- sets_up_cn：后续讨论和画像部分对应这些贡献。
+
+- evidence_pointer：Introduction末句
+
+### 16. Research Background P1
+
+- order：16
+
+- section：Research Background
+
+- locator：Research Background P1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：文章从IS网络安全、暗网黑客资产检测、CLKT三个文献流回顾，以定位研究问题和缺口。
+
+- rhetorical_function_cn：给出文献综述的路线图。
+
+- depends_on_cn：引入背景。
+
+- sets_up_cn：后续三小节分别对应三个文献流。
+
+- evidence_pointer：Research Background首段
+
+### 17. IS Cybersecurity Literature段
+
+- order：17
+
+- section：Research Background -> IS Cybersecurity Literature
+
+- locator：IS Cybersecurity Literature段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：IS网络安全研究分为行为、经济、计算设计科学三范式；计算设计科学适合利用公开暗网数据开发分析制品。
+
+- rhetorical_function_cn：把本研究归入计算设计科学范式。
+
+- depends_on_cn：文献路线图。
+
+- sets_up_cn：为设计科学的范式选择提供合法性。
+
+- evidence_pointer：Research Background第一个二级标题下
+
+### 18. Dark Web Hacker Asset Detection首段后半
+
+- order：18
+
+- section：Research Background -> Dark Web Hacker Asset Detection
+
+- locator：Dark Web Hacker Asset Detection首段后半
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有检测研究大多是单语模型，或只能靠MT处理非英语，未解决多语暗网检测。
+
+- rhetorical_function_cn：用表1的文献汇总指出技术现状的局限。
+
+- depends_on_cn：黑客资产定义的铺垫。
+
+- sets_up_cn：引出跨语言检测必要性。
+
+- evidence_pointer：该小节和Table 1
+
+### 19. 该小节末段
+
+- order：19
+
+- section：Research Background -> Dark Web Hacker Asset Detection
+
+- locator：该小节末段
+
+- move_code：GAP
+
+- paraphrase_cn：MT服务基于普通网络语料训练，无法处理暗网术语；获得翻译对齐语料比分类标签更贵。
+
+- rhetorical_function_cn：进一步否定MT路线。
+
+- depends_on_cn：已有的单语限制。
+
+- sets_up_cn：为CLKT登场铺路。
+
+- evidence_pointer：该小节末段
+
+### 20. CLKT小节前段
+
+- order：20
+
+- section：Research Background -> CLKT
+
+- locator：CLKT小节前段
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：CLKT是迁移学习的分支，旨在用高资源语言知识改善低资源语言任务，但传统方法依赖人工特征工程。
+
+- rhetorical_function_cn：介绍知识基础。
+
+- depends_on_cn：MT缺口的铺垫。
+
+- sets_up_cn：说明深度CLKT是方向，但仍有外部资源依赖。
+
+- evidence_pointer：CLKT小节前段
+
+### 21. CLKT小节后续
+
+- order：21
+
+- section：Research Background -> CLKT
+
+- locator：CLKT小节后续
+
+- move_code：LIMITATION
+
+- paraphrase_cn：现有深度CLKT需要多语词向量、平行语料或可靠MT，这些外部资源在领域特定文本中昂贵或不可得。
+
+- rhetorical_function_cn：找出CLKT方法在暗网场景无法落地的主要原因。
+
+- depends_on_cn：CLKT介绍。
+
+- sets_up_cn：让“不依赖外部资源”成为ADREL的差异化卖点。
+
+- evidence_pointer：CLKT小节后半
+
+### 22. Research Background末段
+
+- order：22
+
+- section：Research Background -> Gap Synthesis
+
+- locator：Research Background末段
+
+- move_code：GAP
+
+- paraphrase_cn：IS网络安全分析缺少能同时利用多种语言数据源的制品；单语模型有标签问题，MT方法有误译，CLKT又依赖外部资源。
+
+- rhetorical_function_cn：合成三类文献缺口，形成研究问题。
+
+- depends_on_cn：前面三个文献流。
+
+- sets_up_cn：为方法设计提供明确动机。
+
+- evidence_pointer：Research Background末段
+
+### 23. Research Background末段后句
+
+- order：23
+
+- section：Research Background -> Gap Synthesis
+
+- locator：Research Background末段后句
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：管理者需要全球暗网全景视图，也需要知道安全分析师语言能力招聘需求，因此多语检测有管理后果。
+
+- rhetorical_function_cn：把技术缺口提升到IS管理问题。
+
+- depends_on_cn：技术缺口。
+
+- sets_up_cn：后续管理启示部分。
+
+- evidence_pointer：Research Background末段后句
+
+### 24. Deep Representation Learning首段
+
+- order：24
+
+- section：Methodological Foundation
+
+- locator：Deep Representation Learning首段
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：深度表示学习通过多层非线性变换获得嵌入语义的文本表示；BiLSTM利用双向词序捕获时序依赖模式。
+
+- rhetorical_function_cn：给ADREL第一阶段提供技术依据。
+
+- depends_on_cn：前面CLKT的深度化趋势。
+
+- sets_up_cn：说明BiLSTM适合提取单语表示。
+
+- evidence_pointer：Methodological Foundation下Deep Representation Learning
+
+### 25. Deep Representation Learning末句
+
+- order：25
+
+- section：Methodological Foundation
+
+- locator：Deep Representation Learning末句
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：BiLSTM产生的语言特定表示不可迁移；可迁移表示必须是语言不变的。
+
+- rhetorical_function_cn：提出设计命题，把“语言不变”变成设计目标。
+
+- depends_on_cn：BiLSTM的表示机制描述。
+
+- sets_up_cn：为GAN引入提供逻辑前提。
+
+- evidence_pointer：Deep Representation Learning末句
+
+### 26. GAN小节首段
+
+- order：26
+
+- section：Methodological Foundation
+
+- locator：GAN小节首段
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：GAN通过生成器和判别器的对抗博弈学习生成难以区分真伪的数据；目标函数是minimax。
+
+- rhetorical_function_cn：引入GAN作为实现语言不变表示的核心工具。
+
+- depends_on_cn：语言不变表示命题。
+
+- sets_up_cn：下一句说明GAN如何被改造成ADREL。
+
+- evidence_pointer：Methodological Foundation下GAN段落
+
+### 27. GAN小节末句
+
+- order：27
+
+- section：Methodological Foundation
+
+- locator：GAN小节末句
+
+- move_code：GAP
+
+- paraphrase_cn：GAN有潜力在无外部资源下实现CLKT，但如何设计生成器和判别器以产生语言不变表示仍需研究。
+
+- rhetorical_function_cn：把一般GAN知识转化为待解决的设计问题。
+
+- depends_on_cn：GAN机制描述。
+
+- sets_up_cn：直接引出ADREL方法设计。
+
+- evidence_pointer：GAN小节末句
+
+### 28. Proposed Research Design首段
+
+- order：28
+
+- section：Proposed Research Design
+
+- locator：Proposed Research Design首段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：研究设计包含四部分：数据采集与预处理、CLHAD、性能评价、解释与画像。
+
+- rhetorical_function_cn：给读者研究结构地图。
+
+- depends_on_cn：前面的缺口与知识基础。
+
+- sets_up_cn：后面各小节按这四部分展开。
+
+- evidence_pointer：Proposed Research Design首段及Figure 1
+
+### 29. Data Collection段
+
+- order：29
+
+- section：Proposed Research Design -> Data Collection
+
+- locator：Data Collection段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者用Tor路由的BFS爬虫从4个论坛和10个暗网市场抓取862,715条文本，全部语料用于学表示，子集用于训练和评价。
+
+- rhetorical_function_cn：解释数据来源的规模和合理性。
+
+- depends_on_cn：研究设计框架。
+
+- sets_up_cn：为金标准和基准评价提供数据基础。
+
+- evidence_pointer：Proposed Research Design -> Data Collection and Data Pre-Processing
+
+### 30. CLHAD小节
+
+- order：30
+
+- section：Proposed Research Design -> CLHAD
+
+- locator：CLHAD小节
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：CLHAD分两阶段：ADREL学习语言不变表示，二元分类器判定黑客资产。
+
+- rhetorical_function_cn：给出框架总结构。
+
+- depends_on_cn：数据与知识基础。
+
+- sets_up_cn：随后详述ADREL和分类器。
+
+- evidence_pointer：Proposed Research Design -> Cross-Lingual Hacker Asset Detection
+
+### 31. ADREL Phase 1描述
+
+- order：31
+
+- section：Proposed Research Design -> ADREL
+
+- locator：ADREL Phase 1描述
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ADREL第一阶段用两个独立BiLSTM分别处理英语和非英语词向量，获得语言特异表示R_en和R_NE。
+
+- rhetorical_function_cn：落实“语言特异表示”这一中间产物。
+
+- depends_on_cn：BiLSTM知识。
+
+- sets_up_cn：第二阶段GAN只需修改这两种表示。
+
+- evidence_pointer：CLHAD Stage 1, Figure 2
+
+### 32. ADREL设计直觉句
+
+- order：32
+
+- section：Proposed Research Design -> ADREL
+
+- locator：ADREL设计直觉句
+
+- move_code：MECHANISM
+
+- paraphrase_cn：设计直觉是每个语言表示都需要修改以接近对方语言表示，非英语生成器学习携带英语上下文中的黑客资产关键特征。
+
+- rhetorical_function_cn：用机制语言说明对抗设置为什么成立。
+
+- depends_on_cn：语言不变表示命题。
+
+- sets_up_cn：为双生成器单判别器的目标函数铺垫。
+
+- evidence_pointer：CLHAD Stage 1第2段
+
+### 33. 式(2)及解释
+
+- order：33
+
+- section：Proposed Research Design -> ADREL
+
+- locator：式(2)及解释
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ADREL使用G_en和G_NE两个生成器同时制造对方语言风格的表示，判别器学习区分合成表示来自哪种语言，二者形成minimax博弈。
+
+- rhetorical_function_cn：把机制转成形式化设计。
+
+- depends_on_cn：GAN的minimax公式。
+
+- sets_up_cn：后续Y型结构和5步迭代算法。
+
+- evidence_pointer：CLHAD Stage 1, Equation 2
+
+### 34. Figure 3对比
+
+- order：34
+
+- section：Proposed Research Design -> ADREL
+
+- locator：Figure 3对比
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ADREL把标准GAN的单生成器结构扩展为Y型双生成器单判别器结构，并用新的均衡准则使判别器无法区分源语言和目标语言。
+
+- rhetorical_function_cn：通过图示对比说明相对标准GAN的修改。
+
+- depends_on_cn：式(2)的博弈。
+
+- sets_up_cn：让读者知道这是“修改GAN”而非直接套用。
+
+- evidence_pointer：Figure 3及前后文
+
+### 35. ADREL novelty 2
+
+- order：35
+
+- section：Proposed Research Design -> ADREL
+
+- locator：ADREL novelty 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ADREL不依赖多语词向量、机器翻译语料或平行语料，据称是首个无需外部语言资源提取语言不变表示的方法。
+
+- rhetorical_function_cn：强调相对CLKT文献的技术差异化。
+
+- depends_on_cn：CLKT文献中的外部资源限制。
+
+- sets_up_cn：支撑“适合暗网等资源稀缺场景”的论断。
+
+- evidence_pointer：CLHAD Stage 1末段
+
+### 36. ADREL novelty 3
+
+- order：36
+
+- section：Proposed Research Design -> ADREL
+
+- locator：ADREL novelty 3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：ADREL不对数据施加先验分布假设，因此适合文本这类分布未知的数据。
+
+- rhetorical_function_cn：补充一个通用性优势。
+
+- depends_on_cn：GAN通常依赖噪声先验的标准设定。
+
+- sets_up_cn：暗示方法可推广到其他新兴文本应用。
+
+- evidence_pointer：CLHAD Stage 1末段
+
+### 37. CLHAD Stage 2
+
+- order：37
+
+- section：Proposed Research Design -> Stage 2
+
+- locator：CLHAD Stage 2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：训练完ADREL后，将G_NE应用于非英语数据得到语言不变特征，再由BiLSTM二元分类器输出黑客资产概率和置信度。
+
+- rhetorical_function_cn：完成从表示学习到最终检测任务的链路。
+
+- depends_on_cn：ADREL的生成器。
+
+- sets_up_cn：引出后续性能评价和置信度/解释输出。
+
+- evidence_pointer：CLHAD Stage 2
+
+### 38. Performance Evaluation首段
+
+- order：38
+
+- section：Performance Evaluation
+
+- locator：Performance Evaluation首段
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：评价分为两部分：先检查对抗训练是否达到均衡，再与既有方法做基准比较。
+
+- rhetorical_function_cn：把评价内部再分层，确保公平训练和性能比较分开。
+
+- depends_on_cn：设计了CLHAD之后。
+
+- sets_up_cn：后面的均衡识别和基准评价小节。
+
+- evidence_pointer：Performance Evaluation首段
+
+### 39. Gold-Standard Dataset Construction
+
+- order：39
+
+- section：Performance Evaluation -> Gold-Standard
+
+- locator：Gold-Standard Dataset Construction
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：7名标注员包括5名母语者和2名网络安全专家，每语种由1名母语者和1名专家配对标注，分歧会议讨论后超过99%一致，最终保留5,976篇文档。
+
+- rhetorical_function_cn：用标注者结构和一致性说明金标准可信。
+
+- depends_on_cn：数据爬取。
+
+- sets_up_cn：基准评价的可靠性前提。
+
+- evidence_pointer：Performance Evaluation -> Gold-Standard Dataset Construction
+
+### 40. Equilibrium Identification
+
+- order：40
+
+- section：Performance Evaluation -> Equilibrium
+
+- locator：Equilibrium Identification
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：GAN训练需确定迭代数，作者用生成器与判别器损失的稳定点作为训练结束信号。
+
+- rhetorical_function_cn：解决GAN训练常见的不稳定问题。
+
+- depends_on_cn：GAN需要均衡的先验知识。
+
+- sets_up_cn：为指定训练迭代数提供依据。
+
+- evidence_pointer：Performance Evaluation -> Equilibrium Identification
+
+### 41. Equilibrium结果
+
+- order：41
+
+- section：Performance Evaluation -> Equilibrium
+
+- locator：Equilibrium结果
+
+- move_code：RESULT
+
+- paraphrase_cn：俄、法、意的损失约在500、600、400次迭代后稳定，该迭代数进入后续基准实验。
+
+- rhetorical_function_cn：给出可操作训练参数。
+
+- depends_on_cn：损失曲线。
+
+- sets_up_cn：保证基准实验中ADREL不过/欠训练。
+
+- evidence_pointer：Figure 4及紧接段落
+
+### 42. Benchmark Evaluation首段
+
+- order：42
+
+- section：Performance Evaluation -> Benchmark
+
+- locator：Benchmark Evaluation首段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：基准分四类：词表基线、单语模型、MT-Based模型、CLKT备选模型，覆盖传统ML和深度模型。
+
+- rhetorical_function_cn：建立完整方法对照体系。
+
+- depends_on_cn：表1文献回顾。
+
+- sets_up_cn：后面报告性能差异。
+
+- evidence_pointer：Benchmark Evaluation首段及Table 2
+
+### 43. Evaluation Metrics段
+
+- order：43
+
+- section：Performance Evaluation -> Benchmark
+
+- locator：Evaluation Metrics段
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：使用Accuracy、F1和AUC，因类别不平衡舍弃只靠准确率；用五折交叉验证和配对t检验评估显著性。
+
+- rhetorical_function_cn：说明指标选择和统计效度。
+
+- depends_on_cn：基准方法体系。
+
+- sets_up_cn：使表3结果具有统计含义。
+
+- evidence_pointer：Evaluation Metrics段
+
+### 44. Benchmark结果段
+
+- order：44
+
+- section：Performance Evaluation -> Benchmark
+
+- locator：Benchmark结果段
+
+- move_code：RESULT
+
+- paraphrase_cn：CLHAD在俄、法论坛和DNM上几乎全面领先，俄语论坛AUC约12个百分点优于第二名，法语约14个百分点；意大利结果在附录A。
+
+- rhetorical_function_cn：给出核心实证主张。
+
+- depends_on_cn：统一基准和指标。
+
+- sets_up_cn：随后解释为什么性能提升。
+
+- evidence_pointer：Table 3及紧接段落
+
+### 45. Benchmark结果后的解释段
+
+- order：45
+
+- section：Performance Evaluation -> Benchmark
+
+- locator：Benchmark结果后的解释段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：MT并非总优于单语，说明误译有害；CLHAD胜过单语和CLKT，说明语言特异表示不足、对抗训练能产生语言不变表示。
+
+- rhetorical_function_cn：把性能差异解释为设计机制证据。
+
+- depends_on_cn：表3结果。
+
+- sets_up_cn：为贡献和设计原则做准备。
+
+- evidence_pointer：Benchmark Evaluation后部
+
+### 46. Benchmark末段
+
+- order：46
+
+- section：Performance Evaluation -> Benchmark
+
+- locator：Benchmark末段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：结果在多个语言和平台类型上一致，作者认为显示CLHAD的泛化能力；附录B进一步分析语言族和训练规模。
+
+- rhetorical_function_cn：把单点结果扩展为跨语言稳健性。
+
+- depends_on_cn：主benchmark结果。
+
+- sets_up_cn：外部效度论证。
+
+- evidence_pointer：Benchmark Evaluation末段及Appendix B
+
+### 47. Results Explanation首段
+
+- order：47
+
+- section：Explanation and Profiling
+
+- locator：Results Explanation首段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：作者采用SHAP，用合作博弈论计算每个词对CLHAD最终决策的贡献。
+
+- rhetorical_function_cn：为“可解释性”引入标准工具。
+
+- depends_on_cn：CLHAD分类器输出。
+
+- sets_up_cn：展示三个样例的输出解释。
+
+- evidence_pointer：Explanation and Detected Hacker Assets Profiling -> Results Explanation
+
+### 48. Table 4前段及样例
+
+- order：48
+
+- section：Explanation and Profiling
+
+- locator：Table 4前段及样例
+
+- move_code：RESULT
+
+- paraphrase_cn：俄语“wallet/spy/victim”，法语“logs/inject”，意大利语“spoof/address/MAC”等词对检测有较大贡献，简单词典翻译可辅助非母语分析者。
+
+- rhetorical_function_cn：用具体案例展示解释输出。
+
+- depends_on_cn：SHAP机制。
+
+- sets_up_cn：说明解释机制给分析者提供确认或否决模型建议的依据。
+
+- evidence_pointer：Table 4
+
+### 49. Detected Hacker Assets Profiling首段
+
+- order：49
+
+- section：Explanation and Profiling
+
+- locator：Detected Hacker Assets Profiling首段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为构建资产画像，作者用词表搜索把CLHAD发现的资产分成黑客工具、黑客服务、黑客教程、金融欺诈工具四类。
+
+- rhetorical_function_cn：说明画像分类做法。
+
+- depends_on_cn：CLHAD检测结果。
+
+- sets_up_cn：引出图5的分布结果。
+
+- evidence_pointer：Detected Hacker Assets Profiling段
+
+### 50. 图5后的观察1
+
+- order：50
+
+- section：Explanation and Profiling
+
+- locator：图5后的观察1
+
+- move_code：RESULT
+
+- paraphrase_cn：所有语言平台都较多涉足金融欺诈；英语和俄语平台更专注于黑客工具。
+
+- rhetorical_function_cn：给出画像的第一个描述性发现。
+
+- depends_on_cn：图5。
+
+- sets_up_cn：为之后“金融欺诈资产需跨语言监控”的管理启示提供依据。
+
+- evidence_pointer：Figure 5及观察1
+
+### 51. 图5后的观察2
+
+- order：51
+
+- section：Explanation and Profiling
+
+- locator：图5后的观察2
+
+- move_code：RESULT
+
+- paraphrase_cn：俄语平台显著聚焦黑客服务，其他语言平台少见；作者认为这可能说明俄罗斯集中了高级有组织黑客，甚至可能涉及内部非法访问。
+
+- rhetorical_function_cn：给出画像中最强的语言差异。
+
+- depends_on_cn：图5。
+
+- sets_up_cn：支撑“应优先关注俄语平台以识别高级黑客资产”。
+
+- evidence_pointer：Figure 5及观察2
+
+### 52. 图5后的观察3
+
+- order：52
+
+- section：Explanation and Profiling
+
+- locator：图5后的观察3
+
+- move_code：RESULT
+
+- paraphrase_cn：法语和意大利语平台更重黑客教程，俄语教程少，可能说明俄语平台使用者技能更高而法意平台更多低技能黑客。
+
+- rhetorical_function_cn：完成四种语言的画像对比。
+
+- depends_on_cn：图5。
+
+- sets_up_cn：支撑操作层和战略层管理含义。
+
+- evidence_pointer：Figure 5及观察3
+
+### 53. Contributions to the IS Knowledge Base段
+
+- order：53
+
+- section：Discussion
+
+- locator：Contributions to the IS Knowledge Base段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者声称研究贡献两条设计原则：多语言同时参与构造全面文本表示，以及通过域不变表示迁移专家标注知识。
+
+- rhetorical_function_cn：把具体制品提炼成可复用设计知识。
+
+- depends_on_cn：前面的技术与评价结果。
+
+- sets_up_cn：把它们延伸至其他网络安全和社会媒体分析任务。
+
+- evidence_pointer：Discussion -> Contributions to the IS Knowledge Base
+
+### 54. Contributions段后半
+
+- order：54
+
+- section：Discussion
+
+- locator：Contributions段后半
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：两条设计原则可支持非英语平台关键黑客识别、社群发现、外语社交媒体内容审查和跨语言众包问答等任务。
+
+- rhetorical_function_cn：扩展设计原则的适用范围。
+
+- depends_on_cn：设计原则。
+
+- sets_up_cn：说明IS知识贡献不限于暗网。
+
+- evidence_pointer：Discussion -> Contributions to the IS Knowledge Base后半
+
+### 55. Managerial Implications for Cybersecurity Analytics
+
+- order：55
+
+- section：Discussion
+
+- locator：Managerial Implications for Cybersecurity Analytics
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：操作层面，安全运营中心可用自动资产画像支持攻击归因；保护金融公司的机构需要同时监控非英语平台，因为金融欺诈资产分散。
+
+- rhetorical_function_cn：把资产画像结果转成行动建议。
+
+- depends_on_cn：画像结果。
+
+- sets_up_cn：为CISO/ISSM提供可操作和可投资的建议。
+
+- evidence_pointer：Discussion -> Managerial Implications
+
+### 56. Managerial Implications后半
+
+- order：56
+
+- section：Discussion
+
+- locator：Managerial Implications后半
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：战略层面，季度/年度网络风险报告可利用跨语言画像辅助资源配置，安全公司可根据发现招募掌握特定语言的分析师，例如俄语分析师。
+
+- rhetorical_function_cn：提供战略层管理启示。
+
+- depends_on_cn：画像结果和语言差异。
+
+- sets_up_cn：收束全文贡献。
+
+- evidence_pointer：Discussion -> Managerial Implications后半
+
+### 57. Conclusion首段
+
+- order：57
+
+- section：Conclusion
+
+- locator：Conclusion首段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结：CLHAD通过对抗深度跨语言知识迁移实现可解释的非英语黑客资产检测，并在俄法意论坛和市场上显著改善检测。
+
+- rhetorical_function_cn：复述贡献的核心。
+
+- depends_on_cn：全文所有结果。
+
+- sets_up_cn：引出未来研究。
+
+- evidence_pointer：Conclusion首段
+
+### 58. Conclusion末句
+
+- order：58
+
+- section：Conclusion
+
+- locator：Conclusion末句
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：未来研究可把CLHAD结果整合进社交网络分析，识别关键黑客社群、支持资源分配并降低全球网络犯罪总成本。
+
+- rhetorical_function_cn：给未来研究指明方向。
+
+- depends_on_cn：CLHAD作为基础能力。
+
+- sets_up_cn：没有更后续内容。
+
+- evidence_pointer：Conclusion末句
+
+### 59. Appendix B结果段
+
+- order：59
+
+- section：Appendix B
+
+- locator：Appendix B结果段
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：达到AUC>80%所需的训练文档数：俄语1,817、法语570、意大利语261；与英语同语族的法意所需数据远少于跨语族的俄语。
+
+- rhetorical_function_cn：通过训练规模实验给出方法的资源边界。
+
+- depends_on_cn：主benchmark结果。
+
+- sets_up_cn：支撑“CLHAD适合低资源语言”的可泛化论证。
+
+- evidence_pointer：Appendix B, Figure B1
+
+### 60. Appendix B末段
+
+- order：60
+
+- section：Appendix B
+
+- locator：Appendix B末段
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：作者推断：学习与英语同族的新语言时只需要几百篇标注文档，而学习跨族语言需要一两千篇。
+
+- rhetorical_function_cn：把具体阈值提炼为边界条件。
+
+- depends_on_cn：俄法意的训练规模曲线。
+
+- sets_up_cn：作为讨论中关于泛化的证据。
+
+- evidence_pointer：Appendix B末段
+
+## 写作技术
+
+- gap_construction_cn：文章用三层递进构造缺口：先以损失金额和暗网体量建立现实紧迫性；再把“人工不可行→关键词错误→ML需要标注”逐层排除；最后把机器翻译和传统CLKT的外部资源依赖也排除，从而只剩下“无外部资源的跨语言表示学习”这一条未被占据的设计空间。
+
+- signposting_cn：每节开头有明确预告。例如研究背景先说明要回顾哪三个文献流；性能评价先说明“均衡识别+基准比较”两个任务；讨论先说明贡献和管理启示两个子节。图1还把四组件研究设计可视化。
+
+- transition_logic_cn：过渡常从“前一步的不确定性”开始：确定数据后问如何转成设计；构建ADREL后问训练多少轮；得到基准分数后问能否解释；得到解释后问检测结果的管理含义。每个新Study都解决前一个Study留下的未答问题。
+
+- claim_evidence_rhythm_cn：文章采用“先给证据后给机制”的节奏：先把表3的完整分数摆出来，再做三点解释；先展示SHAP样例，再说非母语者能用；先展示图5分布，再提炼管理者应采取的行动。解释总是紧跟在证据之后。
+
+- benchmark_narrative_cn：Benchmark不是孤立跑分，而是按方法族历史演进组织成“词表→单语→MT→CLKT”的阶梯，每个阶梯对应文献中的一个真实替代方案；作者把CLHAD放在最后一格，使性能优势自然地表现为对整条技术路线的超越。
+
+- theory_return_cn：结果返回理论的方式是把具体制品抽象成两条通用设计原则，并说明其可迁移到关键黑客识别、内容审核和跨语言问答等任务，但没有把这些新任务再纳入实证检验。
+
+- contribution_positioning_cn：贡献定位不是“我们的方法最高分”，而是“我们扩展了IS设计知识和跨语言网络安全分析方法族”；通过设计原则、管理者洞察和公开代码共同强化研究的可复用性。
+
+- novelty_protection_cn：作者通过四点防止贡献退化为一次性性能结果：一是在同一个框架中同时强调机制（语言不变表示）和性能；二是加入SHAP解释使输出具有分析者可用的界面；三是用资产画像展示业务后果；四是在附录中给出训练规模边界，使方法不是靠海量数据堆出来的一次性结果。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实损失和平台规模建立问题紧迫感，定义应用对象与资产类型。
+
+- research_job_cn：识别高影响、数据可公开的应用场景和核心实体类型。
+
+- required_evidence_cn：有公开或可合法获取的数据源；有现实后果的数量或案例。
+
+- transition_to_next_cn：“对象很重要，但人工/规则方法无法规模化”引出自动方法。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：用文献回顾逐层排除已有方法的解释：关键词→监督ML→机器翻译→传统CLKT。
+
+- research_job_cn：系统检索相关IS、安全和ML文献并构造方法族分类。
+
+- required_evidence_cn：能列出现有方法的代表作品和限制；能定位一个未被占据的缺口。
+
+- transition_to_next_cn：缺口指明需要某种新机制，于是引入知识基础。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：介绍足以支撑设计的计算/理论工具，并用一句命题把工具与设计目标连接。
+
+- research_job_cn：选择能解决缺口的低层知识，例如这里用BiLSTM+GAN实现语言不变表示。
+
+- required_evidence_cn：知识基础的机制和限制已被文献支持。
+
+- transition_to_next_cn：“这个工具能解决上述缺口，但需要进一步设计”引出制品。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：分阶段描述制品，把设计动机、目标函数、架构图和迭代算法写清楚。
+
+- research_job_cn：把知识命题转成具体模块/参数/训练流程，并准备好可复现代码。
+
+- required_evidence_cn：唯一、清晰的制品设计；能与每个知识命题对应。
+
+- transition_to_next_cn：“制品已构建，但训练如何稳定、性能是否更好”引出评价。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：说明金标准、训练调参方法和指标体系，证明评价对象可信。
+
+- research_job_cn：建立人工标注或真实标签；用损失曲线等稳定性证据确定关键训练参数。
+
+- required_evidence_cn：标签可信度证据；每个元参数的选定理由。
+
+- transition_to_next_cn：“参数已定，可以与现状方法比较”。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：按方法族排列基准，报告统一指标与显著性检验，并对结果做机制解读。
+
+- research_job_cn：在同一数据、同一指标、同一验证协议下比较基线、传统、深度和候选方法。
+
+- required_evidence_cn：包含完整表格、显著性标注、消融或替代方法对照。
+
+- transition_to_next_cn：“性能最好”之后，立即问这个输出如何被使用者理解和采用。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：补充可解释性展示、业务画像和边界条件分析，最后提炼设计原则与管理启示。
+
+- research_job_cn：用解释工具展示示例；用描述性分析把输出转成业务洞察；用敏感性分析界定数据需求。
+
+- required_evidence_cn：能说明“为什么模型这么判”的例证；能说明“结果对谁有用”的业务图景；能说明“何时不适用/需要多少资源”的边界证据。
+
+- transition_to_next_cn：在讨论中把上述证据累加成设计知识和可复用原则，完成论文闭环。
+
+### most_transferable_moves_cn
+
+1. 用三级文献回顾构造方法缺口，而不是只评一篇或一类文献
+
+2. 让“知识基础→设计直觉→目标函数→模块设置”四者一一对应
+
+3. 把基准方法按技术演进分成族，显示对整条路线而非单个模型的超越
+
+4. 在主实验之后用损失曲线、可解释样例、资产画像和训练规模分析做多维度证据
+
+5. 把技术结果抽象为设计原则，再给出分层的管理启示
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. Tor路由暗网爬虫和四大语言平台数据采集需要特殊网络资源和伦理授权
+
+2. 7名母语者与网络安全专家的人工标注成本高
+
+3. 862,715条语料上的深度模型训练需要较大算力
+
+4. 俄法意等地暗网平台的可达性随时间变化，数据获取不易复刻
+
+5. SHAP词级解释依赖模型输出和词表翻译，若数据不含多语词表则难以直接复用
+
+### what_not_to_copy_superficially_cn
+
+1. 不能只写“对抗跨语言表示学习”而不给双生成器的minimax设置和均衡准则
+
+2. 不能只在讨论中说“设计原则”却没有在正文中让每个设计原则对应具体设计选择和证据
+
+3. 不能把“俄语黑客服务多”解读为“技能更高”而不加限定，否则是过度推断
+
+4. 不能照抄“优于所有基准”的表述，除非包含完整方法族、统计显著性和统一数据协议
+
+5. 不能在没有代码与金标准公开的情况下声称可复现
+
+- single_best_description_of_the_routine_cn：用现实暗网多语种标注稀缺问题作为入口，以GAN知识为设计理论构建ADREL制品，再用分层基准、损失稳定和解释画像共同证明该项人类判断与设计原则，最后把结果升华为可复用设计原则和管理建议。
+
+## 分析边界
+
+分析基于文章全文和附录，但缺乏真实页码；部分图像（损失曲线、画像、训练规模图）只依赖文中文字解释，未直接读取图像数值；无法验证GitHub代码仓库的完整内容；对“第一个”等声明按作者表述记为声称而非验证结果。

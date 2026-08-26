@@ -1,0 +1,1268 @@
+{
+  "record_id": "19686",
+  "source_file": "19686_2021_a-cross-domain-recommender-system-through-information-transfer-for-medical-diagnosis.md",
+  "title": "A cross-domain recommender system through information transfer for medical diagnosis",
+  "authors": "Wenjun Chang; Qian Zhang; Chao Fu; Weiyong Liu; Guangquan Zhang; Jie Lu",
+  "year": "2021",
+  "journal": "Decision Support Systems",
+  "doi": "10.1016/j.dss.2020.113489",
+  "fulltext_chars": 118951,
+  "source_base_match": true,
+  "source_theory_guided_subset_match": false,
+  "source_primary_artifact_function": "prediction_detection_and_assessment",
+  "source_primary_objective_family": "analytic_quality",
+  "source_application_context": "healthcare_and_care",
+  "stage": "all231",
+  "analysis_version": "ais-basket-writing-logic-all231-v1",
+  "prompt_fingerprint": "444acb82542342fb9e660eddbe829f7a3939bcdb1201e249e45179d6d24e48c1",
+  "model": "deepseek-v4-flash",
+  "analysis_mode": "one_complete_local_fulltext_per_request",
+  "attempts": 1,
+  "finish_reason": "stop",
+  "completed_at": "2026-08-07T06:30:06.844493+00:00",
+  "article_level_summary": {
+    "central_question_cn": "如何在医学诊断中为数据稀疏的目标疾病构建跨域推荐系统，使其既能处理区间数形式的不确定症状与风险表示，又能处理源域与目标域症状空间不匹配的问题，从而为医生提供个性化疾病风险推荐？",
+    "artifact_and_design_cn": "提出ITMD（information transfer for medical diagnosis）跨域推荐方法。核心设计包括：将区间数患者-症状矩阵归一化为均值矩阵；通过两个变换矩阵M1/M2将源域症状空间对齐到目标域症状空间；设计一种基于风险区间中点加权的相异性度量；在条件数相等约束下使用集体矩阵分解学习源/目标共享症状关系矩阵，并生成目标域推荐。",
+    "objective_outcomes_cn": "在合成数据实验中，ITMD在相同与不同症状空间的两组设置、多个数据比例下均优于四种基线，同空间最大改进0.0973、异空间最大改进0.0827；在真实医院甲状腺癌→乳腺癌案例中，对四位医生的数据均优于基线，最大改进0.1221，改进率16.69%。补充分析显示新相异性度量优于欧氏、曼哈顿、切比雪夫距离，λ在0.5–1区间稳定。",
+    "core_contribution_cn": "作者声称提出了一种能够处理区间数不确定表示和异构特征空间的医学诊断跨域推荐方法，通过空间对齐、新相异性度量和条件数约束的集体矩阵分解实现知识转移，并在合成数据与真实案例中验证了其有效性和决策支持价值。",
+    "whole_argument_in_one_paragraph_cn": "文章从医学诊断中电子病历数据的价值出发，指出部分疾病因记录不足而产生数据稀疏问题，提出用跨域推荐系统从相似源域转移知识；接着指出医学诊断的两个具体挑战，即区间数表示和不同疾病的症状特征空间不匹配。为解决这两个挑战，作者正式定义单域与跨域医学诊断问题，然后构建ITMD五步方法：区间数归一化、症状空间对齐、风险敏感的相异性度量、条件数约束的信息转移、目标域推荐生成。方法部分用命题和定理为归一化和条件数约束提供数学支撑，并用算例说明新度量比标准距离更合理。随后通过合成数据实验覆盖相同/不同症状空间和不同源目标比例，证明ITMD相对四种非迁移基线的优越性；再以真实医院甲状腺癌→乳腺癌数据做案例研究，验证其临床可行性。案例内补充的源域直接学习、距离度量比较和λ敏感性分析进一步支持各组件贡献与参数稳定性。结论将结果回扣到两个挑战，并声明理论与实际意义。"
+  },
+  "paper_archetype": "build_evaluate_design_science",
+  "paper_archetype_reason_cn": "文章从医学诊断的两个现实挑战出发，提炼需求，设计并实现了ITMD制品，随后用合成数据实验和真实世界案例研究进行评价，最后以方法贡献和设计组件知识收束；整体属于需求—构建—评价的设计科学研究，而不是从理论命题推导出可检验差异的实验研究，也不是以大规模benchmark为主导的计算制品论文。",
+  "dominant_writing_arc": "requirements_build_evaluate_design_principles",
+  "dominant_writing_arc_reason_cn": "论证弧线可以概括为：医学诊断对跨域推荐提出的要求（处理区间数、处理症状空间不匹配）→构建ITMD方法→合成与真实评价→形成关于方法和组件的可复用设计知识。这与“要求—构建—评价—设计原则”的弧线一致。",
+  "research_program": {
+    "study_or_phase_count": 5,
+    "overall_sequence_cn": "第一阶段将医学诊断问题形式化为区间数矩阵预测问题并定义跨域场景；第二阶段构建ITMD五步算法并提供数学性质；第三阶段用合成数据系统评价方法在相同/不同症状空间和不同数据比例下的表现；第四阶段用真实医院甲状腺→乳腺诊断数据验证外部有效性；第五阶段在真实案例内部进行组件消融与敏感性分析，隔离目标域标签、相异性度量和参数λ的贡献。五个阶段依次从形式基础、制品构建、内部有效性、外部有效性到组件级证据累积。",
+    "studies_or_phases": [
+      {
+        "order": 1,
+        "name_cn": "问题形式化与跨域医学诊断场景定义",
+        "question_cn": "如何用区间数形式化单域医学诊断推荐问题，并定义跨域设置下的输入输出关系？",
+        "inputs_and_setting_cn": "医学诊断基本元素：患者集合、症状等级区间、诊断类别风险区间，以及患者-症状矩阵U、症状-类别矩阵V、患者-类别矩阵R；示例使用8名乳腺结节患者与5个症状、5个诊断类别。",
+        "designed_or_compared_object_cn": "形式化符号体系与预测函数：单域 R=f(U|V)，跨域 R_t=g(R_s,U_s,V_s,U_t,V_t)。",
+        "baseline_control_or_counterfactual_cn": "无比较基线；主要是概念形式化。",
+        "objective_metrics": [],
+        "analysis_method_cn": "定义、假设和示例说明。",
+        "main_result_cn": "给出了区间数医学诊断的矩阵化表达，并将跨域问题定义为从源域提取共享症状关系以预测目标域患者-类别矩阵。",
+        "argumentative_role_cn": "为后续算法设计提供数学语言和可计算的问题边界。",
+        "remaining_uncertainty_cn": "如何具体实现知识转移、如何处理不同症状空间尚待解决。",
+        "link_to_next_phase_cn": "引向方法节，逐一针对这些未解决问题设计算法步骤。",
+        "evidence_pointers": [
+          "Section 3.1",
+          "Example 1 and Tables 2–4",
+          "Section 3.2，公式 R_t = g(R_s,U_s,V_s,U_t,V_t)"
+        ]
+      },
+      {
+        "order": 2,
+        "name_cn": "ITMD方法构建与数学性质证明",
+        "question_cn": "如何设计归一化、空间对齐、相异性度量和知识转移约束，以应对区间数和症状空间不匹配两个挑战？",
+        "inputs_and_setting_cn": "源域/目标域的患者-症状矩阵、症状-类别矩阵、患者-类别矩阵；区间数保序性质；矩阵条件数与扰动理论。",
+        "designed_or_compared_object_cn": "ITMD五步算法：Step1区间均值归一化（Proposition 1/2）；Step2症状矩阵分解与空间对齐（Definition 1，变换矩阵M1/M2）；Step3新相异性度量（Definition 2，Eq.3）；Step4条件数约束的集体矩阵分解（Definition 3，Theorem 1，Eq.10）；Step5推荐生成。",
+        "baseline_control_or_counterfactual_cn": "在Example 2中，将新相异性度量与欧氏、曼哈顿、切比雪夫距离作对比。",
+        "objective_metrics": [
+          "区间与均值是否一一对应",
+          "区间大小顺序是否与均值顺序一致",
+          "相异性度量是否在[0,1]内、满足对称性和0/1边界",
+          "条件数对相对误差界的控制"
+        ],
+        "analysis_method_cn": "命题与定理证明、算例说明、算法伪代码。",
+        "main_result_cn": "得到完整的ITMD算法；算例显示新度量能区分标准距离无法区分的诊断错分（预测到相邻类别 vs 预测到最远类别）。",
+        "argumentative_role_cn": "建立制品的具体结构，并为关键设计提供数学合理性。",
+        "remaining_uncertainty_cn": "尚未在数据上验证实际预测性能，也没有比较不同组件对最终准确率的贡献。",
+        "link_to_next_phase_cn": "由于真实医疗数据隐私/不可及，转向合成数据系统评价。",
+        "evidence_pointers": [
+          "Section 4.1–4.5",
+          "Proposition 1, Proposition 2",
+          "Definition 2 与 Example 2",
+          "Theorem 1",
+          "Algorithm 1 and Algorithm 2"
+        ]
+      },
+      {
+        "order": 3,
+        "name_cn": "合成数据系统评价：相同/不同症状空间",
+        "question_cn": "在相同症状空间和不同症状空间两种条件下，ITMD是否优于非迁移基线？源目标比例如何影响性能？",
+        "inputs_and_setting_cn": "合成数据：第一组甲状腺癌→乳腺癌（同空间，各5症状、5类别），第二组胃癌→肝癌（异空间，6症状8类别→5症状5类别）；每组G1–G10，源目标比例1:1到4:1；五折交叉验证。",
+        "designed_or_compared_object_cn": "ITMD方法与四种基线B1、B2、B3、B4的比较；其中B4是ITMD的非迁移矩阵分解变体。",
+        "baseline_control_or_counterfactual_cn": "B1/B2/B3为基于不同区间距离的线性组合诊断方法；B4为无知识转移的同类方法，用于隔离转移效果。",
+        "objective_metrics": [
+          "预测准确率 AR_t = 1 − d(R_Y, R_hat_Y)",
+          "20次随机初始化的平均值和标准差"
+        ],
+        "analysis_method_cn": "五折交叉验证，固定源域全量训练；表6/7、图2/3报告结果。",
+        "main_result_cn": "ITMD在每组记录上都取得最佳准确率；比例从1:1提高到4:1时改进增大；同空间最大改进0.0973，异空间最大改进0.0827；B1–B3标准差较大，B4和ITMD更稳定。",
+        "argumentative_role_cn": "提供内部有效性：证明方法在受控合成数据上有效，并通过B4隔离支持“知识转移带来改进”的机制主张。",
+        "remaining_uncertainty_cn": "合成数据基于预设概率分布，不能完全反映真实病历的噪声和临床过程；需要真实案例验证。",
+        "link_to_next_phase_cn": "转入真实医院数据案例研究，检验方法的实际可用性。",
+        "evidence_pointers": [
+          "Section 5.1",
+          "Table 5",
+          "Section 5.2",
+          "Tables 6–7",
+          "Figs. 2–3"
+        ]
+      },
+      {
+        "order": 4,
+        "name_cn": "真实世界案例研究主实验",
+        "question_cn": "在真实甲状腺癌→乳腺癌诊断记录上，ITMD是否仍优于基线并可为医生提供决策支持？",
+        "inputs_and_setting_cn": "国内某三甲医院四位超声医生2017–2019年的甲状腺（源域）和乳腺（目标域）诊断记录；数据量远小于合成数据；五折交叉验证。",
+        "designed_or_compared_object_cn": "ITMD与B1–B4比较；四种源目标比例1:1、2:1、3:1、4:1。",
+        "baseline_control_or_counterfactual_cn": "同合成实验的四种基线。",
+        "objective_metrics": [
+          "预测准确率",
+          "改进幅度与最大改进率"
+        ],
+        "analysis_method_cn": "20次随机初始化，表9–11与图4。",
+        "main_result_cn": "对四位医生数据，ITMD均优于基线；最大改进0.1221，最大改进率16.69%；B1–B3在稀疏目标域下表现差且不稳定；比例增大时ITMD改进增大。",
+        "argumentative_role_cn": "提供外部有效性：表明方法在真实病历、真实医生诊断分布下可行。",
+        "remaining_uncertainty_cn": "单一医院、单一疾病对；没有与其他跨域推荐/迁移学习方法直接比较；没有评估真实临床决策结果。",
+        "link_to_next_phase_cn": "为进一步证明组件贡献和参数稳定性，进入案例内的补充分析。",
+        "evidence_pointers": [
+          "Section 6.1",
+          "Tables 8–9",
+          "Section 6.2",
+          "Tables 10–11",
+          "Fig. 4"
+        ]
+      },
+      {
+        "order": 5,
+        "name_cn": "真实案例内组件消融与敏感性分析",
+        "question_cn": "目标域标签的边际贡献是什么？新相异性度量是否优于标准距离？参数λ是否敏感？",
+        "inputs_and_setting_cn": "同一真实案例数据；Table12仅用源域学习D_t；Table13将新度量替换为欧氏/曼哈顿/切比雪夫距离；Fig5改变λ。",
+        "designed_or_compared_object_cn": "源域直接学习 vs 目标域联合训练；新相异性度量 vs 三种标准距离；λ从0到1。",
+        "baseline_control_or_counterfactual_cn": "仅源域模型和标准距离模型作为消融/对照。",
+        "objective_metrics": [
+          "预测准确率"
+        ],
+        "analysis_method_cn": "对比表12/13结果，绘制λ影响曲线。",
+        "main_result_cn": "仅用源域数据对目标域改进有限，加入少量目标域标签显著提升预测；新度量显著优于三种标准距离；λ从0到0.5准确率上升，0.5到1基本稳定。",
+        "argumentative_role_cn": "支撑制品主张：空间对齐、相异性度量、目标域信息各自对ITMD性能有可识别贡献；参数设置不敏感。",
+        "remaining_uncertainty_cn": "消融只针对部分组件；未对其他参数（如迭代次数、优化初始值）做系统敏感性检验。",
+        "link_to_next_phase_cn": "这些证据支持结论中将ITMD定位为针对两个挑战的有效方法。",
+        "evidence_pointers": [
+          "Section 6.2",
+          "Table 12",
+          "Table 13",
+          "Fig. 5"
+        ]
+      }
+    ]
+  },
+  "rhetorical_architecture": {
+    "abstract_moves": [
+      "CONTEXT",
+      "LIMITATION",
+      "PRIOR_KNOWLEDGE",
+      "PHENOMENON",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "RESULT"
+    ],
+    "introduction_moves": [
+      "CONTEXT",
+      "PRACTICAL_STAKES",
+      "PHENOMENON",
+      "PRIOR_KNOWLEDGE",
+      "LIMITATION",
+      "WHY_GAP_MATTERS",
+      "MECHANISM",
+      "RQ_OR_OBJECTIVE",
+      "DESIGN_FEATURE",
+      "CONTRIBUTION",
+      "STUDY_OVERVIEW"
+    ],
+    "theory_and_knowledge_moves": [
+      "THEORY_INTRO",
+      "THEORY_PROPOSITION",
+      "PRIOR_KNOWLEDGE",
+      "MECHANISM",
+      "LIMITATION"
+    ],
+    "artifact_design_moves": [
+      "REQUIREMENT",
+      "DESIGN_FEATURE",
+      "MECHANISM",
+      "THEORY_PROPOSITION",
+      "STUDY_OVERVIEW",
+      "HYPOTHESIS_OR_PROPOSITION"
+    ],
+    "evaluation_moves": [
+      "METHOD_JUSTIFICATION",
+      "BENCHMARK_OR_CONTRAST",
+      "RESULT",
+      "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "STUDY_OVERVIEW"
+    ],
+    "discussion_and_contribution_moves": [
+      "CONTRIBUTION",
+      "RESULT",
+      "DESIGN_FEATURE",
+      "BOUNDARY_CONDITION",
+      "LIMITATION_AND_FUTURE"
+    ]
+  },
+  "theory_to_design_trace": {
+    "knowledge_bases": [
+      "区间数及其可能性度量的保序性质",
+      "医学诊断中TI-RADS/BI-RADS等风险区间分类标准",
+      "协同过滤与跨域推荐中的集体矩阵分解",
+      "矩阵条件数与扰动理论",
+      "跨域推荐中通过共享实体/特征进行知识迁移的思想"
+    ],
+    "theory_design_coupling": "partial",
+    "coupling_reason_cn": "ITMD的主要技术选择来自医学诊断数据的两个具体挑战以及数学/工程启发，并非由一个统一理论前瞻性推导；但部分设计确实依赖知识基础：区间均值归一化依赖区间数保序理论，条件数约束依赖矩阵扰动理论，相异性度量依赖风险区间权重。因此属于部分耦合。",
+    "translation_chain_cn": "区间数保序性质→归一化可安全保留诊断顺序；相似疾病共享症状关系→源域症状关系矩阵可用于目标域；症状空间不同→用变换矩阵对齐；矩阵条件数影响误差传播→约束条件数相等；风险等级严重度不同→在相异性度量中引入风险区间权重。",
+    "mapping_table": [
+      {
+        "theory_or_knowledge_claim_cn": "对满足式(1)的区间数序列，区间相等当且仅当区间均值相等，且区间大小顺序与均值顺序一致。",
+        "mechanism_cn": "用区间均值替代原区间不会丢失诊断类别顺序信息。",
+        "design_requirement_cn": "需要把区间值患者-症状矩阵转化为数值矩阵，同时保持类别可区分性。",
+        "artifact_choice_cn": "Step 1将U_s和U_t中每个区间值替换为上下界均值，得到\bar{U}_s和\bar{U}_t。",
+        "evaluated_contrast_cn": "该方法用于所有实验与案例；在方法部分通过命题证明其合理性。",
+        "objective_result_cn": "归一化后ITMD在合成/真实数据上整体优于基线；但没有单独消融归一化。",
+        "evidence_pointers": [
+          "Section 4.1, Propositions 1–2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "两个相似疾病的诊断标准、器官类型、发病机制相似时，症状之间的影响关系可被共享。",
+        "mechanism_cn": "源域充足的症状关系知识可被转移到稀疏目标域，以补充目标域无法估计的关系。",
+        "design_requirement_cn": "需要让源域和目标域使用同一症状空间来比较和迁移关系矩阵。",
+        "artifact_choice_cn": "将R_s分解为\bar{U}_s M1 D_s^1 M2 V_s，使D_s^1与D_t共享目标症状空间；用集体矩阵分解同时最小化两域重构误差。",
+        "evaluated_contrast_cn": "ITMD（迁移版）与B4（非迁移变体）对比。",
+        "objective_result_cn": "在合成数据同/异空间和真实案例中，ITMD始终优于B4，支持知识转移有效性。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Tables 6, 10",
+          "B4 description in Section 5.2"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "当两域症状数量或分布不同时，症状空间不匹配，需要先建立一致表示再迁移。",
+        "mechanism_cn": "通过行随机变换矩阵M1/M2将源域症状关系投影到目标域症状空间，消除特征数量差异和分布差异。",
+        "design_requirement_cn": "算法必须能处理L_s≠L_t且共享症状较少的场景。",
+        "artifact_choice_cn": "Step 2引入M1∈R^{L_s×L_t}、M2∈R^{L_t×L_s}，并令D_s=M1 D_s^1 M2。",
+        "evaluated_contrast_cn": "合成数据不同症状空间组（胃癌→肝癌）与相同症状空间组分别报告。",
+        "objective_result_cn": "不同症状空间下ITMD仍优于所有基线，最大改进0.0827。",
+        "evidence_pointers": [
+          "Section 4.2",
+          "Section 5.1 second group",
+          "Table 7, G6–G10"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "矩阵条件数控制输入扰动对输出相对误差的影响；条件数越小误差传播越可控。",
+        "mechanism_cn": "在矩阵分解中，若D_t或D_s^1条件数过大，源/目标域实测矩阵的微小误差会被放大，导致学习到的关系矩阵不稳定。",
+        "design_requirement_cn": "优化问题应对关系矩阵的良态性施加约束，以便知识转移可靠。",
+        "artifact_choice_cn": "Step 4在代价函数中引入约束cond(D_s^1)=cond(D_t)，并采用SQP求解。",
+        "evaluated_contrast_cn": "定理1提供误差界证明；实验中没有单独改变条件数约束作消融，因此该约束的独立贡献未被直接检验。",
+        "objective_result_cn": "整体ITMD性能稳定，标准差较小，但无法归因于条件数约束本身。",
+        "evidence_pointers": [
+          "Section 4.4, Definition 3, Theorem 1, Eq.(10)"
+        ]
+      },
+      {
+        "theory_or_knowledge_claim_cn": "医学诊断中不同诊断类别的风险区间具有不同严重程度；把类别错分到邻近类别与错分到极远类别应被区别对待。",
+        "mechanism_cn": "在比较真实诊断矩阵R与预测矩阵R_hat时，用风险区间中点差(p(C_k)-p(C_l))加权类别对差异，使高风险错分被赋予更大惩罚。",
+        "design_requirement_cn": "需要一种适用于区间数诊断矩阵的相异性度量，而不是无差异的标准距离。",
+        "artifact_choice_cn": "Definition 2构造如式(3)所示的相异性度量，并对每个患者在所有类别对上加权求和。",
+        "evaluated_contrast_cn": "Example 2与欧氏/曼哈顿/切比雪夫距离比较；Table 13在四个医生数据上比较。",
+        "objective_result_cn": "标准距离不能区分“预测到相邻类别”和“预测到最远类别”，新度量可以；Table 13中新度量预测准确率显著高于三种距离。",
+        "evidence_pointers": [
+          "Section 4.3, Definition 2",
+          "Example 2",
+          "Table 13"
+        ]
+      }
+    ]
+  },
+  "evaluation_logic": {
+    "evaluation_modes": [
+      "合成数据受控实验",
+      "真实世界病例研究",
+      "非迁移变体消融",
+      "组件级距离度量比较",
+      "参数敏感性分析",
+      "源域直接学习对照"
+    ],
+    "why_these_evaluations_cn": "先用合成数据在可控制条件下系统评估基本有效性；再用真实数据验证可操作性与外部有效性；然后通过非迁移变体B4、不同距离度量、源域直接学习分别隔离知识转移、相异性度量和目标域标签的贡献；最后通过λ分析检验参数敏感性。",
+    "benchmark_and_contrast_chain_cn": "B1/B2/B3提供传统区间距离诊断基线，B4是ITMD去掉知识转移后的同框架变体，构成从无迁移到有迁移的关键对比；标准距离比较用于隔离相异性度量；仅源域学习对照用于隔离目标域标签贡献；不同比例用于刻画源域数据规模对改进的影响。",
+    "claim_evidence_ledger": [
+      {
+        "claim_cn": "ITMD在合成数据上准确率优于四种基线。",
+        "evidence_cn": "表6/7与图2/3显示所有分组ITMD最高，改进幅度随比例增大。",
+        "supported_cn": true
+      },
+      {
+        "claim_cn": "ITMD在真实诊断数据上优于基线并支持医生决策。",
+        "evidence_cn": "表10/11与图4显示四位医生数据上均优于基线。",
+        "supported_cn": true
+      },
+      {
+        "claim_cn": "知识转移是改进的来源。",
+        "evidence_cn": "B4作为无迁移变体明显弱于ITMD。",
+        "supported_cn": true
+      },
+      {
+        "claim_cn": "新相异性度量优于标准距离。",
+        "evidence_cn": "例2与表13支持。",
+        "supported_cn": true
+      },
+      {
+        "claim_cn": "条件数约束提高知识转移稳定性。",
+        "evidence_cn": "定理1给出理论误差界，但没有单独消融条件数约束；只能算间接支持。",
+        "supported_cn": false
+      },
+      {
+        "claim_cn": "目标域少量标签显著提升预测。",
+        "evidence_cn": "表12仅源域学习 vs 表10联合训练。",
+        "supported_cn": true
+      }
+    ],
+    "internal_validity_strategy_cn": "使用五折交叉验证、20次随机初始化并报告平均值与标准差、保持所有方法使用相同测试集、源域数据固定用于训练；通过B4变体控制模型结构差异。",
+    "external_validity_strategy_cn": "使用真实医院四位医生的超声诊断记录；选择甲状腺癌→乳腺癌这一在器官、发病机制和诊断标准上相似的真实疾病对；研究场景与医院实际诊断流程对应。",
+    "what_is_not_actually_tested_cn": "没有与现有跨域推荐/迁移学习方法直接比较；没有检验真实临床决策结果或医生采纳情况；没有验证条件数约束的独立贡献；没有覆盖多家医院、更多疾病对或异质数据模态；真实案例仅来自单一超声科室。"
+  },
+  "contribution_logic": {
+    "technical_claim_cn": "ITMD在预测疾病风险等级方面准确率优于四种非迁移基线，在合成和真实数据上均成立。",
+    "artifact_claim_cn": "新相异性度量和空间对齐方法是ITMD性能提升的可识别来源；通过B4和不同距离度量比较得到支持。",
+    "mechanism_claim_cn": "源域通过与目标域共享的症状关系矩阵提供额外信息，空间对齐消除特征维度/分布差异，条件数约束控制误差传播，从而在目标域数据稀疏时改善预测。",
+    "boundary_claim_cn": "在相同和不同症状空间下均有效；在目标域数据越稀疏（记录越少）时改进越大；当目标域数据增加时，方法相对基线改进减小，因为目标域自身数据已足以支撑建模。",
+    "reusable_design_knowledge_cn": "面向区间数医学诊断的跨域推荐应包含：保序的区间归一化、将源域特征空间对齐到目标域的变换矩阵、风险区间加权的相异性度量，以及在优化中约束共享矩阵条件数以增强数值稳定性。",
+    "theoretical_contribution_cn": "作者声称理论贡献是解决医学诊断中的不确定（区间数）和异构（特征空间不匹配）表示问题，将跨域推荐扩展到医学诊断；但文章更多是方法贡献，未提出可检验的新理论命题或对既有理论命题进行修正。",
+    "how_discussion_closes_intro_gap_cn": "结论明确重新指向引言提出的两个挑战：相异性度量对应区间数挑战，空间对齐对应特征空间不匹配挑战；进而声称ITMD通过集体矩阵分解实现知识转移，并以合成实验和真实案例作为证据，完成从缺口到解决闭环。",
+    "overclaim_or_unsupported_leaps_cn": "结论中“理论层面解决数据稀疏问题”的说法较强；由于未与迁移学习/跨域推荐基线比较，且条件数约束没有单独消融，不能确定各组件贡献权重；真实案例单中心和单一疾病对也使“直接用于支持放射科医生”的宣传略显过度。"
+  },
+  "sentence_level_move_map": [
+    {
+      "order": 1,
+      "section": "Abstract",
+      "locator": "Abstract P1 S1–S2",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "医院收集的患者电子诊断记录是开发辅助医生预测疾病风险的推荐系统的宝贵数据。",
+      "rhetorical_function_cn": "开篇建立医学推荐系统的数据基础与研究价值。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "为随后指出数据稀疏问题提供前提。",
+      "evidence_pointer": "摘要第一句"
+    },
+    {
+      "order": 2,
+      "section": "Abstract",
+      "locator": "Abstract P1 S3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "某些疾病诊断记录不足以训练预测模型，即数据稀疏问题。",
+      "rhetorical_function_cn": "引入核心现实矛盾。",
+      "depends_on_cn": "电子记录虽有价值但并非所有疾病都充分。",
+      "sets_up_cn": "为跨域推荐作为解决方案做铺垫。",
+      "evidence_pointer": "摘要第二句"
+    },
+    {
+      "order": 3,
+      "section": "Abstract",
+      "locator": "Abstract P1 S4",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "跨域推荐系统通过从有充足数据的相似源域转移知识来缓解该问题。",
+      "rhetorical_function_cn": "引入既有技术路径。",
+      "depends_on_cn": "数据稀疏问题。",
+      "sets_up_cn": "使读者预期一个跨域推荐方案。",
+      "evidence_pointer": "摘要第三句"
+    },
+    {
+      "order": 4,
+      "section": "Abstract",
+      "locator": "Abstract P1 S5–S6",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "但医学诊断跨域推荐面临两个挑战：区间数表示的不确定性，以及不同疾病的症状特征空间通常不匹配。",
+      "rhetorical_function_cn": "列出本文要解决的两个具体矛盾，将一般性问题收窄。",
+      "depends_on_cn": "跨域推荐一般路径；医学数据特殊性。",
+      "sets_up_cn": "为ITMD的创新点提供靶子。",
+      "evidence_pointer": "摘要第四句"
+    },
+    {
+      "order": 5,
+      "section": "Abstract",
+      "locator": "Abstract P1 S7",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "本文提出名为ITMD的跨域推荐系统，向医生提供个性化疾病风险推荐。",
+      "rhetorical_function_cn": "宣布研究目标和产物。",
+      "depends_on_cn": "两个挑战。",
+      "sets_up_cn": "引出后续组件描述。",
+      "evidence_pointer": "摘要第五句"
+    },
+    {
+      "order": 6,
+      "section": "Abstract",
+      "locator": "Abstract P1 S8",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "ITMD包含新的相异性度量、空间对齐技术和集体矩阵分解来实现知识转移。",
+      "rhetorical_function_cn": "概括制品核心机制。",
+      "depends_on_cn": "两个挑战分别被这些机制处理。",
+      "sets_up_cn": "为评价段落提供被测对象。",
+      "evidence_pointer": "摘要第六句"
+    },
+    {
+      "order": 7,
+      "section": "Abstract",
+      "locator": "Abstract P1 S9",
+      "move_code": "RESULT",
+      "paraphrase_cn": "实验和真实数据案例表明ITMD优于四个基线，提高了疾病风险推荐准确率。",
+      "rhetorical_function_cn": "给出一句话证据声明。",
+      "depends_on_cn": "方法组件。",
+      "sets_up_cn": "读者预期有实验与案例部分。",
+      "evidence_pointer": "摘要末句"
+    },
+    {
+      "order": 8,
+      "section": "Introduction",
+      "locator": "Introduction P1 S1",
+      "move_code": "CONTEXT",
+      "paraphrase_cn": "临床医学中，医疗诊断通常是预测和预防疾病可能发生的第一步。",
+      "rhetorical_function_cn": "将研究置于临床决策起点。",
+      "depends_on_cn": "无",
+      "sets_up_cn": "引出早期诊断和电子记录的重要性。",
+      "evidence_pointer": "Introduction第1段第1句"
+    },
+    {
+      "order": 9,
+      "section": "Introduction",
+      "locator": "Introduction P1 S2–S3",
+      "move_code": "PRACTICAL_STAKES",
+      "paraphrase_cn": "早期诊断可防止病情恶化并提高治愈可能，尤其对癌症；例如乳腺癌若早期诊断可防可治，否则多数患者无法治愈。",
+      "rhetorical_function_cn": "赋予研究现实利害关系，提升问题重要性。",
+      "depends_on_cn": "诊断作为第一步的背景。",
+      "sets_up_cn": "支持个性化推荐系统介入的必要性。",
+      "evidence_pointer": "Introduction第1段第2–3句"
+    },
+    {
+      "order": 10,
+      "section": "Introduction",
+      "locator": "Introduction P1 S4–S5",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "电子病历包含可辅助早期准确诊断的重要信息；医生需要针对患者症状差异的个性化推荐。",
+      "rhetorical_function_cn": "建立数据可得性与个性化需求。",
+      "depends_on_cn": "早期诊断的重要性。",
+      "sets_up_cn": "引出推荐系统在医学诊断中的应用。",
+      "evidence_pointer": "Introduction第1段第4–5句"
+    },
+    {
+      "order": 11,
+      "section": "Introduction",
+      "locator": "Introduction P1 S6",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "推荐系统已被用于慢性病、心脏病等医学诊断，其基本映射是患者=用户、风险等级=项目、评分=医生或模型给出的概率。",
+      "rhetorical_function_cn": "概括现有应用并建立术语映射。",
+      "depends_on_cn": "个性化推荐需求。",
+      "sets_up_cn": "为讨论数据稀疏问题提供概念工具。",
+      "evidence_pointer": "Introduction第1段第6句"
+    },
+    {
+      "order": 12,
+      "section": "Introduction",
+      "locator": "Introduction P2 S1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "虽然推荐系统可提供医学诊断支持，但面临数据稀疏问题。",
+      "rhetorical_function_cn": "引入本研究的核心限制。",
+      "depends_on_cn": "医学推荐系统映射。",
+      "sets_up_cn": "解释稀疏原因和后果。",
+      "evidence_pointer": "Introduction第2段第1句"
+    },
+    {
+      "order": 13,
+      "section": "Introduction",
+      "locator": "Introduction P2 S2–S3",
+      "move_code": "WHY_GAP_MATTERS",
+      "paraphrase_cn": "数据稀疏源于低发病率、医生经验不足或记录难以获取；稀疏数据会导致诊断决策支持不准确，破伤风等罕见病因记录不足而无法可靠估计症状关系。",
+      "rhetorical_function_cn": "说明数据稀疏不仅是工程问题，更影响临床诊断安全性。",
+      "depends_on_cn": "数据稀疏问题。",
+      "sets_up_cn": "为迁移学习/跨域推荐提供动机。",
+      "evidence_pointer": "Introduction第2段第2–3句"
+    },
+    {
+      "order": 14,
+      "section": "Introduction",
+      "locator": "Introduction P3 S1–S2",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "迁移学习被广泛用于缓解医学诊断中的稀疏，跨域推荐系统将迁移学习与协同过滤结合，从数据充足的源域提取知识并转给目标域。",
+      "rhetorical_function_cn": "引入解决方案家族。",
+      "depends_on_cn": "数据稀疏的危害。",
+      "sets_up_cn": "指出跨域推荐是本研究采用的方向。",
+      "evidence_pointer": "Introduction第3段第1–2句"
+    },
+    {
+      "order": 15,
+      "section": "Introduction",
+      "locator": "Introduction P3 S3–S4",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当两种疾病在发生器官类型、细胞病理与发病机制、诊断标准方面相似时，其症状间关系相似；重叠症状可作为桥梁对齐并转移这些关系。",
+      "rhetorical_function_cn": "解释医学领域知识转移可行性的机制。",
+      "depends_on_cn": "跨域推荐概念。",
+      "sets_up_cn": "为后续症状空间对齐和关系矩阵共享提供领域依据。",
+      "evidence_pointer": "Introduction第3段第3–4句"
+    },
+    {
+      "order": 16,
+      "section": "Introduction",
+      "locator": "Introduction P4 S1",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "构建医学诊断跨域推荐系统通常面临两个挑战。",
+      "rhetorical_function_cn": "从一般跨域推荐转向医学领域的特殊难题。",
+      "depends_on_cn": "跨域知识转移机制。",
+      "sets_up_cn": "分别展开两个挑战。",
+      "evidence_pointer": "Introduction第4段第1句"
+    },
+    {
+      "order": 17,
+      "section": "Introduction",
+      "locator": "Introduction P4 S2",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "挑战1：医学记录常使用区间数表示不确定症状与疾病风险，如甲状腺癌TIRADS的五个类别对应不同风险区间。",
+      "rhetorical_function_cn": "具体化第一个技术挑战。",
+      "depends_on_cn": "两个挑战的总述。",
+      "sets_up_cn": "为相异性度量创新做铺垫。",
+      "evidence_pointer": "Introduction第4段第2句"
+    },
+    {
+      "order": 18,
+      "section": "Introduction",
+      "locator": "Introduction P4 S3",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "挑战2：不同疾病的症状空间差异大，源域与目标域共享症状少且共享症状的严重度分布也不同；例如乳腺癌五症状与痛风六症状只共享三个。",
+      "rhetorical_function_cn": "具体化第二个技术挑战。",
+      "depends_on_cn": "两个挑战的总述。",
+      "sets_up_cn": "为空间对齐创新做铺垫。",
+      "evidence_pointer": "Introduction第4段第3句"
+    },
+    {
+      "order": 19,
+      "section": "Introduction",
+      "locator": "Introduction P5 S1",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "为应对这两个挑战，本研究开发新的跨域推荐方法ITMD，为记录不足的患者提供个性化风险等级推荐。",
+      "rhetorical_function_cn": "正式宣布研究目标。",
+      "depends_on_cn": "两个挑战。",
+      "sets_up_cn": "随后概述方法原理。",
+      "evidence_pointer": "Introduction第5段第1句"
+    },
+    {
+      "order": 20,
+      "section": "Introduction",
+      "locator": "Introduction P5 S2–S4",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "ITMD在归一化后学习两个变换矩阵对齐症状空间，用新相异性度量衡量诊断差异，并同时最小化两域的诊断-预测差异以学习共享症状关系。",
+      "rhetorical_function_cn": "压缩概述核心机制。",
+      "depends_on_cn": "两个挑战。",
+      "sets_up_cn": "为贡献列表提供内容。",
+      "evidence_pointer": "Introduction第5段第2–4句"
+    },
+    {
+      "order": 21,
+      "section": "Introduction",
+      "locator": "Introduction, contribution list paragraphs (1)–(4)",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "四条贡献分别指向：新相异性度量应对挑战1；空间对齐方法应对挑战2；整合的ITMD方法及条件数约束实现知识转移；综合实验和真实案例验证。",
+      "rhetorical_function_cn": "明确贡献清单，使读者预知论文价值。",
+      "depends_on_cn": "问题与设计概述。",
+      "sets_up_cn": "为后文方法、实验和结论设置验收标准。",
+      "evidence_pointer": "Introduction第5段后贡献列表"
+    },
+    {
+      "order": 22,
+      "section": "Introduction",
+      "locator": "Introduction P6",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "说明剩余部分的结构：相关工作、问题定义、ITMD方法、两组实验、真实案例和结论。",
+      "rhetorical_function_cn": "给读者导航。",
+      "depends_on_cn": "贡献列表。",
+      "sets_up_cn": "无",
+      "evidence_pointer": "Introduction末段"
+    },
+    {
+      "order": 23,
+      "section": "Related work 2.1",
+      "locator": "Related work 2.1, first two paragraphs",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "综述了推荐系统在医学中的应用，包括个性化处方、心脏病患者建议、基于人口统计学的治疗推荐、慢性病诊断、心脏骤停风险预测等。",
+      "rhetorical_function_cn": "建立医学推荐系统的已有知识版图。",
+      "depends_on_cn": "引言中的推荐系统应用。",
+      "sets_up_cn": "通过这些例子引出其限制。",
+      "evidence_pointer": "Section 2.1第1–2段"
+    },
+    {
+      "order": 24,
+      "section": "Related work 2.1",
+      "locator": "Related work 2.1 final paragraph and Table 1",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有医学推荐系统无法处理实践中常见的区间数据与数据稀疏问题。",
+      "rhetorical_function_cn": "指出现有医学推荐系统的知识缺口。",
+      "depends_on_cn": "前两段文献。",
+      "sets_up_cn": "为转向跨域推荐做铺垫。",
+      "evidence_pointer": "Section 2.1末段与Table 1"
+    },
+    {
+      "order": 25,
+      "section": "Related work 2.2",
+      "locator": "Related work 2.2 introductory paragraph",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "跨域推荐系统分为基于用户-物品评分矩阵的方法与基于附加信息的方法两类。",
+      "rhetorical_function_cn": "给出跨域推荐系统的经典分类。",
+      "depends_on_cn": "跨域推荐作为解决方案。",
+      "sets_up_cn": "后续分别评述两类方法。",
+      "evidence_pointer": "Section 2.2第1段"
+    },
+    {
+      "order": 26,
+      "section": "Related work 2.2.1",
+      "locator": "Related work 2.2.1 entire subsection",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "基于评分矩阵的方法包括非重叠、部分重叠和完全重叠用户/物品；分别以聚类级共享、坐标系统迁移、核诱导迁移等实现知识转移。",
+      "rhetorical_function_cn": "综述评分矩阵类方法。",
+      "depends_on_cn": "跨域推荐分类。",
+      "sets_up_cn": "让读者看到这些方法没有处理区间数和医学诊断约束。",
+      "evidence_pointer": "Section 2.2.1"
+    },
+    {
+      "order": 27,
+      "section": "Related work 2.2.2",
+      "locator": "Related work 2.2.2 entire subsection",
+      "move_code": "PRIOR_KNOWLEDGE",
+      "paraphrase_cn": "基于附加信息的方法利用社交、标签、评论或元数据作为跨域桥梁，例如标签矩阵迁移、社交图随机游走、元数据混合矩阵分解等。",
+      "rhetorical_function_cn": "综述附加信息类方法。",
+      "depends_on_cn": "跨域推荐分类。",
+      "sets_up_cn": "说明即使有附加信息，也仍无法直接适用于医学区间诊断数据。",
+      "evidence_pointer": "Section 2.2.2"
+    },
+    {
+      "order": 28,
+      "section": "Related work 2.2 ending",
+      "locator": "Related work final paragraph before Section 3",
+      "move_code": "LIMITATION",
+      "paraphrase_cn": "现有跨域推荐系统并非为医学诊断问题设计，不能直接应用，且没有方法能处理医学诊断中常见的区间数据。",
+      "rhetorical_function_cn": "明确文献缺口。",
+      "depends_on_cn": "两类跨域方法综述。",
+      "sets_up_cn": "为本文提出ITMD提供理由。",
+      "evidence_pointer": "Section 2.2末段"
+    },
+    {
+      "order": 29,
+      "section": "Problem definition 3.1",
+      "locator": "Section 3.1 first paragraphs",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "形式化单域医学诊断：患者、症状、类别列表，症状等级为区间数，矩阵U、V、R分别表示患者-症状、症状-类别、患者-类别关系。",
+      "rhetorical_function_cn": "建立后续算法的数学对象。",
+      "depends_on_cn": "引言中的用户/项目/评分映射。",
+      "sets_up_cn": "使跨域问题可以被严格定义。",
+      "evidence_pointer": "Section 3.1"
+    },
+    {
+      "order": 30,
+      "section": "Problem definition 3.1",
+      "locator": "Section 3.1, Example 1",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "通过8名乳腺结节患者的例子演示U、V、R三个矩阵如何构成诊断过程。",
+      "rhetorical_function_cn": "用具体算例说明抽象形式化。",
+      "depends_on_cn": "矩阵定义。",
+      "sets_up_cn": "使读者能直观理解问题。",
+      "evidence_pointer": "Section 3.1, Example 1, Tables 2–4"
+    },
+    {
+      "order": 31,
+      "section": "Problem definition 3.1",
+      "locator": "Section 3.1 end",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "三个矩阵对应医生的推理链：把患者关联到症状、把症状关联到诊断类别、再把患者关联到诊断类别；诊断即从U和V确定R。",
+      "rhetorical_function_cn": "解释矩阵分解的医学语义。",
+      "depends_on_cn": "矩阵定义与示例。",
+      "sets_up_cn": "为方法中R≈U D V的分解提供正当性。",
+      "evidence_pointer": "Section 3.1最后一段"
+    },
+    {
+      "order": 32,
+      "section": "Problem definition 3.2",
+      "locator": "Section 3.2 first paragraph",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "跨域场景中，目标域记录不足，源域记录充足；问题是如何用源域记录改善目标域诊断支持。",
+      "rhetorical_function_cn": "从单域过渡到跨域设置。",
+      "depends_on_cn": "单域问题和数据稀疏现象。",
+      "sets_up_cn": "形式化跨域输入输出。",
+      "evidence_pointer": "Section 3.2第1段"
+    },
+    {
+      "order": 33,
+      "section": "Problem definition 3.2",
+      "locator": "Section 3.2, symptom space definition",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义症状空间为症状两两之间对疾病风险影响的关联结构；症状数量与分布相同则空间相同，否则不同。",
+      "rhetorical_function_cn": "给出“特征空间匹配”的形式定义。",
+      "depends_on_cn": "跨域场景。",
+      "sets_up_cn": "使空间对齐成为可操作的研究对象。",
+      "evidence_pointer": "Section 3.2第2–3段"
+    },
+    {
+      "order": 34,
+      "section": "Problem definition 3.2",
+      "locator": "Section 3.2 final formula",
+      "move_code": "RQ_OR_OBJECTIVE",
+      "paraphrase_cn": "正式定义跨域诊断问题为：在症状空间不同时，用源域R_s、U_s、V_s和目标域U_t、V_t预测目标域R_t，即R_t=g(R_s,U_s,V_s,U_t,V_t)。",
+      "rhetorical_function_cn": "将研究目标转化为可计算的函数估计问题。",
+      "depends_on_cn": "单域定义和症状空间定义。",
+      "sets_up_cn": "为方法节的五步算法提供输入输出规格。",
+      "evidence_pointer": "Section 3.2末公式"
+    },
+    {
+      "order": 35,
+      "section": "Method Section 4 intro",
+      "locator": "Section 4 first paragraph and Fig.1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "提出ITMD的五步流程：归一化、症状空间对齐、相异性度量、基于关系矩阵约束的信息转移、目标域诊断支持。",
+      "rhetorical_function_cn": "给出方法总览图，让读者掌握全局。",
+      "depends_on_cn": "跨域问题定义。",
+      "sets_up_cn": "后续各子节按这五步展开。",
+      "evidence_pointer": "Section 4第1段与Fig.1"
+    },
+    {
+      "order": 36,
+      "section": "Method Section 4.1",
+      "locator": "Section 4.1 first paragraph",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "需要将区间值的患者-症状矩阵转换为数值矩阵，以便后续矩阵分解。",
+      "rhetorical_function_cn": "提出第一步设计需求。",
+      "depends_on_cn": "区间数矩阵。",
+      "sets_up_cn": "引入两条命题论证归一化合理性。",
+      "evidence_pointer": "Section 4.1第1段"
+    },
+    {
+      "order": 37,
+      "section": "Method Section 4.1",
+      "locator": "Section 4.1, Proposition 1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "若区间列表满足式(1)，则区间相等当且仅当区间均值相等。",
+      "rhetorical_function_cn": "用数学命题为均值归一化提供保序性依据。",
+      "depends_on_cn": "区间数形式化。",
+      "sets_up_cn": "支撑归一化不会丢失区分性。",
+      "evidence_pointer": "Section 4.1, Proposition 1"
+    },
+    {
+      "order": 38,
+      "section": "Method Section 4.1",
+      "locator": "Section 4.1, Proposition 2",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "在相同的区间列表条件下，区间之间的优劣可能性与它们均值之间的优劣顺序一致。",
+      "rhetorical_function_cn": "进一步保证归一化不仅保留唯一性，还保留大小序。",
+      "depends_on_cn": "Proposition 1和可能性度定义。",
+      "sets_up_cn": "说明用均值代替区间是安全的信息压缩。",
+      "evidence_pointer": "Section 4.1, Proposition 2"
+    },
+    {
+      "order": 39,
+      "section": "Method Section 4.1",
+      "locator": "Section 4.1 end",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "由两个命题可知，把U_s和U_t转换为均值矩阵是合理的。",
+      "rhetorical_function_cn": "将命题转化为设计决策。",
+      "depends_on_cn": "Proposition 1/2。",
+      "sets_up_cn": "进入空间对齐步骤。",
+      "evidence_pointer": "Section 4.1末句"
+    },
+    {
+      "order": 40,
+      "section": "Method Section 4.2",
+      "locator": "Section 4.2, Definition 1",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义症状矩阵D，其元素表示症状i对症状j所导致疾病风险的影响程度，满足对称和行和归一。",
+      "rhetorical_function_cn": "为知识转移提供待学习的共享对象。",
+      "depends_on_cn": "矩阵R的分解需要中间关系矩阵。",
+      "sets_up_cn": "使R可被分解为U D V。",
+      "evidence_pointer": "Section 4.2, Definition 1"
+    },
+    {
+      "order": 41,
+      "section": "Method Section 4.2",
+      "locator": "Section 4.2 middle paragraphs",
+      "move_code": "MECHANISM",
+      "paraphrase_cn": "当目标域症状空间与源域相同，可直接转移D_s；否则必须先对齐空间，才能让D_s^1与D_t可比。",
+      "rhetorical_function_cn": "说明空间对齐在知识转移链中的必要性。",
+      "depends_on_cn": "症状矩阵定义和两域症状空间差异。",
+      "sets_up_cn": "为变换矩阵M1/M2做铺垫。",
+      "evidence_pointer": "Section 4.2第3–4段"
+    },
+    {
+      "order": 42,
+      "section": "Method Section 4.2",
+      "locator": "Section 4.2 end",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "将源域症状矩阵分解为D_s=M1 D_s^1 M2，使D_s^1与D_t在目标症状空间上可比，并相应重写R_s的分解。",
+      "rhetorical_function_cn": "提出空间对齐的具体实现。",
+      "depends_on_cn": "需要跨空间比较。",
+      "sets_up_cn": "为优化问题提供待求解变量。",
+      "evidence_pointer": "Section 4.2末段"
+    },
+    {
+      "order": 43,
+      "section": "Method Section 4.3",
+      "locator": "Section 4.3 opening",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "转移信息需要知道真实诊断矩阵与预测矩阵之间的差异，因此要构造相异性度量。",
+      "rhetorical_function_cn": "提出第三步的需求。",
+      "depends_on_cn": "优化目标需要比较R与R_hat。",
+      "sets_up_cn": "引入风险区间和相异性度量定义。",
+      "evidence_pointer": "Section 4.3第1段"
+    },
+    {
+      "order": 44,
+      "section": "Method Section 4.3",
+      "locator": "Section 4.3, Definition 2",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "定义式(3)的相异性度量：对每个患者在所有类别对上计算误差平方乘积，用风险区间均值差加权，最后归一化到[0,1]。",
+      "rhetorical_function_cn": "给出本文的核心创新型度量。",
+      "depends_on_cn": "风险区间与均值转换。",
+      "sets_up_cn": "通过例2和性质说明其合理性。",
+      "evidence_pointer": "Section 4.3, Definition 2, Eq.(3)"
+    },
+    {
+      "order": 45,
+      "section": "Method Section 4.3",
+      "locator": "Section 4.3, Example 2",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "在只有两种预测的例子里，欧氏、曼哈顿、切比雪夫距离均把“错到相邻类别”和“错到最远类别”视为相同，而新度量能区分二者。",
+      "rhetorical_function_cn": "用最小算例证明新度量的必要性。",
+      "depends_on_cn": "新度量公式。",
+      "sets_up_cn": "为Table13的真实数据距离比较提供概念先例。",
+      "evidence_pointer": "Section 4.3, Example 2"
+    },
+    {
+      "order": 46,
+      "section": "Method Section 4.3",
+      "locator": "Section 4.3, Property 1",
+      "move_code": "HYPOTHESIS_OR_PROPOSITION",
+      "paraphrase_cn": "新度量满足非负有界、对称、零当且仅当两矩阵相等、一当且仅当所有患者被完全错分到相反端点类别。",
+      "rhetorical_function_cn": "给出度量的数学性质，增强形式可信度。",
+      "depends_on_cn": "Definition 2。",
+      "sets_up_cn": "确保后续优化目标行为良好。",
+      "evidence_pointer": "Section 4.3, Property 1与附录A"
+    },
+    {
+      "order": 47,
+      "section": "Method Section 4.4",
+      "locator": "Section 4.4, Definition 3",
+      "move_code": "THEORY_INTRO",
+      "paraphrase_cn": "定义矩阵的Frobenius条件数，用于衡量输入扰动对输出的影响程度。",
+      "rhetorical_function_cn": "引入数值稳定性工具。",
+      "depends_on_cn": "矩阵分解优化需要稳健性。",
+      "sets_up_cn": "为定理1和约束条件铺垫。",
+      "evidence_pointer": "Section 4.4, Definition 3"
+    },
+    {
+      "order": 48,
+      "section": "Method Section 4.4",
+      "locator": "Section 4.4, Theorem 1",
+      "move_code": "THEORY_PROPOSITION",
+      "paraphrase_cn": "定理1给出R_t=U_t D_t V_t分解中，U_t或V_t的扰动造成的R_t相对误差被条件数乘积界定。",
+      "rhetorical_function_cn": "用形式理论说明条件数越小误差越可控。",
+      "depends_on_cn": "条件数定义与矩阵分解。",
+      "sets_up_cn": "为在优化中约束条件数提供依据。",
+      "evidence_pointer": "Section 4.4, Theorem 1与附录B"
+    },
+    {
+      "order": 49,
+      "section": "Method Section 4.4",
+      "locator": "Section 4.4 after Theorem 1",
+      "move_code": "REQUIREMENT",
+      "paraphrase_cn": "因此需要使D_s^1和D_t的条件数相等，从而在共享症状空间下稳定地学习两域关系。",
+      "rhetorical_function_cn": "将定理转为优化约束。",
+      "depends_on_cn": "Theorem 1。",
+      "sets_up_cn": "引出式(10)的约束优化。",
+      "evidence_pointer": "Section 4.4“When D_s^1 and D_t share the same symptom space…”附近"
+    },
+    {
+      "order": 50,
+      "section": "Method Section 4.4",
+      "locator": "Section 4.4, Eq.(10)",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "构造联合代价函数，由两域诊断-预测相异度和两域症状关系矩阵差的惩罚项组成，并用条件数相等与矩阵非负、对称、行和归一约束进行优化。",
+      "rhetorical_function_cn": "将知识转移转化为一个可求解的优化问题。",
+      "depends_on_cn": "相异性度量、空间对齐和条件数约束。",
+      "sets_up_cn": "算法1负责求解该优化问题。",
+      "evidence_pointer": "Section 4.4, Eq.(10)"
+    },
+    {
+      "order": 51,
+      "section": "Method Section 4.4",
+      "locator": "Section 4.4, Algorithm 1",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "用SQP迭代更新D_s^1、D_t、M1、M2，直到代价函数收敛。",
+      "rhetorical_function_cn": "给出信息转移的算法实现。",
+      "depends_on_cn": "Eq.(10)的优化问题。",
+      "sets_up_cn": "为算法2提供子过程。",
+      "evidence_pointer": "Section 4.4, Algorithm 1"
+    },
+    {
+      "order": 52,
+      "section": "Method Section 4.5",
+      "locator": "Section 4.5 first paragraph",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "目标域推荐由预测矩阵R_hat_t=U_t D_t V_t中每行最大的类别给出；同空间情形则不需要变换矩阵。",
+      "rhetorical_function_cn": "完成方法最后一步并处理同空间特例。",
+      "depends_on_cn": "前四步。",
+      "sets_up_cn": "使算法2可汇总整个流程。",
+      "evidence_pointer": "Section 4.5与Algorithm 2"
+    },
+    {
+      "order": 53,
+      "section": "Experiments Section 5 intro",
+      "locator": "Section 5 first paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "由于多数疾病诊断数据涉及隐私且不可获取，需要生成合成数据来研究ITMD；合成数据应反映风险区间诊断特征。",
+      "rhetorical_function_cn": "为使用合成数据提供正当理由。",
+      "depends_on_cn": "方法构建完成。",
+      "sets_up_cn": "介绍数据生成过程和两组实验。",
+      "evidence_pointer": "Section 5第1段"
+    },
+    {
+      "order": 54,
+      "section": "Experiments Section 5.1",
+      "locator": "Section 5.1 first paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "合成数据基于疾病诊断的必要信息（患者、症状、类别风险区间、症状等级）生成，以模拟真实病历结构。",
+      "rhetorical_function_cn": "说明合成数据不是任意模拟，而是有领域依据。",
+      "depends_on_cn": "问题定义中的矩阵/区间结构。",
+      "sets_up_cn": "分别描述两组实验的具体疾病。",
+      "evidence_pointer": "Section 5.1第1段"
+    },
+    {
+      "order": 55,
+      "section": "Experiments Section 5.1",
+      "locator": "Section 5.1 first group",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第一组以甲状腺癌为源域、乳腺癌为目标域，两域症状空间相同，生成40000与10000条记录，λ=0.5。",
+      "rhetorical_function_cn": "定义同症状空间评价条件。",
+      "depends_on_cn": "方法需要评价。",
+      "sets_up_cn": "为表5的G1–G5提供数据。",
+      "evidence_pointer": "Section 5.1第一组与Table 5"
+    },
+    {
+      "order": 56,
+      "section": "Experiments Section 5.1",
+      "locator": "Section 5.1 second group",
+      "move_code": "DESIGN_FEATURE",
+      "paraphrase_cn": "第二组以胃癌为源域、肝癌为目标域，症状数量不同、类别也不同，形成不同症状空间；同样生成40000与10000条记录，λ=0.5。",
+      "rhetorical_function_cn": "定义不同症状空间评价条件。",
+      "depends_on_cn": "空间对齐机制。",
+      "sets_up_cn": "为G6–G10提供数据。",
+      "evidence_pointer": "Section 5.1第二组与Table 5"
+    },
+    {
+      "order": 57,
+      "section": "Experiments Section 5.1",
+      "locator": "Section 5.1 final paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "所有实验对目标域做五折交叉验证，源域数据全量用于训练。",
+      "rhetorical_function_cn": "说明评价流程，防止信息泄漏。",
+      "depends_on_cn": "合成数据生成。",
+      "sets_up_cn": "为指标和基线比较提供统一协议。",
+      "evidence_pointer": "Section 5.1末段"
+    },
+    {
+      "order": 58,
+      "section": "Experiments Section 5.2",
+      "locator": "Section 5.2 first paragraph",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "评价指标为预测准确率，定义为1减去测试集上的相异度。",
+      "rhetorical_function_cn": "确定客观成功标准。",
+      "depends_on_cn": "新相异性度量。",
+      "sets_up_cn": "后续所有表/图都报告该指标。",
+      "evidence_pointer": "Section 5.2第1段"
+    },
+    {
+      "order": 59,
+      "section": "Experiments Section 5.2",
+      "locator": "Section 5.2 second paragraph",
+      "move_code": "BENCHMARK_OR_CONTRAST",
+      "paraphrase_cn": "选择四个非迁移方法作为基线，其中B1/B2/B3使用不同区间距离的线性组合，B4是ITMD去掉迁移的变体。",
+      "rhetorical_function_cn": "建立对照梯度：从传统区间距离到无迁移同框架。",
+      "depends_on_cn": "方法定义。",
+      "sets_up_cn": "使ITMD的改进可归因于知识转移而非模型结构。",
+      "evidence_pointer": "Section 5.2第2段"
+    },
+    {
+      "order": 60,
+      "section": "Experiments Section 5.3",
+      "locator": "Section 5.3 first paragraph",
+      "move_code": "RESULT",
+      "paraphrase_cn": "ITMD在每组记录中表现最好，且源:目标比例从1:1增至4:1时性能提升；这支持知识转移在相同/不同症状空间下均有效。",
+      "rhetorical_function_cn": "给出实验总结果。",
+      "depends_on_cn": "表6/7和图2/3。",
+      "sets_up_cn": "随后四条highlight进一步解释。",
+      "evidence_pointer": "Section 5.3开头与Tables 6–7"
+    },
+    {
+      "order": 61,
+      "section": "Experiments Section 5.3",
+      "locator": "Section 5.3, highlights (1)–(2)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "B4优于B1–B3但仍显著弱于ITMD，说明转移贡献大；B1–B3标准差明显较大，稳定性差。",
+      "rhetorical_function_cn": "用基线梯度解释改进来源和稳定性。",
+      "depends_on_cn": "表6。",
+      "sets_up_cn": "支撑机制主张。",
+      "evidence_pointer": "Section 5.3 highlight (1)–(2)"
+    },
+    {
+      "order": 62,
+      "section": "Experiments Section 5.3",
+      "locator": "Section 5.3, highlight (4)",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "当目标域记录从2000增至10000时，改进率下降；作者解释为目标域数据越充足，对转移支持的需求越小。",
+      "rhetorical_function_cn": "检验边界条件并给出合理性解释。",
+      "depends_on_cn": "表7。",
+      "sets_up_cn": "为真实案例中稀疏目标域的高改进做铺垫。",
+      "evidence_pointer": "Section 5.3 highlight (4)"
+    },
+    {
+      "order": 63,
+      "section": "Case study Section 6 intro",
+      "locator": "Section 6 first paragraph",
+      "move_code": "STUDY_OVERVIEW",
+      "paraphrase_cn": "本节用真实病例数据演示ITMD在实际场景中的运行与性能。",
+      "rhetorical_function_cn": "从合成实验转向真实案例。",
+      "depends_on_cn": "合成实验结论。",
+      "sets_up_cn": "描述真实数据和结果。",
+      "evidence_pointer": "Section 6第1段"
+    },
+    {
+      "order": 64,
+      "section": "Case study Section 6.1",
+      "locator": "Section 6.1, first paragraphs",
+      "move_code": "PHENOMENON",
+      "paraphrase_cn": "目标医院擅长甲状腺癌但乳腺诊断能力不足；甲状腺与乳腺在浅表器官、内分泌腺病变机制、TI/BIRADS诊断标准三方面相似。",
+      "rhetorical_function_cn": "建立真实案例的领域相似性，使转移有医学依据。",
+      "depends_on_cn": "引言中相似疾病三视角。",
+      "sets_up_cn": "为使用甲状腺→乳腺作为源目标的合理性提供证据。",
+      "evidence_pointer": "Section 6.1第1–3段"
+    },
+    {
+      "order": 65,
+      "section": "Case study Section 6.1",
+      "locator": "Section 6.1, TI/BI-RADS paragraphs",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "医院将医生对五个症状的观察转换为TIRADS类别和风险区间，进而形成患者-症状和患者-类别关系；两病共享的症状关系可作为跨域知识。",
+      "rhetorical_function_cn": "说明真实数据如何映射到本文形式化框架。",
+      "depends_on_cn": "问题定义中的区间/矩阵表示。",
+      "sets_up_cn": "使真实记录可以喂入ITMD。",
+      "evidence_pointer": "Section 6.1中Table 8与后续两段"
+    },
+    {
+      "order": 66,
+      "section": "Case study Section 6.1",
+      "locator": "Section 6.1, data description paragraph",
+      "move_code": "METHOD_JUSTIFICATION",
+      "paraphrase_cn": "数据集包含四位医生2017–2019年的超声评估；目标域用五折交叉验证，源域全训练，并与四种基线在同测试集上比较。",
+      "rhetorical_function_cn": "描述真实评价协议。",
+      "depends_on_cn": "映射后的矩阵表示。",
+      "sets_up_cn": "报告表9–11的结果。",
+      "evidence_pointer": "Section 6.1末段，Table 9"
+    },
+    {
+      "order": 67,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, observation (1)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "在四位医生数据上，ITMD均优于四个基线，最大改进0.1221，最大改进率16.69%。",
+      "rhetorical_function_cn": "给出真实案例的核心结果。",
+      "depends_on_cn": "表10/11。",
+      "sets_up_cn": "支持外部有效性声明。",
+      "evidence_pointer": "Section 6.2与Tables 10–11"
+    },
+    {
+      "order": 68,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, observation (2)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "B1–B3在稀疏数据下表现差且不稳定，不被认为可接受；B4和ITMD更稳定。",
+      "rhetorical_function_cn": "强化非迁移基线在实际稀疏场景中的失败。",
+      "depends_on_cn": "表10。",
+      "sets_up_cn": "证明跨域方法必要性。",
+      "evidence_pointer": "Section 6.2 observation (2)"
+    },
+    {
+      "order": 69,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, observation (3)",
+      "move_code": "RESULT",
+      "paraphrase_cn": "源:目标比例从1:1增至4:1时，ITMD相对基线的改进持续增大。",
+      "rhetorical_function_cn": "在真实数据上复现比例效应。",
+      "depends_on_cn": "Table 11。",
+      "sets_up_cn": "帮助解释源域知识价值。",
+      "evidence_pointer": "Section 6.2 observation (3)"
+    },
+    {
+      "order": 70,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, source-domain direct learning paragraph",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "对照实验显示，只用源域数据学习关系矩阵对目标域预测改进很小；加入目标域少量标签后准确率显著提升。",
+      "rhetorical_function_cn": "隔离目标域信息的重要性。",
+      "depends_on_cn": "Table 12。",
+      "sets_up_cn": "说明知识转移需要目标域少量校准。",
+      "evidence_pointer": "Section 6.2与Table 12"
+    },
+    {
+      "order": 71,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, distance measurement comparison paragraph",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "用欧氏、曼哈顿、切比雪夫距离替换B4中的相异度后，准确率显著下降，说明新度量对性能有实质贡献。",
+      "rhetorical_function_cn": "隔离相异性度量组件的贡献。",
+      "depends_on_cn": "Table 13。",
+      "sets_up_cn": "支持贡献1的声称。",
+      "evidence_pointer": "Section 6.2与Table 13"
+    },
+    {
+      "order": 72,
+      "section": "Case study Section 6.2",
+      "locator": "Section 6.2, lambda analysis paragraph",
+      "move_code": "ROBUSTNESS_OR_BOUNDARY_TEST",
+      "paraphrase_cn": "当λ从0增至0.5，准确率单调上升；λ在0.5到1之间基本平稳。",
+      "rhetorical_function_cn": "检验正则参数敏感性。",
+      "depends_on_cn": "Fig.5。",
+      "sets_up_cn": "表明方法对λ不过度敏感。",
+      "evidence_pointer": "Section 6.2末段与Fig.5"
+    },
+    {
+      "order": 73,
+      "section": "Conclusion Section 7",
+      "locator": "Section 7 first paragraph",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "本文提出ITMD，通过相异性度量、空间对齐和集体矩阵分解解决区间数与症状空间不匹配两个挑战，支持稀疏疾病诊断。",
+      "rhetorical_function_cn": "回扣引言的两个挑战。",
+      "depends_on_cn": "前六节全部内容。",
+      "sets_up_cn": "引出贡献声明。",
+      "evidence_pointer": "Section 7第1–2段"
+    },
+    {
+      "order": 74,
+      "section": "Conclusion Section 7",
+      "locator": "Section 7, significance statement",
+      "move_code": "CONTRIBUTION",
+      "paraphrase_cn": "作者称结果在理论上解决医学诊断数据稀疏问题并处理不确定/异构表示，在实践上可直接用于支持经验不足的放射科医生。",
+      "rhetorical_function_cn": "放大研究意义。",
+      "depends_on_cn": "实验与案例证据。",
+      "sets_up_cn": "将局部结果提升为一般知识声明。",
+      "evidence_pointer": "Section 7第3段"
+    },
+    {
+      "order": 75,
+      "section": "Conclusion Section 7",
+      "locator": "Section 7, future study paragraph",
+      "move_code": "LIMITATION_AND_FUTURE",
+      "paraphrase_cn": "未来将扩展到更复杂的异构诊断数据迁移，并考虑患者隐私、医生风险态度和医学金标准等因素。",
+      "rhetorical_function_cn": "承认边界并指出后续方向。",
+      "depends_on_cn": "当前方法的适用范围。",
+      "sets_up_cn": "无",
+      "evidence_pointer": "Section 7末段"
+    }
+  ],
+  "writing_techniques": {
+    "gap_construction_cn": "先以医学诊断和早期治疗的重要性铺垫现实价值；随后指出数据稀疏会导致诊断支持不可靠；再介绍迁移学习/跨域推荐作为可行路径；最后指出医学数据特有的两个挑战（区间数和特征空间不匹配）使现有跨域推荐不能直接应用，从而形成“技术可行但医学场景不可直接套用”的缺口。",
+    "signposting_cn": "摘要末尾直接给出结果；引言贡献列表按两个挑战分条；方法开始用Fig.1总览五步并逐节对应；实验开头预告两组设置；每一节首句都说明本部分任务，降低读者追踪成本。",
+    "transition_logic_cn": "从单域问题到跨域问题用“目标域数据不足，源域充足”切换；从方法到实验用“需要合成数据验证”过渡；从合成到真实用“真实场景更有说服力”过渡；案例内从主结果到组件分析用“进一步验证性能”过渡；最后结论回扣两个挑战。",
+    "claim_evidence_rhythm_cn": "每个方法组件先给需求/定义，再用命题或算例支撑，最后通过实验/案例给数据；实验部分先报告总体最优，再列highlight解释原因；每个主要声明都紧跟对应表/图。",
+    "benchmark_narrative_cn": "基线设计分三层：B1/B2/B3代表传统区间距离模型，B4是去掉迁移的ITMD，ITMD是完整方法；通过三者逐步比较，将差异归因于知识转移；再用距离度量和源域直接学习进一步拆解“新度量”和“目标域标签”两个组件。",
+    "theory_return_cn": "结论明确重新表述两个挑战，并将相异性度量、空间对齐、集体矩阵分解分别对应到区间数、异构表示和数据稀疏问题，使方法层面的结果看起来回答了理论问题。",
+    "contribution_positioning_cn": "贡献列表按挑战逐条定位；在方法节每个创新组件都有正式定义和性质；实验和案例分别提供内部/外部有效性；结论再区分理论与实际意义。",
+    "novelty_protection_cn": "通过多个对照防止贡献被当成一次性调参结果：B4非迁移变体隔离迁移贡献；不同距离度量隔离相异性度量贡献；多个数据比例说明改进模式；λ敏感性显示参数稳健；真实案例排除纯合成数据疑虑。"
+  },
+  "reusable_blueprint": {
+    "structure_steps": [
+      {
+        "step": 1,
+        "writing_job_cn": "建立领域重要性和具体痛点（如诊断重要性、数据稀疏）。",
+        "research_job_cn": "识别目标场景中的关键数据和决策主体。",
+        "required_evidence_cn": "能说明问题的文献或实例，以及一个可操作的数据稀疏例证。",
+        "transition_to_next_cn": "从痛点转向已有解决路径的不足。"
+      },
+      {
+        "step": 2,
+        "writing_job_cn": "综述已有方法并定位缺口：现有方法无法处理该领域特殊数据形态。",
+        "research_job_cn": "梳理相关方法并归纳其数据假设。",
+        "required_evidence_cn": "至少一个领域特有约束（如区间数、异质空间）在现有方法中未被处理。",
+        "transition_to_next_cn": "指出需要新制品来填补缺口。"
+      },
+      {
+        "step": 3,
+        "writing_job_cn": "形式化问题：给出输入/输出、矩阵或数据结构、优化目标。",
+        "research_job_cn": "将领域问题转化为数学/算法问题。",
+        "required_evidence_cn": "能覆盖目标场景的符号定义和一个示例。",
+        "transition_to_next_cn": "形式化自然导向方法步骤。"
+      },
+      {
+        "step": 4,
+        "writing_job_cn": "分步构建方法，每一步对应一个挑战，并用定义/命题/算例支撑。",
+        "research_job_cn": "设计归一化、对齐、度量、优化和预测等组件。",
+        "required_evidence_cn": "每个组件的数学性质或最小算例，证明其行为合理。",
+        "transition_to_next_cn": "方法完成后需要数据验证。"
+      },
+      {
+        "step": 5,
+        "writing_job_cn": "设计受控合成实验：覆盖关键条件（同/异空间、比率变化）。",
+        "research_job_cn": "生成能反映真实结构的数据并定义基线和指标。",
+        "required_evidence_cn": "包含一个无迁移/消融变体，以及多个难度梯度。",
+        "transition_to_next_cn": "合成实验有效，还需真实案例。"
+      },
+      {
+        "step": 6,
+        "writing_job_cn": "用真实数据案例验证外部有效性，并保持与合成实验相同的评价协议。",
+        "research_job_cn": "获得真实数据集，说明领域相似性和数据收集过程。",
+        "required_evidence_cn": "真实数据上的对比结果及改进幅度。",
+        "transition_to_next_cn": "主结果之后，用附加分析隔离组件贡献。"
+      },
+      {
+        "step": 7,
+        "writing_job_cn": "进行组件消融/敏感性分析，证明不是整体调参效应。",
+        "research_job_cn": "对关键组件做变体比较（如度量、参数、数据来源）。",
+        "required_evidence_cn": "每个变体的对比表和必要的敏感性图。",
+        "transition_to_next_cn": "回到引言缺口，声明贡献和边界。"
+      },
+      {
+        "step": 8,
+        "writing_job_cn": "结论回扣挑战，区分理论/实践贡献，说明边界和未来工作。",
+        "research_job_cn": "根据证据审慎地概括适用范围。",
+        "required_evidence_cn": "不超出所验证范围做贡献声明。",
+        "transition_to_next_cn": "无"
+      }
+    ],
+    "most_transferable_moves_cn": [
+      "用具体医学/领域例子说明数据稀疏后果",
+      "将两个领域特有挑战作为方法设计的直接需求列表",
+      "设置一个无迁移变体作为消融基线，以隔离“知识转移”贡献",
+      "先合成数据后真实数据的两阶段评价",
+      "在真实案例内部追加组件比较（度量、数据来源、参数）",
+      "用命题/定理为方法组件提供形式合理性"
+    ],
+    "resource_intensive_or_nonstandard_parts_cn": [
+      "真实医院超声诊断记录需要医院合作和数据伦理审批",
+      "四位医生多年的诊断记录难以普遍获得",
+      "针对具体疾病(如甲状腺/乳腺)的领域知识、TI/BI-RADS标准依赖专家",
+      "区间数数据的构造和生成需要领域规范"
+    ],
+    "what_not_to_copy_superficially_cn": [
+      "不能只写‘区间数+矩阵分解’而没有相异性度量的算例和性质",
+      "不能只报告整体准确率而不提供B4/无迁移对照，否则无法证明知识转移贡献",
+      "不能在没有真实医学数据时声称临床决策支持",
+      "不能复制‘条件数约束’但没有定理或误差分析支撑",
+      "不能把‘优于四个基线’说成‘优于所有跨域推荐方法’，因为缺少与迁移学习/跨域基线比较"
+    ],
+    "single_best_description_of_the_routine_cn": "从领域真实痛点中提炼两个可计算挑战，用数学组件逐个攻克，以合成实验和真实案例建立证据链，再用消融和敏感性把性能改进归因到具体设计。"
+  },
+  "confidence": 0.85,
+  "limitations_cn": "基于提供的全文进行分析，表格/公式OCR可能有个别错漏，如Table 13的图注位置与Table 12/13的编号关系在原文中略有交错；无法核实附录证明的完整推导；真实案例的伦理与数据获取细节未在文中充分展开；由于本文未与其他跨域推荐方法比较，对“优于现有跨域方法”的主张只能按原文表述保留。",
+  "usage": {
+    "prompt_tokens": 43637,
+    "completion_tokens": 29919,
+    "total_tokens": 73556,
+    "prompt_cache_hit_tokens": 3328,
+    "prompt_cache_miss_tokens": 40309
+  }
+}

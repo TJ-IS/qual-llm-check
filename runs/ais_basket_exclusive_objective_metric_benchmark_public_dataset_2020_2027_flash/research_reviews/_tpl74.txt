@@ -1,0 +1,37 @@
+
+######################### RADAR
+  * Drawing on the computational design science paradigm, we couple robust optimization and reinforcement learning theories to develop a novel framework, called reinforcement learning-based adversarial attack robustness (RADAR), to increase the robustness of cyber defense AI agents against adversarial attacks.
+  * Keywords: Cyber defense, artificial intelligence, adversarial attacks, robust optimization, deep reinforcement learning, computational design science ## Introduction With the recent increase in the scale and severity of cyber attacks, artificial intelligence (AI) agents have been developed to automate cyber defense in information technology (IT) infrastructure (Apruzzese et al.
+  * Drawing on the computational design science paradigm, we leverage RO and RL to develop a novel RL-based adversarial attack robustness (RADAR) framework for enhancing the robustness of cyber defense AI agents.
+  * ## Defending IT Infrastructure Recent IS research on defending IT infrastructure can be classified into three major streams: (1) AI-enabled security research, which focuses on developing new IT artifacts based on AI as guided by computational design science (Abbasi et al.
+  * Following the computational design science paradigm (Gregor & Hevner, 2013), we present the instantiation of RADAR as a situated implementation of our design for the malware attack domain.
+  * Frequency of Evasive Adversarial Actions for EMBER Malware Detector ## Discussion Guided by the computational design science paradigm (Gregor & Hevner, 2013; Rai, 2017), our study concerns the emerging problem of the robustness of cyber defense AI agents against adversarial attacks.
+  * Positioning and presenting design science research for maximum impact.
+  * A design science research methodology for information systems research.
+  * Editor’s comments: Diversity of design science research.
+  * Following the computational design science paradigm (Gregor & Hevner, 2013), we present the instantiation of RADAR as a situated implementation of our design for the malware attack domain.
+  * Frequency of Evasive Adversarial Actions for EMBER Malware Detector ## Discussion Guided by the computational design science paradigm (Gregor & Hevner, 2013; Rai, 2017), our study concerns the emerging problem of the robustness of cyber defense AI agents against adversarial attacks.
+  * pdf Gregor, S.
+
+######################### ARText
+  * Design science in information systems research.
+
+######################### DSDL
+  * The theory asserts that the rationale behind satisfaction is rooted in disconfirmation, that is, the discrepancy between prior expectation and actual experience (Oliver 1977).
+  * The rationale behind this is that each voice chat is indeed a question–answer session, where the agent’s answers to customers’ questions tend to determine the degree of customer satisfaction whereas the customers’ answers to the agent’s questions tend to reflect the intensity of their willingness to participate.
+  * This offers managerial implications for the design science paradigm of information systems, that is, synergizing theory-driven constructs and context-specific knowledge with data-driven opaque predictive capability can lead to more effective prediction models and, meanwhile, reveal more practical business insights.
+
+######################### ACAA
+  * 2004), a sound design rationale, as a foundation for artifact design and evaluation, is important for establishing a design science contribution (Gregor and Hevner 2013).
+  * The design rationales for our attention mechanisms are four customer attention indicators, which stem from a process-granularity framework.
+  * Table 1 summarizes our induced customer attention indicators, in terms of their theoretical rationales, methodological challenges, and our proposed solutions.
+  * Summary of Customer Attention Indicators <table><tr><td>Attention indicator</td><td>Granularity level</td><td>Theoretical rationale</td><td>Challenge</td><td>Proposed solution</td></tr><tr><td>Timeliness</td><td>Holistic review set to review subset</td><td>Dual-process theory (Groves and Thompson 1970, Archak et al.
+  * Proposed Method The theoretical rationales of customer attention and the methodological challenges (Table 1) motivate us to design a deep learning method with two mechanisms (DTV and AMI) to effectively leverage customer attention for multimodal review–based sales prediction.
+  * As this study falls in the design science paradigm (Hevner et al.
+  * 2004), a sound design rationale, as a foundation for artifact design and evaluation, is important for establishing a design science contribution (Gregor and Hevner 2013).
+  * 2020), the attention mechanisms we design based on the customer attention indicators constitute the core design science contribution of this paper.
+  * For the design science paradigm of information systems research, DTV-AMI enriches its collection of methodological tools with a new artifact, expanding the boundary of multimodal reviews’ enabling role for business decision making.
+  * Gregor S, Hevner AR (2013) Positioning and presenting design science research for maximum impact.
+  * Hevner AR, March ST, Park J, Ram S (2004) Design science in information systems research.
+  * 2004), a sound design rationale, as a foundation for artifact design and evaluation, is important for establishing a design science contribution (Gregor and Hevner 2013).
+  * Gregor S, Hevner AR (2013) Positioning and presenting design science research for maximum impact.

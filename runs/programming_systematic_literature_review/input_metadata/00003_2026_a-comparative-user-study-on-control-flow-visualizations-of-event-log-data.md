@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-105043555258"
+title: "A Comparative User Study on Control-Flow Visualizations of Event Log Data"
+authors: "van der Linden S.; Willemsen M.C.; Brunings M.D.; Vilanova A.; van den Elzen S."
+year: "2026"
+journal: "Computer Graphics Forum"
+doi: "10.1111/cgf.70510"
+---
+# Scopus title-abstract-keyword metadata
+Title: A Comparative User Study on Control-Flow Visualizations of Event Log Data
+Abstract: Event sequence data is collected abundantly, especially in the Process Mining (PM) and Visual Analytics (VA) fields. Despite these two fields occasionally working on similar challenges, there is little cross-fertilization. While these two fields can complement each other based on their strengths, both fields have independently developed abstractions and visualizations to understand and analyze the control-flow of event sequences. However, there is no study that evaluates the strengths and weaknesses of these abstractions and visualizations for different common tasks. This paper compares seven commonly used control-flow visualizations using a formal user study with 48 participants. Directly-Follows Graphs (DFGs), Petri nets, Business Process Model and Notations, Process trees, variant timelines, Icicle plots, and Sankey diagrams are evaluated on their performance on different tasks, understandability, and user preferences. Our results show that the DFG, variant timeline, and Sankey diagram are the only visualizations that significantly outperform others for the selected tasks. Furthermore, DFG significantly outperforms most others in identifying the most frequent activity. Surprisingly, DFG also excels in identifying loops of three consecutive events despite being hard to answer correctly. Despite its high performance, we find that the DFG is not preferred by participants and even more so when participants do not understand it. Moreover, we find that understandability influences user preferences and correctness. © 2026 The Author(s). Computer Graphics Forum published by Eurographics - The European Association for Computer Graphics and John Wiley & Sons Ltd.
+Author keywords: process mining; user study; visual analytics
+Index keywords: Abstracting; Administrative data processing; Computer graphics; Data mining; Flow control; Flow graphs; Flow visualization; Trees (mathematics); Visual analytics; Control-flow; Event sequence; Flow visualisation; Performance; Process mining; Sankey diagram; Understandability; User study; User's preferences; Visual analytics; Petri nets
+Document type: Article
+Conference: 
+Source title: Computer Graphics Forum
+Year: 2026
+EID: 2-s2.0-105043555258
+DOI: 10.1111/cgf.70510
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

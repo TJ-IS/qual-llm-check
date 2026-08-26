@@ -1,0 +1,21 @@
+---
+otero_id: "2-s2.0-85092274932"
+title: "SQL Education: A Systematic Mapping Study and Future Research Agenda"
+authors: "Taipalus T.; Seppänen V."
+year: "2020"
+journal: "ACM Transactions on Computing Education"
+doi: "10.1145/3398377"
+---
+# Scopus title-abstract-keyword metadata
+Title: SQL Education: A Systematic Mapping Study and Future Research Agenda
+Abstract: Structured Query Language (SQL) skills are crucial in software engineering and computer science. However, teaching SQL effectively requires both pedagogical skill and considerable knowledge of the language. Educators and scholars have proposed numerous considerations for the betterment of SQL education, yet these considerations may be too numerous and scattered among different fora for educators to find and internalize, as no systematic mappings or literature reviews regarding SQL education have been conducted. The two main goals of this mapping study are to provide an overview of educational SQL research topics, research types, and publication fora, and to collect and propagate SQL teaching practices for educators to utilize. Additionally, we present a short future research agenda based on insights from the mapping process. We conducted a systematic mapping study complemented by snowballing techniques to identify applicable primary studies. We classified the primary studies according to research type and utilized directed content analysis to classify the primary studies by their topic. Out of our selected 89 primary studies, we identified six recurring topics: (i) student errors in query formulation; (ii) characteristics and presentation of the exercise database; (iii) specific and (iv) non-specific teaching approach suggestions; (v) patterns and visualization; and (vi) easing teacher workload. We list 66 teaching approaches the primary studies argued for (and in some cases against). For researchers, we provide a systematic map of educational SQL research and future research agenda. For educators, we present an aggregated body of knowledge on teaching practices in SQL education over a time frame of 30 years. In conclusion, we suggest that replication studies, studies on advanced SQL concepts, and studies on aspects other than data retrieval are needed to further educational SQL research.  © 2020 ACM.
+Author keywords: database; education; query language; Structured Query Language (SQL); student
+Index keywords: Facsimile; Query languages; Query processing; Software engineering; Body of knowledge; Engineering and computer science; Literature reviews; Structured query languages; Systematic mapping; Systematic mapping studies; Teaching approaches; Teaching practices; Mapping
+Document type: Article
+Conference: 
+Source title: ACM Transactions on Computing Education
+Year: 2020
+EID: 2-s2.0-85092274932
+DOI: 10.1145/3398377
+Retrieval channels: forward_citation_of_20_seeds
+Local full-text files: 

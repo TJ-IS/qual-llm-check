@@ -1,0 +1,40 @@
+﻿{
+    "corpus_years":  "2020-2027",
+    "corpus_fulltexts":  2475,
+    "model":  "deepseek-v4-flash",
+    "request_unit":  "one full text per request",
+    "model_v3_candidates":  27,
+    "final_included":  17,
+    "manual_excluded_from_v3":  10,
+    "theory_filter_applied":  false,
+    "final_year_counts":  {
+                              "2020":  7,
+                              "2021":  1,
+                              "2022":  3,
+                              "2023":  3,
+                              "2024":  2,
+                              "2025":  1
+                          },
+    "final_journal_counts":  {
+                                 "Decision Support Systems":  2,
+                                 "European Journal of Information Systems":  3,
+                                 "Information Systems Journal":  1,
+                                 "Information Systems Research":  4,
+                                 "Journal of Management Information Systems":  3,
+                                 "Journal of the Association for Information Systems":  3,
+                                 "MIS Quarterly":  1
+                             },
+    "exclusion_code_counts":  {
+                                  "ALGORITHM_OR_ANALYTICAL_METHOD":  1,
+                                  "DOMAIN_MECHANISM_OR_POLICY_CONTRIBUTION":  1,
+                                  "DOMAIN_METHOD_NOT_ARTIFACT_CLASS":  1,
+                                  "HUMAN_SEMANTIC_JUDGMENT":  2,
+                                  "MIXED_CORE_OUTCOMES":  1,
+                                  "OPTIMIZER_WRAPPED_AS_DSS":  1,
+                                  "SUBJECTIVE_CONSTRUCT_WITH_FIXED_LABELS":  1,
+                                  "THEORY_OR_EXPLANATION_PRIMARY":  2
+                              },
+    "source_model_output":  "E:\\github\\qual-llm-check-IS-utd\\runs\\ais_basket_unified_strict_artifact_class_2020_2027_flash\\output_full_v3\\decisions.csv",
+    "prompt_fingerprint":  "3fe999fdfd248f34c4711cccbdeb03e8257448aab6ef4f86d0622060efe5c10c",
+    "adjudication_note":  "V3 full-text model screening followed by conservative human full-text red-team adjudication of all 27 model-positive records."
+}

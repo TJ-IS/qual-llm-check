@@ -1,0 +1,2183 @@
+# Incorporating FAT and privacy aware AI modeling approaches into business decision making frameworks
+
+- 作者：Dmitry Zhdanov; Sudip Bhattacharjee; Mikhail A. Bragin
+- 年份 / 期刊：2022 / Decision Support Systems
+- DOI：10.1016/j.dss.2021.113715
+- 源文件：19922_2022_incorporating-fat-and-privacy-aware-ai-modeling-approaches-into-business-decision-making-framewo.md
+- 论文主类型：build_evaluate_design_science
+- 主导写作弧线：requirements_build_evaluate_design_principles
+- 置信度：0.66
+
+## 文章级论证概况
+
+- 核心问题：在隐私受限的真实数据条件下，能否构建并评价一个同时纳入公平、问责、透明（FAT）三要素的AI/ML建模方法，并且不因追求可解释性而显著牺牲预测性能？
+
+- 制品与设计：一个FAT导向的迭代建模框架及其在affinity prediction场景中的实例化：以广义线性模型（GLM）为核心透明模型，使用四个预测变量（M_Avg、U_Avg、M_Pred、U_Pred）、修改的余弦相似度（MCS）、基于电影评分数量的潜在分区，以及best subsets + Mallows' Cp的简约模型选择，把FAT三要素转译为可操作的设计与评价步骤。
+
+- 客观结果：在Netflix Prize隐私受限数据集上，所有预测器均计算成功的NoNulls子模型在多数分区上比Cinematch基准改进8–14%，整体覆盖率约81.42%，绝大多数GLM只使用3–7个变量；4、6、11三种分区配置下预测性能保持稳定，说明FAT三要素可以同时达到。
+
+- 核心贡献：提出并评估一个并非只处理FAT两两子集、而是同时纳入三要素的功能性FAT机器学习方法，表明可解释/透明模型不必对预测性能产生重大负面影响，并据此回应业务、政策与IS研究中对可解释AI的呼吁。
+
+- 整篇论证链：论文从AI黑箱、偏见和隐私问题出发，指出现有FAT研究多为呼吁、治理讨论或两两子集分析，缺少在商业/IS情境下同时实现三者的正式方法；随后将Shin & Park的FAT概念模型修改为迭代建模流程，用隐私受限的Netflix数据集实例化：先选择透明方法，构造四个基于邻域与相似度的预测变量，用MCS和分区控制覆盖率与数据偏差，再用GLM和Mallows' Cp选择简约模型，然后以Cinematch基准检验准确率，以覆盖率、变量数和分区稳健性分别评价问责、透明与公平，最后用表7把三类证据合成“FAT可以共存”的整体结论，并在讨论中把贡献上升为可跨领域迁移的框架性设计知识。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：论文不是先提出可检验理论再由实验验证假设，而是基于FAT文献提出设计框架，在真实大规模数据集上实例化该框架并用基准与多维度评价产生设计知识；其贡献载体是“框架/方法原型”及其评价，而不是行为实验、形式模型或纯粹benchmark竞赛。
+
+- 主导写作弧线判定：文章按“FAT需求与原则 → 构建迭代建模框架 → 实例化GLM制成品 → 多维度评价 → 形成可复用设计过程与边界”展开，核心不是从理论命题到假设检验，而是把原则变成可运行流程并证明其可行。
+
+## 研究开展程序
+
+- study_or_phase_count：7
+
+- 研究阶段总序列：先建立概念性FAT框架，再将其实例化为affinity预测制品，随后通过预测精度基准、覆盖率、模型简洁度和分区稳健性四类证据逐项支持FAT三要素，最后在讨论中汇合成整体贡献并界定边界。
+
+### studies_or_phases
+
+#### 1. FAT概念框架与迭代建模流程构建
+
+- order：1
+
+- name_cn：FAT概念框架与迭代建模流程构建
+
+- question_cn：如何把FAT三要素转译成可执行的AI建模流程？
+
+- inputs_and_setting_cn：FAT/XAI文献（Arrieta等、Shin & Park），政策文件（EU、Singapore），治理研究
+
+- designed_or_compared_object_cn：迭代决策流程（Fig.1），包含透明方法选择、预测变量识别、问责检查、公平检查、透明复检
+
+- baseline_control_or_counterfactual_cn：现有研究只处理两两子集或仅停留在治理呼吁层面
+
+##### objective_metrics
+
+1. 框架完整性：是否覆盖FAT三要素
+
+2. 流程可执行性：每一步是否有明确检查与失败条件
+
+- analysis_method_cn：概念综合与流程设计
+
+- main_result_cn：提出以透明方法为起点、依次检查问责和公平、最后再验透明性的迭代框架
+
+- argumentative_role_cn：为后续实例化提供设计骨架，使FAT从抽象原则变成可操作的建模动作
+
+- remaining_uncertainty_cn：框架未经数据验证，不知道是否真的可同时达到三要素
+
+- link_to_next_phase_cn：下一阶段用实际隐私受限数据集实例化并检验流程
+
+##### evidence_pointers
+
+1. Section 2 最后一段
+
+2. Section 3 FAT定义
+
+3. Fig.1 Conceptual model of FAT approach
+
+4. Section 4.3 Fig.2 Instantiation of FAT framework
+
+#### 2. 隐私受限数据集选择与预处理
+
+- order：2
+
+- name_cn：隐私受限数据集选择与预处理
+
+- question_cn：在只有用户ID、电影ID、评分和日期的隐私受限数据上，怎样形成稳定可复现的建模基础？
+
+- inputs_and_setting_cn：Netflix Prize数据集（原始100,480,507条），Chebyshev定理，最终97,454,043条
+
+- designed_or_compared_object_cn：采用低属性数据集；剔除稀疏电影异常值；形成PES与MGS两个互不重叠的元组集合
+
+- baseline_control_or_counterfactual_cn：Netflix Prize只以RMSE为目标且最终模型未被Netflix采用
+
+##### objective_metrics
+
+1. 最终数据量97,454,043
+
+2. 用户数480,051
+
+3. 电影数8,322
+
+4. PES与MGS切分结构
+
+- analysis_method_cn：统计离群值筛选与数据切分
+
+- main_result_cn：形成98.6%的预测变量估计集PES与约1.35M的模型生成集MGS，既满足隐私条件又避免直接利用PES训练造成的过拟合
+
+- argumentative_role_cn：为后续所有FAT检验提供同一数据底座，同时说明“低属性/隐私”是框架的重要约束而非缺陷
+
+- remaining_uncertainty_cn：数据切分后的覆盖率、公平性和准确率尚未评估
+
+- link_to_next_phase_cn：下一阶段在PES/MGS结构上计算预测变量并设置预测质量问题
+
+##### evidence_pointers
+
+1. Section 4.2 Data
+
+2. Section 5.1 第一段
+
+#### 3. 预测器计算、相似度度量与数据分区设计
+
+- order：3
+
+- name_cn：预测器计算、相似度度量与数据分区设计
+
+- question_cn：在有限属性条件下如何构造预测因子并控制覆盖率、准确率与数据偏差？
+
+- inputs_and_setting_cn：PES时序数据，MGS目标元组，MCS相似度，M_Avg/U_Avg/M_Pred/U_Pred四个预测变量
+
+- designed_or_compared_object_cn：四个预测变量；按电影评分数量分为11个潜在分区；MCS距离度量；领域参数Dm=30天、Du=120天、M_Pred阈值C=0.825
+
+- baseline_control_or_counterfactual_cn：传统Pearson相关；未分区或少分区；外部属性增强的常见做法
+
+##### objective_metrics
+
+1. 四个预测器是否成功计算
+
+2. 总体覆盖率81.42%
+
+3. 各分区缺失类型分布
+
+- analysis_method_cn：预测变量算法计算与分区策略比较
+
+- main_result_cn：预测器计算覆盖约81.42%的目标元组，形成NoNulls、MPred is Null、UAvg is Null、Two Nulls四种可用子分区
+
+- argumentative_role_cn：把FAT概念中的“数据偏差”和“覆盖率”转译为可计算的分区与缺失类型，为问责和公平评价提供对象
+
+- remaining_uncertainty_cn：预测精度未知，且覆盖率与准确率可能冲突
+
+- link_to_next_phase_cn：下一阶段为每个子分区估计GLM并评价预测精度
+
+##### evidence_pointers
+
+1. Section 4.3 Instantiation of FAT framework
+
+2. Section 4.4 Predictors
+
+3. Section 4.5 Similarity measure
+
+4. Table 2 Dataset coverage
+
+#### 4. GLM估计与简约模型选择
+
+- order：4
+
+- name_cn：GLM估计与简约模型选择
+
+- question_cn：怎样用透明模型拟合不同子分区并在准确率与模型可解释性之间取舍？
+
+- inputs_and_setting_cn：44个子分区（11个分区×4种缺失类型），每个子分区70%分析集、30%留出集
+
+- designed_or_compared_object_cn：14个候选变量的二阶GLM；best subsets + Mallows' Cp选择最简约模型
+
+- baseline_control_or_counterfactual_cn：包含全部14个变量的满模型
+
+##### objective_metrics
+
+1. 所选模型变量数3–7
+
+2. U_Pred、M_Pred、U_Avg在44个模型中的出现频次
+
+3. Cp值
+
+- analysis_method_cn：线性回归模型选择
+
+- main_result_cn：除一个例外，所有模型只用3–7个变量；U_Pred、M_Pred、U_Avg至少出现在19个模型中，显示出简约性与可解释性
+
+- argumentative_role_cn：同时支撑准确率和透明性主张；说明预测器能够被管理者理解与行动
+
+- remaining_uncertainty_cn：整体RMSE相对基准尚未检验，且透明性指标仍是代理性的变量数
+
+- link_to_next_phase_cn：下一阶段在44个留出集上计算RMSE并与Cinematch基准比较
+
+##### evidence_pointers
+
+1. Section 4.6 Generalized Linear Model
+
+2. Section 5.3 GLM estimation
+
+3. Table 5 Parsimonious models
+
+#### 5. 预测准确性基准比较
+
+- order：5
+
+- name_cn：预测准确性基准比较
+
+- question_cn：FAT导向的GLM在隐私受限数据上是否牺牲了预测性能？
+
+- inputs_and_setting_cn：44个holdout子集；Cinematch RMSE基准
+
+- designed_or_compared_object_cn：由GLM预测评分，计算RMSE及相对基准的改进百分比
+
+- baseline_control_or_counterfactual_cn：Cinematch benchmark RMSE
+
+##### objective_metrics
+
+1. RMSE
+
+2. 相对Cinematch基准的改进百分比
+
+- analysis_method_cn：预测误差统计与分区比较
+
+- main_result_cn：NoNulls子模型在≥5k评分的分区中比基准改进8–14%；缺失M_Pred的子模型整体低于基准
+
+- argumentative_role_cn：用公开基准化解“可解释必然牺牲准确率”的顾虑，证明FAT框架没有以性能为代价
+
+- remaining_uncertainty_cn：只证明了准确率，尚未证明覆盖率、透明性和公平性同时达成
+
+- link_to_next_phase_cn：接下来逐项评价accountability、transparency、fairness
+
+##### evidence_pointers
+
+1. Section 5.4 Prediction accuracy
+
+2. Table 3 Prediction accuracy and model comparison
+
+#### 6. FAT三要素逐项评价与稳健性分析
+
+- order：6
+
+- name_cn：FAT三要素逐项评价与稳健性分析
+
+- question_cn：除准确率外，覆盖率、透明性和公平性是否同时可达？
+
+- inputs_and_setting_cn：11/6/4三种分区配置；Table 4覆盖率/准确率排名；Table 5变量数；Table 6分区数比较
+
+- designed_or_compared_object_cn：将覆盖率与准确率排名、GLM变量数、分区配置作为FAT的代理指标
+
+- baseline_control_or_counterfactual_cn：全局固定输入参数；4分区 vs 6分区 vs 11分区
+
+##### objective_metrics
+
+1. 覆盖率与准确率排名相关性
+
+2. 模型变量数
+
+3. 不同分区配置下准确率变化
+
+4. 覆盖率变化
+
+- analysis_method_cn：描述性比较与稳健性检查
+
+- main_result_cn：覆盖率与准确率排名无支配关系；模型变量数普遍3–7；分区数增加提高准确率但降低覆盖率，FAT参数在4/6/11分区下保持稳定
+
+- argumentative_role_cn：将FAT三要素转化为可观测证据，用“无支配关系”和“分区稳健性”支持三者可平衡、框架可适用于不同内在特征
+
+- remaining_uncertainty_cn：公平性以分区稳健性为代理，未直接检验受保护类别上的偏差
+
+- link_to_next_phase_cn：最后用Table 7综合三要素并进入讨论
+
+##### evidence_pointers
+
+1. Section 5.5 Evaluating FAT components
+
+2. Tables 4–7
+
+#### 7. 整体贡献综合、边界界定与政策意义
+
+- order：7
+
+- name_cn：整体贡献综合、边界界定与政策意义
+
+- question_cn：这些局部结果如何上升为FAT型AI系统的一般设计知识与理论贡献？
+
+- inputs_and_setting_cn：Table 7综合结果；引言中的政策与行业动机；affinity问题的一般性质
+
+- designed_or_compared_object_cn：将结果叙述为功能性FAT机器学习方法，并给出跨领域迁移边界
+
+- baseline_control_or_counterfactual_cn：只处理单一FAT维度或两两子集的现有研究
+
+##### objective_metrics
+
+1. 不适用，此阶段为综合论证
+
+- analysis_method_cn：理论综合与边界界定
+
+- main_result_cn：宣称FAT可在良好设计的系统中共存，可解释性不必然显著损害性能，并扩展到保险、健康诊断、政府资金分配等场景
+
+- argumentative_role_cn：闭合引言中“缺少系统性工作”的缺口，把实例化结果转化为可复用的设计过程和理论定位
+
+- remaining_uncertainty_cn：跨领域适用性未经测试；文本/图像/地理空间等需要重新定义指标与校准
+
+- link_to_next_phase_cn：论文以未来研究方向收尾
+
+##### evidence_pointers
+
+1. Section 5.5.4 Table 7
+
+2. Section 6 Discussion and conclusion
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTRIBUTION
+
+2. STUDY_OVERVIEW
+
+3. RESULT
+
+4. CONTRIBUTION
+
+5. RESULT
+
+### introduction_moves
+
+1. CONTEXT
+
+2. LIMITATION
+
+3. PHENOMENON
+
+4. CONTEXT
+
+5. PHENOMENON
+
+6. REQUIREMENT
+
+7. WHY_GAP_MATTERS
+
+8. GAP
+
+9. CONTEXT
+
+10. REQUIREMENT
+
+11. RQ_OR_OBJECTIVE
+
+12. RESULT
+
+13. CONTRIBUTION
+
+### theory_and_knowledge_moves
+
+1. THEORY_INTRO
+
+2. PRIOR_KNOWLEDGE
+
+3. GAP
+
+4. LIMITATION
+
+5. REQUIREMENT
+
+6. METHOD_JUSTIFICATION
+
+7. LIMITATION
+
+8. GAP
+
+9. THEORY_INTRO
+
+10. STUDY_OVERVIEW
+
+11. THEORY_PROPOSITION
+
+12. MECHANISM
+
+13. PRIOR_KNOWLEDGE
+
+### artifact_design_moves
+
+1. REQUIREMENT
+
+2. DESIGN_FEATURE
+
+3. STUDY_OVERVIEW
+
+4. DESIGN_FEATURE
+
+5. DESIGN_FEATURE
+
+6. METHOD_JUSTIFICATION
+
+7. DESIGN_FEATURE
+
+8. REQUIREMENT
+
+9. RQ_OR_OBJECTIVE
+
+### evaluation_moves
+
+1. BENCHMARK_OR_CONTRAST
+
+2. RESULT
+
+3. RESULT
+
+4. RESULT
+
+5. ROBUSTNESS_OR_BOUNDARY_TEST
+
+6. RESULT
+
+7. BOUNDARY_CONDITION
+
+### discussion_and_contribution_moves
+
+1. CONTRIBUTION
+
+2. CONTRIBUTION
+
+3. WHY_GAP_MATTERS
+
+4. CONTRIBUTION
+
+5. BOUNDARY_CONDITION
+
+6. LIMITATION_AND_FUTURE
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. FAT/可解释AI概念文献：Arrieta et al. XAI综述，Shin & Park的FAT概念化，Gilpin、Wachter、Gasser等治理讨论
+
+2. 解释性预测的方法论传统：线性回归、GLM、逻辑回归、决策树等透明模型
+
+3. affinity modeling/协同过滤领域知识：memory-based/model-based方法、相似度度量、MAE/RMSE评估
+
+4. 隐私保护数据设计：低属性数据集、匿名化、禁止外部数据融合
+
+- 理论—设计耦合：partial
+
+- 耦合判定理由：FAT概念和Shin & Park的概念模型确实影响了研究问题、维度定义和迭代流程的步骤顺序；但具体技术选择（GLM、MCS、按电影评分数量分区、Chebyshev离群值处理、Mallows' Cp）主要来自机器学习和affinity modeling的工程知识，并非由FAT理论严格推导出来。
+
+- 理论到设计翻译链：FAT三要素定义→各自的可操作含义（公平=数据/模型偏差；问责=准确率+覆盖率+稳定性；透明=模型方法可解释）→迭代建模流程（先选透明方法，再检查问责、公平、透明）→实例化中的四个设计决策（分区、相似度、GLM、预测变量优化）→分别用覆盖率、RMSE、变量数、分区稳健性来评价三要素。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：FAT三要素必须同时存在，而不是两两子集；现有研究多是概念呼吁或调查
+
+- mechanism_cn：若只追求准确率或只处理公平-准确率二维权衡，无法满足治理与信任要求
+
+- design_requirement_cn：需要一个同时检查三者的迭代流程，任何维度不达标都应重新调整
+
+- artifact_choice_cn：Fig.1迭代框架：透明方法选择→预测变量→问责检查→公平检查→透明复检
+
+- evaluated_contrast_cn：与只研究两两子集的文献对照；在实例化中同时报告准确率、覆盖率、变量数、分区稳健性
+
+- objective_result_cn：Table 7显示三类FAT指标同时成立
+
+##### evidence_pointers
+
+1. Section 2 P10
+
+2. Section 3 Fig.1
+
+3. Section 5.5.4 Table 7
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：线性模型天然透明、稳定、可复制；黑箱模型难以解释且可能不稳定
+
+- mechanism_cn：GLM系数可直接解释为预测因子对评分的贡献，避免NN/SVD等黑箱的不可解释性
+
+- design_requirement_cn：选择透明建模方法作为FAT框架的模型层，以透明性为第一优先级
+
+- artifact_choice_cn：采用GLM，并配合best subsets + Mallows' Cp选择简约变量集
+
+- evaluated_contrast_cn：与Cinematch基准比较；与全变量模型对照
+
+- objective_result_cn：多数模型只用3–7个变量；NoNulls子模型相对基准改进8–14%
+
+##### evidence_pointers
+
+1. Section 4.3 Step 3
+
+2. Section 4.6
+
+3. Section 5.3
+
+4. Table 3
+
+5. Table 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：隐私受限数据不能使用外部属性，需通过低属性数据本身挖掘潜在特征
+
+- mechanism_cn：数据分区能按潜在相似性聚合相关对象，既能提取潜在模式，也能降低数据偏差
+
+- design_requirement_cn：特征提取采用数据分区而不是外部属性补充
+
+- artifact_choice_cn：按电影评分数量进行潜在分区，报告4/6/11种分区配置
+
+- evaluated_contrast_cn：不同分区数量之间的准确率与覆盖率比较
+
+- objective_result_cn：分区越多准确率越高但覆盖率越低；预测性能在不同分区下保持稳定
+
+##### evidence_pointers
+
+1. Section 4.3 Step 1
+
+2. Section 5.1
+
+3. Section 5.5.3
+
+4. Table 6
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：问责包含准确率和覆盖率，二者存在权衡；覆盖率指能可靠预测的数据点百分比
+
+- mechanism_cn：相似度度量影响邻域质量；过严阈值提高精度但降低覆盖率，过松阈值降低精度
+
+- design_requirement_cn：需要改进相似度度量以在不损失准确率的情况下提高覆盖率
+
+- artifact_choice_cn：提出MCS修改余弦相似度；设置M_Pred阈值C=0.825；允许四种预测变量缺失类型
+
+- evaluated_contrast_cn：MCS与Pearson相关对比（文中称更好但结果略去）；阈值与预测变量缺失的覆盖效果
+
+- objective_result_cn：整体覆盖率81.42%；阈值过严导致474,236个元组缺失M_Pred，但保住了准确率
+
+##### evidence_pointers
+
+1. Section 4.5
+
+2. Section 5.2
+
+3. Table 2
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：公平性包括数据偏差与模型偏差；数据偏差可通过分区和异常值处理部分纠正
+
+- mechanism_cn：更细的分区过滤掉不相似对象带来的噪声，使模型对不同物品类别保持稳定表现
+
+- design_requirement_cn：必须证明模型在不同潜在分区/人口/类上表现一致
+
+- artifact_choice_cn：迭代改变分区数量（4/6/11），保持全局参数固定，评估准确率变化
+
+- evaluated_contrast_cn：4分区 vs 6分区 vs 11分区
+
+- objective_result_cn：NoNulls准确率保持在7.52%–8.55%，无明显单一最优配置，说明公平性稳健
+
+##### evidence_pointers
+
+1. Section 5.5.3
+
+2. Table 6
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. 公开基准对比：Cinematch RMSE
+
+2. 覆盖率统计：数据点可预测比例
+
+3. 模型简洁性分析：GLM变量数
+
+4. 分区稳健性分析：4/6/11分区下的性能一致性
+
+5. 权衡分析：准确率、覆盖率、分区数的关系
+
+- why_these_evaluations_cn：因为FAT是三要素并存的框架，没有单一目标函数；需要分别用一个可观察指标支撑每个维度：RMSE对应问责中的准确率，覆盖率对应问责中的覆盖范围，GLM变量数对应透明性，分区稳健性对应公平性，最后用权衡分析说明三者可以同时成立。
+
+- benchmark_and_contrast_chain_cn：先以Cinematch基准建立准确率参照；再通过子分区类型（NoNulls、MPred Null、UAvg Null、Two Nulls）说明预测变量缺失如何影响精度；接着以4/6/11分区数量作为公平性反事实，检查性能稳定性；最后以覆盖率随分区数变化揭示准确率-覆盖率权衡，从而把单一基准逐渐扩展成FAT多维度证据链。
+
+### claim_evidence_ledger
+
+#### 1. 可解释GLM模型在隐私受限数据上能超过Cinematch基准
+
+- claim_cn：可解释GLM模型在隐私受限数据上能超过Cinematch基准
+
+- evidence_cn：Table 3：NoNulls子模型在≥5k评分分区中改进8–14%
+
+#### 2. FAT框架同时达到了问责、公平、透明
+
+- claim_cn：FAT框架同时达到了问责、公平、透明
+
+- evidence_cn：Table 7：准确率虽整体略低于基准但覆盖率超80%、模型稳定、分区稳健、模型方法透明
+
+#### 3. 分区有助于公平性
+
+- claim_cn：分区有助于公平性
+
+- evidence_cn：Table 6：4/6/11分区下准确率变化窄，且更细分区总体提高准确率
+
+#### 4. 模型具有透明性和可管理性
+
+- claim_cn：模型具有透明性和可管理性
+
+- evidence_cn：Table 5：44个模型中几乎全部只用3–7个变量
+
+#### 5. MCS比Pearson在affinity预测中表现更好
+
+- claim_cn：MCS比Pearson在affinity预测中表现更好
+
+- evidence_cn：文中明示“结果略去”，实际没有展示证据
+
+- internal_validity_strategy_cn：利用PES/MGS切分避免过拟合；每个子分区按70/30随机拆分；所有分区和模型使用相同全局参数；对异常值使用Chebyshev定理统一处理，使比较不受局部调参影响。
+
+- external_validity_strategy_cn：使用真实大规模、隐私受限的Netflix数据集；通过不同分区数量检验结果对数据切分的鲁棒性；讨论中把affinity问题类比到犯罪、医疗、保险、资金分配等领域，主张框架可迁移。
+
+- what_is_not_actually_tested_cn：没有直接检验受保护类别上的公平性（如种族、性别）；没有将GLM与同数据的黑箱模型做严格性能对比；透明性只用变量数量代理，没有测试决策者或用户的真实理解；模型偏差的处理没有独立指标；MCS相对Pearson的优势未展示证据；没有现场部署或真实决策使用。
+
+## 贡献闭环
+
+- technical_claim_cn：一个基于GLM的FAT导向affinity预测模型能够在隐私受限数据上取得与Cinematch相当甚至更好的预测表现，且保持简约可解释。
+
+- artifact_claim_cn：数据分区、四个邻域/相似度预测变量、MCS相似度、GLM与Mallows' Cp模型选择共同构成可复现的FAT建模制成品；M_Pred是关键预测变量，缺失会导致性能下降。
+
+- mechanism_claim_cn：分区聚合潜在相似对象并过滤不相关噪声，从而同时改善准确率与公平稳健性；MCS更直接度量评分向量距离从而提升覆盖率；简约模型降低复杂度并保持透明性。
+
+- boundary_claim_cn：框架适用于affinity型、低属性、整数评分、隐私约束的数据；在文本、图像、地理空间等领域需要重新定义FAT指标和校准过程；若业务要求高覆盖率，则需接受准确率或透明性上的权衡。
+
+- reusable_design_knowledge_cn：可复用的是“FAT优先”的迭代设计过程：先选透明方法，再构建预测变量，依次通过问责、公平、透明检查；具体阈值和指标由领域专家根据业务目标设定，无法由算法自动给出。
+
+- theoretical_contribution_cn：将Shin & Park的FAT概念模型从调查/概念层面推进到可运行的算法层面，形成同时纳入三要素而非两两子集的ML方法，并实证说明可解释性不一定以预测性能为代价。
+
+- how_discussion_closes_intro_gap_cn：讨论重新引用引言中的“无系统性FAT工作”缺口，宣称本文提供了功能性FAT ML方法；同时回应政策、隐私和信任问题，把技术结果连接到管理决策与AI治理。
+
+- overclaim_or_unsupported_leaps_cn：“FAT三要素都达到”依赖于代理指标，尤其是把公平定义为分区稳健性而非受保护类别偏差；MCS优于Pearson的结果未展示；说明“无重大性能损失”时使用的是特定数据集和基准，不能直接泛化到所有黑箱基线；文中也未测试真实用户/管理者对透明性的感知。
+
+## 句级写作动作图谱
+
+### 1. P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：P1 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出用正式方法构建和评估包含FAT原则的AI系统。
+
+- rhetorical_function_cn：摘要开篇即声明论文的主要交付物是方法而非单纯分析。
+
+- depends_on_cn：无
+
+- sets_up_cn：为全文确定FAT框架的中心地位。
+
+- evidence_pointer：Abstract第一句
+
+### 2. P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：P1 S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：在隐私受限数据集上开发并实例化FAT框架，构建模型展示三维度平衡。
+
+- rhetorical_function_cn：预告研究阶段和核心评价标准。
+
+- depends_on_cn：前句提出方法
+
+- sets_up_cn：引出隐私约束和三维度平衡这两个关键词。
+
+- evidence_pointer：Abstract第二句
+
+### 3. P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：P1 S3
+
+- move_code：RESULT
+
+- paraphrase_cn：结果表明FAT可以在设计良好的系统中共存。
+
+- rhetorical_function_cn：提前给出最重要结论，制造阅读期待。
+
+- depends_on_cn：需要后续实例化结果支撑
+
+- sets_up_cn：为“可共存”这一贡献主张定调。
+
+- evidence_pointer：Abstract第三句
+
+### 4. P2 S1
+
+- order：4
+
+- section：Abstract
+
+- locator：P2 S1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：贡献是提出并评估affinity预测场景中功能性FAT机器学习模型。
+
+- rhetorical_function_cn：明确贡献对象和场景。
+
+- depends_on_cn：前面结果句
+
+- sets_up_cn：把贡献限定在affinity预测而非泛泛AI伦理讨论。
+
+- evidence_pointer：Abstract第二段第一句
+
+### 5. P2 S2
+
+- order：5
+
+- section：Abstract
+
+- locator：P2 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：与通常信念相反，可解释AI/ML系统不必对预测性能产生重大负面影响。
+
+- rhetorical_function_cn：用反常识结论强化贡献的新颖性。
+
+- depends_on_cn：要求有基准证据
+
+- sets_up_cn：为全文“可解释不牺牲性能”的核心论点铺垫。
+
+- evidence_pointer：Abstract第二段第二句
+
+### 6. P1 S1
+
+- order：6
+
+- section：Introduction
+
+- locator：P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI被用于推荐、司法预测、入侵检测、健康诊断等领域，需要被影响人群信任并遵守法规。
+
+- rhetorical_function_cn：建立问题的广泛现实背景。
+
+- depends_on_cn：无
+
+- sets_up_cn：使读者接受AI信任与合规是普遍问题。
+
+- evidence_pointer：Introduction第一句
+
+### 7. P1 S2
+
+- order：7
+
+- section：Introduction
+
+- locator：P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：大多数AI/ML研究只关注系统性能和准确率，倾向黑箱方法。
+
+- rhetorical_function_cn：指出现有研究的技术局限。
+
+- depends_on_cn：背景句
+
+- sets_up_cn：为“需要FAT”提供缺口。
+
+- evidence_pointer：Introduction第二句
+
+### 8. P1 S3
+
+- order：8
+
+- section：Introduction
+
+- locator：P1 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：黑箱系统可能带偏见或不道德，例如Google Flu和YouTube预测错误。
+
+- rhetorical_function_cn：用具体失败案例让抽象问题具象化。
+
+- depends_on_cn：前句黑箱局限
+
+- sets_up_cn：为后续公平、透明、问责问题铺垫。
+
+- evidence_pointer：Introduction第三句
+
+### 9. P2 S1
+
+- order：9
+
+- section：Introduction
+
+- locator：P2 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：AI伦理成为新出现的重要关切。
+
+- rhetorical_function_cn：从性能问题转向伦理问题。
+
+- depends_on_cn：前面失败案例
+
+- sets_up_cn：引入AI伦理讨论。
+
+- evidence_pointer：Introduction第二段第一句
+
+### 10. P2 S2-P2 S3
+
+- order：10
+
+- section：Introduction
+
+- locator：P2 S2-P2 S3
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：刑事司法中的累犯预测对黑人被告过度预测，Amazon招聘引擎歧视女性，保险决策不透明，自动驾驶问责困难。
+
+- rhetorical_function_cn：用多领域实例说明FAT三要素各自的重要性。
+
+- depends_on_cn：AI伦理关切
+
+- sets_up_cn：引出FAT三要素的必要性。
+
+- evidence_pointer：Introduction第二段
+
+### 11. P3 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：P3 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：因此迫切需要把公平、问责、透明纳入AI。
+
+- rhetorical_function_cn：从现象提炼出规范性需求。
+
+- depends_on_cn：具体案例
+
+- sets_up_cn：为后续FAT框架提供动机。
+
+- evidence_pointer：Introduction第三段第一句
+
+### 12. P3 S2
+
+- order：12
+
+- section：Introduction
+
+- locator：P3 S2
+
+- move_code：CONTEXT
+
+- paraphrase_cn：政策（EU、Singapore）和企业（Microsoft）已经开始体现这些原则。
+
+- rhetorical_function_cn：说明FAT不仅学术上重要，也是政策现实。
+
+- depends_on_cn：前句需求
+
+- sets_up_cn：增加研究的时代紧迫性。
+
+- evidence_pointer：Introduction第三段第二句
+
+### 13. P3 S3
+
+- order：13
+
+- section：Introduction
+
+- locator：P3 S3
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：研究FAT AI系统对社会和IS领域都及时且关键。
+
+- rhetorical_function_cn：把政策问题转化为IS研究命题。
+
+- depends_on_cn：政策和现实案例
+
+- sets_up_cn：为IS期刊合法化该研究主题。
+
+- evidence_pointer：Introduction第三段第三句
+
+### 14. P3 S4
+
+- order：14
+
+- section：Introduction
+
+- locator：P3 S4
+
+- move_code：GAP
+
+- paraphrase_cn：虽然FAT单要素有研究，但几乎没有同时考虑三者的系统性工作。
+
+- rhetorical_function_cn：明确指出文献缺口。
+
+- depends_on_cn：需求与背景
+
+- sets_up_cn：为论文核心贡献定位。
+
+- evidence_pointer：Introduction第三段第四句
+
+### 15. P4 S1
+
+- order：15
+
+- section：Introduction
+
+- locator：P4 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：GDPR和CCPA等法律推动机器学习中的个人隐私保护趋势。
+
+- rhetorical_function_cn：引入第二项约束：隐私。
+
+- depends_on_cn：FAT需求
+
+- sets_up_cn：为隐私受限数据集选择做铺垫。
+
+- evidence_pointer：Introduction第四段第一句
+
+### 16. P4 S2
+
+- order：16
+
+- section：Introduction
+
+- locator：P4 S2
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：使用个体级数据的AI方法需要隐私保护，且可能只能访问有限属性。
+
+- rhetorical_function_cn：把隐私趋势转成数据与方法设计约束。
+
+- depends_on_cn：隐私法律趋势
+
+- sets_up_cn：为后文“低属性数据集”提供依据。
+
+- evidence_pointer：Introduction第四段第二句
+
+### 17. P5 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：P5 S1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：开发FAT AI框架并在隐私受限的affinity预测场景中实例化。
+
+- rhetorical_function_cn：提出论文的具体研究目标。
+
+- depends_on_cn：前文的FAT与隐私需求
+
+- sets_up_cn：预告后续方法与数据集。
+
+- evidence_pointer：Introduction第五段第一句
+
+### 18. P5 S2
+
+- order：18
+
+- section：Introduction
+
+- locator：P5 S2
+
+- move_code：RESULT
+
+- paraphrase_cn：结果表明所有FAT要素能在设计良好的系统中平衡。
+
+- rhetorical_function_cn：提前宣布核心结果。
+
+- depends_on_cn：需要实例化证据
+
+- sets_up_cn：奠定总体贡献。
+
+- evidence_pointer：Introduction第五段第二句
+
+### 19. P5 S3
+
+- order：19
+
+- section：Introduction
+
+- locator：P5 S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献是开发并评估包含所有维度而非子集的功能性FAT ML方法。
+
+- rhetorical_function_cn：把缺口转化为贡献声明。
+
+- depends_on_cn：GAP句
+
+- sets_up_cn：为讨论部分的贡献表述提供模板。
+
+- evidence_pointer：Introduction第五段第三句
+
+### 20. P1 S1
+
+- order：20
+
+- section：Background and framework
+
+- locator：P1 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：分析基于FAT方法进行可解释预测。
+
+- rhetorical_function_cn：引入理论基础。
+
+- depends_on_cn：引言目标
+
+- sets_up_cn：定义后续框架的概念锚点。
+
+- evidence_pointer：Background第一句
+
+### 21. P2 S1
+
+- order：21
+
+- section：Background and framework
+
+- locator：P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：XAI元综述提出负责任AI六原则，但多数研究只是在呼吁，没有同时处理三个FAT维度。
+
+- rhetorical_function_cn：总结已有知识并指出其不足。
+
+- depends_on_cn：THEORY_INTRO
+
+- sets_up_cn：为“没有正式FAT应用”的缺口铺垫。
+
+- evidence_pointer：Background第二段
+
+### 22. P2 S2
+
+- order：22
+
+- section：Background and framework
+
+- locator：P2 S2
+
+- move_code：GAP
+
+- paraphrase_cn：未发现FAT框架在商业或IS研究中的正式应用。
+
+- rhetorical_function_cn：明确研究空白。
+
+- depends_on_cn：前句总结
+
+- sets_up_cn：宣称本文填补该空白。
+
+- evidence_pointer：Background第二段末
+
+### 23. P3 S1
+
+- order：23
+
+- section：Background and framework
+
+- locator：P3 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：大多数治理研究呼吁AI治理，但缺少算法和实现细节。
+
+- rhetorical_function_cn：批评治理文献的操作性不足。
+
+- depends_on_cn：已有GAP
+
+- sets_up_cn：强调本文要提供实施细节。
+
+- evidence_pointer：Background第三段
+
+### 24. P3 S2
+
+- order：24
+
+- section：Background and framework
+
+- locator：P3 S2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：目标是弥补商业环境下可解释预测的治理与实施缺口。
+
+- rhetorical_function_cn：把批评转化为研究目标。
+
+- depends_on_cn：治理文献缺实现细节
+
+- sets_up_cn：为方法部分篇幅奠定理由。
+
+- evidence_pointer：Background第三段末
+
+### 25. P6 S1
+
+- order：25
+
+- section：Background and framework
+
+- locator：P6 S1
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：已有可解释性工作主要围绕线性方法，本文围绕GLM构建方法。
+
+- rhetorical_function_cn：说明本文继承并可立即贡献于某一方法传统。
+
+- depends_on_cn：可解释性文献回顾
+
+- sets_up_cn：为GLM选择做知识铺垫。
+
+- evidence_pointer：Background第六段
+
+### 26. P7 S1
+
+- order：26
+
+- section：Background and framework
+
+- locator：P7 S1
+
+- move_code：LIMITATION
+
+- paraphrase_cn：FAT度量研究大多只关注公平性，且公平性增强算法不稳定和不可复现。
+
+- rhetorical_function_cn：指出现有FAT评价的狭窄性。
+
+- depends_on_cn：FAT三要素框架
+
+- sets_up_cn：说明为什么不能只用公平性评价。
+
+- evidence_pointer：Background第七段
+
+### 27. P9 S1
+
+- order：27
+
+- section：Background and framework
+
+- locator：P9 S1
+
+- move_code：GAP
+
+- paraphrase_cn：多数研究只研究两两FAT子集，本文显式分析三方FAT平衡。
+
+- rhetorical_function_cn：把前几段的文献批评总结为清晰缺口。
+
+- depends_on_cn：公平、准确率、透明文献回顾
+
+- sets_up_cn：为“三向平衡”这一核心贡献定位。
+
+- evidence_pointer：Background第九段
+
+### 28. P10 S1
+
+- order：28
+
+- section：Background and framework
+
+- locator：P10 S1
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：Shin & Park对FAT三维度进行了完整处理，本文采纳其概念模型并做些修改。
+
+- rhetorical_function_cn：确定概念基础并划清继承与修改边界。
+
+- depends_on_cn：前文GAP
+
+- sets_up_cn：下一节给出修改后的FAT定义。
+
+- evidence_pointer：Background第十段
+
+### 29. P10 S2
+
+- order：29
+
+- section：Background and framework
+
+- locator：P10 S2
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：开发算法化FAT实现，即迭代决策过程。
+
+- rhetorical_function_cn：预告方法部分的核心交付物。
+
+- depends_on_cn：概念模型采纳
+
+- sets_up_cn：引出Section 3中的迭代框架。
+
+- evidence_pointer：Background第十段末
+
+### 30. P1 S1
+
+- order：30
+
+- section：Modeling approach
+
+- locator：P1 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：修改Shin & Park，将FAT定义为公平、问责、透明三个构成的集合。
+
+- rhetorical_function_cn：正式提出本文使用的理论定义。
+
+- depends_on_cn：Background采纳的概念模型
+
+- sets_up_cn：为后续三小节展开定义细节。
+
+- evidence_pointer：Section 3第一句
+
+### 31. P1 Fairness段
+
+- order：31
+
+- section：Modeling approach
+
+- locator：P1 Fairness段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：公平性指无预测偏差；数据偏差来自输入，模型偏差来自模型内部，追求公平可能降低问责和透明表现。
+
+- rhetorical_function_cn：解释公平性内部的机制及其与其他维度的张力。
+
+- depends_on_cn：FAT定义
+
+- sets_up_cn：为公平检查的设计要求提供理由。
+
+- evidence_pointer：Section 3 Fairness定义段
+
+### 32. P2 Accountability段
+
+- order：32
+
+- section：Modeling approach
+
+- locator：P2 Accountability段
+
+- move_code：MECHANISM
+
+- paraphrase_cn：问责包括预测准确率和覆盖率；复杂模型损害可解释性，管理者需决定满意准确率。
+
+- rhetorical_function_cn：引入第二维度的两个子度量和管理判断。
+
+- depends_on_cn：FAT定义
+
+- sets_up_cn：为覆盖率和准确率的权衡分析做铺垫。
+
+- evidence_pointer：Section 3 Accountability定义段
+
+### 33. P3 Transparency段
+
+- order：33
+
+- section：Modeling approach
+
+- locator：P3 Transparency段
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：透明性取决于建模方法；线性模型透明，神经网络黑箱，LIME/SHAP用局部线性模型解释黑箱。
+
+- rhetorical_function_cn：说明透明性在方法选择层即可决定。
+
+- depends_on_cn：FAT定义
+
+- sets_up_cn：把透明性操作化为“选择GLM而非NN”。
+
+- evidence_pointer：Section 3 Transparency定义段
+
+### 34. P4段
+
+- order：34
+
+- section：Modeling approach
+
+- locator：P4段
+
+- move_code：CONTEXT
+
+- paraphrase_cn：affinity问题关注人与行动/结果之间的倾向关系，如犯罪倾向和疾病风险。
+
+- rhetorical_function_cn：界定论文应用领域。
+
+- depends_on_cn：FAT三定义
+
+- sets_up_cn：为affinity预测场景的正式描述做铺垫。
+
+- evidence_pointer：Section 3 affinity段
+
+### 35. P5段
+
+- order：35
+
+- section：Modeling approach
+
+- locator：P5段
+
+- move_code：GAP
+
+- paraphrase_cn：商业affinity研究过去只关注准确率，但用户和决策者要求系统可接受可信，必须显式处理FAT三要素。
+
+- rhetorical_function_cn：将一般FAT话语收束到商业IS研究。
+
+- depends_on_cn：affinity问题引入
+
+- sets_up_cn：为研究动机提供领域合法化。
+
+- evidence_pointer：Section 3第五段
+
+### 36. Fig.1段
+
+- order：36
+
+- section：Modeling approach
+
+- locator：Fig.1段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：图1表示迭代流程：选透明方法、识别预测变量、问责检查、公平检查、透明检查，全部通过才停止。
+
+- rhetorical_function_cn：把FAT概念转化为具体的流程图设计。
+
+- depends_on_cn：FAT定义
+
+- sets_up_cn：为后续实例化提供设计蓝本。
+
+- evidence_pointer：Fig.1前后段落
+
+### 37. P2
+
+- order：37
+
+- section：Modeling method
+
+- locator：P2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：引用“AI必须解释自己”，主张构建性能好且可解释、不依赖外部上下文信息的模型。
+
+- rhetorical_function_cn：把方法章节的目标定位为可解释且无需外部信息。
+
+- depends_on_cn：FAT框架
+
+- sets_up_cn：为选择GLM和低属性数据做法提供方向。
+
+- evidence_pointer：Modeling method引言段
+
+### 38. Data P1
+
+- order：38
+
+- section：Modeling method
+
+- locator：Data P1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：Netflix Prize只关注推荐准确率，完全忽略FAT，最终产出模型未被Netflix使用。
+
+- rhetorical_function_cn：用著名案例说明纯准确率竞赛的失败。
+
+- depends_on_cn：商业affinity缺口
+
+- sets_up_cn：为重新利用该数据集但改变目标提供解释。
+
+- evidence_pointer：Section 4.2第一段
+
+### 39. Data P2
+
+- order：39
+
+- section：Modeling method
+
+- locator：Data P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择该数据集是因为其无用户/产品属性、满足隐私标准，且具有公开准确率基准。
+
+- rhetorical_function_cn：说明数据集选择的合理性。
+
+- depends_on_cn：隐私与FAT需求
+
+- sets_up_cn：为“无外部属性”作为设计约束提供依据。
+
+- evidence_pointer：Section 4.2 Data段
+
+### 40. Data P4
+
+- order：40
+
+- section：Modeling method
+
+- locator：Data P4
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：采用Chebyshev定理剔除稀疏评分电影，保留97%数据，形成稳定统计样本。
+
+- rhetorical_function_cn：解释数据清洗决策。
+
+- depends_on_cn：数据规模与稀疏性
+
+- sets_up_cn：为后续PES/MGS切分提供数据基础。
+
+- evidence_pointer：Section 4.2 Data末段
+
+### 41. Instantiation P1
+
+- order：41
+
+- section：Modeling method
+
+- locator：Instantiation P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：特征提取通过数据分区实现：分区提高准确率并降低数据偏差，但可能降低覆盖率。
+
+- rhetorical_function_cn：把FAT公平要求转成第一个设计决策。
+
+- depends_on_cn：低属性约束
+
+- sets_up_cn：为后续分区实验提供理论理由。
+
+- evidence_pointer：Section 4.3第一决策
+
+### 42. Instantiation P2
+
+- order：42
+
+- section：Modeling method
+
+- locator：Instantiation P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：MCS相似度被引入以克服Pearson局限，改进覆盖率且不损失准确率。
+
+- rhetorical_function_cn：把问责中的覆盖率目标转成相似度度量设计。
+
+- depends_on_cn：相似度文献与初步实验
+
+- sets_up_cn：为MCS公式与例子的出现铺垫。
+
+- evidence_pointer：Section 4.3第二决策
+
+### 43. Instantiation P3
+
+- order：43
+
+- section：Modeling method
+
+- locator：Instantiation P3
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：建模方法选择以透明性为主要标准，辅以稳定性，最终选择GLM以降低模型偏差。
+
+- rhetorical_function_cn：把透明性维度和稳定性维度同时落实到模型选型。
+
+- depends_on_cn：FAT定义中的透明性
+
+- sets_up_cn：为Section 4.6 GLM的详细介绍提供理由。
+
+- evidence_pointer：Section 4.3第三决策
+
+### 44. Instantiation P4
+
+- order：44
+
+- section：Modeling method
+
+- locator：Instantiation P4
+
+- move_code：REQUIREMENT
+
+- paraphrase_cn：预测变量和参数优化需要平衡覆盖率、准确率，并借此处理数据偏差。
+
+- rhetorical_function_cn：把问责与公平纳入最后一个设计决策。
+
+- depends_on_cn：前三个设计决策
+
+- sets_up_cn：引出四个预测变量的定义。
+
+- evidence_pointer：Section 4.3第四决策
+
+### 45. Predictors P1
+
+- order：45
+
+- section：Modeling method
+
+- locator：Predictors P1
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：任务是准确估计用户对电影的评分，同时在隐私受限数据上遵守FAT原则。
+
+- rhetorical_function_cn：将一般affinity问题具体化为可计算任务。
+
+- depends_on_cn：数据描述
+
+- sets_up_cn：为四个预测变量的意义提供问题上下文。
+
+- evidence_pointer：Section 4.4第一段
+
+### 46. Similarity measure P1
+
+- order：46
+
+- section：Modeling method
+
+- locator：Similarity measure P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：推导出MCS，结果限定在[-1,1]，能捕获评分向量之间的距离，并在affinity预测中优于Pearson。
+
+- rhetorical_function_cn：提供新的相似度设计并预告其优势。
+
+- depends_on_cn：传统相似度度量
+
+- sets_up_cn：通过例子演示MCS与Pearson差异。
+
+- evidence_pointer：Section 4.5
+
+### 47. GLM P1
+
+- order：47
+
+- section：Modeling method
+
+- locator：GLM P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：选择GLM是因为它不是黑箱、能用较少数据、且能让分析者理解每个预测变量的影响。
+
+- rhetorical_function_cn：进一步为GLM选型辩护。
+
+- depends_on_cn：透明性设计要求
+
+- sets_up_cn：进入GLM估计的细节。
+
+- evidence_pointer：Section 4.6第一段
+
+### 48. GLM P2
+
+- order：48
+
+- section：Modeling method
+
+- locator：GLM P2
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：用best subsets和Mallows' Cp选择最简约模型，而不是单纯追求R2。
+
+- rhetorical_function_cn：说明模型选择的统计机制。
+
+- depends_on_cn：GLM选型
+
+- sets_up_cn：为结果中变量数3–7提供方法支持。
+
+- evidence_pointer：Section 4.6第二段
+
+### 49. 5.1 P1
+
+- order：49
+
+- section：Results
+
+- locator：5.1 P1
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：利用PES计算预测变量、MGS训练和验证模型，避免仅用PES导致过拟合。
+
+- rhetorical_function_cn：解释数据切分的内部有效性策略。
+
+- depends_on_cn：数据预处理
+
+- sets_up_cn：为GLM诚实评估提供基础。
+
+- evidence_pointer：Section 5.1第一段
+
+### 50. 5.1 P2
+
+- order：50
+
+- section：Results
+
+- locator：5.1 P2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：分区边界没有算法自动给出，需要领域专家决定；选择按电影评分数量分区而非用户活跃度。
+
+- rhetorical_function_cn：说明分区决定依赖领域知识，并排除用户活动度分区的缺陷。
+
+- depends_on_cn：数据集特征
+
+- sets_up_cn：为11个分区的具体实验设置预作说明。
+
+- evidence_pointer：Section 5.1第二段
+
+### 51. 5.2 P1
+
+- order：51
+
+- section：Results
+
+- locator：5.2 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：设置邻域深度Dm=30天、U_Avg=120天和M_Pred阈值C=0.825，以平衡数据覆盖和邻近质量。
+
+- rhetorical_function_cn：把参数选择描述为FAT平衡手段。
+
+- depends_on_cn：预测变量定义
+
+- sets_up_cn：为覆盖率和缺失类型结果做铺垫。
+
+- evidence_pointer：Section 5.2第一段
+
+### 52. 5.2 P2
+
+- order：52
+
+- section：Results
+
+- locator：5.2 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：预测器生成结果覆盖约81.42%的MGS元组；完全覆盖率虽然理想但和公平、复杂度、准确率存在权衡。
+
+- rhetorical_function_cn：报告覆盖率结果并提示其并非越高越好。
+
+- depends_on_cn：参数设计
+
+- sets_up_cn：为后续准确率-覆盖率权衡分析埋伏笔。
+
+- evidence_pointer：Table 2后段落
+
+### 53. 5.3 P1
+
+- order：53
+
+- section：Results
+
+- locator：5.3 P1
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：对11个分区×4种预测变量缺失类型估计44个GLM，每个子分区按70/30拆分。
+
+- rhetorical_function_cn：描述子分区的GLM估计设计。
+
+- depends_on_cn：预测变量缺失类型
+
+- sets_up_cn：为模型简约性和预测准确率结果做铺垫。
+
+- evidence_pointer：Section 5.3
+
+### 54. 5.3 P2
+
+- order：54
+
+- section：Results
+
+- locator：5.3 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：除一个模型外，所有GLM只包含3–7个变量，体现方法简约性。
+
+- rhetorical_function_cn：报告透明性和可管理性的第一项证据。
+
+- depends_on_cn：44个模型估计
+
+- sets_up_cn：为Table 5提供叙述。
+
+- evidence_pointer：Section 5.3第二段
+
+### 55. 5.4 P1
+
+- order：55
+
+- section：Results
+
+- locator：5.4 P1
+
+- move_code：BENCHMARK_OR_CONTRAST
+
+- paraphrase_cn：为了解释RMSE，采用该数据集公开的Cinematch基准。
+
+- rhetorical_function_cn：为准确率结果建立外部参照。
+
+- depends_on_cn：RMSE原始指标
+
+- sets_up_cn：使后续8–14%改进可理解。
+
+- evidence_pointer：Section 5.4第一段
+
+### 56. 5.4 P2-P3
+
+- order：56
+
+- section：Results
+
+- locator：5.4 P2-P3
+
+- move_code：RESULT
+
+- paraphrase_cn：NoNulls子模型在5k评分以上分区显著超过Cinematch基准，改进幅度8–14%，20k以上超过12%。
+
+- rhetorical_function_cn：报告核心准确率结果。
+
+- depends_on_cn：Cinematch基准
+
+- sets_up_cn：证明FAT框架没有牺牲准确率。
+
+- evidence_pointer：Section 5.4第二、三段
+
+### 57. 5.4 P3
+
+- order：57
+
+- section：Results
+
+- locator：5.4 P3
+
+- move_code：RESULT
+
+- paraphrase_cn：M_Pred是最关键预测变量：缺失M_Pred的子模型低于基准。
+
+- rhetorical_function_cn：从结果反推预测变量的机制重要性。
+
+- depends_on_cn：Table 3结果
+
+- sets_up_cn：为说明隐私约束下不引入外部属性的代价提供证据。
+
+- evidence_pointer：Section 5.4第三段
+
+### 58. 5.5 P1
+
+- order：58
+
+- section：Results
+
+- locator：5.5 P1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：结果部分将评估问责（准确率与覆盖率）、公平（数据偏差），透明已在方法选择阶段处理。
+
+- rhetorical_function_cn：预告FAT逐项评价结构。
+
+- depends_on_cn：准确率结果
+
+- sets_up_cn：分别展开5.5.1–5.5.4。
+
+- evidence_pointer：Section 5.5开头
+
+### 59. 5.5.1 P1
+
+- order：59
+
+- section：Results
+
+- locator：5.5.1 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：覆盖率和准确率排名之间没有显著相关或支配关系。
+
+- rhetorical_function_cn：报告问责两个子目标之间的非支配性。
+
+- depends_on_cn：Table 4
+
+- sets_up_cn：支持框架在不同内部特征下具有平衡性。
+
+- evidence_pointer：Section 5.5.1
+
+### 60. 5.5.2 P1
+
+- order：60
+
+- section：Results
+
+- locator：5.5.2 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：各分区模型只使用3–7个变量，变量少使透明性和有界理性决策更容易。
+
+- rhetorical_function_cn：报告透明性代理指标。
+
+- depends_on_cn：Table 5
+
+- sets_up_cn：把“模型简洁”与“透明”连接起来。
+
+- evidence_pointer：Section 5.5.2
+
+### 61. 5.5.3 P1
+
+- order：61
+
+- section：Results
+
+- locator：5.5.3 P1
+
+- move_code：ROBUSTNESS_OR_BOUNDARY_TEST
+
+- paraphrase_cn：通过4、6、11分区配置的迭代，检验FAT框架对数据偏差的稳健性。
+
+- rhetorical_function_cn：设计公平性的稳健性检验。
+
+- depends_on_cn：11分区基线
+
+- sets_up_cn：为Table 6结果做准备。
+
+- evidence_pointer：Section 5.5.3
+
+### 62. 5.5.3 P2
+
+- order：62
+
+- section：Results
+
+- locator：5.5.3 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：分区数增加总体提高预测准确率，说明分区能过滤不相似数据的噪声并间接增强公平性。
+
+- rhetorical_function_cn：报告公平稳健性结果并提供机制解释。
+
+- depends_on_cn：Table 6
+
+- sets_up_cn：为“分区越大越公平但覆盖率下降”的权衡做铺垫。
+
+- evidence_pointer：Section 5.5.3第二段
+
+### 63. 5.5.4 P1
+
+- order：63
+
+- section：Results
+
+- locator：5.5.4 P1
+
+- move_code：RESULT
+
+- paraphrase_cn：分区越多准确率越高，但覆盖率从88.21%降到81.42%，这是准确率与覆盖率的明确权衡。
+
+- rhetorical_function_cn：直接展示问责内部权衡。
+
+- depends_on_cn：4/6/11分区结果
+
+- sets_up_cn：说明最终配置是管理决策。
+
+- evidence_pointer：Section 5.5.4第一段
+
+### 64. 5.5.4 P2
+
+- order：64
+
+- section：Results
+
+- locator：5.5.4 P2
+
+- move_code：RESULT
+
+- paraphrase_cn：表7汇总显示：准确率接近基准但不等同于最佳，覆盖率超过80%，模型稳定，分区稳健，模型透明。
+
+- rhetorical_function_cn：把三类零散证据汇成FAT整体结论。
+
+- depends_on_cn：Tables 3–6
+
+- sets_up_cn：支撑“FAT三要素可以共存”的核心主张。
+
+- evidence_pointer：Section 5.5.4 Table 7
+
+### 65. 5.5.4 P3
+
+- order：65
+
+- section：Results
+
+- locator：5.5.4 P3
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：若想进一步提高问责（准确率或覆盖率），可能需要黑箱模型从而降低透明；增加分区提高公平但降低覆盖率；具体配置应由任务决定。
+
+- rhetorical_function_cn：界定FAT内部的替代与边界条件。
+
+- depends_on_cn：Table 7
+
+- sets_up_cn：为讨论中的“业务目标决定配置”提供依据。
+
+- evidence_pointer：Section 5.5.4末段
+
+### 66. P1
+
+- order：66
+
+- section：Discussion
+
+- locator：P1
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：提出系统化框架，在隐私受限affinity场景中实例化，证明FAT可共存。
+
+- rhetorical_function_cn：第一段重新陈述主要贡献。
+
+- depends_on_cn：Table 7
+
+- sets_up_cn：为后续理论贡献、政策意义段落提供起点。
+
+- evidence_pointer：Section 6第一段
+
+### 67. P2
+
+- order：67
+
+- section：Discussion
+
+- locator：P2
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：理论贡献在于功能性FAT ML方法，且可解释不必然损害预测性能。
+
+- rhetorical_function_cn：把“FAT可共存”提升为理论贡献。
+
+- depends_on_cn：引言中的理论贡献声明
+
+- sets_up_cn：将结果与“违背常识”的定位绑定。
+
+- evidence_pointer：Section 6第二段
+
+### 68. P3
+
+- order：68
+
+- section：Discussion
+
+- locator：P3
+
+- move_code：WHY_GAP_MATTERS
+
+- paraphrase_cn：框架满足数据驱动决策和政策分析对可解释模型的迫切需求；准确率不再是唯一标准。
+
+- rhetorical_function_cn：重申研究的社会与IS相关性。
+
+- depends_on_cn：引言缺口
+
+- sets_up_cn：为政策和管理影响做铺垫。
+
+- evidence_pointer：Section 6第三段
+
+### 69. P4
+
+- order：69
+
+- section：Discussion
+
+- locator：P4
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：AI接受度低，隐私数据集增加挑战，本文提供低属性、可解释、可靠建模的路径。
+
+- rhetorical_function_cn：把结果放入隐私挑战的叙事中。
+
+- depends_on_cn：数据与结果
+
+- sets_up_cn：为后续管理应用和边界讨论过渡。
+
+- evidence_pointer：Section 6第四段
+
+### 70. P7
+
+- order：70
+
+- section：Discussion
+
+- locator：P7
+
+- move_code：BOUNDARY_CONDITION
+
+- paraphrase_cn：一般方法需按领域定制，文本/图像/地理空间分析中的FAT指标与校准会不同，但框架可扩展。
+
+- rhetorical_function_cn：界定贡献适用范围并防御过度泛化。
+
+- depends_on_cn：affinity实例化
+
+- sets_up_cn：引导未来研究方向。
+
+- evidence_pointer：Section 6最后一段
+
+## 写作技术
+
+- gap_construction_cn：先以Google Flu、COMPAS、Amazon招聘、保险评分禁令等现实事件制造伦理危机感，再转向政策文件说明FAT已是现实需求，随后用三层文献缺口收束：大多数研究只呼吁无实施、无商业/IS正式应用、即使有FAT研究也只处理两两子集。
+
+- signposting_cn：使用大量显式路标：We develop a framework…、Our theoretical contribution lies…、We present an instantiation…、Fig.1 represents…、The final decision involves…、Table 7 summarizes…，使读者始终知道当前处于论证哪个环节。
+
+- transition_logic_cn：段落与阶段之间反复采用“先批评现有不足，再声明本文做法”的过渡；例如从治理研究无实施细节过渡到本文提供算法实现，从两两FAT子集过渡到三方平衡，从准确率结果过渡到FAT逐项评价。
+
+- claim_evidence_rhythm_cn：每个重要主张后紧跟表格或图：准确率主张接Table 3，覆盖与问责接Table 2/4，透明主张接Table 5，公平稳健性接Table 6，整体FAT主张接Table 7；在讨论部分则重新以叙述方式引用这些证据，而不是引入新证据。
+
+- benchmark_narrative_cn：选择Netflix Prize数据集后先说明该竞赛只追求准确率且最终模型不可用，再声明本文不是推荐系统研究；然后把Cinematch基准降级为“准确率这一个指标”的参照，后续用覆盖率、变量数和分区稳健性补充基准叙事，使单一准确率基准不垄断评价。
+
+- theory_return_cn：讨论部分没有发展新理论，而是回到Shin & Park的FAT概念模型，称本文将其推进为“功能性方法”；用“可解释性不必然损害性能”逆转文献中的默认权衡，保持与理论文献的对话。
+
+- contribution_positioning_cn：贡献被反复表述为“同时纳入三要素，而非子集”，并与“可解释不牺牲性能”的反常识结论绑定；这使贡献不仅是一个预测模型，而是一个伦理/治理命题的实证示范。
+
+- novelty_protection_cn：通过不断重申目标不是Netflix Prize、不是推荐系统、不是单纯准确率竞争，将结果从一次性性能提升中抽离；同时用“可解释还超过基准”来防止贡献被简化为“牺牲性能换伦理”的妥协。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：用现实AI伦理失败案例引出对公平、问责、透明的需求，并引用政策文件证明时效性。
+
+- research_job_cn：识别至少一个与FAT三方都相关的应用领域（如affinity预测）。
+
+- required_evidence_cn：需要现实案例和权威政策文件作为问题严重性的外部证据。
+
+- transition_to_next_cn：把“需求”转为“现有研究缺口”，并声明本文同时处理三要素。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：提出FAT三要素的定义并绘制迭代建模流程图。
+
+- research_job_cn：选择并修改一个可用的FAT概念模型，使每个维度可被检查。
+
+- required_evidence_cn：至少一个来源理论（如Shin & Park）作为概念基础。
+
+- transition_to_next_cn：说明流程需要实例化，于是进入数据集与方法选择。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：选择数据并说明其满足隐私与基准条件，明确研究目标不是原竞赛目标。
+
+- research_job_cn：找一个大尺度、低属性、有公开基准的数据集，并做离群值清洗与训练/验证切分。
+
+- required_evidence_cn：数据规模、无外部属性、公开基准；清洗和切分必须可复现。
+
+- transition_to_next_cn：将数据约束转化为四个设计决策：分区、相似度、模型方法、预测变量优化。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：详细描述每个FAT设计决策如何影响公平、问责或透明。
+
+- research_job_cn：实现分区、相似度度量、透明模型选择、预测变量计算。
+
+- required_evidence_cn：每个决策必须与至少一个FAT子维度对应，不能只有技术理由。
+
+- transition_to_next_cn：说明需要先用透明模型估计并选择简约模型，然后才能评估性能。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：报告准确率并与公开基准比较，同时报告覆盖率。
+
+- research_job_cn：对每个子分区的holdout计算RMSE，并统计可预测数据点比例。
+
+- required_evidence_cn：基准对比表和覆盖率表；若只报告准确率则不足以支撑FAT。
+
+- transition_to_next_cn：从准确率结果转向其余FAT维度，说明还需要透明性与公平性证据。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：用代理指标逐项评价透明性、公平性并展示三者的权衡。
+
+- research_job_cn：统计模型变量数、进行不同分区数量的稳健性检验、比较覆盖率与准确率排名。
+
+- required_evidence_cn：变量数与透明性关联、分区稳健性与公平性关联、覆盖率与准确率权衡。
+
+- transition_to_next_cn：用一张总结表把三方面证据并排，形成“三要素可共存”的整体结论。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：在讨论中回到引言缺口，把实例化结果上升为方法/框架贡献，并界定领域边界。
+
+- research_job_cn：识别哪些指标和参数需要针对其他领域重新定义，哪些流程可迁移。
+
+- required_evidence_cn：需要前序评价结果和明确的适用范围声明。
+
+- transition_to_next_cn：以未来研究收尾，结束论证循环。
+
+### most_transferable_moves_cn
+
+1. 使用现实案例+政策文件把伦理问题转化为IS研究缺口
+
+2. 用一个可修改的概念模型作为设计蓝本，再画迭代流程图
+
+3. 选择人们熟悉但有争议的公开数据集，先说明“我的目标不是原始竞赛目标”
+
+4. 把FAT三要素分别映射到可观察的代理指标
+
+5. 用“表格并排”的方式呈现多维度权衡，而不是只报告单一性能指标
+
+6. 用“不是子集而是三要素同时”和“可解释不必然牺牲准确率”来包装贡献
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. Netflix Prize级别的亿级数据集不是一般研究者随手可得
+
+2. 文中提到低分区计算的运算时间长达数周，普通实验设置难以承受
+
+3. 按电影评分数量做潜在分区需要大量领域知识和试错
+
+4. 缺少受保护属性是数据集固有特征，使“公平性”只能以分区稳健性代理
+
+### what_not_to_copy_superficially_cn
+
+1. 不能仅凭GLM变量数少就声称“透明”；还需要论证决策者能理解这些变量
+
+2. 不能把分区稳健性直接等同于公平；在应用时必须补上受保护类别层面的公平检验
+
+3. 不能只讲可解释不牺牲性能，必须有类似Cinematch的公开基准与多分区证据
+
+4. 不能把“MCS优于Pearson”作为结果，除非展示比较数据
+
+- single_best_description_of_the_routine_cn：把抽象伦理原则（FAT）转译成迭代建模流程，在隐私受限的经典数据集上用透明线性模型同时证明准确性、覆盖率、模型简洁性和分区稳健性，最后以“不是子集而是整体”来回填缺口。
+
+## 分析边界
+
+文章以HTML全文形式提供，但未包含分页页码，因此位置信息使用章节、段落和表格定位；Table 2的Overall行中PES列数值疑似OCR不一致，但不影响对论证结构的判断；作者在文中明确略去了MCS与Pearson的比较结果，因此无法独立验证该局部主张。

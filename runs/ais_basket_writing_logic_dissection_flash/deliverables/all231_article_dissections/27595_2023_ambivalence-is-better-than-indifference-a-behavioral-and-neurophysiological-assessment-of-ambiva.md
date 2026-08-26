@@ -1,0 +1,1991 @@
+# Ambivalence Is Better than Indifference: A Behavioral and Neurophysiological Assessment of Ambivalence in Online Environments
+
+- 作者：Akshat Lakhiwal; Hillol Bala; Pierre-Majorique Léger
+- 年份 / 期刊：2023 / MIS Quarterly
+- DOI：10.25300/misq/2022/17123
+- 源文件：27595_2023_ambivalence-is-better-than-indifference-a-behavioral-and-neurophysiological-assessment-of-ambiva.md
+- 论文主类型：multi_method_or_multi_study_program
+- 主导写作弧线：problem_theory_design_test_return
+- 置信度：0.72
+
+## 文章级论证概况
+
+- 核心问题：在线环境中的信息表征（评分与评论）如何呈现并影响非极端态度（ambivalence与indifference）对用户注意和购买决策的作用；现存的基于双极（正负单一连续体）的表征（如星级评分）是否掩盖了这种区分；改用双变量（bivariate）表征是否能够辨识并改善决策结果。
+
+- 制品与设计：文章核心的干预制品是一种双变量评分表征方式，即在正、负两个维度上分别显示强度，以替代将 ambivalent 和 indifferent 都压缩到同一中值（如2.5星）的传统双极星级评分。研究还设计了基于EEG P300的注意测量范式，以及由分类器生成的属性刺激序列。
+
+- 客观结果：四个随机对照实验显示：ambivalence比positivity、negativity、indifference引发更高P300注意；ambivalence的购买意愿低于positivity和indifference但高于negativity；positive-first序列比negative-first序列带来更高的注意和购买意愿；双变量评分能显著区分ambivalence与indifference，并将 ambivalent 产品的购买提高约70%、50%、100%，最终达到相对双极表示的至少50%购买提升。
+
+- 核心贡献：作者声称：将信息效价研究中被忽略的非极端态度（ambivalence和indifference）纳入理论框架；用NeuroIS证据说明ambivalence对注意和决策的区分性影响；揭示当前双极评分的表征缺陷并提出可提升购买结果的双变量干预；同时从注意、顺序和表征三个层面扩展关于在线信息效价、混合情感和推荐策略的知识。
+
+- 整篇论证链：作者先从平台依赖评分/评论帮助用户决策这一现实出发，指出既有IS研究只用正负双极理解信息效价，因而无法区分同时存在正负情感的ambivalence与缺乏评价的indifference。随后用“非互惠双变量态度结构”以及negativity bias和broaden-and-build两个理论构建机制：ambivalence因冲突需要更多注意，且在positive-first序列下因扩展性认知环境而比negative-first产生更高购买意愿；EEG P300实验从神经层面支持该机制。接下来，作者论证当前星级评分不能辨识ambivalence与indifference，并提出一个双变量评分干预。第二至第四个实验逐步排除干预新颖性、加入真实评论、提高统计功效并检验顺序效应，最终把“双极表征误导用户、双变量表征改善决策”从局部结果提升为可复用设计知识。讨论部分重新连接引言缺口，主张这是对信息效价研究、混合情感解决和在线平台表征策略的理论贡献。
+
+## 类型与写作弧线判定
+
+- 论文主类型判定：文章包含一个EEG神经实验和三个实验室行为实验，另有刺激构建和子实验/稳健性补充，四种研究情境共同完成从神经机制、行为结果、表征缺陷到干预效果的累积论证；因此不是单一的artifact-benchmark或形式模型，而是多方法多Study的研究项目。
+
+- 主导写作弧线判定：写作主线是：先提出双极表征忽略非极端态度的问题，再引入态度双变量理论与两类效价理论，将这些理论转化为对ambivalence、indifference、信息顺序和双变量表征的假设，通过四个实验检验，最后在General Discussion回到理论贡献和表征设计知识。
+
+## 研究开展程序
+
+- study_or_phase_count：6
+
+- 研究阶段总序列：研究分六个阶段推进：(1)刺激物构建与操作化阶段，用Amazon评论训练分类器提取正/负/中性属性并通过预检验确定80个产品刺激；(2)Experiment 1，用EEG被试内实验证明ambivalence相较positivity、negativity、indifference引发更多注意，且信息顺序调节其效果；(3)Experiment 2，用混合设计比较双极星级评分与双变量评分，证明后者能区分ambivalence/indifference并影响购买意图和复杂性，但H7b未达显著；(4)Experiment 3，加入novel bipolar作为新颖性对照，并在评分旁附加真实评论，重测H7b与决策时间；(5)Experiment 4，在更接近现实的信息顺序呈现情境中同时检验H7b和H4的稳健性；(6)表1注释中提到的补充实验，用与Experiment 3相同但不含novel bipolar条件的设计复现结果，作为额外稳健性。
+
+### studies_or_phases
+
+#### 1. 刺激物构建与操作化阶段
+
+- order：1
+
+- name_cn：刺激物构建与操作化阶段
+
+- question_cn：如何生成能够分别诱发positivity、negativity、indifference、ambivalence（positive-first/negative-first）的产品属性刺激？
+
+- inputs_and_setting_cn：Amazon评论文本；80个对北美大学生相关的产品；预检验；一个未完全说明被试规模的预试验。
+
+- designed_or_compared_object_cn：每个产品随机分配的两个属性形容词；属性按正-正、负-负、中-中、正-负、负-正组合形成五种处理组。
+
+- baseline_control_or_counterfactual_cn：正-正、负-负、中-中作为非ambivalence对照组；正-负与负-正用于ambivalence的序列对照。
+
+##### objective_metrics
+
+1. 分类器系数
+
+2. 预检验中的ambivalence水平
+
+3. 各处理组的属性效价
+
+- analysis_method_cn：文本预处理（去标点、停用词、词干化）、n-gram向量化、两个logistic回归分类器、人工依据系数提取属性；预检验进行操纵检查。
+
+- main_result_cn：得到Elegant、Friendly等正属性，Slow、Expensive等负属性，Passable、Average等中性属性；ambivalence处理组的操纵检查显著高于非ambivalence组。
+
+- argumentative_role_cn：为Experiment 1提供有效且可信的刺激物，使后续神经与行为效应不是由随意选择的词语驱动。
+
+- remaining_uncertainty_cn：刺激能诱发ambivalence，但尚不知道用户在注意和购买意向上是否会表现出可测差异。
+
+- link_to_next_phase_cn：生成和处理后的刺激直接进入Experiment 1的被试内EEG试次。
+
+##### evidence_pointers
+
+1. Experiment 1 Methodology, Treatment段
+
+2. Experiment 1 Methodology, Stimulus Design段
+
+3. Table 2
+
+4. Table 3
+
+5. Experiment 1 Results, Behavioral Results段
+
+#### 2. Experiment 1：EEG被试内实验
+
+- order：2
+
+- name_cn：Experiment 1：EEG被试内实验
+
+- question_cn：RQ1：ambivalence相较positivity、negativity和indifference如何影响注意和购买意愿？RQ2：顺序性信息效价如何影响ambivalence下的决策？
+
+- inputs_and_setting_cn：18名有效被试；每人完成80个随机试次；产品图片、fixation cross、两个连续属性；EEG在32导设备上采集。
+
+- designed_or_compared_object_cn：五种属性处理组：positive-positive、negative-negative、indifferent-indifferent、ambivalence positive-first、ambivalence negative-first；因变量为P300振幅、购买意愿、自报ambivalence。
+
+- baseline_control_or_counterfactual_cn：positivity、negativity、indifference作为非ambivalence基线；positive-first与negative-first作为序列对照。
+
+##### objective_metrics
+
+1. Pz电极300-500ms P300峰值振幅
+
+2. 自报ambivalence分数
+
+3. 5点购买意愿
+
+- analysis_method_cn：jackknife ERP分析、ANOVA、Bonferroni校正的事后检验。
+
+- main_result_cn：H1、H2a、H2b、H2c、H3、H4均获支持：ambivalence的P300最高；购买意愿低于positivity和indifference但高于negativity；positive-first序列的注意和购买意愿高于negative-first。
+
+- argumentative_role_cn：从客观神经信号和主观行为两个层面证明非极端态度，尤其是ambivalence，在在线决策中产生区别于极端态度的效应，并证明信息顺序是重要调节因素。
+
+- remaining_uncertainty_cn：尚未说明实际的星级评分界面是否也能让用户区分ambivalence与indifference，也没有提出干预设计。
+
+- link_to_next_phase_cn：Experiment 1讨论末尾提出问题：双极表征是否扭曲偏好？如果换成更全面但仍简洁的表征会怎样？由此引出Experiment 2。
+
+##### evidence_pointers
+
+1. Experiment 1: Research Hypotheses
+
+2. Experiment 1: Methodology, Procedure/EEG Acquisition/Measures
+
+3. Experiment 1: Results and Analysis, Behavioral/EEG Results
+
+4. Experiment 1: Discussion
+
+5. Figure 5
+
+#### 3. Experiment 2：双极 vs 双变量评分表征实验
+
+- order：3
+
+- name_cn：Experiment 2：双极 vs 双变量评分表征实验
+
+- question_cn：RQ3：双变量评分是否会比双极星级评分更好地让用户分辨ambivalence与indifference，并影响存在ambivalence信息时的购买意愿和购买决策？
+
+- inputs_and_setting_cn：65名美国中西部大学学生；三个购买场景（笔记本电脑、办公椅、咖啡机）；每个场景四个产品选项；评分和五个描述点作为材料。
+
+- designed_or_compared_object_cn：Between-subject：双极星级评分 vs 双变量评分；within-subject：positive（5星）、negative（1星）、ambivalent（2.5星）、indifferent（2.5星）；加入mid scenario迫使参与者在非极端选项中决策。
+
+- baseline_control_or_counterfactual_cn：传统双极星级评分作为基线；positive/negative极端评分作为参照；ambivalent与indifferent使用相同2.5星值以测试表征的可分辨性。
+
+##### objective_metrics
+
+1. 自报ambivalence
+
+2. 7点购买意愿
+
+3. 单题决策复杂性
+
+4. 场景末购买决策
+
+- analysis_method_cn：ANOVA、F检验、Cohen's d效应量。
+
+- main_result_cn：H5、H6、H7a获支持；双变量评分显著区分ambivalence与indifferent，提高决策复杂性和购买意愿；H7b未显著但方向正确，ambivalent选项购买率提高约73%。
+
+- argumentative_role_cn：把Experiment 1的个体内部机制转成表征层面的结果：双极评分实际无法辨识ambivalence和indifference，双变量评分则可以，并产生经济上重要的购买提升。
+
+- remaining_uncertainty_cn：存在表征新颖性混淆；评分的旁边没有真实评论；H7b统计功效不足；决策复杂性提高是否意味着更深认知卷入尚未充分验证。
+
+- link_to_next_phase_cn：Experiment 2讨论明确列出四个concern，并直接预告Experiment 3将加入novel bipolar、真实评论和决策时间测量。
+
+##### evidence_pointers
+
+1. Experiment 2: Research Hypotheses
+
+2. Experiment 2: Methodology, Procedure
+
+3. Experiment 2: Results, Manipulation Check/Decision Complexity/Purchase Intention/Purchase Decision
+
+4. Experiment 2: Discussion
+
+5. Table 4
+
+6. Figure 7
+
+#### 4. Experiment 3：新颖性对照与评论情境实验
+
+- order：4
+
+- name_cn：Experiment 3：新颖性对照与评论情境实验
+
+- question_cn：双变量评分的效果是否在控制表征新颖性并加入真实评论后仍然存在？双变量评分是否比双极评分带来更长的决策时间？H7b在大样本下是否成立？
+
+- inputs_and_setting_cn：325名美国中西部大学学生；每个选项除评分外附加两条来自Amazon、品牌/产品中性且措辞相似的评论；新增novel bipolar作为第三个between-subject条件。
+
+- designed_or_compared_object_cn：三种表征：incumbent bipolar star rating、novel bipolar、bivariate；within-subject的rating效价；每条评论数量固定，顺序随机。
+
+- baseline_control_or_counterfactual_cn：incumbent bipolar为原始基线；novel bipolar用于排除新颖性；positive/negative极端评分作为极端参照。
+
+##### objective_metrics
+
+1. 自报ambivalence
+
+2. 7点购买意愿
+
+3. 单题决策复杂性
+
+4. 决策响应时间
+
+5. 场景末购买决策
+
+- analysis_method_cn：ANOVA、F检验、Cohen's d。
+
+- main_result_cn：H6、H7a、H7b、H8获支持；双变量评分相较双极提高购买ambivalent选项超过50%，相较novel bipolar提高超过70%；决策复杂性和决策时间均显著提高；双极与novel bipolar之间无显著差异。
+
+- argumentative_role_cn：排除新颖性解释，证明效果真实来自双变量表征本身；通过增加统计功效把Experiment 2中未显著的最终购买决策效应变为显著；决策时间增加支持更深认知卷入机制。
+
+- remaining_uncertainty_cn：Experiment 3中评分和评论同时呈现，评价分数可能在看到评论之前就锚定态度；信息顺序的作用需要一个更自然、更接近Experiment 1序列情境的测试；H7b需要再验证。
+
+- link_to_next_phase_cn：Experiment 3讨论明确指出Experiment 4要给出H7b的一致verdict，并在更丰富的技术体验中检验H4信息顺序。
+
+##### evidence_pointers
+
+1. Experiment 3开头设计变化段
+
+2. Experiment 3: Research Hypotheses
+
+3. Experiment 3: Methodology, Procedure/Participants/Measures
+
+4. Experiment 3: Results, Manipulation Check/Decision Complexity/Purchase Intention/Purchase Decision/Decision Response Time
+
+5. Experiment 3: Discussion
+
+6. Table 5
+
+7. Figure 8
+
+8. Figure 9
+
+#### 5. Experiment 4：顺序呈现与巩固实验
+
+- order：5
+
+- name_cn：Experiment 4：顺序呈现与巩固实验
+
+- question_cn：在评分之后再顺序呈现评论的更真实情境中，双变量评分对ambivalent产品购买决策的影响是否稳健？H4的信息顺序效应是否仍然成立？
+
+- inputs_and_setting_cn：83名美国中西部大学学生；设计同Experiment 3但去掉novel bipolar；两条评论在评分信息之后顺序呈现，ambivalent选项的评论顺序被记录。
+
+- designed_or_compared_object_cn：Between-subject：双极 vs 双变量；within-subject：rating效价；within-subject：ambivalent评论的positive-first vs negative-first顺序。
+
+- baseline_control_or_counterfactual_cn：双极星级评分作为基线；ambivalent与indifferent同为2.5星；positive-first与negative-first作为顺序对照。
+
+##### objective_metrics
+
+1. 自报ambivalence
+
+2. 7点购买意愿
+
+3. 单题决策复杂性
+
+4. 场景末购买决策
+
+- analysis_method_cn：ANOVA、F检验、Cohen's d。
+
+- main_result_cn：H6、H7a、H7b、H4均获支持；双变量评分下ambivalent选项购买相比双极提高超过100%；顺序上positive-first比negative-first产生更高购买意愿。
+
+- argumentative_role_cn：在更生态的情境中同时验证表征干预和顺序机制，把Experiment 1的神经/行为顺序证据与Experiment 2/3的表征证据串成统一论证。
+
+- remaining_uncertainty_cn：仍未在真实平台现场部署中测试；无法测量决策时间；长期行为、推荐系统指标和平台收益未直接检验。
+
+- link_to_next_phase_cn：General Discussion利用Experiment 4的结果汇总全部假设，并将效应解释为对信息效价理论和平台表征设计的贡献。
+
+##### evidence_pointers
+
+1. Experiment 4开头目标段
+
+2. Experiment 4: Methodology, Procedure/Participants/Measures
+
+3. Experiment 4: Results, Manipulation Check/Decision Complexity/Purchase Intention/Purchase Decision/Information Sequence
+
+4. Experiment 4: Discussion
+
+5. Table 6
+
+#### 6. 补充稳健性实验（表1注释报告）
+
+- order：6
+
+- name_cn：补充稳健性实验（表1注释报告）
+
+- question_cn：使用与Experiment 3相同但不含novel bipolar条件的设计，是否可以复现Experiment 2和Experiment 3的主要结果？
+
+- inputs_and_setting_cn：作者未提供样本量与细节；只在Table 1注释中说明其设计为Experiment 3减去第三个between-subject操纵。
+
+- designed_or_compared_object_cn：双极评分 vs 双变量评分；包含与Experiment 3相似的评论情境。
+
+- baseline_control_or_counterfactual_cn：双极评分作为基线；双变量干预作为比较条件。
+
+##### objective_metrics
+
+1. 文中未具体报告，作者声称结果与Experiment 2和3一致
+
+- analysis_method_cn：未报告。
+
+- main_result_cn：结果与Experiment 2和Experiment 3保持一致；具体统计细节可从作者处获取。
+
+- argumentative_role_cn：作为额外稳健性证据，说明双变量干预效果不是Experiment 3组合条件特异性造成的。
+
+- remaining_uncertainty_cn：无法独立评估该实验的设计质量、样本量和统计功效。
+
+- link_to_next_phase_cn：补充实验不承担主要论证推进，只用于巩固General Discussion中对稳健性的表述。
+
+##### evidence_pointers
+
+1. Research Overview, Table 1 Note
+
+2. General Discussion对跨研究一致性的总结
+
+## 各部分修辞架构
+
+### abstract_moves
+
+1. CONTEXT: 信息表征对在线决策重要
+
+2. LIMITATION: 既有IS研究只关注极端正负效价，忽略ambivalence和indifference
+
+3. GAP: 双极思路无法理解非极端态度如何形成并影响决策
+
+4. STUDY_OVERVIEW: 四个随机对照实验，含EEG
+
+5. RESULT: ambivalence和indifference对注意与购买产生不同影响，星级评分无法捕捉混合情感
+
+6. CONTRIBUTION: 提出双变量干预，提升ambivalent信息产品的购买至少50%
+
+### introduction_moves
+
+1. CONTEXT: 平台依赖评分/评论帮助决策
+
+2. PRACTICAL_STAKES: 表征偏差会扭曲偏好和推荐
+
+3. PHENOMENON: Amazon中的3星评论既可能是ambivalent也可能是indifferent
+
+4. LIMITATION: 双极框架忽视nonextreme attitudes
+
+5. GAP: 顺序性信息如何诱发ambivalence并未回答
+
+6. RQ_OR_OBJECTIVE: 提出RQ1、RQ2、RQ3
+
+7. METHOD_JUSTIFICATION: 用EEG测注意
+
+8. RESULT: EEG显示注意与顺序效应；星级评分不能区分双变量态度
+
+9. CONTRIBUTION: 贡献于信息效价、NeuroIS和表征设计
+
+### theory_and_knowledge_moves
+
+1. PRIOR_KNOWLEDGE: 表征聚合同伴反馈，降低信息过载
+
+2. LIMITATION: 表征存在简洁与准确之间的张力
+
+3. THEORY_INTRO: 情感/态度本质上是双变量非互惠的
+
+4. PRIOR_KNOWLEDGE: ambivalence与indifference的定义差异
+
+5. MECHANISM: 顺序信息加工更新态度，形成ambivalence
+
+6. THEORY_INTRO: negativity bias theory
+
+7. THEORY_INTRO: broaden-and-build theory
+
+### artifact_design_moves
+
+1. MECHANISM: 冲突需要更多认知资源；P300可测注意
+
+2. REQUIREMENT: 需要用客观神经指标测量注意
+
+3. DESIGN_FEATURE: EEG试次中按顺序呈现两个属性
+
+4. DESIGN_FEATURE: 使用logistic回归从评论中提取正负/中性属性
+
+5. LIMITATION: 双极评分无法辨认ambivalence/indifference
+
+6. DESIGN_FEATURE: 提出双变量评分，分别显示正负强度
+
+7. BENCHMARK_OR_CONTRAST: 以星级评分作为incumbent基线，加入novel bipolar排除新颖性
+
+8. METHOD_JUSTIFICATION: 加入真实评论与顺序呈现使情境更接近现实
+
+### evaluation_moves
+
+1. METHOD_JUSTIFICATION: NeuroIS方法补充自报数据
+
+2. RESULT: E1操纵检查与P300结果支持H1-H4
+
+3. RESULT: E2操纵检查支持H5，购买意愿支持H7a，H7b方向正确但不显著
+
+4. RESULT: E3支持H6/H7a/H7b/H8，并排除新颖性
+
+5. RESULT: E4支持H6/H7a/H7b/H4
+
+6. ROBUSTNESS_OR_BOUNDARY_TEST: 额外实验和跨实验效应量作为稳健性
+
+### discussion_and_contribution_moves
+
+1. RESULT: 总结四实验的一致结论
+
+2. CONTRIBUTION: 扩展非极端态度对注意和决策的知识
+
+3. CONTRIBUTION: 信息顺序为ambivalence解决提供解释
+
+4. CONTRIBUTION: 双变量表征减少信息失真并促进知情决策
+
+5. PRACTICAL_STAKES: 平台可借由表征和顺序优化推荐策略
+
+6. LIMITATION_AND_FUTURE: 学生样本、短信息序列和未来NeuroIS方法
+
+7. CONTRIBUTION: 联结理论上的双变量态度结构与实际平台表征
+
+## 理论/知识到设计的翻译
+
+### 知识/理论基础
+
+1. 态度/情感的双变量结构（positive/negative nonreciprocal）
+
+2. ambivalence与indifference的社会心理学定义
+
+3. negativity bias theory
+
+4. broaden-and-build theory
+
+5. NeuroIS中P300 ERP作为注意指标的既有知识
+
+6. 信息表征的可视显著性与cognitive fit
+
+- 理论—设计耦合：direct
+
+- 耦合判定理由：研究的核心设计——双变量评分——直接来自态度双变量结构这一理论前提：因为正负认知非互惠，所以只有分离显示正负强度的评分才能让ambivalence与indifference可分辨；实验3的novel bipolar、顺序设计、EEG P300也都是由理论推导出的可检验差异，而非事后解释。
+
+- 理论到设计翻译链：双变量态度结构 → 双极连续统会混淆“并存”与“缺失” → 表征应同时显性呈现正负维度 → 设计双变量评分量表 → 与星级评分对比 → 操纵检验显示双变量能区分ambivalence/indifference，购买意愿与决策更高。同时，ambivalence的冲突性 → 注意需求增加 → P300作为客观注意指标 → EEG实验比较五种态度条件；negativity与positivity理论 → leading valence决定认知环境 → 操纵positive-first/negative-first序列 → H3/H4被检验。
+
+### mapping_table
+
+#### 1. 1
+
+- theory_or_knowledge_claim_cn：正负态度是非互惠的，不能压缩到单一连续体
+
+- mechanism_cn：双极评分造成认知失配，用户无法区分同时对产品有强弱正负评价（ambivalence）和没有评价（indifference）
+
+- design_requirement_cn：表征应允许正、负强度分别可见
+
+- artifact_choice_cn：双变量评分量表，两个维度独立显示
+
+- evaluated_contrast_cn：双极星级评分 vs 双变量评分；ambivalent与indifferent都设为2.5星
+
+- objective_result_cn：E2-E4操纵检查：双变量下ambivalence显著高于indifference，双极下无差异；购买意愿和购买决策显著提高
+
+##### evidence_pointers
+
+1. Experiment 2 Manipulation Check
+
+2. Experiment 3 Manipulation Check
+
+3. Experiment 4 Manipulation Check
+
+4. Table 4-6
+
+#### 2. 2
+
+- theory_or_knowledge_claim_cn：ambivalence是同时存在的强正负取向，冲突性需要认知资源
+
+- mechanism_cn：冲突引发不适与一致性需求，个体投入更多注意以过滤/解决冲突
+
+- design_requirement_cn：需要客观、时间锁定的注意测量
+
+- artifact_choice_cn：EEG实验，Pz电极P300成分；两属性顺序呈现诱发ambivalence
+
+- evaluated_contrast_cn：ambivalence vs positivity/negativity/indifference
+
+- objective_result_cn：P300在300-500ms于Pz处对ambivalence最高；H1成立
+
+##### evidence_pointers
+
+1. Experiment 1 Hypotheses: Ambivalence and Attention
+
+2. Experiment 1 EEG Results
+
+3. Figure 5
+
+#### 3. 3
+
+- theory_or_knowledge_claim_cn：negativity bias使负面信息激活抑制系统；broaden-and-build使正面信息扩展认知环境
+
+- mechanism_cn：负面先出现时个体保守、回避、减少资源投入；正面先出现时个体探索、吸收并坚持评估
+
+- design_requirement_cn：在ambivalence诱发中操纵顺序并记录leading valence
+
+- artifact_choice_cn：positive-negative vs negative-positive属性序列；E4中顺序呈现真实评论
+
+- evaluated_contrast_cn：positive-first vs negative-first sequences
+
+- objective_result_cn：H3和H4在E1成立，H4在E4继续成立：positive-first产生更高P300和购买意愿
+
+##### evidence_pointers
+
+1. Experiment 1 Hypotheses: Information Sequence
+
+2. Experiment 1 Behavioral/EEG Results
+
+3. Experiment 4 Information Sequence Results
+
+#### 4. 4
+
+- theory_or_knowledge_claim_cn：视觉显著性吸引注意并加深信息加工
+
+- mechanism_cn：双变量评分使正负强度同时突出，用户投入更多认知，决策复杂性和决策时间增加
+
+- design_requirement_cn：干预应同时提高可视显著性和认知卷入
+
+- artifact_choice_cn：双变量评分量表；决策复杂性和决策时间作为过程指标
+
+- evaluated_contrast_cn：双变量 vs 双极和novel bipolar
+
+- objective_result_cn：E2-E4决策复杂性显著更高；E3决策时间显著更长；H6和H8成立
+
+##### evidence_pointers
+
+1. Experiment 2 Decision Complexity Results
+
+2. Experiment 3 Decision Complexity/Decision Response Time Results
+
+3. Experiment 4 Decision Complexity Results
+
+#### 5. 5
+
+- theory_or_knowledge_claim_cn：新颖的界面本身可能吸引注意，产生行为变化
+
+- mechanism_cn：如果不加控制，双变量评分的效果可能只是新刺激效应而非表征本质
+
+- design_requirement_cn：必须加入一种同样新颖但仍属双极的对照
+
+- artifact_choice_cn：novel bipolar scale作为第三个between-subject条件
+
+- evaluated_contrast_cn：bivariate vs incumbent bipolar vs novel bipolar
+
+- objective_result_cn：双极与novel bipolar之间无显著差异，bivariate仍高出50%+；说明效果非新颖性
+
+##### evidence_pointers
+
+1. Experiment 3 Design Changes
+
+2. Experiment 3 Purchase Decision Results
+
+3. Experiment 3 Discussion
+
+## 评价逻辑
+
+### evaluation_modes
+
+1. EEG P300 ERP神经测量（被试内重复试次）
+
+2. 三组实验室随机对照实验（混合设计）
+
+3. 操纵检查与Bonferroni事后检验
+
+4. 对incumbent bipolar、novel bipolar、bivariate三种表征的对比评价
+
+5. 加入真实评论和顺序呈现的生态性增强实验
+
+6. 跨实验效应量、统计功效和补充实验的稳健性评价
+
+- why_these_evaluations_cn：作者需要回答三个不同的研究问题：第一问涉及内部认知机制，需要客观神经指标（P300）证明ambivalence的注意差异；第二问涉及实际评分界面能否区分非极端态度，需要操纵表征类型并测量参与者的ambivalence感知；第三问涉及最终购买行为，因此需要用最终购买决策而非仅购买意愿来检验。其后加入novel bipolar和评论是为了排除替代解释并提高生态效度。
+
+- benchmark_and_contrast_chain_cn：E1首先在刺激层面用极端态度和非极端态度作为内部对照，建立“ambivalence需要更多注意且positive-first更强”的机制门槛。E2把机制上升到表征层面，以星级评分为baseline，用双变量评分作干预，证明双极会让ambivalence/indifference不可分辨；E3增加novel bipolar，既排除“只是因为新界面”的解释，又用更大样本把E2方向正确但不显著的H7b变成显著；E4把评论从与评分并存改为顺序呈现，再次复现H7b并检验H4。累积起来，局部购买百分比从73%到50%再到100%，形成一致的效应量证据。
+
+### claim_evidence_ledger
+
+#### 1. ambivalence比positivity、negativity和indifference需要更多注意
+
+- claim_cn：ambivalence比positivity、negativity和indifference需要更多注意
+
+- evidence_cn：E1中P300在Pz上的振幅显著更高；F(2,51)=9.07/9.04/10.02
+
+- supported：是
+
+#### 2. ambivalence的购买意愿低于positivity和indifference但高于negativity
+
+- claim_cn：ambivalence的购买意愿低于positivity和indifference但高于negativity
+
+- evidence_cn：E1行为结果F(3,1436)=432.77，事后检验支持H2a/b/c
+
+- supported：是
+
+#### 3. 信息顺序调节ambivalence下的注意和购买意愿，positive-first比negative-first更好
+
+- claim_cn：信息顺序调节ambivalence下的注意和购买意愿，positive-first比negative-first更好
+
+- evidence_cn：E1 P300顺序效应F(1,34)=10.92，购买意愿F(1,574)=15.04；E4购买意愿F(1,154)=4.35
+
+- supported：是
+
+#### 4. 双极星级评分无法区分ambivalence与indifference，双变量评分可以
+
+- claim_cn：双极星级评分无法区分ambivalence与indifference，双变量评分可以
+
+- evidence_cn：E2操纵检查：双极下无差异；双变量下差异显著F(1,255)=6.83；E3/E4同样如此
+
+- supported：是
+
+#### 5. 双变量评分提高ambivalent产品的购买意愿
+
+- claim_cn：双变量评分提高ambivalent产品的购买意愿
+
+- evidence_cn：E2 F(1,255)=26.02；E3 F(1,879)=18.48；E4 F(1,311)=13.47
+
+- supported：是
+
+#### 6. 双变量评分提高ambivalent产品的最终购买决策
+
+- claim_cn：双变量评分提高ambivalent产品的最终购买决策
+
+- evidence_cn：E2未显著但方向正确，p=0.06；E3 F(1,649)=10.07和F(1,656)=13.96；E4 F(1,247)=16.40；购买增幅73%、50%+、100%+
+
+- supported：E3/E4支持，E2方向支持
+
+#### 7. 双变量评分提高决策复杂性和决策时间，反映更深认知卷入
+
+- claim_cn：双变量评分提高决策复杂性和决策时间，反映更深认知卷入
+
+- evidence_cn：E2复杂度F(1,259)=6.84；E3复杂度F(1,2614)=35.85/16.07，决策时间F(1,2613)=5.65/7.33；E4复杂度F(1,331)=24.04
+
+- supported：是
+
+#### 8. 双变量评分效果不是表征新颖性造成的
+
+- claim_cn：双变量评分效果不是表征新颖性造成的
+
+- evidence_cn：E3中双极与novel bipolar在ambivalent产品购买上无显著差异，而bivariate显著更高
+
+- supported：是
+
+- internal_validity_strategy_cn：使用被试内设计控制个体差异；随机化产品、属性和评论顺序；预检验和操纵检查验证刺激效价；用Amazon评论训练分类器生成属性，减少人工选择偏差；EEG处理采用TTL同步、ASR伪迹清理、jackknife和Bonferroni校正；在E2-E4中加入注意力检查题；增加mid scenario以在非极端选择情境中测试；E3用novel bipolar控制新颖性。
+
+- external_validity_strategy_cn：选用大学生熟悉的真实产品；属性来自Amazon真实评论；E3加入真实评论；E4将评论顺序化，更接近平台实际浏览；跨多个实验反复复现结果，并用效应量和购买百分比增强实践意义；未来研究通过更长序列和现场设定扩展边界。
+
+- what_is_not_actually_tested_cn：没有在真实平台现场部署双变量评分，也没有A/B测试或实际推荐系统指标；没有观测真实货币交易和长期行为；没有用眼动或其他NeuroIS方法直接检验视觉注意分配；额外补充实验未获得足够信息无法独立评估；H7b在首个实验中未达到惯例显著性，只能算方向性支持。
+
+## 贡献闭环
+
+- technical_claim_cn：双变量评分作为一种信息表征技术，能够显著提升对ambivalence与indifference的辨识度，并在在线购物情境中提高用户对具ambivalent信息的产品的购买意图与购买决策；EEG-P300可以作为客观注意指标用于此类研究。
+
+- artifact_claim_cn：具体可识别的设计部分是“将正负效价分开呈现在两个量表上”，而不是单纯改变评分格式或增加新界面；novel bipolar对照证明效果来自双变量结构而非新颖性。
+
+- mechanism_claim_cn：机制是认知匹配与视觉显著性：双极评分使同时存在的正负强度不可见，造成用户对ambivalence/indifference的感知混淆；双变量评分匹配态度的双变量心理表征，增加视觉显著性，引导更深认知卷入（决策复杂性和时间上升），从而缓解ambivalence对购买的负面作用。
+
+- boundary_claim_cn：研究发生在在线购物情境中，采用学生样本、两种商品属性、最多两条评论及2.5星作为非极端值；结论直接适用于短信息序列和以评分为主要辅助信息的平台；作者指出可通过更长序列和现场测试继续扩展边界。
+
+- reusable_design_knowledge_cn：设计在线评分/评价表征时，不应假设正负效价可以压缩到单一连续统；要显性保留正、负两个维度，以便用户区分“同时有正负感受”和“没有感受”；这类设计会提高认知卷入，但也会延长决策时间，平台需权衡认知深度与决策效率。
+
+- theoretical_contribution_cn：将信息效价研究从极端态度扩展至非极端态度：理论上区分ambivalence与indifference对注意、购买意愿和购买决策的差异化影响；用顺序性信息加工解释ambivalence的解决过程；用NeuroIS证据将认知注意力纳入信息表征与决策模型。
+
+- how_discussion_closes_intro_gap_cn：General Discussion直接回应引言中的“双极思路忽略非极端态度”的缺口，用四实验证据说明双极表征确实造成信息扭曲，并证明双变量干预可以恢复被压抑的非极端态度，从而将“ambivalence和indifference应被区分”这一理论起点转为经验结论和设计建议。
+
+- overclaim_or_unsupported_leaps_cn：作者从购买意愿和选择任务推断“informed decision-making”，但没有直接测量决策质量；决策复杂度和时间增加被解释为认知卷入，也可能只是界面不熟悉导致的困难；实验4不再测决策时间，因此H8没有在更生态情境中复现；将学生样本短序列结果泛化到真实平台策略仍需现场证据。
+
+## 句级写作动作图谱
+
+### 1. Abstract P1 S1
+
+- order：1
+
+- section：Abstract
+
+- locator：Abstract P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：信息表征如评分和评论在在线决策中发挥重要作用。
+
+- rhetorical_function_cn：开场建立研究的核心对象：representations。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续讨论评分/评论的效价问题铺设平台。
+
+- evidence_pointer：摘要首句
+
+### 2. Abstract P1 S2
+
+- order：2
+
+- section：Abstract
+
+- locator：Abstract P1 S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：既有IS研究大多聚焦极端效价，即表征所传达的正性或负性。
+
+- rhetorical_function_cn：指出当前研究的单一视角。
+
+- depends_on_cn：依赖前一句将表征置于核心。
+
+- sets_up_cn：为ambivalence和indifference被忽略提供依据。
+
+- evidence_pointer：摘要第二句
+
+### 3. Abstract P1 S3
+
+- order：3
+
+- section：Abstract
+
+- locator：Abstract P1 S3
+
+- move_code：GAP
+
+- paraphrase_cn：这种双极方法忽略了正负并存（ambivalence）或正负皆无（indifference）的形成及其独特注意过程和决策结果。
+
+- rhetorical_function_cn：直接点明知识缺口。
+
+- depends_on_cn：建立在极端效价研究不足的判断之上。
+
+- sets_up_cn：为“我们理论化……”的研究目标作准备。
+
+- evidence_pointer：摘要第三句
+
+### 4. Abstract P1 S4
+
+- order：4
+
+- section：Abstract
+
+- locator：Abstract P1 S4
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者进行四个随机对照实验，包括一个EEG实验，以分离ambivalence和indifference对在线购物决策的影响。
+
+- rhetorical_function_cn：预告实证研究结构。
+
+- depends_on_cn：承接前文缺口，说明如何回答。
+
+- sets_up_cn：为摘要中的具体结果提供来源。
+
+- evidence_pointer：摘要第四句
+
+### 5. Abstract P1 S5-S6
+
+- order：5
+
+- section：Abstract
+
+- locator：Abstract P1 S5-S6
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：结果发现双极表示无法捕捉混合情感；提出的双变量干预可把具ambivalent信息产品的购买提升至少50%。
+
+- rhetorical_function_cn：给出核心结果和贡献。
+
+- depends_on_cn：依赖四个实验作为证据基础。
+
+- sets_up_cn：摘要以可量化贡献结束，吸引读者进入正文。
+
+- evidence_pointer：摘要第五至六句
+
+### 6. Introduction P1 S1
+
+- order：6
+
+- section：Introduction
+
+- locator：Introduction P1 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：信息表征如评分和评论是在线环境决策的重要考量。
+
+- rhetorical_function_cn：再次以现实重要性开场。
+
+- depends_on_cn：无
+
+- sets_up_cn：为后续的平台与研究者关注奠定背景。
+
+- evidence_pointer：Introduction P1第一句
+
+### 7. Introduction P1 S3
+
+- order：7
+
+- section：Introduction
+
+- locator：Introduction P1 S3
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：由于表征普遍且重要，研究者越来越关注识别和修复会导致偏好和购买偏差以及推荐策略问题的方面。
+
+- rhetorical_function_cn：说明问题的现实后果。
+
+- depends_on_cn：依赖表征普遍性的背景。
+
+- sets_up_cn：为将表征缺陷作为研究问题提供紧迫性。
+
+- evidence_pointer：Introduction P1第三句
+
+### 8. Introduction P2 S1
+
+- order：8
+
+- section：Introduction
+
+- locator：Introduction P2 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：表征吸引注意并传达信息效价，效价通常被分为正或负。
+
+- rhetorical_function_cn：引入既有理解。
+
+- depends_on_cn：从表征重要性进入效价概念。
+
+- sets_up_cn：为批评“只分正负”做铺垫。
+
+- evidence_pointer：Introduction P2第一句
+
+### 9. Introduction P2 S3
+
+- order：9
+
+- section：Introduction
+
+- locator：Introduction P2 S3
+
+- move_code：LIMITATION
+
+- paraphrase_cn：但双极区分忽略了非极端态度如何影响决策过程和结果。
+
+- rhetorical_function_cn：指出双极视角的限制。
+
+- depends_on_cn：依赖前一句对效价正负二分的描述。
+
+- sets_up_cn：引入ambivalence和indifference。
+
+- evidence_pointer：Introduction P2第三句
+
+### 10. Introduction P2 S4-S5
+
+- order：10
+
+- section：Introduction
+
+- locator：Introduction P2 S4-S5
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：图1第一个评论和图2正负评论序列展示共存且冲突的倾向即ambivalence；ambivalence不同于indifference；先前研究却多用双极尺度。
+
+- rhetorical_function_cn：用平台真实例子使概念具体化。
+
+- depends_on_cn：建立在ambivalence/indifference概念定义上。
+
+- sets_up_cn：让读者看到三星评分可以是ambivalent也可以是indifferent。
+
+- evidence_pointer：Introduction P2第四至五句；Figure 1；Figure 2
+
+### 11. Introduction P3 S1
+
+- order：11
+
+- section：Introduction
+
+- locator：Introduction P3 S1
+
+- move_code：CONTEXT
+
+- paraphrase_cn：在线环境信息丰富，决策依赖来自不同来源且常以不同顺序呈现的评分和评论。
+
+- rhetorical_function_cn：引入“顺序”这一新要素。
+
+- depends_on_cn：承接表征普遍性的背景。
+
+- sets_up_cn：为RQ2和顺序研究铺垫。
+
+- evidence_pointer：Introduction P3第一句
+
+### 12. Introduction P3 S3
+
+- order：12
+
+- section：Introduction
+
+- locator：Introduction P3 S3
+
+- move_code：GAP
+
+- paraphrase_cn：顺序性信息评估如何形成ambivalence并影响决策的问题尚未回答。
+
+- rhetorical_function_cn：明确未解决问题。
+
+- depends_on_cn：依赖“多来源顺序信息”的背景。
+
+- sets_up_cn：引出本文研究目标。
+
+- evidence_pointer：Introduction P3第三句
+
+### 13. Introduction P3 S4
+
+- order：13
+
+- section：Introduction
+
+- locator：Introduction P3 S4
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：作者计划利用评论和评分这两种最常见表征，理论化冲突信息顺序呈现如何诱发ambivalence。
+
+- rhetorical_function_cn：说明方法起点。
+
+- depends_on_cn：基于前述缺口。
+
+- sets_up_cn：为RQ1和RQ2的具体表述提供逻辑。
+
+- evidence_pointer：Introduction P3第四句
+
+### 14. Introduction P3 RQ1-RQ2
+
+- order：14
+
+- section：Introduction
+
+- locator：Introduction P3 RQ1-RQ2
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：RQ1询问ambivalence与positivity、negativity、indifference在在线购买情境中如何导致不同决策；RQ2询问顺序呈现的信息效价如何影响ambivalence下的决策。
+
+- rhetorical_function_cn：正式提出前两个研究问题。
+
+- depends_on_cn：承接前句研究目标。
+
+- sets_up_cn：对应Experiment 1。
+
+- evidence_pointer：Introduction RQ1/RQ2
+
+### 15. Introduction P4 S1-S2
+
+- order：15
+
+- section：Introduction
+
+- locator：Introduction P4 S1-S2
+
+- move_code：LIMITATION
+
+- paraphrase_cn：双极解释把信息效价压成单一正负连续体，与双变量结构矛盾，使ambivalence和indifference无法被分辨。
+
+- rhetorical_function_cn：从认知理论角度批评现有表征。
+
+- depends_on_cn：依赖双变量态度结构理论。
+
+- sets_up_cn：为RQ3和双变量干预铺垫。
+
+- evidence_pointer：Introduction P4第一至二句
+
+### 16. Introduction P4 RQ3
+
+- order：16
+
+- section：Introduction
+
+- locator：Introduction P4 RQ3
+
+- move_code：RQ_OR_OBJECTIVE
+
+- paraphrase_cn：RQ3询问双变量评分相比当前双极评分会如何影响具ambivalent评分产品的决策。
+
+- rhetorical_function_cn：提出第三个研究问题，直接指向干预设计。
+
+- depends_on_cn：依赖前文对双极表征不可分辨性的判断。
+
+- sets_up_cn：对应Experiment 2-4。
+
+- evidence_pointer：Introduction RQ3
+
+### 17. Introduction P5 S1
+
+- order：17
+
+- section：Introduction
+
+- locator：Introduction P5 S1
+
+- move_code：THEORY_PROPOSITION
+
+- paraphrase_cn：作者理论化：由顺序评估的冲突信息效价引发的ambivalence会带来更高注意和不同于非ambivalence的购买意愿。
+
+- rhetorical_function_cn：压缩全文理论预测。
+
+- depends_on_cn：依赖RQ1/RQ2和前述理论。
+
+- sets_up_cn：为EEG实验做预告。
+
+- evidence_pointer：Introduction P5第一句
+
+### 18. Introduction P5 S2
+
+- order：18
+
+- section：Introduction
+
+- locator：Introduction P5 S2
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：为了客观测量注意，作者基于NeuroIS研究设计了一个EEG实验。
+
+- rhetorical_function_cn：说明选择EEG的理由。
+
+- depends_on_cn：依赖注意作为核心构念。
+
+- sets_up_cn：为Experiment 1方法论做铺垫。
+
+- evidence_pointer：Introduction P5第二句
+
+### 19. Introduction P5 S3-S4
+
+- order：19
+
+- section：Introduction
+
+- locator：Introduction P5 S3-S4
+
+- move_code：RESULT
+
+- paraphrase_cn：实验表明：顺序性正面信息先出现时购买意愿和注意更高；双极表示失败于区分ambivalence和indifference；双变量表示使ambivalent产品购买提升至少50%。
+
+- rhetorical_function_cn：提前给出全文核心结果。
+
+- depends_on_cn：依赖四个实验的证据。
+
+- sets_up_cn：强化贡献，吸引读者进入方法细节。
+
+- evidence_pointer：Introduction P5第三至四句
+
+### 20. Introduction P6 S1-S3
+
+- order：20
+
+- section：Introduction
+
+- locator：Introduction P6 S1-S3
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究贡献在于理解ambivalence和indifference如何可分辨地影响决策、顺序如何影响ambivalence解决、以及双变量干预减少表征失真并改善决策。
+
+- rhetorical_function_cn：在引言结尾集中声明贡献。
+
+- depends_on_cn：依赖前文全部问题与结果。
+
+- sets_up_cn：为Introduction到Related Literature的过渡。
+
+- evidence_pointer：Introduction P6
+
+### 21. 该小节P1 S1
+
+- order：21
+
+- section：Related Literature: Information Representations and Attitude Formation
+
+- locator：该小节P1 S1
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：表征通过汇总同伴反馈降低信息过载，帮助用户吸引有限注意并简化决策。
+
+- rhetorical_function_cn：解释表征为何重要。
+
+- depends_on_cn：承接引言中对表征重要性的铺垫。
+
+- sets_up_cn：为讨论表征的简约性张力做背景。
+
+- evidence_pointer：Related Literature第一段第一句
+
+### 22. 该小节P1 S4
+
+- order：22
+
+- section：Related Literature: Information Representations and Attitude Formation
+
+- locator：该小节P1 S4
+
+- move_code：LIMITATION
+
+- paraphrase_cn：表征常面临简洁性与准确表达之间的张力；现有双极表征把正负效价当作单一连续体，而情感与态度本质是双变量、非互惠的。
+
+- rhetorical_function_cn：引入关键理论限制。
+
+- depends_on_cn：依赖前面对表征作用的描述。
+
+- sets_up_cn：为ambivalence/indifference和双变量干预提供理论依据。
+
+- evidence_pointer：该小节最后部分
+
+### 23. 该小节P1 S1
+
+- order：23
+
+- section：Related Literature: Ambivalence and Indifference
+
+- locator：该小节P1 S1
+
+- move_code：PHENOMENON
+
+- paraphrase_cn：用户经常在信息丰富的在线环境中体验ambivalence这样的混合情感，但恒星评分等双极端点会把ambivalence误认为indifference。
+
+- rhetorical_function_cn：让抽象态度概念落到在线平台现象上。
+
+- depends_on_cn：依赖上一小节的表征张力。
+
+- sets_up_cn：为定义两种非极端态度做准备。
+
+- evidence_pointer：Ambivalence and Indifference第一句
+
+### 24. 该小节P1 S2-S3
+
+- order：24
+
+- section：Related Literature: Ambivalence and Indifference
+
+- locator：该小节P1 S2-S3
+
+- move_code：PRIOR_KNOWLEDGE
+
+- paraphrase_cn：ambivalence是同时存在的强烈认知与情感对立取向；indifference则是很弱或不存在认知/情感取向。
+
+- rhetorical_function_cn：给出可操作化定义。
+
+- depends_on_cn：依赖社会心理学文献。
+
+- sets_up_cn：为后续假设中两者的差异提供构念基础。
+
+- evidence_pointer：该小节第二至三句
+
+### 25. 该小节P2 S1
+
+- order：25
+
+- section：Related Literature: Ambivalence and Indifference
+
+- locator：该小节P2 S1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：信息的渐进和时间分离加工影响态度的累积形成；顺序处理冲突效价为ambivalence出现提供了情境。
+
+- rhetorical_function_cn：把ambivalence从静态态度转为动态过程。
+
+- depends_on_cn：依赖前面的双变量态度观。
+
+- sets_up_cn：为信息顺序假设提供机制基础。
+
+- evidence_pointer：该小节第二段第一句
+
+### 26. 该小节P1最后部分
+
+- order：26
+
+- section：Related Literature: Negativity and Negativity Bias Theory
+
+- locator：该小节P1最后部分
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：负面信息会增强行为抑制系统，激发回避并导致狭窄化、资源保护式的决策。
+
+- rhetorical_function_cn：引入解释负面leading valence影响的理论机制。
+
+- depends_on_cn：承接顺序加工所述leading attitude概念。
+
+- sets_up_cn：为H3/H4关于negative-first的预测做准备。
+
+- evidence_pointer：Negativity and Negativity Bias Theory段
+
+### 27. 该小节P1中间
+
+- order：27
+
+- section：Related Literature: Positivity and Broaden-and-Build Theory
+
+- locator：该小节P1中间
+
+- move_code：THEORY_INTRO
+
+- paraphrase_cn：正面情绪拓宽思维和行动库，激活行为趋近系统，使个体主动加工新信息并降低负面感受。
+
+- rhetorical_function_cn：引入解释positive-first效果的理论机制。
+
+- depends_on_cn：与negativity bias theory形成对照。
+
+- sets_up_cn：为H3/H4关于positive-first的预测做准备。
+
+- evidence_pointer：Positivity and Broaden-and-Build Theory段
+
+### 28. Research Overview第一段及Table 1
+
+- order：28
+
+- section：Research Overview
+
+- locator：Research Overview第一段及Table 1
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：作者预告四个实验：E1用EEG看ambivalence对注意/购买意愿的影响；E2比较双极与双变量表征；E3消除新颖性；E4巩固结果并检验顺序。
+
+- rhetorical_function_cn：给读者整个研究的路线图。
+
+- depends_on_cn：依赖引言中三个RQ。
+
+- sets_up_cn：让后文的每个实验有清晰定位。
+
+- evidence_pointer：Research Overview段；Table 1
+
+### 29. 该小节P2 S1-S2
+
+- order：29
+
+- section：Experiment 1: Hypotheses, Ambivalence and Attention
+
+- locator：该小节P2 S1-S2
+
+- move_code：MECHANISM
+
+- paraphrase_cn：ambivalence因同时的正负评价产生冲突，冲突比indifference的“没有评价”需要更多认知资源来解决。
+
+- rhetorical_function_cn：解释为什么ambivalence需要更多注意。
+
+- depends_on_cn：依赖ambivalence冲突性的文献。
+
+- sets_up_cn：为H1给出机制逻辑。
+
+- evidence_pointer：Experiment 1 Hypotheses: Ambivalence and Attention第二段
+
+### 30. 该小节P3最后
+
+- order：30
+
+- section：Experiment 1: Hypotheses, Ambivalence and Attention
+
+- locator：该小节P3最后
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H1：ambivalence需要的注意（P300振幅）高于positivity、negativity和indifference。
+
+- rhetorical_function_cn：将机制转换为可检验假设。
+
+- depends_on_cn：依赖P300作为注意指标的操作化。
+
+- sets_up_cn：为Experiment 1的EEG分析提供目标。
+
+- evidence_pointer：Experiment 1 Hypotheses: Ambivalence and Attention，H1
+
+### 31. 该小节P2
+
+- order：31
+
+- section：Experiment 1: Hypotheses, Ambivalence and Purchase Intention
+
+- locator：该小节P2
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H2a/b/c：ambivalence和indifference的购买意愿高于negativity但低于positivity，且ambivalence低于indifference。
+
+- rhetorical_function_cn：给出行为层面的排序预测。
+
+- depends_on_cn：依赖极端态度与ambivalence在意图上的已知差异。
+
+- sets_up_cn：为E1行为结果检验提供三个子假设。
+
+- evidence_pointer：Experiment 1 Hypotheses: Ambivalence and Purchase Intention，H2a-c
+
+### 32. 该小节P1
+
+- order：32
+
+- section：Experiment 1: Hypotheses, Information Sequence and Ambivalence
+
+- locator：该小节P1
+
+- move_code：MECHANISM
+
+- paraphrase_cn：连续信息评估中，新态度与已有态度持续互动，因此leading valence设定了ambivalence形成与解决的认知环境。
+
+- rhetorical_function_cn：解释顺序效应的机制。
+
+- depends_on_cn：依赖前面态度的累积形成机制。
+
+- sets_up_cn：为H3/H4的顺序预测提供共同基础。
+
+- evidence_pointer：Experiment 1 Hypotheses: Information Sequence and Ambivalence第一段
+
+### 33. 该小节最后
+
+- order：33
+
+- section：Experiment 1: Hypotheses, Information Sequence, Ambivalence, and Attention
+
+- locator：该小节最后
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H3：信息顺序调节ambivalence对P300注意的作用，positive-first比negative-first产生更高P300振幅。
+
+- rhetorical_function_cn：提出神经注意层面的调节假设。
+
+- depends_on_cn：依赖negativity bias与broaden-and-build的相反预测。
+
+- sets_up_cn：为EEG顺序效应分析设定检验目标。
+
+- evidence_pointer：Experiment 1 Hypotheses，H3
+
+### 34. 该小节最后
+
+- order：34
+
+- section：Experiment 1: Hypotheses, Information Sequence, Ambivalence, and Purchase Intention
+
+- locator：该小节最后
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H4：信息顺序调节ambivalence对购买意愿的负向作用，positive-first会减弱这种负向作用，导致更高购买意愿。
+
+- rhetorical_function_cn：提出行为层面的顺序调节假设。
+
+- depends_on_cn：依赖positive-first的探索心态与负面信息后的保守心态对比。
+
+- sets_up_cn：为E1和E4的购买意愿分析提供目标。
+
+- evidence_pointer：Experiment 1 Hypotheses，H4
+
+### 35. 该段最后一句
+
+- order：35
+
+- section：Experiment 1: Methodology, NeuroIS
+
+- locator：该段最后一句
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：EEG相较fMRI侵入性更低、时间精度更高、生态效度和无提示诊断性更好，因此适合测量P300注意。
+
+- rhetorical_function_cn：为使用EEG提供技术理由。
+
+- depends_on_cn：依赖NeuroIS文献。
+
+- sets_up_cn：解释后续EEG方法选择。
+
+- evidence_pointer：Experiment 1 Methodology第一段
+
+### 36. Treatment与Stimulus Design段
+
+- order：36
+
+- section：Experiment 1: Methodology, Treatment and Stimulus Design
+
+- locator：Treatment与Stimulus Design段
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：通过预检验确定80个产品，并用Amazon评论训练logistic回归分类器提取正、负、中性属性，以构造五种效价处理组。
+
+- rhetorical_function_cn：说明操作性设计如何保证内部效度。
+
+- depends_on_cn：依赖操纵检查的需要。
+
+- sets_up_cn：为E1结果中的操纵检查提供来源。
+
+- evidence_pointer：Experiment 1 Methodology, Treatment/Stimulus Design；Table 2/3
+
+### 37. Behavioral Results段
+
+- order：37
+
+- section：Experiment 1: Results, Behavioral Results
+
+- locator：Behavioral Results段
+
+- move_code：RESULT
+
+- paraphrase_cn：操纵检查显示ambivalent属性诱发更高ambivalence；购买意愿排序符合H2a/b/c；positive-first比negative-first产生更高购买意愿，H4获支持。
+
+- rhetorical_function_cn：用行为数据验证假设。
+
+- depends_on_cn：依赖E1设计中的处理组和操纵检查。
+
+- sets_up_cn：为下面EEG结果补充行为层面证据。
+
+- evidence_pointer：Experiment 1 Results: Behavioral Results
+
+### 38. EEG Results段
+
+- order：38
+
+- section：Experiment 1: Results, EEG Results
+
+- locator：EEG Results段
+
+- move_code：RESULT
+
+- paraphrase_cn：P300在Pz电极对ambivalence的振幅显著高于positivity、negativity和indifference；positive-first序列的P300高于negative-first，H1和H3获支持。
+
+- rhetorical_function_cn：用神经指标验证注意假设。
+
+- depends_on_cn：依赖EEG采集与jackknife处理。
+
+- sets_up_cn：使注意机制的客观性得到支撑。
+
+- evidence_pointer：Experiment 1 Results: EEG Results；Figure 5
+
+### 39. Experiment 1 Discussion第一至三段
+
+- order：39
+
+- section：Experiment 1: Discussion
+
+- locator：Experiment 1 Discussion第一至三段
+
+- move_code：TRANSITION
+
+- paraphrase_cn：E1回答了前两个RQ，说明双极解释可能误解非极端效价；由此追问现有双极表示是否扭曲偏好，并预告Experiment 2。
+
+- rhetorical_function_cn：把机制实验结果转换成表征层面的追问。
+
+- depends_on_cn：依赖E1的结果。
+
+- sets_up_cn：把论证从个体认知推进到信息表征设计。
+
+- evidence_pointer：Experiment 1 Discussion
+
+### 40. Experiment 2开头段
+
+- order：40
+
+- section：Experiment 2: Introduction
+
+- locator：Experiment 2开头段
+
+- move_code：LIMITATION
+
+- paraphrase_cn：星级评分虽常见，但双极方式会阻碍展示非极端态度，可能误导决策者；作者由此建议双变量干预。
+
+- rhetorical_function_cn：在E2开始时重新引入表征缺陷。
+
+- depends_on_cn：依赖E1讨论末尾对双极表征的质疑。
+
+- sets_up_cn：为H5-H7和双变量评分提供起点。
+
+- evidence_pointer：Experiment 2开头段；Figure 6
+
+### 41. 该小节最后，H5
+
+- order：41
+
+- section：Experiment 2: Hypotheses, Discernibility
+
+- locator：该小节最后，H5
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H5：双变量表征会让用户对ambivalent和indifferent信息的ambivalence感知差异更大。
+
+- rhetorical_function_cn：把认知失配理论转为可检验的感知假设。
+
+- depends_on_cn：依赖双变量态度结构与cognitive fit。
+
+- sets_up_cn：为E2操纵检查提供核心假设。
+
+- evidence_pointer：Experiment 2 Hypotheses，H5
+
+### 42. 该小节最后，H6
+
+- order：42
+
+- section：Experiment 2: Hypotheses, Decision-Making Complexity
+
+- locator：该小节最后，H6
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H6：对具ambivalent信息的产品，双变量表征会比双极表征带来更高决策复杂性。
+
+- rhetorical_function_cn：假设视觉显著性提高认知卷入。
+
+- depends_on_cn：依赖视觉显著性影响信息加工的理论。
+
+- sets_up_cn：为决策复杂性作为机制指标做检验。
+
+- evidence_pointer：Experiment 2 Hypotheses，H6
+
+### 43. 该小节最后，H7a-b
+
+- order：43
+
+- section：Experiment 2: Hypotheses, Purchase Outcomes
+
+- locator：该小节最后，H7a-b
+
+- move_code：HYPOTHESIS_OR_PROPOSITION
+
+- paraphrase_cn：H7a/H7b：评分类型调节ambivalence对购买意愿和购买决策的负向作用，双变量表征会减弱这种负向作用。
+
+- rhetorical_function_cn：把表征干预与最终购买结果连接。
+
+- depends_on_cn：依赖视觉显著性和一般正面情感机制。
+
+- sets_up_cn：为E2-E4的核心经济效应提供假设框架。
+
+- evidence_pointer：Experiment 2 Hypotheses，H7a-b
+
+### 44. Procedure段
+
+- order：44
+
+- section：Experiment 2: Methodology
+
+- locator：Procedure段
+
+- move_code：METHOD_JUSTIFICATION
+
+- paraphrase_cn：实验采用2×4混合设计，含mix和mid场景；mid场景强迫用户必须在非极端选项中购买，模拟现实中包含ambivalent/indifferent选择的决策。
+
+- rhetorical_function_cn：解释实验设计为何能覆盖实际选择情境。
+
+- depends_on_cn：依赖H5-H7需要对比非极端选项。
+
+- sets_up_cn：为最终购买决策提供场景级测量。
+
+- evidence_pointer：Experiment 2 Methodology, Procedure；Figure 7
+
+### 45. Manipulation Check段
+
+- order：45
+
+- section：Experiment 2: Results, Manipulation Check
+
+- locator：Manipulation Check段
+
+- move_code：RESULT
+
+- paraphrase_cn：双极评分下，ambivalent和indifferent评分产品的ambivalence无差异；双变量评分下差异显著，H5获支持。
+
+- rhetorical_function_cn：直接证明现有表征不可分辨非极端态度。
+
+- depends_on_cn：依赖E2的评分操纵。
+
+- sets_up_cn：为后续购买结果提供“表征确实影响感知”的基础。
+
+- evidence_pointer：Experiment 2 Results, Manipulation Check
+
+### 46. Purchase Decision段
+
+- order：46
+
+- section：Experiment 2: Results, Purchase Decision
+
+- locator：Purchase Decision段
+
+- move_code：RESULT
+
+- paraphrase_cn：H7b未达统计显著，但双变量下ambivalent选项购买次数提高约73%。
+
+- rhetorical_function_cn：报告主效应方向但承认功效不足。
+
+- depends_on_cn：依赖场景级购买决策数据。
+
+- sets_up_cn：为讨论中强调经济显著性和后续提高功效做铺垫。
+
+- evidence_pointer：Experiment 2 Results, Purchase Decision
+
+### 47. Experiment 2 Discussion第二段
+
+- order：47
+
+- section：Experiment 2: Discussion
+
+- locator：Experiment 2 Discussion第二段
+
+- move_code：TRANSITION
+
+- paraphrase_cn：作者列出四个concern：新颖性、真实评论缺失、H7b功效不足、认知卷入机制待验证；并预告Experiment 3。
+
+- rhetorical_function_cn：坦诚局限并把研究推向下一个实验。
+
+- depends_on_cn：依赖E2结果中的问题。
+
+- sets_up_cn：为Experiment 3的设计变化提供理由。
+
+- evidence_pointer：Experiment 2 Discussion第二段
+
+### 48. Experiment 3开头第一段及H8
+
+- order：48
+
+- section：Experiment 3: Design Changes and Hypothesis
+
+- locator：Experiment 3开头第一段及H8
+
+- move_code：DESIGN_FEATURE
+
+- paraphrase_cn：E3加入novel bipolar以控制新颖性，并在每个选项中附加两条真实评论；H8预测双变量评分下的决策响应时间更高。
+
+- rhetorical_function_cn：说明实验变化和新的过程假设。
+
+- depends_on_cn：直接回应E2讨论中的四个concern。
+
+- sets_up_cn：为E3一系列结果做准备。
+
+- evidence_pointer：Experiment 3开头；H8；Figure 8/9
+
+### 49. Results各小节
+
+- order：49
+
+- section：Experiment 3: Results
+
+- locator：Results各小节
+
+- move_code：RESULT
+
+- paraphrase_cn：E3中H6、H7a、H7b、H8获支持；双变量相比双极和novel bipolar将ambivalent产品购买分别提升超过50%和70%；双极与novel bipolar无显著差异。
+
+- rhetorical_function_cn：用大样本和控制条件强化干预效应。
+
+- depends_on_cn：依赖E3的三组设计和评论附加。
+
+- sets_up_cn：为排除新颖性解释提供核心证据。
+
+- evidence_pointer：Experiment 3 Results：Decision Complexity/Purchase Intention/Purchase Decision/Decision Response Time
+
+### 50. Experiment 3 Discussion最后一句
+
+- order：50
+
+- section：Experiment 3: Discussion
+
+- locator：Experiment 3 Discussion最后一句
+
+- move_code：TRANSITION
+
+- paraphrase_cn：Experiment 4将寻求H7b的一致验证，并在含评论的更丰富技术体验中检验信息顺序（H4）。
+
+- rhetorical_function_cn：把研究推进到生态性更强的检验。
+
+- depends_on_cn：依赖E3已支撑H7b。
+
+- sets_up_cn：为Experiment 4目标做预告。
+
+- evidence_pointer：Experiment 3 Discussion末句
+
+### 51. Experiment 4开头
+
+- order：51
+
+- section：Experiment 4: Introduction
+
+- locator：Experiment 4开头
+
+- move_code：STUDY_OVERVIEW
+
+- paraphrase_cn：E4有两个目标：在更可推广的用户体验情境中一致性检验H7b，并检验H4信息顺序效应。
+
+- rhetorical_function_cn：明确Experiment 4的累积地位。
+
+- depends_on_cn：依赖E1-E3的发现。
+
+- sets_up_cn：为E4结果设定检验目标。
+
+- evidence_pointer：Experiment 4开头
+
+### 52. Results各小节
+
+- order：52
+
+- section：Experiment 4: Results
+
+- locator：Results各小节
+
+- move_code：RESULT
+
+- paraphrase_cn：E4支持H6、H7a、H7b、H4；双变量将ambivalent产品购买提升超过100%，positive-first顺序购买意愿显著高于negative-first。
+
+- rhetorical_function_cn：在更生态情境中统一验证表征干预和顺序机制。
+
+- depends_on_cn：依赖E4顺序呈现评论的设计。
+
+- sets_up_cn：为General Discussion汇总全部假设提供最后证据。
+
+- evidence_pointer：Experiment 4 Results：Manipulation Check/Decision Complexity/Purchase Intention/Purchase Decision/Information Sequence
+
+### 53. General Discussion第一至二段
+
+- order：53
+
+- section：General Discussion
+
+- locator：General Discussion第一至二段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者总结：双极表征限制了对在线决策的理解，可能扭曲偏好；四个实验表明双变量表征能让ambivalence与indifference可分辨并提高ambivalent产品购买。
+
+- rhetorical_function_cn：将各实验成果综合成单一贡献主张。
+
+- depends_on_cn：依赖Table 7的假设汇总。
+
+- sets_up_cn：为理论贡献和实践含义铺路。
+
+- evidence_pointer：General Discussion第一至二段；Table 7
+
+### 54. Theoretical Contributions第三段
+
+- order：54
+
+- section：General Discussion: Theoretical Contributions
+
+- locator：Theoretical Contributions第三段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：作者指出混合情感不仅形成于多来源信息，还受信息顺序影响；positive-first的ambivalent用户购买更多。
+
+- rhetorical_function_cn：把信息顺序上升为理论贡献。
+
+- depends_on_cn：依赖H3/H4在E1和E4的重复支持。
+
+- sets_up_cn：回应引言中关于“顺序评估如何manifest ambivalence”的缺口。
+
+- evidence_pointer：General Discussion, Theoretical Contributions，顺序段
+
+### 55. Theoretical Contributions第四段
+
+- order：55
+
+- section：General Discussion: Theoretical Contributions
+
+- locator：Theoretical Contributions第四段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：基于NeuroIS和心理学文献，作者认为ambivalence下个体的认知投入更高，且positive-first会进一步提升注意；这拓宽了在线环境中注意决定因素的知识。
+
+- rhetorical_function_cn：把EEG结果提升为注意理论贡献。
+
+- depends_on_cn：依赖E1的P300结果。
+
+- sets_up_cn：邀请未来研究探索ambivalence对信息搜索等行为的影响。
+
+- evidence_pointer：General Discussion, Theoretical Contributions，注意段
+
+### 56. Practical Implications第一段
+
+- order：56
+
+- section：General Discussion: Practical Implications
+
+- locator：Practical Implications第一段
+
+- move_code：PRACTICAL_STAKES
+
+- paraphrase_cn：平台应超越正/负二分，考虑更广泛的态度范围，因为某些3星产品可能由于ambivalence/indifference的辨识而销售更好或更差。
+
+- rhetorical_function_cn：把研究结果转化为平台建议。
+
+- depends_on_cn：依赖双变量评分能区分非极端态度的实验证据。
+
+- sets_up_cn：为推荐策略和实时行为预测提供管理含义。
+
+- evidence_pointer：General Discussion, Practical Implications第一段
+
+### 57. Limitations and Future Research段
+
+- order：57
+
+- section：General Discussion: Limitations and Future Research
+
+- locator：Limitations and Future Research段
+
+- move_code：LIMITATION_AND_FUTURE
+
+- paraphrase_cn：作者承认使用学生样本、只有两个属性、实验情境受控等限制，并建议未来在更长信息序列、眼动和其他NeuroIS方法中探索边界。
+
+- rhetorical_function_cn：保护贡献免受过度泛化。
+
+- depends_on_cn：依赖研究设计的具体限制。
+
+- sets_up_cn：为后续研究者提供方向。
+
+- evidence_pointer：General Discussion, Limitations and Future Research
+
+### 58. Conclusion段
+
+- order：58
+
+- section：Conclusion
+
+- locator：Conclusion段
+
+- move_code：CONTRIBUTION
+
+- paraphrase_cn：研究连接了态度/认知双变量结构的理论理解和数字平台上表征的实际方法。
+
+- rhetorical_function_cn：以理论-实践桥梁收束全文。
+
+- depends_on_cn：依赖全部实验和讨论。
+
+- sets_up_cn：无后续，作为最终贡献声明。
+
+- evidence_pointer：Conclusion段
+
+## 写作技术
+
+- gap_construction_cn：作者不是简单说“没人研究ambivalence”，而是先展示真实Amazon评论中“三星”既可能是ambivalent也可能是indifferent，然后用态度双变量理论说明双极评分在概念上无法区分两者，从而构造出“表征错误可能导致偏好扭曲”的IS缺口。
+
+- signposting_cn：在引言末尾给出RQ1-RQ3；在Research Overview用Table 1预告四个实验；每个Experiment开头都用一两句说明它在前一实验基础上解决什么；General Discussion又通过Table 7汇总全部假设。
+
+- transition_logic_cn：Experiment 1以“双极解释可能误表征非极端态度”结束，直接引出Experiment 2的表征干预；Experiment 2讨论以“四个concern”结束，逐条对应Experiment 3的设计变化；Experiment 3讨论以“需要一致验证H7b和检验H4”结束，开启Experiment 4；最终General Discussion把四实验串成统一贡献。
+
+- claim_evidence_rhythm_cn：每个假设先有理论机制段，再给出H编号；每个结果小节先报告统计值和效应量，再在Discussion中解释理论和实践意义；对失败或边缘结果（如H7b在E2未显著）明确说明方向和功效问题，而不是隐藏。
+
+- benchmark_narrative_cn：benchmark不是单独离线的性能比较，而是嵌入行为论证：E2用星级评分为现实基准，E3用novel bipolar作为新颖性基准，E4用顺序呈现评论作为生态基准；基准随论证阶段逐步升级。
+
+- theory_return_cn：在General Discussion中，作者不把结果只写成“双变量界面有效”，而是重新回落到态度双变量结构、顺序性态度更新和NeuroIS注意机制三项理论知识上，让局部实验贡献到更广的IS信息效价理论。
+
+- contribution_positioning_cn：贡献被定位为“校正信息表征研究中的双极偏见”，而不是仅仅“提出更好的评分UI”；因此既有理论意义又有设计知识意义。
+
+- novelty_protection_cn：通过增加novel bipolar条件、在E3/E4中附加真实评论和顺序呈现，以及重复跨实验显著结果，作者保护核心主张不是“对某个新奇界面的一次性反应”；同时承认E2的H7b未显著并依靠提高功效解决，避免把边缘结果包装成稳健结论。
+
+## 可复用研究与写作程序
+
+### structure_steps
+
+#### 1. 1
+
+- step：1
+
+- writing_job_cn：写现实背景：平台依赖信息表征，表征问题有实际后果。
+
+- research_job_cn：确认一个普遍在线现象，并找到其可感知的具体实例。
+
+- required_evidence_cn：真实平台例子、来源文献、可能的经济后果。
+
+- transition_to_next_cn：从“现有研究已关注表征”过渡到“现有研究用了何种简化假设”。
+
+#### 2. 2
+
+- step：2
+
+- writing_job_cn：指出既有概念框架的局限，例如双极效价忽略非极端态度。
+
+- research_job_cn：精确定义新构念（ambivalence/indifference）并提供可观察表现。
+
+- required_evidence_cn：构念定义、与已有构念的边界、真实例子。
+
+- transition_to_next_cn：将定义转成理论机制和问题陈述。
+
+#### 3. 3
+
+- step：3
+
+- writing_job_cn：引入一个或多个理论，解释为什么现象会发生。
+
+- research_job_cn：把理论命题连接到信息处理/行为机制。
+
+- required_evidence_cn：可引用理论，并明确理论如何预测顺序、注意、态度形成。
+
+- transition_to_next_cn：把机制进一步编译为设计与假设。
+
+#### 4. 4
+
+- step：4
+
+- writing_job_cn：写出研究问题和实验路线图。
+
+- research_job_cn：按研究阶段分配RQ；每个Study解决一个尚未解决的部分。
+
+- required_evidence_cn：每阶段的具体变量、操作化、baseline和指标。
+
+- transition_to_next_cn：从全局预告进入第一个实验的详细假设。
+
+#### 5. 5
+
+- step：5
+
+- writing_job_cn：用客观化手段操纵和测量核心构念。
+
+- research_job_cn：构建刺激材料，进行预检验/操纵检查；如可用神经指标，则证明构念有生理现实性。
+
+- required_evidence_cn：刺激生成流程、预检验结果、客观测量协议。
+
+- transition_to_next_cn：确认操作有效后，进入行为/神经效应检验。
+
+#### 6. 6
+
+- step：6
+
+- writing_job_cn：报告第一个对照实验结果，并讨论其边界。
+
+- research_job_cn：用统计检验比较处理条件，支持或拒绝机制假设。
+
+- required_evidence_cn：假设对应的F/p/d，操纵检查，图表。
+
+- transition_to_next_cn：从内部机制过渡到现实界面表征是否保留了该机制。
+
+#### 7. 7
+
+- step：7
+
+- writing_job_cn：提出干预或改进设计，并以当前现实方案为baseline。
+
+- research_job_cn：设计可比较的替代表示/系统，建立可分辨性检验。
+
+- required_evidence_cn：干预的具体界面特征，baseline选择理由。
+
+- transition_to_next_cn：用实验证明干预比baseline更能解决先前机制层面的缺陷。
+
+#### 8. 8
+
+- step：8
+
+- writing_job_cn：排除替代解释，进行稳健性实验。
+
+- research_job_cn：加入新颖性对照、真实内容、更高统计功效、顺序化材料。
+
+- required_evidence_cn：新实验条件的结果与主结果一致。
+
+- transition_to_next_cn：从稳健性回到理论解释和贡献。
+
+#### 9. 9
+
+- step：9
+
+- writing_job_cn：在讨论中把实验结果升格为设计知识和理论贡献。
+
+- research_job_cn：重新连接开头缺口，并指出边界条件和未来研究。
+
+- required_evidence_cn：假设汇总表、效应量、跨研究一致性。
+
+- transition_to_next_cn：无下一步，论文收束。
+
+### most_transferable_moves_cn
+
+1. 用三个RQ分解“机制-表征-干预”三层问题
+
+2. 把每个Experiment改写为对前一个Experiment未解决问题的直接回应
+
+3. 在Table 1中预告实验目标、变量和设计
+
+4. 将真实平台截图嵌入问题建构，让读者立即看到三星评分造成的ambivalence/indifference歧义
+
+5. 用EEG客观指标补充自报数据，证明构念并非纯问卷构造
+
+6. 用效应量和购买百分比提升表述经济意义
+
+7. 设定novel bipolar对照来封装“新颖性”替代解释
+
+8. 对未显著假设坦承功效不足，并通过后续实验补证
+
+### resource_intensive_or_nonstandard_parts_cn
+
+1. EEG实验室、32导设备、TCL同步和P300处理需要NeuroIS基础设施
+
+2. 使用Amazon评论训练logistic回归构造刺激物，需要文本处理和人工提取属性
+
+3. 34个教室/实验室行为实验需要多个大学生被试池和课程学分激励
+
+4. Table 1注释中的额外实验未给细节，说明可能涉及审稿阶段补做实验但未完整报告
+
+### what_not_to_copy_superficially_cn
+
+1. 不要把“双变量评分提高购买50%”当作普适口号；该数字依赖特定产品、2.5星、学生样本和评论情境
+
+2. 不要在没有操纵检查的情况下宣称能区分ambivalence与indifference
+
+3. 不要在没有EEG预处理细节时声称P300测量注意
+
+4. 不要用响应时间增加直接等同“更好决策”；作者也只是解释为更深认知卷入
+
+5. 不要只因为结果显示“双变量更好”就忽略E2中H7b未显著的初始证据
+
+6. 不要在没有novel bipolar或类似新颖性对照时把效果归因于设计本身
+
+- single_best_description_of_the_routine_cn：用客观神经指标先证明非极端态度对注意和决策有区分效应，再说明现有双极评分无法辨识该区分，然后用双变量评分作为干预，在逐步增强生态效度和控制新颖性的后续实验中复现效果，最终把局部效应升格为信息表征设计知识与理论贡献。
+
+## 分析边界
+
+全文可用，但图1、图2、图6、图7、图8、图9的视觉细节多依赖于OCR图片链接和文字说明，无法直接看到双变量量的具体界面形态；Table 1注释中的额外实验只给出极简说明，无法独立评估；附录中测量量表缺少完整Likert刻度文字；因此对刺激物和干预制品的具体视觉呈现存在一定推断成分；研究中未见完整方差分析表，主要依赖文中F值。

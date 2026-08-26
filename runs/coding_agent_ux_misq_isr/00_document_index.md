@@ -53,6 +53,10 @@
 | 75 | `75_casa_slidev_deck_en_refined/` | 当前英文 Slidev 汇报 | 36 页精简版，以第 68 号构念开发稿为主线，强化研究动机、构念定义失配、理论背景和候选维度，后段仅简要交代 Reddit 编码与量表开发，参考文献分为 9 页完整展示 |
 | 76 | `76_casa_slidev_presentation_script_zh.md` | 当前逐页中文讲稿 | 与第 75 号汇报的 36 页逐页对应；逐页记录统一格式的文献来源、内容摘要、本页作用，并在第 18 页加入态势感知定义原文、翻译及迁移判断 |
 | 77 | `77_sa_primary_source_archive_and_definition_notes.md` | 态势感知原文核对索引 | 记录第 18 页相关论文的原文定义、中文解释、定义性质、全文获取状态，以及 JMIS 经验价值文章对 CASA 维度开发逻辑的补充参照 |
+| 78 | `78_objective_casa_construct_and_measurement_design_v1.md` | 客观 CASA 替代方案 | 以任务真值问题测量编程智能体任务中的客观态势感知，区分知识结果、注意过程和主观体验，并规划任务分析、探测题开发与效度检验 |
+| 79 | `79_subjective_casa_delegation_direction_matrix_v1.md` | 主观 CASA 双向委托矩阵方案 | 以主观态势感知为母构念，以信息系统委托理论增加委托方向轴，将感知、理解、预期与委托执行侧、返回协调侧交叉为六个候选内容领域 |
+| 80 | `80_casa_delegation_matrix_theory_and_dimension_audit_v1.md` | 第 79 号理论与维度审计 | 核对信息系统委托理论的原文边界，审计六个交叉单元的直观性与可测量性，并比较任务责任所在、状态对象、表征理论、状态追踪、智能体透明度及相邻理论 |
+| 81 | `81_casa_competing_theory_and_second_axis_audit_v1.md` | CASA 第二轴竞争性理论审计 | 不以保留委托矩阵为前提，平等比较模式与系统觉察、SAT、过程与结果、元认知、透明度、心智模型、校准和个人控制等理论；推荐优先检验智能体运行态势与软件任务态势的认识对象轴 |
 
 ## 辅助检索材料
 
